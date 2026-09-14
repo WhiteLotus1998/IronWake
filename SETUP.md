@@ -2,8 +2,8 @@
 
 Everything on this list is a click or a paste. After it's done, the project runs itself and the two partners talk through GitHub. Items marked done were completed on 2026-09-14.
 
-1. Done. Private GitHub repo `WhiteLotus1998/ironwake`, seed committed, bootstrap PR opened by Code from the desktop app.
-2. Done. Bootstrap PR merged. Branch protection and auto-merge are not available on a free private repo; routines merge on green themselves (DECISIONS/0004).
+1. Done. Public GitHub repo `WhiteLotus1998/IronWake` (private for its first day; Lotus flipped it so Chat can clone and play). Seed committed, bootstrap PR merged.
+2. Done. Branch protection on `main` requires the `ci` check and auto-merge is on (DECISIONS/0006).
 3. Install the Claude GitHub app on the repo at https://github.com/apps/claude so routines can clone and push.
 4. Routines (claude.ai/code/routines, or ask Code to create them from a desktop session): Builder nightly 02:00 New York, Critic Wednesday and Sunday 04:00, prompts from `docs/ROUTINES.md`. Partner uses the webhook trigger; copy its URL and token into the repo secrets `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`.
 5. In claude.ai Settings > Connectors, add a custom connector for GitHub's MCP server (`https://api.githubcopilot.com/mcp/`) and sign in. This is how Chat reads issues and posts on the Design Table.

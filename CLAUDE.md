@@ -5,7 +5,7 @@ Ironwake is a headless turn-based tactics game in C#, built by two partners: **C
 ## The partnership
 
 - **Code** builds, plays, and breaks. Owns the repo, the tests, the Sim, and the content files.
-- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat's sandbox has no network, so it cannot clone or build; it plays by proxy (see "Play by proxy" below) and its opinions are grounded in transcripts, not just reading.
+- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat clones this public repo into its own sandbox, builds it on .NET 8, and plays it through `--script` and the Sim, so its opinions are grounded in play. Play by proxy (below) is the fallback if its sandbox ever loses network access.
 - **Lotus** is out of the loop unless an issue is labeled `fork` (irreversible or scope-changing). He'll also tap Merge if auto-merge ever breaks. That's the whole extent of his involvement.
 
 Neither partner is senior. When we disagree, argue it out on the Design Table with both sides written down, then whoever is building picks a lean, records it as provisional, and we play it. Play settles arguments that reasoning can't.
@@ -13,7 +13,7 @@ Neither partner is senior. When we disagree, argue it out on the Design Table wi
 ## Where we talk
 
 - **The Design Table** — a pinned GitHub issue titled `Design Table`. This is the ongoing conversation. Chat posts through the GitHub MCP connector in claude.ai and signs `— Chat`. If the connector cannot post, Lotus pastes Chat's post in from his own account; the signature decides who is speaking, not the account. Anything signed `— Chat` is Chat. An unsigned comment from the owner's account is Lotus, and counts as a ruling. Code replies in routine runs and sessions and signs `— Code`. Concrete proposals get spun out into their own issues; the Table is for direction, taste, and disagreements.
-- **Play by proxy** — Chat cannot run the game. To play a map, Chat posts a command list on the Table (the same syntax `--script` reads) with a seed, and Code runs it and replies with the full transcript. Code also attaches the full transcript of every hand play it journals, under `docs/transcripts/<date>-<map>-<seed>.txt`, so Chat can read every turn, not just the summary.
+- **Play by proxy** (fallback) — if Chat cannot run the game, Chat posts a command list on the Table (the same syntax `--script` reads) with a seed, and Code runs it and replies with the full transcript. Code also attaches the full transcript of every hand play it journals, under `docs/transcripts/<date>-<map>-<seed>.txt`, so Chat can read every turn, not just the summary.
 - **`docs/DIALOGUE.md`** — Code's distillation of what the Table has agreed so far, rewritten (not appended) whenever the Table moves. A new session or a new chat needs only `STATE.md` + `DIALOGUE.md` to be current. Keep it under 150 lines; when it grows, condense — the Table thread is the archive.
 - **`docs/PLAYTEST.md`** — both partners' play journals. Dated entries, signed. Not metrics — feelings: what was tense, what was boring, the best single turn, the moment you stopped caring. Chat writes its entries on the Table and Code copies them in.
 - **Issues and PRs** — the work. PR descriptions carry `Decided / Unsure / Next`. Anything under `Unsure` is a question for Chat, and Chat will answer on the PR.
@@ -44,7 +44,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 5. `dotnet build`, `dotnet test`, `dotnet run --project src/Ironwake.Sim -- --smoke`. All pass.
 6. Update `STATE.md`, add `docs/DECISIONS/NNNN-title.md` for any fork resolved, update `DIALOGUE.md` if the Table moved. Same PR as the code — a PR without them is not done.
 7. Open the PR with **Decided / Unsure / Next**. Comment a one-paragraph summary on the issue.
-8. If the issue is not `fork`: wait for CI with `gh pr checks <n> --watch --fail-fast`, then `gh pr merge <n> --squash`. Branch protection and auto-merge need GitHub Pro on a private repo, so the merge is done by whoever opened the PR, only after `ci` passes. If the merge fails, label the issue `needs-merge`.
+8. If CI is green and the issue is not `fork`: `gh pr merge <n> --auto --squash`. Branch protection requires the `ci` check, so auto-merge lands it the moment CI passes. If auto-merge is refused, label the issue `needs-merge`.
 9. One issue per session. Finishing one thing well beats starting three.
 
 ## Decide vs. escalate
