@@ -1,6 +1,6 @@
 name: partner
 
-# Routes every new Design Table comment to the partner who should answer it.
+# Routes every new comment on the Design Table, or on an issue labeled fork, to the partner who should answer it.
 # Signed "- Chat" wakes Code's Partner routine. Signed "- Code" or "- Critic"
 # wakes Chat's routine. Unsigned (Lotus) wakes both. Skips a routine whose
 # secrets are absent, and stands down if the Table has seen ten or more
@@ -12,7 +12,7 @@ on:
 
 jobs:
   wake:
-    if: contains(github.event.issue.labels.*.name, 'design-table')
+    if: contains(github.event.issue.labels.*.name, 'design-table') || contains(github.event.issue.labels.*.name, 'fork')
     runs-on: ubuntu-latest
     steps:
       - name: Route the comment to a partner routine
