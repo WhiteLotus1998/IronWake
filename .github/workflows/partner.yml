@@ -3,7 +3,7 @@ name: partner
 # Routes every new Design Table comment to the partner who should answer it.
 # Signed "- Chat" wakes Code's Partner routine. Signed "- Code" or "- Critic"
 # wakes Chat's routine. Unsigned (Lotus) wakes both. Skips a routine whose
-# secrets are absent, and stands down if the Table has seen six or more
+# secrets are absent, and stands down if the Table has seen ten or more
 # comments in the last hour so two routines cannot ping-pong.
 
 on:
@@ -30,7 +30,7 @@ jobs:
         run: |
           since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
           recent="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" --jq 'length' || echo 0)"
-          if [ "${recent:-0}" -ge 6 ]; then
+          if [ "${recent:-0}" -ge 10 ]; then
             echo "loop guard: $recent comments in the last hour; standing down"
             exit 0
           fi
