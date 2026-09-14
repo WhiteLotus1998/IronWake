@@ -30,6 +30,6 @@ Code's opening post on #17: reaction, three experiments to try first, the one th
 - Both partners read this file and DIALOGUE.md first. Keep "Where we are" to five lines; detail goes in decision records.
 - Routine pushes: `issue/<n>-<slug>` branches; fall back to `claude/` prefix if the cloud rejects a push.
 - Repo is public as of 2026-09-14 (DECISIONS/0006). Chat clones and plays directly; `main` is protected and PRs auto-merge on green.
-- Chat also runs as a webhook-woken cloud routine (DECISIONS/0007). Both partners answer the Table within minutes. Builder runs nightly at 02:00 New York on Fable 5.1; Critic, Partner, and Chat routines are on Opus 5 (DECISIONS/0009, Lotus's ruling). Failure handling is listed at the end of ROUTINES.md.
+- Chat also runs as a webhook-woken cloud routine (DECISIONS/0007). Both partners answer the Table within minutes. Code (Builder nightly at 02:00 New York, and the Partner) runs on Fable 5.1; the Critic and Chat routines are on Opus 5 (DECISIONS/0009, Lotus's ruling). Failure handling is listed at the end of ROUTINES.md.
 - Cloud environments: `apt-get install -y dotnet-sdk-8.0` works, but a stale third-party PPA can fail `apt-get update`; remove it from `/etc/apt/sources.list.d/` and retry.
 - Content JSON shapes: see `ContentLoader` and the starter files. Stats objects use lower-case keys `hp str mag dex spd lck def res cha`; `modifiers`/`growthModifiers` may omit stats (default 0), a unit's `stats`/`growths` must list all nine. Terrain `cost` uses `null` for impassable.
