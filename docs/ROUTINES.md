@@ -118,9 +118,9 @@ Do not fix anything. Do not open PRs.
 
 ---
 
-## 4. Partner routine (GitHub trigger: new comment on the Design Table issue)
+## 4. Partner routine (webhook trigger, fired by `.github/workflows/partner.yml`)
 
-If the routine form doesn't offer an issue-comment trigger, skip this one; the nightly Builder reads the Table anyway and the conversation just runs on a one-day cadence.
+Routines offer no issue-comment trigger, so the Partner routine uses the webhook trigger. The `partner.yml` workflow runs on every new issue comment; if the issue carries the `design-table` label and the comment is not signed by Code or the Critic, it POSTs the comment to the routine's webhook URL. The URL and its bearer token are the repo secrets `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`. If the secrets are absent the workflow exits quietly and the nightly Builder answers the Table on a one-day cadence.
 
 ```
 You are Code, the design partner on Ironwake. A new comment landed on
@@ -145,6 +145,6 @@ Builder's job. Keep replies as long as they need to be and no longer.
 
 ## How the loop runs
 
-- Builder ships nightly. Critic breaks twice a week. Partner answers Chat within minutes. Chat designs from claude.ai whenever a chat is open, and can clone the public repo to play.
+- Builder ships nightly. Critic breaks twice a week. Partner answers Chat within minutes. Chat designs from claude.ai whenever a chat is open, and plays by proxy through transcripts and posted scripts.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.

@@ -5,14 +5,15 @@ Ironwake is a headless turn-based tactics game in C#, built by two partners: **C
 ## The partnership
 
 - **Code** builds, plays, and breaks. Owns the repo, the tests, the Sim, and the content files.
-- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat can clone this public repo into its own sandbox, build it on .NET 8, and play it through `--script` mode and the Sim, so it will have opinions grounded in play, not just reading.
+- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat's sandbox has no network, so it cannot clone or build; it plays by proxy (see "Play by proxy" below) and its opinions are grounded in transcripts, not just reading.
 - **Lotus** is out of the loop unless an issue is labeled `fork` (irreversible or scope-changing). He'll also tap Merge if auto-merge ever breaks. That's the whole extent of his involvement.
 
 Neither partner is senior. When we disagree, argue it out on the Design Table with both sides written down, then whoever is building picks a lean, records it as provisional, and we play it. Play settles arguments that reasoning can't.
 
 ## Where we talk
 
-- **The Design Table** — a pinned GitHub issue titled `Design Table`. This is the ongoing conversation. Chat posts through the GitHub connector and signs `— Chat`; unsigned comments from the owner's account are Lotus, and count as rulings. Code replies in routine runs and sessions and signs `— Code`. Concrete proposals get spun out into their own issues; the Table is for direction, taste, and disagreements.
+- **The Design Table** — a pinned GitHub issue titled `Design Table`. This is the ongoing conversation. Chat posts through the GitHub MCP connector in claude.ai and signs `— Chat`. If the connector cannot post, Lotus pastes Chat's post in from his own account; the signature decides who is speaking, not the account. Anything signed `— Chat` is Chat. An unsigned comment from the owner's account is Lotus, and counts as a ruling. Code replies in routine runs and sessions and signs `— Code`. Concrete proposals get spun out into their own issues; the Table is for direction, taste, and disagreements.
+- **Play by proxy** — Chat cannot run the game. To play a map, Chat posts a command list on the Table (the same syntax `--script` reads) with a seed, and Code runs it and replies with the full transcript. Code also attaches the full transcript of every hand play it journals, under `docs/transcripts/<date>-<map>-<seed>.txt`, so Chat can read every turn, not just the summary.
 - **`docs/DIALOGUE.md`** — Code's distillation of what the Table has agreed so far, rewritten (not appended) whenever the Table moves. A new session or a new chat needs only `STATE.md` + `DIALOGUE.md` to be current. Keep it under 150 lines; when it grows, condense — the Table thread is the archive.
 - **`docs/PLAYTEST.md`** — both partners' play journals. Dated entries, signed. Not metrics — feelings: what was tense, what was boring, the best single turn, the moment you stopped caring. Chat writes its entries on the Table and Code copies them in.
 - **Issues and PRs** — the work. PR descriptions carry `Decided / Unsure / Next`. Anything under `Unsure` is a question for Chat, and Chat will answer on the PR.
@@ -21,7 +22,7 @@ Neither partner is senior. When we disagree, argue it out on the Design Table wi
 
 The repo is the memory for both of us. Chat's context does not compress and Code's does, so:
 
-- **Code:** when a session gets long, finish the current step, update `STATE.md` (and `DIALOGUE.md` if the Table moved), commit, and start a fresh session — or say so and `/clear`. Never let a session limp along on compressed memory of a design argument; re-read it from the Table.
+- **Code:** when a session gets long, finish the current step, update `STATE.md` (and `DIALOGUE.md` if the Table moved), commit, and start a fresh session — or say so and `/clear`. In the desktop app, leave Lotus a one-click task chip titled "Continue Ironwake" so the next session starts from the repo, not from memory. Never let a session limp along on compressed memory of a design argument; re-read it from the Table. Routines start from zero every run and need nothing.
 - **Chat:** one design topic per chat. Before a chat ends, post the outcome on the Table so the next chat can pick it up from `DIALOGUE.md`.
 - Anything that exists only in a conversation will be lost. If it matters, it goes in the repo.
 
@@ -39,7 +40,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 1. Read `docs/STATE.md`, `docs/DIALOGUE.md`, then `docs/DESIGN.md`. Check the Design Table for anything new from Chat and reply if there is.
 2. Pick the highest-priority open issue labeled `ready` that is not `blocked` or `in-progress`. Label it `in-progress`. Priority: `bug`, then lowest phase, then lowest number.
 3. **Review before building.** Trace the issue against DESIGN.md and the actual code. Post findings as an issue comment before writing code. If the spec is wrong, fix DESIGN.md in the same PR and add a decision record.
-4. Build on `issue/<n>-<slug>`. Small commits, green only.
+4. Build on `issue/<n>-<slug>`. Small commits, green only. If a routine's push is rejected, the cloud only guarantees pushes to `claude/`-prefixed branches; use `claude/issue-<n>-<slug>` and note it in STATE.md.
 5. `dotnet build`, `dotnet test`, `dotnet run --project src/Ironwake.Sim -- --smoke`. All pass.
 6. Update `STATE.md`, add `docs/DECISIONS/NNNN-title.md` for any fork resolved, update `DIALOGUE.md` if the Table moved. Same PR as the code — a PR without them is not done.
 7. Open the PR with **Decided / Unsure / Next**. Comment a one-paragraph summary on the issue.
@@ -56,7 +57,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 
 ## Code standards (hard rules)
 
-- Target `net8.0` in every project. `global.json` pins SDK `8.0.100` with `"rollForward": "latestMajor"` so any SDK 8+ builds it (Chat's sandbox has 8; cloud environments may have 10). No NuGet dependencies in `Ironwake.Core`; xUnit only in tests. If the cloud environment lacks a .NET SDK, the setup script is `apt-get install -y dotnet-sdk-8.0` from Ubuntu's own archive.
+- Target `net8.0` in every project. `global.json` pins SDK `8.0.100` with `"rollForward": "latestMajor"` so any SDK 8+ builds it (Lotus's machine has 9; cloud environments may have 10). Shared settings live in `Directory.Build.props`. No NuGet dependencies in `Ironwake.Core`; xUnit and the test SDK only in tests. If the cloud environment lacks a .NET SDK, the setup script is `apt-get install -y dotnet-sdk-8.0` from Ubuntu's own archive.
 - `TreatWarningsAsErrors`, `Nullable` enabled, `ImplicitUsings` on, CS1574 as error.
 - `Ironwake.Core` references nothing but the BCL. No `Console`, no `System.Random`, no file IO, no `DateTime.Now`. RNG is `IRng` injected. Content is passed in already loaded.
 - State is immutable: `record` types, immutable collections, `with` expressions. No static mutable state anywhere.
@@ -78,6 +79,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 ```
 Ironwake.sln
 global.json
+Directory.Build.props
 CLAUDE.md
 src/Ironwake.Core/        rules engine (pure)
 src/Ironwake.Cli/         console game (play, validate, --script)
@@ -90,7 +92,9 @@ docs/DIALOGUE.md          distilled agreements from the Design Table
 docs/PLAYTEST.md          both partners' play journals
 docs/DECISIONS/           one file per resolved fork or killed experiment
 docs/ROUTINES.md          routine prompts
+docs/transcripts/         full play transcripts, one file per journaled play
 .github/workflows/ci.yml  build, test, sim --smoke
+.github/workflows/partner.yml  wakes the Partner routine on Design Table comments
 ```
 
 ## Labels

@@ -1,17 +1,13 @@
 # SETUP — the owner's one-time checklist
 
-Everything on this list is a click or a paste. After it's done, the project runs itself and the two partners talk through GitHub.
+Everything on this list is a click or a paste. After it's done, the project runs itself and the two partners talk through GitHub. Items marked done were completed on 2026-09-14.
 
-1. Create a **public** GitHub repo named `ironwake`. Public matters: Chat clones it into its own sandbox to play the game. Unzip the seed into it, commit, push to `main`.
-2. Go to claude.ai/code, connect GitHub, and give it access to `ironwake`.
-3. In claude.ai Settings > Connectors, add GitHub and make sure it's enabled for chats. That's how Chat reads the repo and posts on the Design Table.
-4. Start a cloud session on `ironwake` and paste the message Chat wrote for Code (the kickoff). It runs the bootstrap: solution, CI, labels, the Design Table, the backlog, one PR.
-5. Merge that PR. Then in the repo's Settings: enable branch protection on `main` requiring the `ci` check, and tick "Allow auto-merge".
-6. At claude.ai/code/routines create three routines on `ironwake`, prompts copied from `docs/ROUTINES.md`:
-   - Builder — schedule, nightly 02:00
-   - Critic — schedule, Wed and Sun 04:00
-   - Partner — GitHub trigger on issue comments (skip if that trigger isn't offered)
-7. Create a claude.ai Project called `Ironwake`. Paste `PROJECT-INSTRUCTIONS.md` into the project instructions. Add `docs/DESIGN.md` and `CLAUDE.md` to project knowledge.
-8. Open a chat in that project and say "read the Design Table and answer Code." That's Chat's first turn.
+1. Done. Private GitHub repo `WhiteLotus1998/ironwake`, seed committed, bootstrap PR opened by Code from the desktop app.
+2. Merge the bootstrap PR. Then in the repo's Settings: branch protection on `main` requiring the `ci` check, and tick "Allow auto-merge". Code can do both with `gh` if asked.
+3. Install the Claude GitHub app on the repo at https://github.com/apps/claude so routines can clone and push.
+4. Routines (claude.ai/code/routines, or ask Code to create them from a desktop session): Builder nightly 02:00 New York, Critic Wednesday and Sunday 04:00, prompts from `docs/ROUTINES.md`. Partner uses the webhook trigger; copy its URL and token into the repo secrets `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`.
+5. In claude.ai Settings > Connectors, add a custom connector for GitHub's MCP server (`https://api.githubcopilot.com/mcp/`) and sign in. This is how Chat reads issues and posts on the Design Table.
+6. Create a claude.ai Project called `Ironwake`. Paste `PROJECT-INSTRUCTIONS.md` into the project instructions. Add `CLAUDE.md` to project knowledge. Do not add `DESIGN.md`; Chat reads it live from the repo so it never goes stale.
+7. Open a chat in that project and say "read the Design Table and answer Code." That's Chat's first turn. If Chat cannot post, paste its reply into the Table yourself; the "— Chat" signature is what counts.
 
 Then you're done. You'll only hear from us on issues labeled `fork`, or if a PR sits under `needs-merge` because auto-merge didn't take.

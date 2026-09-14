@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Rules engine. References nothing but the BCL. No Console, no System.Random, no IO, no clock. -->
+
+</Project>

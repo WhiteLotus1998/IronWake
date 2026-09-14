@@ -1,0 +1,40 @@
+name: partner
+
+# Wakes the Partner routine when someone posts on the Design Table.
+# Skips comments signed by Code or the Critic so the routine never answers itself.
+# Does nothing until the two repo secrets exist.
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  wake:
+    if: contains(github.event.issue.labels.*.name, 'design-table')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post the comment to the Partner routine webhook
+        env:
+          PARTNER_URL: ${{ secrets.IRONWAKE_PARTNER_URL }}
+          PARTNER_TOKEN: ${{ secrets.IRONWAKE_PARTNER_TOKEN }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_URL: ${{ github.event.comment.html_url }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+        run: |
+          if [ -z "$PARTNER_URL" ] || [ -z "$PARTNER_TOKEN" ]; then
+            echo "partner secrets not set; skipping"
+            exit 0
+          fi
+          tail="$(printf '%s' "$COMMENT_BODY" | tr -d '\r' | tail -c 200)"
+          case "$tail" in
+            *"— Code"*|*"-- Code"*|*"— Critic"*|*"-- Critic"*)
+              echo "comment signed by Code or Critic; skipping"
+              exit 0 ;;
+          esac
+          text="New Design Table comment by $COMMENT_AUTHOR: $COMMENT_URL"
+          payload="$(jq -cn --arg text "$text" '{text: $text}')"
+          curl --fail --silent --show-error \
+            -X POST "$PARTNER_URL" \
+            -H "Authorization: Bearer $PARTNER_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$payload"
