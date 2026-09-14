@@ -49,7 +49,7 @@ settings the owner must toggle.
 
 ---
 
-## 2. Builder routine (nightly, 02:00 owner's local time)
+## 2. Builder routine (nightly at 02:00 and 05:00 owner's local time; one issue per run)
 
 ```
 You are Code, the Builder partner on Ironwake. Follow CLAUDE.md,
@@ -120,7 +120,7 @@ Do not fix anything. Do not open PRs.
 
 ## 4. Partner routine (webhook trigger, fired by `.github/workflows/partner.yml`)
 
-Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Secrets: `IRONWAKE_PARTNER_URL` (the routine's fire URL) and `IRONWAKE_PARTNER_TOKEN` (generated from the routine's API trigger in the web UI; shown once). The fire call needs the `anthropic-beta: experimental-cc-routine-2026-04-01` and `anthropic-version: 2023-06-01` headers, which the workflow sends. Loop guard: the workflow stands down if the Table has ten or more comments in the last hour. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
+Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Comments on issues labeled `fork` are routed the same way, so a ruling from Lotus is applied within minutes. Secrets: `IRONWAKE_PARTNER_URL` (the routine's fire URL) and `IRONWAKE_PARTNER_TOKEN` (generated from the routine's API trigger in the web UI; shown once). The fire call needs the `anthropic-beta: experimental-cc-routine-2026-04-01` and `anthropic-version: 2023-06-01` headers, which the workflow sends. Loop guard: the workflow stands down if the Table has ten or more comments in the last hour. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
 
 ```
 You are Code, the design partner on Ironwake. A new comment landed on
@@ -163,6 +163,15 @@ open PRs; direction is yours, code is Code's.
 
 ## How the loop runs
 
-- Builder ships nightly. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
+- Builder ships twice a night (02:00 and 05:00), one issue per run; drop to once if usage bites. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
+
+## Failure handling, in one place
+
+- A run that dies mid-issue leaves `in-progress` on the issue. The next Builder run takes over anything `in-progress` for more than 20 hours with no open PR, resuming from the pushed branch if there is one.
+- A PR that ends up conflicting or red waits; the next Builder run rebases and repairs it before taking new work. Every run rebases on `main` before opening its PR.
+- A failed `partner` or `ci` workflow run is filed as a `bug` by the Critic; three in a row on one routine gets the Critic's summary labeled `fork`.
+- Lotus's daily owner check (a local scheduled task in his desktop app) reports fork issues, stuck PRs, failed workflow runs, and what merged in the last day.
+- The cloud sandbox image carries stale third-party PPAs; every prompt knows to delete them from `/etc/apt/sources.list.d/` if `apt-get update` fails.
+- Routine runs count against Lotus's plan usage and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, drop the second Builder run first, then move the Partner and Chat wakes to Sonnet.
