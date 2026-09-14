@@ -75,7 +75,9 @@ CritAvoid     = Lck
 CritChance    = clamp(Crit - CritAvoid, 0, 100)
 ```
 
-**Rolls.** Hit uses the average of two rolls (0–99), i.e. displayed hit is a "true hit." Crit uses one roll. Draw order per strike: hit roll A, hit roll B, then crit roll only if the hit landed. This order is a tested contract.
+**Rolls.** Hit uses the average of two rolls (0–99). Crit uses one roll. Draw order per strike: hit roll A, hit roll B, then crit roll only if the hit landed. This order is a tested contract until issue 31 (keyed rolls) lands; then each roll is derived from the seed and a documented key, and the key tuples replace the draw order as the contract.
+
+**Display.** The forecast shows the *resolved* probability of whatever roll scheme is in use, rounded to the nearest integer, never the raw hit stat. Under two-roll averaging a raw 75 lands 87.75% of the time and displays as 88; a raw 30 lands 18.3% and displays as 18. Forecast, resolver, and AI scorer all call one hit-probability function; the roll scheme is a switch inside it. One roll versus two is open on the Design Table (lean: one roll, because terrain avoid is then worth the number printed in section 4 against every enemy) and is settled by an A/B once issue 5 lands.
 
 **Sequence.** Attacker strikes; defender counters if the attacker is within the defender's weapon range and the defender has a usable weapon; then whoever doubles strikes again. Combat ends early on death. Brave/gauntlet double-strikes are Phase 3.
 
@@ -106,13 +108,15 @@ Player phase → Enemy phase → (Ally phase if any) → turn counter increments
 
 **Recall.** 3 charges per map on Normal. Rewinds to any previous state in the current map's history. Charges do not refresh mid-map.
 
+**Recall restores the rolls.** The same attack after a Recall gets the same rolls; a Recall lets you choose differently, never reroll. This is true only once rolls are keyed (issue 31): with a sequential stream, reordering unrelated actions after a rewind moves the stream position and launders a reroll for free. Until 31 lands this is the intended rule, not a fact.
+
 ## 8. Enemy AI
 
 Every enemy belongs to a *group* with one behavior:
 
 - `Aggressive` — moves toward and attacks the best target every turn.
 - `Hold` — never moves; attacks anything in range.
-- `Guard` — behaves as Hold until any member of its group is attacked or a player unit enters the group's trigger zone; then the whole group becomes Aggressive. This is the main pacing tool for maps.
+- `Guard` — behaves as Hold until the group *wakes*; then the whole group becomes Aggressive. This is the main pacing tool for maps. A group wakes on any of: **proximity** (after any player command, a player unit stands within the wake radius of any member), **noise** (any combat involving a tile within the wake radius plus 2 of any member), or **death** (any member dies, at any distance). The wake radius is one global constant, 4 tiles, Manhattan distance, walls not considered; it lives in content, never in code and never in a map file, and it is identical on every map so the player learns it once and counting tiles is a skill, not a discovery. Waking emits an event naming the group and the cause. There are no trigger rectangles.
 - `Boss` — Hold, plus never leaves its tile.
 
 Target scoring, deterministic (ties broken by lowest unit id):
@@ -129,6 +133,7 @@ Tile choice: among tiles that allow the best-scoring attack, prefer highest terr
 
 - **Cast.** Captain (fixed sword unit, Cha-heavy) + 10 recruits, 3–4 from each region, covering every weapon type and movement type at least once. Each recruit has a one-line personality, a home region, and two people they get on with (support hooks for Phase 3). Names are original.
 - **Campaign.** 8 maps, escalating: 2 tutorials-in-disguise (small maps, one new idea each), 4 mid maps introducing Guard groups, reinforcements, forts, and a Seize, 2 finale maps. Maps are 12×10 to 20×16.
+- **Map authoring constraint.** Armored's job is blocking, and with no zone of control that job is binary: a one-tile corridor with a body in it is an absolute wall, a two-tile one is nothing. Maps that want the wall must draw the corridor. Archers need a back line to protect, which means forests behind a wall of two or a corridor, not a third body.
 - **Difficulty.** Normal only in v1. Hard is a data change (enemy stat multipliers, fewer Recall charges) — leave the hook.
 - **Between maps.** Minimal: repair, shop with fixed stock, level/class screen. Text only.
 
@@ -157,13 +162,15 @@ recall: 3
 units:
 P captain 1,8
 P recruit:mira 2,8
-E soldier 9,1 group:mill behavior:guard trigger:6,0-11,4
+E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
 B bandit_leader 10,1 group:mill behavior:boss
 ```
 
-Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`.
+Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
+
+The renderer's output must be genuinely re-parseable as a map file, not only for the round-trip test: experiment 13.5 edits the finale's `.map` between maps, so the game writes this format as well as reads it.
 
 ## 11. Quality bar — what "not janky" means when no human is watching
 
@@ -171,8 +178,8 @@ The Sim harness (`Ironwake.Sim`) exists so quality is measured, not felt. Every 
 
 1. **Beatable.** The heuristic AI player wins ≥ 60% of 200 seeded runs within the turn limit.
 2. **Decisions matter.** The random-legal-move player wins ≤ 5% of 200 runs.
-3. **No cheap shots.** Running the enemy phase from deployment positions with no player moves kills zero player units.
-4. **No dead weight.** Across the 200 AI-player runs, every deployed recruit gets ≥ 1 kill in at least 30% of runs.
+3. **No cheap shots.** Running the enemy phase from deployment positions with no player moves kills zero player units. Maps 4 and up may waive this deliberately with `cheap_shots: allowed` in the map header (section 10); the waiver is declared in the file so the Table can see which maps opted in, never exempted in a test.
+4. **No dead weight.** Ablation, not kills: kills are a proxy that fails healers and corridor-blockers. For each deployed recruit, replay the same 200 seeds with that recruit benched and compare outcomes paired by seed against the baseline. Every bench removes a body, and a body always matters, so the threshold is relative: a recruit is dead weight when their paired drop is under half the median drop across the cast. (Threshold provisional, from the Table; tune on the first map that fails it.) The gate measures how well the heuristic player uses the unit, so a failure on a healer indicts the heuristic first.
 5. **Forecast honesty.** For 10,000 random combats, forecast damage/hit/crit equals resolver behavior (statistically for hit/crit, exactly for damage).
 6. **Determinism.** 100 random seeds × 100 random commands replay byte-identical.
 7. **Speed.** A full AI-vs-AI map resolves in under 1 second.
@@ -199,16 +206,18 @@ The gates in section 11 catch jank. They cannot tell us whether a turn was *wort
 
 ### Starting experiments (build on `experiment/<name>`, play, keep or kill)
 
-1. **Rapport and Rivalry.** Adjacent allies build rapport (the support base). But recruits from *different* regions start with rivalry, and a rival adjacent gives +10 crit and -5 hit — they show off. Rapport eventually overwrites rivalry. Cohort friction as a mechanic, not a cutscene.
-2. **Commander's Word.** Once per map the captain calls one order, scaled by Cha: *Hold* (+15 avoid to all allies this enemy phase), *Press* (+1 Mov this phase), *Rally* (heal 15% all). A gambit before battalions exist, and a reason Cha matters on day one.
-3. **Recall scars.** Rewinding is free of charge-count cost only three times, but the unit whose death you undid earns no EXP for the rest of the map — the near-miss shakes them. Cheap, thematic, and makes charge use a real decision.
+Agreed order on the Table (2026-09-14): map events first, as Phase 2 infrastructure rather than a spike; enemy retreat second; Rapport and Rivalry third. Commander's Word waits until maps 1 to 3 exist and the hit A/B has run.
+
+1. **Rapport and Rivalry.** Adjacent allies build rapport (the support base). But recruits from *different* regions start with rivalry, and a rival adjacent gives +10 crit and -5 hit — they show off. Rapport eventually overwrites rivalry. Cohort friction as a mechanic, not a cutscene. This is the only thing in v1 that makes adjacency mean anything (no zone of control, supports and battalions are Phase 3). Watch for: +10 crit at triple damage is worth about +20% expected damage against -5 hit, which is a formation bonus the player will farm, not friction. The spike's question is whether the player clusters rivals on purpose. Lean for the spike: showing off cuts both ways, so a rival adjacent also drops the unit's own crit avoid by 10.
+2. **Commander's Word.** Once per map the captain calls one order, scaled by Cha: *Hold* (+15 avoid to all allies this enemy phase), *Press* (+1 Mov this phase), *Rally* (heal 15% all). A gambit before battalions exist. Deferred, not killed: its value is a function of map difficulty and two of its orders lean on unbuilt systems; Cha being idle in v1 is a decision section 3 already made.
+3. **Recall scars.** Killed 2026-09-14 (DECISIONS/0010). It taxed the recruit's future instead of the charge, and its incentive was to let the recruit die. Replaced by the "Recall restores the rolls" rule in section 7.
 4. **Named rivals who level.** A crown cohort — six named enemies — appears on maps 2, 4, 6, and 8 with levels tracking the player's average, carrying grudges: a rival whose ally you killed targets that unit first. Data-driven recurring antagonists.
 5. **Ironwake itself.** The finale is the defense of the keep. Between maps the player spends repair points on the keep's `.map` — rebuild a wall, dig a ditch (water), raise a fort — editing the finale's terrain. Your base is a level you've been building all game.
 6. **Certification as a puzzle.** Instead of a roll, certifying into a class is a one-turn micro-map: "kill the dummy in one turn with this loadout." Pass and the class is yours. Tiny puzzle maps are cheap to author and genuinely satisfying.
 7. **Dusk maps.** Vision radius shrinks by one tile each turn. Not fog of war — a countdown. Pressure without RNG.
 8. **Carry the fallen.** Permadeath stays, but an ally who reaches a fallen recruit's tile recovers their weapon, and the weapon keeps their name. Loss with a keepsake.
-9. **Map events.** A minimal trigger system: on turn N or when a tile is entered, open a gate, collapse a bridge, spawn reinforcements from an edge. The single most reusable tool for making maps tell stories.
-10. **Enemy retreat and regroup.** Enemies below 30% HP with an escape route fall back to the nearest fort and heal. Enemies that act like they want to live make players commit.
+9. **Map events.** A minimal trigger system: on turn N or when a tile is entered, open a gate, collapse a bridge, spawn reinforcements from an edge. The single most reusable tool for making maps tell stories. Not an experiment: it is the authoring tool maps 1 to 8 are written with, so it is Phase 2 infrastructure (issue 32) and maps 1 to 3 are authored with it rather than rewritten after it.
+10. **Enemy retreat and regroup.** Enemies below 30% HP with an escape route fall back to the nearest fort and heal. Enemies that act like they want to live make players commit. Constraint: an enemy retreats only if it can reach a fort or a safe tile *this turn*, and never retreats twice; otherwise it stands and fights. No multi-turn flights, no chases, nothing that eats the turn limit.
 
 ### The Fun Gate (part of `tuned`, alongside gates 1–8)
 Both partners play the map by hand and independently rate it 1–10 on *tension*, *choice*, and *surprise*, and name their best turn in `docs/PLAYTEST.md`. All three scores ≥ 7 from both, or it goes back. If we disagree by 3+ on any axis, the Design Table gets a thread before anyone touches the map.
