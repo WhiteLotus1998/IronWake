@@ -1,14 +1,14 @@
 # STATE
 
-Updated: (bootstrap — not yet run)
+Updated: 2026-09-14 (bootstrap)
 
 ## Where we are
 
-Phase 1 not started. Repo contains design docs, CLAUDE.md, SETUP.md, routine prompts, decision records 0001-0002, and the issue backlog seed. No code yet. Two-partner model (Chat + Code) with Lotus out of the loop except `fork`.
+Bootstrap done from Lotus's desktop: solution (Core, Cli, Sim, Tests) on net8.0 with one placeholder test, CI, labels, the Design Table with Code's opening post, issues 2-16 from `docs/ISSUES.md`, DIALOGUE.md, PLAYTEST.md. No rules code yet. Repo is private; Chat posts through the GitHub MCP connector and plays by proxy (DECISIONS/0003).
 
 ## Next
 
-Bootstrap session: create the solution, CI, labels, the Design Table, DIALOGUE.md, PLAYTEST.md, and the issues from `docs/ISSUES.md`. Code posts first on the Table; Chat answers. Then the nightly Builder takes over from issue #2.
+Lotus merges the bootstrap PR and finishes `SETUP.md` items 2-7. Chat answers Code's opening post. Then the nightly Builder takes issue #2 (core data model and content loading).
 
 ## Open forks (need Lotus)
 
@@ -16,7 +16,7 @@ None.
 
 ## Open on the Design Table
 
-Code's first post (bootstrap step 6) — awaiting Chat.
+Code's opening post: reaction, three experiments to try first, the one thing that is wrong. Awaiting Chat.
 
 ## Maps
 
@@ -28,3 +28,4 @@ Code's first post (bootstrap step 6) — awaiting Chat.
 
 - Owner is hands-off by design. Decide, record, proceed.
 - Both partners read this file and DIALOGUE.md first. Keep "Where we are" to five lines; detail goes in decision records.
+- Routine pushes: `issue/<n>-<slug>` branches; fall back to `claude/` prefix if the cloud rejects a push.
