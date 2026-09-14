@@ -1,0 +1,85 @@
+{
+  "units": [
+    {
+      "id": "soldier",
+      "name": "Soldier",
+      "class": "pikeman",
+      "level": 1,
+      "stats": { "hp": 19, "str": 6, "mag": 0, "dex": 4, "spd": 5, "lck": 2, "def": 3, "res": 1, "cha": 2 },
+      "growths": { "hp": 45, "str": 35, "mag": 5, "dex": 30, "spd": 30, "lck": 15, "def": 30, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "brigand",
+      "name": "Brigand",
+      "class": "reaver",
+      "level": 1,
+      "stats": { "hp": 20, "str": 6, "mag": 0, "dex": 3, "spd": 4, "lck": 1, "def": 2, "res": 0, "cha": 1 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 20, "res": 10, "cha": 5 },
+      "inventory": [ { "item": "iron_axe" } ]
+    },
+    {
+      "id": "archer",
+      "name": "Archer",
+      "class": "bowman",
+      "level": 1,
+      "stats": { "hp": 17, "str": 5, "mag": 0, "dex": 6, "spd": 5, "lck": 2, "def": 2, "res": 1, "cha": 2 },
+      "growths": { "hp": 40, "str": 30, "mag": 5, "dex": 40, "spd": 30, "lck": 15, "def": 20, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "iron_bow" } ]
+    },
+    {
+      "id": "hexer",
+      "name": "Hexer",
+      "class": "adept",
+      "level": 1,
+      "stats": { "hp": 16, "str": 1, "mag": 5, "dex": 5, "spd": 4, "lck": 2, "def": 1, "res": 4, "cha": 2 },
+      "growths": { "hp": 35, "str": 5, "mag": 40, "dex": 30, "spd": 30, "lck": 15, "def": 10, "res": 30, "cha": 10 },
+      "inventory": [ { "item": "cinder" } ]
+    },
+    {
+      "id": "acolyte",
+      "name": "Acolyte",
+      "class": "chaplain",
+      "level": 1,
+      "stats": { "hp": 16, "str": 1, "mag": 4, "dex": 4, "spd": 4, "lck": 3, "def": 1, "res": 5, "cha": 3 },
+      "growths": { "hp": 35, "str": 5, "mag": 35, "dex": 25, "spd": 25, "lck": 25, "def": 10, "res": 35, "cha": 20 },
+      "inventory": [ { "item": "radiance" }, { "item": "salve" } ]
+    },
+    {
+      "id": "rider",
+      "name": "Rider",
+      "class": "outrider",
+      "level": 1,
+      "stats": { "hp": 19, "str": 6, "mag": 0, "dex": 4, "spd": 5, "lck": 2, "def": 3, "res": 1, "cha": 2 },
+      "growths": { "hp": 45, "str": 35, "mag": 5, "dex": 30, "spd": 30, "lck": 15, "def": 25, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "wingrider",
+      "name": "Wingrider",
+      "class": "skyrider",
+      "level": 1,
+      "stats": { "hp": 17, "str": 5, "mag": 0, "dex": 5, "spd": 6, "lck": 3, "def": 2, "res": 3, "cha": 2 },
+      "growths": { "hp": 40, "str": 30, "mag": 5, "dex": 30, "spd": 40, "lck": 20, "def": 15, "res": 25, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "shieldbearer",
+      "name": "Shieldbearer",
+      "class": "bulwark",
+      "level": 1,
+      "stats": { "hp": 21, "str": 6, "mag": 0, "dex": 3, "spd": 3, "lck": 1, "def": 5, "res": 0, "cha": 2 },
+      "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 20, "spd": 15, "lck": 10, "def": 35, "res": 10, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "bandit_leader",
+      "name": "Bandit Leader",
+      "class": "reaver",
+      "level": 3,
+      "stats": { "hp": 24, "str": 8, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 4, "res": 1, "cha": 4 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 25, "res": 10, "cha": 10 },
+      "inventory": [ { "item": "steel_axe" }, { "item": "hatchet" } ]
+    }
+  ]
+}

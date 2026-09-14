@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Loads and validates the JSON under /content into Core records. Owns all content file IO so Core never does. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ironwake.Core\Ironwake.Core.csproj" />
+  </ItemGroup>
+
+</Project>
