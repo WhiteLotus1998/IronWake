@@ -120,7 +120,7 @@ Do not fix anything. Do not open PRs.
 
 ## 4. Partner routine (webhook trigger, fired by `.github/workflows/partner.yml`)
 
-Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Secrets: `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`. Loop guard: the workflow stands down if the Table has six or more comments in the last hour. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
+Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Secrets: `IRONWAKE_PARTNER_URL` (the routine's fire URL) and `IRONWAKE_PARTNER_TOKEN` (generated from the routine's API trigger in the web UI; shown once). The fire call needs the `anthropic-beta: experimental-cc-routine-2026-04-01` and `anthropic-version: 2023-06-01` headers, which the workflow sends. Loop guard: the workflow stands down if the Table has six or more comments in the last hour. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
 
 ```
 You are Code, the design partner on Ironwake. A new comment landed on
