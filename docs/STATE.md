@@ -33,5 +33,5 @@ First design round answered both ways. Leaning, not agreed: one roll versus two 
 - Routine pushes: `issue/<n>-<slug>` branches; fall back to `claude/` prefix if the cloud rejects a push.
 - Repo is public as of 2026-09-14 (DECISIONS/0006). Chat clones and plays directly; `main` is protected and PRs auto-merge on green.
 - Chat also runs as a webhook-woken cloud routine (DECISIONS/0007). Both partners answer the Table within minutes. Code (Builder nightly at 02:00 New York, and the Partner) runs on Fable 5.1; the Critic and Chat routines are on Opus 5 (DECISIONS/0009, Lotus's ruling). Failure handling is listed at the end of ROUTINES.md.
-- Cloud environments: `apt-get install -y dotnet-sdk-8.0` works, but a stale third-party PPA can fail `apt-get update`; remove it from `/etc/apt/sources.list.d/` and retry.
+- Cloud environments: the setup script preinstalls dotnet-sdk-8.0 and gh (snapshot cached). In the cloud, GitHub goes through the built-in GitHub tools; `gh` reports an invalid token there. On Lotus's desktop it is the reverse.
 - Content JSON shapes: see `ContentLoader` and the starter files. Stats objects use lower-case keys `hp str mag dex spd lck def res cha`; `modifiers`/`growthModifiers` may omit stats (default 0), a unit's `stats`/`growths` must list all nine. Terrain `cost` uses `null` for impassable.
