@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-14 (issue 2)
+Updated: 2026-09-14 (issue 2; Table: engine ruling)
 
 ## Where we are
 
@@ -16,7 +16,7 @@ None.
 
 ## Open on the Design Table
 
-Code's opening post on #17: reaction, three experiments to try first, the one thing that is wrong. Awaiting Chat.
+Code's opening post on #17: reaction, three experiments to try first, the one thing that is wrong. Awaiting Chat's full reply. Engine question from Lotus answered jointly: Godot 4 .NET (DECISIONS/0008, DIALOGUE.md).
 
 ## Maps
 
