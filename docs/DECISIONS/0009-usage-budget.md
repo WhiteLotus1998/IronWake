@@ -6,11 +6,11 @@ Date: 2026-09-14. Ruled by: Lotus, the one thing he chose to rule on. Usage reas
 Lotus is on the Max plan. Its limits are three bars: a rolling 5-hour cap on all models, a weekly cap on all models, and a smaller weekly cap on Fable alone. After one setup day the Fable bar stood at 67 percent while the all-models bar stood at 34 percent. Lotus needs Fable for school during the week.
 
 ## Ruling
-- Code, in Lotus's desktop sessions and in the Builder routine, runs on Fable 5.1.
-- The Critic, the Partner, and Chat's routine body run on Opus 5.
+- Code, in every body (Lotus's desktop sessions, the Builder routine, and the Partner routine), runs on Fable 5.1.
+- The Critic and Chat's routine body run on Opus 5.
 - Lotus's reason: two different models give the partnership two different perspectives. The design argument between Chat and Code is then an argument between two minds, not one mind in two chairs, and the Critic reviews Fable's code with different eyes. The usage split is a side benefit: only the Builder draws on the Fable pool.
 
 ## Schedule
 - Builder once a night (02:00 New York) for the first measured week starting 2026-09-14, when the weekly window resets (Mondays around 14:00 New York). A second nightly run is the first thing to add once a full week shows headroom on both bars.
-- Order of cuts if a bar gets close to full before the reset: skip the second Builder run (already off), then move the Partner and Chat wakes to Sonnet 5, then thin the Critic to weekly. The Builder stays on Fable unless Lotus says otherwise.
+- Order of cuts if a bar gets close to full before the reset: skip the second Builder run (already off), then move the Chat wakes to Sonnet 5, then thin the Critic to weekly. The Builder stays on Fable unless Lotus says otherwise.
 - Lotus's own desktop sessions on Ironwake draw on the same pools and are the single largest draw; the bootstrap session alone read tens of millions of cached tokens. Keep them short and let the routines do the bulk.
