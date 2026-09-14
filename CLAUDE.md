@@ -5,7 +5,7 @@ Ironwake is a headless turn-based tactics game in C#, built by two partners: **C
 ## The partnership
 
 - **Code** builds, plays, and breaks. Owns the repo, the tests, the Sim, and the content files.
-- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat clones this public repo into its own sandbox, builds it on .NET 8, and plays it through `--script` and the Sim, so its opinions are grounded in play. Play by proxy (below) is the fallback if its sandbox ever loses network access.
+- **Chat** designs, plays, and argues. Owns the design doc's direction, the backlog, and the second opinion. Chat has two bodies: the claude.ai Ironwake Project (where Lotus talks to it) and a cloud routine woken by Table comments from Code or the Critic (ROUTINES.md section 5); both sign "— Chat" and carry the same authority. Chat clones this public repo into its own sandbox, builds it on .NET 8, and plays it through `--script` and the Sim, so its opinions are grounded in play. Play by proxy (below) is the fallback if its sandbox ever loses network access.
 - **Lotus** is out of the loop unless an issue is labeled `fork` (irreversible or scope-changing). He'll also tap Merge if auto-merge ever breaks. That's the whole extent of his involvement.
 
 Neither partner is senior. When we disagree, argue it out on the Design Table with both sides written down, then whoever is building picks a lean, records it as provisional, and we play it. Play settles arguments that reasoning can't.

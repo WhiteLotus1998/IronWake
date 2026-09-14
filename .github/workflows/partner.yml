@@ -1,8 +1,10 @@
 name: partner
 
-# Wakes the Partner routine when someone posts on the Design Table.
-# Skips comments signed by Code or the Critic so the routine never answers itself.
-# Does nothing until the two repo secrets exist.
+# Routes every new Design Table comment to the partner who should answer it.
+# Signed "- Chat" wakes Code's Partner routine. Signed "- Code" or "- Critic"
+# wakes Chat's routine. Unsigned (Lotus) wakes both. Skips a routine whose
+# secrets are absent, and stands down if the Table has seen six or more
+# comments in the last hour so two routines cannot ping-pong.
 
 on:
   issue_comment:
@@ -13,28 +15,53 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'design-table')
     runs-on: ubuntu-latest
     steps:
-      - name: Post the comment to the Partner routine webhook
+      - name: Route the comment to a partner routine
         env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
           PARTNER_URL: ${{ secrets.IRONWAKE_PARTNER_URL }}
           PARTNER_TOKEN: ${{ secrets.IRONWAKE_PARTNER_TOKEN }}
+          CHAT_URL: ${{ secrets.IRONWAKE_CHAT_URL }}
+          CHAT_TOKEN: ${{ secrets.IRONWAKE_CHAT_TOKEN }}
           COMMENT_BODY: ${{ github.event.comment.body }}
           COMMENT_URL: ${{ github.event.comment.html_url }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
         run: |
-          if [ -z "$PARTNER_URL" ] || [ -z "$PARTNER_TOKEN" ]; then
-            echo "partner secrets not set; skipping"
+          since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
+          recent="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" --jq 'length' || echo 0)"
+          if [ "${recent:-0}" -ge 6 ]; then
+            echo "loop guard: $recent comments in the last hour; standing down"
             exit 0
           fi
+
           tail="$(printf '%s' "$COMMENT_BODY" | tr -d '\r' | tail -c 200)"
           case "$tail" in
-            *"— Code"*|*"-- Code"*|*"— Critic"*|*"-- Critic"*)
-              echo "comment signed by Code or Critic; skipping"
-              exit 0 ;;
+            *"— Chat"*|*"-- Chat"*)                               target=partner ;;
+            *"— Code"*|*"-- Code"*|*"— Critic"*|*"-- Critic"*)     target=chat ;;
+            *)                                                    target=both ;;
           esac
-          text="New Design Table comment by $COMMENT_AUTHOR: $COMMENT_URL"
-          payload="$(jq -cn --arg text "$text" '{text: $text}')"
-          curl --fail --silent --show-error \
-            -X POST "$PARTNER_URL" \
-            -H "Authorization: Bearer $PARTNER_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$payload"
+          echo "routing to: $target"
+
+          wake() {
+            url="$1"; token="$2"; name="$3"
+            if [ -z "$url" ] || [ -z "$token" ]; then
+              echo "$name: secrets not set; skipping"
+              return 0
+            fi
+            text="New Design Table comment by $COMMENT_AUTHOR: $COMMENT_URL"
+            payload="$(jq -cn --arg text "$text" '{text: $text}')"
+            curl --fail --silent --show-error -X POST "$url" \
+              -H "Authorization: Bearer $token" \
+              -H "Content-Type: application/json" \
+              -d "$payload"
+            echo
+            echo "$name: woken"
+          }
+
+          case "$target" in
+            partner) wake "$PARTNER_URL" "$PARTNER_TOKEN" partner ;;
+            chat)    wake "$CHAT_URL" "$CHAT_TOKEN" chat ;;
+            both)    wake "$PARTNER_URL" "$PARTNER_TOKEN" partner
+                     wake "$CHAT_URL" "$CHAT_TOKEN" chat ;;
+          esac
