@@ -17,6 +17,18 @@ Chat's full reply to Code's opening post, and Code's answer. Recorded in DESIGN.
 - **Gate 3 may be waived from map 4 on**, declared in the map file as `cheap_shots: allowed` and printed by the Sim, never exempted quietly in a test.
 - **Map authoring.** Armored's corridor job needs one-tile corridors; with no zone of control a two-tile gap is no wall. The map format is written by the game as well as read, for 13.5. (DESIGN sections 9 and 10.)
 
+### Second round (2026-09-14, both partners)
+
+Chat's reply to Code's answer, and Code's answer to it. Recorded in DESIGN.md sections 3, 5, 8, 11, and 13.1, and in issues 12, 16, and 31.
+
+- **The "three places" argument against two rolls is withdrawn.** One hit function, three callers, under either scheme. Only the terrain reason stands.
+- **Gate 4 depends on issue 31.** The ablation is a paired experiment only once rolls and growth are keyed: under a sequential stream, benching one unit reshuffles every later roll and every other recruit's growth. Keying is common random numbers; it does not cut the run count (the baseline is gate 1's seeds), it cuts the variance. Chat's 200-seeds-per-bench figure was the un-keyed cost. (Issue 12; DESIGN section 11.)
+- **Growth rolls are keyed on (unit, new level, stat) and nothing else.** Two reasons agreeing: it kills level-up scumming through Recall, and it makes every recruit's level-ups invariant under ablation. Keying on map or turn would reopen laundering and break the gate. A starved stat on one recruit is a character; the Sim shows the spread before anyone argues for a change. (DESIGN section 3; issue 31.)
+- **Gate 4 fails only past a noise margin and prints the action mix.** Report each drop with a standard error; fail on `drop + 2 * SE < 0.5 * median`. At 200 seeds the margin is about the threshold's size, so the gate catches near-zero recruits and nothing subtler, which is what dead weight means. Each recruit's action mix per arm (attacks, damage, heals, attacks absorbed) prints next to the drop so a healer failure can be read as a heuristic failure without re-deriving it. (Issue 12; DESIGN section 11.)
+- **The wake rule is "do not stop close."** Manhattan, walls not considered, evaluated on where units stand after each player command. A unit can run past a sleeping group and end beyond the radius; that is a designed play and Cavalry's first job that is not arriving early. The noise radius prices a dash that fights on the way through. (DESIGN section 8.)
+- **Rivalry keeps the symmetric-cost lean as the second arm, and gains a third.** Chat checked the numbers against the starter content: both sides move about ten points, so the cost is symmetric in probability, which is the real defence. `CritAvoid` is not clamped, and a test falsifies the clamp. The hole: the bonus rides every attack made, the cost only attacks received, and good play drives the cost to zero. The spike logs exposure (fraction of rival-adjacent player-phase actions followed by an attack on that unit); if it is low, the third arm is a counter-only bonus. All arms are data changes. (DESIGN sections 5 and 13.1; issue 16.)
+- **The enemy AI prices crit.** Code's addition: section 8's expected damage includes the crit expectation, computed by the same functions the forecast uses, so a lowered crit avoid makes a unit a better target in the enemy's own arithmetic rather than a cost the enemy cannot see. Without this, exposure would measure geometry only. Builder-level call; argue it on issue 10's PR.
+
 ### Engine and renderers (2026-09-14, both partners; DECISIONS/0008)
 
 - The shipping front end is Godot 4 .NET, living in this repo. Unity is out. Unreal is not the main line.
@@ -36,8 +48,7 @@ Chat's full reply to Code's opening post, and Code's answer. Recorded in DESIGN.
 ## Leaning, not agreed
 
 - **One roll versus two.** Both partners lean one roll. Code's original reason (the display lies) is withdrawn: the display shows the resolved number under either scheme. The reason that stands is Chat's: under two rolls, forest buys 12 points of avoid against a raw-95 enemy and 32 against a raw-50 one, so cover is weakest exactly when it is needed most and section 4's table is never what you get. The A/B after issue 5 settles it. What it measures: roll sensitivity in the Sim (with keyed rolls, flip each high-odds miss or low-odds hit, replay, count runs whose outcome changed), paired by seed, both arms on tuned numbers. Whether the player had a positional answer is judged in the PLAYTEST entries, not by the Sim.
-- **Rivalry's numbers.** As written, +10 crit at triple damage is a formation bonus the player will farm. Code's lean for the spike: a rival adjacent also drops the unit's own crit avoid by 10. The spike's question is whether players cluster rivals on purpose.
-- **Keyed level-ups.** Issue 31 keys growth rolls on (unit, level, stat), which fixes every recruit's growth trajectory at the campaign seed and kills level-up scumming through Recall. Code leans toward keeping that and letting the Sim show the spread. The Builder's review step on 31 decides; Chat can argue it there.
+- **Rivalry's numbers.** As written, +10 crit at triple damage is a formation bonus the player will farm. Three arms, all data: as written; symmetric cost (crit avoid -10 while rival-adjacent, Code's lean); counter-only bonus (the fallback if exposure comes back low). The spike's questions are whether players cluster rivals on purpose and whether the rival-adjacent unit is then attacked.
 
 ## Open questions on the Table
 

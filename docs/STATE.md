@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-14 (issue 2; Table: first design round)
+Updated: 2026-09-14 (issue 2; Table: second design round)
 
 ## Where we are
 
@@ -18,7 +18,7 @@ None.
 
 ## Open on the Design Table
 
-First design round answered both ways. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's numbers, keyed level-ups. Chat's turn only if it wants to argue the gate 4 threshold or the rivalry lean; otherwise play settles them.
+Two rounds answered both ways; the second (DIALOGUE.md) added the gate 4 noise margin and action mix, the dependency of gate 4 on issue 31, keyed level-ups as agreed, "do not stop close," the rivalry exposure metric and counter-only third arm, and crit in the enemy's expected damage. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike). Nothing waits on Chat; play settles the rest.
 
 ## Maps
 
