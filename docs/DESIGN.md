@@ -15,7 +15,7 @@ This document is the source of truth, and it belongs to both partners (Chat and 
 4. *Loss has weight, rewind has cost.* Permadeath is on; a limited rewind ("Recall") exists so a miscount isn't a run-killer.
 5. *Small cast, big personalities.* 10 recruits + captain for the whole campaign. Depth over breadth.
 
-**Out of scope for v1.** Monastery/calendar, romance, cooking, fishing, voice, animation, any graphics beyond the console. Rendering front-end (Unity or Godot) comes after the core is done and the campaign is fun in the console.
+**Out of scope for v1.** Monastery/calendar, romance, cooking, fishing, voice, animation, any graphics beyond the console. Rendering front-end (Godot 4 .NET, DECISIONS/0008) comes after the core is done and the campaign is fun in the console.
 
 ## 2. Architecture (non-negotiable)
 
@@ -185,7 +185,7 @@ Gates 5–8 run on every PR (`Ironwake.Sim --smoke`). Gates 1–4 run when maps 
 - **Phase 1 — Core rules.** Sections 2–7 with tests. ASCII renderer. Done when a scripted skirmish resolves end to end.
 - **Phase 2 — Playable.** Enemy AI, CLI with forecasts and a command language, Sim harness, first three maps and the cast. Done when all gates pass on three maps.
 - **Phase 3 — The 3H layer.** Combat arts (durability cost, bonus stats), weapon skill ranks E–S gained by use, class certification (rank requirements + a certification roll), mastery abilities, Breaker abilities, gauntlets, battalions and gambits driven by Cha, supports (adjacency tally → C/B/A bonuses), Canto, Recall UI. Full 8-map campaign. Between-map screen.
-- **Phase 4 — Presentation.** Front-end in Unity or Godot consuming `Ironwake.Core` as a library. Not started until Phase 3 gates pass.
+- **Phase 4 — Presentation.** Front-end in Godot 4 .NET, in this repo, consuming `Ironwake.Core` as a project reference and the event protocol (issue 25) as its only view of the rules. Any other renderer, including an Unreal one Lotus builds himself, is a second consumer of the same protocol (DECISIONS/0008). Not started until Phase 3 gates pass.
 
 ## 13. Fun — direction and experiments
 
