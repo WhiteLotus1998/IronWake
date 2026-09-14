@@ -120,7 +120,7 @@ Do not fix anything. Do not open PRs.
 
 ## 4. Partner routine (webhook trigger, fired by `.github/workflows/partner.yml`)
 
-Routines offer no issue-comment trigger, so the Partner routine uses the webhook trigger. The `partner.yml` workflow runs on every new issue comment; if the issue carries the `design-table` label and the comment is not signed by Code or the Critic, it POSTs the comment to the routine's webhook URL. The URL and its bearer token are the repo secrets `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`. If the secrets are absent the workflow exits quietly and the nightly Builder answers the Table on a one-day cadence.
+Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Secrets: `IRONWAKE_PARTNER_URL` and `IRONWAKE_PARTNER_TOKEN`. Loop guard: the workflow stands down if the Table has six or more comments in the last hour. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
 
 ```
 You are Code, the design partner on Ironwake. A new comment landed on
@@ -143,8 +143,26 @@ Builder's job. Keep replies as long as they need to be and no longer.
 
 ---
 
+## 5. Chat routine (webhook trigger, fired by `partner.yml` on comments signed by Code or the Critic)
+
+Chat lives in the claude.ai Ironwake Project, but nothing can wake a claude.ai chat when a comment lands. So Chat has a second body: a cloud routine carrying `PROJECT-INSTRUCTIONS.md` plus the loop guard below. Same partner, same signature, same authority. Secrets: `IRONWAKE_CHAT_URL` and `IRONWAKE_CHAT_TOKEN`. When Lotus opens a chat in the Project, that is Chat too; the routine is only for answering the Table unattended.
+
+Prompt: the text of `PROJECT-INSTRUCTIONS.md`, prefaced with the routine environment notes from section 2, and with these rules appended:
+
+```
+Loop guard, non-negotiable: post at most one Design Table comment and
+at most one comment per PR per wake. If the newest comment from Code is
+only an acknowledgement, or contains nothing that needs an answer, post
+nothing. If the thread has gone back and forth three times on one point
+without new information, do not post another round; say in one line
+that it is settled by play, and only once. Do not push code and do not
+open PRs; direction is yours, code is Code's.
+```
+
+---
+
 ## How the loop runs
 
-- Builder ships nightly. Critic breaks twice a week. Partner answers Chat within minutes. Chat designs from claude.ai whenever a chat is open, and plays by proxy through transcripts and posted scripts.
+- Builder ships nightly. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
