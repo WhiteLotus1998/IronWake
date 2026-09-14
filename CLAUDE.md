@@ -44,7 +44,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 5. `dotnet build`, `dotnet test`, `dotnet run --project src/Ironwake.Sim -- --smoke`. All pass.
 6. Update `STATE.md`, add `docs/DECISIONS/NNNN-title.md` for any fork resolved, update `DIALOGUE.md` if the Table moved. Same PR as the code — a PR without them is not done.
 7. Open the PR with **Decided / Unsure / Next**. Comment a one-paragraph summary on the issue.
-8. If CI is green and the issue is not `fork`: `gh pr merge --auto --squash`. If auto-merge isn't available, label the issue `needs-merge`.
+8. If the issue is not `fork`: wait for CI with `gh pr checks <n> --watch --fail-fast`, then `gh pr merge <n> --squash`. Branch protection and auto-merge need GitHub Pro on a private repo, so the merge is done by whoever opened the PR, only after `ci` passes. If the merge fails, label the issue `needs-merge`.
 9. One issue per session. Finishing one thing well beats starting three.
 
 ## Decide vs. escalate
