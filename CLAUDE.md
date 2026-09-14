@@ -57,7 +57,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 
 ## Code standards (hard rules)
 
-- Target `net8.0` in every project. `global.json` pins SDK `8.0.100` with `"rollForward": "latestMajor"` so any SDK 8+ builds it (Lotus's machine has 9; cloud environments may have 10). Shared settings live in `Directory.Build.props`. No NuGet dependencies in `Ironwake.Core`; xUnit and the test SDK only in tests. If the cloud environment lacks a .NET SDK, the setup script is `apt-get install -y dotnet-sdk-8.0` from Ubuntu's own archive.
+- Target `net8.0` in every project. `global.json` pins SDK `8.0.100` with `"rollForward": "latestMajor"` so any SDK 8+ builds it (Lotus's machine has 9; cloud environments may have 10). Shared settings live in `Directory.Build.props`. No NuGet dependencies in `Ironwake.Core` or `Ironwake.Content`; xUnit and the test SDK only in tests. `Ironwake.Content` may use System.Text.Json and file IO; it is the only project that reads content files. If the cloud environment lacks a .NET SDK, the setup script is `apt-get install -y dotnet-sdk-8.0` from Ubuntu's own archive.
 - `TreatWarningsAsErrors`, `Nullable` enabled, `ImplicitUsings` on, CS1574 as error.
 - `Ironwake.Core` references nothing but the BCL. No `Console`, no `System.Random`, no file IO, no `DateTime.Now`. RNG is `IRng` injected. Content is passed in already loaded.
 - State is immutable: `record` types, immutable collections, `with` expressions. No static mutable state anywhere.
@@ -82,6 +82,7 @@ global.json
 Directory.Build.props
 CLAUDE.md
 src/Ironwake.Core/        rules engine (pure)
+src/Ironwake.Content/     JSON content loader and validator (the only place content files are read)
 src/Ironwake.Cli/         console game (play, validate, --script)
 src/Ironwake.Sim/         headless harness, metrics, --smoke, --full
 tests/Ironwake.Core.Tests/

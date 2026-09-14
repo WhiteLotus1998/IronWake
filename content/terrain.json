@@ -1,0 +1,89 @@
+{
+  "terrain": [
+    {
+      "id": "plain",
+      "name": "Plain",
+      "glyph": ".",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0
+    },
+    {
+      "id": "road",
+      "name": "Road",
+      "glyph": "=",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0
+    },
+    {
+      "id": "forest",
+      "name": "Forest",
+      "glyph": "^",
+      "cost": { "infantry": 2, "cavalry": 3, "flying": 1, "armored": 2 },
+      "avoid": 20,
+      "def": 1,
+      "res": 0
+    },
+    {
+      "id": "hill",
+      "name": "Hill",
+      "glyph": "n",
+      "cost": { "infantry": 2, "cavalry": 3, "flying": 1, "armored": 3 },
+      "avoid": 10,
+      "def": 1,
+      "res": 0
+    },
+    {
+      "id": "mountain",
+      "name": "Mountain",
+      "glyph": "M",
+      "cost": { "infantry": 3, "cavalry": null, "flying": 1, "armored": null },
+      "avoid": 30,
+      "def": 2,
+      "res": 0
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "glyph": "~",
+      "cost": { "infantry": null, "cavalry": null, "flying": 1, "armored": null },
+      "avoid": 0,
+      "def": 0,
+      "res": 0
+    },
+    {
+      "id": "fort",
+      "name": "Fort",
+      "glyph": "F",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 30,
+      "def": 2,
+      "res": 2,
+      "heal": 20,
+      "appliesToFlyers": true
+    },
+    {
+      "id": "wall",
+      "name": "Wall",
+      "glyph": "#",
+      "cost": { "infantry": null, "cavalry": null, "flying": null, "armored": null },
+      "avoid": 0,
+      "def": 0,
+      "res": 0
+    },
+    {
+      "id": "throne",
+      "name": "Gate",
+      "glyph": "T",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 30,
+      "def": 3,
+      "res": 3,
+      "heal": 20,
+      "appliesToFlyers": true
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "classes": [
+    {
+      "id": "cadet",
+      "name": "Cadet",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["sword", "lance", "axe"],
+      "modifiers": {},
+      "growthModifiers": {}
+    },
+    {
+      "id": "pikeman",
+      "name": "Pikeman",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["lance"],
+      "modifiers": { "hp": 1, "str": 1, "def": 1 },
+      "growthModifiers": { "hp": 5, "def": 5 }
+    },
+    {
+      "id": "reaver",
+      "name": "Reaver",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["axe"],
+      "modifiers": { "hp": 2, "str": 2 },
+      "growthModifiers": { "hp": 5, "str": 10, "spd": -5 }
+    },
+    {
+      "id": "bowman",
+      "name": "Bowman",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["bow"],
+      "modifiers": { "dex": 2 },
+      "growthModifiers": { "dex": 10 }
+    },
+    {
+      "id": "adept",
+      "name": "Adept",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "modifiers": { "mag": 2, "res": 1 },
+      "growthModifiers": { "mag": 10 }
+    },
+    {
+      "id": "chaplain",
+      "name": "Chaplain",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["faith"],
+      "modifiers": { "mag": 1, "res": 2 },
+      "growthModifiers": { "res": 10, "lck": 5 }
+    },
+    {
+      "id": "outrider",
+      "name": "Outrider",
+      "movement": "cavalry",
+      "mov": 6,
+      "weapons": ["lance", "sword"],
+      "modifiers": { "hp": 1, "str": 1 },
+      "growthModifiers": { "hp": 5, "str": 5 }
+    },
+    {
+      "id": "skyrider",
+      "name": "Skyrider",
+      "movement": "flying",
+      "mov": 6,
+      "weapons": ["lance"],
+      "modifiers": { "spd": 2, "res": 1, "def": -1 },
+      "growthModifiers": { "spd": 10, "def": -5 }
+    },
+    {
+      "id": "bulwark",
+      "name": "Bulwark",
+      "movement": "armored",
+      "mov": 4,
+      "weapons": ["lance", "axe"],
+      "modifiers": { "hp": 3, "def": 3, "spd": -2 },
+      "growthModifiers": { "hp": 10, "def": 15, "spd": -10 }
+    }
+  ]
+}
