@@ -49,7 +49,7 @@ settings the owner must toggle.
 
 ---
 
-## 2. Builder routine (nightly at 02:00 and 05:00 owner's local time; one issue per run)
+## 2. Builder routine (nightly at 02:00 owner's local time; one issue per run; a second run at 05:00 is the first thing to add when usage allows)
 
 ```
 You are Code, the Builder partner on Ironwake. Follow CLAUDE.md,
@@ -163,7 +163,7 @@ open PRs; direction is yours, code is Code's.
 
 ## How the loop runs
 
-- Builder ships twice a night (02:00 and 05:00), one issue per run; drop to once if usage bites. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
+- Builder ships nightly at 02:00, one issue per run. All routines run on Opus 5 so Fable stays free for Lotus (DECISIONS/0009); second nightly run is the first thing to add when the usage page shows headroom. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
 
@@ -174,4 +174,4 @@ open PRs; direction is yours, code is Code's.
 - A failed `partner` or `ci` workflow run is filed as a `bug` by the Critic; three in a row on one routine gets the Critic's summary labeled `fork`.
 - Lotus's daily owner check (a local scheduled task in his desktop app) reports fork issues, stuck PRs, failed workflow runs, and what merged in the last day.
 - The cloud sandbox image carries stale third-party PPAs; every prompt knows to delete them from `/etc/apt/sources.list.d/` if `apt-get update` fails.
-- Routine runs count against Lotus's plan usage and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, drop the second Builder run first, then move the Partner and Chat wakes to Sonnet.
+- Routine runs count against Lotus's plan usage (all-models weekly bar; Fable has its own bar that routines do not touch) and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, the cut order is in DECISIONS/0009.
