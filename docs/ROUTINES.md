@@ -49,7 +49,7 @@ settings the owner must toggle.
 
 ---
 
-## 2. Builder routine (nightly at 02:00 owner's local time; one issue per run; a second run at 05:00 is the first thing to add when usage allows)
+## 2. Builder routine (nightly at 02:00 and 05:00 owner's local time; one issue per run)
 
 ```
 You are Code, the Builder partner on Ironwake. Follow CLAUDE.md,
@@ -163,7 +163,7 @@ open PRs; direction is yours, code is Code's.
 
 ## How the loop runs
 
-- Builder ships nightly at 02:00, one issue per run. Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5, by Lotus's ruling (DECISIONS/0009); a second nightly Builder run is the first thing to add when the usage page shows headroom. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
+- Builder ships twice a night, 02:00 and 05:00, one issue per run (Lotus asked for more per night on 2026-09-15 after the first 13-minute run). Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5, by Lotus's ruling (DECISIONS/0009); if the Fable bar on the usage page runs short before the Monday reset, the 05:00 run is the first thing to drop. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
 
