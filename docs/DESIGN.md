@@ -143,7 +143,7 @@ Tile choice: among tiles that allow the best-scoring attack, prefer highest terr
 
 ## 10. Map file format
 
-A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block. Glyphs per section 4. Example:
+A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block. Glyphs per section 4. Coordinates are `x,y` from the top-left, 0-based. Header keys: `name`, `size` (`WxH`), `win` (`rout`, `seize`, `defeat_boss`, `survive`, `escape`), `turn_limit` (required; every map has one, gate 1 counts against it), `recall` (default 3), `enemy_level` (default 1), and the optional `cheap_shots` below. A `P` line is `captain`, `recruit:<id>` (this recruit stands here), or bare `recruit` (a deployment slot the roster fills in order). An `E` line needs `group:` and `behavior:` (`aggressive`, `hold`, `guard`); a `B` line is a boss, and its behavior is always `boss`. Example:
 
 ```
 name: Old Mill Road
@@ -165,16 +165,18 @@ recall: 3
 
 units:
 P captain 1,8
-P recruit:mira 2,8
+P recruit:wren 2,8
 E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
 B bandit_leader 10,1 group:mill behavior:boss
 ```
 
-Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
+Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`: a template below it is raised to it (deterministically, DECISIONS/0005), and a template already at or above it keeps its own level, so a level-3 boss on a level-1 map stays level 3. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
 
-The renderer's output must be genuinely re-parseable as a map file, not only for the round-trip test: experiment 13.5 edits the finale's `.map` between maps, so the game writes this format as well as reads it.
+The parser validates beyond the grammar (DECISIONS/0011): positions inside the grid, one unit per tile, exactly one captain, player slots on ground infantry can stand on, enemies on ground their class can enter, a throne for `seize`, a `B` line for `defeat_boss`, and no attribute other than `group` and `behavior`. Errors name the file and line.
+
+The game writes this format as well as reads it: experiment 13.5 edits the finale's `.map` between maps. The writer is canonical (fixed header order, defaults written out), so writing a parsed map gives the same text back and every file under `content/maps/` is held to that form by a test. The console view (grid with units drawn over the terrain, plus a legend) is a separate rendering for reading, since a grid with letters on it has lost the terrain under them; the legend names the terrain under each unit instead.
 
 ## 11. Quality bar — what "not janky" means when no human is watching
 

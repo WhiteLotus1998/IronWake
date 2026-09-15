@@ -34,6 +34,60 @@ public class CliValidateTests
     }
 
     [Fact]
+    public void ValidateCountsMapsAndReportsTheFirstMapError()
+    {
+        var ok = Run(out var okExit, "validate", Fixture.RealContentDirectory());
+        Assert.Equal(0, okExit);
+        Assert.Contains("3 maps", ok);
+
+        var dir = Path.Combine(Path.GetTempPath(), "ironwake-cli-maps-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(Path.Combine(dir, "maps"));
+        try
+        {
+            foreach (var name in new[] { "classes.json", "weapons.json", "terrain.json" })
+            {
+                File.Copy(Path.Combine(Fixture.RealContentDirectory(), name), Path.Combine(dir, name));
+            }
+
+            Directory.CreateDirectory(Path.Combine(dir, "units"));
+            File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "enemies.json"), Path.Combine(dir, "units", "enemies.json"));
+            File.WriteAllText(Path.Combine(dir, "maps", "broken.map"), "name: Broken\nsize: 2x1\nwin: rout\nturn_limit: 5\n\n.?\n\nunits:\nP captain 0,0\n");
+
+            var output = Run(out var exit, "validate", dir);
+
+            Assert.Equal(1, exit);
+            Assert.StartsWith("ERROR: " + Path.Combine(dir, "maps", "broken.map") + ", line 6: unknown terrain glyph '?'", output);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void ShowPrintsTheMapView()
+    {
+        var output = Run(out var exit, "show", Path.Combine(Fixture.RealContentDirectory(), "maps", "old_mill_road.map"), Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.StartsWith("Old Mill Road  12x10", output);
+        Assert.Contains(" 8 .AB.........", output);
+        Assert.Contains("!  Bandit Leader L3", output);
+        Assert.All(output, c => Assert.True(c < 128, "non-ASCII character in CLI output"));
+    }
+
+    [Fact]
+    public void ShowWithoutAMapOrWithAMissingMapFails()
+    {
+        Run(out var usage, "show");
+        var output = Run(out var missing, "show", "/no/such.map", Fixture.RealContentDirectory());
+
+        Assert.Equal(2, usage);
+        Assert.Equal(1, missing);
+        Assert.StartsWith("ERROR: /no/such.map: file not found", output);
+    }
+
+    [Fact]
     public void UnknownCommandExitsTwo()
     {
         Run(out var exit, "dance");
