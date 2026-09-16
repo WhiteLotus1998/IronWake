@@ -1,5 +1,7 @@
 namespace Ironwake.Core.Tests.Content;
 
+/// <summary>CLI tests redirect the process-wide console, so they share one collection and never run in parallel with each other.</summary>
+[Collection("console")]
 public class CliValidateTests
 {
     [Fact]

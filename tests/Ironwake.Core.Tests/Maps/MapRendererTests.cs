@@ -76,6 +76,20 @@ public class MapRendererTests
     }
 
     [Fact]
+    public void AReachOverlayMarksDestinationsUnderTheUnitsAndSaysWhoseItIs()
+    {
+        var reach = Movement.Reach(Map, MapFixture.Content, new Coord(1, 8), MovementType.Infantry, 4, at => Map.OccupantAt(at, Side.Player));
+
+        var view = MapRenderer.Render(Map, MapFixture.Content, reach);
+        var lines = view.Split('\n');
+
+        Assert.Equal(" 8 *AB***......", lines[10]);
+        Assert.Equal(" 6 ****.....#..", lines[8]);
+        Assert.Contains("*  reach from 1,8, infantry mov 4: 21 tiles\n", view);
+        Assert.DoesNotContain("*", View);
+    }
+
+    [Fact]
     public void OutputIsPlainAscii()
     {
         Assert.All(View, c => Assert.True(c < 128 && (c >= 32 || c == '\n'), "non-ASCII or control character in the view"));
