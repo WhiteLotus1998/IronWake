@@ -19,7 +19,10 @@ public static class Movement
     /// </summary>
     /// <param name="map">The grid.</param>
     /// <param name="content">Terrain definitions the grid's ids refer to.</param>
-    /// <param name="from">Where the unit stands. Must be inside the map.</param>
+    /// <param name="from">
+    /// Where the unit stands. Must be inside the map, on terrain the movement type can
+    /// enter; a unit on impassable terrain is a corrupt state, refused rather than answered.
+    /// </param>
     /// <param name="movement">The unit's movement type, which picks the terrain cost column.</param>
     /// <param name="mov">Movement points, at least 0.</param>
     /// <param name="occupantAt">
@@ -42,6 +45,12 @@ public static class Movement
         if (mov < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(mov), mov, "mov must be at least 0");
+        }
+
+        var standing = map.TerrainAt(from, content);
+        if (!standing.IsPassable(movement))
+        {
+            throw new ArgumentException(CannotStandMessage(from, standing, movement), nameof(from));
         }
 
         var tiles = map.Width * map.Height;
@@ -116,6 +125,13 @@ public static class Movement
 
         return new Reach(from, movement, mov, ValueList<ReachEntry>.From(entries));
     }
+
+    /// <summary>
+    /// The refusal for a unit standing where its movement type cannot go, in the same
+    /// words the map loader uses for a placement it rejects.
+    /// </summary>
+    public static string CannotStandMessage(Coord at, Terrain terrain, MovementType movement) =>
+        $"{movement.ToString().ToLowerInvariant()} cannot stand on {terrain.Name} at {at}";
 
     private static ValueList<Coord> PathTo(MapDefinition map, int[] parents, int index, int origin)
     {

@@ -138,6 +138,13 @@ public static class Program
                 }
             }
 
+            var standing = map.TerrainAt(at, content);
+            if (!standing.IsPassable(movement.Value))
+            {
+                Console.WriteLine("ERROR: " + Movement.CannotStandMessage(at, standing, movement.Value));
+                return 1;
+            }
+
             var reach = Movement.Reach(map, content, at, movement.Value, mov, tile => map.OccupantAt(tile, side));
             Console.Write(MapRenderer.Render(map, content, reach));
             return 0;

@@ -1,8 +1,10 @@
 # STATE
 
-Updated: 2026-09-16 (issue 4; Table third round, the Critic's first pass, and Chat's amendments to issue 47)
+Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table third round and Chat's amendments to issue 47)
 
 ## Where we are
+
+Issue 42 done: `Movement.Reach` refuses an origin its movement type cannot stand on (a footman on a wall, a rider in water) with an error in the loader's own wording, so Core is as strict as the content loader about the same fact; `ironwake reach` checks first and prints `ERROR: infantry cannot stand on Wall at 9,5`. A flyer over water is a valid origin. 289 tests. The Critic's other bugs (41, 43, 44, 45) are next in the bug queue.
 
 Issue 4 done: `Movement.Reach` answers "where can this unit move" (DESIGN.md section 4, DECISIONS/0012): Dijkstra with the terrain's per-movement-type costs, a strict Mov budget, allies crossable but not destinations, enemies never entered, a path to every tile, and a documented tie-break (cost, then row-major; north, west, east, south) so every renderer draws the same path. Occupancy is a `Coord -> Occupant` function the caller supplies; `MapDefinition.OccupantAt` answers it from placements until issue 6's `BattleState` does. `ironwake reach <map> <x,y> [movement:mov]` prints the map view with destinations marked `*`. Issue 3 before it: the `.map` format, canonical writer, console view, three sample maps. 281 tests. Still nothing playable, so no journal entry; issue 11 is where play begins.
 
@@ -10,7 +12,7 @@ The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by pro
 
 ## Next
 
-Nightly Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, 8, 9 in order.
+Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, 8, 9 in order.
 
 ## Open forks (need Lotus)
 
