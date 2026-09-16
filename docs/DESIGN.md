@@ -133,7 +133,15 @@ score = 100 if the attack can kill
 ```
 `expectedDamage` on both lines includes the crit expectation, `Damage * (1 + 2 * CritChance / 100)`, using the same functions the forecast uses. The enemy prices what the player sees, so a modifier that lowers a unit's crit avoid (13.1) makes that unit a better target in the enemy's own arithmetic rather than a cost the enemy is blind to.
 
-Tile choice: among tiles that allow the best-scoring attack, prefer highest terrain avoid, then fewest player units that can reach the tile next phase.
+Tile choice: among tiles that allow the best-scoring attack, prefer highest terrain avoid, then fewest player units that can reach the tile next phase. "Can reach the tile" means the tile is in that player unit's reach set as section 4 defines it, which is what `ironwake reach` prints, so the count can be checked by hand.
+
+**Approach.** The tile rule above is scoped to tiles that allow an attack, so it says nothing about a turn on which an Aggressive unit can attack nobody, and "moves toward" is not an algorithm. The approach is a rule for the same reason the path tie-break is (DECISIONS/0012): a debug prediction written from this document and the implementation must arrive at the same tile, so the choice cannot be an accident of the code (Design Table, fifth round). When no reachable tile allows any attack:
+
+- **Target:** the player unit whose nearest *attack tile* (a tile the mover can end on, from which its equipped weapon reaches that unit) has the lowest path cost from the mover's own tile, computed with section 4's costs and occupancy and no Mov budget. Ties by lowest unit id, section 8's existing tie-break. A unit with no path to any attack tile is not a target; a mover with no target waits where it stands.
+- **Destination:** among the mover's reachable tiles (section 4, own tile included), the one with the lowest remaining path cost to any attack tile on the chosen target. Ties by highest terrain avoid, then fewest player units whose reach set contains the tile, then (cost from the mover's tile, then row-major), DECISIONS/0012's contract as the final key, so the answer is unique. Path cost throughout, never Manhattan, so terrain means the same thing to the approach as to everything else.
+- **Order:** enemy units act in ascending unit id, each on the board as the one before it left it.
+
+On Old Mill Road as placed, this sends the brigand at 6,5 to 3,6 on enemy phase 1: 3,6, 4,7 and 5,8 all sit at remaining cost 2 to an attack tile on the recruit at 2,8, all Plain, all inside both player units' reach, all at cost 4 from 6,5, and row-major takes y=6. Issue 10 holds that case as a table-driven test named for this rule; a determinism test (the phase replays for the same seed) does not protect it, because a hash-ordered pick among the three replays too.
 
 ## 9. Content plan for v1
 
