@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table fourth round: the front-loaded block is 10 then 11, with a debug pass before cold play)
+Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table fourth round: the front-loaded block is 10 then 11, with a committed debug pair, prediction first, before cold play)
 
 ## Where we are
 
@@ -12,7 +12,7 @@ The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by pro
 
 ## Next
 
-Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then the front-loaded block (Table, 2026-09-16): 10 (enemy AI, so the brigand comes to the player line), then 11 (playable CLI; `item` refuses with a usage error and `help` lists it unavailable; `play` prints one line naming the systems the build lacks). Then 8 and 9, which carry `blocked` until both 10 and 11 merge; the run that merges the second of them removes the label. 11's PR carries a debug pass before it opens: a scripted approach with no player attacks over Old Mill Road, the expected enemy moves written in the PR description first, the transcript committed under `docs/transcripts/`; fixes land before anyone plays cold. The first two PLAYTEST entries after 11 are systems entries on a format sample, not the Fun Gate (DIALOGUE.md, fourth round).
+Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then the front-loaded block (Table, 2026-09-16): 10 (enemy AI, so the brigand comes to the player line), then 11 (playable CLI; `item` refuses with a usage error and `help` lists it unavailable; `play` prints one line naming the systems the build lacks). Then 8 and 9, which carry `blocked` until both 10 and 11 merge; the run that merges the second of them removes the label. 11's PR carries a debug pass before it opens: a scripted approach with no player attacks over Old Mill Road, committed as a pair under `docs/transcripts/`, the prediction (`-debug.prediction.md`, with its `-debug.script`) in one commit and the run (`-debug.txt`) in the next; the PR description names every divergence, and agreement is not the acceptance. A fault in 10 found by the pass is a `bug` issue whose PR carries a fresh pair; cold play waits on a pair that ran clean on the build both partners will play. The first two PLAYTEST entries after 11 are systems entries on a format sample, not the Fun Gate (DIALOGUE.md, fourth round).
 
 ## Open forks (need Lotus)
 
