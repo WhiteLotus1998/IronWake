@@ -1,10 +1,12 @@
 name: partner
 
-# Routes every new comment on the Design Table, or on an issue labeled fork, to the partner who should answer it.
-# Signed "- Chat" wakes Code's Partner routine. Signed "- Code" or "- Critic"
-# wakes Chat's routine. Unsigned (Lotus) wakes both. Skips a routine whose
-# secrets are absent, and stands down if the Table has seen ten or more
-# comments in the last hour so two routines cannot ping-pong.
+# Routes every new comment on the Design Table, or on an issue labeled fork,
+# to the partner who should answer it. Signed "- Chat" wakes Code's Partner
+# routine. Signed "- Code" or "- Critic" wakes Chat's routine. Unsigned
+# (Lotus) wakes both. Guards: stands down if the Table has eight or more
+# comments in the last hour, or if the partner being woken has already
+# posted three times in that hour. A refused wake (routine paused, daily
+# cap) is logged, not failed; the nightly Builder answers instead.
 
 on:
   issue_comment:
@@ -29,8 +31,12 @@ jobs:
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
         run: |
           since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
-          recent="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" --jq 'length' || echo 0)"
-          if [ "${recent:-0}" -ge 10 ]; then
+          recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
+          recent="$(printf '%s' "$recent_json" | jq 'length')"
+          code_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body | test("(—|--) Code\s*$|(—|--) Code\s*\n\s*---"; "x"))] | length')"
+          chat_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body | test("(—|--) Chat\s*$|(—|--) Chat\s*\n\s*---"; "x"))] | length')"
+          echo "last hour: $recent comments, Code $code_posts, Chat $chat_posts"
+          if [ "${recent:-0}" -ge 8 ]; then
             echo "loop guard: $recent comments in the last hour; standing down"
             exit 0
           fi
@@ -44,26 +50,33 @@ jobs:
           echo "routing to: $target"
 
           wake() {
-            url="$1"; token="$2"; name="$3"
+            url="$1"; token="$2"; name="$3"; posted="$4"
             if [ -z "$url" ] || [ -z "$token" ]; then
               echo "$name: secrets not set; skipping"
               return 0
             fi
+            if [ "${posted:-0}" -ge 3 ]; then
+              echo "$name: already posted $posted times this hour; standing down until the hour rolls"
+              return 0
+            fi
             text="New Design Table comment by $COMMENT_AUTHOR: $COMMENT_URL"
             payload="$(jq -cn --arg text "$text" '{text: $text}')"
-            curl --fail --silent --show-error -X POST "$url" \
+            code="$(curl --silent --show-error -o /tmp/fire.out -w '%{http_code}' -X POST "$url" \
               -H "Authorization: Bearer $token" \
               -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
               -H "anthropic-version: 2023-06-01" \
               -H "Content-Type: application/json" \
-              -d "$payload"
-            echo
-            echo "$name: woken"
+              -d "$payload" || echo 000)"
+            cat /tmp/fire.out; echo
+            case "$code" in
+              2*) echo "$name: woken" ;;
+              *)  echo "$name: wake refused (HTTP $code); the nightly Builder answers instead" ;;
+            esac
           }
 
           case "$target" in
-            partner) wake "$PARTNER_URL" "$PARTNER_TOKEN" partner ;;
-            chat)    wake "$CHAT_URL" "$CHAT_TOKEN" chat ;;
-            both)    wake "$PARTNER_URL" "$PARTNER_TOKEN" partner
-                     wake "$CHAT_URL" "$CHAT_TOKEN" chat ;;
+            partner) wake "$PARTNER_URL" "$PARTNER_TOKEN" partner "$code_posts" ;;
+            chat)    wake "$CHAT_URL" "$CHAT_TOKEN" chat "$chat_posts" ;;
+            both)    wake "$PARTNER_URL" "$PARTNER_TOKEN" partner "$code_posts"
+                     wake "$CHAT_URL" "$CHAT_TOKEN" chat "$chat_posts" ;;
           esac
