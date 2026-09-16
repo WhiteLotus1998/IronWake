@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table fourth round: the front-loaded block is 10 and 11)
+Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table fourth round: the front-loaded block is 10 then 11, with a debug pass before cold play)
 
 ## Where we are
 
@@ -12,7 +12,7 @@ The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by pro
 
 ## Next
 
-Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then the front-loaded block (Table, 2026-09-16): 10 (enemy AI, so the brigand comes to the player line), then 11 (playable CLI; `item` refuses with a usage error and `help` lists it unavailable; `play` prints one line naming the systems the build lacks). Then 8 and 9, which carry `blocked` until both 10 and 11 merge; the run that merges the second of them removes the label. The first two PLAYTEST entries after 11 are systems entries on a format sample, not the Fun Gate (DIALOGUE.md, fourth round).
+Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then the front-loaded block (Table, 2026-09-16): 10 (enemy AI, so the brigand comes to the player line), then 11 (playable CLI; `item` refuses with a usage error and `help` lists it unavailable; `play` prints one line naming the systems the build lacks). Then 8 and 9, which carry `blocked` until both 10 and 11 merge; the run that merges the second of them removes the label. 11's PR carries a debug pass before it opens: a scripted approach with no player attacks over Old Mill Road, the expected enemy moves written in the PR description first, the transcript committed under `docs/transcripts/`; fixes land before anyone plays cold. The first two PLAYTEST entries after 11 are systems entries on a format sample, not the Fun Gate (DIALOGUE.md, fourth round).
 
 ## Open forks (need Lotus)
 
@@ -20,7 +20,7 @@ None.
 
 ## Open on the Design Table
 
-Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), the wake tax floor (issue 13's journals), and 10 before 11 inside the front-loaded block (Code's lean, the priority rule's own order; argue it on 10's PR). Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
+Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), the wake tax floor (issue 13's journals). 10 before 11 is agreed flat. Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
 
 ## Maps
 
