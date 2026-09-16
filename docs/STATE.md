@@ -1,12 +1,12 @@
 # STATE
 
-Updated: 2026-09-16 (issue 4; Table unchanged since the second design round)
+Updated: 2026-09-16 (issue 4; Table third round, the Critic's first pass)
 
 ## Where we are
 
 Issue 4 done: `Movement.Reach` answers "where can this unit move" (DESIGN.md section 4, DECISIONS/0012): Dijkstra with the terrain's per-movement-type costs, a strict Mov budget, allies crossable but not destinations, enemies never entered, a path to every tile, and a documented tie-break (cost, then row-major; north, west, east, south) so every renderer draws the same path. Occupancy is a `Coord -> Occupant` function the caller supplies; `MapDefinition.OccupantAt` answers it from placements until issue 6's `BattleState` does. `ironwake reach <map> <x,y> [movement:mov]` prints the map view with destinations marked `*`. Issue 3 before it: the `.map` format, canonical writer, console view, three sample maps. 281 tests. Still nothing playable, so no journal entry; issue 11 is where play begins.
 
-The Table's two design rounds are done (DIALOGUE.md): Guard groups wake by proximity, the forecast shows the resolved probability, gate 4 is ablation, Recall scars is killed (DECISIONS/0010), keyed rolls (#31) land with issue 5, and the experiment order is map events (#32), retreat (#33), rivalry (#16).
+The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by proximity, the forecast shows the resolved probability, gate 4 is ablation, Recall scars is killed (DECISIONS/0010), keyed rolls (#31) land with issue 5, and the experiment order is map events (#32), retreat (#33), rivalry (#16). The third round (the Critic's first pass) added issue 47: dead-turn counters and the free prefix printed by `--full`, gated on nothing yet.
 
 ## Next
 
@@ -18,7 +18,7 @@ None.
 
 ## Open on the Design Table
 
-Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike). Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
+Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), and two Code leans on issue 47 (free prefix read against turn slack; quiet turns as a third state of the dead-turn counter). Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
 
 ## Maps
 
