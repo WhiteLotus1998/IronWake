@@ -12,7 +12,7 @@ The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by pro
 
 ## Next
 
-Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, 8, 9 in order.
+Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then 11 (playable CLI, pulled ahead on the Critic's recommendation, 2026-09-16; `item` stubbed, no level-ups yet), then 8 and 9, which carry `blocked` until 11 merges.
 
 ## Open forks (need Lotus)
 
