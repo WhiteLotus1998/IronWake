@@ -60,6 +60,29 @@ public class CliReachTests
         Assert.StartsWith("ERROR: 12,0 is outside the 12x10 map", output);
     }
 
+    [Theory]
+    [InlineData("9,5", "infantry:4", "ERROR: infantry cannot stand on Wall at 9,5")]
+    [InlineData("2,4", "armored:4", "ERROR: armored cannot stand on Water at 2,4")]
+    public void ReachRefusesToProbeFromATileTheMovementTypeCannotStandOn(string at, string movement, string expected)
+    {
+        var output = Run(out var exit, "reach", OldMillRoad, at, movement, Fixture.RealContentDirectory());
+
+        Assert.Equal(1, exit);
+        Assert.StartsWith(expected, output);
+        Assert.DoesNotContain("*", output);
+    }
+
+    [Fact]
+    public void ReachProbesAFlyerFromWaterBecauseTheOriginCheckIsPerMovementType()
+    {
+        var output = Run(out var exit, "reach", OldMillRoad, "2,4", "flying:1", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains(" 4 .***........", output);
+        Assert.Contains(" 5 ..*~..c..#..", output);
+        Assert.Contains("flying mov 1: 4 tiles", output);
+    }
+
     [Fact]
     public void ReachWithoutACoordinatePrintsUsage()
     {

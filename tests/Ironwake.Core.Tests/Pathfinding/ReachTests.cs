@@ -213,6 +213,36 @@ public class ReachTests
         Assert.Throws<ArgumentOutOfRangeException>(() => ReachFrom(map, new Coord(3, 0), MovementType.Infantry, 1));
     }
 
+    // The origin's terrain is checked per movement type, like every other tile: the
+    // loader refuses to place a unit where it cannot stand, and the engine refuses to
+    // answer for one that is there anyway, so a corrupt state fails loudly (issue 42).
+    [Theory]
+    [InlineData('#', MovementType.Infantry, "infantry cannot stand on Wall at 1,0")]
+    [InlineData('~', MovementType.Armored, "armored cannot stand on Water at 1,0")]
+    [InlineData('M', MovementType.Cavalry, "cavalry cannot stand on Mountain at 1,0")]
+    [InlineData('#', MovementType.Flying, "flying cannot stand on Wall at 1,0")]
+    public void AnOriginTheMovementTypeCannotStandOnIsRefused(char glyph, MovementType movement, string message)
+    {
+        var map = Grid("." + glyph + ".");
+
+        var refusal = Assert.Throws<ArgumentException>(() => ReachFrom(map, new Coord(1, 0), movement, 4));
+
+        Assert.Equal("from", refusal.ParamName);
+        Assert.StartsWith(message, refusal.Message);
+    }
+
+    [Fact]
+    public void AFlyerOverWaterIsAValidOriginBecauseTheOriginCheckIsPerMovementType()
+    {
+        // The loader will not place a captain on water, which is the point: only a
+        // probe from an empty tile, or a flyer that moved there, can ask this.
+        var map = Grid(".~.\n...", "P captain 0,1");
+
+        var reach = ReachFrom(map, new Coord(1, 0), MovementType.Flying, 1);
+
+        Assert.Equal(new[] { new Coord(0, 0), new Coord(1, 0), new Coord(2, 0), new Coord(1, 1) }, reach.Destinations);
+    }
+
     [Fact]
     public void TheOccupancyFunctionIsNeverAskedAboutTheOrigin()
     {
