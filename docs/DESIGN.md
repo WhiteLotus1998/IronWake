@@ -51,6 +51,8 @@ Square grid, 4-connected movement. No zone of control. Units may pass through al
 
 `—` means impassable. Terrain avoid/def do not apply to flyers except on Fort/Throne.
 
+**Reach.** A unit's reachable tiles are every tile whose cheapest entry cost, summed along a 4-connected path, is at most its Mov; the budget is strict, so a tile costing more than what remains is not entered. Tiles an ally stands on may be crossed but not ended on; tiles an enemy stands on are never entered. The unit's own tile is always a destination, since Move is optional (section 7). Which of two equal-cost paths a unit walks is part of the rules, because renderers show it: tiles settle in (cost, then row-major) order, neighbours expand north, west, east, south, and a tile's path changes only when a strictly cheaper one is found. `Movement.Reach` is the one function that answers this; the CLI, the AI, and every renderer ask it rather than counting for themselves (DECISIONS/0012).
+
 ## 5. Combat
 
 3H-inspired, but these are Ironwake's formulas. All division is integer floor.

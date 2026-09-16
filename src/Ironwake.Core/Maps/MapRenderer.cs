@@ -7,13 +7,17 @@ namespace Ironwake.Core;
 /// naming every unit letter and every terrain glyph on the map. Player units are
 /// uppercase letters in placement order, enemies lowercase, bosses <c>!</c>. The view
 /// is for reading, not for parsing; the map file itself is written by the Content
-/// project's map writer. Output is plain ASCII.
+/// project's map writer. Output is plain ASCII. Given a <see cref="Reach"/>, the tiles
+/// the unit may end on are drawn as <see cref="ReachGlyph"/> and a line under the
+/// legend says whose reach it is.
 /// </summary>
 public static class MapRenderer
 {
     public const char BossGlyph = '!';
 
-    public static string Render(MapDefinition map, GameContent content)
+    public const char ReachGlyph = '*';
+
+    public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
     {
         var sb = new StringBuilder();
         sb.Append(map.Name).Append("  ").Append(map.Width).Append('x').Append(map.Height)
@@ -40,6 +44,17 @@ public static class MapRenderer
         {
             sb.Append(y.ToString().PadLeft(2)).Append(' ');
             var row = map.GlyphRow(y, content).ToCharArray();
+            if (reach is not null)
+            {
+                for (var x = 0; x < map.Width; x++)
+                {
+                    if (reach.CanEnd(new Coord(x, y)))
+                    {
+                        row[x] = ReachGlyph;
+                    }
+                }
+            }
+
             for (var i = 0; i < map.Placements.Count; i++)
             {
                 if (map.Placements[i].At.Y == y)
@@ -69,6 +84,15 @@ public static class MapRenderer
         }
 
         sb.Append('\n');
+        if (reach is not null)
+        {
+            var count = reach.Destinations.Count() - 1;
+            sb.Append(ReachGlyph).Append("  reach from ").Append(reach.Origin)
+                .Append(", ").Append(reach.Movement.ToString().ToLowerInvariant())
+                .Append(" mov ").Append(reach.Mov)
+                .Append(": ").Append(count).Append(count == 1 ? " tile" : " tiles").Append('\n');
+        }
+
         return sb.ToString();
     }
 

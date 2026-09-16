@@ -60,6 +60,19 @@ public sealed record MapDefinition(
         return null;
     }
 
+    /// <summary>
+    /// Who stands on a tile at the start of the map, seen from <paramref name="moverSide"/>.
+    /// Stands in for the battle state's answer until issue 6; the map view and the
+    /// <c>reach</c> command use it.
+    /// </summary>
+    public Occupant OccupantAt(Coord at, Side moverSide) =>
+        PlacementAt(at) switch
+        {
+            null => Occupant.None,
+            var placement when placement.Side == moverSide => Occupant.Ally,
+            _ => Occupant.Enemy,
+        };
+
     /// <summary>Every tile drawn with a given terrain, in row-major order.</summary>
     public IEnumerable<Coord> TilesOf(string terrainId)
     {
