@@ -33,8 +33,8 @@ jobs:
           since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
           recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
           recent="$(printf '%s' "$recent_json" | jq 'length')"
-          code_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body | test("(—|--) Code\s*$|(—|--) Code\s*\n\s*---"; "x"))] | length')"
-          chat_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body | test("(—|--) Chat\s*$|(—|--) Chat\s*\n\s*---"; "x"))] | length')"
+          code_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body[-300:] | test("(—|--) Code"))] | length')"
+          chat_posts="$(printf '%s' "$recent_json" | jq '[.[] | select(.body[-300:] | test("(—|--) Chat"))] | length')"
           echo "last hour: $recent comments, Code $code_posts, Chat $chat_posts"
           if [ "${recent:-0}" -ge 8 ]; then
             echo "loop guard: $recent comments in the last hour; standing down"
