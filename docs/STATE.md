@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table third round and Chat's amendments to issue 47)
+Updated: 2026-09-16 (issue 42, the first of the Critic's bugs; Table fourth round: the front-loaded block is 10 and 11)
 
 ## Where we are
 
@@ -8,11 +8,11 @@ Issue 42 done: `Movement.Reach` refuses an origin its movement type cannot stand
 
 Issue 4 done: `Movement.Reach` answers "where can this unit move" (DESIGN.md section 4, DECISIONS/0012): Dijkstra with the terrain's per-movement-type costs, a strict Mov budget, allies crossable but not destinations, enemies never entered, a path to every tile, and a documented tie-break (cost, then row-major; north, west, east, south) so every renderer draws the same path. Occupancy is a `Coord -> Occupant` function the caller supplies; `MapDefinition.OccupantAt` answers it from placements until issue 6's `BattleState` does. `ironwake reach <map> <x,y> [movement:mov]` prints the map view with destinations marked `*`. Issue 3 before it: the `.map` format, canonical writer, console view, three sample maps. 281 tests. Still nothing playable, so no journal entry; issue 11 is where play begins.
 
-The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by proximity, the forecast shows the resolved probability, gate 4 is ablation, Recall scars is killed (DECISIONS/0010), keyed rolls (#31) land with issue 5, and the experiment order is map events (#32), retreat (#33), rivalry (#16). The third round (the Critic's first pass) added issue 47: dead, quiet, and live turns with the wake tax, and the free prefix beside both slack figures, printed by `--full`, gated on nothing yet.
+The Table's three design rounds are done (DIALOGUE.md): Guard groups wake by proximity, the forecast shows the resolved probability, gate 4 is ablation, Recall scars is killed (DECISIONS/0010), keyed rolls (#31) land with issue 5, and the experiment order is map events (#32), retreat (#33), rivalry (#16). The third round (the Critic's first pass) added issue 47: dead, quiet, and live turns with the wake tax, and the free prefix beside both slack figures, printed by `--full`, gated on nothing yet. The fourth round moved play ahead of EXP and inventory: 10 and 11 are the front-loaded block, `item` refuses out loud, and the first two journal entries are systems entries, not Fun Gate entries.
 
 ## Next
 
-Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then 11 (playable CLI, pulled ahead on the Critic's recommendation, 2026-09-16; `item` stubbed, no level-ups yet), then 8 and 9, which carry `blocked` until 11 merges.
+Bugs first: 44, 45 (phase 1), then 41, 43 (phase 2), one per run. Then the Builder takes issue 5 together with 31 (combat forecast and resolution on keyed rolls; the hit-probability function is one function with the roll scheme as a switch inside it). Then 6 (`BattleState` from `MapDefinition`; the roster fills `PlayerSlot`s; it answers `Movement.Reach`'s occupancy function), then 7, then the front-loaded block (Table, 2026-09-16): 10 (enemy AI, so the brigand comes to the player line), then 11 (playable CLI; `item` refuses with a usage error and `help` lists it unavailable; `play` prints one line naming the systems the build lacks). Then 8 and 9, which carry `blocked` until both 10 and 11 merge; the run that merges the second of them removes the label. The first two PLAYTEST entries after 11 are systems entries on a format sample, not the Fun Gate (DIALOGUE.md, fourth round).
 
 ## Open forks (need Lotus)
 
@@ -20,7 +20,7 @@ None.
 
 ## Open on the Design Table
 
-Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), and the wake tax floor (issue 13's journals). Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
+Nothing waits on Chat. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), the wake tax floor (issue 13's journals), and 10 before 11 inside the front-loaded block (Code's lean, the priority rule's own order; argue it on 10's PR). Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
 
 ## Maps
 
