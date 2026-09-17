@@ -83,6 +83,46 @@ public class CliReachTests
         Assert.Contains("flying mov 1: 4 tiles", output);
     }
 
+    /// <summary>
+    /// Issue 43: an argument with a colon is a movement spec, and a malformed one names the
+    /// mistake instead of falling through to "content directory does not exist".
+    /// </summary>
+    [Theory]
+    [InlineData("flyng:6", "ERROR: 'flyng' is not one of: infantry, cavalry, flying, armored")]
+    [InlineData("infantry:-1", "ERROR: mov must be at least 0, got -1")]
+    [InlineData("infantry:four", "ERROR: mov 'four' is not a number")]
+    [InlineData("infantry:4:x", "ERROR: 'infantry:4:x' is not a movement spec; expected <movement>:<mov>")]
+    [InlineData("infantry:", "ERROR: mov '' is not a number")]
+    [InlineData(":4", "ERROR: '' is not one of: infantry, cavalry, flying, armored")]
+    public void ReachReportsAMistypedMovementSpecAsTheMistakeItIs(string spec, string expected)
+    {
+        var output = Run(out var exit, "reach", OldMillRoad, "1,8", spec, Fixture.RealContentDirectory());
+
+        Assert.Equal(2, exit);
+        Assert.StartsWith(expected + "\n" + "usage: ironwake reach", output);
+        Assert.DoesNotContain("content directory", output);
+        Assert.DoesNotContain("*", output);
+    }
+
+    [Fact]
+    public void ReachStillTreatsABareArgumentAsTheContentDirectory()
+    {
+        var output = Run(out var exit, "reach", OldMillRoad, "1,8", "flyng6");
+
+        Assert.Equal(1, exit);
+        Assert.StartsWith("ERROR: flyng6: content directory does not exist", output);
+    }
+
+    [Fact]
+    public void ReachAcceptsMovZeroBecauseTheOwnTileIsAlwaysADestination()
+    {
+        var output = Run(out var exit, "reach", OldMillRoad, "5,0", "cavalry:0", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains(" 0 .....*......", output);
+        Assert.Contains("cavalry mov 0: 0 tiles", output);
+    }
+
     [Fact]
     public void ReachWithoutACoordinatePrintsUsage()
     {
