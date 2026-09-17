@@ -65,4 +65,13 @@ public sealed record Unit(
         var scaled = Stats.Map((stat, value) => value + Growths.Get(stat) * gained / 100);
         return this with { Level = level, Stats = scaled };
     }
+
+    /// <summary>
+    /// The enemy level floor of DESIGN.md section 10 and DECISIONS/0005: a template below
+    /// <paramref name="floor"/> is raised to it by <see cref="AtLevel"/>, stats included;
+    /// a template already at or above it is returned as it is, so a level-3 boss on a
+    /// level-1 map stays level 3. This is the one place the rule lives; the map view and
+    /// the battle state both come here through <see cref="MapDefinition.EnemyUnit"/>.
+    /// </summary>
+    public Unit ScaledTo(int floor) => Level >= floor ? this : AtLevel(floor);
 }

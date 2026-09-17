@@ -133,9 +133,8 @@ public static class MapRenderer
                 };
                 return $"{slot,-22} {p.At,-6} {terrain}";
             case EnemyPlacement e:
-                var unit = content.Unit(e.TemplateId);
-                var level = Math.Max(unit.Level, map.EnemyLevel);
-                var who = $"{unit.Name} L{level}";
+                var unit = map.EnemyUnit(e, content);
+                var who = $"{unit.Name} L{unit.Level}";
                 var role = e.IsBoss ? "boss" : e.Behavior.ToString().ToLowerInvariant();
                 return $"{who,-22} {e.At,-6} {terrain}  group {e.Group}, {role}";
             default:

@@ -13,6 +13,7 @@ namespace Ironwake.Core;
 /// <param name="RecallCharges">Recall charges for the map. Section 7 says 3 on Normal.</param>
 /// <param name="EnemyLevel">
 /// Level enemy templates are raised to. A template already at or above it keeps its own level.
+/// <see cref="EnemyUnit"/> applies it.
 /// </param>
 /// <param name="CheapShotsAllowed">The map waives gate 3 on purpose (section 11). Maps 4 and up only.</param>
 /// <param name="TerrainIds">Terrain id per tile, row-major from the top-left.</param>
@@ -72,6 +73,15 @@ public sealed record MapDefinition(
             var placement when placement.Side == moverSide => Occupant.Ally,
             _ => Occupant.Enemy,
         };
+
+    /// <summary>
+    /// The unit an enemy placement puts on the map: its template from the content, raised
+    /// to <see cref="EnemyLevel"/> by <see cref="Unit.ScaledTo"/> when the template is below
+    /// it. Every consumer that needs an enemy's level or stats asks here, so the floor rule
+    /// has one caller to check rather than one per renderer.
+    /// </summary>
+    public Unit EnemyUnit(EnemyPlacement placement, GameContent content) =>
+        content.Unit(placement.TemplateId).ScaledTo(EnemyLevel);
 
     /// <summary>Every tile drawn with a given terrain, in row-major order.</summary>
     public IEnumerable<Coord> TilesOf(string terrainId)
