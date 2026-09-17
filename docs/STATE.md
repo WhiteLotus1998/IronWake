@@ -1,6 +1,6 @@
 # STATE
 
-Updated: 2026-09-17 (issue 43, the last of the Critic's bugs: `reach` names a mistyped movement spec)
+Updated: 2026-09-17 (Table, sixth round closed: the battalions fork's trigger is either Cha job, its deadline is #74, issue 16 carries the rapport rate)
 
 ## Where we are
 
@@ -26,7 +26,7 @@ None.
 
 ## Open on the Design Table
 
-Issue 44's question is answered (effective growth, clamped; #84). Sixth round (2026-09-17): the Phase 3 backlog is filed as #66 to #83 with the numbers as the build order (#77 and #83 `blocked`); Cha's two jobs are the lean, Commander's Word (#85, two arms; arm B, reach by Cha, is the shape both partners expect, Chat having withdrawn arm A as its lean, and #85 logs the binding fraction and the captain's exposure) and the rapport rate (issue 16); battalions stay in section 12 unfiled, and their drop is a `fork` for Lotus once either Cha job has been played. For Lotus, not forks: ROUTINES.md section 2's Builder prompt now protects step 3 and the decision record at the new pace, and the Critic's cadence should follow the merge rate; both are his to paste and schedule. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), the wake tax floor (issue 13's journals). 10 before 11 is agreed flat, and section 8's approach rule (fifth round) is Chat's key order, agreed, with the third tied tile found by Code. Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
+Issue 44's question is answered (effective growth, clamped; #84). Sixth round (2026-09-17): the Phase 3 backlog is filed as #66 to #83 with the numbers as the build order (#77 and #83 `blocked`); Cha's two jobs are the lean, Commander's Word (#85, two arms; arm B, reach by Cha, is the shape both partners expect, Chat having withdrawn arm A as its lean, and #85 logs the binding fraction and the captain's exposure) and the rapport rate (issue 16); battalions stay in section 12 unfiled, and their drop is a `fork` for Lotus filed by the decision PR of whichever Cha spike runs first (issue 16 by the queue; its body now carries the rapport rate), with #74 `blocked` until the fork is ruled; #85 runs at its number, after map 8, since that is where its binding fraction can be read. For Lotus, not forks: ROUTINES.md section 2's Builder prompt now protects step 3 and the decision record at the new pace, and the Critic's cadence should follow the merge rate; both are his to paste and schedule. Leaning, not agreed: one roll versus two (A/B after issue 5), rivalry's arm (the spike), the wake tax floor (issue 13's journals). 10 before 11 is agreed flat, and section 8's approach rule (fifth round) is Chat's key order, agreed, with the third tied tile found by Code. Code's two issue-47 additions are agreed with Chat's amendments (p90 slack and the boundary refund; the wake tax beside the quiet state) and are in the issue body. Decisions 0011 (map format) and 0012 (movement query, tie-break, strict budget) are Code's rulings made without the Table; argue them on the PRs if they read wrong.
 
 ## Maps
 
