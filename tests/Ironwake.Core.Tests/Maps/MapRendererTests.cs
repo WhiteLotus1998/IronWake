@@ -9,7 +9,79 @@ public class MapRendererTests
     [Fact]
     public void PlayersAreUppercaseEnemiesLowercaseAndTheBossIsABang()
     {
-        Assert.Equal(new[] { 'A', 'B', 'a', 'b', 'c', '!' }, MapRenderer.Letters(Map));
+        Assert.Equal(new[] { 'A', 'B', 'a', 'b', 'c', '!' }, MapRenderer.Letters(Map, MapFixture.Content));
+    }
+
+    [Fact]
+    public void TheSixthPlayerIsNotDrawnAsAFort()
+    {
+        var map = MapFixture.Parse(MapFixture.OldMillRoad.Replace(
+            "P recruit:wren 2,8",
+            "P recruit 2,8\nP recruit 3,8\nP recruit 4,8\nP recruit 5,8\nP recruit 6,8"));
+
+        var lines = MapRenderer.Render(map, MapFixture.Content).Split('\n');
+
+        Assert.Equal(" 8 .ABCDEG.....", lines[10]);
+        Assert.Equal(" 2 ..^^..F.nnb.", lines[4]);
+    }
+
+    [Fact]
+    public void LettersSkipEveryTerrainGlyphOnBothSides()
+    {
+        var map = MapFixture.Parse(WithUnits(26, 26));
+        var letters = MapRenderer.Letters(map, MapFixture.Content);
+
+        Assert.Equal("ABCDEGHIJKLNOPQRSUVWXYZABC", new string(letters, 0, 26));
+        Assert.Equal("abcdefghijklmopqrstuvwxyza", new string(letters, 26, 26));
+    }
+
+    [Theory]
+    [InlineData("old_mill_road.map")]
+    [InlineData("saltmarsh_ford.map")]
+    [InlineData("the_tollgate.map")]
+    public void NoUnitGlyphIsATerrainGlyph(string file)
+    {
+        var map = MapFixture.Parse(File.ReadAllText(Path.Combine(MapFixture.MapsDirectory, file)), file);
+
+        foreach (var letter in MapRenderer.Letters(map, MapFixture.Content).Append(MapRenderer.BossGlyph).Append(MapRenderer.ReachGlyph))
+        {
+            Assert.Null(MapFixture.Content.TerrainByGlyph(letter));
+        }
+    }
+
+    [Fact]
+    public void ContentWhoseGlyphsUseEveryLetterIsRefused()
+    {
+        var terrain = MapFixture.Content.Terrain;
+        var fort = terrain["fort"];
+        for (var offset = 0; offset < 26; offset++)
+        {
+            var glyph = (char)('A' + offset);
+            terrain = terrain.SetItem("letter_" + glyph, fort with { Id = "letter_" + glyph, Glyph = glyph });
+        }
+
+        var content = MapFixture.Content with { Terrain = terrain };
+
+        var error = Assert.Throws<InvalidOperationException>(() => MapRenderer.Letters(Map, content));
+        Assert.Contains("every letter A..Z", error.Message);
+    }
+
+    /// <summary>The example map's grid with a full row of players along y=9 and y=8, and enemies along y=0 and y=1.</summary>
+    private static string WithUnits(int players, int enemies)
+    {
+        var sb = new System.Text.StringBuilder(MapFixture.OldMillRoad[..MapFixture.OldMillRoad.IndexOf("units:", StringComparison.Ordinal)]);
+        sb.Append("units:\nP captain 0,9\n");
+        for (var i = 1; i < players; i++)
+        {
+            sb.Append("P recruit ").Append(i % 12).Append(',').Append(9 - i / 12).Append('\n');
+        }
+
+        for (var i = 0; i < enemies; i++)
+        {
+            sb.Append("E soldier ").Append(i % 12).Append(',').Append(i / 12).Append(" group:line behavior:hold\n");
+        }
+
+        return sb.ToString();
     }
 
     [Fact]
