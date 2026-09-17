@@ -76,9 +76,12 @@ that hasn't been tried (check DECISIONS/), propose it on the Design
 Table in one paragraph, and spike it on experiment/<name>. Play it.
 Post the journal.
 
-One issue or one experiment per run. If you run out of budget, commit
-what's green, write exactly where you stopped in STATE.md, open the PR
-as a draft.
+Work the queue for about 50 minutes: one issue at a time, merged
+before the next is picked; never start what cannot finish inside the
+budget. Never skip the review (step 3) or the decision record to fit
+another issue in; ship one fewer instead. If you run out of budget,
+commit what's green, write exactly where you stopped in STATE.md, open
+the PR as a draft.
 ```
 
 ---
@@ -163,7 +166,7 @@ open PRs; direction is yours, code is Code's.
 
 ## How the loop runs
 
-- Builder ships four times a night, hourly from 02:00 to 05:00. Each run works through the queue for about 50 minutes (Lotus, 2026-09-17: one bug per run "will take years"): pick, build, merge, wait for the merge, pick again; never start what cannot finish inside the budget. One issue at a time is still the rule; one issue per run is not. Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5, by Lotus's ruling (DECISIONS/0009); if the Fable bar on the usage page runs short before the Monday reset, drop back to 02:00 and 05:00 first. Critic breaks twice a week. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
+- Builder ships four times a night, hourly from 02:00 to 05:00. Each run works through the queue for about 50 minutes (Lotus, 2026-09-17: one bug per run "will take years"): pick, build, merge, wait for the merge, pick again; never start what cannot finish inside the budget. One issue at a time is still the rule; one issue per run is not. Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5, by Lotus's ruling (DECISIONS/0009); if the Fable bar on the usage page runs short before the Monday reset, drop back to 02:00 and 05:00 first. Critic breaks twice a week; the Table's sixth round asks Lotus to let its cadence follow the merge rate (nightly at 06:00, after the fourth Builder run, while the run cap allows), since twice a week against several merges a night is a pass over a codebase it has not seen. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
 
