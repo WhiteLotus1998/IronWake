@@ -171,6 +171,46 @@ public class ReachTests
             reach.PathTo(new Coord(2, 1)));
     }
 
+    // The whole tie-break contract of DESIGN.md section 4 in one clause: a tile's path
+    // arrives through the row-major-first of its neighbours that can offer the tile its
+    // cost. That neighbour settles first, and later equal-cost offers never replace it.
+    // Checked for every reachable tile, so the path to each one is derivable from the
+    // document alone; how Coord enumerates neighbours does not enter into it (issue 45).
+    [Theory]
+    [InlineData(1, 8, MovementType.Infantry, 4, Side.Player)]
+    [InlineData(2, 8, MovementType.Infantry, 4, Side.Player)]
+    [InlineData(3, 3, MovementType.Cavalry, 6, Side.Player)]
+    [InlineData(6, 5, MovementType.Infantry, 4, Side.Enemy)]
+    [InlineData(6, 2, MovementType.Flying, 7, Side.Enemy)]
+    public void EveryPathArrivesThroughTheRowMajorFirstNeighbourThatOffersTheTileItsCost(
+        int x, int y, MovementType movement, int mov, Side side)
+    {
+        var map = MapFixture.Parse(MapFixture.OldMillRoad);
+        var origin = new Coord(x, y);
+
+        var reach = ReachFrom(map, origin, movement, mov, side);
+
+        foreach (var entry in reach.Entries)
+        {
+            if (entry.At == origin)
+            {
+                Assert.Empty(entry.Path);
+                continue;
+            }
+
+            var step = map.TerrainAt(entry.At, MapFixture.Content).MoveCost(movement);
+            var expectedParent = entry.At.Neighbors()
+                .Where(map.Contains)
+                .OrderBy(n => n)
+                .First(n => reach.CostTo(n) + step == entry.Cost);
+            var actualParent = entry.Path.Count == 1 ? origin : entry.Path[entry.Path.Count - 2];
+
+            Assert.True(expectedParent == actualParent, $"path to {entry.At} arrives from {actualParent}, the contract says {expectedParent}");
+            Assert.Equal(entry.At, entry.Path[entry.Path.Count - 1]);
+            Assert.Equal(reach.PathTo(actualParent), ValueList<Coord>.From(entry.Path.Take(entry.Path.Count - 1)));
+        }
+    }
+
     [Fact]
     public void EntriesAreInRowMajorOrderAndTheSameInputsGiveTheSameReach()
     {

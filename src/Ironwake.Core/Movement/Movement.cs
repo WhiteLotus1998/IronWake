@@ -8,8 +8,11 @@ namespace Ironwake.Core;
 /// <remarks>
 /// The tie-break is part of the contract, because paths travel over the presentation
 /// protocol and every renderer must show the same one: tiles settle in (cost, row-major)
-/// order, neighbours expand north, west, east, south, and a tile's path changes only when
-/// a strictly cheaper one is found. Same inputs, same paths, on every machine.
+/// order, and a tile's path changes only when a strictly cheaper one is found. So a tile's
+/// path arrives through the row-major-first of its neighbours that can offer it its cost.
+/// The order <see cref="Coord.Neighbors"/> enumerates in does no work here: every step
+/// costs at least 1, so every tile at a cost is queued before the first tile at that cost
+/// settles, and the queue key alone fixes the order. Same inputs, same paths, on every machine.
 /// </remarks>
 public static class Movement
 {

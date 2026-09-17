@@ -19,8 +19,10 @@ public readonly record struct Coord(int X, int Y) : IComparable<Coord>
     }
 
     /// <summary>
-    /// The four 4-connected neighbours in the fixed order north, west, east, south, which
-    /// is row-major order around the tile. Callers filter tiles outside the map.
+    /// The four 4-connected neighbours in the order north, west, east, south, which is
+    /// row-major order around the tile, for readability. Movement's tie-break (section 4)
+    /// does not depend on this order, only on the row-major ordering of tiles themselves.
+    /// Callers filter tiles outside the map.
     /// </summary>
     public IEnumerable<Coord> Neighbors()
     {
