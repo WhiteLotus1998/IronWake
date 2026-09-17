@@ -96,15 +96,22 @@ public static class Program
         var contentDir = "content";
         foreach (var arg in args.Skip(2))
         {
-            if (TryParseMovement(arg, out var parsedMovement, out var parsedMov))
-            {
-                movement = parsedMovement;
-                mov = parsedMov;
-            }
-            else
+            if (!arg.Contains(':'))
             {
                 contentDir = arg;
+                continue;
             }
+
+            var error = ParseMovement(arg, out var parsedMovement, out var parsedMov);
+            if (error is not null)
+            {
+                Console.WriteLine("ERROR: " + error);
+                Console.WriteLine(ReachUsage);
+                return 2;
+            }
+
+            movement = parsedMovement;
+            mov = parsedMov;
         }
 
         try
@@ -174,16 +181,41 @@ public static class Program
         return true;
     }
 
-    private static bool TryParseMovement(string text, out MovementType movement, out int mov)
+    /// <summary>
+    /// Parses a <c>movement:mov</c> spec. Any argument with a colon in it is a spec (issue 43):
+    /// a malformed one is reported as the mistake it is, never reclassified as a directory.
+    /// Returns the error message, or null when the spec parsed. The movement-type wording is
+    /// the content loader's, so the CLI and the content files disagree about nothing. Mov 0 is
+    /// legal: the own tile is a destination at any budget (DESIGN.md section 4), so a mov-0
+    /// probe is a true answer about the origin rule.
+    /// </summary>
+    private static string? ParseMovement(string text, out MovementType movement, out int mov)
     {
         movement = default;
         mov = 0;
         var parts = text.Split(':');
-        return parts.Length == 2
-            && Enum.TryParse(parts[0], ignoreCase: true, out movement)
-            && Enum.IsDefined(movement)
-            && int.TryParse(parts[1], out mov)
-            && mov >= 0;
+        if (parts.Length != 2)
+        {
+            return $"'{text}' is not a movement spec; expected <movement>:<mov>";
+        }
+
+        if (!Enum.TryParse(parts[0], ignoreCase: true, out movement) || !Enum.IsDefined(movement))
+        {
+            var allowed = string.Join(", ", Enum.GetNames<MovementType>().Select(n => n.ToLowerInvariant()));
+            return $"'{parts[0]}' is not one of: {allowed}";
+        }
+
+        if (!int.TryParse(parts[1], out mov))
+        {
+            return $"mov '{parts[1]}' is not a number";
+        }
+
+        if (mov < 0)
+        {
+            return $"mov must be at least 0, got {mov}";
+        }
+
+        return null;
     }
 
     private static int Show(string mapPath, string contentDir)
