@@ -18,7 +18,8 @@ public sealed record PlayerPlacement(Coord At, PlayerSlot Slot, string? RecruitI
 
 /// <summary>
 /// An enemy from a template in the content's unit list, scaled to the map's
-/// <see cref="MapDefinition.EnemyLevel"/> when the template is below it. Every enemy
+/// <see cref="MapDefinition.EnemyLevel"/> when the template is below it; the scaled
+/// unit comes from <see cref="MapDefinition.EnemyUnit"/>, not from here. Every enemy
 /// belongs to a group with one behavior (DESIGN.md section 8). A boss is any enemy
 /// written on a <c>B</c> line; its behavior is always <see cref="Behavior.Boss"/>.
 /// </summary>
