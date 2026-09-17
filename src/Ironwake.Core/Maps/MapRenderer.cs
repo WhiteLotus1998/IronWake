@@ -32,7 +32,7 @@ public static class MapRenderer
 
         sb.Append('\n');
 
-        var letters = Letters(map);
+        var letters = Letters(map, content);
         sb.Append("   ");
         for (var x = 0; x < map.Width; x++)
         {
@@ -98,11 +98,16 @@ public static class MapRenderer
 
     /// <summary>
     /// The letter each placement is drawn with, by placement index. Players take
-    /// A..Z, enemies a..z, and a boss is always <see cref="BossGlyph"/>. Past 26 on
-    /// a side the letters wrap; no v1 map has that many units.
+    /// A..Z, enemies a..z, and a boss is always <see cref="BossGlyph"/>. A letter that
+    /// any terrain in the content draws with is skipped on both sides, so a unit is
+    /// never drawn as a tile (issue 41); the skip uses the whole content, not the
+    /// terrain on this map, so a slot keeps its letter from map to map. Past the usable
+    /// count on a side the letters wrap; no v1 map has that many units.
     /// </summary>
-    public static char[] Letters(MapDefinition map)
+    public static char[] Letters(MapDefinition map, GameContent content)
     {
+        var upper = Alphabet('A', content);
+        var lower = Alphabet('a', content);
         var letters = new char[map.Placements.Count];
         var players = 0;
         var enemies = 0;
@@ -111,12 +116,34 @@ public static class MapRenderer
             letters[i] = map.Placements[i] switch
             {
                 EnemyPlacement { IsBoss: true } => BossGlyph,
-                EnemyPlacement => (char)('a' + enemies++ % 26),
-                _ => (char)('A' + players++ % 26),
+                EnemyPlacement => lower[enemies++ % lower.Length],
+                _ => upper[players++ % upper.Length],
             };
         }
 
         return letters;
+    }
+
+    /// <summary>
+    /// The 26 letters from <paramref name="first"/> minus every one a terrain draws with.
+    /// Content whose glyphs use every letter of a case leaves nothing to draw units with
+    /// and is refused, since a view with no letters would be a grid of terrain only.
+    /// </summary>
+    private static char[] Alphabet(char first, GameContent content)
+    {
+        var alphabet = new List<char>(26);
+        for (var offset = 0; offset < 26; offset++)
+        {
+            var letter = (char)(first + offset);
+            if (content.TerrainByGlyph(letter) is null)
+            {
+                alphabet.Add(letter);
+            }
+        }
+
+        return alphabet.Count > 0
+            ? alphabet.ToArray()
+            : throw new InvalidOperationException($"terrain glyphs use every letter {first}..{(char)(first + 25)}; nothing is left to draw units with");
     }
 
     private static string Describe(Placement placement, MapDefinition map, GameContent content)
