@@ -35,12 +35,17 @@ internal static class Fixture
         ] }
         """;
 
+    public const string Rules = """
+        { "wakeRadius": 4 }
+        """;
+
     public static ContentFiles Files(
         string? terrain = null,
         string? classes = null,
         string? weapons = null,
         string? units = null,
-        string? secondUnitsFile = null)
+        string? secondUnitsFile = null,
+        string? rules = null)
     {
         var unitFiles = new List<ContentFile> { new("units/units.json", units ?? Units) };
         if (secondUnitsFile is not null)
@@ -52,7 +57,8 @@ internal static class Fixture
             new ContentFile(ContentFiles.ClassesName, classes ?? Classes),
             new ContentFile(ContentFiles.WeaponsName, weapons ?? Weapons),
             new ContentFile(ContentFiles.TerrainName, terrain ?? Terrain),
-            unitFiles);
+            unitFiles,
+            new ContentFile(ContentFiles.RulesName, rules ?? Rules));
     }
 
     /// <summary>Walks up from the test binaries to the repository's content directory.</summary>

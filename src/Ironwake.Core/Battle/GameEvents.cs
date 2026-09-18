@@ -24,3 +24,19 @@ public sealed record PhaseBegan(Side Side, int Turn) : GameEvent;
 public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEvent;
 
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
+
+/// <summary>Why a Guard group woke (DESIGN.md section 8), the loudest cause first.</summary>
+public enum WakeCause
+{
+    /// <summary>A member of the group died, at any distance.</summary>
+    Death,
+
+    /// <summary>A combat involved a tile within the wake radius plus 2 of a member.</summary>
+    Noise,
+
+    /// <summary>A player unit stands within the wake radius of a member.</summary>
+    Proximity,
+}
+
+/// <summary>A Guard group woke; its members behave as Aggressive from now on.</summary>
+public sealed record GroupWoke(string Group, WakeCause Cause) : GameEvent;

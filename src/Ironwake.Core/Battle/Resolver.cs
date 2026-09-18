@@ -56,8 +56,78 @@ public static class Resolver
             return new ApplyResult(state, ValueList<GameEvent>.Empty, rejection);
         }
 
+        next = WakeGroups(state, next, content, events);
         next = next with { History = state.History.Add(state with { History = ValueList<BattleState>.Empty }) };
         return new ApplyResult(next, ValueList<GameEvent>.From(events), null);
+    }
+
+    /// <summary>
+    /// The Guard wake check of DESIGN.md section 8, run after every accepted command on
+    /// where units stand afterwards. A sleeping group wakes on the death of a member
+    /// (any distance), on noise (a combat this command whose attacker or target stood
+    /// within the noise radius of a living member), or on proximity (a player unit within
+    /// the wake radius of a living member). One <see cref="GroupWoke"/> per group per
+    /// command, naming the loudest cause in that order. Distances are Manhattan and walls
+    /// are not considered.
+    /// </summary>
+    private static BattleState WakeGroups(BattleState before, BattleState after, GameContent content, List<GameEvent> events)
+    {
+        var sleeping = new SortedSet<string>(StringComparer.Ordinal);
+        foreach (var unit in before.Units)
+        {
+            if (unit is { Behavior: Behavior.Guard, Group: { } group } && !before.IsAwake(group))
+            {
+                sleeping.Add(group);
+            }
+        }
+
+        if (sleeping.Count == 0)
+        {
+            return after;
+        }
+
+        var died = new List<BattleUnit>();
+        var noisy = new List<Coord>();
+        foreach (var e in events)
+        {
+            switch (e)
+            {
+                case UnitDied dead when before.Find(dead.UnitId) is { } unit:
+                    died.Add(unit);
+                    break;
+                case CombatFought fought:
+                    noisy.Add(before.Find(fought.AttackerId)!.At);
+                    noisy.Add(before.Find(fought.TargetId)!.At);
+                    break;
+            }
+        }
+
+        var next = after;
+        foreach (var group in sleeping)
+        {
+            var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
+            WakeCause? cause = null;
+            if (died.Any(u => u.Group == group))
+            {
+                cause = WakeCause.Death;
+            }
+            else if (noisy.Any(tile => members.Any(m => m.DistanceTo(tile) <= content.NoiseRadius)))
+            {
+                cause = WakeCause.Noise;
+            }
+            else if (after.UnitsOf(Side.Player).Any(p => members.Any(m => m.DistanceTo(p.At) <= content.WakeRadius)))
+            {
+                cause = WakeCause.Proximity;
+            }
+
+            if (cause is { } woke)
+            {
+                events.Add(new GroupWoke(group, woke));
+                next = next.Wake(group);
+            }
+        }
+
+        return next;
     }
 
     /// <summary>The unit a command names, if it is on the board, on the acting side, and has not acted.</summary>

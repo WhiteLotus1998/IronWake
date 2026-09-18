@@ -6,13 +6,19 @@ namespace Ironwake.Core;
 /// Everything loaded from the content directory, keyed by id. Core receives this already
 /// validated; it never reads files itself. Lookups by id throw a <see cref="KeyNotFoundException"/>
 /// naming the id, since a missing id after validation is a programming error.
+/// <see cref="WakeRadius"/> is the Guard wake radius of DESIGN.md section 8, in tiles,
+/// Manhattan: one number for every map, read from <c>rules.json</c>.
 /// </summary>
 public sealed record GameContent(
     ImmutableSortedDictionary<string, UnitClass> Classes,
     ImmutableSortedDictionary<string, Weapon> Weapons,
     ImmutableSortedDictionary<string, Terrain> Terrain,
-    ImmutableSortedDictionary<string, Unit> Units)
+    ImmutableSortedDictionary<string, Unit> Units,
+    int WakeRadius)
 {
+    /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
+    public int NoiseRadius => WakeRadius + 2;
+
     public UnitClass Class(string id) => Lookup(Classes, id, "class");
 
     public Weapon Weapon(string id) => Lookup(Weapons, id, "weapon");
@@ -45,10 +51,11 @@ public sealed record GameContent(
         && DictEquals(Classes, other.Classes)
         && DictEquals(Weapons, other.Weapons)
         && DictEquals(Terrain, other.Terrain)
-        && DictEquals(Units, other.Units);
+        && DictEquals(Units, other.Units)
+        && WakeRadius == other.WakeRadius;
 
     public override int GetHashCode() =>
-        HashCode.Combine(Classes.Count, Weapons.Count, Terrain.Count, Units.Count);
+        HashCode.Combine(Classes.Count, Weapons.Count, Terrain.Count, Units.Count, WakeRadius);
 
     private static bool DictEquals<T>(ImmutableSortedDictionary<string, T> a, ImmutableSortedDictionary<string, T> b)
     {

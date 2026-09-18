@@ -17,7 +17,8 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.ClassesName, WriteArray("classes", content.Classes.Values, WriteClass)),
         new ContentFile(ContentFiles.WeaponsName, WriteArray("weapons", content.Weapons.Values, WriteWeapon)),
         new ContentFile(ContentFiles.TerrainName, WriteArray("terrain", content.Terrain.Values, WriteTerrain)),
-        new[] { new ContentFile(ContentFiles.UnitsDirectory + "/all.json", WriteArray("units", content.Units.Values, WriteUnit)) });
+        new[] { new ContentFile(ContentFiles.UnitsDirectory + "/all.json", WriteArray("units", content.Units.Values, WriteUnit)) },
+        new ContentFile(ContentFiles.RulesName, "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n"));
 
     private static string WriteArray<T>(string key, IEnumerable<T> items, Action<Utf8JsonWriter, T> writeItem)
     {

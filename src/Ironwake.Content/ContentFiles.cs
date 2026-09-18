@@ -11,9 +11,11 @@ public sealed record ContentFiles(
     ContentFile Classes,
     ContentFile Weapons,
     ContentFile Terrain,
-    IReadOnlyList<ContentFile> Units)
+    IReadOnlyList<ContentFile> Units,
+    ContentFile Rules)
 {
     public const string ClassesName = "classes.json";
+    public const string RulesName = "rules.json";
     public const string WeaponsName = "weapons.json";
     public const string TerrainName = "terrain.json";
     public const string UnitsDirectory = "units";
