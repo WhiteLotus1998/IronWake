@@ -7,8 +7,7 @@ namespace Ironwake.Cli;
 /// Console front end for Ironwake. <c>validate</c> loads every content file and every map
 /// and reports OK or the first error. <c>show</c> prints a map's console view. <c>reach</c>
 /// prints the view with one unit's reachable tiles marked, for checking a map by eye. <c>play</c>
-/// arrives with issue 11; until then it prints usage and exits non-zero so a script cannot
-/// mistake it for a working game.
+/// runs a battle from a script or the keyboard (<see cref="PlaySession"/>).
 /// </summary>
 public static class Program
 {
@@ -35,8 +34,7 @@ public static class Program
             case "reach":
                 return Reach(args.Skip(1).ToArray());
             case "play":
-                Console.WriteLine("play is not implemented yet (issue 11)");
-                return 2;
+                return PlaySession.Run(args.Skip(1).ToArray());
             default:
                 PrintUsage();
                 return 2;
@@ -49,7 +47,7 @@ public static class Program
         Console.WriteLine("usage: ironwake validate [content-dir]");
         Console.WriteLine("       ironwake show <map-file> [content-dir]");
         Console.WriteLine("       ironwake reach <map-file> <x,y> [<movement>:<mov>] [content-dir]");
-        Console.WriteLine("       ironwake play <map> [--seed N] [--script file]   (not implemented yet)");
+        Console.WriteLine("       ironwake play <map-file> [--seed N] [--script file] [--content dir]");
     }
 
     private static int Validate(string contentDir)

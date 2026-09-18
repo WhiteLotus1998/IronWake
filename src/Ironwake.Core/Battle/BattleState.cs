@@ -87,19 +87,20 @@ public sealed record BattleState(
 
         var nextBare = 1;
         var perTemplate = new Dictionary<string, int>(StringComparer.Ordinal);
-        foreach (var placement in map.Placements)
+        for (var index = 0; index < map.Placements.Count; index++)
         {
+            var placement = map.Placements[index];
             switch (placement)
             {
                 case PlayerPlacement p:
                     var unit = Fill(p, roster, named, deployed, ref nextBare);
-                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain });
+                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index });
                     break;
                 case EnemyPlacement e:
                     var count = perTemplate.GetValueOrDefault(e.TemplateId) + 1;
                     perTemplate[e.TemplateId] = count;
                     var enemy = map.EnemyUnit(e, content) with { Id = e.TemplateId + "-" + count };
-                    units.Add(Place(enemy, Side.Enemy, e.At, map, content) with { Group = e.Group, Behavior = e.Behavior, IsBoss = e.IsBoss });
+                    units.Add(Place(enemy, Side.Enemy, e.At, map, content) with { Group = e.Group, Behavior = e.Behavior, IsBoss = e.IsBoss, PlacementIndex = index });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(map), placement, "unknown placement kind");

@@ -50,7 +50,7 @@ public static class Program
 
         var content = ContentLoader.Load(contentDir);
         var maps = MapFiles.LoadAll(contentDir, content);
-        Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}; roster is {Roster.Count} synthetic cadets until issue 13");
+        Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}; {SyntheticRoster.Notice}");
         var failed = false;
         failed |= !Gate6(content, maps);
         failed |= !Gate7(content, maps);
@@ -239,15 +239,7 @@ public static class Program
         return (state.Canonical(), events.ToString());
     }
 
-    private static readonly ValueList<Unit> Roster = ValueList<Unit>.Of(
-        Cadet("captain", new Stats(22, 8, 0, 7, 8, 6, 5, 2, 9)),
-        Cadet("wren", new Stats(20, 7, 0, 6, 8, 5, 4, 2, 3)),
-        Cadet("recruit-2", new Stats(19, 6, 0, 5, 7, 4, 4, 3, 4)),
-        Cadet("recruit-3", new Stats(21, 7, 0, 5, 6, 3, 5, 2, 2)),
-        Cadet("recruit-4", new Stats(18, 5, 0, 8, 9, 5, 3, 3, 5)));
-
-    private static Unit Cadet(string id, Stats stats) =>
-        new(id, id, "cadet", 1, 0, stats, Stats.Zero, new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 40))), ValueList<string>.Empty);
+    private static ValueList<Unit> Roster => SyntheticRoster.Cadets;
 
     private static string? FindContent()
     {

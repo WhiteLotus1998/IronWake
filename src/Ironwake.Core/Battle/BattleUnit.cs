@@ -7,7 +7,9 @@ namespace Ironwake.Core;
 /// Item, Wait). Enemies also carry their group and behavior from the map (section 8).
 /// The unit's id is its <see cref="Unit"/>'s id: for a player unit the roster id, for an
 /// enemy the template id with a per-template counter (<c>brigand-1</c>), so every roll key
-/// and every event names one body on the map.
+/// and every event names one body on the map. <see cref="PlacementIndex"/> is the index of
+/// the map placement the unit filled, so a renderer draws it with the letter section 10
+/// gives that slot for the whole battle, wherever it has moved.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -19,7 +21,8 @@ public sealed record BattleUnit(
     string? Group = null,
     Behavior? Behavior = null,
     bool IsBoss = false,
-    bool IsCaptain = false)
+    bool IsCaptain = false,
+    int PlacementIndex = -1)
 {
     public string Id => Unit.Id;
 

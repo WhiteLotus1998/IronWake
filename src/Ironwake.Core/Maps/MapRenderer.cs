@@ -97,6 +97,96 @@ public static class MapRenderer
     }
 
     /// <summary>
+    /// The console view of a battle: the grid with every living unit drawn where it stands,
+    /// each with the letter of the placement it filled, then a legend with each unit's
+    /// name, class, position, HP, terrain, and for enemies its group and how it behaves
+    /// now (a sleeping Guard reads <c>guard, asleep</c>). The turn line names the phase and
+    /// the Recall charges left. Given a <see cref="Reach"/>, the tiles that unit may end on
+    /// are marked as in the map view.
+    /// </summary>
+    public static string Render(BattleState state, GameContent content, Reach? reach = null)
+    {
+        var map = state.Map;
+        var sb = new StringBuilder();
+        sb.Append(map.Name).Append("  turn ").Append(state.Turn).Append(" of ").Append(map.TurnLimit)
+            .Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase")
+            .Append("  ").Append(WinName(map.Win))
+            .Append("  recall ").Append(state.RecallCharges).Append('\n');
+        var letters = Letters(map, content);
+        sb.Append("   ");
+        for (var x = 0; x < map.Width; x++)
+        {
+            sb.Append((char)('0' + x % 10));
+        }
+
+        sb.Append('\n');
+        for (var y = 0; y < map.Height; y++)
+        {
+            sb.Append(y.ToString().PadLeft(2)).Append(' ');
+            var row = map.GlyphRow(y, content).ToCharArray();
+            if (reach is not null)
+            {
+                for (var x = 0; x < map.Width; x++)
+                {
+                    if (reach.CanEnd(new Coord(x, y)))
+                    {
+                        row[x] = ReachGlyph;
+                    }
+                }
+            }
+
+            foreach (var unit in state.Units)
+            {
+                if (unit.At.Y == y)
+                {
+                    row[unit.At.X] = letters[unit.PlacementIndex];
+                }
+            }
+
+            sb.Append(row).Append('\n');
+        }
+
+        sb.Append('\n');
+        foreach (var unit in state.Units)
+        {
+            var terrain = map.TerrainAt(unit.At, content).Name;
+            var who = $"{unit.Unit.Name} L{unit.Unit.Level} {content.Class(unit.Unit.ClassId).Name.ToLowerInvariant()}";
+            var hp = $"hp {unit.Hp}/{unit.MaxHp(content)}";
+            sb.Append(letters[unit.PlacementIndex]).Append("  ").Append($"{unit.Id,-16} {who,-26} {unit.At,-6} {hp,-9} {terrain}");
+            if (unit.Side == Side.Enemy)
+            {
+                var role = unit.IsBoss ? "boss" : unit.Behavior.ToString()!.ToLowerInvariant();
+                if (unit.Behavior == Behavior.Guard)
+                {
+                    role += state.IsAwake(unit.Group!) ? ", awake" : ", asleep";
+                }
+
+                sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
+            }
+            else if (unit.IsCaptain)
+            {
+                sb.Append("  captain");
+            }
+
+            if (unit.Acted)
+            {
+                sb.Append("  done");
+            }
+
+            sb.Append('\n');
+        }
+
+        if (reach is not null)
+        {
+            var count = reach.Destinations.Count() - 1;
+            sb.Append(ReachGlyph).Append("  reach from ").Append(reach.Origin)
+                .Append(": ").Append(count).Append(count == 1 ? " tile" : " tiles").Append('\n');
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
     /// The letter each placement is drawn with, by placement index. Players take
     /// A..Z, enemies a..z, and a boss is always <see cref="BossGlyph"/>. A letter that
     /// any terrain in the content draws with is skipped on both sides, so a unit is
