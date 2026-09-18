@@ -330,4 +330,27 @@ public class ValidationTests
         Assert.Equal("north", unit.Region);
         Assert.Equal("Counts everything twice.", unit.Personality);
     }
+
+    [Fact]
+    public void RulesMustNameAWakeRadius()
+    {
+        var e = Fails(Fixture.Files(rules: "{ }"));
+
+        AssertNames(e, ContentFiles.RulesName, null, "wakeRadius");
+    }
+
+    [Fact]
+    public void ANegativeWakeRadiusIsRefused()
+    {
+        var e = Fails(Fixture.Files(rules: "{ \"wakeRadius\": -1 }"));
+
+        AssertNames(e, ContentFiles.RulesName, null, "wakeRadius");
+        Assert.Contains("at least 0", e.Message);
+    }
+
+    [Fact]
+    public void TheWakeRadiusIsReadFromRules()
+    {
+        Assert.Equal(6, ContentLoader.Parse(Fixture.Files(rules: "{ \"wakeRadius\": 6 }")).WakeRadius);
+    }
 }

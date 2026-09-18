@@ -7,10 +7,11 @@ namespace Ironwake.Sim;
 /// <summary>
 /// Headless harness. Runs the quality gates from DESIGN.md section 11.
 /// --smoke runs the per-PR gates over every map under content/maps; --full runs the
-/// per-map gates (1-4). Gates 6 (determinism) and 8 (crash-free) run now; gate 5
-/// (forecast honesty over the resolver) and gate 7 (speed) register when the enemy AI
-/// (issue 10) gives a full AI-vs-AI map to time. Until issue 13 lands the cast, the
-/// player's roster is five synthetic cadets with iron swords, and the output says so.
+/// per-map gates (1-4). Gates 6 (determinism, over random commands and over the enemy
+/// AI's phases), 7 (a full map of the random player against the enemy AI under a second)
+/// and 8 (crash-free) run now; gate 5 (forecast honesty over the resolver) registers when
+/// the Sim fights enough combats to count. Until issue 13 lands the cast, the player's
+/// roster is five synthetic cadets with iron swords, and the output says so.
 /// </summary>
 public static class Program
 {
@@ -18,6 +19,8 @@ public static class Program
     private const int Gate6Commands = 100;
     private const int Gate8Sequences = 10000;
     private const int Gate8Commands = 20;
+    private const int Gate7Seeds = 5;
+    private const int Gate7LimitMs = 1000;
 
     public static int Main(string[] args)
     {
@@ -50,8 +53,9 @@ public static class Program
         Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}; roster is {Roster.Count} synthetic cadets until issue 13");
         var failed = false;
         failed |= !Gate6(content, maps);
+        failed |= !Gate7(content, maps);
         failed |= !Gate8(content, maps);
-        Console.WriteLine("gate 5 forecast honesty and gate 7 speed: waiting on the enemy AI (issue 10)");
+        Console.WriteLine("gate 5 forecast honesty: waiting on a Sim that counts combats");
         Console.WriteLine(failed ? "smoke: FAILED" : "smoke: ok");
         return failed ? 1 : 0;
     }
@@ -80,6 +84,76 @@ public static class Program
 
         Console.WriteLine($"gate 6 determinism: {maps.Count} maps x {Gate6Seeds} seeds x {Gate6Commands} commands, {watch.ElapsedMilliseconds} ms: {(ok ? "ok" : "FAILED")}");
         return ok;
+    }
+
+    /// <summary>
+    /// Gate 7: a full map, the random player against <see cref="EnemyAi.Plan"/>, resolves
+    /// in under a second; the same seed replayed lands on the same canonical state, which
+    /// is gate 6 over the AI's phases. The slowest game per map is what is printed and judged.
+    /// </summary>
+    private static bool Gate7(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
+    {
+        var ok = true;
+        foreach (var (id, map) in maps)
+        {
+            long slowest = 0;
+            var turns = 0;
+            for (var seed = 1; seed <= Gate7Seeds; seed++)
+            {
+                var watch = Stopwatch.StartNew();
+                var (first, firstTurns) = FullGame(content, map, (ulong)seed);
+                watch.Stop();
+                slowest = Math.Max(slowest, watch.ElapsedMilliseconds);
+                turns += firstTurns;
+                var (second, _) = FullGame(content, map, (ulong)seed);
+                if (first != second)
+                {
+                    Console.WriteLine($"gate 6 determinism: {id} seed {seed} AI-vs-AI game replayed differently");
+                    ok = false;
+                }
+            }
+
+            var fast = slowest < Gate7LimitMs;
+            ok &= fast;
+            Console.WriteLine($"gate 7 speed: {id}, {Gate7Seeds} AI-vs-AI games, {turns} turns, slowest {slowest} ms: {(fast ? "ok" : "FAILED")}");
+        }
+
+        return ok;
+    }
+
+    /// <summary>The random player against the enemy AI until the battle is decided. Returns the canonical end state and the turns played.</summary>
+    private static (string State, int Turns) FullGame(GameContent content, MapDefinition map, ulong seed)
+    {
+        var state = BattleState.From(map, content, Roster, seed);
+        var random = new Random((int)seed);
+        while (!state.Outcome.IsOver)
+        {
+            if (state.Phase == Side.Player)
+            {
+                var legal = Resolver.Legal(state, content).ToList();
+                state = Apply(state, content, legal[random.Next(legal.Count)]);
+            }
+            else
+            {
+                foreach (var command in EnemyAi.Plan(state, content))
+                {
+                    state = Apply(state, content, command);
+                }
+            }
+        }
+
+        return (state.Canonical(), state.Turn);
+    }
+
+    private static BattleState Apply(BattleState state, GameContent content, Command command)
+    {
+        var result = Resolver.Apply(state, content, command);
+        if (!result.Accepted)
+        {
+            throw new InvalidOperationException($"{command} was rejected: {result.Rejection!.Message}");
+        }
+
+        return result.Next;
     }
 
     /// <summary>Gate 8: random legal command sequences throw nothing and are never rejected.</summary>

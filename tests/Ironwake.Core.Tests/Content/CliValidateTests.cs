@@ -22,6 +22,7 @@ public class CliValidateTests
         {
             File.WriteAllText(Path.Combine(dir, "classes.json"), Fixture.Classes);
             File.WriteAllText(Path.Combine(dir, "weapons.json"), Fixture.Weapons);
+            File.WriteAllText(Path.Combine(dir, "rules.json"), Fixture.Rules);
             File.WriteAllText(Path.Combine(dir, "terrain.json"), "{ \"terrain\": [ { \"id\": \"plain\", \"name\": \"Plain\", \"glyph\": \"..\", \"cost\": { \"infantry\": 1, \"cavalry\": 1, \"flying\": 1, \"armored\": 1 } } ] }");
 
             var output = Run(out var exit, "validate", dir);
@@ -46,7 +47,7 @@ public class CliValidateTests
         Directory.CreateDirectory(Path.Combine(dir, "maps"));
         try
         {
-            foreach (var name in new[] { "classes.json", "weapons.json", "terrain.json" })
+            foreach (var name in new[] { "classes.json", "weapons.json", "terrain.json", "rules.json" })
             {
                 File.Copy(Path.Combine(Fixture.RealContentDirectory(), name), Path.Combine(dir, name));
             }

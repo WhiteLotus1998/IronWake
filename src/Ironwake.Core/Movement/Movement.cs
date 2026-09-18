@@ -130,6 +130,84 @@ public static class Movement
     }
 
     /// <summary>
+    /// The remaining path cost from every tile to the nearest of <paramref name="targets"/>,
+    /// with no Mov budget, over the same costs and occupancy as <see cref="Reach"/>: the
+    /// query the approach rule of DESIGN.md section 8 needs. A tile's distance is the sum
+    /// of the entry costs of the tiles walked after it, so a target's own distance is 0 and
+    /// a tile from which no target can be reached is null. Enemy-occupied tiles are never
+    /// walked through; the targets are taken as given, so the caller decides which tiles
+    /// count as ones the mover may end on. One multi-source Dijkstra over the reversed
+    /// graph, so nothing re-counts per tile.
+    /// </summary>
+    public static Distances DistancesTo(
+        MapDefinition map,
+        GameContent content,
+        IEnumerable<Coord> targets,
+        MovementType movement,
+        Func<Coord, Occupant> occupantAt)
+    {
+        var tiles = map.Width * map.Height;
+        var costs = new int[tiles];
+        Array.Fill(costs, int.MaxValue);
+        var frontier = new PriorityQueue<int, (int Cost, int Index)>();
+        foreach (var target in targets)
+        {
+            if (!map.Contains(target))
+            {
+                throw new ArgumentOutOfRangeException(nameof(targets), target, $"outside a {map.Width}x{map.Height} map");
+            }
+
+            var index = Index(map, target);
+            costs[index] = 0;
+            frontier.Enqueue(index, (0, index));
+        }
+
+        var occupants = new Occupant?[tiles];
+        var stepInto = new int?[tiles];
+        var stepAsked = new bool[tiles];
+        while (frontier.TryDequeue(out var current, out var priority))
+        {
+            if (priority.Cost > costs[current])
+            {
+                continue;
+            }
+
+            var here = TileAt(map, current);
+            if (!stepAsked[current])
+            {
+                stepAsked[current] = true;
+                stepInto[current] = content.TerrainById(map.TerrainIds[current]).MoveCost(movement);
+                occupants[current] ??= occupantAt(here);
+            }
+
+            if (stepInto[current] is not { } entry || occupants[current] == Occupant.Enemy)
+            {
+                continue;
+            }
+
+            foreach (var previous in here.Neighbors())
+            {
+                if (!map.Contains(previous))
+                {
+                    continue;
+                }
+
+                var index = Index(map, previous);
+                var cost = costs[current] + entry;
+                if (cost >= costs[index])
+                {
+                    continue;
+                }
+
+                costs[index] = cost;
+                frontier.Enqueue(index, (cost, index));
+            }
+        }
+
+        return new Distances(map, costs);
+    }
+
+    /// <summary>
     /// The refusal for a unit standing where its movement type cannot go, in the same
     /// words the map loader uses for a placement it rejects.
     /// </summary>

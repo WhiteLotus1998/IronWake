@@ -17,6 +17,7 @@ namespace Ironwake.Core;
 /// <param name="Scheme">How hit rolls are read, section 5.</param>
 /// <param name="RecallCharges">Recall charges left on this map.</param>
 /// <param name="History">Every prior state, oldest first, each stored with an empty history of its own so the record stays finite.</param>
+/// <param name="AwakeGroups">Guard groups that have woken (section 8), sorted by name. A woken group is a fact of the board, so a Recall restores it with the rest.</param>
 public sealed record BattleState(
     MapDefinition Map,
     ValueList<BattleUnit> Units,
@@ -25,8 +26,36 @@ public sealed record BattleState(
     ulong Seed,
     RollScheme Scheme,
     int RecallCharges,
-    ValueList<BattleState> History)
+    ValueList<BattleState> History,
+    ValueList<string> AwakeGroups = default)
 {
+    /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
+    public bool IsAwake(string group) => AwakeGroups.Contains(group);
+
+    /// <summary>
+    /// How an enemy behaves now (DESIGN.md section 8): a sleeping Guard as Hold, a woken
+    /// Guard as Aggressive, everything else as its map says. A player unit has no behavior and gets null.
+    /// </summary>
+    public Behavior? EffectiveBehavior(BattleUnit unit) =>
+        unit.Behavior switch
+        {
+            Core.Behavior.Guard => unit.Group is { } group && IsAwake(group) ? Core.Behavior.Aggressive : Core.Behavior.Hold,
+            var other => other,
+        };
+
+    /// <summary>This state with a group woken. Idempotent; the list stays sorted.</summary>
+    public BattleState Wake(string group)
+    {
+        if (IsAwake(group))
+        {
+            return this;
+        }
+
+        var groups = AwakeGroups.Add(group).ToList();
+        groups.Sort(string.CompareOrdinal);
+        return this with { AwakeGroups = ValueList<string>.From(groups) };
+    }
+
     /// <summary>
     /// The opening state of a map. <paramref name="roster"/> is the player's units in
     /// order: the first is the captain and fills the captain's slot, a named slot takes
@@ -293,6 +322,13 @@ public sealed record BattleState(
             .Append(" seed ").Append(Seed).Append(" scheme ").Append(Scheme)
             .Append(" recall ").Append(RecallCharges).Append(" history ").Append(History.Count)
             .Append(" outcome ").Append(Outcome.Result).Append('\n');
+        sb.Append("awake");
+        foreach (var group in AwakeGroups)
+        {
+            sb.Append(' ').Append(group);
+        }
+
+        sb.Append('\n');
         foreach (var unit in Units)
         {
             sb.Append("unit ").Append(unit.Id).Append(' ').Append(unit.Side).Append(' ').Append(unit.At)

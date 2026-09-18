@@ -34,7 +34,8 @@ public static class ContentLoader
             ReadFile(contentRoot, ContentFiles.WeaponsName),
             ReadFile(contentRoot, ContentFiles.TerrainName),
             unitFiles.Select(p => new ContentFile(
-                ContentFiles.UnitsDirectory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList());
+                ContentFiles.UnitsDirectory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList(),
+            ReadFile(contentRoot, ContentFiles.RulesName));
 
         return Parse(files);
     }
@@ -46,7 +47,39 @@ public static class ContentLoader
         var classes = ParseClasses(files.Classes);
         var weapons = ParseWeapons(files.Weapons);
         var units = ParseUnits(files.Units, classes, weapons);
-        return new GameContent(classes, weapons, terrain, units);
+        var wakeRadius = ParseRules(files.Rules);
+        return new GameContent(classes, weapons, terrain, units, wakeRadius);
+    }
+
+    /// <summary>
+    /// The global rule constants of DESIGN.md: today only the Guard wake radius (section 8),
+    /// which lives in content so it is identical on every map and never in a map file.
+    /// </summary>
+    private static int ParseRules(ContentFile file)
+    {
+        JsonDocument document;
+        try
+        {
+            document = JsonDocument.Parse(file.Text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true });
+        }
+        catch (JsonException e)
+        {
+            throw new ContentException(file.Name, null, null, "invalid JSON: " + e.Message);
+        }
+
+        if (document.RootElement.ValueKind != JsonValueKind.Object)
+        {
+            throw new ContentException(file.Name, null, null, "root must be an object");
+        }
+
+        var root = new EntryNode(file.Name, null, document.RootElement);
+        var wakeRadius = root.Int("wakeRadius");
+        if (wakeRadius < 0)
+        {
+            throw root.Error("wakeRadius", "must be at least 0");
+        }
+
+        return wakeRadius;
     }
 
     private static ContentFile ReadFile(string root, string name)
