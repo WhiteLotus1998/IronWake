@@ -11,8 +11,13 @@ public abstract record Command;
 /// <summary>Move a unit to a tile in its reach (section 4). Once per phase, before it acts.</summary>
 public sealed record Move(string UnitId, Coord To) : Command;
 
-/// <summary>Attack an enemy within the unit's weapon range. Ends the unit's action.</summary>
-public sealed record Attack(string UnitId, string TargetId) : Command;
+/// <summary>
+/// Attack an enemy within the unit's weapon range. Ends the unit's action.
+/// <paramref name="Slot"/> names the inventory slot of the weapon to strike with; it
+/// moves to the front of the inventory, so the counter on the enemy phase uses the same
+/// weapon. Without it the equipped weapon strikes. Choosing costs nothing extra (section 7).
+/// </summary>
+public sealed record Attack(string UnitId, string TargetId, int? Slot = null) : Command;
 
 /// <summary>
 /// Use the item in an inventory slot (section 7's Item action): a consumable heals its

@@ -30,19 +30,20 @@ public static class Queries
     }
 
     /// <summary>
-    /// The section 5 forecast of the unit attacking the target from where it stands, or
-    /// null when it cannot (no weapon, or the target out of range), the same combatants
-    /// the resolver would build.
+    /// The section 5 forecast of the unit attacking the target from where it stands with
+    /// its equipped weapon, or with the weapon in <paramref name="slot"/>; null when it
+    /// cannot (no weapon, a slot that holds no usable weapon, the target out of range or
+    /// on its own side), the same combatants the resolver would build.
     /// </summary>
-    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int? slot = null)
     {
-        var weapon = unit.EquippedWeapon(content);
+        var (armed, weapon, rejection) = Resolver.ChooseWeapon(unit, content, slot);
         var distance = unit.At.DistanceTo(target.At);
-        if (weapon is null || !weapon.InRange(distance) || target.Side == unit.Side)
+        if (rejection is not null || !weapon!.InRange(distance) || target.Side == unit.Side)
         {
             return null;
         }
 
-        return Combat.Forecast(unit.ToCombatant(state.Map, content), target.ToCombatant(state.Map, content), distance, state.Scheme);
+        return Combat.Forecast(armed.ToCombatant(state.Map, content), target.ToCombatant(state.Map, content), distance, state.Scheme);
     }
 }

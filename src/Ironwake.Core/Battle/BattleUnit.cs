@@ -29,26 +29,62 @@ public sealed record BattleUnit(
     public int MaxHp(GameContent content) => Unit.EffectiveStats(content.Class(Unit.ClassId)).Hp;
 
     /// <summary>
-    /// The inventory slot of the weapon the unit strikes with: the first item that is a
-    /// weapon its class can use and that is not a healing spell, skipping a spell with no
-    /// uses left this battle (section 5: a physical weapon at zero uses still fights,
-    /// broken; a spent spell does not). -1 when there is none. Choosing another slot is
-    /// not in this build; the PR for issue 9 says why.
+    /// The inventory slot of the weapon the unit strikes with: the first slot that
+    /// <see cref="UsableWeaponAt"/> accepts. -1 when there is none. An <see cref="Attack"/>
+    /// naming another usable slot moves that weapon to the front first.
     /// </summary>
     public int EquippedSlot(GameContent content)
     {
-        var unitClass = content.Class(Unit.ClassId);
         for (var slot = 0; slot < Unit.Inventory.Count; slot++)
         {
-            var item = Unit.Inventory.Items[slot];
-            if (content.Weapons.TryGetValue(item.ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !weapon.Heals
-                && (item.Uses > 0 || !weapon.IsMagic))
+            if (UsableWeaponAt(content, slot) is not null)
             {
                 return slot;
             }
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// The weapon in a slot if the unit can strike with it: a weapon its class can use
+    /// that is not a healing spell, skipping a spell with no uses left this battle
+    /// (section 5: a physical weapon at zero uses still fights, broken; a spent spell
+    /// does not). Null for an empty slot, an item, a healing spell, or a spent spell.
+    /// </summary>
+    public Weapon? UsableWeaponAt(GameContent content, int slot)
+    {
+        if (slot < 0 || slot >= Unit.Inventory.Count)
+        {
+            return null;
+        }
+
+        var item = Unit.Inventory.Items[slot];
+        var unitClass = content.Class(Unit.ClassId);
+        return content.Weapons.TryGetValue(item.ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !weapon.Heals
+            && (item.Uses > 0 || !weapon.IsMagic)
+            ? weapon
+            : null;
+    }
+
+    /// <summary>This unit with the item in <paramref name="slot"/> moved to the front of its inventory, the other slots keeping their order.</summary>
+    public BattleUnit WithSlotInFront(int slot)
+    {
+        if (slot == 0)
+        {
+            return this;
+        }
+
+        var items = new List<ItemStack>(Unit.Inventory.Count) { Unit.Inventory.Items[slot] };
+        for (var i = 0; i < Unit.Inventory.Count; i++)
+        {
+            if (i != slot)
+            {
+                items.Add(Unit.Inventory.Items[i]);
+            }
+        }
+
+        return this with { Unit = Unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) } };
     }
 
     /// <summary>The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.</summary>
