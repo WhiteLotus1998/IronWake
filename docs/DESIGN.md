@@ -108,7 +108,9 @@ A unit earns EXP once per combat, computed from the best outcome in that combat.
 Player phase → Enemy phase → (Ally phase if any) → turn counter increments. On a unit's turn: **Move** (optional), then one of **Attack / Item / Wait**. Cavalry get Canto (move remaining Mov after acting) in Phase 3, not v1.
 
 **Win conditions** (one per map): Rout, Seize (captain on `T`), Defeat Boss, Survive N turns, Escape (all living units reach exit tiles).
-**Loss conditions:** captain dies; or a map-specific protect-target dies.
+**Loss conditions:** captain dies; or a map-specific protect-target dies (the `protect:` header, section 10).
+
+**Outcome.** `BattleState.Outcome` is computed from the board after every command, never stored, and read in this order: captain dead (lost), protected recruit dead (lost), the win condition met (won), the turn past `turn_limit` (won for Survive, lost for everything else), else ongoing. Seize is the captain standing on a throne tile; Escape is every living player unit standing on an exit tile; Rout is no enemy alive; Defeat Boss is no boss alive. A decided battle refuses every command but Recall, so a loss is the moment Recall is for. Healing terrain (section 4) heals the units of the side whose phase begins, the terrain's percent of max HP with integer floor, capped at max (issue 7).
 
 **Recall.** 3 charges per map on Normal. Rewinds to any previous state in the current map's history. Charges do not refresh mid-map.
 
@@ -153,7 +155,7 @@ On Old Mill Road as placed, this sends the brigand at 6,5 to 3,6 on enemy phase 
 
 ## 10. Map file format
 
-A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block. Glyphs per section 4. Coordinates are `x,y` from the top-left, 0-based. Header keys: `name`, `size` (`WxH`), `win` (`rout`, `seize`, `defeat_boss`, `survive`, `escape`), `turn_limit` (required; every map has one, gate 1 counts against it), `recall` (default 3), `enemy_level` (default 1), and the optional `cheap_shots` below. A `P` line is `captain`, `recruit:<id>` (this recruit stands here), or bare `recruit` (a deployment slot the roster fills in order). An `E` line needs `group:` and `behavior:` (`aggressive`, `hold`, `guard`); a `B` line is a boss, and its behavior is always `boss`. Example:
+A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block. Glyphs per section 4. Coordinates are `x,y` from the top-left, 0-based. Header keys: `name`, `size` (`WxH`), `win` (`rout`, `seize`, `defeat_boss`, `survive`, `escape`), `turn_limit` (required; every map has one, gate 1 counts against it), `recall` (default 3), `enemy_level` (default 1), `exit` (Escape maps only: the exit tiles as `x,y` separated by spaces, at least as many as the map has player slots, so every deployed unit has one to stand on), `protect` (optional: the id of a `recruit:<id>` slot on this map whose death loses the map, section 7), and the optional `cheap_shots` below. A `P` line is `captain`, `recruit:<id>` (this recruit stands here), or bare `recruit` (a deployment slot the roster fills in order). An `E` line needs `group:` and `behavior:` (`aggressive`, `hold`, `guard`); a `B` line is a boss, and its behavior is always `boss`. Example:
 
 ```
 name: Old Mill Road

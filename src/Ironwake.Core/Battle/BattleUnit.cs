@@ -18,7 +18,8 @@ public sealed record BattleUnit(
     bool Acted,
     string? Group = null,
     Behavior? Behavior = null,
-    bool IsBoss = false)
+    bool IsBoss = false,
+    bool IsCaptain = false)
 {
     public string Id => Unit.Id;
 

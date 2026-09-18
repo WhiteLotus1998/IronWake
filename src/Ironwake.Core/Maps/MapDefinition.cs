@@ -18,6 +18,8 @@ namespace Ironwake.Core;
 /// <param name="CheapShotsAllowed">The map waives gate 3 on purpose (section 11). Maps 4 and up only.</param>
 /// <param name="TerrainIds">Terrain id per tile, row-major from the top-left.</param>
 /// <param name="Placements">Starting units in file order.</param>
+/// <param name="Exits">Exit tiles for an Escape map (the <c>exit:</c> header); empty otherwise.</param>
+/// <param name="ProtectId">The recruit whose death loses the map (the <c>protect:</c> header), or null.</param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -28,7 +30,9 @@ public sealed record MapDefinition(
     int EnemyLevel,
     bool CheapShotsAllowed,
     ValueList<string> TerrainIds,
-    ValueList<Placement> Placements)
+    ValueList<Placement> Placements,
+    ValueList<Coord> Exits = default,
+    string? ProtectId = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -36,6 +40,10 @@ public sealed record MapDefinition(
 
     /// <summary>The terrain id of the seize target (glyph <c>T</c> in DESIGN.md section 4).</summary>
     public const string ThroneTerrainId = "throne";
+
+    public bool IsExit(Coord at) => Exits.Contains(at);
+
+    public bool IsThrone(Coord at) => TerrainIdAt(at) == ThroneTerrainId;
 
     public bool Contains(Coord at) => at.X >= 0 && at.X < Width && at.Y >= 0 && at.Y < Height;
 

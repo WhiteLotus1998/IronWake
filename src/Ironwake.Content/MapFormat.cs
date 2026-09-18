@@ -12,7 +12,7 @@ namespace Ironwake.Content;
 /// </summary>
 public static class MapFormat
 {
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "cheap_shots" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -32,6 +32,16 @@ public static class MapFormat
         sb.Append("turn_limit: ").Append(map.TurnLimit).Append('\n');
         sb.Append("recall: ").Append(map.RecallCharges).Append('\n');
         sb.Append("enemy_level: ").Append(map.EnemyLevel).Append('\n');
+        if (map.Exits.Count > 0)
+        {
+            sb.Append("exit: ").Append(string.Join(' ', map.Exits)).Append('\n');
+        }
+
+        if (map.ProtectId is not null)
+        {
+            sb.Append("protect: ").Append(map.ProtectId).Append('\n');
+        }
+
         if (map.CheapShotsAllowed)
         {
             sb.Append("cheap_shots: allowed\n");
@@ -102,13 +112,15 @@ public static class MapFormat
             var recall = ParseInt(header, "recall", 0, 99, required: false, fallback: MapDefinition.DefaultRecallCharges);
             var enemyLevel = ParseInt(header, "enemy_level", Unit.MinLevel, Unit.MaxLevel, required: false, fallback: MapDefinition.DefaultEnemyLevel);
             var cheapShots = ParseCheapShots(header);
+            var exits = ParseExits(header, width, height);
+            var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
 
             SkipBlankLines();
             var terrain = ParseGrid(width, height);
             SkipBlankLines();
             var placements = ParseUnits(width, height, terrain);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect);
             Validate(map);
             return map;
         }
@@ -205,6 +217,40 @@ public static class MapFormat
             }
 
             return value;
+        }
+
+        /// <summary>The <c>exit:</c> header: tiles separated by spaces, each inside the grid, none twice.</summary>
+        private ValueList<Coord> ParseExits(Dictionary<string, (string Value, int Line)> header, int width, int height)
+        {
+            if (!header.TryGetValue("exit", out var entry))
+            {
+                return ValueList<Coord>.Empty;
+            }
+
+            var exits = new List<Coord>();
+            foreach (var token in entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var parts = token.Split(',');
+                if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y))
+                {
+                    throw ErrorAt(entry.Line, $"exit must list tiles as x,y separated by spaces, got '{token}'");
+                }
+
+                var at = new Coord(x, y);
+                if (x < 0 || y < 0 || x >= width || y >= height)
+                {
+                    throw ErrorAt(entry.Line, $"exit {at} is outside the {width}x{height} grid");
+                }
+
+                if (exits.Contains(at))
+                {
+                    throw ErrorAt(entry.Line, $"exit {at} is listed twice");
+                }
+
+                exits.Add(at);
+            }
+
+            return ValueList<Coord>.From(exits);
         }
 
         private bool ParseCheapShots(Dictionary<string, (string Value, int Line)> header)
@@ -456,6 +502,22 @@ public static class MapFormat
             if (map.Win == WinCondition.DefeatBoss && !map.Placements.Any(p => p is EnemyPlacement { IsBoss: true }))
             {
                 throw new MapException(_file, 0, "win is defeat_boss but there is no B line");
+            }
+
+            var slots = map.Placements.Count(p => p is PlayerPlacement);
+            if (map.Win == WinCondition.Escape && map.Exits.Count < slots)
+            {
+                throw new MapException(_file, 0, $"win is escape but there are {map.Exits.Count} exit tiles for {slots} player slots; every deployed unit needs one to stand on");
+            }
+
+            if (map.Win != WinCondition.Escape && map.Exits.Count > 0)
+            {
+                throw new MapException(_file, 0, $"exit tiles are only for win: escape, and this map's win is {MapRenderer.WinName(map.Win)}");
+            }
+
+            if (map.ProtectId is { } protect && !map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == protect))
+            {
+                throw new MapException(_file, 0, $"protect names '{protect}' but no 'P recruit:{protect}' line places them");
             }
         }
     }

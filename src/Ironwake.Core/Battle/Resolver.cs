@@ -17,6 +17,13 @@ public static class Resolver
         var events = new List<GameEvent>();
         BattleState next;
         Rejection? rejection;
+        if (command is not Recall && state.Outcome is { IsOver: true } outcome)
+        {
+            var verdict = outcome.Result == BattleResult.Won ? "won" : "lost";
+            return new ApplyResult(state, ValueList<GameEvent>.Empty, new Rejection(
+                RejectionReason.BattleOver, $"the battle is {verdict} ({outcome.Reason}); only Recall is left"));
+        }
+
         switch (command)
         {
             case Move move:
@@ -34,7 +41,7 @@ public static class Resolver
                 (next, rejection) = ApplyWait(state, wait, events);
                 break;
             case EndPhase:
-                (next, rejection) = ApplyEndPhase(state, events);
+                (next, rejection) = ApplyEndPhase(state, content, events);
                 break;
             case Recall recall:
                 return ApplyRecall(state, recall);
@@ -177,20 +184,88 @@ public static class Resolver
         return (state.WithUnit(unit with { Moved = true, Acted = true }), null);
     }
 
-    private static (BattleState, Rejection?) ApplyEndPhase(BattleState state, List<GameEvent> events)
+    /// <summary>
+    /// Flips the phase, increments the turn after the enemy phase, clears every flag, and
+    /// heals the units of the side whose phase begins that stand on healing terrain
+    /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
+    /// max, reported as the amount actually gained; a unit at full HP is not reported.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyEndPhase(BattleState state, GameContent content, List<GameEvent> events)
     {
         var ended = state.Phase;
         var nextPhase = ended == Side.Player ? Side.Enemy : Side.Player;
         var nextTurn = ended == Side.Enemy ? state.Turn + 1 : state.Turn;
+        events.Add(new PhaseEnded(ended, state.Turn));
+        events.Add(new PhaseBegan(nextPhase, nextTurn));
         var units = new List<BattleUnit>(state.Units.Count);
         foreach (var unit in state.Units)
         {
-            units.Add(unit with { Moved = false, Acted = false });
+            var hp = unit.Hp;
+            if (unit.Side == nextPhase)
+            {
+                var max = unit.MaxHp(content);
+                var percent = state.Map.TerrainAt(unit.At, content).HealPercent;
+                hp = Math.Min(max, hp + max * percent / 100);
+                if (hp > unit.Hp)
+                {
+                    events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
+                }
+            }
+
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false });
         }
 
-        events.Add(new PhaseEnded(ended, state.Turn));
-        events.Add(new PhaseBegan(nextPhase, nextTurn));
         return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) }, null);
+    }
+
+    /// <summary>
+    /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
+    /// in a fixed order: for each unacted unit of the acting side in id order, its Moves
+    /// (row-major, own tile excluded), its Attacks (targets in id order), then Wait; then
+    /// EndPhase. Empty once the battle is over. The random player of gates 2 and 8 draws
+    /// from this list, so a command it picks is legal by construction.
+    /// </summary>
+    public static IEnumerable<Command> Legal(BattleState state, GameContent content)
+    {
+        if (state.Outcome.IsOver)
+        {
+            yield break;
+        }
+
+        foreach (var unit in state.UnitsOf(state.Phase))
+        {
+            if (unit.Acted)
+            {
+                continue;
+            }
+
+            if (!unit.Moved)
+            {
+                foreach (var to in state.ReachOf(unit, content).Destinations)
+                {
+                    if (to != unit.At)
+                    {
+                        yield return new Move(unit.Id, to);
+                    }
+                }
+            }
+
+            var weapon = unit.EquippedWeapon(content);
+            if (weapon is not null)
+            {
+                foreach (var target in state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player))
+                {
+                    if (weapon.InRange(unit.At.DistanceTo(target.At)))
+                    {
+                        yield return new Attack(unit.Id, target.Id);
+                    }
+                }
+            }
+
+            yield return new Wait(unit.Id);
+        }
+
+        yield return new EndPhase();
     }
 
     private static ApplyResult ApplyRecall(BattleState state, Recall recall)
