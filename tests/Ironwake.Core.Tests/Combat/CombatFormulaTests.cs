@@ -15,6 +15,34 @@ public class CombatFormulaTests
     }
 
     [Fact]
+    public void ABrokenWeaponFightsAtMinusFiveMtAndMinusTenHitFlooredAtZeroMt()
+    {
+        var broken = new Combatant(Wren, Cadet, IronSword, Plain, 20, 0, broken: true);
+
+        Assert.Equal(0, Core.Combat.Mt(broken));
+        Assert.Equal(7, Core.Combat.Atk(broken, BrigandInForest()));
+        Assert.Equal(4, Core.Combat.Damage(broken, BrigandInForest()));
+        Assert.Equal(88, Core.Combat.Hit(broken));
+        Assert.Equal(98, Core.Combat.Hit(WrenOnPlain()));
+        Assert.Equal(2, Core.Combat.Mt(new Combatant(Brigand, Reaver, HeavyAxe, Forest, 22, 0, broken: true)));
+        Assert.False(new Combatant(Wren, Cadet, null, Plain, 20, 0, broken: true).Broken);
+    }
+
+    [Theory]
+    [InlineData(6, 0, 8)]
+    [InlineData(6, 2, 10)]
+    [InlineData(7, 3, 11)]
+    [InlineData(0, 0, 5)]
+    public void FaithHealIsHalfMagPlusFivePlusTheSpellBase(int mag, int healBase, int expected)
+    {
+        var salve = new Weapon("salve", "Salve", WeaponType.Faith, 0, 100, 0, 2, 1, 1, 8, ValueList<MovementType>.Empty, Heals: true, HealBase: healBase);
+        var healer = new Combatant(Hexer with { Stats = Hexer.Stats with { Mag = mag } }, Adept, null, Plain, 16);
+
+        Assert.Equal(expected, Core.Combat.Heal(healer, salve));
+        Assert.Throws<ArgumentException>(() => Core.Combat.Heal(healer, Spark));
+    }
+
+    [Fact]
     public void AttackSpeedIsSpeedMinusBurdenAndMayGoNegative()
     {
         Assert.Equal(4, Core.Combat.AttackSpeed(WrenOnPlain()));

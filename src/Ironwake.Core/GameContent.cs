@@ -7,13 +7,15 @@ namespace Ironwake.Core;
 /// validated; it never reads files itself. Lookups by id throw a <see cref="KeyNotFoundException"/>
 /// naming the id, since a missing id after validation is a programming error.
 /// <see cref="WakeRadius"/> is the Guard wake radius of DESIGN.md section 8, in tiles,
-/// Manhattan: one number for every map, read from <c>rules.json</c>.
+/// Manhattan: one number for every map, read from <c>rules.json</c>. <see cref="Items"/>
+/// are the consumables of <c>items.json</c>; an inventory entry names a weapon or an item.
 /// </summary>
 public sealed record GameContent(
     ImmutableSortedDictionary<string, UnitClass> Classes,
     ImmutableSortedDictionary<string, Weapon> Weapons,
     ImmutableSortedDictionary<string, Terrain> Terrain,
     ImmutableSortedDictionary<string, Unit> Units,
+    ImmutableSortedDictionary<string, Item> Items,
     int WakeRadius)
 {
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
@@ -26,6 +28,8 @@ public sealed record GameContent(
     public Terrain TerrainById(string id) => Lookup(Terrain, id, "terrain");
 
     public Unit Unit(string id) => Lookup(Units, id, "unit");
+
+    public Item Item(string id) => Lookup(Items, id, "item");
 
     /// <summary>Finds the terrain drawn with a glyph, or null if no terrain uses it.</summary>
     public Terrain? TerrainByGlyph(char glyph)
@@ -52,10 +56,11 @@ public sealed record GameContent(
         && DictEquals(Weapons, other.Weapons)
         && DictEquals(Terrain, other.Terrain)
         && DictEquals(Units, other.Units)
+        && DictEquals(Items, other.Items)
         && WakeRadius == other.WakeRadius;
 
     public override int GetHashCode() =>
-        HashCode.Combine(Classes.Count, Weapons.Count, Terrain.Count, Units.Count, WakeRadius);
+        HashCode.Combine(Classes.Count, Weapons.Count, Terrain.Count, Units.Count, Items.Count, WakeRadius);
 
     private static bool DictEquals<T>(ImmutableSortedDictionary<string, T> a, ImmutableSortedDictionary<string, T> b)
     {

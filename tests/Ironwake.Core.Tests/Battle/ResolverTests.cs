@@ -159,16 +159,6 @@ public class ResolverTests
     }
 
     [Fact]
-    public void UseItemIsRefusedOutLoudUntilIssue9()
-    {
-        var rejection = Start().Refused(new UseItem("hale", 0));
-
-        Assert.Equal(RejectionReason.NotAvailable, rejection.Reason);
-        Assert.Equal("hale cannot use an item: items are not in this build (issue 9)", rejection.Message);
-        Assert.Equal(RejectionReason.NoSuchUnit, Start().Refused(new UseItem("nobody", 0)).Reason);
-    }
-
-    [Fact]
     public void WaitEndsTheActionAndCannotBeRepeated()
     {
         var result = Start().Try(new Wait("hale"));

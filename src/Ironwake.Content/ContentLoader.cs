@@ -35,7 +35,8 @@ public static class ContentLoader
             ReadFile(contentRoot, ContentFiles.TerrainName),
             unitFiles.Select(p => new ContentFile(
                 ContentFiles.UnitsDirectory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList(),
-            ReadFile(contentRoot, ContentFiles.RulesName));
+            ReadFile(contentRoot, ContentFiles.RulesName),
+            ReadFile(contentRoot, ContentFiles.ItemsName));
 
         return Parse(files);
     }
@@ -46,9 +47,40 @@ public static class ContentLoader
         var terrain = ParseTerrain(files.Terrain);
         var classes = ParseClasses(files.Classes);
         var weapons = ParseWeapons(files.Weapons);
-        var units = ParseUnits(files.Units, classes, weapons);
+        var items = ParseItems(files.Items, weapons);
+        var units = ParseUnits(files.Units, classes, weapons, items);
         var wakeRadius = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, wakeRadius);
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius);
+    }
+
+    /// <summary>The consumables of DESIGN.md section 5 (issue 9): each heals its user and has a number of uses. An id shared with a weapon is refused, since an inventory entry names either.</summary>
+    private static ImmutableSortedDictionary<string, Item> ParseItems(ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons)
+    {
+        var entries = Entries(file, "items");
+        var builder = ImmutableSortedDictionary.CreateBuilder<string, Item>(StringComparer.Ordinal);
+        foreach (var node in entries)
+        {
+            if (weapons.ContainsKey(node.Entry!))
+            {
+                throw node.Error("id", $"'{node.Entry}' is already a weapon");
+            }
+
+            var heals = node.Int("heals");
+            if (heals < 1)
+            {
+                throw node.Error("heals", "must be at least 1");
+            }
+
+            var uses = node.Int("uses");
+            if (uses < 1)
+            {
+                throw node.Error("uses", "must be at least 1");
+            }
+
+            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses));
+        }
+
+        return builder.ToImmutable();
     }
 
     /// <summary>
@@ -373,7 +405,8 @@ public static class ContentLoader
     private static ImmutableSortedDictionary<string, Unit> ParseUnits(
         IReadOnlyList<ContentFile> files,
         ImmutableSortedDictionary<string, UnitClass> classes,
-        ImmutableSortedDictionary<string, Weapon> weapons)
+        ImmutableSortedDictionary<string, Weapon> weapons,
+        ImmutableSortedDictionary<string, Item> items)
     {
         var builder = ImmutableSortedDictionary.CreateBuilder<string, Unit>(StringComparer.Ordinal);
         var origin = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -389,7 +422,7 @@ public static class ContentLoader
                 }
 
                 origin[node.Entry!] = file.Name;
-                builder.Add(node.Entry!, ParseUnit(node, classes, weapons));
+                builder.Add(node.Entry!, ParseUnit(node, classes, weapons, items));
             }
         }
 
@@ -399,7 +432,8 @@ public static class ContentLoader
     private static Unit ParseUnit(
         EntryNode node,
         ImmutableSortedDictionary<string, UnitClass> classes,
-        ImmutableSortedDictionary<string, Weapon> weapons)
+        ImmutableSortedDictionary<string, Weapon> weapons,
+        ImmutableSortedDictionary<string, Item> knownItems)
     {
         var classId = node.String("class");
         if (!classes.ContainsKey(classId))
@@ -454,15 +488,24 @@ public static class ContentLoader
 
             var itemNode = new EntryNode(node.File, node.Entry, element);
             var itemId = itemNode.String("item");
-            if (!weapons.TryGetValue(itemId, out var weapon))
+            int maxUses;
+            if (weapons.TryGetValue(itemId, out var weapon))
             {
-                throw node.Error(field + ".item", $"unknown item '{itemId}'");
+                maxUses = weapon.Durability;
+            }
+            else if (knownItems.TryGetValue(itemId, out var known))
+            {
+                maxUses = known.Uses;
+            }
+            else
+            {
+                throw node.Error(field + ".item", $"unknown item '{itemId}': not a weapon in weapons.json or an item in items.json");
             }
 
-            var uses = itemNode.IntOr("uses", weapon.Durability);
-            if (uses < 1 || uses > weapon.Durability)
+            var uses = itemNode.IntOr("uses", maxUses);
+            if (uses < 1 || uses > maxUses)
             {
-                throw node.Error(field + ".uses", $"must be 1..{weapon.Durability} for '{itemId}'");
+                throw node.Error(field + ".uses", $"must be 1..{maxUses} for '{itemId}'");
             }
 
             items.Add(new ItemStack(itemId, uses));

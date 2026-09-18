@@ -1,0 +1,5 @@
+{
+  "items": [
+    { "id": "field_dressing", "name": "Field Dressing", "heals": 10, "uses": 3 }
+  ]
+}

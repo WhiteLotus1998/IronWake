@@ -31,6 +31,15 @@ public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEv
 
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 
+/// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>
+public sealed record ItemUsed(string UnitId, string ItemId, string TargetId, int UsesLeft) : GameEvent;
+
+/// <summary>A physical weapon reached zero uses on this strike; it stays in the inventory and fights at the section 5 fallback.</summary>
+public sealed record WeaponBroke(string UnitId, string ItemId) : GameEvent;
+
+/// <summary>A spell's last use this battle was spent; it refreshes at the next map.</summary>
+public sealed record SpellSpent(string UnitId, string ItemId) : GameEvent;
+
 /// <summary>Why a Guard group woke (DESIGN.md section 8), the loudest cause first.</summary>
 public enum WakeCause
 {

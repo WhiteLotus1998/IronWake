@@ -27,24 +27,27 @@ public class CliPlayTests
     }
 
     [Fact]
-    public void PlayPrintsTheMissingSystemsLineFirst()
+    public void PlayPrintsTheRosterNoticeFirst()
     {
         var output = Play(out var exit, "");
 
         Assert.StartsWith(PlaySession.MissingSystems + "\n", output);
-        Assert.Contains("no items (issue 9)", output);
+        Assert.DoesNotContain("issue 9", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);
         Assert.All(output, c => Assert.True(c < 128, "non-ASCII character in CLI output"));
     }
 
     [Fact]
-    public void ItemRefusesOutLoudAndHelpListsItUnavailable()
+    public void ItemUsesADressingAfterACombatAndHelpListsIt()
     {
-        var output = Play(out _, "item captain 0\nhelp\n");
+        var output = Play(out _, "item captain 1\nmove captain 2,6\nend\nend\nitem captain 1\nshow captain\nhelp\n");
 
-        Assert.Contains("> item captain 0\nERROR: item is not in this build: items land with issue 9", output);
-        Assert.Contains("unavailable in this build:\n  item <unit> <slot> [target]   items land with issue 9", output);
+        Assert.Contains("> item captain 1\nERROR: captain is at full HP\n", output);
+        Assert.Contains("> item captain 1\ncaptain uses field_dressing (2 left)\ncaptain heals 10 (hp 22)\n", output);
+        Assert.Contains("  items: 0: Iron Sword x38, 1: Field Dressing x2\n", output);
+        Assert.Contains("  item <unit> <slot> [ally] use the item in a slot", output);
+        Assert.DoesNotContain("unavailable", output);
     }
 
     [Theory]
@@ -54,6 +57,8 @@ public class CliPlayTests
     [InlineData("wait", "ERROR: usage: wait <unit>")]
     [InlineData("end now", "ERROR: usage: end")]
     [InlineData("recall x", "ERROR: usage: recall <n>")]
+    [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
+    [InlineData("item captain 0", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
     [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target>")]
     [InlineData("show", "ERROR: usage: show <unit>")]
     [InlineData("reach", "ERROR: usage: reach <unit>")]

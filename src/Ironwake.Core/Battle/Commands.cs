@@ -14,8 +14,12 @@ public sealed record Move(string UnitId, Coord To) : Command;
 /// <summary>Attack an enemy within the unit's weapon range. Ends the unit's action.</summary>
 public sealed record Attack(string UnitId, string TargetId) : Command;
 
-/// <summary>Use an inventory item. Refused until issue 9; it exists so a script can be refused out loud.</summary>
-public sealed record UseItem(string UnitId, int Slot) : Command;
+/// <summary>
+/// Use the item in an inventory slot (section 7's Item action): a consumable heals its
+/// user and needs no target; a healing spell heals the ally named by <paramref name="TargetId"/>
+/// within its range. Ends the unit's action.
+/// </summary>
+public sealed record UseItem(string UnitId, int Slot, string? TargetId = null) : Command;
 
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
