@@ -1,0 +1,21 @@
+# Debug pass for issue 11 (DIALOGUE.md, fourth round): a scripted approach with no
+# player attacks on the mill group, over Old Mill Road, seed 7. The prediction is in
+# 2026-09-18-old_mill_road-7-debug.prediction.md, committed with this file ahead of the run.
+# turn 1
+move captain 1,4
+wait captain
+move wren 1,6
+wait wren
+end
+# turn 2
+move wren 2,6
+attack wren brigand-1
+move captain 4,3
+wait captain
+end
+# turn 3
+move captain 8,3
+wait captain
+move wren 1,3
+wait wren
+end
