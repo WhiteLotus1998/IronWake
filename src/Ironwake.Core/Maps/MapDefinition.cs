@@ -63,8 +63,8 @@ public sealed record MapDefinition(
 
     /// <summary>
     /// Who stands on a tile at the start of the map, seen from <paramref name="moverSide"/>.
-    /// Stands in for the battle state's answer until issue 6; the map view and the
-    /// <c>reach</c> command use it.
+    /// The map view and the <c>reach</c> command use it; during a battle
+    /// <see cref="BattleState.OccupantAt"/> answers from where units stand now.
     /// </summary>
     public Occupant OccupantAt(Coord at, Side moverSide) =>
         PlacementAt(at) switch
