@@ -53,13 +53,15 @@ public class CliPlayTests
     [Theory]
     [InlineData("move captain", "ERROR: usage: move <unit> <x,y>")]
     [InlineData("move captain 9", "ERROR: usage: move <unit> <x,y>")]
-    [InlineData("attack captain", "ERROR: usage: attack <unit> <target>")]
+    [InlineData("attack captain", "ERROR: usage: attack <unit> <target> [slot]")]
+    [InlineData("attack captain brigand-1 x", "ERROR: usage: attack <unit> <target> [slot]")]
+    [InlineData("forecast captain brigand-1 1", "ERROR: captain cannot attack with slot 1 (field_dressing): an item, not a weapon")]
     [InlineData("wait", "ERROR: usage: wait <unit>")]
     [InlineData("end now", "ERROR: usage: end")]
     [InlineData("recall x", "ERROR: usage: recall <n>")]
     [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
     [InlineData("item captain 0", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
-    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target>")]
+    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot]")]
     [InlineData("show", "ERROR: usage: show <unit>")]
     [InlineData("reach", "ERROR: usage: reach <unit>")]
     [InlineData("dance", "ERROR: unknown command 'dance'; type help")]
@@ -100,11 +102,11 @@ public class CliPlayTests
     [Fact]
     public void TheForecastPrintsBeforeAnAttackAndEventsRenderStrikeByStrike()
     {
-        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1\nshow wren\nrecall 0\n");
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 0\nshow wren\nrecall 0\n");
 
         Assert.Contains("captain moves 1,8 -> 1,4 via 1,7 1,6 1,5\n", output);
         Assert.Contains("> forecast wren brigand-1\nforecast wren -> brigand-1: dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
-        Assert.Contains("> attack wren brigand-1\nforecast wren -> brigand-1:", output);
+        Assert.Contains("> attack wren brigand-1 0\nforecast wren -> brigand-1:", output);
         Assert.Contains("wren attacks brigand-1\n  wren hits brigand-1 for 10", output);
         Assert.Contains("> show wren\nwren: wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
         Assert.Contains("weapon: Iron Sword (mt 5 hit 90 crit 0 wt 5 range 1-1)\n", output);

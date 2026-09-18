@@ -21,12 +21,12 @@ public sealed class PlaySession
     private const string Help = """
         commands:
           move <unit> <x,y>        move a unit to a tile in its reach
-          attack <unit> <target>   attack an enemy in range (the forecast prints first)
+          attack <unit> <target> [slot]  attack an enemy in range, with the weapon in a slot (the forecast prints first)
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           end                      end the player phase; the enemy phase plays out
           recall <n>               rewind to history state n (spends a charge)
-          forecast <unit> <target> show the forecast without attacking
+          forecast <unit> <target> [slot]  show the forecast without attacking
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
           map                      show the board
@@ -150,15 +150,16 @@ public sealed class PlaySession
             case "move":
                 Error("usage: move <unit> <x,y>");
                 break;
-            case "attack" when words.Length == 3:
-                if (PrintForecast(words[1], words[2]))
+            case "attack" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
+                var attackSlot = words.Length == 4 ? int.Parse(words[3]) : (int?)null;
+                if (PrintForecast(words[1], words[2], attackSlot))
                 {
-                    Apply(new Attack(words[1], words[2]));
+                    Apply(new Attack(words[1], words[2], attackSlot));
                 }
 
                 break;
             case "attack":
-                Error("usage: attack <unit> <target>");
+                Error("usage: attack <unit> <target> [slot]");
                 break;
             case "wait" when words.Length == 2:
                 Apply(new Wait(words[1]));
@@ -188,11 +189,11 @@ public sealed class PlaySession
             case "item":
                 Error("usage: item <unit> <slot> [ally]");
                 break;
-            case "forecast" when words.Length == 3:
-                PrintForecast(words[1], words[2]);
+            case "forecast" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
+                PrintForecast(words[1], words[2], words.Length == 4 ? int.Parse(words[3]) : null);
                 break;
             case "forecast":
-                Error("usage: forecast <unit> <target>");
+                Error("usage: forecast <unit> <target> [slot]");
                 break;
             case "reach" when words.Length == 2:
                 if (Find(words[1]) is { } mover)
@@ -282,17 +283,18 @@ public sealed class PlaySession
         }
     }
 
-    private bool PrintForecast(string unitId, string targetId)
+    private bool PrintForecast(string unitId, string targetId, int? slot)
     {
         if (Find(unitId) is not { } unit || Find(targetId) is not { } target)
         {
             return false;
         }
 
-        var forecast = Queries.Forecast(_state, _content, unit, target);
+        var forecast = Queries.Forecast(_state, _content, unit, target, slot);
         if (forecast is null)
         {
-            Error($"{unit.Id} cannot attack {target.Id} from {unit.At}");
+            var (_, _, rejection) = Resolver.ChooseWeapon(unit, _content, slot);
+            Error(rejection?.Message ?? $"{unit.Id} cannot attack {target.Id} from {unit.At}");
             return false;
         }
 
@@ -348,7 +350,7 @@ public sealed class PlaySession
     private static string Describe(Command command) => command switch
     {
         Move m => $"move {m.UnitId} {m.To}",
-        Attack a => $"attack {a.UnitId} {a.TargetId}",
+        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + a.Slot),
         Wait w => $"wait {w.UnitId}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -395,6 +397,8 @@ public sealed class PlaySession
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:
                 return $"{i.UnitId} uses {i.ItemId}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
+            case WeaponEquipped w:
+                return $"{w.UnitId} equips {w.ItemId}";
             case WeaponBroke b:
                 return $"{b.UnitId}'s {b.ItemId} breaks";
             case SpellSpent s:

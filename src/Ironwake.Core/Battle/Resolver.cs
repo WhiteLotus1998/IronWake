@@ -200,18 +200,24 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotAnEnemy, $"{target.Id} is on {unit.Id}'s own side"));
         }
 
-        var weapon = unit.EquippedWeapon(content);
-        if (weapon is null)
+        var (armed, weapon, choice) = ChooseWeapon(unit, content, attack.Slot);
+        if (choice is not null)
         {
-            return (state, new Rejection(RejectionReason.NoWeapon, $"{unit.Id} has no weapon to attack with"));
+            return (state, choice);
         }
 
+        unit = armed;
         var distance = unit.At.DistanceTo(target.At);
-        if (!weapon.InRange(distance))
+        if (!weapon!.InRange(distance))
         {
             return (state, new Rejection(
                 RejectionReason.OutOfRange,
                 $"{target.Id} at {target.At} is {distance} tiles from {unit.Id} at {unit.At}; {weapon.Name} reaches {weapon.MinRange}-{weapon.MaxRange}"));
+        }
+
+        if (attack.Slot is { } chosen && chosen != state.Find(unit.Id)!.EquippedSlot(content))
+        {
+            events.Add(new WeaponEquipped(unit.Id, weapon.Id));
         }
 
         var result = CombatResolver.Resolve(
@@ -242,6 +248,41 @@ public static class Resolver
         }
 
         return (next, null);
+    }
+
+    /// <summary>
+    /// The unit as it strikes and the weapon it strikes with: the equipped weapon, or the
+    /// weapon in <paramref name="slot"/> moved to the front. A slot that holds no usable
+    /// weapon (empty, an item, a healing spell, a spent spell) is refused by name.
+    /// </summary>
+    public static (BattleUnit Unit, Weapon? Weapon, Rejection? Rejection) ChooseWeapon(BattleUnit unit, GameContent content, int? slot)
+    {
+        if (slot is null)
+        {
+            var equipped = unit.EquippedWeapon(content);
+            return equipped is null
+                ? (unit, null, new Rejection(RejectionReason.NoWeapon, $"{unit.Id} has no weapon to attack with"))
+                : (unit, equipped, null);
+        }
+
+        var count = unit.Unit.Inventory.Count;
+        if (slot < 0 || slot >= count)
+        {
+            return (unit, null, new Rejection(RejectionReason.EmptySlot, $"{unit.Id} has nothing in slot {slot}; slots run 0-{count - 1}"));
+        }
+
+        var weapon = unit.UsableWeaponAt(content, slot.Value);
+        if (weapon is null)
+        {
+            var itemId = unit.Unit.Inventory.Items[slot.Value].ItemId;
+            var why = content.Items.ContainsKey(itemId) ? "an item, not a weapon"
+                : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
+                : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
+                : $"not a weapon a {unit.Unit.ClassId} can use";
+            return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with slot {slot} ({itemId}): {why}"));
+        }
+
+        return (unit.WithSlotInFront(slot.Value), weapon, null);
     }
 
     /// <summary>
@@ -478,7 +519,8 @@ public static class Resolver
     /// <summary>
     /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
     /// in a fixed order: for each unacted unit of the acting side in id order, its Moves
-    /// (row-major, own tile excluded), its Attacks (targets in id order), its item uses
+    /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
+    /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
     /// something would heal), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
@@ -509,16 +551,9 @@ public static class Resolver
                 }
             }
 
-            var weapon = unit.EquippedWeapon(content);
-            if (weapon is not null)
+            foreach (var attack in LegalAttacks(state, content, unit))
             {
-                foreach (var target in state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player))
-                {
-                    if (weapon.InRange(unit.At.DistanceTo(target.At)))
-                    {
-                        yield return new Attack(unit.Id, target.Id);
-                    }
-                }
+                yield return attack;
             }
 
             foreach (var use in LegalItemUses(state, content, unit))
@@ -530,6 +565,32 @@ public static class Resolver
         }
 
         yield return new EndPhase();
+    }
+
+    /// <summary>One Attack per target in range of the equipped weapon, slot unnamed; when the unit carries a second usable weapon, one per usable slot per target in its range, slots named.</summary>
+    private static IEnumerable<Attack> LegalAttacks(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var slots = new List<int>();
+        for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+        {
+            if (unit.UsableWeaponAt(content, slot) is not null)
+            {
+                slots.Add(slot);
+            }
+        }
+
+        var targets = state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player).ToList();
+        foreach (var slot in slots)
+        {
+            var weapon = unit.UsableWeaponAt(content, slot)!;
+            foreach (var target in targets)
+            {
+                if (weapon.InRange(unit.At.DistanceTo(target.At)))
+                {
+                    yield return slots.Count == 1 ? new Attack(unit.Id, target.Id) : new Attack(unit.Id, target.Id, slot);
+                }
+            }
+        }
     }
 
     private static IEnumerable<UseItem> LegalItemUses(BattleState state, GameContent content, BattleUnit unit)

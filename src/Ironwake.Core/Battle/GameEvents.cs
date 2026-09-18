@@ -34,6 +34,9 @@ public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 /// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>
 public sealed record ItemUsed(string UnitId, string ItemId, string TargetId, int UsesLeft) : GameEvent;
 
+/// <summary>An attack named a weapon slot other than the equipped one; the weapon is at the front of the inventory from now on.</summary>
+public sealed record WeaponEquipped(string UnitId, string ItemId) : GameEvent;
+
 /// <summary>A physical weapon reached zero uses on this strike; it stays in the inventory and fights at the section 5 fallback.</summary>
 public sealed record WeaponBroke(string UnitId, string ItemId) : GameEvent;
 
