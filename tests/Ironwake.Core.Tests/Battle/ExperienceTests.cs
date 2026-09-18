@@ -110,7 +110,8 @@ public class ExperienceTests
             Assert.Equal(Experience.ForCombat(1, 1, landed: true, killed: fought.AttackerHpAfter == 0, boss: false), gained.Amount);
         }
 
-        Assert.Equal(0, result.Next.Find("brigand-1")!.Unit.Exp);
+        Assert.DoesNotContain(result.Events, e => e is ExpGained { UnitId: "brigand-1" } or LeveledUp { UnitId: "brigand-1" });
+        Assert.Equal(0, result.Next.Find("brigand-1")?.Unit.Exp ?? 0);
     }
 
     [Fact]
