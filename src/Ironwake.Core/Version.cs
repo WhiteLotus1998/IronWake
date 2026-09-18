@@ -7,5 +7,5 @@ namespace Ironwake.Core;
 public static class RulesVersion
 {
     /// <summary>Incremented whenever a change alters how a command resolves.</summary>
-    public const int Current = 0;
+    public const int Current = 1;
 }
