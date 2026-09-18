@@ -29,25 +29,43 @@ public sealed record BattleUnit(
     public int MaxHp(GameContent content) => Unit.EffectiveStats(content.Class(Unit.ClassId)).Hp;
 
     /// <summary>
-    /// The weapon the unit strikes with: the first inventory item that is a weapon its
-    /// class can use and that is not a healing spell. Null when it has none, in which
-    /// case it can neither attack nor counter. Issue 9 adds explicit equipping.
+    /// The inventory slot of the weapon the unit strikes with: the first item that is a
+    /// weapon its class can use and that is not a healing spell, skipping a spell with no
+    /// uses left this battle (section 5: a physical weapon at zero uses still fights,
+    /// broken; a spent spell does not). -1 when there is none. Choosing another slot is
+    /// not in this build; the PR for issue 9 says why.
     /// </summary>
-    public Weapon? EquippedWeapon(GameContent content)
+    public int EquippedSlot(GameContent content)
     {
         var unitClass = content.Class(Unit.ClassId);
-        foreach (var item in Unit.Inventory.Items)
+        for (var slot = 0; slot < Unit.Inventory.Count; slot++)
         {
-            if (content.Weapons.TryGetValue(item.ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !weapon.Heals)
+            var item = Unit.Inventory.Items[slot];
+            if (content.Weapons.TryGetValue(item.ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !weapon.Heals
+                && (item.Uses > 0 || !weapon.IsMagic))
             {
-                return weapon;
+                return slot;
             }
         }
 
-        return null;
+        return -1;
     }
 
-    /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on.</summary>
+    /// <summary>The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.</summary>
+    public Weapon? EquippedWeapon(GameContent content)
+    {
+        var slot = EquippedSlot(content);
+        return slot < 0 ? null : content.Weapon(Unit.Inventory.Items[slot].ItemId);
+    }
+
+    /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>
+    public bool WeaponBroken(GameContent content)
+    {
+        var slot = EquippedSlot(content);
+        return slot >= 0 && Unit.Inventory.Items[slot].Uses == 0;
+    }
+
+    /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on, its weapon broken or whole.</summary>
     public Combatant ToCombatant(MapDefinition map, GameContent content) =>
-        new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), map.TerrainAt(At, content), Hp);
+        new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content));
 }

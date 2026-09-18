@@ -1,0 +1,18 @@
+move captain 2,6
+move wren 1,8
+end
+attack captain brigand-1
+end
+show captain
+item captain 1
+end
+move captain 5,5
+move wren 2,7
+end
+move captain 7,3
+move wren 5,5
+end
+end
+show captain
+item captain 1
+end

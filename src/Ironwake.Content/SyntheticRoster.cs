@@ -3,8 +3,8 @@ using Ironwake.Core;
 namespace Ironwake.Content;
 
 /// <summary>
-/// The player's roster until issue 13 writes the cast: five cadets with iron swords, the
-/// first the captain. The Sim and the CLI share it so a transcript and a gate describe
+/// The player's roster until issue 13 writes the cast: five cadets with iron swords and a
+/// field dressing each, the first the captain. The Sim and the CLI share it so a transcript and a gate describe
 /// the same party, and every output that uses it says so.
 /// </summary>
 public static class SyntheticRoster
@@ -19,5 +19,5 @@ public static class SyntheticRoster
         Cadet("recruit-4", new Stats(18, 5, 0, 8, 9, 5, 3, 3, 5)));
 
     private static Unit Cadet(string id, Stats stats) =>
-        new(id, id, "cadet", 1, 0, stats, Stats.Zero, new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 40))), ValueList<string>.Empty);
+        new(id, id, "cadet", 1, 0, stats, Stats.Zero, new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 40), new ItemStack("field_dressing", 3))), ValueList<string>.Empty);
 }

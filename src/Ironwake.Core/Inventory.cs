@@ -4,8 +4,8 @@ namespace Ironwake.Core;
 public readonly record struct ItemStack(string ItemId, int Uses);
 
 /// <summary>
-/// A five-slot inventory. The equipped weapon is the first slot holding a weapon the
-/// unit's class can use; issue 9 adds explicit equipping and consumables.
+/// A five-slot inventory. The equipped weapon is the first slot holding a usable weapon
+/// (<see cref="BattleUnit.EquippedSlot"/>); consumables are the entries of items.json.
 /// </summary>
 public sealed record Inventory
 {
@@ -32,4 +32,6 @@ public sealed record Inventory
     public Inventory Add(ItemStack item) => new(Items.Add(item));
 
     public Inventory RemoveAt(int index) => new(Items.RemoveAt(index));
+
+    public Inventory Replace(int index, ItemStack item) => new(Items.SetItem(index, item));
 }

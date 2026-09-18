@@ -89,7 +89,9 @@ Only `CritChance` is clamped. `CritAvoid` is not: a modifier (rivalry in 13.1 is
 
 **Ranges.** Melee 1; Bows 2 (2–3 with Phase 3 abilities); Reason/Faith 1–2. A unit with only a 2-range weapon cannot counter at 1, and vice versa.
 
-**Durability.** Physical weapons have uses and break at 0 (broken weapons stay in inventory, usable at −5 Mt / −10 hit as a "broken" fallback so units are never helpless; repair comes with the between-map screen). Spells have uses per battle that fully refresh each map.
+**Durability.** Physical weapons have uses and break at 0 (broken weapons stay in inventory, usable at −5 Mt / −10 hit as a "broken" fallback so units are never helpless; repair comes with the between-map screen). Every strike a unit makes spends one use, landed or not, so a swing costs the same whether it hits (issue 9). Spells have uses per battle that fully refresh each map; a spell at 0 is not cast again this battle, and a unit whose only weapon is a spent spell is unarmed until the next map, since the broken fallback is for steel, not for words (DECISIONS/0018).
+
+**Items.** A unit's five slots hold weapons, spells, and consumables; the equipped weapon is the first slot holding a usable weapon that is not a healing spell (choosing another slot is not in v1; DECISIONS/0018). Consumables live in `items.json` (`id`, `name`, `heals`, `uses`); the first is the Field Dressing (heals 10, 3 uses), an original name, since the content standards forbid franchise names. Section 7's Item action uses one slot: a consumable heals its user and needs no target; a healing spell heals one ally within its range. Either spends a use and ends the action; a consumable at 0 leaves the inventory. Healing a unit already at full HP is refused, so no script burns a use on nothing, and the legal-command list offers an item use only where something would heal.
 
 **Healing.** Faith heal = Mag / 2 + 5 + spell base. Healer gains 11 EXP per heal, +5 if the target was below 50%.
 

@@ -272,6 +272,7 @@ public class ValidationTests
     [InlineData(", \"inventory\": [ { \"item\": \"stick\" } ]", "inventory[0].item")]
     [InlineData(", \"inventory\": [ { \"item\": \"iron_sword\", \"uses\": 41 } ]", "inventory[0].uses")]
     [InlineData(", \"inventory\": [ { \"item\": \"iron_sword\", \"uses\": 0 } ]", "inventory[0].uses")]
+    [InlineData(", \"inventory\": [ { \"item\": \"field_dressing\", \"uses\": 4 } ]", "inventory[0].uses")]
     [InlineData(", \"inventory\": [ \"iron_sword\" ]", "inventory[0]")]
     [InlineData(", \"inventory\": [ { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\" } ]", "inventory")]
     [InlineData(", \"abilities\": [1]", "abilities")]
@@ -337,6 +338,27 @@ public class ValidationTests
         var e = Fails(Fixture.Files(rules: "{ }"));
 
         AssertNames(e, ContentFiles.RulesName, null, "wakeRadius");
+    }
+
+    [Theory]
+    [InlineData("{ \"items\": [ { \"id\": \"iron_sword\", \"name\": \"Sword\", \"heals\": 1, \"uses\": 1 } ] }", "id")]
+    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 0, \"uses\": 1 } ] }", "heals")]
+    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 1, \"uses\": 0 } ] }", "uses")]
+    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 1 } ] }", "uses")]
+    public void ItemFieldRulesFire(string items, string expectedField)
+    {
+        var e = Fails(Fixture.Files(items: items));
+
+        AssertNames(e, ContentFiles.ItemsName, items.Contains("iron_sword") ? "iron_sword" : "x", expectedField);
+    }
+
+    [Fact]
+    public void AnInventoryEntryMayNameAnItemAndDefaultsToItsUses()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(units: UnitWith(Recruit(", \"inventory\": [ { \"item\": \"iron_sword\" }, { \"item\": \"field_dressing\" } ]"))));
+
+        Assert.Equal(new ItemStack("field_dressing", 3), content.Unit("u").Inventory.Items[1]);
+        Assert.Equal(new Item("field_dressing", "Field Dressing", 10, 3), content.Item("field_dressing"));
     }
 
     [Fact]

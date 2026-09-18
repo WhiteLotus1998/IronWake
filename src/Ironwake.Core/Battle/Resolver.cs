@@ -33,9 +33,7 @@ public static class Resolver
                 (next, rejection) = ApplyAttack(state, content, attack, events);
                 break;
             case UseItem item:
-                var actor = Acting(state, item.UnitId, out rejection);
-                next = state;
-                rejection ??= new Rejection(RejectionReason.NotAvailable, $"{actor!.Id} cannot use an item: items are not in this build (issue 9)");
+                (next, rejection) = ApplyUseItem(state, content, item, events);
                 break;
             case Wait wait:
                 (next, rejection) = ApplyWait(state, wait, events);
@@ -225,8 +223,8 @@ public static class Resolver
             state.Scheme);
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
 
-        var attackerAfter = unit with { Hp = result.AttackerHp, Moved = true, Acted = true };
-        var targetAfter = target with { Hp = result.DefenderHp };
+        var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events);
+        var targetAfter = SpendDurability(target with { Hp = result.DefenderHp }, result.Strikes, content, events);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
         var next = state.WithUnit(attackerAfter);
@@ -244,6 +242,157 @@ public static class Resolver
         }
 
         return (next, null);
+    }
+
+    /// <summary>
+    /// Section 5's durability: every strike a unit made in the combat, landed or not,
+    /// spends one use of the weapon it struck with, never below zero. The strike that
+    /// empties a physical weapon emits <see cref="WeaponBroke"/> and the weapon stays,
+    /// broken; the one that empties a spell emits <see cref="SpellSpent"/>.
+    /// </summary>
+    private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events)
+    {
+        var made = strikes.Count(s => s.AttackerId == unit.Id);
+        var slot = unit.EquippedSlot(content);
+        if (made == 0 || slot < 0)
+        {
+            return unit;
+        }
+
+        var stack = unit.Unit.Inventory.Items[slot];
+        if (stack.Uses == 0)
+        {
+            return unit;
+        }
+
+        var left = Math.Max(0, stack.Uses - made);
+        if (left == 0)
+        {
+            events.Add(content.Weapon(stack.ItemId).IsMagic ? new SpellSpent(unit.Id, stack.ItemId) : new WeaponBroke(unit.Id, stack.ItemId));
+        }
+
+        return unit with { Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Replace(slot, stack with { Uses = left }) } };
+    }
+
+    /// <summary>
+    /// Section 7's Item action. A consumable (an entry of <c>items.json</c>) heals its user
+    /// by its amount and needs no target; a healing spell heals the ally named as the
+    /// target, within the spell's range, by section 5's formula, and the healer earns
+    /// section 5's heal EXP. Either spends one use and ends the action; a consumable at
+    /// zero leaves the inventory, a spell at zero stays for the next map. Healing a unit
+    /// at full HP is refused, so no script burns a use on nothing.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyUseItem(BattleState state, GameContent content, UseItem use, List<GameEvent> events)
+    {
+        var unit = Acting(state, use.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        var inventory = unit.Unit.Inventory;
+        if (use.Slot < 0 || use.Slot >= inventory.Count)
+        {
+            return (state, new Rejection(RejectionReason.EmptySlot, $"{unit.Id} has nothing in slot {use.Slot}; slots run 0-{inventory.Count - 1}"));
+        }
+
+        var stack = inventory.Items[use.Slot];
+        if (content.Items.TryGetValue(stack.ItemId, out var item))
+        {
+            if (use.TargetId is not null && use.TargetId != unit.Id)
+            {
+                return (state, new Rejection(RejectionReason.NotUsable, $"{item.Name} heals its user; it cannot be used on {use.TargetId}"));
+            }
+
+            var max = unit.MaxHp(content);
+            if (unit.Hp >= max)
+            {
+                return (state, new Rejection(RejectionReason.NothingToHeal, $"{unit.Id} is at full HP"));
+            }
+
+            var hp = Math.Min(max, unit.Hp + item.Heals);
+            var left = stack.Uses - 1;
+            var after = left == 0 ? inventory.RemoveAt(use.Slot) : inventory.Replace(use.Slot, stack with { Uses = left });
+            events.Add(new ItemUsed(unit.Id, item.Id, unit.Id, left));
+            events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
+            return (state.WithUnit(unit with { Hp = hp, Moved = true, Acted = true, Unit = unit.Unit with { Inventory = after } }), null);
+        }
+
+        var spell = content.Weapon(stack.ItemId);
+        if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
+        }
+
+        if (stack.Uses == 0)
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
+        }
+
+        if (use.TargetId is null)
+        {
+            return (state, new Rejection(RejectionReason.NoTarget, $"{spell.Name} needs a target: item {unit.Id} {use.Slot} <ally>"));
+        }
+
+        var target = state.Find(use.TargetId);
+        if (target is null)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit '{use.TargetId}' to heal"));
+        }
+
+        if (target.Side != unit.Side)
+        {
+            return (state, new Rejection(RejectionReason.NotAnAlly, $"{target.Id} is not on {unit.Id}'s side"));
+        }
+
+        var distance = unit.At.DistanceTo(target.At);
+        if (!spell.InRange(distance))
+        {
+            return (state, new Rejection(
+                RejectionReason.OutOfRange,
+                $"{target.Id} at {target.At} is {distance} tiles from {unit.Id} at {unit.At}; {spell.Name} reaches {spell.MinRange}-{spell.MaxRange}"));
+        }
+
+        var targetMax = target.MaxHp(content);
+        if (target.Hp >= targetMax)
+        {
+            return (state, new Rejection(RejectionReason.NothingToHeal, $"{target.Id} is at full HP"));
+        }
+
+        var healed = Math.Min(targetMax, target.Hp + Combat.Heal(unit.ToCombatant(state.Map, content), spell));
+        var usesLeft = stack.Uses - 1;
+        events.Add(new ItemUsed(unit.Id, spell.Id, target.Id, usesLeft));
+        events.Add(new UnitHealed(target.Id, healed - target.Hp, healed));
+        if (usesLeft == 0)
+        {
+            events.Add(new SpellSpent(unit.Id, spell.Id));
+        }
+
+        var healer = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
+        healer = AwardHealExp(healer, target.Hp * 2 < targetMax, content, state.Seed, events);
+        var next = state.WithUnit(healer);
+        return (next.WithUnit(target with { Hp = healed }), null);
+    }
+
+    /// <summary>Section 5's healer EXP through the same level-up path as combat: player units only, nothing at the cap.</summary>
+    private static BattleUnit AwardHealExp(BattleUnit healer, bool targetBelowHalf, GameContent content, ulong seed, List<GameEvent> events)
+    {
+        if (healer.Side != Side.Player || healer.Unit.Level >= Unit.MaxLevel)
+        {
+            return healer;
+        }
+
+        var amount = Experience.ForHeal(targetBelowHalf);
+        var result = healer.Unit.GainExp(amount, content.Class(healer.Unit.ClassId), new KeyedRng(seed));
+        events.Add(new ExpGained(healer.Id, amount, result.Unit.Exp));
+        var hp = healer.Hp;
+        foreach (var levelUp in result.LevelUps)
+        {
+            events.Add(new LeveledUp(healer.Id, levelUp.NewLevel, levelUp.Gains));
+            hp += levelUp.Gains.Hp;
+        }
+
+        return healer with { Unit = result.Unit, Hp = hp };
     }
 
     /// <summary>
@@ -329,9 +478,11 @@ public static class Resolver
     /// <summary>
     /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
     /// in a fixed order: for each unacted unit of the acting side in id order, its Moves
-    /// (row-major, own tile excluded), its Attacks (targets in id order), then Wait; then
-    /// EndPhase. Empty once the battle is over. The random player of gates 2 and 8 draws
-    /// from this list, so a command it picks is legal by construction.
+    /// (row-major, own tile excluded), its Attacks (targets in id order), its item uses
+    /// (slots in order; a spell once per ally in range, allies in id order; only where
+    /// something would heal), then Wait; then EndPhase. Empty once the battle is over.
+    /// The random player of gates 2 and 8 draws from this list, so a command it picks is
+    /// legal by construction.
     /// </summary>
     public static IEnumerable<Command> Legal(BattleState state, GameContent content)
     {
@@ -370,10 +521,47 @@ public static class Resolver
                 }
             }
 
+            foreach (var use in LegalItemUses(state, content, unit))
+            {
+                yield return use;
+            }
+
             yield return new Wait(unit.Id);
         }
 
         yield return new EndPhase();
+    }
+
+    private static IEnumerable<UseItem> LegalItemUses(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
+        {
+            var stack = unit.Unit.Inventory.Items[slot];
+            if (content.Items.ContainsKey(stack.ItemId))
+            {
+                if (unit.Hp < unit.MaxHp(content))
+                {
+                    yield return new UseItem(unit.Id, slot);
+                }
+
+                continue;
+            }
+
+            var spell = content.Weapon(stack.ItemId);
+            if (!spell.Heals || !unitClass.CanUse(spell.Type) || stack.Uses == 0)
+            {
+                continue;
+            }
+
+            foreach (var ally in state.UnitsOf(unit.Side))
+            {
+                if (spell.InRange(unit.At.DistanceTo(ally.At)) && ally.Hp < ally.MaxHp(content))
+                {
+                    yield return new UseItem(unit.Id, slot, ally.Id);
+                }
+            }
+        }
     }
 
     private static ApplyResult ApplyRecall(BattleState state, Recall recall)

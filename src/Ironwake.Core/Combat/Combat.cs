@@ -10,6 +10,9 @@ public static class Combat
     public const int DoubleThreshold = 4;
     public const int CritMultiplier = 3;
     public const int EffectiveMultiplier = 3;
+    public const int BrokenMtPenalty = 5;
+    public const int BrokenHitPenalty = 10;
+    public const int HealBase = 5;
 
     public static int Burden(Combatant unit) =>
         unit.Weapon is null ? 0 : Math.Max(0, unit.Weapon.Wt - unit.Stats.Str / 5);
@@ -19,11 +22,18 @@ public static class Combat
     public static bool Doubles(Combatant attacker, Combatant target) =>
         AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
 
+    /// <summary>The weapon's Mt as this side fights with it: the content number, less 5 (floored at zero) when the weapon is broken.</summary>
+    public static int Mt(Combatant attacker)
+    {
+        var weapon = Armed(attacker);
+        return attacker.Broken ? Math.Max(0, weapon.Mt - BrokenMtPenalty) : weapon.Mt;
+    }
+
     /// <summary>Str or Mag plus Mt, with Mt tripled first when the weapon is effective against the target.</summary>
     public static int Atk(Combatant attacker, Combatant target)
     {
         var weapon = Armed(attacker);
-        var mt = weapon.IsEffectiveAgainst(target.Movement) ? weapon.Mt * EffectiveMultiplier : weapon.Mt;
+        var mt = weapon.IsEffectiveAgainst(target.Movement) ? Mt(attacker) * EffectiveMultiplier : Mt(attacker);
         return (weapon.IsMagic ? attacker.Stats.Mag : attacker.Stats.Str) + mt;
     }
 
@@ -35,8 +45,20 @@ public static class Combat
         return Math.Max(0, Atk(attacker, target) - defence);
     }
 
+    /// <summary>Weapon hit (less 10 when broken) plus Dex plus half Lck.</summary>
     public static int Hit(Combatant attacker) =>
-        Armed(attacker).Hit + attacker.Stats.Dex + attacker.Stats.Lck / 2;
+        Armed(attacker).Hit - (attacker.Broken ? BrokenHitPenalty : 0) + attacker.Stats.Dex + attacker.Stats.Lck / 2;
+
+    /// <summary>Section 5's Faith heal: Mag / 2 + 5 + the spell's base. <paramref name="spell"/> must be a healing spell.</summary>
+    public static int Heal(Combatant healer, Weapon spell)
+    {
+        if (!spell.Heals)
+        {
+            throw new ArgumentException($"{spell.Id} is not a healing spell", nameof(spell));
+        }
+
+        return healer.Stats.Mag / 2 + HealBase + spell.HealBase;
+    }
 
     /// <summary>Avoid against a physical or a magic strike; magic ignores burden.</summary>
     public static int Avoid(Combatant target, bool againstMagic)

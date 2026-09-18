@@ -15,13 +15,14 @@ public sealed class PlaySession
 {
     public const string Usage = "usage: ironwake play <map-file> [--seed N] [--script file] [--content dir]";
 
-    /// <summary>The line every transcript starts with, naming the systems this build lacks (Design Table, fourth round).</summary>
-    public const string MissingSystems = "this build has no items (issue 9); " + SyntheticRoster.Notice;
+    /// <summary>The line every transcript starts with: what this build stands in for (Design Table, fourth round). Every system of section 12's phase 1 is in.</summary>
+    public const string MissingSystems = SyntheticRoster.Notice;
 
     private const string Help = """
         commands:
           move <unit> <x,y>        move a unit to a tile in its reach
           attack <unit> <target>   attack an enemy in range (the forecast prints first)
+          item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           end                      end the player phase; the enemy phase plays out
           recall <n>               rewind to history state n (spends a charge)
@@ -30,8 +31,6 @@ public sealed class PlaySession
           show <unit>              show a unit's numbers
           map                      show the board
           help                     this list
-        unavailable in this build:
-          item <unit> <slot> [target]   items land with issue 9
         """;
 
     private readonly GameContent _content;
@@ -183,8 +182,11 @@ public sealed class PlaySession
             case "recall":
                 Error("usage: recall <n>  (history holds " + _state.History.Count + " states)");
                 break;
+            case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out var slot):
+                Apply(new UseItem(words[1], slot, words.Length == 4 ? words[3] : null));
+                break;
             case "item":
-                Error("item is not in this build: items land with issue 9 (usage when it does: item <unit> <slot> [target])");
+                Error("usage: item <unit> <slot> [ally]");
                 break;
             case "forecast" when words.Length == 3:
                 PrintForecast(words[1], words[2]);
@@ -307,10 +309,15 @@ public sealed class PlaySession
         var weapon = unit.EquippedWeapon(_content);
         _out.WriteLine($"{unit.Id}: {unit.Unit.Name}, {_content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {_state.Map.TerrainAt(unit.At, _content).Name}");
         _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}");
-        _out.WriteLine($"  weapon: {(weapon is null ? "none" : $"{weapon.Name} (mt {weapon.Mt} hit {weapon.Hit} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange})")}");
+        _out.WriteLine($"  weapon: {(weapon is null ? "none" : $"{weapon.Name} (mt {weapon.Mt} hit {weapon.Hit} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange}){(unit.WeaponBroken(_content) ? " broken: -5 mt -10 hit" : "")}")}");
+        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot}: {Named(item.ItemId)} x{item.Uses}");
+        _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
     }
+
+    private string Named(string itemId) =>
+        _content.Items.TryGetValue(itemId, out var item) ? item.Name : _content.Weapon(itemId).Name;
 
     private BattleUnit? Find(string id)
     {
@@ -345,7 +352,7 @@ public sealed class PlaySession
         Wait w => $"wait {w.UnitId}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
-        UseItem i => $"item {i.UnitId} {i.Slot}",
+        UseItem i => $"item {i.UnitId} {i.Slot}" + (i.TargetId is null ? "" : " " + i.TargetId),
         _ => command.ToString() ?? "?",
     };
 
@@ -386,6 +393,12 @@ public sealed class PlaySession
                 return $"group {g.Group} wakes: {g.Cause.ToString().ToLowerInvariant()}";
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
+            case ItemUsed i:
+                return $"{i.UnitId} uses {i.ItemId}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
+            case WeaponBroke b:
+                return $"{b.UnitId}'s {b.ItemId} breaks";
+            case SpellSpent s:
+                return $"{s.UnitId}'s {s.ItemId} is spent for this battle";
             default:
                 return e.ToString() ?? "?";
         }

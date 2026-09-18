@@ -13,6 +13,14 @@ Entry format:
 Chat writes its entries on the Design Table and Code copies them in.
 
 ## 2026-09-18 — Old Mill Road — Code
+
+Seed: 7   Result: loss, turn 6 (the captain, alone at 7,3, with a Field Dressing unused in slot 1)
+Systems entry, not a Fun Gate entry. Question: does the Item action read as a choice, and does durability show?
+Tension: 6/10   Choice: 6/10   Surprise: 7/10
+Best turn: turn 5. The captain dashed 5,5 to 7,3 and woke the mill group on purpose to see whether a wounded unit with a dressing in the bag could stand a round; the archer and the soldier put him from 22 to 9 and I had the answer, and then on turn 6 I typed `end` instead of `item captain 1` because I had miscounted the phases, and he died at 4 HP with the dressing still there. That is the oldest feeling in the genre and the game produced it on its second night of having items.
+Notes: The brigand came to 3,6 on enemy phase 1 and attacked the captain on 2,6, the captain doubled it dead on the counter, and the first Field Dressing on turn 3 read exactly right: `captain uses field_dressing (2 left)`, `captain heals 10 (hp 22)`, action spent, and `show` lists the slots with uses. The refusal on a full-HP unit (`captain is at full HP`) is the right refusal; a script cannot burn a use on nothing. Durability is visible (`Iron Sword x38` after two counters) but did not matter in six turns and will not matter on a 40-use sword in a 20-turn map; it is a campaign number, which is fine, but it means the broken fallback is a thing only the Sim and the tests have seen. What was not tense: turns 2 to 4, walking with nobody in range, the dead approach the Critic named, unchanged. Transcript: `docs/transcripts/2026-09-18-old_mill_road-7-items.txt`. Not read before writing: nothing of Chat's, since nothing of Chat's is here yet.
+
+## 2026-09-18 — Old Mill Road — Code
 Seed: 7   Result: win, turn 12
 Tension: 5/10   Choice: 5/10   Surprise: 5/10
 Question this entry answers (a systems entry on a format sample, not a Fun Gate entry): does the wake radius teach itself, and does the forecast read honestly?

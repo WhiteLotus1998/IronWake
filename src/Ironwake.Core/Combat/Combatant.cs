@@ -5,10 +5,12 @@ namespace Ironwake.Core;
 /// class, the weapon it fights with (none means it cannot strike), the terrain under it,
 /// and its current HP. <see cref="CritAvoidModifier"/> is the section 5 modifier slot that
 /// rivalry (13.1) is the first to fill; it may be negative and is never clamped.
+/// <see cref="Broken"/> marks a physical weapon at zero uses: it still strikes, at the
+/// section 5 fallback of -5 Mt and -10 hit, so a unit is never helpless.
 /// </summary>
 public sealed record Combatant
 {
-    public Combatant(Unit unit, UnitClass unitClass, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0)
+    public Combatant(Unit unit, UnitClass unitClass, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false)
     {
         if (unitClass.Id != unit.ClassId)
         {
@@ -33,6 +35,7 @@ public sealed record Combatant
         Terrain = terrain;
         Hp = hp;
         CritAvoidModifier = critAvoidModifier;
+        Broken = weapon is not null && broken;
     }
 
     public Unit Unit { get; }
@@ -46,6 +49,9 @@ public sealed record Combatant
     public int Hp { get; }
 
     public int CritAvoidModifier { get; }
+
+    /// <summary>Whether the weapon is at zero uses and fights at the broken fallback.</summary>
+    public bool Broken { get; }
 
     public string Id => Unit.Id;
 
