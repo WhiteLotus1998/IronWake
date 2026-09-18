@@ -16,7 +16,7 @@ public sealed class PlaySession
     public const string Usage = "usage: ironwake play <map-file> [--seed N] [--script file] [--content dir]";
 
     /// <summary>The line every transcript starts with, naming the systems this build lacks (Design Table, fourth round).</summary>
-    public const string MissingSystems = "this build has no EXP or level-ups (issue 8) and no items (issue 9); " + SyntheticRoster.Notice;
+    public const string MissingSystems = "this build has no items (issue 9); " + SyntheticRoster.Notice;
 
     private const string Help = """
         commands:
@@ -369,6 +369,11 @@ public sealed class PlaySession
                 return sb.ToString();
             case UnitDied d:
                 return $"{d.UnitId} falls at {d.At}";
+            case ExpGained x:
+                return $"{x.UnitId} gains {x.Amount} exp ({x.ExpAfter})";
+            case LeveledUp l:
+                var rose = string.Join(" ", Stats.All.Where(stat => l.Gains.Get(stat) > 0).Select(stat => stat.ToString().ToLowerInvariant() + " +1"));
+                return $"{l.UnitId} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
             case UnitHealed h:

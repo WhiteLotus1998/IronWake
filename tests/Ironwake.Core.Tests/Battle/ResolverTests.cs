@@ -111,7 +111,7 @@ public class ResolverTests
 
         var fought = Assert.IsType<CombatFought>(result.Events[0]);
         Assert.True(fought.Strikes[0].Hit, "the seed was chosen so the first strike lands");
-        Assert.Equal(new UnitDied("brigand-1", Side.Enemy, new Coord(3, 1)), result.Events[1]);
+        Assert.Equal(new UnitDied("brigand-1", Side.Enemy, new Coord(3, 1)), result.Events[^1]);
         Assert.Null(result.Next.Find("brigand-1"));
         Assert.Equal(Occupant.None, result.Next.OccupantAt(new Coord(3, 1), Side.Player));
         Assert.Equal(RejectionReason.NoSuchTarget, result.Next.Do(new EndPhase()).Do(new EndPhase()).Refused(new Attack("wren", "brigand-1")).Reason);

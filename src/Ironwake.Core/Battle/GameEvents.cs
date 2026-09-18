@@ -14,6 +14,12 @@ public sealed record CombatFought(
 
 public sealed record UnitDied(string UnitId, Side Side, Coord At) : GameEvent;
 
+/// <summary>EXP earned from one combat (DESIGN.md section 6), with the total toward the next level after it.</summary>
+public sealed record ExpGained(string UnitId, int Amount, int ExpAfter) : GameEvent;
+
+/// <summary>A level gained: <see cref="Gains"/> holds 1 for each stat that rose.</summary>
+public sealed record LeveledUp(string UnitId, int NewLevel, Stats Gains) : GameEvent;
+
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
 public sealed record PhaseEnded(Side Side, int Turn) : GameEvent;
