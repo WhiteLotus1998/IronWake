@@ -107,6 +107,21 @@ public class CliPlayTests
         Assert.Contains("battle ongoing at turn 1, player phase\n", output);
     }
 
+    /// <summary>Issue 11's acceptance: the journaled script under docs/transcripts wins the sample map under its seed. Keyed rolls keep it stable.</summary>
+    [Fact]
+    public void TheJournaledScriptWinsOldMillRoadOnSeedSeven()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-18-old_mill_road-7.script");
+
+        var output = Run(out var exit, "play", OldMillRoad, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Contains("group mill wakes: proximity", output);
+        Assert.Contains("bandit_leader-1 falls at 10,1", output);
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var original = Console.Out;

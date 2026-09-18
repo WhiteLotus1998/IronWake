@@ -1,0 +1,59 @@
+# Old Mill Road, seed 7, hand play by Code (systems entry)
+# turn 1: let the brigand come
+end
+# turn 2: the captain kills it alone, two certain hits
+move captain 3,7
+attack captain brigand-1
+move wren 2,7
+wait wren
+end
+# turn 3: toward the fort, outside the wake radius
+move wren 4,5
+wait wren
+move captain 4,6
+wait captain
+end
+# turn 4: Wren to the road below the fort, still outside radius 4
+move wren 6,3
+wait wren
+move captain 4,3
+wait captain
+end
+# turn 5: Wren takes the fort and wakes the mill; the captain stays out of the bow line
+move wren 6,2
+wait wren
+wait captain
+end
+# turn 6: Wren finishes the soldier from the fort; the captain opens on the archer, which cannot answer at one tile
+attack wren soldier-1
+move captain 7,2
+attack captain archer-1
+end
+# turn 7: the captain climbs the hill and finishes the archer
+move captain 8,2
+attack captain archer-1
+wait wren
+end
+# turn 8: Wren stages on the road; the captain takes the fort to heal. The boss never moves, so time is the only cost
+move wren 9,3
+wait wren
+move captain 6,2
+wait captain
+end
+# turns 9 to 10: heal
+wait wren
+wait captain
+end
+wait wren
+wait captain
+end
+# turn 11: healed to 19, the captain stages above the boss
+move captain 8,0
+wait captain
+wait wren
+end
+# turn 12: both strike the boss; the captain eats the one counter, Wren kills on her first hit
+move captain 10,0
+attack captain bandit_leader-1
+move wren 10,2
+attack wren bandit_leader-1
