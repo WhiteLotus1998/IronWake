@@ -182,7 +182,7 @@ E brigand 6,5 group:road behavior:aggressive
 B bandit_leader 10,1 group:mill behavior:boss
 ```
 
-Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`: a template below it is raised to it (deterministically, DECISIONS/0005), and a template already at or above it keeps its own level, so a level-3 boss on a level-1 map stays level 3. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
+Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`: a template below it is raised to it (deterministically, on the effective growth of section 3 clamped per stat to 0..100, DECISIONS/0005 as amended by issue 84), and a template already at or above it keeps its own level, so a level-3 boss on a level-1 map stays level 3. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
 
 The parser validates beyond the grammar (DECISIONS/0011): positions inside the grid, one unit per tile, exactly one captain, player slots on ground infantry can stand on, enemies on ground their class can enter, a throne for `seize`, a `B` line for `defeat_boss`, and no attribute other than `group` and `behavior`. Errors name the file and line.
 

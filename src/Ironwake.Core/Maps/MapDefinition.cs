@@ -76,12 +76,16 @@ public sealed record MapDefinition(
 
     /// <summary>
     /// The unit an enemy placement puts on the map: its template from the content, raised
-    /// to <see cref="EnemyLevel"/> by <see cref="Unit.ScaledTo"/> when the template is below
-    /// it. Every consumer that needs an enemy's level or stats asks here, so the floor rule
-    /// has one caller to check rather than one per renderer.
+    /// to <see cref="EnemyLevel"/> by <see cref="Unit.ScaledTo"/> on the growth of the class
+    /// the template names when the template is below it. Every consumer that needs an
+    /// enemy's level or stats asks here, so the floor rule has one caller to check rather
+    /// than one per renderer.
     /// </summary>
-    public Unit EnemyUnit(EnemyPlacement placement, GameContent content) =>
-        content.Unit(placement.TemplateId).ScaledTo(EnemyLevel);
+    public Unit EnemyUnit(EnemyPlacement placement, GameContent content)
+    {
+        var template = content.Unit(placement.TemplateId);
+        return template.ScaledTo(EnemyLevel, content.Class(template.ClassId));
+    }
 
     /// <summary>Every tile drawn with a given terrain, in row-major order.</summary>
     public IEnumerable<Coord> TilesOf(string terrainId)

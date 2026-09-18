@@ -43,14 +43,44 @@ public class UnitTests
         Assert.Equal(99, Soldier(exp: 99).Exp);
     }
 
-    [Fact]
-    public void AtLevelAddsFlooredGrowthPerLevelGainedWithoutRng()
+    private static readonly UnitClass Pikeman = new(
+        "pikeman", "Pikeman", MovementType.Infantry, 4,
+        new Stats(1, 1, 0, 0, 0, 0, 1, 0, 0),
+        ValueList<WeaponType>.Of(WeaponType.Lance),
+        new Stats(5, 0, 0, 0, 0, 0, 5, 0, 0));
+
+    /// <summary>A pikeman whose growth modifiers push the soldier's growth outside 0..100 on two stats.</summary>
+    private static readonly UnitClass Pikeman_OutsideTheRange = Pikeman with
     {
-        var scaled = Soldier().AtLevel(11);
+        GrowthModifiers = new Stats(60, 0, -10, 0, 0, 0, 0, 0, 0),
+    };
+
+    [Fact]
+    public void AtLevelAddsFlooredEffectiveGrowthPerLevelGainedWithoutRng()
+    {
+        var scaled = Soldier().AtLevel(11, Pikeman);
 
         Assert.Equal(11, scaled.Level);
-        Assert.Equal(new Stats(19 + 4, 6 + 3, 0 + 0, 4 + 3, 5 + 3, 2 + 1, 3 + 3, 1 + 1, 2 + 1), scaled.Stats);
+        Assert.Equal(new Stats(19 + 5, 6 + 3, 0 + 0, 4 + 3, 5 + 3, 2 + 1, 3 + 3, 1 + 1, 2 + 1), scaled.Stats);
         Assert.Equal(Growths, scaled.Growths);
+    }
+
+    [Fact]
+    public void AtLevelClampsANegativeEffectiveGrowthToZeroRatherThanLosingTheStat()
+    {
+        var scaled = Soldier().AtLevel(30, Pikeman_OutsideTheRange);
+
+        Assert.Equal(-5, Soldier().EffectiveGrowths(Pikeman_OutsideTheRange).Mag);
+        Assert.Equal(0, scaled.Stats.Mag);
+    }
+
+    [Fact]
+    public void AtLevelClampsAnEffectiveGrowthAboveOneHundredToOnePointPerLevel()
+    {
+        var scaled = Soldier().AtLevel(21, Pikeman_OutsideTheRange);
+
+        Assert.Equal(105, Soldier().EffectiveGrowths(Pikeman_OutsideTheRange).Hp);
+        Assert.Equal(19 + 20, scaled.Stats.Hp);
     }
 
     [Fact]
@@ -58,7 +88,8 @@ public class UnitTests
     {
         var unit = Soldier(3);
 
-        Assert.Equal(unit, unit.AtLevel(3));
+        Assert.Equal(unit, unit.AtLevel(3, Pikeman));
+        Assert.Equal(unit, unit.AtLevel(3, Pikeman_OutsideTheRange));
     }
 
     [Theory]
@@ -66,7 +97,18 @@ public class UnitTests
     [InlineData(31)]
     public void AtLevelRejectsLevelsBelowCurrentOrAboveCap(int target)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Soldier(3).AtLevel(target));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Soldier(3).AtLevel(target, Pikeman));
+    }
+
+    [Fact]
+    public void AtLevelRejectsAClassThatIsNotTheUnitsOwn()
+    {
+        var reaver = Pikeman with { Id = "reaver", Name = "Reaver" };
+
+        var error = Assert.Throws<ArgumentException>(() => Soldier().AtLevel(5, reaver));
+
+        Assert.Contains("soldier is a pikeman, not a reaver", error.Message);
+        Assert.Throws<ArgumentException>(() => Soldier().ScaledTo(5, reaver));
     }
 
     [Theory]
@@ -77,37 +119,31 @@ public class UnitTests
     {
         var template = Soldier(level);
 
-        var scaled = template.ScaledTo(floor);
+        var scaled = template.ScaledTo(floor, Pikeman);
 
         Assert.Equal(expected, scaled.Level);
-        Assert.Equal(expected == level ? template : template.AtLevel(floor), scaled);
+        Assert.Equal(expected == level ? template : template.AtLevel(floor, Pikeman), scaled);
     }
 
     [Fact]
     public void ScaledToRaisesTheStatsAsWellAsTheLevel()
     {
-        var scaled = Soldier().ScaledTo(11);
+        var scaled = Soldier().ScaledTo(11, Pikeman);
 
-        Assert.Equal(Soldier().AtLevel(11).Stats, scaled.Stats);
+        Assert.Equal(Soldier().AtLevel(11, Pikeman).Stats, scaled.Stats);
         Assert.NotEqual(Base, scaled.Stats);
     }
 
     [Fact]
     public void ScaledToAboveTheCapIsRejected()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => Soldier().ScaledTo(31));
+        Assert.Throws<ArgumentOutOfRangeException>(() => Soldier().ScaledTo(31, Pikeman));
     }
 
     [Fact]
     public void EffectiveStatsAddTheClassModifiers()
     {
-        var pikeman = new UnitClass(
-            "pikeman", "Pikeman", MovementType.Infantry, 4,
-            new Stats(1, 1, 0, 0, 0, 0, 1, 0, 0),
-            ValueList<WeaponType>.Of(WeaponType.Lance),
-            new Stats(5, 0, 0, 0, 0, 0, 5, 0, 0));
-
-        Assert.Equal(new Stats(20, 7, 0, 4, 5, 2, 4, 1, 2), Soldier().EffectiveStats(pikeman));
-        Assert.Equal(new Stats(50, 35, 5, 30, 30, 15, 35, 15, 10), Soldier().EffectiveGrowths(pikeman));
+        Assert.Equal(new Stats(20, 7, 0, 4, 5, 2, 4, 1, 2), Soldier().EffectiveStats(Pikeman));
+        Assert.Equal(new Stats(50, 35, 5, 30, 30, 15, 35, 15, 10), Soldier().EffectiveGrowths(Pikeman));
     }
 }

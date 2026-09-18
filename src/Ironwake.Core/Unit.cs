@@ -50,19 +50,32 @@ public sealed record Unit(
     public Stats EffectiveGrowths(UnitClass unitClass) => Growths + unitClass.GrowthModifiers;
 
     /// <summary>
-    /// Scales a template to a higher level without RNG: each stat gains the floor of
-    /// growth times levels gained over 100. Used for enemy templates on maps, so the same
-    /// map shows the same enemy numbers on every seed.
+    /// Scales a template to a higher level without RNG: each stat gains the floor of its
+    /// effective growth (unit growth plus the class modifier, DESIGN.md section 3) times
+    /// levels gained over 100. That is the rolled level-up in expectation, so a template
+    /// authored at a level and a template raised to it gain what the class gains. The
+    /// growth is clamped to 0..100 first: under a rolled level-up a negative effective
+    /// growth is a probability of zero, never a stat loss, and one above 100 is certainty.
+    /// Used for enemy templates on maps, so the same map shows the same enemy numbers on
+    /// every seed (DECISIONS/0005). <paramref name="unitClass"/> must be this unit's own
+    /// class; scaling by another class's growth would be a different unit.
     /// </summary>
-    public Unit AtLevel(int level)
+    public Unit AtLevel(int level, UnitClass unitClass)
     {
+        if (unitClass.Id != ClassId)
+        {
+            throw new ArgumentException(
+                $"class must be the unit's own: {Id} is a {ClassId}, not a {unitClass.Id}", nameof(unitClass));
+        }
+
         if (level < Level || level > MaxLevel)
         {
             throw new ArgumentOutOfRangeException(nameof(level), level, $"level must be {Level}..{MaxLevel}");
         }
 
         var gained = level - Level;
-        var scaled = Stats.Map((stat, value) => value + Growths.Get(stat) * gained / 100);
+        var growths = EffectiveGrowths(unitClass);
+        var scaled = Stats.Map((stat, value) => value + Math.Clamp(growths.Get(stat), 0, 100) * gained / 100);
         return this with { Level = level, Stats = scaled };
     }
 
@@ -73,5 +86,5 @@ public sealed record Unit(
     /// level-1 map stays level 3. This is the one place the rule lives; the map view and
     /// the battle state both come here through <see cref="MapDefinition.EnemyUnit"/>.
     /// </summary>
-    public Unit ScaledTo(int floor) => Level >= floor ? this : AtLevel(floor);
+    public Unit ScaledTo(int floor, UnitClass unitClass) => Level >= floor ? this : AtLevel(floor, unitClass);
 }
