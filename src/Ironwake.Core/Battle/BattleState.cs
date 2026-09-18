@@ -64,7 +64,7 @@ public sealed record BattleState(
             {
                 case PlayerPlacement p:
                     var unit = Fill(p, roster, named, deployed, ref nextBare);
-                    units.Add(Place(unit, Side.Player, p.At, map, content));
+                    units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain });
                     break;
                 case EnemyPlacement e:
                     var count = perTemplate.GetValueOrDefault(e.TemplateId) + 1;
@@ -151,6 +151,50 @@ public sealed record BattleState(
         }
 
         return new BattleUnit(unit, side, at, unit.EffectiveStats(unitClass).Hp, false, false);
+    }
+
+    /// <summary>
+    /// Whether the battle is over and why, DESIGN.md section 7, computed from the board
+    /// and never stored. Checked in order: the captain dead, the protected recruit dead,
+    /// the map's win condition met, the turn limit passed (a win for Survive, a loss for
+    /// everything else), else ongoing. A finished battle refuses every command but Recall.
+    /// </summary>
+    public BattleOutcome Outcome
+    {
+        get
+        {
+            var captain = Units.FirstOrDefault(u => u.IsCaptain);
+            if (captain is null)
+            {
+                return new BattleOutcome(BattleResult.Lost, "the captain is dead");
+            }
+
+            if (Map.ProtectId is { } protectId && Find(protectId) is null)
+            {
+                return new BattleOutcome(BattleResult.Lost, $"{protectId} is dead");
+            }
+
+            var won = Map.Win switch
+            {
+                WinCondition.Rout => !UnitsOf(Side.Enemy).Any(),
+                WinCondition.Seize => Map.IsThrone(captain.At),
+                WinCondition.DefeatBoss => !UnitsOf(Side.Enemy).Any(u => u.IsBoss),
+                WinCondition.Escape => UnitsOf(Side.Player).All(u => Map.IsExit(u.At)),
+                WinCondition.Survive => Turn > Map.TurnLimit,
+                _ => throw new ArgumentOutOfRangeException(nameof(Map), Map.Win, "unknown win condition"),
+            };
+            if (won)
+            {
+                return new BattleOutcome(BattleResult.Won, MapRenderer.WinName(Map.Win));
+            }
+
+            if (Turn > Map.TurnLimit)
+            {
+                return new BattleOutcome(BattleResult.Lost, $"turn {Map.TurnLimit} passed");
+            }
+
+            return BattleOutcome.Ongoing;
+        }
     }
 
     /// <summary>The living unit with an id, or null.</summary>
@@ -247,7 +291,8 @@ public sealed record BattleState(
         sb.Append("map ").Append(Map.Name).Append(' ').Append(Map.Width).Append('x').Append(Map.Height).Append('\n');
         sb.Append("turn ").Append(Turn).Append(" phase ").Append(Phase)
             .Append(" seed ").Append(Seed).Append(" scheme ").Append(Scheme)
-            .Append(" recall ").Append(RecallCharges).Append(" history ").Append(History.Count).Append('\n');
+            .Append(" recall ").Append(RecallCharges).Append(" history ").Append(History.Count)
+            .Append(" outcome ").Append(Outcome.Result).Append('\n');
         foreach (var unit in Units)
         {
             sb.Append("unit ").Append(unit.Id).Append(' ').Append(unit.Side).Append(' ').Append(unit.At)
@@ -260,6 +305,11 @@ public sealed record BattleState(
             foreach (var item in unit.Unit.Inventory.Items)
             {
                 sb.Append(' ').Append(item.ItemId).Append('x').Append(item.Uses);
+            }
+
+            if (unit.IsCaptain)
+            {
+                sb.Append(" captain");
             }
 
             if (unit.Side == Side.Enemy)

@@ -112,7 +112,7 @@ public class BattleStateTests
         var moved = start.Do(new Move("hale", new Coord(2, 1)));
 
         var text = start.Canonical();
-        Assert.Contains("turn 1 phase Player seed 7 scheme TwoRollAverage recall 3 history 0\n", text);
+        Assert.Contains("turn 1 phase Player seed 7 scheme TwoRollAverage recall 3 history 0 outcome Ongoing\n", text);
         Assert.Contains("unit hale Player 0,1 hp 22 unmoved ready class cadet level 1 exp 0 stats HP 22", text);
         Assert.Contains("items iron_swordx40", text);
         Assert.Contains("unit brigand-1 Enemy 3,1 hp", text);

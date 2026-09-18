@@ -15,6 +15,7 @@ public enum RejectionReason
     NotAvailable,
     NoRecallCharges,
     NoSuchHistoryIndex,
+    BattleOver,
     UnknownCommand,
 }
 

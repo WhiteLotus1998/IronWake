@@ -20,4 +20,7 @@ public sealed record PhaseEnded(Side Side, int Turn) : GameEvent;
 
 public sealed record PhaseBegan(Side Side, int Turn) : GameEvent;
 
+/// <summary>Healing terrain at the start of the owner's phase (DESIGN.md section 4). Amount is what was actually gained.</summary>
+public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEvent;
+
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;

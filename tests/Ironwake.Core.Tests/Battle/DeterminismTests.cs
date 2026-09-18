@@ -26,7 +26,7 @@ public class DeterminismTests
 
             Assert.Equal(first.Canonical, second.Canonical);
             Assert.Equal(first.Events, second.Events);
-            Assert.Equal(CommandsPerRun, commands.Count);
+            Assert.True(commands.Count == CommandsPerRun || first.Over, "a run stopped short of its commands without an outcome");
             attacks += commands.Count(c => c is Attack);
         }
 
@@ -39,7 +39,7 @@ public class DeterminismTests
         var map = MapFixture.Parse(MapFixture.OldMillRoad);
         var state = BattleState.From(map, Starter, ValueList<Unit>.Of(Hale, Wren), 3);
         var random = new Random(3);
-        for (var i = 0; i < 400; i++)
+        for (var i = 0; i < 400 && !state.Outcome.IsOver; i++)
         {
             var command = Pick(Legal(state), random);
             var result = Resolver.Apply(state, Starter, command);
@@ -54,7 +54,7 @@ public class DeterminismTests
         var commands = new List<Command>();
         var events = new List<string>();
         var canonical = new List<string>();
-        while (commands.Count < CommandsPerRun)
+        while (commands.Count < CommandsPerRun && !state.Outcome.IsOver)
         {
             var command = Pick(Legal(state), random);
             var result = Resolver.Apply(state, Starter, command);
@@ -65,7 +65,7 @@ public class DeterminismTests
             canonical.Add(state.Canonical());
         }
 
-        return (commands, new Run(string.Join("\n", canonical), events));
+        return (commands, new Run(string.Join("\n", canonical), events, state.Outcome.IsOver));
     }
 
     private static Run Replay(MapDefinition map, ValueList<Unit> roster, ulong seed, List<Command> commands)
@@ -82,54 +82,17 @@ public class DeterminismTests
             canonical.Add(state.Canonical());
         }
 
-        return new Run(string.Join("\n", canonical), events);
+        return new Run(string.Join("\n", canonical), events, state.Outcome.IsOver);
     }
 
-    private sealed record Run(string Canonical, List<string> Events);
+    private sealed record Run(string Canonical, List<string> Events, bool Over);
 
     private static Command Pick(List<Command> legal, Random random) => legal[random.Next(legal.Count)];
 
-    /// <summary>
-    /// Every legal command in the state: each unacted unit's moves, attacks, and Wait,
-    /// EndPhase, and (at most one, so a long history does not drown the rest) a Recall.
-    /// </summary>
+    /// <summary>The resolver's legal commands plus, when a charge is left, one Recall to the middle of the history.</summary>
     public static List<Command> Legal(BattleState state)
     {
-        var legal = new List<Command>();
-        foreach (var unit in state.UnitsOf(state.Phase))
-        {
-            if (unit.Acted)
-            {
-                continue;
-            }
-
-            if (!unit.Moved)
-            {
-                foreach (var to in state.ReachOf(unit, Starter).Destinations)
-                {
-                    if (to != unit.At)
-                    {
-                        legal.Add(new Move(unit.Id, to));
-                    }
-                }
-            }
-
-            var weapon = unit.EquippedWeapon(Starter);
-            if (weapon is not null)
-            {
-                foreach (var target in state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player))
-                {
-                    if (weapon.InRange(unit.At.DistanceTo(target.At)))
-                    {
-                        legal.Add(new Attack(unit.Id, target.Id));
-                    }
-                }
-            }
-
-            legal.Add(new Wait(unit.Id));
-        }
-
-        legal.Add(new EndPhase());
+        var legal = Resolver.Legal(state, Starter).ToList();
         if (state.RecallCharges > 0 && state.History.Count > 0)
         {
             legal.Add(new Recall(state.History.Count / 2));
