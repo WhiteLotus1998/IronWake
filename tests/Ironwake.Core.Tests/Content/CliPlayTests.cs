@@ -32,7 +32,6 @@ public class CliPlayTests
         var output = Play(out var exit, "");
 
         Assert.StartsWith(PlaySession.MissingSystems + "\n", output);
-        Assert.Contains("no EXP or level-ups (issue 8)", output);
         Assert.Contains("no items (issue 9)", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);

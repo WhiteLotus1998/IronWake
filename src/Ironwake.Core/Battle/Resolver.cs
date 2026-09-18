@@ -225,8 +225,12 @@ public static class Resolver
             state.Scheme);
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
 
-        var next = state.WithUnit(unit with { Hp = result.AttackerHp, Moved = true, Acted = true });
-        next = next.WithUnit(target with { Hp = result.DefenderHp });
+        var attackerAfter = unit with { Hp = result.AttackerHp, Moved = true, Acted = true };
+        var targetAfter = target with { Hp = result.DefenderHp };
+        attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
+        targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
+        var next = state.WithUnit(attackerAfter);
+        next = next.WithUnit(targetAfter);
         if (result.DefenderDied)
         {
             events.Add(new UnitDied(target.Id, target.Side, target.At));
@@ -240,6 +244,40 @@ public static class Resolver
         }
 
         return (next, null);
+    }
+
+    /// <summary>
+    /// Section 6 for one side of a combat: a living player unit earns EXP once, from its
+    /// best outcome (a strike landed, the enemy killed, a boss killed), and levels up for
+    /// every 100 crossed under the section 3 growth keys. Enemies earn nothing: they are
+    /// templates that do not outlive the map (DECISIONS/0017). An HP gain raises current HP
+    /// by the same amount. Events follow the combat and precede any death.
+    /// </summary>
+    private static BattleUnit AwardExp(
+        BattleUnit earner, BattleUnit other, ValueList<StrikeEvent> strikes, bool killed, GameContent content, ulong seed, List<GameEvent> events)
+    {
+        if (earner.Side != Side.Player || earner.Hp == 0)
+        {
+            return earner;
+        }
+
+        var landed = strikes.Any(s => s.AttackerId == earner.Id && s.Hit);
+        var amount = Experience.ForCombat(earner.Unit.Level, other.Unit.Level, landed, killed, other.IsBoss);
+        if (amount == 0 || earner.Unit.Level >= Unit.MaxLevel)
+        {
+            return earner;
+        }
+
+        var result = earner.Unit.GainExp(amount, content.Class(earner.Unit.ClassId), new KeyedRng(seed));
+        events.Add(new ExpGained(earner.Id, amount, result.Unit.Exp));
+        var hp = earner.Hp;
+        foreach (var levelUp in result.LevelUps)
+        {
+            events.Add(new LeveledUp(earner.Id, levelUp.NewLevel, levelUp.Gains));
+            hp += levelUp.Gains.Hp;
+        }
+
+        return earner with { Unit = result.Unit, Hp = hp };
     }
 
     private static (BattleState, Rejection?) ApplyWait(BattleState state, Wait wait, List<GameEvent> events)

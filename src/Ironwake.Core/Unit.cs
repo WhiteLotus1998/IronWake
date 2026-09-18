@@ -87,4 +87,62 @@ public sealed record Unit(
     /// the battle state both come here through <see cref="MapDefinition.EnemyUnit"/>.
     /// </summary>
     public Unit ScaledTo(int floor, UnitClass unitClass) => Level >= floor ? this : AtLevel(floor, unitClass);
+
+    /// <summary>
+    /// Adds EXP and levels up for every 100 crossed (DESIGN.md sections 3 and 6). At the
+    /// level cap nothing is gained and the unit is returned unchanged; a level-up that
+    /// reaches the cap discards the remainder. <paramref name="unitClass"/> must be the
+    /// unit's own, since the rolls test the effective growth.
+    /// </summary>
+    public ExpResult GainExp(int amount, UnitClass unitClass, IRng rng)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(amount), amount, "exp gained must be at least 0");
+        }
+
+        if (Level >= MaxLevel || amount == 0)
+        {
+            return new ExpResult(this, ValueList<LevelUp>.Empty);
+        }
+
+        var unit = this;
+        var levelUps = new List<LevelUp>();
+        var total = Exp + amount;
+        while (total >= Experience.LevelUpAt && unit.Level < MaxLevel)
+        {
+            total -= Experience.LevelUpAt;
+            var (next, gains) = unit.LevelUp(unitClass, rng);
+            unit = next;
+            levelUps.Add(new LevelUp(unit.Level, gains));
+        }
+
+        unit = unit with { Exp = unit.Level >= MaxLevel ? 0 : total };
+        return new ExpResult(unit, ValueList<LevelUp>.From(levelUps));
+    }
+
+    /// <summary>
+    /// One level: every stat rolls against its effective growth clamped to 0..100 under
+    /// the key (unit, new level, stat) and nothing else (section 3), so the same seed
+    /// gives this unit the same level 7 whatever else happened. Returns the unit and the
+    /// gains, a <see cref="Stats"/> of 0s and 1s.
+    /// </summary>
+    public (Unit Unit, Stats Gains) LevelUp(UnitClass unitClass, IRng rng)
+    {
+        if (unitClass.Id != ClassId)
+        {
+            throw new ArgumentException(
+                $"class must be the unit's own: {Id} is a {ClassId}, not a {unitClass.Id}", nameof(unitClass));
+        }
+
+        if (Level >= MaxLevel)
+        {
+            throw new InvalidOperationException($"{Id} is already at level {MaxLevel}");
+        }
+
+        var newLevel = Level + 1;
+        var growths = EffectiveGrowths(unitClass);
+        var gains = Stats.Zero.Map((stat, _) => rng.Roll(RollKey.Growth(Id, newLevel, stat)) < Math.Clamp(growths.Get(stat), 0, 100) ? 1 : 0);
+        return (this with { Level = newLevel, Stats = Stats + gains }, gains);
+    }
 }

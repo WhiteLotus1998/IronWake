@@ -101,7 +101,7 @@ On a kill (added):     Exp = clamp(20 + 3 * (EnemyLevel - UnitLevel), 5, 70)
 Bosses:                kill bonus +20
 ```
 
-A unit earns EXP once per combat, computed from the best outcome in that combat.
+A unit earns EXP once per combat, computed from the best outcome in that combat: the strike line when any of its strikes landed, plus the kill line when the other unit died, plus the boss bonus; nothing landed earns nothing. Only player units earn EXP; enemies are templates that do not outlive the map, and their numbers never change mid-battle behind a forecast the player already read (issue 8, DECISIONS/0017). Level up at 100, carrying the remainder; a combat is worth at most 120, so it can cross two levels and the engine handles that. At level 30 nothing is awarded and no event is emitted; a level-up that reaches 30 discards the remainder. Growth rolls are the section 3 keys, `(unit, new level, stat)`, tested against the effective growth clamped to 0..100, the same growth `AtLevel` scales by, so a rolled level-up equals the deterministic scaling in expectation. An HP gain raises current HP by the same amount. Two events carry it, `ExpGained` and `LeveledUp` (which stats rose), after the combat and before any death. Healer EXP (section 5) is a formula without a caller until issue 9's heal action.
 
 ## 7. Turn structure
 
