@@ -119,6 +119,7 @@ public class CliValidateTests
             Console.SetOut(original);
         }
 
-        return writer.ToString();
+        // The CLI writes the platform's line ending (issue 64); the expectations are written with \n.
+        return writer.ToString().Replace("\r\n", "\n");
     }
 }

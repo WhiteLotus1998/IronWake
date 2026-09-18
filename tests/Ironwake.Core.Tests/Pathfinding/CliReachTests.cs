@@ -105,6 +105,31 @@ public class CliReachTests
     }
 
     [Fact]
+    public void ReachTakesAContentDirectoryWithAColonInItsPathAsADirectory()
+    {
+        // On Windows the real directory's absolute path carries the drive's colon (issue 64);
+        // elsewhere a link named with a colon stands in for it.
+        var link = Path.Combine(Path.GetTempPath(), "ironwake-" + Guid.NewGuid().ToString("N") + ":content");
+        var dir = OperatingSystem.IsWindows() ? Fixture.RealContentDirectory() : Directory.CreateSymbolicLink(link, Fixture.RealContentDirectory()).FullName;
+        try
+        {
+            Assert.Contains(':', dir);
+
+            var output = Run(out var exit, "reach", OldMillRoad, "5,0", "cavalry:2", dir);
+
+            Assert.Equal(0, exit);
+            Assert.Contains("cavalry mov 2: 8 tiles", output);
+        }
+        finally
+        {
+            if (!OperatingSystem.IsWindows())
+            {
+                Directory.Delete(link);
+            }
+        }
+    }
+
+    [Fact]
     public void ReachStillTreatsABareArgumentAsTheContentDirectory()
     {
         var output = Run(out var exit, "reach", OldMillRoad, "1,8", "flyng6");
@@ -148,6 +173,7 @@ public class CliReachTests
             Console.SetOut(original);
         }
 
-        return writer.ToString();
+        // The CLI writes the platform's line ending (issue 64); the expectations are written with \n.
+        return writer.ToString().Replace("\r\n", "\n");
     }
 }

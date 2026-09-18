@@ -96,7 +96,7 @@ public static class Program
         var contentDir = "content";
         foreach (var arg in args.Skip(2))
         {
-            if (!arg.Contains(':'))
+            if (!LooksLikeMovementSpec(arg))
             {
                 contentDir = arg;
                 continue;
@@ -182,7 +182,17 @@ public static class Program
     }
 
     /// <summary>
-    /// Parses a <c>movement:mov</c> spec. Any argument with a colon in it is a spec (issue 43):
+    /// Whether a trailing <c>reach</c> argument has the shape of a <c>movement:mov</c> spec
+    /// rather than a content directory (issues 43 and 64): a colon, no path separator, and
+    /// not an existing directory. A Windows drive-letter path always carries a separator
+    /// after its colon, and a directory whose name holds a colon (legal outside Windows)
+    /// exists, so both stay directories; <c>flyng:6</c> stays a spec to be reported.
+    /// </summary>
+    private static bool LooksLikeMovementSpec(string arg) =>
+        arg.Contains(':') && !arg.Contains('/') && !arg.Contains('\\') && !Directory.Exists(arg);
+
+    /// <summary>
+    /// Parses a <c>movement:mov</c> spec. Any argument shaped like one is a spec (issue 43):
     /// a malformed one is reported as the mistake it is, never reclassified as a directory.
     /// Returns the error message, or null when the spec parsed. The movement-type wording is
     /// the content loader's, so the CLI and the content files disagree about nothing. Mov 0 is
