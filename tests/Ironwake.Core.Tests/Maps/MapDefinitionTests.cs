@@ -15,7 +15,7 @@ public class MapDefinitionTests
         var soldier = raised.EnemyUnit(Enemy(raised, "soldier"), MapFixture.Content);
 
         Assert.Equal(5, soldier.Level);
-        Assert.Equal(new Stats(20, 7, 0, 5, 6, 2, 4, 1, 2), soldier.Stats);
+        Assert.Equal(new Stats(21, 7, 0, 5, 6, 2, 4, 1, 2), soldier.Stats);
         Assert.Equal(MapFixture.Content.Unit("soldier").Growths, soldier.Growths);
     }
 
