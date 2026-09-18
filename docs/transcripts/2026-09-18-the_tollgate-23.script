@@ -1,0 +1,85 @@
+move wren 1,11
+move captain 2,11
+move recruit-2 4,11
+move recruit-3 3,10
+move recruit-4 5,11
+end
+move recruit-3 4,10
+move recruit-2 3,10
+move captain 2,10
+move wren 2,9
+move recruit-4 4,11
+end
+move recruit-4 5,11
+attack recruit-4 rider-1
+item recruit-3 2
+move recruit-2 4,9
+wait captain
+wait wren
+end
+move wren 3,7
+attack wren archer-2
+move captain 4,8
+attack captain archer-2
+item recruit-2 1
+item recruit-4 1
+wait recruit-3
+end
+attack wren brigand-1
+move recruit-2 5,6
+move recruit-3 4,7
+move recruit-4 4,9
+move captain 4,5
+end
+item wren 1
+move recruit-4 4,9
+move recruit-2 4,6
+move recruit-3 5,5
+move captain 6,4
+end
+move captain 5,4
+move recruit-3 6,4
+item recruit-3 1
+move recruit-2 5,5
+move wren 4,6
+move recruit-4 4,9
+end
+move recruit-3 6,3
+forecast recruit-3 soldier-1
+attack recruit-3 soldier-1
+move wren 5,5
+move recruit-2 6,4
+move recruit-4 4,6
+end
+recall 84
+move captain 6,3
+attack captain soldier-1
+move recruit-2 7,4
+move wren 5,5
+move recruit-4 4,6
+wait recruit-3
+end
+move captain 5,4
+item captain 1
+move recruit-3 6,2
+forecast recruit-3 archer-1
+attack recruit-3 archer-1
+move wren 6,4
+move recruit-4 5,5
+wait recruit-2
+end
+move recruit-2 7,5
+move recruit-3 7,4
+item recruit-3 1
+move wren 6,2
+attack wren bandit_leader-1
+move recruit-4 6,4
+item captain 1
+end
+attack wren archer-1
+move captain 6,3
+wait recruit-2
+wait recruit-3
+wait recruit-4
+end
+move captain 7,1
