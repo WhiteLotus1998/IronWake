@@ -10,10 +10,17 @@ namespace Ironwake.Cli;
 /// session renders only from events and asks the core for every number through
 /// <see cref="Queries"/>, <see cref="Resolver"/>, and <see cref="EnemyAi"/>; it computes
 /// nothing about the rules itself (DESIGN.md section 2). Output is plain ASCII.
+/// Slots count from one at this boundary (issue 101): <c>show</c> lists them from 1 and
+/// <c>attack</c>, <c>item</c>, and <c>forecast</c> read them that way; the core counts
+/// from zero and is not told. A scripted run is a claim about a game, so it ends with a
+/// summary of every rejected line, and <c>--strict</c> stops at the first one.
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file> [--seed N] [--script file] [--content dir]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir]";
+
+    /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
+    public const int StrictStop = 3;
 
     /// <summary>The line every transcript starts with: what this build stands in for (Design Table, fourth round). Every system of section 12's phase 1 is in.</summary>
     public const string MissingSystems = SyntheticRoster.Notice;
@@ -31,17 +38,24 @@ public sealed class PlaySession
           show <unit>              show a unit's numbers
           map                      show the board
           help                     this list
+        slots count from 1, as show lists them
+        a scripted run ends with a summary of every rejected line; --strict stops at the first
         """;
 
     private readonly GameContent _content;
     private readonly TextWriter _out;
+    private readonly bool _scripted;
+    private readonly List<(int Line, string Command, string Reason)> _rejections = new();
     private BattleState _state;
+    private int _line;
+    private string _command = "";
 
-    private PlaySession(GameContent content, BattleState state, TextWriter output)
+    private PlaySession(GameContent content, BattleState state, TextWriter output, bool scripted)
     {
         _content = content;
         _state = state;
         _out = output;
+        _scripted = scripted;
     }
 
     /// <summary>Parses the arguments after <c>play</c>, runs the session, and returns the exit code: 0 on a win, 1 otherwise, 2 for a usage error.</summary>
@@ -55,6 +69,7 @@ public sealed class PlaySession
 
         ulong seed = 1;
         string? script = null;
+        var strict = false;
         var contentDir = "content";
         for (var i = 1; i < args.Length; i++)
         {
@@ -68,6 +83,9 @@ public sealed class PlaySession
                     script = value;
                     i++;
                     break;
+                case "--strict":
+                    strict = true;
+                    break;
                 case "--content" when value is not null:
                     contentDir = value;
                     i++;
@@ -79,12 +97,19 @@ public sealed class PlaySession
             }
         }
 
+        if (strict && script is null)
+        {
+            Console.WriteLine("ERROR: --strict applies to a scripted run; give --script");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
         GameContent content;
         MapDefinition map;
         try
         {
             content = ContentLoader.Load(contentDir);
-            map = MapFiles.Load(args[0], content);
+            map = MapFiles.Load(ResolveMap(args[0], contentDir), content);
         }
         catch (Exception e) when (e is ContentException or MapException)
         {
@@ -108,36 +133,72 @@ public sealed class PlaySession
             input = Console.In;
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, SyntheticRoster.Cadets, seed), Console.Out);
-        return session.Play(input, echo: script is not null, seed);
+        var session = new PlaySession(content, BattleState.From(map, content, SyntheticRoster.Cadets, seed), Console.Out, scripted: script is not null);
+        return session.Play(input, strict, seed);
     }
 
-    private int Play(TextReader input, bool echo, ulong seed)
+    /// <summary>
+    /// A bare map name resolves to <c>&lt;content&gt;/maps/&lt;name&gt;.map</c> when no file
+    /// exists at the path given (issue 101), so <c>play the_tollgate</c> works the way the
+    /// journals name maps. A path that exists is used as given.
+    /// </summary>
+    public static string ResolveMap(string mapArg, string contentDir)
+    {
+        if (File.Exists(mapArg))
+        {
+            return mapArg;
+        }
+
+        var named = Path.Combine(contentDir, "maps", mapArg + ".map");
+        return File.Exists(named) ? named : mapArg;
+    }
+
+    private int Play(TextReader input, bool strict, ulong seed)
     {
         _out.WriteLine(MissingSystems);
         _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
         _out.Write(MapRenderer.Render(_state, _content));
+        var commands = 0;
+        var stopped = false;
         while (input.ReadLine() is { } line)
         {
+            _line++;
             var text = line.Trim();
             if (text.Length == 0 || text.StartsWith('#'))
             {
                 continue;
             }
 
-            if (echo)
+            if (_scripted)
             {
                 _out.WriteLine("> " + text);
             }
 
+            _command = text;
+            commands++;
             Execute(text.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+            if (strict && _rejections.Count > 0)
+            {
+                _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
+                stopped = true;
+                break;
+            }
+        }
+
+        if (_scripted && _rejections.Count > 0)
+        {
+            _out.WriteLine($"rejected {_rejections.Count} of {commands} commands:");
+            foreach (var (at, command, reason) in _rejections)
+            {
+                _out.WriteLine($"  line {at}: {command}: {reason}");
+            }
         }
 
         var outcome = _state.Outcome;
         _out.WriteLine(outcome.IsOver
             ? $"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}"
             : $"battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
-        return outcome.Result == BattleResult.Won ? 0 : 1;
+        return stopped ? StrictStop : outcome.Result == BattleResult.Won ? 0 : 1;
     }
 
     private void Execute(string[] words)
@@ -151,8 +212,7 @@ public sealed class PlaySession
                 Error("usage: move <unit> <x,y>");
                 break;
             case "attack" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
-                var attackSlot = words.Length == 4 ? int.Parse(words[3]) : (int?)null;
-                if (PrintForecast(words[1], words[2], attackSlot))
+                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var attackSlot) && PrintForecast(words[1], words[2], attackSlot))
                 {
                     Apply(new Attack(words[1], words[2], attackSlot));
                 }
@@ -183,14 +243,22 @@ public sealed class PlaySession
             case "recall":
                 Error("usage: recall <n>  (history holds " + _state.History.Count + " states)");
                 break;
-            case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out var slot):
-                Apply(new UseItem(words[1], slot, words.Length == 4 ? words[3] : null));
+            case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out _):
+                if (TrySlot(words[1], words[2], out var itemSlot))
+                {
+                    Apply(new UseItem(words[1], itemSlot!.Value, words.Length == 4 ? words[3] : null));
+                }
+
                 break;
             case "item":
                 Error("usage: item <unit> <slot> [ally]");
                 break;
             case "forecast" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
-                PrintForecast(words[1], words[2], words.Length == 4 ? int.Parse(words[3]) : null);
+                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var forecastSlot))
+                {
+                    PrintForecast(words[1], words[2], forecastSlot);
+                }
+
                 break;
             case "forecast":
                 Error("usage: forecast <unit> <target> [slot]");
@@ -305,14 +373,62 @@ public sealed class PlaySession
             $"dmg {side.Damage}{(side.Doubles ? " x2" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
     }
 
+    /// <summary>
+    /// Reads a one-based slot typed by the player into the core's zero-based one. Null text
+    /// is no slot. A slot outside 1..count is refused here, naming the range the player
+    /// sees, so the core's zero-based message never reaches the screen.
+    /// </summary>
+    private bool TrySlot(string unitId, string? text, out int? slot)
+    {
+        slot = null;
+        if (text is null)
+        {
+            return true;
+        }
+
+        if (Find(unitId) is not { } unit)
+        {
+            return false;
+        }
+
+        var typed = int.Parse(text);
+        var count = unit.Unit.Inventory.Count;
+        if (typed < 1 || typed > count)
+        {
+            Error(count == 0 ? $"{unit.Id} carries nothing" : $"{unit.Id} has nothing in slot {typed}; slots run 1-{count}");
+            return false;
+        }
+
+        slot = typed - 1;
+        return true;
+    }
+
+    /// <summary>
+    /// The <c>show</c> weapon line: the equipped weapon's numbers, or <c>unarmed</c> for a
+    /// unit with nothing usable, with <c>(spell spent)</c> when a spell its class could
+    /// cast sits at zero uses (issue 101; DECISIONS/0018 item 3).
+    /// </summary>
+    public static string WeaponLine(BattleUnit unit, GameContent content)
+    {
+        var weapon = unit.EquippedWeapon(content);
+        if (weapon is not null)
+        {
+            return $"{weapon.Name} (mt {weapon.Mt} hit {weapon.Hit} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange}){(unit.WeaponBroken(content) ? " broken: -5 mt -10 hit" : "")}";
+        }
+
+        var unitClass = content.Class(unit.Unit.ClassId);
+        var spent = unit.Unit.Inventory.Items.Any(item =>
+            item.Uses == 0 && content.Weapons.TryGetValue(item.ItemId, out var w) && w.IsMagic && !w.Heals && unitClass.CanUse(w.Type));
+        return spent ? "unarmed (spell spent)" : "unarmed";
+    }
+
     private void Show(BattleUnit unit)
     {
         var stats = unit.Unit.EffectiveStats(_content.Class(unit.Unit.ClassId));
-        var weapon = unit.EquippedWeapon(_content);
         _out.WriteLine($"{unit.Id}: {unit.Unit.Name}, {_content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {_state.Map.TerrainAt(unit.At, _content).Name}");
         _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}");
-        _out.WriteLine($"  weapon: {(weapon is null ? "none" : $"{weapon.Name} (mt {weapon.Mt} hit {weapon.Hit} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange}){(unit.WeaponBroken(_content) ? " broken: -5 mt -10 hit" : "")}")}");
-        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot}: {Named(item.ItemId)} x{item.Uses}");
+        _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
+        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)} x{item.Uses}");
         _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
@@ -332,7 +448,14 @@ public sealed class PlaySession
         return unit;
     }
 
-    private void Error(string message) => _out.WriteLine("ERROR: " + message);
+    private void Error(string message)
+    {
+        _out.WriteLine("ERROR: " + message);
+        if (_scripted)
+        {
+            _rejections.Add((_line, _command, message));
+        }
+    }
 
     private static bool TryCoord(string text, out Coord at)
     {
@@ -350,11 +473,11 @@ public sealed class PlaySession
     private static string Describe(Command command) => command switch
     {
         Move m => $"move {m.UnitId} {m.To}",
-        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + a.Slot),
+        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)),
         Wait w => $"wait {w.UnitId}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
-        UseItem i => $"item {i.UnitId} {i.Slot}" + (i.TargetId is null ? "" : " " + i.TargetId),
+        UseItem i => $"item {i.UnitId} {i.Slot + 1}" + (i.TargetId is null ? "" : " " + i.TargetId),
         _ => command.ToString() ?? "?",
     };
 

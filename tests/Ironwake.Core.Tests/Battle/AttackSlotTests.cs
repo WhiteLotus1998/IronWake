@@ -55,7 +55,7 @@ public class AttackSlotTests
     }
 
     [Theory]
-    [InlineData(2, RejectionReason.NotUsable, "hale cannot attack with slot 2 (field_dressing): an item, not a weapon")]
+    [InlineData(2, RejectionReason.NotUsable, "hale cannot attack with field_dressing: an item, not a weapon")]
     [InlineData(3, RejectionReason.EmptySlot, "hale has nothing in slot 3; slots run 0-2")]
     [InlineData(-1, RejectionReason.EmptySlot, "hale has nothing in slot -1; slots run 0-2")]
     public void ASlotThatHoldsNoUsableWeaponIsRefusedByName(int slot, RejectionReason reason, string message)
@@ -74,12 +74,12 @@ public class AttackSlotTests
 
         var healing = state.Refused(new Attack("mira", "soldier-1", 1));
         Assert.Equal(RejectionReason.NotUsable, healing.Reason);
-        Assert.Equal("mira cannot attack with slot 1 (salve): a healing spell; use it with item", healing.Message);
+        Assert.Equal("mira cannot attack with salve: a healing spell; use it with item", healing.Message);
 
         var spent = state.WithUnit(state.Find("mira")! with { Unit = state.Find("mira")!.Unit.WithUses(0) });
         var refused = spent.Refused(new Attack("mira", "soldier-1", 0));
         Assert.Equal(RejectionReason.NotUsable, refused.Reason);
-        Assert.Equal("mira cannot attack with slot 0 (radiance): spent for this battle", refused.Message);
+        Assert.Equal("mira cannot attack with radiance: spent for this battle", refused.Message);
         Assert.Null(Queries.Forecast(spent, Starter, spent.Find("mira")!, spent.Find("soldier-1")!, 0));
     }
 
@@ -93,5 +93,26 @@ public class AttackSlotTests
 
         var one = Start().Do(new Move("hale", new Coord(2, 1)));
         Assert.Equal(new[] { new Attack("hale", "brigand-1") }, Resolver.Legal(one, Starter).OfType<Attack>().Where(a => a.UnitId == "hale"));
+    }
+
+    /// <summary>Issue 101: an unarmed unit says so on the board and in <c>show</c>, and a spent spell is named as the cause.</summary>
+    [Fact]
+    public void AnUnarmedUnitSaysSoOnTheBoardAndInShow()
+    {
+        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve");
+        var state = Start(roster: ValueList<Unit>.Of(Hale, mira), map: Yard.Replace("recruit:wren", "recruit"));
+        Assert.DoesNotContain("unarmed", Ironwake.Core.MapRenderer.Render(state, Starter));
+        Assert.Equal("Radiance (mt 6 hit 85 crit 0 wt 4 range 1-2)", Ironwake.Cli.PlaySession.WeaponLine(state.Find("mira")!, Starter));
+
+        var spent = state.WithUnit(state.Find("mira")! with { Unit = state.Find("mira")!.Unit.WithUses(0) });
+        var board = Ironwake.Core.MapRenderer.Render(spent, Starter);
+        Assert.Contains("mira ", board);
+        Assert.Matches(@"mira .*  unarmed", board);
+        Assert.DoesNotMatch(@"hale .*  unarmed", board);
+        Assert.Equal("unarmed (spell spent)", Ironwake.Cli.PlaySession.WeaponLine(spent.Find("mira")!, Starter));
+
+        var bare = Start(roster: ValueList<Unit>.Of(Hale, Unarmed), map: Yard.Replace("recruit:wren", "recruit"));
+        Assert.Matches(@"pell .*  unarmed", Ironwake.Core.MapRenderer.Render(bare, Starter));
+        Assert.Equal("unarmed", Ironwake.Cli.PlaySession.WeaponLine(bare.Find("pell")!, Starter));
     }
 }
