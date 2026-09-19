@@ -27,7 +27,7 @@ public static class Runner
     /// <summary>A full game from the opening state until the battle is decided.</summary>
     public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage)
     {
-        var state = BattleState.From(map, content, SimRoster.Roster, seed, scheme, benched);
+        var state = BattleState.From(map, content, content.Cast, seed, scheme, benched);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
         foreach (var unit in state.UnitsOf(Side.Player))
         {
@@ -129,7 +129,7 @@ public static class Gates
     /// <summary>Gate 3: one enemy phase from deployment with no player move kills nobody. A map declaring <c>cheap_shots: allowed</c> prints the waiver and the kills, and passes.</summary>
     public static GateResult Gate3(GameContent content, MapDefinition map, string id)
     {
-        var state = BattleState.From(map, content, SimRoster.Roster, 1);
+        var state = BattleState.From(map, content, content.Cast, 1);
         var kills = 0;
         state = Apply(state, content, new EndPhase(), ref kills);
         foreach (var command in EnemyAi.Plan(state, content))
@@ -177,7 +177,7 @@ public static class Gates
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
-        var opening = BattleState.From(map, content, SimRoster.Roster, 1);
+        var opening = BattleState.From(map, content, content.Cast, 1);
         var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
         var recruits = opening.UnitsOf(Side.Player).Where(u => !u.IsCaptain).Select(u => u.Id).ToList();
         var rows = new List<AblationRow>();
@@ -341,7 +341,7 @@ public static class Gates
     public static void ForecastStream(GameContent content, Gates.ForecastTally tally, int combats, int seed = 1)
     {
         var random = new Random(seed);
-        var pool = new List<Unit>(SimRoster.Roster);
+        var pool = new List<Unit>(content.Cast);
         foreach (var template in content.Units.Values)
         {
             for (var level = 1; level <= 10; level += 3)
@@ -402,10 +402,4 @@ public static class Gates
         var sorted = values.OrderBy(v => v).ToList();
         return sorted.Count % 2 == 1 ? sorted[sorted.Count / 2] : (sorted[sorted.Count / 2 - 1] + sorted[sorted.Count / 2]) / 2;
     }
-}
-
-/// <summary>The player's roster until issue 13 lands the cast.</summary>
-public static class SimRoster
-{
-    public static ValueList<Unit> Roster => Ironwake.Content.SyntheticRoster.Cadets;
 }

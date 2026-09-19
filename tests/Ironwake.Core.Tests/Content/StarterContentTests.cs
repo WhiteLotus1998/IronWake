@@ -13,7 +13,62 @@ public class StarterContentTests
         Assert.Equal(9, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
         Assert.Equal(17, Content.Weapons.Count);
-        Assert.Equal(9, Content.Units.Count);
+        Assert.Equal(20, Content.Units.Count);
+        Assert.Equal(11, Content.Cast.Count);
+    }
+
+    /// <summary>DESIGN.md section 9: a captain and ten recruits, three or four per region, every weapon type and movement type covered, hooks between cast members (DECISIONS/0022).</summary>
+    [Fact]
+    public void TheCastCoversSectionNine()
+    {
+        var cast = Content.Cast;
+        Assert.Equal("captain", cast[0].Id);
+        Assert.True(Content.Class(cast[0].ClassId).CanUse(WeaponType.Sword));
+        Assert.All(cast.Skip(1), u => Assert.True(cast[0].Stats.Cha > u.Stats.Cha, u.Id + " out-charms the captain"));
+
+        var recruits = cast.Skip(1).ToList();
+        Assert.Equal(10, recruits.Count);
+        var regions = recruits.GroupBy(u => u.Region).ToDictionary(g => g.Key!, g => g.Count());
+        Assert.Equal(3, regions.Count);
+        Assert.All(regions.Values, n => Assert.InRange(n, 3, 4));
+        Assert.DoesNotContain(cast[0].Region, regions.Keys);
+
+        var classes = cast.Select(u => Content.Class(u.ClassId)).ToList();
+        foreach (var type in Enum.GetValues<WeaponType>())
+        {
+            Assert.Contains(classes, c => c.CanUse(type));
+        }
+
+        foreach (var movement in Enum.GetValues<MovementType>())
+        {
+            Assert.Contains(classes, c => c.Movement == movement);
+        }
+
+        var ids = cast.Select(u => u.Id).ToHashSet();
+        foreach (var recruit in recruits)
+        {
+            Assert.Equal(2, recruit.Hooks.Count);
+            Assert.All(recruit.Hooks, h => Assert.True(ids.Contains(h) && h != recruit.Id, recruit.Id + " hooks " + h));
+            Assert.False(string.IsNullOrWhiteSpace(recruit.Personality));
+            Assert.NotEqual(recruit.Name, recruit.Id);
+        }
+
+        Assert.Empty(cast[0].Hooks);
+        Assert.All(cast, u => Assert.All(u.Inventory.Items, s => Assert.True(
+            !Content.Weapons.TryGetValue(s.ItemId, out var w) || Content.Class(u.ClassId).CanUse(w.Type), u.Id + " cannot use " + s.ItemId)));
+    }
+
+    /// <summary>Design Table, seventh round: no Reason or Faith unit ships with one casting option.</summary>
+    [Fact]
+    public void EveryCasterCarriesTwoSpells()
+    {
+        var casters = Content.Cast.Where(u => Content.Class(u.ClassId).Weapons.All(t => t.IsMagic())).ToList();
+        Assert.NotEmpty(casters);
+        foreach (var caster in casters)
+        {
+            var spells = caster.Inventory.Items.Count(s => Content.Weapons.ContainsKey(s.ItemId));
+            Assert.True(spells >= 2, caster.Id + " carries " + spells + " spells");
+        }
     }
 
     [Fact]
@@ -35,7 +90,10 @@ public class StarterContentTests
         Assert.Equal(once.Classes.Text, twice.Classes.Text);
         Assert.Equal(once.Weapons.Text, twice.Weapons.Text);
         Assert.Equal(once.Terrain.Text, twice.Terrain.Text);
-        Assert.Equal(once.Units.Single().Text, twice.Units.Single().Text);
+        Assert.Equal(2, once.Units.Count);
+        Assert.Equal(once.Units.Select(u => u.Name), twice.Units.Select(u => u.Name));
+        Assert.Equal(once.Units.Select(u => u.Text), twice.Units.Select(u => u.Text));
+        Assert.Contains(once.Units, u => u.Name == ContentFiles.CastName);
     }
 
     // The terrain table from DESIGN.md section 4, one row per terrain: costs are

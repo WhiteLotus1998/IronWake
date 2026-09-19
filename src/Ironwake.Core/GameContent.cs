@@ -18,6 +18,14 @@ public sealed record GameContent(
     ImmutableSortedDictionary<string, Item> Items,
     int WakeRadius)
 {
+    /// <summary>
+    /// The player's roster in roster order, the captain first (DESIGN.md section 9; issue 13):
+    /// the units of <c>units/cast.json</c> in file order. A bare <c>recruit</c> slot on a map
+    /// takes the next undeployed recruit in this order, so the order decides who fights the
+    /// early maps. Empty when the content has no cast file.
+    /// </summary>
+    public ValueList<Unit> Cast { get; init; } = ValueList<Unit>.Empty;
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -57,6 +65,7 @@ public sealed record GameContent(
         && DictEquals(Terrain, other.Terrain)
         && DictEquals(Units, other.Units)
         && DictEquals(Items, other.Items)
+        && Cast == other.Cast
         && WakeRadius == other.WakeRadius;
 
     public override int GetHashCode() =>

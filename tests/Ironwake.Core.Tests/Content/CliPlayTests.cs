@@ -27,11 +27,12 @@ public class CliPlayTests
     }
 
     [Fact]
-    public void PlayPrintsTheRosterNoticeFirst()
+    public void PlayPrintsTheMapHeaderFirstAndFieldsTheCast()
     {
         var output = Play(out var exit, "");
 
-        Assert.StartsWith(PlaySession.MissingSystems + "\n", output);
+        Assert.StartsWith("Old Mill Road, seed 7, scheme ", output);
+        Assert.DoesNotContain("synthetic", output);
         Assert.DoesNotContain("issue 9", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);
@@ -167,7 +168,7 @@ public class CliPlayTests
         Assert.Contains("> forecast wren brigand-1\nforecast wren -> brigand-1: dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
         Assert.Contains("> attack wren brigand-1 1\nforecast wren -> brigand-1:", output);
         Assert.Contains("wren attacks brigand-1\n  wren hits brigand-1 for 10", output);
-        Assert.Contains("> show wren\nwren: wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
+        Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
         Assert.Contains("weapon: Iron Sword (mt 5 hit 90 crit 0 wt 5 range 1-1)\n", output);
         Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\n", output);
         Assert.Contains("battle ongoing at turn 1, player phase\n", output);
@@ -236,7 +237,7 @@ public class SimFullTests
     public void TraceNamesTheSchemeAndAnUnknownSchemeIsRefusedWithUsage()
     {
         var one = Capture(() => Ironwake.Sim.Program.Main(new[] { "--trace", "old_mill_road", "3", "--scheme", "one" }));
-        Assert.StartsWith("# old_mill_road seed 3, heuristic player, one roll;", one);
+        Assert.StartsWith("# old_mill_road seed 3, heuristic player, one roll\n", one);
         var refused = 0;
         var output = Capture(() => refused = Ironwake.Sim.Program.Main(new[] { "--full", "old_mill_road", "--seeds", "3", "--scheme", "both" }));
         Assert.Equal(2, refused);

@@ -48,9 +48,9 @@ public static class ContentLoader
         var classes = ParseClasses(files.Classes);
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
-        var units = ParseUnits(files.Units, classes, weapons, items);
+        var (units, cast) = ParseUnits(files.Units, classes, weapons, items);
         var wakeRadius = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius);
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast };
     }
 
     /// <summary>The consumables of DESIGN.md section 5 (issue 9): each heals its user and has a number of uses. An id shared with a weapon is refused, since an inventory entry names either.</summary>
@@ -402,7 +402,14 @@ public static class ContentLoader
         return builder.ToImmutable();
     }
 
-    private static ImmutableSortedDictionary<string, Unit> ParseUnits(
+    /// <summary>
+    /// Every unit file, plus the cast: the units of <see cref="ContentFiles.CastName"/> in
+    /// file order, the first the captain. A cast entry must carry a region and a personality
+    /// (section 9), its hooks must name other cast members, and a Reason or Faith unit must
+    /// carry at least two castable spells, since a spent spell does not equip and the only
+    /// sidearm a caster can hold is a second book (Design Table, seventh round).
+    /// </summary>
+    private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast) ParseUnits(
         IReadOnlyList<ContentFile> files,
         ImmutableSortedDictionary<string, UnitClass> classes,
         ImmutableSortedDictionary<string, Weapon> weapons,
@@ -410,10 +417,13 @@ public static class ContentLoader
     {
         var builder = ImmutableSortedDictionary.CreateBuilder<string, Unit>(StringComparer.Ordinal);
         var origin = new Dictionary<string, string>(StringComparer.Ordinal);
+        var cast = new List<Unit>();
+        var castNodes = new List<EntryNode>();
         foreach (var file in files)
         {
             var entries = Entries(file, "units");
             RequireUnique(file, entries);
+            var isCast = file.Name == ContentFiles.CastName;
             foreach (var node in entries)
             {
                 if (origin.TryGetValue(node.Entry!, out var otherFile))
@@ -422,11 +432,60 @@ public static class ContentLoader
                 }
 
                 origin[node.Entry!] = file.Name;
-                builder.Add(node.Entry!, ParseUnit(node, classes, weapons, items));
+                var unit = ParseUnit(node, classes, weapons, items);
+                builder.Add(node.Entry!, unit);
+                if (isCast)
+                {
+                    cast.Add(unit);
+                    castNodes.Add(node);
+                }
             }
         }
 
-        return builder.ToImmutable();
+        var castIds = new HashSet<string>(cast.Select(u => u.Id), StringComparer.Ordinal);
+        for (var i = 0; i < cast.Count; i++)
+        {
+            ValidateCastEntry(castNodes[i], cast[i], castIds, classes, weapons);
+        }
+
+        return (builder.ToImmutable(), ValueList<Unit>.From(cast));
+    }
+
+    private static void ValidateCastEntry(
+        EntryNode node,
+        Unit unit,
+        HashSet<string> castIds,
+        ImmutableSortedDictionary<string, UnitClass> classes,
+        ImmutableSortedDictionary<string, Weapon> weapons)
+    {
+        if (string.IsNullOrWhiteSpace(unit.Region))
+        {
+            throw node.Error("region", "a cast member names a home region");
+        }
+
+        if (string.IsNullOrWhiteSpace(unit.Personality))
+        {
+            throw node.Error("personality", "a cast member carries a one-line personality");
+        }
+
+        foreach (var hook in unit.Hooks)
+        {
+            if (hook == unit.Id || !castIds.Contains(hook))
+            {
+                throw node.Error("hooks", $"'{hook}' is not another cast member");
+            }
+        }
+
+        var unitClass = classes[unit.ClassId];
+        var casterOnly = unitClass.Weapons.Count > 0 && unitClass.Weapons.All(t => t.IsMagic());
+        if (casterOnly)
+        {
+            var castable = unit.Inventory.Items.Count(s => weapons.TryGetValue(s.ItemId, out var w) && unitClass.CanUse(w.Type));
+            if (castable < 2)
+            {
+                throw node.Error("inventory", "a Reason or Faith unit carries at least two castable spells; a spent spell does not equip");
+            }
+        }
     }
 
     private static Unit ParseUnit(
@@ -528,6 +587,9 @@ public static class ContentLoader
             new Inventory(ValueList<ItemStack>.From(items)),
             ValueList<string>.From(node.StringArrayOrEmpty("abilities")),
             node.OptionalString("region"),
-            node.OptionalString("personality"));
+            node.OptionalString("personality"))
+        {
+            Hooks = ValueList<string>.From(node.StringArrayOrEmpty("hooks")),
+        };
     }
 }

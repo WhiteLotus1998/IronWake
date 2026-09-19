@@ -83,8 +83,8 @@ public class SimGateTests
         var (gate1, baseline) = Gates.Gate1(Starter, map, "walled", 30);
         var result = Gates.Gate4(Starter, map, "walled", baseline);
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
-        Assert.Contains("recruit-2: drop 0.000 se 0.000", result.Line);
-        Assert.Contains("recruit-2: drop 0.000 se 0.000 own [atk 0 dmg 0 heal 0 abs 0]", result.Line);
+        Assert.Contains("teodor: drop 0.000 se 0.000", result.Line);
+        Assert.Contains("teodor: drop 0.000 se 0.000 own [atk 0 dmg 0 heal 0 abs 0]", result.Line);
         Assert.Contains("DEAD WEIGHT", result.Line);
         Assert.DoesNotContain("wren: drop 0.000 se 0.000", result.Line);
         Assert.Contains("captain captain: baseline [atk", result.Line);
@@ -152,7 +152,7 @@ public class SimGateTests
         var result = Gates.Gate4(Starter, map, "escape", baseline);
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
         Assert.Contains("cast not earning its deployment: benching the median recruit raises the win rate", result.Line);
-        Assert.Contains("recruit-2: drop -1.000", result.Line);
+        Assert.Contains("teodor: drop -1.000", result.Line);
         Assert.DoesNotContain("DEAD WEIGHT", result.Line);
     }
 

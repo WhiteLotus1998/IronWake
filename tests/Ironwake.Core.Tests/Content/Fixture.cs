@@ -52,9 +52,15 @@ internal static class Fixture
         string? units = null,
         string? secondUnitsFile = null,
         string? rules = null,
-        string? items = null)
+        string? items = null,
+        string? cast = null)
     {
         var unitFiles = new List<ContentFile> { new("units/units.json", units ?? Units) };
+        if (cast is not null)
+        {
+            unitFiles.Add(new ContentFile(ContentFiles.CastName, cast));
+        }
+
         if (secondUnitsFile is not null)
         {
             unitFiles.Add(new ContentFile("units/more.json", secondUnitsFile));
