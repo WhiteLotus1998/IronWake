@@ -33,25 +33,55 @@ public static class Program
         if (args.Length > 1 && args[0] == "--full")
         {
             var seeds = Gates.DefaultSeeds;
+            RollScheme? scheme = RollScheme.TwoRollAverage;
             for (var i = 2; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
                 {
                     seeds = n;
                 }
+                else if (args[i] == "--scheme")
+                {
+                    scheme = ParseScheme(args[i + 1]);
+                }
             }
 
-            return Full(args[1], seeds);
+            if (scheme is { } full)
+            {
+                return Full(args[1], seeds, full);
+            }
         }
 
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
         {
-            return Trace(args[1], traceSeed);
+            RollScheme? scheme = RollScheme.TwoRollAverage;
+            for (var i = 3; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--scheme")
+                {
+                    scheme = ParseScheme(args[i + 1]);
+                }
+            }
+
+            if (scheme is { } trace)
+            {
+                return Trace(args[1], traceSeed, trace);
+            }
         }
 
-        Console.WriteLine("usage: ironwake-sim --smoke | --full <map> [--seeds N] | --full --all [--seeds N] | --trace <map> <seed>");
+        Console.WriteLine(Usage);
         return 2;
     }
+
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two]";
+
+    /// <summary>The <c>--scheme</c> argument: <c>one</c> is one roll, <c>two</c> is the two-roll average; anything else is refused with the usage line.</summary>
+    public static RollScheme? ParseScheme(string text) => text switch
+    {
+        "one" => RollScheme.OneRoll,
+        "two" => RollScheme.TwoRollAverage,
+        _ => null,
+    };
 
     /// <summary>
     /// One game of the heuristic player on a map and a seed, printed as the script the CLI
@@ -59,7 +89,7 @@ public static class Program
     /// wakes as comments), so a baseline game can be read turn by turn or handed to
     /// <c>ironwake play --script</c>.
     /// </summary>
-    public static int Trace(string mapId, ulong seed)
+    public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -76,9 +106,9 @@ public static class Program
             return 2;
         }
 
-        var state = BattleState.From(maps[0].Map, content, SimRoster.Roster, seed);
+        var state = BattleState.From(maps[0].Map, content, SimRoster.Roster, seed, scheme);
         var player = new HeuristicPlayer();
-        Console.WriteLine($"# {mapId} seed {seed}, heuristic player; {SyntheticRoster.Notice}");
+        Console.WriteLine($"# {mapId} seed {seed}, heuristic player, {Gates.Name(scheme)}; {SyntheticRoster.Notice}");
         while (!state.Outcome.IsOver)
         {
             var enemy = state.Phase == Side.Enemy;
@@ -135,8 +165,8 @@ public static class Program
         _ => command.ToString() ?? "",
     };
 
-    /// <summary>All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs them, then 1 to 4 over <paramref name="seeds"/> seeds.</summary>
-    public static int Full(string mapId, int seeds)
+    /// <summary>All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs them, then 1 to 4 over <paramref name="seeds"/> seeds under <paramref name="scheme"/>.</summary>
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -154,20 +184,20 @@ public static class Program
             return 2;
         }
 
-        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds; {SyntheticRoster.Notice}");
+        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}; {SyntheticRoster.Notice}");
         var failed = false;
         foreach (var (id, map) in maps)
         {
             var one = new[] { (id, map) };
             var tally = new Gates.ForecastTally();
             Gates.ForecastStream(content, tally, Gate5MinimumCombats);
-            var (gate1, baseline) = Gates.Gate1(content, map, id, seeds);
+            var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme);
             var rows = new List<GateResult>
             {
                 gate1,
-                Gates.Gate2(content, map, id, seeds),
+                Gates.Gate2(content, map, id, seeds, scheme),
                 Gates.Gate3(content, map, id),
-                Gates.Gate4(content, map, id, baseline),
+                Gates.Gate4(content, map, id, baseline, scheme),
                 Gate6(content, one, tally),
                 tally.Result(Gate5MinimumCombats),
                 Gate7(content, one),
