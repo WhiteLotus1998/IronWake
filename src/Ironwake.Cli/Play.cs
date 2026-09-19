@@ -22,8 +22,8 @@ public sealed class PlaySession
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
 
-    /// <summary>The line every transcript starts with: what this build stands in for (Design Table, fourth round). Every system of section 12's phase 1 is in.</summary>
-    public const string MissingSystems = SyntheticRoster.Notice;
+    /// <summary>The refusal when the content directory has no cast file: the roster is content (issue 13), so nothing stands in for it.</summary>
+    public const string NoCast = "content has no cast: " + ContentFiles.CastName + " is missing or empty";
 
     private const string Help = """
         commands:
@@ -133,7 +133,13 @@ public sealed class PlaySession
             input = Console.In;
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, SyntheticRoster.Cadets, seed), Console.Out, scripted: script is not null);
+        if (content.Cast.Count == 0)
+        {
+            Console.Error.WriteLine(NoCast);
+            return 2;
+        }
+
+        var session = new PlaySession(content, BattleState.From(map, content, content.Cast, seed), Console.Out, scripted: script is not null);
         return session.Play(input, strict, seed);
     }
 
@@ -155,7 +161,6 @@ public sealed class PlaySession
 
     private int Play(TextReader input, bool strict, ulong seed)
     {
-        _out.WriteLine(MissingSystems);
         _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
         _out.Write(MapRenderer.Render(_state, _content));
         var commands = 0;

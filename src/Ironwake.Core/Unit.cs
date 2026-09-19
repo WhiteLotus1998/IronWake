@@ -23,6 +23,12 @@ public sealed record Unit(
     public const int MaxLevel = 30;
     public const int MaxExp = 99;
 
+    /// <summary>
+    /// The two cast members this recruit gets on with (DESIGN.md section 9): the support
+    /// hooks Phase 3 builds rapport on. Empty for the captain and for enemy templates.
+    /// </summary>
+    public ValueList<string> Hooks { get; init; } = ValueList<string>.Empty;
+
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));
 

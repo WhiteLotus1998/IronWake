@@ -21,4 +21,7 @@ public sealed record ContentFiles(
     public const string WeaponsName = "weapons.json";
     public const string TerrainName = "terrain.json";
     public const string UnitsDirectory = "units";
+
+    /// <summary>The unit file that holds the player's cast, in roster order (issue 13).</summary>
+    public const string CastName = UnitsDirectory + "/cast.json";
 }

@@ -7,7 +7,7 @@ namespace Ironwake.Content;
 /// <summary>
 /// Writes a <see cref="GameContent"/> back to the file shapes <see cref="ContentLoader"/>
 /// reads. Output is canonical: sorted by id, every field present, so two equal contents
-/// serialize to identical text. All units go into one file, units/all.json.
+/// serialize to identical text. The cast goes into units/cast.json and every other unit into units/all.json.
 /// </summary>
 public static class ContentSerializer
 {
@@ -17,9 +17,29 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.ClassesName, WriteArray("classes", content.Classes.Values, WriteClass)),
         new ContentFile(ContentFiles.WeaponsName, WriteArray("weapons", content.Weapons.Values, WriteWeapon)),
         new ContentFile(ContentFiles.TerrainName, WriteArray("terrain", content.Terrain.Values, WriteTerrain)),
-        new[] { new ContentFile(ContentFiles.UnitsDirectory + "/all.json", WriteArray("units", content.Units.Values, WriteUnit)) },
+        UnitFiles(content),
         new ContentFile(ContentFiles.RulesName, "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n"),
         new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)));
+
+    /// <summary>
+    /// The cast goes to <see cref="ContentFiles.CastName"/> in roster order, since the order is
+    /// content (issue 13); every other unit goes to units/all.json. No cast file is written for
+    /// content without a cast, so a round trip stays equal.
+    /// </summary>
+    private static IReadOnlyList<ContentFile> UnitFiles(GameContent content)
+    {
+        var castIds = new HashSet<string>(content.Cast.Select(u => u.Id), StringComparer.Ordinal);
+        var files = new List<ContentFile>
+        {
+            new(ContentFiles.UnitsDirectory + "/all.json", WriteArray("units", content.Units.Values.Where(u => !castIds.Contains(u.Id)), WriteUnit)),
+        };
+        if (content.Cast.Count > 0)
+        {
+            files.Add(new ContentFile(ContentFiles.CastName, WriteArray("units", content.Cast, WriteUnit)));
+        }
+
+        return files;
+    }
 
     private static void WriteItem(Utf8JsonWriter writer, Item item)
     {
@@ -174,6 +194,17 @@ public static class ContentSerializer
         if (unit.Personality is not null)
         {
             writer.WriteString("personality", unit.Personality);
+        }
+
+        if (unit.Hooks.Count > 0)
+        {
+            writer.WriteStartArray("hooks");
+            foreach (var hook in unit.Hooks)
+            {
+                writer.WriteStringValue(hook);
+            }
+
+            writer.WriteEndArray();
         }
 
         writer.WriteEndObject();

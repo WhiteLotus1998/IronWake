@@ -9,9 +9,8 @@ namespace Ironwake.Sim;
 /// --smoke runs the per-PR gates over every map under content/maps; --full runs the
 /// per-map gates (1-4) on one map or on all of them, with gates 5-8 re-run on that map,
 /// and exits non-zero on any failed gate. Gate 5 (forecast honesty) tallies every combat
-/// of gate 6's random stream against the forecast asked before it. Until issue 13 lands
-/// the cast, the player's roster is five synthetic cadets with iron swords, and the
-/// output says so.
+/// of gate 6's random stream against the forecast asked before it. The player's roster
+/// is the content's cast (units/cast.json, issue 13).
 /// </summary>
 public static class Program
 {
@@ -106,9 +105,9 @@ public static class Program
             return 2;
         }
 
-        var state = BattleState.From(maps[0].Map, content, SimRoster.Roster, seed, scheme);
+        var state = BattleState.From(maps[0].Map, content, content.Cast, seed, scheme);
         var player = new HeuristicPlayer();
-        Console.WriteLine($"# {mapId} seed {seed}, heuristic player, {Gates.Name(scheme)}; {SyntheticRoster.Notice}");
+        Console.WriteLine($"# {mapId} seed {seed}, heuristic player, {Gates.Name(scheme)}");
         while (!state.Outcome.IsOver)
         {
             var enemy = state.Phase == Side.Enemy;
@@ -184,7 +183,7 @@ public static class Program
             return 2;
         }
 
-        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}; {SyntheticRoster.Notice}");
+        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}");
         var failed = false;
         foreach (var (id, map) in maps)
         {
@@ -225,7 +224,7 @@ public static class Program
 
         var content = ContentLoader.Load(contentDir);
         var maps = MapFiles.LoadAll(contentDir, content);
-        Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}; {SyntheticRoster.Notice}");
+        Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}");
         var failed = false;
         var tally = new Gates.ForecastTally();
         Gates.ForecastStream(content, tally, Gate5MinimumCombats);
@@ -308,7 +307,7 @@ public static class Program
     /// <summary>The random player against the enemy AI until the battle is decided. Returns the canonical end state and the turns played.</summary>
     private static (string State, int Turns) FullGame(GameContent content, MapDefinition map, ulong seed)
     {
-        var state = BattleState.From(map, content, Roster, seed);
+        var state = BattleState.From(map, content, content.Cast, seed);
         var random = new Random((int)seed);
         while (!state.Outcome.IsOver)
         {
@@ -376,7 +375,7 @@ public static class Program
     private static (string State, string Events) Run(
         GameContent content, MapDefinition map, ulong seed, int commands, Random? random, List<Command>? record, List<Command>? replay, Gates.ForecastTally? tally)
     {
-        var state = BattleState.From(map, content, Roster, seed);
+        var state = BattleState.From(map, content, content.Cast, seed);
         var events = new System.Text.StringBuilder();
         for (var i = 0; i < commands; i++)
         {
@@ -434,8 +433,6 @@ public static class Program
 
         return (state.Canonical(), events.ToString());
     }
-
-    private static ValueList<Unit> Roster => SyntheticRoster.Cadets;
 
     private static string? FindContent()
     {

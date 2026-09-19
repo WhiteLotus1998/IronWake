@@ -1,0 +1,135 @@
+{
+  "units": [
+    {
+      "id": "captain",
+      "name": "Alder Fenn",
+      "class": "cadet",
+      "level": 1,
+      "region": "crown",
+      "personality": "Crown-appointed, twenty-four, and the only one here who did not choose it; keeps a list of every cadet's name in his coat and reads it before each map.",
+      "stats": { "hp": 22, "str": 8, "mag": 0, "dex": 7, "spd": 8, "lck": 6, "def": 5, "res": 2, "cha": 9 },
+      "growths": { "hp": 55, "str": 40, "mag": 10, "dex": 40, "spd": 40, "lck": 35, "def": 30, "res": 20, "cha": 50 },
+      "inventory": [ { "item": "iron_sword" }, { "item": "field_dressing" } ]
+    },
+    {
+      "id": "wren",
+      "name": "Wren",
+      "class": "cadet",
+      "level": 1,
+      "region": "aldmere",
+      "personality": "Counts tiles under her breath and is usually right; talks to fill silences and fills a lot of them.",
+      "hooks": [ "pell", "teodor" ],
+      "stats": { "hp": 20, "str": 7, "mag": 0, "dex": 6, "spd": 8, "lck": 5, "def": 4, "res": 2, "cha": 3 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 45, "spd": 50, "lck": 30, "def": 25, "res": 15, "cha": 25 },
+      "inventory": [ { "item": "iron_sword" }, { "item": "field_dressing" } ]
+    },
+    {
+      "id": "teodor",
+      "name": "Teodor",
+      "class": "pikeman",
+      "level": 1,
+      "region": "aldmere",
+      "personality": "Eldest of nine, gives orders to anyone younger, officers included; follows them himself when nobody is watching.",
+      "hooks": [ "wren", "brannock" ],
+      "stats": { "hp": 20, "str": 7, "mag": 0, "dex": 5, "spd": 5, "lck": 2, "def": 4, "res": 1, "cha": 4 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 35, "spd": 30, "lck": 20, "def": 35, "res": 15, "cha": 30 },
+      "inventory": [ { "item": "iron_lance" }, { "item": "field_dressing" } ]
+    },
+    {
+      "id": "ottilie",
+      "name": "Ottilie",
+      "class": "bowman",
+      "level": 1,
+      "region": "sallow",
+      "personality": "Keeps a ledger of every arrow and bills the crown for the ones she loses; has not been paid.",
+      "hooks": [ "ansgar", "wren" ],
+      "stats": { "hp": 17, "str": 5, "mag": 0, "dex": 7, "spd": 6, "lck": 4, "def": 3, "res": 2, "cha": 4 },
+      "growths": { "hp": 40, "str": 35, "mag": 5, "dex": 50, "spd": 40, "lck": 30, "def": 20, "res": 20, "cha": 30 },
+      "inventory": [ { "item": "iron_bow" }, { "item": "field_dressing" } ]
+    },
+    {
+      "id": "pell",
+      "name": "Pell",
+      "class": "adept",
+      "level": 1,
+      "region": "aldmere",
+      "personality": "Reads in the saddle, at table, and once during a drill; sets small fires by accident and large ones on purpose.",
+      "hooks": [ "wren", "maud" ],
+      "stats": { "hp": 16, "str": 1, "mag": 6, "dex": 5, "spd": 5, "lck": 3, "def": 2, "res": 4, "cha": 3 },
+      "growths": { "hp": 35, "str": 5, "mag": 50, "dex": 35, "spd": 35, "lck": 25, "def": 10, "res": 35, "cha": 25 },
+      "inventory": [ { "item": "cinder" }, { "item": "gust" } ]
+    },
+    {
+      "id": "dunstan",
+      "name": "Dunstan",
+      "class": "bulwark",
+      "level": 1,
+      "region": "kestrow",
+      "personality": "Slow to speak and slower to walk; has never once stepped back, and carries the scars of the times he should have.",
+      "hooks": [ "rook", "maud" ],
+      "stats": { "hp": 20, "str": 7, "mag": 0, "dex": 3, "spd": 4, "lck": 2, "def": 4, "res": 1, "cha": 2 },
+      "growths": { "hp": 55, "str": 40, "mag": 0, "dex": 25, "spd": 20, "lck": 15, "def": 35, "res": 10, "cha": 20 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "maud",
+      "name": "Maud",
+      "class": "chaplain",
+      "level": 1,
+      "region": "kestrow",
+      "personality": "Mends what she is handed, people included, and says a short prayer over each one whether it wanted one or not.",
+      "hooks": [ "dunstan", "pell" ],
+      "stats": { "hp": 17, "str": 2, "mag": 4, "dex": 4, "spd": 4, "lck": 5, "def": 2, "res": 5, "cha": 5 },
+      "growths": { "hp": 40, "str": 10, "mag": 40, "dex": 30, "spd": 30, "lck": 35, "def": 15, "res": 40, "cha": 35 },
+      "inventory": [ { "item": "radiance" }, { "item": "salve" } ]
+    },
+    {
+      "id": "ansgar",
+      "name": "Ansgar",
+      "class": "outrider",
+      "level": 1,
+      "region": "sallow",
+      "personality": "Rode here on a horse he says was a gift; the horse's former owner says otherwise.",
+      "hooks": [ "ottilie", "keziah" ],
+      "stats": { "hp": 19, "str": 6, "mag": 0, "dex": 5, "spd": 6, "lck": 3, "def": 3, "res": 1, "cha": 4 },
+      "growths": { "hp": 45, "str": 40, "mag": 5, "dex": 35, "spd": 35, "lck": 25, "def": 25, "res": 15, "cha": 35 },
+      "inventory": [ { "item": "iron_lance" }, { "item": "iron_sword" } ]
+    },
+    {
+      "id": "rook",
+      "name": "Rook",
+      "class": "skyrider",
+      "level": 1,
+      "region": "kestrow",
+      "personality": "Grew up on a cliff and distrusts flat ground; goes high when nervous, which is exactly when she should not.",
+      "hooks": [ "dunstan", "brannock" ],
+      "stats": { "hp": 17, "str": 5, "mag": 0, "dex": 6, "spd": 7, "lck": 4, "def": 2, "res": 3, "cha": 2 },
+      "growths": { "hp": 40, "str": 35, "mag": 5, "dex": 40, "spd": 50, "lck": 30, "def": 15, "res": 30, "cha": 20 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
+      "id": "keziah",
+      "name": "Keziah",
+      "class": "reaver",
+      "level": 1,
+      "region": "sallow",
+      "personality": "A harbour brawler who has never lost a fight she started, and laughs at the wrong moment in every one of them.",
+      "hooks": [ "ansgar", "ottilie" ],
+      "stats": { "hp": 21, "str": 7, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 3, "res": 0, "cha": 2 },
+      "growths": { "hp": 55, "str": 45, "mag": 0, "dex": 30, "spd": 30, "lck": 20, "def": 20, "res": 10, "cha": 15 },
+      "inventory": [ { "item": "iron_axe" } ]
+    },
+    {
+      "id": "brannock",
+      "name": "Brannock",
+      "class": "cadet",
+      "level": 1,
+      "region": "aldmere",
+      "personality": "Was the best farmhand in his parish and says so; treats every drill as a race and every race as a drill.",
+      "hooks": [ "teodor", "rook" ],
+      "stats": { "hp": 19, "str": 6, "mag": 0, "dex": 5, "spd": 6, "lck": 4, "def": 4, "res": 1, "cha": 3 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 35, "spd": 40, "lck": 25, "def": 30, "res": 15, "cha": 20 },
+      "inventory": [ { "item": "hatchet" }, { "item": "field_dressing" } ]
+    }
+  ]
+}

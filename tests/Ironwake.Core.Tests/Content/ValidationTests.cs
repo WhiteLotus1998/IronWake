@@ -375,4 +375,63 @@ public class ValidationTests
     {
         Assert.Equal(6, ContentLoader.Parse(Fixture.Files(rules: "{ \"wakeRadius\": 6 }")).WakeRadius);
     }
+
+    private static string CastMember(string id, string extra = "") =>
+        "{ \"id\": \"" + id + "\", \"name\": \"" + id + "\", \"class\": \"cadet\", " + extra +
+        " \"stats\": { \"hp\": 20, \"str\": 6, \"mag\": 1, \"dex\": 5, \"spd\": 6, \"lck\": 3, \"def\": 4, \"res\": 2, \"cha\": 5 }," +
+        " \"growths\": { \"hp\": 50, \"str\": 40, \"mag\": 10, \"dex\": 40, \"spd\": 45, \"lck\": 30, \"def\": 30, \"res\": 20, \"cha\": 35 }," +
+        " \"inventory\": [ { \"item\": \"iron_sword\" } ] }";
+
+    private const string Authored = "\"region\": \"crown\", \"personality\": \"Says little.\",";
+
+    /// <summary>The cast is the units of units/cast.json in file order, the first the captain; other unit files contribute nothing to it.</summary>
+    [Fact]
+    public void TheCastIsReadInFileOrder()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored) + ", " + CastMember("wren", Authored + " \"hooks\": [ \"captain\" ],") + " ] }"));
+
+        Assert.Equal(new[] { "captain", "wren" }, content.Cast.Select(u => u.Id));
+        Assert.Equal(new[] { "captain" }, content.Cast[1].Hooks);
+        Assert.Equal(3, content.Units.Count);
+        Assert.Empty(ContentLoader.Parse(Fixture.Files()).Cast);
+    }
+
+    [Fact]
+    public void ACastMemberWithoutARegionIsRefused()
+    {
+        var e = Fails(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", "\"personality\": \"Says little.\",") + " ] }"));
+        AssertNames(e, ContentFiles.CastName, "captain", "region");
+    }
+
+    [Fact]
+    public void ACastMemberWithoutAPersonalityIsRefused()
+    {
+        var e = Fails(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", "\"region\": \"crown\",") + " ] }"));
+        AssertNames(e, ContentFiles.CastName, "captain", "personality");
+    }
+
+    [Theory]
+    [InlineData("nobody")]
+    [InlineData("wren")]
+    public void AHookMustNameAnotherCastMember(string hook)
+    {
+        var e = Fails(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored) + ", " + CastMember("wren", Authored + " \"hooks\": [ \"" + hook + "\" ],") + " ] }"));
+        AssertNames(e, ContentFiles.CastName, "wren", "hooks");
+        Assert.Contains(hook, e.Message);
+    }
+
+    /// <summary>Design Table, seventh round: a spent spell does not equip, so a Reason or Faith unit carries two castable spells or is refused.</summary>
+    [Fact]
+    public void ACasterWithOneSpellIsRefused()
+    {
+        const string classes = "{ \"classes\": [ { \"id\": \"cadet\", \"name\": \"Cadet\", \"movement\": \"infantry\", \"mov\": 4, \"weapons\": [\"reason\"] } ] }";
+        const string weapons = "{ \"weapons\": [ { \"id\": \"iron_sword\", \"name\": \"Cinder\", \"type\": \"reason\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 8 } ] }";
+        var one = "{ \"units\": [ " + CastMember("captain", Authored) + " ] }";
+        var e = Fails(Fixture.Files(classes: classes, weapons: weapons, cast: one));
+        AssertNames(e, ContentFiles.CastName, "captain", "inventory");
+        Assert.Contains("two castable spells", e.Message);
+
+        var two = one.Replace("[ { \"item\": \"iron_sword\" } ]", "[ { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\", \"uses\": 3 } ]");
+        Assert.Single(ContentLoader.Parse(Fixture.Files(classes: classes, weapons: weapons, cast: two)).Cast);
+    }
 }
