@@ -146,3 +146,57 @@ public class CliPlayTests
         return writer.ToString().Replace("\r\n", "\n");
     }
 }
+
+/// <summary>The Sim's <c>--full</c> prints all eight gate rows for a map and <c>--trace</c> prints a replayable script.</summary>
+[Collection("console")]
+public class SimFullTests
+{
+    [Fact]
+    public void FullPrintsEightGateRowsForOneMap()
+    {
+        var output = Capture(() => Ironwake.Sim.Program.Full("old_mill_road", 3));
+        for (var gate = 1; gate <= 8; gate++)
+        {
+            Assert.Contains($"gate {gate} ", output);
+        }
+
+        Assert.Contains("full: ", output);
+    }
+
+    [Fact]
+    public void FullNamesTheMapsWhenTheMapIsUnknown()
+    {
+        var output = Capture(() => Ironwake.Sim.Program.Full("no_such_map", 3));
+        Assert.Contains("no map 'no_such_map'", output);
+        Assert.Contains("old_mill_road", output);
+    }
+
+    [Fact]
+    public void TraceEndsWithTheOutcome()
+    {
+        var output = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 3));
+        Assert.StartsWith("# old_mill_road seed 3", output);
+        Assert.Contains("\nend\n", output);
+        Assert.Matches("# (Won|Lost) on turn", output);
+    }
+
+    private static string Capture(Action run)
+    {
+        var previous = Console.Out;
+        var writer = new StringWriter();
+        var cwd = Directory.GetCurrentDirectory();
+        Console.SetOut(writer);
+        try
+        {
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Fixture.RealContentDirectory())!);
+            run();
+        }
+        finally
+        {
+            Directory.SetCurrentDirectory(cwd);
+            Console.SetOut(previous);
+        }
+
+        return writer.ToString();
+    }
+}

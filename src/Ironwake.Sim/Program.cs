@@ -7,11 +7,11 @@ namespace Ironwake.Sim;
 /// <summary>
 /// Headless harness. Runs the quality gates from DESIGN.md section 11.
 /// --smoke runs the per-PR gates over every map under content/maps; --full runs the
-/// per-map gates (1-4). Gates 6 (determinism, over random commands and over the enemy
-/// AI's phases), 7 (a full map of the random player against the enemy AI under a second)
-/// and 8 (crash-free) run now; gate 5 (forecast honesty over the resolver) registers when
-/// the Sim fights enough combats to count. Until issue 13 lands the cast, the player's
-/// roster is five synthetic cadets with iron swords, and the output says so.
+/// per-map gates (1-4) on one map or on all of them, with gates 5-8 re-run on that map,
+/// and exits non-zero on any failed gate. Gate 5 (forecast honesty) tallies every combat
+/// of gate 6's random stream against the forecast asked before it. Until issue 13 lands
+/// the cast, the player's roster is five synthetic cadets with iron swords, and the
+/// output says so.
 /// </summary>
 public static class Program
 {
@@ -21,6 +21,7 @@ public static class Program
     private const int Gate8Commands = 20;
     private const int Gate7Seeds = 5;
     private const int Gate7LimitMs = 1000;
+    private const int Gate5MinimumCombats = 10000;
 
     public static int Main(string[] args)
     {
@@ -29,14 +30,158 @@ public static class Program
             return Smoke();
         }
 
-        if (args.Length > 0 && args[0] == "--full")
+        if (args.Length > 1 && args[0] == "--full")
         {
-            Console.WriteLine("full: no gates registered yet");
-            return 0;
+            var seeds = Gates.DefaultSeeds;
+            for (var i = 2; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+            }
+
+            return Full(args[1], seeds);
         }
 
-        Console.WriteLine("usage: ironwake-sim --smoke | --full <map> | --full --all");
+        if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
+        {
+            return Trace(args[1], traceSeed);
+        }
+
+        Console.WriteLine("usage: ironwake-sim --smoke | --full <map> [--seeds N] | --full --all [--seeds N] | --trace <map> <seed>");
         return 2;
+    }
+
+    /// <summary>
+    /// One game of the heuristic player on a map and a seed, printed as the script the CLI
+    /// replays (player commands bare, enemy commands as <c>enemy:</c> lines, deaths and
+    /// wakes as comments), so a baseline game can be read turn by turn or handed to
+    /// <c>ironwake play --script</c>.
+    /// </summary>
+    public static int Trace(string mapId, ulong seed)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("trace: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var maps = MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0)
+        {
+            Console.WriteLine($"trace: no map '{mapId}' under {contentDir}");
+            return 2;
+        }
+
+        var state = BattleState.From(maps[0].Map, content, SimRoster.Roster, seed);
+        var player = new HeuristicPlayer();
+        Console.WriteLine($"# {mapId} seed {seed}, heuristic player; {SyntheticRoster.Notice}");
+        while (!state.Outcome.IsOver)
+        {
+            var enemy = state.Phase == Side.Enemy;
+            var commands = enemy ? EnemyAi.Plan(state, content) : player.Next(state, content);
+            foreach (var command in commands)
+            {
+                var result = Resolver.Apply(state, content, command);
+                if (!result.Accepted)
+                {
+                    Console.WriteLine($"# {command} was rejected: {result.Rejection!.Message}");
+                    return 1;
+                }
+
+                Console.WriteLine((enemy ? "enemy: " : "") + Script(command));
+                foreach (var e in result.Events)
+                {
+                    switch (e)
+                    {
+                        case CombatFought f:
+                            Console.WriteLine($"#   {f.AttackerId} vs {f.TargetId}: {string.Join(" ", f.Strikes.Select(s => s.Hit ? (s.Crit ? "crit " : "hit ") + s.Damage : "miss"))}; {f.AttackerId} {f.AttackerHpAfter} hp, {f.TargetId} {f.TargetHpAfter} hp");
+                            break;
+                        case UnitDied d:
+                            Console.WriteLine($"#   {d.UnitId} died at {d.At}");
+                            break;
+                        case GroupWoke w:
+                            Console.WriteLine($"#   group {w.Group} woke ({w.Cause})");
+                            break;
+                        case PhaseBegan p when p.Side == Side.Player:
+                            Console.WriteLine($"# turn {p.Turn}");
+                            break;
+                    }
+                }
+
+                state = result.Next;
+                if (state.Outcome.IsOver)
+                {
+                    break;
+                }
+            }
+        }
+
+        Console.WriteLine($"# {state.Outcome.Result} on turn {state.Turn}: {state.Outcome.Reason}");
+        return 0;
+    }
+
+    private static string Script(Command command) => command switch
+    {
+        Move m => $"move {m.UnitId} {m.To}",
+        Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot}" : $"attack {a.UnitId} {a.TargetId}",
+        UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot} {t}" : $"item {u.UnitId} {u.Slot}",
+        Wait w => $"wait {w.UnitId}",
+        EndPhase => "end",
+        Recall r => $"recall {r.ToIndex}",
+        _ => command.ToString() ?? "",
+    };
+
+    /// <summary>All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs them, then 1 to 4 over <paramref name="seeds"/> seeds.</summary>
+    public static int Full(string mapId, int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("full: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var all = MapFiles.LoadAll(contentDir, content);
+        var maps = mapId == "--all" ? all : all.Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0)
+        {
+            Console.WriteLine($"full: no map '{mapId}' under {contentDir}; maps are {string.Join(", ", all.Select(m => m.Id))}");
+            return 2;
+        }
+
+        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds; {SyntheticRoster.Notice}");
+        var failed = false;
+        foreach (var (id, map) in maps)
+        {
+            var one = new[] { (id, map) };
+            var tally = new Gates.ForecastTally();
+            Gates.ForecastStream(content, tally, Gate5MinimumCombats);
+            var (gate1, baseline) = Gates.Gate1(content, map, id, seeds);
+            var rows = new List<GateResult>
+            {
+                gate1,
+                Gates.Gate2(content, map, id, seeds),
+                Gates.Gate3(content, map, id),
+                Gates.Gate4(content, map, id, baseline),
+                Gate6(content, one, tally),
+                tally.Result(Gate5MinimumCombats),
+                Gate7(content, one),
+                Gate8(content, one),
+            };
+            foreach (var row in rows)
+            {
+                Console.WriteLine(row.Line);
+                failed |= !row.Passed;
+            }
+        }
+
+        Console.WriteLine(failed ? "full: FAILED" : "full: ok");
+        return failed ? 1 : 0;
     }
 
     private static int Smoke()
@@ -52,38 +197,46 @@ public static class Program
         var maps = MapFiles.LoadAll(contentDir, content);
         Console.WriteLine($"smoke: {maps.Count} maps from {contentDir}; {SyntheticRoster.Notice}");
         var failed = false;
-        failed |= !Gate6(content, maps);
-        failed |= !Gate7(content, maps);
-        failed |= !Gate8(content, maps);
-        Console.WriteLine("gate 5 forecast honesty: waiting on a Sim that counts combats");
+        var tally = new Gates.ForecastTally();
+        Gates.ForecastStream(content, tally, Gate5MinimumCombats);
+        failed |= !Print(Gate6(content, maps, tally));
+        failed |= !Print(tally.Result(Gate5MinimumCombats));
+        failed |= !Print(Gate7(content, maps));
+        failed |= !Print(Gate8(content, maps));
         Console.WriteLine(failed ? "smoke: FAILED" : "smoke: ok");
         return failed ? 1 : 0;
     }
 
-    /// <summary>Gate 6: the same seed and commands replay byte-identical through <see cref="BattleState.Canonical"/>.</summary>
-    private static bool Gate6(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
+    private static bool Print(GateResult result)
+    {
+        Console.WriteLine(result.Line);
+        return result.Passed;
+    }
+
+    /// <summary>Gate 6: the same seed and commands replay byte-identical through <see cref="BattleState.Canonical"/>. Every combat of the first run feeds gate 5's tally.</summary>
+    private static GateResult Gate6(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps, Gates.ForecastTally tally)
     {
         var watch = Stopwatch.StartNew();
         var ok = true;
+        var detail = "";
         foreach (var (id, map) in maps)
         {
             for (var seed = 1; seed <= Gate6Seeds; seed++)
             {
                 var commands = new List<Command>();
                 var random = new Random(seed);
-                var (first, firstEvents) = Run(content, map, (ulong)seed, Gate6Commands, random, commands, null);
-                var (second, secondEvents) = Run(content, map, (ulong)seed, Gate6Commands, null, null, commands);
+                var (first, firstEvents) = Run(content, map, (ulong)seed, Gate6Commands, random, commands, null, tally);
+                var (second, secondEvents) = Run(content, map, (ulong)seed, Gate6Commands, null, null, commands, null);
                 if (first != second || firstEvents != secondEvents)
                 {
-                    Console.WriteLine($"gate 6 determinism: {id} seed {seed} replayed differently");
+                    detail = $"{id} seed {seed} replayed differently; ";
                     ok = false;
                     break;
                 }
             }
         }
 
-        Console.WriteLine($"gate 6 determinism: {maps.Count} maps x {Gate6Seeds} seeds x {Gate6Commands} commands, {watch.ElapsedMilliseconds} ms: {(ok ? "ok" : "FAILED")}");
-        return ok;
+        return new GateResult($"gate 6 determinism: {detail}{maps.Count} maps x {Gate6Seeds} seeds x {Gate6Commands} commands, {watch.ElapsedMilliseconds} ms: {Gates.Verdict(ok)}", ok);
     }
 
     /// <summary>
@@ -91,9 +244,10 @@ public static class Program
     /// in under a second; the same seed replayed lands on the same canonical state, which
     /// is gate 6 over the AI's phases. The slowest game per map is what is printed and judged.
     /// </summary>
-    private static bool Gate7(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
+    private static GateResult Gate7(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
     {
         var ok = true;
+        var lines = new List<string>();
         foreach (var (id, map) in maps)
         {
             long slowest = 0;
@@ -108,17 +262,17 @@ public static class Program
                 var (second, _) = FullGame(content, map, (ulong)seed);
                 if (first != second)
                 {
-                    Console.WriteLine($"gate 6 determinism: {id} seed {seed} AI-vs-AI game replayed differently");
+                    lines.Add($"gate 6 determinism: {id} seed {seed} AI-vs-AI game replayed differently: FAILED");
                     ok = false;
                 }
             }
 
             var fast = slowest < Gate7LimitMs;
             ok &= fast;
-            Console.WriteLine($"gate 7 speed: {id}, {Gate7Seeds} AI-vs-AI games, {turns} turns, slowest {slowest} ms: {(fast ? "ok" : "FAILED")}");
+            lines.Add($"gate 7 speed: {id}, {Gate7Seeds} AI-vs-AI games, {turns} turns, slowest {slowest} ms: {Gates.Verdict(fast)}");
         }
 
-        return ok;
+        return new GateResult(string.Join('\n', lines), ok);
     }
 
     /// <summary>The random player against the enemy AI until the battle is decided. Returns the canonical end state and the turns played.</summary>
@@ -157,8 +311,9 @@ public static class Program
     }
 
     /// <summary>Gate 8: random legal command sequences throw nothing and are never rejected.</summary>
-    private static bool Gate8(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
+    private static GateResult Gate8(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps)
     {
+        var detail = "";
         var watch = Stopwatch.StartNew();
         var perMap = Math.Max(1, Gate8Sequences / Math.Max(1, maps.Count));
         var ok = true;
@@ -168,28 +323,28 @@ public static class Program
             {
                 try
                 {
-                    Run(content, map, (ulong)sequence, Gate8Commands, new Random(sequence), null, null);
+                    Run(content, map, (ulong)sequence, Gate8Commands, new Random(sequence), null, null, null);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"gate 8 crash-free: {id} sequence {sequence}: {ex.GetType().Name}: {ex.Message}");
+                    detail = $"{id} sequence {sequence}: {ex.GetType().Name}: {ex.Message}; ";
                     ok = false;
                 }
             }
         }
 
-        Console.WriteLine($"gate 8 crash-free: {maps.Count} maps x {perMap} sequences x {Gate8Commands} commands, {watch.ElapsedMilliseconds} ms: {(ok ? "ok" : "FAILED")}");
-        return ok;
+        return new GateResult($"gate 8 crash-free: {detail}{maps.Count} maps x {perMap} sequences x {Gate8Commands} commands, {watch.ElapsedMilliseconds} ms: {Gates.Verdict(ok)}", ok);
     }
 
     /// <summary>
     /// Plays random legal commands (with a Recall now and then) from <paramref name="random"/>,
     /// or replays <paramref name="replay"/>, recording what was played into
     /// <paramref name="record"/>. Returns the final canonical state and the event log.
-    /// A rejected command is a harness fault and throws.
+    /// A rejected command is a harness fault and throws. Every Attack's forecast, asked
+    /// before it is applied, is counted against its combat in <paramref name="tally"/>.
     /// </summary>
     private static (string State, string Events) Run(
-        GameContent content, MapDefinition map, ulong seed, int commands, Random? random, List<Command>? record, List<Command>? replay)
+        GameContent content, MapDefinition map, ulong seed, int commands, Random? random, List<Command>? record, List<Command>? replay, Gates.ForecastTally? tally)
     {
         var state = BattleState.From(map, content, Roster, seed);
         var events = new System.Text.StringBuilder();
@@ -221,10 +376,21 @@ public static class Program
                 command = legal[random!.Next(legal.Count)];
             }
 
+            CombatForecast? forecast = null;
+            if (tally is not null && command is Attack attack)
+            {
+                forecast = Queries.Forecast(state, content, state.Find(attack.UnitId)!, state.Find(attack.TargetId)!, attack.Slot);
+            }
+
             var result = Resolver.Apply(state, content, command);
             if (!result.Accepted)
             {
                 throw new InvalidOperationException($"{command} was rejected: {result.Rejection!.Message}");
+            }
+
+            if (forecast is not null)
+            {
+                tally!.Count(forecast, result.Events.OfType<CombatFought>().Single());
             }
 
             record?.Add(command);
