@@ -60,7 +60,11 @@ public sealed class HeuristicPlayer : IPlayer
         var weapon = unit.EquippedWeapon(content);
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var reach = state.ReachOf(unit, content);
-        var tiles = unit.Moved ? new List<Coord> { unit.At } : reach.Destinations.ToList();
+        var tiles = unit.Moved ? new List<Coord> { unit.At } : reach.Destinations.Where(t => MayEndOn(state, content, unit, t)).ToList();
+        if (tiles.Count == 0)
+        {
+            tiles.Add(unit.At);
+        }
         var enemies = state.UnitsOf(Side.Enemy).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
@@ -122,6 +126,15 @@ public sealed class HeuristicPlayer : IPlayer
 
     private static IReadOnlyList<Command> WithMove(BattleUnit unit, Coord tile, Command action) =>
         tile == unit.At ? new[] { action } : new Command[] { new Move(unit.Id, tile), action };
+
+    /// <summary>
+    /// A recruit never ends a move on a throne tile of a Seize map (issue 111): only the
+    /// captain can seize (section 7), so a recruit standing there blocks the win for as long
+    /// as it stays, and the approach toward the throne would otherwise put the first recruit
+    /// to arrive exactly there. The captain may end anywhere in reach.
+    /// </summary>
+    private static bool MayEndOn(BattleState state, GameContent content, BattleUnit unit, Coord tile) =>
+        unit.IsCaptain || state.Map.Win != WinCondition.Seize || !state.Map.IsThrone(tile);
 
     /// <summary>A heal when one is wanted: a healing spell on the most wounded ally below half, else a consumable on itself below half, from the safest tile that allows it.</summary>
     private static IReadOnlyList<Command>? Heal(BattleState state, GameContent content, BattleUnit unit, List<Coord> tiles, List<Reach> enemyReach)
@@ -247,7 +260,7 @@ public sealed class HeuristicPlayer : IPlayer
         (bool Lethal, int Remaining, bool CritLethal, int Avoid, int Exposed, int Cost) bestKey = default;
         foreach (var tile in reach.Destinations)
         {
-            if (toward.From(tile) is not { } remaining)
+            if (toward.From(tile) is not { } remaining || !MayEndOn(state, content, unit, tile))
             {
                 continue;
             }
