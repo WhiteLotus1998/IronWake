@@ -254,6 +254,49 @@ public class SimFullTests
         Assert.Matches("# (Won|Lost) on turn", output);
     }
 
+    /// <summary>
+    /// Issue 118: a trace is a script the CLI replays. Slots print one-based as the CLI reads
+    /// them, and the enemy's commands print as comments, since the CLI plays the enemy phase
+    /// itself from the same planner. Seed 2 on Old Mill Road has Wren use her dressing; the
+    /// trace replayed under --strict applies every line and ends where the Sim said.
+    /// </summary>
+    [Fact]
+    public void ATraceWithAnItemLineReplaysInTheCliUnderStrict()
+    {
+        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 2)).Replace("\r\n", "\n");
+        Assert.Contains("\nitem wren 2\n", trace);
+        Assert.DoesNotContain("\nenemy:", trace);
+        Assert.Contains("\n# enemy: wait archer-1\n", trace);
+        var outcome = System.Text.RegularExpressions.Regex.Match(trace, "# (Won|Lost) on turn (\\d+): (.*)\n$");
+        Assert.True(outcome.Success, trace);
+        var turn = int.Parse(outcome.Groups[2].Value, System.Globalization.CultureInfo.InvariantCulture);
+
+        Assert.Equal("item wren 2", Ironwake.Sim.Program.Script(new UseItem("wren", 1)));
+        Assert.Equal("item wren 1 captain", Ironwake.Sim.Program.Script(new UseItem("wren", 0, "captain")));
+        Assert.Equal("attack wren brigand-1 2", Ironwake.Sim.Program.Script(new Attack("wren", "brigand-1", 1)));
+        Assert.Equal("attack wren brigand-1", Ironwake.Sim.Program.Script(new Attack("wren", "brigand-1")));
+
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-trace-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, trace);
+        try
+        {
+            var exit = 0;
+            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "2", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() })).Replace("\r\n", "\n");
+
+            Assert.Equal(0, exit);
+            Assert.DoesNotContain("rejected ", output);
+            Assert.DoesNotContain("strict: stopped", output);
+            Assert.Contains("> item wren 2\nwren uses field_dressing", output);
+            Assert.Contains($"turn {turn} of ", output);
+            Assert.DoesNotContain($"turn {turn + 1} of ", output);
+            Assert.EndsWith($"battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     private static string Capture(Action run)
     {
         var previous = Console.Out;
