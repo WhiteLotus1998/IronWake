@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\src\Ironwake.Core\Ironwake.Core.csproj" />
     <ProjectReference Include="..\..\src\Ironwake.Content\Ironwake.Content.csproj" />
     <ProjectReference Include="..\..\src\Ironwake.Cli\Ironwake.Cli.csproj" />
+    <ProjectReference Include="..\..\src\Ironwake.Sim\Ironwake.Sim.csproj" />
   </ItemGroup>
 
 </Project>

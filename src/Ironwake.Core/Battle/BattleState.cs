@@ -64,14 +64,23 @@ public sealed record BattleState(
     /// Enemies come from <see cref="MapDefinition.EnemyUnit"/> and are named
     /// <c>template-n</c>, counting placements of that template from 1. A roster that
     /// cannot fill the map, or a unit that cannot stand where the map puts it, is a
-    /// content or programming error and throws with the slot named.
+    /// content or programming error and throws with the slot named. <paramref name="benched"/>
+    /// names roster units held back for gate 4's ablation (DESIGN.md section 11): the
+    /// placement such a unit would have filled, named or bare, stays empty, so the bench
+    /// removes a body and never shifts another recruit into the slot. The captain cannot
+    /// be benched.
     /// </summary>
     public static BattleState From(
-        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage)
+        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default)
     {
         if (roster.Count == 0)
         {
             throw new ArgumentException("the roster needs a captain", nameof(roster));
+        }
+
+        if (benched.Contains(roster[0].Id))
+        {
+            throw new ArgumentException($"the captain '{roster[0].Id}' cannot be benched", nameof(benched));
         }
 
         var units = new List<BattleUnit>();
@@ -94,6 +103,11 @@ public sealed record BattleState(
             {
                 case PlayerPlacement p:
                     var unit = Fill(p, roster, named, deployed, ref nextBare);
+                    if (benched.Contains(unit.Id))
+                    {
+                        break;
+                    }
+
                     units.Add(Place(unit, Side.Player, p.At, map, content) with { IsCaptain = p.Slot == PlayerSlot.Captain, PlacementIndex = index });
                     break;
                 case EnemyPlacement e:
