@@ -172,6 +172,18 @@ public class SimFullTests
     }
 
     [Fact]
+    public void TraceNamesTheSchemeAndAnUnknownSchemeIsRefusedWithUsage()
+    {
+        var one = Capture(() => Ironwake.Sim.Program.Main(new[] { "--trace", "old_mill_road", "3", "--scheme", "one" }));
+        Assert.StartsWith("# old_mill_road seed 3, heuristic player, one roll;", one);
+        var refused = 0;
+        var output = Capture(() => refused = Ironwake.Sim.Program.Main(new[] { "--full", "old_mill_road", "--seeds", "3", "--scheme", "both" }));
+        Assert.Equal(2, refused);
+        Assert.Contains("[--scheme one|two]", output);
+        Assert.DoesNotContain("gate 1", output);
+    }
+
+    [Fact]
     public void TraceEndsWithTheOutcome()
     {
         var output = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 3));

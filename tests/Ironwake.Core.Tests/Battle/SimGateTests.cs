@@ -230,4 +230,30 @@ public class SimGateTests
         var gate2 = Gates.Gate2(Starter, YardMap, "yard", 10);
         Assert.Contains("gate 2 decisions matter: yard, random wins", gate2.Line);
     }
+
+    /// <summary>
+    /// Issue 107: the Sim fights under either roll scheme. The default is the two-roll
+    /// average, so an unspecified game equals a two-roll one on every seed; the keyed rng
+    /// hands both schemes the same numbers and <c>Combat.Lands</c> reads them differently,
+    /// so over ten seeds at least one game comes out different under one roll.
+    /// </summary>
+    [Fact]
+    public void TheSimPlaysUnderEitherRollSchemeAndDefaultsToTwoRolls()
+    {
+        var differed = false;
+        for (var seed = 1UL; seed <= 10; seed++)
+        {
+            var unspecified = Runner.Play(Starter, YardMap, seed, new HeuristicPlayer());
+            var two = Runner.Play(Starter, YardMap, seed, new HeuristicPlayer(), scheme: RollScheme.TwoRollAverage);
+            var one = Runner.Play(Starter, YardMap, seed, new HeuristicPlayer(), scheme: RollScheme.OneRoll);
+            Assert.Equal(Line(two), Line(unspecified));
+            differed |= Line(one) != Line(two);
+        }
+
+        Assert.True(differed, "ten seeds under one roll never differed from two rolls");
+        Assert.Contains(", one roll:", Gates.Gate1(Starter, YardMap, "yard", 3, RollScheme.OneRoll).Gate.Line);
+        Assert.Contains(", two-roll average:", Gates.Gate1(Starter, YardMap, "yard", 3).Gate.Line);
+
+        static string Line(GameResult game) => $"{game.Result} {game.Turns} {string.Join(" ", game.Mix.OrderBy(m => m.Key, StringComparer.Ordinal).Select(m => m.Key + "=" + m.Value))}";
+    }
 }

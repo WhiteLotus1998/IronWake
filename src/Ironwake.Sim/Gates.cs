@@ -25,9 +25,9 @@ public sealed record GateResult(string Line, bool Passed);
 public static class Runner
 {
     /// <summary>A full game from the opening state until the battle is decided.</summary>
-    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default)
+    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage)
     {
-        var state = BattleState.From(map, content, SimRoster.Roster, seed, benched: benched);
+        var state = BattleState.From(map, content, SimRoster.Roster, seed, scheme, benched);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
         foreach (var unit in state.UnitsOf(Side.Player))
         {
@@ -89,13 +89,16 @@ public static class Gates
     public const double BeatableRate = 0.60;
     public const double RandomRate = 0.05;
 
-    /// <summary>Gate 1: the heuristic player wins at least 60 percent of the seeds within the turn limit. Also prints the median and p90 winning turn beside the limit, the instrument issue 47 reads.</summary>
-    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds)
+    /// <summary>The scheme's name as the Sim prints it, so a pasted row says which arm of the hit A/B it came from.</summary>
+    public static string Name(RollScheme scheme) => scheme == RollScheme.OneRoll ? "one roll" : "two-roll average";
+
+    /// <summary>Gate 1: the heuristic player wins at least 60 percent of the seeds within the turn limit. Also prints the median and p90 winning turn beside the limit, the instrument issue 47 reads, and the roll scheme the games were fought under.</summary>
+    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var games = new List<GameResult>();
         for (var seed = 1; seed <= seeds; seed++)
         {
-            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer()));
+            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), scheme: scheme));
         }
 
         var wins = games.Count(g => g.Won);
@@ -103,16 +106,16 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Name(scheme)}: {Verdict(passed)}", passed), games);
     }
 
     /// <summary>Gate 2: the random legal player wins at most 5 percent of the seeds.</summary>
-    public static GateResult Gate2(GameContent content, MapDefinition map, string id, int seeds)
+    public static GateResult Gate2(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var wins = 0;
         for (var seed = 1; seed <= seeds; seed++)
         {
-            if (Runner.Play(content, map, (ulong)seed, new RandomLegalPlayer(seed)).Won)
+            if (Runner.Play(content, map, (ulong)seed, new RandomLegalPlayer(seed), scheme: scheme).Won)
             {
                 wins++;
             }
@@ -172,7 +175,7 @@ public static class Gates
     /// Above zero a recruit fails only when drop + 2 * SE is under half the median drop.
     /// The captain's mix prints as data; he is never benched and never judged.
     /// </summary>
-    public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline)
+    public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var opening = BattleState.From(map, content, SimRoster.Roster, 1);
         var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
@@ -188,7 +191,7 @@ public static class Gates
             var restBenched = ActionMix.Zero;
             for (var seed = 1; seed <= baseline.Count; seed++)
             {
-                var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched);
+                var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched, scheme);
                 var before = baseline[seed - 1];
                 if (before.Won && !arm.Won)
                 {
