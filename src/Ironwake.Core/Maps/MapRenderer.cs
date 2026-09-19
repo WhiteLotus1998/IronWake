@@ -100,7 +100,9 @@ public static class MapRenderer
     /// The console view of a battle: the grid with every living unit drawn where it stands,
     /// each with the letter of the placement it filled, then a legend with each unit's
     /// name, class, position, HP, terrain, and for enemies its group and how it behaves
-    /// now (a sleeping Guard reads <c>guard, asleep</c>). The turn line names the phase and
+    /// now (a sleeping Guard reads <c>guard, asleep</c>), and <c>unarmed</c> for a unit with
+    /// no usable weapon, since the enemy planner prices such a unit as free damage (issue
+    /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
     /// the Recall charges left. Given a <see cref="Reach"/>, the tiles that unit may end on
     /// are marked as in the map view.
     /// </summary>
@@ -166,6 +168,11 @@ public static class MapRenderer
             else if (unit.IsCaptain)
             {
                 sb.Append("  captain");
+            }
+
+            if (unit.EquippedWeapon(content) is null)
+            {
+                sb.Append("  unarmed");
             }
 
             if (unit.Acted)

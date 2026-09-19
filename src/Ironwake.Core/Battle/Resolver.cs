@@ -279,7 +279,7 @@ public static class Resolver
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : $"not a weapon a {unit.Unit.ClassId} can use";
-            return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with slot {slot} ({itemId}): {why}"));
+            return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with {itemId}: {why}"));
         }
 
         return (unit.WithSlotInFront(slot.Value), weapon, null);

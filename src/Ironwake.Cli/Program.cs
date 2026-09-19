@@ -47,7 +47,7 @@ public static class Program
         Console.WriteLine("usage: ironwake validate [content-dir]");
         Console.WriteLine("       ironwake show <map-file> [content-dir]");
         Console.WriteLine("       ironwake reach <map-file> <x,y> [<movement>:<mov>] [content-dir]");
-        Console.WriteLine("       ironwake play <map-file> [--seed N] [--script file] [--content dir]");
+        Console.WriteLine("       ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir]");
     }
 
     private static int Validate(string contentDir)

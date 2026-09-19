@@ -41,11 +41,13 @@ public class CliPlayTests
     [Fact]
     public void ItemUsesADressingAfterACombatAndHelpListsIt()
     {
-        var output = Play(out _, "item captain 1\nmove captain 2,6\nend\nend\nitem captain 1\nshow captain\nhelp\n");
+        var output = Play(out _, "item captain 2\nmove captain 2,6\nend\nend\nitem captain 2\nshow captain\nhelp\n");
 
-        Assert.Contains("> item captain 1\nERROR: captain is at full HP\n", output);
-        Assert.Contains("> item captain 1\ncaptain uses field_dressing (2 left)\ncaptain heals 10 (hp 22)\n", output);
-        Assert.Contains("  items: 0: Iron Sword x38, 1: Field Dressing x2\n", output);
+        Assert.Contains("> item captain 2\nERROR: captain is at full HP\n", output);
+        Assert.Contains("> item captain 2\ncaptain uses field_dressing (2 left)\ncaptain heals 10 (hp 22)\n", output);
+        Assert.Contains("  items: 1: Iron Sword x38, 2: Field Dressing x2\n", output);
+        Assert.Contains("slots count from 1", output);
+        Assert.Contains("--strict stops at the first", output);
         Assert.Contains("  item <unit> <slot> [ally] use the item in a slot", output);
         Assert.DoesNotContain("unavailable", output);
     }
@@ -55,12 +57,15 @@ public class CliPlayTests
     [InlineData("move captain 9", "ERROR: usage: move <unit> <x,y>")]
     [InlineData("attack captain", "ERROR: usage: attack <unit> <target> [slot]")]
     [InlineData("attack captain brigand-1 x", "ERROR: usage: attack <unit> <target> [slot]")]
-    [InlineData("forecast captain brigand-1 1", "ERROR: captain cannot attack with slot 1 (field_dressing): an item, not a weapon")]
+    [InlineData("forecast captain brigand-1 2", "ERROR: captain cannot attack with field_dressing: an item, not a weapon")]
+    [InlineData("forecast captain brigand-1 0", "ERROR: captain has nothing in slot 0; slots run 1-2")]
+    [InlineData("attack captain brigand-1 3", "ERROR: captain has nothing in slot 3; slots run 1-2")]
+    [InlineData("item captain 3", "ERROR: captain has nothing in slot 3; slots run 1-2")]
     [InlineData("wait", "ERROR: usage: wait <unit>")]
     [InlineData("end now", "ERROR: usage: end")]
     [InlineData("recall x", "ERROR: usage: recall <n>")]
     [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
-    [InlineData("item captain 0", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
+    [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
     [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot]")]
     [InlineData("show", "ERROR: usage: show <unit>")]
     [InlineData("reach", "ERROR: usage: reach <unit>")]
@@ -87,6 +92,60 @@ public class CliPlayTests
         output = Run(out exit, "play", OldMillRoad, "--script", "/no/such.script", "--content", Fixture.RealContentDirectory());
         Assert.Equal(2, exit);
         Assert.StartsWith("ERROR: script file '/no/such.script' not found", output);
+        output = Run(out exit, "play", OldMillRoad, "--strict", "--content", Fixture.RealContentDirectory());
+        Assert.Equal(2, exit);
+        Assert.StartsWith("ERROR: --strict applies to a scripted run; give --script", output);
+        Assert.Contains("[--strict]", output);
+    }
+
+    /// <summary>Issue 101: a bare map name resolves under the content directory's maps; a path that exists is used as given.</summary>
+    [Fact]
+    public void PlayAcceptsABareMapName()
+    {
+        var output = Run(out var exit, "play", "old_mill_road", "--script", "/no/such.script", "--content", Fixture.RealContentDirectory());
+        Assert.Equal(2, exit);
+        Assert.StartsWith("ERROR: script file", output);
+        Assert.Equal(OldMillRoad, PlaySession.ResolveMap("old_mill_road", Fixture.RealContentDirectory()));
+        Assert.Equal(OldMillRoad, PlaySession.ResolveMap(OldMillRoad, Fixture.RealContentDirectory()));
+        Assert.Equal("no_such_map", PlaySession.ResolveMap("no_such_map", Fixture.RealContentDirectory()));
+    }
+
+    /// <summary>
+    /// Issue 101: a scripted run ends with every rejected line, numbered as in the file
+    /// (blank lines and comments count), with its reason; the per-command ERROR lines stay.
+    /// </summary>
+    [Fact]
+    public void AScriptedRunSummarisesItsRejectionsWithLineNumbers()
+    {
+        var output = Play(out var exit, "# a comment\n\nmove captain 9,9\nmove wren 2,6\nwait wren\nwait wren\nshow nobody\n");
+
+        Assert.Contains("> move captain 9,9\nERROR: captain cannot move to 9,9", output);
+        Assert.Contains("rejected 3 of 5 commands:\n  line 3: move captain 9,9: captain cannot move to 9,9", output);
+        Assert.Contains("\n  line 6: wait wren: wren has already acted", output);
+        Assert.Contains("\n  line 7: show nobody: no living unit 'nobody'\nbattle ongoing at turn 1, player phase\n", output);
+        Assert.Equal(1, exit);
+    }
+
+    [Fact]
+    public void AStrictRunStopsAtTheFirstRejectionAndAppliesNothingAfterIt()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-strict-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "move wren 2,6\nmove captain 9,9\nwait wren\n");
+        try
+        {
+            var output = Run(out var exit, "play", OldMillRoad, "--seed", "7", "--script", path, "--strict", "--content", Fixture.RealContentDirectory());
+            Assert.Equal(PlaySession.StrictStop, exit);
+            Assert.Contains("wren moves ", output);
+            Assert.Contains("-> 2,6", output);
+            Assert.Contains("> move captain 9,9\nERROR: captain cannot move to 9,9", output);
+            Assert.Contains("strict: stopped at line 2 (move captain 9,9); no later command applied\nrejected 1 of 2 commands:\n  line 2: move captain 9,9:", output);
+            Assert.DoesNotContain("> wait wren", output);
+            Assert.DoesNotContain("wren waits", output);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
     }
 
     [Fact]
@@ -102,11 +161,11 @@ public class CliPlayTests
     [Fact]
     public void TheForecastPrintsBeforeAnAttackAndEventsRenderStrikeByStrike()
     {
-        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 0\nshow wren\nrecall 0\n");
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 1\nshow wren\nrecall 0\n");
 
         Assert.Contains("captain moves 1,8 -> 1,4 via 1,7 1,6 1,5\n", output);
         Assert.Contains("> forecast wren brigand-1\nforecast wren -> brigand-1: dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
-        Assert.Contains("> attack wren brigand-1 0\nforecast wren -> brigand-1:", output);
+        Assert.Contains("> attack wren brigand-1 1\nforecast wren -> brigand-1:", output);
         Assert.Contains("wren attacks brigand-1\n  wren hits brigand-1 for 10", output);
         Assert.Contains("> show wren\nwren: wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
         Assert.Contains("weapon: Iron Sword (mt 5 hit 90 crit 0 wt 5 range 1-1)\n", output);
@@ -121,10 +180,12 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-18-old_mill_road-7.script");
 
-        var output = Run(out var exit, "play", OldMillRoad, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", OldMillRoad, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("group mill wakes: proximity", output);
         Assert.Contains("bandit_leader-1 falls at 10,1", output);
     }
