@@ -293,6 +293,114 @@ public class SimGateTests
         Assert.False(state.Map.IsThrone(move.To));
     }
 
+    /// <summary>Issue 114: a Rout map whose only enemy holds behind a wall nobody can cross, so every seed runs out the clock without a combat.</summary>
+    private const string Sealed = """
+        name: Sealed
+        size: 6x3
+        win: rout
+        turn_limit: 3
+        recall: 3
+        enemy_level: 1
+
+        ...#..
+        ...#..
+        ...#..
+
+        units:
+        P captain 0,1
+        E brigand 5,1 group:far behavior:hold
+
+        """;
+
+    /// <summary>Issue 114: the captain alone in the middle of four aggressive level-20 brigands, so every seed is a captain death on turn 1.</summary>
+    private const string Ambush = """
+        name: Ambush
+        size: 3x3
+        win: rout
+        turn_limit: 5
+        recall: 3
+        enemy_level: 20
+
+        ...
+        ...
+        ...
+
+        units:
+        P captain 1,1
+        E brigand 0,0 group:ring behavior:aggressive
+        E brigand 2,0 group:ring behavior:aggressive
+        E brigand 0,2 group:ring behavior:aggressive
+        E brigand 2,2 group:ring behavior:aggressive
+
+        """;
+
+    /// <summary>Issue 114: the protected recruit among the same four brigands and the captain walled off from her, so every seed is a protected death.</summary>
+    private const string Hostage = """
+        name: Hostage
+        size: 7x3
+        win: rout
+        turn_limit: 5
+        recall: 3
+        enemy_level: 20
+        protect: wren
+
+        ...#...
+        ...#...
+        ...#...
+
+        units:
+        P captain 0,1
+        P recruit:wren 5,1
+        E brigand 4,0 group:ring behavior:aggressive
+        E brigand 6,0 group:ring behavior:aggressive
+        E brigand 4,2 group:ring behavior:aggressive
+        E brigand 6,2 group:ring behavior:aggressive
+
+        """;
+
+    /// <summary>
+    /// Issue 114: gate 1's row counts the losses by cause in section 7's order and prints the
+    /// mean quiet tail of the timeouts, the turns from the last combat to the limit. With no
+    /// combat at all the tail is the whole limit; with no timeouts it is a dash.
+    /// </summary>
+    [Fact]
+    public void GateOnePrintsTheLossesByCauseAndTheQuietTail()
+    {
+        var (sealedRow, sealedGames) = Gates.Gate1(Starter, MapFixture.Parse(Sealed), "sealed", 10);
+        Assert.Contains("heuristic wins 0/10 (0 %), no wins, losses 10 timeout 0 captain 0 protected, quiet tail 3.0, two-roll average: FAILED", sealedRow.Line);
+        Assert.All(sealedGames, g => Assert.Equal(LossCause.Timeout, g.Cause));
+        Assert.All(sealedGames, g => Assert.Equal(0, g.LastCombatTurn));
+
+        var (ambushRow, ambushGames) = Gates.Gate1(Starter, MapFixture.Parse(Ambush), "ambush", 10);
+        Assert.Contains("losses 0 timeout 10 captain 0 protected, quiet tail -, two-roll average: FAILED", ambushRow.Line);
+        Assert.All(ambushGames, g => Assert.Equal(LossCause.Captain, g.Cause));
+
+        var (hostageRow, hostageGames) = Gates.Gate1(Starter, MapFixture.Parse(Hostage), "hostage", 10);
+        Assert.Contains("losses 0 timeout 0 captain 10 protected, quiet tail -, two-roll average: FAILED", hostageRow.Line);
+        Assert.All(hostageGames, g => Assert.Equal(LossCause.Protected, g.Cause));
+
+        var yard = Runner.Play(Starter, YardMap, 7, new HeuristicPlayer());
+        Assert.Equal(LossCause.None, yard.Cause);
+        Assert.True(yard.LastCombatTurn > 0, "the yard fights");
+        Assert.True(yard.LastCombatTurn <= yard.Turns);
+    }
+
+    /// <summary>Issue 114: the tail counts from the last combat, not from the start, so a timeout after a fight reads shorter than the limit.</summary>
+    [Fact]
+    public void TheQuietTailCountsFromTheLastCombat()
+    {
+        var games = new[]
+        {
+            new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2),
+            new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 5),
+            new GameResult(BattleResult.Lost, 3, new Dictionary<string, ActionMix>(), LossCause.Captain, 3),
+            new GameResult(BattleResult.Won, 4, new Dictionary<string, ActionMix>(), LossCause.None, 4),
+        };
+        var map = MapFixture.Parse(Sealed) with { TurnLimit = 5 };
+        Assert.Equal("losses 2 timeout 1 captain 0 protected, quiet tail 1.5", Gates.Losses(games, map));
+        Assert.Equal("losses 0 timeout 1 captain 0 protected, quiet tail -", Gates.Losses(games.Skip(2).ToList(), map));
+    }
+
     [Fact]
     public void GateOneAndTwoRunOnTheYard()
     {
