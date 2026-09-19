@@ -99,8 +99,8 @@ public class TurnLoopTests
 
         var lost = state.WithoutUnit("hale");
 
-        Assert.Equal(new BattleOutcome(BattleResult.Lost, "the captain is dead"), lost.Outcome);
-        Assert.Equal(new BattleOutcome(BattleResult.Lost, "the captain is dead"), lost.WithoutUnit("brigand-1").WithoutUnit("soldier-1").Outcome);
+        Assert.Equal(new BattleOutcome(BattleResult.Lost, "the captain is dead", LossCause.Captain), lost.Outcome);
+        Assert.Equal(new BattleOutcome(BattleResult.Lost, "the captain is dead", LossCause.Captain), lost.WithoutUnit("brigand-1").WithoutUnit("soldier-1").Outcome);
         Assert.True(state.Find("hale")!.IsCaptain);
         Assert.False(state.Find("wren")!.IsCaptain);
         Assert.Contains("unit hale Player 0,1 hp 22 unmoved ready class cadet level 1 exp 0 stats HP 22 Str 8 Mag 0 Dex 7 Spd 8 Lck 6 Def 5 Res 2 Cha 9 items iron_swordx40 captain\n", state.Canonical());
@@ -112,7 +112,7 @@ public class TurnLoopTests
         var state = Start(map: YardWith("rout", "protect: wren"));
         Assert.Equal("wren", state.Map.ProtectId);
 
-        Assert.Equal(new BattleOutcome(BattleResult.Lost, "wren is dead"), state.WithoutUnit("wren").Outcome);
+        Assert.Equal(new BattleOutcome(BattleResult.Lost, "wren is dead", LossCause.Protected), state.WithoutUnit("wren").Outcome);
         Assert.Equal(BattleOutcome.Ongoing, Start(map: YardWith("rout")).WithoutUnit("wren").Outcome);
     }
 
@@ -123,7 +123,7 @@ public class TurnLoopTests
 
         var turn2 = state.Do(new EndPhase()).Do(new EndPhase());
 
-        Assert.Equal(new BattleOutcome(BattleResult.Lost, "turn 1 passed"), turn2.Outcome);
+        Assert.Equal(new BattleOutcome(BattleResult.Lost, "turn 1 passed", LossCause.Timeout), turn2.Outcome);
     }
 
     [Fact]

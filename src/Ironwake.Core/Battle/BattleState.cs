@@ -222,12 +222,12 @@ public sealed record BattleState(
             var captain = Units.FirstOrDefault(u => u.IsCaptain);
             if (captain is null)
             {
-                return new BattleOutcome(BattleResult.Lost, "the captain is dead");
+                return new BattleOutcome(BattleResult.Lost, "the captain is dead", LossCause.Captain);
             }
 
             if (Map.ProtectId is { } protectId && Find(protectId) is null)
             {
-                return new BattleOutcome(BattleResult.Lost, $"{protectId} is dead");
+                return new BattleOutcome(BattleResult.Lost, $"{protectId} is dead", LossCause.Protected);
             }
 
             var won = Map.Win switch
@@ -246,7 +246,7 @@ public sealed record BattleState(
 
             if (Turn > Map.TurnLimit)
             {
-                return new BattleOutcome(BattleResult.Lost, $"turn {Map.TurnLimit} passed");
+                return new BattleOutcome(BattleResult.Lost, $"turn {Map.TurnLimit} passed", LossCause.Timeout);
             }
 
             return BattleOutcome.Ongoing;

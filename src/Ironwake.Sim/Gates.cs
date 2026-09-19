@@ -1,3 +1,4 @@
+using System.Globalization;
 using Ironwake.Core;
 
 namespace Ironwake.Sim;
@@ -12,8 +13,11 @@ public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed)
     public override string ToString() => $"atk {Attacks} dmg {Damage} heal {Heals} abs {Absorbed}";
 }
 
-/// <summary>One finished game: who won, when, and what every player unit did.</summary>
-public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix)
+/// <summary>
+/// One finished game: who won, when, how a loss was lost, the last turn a combat was fought
+/// (zero when none was), and what every player unit did.
+/// </summary>
+public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix, LossCause Cause = LossCause.None, int LastCombatTurn = 0)
 {
     public bool Won => Result == BattleResult.Won;
 }
@@ -34,6 +38,7 @@ public static class Runner
             mix[unit.Id] = ActionMix.Zero;
         }
 
+        var lastCombatTurn = 0;
         while (!state.Outcome.IsOver)
         {
             var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
@@ -51,6 +56,11 @@ public static class Runner
                 }
 
                 Tally(mix, result.Events);
+                if (result.Events.OfType<CombatFought>().Any())
+                {
+                    lastCombatTurn = state.Turn;
+                }
+
                 state = result.Next;
                 if (state.Outcome.IsOver)
                 {
@@ -59,7 +69,7 @@ public static class Runner
             }
         }
 
-        return new GameResult(state.Outcome.Result, state.Turn, mix);
+        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn);
     }
 
     private static void Tally(Dictionary<string, ActionMix> mix, IReadOnlyList<GameEvent> events)
@@ -92,7 +102,14 @@ public static class Gates
     /// <summary>The scheme's name as the Sim prints it, so a pasted row says which arm of the hit A/B it came from.</summary>
     public static string Name(RollScheme scheme) => scheme == RollScheme.OneRoll ? "one roll" : "two-roll average";
 
-    /// <summary>Gate 1: the heuristic player wins at least 60 percent of the seeds within the turn limit. Also prints the median and p90 winning turn beside the limit, the instrument issue 47 reads, and the roll scheme the games were fought under.</summary>
+    /// <summary>
+    /// Gate 1: the heuristic player wins at least 60 percent of the seeds within the turn limit.
+    /// Also prints the median and p90 winning turn beside the limit, the instrument issue 47
+    /// reads; the losses by cause in section 7's order with the mean quiet tail of the
+    /// timeouts (turns from the last combat to the limit, so a tail near the limit is a board
+    /// that stopped and one near zero a fight that ran out of clock; issue 114); and the roll
+    /// scheme the games were fought under.
+    /// </summary>
     public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var games = new List<GameResult>();
@@ -106,7 +123,17 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {Name(scheme)}: {Verdict(passed)}", passed), games);
+    }
+
+    /// <summary>The losses by cause, zeros printed so pasted rows line up, and the mean quiet tail of the timeouts or a dash when there were none.</summary>
+    public static string Losses(IReadOnlyList<GameResult> games, MapDefinition map)
+    {
+        var timeouts = games.Where(g => g.Cause == LossCause.Timeout).ToList();
+        var captain = games.Count(g => g.Cause == LossCause.Captain);
+        var protectedDeaths = games.Count(g => g.Cause == LossCause.Protected);
+        var tail = timeouts.Count == 0 ? "-" : timeouts.Average(g => map.TurnLimit - g.LastCombatTurn).ToString("F1", CultureInfo.InvariantCulture);
+        return $"losses {timeouts.Count} timeout {captain} captain {protectedDeaths} protected, quiet tail {tail}";
     }
 
     /// <summary>Gate 2: the random legal player wins at most 5 percent of the seeds.</summary>
