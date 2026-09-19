@@ -239,16 +239,21 @@ public static class Gates
         }
 
         var median = rows.Count == 0 ? 0.0 : Median(rows.Select(r => r.Drop).ToList());
-        var castFails = CastFails(rows);
+        var verdict = CastVerdict(rows);
         var failing = Judge(rows);
-        var passed = !castFails && failing.Count == 0;
+        var passed = verdict == CastVerdictKind.Passes && failing.Count == 0;
         var lines = new List<string>
         {
             $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, median drop {median:F3}: {Verdict(passed)}",
         };
-        if (castFails)
+        switch (verdict)
         {
-            lines.Add($"  cast not earning its deployment: benching the median recruit raises the win rate by {-median:F3}; rows are data, no recruit is judged");
+            case CastVerdictKind.BenchingRaisesWins:
+                lines.Add($"  cast not earning its deployment: benching the median recruit raises the win rate by {-median:F3}; rows are data, no recruit is judged");
+                break;
+            case CastVerdictKind.NoOutcomesChange:
+                lines.Add($"  cast not earning its deployment: the median recruit changes no outcomes (drop {median:F3}, se {MedianError(rows):F3}); rows are data, no recruit is judged");
+                break;
         }
 
         foreach (var r in rows)
@@ -280,13 +285,50 @@ public static class Gates
         return total;
     }
 
+    /// <summary>The map-level verdict's three outcomes (issues 105 and 115).</summary>
+    public enum CastVerdictKind
+    {
+        Passes,
+        /// <summary>The median drop is below minus twice its row's standard error: benching the median recruit raises the win rate.</summary>
+        BenchingRaisesWins,
+        /// <summary>The median drop is not above twice its row's standard error: the median recruit changes no outcomes, a ceiling.</summary>
+        NoOutcomesChange,
+    }
+
     /// <summary>
-    /// The map-level verdict (issue 105): the cast fails when the median paired drop is at or
-    /// below zero, because benching the median recruit then raises the win rate and the
-    /// relative threshold has no zero point to measure from. False for an empty cast.
+    /// The map-level verdict (issues 105 and 115): the cast fails unless the median paired
+    /// drop is above zero by twice the standard error of the row supplying it, since a
+    /// median that is noise flips the verdict on the third decimal between runs. The two
+    /// failures are different findings and print different lines. Passes for an empty cast.
     /// </summary>
-    public static bool CastFails(IReadOnlyList<AblationRow> rows)
-        => rows.Count > 0 && Median(rows.Select(r => r.Drop).ToList()) <= 0;
+    public static CastVerdictKind CastVerdict(IReadOnlyList<AblationRow> rows)
+    {
+        if (rows.Count == 0)
+        {
+            return CastVerdictKind.Passes;
+        }
+
+        var median = Median(rows.Select(r => r.Drop).ToList());
+        var margin = 2 * MedianError(rows);
+        if (median < -margin)
+        {
+            return CastVerdictKind.BenchingRaisesWins;
+        }
+
+        return median > margin ? CastVerdictKind.Passes : CastVerdictKind.NoOutcomesChange;
+    }
+
+    /// <summary>Whether <see cref="CastVerdict"/> fails the cast, on either line.</summary>
+    public static bool CastFails(IReadOnlyList<AblationRow> rows) => CastVerdict(rows) != CastVerdictKind.Passes;
+
+    /// <summary>The standard error of the row supplying the median: on an even count, the larger of the two straddling rows' errors.</summary>
+    public static double MedianError(IReadOnlyList<AblationRow> rows)
+    {
+        var sorted = rows.OrderBy(r => r.Drop).ToList();
+        return sorted.Count % 2 == 1
+            ? sorted[sorted.Count / 2].StandardError
+            : Math.Max(sorted[sorted.Count / 2 - 1].StandardError, sorted[sorted.Count / 2].StandardError);
+    }
 
     /// <summary>
     /// The recruits that fail section 11's rule: <c>drop + 2 * SE &lt; 0.5 * median</c>.
