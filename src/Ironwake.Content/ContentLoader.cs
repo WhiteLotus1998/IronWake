@@ -407,7 +407,10 @@ public static class ContentLoader
     /// file order, the first the captain. A cast entry must carry a region and a personality
     /// (section 9), its hooks must name other cast members, and a Reason or Faith unit must
     /// carry at least two castable spells, since a spent spell does not equip and the only
-    /// sidearm a caster can hold is a second book (Design Table, seventh round).
+    /// sidearm a caster can hold is a second book (Design Table, seventh round), at least
+    /// one of them an attacking spell, since a healing spell is legal only when an ally in
+    /// range is hurt and two of them leave the unit with Move and Wait on a healthy turn
+    /// (issue 113, ninth round).
     /// </summary>
     private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast) ParseUnits(
         IReadOnlyList<ContentFile> files,
@@ -480,10 +483,18 @@ public static class ContentLoader
         var casterOnly = unitClass.Weapons.Count > 0 && unitClass.Weapons.All(t => t.IsMagic());
         if (casterOnly)
         {
-            var castable = unit.Inventory.Items.Count(s => weapons.TryGetValue(s.ItemId, out var w) && unitClass.CanUse(w.Type));
-            if (castable < 2)
+            var castable = unit.Inventory.Items
+                .Select(s => weapons.TryGetValue(s.ItemId, out var w) && unitClass.CanUse(w.Type) ? w : null)
+                .Where(w => w is not null)
+                .ToList();
+            if (castable.Count < 2)
             {
                 throw node.Error("inventory", "a Reason or Faith unit carries at least two castable spells; a spent spell does not equip");
+            }
+
+            if (castable.All(w => w!.Heals))
+            {
+                throw node.Error("inventory", "a Reason or Faith unit carries at least one attacking spell, since a healing spell is legal only when an ally in range is hurt");
             }
         }
     }
