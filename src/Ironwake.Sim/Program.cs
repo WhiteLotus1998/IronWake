@@ -121,7 +121,7 @@ public static class Program
                     return 1;
                 }
 
-                Console.WriteLine((enemy ? "enemy: " : "") + Script(command));
+                Console.WriteLine((enemy ? "# enemy: " : "") + Script(command));
                 foreach (var e in result.Events)
                 {
                     switch (e)
@@ -153,11 +153,15 @@ public static class Program
         return 0;
     }
 
-    private static string Script(Command command) => command switch
+    /// <summary>
+    /// A command as the CLI's script reader takes it. Slots print one-based, as the CLI reads
+    /// them since issue 101 (issue 118); the core's own slot is one lower.
+    /// </summary>
+    public static string Script(Command command) => command switch
     {
         Move m => $"move {m.UnitId} {m.To}",
-        Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot}" : $"attack {a.UnitId} {a.TargetId}",
-        UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot} {t}" : $"item {u.UnitId} {u.Slot}",
+        Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
+        UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
