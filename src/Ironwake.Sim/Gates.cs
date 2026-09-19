@@ -155,18 +155,27 @@ public static class Gates
         return result.Next;
     }
 
-    /// <summary>One recruit's ablation row: the paired drop, its standard error, and the recruit's baseline action mix.</summary>
-    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Baseline, ActionMix Benched);
+    /// <summary>
+    /// One recruit's ablation row: the paired drop, its standard error, and three action
+    /// mixes over the same set of units on both sides of the bench: the recruit's own
+    /// baseline mix, the rest of the cast's baseline mix, and the rest of the cast's mix
+    /// with the recruit benched.
+    /// </summary>
+    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched);
 
     /// <summary>
     /// Gate 4: each deployed recruit benched in turn over the baseline's seeds, outcomes
     /// paired by seed. Drop is (baseline wins - arm wins) / n; the standard error comes
-    /// from the discordant seeds only, sqrt(b + c) / n. A recruit fails only when
-    /// drop + 2 * SE is under half the median drop across the cast.
+    /// from the discordant seeds only, sqrt(b + c) / n. A median drop at or below zero
+    /// fails the cast as a whole (DESIGN.md section 11, issue 105): benching the median
+    /// recruit raises the win rate, so the deployment is wrong and no recruit is judged.
+    /// Above zero a recruit fails only when drop + 2 * SE is under half the median drop.
+    /// The captain's mix prints as data; he is never benched and never judged.
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline)
     {
         var opening = BattleState.From(map, content, SimRoster.Roster, 1);
+        var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
         var recruits = opening.UnitsOf(Side.Player).Where(u => !u.IsCaptain).Select(u => u.Id).ToList();
         var rows = new List<AblationRow>();
         foreach (var recruit in recruits)
@@ -174,8 +183,9 @@ public static class Gates
             var benched = ValueList<string>.Of(recruit);
             var flippedDown = 0;
             var flippedUp = 0;
-            var baseMix = ActionMix.Zero;
-            var armMix = ActionMix.Zero;
+            var own = ActionMix.Zero;
+            var restBaseline = ActionMix.Zero;
+            var restBenched = ActionMix.Zero;
             for (var seed = 1; seed <= baseline.Count; seed++)
             {
                 var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched);
@@ -189,28 +199,73 @@ public static class Gates
                     flippedUp++;
                 }
 
-                baseMix = baseMix.Plus(before.Mix.GetValueOrDefault(recruit, ActionMix.Zero));
-                foreach (var other in arm.Mix.Values)
-                {
-                    armMix = armMix.Plus(other);
-                }
+                own = own.Plus(before.Mix.GetValueOrDefault(recruit, ActionMix.Zero));
+                restBaseline = restBaseline.Plus(Sum(before.Mix, except: recruit));
+                restBenched = restBenched.Plus(Sum(arm.Mix, except: recruit));
             }
 
             var n = (double)baseline.Count;
-            rows.Add(new AblationRow(recruit, (flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n, baseMix, armMix));
+            rows.Add(new AblationRow(recruit, (flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n, own, restBaseline, restBenched));
         }
 
+        var median = rows.Count == 0 ? 0.0 : Median(rows.Select(r => r.Drop).ToList());
+        var castFails = CastFails(rows);
         var failing = Judge(rows);
-        var lines = rows.Select(r => $"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} baseline [{r.Baseline}] rest of cast benched [{r.Benched}]{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
-        var passed = failing.Count == 0;
-        var header = $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, median drop {Median(rows.Select(r => r.Drop).ToList()):F3}: {Verdict(passed)}";
-        return new GateResult(string.Join('\n', new[] { header }.Concat(lines)), passed);
+        var passed = !castFails && failing.Count == 0;
+        var lines = new List<string>
+        {
+            $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, median drop {median:F3}: {Verdict(passed)}",
+        };
+        if (castFails)
+        {
+            lines.Add($"  cast not earning its deployment: benching the median recruit raises the win rate by {-median:F3}; rows are data, no recruit is judged");
+        }
+
+        foreach (var r in rows)
+        {
+            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}]{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
+        }
+
+        var captainMix = ActionMix.Zero;
+        foreach (var game in baseline)
+        {
+            captainMix = captainMix.Plus(game.Mix.GetValueOrDefault(captain, ActionMix.Zero));
+        }
+
+        lines.Add($"  captain {captain}: baseline [{captainMix}] never benched, not judged");
+        return new GateResult(string.Join('\n', lines), passed);
     }
 
-    /// <summary>The recruits that fail section 11's rule: <c>drop + 2 * SE &lt; 0.5 * median</c>. Empty for an empty cast.</summary>
+    private static ActionMix Sum(IReadOnlyDictionary<string, ActionMix> mix, string except)
+    {
+        var total = ActionMix.Zero;
+        foreach (var (unitId, part) in mix)
+        {
+            if (!string.Equals(unitId, except, StringComparison.Ordinal))
+            {
+                total = total.Plus(part);
+            }
+        }
+
+        return total;
+    }
+
+    /// <summary>
+    /// The map-level verdict (issue 105): the cast fails when the median paired drop is at or
+    /// below zero, because benching the median recruit then raises the win rate and the
+    /// relative threshold has no zero point to measure from. False for an empty cast.
+    /// </summary>
+    public static bool CastFails(IReadOnlyList<AblationRow> rows)
+        => rows.Count > 0 && Median(rows.Select(r => r.Drop).ToList()) <= 0;
+
+    /// <summary>
+    /// The recruits that fail section 11's rule: <c>drop + 2 * SE &lt; 0.5 * median</c>.
+    /// Empty for an empty cast, and empty when the cast fails (<see cref="CastFails"/>),
+    /// since the rule is meaningless on that side of zero.
+    /// </summary>
     public static IReadOnlyList<string> Judge(IReadOnlyList<AblationRow> rows)
     {
-        if (rows.Count == 0)
+        if (rows.Count == 0 || CastFails(rows))
         {
             return Array.Empty<string>();
         }
