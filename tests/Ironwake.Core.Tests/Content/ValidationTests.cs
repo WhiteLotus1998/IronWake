@@ -434,4 +434,31 @@ public class ValidationTests
         var two = one.Replace("[ { \"item\": \"iron_sword\" } ]", "[ { \"item\": \"iron_sword\" }, { \"item\": \"iron_sword\", \"uses\": 3 } ]");
         Assert.Single(ContentLoader.Parse(Fixture.Files(classes: classes, weapons: weapons, cast: two)).Cast);
     }
+
+    private const string FaithSpells = "{ \"weapons\": [ " +
+        "{ \"id\": \"iron_sword\", \"name\": \"Salve\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 2, \"minRange\": 1, \"maxRange\": 1, \"durability\": 8, \"heals\": true }, " +
+        "{ \"id\": \"beacon\", \"name\": \"Beacon\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 4, \"heals\": true }, " +
+        "{ \"id\": \"radiance\", \"name\": \"Radiance\", \"type\": \"faith\", \"mt\": 6, \"hit\": 85, \"crit\": 0, \"wt\": 4, \"minRange\": 1, \"maxRange\": 2, \"durability\": 5 } ] }";
+
+    /// <summary>
+    /// Issue 113: two healing spells pass the count and fail its purpose, since a healing
+    /// spell is legal only when an ally in range is hurt. A caster-only class carries at
+    /// least one attacking spell; a class that can hold steel beside a book is unaffected.
+    /// </summary>
+    [Fact]
+    public void ACasterWithOnlyHealingSpellsIsRefused()
+    {
+        const string chaplain = "{ \"classes\": [ { \"id\": \"cadet\", \"name\": \"Chaplain\", \"movement\": \"infantry\", \"mov\": 4, \"weapons\": [\"faith\"] } ] }";
+        var healers = "{ \"units\": [ " + CastMember("captain", Authored).Replace("[ { \"item\": \"iron_sword\" } ]", "[ { \"item\": \"iron_sword\" }, { \"item\": \"beacon\" } ]") + " ] }";
+        var e = Fails(Fixture.Files(classes: chaplain, weapons: FaithSpells, cast: healers));
+        AssertNames(e, ContentFiles.CastName, "captain", "inventory");
+        Assert.Contains("at least one attacking spell", e.Message);
+        Assert.Contains("legal only when an ally in range is hurt", e.Message);
+
+        var maud = healers.Replace("\"beacon\"", "\"radiance\"");
+        Assert.Single(ContentLoader.Parse(Fixture.Files(classes: chaplain, weapons: FaithSpells, cast: maud)).Cast);
+
+        const string armed = "{ \"classes\": [ { \"id\": \"cadet\", \"name\": \"War Monk\", \"movement\": \"infantry\", \"mov\": 4, \"weapons\": [\"sword\", \"faith\"] } ] }";
+        Assert.Single(ContentLoader.Parse(Fixture.Files(classes: armed, weapons: FaithSpells, cast: healers)).Cast);
+    }
 }
