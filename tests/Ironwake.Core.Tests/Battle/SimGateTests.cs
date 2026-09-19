@@ -125,8 +125,10 @@ public class SimGateTests
     /// <summary>
     /// Issue 105: an Escape map wins only when every living unit stands on an exit, and the
     /// second recruit starts nine tiles from it with a two-turn limit, so the party wins
-    /// only with that recruit benched. The median drop is at or below zero and gate 4 fails
-    /// the cast, with no recruit labelled.
+    /// only with that recruit benched. The median drop is confidently negative and gate 4
+    /// fails the cast on the benching line, with no recruit labelled. Twenty seeds, since the
+    /// median of two rows is -0.5 and the margin (issue 115) is twice the benched recruit's
+    /// standard error, 1 / sqrt(seeds): at ten seeds it would read as a ceiling instead.
     /// </summary>
     private const string OneBodyTooMany = """
         name: One body too many
@@ -153,10 +155,11 @@ public class SimGateTests
     public void GateFourFailsTheCastWhenBenchingTheMedianRecruitRaisesTheWinRate()
     {
         var map = MapFixture.Parse(OneBodyTooMany);
-        var (gate1, baseline) = Gates.Gate1(Starter, map, "escape", 10);
+        var (gate1, baseline) = Gates.Gate1(Starter, map, "escape", 20);
         var result = Gates.Gate4(Starter, map, "escape", baseline);
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
         Assert.Contains("cast not earning its deployment: benching the median recruit raises the win rate", result.Line);
+        Assert.DoesNotContain("changes no outcomes", result.Line);
         Assert.Contains("teodor: drop -1.000", result.Line);
         Assert.DoesNotContain("DEAD WEIGHT", result.Line);
     }
@@ -177,6 +180,50 @@ public class SimGateTests
         var zero = new[] { new Gates.AblationRow("a", 0.0, 0.0, ActionMix.Zero, ActionMix.Zero, ActionMix.Zero) };
         Assert.True(Gates.CastFails(zero));
         Assert.Empty(Gates.Judge(zero));
+    }
+
+    /// <summary>
+    /// Issue 115: the verdict fails unless the median is above zero by twice its row's
+    /// standard error. The Tollgate's rows at 08f00f6 under both schemes fail on the ceiling
+    /// line rather than flipping on the sign of noise; a cast of clear drops passes; a median
+    /// row inside its own margin fails on the ceiling line; a confidently negative median fails
+    /// on the benching line.
+    /// </summary>
+    [Fact]
+    public void TheCastVerdictNeedsASignificantlyPositiveMedian()
+    {
+        var tollgateTwoRolls = new[]
+        {
+            Row("ottilie", -0.005, 0.005),
+            Row("pell", 0.440, 0.047),
+            Row("teodor", -0.005, 0.005),
+            Row("wren", -0.005, 0.005),
+        };
+        var tollgateOneRoll = new[]
+        {
+            Row("ottilie", -0.005, 0.005),
+            Row("pell", 0.170, 0.030),
+            Row("teodor", 0.025, 0.013),
+            Row("wren", 0.005, 0.009),
+        };
+        Assert.Equal(Gates.CastVerdictKind.NoOutcomesChange, Gates.CastVerdict(tollgateTwoRolls));
+        Assert.Equal(Gates.CastVerdictKind.NoOutcomesChange, Gates.CastVerdict(tollgateOneRoll));
+        Assert.Equal(0.013, Gates.MedianError(tollgateOneRoll), 6);
+        Assert.True(Gates.CastFails(tollgateOneRoll));
+        Assert.Empty(Gates.Judge(tollgateOneRoll));
+
+        var clear = new[] { Row("a", 0.6, 0.05), Row("b", 0.6, 0.05), Row("c", 0.6, 0.05) };
+        Assert.Equal(Gates.CastVerdictKind.Passes, Gates.CastVerdict(clear));
+        Assert.False(Gates.CastFails(clear));
+
+        var ceiling = new[] { Row("a", 0.300, 0.040), Row("b", 0.010, 0.008), Row("c", -0.020, 0.010) };
+        Assert.Equal(Gates.CastVerdictKind.NoOutcomesChange, Gates.CastVerdict(ceiling));
+
+        var benching = new[] { Row("a", -0.65, 0.13), Row("b", -0.70, 0.14), Row("c", -0.05, 0.08), Row("d", -0.22, 0.09) };
+        Assert.Equal(Gates.CastVerdictKind.BenchingRaisesWins, Gates.CastVerdict(benching));
+        Assert.Equal(Gates.CastVerdictKind.Passes, Gates.CastVerdict(Array.Empty<Gates.AblationRow>()));
+
+        static Gates.AblationRow Row(string id, double drop, double se) => new(id, drop, se, ActionMix.Zero, ActionMix.Zero, ActionMix.Zero);
     }
 
     [Fact]
