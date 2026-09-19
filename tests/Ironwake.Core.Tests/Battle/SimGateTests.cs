@@ -221,6 +221,73 @@ public class SimGateTests
         Assert.NotEqual(new Coord(3, 1), move.To);
     }
 
+    /// <summary>
+    /// A Seize map where the recruit stands nearer the throne than the captain and nothing
+    /// is in reach to fight on turn 1: the approach walks both toward the throne, and the
+    /// nearest tile to the throne is the throne.
+    /// </summary>
+    private const string Gatehouse = """
+        name: Gatehouse
+        size: 9x3
+        win: seize
+        turn_limit: 6
+        recall: 3
+        enemy_level: 1
+
+        .........
+        ....T....
+        .........
+
+        units:
+        P captain 0,1
+        P recruit 2,1
+        E soldier 8,1 group:door behavior:hold
+
+        """;
+
+    /// <summary>Issue 111: only the captain can seize, so a recruit never ends a move on the throne, and the captain does.</summary>
+    [Fact]
+    public void ARecruitStopsShortOfTheThroneAndTheCaptainTakesIt()
+    {
+        var state = Start(map: Gatehouse);
+        var throne = new Coord(4, 1);
+
+        var wren = state.Find("wren")!;
+        Assert.True(state.ReachOf(wren, Starter).CanEnd(throne), "the throne is in the recruit's reach, so the test is a real refusal");
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, wren);
+        var move = Assert.IsType<Move>(plan[0]);
+        Assert.NotEqual(throne, move.To);
+        Assert.Equal(1, move.To.DistanceTo(throne));
+
+        var applied = Resolver.Apply(state, Starter, move).Next;
+        applied = Resolver.Apply(applied, Starter, new Wait("wren")).Next;
+        applied = Resolver.Apply(applied, Starter, new Move("hale", new Coord(3, 0))).Next;
+        applied = Resolver.Apply(applied, Starter, new Wait("hale")).Next;
+        applied = Resolver.Apply(applied, Starter, new EndPhase()).Next;
+        applied = EnemyAi.Plan(applied, Starter).Aggregate(applied, (s, c) => Resolver.Apply(s, Starter, c).Next);
+        var hale = applied.Find("hale")!;
+        var captainPlan = HeuristicPlayer.PlanUnit(applied, Starter, hale);
+        Assert.Equal(throne, Assert.IsType<Move>(captainPlan[0]).To);
+
+        var game = Runner.Play(Starter, MapFixture.Parse(Gatehouse, "gatehouse.map"), 1, new HeuristicPlayer());
+        Assert.True(game.Won, "the heuristic seizes within the limit: " + game.Result + " at turn " + game.Turns);
+        Assert.True(game.Turns <= 3, "seized at turn " + game.Turns);
+    }
+
+    /// <summary>Issue 111: a recruit that already stands on the throne steps off it.</summary>
+    [Fact]
+    public void ARecruitStandingOnTheThroneStepsOff()
+    {
+        var map = Gatehouse.Replace("P recruit 2,1", "P recruit 4,1");
+        var state = Start(map: map);
+        var wren = state.Find("wren")!;
+        Assert.True(state.Map.IsThrone(wren.At));
+
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, wren);
+        var move = Assert.IsType<Move>(plan[0]);
+        Assert.False(state.Map.IsThrone(move.To));
+    }
+
     [Fact]
     public void GateOneAndTwoRunOnTheYard()
     {
