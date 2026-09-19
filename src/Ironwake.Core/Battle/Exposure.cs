@@ -21,8 +21,14 @@ public static class Exposure
     /// of the other side whose reach-plus-range covers the tile is counted at the
     /// forecast's own numbers from the best attack tile it can end on, conservative on
     /// purpose: a sleeping Guard is counted by its reach from where it stands, and so is
-    /// an enemy the attack would have killed. Reach is taken on the board as it stands
-    /// with the mover treated as standing on <paramref name="tile"/>.
+    /// an enemy the attack would probably have killed. The one exclusion is exact and
+    /// constant-free (issue 117): a target the named attack kills with certainty, the raw
+    /// hit at 100 so the resolved probability is one under either scheme and the first
+    /// strike's damage at least its current HP, contributes neither its counter nor its
+    /// enemy-phase term, since both are branches of probability zero and a veto that
+    /// counted them took a certain loss over an impossible death. Raw 99 prints as 100
+    /// under two rolls and still counts. Reach is taken on the board as it stands with
+    /// the mover treated as standing on <paramref name="tile"/>.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
@@ -30,6 +36,7 @@ public static class Exposure
         var board = state.WithUnit(moved);
         var counter = 0;
         var counterCrit = 0;
+        var certainKill = false;
         if (target is not null)
         {
             var (armed, weapon, rejection) = Resolver.ChooseWeapon(moved, content, slot);
@@ -37,7 +44,11 @@ public static class Exposure
             if (rejection is null && weapon!.InRange(distance))
             {
                 var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme);
-                (counter, counterCrit) = Worst(forecast.Defender);
+                certainKill = KillsWithCertainty(forecast.Attacker, target.Hp);
+                if (!certainKill)
+                {
+                    (counter, counterCrit) = Worst(forecast.Defender);
+                }
             }
         }
 
@@ -47,7 +58,7 @@ public static class Exposure
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
             var weapon = enemy.EquippedWeapon(content);
-            if (weapon is null)
+            if (weapon is null || (certainKill && enemy.Id == target!.Id))
             {
                 continue;
             }
@@ -80,6 +91,16 @@ public static class Exposure
 
         return new ExposureSum(counter, noCrit, withCrit);
     }
+
+    /// <summary>
+    /// Whether the first strike of <paramref name="attacker"/> kills a target at
+    /// <paramref name="hp"/> with certainty: it strikes, its raw hit is 100 (clamped, so
+    /// <see cref="Combat.HitProbability"/> is exactly one under either scheme), and its
+    /// plain damage reaches the HP. One strike, never the double, because the counter
+    /// falls between the strikes.
+    /// </summary>
+    public static bool KillsWithCertainty(SideForecast attacker, int hp) =>
+        attacker.Strikes && attacker.HitChance >= 100 && attacker.Damage >= hp;
 
     private static (int Plain, int Crit) Worst(SideForecast side)
     {

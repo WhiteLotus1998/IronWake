@@ -93,8 +93,10 @@ public class SimGateTests
     /// <summary>
     /// Issue 105: the row compares the rest of the cast against itself across the bench. On the
     /// walled map wren stands beside the captain and absorbs; with wren benched the captain
-    /// fights alone and attacks more, so the rest-of-cast mix differs between the two arms
-    /// in the direction the row is meant to show: fewer bodies fought more.
+    /// fights alone, deals more damage, and absorbs more, so the rest-of-cast mix differs
+    /// between the two arms in the direction the row is meant to show: fewer bodies fought
+    /// more. Damage is the number read, not attacks: since issue 117 the captain takes a
+    /// certain kill in both arms and the attack counts meet.
     /// </summary>
     [Fact]
     public void GateFourPrintsTheRestOfTheCastOnBothSidesOfTheBench()
@@ -106,7 +108,8 @@ public class SimGateTests
         var restBaseline = Between(wren, "rest baseline [", "]");
         var restBenched = Between(wren, "rest benched [", "]");
         Assert.NotEqual(restBaseline, restBenched);
-        Assert.True(Attacks(restBenched) > Attacks(restBaseline), wren);
+        Assert.True(Damage(restBenched) > Damage(restBaseline), wren);
+        Assert.True(Absorbed(restBenched) > Absorbed(restBaseline), wren);
 
         static string Between(string line, string open, string close)
         {
@@ -114,7 +117,9 @@ public class SimGateTests
             return line[start..line.IndexOf(close, start, StringComparison.Ordinal)];
         }
 
-        static int Attacks(string mix) => int.Parse(mix.Split(' ')[1], System.Globalization.CultureInfo.InvariantCulture);
+        static int Damage(string mix) => int.Parse(mix.Split(' ')[3], System.Globalization.CultureInfo.InvariantCulture);
+
+        static int Absorbed(string mix) => int.Parse(mix.Split(' ')[7], System.Globalization.CultureInfo.InvariantCulture);
     }
 
     /// <summary>
