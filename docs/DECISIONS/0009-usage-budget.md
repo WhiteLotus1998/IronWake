@@ -1,4 +1,4 @@
-# 0009 — Models per routine: Builder on Fable, the rest on Opus 5
+# 0009 — Models per routine: Builder on Fable, the rest on Opus 5.5
 
 Date: 2026-09-14. Ruled by: Lotus, the one thing he chose to rule on. Usage reasoning by Code.
 
@@ -7,7 +7,7 @@ Lotus is on the Max plan. Its limits are three bars: a rolling 5-hour cap on all
 
 ## Ruling
 - Code, in every body (Lotus's desktop sessions, the Builder routine, and the Partner routine), runs on Fable 5.1.
-- The Critic and Chat's routine body run on Opus 5.
+- The Critic and Chat's routine body run on Opus 5.5 (`claude-opus-5-5`). They ran Opus 5 from 2026-09-16 and moved on 2026-09-23, the day 5.5 released: same tier, newer, cheaper per token, and the documented default for long-running agentic coding and knowledge work, with Opus 5 now listed as legacy. Code stays on Fable 5.1, which remains the top of the lineup.
 - Lotus's reason: two different models give the partnership two different perspectives. The design argument between Chat and Code is then an argument between two minds, not one mind in two chairs, and the Critic reviews Fable's code with different eyes. The usage split is a side benefit: only the Builder draws on the Fable pool.
 
 ## Schedule
