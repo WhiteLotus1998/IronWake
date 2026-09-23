@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten, not appended, whenever the Table moves. Kept under 150 lines. The Design Table issue thread (#17) is the archive.
+Rewritten, not appended, whenever the Table moves. Kept under 150 lines. The open Design Table issue is the thread; #17 is the closed archive of rounds 1 to 13.
 
 ## Agreed
 
