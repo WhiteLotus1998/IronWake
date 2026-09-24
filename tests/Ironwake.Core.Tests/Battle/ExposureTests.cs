@@ -56,40 +56,213 @@ public class ExposureTests
         Assert.True(Exposure.Of(state, Starter, state.Find("hale")!, new Coord(2, 1)).NoCrit > 0, "a holding brigand still strikes the tile beside it");
     }
 
+    /// <summary>A 12x6 field with one sleeping Guard brigand at 9,1 and both player units outside every radius of it.</summary>
+    private const string Watch = """
+        name: Watch
+        size: 12x6
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+
+        ............
+        ............
+        ............
+        ............
+        ............
+        ............
+
+        units:
+        P captain 0,1
+        P recruit:wren 0,5
+        E brigand 9,1 group:watch behavior:guard
+
+        """;
+
+    private static SideForecast StrikeOn(BattleState state, string enemyId, Coord from, BattleUnit unit, Coord tile)
+    {
+        var enemy = state.Find(enemyId)!;
+        var striker = new Combatant(enemy.Unit, Starter.Class(enemy.Unit.ClassId), enemy.EquippedWeapon(Starter)!, state.Map.TerrainAt(from, Starter), enemy.Hp, 0, false);
+        return Core.Combat.Forecast(striker, (unit with { At = tile }).ToCombatant(state.Map, Starter), from.DistanceTo(tile), state.Scheme).Attacker;
+    }
+
+    /// <summary>
+    /// Issue 128: a sleeping Guard group the move itself wakes is counted by its move. The
+    /// tile at exactly the wake radius from the brigand wakes it, and the sum is the
+    /// brigand's strike from the tile beside the captain, three tiles into its move.
+    /// </summary>
     [Fact]
-    public void ASleepingGuardIsCountedByItsReachFromWhereItStandsAndAnAggressiveUnitByItsMove()
+    public void ASleepingGroupTheMoveWakesByProximityIsCountedByItsMove()
+    {
+        var state = Start(map: Watch);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(5, 1);
+        Assert.Equal(Starter.WakeRadius, tile.DistanceTo(state.Find("brigand-1")!.At));
+
+        var sum = Exposure.Of(state, Starter, hale, tile);
+
+        var strike = StrikeOn(state, "brigand-1", new Coord(6, 1), hale, tile);
+        Assert.True(Exposure.Board(state, Starter, hale, tile).IsAwake("watch"));
+        Assert.Equal(new ExposureSum(0, strike.Damage * Strikes(strike), strike.Damage * Core.Combat.CritMultiplier * Strikes(strike)), sum);
+        Assert.True(sum.NoCrit > 0);
+    }
+
+    /// <summary>
+    /// Issue 128, falsified the other way: a group the command does not wake is counted
+    /// from where it stands. One tile past the wake radius with no fight, the brigand
+    /// stays asleep and its range 1 reaches nothing, though awake it would reach the tile.
+    /// </summary>
+    [Fact]
+    public void ASleepingGroupTheMoveDoesNotWakeIsCountedFromWhereItStands()
+    {
+        var state = Start(map: Watch);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(4, 1);
+        Assert.Equal(Starter.WakeRadius + 1, tile.DistanceTo(state.Find("brigand-1")!.At));
+
+        Assert.False(Exposure.Board(state, Starter, hale, tile).IsAwake("watch"));
+        Assert.Equal(new ExposureSum(0, 0, 0), Exposure.Of(state, Starter, hale, tile));
+        Assert.True(Exposure.Of(state.Wake("watch"), Starter, hale, tile).NoCrit > 0, "awake, the brigand reaches the tile");
+    }
+
+    /// <summary>
+    /// Issue 128: when the plan attacks, the fight's two tiles are noisy and a group within
+    /// the noise radius of either wakes, even when neither player unit is within the wake
+    /// radius of it. The brigand at 4,4 is five from the captain's tile and four from the
+    /// soldier he attacks, so the attack alone wakes it and it is counted by its move;
+    /// the same tile with no attack leaves it asleep.
+    /// </summary>
+    [Fact]
+    public void ASleepingGroupTheFightsNoiseWakesIsCountedByItsMove()
     {
         const string map = """
-            name: Yard
-            size: 6x4
+            name: Noise
+            size: 10x6
             win: rout
             turn_limit: 10
             recall: 3
             enemy_level: 1
 
-            ......
-            ......
-            ......
-            ......
+            ..........
+            ..........
+            ..........
+            ..........
+            ..........
+            ..........
 
             units:
             P captain 0,1
-            P recruit:wren 0,2
-            E brigand 3,1 group:yard behavior:guard
-            E soldier 3,2 group:yard behavior:aggressive
+            P recruit:wren 0,5
+            E soldier 3,1 group:road behavior:aggressive
+            E brigand 4,4 group:watch behavior:guard
 
             """;
         var state = Start(map: map);
         var hale = state.Find("hale")!;
+        var soldier = state.Find("soldier-1")!;
+        var brigand = state.Find("brigand-1")!;
+        var tile = new Coord(2, 1);
+        Assert.True(tile.DistanceTo(brigand.At) > Starter.WakeRadius);
+        Assert.True(state.Find("wren")!.At.DistanceTo(brigand.At) > Starter.WakeRadius);
+        Assert.True(soldier.At.DistanceTo(brigand.At) <= Starter.NoiseRadius);
 
-        var beside = Exposure.Of(state, Starter, hale, new Coord(2, 1));
-        var apart = Exposure.Of(state, Starter, hale, new Coord(0, 0));
+        var quiet = Exposure.Of(state, Starter, hale, tile);
+        var loud = Exposure.Of(state, Starter, hale, tile, soldier);
+        var awake = Exposure.Of(state.Wake("watch"), Starter, hale, tile);
 
-        var brigandStrike = Core.Combat.Forecast(state.Find("brigand-1")!.ToCombatant(state.Map, Starter), (hale with { At = new Coord(2, 1) }).ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;
-        Assert.True(beside.NoCrit > brigandStrike.Damage * Strikes(brigandStrike), "the aggressive soldier reaches the tile beside the brigand");
-        Assert.True(apart.NoCrit > 0, "the aggressive soldier reaches 0,0 within its move");
-        var soldierStrike = Core.Combat.Forecast(state.Find("soldier-1")!.ToCombatant(state.Map, Starter), (hale with { At = new Coord(0, 0) }).ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;
-        Assert.Equal(soldierStrike.Damage * Strikes(soldierStrike), apart.NoCrit);
+        Assert.False(Exposure.Board(state, Starter, hale, tile).IsAwake("watch"));
+        Assert.True(Exposure.Board(state, Starter, hale, tile, soldier).IsAwake("watch"));
+        Assert.True(loud.Counter > 0);
+        Assert.True(quiet.NoCrit < awake.NoCrit, "asleep, the brigand does not reach the tile");
+        Assert.Equal(awake.NoCrit, loud.NoCrit - loud.Counter);
+    }
+
+    /// <summary>
+    /// Issue 128: a certain kill on a grouped enemy wakes that enemy's sleeping group by
+    /// death, even though issue 117 drops the dead target itself from the board. The
+    /// group's other member stands outside both radii of every player unit and of both
+    /// fight tiles, so death is the only cause that can have fired, and the same board
+    /// with no death listed wakes nothing; a kill one damage short leaves the target standing.
+    /// </summary>
+    [Fact]
+    public void ACertainKillWakesTheTargetsGroupByDeathAtAnyDistance()
+    {
+        const string map = """
+            name: Far
+            size: 14x4
+            win: rout
+            turn_limit: 10
+            recall: 3
+            enemy_level: 1
+
+            ..............
+            ..............
+            ..............
+            ..............
+
+            units:
+            P captain 0,1
+            P recruit:wren 0,2
+            E brigand 3,1 group:watch behavior:guard
+            E soldier 13,3 group:watch behavior:guard
+
+            """;
+        var tile = new Coord(2, 1);
+        var (state, hale, brigand) = CertainKillBoard(hpShort: 0, map: map);
+        var far = state.Find("soldier-1")!.At;
+        Assert.True(far.DistanceTo(tile) > Starter.NoiseRadius && far.DistanceTo(brigand.At) > Starter.NoiseRadius);
+        Assert.True(far.DistanceTo(state.Find("wren")!.At) > Starter.WakeRadius);
+
+        var board = Exposure.Board(state, Starter, hale, tile, brigand);
+
+        Assert.Null(board.Find("brigand-1"));
+        Assert.True(board.IsAwake("watch"));
+
+        var noisy = new[] { tile, brigand.At };
+        Assert.Empty(WakeCheck.Run(state, board, Starter, noisy, Array.Empty<string>()));
+        Assert.Equal(new[] { new GroupWoke("watch", WakeCause.Death) }, WakeCheck.Run(state, board, Starter, noisy, new[] { "watch" }));
+
+        var (shortState, shortHale, shortBrigand) = CertainKillBoard(hpShort: 1, map: map);
+        Assert.NotNull(Exposure.Board(shortState, Starter, shortHale, tile, shortBrigand).Find("brigand-1"));
+    }
+
+    /// <summary>
+    /// DECISIONS/0025, the scope of the rule: an ally's body in a one-tile crossing is a
+    /// blocker on the board as it stands, and the enemy behind it is priced at zero even
+    /// though the ally may die inside the cycle and open the crossing. Deliberate: an
+    /// ally's death has the enemy's choice inside it and is never this command's
+    /// certainty, so the veto is a worst case over the standing board, not a guarantee
+    /// over the cycle. Saltmarsh Ford seed 24 under two rolls, turn 3, is the shape.
+    /// </summary>
+    [Fact]
+    public void AnAllyInAOneTileCrossingBlocksTheEnemyBehindItInTheSum()
+    {
+        const string map = """
+            name: Crossing
+            size: 5x5
+            win: rout
+            turn_limit: 10
+            recall: 3
+            enemy_level: 1
+
+            .....
+            .....
+            ~~=~~
+            .....
+            .....
+
+            units:
+            P captain 2,4
+            P recruit:wren 2,2
+            E soldier 2,0 group:bank behavior:aggressive
+
+            """;
+        var state = Start(map: map);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(2, 3);
+
+        Assert.Equal(new ExposureSum(0, 0, 0), Exposure.Of(state, Starter, hale, tile));
+        Assert.True(Exposure.Of(state.WithoutUnit("wren"), Starter, hale, tile).NoCrit > 0, "with the crossing open the soldier strikes from the ford");
     }
 
     /// <summary>
@@ -197,14 +370,15 @@ public class ExposureTests
     /// <summary>
     /// The yard with the captain's Dex raised until his raw hit against the brigand is
     /// <paramref name="rawHit"/> (searched, since Hit is monotone in Dex) and the brigand's
-    /// HP set <paramref name="hpShort"/> above the forecast's damage from the tile beside it.
+    /// HP set <paramref name="hpShort"/> above the forecast's damage from the tile beside it,
+    /// on the yard or on <paramref name="map"/>, whose brigand must stand at 3,1.
     /// </summary>
-    private static (BattleState State, BattleUnit Hale, BattleUnit Brigand) CertainKillBoard(int hpShort, int rawHit = 100)
+    private static (BattleState State, BattleUnit Hale, BattleUnit Brigand) CertainKillBoard(int hpShort, int rawHit = 100, string? map = null)
     {
         for (var dex = 0; dex <= 80; dex++)
         {
             var sharp = Recruit("hale", new Stats(22, 8, 0, dex, 8, 6, 5, 2, 9), "iron_sword");
-            var state = Start(roster: ValueList<Unit>.Of(sharp, Wren));
+            var state = Start(roster: ValueList<Unit>.Of(sharp, Wren), map: map);
             var hale = state.Find("hale")! with { At = new Coord(2, 1) };
             var brigand = state.Find("brigand-1")!;
             var forecast = Queries.Forecast(state.WithUnit(hale), Starter, hale, brigand)!.Attacker;

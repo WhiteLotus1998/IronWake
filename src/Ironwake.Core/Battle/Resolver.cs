@@ -60,38 +60,21 @@ public static class Resolver
     }
 
     /// <summary>
-    /// The Guard wake check of DESIGN.md section 8, run after every accepted command on
-    /// where units stand afterwards. A sleeping group wakes on the death of a member
-    /// (any distance), on noise (a combat this command whose attacker or target stood
-    /// within the noise radius of a living member), or on proximity (a player unit within
-    /// the wake radius of a living member). One <see cref="GroupWoke"/> per group per
-    /// command, naming the loudest cause in that order. Distances are Manhattan and walls
-    /// are not considered.
+    /// The Guard wake check of DESIGN.md section 8 through <see cref="WakeCheck"/>, run
+    /// after every accepted command on where units stand afterwards, with the dead and
+    /// the fought tiles read off the command's events. One <see cref="GroupWoke"/> per
+    /// group per command.
     /// </summary>
     private static BattleState WakeGroups(BattleState before, BattleState after, GameContent content, List<GameEvent> events)
     {
-        var sleeping = new SortedSet<string>(StringComparer.Ordinal);
-        foreach (var unit in before.Units)
-        {
-            if (unit is { Behavior: Behavior.Guard, Group: { } group } && !before.IsAwake(group))
-            {
-                sleeping.Add(group);
-            }
-        }
-
-        if (sleeping.Count == 0)
-        {
-            return after;
-        }
-
-        var died = new List<BattleUnit>();
+        var died = new List<string>();
         var noisy = new List<Coord>();
         foreach (var e in events)
         {
             switch (e)
             {
-                case UnitDied dead when before.Find(dead.UnitId) is { } unit:
-                    died.Add(unit);
+                case UnitDied dead when before.Find(dead.UnitId) is { Group: { } group }:
+                    died.Add(group);
                     break;
                 case CombatFought fought:
                     noisy.Add(before.Find(fought.AttackerId)!.At);
@@ -101,28 +84,10 @@ public static class Resolver
         }
 
         var next = after;
-        foreach (var group in sleeping)
+        foreach (var woke in WakeCheck.Run(before, after, content, noisy, died))
         {
-            var members = after.Units.Where(u => u.Group == group).Select(u => u.At).ToList();
-            WakeCause? cause = null;
-            if (died.Any(u => u.Group == group))
-            {
-                cause = WakeCause.Death;
-            }
-            else if (noisy.Any(tile => members.Any(m => m.DistanceTo(tile) <= content.NoiseRadius)))
-            {
-                cause = WakeCause.Noise;
-            }
-            else if (after.UnitsOf(Side.Player).Any(p => members.Any(m => m.DistanceTo(p.At) <= content.WakeRadius)))
-            {
-                cause = WakeCause.Proximity;
-            }
-
-            if (cause is { } woke)
-            {
-                events.Add(new GroupWoke(group, woke));
-                next = next.Wake(group);
-            }
+            events.Add(woke);
+            next = next.Wake(woke.Group);
         }
 
         return next;
