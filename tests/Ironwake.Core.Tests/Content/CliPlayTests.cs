@@ -193,19 +193,10 @@ public class CliPlayTests
 
     private static string Run(out int exit, params string[] args)
     {
-        var original = Console.Out;
-        using var writer = new StringWriter();
-        Console.SetOut(writer);
-        try
-        {
-            exit = Ironwake.Cli.Program.Main(args);
-        }
-        finally
-        {
-            Console.SetOut(original);
-        }
-
-        return writer.ToString().Replace("\r\n", "\n");
+        var code = 0;
+        var output = ConsoleCapture.Run(() => code = Ironwake.Cli.Program.Main(args));
+        exit = code;
+        return output;
     }
 }
 
@@ -245,6 +236,20 @@ public class SimFullTests
         Assert.DoesNotContain("gate 1", output);
     }
 
+    /// <summary>
+    /// Issue 132: gate rows and forecasts print numbers the same on every machine and
+    /// locale. Gate 1's win rate printed as <c>0 %</c> on Linux CI and <c>0%</c> on an
+    /// en-US Windows desktop until every project ran under invariant globalization
+    /// (Directory.Build.props); this fails if a project drops the setting.
+    /// </summary>
+    [Fact]
+    public void ConsoleOutputIsCultureFree()
+    {
+        Assert.Equal(System.Globalization.CultureInfo.InvariantCulture, System.Globalization.CultureInfo.CurrentCulture);
+        Assert.Equal("0 %", string.Format("{0:P0}", 0.0));
+        Assert.Equal("0.630", string.Format("{0:F3}", 0.63));
+    }
+
     [Fact]
     public void TraceEndsWithTheOutcome()
     {
@@ -263,7 +268,7 @@ public class SimFullTests
     [Fact]
     public void ATraceWithAnItemLineReplaysInTheCliUnderStrict()
     {
-        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 2)).Replace("\r\n", "\n");
+        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 2));
         Assert.Contains("\nitem wren 2\n", trace);
         Assert.DoesNotContain("\nenemy:", trace);
         Assert.Contains("\n# enemy: wait archer-1\n", trace);
@@ -281,7 +286,7 @@ public class SimFullTests
         try
         {
             var exit = 0;
-            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "2", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() })).Replace("\r\n", "\n");
+            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "2", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
 
             Assert.Equal(0, exit);
             Assert.DoesNotContain("rejected ", output);
@@ -297,23 +302,6 @@ public class SimFullTests
         }
     }
 
-    private static string Capture(Action run)
-    {
-        var previous = Console.Out;
-        var writer = new StringWriter();
-        var cwd = Directory.GetCurrentDirectory();
-        Console.SetOut(writer);
-        try
-        {
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(Fixture.RealContentDirectory())!);
-            run();
-        }
-        finally
-        {
-            Directory.SetCurrentDirectory(cwd);
-            Console.SetOut(previous);
-        }
-
-        return writer.ToString();
-    }
+    private static string Capture(Action run) =>
+        ConsoleCapture.Run(run, Path.GetDirectoryName(Fixture.RealContentDirectory())!);
 }
