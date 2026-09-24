@@ -8,7 +8,7 @@ Phase 1 of DESIGN section 12 is complete and Phase 2 is most of the way: rules, 
 
 ## Next
 
-Issue 13's second run continues with Saltmarsh Ford (with #131's geometry read) and the Tollgate (three deployed or a second contested place), each with a hand play and a limit from gate 1's p90 plus about two; then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries), 16, 32, 33, 47. No bug is open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
+Issue 13's second run continues with Saltmarsh Ford (#131's geometry measured and not yet taken, see its thread) and the Tollgate (three deployed or a second contested place), each with a hand play and a limit from gate 1's p90 plus about two; then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries, tricks unnamed until both are in), 16, 32, 33, 47, 125, 141. No bug is open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
 
 ## Open forks (need Lotus)
 
@@ -16,7 +16,7 @@ None. One is expected later: whether battalions stay in scope, filed by the deci
 
 ## Open on the Design Table
 
-Thirteen rounds are settled and distilled in `docs/DIALOGUE.md`; that file plus this one is enough to be current. The Table thread that carried rounds 1 to 13 is issue #17, now closed as an archive; the open Table is the pinned issue labeled `design-table`. One question rides PR run 2a for Chat: how gate 1 should read a `protect` map, since the baseline takes no recruit veto (DECISIONS/0027). Next by the Table's order: the Fun Gate on maps 1 to 3 once issue 13's run 2 lands them, with both partners playing cold and neither reading the other's entry first.
+`docs/DIALOGUE.md` distils every settled round; that file plus this one is enough to be current. The Table thread that carried rounds 1 to 13 is issue #17, now closed as an archive; the open Table is the pinned issue labeled `design-table`. Fourteen rounds are settled; the fourteenth (2026-09-24) answered run 2's `protect` question and is filed as #141 (`ready`), which re-measures `protect: wren` on Old Mill Road once built. Nothing is awaiting an answer. Issue 131's geometry for Saltmarsh Ford was measured ahead of its slice (both halves alone drop gate 1 from 85 to under 25 percent; the table is on #131) and is Chat's to re-read before it lands. Next by the Table's order: the Fun Gate on maps 1 to 3 once issue 13's run 2 lands them, with both partners playing cold and neither reading the other's entry first.
 
 ## Maps
 
