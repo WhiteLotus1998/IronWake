@@ -67,8 +67,10 @@ public sealed record BattleState(
     /// content or programming error and throws with the slot named. <paramref name="benched"/>
     /// names roster units held back for gate 4's ablation (DESIGN.md section 11): the
     /// placement such a unit would have filled, named or bare, stays empty, so the bench
-    /// removes a body and never shifts another recruit into the slot. The captain cannot
-    /// be benched.
+    /// removes a body and never shifts another recruit into the slot. A unit whose death
+    /// loses the map cannot be benched: the captain, and the recruit the map's
+    /// <c>protect:</c> header names (section 7's loss order; issue 141), since an empty
+    /// placement for either is a loss on the opening board and never an ablation.
     /// </summary>
     public static BattleState From(
         MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default)
@@ -81,6 +83,11 @@ public sealed record BattleState(
         if (benched.Contains(roster[0].Id))
         {
             throw new ArgumentException($"the captain '{roster[0].Id}' cannot be benched", nameof(benched));
+        }
+
+        if (map.ProtectId is { } protectId && benched.Contains(protectId))
+        {
+            throw new ArgumentException($"the protected recruit '{protectId}' cannot be benched", nameof(benched));
         }
 
         var units = new List<BattleUnit>();

@@ -274,6 +274,96 @@ public class SimGateTests
     }
 
     /// <summary>
+    /// Issue 141: a <c>protect:</c> map where the protected recruit's only attack tile,
+    /// 4,1 beside the brigand, sits between two walls, so the soldiers behind the brigand
+    /// cannot reach it and the brigand's own strikes are the whole sum, lethal on the
+    /// enemy phase alone. The captain stands out of everyone's reach and plays no part.
+    /// </summary>
+    private const string Ward = """
+        name: Ward
+        size: 7x3
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 20
+        protect: wren
+
+        ....#..
+        .......
+        ....#..
+
+        units:
+        P captain 0,1
+        P recruit:wren 2,1
+        E brigand 5,1 group:yard behavior:hold
+        E soldier 6,0 group:yard behavior:hold
+        E soldier 6,2 group:yard behavior:hold
+
+        """;
+
+    /// <summary>
+    /// Issue 141: the veto covers every unit whose death loses the map. On the Ward the
+    /// protected recruit refuses her one attack tile because the no-crit sum there reaches
+    /// her HP, and ends somewhere the sum does not; on the same board without the header
+    /// she is an ordinary recruit and takes the attack.
+    /// </summary>
+    [Fact]
+    public void TheProtectedRecruitRefusesALethalAttackTileAndAnUnprotectedOneTakesIt()
+    {
+        var attackTile = new Coord(4, 1);
+        var guarded = Start(map: Ward);
+        var wren = guarded.Find("wren")!;
+        var brigand = guarded.Find("brigand-1")!;
+        Assert.True(HeuristicPlayer.LosesTheMap(guarded, wren));
+        Assert.True(HeuristicPlayer.LosesTheMap(guarded, guarded.UnitsOf(Side.Player).Single(u => u.IsCaptain)), "the captain is always covered");
+        Assert.True(guarded.ReachOf(wren, Starter).CanEnd(attackTile), "the attack tile is in reach, so the refusal is real");
+        Assert.True(Exposure.Of(guarded, Starter, wren, attackTile, brigand).NoCrit >= wren.Hp, "the sum at the attack tile reaches her HP, so the test is a real refusal");
+        Assert.True(Exposure.Of(guarded, Starter, wren, attackTile).NoCrit >= wren.Hp, "standing there without attacking is lethal too, so the approach refuses the tile as well");
+
+        var refused = HeuristicPlayer.PlanUnit(guarded, Starter, wren);
+        Assert.DoesNotContain(refused, c => c is Attack);
+        var ends = refused[0] is Move m ? m.To : wren.At;
+        Assert.NotEqual(attackTile, ends);
+        Assert.True(Exposure.Of(guarded, Starter, wren, ends).NoCrit < wren.Hp, $"{ends}: the tile she ends on passes the veto");
+
+        var open = Start(map: Ward.Replace("protect: wren\n", ""));
+        var unprotected = open.Find("wren")!;
+        Assert.False(HeuristicPlayer.LosesTheMap(open, unprotected));
+        var taken = HeuristicPlayer.PlanUnit(open, Starter, unprotected);
+        Assert.Equal(attackTile, Assert.IsType<Move>(taken[0]).To);
+        Assert.Equal("brigand-1", Assert.IsType<Attack>(taken[1]).TargetId);
+    }
+
+    /// <summary>Issue 141: the protected recruit's bench is refused by the core, like the captain's, with the same message shape.</summary>
+    [Fact]
+    public void TheProtectedRecruitCannotBeBenched()
+    {
+        var map = MapFixture.Parse(Ward);
+        var ex = Assert.Throws<ArgumentException>(() => BattleState.From(map, Starter, Starter.Cast, 7, benched: ValueList<string>.Of("wren")));
+        Assert.Equal("the protected recruit 'wren' cannot be benched (Parameter 'benched')", ex.Message);
+        Assert.NotNull(BattleState.From(map, Starter, Starter.Cast, 7, benched: ValueList<string>.Of("teodor")).Find("wren"));
+    }
+
+    /// <summary>
+    /// Issue 141: gate 4 neither benches nor judges the protected recruit. Her mix prints as
+    /// data on a line beside the captain's, she is not in the recruit count or the median,
+    /// and a bare recruit on the same map is benched and judged as ever.
+    /// </summary>
+    [Fact]
+    public void GateFourPrintsTheProtectedRecruitUnjudgedBesideTheCaptain()
+    {
+        var map = MapFixture.Parse(Ward.Replace("P recruit:wren 2,1", "P recruit:wren 2,1\n        P recruit 0,0"));
+        var (_, baseline) = Gates.Gate1(Starter, map, "ward", 5);
+        var result = Gates.Gate4(Starter, map, "ward", baseline);
+        var lines = result.Line.Split('\n');
+        Assert.Contains("gate 4 no dead weight: ward, 1 recruits x 5 seeds", lines[0]);
+        Assert.Contains(lines, l => l.StartsWith("  teodor: drop ", StringComparison.Ordinal));
+        Assert.Contains(lines, l => l.StartsWith("  captain captain: baseline [atk", StringComparison.Ordinal) && l.EndsWith("never benched, not judged", StringComparison.Ordinal));
+        Assert.Contains(lines, l => l.StartsWith("  protected wren: baseline [atk", StringComparison.Ordinal) && l.EndsWith("never benched, not judged", StringComparison.Ordinal));
+        Assert.DoesNotContain(lines, l => l.StartsWith("  wren: drop ", StringComparison.Ordinal));
+    }
+
+    /// <summary>
     /// A Seize map where the recruit stands nearer the throne than the captain and nothing
     /// is in reach to fight on turn 1: the approach walks both toward the throne, and the
     /// nearest tile to the throne is the throne.

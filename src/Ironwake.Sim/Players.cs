@@ -35,11 +35,14 @@ public sealed class RandomLegalPlayer : IPlayer
 /// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
-/// for Escape, hold for Survive. The captain veto is arithmetic (Design Table, seventh
-/// round): a plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole
-/// cycle reaches the captain's current HP, and among plans that pass, one a crit cannot
-/// kill on is preferred ahead of the tile keys. The planner knows nothing of the wake rule
-/// and walks into sleeping groups; that is the baseline gate 1 measures.
+/// for Escape, hold for Survive. The veto is arithmetic (Design Table, seventh round)
+/// and covers every unit whose death loses the map (fourteenth round, issue 141): the
+/// captain, and the recruit a <c>protect:</c> header names, by section 7's loss order.
+/// A plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole cycle
+/// reaches that unit's current HP, and among plans that pass, one a crit cannot kill on
+/// is preferred ahead of the tile keys. Every other recruit plays without a veto. The
+/// planner knows nothing of the wake rule and walks into sleeping groups; that is the
+/// baseline gate 1 measures.
 /// </summary>
 public sealed class HeuristicPlayer : IPlayer
 {
@@ -84,7 +87,7 @@ public sealed class HeuristicPlayer : IPlayer
                     }
 
                     var critSafe = true;
-                    if (unit.IsCaptain)
+                    if (LosesTheMap(state, unit))
                     {
                         var sum = Exposure.Of(state, content, unit, tile, target);
                         if (sum.NoCrit >= unit.Hp)
@@ -136,11 +139,20 @@ public sealed class HeuristicPlayer : IPlayer
     private static bool MayEndOn(BattleState state, GameContent content, BattleUnit unit, Coord tile) =>
         unit.IsCaptain || state.Map.Win != WinCondition.Seize || !state.Map.IsThrone(tile);
 
+    /// <summary>
+    /// Whether the veto applies to this unit: its death is a loss condition by section 7's
+    /// outcome order, so the captain on every map and the recruit named by the map's
+    /// <c>protect:</c> header (issue 141). One predicate at every site, since a unit that
+    /// refuses lethal attacks but approaches blind walks onto a lethal tile by another route.
+    /// </summary>
+    public static bool LosesTheMap(BattleState state, BattleUnit unit) =>
+        unit.IsCaptain || (state.Map.ProtectId is { } protectId && string.Equals(unit.Id, protectId, StringComparison.Ordinal));
+
     /// <summary>A heal when one is wanted: a healing spell on the most wounded ally below half, else a consumable on itself below half, from the safest tile that allows it.</summary>
     private static IReadOnlyList<Command>? Heal(BattleState state, GameContent content, BattleUnit unit, List<Coord> tiles, List<Reach> enemyReach)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var safest = tiles.OrderBy(t => unit.IsCaptain ? Exposure.Of(state, content, unit, t).NoCrit : enemyReach.Count(r => r.CanEnd(t))).ThenBy(t => t).ToList();
+        var safest = tiles.OrderBy(t => LosesTheMap(state, unit) ? Exposure.Of(state, content, unit, t).NoCrit : enemyReach.Count(r => r.CanEnd(t))).ThenBy(t => t).ToList();
         for (var slot = 0; slot < unit.Unit.Inventory.Count; slot++)
         {
             var stack = unit.Unit.Inventory.Items[slot];
@@ -185,8 +197,9 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// Where a unit that can attack nobody walks: section 8's approach toward the nearest
     /// enemy on Rout and Defeat Boss, the reachable tile nearest the throne on Seize, the
-    /// nearest exit on Escape. The captain refuses tiles whose no-crit exposure reaches
-    /// its HP when any tile passes, and prefers a tile a crit cannot kill on.
+    /// nearest exit on Escape. A unit the veto covers (<see cref="LosesTheMap"/>) refuses
+    /// tiles whose no-crit exposure reaches its HP when any tile passes, and prefers a tile
+    /// a crit cannot kill on; every other recruit takes <see cref="EnemyAi.Approach"/>.
     /// </summary>
     private static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon? weapon, Reach reach,
@@ -225,7 +238,7 @@ public sealed class HeuristicPlayer : IPlayer
                     return null;
                 }
 
-                if (!unit.IsCaptain)
+                if (!LosesTheMap(state, unit))
                 {
                     return EnemyAi.Approach(state, content, unit, weapon, reach, enemies, enemyReach);
                 }
@@ -243,7 +256,7 @@ public sealed class HeuristicPlayer : IPlayer
 
         if (toward is null && weapon is not null && state.Map.Win is WinCondition.Seize or WinCondition.Escape)
         {
-            if (!unit.IsCaptain)
+            if (!LosesTheMap(state, unit))
             {
                 return EnemyAi.Approach(state, content, unit, weapon, reach, enemies, enemyReach);
             }
@@ -267,7 +280,7 @@ public sealed class HeuristicPlayer : IPlayer
 
             var lethal = false;
             var critLethal = false;
-            if (unit.IsCaptain)
+            if (LosesTheMap(state, unit))
             {
                 var sum = Exposure.Of(state, content, unit, tile);
                 lethal = sum.NoCrit >= unit.Hp;

@@ -200,13 +200,19 @@ public static class Gates
     /// fails the cast as a whole (DESIGN.md section 11, issue 105): benching the median
     /// recruit raises the win rate, so the deployment is wrong and no recruit is judged.
     /// Above zero a recruit fails only when drop + 2 * SE is under half the median drop.
-    /// The captain's mix prints as data; he is never benched and never judged.
+    /// A unit whose death loses the map is never benched and never judged, because
+    /// <see cref="BattleState.From"/> refuses the bench: its empty placement would lose
+    /// every seed on turn 1 by section 7, so its paired drop would measure the loss
+    /// condition and not the unit (issue 141). The captain's mix, and the protected
+    /// recruit's on a <c>protect:</c> map, print as data on their own lines and are not
+    /// in the median.
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var opening = BattleState.From(map, content, content.Cast, 1);
         var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
-        var recruits = opening.UnitsOf(Side.Player).Where(u => !u.IsCaptain).Select(u => u.Id).ToList();
+        var unjudged = opening.UnitsOf(Side.Player).Where(u => HeuristicPlayer.LosesTheMap(opening, u)).Select(u => u.Id).ToList();
+        var recruits = opening.UnitsOf(Side.Player).Select(u => u.Id).Where(unitId => !unjudged.Contains(unitId)).ToList();
         var rows = new List<AblationRow>();
         foreach (var recruit in recruits)
         {
@@ -261,13 +267,16 @@ public static class Gates
             lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}]{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
         }
 
-        var captainMix = ActionMix.Zero;
-        foreach (var game in baseline)
+        foreach (var unitId in unjudged)
         {
-            captainMix = captainMix.Plus(game.Mix.GetValueOrDefault(captain, ActionMix.Zero));
-        }
+            var mix = ActionMix.Zero;
+            foreach (var game in baseline)
+            {
+                mix = mix.Plus(game.Mix.GetValueOrDefault(unitId, ActionMix.Zero));
+            }
 
-        lines.Add($"  captain {captain}: baseline [{captainMix}] never benched, not judged");
+            lines.Add($"  {(unitId == captain ? "captain" : "protected")} {unitId}: baseline [{mix}] never benched, not judged");
+        }
         return new GateResult(string.Join('\n', lines), passed);
     }
 
