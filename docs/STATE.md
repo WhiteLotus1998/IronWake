@@ -4,11 +4,11 @@ Updated: 2026-09-24. Rewritten, not appended: this file is what is true now, not
 
 ## Where we are
 
-Phase 1 of DESIGN section 12 is complete and Phase 2 is most of the way: rules, content loading, maps, movement, combat on keyed rolls, battle state with history and Recall, the turn loop, EXP, items, the enemy AI, the playable CLI, and the Sim harness with gates 1 to 8. The cast of eleven is in content. `ironwake play <map> [--seed N] [--script f] [--strict]` plays a real battle and both partners have played by hand; the three sample maps pass gates 1 to 4 on the cast but none is `tuned`, and no Fun Gate entry exists yet. 600 tests green on Linux and, from #132, on the `ci-windows` job too. The hit A/B is settled on two-roll averaging (DECISIONS/0023). The exposure sum counts the board the command certainly produces: a certain kill removed (#117), a strike at raw hit 0 dropped (#126), and a group the command wakes counted by its move through the wake predicate the resolver shares (#128, DECISIONS/0026).
+Phase 1 of DESIGN section 12 is complete and Phase 2 is most of the way: rules, content loading, maps, movement, combat on keyed rolls, battle state with history and Recall, the turn loop, EXP, items, the enemy AI, the playable CLI, and the Sim harness with gates 1 to 8. The cast of eleven is in content. `ironwake play <map> [--seed N] [--script f] [--strict]` plays a real battle and both partners have played by hand; the three sample maps pass gates 1 to 4 on the cast but none is `tuned`, and no Fun Gate entry exists yet. 600 tests green on Linux and, from #132, on the `ci-windows` job too. The hit A/B is settled on two-roll averaging (DECISIONS/0023). The exposure sum counts the board the command certainly produces: a certain kill removed (#117), a strike at raw hit 0 dropped (#126), and a group the command wakes counted by its move through the wake predicate the resolver shares (#128, DECISIONS/0026). Issue 13's run 2 has started: Old Mill Road is retuned against the cast with its own boss and a limit of 12, all eight gates passing (DECISIONS/0027).
 
 ## Next
 
-Issue 13's second run (maps 1 to 3 authored or retuned against the cast; turn limits from gate 1's p90 plus about two; three hand plays), then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries), 16, 32, 33, 47. No bug is open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
+Issue 13's second run continues with Saltmarsh Ford (with #131's geometry read) and the Tollgate (three deployed or a second contested place), each with a hand play and a limit from gate 1's p90 plus about two; then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries), 16, 32, 33, 47. No bug is open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
 
 ## Open forks (need Lotus)
 
@@ -16,13 +16,13 @@ None. One is expected later: whether battalions stay in scope, filed by the deci
 
 ## Open on the Design Table
 
-Thirteen rounds are settled and distilled in `docs/DIALOGUE.md`; that file plus this one is enough to be current. The Table thread that carried rounds 1 to 13 is issue #17, now closed as an archive; the open Table is the pinned issue labeled `design-table`. Nothing is awaiting an answer. Next by the Table's order: the Fun Gate on maps 1 to 3 once issue 13's run 2 lands them, with both partners playing cold and neither reading the other's entry first.
+Thirteen rounds are settled and distilled in `docs/DIALOGUE.md`; that file plus this one is enough to be current. The Table thread that carried rounds 1 to 13 is issue #17, now closed as an archive; the open Table is the pinned issue labeled `design-table`. One question rides PR run 2a for Chat: how gate 1 should read a `protect` map, since the baseline takes no recruit veto (DECISIONS/0027). Next by the Table's order: the Fun Gate on maps 1 to 3 once issue 13's run 2 lands them, with both partners playing cold and neither reading the other's entry first.
 
 ## Maps
 
 | Map | Status |
 |---|---|
-| old_mill_road | format sample (the DESIGN.md section 10 example); gates 1 to 4 pass on the cast (92 percent, median turn 7, p90 7, limit 20); its 16 losses are all timeouts against a boss no certain kill reaches, a content finding for issue 13's run 2; not tuned |
+| old_mill_road | retuned in run 2 (DECISIONS/0027): its own boss `mill_bandit`, limit 12; all eight gates pass on the cast (97 percent, median turn 8, p90 9, 6 captain losses, no timeouts; Wren's drop 0.700); hand play seed 11 won on turn 9 with two Recalls; awaits the Fun Gate; not tuned |
 | saltmarsh_ford | format sample; gates 1 to 4 pass on the cast (85 percent); the east crossing is one tile, so ground contact is 1v1 (#131); not tuned |
 | the_tollgate | format sample (seize); gate 1 passes at 99 percent and gate 4 fails the cast on the ceiling line: five deployed behind one contested tile, so three of four recruits change nothing; not tuned |
 

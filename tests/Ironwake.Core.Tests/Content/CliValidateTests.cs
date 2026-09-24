@@ -76,7 +76,7 @@ public class CliValidateTests
         Assert.Equal(0, exit);
         Assert.StartsWith("Old Mill Road  12x10", output);
         Assert.Contains(" 8 .AB.........", output);
-        Assert.Contains("!  Bandit Leader L3", output);
+        Assert.Contains("!  Mill Bandit L2", output);
         Assert.All(output, c => Assert.True(c < 128, "non-ASCII character in CLI output"));
     }
 

@@ -34,26 +34,26 @@ move captain 8,2
 attack captain archer-1
 wait wren
 end
-# turn 8: Wren stages on the road; the captain takes the fort to heal. The boss never moves, so time is the only cost
-move wren 9,3
+# turn 8: the captain, at 7 after the archer, takes the fort; Wren stages on the road out of the bandit's reach
+move wren 8,3
 wait wren
 move captain 6,2
 wait captain
 end
-# turns 9 to 10: heal
+# turn 9: the fort's heal plus the dressing, since the mill bandit's two swings are 18 and the captain must open with more than that
+item captain 2
 wait wren
-wait captain
 end
-wait wren
-wait captain
-end
-# turn 11: healed to 19, the captain stages above the boss
-move captain 8,0
+# turn 10: one more fort heal on the phase start, then stage at the road under the boss, who never moves
+move captain 9,3
 wait captain
 wait wren
 end
-# turn 12: both strike the boss; the captain eats the one counter, Wren kills on her first hit
-move captain 10,0
-attack captain bandit_leader-1
-move wren 10,2
-attack wren bandit_leader-1
+# turn 11: the captain opens alone and takes the counter and the enemy-phase swing; Wren stays out of reach, because the bandit's 10 is half her HP
+move captain 10,2
+attack captain mill_bandit-1
+wait wren
+end
+# turn 12: the last turn of the limit. Wren opens at full HP and it ends before anyone counters
+move wren 9,1
+attack wren mill_bandit-1

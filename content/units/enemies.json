@@ -73,6 +73,15 @@
       "inventory": [ { "item": "iron_lance" } ]
     },
     {
+      "id": "mill_bandit",
+      "name": "Mill Bandit",
+      "class": "reaver",
+      "level": 2,
+      "stats": { "hp": 22, "str": 7, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 3, "res": 1, "cha": 3 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 20, "res": 10, "cha": 5 },
+      "inventory": [ { "item": "hatchet" } ]
+    },
+    {
       "id": "bandit_leader",
       "name": "Bandit Leader",
       "class": "reaver",

@@ -165,8 +165,9 @@ A `.map` file is a header of `key: value` lines, then the grid, then a `units:` 
 name: Old Mill Road
 size: 12x10
 win: rout
-turn_limit: 20
+turn_limit: 12
 recall: 3
+enemy_level: 1
 
 ............
 ..^^....n...
@@ -185,7 +186,7 @@ P recruit:wren 2,8
 E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
-B bandit_leader 10,1 group:mill behavior:boss
+B mill_bandit 10,1 group:mill behavior:boss
 ```
 
 Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`: a template below it is raised to it (deterministically, on the effective growth of section 3 clamped per stat to 0..100, DECISIONS/0005 as amended by issue 84), and a template already at or above it keeps its own level, so a level-3 boss on a level-1 map stays level 3. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.

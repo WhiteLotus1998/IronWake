@@ -1,0 +1,61 @@
+# Old Mill Road, seed 11, hand play by Code (run 2: the mill bandit and a limit of 12)
+# turn 1: let the brigand come
+end
+# turn 2: the captain takes the brigand alone; Wren stays behind him
+move captain 3,7
+attack captain brigand-1
+move wren 2,7
+wait wren
+end
+# turn 3: the captain at 12 dresses the brigand's axe wound and Wren leads
+item captain 2
+move wren 4,6
+wait wren
+end
+# turn 4: toward the road, both outside radius 4 of the soldier at 9,1
+move wren 5,4
+wait wren
+move captain 4,5
+wait captain
+end
+# turn 5: Wren takes the fort and wakes the mill on purpose; the captain waits on the road out of the bow line
+move wren 6,2
+wait wren
+move captain 4,3
+wait captain
+end
+# turn 6: Wren finishes the soldier from the fort; the captain steps beside the archer, which cannot answer at one tile
+attack wren soldier-1
+move captain 7,2
+attack captain archer-1
+end
+# turn 7: the archer fell to the double. Stage on the road under the boss, who never leaves his tile
+move captain 10,3
+wait captain
+move wren 9,3
+wait wren
+end
+# turn 8: the captain opens on the boss and eats one hatchet; Wren finishes from the hill side
+move captain 10,2
+attack captain mill_bandit-1
+move wren 9,1
+attack wren mill_bandit-1
+end
+# turn 9: Wren is dead at 9,1 and the boss has 5 HP. The map is lost the way the eighth round said. First Recall, to the start of turn 8
+recall 57
+# turn 8 again: Wren opens from the hill side and the captain closes; the dice are the dice
+move wren 9,1
+attack wren mill_bandit-1
+move captain 10,2
+attack captain mill_bandit-1
+end
+# turn 9 again: same board, same dice, same death. The boss hits Wren for exactly half her HP, so she can never end a player phase beside him. Second Recall
+recall 57
+# turn 8, third time: the captain opens alone and takes both swings; Wren stays out of reach
+move captain 10,2
+attack captain mill_bandit-1
+wait wren
+end
+# turn 9: the boss is at 4 after the captain's counter. Wren opens at full HP and it is over before anyone counters
+move wren 9,1
+attack wren mill_bandit-1
