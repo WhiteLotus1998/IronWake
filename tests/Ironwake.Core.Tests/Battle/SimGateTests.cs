@@ -363,6 +363,132 @@ public class SimGateTests
         Assert.DoesNotContain(lines, l => l.StartsWith("  wren: drop ", StringComparison.Ordinal));
     }
 
+    private const string Veto = """
+        name: Veto
+        size: 7x3
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 12
+
+        .......
+        .......
+        .......
+
+        units:
+        P captain 0,1
+        E brigand 4,1 group:yard behavior:hold
+        E soldier 3,0 group:yard behavior:hold
+        E soldier 3,2 group:yard behavior:hold
+
+        """;
+
+    /// <summary>
+    /// Issue 125: the refused kill probability is the named attack's own chance to kill over
+    /// its strikes at the forecast's numbers under the game's scheme. On the Veto board with
+    /// the brigand at 1 HP, the captain's only attack on him is from 3,1, which the worst case
+    /// refuses; any landing strike kills, so the chance is the hit probability, or one minus
+    /// the chance both strikes miss when he doubles, and it differs between the two schemes.
+    /// </summary>
+    [Theory]
+    [InlineData(RollScheme.TwoRollAverage)]
+    [InlineData(RollScheme.OneRoll)]
+    public void TheRefusedKillProbabilityIsTheNamedAttacksChanceToKillUnderTheScheme(RollScheme scheme)
+    {
+        var start = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(Hale), 7, scheme);
+        var brigand = start.Find("brigand-1")! with { Hp = 1 };
+        var state = start.WithUnit(brigand);
+        var hale = state.Find("hale")!;
+        var tile = new Coord(3, 1);
+        Assert.True(Exposure.Of(state, Starter, hale, tile, brigand).NoCrit >= hale.Hp, "the attack on the brigand is refused, so the test is a real refusal");
+
+        var side = Ironwake.Core.Combat.Forecast((hale with { At = tile }).ToCombatant(state.Map, Starter), brigand.ToCombatant(state.Map, Starter), 1, scheme).Attacker;
+        Assert.True(side.HitChance < 100, "a raw 100 would be a certain kill and leave the sum, so the hit is under it");
+        var hit = Ironwake.Core.Combat.HitProbability(side.HitChance, scheme);
+        var expected = side.Doubles ? 1 - (1 - hit) * (1 - hit) : hit;
+
+        Assert.Equal(expected, HeuristicPlayer.KillProbability(state, Starter, hale, tile, brigand), 12);
+        var player = new HeuristicPlayer();
+        player.Next(state, Starter);
+        Assert.Equal(expected, player.HighestRefusedKill!.Value, 12);
+        Assert.Equal(Ironwake.Core.Combat.HitProbability(side.HitChance, scheme), Ironwake.Core.Combat.HitProbability(side.HitChance, scheme));
+    }
+
+    /// <summary>
+    /// Issue 125: a strike that does not kill on its own can kill with its crit or with the
+    /// second strike, and the probability enumerates those paths at the forecast's numbers.
+    /// The brigand at full HP on the Veto board is not killed by one plain hit from the captain.
+    /// </summary>
+    [Fact]
+    public void TheKillProbabilityCountsTheCritAndTheSecondStrike()
+    {
+        var state = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(Hale), 7);
+        var hale = state.Find("hale")!;
+        var brigand = state.Find("brigand-1")!;
+        var tile = new Coord(3, 1);
+        var side = Ironwake.Core.Combat.Forecast((hale with { At = tile }).ToCombatant(state.Map, Starter), brigand.ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;
+        Assert.True(side.Damage < brigand.Hp, "one plain hit does not kill, so the crit and the double are the only ways");
+        var hit = Ironwake.Core.Combat.HitProbability(side.HitChance, state.Scheme);
+        var crit = side.CritChance / 100.0;
+        var expected = 0.0;
+        var outcomes = new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Ironwake.Core.Combat.CritMultiplier) };
+        foreach (var (p1, d1) in outcomes)
+        {
+            if (!side.Doubles)
+            {
+                expected += d1 >= brigand.Hp ? p1 : 0;
+                continue;
+            }
+
+            foreach (var (p2, d2) in outcomes)
+            {
+                expected += d1 + d2 >= brigand.Hp ? p1 * p2 : 0;
+            }
+        }
+
+        Assert.Equal(expected, HeuristicPlayer.KillProbability(state, Starter, hale, tile, brigand), 12);
+        Assert.InRange(expected, 0.0, 1.0);
+    }
+
+    /// <summary>
+    /// Issue 125: gate 1 prints the refused-kill median over its timeout losses with its
+    /// count, and a dash when no timeout had a refusal. On the Ward every seed is a timeout
+    /// in which both covered units refused the one lethal attack on the brigand, whose full
+    /// HP only a crit path kills, so the median is a small probability over every seed; on
+    /// the Sealed map nothing was ever refused, so the row prints a dash and the result
+    /// carries null, as does a game the random player fought.
+    /// </summary>
+    [Fact]
+    public void GateOnePrintsTheRefusedKillMedianOverTimeoutsAndADashWhenNothingWasRefused()
+    {
+        var (ward, wardGames) = Gates.Gate1(Starter, MapFixture.Parse(Ward), "ward", 3);
+        Assert.Contains("losses 3 timeout 0 captain 0 protected, quiet tail ", ward.Line);
+        Assert.Contains(", refused kill p50 0.", ward.Line);
+        Assert.Contains(" over 3, two-roll average: FAILED", ward.Line);
+        Assert.All(wardGames, g => Assert.InRange(g.RefusedKill!.Value, 0.0, 1.0));
+        Assert.All(wardGames, g => Assert.True(g.RefusedKill!.Value > 0, "the crit path is a way to kill, so the refused chance is above zero"));
+
+        var (_, sealedGames) = Gates.Gate1(Starter, MapFixture.Parse(Sealed), "sealed", 3);
+        Assert.All(sealedGames, g => Assert.Null(g.RefusedKill));
+        Assert.Equal("refused kill -", Gates.RefusedKill(sealedGames));
+        Assert.Null(Runner.Play(Starter, MapFixture.Parse(Sealed), 1, new RandomLegalPlayer(1)).RefusedKill);
+    }
+
+    /// <summary>
+    /// Issue 125: gate 4's rows print the benched arm's losses by cause. On the Ambush with a
+    /// recruit beside the captain, benching her leaves him alone among four brigands and every
+    /// arm game is a captain death, counted under captain in her row.
+    /// </summary>
+    [Fact]
+    public void GateFourPrintsTheBenchedArmsLossesByCause()
+    {
+        var map = MapFixture.Parse(Ambush.Replace("P captain 1,1", "P captain 1,1\n        P recruit 1,0"));
+        var (_, baseline) = Gates.Gate1(Starter, map, "ambush", 5);
+        var result = Gates.Gate4(Starter, map, "ambush", baseline);
+        var wren = result.Line.Split('\n').Single(l => l.StartsWith("  wren:", StringComparison.Ordinal));
+        Assert.Contains("benched losses 0 timeout 5 captain 0 protected, refused kill -", wren);
+    }
+
     /// <summary>
     /// A Seize map where the recruit stands nearer the throne than the captain and nothing
     /// is in reach to fight on turn 1: the approach walks both toward the throne, and the
@@ -504,16 +630,16 @@ public class SimGateTests
     public void GateOnePrintsTheLossesByCauseAndTheQuietTail()
     {
         var (sealedRow, sealedGames) = Gates.Gate1(Starter, MapFixture.Parse(Sealed), "sealed", 10);
-        Assert.Contains("heuristic wins 0/10 (0 %), no wins, losses 10 timeout 0 captain 0 protected, quiet tail 3.0, two-roll average: FAILED", sealedRow.Line);
+        Assert.Contains("heuristic wins 0/10 (0 %), no wins, losses 10 timeout 0 captain 0 protected, quiet tail 3.0, refused kill -, two-roll average: FAILED", sealedRow.Line);
         Assert.All(sealedGames, g => Assert.Equal(LossCause.Timeout, g.Cause));
         Assert.All(sealedGames, g => Assert.Equal(0, g.LastCombatTurn));
 
         var (ambushRow, ambushGames) = Gates.Gate1(Starter, MapFixture.Parse(Ambush), "ambush", 10);
-        Assert.Contains("losses 0 timeout 10 captain 0 protected, quiet tail -, two-roll average: FAILED", ambushRow.Line);
+        Assert.Contains("losses 0 timeout 10 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED", ambushRow.Line);
         Assert.All(ambushGames, g => Assert.Equal(LossCause.Captain, g.Cause));
 
         var (hostageRow, hostageGames) = Gates.Gate1(Starter, MapFixture.Parse(Hostage), "hostage", 10);
-        Assert.Contains("losses 0 timeout 0 captain 10 protected, quiet tail -, two-roll average: FAILED", hostageRow.Line);
+        Assert.Contains("losses 0 timeout 0 captain 10 protected, quiet tail -, refused kill -, two-roll average: FAILED", hostageRow.Line);
         Assert.All(hostageGames, g => Assert.Equal(LossCause.Protected, g.Cause));
 
         var yard = Runner.Play(Starter, YardMap, 7, new HeuristicPlayer());
