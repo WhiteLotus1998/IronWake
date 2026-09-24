@@ -222,6 +222,74 @@ public class ExposureTests
         throw new Xunit.Sdk.XunitException("no Dex gives a raw hit of " + rawHit);
     }
 
+    /// <summary>
+    /// Issue 126: a strike whose raw hit against the unit is 0 after the clamp is the
+    /// same zero-probability branch as issue 117's certain kill, read from the other side.
+    /// The only enemy on the board cannot land on the captain, so the counter on the named
+    /// attack and the enemy-phase term both read 0, with and without the attack named.
+    /// </summary>
+    [Fact]
+    public void AnEnemyStrikeAtRawHitZeroContributesNothingToEitherSum()
+    {
+        var (state, hale, brigand) = UntouchableBoard(rawHit: 0);
+        var tile = new Coord(2, 1);
+        var forecast = Queries.Forecast(state.WithUnit(hale with { At = tile }), Starter, hale with { At = tile }, brigand)!;
+        Assert.True(forecast.Defender.Strikes, "the brigand counters at range 1");
+        Assert.Equal(0, forecast.Defender.HitChance);
+        Assert.True(forecast.Defender.Damage > 0, "the strike would hurt if it landed");
+
+        Assert.Equal(new ExposureSum(0, 0, 0), Exposure.Of(state, Starter, hale, tile, brigand));
+        Assert.Equal(new ExposureSum(0, 0, 0), Exposure.Of(state, Starter, hale, tile));
+    }
+
+    /// <summary>Issue 126, falsified the other way: raw 1 is a strike that can land, and both terms count in full.</summary>
+    [Fact]
+    public void AnEnemyStrikeAtRawHitOneCountsInFull()
+    {
+        var (state, hale, brigand) = UntouchableBoard(rawHit: 1);
+        var tile = new Coord(2, 1);
+        var forecast = Queries.Forecast(state.WithUnit(hale with { At = tile }), Starter, hale with { At = tile }, brigand)!;
+        Assert.Equal(1, forecast.Defender.HitChance);
+        var counter = forecast.Defender.Damage * Strikes(forecast.Defender);
+        Assert.True(counter > 0);
+
+        var sum = Exposure.Of(state, Starter, hale, tile, brigand);
+
+        var strike = Core.Combat.Forecast(brigand.ToCombatant(state.Map, Starter), (hale with { At = tile }).ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;
+        Assert.Equal(1, strike.HitChance);
+        Assert.Equal(counter, sum.Counter);
+        Assert.Equal(counter + strike.Damage * Strikes(strike), sum.NoCrit);
+        Assert.Equal((counter + strike.Damage * Strikes(strike)) * Core.Combat.CritMultiplier, sum.WithCrit);
+    }
+
+    /// <summary>
+    /// The yard with the soldier removed and the captain's Spd raised until the brigand's
+    /// raw hit against him on the tile beside it is <paramref name="rawHit"/> (searched,
+    /// since Avoid is monotone in Spd). Lck stays at Hale's own, so the captain still hits
+    /// the brigand and the counter is a real strike that cannot land.
+    /// </summary>
+    private static (BattleState State, BattleUnit Hale, BattleUnit Brigand) UntouchableBoard(int rawHit)
+    {
+        var map = Yard.Replace("E soldier 3,2 group:yard behavior:aggressive\n", string.Empty);
+        for (var spd = 8; spd <= 120; spd++)
+        {
+            var quick = Recruit("hale", new Stats(22, 8, 0, 7, spd, 6, 5, 2, 9), "iron_sword");
+            var state = Start(roster: ValueList<Unit>.Of(quick, Wren), map: map);
+            Assert.Null(state.Find("soldier-1"));
+            var hale = state.Find("hale")! with { At = new Coord(2, 1) };
+            var brigand = state.Find("brigand-1")!;
+            var forecast = Queries.Forecast(state.WithUnit(hale), Starter, hale, brigand)!;
+            if (forecast.Defender.HitChance != rawHit)
+            {
+                continue;
+            }
+
+            return (state, state.Find("hale")!, brigand);
+        }
+
+        throw new Xunit.Sdk.XunitException("no Spd gives a raw hit of " + rawHit + " against the captain");
+    }
+
     [Fact]
     public void BenchingLeavesTheNamedSlotEmptyAndShiftsNobody()
     {

@@ -27,8 +27,11 @@ public static class Exposure
     /// strike's damage at least its current HP, contributes neither its counter nor its
     /// enemy-phase term, since both are branches of probability zero and a veto that
     /// counted them took a certain loss over an impossible death. Raw 99 prints as 100
-    /// under two rolls and still counts. Reach is taken on the board as it stands with
-    /// the mover treated as standing on <paramref name="tile"/>.
+    /// under two rolls and still counts. The same zero-probability branch read from the
+    /// other side is excluded too (issue 126): a strike whose raw hit against the unit is
+    /// 0 after the clamp contributes nothing, whether it is the counter on the named
+    /// attack or an enemy-phase term; raw 1 counts in full. Reach is taken on the board
+    /// as it stands with the mover treated as standing on <paramref name="tile"/>.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
@@ -102,9 +105,14 @@ public static class Exposure
     public static bool KillsWithCertainty(SideForecast attacker, int hp) =>
         attacker.Strikes && attacker.HitChance >= 100 && attacker.Damage >= hp;
 
+    /// <summary>
+    /// The worst a side's strikes can do: plain and crit damage over one or two strikes,
+    /// or nothing when the side does not strike or its raw hit is 0, since a strike that
+    /// cannot land is a branch of probability zero under either scheme (issue 126).
+    /// </summary>
     private static (int Plain, int Crit) Worst(SideForecast side)
     {
-        if (!side.Strikes)
+        if (!side.Strikes || side.HitChance <= 0)
         {
             return (0, 0);
         }
