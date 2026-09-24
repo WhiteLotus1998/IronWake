@@ -154,7 +154,7 @@ public class CliPlayTests
     {
         var output = Play(out _, "# stand still\nend\n");
 
-        Assert.Contains("> end\n-- player phase ends, turn 1 --\n-- enemy phase, turn 1 --\nenemy: wait archer-1\narcher-1 waits\nenemy: wait bandit_leader-1\nbandit_leader-1 waits\nenemy: move brigand-1 3,6\nbrigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: wait soldier-1\nsoldier-1 waits\nenemy: end\n-- enemy phase ends, turn 1 --\n-- player phase, turn 2 --\nOld Mill Road  turn 2 of 20  player phase  rout  recall 3\n", output);
+        Assert.Contains("> end\n-- player phase ends, turn 1 --\n-- enemy phase, turn 1 --\nenemy: wait archer-1\narcher-1 waits\nenemy: move brigand-1 3,6\nbrigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: wait mill_bandit-1\nmill_bandit-1 waits\nenemy: wait soldier-1\nsoldier-1 waits\nenemy: end\n-- enemy phase ends, turn 1 --\n-- player phase, turn 2 --\nOld Mill Road  turn 2 of 12  player phase  rout  recall 3\n", output);
         Assert.Contains(" 6 ...c.....#..\n", output);
         Assert.Contains("group mill, guard, asleep", output);
     }
@@ -188,7 +188,7 @@ public class CliPlayTests
         Assert.DoesNotContain("rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("group mill wakes: proximity", output);
-        Assert.Contains("bandit_leader-1 falls at 10,1", output);
+        Assert.Contains("mill_bandit-1 falls at 10,1", output);
     }
 
     private static string Run(out int exit, params string[] args)

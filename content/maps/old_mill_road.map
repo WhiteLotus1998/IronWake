@@ -1,7 +1,7 @@
 name: Old Mill Road
 size: 12x10
 win: rout
-turn_limit: 20
+turn_limit: 12
 recall: 3
 enemy_level: 1
 
@@ -22,4 +22,4 @@ P recruit:wren 2,8
 E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
-B bandit_leader 10,1 group:mill behavior:boss
+B mill_bandit 10,1 group:mill behavior:boss
