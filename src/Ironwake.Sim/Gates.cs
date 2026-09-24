@@ -15,9 +15,11 @@ public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed)
 
 /// <summary>
 /// One finished game: who won, when, how a loss was lost, the last turn a combat was fought
-/// (zero when none was), and what every player unit did.
+/// (zero when none was), what every player unit did, and the highest kill probability the
+/// veto refused (<see cref="HeuristicPlayer.HighestRefusedKill"/>; null for any other
+/// player or when it refused nothing).
 /// </summary>
-public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix, LossCause Cause = LossCause.None, int LastCombatTurn = 0)
+public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix, LossCause Cause = LossCause.None, int LastCombatTurn = 0, double? RefusedKill = null)
 {
     public bool Won => Result == BattleResult.Won;
 }
@@ -69,7 +71,7 @@ public static class Runner
             }
         }
 
-        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn);
+        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, (player as HeuristicPlayer)?.HighestRefusedKill);
     }
 
     private static void Tally(Dictionary<string, ActionMix> mix, IReadOnlyList<GameEvent> events)
@@ -123,17 +125,33 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {Name(scheme)}: {Verdict(passed)}", passed), games);
     }
 
     /// <summary>The losses by cause, zeros printed so pasted rows line up, and the mean quiet tail of the timeouts or a dash when there were none.</summary>
     public static string Losses(IReadOnlyList<GameResult> games, MapDefinition map)
     {
         var timeouts = games.Where(g => g.Cause == LossCause.Timeout).ToList();
-        var captain = games.Count(g => g.Cause == LossCause.Captain);
-        var protectedDeaths = games.Count(g => g.Cause == LossCause.Protected);
         var tail = timeouts.Count == 0 ? "-" : timeouts.Average(g => map.TurnLimit - g.LastCombatTurn).ToString("F1", CultureInfo.InvariantCulture);
-        return $"losses {timeouts.Count} timeout {captain} captain {protectedDeaths} protected, quiet tail {tail}";
+        return $"losses {LossCounts(games)}, quiet tail {tail}";
+    }
+
+    /// <summary>The losses by cause in section 7's order, zeros printed: <c>2 timeout 1 captain 0 protected</c>.</summary>
+    public static string LossCounts(IReadOnlyList<GameResult> games) =>
+        $"{games.Count(g => g.Cause == LossCause.Timeout)} timeout {games.Count(g => g.Cause == LossCause.Captain)} captain {games.Count(g => g.Cause == LossCause.Protected)} protected";
+
+    /// <summary>
+    /// Over the timeout losses, the median of each game's highest kill probability the veto
+    /// refused, with the count of games it is over, as <c>refused kill p50 0.9994 over 16</c>, four decimals so raw 98 and 99 under two rolls print apart from certainty;
+    /// a dash when no timeout had a refusal (issue 125). Printed, never classified: a value
+    /// near one is a stall the veto caused by refusing a near-certain kill, a low value is a
+    /// board the player judged too risky, and the row says which without a threshold. The
+    /// count is printed so one game reads as one game and not as a finding.
+    /// </summary>
+    public static string RefusedKill(IReadOnlyList<GameResult> games)
+    {
+        var refused = games.Where(g => g.Cause == LossCause.Timeout && g.RefusedKill is not null).Select(g => g.RefusedKill!.Value).ToList();
+        return refused.Count == 0 ? "refused kill -" : $"refused kill p50 {Median(refused).ToString("F4", CultureInfo.InvariantCulture)} over {refused.Count}";
     }
 
     /// <summary>Gate 2: the random legal player wins at most 5 percent of the seeds.</summary>
@@ -191,7 +209,7 @@ public static class Gates
     /// baseline mix, the rest of the cast's baseline mix, and the rest of the cast's mix
     /// with the recruit benched.
     /// </summary>
-    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched);
+    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched, IReadOnlyList<GameResult>? Arm = null);
 
     /// <summary>
     /// Gate 4: each deployed recruit benched in turn over the baseline's seeds, outcomes
@@ -205,7 +223,9 @@ public static class Gates
     /// every seed on turn 1 by section 7, so its paired drop would measure the loss
     /// condition and not the unit (issue 141). The captain's mix, and the protected
     /// recruit's on a <c>protect:</c> map, print as data on their own lines and are not
-    /// in the median.
+    /// in the median. Each row also prints the benched arm's losses by cause and its
+    /// refused-kill median (issue 125), so a large drop beside many captain deaths or a
+    /// refused kill near one is read as the veto's doing and not the recruit's.
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -222,9 +242,11 @@ public static class Gates
             var own = ActionMix.Zero;
             var restBaseline = ActionMix.Zero;
             var restBenched = ActionMix.Zero;
+            var arms = new List<GameResult>();
             for (var seed = 1; seed <= baseline.Count; seed++)
             {
                 var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched, scheme);
+                arms.Add(arm);
                 var before = baseline[seed - 1];
                 if (before.Won && !arm.Won)
                 {
@@ -241,7 +263,7 @@ public static class Gates
             }
 
             var n = (double)baseline.Count;
-            rows.Add(new AblationRow(recruit, (flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n, own, restBaseline, restBenched));
+            rows.Add(new AblationRow(recruit, (flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n, own, restBaseline, restBenched, arms));
         }
 
         var median = rows.Count == 0 ? 0.0 : Median(rows.Select(r => r.Drop).ToList());
@@ -264,7 +286,8 @@ public static class Gates
 
         foreach (var r in rows)
         {
-            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}]{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
+            var arm = r.Arm ?? Array.Empty<GameResult>();
+            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}] benched losses {LossCounts(arm)}, {RefusedKill(arm)}{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
         }
 
         foreach (var unitId in unjudged)

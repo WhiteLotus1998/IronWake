@@ -46,6 +46,14 @@ public sealed class RandomLegalPlayer : IPlayer
 /// </summary>
 public sealed class HeuristicPlayer : IPlayer
 {
+    /// <summary>
+    /// The highest kill probability among the attack plans the veto refused in this game,
+    /// or null when it refused none (issue 125). A refused plan whose kill was near certain
+    /// is the veto rescuing nobody, and gate 1 and gate 4 print this so a stall reads as a
+    /// veto rescue or a risk stall without a threshold.
+    /// </summary>
+    public double? HighestRefusedKill { get; private set; }
+
     public IReadOnlyList<Command> Next(BattleState state, GameContent content)
     {
         if (state.Outcome.IsOver || state.Phase != Side.Player)
@@ -54,12 +62,32 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         var unit = state.UnitsOf(Side.Player).FirstOrDefault(u => !u.Acted);
-        return unit is null ? new Command[] { new EndPhase() } : PlanUnit(state, content, unit);
+        if (unit is null)
+        {
+            return new Command[] { new EndPhase() };
+        }
+
+        var plan = PlanUnit(state, content, unit, out var refused);
+        if (refused is { } p && (HighestRefusedKill is null || p > HighestRefusedKill))
+        {
+            HighestRefusedKill = p;
+        }
+
+        return plan;
     }
 
     /// <summary>One player unit's commands on the board as it stands.</summary>
-    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
+    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit) =>
+        PlanUnit(state, content, unit, out _);
+
+    /// <summary>
+    /// One player unit's commands on the board as it stands. <paramref name="refusedKill"/>
+    /// is the highest kill probability among the attacks the veto refused for this unit,
+    /// or null when it refused none.
+    /// </summary>
+    public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit, out double? refusedKill)
     {
+        refusedKill = null;
         var weapon = unit.EquippedWeapon(content);
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var reach = state.ReachOf(unit, content);
@@ -92,6 +120,12 @@ public sealed class HeuristicPlayer : IPlayer
                         var sum = Exposure.Of(state, content, unit, tile, target);
                         if (sum.NoCrit >= unit.Hp)
                         {
+                            var kill = KillProbability(state, content, unit, tile, target);
+                            if (refusedKill is null || kill > refusedKill)
+                            {
+                                refusedKill = kill;
+                            }
+
                             continue;
                         }
 
@@ -125,6 +159,40 @@ public sealed class HeuristicPlayer : IPlayer
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
         return WithMove(unit, destination ?? unit.At, new Wait(unit.Id));
+    }
+
+    /// <summary>
+    /// The chance that <paramref name="attacker"/>, attacking from <paramref name="tile"/>
+    /// with its equipped weapon, kills <paramref name="target"/> over the whole attack: the
+    /// first strike and the second when it doubles, each landing at the forecast's resolved
+    /// hit probability under the game's scheme and critting at its crit chance for
+    /// <see cref="Combat.CritMultiplier"/> times the damage (issue 125). The counter between
+    /// the strikes is not counted; this is the named attack's own chance, nothing more.
+    /// </summary>
+    public static double KillProbability(BattleState state, GameContent content, BattleUnit attacker, Coord tile, BattleUnit target)
+    {
+        var me = (attacker with { At = tile }).ToCombatant(state.Map, content);
+        var them = target.ToCombatant(state.Map, content);
+        var side = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme).Attacker;
+        var hit = Combat.HitProbability(side.HitChance, state.Scheme);
+        var crit = Math.Clamp(side.CritChance, 0, 100) / 100.0;
+        var outcomes = new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Combat.CritMultiplier) };
+        var kill = 0.0;
+        foreach (var (firstP, firstDamage) in outcomes)
+        {
+            if (!side.Doubles)
+            {
+                kill += firstDamage >= target.Hp ? firstP : 0;
+                continue;
+            }
+
+            foreach (var (secondP, secondDamage) in outcomes)
+            {
+                kill += firstDamage + secondDamage >= target.Hp ? firstP * secondP : 0;
+            }
+        }
+
+        return kill;
     }
 
     private static IReadOnlyList<Command> WithMove(BattleUnit unit, Coord tile, Command action) =>
