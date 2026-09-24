@@ -18,3 +18,15 @@ jobs:
       - run: dotnet build --no-restore --configuration Release
       - run: dotnet test --no-build --configuration Release
       - run: dotnet run --no-build --configuration Release --project src/Ironwake.Sim -- --smoke
+  ci-windows:
+    name: ci-windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - run: dotnet restore
+      - run: dotnet build --no-restore --configuration Release
+      - run: dotnet test --no-build --configuration Release
+      - run: dotnet run --no-build --configuration Release --project src/Ironwake.Sim -- --smoke

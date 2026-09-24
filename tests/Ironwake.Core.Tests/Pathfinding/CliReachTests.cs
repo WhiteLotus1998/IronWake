@@ -161,19 +161,9 @@ public class CliReachTests
 
     private static string Run(out int exit, params string[] args)
     {
-        var original = Console.Out;
-        using var writer = new StringWriter();
-        Console.SetOut(writer);
-        try
-        {
-            exit = Ironwake.Cli.Program.Main(args);
-        }
-        finally
-        {
-            Console.SetOut(original);
-        }
-
-        // The CLI writes the platform's line ending (issue 64); the expectations are written with \n.
-        return writer.ToString().Replace("\r\n", "\n");
+        var code = 0;
+        var output = ConsoleCapture.Run(() => code = Ironwake.Cli.Program.Main(args));
+        exit = code;
+        return output;
     }
 }
