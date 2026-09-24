@@ -4,11 +4,11 @@ Updated: 2026-09-24. Rewritten, not appended: this file is what is true now, not
 
 ## Where we are
 
-Phase 1 of DESIGN section 12 is complete and Phase 2 is most of the way: rules, content loading, maps, movement, combat on keyed rolls, battle state with history and Recall, the turn loop, EXP, items, the enemy AI, the playable CLI, and the Sim harness with gates 1 to 8. The cast of eleven is in content. `ironwake play <map> [--seed N] [--script f] [--strict]` plays a real battle and both partners have played by hand; the three sample maps pass gates 1 to 4 on the cast but none is `tuned`, and no Fun Gate entry exists yet. 595 tests green on Linux; three Sim tests fail on Windows (#132). The hit A/B is settled on two-roll averaging (DECISIONS/0023). The exposure sum excludes the two zero-probability branches, a certain kill (#117) and a strike at raw hit 0 (#126); the wake-aware sum (#128) is next.
+Phase 1 of DESIGN section 12 is complete and Phase 2 is most of the way: rules, content loading, maps, movement, combat on keyed rolls, battle state with history and Recall, the turn loop, EXP, items, the enemy AI, the playable CLI, and the Sim harness with gates 1 to 8. The cast of eleven is in content. `ironwake play <map> [--seed N] [--script f] [--strict]` plays a real battle and both partners have played by hand; the three sample maps pass gates 1 to 4 on the cast but none is `tuned`, and no Fun Gate entry exists yet. 599 tests green on Linux; three Sim tests fail on Windows (#132). The hit A/B is settled on two-roll averaging (DECISIONS/0023). The exposure sum counts the board the command certainly produces: a certain kill removed (#117), a strike at raw hit 0 dropped (#126), and a group the command wakes counted by its move through the wake predicate the resolver shares (#128, DECISIONS/0026).
 
 ## Next
 
-Issue 13's second run (maps 1 to 3 authored or retuned against the cast; turn limits from gate 1's p90 plus about two; three hand plays), then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries), 16, 32, 33, 47. Bugs first by the priority rule: #128 (the sum and the wake check) and #132 (Windows) are open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
+Issue 13's second run (maps 1 to 3 authored or retuned against the cast; turn limits from gate 1's p90 plus about two; three hand plays), then its third (tuning to all eight gates), then 15 (the Fun Gate and the two cold journal entries), 16, 32, 33, 47. Bugs first by the priority rule: #132 (Windows) is open. Phase 3 is filed as #66 to #85 and runs after Phase 2 by the numbers.
 
 ## Open forks (need Lotus)
 

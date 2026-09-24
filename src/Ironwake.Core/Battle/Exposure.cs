@@ -19,49 +19,35 @@ public static class Exposure
     /// The exposure of <paramref name="unit"/> ending its cycle on <paramref name="tile"/>,
     /// after attacking <paramref name="target"/> from there when one is named. Every unit
     /// of the other side whose reach-plus-range covers the tile is counted at the
-    /// forecast's own numbers from the best attack tile it can end on, conservative on
-    /// purpose: a sleeping Guard is counted by its reach from where it stands, and so is
-    /// an enemy the attack would probably have killed. The one exclusion is exact and
-    /// constant-free (issue 117): a target the named attack kills with certainty, the raw
-    /// hit at 100 so the resolved probability is one under either scheme and the first
-    /// strike's damage at least its current HP, contributes neither its counter nor its
-    /// enemy-phase term, since both are branches of probability zero and a veto that
-    /// counted them took a certain loss over an impossible death. Raw 99 prints as 100
-    /// under two rolls and still counts. The same zero-probability branch read from the
-    /// other side is excluded too (issue 126): a strike whose raw hit against the unit is
-    /// 0 after the clamp contributes nothing, whether it is the counter on the named
-    /// attack or an enemy-phase term; raw 1 counts in full. Reach is taken on the board
-    /// as it stands with the mover treated as standing on <paramref name="tile"/>.
+    /// forecast's own numbers from the best attack tile it can end on. The sum counts the
+    /// board the enemy phase will find as far as this command certainly determines it
+    /// (Design Table, twelfth and thirteenth rounds; DECISIONS/0024 to 0026): an enemy
+    /// that is certainly dead is not on it, a group this command certainly wakes is awake
+    /// on it, and a strike that certainly misses is not thrown on it. Certainly dead is
+    /// exact and constant-free (issue 117): the raw hit at 100, so the resolved
+    /// probability is one under either scheme, and the first strike's plain damage at
+    /// least the target's current HP; raw 99 prints as 100 under two rolls and still
+    /// counts, and a probable kill counts in full. Certainly woken is section 8's three
+    /// causes through <see cref="WakeCheck"/>, on the board <see cref="Board"/> builds
+    /// (issue 128); a group this command does not wake is counted from where it stands,
+    /// the conservative reading in that regime. Certainly missing is a raw hit of 0
+    /// (issue 126). Everything else is a worst case over the board at the moment of the
+    /// command: a sleeping group a later command wakes, and an ally whose body blocks a
+    /// path and then dies inside the cycle, are the enemy's choices and the cycle's, not
+    /// this command's certainty, so the veto is not a guarantee over the cycle
+    /// (DECISIONS/0025) and gate 1's captain-loss count is where that regime is seen.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
-        var moved = unit with { At = tile };
-        var board = state.WithUnit(moved);
-        var counter = 0;
-        var counterCrit = 0;
-        var certainKill = false;
-        if (target is not null)
-        {
-            var (armed, weapon, rejection) = Resolver.ChooseWeapon(moved, content, slot);
-            var distance = tile.DistanceTo(target.At);
-            if (rejection is null && weapon!.InRange(distance))
-            {
-                var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme);
-                certainKill = KillsWithCertainty(forecast.Attacker, target.Hp);
-                if (!certainKill)
-                {
-                    (counter, counterCrit) = Worst(forecast.Defender);
-                }
-            }
-        }
-
+        var (board, counter, counterCrit) = Plan(state, content, unit, tile, target, slot);
+        var moved = board.Find(unit.Id)!;
         var noCrit = counter;
         var withCrit = counterCrit;
         var me = moved.ToCombatant(board.Map, content);
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
             var weapon = enemy.EquippedWeapon(content);
-            if (weapon is null || (certainKill && enemy.Id == target!.Id))
+            if (weapon is null)
             {
                 continue;
             }
@@ -93,6 +79,56 @@ public static class Exposure
         }
 
         return new ExposureSum(counter, noCrit, withCrit);
+    }
+
+    /// <summary>
+    /// The board the sum is priced on: <paramref name="unit"/> standing on
+    /// <paramref name="tile"/>, <paramref name="target"/> removed when the named attack
+    /// kills it with certainty, and every sleeping Guard group the command certainly
+    /// wakes woken, by proximity to where the player's units then stand, by the noise of
+    /// the fight's two tiles when the plan attacks, or by the certain death of a member.
+    /// </summary>
+    public static BattleState Board(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null) =>
+        Plan(state, content, unit, tile, target, slot).Board;
+
+    private static (BattleState Board, int Counter, int CounterCrit) Plan(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target, int? slot)
+    {
+        var moved = unit with { At = tile };
+        var board = state.WithUnit(moved);
+        var counter = 0;
+        var counterCrit = 0;
+        var noisy = new List<Coord>();
+        var died = new List<string>();
+        if (target is not null)
+        {
+            var (armed, weapon, rejection) = Resolver.ChooseWeapon(moved, content, slot);
+            var distance = tile.DistanceTo(target.At);
+            if (rejection is null && weapon!.InRange(distance))
+            {
+                var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme);
+                noisy.Add(tile);
+                noisy.Add(target.At);
+                if (KillsWithCertainty(forecast.Attacker, target.Hp))
+                {
+                    board = board.WithoutUnit(target.Id);
+                    if (target.Group is { } group)
+                    {
+                        died.Add(group);
+                    }
+                }
+                else
+                {
+                    (counter, counterCrit) = Worst(forecast.Defender);
+                }
+            }
+        }
+
+        foreach (var woke in WakeCheck.Run(state, board, content, noisy, died))
+        {
+            board = board.Wake(woke.Group);
+        }
+
+        return (board, counter, counterCrit);
     }
 
     /// <summary>
