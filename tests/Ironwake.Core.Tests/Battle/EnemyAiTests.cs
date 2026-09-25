@@ -170,6 +170,27 @@ public class EnemyAiTests
         Assert.Equal(new Command[] { new Attack(leader.Id, cadet, 1) }, EnemyAi.PlanUnit(two, Starter, two.Find(leader.Id)!));
     }
 
+    /// <summary>
+    /// Issue 131, target 1: Saltmarsh Ford's west crossing opens into forest at 3,4 and 4,4,
+    /// so the approach rule's avoid key stops the brigand in the forest south of the bridge
+    /// on enemy phase 1 instead of on open ground beside the party. The party stands where
+    /// the heuristic puts it on turn 1, out of the brigand's reach that phase.
+    /// </summary>
+    [Fact]
+    public void OnSaltmarshFordTheBrigandsApproachStopsInTheForestSouthOfTheWestCrossing()
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map"), Starter);
+        var start = BattleState.From(map, Starter, Starter.Cast, 7);
+        foreach (var (id, x, y) in new[] { ("captain", 6, 4), ("ottilie", 6, 5), ("teodor", 7, 4), ("wren", 5, 5) })
+            start = start.WithUnit(start.Find(id)! with { At = new Coord(x, y) });
+        var state = start.Do(new EndPhase());
+
+        Assert.Equal("forest", map.TerrainIdAt(new Coord(3, 4)));
+        Assert.Equal(
+            new Command[] { new Move("brigand-1", new Coord(3, 4)), new Wait("brigand-1") },
+            EnemyAi.PlanUnit(state, Starter, state.Find("brigand-1")!));
+    }
+
     [Fact]
     public void OfTwoWeaponsScoringTheSameTheEquippedSlotStrikesAndNoSlotIsNamed()
     {
