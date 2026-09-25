@@ -67,7 +67,11 @@ public class CliPlayTests
     [InlineData("recall x", "ERROR: usage: recall <n>")]
     [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
     [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
-    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot]")]
+    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 9,9", "ERROR: captain cannot move to 9,9")]
     [InlineData("show", "ERROR: usage: show <unit>")]
     [InlineData("reach", "ERROR: usage: reach <unit>")]
     [InlineData("dance", "ERROR: unknown command 'dance'; type help")]
@@ -157,6 +161,26 @@ public class CliPlayTests
         Assert.Contains("> end\n-- player phase ends, turn 1 --\n-- enemy phase, turn 1 --\nenemy: wait archer-1\narcher-1 waits\nenemy: move brigand-1 3,6\nbrigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: wait mill_bandit-1\nmill_bandit-1 waits\nenemy: wait soldier-1\nsoldier-1 waits\nenemy: end\n-- enemy phase ends, turn 1 --\n-- player phase, turn 2 --\nOld Mill Road  turn 2 of 12  player phase  rout  recall 3\n", output);
         Assert.Contains(" 6 ...c.....#..\n", output);
         Assert.Contains("group mill, guard, asleep", output);
+    }
+
+    /// <summary>
+    /// Issue 151: <c>forecast ... from x,y</c> answers from any tile the unit can still move
+    /// to, naming the tile and its terrain, and refuses a tile it cannot stand on or any
+    /// other tile once the unit has moved. Nothing moves.
+    /// </summary>
+    [Fact]
+    public void TheForecastAnswersFromAnyTileInReachBeforeTheMoveIsMade()
+    {
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 1 from 3,7\nforecast wren brigand-1 from 3,5\nforecast wren brigand-1 from 2,7\nshow wren\nmove wren 3,7\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 from 3,7\n");
+
+        Assert.Contains("> forecast wren brigand-1 from 4,6\nforecast wren -> brigand-1 from 4,6 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: wren cannot move to 3,5\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: wren cannot attack brigand-1 from 2,7\n", output);
+        Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("  forecast <unit> <target> [slot] [from <x,y>]  show the forecast", Play(out _, "help\n"));
     }
 
     [Fact]
