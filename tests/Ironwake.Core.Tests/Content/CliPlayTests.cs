@@ -233,7 +233,7 @@ public class CliPlayTests
     /// <summary>
     /// Issue 11's acceptance: a journaled script under docs/transcripts wins the sample map
     /// under its seed. Keyed rolls keep it stable. The script is Code's play of seed 139 on
-    /// the one-dressing ration (issue 160; DECISIONS/0039): both cadets take the trailing
+    /// `supplies: 1` (issue 160; DECISIONS/0039): both cadets take the trailing
     /// archer on turn 2, the captain holds the fort while the mill comes, and Wren finishes the
     /// bandit at 85 on 10 HP with her one dressing unspent. The seed-101 script spends a
     /// second dressing and no longer replays.

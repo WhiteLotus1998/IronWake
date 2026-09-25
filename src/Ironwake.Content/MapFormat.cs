@@ -12,7 +12,10 @@ namespace Ironwake.Content;
 /// </summary>
 public static class MapFormat
 {
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "ration" };
+    /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
+    private const int MaxSupplies = 99;
+
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -57,9 +60,9 @@ public static class MapFormat
             sb.Append("rivalry: ").Append(arm).Append('\n');
         }
 
-        if (map.Rations.Count > 0)
+        if (map.Supplies is { } supplies)
         {
-            sb.Append("ration: ").Append(string.Join(' ', map.Rations.Select(r => r.ItemId + ":" + r.Uses))).Append('\n');
+            sb.Append("supplies: ").Append(supplies).Append('\n');
         }
 
         sb.Append('\n');
@@ -157,7 +160,7 @@ public static class MapFormat
             var cheapShots = ParseCheapShots(header);
             var retreat = ParseRetreat(header);
             var rivalry = ParseRivalry(header);
-            var rations = ParseRations(header);
+            int? supplies = header.ContainsKey("supplies") ? ParseInt(header, "supplies", 1, MaxSupplies, required: true, fallback: 0) : null;
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
 
@@ -167,7 +170,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, rations);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies);
             Validate(map);
             return map;
         }
@@ -346,44 +349,6 @@ public static class MapFormat
             }
 
             return entry.Value;
-        }
-
-        private ValueList<ItemStack> ParseRations(Dictionary<string, (string Value, int Line)> header)
-        {
-            if (!header.TryGetValue("ration", out var entry))
-            {
-                return ValueList<ItemStack>.Empty;
-            }
-
-            var rations = new List<ItemStack>();
-            foreach (var token in entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries))
-            {
-                var colon = token.IndexOf(':');
-                if (colon <= 0 || colon == token.Length - 1)
-                {
-                    throw ErrorAt(entry.Line, $"ration entry '{token}' must be <item>:<uses>");
-                }
-
-                var itemId = token[..colon];
-                if (!_content.Items.TryGetValue(itemId, out var item))
-                {
-                    throw ErrorAt(entry.Line, $"ration names '{itemId}', which is not an item in items.json");
-                }
-
-                if (!int.TryParse(token[(colon + 1)..], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var uses) || uses < 1 || uses > item.Uses)
-                {
-                    throw ErrorAt(entry.Line, $"ration for '{itemId}' must be 1..{item.Uses} uses, got '{token[(colon + 1)..]}'");
-                }
-
-                if (rations.Any(r => r.ItemId == itemId))
-                {
-                    throw ErrorAt(entry.Line, $"ration names '{itemId}' twice");
-                }
-
-                rations.Add(new ItemStack(itemId, uses));
-            }
-
-            return ValueList<ItemStack>.From(rations);
         }
 
         private void SkipBlankLines()

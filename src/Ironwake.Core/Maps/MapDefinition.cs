@@ -23,9 +23,9 @@ namespace Ironwake.Core;
 /// <param name="Events">The <c>events:</c> block in file order (issue 32); empty on a map without one.</param>
 /// <param name="RetreatEnabled">The map turns on enemy retreat (the <c>retreat: on</c> header, issue 33). Off by default.</param>
 /// <param name="RivalryArm">The rivalry arm the map turns on (the <c>rivalry:</c> header, issue 16), an id in <c>rules.json</c>; null for none.</param>
-/// <param name="Rations">
-/// The <c>ration:</c> header (issue 160): each entry caps a deployed player unit's stack of that item at
-/// <see cref="ItemStack.Uses"/> uses when the map starts. Empty for none. <see cref="Rationed"/> applies it.
+/// <param name="Supplies">
+/// The <c>supplies:</c> header (issue 160): every consumable stack a deployed player unit carries is
+/// capped at this many uses when the map starts; null for no cap. <see cref="Supplied"/> applies it.
 /// </param>
 public sealed record MapDefinition(
     string Name,
@@ -43,7 +43,7 @@ public sealed record MapDefinition(
     ValueList<MapEvent> Events = default,
     bool RetreatEnabled = false,
     string? RivalryArm = null,
-    ValueList<ItemStack> Rations = default)
+    int? Supplies = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -55,13 +55,14 @@ public sealed record MapDefinition(
     public bool IsExit(Coord at) => Exits.Contains(at);
 
     /// <summary>
-    /// A player unit as this map issues it: every stack of a rationed item is clamped to the
-    /// ration's uses. A clamp and never a set, so a unit carrying fewer uses keeps fewer, and a
-    /// map can take supplies away but never hand out more than the unit carried.
+    /// A player unit as this map issues it: every consumable stack (an entry of items.json;
+    /// weapons and spells are not supplies) is capped at <see cref="Supplies"/> uses. A cap and
+    /// never a set, so a stack already under it keeps its own, and a map can take supplies away
+    /// but never hand out more than the unit carried.
     /// </summary>
-    public Unit Rationed(Unit unit)
+    public Unit Supplied(Unit unit, GameContent content)
     {
-        if (Rations.Count == 0)
+        if (Supplies is not { } cap)
         {
             return unit;
         }
@@ -69,16 +70,7 @@ public sealed record MapDefinition(
         var items = new List<ItemStack>(unit.Inventory.Count);
         foreach (var item in unit.Inventory.Items)
         {
-            var capped = item;
-            foreach (var ration in Rations)
-            {
-                if (ration.ItemId == item.ItemId && item.Uses > ration.Uses)
-                {
-                    capped = item with { Uses = ration.Uses };
-                }
-            }
-
-            items.Add(capped);
+            items.Add(content.Items.ContainsKey(item.ItemId) && item.Uses > cap ? item with { Uses = cap } : item);
         }
 
         return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
