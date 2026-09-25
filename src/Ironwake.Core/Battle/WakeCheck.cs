@@ -18,12 +18,13 @@ public static class WakeCheck
     /// and wakes on <paramref name="after"/>, in group order, each naming the loudest
     /// cause in the order death, noise, proximity. <paramref name="noisy"/> holds the
     /// tiles of every combat the command fought, <paramref name="diedGroups"/> the group
-    /// of every unit it killed.
+    /// of every unit it killed. A Guard group a map event spawned during the command
+    /// (issue 32) is asleep on <paramref name="before"/> and is checked with the rest.
     /// </summary>
     public static IReadOnlyList<GroupWoke> Run(BattleState before, BattleState after, GameContent content, IReadOnlyCollection<Coord> noisy, IReadOnlyCollection<string> diedGroups)
     {
         var sleeping = new SortedSet<string>(StringComparer.Ordinal);
-        foreach (var unit in before.Units)
+        foreach (var unit in before.Units.Concat(after.Units))
         {
             if (unit is { Behavior: Behavior.Guard, Group: { } group } && !before.IsAwake(group))
             {

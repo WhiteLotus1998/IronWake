@@ -1,0 +1,20 @@
+# 0036 — Map events: two triggers, three actions, a held tile blocks
+
+Date: 2026-09-25. Issue 32 (Phase 2 infrastructure, first in the Table's experiment order). Built by Code; the review is on the issue. These leans are reversible and are implementation, so they are decided and recorded here, and Chat argues on the PR if it disagrees.
+
+## Decisions
+
+1. **Syntax.** The `events:` block comes after `units:`, one line per event: `<name> <trigger> <action>`. Triggers are `turn N player|enemy` and `enter x,y`. Actions are `terrain x,y <glyph>`, `spawn <template> x,y group:<g> behavior:<b>`, and `flag <name>`. A terrain action names the grid's own glyph, so an event reads the way the grid draws. The writer emits the block last, in file order, and only when the map has events, so the three shipped maps write back byte-identical.
+2. **When they fire.** A turn trigger fires at the start of its phase, after healing terrain heals. `turn 1 player` is a parse error because the battle opens in it. An enter trigger fires after an accepted player Move that ends on the tile. Passing through does not fire it, and neither does starting there or an enemy stopping there. The rule matches the wake rule's "do not stop close". Both are checked inside the resolver, before the Guard wake check. Several events due at once fire in file order.
+3. **Once, and a held tile blocks.** Each event fires at most once per battle. If its tile is held, it is blocked and spent: a spawn tile with any unit on it, or with terrain the template cannot enter, and a terrain change its occupant could not stand on. `MapEventFired` carries `Blocked`. Standing on a reinforcement tile is therefore a play the player can count in advance. We did not choose to delay the event until the tile clears, because that would make the arrival turn depend on the player's footing in a way the map file cannot show.
+4. **Stable ids.** A spawned unit is `template-n`. The count continues from the map's placements of that template through the spawn events before it in file order. The file fixes the name, so a blocked or unfired earlier spawn never shifts a later id, and replays and Recalls agree (gate 6).
+5. **State.** A terrain change replaces the tile in the state's own `MapDefinition`, so every rule (movement, avoid, healing, throne) reads it with no new query, and a Recall restores it. `Fired` and `Flags` are sorted lists on `BattleState`. `Canonical()` prints them, plus every tile an event can change, but only on a map with events, so the canonical text of every existing replay is unchanged.
+6. **Spawned units in the view.** A spawned unit's letter is drawn after the placements, in spawn order. It is never a boss, since a `B` line is the map's declared target.
+7. **The Guard wake check reads groups that exist only after the command.** A Guard group spawned during a command is checked on that same command, so a reinforcement that arrives beside the party wakes at once rather than one command late. A test falsifies it.
+8. **The sample is not a shipped map.** The issue asked for the sample map to gain a reinforcement. All three maps in `content/maps` wait on Chat's cold re-rates, and a spawn would move every gate number under those entries (sixteenth round). The sample is `docs/samples/sluice_gate.map`: a lever tile opens a wall, and a brigand arrives from the east edge on enemy phase 3. Code's hand play of it is in PLAYTEST.md with the transcript. A test holds the file canonical, and another replays the script under `--strict`.
+
+## Not decided
+
+- Whether a win condition reads flags (for example `win: flag <name>`, or Survive ending early). The issue asks only that a flag can be set. The first map that needs it decides the syntax.
+- Whether `enter` should also fire for a unit that ends a move there by canto (Phase 3, #71). As written it does, since canto will be a Move.
+- Map 4 (#78) is the first gated map with reinforcements. Gate 3's cheap-shot waiver and the exposure sum should both be read against it when it lands.

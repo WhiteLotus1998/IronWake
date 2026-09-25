@@ -1,0 +1,29 @@
+end
+move wren 4,7
+attack wren soldier-1
+move teodor 1,2
+wait teodor
+move captain 3,7
+wait captain
+end
+attack wren soldier-1
+move teodor 3,1
+wait teodor
+move captain 3,4
+wait captain
+end
+wait teodor
+move captain 3,2
+wait captain
+move wren 5,5
+wait wren
+end
+attack wren brigand-1
+move teodor 7,1
+attack teodor archer-1
+move captain 5,1
+wait captain
+end
+attack teodor archer-1
+move captain 6,2
+attack captain archer-1

@@ -6,7 +6,7 @@ namespace Ironwake.Content;
 /// <summary>
 /// Reads and writes the <c>.map</c> text format from DESIGN.md section 10: a header of
 /// <c>key: value</c> lines, a blank line, the terrain grid, a blank line, then a
-/// <c>units:</c> block. <see cref="Write"/> is canonical (fixed header order, every
+/// <c>units:</c> block, then an optional <c>events:</c> block (issue 32). <see cref="Write"/> is canonical (fixed header order, every
 /// default written out), so <c>Write(Parse(text))</c> is a fixed point and a hand-edited
 /// file can be checked against it. Nothing here touches the disk; <see cref="MapFiles"/> does.
 /// </summary>
@@ -60,7 +60,35 @@ public static class MapFormat
             sb.Append(WriteUnitLine(placement)).Append('\n');
         }
 
+        if (map.Events.Count > 0)
+        {
+            sb.Append('\n');
+            sb.Append("events:\n");
+            foreach (var mapEvent in map.Events)
+            {
+                sb.Append(WriteEventLine(mapEvent, content)).Append('\n');
+            }
+        }
+
         return sb.ToString();
+    }
+
+    private static string WriteEventLine(MapEvent mapEvent, GameContent content)
+    {
+        var trigger = mapEvent.Trigger switch
+        {
+            TurnTrigger t => "turn " + t.Turn + " " + t.Phase.ToString().ToLowerInvariant(),
+            EnterTrigger e => "enter " + e.At,
+            _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
+        };
+        var action = mapEvent.Action switch
+        {
+            ChangeTerrain c => "terrain " + c.At + " " + content.TerrainById(c.TerrainId).Glyph,
+            SpawnEnemy s => "spawn " + s.Placement.TemplateId + " " + s.Placement.At + " group:" + s.Placement.Group + " behavior:" + s.Placement.Behavior.ToString().ToLowerInvariant(),
+            SetFlag f => "flag " + f.Flag,
+            _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Action, "unknown map event action"),
+        };
+        return mapEvent.Name + " " + trigger + " " + action;
     }
 
     private static string WriteUnitLine(Placement placement) => placement switch
@@ -119,8 +147,9 @@ public static class MapFormat
             var terrain = ParseGrid(width, height);
             SkipBlankLines();
             var placements = ParseUnits(width, height, terrain);
+            var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events);
             Validate(map);
             return map;
         }
@@ -325,7 +354,7 @@ public static class MapFormat
             _index++;
             var placements = new List<Placement>();
             var occupied = new Dictionary<Coord, int>();
-            for (; !AtEnd; _index++)
+            for (; !AtEnd && Current.Trim() != "events:"; _index++)
             {
                 if (string.IsNullOrWhiteSpace(Current))
                 {
@@ -422,6 +451,143 @@ public static class MapFormat
             }
 
             return new EnemyPlacement(at, tokens[1], group, behavior, isBoss);
+        }
+
+        /// <summary>
+        /// The optional <c>events:</c> block after the units (issue 32): one line per event,
+        /// <c>name trigger action</c>. Triggers are <c>turn N player|enemy</c> and
+        /// <c>enter x,y</c>; actions are <c>terrain x,y glyph</c>, <c>spawn template x,y
+        /// group:g behavior:b</c> on an edge tile, and <c>flag name</c>. Names are unique.
+        /// </summary>
+        private ValueList<MapEvent> ParseEvents(int width, int height, ValueList<string> terrain, int turnLimit)
+        {
+            if (AtEnd)
+            {
+                return ValueList<MapEvent>.Empty;
+            }
+
+            _index++;
+            var events = new List<MapEvent>();
+            var names = new Dictionary<string, int>(StringComparer.Ordinal);
+            for (; !AtEnd; _index++)
+            {
+                if (string.IsNullOrWhiteSpace(Current))
+                {
+                    continue;
+                }
+
+                var tokens = Current.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var name = tokens[0];
+                if (name.Contains(':'))
+                {
+                    throw Error($"an event line starts with its name, got '{name}'");
+                }
+
+                if (names.TryGetValue(name, out var otherLine))
+                {
+                    throw Error($"event name '{name}' is already used on line {otherLine}");
+                }
+
+                names[name] = LineNumber;
+                var (trigger, rest) = ParseTrigger(tokens, width, height, turnLimit);
+                var action = ParseAction(rest, width, height, terrain);
+                events.Add(new MapEvent(name, trigger, action));
+            }
+
+            return ValueList<MapEvent>.From(events);
+        }
+
+        private (MapEventTrigger, string[]) ParseTrigger(string[] tokens, int width, int height, int turnLimit)
+        {
+            if (tokens.Length < 2)
+            {
+                throw Error("event line needs a name, a trigger, and an action: 'reinforce turn 3 enemy spawn brigand 0,5 group:west behavior:aggressive'");
+            }
+
+            switch (tokens[1])
+            {
+                case "turn":
+                    if (tokens.Length < 4)
+                    {
+                        throw Error("turn trigger needs a turn and a phase: 'turn 3 enemy'");
+                    }
+
+                    if (!int.TryParse(tokens[2], out var turn) || turn < 1 || turn > turnLimit)
+                    {
+                        throw Error($"turn trigger's turn must be an integer 1..{turnLimit} (the turn limit), got '{tokens[2]}'");
+                    }
+
+                    var phase = tokens[3] switch
+                    {
+                        "player" => Side.Player,
+                        "enemy" => Side.Enemy,
+                        _ => throw Error($"turn trigger's phase must be player or enemy, got '{tokens[3]}'"),
+                    };
+                    if (turn == 1 && phase == Side.Player)
+                    {
+                        throw Error("turn 1 player never begins, since the battle opens in it; put the change in the grid or the units block, or use turn 1 enemy");
+                    }
+
+                    return (new TurnTrigger(turn, phase), tokens[4..]);
+                case "enter":
+                    if (tokens.Length < 3)
+                    {
+                        throw Error("enter trigger needs a tile: 'enter 6,2'");
+                    }
+
+                    return (new EnterTrigger(ParseCoord(tokens[2], width, height)), tokens[3..]);
+                default:
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn or enter");
+            }
+        }
+
+        private MapEventAction ParseAction(string[] tokens, int width, int height, ValueList<string> terrain)
+        {
+            if (tokens.Length == 0)
+            {
+                throw Error("event line needs an action: terrain, spawn, or flag");
+            }
+
+            switch (tokens[0])
+            {
+                case "terrain":
+                    if (tokens.Length != 3 || tokens[2].Length != 1)
+                    {
+                        throw Error("terrain action needs a tile and one glyph: 'terrain 6,1 ='");
+                    }
+
+                    var at = ParseCoord(tokens[1], width, height);
+                    var glyph = tokens[2][0];
+                    var tile = _content.TerrainByGlyph(glyph) ?? throw Error($"unknown terrain glyph '{glyph}' in terrain action");
+                    return new ChangeTerrain(at, tile.Id);
+                case "spawn":
+                    if (tokens.Length < 3)
+                    {
+                        throw Error("spawn action needs a template and an edge tile: 'spawn brigand 0,5 group:west behavior:aggressive'");
+                    }
+
+                    var placement = ParseUnitLine("E " + string.Join(' ', tokens[1..]), width, height, terrain);
+                    if (placement is not EnemyPlacement enemy)
+                    {
+                        throw Error("spawn action places an enemy");
+                    }
+
+                    if (enemy.At.X != 0 && enemy.At.Y != 0 && enemy.At.X != width - 1 && enemy.At.Y != height - 1)
+                    {
+                        throw Error($"spawn tile {enemy.At} is not on the edge of the {width}x{height} grid; reinforcements arrive from an edge");
+                    }
+
+                    return new SpawnEnemy(enemy);
+                case "flag":
+                    if (tokens.Length != 2)
+                    {
+                        throw Error("flag action needs one name: 'flag alarm'");
+                    }
+
+                    return new SetFlag(tokens[1]);
+                default:
+                    throw Error($"unknown event action '{tokens[0]}'; expected terrain, spawn, or flag");
+            }
         }
 
         private PlayerPlacement ParsePlayer(string token, Coord at)

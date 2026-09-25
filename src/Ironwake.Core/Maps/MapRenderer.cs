@@ -199,18 +199,20 @@ public static class MapRenderer
     /// any terrain in the content draws with is skipped on both sides, so a unit is
     /// never drawn as a tile (issue 41); the skip uses the whole content, not the
     /// terrain on this map, so a slot keeps its letter from map to map. Past the usable
-    /// count on a side the letters wrap; no v1 map has that many units.
+    /// count on a side the letters wrap; no v1 map has that many units. Spawned units
+    /// (issue 32) follow the placements in spawn order, at <see cref="MapDefinition.SpawnIndex"/>.
     /// </summary>
     public static char[] Letters(MapDefinition map, GameContent content)
     {
         var upper = Alphabet('A', content);
         var lower = Alphabet('a', content);
-        var letters = new char[map.Placements.Count];
+        var placements = map.Placements.Concat(map.Spawns()).ToList();
+        var letters = new char[placements.Count];
         var players = 0;
         var enemies = 0;
-        for (var i = 0; i < map.Placements.Count; i++)
+        for (var i = 0; i < placements.Count; i++)
         {
-            letters[i] = map.Placements[i] switch
+            letters[i] = placements[i] switch
             {
                 EnemyPlacement { IsBoss: true } => BossGlyph,
                 EnemyPlacement => lower[enemies++ % lower.Length],

@@ -28,6 +28,11 @@ public static class Resolver
         {
             case Move move:
                 (next, rejection) = ApplyMove(state, content, move, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(move.UnitId)!, events);
+                }
+
                 break;
             case Attack attack:
                 (next, rejection) = ApplyAttack(state, content, attack, events);
@@ -452,6 +457,8 @@ public static class Resolver
     /// heals the units of the side whose phase begins that stand on healing terrain
     /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
     /// max, reported as the amount actually gained; a unit at full HP is not reported.
+    /// Then the map events whose turn trigger names the phase that has begun fire, in
+    /// file order (issue 32).
     /// </summary>
     private static (BattleState, Rejection?) ApplyEndPhase(BattleState state, GameContent content, List<GameEvent> events)
     {
@@ -478,7 +485,8 @@ public static class Resolver
             units.Add(unit with { Hp = hp, Moved = false, Acted = false });
         }
 
-        return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) }, null);
+        var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
+        return (MapEvents.AtPhaseStart(next, content, events), null);
     }
 
     /// <summary>

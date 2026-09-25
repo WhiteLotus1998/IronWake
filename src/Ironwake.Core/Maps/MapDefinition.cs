@@ -20,6 +20,7 @@ namespace Ironwake.Core;
 /// <param name="Placements">Starting units in file order.</param>
 /// <param name="Exits">Exit tiles for an Escape map (the <c>exit:</c> header); empty otherwise.</param>
 /// <param name="ProtectId">The recruit whose death loses the map (the <c>protect:</c> header), or null.</param>
+/// <param name="Events">The <c>events:</c> block in file order (issue 32); empty on a map without one.</param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -32,7 +33,8 @@ public sealed record MapDefinition(
     ValueList<string> TerrainIds,
     ValueList<Placement> Placements,
     ValueList<Coord> Exits = default,
-    string? ProtectId = null)
+    string? ProtectId = null,
+    ValueList<MapEvent> Events = default)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -93,6 +95,61 @@ public sealed record MapDefinition(
     {
         var template = content.Unit(placement.TemplateId);
         return template.ScaledTo(EnemyLevel, content.Class(template.ClassId));
+    }
+
+    /// <summary>This map with one tile's terrain replaced; what a <see cref="ChangeTerrain"/> event leaves behind.</summary>
+    public MapDefinition WithTerrain(Coord at, string terrainId) =>
+        Contains(at)
+            ? this with { TerrainIds = TerrainIds.SetItem(at.Y * Width + at.X, terrainId) }
+            : throw new ArgumentOutOfRangeException(nameof(at), at, $"outside a {Width}x{Height} map");
+
+    /// <summary>The placement of every <see cref="SpawnEnemy"/> event, in file order.</summary>
+    public IEnumerable<EnemyPlacement> Spawns() => Events.Select(e => e.Action).OfType<SpawnEnemy>().Select(s => s.Placement);
+
+    /// <summary>
+    /// The unit id a spawn event gives its unit: the template id and a counter that goes
+    /// on from the map's placements of that template through the spawn events before it,
+    /// in file order. It is fixed by the file and never by when or whether an earlier
+    /// spawn fired, so ids are stable across replays and Recalls (issue 32).
+    /// </summary>
+    public string SpawnId(MapEvent spawn)
+    {
+        var template = ((SpawnEnemy)spawn.Action).Placement.TemplateId;
+        var count = Placements.Count(p => p is EnemyPlacement e && e.TemplateId == template);
+        foreach (var e in Events)
+        {
+            if (e.Action is SpawnEnemy s && s.Placement.TemplateId == template)
+            {
+                count++;
+            }
+
+            if (e == spawn)
+            {
+                return template + "-" + count;
+            }
+        }
+
+        throw new ArgumentException($"event '{spawn.Name}' is not on this map", nameof(spawn));
+    }
+
+    /// <summary>The index a spawned unit's letter is drawn from: after every placement, in spawn order.</summary>
+    public int SpawnIndex(MapEvent spawn)
+    {
+        var index = Placements.Count;
+        foreach (var e in Events)
+        {
+            if (e == spawn)
+            {
+                return index;
+            }
+
+            if (e.Action is SpawnEnemy)
+            {
+                index++;
+            }
+        }
+
+        throw new ArgumentException($"event '{spawn.Name}' is not on this map", nameof(spawn));
     }
 
     /// <summary>Every tile drawn with a given terrain, in row-major order.</summary>

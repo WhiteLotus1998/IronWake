@@ -18,6 +18,8 @@ namespace Ironwake.Core;
 /// <param name="RecallCharges">Recall charges left on this map.</param>
 /// <param name="History">Every prior state, oldest first, each stored with an empty history of its own so the record stays finite.</param>
 /// <param name="AwakeGroups">Guard groups that have woken (section 8), sorted by name. A woken group is a fact of the board, so a Recall restores it with the rest.</param>
+/// <param name="Fired">The names of the map events that have fired, blocked or not, sorted (issue 32). Each fires once; a Recall restores the list with the board.</param>
+/// <param name="Flags">The flags map events have set, sorted, for a win condition to read.</param>
 public sealed record BattleState(
     MapDefinition Map,
     ValueList<BattleUnit> Units,
@@ -27,7 +29,9 @@ public sealed record BattleState(
     RollScheme Scheme,
     int RecallCharges,
     ValueList<BattleState> History,
-    ValueList<string> AwakeGroups = default)
+    ValueList<string> AwakeGroups = default,
+    ValueList<string> Fired = default,
+    ValueList<string> Flags = default)
 {
     /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
     public bool IsAwake(string group) => AwakeGroups.Contains(group);
@@ -63,6 +67,12 @@ public sealed record BattleState(
         groups.Sort(string.CompareOrdinal);
         return this with { AwakeGroups = ValueList<string>.From(groups) };
     }
+
+    /// <summary>Whether the named map event has fired on this battle.</summary>
+    public bool HasFired(string eventName) => Fired.Contains(eventName);
+
+    /// <summary>Whether a map event has set the named flag.</summary>
+    public bool HasFlag(string flag) => Flags.Contains(flag);
 
     /// <summary>
     /// The opening state of a map. <paramref name="roster"/> is the player's units in
@@ -200,7 +210,7 @@ public sealed record BattleState(
         return unit;
     }
 
-    private static BattleUnit Place(Unit unit, Side side, Coord at, MapDefinition map, GameContent content)
+    internal static BattleUnit Place(Unit unit, Side side, Coord at, MapDefinition map, GameContent content)
     {
         var unitClass = content.Class(unit.ClassId);
         var terrain = map.TerrainAt(at, content);
@@ -371,6 +381,30 @@ public sealed record BattleState(
         }
 
         sb.Append('\n');
+        if (Map.Events.Count > 0)
+        {
+            sb.Append("fired");
+            foreach (var name in Fired)
+            {
+                sb.Append(' ').Append(name);
+            }
+
+            sb.Append("\nflags");
+            foreach (var flag in Flags)
+            {
+                sb.Append(' ').Append(flag);
+            }
+
+            sb.Append('\n');
+            for (var i = 0; i < Map.TerrainIds.Count; i++)
+            {
+                if (Map.Events.Any(e => e.Action is ChangeTerrain c && c.At.Y * Map.Width + c.At.X == i))
+                {
+                    sb.Append("tile ").Append(new Coord(i % Map.Width, i / Map.Width)).Append(' ').Append(Map.TerrainIds[i]).Append('\n');
+                }
+            }
+        }
+
         foreach (var unit in Units)
         {
             sb.Append("unit ").Append(unit.Id).Append(' ').Append(unit.Side).Append(' ').Append(unit.At)
