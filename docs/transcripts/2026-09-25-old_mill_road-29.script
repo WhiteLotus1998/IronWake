@@ -1,0 +1,48 @@
+# Old Mill Road, seed 29, Code's Fun Gate play (not cold: Code retuned the map and read Chat's seed 42 entry first)
+# turn 1: Wren baits the brigand so the kill and the EXP are hers; the captain stays a step behind
+move wren 4,7
+wait wren
+move captain 2,7
+wait captain
+end
+# turn 2: Wren finishes the brigand at 2; the captain comes up beside her
+attack wren brigand-1
+move captain 5,6
+wait captain
+end
+# turn 3: Wren dresses the axe wound; both stay outside radius 4 of the soldier at 9,1
+move wren 6,6
+item wren 2
+move captain 6,4
+wait captain
+end
+# turn 4: the captain wakes the mill from 7,2, on plain, and takes both of them; Wren stays a bow's length out of reach
+move captain 7,2
+wait captain
+move wren 5,4
+wait wren
+end
+# turn 5: the soldier missed and stands at 4 on the hill; the archer is behind it at 9,2 where nothing can reach it this turn, so the captain drops the soldier and Wren steps up out of the bow line
+forecast captain soldier-1
+attack captain soldier-1
+move wren 6,3
+wait wren
+end
+# turn 6: the archer came down to the road to shoot Wren and is now inside both swords' reach; two strikes at one tile, no counter possible
+move wren 7,3
+attack wren archer-1
+move captain 8,2
+attack captain archer-1
+end
+# turn 7: the bandit holds his tile and hits for 9 on the captain and 10 on Wren; the captain dresses to full before opening, Wren stays out of his reach
+item captain 2
+move wren 8,3
+wait wren
+end
+# turn 8: the captain opens alone at 22; the counter and the enemy phase cost 9 each and his own counter takes the bandit to 4
+move captain 9,1
+attack captain mill_bandit-1
+end
+# turn 9: Wren closes
+move wren 10,2
+attack wren mill_bandit-1
