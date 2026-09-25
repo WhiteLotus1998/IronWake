@@ -451,6 +451,143 @@ public class SimGateTests
     }
 
     /// <summary>
+    /// Issue 147: a kill that needs the second strike is weighted by the chance the attacker
+    /// survives the counter thrown between the strikes, at the defender's own hit and crit.
+    /// On the Yard the level 1 brigand at 20 HP takes 11 from the captain's iron sword, so
+    /// the kill needs both strikes; his iron axe counters for 8, so a captain at 8 HP dies to
+    /// any landing counter before the second strike. The number is the closed form of that
+    /// board, and it is under the count the named attack alone would give (issue 125).
+    /// </summary>
+    [Theory]
+    [InlineData(RollScheme.TwoRollAverage)]
+    [InlineData(RollScheme.OneRoll)]
+    public void TheRefusedKillCountsTheCounterBetweenTheStrikesWhenTheKillNeedsTheSecond(RollScheme scheme)
+    {
+        var start = BattleState.From(BattleFixture.YardMap, Starter, BattleFixture.Roster, 7, scheme);
+        var hale = start.Find("hale")! with { Hp = 8 };
+        var state = start.WithUnit(hale);
+        var brigand = state.Find("brigand-1")!;
+        var tile = new Coord(2, 1);
+        var forecast = Ironwake.Core.Combat.Forecast((hale with { At = tile }).ToCombatant(state.Map, Starter), brigand.ToCombatant(state.Map, Starter), 1, scheme);
+        var side = forecast.Attacker;
+        var back = forecast.Defender;
+        Assert.True(side.Doubles, "the captain doubles the brigand, so the second strike exists");
+        Assert.True(side.Damage < brigand.Hp && 2 * side.Damage >= brigand.Hp, "one plain hit does not kill and two do, so the kill needs the second strike");
+        Assert.True(back.Strikes && back.Damage >= hale.Hp && back.Damage * Ironwake.Core.Combat.CritMultiplier >= hale.Hp, "the counter kills the captain on any landing strike");
+
+        var strike = Outcomes(side, scheme);
+        var counterKills = Outcomes(back, scheme).Where(o => o.Damage >= hale.Hp).Sum(o => o.P);
+        Assert.InRange(counterKills, 0.5, 1.0);
+        var expected = 0.0;
+        var alone = 0.0;
+        foreach (var (p1, d1) in strike)
+        {
+            if (d1 >= brigand.Hp)
+            {
+                expected += p1;
+                alone += p1;
+                continue;
+            }
+
+            foreach (var (p2, d2) in strike)
+            {
+                if (d1 + d2 >= brigand.Hp)
+                {
+                    expected += p1 * (1 - counterKills) * p2;
+                    alone += p1 * p2;
+                }
+            }
+        }
+
+        var actual = HeuristicPlayer.KillProbability(state, Starter, hale, tile, brigand);
+        Assert.Equal(expected, actual, 12);
+        Assert.True(actual < alone - 0.3, "the counter's share is taken off the second strike's paths");
+        Assert.True(Exposure.Of(state, Starter, hale, tile, brigand).NoCrit >= hale.Hp, "the attack is refused, so the number reaches the row");
+        var player = new HeuristicPlayer();
+        player.Next(state, Starter);
+        Assert.Equal(expected, player.HighestRefusedKill!.Value, 12);
+    }
+
+    /// <summary>
+    /// Issue 147: the counter weighs only the paths through the second strike. A first
+    /// strike that kills when it lands is unchanged on that path; only the path where it
+    /// misses and the second strike kills carries the counter, so the brigand at 1 HP on the
+    /// Veto board moves from the named attack's own chance by exactly the miss, the
+    /// counter's kill, and the second hit, and by nothing when the captain stands at full
+    /// HP, where the counter kills nobody. A defender that cannot strike back, an archer at
+    /// sword range against a captain fast enough to double it, weighs the second strike at
+    /// one, so the number is the plain count over the strikes however low the captain's HP.
+    /// </summary>
+    [Theory]
+    [InlineData(RollScheme.TwoRollAverage)]
+    [InlineData(RollScheme.OneRoll)]
+    public void OnlyThePathsThroughTheSecondStrikeCarryTheCounter(RollScheme scheme)
+    {
+        var start = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(Hale), 7, scheme);
+        var brigand = start.Find("brigand-1")! with { Hp = 1 };
+        var tile = new Coord(3, 1);
+        var full = start.WithUnit(brigand);
+        var hale = full.Find("hale")!;
+        var low = full.WithUnit(hale with { Hp = 1 });
+        var forecast = Ironwake.Core.Combat.Forecast((hale with { At = tile }).ToCombatant(full.Map, Starter), brigand.ToCombatant(full.Map, Starter), 1, scheme);
+        var side = forecast.Attacker;
+        var back = forecast.Defender;
+        Assert.True(side.Doubles && side.HitChance < 100, "the miss-then-kill path exists and has a chance");
+        Assert.True(back.Strikes && back.Damage >= 1 && back.Damage < hale.Hp, "the counter kills a captain at 1 HP and not one at full");
+        var hit = Ironwake.Core.Combat.HitProbability(side.HitChance, scheme);
+        var counterKills = Outcomes(back, scheme).Where(o => o.Damage >= 1).Sum(o => o.P);
+        var alone = 1 - (1 - hit) * (1 - hit);
+
+        Assert.Equal(alone, HeuristicPlayer.KillProbability(full, Starter, hale, tile, brigand), 12);
+        Assert.Equal(alone - (1 - hit) * counterKills * hit, HeuristicPlayer.KillProbability(low, Starter, low.Find("hale")!, tile, brigand), 12);
+
+        var swift = Hale with { Stats = Hale.Stats with { Spd = Hale.Stats.Spd + 8 } };
+        var unanswered = BattleState.From(MapFixture.Parse(Unanswered), Starter, ValueList<Unit>.Of(swift), 7, scheme);
+        var archer = unanswered.Find("archer-1")!;
+        var weak = unanswered.WithUnit(unanswered.Find("hale")! with { Hp = 1 });
+        var attacker = weak.Find("hale")!;
+        var against = Ironwake.Core.Combat.Forecast((attacker with { At = tile }).ToCombatant(weak.Map, Starter), archer.ToCombatant(weak.Map, Starter), 1, scheme);
+        Assert.False(against.Defender.Strikes, "a bow does not answer at range 1");
+        Assert.True(against.Attacker.Doubles && against.Attacker.Damage < archer.Hp, "the kill needs the second strike, the case the counter would weigh");
+        var strike = Outcomes(against.Attacker, scheme);
+        var expected = 0.0;
+        foreach (var (p1, d1) in strike)
+        {
+            foreach (var (p2, d2) in strike)
+            {
+                expected += d1 + d2 >= archer.Hp ? p1 * p2 : 0;
+            }
+        }
+
+        Assert.Equal(expected, HeuristicPlayer.KillProbability(weak, Starter, attacker, tile, archer), 12);
+    }
+
+    private static (double P, int Damage)[] Outcomes(SideForecast side, RollScheme scheme)
+    {
+        var hit = Ironwake.Core.Combat.HitProbability(side.HitChance, scheme);
+        var crit = side.CritChance / 100.0;
+        return new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Ironwake.Core.Combat.CritMultiplier) };
+    }
+
+    private const string Unanswered = """
+        name: Unanswered
+        size: 7x3
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+
+        .......
+        .......
+        .......
+
+        units:
+        P captain 0,1
+        E archer 4,1 group:yard behavior:hold
+
+        """;
+
+    /// <summary>
     /// Issue 125: gate 1 prints the refused-kill median over its timeout losses with its
     /// count, and a dash when no timeout had a refusal. On the Ward every seed is a timeout
     /// in which both covered units refused the one lethal attack on the brigand, whose full

@@ -143,7 +143,8 @@ public static class Gates
     /// <summary>
     /// Over the timeout losses, the median of each game's highest kill probability the veto
     /// refused, with the count of games it is over, as <c>refused kill p50 0.9994 over 16</c>, four decimals so raw 98 and 99 under two rolls print apart from certainty;
-    /// a dash when no timeout had a refusal (issue 125). Printed, never classified: a value
+    /// a dash when no timeout had a refusal (issue 125). The probability is over the strikes
+    /// the attacker lives to make, the counter between them counted (issue 147). Printed, never classified: a value
     /// near one is a stall the veto caused by refusing a near-certain kill, a low value is a
     /// board the player judged too risky, and the row says which without a threshold. The
     /// count is printed so one game reads as one game and not as a finding.
