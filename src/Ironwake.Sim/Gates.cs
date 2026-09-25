@@ -26,6 +26,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
 
     /// <summary>The weapon rank points of every player unit as it last stood in the game (issue 67), by id.</summary>
     public IReadOnlyDictionary<string, WeaponSkill> Skills { get; init; } = new Dictionary<string, WeaponSkill>(StringComparer.Ordinal);
+
+    /// <summary>The mastery points of every player unit as it last stood in the game (issue 69), by id.</summary>
+    public IReadOnlyDictionary<string, MasteryProgress> Masteries { get; init; } = new Dictionary<string, MasteryProgress>(StringComparer.Ordinal);
 }
 
 /// <summary>A gate's printed line and verdict.</summary>
@@ -87,23 +90,24 @@ public static class Runner
 
         return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player))
         {
-            Skills = SkillsOf(state),
+            Skills = LastOf(state, unit => unit.Skill),
+            Masteries = LastOf(state, unit => unit.Mastery),
         };
     }
 
-    /// <summary>Each player unit's rank points as it last stood in the game, so a unit that fell keeps the points it had.</summary>
-    private static Dictionary<string, WeaponSkill> SkillsOf(BattleState state)
+    /// <summary>Something of each player unit as it last stood in the game, so a unit that fell keeps the points it had.</summary>
+    private static Dictionary<string, T> LastOf<T>(BattleState state, Func<Unit, T> read)
     {
-        var skills = new Dictionary<string, WeaponSkill>(StringComparer.Ordinal);
+        var last = new Dictionary<string, T>(StringComparer.Ordinal);
         foreach (var step in state.History.Append(state))
         {
             foreach (var unit in step.UnitsOf(Side.Player))
             {
-                skills[unit.Id] = unit.Unit.Skill;
+                last[unit.Id] = read(unit.Unit);
             }
         }
 
-        return skills;
+        return last;
     }
 
     private static double? RefusedKillOf(IPlayer player) => player switch

@@ -95,6 +95,11 @@ public static class ProtocolJson
                 w.WriteString("weaponType", Name(k.Type));
                 w.WriteString("rank", Name(k.Rank));
                 break;
+            case MasteryEarned m:
+                w.WriteString("unit", m.UnitId);
+                w.WriteString("class", m.ClassId);
+                w.WriteString("ability", m.AbilityId);
+                break;
             case UnitWaited u:
                 w.WriteString("unit", u.UnitId);
                 break;
@@ -479,6 +484,13 @@ public static class ProtocolJson
         }
 
         w.WriteEndObject();
+        w.WriteStartObject("masteryPoints");
+        foreach (var (classId, points) in u.Mastery.All)
+        {
+            w.WriteNumber(classId, points);
+        }
+
+        w.WriteEndObject();
         w.WriteEndObject();
     }
 
@@ -509,6 +521,7 @@ public static class ProtocolJson
             {
                 Hooks = ReadStrings(e, "hooks"),
                 Skill = ReadWeaponPoints(e),
+                Mastery = ReadMasteryPoints(e),
             };
         }
         catch (ArgumentException ex)
@@ -755,6 +768,34 @@ public static class ProtocolJson
         }
 
         return skill;
+    }
+
+    /// <summary>A unit's <c>masteryPoints</c> (issue 69), class id to points; a state written before the field existed reads as none.</summary>
+    private static MasteryProgress ReadMasteryPoints(JsonElement e)
+    {
+        if (!e.TryGetProperty("masteryPoints", out var value) || value.ValueKind == JsonValueKind.Null)
+        {
+            return MasteryProgress.Empty;
+        }
+
+        if (value.ValueKind != JsonValueKind.Object)
+        {
+            throw new ProtocolException("field 'masteryPoints' is not an object");
+        }
+
+        var progress = MasteryProgress.Empty;
+        foreach (var property in value.EnumerateObject())
+        {
+            var points = RequiredInt(value, property.Name);
+            if (points < 0)
+            {
+                throw new ProtocolException($"field 'masteryPoints.{property.Name}' is below 0");
+            }
+
+            progress = progress.With(property.Name, points);
+        }
+
+        return progress;
     }
 
     private static ValueList<string> ReadStrings(JsonElement e, string name) =>

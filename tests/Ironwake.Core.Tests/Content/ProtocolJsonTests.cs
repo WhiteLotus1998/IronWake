@@ -26,6 +26,7 @@ public class ProtocolJsonTests
         { new ExpGained("wren", 30, 72), """{"type":"expGained","unit":"wren","amount":30,"expAfter":72}""" },
         { new LeveledUp("wren", 4, new Stats(1, 0, 0, 1, 1, 0, 0, 0, 1)), """{"type":"leveledUp","unit":"wren","newLevel":4,"gains":{"hp":1,"str":0,"mag":0,"dex":1,"spd":1,"lck":0,"def":0,"res":0,"cha":1}}""" },
         { new RankRaised("wren", WeaponType.Sword, WeaponRank.D), """{"type":"rankRaised","unit":"wren","weaponType":"sword","rank":"d"}""" },
+        { new MasteryEarned("wren", "cadet", "axebreaker"), """{"type":"masteryEarned","unit":"wren","class":"cadet","ability":"axebreaker"}""" },
         { new UnitWaited("wren"), """{"type":"unitWaited","unit":"wren"}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
@@ -216,6 +217,24 @@ public class ProtocolJsonTests
         var older = System.Text.RegularExpressions.Regex.Replace(json, ",\"weaponPoints\":\\{[^}]*\\}", string.Empty);
         Assert.DoesNotContain("weaponPoints", older);
         Assert.Equal(WeaponSkill.Zero, ProtocolJson.ReadState(older, content).Find(captain.Id)!.Unit.Skill);
+    }
+
+    /// <summary>Issue 69: a unit's mastery points travel in <c>masteryPoints</c> by class id, and a state written before the field existed reads as none.</summary>
+    [Fact]
+    public void AStateReadsBackEqualWithMasteryPoints()
+    {
+        var (content, state) = PlayedTollgate();
+        var captain = state.UnitsOf(Side.Player).First();
+        var trained = (state with { History = ValueList<BattleState>.Empty })
+            .WithUnit(captain with { Unit = captain.Unit with { Mastery = MasteryProgress.Empty.With("pikeman", 2).With("cadet", 5) } });
+
+        var json = ProtocolJson.State(trained, content);
+        Assert.Contains("\"masteryPoints\":{\"cadet\":5,\"pikeman\":2}", json);
+        Assert.Equal(trained, ProtocolJson.ReadState(json, content));
+
+        var older = System.Text.RegularExpressions.Regex.Replace(json, ",\"masteryPoints\":\\{[^}]*\\}", string.Empty);
+        Assert.DoesNotContain("masteryPoints", older);
+        Assert.Equal(MasteryProgress.Empty, ProtocolJson.ReadState(older, content).Find(captain.Id)!.Unit.Mastery);
     }
 
     [Fact]

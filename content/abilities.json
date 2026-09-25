@@ -1,3 +1,16 @@
 {
-  "abilities": []
+  "abilities": [
+    { "id": "swordbreaker", "name": "Swordbreaker", "text": "+20 hit and avoid against swords.",
+      "effect": { "kind": "combat", "against": { "weapon": "sword" }, "hit": 20, "avoid": 20 } },
+    { "id": "lancebreaker", "name": "Lancebreaker", "text": "+20 hit and avoid against lances.",
+      "effect": { "kind": "combat", "against": { "weapon": "lance" }, "hit": 20, "avoid": 20 } },
+    { "id": "axebreaker", "name": "Axebreaker", "text": "+20 hit and avoid against axes.",
+      "effect": { "kind": "combat", "against": { "weapon": "axe" }, "hit": 20, "avoid": 20 } },
+    { "id": "bowbreaker", "name": "Bowbreaker", "text": "+20 hit and avoid against bows.",
+      "effect": { "kind": "combat", "against": { "weapon": "bow" }, "hit": 20, "avoid": 20 } },
+    { "id": "reasonbreaker", "name": "Reasonbreaker", "text": "+20 hit and avoid against Reason.",
+      "effect": { "kind": "combat", "against": { "weapon": "reason" }, "hit": 20, "avoid": 20 } },
+    { "id": "faithbreaker", "name": "Faithbreaker", "text": "+20 hit and avoid against Faith.",
+      "effect": { "kind": "combat", "against": { "weapon": "faith" }, "hit": 20, "avoid": 20 } }
+  ]
 }

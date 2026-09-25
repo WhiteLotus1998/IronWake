@@ -495,6 +495,26 @@ public static class ContentLoader
                 throw node.Error("mastery", $"unknown ability '{mastery}': not in {ContentFiles.AbilitiesName}");
             }
 
+            var masteryPoints = 0;
+            if (mastery is null && node.Has("masteryPoints"))
+            {
+                throw node.Error("masteryPoints", "needs a 'mastery' to earn");
+            }
+
+            if (mastery is not null)
+            {
+                if (!node.Has("masteryPoints"))
+                {
+                    throw node.Error("masteryPoints", $"missing: a class that names a mastery names the points that earn it");
+                }
+
+                masteryPoints = node.Int("masteryPoints");
+                if (masteryPoints < 1)
+                {
+                    throw node.Error("masteryPoints", "must be at least 1");
+                }
+            }
+
             builder.Add(node.Entry!, new UnitClass(
                 node.Entry!,
                 node.String("name"),
@@ -505,6 +525,7 @@ public static class ContentLoader
                 growthModifiers)
             {
                 Mastery = mastery,
+                MasteryPoints = masteryPoints,
             });
         }
 

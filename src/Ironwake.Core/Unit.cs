@@ -35,6 +35,12 @@ public sealed record Unit(
     /// </summary>
     public WeaponSkill Skill { get; init; } = WeaponSkill.Zero;
 
+    /// <summary>
+    /// Mastery points per class (issue 69), earned in combat by player units. A mastered
+    /// ability is added to <see cref="Abilities"/>, so it outlives the class.
+    /// </summary>
+    public MasteryProgress Mastery { get; init; } = MasteryProgress.Empty;
+
     /// <summary>Whether this unit may equip <paramref name="weapon"/>: its class uses the type and its rank in the type reaches the weapon's.</summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
         unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank;
