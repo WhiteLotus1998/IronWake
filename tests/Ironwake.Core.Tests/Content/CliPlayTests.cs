@@ -158,8 +158,8 @@ public class CliPlayTests
     {
         var output = Play(out _, "# stand still\nend\n");
 
-        Assert.Contains("> end\n-- player phase ends, turn 1 --\n-- enemy phase, turn 1 --\nenemy: wait archer-1\narcher-1 waits\nenemy: move brigand-1 3,6\nbrigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: wait mill_bandit-1\nmill_bandit-1 waits\nenemy: wait soldier-1\nsoldier-1 waits\nenemy: end\n-- enemy phase ends, turn 1 --\n-- player phase, turn 2 --\nOld Mill Road  turn 2 of 12  player phase  rout  recall 3\n", output);
-        Assert.Contains(" 6 ...c.....#..\n", output);
+        Assert.Contains("> end\n-- player phase ends, turn 1 --\n-- enemy phase, turn 1 --\nenemy: wait archer-1\narcher-1 waits\nenemy: move archer-2 4,7\narcher-2 moves 8,7 -> 4,7 via 7,7 6,7 5,7\nenemy: wait archer-2\narcher-2 waits\nenemy: move brigand-1 3,6\nbrigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: wait mill_bandit-1\nmill_bandit-1 waits\nenemy: wait soldier-1\nsoldier-1 waits\nenemy: end\n-- enemy phase ends, turn 1 --\n-- player phase, turn 2 --\nOld Mill Road  turn 2 of 12  player phase  rout  recall 3\n", output);
+        Assert.Contains(" 6 ...c.....#..\n 7 ....e.....^^\n", output);
         Assert.Contains("group mill, guard, asleep", output);
     }
 
@@ -174,10 +174,10 @@ public class CliPlayTests
         var output = Play(out _, "end\nrecall\nrecall 3\nend\nrecall\n");
 
         Assert.DoesNotContain("Unhandled", output);
-        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0; history holds 7 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\n", output);
         Assert.Contains("> recall 3\nERROR: state 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
         Assert.Contains("-- player phase, turn 3 --\n", output);
-        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0, turn 2 state 7; history holds 14 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
         Assert.Contains("  recall                   list the state each player turn started at", Play(out _, "help\n"));
     }
 
@@ -232,28 +232,30 @@ public class CliPlayTests
 
     /// <summary>
     /// Issue 11's acceptance: a journaled script under docs/transcripts wins the sample map
-    /// under its seed. Keyed rolls keep it stable. The script is Code's play of seed 73 on
-    /// the mill that wakes whole (DECISIONS/0031), with the Recall that took back Wren's
-    /// death; the seed-53 script was played while the mill bandit held his tile and loses
-    /// now that he leaves it.
+    /// under its seed. Keyed rolls keep it stable. The script is Code's play of seed 101 with
+    /// the road pair (issue 160): both cadets rush the trailing archer on turn 2, and two
+    /// Recalls take back a turn-8 line that lost the fort and a turn-9 miss that lost Wren;
+    /// the seed-73 script was played before the road archer and no longer replays.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsOldMillRoadOnSeedSeventyThree()
+    public void TheJournaledScriptWinsOldMillRoadOnSeedOneHundredOne()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road-73.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road-101.script");
 
-        var output = Run(out var exit, "play", OldMillRoad, "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", OldMillRoad, "--seed", "101", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
+        Assert.Contains("archer-2 falls at 4,7", output);
         Assert.Contains("group mill wakes: proximity", output);
-        Assert.Contains("wren falls at 2,0", output);
-        Assert.Contains("recalled to state 33", output);
-        Assert.Contains("mill_bandit-1 moves 7,1 -> 7,2", output);
-        Assert.Contains("mill_bandit-1 falls at 7,2", output);
+        Assert.Contains("mill_bandit-1 moves 7,3 -> 6,2 via 7,2", output);
+        Assert.Contains("recalled to state 62", output);
+        Assert.Contains("wren falls at 8,4", output);
+        Assert.Contains("recalled to state 70", output);
+        Assert.Contains("mill_bandit-1 falls at 7,3", output);
     }
 
     /// <summary>
@@ -355,7 +357,7 @@ public class SimFullTests
     [Fact]
     public void ATraceWithAnItemLineReplaysInTheCliUnderStrict()
     {
-        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 3));
+        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 5));
         Assert.Contains("\nitem wren 2\n", trace);
         Assert.DoesNotContain("\nenemy:", trace);
         Assert.Contains("\n# enemy: wait archer-1\n", trace);
@@ -373,7 +375,7 @@ public class SimFullTests
         try
         {
             var exit = 0;
-            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "3", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
+            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "5", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
 
             Assert.Equal(0, exit);
             Assert.DoesNotContain("rejected ", output);

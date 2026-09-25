@@ -191,9 +191,10 @@ E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
 E mill_bandit 10,1 group:mill behavior:guard
+E archer 8,7 group:road behavior:aggressive
 ```
 
-The example is `content/maps/old_mill_road.map`, where the mill bandit is an ordinary member of the mill group and wakes with it (DECISIONS/0031); a `B` line reads `B bandit_leader 10,0 group:fort behavior:boss`, as on Saltmarsh Ford.
+The example is `content/maps/old_mill_road.map`, where the mill bandit is an ordinary member of the mill group and wakes with it (DECISIONS/0031) and a road archer trails the brigand so the pair reach the party on the same enemy phase (DECISIONS/0034); a `B` line reads `B bandit_leader 10,0 group:fort behavior:boss`, as on Saltmarsh Ford.
 
 Enemy generic units are templates from `/content/units/enemies.json` scaled to the map's `enemy_level`: a template below it is raised to it (deterministically, on the effective growth of section 3 clamped per stat to 0..100, DECISIONS/0005 as amended by issue 84), and a template already at or above it keeps its own level, so a level-3 boss on a level-1 map stays level 3. Guard groups carry no trigger attribute; they wake by the section 8 rule. An optional header `cheap_shots: allowed` (maps 4 and up only) declares that the map waives gate 3 on purpose; the Sim reports the waiver rather than skipping the gate quietly.
 
