@@ -1,5 +1,5 @@
 {
   "items": [
-    { "id": "field_dressing", "name": "Field Dressing", "heals": 10, "uses": 3 }
+    { "id": "field_dressing", "name": "Field Dressing", "heals": 10, "uses": 3, "price": 150 }
   ]
 }

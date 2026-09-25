@@ -35,6 +35,8 @@ public static class Program
                 return Reach(args.Skip(1).ToArray());
             case "play":
                 return PlaySession.Run(args.Skip(1).ToArray());
+            case "campaign":
+                return CampaignSession.Run(args.Skip(1).ToArray());
             default:
                 PrintUsage();
                 return 2;
@@ -48,6 +50,7 @@ public static class Program
         Console.WriteLine("       ironwake show <map-file> [content-dir]");
         Console.WriteLine("       ironwake reach <map-file> <x,y> [<movement>:<mov>] [content-dir]");
         Console.WriteLine("       ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol] [--candidate id]");
+        Console.WriteLine("       ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two]");
     }
 
     private static int Validate(string contentDir)
@@ -56,6 +59,14 @@ public static class Program
         {
             var content = ContentLoader.Load(contentDir);
             var maps = MapFiles.LoadAll(contentDir, content);
+            foreach (var entry in content.Campaign.Maps)
+            {
+                if (!File.Exists(Path.Combine(contentDir, "maps", entry.MapId + ".map")))
+                {
+                    throw new ContentException(ContentFiles.CampaignName, entry.MapId, "map", $"no file maps/{entry.MapId}.map under {contentDir}");
+                }
+            }
+
             Console.WriteLine(
                 $"OK: {content.Terrain.Count} terrain, {content.Classes.Count} classes, " +
                 $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps from {contentDir}");

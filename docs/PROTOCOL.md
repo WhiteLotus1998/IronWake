@@ -90,6 +90,10 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `unitSpawned` | `unit`, `at`, `group`, `behavior` |
 | `flagSet` | `flag` |
 
+## Campaign record
+
+A campaign between maps (issue 74) is one JSON object, written by `ProtocolJson.Campaign` and read back equal by `ProtocolJson.ReadCampaign`, and printed by the `record` command on the campaign screen: `protocolVersion`, `seed` (a string, as in a state), `difficulty`, `purse`, `mapIndex` (the next map, 0-based, in `campaign.json` order), `roster` (in roster order, the captain first; each unit is `id`, `name` and the unit fields of a state from `class` on, without the battle fields `side` to `canto`), `fallen` and `benched` (unit ids). A record from another protocol version is refused.
+
 ## A bug report
 
 A seed, a map, and a `.jsonl` command list: `ironwake play the_tollgate --seed 163 --protocol --script report.jsonl`. The answers replay byte for byte on the same build; the first line's state carries both version numbers, so a report from another build is recognisable as one.

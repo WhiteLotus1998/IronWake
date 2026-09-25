@@ -81,6 +81,32 @@ public sealed class PlaySession
         _scripted = scripted;
     }
 
+    /// <summary>
+    /// A battle inside a campaign (issue 74): the same commands, plus <c>leave</c>, which ends a
+    /// decided battle and hands the board back to <see cref="CampaignSession"/>. Script lines count
+    /// on from <paramref name="line"/>, so a rejection names its line in the whole campaign script.
+    /// </summary>
+    internal PlaySession(GameContent content, BattleState state, TextWriter output, bool scripted, int line)
+        : this(content, state, output, scripted)
+    {
+        _campaign = true;
+        _line = line;
+    }
+
+    private readonly bool _campaign;
+
+    /// <summary>The board as it stands.</summary>
+    internal BattleState State => _state;
+
+    /// <summary>The last script line read.</summary>
+    internal int Line => _line;
+
+    /// <summary>Every rejected line, with its line number and reason.</summary>
+    internal IReadOnlyList<(int Line, string Command, string Reason)> Rejections => _rejections;
+
+    /// <summary>Whether a campaign battle has been left with <c>leave</c>.</summary>
+    internal bool Left { get; private set; }
+
     /// <summary>Parses the arguments after <c>play</c>, runs the session, and returns the exit code: 0 on a win, 1 otherwise, 2 for a usage error.</summary>
     public static int Run(string[] args)
     {
@@ -240,31 +266,7 @@ public sealed class PlaySession
         }
         _out.Write(MapRenderer.Render(_state, _content));
         var commands = 0;
-        var stopped = false;
-        while (input.ReadLine() is { } line)
-        {
-            _line++;
-            var text = line.Trim();
-            if (text.Length == 0 || text.StartsWith('#'))
-            {
-                continue;
-            }
-
-            if (_scripted)
-            {
-                _out.WriteLine("> " + text);
-            }
-
-            _command = text;
-            commands++;
-            Execute(text.Split(' ', StringSplitOptions.RemoveEmptyEntries));
-            if (strict && _rejections.Count > 0)
-            {
-                _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
-                stopped = true;
-                break;
-            }
-        }
+        var stopped = RunCommands(input, strict, ref commands);
 
         if (_scripted && _rejections.Count > 0)
         {
@@ -293,6 +295,40 @@ public sealed class PlaySession
         }
 
         return stopped ? StrictStop : outcome.Result == BattleResult.Won ? 0 : 1;
+    }
+
+    /// <summary>
+    /// Reads and applies commands until the input ends, a campaign battle is left, or, under
+    /// <paramref name="strict"/>, a line is rejected; true for the strict stop. Blank lines and
+    /// <c>#</c> comments are skipped and not counted.
+    /// </summary>
+    internal bool RunCommands(TextReader input, bool strict, ref int commands)
+    {
+        while (!Left && input.ReadLine() is { } line)
+        {
+            _line++;
+            var text = line.Trim();
+            if (text.Length == 0 || text.StartsWith('#'))
+            {
+                continue;
+            }
+
+            if (_scripted)
+            {
+                _out.WriteLine("> " + text);
+            }
+
+            _command = text;
+            commands++;
+            Execute(text.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+            if (strict && _rejections.Count > 0)
+            {
+                _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void Execute(string[] words)
@@ -417,6 +453,17 @@ public sealed class PlaySession
                 break;
             case "map":
                 _out.Write(MapRenderer.Render(_state, _content));
+                break;
+            case "leave" when _campaign && words.Length == 1:
+                if (_state.Outcome.IsOver)
+                {
+                    Left = true;
+                }
+                else
+                {
+                    Error("the battle is not decided; leave comes after it is won or lost");
+                }
+
                 break;
             case "help":
                 _out.WriteLine(Help);
@@ -657,7 +704,7 @@ public sealed class PlaySession
         var outcome = _state.Outcome;
         if (outcome.IsOver)
         {
-            _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; only recall is left");
+            _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; only recall is left{(_campaign ? ", or leave" : "")}");
         }
     }
 

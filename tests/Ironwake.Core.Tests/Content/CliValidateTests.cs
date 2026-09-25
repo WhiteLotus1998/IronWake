@@ -39,6 +39,35 @@ public class CliValidateTests
     }
 
     [Fact]
+    public void ValidateRefusesACampaignMapWithNoFile()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "ironwake-cli-campaign-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(Path.Combine(dir, "maps"));
+        try
+        {
+            foreach (var name in new[] { "classes.json", "weapons.json", "terrain.json", "rules.json", "items.json", "abilities.json" })
+            {
+                File.Copy(Path.Combine(Fixture.RealContentDirectory(), name), Path.Combine(dir, name));
+            }
+
+            Directory.CreateDirectory(Path.Combine(dir, "units"));
+            File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "enemies.json"), Path.Combine(dir, "units", "enemies.json"));
+            File.WriteAllText(Path.Combine(dir, "campaign.json"), """{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "lost_road", "reward": 0, "stock": [] } ] }""");
+
+            var output = Run(out var exit, "validate", dir);
+
+            Assert.Equal(1, exit);
+            Assert.StartsWith("ERROR: campaign.json", output);
+            Assert.Contains("lost_road", output);
+            Assert.Contains("no file maps/lost_road.map", output);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    [Fact]
     public void ValidateCountsMapsAndReportsTheFirstMapError()
     {
         var ok = Run(out var okExit, "validate", Fixture.RealContentDirectory());

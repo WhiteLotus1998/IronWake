@@ -20,7 +20,40 @@ public static class ContentSerializer
         UnitFiles(content),
         new ContentFile(ContentFiles.RulesName, WriteRules(content)),
         new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)),
-        new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)));
+        new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)),
+        content.Campaign == CampaignRules.None ? null : new ContentFile(ContentFiles.CampaignName, WriteCampaign(content.Campaign)));
+
+    /// <summary>campaign.json (issue 74) in the shape <see cref="ContentLoader"/> reads.</summary>
+    private static string WriteCampaign(CampaignRules campaign)
+    {
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream, WriterOptions))
+        {
+            writer.WriteStartObject();
+            writer.WriteNumber("startingPurse", campaign.StartingPurse);
+            writer.WriteNumber("certificationPrice", campaign.CertificationPrice);
+            writer.WriteStartArray("maps");
+            foreach (var map in campaign.Maps)
+            {
+                writer.WriteStartObject();
+                writer.WriteString("map", map.MapId);
+                writer.WriteNumber("reward", map.Reward);
+                writer.WriteStartArray("stock");
+                foreach (var id in map.Stock)
+                {
+                    writer.WriteStringValue(id);
+                }
+
+                writer.WriteEndArray();
+                writer.WriteEndObject();
+            }
+
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+
+        return Encoding.UTF8.GetString(stream.ToArray()) + "\n";
+    }
 
     /// <summary>An ability and its effect in the shape <see cref="ContentLoader"/> reads (issue 66); a combat effect writes all four modifiers, an art all five deltas.</summary>
     private static void WriteAbility(Utf8JsonWriter writer, Ability ability)
@@ -108,6 +141,11 @@ public static class ContentSerializer
         writer.WriteString("name", item.Name);
         writer.WriteNumber("heals", item.Heals);
         writer.WriteNumber("uses", item.Uses);
+        if (item.Price is { } price)
+        {
+            writer.WriteNumber("price", price);
+        }
+
         writer.WriteEndObject();
     }
 
@@ -274,6 +312,11 @@ public static class ContentSerializer
         writer.WriteNumber("maxRange", weapon.MaxRange);
         writer.WriteNumber("durability", weapon.Durability);
         writer.WriteString("rank", weapon.Rank.ToString());
+        if (weapon.Price is { } price)
+        {
+            writer.WriteNumber("price", price);
+        }
+
         writer.WriteStartArray("effective");
         foreach (var movement in weapon.EffectiveAgainst)
         {
