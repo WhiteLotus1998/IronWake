@@ -43,6 +43,9 @@ public static class Resolver
             case Wait wait:
                 (next, rejection) = ApplyWait(state, wait, events);
                 break;
+            case Retreat retreat:
+                (next, rejection) = ApplyRetreat(state, content, retreat, events);
+                break;
             case EndPhase:
                 (next, rejection) = ApplyEndPhase(state, content, events);
                 break;
@@ -453,6 +456,39 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Issue 33's retreat through <see cref="RetreatRule"/>: the unit moves to a healing
+    /// tile in its reach and ends its action, marked so it never retreats again. The path
+    /// is the reach's, as for a Move.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyRetreat(BattleState state, GameContent content, Retreat retreat, List<GameEvent> events)
+    {
+        var unit = Acting(state, retreat.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (RetreatRule.Refusal(state, content, unit) is { } why)
+        {
+            return (state, new Rejection(RejectionReason.CannotRetreat, why));
+        }
+
+        if (!RetreatRule.Tiles(state, content, unit).Contains(retreat.To))
+        {
+            return (state, new Rejection(RejectionReason.CannotRetreat, $"{unit.Id} cannot retreat to {retreat.To}: not a healing tile it can reach this phase"));
+        }
+
+        var path = state.ReachOf(unit, content).EntryAt(retreat.To)!.Path;
+        events.Add(new UnitRetreated(unit.Id, unit.At, retreat.To));
+        if (retreat.To != unit.At)
+        {
+            events.Add(new UnitMoved(unit.Id, unit.At, retreat.To, path));
+        }
+
+        return (state.WithUnit(unit with { At = retreat.To, Moved = true, Acted = true, Retreated = true }), null);
+    }
+
+    /// <summary>
     /// Flips the phase, increments the turn after the enemy phase, clears every flag, and
     /// heals the units of the side whose phase begins that stand on healing terrain
     /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
@@ -495,7 +531,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal), its Retreats (best tile first, issue 33), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -532,6 +568,14 @@ public static class Resolver
             foreach (var use in LegalItemUses(state, content, unit))
             {
                 yield return use;
+            }
+
+            if (RetreatRule.Refusal(state, content, unit) is null)
+            {
+                foreach (var to in RetreatRule.Tiles(state, content, unit))
+                {
+                    yield return new Retreat(unit.Id, to);
+                }
             }
 
             yield return new Wait(unit.Id);

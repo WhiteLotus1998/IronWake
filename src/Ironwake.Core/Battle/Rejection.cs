@@ -20,6 +20,7 @@ public enum RejectionReason
     NoRecallCharges,
     NoSuchHistoryIndex,
     NotAPlayerPhase,
+    CannotRetreat,
     BattleOver,
     UnknownCommand,
 }

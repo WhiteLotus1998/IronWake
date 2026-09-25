@@ -12,7 +12,7 @@ namespace Ironwake.Content;
 /// </summary>
 public static class MapFormat
 {
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -45,6 +45,11 @@ public static class MapFormat
         if (map.CheapShotsAllowed)
         {
             sb.Append("cheap_shots: allowed\n");
+        }
+
+        if (map.RetreatEnabled)
+        {
+            sb.Append("retreat: on\n");
         }
 
         sb.Append('\n');
@@ -140,6 +145,7 @@ public static class MapFormat
             var recall = ParseInt(header, "recall", 0, 99, required: false, fallback: MapDefinition.DefaultRecallCharges);
             var enemyLevel = ParseInt(header, "enemy_level", Unit.MinLevel, Unit.MaxLevel, required: false, fallback: MapDefinition.DefaultEnemyLevel);
             var cheapShots = ParseCheapShots(header);
+            var retreat = ParseRetreat(header);
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
 
@@ -149,7 +155,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat);
             Validate(map);
             return map;
         }
@@ -292,6 +298,21 @@ public static class MapFormat
             if (entry.Value != "allowed")
             {
                 throw ErrorAt(entry.Line, $"cheap_shots may only be 'allowed' (or absent), got '{entry.Value}'");
+            }
+
+            return true;
+        }
+
+        private bool ParseRetreat(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("retreat", out var entry))
+            {
+                return false;
+            }
+
+            if (entry.Value != "on")
+            {
+                throw ErrorAt(entry.Line, $"retreat may only be 'on' (or absent), got '{entry.Value}'");
             }
 
             return true;

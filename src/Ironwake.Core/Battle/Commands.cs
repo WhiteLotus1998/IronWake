@@ -26,6 +26,14 @@ public sealed record Attack(string UnitId, string TargetId, int? Slot = null) : 
 /// </summary>
 public sealed record UseItem(string UnitId, int Slot, string? TargetId = null) : Command;
 
+/// <summary>
+/// An enemy below 30 percent HP falls back to a healing tile it can reach this phase
+/// and ends its action without attacking (DESIGN.md 13.10, issue 33). Only on a map with
+/// the <c>retreat: on</c> header, only for a unit whose effective behavior is Aggressive,
+/// and never twice in a battle. The AI issues it; the player never does.
+/// </summary>
+public sealed record Retreat(string UnitId, Coord To) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 
