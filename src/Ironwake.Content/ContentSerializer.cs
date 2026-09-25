@@ -201,6 +201,7 @@ public static class ContentSerializer
         if (unitClass.Mastery is not null)
         {
             writer.WriteString("mastery", unitClass.Mastery);
+            writer.WriteNumber("masteryPoints", unitClass.MasteryPoints);
         }
 
         writer.WriteEndObject();

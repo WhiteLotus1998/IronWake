@@ -226,6 +226,8 @@ public static class Resolver
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
         attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, result.DefenderDied, events);
         targetAfter = AwardRank(targetAfter, defenderWeapon, result.Strikes, result.AttackerDied, events);
+        attackerAfter = AwardMastery(attackerAfter, content, events);
+        targetAfter = AwardMastery(targetAfter, content, events);
         var next = state.WithUnit(attackerAfter);
         next = next.WithUnit(targetAfter);
         if (result.DefenderDied)
@@ -516,6 +518,31 @@ public static class Resolver
         }
 
         return GainRank(earner, weapon.Type, WeaponRanks.ForCombat(killed), events);
+    }
+
+    /// <summary>
+    /// Issue 69 for one side of a combat: a living player unit earns a mastery point in its
+    /// class whether or not it struck, since it fought the combat, and emits
+    /// <see cref="MasteryEarned"/> on reaching the class's requirement. A mastery that
+    /// raises max HP raises current HP by as much, as a level-up does, and one that lowers it caps current HP at the new max. Enemies earn
+    /// nothing, as with EXP and ranks (DECISIONS/0017).
+    /// </summary>
+    private static BattleUnit AwardMastery(BattleUnit earner, GameContent content, List<GameEvent> events)
+    {
+        if (earner.Side != Side.Player || earner.Hp == 0)
+        {
+            return earner;
+        }
+
+        var (unit, mastered) = Masteries.ForCombat(earner.Unit, content.Class(earner.Unit.ClassId));
+        if (mastered is not null)
+        {
+            events.Add(new MasteryEarned(earner.Id, unit.ClassId, mastered));
+        }
+
+        var max = content.StatsOf(unit).Hp;
+        var raised = max - earner.MaxHp(content);
+        return earner with { Unit = unit, Hp = raised > 0 ? earner.Hp + raised : Math.Min(earner.Hp, max) };
     }
 
     /// <summary>Adds rank points to a player unit and emits <see cref="RankRaised"/> when they cross a threshold; an enemy is returned unchanged.</summary>

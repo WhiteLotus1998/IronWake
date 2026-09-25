@@ -738,6 +738,17 @@ public sealed class PlaySession
             _out.WriteLine($"  arts: {string.Join(", ", arts)}");
         }
 
+        var held = _content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
+        if (held.Count > 0)
+        {
+            _out.WriteLine($"  abilities: {string.Join(", ", held)}");
+        }
+
+        if (MasteryLine(unit, _content) is { } mastery)
+        {
+            _out.WriteLine(mastery);
+        }
+
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
         if (_state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
@@ -748,6 +759,24 @@ public sealed class PlaySession
             var list = string.Join(", ", rivals);
             _out.WriteLine($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, _content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}");
         }
+    }
+
+    /// <summary>
+    /// The mastery line of <c>show</c> (issue 69): the class's mastery ability and the unit's
+    /// points against the requirement, or that it is mastered. Silent for a class with none.
+    /// </summary>
+    public static string? MasteryLine(BattleUnit unit, GameContent content)
+    {
+        var unitClass = content.Class(unit.Unit.ClassId);
+        if (unitClass.Mastery is not { } id)
+        {
+            return null;
+        }
+
+        var name = content.Ability(id).Name;
+        return unit.Unit.Abilities.Contains(id)
+            ? $"  mastery: {name}, mastered"
+            : $"  mastery: {name} ({unit.Unit.Mastery.Points(unitClass.Id)} of {unitClass.MasteryPoints} combats)";
     }
 
     /// <summary>
@@ -849,6 +878,8 @@ public sealed class PlaySession
                 return $"{l.UnitId} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
             case RankRaised k:
                 return $"{k.UnitId} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
+            case MasteryEarned m:
+                return $"{m.UnitId} masters the {m.ClassId} class and keeps {m.AbilityId}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
             case UnitRetreated r:

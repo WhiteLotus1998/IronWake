@@ -23,6 +23,9 @@ public sealed record LeveledUp(string UnitId, int NewLevel, Stats Gains) : GameE
 /// <summary>A unit's rank points in a weapon type crossed a threshold (issue 67); points that cross none raise no event.</summary>
 public sealed record RankRaised(string UnitId, WeaponType Type, WeaponRank Rank) : GameEvent;
 
+/// <summary>A player unit mastered its class (issue 69): the class's mastery ability is now its own.</summary>
+public sealed record MasteryEarned(string UnitId, string ClassId, string AbilityId) : GameEvent;
+
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>

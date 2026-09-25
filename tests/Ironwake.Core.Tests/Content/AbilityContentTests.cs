@@ -81,7 +81,7 @@ public class AbilityContentTests
     [Fact]
     public void AClassMasteryLoadsAndMustNameAnAbility()
     {
-        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\"");
+        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\", \"masteryPoints\": 12");
         Assert.Equal("vigilance", ContentLoader.Parse(Fixture.Files(classes: classes)).Class("cadet").Mastery);
         Assert.Null(ContentLoader.Parse(Fixture.Files()).Class("cadet").Mastery);
 
@@ -91,12 +91,28 @@ public class AbilityContentTests
     }
 
     [Fact]
-    public void ANamedMasteryGrantsNothing()
+    public void ANamedMasteryGrantsNothingUntilItIsEarned()
     {
-        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\"");
+        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\", \"masteryPoints\": 12");
         var content = ContentLoader.Parse(Fixture.Files(classes: classes));
 
         Assert.Equal(4, content.StatsOf(content.Unit("recruit")).Def);
+    }
+
+    [Fact]
+    public void AClassMasteryMustNameThePointsThatEarnIt()
+    {
+        var bare = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\"");
+        AssertNames(Fails(Fixture.Files(classes: bare)), ContentFiles.ClassesName, "cadet", "masteryPoints");
+
+        var zero = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\", \"masteryPoints\": 0");
+        AssertNames(Fails(Fixture.Files(classes: zero)), ContentFiles.ClassesName, "cadet", "masteryPoints");
+
+        var orphan = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"masteryPoints\": 12");
+        AssertNames(Fails(Fixture.Files(classes: orphan)), ContentFiles.ClassesName, "cadet", "masteryPoints");
+
+        var named = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\", \"masteryPoints\": 12");
+        Assert.Equal(12, ContentLoader.Parse(Fixture.Files(classes: named)).Class("cadet").MasteryPoints);
     }
 
     [Fact]
@@ -200,7 +216,7 @@ public class AbilityContentTests
     [Fact]
     public void AbilitiesAndMasteryRoundTrip()
     {
-        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"axebreaker\"");
+        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"axebreaker\", \"masteryPoints\": 12");
         var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers, classes: classes, units: RecruitWithAbilities("[\"steady\"]")));
 
         var written = ContentSerializer.Write(content);
