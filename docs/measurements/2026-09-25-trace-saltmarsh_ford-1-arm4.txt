@@ -1,0 +1,198 @@
+# issue 158: dotnet run --project src/Ironwake.Sim -- --trace saltmarsh_ford 1 --formula arm4 (two rolls). One of the arm-4 Saltmarsh losses, replayable with ironwake play saltmarsh_ford --seed 1 --formula arm4 --script <this file>.
+# saltmarsh_ford seed 1, heuristic player, two-roll average, arm 4 (arm 2 + iron hit -15) (replay with --scheme two --formula arm4)
+move captain 6,4
+wait captain
+move ottilie 6,5
+wait ottilie
+move teodor 7,4
+wait teodor
+move wren 5,5
+wait wren
+end
+# enemy: wait archer-1
+# enemy: wait bandit_leader-1
+# enemy: move brigand-1 5,4
+# enemy: attack brigand-1 captain
+#   brigand-1 vs captain: miss hit 11 hit 11; brigand-1 0 hp, captain 22 hp
+#   brigand-1 died at 5,4
+# enemy: move soldier-1 3,4
+# enemy: wait soldier-1
+# enemy: wait soldier-2
+# enemy: wait wingrider-1
+# enemy: end
+# turn 2
+move captain 4,4
+attack captain soldier-1
+#   captain vs soldier-1: hit 9 miss; captain 22 hp, soldier-1 11 hp
+move ottilie 4,5
+attack ottilie soldier-1
+#   ottilie vs soldier-1: hit 6; ottilie 17 hp, soldier-1 5 hp
+move teodor 10,3
+#   group fort woke (Proximity)
+wait teodor
+move wren 3,5
+attack wren soldier-1
+#   wren vs soldier-1: hit 8; wren 20 hp, soldier-1 0 hp
+#   soldier-1 died at 3,4
+end
+# enemy: attack archer-1 teodor
+#   archer-1 vs teodor: hit 5; archer-1 17 hp, teodor 16 hp
+# enemy: wait bandit_leader-1
+# enemy: move soldier-2 10,2
+# enemy: attack soldier-2 teodor
+#   soldier-2 vs teodor: hit 8 hit 10; soldier-2 10 hp, teodor 8 hp
+# enemy: move wingrider-1 11,3
+# enemy: attack wingrider-1 teodor
+#   wingrider-1 vs teodor: hit 6 miss; wingrider-1 17 hp, teodor 2 hp
+# enemy: end
+# turn 3
+move captain 8,4
+wait captain
+move ottilie 7,4
+wait ottilie
+attack teodor soldier-2
+#   teodor vs soldier-2: miss miss; teodor 2 hp, soldier-2 10 hp
+move wren 6,4
+wait wren
+end
+# enemy: attack archer-1 teodor
+#   archer-1 vs teodor: hit 5; archer-1 17 hp, teodor 0 hp
+#   teodor died at 10,3
+# enemy: wait bandit_leader-1
+# enemy: move soldier-2 9,4
+# enemy: attack soldier-2 captain
+#   soldier-2 vs captain: hit 8 hit 9; soldier-2 1 hp, captain 14 hp
+# enemy: move wingrider-1 7,3
+# enemy: attack wingrider-1 ottilie
+#   wingrider-1 vs ottilie: hit 8; wingrider-1 17 hp, ottilie 9 hp
+# enemy: end
+# turn 4
+move captain 5,4
+wait captain
+move ottilie 8,4
+attack ottilie wingrider-1
+#   ottilie vs wingrider-1: hit 19; ottilie 9 hp, wingrider-1 0 hp
+#   wingrider-1 died at 7,3
+move wren 9,5
+attack wren soldier-2
+#   wren vs soldier-2: hit 8; wren 20 hp, soldier-2 0 hp
+#   soldier-2 died at 9,4
+end
+# enemy: move archer-1 10,4
+# enemy: attack archer-1 wren
+#   archer-1 vs wren: miss; archer-1 17 hp, wren 20 hp
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 5
+move captain 9,4
+attack captain archer-1
+#   captain vs archer-1: hit 11; captain 14 hp, archer-1 6 hp
+attack ottilie archer-1
+#   ottilie vs archer-1: hit 8; ottilie 9 hp, archer-1 0 hp
+#   archer-1 died at 10,4
+move wren 10,2
+wait wren
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 6
+move captain 10,3
+wait captain
+move ottilie 10,4
+wait ottilie
+move wren 10,1
+attack wren bandit_leader-1
+#   wren vs bandit_leader-1: hit 6 hit 17 hit 6; wren 3 hp, bandit_leader-1 14 hp
+end
+# enemy: attack bandit_leader-1 wren
+#   bandit_leader-1 vs wren: hit 17; bandit_leader-1 19 hp, wren 0 hp
+#   wren died at 10,1
+# enemy: end
+# turn 7
+move captain 10,2
+wait captain
+move ottilie 9,1
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 19 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 8
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: hit 4; ottilie 9 hp, bandit_leader-1 20 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 9
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: hit 4; ottilie 9 hp, bandit_leader-1 21 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 10
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 11
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: hit 4; ottilie 9 hp, bandit_leader-1 22 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 12
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 13
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 14
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 15
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 16
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: miss; ottilie 9 hp, bandit_leader-1 26 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 17
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: hit 4; ottilie 9 hp, bandit_leader-1 22 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 18
+wait captain
+attack ottilie bandit_leader-1
+#   ottilie vs bandit_leader-1: hit 4; ottilie 9 hp, bandit_leader-1 22 hp
+end
+# enemy: wait bandit_leader-1
+# enemy: end
+# turn 19
+# Lost on turn 19: turn 18 passed
