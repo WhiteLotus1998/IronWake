@@ -164,6 +164,24 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 190: a Recall into the enemy phase's own states is refused without spending a
+    /// charge, so the player is never stranded mid enemy phase and the next <c>end</c> plays
+    /// on; bare <c>recall</c> lists the state each player turn started at.
+    /// </summary>
+    [Fact]
+    public void ARecallIntoTheEnemyPhaseIsRefusedAndEndStillPlaysOn()
+    {
+        var output = Play(out _, "end\nrecall\nrecall 3\nend\nrecall\n");
+
+        Assert.DoesNotContain("Unhandled", output);
+        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0; history holds 7 states; 3 charges left\n", output);
+        Assert.Contains("> recall 3\nERROR: state 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
+        Assert.Contains("-- player phase, turn 3 --\n", output);
+        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0, turn 2 state 7; history holds 14 states; 3 charges left\n", output);
+        Assert.Contains("  recall                   list the state each player turn started at", Play(out _, "help\n"));
+    }
+
+    /// <summary>
     /// Issue 151: <c>forecast ... from x,y</c> answers from any tile the unit can still move
     /// to, naming the tile and its terrain, and refuses a tile it cannot stand on or any
     /// other tile once the unit has moved. Nothing moves.

@@ -59,6 +59,32 @@ public class RecallTests
     }
 
     [Fact]
+    public void RecallIsRefusedIntoAnEnemyPhaseAndNamesTheNearestPlayerPhaseStates()
+    {
+        var state = Start().Do(new Wait("hale")).Do(new EndPhase()).Do(new EndPhase()).Do(new Wait("hale"));
+        Assert.Equal(new[] { Side.Player, Side.Player, Side.Enemy, Side.Player }, state.History.Select(s => s.Phase));
+
+        var rejection = state.Refused(new Recall(2));
+
+        Assert.Equal(RejectionReason.NotAPlayerPhase, rejection.Reason);
+        Assert.Equal("state 2 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase states are 1 and 3", rejection.Message);
+        Assert.Equal(new[] { 0, 1, 3 }, state.RecallTargets());
+        var recalled = state.Do(new Recall(3));
+        Assert.Equal((2, Side.Player), (recalled.Turn, recalled.Phase));
+    }
+
+    [Fact]
+    public void ARefusedRecallIntoAnEnemyPhaseNamesOnlyTheEarlierStateWhenNoneFollows()
+    {
+        var state = Start().Do(new EndPhase()).Do(new EndPhase());
+
+        var rejection = state.Refused(new Recall(1));
+
+        Assert.Equal("state 1 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0", rejection.Message);
+        Assert.Equal(3, state.RecallCharges);
+    }
+
+    [Fact]
     public void TheSpentChargesSurviveARecallToBeforeTheyWereSpent()
     {
         var state = Start().Do(new Wait("hale")).Do(new Wait("wren"));
