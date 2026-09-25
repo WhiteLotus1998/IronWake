@@ -1,0 +1,30 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: the_tollgate, heuristic wins 144/200 (72 %), winning turn median 8 p90 9 limit 10, losses 56 timeout 0 captain 0 protected, quiet tail 0.3, refused kill p50 0.8674 over 56, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.225: ok
+  pell: drop 0.495 se 0.054 own [atk 815 dmg 13536 heal 0 abs 430] rest baseline [atk 1355 dmg 12526 heal 0 abs 1806] rest benched [atk 1953 dmg 19933 heal 0 abs 2606] benched losses 155 timeout 0 captain 0 protected, refused kill p50 0.8674 over 155
+  teodor: drop 0.225 se 0.047 own [atk 408 dmg 4705 heal 0 abs 700] rest baseline [atk 1762 dmg 21357 heal 0 abs 1536] rest benched [atk 1774 dmg 24347 heal 0 abs 2117] benched losses 101 timeout 0 captain 0 protected, refused kill p50 0.8664 over 101
+  wren: drop 0.085 se 0.041 own [atk 484 dmg 3819 heal 0 abs 699] rest baseline [atk 1686 dmg 22243 heal 0 abs 1537] rest benched [atk 1926 dmg 25502 heal 0 abs 1999] benched losses 73 timeout 0 captain 0 protected, refused kill p50 0.8674 over 73
+  captain captain: baseline [atk 463 dmg 4002 heal 0 abs 407] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 409 ms: ok
+gate 5 forecast honesty: 10141 combats, 17917 strikes, hits 10362 expected 10256.5, crits 259 expected 249.1, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 4 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 5421 ms: ok
+free prefix: the_tollgate, 0 of 2, 4, 6 tried, slack median 2 p90 1 (printed, not gated)
+  prefix 2: wins 97/200, drop 0.235 se 0.049, not free
+  prefix 4: wins 29/200, drop 0.575 se 0.058, not free
+  prefix 6: wins 0/200, drop 0.720 se 0.060, not free
+  prefix 2 refunded: wins 124/200, drop 0.100 se 0.044, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 4 quiet 0 live 196, wake tax 0.00
+  turn 6: dead 1 quiet 0 live 199, wake tax 0.00
+  turn 7: dead 9 quiet 0 live 184, wake tax 0.00
+  turn 8: dead 20 quiet 0 live 143, wake tax 0.00
+  turn 9: dead 9 quiet 0 live 87, wake tax 0.00
+  turn 10: dead 3 quiet 0 live 66, wake tax 0.00
+full: ok

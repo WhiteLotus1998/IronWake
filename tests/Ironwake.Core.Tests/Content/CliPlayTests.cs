@@ -258,25 +258,27 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 197: Code's play of seed 127 on the Tollgate with the woods screen. The toll
-    /// brigand holds its forest and throws at range 2, so Pell's strike on it from 8,5 is
-    /// answered; the woods cost Pell 13 on turn 4, Teodor opens the door so Pell's finish on
-    /// the warden takes no counter, and the captain seizes on turn 9 with no Recall.
+    /// Issue 208: Code's play of seed 131 on the Tollgate with the woods archer at 5,5, inside
+    /// the toll brigand's band. Pell's strike on the brigand is answered, the archer takes
+    /// two turns of melee and falls to Pell from range 2, Teodor opens the door and dies to
+    /// the keep archer, the boss throws at Wren rather than swing at the captain beside him,
+    /// and the captain seizes on turn 9 with no Recall.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsTheTollgateOnSeedOneTwentySeven()
+    public void TheJournaledScriptWinsTheTollgateOnSeedOneThirtyOne()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-127.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-131.script");
 
-        var output = Run(out var exit, "play", "the_tollgate", "--seed", "127", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "the_tollgate", "--seed", "131", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
         Assert.Contains("forecast pell -> toll_brigand-1: dmg 13 hit 87% crit 3%; counter: dmg 13 hit 62% crit 0%", output);
-        Assert.Contains("toll_brigand-1 hits pell for 13 (hp 3)", output);
-        Assert.Contains("toll_warden-1 falls at 6,2", output);
+        Assert.Contains("archer-2 falls at 5,5", output);
+        Assert.Contains("teodor falls at 6,3", output);
+        Assert.Contains("enemy: attack bandit_leader-1 wren", output);
         Assert.Contains("The Tollgate  turn 9 of 10", output);
         Assert.DoesNotContain("The Tollgate  turn 10 of 10", output);
     }

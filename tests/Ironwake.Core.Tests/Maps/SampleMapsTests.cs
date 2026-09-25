@@ -48,6 +48,48 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 208: the Tollgate's woods archer is no free kill. Every passable tile beside it
+    /// lies within 1 or 2 of the toll brigand, so a melee strike on the archer eats the thrown
+    /// axe; and some passable tile at range 2 of the archer lies outside the brigand's band,
+    /// so a bow can still reach it and the group is not a wall. The archer at 5,6 fails the
+    /// first half: 4,6 and 5,7 stand at distance 3 from the brigand.
+    /// </summary>
+    [Fact]
+    public void TheTollgateWoodsArcherIsReachedInMeleeOnlyInsideTheBrigandsBand()
+    {
+        var map = All().Single(m => m.Id == "the_tollgate").Map;
+        var content = MapFixture.Content;
+        var woods = map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "woods").ToList();
+        var brigand = Assert.Single(woods, e => e.TemplateId == "toll_brigand").At;
+        var archer = Assert.Single(woods, e => e.TemplateId == "archer").At;
+
+        bool Open(Coord tile) =>
+            tile.X >= 0 && tile.Y >= 0 && tile.X < map.Width && tile.Y < map.Height
+            && tile != brigand && map.TerrainAt(tile, content).IsPassable(MovementType.Infantry);
+
+        var neighbours = new[] { new Coord(archer.X + 1, archer.Y), new Coord(archer.X - 1, archer.Y), new Coord(archer.X, archer.Y + 1), new Coord(archer.X, archer.Y - 1) }
+            .Where(Open)
+            .ToList();
+        Assert.NotEmpty(neighbours);
+        Assert.All(neighbours, tile => Assert.InRange(tile.DistanceTo(brigand), 1, 2));
+
+        var bowTiles = new List<Coord>();
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < map.Width; x++)
+            {
+                var tile = new Coord(x, y);
+                if (Open(tile) && tile.DistanceTo(archer) == 2 && tile.DistanceTo(brigand) > 2)
+                {
+                    bowTiles.Add(tile);
+                }
+            }
+        }
+
+        Assert.NotEmpty(bowTiles);
+    }
+
+    /// <summary>
     /// Issue 181: the Tollgate's keep has no free tile. Every open tile outside the keep
     /// walls that stands within 2 of a keep enemy is a tile that enemy's weapons reach, so a
     /// range-2 unit striking the keep from outside is always answered. The door warden's

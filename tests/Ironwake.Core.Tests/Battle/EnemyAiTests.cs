@@ -171,6 +171,26 @@ public class EnemyAiTests
     }
 
     /// <summary>
+    /// Issue 208's kept behavior, from Chat's seed 139 on the Tollgate: with the warden dead,
+    /// the captain at the door at 6,2 beside the boss and Teodor at 6,3 at range 2, the boss
+    /// throws the Toll Axe at Teodor, whose lance cannot answer, rather than swinging at the
+    /// captain.
+    /// </summary>
+    [Fact]
+    public void OnTheTollgateTheBossThrowsAtTheLanceBehindTheDoorRatherThanSwingAtTheCaptain()
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_tollgate.map"), Starter);
+        var start = BattleState.From(map, Starter, Starter.Cast, 139).WithoutUnit("toll_warden-1");
+        start = start.WithUnit(start.Find("captain")! with { At = new Coord(6, 2) });
+        start = start.WithUnit(start.Find("teodor")! with { At = new Coord(6, 3) });
+        var state = start.Do(new EndPhase());
+
+        var plan = EnemyAi.PlanUnit(state, Starter, state.Find("bandit_leader-1")!);
+
+        Assert.Equal(new Command[] { new Attack("bandit_leader-1", "teodor", 1) }, plan);
+    }
+
+    /// <summary>
     /// Issue 131, target 1: Saltmarsh Ford's west crossing opens into forest at 3,4 and 4,4,
     /// so the approach rule's avoid key stops the brigand in the forest south of the bridge
     /// on enemy phase 1 instead of on open ground beside the party. The party stands where
