@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "difficulty" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "difficulty", "certification" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -68,6 +68,17 @@ public static class MapFormat
         if (map.DifficultyId is { } difficulty)
         {
             sb.Append("difficulty: ").Append(difficulty).Append('\n');
+        }
+
+        if (map.Certification is { } trial)
+        {
+            sb.Append("certification: ").Append(trial.ClassId);
+            foreach (var item in trial.Loadout)
+            {
+                sb.Append(' ').Append(item);
+            }
+
+            sb.Append('\n');
         }
 
         sb.Append('\n');
@@ -169,6 +180,7 @@ public static class MapFormat
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
             var difficulty = ParseDifficulty(header);
+            var certification = ParseCertification(header);
 
             SkipBlankLines();
             var terrain = ParseGrid(width, height);
@@ -176,7 +188,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification);
             Validate(map);
             return map;
         }
@@ -378,6 +390,50 @@ public static class MapFormat
             }
 
             return entry.Value;
+        }
+
+        /// <summary>
+        /// The <c>certification:</c> header (issue 73): a class in classes.json, then one to
+        /// <see cref="Inventory.Capacity"/> weapon or item ids, the trial's fixed loadout.
+        /// </summary>
+        private CertificationTrial? ParseCertification(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("certification", out var entry))
+            {
+                return null;
+            }
+
+            var words = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length < 2)
+            {
+                throw ErrorAt(entry.Line, "certification must be '<class> <item> [<item> ...]': the class it grants and the loadout the trial is played with");
+            }
+
+            if (!_content.Classes.TryGetValue(words[0], out var trialClass))
+            {
+                throw ErrorAt(entry.Line, $"certification names class '{words[0]}', which is not in classes.json");
+            }
+
+            var loadout = words[1..];
+            if (loadout.Length > Inventory.Capacity)
+            {
+                throw ErrorAt(entry.Line, $"certification loadout holds at most {Inventory.Capacity} items, got {loadout.Length}");
+            }
+
+            foreach (var item in loadout)
+            {
+                if (!_content.Weapons.ContainsKey(item) && !_content.Items.ContainsKey(item))
+                {
+                    throw ErrorAt(entry.Line, $"certification loadout names '{item}', which is not a weapon in weapons.json or an item in items.json");
+                }
+
+                if (_content.Weapons.TryGetValue(item, out var weapon) && !trialClass.CanUse(weapon.Type))
+                {
+                    throw ErrorAt(entry.Line, $"certification loadout names '{item}', a {weapon.Type.ToString().ToLowerInvariant()}, which a {trialClass.Name} cannot wield");
+                }
+            }
+
+            return new CertificationTrial(words[0], ValueList<string>.From(loadout));
         }
 
         private void SkipBlankLines()
@@ -762,6 +818,11 @@ public static class MapFormat
             if (map.Win != WinCondition.Escape && map.Exits.Count > 0)
             {
                 throw new MapException(_file, 0, $"exit tiles are only for win: escape, and this map's win is {MapRenderer.WinName(map.Win)}");
+            }
+
+            if (map.Certification is not null && slots != 1)
+            {
+                throw new MapException(_file, 0, $"a certification map has exactly one player slot, the candidate's 'P captain', got {slots}");
             }
 
             if (map.ProtectId is { } protect && !map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == protect))

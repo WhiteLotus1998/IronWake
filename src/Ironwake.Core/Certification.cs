@@ -82,3 +82,23 @@ public static class Certifications
         return unit with { ClassId = target.Id };
     }
 }
+
+/// <summary>
+/// A certification trial (issue 73, DESIGN section 13.6): the <c>certification:</c> header of a
+/// one-unit puzzle map. Whoever fills the map's one player slot plays it in <see cref="ClassId"/>
+/// with exactly <see cref="Loadout"/>, each at full uses, and clearing the map earns the class.
+/// </summary>
+/// <param name="ClassId">The class the trial is played in and grants.</param>
+/// <param name="Loadout">Weapon and item ids the candidate carries, in slot order.</param>
+public sealed record CertificationTrial(string ClassId, ValueList<string> Loadout)
+{
+    /// <summary>
+    /// <paramref name="unit"/> as the trial fields it: in the trial's class, carrying the loadout
+    /// and nothing else, every stack at its full uses. Level, stats, ranks and mastery are its own.
+    /// </summary>
+    public Unit Candidate(Unit unit, GameContent content)
+    {
+        var items = Loadout.Select(id => new ItemStack(id, content.Weapons.TryGetValue(id, out var weapon) ? weapon.Durability : content.Item(id).Uses));
+        return unit with { ClassId = ClassId, Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+    }
+}
