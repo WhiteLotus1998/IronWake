@@ -585,6 +585,7 @@ public sealed class PlaySession
         Move m => $"move {m.UnitId} {m.To}",
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)),
         Wait w => $"wait {w.UnitId}",
+        Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
         UseItem i => $"item {i.UnitId} {i.Slot + 1}" + (i.TargetId is null ? "" : " " + i.TargetId),
@@ -618,6 +619,8 @@ public sealed class PlaySession
                 return $"{l.UnitId} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
+            case UnitRetreated r:
+                return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
             case UnitHealed h:
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
             case PhaseEnded p:

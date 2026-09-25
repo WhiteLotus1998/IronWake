@@ -65,7 +65,8 @@ public static class EnemyAi
     }
 
     /// <summary>
-    /// One enemy's commands on the board as it stands: the best-scoring attack from the
+    /// One enemy's commands on the board as it stands: a <see cref="Retreat"/> first when
+    /// <see cref="RetreatRule"/> says the unit falls back (issue 33); else the best-scoring attack from the
     /// best tile if any tile allows one, else the approach rule for an Aggressive unit,
     /// else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
     /// The attack options range over every weapon the unit can strike with, in inventory
@@ -83,6 +84,11 @@ public static class EnemyAi
         var tiles = mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+
+        if (RetreatRule.Choose(state, content, unit) is { } refuge)
+        {
+            return new Command[] { new Retreat(unit.Id, refuge) };
+        }
 
         if (weapon is null)
         {

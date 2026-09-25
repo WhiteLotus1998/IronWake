@@ -21,6 +21,7 @@ namespace Ironwake.Core;
 /// <param name="Exits">Exit tiles for an Escape map (the <c>exit:</c> header); empty otherwise.</param>
 /// <param name="ProtectId">The recruit whose death loses the map (the <c>protect:</c> header), or null.</param>
 /// <param name="Events">The <c>events:</c> block in file order (issue 32); empty on a map without one.</param>
+/// <param name="RetreatEnabled">The map turns on enemy retreat (the <c>retreat: on</c> header, issue 33). Off by default.</param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -34,7 +35,8 @@ public sealed record MapDefinition(
     ValueList<Placement> Placements,
     ValueList<Coord> Exits = default,
     string? ProtectId = null,
-    ValueList<MapEvent> Events = default)
+    ValueList<MapEvent> Events = default,
+    bool RetreatEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

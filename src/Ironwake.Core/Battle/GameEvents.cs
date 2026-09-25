@@ -22,6 +22,9 @@ public sealed record LeveledUp(string UnitId, int NewLevel, Stats Gains) : GameE
 
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
+/// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
+public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
+
 public sealed record PhaseEnded(Side Side, int Turn) : GameEvent;
 
 public sealed record PhaseBegan(Side Side, int Turn) : GameEvent;
