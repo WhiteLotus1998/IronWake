@@ -306,6 +306,27 @@ public class CliPlayTests
         Assert.Equal(1, CountOf(output, "event reinforce"));
     }
 
+    /// <summary>
+    /// Issue 33's hand play: Old Mill Road with <c>retreat: on</c>, seed 41. The captain
+    /// steps off the fort at 6,2 to leave the mill bandit on 4, and on enemy phase 6 the
+    /// bandit falls back onto that fort instead of swinging.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptShowsTheMillBanditRetreatOntoTheFort()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "old_mill_road_retreat.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road_retreat-41.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "41", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("enemy: retreat mill_bandit-1 6,2\nmill_bandit-1 falls back to 6,2 and will not fight this phase\nmill_bandit-1 moves 7,2 -> 6,2\n", output);
+        Assert.Equal(1, CountOf(output, "falls back"));
+    }
+
     private static int CountOf(string text, string fragment)
     {
         var count = 0;

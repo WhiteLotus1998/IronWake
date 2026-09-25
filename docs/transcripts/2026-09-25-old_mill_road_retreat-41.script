@@ -1,0 +1,37 @@
+move captain 2,7
+move wren 1,8
+end
+move captain 3,7
+attack captain archer-2
+move wren 2,6
+attack wren brigand-1
+end
+recall
+recall 11
+move captain 2,6
+attack captain brigand-1
+move wren 4,8
+attack wren archer-2
+end
+move wren 6,7
+attack wren archer-2
+move captain 4,4
+end
+move captain 6,2
+move wren 6,4
+end
+attack captain soldier-1
+move wren 6,7
+item wren 2
+end
+forecast captain mill_bandit-1 from 7,1
+move captain 7,1
+attack captain mill_bandit-1
+move wren 7,7
+attack wren archer-1
+end
+forecast captain mill_bandit-1 from 6,1
+move captain 6,1
+attack captain mill_bandit-1
+move wren 7,6
+attack wren archer-1

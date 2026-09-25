@@ -230,4 +230,17 @@ public class RetreatTests
 
         Assert.Contains("retreat may only be 'on'", error.Message);
     }
+
+    [Fact]
+    public void TheRetreatSampleIsOldMillRoadWithTheHeader()
+    {
+        var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
+        var text = File.ReadAllText(Path.Combine(repo, "docs", "samples", "old_mill_road_retreat.map")).Replace("\r\n", "\n");
+        var shipped = File.ReadAllText(Path.Combine(repo, "content", "maps", "old_mill_road.map")).Replace("\r\n", "\n");
+        var map = MapFixture.Parse(text, "old_mill_road_retreat.map");
+
+        Assert.Equal(text, MapFormat.Write(map, Starter));
+        Assert.True(map.RetreatEnabled);
+        Assert.Equal(MapFixture.Parse(shipped, "old_mill_road.map") with { Name = map.Name, RetreatEnabled = true }, map);
+    }
 }
