@@ -19,6 +19,35 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 197: the Tollgate's woods group screens the hill. It holds its forest, so it
+    /// never walks onto plain, and the toll brigand at 6,5 reaches 6,4 and every tile within 2
+    /// of itself, so the hill is struck while it lives and a strike on it from range 2 is
+    /// answered. A brigand with an axe of range 1, or a woods group that guards, fails this.
+    /// </summary>
+    [Fact]
+    public void TheTollgateWoodsScreenHoldsTheHillAndAnswersRangeTwo()
+    {
+        var map = All().Single(m => m.Id == "the_tollgate").Map;
+        var content = MapFixture.Content;
+        var woods = map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "woods").ToList();
+        Assert.Equal(2, woods.Count);
+        Assert.All(woods, e => Assert.Equal(Behavior.Hold, e.Behavior));
+
+        var screen = Assert.Single(woods, e => e.TemplateId == "toll_brigand");
+        Assert.Equal(new Coord(6, 5), screen.At);
+        var reach = content.Unit(screen.TemplateId).Inventory.Items
+            .Where(item => content.Weapons.ContainsKey(item.ItemId))
+            .Select(item => content.Weapon(item.ItemId))
+            .ToList();
+        for (var distance = 1; distance <= 2; distance++)
+        {
+            Assert.Contains(reach, w => w.MinRange <= distance && distance <= w.MaxRange);
+        }
+
+        Assert.Equal(1, new Coord(6, 4).DistanceTo(screen.At));
+    }
+
+    /// <summary>
     /// Issue 181: the Tollgate's keep has no free tile. Every open tile outside the keep
     /// walls that stands within 2 of a keep enemy is a tile that enemy's weapons reach, so a
     /// range-2 unit striking the keep from outside is always answered. The door warden's
