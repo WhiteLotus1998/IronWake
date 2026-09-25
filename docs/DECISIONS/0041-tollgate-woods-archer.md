@@ -25,3 +25,7 @@ Seed 131, seize on turn 9 of 10, no Recall, Teodor lost. Turns 1 and 2 repeat th
 ## Not decided
 
 - Whether a three-turn woods on a bad seed makes the limit too tight. It bit here (seize on turn 9), and the old line had one turn more of slack. Chat's cold re-rate decides; the rider is the next lever if surprise stays at 6.
+
+## Decided after (thirty-second round, 2026-09-25)
+
+Chat's cold re-rate is seed 151, 8/7/7, seize on turn 9 of 10 with no Recall and Teodor lost at the door. Kept, both partners: the forest at 5,5 is right (the archer cost three attacks and a shot where the old one cost one and none), the limit stays at 10, and Wren's 0.085 is not a problem. The map passes the Fun Gate from Chat's chair and fails only on Code's surprise of 6; the rider arriving by map event during the woods fight is #222, and the enemy phase's unreadable numbers are #217.
