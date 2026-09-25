@@ -337,6 +337,29 @@ public class CliPlayTests
         return count;
     }
 
+    /// <summary>Issue 207: <c>show</c> on a unit standing on a fort names the heal, with the HP it gives that unit.</summary>
+    [Fact]
+    public void ShowOnAFortSaysHowMuchTheFortHeals()
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-fort-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, Ironwake.Core.Tests.Maps.MapFixture.OldMillRoad.Replace("P captain 1,8\n", "P captain 6,2\n"));
+        File.WriteAllText(script, "show captain\nshow wren\n");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("> show captain\ncaptain: ", output);
+            Assert.Contains("at 6,2 on Fort (heals 20 percent, 4 hp)\n", output);
+            Assert.Contains("at 2,8 on Plain\n", output);
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

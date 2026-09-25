@@ -4,8 +4,9 @@ namespace Ironwake.Core;
 
 /// <summary>
 /// The console view of a map: the grid with units drawn over the terrain, then a legend
-/// naming every unit letter and every terrain glyph on the map. Player units are
-/// uppercase letters in placement order, enemies lowercase, bosses <c>!</c>. The view
+/// naming every unit letter and every terrain glyph on the map, a healing glyph with its
+/// percent. Player units are uppercase letters in placement order, enemies lowercase,
+/// bosses <c>!</c>. The view
 /// is for reading, not for parsing; the map file itself is written by the Content
 /// project's map writer. Output is plain ASCII. Given a <see cref="Reach"/>, the tiles
 /// the unit may end on are drawn as <see cref="ReachGlyph"/> and a line under the
@@ -79,7 +80,7 @@ public static class MapRenderer
             if (seen.Add(id))
             {
                 var terrain = content.TerrainById(id);
-                sb.Append("  ").Append(terrain.Glyph).Append(' ').Append(terrain.Name);
+                sb.Append("  ").Append(terrain.Glyph).Append(' ').Append(terrain.Label());
             }
         }
 
@@ -99,8 +100,8 @@ public static class MapRenderer
     /// <summary>
     /// The console view of a battle: the grid with every living unit drawn where it stands,
     /// each with the letter of the placement it filled, then a legend with each unit's
-    /// name, class, position, HP, terrain, and for enemies its group and how it behaves
-    /// now (a sleeping Guard reads <c>guard, asleep</c>), and <c>unarmed</c> for a unit with
+    /// name, class, position, HP, terrain (with the HP a healing tile gives that unit, issue
+    /// 207), and for enemies its group and how it behaves now (a sleeping Guard reads <c>guard, asleep</c>), and <c>unarmed</c> for a unit with
     /// no usable weapon, since the enemy planner prices such a unit as free damage (issue
     /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
     /// the Recall charges left. Given a <see cref="Reach"/>, the tiles that unit may end on
@@ -151,7 +152,7 @@ public static class MapRenderer
         sb.Append('\n');
         foreach (var unit in state.Units)
         {
-            var terrain = map.TerrainAt(unit.At, content).Name;
+            var terrain = map.TerrainAt(unit.At, content).Label(unit.MaxHp(content));
             var who = $"{unit.Unit.Name} L{unit.Unit.Level} {content.Class(unit.Unit.ClassId).Name.ToLowerInvariant()}";
             var hp = $"hp {unit.Hp}/{unit.MaxHp(content)}";
             sb.Append(letters[unit.PlacementIndex]).Append("  ").Append($"{unit.Id,-16} {who,-26} {unit.At,-6} {hp,-9} {terrain}");
@@ -247,7 +248,7 @@ public static class MapRenderer
 
     private static string Describe(Placement placement, MapDefinition map, GameContent content)
     {
-        var terrain = map.TerrainAt(placement.At, content).Name;
+        var terrain = map.TerrainAt(placement.At, content).Label();
         switch (placement)
         {
             case PlayerPlacement p:
