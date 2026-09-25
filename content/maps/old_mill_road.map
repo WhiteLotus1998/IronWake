@@ -4,6 +4,7 @@ win: rout
 turn_limit: 12
 recall: 3
 enemy_level: 1
+ration: field_dressing:1
 
 ............
 ..^^....n...

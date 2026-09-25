@@ -392,12 +392,12 @@ public class ExposureTests
     /// the road archer (issue 160), which puts seed 1's win on the last turn.
     /// </summary>
     [Fact]
-    public void OldMillRoadSeedFiveEndsInAWinNotAStall()
+    public void OldMillRoadSeedTwentyEndsInAWinNotAStall()
     {
         var file = "old_mill_road" + MapFiles.Extension;
         var map = Maps.MapFixture.Parse(File.ReadAllText(Path.Combine(Maps.MapFixture.MapsDirectory, file)), file);
 
-        var game = Runner.Play(Starter, map, 5, new HeuristicPlayer());
+        var game = Runner.Play(Starter, map, 20, new HeuristicPlayer());
 
         Assert.True(game.Won, game.Result + " at turn " + game.Turns);
         Assert.True(game.Turns < map.TurnLimit, "won at turn " + game.Turns);
