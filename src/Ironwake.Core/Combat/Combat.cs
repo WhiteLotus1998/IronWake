@@ -81,8 +81,16 @@ public static class Combat
         return AvoidSpeedWeight * AttackSpeed(target) + target.Stats.Lck / 2 + terrain;
     }
 
+    /// <summary>
+    /// Hit less avoid, clamped to 0..100, with each side's on-combat ability modifiers
+    /// against the other added first (issue 66): the attacker's hit, the target's avoid.
+    /// </summary>
     public static int HitChance(Combatant attacker, Combatant target) =>
-        Math.Clamp(Hit(attacker) - Avoid(target, Armed(attacker).IsMagic), 0, 100);
+        Math.Clamp(
+            Hit(attacker) + AbilityRules.Against(attacker, target).Hit
+            - Avoid(target, Armed(attacker).IsMagic) - AbilityRules.Against(target, attacker).Avoid,
+            0,
+            100);
 
     public static int Crit(Combatant attacker) =>
         Armed(attacker).Crit + (attacker.Stats.Dex + attacker.Stats.Lck) / 2 + attacker.CritModifier;
@@ -90,8 +98,13 @@ public static class Combat
     /// <summary>Lck plus modifiers, deliberately unclamped: a negative crit avoid is a cost a modifier may impose.</summary>
     public static int CritAvoid(Combatant target) => target.Stats.Lck + target.CritAvoidModifier;
 
+    /// <summary>Crit less crit avoid, clamped to 0..100, with the on-combat ability modifiers added as for <see cref="HitChance"/>.</summary>
     public static int CritChance(Combatant attacker, Combatant target) =>
-        Math.Clamp(Crit(attacker) - CritAvoid(target), 0, 100);
+        Math.Clamp(
+            Crit(attacker) + AbilityRules.Against(attacker, target).Crit
+            - CritAvoid(target) - AbilityRules.Against(target, attacker).CritAvoid,
+            0,
+            100);
 
     /// <summary>
     /// The probability a strike with <paramref name="hitChance"/> lands under

@@ -7,8 +7,8 @@ namespace Ironwake.Content;
 /// <summary>
 /// Reads the content directory into a validated <see cref="GameContent"/>. Every failure
 /// is a <see cref="ContentException"/> naming file, entry, and field. Validation order
-/// is fixed: terrain, classes, weapons, units, then cross-references, so the first error
-/// reported is deterministic.
+/// is fixed: terrain, abilities, classes, weapons, units, then cross-references, so the
+/// first error reported is deterministic.
 /// </summary>
 public static class ContentLoader
 {
@@ -36,7 +36,8 @@ public static class ContentLoader
             unitFiles.Select(p => new ContentFile(
                 ContentFiles.UnitsDirectory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList(),
             ReadFile(contentRoot, ContentFiles.RulesName),
-            ReadFile(contentRoot, ContentFiles.ItemsName));
+            ReadFile(contentRoot, ContentFiles.ItemsName),
+            ReadFile(contentRoot, ContentFiles.AbilitiesName));
 
         return Parse(files);
     }
@@ -45,12 +46,114 @@ public static class ContentLoader
     public static GameContent Parse(ContentFiles files)
     {
         var terrain = ParseTerrain(files.Terrain);
-        var classes = ParseClasses(files.Classes);
+        var abilities = ParseAbilities(files.Abilities);
+        var classes = ParseClasses(files.Classes, abilities);
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
-        var (units, cast) = ParseUnits(files.Units, classes, weapons, items);
+        var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry) = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry };
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities };
+    }
+
+    /// <summary>
+    /// The abilities of issue 66: an id, a name, one line of <c>text</c>, and an <c>effect</c>
+    /// whose <c>kind</c> picks one of the closed set. <c>stats</c> is a passive flat delta,
+    /// its <c>stats</c> object a partial stat block with at least one non-zero value;
+    /// <c>combat</c> is an on-combat modifier of <c>hit</c>, <c>avoid</c>, <c>crit</c> and
+    /// <c>critAvoid</c> (each optional, at least one non-zero), applied against opponents
+    /// matching the optional <c>against</c> object's <c>weapon</c> and <c>movement</c>.
+    /// </summary>
+    private static ImmutableSortedDictionary<string, Ability> ParseAbilities(ContentFile file)
+    {
+        var entries = Entries(file, "abilities");
+        RequireUnique(file, entries);
+        var builder = ImmutableSortedDictionary.CreateBuilder<string, Ability>(StringComparer.Ordinal);
+        foreach (var node in entries)
+        {
+            var text = node.String("text");
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                throw node.Error("text", "must be one line of text");
+            }
+
+            builder.Add(node.Entry!, new Ability(node.Entry!, node.String("name"), text, ParseEffect(node, node.Object("effect"))));
+        }
+
+        return builder.ToImmutable();
+    }
+
+    private static AbilityEffect ParseEffect(EntryNode entry, EntryNode effect)
+    {
+        var kind = effect.String("kind");
+        switch (kind)
+        {
+            case "stats":
+                RequireOnly(entry, effect, "effect", "kind", "stats");
+                var delta = ParseStats(effect.Object("stats"), allRequired: false);
+                if (delta == Stats.Zero)
+                {
+                    throw entry.Error("effect.stats", "must change at least one stat");
+                }
+
+                return new StatDeltaEffect(delta);
+            case "combat":
+                RequireOnly(entry, effect, "effect", "kind", "against", "hit", "avoid", "crit", "critAvoid");
+                var against = OpponentCondition.Any;
+                if (effect.OptionalObject("against") is { } condition)
+                {
+                    RequireOnly(entry, condition, "effect.against", "weapon", "movement");
+                    WeaponType? weapon = condition.Has("weapon") ? entry.ParseEnum<WeaponType>("effect.against.weapon", condition.String("weapon")) : null;
+                    MovementType? movement = condition.Has("movement") ? entry.ParseEnum<MovementType>("effect.against.movement", condition.String("movement")) : null;
+                    if (weapon is null && movement is null)
+                    {
+                        throw entry.Error("effect.against", "must name a weapon, a movement, or both; leave it out to match every opponent");
+                    }
+
+                    against = new OpponentCondition(weapon, movement);
+                }
+
+                var modifier = new CombatModifierEffect(against, effect.IntOr("hit", 0), effect.IntOr("avoid", 0), effect.IntOr("crit", 0), effect.IntOr("critAvoid", 0));
+                if (modifier.Hit == 0 && modifier.Avoid == 0 && modifier.Crit == 0 && modifier.CritAvoid == 0)
+                {
+                    throw entry.Error("effect", "a combat effect must change hit, avoid, crit or critAvoid");
+                }
+
+                return modifier;
+            default:
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats or combat");
+        }
+    }
+
+    /// <summary>Refuses a key the effect's kind does not read, so a misspelt modifier fails instead of doing nothing.</summary>
+    private static void RequireOnly(EntryNode entry, EntryNode node, string prefix, params string[] keys)
+    {
+        foreach (var property in node.Element.EnumerateObject())
+        {
+            if (System.Array.IndexOf(keys, property.Name) < 0)
+            {
+                throw entry.Error(prefix + "." + property.Name, "is not read here; expected one of " + string.Join(", ", keys));
+            }
+        }
+    }
+
+    /// <summary>A list of ability ids: each must be in abilities.json, none twice.</summary>
+    private static ValueList<string> AbilityIds(EntryNode node, string field, ImmutableSortedDictionary<string, Ability> abilities)
+    {
+        var ids = node.StringArrayOrEmpty(field);
+        for (var i = 0; i < ids.Count; i++)
+        {
+            if (!abilities.ContainsKey(ids[i]))
+            {
+                throw node.Error($"{field}[{i}]", $"unknown ability '{ids[i]}': not in {ContentFiles.AbilitiesName}");
+            }
+
+            if (ids.Take(i).Contains(ids[i], StringComparer.Ordinal))
+            {
+                throw node.Error($"{field}[{i}]", $"'{ids[i]}' is listed twice");
+            }
+        }
+
+        return ValueList<string>.From(ids);
     }
 
     /// <summary>The consumables of DESIGN.md section 5 (issue 9): each heals its user and has a number of uses. An id shared with a weapon is refused, since an inventory entry names either.</summary>
@@ -328,7 +431,7 @@ public static class ContentLoader
         return builder.ToImmutable();
     }
 
-    private static ImmutableSortedDictionary<string, UnitClass> ParseClasses(ContentFile file)
+    private static ImmutableSortedDictionary<string, UnitClass> ParseClasses(ContentFile file, ImmutableSortedDictionary<string, Ability> abilities)
     {
         var entries = Entries(file, "classes");
         RequireUnique(file, entries);
@@ -355,6 +458,11 @@ public static class ContentLoader
 
             var modifiers = node.OptionalObject("modifiers") is { } m ? ParseStats(m, allRequired: false) : Stats.Zero;
             var growthModifiers = node.OptionalObject("growthModifiers") is { } g ? ParseStats(g, allRequired: false) : Stats.Zero;
+            var mastery = node.OptionalString("mastery");
+            if (mastery is not null && !abilities.ContainsKey(mastery))
+            {
+                throw node.Error("mastery", $"unknown ability '{mastery}': not in {ContentFiles.AbilitiesName}");
+            }
 
             builder.Add(node.Entry!, new UnitClass(
                 node.Entry!,
@@ -363,7 +471,10 @@ public static class ContentLoader
                 mov,
                 modifiers,
                 ValueList<WeaponType>.From(weapons),
-                growthModifiers));
+                growthModifiers)
+            {
+                Mastery = mastery,
+            });
         }
 
         if (builder.Count == 0)
@@ -486,7 +597,8 @@ public static class ContentLoader
         IReadOnlyList<ContentFile> files,
         ImmutableSortedDictionary<string, UnitClass> classes,
         ImmutableSortedDictionary<string, Weapon> weapons,
-        ImmutableSortedDictionary<string, Item> items)
+        ImmutableSortedDictionary<string, Item> items,
+        ImmutableSortedDictionary<string, Ability> abilities)
     {
         var builder = ImmutableSortedDictionary.CreateBuilder<string, Unit>(StringComparer.Ordinal);
         var origin = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -505,7 +617,7 @@ public static class ContentLoader
                 }
 
                 origin[node.Entry!] = file.Name;
-                var unit = ParseUnit(node, classes, weapons, items);
+                var unit = ParseUnit(node, classes, weapons, items, abilities);
                 builder.Add(node.Entry!, unit);
                 if (isCast)
                 {
@@ -573,7 +685,8 @@ public static class ContentLoader
         EntryNode node,
         ImmutableSortedDictionary<string, UnitClass> classes,
         ImmutableSortedDictionary<string, Weapon> weapons,
-        ImmutableSortedDictionary<string, Item> knownItems)
+        ImmutableSortedDictionary<string, Item> knownItems,
+        ImmutableSortedDictionary<string, Ability> abilities)
     {
         var classId = node.String("class");
         if (!classes.ContainsKey(classId))
@@ -666,7 +779,7 @@ public static class ContentLoader
             stats,
             growths,
             new Inventory(ValueList<ItemStack>.From(items)),
-            ValueList<string>.From(node.StringArrayOrEmpty("abilities")),
+            AbilityIds(node, "abilities", abilities),
             node.OptionalString("region"),
             node.OptionalString("personality"))
         {

@@ -29,6 +29,10 @@ public sealed record GameContent(
     /// <summary>The rivalry arms and rapport table of <c>rules.json</c> (issue 16); <see cref="RivalryRules.None"/> when it has no block.</summary>
     public RivalryRules Rivalry { get; init; } = RivalryRules.None;
 
+    /// <summary>The abilities of <c>abilities.json</c> by id (issue 66); empty when the content names none.</summary>
+    public ImmutableSortedDictionary<string, Ability> Abilities { get; init; } =
+        ImmutableSortedDictionary<string, Ability>.Empty.WithComparers(StringComparer.Ordinal);
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -41,6 +45,21 @@ public sealed record GameContent(
     public Unit Unit(string id) => Lookup(Units, id, "unit");
 
     public Item Item(string id) => Lookup(Items, id, "item");
+
+    public Ability Ability(string id) => Lookup(Abilities, id, "ability");
+
+    /// <summary>The unit's abilities, resolved in the order it lists them.</summary>
+    public ValueList<Ability> AbilitiesOf(Unit unit) => ValueList<Ability>.From(unit.Abilities.Select(Ability));
+
+    /// <summary>
+    /// The numbers a unit fights with: its stats, its class modifiers, and its passive
+    /// ability deltas. Max HP is this <c>Hp</c>, the same number <see cref="Combatant.Stats"/> carries.
+    /// </summary>
+    public Stats StatsOf(Unit unit) => unit.EffectiveStats(Class(unit.ClassId)) + AbilityRules.Passive(AbilitiesOf(unit));
+
+    /// <summary>This unit as the section 5 formulas see it, its abilities resolved from this content.</summary>
+    public Combatant CombatantOf(Unit unit, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false, int hitModifier = 0, int critModifier = 0) =>
+        new(unit, Class(unit.ClassId), weapon, terrain, hp, critAvoidModifier, broken, hitModifier, critModifier, AbilitiesOf(unit));
 
     /// <summary>Finds the terrain drawn with a glyph, or null if no terrain uses it.</summary>
     public Terrain? TerrainByGlyph(char glyph)
@@ -68,6 +87,7 @@ public sealed record GameContent(
         && DictEquals(Terrain, other.Terrain)
         && DictEquals(Units, other.Units)
         && DictEquals(Items, other.Items)
+        && DictEquals(Abilities, other.Abilities)
         && Cast == other.Cast
         && Rivalry == other.Rivalry
         && WakeRadius == other.WakeRadius;

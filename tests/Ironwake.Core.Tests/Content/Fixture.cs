@@ -45,6 +45,12 @@ internal static class Fixture
         ] }
         """;
 
+    public const string Abilities = """
+        { "abilities": [
+          { "id": "vigilance", "name": "Vigilance", "text": "Def +2.", "effect": { "kind": "stats", "stats": { "def": 2 } } }
+        ] }
+        """;
+
     public static ContentFiles Files(
         string? terrain = null,
         string? classes = null,
@@ -53,7 +59,8 @@ internal static class Fixture
         string? secondUnitsFile = null,
         string? rules = null,
         string? items = null,
-        string? cast = null)
+        string? cast = null,
+        string? abilities = null)
     {
         var unitFiles = new List<ContentFile> { new("units/units.json", units ?? Units) };
         if (cast is not null)
@@ -72,7 +79,8 @@ internal static class Fixture
             new ContentFile(ContentFiles.TerrainName, terrain ?? Terrain),
             unitFiles,
             new ContentFile(ContentFiles.RulesName, rules ?? Rules),
-            new ContentFile(ContentFiles.ItemsName, items ?? Items));
+            new ContentFile(ContentFiles.ItemsName, items ?? Items),
+            new ContentFile(ContentFiles.AbilitiesName, abilities ?? Abilities));
     }
 
     /// <summary>Walks up from the test binaries to the repository's content directory.</summary>

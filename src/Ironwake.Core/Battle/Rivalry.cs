@@ -113,7 +113,7 @@ public static class Rivalry
 
     /// <summary>The rapport a recruit adds per player phase beside another, from its effective Cha.</summary>
     public static int RateOf(BattleUnit unit, GameContent content) =>
-        content.Rivalry.RateFor(unit.Unit.EffectiveStats(content.Class(unit.Unit.ClassId)).Cha);
+        content.Rivalry.RateFor(content.StatsOf(unit.Unit).Cha);
 
     /// <summary>
     /// The recruits that end this player phase beside a rival on a tile some awake enemy

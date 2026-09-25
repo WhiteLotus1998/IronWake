@@ -28,7 +28,7 @@ public sealed record BattleUnit(
 {
     public string Id => Unit.Id;
 
-    public int MaxHp(GameContent content) => Unit.EffectiveStats(content.Class(Unit.ClassId)).Hp;
+    public int MaxHp(GameContent content) => content.StatsOf(Unit).Hp;
 
     /// <summary>
     /// The inventory slot of the weapon the unit strikes with: the first slot that
@@ -105,7 +105,7 @@ public sealed record BattleUnit(
 
     /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on, its weapon broken or whole.</summary>
     public Combatant ToCombatant(MapDefinition map, GameContent content) =>
-        new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content));
+        content.CombatantOf(Unit, EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content));
 
     /// <summary>
     /// This unit as the formulas see it on a board, rivalry's modifiers included (issue 16):
@@ -116,6 +116,6 @@ public sealed record BattleUnit(
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false)
     {
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
-        return new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
+        return content.CombatantOf(Unit, EquippedWeapon(content), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
     }
 }

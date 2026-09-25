@@ -224,7 +224,7 @@ public sealed record BattleState(
             throw new ArgumentException(Movement.CannotStandMessage(at, terrain, unitClass.Movement), nameof(unit));
         }
 
-        return new BattleUnit(RefreshSpells(unit, content), side, at, unit.EffectiveStats(unitClass).Hp, false, false);
+        return new BattleUnit(RefreshSpells(unit, content), side, at, content.StatsOf(unit).Hp, false, false);
     }
 
     /// <summary>Section 5: spells have uses per battle, so every Reason or Faith weapon starts a map at its full durability. Physical weapons carry what they have.</summary>

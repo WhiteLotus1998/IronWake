@@ -541,8 +541,43 @@ public static class Gates
             }
         }
 
-        var maxHp = unit.EffectiveStats(unitClass).Hp;
-        return new Combatant(unit, unitClass, weapon, passable[random.Next(passable.Count)], 1 + random.Next(maxHp), 0, random.Next(10) == 0);
+        var abilities = ValueList<Ability>.From(content.AbilitiesOf(unit).Concat(DrawnAbilities(content, random)));
+        var maxHp = (unit.EffectiveStats(unitClass) + AbilityRules.Passive(abilities)).Hp;
+        return new Combatant(unit, unitClass, weapon, passable[random.Next(passable.Count)], 1 + random.Next(maxHp), 0, random.Next(10) == 0, abilities: abilities);
+    }
+
+    /// <summary>
+    /// Gate 5 runs with abilities on both sides (issue 66): each fighter draws, at even odds
+    /// each, one ability from the content's own and one synthetic effect of each kind, a
+    /// passive stat delta and a combat modifier on a random condition, so the stream covers
+    /// every effect kind whether or not content ships one yet.
+    /// </summary>
+    public static IEnumerable<Ability> DrawnAbilities(GameContent content, Random random)
+    {
+        var drawn = new List<Ability>();
+        if (content.Abilities.Count > 0 && random.Next(2) == 0)
+        {
+            drawn.Add(content.Abilities.Values.ElementAt(random.Next(content.Abilities.Count)));
+        }
+
+        if (random.Next(2) == 0)
+        {
+            var delta = Stats.Zero.Map((stat, _) => stat == Stat.Hp ? random.Next(0, 4) : random.Next(-2, 4));
+            drawn.Add(new Ability("sim_passive", "Sim Passive", "a drawn stat delta", new StatDeltaEffect(delta)));
+        }
+
+        if (random.Next(2) == 0)
+        {
+            var weapons = Enum.GetValues<WeaponType>();
+            var movements = Enum.GetValues<MovementType>();
+            var against = new OpponentCondition(
+                random.Next(2) == 0 ? weapons[random.Next(weapons.Length)] : null,
+                random.Next(3) == 0 ? movements[random.Next(movements.Length)] : null);
+            var modifier = new CombatModifierEffect(against, random.Next(-20, 21), random.Next(-20, 21), random.Next(-10, 16), random.Next(-10, 16));
+            drawn.Add(new Ability("sim_combat", "Sim Combat", "a drawn combat modifier", modifier));
+        }
+
+        return drawn;
     }
 
     public static string Verdict(bool passed) => passed ? "ok" : "FAILED";

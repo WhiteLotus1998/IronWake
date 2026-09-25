@@ -19,7 +19,53 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.TerrainName, WriteArray("terrain", content.Terrain.Values, WriteTerrain)),
         UnitFiles(content),
         new ContentFile(ContentFiles.RulesName, WriteRules(content)),
-        new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)));
+        new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)),
+        new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)));
+
+    /// <summary>An ability and its effect in the shape <see cref="ContentLoader"/> reads (issue 66); a combat effect writes all four modifiers.</summary>
+    private static void WriteAbility(Utf8JsonWriter writer, Ability ability)
+    {
+        writer.WriteStartObject();
+        writer.WriteString("id", ability.Id);
+        writer.WriteString("name", ability.Name);
+        writer.WriteString("text", ability.Text);
+        writer.WriteStartObject("effect");
+        switch (ability.Effect)
+        {
+            case StatDeltaEffect delta:
+                writer.WriteString("kind", "stats");
+                WriteStats(writer, "stats", delta.Delta);
+                break;
+            case CombatModifierEffect modifier:
+                writer.WriteString("kind", "combat");
+                if (modifier.Against != OpponentCondition.Any)
+                {
+                    writer.WriteStartObject("against");
+                    if (modifier.Against.Weapon is { } weapon)
+                    {
+                        writer.WriteString("weapon", weapon.ToString().ToLowerInvariant());
+                    }
+
+                    if (modifier.Against.Movement is { } movement)
+                    {
+                        writer.WriteString("movement", movement.ToString().ToLowerInvariant());
+                    }
+
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteNumber("hit", modifier.Hit);
+                writer.WriteNumber("avoid", modifier.Avoid);
+                writer.WriteNumber("crit", modifier.Crit);
+                writer.WriteNumber("critAvoid", modifier.CritAvoid);
+                break;
+            default:
+                throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
+        }
+
+        writer.WriteEndObject();
+        writer.WriteEndObject();
+    }
 
     /// <summary>
     /// The cast goes to <see cref="ContentFiles.CastName"/> in roster order, since the order is
@@ -141,6 +187,11 @@ public static class ContentSerializer
         writer.WriteEndArray();
         WriteStats(writer, "modifiers", unitClass.Modifiers);
         WriteStats(writer, "growthModifiers", unitClass.GrowthModifiers);
+        if (unitClass.Mastery is not null)
+        {
+            writer.WriteString("mastery", unitClass.Mastery);
+        }
+
         writer.WriteEndObject();
     }
 
