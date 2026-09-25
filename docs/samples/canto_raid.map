@@ -1,0 +1,22 @@
+name: Canto Raid
+size: 12x6
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 1
+
+............
+....F.......
+............
+............
+.......F....
+............
+
+units:
+P captain 1,2
+P recruit:ansgar 1,3
+P recruit:wren 0,2
+E brigand 5,2 group:road behavior:aggressive
+E archer 7,4 group:road behavior:aggressive
+E soldier 11,0 group:watch behavior:guard
+E soldier 11,5 group:watch behavior:guard

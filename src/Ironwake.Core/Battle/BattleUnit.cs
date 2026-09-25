@@ -11,6 +11,10 @@ namespace Ironwake.Core;
 /// the map placement the unit filled, so a renderer draws it with the letter section 10
 /// gives that slot for the whole battle, wherever it has moved. <see cref="Retreated"/>
 /// is set by a <see cref="Retreat"/> and never cleared, so no unit retreats twice.
+/// <see cref="Canto"/> is what a Canto unit's Move left of its Mov this phase (issue 71),
+/// its full Mov when it acts without moving, and null once the Canto is taken or declined,
+/// at the end of the phase, and for a unit without Canto; a <see cref="Canto"/> command is
+/// legal only while the unit has acted and this is not null.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -24,7 +28,8 @@ public sealed record BattleUnit(
     bool IsBoss = false,
     bool IsCaptain = false,
     int PlacementIndex = -1,
-    bool Retreated = false)
+    bool Retreated = false,
+    int? Canto = null)
 {
     public string Id => Unit.Id;
 

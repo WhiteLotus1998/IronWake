@@ -70,6 +70,9 @@ public static class ContentSerializer
                 writer.WriteNumber("wt", art.Wt);
                 writer.WriteNumber("range", art.Range);
                 break;
+            case CantoEffect:
+                writer.WriteString("kind", "canto");
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }
@@ -202,6 +205,17 @@ public static class ContentSerializer
         {
             writer.WriteString("mastery", unitClass.Mastery);
             writer.WriteNumber("masteryPoints", unitClass.MasteryPoints);
+        }
+
+        if (unitClass.Abilities.Count > 0)
+        {
+            writer.WriteStartArray("abilities");
+            foreach (var ability in unitClass.Abilities)
+            {
+                writer.WriteStringValue(ability);
+            }
+
+            writer.WriteEndArray();
         }
 
         writer.WriteEndObject();

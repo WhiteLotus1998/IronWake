@@ -103,6 +103,12 @@ public static class ProtocolJson
             case UnitWaited u:
                 w.WriteString("unit", u.UnitId);
                 break;
+            case Cantoed c:
+                w.WriteString("unit", c.UnitId);
+                WriteCoord(w, "from", c.From);
+                WriteCoord(w, "to", c.To);
+                WriteCoords(w, "path", c.Path);
+                break;
             case UnitRetreated r:
                 w.WriteString("unit", r.UnitId);
                 WriteCoord(w, "from", r.From);
@@ -229,6 +235,11 @@ public static class ProtocolJson
                 w.WriteString("type", "wait");
                 w.WriteString("unit", wait.UnitId);
                 break;
+            case Canto canto:
+                w.WriteString("type", "canto");
+                w.WriteString("unit", canto.UnitId);
+                WriteCoord(w, "to", canto.To);
+                break;
             case EndPhase:
                 w.WriteString("type", "end");
                 break;
@@ -260,9 +271,10 @@ public static class ProtocolJson
             "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
+            "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, end, or recall"),
         };
     }
 
@@ -458,6 +470,7 @@ public static class ProtocolJson
         w.WriteBoolean("isCaptain", unit.IsCaptain);
         w.WriteNumber("placementIndex", unit.PlacementIndex);
         w.WriteBoolean("retreated", unit.Retreated);
+        WriteNullableNumber(w, "canto", unit.Canto);
         w.WriteString("class", u.ClassId);
         w.WriteNumber("level", u.Level);
         w.WriteNumber("exp", u.Exp);
@@ -542,7 +555,8 @@ public static class ProtocolJson
             RequiredBool(e, "isBoss"),
             RequiredBool(e, "isCaptain"),
             RequiredInt(e, "placementIndex"),
-            RequiredBool(e, "retreated"));
+            RequiredBool(e, "retreated"),
+            OptionalInt(e, "canto"));
     }
 
     private static void WriteSide(Utf8JsonWriter w, string name, SideForecast side)

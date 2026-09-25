@@ -48,8 +48,9 @@ public sealed record GameContent(
 
     public Ability Ability(string id) => Lookup(Abilities, id, "ability");
 
-    /// <summary>The unit's abilities, resolved in the order it lists them.</summary>
-    public ValueList<Ability> AbilitiesOf(Unit unit) => ValueList<Ability>.From(unit.Abilities.Select(Ability));
+    /// <summary>The unit's abilities, resolved in the order it lists them, then its class's (issue 71) that it does not already list.</summary>
+    public ValueList<Ability> AbilitiesOf(Unit unit) =>
+        ValueList<Ability>.From(unit.Abilities.Concat(Class(unit.ClassId).Abilities.Where(id => !unit.Abilities.Contains(id))).Select(Ability));
 
     /// <summary>The combat arts a unit knows (issue 68): the abilities it lists whose effect is an art, in its order.</summary>
     public IEnumerable<(Ability Ability, CombatArtEffect Art)> ArtsOf(Unit unit) =>

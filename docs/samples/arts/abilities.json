@@ -1,6 +1,8 @@
 {
   "abilities": [
     { "id": "cleave", "name": "Cleave", "text": "+5 Mt and +5 Wt; two extra uses, hit or miss.",
-      "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 2, "mt": 5, "wt": 5 } }
+      "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 2, "mt": 5, "wt": 5 } },
+    { "id": "canto", "name": "Canto", "text": "After acting, move again on what the first move left.",
+      "effect": { "kind": "canto" } }
   ]
 }

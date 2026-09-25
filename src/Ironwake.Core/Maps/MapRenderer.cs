@@ -183,7 +183,7 @@ public static class MapRenderer
 
             if (unit.Acted)
             {
-                sb.Append("  done");
+                sb.Append(unit.Canto is { } canto ? $"  canto {canto}" : "  done");
             }
 
             sb.Append('\n');

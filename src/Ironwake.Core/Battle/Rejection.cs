@@ -23,6 +23,7 @@ public enum RejectionReason
     CannotRetreat,
     NoSuchArt,
     ArtRefused,
+    NoCanto,
     BattleOver,
     UnknownCommand,
 }

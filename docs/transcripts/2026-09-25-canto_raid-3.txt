@@ -1,0 +1,902 @@
+Canto Raid, seed 3, scheme TwoRollAverage
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 CA...a......
+ 3 .B..........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         1,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 20/20  Plain
+> move captain 2,2
+captain moves 1,2 -> 2,2
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C.A..a......
+ 3 .B..........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         1,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 20/20  Plain
+> move wren 2,3
+wren moves 0,2 -> 2,3 via 1,2 2,2
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ..A..a......
+ 3 .BC.........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         1,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
+> move ansgar 0,3
+ansgar moves 1,3 -> 0,3
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ..A..a......
+ 3 B.C.........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
+> wait ansgar
+ansgar waits
+ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ..A..a......
+ 3 B.C.........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain  canto 5
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
+> canto ansgar stay
+ansgar stays at 0,3 (canto)
+Canto Raid  turn 1 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ..A..a......
+ 3 B.C.........
+ 4 .......b....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain  done
+b  archer-1         Archer L1 bowman           7,4    hp 17/17  Fort (heals 20 percent, 3 hp)  group road, aggressive
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: move archer-1 4,3
+archer-1 moves 7,4 -> 4,3 via 7,3 6,3 5,3
+enemy: attack archer-1 wren
+forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
+archer-1 attacks wren
+  archer-1 hits wren for 6 (hp 14)
+  archer-1 hp 17, wren hp 14
+enemy: move brigand-1 3,3
+brigand-1 moves 5,2 -> 3,3 via 4,2 3,2
+enemy: attack brigand-1 wren
+forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+brigand-1 attacks wren
+  brigand-1 hits wren for 11 (hp 3)
+  wren misses brigand-1
+  wren hits brigand-1 for 10 (hp 12)
+  brigand-1 hp 12, wren hp 3
+wren gains 10 exp (10)
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ..A.........
+ 3 B.Cab.......
+ 4 .......F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 17/17  Plain  group road, aggressive
+a  brigand-1        Brigand L1 reaver          3,3    hp 12/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> move captain 3,2
+captain moves 2,2 -> 3,2
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ...A........
+ 3 B.Cab.......
+ 4 .......F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 17/17  Plain  group road, aggressive
+a  brigand-1        Brigand L1 reaver          3,3    hp 12/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 22/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> attack captain brigand-1
+forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+captain attacks brigand-1
+  captain hits brigand-1 for 11 (hp 1)
+  brigand-1 hits captain for 10 (hp 12)
+  captain hits brigand-1 for 11 (hp 0)
+  captain hp 12, brigand-1 hp 0
+captain gains 30 exp (30)
+brigand-1 falls at 3,3
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ...A........
+ 3 B.C.b.......
+ 4 .......F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         0,3    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> move ansgar 4,4
+ansgar moves 0,3 -> 4,4 via 1,3 2,3 3,3 3,4
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ...A........
+ 3 ..C.b.......
+ 4 ....B..F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 17/17  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> attack ansgar archer-1
+forecast ansgar -> archer-1: dmg 11 hit 76% crit 2%; counter: none
+ansgar attacks archer-1
+  ansgar hits archer-1 for 11 (hp 6)
+  ansgar hp 20, archer-1 hp 6
+ansgar gains 10 exp (10)
+ansgar may canto up to 1 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ...A........
+ 3 ..C.b.......
+ 4 ....B..F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 1
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> canto ansgar 4,5
+ansgar cantos 4,4 -> 4,5
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ...A........
+ 3 ..C.b.......
+ 4 .......F....
+ 5 ....B......d
+
+B  ansgar           Ansgar L1 outrider         4,5    hp 20/20  Plain  done
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
+> move wren 0,2
+wren moves 2,3 -> 0,2 via 2,2 1,2
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ....b.......
+ 4 .......F....
+ 5 ....B......d
+
+B  ansgar           Ansgar L1 outrider         4,5    hp 20/20  Plain  done
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 3/20   Plain
+> item wren 2
+wren uses field_dressing (2 left)
+wren heals 10 (hp 13)
+Canto Raid  turn 2 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ....b.......
+ 4 .......F....
+ 5 ....B......d
+
+B  ansgar           Ansgar L1 outrider         4,5    hp 20/20  Plain  done
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain  done
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: attack archer-1 ansgar
+forecast archer-1 -> ansgar: dmg 7 hit 77% crit 2%; counter: none
+archer-1 attacks ansgar
+  archer-1 misses ansgar
+  archer-1 hp 6, ansgar hp 20
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ....b.......
+ 4 .......F....
+ 5 ....B......d
+
+B  ansgar           Ansgar L1 outrider         4,5    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+> move ansgar 4,4
+ansgar moves 4,5 -> 4,4
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ....b.......
+ 4 ....B..F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain
+b  archer-1         Archer L1 bowman           4,3    hp 6/17   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+> attack ansgar archer-1
+forecast ansgar -> archer-1: dmg 11 hit 76% crit 2%; counter: none
+ansgar attacks archer-1
+  ansgar hits archer-1 for 11 (hp 0)
+  ansgar hp 20, archer-1 hp 0
+ansgar gains 30 exp (40)
+archer-1 falls at 4,3
+ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ............
+ 4 ....B..F....
+ 5 ...........d
+
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 5
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+> reach ansgar
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...***.....c
+ 1 ..*****.....
+ 2 C**A****....
+ 3 *********...
+ 4 ****B*****..
+ 5 *********..d
+
+B  ansgar           Ansgar L1 outrider         4,4    hp 20/20  Plain  canto 5
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+*  reach from 4,4: 41 tiles
+> canto ansgar 6,5
+ansgar cantos 4,4 -> 6,5 via 5,4 6,4
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C..A........
+ 3 ............
+ 4 .......F....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain  done
+A  captain          Alder Fenn L1 cadet        3,2    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+> move captain 4,3
+captain moves 3,2 -> 4,3 via 4,2
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 C...........
+ 3 ....A.......
+ 4 .......F....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain  done
+A  captain          Alder Fenn L1 cadet        4,3    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
+> move wren 3,3
+wren moves 0,2 -> 3,3 via 1,2 2,2 3,2
+Canto Raid  turn 3 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ...CA.......
+ 4 .......F....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain  done
+A  captain          Alder Fenn L1 cadet        4,3    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ...CA.......
+ 4 .......F....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain
+A  captain          Alder Fenn L1 cadet        4,3    hp 12/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
+> move captain 7,4
+captain moves 4,3 -> 7,4 via 5,3 6,3 7,3
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ...C........
+ 4 .......A....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
+> move wren 6,3
+wren moves 3,3 -> 6,3 via 4,3 5,3
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A....
+ 5 ......B....d
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 20/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, asleep
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, asleep
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> move ansgar 10,5
+ansgar moves 6,5 -> 10,5 via 7,5 8,5 9,5
+group watch wakes: proximity
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A....
+ 5 ..........Bd
+
+B  ansgar           Ansgar L1 outrider         10,5   hp 20/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> attack ansgar soldier-2
+forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+ansgar attacks soldier-2
+  ansgar hits soldier-2 for 9 (hp 11)
+  soldier-2 misses ansgar
+  ansgar hp 20, soldier-2 hp 11
+ansgar gains 10 exp (50)
+ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A....
+ 5 ..........Bd
+
+B  ansgar           Ansgar L1 outrider         10,5   hp 20/20  Plain  canto 2
+A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         11,5   hp 11/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> canto ansgar 8,5
+ansgar cantos 10,5 -> 8,5 via 9,5
+Canto Raid  turn 4 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ...........c
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A....
+ 5 ........B..d
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 20/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 12/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         11,5   hp 11/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: move soldier-1 11,4
+soldier-1 moves 11,0 -> 11,4 via 11,1 11,2 11,3
+enemy: wait soldier-1
+soldier-1 waits
+enemy: move soldier-2 9,5
+soldier-2 moves 11,5 -> 9,5 via 10,5
+enemy: attack soldier-2 ansgar
+forecast soldier-2 -> ansgar: dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+soldier-2 attacks ansgar
+  soldier-2 hits ansgar for 10 (hp 10)
+  ansgar hits soldier-2 for 9 (hp 2)
+  soldier-2 hp 2, ansgar hp 10
+ansgar gains 10 exp (60)
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+captain heals 4 (hp 16)
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........Bd..
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> attack ansgar soldier-2
+forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+ansgar attacks soldier-2
+  ansgar hits soldier-2 for 9 (hp 0)
+  ansgar hp 10, soldier-2 hp 0
+ansgar gains 30 exp (90)
+soldier-2 falls at 9,5
+ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........B...
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> threat ansgar
+threat on ansgar at 8,5 (Plain):
+  soldier-1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+  if all land: 10 against 10 hp
+> canto ansgar 6,5
+ansgar cantos 8,5 -> 6,5 via 7,5
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ......B.....
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> move captain 10,4
+captain moves 7,4 -> 10,4 via 8,4 9,4
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......F..Ac
+ 5 ......B.....
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        10,4   hp 16/22  Plain  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks soldier-1
+  captain hits soldier-1 for 9 (hp 11)
+  soldier-1 hits captain for 8 (hp 8)
+  captain hp 8, soldier-1 hp 11
+captain gains 10 exp (40)
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......F..Ac
+ 5 ......B.....
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        10,4   hp 8/22   Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> move wren 8,4
+wren moves 6,3 -> 8,4 via 7,3 8,3
+Canto Raid  turn 5 of 10  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ............
+ 4 .......FC.Ac
+ 5 ......B.....
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        10,4   hp 8/22   Plain  captain  done
+c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: attack soldier-1 captain
+forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+soldier-1 attacks captain
+  soldier-1 hits captain for 8 (hp 0)
+  soldier-1 hp 11, captain hp 0
+captain falls at 10,4
+Canto Raid  turn 5 of 10  enemy phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ............
+ 4 .......FC..c
+ 5 ......B.....
+
+B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake  done
+C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
+battle lost: the captain is dead; only recall is left
+> recall
+player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
+> recall 45
+recalled to state 45; 2 charges left
+Canto Raid  turn 5 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........Bd..
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> attack ansgar soldier-2
+forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+ansgar attacks soldier-2
+  ansgar hits soldier-2 for 9 (hp 0)
+  ansgar hp 10, soldier-2 hp 0
+ansgar gains 30 exp (90)
+soldier-2 falls at 9,5
+ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 5 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........B...
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> canto ansgar 7,5
+ansgar cantos 8,5 -> 7,5
+Canto Raid  turn 5 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 .......B....
+
+B  ansgar           Ansgar L1 outrider         7,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> move wren 7,3
+wren moves 6,3 -> 7,3
+Canto Raid  turn 5 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 .......C....
+ 4 .......A...c
+ 5 .......B....
+
+B  ansgar           Ansgar L1 outrider         7,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
+> wait captain
+captain waits
+Canto Raid  turn 5 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 .......C....
+ 4 .......A...c
+ 5 .......B....
+
+B  ansgar           Ansgar L1 outrider         7,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain  done
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: move soldier-1 8,5
+soldier-1 moves 11,4 -> 8,5 via 10,4 9,4 8,4
+enemy: attack soldier-1 ansgar
+forecast soldier-1 -> ansgar: dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+soldier-1 attacks ansgar
+  soldier-1 hits ansgar for 10 (hp 0)
+  soldier-1 hp 20, ansgar hp 0
+ansgar falls at 7,5
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+captain heals 4 (hp 20)
+Canto Raid  turn 6 of 10  player phase  rout  recall 2
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 .......C....
+ 4 .......A....
+ 5 ........c...
+
+A  captain          Alder Fenn L1 cadet        7,4    hp 20/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
+> recall 45
+recalled to state 45; 1 charges left
+Canto Raid  turn 5 of 10  player phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........Bd..
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> attack ansgar soldier-2
+forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+ansgar attacks soldier-2
+  ansgar hits soldier-2 for 9 (hp 0)
+  ansgar hp 10, soldier-2 hp 0
+ansgar gains 30 exp (90)
+soldier-2 falls at 9,5
+ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Canto Raid  turn 5 of 10  player phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 ........B...
+
+B  ansgar           Ansgar L1 outrider         8,5    hp 10/20  Plain  canto 6
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> threat ansgar from 7,5
+threat on ansgar at 7,5 (Plain):
+  soldier-1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+  if all land: 10 against 10 hp
+> threat ansgar from 5,5
+threat on ansgar at 5,5 (Plain): no enemy can strike it next phase
+> canto ansgar 5,5
+ansgar cantos 8,5 -> 5,5 via 7,5 6,5
+Canto Raid  turn 5 of 10  player phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 .....B......
+
+B  ansgar           Ansgar L1 outrider         5,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+> threat wren
+threat on wren at 6,3 (Plain): no enemy can strike it next phase
+> wait wren
+wren waits
+Canto Raid  turn 5 of 10  player phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 .....B......
+
+B  ansgar           Ansgar L1 outrider         5,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain  done
+> wait captain
+captain waits
+Canto Raid  turn 5 of 10  player phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A...c
+ 5 .....B......
+
+B  ansgar           Ansgar L1 outrider         5,5    hp 10/20  Plain  done
+A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 percent, 4 hp)  captain  done
+c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain  done
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: move soldier-1 8,4
+soldier-1 moves 11,4 -> 8,4 via 10,4 9,4
+enemy: attack soldier-1 captain
+forecast soldier-1 -> captain: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+soldier-1 attacks captain
+  soldier-1 hits captain for 6 (hp 10)
+  captain crits soldier-1 for 27 (hp 0)
+  soldier-1 hp 0, captain hp 10
+captain gains 30 exp (60)
+soldier-1 falls at 8,4
+Canto Raid  turn 5 of 10  enemy phase  rout  recall 1
+   012345678901
+ 0 ............
+ 1 ....F.......
+ 2 ............
+ 3 ......C.....
+ 4 .......A....
+ 5 .....B......
+
+B  ansgar           Ansgar L1 outrider         5,5    hp 10/20  Plain
+A  captain          Alder Fenn L1 cadet        7,4    hp 10/22  Fort (heals 20 percent, 4 hp)  captain
+C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
+battle won: rout; only recall is left
+battle won: rout

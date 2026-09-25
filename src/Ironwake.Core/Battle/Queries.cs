@@ -8,8 +8,12 @@ namespace Ironwake.Core;
 /// </summary>
 public static class Queries
 {
-    /// <summary>Where the unit may move, section 4, on the board as it stands.</summary>
-    public static Reach Reachable(BattleState state, GameContent content, BattleUnit unit) => state.ReachOf(unit, content);
+    /// <summary>
+    /// Where the unit may move, section 4, on the board as it stands: its Canto's reach
+    /// when it has acted and is owed one (issue 71), else its full reach.
+    /// </summary>
+    public static Reach Reachable(BattleState state, GameContent content, BattleUnit unit) =>
+        state.CantoReachOf(unit, content) ?? state.ReachOf(unit, content);
 
     /// <summary>The enemy units the unit's equipped weapon reaches from where it stands, in id order. Empty when it has no weapon.</summary>
     public static IEnumerable<BattleUnit> Targets(BattleState state, GameContent content, BattleUnit unit)
@@ -120,12 +124,14 @@ public static class Queries
     /// the phase-start healing and events the enemy phase would see are applied. A group
     /// still asleep is not listed and a unit that holds strikes only from its own tile.
     /// Each line reads that phase-start board; an earlier enemy's move or kill in the phase
-    /// is not played out. Null when the unit cannot stand on the tile this phase, or when
-    /// the state is not a player phase. Read-only.
+    /// is not played out. A unit owed a Canto (issue 71) is asked from any tile its Canto
+    /// can end on, since that is where it still chooses to stand. Null when the unit cannot
+    /// stand on the tile this phase, or when the state is not a player phase. Read-only.
     /// </summary>
     public static IReadOnlyList<ThreatLine>? Threats(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
-        if (state.Phase != Side.Player || unit.Side != Side.Player || !CanStandOn(state, content, unit, from))
+        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
         {
             return null;
         }

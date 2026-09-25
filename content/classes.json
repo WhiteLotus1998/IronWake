@@ -59,6 +59,7 @@
       "name": "Outrider",
       "movement": "cavalry",
       "mov": 6,
+      "abilities": ["canto"],
       "weapons": ["lance", "sword"],
       "modifiers": { "hp": 1, "str": 1 },
       "growthModifiers": { "hp": 5, "str": 5 }

@@ -37,6 +37,14 @@ public sealed record UseItem(string UnitId, int Slot, string? TargetId = null) :
 /// </summary>
 public sealed record Retreat(string UnitId, Coord To) : Command;
 
+/// <summary>
+/// Canto (issue 71): after its Attack, Item or Wait, a unit with Canto moves to a tile
+/// within what its first move left of its Mov. Its own tile is a legal destination, so a
+/// Canto declined is this command with the unit's own tile, and the transcript says so.
+/// After it the unit is done for the phase.
+/// </summary>
+public sealed record Canto(string UnitId, Coord To) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

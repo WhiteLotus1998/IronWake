@@ -11,6 +11,8 @@
     { "id": "reasonbreaker", "name": "Reasonbreaker", "text": "+20 hit and avoid against Reason.",
       "effect": { "kind": "combat", "against": { "weapon": "reason" }, "hit": 20, "avoid": 20 } },
     { "id": "faithbreaker", "name": "Faithbreaker", "text": "+20 hit and avoid against Faith.",
-      "effect": { "kind": "combat", "against": { "weapon": "faith" }, "hit": 20, "avoid": 20 } }
+      "effect": { "kind": "combat", "against": { "weapon": "faith" }, "hit": 20, "avoid": 20 } },
+    { "id": "canto", "name": "Canto", "text": "After acting, move again on what the first move left.",
+      "effect": { "kind": "canto" } }
   ]
 }

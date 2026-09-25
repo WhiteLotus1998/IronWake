@@ -30,6 +30,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon), `art` (optional: a combat art the unit knows, issue 68) | `Attack` |
 | `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
 | `wait` | `unit` | `Wait` |
+| `canto` | `unit`, `to` (the unit's own tile declines it, issue 71) | `Canto` |
 | `end` | none | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
@@ -41,7 +42,7 @@ A request with a `query` field. Queries change nothing. Each answers `{"ok":true
 | `query` | fields in | answer fields |
 |---|---|---|
 | `state` | none | `state`: the full state |
-| `reachable` | `unit` | `unit`, `reach`: `origin`, `movement`, `mov`, `tiles`: each `x`, `y`, `cost`, `canEnd`, `path` (the tiles walked after the origin, DECISIONS/0012's tie-break), in the order the core settled them |
+| `reachable` | `unit` (a unit that has acted and is owed a Canto answers with the Canto's reach, issue 71) | `unit`, `reach`: `origin`, `movement`, `mov`, `tiles`: each `x`, `y`, `cost`, `canEnd`, `path` (the tiles walked after the origin, DECISIONS/0012's tie-break), in the order the core settled them |
 | `targets` | `unit` | `unit`, `targets`: enemy ids the equipped weapon reaches from where the unit stands, in id order |
 | `forecast` | `unit`, `target`, `slot` (optional, 0-based), `from` (optional, a tile the unit can still move to, issue 151), `art` (optional, issue 68) | `unit`, `target`, `from`, `forecast` (below), `text`: the console's forecast line and, when they apply, its art, rivalry and pending-retreat lines, joined by `\n` |
 | `threat` | `unit` (a player unit), `from` (optional) | `unit`, `from`, `threats`: each `enemy`, `from`, `slot` (0-based), `weapon` (id), `ifAllLand`, `forecast`; then `ifAllLand` (the sum) and `text`: the console's `threat` block |
@@ -52,7 +53,7 @@ A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side
 
 `protocolVersion`, `rulesVersion`, `mapName`, `map` (full only: the map's canonical `.map` text, `MapFormat.Write`), `turn`, `phase`, `seed`, `scheme`, `recallCharges`, `units`, `awakeGroups`, `fired` (map events spent), `flags`, `rapport` (each `a`, `b`, `points`), `outcome` (`result`: `ongoing`, `won`, `lost`; `reason`; `cause`: `none`, `captain`, `protected`, `timeout`), `historyCount`, `history` (full only: every prior state in this same shape, each with an empty history of its own).
 
-A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`, `weaponPoints` (rank points per weapon type, `sword` to `faith`, issue 67, then `gauntlet`, issue 70; a state without it reads as 0 in every type), `masteryPoints` (mastery points by class id, only classes with points, issue 69; a state without it reads as none).
+A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `canto` (the Mov a Canto unit has left this phase, issue 71; null when none is owed, and a state without it reads as null), `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`, `weaponPoints` (rank points per weapon type, `sword` to `faith`, issue 67, then `gauntlet`, issue 70; a state without it reads as 0 in every type), `masteryPoints` (mastery points by class id, only classes with points, issue 69; a state without it reads as none).
 
 The **full** state (the first line out and the `state` query) reads back to an equal `BattleState` through `ProtocolJson.ReadState`, history and all. The **board** state a command answers with leaves out `map` and `history`, which would make every answer grow with the battle; a renderer reads the map once and follows `terrainChanged`. `outcome`, `maxHp` and `historyCount` are derived and never read back.
 
@@ -70,6 +71,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `rankRaised` | `unit`, `weaponType`, `rank` (the new rank, `e` to `s`; issue 67) |
 | `masteryEarned` | `unit`, `class`, `ability` (the class's mastery ability, now in the unit's `abilities`; issue 69) |
 | `unitWaited` | `unit` |
+| `cantoed` | `unit`, `from`, `to`, `path` (from equal to to and an empty path: the Canto declined) |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
 | `rivalryEnded` | `a`, `b` |

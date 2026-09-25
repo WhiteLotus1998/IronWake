@@ -65,7 +65,7 @@ public static class ContentLoader
     /// <c>art</c> is a combat art (issue 68): a <c>weapon</c> type, the <c>rank</c> it needs,
     /// its extra <c>cost</c> in uses (at least 1), and optional <c>mt</c>, <c>hit</c>,
     /// <c>crit</c>, <c>wt</c> and <c>range</c> deltas, at least one non-zero and
-    /// <c>range</c> never negative.
+    /// <c>range</c> never negative; <c>canto</c> (issue 71) reads nothing but its kind.
     /// </summary>
     private static ImmutableSortedDictionary<string, Ability> ParseAbilities(ContentFile file)
     {
@@ -150,8 +150,11 @@ public static class ContentLoader
                 }
 
                 return art;
+            case "canto":
+                RequireOnly(entry, effect, "effect", "kind");
+                return new CantoEffect();
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat or art");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art or canto");
         }
     }
 
@@ -526,6 +529,7 @@ public static class ContentLoader
             {
                 Mastery = mastery,
                 MasteryPoints = masteryPoints,
+                Abilities = AbilityIds(node, "abilities", abilities),
             });
         }
 

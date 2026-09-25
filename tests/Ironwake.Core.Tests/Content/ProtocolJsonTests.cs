@@ -28,6 +28,7 @@ public class ProtocolJsonTests
         { new RankRaised("wren", WeaponType.Sword, WeaponRank.D), """{"type":"rankRaised","unit":"wren","weaponType":"sword","rank":"d"}""" },
         { new MasteryEarned("wren", "cadet", "axebreaker"), """{"type":"masteryEarned","unit":"wren","class":"cadet","ability":"axebreaker"}""" },
         { new UnitWaited("wren"), """{"type":"unitWaited","unit":"wren"}""" },
+        { new Cantoed("ansgar", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"cantoed","unit":"ansgar","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
         { new RapportGained("teodor", "wren", 4, 8), """{"type":"rapportGained","a":"teodor","b":"wren","amount":4,"total":8,"outOf":null}""" },
@@ -102,6 +103,7 @@ public class ProtocolJsonTests
         { new UseItem("mira", 0, "wren"), """{"type":"item","unit":"mira","slot":0,"target":"wren"}""" },
         { new Retreat("brigand-1", A), """{"type":"retreat","unit":"brigand-1","to":{"x":1,"y":2}}""" },
         { new Wait("wren"), """{"type":"wait","unit":"wren"}""" },
+        { new Canto("ansgar", B), """{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""" },
         { new EndPhase(), """{"type":"end"}""" },
         { new Recall(4), """{"type":"recall","toIndex":4}""" },
     };
@@ -212,6 +214,24 @@ public class ProtocolJsonTests
         };
 
         Assert.Equal(marked, ProtocolJson.ReadState(ProtocolJson.State(marked, content), content));
+    }
+
+    /// <summary>Issue 71: a Canto owed travels in <c>canto</c>, null when none is, and a state written before the field existed reads as none.</summary>
+    [Fact]
+    public void AStateReadsBackEqualWithACantoOwed()
+    {
+        var (content, state) = PlayedTollgate();
+        var captain = state.UnitsOf(Side.Player).First();
+        var owed = (state with { History = ValueList<BattleState>.Empty }).WithUnit(captain with { Acted = true, Canto = 3 });
+
+        var json = ProtocolJson.State(owed, content);
+        Assert.Contains("\"canto\":3", json);
+        Assert.Contains("\"canto\":null", json);
+        Assert.Equal(owed, ProtocolJson.ReadState(json, content));
+
+        var older = json.Replace(",\"canto\":null", string.Empty);
+        Assert.DoesNotContain("\"canto\":null", older);
+        Assert.Equal(owed, ProtocolJson.ReadState(older, content));
     }
 
     /// <summary>Issue 67: a unit's rank points travel in <c>weaponPoints</c>, and a state written before the field existed reads as rank E.</summary>

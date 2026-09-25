@@ -5,6 +5,8 @@ namespace Ironwake.Core;
 /// in the class, usable weapon types, and growth modifiers. <see cref="Mastery"/> names the
 /// class's mastery ability in <c>abilities.json</c>, or null, and <see cref="MasteryPoints"/>
 /// the combats fought in the class that earn it (issue 69, <see cref="Masteries"/>).
+/// <see cref="Abilities"/> are held while in the class and lost on leaving it, as Canto on
+/// the cavalry classes is (issue 71).
 /// </summary>
 public sealed record UnitClass(
     string Id,
@@ -19,6 +21,9 @@ public sealed record UnitClass(
 
     /// <summary>The mastery points that earn <see cref="Mastery"/>; content names both or neither, and 0 when there is none.</summary>
     public int MasteryPoints { get; init; }
+
+    /// <summary>Ability ids every unit in the class holds while it is in the class, in content order.</summary>
+    public ValueList<string> Abilities { get; init; } = ValueList<string>.Empty;
 
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 }
