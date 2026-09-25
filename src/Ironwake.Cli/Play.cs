@@ -38,7 +38,8 @@ public sealed class PlaySession
           wait <unit>              end the unit's action
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
-          recall <n>               rewind to history state n, a player-phase state (spends a charge)
+          recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
+          recall list              every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   list the state each player turn started at, and the charges left
           forecast <unit> <target> [slot] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach
@@ -61,6 +62,13 @@ public sealed class PlaySession
     /// it in the enemy phase that followed. A Recall drops the entries it undoes.
     /// </summary>
     private readonly List<ExposureEntry> _exposure = new();
+
+    /// <summary>
+    /// The command applied from each history state, by index (issue 75): entry i is what
+    /// turned history state i into the next one, so <c>recall list</c> can name the command
+    /// that made each state. A Recall drops the entries it undoes.
+    /// </summary>
+    private readonly List<string> _made = new();
     private BattleState _state;
     private int _line;
     private string _command = "";
@@ -303,17 +311,21 @@ public sealed class PlaySession
                 Error("usage: end");
                 break;
             case "recall" when words.Length == 2 && int.TryParse(words[1], out var index):
-                if (Apply(new Recall(index)))
+                var undone = index >= 0 && index < _state.History.Count ? RecallCost.Of(_state, index) : null;
+                if (Apply(new Recall(index), undone is null ? null : "undone: " + UndoText(undone) + "\n" + SameRolls))
                 {
                     _exposure.RemoveAll(entry => entry.HistoryAt >= index);
                 }
 
                 break;
+            case "recall" when words.Length == 2 && words[1] == "list":
+                ListRecallHistory();
+                break;
             case "recall" when words.Length == 1:
                 ListRecallTargets();
                 break;
             case "recall":
-                Error("usage: recall <n>  (history holds " + _state.History.Count + " states)");
+                Error("usage: recall <n> | recall list  (history holds " + _state.History.Count + " states)");
                 break;
             case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out _):
                 if (TrySlot(words[1], words[2], out var itemSlot))
@@ -376,7 +388,11 @@ public sealed class PlaySession
         }
     }
 
-    private bool Apply(Command command)
+    /// <summary>
+    /// Applies a player command and prints its events, then <paramref name="after"/> if it was
+    /// accepted, then the board. False, with the rejection printed, if it was refused.
+    /// </summary>
+    private bool Apply(Command command, string? after = null)
     {
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
@@ -385,10 +401,16 @@ public sealed class PlaySession
             return false;
         }
 
+        Record(command);
         _state = result.Next;
         foreach (var e in result.Events)
         {
             _out.WriteLine(Describe(e));
+        }
+
+        if (after is not null)
+        {
+            _out.WriteLine(after);
         }
 
         if (CantoOwed(command) is { } owed)
@@ -451,6 +473,7 @@ public sealed class PlaySession
                 throw new InvalidOperationException($"the enemy AI's {command} was rejected: {result.Rejection!.Message}");
             }
 
+            Record(command);
             _state = result.Next;
             foreach (var e in result.Events)
             {
@@ -481,6 +504,113 @@ public sealed class PlaySession
             .ToList();
         var list = starts.Count == 0 ? "none yet" : string.Join(", ", starts);
         _out.WriteLine($"player turns start at: {list}; history holds {_state.History.Count} states; {_state.RecallCharges} charges left");
+    }
+
+    /// <summary>The line a rewind prints under what it undoes: rolls are keyed (section 7), so a Recall is a choice and never a reroll.</summary>
+    private const string SameRolls = "the rolls do not change: the same attack will roll the same";
+
+    /// <summary>
+    /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
+    /// state moves: a Recall truncates it to the state it returns to, anything else names
+    /// the command applied from the state it leaves.
+    /// </summary>
+    private void Record(Command command)
+    {
+        if (command is Recall recall)
+        {
+            _made.RemoveRange(recall.ToIndex, _made.Count - recall.ToIndex);
+            return;
+        }
+
+        if (_made.Count == _state.History.Count)
+        {
+            _made.Add(Describe(command));
+        }
+    }
+
+    /// <summary>
+    /// The Recall browser (issue 75): every history state a Recall may return to, with the
+    /// turn, the command that made it, and what a rewind there gives back, from
+    /// <see cref="RecallCost.Of"/>, which the rewind itself prints too. Spends nothing.
+    /// </summary>
+    private void ListRecallHistory()
+    {
+        var total = _state.Map.RecallCharges;
+        var spent = total - _state.RecallCharges;
+        _out.WriteLine($"recall: {_state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same");
+        if (_state.RecallCharges < 1)
+        {
+            _out.WriteLine("  no charges left: nothing more can be recalled on this map");
+            return;
+        }
+
+        var targets = _state.RecallTargets().ToList();
+        if (targets.Count == 0)
+        {
+            _out.WriteLine("  no state to return to yet");
+            return;
+        }
+
+        foreach (var i in targets)
+        {
+            var made = i == 0
+                ? "the start"
+                : _state.History[i - 1].Phase != Side.Player
+                    ? "turn start"
+                    : i - 1 < _made.Count ? "after " + _made[i - 1] : "after ?";
+            _out.WriteLine($"  state {i}  turn {_state.History[i].Turn}  {made}  undoes: {UndoText(RecallCost.Of(_state, i))}");
+        }
+    }
+
+    /// <summary>A rewind's cost in the console's words, the player's gains given back first, then what comes back to the player.</summary>
+    public static string UndoText(RecallCost cost)
+    {
+        if (cost.IsEmpty)
+        {
+            return "moves only";
+        }
+
+        var back = new List<string>();
+        if (cost.KillsGivenBack.Count > 0)
+        {
+            back.Add($"{cost.KillsGivenBack.Count} {(cost.KillsGivenBack.Count == 1 ? "kill" : "kills")} ({string.Join(", ", cost.KillsGivenBack)})");
+        }
+
+        if (cost.ExpGivenBack > 0)
+        {
+            back.Add($"{cost.ExpGivenBack} exp");
+        }
+
+        if (cost.LevelsGivenBack > 0)
+        {
+            back.Add($"{cost.LevelsGivenBack} {(cost.LevelsGivenBack == 1 ? "level" : "levels")}");
+        }
+
+        if (cost.EnemyHpBack > 0)
+        {
+            back.Add($"{cost.EnemyHpBack} enemy hp");
+        }
+
+        var returned = new List<string>();
+        returned.AddRange(cost.UnitsReturned.Select(id => id + " alive"));
+        if (cost.HpReturned > 0)
+        {
+            returned.Add($"{cost.HpReturned} hp");
+        }
+
+        returned.AddRange(cost.ArrivalsUndone.Select(id => id + " not yet arrived"));
+        var parts = new List<string>();
+        if (back.Count > 0)
+        {
+            parts.Add("gives back " + string.Join(", ", back));
+        }
+
+        if (returned.Count > 0)
+        {
+            parts.Add("returns " + string.Join(", ", returned));
+        }
+
+        return string.Join("; ", parts);
     }
 
     private void AnnounceOutcome()
@@ -879,7 +1009,8 @@ public sealed class PlaySession
     private static string Describe(Command command) => command switch
     {
         Move m => $"move {m.UnitId} {m.To}",
-        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)),
+        Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
+        Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",

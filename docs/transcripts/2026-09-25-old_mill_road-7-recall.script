@@ -1,0 +1,13 @@
+move captain 1,4
+move wren 2,6
+end
+recall list
+forecast wren brigand-1
+attack wren brigand-1 1
+recall list
+recall 11
+attack wren brigand-1 1
+recall 2
+recall 0
+recall list
+recall 0
