@@ -1,0 +1,80 @@
+move teodor 10,9
+move captain 9,10
+move wren 8,10
+move ottilie 7,10
+wait pell
+end
+move pell 10,9
+attack pell rider-1
+move wren 9,9
+attack wren rider-1
+reach brigand-1
+reach archer-2
+move teodor 10,10
+wait ottilie
+wait captain
+end
+forecast pell brigand-1 from 10,7
+forecast pell brigand-1 from 8,9
+forecast wren brigand-1 from 8,8
+forecast wren brigand-1 from 9,7
+forecast captain archer-2 from 9,7
+forecast captain archer-2 from 10,6
+forecast teodor brigand-1 from 9,7
+forecast ottilie brigand-1 from 6,7
+move pell 10,7
+attack pell brigand-1
+move wren 9,7
+attack wren archer-2
+move teodor 10,6
+attack teodor archer-2
+reach ottilie
+reach captain
+show pell
+move ottilie 9,8
+move captain 8,7
+end
+reach pell
+forecast ottilie soldier-1 from 6,4
+move pell 7,4
+move pell 10,4
+move ottilie 8,6
+move captain 8,4
+move wren 9,4
+move teodor 9,5
+end
+forecast ottilie soldier-1 from 6,4
+forecast pell soldier-1 from 6,4
+forecast captain soldier-1 from 6,3
+forecast teodor soldier-1 from 6,3
+forecast wren soldier-1 from 6,3
+forecast ottilie archer-1 from 6,3
+reach pell
+reach ottilie
+move pell 7,4
+move ottilie 6,5
+end
+forecast pell soldier-1 from 6,4
+forecast ottilie soldier-1 from 6,4
+forecast pell bandit_leader-1 from 6,3
+move pell 6,4
+attack pell soldier-1
+move captain 6,3
+attack captain soldier-1
+wait ottilie
+wait wren
+wait teodor
+end
+forecast captain archer-1 from 5,1
+forecast captain bandit_leader-1 from 6,2
+forecast captain archer-1 from 6,2
+move captain 5,1
+attack captain archer-1
+move pell 6,3
+attack pell bandit_leader-1
+move wren 6,4
+move teodor 7,4
+move ottilie 8,4
+end
+move captain 7,1
+attack captain bandit_leader-1
