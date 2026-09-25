@@ -25,8 +25,13 @@ public sealed record UnitWaited(string UnitId) : GameEvent;
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 
-/// <summary>Two adjacent recruits gained rapport at the end of a player phase (issue 16): both rates, and the pair's total after.</summary>
-public sealed record RapportGained(string A, string B, int Amount, int Total) : GameEvent;
+/// <summary>
+/// Two adjacent recruits gained rapport at the end of a player phase (issue 16): both rates,
+/// and the pair's total after. <paramref name="OutOf"/> is the overwrite threshold when the
+/// pair were rivals before the gain, so the line can print how far the cure has come, and
+/// null for a pair of one region.
+/// </summary>
+public sealed record RapportGained(string A, string B, int Amount, int Total, int? OutOf = null) : GameEvent;
 
 /// <summary>A rival pair's rapport reached the overwrite threshold; they are rivals no longer.</summary>
 public sealed record RivalryEnded(string A, string B) : GameEvent;

@@ -746,7 +746,7 @@ public sealed class PlaySession
             case FlagSet f:
                 return $"  flag {f.Flag} is set";
             case RapportGained g:
-                return $"rapport {g.A} and {g.B} +{g.Amount} ({g.Total})";
+                return $"rapport {g.A} and {g.B} +{g.Amount} ({g.Total}{(g.OutOf is { } outOf ? $" of {outOf}" : "")})";
             case RivalryEnded r:
                 return $"{r.A} and {r.B} are rivals no longer";
             case Recalled r:

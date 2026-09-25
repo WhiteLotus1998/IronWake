@@ -12,6 +12,6 @@
       { "cha": 5, "rate": 3 },
       { "cha": 8, "rate": 4 }
     ],
-    "overwriteAt": 16
+    "overwriteAt": 8
   }
 }
