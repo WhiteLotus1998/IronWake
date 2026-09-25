@@ -13,16 +13,16 @@ public class HitBandTests
     [Fact]
     public void TheIronArmCutsEveryIronWeaponsHitByFifteenAndNothingElse()
     {
-        var content = HitBand.Content(Starter, HitBandArm.IronHit15);
+        var content = FormulaArms.Content(Starter, FormulaArm.IronHit15);
 
         foreach (var (id, weapon) in Starter.Weapons)
         {
-            var expected = id.StartsWith("iron_", StringComparison.Ordinal) ? weapon.Hit - HitBand.IronHitCut : weapon.Hit;
+            var expected = id.StartsWith("iron_", StringComparison.Ordinal) ? weapon.Hit - FormulaArms.IronHitCut : weapon.Hit;
             Assert.Equal(expected, content.Weapons[id].Hit);
         }
 
         Assert.Contains(Starter.Weapons.Keys, id => id.StartsWith("iron_", StringComparison.Ordinal));
-        Assert.Same(Starter, HitBand.Content(Starter, HitBandArm.Main));
+        Assert.Same(Starter, FormulaArms.Content(Starter, FormulaArm.Main));
     }
 
     [Fact]

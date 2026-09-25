@@ -5,31 +5,6 @@ using Ironwake.Core;
 namespace Ironwake.Sim;
 
 /// <summary>
-/// The hit-band table of issue 158: the raw hit chance of every strike side in the
-/// heuristic's games, both sides, as a histogram, beside the doubling rate. A cell of
-/// the table is one arm under one roll scheme on one map. The arms that change content
-/// (the iron tier's hit 15 lower) are applied here to the loaded content, so the content
-/// files and the formulas on main are untouched by a measurement.
-/// </summary>
-public enum HitBandArm
-{
-    /// <summary>Main as it ships: burden against Str / 5, speed once in avoid, content as loaded.</summary>
-    Main,
-
-    /// <summary>Arm 1: burden against the whole of Str.</summary>
-    FullStr,
-
-    /// <summary>Arm 2: arm 1 with attack speed counted twice in avoid.</summary>
-    FullStrSpeedTwice,
-
-    /// <summary>Arm 3: content only, every iron-tier weapon's hit 15 lower.</summary>
-    IronHit15,
-
-    /// <summary>Arm 4: arm 2's formulas with arm 3's content.</summary>
-    FullStrSpeedTwiceIronHit15,
-}
-
-/// <summary>
 /// A tally of raw hit chances by side, read from the forecast of every attack command
 /// before the resolver applies it (the same forecast the player and the AI read), so a
 /// side that strikes counts once per combat it strikes in, and doubles are counted beside.
@@ -40,6 +15,7 @@ public sealed class HitTally
     private readonly int[,] buckets = new int[2, Buckets];
     private readonly int[] combats = new int[2];
     private readonly int[] doubles = new int[2];
+    private readonly SortedDictionary<string, int[]>[] byTerrain = { new(StringComparer.Ordinal), new(StringComparer.Ordinal) };
 
     public void Record(BattleState state, GameContent content, Command command)
     {
@@ -61,11 +37,11 @@ public sealed class HitTally
             return;
         }
 
-        Count(unit.Side, forecast.Attacker);
-        Count(target.Side, forecast.Defender);
+        Count(unit.Side, forecast.Attacker, state.Map.TerrainIdAt(target.At));
+        Count(target.Side, forecast.Defender, state.Map.TerrainIdAt(unit.At));
     }
 
-    private void Count(Side side, SideForecast forecast)
+    private void Count(Side side, SideForecast forecast, string defenderTerrain)
     {
         if (!forecast.Strikes)
         {
@@ -73,7 +49,15 @@ public sealed class HitTally
         }
 
         var index = side == Side.Player ? 0 : 1;
-        buckets[index, Math.Min(forecast.HitChance / 10, Buckets - 1)]++;
+        var bucket = Math.Min(forecast.HitChance / 10, Buckets - 1);
+        buckets[index, bucket]++;
+        if (!byTerrain[index].TryGetValue(defenderTerrain, out var row))
+        {
+            row = new int[Buckets];
+            byTerrain[index][defenderTerrain] = row;
+        }
+
+        row[bucket]++;
         combats[index]++;
         if (forecast.Doubles)
         {
@@ -101,60 +85,52 @@ public sealed class HitTally
 
         return text.ToString().TrimEnd('\n');
     }
-}
 
-public static class HitBand
-{
-    public const int IronHitCut = 15;
-
-    /// <summary>The content an arm measures: main's as loaded, or the iron tier (every weapon whose id starts with <c>iron_</c>) with its hit cut by 15.</summary>
-    public static GameContent Content(GameContent content, HitBandArm arm)
+    /// <summary>
+    /// The terrain column (Design Table, eighteenth round): one row per side and per terrain
+    /// id the struck unit stood on, with the ten-wide buckets and the strike count, so
+    /// "terrain visibly below" reads off the table. The attacker's strike is filed under the
+    /// target's tile and the counter under the attacker's.
+    /// </summary>
+    public string TerrainLines(string prefix)
     {
-        if (arm != HitBandArm.IronHit15 && arm != HitBandArm.FullStrSpeedTwiceIronHit15)
+        var text = new StringBuilder();
+        for (var index = 0; index < 2; index++)
         {
-            return content;
-        }
-
-        var weapons = content.Weapons.ToBuilder();
-        foreach (var (id, weapon) in content.Weapons)
-        {
-            if (id.StartsWith("iron_", StringComparison.Ordinal))
+            var side = index == 0 ? "player" : "enemy";
+            foreach (var (terrain, row) in byTerrain[index])
             {
-                weapons[id] = weapon with { Hit = weapon.Hit - IronHitCut };
+                text.Append(prefix).Append(' ').Append(side).Append(" into ").Append(terrain).Append(':');
+                for (var bucket = 0; bucket < Buckets; bucket++)
+                {
+                    var label = bucket == Buckets - 1 ? "100" : $"{bucket * 10}-{bucket * 10 + 9}";
+                    text.Append(' ').Append(label).Append(' ').Append(row[bucket]);
+                }
+
+                text.Append(", strikes ").Append(row.Sum()).Append('\n');
             }
         }
 
-        return content with { Weapons = weapons.ToImmutable() };
+        return text.ToString().TrimEnd('\n');
     }
+}
 
-    /// <summary>The section 5 formulas an arm fights under.</summary>
-    public static CombatFormula Formula(HitBandArm arm) => arm switch
+/// <summary>
+/// The hit-band table of issue 158: the raw hit chance of every strike side in the
+/// heuristic's games, both sides, as a histogram, beside the doubling rate. A cell of
+/// the table is one arm (<see cref="FormulaArm"/>) under one roll scheme on one map.
+/// </summary>
+public static class HitBand
+{
+    /// <summary>One cell: gate 1 with the tally attached, gate 4 on that baseline, the two histogram rows, and the terrain rows.</summary>
+    public static IReadOnlyList<string> Cell(GameContent loaded, MapDefinition map, string id, int seeds, FormulaArm arm, RollScheme scheme)
     {
-        HitBandArm.Main or HitBandArm.IronHit15 => CombatFormula.Standard,
-        HitBandArm.FullStr => CombatFormula.FullStrBurden,
-        HitBandArm.FullStrSpeedTwice or HitBandArm.FullStrSpeedTwiceIronHit15 => CombatFormula.FullStrBurdenSpeedTwice,
-        _ => throw new ArgumentOutOfRangeException(nameof(arm), arm, "unknown arm"),
-    };
-
-    public static string Name(HitBandArm arm) => arm switch
-    {
-        HitBandArm.Main => "main",
-        HitBandArm.FullStr => "arm 1 (full Str)",
-        HitBandArm.FullStrSpeedTwice => "arm 2 (full Str, speed twice)",
-        HitBandArm.IronHit15 => "arm 3 (iron hit -15)",
-        HitBandArm.FullStrSpeedTwiceIronHit15 => "arm 4 (arm 2 + iron hit -15)",
-        _ => throw new ArgumentOutOfRangeException(nameof(arm), arm, "unknown arm"),
-    };
-
-    /// <summary>One cell: gate 1 with the tally attached, gate 4 on that baseline, and the two histogram rows.</summary>
-    public static IReadOnlyList<string> Cell(GameContent loaded, MapDefinition map, string id, int seeds, HitBandArm arm, RollScheme scheme)
-    {
-        var content = Content(loaded, arm);
+        var content = FormulaArms.Content(loaded, arm);
         var hits = new HitTally();
-        var prefix = $"hitband: {id}, {Name(arm)}, {Gates.Name(scheme)}";
-        var formula = Formula(arm);
+        var prefix = $"hitband: {id}, {FormulaArms.Name(arm)}, {Gates.Name(scheme)}";
+        var formula = FormulaArms.Formula(arm);
         var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme, hits, formula);
         var gate4 = Gates.Gate4(content, map, id, baseline, scheme, formula);
-        return new[] { prefix, hits.Lines(prefix), gate1.Line, gate4.Line };
+        return new[] { prefix, hits.Lines(prefix), hits.TerrainLines(prefix), gate1.Line, gate4.Line };
     }
 }
