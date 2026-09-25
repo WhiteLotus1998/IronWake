@@ -8,6 +8,9 @@ name: partner
 # fires, so a long argument runs to its end at a round every twenty minutes
 # instead of dying at an hour boundary. Hard stop: eight comments in an hour.
 # A refused wake (routine paused, daily cap) is logged, not failed.
+# Only the owner's account wakes anything: every partner, routine, and
+# Critic posts from it, so a comment from any other account is a stranger
+# on a public repo, and the job is skipped before any secret is loaded.
 
 on:
   issue_comment:
@@ -15,7 +18,10 @@ on:
 
 jobs:
   wake:
-    if: contains(github.event.issue.labels.*.name, 'design-table') || contains(github.event.issue.labels.*.name, 'fork')
+    if: >-
+      github.event.comment.user.login == github.repository_owner &&
+      (contains(github.event.issue.labels.*.name, 'design-table') ||
+       contains(github.event.issue.labels.*.name, 'fork'))
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
