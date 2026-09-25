@@ -19,6 +19,7 @@ public enum RejectionReason
     NothingToHeal,
     NoRecallCharges,
     NoSuchHistoryIndex,
+    NotAPlayerPhase,
     BattleOver,
     UnknownCommand,
 }

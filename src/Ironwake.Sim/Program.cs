@@ -422,7 +422,9 @@ public static class Program
     /// Plays random legal commands (with a Recall now and then) from <paramref name="random"/>,
     /// or replays <paramref name="replay"/>, recording what was played into
     /// <paramref name="record"/>. Returns the final canonical state and the event log.
-    /// A rejected command is a harness fault and throws. Every Attack's forecast, asked
+    /// The random alphabet also recalls to the middle of the raw history, which may fall
+    /// inside an enemy phase; that refusal (issue 190) is expected, leaves the state as it
+    /// was, and is not recorded. Any other rejected command is a harness fault and throws. Every Attack's forecast, asked
     /// before it is applied, is counted against its combat in <paramref name="tally"/>.
     /// </summary>
     private static (string State, string Events) Run(
@@ -445,6 +447,12 @@ public static class Program
             else
             {
                 var legal = Resolver.Legal(state, content).ToList();
+                var targets = state.RecallTargets().ToList();
+                if (state.RecallCharges > 0 && targets.Count > 0)
+                {
+                    legal.Add(new Recall(targets[targets.Count / 2]));
+                }
+
                 if (state.RecallCharges > 0 && state.History.Count > 0)
                 {
                     legal.Add(new Recall(state.History.Count / 2));
@@ -467,6 +475,11 @@ public static class Program
             var result = Resolver.Apply(state, content, command);
             if (!result.Accepted)
             {
+                if (replay is null && command is Recall && result.Rejection!.Reason == RejectionReason.NotAPlayerPhase && result.Next == state)
+                {
+                    continue;
+                }
+
                 throw new InvalidOperationException($"{command} was rejected: {result.Rejection!.Message}");
             }
 

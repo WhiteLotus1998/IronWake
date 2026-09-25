@@ -43,6 +43,14 @@ public sealed record BattleState(
             var other => other,
         };
 
+    /// <summary>
+    /// The history indices a Recall may target (DESIGN.md section 7): the player-phase
+    /// states, oldest first. Recall is the player's action, so an enemy phase's own states
+    /// are never a target (issue 190).
+    /// </summary>
+    public IEnumerable<int> RecallTargets() =>
+        Enumerable.Range(0, History.Count).Where(i => History[i].Phase == Side.Player);
+
     /// <summary>This state with a group woken. Idempotent; the list stays sorted.</summary>
     public BattleState Wake(string group)
     {

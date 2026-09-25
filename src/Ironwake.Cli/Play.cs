@@ -36,7 +36,8 @@ public sealed class PlaySession
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
-          recall <n>               rewind to history state n (spends a charge)
+          recall <n>               rewind to history state n, a player-phase state (spends a charge)
+          recall                   list the state each player turn started at, and the charges left
           forecast <unit> <target> [slot] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
@@ -254,6 +255,9 @@ public sealed class PlaySession
             case "recall" when words.Length == 2 && int.TryParse(words[1], out var index):
                 Apply(new Recall(index));
                 break;
+            case "recall" when words.Length == 1:
+                ListRecallTargets();
+                break;
             case "recall":
                 Error("usage: recall <n>  (history holds " + _state.History.Count + " states)");
                 break;
@@ -374,6 +378,20 @@ public sealed class PlaySession
 
         _out.Write(MapRenderer.Render(_state, _content));
         AnnounceOutcome();
+    }
+
+    /// <summary>
+    /// Prints the history index at which each player phase in the history began, so a
+    /// player can find the n for <c>recall n</c> (issue 190). Spends nothing.
+    /// </summary>
+    private void ListRecallTargets()
+    {
+        var starts = _state.RecallTargets()
+            .Where(i => i == 0 || _state.History[i - 1].Phase != Side.Player)
+            .Select(i => $"turn {_state.History[i].Turn} state {i}")
+            .ToList();
+        var list = starts.Count == 0 ? "none yet" : string.Join(", ", starts);
+        _out.WriteLine($"player turns start at: {list}; history holds {_state.History.Count} states; {_state.RecallCharges} charges left");
     }
 
     private void AnnounceOutcome()

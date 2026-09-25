@@ -89,13 +89,14 @@ public class DeterminismTests
 
     private static Command Pick(List<Command> legal, Random random) => legal[random.Next(legal.Count)];
 
-    /// <summary>The resolver's legal commands plus, when a charge is left, one Recall to the middle of the history.</summary>
+    /// <summary>The resolver's legal commands plus, when a charge is left, one Recall to the middle of the player-phase states in the history.</summary>
     public static List<Command> Legal(BattleState state)
     {
         var legal = Resolver.Legal(state, Starter).ToList();
-        if (state.RecallCharges > 0 && state.History.Count > 0)
+        var targets = state.RecallTargets().ToList();
+        if (state.RecallCharges > 0 && targets.Count > 0)
         {
-            legal.Add(new Recall(state.History.Count / 2));
+            legal.Add(new Recall(targets[targets.Count / 2]));
         }
 
         return legal;

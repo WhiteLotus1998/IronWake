@@ -137,7 +137,7 @@ public class TurnLoopTests
         Assert.Equal(RejectionReason.BattleOver, lost.Refused(new EndPhase()).Reason);
         Assert.Empty(Resolver.Legal(lost, Starter));
 
-        var recalled = lost.Do(new Recall(1));
+        var recalled = lost.Do(new Recall(0));
         Assert.Equal(BattleOutcome.Ongoing, recalled.Outcome);
         Assert.NotEmpty(Resolver.Legal(recalled, Starter));
     }

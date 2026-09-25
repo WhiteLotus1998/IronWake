@@ -603,6 +603,24 @@ public static class Resolver
                 RejectionReason.NoSuchHistoryIndex, $"history holds {state.History.Count} states; there is no state {recall.ToIndex} to recall"));
         }
 
+        var target = state.History[recall.ToIndex];
+        if (target.Phase != Side.Player)
+        {
+            var targets = state.RecallTargets().ToList();
+            var before = targets.LastOrDefault(i => i < recall.ToIndex, -1);
+            var after = targets.FirstOrDefault(i => i > recall.ToIndex, -1);
+            var nearest = (before, after) switch
+            {
+                (>= 0, >= 0) => $"; the nearest player-phase states are {before} and {after}",
+                (>= 0, _) => $"; the nearest player-phase state is {before}",
+                (_, >= 0) => $"; the nearest player-phase state is {after}",
+                _ => "",
+            };
+            return new ApplyResult(state, ValueList<GameEvent>.Empty, new Rejection(
+                RejectionReason.NotAPlayerPhase,
+                $"state {recall.ToIndex} is inside the enemy phase of turn {target.Turn}; Recall returns only to a player phase{nearest}"));
+        }
+
         var kept = new List<BattleState>(recall.ToIndex);
         for (var i = 0; i < recall.ToIndex; i++)
         {
