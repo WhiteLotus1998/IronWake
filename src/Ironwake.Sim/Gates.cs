@@ -457,6 +457,12 @@ public static class Gates
         public double ExpectedCrits { get; private set; }
         public int WrongDamage { get; private set; }
 
+        /// <summary>Combats where a side made more strikes than its forecast's <see cref="SideForecast.StrikeCount"/>, or, with both alive at the end, a different number (issue 70).</summary>
+        public int WrongStrikeCounts { get; private set; }
+
+        /// <summary>Combats where either side fought with a multi-strike round, a gauntlet (issue 70).</summary>
+        public int GauntletCombats { get; private set; }
+
         /// <summary>Counts one combat: the forecast asked before the attack against the strikes it produced.</summary>
         public void Count(CombatForecast forecast, CombatFought fought)
         {
@@ -468,6 +474,16 @@ public static class Gates
             }
 
             forecast = overProtocol;
+            GauntletCombats += forecast.Attacker.StrikesPerRound > 1 || forecast.Defender.StrikesPerRound > 1 ? 1 : 0;
+            var bothAlive = fought.AttackerHpAfter > 0 && fought.TargetHpAfter > 0;
+            var attackerMade = fought.Strikes.Count(s => s.AttackerId == fought.AttackerId);
+            var defenderMade = fought.Strikes.Count - attackerMade;
+            if (!StrikeCountHolds(attackerMade, forecast.Attacker.StrikeCount, bothAlive)
+                || !StrikeCountHolds(defenderMade, forecast.Defender.StrikeCount, bothAlive))
+            {
+                WrongStrikeCounts++;
+            }
+
             foreach (var strike in fought.Strikes)
             {
                 var side = strike.AttackerId == fought.AttackerId ? forecast.Attacker : forecast.Defender;
@@ -491,6 +507,9 @@ public static class Gates
             }
         }
 
+        private static bool StrikeCountHolds(int made, int forecast, bool bothAlive) =>
+            bothAlive ? made == forecast : made <= forecast;
+
         /// <summary>Hits and crits within three standard errors of the displayed probabilities, damage exact, at least <paramref name="minimum"/> combats.</summary>
         public GateResult Result(int minimum)
         {
@@ -498,9 +517,10 @@ public static class Gates
             var critSe = Math.Sqrt(Math.Max(1, ExpectedCrits * (1 - ExpectedCrits / Math.Max(1, Hits))));
             var hitOk = Math.Abs(Hits - ExpectedHits) <= 3 * hitSe;
             var critOk = Math.Abs(Crits - ExpectedCrits) <= 3 * critSe;
-            var passed = Combats >= minimum && WrongDamage == 0 && ProtocolMismatches == 0 && hitOk && critOk;
+            var passed = Combats >= minimum && WrongDamage == 0 && WrongStrikeCounts == 0 && ProtocolMismatches == 0 && hitOk && critOk;
             return new GateResult(
-                $"gate 5 forecast honesty: {Combats} combats, {Strikes} strikes, hits {Hits} expected {ExpectedHits:F1}, crits {Crits} expected {ExpectedCrits:F1}, damage mismatches {WrongDamage}"
+                $"gate 5 forecast honesty: {Combats} combats ({GauntletCombats} with gauntlets), {Strikes} strikes, hits {Hits} expected {ExpectedHits:F1}, crits {Crits} expected {ExpectedCrits:F1}, damage mismatches {WrongDamage}"
+                + (WrongStrikeCounts > 0 ? $", {WrongStrikeCounts} combats with a strike count the forecast did not show" : "")
                 + (ProtocolMismatches > 0 ? $", {ProtocolMismatches} forecasts changed over the protocol" : "")
                 + (Combats < minimum ? $", under the {minimum} required" : "") + $": {Verdict(passed)}",
                 passed);
@@ -516,6 +536,9 @@ public static class Gates
     /// count covers both the formulas and the resolver's use of them. Half the attackers
     /// with a whole weapon declare a drawn combat art (issue 68, <see cref="DrawnArt"/>),
     /// from a generator of their own so the rest of the stream draws what it drew before.
+    /// One fighter in four on either side swaps its weapon for a drawn gauntlet (issue 70,
+    /// <see cref="DrawnGauntlet"/>), from a third generator, so the stream covers two-strike
+    /// rounds whether or not content ships a gauntlet yet.
     /// </summary>
     public static void ForecastStream(GameContent content, Gates.ForecastTally tally, int combats, int seed = 1)
     {
@@ -531,6 +554,7 @@ public static class Gates
 
         var terrains = content.Terrain.Values.ToList();
         var arts = new Random(seed + 68);
+        var fists = new Random(seed + 70);
         var counted = 0;
         for (var attempt = 0; counted < combats && attempt < combats * 20; attempt++)
         {
@@ -541,9 +565,11 @@ public static class Gates
                 continue;
             }
 
+            attacker = fists.Next(4) == 0 ? Gauntleted(attacker, fists) : attacker;
+            defender = fists.Next(4) == 0 ? Gauntleted(defender, fists) : defender;
             if (!attacker.Broken && arts.Next(2) == 0)
             {
-                var weapon = DrawnArt(arts).Apply(attacker.Weapon);
+                var weapon = DrawnArt(arts).Apply(attacker.Weapon!);
                 attacker = new Combatant(attacker.Unit, attacker.Class, weapon, attacker.Terrain, attacker.Hp, abilities: attacker.Abilities);
             }
 
@@ -617,6 +643,19 @@ public static class Gates
     /// <summary>A combat art with drawn deltas (issue 68), so gate 5 covers arts whether or not content ships one yet; its weapon type and rank are the resolver's checks, not the formulas', and are not read here.</summary>
     public static CombatArtEffect DrawnArt(Random random) => new(
         WeaponType.Sword, WeaponRank.E, 1 + random.Next(3), random.Next(-2, 6), random.Next(-20, 21), random.Next(-5, 21), random.Next(0, 6), random.Next(2));
+
+    /// <summary>A gauntlet with drawn numbers (issue 70): low Mt, high hit, a little crit, light, range 1.</summary>
+    public static Weapon DrawnGauntlet(Random random) => new(
+        "sim_gauntlet", "Sim Gauntlet", WeaponType.Gauntlet, 1 + random.Next(5), 70 + random.Next(31), random.Next(11), random.Next(5), 1, 1, 30, ValueList<MovementType>.Empty);
+
+    /// <summary>The fighter with a drawn gauntlet in hand, its class widened to wield one; everything else as drawn.</summary>
+    private static Combatant Gauntleted(Combatant fighter, Random random)
+    {
+        var unitClass = fighter.Class.CanUse(WeaponType.Gauntlet)
+            ? fighter.Class
+            : fighter.Class with { Weapons = fighter.Class.Weapons.Add(WeaponType.Gauntlet) };
+        return new Combatant(fighter.Unit, unitClass, DrawnGauntlet(random), fighter.Terrain, fighter.Hp, abilities: fighter.Abilities);
+    }
 
     public static string Verdict(bool passed) => passed ? "ok" : "FAILED";
 

@@ -7,6 +7,9 @@ public class StarterContentTests
 {
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
+    /// <summary>Every weapon type but gauntlets, whose mechanism is in (issue 70) while their weapons and wielder wait on the Table.</summary>
+    private static readonly WeaponType[] ShippedWeaponTypes = Enum.GetValues<WeaponType>().Where(t => t != WeaponType.Gauntlet).ToArray();
+
     [Fact]
     public void StarterContentLoads()
     {
@@ -34,7 +37,7 @@ public class StarterContentTests
         Assert.DoesNotContain(cast[0].Region, regions.Keys);
 
         var classes = cast.Select(u => Content.Class(u.ClassId)).ToList();
-        foreach (var type in Enum.GetValues<WeaponType>())
+        foreach (var type in ShippedWeaponTypes)
         {
             Assert.Contains(classes, c => c.CanUse(type));
         }
@@ -147,7 +150,7 @@ public class StarterContentTests
             Assert.Contains(Content.Classes.Values, c => c.Movement == movement);
         }
 
-        foreach (var weaponType in Enum.GetValues<WeaponType>())
+        foreach (var weaponType in ShippedWeaponTypes)
         {
             Assert.Contains(Content.Classes.Values, c => c.CanUse(weaponType));
             Assert.True(Content.Weapons.Values.Count(w => w.Type == weaponType) >= 2, weaponType + " needs at least two weapons");

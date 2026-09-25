@@ -17,7 +17,9 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// <summary>
 /// Fights a combat strike by strike under the section 5 sequence: the attacker strikes,
 /// the defender counters if its weapon reaches, then whoever doubles strikes again; the
-/// combat ends early on a death. Every roll comes from <see cref="IRng"/> under the key
+/// combat ends early on a death. Each of those turns is a round of the side's
+/// <see cref="SideForecast.StrikesPerRound"/> strikes, two for gauntlets (issue 70), and
+/// a death ends the combat mid-round. Every roll comes from <see cref="IRng"/> under the key
 /// <see cref="RollKey.Combat"/> documents, and the crit roll is drawn only when the hit landed.
 /// </summary>
 public static class CombatResolver
@@ -32,25 +34,33 @@ public static class CombatResolver
         var attackerStrikes = 0;
         var defenderStrikes = 0;
 
-        Strike(attacker, defender, forecast.Attacker, ref defenderHp, attackerStrikes++);
+        Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes);
         if (defenderHp > 0 && forecast.Defender.Strikes)
         {
-            Strike(defender, attacker, forecast.Defender, ref attackerHp, defenderStrikes++);
+            Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes);
         }
 
         if (attackerHp > 0 && defenderHp > 0)
         {
             if (forecast.Attacker.Doubles)
             {
-                Strike(attacker, defender, forecast.Attacker, ref defenderHp, attackerStrikes++);
+                Round(attacker, defender, forecast.Attacker, ref defenderHp, ref attackerStrikes);
             }
             else if (forecast.Defender.Strikes && forecast.Defender.Doubles)
             {
-                Strike(defender, attacker, forecast.Defender, ref attackerHp, defenderStrikes++);
+                Round(defender, attacker, forecast.Defender, ref attackerHp, ref defenderStrikes);
             }
         }
 
         return new CombatResult(strikes, attackerHp, defenderHp);
+
+        void Round(Combatant striker, Combatant target, SideForecast side, ref int targetHp, ref int strikeIndex)
+        {
+            for (var i = 0; i < side.StrikesPerRound && targetHp > 0; i++)
+            {
+                Strike(striker, target, side, ref targetHp, strikeIndex++);
+            }
+        }
 
         void Strike(Combatant striker, Combatant target, SideForecast side, ref int targetHp, int strikeIndex)
         {

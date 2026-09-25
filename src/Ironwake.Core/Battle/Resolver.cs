@@ -317,13 +317,14 @@ public static class Resolver
     /// spends one use of the weapon it struck with, never below zero, and a declared art's
     /// <paramref name="artCost"/> is spent with them, hit or miss (issue 68). The strike that
     /// empties a physical weapon emits <see cref="WeaponBroke"/> and the weapon stays,
-    /// broken; the one that empties a spell emits <see cref="SpellSpent"/>.
+    /// broken; the one that empties a spell emits <see cref="SpellSpent"/>. A gauntlet spends
+    /// one use for the combat however many strikes it made (issue 70).
     /// </summary>
     private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events, int artCost = 0)
     {
-        var made = strikes.Count(s => s.AttackerId == unit.Id) + artCost;
+        var struck = strikes.Count(s => s.AttackerId == unit.Id);
         var slot = unit.EquippedSlot(content);
-        if (made == 0 || slot < 0)
+        if (struck + artCost == 0 || slot < 0)
         {
             return unit;
         }
@@ -333,6 +334,8 @@ public static class Resolver
         {
             return unit;
         }
+
+        var made = (content.Weapon(stack.ItemId).Type.SpendsPerStrike() ? struck : Math.Min(1, struck)) + artCost;
 
         var left = Math.Max(0, stack.Uses - made);
         if (left == 0)

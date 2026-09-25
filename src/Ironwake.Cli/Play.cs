@@ -587,7 +587,7 @@ public sealed class PlaySession
     /// On a retreat map, the line under a forecast that says where the target would fall
     /// back to if the strike leaves it alive and below the threshold (issue 215), through
     /// <see cref="RetreatRule.Pending"/>: once per distinct HP the attacker's landed strikes
-    /// can leave, one hit and, when it doubles, two, crits aside. Silent when no outcome
+    /// can leave, from one hit up to every strike the attack can make, crits aside. Silent when no outcome
     /// sends it anywhere.
     /// </summary>
     private static IEnumerable<string> PendingRetreatLines(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast)
@@ -597,7 +597,7 @@ public sealed class PlaySession
             yield break;
         }
 
-        var hits = forecast.Attacker.Doubles ? new[] { 1, 2 } : new[] { 1 };
+        var hits = Enumerable.Range(1, forecast.Attacker.StrikeCount);
         foreach (var hpAfter in hits.Select(n => target.Hp - n * forecast.Attacker.Damage).Distinct())
         {
             if (RetreatRule.Pending(state, content, unit, tile, target, hpAfter) is { } refuge)
@@ -669,7 +669,7 @@ public sealed class PlaySession
 
     /// <summary>One side of a forecast as the console prints it: damage, doubles, displayed hit, and crit.</summary>
     private static string StrikeText(SideForecast side) =>
-        $"dmg {side.Damage}{(side.Doubles ? " x2" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
+        $"dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
 
     /// <summary>
     /// Reads a one-based slot typed by the player into the core's zero-based one. Null text

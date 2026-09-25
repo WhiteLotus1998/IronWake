@@ -587,6 +587,11 @@ public static class ContentLoader
                 throw node.Error("maxRange", "must be at least minRange");
             }
 
+            if (type == WeaponType.Gauntlet && maxRange != 1)
+            {
+                throw node.Error("maxRange", "gauntlets strike at range 1 only");
+            }
+
             var durability = node.Int("durability");
             if (durability < 1)
             {

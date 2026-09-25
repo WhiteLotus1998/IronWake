@@ -892,4 +892,38 @@ public class SimGateTests
         Assert.Equal(500, tally.Combats);
         Assert.Equal(0, tally.WrongDamage);
     }
+
+    /// <summary>Issue 70: gate 5's stream carries drawn gauntlets on both sides, and every combat's strikes match the forecast's count.</summary>
+    [Fact]
+    public void GateFiveFightsGauntletsAndCountsEveryStrike()
+    {
+        var tally = new Gates.ForecastTally();
+        Gates.ForecastStream(Starter, tally, 2000);
+
+        Assert.Equal(0, tally.WrongStrikeCounts);
+        Assert.InRange(tally.GauntletCombats, 600, 1200);
+        Assert.True(tally.Result(2000).Passed, tally.Result(2000).Line);
+        var gauntlet = Gates.DrawnGauntlet(new Random(3));
+        Assert.Equal(WeaponType.Gauntlet, gauntlet.Type);
+        Assert.Equal((1, 1), (gauntlet.MinRange, gauntlet.MaxRange));
+    }
+
+    /// <summary>The strike-count check fires: a forecast that shows one strike for a two-strike round fails gate 5.</summary>
+    [Fact]
+    public void GateFiveFailsAForecastThatHidesAStrike()
+    {
+        var side = new SideForecast(true, 3, 50, 50, 0, false, StrikesPerRound: 2);
+        var forecast = new CombatForecast(side, SideForecast.None, RollScheme.OneRoll);
+        var strikes = ValueList<StrikeEvent>.Of(
+            new StrikeEvent(0, "a", "b", false, false, 0, 20),
+            new StrikeEvent(1, "a", "b", false, false, 0, 20));
+        var tally = new Gates.ForecastTally();
+
+        tally.Count(forecast, new CombatFought("a", "b", 1, Side.Player, strikes, 20, 20));
+        Assert.Equal(0, tally.WrongStrikeCounts);
+        tally.Count(forecast with { Attacker = side with { StrikesPerRound = 1 } }, new CombatFought("a", "b", 1, Side.Player, strikes, 20, 20));
+        Assert.Equal(1, tally.WrongStrikeCounts);
+        Assert.False(tally.Result(1).Passed);
+        Assert.Contains("1 combats with a strike count the forecast did not show", tally.Result(1).Line);
+    }
 }
