@@ -49,7 +49,7 @@ settings the owner must toggle.
 
 ---
 
-## 2. Builder routine (nightly at 02:00, 03:00, 04:00, and 05:00 owner's local time; each run works through the queue for about 50 minutes, one issue merged before the next starts)
+## 2. Builder routine (nightly at 02:00, 03:00, and 05:00 New York, three slots since 2026-09-23; each run works through the queue for about 50 minutes, one issue merged before the next starts; a chained run, section 6, does exactly one)
 
 ```
 You are Code, the Builder partner on Ironwake. Follow CLAUDE.md,
@@ -89,7 +89,7 @@ the PR as a draft.
 
 ---
 
-## 3. Critic routine (Wednesday and Sunday, 04:00)
+## 3. Critic routine (on the schedule Lotus sets on the account; see "How the loop runs")
 
 ```
 You are the Critic on Ironwake. You are Code with fresh eyes and no
@@ -169,18 +169,19 @@ open PRs; direction is yours, code is Code's.
 
 ## How the loop runs
 
-- Builder ships four times a night, hourly from 02:00 to 05:00. Each run works through the queue for about 50 minutes (Lotus, 2026-09-17: one bug per run "will take years"): pick, build, merge, wait for the merge, pick again; never start what cannot finish inside the budget. One issue at a time is still the rule; one issue per run is not. Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5, by Lotus's ruling (DECISIONS/0009); if the Fable bar on the usage page runs short before the Monday reset, drop back to 02:00 and 05:00 first. Critic breaks twice a week; the Table's sixth round asks Lotus to let its cadence follow the merge rate (nightly at 06:00, after the fourth Builder run, while the run cap allows), since twice a week against several merges a night is a pass over a codebase it has not seen. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
+- Builder ships three times a night, at 02:00, 03:00, and 05:00 New York (four, hourly, until 2026-09-23, when Lotus cut one; DECISIONS/0009 carries the change). Each cron run works through the queue for about 50 minutes (Lotus, 2026-09-17: one bug per run "will take years"): pick, build, merge, wait for the merge, pick again; never start what cannot finish inside the budget. One issue at a time is the rule everywhere; how many per run depends on the body: a cron run takes as many as its budget allows, a chained run (section 6) takes exactly one and exits, and a desktop session takes one (CLAUDE.md step 9). Code (Builder and Partner) runs on Fable 5.1; the Critic and Chat run on Opus 5.5, by Lotus's ruling (DECISIONS/0009); if the Fable bar on the usage page runs short before the Monday reset, drop to 02:00 and 05:00 first. The Critic's slots are set on Lotus's account and this file only records them: Wednesday and Sunday at 04:00 was the last recorded setting, its passes of 2026-09-20 and 2026-09-23 did not run (the budget pause of the Table's rotation post, logged nowhere at the time), and the pass of 2026-09-25 fired on a Friday at 03:40 UTC, so the setting has moved or the pass was fired by hand; the `critic` issues are the record of what ran. The Table's sixth round asks Lotus to let its cadence follow the merge rate (nightly, after the last Builder run, while the run cap allows), since twice a week against several merges a night is a pass over a codebase it has not seen. Partner answers Chat within minutes, and the Chat routine answers Code within minutes. Chat also designs from claude.ai whenever Lotus opens a chat, and clones the public repo to play.
 - Lotus rules on `fork` issues and taps Merge on `needs-merge` PRs. That's it.
 - Routines have a daily run cap per account. If runs are starving, drop the Partner routine first (the Builder covers it daily), then thin the Critic to weekly.
 
 ## Failure handling, in one place
 
+- A scheduled pass that did not run leaves no trace of its own; the next pass of that routine says so in its issue, and the Builder's next STATE.md mentions it if a `critic` issue is missing for a slot. (The Critic's two missed passes in the week of 2026-09-20 were found by the Critic itself on the 25th, #155.)
 - A run that dies mid-issue leaves `in-progress` on the issue. The next Builder run takes over anything `in-progress` for more than 20 hours with no open PR, resuming from the pushed branch if there is one.
 - A PR that ends up conflicting or red waits; the next Builder run rebases and repairs it before taking new work. Every run rebases on `main` before opening its PR.
 - A failed `partner` or `ci` workflow run is filed as a `bug` by the Critic; three in a row on one routine gets the Critic's summary labeled `fork`.
 - Lotus's daily owner check (a local scheduled task in his desktop app) reports fork issues, stuck PRs, failed workflow runs, and what merged in the last day.
 - The cloud sandbox image carries stale third-party PPAs; every prompt knows to delete them from `/etc/apt/sources.list.d/` if `apt-get update` fails.
-- Routine runs count against Lotus's plan usage (all-models weekly bar; Fable has its own bar that routines do not touch) and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, the cut order is in DECISIONS/0009.
+- Routine runs count against Lotus's plan usage (the all-models weekly bar, and the Fable bar that only the Builder and the Partner draw on, DECISIONS/0009) and a daily per-account run cap. If wakes are being skipped, the nightly Builder still answers the Table; if usage bites, the cut order is in DECISIONS/0009.
 - The cloud sandbox talks to GitHub through its built-in GitHub tools (issue and PR read and write, reactions, auto-merge). `git push` works with the injected token. The `gh` CLI is installed by the environment's setup script but its token check fails there, so no prompt depends on it. Lotus's desktop sessions are the reverse: `gh` is logged in and there are no built-in GitHub tools.
 - The environment's setup script (set by Lotus in the cloud environment dialog) preinstalls dotnet-sdk-8.0 and gh and removes the stale PPAs; Anthropic snapshots the result and later runs start from it. Every prompt still carries the apt fallback.
 
