@@ -8,12 +8,16 @@ namespace Ironwake.Core.Tests.Battle;
 /// Issue 69's class mastery: a class naming a mastery ability names the points that earn
 /// it, a player unit earns one point per combat fought in the class, and the ability it
 /// earns is its own after it leaves the class. The requirements here are test numbers:
-/// the shipped classes name no mastery until the Table sets which and how many.
+/// the shipped classes' masteries and requirements are content, tested in ShippedMasteryTests.
 /// </summary>
 public class MasteryTests
 {
     private static GameContent WithCadetMastery(string ability, int points) =>
         Starter with { Classes = Starter.Classes.SetItem("cadet", Starter.Class("cadet") with { Mastery = ability, MasteryPoints = points }) };
+
+    /// <summary>The shipped content with the cadet naming no mastery, since every shipped class names one.</summary>
+    private static GameContent WithoutCadetMastery() =>
+        Starter with { Classes = Starter.Classes.SetItem("cadet", Starter.Class("cadet") with { Mastery = null, MasteryPoints = 0 }) };
 
     private static BattleState Beside(GameContent content, Unit? captain = null, ulong seed = 7)
     {
@@ -38,7 +42,7 @@ public class MasteryTests
     [Fact]
     public void AClassWithNoMasteryEarnsNoPoints()
     {
-        var (unit, mastered) = Masteries.ForCombat(Hale, Starter.Class("cadet"));
+        var (unit, mastered) = Masteries.ForCombat(Hale, WithoutCadetMastery().Class("cadet"));
 
         Assert.Equal(Hale, unit);
         Assert.Null(mastered);
@@ -227,7 +231,7 @@ public class MasteryTests
         var three = hale with { Unit = hale.Unit with { Mastery = MasteryProgress.Empty.With("cadet", 3) } };
         var done = hale with { Unit = hale.Unit with { Abilities = ValueList<string>.Of("axebreaker") } };
 
-        Assert.Null(Ironwake.Cli.PlaySession.MasteryLine(hale, Starter));
+        Assert.Null(Ironwake.Cli.PlaySession.MasteryLine(hale, WithoutCadetMastery()));
         Assert.Equal("  mastery: Axebreaker (3 of 12 combats)", Ironwake.Cli.PlaySession.MasteryLine(three, content));
         Assert.Equal("  mastery: Axebreaker, mastered", Ironwake.Cli.PlaySession.MasteryLine(done, content));
     }

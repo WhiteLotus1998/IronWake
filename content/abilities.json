@@ -12,6 +12,18 @@
       "effect": { "kind": "combat", "against": { "weapon": "reason" }, "hit": 20, "avoid": 20 } },
     { "id": "faithbreaker", "name": "Faithbreaker", "text": "+20 hit and avoid against Faith.",
       "effect": { "kind": "combat", "against": { "weapon": "faith" }, "hit": 20, "avoid": 20 } },
+    { "id": "fundamentals", "name": "Fundamentals", "text": "+1 Str, Spd and Def, kept from the drill yard.",
+      "effect": { "kind": "stats", "stats": { "str": 1, "spd": 1, "def": 1 } } },
+    { "id": "horsebane", "name": "Horsebane", "text": "+20 hit and +10 crit against cavalry.",
+      "effect": { "kind": "combat", "against": { "movement": "cavalry" }, "hit": 20, "crit": 10 } },
+    { "id": "bloodrush", "name": "Bloodrush", "text": "+15 crit and -10 avoid in every fight.",
+      "effect": { "kind": "combat", "crit": 15, "avoid": -10 } },
+    { "id": "deadeye", "name": "Deadeye", "text": "+10 hit and +10 crit in every fight.",
+      "effect": { "kind": "combat", "hit": 10, "crit": 10 } },
+    { "id": "deep_study", "name": "Deep Study", "text": "+2 Mag.",
+      "effect": { "kind": "stats", "stats": { "mag": 2 } } },
+    { "id": "grace", "name": "Grace", "text": "+10 avoid and +20 crit avoid in every fight.",
+      "effect": { "kind": "combat", "avoid": 10, "critAvoid": 20 } },
     { "id": "canto", "name": "Canto", "text": "After acting, move again on what the first move left.",
       "effect": { "kind": "canto" } }
   ]
