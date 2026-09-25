@@ -334,9 +334,9 @@ public class RivalryTests
     }
 
     [Fact]
-    public void TheShippedThresholdIsOneExposedEnemyPhase()
+    public void TheShippedThresholdIsThreeExposedEnemyPhases()
     {
-        Assert.Equal(8, Starter.Rivalry.OverwriteAt);
+        Assert.Equal(16, Starter.Rivalry.OverwriteAt);
     }
 
     [Fact]

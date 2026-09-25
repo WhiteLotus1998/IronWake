@@ -1,0 +1,18 @@
+# 0043 — Rapport and Rivalry kept: the symmetric arm, threatened-only accrual, the threshold at 16
+
+Date: 2026-09-25. Issue 16, closing its keep-or-kill question (Design Table, thirty-third round, Chat's cold plays on seed 47). Amends DECISIONS/0038 and 0042. Still behind the `rivalry:` header, so no gated map and no gate number moves.
+
+Amended the same day (thirty-fourth round): decision 2 was built as a threshold of 8 and is reversed to 16 below. The keep, the rapport line and the fork stand. Amended rather than superseded because the reversal is the same question answered by the same two plays, read together.
+
+## Decisions
+
+1. **Kept.** 0038's kill condition (every rivalry ends before the fight that matters) is not met from any chair on 0042: Code's seed 41 and both of Chat's seed 47 lines reach the boss with every rivalry live. The arm is `symmetric` (-5 hit, +10 crit, -10 crit avoid beside a rival); accrual is 0042's, on threatened player phases only; exposure per unit, accrual per pair, as built.
+2. **`overwriteAt` stays 16.** It was built as 8 on Chat's first seed-47 play, whose arithmetic is right: accrual lands at the end of the player phase, so at 4 per phase 16 costs three exposed enemy phases (a front-liner taking about three swings a phase at +10 crit runs roughly a 60 percent chance that one crit is the rivalry's) and 8 costs one at roughly 25 percent. Reversed on Chat's reading of both of its plays side by side, since on both lines through the same seed 8 removes the phase the rivalry was worth having. On the first line the turn-4 accrual came free when the soldier chose Wren, so at 8 the rivalry cures itself at the end of turn 7's player phase, before the fort woke and before the crit at 11 beside Ottilie that was the rivalry's one live moment: the tell for 16 that the Leaning entry had named, delivered by the play that argued for 8. On the second line 8 ends Ottilie and Wren's rivalry at the end of turn 12's player phase, one phase before the boss dies, and turns Wren's counter on him from a 12 percent kill (a crit for 18 against his 13) into a 2 percent one. The arithmetic priced the rivalry as a cure the player buys and found the price too high. Nobody needs to buy it: the arm is a cost that geometry imposes where spacing fails, at chokes and on the boss's melee tile, and 16 being too dear to farm is the point. The tell for 8 (a play at 16 where nobody stands beside a rival under fire) had already failed three times on seed 47: the turn-7 bow tile, the turn-3 shot and the boss tile, each forced or tempting and each read off the forecast. 12 is rejected as a split between the two plays that neither measured. Threshold rather than rate either way, so the rate table stays clean for Cha's sign.
+3. **The rapport line prints the threshold for a rival pair.** `RapportGained` carries `OutOf`, the threshold when the pair were rivals before the gain and null for a pair of one region or one already cured; the CLI prints `rapport ottilie and teodor +4 (4 of 16)`. The `rivals no longer` line that follows already marks the end.
+4. **The battalions fork is filed** as issue 225, for Lotus. Both partners lean drop.
+
+## Not decided
+
+- Whether 16 holds forever. One tell reopens it, and only one: a journal at 16 where a rivalry never touches a fight. That play gives the number; this record does not.
+- Cha's rate table. The cast's recruit Cha runs 2 to 5 and every deployed rate on the sample is 2, so its sign is still unread; it waits for a recruit with a different Cha standing in a rivalry.
+- Which maps carry the header. The spike's sample is the only one; a shipped map adopting it is a content issue with its own plays.
