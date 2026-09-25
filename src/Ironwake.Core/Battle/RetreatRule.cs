@@ -89,42 +89,11 @@ public static class RetreatRule
     /// Every tile some player unit could strike next phase on the board as it stands: any
     /// usable weapon it carries, in range from any tile it can end a move on, its own tile
     /// included. This is the strike set, not the move set: a bow that reaches a tile from
-    /// where it stands puts that tile in reach without a step (twenty-eighth round).
+    /// where it stands puts that tile in reach without a step (twenty-eighth round). The
+    /// set is <see cref="Threat.StruckBy"/>'s, the one the rivalry spike reads.
     /// </summary>
-    public static IReadOnlySet<Coord> Struck(BattleState state, GameContent content)
-    {
-        var struck = new HashSet<Coord>();
-        foreach (var player in state.UnitsOf(Side.Player))
-        {
-            var weapons = Enumerable.Range(0, player.Unit.Inventory.Count)
-                .Select(slot => player.UsableWeaponAt(content, slot))
-                .OfType<Weapon>()
-                .ToList();
-            if (weapons.Count == 0)
-            {
-                continue;
-            }
-
-            var maxRange = weapons.Max(w => w.MaxRange);
-            foreach (var from in state.ReachOf(player, content).Destinations.Append(player.At).Distinct())
-            {
-                for (var dy = -maxRange; dy <= maxRange; dy++)
-                {
-                    for (var dx = -maxRange; dx <= maxRange; dx++)
-                    {
-                        var tile = new Coord(from.X + dx, from.Y + dy);
-                        var distance = Math.Abs(dx) + Math.Abs(dy);
-                        if (state.Map.Contains(tile) && weapons.Any(w => w.InRange(distance)))
-                        {
-                            struck.Add(tile);
-                        }
-                    }
-                }
-            }
-        }
-
-        return struck;
-    }
+    public static IReadOnlySet<Coord> Struck(BattleState state, GameContent content) =>
+        Threat.StruckBy(state, content, Side.Player);
 
     /// <summary>The tile the unit retreats to now, or null when it may not or has nowhere to go.</summary>
     public static Coord? Choose(BattleState state, GameContent content, BattleUnit unit) =>
