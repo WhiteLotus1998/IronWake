@@ -384,6 +384,36 @@ public class SimGateTests
         """;
 
     /// <summary>
+    /// Issue 153: the refused-kill column floors at four decimals, so only a kill that cannot
+    /// fail prints 1.0000. A doubled raw-99 first-strike kill on the Yard succeeds unless both
+    /// strikes miss, one minus a hundred-millionth, which rounding put on the certainty line
+    /// and the floor prints as 0.9999; the same board at raw 100 is exactly one and prints
+    /// 1.0000. Raw 98 and a four-decimal value print as themselves.
+    /// </summary>
+    [Fact]
+    public void TheRefusedKillColumnFloorsSoOnlyACertainKillPrintsAsOne()
+    {
+        var (nearly, sharp, brigand) = ExposureTests.CertainKillBoard(hpShort: 0, rawHit: 99);
+        var (certain, sharper, target) = ExposureTests.CertainKillBoard(hpShort: 0, rawHit: 100);
+        var tile = new Coord(2, 1);
+        Assert.Equal(RollScheme.TwoRollAverage, nearly.Scheme);
+        Assert.True(Queries.Forecast(nearly, Starter, sharp, brigand, tile)!.Attacker.Doubles, "the captain doubles the brigand, so the second strike is a second chance");
+
+        var double99 = HeuristicPlayer.KillProbability(nearly, Starter, sharp, tile, brigand);
+        var double100 = HeuristicPlayer.KillProbability(certain, Starter, sharper, tile, target);
+
+        Assert.True(double99 < 1 && double99 > 0.9999, "under one and inside the last digit: the case that rounded onto the line");
+        Assert.Equal(1.0, double100, 12);
+        Assert.Equal("0.9999", Gates.FormatKill(double99));
+        Assert.Equal("1.0000", Gates.FormatKill(double100));
+        Assert.Equal("0.9994", Gates.FormatKill(0.9994));
+        Assert.Equal("0.7191", Gates.FormatKill(0.71915));
+        Assert.Equal("0.0000", Gates.FormatKill(0));
+        Assert.Equal("refused kill p50 0.9999 over 1", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double99) }));
+        Assert.Equal("refused kill p50 1.0000 over 1", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double100) }));
+    }
+
+    /// <summary>
     /// Issue 125: the refused kill probability is the named attack's own chance to kill over
     /// its strikes at the forecast's numbers under the game's scheme. On the Veto board with
     /// the brigand at 1 HP, the captain's only attack on him is from 3,1, which the worst case

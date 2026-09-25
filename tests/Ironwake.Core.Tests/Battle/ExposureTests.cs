@@ -373,7 +373,7 @@ public class ExposureTests
     /// HP set <paramref name="hpShort"/> above the forecast's damage from the tile beside it,
     /// on the yard or on <paramref name="map"/>, whose brigand must stand at 3,1.
     /// </summary>
-    private static (BattleState State, BattleUnit Hale, BattleUnit Brigand) CertainKillBoard(int hpShort, int rawHit = 100, string? map = null)
+    internal static (BattleState State, BattleUnit Hale, BattleUnit Brigand) CertainKillBoard(int hpShort, int rawHit = 100, string? map = null)
     {
         for (var dex = 0; dex <= 80; dex++)
         {
