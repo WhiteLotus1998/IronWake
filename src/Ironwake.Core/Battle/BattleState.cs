@@ -20,6 +20,7 @@ namespace Ironwake.Core;
 /// <param name="AwakeGroups">Guard groups that have woken (section 8), sorted by name. A woken group is a fact of the board, so a Recall restores it with the rest.</param>
 /// <param name="Fired">The names of the map events that have fired, blocked or not, sorted (issue 32). Each fires once; a Recall restores the list with the board.</param>
 /// <param name="Flags">The flags map events have set, sorted, for a win condition to read.</param>
+/// <param name="Rapport">Each recruit pair's rapport, sorted by pair (issue 16). Empty on a map without the <c>rivalry:</c> header; a Recall restores it with the board.</param>
 public sealed record BattleState(
     MapDefinition Map,
     ValueList<BattleUnit> Units,
@@ -31,7 +32,8 @@ public sealed record BattleState(
     ValueList<BattleState> History,
     ValueList<string> AwakeGroups = default,
     ValueList<string> Fired = default,
-    ValueList<string> Flags = default)
+    ValueList<string> Flags = default,
+    ValueList<Rapport> Rapport = default)
 {
     /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
     public bool IsAwake(string group) => AwakeGroups.Contains(group);
@@ -403,6 +405,17 @@ public sealed record BattleState(
                     sb.Append("tile ").Append(new Coord(i % Map.Width, i / Map.Width)).Append(' ').Append(Map.TerrainIds[i]).Append('\n');
                 }
             }
+        }
+
+        if (Map.RivalryArm is not null)
+        {
+            sb.Append("rapport");
+            foreach (var entry in Rapport)
+            {
+                sb.Append(' ').Append(entry.A).Append('+').Append(entry.B).Append('=').Append(entry.Points);
+            }
+
+            sb.Append('\n');
         }
 
         foreach (var unit in Units)

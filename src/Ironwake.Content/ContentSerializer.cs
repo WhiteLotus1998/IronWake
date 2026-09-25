@@ -18,7 +18,7 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.WeaponsName, WriteArray("weapons", content.Weapons.Values, WriteWeapon)),
         new ContentFile(ContentFiles.TerrainName, WriteArray("terrain", content.Terrain.Values, WriteTerrain)),
         UnitFiles(content),
-        new ContentFile(ContentFiles.RulesName, "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n"),
+        new ContentFile(ContentFiles.RulesName, WriteRules(content)),
         new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)));
 
     /// <summary>
@@ -49,6 +49,50 @@ public static class ContentSerializer
         writer.WriteNumber("heals", item.Heals);
         writer.WriteNumber("uses", item.Uses);
         writer.WriteEndObject();
+    }
+
+    /// <summary>rules.json: the wake radius, and the rivalry block when the content has one (issue 16).</summary>
+    private static string WriteRules(GameContent content)
+    {
+        if (content.Rivalry == RivalryRules.None)
+        {
+            return "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n";
+        }
+
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream, WriterOptions))
+        {
+            writer.WriteStartObject();
+            writer.WriteNumber("wakeRadius", content.WakeRadius);
+            writer.WriteStartObject("rivalry");
+            writer.WriteStartObject("arms");
+            foreach (var arm in content.Rivalry.Arms)
+            {
+                writer.WriteStartObject(arm.Id);
+                writer.WriteNumber("hit", arm.Hit);
+                writer.WriteNumber("crit", arm.Crit);
+                writer.WriteNumber("critAvoid", arm.CritAvoid);
+                writer.WriteBoolean("countersOnly", arm.CountersOnly);
+                writer.WriteEndObject();
+            }
+
+            writer.WriteEndObject();
+            writer.WriteStartArray("rapportRate");
+            foreach (var step in content.Rivalry.RapportRates)
+            {
+                writer.WriteStartObject();
+                writer.WriteNumber("cha", step.Cha);
+                writer.WriteNumber("rate", step.Rate);
+                writer.WriteEndObject();
+            }
+
+            writer.WriteEndArray();
+            writer.WriteNumber("overwriteAt", content.Rivalry.OverwriteAt);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        return Encoding.UTF8.GetString(stream.ToArray()) + "\n";
     }
 
     private static string WriteArray<T>(string key, IEnumerable<T> items, Action<Utf8JsonWriter, T> writeItem)

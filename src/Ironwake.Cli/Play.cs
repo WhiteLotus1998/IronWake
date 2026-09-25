@@ -51,6 +51,13 @@ public sealed class PlaySession
     private readonly TextWriter _out;
     private readonly bool _scripted;
     private readonly List<(int Line, string Command, string Reason)> _rejections = new();
+
+    /// <summary>
+    /// Rivalry's exposure log (issue 16): every recruit that ended a player phase beside a
+    /// rival, with the history length when that phase ended, and whether an enemy attacked
+    /// it in the enemy phase that followed. A Recall drops the entries it undoes.
+    /// </summary>
+    private readonly List<ExposureEntry> _exposure = new();
     private BattleState _state;
     private int _line;
     private string _command = "";
@@ -213,6 +220,12 @@ public sealed class PlaySession
         _out.WriteLine(outcome.IsOver
             ? $"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}"
             : $"battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
+        if (_state.Map.RivalryArm is { } arm)
+        {
+            var attacked = _exposure.Count(entry => entry.Attacked);
+            _out.WriteLine($"rivalry ({arm}): {_exposure.Count} player phases ended beside a rival, {attacked} of them attacked in the enemy phase after");
+        }
+
         return stopped ? StrictStop : outcome.Result == BattleResult.Won ? 0 : 1;
     }
 
@@ -243,8 +256,12 @@ public sealed class PlaySession
                 Error("usage: wait <unit>");
                 break;
             case "end" when words.Length == 1:
+                var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
+                    ? _state.UnitsOf(Side.Player).Where(u => Rivalry.AdjacentRivals(_state, _content, u).Count > 0).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
+                    : new List<ExposureEntry>();
                 if (Apply(new EndPhase()))
                 {
+                    _exposure.AddRange(exposed);
                     EnemyPhase();
                 }
 
@@ -253,7 +270,11 @@ public sealed class PlaySession
                 Error("usage: end");
                 break;
             case "recall" when words.Length == 2 && int.TryParse(words[1], out var index):
-                Apply(new Recall(index));
+                if (Apply(new Recall(index)))
+                {
+                    _exposure.RemoveAll(entry => entry.HistoryAt >= index);
+                }
+
                 break;
             case "recall" when words.Length == 1:
                 ListRecallTargets();
@@ -361,6 +382,7 @@ public sealed class PlaySession
                 }
 
                 _out.WriteLine(ForecastLine(attacker!, target!, forecast));
+                PrintRivalry(target!, countering: true);
             }
 
             var result = Resolver.Apply(_state, _content, command);
@@ -373,6 +395,13 @@ public sealed class PlaySession
             foreach (var e in result.Events)
             {
                 _out.WriteLine(Describe(e));
+                if (e is CombatFought fought)
+                {
+                    foreach (var entry in _exposure.Where(x => x.UnitId == fought.TargetId && x.Turn == fought.Turn))
+                    {
+                        entry.Attacked = true;
+                    }
+                }
             }
         }
 
@@ -466,6 +495,7 @@ public sealed class PlaySession
 
         var where = from is null ? "" : $" from {tile} ({_state.Map.TerrainAt(tile, _content).Name})";
         _out.WriteLine(ForecastLine(unit, target, forecast, where));
+        PrintRivalry(unit with { At = tile }, countering: false);
         return true;
     }
 
@@ -542,6 +572,30 @@ public sealed class PlaySession
         _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
+        if (_state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
+        {
+            var rivals = _state.UnitsOf(Side.Player)
+                .Where(other => Rivalry.AreRivals(_state, _content, unit, other))
+                .Select(other => $"{other.Id} {Rivalry.PointsOf(_state, unit.Id, other.Id)}/{_content.Rivalry.OverwriteAt}");
+            var list = string.Join(", ", rivals);
+            _out.WriteLine($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, _content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}");
+        }
+    }
+
+    /// <summary>
+    /// On a rivalry map, the line under a forecast that names what rivalry changed on the
+    /// player's side: the rivals beside the unit and the modifiers the forecast included.
+    /// Silent when no rival is adjacent.
+    /// </summary>
+    private void PrintRivalry(BattleUnit unit, bool countering)
+    {
+        if (Rivalry.ArmOf(_state, _content) is null || Rivalry.AdjacentRivals(_state, _content, unit) is not { Count: > 0 } rivals)
+        {
+            return;
+        }
+
+        var (hit, crit, critAvoid) = Rivalry.Modifiers(_state, _content, unit, countering);
+        _out.WriteLine($"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}");
     }
 
     private string Named(string itemId) =>
@@ -637,6 +691,10 @@ public sealed class PlaySession
                 return $"  {u.UnitId} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
             case FlagSet f:
                 return $"  flag {f.Flag} is set";
+            case RapportGained g:
+                return $"rapport {g.A} and {g.B} +{g.Amount} ({g.Total})";
+            case RivalryEnded r:
+                return $"{r.A} and {r.B} are rivals no longer";
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:
@@ -651,4 +709,23 @@ public sealed class PlaySession
                 return e.ToString() ?? "?";
         }
     }
+}
+
+/// <summary>One recruit that ended a player phase beside a rival (issue 16), and whether the enemy phase after struck it.</summary>
+internal sealed class ExposureEntry
+{
+    public ExposureEntry(int historyAt, int turn, string unitId)
+    {
+        HistoryAt = historyAt;
+        Turn = turn;
+        UnitId = unitId;
+    }
+
+    public int HistoryAt { get; }
+
+    public int Turn { get; }
+
+    public string UnitId { get; }
+
+    public bool Attacked { get; set; }
 }

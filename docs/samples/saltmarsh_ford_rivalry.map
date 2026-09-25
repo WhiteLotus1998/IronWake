@@ -1,0 +1,30 @@
+name: Saltmarsh Ford (rivalry)
+size: 14x10
+win: rout
+turn_limit: 18
+recall: 3
+enemy_level: 2
+rivalry: symmetric
+
+....^^....F...
+..^....nn.....
+......n.......
+~~~=~~~~~~=~~~
+...^^.........
+....^^........
+..^^..........
+..............
+..............
+..............
+
+units:
+P captain 6,8
+P recruit 5,8
+P recruit 7,8
+P recruit 6,9
+E brigand 3,2 group:ford behavior:aggressive
+E soldier 2,1 group:ford behavior:aggressive
+E archer 10,1 group:fort behavior:guard
+E soldier 9,0 group:fort behavior:guard
+E wingrider 12,2 group:fort behavior:guard
+B bandit_leader 10,0 group:fort behavior:boss

@@ -54,9 +54,9 @@ public static class Combat
         return Math.Max(0, Atk(attacker, target) - defence);
     }
 
-    /// <summary>Weapon hit (less 10 when broken) plus Dex plus half Lck.</summary>
+    /// <summary>Weapon hit (less 10 when broken) plus Dex plus half Lck, plus the hit modifier.</summary>
     public static int Hit(Combatant attacker) =>
-        Armed(attacker).Hit - (attacker.Broken ? BrokenHitPenalty : 0) + attacker.Stats.Dex + attacker.Stats.Lck / 2;
+        Armed(attacker).Hit - (attacker.Broken ? BrokenHitPenalty : 0) + attacker.Stats.Dex + attacker.Stats.Lck / 2 + attacker.HitModifier;
 
     /// <summary>Section 5's Faith heal: Mag / 2 + 5 + the spell's base. <paramref name="spell"/> must be a healing spell.</summary>
     public static int Heal(Combatant healer, Weapon spell)
@@ -85,7 +85,7 @@ public static class Combat
         Math.Clamp(Hit(attacker) - Avoid(target, Armed(attacker).IsMagic), 0, 100);
 
     public static int Crit(Combatant attacker) =>
-        Armed(attacker).Crit + (attacker.Stats.Dex + attacker.Stats.Lck) / 2;
+        Armed(attacker).Crit + (attacker.Stats.Dex + attacker.Stats.Lck) / 2 + attacker.CritModifier;
 
     /// <summary>Lck plus modifiers, deliberately unclamped: a negative crit avoid is a cost a modifier may impose.</summary>
     public static int CritAvoid(Combatant target) => target.Stats.Lck + target.CritAvoidModifier;
