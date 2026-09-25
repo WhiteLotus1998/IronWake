@@ -71,4 +71,55 @@ public static class Queries
     /// </summary>
     public static bool CanStandOn(BattleState state, GameContent content, BattleUnit unit, Coord at) =>
         at == unit.At || (!unit.Moved && Reachable(state, content, unit).CanEnd(at));
+
+    /// <summary>
+    /// What the coming enemy phase could do to <paramref name="unit"/> if it ended its move
+    /// on <paramref name="from"/> (issue 217): one line per enemy with an attack on it, in
+    /// the phase's own order, each the strike the planner would make
+    /// were it to choose this unit, through <see cref="EnemyAi.StrikeOn"/>, with the
+    /// forecast the enemy phase prints before that strike. The board is the exposure sum's,
+    /// <see cref="Exposure.Board"/> (the unit on the tile, every group its standing there
+    /// certainly wakes awake), with the player phase then ended through the resolver, so
+    /// the phase-start healing and events the enemy phase would see are applied. A group
+    /// still asleep is not listed and a unit that holds strikes only from its own tile.
+    /// Each line reads that phase-start board; an earlier enemy's move or kill in the phase
+    /// is not played out. Null when the unit cannot stand on the tile this phase, or when
+    /// the state is not a player phase. Read-only.
+    /// </summary>
+    public static IReadOnlyList<ThreatLine>? Threats(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !CanStandOn(state, content, unit, from))
+        {
+            return null;
+        }
+
+        var lines = new List<ThreatLine>();
+        var ended = Resolver.Apply(Exposure.Board(state, content, unit, from), content, new EndPhase());
+        if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)
+        {
+            return lines;
+        }
+
+        var board = ended.Next;
+        foreach (var enemy in board.UnitsOf(Side.Enemy))
+        {
+            if (board.EffectiveBehavior(enemy) is null || EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
+            {
+                continue;
+            }
+
+            var forecast = Forecast(board, content, enemy, moved, strike.From, strike.Slot)
+                ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {unit.Id} from {strike.From} has no forecast");
+            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast));
+        }
+
+        return lines;
+    }
+}
+
+/// <summary>One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from where, with which slot's weapon, and the forecast of that combat.</summary>
+public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast)
+{
+    /// <summary>The damage the strike deals if every hit lands, doubles included, no crit.</summary>
+    public int IfAllLand => Forecast.Attacker.Strikes ? Forecast.Attacker.Damage * (Forecast.Attacker.Doubles ? 2 : 1) : 0;
 }

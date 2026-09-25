@@ -39,6 +39,7 @@ public sealed class PlaySession
           recall <n>               rewind to history state n, a player-phase state (spends a charge)
           recall                   list the state each player turn started at, and the charges left
           forecast <unit> <target> [slot] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
+          threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
           map                      show the board
@@ -302,6 +303,15 @@ public sealed class PlaySession
             case "forecast":
                 Error("usage: forecast <unit> <target> [slot] [from <x,y>]");
                 break;
+            case "threat" when words.Length == 2:
+                PrintThreat(words[1], null);
+                break;
+            case "threat" when words.Length == 4 && words[2] == "from" && TryCoord(words[3], out var threatFrom):
+                PrintThreat(words[1], threatFrom);
+                break;
+            case "threat":
+                Error("usage: threat <unit> [from <x,y>]");
+                break;
             case "reach" when words.Length == 2:
                 if (Find(words[1]) is { } mover)
                 {
@@ -500,6 +510,49 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// Prints what the coming enemy phase could do to a player unit standing where it is
+    /// or on <paramref name="from"/> (issue 217), through <see cref="Queries.Threats"/>:
+    /// one line per enemy with the weapon the planner would swing, its slot counted from
+    /// one, the tile it strikes from, and the forecast line the enemy phase would print,
+    /// then the total if every strike lands against the unit's HP. Spends nothing.
+    /// </summary>
+    private void PrintThreat(string unitId, Coord? from)
+    {
+        if (Find(unitId) is not { } unit)
+        {
+            return;
+        }
+
+        if (unit.Side != Ironwake.Core.Side.Player)
+        {
+            Error($"{unit.Id} is an enemy; threat answers for a player unit");
+            return;
+        }
+
+        var tile = from ?? unit.At;
+        if (Queries.Threats(_state, _content, unit, tile) is not { } lines)
+        {
+            Error(unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+            return;
+        }
+
+        var where = $"{tile} ({_state.Map.TerrainAt(tile, _content).Name})";
+        if (lines.Count == 0)
+        {
+            _out.WriteLine($"threat on {unit.Id} at {where}: no enemy can strike it next phase");
+            return;
+        }
+
+        _out.WriteLine($"threat on {unit.Id} at {where}:");
+        foreach (var line in lines)
+        {
+            _out.WriteLine($"  {line.Enemy.Id} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+        }
+
+        _out.WriteLine($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
+    }
+
+    /// <summary>
     /// The one forecast line, printed before an attack from either side and by the
     /// <c>forecast</c> command: the attacker's strike, then the counter or <c>none</c>.
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
@@ -507,11 +560,12 @@ public sealed class PlaySession
     /// </summary>
     public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "")
     {
-        return $"forecast {unit.Id} -> {target.Id}{where}: {Side(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? Side(forecast.Defender) : "none")}";
-
-        static string Side(SideForecast side) =>
-            $"dmg {side.Damage}{(side.Doubles ? " x2" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
+        return $"forecast {unit.Id} -> {target.Id}{where}: {StrikeText(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? StrikeText(forecast.Defender) : "none")}";
     }
+
+    /// <summary>One side of a forecast as the console prints it: damage, doubles, displayed hit, and crit.</summary>
+    private static string StrikeText(SideForecast side) =>
+        $"dmg {side.Damage}{(side.Doubles ? " x2" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
 
     /// <summary>
     /// Reads a one-based slot typed by the player into the core's zero-based one. Null text
