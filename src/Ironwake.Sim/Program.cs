@@ -51,6 +51,20 @@ public static class Program
             }
         }
 
+        if (args.Length > 1 && args[0] == "--hitband")
+        {
+            var seeds = HitBandSeeds;
+            for (var i = 2; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+            }
+
+            return HitBandTable(args[1], seeds);
+        }
+
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
         {
             RollScheme? scheme = RollScheme.TwoRollAverage;
@@ -72,7 +86,50 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
+
+    private const int HitBandSeeds = 50;
+
+    /// <summary>
+    /// The hit-band table of issue 158 for one map or every map: each arm under each roll
+    /// scheme, with both sides' raw-hit histogram, the doubling rate, and gates 1 and 4 on
+    /// the arm. A measurement only; nothing here changes what ships.
+    /// </summary>
+    public static int HitBandTable(string mapId, int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("hitband: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var all = MapFiles.LoadAll(contentDir, content);
+        var maps = mapId == "--all" ? all : all.Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0)
+        {
+            Console.WriteLine($"hitband: no map '{mapId}' under {contentDir}; maps are {string.Join(", ", all.Select(m => m.Id))}");
+            return 2;
+        }
+
+        Console.WriteLine($"hitband: {maps.Count} maps from {contentDir}, {seeds} seeds per cell");
+        foreach (var (id, map) in maps)
+        {
+            foreach (var arm in Enum.GetValues<HitBandArm>())
+            {
+                foreach (var scheme in new[] { RollScheme.TwoRollAverage, RollScheme.OneRoll })
+                {
+                    foreach (var line in HitBand.Cell(content, map, id, seeds, arm, scheme))
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+        }
+
+        return 0;
+    }
 
     /// <summary>The <c>--scheme</c> argument: <c>one</c> is one roll, <c>two</c> is the two-roll average; anything else is refused with the usage line.</summary>
     public static RollScheme? ParseScheme(string text) => text switch

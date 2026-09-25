@@ -191,7 +191,8 @@ public static class Resolver
             distance,
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),
-            state.Scheme);
+            state.Scheme,
+            state.Formula);
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
 
         var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events);

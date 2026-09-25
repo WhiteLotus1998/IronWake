@@ -31,9 +31,9 @@ public sealed record GateResult(string Line, bool Passed);
 public static class Runner
 {
     /// <summary>A full game from the opening state until the battle is decided.</summary>
-    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage)
+    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, CombatFormula formula = CombatFormula.Standard)
     {
-        var state = BattleState.From(map, content, content.Cast, seed, scheme, benched);
+        var state = BattleState.From(map, content, content.Cast, seed, scheme, benched, formula);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
         foreach (var unit in state.UnitsOf(Side.Player))
         {
@@ -51,6 +51,7 @@ public static class Runner
 
             foreach (var command in commands)
             {
+                hits?.Record(state, content, command);
                 var result = Resolver.Apply(state, content, command);
                 if (!result.Accepted)
                 {
@@ -112,12 +113,12 @@ public static class Gates
     /// that stopped and one near zero a fight that ran out of clock; issue 114); and the roll
     /// scheme the games were fought under.
     /// </summary>
-    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
+    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, CombatFormula formula = CombatFormula.Standard)
     {
         var games = new List<GameResult>();
         for (var seed = 1; seed <= seeds; seed++)
         {
-            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), scheme: scheme));
+            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), scheme: scheme, hits: hits, formula: formula));
         }
 
         var wins = games.Count(g => g.Won);
@@ -240,7 +241,7 @@ public static class Gates
     /// refused-kill median (issue 125), so a large drop beside many captain deaths or a
     /// refused kill near one is read as the veto's doing and not the recruit's.
     /// </summary>
-    public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
+    public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage, CombatFormula formula = CombatFormula.Standard)
     {
         var opening = BattleState.From(map, content, content.Cast, 1);
         var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
@@ -258,7 +259,7 @@ public static class Gates
             var arms = new List<GameResult>();
             for (var seed = 1; seed <= baseline.Count; seed++)
             {
-                var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched, scheme);
+                var arm = Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), benched, scheme, formula: formula);
                 arms.Add(arm);
                 var before = baseline[seed - 1];
                 if (before.Won && !arm.Won)

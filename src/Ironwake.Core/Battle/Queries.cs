@@ -61,7 +61,7 @@ public static class Queries
             return null;
         }
 
-        return Combat.Forecast((armed with { At = from }).ToCombatant(state.Map, content), target.ToCombatant(state.Map, content), distance, state.Scheme);
+        return Combat.Forecast((armed with { At = from }).ToCombatant(state.Map, content), target.ToCombatant(state.Map, content), distance, state.Scheme, state.Formula);
     }
 
     /// <summary>
