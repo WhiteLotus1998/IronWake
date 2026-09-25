@@ -1,0 +1,50 @@
+move captain 2,2
+move wren 2,3
+move ansgar 0,3
+wait ansgar
+canto ansgar stay
+end
+move captain 3,2
+attack captain brigand-1
+move ansgar 4,4
+attack ansgar archer-1
+canto ansgar 4,5
+move wren 0,2
+item wren 2
+end
+move ansgar 4,4
+attack ansgar archer-1
+reach ansgar
+canto ansgar 6,5
+move captain 4,3
+move wren 3,3
+end
+move captain 7,4
+move wren 6,3
+move ansgar 10,5
+attack ansgar soldier-2
+canto ansgar 8,5
+end
+attack ansgar soldier-2
+threat ansgar
+canto ansgar 6,5
+move captain 10,4
+attack captain soldier-1
+move wren 8,4
+end
+recall
+recall 45
+attack ansgar soldier-2
+canto ansgar 7,5
+move wren 7,3
+wait captain
+end
+recall 45
+attack ansgar soldier-2
+threat ansgar from 7,5
+threat ansgar from 5,5
+canto ansgar 5,5
+threat wren
+wait wren
+wait captain
+end

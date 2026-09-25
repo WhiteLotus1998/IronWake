@@ -229,7 +229,10 @@ public sealed class ProtocolSession
         var tile = ProtocolJson.OptionalCoord(request, "from") ?? unit.At;
         if (Queries.Threats(_state, _content, unit, tile) is not { } lines)
         {
-            return Error(ProtocolJson.Name(unit.Moved ? RejectionReason.AlreadyMoved : RejectionReason.OutOfReach), unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+            var owed = unit.Canto is not null && unit.Acted;
+            return Error(
+                ProtocolJson.Name(unit.Moved && !owed ? RejectionReason.AlreadyMoved : RejectionReason.OutOfReach),
+                owed ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
         }
 
         return Ok("threat", w =>

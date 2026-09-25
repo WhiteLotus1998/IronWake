@@ -28,6 +28,9 @@ public sealed record MasteryEarned(string UnitId, string ClassId, string Ability
 
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
+/// <summary>A unit took its Canto (issue 71): <see cref="From"/> equal to <see cref="To"/> and an empty path is a Canto declined.</summary>
+public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
+
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 

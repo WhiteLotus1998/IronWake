@@ -43,6 +43,14 @@ public static class Resolver
             case Wait wait:
                 (next, rejection) = ApplyWait(state, wait, events);
                 break;
+            case Canto canto:
+                (next, rejection) = ApplyCanto(state, content, canto, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(canto.UnitId)!, events);
+                }
+
+                break;
             case Retreat retreat:
                 (next, rejection) = ApplyRetreat(state, content, retreat, events);
                 break;
@@ -60,6 +68,18 @@ public static class Resolver
         if (rejection is not null)
         {
             return new ApplyResult(state, ValueList<GameEvent>.Empty, rejection);
+        }
+
+        var acted = command switch
+        {
+            Attack a => a.UnitId,
+            UseItem i => i.UnitId,
+            Wait w => w.UnitId,
+            _ => null,
+        };
+        if (acted is not null)
+        {
+            next = OpenCanto(next, content, acted);
         }
 
         next = WakeGroups(state, next, content, events);
@@ -151,7 +171,63 @@ public static class Resolver
         }
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
-        return (state.WithUnit(unit with { At = move.To, Moved = true }), null);
+        int? canto = AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) ? reach.Mov - entry.Cost : null;
+        return (state.WithUnit(unit with { At = move.To, Moved = true, Canto = canto }), null);
+    }
+
+    /// <summary>
+    /// Owes a Canto (issue 71) to a unit that has just attacked, used an item or waited and
+    /// is still on the board: what its Move left, set by <see cref="ApplyMove"/>, or its
+    /// full Mov when it acted without moving. A unit without Canto is left as it is.
+    /// </summary>
+    private static BattleState OpenCanto(BattleState state, GameContent content, string unitId)
+    {
+        if (state.Find(unitId) is not { } unit || !AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)))
+        {
+            return state;
+        }
+
+        return unit.Canto is null
+            ? state.WithUnit(unit with { Canto = content.Class(unit.Unit.ClassId).Mov })
+            : state;
+    }
+
+    /// <summary>
+    /// Canto (issue 71): a unit that has acted and is owed a Canto moves within the reach
+    /// <see cref="BattleState.CantoReachOf"/> gives, its own tile included, and is done.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyCanto(BattleState state, GameContent content, Canto canto, List<GameEvent> events)
+    {
+        var unit = state.Find(canto.UnitId);
+        if (unit is null)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchUnit, $"no living unit '{canto.UnitId}'"));
+        }
+
+        if (unit.Side != state.Phase)
+        {
+            return (state, new Rejection(RejectionReason.NotThisSide, $"{unit.Id} is a {unit.Side} unit and it is the {state.Phase} phase"));
+        }
+
+        if (state.CantoReachOf(unit, content) is not { } reach)
+        {
+            var why = !AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) ? "it has no Canto"
+                : !unit.Acted ? "it has not acted yet this phase"
+                : "its Canto is spent this phase";
+            return (state, new Rejection(RejectionReason.NoCanto, $"{unit.Id} cannot Canto: {why}"));
+        }
+
+        var entry = reach.EntryAt(canto.To);
+        if (entry is not { CanEnd: true })
+        {
+            var why = !state.Map.Contains(canto.To) ? "outside the map"
+                : entry is null ? $"not within the {reach.Mov} movement its Canto has left from {unit.At}"
+                : "occupied by an ally";
+            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot Canto to {canto.To}: {why}"));
+        }
+
+        events.Add(new Cantoed(unit.Id, unit.At, canto.To, entry.Path));
+        return (state.WithUnit(unit with { At = canto.To, Canto = null }), null);
     }
 
     private static (BattleState, Rejection?) ApplyAttack(BattleState state, GameContent content, Attack attack, List<GameEvent> events)
@@ -646,7 +722,7 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false });
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -655,7 +731,8 @@ public static class Resolver
 
     /// <summary>
     /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
-    /// in a fixed order: for each unacted unit of the acting side in id order, its Moves
+    /// in a fixed order: for each unit of the acting side in id order, if it has acted, its
+    /// Cantos (row-major, own tile included, issue 71), else its Moves
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
@@ -674,6 +751,14 @@ public static class Resolver
         {
             if (unit.Acted)
             {
+                if (state.CantoReachOf(unit, content) is { } canto)
+                {
+                    foreach (var to in canto.Destinations)
+                    {
+                        yield return new Canto(unit.Id, to);
+                    }
+                }
+
                 continue;
             }
 

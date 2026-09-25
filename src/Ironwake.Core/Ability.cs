@@ -13,8 +13,8 @@ public sealed record Ability(string Id, string Name, string Text, AbilityEffect 
 }
 
 /// <summary>
-/// When an ability's effect applies. The set is closed and small on purpose: Canto's
-/// after-action movement and a bow's range extension join it with the issues that need them.
+/// When an ability's effect applies. The set is closed and small on purpose: a bow's range
+/// extension joins it with the issue that needs it.
 /// </summary>
 public enum AbilityTrigger
 {
@@ -26,6 +26,9 @@ public enum AbilityTrigger
 
     /// <summary>Declared with an attack command, before the roll: a combat art (issue 68).</summary>
     Declared,
+
+    /// <summary>After the unit's Attack, Item or Wait: Canto's second move (issue 71).</summary>
+    AfterAction,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -81,6 +84,16 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 }
 
 /// <summary>
+/// Canto (issue 71, DESIGN.md section 7): after an Attack, Item or Wait the unit may move
+/// again on what its first move left of its Mov, through <see cref="Movement.Reach"/> from
+/// where it stands. The effect has no numbers; content decides which classes carry it.
+/// </summary>
+public sealed record CantoEffect : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.AfterAction;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition.
@@ -121,6 +134,9 @@ public static class AbilityRules
 
         return total;
     }
+
+    /// <summary>Whether any of <paramref name="abilities"/> is Canto.</summary>
+    public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
 
     /// <summary>The sum of <paramref name="self"/>'s combat modifiers whose condition <paramref name="opponent"/> meets.</summary>
     public static CombatBonus Against(Combatant self, Combatant opponent)

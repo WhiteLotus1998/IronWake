@@ -91,6 +91,28 @@ public class AbilityContentTests
     }
 
     [Fact]
+    public void AClassAbilityLoadsAndMustNameAKnownAbilityOnce()
+    {
+        var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"abilities\": [\"vigilance\"]");
+        var content = ContentLoader.Parse(Fixture.Files(classes: classes));
+        Assert.Equal(ValueList<string>.Of("vigilance"), content.Class("cadet").Abilities);
+        Assert.Contains(content.AbilitiesOf(content.Unit("recruit")), a => a.Id == "vigilance");
+        Assert.Empty(ContentLoader.Parse(Fixture.Files()).Class("cadet").Abilities);
+
+        AssertNames(Fails(Fixture.Files(classes: classes.Replace("[\"vigilance\"]", "[\"swordfaire\"]"))), ContentFiles.ClassesName, "cadet", "abilities[0]");
+        AssertNames(Fails(Fixture.Files(classes: classes.Replace("[\"vigilance\"]", "[\"vigilance\", \"vigilance\"]"))), ContentFiles.ClassesName, "cadet", "abilities[1]");
+    }
+
+    [Fact]
+    public void ACantoEffectLoadsAndReadsNothingButItsKind()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"canto\" }")));
+        Assert.IsType<CantoEffect>(content.Ability("a").Effect);
+
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"canto\", \"mov\": 2 }"))), ContentFiles.AbilitiesName, "a", "effect.mov");
+    }
+
+    [Fact]
     public void ANamedMasteryGrantsNothingUntilItIsEarned()
     {
         var classes = Fixture.Classes.Replace("\"weapons\": [\"sword\"]", "\"weapons\": [\"sword\"], \"mastery\": \"vigilance\", \"masteryPoints\": 12");
@@ -118,7 +140,7 @@ public class AbilityContentTests
     [Fact]
     public void AnEffectKindMustBeKnown()
     {
-        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"canto\" }"))), ContentFiles.AbilitiesName, "a", "effect.kind");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"aura\" }"))), ContentFiles.AbilitiesName, "a", "effect.kind");
     }
 
     [Fact]

@@ -128,7 +128,7 @@ public static class RetreatRule
 
         var units = state.Units
             .Select(u => u.Id == attacker.Id ? u with { At = from } : u.Id == target.Id ? u with { Hp = hpAfter } : u)
-            .Select(u => u with { Moved = false, Acted = false });
+            .Select(u => u with { Moved = false, Acted = false, Canto = null });
         var board = state with { Units = ValueList<BattleUnit>.From(units) };
         return Choose(board, content, board.Find(target.Id)!);
     }

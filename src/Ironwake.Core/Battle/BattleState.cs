@@ -338,6 +338,21 @@ public sealed record BattleState(
         return Movement.Reach(Map, content, unit.At, unitClass.Movement, unitClass.Mov, at => OccupantAt(at, unit.Side));
     }
 
+    /// <summary>
+    /// Where a unit's Canto may take it (issue 71): the same section 4 reach from where it
+    /// stands on the budget its first move left, or null when no Canto is owed.
+    /// </summary>
+    public Reach? CantoReachOf(BattleUnit unit, GameContent content)
+    {
+        if (!unit.Acted || unit.Canto is not { } budget)
+        {
+            return null;
+        }
+
+        var unitClass = content.Class(unit.Unit.ClassId);
+        return Movement.Reach(Map, content, unit.At, unitClass.Movement, budget, at => OccupantAt(at, unit.Side));
+    }
+
     /// <summary>This state with one unit replaced by id. The unit must exist.</summary>
     public BattleState WithUnit(BattleUnit unit)
     {
@@ -438,6 +453,11 @@ public sealed record BattleState(
             if (unit.IsCaptain)
             {
                 sb.Append(" captain");
+            }
+
+            if (unit.Canto is { } canto)
+            {
+                sb.Append(" canto ").Append(canto);
             }
 
             if (unit.Side == Side.Enemy)

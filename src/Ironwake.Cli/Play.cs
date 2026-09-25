@@ -36,6 +36,7 @@ public sealed class PlaySession
           attack <unit> <target> [slot] [art <id>]  attack an enemy in range, with the weapon in a slot, declaring a combat art (the forecast prints first)
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
+          canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge)
           recall                   list the state each player turn started at, and the charges left
@@ -274,6 +275,19 @@ public sealed class PlaySession
             case "wait":
                 Error("usage: wait <unit>");
                 break;
+            case "canto" when words.Length == 3 && TryCoord(words[2], out var cantoTo):
+                Apply(new Canto(words[1], cantoTo));
+                break;
+            case "canto" when words.Length == 3 && words[2] == "stay":
+                if (Find(words[1]) is { } stayer)
+                {
+                    Apply(new Canto(stayer.Id, stayer.At));
+                }
+
+                break;
+            case "canto":
+                Error("usage: canto <unit> <x,y|stay>");
+                break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
                     ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
@@ -377,6 +391,11 @@ public sealed class PlaySession
             _out.WriteLine(Describe(e));
         }
 
+        if (CantoOwed(command) is { } owed)
+        {
+            _out.WriteLine($"{owed.Id} may canto up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
+        }
+
         if (command is not EndPhase)
         {
             _out.Write(MapRenderer.Render(_state, _content));
@@ -384,6 +403,19 @@ public sealed class PlaySession
         }
 
         return true;
+    }
+
+    /// <summary>The player unit an Attack, Item or Wait just left owed a Canto (issue 71), or null.</summary>
+    private BattleUnit? CantoOwed(Command command)
+    {
+        var id = command switch
+        {
+            Attack a => a.UnitId,
+            UseItem i => i.UnitId,
+            Wait w => w.UnitId,
+            _ => null,
+        };
+        return id is not null && _state.Find(id) is { Side: Side.Player } unit && _state.CantoReachOf(unit, _content) is not null ? unit : null;
     }
 
     /// <summary>
@@ -630,7 +662,7 @@ public sealed class PlaySession
         var tile = from ?? unit.At;
         if (Queries.Threats(_state, _content, unit, tile) is not { } lines)
         {
-            Error(unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+            Error(unit.Canto is not null && unit.Acted ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
             return;
         }
 
@@ -747,6 +779,11 @@ public sealed class PlaySession
         if (MasteryLine(unit, _content) is { } mastery)
         {
             _out.WriteLine(mastery);
+        }
+
+        if (_state.CantoReachOf(unit, _content) is not null)
+        {
+            _out.WriteLine($"  canto: {unit.Canto} movement left this phase");
         }
 
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
@@ -882,6 +919,10 @@ public sealed class PlaySession
                 return $"{m.UnitId} masters the {m.ClassId} class and keeps {m.AbilityId}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
+            case Cantoed c:
+                return c.From == c.To
+                    ? $"{c.UnitId} stays at {c.To} (canto)"
+                    : $"{c.UnitId} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
             case UnitRetreated r:
                 return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
             case UnitHealed h:
