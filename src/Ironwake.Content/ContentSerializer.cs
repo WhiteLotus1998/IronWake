@@ -218,6 +218,22 @@ public static class ContentSerializer
             writer.WriteEndArray();
         }
 
+        if (unitClass.Certification != CertificationRequirements.None)
+        {
+            var certification = unitClass.Certification;
+            writer.WriteStartObject("certification");
+            writer.WriteNumber("level", certification.Level);
+            writer.WriteStartObject("ranks");
+            foreach (var (type, rank) in certification.Ranks)
+            {
+                writer.WriteString(type.ToString().ToLowerInvariant(), rank.ToString());
+            }
+
+            writer.WriteEndObject();
+            WriteStats(writer, "stats", certification.Stats);
+            writer.WriteEndObject();
+        }
+
         writer.WriteEndObject();
     }
 
