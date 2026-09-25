@@ -386,15 +386,17 @@ public class ExposureTests
     /// <summary>
     /// Issue 117's board: on Old Mill Road seed 2 the heuristic's captain stood two tiles
     /// from a boss at 8 HP for twelve turns, a kill at raw 100 for 9 refused because the
-    /// sum counted the boss's counter and enemy-phase strike. The game now ends in a win.
+    /// sum counted the boss's counter and enemy-phase strike. Since DECISIONS/0031 the mill
+    /// bandit wakes with his group instead of holding his tile, so that board is gone; seed 1
+    /// keeps the half that still reads, a game the heuristic finishes inside the limit.
     /// </summary>
     [Fact]
-    public void OldMillRoadSeedTwoEndsInAWinNotAStall()
+    public void OldMillRoadSeedOneEndsInAWinNotAStall()
     {
         var file = "old_mill_road" + MapFiles.Extension;
         var map = Maps.MapFixture.Parse(File.ReadAllText(Path.Combine(Maps.MapFixture.MapsDirectory, file)), file);
 
-        var game = Runner.Play(Starter, map, 2, new HeuristicPlayer());
+        var game = Runner.Play(Starter, map, 1, new HeuristicPlayer());
 
         Assert.True(game.Won, game.Result + " at turn " + game.Turns);
         Assert.True(game.Turns < map.TurnLimit, "won at turn " + game.Turns);

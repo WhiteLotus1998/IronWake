@@ -214,24 +214,28 @@ public class CliPlayTests
 
     /// <summary>
     /// Issue 11's acceptance: a journaled script under docs/transcripts wins the sample map
-    /// under its seed. Keyed rolls keep it stable. The script is Code's arm-4 play of seed 53,
-    /// which still wins under section 5 as kept (DECISIONS/0028); the seed-7 script of
-    /// 2026-09-18 was played under the formulas before the keep and loses under these.
+    /// under its seed. Keyed rolls keep it stable. The script is Code's play of seed 73 on
+    /// the mill that wakes whole (DECISIONS/0031), with the Recall that took back Wren's
+    /// death; the seed-53 script was played while the mill bandit held his tile and loses
+    /// now that he leaves it.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsOldMillRoadOnSeedFiftyThree()
+    public void TheJournaledScriptWinsOldMillRoadOnSeedSeventyThree()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road-53.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road-73.script");
 
-        var output = Run(out var exit, "play", OldMillRoad, "--seed", "53", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", OldMillRoad, "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("group mill wakes: proximity", output);
-        Assert.Contains("mill_bandit-1 falls at 10,1", output);
+        Assert.Contains("wren falls at 2,0", output);
+        Assert.Contains("recalled to state 33", output);
+        Assert.Contains("mill_bandit-1 moves 7,1 -> 7,2", output);
+        Assert.Contains("mill_bandit-1 falls at 7,2", output);
     }
 
     private static string Run(out int exit, params string[] args)
@@ -305,13 +309,13 @@ public class SimFullTests
     /// <summary>
     /// Issue 118: a trace is a script the CLI replays. Slots print one-based as the CLI reads
     /// them, and the enemy's commands print as comments, since the CLI plays the enemy phase
-    /// itself from the same planner. Seed 2 on Old Mill Road has Wren use her dressing; the
+    /// itself from the same planner. Seed 3 on Old Mill Road has Wren use her dressing; the
     /// trace replayed under --strict applies every line and ends where the Sim said.
     /// </summary>
     [Fact]
     public void ATraceWithAnItemLineReplaysInTheCliUnderStrict()
     {
-        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 2));
+        var trace = Capture(() => Ironwake.Sim.Program.Trace("old_mill_road", 3));
         Assert.Contains("\nitem wren 2\n", trace);
         Assert.DoesNotContain("\nenemy:", trace);
         Assert.Contains("\n# enemy: wait archer-1\n", trace);
@@ -329,7 +333,7 @@ public class SimFullTests
         try
         {
             var exit = 0;
-            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "2", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
+            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "3", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
 
             Assert.Equal(0, exit);
             Assert.DoesNotContain("rejected ", output);
