@@ -256,6 +256,28 @@ public class CliPlayTests
         Assert.Contains("mill_bandit-1 falls at 7,2", output);
     }
 
+    /// <summary>
+    /// Issue 181: Code's play of seed 97 on the Tollgate with the door warden. Pell takes
+    /// 6,4 and the warden's thrown spear answers; the warden dies to Pell's counter in the
+    /// enemy phase, and the captain seizes on turn 7 with no Recall.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptWinsTheTollgateOnSeedNinetySeven()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-97.script");
+
+        var output = Run(out var exit, "play", "the_tollgate", "--seed", "97", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("forecast pell -> toll_warden-1: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%", output);
+        Assert.Contains("enemy: attack toll_warden-1 pell", output);
+        Assert.Contains("toll_warden-1 falls at 6,2", output);
+        Assert.Contains("The Tollgate  turn 7 of 10", output);
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

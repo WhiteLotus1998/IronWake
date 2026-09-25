@@ -1,0 +1,29 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: the_tollgate, heuristic wins 150/200 (75 %), winning turn median 7 p90 9 limit 10, losses 50 timeout 0 captain 0 protected, quiet tail 0.4, refused kill p50 0.9892 over 50, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.480: ok
+  pell: drop 0.595 se 0.056 own [atk 494 dmg 10931 heal 0 abs 479] rest baseline [atk 1344 dmg 14195 heal 0 abs 1344] rest benched [atk 1508 dmg 20058 heal 0 abs 2533] benched losses 169 timeout 0 captain 0 protected, refused kill p50 0.9892 over 169
+  teodor: drop 0.480 se 0.053 own [atk 561 dmg 5415 heal 0 abs 538] rest baseline [atk 1277 dmg 19711 heal 0 abs 1285] rest benched [atk 1341 dmg 21152 heal 0 abs 2288] benched losses 146 timeout 0 captain 0 protected, refused kill p50 0.0346 over 146
+  wren: drop 0.415 se 0.049 own [atk 319 dmg 3572 heal 0 abs 542] rest baseline [atk 1519 dmg 21554 heal 0 abs 1281] rest benched [atk 1388 dmg 20839 heal 0 abs 2356] benched losses 132 timeout 1 captain 0 protected, refused kill p50 0.8674 over 132
+  captain captain: baseline [atk 464 dmg 5208 heal 0 abs 264] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 849 ms: ok
+gate 5 forecast honesty: 10129 combats, 17941 strikes, hits 10339 expected 10423.2, crits 247 expected 249.8, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 13 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 15028 ms: ok
+full: ok
+
+full: 1 maps from /home/user/IronWake/content, 200 seeds, one roll
+gate 1 beatable: the_tollgate, heuristic wins 129/200 (65 %), winning turn median 7 p90 9 limit 10, losses 71 timeout 0 captain 0 protected, quiet tail 0.7, refused kill p50 0.9471 over 71, one roll: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.445: ok
+  pell: drop 0.530 se 0.054 own [atk 601 dmg 11666 heal 0 abs 468] rest baseline [atk 1496 dmg 13567 heal 0 abs 1502] rest benched [atk 1649 dmg 20123 heal 0 abs 2591] benched losses 177 timeout 0 captain 0 protected, refused kill p50 0.9471 over 177
+  teodor: drop 0.445 se 0.053 own [atk 643 dmg 5746 heal 0 abs 633] rest baseline [atk 1454 dmg 19487 heal 0 abs 1337] rest benched [atk 1509 dmg 20730 heal 0 abs 2346] benched losses 160 timeout 0 captain 0 protected, refused kill p50 0.0296 over 160
+  wren: drop 0.250 se 0.044 own [atk 362 dmg 3471 heal 0 abs 596] rest baseline [atk 1735 dmg 21762 heal 0 abs 1374] rest benched [atk 1611 dmg 22073 heal 0 abs 2332] benched losses 121 timeout 0 captain 0 protected, refused kill p50 0.7400 over 121
+  captain captain: baseline [atk 491 dmg 4350 heal 0 abs 273] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1037 ms: ok
+gate 5 forecast honesty: 10129 combats, 17941 strikes, hits 10339 expected 10423.2, crits 247 expected 249.8, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 11 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 15963 ms: ok
+full: ok

@@ -1,7 +1,7 @@
 name: The Tollgate
 size: 14x12
 win: seize
-turn_limit: 16
+turn_limit: 10
 recall: 3
 enemy_level: 3
 
@@ -20,12 +20,11 @@ MM####.#######
 
 units:
 P captain 6,11
-P recruit 5,11
-P recruit 7,11
-P recruit 6,10
-P recruit 8,11
+P recruit:wren 5,11
+P recruit:teodor 7,11
+P recruit:pell 6,10
 E archer 6,1 group:keep behavior:hold
-E soldier 6,2 group:keep behavior:hold
+E toll_warden 6,2 group:keep behavior:hold
 B bandit_leader 7,2 group:keep behavior:boss
 E brigand 6,5 group:woods behavior:guard
 E archer 5,6 group:woods behavior:guard

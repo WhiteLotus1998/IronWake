@@ -6,6 +6,7 @@
 
     { "id": "iron_lance", "name": "Iron Lance", "type": "lance", "mt": 6, "hit": 70, "crit": 0, "wt": 6, "minRange": 1, "maxRange": 1, "durability": 40 },
     { "id": "steel_lance", "name": "Steel Lance", "type": "lance", "mt": 9, "hit": 75, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 30 },
+    { "id": "toll_spear", "name": "Toll Spear", "type": "lance", "mt": 5, "hit": 65, "crit": 0, "wt": 7, "minRange": 1, "maxRange": 2, "durability": 20 },
     { "id": "longpike", "name": "Longpike", "type": "lance", "mt": 8, "hit": 70, "crit": 5, "wt": 11, "minRange": 1, "maxRange": 1, "durability": 25, "effective": ["armored"] },
 
     { "id": "hatchet", "name": "Hatchet", "type": "axe", "mt": 5, "hit": 85, "crit": 5, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 45 },
