@@ -284,29 +284,55 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 208: Code's play of seed 131 on the Tollgate with the woods archer at 5,5, inside
-    /// the toll brigand's band. Pell's strike on the brigand is answered, the archer takes
-    /// two turns of melee and falls to Pell from range 2, Teodor opens the door and dies to
-    /// the keep archer, the boss throws at Wren rather than swing at the captain beside him,
-    /// and the captain seizes on turn 9 with no Recall.
+    /// Issue 222: Code's play of seed 163 on the Tollgate with the rider arriving by map event.
+    /// The woods fight opens on turn 3, the rider arrives at 13,5 as enemy phase 4 opens and
+    /// strikes Pell on the flank of it, one Recall on turn 5 buys the rider's kill by the
+    /// captain, the captain takes the door, and he seizes on turn 10 of 10.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsTheTollgateOnSeedOneThirtyOne()
+    public void TheJournaledScriptWinsTheTollgateOnSeedOneSixtyThree()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-131.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-163.script");
 
-        var output = Run(out var exit, "play", "the_tollgate", "--seed", "131", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "the_tollgate", "--seed", "163", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("forecast pell -> toll_brigand-1: dmg 13 hit 87% crit 3%; counter: dmg 13 hit 62% crit 0%", output);
-        Assert.Contains("archer-2 falls at 5,5", output);
-        Assert.Contains("teodor falls at 6,3", output);
-        Assert.Contains("enemy: attack bandit_leader-1 wren", output);
-        Assert.Contains("The Tollgate  turn 9 of 10", output);
-        Assert.DoesNotContain("The Tollgate  turn 10 of 10", output);
+        Assert.Contains("-- enemy phase, turn 4 --\nevent riders\n  rider-1 arrives at 13,5, group flank, aggressive\n", output);
+        Assert.Contains("rider-1 attacks pell", output);
+        Assert.Contains("recalled to state 49; 2 charges left", output);
+        Assert.Contains("rider-1 falls at 9,5", output);
+        Assert.Contains("toll_warden-1 falls at 6,2", output);
+        Assert.Contains("The Tollgate  turn 10 of 10", output);
+    }
+
+    /// <summary>
+    /// Issue 222's rule: the Tollgate places no rider, and one spawn event brings rider-1 to
+    /// 13,5 at the start of enemy phase 4, under the same id on every replay.
+    /// </summary>
+    [Fact]
+    public void TheTollgateRiderArrivesByEventOnEnemyPhaseFour()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-play-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "show rider-1\nend\nend\nend\nend\n");
+        try
+        {
+            var first = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
+            var second = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
+
+            var turnOne = first[..first.IndexOf("-- player phase ends, turn 1 --", StringComparison.Ordinal)];
+            Assert.DoesNotContain("rider", turnOne.Replace("show rider-1", "").Replace("'rider-1'", ""));
+            Assert.Contains("no living unit 'rider-1'", turnOne);
+            Assert.DoesNotContain("arrives", first[..first.IndexOf("-- enemy phase, turn 4 --", StringComparison.Ordinal)]);
+            Assert.Contains("-- enemy phase, turn 4 --\nevent riders\n  rider-1 arrives at 13,5, group flank, aggressive\n", first);
+            Assert.Equal(first, second);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
     }
 
     /// <summary>
