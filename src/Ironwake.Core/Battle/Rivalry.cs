@@ -171,8 +171,9 @@ public static class Rivalry
                 var before = table.GetValueOrDefault((a.Id, b.Id));
                 var after = before + amount;
                 table[(a.Id, b.Id)] = after;
-                events.Add(new RapportGained(a.Id, b.Id, amount, after));
-                if (a.Unit.Region != b.Unit.Region && before < content.Rivalry.OverwriteAt && after >= content.Rivalry.OverwriteAt)
+                var wereRivals = a.Unit.Region != b.Unit.Region && before < content.Rivalry.OverwriteAt;
+                events.Add(new RapportGained(a.Id, b.Id, amount, after, wereRivals ? content.Rivalry.OverwriteAt : null));
+                if (wereRivals && after >= content.Rivalry.OverwriteAt)
                 {
                     events.Add(new RivalryEnded(a.Id, b.Id));
                 }

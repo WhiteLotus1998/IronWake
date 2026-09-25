@@ -1,3 +1,4 @@
+using Ironwake.Cli;
 using Ironwake.Content;
 using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
@@ -186,7 +187,7 @@ public class RivalryTests
 
         var result = Resolver.Apply(state, Starter, new EndPhase());
 
-        Assert.Equal(new RapportGained("ivo", "wren", amount, amount), result.Events[0]);
+        Assert.Equal(new RapportGained("ivo", "wren", amount, amount, Starter.Rivalry.OverwriteAt), result.Events[0]);
         Assert.Equal(amount, Rivalry.PointsOf(result.Next, "wren", "ivo"));
         Assert.Equal(ValueList<Rapport>.Of(new Rapport("ivo", "wren", amount)), result.Next.Rapport);
     }
@@ -253,7 +254,7 @@ public class RivalryTests
 
         var result = Resolver.Apply(state, Starter, new EndPhase());
 
-        Assert.Contains(new RapportGained("ivo", "wren", amount, amount), result.Events);
+        Assert.Contains(new RapportGained("ivo", "wren", amount, amount, Starter.Rivalry.OverwriteAt), result.Events);
     }
 
     [Fact]
@@ -315,6 +316,27 @@ public class RivalryTests
         Assert.Contains(new RivalryEnded("ivo", "wren"), result.Events);
         Assert.Empty(Rivalry.AdjacentRivals(result.Next, Starter, result.Next.Find("wren")!));
         Assert.Equal((0, 0, 0), Rivalry.Modifiers(result.Next, Starter, result.Next.Find("wren")!, countering: true));
+    }
+
+    [Fact]
+    public void TheRapportLineCarriesTheThresholdOnlyForAPairThatWereRivals()
+    {
+        var rivals = Resolver.Apply(Begin(), Starter, new EndPhase()).Events.OfType<RapportGained>().Single();
+        var oneRegion = Resolver.Apply(Begin(ivoRegion: "aldmere"), Starter, new EndPhase()).Events.OfType<RapportGained>().Single();
+        var past = Begin() with { Rapport = ValueList<Rapport>.Of(new Rapport("ivo", "wren", Starter.Rivalry.OverwriteAt)) };
+        var cured = Resolver.Apply(past, Starter, new EndPhase()).Events.OfType<RapportGained>().Single();
+
+        Assert.Equal(Starter.Rivalry.OverwriteAt, rivals.OutOf);
+        Assert.Null(oneRegion.OutOf);
+        Assert.Null(cured.OutOf);
+        Assert.Equal($"rapport ivo and wren +{rivals.Amount} ({rivals.Total} of {Starter.Rivalry.OverwriteAt})", PlaySession.Describe(rivals));
+        Assert.Equal($"rapport ivo and wren +{oneRegion.Amount} ({oneRegion.Total})", PlaySession.Describe(oneRegion));
+    }
+
+    [Fact]
+    public void TheShippedThresholdIsOneExposedEnemyPhase()
+    {
+        Assert.Equal(8, Starter.Rivalry.OverwriteAt);
     }
 
     [Fact]
