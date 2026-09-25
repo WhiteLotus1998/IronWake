@@ -163,37 +163,58 @@ public sealed class HeuristicPlayer : IPlayer
 
     /// <summary>
     /// The chance that <paramref name="attacker"/>, attacking from <paramref name="tile"/>
-    /// with its equipped weapon, kills <paramref name="target"/> over the whole attack: the
-    /// first strike and the second when it doubles, each landing at the forecast's resolved
-    /// hit probability under the game's scheme and critting at its crit chance for
-    /// <see cref="Combat.CritMultiplier"/> times the damage (issue 125). The counter between
-    /// the strikes is not counted; this is the named attack's own chance, nothing more.
+    /// with its equipped weapon, kills <paramref name="target"/> over the strikes it lives to
+    /// make: the first strike, and the second when it doubles, each landing at the forecast's
+    /// resolved hit probability under the game's scheme and critting at its crit chance for
+    /// <see cref="Combat.CritMultiplier"/> times the damage (issue 125). A kill that needs the
+    /// second strike is weighted by the chance the attacker survives the counter thrown
+    /// between them (issue 147): the defender's strike when it reaches, at its own hit and
+    /// crit, killing when its damage reaches the attacker's current HP. A first-strike kill
+    /// takes no counter and is unchanged; a defender that cannot strike back, or whose raw
+    /// hit is 0, weighs the second strike at one.
     /// </summary>
     public static double KillProbability(BattleState state, GameContent content, BattleUnit attacker, Coord tile, BattleUnit target)
     {
         var me = (attacker with { At = tile }).ToCombatant(state.Map, content);
         var them = target.ToCombatant(state.Map, content);
-        var side = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme).Attacker;
-        var hit = Combat.HitProbability(side.HitChance, state.Scheme);
-        var crit = Math.Clamp(side.CritChance, 0, 100) / 100.0;
-        var outcomes = new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Combat.CritMultiplier) };
+        var forecast = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme);
+        var side = forecast.Attacker;
+        var outcomes = Outcomes(side, state.Scheme);
+        var survivesCounter = 1 - KillsWith(forecast.Defender, attacker.Hp, state.Scheme);
         var kill = 0.0;
         foreach (var (firstP, firstDamage) in outcomes)
         {
+            if (firstDamage >= target.Hp)
+            {
+                kill += firstP;
+                continue;
+            }
+
             if (!side.Doubles)
             {
-                kill += firstDamage >= target.Hp ? firstP : 0;
                 continue;
             }
 
             foreach (var (secondP, secondDamage) in outcomes)
             {
-                kill += firstDamage + secondDamage >= target.Hp ? firstP * secondP : 0;
+                kill += firstDamage + secondDamage >= target.Hp ? firstP * survivesCounter * secondP : 0;
             }
         }
 
         return kill;
     }
+
+    /// <summary>The three outcomes of one strike with their probabilities: a miss, a plain hit, a crit.</summary>
+    private static (double P, int Damage)[] Outcomes(SideForecast side, RollScheme scheme)
+    {
+        var hit = Combat.HitProbability(side.HitChance, scheme);
+        var crit = Math.Clamp(side.CritChance, 0, 100) / 100.0;
+        return new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Combat.CritMultiplier) };
+    }
+
+    /// <summary>The chance one strike of <paramref name="side"/> kills a unit at <paramref name="hp"/>; zero when the side does not strike.</summary>
+    private static double KillsWith(SideForecast side, int hp, RollScheme scheme) =>
+        side.Strikes ? Outcomes(side, scheme).Where(o => o.Damage >= hp).Sum(o => o.P) : 0;
 
     private static IReadOnlyList<Command> WithMove(BattleUnit unit, Coord tile, Command action) =>
         tile == unit.At ? new[] { action } : new Command[] { new Move(unit.Id, tile), action };
