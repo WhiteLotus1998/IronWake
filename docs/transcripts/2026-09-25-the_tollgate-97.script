@@ -1,0 +1,39 @@
+move teodor 9,11
+move captain 9,10
+move wren 8,10
+move pell 7,10
+end
+move pell 10,9
+attack pell rider-1
+move teodor 9,9
+attack teodor rider-1
+end
+move pell 10,7
+attack pell brigand-1
+move captain 8,8
+attack captain brigand-1
+move teodor 10,6
+attack teodor archer-2
+move wren 9,7
+attack wren archer-2
+end
+move pell 8,5
+move captain 7,6
+move teodor 9,5
+move wren 8,4
+end
+move pell 6,4
+attack pell toll_warden-1
+move wren 7,4
+move captain 7,5
+move teodor 8,4
+end
+move wren 6,2
+attack wren archer-1
+move pell 6,3
+attack pell archer-1
+move captain 6,4
+move teodor 8,4
+end
+attack pell bandit_leader-1
+move captain 7,1

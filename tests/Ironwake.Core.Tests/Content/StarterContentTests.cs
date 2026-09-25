@@ -12,8 +12,8 @@ public class StarterContentTests
     {
         Assert.Equal(9, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
-        Assert.Equal(18, Content.Weapons.Count);
-        Assert.Equal(21, Content.Units.Count);
+        Assert.Equal(19, Content.Weapons.Count);
+        Assert.Equal(22, Content.Units.Count);
         Assert.Equal(11, Content.Cast.Count);
     }
 
@@ -187,13 +187,14 @@ public class StarterContentTests
             .Where(w => w.Type is WeaponType.Sword or WeaponType.Lance or WeaponType.Axe && w.MaxRange > 1)
             .Select(w => w.Id)
             .ToList();
-        Assert.Equal(new[] { "toll_axe" }, thrown);
+        Assert.Equal(new[] { "toll_axe", "toll_spear" }, thrown.Order());
         foreach (var unit in Content.Cast)
         {
             Assert.DoesNotContain(unit.Inventory.Items, item => thrown.Contains(item.ItemId));
         }
 
         Assert.Contains(Content.Unit("bandit_leader").Inventory.Items, item => item.ItemId == "toll_axe");
+        Assert.Contains(Content.Unit("toll_warden").Inventory.Items, item => item.ItemId == "toll_spear");
     }
 
     [Fact]

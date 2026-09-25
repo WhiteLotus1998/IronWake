@@ -82,6 +82,15 @@
       "inventory": [ { "item": "hatchet" } ]
     },
     {
+      "id": "toll_warden",
+      "name": "Toll Warden",
+      "class": "pikeman",
+      "level": 1,
+      "stats": { "hp": 19, "str": 6, "mag": 0, "dex": 4, "spd": 5, "lck": 2, "def": 3, "res": 1, "cha": 2 },
+      "growths": { "hp": 45, "str": 35, "mag": 5, "dex": 30, "spd": 30, "lck": 15, "def": 30, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "toll_spear" } ]
+    },
+    {
       "id": "bandit_leader",
       "name": "Bandit Leader",
       "class": "reaver",
