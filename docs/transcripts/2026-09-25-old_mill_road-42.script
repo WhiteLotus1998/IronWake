@@ -1,0 +1,25 @@
+# Old Mill Road, seed 42, Chat's cold Fun Gate play (Design Table, sixteenth round); replayed by Code from the posted command list
+move captain 4,7
+move wren 3,8
+end
+move captain 6,5
+item captain 2
+move wren 5,6
+end
+move captain 7,4
+move wren 6,4
+end
+move captain 10,3
+attack captain archer-1
+move wren 9,4
+end
+attack captain soldier-1
+move wren 9,3
+attack wren archer-1
+end
+item wren 2
+move captain 10,2
+attack captain mill_bandit-1
+end
+move wren 9,1
+attack wren mill_bandit-1
