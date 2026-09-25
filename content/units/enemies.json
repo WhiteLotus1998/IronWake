@@ -82,6 +82,15 @@
       "inventory": [ { "item": "hatchet" } ]
     },
     {
+      "id": "toll_brigand",
+      "name": "Toll Brigand",
+      "class": "reaver",
+      "level": 1,
+      "stats": { "hp": 20, "str": 6, "mag": 0, "dex": 3, "spd": 4, "lck": 1, "def": 2, "res": 0, "cha": 1 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 20, "res": 10, "cha": 5 },
+      "inventory": [ { "item": "toll_axe" } ]
+    },
+    {
       "id": "toll_warden",
       "name": "Toll Warden",
       "class": "pikeman",

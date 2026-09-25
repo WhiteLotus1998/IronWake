@@ -1,0 +1,18 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: the_tollgate, heuristic wins 137/200 (69 %), winning turn median 8 p90 9 limit 10, losses 63 timeout 0 captain 0 protected, quiet tail 0.3, refused kill p50 0.8674 over 63, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.330: ok
+  pell: drop 0.455 se 0.053 own [atk 631 dmg 11102 heal 0 abs 410] rest baseline [atk 1608 dmg 14290 heal 0 abs 1438] rest benched [atk 1915 dmg 19962 heal 0 abs 2251] benched losses 154 timeout 0 captain 0 protected, refused kill p50 0.8664 over 154
+  teodor: drop 0.250 se 0.043 own [atk 571 dmg 4293 heal 0 abs 471] rest baseline [atk 1668 dmg 21099 heal 0 abs 1377] rest benched [atk 1717 dmg 21558 heal 0 abs 1772] benched losses 113 timeout 0 captain 0 protected, refused kill p50 0.8674 over 113
+  wren: drop 0.330 se 0.041 own [atk 433 dmg 4686 heal 0 abs 625] rest baseline [atk 1806 dmg 20706 heal 0 abs 1223] rest benched [atk 1771 dmg 20872 heal 0 abs 1694] benched losses 129 timeout 0 captain 0 protected, refused kill p50 0.8674 over 129
+  captain captain: baseline [atk 604 dmg 5311 heal 0 abs 342] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1245 ms: ok
+gate 5 forecast honesty: 10147 combats, 17926 strikes, hits 10366 expected 10261.9, crits 256 expected 249.1, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 14 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 19240 ms: ok
+full: ok
+
+one roll, same content:
+gate 1 beatable: the_tollgate, heuristic wins 112/200 (56 %), winning turn median 8 p90 10 limit 10, losses 88 timeout 0 captain 0 protected, quiet tail 0.5, refused kill p50 0.7400 over 88, one roll: FAILED
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.260: ok

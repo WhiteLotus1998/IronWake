@@ -13,7 +13,7 @@ public class StarterContentTests
         Assert.Equal(9, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
         Assert.Equal(19, Content.Weapons.Count);
-        Assert.Equal(22, Content.Units.Count);
+        Assert.Equal(23, Content.Units.Count);
         Assert.Equal(11, Content.Cast.Count);
     }
 
@@ -195,6 +195,7 @@ public class StarterContentTests
 
         Assert.Contains(Content.Unit("bandit_leader").Inventory.Items, item => item.ItemId == "toll_axe");
         Assert.Contains(Content.Unit("toll_warden").Inventory.Items, item => item.ItemId == "toll_spear");
+        Assert.Contains(Content.Unit("toll_brigand").Inventory.Items, item => item.ItemId == "toll_axe");
     }
 
     [Fact]

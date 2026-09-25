@@ -259,25 +259,27 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 181: Code's play of seed 97 on the Tollgate with the door warden. Pell takes
-    /// 6,4 and the warden's thrown spear answers; the warden dies to Pell's counter in the
-    /// enemy phase, and the captain seizes on turn 7 with no Recall.
+    /// Issue 197: Code's play of seed 127 on the Tollgate with the woods screen. The toll
+    /// brigand holds its forest and throws at range 2, so Pell's strike on it from 8,5 is
+    /// answered; the woods cost Pell 13 on turn 4, Teodor opens the door so Pell's finish on
+    /// the warden takes no counter, and the captain seizes on turn 9 with no Recall.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsTheTollgateOnSeedNinetySeven()
+    public void TheJournaledScriptWinsTheTollgateOnSeedOneTwentySeven()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-97.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-127.script");
 
-        var output = Run(out var exit, "play", "the_tollgate", "--seed", "97", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "the_tollgate", "--seed", "127", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("forecast pell -> toll_warden-1: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%", output);
-        Assert.Contains("enemy: attack toll_warden-1 pell", output);
+        Assert.Contains("forecast pell -> toll_brigand-1: dmg 13 hit 87% crit 3%; counter: dmg 13 hit 62% crit 0%", output);
+        Assert.Contains("toll_brigand-1 hits pell for 13 (hp 3)", output);
         Assert.Contains("toll_warden-1 falls at 6,2", output);
-        Assert.Contains("The Tollgate  turn 7 of 10", output);
+        Assert.Contains("The Tollgate  turn 9 of 10", output);
+        Assert.DoesNotContain("The Tollgate  turn 10 of 10", output);
     }
 
     private static string Run(out int exit, params string[] args)

@@ -26,6 +26,6 @@ P recruit:pell 6,10
 E archer 6,1 group:keep behavior:hold
 E toll_warden 6,2 group:keep behavior:hold
 B bandit_leader 7,2 group:keep behavior:boss
-E brigand 6,5 group:woods behavior:guard
-E archer 5,6 group:woods behavior:guard
+E toll_brigand 6,5 group:woods behavior:hold
+E archer 5,6 group:woods behavior:hold
 E rider 12,5 group:flank behavior:aggressive
