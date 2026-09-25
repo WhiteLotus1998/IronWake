@@ -158,5 +158,5 @@ public static class Queries
 public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast)
 {
     /// <summary>The damage the strike deals if every hit lands, doubles included, no crit.</summary>
-    public int IfAllLand => Forecast.Attacker.Strikes ? Forecast.Attacker.Damage * (Forecast.Attacker.Doubles ? 2 : 1) : 0;
+    public int IfAllLand => Forecast.Attacker.Damage * Forecast.Attacker.StrikeCount;
 }

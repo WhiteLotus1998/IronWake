@@ -137,13 +137,26 @@ public class ProtocolJsonTests
     }
 
     [Fact]
+    public void AGauntletForecastCarriesItsStrikesPerRoundAndAnOlderForecastReadsAsOne()
+    {
+        var forecast = new CombatForecast(new SideForecast(true, 3, 81, 91, 4, true, StrikesPerRound: 2), SideForecast.None, RollScheme.OneRoll);
+
+        var json = ProtocolJson.Forecast(forecast);
+
+        Assert.Contains("\"doubles\":true,\"strikesPerRound\":2}", json);
+        Assert.Equal(forecast, ProtocolJson.ReadForecast(json));
+        var older = json.Replace(",\"strikesPerRound\":2", "").Replace(",\"strikesPerRound\":1", "");
+        Assert.Equal(1, ProtocolJson.ReadForecast(older).Attacker.StrikesPerRound);
+    }
+
+    [Fact]
     public void AForecastReadsBackEqual()
     {
         var forecast = new CombatForecast(new SideForecast(true, 7, 81, 91, 4, true), SideForecast.None, RollScheme.TwoRollAverage);
 
         var json = ProtocolJson.Forecast(forecast);
 
-        Assert.Equal("""{"attacker":{"strikes":true,"damage":7,"hitChance":81,"displayedHit":91,"critChance":4,"doubles":true},"defender":{"strikes":false,"damage":0,"hitChance":0,"displayedHit":0,"critChance":0,"doubles":false},"scheme":"twoRollAverage"}""", json);
+        Assert.Equal("""{"attacker":{"strikes":true,"damage":7,"hitChance":81,"displayedHit":91,"critChance":4,"doubles":true,"strikesPerRound":1},"defender":{"strikes":false,"damage":0,"hitChance":0,"displayedHit":0,"critChance":0,"doubles":false,"strikesPerRound":1},"scheme":"twoRollAverage"}""", json);
         Assert.Equal(forecast, ProtocolJson.ReadForecast(json));
     }
 
@@ -211,7 +224,7 @@ public class ProtocolJsonTests
             .WithUnit(captain with { Unit = captain.Unit with { Skill = WeaponSkill.Zero.With(WeaponType.Sword, 34).With(WeaponType.Faith, 3) } });
 
         var json = ProtocolJson.State(skilled, content);
-        Assert.Contains("\"weaponPoints\":{\"sword\":34,\"lance\":0,\"axe\":0,\"bow\":0,\"reason\":0,\"faith\":3}", json);
+        Assert.Contains("\"weaponPoints\":{\"sword\":34,\"lance\":0,\"axe\":0,\"bow\":0,\"reason\":0,\"faith\":3,\"gauntlet\":0}", json);
         Assert.Equal(skilled, ProtocolJson.ReadState(json, content));
 
         var older = System.Text.RegularExpressions.Regex.Replace(json, ",\"weaponPoints\":\\{[^}]*\\}", string.Empty);

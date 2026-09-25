@@ -141,11 +141,12 @@ public static class Exposure
     /// Whether the first strike of <paramref name="attacker"/> kills a target at
     /// <paramref name="hp"/> with certainty: it strikes, its raw hit is 100 (clamped, so
     /// <see cref="Combat.HitProbability"/> is exactly one under either scheme), and its
-    /// plain damage reaches the HP. One strike, never the double, because the counter
-    /// falls between the strikes.
+    /// plain damage over its first round reaches the HP. The first round, never the double,
+    /// because the counter falls between the rounds; a gauntlet's round is two strikes with
+    /// nothing between them (issue 70).
     /// </summary>
     public static bool KillsWithCertainty(SideForecast attacker, int hp) =>
-        attacker.Strikes && attacker.HitChance >= 100 && attacker.Damage >= hp;
+        attacker.Strikes && attacker.HitChance >= 100 && attacker.Damage * attacker.StrikesPerRound >= hp;
 
     /// <summary>
     /// The worst a side's strikes can do: plain and crit damage over one or two strikes,
@@ -159,7 +160,7 @@ public static class Exposure
             return (0, 0);
         }
 
-        var strikes = side.Doubles ? 2 : 1;
+        var strikes = side.StrikeCount;
         return (side.Damage * strikes, side.Damage * Combat.CritMultiplier * strikes);
     }
 }

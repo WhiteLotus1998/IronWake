@@ -201,14 +201,14 @@ public static class EnemyAi
         var them = target.ToCombatant(state, content, countering: true);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
-        var strikes = forecast.Attacker.Doubles ? 2 : 1;
+        var strikes = forecast.Attacker.StrikeCount;
         var canKill = forecast.Attacker.Damage * strikes >= target.Hp;
         var dealt = Math.Min(target.Hp, Expected(forecast.Attacker, strikes));
         var score = (canKill ? KillBonus : 0) + dealt * Combat.HitProbability(forecast.Attacker.HitChance, state.Scheme);
 
         if (forecast.Defender.Strikes)
         {
-            var counterStrikes = forecast.Defender.Doubles ? 2 : 1;
+            var counterStrikes = forecast.Defender.StrikeCount;
             var taken = Math.Min(attacker.Hp, Expected(forecast.Defender, counterStrikes));
             score -= taken * Combat.HitProbability(forecast.Defender.HitChance, state.Scheme) * CounterWeight;
         }

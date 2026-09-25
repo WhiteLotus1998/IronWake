@@ -24,11 +24,18 @@ public static class RollSchemes
 /// <summary>
 /// One side of a forecast. <see cref="HitChance"/> is the raw section 5 number the
 /// resolver rolls against; <see cref="DisplayedHit"/> is the resolved probability the
-/// player sees, and the only one a renderer may print.
+/// player sees, and the only one a renderer may print. <see cref="StrikesPerRound"/> is
+/// the strikes each of this side's turns makes, two for gauntlets (issue 70).
 /// </summary>
-public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles)
+public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1)
 {
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
+
+    /// <summary>The turns this side takes in the combat: two when it doubles, one when it strikes at all.</summary>
+    public int Rounds => !Strikes ? 0 : Doubles ? 2 : 1;
+
+    /// <summary>Every strike this side can make if nobody dies: its rounds times the strikes per round, four for a doubling gauntlet.</summary>
+    public int StrikeCount => Rounds * StrikesPerRound;
 }
 
 /// <summary>
@@ -37,6 +44,9 @@ public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int D
 /// </summary>
 public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender, RollScheme Scheme, int ArtCost = 0)
 {
-    /// <summary>The most uses the attacker's weapon spends: one per strike it can make, and an art's cost, paid hit or miss.</summary>
-    public int AttackerSpendsAtMost => (Attacker.Doubles ? 2 : 1) + ArtCost;
+    /// <summary>
+    /// The most uses the attacker's weapon spends: one per strike it can make, or one for
+    /// the whole combat with a gauntlet (issue 70), and an art's cost, paid hit or miss.
+    /// </summary>
+    public int AttackerSpendsAtMost => (Attacker.StrikesPerRound > 1 ? 1 : Attacker.StrikeCount) + ArtCost;
 }
