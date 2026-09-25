@@ -78,7 +78,6 @@ public static class EnemyAi
         var behavior = state.EffectiveBehavior(unit)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
         var weapon = unit.EquippedWeapon(content);
-        var movement = content.Class(unit.Unit.ClassId).Movement;
         var mayMove = behavior == Behavior.Aggressive && !unit.Moved;
         var reach = state.ReachOf(unit, content);
         var tiles = mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
@@ -96,35 +95,7 @@ public static class EnemyAi
         }
 
         var equipped = unit.EquippedSlot(content);
-        var arms = Enumerable.Range(0, unit.Unit.Inventory.Count)
-            .Where(slot => unit.UsableWeaponAt(content, slot) is not null)
-            .Select(slot => (Slot: slot, Weapon: unit.UsableWeaponAt(content, slot)!, Armed: unit.WithSlotInFront(slot)))
-            .ToList();
-
-        AttackOption? best = null;
-        foreach (var tile in tiles)
-        {
-            var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
-            var exposure = playerReach.Count(r => r.CanEnd(tile));
-            var cost = reach.CostTo(tile)!.Value;
-            foreach (var arm in arms)
-            {
-                foreach (var target in players)
-                {
-                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)))
-                    {
-                        continue;
-                    }
-
-                    var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot);
-                    if (best is null || option.Beats(best))
-                    {
-                        best = option;
-                    }
-                }
-            }
-        }
-
+        var best = BestOption(state, content, unit, tiles, reach, players, playerReach);
         if (best is not null)
         {
             var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
@@ -142,6 +113,75 @@ public static class EnemyAi
         return destination is { } to && to != unit.At
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
+    }
+
+    /// <summary>
+    /// The attack <paramref name="unit"/> would make on <paramref name="target"/> if the
+    /// planner chose that target on the board as it stands (issue 217): the best tile and
+    /// weapon slot among its options against that one unit, by <see cref="PlanUnit"/>'s
+    /// own score and order, so when the planner's best option is this target the strike
+    /// named here is the strike that comes. Null when the unit would retreat, has no
+    /// weapon, or has no option against the target; a unit that holds strikes only from
+    /// its own tile, and one that has moved only from where it stands.
+    /// </summary>
+    public static EnemyStrike? StrikeOn(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    {
+        var behavior = state.EffectiveBehavior(unit)
+            ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
+        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null)
+        {
+            return null;
+        }
+
+        var reach = state.ReachOf(unit, content);
+        var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
+        var players = state.UnitsOf(Side.Player).ToList();
+        var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+        var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach);
+        return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
+    }
+
+    /// <summary>
+    /// The best-scoring attack option over <paramref name="tiles"/>, every usable weapon in
+    /// inventory order, and <paramref name="targets"/>, by <see cref="AttackOption.Beats"/>;
+    /// null when no weapon reaches any target from any tile. The tile's exposure counts
+    /// every player unit through <paramref name="playerReach"/>, whichever targets are asked.
+    /// </summary>
+    private static AttackOption? BestOption(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
+        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach)
+    {
+        var movement = content.Class(unit.Unit.ClassId).Movement;
+        var arms = Enumerable.Range(0, unit.Unit.Inventory.Count)
+            .Where(slot => unit.UsableWeaponAt(content, slot) is not null)
+            .Select(slot => (Slot: slot, Weapon: unit.UsableWeaponAt(content, slot)!, Armed: unit.WithSlotInFront(slot)))
+            .ToList();
+
+        AttackOption? best = null;
+        foreach (var tile in tiles)
+        {
+            var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
+            var exposure = playerReach.Count(r => r.CanEnd(tile));
+            var cost = reach.CostTo(tile)!.Value;
+            foreach (var arm in arms)
+            {
+                foreach (var target in targets)
+                {
+                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)))
+                    {
+                        continue;
+                    }
+
+                    var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot);
+                    if (best is null || option.Beats(best))
+                    {
+                        best = option;
+                    }
+                }
+            }
+        }
+
+        return best;
     }
 
     /// <summary>
@@ -332,3 +372,7 @@ public static class EnemyAi
         }
     }
 }
+
+/// <summary>An enemy's strike as the planner would make it: the tile it strikes from and the inventory slot of the weapon it swings.</summary>
+public sealed record EnemyStrike(Coord From, int Slot);
+

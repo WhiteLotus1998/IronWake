@@ -73,6 +73,10 @@ public class CliPlayTests
     [InlineData("forecast captain brigand-1 at 1,4", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
     [InlineData("forecast captain brigand-1 from 9,9", "ERROR: captain cannot move to 9,9")]
     [InlineData("show", "ERROR: usage: show <unit>")]
+    [InlineData("threat", "ERROR: usage: threat <unit> [from <x,y>]")]
+    [InlineData("threat captain at 1,4", "ERROR: usage: threat <unit> [from <x,y>]")]
+    [InlineData("threat captain from 9,9", "ERROR: captain cannot move to 9,9")]
+    [InlineData("threat brigand-1", "ERROR: brigand-1 is an enemy; threat answers for a player unit")]
     [InlineData("reach", "ERROR: usage: reach <unit>")]
     [InlineData("dance", "ERROR: unknown command 'dance'; type help")]
     [InlineData("move captain 9,9", "ERROR: captain cannot move to 9,9")]
@@ -199,6 +203,28 @@ public class CliPlayTests
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("  forecast <unit> <target> [slot] [from <x,y>]  show the forecast", Play(out _, "help\n"));
+    }
+
+    /// <summary>
+    /// Issue 217: <c>threat &lt;unit&gt; [from x,y]</c> lists each enemy that could strike the
+    /// unit next enemy phase with the weapon the planner would swing, the tile, and the
+    /// forecast line, then the total if all land; the enemy phase that follows prints the
+    /// same forecasts. Refused from another tile once the unit has moved.
+    /// </summary>
+    [Fact]
+    public void ThreatListsWhatEachEnemyWillStrikeWithAndTheEnemyPhasePrintsTheSame()
+    {
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nthreat wren from 4,6\nmove wren 4,6\nthreat wren from 3,7\nthreat wren\nwait wren\nend\n");
+
+        const string Archer = "archer-2 from 5,5 with Iron Bow (slot 1): dmg 6 hit 70% crit 0%; counter: none";
+        const string Brigand = "brigand-1 from 3,6 with Iron Axe (slot 1): dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%";
+        var expected = $"threat on wren at 4,6 (Plain):\n  {Archer}\n  {Brigand}\n  if all land: 17 against 9 hp\n";
+        Assert.Contains("> threat wren from 4,6\n" + expected, output);
+        Assert.Contains("> threat wren from 3,7\nERROR: wren has already moved this phase; threat from 4,6\n", output);
+        Assert.Contains("> threat wren\n" + expected, output);
+        Assert.Contains("enemy: attack archer-2 wren\nforecast archer-2 -> wren: dmg 6 hit 70% crit 0%; counter: none\n", output);
+        Assert.Contains("enemy: attack brigand-1 wren\nforecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\n", output);
+        Assert.Contains("  threat <unit> [from <x,y>]  what each enemy would strike it with", Play(out _, "help\n"));
     }
 
     [Fact]
