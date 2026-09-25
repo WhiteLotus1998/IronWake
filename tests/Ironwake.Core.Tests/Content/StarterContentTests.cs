@@ -7,15 +7,15 @@ public class StarterContentTests
 {
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
-    /// <summary>Every weapon type but gauntlets, whose mechanism is in (issue 70) while their weapons and wielder wait on the Table.</summary>
-    private static readonly WeaponType[] ShippedWeaponTypes = Enum.GetValues<WeaponType>().Where(t => t != WeaponType.Gauntlet).ToArray();
+    /// <summary>Every weapon type, gauntlets included since issue 70's content line: the reaver wields them and Keziah carries a pair.</summary>
+    private static readonly WeaponType[] ShippedWeaponTypes = Enum.GetValues<WeaponType>();
 
     [Fact]
     public void StarterContentLoads()
     {
         Assert.Equal(9, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
-        Assert.Equal(19, Content.Weapons.Count);
+        Assert.Equal(21, Content.Weapons.Count);
         Assert.Equal(23, Content.Units.Count);
         Assert.Equal(11, Content.Cast.Count);
     }
@@ -140,6 +140,47 @@ public class StarterContentTests
     public void TheIronTierHitIsTheKeptNumbers(string id, int hit)
     {
         Assert.Equal(hit, Content.Weapons[id].Hit);
+    }
+
+    // Issue 70's lean: low Mt, high Hit, low Wt, and no crit, since four strikes at any
+    // crit fish for the boss (the dial the issue names is crit, not the strike count).
+    [Theory]
+    [InlineData("iron_gauntlets", 2, 85, 0, 2, 40)]
+    [InlineData("steel_gauntlets", 4, 80, 0, 5, 30)]
+    public void GauntletsAreLowMightHighHitLowWeightAndNoCrit(string id, int mt, int hit, int crit, int wt, int durability)
+    {
+        var weapon = Content.Weapons[id];
+
+        Assert.Equal(WeaponType.Gauntlet, weapon.Type);
+        Assert.Equal((mt, hit, crit, wt, durability), (weapon.Mt, weapon.Hit, weapon.Crit, weapon.Wt, weapon.Durability));
+        Assert.Equal((1, 1), (weapon.MinRange, weapon.MaxRange));
+    }
+
+    /// <summary>
+    /// Issue 70: two iron-gauntlet strikes out-damage one iron-sword strike only while the
+    /// target's Def is under the wielder's Str less one, so gauntlets lose to armour.
+    /// </summary>
+    [Theory]
+    [InlineData(7, 3, true)]
+    [InlineData(7, 5, true)]
+    [InlineData(7, 6, false)]
+    [InlineData(7, 8, false)]
+    [InlineData(5, 3, true)]
+    [InlineData(5, 4, false)]
+    public void TwoIronGauntletStrikesBeatOneIronSwordStrikeOnlyBelowStrLessOneDef(int str, int def, bool gauntletsAhead)
+    {
+        var fists = 2 * Math.Max(0, str + Content.Weapons["iron_gauntlets"].Mt - def);
+        var sword = Math.Max(0, str + Content.Weapons["iron_sword"].Mt - def);
+
+        Assert.Equal(gauntletsAhead, fists > sword);
+    }
+
+    /// <summary>Issue 70: the reaver wields gauntlets beside the axe, and Keziah, the harbour brawler, carries both.</summary>
+    [Fact]
+    public void KeziahCarriesAnAxeAndGauntlets()
+    {
+        Assert.True(Content.Class("reaver").CanUse(WeaponType.Gauntlet));
+        Assert.Equal(new[] { "iron_axe", "iron_gauntlets" }, Content.Cast.Single(u => u.Id == "keziah").Inventory.Items.Select(s => s.ItemId));
     }
 
     [Fact]

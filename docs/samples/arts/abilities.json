@@ -14,6 +14,8 @@
       "effect": { "kind": "combat", "against": { "weapon": "reason" }, "hit": 20, "avoid": 20 } },
     { "id": "faithbreaker", "name": "Faithbreaker", "text": "+20 hit and avoid against Faith.",
       "effect": { "kind": "combat", "against": { "weapon": "faith" }, "hit": 20, "avoid": 20 } },
+    { "id": "fistbreaker", "name": "Fistbreaker", "text": "+20 hit and avoid against gauntlets.",
+      "effect": { "kind": "combat", "against": { "weapon": "gauntlet" }, "hit": 20, "avoid": 20 } },
     { "id": "fundamentals", "name": "Fundamentals", "text": "+1 Str, Spd and Def, kept from the drill yard.",
       "effect": { "kind": "stats", "stats": { "str": 1, "spd": 1, "def": 1 } } },
     { "id": "horsebane", "name": "Horsebane", "text": "+20 hit and +10 crit against cavalry.",

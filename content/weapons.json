@@ -21,6 +21,9 @@
     { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "effective": ["flying"] },
     { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "E" },
 
+    { "id": "iron_gauntlets", "name": "Iron Gauntlets", "type": "gauntlet", "mt": 2, "hit": 85, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E" },
+    { "id": "steel_gauntlets", "name": "Steel Gauntlets", "type": "gauntlet", "mt": 4, "hit": 80, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 30, "rank": "E" },
+
     { "id": "salve", "name": "Salve", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 8, "rank": "E", "heals": true, "healBase": 0 },
     { "id": "beacon", "name": "Beacon", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "E", "heals": true, "healBase": 0 },
     { "id": "radiance", "name": "Radiance", "type": "faith", "mt": 6, "hit": 85, "crit": 0, "wt": 4, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "E" }

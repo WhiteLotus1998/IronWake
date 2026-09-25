@@ -24,12 +24,13 @@ public class BreakerTests
     [InlineData(WeaponType.Bow, "bowbreaker")]
     [InlineData(WeaponType.Reason, "reasonbreaker")]
     [InlineData(WeaponType.Faith, "faithbreaker")]
+    [InlineData(WeaponType.Gauntlet, "fistbreaker")]
     public void ContentShipsABreakerForEveryWeaponTypeAtTwentyHitAndTwentyAvoid(WeaponType type, string id)
     {
         Assert.Equal(new CombatModifierEffect(new OpponentCondition(type, null), 20, 20, 0, 0), Starter.Ability(id).Effect);
     }
 
-    /// <summary>Six, one per weapon type but gauntlets: Fistbreaker is outside issue 70 and waits on the Table.</summary>
+    /// <summary>Seven, one per weapon type, Fistbreaker for gauntlets since issue 70's content line.</summary>
     [Fact]
     public void EveryWeaponTypeHasExactlyOneBreaker()
     {
@@ -40,7 +41,7 @@ public class BreakerTests
             .Select(m => m.Against.Weapon!.Value)
             .ToList();
 
-        Assert.Equal(Enum.GetValues<WeaponType>().Where(t => t != WeaponType.Gauntlet).OrderBy(t => t), breakers.OrderBy(t => t));
+        Assert.Equal(Enum.GetValues<WeaponType>().OrderBy(t => t), breakers.OrderBy(t => t));
     }
 
     [Fact]

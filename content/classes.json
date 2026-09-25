@@ -27,7 +27,7 @@
       "name": "Reaver",
       "movement": "infantry",
       "mov": 4,
-      "weapons": ["axe"],
+      "weapons": ["axe", "gauntlet"],
       "mastery": "bloodrush",
       "masteryPoints": 12,
       "modifiers": { "hp": 2, "str": 2 },
