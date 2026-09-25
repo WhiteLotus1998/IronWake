@@ -1,3 +1,4 @@
+using Ironwake.Content;
 using Ironwake.Core.Tests.Maps;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
@@ -143,6 +144,30 @@ public class EnemyAiTests
             1, board.Scheme).Defender;
         Assert.Equal(Counter(Armed(playerPhase, "bandit_leader-1", "hatchet")), Counter(playerPhase));
         Assert.NotEqual(Counter(Armed(playerPhase, "bandit_leader-1", "steel_axe")), Counter(playerPhase));
+    }
+
+    /// <summary>
+    /// Issue 131's constraint on the Toll Axe, as a behavior: on both maps the bandit leader
+    /// holds, adjacent to the captain or Wren at full HP he swings the Steel Axe in front,
+    /// and at range 2 he throws, naming the Toll Axe's slot.
+    /// </summary>
+    [Theory]
+    [InlineData("saltmarsh_ford", "captain", 11, 0, 12, 0)]
+    [InlineData("saltmarsh_ford", "wren", 11, 0, 12, 0)]
+    [InlineData("the_tollgate", "captain", 8, 2, 9, 2)]
+    [InlineData("the_tollgate", "wren", 8, 2, 9, 2)]
+    public void TheBanditLeaderSwingsSteelAdjacentToAFastCadetAndThrowsAtRangeTwo(string mapId, string cadet, int x1, int y1, int x2, int y2)
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, mapId + ".map"), Starter);
+        var start = BattleState.From(map, Starter, Starter.Cast, 7).Do(new EndPhase());
+        var leader = start.UnitsOf(Side.Enemy).Single(u => u.Id == "bandit_leader-1");
+        Assert.Equal(new[] { "steel_axe", "toll_axe" }, leader.Unit.Inventory.Items.Select(i => i.ItemId));
+
+        var adjacent = start.WithUnit(start.Find(cadet)! with { At = new Coord(x1, y1) });
+        Assert.Equal(new Command[] { new Attack(leader.Id, cadet) }, EnemyAi.PlanUnit(adjacent, Starter, adjacent.Find(leader.Id)!));
+
+        var two = start.WithUnit(start.Find(cadet)! with { At = new Coord(x2, y2) });
+        Assert.Equal(new Command[] { new Attack(leader.Id, cadet, 1) }, EnemyAi.PlanUnit(two, Starter, two.Find(leader.Id)!));
     }
 
     [Fact]
