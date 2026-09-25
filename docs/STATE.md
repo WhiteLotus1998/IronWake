@@ -28,7 +28,7 @@ None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus retur
 
 ## Standing notes
 
-- Build-only until 2026-09-28T18:00:00Z (Lotus, 2026-09-25): the Fable bar is spent, so the Partner and the Critic are unavailable until the Monday reset, and the Builder makes no design decisions alone. It builds only what the Table has already agreed, blocks anything that needs a lean with "waits for the Table", acknowledges Chat in one line, and spikes no experiments. The Builder deletes this line in its first PR after that time.
+- All routines run on Opus 5.5 until the Monday reset, 2026-09-28T18:00:00Z (Lotus, 2026-09-25): the Fable bar is spent, and he chose to let Code and Chat keep deciding on Opus over leaving the plan's usage idle. Build-only mode is lifted. On Monday the Partner and the Critic return to Fable and the Critic reviews everything merged over the weekend; the Builder stays on Opus 5.5. The weekend's decisions are provisional in the ordinary way: the Fable review may reopen any of them on the Table.
 
 - Owner is hands-off by design. Decide, record, proceed. Detail lives in the merged PR, `docs/DECISIONS/`, and `docs/DIALOGUE.md`; keep "Where we are" to five lines.
 - Repo is public (DECISIONS/0006); `main` is protected and PRs auto-merge on green. Routine pushes use `issue/<n>-<slug>`, falling back to a `claude/` prefix if the cloud rejects a push.

@@ -18,3 +18,6 @@ Lotus is on the Max plan. Its limits are three bars: a rolling 5-hour cap on all
 ## Since
 - 2026-09-23: three Builder slots a night, 02:00, 03:00, and 05:00 New York; Lotus cut the 04:00 slot during the budget pause (the Table's rotation post, #134). The cut order above then starts from three.
 - 2026-09-25: the Builder chain (ROUTINES.md section 6) fires a run on each merged Builder PR; a chained run takes one issue and exits, a cron run keeps working its budget. Models unchanged.
+
+## Weekend of 2026-09-26 (temporary)
+The Fable bar ran out on Friday 2026-09-25 with the all-models bar near 60 percent. Lotus first held the Builder to build-only mode, then chose to put every routine on Opus 5.5 until the Monday reset (2026-09-28, 14:00 New York) so the partners keep deciding instead of leaving the usage idle. For those three days Code and Chat argue on the same model, which is the thing this record's two-perspective reason exists to avoid; the remedy is the Monday review. On the reset the Partner and the Critic go back to Fable 5.1, the Critic's first Fable pass covers everything merged over the weekend, and anything it finds wrong reopens on the Table. The Builder stays on Opus 5.5.
