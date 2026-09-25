@@ -65,7 +65,7 @@ public static class Exposure
                 }
 
                 var striker = new Combatant(enemy.Unit, content.Class(enemy.Unit.ClassId), weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, enemy.WeaponBroken(content));
-                var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
+                var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme, state.Formula);
                 var here = Worst(forecast.Attacker);
                 if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
                 {
@@ -105,7 +105,7 @@ public static class Exposure
             var distance = tile.DistanceTo(target.At);
             if (rejection is null && weapon!.InRange(distance))
             {
-                var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme);
+                var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme, state.Formula);
                 noisy.Add(tile);
                 noisy.Add(target.At);
                 if (KillsWithCertainty(forecast.Attacker, target.Hp))

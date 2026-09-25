@@ -15,6 +15,7 @@ namespace Ironwake.Core;
 /// <param name="Phase">Whose phase it is.</param>
 /// <param name="Seed">The campaign seed every roll derives from.</param>
 /// <param name="Scheme">How hit rolls are read, section 5.</param>
+/// <param name="Formula">Which burden and avoid formulas section 5 uses; <see cref="CombatFormula.Standard"/> everywhere but the Sim's hit-band table (issue 158).</param>
 /// <param name="RecallCharges">Recall charges left on this map.</param>
 /// <param name="History">Every prior state, oldest first, each stored with an empty history of its own so the record stays finite.</param>
 /// <param name="AwakeGroups">Guard groups that have woken (section 8), sorted by name. A woken group is a fact of the board, so a Recall restores it with the rest.</param>
@@ -27,7 +28,8 @@ public sealed record BattleState(
     RollScheme Scheme,
     int RecallCharges,
     ValueList<BattleState> History,
-    ValueList<string> AwakeGroups = default)
+    ValueList<string> AwakeGroups = default,
+    CombatFormula Formula = CombatFormula.Standard)
 {
     /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
     public bool IsAwake(string group) => AwakeGroups.Contains(group);
@@ -73,7 +75,7 @@ public sealed record BattleState(
     /// placement for either is a loss on the opening board and never an ablation.
     /// </summary>
     public static BattleState From(
-        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default)
+        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default, CombatFormula formula = CombatFormula.Standard)
     {
         if (roster.Count == 0)
         {
@@ -137,7 +139,7 @@ public sealed record BattleState(
             }
         }
 
-        return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty);
+        return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty, Formula: formula);
     }
 
     private static Unit Fill(PlayerPlacement slot, ValueList<Unit> roster, HashSet<string> named, HashSet<string> deployed, ref int nextBare)
