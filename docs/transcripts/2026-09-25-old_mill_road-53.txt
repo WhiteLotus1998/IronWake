@@ -1,0 +1,657 @@
+Old Mill Road, seed 53, scheme TwoRollAverage, formula arm4
+Old Mill Road  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ..........^^
+ 8 .AB.........
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move captain 4,7
+captain moves 1,8 -> 4,7 via 1,7 2,7 3,7
+Old Mill Road  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ....A.....^^
+ 8 ..B.........
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move wren 2,7
+wren moves 2,8 -> 2,7
+Old Mill Road  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ..B.A.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: move brigand-1 4,6
+brigand-1 moves 6,5 -> 4,6 via 5,5 4,5
+enemy: attack brigand-1 captain
+forecast brigand-1 -> captain: dmg 10 hit 49% crit 0%; counter: dmg 11 x2 hit 90% crit 5%
+brigand-1 attacks captain
+  brigand-1 hits captain for 10 (hp 12)
+  captain crits brigand-1 for 33 (hp 0)
+  brigand-1 hp 0, captain hp 12
+captain gains 30 exp (30)
+brigand-1 falls at 4,6
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Old Mill Road  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..B.A.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,7    hp 12/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> move captain 5,4
+captain moves 4,7 -> 5,4 via 4,6 4,5 4,4
+Old Mill Road  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~.A......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..B.......^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,4    hp 12/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> item captain 2
+captain uses field_dressing (2 left)
+captain heals 10 (hp 22)
+Old Mill Road  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~.A......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..B.......^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> move wren 4,5
+wren moves 2,7 -> 4,5 via 2,6 3,6 4,6
+Old Mill Road  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~.A......
+ 5 ..~~B....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Old Mill Road  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~.A......
+ 5 ..~~B....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+B  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+> move captain 6,2
+captain moves 5,4 -> 6,2 via 5,3 5,2
+group mill wakes: proximity
+Old Mill Road  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..A.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~B....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
+B  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+> move wren 5,4
+wren moves 4,5 -> 5,4 via 4,4
+Old Mill Road  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....na!.
+ 2 ..^^..A.nnb.
+ 3 ============
+ 4 ..~~.B......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: move archer-1 8,2
+archer-1 moves 10,2 -> 8,2 via 9,2
+enemy: attack archer-1 captain
+forecast archer-1 -> captain: dmg 3 hit 18% crit 0%; counter: none
+archer-1 attacks captain
+  archer-1 misses captain
+  archer-1 hp 17, captain hp 22
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: move soldier-1 6,1
+soldier-1 moves 9,1 -> 6,1 via 8,1 7,1
+enemy: attack soldier-1 captain
+forecast soldier-1 -> captain: dmg 6 hit 14% crit 0%; counter: dmg 9 hit 87% crit 4%
+soldier-1 attacks captain
+  soldier-1 misses captain
+  captain hits soldier-1 for 9 (hp 11)
+  soldier-1 hp 11, captain hp 22
+captain gains 10 exp (40)
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Old Mill Road  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..a.n.!.
+ 2 ..^^..A.bn..
+ 3 ============
+ 4 ..~~.B......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           8,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         6,1    hp 11/20  Plain  group mill, guard, awake
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 6 hit 14% crit 0%
+captain attacks soldier-1
+  captain hits soldier-1 for 9 (hp 2)
+  soldier-1 misses captain
+  captain hp 22, soldier-1 hp 2
+captain gains 10 exp (50)
+Old Mill Road  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..a.n.!.
+ 2 ..^^..A.bn..
+ 3 ============
+ 4 ..~~.B......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           8,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         6,1    hp 2/20   Plain  group mill, guard, awake
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> move wren 5,1
+wren moves 5,4 -> 5,1 via 5,3 5,2
+Old Mill Road  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^.Ba.n.!.
+ 2 ..^^..A.bn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           8,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+a  soldier-1        Soldier L1 pikeman         6,1    hp 2/20   Plain  group mill, guard, awake
+B  wren             Wren L1 cadet              5,1    hp 20/20  Plain
+> attack wren soldier-1
+forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+wren attacks soldier-1
+  wren hits soldier-1 for 8 (hp 0)
+  wren hp 20, soldier-1 hp 0
+wren gains 30 exp (30)
+soldier-1 falls at 6,1
+Old Mill Road  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^.B..n.!.
+ 2 ..^^..A.bn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           8,2    hp 17/17  Hill  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              5,1    hp 20/20  Plain  done
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: move archer-1 7,1
+archer-1 moves 8,2 -> 7,1 via 7,2
+enemy: attack archer-1 wren
+forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
+archer-1 attacks wren
+  archer-1 hits wren for 6 (hp 14)
+  archer-1 hp 17, wren hp 14
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Old Mill Road  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^.B.bn.!.
+ 2 ..^^..A.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,1    hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              5,1    hp 14/20  Plain
+> move captain 7,2
+captain moves 6,2 -> 7,2
+Old Mill Road  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^.B.bn.!.
+ 2 ..^^..FAnn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,1    hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              5,1    hp 14/20  Plain
+> attack captain archer-1
+forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+captain attacks archer-1
+  captain hits archer-1 for 11 (hp 6)
+  captain hp 22, archer-1 hp 6
+captain gains 10 exp (60)
+Old Mill Road  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^.B.bn.!.
+ 2 ..^^..FAnn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,1    hp 6/17   Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              5,1    hp 14/20  Plain
+> move wren 6,1
+wren moves 5,1 -> 6,1
+Old Mill Road  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..Bbn.!.
+ 2 ..^^..FAnn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,1    hp 6/17   Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              6,1    hp 14/20  Plain
+> attack wren archer-1
+forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+wren attacks archer-1
+  wren hits archer-1 for 10 (hp 0)
+  wren hp 14, archer-1 hp 0
+wren gains 30 exp (60)
+archer-1 falls at 7,1
+Old Mill Road  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..B.n.!.
+ 2 ..^^..FAnn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              6,1    hp 14/20  Plain  done
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Old Mill Road  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..B.n.!.
+ 2 ..^^..FAnn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              6,1    hp 14/20  Plain
+> move captain 9,1
+captain moves 7,2 -> 9,1 via 7,1 8,1
+Old Mill Road  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..B.nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 22/22  Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              6,1    hp 14/20  Plain
+> attack captain mill_bandit-1
+forecast captain -> mill_bandit-1: dmg 10 hit 87% crit 3%; counter: dmg 9 hit 83% crit 2%
+captain attacks mill_bandit-1
+  captain hits mill_bandit-1 for 10 (hp 14)
+  mill_bandit-1 hits captain for 9 (hp 13)
+  captain hp 13, mill_bandit-1 hp 14
+captain gains 12 exp (72)
+Old Mill Road  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..B.nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 13/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 14/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              6,1    hp 14/20  Plain
+> move wren 8,0
+wren moves 6,1 -> 8,0 via 6,0 7,0
+Old Mill Road  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ........B...
+ 1 ..^^....nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 13/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 14/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              8,0    hp 14/20  Plain
+> item wren 2
+wren uses field_dressing (2 left)
+wren heals 6 (hp 20)
+Old Mill Road  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ........B...
+ 1 ..^^....nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 13/22  Plain  captain  done
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 14/24  Plain  group mill, boss
+B  wren             Wren L1 cadet              8,0    hp 20/20  Plain  done
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: attack mill_bandit-1 captain
+forecast mill_bandit-1 -> captain: dmg 9 hit 83% crit 2%; counter: dmg 10 hit 87% crit 3%
+mill_bandit-1 attacks captain
+  mill_bandit-1 hits captain for 9 (hp 4)
+  captain hits mill_bandit-1 for 10 (hp 4)
+  mill_bandit-1 hp 4, captain hp 4
+captain gains 12 exp (84)
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Old Mill Road  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ........B...
+ 1 ..^^....nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 4/22   Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 4/24   Plain  group mill, boss
+B  wren             Wren L1 cadet              8,0    hp 20/20  Plain
+> move wren 10,0
+wren moves 8,0 -> 10,0 via 9,0
+Old Mill Road  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ..........B.
+ 1 ..^^....nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 4/22   Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 4/24   Plain  group mill, boss
+B  wren             Wren L1 cadet              10,0   hp 20/20  Plain
+> attack wren mill_bandit-1
+forecast wren -> mill_bandit-1: dmg 9 hit 85% crit 2%; counter: dmg 10 hit 85% crit 3%
+wren attacks mill_bandit-1
+  wren misses mill_bandit-1
+  mill_bandit-1 hits wren for 10 (hp 10)
+  wren hp 10, mill_bandit-1 hp 4
+Old Mill Road  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ..........B.
+ 1 ..^^....nA!.
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        9,1    hp 4/22   Plain  captain
+!  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 4/24   Plain  group mill, boss
+B  wren             Wren L1 cadet              10,0   hp 10/20  Plain  done
+> attack captain mill_bandit-1
+forecast captain -> mill_bandit-1: dmg 10 hit 87% crit 3%; counter: dmg 9 hit 83% crit 2%
+captain attacks mill_bandit-1
+  captain hits mill_bandit-1 for 10 (hp 0)
+  captain hp 4, mill_bandit-1 hp 0
+captain gains 55 exp (39)
+captain reaches level 2: spd +1 def +1 cha +1
+mill_bandit-1 falls at 10,1
+Old Mill Road  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ..........B.
+ 1 ..^^....nA..
+ 2 ..^^..F.nn..
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L2 cadet        9,1    hp 4/22   Plain  captain  done
+B  wren             Wren L1 cadet              10,0   hp 10/20  Plain  done
+battle won: rout; only recall is left
+battle won: rout
