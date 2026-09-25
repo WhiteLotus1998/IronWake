@@ -9,8 +9,10 @@ namespace Ironwake.Cli;
 /// standard input, every event printed as a line and the board after every command. The
 /// session renders only from events and asks the core for every number through
 /// <see cref="Queries"/>, <see cref="Resolver"/>, and <see cref="EnemyAi"/>; it computes
-/// nothing about the rules itself (DESIGN.md section 2). Output is plain ASCII.
-/// Slots count from one at this boundary (issue 101): <c>show</c> lists them from 1 and
+/// nothing about the rules itself (DESIGN.md section 2). Output is plain ASCII. Every
+/// attack the session resolves prints its forecast line first, the enemy phase's included
+/// (issue 152): the odds behind a hit are on the transcript whichever side threw it, so a
+/// reader can tell a misplay from bad luck. Slots count from one at this boundary (issue 101): <c>show</c> lists them from 1 and
 /// <c>attack</c>, <c>item</c>, and <c>forecast</c> read them that way; the core counts
 /// from zero and is not told. A scripted run is a claim about a game, so it ends with a
 /// summary of every rejected line, and <c>--strict</c> stops at the first one.
@@ -31,7 +33,7 @@ public sealed class PlaySession
           attack <unit> <target> [slot]  attack an enemy in range, with the weapon in a slot (the forecast prints first)
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
-          end                      end the player phase; the enemy phase plays out
+          end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n (spends a charge)
           forecast <unit> <target> [slot] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           reach <unit>             show the board with the unit's reachable tiles marked
@@ -324,12 +326,32 @@ public sealed class PlaySession
         return true;
     }
 
-    /// <summary>Plays the enemy phase from <see cref="EnemyAi.Plan"/>, one command at a time through the same resolver, and prints the board once it is over.</summary>
+    /// <summary>
+    /// Plays the enemy phase from <see cref="EnemyAi.Plan"/>, one command at a time through
+    /// the same resolver, and prints the board once it is over. An enemy attack prints the
+    /// same forecast line a player's attack does, asked of the core on the board the
+    /// resolver is about to read, so the transcript carries the odds of every combat and
+    /// not only the player's half (issue 152). The planner only emits attacks the core
+    /// forecasts, so a null forecast here is a harness fault, like a rejected command.
+    /// </summary>
     private void EnemyPhase()
     {
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
             _out.WriteLine("enemy: " + Describe(command));
+            if (command is Attack attack)
+            {
+                var attacker = _state.Find(attack.UnitId);
+                var target = _state.Find(attack.TargetId);
+                var forecast = attacker is null || target is null ? null : Queries.Forecast(_state, _content, attacker, target, attacker.At, attack.Slot);
+                if (forecast is null)
+                {
+                    throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
+                }
+
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast));
+            }
+
             var result = Resolver.Apply(_state, _content, command);
             if (!result.Accepted)
             {
@@ -418,8 +440,19 @@ public sealed class PlaySession
         }
 
         var where = from is null ? "" : $" from {tile} ({_state.Map.TerrainAt(tile, _content).Name})";
-        _out.WriteLine($"forecast {unit.Id} -> {target.Id}{where}: {Side(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? Side(forecast.Defender) : "none")}");
+        _out.WriteLine(ForecastLine(unit, target, forecast, where));
         return true;
+    }
+
+    /// <summary>
+    /// The one forecast line, printed before an attack from either side and by the
+    /// <c>forecast</c> command: the attacker's strike, then the counter or <c>none</c>.
+    /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
+    /// unit has not moved to (issue 151), empty for a forecast on the standing board.
+    /// </summary>
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "")
+    {
+        return $"forecast {unit.Id} -> {target.Id}{where}: {Side(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? Side(forecast.Defender) : "none")}";
 
         static string Side(SideForecast side) =>
             $"dmg {side.Damage}{(side.Doubles ? " x2" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";

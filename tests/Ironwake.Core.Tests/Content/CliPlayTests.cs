@@ -198,6 +198,20 @@ public class CliPlayTests
         Assert.Contains("battle ongoing at turn 1, player phase\n", output);
     }
 
+    /// <summary>
+    /// Issue 152: an enemy attack prints the same forecast line a player's attack does,
+    /// between the planner's command and the strikes, so the transcript carries the odds
+    /// of the enemy's combats too. The brigand's line is the mirror of Wren's on the same
+    /// two tiles: its strike first, her doubled counter after.
+    /// </summary>
+    [Fact]
+    public void AnEnemyAttackPrintsItsForecastBeforeTheStrikes()
+    {
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\n");
+
+        Assert.Contains("enemy: attack brigand-1 wren\nforecast brigand-1 -> wren: dmg 11 hit 90% crit 0%; counter: dmg 10 x2 hit 100% crit 4%\nbrigand-1 attacks wren\n  brigand-1 ", output);
+    }
+
     /// <summary>Issue 11's acceptance: the journaled script under docs/transcripts wins the sample map under its seed. Keyed rolls keep it stable.</summary>
     [Fact]
     public void TheJournaledScriptWinsOldMillRoadOnSeedSeven()
