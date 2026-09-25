@@ -163,7 +163,7 @@ On Old Mill Road as placed, this sends the brigand at 6,5 to 3,6 on enemy phase 
 
 ## 10. Map file format
 
-A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block, then an optional `events:` block. Glyphs per section 4. Coordinates are `x,y` from the top-left, 0-based. Header keys: `name`, `size` (`WxH`), `win` (`rout`, `seize`, `defeat_boss`, `survive`, `escape`), `turn_limit` (required; every map has one, gate 1 counts against it), `recall` (default 3), `enemy_level` (default 1), `exit` (Escape maps only: the exit tiles as `x,y` separated by spaces, at least as many as the map has player slots, so every deployed unit has one to stand on), `protect` (optional: the id of a `recruit:<id>` slot on this map whose death loses the map, section 7), the optional `cheap_shots` below, and the optional `retreat: on`, which turns on enemy retreat for the map (13.10, issue 33; DECISIONS/0037). The optional `rivalry: <arm>` turns on Rapport and Rivalry for the map (13.1, issue 16; DECISIONS/0038), the arm an id under `rivalry.arms` in `rules.json`. A `P` line is `captain`, `recruit:<id>` (this recruit stands here), or bare `recruit` (a deployment slot the roster fills in order). An `E` line needs `group:` and `behavior:` (`aggressive`, `hold`, `guard`); a `B` line is a boss, and its behavior is always `boss`. Example:
+A `.map` file is a header of `key: value` lines, then the grid, then a `units:` block, then an optional `events:` block. Glyphs per section 4. Coordinates are `x,y` from the top-left, 0-based. Header keys: `name`, `size` (`WxH`), `win` (`rout`, `seize`, `defeat_boss`, `survive`, `escape`), `turn_limit` (required; every map has one, gate 1 counts against it), `recall` (default 3), `enemy_level` (default 1), `exit` (Escape maps only: the exit tiles as `x,y` separated by spaces, at least as many as the map has player slots, so every deployed unit has one to stand on), `protect` (optional: the id of a `recruit:<id>` slot on this map whose death loses the map, section 7), the optional `cheap_shots` below, and the optional `retreat: on`, which turns on enemy retreat for the map (13.10, issue 33; DECISIONS/0037). The optional `rivalry: <arm>` turns on Rapport and Rivalry for the map (13.1, issue 16; DECISIONS/0038), the arm an id under `rivalry.arms` in `rules.json`. The optional `supplies: N` (1 to 99) caps every consumable stack (an entry of `items.json`) a deployed player unit carries at N uses when the map starts (issue 160; DECISIONS/0039). It is a cap and never a set, so a stack already under it keeps its own and a map can take supplies away but never hand out more than a unit carried; weapons, spells and enemies are untouched. A `P` line is `captain`, `recruit:<id>` (this recruit stands here), or bare `recruit` (a deployment slot the roster fills in order). An `E` line needs `group:` and `behavior:` (`aggressive`, `hold`, `guard`); a `B` line is a boss, and its behavior is always `boss`. Example:
 
 ```
 name: Old Mill Road
@@ -172,6 +172,7 @@ win: rout
 turn_limit: 12
 recall: 3
 enemy_level: 1
+supplies: 1
 
 ............
 ..^^....n...

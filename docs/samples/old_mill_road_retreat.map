@@ -5,6 +5,7 @@ turn_limit: 12
 recall: 3
 enemy_level: 1
 retreat: on
+supplies: 1
 
 ............
 ..^^....n...

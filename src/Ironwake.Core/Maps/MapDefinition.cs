@@ -23,6 +23,10 @@ namespace Ironwake.Core;
 /// <param name="Events">The <c>events:</c> block in file order (issue 32); empty on a map without one.</param>
 /// <param name="RetreatEnabled">The map turns on enemy retreat (the <c>retreat: on</c> header, issue 33). Off by default.</param>
 /// <param name="RivalryArm">The rivalry arm the map turns on (the <c>rivalry:</c> header, issue 16), an id in <c>rules.json</c>; null for none.</param>
+/// <param name="Supplies">
+/// The <c>supplies:</c> header (issue 160): every consumable stack a deployed player unit carries is
+/// capped at this many uses when the map starts; null for no cap. <see cref="Supplied"/> applies it.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -38,7 +42,8 @@ public sealed record MapDefinition(
     string? ProtectId = null,
     ValueList<MapEvent> Events = default,
     bool RetreatEnabled = false,
-    string? RivalryArm = null)
+    string? RivalryArm = null,
+    int? Supplies = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -48,6 +53,28 @@ public sealed record MapDefinition(
     public const string ThroneTerrainId = "throne";
 
     public bool IsExit(Coord at) => Exits.Contains(at);
+
+    /// <summary>
+    /// A player unit as this map issues it: every consumable stack (an entry of items.json;
+    /// weapons and spells are not supplies) is capped at <see cref="Supplies"/> uses. A cap and
+    /// never a set, so a stack already under it keeps its own, and a map can take supplies away
+    /// but never hand out more than the unit carried.
+    /// </summary>
+    public Unit Supplied(Unit unit, GameContent content)
+    {
+        if (Supplies is not { } cap)
+        {
+            return unit;
+        }
+
+        var items = new List<ItemStack>(unit.Inventory.Count);
+        foreach (var item in unit.Inventory.Items)
+        {
+            items.Add(content.Items.ContainsKey(item.ItemId) && item.Uses > cap ? item with { Uses = cap } : item);
+        }
+
+        return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+    }
 
     public bool IsThrone(Coord at) => TerrainIdAt(at) == ThroneTerrainId;
 

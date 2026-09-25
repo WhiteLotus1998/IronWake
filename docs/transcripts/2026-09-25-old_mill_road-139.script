@@ -1,0 +1,23 @@
+end
+move wren 4,8
+attack wren archer-2
+move captain 3,7
+attack captain archer-2
+end
+attack wren brigand-1
+move captain 5,5
+end
+move captain 6,2
+move wren 5,5
+end
+attack captain soldier-1
+move wren 5,1
+attack wren soldier-1
+end
+attack captain mill_bandit-1
+attack wren mill_bandit-1
+end
+move captain 7,0
+attack captain archer-1
+move wren 5,0
+attack wren archer-1

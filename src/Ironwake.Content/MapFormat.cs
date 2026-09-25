@@ -12,7 +12,10 @@ namespace Ironwake.Content;
 /// </summary>
 public static class MapFormat
 {
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry" };
+    /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
+    private const int MaxSupplies = 99;
+
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -55,6 +58,11 @@ public static class MapFormat
         if (map.RivalryArm is { } arm)
         {
             sb.Append("rivalry: ").Append(arm).Append('\n');
+        }
+
+        if (map.Supplies is { } supplies)
+        {
+            sb.Append("supplies: ").Append(supplies).Append('\n');
         }
 
         sb.Append('\n');
@@ -152,6 +160,7 @@ public static class MapFormat
             var cheapShots = ParseCheapShots(header);
             var retreat = ParseRetreat(header);
             var rivalry = ParseRivalry(header);
+            int? supplies = header.ContainsKey("supplies") ? ParseInt(header, "supplies", 1, MaxSupplies, required: true, fallback: 0) : null;
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
 
@@ -161,7 +170,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies);
             Validate(map);
             return map;
         }

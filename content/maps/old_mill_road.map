@@ -4,6 +4,7 @@ win: rout
 turn_limit: 12
 recall: 3
 enemy_level: 1
+supplies: 1
 
 ............
 ..^^....n...
