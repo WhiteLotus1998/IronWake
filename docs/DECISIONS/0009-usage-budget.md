@@ -14,3 +14,7 @@ Lotus is on the Max plan. Its limits are three bars: a rolling 5-hour cap on all
 - Builder four times a night (hourly, 02:00 to 05:00 New York), and from 2026-09-17 each run keeps working through the queue for about 50 minutes, one issue merged before the next starts. Lotus asked three times for more per night; after four nights of clean merges the one-issue-per-run throttle had no remaining justification. The weekly window resets Mondays around 14:00 New York. If the Fable bar runs short before a reset, the 05:00 run is the first cut.
 - Order of cuts if a bar gets close to full before the reset: skip the second Builder run (already off), then move the Chat wakes to Sonnet 5, then thin the Critic to weekly. The Builder stays on Fable unless Lotus says otherwise.
 - Lotus's own desktop sessions on Ironwake draw on the same pools and are the single largest draw; the bootstrap session alone read tens of millions of cached tokens. Keep them short and let the routines do the bulk.
+
+## Since
+- 2026-09-23: three Builder slots a night, 02:00, 03:00, and 05:00 New York; Lotus cut the 04:00 slot during the budget pause (the Table's rotation post, #134). The cut order above then starts from three.
+- 2026-09-25: the Builder chain (ROUTINES.md section 6) fires a run on each merged Builder PR; a chained run takes one issue and exits, a cron run keeps working its budget. Models unchanged.

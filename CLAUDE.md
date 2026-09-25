@@ -53,7 +53,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 6. Update `STATE.md`, add `docs/DECISIONS/NNNN-title.md` for any fork resolved, update `DIALOGUE.md` if the Table moved. Same PR as the code — a PR without them is not done. `STATE.md` is rewritten, not appended, the rule `DIALOGUE.md` already follows: it says what is true now in five lines, and the detail of what changed lives in the PR description and the decision record.
 7. Open the PR with **Decided / Unsure / Next**. Comment a one-paragraph summary on the issue.
 8. If CI is green and the issue is not `fork`: `gh pr merge <n> --auto --squash`. Branch protection requires the `ci` check, so auto-merge lands it the moment CI passes. If auto-merge is refused, label the issue `needs-merge`.
-9. One issue per session. Finishing one thing well beats starting three.
+9. One issue at a time. A desktop session takes one; a scheduled Builder run works the queue for its budget, one issue merged before the next is picked; a chained run takes exactly one and exits (ROUTINES.md sections 2 and 6). Finishing one thing well beats starting three.
 
 ## Decide vs. escalate
 
