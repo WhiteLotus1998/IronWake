@@ -111,6 +111,50 @@ public class EnemyAiTests
         Assert.Equal(new Command[] { new Attack("bandit_leader-1", "hale") }, EnemyAi.PlanUnit(adjacent, Starter, adjacent.Find("bandit_leader-1")!));
     }
 
+    private static BattleState Armed(BattleState state, string unitId, params string[] items)
+    {
+        var unit = state.Find(unitId)!;
+        var stacks = items.Select(item => new ItemStack(item, Starter.Weapon(item).Durability));
+        return state.WithUnit(unit with { Unit = unit.Unit with { Inventory = new Inventory(ValueList<ItemStack>.From(stacks.ToList())) } });
+    }
+
+    [Fact]
+    public void ATwoWeaponEnemyAttacksWithTheSlotThatScoresHigherAndCountersWithIt()
+    {
+        var far = EnemyPhase(Yard("P captain 0,1\nP recruit:wren 0,2", "B bandit_leader 7,0 group:g behavior:boss"));
+        var adjacent = far.WithUnit(far.Find("hale")! with { At = new Coord(6, 0) });
+        var state = Armed(adjacent, "bandit_leader-1", "steel_axe", "hatchet");
+        var leader = state.Find("bandit_leader-1")!;
+        var hale = state.Find("hale")!;
+
+        var steel = EnemyAi.Score(state, Starter, leader, leader.At, hale);
+        var hatchet = EnemyAi.Score(state, Starter, leader.WithSlotInFront(1), leader.At, hale);
+        Assert.True(hatchet > steel, $"hatchet {hatchet} against steel axe {steel}");
+        var plan = EnemyAi.PlanUnit(state, Starter, leader);
+        Assert.Equal(new Command[] { new Attack("bandit_leader-1", "hale", 1) }, plan);
+
+        var after = state.Do(plan[0]);
+        Assert.Equal("hatchet", after.Find("bandit_leader-1")!.EquippedWeapon(Starter)!.Id);
+
+        var playerPhase = after.Do(new EndPhase());
+        SideForecast Counter(BattleState board) => Ironwake.Core.Combat.Forecast(
+            board.Find("hale")!.ToCombatant(board.Map, Starter),
+            board.Find("bandit_leader-1")!.ToCombatant(board.Map, Starter),
+            1, board.Scheme, board.Formula).Defender;
+        Assert.Equal(Counter(Armed(playerPhase, "bandit_leader-1", "hatchet")), Counter(playerPhase));
+        Assert.NotEqual(Counter(Armed(playerPhase, "bandit_leader-1", "steel_axe")), Counter(playerPhase));
+    }
+
+    [Fact]
+    public void OfTwoWeaponsScoringTheSameTheEquippedSlotStrikesAndNoSlotIsNamed()
+    {
+        var far = EnemyPhase(Yard("P captain 0,1\nP recruit:wren 0,2", "B bandit_leader 7,0 group:g behavior:boss"));
+        var adjacent = far.WithUnit(far.Find("hale")! with { At = new Coord(6, 0) });
+        var state = Armed(adjacent, "bandit_leader-1", "hatchet", "hatchet");
+
+        Assert.Equal(new Command[] { new Attack("bandit_leader-1", "hale") }, EnemyAi.PlanUnit(state, Starter, state.Find("bandit_leader-1")!));
+    }
+
     [Fact]
     public void AHoldUnitAttacksInRangeAndNeverMoves()
     {
