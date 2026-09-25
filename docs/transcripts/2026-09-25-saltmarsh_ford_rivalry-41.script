@@ -1,0 +1,86 @@
+move captain 5,7
+move teodor 6,7
+move wren 4,7
+move ottilie 6,9
+end
+move wren 3,6
+attack wren brigand-1
+move captain 4,5
+attack captain brigand-1
+move teodor 4,6
+move ottilie 5,6
+end
+move ottilie 5,5
+attack ottilie soldier-1
+attack captain soldier-1
+move wren 3,4
+attack wren soldier-1
+move teodor 5,4
+attack teodor soldier-1
+end
+move captain 7,5
+move teodor 8,5
+move wren 6,4
+move ottilie 8,6
+end
+move teodor 9,4
+move captain 8,4
+move wren 7,4
+move ottilie 9,5
+end
+recall 51
+move teodor 9,4
+move captain 8,4
+move wren 7,4
+move ottilie 8,5
+end
+move ottilie 8,6
+attack ottilie wingrider-1
+move teodor 10,4
+attack teodor soldier-2
+move captain 9,4
+end
+move teodor 9,6
+item teodor 2
+move ottilie 10,4
+attack ottilie archer-1
+move captain 10,3
+attack captain archer-1
+move wren 9,4
+end
+move captain 9,2
+move wren 11,2
+move ottilie 10,3
+move teodor 10,4
+show teodor
+end
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move captain 9,0
+attack captain bandit_leader-1
+recall 85
+move captain 9,2
+item captain 2
+move wren 11,2
+move ottilie 10,3
+item ottilie 2
+move teodor 10,4
+end
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move captain 9,0
+attack captain bandit_leader-1
+move wren 11,0
+attack wren bandit_leader-1
+recall 91
+end
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move wren 11,0
+attack wren bandit_leader-1
+end
+move wren 12,2
+item wren 2
+attack ottilie bandit_leader-1
+move captain 9,0
+attack captain bandit_leader-1

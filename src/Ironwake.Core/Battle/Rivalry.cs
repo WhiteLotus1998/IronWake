@@ -46,10 +46,13 @@ public sealed record Rapport(string A, string B, int Points);
 /// Rapport and Rivalry (DESIGN.md 13.1, issue 16), behind a map's <c>rivalry:</c> header.
 /// A recruit is a deployed player unit other than the captain with a region. Two recruits of
 /// different regions are rivals until their rapport reaches the overwrite threshold. While a
-/// rival stands adjacent, a unit fights with the map's arm applied. At the end of every
-/// player phase each adjacent pair of recruits gains the sum of both recruits' rates, a rate
-/// read from the step table by the recruit's effective Cha. With no header nothing here
-/// changes a number and no rapport accrues.
+/// rival stands adjacent, a unit fights with the map's arm applied. At the end of a
+/// threatened player phase each adjacent pair of recruits gains the sum of both recruits'
+/// rates, a rate read from the step table by the recruit's effective Cha. A pair's phase is
+/// threatened when an awake enemy could strike one of the pair next phase, through
+/// <see cref="Threat"/>'s strike set (issue 209); the exposure line reads the same
+/// predicate through <see cref="Exposed"/>, so accrual and exposure count the same phases.
+/// With no header nothing here changes a number and no rapport accrues.
 /// </summary>
 public static class Rivalry
 {
@@ -113,9 +116,30 @@ public static class Rivalry
         content.Rivalry.RateFor(unit.Unit.EffectiveStats(content.Class(unit.Unit.ClassId)).Cha);
 
     /// <summary>
-    /// The end of a player phase: every adjacent pair of recruits gains both rates, pairs in
-    /// id order, with a <see cref="RapportGained"/> each and a <see cref="RivalryEnded"/>
-    /// for a rival pair that crosses the threshold. No header, no change.
+    /// The recruits that end this player phase beside a rival on a tile some awake enemy
+    /// could strike next phase, in id order: what the exposure line counts. The strike set
+    /// is the one <see cref="Accrue"/> reads. Empty without the header.
+    /// </summary>
+    public static IReadOnlyList<BattleUnit> Exposed(BattleState state, GameContent content)
+    {
+        if (state.Map.RivalryArm is null)
+        {
+            return Array.Empty<BattleUnit>();
+        }
+
+        var struck = Threat.StruckBy(state, content, Side.Enemy);
+        return state.UnitsOf(Side.Player)
+            .Where(u => struck.Contains(u.At) && AdjacentRivals(state, content, u).Count > 0)
+            .OrderBy(u => u.Id, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    /// <summary>
+    /// The end of a player phase: every adjacent pair of recruits one of whom some awake
+    /// enemy could strike next phase gains both rates, pairs in id order, with a
+    /// <see cref="RapportGained"/> each and a <see cref="RivalryEnded"/> for a rival pair
+    /// that crosses the threshold. A pair nobody can reach gains nothing (issue 209). No
+    /// header, no change.
     /// </summary>
     public static BattleState Accrue(BattleState state, GameContent content, List<GameEvent> events)
     {
@@ -124,6 +148,7 @@ public static class Rivalry
             return state;
         }
 
+        var struck = Threat.StruckBy(state, content, Side.Enemy);
         var recruits = state.Units.Where(IsRecruit).OrderBy(u => u.Id, StringComparer.Ordinal).ToList();
         var table = state.Rapport.ToDictionary(r => (r.A, r.B), r => r.Points);
         for (var i = 0; i < recruits.Count; i++)
@@ -132,7 +157,7 @@ public static class Rivalry
             {
                 var a = recruits[i];
                 var b = recruits[j];
-                if (a.At.DistanceTo(b.At) != 1)
+                if (a.At.DistanceTo(b.At) != 1 || !(struck.Contains(a.At) || struck.Contains(b.At)))
                 {
                     continue;
                 }

@@ -54,7 +54,7 @@ public sealed class PlaySession
 
     /// <summary>
     /// Rivalry's exposure log (issue 16): every recruit that ended a player phase beside a
-    /// rival, with the history length when that phase ended, and whether an enemy attacked
+    /// rival on a tile an awake enemy could strike (<see cref="Rivalry.Exposed"/>, issue 209), with the history length when that phase ended, and whether an enemy attacked
     /// it in the enemy phase that followed. A Recall drops the entries it undoes.
     /// </summary>
     private readonly List<ExposureEntry> _exposure = new();
@@ -223,7 +223,7 @@ public sealed class PlaySession
         if (_state.Map.RivalryArm is { } arm)
         {
             var attacked = _exposure.Count(entry => entry.Attacked);
-            _out.WriteLine($"rivalry ({arm}): {_exposure.Count} player phases ended beside a rival, {attacked} of them attacked in the enemy phase after");
+            _out.WriteLine($"rivalry ({arm}): {_exposure.Count} threatened player phases ended beside a rival, {attacked} of them attacked in the enemy phase after");
         }
 
         return stopped ? StrictStop : outcome.Result == BattleResult.Won ? 0 : 1;
@@ -257,7 +257,7 @@ public sealed class PlaySession
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
-                    ? _state.UnitsOf(Side.Player).Where(u => Rivalry.AdjacentRivals(_state, _content, u).Count > 0).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
+                    ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
                     : new List<ExposureEntry>();
                 if (Apply(new EndPhase()))
                 {
@@ -711,7 +711,7 @@ public sealed class PlaySession
     }
 }
 
-/// <summary>One recruit that ended a player phase beside a rival (issue 16), and whether the enemy phase after struck it.</summary>
+/// <summary>One recruit that ended a threatened player phase beside a rival (issues 16 and 209), and whether the enemy phase after struck it.</summary>
 internal sealed class ExposureEntry
 {
     public ExposureEntry(int historyAt, int turn, string unitId)

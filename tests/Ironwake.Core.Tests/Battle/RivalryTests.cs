@@ -204,6 +204,96 @@ public class RivalryTests
         Assert.Equal(afterPlayer, state.Rapport);
     }
 
+    /// <summary>
+    /// A 12x4 field for the threatened-phase rule (issue 209): the same three at the west
+    /// edge, and the brigand at <c>{0}</c> with <c>{1}</c>. At 11,3 a holding brigand
+    /// strikes nothing near the pair; at 5,1 it stands five tiles from Wren, outside the
+    /// wake radius of 4, and within an aggressive move of her.
+    /// </summary>
+    private static BattleState Field(string at, string behavior) => Start(roster: Cohort(), map: $"""
+        name: Field
+        size: 12x4
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+        rivalry: symmetric
+
+        ............
+        ............
+        ............
+        ............
+
+        units:
+        P captain 0,0
+        P recruit:wren 0,1
+        P recruit:ivo 0,2
+        E brigand {at} group:field behavior:{behavior}
+
+        """);
+
+    [Fact]
+    public void RapportDoesNotAccrueOnAPhaseNoEnemyCanStrikeThePair()
+    {
+        var state = Field("11,3", "hold");
+        Assert.False(Threat.IsThreatened(state, Starter, state.Find("wren")!));
+
+        var result = Resolver.Apply(state, Starter, new EndPhase());
+
+        Assert.DoesNotContain(result.Events, e => e is RapportGained);
+        Assert.Empty(result.Next.Rapport);
+    }
+
+    [Fact]
+    public void RapportAccruesOnAPhaseAnAwakeEnemyCanStrikeOneOfThePair()
+    {
+        var state = Field("5,1", "aggressive");
+        Assert.True(Threat.IsThreatened(state, Starter, state.Find("wren")!));
+        var amount = Rivalry.RateOf(state.Find("ivo")!, Starter) + Rivalry.RateOf(state.Find("wren")!, Starter);
+
+        var result = Resolver.Apply(state, Starter, new EndPhase());
+
+        Assert.Contains(new RapportGained("ivo", "wren", amount, amount), result.Events);
+    }
+
+    [Fact]
+    public void ASleepingGroupThreatensNothingSoRapportDoesNotAccrue()
+    {
+        var state = Field("5,1", "guard");
+        Assert.False(state.IsAwake("field"));
+        Assert.Empty(Threat.StruckByUnit(state, Starter, state.Find("brigand-1")!));
+
+        var result = Resolver.Apply(state, Starter, new EndPhase());
+
+        Assert.DoesNotContain(result.Events, e => e is RapportGained);
+    }
+
+    [Fact]
+    public void AHoldingEnemyThreatensOnlyFromItsOwnTile()
+    {
+        var state = Field("11,3", "hold");
+        var struck = Threat.StruckByUnit(state, Starter, state.Find("brigand-1")!);
+
+        Assert.Contains(new Coord(10, 3), struck);
+        Assert.DoesNotContain(new Coord(8, 3), struck);
+    }
+
+    [Theory]
+    [InlineData("11,3", "hold")]
+    [InlineData("5,1", "guard")]
+    [InlineData("5,1", "aggressive")]
+    public void AccrualAndTheExposureLineReadTheSamePhase(string at, string behavior)
+    {
+        var state = Field(at, behavior);
+
+        var exposed = Rivalry.Exposed(state, Starter).Select(u => u.Id).ToList();
+        var gained = Resolver.Apply(state, Starter, new EndPhase()).Events.OfType<RapportGained>().ToList();
+
+        Assert.Equal(behavior == "aggressive", exposed.Count > 0);
+        Assert.Equal(exposed.Count > 0, gained.Count > 0);
+        Assert.All(exposed, id => Assert.Contains(gained, g => g.A == id || g.B == id));
+    }
+
     [Fact]
     public void RapportDoesNotAccrueWithoutTheHeader()
     {
