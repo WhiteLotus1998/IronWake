@@ -68,6 +68,9 @@ public static class EnemyAi
     /// One enemy's commands on the board as it stands: the best-scoring attack from the
     /// best tile if any tile allows one, else the approach rule for an Aggressive unit,
     /// else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
+    /// The attack options range over every weapon the unit can strike with, in inventory
+    /// order; an Attack with a weapon other than the equipped one names its slot, which
+    /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -86,32 +89,42 @@ public static class EnemyAi
             return new Command[] { new Wait(unit.Id) };
         }
 
+        var equipped = unit.EquippedSlot(content);
+        var arms = Enumerable.Range(0, unit.Unit.Inventory.Count)
+            .Where(slot => unit.UsableWeaponAt(content, slot) is not null)
+            .Select(slot => (Slot: slot, Weapon: unit.UsableWeaponAt(content, slot)!, Armed: unit.WithSlotInFront(slot)))
+            .ToList();
+
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
             var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
             var exposure = playerReach.Count(r => r.CanEnd(tile));
             var cost = reach.CostTo(tile)!.Value;
-            foreach (var target in players)
+            foreach (var arm in arms)
             {
-                if (!weapon.InRange(tile.DistanceTo(target.At)))
+                foreach (var target in players)
                 {
-                    continue;
-                }
+                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)))
+                    {
+                        continue;
+                    }
 
-                var option = new AttackOption(Score(state, content, unit, tile, target), target.Id, tile, avoid, exposure, cost);
-                if (best is null || option.Beats(best))
-                {
-                    best = option;
+                    var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot);
+                    if (best is null || option.Beats(best))
+                    {
+                        best = option;
+                    }
                 }
             }
         }
 
         if (best is not null)
         {
+            var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
             return best.Tile == unit.At
-                ? new Command[] { new Attack(unit.Id, best.TargetId) }
-                : new Command[] { new Move(unit.Id, best.Tile), new Attack(unit.Id, best.TargetId) };
+                ? new Command[] { attack }
+                : new Command[] { new Move(unit.Id, best.Tile), attack };
         }
 
         if (!mayMove)
@@ -130,7 +143,9 @@ public static class EnemyAi
     /// from <paramref name="from"/>. Expected damage on both lines carries the crit
     /// expectation, <c>Damage * (1 + 2 * CritChance / 100)</c>, times the strikes that side
     /// makes, capped at the HP it could remove; the kill flag reads deterministic damage
-    /// only, so an attack lethal only on a crit is never priced as a kill.
+    /// only, so an attack lethal only on a crit is never priced as a kill. The attacker
+    /// strikes with its equipped weapon; <see cref="PlanUnit"/> scores another slot by
+    /// passing the unit with that slot moved to the front.
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
@@ -274,8 +289,10 @@ public static class EnemyAi
     /// One scored attack. <see cref="Beats"/> is section 8's whole order: higher score,
     /// then lower target id, then higher terrain avoid on the tile, then fewer player
     /// units whose reach set contains it, then lower cost from the mover, then row-major.
+    /// An option equal to the best on the whole order does not beat it, so of two weapons
+    /// scoring the same the earlier slot strikes.
     /// </summary>
-    private sealed record AttackOption(double Score, string TargetId, Coord Tile, int Avoid, int Exposure, int Cost)
+    private sealed record AttackOption(double Score, string TargetId, Coord Tile, int Avoid, int Exposure, int Cost, int Slot)
     {
         public bool Beats(AttackOption other)
         {
