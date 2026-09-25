@@ -67,10 +67,10 @@ public class CliPlayTests
     [InlineData("recall x", "ERROR: usage: recall <n>")]
     [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
     [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
-    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: usage: forecast <unit> <target> [slot] [from <x,y>]")]
+    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from", "ERROR: usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]")]
     [InlineData("forecast captain brigand-1 from 9,9", "ERROR: captain cannot move to 9,9")]
     [InlineData("show", "ERROR: usage: show <unit>")]
     [InlineData("threat", "ERROR: usage: threat <unit> [from <x,y>]")]
@@ -202,7 +202,7 @@ public class CliPlayTests
         Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
-        Assert.Contains("  forecast <unit> <target> [slot] [from <x,y>]  show the forecast", Play(out _, "help\n"));
+        Assert.Contains("  forecast <unit> <target> [slot] [art <id>] [from <x,y>]  show the forecast", Play(out _, "help\n"));
     }
 
     /// <summary>

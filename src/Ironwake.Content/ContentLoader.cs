@@ -61,7 +61,11 @@ public static class ContentLoader
     /// its <c>stats</c> object a partial stat block with at least one non-zero value;
     /// <c>combat</c> is an on-combat modifier of <c>hit</c>, <c>avoid</c>, <c>crit</c> and
     /// <c>critAvoid</c> (each optional, at least one non-zero), applied against opponents
-    /// matching the optional <c>against</c> object's <c>weapon</c> and <c>movement</c>.
+    /// matching the optional <c>against</c> object's <c>weapon</c> and <c>movement</c>;
+    /// <c>art</c> is a combat art (issue 68): a <c>weapon</c> type, the <c>rank</c> it needs,
+    /// its extra <c>cost</c> in uses (at least 1), and optional <c>mt</c>, <c>hit</c>,
+    /// <c>crit</c>, <c>wt</c> and <c>range</c> deltas, at least one non-zero and
+    /// <c>range</c> never negative.
     /// </summary>
     private static ImmutableSortedDictionary<string, Ability> ParseAbilities(ContentFile file)
     {
@@ -119,8 +123,35 @@ public static class ContentLoader
                 }
 
                 return modifier;
+            case "art":
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range");
+                var art = new CombatArtEffect(
+                    entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
+                    entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
+                    effect.Int("cost"),
+                    effect.IntOr("mt", 0),
+                    effect.IntOr("hit", 0),
+                    effect.IntOr("crit", 0),
+                    effect.IntOr("wt", 0),
+                    effect.IntOr("range", 0));
+                if (art.Cost < 1)
+                {
+                    throw entry.Error("effect.cost", "must be at least 1: an art free on a miss is the plain attack with better numbers");
+                }
+
+                if (art.Range < 0)
+                {
+                    throw entry.Error("effect.range", "must not be negative");
+                }
+
+                if (art.Mt == 0 && art.Hit == 0 && art.Crit == 0 && art.Wt == 0 && art.Range == 0)
+                {
+                    throw entry.Error("effect", "an art must change mt, hit, crit, wt or range");
+                }
+
+                return art;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats or combat");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat or art");
         }
     }
 

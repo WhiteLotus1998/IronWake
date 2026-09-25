@@ -509,7 +509,9 @@ public static class Gates
     /// passable terrain at a random distance the attacker's weapon reaches, each resolved
     /// through <see cref="CombatResolver"/> under a keyed rng, every one counted against
     /// the forecast asked first. Gate 6's board-level stream feeds the same tally, so the
-    /// count covers both the formulas and the resolver's use of them.
+    /// count covers both the formulas and the resolver's use of them. Half the attackers
+    /// with a whole weapon declare a drawn combat art (issue 68, <see cref="DrawnArt"/>),
+    /// from a generator of their own so the rest of the stream draws what it drew before.
     /// </summary>
     public static void ForecastStream(GameContent content, Gates.ForecastTally tally, int combats, int seed = 1)
     {
@@ -524,6 +526,7 @@ public static class Gates
         }
 
         var terrains = content.Terrain.Values.ToList();
+        var arts = new Random(seed + 68);
         var counted = 0;
         for (var attempt = 0; counted < combats && attempt < combats * 20; attempt++)
         {
@@ -534,7 +537,13 @@ public static class Gates
                 continue;
             }
 
-            var distance = random.Next(attacker.Weapon.MinRange, attacker.Weapon.MaxRange + 1);
+            if (!attacker.Broken && arts.Next(2) == 0)
+            {
+                var weapon = DrawnArt(arts).Apply(attacker.Weapon);
+                attacker = new Combatant(attacker.Unit, attacker.Class, weapon, attacker.Terrain, attacker.Hp, abilities: attacker.Abilities);
+            }
+
+            var distance = random.Next(attacker.Weapon!.MinRange, attacker.Weapon.MaxRange + 1);
             var scheme = random.Next(2) == 0 ? RollScheme.TwoRollAverage : RollScheme.OneRoll;
             var forecast = Combat.Forecast(attacker, defender, distance, scheme);
             var result = CombatResolver.Resolve(attacker, defender, distance, new CombatContext(1 + attempt, Side.Player), new KeyedRng((ulong)seed * 1000003 + (ulong)attempt), scheme);
@@ -600,6 +609,10 @@ public static class Gates
 
         return drawn;
     }
+
+    /// <summary>A combat art with drawn deltas (issue 68), so gate 5 covers arts whether or not content ships one yet; its weapon type and rank are the resolver's checks, not the formulas', and are not read here.</summary>
+    public static CombatArtEffect DrawnArt(Random random) => new(
+        WeaponType.Sword, WeaponRank.E, 1 + random.Next(3), random.Next(-2, 6), random.Next(-20, 21), random.Next(-5, 21), random.Next(0, 6), random.Next(2));
 
     public static string Verdict(bool passed) => passed ? "ok" : "FAILED";
 

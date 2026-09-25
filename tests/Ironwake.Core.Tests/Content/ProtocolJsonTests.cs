@@ -37,6 +37,7 @@ public class ProtocolJsonTests
         { new Recalled(12, 2), """{"type":"recalled","toIndex":12,"chargesLeft":2}""" },
         { new ItemUsed("wren", "field_dressing", "wren", 0), """{"type":"itemUsed","unit":"wren","item":"field_dressing","target":"wren","usesLeft":0}""" },
         { new WeaponEquipped("wren", "steel_sword"), """{"type":"weaponEquipped","unit":"wren","item":"steel_sword"}""" },
+        { new ArtDeclared("wren", "sunder", "iron_sword", 2), """{"type":"artDeclared","unit":"wren","art":"sunder","item":"iron_sword","cost":2}""" },
         { new WeaponBroke("wren", "iron_sword"), """{"type":"weaponBroke","unit":"wren","item":"iron_sword"}""" },
         { new SpellSpent("mira", "mend"), """{"type":"spellSpent","unit":"mira","item":"mend"}""" },
         { new GroupWoke("fort", WakeCause.Proximity), """{"type":"groupWoke","group":"fort","cause":"proximity"}""" },
@@ -95,6 +96,7 @@ public class ProtocolJsonTests
         { new Move("wren", B), """{"type":"move","unit":"wren","to":{"x":3,"y":4}}""" },
         { new Attack("wren", "brigand-1"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null}""" },
         { new Attack("wren", "brigand-1", 1), """{"type":"attack","unit":"wren","target":"brigand-1","slot":1}""" },
+        { new Attack("wren", "brigand-1", null, "sunder"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"art":"sunder"}""" },
         { new UseItem("wren", 1), """{"type":"item","unit":"wren","slot":1,"target":null}""" },
         { new UseItem("mira", 0, "wren"), """{"type":"item","unit":"mira","slot":0,"target":"wren"}""" },
         { new Retreat("brigand-1", A), """{"type":"retreat","unit":"brigand-1","to":{"x":1,"y":2}}""" },
@@ -142,6 +144,18 @@ public class ProtocolJsonTests
 
         Assert.Equal("""{"attacker":{"strikes":true,"damage":7,"hitChance":81,"displayedHit":91,"critChance":4,"doubles":true},"defender":{"strikes":false,"damage":0,"hitChance":0,"displayedHit":0,"critChance":0,"doubles":false},"scheme":"twoRollAverage"}""", json);
         Assert.Equal(forecast, ProtocolJson.ReadForecast(json));
+    }
+
+    [Fact]
+    public void AnArtsForecastCarriesItsCostAndReadsBackEqual()
+    {
+        var forecast = new CombatForecast(new SideForecast(true, 16, 90, 99, 5, false), SideForecast.None, RollScheme.OneRoll, 2);
+
+        var json = ProtocolJson.Forecast(forecast);
+
+        Assert.EndsWith("\"scheme\":\"oneRoll\",\"artCost\":2}", json);
+        Assert.Equal(forecast, ProtocolJson.ReadForecast(json));
+        Assert.Equal(3, forecast.AttackerSpendsAtMost);
     }
 
     [Fact]

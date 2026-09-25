@@ -23,6 +23,9 @@ public enum AbilityTrigger
 
     /// <summary>In a fight, read by the hit and crit chances, so the forecast shows it.</summary>
     OnCombat,
+
+    /// <summary>Declared with an attack command, before the roll: a combat art (issue 68).</summary>
+    Declared,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -49,6 +52,32 @@ public sealed record StatDeltaEffect(Stats Delta) : AbilityEffect
 public sealed record CombatModifierEffect(OpponentCondition Against, int Hit, int Avoid, int Crit, int CritAvoid) : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.OnCombat;
+}
+
+/// <summary>
+/// A combat art (issue 68): declared with the attack command, before the roll, on a
+/// weapon of <see cref="Weapon"/>'s type at rank <see cref="Rank"/> or above. The art is
+/// the weapon with these deltas added (<see cref="Apply"/>), so the forecast, the resolver,
+/// burden and doubling all read it through the unchanged section 5 functions, and a Wt
+/// delta can cost the unit its double. <see cref="Cost"/> is the extra uses the attack
+/// spends on top of one per strike, paid whether the art hits or misses.
+/// </summary>
+public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cost, int Mt, int Hit, int Crit, int Wt, int Range) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.Declared;
+
+    /// <summary>The weapon as the art strikes with it: the deltas added, Mt and Wt floored at zero, the far end of its range extended.</summary>
+    public Weapon Apply(Weapon weapon) => weapon with
+    {
+        Mt = Math.Max(0, weapon.Mt + Mt),
+        Hit = weapon.Hit + Hit,
+        Crit = weapon.Crit + Crit,
+        Wt = Math.Max(0, weapon.Wt + Wt),
+        MaxRange = weapon.MaxRange + Range,
+    };
+
+    /// <summary>The fewest uses a weapon must have left to pay for the art: its cost and the first strike.</summary>
+    public int UsesNeeded => Cost + 1;
 }
 
 /// <summary>
