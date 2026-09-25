@@ -33,6 +33,13 @@ public sealed record GameContent(
     public ImmutableSortedDictionary<string, Ability> Abilities { get; init; } =
         ImmutableSortedDictionary<string, Ability>.Empty.WithComparers(StringComparer.Ordinal);
 
+    /// <summary>
+    /// The difficulties of <c>rules.json</c> by id (issue 76); when any are declared, <c>normal</c>
+    /// is among them and is the identity. Empty when the content declares none.
+    /// </summary>
+    public ImmutableSortedDictionary<string, Difficulty> Difficulties { get; init; } =
+        ImmutableSortedDictionary<string, Difficulty>.Empty.WithComparers(StringComparer.Ordinal);
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -47,6 +54,8 @@ public sealed record GameContent(
     public Item Item(string id) => Lookup(Items, id, "item");
 
     public Ability Ability(string id) => Lookup(Abilities, id, "ability");
+
+    public Difficulty Difficulty(string id) => Lookup(Difficulties, id, "difficulty");
 
     /// <summary>The unit's abilities, resolved in the order it lists them, then its class's (issue 71) that it does not already list.</summary>
     public ValueList<Ability> AbilitiesOf(Unit unit) =>
@@ -93,6 +102,7 @@ public sealed record GameContent(
         && DictEquals(Units, other.Units)
         && DictEquals(Items, other.Items)
         && DictEquals(Abilities, other.Abilities)
+        && DictEquals(Difficulties, other.Difficulties)
         && Cast == other.Cast
         && Rivalry == other.Rivalry
         && WakeRadius == other.WakeRadius;

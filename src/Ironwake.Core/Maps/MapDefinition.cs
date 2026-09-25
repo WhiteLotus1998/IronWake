@@ -27,6 +27,12 @@ namespace Ironwake.Core;
 /// The <c>supplies:</c> header (issue 160): every consumable stack a deployed player unit carries is
 /// capped at this many uses when the map starts; null for no cap. <see cref="Supplied"/> applies it.
 /// </param>
+/// <param name="DifficultyId">
+/// The difficulty this map is played under (issue 76), set only by <see cref="Under"/>, which has
+/// already folded its level offset and Recall charges into the header; <see cref="EnemyUnit"/>
+/// applies its stat percents. Null for a map as authored. A map file never declares one; the
+/// <c>difficulty:</c> header exists so a battle state written out reads back under the same one.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -43,7 +49,8 @@ public sealed record MapDefinition(
     ValueList<MapEvent> Events = default,
     bool RetreatEnabled = false,
     string? RivalryArm = null,
-    int? Supplies = null)
+    int? Supplies = null,
+    string? DifficultyId = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -125,7 +132,29 @@ public sealed record MapDefinition(
     public Unit EnemyUnit(EnemyPlacement placement, GameContent content)
     {
         var template = content.Unit(placement.TemplateId);
-        return template.ScaledTo(EnemyLevel, content.Class(template.ClassId));
+        var scaled = template.ScaledTo(EnemyLevel, content.Class(template.ClassId));
+        return DifficultyId is { } id ? content.Difficulty(id).Apply(scaled) : scaled;
+    }
+
+    /// <summary>
+    /// This map under a difficulty (issue 76): its enemy level floor moved by the offset and
+    /// held to the level range, its Recall charges replaced when the difficulty names a count,
+    /// and the difficulty recorded so <see cref="EnemyUnit"/> applies its stat percents to every
+    /// placement and spawn. A difficulty is chosen once, so a map already under one refuses a second.
+    /// </summary>
+    public MapDefinition Under(Difficulty difficulty)
+    {
+        if (DifficultyId is { } current)
+        {
+            throw new InvalidOperationException($"map '{Name}' is already under difficulty '{current}'");
+        }
+
+        return this with
+        {
+            DifficultyId = difficulty.Id,
+            EnemyLevel = Math.Clamp(EnemyLevel + difficulty.EnemyLevelOffset, Unit.MinLevel, Unit.MaxLevel),
+            RecallCharges = difficulty.RecallCharges ?? RecallCharges,
+        };
     }
 
     /// <summary>This map with one tile's terrain replaced; what a <see cref="ChangeTerrain"/> event leaves behind.</summary>

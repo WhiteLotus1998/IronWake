@@ -34,9 +34,15 @@ public static class Program
             var seeds = Gates.DefaultSeeds;
             RollScheme? scheme = RollScheme.TwoRollAverage;
             double? taxFloor = FreePrefix.DefaultTaxFloor;
+            string? difficulty = null;
             for (var i = 2; i + 1 < args.Length; i++)
             {
-                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                if (args[i] == "--difficulty")
+                {
+                    difficulty = args[i + 1];
+                }
+
+                else if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
                 {
                     seeds = n;
                 }
@@ -52,7 +58,7 @@ public static class Program
 
             if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full, floor);
+                return Full(args[1], seeds, full, floor, difficulty);
             }
         }
 
@@ -91,7 +97,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
 
     private const int HitBandSeeds = 50;
 
@@ -230,9 +236,11 @@ public static class Program
     /// All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs
     /// them, then 1 to 4 over <paramref name="seeds"/> seeds under <paramref name="scheme"/>,
     /// then issue 47's free prefix and turn-state counters, printed and never judged, with
-    /// first quiet read at <paramref name="taxFloor"/>.
+    /// first quiet read at <paramref name="taxFloor"/>. Given a <paramref name="difficulty"/> from
+    /// rules.json, every map is played under it (issue 76), so Hard is measured without the map
+    /// files changing; without one, maps are played as authored.
     /// </summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor)
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -250,7 +258,19 @@ public static class Program
             return 2;
         }
 
-        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}");
+        if (difficulty is not null)
+        {
+            if (!content.Difficulties.TryGetValue(difficulty, out var chosen))
+            {
+                var known = content.Difficulties.Count == 0 ? "rules.json declares none" : "they are " + string.Join(", ", content.Difficulties.Keys);
+                Console.WriteLine($"full: no difficulty '{difficulty}'; {known}");
+                return 2;
+            }
+
+            maps = maps.Select(m => (m.Id, m.Map.Under(chosen))).ToList();
+        }
+
+        Console.WriteLine($"full: {maps.Count} maps from {contentDir}, {seeds} seeds, {Gates.Name(scheme)}" + (difficulty is null ? "" : $", difficulty {difficulty}"));
         var failed = false;
         foreach (var (id, map) in maps)
         {
@@ -316,7 +336,7 @@ public static class Program
     }
 
     /// <summary>Gate 6: the same seed and commands replay byte-identical through <see cref="BattleState.Canonical"/>. Every combat of the first run feeds gate 5's tally.</summary>
-    private static GateResult Gate6(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps, Gates.ForecastTally tally)
+    public static GateResult Gate6(GameContent content, IReadOnlyList<(string Id, MapDefinition Map)> maps, Gates.ForecastTally tally)
     {
         var watch = Stopwatch.StartNew();
         var ok = true;

@@ -559,6 +559,20 @@ public class SimFullTests
     }
 
     [Fact]
+    public void FullUnderADifficultyNamesItAndAnUnknownOneIsRefusedNamingTheKnown()
+    {
+        var output = Capture(() => Ironwake.Sim.Program.Main(new[] { "--full", "old_mill_road", "--seeds", "2", "--difficulty", "normal" }));
+        Assert.Contains("2 seeds, two-roll average, difficulty normal\n", output);
+        Assert.Contains("gate 6 ", output);
+
+        var refused = 0;
+        var unknown = Capture(() => refused = Ironwake.Sim.Program.Main(new[] { "--full", "old_mill_road", "--seeds", "2", "--difficulty", "brutal" }));
+        Assert.Equal(2, refused);
+        Assert.Contains("full: no difficulty 'brutal'; they are normal", unknown);
+        Assert.DoesNotContain("gate 1", unknown);
+    }
+
+    [Fact]
     public void FullNamesTheMapsWhenTheMapIsUnknown()
     {
         var output = Capture(() => Ironwake.Sim.Program.Full("no_such_map", 3));
