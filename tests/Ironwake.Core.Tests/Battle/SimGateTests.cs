@@ -873,4 +873,23 @@ public class SimGateTests
 
         static string Line(GameResult game) => $"{game.Result} {game.Turns} {string.Join(" ", game.Mix.OrderBy(m => m.Key, StringComparer.Ordinal).Select(m => m.Key + "=" + m.Value))}";
     }
+
+    /// <summary>
+    /// Issue 66: gate 5 runs with abilities on both sides. Its fighters draw both effect
+    /// kinds, and a stream of them still reads exactly the damage the forecast printed.
+    /// </summary>
+    [Fact]
+    public void GateFiveFightersCarryAbilitiesOfBothKinds()
+    {
+        var random = new Random(5);
+        var drawn = Enumerable.Range(0, 50).SelectMany(_ => Gates.DrawnAbilities(Starter, random)).ToList();
+
+        Assert.Contains(drawn, a => a.Trigger == AbilityTrigger.Passive);
+        Assert.Contains(drawn, a => a.Trigger == AbilityTrigger.OnCombat);
+
+        var tally = new Gates.ForecastTally();
+        Gates.ForecastStream(Starter, tally, 500);
+        Assert.Equal(500, tally.Combats);
+        Assert.Equal(0, tally.WrongDamage);
+    }
 }

@@ -13,8 +13,11 @@ public sealed record ContentFiles(
     ContentFile Terrain,
     IReadOnlyList<ContentFile> Units,
     ContentFile Rules,
-    ContentFile Items)
+    ContentFile Items,
+    ContentFile Abilities)
 {
+    public const string AbilitiesName = "abilities.json";
+
     public const string ItemsName = "items.json";
     public const string ClassesName = "classes.json";
     public const string RulesName = "rules.json";

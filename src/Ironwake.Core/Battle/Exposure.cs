@@ -69,7 +69,7 @@ public static class Exposure
                         continue;
                     }
 
-                    var striker = new Combatant(enemy.Unit, content.Class(enemy.Unit.ClassId), weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content));
+                    var striker = content.CombatantOf(enemy.Unit, weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content));
                     var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
                     var here = Worst(forecast.Attacker);
                     if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))

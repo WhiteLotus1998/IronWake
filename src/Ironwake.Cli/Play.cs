@@ -683,7 +683,7 @@ public sealed class PlaySession
 
     private void Show(BattleUnit unit)
     {
-        var stats = unit.Unit.EffectiveStats(_content.Class(unit.Unit.ClassId));
+        var stats = _content.StatsOf(unit.Unit);
         _out.WriteLine($"{unit.Id}: {unit.Unit.Name}, {_content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {_state.Map.TerrainAt(unit.At, _content).Label(stats.Hp)}");
         _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}");
         _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
