@@ -141,6 +141,12 @@ public static class ProtocolJson
                 w.WriteString("unit", q.UnitId);
                 w.WriteString("item", q.ItemId);
                 break;
+            case ArtDeclared a:
+                w.WriteString("unit", a.UnitId);
+                w.WriteString("art", a.ArtId);
+                w.WriteString("item", a.ItemId);
+                w.WriteNumber("cost", a.Cost);
+                break;
             case WeaponBroke b:
                 w.WriteString("unit", b.UnitId);
                 w.WriteString("item", b.ItemId);
@@ -197,6 +203,11 @@ public static class ProtocolJson
                 w.WriteString("unit", a.UnitId);
                 w.WriteString("target", a.TargetId);
                 WriteNullableNumber(w, "slot", a.Slot);
+                if (a.Art is not null)
+                {
+                    w.WriteString("art", a.Art);
+                }
+
                 break;
             case UseItem i:
                 w.WriteString("type", "item");
@@ -240,7 +251,7 @@ public static class ProtocolJson
         return type switch
         {
             "move" => new Move(RequiredString(e, "unit"), ReadCoord(e, "to")),
-            "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot")),
+            "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot"), OptionalString(e, "art")),
             "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
@@ -256,6 +267,11 @@ public static class ProtocolJson
         WriteSide(w, "attacker", forecast.Attacker);
         WriteSide(w, "defender", forecast.Defender);
         w.WriteString("scheme", Name(forecast.Scheme));
+        if (forecast.ArtCost != 0)
+        {
+            w.WriteNumber("artCost", forecast.ArtCost);
+        }
+
         w.WriteEndObject();
     }
 
@@ -263,7 +279,7 @@ public static class ProtocolJson
     {
         using var doc = Parse(json);
         var e = doc.RootElement;
-        return new CombatForecast(ReadSide(Required(e, "attacker")), ReadSide(Required(e, "defender")), ParseEnum<RollScheme>(RequiredString(e, "scheme"), "scheme"));
+        return new CombatForecast(ReadSide(Required(e, "attacker")), ReadSide(Required(e, "defender")), ParseEnum<RollScheme>(RequiredString(e, "scheme"), "scheme"), OptionalInt(e, "artCost") ?? 0);
     }
 
     /// <summary>Every tile of a reach in the order the core settled them (DECISIONS/0012), each with its cost, its path from the origin, and whether the unit may end its move there.</summary>

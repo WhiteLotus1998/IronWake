@@ -16,8 +16,11 @@ public sealed record Move(string UnitId, Coord To) : Command;
 /// <paramref name="Slot"/> names the inventory slot of the weapon to strike with; it
 /// moves to the front of the inventory, so the counter on the enemy phase uses the same
 /// weapon. Without it the equipped weapon strikes. Choosing costs nothing extra (section 7).
+/// <paramref name="Art"/> names a combat art the unit knows, declared before the roll
+/// (issue 68): the weapon strikes as the art makes it and spends the art's extra uses,
+/// hit or miss. Only an attack declares one, so a counter never does.
 /// </summary>
-public sealed record Attack(string UnitId, string TargetId, int? Slot = null) : Command;
+public sealed record Attack(string UnitId, string TargetId, int? Slot = null, string? Art = null) : Command;
 
 /// <summary>
 /// Use the item in an inventory slot (section 7's Item action): a consumable heals its

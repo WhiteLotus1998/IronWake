@@ -13,7 +13,9 @@ public class AbilityContentTests
             "effect": { "kind": "combat", "against": { "weapon": "lance", "movement": "flying" }, "crit": 10 } },
           { "id": "steady", "name": "Steady", "text": "-5 crit taken from anyone.",
             "effect": { "kind": "combat", "critAvoid": 5 } },
-          { "id": "vigilance", "name": "Vigilance", "text": "Def +2, HP +1.", "effect": { "kind": "stats", "stats": { "def": 2, "hp": 1 } } }
+          { "id": "vigilance", "name": "Vigilance", "text": "Def +2, HP +1.", "effect": { "kind": "stats", "stats": { "def": 2, "hp": 1 } } },
+          { "id": "sunder", "name": "Sunder", "text": "+4 Mt, +2 Wt, reach 2; two extra uses.",
+            "effect": { "kind": "art", "weapon": "sword", "rank": "D", "cost": 2, "mt": 4, "wt": 2, "range": 1 } }
         ] }
         """;
 
@@ -129,6 +131,54 @@ public class AbilityContentTests
         AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"combat\", \"hit\": 5, \"against\": { } }"))), ContentFiles.AbilitiesName, "a", "effect.against");
         AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"combat\", \"hit\": 5, \"against\": { \"weapon\": \"whip\" } }"))), ContentFiles.AbilitiesName, "a", "effect.against.weapon");
         AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"combat\", \"hit\": 5, \"against\": { \"movement\": \"swimming\" } }"))), ContentFiles.AbilitiesName, "a", "effect.against.movement");
+    }
+
+    [Fact]
+    public void AnArtLoadsWithItsWeaponRankCostAndDeltas()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers));
+
+        Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.D, 2, 4, 0, 0, 2, 1), content.Ability("sunder").Effect);
+        Assert.Equal(AbilityTrigger.Declared, content.Ability("sunder").Trigger);
+    }
+
+    [Fact]
+    public void AnArtKnownByAUnitIsListedAmongItsArtsAndChangesNoStat()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers, units: RecruitWithAbilities("[\"sunder\", \"vigilance\"]")));
+        var recruit = content.Unit("recruit");
+
+        Assert.Equal(new[] { "sunder" }, content.ArtsOf(recruit).Select(a => a.Ability.Id));
+        Assert.Equal(4 + 2, content.StatsOf(recruit).Def);
+    }
+
+    [Fact]
+    public void AnArtCostsAtLeastOneUse()
+    {
+        var e = Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 0, \"mt\": 3 }")));
+
+        AssertNames(e, ContentFiles.AbilitiesName, "a", "effect.cost");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"mt\": 3 }"))), ContentFiles.AbilitiesName, "a", "cost");
+    }
+
+    [Fact]
+    public void AnArtsRangeIsNeverNegative()
+    {
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"bow\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"range\": -1 }"))), ContentFiles.AbilitiesName, "a", "effect.range");
+    }
+
+    [Fact]
+    public void AnArtMustChangeSomething()
+    {
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1 }"))), ContentFiles.AbilitiesName, "a", "effect");
+    }
+
+    [Fact]
+    public void AnArtNamesARealWeaponTypeAndRank()
+    {
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"whip\", \"rank\": \"E\", \"cost\": 1, \"mt\": 1 }"))), ContentFiles.AbilitiesName, "a", "effect.weapon");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"Z\", \"cost\": 1, \"mt\": 1 }"))), ContentFiles.AbilitiesName, "a", "effect.rank");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 1, \"avoid\": 5 }"))), ContentFiles.AbilitiesName, "a", "effect.avoid");
     }
 
     [Fact]

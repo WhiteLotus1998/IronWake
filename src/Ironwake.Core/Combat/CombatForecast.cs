@@ -31,5 +31,12 @@ public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int D
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
 }
 
-/// <summary>What both sides can expect from a combat before it is fought.</summary>
-public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender, RollScheme Scheme);
+/// <summary>
+/// What both sides can expect from a combat before it is fought. <see cref="ArtCost"/> is
+/// the extra uses a declared combat art spends (issue 68), zero for a plain attack.
+/// </summary>
+public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender, RollScheme Scheme, int ArtCost = 0)
+{
+    /// <summary>The most uses the attacker's weapon spends: one per strike it can make, and an art's cost, paid hit or miss.</summary>
+    public int AttackerSpendsAtMost => (Attacker.Doubles ? 2 : 1) + ArtCost;
+}

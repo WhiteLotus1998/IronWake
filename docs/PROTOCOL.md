@@ -27,7 +27,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `type` | fields | core record |
 |---|---|---|
 | `move` | `unit`, `to` | `Move` |
-| `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon) | `Attack` |
+| `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon), `art` (optional: a combat art the unit knows, issue 68) | `Attack` |
 | `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
 | `wait` | `unit` | `Wait` |
 | `end` | none | `EndPhase` |
@@ -43,10 +43,10 @@ A request with a `query` field. Queries change nothing. Each answers `{"ok":true
 | `state` | none | `state`: the full state |
 | `reachable` | `unit` | `unit`, `reach`: `origin`, `movement`, `mov`, `tiles`: each `x`, `y`, `cost`, `canEnd`, `path` (the tiles walked after the origin, DECISIONS/0012's tie-break), in the order the core settled them |
 | `targets` | `unit` | `unit`, `targets`: enemy ids the equipped weapon reaches from where the unit stands, in id order |
-| `forecast` | `unit`, `target`, `slot` (optional, 0-based), `from` (optional, a tile the unit can still move to, issue 151) | `unit`, `target`, `from`, `forecast` (below), `text`: the console's forecast line and, when they apply, its rivalry and pending-retreat lines, joined by `\n` |
+| `forecast` | `unit`, `target`, `slot` (optional, 0-based), `from` (optional, a tile the unit can still move to, issue 151), `art` (optional, issue 68) | `unit`, `target`, `from`, `forecast` (below), `text`: the console's forecast line and, when they apply, its art, rivalry and pending-retreat lines, joined by `\n` |
 | `threat` | `unit` (a player unit), `from` (optional) | `unit`, `from`, `threats`: each `enemy`, `from`, `slot` (0-based), `weapon` (id), `ifAllLand`, `forecast`; then `ifAllLand` (the sum) and `text`: the console's `threat` block |
 
-A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side `strikes`, `damage`, `hitChance` (the raw number the resolver rolls against), `displayedHit` (the only hit a renderer may print), `critChance`, `doubles`. Gate 5 counts every forecast after a write and read through this shape, and fails on any it changes.
+A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side `strikes`, `damage`, `hitChance` (the raw number the resolver rolls against), `displayedHit` (the only hit a renderer may print), `critChance`, `doubles`; a forecast of a combat art also carries `artCost`, the extra uses the art spends hit or miss (issue 68), and its sides are the art's numbers. Gate 5 counts every forecast after a write and read through this shape, and fails on any it changes.
 
 ## State
 
@@ -78,6 +78,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `recalled` | `toIndex`, `chargesLeft` |
 | `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
 | `weaponEquipped` | `unit`, `item` |
+| `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with), `cost` (extra uses, spent hit or miss; issue 68); precedes the `combatFought` |
 | `weaponBroke` | `unit`, `item` |
 | `spellSpent` | `unit`, `item` |
 | `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`) |

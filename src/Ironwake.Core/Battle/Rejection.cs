@@ -21,6 +21,8 @@ public enum RejectionReason
     NoSuchHistoryIndex,
     NotAPlayerPhase,
     CannotRetreat,
+    NoSuchArt,
+    ArtRefused,
     BattleOver,
     UnknownCommand,
 }

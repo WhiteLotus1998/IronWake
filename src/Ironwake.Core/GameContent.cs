@@ -51,6 +51,10 @@ public sealed record GameContent(
     /// <summary>The unit's abilities, resolved in the order it lists them.</summary>
     public ValueList<Ability> AbilitiesOf(Unit unit) => ValueList<Ability>.From(unit.Abilities.Select(Ability));
 
+    /// <summary>The combat arts a unit knows (issue 68): the abilities it lists whose effect is an art, in its order.</summary>
+    public IEnumerable<(Ability Ability, CombatArtEffect Art)> ArtsOf(Unit unit) =>
+        AbilitiesOf(unit).Where(a => a.Effect is CombatArtEffect).Select(a => (a, (CombatArtEffect)a.Effect));
+
     /// <summary>
     /// The numbers a unit fights with: its stats, its class modifiers, and its passive
     /// ability deltas. Max HP is this <c>Hp</c>, the same number <see cref="Combatant.Stats"/> carries.

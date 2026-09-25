@@ -112,10 +112,23 @@ public sealed record BattleUnit(
     /// the neighbours are read from <paramref name="state"/> at this unit's <see cref="At"/>,
     /// so a forecast may pass the unit at a tile it has not moved to yet.
     /// <paramref name="countering"/> is true for the side that is struck first and answers.
+    /// <paramref name="art"/> is a combat art the attacker declared (issue 68): the equipped
+    /// weapon strikes as the art makes it. A counter never carries one.
     /// </summary>
-    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false)
+    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null)
     {
+        if (countering && art is not null)
+        {
+            throw new ArgumentException($"{Id} is countering and cannot declare an art", nameof(art));
+        }
+
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
-        return content.CombatantOf(Unit, EquippedWeapon(content), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
+        var weapon = EquippedWeapon(content);
+        if (art is not null && weapon is not null)
+        {
+            weapon = art.Apply(weapon);
+        }
+
+        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
     }
 }

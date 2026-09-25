@@ -180,6 +180,18 @@ public static class Resolver
         }
 
         unit = armed;
+        CombatArtEffect? art = null;
+        if (attack.Art is not null)
+        {
+            (art, var refused) = ChooseArt(unit, content, weapon!, attack.Art);
+            if (refused is not null)
+            {
+                return (state, refused);
+            }
+
+            weapon = art!.Apply(weapon!);
+        }
+
         var distance = unit.At.DistanceTo(target.At);
         if (!weapon!.InRange(distance))
         {
@@ -193,9 +205,14 @@ public static class Resolver
             events.Add(new WeaponEquipped(unit.Id, weapon.Id));
         }
 
+        if (art is not null)
+        {
+            events.Add(new ArtDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
+        }
+
         var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
-            unit.ToCombatant(state, content),
+            unit.ToCombatant(state, content, art: art),
             target.ToCombatant(state, content, countering: true),
             distance,
             new CombatContext(state.Turn, state.Phase),
@@ -203,7 +220,7 @@ public static class Resolver
             state.Scheme);
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
 
-        var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events);
+        var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, art?.Cost ?? 0);
         var targetAfter = SpendDurability(target with { Hp = result.DefenderHp }, result.Strikes, content, events);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
@@ -262,19 +279,47 @@ public static class Resolver
         return (unit.WithSlotInFront(slot.Value), weapon, null);
     }
 
+    /// <summary>
+    /// The combat art an attack declares (issue 68), or why it cannot: the unit must know
+    /// it (<see cref="RejectionReason.NoSuchArt"/>), and the weapon it strikes with must be
+    /// of the art's type, at a rank the unit has reached, not broken, and holding at least
+    /// the art's cost and the first strike's use (<see cref="RejectionReason.ArtRefused"/>).
+    /// <paramref name="unit"/> is the unit with <paramref name="weapon"/> already equipped.
+    /// </summary>
+    public static (CombatArtEffect? Art, Rejection? Rejection) ChooseArt(BattleUnit unit, GameContent content, Weapon weapon, string artId)
+    {
+        var known = content.ArtsOf(unit.Unit).FirstOrDefault(a => a.Ability.Id == artId);
+        if (known.Art is null)
+        {
+            return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no art '{artId}'"));
+        }
+
+        var (ability, art) = known;
+        var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
+        var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} art and {weapon.Name} is a {Lower(weapon.Type)}"
+            : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
+            : uses == 0 ? $"{weapon.Name} is broken and cannot pay for an art"
+            : uses < art.UsesNeeded ? $"{ability.Name} costs {art.UsesNeeded} uses with the strike and {weapon.Name} has {uses} left"
+            : null;
+        return why is null ? (art, null) : (null, new Rejection(RejectionReason.ArtRefused, $"{unit.Id} cannot use {ability.Name}: {why}"));
+
+        static string Lower(WeaponType type) => type.ToString().ToLowerInvariant();
+    }
+
     /// <summary>The refusal's reason when a unit's rank is below a weapon's (issue 67): the unit's rank in the type and the rank the weapon needs.</summary>
     public static string RankShort(Unit unit, Weapon weapon) =>
         $"rank {unit.Skill.Rank(weapon.Type)} in {weapon.Type.ToString().ToLowerInvariant()}, and {weapon.Name} needs {weapon.Rank}";
 
     /// <summary>
     /// Section 5's durability: every strike a unit made in the combat, landed or not,
-    /// spends one use of the weapon it struck with, never below zero. The strike that
+    /// spends one use of the weapon it struck with, never below zero, and a declared art's
+    /// <paramref name="artCost"/> is spent with them, hit or miss (issue 68). The strike that
     /// empties a physical weapon emits <see cref="WeaponBroke"/> and the weapon stays,
     /// broken; the one that empties a spell emits <see cref="SpellSpent"/>.
     /// </summary>
-    private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events)
+    private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events, int artCost = 0)
     {
-        var made = strikes.Count(s => s.AttackerId == unit.Id);
+        var made = strikes.Count(s => s.AttackerId == unit.Id) + artCost;
         var slot = unit.EquippedSlot(content);
         if (made == 0 || slot < 0)
         {
@@ -637,7 +682,12 @@ public static class Resolver
         yield return new EndPhase();
     }
 
-    /// <summary>One Attack per target in range of the equipped weapon, slot unnamed; when the unit carries a second usable weapon, one per usable slot per target in its range, slots named.</summary>
+    /// <summary>
+    /// One Attack per target in range of the equipped weapon, slot unnamed; when the unit
+    /// carries a second usable weapon, one per usable slot per target in its range, slots
+    /// named. Then, per slot, one per art the unit knows and may declare with that weapon
+    /// (issue 68), arts in the unit's order, per target in the art's range.
+    /// </summary>
     private static IEnumerable<Attack> LegalAttacks(BattleState state, GameContent content, BattleUnit unit)
     {
         var slots = new List<int>();
@@ -658,6 +708,24 @@ public static class Resolver
                 if (weapon.InRange(unit.At.DistanceTo(target.At)))
                 {
                     yield return slots.Count == 1 ? new Attack(unit.Id, target.Id) : new Attack(unit.Id, target.Id, slot);
+                }
+            }
+
+            foreach (var (ability, _) in content.ArtsOf(unit.Unit))
+            {
+                var (art, refused) = ChooseArt(unit.WithSlotInFront(slot), content, weapon, ability.Id);
+                if (refused is not null)
+                {
+                    continue;
+                }
+
+                var reach = art!.Apply(weapon);
+                foreach (var target in targets)
+                {
+                    if (reach.InRange(unit.At.DistanceTo(target.At)))
+                    {
+                        yield return new Attack(unit.Id, target.Id, slots.Count == 1 ? null : slot, ability.Id);
+                    }
                 }
             }
         }

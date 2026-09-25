@@ -33,10 +33,13 @@ public static class Queries
     /// The section 5 forecast of the unit attacking the target from where it stands with
     /// its equipped weapon, or with the weapon in <paramref name="slot"/>; null when it
     /// cannot (no weapon, a slot that holds no usable weapon, the target out of range or
-    /// on its own side), the same combatants the resolver would build.
+    /// on its own side), the same combatants the resolver would build. With
+    /// <paramref name="art"/> it is the forecast of that combat art (issue 68): the art's
+    /// numbers, its cost in <see cref="CombatForecast.ArtCost"/>, and null when the resolver
+    /// would refuse the art.
     /// </summary>
-    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int? slot = null) =>
-        Forecast(state, content, unit, target, unit.At, slot);
+    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int? slot = null, string? art = null) =>
+        Forecast(state, content, unit, target, unit.At, slot, art);
 
     /// <summary>
     /// The forecast of the unit attacking the target from <paramref name="from"/>, a tile it
@@ -47,7 +50,7 @@ public static class Queries
     /// for the reasons the standing forecast is null. From the unit's own tile it is the
     /// standing forecast. Read-only: nothing moves.
     /// </summary>
-    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, Coord from, int? slot = null)
+    public static CombatForecast? Forecast(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, Coord from, int? slot = null, string? art = null)
     {
         if (!CanStandOn(state, content, unit, from))
         {
@@ -55,13 +58,47 @@ public static class Queries
         }
 
         var (armed, weapon, rejection) = Resolver.ChooseWeapon(unit, content, slot);
-        var distance = from.DistanceTo(target.At);
-        if (rejection is not null || !weapon!.InRange(distance) || target.Side == unit.Side)
+        if (rejection is not null)
         {
             return null;
         }
 
-        return Combat.Forecast((armed with { At = from }).ToCombatant(state, content), target.ToCombatant(state, content, countering: true), distance, state.Scheme);
+        CombatArtEffect? declared = null;
+        if (art is not null)
+        {
+            (declared, rejection) = Resolver.ChooseArt(armed, content, weapon!, art);
+            if (rejection is not null)
+            {
+                return null;
+            }
+
+            weapon = declared!.Apply(weapon!);
+        }
+
+        var distance = from.DistanceTo(target.At);
+        if (!weapon!.InRange(distance) || target.Side == unit.Side)
+        {
+            return null;
+        }
+
+        var forecast = Combat.Forecast((armed with { At = from }).ToCombatant(state, content, art: declared), target.ToCombatant(state, content, countering: true), distance, state.Scheme);
+        return declared is null ? forecast : forecast with { ArtCost = declared.Cost };
+    }
+
+    /// <summary>
+    /// Why the unit's weapon choice gives no forecast: the refusal of the slot
+    /// (<see cref="Resolver.ChooseWeapon"/>) or of the art (<see cref="Resolver.ChooseArt"/>),
+    /// the same the resolver would give; null when both would be accepted.
+    /// </summary>
+    public static Rejection? WeaponRefusal(GameContent content, BattleUnit unit, int? slot, string? art)
+    {
+        var (armed, weapon, rejection) = Resolver.ChooseWeapon(unit, content, slot);
+        if (rejection is not null || art is null)
+        {
+            return rejection;
+        }
+
+        return Resolver.ChooseArt(armed, content, weapon!, art).Rejection;
     }
 
     /// <summary>

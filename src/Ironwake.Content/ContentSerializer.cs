@@ -22,7 +22,7 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.ItemsName, WriteArray("items", content.Items.Values, WriteItem)),
         new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)));
 
-    /// <summary>An ability and its effect in the shape <see cref="ContentLoader"/> reads (issue 66); a combat effect writes all four modifiers.</summary>
+    /// <summary>An ability and its effect in the shape <see cref="ContentLoader"/> reads (issue 66); a combat effect writes all four modifiers, an art all five deltas.</summary>
     private static void WriteAbility(Utf8JsonWriter writer, Ability ability)
     {
         writer.WriteStartObject();
@@ -58,6 +58,17 @@ public static class ContentSerializer
                 writer.WriteNumber("avoid", modifier.Avoid);
                 writer.WriteNumber("crit", modifier.Crit);
                 writer.WriteNumber("critAvoid", modifier.CritAvoid);
+                break;
+            case CombatArtEffect art:
+                writer.WriteString("kind", "art");
+                writer.WriteString("weapon", art.Weapon.ToString().ToLowerInvariant());
+                writer.WriteString("rank", art.Rank.ToString());
+                writer.WriteNumber("cost", art.Cost);
+                writer.WriteNumber("mt", art.Mt);
+                writer.WriteNumber("hit", art.Hit);
+                writer.WriteNumber("crit", art.Crit);
+                writer.WriteNumber("wt", art.Wt);
+                writer.WriteNumber("range", art.Range);
                 break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));

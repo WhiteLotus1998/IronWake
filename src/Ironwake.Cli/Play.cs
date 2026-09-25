@@ -33,13 +33,13 @@ public sealed class PlaySession
     private const string Help = """
         commands:
           move <unit> <x,y>        move a unit to a tile in its reach
-          attack <unit> <target> [slot]  attack an enemy in range, with the weapon in a slot (the forecast prints first)
+          attack <unit> <target> [slot] [art <id>]  attack an enemy in range, with the weapon in a slot, declaring a combat art (the forecast prints first)
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge)
           recall                   list the state each player turn started at, and the charges left
-          forecast <unit> <target> [slot] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
+          forecast <unit> <target> [slot] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
@@ -249,6 +249,7 @@ public sealed class PlaySession
 
     private void Execute(string[] words)
     {
+        var art = words[0] is "attack" or "forecast" ? TakeArt(ref words) : null;
         switch (words[0])
         {
             case "move" when words.Length == 3 && TryCoord(words[2], out var to):
@@ -258,14 +259,14 @@ public sealed class PlaySession
                 Error("usage: move <unit> <x,y>");
                 break;
             case "attack" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
-                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var attackSlot) && PrintForecast(words[1], words[2], attackSlot))
+                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art))
                 {
-                    Apply(new Attack(words[1], words[2], attackSlot));
+                    Apply(new Attack(words[1], words[2], attackSlot, art));
                 }
 
                 break;
             case "attack":
-                Error("usage: attack <unit> <target> [slot]");
+                Error("usage: attack <unit> <target> [slot] [art <id>]");
                 break;
             case "wait" when words.Length == 2:
                 Apply(new Wait(words[1]));
@@ -313,12 +314,12 @@ public sealed class PlaySession
             case "forecast" when TryForecastWords(words, out var slotText, out var from):
                 if (TrySlot(words[1], slotText, out var forecastSlot))
                 {
-                    PrintForecast(words[1], words[2], forecastSlot, from);
+                    PrintForecast(words[1], words[2], forecastSlot, art, from);
                 }
 
                 break;
             case "forecast":
-                Error("usage: forecast <unit> <target> [slot] [from <x,y>]");
+                Error("usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]");
                 break;
             case "threat" when words.Length == 2:
                 PrintThreat(words[1], null);
@@ -460,6 +461,26 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// Takes <c>art &lt;id&gt;</c> out of an <c>attack</c> or <c>forecast</c> line (issue 68),
+    /// after the unit and the target, and returns the id; the remaining words parse as
+    /// before. A trailing <c>art</c> with no id is left for the usage error.
+    /// </summary>
+    private static string? TakeArt(ref string[] words)
+    {
+        for (var i = 3; i + 1 < words.Length; i++)
+        {
+            if (words[i] == "art")
+            {
+                var id = words[i + 1];
+                words = words.Take(i).Concat(words.Skip(i + 2)).ToArray();
+                return id;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Reads the words after <c>forecast &lt;unit&gt; &lt;target&gt;</c>: an optional slot, then
     /// an optional <c>from &lt;x,y&gt;</c> (issue 151). False when they are anything else.
     /// </summary>
@@ -498,7 +519,7 @@ public sealed class PlaySession
     /// a tile it could still move to (issue 151). The from-tile line names the tile and
     /// its terrain, since the terrain is what the player is choosing between.
     /// </summary>
-    private bool PrintForecast(string unitId, string targetId, int? slot, Coord? from = null)
+    private bool PrintForecast(string unitId, string targetId, int? slot, string? art, Coord? from = null)
     {
         if (Find(unitId) is not { } unit || Find(targetId) is not { } target)
         {
@@ -512,29 +533,33 @@ public sealed class PlaySession
             return false;
         }
 
-        var forecast = Queries.Forecast(_state, _content, unit, target, tile, slot);
+        var forecast = Queries.Forecast(_state, _content, unit, target, tile, slot, art);
         if (forecast is null)
         {
-            var (_, _, rejection) = Resolver.ChooseWeapon(unit, _content, slot);
-            Error(rejection?.Message ?? $"{unit.Id} cannot attack {target.Id} from {tile}");
+            Error(Queries.WeaponRefusal(_content, unit, slot, art)?.Message ?? $"{unit.Id} cannot attack {target.Id} from {tile}");
             return false;
         }
 
-        _out.WriteLine(ForecastText(_state, _content, unit, target, forecast, tile, from is not null));
+        _out.WriteLine(ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
         return true;
     }
 
     /// <summary>
     /// Everything the console prints for a forecast, one line per row: the forecast line,
-    /// then the rivalry line and the pending-retreat lines when they apply. Shared with the
+    /// then the art line, the rivalry line and the pending-retreat lines when they apply. Shared with the
     /// protocol's forecast query (issue 25), whose <c>text</c> is exactly this.
     /// <paramref name="fromTile"/> is true for a forecast asked from a tile the unit has not
     /// moved to, whose line names the tile and its terrain.
     /// </summary>
-    public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile)
+    public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
         var lines = new List<string> { ForecastLine(unit, target, forecast, where) };
+        if (art is not null)
+        {
+            lines.Add(ArtLine(content, unit, forecast, slot, art));
+        }
+
         if (RivalryLine(state, content, unit with { At = tile }, countering: false) is { } rivalry)
         {
             lines.Add(rivalry);
@@ -542,6 +567,20 @@ public sealed class PlaySession
 
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
+    }
+
+    /// <summary>
+    /// Under a forecast of a combat art (issue 68): the art, the weapon as the art makes it,
+    /// and the most uses the attack spends against the uses the weapon has, the art's cost
+    /// included, since that is paid whether the strike lands or not.
+    /// </summary>
+    private static string ArtLine(GameContent content, BattleUnit unit, CombatForecast forecast, int? slot, string art)
+    {
+        var (armed, weapon, _) = Resolver.ChooseWeapon(unit, content, slot);
+        var ability = content.Ability(art);
+        var struck = ((CombatArtEffect)ability.Effect).Apply(weapon!);
+        var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
+        return $"  art {ability.Name}: {struck.Name} at mt {struck.Mt} hit {struck.Hit} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss";
     }
 
     /// <summary>
@@ -692,6 +731,13 @@ public sealed class PlaySession
         var ranks = _content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
         _out.WriteLine($"  ranks: {string.Join(", ", ranks)}");
+        var arts = _content.ArtsOf(unit.Unit).Select(a =>
+            $"{a.Ability.Id} ({a.Art.Weapon.ToString().ToLowerInvariant()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
+        if (arts.Count > 0)
+        {
+            _out.WriteLine($"  arts: {string.Join(", ", arts)}");
+        }
+
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
         if (_state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
@@ -833,6 +879,8 @@ public sealed class PlaySession
                 return $"{i.UnitId} uses {i.ItemId}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
             case WeaponEquipped w:
                 return $"{w.UnitId} equips {w.ItemId}";
+            case ArtDeclared a:
+                return $"{a.UnitId} declares {a.ArtId} with {a.ItemId}, spending {a.Cost} extra uses";
             case WeaponBroke b:
                 return $"{b.UnitId}'s {b.ItemId} breaks";
             case SpellSpent s:
