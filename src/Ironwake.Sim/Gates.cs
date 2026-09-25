@@ -142,8 +142,8 @@ public static class Gates
 
     /// <summary>
     /// Over the timeout losses, the median of each game's highest kill probability the veto
-    /// refused, with the count of games it is over, as <c>refused kill p50 0.9994 over 16</c>, four decimals so raw 98 and 99 under two rolls print apart from certainty;
-    /// a dash when no timeout had a refusal (issue 125). The probability is over the strikes
+    /// refused, with the count of games it is over, as <c>refused kill p50 0.9994 over 16</c>, four decimals floored
+    /// (<see cref="FormatKill"/>) so that only a kill that cannot fail prints on the certainty line; a dash when no timeout had a refusal (issue 125). The probability is over the strikes
     /// the attacker lives to make, the counter between them counted (issue 147). Printed, never classified: a value
     /// near one is a stall the veto caused by refusing a near-certain kill, a low value is a
     /// board the player judged too risky, and the row says which without a threshold. The
@@ -152,8 +152,20 @@ public static class Gates
     public static string RefusedKill(IReadOnlyList<GameResult> games)
     {
         var refused = games.Where(g => g.Cause == LossCause.Timeout && g.RefusedKill is not null).Select(g => g.RefusedKill!.Value).ToList();
-        return refused.Count == 0 ? "refused kill -" : $"refused kill p50 {Median(refused).ToString("F4", CultureInfo.InvariantCulture)} over {refused.Count}";
+        return refused.Count == 0 ? "refused kill -" : $"refused kill p50 {FormatKill(Median(refused))} over {refused.Count}";
     }
+
+    /// <summary>
+    /// A kill probability at four decimals, floored rather than rounded, so nothing under
+    /// one prints as <c>1.0000</c> (issue 153): raw 98 and 99 under two rolls print apart
+    /// from the certainty line as 0.9994 and 0.9999, and a doubled raw 99 whose either
+    /// strike kills, at one minus a hundred-millionth, prints 0.9999 where rounding put it
+    /// on the line. The floor is taken a hair above the value so a probability that is
+    /// exactly a four-decimal number in arithmetic and a hair under it in floating point
+    /// still prints as itself.
+    /// </summary>
+    public static string FormatKill(double probability) =>
+        (Math.Floor(probability * 10000 + 1e-9) / 10000).ToString("F4", CultureInfo.InvariantCulture);
 
     /// <summary>Gate 2: the random legal player wins at most 5 percent of the seeds.</summary>
     public static GateResult Gate2(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
