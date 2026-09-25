@@ -506,7 +506,32 @@ public sealed class PlaySession
         var where = from is null ? "" : $" from {tile} ({_state.Map.TerrainAt(tile, _content).Name})";
         _out.WriteLine(ForecastLine(unit, target, forecast, where));
         PrintRivalry(unit with { At = tile }, countering: false);
+        PrintPendingRetreat(unit, tile, target, forecast);
         return true;
+    }
+
+    /// <summary>
+    /// On a retreat map, the line under a forecast that says where the target would fall
+    /// back to if the strike leaves it alive and below the threshold (issue 215), through
+    /// <see cref="RetreatRule.Pending"/>: once per distinct HP the attacker's landed strikes
+    /// can leave, one hit and, when it doubles, two, crits aside. Silent when no outcome
+    /// sends it anywhere.
+    /// </summary>
+    private void PrintPendingRetreat(BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast)
+    {
+        if (!_state.Map.RetreatEnabled || !forecast.Attacker.Strikes)
+        {
+            return;
+        }
+
+        var hits = forecast.Attacker.Doubles ? new[] { 1, 2 } : new[] { 1 };
+        foreach (var hpAfter in hits.Select(n => target.Hp - n * forecast.Attacker.Damage).Distinct())
+        {
+            if (RetreatRule.Pending(_state, _content, unit, tile, target, hpAfter) is { } refuge)
+            {
+                _out.WriteLine($"  {target.Id} would fall back to {refuge} at {hpAfter} hp");
+            }
+        }
     }
 
     /// <summary>

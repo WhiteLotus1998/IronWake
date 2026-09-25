@@ -17,6 +17,20 @@ public static class RetreatRule
     /// <summary>A unit strictly below this percent of its max HP may retreat.</summary>
     public const int ThresholdPercent = 30;
 
+    /// <summary>A refugee strictly below this percent of its max HP holds its refuge (issue 215).</summary>
+    public const int HoldUntilPercent = 50;
+
+    /// <summary>
+    /// Whether the unit is a refugee that still holds: it has retreated and is strictly
+    /// below <see cref="HoldUntilPercent"/> of its max HP, in integers. Such a unit has the
+    /// effective behavior Hold (<see cref="BattleState.EffectiveBehavior"/>): it does not
+    /// move and strikes what comes into range from its tile. At or above half it is
+    /// Aggressive again and returns (issue 215, DECISIONS/0037 as amended). One flight of
+    /// one phase; only the sitting is long.
+    /// </summary>
+    public static bool Holds(BattleUnit unit, GameContent content) =>
+        unit.Retreated && unit.Hp * 100 < unit.MaxHp(content) * HoldUntilPercent;
+
     /// <summary>Whether the unit is strictly below <see cref="ThresholdPercent"/> of its max HP, in integers.</summary>
     public static bool IsBelowThreshold(BattleUnit unit, GameContent content) =>
         unit.Hp * 100 < unit.MaxHp(content) * ThresholdPercent;
@@ -37,14 +51,14 @@ public static class RetreatRule
             return $"{unit.Id} is a player unit; only enemies retreat";
         }
 
-        if (state.EffectiveBehavior(unit) != Behavior.Aggressive)
-        {
-            return $"{unit.Id} does not move on its own, so it does not retreat";
-        }
-
         if (unit.Retreated)
         {
             return $"{unit.Id} has already retreated once";
+        }
+
+        if (state.EffectiveBehavior(unit, content) != Behavior.Aggressive)
+        {
+            return $"{unit.Id} does not move on its own, so it does not retreat";
         }
 
         if (unit.Moved)
@@ -94,6 +108,30 @@ public static class RetreatRule
     /// </summary>
     public static IReadOnlySet<Coord> Struck(BattleState state, GameContent content) =>
         Threat.StruckBy(state, content, Side.Player);
+
+    /// <summary>
+    /// The refuge <paramref name="target"/> would fall back to on the coming enemy phase if
+    /// <paramref name="attacker"/> struck it from <paramref name="from"/> and left it on
+    /// <paramref name="hpAfter"/> (issue 215), or null when it would not: the forecast's
+    /// pending-retreat line. It reads the board as it stands, the caveat of section 11's
+    /// exposure sum: the attacker on its tile, every other unit where it is, and every
+    /// unit's move spent back, as at the start of the enemy phase. A later player move
+    /// that puts the refuge inside the strike set takes the retreat away, which is the
+    /// player's second lever. Null when <paramref name="hpAfter"/> kills.
+    /// </summary>
+    public static Coord? Pending(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target, int hpAfter)
+    {
+        if (hpAfter <= 0 || target.Side != Side.Enemy)
+        {
+            return null;
+        }
+
+        var units = state.Units
+            .Select(u => u.Id == attacker.Id ? u with { At = from } : u.Id == target.Id ? u with { Hp = hpAfter } : u)
+            .Select(u => u with { Moved = false, Acted = false });
+        var board = state with { Units = ValueList<BattleUnit>.From(units) };
+        return Choose(board, content, board.Find(target.Id)!);
+    }
 
     /// <summary>The tile the unit retreats to now, or null when it may not or has nowhere to go.</summary>
     public static Coord? Choose(BattleState state, GameContent content, BattleUnit unit) =>

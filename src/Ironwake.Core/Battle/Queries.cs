@@ -103,7 +103,7 @@ public static class Queries
         var board = ended.Next;
         foreach (var enemy in board.UnitsOf(Side.Enemy))
         {
-            if (board.EffectiveBehavior(enemy) is null || EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
+            if (board.EffectiveBehavior(enemy, content) is null || EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
             {
                 continue;
             }

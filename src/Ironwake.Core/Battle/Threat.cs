@@ -48,7 +48,7 @@ public static class Threat
             return struck;
         }
 
-        var mayMove = unit.Side == Side.Player || state.EffectiveBehavior(unit) == Behavior.Aggressive;
+        var mayMove = unit.Side == Side.Player || state.EffectiveBehavior(unit, content) == Behavior.Aggressive;
         var origins = mayMove
             ? state.ReachOf(unit, content).Destinations.Append(unit.At).Distinct()
             : new[] { unit.At };

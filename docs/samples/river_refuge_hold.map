@@ -1,0 +1,30 @@
+name: River Refuge (hold)
+size: 14x11
+win: seize
+turn_limit: 10
+recall: 3
+enemy_level: 1
+retreat: on
+
+.............T
+..............
+..F...........
+~~~~~~~~~=~~~~
+~~~~~~~~~=~~~~
+~~~~~~~~~=~~~~
+..............
+..............
+..............
+..............
+..............
+
+units:
+P captain 2,7
+P recruit:wren 3,7
+P recruit:ottilie 2,8
+E wingrider 3,1 group:sky behavior:aggressive
+E wingrider 5,1 group:sky behavior:aggressive
+E archer 0,0 group:fort behavior:guard
+E brigand 12,7 group:bank behavior:aggressive
+E soldier 9,2 group:bridge behavior:hold
+E archer 10,1 group:bridge behavior:hold

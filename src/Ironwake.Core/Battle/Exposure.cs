@@ -50,7 +50,7 @@ public static class Exposure
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
             var movement = content.Class(enemy.Unit.ClassId).Movement;
-            var mayMove = board.EffectiveBehavior(enemy) == Behavior.Aggressive;
+            var mayMove = board.EffectiveBehavior(enemy, content) == Behavior.Aggressive;
             var reach = board.ReachOf(enemy, content);
             var worst = (Plain: 0, Crit: 0);
             var found = false;

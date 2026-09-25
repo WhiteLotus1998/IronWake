@@ -75,7 +75,7 @@ public static class EnemyAi
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
-        var behavior = state.EffectiveBehavior(unit)
+        var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
         var weapon = unit.EquippedWeapon(content);
         var mayMove = behavior == Behavior.Aggressive && !unit.Moved;
@@ -126,7 +126,7 @@ public static class EnemyAi
     /// </summary>
     public static EnemyStrike? StrikeOn(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
     {
-        var behavior = state.EffectiveBehavior(unit)
+        var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
         if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null)
         {

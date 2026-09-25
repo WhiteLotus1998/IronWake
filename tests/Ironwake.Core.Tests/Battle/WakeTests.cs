@@ -49,11 +49,11 @@ public class WakeTests
         var state = Start().Do(new EndPhase());
         var soldier = state.Find("soldier-1")!;
 
-        Assert.Equal(Behavior.Hold, state.EffectiveBehavior(soldier));
+        Assert.Equal(Behavior.Hold, state.EffectiveBehavior(soldier, Starter));
         Assert.Equal(new Command[] { new Wait("soldier-1") }, EnemyAi.PlanUnit(state, Starter, soldier));
 
         var woken = state.Wake("watch");
-        Assert.Equal(Behavior.Aggressive, woken.EffectiveBehavior(woken.Find("soldier-1")!));
+        Assert.Equal(Behavior.Aggressive, woken.EffectiveBehavior(woken.Find("soldier-1")!, Starter));
         Assert.IsType<Move>(EnemyAi.PlanUnit(woken, Starter, woken.Find("soldier-1")!)[0]);
     }
 
@@ -126,7 +126,7 @@ public class WakeTests
         Assert.True(result.Accepted, result.Rejection?.Message);
         Assert.Contains(result.Events, e => e is UnitDied { UnitId: "archer-1" });
         Assert.Equal(new GroupWoke("watch", WakeCause.Death), Assert.Single(Woke(result)));
-        Assert.Equal(Behavior.Aggressive, result.Next.EffectiveBehavior(result.Next.Find("soldier-1")!));
+        Assert.Equal(Behavior.Aggressive, result.Next.EffectiveBehavior(result.Next.Find("soldier-1")!, Starter));
     }
 
     [Fact]

@@ -89,7 +89,7 @@ public static class TurnState
         {
             foreach (var enemy in awake)
             {
-                var from = state.EffectiveBehavior(enemy) == Behavior.Aggressive
+                var from = state.EffectiveBehavior(enemy, content) == Behavior.Aggressive
                     ? state.ReachOf(enemy, content).Destinations.ToList()
                     : new List<Coord> { enemy.At };
                 if (players.Any(player => Strikes(content, enemy, from, player.At)))
