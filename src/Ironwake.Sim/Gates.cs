@@ -1,4 +1,5 @@
 using System.Globalization;
+using Ironwake.Content.Protocol;
 using Ironwake.Core;
 
 namespace Ironwake.Sim;
@@ -414,10 +415,16 @@ public static class Gates
         return rows.Where(r => r.Drop + 2 * r.StandardError < 0.5 * median).Select(r => r.RecruitId).ToList();
     }
 
-    /// <summary>Gate 5's tally: every combat's displayed numbers against what the resolver did.</summary>
+    /// <summary>
+    /// Gate 5's tally: every combat's displayed numbers against what the resolver did. The
+    /// forecast is counted as a renderer in another process would read it, written to the
+    /// protocol's JSON and read back (issue 25), so the gate runs over the protocol as well
+    /// as in-process; a forecast the round trip changes is a mismatch and fails the gate.
+    /// </summary>
     public sealed class ForecastTally
     {
         public int Combats { get; private set; }
+        public int ProtocolMismatches { get; private set; }
         public int Strikes { get; private set; }
         public int Hits { get; private set; }
         public double ExpectedHits { get; private set; }
@@ -429,6 +436,13 @@ public static class Gates
         public void Count(CombatForecast forecast, CombatFought fought)
         {
             Combats++;
+            var overProtocol = ProtocolJson.ReadForecast(ProtocolJson.Forecast(forecast));
+            if (overProtocol != forecast)
+            {
+                ProtocolMismatches++;
+            }
+
+            forecast = overProtocol;
             foreach (var strike in fought.Strikes)
             {
                 var side = strike.AttackerId == fought.AttackerId ? forecast.Attacker : forecast.Defender;
@@ -459,9 +473,10 @@ public static class Gates
             var critSe = Math.Sqrt(Math.Max(1, ExpectedCrits * (1 - ExpectedCrits / Math.Max(1, Hits))));
             var hitOk = Math.Abs(Hits - ExpectedHits) <= 3 * hitSe;
             var critOk = Math.Abs(Crits - ExpectedCrits) <= 3 * critSe;
-            var passed = Combats >= minimum && WrongDamage == 0 && hitOk && critOk;
+            var passed = Combats >= minimum && WrongDamage == 0 && ProtocolMismatches == 0 && hitOk && critOk;
             return new GateResult(
                 $"gate 5 forecast honesty: {Combats} combats, {Strikes} strikes, hits {Hits} expected {ExpectedHits:F1}, crits {Crits} expected {ExpectedCrits:F1}, damage mismatches {WrongDamage}"
+                + (ProtocolMismatches > 0 ? $", {ProtocolMismatches} forecasts changed over the protocol" : "")
                 + (Combats < minimum ? $", under the {minimum} required" : "") + $": {Verdict(passed)}",
                 passed);
         }

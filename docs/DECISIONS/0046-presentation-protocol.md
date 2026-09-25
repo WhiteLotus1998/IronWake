@@ -1,0 +1,19 @@
+# 0046 — The presentation protocol, and the thin renderer in Phase 3
+
+Date: 2026-09-25. Issue 25, built by Code in build-only mode. The spec is the issue's body and the twenty-second round (#134, Code's proposal and Chat's four additions, both agreed; DIALOGUE.md's engine entry). Nothing here is a new design lean: items 1 to 7 are implementation choices the issue left to the Builder, and item 8 records what the twenty-second round already agreed, which said section 12 is amended by a record with #25's PR.
+
+## Decisions
+
+1. **Where it lives.** `ProtocolVersion` (1) sits in `Ironwake.Core` beside `RulesVersion`. The JSON is `Ironwake.Content.Protocol.ProtocolJson`, since Content is the one project allowed System.Text.Json and the core takes no serializer. No new project; DESIGN section 2 is untouched.
+2. **Hand-written names, pinned by golden tests.** Every field name is written by hand, never reflected from a record, and each of the 22 event types has a golden JSON string in `ProtocolJsonTests`; a test fails when a `GameEvent` record has no golden shape, and another when PROTOCOL.md does not name its type. Renaming a C# parameter cannot change the protocol.
+3. **Consumers ignore unknown fields** (twenty-second round). Adding a field is not a version change; removing one or changing its meaning bumps `ProtocolVersion`. The readers here ignore unknown fields too.
+4. **The map travels as its canonical `.map` text** (`MapFormat.Write`, already a tested fixed point) rather than a second JSON shape for maps. A full state reads back to an equal `BattleState`, history and all.
+5. **A command's answer carries a board state** without `map` and `history`, which would make each line grow with the battle; the `state` query and the session's first line carry the full state. The seed is a JSON string.
+6. **Slots are 0-based over the protocol.** Issue 101's count-from-1 is a console boundary for people; the protocol matches the core and the events. Every event and every forecast and threat answer carries `text`, the console's own line, which is what the renderer's event log panel prints.
+7. **`play <map> --protocol`** reads JSON lines from `--script` or standard input and answers each with one line. `end` plays the enemy phase through `EnemyAi.Plan` exactly as `--script` does. `--strict` is refused, since every line already answers `ok` true or false. The acceptance test replays the journaled seed-163 Tollgate line both ways: every protocol answer is accepted, every event's text appears in the text transcript in order, and both win. Gate 5 counts each forecast after a write and read through the protocol's shape and fails on any it changes.
+8. **Section 12, restating the twenty-second round.** A thin renderer comes forward into Phase 3: draw, click, forecast (a hover from any reachable tile), Recall browse, and an event log panel printing the CLI's text for every event; no art pass. Its gate is a headless Godot run in CI whose event log matches the CLI transcript for the same script and seed byte for byte. The Godot SDK stays in the renderer project, out of the core's build and test path or surviving `TreatWarningsAsErrors`. Its Builder slot comes out of Phase 3's systems, never the map retunes. The polish pass stays Phase 4. The renderer is not filed here; filing it is the Table's.
+
+## Not decided
+
+- Whether the renderer (or any consumer) wants the enemy phase's commands and pre-attack forecasts as well as its events. The console prints `enemy: attack ...` and a forecast line before each enemy strike; the protocol's `end` answer carries only events, which is the contract section 2 names. If the renderer's byte-for-byte gate needs those lines, they are an added field, not a version change.
+- The gate 5 protocol-mismatch count cannot be shown firing without a broken serializer; the forecast round-trip test holds the shape instead.

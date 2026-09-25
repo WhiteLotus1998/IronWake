@@ -1,0 +1,90 @@
+# PROTOCOL
+
+The presentation protocol (issue 25, DECISIONS/0046): how a renderer, a replay, or a bug report talks to the rules without carrying any. Protocol version **1** (`ProtocolVersion.Current` in `Ironwake.Core`). The serializer is `Ironwake.Content.Protocol.ProtocolJson`; the line session is `ironwake play <map> --protocol`.
+
+## Rules of the protocol
+
+- **Versioning.** Consumers ignore fields they do not know, so adding a field is not a change. Removing a field or changing what one means increments `ProtocolVersion`. A full state carries `protocolVersion` and a reader refuses any other.
+- **Names.** Field names are camelCase and written by hand, never reflected from the C# records; a golden test per event type holds every shape below. Enum values are the C# name in camelCase (`player`, `twoRollAverage`, `proximity`).
+- **Canonical.** Compact JSON, every field present in the order listed here, `null` where a value is absent. The same state writes the same bytes.
+- **Coordinates** are `{"x":..,"y":..}`, 0-based from the top-left, like the map format.
+- **Slots are 0-based**, as in the core and the events. The console counts slots from 1 (issue 101) because it is read by people; the protocol is read by programs.
+- **The seed is a string** (`"seed":"163"`), since a 64-bit seed does not survive a JSON number in every consumer.
+- **No rules in the renderer.** Reach, targets, forecasts and threats are queries; a consumer never computes them. Every event carries `text`, the console's own line for it, so a renderer's event log prints what the CLI prints and never falls behind the rules.
+
+## The line session: `ironwake play <map> --protocol [--seed N] [--script file] [--content dir] [--scheme one|two]`
+
+One JSON object per line in, one per line out. Input comes from `--script` (a `.jsonl` command list, which is how a bug report replays) or standard input. `--strict` is refused: every line is answered `ok: true` or `ok: false` and the session goes on. The exit code is 0 on a win and 1 otherwise, as for `play`. Blank lines are skipped.
+
+The first line out is `{"ok":true,"protocolVersion":1,"rulesVersion":1,"state":<full state>}`.
+
+A **command** answers `{"ok":true,"events":[<event>...],"state":<board state>}`. `end` plays the enemy phase through `EnemyAi.Plan` and the resolver exactly as `--script` does, so its events are the player's end of phase, the whole enemy phase, and the start of the next player phase.
+
+A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}`. `reason` is a `RejectionReason` in camelCase (`outOfReach`, `noSuchUnit`, `alreadyActed`, ...) for anything the core refused, and `badRequest` for a line that is not a request (bad JSON, an unknown type or query, a missing or mistyped field, named in the message).
+
+## Commands
+
+| `type` | fields | core record |
+|---|---|---|
+| `move` | `unit`, `to` | `Move` |
+| `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon) | `Attack` |
+| `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
+| `wait` | `unit` | `Wait` |
+| `end` | none | `EndPhase` |
+| `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
+| `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
+
+## Queries
+
+A request with a `query` field. Queries change nothing. Each answers `{"ok":true,"query":<name>, ...}` or a refusal.
+
+| `query` | fields in | answer fields |
+|---|---|---|
+| `state` | none | `state`: the full state |
+| `reachable` | `unit` | `unit`, `reach`: `origin`, `movement`, `mov`, `tiles`: each `x`, `y`, `cost`, `canEnd`, `path` (the tiles walked after the origin, DECISIONS/0012's tie-break), in the order the core settled them |
+| `targets` | `unit` | `unit`, `targets`: enemy ids the equipped weapon reaches from where the unit stands, in id order |
+| `forecast` | `unit`, `target`, `slot` (optional, 0-based), `from` (optional, a tile the unit can still move to, issue 151) | `unit`, `target`, `from`, `forecast` (below), `text`: the console's forecast line and, when they apply, its rivalry and pending-retreat lines, joined by `\n` |
+| `threat` | `unit` (a player unit), `from` (optional) | `unit`, `from`, `threats`: each `enemy`, `from`, `slot` (0-based), `weapon` (id), `ifAllLand`, `forecast`; then `ifAllLand` (the sum) and `text`: the console's `threat` block |
+
+A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side `strikes`, `damage`, `hitChance` (the raw number the resolver rolls against), `displayedHit` (the only hit a renderer may print), `critChance`, `doubles`. Gate 5 counts every forecast after a write and read through this shape, and fails on any it changes.
+
+## State
+
+`protocolVersion`, `rulesVersion`, `mapName`, `map` (full only: the map's canonical `.map` text, `MapFormat.Write`), `turn`, `phase`, `seed`, `scheme`, `recallCharges`, `units`, `awakeGroups`, `fired` (map events spent), `flags`, `rapport` (each `a`, `b`, `points`), `outcome` (`result`: `ongoing`, `won`, `lost`; `reason`; `cause`: `none`, `captain`, `protected`, `timeout`), `historyCount`, `history` (full only: every prior state in this same shape, each with an empty history of its own).
+
+A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`.
+
+The **full** state (the first line out and the `state` query) reads back to an equal `BattleState` through `ProtocolJson.ReadState`, history and all. The **board** state a command answers with leaves out `map` and `history`, which would make every answer grow with the battle; a renderer reads the map once and follows `terrainChanged`. `outcome`, `maxHp` and `historyCount` are derived and never read back.
+
+## Events
+
+Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the order the resolver emitted them.
+
+| `type` | fields |
+|---|---|
+| `unitMoved` | `unit`, `from`, `to`, `path` |
+| `combatFought` | `attacker`, `target`, `turn`, `phase`, `strikes` (each `index`, `attacker`, `target`, `hit`, `crit`, `damage`, `targetHpAfter`), `attackerHpAfter`, `targetHpAfter` |
+| `unitDied` | `unit`, `side`, `at` |
+| `expGained` | `unit`, `amount`, `expAfter` |
+| `leveledUp` | `unit`, `newLevel`, `gains` (1 for each stat that rose) |
+| `unitWaited` | `unit` |
+| `unitRetreated` | `unit`, `from`, `to` |
+| `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
+| `rivalryEnded` | `a`, `b` |
+| `phaseEnded` | `side`, `turn` |
+| `phaseBegan` | `side`, `turn` |
+| `unitHealed` | `unit`, `amount`, `hpAfter` |
+| `recalled` | `toIndex`, `chargesLeft` |
+| `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
+| `weaponEquipped` | `unit`, `item` |
+| `weaponBroke` | `unit`, `item` |
+| `spellSpent` | `unit`, `item` |
+| `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`) |
+| `mapEventFired` | `name`, `blocked` |
+| `terrainChanged` | `at`, `terrain` |
+| `unitSpawned` | `unit`, `at`, `group`, `behavior` |
+| `flagSet` | `flag` |
+
+## A bug report
+
+A seed, a map, and a `.jsonl` command list: `ironwake play the_tollgate --seed 163 --protocol --script report.jsonl`. The answers replay byte for byte on the same build; the first line's state carries both version numbers, so a report from another build is recognisable as one.
