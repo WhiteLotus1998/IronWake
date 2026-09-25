@@ -40,11 +40,14 @@ public sealed record BattleState(
 
     /// <summary>
     /// How an enemy behaves now (DESIGN.md section 8): a sleeping Guard as Hold, a woken
-    /// Guard as Aggressive, everything else as its map says. A player unit has no behavior and gets null.
+    /// Guard as Aggressive, a refugee still below half HP as Hold (<see cref="RetreatRule.Holds"/>,
+    /// issue 215), everything else as its map says. A player unit has no behavior and gets null.
     /// </summary>
-    public Behavior? EffectiveBehavior(BattleUnit unit) =>
+    public Behavior? EffectiveBehavior(BattleUnit unit, GameContent content) =>
         unit.Behavior switch
         {
+            null => null,
+            _ when RetreatRule.Holds(unit, content) => Core.Behavior.Hold,
             Core.Behavior.Guard => unit.Group is { } group && IsAwake(group) ? Core.Behavior.Aggressive : Core.Behavior.Hold,
             var other => other,
         };

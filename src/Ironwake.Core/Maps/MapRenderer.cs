@@ -101,7 +101,7 @@ public static class MapRenderer
     /// The console view of a battle: the grid with every living unit drawn where it stands,
     /// each with the letter of the placement it filled, then a legend with each unit's
     /// name, class, position, HP, terrain (with the HP a healing tile gives that unit, issue
-    /// 207), and for enemies its group and how it behaves now (a sleeping Guard reads <c>guard, asleep</c>), and <c>unarmed</c> for a unit with
+    /// 207), and for enemies its group and how it behaves now (a sleeping Guard reads <c>guard, asleep</c>, a refugee below half HP adds <c>holds its refuge until half hp</c>, issue 215), and <c>unarmed</c> for a unit with
     /// no usable weapon, since the enemy planner prices such a unit as free damage (issue
     /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
     /// the Recall charges left. Given a <see cref="Reach"/>, the tiles that unit may end on
@@ -162,6 +162,11 @@ public static class MapRenderer
                 if (unit.Behavior == Behavior.Guard)
                 {
                     role += state.IsAwake(unit.Group!) ? ", awake" : ", asleep";
+                }
+
+                if (RetreatRule.Holds(unit, content))
+                {
+                    role += ", holds its refuge until half hp";
                 }
 
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);

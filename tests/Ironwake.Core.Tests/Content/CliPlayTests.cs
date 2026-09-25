@@ -370,20 +370,49 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// The other branch of the same turn 2: wingrider-1 on 5 is left alive, falls back over
-    /// the water to the fort at 2,2 that no player unit can strike, heals 3 at its next phase
-    /// start, and comes straight back, since it never retreats twice.
+    /// The other branch of the same turn 2: wingrider-1 on 5 is left alive and falls back over
+    /// the water to the fort at 2,2 that no player unit can strike. On the second pass it
+    /// healed 3 and came straight back; since issue 215 a refugee below half HP holds, so on
+    /// 8 of 17 it waits on the fort, and the row says so.
     /// </summary>
     [Fact]
-    public void TheRiverRefugeLetGoScriptRetreatsAcrossTheWaterAndComesBack()
+    public void TheRiverRefugeLetGoScriptRetreatsAcrossTheWaterAndHoldsBelowHalf()
     {
         var output = RunRiver("2026-09-25-river_refuge_retreat-3-letgo.script", out _);
 
         Assert.DoesNotContain("rejected ", output);
         Assert.Contains("enemy: retreat wingrider-1 2,2\nwingrider-1 falls back to 2,2 and will not fight this phase\n", output);
         Assert.Contains("wingrider-1 heals 3 (hp 8)\n", output);
-        Assert.Contains("wingrider-1 moves 2,2 -> 2,7", output);
+        Assert.Contains("enemy: wait wingrider-1\n", output);
+        Assert.DoesNotContain("wingrider-1 moves 2,2 ->", output);
+        Assert.Contains("hp 8/17   Fort (heals 20 percent, 3 hp)  group sky, aggressive, holds its refuge until half hp", output);
         Assert.Equal(1, CountOf(output, "falls back"));
+    }
+
+    /// <summary>
+    /// Issue 215's hand play on the hold sample, seed 5: the captain's forecast on turn 2
+    /// names the refuge before he strikes, wingrider-2 falls back there on 5, holds two
+    /// enemy phases (5, then 8, below half), returns on 11 to the far bridge head, and the
+    /// captain seizes on turn 10 of 10.
+    /// </summary>
+    [Fact]
+    public void TheHoldSampleScriptForecastsTheRetreatHoldsBelowHalfAndSeizes()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "river_refuge_hold.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-river_refuge_hold-5.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "5", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("forecast captain -> wingrider-2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%\n  wingrider-2 would fall back to 2,2 at 5 hp\n", output);
+        Assert.Contains("enemy: retreat wingrider-2 2,2\n", output);
+        Assert.Contains("wingrider-2 heals 3 (hp 8)\n", output);
+        Assert.Contains("enemy: wait wingrider-2\n", output);
+        Assert.Contains("wingrider-2 moves 2,2 -> 8,2", output);
+        Assert.Equal(1, CountOf(output, "would fall back"));
     }
 
     private static string RunRiver(string scriptName, out int exit)
