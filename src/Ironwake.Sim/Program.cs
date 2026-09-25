@@ -33,6 +33,7 @@ public static class Program
         {
             var seeds = Gates.DefaultSeeds;
             RollScheme? scheme = RollScheme.TwoRollAverage;
+            double? taxFloor = FreePrefix.DefaultTaxFloor;
             for (var i = 2; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
@@ -43,11 +44,15 @@ public static class Program
                 {
                     scheme = ParseScheme(args[i + 1]);
                 }
+                else if (args[i] == "--taxfloor")
+                {
+                    taxFloor = double.TryParse(args[i + 1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var f) && f >= 0 && f <= 1 ? f : null;
+                }
             }
 
-            if (scheme is { } full)
+            if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full);
+                return Full(args[1], seeds, full, floor);
             }
         }
 
@@ -86,7 +91,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
 
     private const int HitBandSeeds = 50;
 
@@ -221,8 +226,13 @@ public static class Program
         _ => command.ToString() ?? "",
     };
 
-    /// <summary>All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs them, then 1 to 4 over <paramref name="seeds"/> seeds under <paramref name="scheme"/>.</summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage)
+    /// <summary>
+    /// All eight gates on one map (or every map with <c>--all</c>): 5 to 8 as the smoke runs
+    /// them, then 1 to 4 over <paramref name="seeds"/> seeds under <paramref name="scheme"/>,
+    /// then issue 47's free prefix and turn-state counters, printed and never judged, with
+    /// first quiet read at <paramref name="taxFloor"/>.
+    /// </summary>
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -247,7 +257,8 @@ public static class Program
             var one = new[] { (id, map) };
             var tally = new Gates.ForecastTally();
             Gates.ForecastStream(content, tally, Gate5MinimumCombats);
-            var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme);
+            var readings = new List<IReadOnlyList<TurnReading>>();
+            var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme, readings: readings);
             var rows = new List<GateResult>
             {
                 gate1,
@@ -263,6 +274,11 @@ public static class Program
             {
                 Console.WriteLine(row.Line);
                 failed |= !row.Passed;
+            }
+
+            foreach (var line in FreePrefix.Report(content, map, id, baseline, readings, scheme, taxFloor))
+            {
+                Console.WriteLine(line);
             }
         }
 

@@ -1,0 +1,94 @@
+full: 3 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: old_mill_road, heuristic wins 59/200 (29 %), winning turn median 8 p90 10 limit 12, losses 32 timeout 109 captain 0 protected, quiet tail 5.8, refused kill p50 0.9892 over 32, two-roll average: FAILED
+gate 2 decisions matter: old_mill_road, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: old_mill_road, 0 player units killed from deployment: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.285: ok
+  wren: drop 0.285 se 0.038 own [atk 275 dmg 8511 heal 0 abs 921] rest baseline [atk 507 dmg 11571 heal 0 abs 1350] rest benched [atk 358 dmg 9281 heal 0 abs 1012] benched losses 134 timeout 64 captain 0 protected, refused kill p50 0.0346 over 134
+  captain captain: baseline [atk 507 dmg 11571 heal 0 abs 1350] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1359 ms: ok
+gate 5 forecast honesty: 10094 combats, 17865 strikes, hits 10326 expected 10214.2, crits 257 expected 248.3, damage mismatches 0: ok
+gate 7 speed: old_mill_road, 5 AI-vs-AI games, 53 turns, slowest 15 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 20161 ms: ok
+free prefix: old_mill_road, 2 of 2, 4, 6 tried, slack median 4 p90 2 (printed, not gated)
+  prefix 2: wins 53/200, drop 0.030 se 0.041, free
+  prefix 4: wins 14/200, drop 0.225 se 0.038, not free
+  prefix 6: wins 1/200, drop 0.290 se 0.039, not free
+  prefix 4 refunded: wins 28/200, drop 0.155 se 0.040, not free, limit raised by 4 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 5.0
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 10 quiet 99 live 91, wake tax 0.15
+  turn 4: dead 45 quiet 108 live 47, wake tax 0.06
+  turn 5: dead 0 quiet 71 live 126, wake tax 0.00
+  turn 6: dead 0 quiet 19 live 172, wake tax 0.00
+  turn 7: dead 0 quiet 15 live 159, wake tax 0.00
+  turn 8: dead 0 quiet 15 live 121, wake tax 0.00
+  turn 9: dead 0 quiet 15 live 77, wake tax 0.00
+  turn 10: dead 0 quiet 15 live 41, wake tax 0.00
+  turn 11: dead 0 quiet 15 live 25, wake tax 0.00
+  turn 12: dead 0 quiet 15 live 21, wake tax 0.00
+gate 1 beatable: saltmarsh_ford, heuristic wins 22/200 (11 %), winning turn median 9 p90 13 limit 18, losses 169 timeout 9 captain 0 protected, quiet tail 2.8, refused kill p50 0.8230 over 169, two-roll average: FAILED
+gate 2 decisions matter: saltmarsh_ford, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: saltmarsh_ford, 0 player units killed from deployment: ok
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.030: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.030, se 0.027); rows are data, no recruit is judged
+  ottilie: drop 0.005 se 0.028 own [atk 1095 dmg 6411 heal 0 abs 606] rest baseline [atk 1516 dmg 21300 heal 0 abs 2773] rest benched [atk 1527 dmg 26763 heal 0 abs 3292] benched losses 149 timeout 30 captain 0 protected, refused kill p50 0.8674 over 149
+  teodor: drop 0.030 se 0.027 own [atk 260 dmg 6079 heal 0 abs 942] rest baseline [atk 2351 dmg 21632 heal 0 abs 2437] rest benched [atk 2210 dmg 26033 heal 0 abs 3036] benched losses 165 timeout 19 captain 0 protected, refused kill p50 0.8674 over 165
+  wren: drop 0.065 se 0.026 own [atk 490 dmg 5011 heal 0 abs 533] rest baseline [atk 2121 dmg 22700 heal 0 abs 2846] rest benched [atk 1990 dmg 26491 heal 0 abs 3787] benched losses 170 timeout 21 captain 0 protected, refused kill p50 0.8674 over 170
+  captain captain: baseline [atk 766 dmg 10210 heal 0 abs 1298] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1689 ms: ok
+gate 5 forecast honesty: 10076 combats, 17805 strikes, hits 10266 expected 10163.8, crits 252 expected 246.2, damage mismatches 0: ok
+gate 7 speed: saltmarsh_ford, 5 AI-vs-AI games, 50 turns, slowest 30 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 27711 ms: ok
+free prefix: saltmarsh_ford, 6 of 2, 4, 6 tried, slack median 9 p90 5 (printed, not gated)
+  prefix 2: wins 26/200, drop -0.020 se 0.030, free
+  prefix 4: wins 26/200, drop -0.020 se 0.032, free
+  prefix 6: wins 15/200, drop 0.035 se 0.030, free
+  turns, medians over 200 games: dead 2.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.24
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 13 quiet 0 live 187, wake tax 0.00
+  turn 5: dead 7 quiet 0 live 192, wake tax 0.00
+  turn 6: dead 15 quiet 0 live 181, wake tax 0.00
+  turn 7: dead 12 quiet 0 live 184, wake tax 0.00
+  turn 8: dead 21 quiet 0 live 171, wake tax 0.00
+  turn 9: dead 23 quiet 0 live 166, wake tax 0.00
+  turn 10: dead 29 quiet 0 live 153, wake tax 0.00
+  turn 11: dead 27 quiet 0 live 151, wake tax 0.00
+  turn 12: dead 16 quiet 0 live 161, wake tax 0.00
+  turn 13: dead 9 quiet 0 live 166, wake tax 0.00
+  turn 14: dead 4 quiet 0 live 168, wake tax 0.00
+  turn 15: dead 5 quiet 0 live 166, wake tax 0.00
+  turn 16: dead 1 quiet 0 live 169, wake tax 0.00
+  turn 17: dead 3 quiet 0 live 167, wake tax 0.00
+  turn 18: dead 1 quiet 0 live 168, wake tax 0.00
+gate 1 beatable: the_tollgate, heuristic wins 137/200 (69 %), winning turn median 8 p90 9 limit 10, losses 63 timeout 0 captain 0 protected, quiet tail 0.3, refused kill p50 0.8674 over 63, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.330: ok
+  pell: drop 0.455 se 0.053 own [atk 631 dmg 11102 heal 0 abs 410] rest baseline [atk 1608 dmg 14290 heal 0 abs 1438] rest benched [atk 1915 dmg 19962 heal 0 abs 2251] benched losses 154 timeout 0 captain 0 protected, refused kill p50 0.8664 over 154
+  teodor: drop 0.250 se 0.043 own [atk 571 dmg 4293 heal 0 abs 471] rest baseline [atk 1668 dmg 21099 heal 0 abs 1377] rest benched [atk 1717 dmg 21558 heal 0 abs 1772] benched losses 113 timeout 0 captain 0 protected, refused kill p50 0.8674 over 113
+  wren: drop 0.330 se 0.041 own [atk 433 dmg 4686 heal 0 abs 625] rest baseline [atk 1806 dmg 20706 heal 0 abs 1223] rest benched [atk 1771 dmg 20872 heal 0 abs 1694] benched losses 129 timeout 0 captain 0 protected, refused kill p50 0.8674 over 129
+  captain captain: baseline [atk 604 dmg 5311 heal 0 abs 342] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1603 ms: ok
+gate 5 forecast honesty: 10147 combats, 17926 strikes, hits 10366 expected 10261.9, crits 256 expected 249.1, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 21 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 25398 ms: ok
+free prefix: the_tollgate, 0 of 2, 4, 6 tried, slack median 2 p90 1 (printed, not gated)
+  prefix 2: wins 107/200, drop 0.150 se 0.050, not free
+  prefix 4: wins 42/200, drop 0.475 se 0.055, not free
+  prefix 6: wins 1/200, drop 0.680 se 0.058, not free
+  prefix 2 refunded: wins 126/200, drop 0.055 se 0.048, free, limit raised by 2 against the unraised baseline: at most tempo
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 2 quiet 0 live 198, wake tax 0.00
+  turn 5: dead 2 quiet 0 live 198, wake tax 0.00
+  turn 6: dead 2 quiet 0 live 198, wake tax 0.00
+  turn 7: dead 21 quiet 0 live 153, wake tax 0.00
+  turn 8: dead 17 quiet 0 live 119, wake tax 0.00
+  turn 9: dead 8 quiet 0 live 87, wake tax 0.00
+  turn 10: dead 5 quiet 0 live 65, wake tax 0.00
+full: FAILED
