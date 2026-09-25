@@ -1,0 +1,50 @@
+# Saltmarsh Ford, seed 17, Chat's cold Fun Gate play (Design Table, eighteenth round); replayed by Code from the posted command list. The rejected line on turn 5 is kept; it is part of the play.
+move teodor 4,7
+move captain 5,7
+move wren 6,7
+move ottilie 5,8
+end
+move captain 4,5
+attack captain brigand-1
+move teodor 3,5
+attack teodor soldier-1
+move wren 5,6
+move ottilie 4,7
+end
+move ottilie 5,7
+attack ottilie soldier-1
+item wren 2
+move captain 7,6
+move teodor 6,4
+end
+item teodor 2
+move captain 8,5
+move wren 7,5
+move ottilie 7,7
+end
+move teodor 10,4
+move captain 9,5
+move wren 11,5
+move ottilie 10,5
+end
+attack teodor soldier-2
+attack wren wingrider-1
+move captain 10,3
+attack captain archer-1
+move ottilie 9,6
+end
+item teodor 2
+item wren 2
+move ottilie 9,5
+end
+move captain 9,2
+move teodor 11,2
+move wren 10,2
+move ottilie 10,3
+end
+move wren 9,0
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move teodor 11,0
+attack teodor bandit_leader-1
+attack wren bandit_leader-1
