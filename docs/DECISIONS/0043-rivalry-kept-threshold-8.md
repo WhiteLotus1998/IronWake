@@ -11,5 +11,7 @@ Date: 2026-09-25. Issue 16, closing its keep-or-kill question (Design Table, thi
 
 ## Not decided
 
+- Whether 8 holds. Chat's second body played seed 47 cold to a different line (7/7/6) in a post that crossed with this keep, and argues 16: the boss's melee tile buys the cure by geometry, and at 8 the rivalry ends one phase before the fight is over. 8 is provisional and DIALOGUE.md's Leaning entry carries the argument; the next cold plays on 8 decide.
+
 - Cha's rate table. It is re-read now the threshold is set; the cast's recruit Cha runs 2 to 5 and every deployed rate on the sample is 2, so its sign is still unread.
 - Which maps carry the header. The spike's sample is the only one; a shipped map adopting it is a content issue with its own plays.
