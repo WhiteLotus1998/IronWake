@@ -10,7 +10,9 @@ namespace Ironwake.Core.Tests.Content;
 /// <c>art &lt;id&gt;</c>, the forecast prints the art line, <c>show</c> lists the arts a
 /// unit knows, and the journaled play replays. The content is the shipped set with
 /// <c>docs/samples/arts/abilities.json</c> in place of <c>abilities.json</c> and the captain
-/// knowing its one art, since no shipped unit knows an art yet.
+/// knowing its one art, since no shipped unit knows an art yet, and with no class naming a
+/// mastery: the journaled play predates the shipped masteries (issue 69), and a transcript
+/// is a record of the build it was played on, so the content is that build's.
 /// </summary>
 [Collection("console")]
 public class CombatArtCliTests : IDisposable
@@ -22,7 +24,7 @@ public class CombatArtCliTests : IDisposable
         Directory.Delete(_content, recursive: true);
     }
 
-    /// <summary>A copy of the real content with the sample arts and the captain knowing <c>cleave</c>.</summary>
+    /// <summary>A copy of the real content with the sample arts, the captain knowing <c>cleave</c>, and no class mastery.</summary>
     private static string SampleContent()
     {
         var real = Fixture.RealContentDirectory();
@@ -40,6 +42,15 @@ public class CombatArtCliTests : IDisposable
         var cast = JsonNode.Parse(File.ReadAllText(castPath))!;
         cast["units"]![0]!["abilities"] = new JsonArray("cleave");
         File.WriteAllText(castPath, cast.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+        var classesPath = Path.Combine(copy, ContentFiles.ClassesName);
+        var classes = JsonNode.Parse(File.ReadAllText(classesPath))!;
+        foreach (var unitClass in classes["classes"]!.AsArray())
+        {
+            unitClass!.AsObject().Remove("mastery");
+            unitClass.AsObject().Remove("masteryPoints");
+        }
+
+        File.WriteAllText(classesPath, classes.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
         return copy;
     }
 

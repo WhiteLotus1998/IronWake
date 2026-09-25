@@ -6,6 +6,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["sword", "lance", "axe"],
+      "mastery": "fundamentals",
+      "masteryPoints": 12,
       "modifiers": {},
       "growthModifiers": {}
     },
@@ -15,6 +17,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["lance"],
+      "mastery": "horsebane",
+      "masteryPoints": 12,
       "modifiers": { "hp": 1, "str": 1, "def": 1 },
       "growthModifiers": { "hp": 5, "def": 5 }
     },
@@ -24,6 +28,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["axe"],
+      "mastery": "bloodrush",
+      "masteryPoints": 12,
       "modifiers": { "hp": 2, "str": 2 },
       "growthModifiers": { "hp": 5, "str": 10, "spd": -5 }
     },
@@ -33,6 +39,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["bow"],
+      "mastery": "deadeye",
+      "masteryPoints": 12,
       "modifiers": { "dex": 2 },
       "growthModifiers": { "dex": 10 }
     },
@@ -42,6 +50,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["reason"],
+      "mastery": "deep_study",
+      "masteryPoints": 12,
       "modifiers": { "mag": 2, "res": 1 },
       "growthModifiers": { "mag": 10 }
     },
@@ -51,6 +61,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["faith"],
+      "mastery": "grace",
+      "masteryPoints": 8,
       "modifiers": { "mag": 1, "res": 2 },
       "growthModifiers": { "res": 10, "lck": 5 }
     },
@@ -61,6 +73,8 @@
       "mov": 6,
       "abilities": ["canto"],
       "weapons": ["lance", "sword"],
+      "mastery": "lancebreaker",
+      "masteryPoints": 12,
       "modifiers": { "hp": 1, "str": 1 },
       "growthModifiers": { "hp": 5, "str": 5 }
     },
@@ -70,6 +84,8 @@
       "movement": "flying",
       "mov": 6,
       "weapons": ["lance"],
+      "mastery": "bowbreaker",
+      "masteryPoints": 12,
       "modifiers": { "spd": 2, "res": 1, "def": -1 },
       "growthModifiers": { "spd": 10, "def": -5 }
     },
@@ -79,6 +95,8 @@
       "movement": "armored",
       "mov": 4,
       "weapons": ["lance", "axe"],
+      "mastery": "reasonbreaker",
+      "masteryPoints": 12,
       "modifiers": { "hp": 3, "def": 3, "spd": -2 },
       "growthModifiers": { "hp": 10, "def": 15, "spd": -10 }
     }
