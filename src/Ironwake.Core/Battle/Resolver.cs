@@ -194,8 +194,8 @@ public static class Resolver
         }
 
         var result = CombatResolver.Resolve(
-            unit.ToCombatant(state.Map, content),
-            target.ToCombatant(state.Map, content),
+            unit.ToCombatant(state, content),
+            target.ToCombatant(state, content, countering: true),
             distance,
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),
@@ -501,6 +501,11 @@ public static class Resolver
         var ended = state.Phase;
         var nextPhase = ended == Side.Player ? Side.Enemy : Side.Player;
         var nextTurn = ended == Side.Enemy ? state.Turn + 1 : state.Turn;
+        if (ended == Side.Player)
+        {
+            state = Rivalry.Accrue(state, content, events);
+        }
+
         events.Add(new PhaseEnded(ended, state.Turn));
         events.Add(new PhaseBegan(nextPhase, nextTurn));
         var units = new List<BattleUnit>(state.Units.Count);

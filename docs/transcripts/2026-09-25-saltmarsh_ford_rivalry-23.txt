@@ -1,0 +1,2037 @@
+Saltmarsh Ford (rivalry), seed 23, scheme TwoRollAverage
+Saltmarsh Ford (rivalry)  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..b....nn.c...
+ 2 ...a..n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 .....BAC......
+ 9 ......D.......
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,2    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         2,1    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> move ottilie 5,9
+ottilie moves 6,9 -> 5,9
+Saltmarsh Ford (rivalry)  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..b....nn.c...
+ 2 ...a..n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 .....BAC......
+ 9 .....D........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,2    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         2,1    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> end
+rapport ottilie and wren +4 (4)
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move brigand-1 3,5
+brigand-1 moves 3,2 -> 3,5 via 3,3 3,4
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move soldier-1 3,3
+soldier-1 moves 2,1 -> 3,3 via 3,1 3,2
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 .....BAC......
+ 9 .....D........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> move wren 4,7
+wren moves 5,8 -> 4,7 via 5,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ....B.........
+ 8 ......AC......
+ 9 .....D........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move ottilie 3,7
+ottilie moves 5,9 -> 3,7 via 5,8 5,7 4,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DB.........
+ 8 ......AC......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> attack ottilie brigand-1
+forecast ottilie -> brigand-1: dmg 8 hit 80% crit 15%; counter: none
+  rivalry: ottilie beside wren: hit -5 crit +10 crit avoid -10
+ottilie attacks brigand-1
+  ottilie hits brigand-1 for 8 (hp 14)
+  ottilie hp 17, brigand-1 hp 14
+ottilie gains 12 exp (12)
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DB.........
+ 8 ......AC......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move captain 3,8
+captain moves 6,8 -> 3,8 via 5,8 4,8
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DB.........
+ 8 ...A...C......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move teodor 5,7
+teodor moves 7,8 -> 5,7 via 7,7 6,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DBC........
+ 8 ...A..........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> end
+rapport ottilie and wren +4 (8)
+rapport teodor and wren +4 (4)
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move brigand-1 3,6
+brigand-1 moves 3,5 -> 3,6
+enemy: attack brigand-1 ottilie
+forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 8%; counter: none
+  rivalry: ottilie beside wren: hit -5 crit +10 crit avoid -10
+brigand-1 attacks ottilie
+  brigand-1 crits ottilie for 36 (hp 0)
+  brigand-1 hp 14, ottilie hp 0
+ottilie falls at 3,7
+enemy: move soldier-1 3,5
+soldier-1 moves 3,3 -> 3,5 via 3,4
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...b^^........
+ 6 ..^a..........
+ 7 ....BC........
+ 8 ...A..........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,6    hp 14/22  Forest  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+b  soldier-1        Soldier L2 pikeman         3,5    hp 20/20  Plain  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> recall
+player turns start at: turn 1 state 0, turn 2 state 11; history holds 26 states; 3 charges left
+> recall 11
+recalled to state 11; 2 charges left
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 .....BAC......
+ 9 .....D........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> move captain 4,7
+captain moves 6,8 -> 4,7 via 6,7 5,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ....A.........
+ 8 .....B.C......
+ 9 .....D........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> move ottilie 3,7
+ottilie moves 5,9 -> 3,7 via 5,8 5,7 4,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DA.........
+ 8 .....B.C......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> attack ottilie brigand-1
+forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
+ottilie attacks brigand-1
+  ottilie hits brigand-1 for 8 (hp 14)
+  ottilie hp 17, brigand-1 hp 14
+ottilie gains 12 exp (12)
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DA.........
+ 8 .....B.C......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+> move wren 4,8
+wren moves 5,8 -> 4,8
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DA.........
+ 8 ....B..C......
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> move teodor 5,7
+teodor moves 7,8 -> 5,7 via 7,7 6,7
+Saltmarsh Ford (rivalry)  turn 2 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~b~~~~~~=~~~
+ 4 ...^^.........
+ 5 ...a^^........
+ 6 ..^^..........
+ 7 ...DAC........
+ 8 ....B.........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,5    hp 14/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         3,3    hp 20/20  Road  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move brigand-1 3,6
+brigand-1 moves 3,5 -> 3,6
+enemy: attack brigand-1 ottilie
+forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
+brigand-1 attacks ottilie
+  brigand-1 hits ottilie for 12 (hp 5)
+  brigand-1 hp 14, ottilie hp 5
+enemy: move soldier-1 4,4
+soldier-1 moves 3,3 -> 4,4 via 3,4
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^a..........
+ 7 ...DAC........
+ 8 ....B.........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,6    hp 14/22  Forest  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> move captain 4,6
+captain moves 4,7 -> 4,6
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^aA.........
+ 7 ...D.C........
+ 8 ....B.........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+a  brigand-1        Brigand L2 reaver          3,6    hp 14/22  Forest  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,7    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> attack captain brigand-1
+forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
+captain attacks brigand-1
+  captain hits brigand-1 for 10 (hp 4)
+  brigand-1 misses captain
+  captain hits brigand-1 for 10 (hp 0)
+  captain hp 22, brigand-1 hp 0
+captain gains 35 exp (35)
+brigand-1 falls at 3,6
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^^A.........
+ 7 ...D.C........
+ 8 ....B.........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,7    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> move ottilie 3,9
+ottilie moves 3,7 -> 3,9 via 3,8
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^^A.........
+ 7 .....C........
+ 8 ....B.........
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> item ottilie 2
+ottilie uses field_dressing (2 left)
+ottilie heals 10 (hp 15)
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^^A.........
+ 7 .....C........
+ 8 ....B.........
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
+> move wren 4,7
+wren moves 4,8 -> 4,7
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^^A.........
+ 7 ....BC........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move teodor 5,6
+teodor moves 5,7 -> 5,6
+Saltmarsh Ford (rivalry)  turn 3 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^b.........
+ 5 ....^^........
+ 6 ..^^AC........
+ 7 ....B.........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         4,4    hp 20/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move soldier-1 5,5
+soldier-1 moves 4,4 -> 5,5 via 5,4
+enemy: attack soldier-1 teodor
+forecast soldier-1 -> teodor: dmg 8 hit 74% crit 1%; counter: dmg 9 hit 41% crit 1%
+soldier-1 attacks teodor
+  soldier-1 hits teodor for 8 (hp 13)
+  teodor hits soldier-1 for 9 (hp 11)
+  soldier-1 hp 11, teodor hp 13
+teodor gains 12 exp (12)
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^b........
+ 6 ..^^AC........
+ 7 ....B.........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move captain 4,5
+captain moves 4,6 -> 4,5
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^.C........
+ 7 ....B.........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 22/22  Forest  captain
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 8 hit 58% crit 4%; counter: dmg 7 hit 26% crit 0%
+captain attacks soldier-1
+  captain misses soldier-1
+  soldier-1 hits captain for 7 (hp 15)
+  captain hp 15, soldier-1 hp 11
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^.C........
+ 7 ....B.........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move wren 6,5
+wren moves 4,7 -> 6,5 via 4,6 5,6 6,6
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^.C........
+ 7 ..............
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> attack wren soldier-1
+forecast wren -> soldier-1: dmg 7 hit 54% crit 3%; counter: dmg 9 hit 63% crit 0%
+wren attacks soldier-1
+  wren misses soldier-1
+  soldier-1 hits wren for 9 (hp 11)
+  wren hp 11, soldier-1 hp 11
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^.C........
+ 7 ..............
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 11/20  Plain  done
+> attack teodor soldier-1
+forecast teodor -> soldier-1: dmg 9 hit 41% crit 1%; counter: dmg 8 hit 74% crit 1%
+teodor attacks soldier-1
+  teodor misses soldier-1
+  soldier-1 hits teodor for 8 (hp 5)
+  teodor hp 5, soldier-1 hp 11
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^.C........
+ 7 ..............
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 5/21   Plain  done
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 11/20  Plain  done
+> move ottilie 5,7
+ottilie moves 3,9 -> 5,7 via 3,8 3,7 4,7
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^.C........
+ 7 .....D........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 5/21   Plain  done
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 11/20  Plain  done
+> attack ottilie soldier-1
+forecast ottilie -> soldier-1: dmg 5 hit 41% crit 14%; counter: none
+  rivalry: ottilie beside teodor: hit -5 crit +10 crit avoid -10
+ottilie attacks soldier-1
+  ottilie hits soldier-1 for 5 (hp 6)
+  ottilie hp 15, soldier-1 hp 6
+ottilie gains 12 exp (24)
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^.C........
+ 7 .....D........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 5/21   Plain  done
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 11/20  Plain  done
+> end
+rapport ottilie and teodor +4 (4)
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: attack soldier-1 teodor
+forecast soldier-1 -> teodor: dmg 8 hit 74% crit 11%; counter: dmg 9 hit 32% crit 11%
+  rivalry: teodor beside ottilie: hit -5 crit +10 crit avoid -10
+soldier-1 attacks teodor
+  soldier-1 hits teodor for 8 (hp 0)
+  soldier-1 hp 6, teodor hp 0
+teodor falls at 5,6
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^..........
+ 7 .....D........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 11/20  Plain
+> recall 40
+recalled to state 40; 1 charges left
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^b........
+ 6 ..^^AC........
+ 7 ....B.........
+ 8 ..............
+ 9 ...D..........
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,9    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move ottilie 5,7
+ottilie moves 3,9 -> 5,7 via 3,8 3,7 4,7
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^b........
+ 6 ..^^AC........
+ 7 ....BD........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+b  soldier-1        Soldier L2 pikeman         5,5    hp 11/20  Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> attack ottilie soldier-1
+forecast ottilie -> soldier-1: dmg 5 hit 41% crit 14%; counter: none
+  rivalry: ottilie beside teodor, wren: hit -5 crit +10 crit avoid -10
+ottilie attacks soldier-1
+  ottilie hits soldier-1 for 5 (hp 6)
+  ottilie hp 15, soldier-1 hp 6
+ottilie gains 12 exp (24)
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^b........
+ 6 ..^^AC........
+ 7 ....BD........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move captain 4,5
+captain moves 4,6 -> 4,5
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^.C........
+ 7 ....BD........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 22/22  Forest  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 8 hit 58% crit 4%; counter: dmg 7 hit 26% crit 0%
+captain attacks soldier-1
+  captain misses soldier-1
+  soldier-1 hits captain for 7 (hp 15)
+  captain hp 15, soldier-1 hp 6
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^.C........
+ 7 ....BD........
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,6    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move teodor 5,8
+teodor moves 5,6 -> 5,8 via 5,7
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^..........
+ 7 ....BD........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 13/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> item teodor 2
+teodor uses field_dressing (2 left)
+teodor heals 8 (hp 21)
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....Ab........
+ 6 ..^^..........
+ 7 ....BD........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain  done
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+> move wren 6,5
+wren moves 4,7 -> 6,5 via 4,6 5,6 6,6
+Saltmarsh Ford (rivalry)  turn 4 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....AbB.......
+ 6 ..^^..........
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         5,5    hp 6/20   Forest  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain  done
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> end
+rapport ottilie and teodor +4 (4)
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move soldier-1 5,6
+soldier-1 moves 5,5 -> 5,6
+enemy: attack soldier-1 ottilie
+forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 9%; counter: none
+  rivalry: ottilie beside teodor: hit -5 crit +10 crit avoid -10
+soldier-1 attacks ottilie
+  soldier-1 hits ottilie for 10 (hp 5)
+  soldier-1 hp 6, ottilie hp 5
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....A^B.......
+ 6 ..^^.b........
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,5    hp 15/22  Forest  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         5,6    hp 6/20   Plain  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> move captain 4,6
+captain moves 4,5 -> 4,6
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^B.......
+ 6 ..^^Ab........
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 5/17   Plain
+b  soldier-1        Soldier L2 pikeman         5,6    hp 6/20   Plain  group ford, aggressive
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks soldier-1
+  captain hits soldier-1 for 9 (hp 0)
+  captain hp 15, soldier-1 hp 0
+captain gains 35 exp (70)
+soldier-1 falls at 5,6
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^B.......
+ 6 ..^^A.........
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 5/17   Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> item ottilie 2
+ottilie uses field_dressing (1 left)
+ottilie heals 10 (hp 15)
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^B.......
+ 6 ..^^A.........
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
+> move wren 6,6
+wren moves 6,5 -> 6,6
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^A.B.......
+ 7 .....D........
+ 8 .....C........
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          5,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
+> move teodor 6,7
+teodor moves 5,8 -> 6,7 via 5,7
+Saltmarsh Ford (rivalry)  turn 5 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^A.B.......
+ 7 .....DC.......
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          6,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
+> end
+rapport ottilie and teodor +4 (8)
+rapport teodor and wren +4 (4)
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Saltmarsh Ford (rivalry)  turn 6 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^A.B.......
+ 7 .....DC.......
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        4,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          6,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
+> move captain 8,6
+captain moves 4,6 -> 8,6 via 5,6 6,6 7,6
+Saltmarsh Ford (rivalry)  turn 6 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..B.A.....
+ 7 .....DC.......
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          6,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
+> move wren 9,6
+wren moves 6,6 -> 9,6 via 7,6 8,6
+Saltmarsh Ford (rivalry)  turn 6 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^....AB....
+ 7 .....DC.......
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          6,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> move ottilie 8,7
+ottilie moves 5,7 -> 8,7 via 6,7 7,7
+Saltmarsh Ford (rivalry)  turn 6 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^....AB....
+ 7 ......C.D.....
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          6,7    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> move teodor 9,8
+teodor moves 6,7 -> 9,8 via 7,7 8,7 9,7
+Saltmarsh Ford (rivalry)  turn 6 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^....AB....
+ 7 ........D.....
+ 8 .........C....
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          9,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: wait soldier-2
+soldier-2 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Saltmarsh Ford (rivalry)  turn 7 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^....AB....
+ 7 ........D.....
+ 8 .........C....
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          9,8    hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> move teodor 10,5
+teodor moves 9,8 -> 10,5 via 9,7 9,6 9,5
+group fort wakes: proximity
+Saltmarsh Ford (rivalry)  turn 7 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...d!...
+ 1 ..^....nn.c...
+ 2 ......n.....e.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....C...
+ 6 ..^^....AB....
+ 7 ........D.....
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> end
+-- player phase ends, turn 7 --
+-- enemy phase, turn 7 --
+enemy: move archer-1 10,3
+archer-1 moves 10,1 -> 10,3 via 10,2
+enemy: attack archer-1 teodor
+forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+archer-1 attacks teodor
+  archer-1 hits teodor for 5 (hp 16)
+  archer-1 hp 17, teodor hp 16
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move soldier-2 10,2
+soldier-2 moves 9,0 -> 10,2 via 10,0 10,1
+enemy: wait soldier-2
+soldier-2 waits
+enemy: move wingrider-1 10,4
+wingrider-1 moves 12,2 -> 10,4 via 11,2 10,2 10,3
+enemy: attack wingrider-1 teodor
+forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
+wingrider-1 attacks teodor
+  wingrider-1 hits teodor for 6 (hp 10)
+  teodor misses wingrider-1
+  wingrider-1 hp 17, teodor hp 10
+enemy: end
+-- enemy phase ends, turn 7 --
+-- player phase, turn 8 --
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^.....e...
+ 5 ....^^....C...
+ 6 ..^^....AB....
+ 7 ........D.....
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,7    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      10,4   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> move ottilie 8,4
+ottilie moves 8,7 -> 8,4 via 8,6 8,5
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.e...
+ 5 ....^^....C...
+ 6 ..^^....AB....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+e  wingrider-1      Wingrider L2 skyrider      10,4   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> attack ottilie wingrider-1
+forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
+ottilie attacks wingrider-1
+  ottilie hits wingrider-1 for 19 (hp 0)
+  ottilie hp 15, wingrider-1 hp 0
+ottilie gains 35 exp (59)
+wingrider-1 falls at 10,4
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.....
+ 5 ....^^....C...
+ 6 ..^^....AB....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
+> move wren 10,4
+wren moves 9,6 -> 10,4 via 9,5 9,4
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.B...
+ 5 ....^^....C...
+ 6 ..^^....A.....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+> attack wren archer-1
+forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+wren attacks archer-1
+  wren hits archer-1 for 10 (hp 7)
+  wren hp 20, archer-1 hp 7
+wren gains 12 exp (12)
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.B...
+ 5 ....^^....C...
+ 6 ..^^....A.....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 7/17   Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+> move teodor 11,5
+teodor moves 10,5 -> 11,5
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.B...
+ 5 ....^^.....C..
+ 6 ..^^....A.....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 7/17   Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,5   hp 10/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+> item teodor 2
+teodor uses field_dressing (1 left)
+teodor heals 10 (hp 20)
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.B...
+ 5 ....^^.....C..
+ 6 ..^^....A.....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 7/17   Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain  done
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+> move captain 9,6
+captain moves 8,6 -> 9,6
+Saltmarsh Ford (rivalry)  turn 8 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...d...
+ 3 ~~~=~~~~~~c~~~
+ 4 ...^^...D.B...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+c  archer-1         Archer L2 bowman           10,3   hp 7/17   Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 15/17  Plain  done
+d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain  done
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+> end
+-- player phase ends, turn 8 --
+-- enemy phase, turn 8 --
+enemy: move archer-1 8,2
+archer-1 moves 10,3 -> 8,2 via 10,2 9,2
+enemy: attack archer-1 ottilie
+forecast archer-1 -> ottilie: dmg 7 hit 76% crit 1%; counter: dmg 8 hit 82% crit 4%
+archer-1 attacks ottilie
+  archer-1 hits ottilie for 7 (hp 8)
+  ottilie hits archer-1 for 8 (hp 0)
+  archer-1 hp 0, ottilie hp 8
+ottilie gains 35 exp (94)
+archer-1 falls at 8,2
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move soldier-2 10,3
+soldier-2 moves 10,2 -> 10,3
+enemy: attack soldier-2 wren
+forecast soldier-2 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+soldier-2 attacks wren
+  soldier-2 hits wren for 9 (hp 11)
+  wren hits soldier-2 for 8 (hp 12)
+  soldier-2 hp 12, wren hp 11
+wren gains 12 exp (24)
+enemy: end
+-- enemy phase ends, turn 8 --
+-- player phase, turn 9 --
+Saltmarsh Ford (rivalry)  turn 9 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~d~~~
+ 4 ...^^...D.B...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          8,4    hp 8/17   Plain
+d  soldier-2        Soldier L2 pikeman         10,3   hp 12/20  Road  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 11/20  Plain
+> move ottilie 9,4
+ottilie moves 8,4 -> 9,4
+Saltmarsh Ford (rivalry)  turn 9 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~d~~~
+ 4 ...^^....DB...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          9,4    hp 8/17   Plain
+d  soldier-2        Soldier L2 pikeman         10,3   hp 12/20  Road  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 11/20  Plain
+> attack ottilie soldier-2
+forecast ottilie -> soldier-2: dmg 6 hit 76% crit 14%; counter: none
+  rivalry: ottilie beside wren: hit -5 crit +10 crit avoid -10
+ottilie attacks soldier-2
+  ottilie crits soldier-2 for 18 (hp 0)
+  ottilie hp 8, soldier-2 hp 0
+ottilie gains 35 exp (29)
+ottilie reaches level 2: spd +1 lck +1 def +1
+soldier-2 falls at 10,3
+Saltmarsh Ford (rivalry)  turn 9 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....DB...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          9,4    hp 8/17   Plain  done
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 11/20  Plain
+> item wren 2
+wren uses field_dressing (2 left)
+wren heals 9 (hp 20)
+Saltmarsh Ford (rivalry)  turn 9 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....DB...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          9,4    hp 8/17   Plain  done
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+> end
+rapport ottilie and wren +4 (8)
+-- player phase ends, turn 9 --
+-- enemy phase, turn 9 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: end
+-- enemy phase ends, turn 9 --
+-- player phase, turn 10 --
+Saltmarsh Ford (rivalry)  turn 10 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....DB...
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          9,4    hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+> move wren 9,2
+wren moves 10,4 -> 9,2 via 10,3 10,2
+Saltmarsh Ford (rivalry)  turn 10 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n..B....
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....D....
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          9,4    hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move ottilie 11,2
+ottilie moves 9,4 -> 11,2 via 10,4 10,3 10,2
+Saltmarsh Ford (rivalry)  turn 10 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n..B.D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^.....C..
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          11,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          11,5   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move teodor 10,3
+teodor moves 11,5 -> 10,3 via 11,4 10,4
+Saltmarsh Ford (rivalry)  turn 10 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n..B.D..
+ 3 ~~~=~~~~~~C~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        9,6    hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          11,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          10,3   hp 20/21  Road
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move captain 10,4
+captain moves 9,6 -> 10,4 via 9,5 9,4
+Saltmarsh Ford (rivalry)  turn 10 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n..B.D..
+ 3 ~~~=~~~~~~C~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          11,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          10,3   hp 20/21  Road
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> end
+-- player phase ends, turn 10 --
+-- enemy phase, turn 10 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: end
+-- enemy phase ends, turn 10 --
+-- player phase, turn 11 --
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n..B.D..
+ 3 ~~~=~~~~~~C~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          11,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          10,3   hp 20/21  Road
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move teodor 11,0
+teodor moves 10,3 -> 11,0 via 10,2 10,1 11,1
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!C..
+ 1 ..^....nn.....
+ 2 ......n..B.D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          11,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          11,0   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move ottilie 10,2
+ottilie moves 11,2 -> 10,2
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!C..
+ 1 ..^....nn.....
+ 2 ......n..BD...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          10,2   hp 8/17   Plain
+C  teodor           Teodor L1 pikeman          11,0   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> attack ottilie bandit_leader-1
+forecast ottilie -> bandit_leader-1: dmg 4 x2 hit 58% crit 14%; counter: none
+  rivalry: ottilie beside wren: hit -5 crit +10 crit avoid -10
+ottilie attacks bandit_leader-1
+  ottilie hits bandit_leader-1 for 4 (hp 22)
+  ottilie hits bandit_leader-1 for 4 (hp 18)
+  ottilie hp 8, bandit_leader-1 hp 18
+ottilie gains 12 exp (41)
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^....!C..
+ 1 ..^....nn.....
+ 2 ......n..BD...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 18/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          10,2   hp 8/17   Plain  done
+C  teodor           Teodor L1 pikeman          11,0   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
+> move wren 9,0
+wren moves 9,2 -> 9,0 via 9,1
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...B!C..
+ 1 ..^....nn.....
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 18/26  Fort  group fort, boss
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          10,2   hp 8/17   Plain  done
+C  teodor           Teodor L1 pikeman          11,0   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
+> attack wren bandit_leader-1
+forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter: dmg 17 hit 63% crit 0%
+wren attacks bandit_leader-1
+  wren crits bandit_leader-1 for 18 (hp 0)
+  wren hp 20, bandit_leader-1 hp 0
+wren gains 60 exp (84)
+bandit_leader-1 falls at 10,0
+Saltmarsh Ford (rivalry)  turn 11 of 18  player phase  rout  recall 1
+   01234567890123
+ 0 ....^^...BFC..
+ 1 ..^....nn.....
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....A...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+A  captain          Alder Fenn L1 cadet        10,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L2 bowman          10,2   hp 8/17   Plain  done
+C  teodor           Teodor L1 pikeman          11,0   hp 20/21  Plain
+B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
+battle won: rout; only recall is left
+battle won: rout
+rivalry (symmetric): 8 player phases ended beside a rival, 1 of them attacked in the enemy phase after

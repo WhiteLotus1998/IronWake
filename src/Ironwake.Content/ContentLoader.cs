@@ -49,8 +49,8 @@ public static class ContentLoader
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
         var (units, cast) = ParseUnits(files.Units, classes, weapons, items);
-        var wakeRadius = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast };
+        var (wakeRadius, rivalry) = ParseRules(files.Rules);
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry };
     }
 
     /// <summary>The consumables of DESIGN.md section 5 (issue 9): each heals its user and has a number of uses. An id shared with a weapon is refused, since an inventory entry names either.</summary>
@@ -87,7 +87,7 @@ public static class ContentLoader
     /// The global rule constants of DESIGN.md: today only the Guard wake radius (section 8),
     /// which lives in content so it is identical on every map and never in a map file.
     /// </summary>
-    private static int ParseRules(ContentFile file)
+    private static (int WakeRadius, RivalryRules Rivalry) ParseRules(ContentFile file)
     {
         JsonDocument document;
         try
@@ -111,7 +111,77 @@ public static class ContentLoader
             throw root.Error("wakeRadius", "must be at least 0");
         }
 
-        return wakeRadius;
+        return (wakeRadius, root.OptionalObject("rivalry") is { } rivalry ? ParseRivalry(rivalry) : RivalryRules.None);
+    }
+
+    /// <summary>
+    /// The rivalry block of rules.json (issue 16): <c>arms</c>, an object of arm id to
+    /// <c>hit</c>, <c>crit</c>, <c>critAvoid</c> and optional <c>countersOnly</c>; <c>rapportRate</c>,
+    /// steps of <c>cha</c> and <c>rate</c> with the first at Cha 0 and Cha strictly rising;
+    /// and <c>overwriteAt</c>, at least 1.
+    /// </summary>
+    private static RivalryRules ParseRivalry(EntryNode node)
+    {
+        var armsNode = node.Object("arms");
+        var arms = new List<RivalryArm>();
+        foreach (var property in armsNode.Element.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+        {
+            if (property.Value.ValueKind != JsonValueKind.Object)
+            {
+                throw new ContentException(node.File, "rivalry.arms", property.Name, "must be an object");
+            }
+
+            var arm = new EntryNode(node.File, "rivalry.arms." + property.Name, property.Value);
+            arms.Add(new RivalryArm(property.Name, arm.Int("hit"), arm.Int("crit"), arm.Int("critAvoid"), arm.BoolOr("countersOnly", false)));
+        }
+
+        if (arms.Count == 0)
+        {
+            throw node.Error("rivalry.arms", "must name at least one arm");
+        }
+
+        var steps = new List<RapportStep>();
+        var rates = node.Array("rapportRate");
+        for (var i = 0; i < rates.Count; i++)
+        {
+            if (rates[i].ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error($"rivalry.rapportRate[{i}]", "must be an object");
+            }
+
+            var step = new EntryNode(node.File, $"rivalry.rapportRate[{i}]", rates[i]);
+            var cha = step.Int("cha");
+            var rate = step.Int("rate");
+            if (i == 0 && cha != 0)
+            {
+                throw step.Error("cha", "the first step must be at Cha 0");
+            }
+
+            if (i > 0 && cha <= steps[i - 1].Cha)
+            {
+                throw step.Error("cha", $"must rise; {cha} follows {steps[i - 1].Cha}");
+            }
+
+            if (rate < 0)
+            {
+                throw step.Error("rate", "must be at least 0");
+            }
+
+            steps.Add(new RapportStep(cha, rate));
+        }
+
+        if (steps.Count == 0)
+        {
+            throw node.Error("rivalry.rapportRate", "must have at least one step");
+        }
+
+        var overwriteAt = node.Int("overwriteAt");
+        if (overwriteAt < 1)
+        {
+            throw node.Error("rivalry.overwriteAt", "must be at least 1");
+        }
+
+        return new RivalryRules(ValueList<RivalryArm>.From(arms), ValueList<RapportStep>.From(steps), overwriteAt);
     }
 
     private static ContentFile ReadFile(string root, string name)

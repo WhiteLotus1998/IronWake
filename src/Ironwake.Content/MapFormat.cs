@@ -12,7 +12,7 @@ namespace Ironwake.Content;
 /// </summary>
 public static class MapFormat
 {
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -50,6 +50,11 @@ public static class MapFormat
         if (map.RetreatEnabled)
         {
             sb.Append("retreat: on\n");
+        }
+
+        if (map.RivalryArm is { } arm)
+        {
+            sb.Append("rivalry: ").Append(arm).Append('\n');
         }
 
         sb.Append('\n');
@@ -146,6 +151,7 @@ public static class MapFormat
             var enemyLevel = ParseInt(header, "enemy_level", Unit.MinLevel, Unit.MaxLevel, required: false, fallback: MapDefinition.DefaultEnemyLevel);
             var cheapShots = ParseCheapShots(header);
             var retreat = ParseRetreat(header);
+            var rivalry = ParseRivalry(header);
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
 
@@ -155,7 +161,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry);
             Validate(map);
             return map;
         }
@@ -316,6 +322,24 @@ public static class MapFormat
             }
 
             return true;
+        }
+
+        private string? ParseRivalry(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("rivalry", out var entry))
+            {
+                return null;
+            }
+
+            if (_content.Rivalry.Arm(entry.Value) is null)
+            {
+                var arms = _content.Rivalry.Arms.Count == 0
+                    ? "rules.json has no rivalry arms"
+                    : "the arms are " + string.Join(", ", _content.Rivalry.Arms.Select(a => a.Id));
+                throw ErrorAt(entry.Line, $"rivalry names arm '{entry.Value}'; {arms}");
+            }
+
+            return entry.Value;
         }
 
         private void SkipBlankLines()

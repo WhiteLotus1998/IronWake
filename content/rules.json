@@ -1,3 +1,17 @@
 {
-  "wakeRadius": 4
+  "wakeRadius": 4,
+  "rivalry": {
+    "arms": {
+      "written": { "hit": -5, "crit": 10, "critAvoid": 0 },
+      "symmetric": { "hit": -5, "crit": 10, "critAvoid": -10 },
+      "counter": { "hit": -5, "crit": 10, "critAvoid": 0, "countersOnly": true }
+    },
+    "rapportRate": [
+      { "cha": 0, "rate": 1 },
+      { "cha": 3, "rate": 2 },
+      { "cha": 5, "rate": 3 },
+      { "cha": 8, "rate": 4 }
+    ],
+    "overwriteAt": 16
+  }
 }

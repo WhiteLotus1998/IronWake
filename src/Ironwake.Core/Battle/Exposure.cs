@@ -46,7 +46,7 @@ public static class Exposure
         var moved = board.Find(unit.Id)!;
         var noCrit = counter;
         var withCrit = counterCrit;
-        var me = moved.ToCombatant(board.Map, content);
+        var me = moved.ToCombatant(board, content, countering: true);
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
             var movement = content.Class(enemy.Unit.ClassId).Movement;
@@ -111,7 +111,7 @@ public static class Exposure
             var distance = tile.DistanceTo(target.At);
             if (rejection is null && weapon!.InRange(distance))
             {
-                var forecast = Combat.Forecast(armed.ToCombatant(board.Map, content), target.ToCombatant(board.Map, content), distance, state.Scheme);
+                var forecast = Combat.Forecast(armed.ToCombatant(board, content), target.ToCombatant(board, content, countering: true), distance, state.Scheme);
                 noisy.Add(tile);
                 noisy.Add(target.At);
                 if (KillsWithCertainty(forecast.Attacker, target.Hp))

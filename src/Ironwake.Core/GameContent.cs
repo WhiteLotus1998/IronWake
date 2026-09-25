@@ -26,6 +26,9 @@ public sealed record GameContent(
     /// </summary>
     public ValueList<Unit> Cast { get; init; } = ValueList<Unit>.Empty;
 
+    /// <summary>The rivalry arms and rapport table of <c>rules.json</c> (issue 16); <see cref="RivalryRules.None"/> when it has no block.</summary>
+    public RivalryRules Rivalry { get; init; } = RivalryRules.None;
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -66,6 +69,7 @@ public sealed record GameContent(
         && DictEquals(Units, other.Units)
         && DictEquals(Items, other.Items)
         && Cast == other.Cast
+        && Rivalry == other.Rivalry
         && WakeRadius == other.WakeRadius;
 
     public override int GetHashCode() =>

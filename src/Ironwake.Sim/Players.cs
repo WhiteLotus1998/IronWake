@@ -175,8 +175,8 @@ public sealed class HeuristicPlayer : IPlayer
     /// </summary>
     public static double KillProbability(BattleState state, GameContent content, BattleUnit attacker, Coord tile, BattleUnit target)
     {
-        var me = (attacker with { At = tile }).ToCombatant(state.Map, content);
-        var them = target.ToCombatant(state.Map, content);
+        var me = (attacker with { At = tile }).ToCombatant(state, content);
+        var them = target.ToCombatant(state, content, countering: true);
         var forecast = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme);
         var side = forecast.Attacker;
         var outcomes = Outcomes(side, state.Scheme);

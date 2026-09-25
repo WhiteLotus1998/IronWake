@@ -106,4 +106,16 @@ public sealed record BattleUnit(
     /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on, its weapon broken or whole.</summary>
     public Combatant ToCombatant(MapDefinition map, GameContent content) =>
         new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content));
+
+    /// <summary>
+    /// This unit as the formulas see it on a board, rivalry's modifiers included (issue 16):
+    /// the neighbours are read from <paramref name="state"/> at this unit's <see cref="At"/>,
+    /// so a forecast may pass the unit at a tile it has not moved to yet.
+    /// <paramref name="countering"/> is true for the side that is struck first and answers.
+    /// </summary>
+    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false)
+    {
+        var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
+        return new(Unit, content.Class(Unit.ClassId), EquippedWeapon(content), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
+    }
 }
