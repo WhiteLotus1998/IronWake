@@ -4,7 +4,8 @@ namespace Ironwake.Core;
 /// A weapon or spell from DESIGN.md section 5. For Reason and Faith, <see cref="Durability"/>
 /// is uses per battle and refreshes each map; for physical weapons it is total uses before
 /// the weapon breaks. A Faith weapon with <see cref="Heals"/> set is a healing spell:
-/// its Mt is unused and <see cref="HealBase"/> feeds the heal formula.
+/// its Mt is unused and <see cref="HealBase"/> feeds the heal formula. <see cref="Rank"/> is
+/// the weapon skill rank a unit needs to equip it (issue 67).
 /// </summary>
 public sealed record Weapon(
     string Id,
@@ -19,7 +20,8 @@ public sealed record Weapon(
     int Durability,
     ValueList<MovementType> EffectiveAgainst,
     bool Heals = false,
-    int HealBase = 0)
+    int HealBase = 0,
+    WeaponRank Rank = WeaponRank.E)
 {
     public bool IsMagic => Type.IsMagic();
 

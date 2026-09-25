@@ -689,6 +689,9 @@ public sealed class PlaySession
         _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)} x{item.Uses}");
         _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
+        var ranks = _content.Class(unit.Unit.ClassId).Weapons
+            .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
+        _out.WriteLine($"  ranks: {string.Join(", ", ranks)}");
         var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
         _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
         if (_state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
@@ -798,6 +801,8 @@ public sealed class PlaySession
             case LeveledUp l:
                 var rose = string.Join(" ", Stats.All.Where(stat => l.Gains.Get(stat) > 0).Select(stat => stat.ToString().ToLowerInvariant() + " +1"));
                 return $"{l.UnitId} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
+            case RankRaised k:
+                return $"{k.UnitId} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
             case UnitRetreated r:

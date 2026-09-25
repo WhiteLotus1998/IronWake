@@ -29,6 +29,16 @@ public sealed record Unit(
     /// </summary>
     public ValueList<string> Hooks { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>
+    /// Rank points per weapon type (issue 67): gained by use for player units, declared in
+    /// content for enemy templates, which nothing scales with level.
+    /// </summary>
+    public WeaponSkill Skill { get; init; } = WeaponSkill.Zero;
+
+    /// <summary>Whether this unit may equip <paramref name="weapon"/>: its class uses the type and its rank in the type reaches the weapon's.</summary>
+    public bool CanWield(Weapon weapon, UnitClass unitClass) =>
+        unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank;
+
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));
 

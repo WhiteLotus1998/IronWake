@@ -193,6 +193,7 @@ public static class Resolver
             events.Add(new WeaponEquipped(unit.Id, weapon.Id));
         }
 
+        var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
             unit.ToCombatant(state, content),
             target.ToCombatant(state, content, countering: true),
@@ -206,6 +207,8 @@ public static class Resolver
         var targetAfter = SpendDurability(target with { Hp = result.DefenderHp }, result.Strikes, content, events);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
+        attackerAfter = AwardRank(attackerAfter, weapon, result.Strikes, result.DefenderDied, events);
+        targetAfter = AwardRank(targetAfter, defenderWeapon, result.Strikes, result.AttackerDied, events);
         var next = state.WithUnit(attackerAfter);
         next = next.WithUnit(targetAfter);
         if (result.DefenderDied)
@@ -251,12 +254,17 @@ public static class Resolver
             var why = content.Items.ContainsKey(itemId) ? "an item, not a weapon"
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
-                : $"not a weapon a {unit.Unit.ClassId} can use";
+                : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
+                : RankShort(unit.Unit, content.Weapon(itemId));
             return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with {itemId}: {why}"));
         }
 
         return (unit.WithSlotInFront(slot.Value), weapon, null);
     }
+
+    /// <summary>The refusal's reason when a unit's rank is below a weapon's (issue 67): the unit's rank in the type and the rank the weapon needs.</summary>
+    public static string RankShort(Unit unit, Weapon weapon) =>
+        $"rank {unit.Skill.Rank(weapon.Type)} in {weapon.Type.ToString().ToLowerInvariant()}, and {weapon.Name} needs {weapon.Rank}";
 
     /// <summary>
     /// Section 5's durability: every strike a unit made in the combat, landed or not,
@@ -338,6 +346,11 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
         }
 
+        if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {stack.ItemId}: {RankShort(unit.Unit, spell)}"));
+        }
+
         if (stack.Uses == 0)
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} has no uses left this battle"));
@@ -384,6 +397,7 @@ public static class Resolver
 
         var healer = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
         healer = AwardHealExp(healer, target.Hp * 2 < targetMax, content, state.Seed, events);
+        healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
         var next = state.WithUnit(healer);
         return (next.WithUnit(target with { Hp = healed }), null);
     }
@@ -441,6 +455,41 @@ public static class Resolver
         }
 
         return earner with { Unit = result.Unit, Hp = hp };
+    }
+
+    /// <summary>
+    /// Issue 67 for one side of a combat: a living player unit that struck with its weapon
+    /// earns rank points in the weapon's type once, 5 if the combat killed and 3 otherwise.
+    /// A unit that made no strike (out of range, or dead before its turn) used nothing.
+    /// Enemies earn nothing, as with EXP (DECISIONS/0017).
+    /// </summary>
+    private static BattleUnit AwardRank(BattleUnit earner, Weapon? weapon, ValueList<StrikeEvent> strikes, bool killed, List<GameEvent> events)
+    {
+        if (earner.Hp == 0 || weapon is null || !strikes.Any(s => s.AttackerId == earner.Id))
+        {
+            return earner;
+        }
+
+        return GainRank(earner, weapon.Type, WeaponRanks.ForCombat(killed), events);
+    }
+
+    /// <summary>Adds rank points to a player unit and emits <see cref="RankRaised"/> when they cross a threshold; an enemy is returned unchanged.</summary>
+    private static BattleUnit GainRank(BattleUnit earner, WeaponType type, int points, List<GameEvent> events)
+    {
+        if (earner.Side != Side.Player)
+        {
+            return earner;
+        }
+
+        var before = earner.Unit.Skill.Rank(type);
+        var skill = earner.Unit.Skill.Add(type, points);
+        var after = skill.Rank(type);
+        if (after != before)
+        {
+            events.Add(new RankRaised(earner.Id, type, after));
+        }
+
+        return earner with { Unit = earner.Unit with { Skill = skill } };
     }
 
     private static (BattleState, Rejection?) ApplyWait(BattleState state, Wait wait, List<GameEvent> events)
@@ -631,7 +680,7 @@ public static class Resolver
             }
 
             var spell = content.Weapon(stack.ItemId);
-            if (!spell.Heals || !unitClass.CanUse(spell.Type) || stack.Uses == 0)
+            if (!spell.Heals || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
                 continue;
             }

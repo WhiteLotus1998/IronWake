@@ -20,6 +20,9 @@ public sealed record ExpGained(string UnitId, int Amount, int ExpAfter) : GameEv
 /// <summary>A level gained: <see cref="Gains"/> holds 1 for each stat that rose.</summary>
 public sealed record LeveledUp(string UnitId, int NewLevel, Stats Gains) : GameEvent;
 
+/// <summary>A unit's rank points in a weapon type crossed a threshold (issue 67); points that cross none raise no event.</summary>
+public sealed record RankRaised(string UnitId, WeaponType Type, WeaponRank Rank) : GameEvent;
+
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>

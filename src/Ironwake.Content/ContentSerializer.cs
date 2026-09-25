@@ -208,6 +208,7 @@ public static class ContentSerializer
         writer.WriteNumber("minRange", weapon.MinRange);
         writer.WriteNumber("maxRange", weapon.MaxRange);
         writer.WriteNumber("durability", weapon.Durability);
+        writer.WriteString("rank", weapon.Rank.ToString());
         writer.WriteStartArray("effective");
         foreach (var movement in weapon.EffectiveAgainst)
         {
@@ -289,6 +290,17 @@ public static class ContentSerializer
         if (unit.Personality is not null)
         {
             writer.WriteString("personality", unit.Personality);
+        }
+
+        if (unit.Skill != WeaponSkill.Zero)
+        {
+            writer.WriteStartObject("ranks");
+            foreach (var (type, points) in unit.Skill.All.Where(t => t.Points > 0))
+            {
+                writer.WriteString(type.ToString().ToLowerInvariant(), WeaponRanks.RankAt(points).ToString());
+            }
+
+            writer.WriteEndObject();
         }
 
         if (unit.Hooks.Count > 0)

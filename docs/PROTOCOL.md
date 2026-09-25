@@ -52,7 +52,7 @@ A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side
 
 `protocolVersion`, `rulesVersion`, `mapName`, `map` (full only: the map's canonical `.map` text, `MapFormat.Write`), `turn`, `phase`, `seed`, `scheme`, `recallCharges`, `units`, `awakeGroups`, `fired` (map events spent), `flags`, `rapport` (each `a`, `b`, `points`), `outcome` (`result`: `ongoing`, `won`, `lost`; `reason`; `cause`: `none`, `captain`, `protected`, `timeout`), `historyCount`, `history` (full only: every prior state in this same shape, each with an empty history of its own).
 
-A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`.
+A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`, `weaponPoints` (rank points per weapon type, `sword` to `faith`, issue 67; a state without it reads as 0 in every type).
 
 The **full** state (the first line out and the `state` query) reads back to an equal `BattleState` through `ProtocolJson.ReadState`, history and all. The **board** state a command answers with leaves out `map` and `history`, which would make every answer grow with the battle; a renderer reads the map once and follows `terrainChanged`. `outcome`, `maxHp` and `historyCount` are derived and never read back.
 
@@ -67,6 +67,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `unitDied` | `unit`, `side`, `at` |
 | `expGained` | `unit`, `amount`, `expAfter` |
 | `leveledUp` | `unit`, `newLevel`, `gains` (1 for each stat that rose) |
+| `rankRaised` | `unit`, `weaponType`, `rank` (the new rank, `e` to `s`; issue 67) |
 | `unitWaited` | `unit` |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
