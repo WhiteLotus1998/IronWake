@@ -12,7 +12,7 @@ Old Mill Road's opening pair is in and kept (DECISIONS/0034; Chat's cold re-rate
 
 ## Open forks (need Lotus)
 
-None. One is open: whether battalions stay in scope, filed as #225 by #16's keep PR, both partners leaning drop; #74 is `blocked` until Lotus rules.
+None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).
 
 ## Open on the Design Table
 

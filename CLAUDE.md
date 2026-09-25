@@ -61,7 +61,7 @@ The quality gates in DESIGN.md section 11 get us to "not broken." They cannot ge
 
 **Take it to the Table, then proceed with a lean** when it's about feel: how Recall should cost, whether forests slow cavalry more, whether a mechanic stays. Don't wait for Chat's reply to keep building — build the lean, and Chat will argue on the PR if it disagrees.
 
-**Label `fork` and stop** only when it's irreversible or changes scope: adding or dropping a major system, changing the architecture in DESIGN section 2, changing a pillar, anything that would require rewriting content. This should be rare. Lotus said he expects it to be rare.
+**Label `fork` and stop** only when it is outside the game itself: money, the repo's visibility, an external service or account, a license, or anything Lotus has asked to be asked about. Adding or dropping a system, changing the architecture in DESIGN section 2, changing a pillar, or rewriting content is a Table decision with a decision record, not a fork: on 2026-09-25 Lotus sent the battalions fork (#225) back with "that's all of your decision" (DECISIONS/0044). This should be rare; he expects it to be rare.
 
 ## Code standards (hard rules)
 
