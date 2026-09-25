@@ -306,24 +306,64 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 33's hand play: Old Mill Road with <c>retreat: on</c>, seed 41. The captain
-    /// steps off the fort at 6,2 to leave the mill bandit on 4, and on enemy phase 6 the
-    /// bandit falls back onto that fort instead of swinging.
+    /// Issue 33's hand play, Old Mill Road with <c>retreat: on</c>, seed 41, replayed under
+    /// issue 204's amendment. The only fort, 6,2, is one the captain can strike next phase,
+    /// so on enemy phase 6 the mill bandit on 4 does not fall back: it swings at Wren, and
+    /// the script's later lines, written for the old board, are refused.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptShowsTheMillBanditRetreatOntoTheFort()
+    public void TheSeed41ScriptNoLongerRetreatsBecauseTheFortIsInTheCaptainsReach()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var map = Path.Combine(repo, "docs", "samples", "old_mill_road_retreat.map");
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road_retreat-41.script");
 
-        var output = Run(out var exit, "play", map, "--seed", "41", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "play", map, "--seed", "41", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.DoesNotContain("falls back", output);
+        Assert.Contains("enemy: attack mill_bandit-1 wren\n", output);
+        Assert.Contains("  mill_bandit-1 hits wren for 10 (hp 2)\n", output);
+    }
+
+    /// <summary>
+    /// Issue 204's hand play on the river sample, seed 3: the captain kills wingrider-1 on 5
+    /// before it can fly, so the rule never fires and the captain seizes on turn 7.
+    /// </summary>
+    [Fact]
+    public void TheRiverRefugeScriptSeizesWithoutARetreat()
+    {
+        var output = RunRiver("2026-09-25-river_refuge_retreat-3.script", out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("enemy: retreat mill_bandit-1 6,2\nmill_bandit-1 falls back to 6,2 and will not fight this phase\nmill_bandit-1 moves 7,2 -> 6,2\n", output);
+        Assert.DoesNotContain("falls back", output);
+        Assert.Contains("wingrider-1 falls at 3,7", output);
+    }
+
+    /// <summary>
+    /// The other branch of the same turn 2: wingrider-1 on 5 is left alive, falls back over
+    /// the water to the fort at 2,2 that no player unit can strike, heals 3 at its next phase
+    /// start, and comes straight back, since it never retreats twice.
+    /// </summary>
+    [Fact]
+    public void TheRiverRefugeLetGoScriptRetreatsAcrossTheWaterAndComesBack()
+    {
+        var output = RunRiver("2026-09-25-river_refuge_retreat-3-letgo.script", out _);
+
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("enemy: retreat wingrider-1 2,2\nwingrider-1 falls back to 2,2 and will not fight this phase\n", output);
+        Assert.Contains("wingrider-1 heals 3 (hp 8)\n", output);
+        Assert.Contains("wingrider-1 moves 2,2 -> 2,7", output);
         Assert.Equal(1, CountOf(output, "falls back"));
+    }
+
+    private static string RunRiver(string scriptName, out int exit)
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "river_refuge_retreat.map");
+        var script = Path.Combine(repo, "docs", "transcripts", scriptName);
+        return Run(out exit, "play", map, "--seed", "3", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
     }
 
     private static int CountOf(string text, string fragment)

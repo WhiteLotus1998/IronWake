@@ -14,8 +14,8 @@ public class RetreatTests
 {
     /// <summary>
     /// An 8x4 yard with forts at 2,0 and 6,0. The brigand at 4,1 (Mov 4, max HP 22) reaches
-    /// both at cost 3 and can strike Hale at 0,1 from 1,1. Hale and Wren (Mov 4) reach 2,0
-    /// and not 6,0.
+    /// both at cost 3 and can strike Hale at 0,1 from 1,1. Hale and Wren (Mov 4, iron
+    /// swords) reach 2,0 and can strike it next phase; neither can strike 6,0.
     /// </summary>
     private const string Refuge = """
         name: Refuge
@@ -83,12 +83,52 @@ public class RetreatTests
     }
 
     [Fact]
-    public void TheRetreatPicksTheFortFewestPlayerUnitsCanReach()
+    public void AFortAPlayerUnitCanStrikeNextPhaseIsNoRefuge()
     {
         var state = EnemyPhase();
         var tiles = RetreatRule.Tiles(state, Starter, state.Find("brigand-1")!);
 
-        Assert.Equal(new[] { FarFort, new Coord(2, 0) }, tiles);
+        Assert.Contains(new Coord(2, 0), RetreatRule.Struck(state, Starter));
+        Assert.DoesNotContain(FarFort, RetreatRule.Struck(state, Starter));
+        Assert.Equal(new[] { FarFort }, tiles);
+        Assert.Contains("not a healing tile", state.Refused(new Retreat("brigand-1", new Coord(2, 0))).Message);
+    }
+
+    [Fact]
+    public void AnEnemyWhoseOnlyReachableFortAPlayerUnitCanStrikeStandsAndFights()
+    {
+        var state = EnemyPhase(Refuge.Replace("..F...F.", "..F....."));
+
+        Assert.Empty(RetreatRule.Tiles(state, Starter, state.Find("brigand-1")!));
+        Assert.Contains(PlanOf(state), c => c is Attack);
+        Assert.DoesNotContain(PlanOf(state), c => c is Retreat);
+    }
+
+    [Fact]
+    public void AnEnemyAlreadyOnAFortFightsAndDoesNotRetreatInPlaceOrAway()
+    {
+        var state = EnemyPhase(Refuge.Replace("E brigand 4,1", "E brigand 2,0"));
+        var brigand = state.Find("brigand-1")!;
+
+        Assert.Contains(PlanOf(state), c => c is Attack);
+        Assert.DoesNotContain(PlanOf(state), c => c is Retreat);
+        Assert.Contains("already stands on healing terrain", state.Refused(new Retreat("brigand-1", new Coord(2, 0))).Message);
+        Assert.Contains("already stands on healing terrain", state.Refused(new Retreat("brigand-1", FarFort)).Message);
+        Assert.Equal(new Coord(2, 0), brigand.At);
+    }
+
+    [Fact]
+    public void ABowThatStrikesTheFortWithoutEndingOnItCountsAsReach()
+    {
+        var bowman = Recruit("wren", "bowman", Wren.Stats, "iron_bow");
+        var map = Refuge.Replace("P recruit:wren 0,2", "P recruit:wren 0,0");
+        var state = Start(map: map, roster: ValueList<Unit>.Of(Hale, bowman)).Do(new EndPhase());
+        state = state.WithUnit(state.Find("brigand-1")! with { Hp = 6 });
+
+        Assert.False(state.ReachOf(state.Find("wren")!, Starter).CanEnd(FarFort));
+        Assert.Contains(FarFort, RetreatRule.Struck(state, Starter));
+        Assert.Empty(RetreatRule.Tiles(state, Starter, state.Find("brigand-1")!));
+        Assert.Contains(PlanOf(state), c => c is Attack);
     }
 
     [Fact]
@@ -190,11 +230,11 @@ public class RetreatTests
     }
 
     [Fact]
-    public void LegalListsEachRetreatTileBestFirst()
+    public void LegalListsOnlyTheRefugesNoPlayerUnitCanStrike()
     {
         var retreats = Resolver.Legal(EnemyPhase(), Starter).OfType<Retreat>().ToList();
 
-        Assert.Equal(new[] { new Retreat("brigand-1", FarFort), new Retreat("brigand-1", new Coord(2, 0)) }, retreats);
+        Assert.Equal(new[] { new Retreat("brigand-1", FarFort) }, retreats);
     }
 
     [Fact]
@@ -242,5 +282,20 @@ public class RetreatTests
         Assert.Equal(text, MapFormat.Write(map, Starter));
         Assert.True(map.RetreatEnabled);
         Assert.Equal(MapFixture.Parse(shipped, "old_mill_road.map") with { Name = map.Name, RetreatEnabled = true }, map);
+    }
+
+    [Fact]
+    public void TheRiverSampleIsCanonicalAndItsFortIsOutOfThePartysStrikeReach()
+    {
+        var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
+        var text = File.ReadAllText(Path.Combine(repo, "docs", "samples", "river_refuge_retreat.map")).Replace("\r\n", "\n");
+        var map = MapFixture.Parse(text, "river_refuge_retreat.map");
+
+        Assert.Equal(text, MapFormat.Write(map, Starter));
+        Assert.True(map.RetreatEnabled);
+
+        var state = BattleState.From(map, Starter, Starter.Cast, 3);
+        Assert.Equal("fort", map.TerrainIdAt(new Coord(2, 2)));
+        Assert.DoesNotContain(new Coord(2, 2), RetreatRule.Struck(state, Starter));
     }
 }

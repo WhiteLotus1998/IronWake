@@ -4,10 +4,13 @@ namespace Ironwake.Core;
 /// Enemy retreat (DESIGN.md 13.10, issue 33), one predicate the planner and the resolver
 /// share so they cannot disagree. On a map with <see cref="MapDefinition.RetreatEnabled"/>,
 /// an enemy whose effective behavior is Aggressive, below 30 percent HP, that has neither
-/// moved this phase nor retreated this battle, falls back to a healing tile (Fort or Throne)
-/// in its reach this phase instead of acting, and heals there by the tile rule at its next
-/// phase start. With no such tile it stands and fights. No flights over several turns and
-/// no chases: the turn limit stays the map's pressure.
+/// moved this phase nor retreated this battle, and is not already standing on healing
+/// terrain, falls back to a healing tile (Fort or Throne) in its reach this phase that no
+/// player unit can strike next phase, instead of acting, and heals there by the tile rule
+/// at its next phase start. With no such tile it stands and fights, so the dying enemy's
+/// last swing survives on every board where retreat cannot pose the chase question
+/// (issue 204, DECISIONS/0037 as amended). No flights over several turns: the turn limit
+/// stays the map's pressure.
 /// </summary>
 public static class RetreatRule
 {
@@ -54,25 +57,73 @@ public static class RetreatRule
             return $"{unit.Id} is at {unit.Hp} of {unit.MaxHp(content)}, not below {ThresholdPercent} percent";
         }
 
+        if (state.Map.TerrainAt(unit.At, content).HealPercent > 0)
+        {
+            return $"{unit.Id} already stands on healing terrain at {unit.At}; it fights from there";
+        }
+
         return null;
     }
 
     /// <summary>
-    /// The healing tiles the unit can end on this phase, own tile included, best first:
-    /// fewest player units whose reach set contains the tile (section 8's count), then
-    /// cost from the mover, then row-major. Empty when there is none.
+    /// The healing tiles the unit can end on this phase that no player unit can strike next
+    /// phase (<see cref="Struck"/>), best first: fewest player units whose reach set
+    /// contains the tile (section 8's count), then cost from the mover, then row-major.
+    /// Empty when there is none.
     /// </summary>
     public static IReadOnlyList<Coord> Tiles(BattleState state, GameContent content, BattleUnit unit)
     {
         var reach = state.ReachOf(unit, content);
         var playerReach = state.UnitsOf(Side.Player).Select(p => state.ReachOf(p, content)).ToList();
+        var struck = Struck(state, content);
         return reach.Destinations
-            .Where(tile => state.Map.TerrainAt(tile, content).HealPercent > 0)
+            .Where(tile => state.Map.TerrainAt(tile, content).HealPercent > 0 && !struck.Contains(tile))
             .OrderBy(tile => playerReach.Count(r => r.CanEnd(tile)))
             .ThenBy(tile => reach.CostTo(tile)!.Value)
             .ThenBy(tile => tile.Y)
             .ThenBy(tile => tile.X)
             .ToList();
+    }
+
+    /// <summary>
+    /// Every tile some player unit could strike next phase on the board as it stands: any
+    /// usable weapon it carries, in range from any tile it can end a move on, its own tile
+    /// included. This is the strike set, not the move set: a bow that reaches a tile from
+    /// where it stands puts that tile in reach without a step (twenty-eighth round).
+    /// </summary>
+    public static IReadOnlySet<Coord> Struck(BattleState state, GameContent content)
+    {
+        var struck = new HashSet<Coord>();
+        foreach (var player in state.UnitsOf(Side.Player))
+        {
+            var weapons = Enumerable.Range(0, player.Unit.Inventory.Count)
+                .Select(slot => player.UsableWeaponAt(content, slot))
+                .OfType<Weapon>()
+                .ToList();
+            if (weapons.Count == 0)
+            {
+                continue;
+            }
+
+            var maxRange = weapons.Max(w => w.MaxRange);
+            foreach (var from in state.ReachOf(player, content).Destinations.Append(player.At).Distinct())
+            {
+                for (var dy = -maxRange; dy <= maxRange; dy++)
+                {
+                    for (var dx = -maxRange; dx <= maxRange; dx++)
+                    {
+                        var tile = new Coord(from.X + dx, from.Y + dy);
+                        var distance = Math.Abs(dx) + Math.Abs(dy);
+                        if (state.Map.Contains(tile) && weapons.Any(w => w.InRange(distance)))
+                        {
+                            struck.Add(tile);
+                        }
+                    }
+                }
+            }
+        }
+
+        return struck;
     }
 
     /// <summary>The tile the unit retreats to now, or null when it may not or has nowhere to go.</summary>

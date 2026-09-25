@@ -1,0 +1,31 @@
+move captain 3,8
+move wren 2,8
+move ottilie 4,9
+end
+move ottilie 4,8
+attack ottilie wingrider-2
+attack captain wingrider-1
+move wren 4,7
+attack wren wingrider-2
+end
+move ottilie 2,9
+attack ottilie wingrider-2
+move wren 4,8
+attack wren wingrider-2
+move captain 5,7
+forecast captain brigand-1
+attack captain brigand-1
+end
+move captain 8,6
+move wren 7,7
+move ottilie 5,8
+end
+move captain 9,3
+move wren 9,5
+move ottilie 8,7
+end
+move captain 11,2
+move wren 10,2
+move ottilie 9,4
+end
+move captain 13,0

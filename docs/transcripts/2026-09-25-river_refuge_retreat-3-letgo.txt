@@ -1,0 +1,440 @@
+River Refuge (retreat), seed 3, scheme TwoRollAverage
+River Refuge (retreat)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ...a.b......e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ............d.
+ 8 ..............
+ 9 ..............
+10 ..BAC.........
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          12,7   hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,10   hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,10   hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,1    hp 17/17  Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      5,1    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,10   hp 20/20  Plain
+> move captain 3,8
+captain moves 3,10 -> 3,8 via 3,9
+River Refuge (retreat)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ...a.b......e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ............d.
+ 8 ...A..........
+ 9 ..............
+10 ..B.C.........
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          12,7   hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,10   hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,1    hp 17/17  Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      5,1    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,10   hp 20/20  Plain
+> move wren 2,8
+wren moves 2,10 -> 2,8 via 2,9
+River Refuge (retreat)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ...a.b......e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ............d.
+ 8 ..BA..........
+ 9 ..............
+10 ....C.........
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          12,7   hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,10   hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,1    hp 17/17  Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      5,1    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move ottilie 4,9
+ottilie moves 4,10 -> 4,9
+River Refuge (retreat)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ...a.b......e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ............d.
+ 8 ..BA..........
+ 9 ....C.........
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          12,7   hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,9    hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,1    hp 17/17  Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      5,1    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: move brigand-1 8,7
+brigand-1 moves 12,7 -> 8,7 via 11,7 10,7 9,7
+enemy: wait brigand-1
+brigand-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: move wingrider-1 3,7
+wingrider-1 moves 3,1 -> 3,7 via 3,2 3,3 3,4 3,5 3,6
+enemy: attack wingrider-1 captain
+forecast wingrider-1 -> captain: dmg 6 hit 63% crit 0%; counter: dmg 12 hit 82% crit 3%
+wingrider-1 attacks captain
+  wingrider-1 misses captain
+  captain hits wingrider-1 for 12 (hp 5)
+  wingrider-1 hp 5, captain hp 22
+captain gains 10 exp (10)
+enemy: move wingrider-2 4,6
+wingrider-2 moves 5,1 -> 4,6 via 4,1 4,2 4,3 4,4 4,5
+enemy: wait wingrider-2
+wingrider-2 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ...a....d.....
+ 8 ..BA..........
+ 9 ....C.........
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,9    hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move ottilie 4,8
+ottilie moves 4,9 -> 4,8
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ...a....d.....
+ 8 ..BAC.........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 17/17  Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> attack ottilie wingrider-2
+forecast ottilie -> wingrider-2: dmg 19 hit 77% crit 3%; counter: none
+ottilie attacks wingrider-2
+  ottilie misses wingrider-2
+  ottilie hp 17, wingrider-2 hp 17
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ...a....d.....
+ 8 ..BAC.........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        3,8    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 17/17  Plain  done
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move captain 4,7
+captain moves 3,8 -> 4,7 via 4,8
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ...aA...d.....
+ 8 ..B.C.........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 17/17  Plain  done
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> attack captain wingrider-2
+forecast captain -> wingrider-2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%
+captain attacks wingrider-2
+  captain hits wingrider-2 for 12 (hp 5)
+  wingrider-2 hits captain for 6 (hp 16)
+  captain hp 16, wingrider-2 hp 5
+captain gains 10 exp (20)
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ...aA...d.....
+ 8 ..B.C.........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain  done
+C  ottilie          Ottilie L1 bowman          4,8    hp 17/17  Plain  done
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 5/17   Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move wren 2,7
+wren moves 2,8 -> 2,7
+River Refuge (retreat)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ....b.........
+ 7 ..BaA...d.....
+ 8 ....C.........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          8,7    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain  done
+C  ottilie          Ottilie L1 bowman          4,8    hp 17/17  Plain  done
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      3,7    hp 5/17   Plain  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      4,6    hp 5/17   Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: move brigand-1 5,8
+brigand-1 moves 8,7 -> 5,8 via 7,7 6,7 5,7
+enemy: attack brigand-1 ottilie
+forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
+brigand-1 attacks ottilie
+  brigand-1 misses ottilie
+  brigand-1 hp 22, ottilie hp 17
+enemy: wait soldier-1
+soldier-1 waits
+enemy: retreat wingrider-1 2,2
+wingrider-1 falls back to 2,2 and will not fight this phase
+wingrider-1 moves 3,7 -> 2,2 via 3,6 3,5 3,4 3,3 3,2
+enemy: move wingrider-2 3,8
+wingrider-2 moves 4,6 -> 3,8 via 3,6 3,7
+enemy: attack wingrider-2 ottilie
+forecast wingrider-2 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+wingrider-2 attacks ottilie
+  wingrider-2 hits ottilie for 8 (hp 9)
+  wingrider-2 hp 5, ottilie hp 9
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+River Refuge (retreat)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..a...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ..B.A.........
+ 8 ...bCd........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          5,8    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 9/17   Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      2,2    hp 5/17   Fort (heals 20 percent, 3 hp)  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      3,8    hp 5/17   Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,7    hp 20/20  Plain
+> move wren 2,8
+wren moves 2,7 -> 2,8
+River Refuge (retreat)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..a...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ....A.........
+ 8 ..BbCd........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          5,8    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 9/17   Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      2,2    hp 5/17   Fort (heals 20 percent, 3 hp)  group sky, aggressive
+b  wingrider-2      Wingrider L1 skyrider      3,8    hp 5/17   Plain  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> attack wren wingrider-2
+forecast wren -> wingrider-2: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+wren attacks wingrider-2
+  wren hits wingrider-2 for 11 (hp 0)
+  wren hp 20, wingrider-2 hp 0
+wren gains 30 exp (30)
+wingrider-2 falls at 3,8
+River Refuge (retreat)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..a...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ....A.........
+ 8 ..B.Cd........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          5,8    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 9/17   Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+a  wingrider-1      Wingrider L1 skyrider      2,2    hp 5/17   Fort (heals 20 percent, 3 hp)  group sky, aggressive
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain  done
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+wingrider-1 heals 3 (hp 8)
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: attack brigand-1 ottilie
+forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
+brigand-1 attacks ottilie
+  brigand-1 misses ottilie
+  brigand-1 hp 22, ottilie hp 9
+enemy: wait soldier-1
+soldier-1 waits
+enemy: move wingrider-1 2,7
+wingrider-1 moves 2,2 -> 2,7 via 2,3 2,4 2,5 2,6
+enemy: attack wingrider-1 wren
+forecast wingrider-1 -> wren: dmg 7 hit 65% crit 0%; counter: dmg 11 hit 80% crit 2%
+wingrider-1 attacks wren
+  wingrider-1 misses wren
+  wren hits wingrider-1 for 11 (hp 0)
+  wingrider-1 hp 0, wren hp 20
+wren gains 30 exp (60)
+wingrider-1 falls at 2,7
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+River Refuge (retreat)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 c..........f.T
+ 1 ............e.
+ 2 ..F...........
+ 3 ~~~~~~~~~=~~~~
+ 4 ~~~~~~~~~=~~~~
+ 5 ~~~~~~~~~=~~~~
+ 6 ..............
+ 7 ....A.........
+ 8 ..B.Cd........
+ 9 ..............
+10 ..............
+
+c  archer-1         Archer L1 bowman           0,0    hp 17/17  Plain  group fort, guard, asleep
+f  archer-2         Archer L1 bowman           11,0   hp 17/17  Plain  group throne, hold
+d  brigand-1        Brigand L1 reaver          5,8    hp 22/22  Plain  group bank, aggressive
+A  captain          Alder Fenn L1 cadet        4,7    hp 16/22  Plain  captain
+C  ottilie          Ottilie L1 bowman          4,8    hp 9/17   Plain
+e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+battle ongoing at turn 4, player phase
