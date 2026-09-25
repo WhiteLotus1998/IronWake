@@ -1,0 +1,23 @@
+move keziah 3,7
+move captain 2,7
+end
+move keziah 4,7
+attack keziah archer-2 2
+move captain 2,6
+attack captain brigand-1
+end
+move keziah 6,5
+move captain 4,4
+end
+move keziah 6,2
+move captain 5,3
+end
+attack keziah soldier-1 1
+move captain 6,3
+attack captain archer-1
+end
+attack keziah archer-1 1
+item captain 2
+end
+move keziah 7,2
+attack keziah mill_bandit-1 1

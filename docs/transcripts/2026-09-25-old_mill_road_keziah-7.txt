@@ -1,0 +1,616 @@
+Old Mill Road (Keziah), seed 7, scheme TwoRollAverage
+Old Mill Road (Keziah)  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ........e.^^
+ 8 .AB.........
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+e  archer-2         Archer L1 bowman           8,7    hp 17/17  Plain  group road, aggressive
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           2,8    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move keziah 3,7
+keziah moves 2,8 -> 3,7 via 2,7
+Old Mill Road (Keziah)  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ...B....e.^^
+ 8 .A..........
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+e  archer-2         Archer L1 bowman           8,7    hp 17/17  Plain  group road, aggressive
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           3,7    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move captain 2,7
+captain moves 1,8 -> 2,7 via 1,7
+Old Mill Road (Keziah)  turn 1 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..c..#..
+ 6 .........#..
+ 7 ..AB....e.^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+e  archer-2         Archer L1 bowman           8,7    hp 17/17  Plain  group road, aggressive
+c  brigand-1        Brigand L1 reaver          6,5    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           3,7    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: move archer-2 5,7
+archer-2 moves 8,7 -> 5,7 via 7,7 6,7
+enemy: attack archer-2 keziah
+forecast archer-2 -> keziah: dmg 7 hit 80% crit 2%; counter: none
+archer-2 attacks keziah
+  archer-2 misses keziah
+  archer-2 hp 17, keziah hp 23
+enemy: move brigand-1 3,6
+brigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6
+enemy: attack brigand-1 keziah
+forecast brigand-1 -> keziah: dmg 12 hit 63% crit 0%; counter: dmg 14 hit 72% crit 2%
+brigand-1 attacks keziah
+  brigand-1 misses keziah
+  keziah hits brigand-1 for 14 (hp 8)
+  brigand-1 hp 8, keziah hp 23
+keziah gains 10 exp (10)
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Old Mill Road (Keziah)  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ...c.....#..
+ 7 ..AB.e....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+e  archer-2         Archer L1 bowman           5,7    hp 17/17  Plain  group road, aggressive
+c  brigand-1        Brigand L1 reaver          3,6    hp 8/22   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           3,7    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move keziah 4,7
+keziah moves 3,7 -> 4,7
+Old Mill Road (Keziah)  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ...c.....#..
+ 7 ..A.Be....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+e  archer-2         Archer L1 bowman           5,7    hp 17/17  Plain  group road, aggressive
+c  brigand-1        Brigand L1 reaver          3,6    hp 8/22   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,7    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> attack keziah archer-2 2
+forecast keziah -> archer-2: dmg 9 x2 hit 91% crit 1%; counter: none
+keziah equips iron_gauntlets
+keziah attacks archer-2
+  keziah crits archer-2 for 27 (hp 0)
+  keziah hp 23, archer-2 hp 0
+keziah gains 30 exp (40)
+archer-2 falls at 5,7
+Old Mill Road (Keziah)  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ...c.....#..
+ 7 ..A.B.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+c  brigand-1        Brigand L1 reaver          3,6    hp 8/22   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,7    hp 23/23  Plain  done
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move captain 2,6
+captain moves 2,7 -> 2,6
+Old Mill Road (Keziah)  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ..Ac.....#..
+ 7 ....B.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+c  brigand-1        Brigand L1 reaver          3,6    hp 8/22   Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,7    hp 23/23  Plain  done
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> attack captain brigand-1
+forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+captain attacks brigand-1
+  captain hits brigand-1 for 11 (hp 0)
+  captain hp 22, brigand-1 hp 0
+captain gains 30 exp (30)
+brigand-1 falls at 3,6
+Old Mill Road (Keziah)  turn 2 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ..A......#..
+ 7 ....B.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           4,7    hp 23/23  Plain  done
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Old Mill Road (Keziah)  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 ..A......#..
+ 7 ....B.....^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,7    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move keziah 6,5
+keziah moves 4,7 -> 6,5 via 4,6 4,5 5,5
+Old Mill Road (Keziah)  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~........
+ 5 ..~~..B..#..
+ 6 ..A......#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           6,5    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move captain 4,4
+captain moves 2,6 -> 4,4 via 3,6 4,6 4,5
+Old Mill Road (Keziah)  turn 3 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~A.......
+ 5 ..~~..B..#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           6,5    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Old Mill Road (Keziah)  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..F.nnb.
+ 3 ============
+ 4 ..~~A.......
+ 5 ..~~..B..#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           6,5    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
+> move keziah 6,2
+keziah moves 6,5 -> 6,2 via 6,4 6,3
+group mill wakes: proximity
+Old Mill Road (Keziah)  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..B.nnb.
+ 3 ============
+ 4 ..~~A.......
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        4,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, awake
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
+> move captain 5,3
+captain moves 4,4 -> 5,3 via 4,3
+Old Mill Road (Keziah)  turn 4 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....nad.
+ 2 ..^^..B.nnb.
+ 3 =====A======
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           10,2   hp 17/17  Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Road  captain
+B  keziah           Keziah L1 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)
+d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, awake
+a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: move archer-1 7,3
+archer-1 moves 10,2 -> 7,3 via 10,3 9,3 8,3
+enemy: attack archer-1 captain
+forecast archer-1 -> captain: dmg 5 hit 68% crit 0%; counter: none
+archer-1 attacks captain
+  archer-1 misses captain
+  archer-1 hp 17, captain hp 22
+enemy: move mill_bandit-1 7,1
+mill_bandit-1 moves 10,1 -> 7,1 via 9,1 8,1
+enemy: wait mill_bandit-1
+mill_bandit-1 waits
+enemy: move soldier-1 6,1
+soldier-1 moves 9,1 -> 6,1 via 8,1 7,1
+enemy: attack soldier-1 keziah
+forecast soldier-1 -> keziah: dmg 8 hit 49% crit 0%; counter: dmg 7 x2 hit 91% crit 1%
+soldier-1 attacks keziah
+  soldier-1 hits keziah for 8 (hp 15)
+  keziah misses soldier-1
+  keziah hits soldier-1 for 7 (hp 13)
+  soldier-1 hp 13, keziah hp 15
+keziah gains 10 exp (50)
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+keziah heals 4 (hp 19)
+Old Mill Road (Keziah)  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^..adn...
+ 2 ..^^..B.nn..
+ 3 =====A=b====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Road  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Road  captain
+B  keziah           Keziah L1 reaver           6,2    hp 19/23  Fort (heals 20 percent, 4 hp)
+d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
+a  soldier-1        Soldier L1 pikeman         6,1    hp 13/20  Plain  group mill, guard, awake
+> attack keziah soldier-1 1
+forecast keziah -> soldier-1: dmg 7 x2 hit 91% crit 1%; counter: dmg 8 hit 49% crit 0%
+keziah attacks soldier-1
+  keziah hits soldier-1 for 7 (hp 6)
+  keziah hits soldier-1 for 7 (hp 0)
+  keziah hp 19, soldier-1 hp 0
+keziah gains 30 exp (80)
+soldier-1 falls at 6,1
+Old Mill Road (Keziah)  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^...dn...
+ 2 ..^^..B.nn..
+ 3 =====A=b====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Road  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Road  captain
+B  keziah           Keziah L1 reaver           6,2    hp 19/23  Fort (heals 20 percent, 4 hp)  done
+d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
+> move captain 6,3
+captain moves 5,3 -> 6,3
+Old Mill Road (Keziah)  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^...dn...
+ 2 ..^^..B.nn..
+ 3 ======Ab====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Road  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Road  captain
+B  keziah           Keziah L1 reaver           6,2    hp 19/23  Fort (heals 20 percent, 4 hp)  done
+d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
+> attack captain archer-1
+forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+captain attacks archer-1
+  captain hits archer-1 for 11 (hp 6)
+  captain hp 22, archer-1 hp 6
+captain gains 10 exp (40)
+Old Mill Road (Keziah)  turn 5 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^...dn...
+ 2 ..^^..B.nn..
+ 3 ======Ab====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,3    hp 6/17   Road  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Road  captain  done
+B  keziah           Keziah L1 reaver           6,2    hp 19/23  Fort (heals 20 percent, 4 hp)  done
+d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: move archer-1 7,2
+archer-1 moves 7,3 -> 7,2
+enemy: attack archer-1 captain
+forecast archer-1 -> captain: dmg 5 hit 68% crit 0%; counter: none
+archer-1 attacks captain
+  archer-1 hits captain for 5 (hp 17)
+  archer-1 hp 6, captain hp 17
+enemy: move mill_bandit-1 7,3
+mill_bandit-1 moves 7,1 -> 7,3 via 7,2
+enemy: attack mill_bandit-1 captain
+forecast mill_bandit-1 -> captain: dmg 9 hit 83% crit 2%; counter: dmg 10 hit 87% crit 3%
+mill_bandit-1 attacks captain
+  mill_bandit-1 hits captain for 9 (hp 8)
+  captain hits mill_bandit-1 for 10 (hp 14)
+  mill_bandit-1 hp 14, captain hp 8
+captain gains 12 exp (52)
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+keziah heals 4 (hp 23)
+Old Mill Road (Keziah)  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..Bbnn..
+ 3 ======Ad====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+b  archer-1         Archer L1 bowman           7,2    hp 6/17   Plain  group mill, guard, awake
+A  captain          Alder Fenn L1 cadet        6,3    hp 8/22   Road  captain
+B  keziah           Keziah L1 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)
+d  mill_bandit-1    Mill Bandit L2 reaver      7,3    hp 14/24  Road  group mill, guard, awake
+> attack keziah archer-1 1
+forecast keziah -> archer-1: dmg 9 x2 hit 91% crit 1%; counter: none
+keziah attacks archer-1
+  keziah hits archer-1 for 9 (hp 0)
+  keziah hp 23, archer-1 hp 0
+keziah gains 30 exp (10)
+keziah reaches level 2: nothing rose
+archer-1 falls at 7,2
+Old Mill Road (Keziah)  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..B.nn..
+ 3 ======Ad====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        6,3    hp 8/22   Road  captain
+B  keziah           Keziah L2 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)  done
+d  mill_bandit-1    Mill Bandit L2 reaver      7,3    hp 14/24  Road  group mill, guard, awake
+> item captain 2
+captain uses field_dressing (0 left)
+captain heals 10 (hp 18)
+Old Mill Road (Keziah)  turn 6 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..B.nn..
+ 3 ======Ad====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        6,3    hp 18/22  Road  captain  done
+B  keziah           Keziah L2 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)  done
+d  mill_bandit-1    Mill Bandit L2 reaver      7,3    hp 14/24  Road  group mill, guard, awake
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: attack mill_bandit-1 captain
+forecast mill_bandit-1 -> captain: dmg 9 hit 83% crit 2%; counter: dmg 10 hit 87% crit 3%
+mill_bandit-1 attacks captain
+  mill_bandit-1 hits captain for 9 (hp 9)
+  captain misses mill_bandit-1
+  mill_bandit-1 hp 14, captain hp 9
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Old Mill Road (Keziah)  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..B.nn..
+ 3 ======Ad====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        6,3    hp 9/22   Road  captain
+B  keziah           Keziah L2 reaver           6,2    hp 23/23  Fort (heals 20 percent, 4 hp)
+d  mill_bandit-1    Mill Bandit L2 reaver      7,3    hp 14/24  Road  group mill, guard, awake
+> move keziah 7,2
+keziah moves 6,2 -> 7,2
+Old Mill Road (Keziah)  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..FBnn..
+ 3 ======Ad====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        6,3    hp 9/22   Road  captain
+B  keziah           Keziah L2 reaver           7,2    hp 23/23  Plain
+d  mill_bandit-1    Mill Bandit L2 reaver      7,3    hp 14/24  Road  group mill, guard, awake
+> attack keziah mill_bandit-1 1
+forecast keziah -> mill_bandit-1: dmg 8 x2 hit 91% crit 0%; counter: dmg 11 hit 91% crit 5%
+keziah attacks mill_bandit-1
+  keziah hits mill_bandit-1 for 8 (hp 6)
+  keziah hits mill_bandit-1 for 8 (hp 0)
+  keziah hp 23, mill_bandit-1 hp 0
+keziah gains 30 exp (40)
+mill_bandit-1 falls at 7,3
+Old Mill Road (Keziah)  turn 7 of 12  player phase  rout  recall 3
+   012345678901
+ 0 ............
+ 1 ..^^....n...
+ 2 ..^^..FBnn..
+ 3 ======A=====
+ 4 ..~~........
+ 5 ..~~.....#..
+ 6 .........#..
+ 7 ..........^^
+ 8 ............
+ 9 ............
+
+A  captain          Alder Fenn L1 cadet        6,3    hp 9/22   Road  captain
+B  keziah           Keziah L2 reaver           7,2    hp 23/23  Plain  done
+battle won: rout; only recall is left
+battle won: rout

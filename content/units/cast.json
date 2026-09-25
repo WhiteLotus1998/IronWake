@@ -117,7 +117,7 @@
       "hooks": [ "ansgar", "ottilie" ],
       "stats": { "hp": 21, "str": 7, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 3, "res": 0, "cha": 2 },
       "growths": { "hp": 55, "str": 45, "mag": 0, "dex": 30, "spd": 30, "lck": 20, "def": 20, "res": 10, "cha": 15 },
-      "inventory": [ { "item": "iron_axe" } ]
+      "inventory": [ { "item": "iron_axe" }, { "item": "iron_gauntlets" } ]
     },
     {
       "id": "brannock",
