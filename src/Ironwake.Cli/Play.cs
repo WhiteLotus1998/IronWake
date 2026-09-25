@@ -18,10 +18,11 @@ namespace Ironwake.Cli;
 /// summary of every rejected line, and <c>--strict</c> stops at the first one.
 /// <c>--scheme</c> picks the roll scheme through <see cref="RollSchemes"/>, the same word the
 /// Sim's trace takes, and the header line names it, so a transcript says which game it is.
+/// <c>--protocol</c> hands the battle to <see cref="ProtocolSession"/> instead: JSON lines in and out (issue 25).
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -83,6 +84,7 @@ public sealed class PlaySession
         ulong seed = 1;
         string? script = null;
         var strict = false;
+        var protocol = false;
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
         for (var i = 1; i < args.Length; i++)
@@ -100,6 +102,9 @@ public sealed class PlaySession
                 case "--strict":
                     strict = true;
                     break;
+                case "--protocol":
+                    protocol = true;
+                    break;
                 case "--content" when value is not null:
                     contentDir = value;
                     i++;
@@ -113,6 +118,13 @@ public sealed class PlaySession
                     Console.WriteLine(Usage);
                     return 2;
             }
+        }
+
+        if (strict && protocol)
+        {
+            Console.WriteLine("ERROR: --strict applies to a text script; a protocol run answers every line with ok true or false");
+            Console.WriteLine(Usage);
+            return 2;
         }
 
         if (strict && script is null)
@@ -155,6 +167,11 @@ public sealed class PlaySession
         {
             Console.Error.WriteLine(NoCast);
             return 2;
+        }
+
+        if (protocol)
+        {
+            return new ProtocolSession(content, BattleState.From(map, content, content.Cast, seed, scheme), Console.Out).Run(input);
         }
 
         var session = new PlaySession(content, BattleState.From(map, content, content.Cast, seed, scheme), Console.Out, scripted: script is not null);
@@ -503,11 +520,28 @@ public sealed class PlaySession
             return false;
         }
 
-        var where = from is null ? "" : $" from {tile} ({_state.Map.TerrainAt(tile, _content).Name})";
-        _out.WriteLine(ForecastLine(unit, target, forecast, where));
-        PrintRivalry(unit with { At = tile }, countering: false);
-        PrintPendingRetreat(unit, tile, target, forecast);
+        _out.WriteLine(ForecastText(_state, _content, unit, target, forecast, tile, from is not null));
         return true;
+    }
+
+    /// <summary>
+    /// Everything the console prints for a forecast, one line per row: the forecast line,
+    /// then the rivalry line and the pending-retreat lines when they apply. Shared with the
+    /// protocol's forecast query (issue 25), whose <c>text</c> is exactly this.
+    /// <paramref name="fromTile"/> is true for a forecast asked from a tile the unit has not
+    /// moved to, whose line names the tile and its terrain.
+    /// </summary>
+    public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile)
+    {
+        var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where) };
+        if (RivalryLine(state, content, unit with { At = tile }, countering: false) is { } rivalry)
+        {
+            lines.Add(rivalry);
+        }
+
+        lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
+        return string.Join("\n", lines);
     }
 
     /// <summary>
@@ -517,19 +551,19 @@ public sealed class PlaySession
     /// can leave, one hit and, when it doubles, two, crits aside. Silent when no outcome
     /// sends it anywhere.
     /// </summary>
-    private void PrintPendingRetreat(BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast)
+    private static IEnumerable<string> PendingRetreatLines(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast)
     {
-        if (!_state.Map.RetreatEnabled || !forecast.Attacker.Strikes)
+        if (!state.Map.RetreatEnabled || !forecast.Attacker.Strikes)
         {
-            return;
+            yield break;
         }
 
         var hits = forecast.Attacker.Doubles ? new[] { 1, 2 } : new[] { 1 };
         foreach (var hpAfter in hits.Select(n => target.Hp - n * forecast.Attacker.Damage).Distinct())
         {
-            if (RetreatRule.Pending(_state, _content, unit, tile, target, hpAfter) is { } refuge)
+            if (RetreatRule.Pending(state, content, unit, tile, target, hpAfter) is { } refuge)
             {
-                _out.WriteLine($"  {target.Id} would fall back to {refuge} at {hpAfter} hp");
+                yield return $"  {target.Id} would fall back to {refuge} at {hpAfter} hp";
             }
         }
     }
@@ -561,20 +595,26 @@ public sealed class PlaySession
             return;
         }
 
-        var where = $"{tile} ({_state.Map.TerrainAt(tile, _content).Name})";
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines));
+    }
+
+    /// <summary>What <c>threat</c> prints for <see cref="Queries.Threats"/>' lines, one row per line; the protocol's threat query carries it as its <c>text</c> (issue 25).</summary>
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines)
+    {
+        var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         if (lines.Count == 0)
         {
-            _out.WriteLine($"threat on {unit.Id} at {where}: no enemy can strike it next phase");
-            return;
+            return $"threat on {unit.Id} at {where}: no enemy can strike it next phase";
         }
 
-        _out.WriteLine($"threat on {unit.Id} at {where}:");
+        var rows = new List<string> { $"threat on {unit.Id} at {where}:" };
         foreach (var line in lines)
         {
-            _out.WriteLine($"  {line.Enemy.Id} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+            rows.Add($"  {line.Enemy.Id} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
         }
 
-        _out.WriteLine($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
+        rows.Add($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
+        return string.Join("\n", rows);
     }
 
     /// <summary>
@@ -668,13 +708,21 @@ public sealed class PlaySession
     /// </summary>
     private void PrintRivalry(BattleUnit unit, bool countering)
     {
-        if (Rivalry.ArmOf(_state, _content) is null || Rivalry.AdjacentRivals(_state, _content, unit) is not { Count: > 0 } rivals)
+        if (RivalryLine(_state, _content, unit, countering) is { } line)
         {
-            return;
+            _out.WriteLine(line);
+        }
+    }
+
+    private static string? RivalryLine(BattleState state, GameContent content, BattleUnit unit, bool countering)
+    {
+        if (Rivalry.ArmOf(state, content) is null || Rivalry.AdjacentRivals(state, content, unit) is not { Count: > 0 } rivals)
+        {
+            return null;
         }
 
-        var (hit, crit, critAvoid) = Rivalry.Modifiers(_state, _content, unit, countering);
-        _out.WriteLine($"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}");
+        var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, unit, countering);
+        return $"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
     }
 
     private string Named(string itemId) =>

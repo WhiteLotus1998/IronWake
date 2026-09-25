@@ -9,3 +9,14 @@ public static class RulesVersion
     /// <summary>Incremented whenever a change alters how a command resolves.</summary>
     public const int Current = 1;
 }
+
+/// <summary>
+/// Identifies the shapes of the presentation protocol (issue 25, docs/PROTOCOL.md): the
+/// JSON a renderer reads for a state, an event, a query's answer, and a command. Consumers
+/// ignore fields they do not know, so adding a field is not a change; removing one, or
+/// changing what one means, increments this.
+/// </summary>
+public static class ProtocolVersion
+{
+    public const int Current = 1;
+}

@@ -101,6 +101,7 @@ docs/DIALOGUE.md          distilled agreements from the Design Table
 docs/PLAYTEST.md          both partners' play journals
 docs/DECISIONS/           one file per resolved fork or killed experiment
 docs/ROUTINES.md          routine prompts
+docs/PROTOCOL.md          the presentation protocol: JSON shapes for states, events, commands, queries
 docs/transcripts/         full play transcripts, one file per journaled play
 .github/workflows/ci.yml  build, test, sim --smoke
 .github/workflows/partner.yml  wakes the Partner routine on Design Table comments
