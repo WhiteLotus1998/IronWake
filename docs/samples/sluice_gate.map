@@ -1,0 +1,26 @@
+name: Sluice Gate
+size: 10x8
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 1
+
+....#.....
+..^^#.....
+....#..n..
+....#.....
+....#.....
+..^^#.....
+....#.....
+..........
+
+units:
+P captain 1,6
+P recruit 2,6
+P recruit 1,5
+E soldier 6,4 group:yard behavior:aggressive
+E archer 7,2 group:yard behavior:hold
+
+events:
+sluice enter 3,1 terrain 4,1 =
+reinforce turn 3 enemy spawn brigand 9,0 group:east behavior:aggressive

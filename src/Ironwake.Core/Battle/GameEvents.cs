@@ -58,3 +58,19 @@ public enum WakeCause
 
 /// <summary>A Guard group woke; its members behave as Aggressive from now on.</summary>
 public sealed record GroupWoke(string Group, WakeCause Cause) : GameEvent;
+
+/// <summary>
+/// A map event fired (issue 32). <paramref name="Blocked"/> is true when its tile was held:
+/// a spawn tile with a unit on it, or a terrain change its occupant could not stand on.
+/// A blocked event is spent all the same. Unless blocked, the action's own event follows.
+/// </summary>
+public sealed record MapEventFired(string Name, bool Blocked) : GameEvent;
+
+/// <summary>A map event changed a tile's terrain.</summary>
+public sealed record TerrainChanged(Coord At, string TerrainId) : GameEvent;
+
+/// <summary>A map event brought an enemy onto the board.</summary>
+public sealed record UnitSpawned(string UnitId, Coord At, string Group, Behavior Behavior) : GameEvent;
+
+/// <summary>A map event set a flag.</summary>
+public sealed record FlagSet(string Flag) : GameEvent;

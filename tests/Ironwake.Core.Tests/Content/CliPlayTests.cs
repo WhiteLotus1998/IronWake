@@ -282,6 +282,41 @@ public class CliPlayTests
         Assert.DoesNotContain("The Tollgate  turn 10 of 10", output);
     }
 
+    /// <summary>
+    /// Issue 32's acceptance: the map-events sample under docs/samples, played by hand on
+    /// seed 7. Teodor ending on the lever at 3,1 opens the wall at 4,1, the reinforcement
+    /// arrives from the east edge at the start of enemy phase 3 and walks through the new
+    /// gap, and the transcript names both events.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptShowsTheSluiceOpenAndTheReinforcementArrive()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "sluice_gate.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-sluice_gate-7.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("teodor moves 1,2 -> 3,1 via 2,2 3,2\nevent sluice\n  4,1 becomes road\n", output);
+        Assert.Contains("-- enemy phase, turn 3 --\nevent reinforce\n  brigand-1 arrives at 9,0, group east, aggressive\n", output);
+        Assert.Contains("brigand-1 moves 9,0 -> 5,0", output);
+        Assert.Equal(1, CountOf(output, "event reinforce"));
+    }
+
+    private static int CountOf(string text, string fragment)
+    {
+        var count = 0;
+        for (var i = text.IndexOf(fragment, StringComparison.Ordinal); i >= 0; i = text.IndexOf(fragment, i + 1, StringComparison.Ordinal))
+        {
+            count++;
+        }
+
+        return count;
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

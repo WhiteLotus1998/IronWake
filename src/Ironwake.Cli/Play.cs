@@ -626,6 +626,14 @@ public sealed class PlaySession
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
                 return $"group {g.Group} wakes: {g.Cause.ToString().ToLowerInvariant()}";
+            case MapEventFired m:
+                return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
+            case TerrainChanged t:
+                return $"  {t.At} becomes {t.TerrainId}";
+            case UnitSpawned u:
+                return $"  {u.UnitId} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
+            case FlagSet f:
+                return $"  flag {f.Flag} is set";
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:
