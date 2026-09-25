@@ -243,6 +243,55 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 75: <c>recall list</c> names every state a Recall can return to with the command
+    /// that made it and what a rewind there gives back; <c>recall n</c> prints the same cost
+    /// as it rewinds, and the replayed attack rolls what it rolled before.
+    /// </summary>
+    [Fact]
+    public void RecallListShowsWhatEachRewindGivesBackAndTheReplayedAttackRollsTheSame()
+    {
+        var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nrecall list\nrecall 11\nattack wren brigand-1 1\n");
+
+        Assert.Contains("> recall list\nrecall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same\n"
+            + "  state 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
+            + "  state 1  turn 1  after move captain 1,4  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
+            + "  state 2  turn 1  after move wren 2,6  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
+            + "  state 11  turn 2  turn start  undoes: gives back 10 exp, 10 enemy hp\n", output);
+        Assert.Contains("> recall 11\nrecalled to state 11; 2 charges left\nundone: gives back 10 exp, 10 enemy hp\nthe rolls do not change: the same attack will roll the same\n", output);
+        const string Strikes = "wren attacks brigand-1\n  wren misses brigand-1\n  brigand-1 misses wren\n  wren hits brigand-1 for 10 (hp 2)\n";
+        var first = output.IndexOf(Strikes, StringComparison.Ordinal);
+        Assert.True(first >= 0);
+        Assert.True(output.IndexOf(Strikes, first + 1, StringComparison.Ordinal) > output.IndexOf("> recall 11", StringComparison.Ordinal));
+        Assert.Contains("  recall list              every state recall can return to", Play(out _, "help\n"));
+    }
+
+    /// <summary>Issue 75: a rewind names the kill it gives back and the unit it returns, and one over moves alone says so.</summary>
+    [Fact]
+    public void ARewindNamesTheKillItGivesBackAndOneOverMovesSaysMovesOnly()
+    {
+        const string Script = "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nattack wren brigand-1 1\nrecall 0\n";
+
+        Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\nundone: gives back 1 kill (brigand-1), 40 exp, 22 enemy hp\n", Play(out _, Script, seed: "5"));
+        Assert.Contains("wren falls at 2,6\n", Play(out _, Script, seed: "3"));
+        Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\nundone: gives back 20 enemy hp; returns wren alive, 20 hp\n", Play(out _, Script, seed: "3"));
+        Assert.Contains("undone: moves only\n", Play(out _, "move captain 1,4\nrecall 0\n"));
+    }
+
+    /// <summary>
+    /// Issue 75: a Recall at zero charges is refused with the reason, never ignored, and the
+    /// list says the charges are spent rather than offering states it cannot return to.
+    /// </summary>
+    [Fact]
+    public void ARecallAtZeroChargesIsRefusedAndTheListSaysSo()
+    {
+        var output = Play(out var exit, "move captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall list\nrecall 0\n");
+
+        Assert.Contains("> recall list\nrecall: 0 of 3 charges left, 3 spent; a spent charge does not come back, and the same attack will roll the same\n  no charges left: nothing more can be recalled on this map\n", output);
+        Assert.Contains("> recall 0\nERROR: no Recall charges left on this map\n", output);
+        Assert.Contains("line 9: recall 0: no Recall charges left on this map", output);
+    }
+
+    /// <summary>
     /// Issue 152: an enemy attack prints the same forecast line a player's attack does,
     /// between the planner's command and the strikes, so the transcript carries the odds
     /// of the enemy's combats too. The brigand's line is the mirror of Wren's on the same
