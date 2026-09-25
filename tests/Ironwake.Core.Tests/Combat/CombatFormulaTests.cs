@@ -6,10 +6,10 @@ namespace Ironwake.Core.Tests.Combat;
 public class CombatFormulaTests
 {
     [Fact]
-    public void BurdenIsWeightMinusAFifthOfStrengthFlooredAtZero()
+    public void BurdenIsWeightMinusStrengthFlooredAtZero()
     {
-        Assert.Equal(4, Core.Combat.Burden(WrenOnPlain()));
-        Assert.Equal(7, Core.Combat.Burden(BrigandInForest()));
+        Assert.Equal(0, Core.Combat.Burden(WrenOnPlain()));
+        Assert.Equal(1, Core.Combat.Burden(BrigandInForest()));
         Assert.Equal(0, Core.Combat.Burden(new Combatant(Wren, Cadet, null, Plain, 20)));
         Assert.Equal(0, Core.Combat.Burden(new Combatant(Wren with { Stats = Wren.Stats with { Str = 30 } }, Cadet, IronSword, Plain, 20)));
     }
@@ -45,8 +45,10 @@ public class CombatFormulaTests
     [Fact]
     public void AttackSpeedIsSpeedMinusBurdenAndMayGoNegative()
     {
-        Assert.Equal(4, Core.Combat.AttackSpeed(WrenOnPlain()));
-        Assert.Equal(-3, Core.Combat.AttackSpeed(BrigandInForest()));
+        Assert.Equal(8, Core.Combat.AttackSpeed(WrenOnPlain()));
+        Assert.Equal(3, Core.Combat.AttackSpeed(BrigandInForest()));
+        var overloaded = new Combatant(Wren with { Stats = Wren.Stats with { Str = 0, Spd = 5 } }, Cadet, HeavyAxe, Plain, 20);
+        Assert.Equal(-3, Core.Combat.AttackSpeed(overloaded));
     }
 
     [Fact]
@@ -56,7 +58,7 @@ public class CombatFormulaTests
         Assert.False(Core.Combat.Doubles(BrigandInForest(), WrenOnPlain()));
 
         var wren = WrenOnPlain();
-        var threeSlower = new Combatant(Hexer, Adept, Spark, Plain, 16);
+        var threeSlower = RiderOnPlain();
         Assert.Equal(3, Core.Combat.AttackSpeed(wren) - Core.Combat.AttackSpeed(threeSlower));
         Assert.False(Core.Combat.Doubles(wren, threeSlower));
     }
@@ -102,10 +104,10 @@ public class CombatFormulaTests
     }
 
     [Fact]
-    public void PhysicalAvoidIsAttackSpeedPlusHalfLuckPlusTerrain()
+    public void PhysicalAvoidIsTwiceAttackSpeedPlusHalfLuckPlusTerrain()
     {
-        Assert.Equal(-3 + 0 + 20, Core.Combat.Avoid(BrigandInForest(), againstMagic: false));
-        Assert.Equal(4 + 2 + 0, Core.Combat.Avoid(WrenOnPlain(), againstMagic: false));
+        Assert.Equal(2 * 3 + 0 + 20, Core.Combat.Avoid(BrigandInForest(), againstMagic: false));
+        Assert.Equal(2 * 8 + 2 + 0, Core.Combat.Avoid(WrenOnPlain(), againstMagic: false));
     }
 
     [Fact]
@@ -121,8 +123,8 @@ public class CombatFormulaTests
         var inForest = WingriderInForest();
         var onFort = WingriderOnFort();
 
-        Assert.Equal(Core.Combat.AttackSpeed(inForest) + 3 / 2, Core.Combat.Avoid(inForest, againstMagic: false));
-        Assert.Equal(Core.Combat.AttackSpeed(onFort) + 3 / 2 + 20, Core.Combat.Avoid(onFort, againstMagic: false));
+        Assert.Equal(2 * Core.Combat.AttackSpeed(inForest) + 3 / 2, Core.Combat.Avoid(inForest, againstMagic: false));
+        Assert.Equal(2 * Core.Combat.AttackSpeed(onFort) + 3 / 2 + 20, Core.Combat.Avoid(onFort, againstMagic: false));
         Assert.Equal(12 - 2, Core.Combat.Damage(WrenOnPlain(), inForest));
         Assert.Equal(12 - 4, Core.Combat.Damage(WrenOnPlain(), onFort));
     }
@@ -130,12 +132,13 @@ public class CombatFormulaTests
     [Fact]
     public void HitChanceIsHitMinusAvoidClampedToZeroToOneHundred()
     {
-        Assert.Equal(81, Core.Combat.HitChance(WrenOnPlain(), BrigandInForest()));
-        Assert.Equal(67, Core.Combat.HitChance(BrigandInForest(), WrenOnPlain()));
+        Assert.Equal(72, Core.Combat.HitChance(WrenOnPlain(), BrigandInForest()));
+        Assert.Equal(55, Core.Combat.HitChance(BrigandInForest(), WrenOnPlain()));
         Assert.Equal(85, Core.Combat.HitChance(HexerOnPlain(), WrenOnPlain()));
 
-        var brigandOnPlain = new Combatant(Brigand, Reaver, HeavyAxe, Plain, 22);
-        Assert.Equal(100, Core.Combat.HitChance(WrenOnPlain(), brigandOnPlain));
+        // Str 1 under a Wt 8 axe at Spd 0: attack speed -7, avoid -14, hit 98 + 14 = 112, clamped.
+        var stuck = new Combatant(Brigand with { Stats = Brigand.Stats with { Str = 0, Spd = 0 } }, Reaver, HeavyAxe, Plain, 22);
+        Assert.Equal(100, Core.Combat.HitChance(WrenOnPlain(), stuck));
         var blind = new Combatant(Brigand with { Stats = Brigand.Stats with { Dex = 0, Lck = 0 } }, Reaver, HeavyAxe, Plain, 22);
         var untouchable = new Combatant(Wren with { Stats = Wren.Stats with { Spd = 60, Lck = 40 } }, Cadet, IronSword, Forest, 20);
         Assert.Equal(0, Core.Combat.HitChance(blind, untouchable));
@@ -227,13 +230,13 @@ public class CombatFormulaTests
     {
         var forecast = Core.Combat.Forecast(WrenOnPlain(), BrigandInForest(), 1, RollScheme.TwoRollAverage);
 
-        Assert.Equal(new SideForecast(true, 9, 81, 93, 4, true), forecast.Attacker);
-        Assert.Equal(new SideForecast(true, 10, 67, 79, 0, false), forecast.Defender);
+        Assert.Equal(new SideForecast(true, 9, 72, 85, 4, true), forecast.Attacker);
+        Assert.Equal(new SideForecast(true, 10, 55, 60, 0, false), forecast.Defender);
         Assert.Equal(RollScheme.TwoRollAverage, forecast.Scheme);
 
         var oneRoll = Core.Combat.Forecast(WrenOnPlain(), BrigandInForest(), 1, RollScheme.OneRoll);
-        Assert.Equal(81, oneRoll.Attacker.DisplayedHit);
-        Assert.Equal(67, oneRoll.Defender.DisplayedHit);
+        Assert.Equal(72, oneRoll.Attacker.DisplayedHit);
+        Assert.Equal(55, oneRoll.Defender.DisplayedHit);
     }
 
     [Fact]

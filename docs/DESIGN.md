@@ -45,7 +45,7 @@ Square grid, 4-connected movement. No zone of control. Units may pass through al
 | Hill | `n` | 2 | 3 | 1 | 3 | +10 | +1 Def | |
 | Mountain | `M` | 3 | — | 1 | — | +30 | +2 Def | |
 | Water | `~` | — | — | 1 | — | 0 | 0 | |
-| Fort | `F` | 1 | 1 | 1 | 1 | +30 | +2 Def, +2 Res | heals 20% max HP at start of owner's phase |
+| Fort | `F` | 1 | 1 | 1 | 1 | +15 | +2 Def, +2 Res | heals 20% max HP at start of owner's phase |
 | Wall | `#` | — | — | — | — | — | — | blocks everything, including flyers |
 | Gate/Throne | `T` | 1 | 1 | 1 | 1 | +30 | +3 Def, +3 Res | seize target; heals 20% |
 
@@ -58,7 +58,7 @@ Square grid, 4-connected movement. No zone of control. Units may pass through al
 3H-inspired, but these are Ironwake's formulas. All division is integer floor.
 
 ```
-Burden        = max(0, WeaponWeight - Str / 5)
+Burden        = max(0, WeaponWeight - Str)
 AttackSpeed   = Spd - Burden
 Doubles       if AttackSpeed >= TargetAttackSpeed + 4
 
@@ -68,7 +68,7 @@ Damage        = max(0, Atk - (Def | Res) - TerrainDefBonus)
 Crit damage   = Damage * 3
 
 Hit           = WeaponHit + Dex + Lck / 2
-Avoid (phys)  = AttackSpeed + Lck / 2 + TerrainAvoid
+Avoid (phys)  = 2 * AttackSpeed + Lck / 2 + TerrainAvoid
 Avoid (magic) = (Spd + Lck) / 2 + TerrainAvoid
 HitChance     = clamp(Hit - Avoid, 0, 100)
 
@@ -79,7 +79,7 @@ CritChance    = clamp(Crit - CritAvoid, 0, 100)
 
 Only `CritChance` is clamped. `CritAvoid` is not: a modifier (rivalry in 13.1 is the first) may push it below zero, and a crit of 3 against a crit avoid of -5 is 8 percent. A defensive clamp on `CritAvoid` would silently erase every such cost against the low-crit weapons that make up maps 1 and 2, so a test falsifies it.
 
-**Under measurement (issue 158).** `Str / 5` in Burden was never a recorded choice, and with it an iron weapon costs a Str 5 to 9 unit 4 to 7 speed, so avoid on plain is 1 to 7 for everyone on maps 1 to 3 and raw hits sit at 93 to 100 both ways; doubling follows weapon weight rather than speed. The formulas above are what ships. The state carries a `CombatFormula` beside the roll scheme (`Standard` everywhere but the Sim), and the Sim's `--hitband` command measures issue 158's arms without touching content or this section: burden against full Str (arm 1), that plus attack speed counted twice in avoid (arm 2), the iron tier's hit 15 lower applied to the loaded content (arm 3), and arm 2 with arm 3's content (arm 4), each under both roll schemes, with both sides' raw-hit histogram, the doubling rate, and gates 1 and 4. Arm 4 under two rolls is the provisional cell (Design Table, nineteenth round). The CLI's `play` takes `--formula standard|arm1|arm2|arm3|arm4` and `--scheme one|two`, and the Sim's `--trace` takes both, through one mapping in the core (`FormulaArms`), so a hand play and a measurement of an arm are the same game for the same seed; the play's header line names both. This section changes only when an arm is kept.
+**Why burden and avoid read this way (issue 158, DECISIONS/0028).** Until the keep, burden was weight less `Str / 5` and speed counted once in avoid; an iron weapon then cost a Str 5 to 9 unit 4 to 7 speed, avoid on plain was 1 to 7 for everyone, and raw hits sat at 93 to 100 both ways, so the forecast was arithmetic and doubling followed weapon weight. Burden against the whole of Str gives speed back its job, speed counting twice makes Spd the skirmisher's stat, and the iron tier's hit is 15 lower in content (Iron Sword 75, Iron Lance 70, Iron Axe 65, Iron Bow 70), which together put the player's raw hit on open ground at about 60 to 80 and the enemy's at 50 to 70, with forest and fort visibly below. The fort's avoid is 15, not 30, for the same reason: at 30 under these formulas a boss on a fort was a lottery (Design Table, twenty-fourth round). The Sim's `--hitband` prints the raw-hit histogram of both sides, per defender terrain, beside the doubling rate and gates 1 and 4, under both roll schemes, as a standing number.
 
 **Rolls.** Hit uses the average of two rolls (0–99) by default: a strike lands when `floor((A + B) / 2) < HitChance`, so the landing probability is the share of the 10000 ordered pairs whose sum is below `2 * HitChance` (a raw 50 lands 50.5 percent of the time). Under one roll it lands when `A < HitChance`. Crit uses one roll, `C < CritChance`, drawn only when the hit landed. Every roll is derived from the campaign seed and a key, never from a stream position (issue 31): `IRng.Roll(key)` is the engine's only source of chance, and the key tuples are the contract that replaced draw order. A combat roll keys on `(turn, phase, attacker, target, strikeIndex, roll)` with `roll` one of `HitA`, `HitB`, `Crit`; the counter's strikes key with the defender as the attacker, and `strikeIndex` counts that striker's own strikes in the combat from 0. A growth roll keys on `(unit, newLevel, stat)` and nothing else (section 3). The production `IRng` hashes the key's text with the seed (FNV-1a and a 64-bit finalizer, written out in `KeyedRng`, DECISIONS/0013), so the same seed and key give the same roll in every process; the two pinned rolls in `KeyedRngTests` make a change to the hash a visible decision, since it changes every seed's game.
 

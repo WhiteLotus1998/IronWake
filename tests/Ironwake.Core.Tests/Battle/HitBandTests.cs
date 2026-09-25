@@ -5,26 +5,11 @@ namespace Ironwake.Core.Tests.Battle;
 using static BattleFixture;
 
 /// <summary>
-/// Issue 158's instrument: the content arm cuts the iron tier and nothing else, and the
-/// tally reads both sides of every attack from the forecast the resolver is about to use.
+/// Issue 158's instrument: the tally reads both sides of every attack from the forecast
+/// the resolver is about to use.
 /// </summary>
 public class HitBandTests
 {
-    [Fact]
-    public void TheIronArmCutsEveryIronWeaponsHitByFifteenAndNothingElse()
-    {
-        var content = FormulaArms.Content(Starter, FormulaArm.IronHit15);
-
-        foreach (var (id, weapon) in Starter.Weapons)
-        {
-            var expected = id.StartsWith("iron_", StringComparison.Ordinal) ? weapon.Hit - FormulaArms.IronHitCut : weapon.Hit;
-            Assert.Equal(expected, content.Weapons[id].Hit);
-        }
-
-        Assert.Contains(Starter.Weapons.Keys, id => id.StartsWith("iron_", StringComparison.Ordinal));
-        Assert.Same(Starter, FormulaArms.Content(Starter, FormulaArm.Main));
-    }
-
     [Fact]
     public void TheTallyCountsOnlyAttacksAndBothSidesOfEach()
     {

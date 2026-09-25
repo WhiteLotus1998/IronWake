@@ -1,0 +1,37 @@
+full: 3 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: old_mill_road, heuristic wins 164/200 (82 %), winning turn median 9 p90 11 limit 12, losses 26 timeout 10 captain 0 protected, quiet tail 0.8, refused kill p50 0.8674 over 26, two-roll average: ok
+gate 2 decisions matter: old_mill_road, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: old_mill_road, 0 player units killed from deployment: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.375: ok
+  wren: drop 0.375 se 0.049 own [atk 353 dmg 8117 heal 0 abs 913] rest baseline [atk 805 dmg 13263 heal 0 abs 696] rest benched [atk 587 dmg 18013 heal 0 abs 1958] benched losses 91 timeout 20 captain 0 protected, refused kill p50 0.8674 over 91
+  captain captain: baseline [atk 805 dmg 13263 heal 0 abs 696] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 967 ms: ok
+gate 5 forecast honesty: 10057 combats, 17865 strikes, hits 10506 expected 10480.6, crits 226 expected 251.6, damage mismatches 0: ok
+gate 7 speed: old_mill_road, 5 AI-vs-AI games, 65 turns, slowest 7 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 14076 ms: ok
+gate 1 beatable: saltmarsh_ford, heuristic wins 69/200 (34 %), winning turn median 8 p90 14 limit 18, losses 119 timeout 12 captain 0 protected, quiet tail 2.2, refused kill p50 0.8230 over 119, two-roll average: FAILED
+gate 2 decisions matter: saltmarsh_ford, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: saltmarsh_ford, 0 player units killed from deployment: ok
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.160: ok
+  ottilie: drop 0.180 se 0.040 own [atk 1886 dmg 10029 heal 0 abs 234] rest baseline [atk 1252 dmg 21923 heal 0 abs 1763] rest benched [atk 1396 dmg 26888 heal 0 abs 2299] benched losses 157 timeout 10 captain 0 protected, refused kill p50 0.8674 over 157
+  teodor: drop 0.160 se 0.040 own [atk 293 dmg 5758 heal 0 abs 839] rest baseline [atk 2845 dmg 26194 heal 0 abs 1158] rest benched [atk 2458 dmg 28589 heal 0 abs 1810] benched losses 157 timeout 6 captain 0 protected, refused kill p50 0.8674 over 157
+  wren: drop 0.155 se 0.042 own [atk 593 dmg 6011 heal 0 abs 413] rest baseline [atk 2545 dmg 25941 heal 0 abs 1584] rest benched [atk 2337 dmg 28772 heal 0 abs 2570] benched losses 155 timeout 7 captain 0 protected, refused kill p50 0.8674 over 155
+  captain captain: baseline [atk 366 dmg 10154 heal 0 abs 511] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1429 ms: ok
+gate 5 forecast honesty: 10074 combats, 17856 strikes, hits 10505 expected 10474.6, crits 227 expected 250.8, damage mismatches 0: ok
+gate 7 speed: saltmarsh_ford, 5 AI-vs-AI games, 66 turns, slowest 23 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 23759 ms: ok
+gate 1 beatable: the_tollgate, heuristic wins 198/200 (99 %), winning turn median 8 p90 9 limit 16, losses 2 timeout 0 captain 0 protected, quiet tail 7.5, refused kill p50 0.8674 over 2, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.035: ok
+  ottilie: drop 0.005 se 0.011 own [atk 692 dmg 4382 heal 0 abs 414] rest baseline [atk 2084 dmg 24510 heal 0 abs 1122] rest benched [atk 2094 dmg 29948 heal 0 abs 1565] benched losses 3 timeout 0 captain 0 protected, refused kill p50 0.9892 over 3
+  pell: drop 0.280 se 0.037 own [atk 686 dmg 9168 heal 0 abs 95] rest baseline [atk 2090 dmg 19724 heal 0 abs 1441] rest benched [atk 2609 dmg 27017 heal 0 abs 1825] benched losses 58 timeout 0 captain 0 protected, refused kill p50 0.8674 over 58
+  teodor: drop 0.030 se 0.016 own [atk 519 dmg 5444 heal 0 abs 376] rest baseline [atk 2257 dmg 23448 heal 0 abs 1160] rest benched [atk 2506 dmg 29484 heal 0 abs 1400] benched losses 8 timeout 0 captain 0 protected, refused kill p50 0.8674 over 8
+  wren: drop 0.040 se 0.017 own [atk 300 dmg 3448 heal 0 abs 436] rest baseline [atk 2476 dmg 25444 heal 0 abs 1100] rest benched [atk 2552 dmg 29569 heal 0 abs 1455] benched losses 10 timeout 0 captain 0 protected, refused kill p50 0.9892 over 10
+  captain captain: baseline [atk 579 dmg 6450 heal 0 abs 215] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1335 ms: ok
+gate 5 forecast honesty: 10128 combats, 17935 strikes, hits 10566 expected 10545.2, crits 230 expected 252.9, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 80 turns, slowest 27 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 23001 ms: ok
+full: FAILED

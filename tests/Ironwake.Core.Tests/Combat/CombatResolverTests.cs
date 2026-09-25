@@ -109,11 +109,12 @@ public class CombatResolverTests
         var hitA = RollKey.Combat(3, Side.Player, "wren", "brigand", 0, CombatRoll.HitA);
         var hitB = RollKey.Combat(3, Side.Player, "wren", "brigand", 0, CombatRoll.HitB);
 
-        Assert.True(Fight(new ScriptedRng(99).Set(hitA, 62).Set(hitB, 99)).Strikes[0].Hit);
-        Assert.False(Fight(new ScriptedRng(99).Set(hitA, 63).Set(hitB, 99)).Strikes[0].Hit);
+        Assert.True(Fight(new ScriptedRng(99).Set(hitA, 44).Set(hitB, 99)).Strikes[0].Hit);
+        Assert.False(Fight(new ScriptedRng(99).Set(hitA, 45).Set(hitB, 99)).Strikes[0].Hit);
         Assert.True(Fight(new ScriptedRng(99).Set(hitA, 85).Set(hitB, 0)).Strikes[0].Hit);
         Assert.False(Fight(new ScriptedRng(99).Set(hitA, 85).Set(hitB, 0), RollScheme.OneRoll).Strikes[0].Hit);
-        Assert.True(Fight(new ScriptedRng(99).Set(hitA, 80), RollScheme.OneRoll).Strikes[0].Hit);
+        Assert.True(Fight(new ScriptedRng(99).Set(hitA, 71), RollScheme.OneRoll).Strikes[0].Hit);
+        Assert.False(Fight(new ScriptedRng(99).Set(hitA, 72), RollScheme.OneRoll).Strikes[0].Hit);
     }
 
     [Fact]

@@ -118,19 +118,17 @@ public sealed class HitTally
 /// <summary>
 /// The hit-band table of issue 158: the raw hit chance of every strike side in the
 /// heuristic's games, both sides, as a histogram, beside the doubling rate. A cell of
-/// the table is one arm (<see cref="FormulaArm"/>) under one roll scheme on one map.
+/// the table is one roll scheme on one map.
 /// </summary>
 public static class HitBand
 {
     /// <summary>One cell: gate 1 with the tally attached, gate 4 on that baseline, the two histogram rows, and the terrain rows.</summary>
-    public static IReadOnlyList<string> Cell(GameContent loaded, MapDefinition map, string id, int seeds, FormulaArm arm, RollScheme scheme)
+    public static IReadOnlyList<string> Cell(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme)
     {
-        var content = FormulaArms.Content(loaded, arm);
         var hits = new HitTally();
-        var prefix = $"hitband: {id}, {FormulaArms.Name(arm)}, {Gates.Name(scheme)}";
-        var formula = FormulaArms.Formula(arm);
-        var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme, hits, formula);
-        var gate4 = Gates.Gate4(content, map, id, baseline, scheme, formula);
+        var prefix = $"hitband: {id}, {Gates.Name(scheme)}";
+        var (gate1, baseline) = Gates.Gate1(content, map, id, seeds, scheme, hits);
+        var gate4 = Gates.Gate4(content, map, id, baseline, scheme);
         return new[] { prefix, hits.Lines(prefix), hits.TerrainLines(prefix), gate1.Line, gate4.Line };
     }
 }

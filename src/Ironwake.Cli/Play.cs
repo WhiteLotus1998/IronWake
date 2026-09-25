@@ -16,13 +16,12 @@ namespace Ironwake.Cli;
 /// <c>attack</c>, <c>item</c>, and <c>forecast</c> read them that way; the core counts
 /// from zero and is not told. A scripted run is a claim about a game, so it ends with a
 /// summary of every rejected line, and <c>--strict</c> stops at the first one.
-/// <c>--scheme</c> and <c>--formula</c> pick the roll scheme and one of issue 158's arms
-/// through <see cref="FormulaArms"/>, the same path the Sim's hit-band table and trace take,
-/// and the header line names both, so a transcript says which game it is.
+/// <c>--scheme</c> picks the roll scheme through <see cref="RollSchemes"/>, the same word the
+/// Sim's trace takes, and the header line names it, so a transcript says which game it is.
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--formula standard|arm1|arm2|arm3|arm4]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -77,7 +76,6 @@ public sealed class PlaySession
         var strict = false;
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
-        var arm = FormulaArm.Main;
         for (var i = 1; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -97,12 +95,8 @@ public sealed class PlaySession
                     contentDir = value;
                     i++;
                     break;
-                case "--scheme" when value is not null && FormulaArms.ParseScheme(value) is { } parsedScheme:
+                case "--scheme" when value is not null && RollSchemes.Parse(value) is { } parsedScheme:
                     scheme = parsedScheme;
-                    i++;
-                    break;
-                case "--formula" when value is not null && FormulaArms.Parse(value) is { } parsedArm:
-                    arm = parsedArm;
                     i++;
                     break;
                 default:
@@ -123,9 +117,8 @@ public sealed class PlaySession
         MapDefinition map;
         try
         {
-            var loaded = ContentLoader.Load(contentDir);
-            map = MapFiles.Load(ResolveMap(args[0], contentDir), loaded);
-            content = FormulaArms.Content(loaded, arm);
+            content = ContentLoader.Load(contentDir);
+            map = MapFiles.Load(ResolveMap(args[0], contentDir), content);
         }
         catch (Exception e) when (e is ContentException or MapException)
         {
@@ -155,8 +148,8 @@ public sealed class PlaySession
             return 2;
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, content.Cast, seed, scheme, formula: FormulaArms.Formula(arm)), Console.Out, scripted: script is not null);
-        return session.Play(input, strict, seed, arm);
+        var session = new PlaySession(content, BattleState.From(map, content, content.Cast, seed, scheme), Console.Out, scripted: script is not null);
+        return session.Play(input, strict, seed);
     }
 
     /// <summary>
@@ -175,9 +168,9 @@ public sealed class PlaySession
         return File.Exists(named) ? named : mapArg;
     }
 
-    private int Play(TextReader input, bool strict, ulong seed, FormulaArm arm)
+    private int Play(TextReader input, bool strict, ulong seed)
     {
-        _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}, formula {FormulaArms.Key(arm)}");
+        _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
         _out.Write(MapRenderer.Render(_state, _content));
         var commands = 0;
         var stopped = false;

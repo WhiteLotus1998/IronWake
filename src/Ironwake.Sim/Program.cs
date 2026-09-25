@@ -68,22 +68,17 @@ public static class Program
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
         {
             RollScheme? scheme = RollScheme.TwoRollAverage;
-            FormulaArm? arm = FormulaArm.Main;
             for (var i = 3; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--scheme")
                 {
                     scheme = ParseScheme(args[i + 1]);
                 }
-                else if (args[i] == "--formula")
-                {
-                    arm = FormulaArms.Parse(args[i + 1]);
-                }
             }
 
-            if (scheme is { } trace && arm is { } traceArm)
+            if (scheme is { } trace)
             {
-                return Trace(args[1], traceSeed, trace, traceArm);
+                return Trace(args[1], traceSeed, trace);
             }
         }
 
@@ -91,14 +86,14 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two] [--formula standard|arm1|arm2|arm3|arm4] | --hitband <map>|--all [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] | --full --all [--seeds N] [--scheme one|two] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
 
     private const int HitBandSeeds = 50;
 
     /// <summary>
-    /// The hit-band table of issue 158 for one map or every map: each arm under each roll
-    /// scheme, with both sides' raw-hit histogram, the doubling rate, and gates 1 and 4 on
-    /// the arm. A measurement only; nothing here changes what ships.
+    /// The hit-band table of issue 158 for one map or every map: section 5's formulas under
+    /// each roll scheme, with both sides' raw-hit histogram, the doubling rate, and gates 1
+    /// and 4. A measurement only; nothing here changes what ships.
     /// </summary>
     public static int HitBandTable(string mapId, int seeds)
     {
@@ -121,14 +116,11 @@ public static class Program
         Console.WriteLine($"hitband: {maps.Count} maps from {contentDir}, {seeds} seeds per cell");
         foreach (var (id, map) in maps)
         {
-            foreach (var arm in Enum.GetValues<FormulaArm>())
+            foreach (var scheme in new[] { RollScheme.TwoRollAverage, RollScheme.OneRoll })
             {
-                foreach (var scheme in new[] { RollScheme.TwoRollAverage, RollScheme.OneRoll })
+                foreach (var line in HitBand.Cell(content, map, id, seeds, scheme))
                 {
-                    foreach (var line in HitBand.Cell(content, map, id, seeds, arm, scheme))
-                    {
-                        Console.WriteLine(line);
-                    }
+                    Console.WriteLine(line);
                 }
             }
         }
@@ -137,16 +129,15 @@ public static class Program
     }
 
     /// <summary>The <c>--scheme</c> argument: <c>one</c> is one roll, <c>two</c> is the two-roll average; anything else is refused with the usage line.</summary>
-    public static RollScheme? ParseScheme(string text) => FormulaArms.ParseScheme(text);
+    public static RollScheme? ParseScheme(string text) => RollSchemes.Parse(text);
 
     /// <summary>
     /// One game of the heuristic player on a map and a seed, printed as the script the CLI
     /// replays (player commands bare, enemy commands as <c>enemy:</c> lines, deaths and
     /// wakes as comments), so a baseline game can be read turn by turn or handed to
-    /// <c>ironwake play --script</c>. Under an arm other than main the game is the arm's
-    /// (issue 158), and the header names the CLI flags that replay it.
+    /// <c>ironwake play --script</c>.
     /// </summary>
-    public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, FormulaArm arm = FormulaArm.Main)
+    public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -155,19 +146,17 @@ public static class Program
             return 1;
         }
 
-        var loaded = ContentLoader.Load(contentDir);
-        var maps = MapFiles.LoadAll(contentDir, loaded).Where(m => m.Id == mapId).ToList();
+        var content = ContentLoader.Load(contentDir);
+        var maps = MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
         if (maps.Count == 0)
         {
             Console.WriteLine($"trace: no map '{mapId}' under {contentDir}");
             return 2;
         }
 
-        var content = FormulaArms.Content(loaded, arm);
-        var state = BattleState.From(maps[0].Map, content, content.Cast, seed, scheme, formula: FormulaArms.Formula(arm));
+        var state = BattleState.From(maps[0].Map, content, content.Cast, seed, scheme);
         var player = new HeuristicPlayer();
-        var flags = arm == FormulaArm.Main ? "" : $", {FormulaArms.Name(arm)} (replay with --scheme {(scheme == RollScheme.OneRoll ? "one" : "two")} --formula {FormulaArms.Key(arm)})";
-        Console.WriteLine($"# {mapId} seed {seed}, heuristic player, {Gates.Name(scheme)}{flags}");
+        Console.WriteLine($"# {mapId} seed {seed}, heuristic player, {Gates.Name(scheme)}");
         while (!state.Outcome.IsOver)
         {
             var enemy = state.Phase == Side.Enemy;

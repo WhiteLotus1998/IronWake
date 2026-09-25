@@ -1,24 +1,6 @@
 namespace Ironwake.Core;
 
 /// <summary>How hit rolls are read, DESIGN.md section 5. The switch inside <see cref="Combat.HitProbability"/>.</summary>
-/// <summary>
-/// Which burden and avoid formulas section 5 uses. <see cref="Standard"/> is what ships.
-/// The others are the arms of issue 158, measured by the Sim's hit-band table and never
-/// chosen by content or a map: the state carries the formula the way it carries the roll
-/// scheme, so the forecast, the resolver, and the AI read one formula.
-/// </summary>
-public enum CombatFormula
-{
-    /// <summary>Burden is weight less a fifth of Str; speed counts once in avoid.</summary>
-    Standard,
-
-    /// <summary>Arm 1: burden is weight less the whole of Str; speed counts once in avoid.</summary>
-    FullStrBurden,
-
-    /// <summary>Arm 2: burden is weight less the whole of Str, and attack speed counts twice in avoid.</summary>
-    FullStrBurdenSpeedTwice,
-}
-
 public enum RollScheme
 {
     /// <summary>Hit lands when the floor of the average of two rolls is below the hit chance. The section 5 default.</summary>
@@ -26,6 +8,17 @@ public enum RollScheme
 
     /// <summary>Hit lands when one roll is below the hit chance.</summary>
     OneRoll,
+}
+
+public static class RollSchemes
+{
+    /// <summary>The <c>--scheme</c> word: <c>one</c> is one roll, <c>two</c> the two-roll average; anything else is null.</summary>
+    public static RollScheme? Parse(string text) => text switch
+    {
+        "one" => RollScheme.OneRoll,
+        "two" => RollScheme.TwoRollAverage,
+        _ => null,
+    };
 }
 
 /// <summary>

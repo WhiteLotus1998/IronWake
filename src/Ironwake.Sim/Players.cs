@@ -177,7 +177,7 @@ public sealed class HeuristicPlayer : IPlayer
     {
         var me = (attacker with { At = tile }).ToCombatant(state.Map, content);
         var them = target.ToCombatant(state.Map, content);
-        var forecast = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme, state.Formula);
+        var forecast = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme);
         var side = forecast.Attacker;
         var outcomes = Outcomes(side, state.Scheme);
         var survivesCounter = 1 - KillsWith(forecast.Defender, attacker.Hp, state.Scheme);
