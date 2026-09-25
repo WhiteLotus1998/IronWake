@@ -22,4 +22,4 @@ P recruit:wren 2,8
 E soldier 9,1 group:mill behavior:guard
 E archer 10,2 group:mill behavior:guard
 E brigand 6,5 group:road behavior:aggressive
-B mill_bandit 10,1 group:mill behavior:boss
+E mill_bandit 10,1 group:mill behavior:guard

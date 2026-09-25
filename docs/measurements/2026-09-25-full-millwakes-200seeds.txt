@@ -1,0 +1,24 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: old_mill_road, heuristic wins 155/200 (78 %), winning turn median 8 p90 10 limit 12, losses 4 timeout 41 captain 0 protected, quiet tail 0.5, refused kill p50 0.8674 over 4, two-roll average: ok
+gate 2 decisions matter: old_mill_road, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: old_mill_road, 0 player units killed from deployment: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.500: ok
+  wren: drop 0.500 se 0.053 own [atk 135 dmg 7041 heal 0 abs 968] rest baseline [atk 544 dmg 13225 heal 0 abs 1365] rest benched [atk 153 dmg 11199 heal 0 abs 1218] benched losses 104 timeout 41 captain 0 protected, refused kill p50 0.0346 over 104
+  captain captain: baseline [atk 544 dmg 13225 heal 0 abs 1365] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 857 ms: ok
+gate 5 forecast honesty: 10057 combats, 17865 strikes, hits 10506 expected 10480.6, crits 226 expected 251.6, damage mismatches 0: ok
+gate 7 speed: old_mill_road, 5 AI-vs-AI games, 65 turns, slowest 7 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 11346 ms: ok
+full: ok
+full: 1 maps from /home/user/IronWake/content, 200 seeds, one roll
+gate 1 beatable: old_mill_road, heuristic wins 124/200 (62 %), winning turn median 8 p90 11 limit 12, losses 16 timeout 60 captain 0 protected, quiet tail 0.9, refused kill p50 0.7400 over 16, one roll: ok
+gate 2 decisions matter: old_mill_road, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: old_mill_road, 0 player units killed from deployment: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.450: ok
+  wren: drop 0.450 se 0.054 own [atk 198 dmg 7053 heal 0 abs 1060] rest baseline [atk 535 dmg 12175 heal 0 abs 1464] rest benched [atk 141 dmg 10143 heal 0 abs 1221] benched losses 127 timeout 39 captain 0 protected, refused kill p50 0.7400 over 127
+  captain captain: baseline [atk 535 dmg 12175 heal 0 abs 1464] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 759 ms: ok
+gate 5 forecast honesty: 10057 combats, 17865 strikes, hits 10506 expected 10480.6, crits 226 expected 251.6, damage mismatches 0: ok
+gate 7 speed: old_mill_road, 5 AI-vs-AI games, 65 turns, slowest 6 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 11644 ms: ok
+full: ok
