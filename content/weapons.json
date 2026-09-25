@@ -11,6 +11,7 @@
     { "id": "hatchet", "name": "Hatchet", "type": "axe", "mt": 5, "hit": 85, "crit": 5, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 45 },
     { "id": "iron_axe", "name": "Iron Axe", "type": "axe", "mt": 7, "hit": 65, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 1, "durability": 40 },
     { "id": "steel_axe", "name": "Steel Axe", "type": "axe", "mt": 11, "hit": 70, "crit": 0, "wt": 12, "minRange": 1, "maxRange": 1, "durability": 30 },
+    { "id": "toll_axe", "name": "Toll Axe", "type": "axe", "mt": 6, "hit": 60, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 2, "durability": 20 },
 
     { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "effective": ["flying"] },
     { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "effective": ["flying"] },

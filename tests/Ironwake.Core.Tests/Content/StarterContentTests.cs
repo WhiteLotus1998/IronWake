@@ -12,7 +12,7 @@ public class StarterContentTests
     {
         Assert.Equal(9, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
-        Assert.Equal(17, Content.Weapons.Count);
+        Assert.Equal(18, Content.Weapons.Count);
         Assert.Equal(21, Content.Units.Count);
         Assert.Equal(11, Content.Cast.Count);
     }
@@ -173,10 +173,27 @@ public class StarterContentTests
             {
                 WeaponType.Bow => (2, 2),
                 WeaponType.Reason or WeaponType.Faith => (1, 2),
-                _ => (1, 1),
+                _ => (1, 2),
             };
             Assert.True(weapon.MinRange >= min && weapon.MaxRange <= max, weapon.Id + " range is outside its type's band");
         }
+    }
+
+    /// <summary>Section 5: a melee weapon that reaches 2 is thrown and enemy-only in v1, so the player's melee stays at 1.</summary>
+    [Fact]
+    public void AThrownMeleeWeaponIsCarriedByNoCastMember()
+    {
+        var thrown = Content.Weapons.Values
+            .Where(w => w.Type is WeaponType.Sword or WeaponType.Lance or WeaponType.Axe && w.MaxRange > 1)
+            .Select(w => w.Id)
+            .ToList();
+        Assert.Equal(new[] { "toll_axe" }, thrown);
+        foreach (var unit in Content.Cast)
+        {
+            Assert.DoesNotContain(unit.Inventory.Items, item => thrown.Contains(item.ItemId));
+        }
+
+        Assert.Contains(Content.Unit("bandit_leader").Inventory.Items, item => item.ItemId == "toll_axe");
     }
 
     [Fact]

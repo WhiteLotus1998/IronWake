@@ -39,6 +39,39 @@ public class ExposureTests
         Assert.True(sum.NoCrit > 0);
     }
 
+    /// <summary>
+    /// Issue 131: an enemy is counted at the worst of every weapon it can strike with, so a
+    /// boss holding a melee axe in front still covers range 2 when a thrown axe sits behind it.
+    /// </summary>
+    [Fact]
+    public void AnEnemyIsCountedAtTheWorstOfEveryWeaponItCarries()
+    {
+        var map = Yard.Replace("E brigand 3,1 group:yard behavior:aggressive\nE soldier 3,2 group:yard behavior:aggressive", "B bandit_leader 5,1 group:yard behavior:boss");
+        var state = Start(map: map.Replace("win: rout", "win: defeat_boss"));
+        var leader = state.UnitsOf(Side.Enemy).Single();
+        var hale = state.Find("hale")!;
+        var tile = new Coord(3, 1);
+
+        var both = Exposure.Of(state, Starter, hale, tile);
+        var melee = WithInventory(state, leader, "steel_axe");
+        Assert.Equal(new ExposureSum(0, 0, 0), Exposure.Of(melee, Starter, melee.Find("hale")!, tile));
+
+        var moved = state.WithUnit(hale with { At = tile });
+        var thrown = Core.Combat.Forecast(leader.WithSlotInFront(1).ToCombatant(state.Map, Starter), moved.Find("hale")!.ToCombatant(state.Map, Starter), 2, state.Scheme).Attacker;
+        Assert.True(thrown.Damage > 0);
+        Assert.Equal(thrown.Damage * Strikes(thrown), both.NoCrit);
+
+        var adjacent = new Coord(4, 1);
+        var steel = Core.Combat.Forecast(leader.ToCombatant(state.Map, Starter), state.WithUnit(hale with { At = adjacent }).Find("hale")!.ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;
+        Assert.Equal(steel.Damage * Strikes(steel), Exposure.Of(state, Starter, hale, adjacent).NoCrit);
+    }
+
+    private static BattleState WithInventory(BattleState state, BattleUnit unit, params string[] items)
+    {
+        var stacks = items.Select(item => new ItemStack(item, Starter.Weapon(item).Durability));
+        return state.WithUnit(unit with { Unit = unit.Unit with { Inventory = new Inventory(ValueList<ItemStack>.From(stacks.ToList())) } });
+    }
+
     [Fact]
     public void APlanWithNoAttackHasACounterOfZero()
     {

@@ -36,6 +36,9 @@ public static class Exposure
     /// path and then dies inside the cycle, are the enemy's choices and the cycle's, not
     /// this command's certainty, so the veto is not a guarantee over the cycle
     /// (DECISIONS/0025) and gate 1's captain-loss count is where that regime is seen.
+    /// An enemy is counted at the worst of every weapon it can strike with, since its
+    /// attack options range over all of them (section 8); the counter to the unit's own
+    /// attack is the weapon the target holds in front now, the one it last swung.
     /// </summary>
     public static ExposureSum Of(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null)
     {
@@ -46,31 +49,34 @@ public static class Exposure
         var me = moved.ToCombatant(board.Map, content);
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
-            var weapon = enemy.EquippedWeapon(content);
-            if (weapon is null)
-            {
-                continue;
-            }
-
             var movement = content.Class(enemy.Unit.ClassId).Movement;
             var mayMove = board.EffectiveBehavior(enemy) == Behavior.Aggressive;
             var reach = board.ReachOf(enemy, content);
             var worst = (Plain: 0, Crit: 0);
             var found = false;
-            foreach (var from in EnemyAi.AttackTiles(board, content, enemy, weapon, moved, movement))
+            for (var arm = 0; arm < enemy.Unit.Inventory.Count; arm++)
             {
-                if (from != enemy.At && (!mayMove || !reach.CanEnd(from)))
+                if (enemy.UsableWeaponAt(content, arm) is not { } weapon)
                 {
                     continue;
                 }
 
-                var striker = new Combatant(enemy.Unit, content.Class(enemy.Unit.ClassId), weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, enemy.WeaponBroken(content));
-                var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
-                var here = Worst(forecast.Attacker);
-                if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
+                var armed = enemy.WithSlotInFront(arm);
+                foreach (var from in EnemyAi.AttackTiles(board, content, enemy, weapon, moved, movement))
                 {
-                    worst = here;
-                    found = true;
+                    if (from != enemy.At && (!mayMove || !reach.CanEnd(from)))
+                    {
+                        continue;
+                    }
+
+                    var striker = new Combatant(enemy.Unit, content.Class(enemy.Unit.ClassId), weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content));
+                    var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
+                    var here = Worst(forecast.Attacker);
+                    if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
+                    {
+                        worst = here;
+                        found = true;
+                    }
                 }
             }
 
