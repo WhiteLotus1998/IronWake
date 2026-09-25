@@ -59,7 +59,10 @@ deliverable".
 Start by reading docs/STATE.md, docs/DIALOGUE.md, docs/DESIGN.md. Then
 read the Design Table issue. If Chat has posted since your last reply,
 reply first, signed "— Code", and update docs/DIALOGUE.md if anything
-was agreed. Then pick the highest-priority open issue labeled `ready`
+was agreed. Before taking an issue: if any open issue took
+`in-progress` less than an hour ago, another Builder (a chained run,
+or the previous slot) is on it right now; stop here without taking
+one. Otherwise pick the highest-priority open issue labeled `ready`
 that is not `blocked` or `in-progress` (priority: `bug`, then lowest
 phase, then lowest number) and run the session protocol on it: review
 against the design and the code, comment findings, build on a branch
@@ -183,4 +186,4 @@ open PRs; direction is yours, code is Code's.
 
 ## 6. The Builder chain (`.github/workflows/builder-chain.yml`)
 
-When a Builder PR merges, the workflow fires the next Builder run, so the Builder runs back to back instead of on the clock. In a chained run the Builder does exactly one issue and exits (the wake text says so), which is what keeps two runs from ever overlapping; the hourly cron slots stay as the backstop. The chain runs only while the repo variable `IRONWAKE_CHAIN` is `on` and the clock is before `IRONWAKE_CHAIN_UNTIL` (UTC), and never when there is no ready, unblocked issue or an issue labeled `fork` is open. Secrets: `IRONWAKE_BUILDER_URL` and `IRONWAKE_BUILDER_TOKEN`. Start it with `gh variable set IRONWAKE_CHAIN --body on`, set the deadline, and fire one run by hand (or `gh workflow run builder-chain.yml`); it stops itself. Lotus asked for it on 2026-09-25: let the process cook, not pass by pass.
+When a Builder PR (an `issue/` or `claude/issue-` branch) merges, the workflow fires the next Builder run, so the Builder runs back to back instead of on the clock. In a chained run the Builder does exactly one issue and exits (the wake text says so), which keeps chained runs from overlapping each other; the hourly cron slots stay as the backstop. Chain against cron is guarded from both sides, and the two guards live in different places (#154). The workflow will not fire while any open issue other than the merged branch's own took `in-progress` less than an hour ago, since a run's budget is about 50 minutes and a label that young means a Builder may be alive on it; a dead run's stale label delays the chain by at most an hour, which the workflow logs. A cron slot landing on a chained run is stopped only by the Builder itself: section 2's prompt carries the same rule, stop without taking an issue if any open issue took `in-progress` under an hour ago, and that line protects nothing until Lotus pastes it into the stored prompt, so until then the `in-progress` label is the only thing between a chained run and a slot, and both can read the queue before either has labeled. The chain runs only while the repo variable `IRONWAKE_CHAIN` is `on` and the clock is before `IRONWAKE_CHAIN_UNTIL` (UTC), and never when there is no ready, unblocked issue (a count that includes every phase-3 issue, so in practice the deadline is the stop) or an issue labeled `fork` is open. Secrets: `IRONWAKE_BUILDER_URL` and `IRONWAKE_BUILDER_TOKEN`. Start it with `gh variable set IRONWAKE_CHAIN --body on`, set the deadline, and fire one run by hand (or `gh workflow run builder-chain.yml`); it stops itself. Lotus asked for it on 2026-09-25: let the process cook, not pass by pass.
