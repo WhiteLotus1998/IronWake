@@ -1,0 +1,270 @@
+# issue 158, hit-band table: dotnet run --project src/Ironwake.Sim -- --hitband --all --seeds 200, Debug, 2026-09-25, branch experiment/hit-band at the commit that adds this file.
+# Buckets are raw hit chance, ten wide, from the forecast of every attack before the resolver applied it; a striking side counts once per combat.
+hitband: 3 maps from /home/user/IronWake/content, 200 seeds per cell
+hitband: old_mill_road, main, two-roll average
+hitband: old_mill_road, main, two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 41 70-79 0 80-89 790 90-99 528 100 380, strikes 1739, doubles 50 %
+hitband: old_mill_road, main, two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 0 70-79 552 80-89 1137 90-99 0 100 0, strikes 1689, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 194/200 (97 %), winning turn median 8 p90 9 limit 12, losses 0 timeout 6 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.700: ok
+  wren: drop 0.700 se 0.060 own [atk 228 dmg 9229 heal 0 abs 785] rest baseline [atk 760 dmg 12004 heal 0 abs 328] rest benched [atk 425 dmg 17748 heal 0 abs 1548] benched losses 141 timeout 5 captain 0 protected, refused kill p50 0.9999 over 141
+  captain captain: baseline [atk 760 dmg 12004 heal 0 abs 328] never benched, not judged
+hitband: old_mill_road, main, one roll
+hitband: old_mill_road, main, one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 27 70-79 0 80-89 827 90-99 604 100 380, strikes 1838, doubles 48 %
+hitband: old_mill_road, main, one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 2 60-69 0 70-79 528 80-89 1231 90-99 0 100 0, strikes 1761, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 192/200 (96 %), winning turn median 7 p90 10 limit 12, losses 2 timeout 6 captain 0 protected, quiet tail 1.0, refused kill p50 0.8300 over 2, one roll: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.360: ok
+  wren: drop 0.360 se 0.045 own [atk 288 dmg 9498 heal 0 abs 794] rest baseline [atk 751 dmg 11711 heal 0 abs 383] rest benched [atk 478 dmg 19423 heal 0 abs 1539] benched losses 74 timeout 6 captain 0 protected, refused kill p50 0.9999 over 74
+  captain captain: baseline [atk 751 dmg 11711 heal 0 abs 383] never benched, not judged
+hitband: old_mill_road, arm 1 (full Str), two-roll average
+hitband: old_mill_road, arm 1 (full Str), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 324 70-79 54 80-89 872 90-99 985 100 0, strikes 2235, doubles 20 %
+hitband: old_mill_road, arm 1 (full Str), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 3 50-59 54 60-69 231 70-79 1125 80-89 628 90-99 0 100 0, strikes 2041, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 158/200 (79 %), winning turn median 10 p90 11 limit 12, losses 33 timeout 9 captain 0 protected, quiet tail 2.5, refused kill p50 0.9934 over 33, two-roll average: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.590: ok
+  wren: drop 0.590 se 0.057 own [atk 229 dmg 7881 heal 0 abs 794] rest baseline [atk 760 dmg 13576 heal 0 abs 673] rest benched [atk 358 dmg 15561 heal 0 abs 1795] benched losses 109 timeout 51 captain 0 protected, refused kill p50 0.9934 over 109
+  captain captain: baseline [atk 760 dmg 13576 heal 0 abs 673] never benched, not judged
+hitband: old_mill_road, arm 1 (full Str), one roll
+hitband: old_mill_road, arm 1 (full Str), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 177 70-79 31 80-89 924 90-99 1123 100 0, strikes 2255, doubles 21 %
+hitband: old_mill_road, arm 1 (full Str), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 43 50-59 33 60-69 232 70-79 1069 80-89 707 90-99 0 100 0, strikes 2084, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 169/200 (84 %), winning turn median 10 p90 12 limit 12, losses 20 timeout 11 captain 0 protected, quiet tail 1.4, refused kill p50 0.9400 over 20, one roll: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.500: ok
+  wren: drop 0.500 se 0.055 own [atk 275 dmg 7808 heal 0 abs 842] rest baseline [atk 758 dmg 13483 heal 0 abs 670] rest benched [atk 473 dmg 16688 heal 0 abs 1836] benched losses 98 timeout 33 captain 0 protected, refused kill p50 0.9400 over 98
+  captain captain: baseline [atk 758 dmg 13483 heal 0 abs 670] never benched, not judged
+hitband: old_mill_road, arm 2 (full Str, speed twice), two-roll average
+hitband: old_mill_road, arm 2 (full Str, speed twice), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 246 60-69 52 70-79 892 80-89 604 90-99 444 100 0, strikes 2238, doubles 20 %
+hitband: old_mill_road, arm 2 (full Str, speed twice), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 19 50-59 57 60-69 675 70-79 1298 80-89 0 90-99 0 100 0, strikes 2049, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 159/200 (80 %), winning turn median 9 p90 11 limit 12, losses 29 timeout 12 captain 0 protected, quiet tail 2.2, refused kill p50 0.9769 over 29, two-roll average: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.445: ok
+  wren: drop 0.445 se 0.054 own [atk 260 dmg 8117 heal 0 abs 818] rest baseline [atk 752 dmg 13245 heal 0 abs 654] rest benched [atk 449 dmg 17230 heal 0 abs 1785] benched losses 101 timeout 29 captain 0 protected, refused kill p50 0.9769 over 101
+  captain captain: baseline [atk 752 dmg 13245 heal 0 abs 654] never benched, not judged
+hitband: old_mill_road, arm 2 (full Str, speed twice), one roll
+hitband: old_mill_road, arm 2 (full Str, speed twice), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 156 60-69 39 70-79 938 80-89 729 90-99 468 100 0, strikes 2330, doubles 20 %
+hitband: old_mill_road, arm 2 (full Str, speed twice), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 48 50-59 52 60-69 716 70-79 1361 80-89 0 90-99 0 100 0, strikes 2177, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 167/200 (83 %), winning turn median 9 p90 11 limit 12, losses 27 timeout 6 captain 0 protected, quiet tail 1.2, refused kill p50 0.8900 over 27, one roll: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.475: ok
+  wren: drop 0.475 se 0.054 own [atk 304 dmg 7705 heal 0 abs 870] rest baseline [atk 763 dmg 13479 heal 0 abs 724] rest benched [atk 501 dmg 16865 heal 0 abs 1885] benched losses 97 timeout 31 captain 0 protected, refused kill p50 0.8900 over 97
+  captain captain: baseline [atk 763 dmg 13479 heal 0 abs 724] never benched, not judged
+hitband: old_mill_road, arm 3 (iron hit -15), two-roll average
+hitband: old_mill_road, arm 3 (iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 38 60-69 0 70-79 834 80-89 1017 90-99 0 100 0, strikes 1889, doubles 47 %
+hitband: old_mill_road, arm 3 (iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 4 40-49 7 50-59 42 60-69 906 70-79 265 80-89 589 90-99 0 100 0, strikes 1813, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 187/200 (94 %), winning turn median 8 p90 10 limit 12, losses 4 timeout 9 captain 0 protected, quiet tail 0.2, refused kill p50 0.4861 over 4, two-roll average: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.405: ok
+  wren: drop 0.405 se 0.049 own [atk 301 dmg 9327 heal 0 abs 790] rest baseline [atk 746 dmg 11779 heal 0 abs 440] rest benched [atk 512 dmg 19252 heal 0 abs 1573] benched losses 90 timeout 4 captain 0 protected, refused kill p50 0.9975 over 90
+  captain captain: baseline [atk 746 dmg 11779 heal 0 abs 440] never benched, not judged
+hitband: old_mill_road, arm 3 (iron hit -15), one roll
+hitband: old_mill_road, arm 3 (iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 55 60-69 3 70-79 829 80-89 1189 90-99 0 100 0, strikes 2076, doubles 45 %
+hitband: old_mill_road, arm 3 (iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 16 40-49 18 50-59 42 60-69 945 70-79 331 80-89 663 90-99 0 100 0, strikes 2015, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 167/200 (83 %), winning turn median 8 p90 11 limit 12, losses 27 timeout 6 captain 0 protected, quiet tail 0.6, refused kill p50 0.8300 over 27, one roll: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.355: ok
+  wren: drop 0.355 se 0.047 own [atk 368 dmg 8865 heal 0 abs 827] rest baseline [atk 776 dmg 12165 heal 0 abs 578] rest benched [atk 575 dmg 18696 heal 0 abs 1661] benched losses 94 timeout 10 captain 0 protected, refused kill p50 0.9744 over 94
+  captain captain: baseline [atk 776 dmg 12165 heal 0 abs 578] never benched, not judged
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), two-roll average
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 130 50-59 29 60-69 1038 70-79 1212 80-89 0 90-99 0 100 0, strikes 2409, doubles 19 %
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 71 30-39 36 40-49 452 50-59 761 60-69 405 70-79 531 80-89 0 90-99 0 100 0, strikes 2256, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 165/200 (82 %), winning turn median 9 p90 11 limit 12, losses 26 timeout 9 captain 0 protected, quiet tail 0.9, refused kill p50 0.8674 over 26, two-roll average: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.370: ok
+  wren: drop 0.370 se 0.050 own [atk 353 dmg 8038 heal 0 abs 914] rest baseline [atk 803 dmg 13291 heal 0 abs 719] rest benched [atk 602 dmg 17908 heal 0 abs 1971] benched losses 88 timeout 21 captain 0 protected, refused kill p50 0.8674 over 88
+  captain captain: baseline [atk 803 dmg 13291 heal 0 abs 719] never benched, not judged
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), one roll
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 114 50-59 17 60-69 983 70-79 1482 80-89 0 90-99 0 100 0, strikes 2596, doubles 20 %
+hitband: old_mill_road, arm 4 (arm 2 + iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 112 30-39 32 40-49 437 50-59 859 60-69 443 70-79 577 80-89 0 90-99 0 100 0, strikes 2460, doubles 0 %
+gate 1 beatable: old_mill_road, heuristic wins 153/200 (77 %), winning turn median 10 p90 12 limit 12, losses 41 timeout 6 captain 0 protected, quiet tail 0.6, refused kill p50 0.7400 over 41, one roll: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.505: ok
+  wren: drop 0.505 se 0.055 own [atk 402 dmg 7804 heal 0 abs 978] rest baseline [atk 838 dmg 12903 heal 0 abs 807] rest benched [atk 643 dmg 16528 heal 0 abs 2128] benched losses 125 timeout 23 captain 0 protected, refused kill p50 0.7400 over 125
+  captain captain: baseline [atk 838 dmg 12903 heal 0 abs 807] never benched, not judged
+hitband: saltmarsh_ford, main, two-roll average
+hitband: saltmarsh_ford, main, two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 17 70-79 1117 80-89 215 90-99 1389 100 200, strikes 2938, doubles 53 %
+hitband: saltmarsh_ford, main, two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 358 70-79 235 80-89 1001 90-99 593 100 0, strikes 2187, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 171/200 (85 %), winning turn median 8 p90 12 limit 18, losses 19 timeout 10 captain 0 protected, quiet tail 9.7, refused kill p50 0.0089 over 19, two-roll average: ok
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.605: ok
+  ottilie: drop 0.700 se 0.061 own [atk 1175 dmg 10740 heal 0 abs 186] rest baseline [atk 959 dmg 21795 heal 0 abs 1367] rest benched [atk 988 dmg 27757 heal 0 abs 1895] benched losses 161 timeout 8 captain 0 protected, refused kill p50 0.9994 over 161
+  teodor: drop 0.605 se 0.057 own [atk 220 dmg 6201 heal 0 abs 754] rest baseline [atk 1914 dmg 26334 heal 0 abs 799] rest benched [atk 1661 dmg 28430 heal 0 abs 1289] benched losses 150 timeout 0 captain 0 protected, refused kill p50 0.9994 over 150
+  wren: drop 0.605 se 0.061 own [atk 391 dmg 4945 heal 0 abs 120] rest baseline [atk 1743 dmg 27590 heal 0 abs 1433] rest benched [atk 1298 dmg 27768 heal 0 abs 2182] benched losses 143 timeout 7 captain 0 protected, refused kill p50 0.9999 over 143
+  captain captain: baseline [atk 348 dmg 10649 heal 0 abs 493] never benched, not judged
+hitband: saltmarsh_ford, main, one roll
+hitband: saltmarsh_ford, main, one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 60 70-79 1369 80-89 238 90-99 1441 100 200, strikes 3308, doubles 58 %
+hitband: saltmarsh_ford, main, one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 295 70-79 288 80-89 1081 90-99 561 100 0, strikes 2225, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 126/200 (63 %), winning turn median 9 p90 16 limit 18, losses 56 timeout 18 captain 0 protected, quiet tail 5.7, refused kill p50 0.1940 over 56, one roll: ok
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.385: ok
+  ottilie: drop 0.490 se 0.051 own [atk 1514 dmg 11885 heal 0 abs 147] rest baseline [atk 960 dmg 20653 heal 0 abs 1369] rest benched [atk 1029 dmg 26591 heal 0 abs 1888] benched losses 154 timeout 18 captain 0 protected, refused kill p50 0.9800 over 154
+  teodor: drop 0.385 se 0.050 own [atk 275 dmg 5717 heal 0 abs 698] rest baseline [atk 2199 dmg 26821 heal 0 abs 818] rest benched [atk 2037 dmg 30034 heal 0 abs 1363] benched losses 147 timeout 4 captain 0 protected, refused kill p50 0.9800 over 147
+  wren: drop 0.370 se 0.052 own [atk 377 dmg 4973 heal 0 abs 276] rest baseline [atk 2097 dmg 27565 heal 0 abs 1240] rest benched [atk 1639 dmg 28941 heal 0 abs 2237] benched losses 139 timeout 9 captain 0 protected, refused kill p50 0.9916 over 139
+  captain captain: baseline [atk 308 dmg 9963 heal 0 abs 395] never benched, not judged
+hitband: saltmarsh_ford, arm 1 (full Str), two-roll average
+hitband: saltmarsh_ford, arm 1 (full Str), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 4 60-69 2352 70-79 9 80-89 817 90-99 1216 100 0, strikes 4398, doubles 23 %
+hitband: saltmarsh_ford, arm 1 (full Str), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 9 60-69 345 70-79 259 80-89 1746 90-99 0 100 0, strikes 2359, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 44/200 (22 %), winning turn median 11 p90 17 limit 18, losses 145 timeout 11 captain 0 protected, quiet tail 0.9, refused kill p50 0.9934 over 145, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.095: ok
+  ottilie: drop 0.095 se 0.036 own [atk 2434 dmg 13119 heal 0 abs 166] rest baseline [atk 986 dmg 20936 heal 0 abs 1554] rest benched [atk 1173 dmg 26737 heal 0 abs 1963] benched losses 167 timeout 8 captain 0 protected, refused kill p50 0.9934 over 167
+  teodor: drop 0.165 se 0.031 own [atk 198 dmg 6168 heal 0 abs 799] rest baseline [atk 3222 dmg 27887 heal 0 abs 921] rest benched [atk 1548 dmg 25784 heal 0 abs 1710] benched losses 183 timeout 6 captain 0 protected, refused kill p50 0.9880 over 183
+  wren: drop 0.095 se 0.034 own [atk 425 dmg 4887 heal 0 abs 398] rest baseline [atk 2995 dmg 29168 heal 0 abs 1322] rest benched [atk 1506 dmg 27073 heal 0 abs 2280] benched losses 162 timeout 13 captain 0 protected, refused kill p50 0.9934 over 162
+  captain captain: baseline [atk 363 dmg 9881 heal 0 abs 357] never benched, not judged
+hitband: saltmarsh_ford, arm 1 (full Str), one roll
+hitband: saltmarsh_ford, arm 1 (full Str), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 31 60-69 1903 70-79 10 80-89 884 90-99 1381 100 0, strikes 4209, doubles 21 %
+hitband: saltmarsh_ford, arm 1 (full Str), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 16 60-69 442 70-79 358 80-89 1827 90-99 0 100 0, strikes 2643, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 45/200 (23 %), winning turn median 8 p90 16 limit 18, losses 141 timeout 14 captain 0 protected, quiet tail 2.3, refused kill p50 0.9400 over 141, one roll: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.145: ok
+  ottilie: drop 0.145 se 0.035 own [atk 2053 dmg 10355 heal 0 abs 174] rest baseline [atk 1067 dmg 20664 heal 0 abs 1691] rest benched [atk 1198 dmg 26089 heal 0 abs 2225] benched losses 169 timeout 15 captain 0 protected, refused kill p50 0.9400 over 169
+  teodor: drop 0.170 se 0.034 own [atk 245 dmg 5827 heal 0 abs 817] rest baseline [atk 2875 dmg 25192 heal 0 abs 1048] rest benched [atk 2155 dmg 26836 heal 0 abs 1748] benched losses 178 timeout 11 captain 0 protected, refused kill p50 0.9400 over 178
+  wren: drop 0.120 se 0.037 own [atk 509 dmg 5374 heal 0 abs 422] rest baseline [atk 2611 dmg 25645 heal 0 abs 1443] rest benched [atk 1710 dmg 26483 heal 0 abs 2544] benched losses 153 timeout 26 captain 0 protected, refused kill p50 0.9400 over 153
+  captain captain: baseline [atk 313 dmg 9463 heal 0 abs 452] never benched, not judged
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), two-roll average
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 1305 60-69 902 70-79 279 80-89 1604 90-99 205 100 0, strikes 4295, doubles 22 %
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 4 50-59 373 60-69 222 70-79 1201 80-89 648 90-99 0 100 0, strikes 2448, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 52/200 (26 %), winning turn median 8 p90 16 limit 18, losses 131 timeout 17 captain 0 protected, quiet tail 0.9, refused kill p50 0.9769 over 131, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.090: ok
+  ottilie: drop 0.080 se 0.039 own [atk 2257 dmg 11755 heal 0 abs 148] rest baseline [atk 1014 dmg 20883 heal 0 abs 1610] rest benched [atk 1201 dmg 26810 heal 0 abs 2075] benched losses 156 timeout 8 captain 0 protected, refused kill p50 0.9769 over 156
+  teodor: drop 0.155 se 0.036 own [atk 213 dmg 6016 heal 0 abs 809] rest baseline [atk 3058 dmg 26622 heal 0 abs 949] rest benched [atk 1904 dmg 27079 heal 0 abs 1709] benched losses 172 timeout 7 captain 0 protected, refused kill p50 0.9769 over 172
+  wren: drop 0.090 se 0.037 own [atk 439 dmg 4924 heal 0 abs 409] rest baseline [atk 2832 dmg 27714 heal 0 abs 1349] rest benched [atk 1711 dmg 27532 heal 0 abs 2405] benched losses 154 timeout 12 captain 0 protected, refused kill p50 0.9769 over 154
+  captain captain: baseline [atk 362 dmg 9943 heal 0 abs 392] never benched, not judged
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), one roll
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 1156 60-69 816 70-79 345 80-89 1854 90-99 230 100 0, strikes 4401, doubles 21 %
+hitband: saltmarsh_ford, arm 2 (full Str, speed twice), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 21 50-59 459 60-69 291 70-79 1374 80-89 720 90-99 0 100 0, strikes 2865, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 45/200 (23 %), winning turn median 8 p90 14 limit 18, losses 143 timeout 12 captain 0 protected, quiet tail 2.1, refused kill p50 0.8900 over 143, one roll: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.100: ok
+  ottilie: drop 0.105 se 0.036 own [atk 2097 dmg 10379 heal 0 abs 215] rest baseline [atk 1161 dmg 20786 heal 0 abs 1768] rest benched [atk 1290 dmg 25934 heal 0 abs 2358] benched losses 153 timeout 23 captain 0 protected, refused kill p50 0.8900 over 153
+  teodor: drop 0.100 se 0.035 own [atk 278 dmg 5795 heal 0 abs 827] rest baseline [atk 2980 dmg 25370 heal 0 abs 1156] rest benched [atk 2341 dmg 27591 heal 0 abs 1819] benched losses 160 timeout 15 captain 0 protected, refused kill p50 0.8900 over 160
+  wren: drop 0.095 se 0.036 own [atk 569 dmg 5699 heal 0 abs 439] rest baseline [atk 2689 dmg 25466 heal 0 abs 1544] rest benched [atk 1899 dmg 26925 heal 0 abs 2608] benched losses 150 timeout 24 captain 0 protected, refused kill p50 0.8900 over 150
+  captain captain: baseline [atk 314 dmg 9292 heal 0 abs 502] never benched, not judged
+hitband: saltmarsh_ford, arm 3 (iron hit -15), two-roll average
+hitband: saltmarsh_ford, arm 3 (iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 1794 60-69 14 70-79 944 80-89 999 90-99 0 100 0, strikes 3751, doubles 62 %
+hitband: saltmarsh_ford, arm 3 (iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 9 60-69 826 70-79 1445 80-89 0 90-99 0 100 0, strikes 2280, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 78/200 (39 %), winning turn median 8 p90 16 limit 18, losses 108 timeout 14 captain 0 protected, quiet tail 3.1, refused kill p50 0.9070 over 108, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.245: ok
+  ottilie: drop 0.345 se 0.043 own [atk 1884 dmg 12877 heal 0 abs 137] rest baseline [atk 1026 dmg 20611 heal 0 abs 1391] rest benched [atk 1069 dmg 25557 heal 0 abs 1881] benched losses 173 timeout 18 captain 0 protected, refused kill p50 0.9439 over 173
+  teodor: drop 0.200 se 0.042 own [atk 297 dmg 5931 heal 0 abs 703] rest baseline [atk 2613 dmg 27557 heal 0 abs 825] rest benched [atk 2086 dmg 29390 heal 0 abs 1390] benched losses 159 timeout 3 captain 0 protected, refused kill p50 0.9439 over 159
+  wren: drop 0.245 se 0.043 own [atk 415 dmg 5058 heal 0 abs 314] rest baseline [atk 2495 dmg 28430 heal 0 abs 1214] rest benched [atk 1912 dmg 29229 heal 0 abs 2282] benched losses 162 timeout 9 captain 0 protected, refused kill p50 0.9599 over 162
+  captain captain: baseline [atk 314 dmg 9622 heal 0 abs 374] never benched, not judged
+hitband: saltmarsh_ford, arm 3 (iron hit -15), one roll
+hitband: saltmarsh_ford, arm 3 (iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 1830 60-69 32 70-79 1020 80-89 1181 90-99 0 100 0, strikes 4063, doubles 61 %
+hitband: saltmarsh_ford, arm 3 (iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 20 50-59 20 60-69 930 70-79 1617 80-89 0 90-99 0 100 0, strikes 2587, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 63/200 (32 %), winning turn median 8 p90 15 limit 18, losses 128 timeout 9 captain 0 protected, quiet tail 2.7, refused kill p50 0.8100 over 128, one roll: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.180: ok
+  ottilie: drop 0.230 se 0.040 own [atk 1975 dmg 12374 heal 0 abs 210] rest baseline [atk 1168 dmg 20548 heal 0 abs 1518] rest benched [atk 1237 dmg 26108 heal 0 abs 2076] benched losses 169 timeout 14 captain 0 protected, refused kill p50 0.8300 over 169
+  teodor: drop 0.175 se 0.038 own [atk 360 dmg 5547 heal 0 abs 699] rest baseline [atk 2783 dmg 27375 heal 0 abs 1029] rest benched [atk 2378 dmg 29548 heal 0 abs 1619] benched losses 161 timeout 11 captain 0 protected, refused kill p50 0.8319 over 161
+  wren: drop 0.180 se 0.039 own [atk 484 dmg 5543 heal 0 abs 400] rest baseline [atk 2659 dmg 27379 heal 0 abs 1328] rest benched [atk 2104 dmg 28191 heal 0 abs 2442] benched losses 151 timeout 22 captain 0 protected, refused kill p50 0.9744 over 151
+  captain captain: baseline [atk 324 dmg 9458 heal 0 abs 419] never benched, not judged
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), two-roll average
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 54 40-49 2303 50-59 21 60-69 939 70-79 1474 80-89 0 90-99 0 100 0, strikes 4791, doubles 21 %
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 60 40-49 274 50-59 1095 60-69 1569 70-79 0 80-89 0 90-99 0 100 0, strikes 2998, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 18/200 (9 %), winning turn median 9 p90 15 limit 18, losses 170 timeout 12 captain 0 protected, quiet tail 1.7, refused kill p50 0.8230 over 170, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.035: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.035, se 0.022); rows are data, no recruit is judged
+  ottilie: drop 0.035 se 0.024 own [atk 2335 dmg 8560 heal 0 abs 234] rest baseline [atk 1266 dmg 21078 heal 0 abs 1820] rest benched [atk 1405 dmg 25999 heal 0 abs 2333] benched losses 179 timeout 10 captain 0 protected, refused kill p50 0.8674 over 179
+  teodor: drop 0.035 se 0.022 own [atk 293 dmg 5644 heal 0 abs 838] rest baseline [atk 3308 dmg 23994 heal 0 abs 1216] rest benched [atk 2615 dmg 26974 heal 0 abs 1811] benched losses 183 timeout 6 captain 0 protected, refused kill p50 0.8674 over 183
+  wren: drop 0.045 se 0.023 own [atk 607 dmg 5396 heal 0 abs 430] rest baseline [atk 2994 dmg 24242 heal 0 abs 1624] rest benched [atk 2473 dmg 27067 heal 0 abs 2586] benched losses 183 timeout 8 captain 0 protected, refused kill p50 0.8674 over 183
+  captain captain: baseline [atk 366 dmg 10038 heal 0 abs 552] never benched, not judged
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), one roll
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 79 40-49 1823 50-59 87 60-69 1081 70-79 1869 80-89 0 90-99 0 100 0, strikes 4939, doubles 19 %
+hitband: saltmarsh_ford, arm 4 (arm 2 + iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 192 40-49 385 50-59 1141 60-69 1826 70-79 0 80-89 0 90-99 0 100 0, strikes 3544, doubles 0 %
+gate 1 beatable: saltmarsh_ford, heuristic wins 25/200 (12 %), winning turn median 10 p90 16 limit 18, losses 167 timeout 8 captain 0 protected, quiet tail 2.5, refused kill p50 0.7400 over 167, one roll: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.075: ok
+  ottilie: drop 0.075 se 0.026 own [atk 2149 dmg 8398 heal 0 abs 340] rest baseline [atk 1461 dmg 20877 heal 0 abs 2090] rest benched [atk 1520 dmg 25289 heal 0 abs 2734] benched losses 166 timeout 24 captain 0 protected, refused kill p50 0.7400 over 166
+  teodor: drop 0.050 se 0.028 own [atk 362 dmg 5639 heal 0 abs 894] rest baseline [atk 3248 dmg 23636 heal 0 abs 1536] rest benched [atk 2800 dmg 26562 heal 0 abs 2257] benched losses 171 timeout 14 captain 0 protected, refused kill p50 0.7400 over 171
+  wren: drop 0.075 se 0.029 own [atk 672 dmg 5814 heal 0 abs 530] rest baseline [atk 2938 dmg 23461 heal 0 abs 1900] rest benched [atk 2414 dmg 26041 heal 0 abs 2958] benched losses 164 timeout 26 captain 0 protected, refused kill p50 0.7400 over 164
+  captain captain: baseline [atk 427 dmg 9424 heal 0 abs 666] never benched, not judged
+hitband: the_tollgate, main, two-roll average
+hitband: the_tollgate, main, two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 0 70-79 0 80-89 9 90-99 2177 100 114, strikes 2300, doubles 38 %
+hitband: the_tollgate, main, two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 114 70-79 224 80-89 1319 90-99 571 100 0, strikes 2228, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 199/200 (99 %), winning turn median 8 p90 8 limit 16, losses 1 timeout 0 captain 0 protected, quiet tail 9.0, refused kill p50 0.9998 over 1, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop -0.005: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop -0.005, se 0.005); rows are data, no recruit is judged
+  ottilie: drop -0.005 se 0.005 own [atk 318 dmg 2899 heal 0 abs 408] rest baseline [atk 1632 dmg 29062 heal 0 abs 939] rest benched [atk 1767 dmg 32051 heal 0 abs 1206] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  pell: drop 0.440 se 0.047 own [atk 710 dmg 13833 heal 0 abs 14] rest baseline [atk 1240 dmg 18128 heal 0 abs 1333] rest benched [atk 1984 dmg 29794 heal 0 abs 1348] benched losses 89 timeout 0 captain 0 protected, refused kill p50 0.9999 over 89
+  teodor: drop -0.005 se 0.005 own [atk 233 dmg 2493 heal 0 abs 398] rest baseline [atk 1717 dmg 29468 heal 0 abs 949] rest benched [atk 1762 dmg 31487 heal 0 abs 1044] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  wren: drop -0.005 se 0.005 own [atk 91 dmg 962 heal 0 abs 209] rest baseline [atk 1859 dmg 30999 heal 0 abs 1138] rest benched [atk 1795 dmg 30314 heal 0 abs 1053] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  captain captain: baseline [atk 598 dmg 11774 heal 0 abs 318] never benched, not judged
+hitband: the_tollgate, main, one roll
+hitband: the_tollgate, main, one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 0 70-79 0 80-89 47 90-99 2206 100 187, strikes 2440, doubles 38 %
+hitband: the_tollgate, main, one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 140 70-79 255 80-89 1324 90-99 538 100 0, strikes 2257, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 199/200 (99 %), winning turn median 8 p90 8 limit 16, losses 1 timeout 0 captain 0 protected, quiet tail 9.0, refused kill p50 0.6314 over 1, one roll: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.015: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.015, se 0.013); rows are data, no recruit is judged
+  ottilie: drop -0.005 se 0.005 own [atk 475 dmg 4119 heal 0 abs 398] rest baseline [atk 1648 dmg 26578 heal 0 abs 910] rest benched [atk 1809 dmg 31542 heal 0 abs 1172] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  pell: drop 0.170 se 0.030 own [atk 606 dmg 11335 heal 0 abs 26] rest baseline [atk 1517 dmg 19362 heal 0 abs 1282] rest benched [atk 2071 dmg 29532 heal 0 abs 1305] benched losses 35 timeout 0 captain 0 protected, refused kill p50 0.9999 over 35
+  teodor: drop 0.025 se 0.013 own [atk 316 dmg 3645 heal 0 abs 401] rest baseline [atk 1807 dmg 27052 heal 0 abs 907] rest benched [atk 1840 dmg 30811 heal 0 abs 1091] benched losses 6 timeout 0 captain 0 protected, refused kill p50 0.9999 over 6
+  wren: drop 0.005 se 0.009 own [atk 136 dmg 1565 heal 0 abs 264] rest baseline [atk 1987 dmg 29132 heal 0 abs 1044] rest benched [atk 1902 dmg 29986 heal 0 abs 1127] benched losses 2 timeout 0 captain 0 protected, refused kill p50 0.9808 over 2
+  captain captain: baseline [atk 590 dmg 10033 heal 0 abs 219] never benched, not judged
+hitband: the_tollgate, arm 1 (full Str), two-roll average
+hitband: the_tollgate, arm 1 (full Str), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 2 70-79 7 80-89 639 90-99 2142 100 0, strikes 2790, doubles 4 %
+hitband: the_tollgate, arm 1 (full Str), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 148 70-79 741 80-89 1627 90-99 4 100 0, strikes 2520, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 198/200 (99 %), winning turn median 9 p90 9 limit 16, losses 2 timeout 0 captain 0 protected, quiet tail 8.5, refused kill p50 0.9963 over 2, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.005: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.005, se 0.012); rows are data, no recruit is judged
+  ottilie: drop 0.010 se 0.012 own [atk 373 dmg 3057 heal 0 abs 398] rest baseline [atk 2005 dmg 24413 heal 0 abs 1117] rest benched [atk 1861 dmg 28327 heal 0 abs 1413] benched losses 4 timeout 0 captain 0 protected, refused kill p50 0.9999 over 4
+  pell: drop 0.645 se 0.057 own [atk 751 dmg 9835 heal 0 abs 124] rest baseline [atk 1627 dmg 17635 heal 0 abs 1391] rest benched [atk 2183 dmg 27089 heal 0 abs 1557] benched losses 131 timeout 0 captain 0 protected, refused kill p50 0.9934 over 131
+  teodor: drop 0.000 se 0.010 own [atk 443 dmg 5094 heal 0 abs 393] rest baseline [atk 1935 dmg 22376 heal 0 abs 1122] rest benched [atk 2548 dmg 29756 heal 0 abs 1228] benched losses 2 timeout 0 captain 0 protected, refused kill p50 0.9999 over 2
+  wren: drop 0.000 se 0.010 own [atk 225 dmg 2641 heal 0 abs 413] rest baseline [atk 2153 dmg 24829 heal 0 abs 1102] rest benched [atk 2283 dmg 28997 heal 0 abs 1075] benched losses 2 timeout 0 captain 0 protected, refused kill p50 0.9934 over 2
+  captain captain: baseline [atk 586 dmg 6843 heal 0 abs 187] never benched, not judged
+hitband: the_tollgate, arm 1 (full Str), one roll
+hitband: the_tollgate, arm 1 (full Str), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 16 70-79 76 80-89 722 90-99 2299 100 1, strikes 3114, doubles 5 %
+hitband: the_tollgate, arm 1 (full Str), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 242 70-79 801 80-89 1495 90-99 42 100 0, strikes 2580, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 194/200 (97 %), winning turn median 8 p90 9 limit 16, losses 6 timeout 0 captain 0 protected, quiet tail 7.7, refused kill p50 0.9400 over 6, one roll: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.025: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.025, se 0.021); rows are data, no recruit is judged
+  ottilie: drop 0.020 se 0.017 own [atk 551 dmg 3927 heal 0 abs 390] rest baseline [atk 2067 dmg 24954 heal 0 abs 1095] rest benched [atk 1998 dmg 29847 heal 0 abs 1501] benched losses 10 timeout 0 captain 0 protected, refused kill p50 0.9984 over 10
+  pell: drop 0.420 se 0.046 own [atk 724 dmg 9138 heal 0 abs 91] rest baseline [atk 1894 dmg 19743 heal 0 abs 1394] rest benched [atk 2266 dmg 26549 heal 0 abs 1668] benched losses 89 timeout 1 captain 0 protected, refused kill p50 0.9400 over 89
+  teodor: drop 0.015 se 0.019 own [atk 511 dmg 5755 heal 0 abs 375] rest baseline [atk 2107 dmg 23126 heal 0 abs 1110] rest benched [atk 2506 dmg 29222 heal 0 abs 1332] benched losses 9 timeout 0 captain 0 protected, refused kill p50 0.9853 over 9
+  wren: drop 0.030 se 0.021 own [atk 258 dmg 3185 heal 0 abs 409] rest baseline [atk 2360 dmg 25696 heal 0 abs 1076] rest benched [atk 2516 dmg 28806 heal 0 abs 1442] benched losses 12 timeout 0 captain 0 protected, refused kill p50 0.9400 over 12
+  captain captain: baseline [atk 574 dmg 6876 heal 0 abs 220] never benched, not judged
+hitband: the_tollgate, arm 2 (full Str, speed twice), two-roll average
+hitband: the_tollgate, arm 2 (full Str, speed twice), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 11 70-79 11 80-89 1907 90-99 949 100 0, strikes 2878, doubles 4 %
+hitband: the_tollgate, arm 2 (full Str, speed twice), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 115 60-69 363 70-79 1643 80-89 409 90-99 0 100 0, strikes 2530, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 199/200 (99 %), winning turn median 8 p90 9 limit 16, losses 1 timeout 0 captain 0 protected, quiet tail 8.0, refused kill p50 0.9769 over 1, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.007: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.007, se 0.011); rows are data, no recruit is judged
+  ottilie: drop 0.015 se 0.011 own [atk 431 dmg 3378 heal 0 abs 397] rest baseline [atk 2014 dmg 24757 heal 0 abs 1104] rest benched [atk 1870 dmg 28948 heal 0 abs 1438] benched losses 4 timeout 0 captain 0 protected, refused kill p50 0.9998 over 4
+  pell: drop 0.530 se 0.052 own [atk 724 dmg 9536 heal 0 abs 101] rest baseline [atk 1721 dmg 18599 heal 0 abs 1400] rest benched [atk 2233 dmg 27268 heal 0 abs 1597] benched losses 106 timeout 1 captain 0 protected, refused kill p50 0.9769 over 106
+  teodor: drop 0.000 se 0.007 own [atk 467 dmg 5396 heal 0 abs 398] rest baseline [atk 1978 dmg 22739 heal 0 abs 1103] rest benched [atk 2542 dmg 29816 heal 0 abs 1291] benched losses 1 timeout 0 captain 0 protected, refused kill p50 0.9998 over 1
+  wren: drop 0.000 se 0.007 own [atk 237 dmg 2988 heal 0 abs 426] rest baseline [atk 2208 dmg 25147 heal 0 abs 1075] rest benched [atk 2532 dmg 29596 heal 0 abs 1300] benched losses 1 timeout 0 captain 0 protected, refused kill p50 0.9769 over 1
+  captain captain: baseline [atk 586 dmg 6837 heal 0 abs 179] never benched, not judged
+hitband: the_tollgate, arm 2 (full Str, speed twice), one roll
+hitband: the_tollgate, arm 2 (full Str, speed twice), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 73 70-79 64 80-89 2174 90-99 967 100 1, strikes 3279, doubles 5 %
+hitband: the_tollgate, arm 2 (full Str, speed twice), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 132 60-69 466 70-79 1625 80-89 436 90-99 0 100 0, strikes 2659, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 197/200 (98 %), winning turn median 8 p90 9 limit 16, losses 3 timeout 0 captain 0 protected, quiet tail 5.0, refused kill p50 0.8900 over 3, one roll: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.037: ok
+  ottilie: drop 0.030 se 0.017 own [atk 583 dmg 3863 heal 0 abs 395] rest baseline [atk 2153 dmg 25254 heal 0 abs 1133] rest benched [atk 2073 dmg 29932 heal 0 abs 1539] benched losses 9 timeout 0 captain 0 protected, refused kill p50 0.9936 over 9
+  pell: drop 0.370 se 0.045 own [atk 734 dmg 9194 heal 0 abs 95] rest baseline [atk 2002 dmg 19923 heal 0 abs 1433] rest benched [atk 2340 dmg 26462 heal 0 abs 1749] benched losses 76 timeout 1 captain 0 protected, refused kill p50 0.8900 over 76
+  teodor: drop 0.030 se 0.016 own [atk 548 dmg 5889 heal 0 abs 375] rest baseline [atk 2188 dmg 23228 heal 0 abs 1153] rest benched [atk 2491 dmg 29054 heal 0 abs 1380] benched losses 9 timeout 0 captain 0 protected, refused kill p50 0.9000 over 9
+  wren: drop 0.045 se 0.018 own [atk 284 dmg 3677 heal 0 abs 440] rest baseline [atk 2452 dmg 25440 heal 0 abs 1088] rest benched [atk 2514 dmg 28767 heal 0 abs 1498] benched losses 12 timeout 0 captain 0 protected, refused kill p50 0.9390 over 12
+  captain captain: baseline [atk 587 dmg 6494 heal 0 abs 223] never benched, not judged
+hitband: the_tollgate, arm 3 (iron hit -15), two-roll average
+hitband: the_tollgate, arm 3 (iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 0 60-69 1 70-79 696 80-89 1104 90-99 649 100 0, strikes 2450, doubles 38 %
+hitband: the_tollgate, arm 3 (iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 19 60-69 587 70-79 1541 80-89 0 90-99 0 100 0, strikes 2147, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 200/200 (100 %), winning turn median 8 p90 8 limit 16, losses 0 timeout 0 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.013: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.013, se 0.010); rows are data, no recruit is judged
+  ottilie: drop 0.000 se 0.000 own [atk 485 dmg 4097 heal 0 abs 391] rest baseline [atk 1667 dmg 27316 heal 0 abs 908] rest benched [atk 1829 dmg 30725 heal 0 abs 1308] benched losses 0 timeout 0 captain 0 protected, refused kill -
+  pell: drop 0.260 se 0.036 own [atk 631 dmg 12445 heal 0 abs 18] rest baseline [atk 1521 dmg 18968 heal 0 abs 1281] rest benched [atk 2108 dmg 29366 heal 0 abs 1369] benched losses 50 timeout 2 captain 0 protected, refused kill p50 0.9975 over 50
+  teodor: drop 0.020 se 0.010 own [atk 338 dmg 4034 heal 0 abs 434] rest baseline [atk 1814 dmg 27379 heal 0 abs 865] rest benched [atk 1848 dmg 31243 heal 0 abs 1129] benched losses 4 timeout 0 captain 0 protected, refused kill p50 0.9975 over 4
+  wren: drop 0.005 se 0.005 own [atk 134 dmg 1322 heal 0 abs 247] rest baseline [atk 2018 dmg 30091 heal 0 abs 1052] rest benched [atk 1894 dmg 30313 heal 0 abs 1141] benched losses 1 timeout 0 captain 0 protected, refused kill p50 0.9928 over 1
+  captain captain: baseline [atk 564 dmg 9515 heal 0 abs 209] never benched, not judged
+hitband: the_tollgate, arm 3 (iron hit -15), one roll
+hitband: the_tollgate, arm 3 (iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 4 60-69 14 70-79 770 80-89 1309 90-99 641 100 1, strikes 2739, doubles 38 %
+hitband: the_tollgate, arm 3 (iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 0 50-59 47 60-69 627 70-79 1501 80-89 0 90-99 0 100 0, strikes 2175, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 200/200 (100 %), winning turn median 8 p90 8 limit 16, losses 0 timeout 0 captain 0 protected, quiet tail -, refused kill -, one roll: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.025: FAILED
+  ottilie: drop 0.000 se 0.000 own [atk 591 dmg 4546 heal 0 abs 376] rest baseline [atk 1810 dmg 25620 heal 0 abs 927] rest benched [atk 2015 dmg 30939 heal 0 abs 1377] benched losses 0 timeout 0 captain 0 protected, refused kill - DEAD WEIGHT
+  pell: drop 0.180 se 0.030 own [atk 607 dmg 11039 heal 0 abs 39] rest baseline [atk 1794 dmg 19127 heal 0 abs 1264] rest benched [atk 2276 dmg 28341 heal 0 abs 1535] benched losses 32 timeout 4 captain 0 protected, refused kill p50 0.9744 over 32
+  teodor: drop 0.020 se 0.010 own [atk 439 dmg 4743 heal 0 abs 427] rest baseline [atk 1962 dmg 25423 heal 0 abs 876] rest benched [atk 2016 dmg 30279 heal 0 abs 1257] benched losses 4 timeout 0 captain 0 protected, refused kill p50 0.9655 over 4
+  wren: drop 0.030 se 0.012 own [atk 211 dmg 2118 heal 0 abs 300] rest baseline [atk 2190 dmg 28048 heal 0 abs 1003] rest benched [atk 2073 dmg 29685 heal 0 abs 1282] benched losses 6 timeout 0 captain 0 protected, refused kill p50 0.9506 over 6
+  captain captain: baseline [atk 553 dmg 7720 heal 0 abs 161] never benched, not judged
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), two-roll average
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), two-roll average player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 14 50-59 41 60-69 724 70-79 1758 80-89 4 90-99 760 100 0, strikes 3301, doubles 6 %
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), two-roll average enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 4 40-49 59 50-59 1051 60-69 1515 70-79 47 80-89 0 90-99 0 100 0, strikes 2676, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 198/200 (99 %), winning turn median 8 p90 9 limit 16, losses 2 timeout 0 captain 0 protected, quiet tail 7.5, refused kill p50 0.8674 over 2, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.035: ok
+  ottilie: drop 0.005 se 0.011 own [atk 692 dmg 4382 heal 0 abs 414] rest baseline [atk 2084 dmg 24510 heal 0 abs 1122] rest benched [atk 2094 dmg 29948 heal 0 abs 1565] benched losses 3 timeout 0 captain 0 protected, refused kill p50 0.9892 over 3
+  pell: drop 0.280 se 0.037 own [atk 686 dmg 9168 heal 0 abs 95] rest baseline [atk 2090 dmg 19724 heal 0 abs 1441] rest benched [atk 2609 dmg 27017 heal 0 abs 1825] benched losses 58 timeout 0 captain 0 protected, refused kill p50 0.8674 over 58
+  teodor: drop 0.030 se 0.016 own [atk 519 dmg 5444 heal 0 abs 376] rest baseline [atk 2257 dmg 23448 heal 0 abs 1160] rest benched [atk 2506 dmg 29484 heal 0 abs 1400] benched losses 8 timeout 0 captain 0 protected, refused kill p50 0.8674 over 8
+  wren: drop 0.040 se 0.017 own [atk 300 dmg 3448 heal 0 abs 436] rest baseline [atk 2476 dmg 25444 heal 0 abs 1100] rest benched [atk 2553 dmg 29545 heal 0 abs 1456] benched losses 10 timeout 0 captain 0 protected, refused kill p50 0.9892 over 10
+  captain captain: baseline [atk 579 dmg 6450 heal 0 abs 215] never benched, not judged
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), one roll
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), one roll player raw hit: 0-9 0 10-19 0 20-29 0 30-39 0 40-49 48 50-59 99 60-69 819 70-79 1914 80-89 19 90-99 873 100 6, strikes 3778, doubles 5 %
+hitband: the_tollgate, arm 4 (arm 2 + iron hit -15), one roll enemy raw hit: 0-9 0 10-19 0 20-29 0 30-39 17 40-49 101 50-59 1162 60-69 1547 70-79 60 80-89 0 90-99 0 100 0, strikes 2887, doubles 0 %
+gate 1 beatable: the_tollgate, heuristic wins 195/200 (97 %), winning turn median 8 p90 10 limit 16, losses 5 timeout 0 captain 0 protected, quiet tail 5.0, refused kill p50 0.7400 over 5, one roll: ok
+gate 4 no dead weight: the_tollgate, 4 recruits x 200 seeds, median drop 0.065: ok
+  ottilie: drop 0.010 se 0.017 own [atk 690 dmg 3814 heal 0 abs 432] rest baseline [atk 2418 dmg 25494 heal 0 abs 1260] rest benched [atk 2351 dmg 29324 heal 0 abs 1696] benched losses 7 timeout 0 captain 0 protected, refused kill p50 0.9375 over 7
+  pell: drop 0.350 se 0.043 own [atk 809 dmg 10278 heal 0 abs 127] rest baseline [atk 2299 dmg 19030 heal 0 abs 1565] rest benched [atk 2731 dmg 26166 heal 0 abs 2221] benched losses 68 timeout 7 captain 0 protected, refused kill p50 0.7931 over 68
+  teodor: drop 0.065 se 0.024 own [atk 590 dmg 5272 heal 0 abs 365] rest baseline [atk 2518 dmg 24036 heal 0 abs 1327] rest benched [atk 2695 dmg 28642 heal 0 abs 1664] benched losses 18 timeout 0 captain 0 protected, refused kill p50 0.8234 over 18
+  wren: drop 0.065 se 0.022 own [atk 368 dmg 3857 heal 0 abs 489] rest baseline [atk 2740 dmg 25451 heal 0 abs 1203] rest benched [atk 2730 dmg 28536 heal 0 abs 1663] benched losses 17 timeout 1 captain 0 protected, refused kill p50 0.9471 over 17
+  captain captain: baseline [atk 651 dmg 6087 heal 0 abs 279] never benched, not judged
