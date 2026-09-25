@@ -22,7 +22,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol] [--candidate id]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -96,6 +96,7 @@ public sealed class PlaySession
         var protocol = false;
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
+        string? candidate = null;
         for (var i = 1; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -116,6 +117,10 @@ public sealed class PlaySession
                     break;
                 case "--content" when value is not null:
                     contentDir = value;
+                    i++;
+                    break;
+                case "--candidate" when value is not null:
+                    candidate = value;
                     i++;
                     break;
                 case "--scheme" when value is not null && RollSchemes.Parse(value) is { } parsedScheme:
@@ -178,12 +183,30 @@ public sealed class PlaySession
             return 2;
         }
 
-        if (protocol)
+        var roster = content.Cast;
+        if (candidate is not null)
         {
-            return new ProtocolSession(content, BattleState.From(map, content, content.Cast, seed, scheme), Console.Out).Run(input);
+            if (map.Certification is null)
+            {
+                Console.WriteLine($"ERROR: --candidate is for a certification map, and '{map.Name}' has no certification header");
+                return 2;
+            }
+
+            if (content.Cast.FirstOrDefault(u => u.Id == candidate) is not { } unit)
+            {
+                Console.WriteLine($"ERROR: --candidate names '{candidate}', who is not in the cast");
+                return 2;
+            }
+
+            roster = ValueList<Unit>.From(new[] { unit });
         }
 
-        var session = new PlaySession(content, BattleState.From(map, content, content.Cast, seed, scheme), Console.Out, scripted: script is not null);
+        if (protocol)
+        {
+            return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out).Run(input);
+        }
+
+        var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null);
         return session.Play(input, strict, seed);
     }
 
@@ -206,6 +229,15 @@ public sealed class PlaySession
     private int Play(TextReader input, bool strict, ulong seed)
     {
         _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
+        if (_state.Map.Certification is { } trialHeader)
+        {
+            var candidate = _state.UnitsOf(Side.Player).Single();
+            _out.WriteLine($"certification trial: {candidate.Unit.Id} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
+            foreach (var line in MapFormat.Write(_state.Map, _content).Split('\n').SkipWhile(l => l != "events:").Skip(1).Where(l => l.Length > 0))
+            {
+                _out.WriteLine("  event: " + line);
+            }
+        }
         _out.Write(MapRenderer.Render(_state, _content));
         var commands = 0;
         var stopped = false;
@@ -247,6 +279,13 @@ public sealed class PlaySession
         _out.WriteLine(outcome.IsOver
             ? $"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}"
             : $"battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
+        if (_state.Map.Certification is { } trial && outcome.IsOver)
+        {
+            var className = _content.Class(trial.ClassId).Name;
+            _out.WriteLine(outcome.Result == BattleResult.Won
+                ? $"certification: {_state.UnitsOf(Side.Player).Single().Id} earned {className}"
+                : $"certification: {className} not earned");
+        }
         if (_state.Map.RivalryArm is { } arm)
         {
             var attacked = _exposure.Count(entry => entry.Attacked);

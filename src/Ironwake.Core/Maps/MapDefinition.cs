@@ -33,6 +33,11 @@ namespace Ironwake.Core;
 /// applies its stat percents. Null for a map as authored. A map file never declares one; the
 /// <c>difficulty:</c> header exists so a battle state written out reads back under the same one.
 /// </param>
+/// <param name="Certification">
+/// The <c>certification:</c> header (issue 73): the map is a certification trial, its one player
+/// slot played in the trial's class with the trial's loadout (<see cref="Trial"/>); null for an
+/// ordinary map.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -50,7 +55,8 @@ public sealed record MapDefinition(
     bool RetreatEnabled = false,
     string? RivalryArm = null,
     int? Supplies = null,
-    string? DifficultyId = null)
+    string? DifficultyId = null,
+    CertificationTrial? Certification = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -82,6 +88,9 @@ public sealed record MapDefinition(
 
         return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
     }
+
+    /// <summary>A player unit as a certification trial fields it (<see cref="CertificationTrial.Candidate"/>); unchanged on an ordinary map.</summary>
+    public Unit Trial(Unit unit, GameContent content) => Certification is { } trial ? trial.Candidate(unit, content) : unit;
 
     public bool IsThrone(Coord at) => TerrainIdAt(at) == ThroneTerrainId;
 

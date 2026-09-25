@@ -1,0 +1,122 @@
+Trial of the Bulwark, seed 11, scheme TwoRollAverage
+certification trial: captain plays as Bulwark with iron_lance
+Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
+   012345678
+ 0 .........
+ 1 c.a.e....
+ 2 ....#####
+ 3 .A.......
+ 4 ....#####
+ 5 d.b.f....
+ 6 .........
+
+a  brigand-1        Brigand L3 reaver          2,1    hp 23/23  Plain  group west, aggressive
+b  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group west, aggressive
+c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group west, aggressive
+d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
+A  captain          Alder Fenn L1 bulwark      1,3    hp 25/25  Plain  captain
+e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
+f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
+> threat captain
+threat on captain at 1,3 (Plain):
+  brigand-1 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  brigand-2 from 2,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  brigand-3 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  brigand-4 from 0,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  if all land: 32 against 25 hp
+> threat captain from 4,3
+threat on captain at 4,3 (Plain):
+  brigand-1 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  brigand-2 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  hexer-1 from 4,1 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
+  hexer-2 from 4,5 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
+  if all land: 38 against 25 hp
+> threat captain from 5,3
+threat on captain at 5,3 (Plain):
+  brigand-1 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  brigand-2 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  if all land: 16 against 25 hp
+> forecast captain hexer-1 from 3,1
+forecast captain -> hexer-1 from 3,1 (Plain): dmg 13 x2 hit 88% crit 4%; counter: dmg 11 hit 98% crit 0%
+> move captain 5,3
+captain moves 1,3 -> 5,3 via 2,3 3,3 4,3
+Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
+   012345678
+ 0 .........
+ 1 c.a.e....
+ 2 ....#####
+ 3 .....A...
+ 4 ....#####
+ 5 d.b.f....
+ 6 .........
+
+a  brigand-1        Brigand L3 reaver          2,1    hp 23/23  Plain  group west, aggressive
+b  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group west, aggressive
+c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group west, aggressive
+d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
+A  captain          Alder Fenn L1 bulwark      5,3    hp 25/25  Plain  captain
+e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
+f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
+> wait captain
+captain waits
+Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
+   012345678
+ 0 .........
+ 1 c.a.e....
+ 2 ....#####
+ 3 .....A...
+ 4 ....#####
+ 5 d.b.f....
+ 6 .........
+
+a  brigand-1        Brigand L3 reaver          2,1    hp 23/23  Plain  group west, aggressive
+b  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group west, aggressive
+c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group west, aggressive
+d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
+A  captain          Alder Fenn L1 bulwark      5,3    hp 25/25  Plain  captain  done
+e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
+f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: move brigand-1 4,3
+brigand-1 moves 2,1 -> 4,3 via 3,1 3,2 3,3
+enemy: attack brigand-1 captain
+forecast brigand-1 -> captain: dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+brigand-1 attacks captain
+  brigand-1 misses captain
+  captain misses brigand-1
+  brigand-1 hp 23, captain hp 25
+enemy: wait brigand-2
+brigand-2 waits
+enemy: wait brigand-3
+brigand-3 waits
+enemy: wait brigand-4
+brigand-4 waits
+enemy: wait hexer-1
+hexer-1 waits
+enemy: wait hexer-2
+hexer-2 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Trial of the Bulwark  turn 2 of 1  player phase  survive  recall 0
+   012345678
+ 0 .........
+ 1 c...e....
+ 2 ....#####
+ 3 ....aA...
+ 4 ....#####
+ 5 d.b.f....
+ 6 .........
+
+a  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group west, aggressive
+b  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group west, aggressive
+c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group west, aggressive
+d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
+A  captain          Alder Fenn L1 bulwark      5,3    hp 25/25  Plain  captain
+e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
+f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
+battle won: survive; only recall is left
+battle won: survive
+certification: captain earned Bulwark

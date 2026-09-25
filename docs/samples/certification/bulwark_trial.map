@@ -1,0 +1,24 @@
+name: Trial of the Bulwark
+size: 9x7
+win: survive
+turn_limit: 1
+recall: 0
+enemy_level: 3
+certification: bulwark iron_lance
+
+.........
+.........
+....#####
+.........
+....#####
+.........
+.........
+
+units:
+P captain 1,3
+E brigand 2,1 group:west behavior:aggressive
+E brigand 2,5 group:west behavior:aggressive
+E brigand 0,1 group:west behavior:aggressive
+E brigand 0,5 group:west behavior:aggressive
+E hexer 4,1 group:north behavior:hold
+E hexer 4,5 group:south behavior:hold

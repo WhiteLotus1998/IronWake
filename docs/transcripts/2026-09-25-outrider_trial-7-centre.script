@@ -1,0 +1,5 @@
+# where does each lever leave the Canto?
+reach captain
+move captain 3,3
+wait captain
+canto captain 3,0

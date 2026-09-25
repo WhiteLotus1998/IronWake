@@ -1,0 +1,69 @@
+Trial of the Outrider, seed 7, scheme TwoRollAverage
+certification trial: captain plays as Outrider with iron_lance, iron_sword
+  event: west_lever enter 2,2 terrain 2,1 =
+  event: centre_lever enter 3,3 terrain 3,1 =
+  event: east_lever enter 4,2 terrain 4,1 =
+Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
+   0123456
+ 0 .......
+ 1 #######
+ 2 .......
+ 3 ..^^...
+ 4 .......
+ 5 ...A...
+
+A  captain          Alder Fenn L1 outrider     3,5    hp 23/23  Plain  captain
+> reach captain
+Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
+   0123456
+ 0 .......
+ 1 #######
+ 2 *******
+ 3 *******
+ 4 *******
+ 5 ***A***
+
+A  captain          Alder Fenn L1 outrider     3,5    hp 23/23  Plain  captain
+*  reach from 3,5: 27 tiles
+> move captain 4,2
+captain moves 3,5 -> 4,2 via 3,4 4,4 4,3
+event east_lever
+  4,1 becomes road
+Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
+   0123456
+ 0 .......
+ 1 ####=##
+ 2 ....A..
+ 3 ..^^...
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     4,2    hp 23/23  Plain  captain
+> wait captain
+captain waits
+captain may canto up to 2 movement: canto captain <x,y|stay>
+Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
+   0123456
+ 0 .......
+ 1 ####=##
+ 2 ....A..
+ 3 ..^^...
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     4,2    hp 23/23  Plain  captain  canto 2
+> canto captain 4,0
+captain cantos 4,2 -> 4,0 via 4,1
+Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
+   0123456
+ 0 ....A..
+ 1 ####=##
+ 2 .......
+ 3 ..^^...
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     4,0    hp 23/23  Plain  captain  done
+battle won: escape; only recall is left
+battle won: escape
+certification: captain earned Outrider

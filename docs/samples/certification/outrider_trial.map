@@ -1,0 +1,23 @@
+name: Trial of the Outrider
+size: 7x6
+win: escape
+turn_limit: 1
+recall: 0
+enemy_level: 1
+exit: 0,0 1,0 2,0 3,0 4,0 5,0 6,0
+certification: outrider iron_lance iron_sword
+
+.......
+#######
+.......
+..^^...
+.......
+.......
+
+units:
+P captain 3,5
+
+events:
+west_lever enter 2,2 terrain 2,1 =
+centre_lever enter 3,3 terrain 3,1 =
+east_lever enter 4,2 terrain 4,1 =
