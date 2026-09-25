@@ -51,8 +51,8 @@ public static class ContentLoader
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
         var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
-        var (wakeRadius, rivalry) = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities };
+        var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties };
     }
 
     /// <summary>
@@ -224,7 +224,7 @@ public static class ContentLoader
     /// The global rule constants of DESIGN.md: today only the Guard wake radius (section 8),
     /// which lives in content so it is identical on every map and never in a map file.
     /// </summary>
-    private static (int WakeRadius, RivalryRules Rivalry) ParseRules(ContentFile file)
+    private static (int WakeRadius, RivalryRules Rivalry, ImmutableSortedDictionary<string, Difficulty> Difficulties) ParseRules(ContentFile file)
     {
         JsonDocument document;
         try
@@ -248,7 +248,74 @@ public static class ContentLoader
             throw root.Error("wakeRadius", "must be at least 0");
         }
 
-        return (wakeRadius, root.OptionalObject("rivalry") is { } rivalry ? ParseRivalry(rivalry) : RivalryRules.None);
+        var rivalryRules = root.OptionalObject("rivalry") is { } rivalry ? ParseRivalry(rivalry) : RivalryRules.None;
+        var difficulties = root.OptionalObject("difficulties") is { } block
+            ? ParseDifficulties(block)
+            : ImmutableSortedDictionary<string, Difficulty>.Empty.WithComparers(StringComparer.Ordinal);
+        return (wakeRadius, rivalryRules, difficulties);
+    }
+
+    /// <summary>
+    /// The difficulties block of rules.json (issue 76): an object of difficulty id to an
+    /// optional <c>statPercent</c> (stat keys, each at least 0, an omitted stat 100), an optional
+    /// <c>enemyLevelOffset</c> (0 when omitted), and an optional <c>recall</c> charge count (0 to
+    /// 99; omitted keeps each map's). The block must declare <c>normal</c>, and <c>normal</c>
+    /// must be the identity, so Normal is data and never a code path of its own.
+    /// </summary>
+    private static ImmutableSortedDictionary<string, Difficulty> ParseDifficulties(EntryNode node)
+    {
+        var builder = ImmutableSortedDictionary.CreateBuilder<string, Difficulty>(StringComparer.Ordinal);
+        foreach (var property in node.Element.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+        {
+            if (property.Value.ValueKind != JsonValueKind.Object)
+            {
+                throw new ContentException(node.File, "difficulties", property.Name, "must be an object");
+            }
+
+            var entry = new EntryNode(node.File, "difficulties." + property.Name, property.Value);
+            foreach (var field in entry.Element.EnumerateObject())
+            {
+                if (field.Name is not ("statPercent" or "enemyLevelOffset" or "recall"))
+                {
+                    throw entry.Error(field.Name, "is not a difficulty field; expected statPercent, enemyLevelOffset or recall");
+                }
+            }
+
+            var percent = entry.OptionalObject("statPercent") is { } p ? ParseStats(p, allRequired: false, fallback: 100) : Difficulty.FullPercent;
+            foreach (var stat in Stats.All)
+            {
+                if (percent.Get(stat) < 0)
+                {
+                    throw entry.Error("statPercent." + StatKeys[(int)stat], "must be at least 0");
+                }
+            }
+
+            var offset = entry.IntOr("enemyLevelOffset", 0);
+            if (Math.Abs(offset) >= Unit.MaxLevel)
+            {
+                throw entry.Error("enemyLevelOffset", $"must be between {1 - Unit.MaxLevel} and {Unit.MaxLevel - 1}");
+            }
+
+            int? recall = entry.Has("recall") ? entry.Int("recall") : null;
+            if (recall is < 0 or > 99)
+            {
+                throw entry.Error("recall", "must be 0 to 99");
+            }
+
+            builder.Add(property.Name, new Difficulty(property.Name, percent, offset, recall));
+        }
+
+        if (!builder.TryGetValue(Difficulty.NormalId, out var normal))
+        {
+            throw node.Error("difficulties", $"must declare '{Difficulty.NormalId}'");
+        }
+
+        if (!normal.IsIdentity)
+        {
+            throw new ContentException(node.File, "difficulties." + Difficulty.NormalId, null, "must be the identity: every percent 100, offset 0, no recall");
+        }
+
+        return builder.ToImmutable();
     }
 
     /// <summary>
@@ -379,12 +446,12 @@ public static class ContentLoader
         }
     }
 
-    private static Stats ParseStats(EntryNode node, bool allRequired)
+    private static Stats ParseStats(EntryNode node, bool allRequired, int fallback = 0)
     {
         var values = new int[StatKeys.Length];
         for (var i = 0; i < StatKeys.Length; i++)
         {
-            values[i] = allRequired ? node.Int(StatKeys[i]) : node.IntOr(StatKeys[i], 0);
+            values[i] = allRequired ? node.Int(StatKeys[i]) : node.IntOr(StatKeys[i], fallback);
         }
 
         foreach (var property in node.Element.EnumerateObject())

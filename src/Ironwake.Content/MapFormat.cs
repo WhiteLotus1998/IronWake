@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "difficulty" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -63,6 +63,11 @@ public static class MapFormat
         if (map.Supplies is { } supplies)
         {
             sb.Append("supplies: ").Append(supplies).Append('\n');
+        }
+
+        if (map.DifficultyId is { } difficulty)
+        {
+            sb.Append("difficulty: ").Append(difficulty).Append('\n');
         }
 
         sb.Append('\n');
@@ -163,6 +168,7 @@ public static class MapFormat
             int? supplies = header.ContainsKey("supplies") ? ParseInt(header, "supplies", 1, MaxSupplies, required: true, fallback: 0) : null;
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
+            var difficulty = ParseDifficulty(header);
 
             SkipBlankLines();
             var terrain = ParseGrid(width, height);
@@ -170,7 +176,7 @@ public static class MapFormat
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty);
             Validate(map);
             return map;
         }
@@ -346,6 +352,29 @@ public static class MapFormat
                     ? "rules.json has no rivalry arms"
                     : "the arms are " + string.Join(", ", _content.Rivalry.Arms.Select(a => a.Id));
                 throw ErrorAt(entry.Line, $"rivalry names arm '{entry.Value}'; {arms}");
+            }
+
+            return entry.Value;
+        }
+
+        /// <summary>
+        /// The <c>difficulty:</c> header (issue 76): a difficulty in rules.json that the header's
+        /// enemy level and Recall charges already include. Written only for a map played under one,
+        /// so a battle state reads back under it; <see cref="MapFiles.LoadAll"/> refuses it in content.
+        /// </summary>
+        private string? ParseDifficulty(Dictionary<string, (string Value, int Line)> header)
+        {
+            if (!header.TryGetValue("difficulty", out var entry))
+            {
+                return null;
+            }
+
+            if (!_content.Difficulties.ContainsKey(entry.Value))
+            {
+                var known = _content.Difficulties.Count == 0
+                    ? "rules.json declares no difficulties"
+                    : "the difficulties are " + string.Join(", ", _content.Difficulties.Keys);
+                throw ErrorAt(entry.Line, $"difficulty names '{entry.Value}'; {known}");
             }
 
             return entry.Value;

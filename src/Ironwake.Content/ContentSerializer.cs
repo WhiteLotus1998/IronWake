@@ -111,10 +111,10 @@ public static class ContentSerializer
         writer.WriteEndObject();
     }
 
-    /// <summary>rules.json: the wake radius, and the rivalry block when the content has one (issue 16).</summary>
+    /// <summary>rules.json: the wake radius, and the rivalry (issue 16) and difficulties (issue 76) blocks when the content has them.</summary>
     private static string WriteRules(GameContent content)
     {
-        if (content.Rivalry == RivalryRules.None)
+        if (content.Rivalry == RivalryRules.None && content.Difficulties.Count == 0)
         {
             return "{\n  \"wakeRadius\": " + content.WakeRadius + "\n}\n";
         }
@@ -124,31 +124,54 @@ public static class ContentSerializer
         {
             writer.WriteStartObject();
             writer.WriteNumber("wakeRadius", content.WakeRadius);
-            writer.WriteStartObject("rivalry");
-            writer.WriteStartObject("arms");
-            foreach (var arm in content.Rivalry.Arms)
+            if (content.Rivalry != RivalryRules.None)
             {
-                writer.WriteStartObject(arm.Id);
-                writer.WriteNumber("hit", arm.Hit);
-                writer.WriteNumber("crit", arm.Crit);
-                writer.WriteNumber("critAvoid", arm.CritAvoid);
-                writer.WriteBoolean("countersOnly", arm.CountersOnly);
+                writer.WriteStartObject("rivalry");
+                writer.WriteStartObject("arms");
+                foreach (var arm in content.Rivalry.Arms)
+                {
+                    writer.WriteStartObject(arm.Id);
+                    writer.WriteNumber("hit", arm.Hit);
+                    writer.WriteNumber("crit", arm.Crit);
+                    writer.WriteNumber("critAvoid", arm.CritAvoid);
+                    writer.WriteBoolean("countersOnly", arm.CountersOnly);
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndObject();
+                writer.WriteStartArray("rapportRate");
+                foreach (var step in content.Rivalry.RapportRates)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteNumber("cha", step.Cha);
+                    writer.WriteNumber("rate", step.Rate);
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+                writer.WriteNumber("overwriteAt", content.Rivalry.OverwriteAt);
                 writer.WriteEndObject();
             }
 
-            writer.WriteEndObject();
-            writer.WriteStartArray("rapportRate");
-            foreach (var step in content.Rivalry.RapportRates)
+            if (content.Difficulties.Count > 0)
             {
-                writer.WriteStartObject();
-                writer.WriteNumber("cha", step.Cha);
-                writer.WriteNumber("rate", step.Rate);
+                writer.WriteStartObject("difficulties");
+                foreach (var difficulty in content.Difficulties.Values)
+                {
+                    writer.WriteStartObject(difficulty.Id);
+                    WriteStats(writer, "statPercent", difficulty.StatPercent);
+                    writer.WriteNumber("enemyLevelOffset", difficulty.EnemyLevelOffset);
+                    if (difficulty.RecallCharges is { } recall)
+                    {
+                        writer.WriteNumber("recall", recall);
+                    }
+
+                    writer.WriteEndObject();
+                }
+
                 writer.WriteEndObject();
             }
 
-            writer.WriteEndArray();
-            writer.WriteNumber("overwriteAt", content.Rivalry.OverwriteAt);
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
