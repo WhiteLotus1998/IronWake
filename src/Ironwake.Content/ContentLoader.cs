@@ -572,7 +572,8 @@ public static class ContentLoader
                 durability,
                 ValueList<MovementType>.From(effective),
                 heals,
-                healBase));
+                healBase,
+                node.Enum<WeaponRank>("rank")));
         }
 
         if (builder.Count == 0)
@@ -618,6 +619,11 @@ public static class ContentLoader
 
                 origin[node.Entry!] = file.Name;
                 var unit = ParseUnit(node, classes, weapons, items, abilities);
+                if (!isCast)
+                {
+                    ValidateTemplateRanks(node, unit, classes, weapons);
+                }
+
                 builder.Add(node.Entry!, unit);
                 if (isCast)
                 {
@@ -634,6 +640,54 @@ public static class ContentLoader
         }
 
         return (builder.ToImmutable(), ValueList<Unit>.From(cast));
+    }
+
+    /// <summary>
+    /// An enemy template declares its ranks in content and nothing raises them (issue 67),
+    /// so a weapon its class uses above its declared rank could never be equipped: that is
+    /// a content error, named by the inventory slot. A cast member may carry such a weapon,
+    /// since a player unit's rank grows by use.
+    /// </summary>
+    private static void ValidateTemplateRanks(
+        EntryNode node,
+        Unit unit,
+        ImmutableSortedDictionary<string, UnitClass> classes,
+        ImmutableSortedDictionary<string, Weapon> weapons)
+    {
+        var unitClass = classes[unit.ClassId];
+        for (var i = 0; i < unit.Inventory.Count; i++)
+        {
+            if (weapons.TryGetValue(unit.Inventory.Items[i].ItemId, out var weapon) && unitClass.CanUse(weapon.Type) && !unit.CanWield(weapon, unitClass))
+            {
+                throw node.Error(
+                    "inventory[" + i + "].item",
+                    $"{unit.Id} is {Resolver.RankShort(unit, weapon)}; declare the rank under 'ranks'");
+            }
+        }
+    }
+
+    /// <summary>A unit's optional <c>ranks</c>: an object from weapon type to rank letter, each type at its rank's threshold, every type not named at E.</summary>
+    private static WeaponSkill ParseRanks(EntryNode node)
+    {
+        if (node.OptionalObject("ranks") is not { } ranks)
+        {
+            return WeaponSkill.Zero;
+        }
+
+        var skill = WeaponSkill.Zero;
+        foreach (var property in ranks.Element.EnumerateObject())
+        {
+            var type = node.ParseEnum<WeaponType>("ranks", property.Name);
+            if (property.Value.ValueKind != JsonValueKind.String)
+            {
+                throw node.Error("ranks." + property.Name, "must be a rank letter");
+            }
+
+            var rank = node.ParseEnum<WeaponRank>("ranks." + property.Name, property.Value.GetString()!);
+            skill = skill.With(type, WeaponRanks.Threshold(rank));
+        }
+
+        return skill;
     }
 
     private static void ValidateCastEntry(
@@ -784,6 +838,7 @@ public static class ContentLoader
             node.OptionalString("personality"))
         {
             Hooks = ValueList<string>.From(node.StringArrayOrEmpty("hooks")),
+            Skill = ParseRanks(node),
         };
     }
 }

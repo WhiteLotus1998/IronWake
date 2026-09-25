@@ -90,6 +90,11 @@ public static class ProtocolJson
                 w.WriteNumber("newLevel", l.NewLevel);
                 WriteStats(w, "gains", l.Gains);
                 break;
+            case RankRaised k:
+                w.WriteString("unit", k.UnitId);
+                w.WriteString("weaponType", Name(k.Type));
+                w.WriteString("rank", Name(k.Rank));
+                break;
             case UnitWaited u:
                 w.WriteString("unit", u.UnitId);
                 break;
@@ -451,6 +456,13 @@ public static class ProtocolJson
         w.WriteString("region", u.Region);
         w.WriteString("personality", u.Personality);
         WriteStrings(w, "hooks", u.Hooks);
+        w.WriteStartObject("weaponPoints");
+        foreach (var (type, points) in u.Skill.All)
+        {
+            w.WriteNumber(Name(type), points);
+        }
+
+        w.WriteEndObject();
         w.WriteEndObject();
     }
 
@@ -480,6 +492,7 @@ public static class ProtocolJson
                 OptionalString(e, "personality"))
             {
                 Hooks = ReadStrings(e, "hooks"),
+                Skill = ReadWeaponPoints(e),
             };
         }
         catch (ArgumentException ex)
@@ -699,6 +712,34 @@ public static class ProtocolJson
 
     private static IEnumerable<JsonElement> Array(JsonElement e, string name) =>
         e.ValueKind == JsonValueKind.Array ? e.EnumerateArray().ToList() : throw new ProtocolException($"field '{name}' is not an array");
+
+    /// <summary>A unit's <c>weaponPoints</c> (issue 67); a state written before the field existed reads as rank E in everything.</summary>
+    private static WeaponSkill ReadWeaponPoints(JsonElement e)
+    {
+        if (!e.TryGetProperty("weaponPoints", out var value) || value.ValueKind == JsonValueKind.Null)
+        {
+            return WeaponSkill.Zero;
+        }
+
+        if (value.ValueKind != JsonValueKind.Object)
+        {
+            throw new ProtocolException("field 'weaponPoints' is not an object");
+        }
+
+        var skill = WeaponSkill.Zero;
+        foreach (var property in value.EnumerateObject())
+        {
+            var points = RequiredInt(value, property.Name);
+            if (points < 0)
+            {
+                throw new ProtocolException($"field 'weaponPoints.{property.Name}' is below 0");
+            }
+
+            skill = skill.With(ParseEnum<WeaponType>(property.Name, "weaponPoints"), points);
+        }
+
+        return skill;
+    }
 
     private static ValueList<string> ReadStrings(JsonElement e, string name) =>
         ValueList<string>.From(Array(Required(e, name), name).Select(v => v.ValueKind == JsonValueKind.String ? v.GetString()! : throw new ProtocolException($"field '{name}' holds a value that is not a string")));

@@ -1,28 +1,28 @@
 {
   "weapons": [
-    { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 75, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40 },
-    { "id": "steel_sword", "name": "Steel Sword", "type": "sword", "mt": 8, "hit": 80, "crit": 5, "wt": 9, "minRange": 1, "maxRange": 1, "durability": 30 },
-    { "id": "ridgeblade", "name": "Ridgeblade", "type": "sword", "mt": 6, "hit": 85, "crit": 10, "wt": 6, "minRange": 1, "maxRange": 1, "durability": 25, "effective": ["cavalry"] },
+    { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 75, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E" },
+    { "id": "steel_sword", "name": "Steel Sword", "type": "sword", "mt": 8, "hit": 80, "crit": 5, "wt": 9, "minRange": 1, "maxRange": 1, "durability": 30, "rank": "E" },
+    { "id": "ridgeblade", "name": "Ridgeblade", "type": "sword", "mt": 6, "hit": 85, "crit": 10, "wt": 6, "minRange": 1, "maxRange": 1, "durability": 25, "rank": "E", "effective": ["cavalry"] },
 
-    { "id": "iron_lance", "name": "Iron Lance", "type": "lance", "mt": 6, "hit": 70, "crit": 0, "wt": 6, "minRange": 1, "maxRange": 1, "durability": 40 },
-    { "id": "steel_lance", "name": "Steel Lance", "type": "lance", "mt": 9, "hit": 75, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 30 },
-    { "id": "toll_spear", "name": "Toll Spear", "type": "lance", "mt": 5, "hit": 65, "crit": 0, "wt": 7, "minRange": 1, "maxRange": 2, "durability": 20 },
-    { "id": "longpike", "name": "Longpike", "type": "lance", "mt": 8, "hit": 70, "crit": 5, "wt": 11, "minRange": 1, "maxRange": 1, "durability": 25, "effective": ["armored"] },
+    { "id": "iron_lance", "name": "Iron Lance", "type": "lance", "mt": 6, "hit": 70, "crit": 0, "wt": 6, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E" },
+    { "id": "steel_lance", "name": "Steel Lance", "type": "lance", "mt": 9, "hit": 75, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 30, "rank": "E" },
+    { "id": "toll_spear", "name": "Toll Spear", "type": "lance", "mt": 5, "hit": 65, "crit": 0, "wt": 7, "minRange": 1, "maxRange": 2, "durability": 20, "rank": "E" },
+    { "id": "longpike", "name": "Longpike", "type": "lance", "mt": 8, "hit": 70, "crit": 5, "wt": 11, "minRange": 1, "maxRange": 1, "durability": 25, "rank": "E", "effective": ["armored"] },
 
-    { "id": "hatchet", "name": "Hatchet", "type": "axe", "mt": 5, "hit": 85, "crit": 5, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 45 },
-    { "id": "iron_axe", "name": "Iron Axe", "type": "axe", "mt": 7, "hit": 65, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 1, "durability": 40 },
-    { "id": "steel_axe", "name": "Steel Axe", "type": "axe", "mt": 11, "hit": 70, "crit": 0, "wt": 12, "minRange": 1, "maxRange": 1, "durability": 30 },
-    { "id": "toll_axe", "name": "Toll Axe", "type": "axe", "mt": 6, "hit": 60, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 2, "durability": 20 },
+    { "id": "hatchet", "name": "Hatchet", "type": "axe", "mt": 5, "hit": 85, "crit": 5, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 45, "rank": "E" },
+    { "id": "iron_axe", "name": "Iron Axe", "type": "axe", "mt": 7, "hit": 65, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E" },
+    { "id": "steel_axe", "name": "Steel Axe", "type": "axe", "mt": 11, "hit": 70, "crit": 0, "wt": 12, "minRange": 1, "maxRange": 1, "durability": 30, "rank": "E" },
+    { "id": "toll_axe", "name": "Toll Axe", "type": "axe", "mt": 6, "hit": 60, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 2, "durability": 20, "rank": "E" },
 
-    { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "effective": ["flying"] },
-    { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "effective": ["flying"] },
+    { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "effective": ["flying"] },
+    { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "rank": "E", "effective": ["flying"] },
 
-    { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8 },
-    { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "effective": ["flying"] },
-    { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5 },
+    { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E" },
+    { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "effective": ["flying"] },
+    { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "E" },
 
-    { "id": "salve", "name": "Salve", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 8, "heals": true, "healBase": 0 },
-    { "id": "beacon", "name": "Beacon", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "heals": true, "healBase": 0 },
-    { "id": "radiance", "name": "Radiance", "type": "faith", "mt": 6, "hit": 85, "crit": 0, "wt": 4, "minRange": 1, "maxRange": 2, "durability": 5 }
+    { "id": "salve", "name": "Salve", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 2, "minRange": 1, "maxRange": 1, "durability": 8, "rank": "E", "heals": true, "healBase": 0 },
+    { "id": "beacon", "name": "Beacon", "type": "faith", "mt": 0, "hit": 100, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 4, "rank": "E", "heals": true, "healBase": 0 },
+    { "id": "radiance", "name": "Radiance", "type": "faith", "mt": 6, "hit": 85, "crit": 0, "wt": 4, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "E" }
   ]
 }

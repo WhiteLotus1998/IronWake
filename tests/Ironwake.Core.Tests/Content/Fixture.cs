@@ -22,7 +22,7 @@ internal static class Fixture
 
     public const string Weapons = """
         { "weapons": [
-          { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40 }
+          { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E" }
         ] }
         """;
 

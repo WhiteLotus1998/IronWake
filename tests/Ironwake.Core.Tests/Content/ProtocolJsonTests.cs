@@ -25,6 +25,7 @@ public class ProtocolJsonTests
         { new UnitDied("brigand-1", Side.Enemy, B), """{"type":"unitDied","unit":"brigand-1","side":"enemy","at":{"x":3,"y":4}}""" },
         { new ExpGained("wren", 30, 72), """{"type":"expGained","unit":"wren","amount":30,"expAfter":72}""" },
         { new LeveledUp("wren", 4, new Stats(1, 0, 0, 1, 1, 0, 0, 0, 1)), """{"type":"leveledUp","unit":"wren","newLevel":4,"gains":{"hp":1,"str":0,"mag":0,"dex":1,"spd":1,"lck":0,"def":0,"res":0,"cha":1}}""" },
+        { new RankRaised("wren", WeaponType.Sword, WeaponRank.D), """{"type":"rankRaised","unit":"wren","weaponType":"sword","rank":"d"}""" },
         { new UnitWaited("wren"), """{"type":"unitWaited","unit":"wren"}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
@@ -183,6 +184,24 @@ public class ProtocolJsonTests
         };
 
         Assert.Equal(marked, ProtocolJson.ReadState(ProtocolJson.State(marked, content), content));
+    }
+
+    /// <summary>Issue 67: a unit's rank points travel in <c>weaponPoints</c>, and a state written before the field existed reads as rank E.</summary>
+    [Fact]
+    public void AStateReadsBackEqualWithWeaponPoints()
+    {
+        var (content, state) = PlayedTollgate();
+        var captain = state.UnitsOf(Side.Player).First();
+        var skilled = (state with { History = ValueList<BattleState>.Empty })
+            .WithUnit(captain with { Unit = captain.Unit with { Skill = WeaponSkill.Zero.With(WeaponType.Sword, 34).With(WeaponType.Faith, 3) } });
+
+        var json = ProtocolJson.State(skilled, content);
+        Assert.Contains("\"weaponPoints\":{\"sword\":34,\"lance\":0,\"axe\":0,\"bow\":0,\"reason\":0,\"faith\":3}", json);
+        Assert.Equal(skilled, ProtocolJson.ReadState(json, content));
+
+        var older = System.Text.RegularExpressions.Regex.Replace(json, ",\"weaponPoints\":\\{[^}]*\\}", string.Empty);
+        Assert.DoesNotContain("weaponPoints", older);
+        Assert.Equal(WeaponSkill.Zero, ProtocolJson.ReadState(older, content).Find(captain.Id)!.Unit.Skill);
     }
 
     [Fact]

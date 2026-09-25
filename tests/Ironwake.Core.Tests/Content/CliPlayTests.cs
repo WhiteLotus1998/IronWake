@@ -279,6 +279,7 @@ public class CliPlayTests
         Assert.Contains("archer-2 falls at 4,7", output);
         Assert.Contains("group mill wakes: proximity", output);
         Assert.Contains("  items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
+        Assert.Contains("  ranks: sword E (0), lance E (0), axe E (0)\n", Play(out _, "show captain\n", "139"));
         Assert.Contains("mill_bandit-1 falls at 6,1", output);
         Assert.DoesNotContain("uses field_dressing", output);
     }

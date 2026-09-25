@@ -23,6 +23,9 @@ public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed)
 public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix, LossCause Cause = LossCause.None, int LastCombatTurn = 0, double? RefusedKill = null)
 {
     public bool Won => Result == BattleResult.Won;
+
+    /// <summary>The weapon rank points of every player unit as it last stood in the game (issue 67), by id.</summary>
+    public IReadOnlyDictionary<string, WeaponSkill> Skills { get; init; } = new Dictionary<string, WeaponSkill>(StringComparer.Ordinal);
 }
 
 /// <summary>A gate's printed line and verdict.</summary>
@@ -82,7 +85,25 @@ public static class Runner
             }
         }
 
-        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player));
+        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player))
+        {
+            Skills = SkillsOf(state),
+        };
+    }
+
+    /// <summary>Each player unit's rank points as it last stood in the game, so a unit that fell keeps the points it had.</summary>
+    private static Dictionary<string, WeaponSkill> SkillsOf(BattleState state)
+    {
+        var skills = new Dictionary<string, WeaponSkill>(StringComparer.Ordinal);
+        foreach (var step in state.History.Append(state))
+        {
+            foreach (var unit in step.UnitsOf(Side.Player))
+            {
+                skills[unit.Id] = unit.Unit.Skill;
+            }
+        }
+
+        return skills;
     }
 
     private static double? RefusedKillOf(IPlayer player) => player switch
@@ -534,7 +555,7 @@ public static class Gates
         Weapon? weapon = null;
         foreach (var stack in unit.Inventory.Items)
         {
-            if (content.Weapons.TryGetValue(stack.ItemId, out var w) && unitClass.CanUse(w.Type) && !w.Heals)
+            if (content.Weapons.TryGetValue(stack.ItemId, out var w) && unit.CanWield(w, unitClass) && !w.Heals)
             {
                 weapon = w;
                 break;

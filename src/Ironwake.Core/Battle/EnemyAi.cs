@@ -231,7 +231,7 @@ public static class EnemyAi
         var unitClass = content.Class(unit.Unit.ClassId);
         foreach (var item in unit.Unit.Inventory.Items)
         {
-            if (content.Weapons.TryGetValue(item.ItemId, out var weapon) && weapon.Heals && unitClass.CanUse(weapon.Type))
+            if (content.Weapons.TryGetValue(item.ItemId, out var weapon) && weapon.Heals && unit.Unit.CanWield(weapon, unitClass))
             {
                 return true;
             }
