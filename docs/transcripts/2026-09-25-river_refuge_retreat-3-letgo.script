@@ -1,0 +1,13 @@
+move captain 3,8
+move wren 2,8
+move ottilie 4,9
+end
+move ottilie 4,8
+attack ottilie wingrider-2
+move captain 4,7
+attack captain wingrider-2
+move wren 2,7
+end
+move wren 2,8
+attack wren wingrider-2
+end
