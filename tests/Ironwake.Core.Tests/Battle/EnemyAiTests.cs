@@ -140,7 +140,7 @@ public class EnemyAiTests
         SideForecast Counter(BattleState board) => Ironwake.Core.Combat.Forecast(
             board.Find("hale")!.ToCombatant(board.Map, Starter),
             board.Find("bandit_leader-1")!.ToCombatant(board.Map, Starter),
-            1, board.Scheme, board.Formula).Defender;
+            1, board.Scheme).Defender;
         Assert.Equal(Counter(Armed(playerPhase, "bandit_leader-1", "hatchet")), Counter(playerPhase));
         Assert.NotEqual(Counter(Armed(playerPhase, "bandit_leader-1", "steel_axe")), Counter(playerPhase));
     }
@@ -204,9 +204,9 @@ public class EnemyAiTests
     [Fact]
     public void ATargetAtFifteenPercentCritScoresStrictlyAboveAnOtherwiseIdenticalTargetAtZero()
     {
-        var sharp = Recruit("sharp", new Stats(30, 8, 0, 40, 8, 0, 5, 2, 9), "iron_sword");
-        var lucky = Recruit("lucky", new Stats(40, 7, 0, 6, 8, 20, 4, 2, 3));
-        var plain = Recruit("plain", new Stats(40, 7, 0, 6, 8, 5, 4, 2, 3));
+        var sharp = Recruit("sharp", new Stats(30, 8, 0, 40, 4, 0, 5, 2, 9), "iron_sword");
+        var lucky = Recruit("lucky", new Stats(40, 7, 0, 6, 2, 20, 4, 2, 3));
+        var plain = Recruit("plain", new Stats(40, 7, 0, 6, 2, 5, 4, 2, 3));
         var state = Start(map: Yard("P captain 0,1\nP recruit:lucky 3,0\nP recruit:plain 3,2", "E brigand 3,1 group:g behavior:aggressive"), roster: ValueList<Unit>.Of(sharp, lucky, plain));
         var attacker = state.Find("sharp")!;
         var against = (string id) => Core.Combat.Forecast(attacker.ToCombatant(state.Map, Starter), state.Find(id)!.ToCombatant(state.Map, Starter), 1, state.Scheme).Attacker;

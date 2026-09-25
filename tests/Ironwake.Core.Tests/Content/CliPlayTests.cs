@@ -173,13 +173,13 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 1 from 3,7\nforecast wren brigand-1 from 3,5\nforecast wren brigand-1 from 2,7\nshow wren\nmove wren 3,7\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 from 3,7\n");
 
-        Assert.Contains("> forecast wren brigand-1 from 4,6\nforecast wren -> brigand-1 from 4,6 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
-        Assert.Contains("> forecast wren brigand-1 1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 4,6\nforecast wren -> brigand-1 from 4,6 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: wren cannot move to 3,5\n", output);
         Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: wren cannot attack brigand-1 from 2,7\n", output);
         Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
-        Assert.Contains("> forecast wren brigand-1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 3,7\nforecast wren -> brigand-1 from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("  forecast <unit> <target> [slot] [from <x,y>]  show the forecast", Play(out _, "help\n"));
     }
 
@@ -189,11 +189,11 @@ public class CliPlayTests
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 1\nshow wren\nrecall 0\n");
 
         Assert.Contains("captain moves 1,8 -> 1,4 via 1,7 1,6 1,5\n", output);
-        Assert.Contains("> forecast wren brigand-1\nforecast wren -> brigand-1: dmg 10 x2 hit 100% crit 4%; counter: dmg 11 hit 90% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1\nforecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("> attack wren brigand-1 1\nforecast wren -> brigand-1:", output);
-        Assert.Contains("wren attacks brigand-1\n  wren hits brigand-1 for 10", output);
+        Assert.Contains("wren attacks brigand-1\n  wren misses brigand-1\n  brigand-1 misses wren\n  wren hits brigand-1 for 10", output);
         Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
-        Assert.Contains("weapon: Iron Sword (mt 5 hit 90 crit 0 wt 5 range 1-1)\n", output);
+        Assert.Contains("weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)\n", output);
         Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\n", output);
         Assert.Contains("battle ongoing at turn 1, player phase\n", output);
     }
@@ -209,17 +209,22 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\n");
 
-        Assert.Contains("enemy: attack brigand-1 wren\nforecast brigand-1 -> wren: dmg 11 hit 90% crit 0%; counter: dmg 10 x2 hit 100% crit 4%\nbrigand-1 attacks wren\n  brigand-1 ", output);
+        Assert.Contains("enemy: attack brigand-1 wren\nforecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\nbrigand-1 attacks wren\n  brigand-1 ", output);
     }
 
-    /// <summary>Issue 11's acceptance: the journaled script under docs/transcripts wins the sample map under its seed. Keyed rolls keep it stable.</summary>
+    /// <summary>
+    /// Issue 11's acceptance: a journaled script under docs/transcripts wins the sample map
+    /// under its seed. Keyed rolls keep it stable. The script is Code's arm-4 play of seed 53,
+    /// which still wins under section 5 as kept (DECISIONS/0028); the seed-7 script of
+    /// 2026-09-18 was played under the formulas before the keep and loses under these.
+    /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsOldMillRoadOnSeedSeven()
+    public void TheJournaledScriptWinsOldMillRoadOnSeedFiftyThree()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-18-old_mill_road-7.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-old_mill_road-53.script");
 
-        var output = Run(out var exit, "play", OldMillRoad, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", OldMillRoad, "--seed", "53", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);

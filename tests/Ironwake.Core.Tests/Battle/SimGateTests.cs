@@ -52,13 +52,18 @@ public class SimGateTests
         Assert.Contains("1 player units killed", result.Line);
     }
 
+    /// <summary>
+    /// Teodor starts inside the walls and can reach nothing. The brigands are level 3 and the
+    /// test reads 60 seeds so that, at section 5's kept odds (DECISIONS/0028), benching Wren
+    /// costs enough games for the median to clear its margin and name Teodor.
+    /// </summary>
     private const string WalledOff = """
         name: Walled off
         size: 8x5
         win: survive
         turn_limit: 6
         recall: 3
-        enemy_level: 1
+        enemy_level: 3
 
         ........
         ..###...
@@ -80,7 +85,7 @@ public class SimGateTests
     public void GateFourFailsARecruitDeployedOutOfReachOfEverything()
     {
         var map = MapFixture.Parse(WalledOff);
-        var (gate1, baseline) = Gates.Gate1(Starter, map, "walled", 30);
+        var (gate1, baseline) = Gates.Gate1(Starter, map, "walled", 60);
         var result = Gates.Gate4(Starter, map, "walled", baseline);
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
         Assert.Contains("teodor: drop 0.000 se 0.000", result.Line);
@@ -127,8 +132,10 @@ public class SimGateTests
     /// second recruit starts nine tiles from it with a two-turn limit, so the party wins
     /// only with that recruit benched. The median drop is confidently negative and gate 4
     /// fails the cast on the benching line, with no recruit labelled. Twenty seeds, since the
-    /// median of two rows is -0.5 and the margin (issue 115) is twice the benched recruit's
-    /// standard error, 1 / sqrt(seeds): at ten seeds it would read as a ceiling instead.
+    /// median of two rows is about -0.5 and the margin (issue 115) is twice the benched recruit's
+    /// standard error, 1 / sqrt(seeds): at ten seeds it would read as a ceiling instead. Under
+    /// section 5 as kept (DECISIONS/0028) the far recruit falls to the soldier in 2 of 20
+    /// baseline games, which wins the escape, so the row reads -0.900 rather than -1.000.
     /// </summary>
     private const string OneBodyTooMany = """
         name: One body too many
@@ -160,7 +167,7 @@ public class SimGateTests
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
         Assert.Contains("cast not earning its deployment: benching the median recruit raises the win rate", result.Line);
         Assert.DoesNotContain("changes no outcomes", result.Line);
-        Assert.Contains("teodor: drop -1.000", result.Line);
+        Assert.Contains("teodor: drop -0.900", result.Line);
         Assert.DoesNotContain("DEAD WEIGHT", result.Line);
     }
 
@@ -507,7 +514,7 @@ public class SimGateTests
 
         var strike = Outcomes(side, scheme);
         var counterKills = Outcomes(back, scheme).Where(o => o.Damage >= hale.Hp).Sum(o => o.P);
-        Assert.InRange(counterKills, 0.5, 1.0);
+        Assert.InRange(counterKills, 0.4, 1.0);
         var expected = 0.0;
         var alone = 0.0;
         foreach (var (p1, d1) in strike)
@@ -531,7 +538,7 @@ public class SimGateTests
 
         var actual = HeuristicPlayer.KillProbability(state, Starter, hale, tile, brigand);
         Assert.Equal(expected, actual, 12);
-        Assert.True(actual < alone - 0.3, "the counter's share is taken off the second strike's paths");
+        Assert.True(actual < alone - 0.2, "the counter's share is taken off the second strike's paths");
         Assert.True(Exposure.Of(state, Starter, hale, tile, brigand).NoCrit >= hale.Hp, "the attack is refused, so the number reaches the row");
         var player = new HeuristicPlayer();
         player.Next(state, Starter);
@@ -542,7 +549,7 @@ public class SimGateTests
     /// Issue 147: the counter weighs only the paths through the second strike. A first
     /// strike that kills when it lands is unchanged on that path; only the path where it
     /// misses and the second strike kills carries the counter, so the brigand at 1 HP on the
-    /// Veto board moves from the named attack's own chance by exactly the miss, the
+    /// Veto board, for a captain fast enough to double it, moves from the named attack's own chance by exactly the miss, the
     /// counter's kill, and the second hit, and by nothing when the captain stands at full
     /// HP, where the counter kills nobody. A defender that cannot strike back, an archer at
     /// sword range against a captain fast enough to double it, weighs the second strike at
@@ -553,7 +560,8 @@ public class SimGateTests
     [InlineData(RollScheme.OneRoll)]
     public void OnlyThePathsThroughTheSecondStrikeCarryTheCounter(RollScheme scheme)
     {
-        var start = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(Hale), 7, scheme);
+        var swift = Hale with { Stats = Hale.Stats with { Spd = Hale.Stats.Spd + 8 } };
+        var start = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(swift), 7, scheme);
         var brigand = start.Find("brigand-1")! with { Hp = 1 };
         var tile = new Coord(3, 1);
         var full = start.WithUnit(brigand);
@@ -571,7 +579,6 @@ public class SimGateTests
         Assert.Equal(alone, HeuristicPlayer.KillProbability(full, Starter, hale, tile, brigand), 12);
         Assert.Equal(alone - (1 - hit) * counterKills * hit, HeuristicPlayer.KillProbability(low, Starter, low.Find("hale")!, tile, brigand), 12);
 
-        var swift = Hale with { Stats = Hale.Stats with { Spd = Hale.Stats.Spd + 8 } };
         var unanswered = BattleState.From(MapFixture.Parse(Unanswered), Starter, ValueList<Unit>.Of(swift), 7, scheme);
         var archer = unanswered.Find("archer-1")!;
         var weak = unanswered.WithUnit(unanswered.Find("hale")! with { Hp = 1 });

@@ -23,9 +23,9 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 public static class CombatResolver
 {
     public static CombatResult Resolve(
-        Combatant attacker, Combatant defender, int distance, CombatContext context, IRng rng, RollScheme scheme, CombatFormula formula = CombatFormula.Standard)
+        Combatant attacker, Combatant defender, int distance, CombatContext context, IRng rng, RollScheme scheme)
     {
-        var forecast = Combat.Forecast(attacker, defender, distance, scheme, formula);
+        var forecast = Combat.Forecast(attacker, defender, distance, scheme);
         var strikes = ValueList<StrikeEvent>.Empty;
         var attackerHp = attacker.Hp;
         var defenderHp = defender.Hp;

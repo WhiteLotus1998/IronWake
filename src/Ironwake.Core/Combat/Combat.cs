@@ -13,23 +13,23 @@ public static class Combat
     public const int BrokenMtPenalty = 5;
     public const int BrokenHitPenalty = 10;
     public const int HealBase = 5;
+    public const int AvoidSpeedWeight = 2;
 
-    /// <summary>Weight less Str / 5 under the standard formula, less the whole of Str under issue 158's arms; never below zero.</summary>
-    public static int Burden(Combatant unit, CombatFormula formula = CombatFormula.Standard)
+    /// <summary>Weight less the whole of Str, never below zero (issue 158, DECISIONS/0028).</summary>
+    public static int Burden(Combatant unit)
     {
         if (unit.Weapon is null)
         {
             return 0;
         }
 
-        var offset = formula == CombatFormula.Standard ? unit.Stats.Str / 5 : unit.Stats.Str;
-        return Math.Max(0, unit.Weapon.Wt - offset);
+        return Math.Max(0, unit.Weapon.Wt - unit.Stats.Str);
     }
 
-    public static int AttackSpeed(Combatant unit, CombatFormula formula = CombatFormula.Standard) => unit.Stats.Spd - Burden(unit, formula);
+    public static int AttackSpeed(Combatant unit) => unit.Stats.Spd - Burden(unit);
 
-    public static bool Doubles(Combatant attacker, Combatant target, CombatFormula formula = CombatFormula.Standard) =>
-        AttackSpeed(attacker, formula) >= AttackSpeed(target, formula) + DoubleThreshold;
+    public static bool Doubles(Combatant attacker, Combatant target) =>
+        AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
 
     /// <summary>The weapon's Mt as this side fights with it: the content number, less 5 (floored at zero) when the weapon is broken.</summary>
     public static int Mt(Combatant attacker)
@@ -69,8 +69,8 @@ public static class Combat
         return healer.Stats.Mag / 2 + HealBase + spell.HealBase;
     }
 
-    /// <summary>Avoid against a physical or a magic strike; magic ignores burden. Attack speed counts twice against a physical strike under <see cref="CombatFormula.FullStrBurdenSpeedTwice"/>.</summary>
-    public static int Avoid(Combatant target, bool againstMagic, CombatFormula formula = CombatFormula.Standard)
+    /// <summary>Avoid against a physical or a magic strike; magic ignores burden. Attack speed counts twice against a physical strike.</summary>
+    public static int Avoid(Combatant target, bool againstMagic)
     {
         var terrain = target.Terrain.AvoidFor(target.Movement);
         if (againstMagic)
@@ -78,12 +78,11 @@ public static class Combat
             return (target.Stats.Spd + target.Stats.Lck) / 2 + terrain;
         }
 
-        var speed = formula == CombatFormula.FullStrBurdenSpeedTwice ? 2 : 1;
-        return speed * AttackSpeed(target, formula) + target.Stats.Lck / 2 + terrain;
+        return AvoidSpeedWeight * AttackSpeed(target) + target.Stats.Lck / 2 + terrain;
     }
 
-    public static int HitChance(Combatant attacker, Combatant target, CombatFormula formula = CombatFormula.Standard) =>
-        Math.Clamp(Hit(attacker) - Avoid(target, Armed(attacker).IsMagic, formula), 0, 100);
+    public static int HitChance(Combatant attacker, Combatant target) =>
+        Math.Clamp(Hit(attacker) - Avoid(target, Armed(attacker).IsMagic), 0, 100);
 
     public static int Crit(Combatant attacker) =>
         Armed(attacker).Crit + (attacker.Stats.Dex + attacker.Stats.Lck) / 2;
@@ -145,27 +144,27 @@ public static class Combat
     /// away. The attacker must be able to strike at that distance; the defender counters
     /// only when its weapon reaches back.
     /// </summary>
-    public static CombatForecast Forecast(Combatant attacker, Combatant defender, int distance, RollScheme scheme, CombatFormula formula = CombatFormula.Standard)
+    public static CombatForecast Forecast(Combatant attacker, Combatant defender, int distance, RollScheme scheme)
     {
         if (!attacker.CanStrike(distance))
         {
             throw new ArgumentException($"{attacker.Id} cannot strike at distance {distance}", nameof(distance));
         }
 
-        var defenderSide = defender.CanStrike(distance) ? ForSide(defender, attacker, scheme, formula) : SideForecast.None;
-        return new CombatForecast(ForSide(attacker, defender, scheme, formula), defenderSide, scheme);
+        var defenderSide = defender.CanStrike(distance) ? ForSide(defender, attacker, scheme) : SideForecast.None;
+        return new CombatForecast(ForSide(attacker, defender, scheme), defenderSide, scheme);
     }
 
-    private static SideForecast ForSide(Combatant striker, Combatant target, RollScheme scheme, CombatFormula formula)
+    private static SideForecast ForSide(Combatant striker, Combatant target, RollScheme scheme)
     {
-        var hit = HitChance(striker, target, formula);
+        var hit = HitChance(striker, target);
         return new SideForecast(
             Strikes: true,
             Damage: Damage(striker, target),
             HitChance: hit,
             DisplayedHit: DisplayedHit(hit, scheme),
             CritChance: CritChance(striker, target),
-            Doubles: Doubles(striker, target, formula));
+            Doubles: Doubles(striker, target));
     }
 
     private static Weapon Armed(Combatant unit) =>

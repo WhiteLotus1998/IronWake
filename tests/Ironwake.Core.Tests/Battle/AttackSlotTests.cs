@@ -25,7 +25,7 @@ public class AttackSlotTests
         Assert.Equal(11, Queries.Forecast(state, Starter, hale, brigand)!.Attacker.Damage);
         var steel = Queries.Forecast(state, Starter, hale, brigand, 1)!;
         Assert.Equal(14, steel.Attacker.Damage);
-        Assert.Equal(93, steel.Attacker.HitChance);
+        Assert.Equal(82, steel.Attacker.HitChance);
 
         var result = state.Try(new Attack("hale", "brigand-1", 1));
 

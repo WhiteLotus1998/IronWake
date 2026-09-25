@@ -62,7 +62,7 @@ public class ItemTests
         var state = Start(roster: ValueList<Unit>.Of(Hale, Wren.WithUses(1))).Do(new Move("wren", new Coord(2, 1)));
         var whole = Queries.Forecast(state, Starter, state.Find("wren")!, state.Find("brigand-1")!)!;
         Assert.Equal(10, whole.Attacker.Damage);
-        Assert.Equal(100, whole.Attacker.HitChance);
+        Assert.Equal(75, whole.Attacker.HitChance);
 
         var result = state.Try(new Attack("wren", "brigand-1"));
 
@@ -74,7 +74,7 @@ public class ItemTests
         var next = result.Next.WithUnit(wren with { Moved = false, Acted = false });
         var broken = Queries.Forecast(next, Starter, next.Find("wren")!, next.Find("brigand-1")!)!;
         Assert.Equal(5, broken.Attacker.Damage);
-        Assert.Equal(91, broken.Attacker.HitChance);
+        Assert.Equal(65, broken.Attacker.HitChance);
         var again = next.Try(new Attack("wren", "brigand-1"));
         Assert.DoesNotContain(again.Events, e => e is WeaponBroke);
         Assert.Equal(0, Uses(again.Next, "wren", 0));

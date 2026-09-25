@@ -27,13 +27,13 @@ internal static class CombatFixture
     public static readonly UnitClass Outrider = Class("outrider", MovementType.Cavalry, Stats.Zero, WeaponType.Sword, WeaponType.Lance);
     public static readonly UnitClass Skyrider = Class("skyrider", MovementType.Flying, Stats.Zero, WeaponType.Lance, WeaponType.Sword);
 
-    // Wren: Str 7, Dex 6, Spd 8, Lck 5, Def 4, Res 2. Burden 5 - 1 = 4, attack speed 4.
+    // Wren: Str 7, Dex 6, Spd 8, Lck 5, Def 4, Res 2. Burden max(0, 5 - 7) = 0, attack speed 8.
     public static readonly Unit Wren = Unit("wren", "cadet", new Stats(20, 7, 0, 6, 8, 5, 4, 2, 3));
 
-    // Brigand in a reaver: effective HP 22, Str 7, Dex 3, Spd 4, Lck 1, Def 2. Burden 8 - 1 = 7, attack speed -3.
+    // Brigand in a reaver: effective HP 22, Str 7, Dex 3, Spd 4, Lck 1, Def 2. Burden 8 - 7 = 1, attack speed 3.
     public static readonly Unit Brigand = Unit("brigand", "reaver", new Stats(20, 6, 0, 3, 4, 1, 2, 0, 1));
 
-    // Hexer: Mag 6, Dex 5, Spd 5, Lck 2, Res 5. Burden 4 - 0 = 4, attack speed 1.
+    // Hexer: Mag 6, Dex 5, Spd 5, Lck 2, Res 5. Burden 4 - 1 = 3, attack speed 2.
     public static readonly Unit Hexer = Unit("hexer", "adept", new Stats(16, 1, 6, 5, 5, 2, 1, 5, 2));
 
     public static readonly Unit Archer = Unit("archer", "bowman", new Stats(17, 5, 0, 7, 6, 2, 2, 1, 2));

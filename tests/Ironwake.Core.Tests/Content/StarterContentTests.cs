@@ -105,7 +105,7 @@ public class StarterContentTests
     [InlineData("hill", 'n', 2, 3, 1, 3, 10, 1, 0, 0, false)]
     [InlineData("mountain", 'M', 3, -1, 1, -1, 30, 2, 0, 0, false)]
     [InlineData("water", '~', -1, -1, 1, -1, 0, 0, 0, 0, false)]
-    [InlineData("fort", 'F', 1, 1, 1, 1, 30, 2, 2, 20, true)]
+    [InlineData("fort", 'F', 1, 1, 1, 1, 15, 2, 2, 20, true)]
     [InlineData("wall", '#', -1, -1, -1, -1, 0, 0, 0, 0, false)]
     [InlineData("throne", 'T', 1, 1, 1, 1, 30, 3, 3, 20, true)]
     public void TerrainMatchesTheDesignTable(
@@ -125,6 +125,18 @@ public class StarterContentTests
         Assert.Equal(heal, terrain.HealPercent);
         Assert.Equal(appliesToFlyers, terrain.AppliesToFlyers);
         Assert.Same(terrain, Content.TerrainByGlyph(glyph));
+    }
+
+    // The iron tier's hit from DESIGN.md section 5 as kept by issue 158 (DECISIONS/0028):
+    // 15 under the numbers it shipped with, so raw hits on open ground sit near 60 to 80.
+    [Theory]
+    [InlineData("iron_sword", 75)]
+    [InlineData("iron_lance", 70)]
+    [InlineData("iron_axe", 65)]
+    [InlineData("iron_bow", 70)]
+    public void TheIronTierHitIsTheKeptNumbers(string id, int hit)
+    {
+        Assert.Equal(hit, Content.Weapons[id].Hit);
     }
 
     [Fact]
