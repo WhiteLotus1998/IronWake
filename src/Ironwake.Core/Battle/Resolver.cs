@@ -515,8 +515,7 @@ public static class Resolver
             if (unit.Side == nextPhase)
             {
                 var max = unit.MaxHp(content);
-                var percent = state.Map.TerrainAt(unit.At, content).HealPercent;
-                hp = Math.Min(max, hp + max * percent / 100);
+                hp = Math.Min(max, hp + state.Map.TerrainAt(unit.At, content).HealFor(max));
                 if (hp > unit.Hp)
                 {
                     events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
