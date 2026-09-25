@@ -25,5 +25,8 @@ public sealed record UnitClass(
     /// <summary>Ability ids every unit in the class holds while it is in the class, in content order.</summary>
     public ValueList<string> Abilities { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>What a unit needs to certify into the class (issue 72, <see cref="Certifications"/>).</summary>
+    public CertificationRequirements Certification { get; init; } = CertificationRequirements.None;
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 }

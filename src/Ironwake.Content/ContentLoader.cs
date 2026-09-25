@@ -530,6 +530,7 @@ public static class ContentLoader
                 Mastery = mastery,
                 MasteryPoints = masteryPoints,
                 Abilities = AbilityIds(node, "abilities", abilities),
+                Certification = ParseCertification(node),
             });
         }
 
@@ -539,6 +540,66 @@ public static class ContentLoader
         }
 
         return builder.ToImmutable();
+    }
+
+    /// <summary>
+    /// A class's optional <c>certification</c> (issue 72): <c>level</c>, <c>ranks</c> (weapon
+    /// type to rank letter) and <c>stats</c> (minimums, 0 asking nothing), each optional; absent, the class asks nothing.
+    /// </summary>
+    private static CertificationRequirements ParseCertification(EntryNode node)
+    {
+        if (node.OptionalObject("certification") is not { } certification)
+        {
+            return CertificationRequirements.None;
+        }
+
+        RequireOnly(node, certification, "certification", "level", "ranks", "stats");
+        var level = Unit.MinLevel;
+        if (certification.Has("level"))
+        {
+            if (certification.Element.GetProperty("level") is not { ValueKind: JsonValueKind.Number } element
+                || !element.TryGetInt32(out level) || level < Unit.MinLevel || level > Unit.MaxLevel)
+            {
+                throw node.Error("certification.level", $"must be an integer {Unit.MinLevel}..{Unit.MaxLevel}");
+            }
+        }
+
+        var ranks = new List<(WeaponType, WeaponRank)>();
+        if (certification.OptionalObject("ranks") is { } rankNode)
+        {
+            foreach (var property in rankNode.Element.EnumerateObject())
+            {
+                var field = "certification.ranks." + property.Name;
+                var type = node.ParseEnum<WeaponType>(field, property.Name);
+                if (property.Value.ValueKind != JsonValueKind.String)
+                {
+                    throw node.Error(field, "must be a rank letter");
+                }
+
+                ranks.Add((type, node.ParseEnum<WeaponRank>(field, property.Value.GetString()!)));
+            }
+        }
+
+        var stats = Stats.Zero;
+        if (certification.OptionalObject("stats") is { } statNode)
+        {
+            foreach (var property in statNode.Element.EnumerateObject())
+            {
+                if (System.Array.IndexOf(StatKeys, property.Name) < 0)
+                {
+                    throw node.Error("certification.stats." + property.Name, "is not a stat; expected one of " + string.Join(", ", StatKeys));
+                }
+
+                if (property.Value.ValueKind != JsonValueKind.Number || !property.Value.TryGetInt32(out var minimum) || minimum < 0)
+                {
+                    throw node.Error("certification.stats." + property.Name, "must be an integer at least 0");
+                }
+
+                stats = stats.With((Stat)System.Array.IndexOf(StatKeys, property.Name), minimum);
+            }
+        }
+
+        return new CertificationRequirements(level, ValueList<(WeaponType, WeaponRank)>.From(ranks), stats);
     }
 
     private static ImmutableSortedDictionary<string, Weapon> ParseWeapons(ContentFile file)
