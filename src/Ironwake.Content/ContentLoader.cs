@@ -37,7 +37,8 @@ public static class ContentLoader
                 ContentFiles.UnitsDirectory + "/" + Path.GetFileName(p), File.ReadAllText(p))).ToList(),
             ReadFile(contentRoot, ContentFiles.RulesName),
             ReadFile(contentRoot, ContentFiles.ItemsName),
-            ReadFile(contentRoot, ContentFiles.AbilitiesName));
+            ReadFile(contentRoot, ContentFiles.AbilitiesName),
+            File.Exists(Path.Combine(contentRoot, ContentFiles.CampaignName)) ? ReadFile(contentRoot, ContentFiles.CampaignName) : null);
 
         return Parse(files);
     }
@@ -52,7 +53,109 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties };
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items) : CampaignRules.None;
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign };
+    }
+
+    /// <summary>
+    /// <c>campaign.json</c> (issue 74): <c>startingPurse</c> and <c>certificationPrice</c>, each at
+    /// least 0, and <c>maps</c>, at least one, each a <c>map</c> id (unique), a <c>reward</c> of at
+    /// least 0 and a <c>stock</c> of weapon or item ids, each carrying a <c>price</c> and none
+    /// listed twice. The map ids are checked against <c>content/maps</c> by whoever loads maps.
+    /// </summary>
+    private static CampaignRules ParseCampaign(
+        ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items)
+    {
+        JsonDocument document;
+        try
+        {
+            document = JsonDocument.Parse(file.Text, new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true });
+        }
+        catch (JsonException e)
+        {
+            throw new ContentException(file.Name, null, null, "invalid JSON: " + e.Message);
+        }
+
+        if (document.RootElement.ValueKind != JsonValueKind.Object)
+        {
+            throw new ContentException(file.Name, null, null, "root must be an object with startingPurse, certificationPrice and maps");
+        }
+
+        var root = new EntryNode(file.Name, null, document.RootElement);
+        var purse = root.Int("startingPurse");
+        if (purse < 0)
+        {
+            throw root.Error("startingPurse", "must be at least 0");
+        }
+
+        var seal = root.Int("certificationPrice");
+        if (seal < 0)
+        {
+            throw root.Error("certificationPrice", "must be at least 0");
+        }
+
+        var maps = new List<CampaignMap>();
+        var index = 0;
+        foreach (var element in root.Array("maps"))
+        {
+            var node = new EntryNode(file.Name, "maps[" + index + "]", element);
+            if (element.ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error(null, "must be an object");
+            }
+
+            var mapId = node.String("map");
+            node = node.WithEntry(mapId);
+            if (maps.Any(m => m.MapId == mapId))
+            {
+                throw node.Error("map", "is listed twice");
+            }
+
+            var reward = node.Int("reward");
+            if (reward < 0)
+            {
+                throw node.Error("reward", "must be at least 0");
+            }
+
+            var stock = node.StringArray("stock");
+            foreach (var id in stock)
+            {
+                int? price = weapons.TryGetValue(id, out var weapon) ? weapon.Price
+                    : items.TryGetValue(id, out var item) ? item.Price
+                    : throw node.Error("stock", $"'{id}' is neither a weapon nor an item");
+                if (price is null)
+                {
+                    throw node.Error("stock", $"'{id}' has no price, so no shop can sell it");
+                }
+            }
+
+            if (stock.Distinct().Count() != stock.Count)
+            {
+                throw node.Error("stock", "must not list an id twice");
+            }
+
+            maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock)));
+            index++;
+        }
+
+        if (maps.Count == 0)
+        {
+            throw root.Error("maps", "must list at least one map");
+        }
+
+        return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps));
+    }
+
+    /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>
+    private static int? Price(EntryNode node)
+    {
+        if (!node.Has("price"))
+        {
+            return null;
+        }
+
+        var price = node.Int("price");
+        return price >= 1 ? price : throw node.Error("price", "must be at least 1");
     }
 
     /// <summary>
@@ -214,7 +317,7 @@ public static class ContentLoader
                 throw node.Error("uses", "must be at least 1");
             }
 
-            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses));
+            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses, Price(node)));
         }
 
         return builder.ToImmutable();
@@ -762,7 +865,8 @@ public static class ContentLoader
                 ValueList<MovementType>.From(effective),
                 heals,
                 healBase,
-                node.Enum<WeaponRank>("rank")));
+                node.Enum<WeaponRank>("rank"),
+                Price(node)));
         }
 
         if (builder.Count == 0)

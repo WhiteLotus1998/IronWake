@@ -1,0 +1,121 @@
+# screen before Old Mill Road
+show wren
+bench wren
+march
+end
+move wren 4,8
+attack wren archer-2
+move captain 3,7
+attack captain archer-2
+end
+attack wren brigand-1
+move captain 5,5
+end
+move captain 6,2
+move wren 5,5
+end
+attack captain soldier-1
+move wren 5,1
+attack wren soldier-1
+end
+attack captain mill_bandit-1
+attack wren mill_bandit-1
+end
+move captain 7,0
+attack captain archer-1
+move wren 5,0
+attack wren archer-1
+leave
+# screen before Saltmarsh Ford
+roster
+repair captain 1
+repair wren 1
+repair pell 1
+bench ottilie
+buy field_dressing pell
+certify brannock reaver
+show brannock
+show wren
+march
+move wren 5,5
+wait wren
+move teodor 6,6
+wait teodor
+move captain 6,7
+wait captain
+move pell 5,7
+wait pell
+end
+move wren 4,5
+attack wren brigand-1
+move teodor 5,5
+wait teodor
+move pell 5,6
+wait pell
+move captain 6,5
+wait captain
+end
+move pell 4,6
+attack pell soldier-1
+item wren 2
+move teodor 7,5
+wait teodor
+move captain 7,6
+wait captain
+end
+move teodor 10,5
+wait teodor
+move pell 8,6
+wait pell
+move wren 6,5
+wait wren
+wait captain
+end
+move pell 10,6
+attack pell wingrider-1 2
+move teodor 8,7
+item teodor 2
+wait wren
+wait captain
+end
+move pell 10,7
+attack pell soldier-2
+move wren 7,5
+attack wren archer-1
+item teodor 2
+wait captain
+end
+move wren 10,4
+wait wren
+move pell 10,5
+wait pell
+move teodor 9,5
+wait teodor
+move captain 8,5
+wait captain
+end
+move pell 10,2
+attack pell bandit_leader-1
+move wren 10,1
+attack wren bandit_leader-1
+move teodor 10,4
+wait teodor
+move captain 10,5
+wait captain
+end
+recall 98
+move wren 10,3
+wait wren
+move teodor 10,4
+wait teodor
+move captain 10,5
+wait captain
+end
+attack pell bandit_leader-1
+move wren 10,1
+attack wren bandit_leader-1
+leave
+# screen before The Tollgate
+roster
+show wren
+record

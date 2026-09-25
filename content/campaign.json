@@ -1,0 +1,12 @@
+{
+  "startingPurse": 500,
+  "certificationPrice": 500,
+  "maps": [
+    { "map": "old_mill_road", "reward": 600,
+      "stock": ["iron_sword", "iron_lance", "iron_bow", "field_dressing"] },
+    { "map": "saltmarsh_ford", "reward": 800,
+      "stock": ["iron_sword", "iron_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "salve", "field_dressing"] },
+    { "map": "the_tollgate", "reward": 1000,
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] }
+  ]
+}

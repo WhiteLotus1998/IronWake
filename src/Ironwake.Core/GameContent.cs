@@ -40,6 +40,9 @@ public sealed record GameContent(
     public ImmutableSortedDictionary<string, Difficulty> Difficulties { get; init; } =
         ImmutableSortedDictionary<string, Difficulty>.Empty.WithComparers(StringComparer.Ordinal);
 
+    /// <summary>The campaign of <c>campaign.json</c> (issue 74): its purse, seal price and maps; <see cref="CampaignRules.None"/> when the content has none.</summary>
+    public CampaignRules Campaign { get; init; } = CampaignRules.None;
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -105,6 +108,7 @@ public sealed record GameContent(
         && DictEquals(Difficulties, other.Difficulties)
         && Cast == other.Cast
         && Rivalry == other.Rivalry
+        && Campaign == other.Campaign
         && WakeRadius == other.WakeRadius;
 
     public override int GetHashCode() =>

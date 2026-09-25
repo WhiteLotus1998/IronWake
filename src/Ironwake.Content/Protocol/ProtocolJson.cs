@@ -471,6 +471,13 @@ public static class ProtocolJson
         w.WriteNumber("placementIndex", unit.PlacementIndex);
         w.WriteBoolean("retreated", unit.Retreated);
         WriteNullableNumber(w, "canto", unit.Canto);
+        WriteRosterFields(w, u);
+        w.WriteEndObject();
+    }
+
+    /// <summary>A <see cref="Unit"/>'s own fields, from its class on: the part of a unit a campaign carries between maps (issue 74).</summary>
+    private static void WriteRosterFields(Utf8JsonWriter w, Unit u)
+    {
         w.WriteString("class", u.ClassId);
         w.WriteNumber("level", u.Level);
         w.WriteNumber("exp", u.Exp);
@@ -504,10 +511,30 @@ public static class ProtocolJson
         }
 
         w.WriteEndObject();
-        w.WriteEndObject();
     }
 
     private static BattleUnit ReadUnit(JsonElement e, GameContent content)
+    {
+        var unit = ReadRosterUnit(e, content);
+        var behavior = OptionalString(e, "behavior");
+        return new BattleUnit(
+            unit,
+            ParseEnum<Side>(RequiredString(e, "side"), "side"),
+            ReadCoord(e, "at"),
+            RequiredInt(e, "hp"),
+            RequiredBool(e, "moved"),
+            RequiredBool(e, "acted"),
+            OptionalString(e, "group"),
+            behavior is null ? null : ParseEnum<Behavior>(behavior, "behavior"),
+            RequiredBool(e, "isBoss"),
+            RequiredBool(e, "isCaptain"),
+            RequiredInt(e, "placementIndex"),
+            RequiredBool(e, "retreated"),
+            OptionalInt(e, "canto"));
+    }
+
+    /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
+    private static Unit ReadRosterUnit(JsonElement e, GameContent content)
     {
         var id = RequiredString(e, "id");
         var classId = RequiredString(e, "class");
@@ -542,21 +569,76 @@ public static class ProtocolJson
             throw new ProtocolException($"unit '{id}': {ex.Message}");
         }
 
-        var behavior = OptionalString(e, "behavior");
-        return new BattleUnit(
-            unit,
-            ParseEnum<Side>(RequiredString(e, "side"), "side"),
-            ReadCoord(e, "at"),
-            RequiredInt(e, "hp"),
-            RequiredBool(e, "moved"),
-            RequiredBool(e, "acted"),
-            OptionalString(e, "group"),
-            behavior is null ? null : ParseEnum<Behavior>(behavior, "behavior"),
-            RequiredBool(e, "isBoss"),
-            RequiredBool(e, "isCaptain"),
-            RequiredInt(e, "placementIndex"),
-            RequiredBool(e, "retreated"),
-            OptionalInt(e, "canto"));
+        return unit;
+    }
+
+    /// <summary>
+    /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
+    /// (a ulong does not survive every JSON reader), the difficulty, the purse, the index of the next
+    /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
+    /// without the battle fields), and the fallen and benched ids. A campaign is a file.
+    /// </summary>
+    public static string Campaign(CampaignRecord record) => Write(w =>
+    {
+        w.WriteStartObject();
+        w.WriteNumber("protocolVersion", ProtocolVersion.Current);
+        w.WriteString("seed", record.Seed.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        w.WriteString("difficulty", record.Difficulty);
+        w.WriteNumber("purse", record.Purse);
+        w.WriteNumber("mapIndex", record.MapIndex);
+        w.WriteStartArray("roster");
+        foreach (var u in record.Roster)
+        {
+            w.WriteStartObject();
+            w.WriteString("id", u.Id);
+            w.WriteString("name", u.Name);
+            WriteRosterFields(w, u);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+        WriteStrings(w, "fallen", record.Fallen);
+        WriteStrings(w, "benched", record.Benched);
+        w.WriteEndObject();
+    });
+
+    /// <summary>Reads a campaign record written by <see cref="Campaign"/>; another protocol version is refused.</summary>
+    public static CampaignRecord ReadCampaign(string json, GameContent content)
+    {
+        using var doc = Parse(json);
+        var e = doc.RootElement;
+        var version = RequiredInt(e, "protocolVersion");
+        if (version != ProtocolVersion.Current)
+        {
+            throw new ProtocolException($"protocolVersion {version} is not this build's {ProtocolVersion.Current}");
+        }
+
+        if (!ulong.TryParse(RequiredString(e, "seed"), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var seed))
+        {
+            throw new ProtocolException("field 'seed' is not an unsigned integer");
+        }
+
+        var roster = Array(Required(e, "roster"), "roster").Select(u => ReadRosterUnit(u, content)).ToList();
+        if (roster.Count == 0)
+        {
+            throw new ProtocolException("field 'roster' is empty: a campaign needs its captain");
+        }
+
+        var purse = RequiredInt(e, "purse");
+        var mapIndex = RequiredInt(e, "mapIndex");
+        if (purse < 0 || mapIndex < 0)
+        {
+            throw new ProtocolException("fields 'purse' and 'mapIndex' must be at least 0");
+        }
+
+        return new CampaignRecord(
+            ValueList<Unit>.From(roster),
+            ReadStrings(e, "fallen"),
+            purse,
+            mapIndex,
+            seed,
+            RequiredString(e, "difficulty"),
+            ReadStrings(e, "benched"));
     }
 
     private static void WriteSide(Utf8JsonWriter w, string name, SideForecast side)
