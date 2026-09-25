@@ -30,8 +30,12 @@ public sealed record GateResult(string Line, bool Passed);
 /// <summary>Plays whole games, a player controller against <see cref="EnemyAi"/>, and tallies them.</summary>
 public static class Runner
 {
-    /// <summary>A full game from the opening state until the battle is decided.</summary>
-    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null)
+    /// <summary>
+    /// A full game from the opening state until the battle is decided. With
+    /// <paramref name="turns"/>, each player phase is read by <see cref="TurnState"/> at its
+    /// start (issue 47).
+    /// </summary>
+    public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<TurnReading>? turns = null)
     {
         var state = BattleState.From(map, content, content.Cast, seed, scheme, benched);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
@@ -43,6 +47,11 @@ public static class Runner
         var lastCombatTurn = 0;
         while (!state.Outcome.IsOver)
         {
+            if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
+            {
+                turns.Add(TurnState.Read(state, content));
+            }
+
             var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
             if (commands.Count == 0)
             {
@@ -72,8 +81,15 @@ public static class Runner
             }
         }
 
-        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, (player as HeuristicPlayer)?.HighestRefusedKill);
+        return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player));
     }
+
+    private static double? RefusedKillOf(IPlayer player) => player switch
+    {
+        HeuristicPlayer heuristic => heuristic.HighestRefusedKill,
+        PrefixPlayer prefix => prefix.HighestRefusedKill,
+        _ => null,
+    };
 
     private static void Tally(Dictionary<string, ActionMix> mix, IReadOnlyList<GameEvent> events)
     {
@@ -111,14 +127,20 @@ public static class Gates
     /// reads; the losses by cause in section 7's order with the mean quiet tail of the
     /// timeouts (turns from the last combat to the limit, so a tail near the limit is a board
     /// that stopped and one near zero a fight that ran out of clock; issue 114); and the roll
-    /// scheme the games were fought under.
+    /// scheme the games were fought under. With <paramref name="readings"/>, every game's
+    /// player phases are read for issue 47's turn-state counters, one list per seed.
     /// </summary>
-    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null)
+    public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<IReadOnlyList<TurnReading>>? readings = null)
     {
         var games = new List<GameResult>();
         for (var seed = 1; seed <= seeds; seed++)
         {
-            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), scheme: scheme, hits: hits));
+            var read = readings is null ? null : new List<TurnReading>();
+            games.Add(Runner.Play(content, map, (ulong)seed, new HeuristicPlayer(), scheme: scheme, hits: hits, turns: read));
+            if (read is not null)
+            {
+                readings!.Add(read);
+            }
         }
 
         var wins = games.Count(g => g.Won);
