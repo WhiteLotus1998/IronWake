@@ -33,7 +33,7 @@ public sealed class PlaySession
           wait <unit>              end the unit's action
           end                      end the player phase; the enemy phase plays out
           recall <n>               rewind to history state n (spends a charge)
-          forecast <unit> <target> [slot]  show the forecast without attacking
+          forecast <unit> <target> [slot] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
           map                      show the board
@@ -258,15 +258,15 @@ public sealed class PlaySession
             case "item":
                 Error("usage: item <unit> <slot> [ally]");
                 break;
-            case "forecast" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
-                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var forecastSlot))
+            case "forecast" when TryForecastWords(words, out var slotText, out var from):
+                if (TrySlot(words[1], slotText, out var forecastSlot))
                 {
-                    PrintForecast(words[1], words[2], forecastSlot);
+                    PrintForecast(words[1], words[2], forecastSlot, from);
                 }
 
                 break;
             case "forecast":
-                Error("usage: forecast <unit> <target> [slot]");
+                Error("usage: forecast <unit> <target> [slot] [from <x,y>]");
                 break;
             case "reach" when words.Length == 2:
                 if (Find(words[1]) is { } mover)
@@ -356,22 +356,69 @@ public sealed class PlaySession
         }
     }
 
-    private bool PrintForecast(string unitId, string targetId, int? slot)
+    /// <summary>
+    /// Reads the words after <c>forecast &lt;unit&gt; &lt;target&gt;</c>: an optional slot, then
+    /// an optional <c>from &lt;x,y&gt;</c> (issue 151). False when they are anything else.
+    /// </summary>
+    private static bool TryForecastWords(string[] words, out string? slotText, out Coord? from)
+    {
+        slotText = null;
+        from = null;
+        if (words.Length < 3)
+        {
+            return false;
+        }
+
+        var next = 3;
+        if (next < words.Length && int.TryParse(words[next], out _))
+        {
+            slotText = words[next];
+            next++;
+        }
+
+        if (next < words.Length)
+        {
+            if (words[next] != "from" || next + 1 != words.Length - 1 || !TryCoord(words[next + 1], out var at))
+            {
+                return false;
+            }
+
+            from = at;
+            next += 2;
+        }
+
+        return next == words.Length;
+    }
+
+    /// <summary>
+    /// Prints the forecast line, from the unit's own tile or from <paramref name="from"/>,
+    /// a tile it could still move to (issue 151). The from-tile line names the tile and
+    /// its terrain, since the terrain is what the player is choosing between.
+    /// </summary>
+    private bool PrintForecast(string unitId, string targetId, int? slot, Coord? from = null)
     {
         if (Find(unitId) is not { } unit || Find(targetId) is not { } target)
         {
             return false;
         }
 
-        var forecast = Queries.Forecast(_state, _content, unit, target, slot);
-        if (forecast is null)
+        var tile = from ?? unit.At;
+        if (tile != unit.At && !Queries.CanStandOn(_state, _content, unit, tile))
         {
-            var (_, _, rejection) = Resolver.ChooseWeapon(unit, _content, slot);
-            Error(rejection?.Message ?? $"{unit.Id} cannot attack {target.Id} from {unit.At}");
+            Error(unit.Moved ? $"{unit.Id} has already moved this phase; forecast from {unit.At}" : $"{unit.Id} cannot move to {tile}");
             return false;
         }
 
-        _out.WriteLine($"forecast {unit.Id} -> {target.Id}: {Side(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? Side(forecast.Defender) : "none")}");
+        var forecast = Queries.Forecast(_state, _content, unit, target, tile, slot);
+        if (forecast is null)
+        {
+            var (_, _, rejection) = Resolver.ChooseWeapon(unit, _content, slot);
+            Error(rejection?.Message ?? $"{unit.Id} cannot attack {target.Id} from {tile}");
+            return false;
+        }
+
+        var where = from is null ? "" : $" from {tile} ({_state.Map.TerrainAt(tile, _content).Name})";
+        _out.WriteLine($"forecast {unit.Id} -> {target.Id}{where}: {Side(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? Side(forecast.Defender) : "none")}");
         return true;
 
         static string Side(SideForecast side) =>
