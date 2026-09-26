@@ -218,7 +218,7 @@ public sealed class ProtocolSession
         });
     }
 
-    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, its 0-based slot and weapon, the forecast, and what lands if every hit does.</summary>
+    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248).</summary>
     private string Threat(JsonElement request, BattleUnit unit)
     {
         if (unit.Side != Side.Player)
@@ -227,7 +227,7 @@ public sealed class ProtocolSession
         }
 
         var tile = ProtocolJson.OptionalCoord(request, "from") ?? unit.At;
-        if (Queries.Threats(_state, _content, unit, tile) is not { } lines)
+        if (Queries.Threats(_state, _content, unit, tile) is not { } lines || Queries.SleepingThreats(_state, _content, unit, tile) is not { } asleep)
         {
             var owed = unit.Canto is not null && unit.Acted;
             return Error(
@@ -251,6 +251,14 @@ public sealed class ProtocolSession
                 w.WriteNumber("x", line.From.X);
                 w.WriteNumber("y", line.From.Y);
                 w.WriteEndObject();
+                if (line.Arrives is { } arrives)
+                {
+                    w.WriteStartObject("arrives");
+                    w.WriteNumber("x", arrives.X);
+                    w.WriteNumber("y", arrives.Y);
+                    w.WriteEndObject();
+                }
+
                 w.WriteNumber("slot", line.Slot);
                 w.WriteString("weapon", line.Weapon.Id);
                 w.WriteNumber("ifAllLand", line.IfAllLand);
@@ -261,7 +269,23 @@ public sealed class ProtocolSession
 
             w.WriteEndArray();
             w.WriteNumber("ifAllLand", lines.Sum(l => l.IfAllLand));
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines));
+            w.WriteStartArray("asleep");
+            foreach (var group in asleep)
+            {
+                w.WriteStartObject();
+                w.WriteString("group", group.Group);
+                w.WriteStartArray("members");
+                foreach (var member in group.Members)
+                {
+                    w.WriteStringValue(member.Id);
+                }
+
+                w.WriteEndArray();
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep));
         });
     }
 

@@ -227,6 +227,36 @@ public class CliPlayTests
         Assert.Contains("  threat <unit> [from <x,y>]  what each enemy would strike it with", Play(out _, "help\n"));
     }
 
+    /// <summary>
+    /// Issue 248: on an announced map <c>threat</c> prices the enemy an event brings this
+    /// enemy phase and marks where it arrives, and it names a sleeping group that could
+    /// strike the tile if woken, members and tiles and no numbers, with the wake rule.
+    /// </summary>
+    [Fact]
+    public void ThreatMarksAnAnnouncedArrivalAndNamesASleepingGroupThatCouldReachTheTile()
+    {
+        const string Lane = "name: Lane\nsize: 16x4\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\nannounce: on\n\n"
+            + "................\n................\n................\n................\n\n"
+            + "units:\nP captain 0,1\nP recruit:wren 0,3\nE soldier 10,1 group:y behavior:guard\nE archer 10,3 group:y behavior:guard\n\n"
+            + "events:\narrival turn 1 enemy spawn soldier 7,0 group:n behavior:aggressive\n";
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-lane-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, Lane);
+        File.WriteAllText(script, "threat captain from 4,1\nthreat wren from 4,3\n");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("> threat captain from 4,1\nthreat on captain at 4,1 (Plain):\n  soldier-2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%\n  if all land: 8 against 22 hp\n> ", output);
+            Assert.Contains("> threat wren from 4,3\nthreat on wren at 4,3 (Plain): no enemy can strike it next phase\n  group y asleep, could strike here if woken: archer-1 at 10,3, soldier-1 at 10,1\n  asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies\n", output);
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
     [Fact]
     public void TheForecastPrintsBeforeAnAttackAndEventsRenderStrikeByStrike()
     {
