@@ -256,7 +256,7 @@ public class CampaignRecordTests
     [Fact]
     public void ACampaignIsFinishedAfterItsLastMap()
     {
-        var last = AtMap(2);
+        var last = AtMap(Content.Campaign.Maps.Count - 1);
 
         var after = last.AfterBattle(Won(last), Content);
 

@@ -1,0 +1,39 @@
+name: Harrow Weir
+size: 16x12
+win: defeat_boss
+turn_limit: 14
+recall: 3
+enemy_level: 2
+announce: on
+
+^^^....=..~~..MM
+^^.....=..~~...M
+.......=..~~....
+..^^...=..~~.n..
+..^....=..~~....
+.......=..~~....
+.......=====.n..
+..........~~....
+..n.......~~..^.
+..........~~..^.
+................
+................
+
+units:
+P captain 1,6
+P recruit 1,5
+P recruit 1,7
+P recruit 0,5
+P recruit 0,7
+P recruit 0,6
+E brigand 3,3 group:wood behavior:guard
+E shieldbearer 11,6 group:bridge behavior:hold
+E archer 14,4 group:weir behavior:hold
+B weir_foreman 13,6 group:weir behavior:boss
+E brawler 11,10 group:ford behavior:guard
+E soldier 12,11 group:ford behavior:guard
+
+events:
+north1 turn 3 enemy spawn rider 7,0 group:north behavior:aggressive
+west1 turn 5 enemy spawn brigand 0,11 group:west behavior:aggressive
+north2 turn 7 enemy spawn brigand 7,0 group:north behavior:aggressive
