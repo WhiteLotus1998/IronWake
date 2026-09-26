@@ -460,6 +460,28 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// DESIGN.md 13.7 (Dusk maps, experiment): Code's play of Brackwater Cut with <c>dusk: 7</c>
+    /// on seed 7. The chase and the bank fall into the dark as sight shrinks, the moves made
+    /// there print only as something moving, Dunstan holds the gap and falls, and by turn 5
+    /// every enemy left is a question mark when Rook, Wren and the captain walk out.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptEscapesBrackwaterAtDusk()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "brackwater_cut_dusk.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut_dusk-7.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("escaped: rook, wren, captain; left behind: none; fell: dunstan, pell\n", output);
+        Assert.Contains("enemy: something moves in the dark\n", output);
+        Assert.Contains("  and whatever is in the dark (?), unpriced\n", output);
+        Assert.Contains("?  unseen at 11,1 13,2 4,3 9,3 10,3 11,3 10,4 17,5 17,6 17,7\ndusk: sight 3, 2 next turn; 10 unseen (?); no side strikes what it cannot see\n", output);
+    }
+
+    /// <summary>
     /// Issue 32's acceptance: the map-events sample under docs/samples, played by hand on
     /// seed 7. Teodor ending on the lever at 3,1 opens the wall at 4,1, the reinforcement
     /// arrives from the east edge at the start of enemy phase 3 and walks through the new
