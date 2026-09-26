@@ -527,6 +527,7 @@ public static class Resolver
         var healer = unit with { Moved = true, Acted = true, Unit = unit.Unit with { Inventory = inventory.Replace(use.Slot, stack with { Uses = usesLeft }) } };
         healer = AwardHealExp(healer, target.Hp * 2 < targetMax, content, state.Seed, events);
         healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
+        healer = AwardMastery(healer, content, events);
         var next = state.WithUnit(healer);
         return (next.WithUnit(target with { Hp = healed }), null);
     }
@@ -603,8 +604,9 @@ public static class Resolver
     }
 
     /// <summary>
-    /// Issue 69 for one side of a combat: a living player unit earns a mastery point in its
-    /// class whether or not it struck, since it fought the combat, and emits
+    /// Issue 69 for one side of a combat, and issue 245 for a healer's accepted cast: a living
+    /// player unit earns a mastery point in its class whether or not it struck, since it
+    /// fought the combat, and emits
     /// <see cref="MasteryEarned"/> on reaching the class's requirement. A mastery that
     /// raises max HP raises current HP by as much, as a level-up does, and one that lowers it caps current HP at the new max. Enemies earn
     /// nothing, as with EXP and ranks (DECISIONS/0017).

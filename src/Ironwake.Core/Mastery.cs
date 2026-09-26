@@ -3,13 +3,13 @@ namespace Ironwake.Core;
 /// <summary>
 /// Class mastery (issue 69, DESIGN section 3): a class that names a mastery ability also
 /// names the points that earn it, and a player unit earns one point per combat it fights
-/// in the class. Deterministic, never a roll, like ranks (issue 67). On reaching the
+/// in the class and per healing spell it casts on an ally in the class (issue 245). Deterministic, never a roll, like ranks (issue 67). On reaching the
 /// requirement the ability joins the unit's own abilities, so it stays when the unit
 /// leaves the class.
 /// </summary>
 public static class Masteries
 {
-    /// <summary>Points for a combat fought in the class, as attacker or defender.</summary>
+    /// <summary>Points for a combat fought in the class, as attacker or defender, or for a heal cast in it (issue 245).</summary>
     public const int PerCombat = 1;
 
     /// <summary>

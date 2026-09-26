@@ -136,21 +136,79 @@ public class MasteryTests
         }
     }
 
-    [Fact]
-    public void AHealIsNotACombatAndEarnsNoMasteryPoint()
+    /// <summary>
+    /// Mira the chaplain beside a wounded Hale on the yard, her class's requirement at
+    /// <paramref name="points"/>, carrying Salve and a Field Dressing, herself wounded too.
+    /// </summary>
+    private static (BattleState State, GameContent Content) HealerBeside(int points, int haleHp = 5)
     {
-        var chaplain = Starter.Class("chaplain");
-        var content = Starter with { Classes = Starter.Classes.SetItem("chaplain", chaplain with { Mastery = "faithbreaker", MasteryPoints = 5 }) };
-        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve");
+        var content = Starter with { Classes = Starter.Classes.SetItem("chaplain", Starter.Class("chaplain") with { MasteryPoints = points }) };
+        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "salve", "field_dressing");
         var state = BattleState.From(MapFixture.Parse(Yard.Replace("recruit:wren", "recruit"), "yard.map"), content, ValueList<Unit>.Of(Hale, mira), 7);
         var hale = state.Find("hale") ?? state.UnitsOf(Side.Player).First(u => u.Id != "mira");
-        var hurt = state.WithUnit(hale with { Hp = 5 });
+        var hurt = state.WithUnit(hale with { Hp = haleHp }).WithUnit(state.Find("mira")! with { Hp = 10 });
         Assert.Equal(1, hurt.Find("mira")!.At.DistanceTo(hale.At));
+        return (hurt, content);
+    }
 
-        var result = Resolver.Apply(hurt, content, new UseItem("mira", 1, hale.Id));
+    [Fact]
+    public void AHealCastOnAWoundedAllyEarnsOneMasteryPoint()
+    {
+        var (state, content) = HealerBeside(12);
+        var hale = state.UnitsOf(Side.Player).First(u => u.Id != "mira");
+
+        var result = Resolver.Apply(state, content, new UseItem("mira", 0, hale.Id));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Equal(1, result.Next.Find("mira")!.Unit.Mastery.Points("chaplain"));
+        Assert.Empty(result.Events.OfType<MasteryEarned>());
+    }
+
+    [Fact]
+    public void AFieldDressingEarnsNoMasteryPoint()
+    {
+        var (state, content) = HealerBeside(12);
+
+        var result = Resolver.Apply(state, content, new UseItem("mira", 1));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Contains(result.Events, e => e is UnitHealed { UnitId: "mira" });
         Assert.Equal(0, result.Next.Find("mira")!.Unit.Mastery.Points("chaplain"));
+    }
+
+    [Fact]
+    public void ARefusedHealEarnsNoMasteryPoint()
+    {
+        var (state, content) = HealerBeside(12);
+        var hale = state.UnitsOf(Side.Player).First(u => u.Id != "mira");
+        var whole = state.WithUnit(hale with { Hp = hale.MaxHp(content) });
+
+        var result = Resolver.Apply(whole, content, new UseItem("mira", 0, hale.Id));
+
+        Assert.False(result.Accepted);
+        Assert.Equal(RejectionReason.NothingToHeal, result.Rejection!.Reason);
+        Assert.Equal(0, result.Next.Find("mira")!.Unit.Mastery.Points("chaplain"));
+    }
+
+    [Fact]
+    public void AHealReachingTheRequirementEmitsMasteryEarnedAndGrantsGrace()
+    {
+        var (state, content) = HealerBeside(1);
+        var hale = state.UnitsOf(Side.Player).First(u => u.Id != "mira");
+
+        var result = Resolver.Apply(state, content, new UseItem("mira", 0, hale.Id));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Equal(new MasteryEarned("mira", "chaplain", "grace"), result.Events.OfType<MasteryEarned>().Single());
+        Assert.Contains("grace", result.Next.Find("mira")!.Unit.Abilities);
+    }
+
+    [Fact]
+    public void AHealersMasteryLineCountsCombatsOrHeals()
+    {
+        var (state, content) = HealerBeside(12);
+
+        Assert.Equal("  mastery: Grace (0 of 12 combats or heals)", Ironwake.Cli.PlaySession.MasteryLine(state.Find("mira")!, content));
     }
 
     [Fact]

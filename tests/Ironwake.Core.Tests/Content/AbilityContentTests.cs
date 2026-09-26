@@ -172,6 +172,23 @@ public class AbilityContentTests
     }
 
     [Fact]
+    public void AWieldingConditionLoadsAndRoundTrips()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(abilities: One("{ \"kind\": \"combat\", \"wielding\": \"axe\", \"crit\": 15, \"avoid\": -10 }")));
+
+        var effect = Assert.IsType<CombatModifierEffect>(content.Ability("a").Effect);
+        Assert.Equal(WeaponType.Axe, effect.Wielding);
+        Assert.Equal(OpponentCondition.Any, effect.Against);
+        Assert.Equal(content, ContentLoader.Parse(ContentSerializer.Write(content)));
+    }
+
+    [Fact]
+    public void AWieldingConditionMustNameAWeaponType()
+    {
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"combat\", \"crit\": 15, \"wielding\": \"whip\" }"))), ContentFiles.AbilitiesName, "a", "effect.wielding");
+    }
+
+    [Fact]
     public void AnArtLoadsWithItsWeaponRankCostAndDeltas()
     {
         var content = ContentLoader.Parse(Fixture.Files(abilities: Breakers));

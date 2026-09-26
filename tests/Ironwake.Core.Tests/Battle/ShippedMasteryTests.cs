@@ -4,8 +4,8 @@ namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
 /// Issue 69's shipped masteries, DECISIONS/0047: every starter class names one ability from
-/// issue 66's effect set and the combats that earn it, 12 for a class that fights and 8 for
-/// the chaplain, whose heals are not combats. The yard's brigand is infantry with an iron axe.
+/// issue 66's effect set and the points that earn it, 12 for every class since a heal cast
+/// earns a point as a combat does (issue 245). The yard's brigand is infantry with an iron axe.
 /// </summary>
 public class ShippedMasteryTests
 {
@@ -23,8 +23,8 @@ public class ShippedMasteryTests
     [InlineData("reaver", "bloodrush", 12)]
     [InlineData("bowman", "deadeye", 12)]
     [InlineData("adept", "deep_study", 12)]
-    [InlineData("chaplain", "grace", 8)]
-    [InlineData("outrider", "lancebreaker", 12)]
+    [InlineData("chaplain", "grace", 12)]
+    [InlineData("outrider", "swordbreaker", 12)]
     [InlineData("skyrider", "bowbreaker", 12)]
     [InlineData("bulwark", "reasonbreaker", 12)]
     public void EveryStarterClassMastersOneAbilityAtItsRequirement(string classId, string ability, int points)
@@ -62,14 +62,20 @@ public class ShippedMasteryTests
     }
 
     [Fact]
-    public void BloodrushTradesTenAvoidForFifteenCrit()
+    public void BloodrushTradesTenAvoidForFifteenCritOnlyWhileWieldingAnAxe()
     {
-        var plain = Forecast(Beside(Hale));
-        var rushed = Forecast(Beside(Knowing("bloodrush")));
+        static Unit Reaver(string weapon, bool mastered) =>
+            Recruit("hale", "reaver", Hale.Stats, weapon) with { Abilities = mastered ? ValueList<string>.Of("bloodrush") : ValueList<string>.Empty };
 
-        Assert.Equal(Math.Clamp(plain.Attacker.CritChance + 15, 0, 100), rushed.Attacker.CritChance);
-        Assert.Equal(Math.Clamp(plain.Defender.HitChance + 10, 0, 100), rushed.Defender.HitChance);
-        Assert.Equal(plain.Attacker.HitChance, rushed.Attacker.HitChance);
+        var fists = Forecast(Beside(Reaver("iron_gauntlets", mastered: false)));
+        var rushedFists = Forecast(Beside(Reaver("iron_gauntlets", mastered: true)));
+        Assert.Equal(fists, rushedFists);
+
+        var axe = Forecast(Beside(Reaver("iron_axe", mastered: false)));
+        var rushedAxe = Forecast(Beside(Reaver("iron_axe", mastered: true)));
+        Assert.Equal(Math.Clamp(axe.Attacker.CritChance + 15, 0, 100), rushedAxe.Attacker.CritChance);
+        Assert.Equal(Math.Clamp(axe.Defender.HitChance + 10, 0, 100), rushedAxe.Defender.HitChance);
+        Assert.Equal(axe.Attacker.HitChance, rushedAxe.Attacker.HitChance);
     }
 
     [Fact]
