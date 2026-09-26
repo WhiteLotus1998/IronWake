@@ -23,7 +23,8 @@ public class CampaignRecordTests
 
     /// <summary>
     /// The battle <paramref name="record"/> begins, won by removing every enemy and, on a Seize map,
-    /// standing the captain on the throne, with the opening kept as history.
+    /// standing the captain on the throne, or on an Escape map, every player unit on its own exit,
+    /// with the opening kept as history.
     /// </summary>
     private static BattleState Won(CampaignRecord record, Func<BattleUnit, BattleUnit?>? player = null)
     {
@@ -32,6 +33,7 @@ public class CampaignRecordTests
         var throne = Enumerable.Range(0, map.Width * map.Height).Select(i => new Coord(i % map.Width, i / map.Width)).FirstOrDefault(map.IsThrone);
         var units = opening.Units.Where(u => u.Side == Side.Player)
             .Select(u => u.IsCaptain && map.Win == WinCondition.Seize ? u with { At = throne } : u)
+            .Select((u, i) => map.Win == WinCondition.Escape ? u with { At = map.Exits[i] } : u)
             .Select(u => player is null ? u : player(u)).OfType<BattleUnit>();
         return opening with { Units = ValueList<BattleUnit>.From(units), Turn = 4, History = ValueList<BattleState>.Of(opening) };
     }

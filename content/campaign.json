@@ -11,6 +11,8 @@
     { "map": "harrow_weir", "reward": 1200,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400,
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
+    { "map": "brackwater_cut", "reward": 1600,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }
   ]
 }

@@ -616,6 +616,31 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 80: Code's play of seed 29 on Brackwater Cut. The first pass holds the gap at 11,3
+    /// and loses three units on turn 4, so a Recall goes back to turn 3; the second holds from
+    /// 12,3, where the wall leaves one melee tile and one bow tile, until a second Recall to
+    /// turn 5. The captain steps onto 19,3 on turn 8 of 8 as the only one left alive, which
+    /// is an Escape by the rule (every living unit on an exit).
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptEscapesBrackwaterCutOnSeedTwentyNine()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-29.script");
+
+        var output = Run(out var exit, "play", "brackwater_cut", "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: escape\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("recalled to state 54; 2 charges left", output);
+        Assert.Contains("recalled to state 96; 1 charges left", output);
+        Assert.Contains("archer-2 falls at 11,1", output);
+        Assert.Contains("Brackwater Cut  turn 8 of 8", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;
