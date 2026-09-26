@@ -637,11 +637,14 @@ public sealed class PlaySession
     /// resolver is about to read, so the transcript carries the odds of every combat and
     /// not only the player's half (issue 152). The planner only emits attacks the core
     /// forecasts, so a null forecast here is a harness fault, like a rejected command.
+    /// A grudge strike prints the planner's best alternative under its forecast (issue 331).
     /// </summary>
     private void EnemyPhase()
     {
+        var grudges = new Dictionary<string, EnemyAi.GrudgeStrike?>();
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
+            var grudge = EnemyAi.GrudgeLog(_state, _content, command, grudges);
             if (command is Move or Wait && InTheDark(command))
             {
                 var hidden = Resolve(command);
@@ -669,6 +672,15 @@ public sealed class PlaySession
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith));
                 PrintRivalry(target!, countering: true);
+                if (SwornLine(attacker!, target!) is { } sworn)
+                {
+                    _out.WriteLine(sworn);
+                }
+
+                if (grudge is not null)
+                {
+                    _out.WriteLine("  " + grudge);
+                }
             }
 
             var result = Resolve(command);
@@ -955,6 +967,11 @@ public sealed class PlaySession
         if (RivalryLine(state, content, unit with { At = tile }, countering: false) is { } rivalry)
         {
             lines.Add(rivalry);
+        }
+
+        if (SwornLine(unit, target) is { } sworn)
+        {
+            lines.Add(sworn);
         }
 
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
@@ -1290,6 +1307,19 @@ public sealed class PlaySession
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, unit, countering);
         return $"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
+    }
+
+    /// <summary>
+    /// Under a forecast between a sworn player unit and the enemy sworn on it (issue 331): the
+    /// crit avoid the forecast already took off, so the reader sees why the crit is what it is.
+    /// Silent otherwise.
+    /// </summary>
+    public static string? SwornLine(BattleUnit a, BattleUnit b)
+    {
+        var (enemy, player) = a.Side == Side.Enemy ? (a, b) : (b, a);
+        return enemy.Grudge == player.Id && enemy.Side != player.Side
+            ? $"  sworn: {enemy.Id} on {player.Id}: {player.Id} crit avoid {Grudges.SwornCritAvoid:+0;-0;0}"
+            : null;
     }
 
     private string Named(string itemId) => _content.ItemName(itemId);

@@ -85,7 +85,7 @@ public static class Queries
             return null;
         }
 
-        var forecast = Combat.Forecast((armed with { At = from }).ToCombatant(state, content, art: declared), target.Answering(state, content, from), distance, state.Scheme);
+        var forecast = Combat.Forecast((armed with { At = from }).ToCombatant(state, content, art: declared, against: target), target.Answering(state, content, from, armed), distance, state.Scheme);
         return declared is null ? forecast : forecast with { ArtCost = declared.Cost };
     }
 

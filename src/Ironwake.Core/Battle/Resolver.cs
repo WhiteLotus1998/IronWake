@@ -355,8 +355,8 @@ public static class Resolver
 
         var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
-            unit.ToCombatant(state, content, art: art),
-            target.Answering(state, content, unit.At),
+            unit.ToCombatant(state, content, art: art, against: target),
+            target.Answering(state, content, unit.At, unit),
             distance,
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),
@@ -387,11 +387,11 @@ public static class Resolver
 
         if (result.DefenderDied && !result.AttackerDied)
         {
-            next = SwearGrudges(next, target, unit, events);
+            next = SwearGrudges(next, content, target, unit, events);
         }
         else if (result.AttackerDied && !result.DefenderDied)
         {
-            next = SwearGrudges(next, unit, target, events);
+            next = SwearGrudges(next, content, unit, target, events);
         }
 
         return (next, null);
@@ -402,9 +402,12 @@ public static class Resolver
     /// when a player unit kills an enemy, every living enemy of the dead enemy's group swears
     /// against the killer, replacing any grudge it held, one <see cref="GrudgeSworn"/> each.
     /// A counter-kill counts the same as a strike. Nothing happens on a map without the header,
-    /// when the dead unit is a player unit, or when the dead enemy had no group.
+    /// when the dead unit is a player unit, or when the dead enemy had no group. At dusk only
+    /// the witnesses swear (issue 331): a group-mate that knows of the killer at the kill
+    /// (<see cref="Dusk.Knows"/>) on the board the dead has left, so the dead unit's own eyes
+    /// tell nobody and a kill in the dark makes no grudge in those who never saw it.
     /// </summary>
-    private static BattleState SwearGrudges(BattleState state, BattleUnit dead, BattleUnit killer, List<GameEvent> events)
+    private static BattleState SwearGrudges(BattleState state, GameContent content, BattleUnit dead, BattleUnit killer, List<GameEvent> events)
     {
         if (!state.Map.GrudgesEnabled || dead.Side != Side.Enemy || killer.Side != Side.Player || dead.Group is not { } group)
         {
@@ -412,7 +415,8 @@ public static class Resolver
         }
 
         var next = state;
-        foreach (var mate in state.UnitsOf(Side.Enemy).Where(u => u.Group == group && u.Grudge != killer.Id).ToList())
+        var witness = state.Find(killer.Id) ?? killer;
+        foreach (var mate in state.UnitsOf(Side.Enemy).Where(u => u.Group == group && u.Grudge != killer.Id && Dusk.Knows(state, content, u, witness)).ToList())
         {
             events.Add(new GrudgeSworn(mate.Id, killer.Id));
             next = next.WithUnit(mate with { Grudge = killer.Id });
