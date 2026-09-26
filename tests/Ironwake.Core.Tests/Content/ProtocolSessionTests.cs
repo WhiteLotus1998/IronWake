@@ -296,6 +296,21 @@ public class ProtocolSessionTests
         Assert.StartsWith("{\"ok\":false,\"error\":{\"reason\":\"noSuchTarget\"", session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-2"}"""));
     }
 
+    /// <summary>Issue 309: the forecast query from a tile names an enemy the mover would see from there, and refuses it from its own tile.</summary>
+    [Fact]
+    public void TheForecastQueryFromATileNamesAnEnemyTheMoverWouldSee()
+    {
+        var content = Content();
+        var map = "name: Reach\nsize: 12x3\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\ndusk: 1\n\n"
+            + "............\n............\n............\n\n"
+            + "units:\nP captain 3,1\nE soldier 7,1 group:near behavior:hold\n";
+        var session = new ProtocolSession(content, BattleState.From(MapFormat.Parse("reach.map", map, content), content, content.Cast, 7), new StringWriter());
+
+        Assert.StartsWith("{\"ok\":true", session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-1","from":{"x":6,"y":1}}"""));
+        Assert.StartsWith("{\"ok\":false,\"error\":{\"reason\":\"noSuchTarget\"", session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-1"}"""));
+        Assert.StartsWith("{\"ok\":false,\"error\":{\"reason\":\"noSuchTarget\"", session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-1","from":{"x":5,"y":1}}"""));
+    }
+
     [Fact]
     public void OmniscientIsRefusedWithoutTheProtocol()
     {

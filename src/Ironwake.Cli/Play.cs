@@ -907,7 +907,7 @@ public sealed class PlaySession
     /// </summary>
     private bool PrintForecast(string unitId, string targetId, int? slot, string? art, Coord? from = null)
     {
-        if (Find(unitId) is not { } unit || Find(targetId) is not { } target)
+        if (Find(unitId) is not { } unit)
         {
             return false;
         }
@@ -916,6 +916,11 @@ public sealed class PlaySession
         if (tile != unit.At && !Queries.CanStandOn(_state, _content, unit, tile))
         {
             Error(unit.Moved ? $"{unit.Id} has already moved this phase; forecast from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+            return false;
+        }
+
+        if (Find(targetId, unit.Id, tile) is not { } target)
+        {
             return false;
         }
 
@@ -1282,14 +1287,20 @@ public sealed class PlaySession
 
     private string Named(string itemId) => _content.ItemName(itemId);
 
-    private BattleUnit? Find(string id)
+    /// <summary>
+    /// The living unit named <paramref name="id"/>, or null with the console's error. At dusk
+    /// an enemy the player does not see is refused as out of sight; given a mover and the
+    /// tile a forecast is asked from, an enemy the mover would see from that tile is found
+    /// (<see cref="Dusk.Seen(BattleState, BattleUnit, string, Coord)"/>, issue 309).
+    /// </summary>
+    private BattleUnit? Find(string id, string? moverId = null, Coord? moverAt = null)
     {
         var unit = _state.Find(id);
         if (unit is null)
         {
             Error($"no living unit '{id}'");
         }
-        else if (!Dusk.Seen(_state, unit))
+        else if (moverId is not null && moverAt is { } tile ? !Dusk.Seen(_state, unit, moverId, tile) : !Dusk.Seen(_state, unit))
         {
             Error($"no unit '{id}' in sight at dusk");
             return null;

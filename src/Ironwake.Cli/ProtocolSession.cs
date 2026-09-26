@@ -216,11 +216,6 @@ public sealed class ProtocolSession
     private string Forecast(JsonElement request, BattleUnit unit)
     {
         var targetId = ProtocolJson.RequiredString(request, "target");
-        if (_state.Find(targetId) is not { } target || Hidden(target))
-        {
-            return Error(ProtocolJson.Name(RejectionReason.NoSuchTarget), $"no living unit '{targetId}'");
-        }
-
         var slot = ProtocolJson.OptionalInt(request, "slot");
         var art = ProtocolJson.OptionalString(request, "art");
         var from = ProtocolJson.OptionalCoord(request, "from");
@@ -228,6 +223,11 @@ public sealed class ProtocolSession
         if (tile != unit.At && !Queries.CanStandOn(_state, _content, unit, tile))
         {
             return Error(ProtocolJson.Name(unit.Moved ? RejectionReason.AlreadyMoved : RejectionReason.OutOfReach), unit.Moved ? $"{unit.Id} has already moved this phase; forecast from {unit.At}" : $"{unit.Id} cannot move to {tile}");
+        }
+
+        if (_state.Find(targetId) is not { } target || (PlayerView && !Dusk.Seen(_state, target, unit.Id, tile)))
+        {
+            return Error(ProtocolJson.Name(RejectionReason.NoSuchTarget), $"no living unit '{targetId}'");
         }
 
         if (Queries.Forecast(_state, _content, unit, target, tile, slot, art) is not { } forecast)

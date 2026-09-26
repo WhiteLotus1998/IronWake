@@ -83,6 +83,16 @@ public static class Dusk
     public static bool Seen(BattleState state, BattleUnit unit) =>
         unit.Side == Side.Player || Sees(state, Side.Player, unit.At);
 
+    /// <summary>
+    /// Whether the player may name <paramref name="unit"/> in a forecast from a tile the mover
+    /// has not moved to (issue 309): seen now (<see cref="Seen(BattleState, BattleUnit)"/>), or
+    /// seen with the mover read as standing on <paramref name="moverAt"/>. The mover's own
+    /// tile does not count once it is read elsewhere, since it will have left it, and a unit
+    /// of its side that has not moved counts only from where it stands now.
+    /// </summary>
+    public static bool Seen(BattleState state, BattleUnit unit, string moverId, Coord moverAt) =>
+        Seen(state, unit) || Sees(state, Side.Player, unit.At, moverId, moverAt);
+
     /// <summary>The console line for a dusk map's sight on the state's turn, with the next turn's, or null in daylight.</summary>
     public static string? Line(BattleState state)
     {

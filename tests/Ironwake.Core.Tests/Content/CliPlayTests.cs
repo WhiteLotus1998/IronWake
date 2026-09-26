@@ -680,6 +680,71 @@ public class CliPlayTests
         }
     }
 
+    private static string DarkReachMap(string ottilie) => $"""
+        name: Dark Reach
+        size: 12x3
+        win: rout
+        turn_limit: 5
+        recall: 0
+        enemy_level: 1
+        dusk: 1
+
+        ............
+        ............
+        ............
+
+        units:
+        P captain 3,0
+        P recruit:ottilie {ottilie}
+        E soldier 7,1 group:near behavior:hold
+        """;
+
+    private static string PlayDarkReach(string ottilie, string commands)
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-reach-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, DarkReachMap(ottilie));
+        File.WriteAllText(script, commands);
+        try
+        {
+            return Run(out _, "play", map, "--seed", "1", "--script", script, "--content", Fixture.RealContentDirectory());
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issue 309, from Chat's cold play of the dusk 5 grange: a forecast from a tile beside an
+    /// enemy no one sees yet is given, since the mover would see it from there; at range 2 with
+    /// nobody beside the enemy it is refused with the dark's message.
+    /// </summary>
+    [Fact]
+    public void AForecastFromATileNamesAnEnemyTheMoverWouldSeeFromThere()
+    {
+        var output = PlayDarkReach("3,2", "forecast captain soldier-1 from 6,1\nforecast ottilie soldier-1 from 5,1\nend\n");
+
+        Assert.Contains("> forecast captain soldier-1 from 6,1\nforecast captain -> soldier-1 from 6,1 (", output);
+        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: no unit 'soldier-1' in sight at dusk\n", output);
+    }
+
+    /// <summary>
+    /// Issue 309: a friend who has already moved beside the enemy sees for the forecast, and
+    /// the mover's own tile does not once the forecast reads it elsewhere: an archer beside the
+    /// enemy asking from range 2 is refused as a strike, the enemy being on the board.
+    /// </summary>
+    [Fact]
+    public void AForecastFromATileCountsTheSideNowAndNotTheMoversOldTile()
+    {
+        var spotted = PlayDarkReach("3,2", "move captain 6,1\nforecast ottilie soldier-1 from 5,1\nend\n");
+        var left = PlayDarkReach("6,1", "forecast ottilie soldier-1 from 5,1\nend\n");
+
+        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nforecast ottilie -> soldier-1 from 5,1 (", spotted);
+        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: ottilie cannot attack soldier-1 from 5,1\n", left);
+    }
+
     /// <summary>
     /// Issue 301: an unseen enemy that waits prints the same neutral line as one that moves,
     /// so the board never contradicts the line and the silence never tells the two apart.
