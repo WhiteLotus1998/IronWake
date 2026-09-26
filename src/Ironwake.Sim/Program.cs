@@ -62,6 +62,11 @@ public static class Program
             }
         }
 
+        if (args.Length > 0 && args[0] == "--keep")
+        {
+            return KeepGates(args.Skip(1).ToList());
+        }
+
         if (args.Length > 1 && args[0] == "--hitband")
         {
             var seeds = HitBandSeeds;
@@ -97,7 +102,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
 
     private const int HitBandSeeds = 50;
 
@@ -306,6 +311,99 @@ public static class Program
 
         Console.WriteLine(failed ? "full: FAILED" : "full: ok");
         return failed ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Issue 82's experiment: the keep under <c>content/keep</c> with the named edits made in order,
+    /// written by <see cref="MapFormat.Write"/> and parsed back (the edited keep is an ordinary map),
+    /// then gates 1, 2 and 4 on it, or with <c>--write</c> only the edited keep to a file for
+    /// <c>play</c>. Prints the edited grid so a run is its own record.
+    /// </summary>
+    private static int KeepGates(IReadOnlyList<string> args)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("keep: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var menu = content.Campaign.Keep;
+        if (menu == KeepMenu.None)
+        {
+            Console.WriteLine("keep: the campaign has no keep");
+            return 2;
+        }
+
+        var map = MapFiles.Load(Path.Combine(contentDir, "keep", menu.MapId + ".map"), content);
+        var seeds = Gates.DefaultSeeds;
+        var spent = 0;
+        var made = new List<string>();
+        string? write = null;
+        for (var i = 0; i + 1 < args.Count; i += 2)
+        {
+            if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+            {
+                seeds = n;
+                continue;
+            }
+
+            if (args[i] == "--write")
+            {
+                write = args[i + 1];
+                continue;
+            }
+
+            var parts = args[i + 1].Split(',');
+            if (menu.Edit(args[i]) is not { } edit || parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y))
+            {
+                Console.WriteLine($"keep: '{args[i]} {args[i + 1]}' is not an edit on the menu at an x,y tile; the menu is {string.Join(", ", menu.Edits.Select(e => e.Id))}");
+                return 2;
+            }
+
+            var at = new Coord(x, y);
+            if (Keep.Refusal(map, edit, at) is { } refusal)
+            {
+                Console.WriteLine($"keep: {edit.Id} at {at} refused: {refusal}");
+                return 2;
+            }
+
+            map = Keep.Apply(map, edit, at);
+            spent += edit.Price;
+            made.Add($"{edit.Id} {at}");
+        }
+
+        var text = MapFormat.Write(map, content);
+        var reparsed = MapFormat.Parse(menu.MapId + ".map", text, content);
+        if (reparsed != map || MapFormat.Write(reparsed, content) != text)
+        {
+            Console.WriteLine("keep: the edited keep does not read back equal to what was written");
+            return 1;
+        }
+
+        if (write is not null)
+        {
+            File.WriteAllText(write, text);
+            Console.WriteLine($"keep: written to {write}");
+            return 0;
+        }
+
+        var id = made.Count == 0 ? menu.MapId : menu.MapId + " + " + string.Join(", ", made);
+        Console.WriteLine($"keep: {id}; spent {spent}; {seeds} seeds");
+        foreach (var row in text.Split('\n').SkipWhile(l => l.Length > 0).Skip(1).TakeWhile(l => l.Length > 0))
+        {
+            Console.WriteLine("  " + row);
+        }
+
+        var (gate1, baseline) = Gates.Gate1(content, reparsed, id, seeds, RollScheme.TwoRollAverage);
+        var rows = new[] { gate1, Gates.Gate2(content, reparsed, id, seeds, RollScheme.TwoRollAverage), Gates.Gate4(content, reparsed, id, baseline, RollScheme.TwoRollAverage) };
+        foreach (var row in rows)
+        {
+            Console.WriteLine(row.Line);
+        }
+
+        return rows.All(r => r.Passed) ? 0 : 1;
     }
 
     private static int Smoke()

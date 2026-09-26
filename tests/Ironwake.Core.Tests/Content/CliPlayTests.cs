@@ -653,6 +653,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 82's experiment: Code's play of seed 82 on the keep with both walls rebuilt, the
+    /// edited keep written by the Sim's <c>--keep --write</c>. Each breach is held from inside,
+    /// where only two tiles can strike the holder; the hexer's cast from 9,5 over the wall, the
+    /// ditch's tile, kills Ottilie, and Wren falls on the last enemy phase. Survived, no Recall.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptSurvivesTheWalledKeepOnSeedEightyTwo()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-walls-82.script");
+
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "82", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: survive\n", output);
+        Assert.Contains("hexer-1 hits ottilie for 10 (hp 0)", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 275: Code's play of seed 61 on Sallow Grange the long way, with the hexer moved
     /// to 13,7. Killing the fort archer wakes the field by noise on turn 3 and the field is
     /// fought out west (three Recalls on turn 4); Pell breaks the north lock from 11,1 in two
