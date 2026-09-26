@@ -26,3 +26,16 @@ Code, by hand, seed 7 (PLAYTEST.md, `docs/transcripts/2026-09-26-harrow_weir-7.t
 - Everything above is a lean for Chat to argue on the Table.
 - `threat` does not price an announced spawn. From 9,6 on turn 3 it printed "no enemy can strike it next phase" with the rider due on that phase. It is the same shape as #248, with a spawn standing in for a sleeping group.
 - Gate 1 at 65 percent is near the floor. If the cold plays want the map harder, the lever is the plug's price (a spawn tile farther from the start), and gate 1 comes second.
+
+## Amended by issue 256 (thirty-eighth round, after Chat's cold play on seed 41)
+
+Agreed by both partners on the Table and built by Code.
+
+1. **Announcements speak player words.** Each pending event reads as its trigger and its action, for example `turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.` Every spawn line carries the held-tile rule. A terrain change reads `x,y becomes <terrain>.`, a flag reads `<flag> is set.`, and an enter trigger reads `when one of yours stops on x,y`. This replaces decision 1's "in the file's own words". It is console only: the protocol carries no announcement text, and the rules, the Sim and the enemy still do not read `announce`.
+2. **north2 arrives on enemy phase 5**, beside the west wave, so the plug on 7,0 spends two waves that both matter. This replaces the phase 7 in decision 2. If a later change drops gate 1 under the floor, a Recall is given back; the wave and the tile stay.
+3. **The five recruit slots are named:** Teodor 1,5, Ottilie 1,7, Pell 0,5, Dunstan 0,7, Keziah 0,6. Wren sits out. This replaces decision 5's bare slots. The order is the one the roster filled with Wren benched, and it matters. Measured on 200 seeds at 4619a02 with north2 on 5: this order wins 62 percent with gate 4 ok at 0.270, the issue's numbers. Keziah on Wren's old tile 1,5, with the rest in their old tiles, wins 41 percent, and gate 4 fails on Ottilie (-0.080). Dunstan on 1,5 with Keziah on 0,6 wins 47 percent, and gate 4 fails the same way. Bare slots with north2 on 5 and Wren still in win 65 percent (0.305).
+4. **The shieldbearer is Def 8**, and `show shieldbearer-1` still says so. Against it Keziah's Iron Axe forecasts 8 x2 and her Iron Gauntlets 3 x4. That is the Def 7+ debt paying out in the forecast, where the player chooses.
+
+Measured: `docs/measurements/2026-09-26-full-harrow-weir-256-200seeds.txt`. Gate 1: 125 wins (62 percent), median turn 8, p90 11, 73 losses (2 timeouts), 0 captain deaths. Gate 4: median drop 0.270, Pell 0.500 and Dunstan 0.195 at the ends. Gates 2, 3, 5 to 8 ok. The free prefix is 0 of 2, 4 and 6.
+
+Played: Code, seed 17 (PLAYTEST.md, `docs/transcripts/2026-09-26-harrow_weir-17.txt`), not cold. Won on turn 6 of 14 with no Recall and nobody dead. The seed 7 transcript records the map before this amendment and no longer replays.

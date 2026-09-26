@@ -1,0 +1,2019 @@
+Harrow Weir, seed 17, scheme TwoRollAverage
+  turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.
+  turn 5, enemy phase: a brigand arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.
+  turn 5, enemy phase: a brigand arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^a...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 DB.....=..~~....
+ 6 GA.....====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+a  brigand-1        Brigand L2 reaver          3,3    hp 22/22  Forest  group wood, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,6    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              0,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 3,5
+pell moves 0,5 -> 3,5 via 1,5 2,5
+group wood wakes: proximity
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^a...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .B.D...=..~~....
+ 6 GA.....====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+a  brigand-1        Brigand L2 reaver          3,3    hp 22/22  Forest  group wood, guard, awake
+A  captain          Alder Fenn L1 cadet        1,6    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack pell brigand-1
+forecast pell -> brigand-1: dmg 13 hit 87% crit 3%; counter: none
+pell attacks brigand-1
+  pell hits brigand-1 for 13 (hp 9)
+  pell hp 16, brigand-1 hp 9
+pell gains 12 exp (12)
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^a...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .B.D...=..~~....
+ 6 GA.....====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+a  brigand-1        Brigand L2 reaver          3,3    hp 9/22   Forest  group wood, guard, awake
+A  captain          Alder Fenn L1 cadet        1,6    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 3,4
+captain moves 1,6 -> 3,4 via 1,5 2,5 3,5
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^a...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 .B.D...=..~~....
+ 6 G......====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+a  brigand-1        Brigand L2 reaver          3,3    hp 9/22   Forest  group wood, guard, awake
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack captain brigand-1
+forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
+captain attacks brigand-1
+  captain hits brigand-1 for 10 (hp 0)
+  captain hp 22, brigand-1 hp 0
+captain gains 35 exp (35)
+brigand-1 falls at 3,3
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 .B.D...=..~~....
+ 6 G......====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 5,5
+teodor moves 1,5 -> 5,5 via 2,5 3,5 4,5
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 G......====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+teodor waits
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 G......====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           0,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 4,6
+keziah moves 0,6 -> 4,6 via 1,6 2,6 3,6
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+keziah waits
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 EC........~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         0,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move dunstan 4,7
+dunstan moves 0,7 -> 4,7 via 1,7 2,7 3,7
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 .C..E.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait dunstan
+dunstan waits
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 .C..E.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          1,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 3,7
+ottilie moves 1,7 -> 3,7 via 2,7
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+ottilie waits
+Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait brawler-1
+brawler-1 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait weir_foreman-1
+weir_foreman-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^A...=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        3,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 6,3
+captain moves 3,4 -> 6,3 via 4,4 4,3 5,3
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+captain waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 ....G..====b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           4,6    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 8,6
+keziah moves 4,6 -> 8,6 via 5,6 6,6 7,6
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 .......=G==b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+keziah waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D.B.=..~~....
+ 6 .......=G==b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          5,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 8,5
+teodor moves 5,5 -> 8,5 via 6,5 7,5
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D...=B.~~....
+ 6 .......=G==b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+teodor waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D...=B.~~....
+ 6 .......=G==b.!..
+ 7 ...CE.....~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         4,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move dunstan 8,7
+dunstan moves 4,7 -> 8,7 via 5,7 6,7 7,7
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D...=B.~~....
+ 6 .......=G==b.!..
+ 7 ...C....E.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait dunstan
+dunstan waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 ...D...=B.~~....
+ 6 .......=G==b.!..
+ 7 ...C....E.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              3,5    hp 16/16  Plain
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 7,5
+pell moves 3,5 -> 7,5 via 4,5 5,5 6,5
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 ...C....E.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+pell waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 ...C....E.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          3,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 7,7
+ottilie moves 3,7 -> 7,7 via 4,7 5,7 6,7
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+ottilie waits
+Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,5    hp 16/16  Road  done
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait brawler-1
+brawler-1 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait weir_foreman-1
+weir_foreman-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....=..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^..A=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 7,0
+captain moves 6,3 -> 7,0 via 6,2 6,1 6,0
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+captain waits
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......=G==b.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           8,6    hp 23/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 10,6
+keziah moves 8,6 -> 10,6 via 9,6
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......===Gb.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 23/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, asleep
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> forecast keziah shieldbearer-1
+forecast keziah -> shieldbearer-1: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
+> forecast keziah shieldbearer-1 2
+forecast keziah -> shieldbearer-1: dmg 3 x4 hit 97% crit 2%; counter: dmg 9 hit 72% crit 0%
+> attack keziah shieldbearer-1
+forecast keziah -> shieldbearer-1: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
+keziah attacks shieldbearer-1
+  keziah hits shieldbearer-1 for 8 (hp 16)
+  shieldbearer-1 hits keziah for 9 (hp 14)
+  keziah hits shieldbearer-1 for 8 (hp 8)
+  keziah hp 14, shieldbearer-1 hp 8
+keziah gains 12 exp (12)
+group ford wakes: noise
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......DB.~~....
+ 6 .......===Gb.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              7,5    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 8/24   Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move pell 9,6
+pell moves 7,5 -> 9,6 via 8,5 9,5
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DGb.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 8/24   Road  group bridge, hold
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack pell shieldbearer-1
+forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
+pell attacks shieldbearer-1
+  pell hits shieldbearer-1 for 13 (hp 0)
+  pell hp 16, shieldbearer-1 hp 0
+pell gains 35 exp (47)
+shieldbearer-1 falls at 11,6
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......CE.~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         8,7    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move dunstan 9,8
+dunstan moves 8,7 -> 9,8 via 9,7
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......C..~~....
+ 8 ..n......E~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         9,8    hp 23/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait dunstan
+dunstan waits
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......C..~~....
+ 8 ..n......E~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         9,8    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait teodor
+teodor waits
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......C..~~....
+ 8 ..n......E~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         9,8    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait ottilie
+ottilie waits
+Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......C..~~....
+ 8 ..n......E~~..^.
+ 9 ..........~~..^.
+10 ...........d....
+11 ............e...
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          11,10  hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         9,8    hp 23/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+event north1 is blocked: its tile is held
+enemy: wait archer-1
+archer-1 waits
+enemy: move brawler-1 9,9
+brawler-1 moves 11,10 -> 9,9 via 10,10 9,10
+enemy: attack brawler-1 dunstan
+forecast brawler-1 -> dunstan: dmg 3 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
+brawler-1 attacks dunstan
+  brawler-1 hits dunstan for 3 (hp 20)
+  brawler-1 hits dunstan for 3 (hp 17)
+  dunstan misses brawler-1
+  brawler-1 hp 22, dunstan hp 17
+enemy: move soldier-1 12,7
+soldier-1 moves 12,11 -> 12,7 via 12,10 12,9 12,8
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait weir_foreman-1
+weir_foreman-1 waits
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......==DG=.!..
+ 7 .......C..~~e...
+ 8 ..n......E~~..^.
+ 9 .........d~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          9,9    hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move pell 9,7
+pell moves 9,6 -> 9,7
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......===G=.!..
+ 7 .......C.D~~e...
+ 8 ..n......E~~..^.
+ 9 .........d~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          9,9    hp 22/22  Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack pell brawler-1
+forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+pell attacks brawler-1
+  pell hits brawler-1 for 13 (hp 9)
+  pell hp 16, brawler-1 hp 9
+pell gains 12 exp (59)
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......===G=.!..
+ 7 .......C.D~~e...
+ 8 ..n......E~~..^.
+ 9 .........d~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          9,9    hp 9/22   Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move ottilie 8,8
+ottilie moves 7,7 -> 8,8 via 8,7
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......===G=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 .........d~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          9,9    hp 9/22   Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack ottilie brawler-1
+forecast ottilie -> brawler-1: dmg 8 hit 83% crit 5%; counter: none
+ottilie attacks brawler-1
+  ottilie hits brawler-1 for 8 (hp 1)
+  ottilie hp 17, brawler-1 hp 1
+ottilie gains 12 exp (12)
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......===G=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 .........d~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+d  brawler-1        Brawler L2 reaver          9,9    hp 1/22   Plain  group ford, guard, awake
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack dunstan brawler-1
+forecast dunstan -> brawler-1: dmg 11 hit 74% crit 1%; counter: dmg 3 x2 hit 95% crit 0%
+dunstan attacks brawler-1
+  dunstan hits brawler-1 for 11 (hp 0)
+  dunstan hp 17, brawler-1 hp 0
+dunstan gains 35 exp (35)
+brawler-1 falls at 9,9
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=B.~~....
+ 6 .......===G=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move teodor 9,6
+teodor moves 8,5 -> 9,6 via 9,5
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==BG=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait teodor
+teodor waits
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==BG=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait keziah
+keziah waits
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==BG=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait captain
+captain waits
+Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==BG=.!..
+ 7 .........D~~e...
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain  done
+G  keziah           Keziah L1 reaver           10,6   hp 14/23  Road  done
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: wait archer-1
+archer-1 waits
+enemy: move soldier-1 11,6
+soldier-1 moves 12,7 -> 11,6 via 12,6
+enemy: attack soldier-1 keziah
+forecast soldier-1 -> keziah: dmg 10 hit 74% crit 0%; counter: dmg 12 hit 67% crit 1%
+soldier-1 attacks keziah
+  soldier-1 hits keziah for 10 (hp 4)
+  keziah hits soldier-1 for 12 (hp 8)
+  soldier-1 hp 8, keziah hp 4
+keziah gains 12 exp (24)
+enemy: wait weir_foreman-1
+weir_foreman-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==BGe.!..
+ 7 .........D~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 4/23   Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         11,6   hp 8/20   Road  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move teodor 8,6
+teodor moves 9,6 -> 8,6
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=B=Ge.!..
+ 7 .........D~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 4/23   Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         11,6   hp 8/20   Road  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait teodor
+teodor waits
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=B=Ge.!..
+ 7 .........D~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 4/23   Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,7    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         11,6   hp 8/20   Road  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move pell 9,6
+pell moves 9,7 -> 9,6
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDGe.!..
+ 7 ..........~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 4/23   Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+e  soldier-1        Soldier L2 pikeman         11,6   hp 8/20   Road  group ford, guard, awake
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack pell soldier-1
+forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+pell attacks soldier-1
+  pell hits soldier-1 for 12 (hp 0)
+  pell hp 16, soldier-1 hp 0
+pell gains 35 exp (94)
+soldier-1 falls at 11,6
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDG=.!..
+ 7 ..........~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           10,6   hp 4/23   Road
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move keziah 9,7
+keziah moves 10,6 -> 9,7 via 9,6
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BD==.!..
+ 7 .........G~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait keziah
+keziah waits
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BD==.!..
+ 7 .........G~~....
+ 8 ..n.....CE~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         9,8    hp 17/23  Plain
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move dunstan 10,6
+dunstan moves 9,8 -> 10,6 via 9,7 9,6
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 .........G~~....
+ 8 ..n.....C.~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait dunstan
+dunstan waits
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 .........G~~....
+ 8 ..n.....C.~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move ottilie 8,7
+ottilie moves 8,8 -> 8,7
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 ........CG~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait ottilie
+ottilie waits
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 ........CG~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> wait captain
+captain waits
+Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 ........CG~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain  done
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain  done
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              9,6    hp 16/16  Road  done
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+event west1
+  brigand-2 arrives at 0,11, group west, aggressive
+event north2 is blocked: its tile is held
+enemy: wait archer-1
+archer-1 waits
+enemy: move brigand-2 0,7
+brigand-2 moves 0,11 -> 0,7 via 0,10 0,9 0,8
+enemy: wait brigand-2
+brigand-2 waits
+enemy: wait weir_foreman-1
+weir_foreman-1 waits
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BDE=.!..
+ 7 g.......CG~~....
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         10,6   hp 17/23  Road
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> move dunstan 13,7
+dunstan moves 10,6 -> 13,7 via 11,6 12,6 12,7
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BD==.!..
+ 7 g.......CG~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 17/23  Plain
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
+> attack dunstan weir_foreman-1
+forecast dunstan -> weir_foreman-1: dmg 8 hit 56% crit 0%; counter: dmg 6 x2 hit 93% crit 2%
+dunstan attacks weir_foreman-1
+  dunstan hits weir_foreman-1 for 8 (hp 20)
+  weir_foreman-1 hits dunstan for 6 (hp 11)
+  weir_foreman-1 hits dunstan for 6 (hp 5)
+  dunstan hp 5, weir_foreman-1 hp 20
+dunstan gains 14 exp (49)
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......=BD==.!..
+ 7 g.......CG~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 20/28  Hill  group weir, boss
+> move teodor 12,6
+teodor moves 8,6 -> 12,6 via 9,6 10,6 11,6
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==D==B!..
+ 7 g.......CG~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 20/28  Hill  group weir, boss
+> attack teodor weir_foreman-1
+forecast teodor -> weir_foreman-1: dmg 9 hit 60% crit 0%; counter: dmg 8 x2 hit 88% crit 2%
+teodor attacks weir_foreman-1
+  teodor hits weir_foreman-1 for 9 (hp 11)
+  weir_foreman-1 hits teodor for 8 (hp 13)
+  weir_foreman-1 hits teodor for 8 (hp 5)
+  teodor hp 5, weir_foreman-1 hp 11
+teodor gains 14 exp (14)
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==D==B!..
+ 7 g.......CG~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 11/28  Hill  group weir, boss
+> move ottilie 11,6
+ottilie moves 8,7 -> 11,6 via 8,6 9,6 10,6
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==D=CB!..
+ 7 g........G~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          11,6   hp 17/17  Road
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 11/28  Hill  group weir, boss
+> attack ottilie weir_foreman-1
+forecast ottilie -> weir_foreman-1: dmg 5 hit 68% crit 3%; counter: none
+ottilie attacks weir_foreman-1
+  ottilie hits weir_foreman-1 for 5 (hp 6)
+  ottilie hp 17, weir_foreman-1 hp 6
+ottilie gains 14 exp (26)
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......==D=CB!..
+ 7 g........G~~.E..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          11,6   hp 17/17  Road  done
+D  pell             Pell L1 adept              9,6    hp 16/16  Road
+B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss
+> move pell 12,7
+pell moves 9,6 -> 12,7 via 10,6 11,6 12,6
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......====CB!..
+ 7 g........G~~DE..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          11,6   hp 17/17  Road  done
+D  pell             Pell L1 adept              12,7   hp 16/16  Plain
+B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
+!  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss
+> attack pell weir_foreman-1
+forecast pell -> weir_foreman-1: dmg 12 hit 94% crit 1%; counter: none
+pell attacks weir_foreman-1
+  pell hits weir_foreman-1 for 12 (hp 0)
+  pell hp 16, weir_foreman-1 hp 0
+pell gains 60 exp (54)
+pell reaches level 2: hp +1 mag +1 res +1
+weir_foreman-1 falls at 13,6
+Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
+   0123456789012345
+ 0 ^^^....A..~~..MM
+ 1 ^^.....=..~~...M
+ 2 .......=..~~....
+ 3 ..^^...=..~~.n..
+ 4 ..^....=..~~..c.
+ 5 .......=..~~....
+ 6 .......====CBn..
+ 7 g........G~~DE..
+ 8 ..n.......~~..^.
+ 9 ..........~~..^.
+10 ................
+11 ................
+
+c  archer-1         Archer L2 bowman           14,4   hp 17/17  Plain  group weir, hold
+g  brigand-2        Brigand L2 reaver          0,7    hp 22/22  Plain  group west, aggressive
+A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Road  captain
+E  dunstan          Dunstan L1 bulwark         13,7   hp 5/23   Plain  done
+G  keziah           Keziah L1 reaver           9,7    hp 4/23   Plain
+C  ottilie          Ottilie L1 bowman          11,6   hp 17/17  Road  done
+D  pell             Pell L2 adept              12,7   hp 17/17  Plain  done
+B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
+battle won: defeat_boss; only recall is left
+battle won: defeat_boss
