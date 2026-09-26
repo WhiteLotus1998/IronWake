@@ -15,6 +15,9 @@ namespace Ironwake.Core;
 /// its full Mov when it acts without moving, and null once the Canto is taken or declined,
 /// at the end of the phase, and for a unit without Canto; a <see cref="Canto"/> command is
 /// legal only while the unit has acted and this is not null.
+/// <see cref="Grudge"/> is the id of the player unit an enemy is sworn against on a
+/// <c>grudges: on</c> map (DESIGN.md 13.4, experiment): set when that unit kills one of the
+/// enemy's group, replaced by a newer such kill, and null otherwise.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -29,7 +32,8 @@ public sealed record BattleUnit(
     bool IsCaptain = false,
     int PlacementIndex = -1,
     bool Retreated = false,
-    int? Canto = null)
+    int? Canto = null,
+    string? Grudge = null)
 {
     public string Id => Unit.Id;
 

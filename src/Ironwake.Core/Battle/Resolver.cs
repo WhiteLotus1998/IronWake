@@ -385,7 +385,40 @@ public static class Resolver
             next = LeaveKeepsake(next, attackerAfter, content, events).WithoutUnit(unit.Id);
         }
 
+        if (result.DefenderDied && !result.AttackerDied)
+        {
+            next = SwearGrudges(next, target, unit, events);
+        }
+        else if (result.AttackerDied && !result.DefenderDied)
+        {
+            next = SwearGrudges(next, unit, target, events);
+        }
+
         return (next, null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.4 (Named rivals, the grudge arm, experiment): on a <c>grudges: on</c> map,
+    /// when a player unit kills an enemy, every living enemy of the dead enemy's group swears
+    /// against the killer, replacing any grudge it held, one <see cref="GrudgeSworn"/> each.
+    /// A counter-kill counts the same as a strike. Nothing happens on a map without the header,
+    /// when the dead unit is a player unit, or when the dead enemy had no group.
+    /// </summary>
+    private static BattleState SwearGrudges(BattleState state, BattleUnit dead, BattleUnit killer, List<GameEvent> events)
+    {
+        if (!state.Map.GrudgesEnabled || dead.Side != Side.Enemy || killer.Side != Side.Player || dead.Group is not { } group)
+        {
+            return state;
+        }
+
+        var next = state;
+        foreach (var mate in state.UnitsOf(Side.Enemy).Where(u => u.Group == group && u.Grudge != killer.Id).ToList())
+        {
+            events.Add(new GrudgeSworn(mate.Id, killer.Id));
+            next = next.WithUnit(mate with { Grudge = killer.Id });
+        }
+
+        return next;
     }
 
     /// <summary>

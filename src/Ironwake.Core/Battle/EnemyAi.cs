@@ -73,6 +73,8 @@ public static class EnemyAi
     /// over the player units the enemy knows of (<see cref="Dusk.Knows"/>): those its side
     /// sees and those within hearing of it. One that knows of nobody and may move makes for
     /// the objective (<see cref="Drift"/>, issue 308); a unit that holds keeps its hold.
+    /// On a <c>grudges: on</c> map a unit sworn against a player unit it knows of strikes that
+    /// unit whenever it can and approaches it first (<see cref="Sworn"/>, DESIGN.md 13.4).
     /// The attack options range over every weapon the unit can strike with, in inventory
     /// order; an Attack with a weapon other than the equipped one names its slot, which
     /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
@@ -100,7 +102,9 @@ public static class EnemyAi
         }
 
         var equipped = unit.EquippedSlot(content);
-        var best = BestOption(state, content, unit, tiles, reach, known, playerReach);
+        var sworn = Sworn(state, unit, known);
+        var best = (sworn is null ? null : BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach))
+            ?? BestOption(state, content, unit, tiles, reach, known, playerReach);
         if (best is not null)
         {
             var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
@@ -116,7 +120,8 @@ public static class EnemyAi
 
         var destination = known.Count == 0 && Dusk.Sight(state) is not null
             ? Drift(state, content, unit, reach, playerReach)
-            : Approach(state, content, unit, weapon, reach, known, playerReach);
+            : (sworn is null ? null : Approach(state, content, unit, weapon, reach, new[] { sworn }, playerReach))
+                ?? Approach(state, content, unit, weapon, reach, known, playerReach);
         return destination is { } to && to != unit.At
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
@@ -163,9 +168,26 @@ public static class EnemyAi
         var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+        if (Sworn(state, unit, players) is { } sworn && sworn.Id != target.Id
+            && (inDaylight || Dusk.Knows(state, content, unit, sworn))
+            && BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight) is not null)
+        {
+            return null;
+        }
+
         var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach, inDaylight);
         return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
     }
+
+    /// <summary>
+    /// The player unit <paramref name="unit"/> is sworn against (DESIGN.md 13.4, experiment), if it
+    /// is among <paramref name="candidates"/>; null otherwise. <see cref="PlanUnit"/> strikes it
+    /// whenever any tile and weapon reach it, whatever the score says, takes its best other strike
+    /// only when none does, and approaches it before anyone else; <see cref="StrikeOn"/> names no
+    /// strike on another unit while the sworn one is in reach, so <c>threat</c> agrees.
+    /// </summary>
+    public static BattleUnit? Sworn(BattleState state, BattleUnit unit, IEnumerable<BattleUnit> candidates) =>
+        unit.Grudge is { } id ? candidates.FirstOrDefault(p => p.Id == id) : null;
 
     /// <summary>
     /// The best-scoring attack option over <paramref name="tiles"/>, every usable weapon in

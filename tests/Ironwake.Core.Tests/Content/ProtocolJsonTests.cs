@@ -31,6 +31,7 @@ public class ProtocolJsonTests
         { new UnitExited("wren", new Coord(19, 3)), """{"type":"unitExited","unit":"wren","at":{"x":19,"y":3}}""" },
         { new UnitLeftBehind("dunstan", new Coord(12, 3)), """{"type":"unitLeftBehind","unit":"dunstan","at":{"x":12,"y":3}}""" },
         { new KeepsakeLeft("dunstan", "iron_axe", new Coord(12, 3)), """{"type":"keepsakeLeft","fallen":"dunstan","item":"iron_axe","at":{"x":12,"y":3}}""" },
+        { new GrudgeSworn("soldier-1", "wren"), """{"type":"grudgeSworn","unit":"soldier-1","against":"wren"}""" },
         { new KeepsakeRecovered("wren", "dunstan", "iron_axe"), """{"type":"keepsakeRecovered","unit":"wren","fallen":"dunstan","item":"iron_axe"}""" },
         { new KeepsakeTaken("brigand-2", "teodor", "iron_lance"), """{"type":"keepsakeTaken","unit":"brigand-2","fallen":"teodor","item":"iron_lance"}""" },
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), null), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3}}""" },

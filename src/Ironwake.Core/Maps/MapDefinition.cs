@@ -53,6 +53,11 @@ namespace Ironwake.Core;
 /// one less every turn after, never under 1 (<see cref="Ironwake.Core.Dusk"/>). Null for a map
 /// in daylight, where every unit sees the whole board.
 /// </param>
+/// <param name="GrudgesEnabled">
+/// The <c>grudges: on</c> header (DESIGN.md 13.4, experiment): a player unit that kills an enemy
+/// is sworn against by every living enemy of that enemy's group (<see cref="BattleUnit.Grudge"/>),
+/// and the planner strikes the sworn unit first. Off by default.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -74,7 +79,8 @@ public sealed record MapDefinition(
     CertificationTrial? Certification = null,
     bool Announced = false,
     bool KeepsakesEnabled = false,
-    int? Dusk = null)
+    int? Dusk = null,
+    bool GrudgesEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

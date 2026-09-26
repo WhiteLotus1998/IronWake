@@ -55,6 +55,9 @@ public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coor
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 
+/// <summary>An enemy swore a grudge against the player unit that killed one of its group, on a <c>grudges: on</c> map (DESIGN.md 13.4, experiment).</summary>
+public sealed record GrudgeSworn(string UnitId, string AgainstId) : GameEvent;
+
 /// <summary>
 /// Two adjacent recruits gained rapport at the end of a player phase (issue 16): both rates,
 /// and the pair's total after. <paramref name="OutOf"/> is the overwrite threshold when the
