@@ -5,8 +5,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Issue 72's class certification: a class names what it asks (a level, weapon ranks, stat
 /// minimums), a unit that meets it certifies with no roll, and a unit that does not is
-/// refused with the requirement named. The requirements here are test numbers: the shipped
-/// classes ask nothing until the Table sets the ladder.
+/// refused with the requirement named. The requirements here are test numbers; the shipped
+/// ladder's are in ClassLadderTests.
 /// </summary>
 public class CertificationTests
 {
@@ -17,6 +17,9 @@ public class CertificationTests
 
     private static GameContent WithPikemanRequirements(CertificationRequirements requirements) =>
         Starter with { Classes = Starter.Classes.SetItem("pikeman", Starter.Class("pikeman") with { Certification = requirements }) };
+
+    /// <summary>A shipped class with its certification requirements removed.</summary>
+    private static UnitClass Free(string id) => Starter.Class(id) with { Certification = CertificationRequirements.None };
 
     private static Unit Ready => Hale with
     {
@@ -92,8 +95,8 @@ public class CertificationTests
     [Fact]
     public void AClassThatNamesNoRequirementsTakesAnyUnit()
     {
-        Assert.Equal(CertificationRequirements.None, Starter.Class("outrider").Certification);
-        Assert.Empty(Certifications.Check(Hale, Starter.Class("outrider")));
+        Assert.Equal(CertificationRequirements.None, Starter.Class("cadet").Certification);
+        Assert.Empty(Certifications.Check(Hale, Free("outrider")));
     }
 
     [Fact]
@@ -124,7 +127,7 @@ public class CertificationTests
         (unit, _) = Masteries.ForCombat(unit, content.Class("cadet"));
         (unit, _) = Masteries.ForCombat(unit, content.Class("cadet"));
 
-        var certified = Certifications.Certify(unit, content.Class("outrider"));
+        var certified = Certifications.Certify(unit, Free("outrider"));
 
         Assert.Contains("axebreaker", certified.Abilities);
         Assert.Equal(2, certified.Mastery.Points("cadet"));
@@ -134,7 +137,7 @@ public class CertificationTests
     [Fact]
     public void TheNextMapReadsTheNewClassesMovAndWeapons()
     {
-        var wren = Certifications.Certify(Wren, Starter.Class("outrider"));
+        var wren = Certifications.Certify(Wren, Free("outrider"));
         var state = BattleState.From(YardMap, Starter, ValueList<Unit>.Of(Hale, wren), 7);
 
         var unit = state.Find("wren")!;

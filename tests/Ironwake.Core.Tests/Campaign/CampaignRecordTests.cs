@@ -6,11 +6,12 @@ namespace Ironwake.Core.Tests.Campaign;
 /// <summary>
 /// The campaign record and the between-map screen (issue 74, DESIGN section 9): the purse, the
 /// shop, repair, certification with the seal, the bench as a deployment choice, permadeath and
-/// supplies across a battle, and the seed each map plays on. The shipped content's campaign.
+/// supplies across a battle, and the seed each map plays on. The shipped content's campaign, with
+/// the class ladder removed so the seal's rules are read apart from it (ClassLadderTests).
 /// </summary>
 public class CampaignRecordTests
 {
-    private static GameContent Content => MapFixture.Content;
+    private static readonly GameContent Content = MapFixture.WithoutLadder(MapFixture.Content);
 
     private static MapDefinition Map(string id) => MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, id + ".map"), Content);
 

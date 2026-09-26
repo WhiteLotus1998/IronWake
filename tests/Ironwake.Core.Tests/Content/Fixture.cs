@@ -83,6 +83,37 @@ internal static class Fixture
             new ContentFile(ContentFiles.AbilitiesName, abilities ?? Abilities));
     }
 
+    private static readonly Lazy<string> LadderFree = new(CopyWithoutLadder);
+
+    /// <summary>
+    /// A copy of the real content directory whose classes ask nothing to certify into, for CLI
+    /// tests of what certifying does rather than of the shipped ladder (issue 72). Made once per
+    /// test run under the temp directory.
+    /// </summary>
+    public static string LadderFreeContentDirectory() => LadderFree.Value;
+
+    private static string CopyWithoutLadder()
+    {
+        var source = RealContentDirectory();
+        var target = Path.Combine(Path.GetTempPath(), "ironwake-ladder-free-" + Guid.NewGuid().ToString("N"));
+        foreach (var file in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
+        {
+            var copy = Path.Combine(target, Path.GetRelativePath(source, file));
+            Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
+            File.Copy(file, copy);
+        }
+
+        var classesPath = Path.Combine(target, ContentFiles.ClassesName);
+        var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;
+        foreach (var entry in classes["classes"]!.AsArray())
+        {
+            entry!.AsObject().Remove("certification");
+        }
+
+        File.WriteAllText(classesPath, classes.ToJsonString());
+        return target;
+    }
+
     /// <summary>Walks up from the test binaries to the repository's content directory.</summary>
     public static string RealContentDirectory()
     {

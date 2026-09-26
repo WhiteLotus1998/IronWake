@@ -24,6 +24,7 @@ public sealed class CampaignSession
           shop                     what the shop sells before this map, and each price
           buy <item> <unit>        buy an item at full uses into the unit's next free slot
           repair <unit> <slot>     restore a weapon's uses, at its price per use
+          classes [unit]           what each class asks to certify into it, and what the unit still lacks
           certify <unit> <class>   change class, paying a seal from the purse
           trial <unit> <class>     try the class's certification trial instead of a seal; one attempt per camp
           bench <unit>             keep a unit off the next map; the next in roster order fills its slot
@@ -357,6 +358,20 @@ public sealed class CampaignSession
             case ["repair", var unitId, var slotText] when int.TryParse(slotText, out var slot):
                 Take(_record.Repair(unitId, slot - 1, _content), text);
                 break;
+            case ["classes"]:
+                PrintClasses(null);
+                break;
+            case ["classes", var unitId]:
+                if (_record.Find(unitId) is { } candidate)
+                {
+                    PrintClasses(candidate);
+                }
+                else
+                {
+                    Error(text, $"no unit '{unitId}' on the roster");
+                }
+
+                break;
             case ["certify", var unitId, var classId]:
                 Take(_record.Certify(unitId, classId, _content), text);
                 break;
@@ -392,7 +407,7 @@ public sealed class CampaignSession
             case ["trial", ..]:
                 Error(text, "usage: trial <unit> <class>");
                 break;
-            case ["bench" or "unbench" or "show", ..]:
+            case ["bench" or "unbench" or "show" or "classes", ..]:
                 Error(text, $"usage: {words[0]} <unit>");
                 break;
             default:
@@ -420,6 +435,35 @@ public sealed class CampaignSession
         if (_scripted)
         {
             _rejections.Add((_line, command, message));
+        }
+    }
+
+    /// <summary>
+    /// Every class with what it asks (issue 72) and whether a trial stands in for its seal, and
+    /// for <paramref name="unit"/>, what it still lacks for each, read against its own stats.
+    /// </summary>
+    private void PrintClasses(Unit? unit)
+    {
+        _out.WriteLine($"classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}");
+        foreach (var target in _content.Classes.Values)
+        {
+            var line = $"  {target.Name}: {target.Certification.Describe()}";
+            if (_content.Campaign.TrialFor(target.Id) is not null)
+            {
+                line += "; or its trial in place of the seal";
+            }
+
+            if (unit is not null && unit.ClassId == target.Id)
+            {
+                line += $" -- {unit.Id}'s class";
+            }
+            else if (unit is not null)
+            {
+                var refusals = Certifications.Check(unit, target);
+                line += refusals.Count == 0 ? $" -- {unit.Id} may certify" : $" -- {string.Join("; ", refusals.Select(r => r.Text))}";
+            }
+
+            _out.WriteLine(line);
         }
     }
 
