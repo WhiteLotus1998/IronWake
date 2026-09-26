@@ -224,6 +224,87 @@ public class ProtocolSessionTests
         Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\",\"soldier-1\"]}]", asleep);
     }
 
+    private const string Dark = "name: Dark\nsize: 12x3\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\ndusk: 1\n\n"
+        + "............\n............\n............\n\n"
+        + "units:\nP captain 0,1\nE soldier 1,1 group:near behavior:hold\nE soldier 10,1 group:far behavior:hold\n";
+
+    private static (GameContent Content, BattleState State) DarkStart()
+    {
+        var content = Content();
+        return (content, BattleState.From(MapFormat.Parse("dark.map", Dark, content), content, content.Cast, 7));
+    }
+
+    /// <summary>Issue 302: the player-view state on a dusk map carries an unseen enemy's tile and nothing else of it, and cannot be read back.</summary>
+    [Fact]
+    public void ThePlayerViewStateCarriesNoUnseenIds()
+    {
+        var (content, state) = DarkStart();
+
+        var view = ProtocolJson.Write(w => ProtocolJson.WriteState(w, state, content, full: false, playerView: true));
+        var full = ProtocolJson.Write(w => ProtocolJson.WriteState(w, state, content, full: true, playerView: true));
+
+        Assert.Contains("\"view\":\"player\"", view);
+        Assert.Contains("\"id\":\"soldier-1\"", view);
+        Assert.DoesNotContain("soldier-2", view);
+        Assert.Contains("\"unseen\":[{\"x\":10,\"y\":1}]", view);
+        Assert.Throws<ProtocolException>(() => ProtocolJson.ReadState(full, content));
+    }
+
+    /// <summary>Issue 302: the omniscient state keeps everything, says so, and reads back equal.</summary>
+    [Fact]
+    public void TheOmniscientStateCarriesEveryUnitAndReadsBack()
+    {
+        var (content, state) = DarkStart();
+
+        var json = ProtocolJson.State(state, content);
+
+        Assert.Contains("\"view\":\"omniscient\"", json);
+        Assert.Contains("soldier-2", json);
+        Assert.Equal(state, ProtocolJson.ReadState(json, content));
+    }
+
+    /// <summary>A daylight state carries neither <c>view</c> nor <c>unseen</c>, player view or not.</summary>
+    [Fact]
+    public void ADaylightStateCarriesNoViewField()
+    {
+        var (content, session, _) = Session();
+
+        var json = session.Answer("""{"query":"state"}""");
+
+        Assert.DoesNotContain("\"view\"", json);
+        Assert.DoesNotContain("\"unseen\"", json);
+    }
+
+    /// <summary>Issue 302: the session hides what the console hides, the dark enemy's wait as one <c>unseenActs</c> event, a query on it refused; --omniscient shows it and says so on the first line.</summary>
+    [Fact]
+    public void TheSessionHidesTheDarkUnlessOmniscient()
+    {
+        var (content, state) = DarkStart();
+        var hidden = new StringWriter();
+        var session = new ProtocolSession(content, state, hidden);
+        var omniscient = new StringWriter();
+        var open = new ProtocolSession(content, state, omniscient, omniscient: true);
+
+        session.Run(new StringReader("{\"type\":\"end\"}\n"));
+        open.Run(new StringReader("{\"type\":\"end\"}\n"));
+
+        Assert.Contains("{\"type\":\"unseenActs\",\"text\":\"enemy: something in the dark acts\"}", hidden.ToString());
+        Assert.DoesNotContain("soldier-2", hidden.ToString());
+        Assert.StartsWith("{\"ok\":true,\"protocolVersion\":1,\"rulesVersion\":1,\"omniscient\":true,", omniscient.ToString());
+        Assert.Contains("soldier-2", omniscient.ToString());
+        Assert.StartsWith("{\"ok\":false,\"error\":{\"reason\":\"noSuchUnit\"", session.Answer("""{"query":"reachable","unit":"soldier-2"}"""));
+        Assert.StartsWith("{\"ok\":false,\"error\":{\"reason\":\"noSuchTarget\"", session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-2"}"""));
+    }
+
+    [Fact]
+    public void OmniscientIsRefusedWithoutTheProtocol()
+    {
+        var output = Run(out var exit, "play", "the_tollgate", "--omniscient", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(2, exit);
+        Assert.StartsWith("ERROR: --omniscient applies to a protocol run", output);
+    }
+
     [Fact]
     public void StrictIsRefusedWithTheProtocol()
     {

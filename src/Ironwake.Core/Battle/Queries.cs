@@ -160,6 +160,32 @@ public static class Queries
     }
 
     /// <summary>
+    /// The enemies on <see cref="Threats"/>' board that would strike <paramref name="unit"/> on
+    /// <paramref name="from"/> in daylight but cannot this enemy phase only because they do not
+    /// know where it is or their side cannot see it (DESIGN.md 13.7, issue 302), in unit order;
+    /// <c>threat</c> prices them at 0 and says why. Empty in daylight. Null exactly when
+    /// <see cref="Threats"/> is. Read-only.
+    /// </summary>
+    public static IReadOnlyList<BattleUnit>? Unseeing(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        if (ThreatBoard(state, content, unit, from) is not (var board, var moved, _))
+        {
+            return null;
+        }
+
+        if (moved is null || Dusk.Sight(board) is null)
+        {
+            return Array.Empty<BattleUnit>();
+        }
+
+        return board.UnitsOf(Side.Enemy)
+            .Where(e => board.EffectiveBehavior(e, content) is not null
+                && EnemyAi.StrikeOn(board, content, e, moved) is null
+                && EnemyAi.StrikeOn(board, content, e, moved, inDaylight: true) is not null)
+            .ToList();
+    }
+
+    /// <summary>
     /// What the lines of <see cref="Threats"/> deal together if every strike lands (issue
     /// 253): the worst case over assignments of enemies to distinct strike tiles, each enemy
     /// on one tile of its <see cref="ThreatLine.Tiles"/>, at most one enemy per tile, an

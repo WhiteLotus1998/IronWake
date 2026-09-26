@@ -50,6 +50,35 @@ public static class Dusk
         return false;
     }
 
+    /// <summary>
+    /// Whether <paramref name="unit"/> knows where <paramref name="target"/> is, the symmetric
+    /// knowledge of 13.7's second arm (issue 302): its side sees the target's tile, or the
+    /// target is within the wake radius of the unit itself, which is hearing, the same
+    /// distance a sleeping Guard wakes at. A unit plans strikes on and paths toward only the
+    /// units it knows; a strike still needs its side to see the target from where it strikes.
+    /// Always true in daylight.
+    /// </summary>
+    public static bool Knows(BattleState state, GameContent content, BattleUnit unit, BattleUnit target) =>
+        Sees(state, unit.Side, target.At) || unit.At.DistanceTo(target.At) <= content.WakeRadius;
+
+    /// <summary>
+    /// Whether an enemy's Move or Wait happens where no player unit sees it, before and after
+    /// (issue 301): the console and the protocol's player view then report only that something
+    /// in the dark acted, since naming the unit or its tiles would light the dark. A Move that
+    /// ends in sight is reported in full. False in daylight and for any other command.
+    /// </summary>
+    public static bool InTheDark(BattleState state, GameContent content, Command command)
+    {
+        var id = command switch { Move m => m.UnitId, Wait w => w.UnitId, _ => null };
+        if (Sight(state) is null || id is null || state.Find(id) is not { } unit || Seen(state, unit))
+        {
+            return false;
+        }
+
+        var after = Resolver.Apply(state, content, command).Next.Find(id);
+        return after is null || !Seen(state, after);
+    }
+
     /// <summary>Whether the player sees <paramref name="unit"/>: every player unit is seen, an enemy only within the player's sight.</summary>
     public static bool Seen(BattleState state, BattleUnit unit) =>
         unit.Side == Side.Player || Sees(state, Side.Player, unit.At);

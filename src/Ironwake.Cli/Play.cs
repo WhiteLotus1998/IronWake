@@ -22,7 +22,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol] [--candidate id]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -122,6 +122,7 @@ public sealed class PlaySession
         string? script = null;
         var strict = false;
         var protocol = false;
+        var omniscient = false;
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
         string? candidate = null;
@@ -143,6 +144,9 @@ public sealed class PlaySession
                 case "--protocol":
                     protocol = true;
                     break;
+                case "--omniscient":
+                    omniscient = true;
+                    break;
                 case "--content" when value is not null:
                     contentDir = value;
                     i++;
@@ -160,6 +164,13 @@ public sealed class PlaySession
                     Console.WriteLine(Usage);
                     return 2;
             }
+        }
+
+        if (omniscient && !protocol)
+        {
+            Console.WriteLine("ERROR: --omniscient applies to a protocol run; the console always shows the player's view");
+            Console.WriteLine(Usage);
+            return 2;
         }
 
         if (strict && protocol)
@@ -231,7 +242,7 @@ public sealed class PlaySession
 
         if (protocol)
         {
-            return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out).Run(input);
+            return new ProtocolSession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, omniscient).Run(input);
         }
 
         var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null);
@@ -635,7 +646,7 @@ public sealed class PlaySession
             {
                 var hidden = Resolve(command);
                 _state = hidden.Next;
-                _out.WriteLine("enemy: something in the dark acts");
+                _out.WriteLine(ProtocolSession.DarkLine);
                 foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
                 {
                     _out.WriteLine(Describe(e, _content));
@@ -699,17 +710,7 @@ public sealed class PlaySession
     /// (DESIGN.md 13.7): the console then prints only that something moved, since naming the
     /// unit or its tiles would light the dark. A Move that ends in sight prints in full.
     /// </summary>
-    private bool InTheDark(Command command)
-    {
-        var id = command switch { Move m => m.UnitId, Wait w => w.UnitId, _ => null };
-        if (Dusk.Sight(_state) is null || id is null || _state.Find(id) is not { } unit || Dusk.Seen(_state, unit))
-        {
-            return false;
-        }
-
-        var after = Resolver.Apply(_state, _content, command).Next.Find(id);
-        return after is null || !Dusk.Seen(_state, after);
-    }
+    private bool InTheDark(Command command) => Dusk.InTheDark(_state, _content, command);
 
     /// <summary>
     /// Prints the history index at which each player phase in the history began, so a
@@ -1019,7 +1020,7 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile)));
     }
 
     /// <summary>
@@ -1029,9 +1030,12 @@ public sealed class PlaySession
     /// and the wake rule under them (issue 248); the protocol's threat query carries it as
     /// its <c>text</c> (issue 25). On a dusk map (DESIGN.md 13.7) an enemy no player unit sees
     /// is left out of the rows, the total and the sleeping groups, and one line says the dark is
-    /// unpriced, whether or not anything in it could strike.
+    /// unpriced, whether or not anything in it could strike. An enemy the player sees that
+    /// would strike the unit in daylight but does not know where it is, or whose side cannot
+    /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
+    /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>.
     /// </summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep)
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         var rows = new List<string>();
@@ -1051,6 +1055,11 @@ public sealed class PlaySession
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
+        }
+
+        foreach (var blind in (unseeing ?? Array.Empty<BattleUnit>()).Where(e => Dusk.Seen(state, e)))
+        {
+            rows.Add($"  {blind.Id}: cannot see you (dark)");
         }
 
         if (Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e)))
