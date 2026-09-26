@@ -130,6 +130,18 @@ public class MapFormatTests
     }
 
     [Fact]
+    public void ABossLineMayBeAGuardAndRoundTrips()
+    {
+        var text = MapFixture.OldMillRoad.Replace(" group:mill behavior:boss", " group:mill behavior:guard");
+        var map = MapFixture.Parse(text);
+
+        var boss = Assert.IsType<EnemyPlacement>(map.Placements[5]);
+        Assert.True(boss.IsBoss);
+        Assert.Equal(Behavior.Guard, boss.Behavior);
+        Assert.Equal(text, MapFormat.Write(map, MapFixture.Content));
+    }
+
+    [Fact]
     public void TilesOfFindsEveryTileOfATerrain()
     {
         var map = MapFixture.Parse(MapFixture.OldMillRoad);

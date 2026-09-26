@@ -135,7 +135,7 @@ public static class MapFormat
         PlayerPlacement { Slot: PlayerSlot.Captain } p => "P captain " + p.At,
         PlayerPlacement { Slot: PlayerSlot.NamedRecruit } p => "P recruit:" + p.RecruitId + " " + p.At,
         PlayerPlacement p => "P recruit " + p.At,
-        EnemyPlacement { IsBoss: true } e => "B " + e.TemplateId + " " + e.At + " group:" + e.Group + " behavior:boss",
+        EnemyPlacement { IsBoss: true } e => "B " + e.TemplateId + " " + e.At + " group:" + e.Group + " behavior:" + (e.Behavior == Behavior.Guard ? "guard" : "boss"),
         EnemyPlacement e => "E " + e.TemplateId + " " + e.At + " group:" + e.Group + " behavior:" + e.Behavior.ToString().ToLowerInvariant(),
         _ => throw new ArgumentOutOfRangeException(nameof(placement), placement, "unknown placement kind"),
     };
@@ -575,12 +575,14 @@ public static class MapFormat
             Behavior behavior;
             if (isBoss)
             {
-                if (attributes.TryGetValue("behavior", out var given) && given != "boss")
-                {
-                    throw Error($"a B line's behavior is always boss, got '{given}'");
-                }
-
-                behavior = Behavior.Boss;
+                behavior = attributes.TryGetValue("behavior", out var given)
+                    ? given switch
+                    {
+                        "boss" => Behavior.Boss,
+                        "guard" => Behavior.Guard,
+                        _ => throw Error($"a B line's behavior is boss or guard, got '{given}'"),
+                    }
+                    : Behavior.Boss;
             }
             else
             {

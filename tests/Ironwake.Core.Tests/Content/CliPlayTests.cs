@@ -590,28 +590,28 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 79: Code's play of seed 23 on Sallow Grange. The first pass walks the north skirt a
-    /// turn slow and spends a Recall back to turn 2; the second puts Pell on 5,2 beside the fort
-    /// archer, but her cast at the gate from 10,2 is inside the field's noise and wakes it on
-    /// turn 5; Wren's counter drops the gate shieldbearer, Ansgar kills the hexer from 13,3, and
-    /// the captain seizes on turn 8 of 8 with nobody dead.
+    /// Issue 259: Code's play of seed 31 on Sallow Grange with the Reeve a sleeping guard boss at
+    /// 15,6 and the clock at 10. The field is woken on turn 2 and fought at the party's line; on
+    /// turn 5 Ansgar's kill on the hexer from 12,4 is noise within 6 of the Reeve and wakes him,
+    /// he walks out to 13,6 and spears Teodor, and on turn 6 the captain and Wren take his 26 to
+    /// 0 exactly; the captain seizes on turn 7 of 10 with nobody dead and no Recall.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptSeizesSallowGrangeOnSeedTwentyThree()
+    public void TheJournaledScriptSeizesSallowGrangeOnSeedThirtyOne()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-23.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-31.script");
 
-        var output = Run(out var exit, "play", "sallow_grange", "--seed", "23", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "sallow_grange", "--seed", "31", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("recalled to state 21; 2 charges left", output);
-        Assert.Contains("group field wakes: noise", output);
-        Assert.Contains("shieldbearer-1 falls at 12,2", output);
-        Assert.Contains("hexer-1 falls at 13,4", output);
-        Assert.Contains("Sallow Grange  turn 8 of 8", output);
+        Assert.Contains("group field wakes: proximity", output);
+        Assert.Contains("hexer-1 falls at 13,4\ngroup hall wakes: noise", output);
+        Assert.Contains("enemy: move grange_reeve-1 13,6", output);
+        Assert.Contains("grange_reeve-1 falls at 13,6", output);
+        Assert.Contains("Sallow Grange  turn 7 of 10", output);
         Assert.All(new[] { "captain", "wren", "teodor", "pell", "ottilie", "ansgar" }, id => Assert.DoesNotContain(id + " falls at", output));
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
@@ -792,7 +792,7 @@ public class SimFullTests
 
     /// <summary>
     /// The heuristic's Canto (issue 262) prints as the CLI's own <c>canto</c> line, the tile
-    /// even when it is a stay. Seed 3 on Sallow Grange has Ansgar ride back from 5,8 after
+    /// even when it is a stay. Seed 3 on Sallow Grange has Ansgar ride south from 5,8 after
     /// striking; the trace replayed under --strict applies every line.
     /// </summary>
     [Fact]
@@ -800,7 +800,7 @@ public class SimFullTests
     {
         Assert.Equal("canto ansgar 3,7", Ironwake.Sim.Program.Script(new Canto("ansgar", new Coord(3, 7))));
         var trace = Capture(() => Ironwake.Sim.Program.Trace("sallow_grange", 3));
-        Assert.Contains("\ncanto ansgar 3,7\n", trace);
+        Assert.Contains("\ncanto ansgar 4,10\n", trace);
 
         var path = Path.Combine(Path.GetTempPath(), "ironwake-trace-" + Guid.NewGuid().ToString("N") + ".script");
         File.WriteAllText(path, trace);
@@ -812,7 +812,7 @@ public class SimFullTests
             Assert.Equal(0, exit);
             Assert.DoesNotContain("rejected ", output);
             Assert.DoesNotContain("strict: stopped", output);
-            Assert.Contains("ansgar cantos 5,8 -> 3,7", output);
+            Assert.Contains("ansgar cantos 5,8 -> 4,10", output);
         }
         finally
         {

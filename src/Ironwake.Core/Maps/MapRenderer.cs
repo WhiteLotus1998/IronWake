@@ -332,7 +332,7 @@ public static class MapRenderer
             case EnemyPlacement e:
                 var unit = map.EnemyUnit(e, content);
                 var who = $"{unit.Name} L{unit.Level}";
-                var role = e.IsBoss ? "boss" : e.Behavior.ToString().ToLowerInvariant();
+                var role = e.IsBoss ? (e.Behavior == Behavior.Guard ? "boss, guard" : "boss") : e.Behavior.ToString().ToLowerInvariant();
                 return $"{who,-22} {e.At,-6} {terrain}  group {e.Group}, {role}";
             default:
                 throw new ArgumentOutOfRangeException(nameof(placement), placement, "unknown placement kind");
