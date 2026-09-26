@@ -12,10 +12,10 @@ name: builder-chain
 # stale label delays the chain by at most an hour, and the hourly cron slots
 # pick the queue up. An empty queue after an issue merge wakes one
 # experiment run instead of stopping; an empty queue after an experiment
-# merge stops until the Table files more. A heartbeat every 20 minutes
-# restarts a stalled chain (issues filed by a Table PR wake nothing) when no
-# issue is in progress, no Builder PR is open, and no Builder PR merged in the
-# last 50 minutes. A refused wake (routine paused, daily cap) is logged, not
+# merge stops until the Table files more. A merged table/ PR (where new
+# issues are filed) and a best-effort heartbeat every 20 minutes restart a
+# stalled chain when no issue is in progress, no Builder PR is open, and no
+# Builder PR merged in the last 50 minutes. A refused wake (routine paused, daily cap) is logged, not
 # failed.
 
 on:
@@ -27,7 +27,7 @@ on:
 
 jobs:
   chain:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-') || startsWith(github.event.pull_request.head.ref, 'experiment/')))
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-') || startsWith(github.event.pull_request.head.ref, 'experiment/') || startsWith(github.event.pull_request.head.ref, 'table/')))
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether to fire the next Builder run
@@ -51,10 +51,13 @@ jobs:
           forks="$(gh api "repos/$REPO/issues?labels=fork&state=open&per_page=1" --jq 'length')"
           if [ "${forks:-0}" -gt 0 ]; then echo "a fork issue is open; the chain waits for Lotus"; exit 0; fi
 
-          # The heartbeat restarts a chain that stalled, and only that: it stands
-          # down if any Builder may be alive or about to fire the next run, and
-          # never spikes an experiment on an empty queue.
-          if [ "$EVENT" = "schedule" ]; then
+          # The heartbeat and a Table merge restart a chain that stalled, and only
+          # that: they stand down if any Builder may be alive or about to fire the
+          # next run, and never spike an experiment on an empty queue. A Table
+          # merge is where new issues come from, so it is the reliable restart;
+          # the schedule is best-effort and GitHub often skips it.
+          case "$MERGED_BRANCH" in table/*) restart=yes ;; *) restart=no ;; esac
+          if [ "$EVENT" = "schedule" ] || [ "$restart" = "yes" ]; then
             cut20h="$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
             fresh="$(gh api "repos/$REPO/issues?labels=in-progress&state=open&per_page=100" --jq "[.[] | select(.pull_request == null) | select(.updated_at > \"$cut20h\")] | length")"
             if [ "${fresh:-0}" -gt 0 ]; then echo "heartbeat: an issue is in progress; the chain is alive"; exit 0; fi
