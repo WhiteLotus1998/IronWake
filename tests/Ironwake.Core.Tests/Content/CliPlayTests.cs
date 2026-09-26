@@ -694,6 +694,27 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 287: Code's play of seed 287 on the bare keep with the waves run to the clock. The
+    /// van strikes the breaches on enemy phase 2, the hexer casts from 9,6 over the wall and kills
+    /// Dunstan, Pell falls to an archer that walked in through an unheld breach, and Wren falls
+    /// holding 11,3 on the last enemy phase. Two Recalls; survived with three recruits fallen.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptSurvivesTheBareKeepOnSeedTwoEightySeven()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-base-287.script");
+
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "287", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: survive\n", output);
+        Assert.Contains("hexer-1 hits dunstan for 11 (hp 0)", output);
+        Assert.Contains("wren falls at 11,3", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 275: Code's play of seed 61 on Sallow Grange the long way, with the hexer moved
     /// to 13,7. Killing the fort archer wakes the field by noise on turn 3 and the field is
     /// fought out west (three Recalls on turn 4); Pell breaks the north lock from 11,1 in two
