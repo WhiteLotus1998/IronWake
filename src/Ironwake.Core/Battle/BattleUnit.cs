@@ -136,4 +136,13 @@ public sealed record BattleUnit(
 
         return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
     }
+
+    /// <summary>
+    /// This unit as it answers a strike from <paramref name="attackerAt"/>: countering, and
+    /// <see cref="Combatant.Blind"/> when its side cannot see that tile at dusk, since a counter
+    /// needs sight the same as a strike (DESIGN.md 13.7, issue 308). Every forecast, the
+    /// resolver and the enemy planner build the answering side here, so all read one number.
+    /// </summary>
+    public Combatant Answering(BattleState state, GameContent content, Coord attackerAt) =>
+        ToCombatant(state, content, countering: true) with { Blind = !Dusk.Sees(state, Side, attackerAt) };
 }

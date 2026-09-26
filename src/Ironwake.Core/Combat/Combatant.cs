@@ -75,6 +75,13 @@ public sealed record Combatant
     /// <summary>The unit's stats with the class modifiers and passive ability deltas applied, the numbers the formulas read.</summary>
     public Stats Stats { get; }
 
-    /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles.</summary>
-    public bool CanStrike(int distance) => Weapon is not null && Weapon.InRange(distance);
+    /// <summary>
+    /// Whether this side answers blind: at dusk its side cannot see the tile the strike came
+    /// from, so it makes no counter (DESIGN.md 13.7, issue 308). The weapon stays in hand, so
+    /// its weight still slows the unit and the attacker's numbers do not change.
+    /// </summary>
+    public bool Blind { get; init; }
+
+    /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, and not <see cref="Blind"/>.</summary>
+    public bool CanStrike(int distance) => !Blind && Weapon is not null && Weapon.InRange(distance);
 }

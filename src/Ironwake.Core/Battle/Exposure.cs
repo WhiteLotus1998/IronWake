@@ -111,7 +111,7 @@ public static class Exposure
             var distance = tile.DistanceTo(target.At);
             if (rejection is null && weapon!.InRange(distance))
             {
-                var forecast = Combat.Forecast(armed.ToCombatant(board, content), target.ToCombatant(board, content, countering: true), distance, state.Scheme);
+                var forecast = Combat.Forecast(armed.ToCombatant(board, content), target.Answering(board, content, tile), distance, state.Scheme);
                 noisy.Add(tile);
                 noisy.Add(target.At);
                 if (KillsWithCertainty(forecast.Attacker, target.Hp))

@@ -254,4 +254,155 @@ public class DuskTests
         Assert.Empty(Queries.Unseeing(state, Starter, hale, hale.At)!);
         Assert.Contains(Queries.Threats(state, Starter, hale, hale.At)!, l => l.Enemy.Id == "soldier-1");
     }
+
+    /// <summary>
+    /// A 12x3 night for issue 308's objective drift: Hale and Ottilie at the west edge,
+    /// a soldier at 6,1 six tiles off (past hearing), forest on columns 3 to 5, and the
+    /// objective line and tiles the test asks for.
+    /// </summary>
+    private static BattleState Drifting(string win, string behavior = "aggressive", string row1 = "............")
+    {
+        var map = $"""
+            name: Drift
+            size: 12x3
+            win: {win}
+            turn_limit: 10
+            recall: 3
+            enemy_level: 1
+            dusk: 1
+
+            ...^^^......
+            {row1}
+            ...^^^......
+
+            units:
+            P captain 0,1
+            P recruit:ottilie 0,2
+            E soldier 6,1 group:a behavior:{behavior}
+
+            """;
+        return BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), map).Do(new EndPhase());
+    }
+
+    [Fact]
+    public void AnEnemyThatKnowsOfNobodyMakesForTheExitNearestByItsOwnMovementCost()
+    {
+        var state = Drifting("escape\nexit: 2,1 11,1", row1: "...^^^......");
+        var soldier = state.Find("soldier-1")!;
+
+        var plan = EnemyAi.PlanUnit(state, Starter, soldier);
+
+        Assert.False(Dusk.Knows(state, Starter, soldier, state.Find("hale")!));
+        Assert.True(new Coord(6, 1).DistanceTo(new Coord(2, 1)) < new Coord(6, 1).DistanceTo(new Coord(11, 1)));
+        var move = Assert.IsType<Move>(plan[0]);
+        Assert.True(move.To.X > 6, $"moved to {move.To}, away from the cheaper exit at 11,1");
+        Assert.IsType<Wait>(plan[1]);
+    }
+
+    [Fact]
+    public void OnSeizeAnEnemyThatKnowsOfNobodyMakesForTheThrone()
+    {
+        var state = Drifting("seize", row1: "..T.........");
+
+        var move = Assert.IsType<Move>(EnemyAi.PlanUnit(state, Starter, state.Find("soldier-1")!)[0]);
+
+        Assert.True(move.To.DistanceTo(new Coord(2, 1)) < 4, $"moved to {move.To}");
+    }
+
+    [Fact]
+    public void AnExitAnotherUnitStandsOnIsNoDestination()
+    {
+        var state = Drifting("escape\nexit: 11,0 11,1");
+        var blocked = state.WithUnit(state.Find("hale")! with { At = new Coord(11, 1) })
+            .WithUnit(state.Find("ottilie")! with { At = new Coord(11, 0) });
+        var soldier = blocked.Find("soldier-1")!;
+
+        Assert.False(Dusk.Knows(blocked, Starter, soldier, blocked.Find("hale")!));
+        Assert.Null(EnemyAi.Drift(blocked, Starter, soldier, blocked.ReachOf(soldier, Starter), Array.Empty<Reach>()));
+        Assert.NotNull(EnemyAi.Drift(state, Starter, state.Find("soldier-1")!, state.ReachOf(state.Find("soldier-1")!, Starter), Array.Empty<Reach>()));
+    }
+
+    [Fact]
+    public void OnRoutAnEnemyThatKnowsOfNobodyStillWaits()
+    {
+        var state = Drifting("rout");
+
+        Assert.Equal(new Command[] { new Wait("soldier-1") }, EnemyAi.PlanUnit(state, Starter, state.Find("soldier-1")!));
+    }
+
+    [Fact]
+    public void AnEnemyThatHoldsKeepsItsHoldOnAnObjectiveMap()
+    {
+        var state = Drifting("escape\nexit: 11,0 11,1", behavior: "hold");
+
+        Assert.Equal(new Command[] { new Wait("soldier-1") }, EnemyAi.PlanUnit(state, Starter, state.Find("soldier-1")!));
+    }
+
+    /// <summary>
+    /// Issue 308: Hale spots the archer from 1,1 and Ottilie shoots it from 0,1 at range 2.
+    /// No unit of the archer's side stands within sight 1 of 0,1, so it answers nothing.
+    /// </summary>
+    private static BattleState SpottedShot(int? dusk) =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(dusk, "E archer 2,1 group:a behavior:hold"))
+            .Do(new Move("hale", new Coord(1, 1)))
+            .Do(new Wait("hale"))
+            .Do(new Move("ottilie", new Coord(0, 1)));
+
+    [Fact]
+    public void ARangeTwoStrikeFromATileTheDefendersSideCannotSeeTakesNoCounter()
+    {
+        var dark = SpottedShot(1);
+        var ottilie = dark.Find("ottilie")!;
+        var archer = dark.Find("archer-1")!;
+
+        Assert.False(Dusk.Sees(dark, Side.Enemy, ottilie.At));
+        Assert.True(archer.Answering(dark, Starter, ottilie.At).Blind);
+        Assert.False(Queries.Forecast(dark, Starter, ottilie, archer)!.Defender.Strikes);
+        var fought = dark.Try(new Attack("ottilie", "archer-1")).Events.OfType<CombatFought>().Single();
+        Assert.All(fought.Strikes, s => Assert.Equal("ottilie", s.AttackerId));
+        Assert.Equal(ottilie.Hp, fought.AttackerHpAfter);
+    }
+
+    [Fact]
+    public void TheSameStrikeInDaylightIsCountered()
+    {
+        var day = SpottedShot(null);
+        var ottilie = day.Find("ottilie")!;
+        var archer = day.Find("archer-1")!;
+
+        Assert.False(archer.Answering(day, Starter, ottilie.At).Blind);
+        Assert.True(Queries.Forecast(day, Starter, ottilie, archer)!.Defender.Strikes);
+        var fought = day.Try(new Attack("ottilie", "archer-1")).Events.OfType<CombatFought>().Single();
+        Assert.Contains(fought.Strikes, s => s.AttackerId == "archer-1");
+    }
+
+    [Fact]
+    public void AnAdjacentAttackerIsAlwaysAnswered()
+    {
+        var dark = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(1, "E soldier 2,1 group:a behavior:hold"))
+            .Do(new Move("hale", new Coord(1, 1)));
+        var soldier = dark.Find("soldier-1")!;
+
+        Assert.False(soldier.Answering(dark, Starter, new Coord(1, 1)).Blind);
+        Assert.True(Queries.Forecast(dark, Starter, dark.Find("hale")!, soldier)!.Defender.Strikes);
+    }
+
+    /// <summary>
+    /// The mirror for the enemy side: the soldier at 1,2 spots Ottilie at 0,2 and the archer
+    /// at 2,2 shoots her at range 2, three tiles from Hale and two from her, so she answers
+    /// nothing at sight 1 and the planner scores the shot as unanswered.
+    /// </summary>
+    [Fact]
+    public void TheEnemyPlannerScoresASpottedRangeTwoStrikeAsUnanswered()
+    {
+        const string Pair = "E archer 2,2 group:a behavior:hold\nE soldier 1,2 group:b behavior:hold";
+        var dark = EnemyPhase(1, Pair);
+        var day = EnemyPhase(null, Pair);
+        var archer = dark.Find("archer-1")!;
+
+        Assert.True(dark.Find("ottilie")!.Answering(dark, Starter, archer.At).Blind);
+        Assert.False(day.Find("ottilie")!.Answering(day, Starter, archer.At).Blind);
+        Assert.True(EnemyAi.Score(dark, Starter, archer, archer.At, dark.Find("ottilie")!)
+            > EnemyAi.Score(day, Starter, day.Find("archer-1")!, archer.At, day.Find("ottilie")!));
+    }
 }
