@@ -7,6 +7,8 @@
     { "map": "saltmarsh_ford", "reward": 800,
       "stock": ["iron_sword", "iron_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "salve", "field_dressing"] },
     { "map": "the_tollgate", "reward": 1000,
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] }
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
+    { "map": "harrow_weir", "reward": 1200,
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] }
   ]
 }

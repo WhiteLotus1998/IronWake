@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "difficulty", "certification" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "difficulty", "certification" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -63,6 +63,11 @@ public static class MapFormat
         if (map.Supplies is { } supplies)
         {
             sb.Append("supplies: ").Append(supplies).Append('\n');
+        }
+
+        if (map.Announced)
+        {
+            sb.Append("announce: on\n");
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -174,9 +179,10 @@ public static class MapFormat
             var recall = ParseInt(header, "recall", 0, 99, required: false, fallback: MapDefinition.DefaultRecallCharges);
             var enemyLevel = ParseInt(header, "enemy_level", Unit.MinLevel, Unit.MaxLevel, required: false, fallback: MapDefinition.DefaultEnemyLevel);
             var cheapShots = ParseCheapShots(header);
-            var retreat = ParseRetreat(header);
+            var retreat = ParseOn(header, "retreat");
             var rivalry = ParseRivalry(header);
             int? supplies = header.ContainsKey("supplies") ? ParseInt(header, "supplies", 1, MaxSupplies, required: true, fallback: 0) : null;
+            var announce = ParseOn(header, "announce");
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
             var difficulty = ParseDifficulty(header);
@@ -187,8 +193,12 @@ public static class MapFormat
             SkipBlankLines();
             var placements = ParseUnits(width, height, terrain);
             var events = ParseEvents(width, height, terrain, turnLimit);
+            if (announce && events.Count == 0)
+            {
+                throw ErrorAt(header["announce"].Line, "announce: on needs an events: block to announce");
+            }
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce);
             Validate(map);
             return map;
         }
@@ -336,16 +346,16 @@ public static class MapFormat
             return true;
         }
 
-        private bool ParseRetreat(Dictionary<string, (string Value, int Line)> header)
+        private bool ParseOn(Dictionary<string, (string Value, int Line)> header, string key)
         {
-            if (!header.TryGetValue("retreat", out var entry))
+            if (!header.TryGetValue(key, out var entry))
             {
                 return false;
             }
 
             if (entry.Value != "on")
             {
-                throw ErrorAt(entry.Line, $"retreat may only be 'on' (or absent), got '{entry.Value}'");
+                throw ErrorAt(entry.Line, $"{key} may only be 'on' (or absent), got '{entry.Value}'");
             }
 
             return true;

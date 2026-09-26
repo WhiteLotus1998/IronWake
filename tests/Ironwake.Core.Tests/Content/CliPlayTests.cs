@@ -533,6 +533,62 @@ public class CliPlayTests
         }
     }
 
+    /// <summary>
+    /// Issue 78: on a map with <c>announce: on</c> the console lists every event before the
+    /// first command, and <c>map</c> lists only those still to fire; the Tollgate, which does
+    /// not announce, prints none.
+    /// </summary>
+    [Fact]
+    public void AnAnnouncedMapListsItsEventsAtTheStartAndMapListsThoseStillToFire()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-play-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "end\nend\nend\nmap\n");
+        try
+        {
+            var weir = Run(out _, "play", "harrow_weir", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
+            var tollgate = Run(out _, "play", "the_tollgate", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
+
+            var start = weir[..weir.IndexOf("> end", StringComparison.Ordinal)];
+            Assert.Contains("  event: north1 turn 3 enemy spawn rider 7,0 group:north behavior:aggressive\n", start);
+            Assert.Contains("  event: west1 turn 5 enemy spawn brigand 0,11 group:west behavior:aggressive\n", start);
+            Assert.Contains("  event: north2 turn 7 enemy spawn brigand 7,0 group:north behavior:aggressive\n", start);
+            var afterMap = weir[weir.IndexOf("> map", StringComparison.Ordinal)..];
+            Assert.DoesNotContain("event: north1", afterMap);
+            Assert.Contains("  event: west1 ", afterMap);
+            Assert.Contains("  event: north2 ", afterMap);
+            Assert.DoesNotContain("  event: ", tollgate);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    /// <summary>
+    /// Issue 78: Code's play of seed 7 on Harrow Weir. Wren walks north and stands on 7,0 as
+    /// enemy phase 3 opens, so the rider never arrives; Pell and Teodor break the shieldbearer
+    /// on turn 3; the west brigand arrives on enemy phase 5; the foreman crits Teodor for 24 at
+    /// 2 percent on enemy phase 6, and Pell kills him on turn 7 on 3 HP.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptWinsHarrowWeirOnSeedSeven()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-harrow_weir-7.script");
+
+        var output = Run(out var exit, "play", "harrow_weir", "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("rider-1", output);
+        Assert.Contains("shieldbearer-1 falls at 11,6", output);
+        Assert.Contains("  brigand-2 arrives at 0,11, group west, aggressive\n", output);
+        Assert.Contains("weir_foreman-1 crits teodor for 24 (hp 0)", output);
+        Assert.Contains("Harrow Weir  turn 7 of 14", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

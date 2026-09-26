@@ -252,6 +252,22 @@ public sealed class PlaySession
         return File.Exists(named) ? named : mapArg;
     }
 
+    /// <summary>
+    /// Lists the map's events that have not fired, one line each in the file's own words, on a
+    /// certification trial and on a map with <c>announce: on</c> (issue 78).
+    /// </summary>
+    private void WritePendingEvents()
+    {
+        var lines = MapFormat.Write(_state.Map, _content).Split('\n').SkipWhile(l => l != "events:").Skip(1).Where(l => l.Length > 0).ToList();
+        for (var i = 0; i < _state.Map.Events.Count; i++)
+        {
+            if (!_state.HasFired(_state.Map.Events[i].Name))
+            {
+                _out.WriteLine("  event: " + lines[i]);
+            }
+        }
+    }
+
     private int Play(TextReader input, bool strict, ulong seed)
     {
         _out.WriteLine($"{_state.Map.Name}, seed {seed}, scheme {_state.Scheme}");
@@ -259,10 +275,11 @@ public sealed class PlaySession
         {
             var candidate = _state.UnitsOf(Side.Player).Single();
             _out.WriteLine($"certification trial: {candidate.Unit.Id} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
-            foreach (var line in MapFormat.Write(_state.Map, _content).Split('\n').SkipWhile(l => l != "events:").Skip(1).Where(l => l.Length > 0))
-            {
-                _out.WriteLine("  event: " + line);
-            }
+        }
+
+        if (_state.Map.Certification is not null || _state.Map.Announced)
+        {
+            WritePendingEvents();
         }
         _out.Write(MapRenderer.Render(_state, _content));
         var commands = 0;
@@ -453,6 +470,11 @@ public sealed class PlaySession
                 break;
             case "map":
                 _out.Write(MapRenderer.Render(_state, _content));
+                if (_state.Map.Announced)
+                {
+                    WritePendingEvents();
+                }
+
                 break;
             case "leave" when _campaign && words.Length == 1:
                 if (_state.Outcome.IsOver)

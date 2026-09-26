@@ -10,12 +10,71 @@ public class SampleMapsTests
         MapFiles.LoadAll(Fixture.RealContentDirectory(), MapFixture.Content);
 
     [Fact]
-    public void ThreeSampleMapsLoad()
+    public void TheFourShippedMapsLoad()
     {
         var maps = All();
 
-        Assert.Equal(new[] { "old_mill_road", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
-        Assert.Equal(WinCondition.Seize, maps[2].Map.Win);
+        Assert.Equal(new[] { "harrow_weir", "old_mill_road", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
+        Assert.Equal(WinCondition.Seize, maps[3].Map.Win);
+        Assert.Equal(WinCondition.DefeatBoss, maps[0].Map.Win);
+    }
+
+    /// <summary>
+    /// Issue 78: Harrow Weir announces its reinforcements. Every event is a spawn on a turn
+    /// trigger at the start of an enemy phase, the header says <c>announce: on</c>, and the two
+    /// north waves share the road's edge tile 7,0, so one body standing there spends both.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirAnnouncesTurnSpawnsAndTheNorthWavesShareOneTile()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+
+        Assert.True(map.Announced);
+        Assert.Equal(new[] { "north1", "west1", "north2" }, map.Events.Select(e => e.Name));
+        Assert.All(map.Events, e => Assert.Equal(Side.Enemy, Assert.IsType<TurnTrigger>(e.Trigger).Phase));
+        var tiles = map.Events.ToDictionary(e => e.Name, e => Assert.IsType<SpawnEnemy>(e.Action).Placement.At);
+        Assert.Equal(new Coord(7, 0), tiles["north1"]);
+        Assert.Equal(new Coord(7, 0), tiles["north2"]);
+        Assert.Equal(new Coord(0, 11), tiles["west1"]);
+    }
+
+    /// <summary>
+    /// Issue 78 and section 9's authoring constraint: the weir's bridge is a one-tile corridor
+    /// (water on both sides of 10,6 and 11,6) and the shieldbearer holds its east end, so the
+    /// armored wall is absolute and the other way over is the ford on rows 10 and 11.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirBridgeIsOneTileWideAndTheShieldbearerHoldsIt()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+
+        foreach (var x in new[] { 10, 11 })
+        {
+            Assert.Equal("road", map.TerrainIdAt(new Coord(x, 6)));
+            Assert.Equal("water", map.TerrainIdAt(new Coord(x, 5)));
+            Assert.Equal("water", map.TerrainIdAt(new Coord(x, 7)));
+            Assert.All(new[] { 10, 11 }, y => Assert.Equal("plain", map.TerrainIdAt(new Coord(x, y))));
+        }
+
+        var wall = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.At == new Coord(11, 6));
+        Assert.Equal("shieldbearer", wall.TemplateId);
+        Assert.Equal(Behavior.Hold, wall.Behavior);
+    }
+
+    /// <summary>
+    /// The thirty-sixth round: maps 4 to 8 each owe one enemy that fights with gauntlets and one
+    /// at Def 7 or more, read as the map fields them (class and level included). Harrow Weir's
+    /// brawler and its boss carry gauntlets, and its shieldbearer stands at Def 7 or more.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirFieldsAGauntletEnemyAndOneAtDefSevenOrMore()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+        var content = MapFixture.Content;
+        var enemies = map.Placements.OfType<EnemyPlacement>().Select(e => (e.TemplateId, Unit: map.EnemyUnit(e, content))).ToList();
+
+        Assert.Contains(enemies, e => e.Unit.Inventory.Items.Any(i => content.Weapons.TryGetValue(i.ItemId, out var w) && w.Type == WeaponType.Gauntlet));
+        Assert.Contains(enemies, e => content.StatsOf(e.Unit).Def >= 7);
     }
 
     /// <summary>
@@ -166,7 +225,7 @@ public class SampleMapsTests
         var end = design.IndexOf("```", start + 3, StringComparison.Ordinal);
         var example = design[(start + 4)..end];
 
-        Assert.Equal(All()[0].Map, MapFixture.Parse(example, "DESIGN.md"));
+        Assert.Equal(All().Single(m => m.Id == "old_mill_road").Map, MapFixture.Parse(example, "DESIGN.md"));
     }
 
     [Fact]

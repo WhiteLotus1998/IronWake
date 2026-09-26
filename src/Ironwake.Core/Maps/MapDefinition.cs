@@ -38,6 +38,11 @@ namespace Ironwake.Core;
 /// slot played in the trial's class with the trial's loadout (<see cref="Trial"/>); null for an
 /// ordinary map.
 /// </param>
+/// <param name="Announced">
+/// The <c>announce: on</c> header (issue 78): the console lists the map's events before the first
+/// command and on <c>map</c> while any is still to fire, so a reinforcement turn is counted in
+/// advance. Off by default, and an unannounced event's only tell is its own line when it fires.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -56,7 +61,8 @@ public sealed record MapDefinition(
     string? RivalryArm = null,
     int? Supplies = null,
     string? DifficultyId = null,
-    CertificationTrial? Certification = null)
+    CertificationTrial? Certification = null,
+    bool Announced = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

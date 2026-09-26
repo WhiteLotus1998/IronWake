@@ -1,0 +1,72 @@
+move ottilie 3,5
+attack ottilie brigand-1
+move captain 3,4
+attack captain brigand-1
+move wren 4,4
+wait wren
+move dunstan 4,6
+wait dunstan
+move teodor 5,7
+wait teodor
+move pell 4,7
+wait pell
+end
+move wren 7,3
+wait wren
+move captain 7,4
+wait captain
+move ottilie 6,6
+wait ottilie
+move pell 8,7
+wait pell
+move teodor 9,7
+wait teodor
+move dunstan 8,6
+wait dunstan
+end
+move wren 7,0
+wait wren
+move pell 9,6
+attack pell shieldbearer-1
+move teodor 10,6
+attack teodor shieldbearer-1
+move dunstan 9,8
+wait dunstan
+move captain 8,6
+wait captain
+move ottilie 7,7
+wait ottilie
+end
+attack dunstan brawler-1
+move captain 8,9
+attack captain brawler-1
+move teodor 11,6
+wait teodor
+wait pell
+move ottilie 9,7
+wait ottilie
+wait wren
+end
+move teodor 8,6
+item teodor 2
+move pell 10,6
+attack pell soldier-1
+move dunstan 11,6
+attack dunstan soldier-1
+wait ottilie
+move captain 9,6
+wait captain
+wait wren
+end
+move dunstan 9,5
+wait dunstan
+move pell 11,6
+attack pell weir_foreman-1
+move teodor 12,6
+attack teodor weir_foreman-1
+move captain 10,6
+wait captain
+wait ottilie
+wait wren
+end
+attack pell weir_foreman-1

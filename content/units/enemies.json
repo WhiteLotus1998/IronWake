@@ -100,6 +100,24 @@
       "inventory": [ { "item": "toll_spear" } ]
     },
     {
+      "id": "brawler",
+      "name": "Brawler",
+      "class": "reaver",
+      "level": 1,
+      "stats": { "hp": 20, "str": 6, "mag": 0, "dex": 4, "spd": 5, "lck": 1, "def": 2, "res": 0, "cha": 1 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 20, "res": 10, "cha": 5 },
+      "inventory": [ { "item": "iron_gauntlets" } ]
+    },
+    {
+      "id": "weir_foreman",
+      "name": "Weir Foreman",
+      "class": "reaver",
+      "level": 3,
+      "stats": { "hp": 26, "str": 7, "mag": 0, "dex": 5, "spd": 5, "lck": 3, "def": 4, "res": 1, "cha": 4 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 25, "res": 10, "cha": 10 },
+      "inventory": [ { "item": "steel_gauntlets" }, { "item": "toll_axe" } ]
+    },
+    {
       "id": "bandit_leader",
       "name": "Bandit Leader",
       "class": "reaver",
