@@ -11,13 +11,18 @@ namespace Ironwake.Core;
 /// project's map writer. Output is plain ASCII. Given a <see cref="Reach"/>, the tiles
 /// the unit may end on are drawn as <see cref="ReachGlyph"/> and a line under the
 /// legend says whose reach it is. While any Guard group is asleep, both views print
-/// <see cref="WakeLegend"/> under the unit rows.
+/// <see cref="WakeLegend"/> under the unit rows. On an Escape map both views draw every
+/// exit tile no unit stands on as <see cref="ExitGlyph"/> and print <see cref="ExitLegend"/>
+/// under the unit rows (issue 267), so the objective is on the screen and not only in the
+/// map file's header; a reach glyph covers an exit the unit can end on.
 /// </summary>
 public static class MapRenderer
 {
     public const char BossGlyph = '!';
 
     public const char ReachGlyph = '*';
+
+    public const char ExitGlyph = '>';
 
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
     {
@@ -46,6 +51,7 @@ public static class MapRenderer
         {
             sb.Append(y.ToString().PadLeft(2)).Append(' ');
             var row = map.GlyphRow(y, content).ToCharArray();
+            DrawExits(map, y, row);
             if (reach is not null)
             {
                 for (var x = 0; x < map.Width; x++)
@@ -77,6 +83,11 @@ public static class MapRenderer
         if (map.Placements.OfType<EnemyPlacement>().Any(e => e.Behavior == Behavior.Guard))
         {
             sb.Append(WakeLegend(content)).Append('\n');
+        }
+
+        if (ExitLegend(map) is { } exits)
+        {
+            sb.Append(exits).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -133,6 +144,7 @@ public static class MapRenderer
         {
             sb.Append(y.ToString().PadLeft(2)).Append(' ');
             var row = map.GlyphRow(y, content).ToCharArray();
+            DrawExits(map, y, row);
             if (reach is not null)
             {
                 for (var x = 0; x < map.Width; x++)
@@ -200,6 +212,11 @@ public static class MapRenderer
             sb.Append(WakeLegend(content)).Append('\n');
         }
 
+        if (ExitLegend(map) is { } exits)
+        {
+            sb.Append(exits).Append('\n');
+        }
+
         if (reach is not null)
         {
             var count = reach.Destinations.Count() - 1;
@@ -218,6 +235,34 @@ public static class MapRenderer
     /// </summary>
     public static string WakeLegend(GameContent content) =>
         $"asleep: wakes if a unit ends within {content.WakeRadius} tiles of a member, a combat happens within {content.NoiseRadius}, or a member dies";
+
+    /// <summary>
+    /// What an Escape map asks, in the words of DESIGN.md section 7's outcome rule, printed
+    /// after the exit tiles in <see cref="ExitLegend"/>.
+    /// </summary>
+    public const string EscapeRule = "every living unit on an exit wins";
+
+    /// <summary>
+    /// The one line both board views print under the unit rows on an Escape map (issue 267):
+    /// the exit glyph in parentheses (never at the line's start, where the console echoes a
+    /// command as <c>&gt; </c>), then every exit tile from <see cref="MapDefinition.Exits"/> in the
+    /// map's own order, then <see cref="EscapeRule"/>. Null on a map with no exits.
+    /// </summary>
+    public static string? ExitLegend(MapDefinition map) =>
+        map.Exits.Count == 0
+            ? null
+            : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({EscapeRule})";
+
+    private static void DrawExits(MapDefinition map, int y, char[] row)
+    {
+        foreach (var exit in map.Exits)
+        {
+            if (exit.Y == y)
+            {
+                row[exit.X] = ExitGlyph;
+            }
+        }
+    }
 
     /// <summary>
     /// The letter each placement is drawn with, by placement index. Players take

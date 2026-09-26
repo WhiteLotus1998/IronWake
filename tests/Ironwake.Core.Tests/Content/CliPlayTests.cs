@@ -641,6 +641,30 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>Issue 267: <c>show</c> prints the class's Mov and movement type, one unit of each type on Brackwater Cut.</summary>
+    [Theory]
+    [InlineData("captain", "mov 4 (infantry)")]
+    [InlineData("rider-1", "mov 6 (cavalry)")]
+    [InlineData("rook", "mov 6 (flying)")]
+    [InlineData("shieldbearer-1", "mov 4 (armored)")]
+    public void ShowPrintsMovAndMovementType(string unit, string mov)
+    {
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-show-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "show " + unit + "\n");
+        try
+        {
+            var output = Run(out _, "play", "brackwater_cut", "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            var stats = output.Split('\n').SkipWhile(l => l != "> show " + unit).ElementAt(2);
+            Assert.StartsWith("  hp ", stats);
+            Assert.EndsWith("  " + mov, stats);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

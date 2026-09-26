@@ -43,7 +43,7 @@ public class MapRendererTests
     {
         var map = MapFixture.Parse(File.ReadAllText(Path.Combine(MapFixture.MapsDirectory, file)), file);
 
-        foreach (var letter in MapRenderer.Letters(map, MapFixture.Content).Append(MapRenderer.BossGlyph).Append(MapRenderer.ReachGlyph))
+        foreach (var letter in MapRenderer.Letters(map, MapFixture.Content).Append(MapRenderer.BossGlyph).Append(MapRenderer.ReachGlyph).Append(MapRenderer.ExitGlyph))
         {
             Assert.Null(MapFixture.Content.TerrainByGlyph(letter));
         }
