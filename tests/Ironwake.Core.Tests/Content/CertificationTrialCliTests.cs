@@ -6,14 +6,14 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// Certification trials at the console (issue 73, DESIGN.md section 13.6): the trial's opening
 /// lines, <c>--candidate</c> and its refusals, the result line, and the two journaled puzzles
-/// under <c>docs/samples/certification/</c>, replayed to their transcripts.
+/// under <c>content/trials/</c> (issue 252), replayed to their transcripts.
 /// </summary>
 [Collection("console")]
 public class CertificationTrialCliTests
 {
     private static string Repo => Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
 
-    private static string Sample(string name) => Path.Combine(Repo, "docs", "samples", "certification", name + ".map");
+    private static string Sample(string name) => Path.Combine(Fixture.RealContentDirectory(), "trials", name + ".map");
 
     private static string Transcript(string name) => Path.Combine(Repo, "docs", "transcripts", name);
 
@@ -28,11 +28,11 @@ public class CertificationTrialCliTests
     }
 
     [Fact]
-    public void ATrialNamesItsCandidateClassLoadoutAndEvents()
+    public void ATrialNamesItsCandidateClassAndLoadout()
     {
         var output = Play(out _, "outrider_trial", "7", "reach captain\n");
 
-        Assert.Contains("certification trial: captain plays as Outrider with iron_lance, iron_sword\n  event: west_lever enter 2,2 terrain 2,1 =\n", output);
+        Assert.Contains("certification trial: captain plays as Outrider with iron_lance, iron_sword\nTrial of the Outrider  turn 1 of 1", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.DoesNotContain("certification: ", output);
     }
@@ -61,26 +61,40 @@ public class CertificationTrialCliTests
     }
 
     [Fact]
-    public void TheOutriderTrialIsWonByTheOneLeverThatLeavesTheCantoEnough()
+    public void TheOutriderTrialIsWonFromTheForestInFrontWhoseCantoReachesTheThrone()
     {
-        var script = Transcript("2026-09-25-outrider_trial-7.script");
+        var script = Transcript("2026-09-26-outrider_trial-12.script");
 
-        var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "12", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\ncertification: captain earned Outrider\n", output);
+        Assert.Contains("captain may canto up to 3 movement", output);
+        Assert.EndsWith("battle won: seize; no recall is left\nbattle won: seize\ncertification: captain earned Outrider\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
     [Fact]
-    public void TheCentreLeverInTheForestLeavesTheCantoOneShort()
+    public void TheOutriderTrialIsLostWhenTheStrikeLeavesTheGuardStanding()
     {
-        var script = Transcript("2026-09-25-outrider_trial-7-centre.script");
+        var script = Transcript("2026-09-26-outrider_trial-13.script");
 
-        var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "13", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(1, exit);
-        Assert.Contains("captain cannot Canto to 3,0: not within the 2 movement its Canto has left from 3,3", output);
+        Assert.Contains("hexer-1 hp 3", output);
+        Assert.EndsWith("battle lost: turn 1 passed\ncertification: Outrider not earned\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    [Fact]
+    public void AFlankOfTheGuardLeavesTheCantoOneShortOfTheThrone()
+    {
+        var script = Transcript("2026-09-26-outrider_trial-13-flank.script");
+
+        var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "13", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(1, exit);
+        Assert.Contains("captain cannot Canto to 3,0: not within the 1 movement its Canto has left from 2,2", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -95,6 +109,9 @@ public class CertificationTrialCliTests
 
         Assert.Equal(0, heldExit);
         Assert.EndsWith("battle won: survive\ncertification: captain earned Bulwark\n", heldOutput);
+        Assert.Contains("Trial of the Bulwark  over after turn 1 of 1  survive  recall 0\n", heldOutput);
+        Assert.Contains("battle won: survive; no recall is left\n", heldOutput);
+        Assert.DoesNotContain("turn 2 of 1", heldOutput);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(held, ".txt")).ReplaceLineEndings("\n"), heldOutput);
         Assert.Equal(1, gambleExit);
         Assert.EndsWith("battle lost: the captain is dead\ncertification: Bulwark not earned\n", gambleOutput);

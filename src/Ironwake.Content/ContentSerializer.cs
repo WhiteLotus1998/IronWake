@@ -49,6 +49,17 @@ public static class ContentSerializer
             }
 
             writer.WriteEndArray();
+            if (campaign.Trials.Count > 0)
+            {
+                writer.WriteStartObject("trials");
+                foreach (var trial in campaign.Trials)
+                {
+                    writer.WriteString(trial.ClassId, trial.MapId);
+                }
+
+                writer.WriteEndObject();
+            }
+
             writer.WriteEndObject();
         }
 

@@ -100,7 +100,7 @@ hexer-2 waits
 enemy: end
 -- enemy phase ends, turn 1 --
 -- player phase, turn 2 --
-Trial of the Bulwark  turn 2 of 1  player phase  survive  recall 0
+Trial of the Bulwark  over after turn 1 of 1  survive  recall 0
    012345678
  0 .........
  1 c...e....
@@ -117,6 +117,6 @@ d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group wes
 A  captain          Alder Fenn L1 bulwark      5,3    hp 25/25  Plain  captain
 e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
-battle won: survive; only recall is left
+battle won: survive; no recall is left
 battle won: survive
 certification: captain earned Bulwark

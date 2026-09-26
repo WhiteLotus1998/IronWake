@@ -257,7 +257,7 @@ public sealed class PlaySession
     /// Lists the map's events that have not fired, one line each in the file's own words, on a
     /// certification trial and on a map with <c>announce: on</c> (issue 78).
     /// </summary>
-    private void WritePendingEvents()
+    internal void WritePendingEvents()
     {
         var lines = MapFormat.Write(_state.Map, _content).Split('\n').SkipWhile(l => l != "events:").Skip(1).Where(l => l.Length > 0).ToList();
         for (var i = 0; i < _state.Map.Events.Count; i++)
@@ -759,7 +759,10 @@ public sealed class PlaySession
         var outcome = _state.Outcome;
         if (outcome.IsOver)
         {
-            _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; only recall is left{(_campaign ? ", or leave" : "")}");
+            var after = _state.RecallCharges > 0
+                ? "only recall is left" + (_campaign ? ", or leave" : "")
+                : "no recall is left" + (_campaign ? ", so leave" : "");
+            _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; {after}");
         }
     }
 

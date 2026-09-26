@@ -83,6 +83,23 @@ public class CampaignContentTests
     }
 
     [Fact]
+    public void ACampaignsTrialsLoadByClassAndAnUnknownClassOrEmptyMapIdIsRefused()
+    {
+        const string maps = """{ "map": "one", "reward": 0, "stock": [] }""";
+        var content = ContentLoader.Parse(With(Campaign(maps).TrimEnd('}') + """, "trials": { "cadet": "cadet_trial" } }"""));
+        var unknown = Fails(With(Campaign(maps).TrimEnd('}') + """, "trials": { "wizard": "wizard_trial" } }"""));
+        var empty = Fails(With(Campaign(maps).TrimEnd('}') + """, "trials": { "cadet": "" } }"""));
+
+        Assert.Equal(new CampaignTrial("cadet", "cadet_trial"), content.Campaign.TrialFor("cadet"));
+        Assert.Null(content.Campaign.TrialFor("pikeman"));
+        Assert.Empty(ContentLoader.Parse(With(Campaign(maps))).Campaign.Trials);
+        Assert.Equal((ContentFiles.CampaignName, "trials.wizard"), (unknown.File, unknown.Field));
+        Assert.Contains("is not a class", unknown.Message);
+        Assert.Equal("trials.cadet", empty.Field);
+        Assert.Contains("must be a trial map id", empty.Message);
+    }
+
+    [Fact]
     public void TheShippedCampaignAndPricesRoundTripThroughTheSerializer()
     {
         var written = ContentSerializer.Write(MapFixture.Content);

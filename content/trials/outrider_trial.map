@@ -7,16 +7,12 @@ enemy_level: 1
 certification: outrider iron_lance iron_sword
 
 TTTTTTT
-#######
+###.###
 .......
-..^^...
+.^^^^^.
 .......
 .......
 
 units:
-P captain 3,5
-
-events:
-west_lever enter 2,2 terrain 2,1 =
-centre_lever enter 3,3 terrain 3,1 =
-east_lever enter 4,2 terrain 4,1 =
+P captain 3,4
+E hexer 3,2 group:gate behavior:hold

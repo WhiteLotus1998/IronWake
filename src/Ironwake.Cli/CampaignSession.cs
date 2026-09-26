@@ -8,7 +8,7 @@ namespace Ironwake.Cli;
 /// <c>ironwake campaign</c> (issue 74, DESIGN section 9): the maps of <c>campaign.json</c> in
 /// order, each preceded by the between-map screen, text only. The screen reads the roster, the
 /// shop and the next map's deployment, and takes the actions of <see cref="CampaignRecord"/>:
-/// buy, repair, certify, bench and unbench; <c>march</c> starts the battle, which plays as
+/// buy, repair, certify, trial, bench and unbench; <c>march</c> starts the battle, which plays as
 /// <c>play</c> does until <c>leave</c> after it is decided. A won battle returns to the screen
 /// with the reward paid and the fallen gone; a lost one ends the campaign. The same script
 /// grammar and <c>--strict</c> as <c>play</c>, one script for the whole campaign.
@@ -25,6 +25,7 @@ public sealed class CampaignSession
           buy <item> <unit>        buy an item at full uses into the unit's next free slot
           repair <unit> <slot>     restore a weapon's uses, at its price per use
           certify <unit> <class>   change class, paying a seal from the purse
+          trial <unit> <class>     try the class's certification trial instead of a seal; one attempt per camp
           bench <unit>             keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           return a benched unit to the deployment order
           record                   the campaign record as one JSON line (the protocol's campaign shape)
@@ -223,6 +224,58 @@ public sealed class CampaignSession
 
     private MapDefinition LoadMap(string mapId) => MapFiles.Load(Path.Combine(_contentDir, "maps", mapId + ".map"), _content);
 
+    private MapDefinition LoadTrial(string mapId) => MapFiles.Load(Path.Combine(_contentDir, "trials", mapId + ".map"), _content);
+
+    /// <summary>
+    /// <c>trial &lt;unit&gt; &lt;class&gt;</c> (issue 252): refused as <see cref="CampaignRecord.TrialRefusal"/>
+    /// says, or for a trial map that will not load or certifies another class; otherwise the trial
+    /// plays on the screen with every <c>play</c> command until <c>leave</c>, and its result is
+    /// applied through <see cref="CampaignRecord.AfterTrial"/>. False on a strict stop or when the
+    /// input ends inside the trial.
+    /// </summary>
+    private bool RunTrial(TextReader input, string text, string unitId, string classId, bool strict)
+    {
+        if (_record.TrialRefusal(unitId, classId, _content) is { } refusal)
+        {
+            Error(text, refusal);
+            return true;
+        }
+
+        MapDefinition trial;
+        try
+        {
+            trial = LoadTrial(_content.Campaign.TrialFor(classId)!.MapId);
+        }
+        catch (MapException e)
+        {
+            Error(text, e.Message);
+            return true;
+        }
+
+        if (CampaignRecord.TrialMapRefusal(trial, classId) is { } mismatch)
+        {
+            Error(text, mismatch);
+            return true;
+        }
+
+        _out.WriteLine($"trial: {trial.Name}, seed {_record.TrialSeed(_content)}");
+        _out.WriteLine($"certification trial: {unitId} plays as {_content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}");
+        var battle = new PlaySession(_content, _record.BeginTrial(trial, unitId, _content, _scheme), _out, _scripted, _line);
+        battle.WritePendingEvents();
+        _out.Write(MapRenderer.Render(battle.State, _content));
+        var stopped = battle.RunCommands(input, strict, ref _commands);
+        _line = battle.Line;
+        _rejections.AddRange(battle.Rejections);
+        if (stopped || !battle.Left)
+        {
+            _out.WriteLine($"campaign stopped in {trial.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
+            return false;
+        }
+
+        Take(_record.AfterTrial(battle.State, unitId, _content), text);
+        return true;
+    }
+
     /// <summary>
     /// The between-map screen before <paramref name="map"/>: prints it, then applies commands until
     /// <c>march</c> (true) or the input ends or a strict stop (null).
@@ -254,7 +307,18 @@ public sealed class CampaignSession
                 return true;
             }
 
-            Execute(words, text, map);
+            if (words is ["trial", var trialUnit, var trialClass])
+            {
+                if (!RunTrial(input, text, trialUnit, trialClass, strict))
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                Execute(words, text, map);
+            }
+
             if (strict && _rejections.Count > 0)
             {
                 _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
@@ -324,6 +388,9 @@ public sealed class CampaignSession
                 break;
             case ["certify", ..]:
                 Error(text, "usage: certify <unit> <class>");
+                break;
+            case ["trial", ..]:
+                Error(text, "usage: trial <unit> <class>");
                 break;
             case ["bench" or "unbench" or "show", ..]:
                 Error(text, $"usage: {words[0]} <unit>");
@@ -415,6 +482,11 @@ public sealed class CampaignSession
             ? $"{id} {weapon.Price}"
             : $"{id} {_content.Item(id).Price}");
         _out.WriteLine($"shop: {string.Join(", ", wares)}; a seal to certify costs {_content.Campaign.CertificationPrice}");
+        if (_content.Campaign.Trials.Count > 0)
+        {
+            var trials = _content.Campaign.Trials.Select(t => _content.Class(t.ClassId).Name);
+            _out.WriteLine($"trials in place of a seal (one attempt per unit and class before each map): {string.Join(", ", trials)}");
+        }
     }
 
     private void PrintDeployment(MapDefinition map)
