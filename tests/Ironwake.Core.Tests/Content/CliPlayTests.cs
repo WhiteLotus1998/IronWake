@@ -496,6 +496,36 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 315: Chat's cold play of Sallow Grange at <c>dusk: 5</c> on seed 17. On enemy
+    /// phase 3 the brawler on 11 HP swings Iron Gauntlets at Pell on 16: a gauntlet's round
+    /// is both strikes before her counter, so the 9 x2 is a real kill if both land, and one
+    /// missing is what kept her alive. The captain seizes on turn 8 with nobody lost.
+    /// </summary>
+    [Fact]
+    public void ChatsSallowScriptOnSeedSeventeenShowsAGauntletRoundLandingBeforeTheCounter()
+    {
+        var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-17.script", 17, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  brawler-1 hits pell for 9 (hp 7)\n  brawler-1 misses pell\n  pell hits brawler-1 for 13 (hp 0)\n", output);
+    }
+
+    /// <summary>
+    /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 17 under the third arm:
+    /// rider-1 drifts onto the route and is killed there, and all five walk out on turn 5.
+    /// </summary>
+    [Fact]
+    public void ChatsBrackwaterScriptOnSeedSeventeenEscapesWithAllFive()
+    {
+        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-17.script", 17, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("rider-1 falls at", output);
+        Assert.EndsWith("escaped: rook, dunstan, pell, wren, captain; left behind: none; fell: none\n", output);
+    }
+
+    /// <summary>
     /// Issue 308: Code's play of Brackwater Cut at <c>dusk: 5</c> on seed 23. Knowing of
     /// nobody, the chase makes for the exits through the gap instead of standing still; the
     /// fight it brings to the staging tiles wakes the bank, and only Rook and the captain get out.

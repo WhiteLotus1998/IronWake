@@ -354,6 +354,10 @@ public sealed record SleepingThreat(string Group, IReadOnlyList<BattleUnit> Memb
 /// </summary>
 public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null, ValueList<Coord>? Tiles = null)
 {
-    /// <summary>The damage the strike deals if every hit lands, doubles included, no crit.</summary>
-    public int IfAllLand => Forecast.Attacker.Damage * Forecast.Attacker.StrikeCount;
+    /// <summary>
+    /// The damage the strike deals if every hit lands, no crit, over the strikes the enemy
+    /// lives to make: a double stops at the first round when the unit's plain counter
+    /// between them kills the enemy (<see cref="CombatForecast.AttackerDamageLivedFor"/>, issue 315).
+    /// </summary>
+    public int IfAllLand => Forecast.AttackerDamageLivedFor(Enemy.Hp);
 }

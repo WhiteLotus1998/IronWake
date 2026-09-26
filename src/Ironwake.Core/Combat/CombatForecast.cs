@@ -49,4 +49,19 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// the whole combat with a gauntlet (issue 70), and an art's cost, paid hit or miss.
     /// </summary>
     public int AttackerSpendsAtMost => (Attacker.StrikesPerRound > 1 ? 1 : Attacker.StrikeCount) + ArtCost;
+
+    /// <summary>
+    /// The strikes the attacker lives to make, read on plain damage with every hit
+    /// landing: all of them, unless it doubles and the defender's first round, which falls
+    /// between the attacker's two, reaches <paramref name="attackerHp"/>; then its first
+    /// round only (issue 315). The deterministic reading of issue 147's survival, shared by
+    /// section 8's kill flag and <c>threat</c>'s "if all land".
+    /// </summary>
+    public int AttackerStrikesLivedFor(int attackerHp) =>
+        Attacker.Rounds < 2 || !Defender.Strikes || Defender.Damage * Defender.StrikesPerRound < attackerHp
+            ? Attacker.StrikeCount
+            : Attacker.StrikesPerRound;
+
+    /// <summary>The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit.</summary>
+    public int AttackerDamageLivedFor(int attackerHp) => Attacker.Damage * AttackerStrikesLivedFor(attackerHp);
 }
