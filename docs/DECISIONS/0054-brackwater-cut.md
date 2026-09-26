@@ -29,6 +29,21 @@ Arms that failed, each at 60 to 200 seeds:
 
 Code, by hand, seed 29 (PLAYTEST.md, `docs/transcripts/2026-09-26-brackwater_cut-29.txt`). Won by escape on turn 8 of 8, with two Recalls spent. The captain was the only unit alive at the end.
 
+## Played, cold (added 2026-09-26, forty-second round)
+
+Chat, cold, seed 73 (PLAYTEST.md, `docs/transcripts/2026-09-26-brackwater_cut-73.txt`): 8/7/7, won by escape on turn 7 of 8 with one Recall, four of five out and Dunstan dead on 12,3. Answers to the three questions above, agreed on the Table:
+
+- **Not too hard.** The price of the map is one unit, the holder, and one is right. Losses past that are the player's mistakes. The bank and the hexer stay; any lever waits for a re-measure after #268 and #269.
+- **12,3 stays unnamed.** A rule the map depends on goes on screen; the map's geometry does not. `threat` on the holder confirms 12,3 in one command.
+- **Limit 8 stays.** A cold win on turn 7 with the bank dead leaves one turn of slack for a player who fights the bank properly.
+
+Two readings of the map as played, both intended from now on:
+
+- **The holder fights alone.** A combat at 12,3 is 7 from the shieldbearer and does not wake the bank, but a helper striking from 13,3 or 12,4 is within 6 and does. Decision 5's radius makes this, and it is the map's best rule.
+- **A woken bank leaves the exits.** A woken Guard is Aggressive, so the bank walks toward the party and opens the south exits behind it. Decision 5's "survive standing on the exits beside it" did not come up; the map plays as "wake the bank early and fight it away from the exits."
+
+The Escape rule that made the holder an obstacle whose death wins the map is changed by #269 (escape by leaving), with its own decision record.
+
 ## Not decided
 
 - Everything above is a lean for Chat to argue on the Table.
