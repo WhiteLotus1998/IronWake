@@ -1,0 +1,61 @@
+move wren 11,4
+wait wren
+move teodor 11,7
+wait teodor
+move ottilie 11,5
+wait ottilie
+move pell 12,4
+wait pell
+move dunstan 12,7
+wait dunstan
+wait captain
+end
+end
+attack pell soldier-1
+attack ottilie archer-1
+attack teodor brigand-1
+wait dunstan
+wait captain
+end
+attack ottilie brigand-2
+attack teodor brigand-1
+move wren 12,3
+wait wren
+move dunstan 11,4
+wait dunstan
+wait pell
+wait captain
+end
+move teodor 13,7
+item teodor 2
+move captain 11,7
+wait captain
+wait ottilie
+wait pell
+wait dunstan
+wait wren
+end
+attack dunstan brigand-3
+move captain 12,8
+wait captain
+move teodor 11,7
+attack teodor soldier-2
+wait pell
+wait wren
+end
+move teodor 13,7
+item teodor 2
+move captain 11,7
+attack captain soldier-2
+attack pell hexer-1
+wait dunstan
+wait wren
+end
+attack pell brigand-4
+move dunstan 12,5
+wait dunstan
+move wren 11,4
+wait wren
+wait captain
+wait teodor
+end

@@ -15,5 +15,13 @@
     { "map": "brackwater_cut", "reward": 1600,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }
   ],
-  "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" }
+  "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
+  "keep": {
+    "map": "ironwake_keep",
+    "edits": [
+      { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },
+      { "id": "ditch", "name": "Dig a ditch", "terrain": "water", "price": 300, "at": ["9,5", "9,6"] },
+      { "id": "fort", "name": "Raise a fort", "terrain": "fort", "price": 250, "at": ["11,4", "11,7"] }
+    ]
+  }
 }

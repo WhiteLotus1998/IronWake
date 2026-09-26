@@ -60,6 +60,32 @@ public static class ContentSerializer
                 writer.WriteEndObject();
             }
 
+            if (campaign.Keep != KeepMenu.None)
+            {
+                writer.WriteStartObject("keep");
+                writer.WriteString("map", campaign.Keep.MapId);
+                writer.WriteStartArray("edits");
+                foreach (var edit in campaign.Keep.Edits)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("id", edit.Id);
+                    writer.WriteString("name", edit.Name);
+                    writer.WriteString("terrain", edit.TerrainId);
+                    writer.WriteNumber("price", edit.Price);
+                    writer.WriteStartArray("at");
+                    foreach (var at in edit.At)
+                    {
+                        writer.WriteStringValue(at.ToString());
+                    }
+
+                    writer.WriteEndArray();
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+                writer.WriteEndObject();
+            }
+
             writer.WriteEndObject();
         }
 

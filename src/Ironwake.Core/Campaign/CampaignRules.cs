@@ -27,6 +27,9 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The certification trials, one per class at most, in class id order (issue 252); a class without one certifies only with a seal.</summary>
     public ValueList<CampaignTrial> Trials { get; init; } = ValueList<CampaignTrial>.Empty;
 
+    /// <summary>The keep's map and the edits sold for it (issue 82, an experiment); <see cref="KeepMenu.None"/> when the campaign has none.</summary>
+    public KeepMenu Keep { get; init; } = KeepMenu.None;
+
     /// <summary>The trial that certifies into <paramref name="classId"/>, or null when that class has none.</summary>
     public CampaignTrial? TrialFor(string classId) => Trials.FirstOrDefault(t => t.ClassId == classId);
 

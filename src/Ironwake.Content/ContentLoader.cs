@@ -53,7 +53,7 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes) : CampaignRules.None;
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain) : CampaignRules.None;
         return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign };
     }
 
@@ -68,7 +68,7 @@ public static class ContentLoader
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
-        ImmutableSortedDictionary<string, UnitClass> classes)
+        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain)
     {
         JsonDocument document;
         try
@@ -169,7 +169,63 @@ public static class ContentLoader
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
+            Keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain) : KeepMenu.None,
         };
+    }
+
+    /// <summary>
+    /// The optional <c>keep</c> object (issue 82): the keep's <c>map</c> id under <c>content/keep</c>
+    /// and its <c>edits</c>, each an <c>id</c>, <c>name</c>, <c>terrain</c> id, <c>price</c> of at least 1
+    /// and a non-empty <c>at</c> list of <c>x,y</c> tiles. Whoever loads the map checks the tiles against it.
+    /// </summary>
+    private static KeepMenu ParseKeep(EntryNode node, ImmutableSortedDictionary<string, Terrain> terrain)
+    {
+        var mapId = node.String("map");
+        var edits = new List<KeepEdit>();
+        var index = 0;
+        foreach (var element in node.Array("edits"))
+        {
+            var entry = new EntryNode(node.File, "keep.edits[" + index++ + "]", element);
+            var id = entry.String("id");
+            entry = entry.WithEntry("keep." + id);
+            if (edits.Any(e => e.Id == id))
+            {
+                throw entry.Error("id", "is listed twice");
+            }
+
+            var terrainId = entry.String("terrain");
+            if (!terrain.ContainsKey(terrainId))
+            {
+                throw entry.Error("terrain", $"'{terrainId}' is not a terrain");
+            }
+
+            var price = entry.Int("price");
+            if (price < 1)
+            {
+                throw entry.Error("price", "must be at least 1");
+            }
+
+            var tiles = new List<Coord>();
+            foreach (var text in entry.StringArray("at"))
+            {
+                var parts = text.Split(',');
+                if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y) || x < 0 || y < 0)
+                {
+                    throw entry.Error("at", $"'{text}' is not an x,y tile");
+                }
+
+                tiles.Add(new Coord(x, y));
+            }
+
+            if (tiles.Count == 0)
+            {
+                throw entry.Error("at", "must name at least one tile");
+            }
+
+            edits.Add(new KeepEdit(id, entry.String("name"), terrainId, price, ValueList<Coord>.From(tiles)));
+        }
+
+        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits));
     }
 
     /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>
