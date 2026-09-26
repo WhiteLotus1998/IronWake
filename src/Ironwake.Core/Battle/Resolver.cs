@@ -49,6 +49,9 @@ public static class Resolver
             case Recover recover:
                 (next, rejection) = ApplyRecover(state, recover, events);
                 break;
+            case Shove shove:
+                (next, rejection) = ApplyShove(state, content, shove, events);
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -118,6 +121,10 @@ public static class Resolver
                 case CombatFought fought:
                     noisy.Add(before.Find(fought.AttackerId)!.At);
                     noisy.Add(before.Find(fought.TargetId)!.At);
+                    break;
+                case Shoved shoved:
+                    noisy.Add(shoved.From);
+                    noisy.Add(shoved.To);
                     break;
             }
         }
@@ -790,6 +797,91 @@ public static class Resolver
     /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
     /// under the fallen's name, and no Canto follows.
     /// </summary>
+    private static (BattleState, Rejection?) ApplyShove(BattleState state, GameContent content, Shove shove, List<GameEvent> events)
+    {
+        var unit = Acting(state, shove.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (state.Find(shove.TargetId) is not { } target)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit '{shove.TargetId}'"));
+        }
+
+        if (ShoveRefusal(state, content, unit, target) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotShove, $"{unit.Id} cannot shove {target.Id}: {refusal}"));
+        }
+
+        var to = Beyond(unit.At, target.At);
+        events.Add(new Shoved(unit.Id, target.Id, target.At, to));
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        return (next.WithUnit(target with { At = to }), null);
+    }
+
+    /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>
+    public static Coord Beyond(Coord from, Coord target) =>
+        new(target.X + (target.X - from.X), target.Y + (target.Y - from.Y));
+
+    /// <summary>
+    /// Why <paramref name="unit"/> may not shove <paramref name="target"/> (DESIGN.md 13.12), or null
+    /// when it may: the map needs <c>shove: on</c>, the pusher must be a player unit, the target a
+    /// different unit orthogonally adjacent to it, the tile beyond on the map, passable for the target
+    /// and empty, and the pusher's heft (Str + Def) at least the target's. The resolver and
+    /// <see cref="Legal"/> share it.
+    /// </summary>
+    public static string? ShoveRefusal(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    {
+        if (!state.Map.ShoveEnabled)
+        {
+            return "this map has no shove: on header";
+        }
+
+        if (unit.Side != Side.Player)
+        {
+            return "only player units shove";
+        }
+
+        if (target.Id == unit.Id || unit.At.DistanceTo(target.At) != 1)
+        {
+            return "it is not beside it";
+        }
+
+        var to = Beyond(unit.At, target.At);
+        if (!state.Map.Contains(to))
+        {
+            return $"{to} is off the map";
+        }
+
+        if (!state.Map.TerrainAt(to, content).IsPassable(content.Class(target.Unit.ClassId).Movement))
+        {
+            return $"{target.Id} cannot stand on {to}";
+        }
+
+        if (state.UnitAt(to) is { } blocker)
+        {
+            return $"{blocker.Id} stands on {to}";
+        }
+
+        var heft = Heft(content, unit);
+        var weight = Heft(content, target);
+        if (heft < weight)
+        {
+            return $"heft {heft} is under its {weight}";
+        }
+
+        return null;
+    }
+
+    /// <summary>A unit's heft for a shove (DESIGN.md 13.12): its effective Str plus Def.</summary>
+    public static int Heft(GameContent content, BattleUnit unit)
+    {
+        var stats = content.StatsOf(unit.Unit);
+        return stats.Str + stats.Def;
+    }
+
     private static (BattleState, Rejection?) ApplyRecover(BattleState state, Recover recover, List<GameEvent> events)
     {
         var unit = Acting(state, recover.UnitId, out var rejection);
@@ -954,7 +1046,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), its Shoves on a <c>shove: on</c> map (targets in id order, 13.12), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -1017,6 +1109,17 @@ public static class Resolver
             if (unit.Side == Side.Player && state.KeepsakeAt(unit.At) is not null && !unit.Unit.Inventory.IsFull)
             {
                 yield return new Recover(unit.Id);
+            }
+
+            if (unit.Side == Side.Player && state.Map.ShoveEnabled)
+            {
+                foreach (var other in state.Units.OrderBy(u => u.Id, StringComparer.Ordinal))
+                {
+                    if (ShoveRefusal(state, content, unit, other) is null)
+                    {
+                        yield return new Shove(unit.Id, other.Id);
+                    }
+                }
             }
 
             yield return new Wait(unit.Id);

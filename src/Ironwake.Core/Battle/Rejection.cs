@@ -27,6 +27,7 @@ public enum RejectionReason
     NotOnAnExit,
     NoKeepsake,
     Unseen,
+    CannotShove,
     BattleOver,
     UnknownCommand,
 }

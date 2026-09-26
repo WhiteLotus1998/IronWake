@@ -836,3 +836,18 @@ Best turn: player phase 7, line B again. The captain is on 4 hp at 7,1 beside th
 Notes: **The crit did not change a decision in my replay.** It changed the price of the one I made. I saw the number and paid it knowingly, but that is not a changed decision, and by the kill criterion my replay counts toward the kill. The arm now rests on Chat's seed 23. Chat's script still replays under `--strict`. Its turn 8 bandit strike on Wren is now `crit 23%` (it was 3), against 13 hp and a 24 crit, and the new log line names the lure outright: `grudge: mill_bandit-1 strikes sworn wren (score 0.6); best alternative captain (score 97.1)`. The log is the best thing in this pass. On my own seed 65 turn 7 line A, it reads `score 98.7; best alternative captain (score 101.5)`. The grudge turned the bandit off a 6 hp captain it scored as a kill, by three points of score, and it has done that every time without anyone seeing it. What I would watch for in Chat's replay: whether the 23 percent makes Chat hand the turn 8 kill to the captain instead of Wren. That is the kill reassignment the criterion names.
 Transcript: docs/transcripts/2026-09-26-old_mill_road_grudges-65-sworn-crit.txt (script: docs/transcripts/2026-09-26-old_mill_road_grudges-65.script, unchanged).
 
+
+## 2026-09-26 — Brackwater Cut at dusk with shove (DESIGN 13.12, experiment/shove) — Code
+
+Seed: 29 on `docs/samples/brackwater_cut_shove.map`, the shipped map with `shove: on`. Result: lost on enemy phase 7. Rook exited on turn 4. Dunstan, Pell and Wren fell, then a 2 hp rider found the 5 hp captain one tile from the exit lane. One Recall, on turn 4.
+Not cold: I built the rule earlier in the same run. By hand, turn by turn.
+Tension: 6/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 6, and shove had no part in it. The captain was on 5 hp in the pocket at 12,2. The wall, the water, Wren and Dunstan closed it on four sides, so at sight 1 no enemy could see it and `threat` read `no enemy can strike it`. That pocket is the best tile on Brackwater and I had never noticed it. With Wren dead the pocket had one wall missing. So I ran the captain south to 12,6, out of hearing, and left Dunstan in the gap. He took the brawler to 1 hp and died to the brigand behind it.
+Notes: **I never shoved.** I looked for one every turn, and each time it was illegal or worthless:
+- Turn 3: Dunstan in the gap and the rider at 10,3. Pushing it to 9,3 buys nothing, because it walks back with its whole move and swings anyway, so I struck.
+- Turn 5, and again later: the enemy in the gap had the next pursuer behind it on 10,3, so the tile beyond was never open. A one-tile corridor is a conga line, and shove needs the tile behind the target.
+- Turn 4: the bank's shieldbearer, the one unit I badly wanted moved, is heft 15 against Dunstan's 14.
+- Turn 4, Wren on 5 hp: the captain pushing her one tile east would have added a tile to her move, but she was still one short of the exit.
+
+The structural problem is that a push happens on the player phase, and the enemy phase then undoes it with a full move. Shove as built is worth something only against a unit that will not move (a Hold archer, a sleeping Guard, the seated Reeve), or as +1 tile of tempo for an ally. Brackwater has no reachable Hold unit (the fort archer is ringed by water and wall). So on this map it answers nothing about what the corridor should give Dunstan to hold. If Chat's play also finds no shove, I lean toward a second arm where the push costs the pushed unit its next move (staggered), rather than a kill. But that is a new rule, and it goes to the Table first.
+Transcript: docs/transcripts/2026-09-26-brackwater_cut_shove-29.txt (script: docs/transcripts/2026-09-26-brackwater_cut_shove-29.script).

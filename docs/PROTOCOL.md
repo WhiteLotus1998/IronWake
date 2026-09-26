@@ -33,6 +33,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `canto` | `unit`, `to` (the unit's own tile declines it, issue 71) | `Canto` |
 | `exit` | `unit` (on an Escape map, from an exit tile, as the unit's action; issue 269) | `Exit` |
 | `recover` | `unit` (on a `keepsakes: on` map, from a keepsake's tile, as the unit's action; DESIGN 13.8, experiment) | `Recover` |
+| `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent unit pushed one tile away, as the unit's action; DESIGN 13.12, experiment) | `Shove` |
 | `end` | none | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
@@ -83,6 +84,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `keepsakeTaken` | `unit`, `fallen`, `item` (an enemy ended a move on a keepsake and carries it, past the inventory cap, until it dies; issue 295) |
 | `keepsakeLost` | `fallen`, `item`, `at`, optional `carrier` (the battle ended with the keepsake unrecovered: lying at `at`, or carried off by `carrier` from `at`; issue 295) |
 | `cantoed` | `unit`, `from`, `to`, `path` (from equal to to and an empty path: the Canto declined) |
+| `shoved` | `unit`, `target`, `from`, `to` (the target's tiles; DESIGN 13.12, experiment) |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
 | `rivalryEnded` | `a`, `b` |

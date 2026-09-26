@@ -24,6 +24,9 @@ public static class MapRenderer
 
     public const char ExitGlyph = '>';
 
+    /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
+    public const string ShoveLegend = "shove: a player unit may push a unit beside it one tile straight away, as its action, if its heft is at least the target's and the tile beyond is open";
+
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
     {
         var sb = new StringBuilder();
@@ -88,6 +91,11 @@ public static class MapRenderer
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
+        }
+
+        if (map.ShoveEnabled)
+        {
+            sb.Append(ShoveLegend).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -221,6 +229,11 @@ public static class MapRenderer
                 sb.Append("  unarmed");
             }
 
+            if (map.ShoveEnabled)
+            {
+                sb.Append("  heft ").Append(Resolver.Heft(content, unit));
+            }
+
             var carried = unit.Side == Side.Enemy
                 ? unit.Unit.Inventory.Items.Where(stack => stack.Keepsake is not null).Select(stack => Keepsake.Name(stack.ItemId, stack.Keepsake!, content)).ToList()
                 : new List<string>();
@@ -256,6 +269,11 @@ public static class MapRenderer
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
+        }
+
+        if (map.ShoveEnabled)
+        {
+            sb.Append(ShoveLegend).Append('\n');
         }
 
         if (state.Keepsakes.Count > 0)

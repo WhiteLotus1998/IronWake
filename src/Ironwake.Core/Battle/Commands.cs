@@ -61,6 +61,15 @@ public sealed record Exit(string UnitId) : Command;
 /// </summary>
 public sealed record Recover(string UnitId) : Command;
 
+/// <summary>
+/// Shove an orthogonally adjacent unit (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
+/// a player unit pushes an enemy or an ally one tile directly away from itself, as its action in
+/// place of Attack, Item or Wait, after its Move or without one. The tile beyond must be on the
+/// map, passable for the pushed unit and empty, and the pusher's heft (Str + Def) must be at least
+/// the target's. No Canto follows. The AI never shoves.
+/// </summary>
+public sealed record Shove(string UnitId, string TargetId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 
