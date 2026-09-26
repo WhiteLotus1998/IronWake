@@ -1,0 +1,80 @@
+end
+end
+move captain 5,6
+wait captain
+move wren 5,5
+wait wren
+move teodor 4,5
+wait teodor
+move pell 4,6
+wait pell
+move ottilie 4,7
+wait ottilie
+move ansgar 4,9
+wait ansgar
+canto ansgar stay
+end
+move pell 7,5
+attack pell soldier-1
+move teodor 7,4
+attack teodor soldier-1
+move captain 9,6
+attack captain archer-2
+move wren 8,5
+attack wren soldier-1
+move ottilie 7,6
+wait ottilie
+move ansgar 8,7
+wait ansgar
+canto ansgar stay
+end
+move ansgar 10,8
+attack ansgar archer-2
+canto ansgar stay
+move pell 8,7
+attack pell archer-2
+move captain 10,6
+attack captain grange_reeve-1
+move wren 11,5
+attack wren grange_reeve-1
+move ottilie 9,6
+attack ottilie grange_reeve-1
+move teodor 8,5
+wait teodor
+end
+move wren 12,4
+wait wren
+move captain 12,5
+wait captain
+move ottilie 11,5
+wait ottilie
+move pell 10,6
+wait pell
+move ansgar 11,6
+wait ansgar
+canto ansgar stay
+move teodor 10,5
+wait teodor
+end
+move ansgar 15,6
+wait ansgar
+canto ansgar stay
+move pell 14,6
+attack pell brawler-1
+move ottilie 15,5
+attack ottilie brawler-1
+move captain 14,5
+wait captain
+move wren 13,4
+wait wren
+wait teodor
+end
+move captain 15,6
+attack pell brawler-1
+attack ottilie brawler-1
+move wren 16,5
+attack wren brawler-1
+attack captain brawler-1
+wait teodor
+end
+move captain 16,6
