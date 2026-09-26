@@ -512,6 +512,42 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 317: Sallow Grange at <c>dusk: 5</c> with the field group Aggressive. Knowing of
+    /// nobody, it leaves 7,5 7,6 8,6 for the throne on enemy phase 1 and stops in the wall's
+    /// gap; on enemy phase 2 the archer takes the throne at 16,6, and the two in the gap wait
+    /// behind it, since the only objective tile is held.
+    /// </summary>
+    [Fact]
+    public void TheAggressiveFieldGroupDriftsToTheThroneInTheDark()
+    {
+        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-29.script", 29, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("unseen at 4,2 12,2 7,5 7,6 8,6 15,6 13,7\n", output);
+        Assert.Contains("-- player phase, turn 2 --", output);
+        var turnTwo = output[output.IndexOf("-- player phase, turn 2 --", StringComparison.Ordinal)..];
+        Assert.Contains("unseen at 4,2 12,2 11,5 11,6 12,6 15,6 13,7\n", turnTwo);
+        var turnThree = output[output.IndexOf("-- player phase, turn 3 --", StringComparison.Ordinal)..];
+        Assert.Contains("unseen at 4,2 12,2 11,5 11,6 15,6 16,6 13,7\n", turnThree);
+    }
+
+    /// <summary>
+    /// Issue 317: Code's play of the Seize drift sample on seed 29. Teodor and Wren bait the
+    /// two in the gap out on enemy phase 4, they die at sight 1 on turn 5, the drifted archer
+    /// leaves the throne to stand beside the woken Reeve, and the captain seizes on turn 9.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptSeizesTheDriftSample()
+    {
+        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-29.script", 29, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("brawler-1 moves 11,6 -> 8,6 via 10,6 9,6\n", output);
+        Assert.Contains("grange_reeve-1 falls at 13,6\n", output);
+        Assert.EndsWith("battle won: seize\n", output);
+    }
+
+    /// <summary>
     /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 17 under the third arm:
     /// rider-1 drifts onto the route and is killed there, and all five walk out on turn 5.
     /// </summary>
