@@ -152,10 +152,83 @@ public static class Queries
             var forecast = Forecast(board, content, enemy, moved, strike.From, strike.Slot)
                 ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {unit.Id} from {strike.From} has no forecast");
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast, arrives));
+            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast, arrives, StrikeTiles(board, content, enemy, moved)));
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// What the lines of <see cref="Threats"/> deal together if every strike lands (issue
+    /// 253): the worst case over assignments of enemies to distinct strike tiles, each enemy
+    /// on one tile of its <see cref="ThreatLine.Tiles"/>, at most one enemy per tile, an
+    /// enemy left without a free tile dropped. Two enemies whose only tile is the same one
+    /// count once, the harder hitter. Each enemy is weighed at its line's
+    /// <see cref="ThreatLine.IfAllLand"/>. The lines are a transversal matroid over the
+    /// tiles, so taking them heaviest first (ties in line order) and keeping each one an
+    /// augmenting path can still seat is the maximum.
+    /// </summary>
+    public static int IfAllLand(IReadOnlyList<ThreatLine> lines)
+    {
+        var seated = new Dictionary<Coord, int>();
+        var total = 0;
+        var order = Enumerable.Range(0, lines.Count).OrderByDescending(i => lines[i].IfAllLand).ThenBy(i => i);
+        foreach (var index in order)
+        {
+            if (Seat(index, new HashSet<Coord>()))
+            {
+                total += lines[index].IfAllLand;
+            }
+        }
+
+        return total;
+
+        bool Seat(int index, HashSet<Coord> visited)
+        {
+            foreach (var tile in lines[index].Tiles ?? ValueList<Coord>.Of(lines[index].From))
+            {
+                if (!visited.Add(tile))
+                {
+                    continue;
+                }
+
+                if (!seated.TryGetValue(tile, out var holder) || Seat(holder, visited))
+                {
+                    seated[tile] = index;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Every tile <paramref name="enemy"/> could strike <paramref name="target"/> from on the
+    /// board, with any usable weapon: its own tile only when it holds or has moved, as
+    /// <see cref="EnemyAi.StrikeOn"/> reads it, otherwise every tile of its reach it may end
+    /// on, and a tile another enemy stands on who may move off it first, since the phase
+    /// can play in either order. In row-major order.
+    /// </summary>
+    private static ValueList<Coord> StrikeTiles(BattleState board, GameContent content, BattleUnit enemy, BattleUnit target)
+    {
+        var weapons = Enumerable.Range(0, enemy.Unit.Inventory.Count)
+            .Select(slot => enemy.UsableWeaponAt(content, slot))
+            .OfType<Weapon>()
+            .ToList();
+        bool Strikes(Coord tile) => weapons.Any(w => w.InRange(tile.DistanceTo(target.At)));
+        bool MayMove(BattleUnit unit) => !unit.Moved && board.EffectiveBehavior(unit, content) == Behavior.Aggressive;
+
+        if (!MayMove(enemy))
+        {
+            return ValueList<Coord>.Of(enemy.At);
+        }
+
+        var tiles = board.ReachOf(enemy, content).Entries
+            .Where(e => e.CanEnd || board.UnitsOf(Side.Enemy).Any(u => u.At == e.At && MayMove(u)))
+            .Select(e => e.At)
+            .Where(Strikes);
+        return ValueList<Coord>.From(tiles);
     }
 
     /// <summary>
@@ -247,9 +320,12 @@ public sealed record SleepingThreat(string Group, IReadOnlyList<BattleUnit> Memb
 /// One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from
 /// where, with which slot's weapon, and the forecast of that combat. <paramref name="Arrives"/>
 /// is the tile an announced event spawns the enemy on at the start of that enemy phase
-/// (issue 248), null for an enemy already on the board.
+/// (issue 248), null for an enemy already on the board. <paramref name="Tiles"/> is every
+/// tile the enemy could strike the unit from, which <see cref="Queries.IfAllLand"/> reads
+/// so two enemies are never counted on one tile (issue 253); null reads as
+/// <paramref name="From"/> alone.
 /// </summary>
-public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null)
+public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null, ValueList<Coord>? Tiles = null)
 {
     /// <summary>The damage the strike deals if every hit lands, doubles included, no crit.</summary>
     public int IfAllLand => Forecast.Attacker.Damage * Forecast.Attacker.StrikeCount;

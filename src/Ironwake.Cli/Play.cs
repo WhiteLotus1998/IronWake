@@ -918,7 +918,8 @@ public sealed class PlaySession
     /// or on <paramref name="from"/> (issue 217), through <see cref="Queries.Threats"/>:
     /// one line per enemy with the weapon the planner would swing, its slot counted from
     /// one, the tile it strikes from, and the forecast line the enemy phase would print,
-    /// then the total if every strike lands against the unit's HP. Spends nothing.
+    /// then the total if every strike lands against the unit's HP, one enemy per strike
+    /// tile (<see cref="Queries.IfAllLand"/>, issue 253). Spends nothing.
     /// </summary>
     private void PrintThreat(string unitId, Coord? from)
     {
@@ -967,7 +968,7 @@ public sealed class PlaySession
                 rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
             }
 
-            rows.Add($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
+            rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
         }
 
         foreach (var group in asleep)

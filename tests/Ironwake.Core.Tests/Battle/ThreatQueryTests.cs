@@ -31,6 +31,12 @@ public sealed class ThreatQueryTests
 
         """;
 
+    private static BattleState BulwarkTrial()
+    {
+        var map = MapFiles.Load(Path.Combine(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory(), "trials", "bulwark_trial.map"), Starter);
+        return BattleState.From(map, Starter, Starter.Cast, 12);
+    }
+
     private static BattleState Tollgate(ulong seed = 151)
     {
         var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_tollgate.map"), Starter);
@@ -248,5 +254,60 @@ public sealed class ThreatQueryTests
 
         Assert.Empty(Queries.SleepingThreats(state, Starter, hale, new Coord(1, 1))!);
         Assert.Null(Queries.SleepingThreats(state, Starter, hale, new Coord(9, 3)));
+    }
+
+    /// <summary>
+    /// Issue 253, Chat's board on the Bulwark trial: from 5,3 in the corridor the only open
+    /// tile beside the captain is 4,3, and both western brigands can reach it. Both lines
+    /// stay, each striking from 4,3, and the total counts one of them, since one tile holds
+    /// one brigand.
+    /// </summary>
+    [Fact]
+    public void TheTotalCountsOneAttackerPerStrikeTile()
+    {
+        var state = BulwarkTrial();
+        var corridor = new Coord(5, 3);
+
+        var lines = Queries.Threats(state, Starter, state.Find("captain")!, corridor)!;
+
+        Assert.Equal(new[] { "brigand-1", "brigand-2" }, lines.Select(l => l.Enemy.Id));
+        Assert.All(lines, l => Assert.Equal(new Coord(4, 3), l.From));
+        Assert.All(lines, l => Assert.Equal(new[] { new Coord(4, 3) }, l.Tiles!.Value));
+        Assert.Equal(lines.Max(l => l.IfAllLand), Queries.IfAllLand(lines));
+        Assert.True(Queries.IfAllLand(lines) < lines.Sum(l => l.IfAllLand));
+    }
+
+    /// <summary>On an open field every attacker finds a tile of its own, so the total is the sum of the lines.</summary>
+    [Fact]
+    public void AttackersWithTilesOfTheirOwnAreAllCounted()
+    {
+        var state = Start(map: string.Format(Yard, "E soldier 5,1 group:y behavior:aggressive\nE soldier 5,2 group:y behavior:aggressive"));
+        var hale = state.Find("hale")!;
+
+        var lines = Queries.Threats(state, Starter, hale, new Coord(3, 1))!;
+
+        Assert.Equal(2, lines.Count);
+        Assert.Equal(lines.Sum(l => l.IfAllLand), Queries.IfAllLand(lines));
+    }
+
+    /// <summary>
+    /// The assignment is a matching, not first come first served: an attacker seated on a
+    /// tile moves to its other tile when a later one can use only that tile, and when two
+    /// share a single tile the harder hitter is the one counted.
+    /// </summary>
+    [Fact]
+    public void TheTotalIsTheWorstCaseOverAssignmentsOfAttackersToTiles()
+    {
+        var state = BulwarkTrial();
+        var line = Queries.Threats(state, Starter, state.Find("captain")!, new Coord(5, 3))![0];
+        var a = new Coord(4, 3);
+        var b = new Coord(6, 3);
+        var hard = line with { Forecast = line.Forecast with { Attacker = line.Forecast.Attacker with { Damage = 10 } } };
+        var soft = line with { Forecast = line.Forecast with { Attacker = line.Forecast.Attacker with { Damage = 3 } } };
+        var hits = hard.IfAllLand;
+
+        Assert.Equal(hits + soft.IfAllLand, Queries.IfAllLand(new[] { hard with { Tiles = ValueList<Coord>.Of(a, b) }, soft with { Tiles = ValueList<Coord>.Of(a) } }));
+        Assert.Equal(hits, Queries.IfAllLand(new[] { soft with { Tiles = ValueList<Coord>.Of(a) }, hard with { Tiles = ValueList<Coord>.Of(a) } }));
+        Assert.Equal(0, Queries.IfAllLand(Array.Empty<ThreatLine>()));
     }
 }
