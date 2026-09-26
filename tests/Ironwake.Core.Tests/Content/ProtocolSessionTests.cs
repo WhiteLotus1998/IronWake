@@ -201,7 +201,27 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"text":"threat on captain at 6,11 (Plain): no enemy can strike it next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
+        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"text":"threat on captain at 6,11 (Plain): no enemy can strike it next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
+    }
+
+    /// <summary>Issue 248: a threat line an announced event brings carries <c>arrives</c>, and <c>asleep</c> names each sleeping group that could strike the tile with its members.</summary>
+    [Fact]
+    public void TheThreatQueryCarriesArrivalsAndSleepingGroups()
+    {
+        var content = Content();
+        const string Lane = "name: Lane\nsize: 16x4\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\nannounce: on\n\n"
+            + "................\n................\n................\n................\n\n"
+            + "units:\nP captain 0,1\nP recruit:wren 0,3\nE soldier 10,1 group:y behavior:guard\nE archer 10,3 group:y behavior:guard\n\n"
+            + "events:\narrival turn 1 enemy spawn soldier 7,0 group:n behavior:aggressive\n";
+        var map = MapFormat.Parse("lane.map", Lane, content);
+        var session = new ProtocolSession(content, BattleState.From(map, content, content.Cast, 7), new StringWriter());
+
+        var arrival = session.Answer("""{"query":"threat","unit":"captain","from":{"x":4,"y":1}}""");
+        var asleep = session.Answer("""{"query":"threat","unit":"wren","from":{"x":4,"y":3}}""");
+
+        Assert.Contains("\"enemy\":\"soldier-2\",\"from\":{\"x\":4,\"y\":0},\"arrives\":{\"x\":7,\"y\":0},\"slot\":0", arrival);
+        Assert.Contains("\"asleep\":[]", arrival);
+        Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\",\"soldier-1\"]}]", asleep);
     }
 
     [Fact]

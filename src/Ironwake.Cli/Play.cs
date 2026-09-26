@@ -937,25 +937,46 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!));
     }
 
-    /// <summary>What <c>threat</c> prints for <see cref="Queries.Threats"/>' lines, one row per line; the protocol's threat query carries it as its <c>text</c> (issue 25).</summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines)
+    /// <summary>
+    /// What <c>threat</c> prints for <see cref="Queries.Threats"/>' lines, one row per line,
+    /// an enemy an announced event brings marked with where it arrives, then one row per
+    /// group <see cref="Queries.SleepingThreats"/> names, members and tiles and no numbers,
+    /// and the wake rule under them (issue 248); the protocol's threat query carries it as
+    /// its <c>text</c> (issue 25).
+    /// </summary>
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
+        var rows = new List<string>();
         if (lines.Count == 0)
         {
-            return $"threat on {unit.Id} at {where}: no enemy can strike it next phase";
+            rows.Add($"threat on {unit.Id} at {where}: no enemy can strike it next phase");
         }
-
-        var rows = new List<string> { $"threat on {unit.Id} at {where}:" };
-        foreach (var line in lines)
+        else
         {
-            rows.Add($"  {line.Enemy.Id} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+            rows.Add($"threat on {unit.Id} at {where}:");
+            foreach (var line in lines)
+            {
+                var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
+                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+            }
+
+            rows.Add($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
         }
 
-        rows.Add($"  if all land: {lines.Sum(l => l.IfAllLand)} against {unit.Hp} hp");
+        foreach (var group in asleep)
+        {
+            rows.Add($"  group {group.Group} asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{m.Id} at {m.At}"))}");
+        }
+
+        if (asleep.Count > 0)
+        {
+            rows.Add($"  {MapRenderer.WakeLegend(content)}");
+        }
+
         return string.Join("\n", rows);
     }
 

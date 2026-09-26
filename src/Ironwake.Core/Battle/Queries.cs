@@ -118,32 +118,30 @@ public static class Queries
     /// on <paramref name="from"/> (issue 217): one line per enemy with an attack on it, in
     /// the phase's own order, each the strike the planner would make
     /// were it to choose this unit, through <see cref="EnemyAi.StrikeOn"/>, with the
-    /// forecast the enemy phase prints before that strike. The board is the exposure sum's,
-    /// <see cref="Exposure.Board"/> (the unit on the tile, every group its standing there
-    /// certainly wakes awake), with the player phase then ended through the resolver, so
-    /// the phase-start healing and events the enemy phase would see are applied. A group
-    /// still asleep is not listed and a unit that holds strikes only from its own tile.
-    /// Each line reads that phase-start board; an earlier enemy's move or kill in the phase
-    /// is not played out. A unit owed a Canto (issue 71) is asked from any tile its Canto
-    /// can end on, since that is where it still chooses to stand. Null when the unit cannot
-    /// stand on the tile this phase, or when the state is not a player phase. Read-only.
+    /// forecast the enemy phase prints before that strike. The board is
+    /// <see cref="ThreatBoard"/>'s. A group still asleep is not listed (see
+    /// <see cref="SleepingThreats"/>) and a unit that holds strikes only from its own tile.
+    /// An enemy an announced event spawns at the start of that enemy phase is priced like
+    /// any other and carries the tile it arrives on (issue 248); an unannounced one is not
+    /// on the board the query reads (DECISIONS/0045). Each line reads that phase-start
+    /// board; an earlier enemy's move or kill in the phase is not played out. A unit owed a
+    /// Canto (issue 71) is asked from any tile its Canto can end on, since that is where it
+    /// still chooses to stand. Null when the unit cannot stand on the tile this phase, or
+    /// when the state is not a player phase. Read-only.
     /// </summary>
     public static IReadOnlyList<ThreatLine>? Threats(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
-        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
-        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
+        if (ThreatBoard(state, content, unit, from) is not (var board, var moved, var arrivals))
         {
             return null;
         }
 
         var lines = new List<ThreatLine>();
-        var ended = Resolver.Apply(Exposure.Board(state, content, unit, from), content, new EndPhase());
-        if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)
+        if (moved is null)
         {
             return lines;
         }
 
-        var board = ended.Next;
         foreach (var enemy in board.UnitsOf(Side.Enemy))
         {
             if (board.EffectiveBehavior(enemy, content) is null || EnemyAi.StrikeOn(board, content, enemy, moved) is not { } strike)
@@ -153,15 +151,105 @@ public static class Queries
 
             var forecast = Forecast(board, content, enemy, moved, strike.From, strike.Slot)
                 ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {unit.Id} from {strike.From} has no forecast");
-            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast));
+            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
+            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast, arrives));
         }
 
         return lines;
     }
+
+    /// <summary>
+    /// The Guard groups still asleep on <see cref="ThreatBoard"/>'s board of which some
+    /// member could strike <paramref name="unit"/> on <paramref name="from"/> were the group
+    /// awake (issue 248, the thirty-sixth round's shape one): each group with every living
+    /// member, in group order, and no numbers, so the player learns a sleeping group is a
+    /// question without being handed its answer. A group the tile itself certainly wakes is
+    /// already awake on that board and priced by <see cref="Threats"/> instead. Null exactly
+    /// when <see cref="Threats"/> is. Read-only.
+    /// </summary>
+    public static IReadOnlyList<SleepingThreat>? SleepingThreats(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        if (ThreatBoard(state, content, unit, from) is not (var board, var moved, _))
+        {
+            return null;
+        }
+
+        var groups = new List<SleepingThreat>();
+        if (moved is null)
+        {
+            return groups;
+        }
+
+        var sleeping = board.UnitsOf(Side.Enemy)
+            .Where(u => u is { Behavior: Behavior.Guard, Group: not null } && !board.IsAwake(u.Group))
+            .Select(u => u.Group!)
+            .Distinct()
+            .OrderBy(g => g, StringComparer.Ordinal);
+        foreach (var group in sleeping)
+        {
+            var woken = board.Wake(group);
+            var members = woken.UnitsOf(Side.Enemy).Where(u => u.Group == group).ToList();
+            if (members.Any(m => EnemyAi.StrikeOn(woken, content, m, moved) is not null))
+            {
+                groups.Add(new SleepingThreat(group, members));
+            }
+        }
+
+        return groups;
+    }
+
+    /// <summary>
+    /// The board <see cref="Threats"/> and <see cref="SleepingThreats"/> read: the exposure
+    /// sum's, <see cref="Exposure.Board"/> (the unit on the tile, every group its standing
+    /// there certainly wakes awake), with the player phase then ended through the resolver,
+    /// so the phase-start healing and events the enemy phase would see are applied. An enemy
+    /// an unannounced event spawned in that phase start is taken off the board again, and
+    /// an announced one is kept and named in <c>Arrivals</c> with its tile. <c>Moved</c> is
+    /// null when ending the phase ends the battle or removes the unit. Null when the unit
+    /// cannot stand on the tile this phase, or when the state is not a player phase.
+    /// </summary>
+    private static (BattleState Board, BattleUnit? Moved, IReadOnlyDictionary<string, Coord> Arrivals)? ThreatBoard(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
+        {
+            return null;
+        }
+
+        var arrivals = new Dictionary<string, Coord>(StringComparer.Ordinal);
+        var ended = Resolver.Apply(Exposure.Board(state, content, unit, from), content, new EndPhase());
+        if (!ended.Accepted || ended.Next.Outcome.IsOver || ended.Next.Find(unit.Id) is not { } moved)
+        {
+            return (state, null, arrivals);
+        }
+
+        var board = ended.Next;
+        foreach (var spawned in ended.Events.OfType<UnitSpawned>())
+        {
+            if (state.Map.Announced)
+            {
+                arrivals[spawned.UnitId] = spawned.At;
+            }
+            else
+            {
+                board = board.WithoutUnit(spawned.UnitId);
+            }
+        }
+
+        return (board, moved, arrivals);
+    }
 }
 
-/// <summary>One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from where, with which slot's weapon, and the forecast of that combat.</summary>
-public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast)
+/// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and able to strike the unit were it awake.</summary>
+public sealed record SleepingThreat(string Group, IReadOnlyList<BattleUnit> Members);
+
+/// <summary>
+/// One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from
+/// where, with which slot's weapon, and the forecast of that combat. <paramref name="Arrives"/>
+/// is the tile an announced event spawns the enemy on at the start of that enemy phase
+/// (issue 248), null for an enemy already on the board.
+/// </summary>
+public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null)
 {
     /// <summary>The damage the strike deals if every hit lands, doubles included, no crit.</summary>
     public int IfAllLand => Forecast.Attacker.Damage * Forecast.Attacker.StrikeCount;

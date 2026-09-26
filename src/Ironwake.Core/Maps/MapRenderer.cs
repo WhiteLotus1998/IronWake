@@ -238,8 +238,11 @@ public static class MapRenderer
     /// only in the doc. The numbers are the content's <see cref="GameContent.WakeRadius"/>
     /// and <see cref="GameContent.NoiseRadius"/>, the ones <see cref="WakeCheck"/> reads.
     /// </summary>
-    public static string WakeLegend(GameContent content) =>
-        $"asleep: wakes if a unit ends within {content.WakeRadius} tiles of a member, a combat happens within {content.NoiseRadius}, or a member dies";
+    public static string WakeLegend(GameContent content) => $"asleep: {WakeCondition(content)}";
+
+    /// <summary>The wake rule alone, as the legend and <c>threat</c>'s sleeping-group rows print it (issue 248).</summary>
+    public static string WakeCondition(GameContent content) =>
+        $"wakes if a unit ends within {content.WakeRadius} tiles of a member, a combat happens within {content.NoiseRadius}, or a member dies";
 
     /// <summary>
     /// What an Escape map asks, in the words of DESIGN.md section 7's outcome rule (issue 269),

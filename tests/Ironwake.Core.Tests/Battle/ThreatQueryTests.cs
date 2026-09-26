@@ -155,4 +155,98 @@ public sealed class ThreatQueryTests
         var enemyPhase = state.Do(new EndPhase());
         Assert.Null(Queries.Threats(enemyPhase, Starter, enemyPhase.Find("hale")!, enemyPhase.Find("hale")!.At));
     }
+
+    private const string Lane = """
+        name: Lane
+        size: 16x4
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+        {0}
+        ................
+        ................
+        ................
+        ................
+
+        units:
+        P captain 0,1
+        P recruit:wren 0,3
+        {1}
+
+        events:
+        arrival turn 1 enemy spawn soldier 7,0 group:n behavior:aggressive
+
+        """;
+
+    /// <summary>
+    /// DECISIONS/0045: an enemy an unannounced event brings is invisible to the query, so
+    /// the board it reads does not carry it, even though the resolver spawns it at the
+    /// start of the enemy phase the query prices.
+    /// </summary>
+    [Fact]
+    public void AnUnannouncedSpawnIsNotPriced()
+    {
+        var state = Start(map: string.Format(Lane, "", "E soldier 15,3 group:y behavior:hold"));
+        var hale = state.Find("hale")!;
+
+        Assert.Empty(Queries.Threats(state, Starter, hale, new Coord(4, 1))!);
+        Assert.Contains(state.Do(new EndPhase()).Units, u => u.At == new Coord(7, 0));
+    }
+
+    /// <summary>
+    /// Issue 248: on an <c>announce: on</c> map the spawn is a promise, so the query prices
+    /// it with numbers like any awake enemy and names the tile it arrives on.
+    /// </summary>
+    [Fact]
+    public void AnAnnouncedSpawnIsPricedAndMarkedWithWhereItArrives()
+    {
+        var state = Start(map: string.Format(Lane, "announce: on\n", "E soldier 15,3 group:y behavior:hold"));
+        var hale = state.Find("hale")!;
+
+        var line = Assert.Single(Queries.Threats(state, Starter, hale, new Coord(4, 1))!);
+
+        Assert.Equal(new Coord(7, 0), line.Arrives);
+        Assert.StartsWith("soldier-", line.Enemy.Id);
+        Assert.True(line.IfAllLand > 0);
+    }
+
+    /// <summary>A held spawn tile spends the event (DECISIONS/0036), so the unit standing on it is not threatened by the arrival.</summary>
+    [Fact]
+    public void AnAnnouncedSpawnWhoseTileTheUnitHoldsIsNotListed()
+    {
+        var state = Start(map: string.Format(Lane, "announce: on\n", "E soldier 15,3 group:y behavior:hold"));
+        var standing = state.WithUnit(state.Find("hale")! with { At = new Coord(6, 0) });
+
+        Assert.Empty(Queries.Threats(standing, Starter, standing.Find("hale")!, new Coord(7, 0))!);
+    }
+
+    /// <summary>
+    /// Issue 248, shape one: a Guard group asleep on the board the query reads is named,
+    /// with its members, when some member could strike the tile were it awake; a group too
+    /// far to reach it is not; a group the tile certainly wakes is priced instead.
+    /// </summary>
+    [Fact]
+    public void ASleepingGroupThatCouldReachTheTileIsNamedWithItsMembers()
+    {
+        var state = Start(map: string.Format(Yard, "E soldier 7,1 group:y behavior:guard\nE archer 7,3 group:y behavior:guard"));
+        var hale = state.Find("hale")!;
+
+        var asleep = Assert.Single(Queries.SleepingThreats(state, Starter, hale, new Coord(2, 1))!);
+        Assert.Equal("y", asleep.Group);
+        Assert.Equal(new[] { "archer-1", "soldier-1" }, asleep.Members.Select(m => m.Id).OrderBy(i => i, StringComparer.Ordinal));
+        Assert.Empty(Queries.Threats(state, Starter, hale, new Coord(2, 1))!);
+        Assert.Empty(Queries.SleepingThreats(state, Starter, hale, new Coord(3, 1))!);
+        Assert.NotEmpty(Queries.Threats(state, Starter, hale, new Coord(3, 1))!);
+    }
+
+    [Fact]
+    public void ASleepingGroupTooFarToStrikeTheTileIsNotNamed()
+    {
+        var state = Start(map: string.Format(Lane, "", "E soldier 15,3 group:far behavior:guard"));
+        var hale = state.Find("hale")!;
+
+        Assert.Empty(Queries.SleepingThreats(state, Starter, hale, new Coord(1, 1))!);
+        Assert.Null(Queries.SleepingThreats(state, Starter, hale, new Coord(9, 3)));
+    }
 }
