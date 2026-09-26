@@ -137,8 +137,10 @@ public sealed record BattleUnit(
     /// <paramref name="countering"/> is true for the side that is struck first and answers.
     /// <paramref name="art"/> is a combat art the attacker declared (issue 68): the equipped
     /// weapon strikes as the art makes it. A counter never carries one.
+    /// <paramref name="against"/> is the unit it fights, when known: a unit sworn against by
+    /// that enemy loses <see cref="Grudges.SwornCritAvoid"/> crit avoid (issue 331).
     /// </summary>
-    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null)
+    public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
         if (countering && art is not null)
         {
@@ -146,6 +148,7 @@ public sealed record BattleUnit(
         }
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
+        critAvoid += Grudges.CritAvoidAgainst(this, against);
         var weapon = EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {
@@ -160,7 +163,8 @@ public sealed record BattleUnit(
     /// <see cref="Combatant.Blind"/> when its side cannot see that tile at dusk, since a counter
     /// needs sight the same as a strike (DESIGN.md 13.7, issue 308). Every forecast, the
     /// resolver and the enemy planner build the answering side here, so all read one number.
+    /// <paramref name="attacker"/> is the unit striking, for the sworn crit avoid (issue 331).
     /// </summary>
-    public Combatant Answering(BattleState state, GameContent content, Coord attackerAt) =>
-        ToCombatant(state, content, countering: true) with { Blind = !Dusk.Sees(state, Side, attackerAt) };
+    public Combatant Answering(BattleState state, GameContent content, Coord attackerAt, BattleUnit? attacker = null) =>
+        ToCombatant(state, content, countering: true, against: attacker) with { Blind = !Dusk.Sees(state, Side, attackerAt) };
 }

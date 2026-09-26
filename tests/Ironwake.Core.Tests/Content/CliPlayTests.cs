@@ -29,6 +29,23 @@ public class CliPlayTests
         }
     }
 
+    /// <summary>
+    /// Issue 331: on the grudges sample, Code's seed 65 script prints the sworn crit avoid
+    /// under a forecast between a sworn unit and its enemy, and a grudge strike's best
+    /// alternative under the enemy's forecast.
+    /// </summary>
+    [Fact]
+    public void AGrudgeStrikePrintsTheSwornCritAvoidAndThePlannersBestAlternative()
+    {
+        var docs = Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs");
+        var output = Run(
+            out _, "play", Path.Combine(docs, "samples", "old_mill_road_grudges.map"), "--seed", "65", "--strict",
+            "--script", Path.Combine(docs, "transcripts", "2026-09-26-old_mill_road_grudges-65.script"), "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("enemy: attack archer-2 wren\nforecast archer-2 -> wren: dmg 6 hit 70% crit 20%; counter: none\n  sworn: archer-2 on wren: wren crit avoid -20\n  grudge: archer-2 strikes sworn wren (score 15.9); best alternative captain (score 13.4)\n", output);
+        Assert.Contains("battle won: rout", output);
+    }
+
     [Fact]
     public void PlayPrintsTheMapHeaderFirstAndFieldsTheCast()
     {

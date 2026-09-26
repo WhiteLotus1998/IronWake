@@ -74,7 +74,8 @@ public static class EnemyAi
     /// sees and those within hearing of it. One that knows of nobody and may move makes for
     /// the objective (<see cref="Drift"/>, issue 308); a unit that holds keeps its hold.
     /// On a <c>grudges: on</c> map a unit sworn against a player unit it knows of strikes that
-    /// unit whenever it can and approaches it first (<see cref="Sworn"/>, DESIGN.md 13.4).
+    /// unit whenever it can and approaches it first (<see cref="Sworn"/>, DESIGN.md 13.4),
+    /// unless it can strike with a keepsake: the keepsake outranks the grudge (issue 331).
     /// The attack options range over every weapon the unit can strike with, in inventory
     /// order; an Attack with a weapon other than the equipped one names its slot, which
     /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
@@ -103,8 +104,7 @@ public static class EnemyAi
 
         var equipped = unit.EquippedSlot(content);
         var sworn = Sworn(state, unit, known);
-        var best = (sworn is null ? null : BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach))
-            ?? BestOption(state, content, unit, tiles, reach, known, playerReach);
+        var best = Choose(state, content, unit, tiles, reach, known, playerReach, sworn).Best;
         if (best is not null)
         {
             var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
@@ -168,15 +168,129 @@ public static class EnemyAi
         var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
-        if (Sworn(state, unit, players) is { } sworn && sworn.Id != target.Id
-            && (inDaylight || Dusk.Knows(state, content, unit, sworn))
-            && BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight) is not null)
+        var known = players.Where(p => inDaylight || Dusk.Knows(state, content, unit, p)).ToList();
+        if (Sworn(state, unit, known) is { } sworn)
         {
-            return null;
+            var chosen = Choose(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight);
+            if (chosen.Keepsake)
+            {
+                var onTarget = target.Id == sworn.Id || chosen.Best!.TargetId != sworn.Id
+                    ? BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach, inDaylight, keepsakesOnly: true)
+                    : null;
+                return onTarget is null ? null : new EnemyStrike(onTarget.Tile, onTarget.Slot);
+            }
+
+            if (chosen.Best is { } swornStrike && swornStrike.TargetId == sworn.Id && sworn.Id != target.Id)
+            {
+                return null;
+            }
         }
 
         var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach, inDaylight);
         return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
+    }
+
+    /// <summary>
+    /// A grudge strike and what it cost the planner (issue 331): the sworn unit struck and the
+    /// planner's score for that strike, beside the best strike the unit had on anyone else
+    /// and its score, both null when the sworn unit was the only one in reach. Sim traces
+    /// and the console print it beside the strike, so whether a grudge redirected an enemy
+    /// reads off a log.
+    /// </summary>
+    public sealed record GrudgeStrike(string SwornId, double Score, string? AlternativeId, double? AlternativeScore)
+    {
+        /// <summary>The log line for <paramref name="unitId"/>'s grudge strike, plain ASCII, scores to one decimal.</summary>
+        public string Line(string unitId) =>
+            FormattableString.Invariant($"grudge: {unitId} strikes sworn {SwornId} (score {Score:0.0}); ")
+            + (AlternativeId is { } other
+                ? FormattableString.Invariant($"best alternative {other} (score {AlternativeScore:0.0})")
+                : "no other strike in reach");
+    }
+
+    /// <summary>
+    /// The grudge line to print beside <paramref name="command"/> in an enemy phase (issue 331):
+    /// asked on the board before the unit's first command, so a Move and the Attack after it
+    /// share one answer. <paramref name="pending"/> holds the answer between the two.
+    /// Returns the line when the command is the grudge strike, else null.
+    /// </summary>
+    public static string? GrudgeLog(BattleState state, GameContent content, Command command, Dictionary<string, GrudgeStrike?> pending)
+    {
+        var id = command switch { Move m => m.UnitId, Attack a => a.UnitId, _ => null };
+        if (id is null || state.Find(id) is not { Side: Side.Enemy } unit || unit.Grudge is null)
+        {
+            return null;
+        }
+
+        if (!unit.Moved || !pending.ContainsKey(id))
+        {
+            pending[id] = GrudgeChoice(state, content, unit);
+        }
+
+        return command is Attack attack && pending[id] is { } choice && choice.SwornId == attack.TargetId ? choice.Line(id) : null;
+    }
+
+    /// <summary>
+    /// The grudge strike <see cref="PlanUnit"/> makes with <paramref name="unit"/> on the board
+    /// as it stands, or null when its plan is not a strike on the unit it is sworn against
+    /// for the grudge's sake: it is sworn on nobody it knows, it retreats, it has no weapon,
+    /// it cannot reach the sworn unit, or a keepsake strike outranks the grudge.
+    /// </summary>
+    public static GrudgeStrike? GrudgeChoice(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (unit.Side != Side.Enemy || unit.Grudge is null || unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null)
+        {
+            return null;
+        }
+
+        var behavior = state.EffectiveBehavior(unit, content);
+        var reach = state.ReachOf(unit, content);
+        var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
+        var players = state.UnitsOf(Side.Player).ToList();
+        var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
+        if (Sworn(state, unit, known) is not { } sworn)
+        {
+            return null;
+        }
+
+        var chosen = Choose(state, content, unit, tiles, reach, known, playerReach, sworn);
+        if (chosen.Keepsake || chosen.Best is not { } strike || strike.TargetId != sworn.Id)
+        {
+            return null;
+        }
+
+        var others = known.Where(p => p.Id != sworn.Id).ToList();
+        var alternative = BestOption(state, content, unit, tiles, reach, others, playerReach);
+        return new GrudgeStrike(sworn.Id, strike.Score, alternative?.TargetId, alternative?.Score);
+    }
+
+    /// <summary>
+    /// The strike the planner takes among <paramref name="known"/>, in precedence order (issue 331):
+    /// a keepsake strike on the sworn unit, then any keepsake strike, then any strike on the
+    /// sworn unit, then the best strike by score. The keepsake tiers apply only to a sworn unit,
+    /// so an unsworn unit's choice is the score's alone, as before the grudge arm.
+    /// <c>Keepsake</c> is true when a keepsake tier chose.
+    /// </summary>
+    private static (AttackOption? Best, bool Keepsake) Choose(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool inDaylight = false)
+    {
+        if (sworn is not null)
+        {
+            var keepsake = BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight, keepsakesOnly: true)
+                ?? BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight, keepsakesOnly: true);
+            if (keepsake is not null)
+            {
+                return (keepsake, true);
+            }
+
+            if (BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight) is { } grudge)
+            {
+                return (grudge, false);
+            }
+        }
+
+        return (BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight), false);
     }
 
     /// <summary>
@@ -196,10 +310,11 @@ public static class EnemyAi
     /// every player unit through <paramref name="playerReach"/>, whichever targets are asked.
     /// On a dusk map a target the unit's side cannot see from where it would strike is no
     /// option (DESIGN.md 13.7), the same rule the resolver holds, unless <paramref name="inDaylight"/>.
+    /// Given <paramref name="keepsakesOnly"/>, only strikes with a keepsake count (issue 331).
     /// </summary>
     private static AttackOption? BestOption(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
-        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach, bool inDaylight = false)
+        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach, bool inDaylight = false, bool keepsakesOnly = false)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
@@ -213,6 +328,11 @@ public static class EnemyAi
             var cost = reach.CostTo(tile)!.Value;
             foreach (var arm in arms)
             {
+                if (keepsakesOnly && carrier.Unit.Inventory.Items[arm.Slot].Keepsake is null)
+                {
+                    continue;
+                }
+
                 foreach (var target in targets)
                 {
                     if (!arm.Weapon.InRange(tile.DistanceTo(target.At)) || (!inDaylight && !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile)))
@@ -266,7 +386,7 @@ public static class EnemyAi
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var me = content.CombatantOf(attacker.Unit, weapon, state.Map.TerrainAt(from, content), attacker.Hp);
-        var them = target.Answering(state, content, from);
+        var them = target.Answering(state, content, from, attacker);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
         var strikes = forecast.Attacker.StrikeCount;

@@ -152,7 +152,9 @@ public static class Program
     /// One game of the heuristic player on a map and a seed, printed as the script the CLI
     /// replays (player commands bare, enemy commands as <c>enemy:</c> lines, deaths and
     /// wakes as comments), so a baseline game can be read turn by turn or handed to
-    /// <c>ironwake play --script</c>.
+    /// <c>ironwake play --script</c>. A grudge strike prints the planner's best alternative
+    /// beside it (issue 331). <paramref name="mapId"/> may be a map file's path, so a sample
+    /// outside the content directory traces too.
     /// </summary>
     public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -164,7 +166,9 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
-        var maps = MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
+        var maps = File.Exists(mapId)
+            ? new List<(string Id, MapDefinition Map)> { (mapId, MapFiles.Load(mapId, content)) }
+            : MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
         if (maps.Count == 0 && content.Campaign.Keep.IsKeepMap(mapId))
         {
             maps.Add((mapId, MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content)));
@@ -183,8 +187,10 @@ public static class Program
         {
             var enemy = state.Phase == Side.Enemy;
             var commands = enemy ? EnemyAi.Plan(state, content) : player.Next(state, content);
+            var grudges = new Dictionary<string, EnemyAi.GrudgeStrike?>();
             foreach (var command in commands)
             {
+                var grudge = enemy ? EnemyAi.GrudgeLog(state, content, command, grudges) : null;
                 var result = Resolver.Apply(state, content, command);
                 if (!result.Accepted)
                 {
@@ -193,6 +199,11 @@ public static class Program
                 }
 
                 Console.WriteLine((enemy ? "# enemy: " : "") + Script(command));
+                if (grudge is not null)
+                {
+                    Console.WriteLine("#   " + grudge);
+                }
+
                 foreach (var e in result.Events)
                 {
                     switch (e)
