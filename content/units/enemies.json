@@ -118,6 +118,15 @@
       "inventory": [ { "item": "steel_gauntlets" }, { "item": "toll_axe" } ]
     },
     {
+      "id": "grange_reeve",
+      "name": "Grange Reeve",
+      "class": "pikeman",
+      "level": 3,
+      "stats": { "hp": 25, "str": 7, "mag": 0, "dex": 5, "spd": 4, "lck": 3, "def": 5, "res": 2, "cha": 4 },
+      "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 30, "spd": 20, "lck": 10, "def": 30, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "steel_lance" }, { "item": "toll_spear" } ]
+    },
+    {
       "id": "bandit_leader",
       "name": "Bandit Leader",
       "class": "reaver",

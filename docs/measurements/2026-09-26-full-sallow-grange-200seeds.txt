@@ -1,0 +1,30 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sallow_grange, heuristic wins 167/200 (83 %), winning turn median 6 p90 7 limit 8, losses 33 timeout 0 captain 0 protected, quiet tail 0.6, refused kill p50 0.8674 over 33, two-roll average: ok
+gate 2 decisions matter: sallow_grange, random wins 1/200 (1 %): ok
+gate 3 no cheap shots: sallow_grange, 0 player units killed from deployment: ok
+gate 4 no dead weight: sallow_grange, 5 recruits x 200 seeds, median drop 0.380: ok
+  ansgar: drop 0.170 se 0.042 own [atk 534 dmg 5633 heal 0 abs 453] rest baseline [atk 1648 dmg 14957 heal 0 abs 1484] rest benched [atk 1791 dmg 17720 heal 0 abs 1860] benched losses 58 timeout 9 captain 0 protected, refused kill p50 0.8775 over 58
+  ottilie: drop 0.600 se 0.058 own [atk 320 dmg 2255 heal 0 abs 440] rest baseline [atk 1862 dmg 18335 heal 0 abs 1497] rest benched [atk 2242 dmg 22663 heal 0 abs 1781] benched losses 144 timeout 9 captain 0 protected, refused kill p50 0.8775 over 139
+  pell: drop 0.375 se 0.052 own [atk 13 dmg 640 heal 0 abs 231] rest baseline [atk 2169 dmg 19950 heal 0 abs 1706] rest benched [atk 2004 dmg 20257 heal 0 abs 2167] benched losses 96 timeout 12 captain 0 protected, refused kill p50 0.8775 over 96
+  teodor: drop 0.520 se 0.054 own [atk 665 dmg 5622 heal 0 abs 223] rest baseline [atk 1517 dmg 14968 heal 0 abs 1714] rest benched [atk 1843 dmg 19876 heal 0 abs 2187] benched losses 120 timeout 17 captain 0 protected, refused kill p50 0.8775 over 116
+  wren: drop 0.380 se 0.049 own [atk 468 dmg 3745 heal 0 abs 447] rest baseline [atk 1714 dmg 16845 heal 0 abs 1490] rest benched [atk 1769 dmg 19472 heal 0 abs 1982] benched losses 88 timeout 21 captain 0 protected, refused kill p50 0.8775 over 87
+  captain captain: baseline [atk 182 dmg 2695 heal 0 abs 143] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 632 ms: ok
+gate 5 forecast honesty: 10173 combats (4519 with gauntlets), 21165 strikes, hits 13052 expected 13036.7, crits 961 expected 939.0, damage mismatches 0: ok
+gate 7 speed: sallow_grange, 5 AI-vs-AI games, 28 turns, slowest 6 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 10029 ms: ok
+free prefix: sallow_grange, 0 of 2, 4, 6 tried, slack median 2 p90 1 (printed, not gated)
+  prefix 2: wins 89/200, drop 0.390 se 0.051, not free
+  prefix 4: wins 18/200, drop 0.745 se 0.063, not free
+  prefix 6: wins 2/200, drop 0.825 se 0.065, not free
+  prefix 2 refunded: wins 125/200, drop 0.210 se 0.045, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 0.0, quiet 1.0, leading dead 0.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.21
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 16 quiet 0 live 184, wake tax 0.00
+  turn 5: dead 27 quiet 0 live 173, wake tax 0.00
+  turn 6: dead 10 quiet 0 live 186, wake tax 0.00
+  turn 7: dead 2 quiet 0 live 99, wake tax 0.00
+  turn 8: dead 6 quiet 0 live 42, wake tax 0.00
+full: ok

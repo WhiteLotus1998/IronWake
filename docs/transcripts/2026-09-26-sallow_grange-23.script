@@ -1,0 +1,140 @@
+move wren 1,1
+wait wren
+move teodor 0,2
+wait teodor
+move captain 2,3
+wait captain
+move pell 2,4
+wait pell
+move ottilie 1,4
+wait ottilie
+move ansgar 2,6
+wait ansgar
+end
+move captain 4,1
+wait captain
+move wren 3,0
+wait wren
+move teodor 2,1
+wait teodor
+move pell 1,1
+wait pell
+move ottilie 0,1
+wait ottilie
+move ansgar 1,3
+wait ansgar
+end
+move captain 6,1
+wait captain
+move wren 5,0
+wait wren
+move teodor 3,0
+wait teodor
+move pell 4,1
+wait pell
+move ottilie 2,1
+wait ottilie
+move ansgar 2,0
+wait ansgar
+end
+move captain 9,2
+wait captain
+move pell 6,1
+wait pell
+move wren 7,0
+wait wren
+move teodor 5,0
+wait teodor
+move ottilie 4,1
+wait ottilie
+wait ansgar
+end
+move captain 11,0
+wait captain
+move pell 9,2
+wait pell
+move wren 9,0
+wait wren
+move teodor 7,0
+wait teodor
+move ottilie 6,1
+wait ottilie
+move ansgar 4,1
+recall 21
+move captain 5,2
+wait captain
+move pell 4,3
+wait pell
+move wren 4,1
+wait wren
+move teodor 2,1
+wait teodor
+move ottilie 1,2
+wait ottilie
+move ansgar 1,3
+wait ansgar
+end
+move captain 9,2
+wait captain
+move pell 5,2
+wait pell
+move wren 6,1
+wait wren
+move teodor 4,1
+wait teodor
+move ottilie 3,0
+wait ottilie
+move ansgar 4,3
+wait ansgar
+end
+move captain 11,0
+wait captain
+move pell 9,2
+wait pell
+move wren 8,1
+wait wren
+move teodor 6,1
+wait teodor
+move ottilie 5,0
+wait ottilie
+move ansgar 5,2
+wait ansgar
+end
+move pell 10,2
+attack pell shieldbearer-1
+move wren 12,1
+attack wren shieldbearer-1
+move captain 12,0
+wait captain
+move ansgar 10,1
+wait ansgar
+move teodor 9,2
+wait teodor
+move ottilie 6,1
+wait ottilie
+end
+move ansgar 13,3
+attack ansgar hexer-1
+canto ansgar stay
+move wren 12,5
+wait wren
+move captain 12,4
+wait captain
+move pell 9,3
+attack pell archer-2
+move teodor 10,4
+attack teodor archer-2
+move ottilie 8,2
+wait ottilie
+end
+attack pell brawler-1
+move teodor 9,4
+attack teodor archer-2
+move captain 14,6
+wait captain
+move ottilie 11,1
+wait ottilie
+wait wren
+wait ansgar
+end
+move captain 16,6
