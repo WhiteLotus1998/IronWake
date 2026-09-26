@@ -1,5 +1,5 @@
-campaign, seed 139, difficulty normal, scheme TwoRollAverage, 4 maps
--- before map 1 of 4: Old Mill Road; the purse holds 500 --
+campaign, seed 139, difficulty normal, scheme TwoRollAverage, 5 maps
+-- before map 1 of 5: Old Mill Road; the purse holds 500 --
 roster:
   captain: Cadet L1 exp 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   wren: Cadet L1 exp 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
@@ -22,7 +22,7 @@ deploys to Old Mill Road: captain, wren
 > bench wren
 ERROR: Old Mill Road places wren by name at 2,8
 > march
-map 1 of 4: Old Mill Road, seed 139
+map 1 of 5: Old Mill Road, seed 139
 Old Mill Road  turn 1 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -649,7 +649,7 @@ B  wren             Wren L2 cadet              5,0    hp 6/21   Plain  done
 battle won: rout; only recall is left, or leave
 > leave
 Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell
--- before map 2 of 4: Saltmarsh Ford; the purse holds 1100 --
+-- before map 2 of 5: Saltmarsh Ford; the purse holds 1100 --
 roster:
   captain: Cadet L1 exp 72; 1: Iron Sword 35/40 (repair 50), 2: Field Dressing 3/3
   wren: Cadet L2 exp 52; 1: Iron Sword 32/40 (repair 80), 2: Field Dressing 3/3
@@ -701,7 +701,7 @@ brannock certifies from Cadet to Reaver for 500; the purse holds 320
     ranks: sword E (29), lance E (0), axe E (0)
     mastery: Fundamentals (9 of 12 combats)
 > march
-map 2 of 4: Saltmarsh Ford, seed 140
+map 2 of 5: Saltmarsh Ford, seed 140
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -2614,7 +2614,7 @@ B  wren             Wren L3 cadet              10,1   hp 22/22  Plain  done
 battle won: rout; only recall is left, or leave
 > leave
 Saltmarsh Ford won: rout; reward 800, the purse holds 1120; nobody fell
--- before map 3 of 4: The Tollgate; the purse holds 1120 --
+-- before map 3 of 5: The Tollgate; the purse holds 1120 --
 roster:
   captain: Cadet L1 exp 72; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   wren: Cadet L3 exp 72; 1: Iron Sword 33/40 (repair 70), 2: Field Dressing 2/3

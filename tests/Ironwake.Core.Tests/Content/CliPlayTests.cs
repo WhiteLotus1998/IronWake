@@ -589,6 +589,33 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 79: Code's play of seed 23 on Sallow Grange. The first pass walks the north skirt a
+    /// turn slow and spends a Recall back to turn 2; the second puts Pell on 5,2 beside the fort
+    /// archer, but her cast at the gate from 10,2 is inside the field's noise and wakes it on
+    /// turn 5; Wren's counter drops the gate shieldbearer, Ansgar kills the hexer from 13,3, and
+    /// the captain seizes on turn 8 of 8 with nobody dead.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptSeizesSallowGrangeOnSeedTwentyThree()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-23.script");
+
+        var output = Run(out var exit, "play", "sallow_grange", "--seed", "23", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.Contains("recalled to state 21; 2 charges left", output);
+        Assert.Contains("group field wakes: noise", output);
+        Assert.Contains("shieldbearer-1 falls at 12,2", output);
+        Assert.Contains("hexer-1 falls at 13,4", output);
+        Assert.Contains("Sallow Grange  turn 8 of 8", output);
+        Assert.All(new[] { "captain", "wren", "teodor", "pell", "ottilie", "ansgar" }, id => Assert.DoesNotContain(id + " falls at", output));
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

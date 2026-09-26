@@ -72,7 +72,7 @@ public class CliValidateTests
     {
         var ok = Run(out var okExit, "validate", Fixture.RealContentDirectory());
         Assert.Equal(0, okExit);
-        Assert.Contains("4 maps", ok);
+        Assert.Contains("5 maps", ok);
 
         var dir = Path.Combine(Path.GetTempPath(), "ironwake-cli-maps-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(Path.Combine(dir, "maps"));

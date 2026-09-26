@@ -95,11 +95,11 @@ public class CampaignContentTests
     }
 
     [Fact]
-    public void TheShippedCampaignPlaysTheFourMapsInOrderEachOnDisk()
+    public void TheShippedCampaignPlaysTheFiveMapsInOrderEachOnDisk()
     {
         var maps = MapFixture.Content.Campaign.Maps;
 
-        Assert.Equal(new[] { "old_mill_road", "saltmarsh_ford", "the_tollgate", "harrow_weir" }, maps.Select(m => m.MapId));
+        Assert.Equal(new[] { "old_mill_road", "saltmarsh_ford", "the_tollgate", "harrow_weir", "sallow_grange" }, maps.Select(m => m.MapId));
         Assert.All(maps, m => Assert.True(File.Exists(Path.Combine(MapFixture.MapsDirectory, m.MapId + ".map"))));
     }
 

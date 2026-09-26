@@ -10,12 +10,13 @@ public class SampleMapsTests
         MapFiles.LoadAll(Fixture.RealContentDirectory(), MapFixture.Content);
 
     [Fact]
-    public void TheFourShippedMapsLoad()
+    public void TheFiveShippedMapsLoad()
     {
         var maps = All();
 
-        Assert.Equal(new[] { "harrow_weir", "old_mill_road", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
-        Assert.Equal(WinCondition.Seize, maps[3].Map.Win);
+        Assert.Equal(new[] { "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
+        Assert.Equal(WinCondition.Seize, maps[4].Map.Win);
+        Assert.Equal(WinCondition.Seize, maps[2].Map.Win);
         Assert.Equal(WinCondition.DefeatBoss, maps[0].Map.Win);
     }
 
@@ -64,17 +65,95 @@ public class SampleMapsTests
     /// <summary>
     /// The thirty-sixth round: maps 4 to 8 each owe one enemy that fights with gauntlets and one
     /// at Def 7 or more, read as the map fields them (class and level included). Harrow Weir's
-    /// brawler and its boss carry gauntlets, and its shieldbearer stands at Def 7 or more.
+    /// brawler and its boss carry gauntlets and its bridge shieldbearer stands at Def 7 or more;
+    /// Sallow Grange's field brawler carries gauntlets and its north gate shieldbearer is the wall.
     /// </summary>
-    [Fact]
-    public void HarrowWeirFieldsAGauntletEnemyAndOneAtDefSevenOrMore()
+    [Theory]
+    [InlineData("harrow_weir")]
+    [InlineData("sallow_grange")]
+    public void MapsFromFourFieldAGauntletEnemyAndOneAtDefSevenOrMore(string id)
     {
-        var map = All().Single(m => m.Id == "harrow_weir").Map;
+        var map = All().Single(m => m.Id == id).Map;
         var content = MapFixture.Content;
         var enemies = map.Placements.OfType<EnemyPlacement>().Select(e => (e.TemplateId, Unit: map.EnemyUnit(e, content))).ToList();
 
         Assert.Contains(enemies, e => e.Unit.Inventory.Items.Any(i => content.Weapons.TryGetValue(i.ItemId, out var w) && w.Type == WeaponType.Gauntlet));
         Assert.Contains(enemies, e => content.StatsOf(e.Unit).Def >= 7);
+    }
+
+    private static IReadOnlyList<Coord> FieldGroup(MapDefinition map) =>
+        map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "field").Select(e => e.At).ToList();
+
+    private static bool Within(IReadOnlyList<Coord> members, Coord tile, int radius) =>
+        members.Any(m => m.DistanceTo(tile) <= radius);
+
+    /// <summary>
+    /// Issue 79: the sleeping group sits on open ground with room on two sides, since a group in a
+    /// corridor can only be woken, never dashed past (DIALOGUE.md, third round). The field group is
+    /// three Guard units whose wake diamond reaches neither the top row nor the bottom row, so a
+    /// unit can pass it to the north or to the south without stopping inside it.
+    /// </summary>
+    [Fact]
+    public void SallowGrangeFieldGroupSleepsWithRoomToPassOnBothSides()
+    {
+        var map = All().Single(m => m.Id == "sallow_grange").Map;
+        var field = FieldGroup(map);
+        var radius = MapFixture.Content.WakeRadius;
+
+        Assert.Equal(3, field.Count);
+        Assert.All(map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == "field"), e => Assert.Equal(Behavior.Guard, e.Behavior));
+        for (var x = 0; x < map.Width; x++)
+        {
+            Assert.False(Within(field, new Coord(x, 0), radius), $"row 0 at x {x} wakes the field");
+            Assert.False(Within(field, new Coord(x, map.Height - 1), radius), $"row {map.Height - 1} at x {x} wakes the field");
+        }
+    }
+
+    /// <summary>
+    /// Issue 79: the throne is reachable two ways. The west gate (11,5 and 11,6) is the short way
+    /// and lies inside the field group's wake radius; the north gate (12,2) is the long way, held
+    /// by a Hold shieldbearer whose only outside neighbour, 12,1, is beyond the field's noise
+    /// radius, so the lock can be broken in melee without waking the field. A caster at 10,2 is
+    /// inside the noise radius: the long way has a wrong tile too.
+    /// </summary>
+    [Fact]
+    public void SallowGrangeWestGateWakesTheFieldAndTheNorthGateCanBeBrokenQuietly()
+    {
+        var map = All().Single(m => m.Id == "sallow_grange").Map;
+        var content = MapFixture.Content;
+        var field = FieldGroup(map);
+
+        foreach (var gate in new[] { new Coord(11, 5), new Coord(11, 6) })
+        {
+            Assert.Equal("plain", map.TerrainIdAt(gate));
+            Assert.True(Within(field, gate, content.WakeRadius));
+        }
+
+        var lockUnit = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.At == new Coord(12, 2));
+        Assert.Equal("shieldbearer", lockUnit.TemplateId);
+        Assert.Equal(Behavior.Hold, lockUnit.Behavior);
+        Assert.Equal("wall", map.TerrainIdAt(new Coord(11, 2)));
+        Assert.Equal("wall", map.TerrainIdAt(new Coord(13, 2)));
+        Assert.False(Within(field, new Coord(12, 1), content.NoiseRadius));
+        Assert.False(Within(field, new Coord(12, 2), content.NoiseRadius));
+        Assert.True(Within(field, new Coord(10, 2), content.NoiseRadius));
+    }
+
+    /// <summary>
+    /// Issue 79 and the seventh round: a Hold boss beside the throne on a Seize map, so killing him
+    /// is optional and visibly so, and an enemy-held fort on the short way.
+    /// </summary>
+    [Fact]
+    public void SallowGrangeHasAHoldBossBesideTheThroneAndAnEnemyOnTheFort()
+    {
+        var map = All().Single(m => m.Id == "sallow_grange").Map;
+
+        Assert.Equal(WinCondition.Seize, map.Win);
+        var boss = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.IsBoss);
+        Assert.Equal(1, boss.At.DistanceTo(new Coord(16, 6)));
+        Assert.Equal("throne", map.TerrainIdAt(new Coord(16, 6)));
+        var fort = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => map.TerrainIdAt(e.At) == "fort");
+        Assert.Equal(Behavior.Hold, fort.Behavior);
     }
 
     /// <summary>
