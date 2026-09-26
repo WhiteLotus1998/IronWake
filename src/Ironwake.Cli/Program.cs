@@ -61,9 +61,11 @@ public static class Program
             var maps = MapFiles.LoadAll(contentDir, content);
             foreach (var entry in content.Campaign.Maps)
             {
-                if (!File.Exists(Path.Combine(contentDir, "maps", entry.MapId + ".map")))
+                var path = MapFiles.CampaignPath(contentDir, content, entry.MapId);
+                if (!File.Exists(path))
                 {
-                    throw new ContentException(ContentFiles.CampaignName, entry.MapId, "map", $"no file maps/{entry.MapId}.map under {contentDir}");
+                    var dir = content.Campaign.Keep.IsKeepMap(entry.MapId) ? MapFiles.KeepDirectory : MapFiles.MapsDirectory;
+                    throw new ContentException(ContentFiles.CampaignName, entry.MapId, "map", $"no file {dir}/{entry.MapId}.map under {contentDir}");
                 }
             }
 

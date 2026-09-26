@@ -10,14 +10,19 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "harrow_weir", "reward": 1200,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
+    { "map": "ironwake_raid", "reward": 1000,
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
     { "map": "brackwater_cut", "reward": 1600,
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
+    { "map": "ironwake_keep", "reward": 2000,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }
   ],
   "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
   "keep": {
     "map": "ironwake_keep",
+    "raid": "ironwake_raid",
     "edits": [
       { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },
       { "id": "ditch", "name": "Dig a ditch", "terrain": "water", "price": 300, "at": ["9,5", "9,6"] }

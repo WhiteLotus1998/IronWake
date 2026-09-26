@@ -35,6 +35,13 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<TrialAttempt> TrialsTried { get; init; } = ValueList<TrialAttempt>.Empty;
 
+    /// <summary>
+    /// The edits bought for the keep (issue 288), in the order they were made. The keep the finale
+    /// is fought on is the content's keep with these applied (<see cref="KeepMap"/>), so the record
+    /// carries what was bought and the map is rebuilt from it, written canonically wherever it is shown.
+    /// </summary>
+    public ValueList<KeepWork> Keep { get; init; } = ValueList<KeepWork>.Empty;
+
     /// <summary>A new campaign: the cast in roster order, the starting purse, the first map, nobody benched.</summary>
     public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty)
     {
@@ -447,6 +454,73 @@ public sealed record CampaignRecord(
     /// </summary>
     public IReadOnlyList<string> Deployment(MapDefinition map, GameContent content) =>
         Begin(map, content).UnitsOf(Side.Player).OrderBy(u => u.PlacementIndex).Select(u => u.Id).ToList();
+
+    /// <summary>
+    /// Why the keep's menu is closed now, or null when it is open (issue 288): the campaign must
+    /// have a keep with a raid among its maps, the raid must have been won, and a map must be left
+    /// to fight. A spend before the raid would be a guess (DECISIONS/0059 decision 7).
+    /// </summary>
+    public string? KeepMenuRefusal(GameContent content)
+    {
+        var menu = content.Campaign.Keep;
+        var raid = menu.RaidId.Length == 0 ? -1 : content.Campaign.Maps.Select(m => m.MapId).ToList().IndexOf(menu.RaidId);
+        if (menu == KeepMenu.None || raid < 0)
+        {
+            return "the campaign has no keep to build";
+        }
+
+        if (MapIndex <= raid)
+        {
+            return $"the keep's menu opens after the raid on it ({menu.RaidId}, map {raid + 1}) is fought";
+        }
+
+        return IsFinished(content) ? "the campaign is finished" : null;
+    }
+
+    /// <summary>
+    /// <paramref name="bare"/>, the content's keep as the caller loaded it, with every edit of
+    /// <see cref="Keep"/> made in order: the keep the record holds.
+    /// </summary>
+    public MapDefinition KeepMap(MapDefinition bare, GameContent content) =>
+        Keep.Aggregate(bare, (map, work) => Core.Keep.Apply(map, content.Campaign.Keep.Edit(work.EditId)
+            ?? throw new InvalidOperationException($"the keep's menu has no edit '{work.EditId}'"), work.At));
+
+    /// <summary>
+    /// Buys <paramref name="editId"/> at <paramref name="at"/> for the keep (issue 288): refused
+    /// while the menu is closed (<see cref="KeepMenuRefusal"/>), for an edit not on the menu, for a
+    /// placement <see cref="Core.Keep.Refusal"/> refuses on the keep the record holds, or for a
+    /// purse short of the price. The line says what the placement does in rules terms.
+    /// </summary>
+    public ScreenResult Build(string editId, Coord at, MapDefinition bare, GameContent content)
+    {
+        if (KeepMenuRefusal(content) is { } closed)
+        {
+            return ScreenResult.Refused(this, closed);
+        }
+
+        var menu = content.Campaign.Keep;
+        if (menu.Edit(editId) is not { } edit)
+        {
+            return ScreenResult.Refused(this, $"the keep's menu has no '{editId}'; it sells {string.Join(", ", menu.Edits.Select(e => e.Id))}");
+        }
+
+        var keep = KeepMap(bare, content);
+        if (Core.Keep.Refusal(keep, edit, at) is { } refusal)
+        {
+            return ScreenResult.Refused(this, refusal);
+        }
+
+        if (Purse < edit.Price)
+        {
+            return ScreenResult.Refused(this, $"{edit.Name} costs {edit.Price} and the purse holds {Purse}");
+        }
+
+        var line = Core.Keep.Describe(keep, edit, at, content);
+        return new ScreenResult(
+            this with { Purse = Purse - edit.Price, Keep = Keep.Add(new KeepWork(edit.Id, at)) },
+            $"built for {edit.Price}, the purse holds {Purse - edit.Price}: {line}",
+            true);
+    }
 
     private CampaignRecord Replace(Unit unit) =>
         this with { Roster = ValueList<Unit>.From(Roster.Select(u => u.Id == unit.Id ? unit : u)) };

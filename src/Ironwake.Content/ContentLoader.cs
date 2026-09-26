@@ -166,17 +166,25 @@ public static class ContentLoader
             }
         }
 
+        var keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain) : KeepMenu.None;
+        var ids = maps.Select(m => m.MapId).ToList();
+        if (keep.RaidId.Length > 0 && ids.Contains(keep.MapId) && !(ids.IndexOf(keep.RaidId) is var raidAt && raidAt >= 0 && raidAt < ids.IndexOf(keep.MapId)))
+        {
+            throw root.Error("keep.raid", $"'{keep.RaidId}' must be listed in maps before the keep '{keep.MapId}', since the keep's menu opens after the raid");
+        }
+
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
-            Keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain) : KeepMenu.None,
+            Keep = keep,
         };
     }
 
     /// <summary>
     /// The optional <c>keep</c> object (issue 82): the keep's <c>map</c> id under <c>content/keep</c>
     /// and its <c>edits</c>, each an <c>id</c>, <c>name</c>, <c>terrain</c> id, <c>price</c> of at least 1
-    /// and a non-empty <c>at</c> list of <c>x,y</c> tiles. Whoever loads the map checks the tiles against it.
+    /// and a non-empty <c>at</c> list of <c>x,y</c> tiles; and an optional <c>raid</c>, the raid's map id
+    /// under <c>content/keep</c> (issue 288). Whoever loads the map checks the tiles against it.
     /// </summary>
     private static KeepMenu ParseKeep(EntryNode node, ImmutableSortedDictionary<string, Terrain> terrain)
     {
@@ -225,7 +233,13 @@ public static class ContentLoader
             edits.Add(new KeepEdit(id, entry.String("name"), terrainId, price, ValueList<Coord>.From(tiles)));
         }
 
-        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits));
+        var raid = node.OptionalString("raid") ?? "";
+        if (raid == mapId)
+        {
+            throw node.Error("raid", "must name a map other than the keep");
+        }
+
+        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits)) { RaidId = raid };
     }
 
     /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>

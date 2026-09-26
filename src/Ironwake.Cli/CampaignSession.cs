@@ -8,7 +8,7 @@ namespace Ironwake.Cli;
 /// <c>ironwake campaign</c> (issue 74, DESIGN section 9): the maps of <c>campaign.json</c> in
 /// order, each preceded by the between-map screen, text only. The screen reads the roster, the
 /// shop and the next map's deployment, and takes the actions of <see cref="CampaignRecord"/>:
-/// buy, repair, certify, trial, bench and unbench; <c>march</c> starts the battle, which plays as
+/// buy, repair, certify, trial, build (the keep's menu, after the raid on it; issue 288), bench and unbench; <c>march</c> starts the battle, which plays as
 /// <c>play</c> does until <c>leave</c> after it is decided. A won battle returns to the screen
 /// with the reward paid and the fallen gone; a lost one ends the campaign. The same script
 /// grammar and <c>--strict</c> as <c>play</c>, one script for the whole campaign.
@@ -27,6 +27,8 @@ public sealed class CampaignSession
           classes [unit]           what each class asks to certify into it, and what the unit still lacks
           certify <unit> <class>   change class, paying a seal from the purse
           trial <unit> <class>     try the class's certification trial instead of a seal; one attempt per camp
+          keep                     the keep's menu once the raid is fought: each placement, its price and what it does
+          build <edit> <x,y>       buy one edit of the keep's menu at one of its placements
           bench <unit>             keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           return a benched unit to the deployment order
           record                   the campaign record as one JSON line (the protocol's campaign shape)
@@ -179,6 +181,12 @@ public sealed class CampaignSession
                 break;
             }
 
+            if (_record.NextMap(_content).MapId == _content.Campaign.Keep.MapId)
+            {
+                // The keep is rebuilt after the screen, so an edit bought on it stands in this battle.
+                map = LoadMap(_content.Campaign.Keep.MapId);
+            }
+
             _out.WriteLine($"map {_record.MapIndex + 1} of {_content.Campaign.Maps.Count}: {map.Name}, seed {_record.BattleSeed}");
             var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), _out, _scripted, _line);
             _out.Write(MapRenderer.Render(battle.State, _content));
@@ -223,7 +231,18 @@ public sealed class CampaignSession
         return stopped ? PlaySession.StrictStop : code;
     }
 
-    private MapDefinition LoadMap(string mapId) => MapFiles.Load(Path.Combine(_contentDir, "maps", mapId + ".map"), _content);
+    /// <summary>
+    /// The campaign map <paramref name="mapId"/>: the keep and its raid from <c>content/keep</c>, the
+    /// keep with every edit the record holds made (issue 288), every other map from <c>content/maps</c>.
+    /// </summary>
+    private MapDefinition LoadMap(string mapId)
+    {
+        var map = MapFiles.Load(MapFiles.CampaignPath(_contentDir, _content, mapId), _content);
+        return mapId == _content.Campaign.Keep.MapId ? _record.KeepMap(map, _content) : map;
+    }
+
+    private MapDefinition LoadBareKeep() =>
+        MapFiles.Load(MapFiles.CampaignPath(_contentDir, _content, _content.Campaign.Keep.MapId), _content);
 
     private MapDefinition LoadTrial(string mapId) => MapFiles.Load(Path.Combine(_contentDir, "trials", mapId + ".map"), _content);
 
@@ -287,6 +306,11 @@ public sealed class CampaignSession
         PrintRoster();
         PrintShop();
         PrintDeployment(map);
+        if (_record.KeepMenuRefusal(_content) is null)
+        {
+            PrintKeep();
+        }
+
         while (input.ReadLine() is { } line)
         {
             _line++;
@@ -374,6 +398,31 @@ public sealed class CampaignSession
                 break;
             case ["certify", var unitId, var classId]:
                 Take(_record.Certify(unitId, classId, _content), text);
+                break;
+            case ["keep"]:
+                if (_record.KeepMenuRefusal(_content) is { } closed)
+                {
+                    Error(text, closed);
+                }
+                else
+                {
+                    PrintKeep();
+                }
+
+                break;
+            case ["build", var editId, var atText] when TryParseCoord(atText, out var at):
+                try
+                {
+                    Take(_record.Build(editId, at, LoadBareKeep(), _content), text);
+                }
+                catch (MapException e)
+                {
+                    Error(text, e.Message);
+                }
+
+                break;
+            case ["build", ..]:
+                Error(text, "usage: build <edit> <x,y>");
                 break;
             case ["bench", var unitId]:
                 if (Take(_record.Bench(unitId, map), text))
@@ -465,6 +514,52 @@ public sealed class CampaignSession
 
             _out.WriteLine(line);
         }
+    }
+
+    /// <summary>
+    /// The keep's menu (issue 288): what is built, then every edit with its price and, for each of
+    /// its placements, what the edit does there in rules terms on the keep the record holds, or that
+    /// it is built or refused.
+    /// </summary>
+    private void PrintKeep()
+    {
+        MapDefinition keep;
+        try
+        {
+            keep = _record.KeepMap(LoadBareKeep(), _content);
+        }
+        catch (MapException e)
+        {
+            _out.WriteLine("ERROR: " + e.Message);
+            return;
+        }
+
+        _out.WriteLine($"keep: {keep.Name}; built: {(_record.Keep.Count == 0 ? "nothing" : string.Join(", ", _record.Keep))}; the purse holds {_record.Purse}");
+        foreach (var edit in _content.Campaign.Keep.Edits)
+        {
+            _out.WriteLine($"  {edit.Id}: {edit.Name}, {edit.Price}");
+            foreach (var at in edit.At)
+            {
+                _out.WriteLine(_record.Keep.Contains(new KeepWork(edit.Id, at))
+                    ? $"    {edit.Id} {at}: built"
+                    : Keep.Refusal(keep, edit, at) is { } refusal
+                        ? $"    {edit.Id} {at}: {refusal}"
+                        : "    " + Keep.Describe(keep, edit, at, _content));
+            }
+        }
+    }
+
+    private static bool TryParseCoord(string text, out Coord at)
+    {
+        var parts = text.Split(',');
+        if (parts.Length == 2 && int.TryParse(parts[0], out var x) && int.TryParse(parts[1], out var y))
+        {
+            at = new Coord(x, y);
+            return true;
+        }
+
+        at = default;
+        return false;
     }
 
     private void PrintRoster()

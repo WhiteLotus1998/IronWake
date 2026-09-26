@@ -7,7 +7,8 @@ namespace Ironwake.Sim;
 /// <summary>
 /// Headless harness. Runs the quality gates from DESIGN.md section 11.
 /// --smoke runs the per-PR gates over every map under content/maps; --full runs the
-/// per-map gates (1-4) on one map or on all of them, with gates 5-8 re-run on that map,
+/// per-map gates (1-4) on one map or on all of them, with gates 5-8 re-run on that map
+/// (one map may be the keep or its raid under content/keep, issue 288),
 /// and exits non-zero on any failed gate. Gate 5 (forecast honesty) tallies every combat
 /// of gate 6's random stream against the forecast asked before it. The player's roster
 /// is the content's cast (units/cast.json, issue 13).
@@ -164,6 +165,11 @@ public static class Program
 
         var content = ContentLoader.Load(contentDir);
         var maps = MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0 && content.Campaign.Keep.IsKeepMap(mapId))
+        {
+            maps.Add((mapId, MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content)));
+        }
+
         if (maps.Count == 0)
         {
             Console.WriteLine($"trace: no map '{mapId}' under {contentDir}");
@@ -259,6 +265,11 @@ public static class Program
         var content = ContentLoader.Load(contentDir);
         var all = MapFiles.LoadAll(contentDir, content);
         var maps = mapId == "--all" ? all : all.Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0 && content.Campaign.Keep.IsKeepMap(mapId))
+        {
+            maps = new[] { (mapId, MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content)) };
+        }
+
         if (maps.Count == 0)
         {
             Console.WriteLine($"full: no map '{mapId}' under {contentDir}; maps are {string.Join(", ", all.Select(m => m.Id))}");
