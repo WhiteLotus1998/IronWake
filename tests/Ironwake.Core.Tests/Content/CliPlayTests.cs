@@ -45,7 +45,7 @@ public class CliPlayTests
         var output = Play(out _, "item captain 2\nmove captain 2,6\nend\nend\nitem captain 2\nshow captain\nhelp\n");
 
         Assert.Contains("> item captain 2\nERROR: captain is at full HP\n", output);
-        Assert.Contains("> item captain 2\ncaptain uses field_dressing (0 left)\ncaptain heals 10 (hp 22)\n", output);
+        Assert.Contains("> item captain 2\ncaptain uses Field Dressing (0 left)\ncaptain heals 10 (hp 22)\n", output);
         Assert.Contains("  items: 1: Iron Sword x38\n", output);
         Assert.Contains("slots count from 1", output);
         Assert.Contains("--strict stops at the first", output);
@@ -360,7 +360,7 @@ public class CliPlayTests
         Assert.Contains("  items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
         Assert.Contains("  ranks: sword E (0), lance E (0), axe E (0)\n", Play(out _, "show captain\n", "139"));
         Assert.Contains("mill_bandit-1 falls at 6,1", output);
-        Assert.DoesNotContain("uses field_dressing", output);
+        Assert.DoesNotContain("uses Field Dressing", output);
     }
 
     /// <summary>
@@ -433,9 +433,9 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
-        Assert.Contains("teodor falls at 8,7\nteodor's iron_lance lies at 8,7\n", output);
-        Assert.Contains("keepsakes: teodor's iron_lance at 8,7\n", output);
-        Assert.Contains("dunstan recovers teodor's iron_lance\n", output);
+        Assert.Contains("teodor falls at 8,7\nIron Lance (Teodor's) lies at 8,7\n", output);
+        Assert.Contains("keepsakes: Iron Lance (Teodor's) at 8,7\n", output);
+        Assert.Contains("dunstan recovers Iron Lance (Teodor's)\n", output);
         Assert.Contains("  items: 1: Iron Lance x39, 2: Iron Lance (Teodor's) x37\n", output);
     }
 
@@ -457,7 +457,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("teodor moves 1,2 -> 3,1 via 2,2 3,2\nevent sluice\n  4,1 becomes road\n", output);
+        Assert.Contains("teodor moves 1,2 -> 3,1 via 2,2 3,2\nevent sluice\n  4,1 becomes Road\n", output);
         Assert.Contains("-- enemy phase, turn 3 --\nevent reinforce\n  brigand-1 arrives at 9,0, group east, aggressive\n", output);
         Assert.Contains("brigand-1 moves 9,0 -> 5,0", output);
         Assert.Equal(1, CountOf(output, "event reinforce"));
@@ -970,7 +970,7 @@ public class SimFullTests
             Assert.Equal(0, exit);
             Assert.DoesNotContain("rejected ", output);
             Assert.DoesNotContain("strict: stopped", output);
-            Assert.Contains("> item wren 2\nwren uses field_dressing", output);
+            Assert.Contains("> item wren 2\nwren uses Field Dressing", output);
             Assert.Contains($"turn {turn} of ", output);
             Assert.DoesNotContain($"turn {turn + 1} of ", output);
             Assert.EndsWith($"battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);

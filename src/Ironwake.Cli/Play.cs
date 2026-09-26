@@ -563,7 +563,7 @@ public sealed class PlaySession
         _state = result.Next;
         foreach (var e in result.Events)
         {
-            _out.WriteLine(Describe(e));
+            _out.WriteLine(Describe(e, _content));
         }
 
         if (after is not null)
@@ -656,7 +656,7 @@ public sealed class PlaySession
             _state = result.Next;
             foreach (var e in result.Events)
             {
-                _out.WriteLine(Describe(e));
+                _out.WriteLine(Describe(e, _content));
                 if (e is CombatFought fought)
                 {
                     foreach (var entry in _exposure.Where(x => x.UnitId == fought.TargetId && x.Turn == fought.Turn))
@@ -1175,8 +1175,7 @@ public sealed class PlaySession
         return $"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
     }
 
-    private string Named(string itemId) =>
-        _content.Items.TryGetValue(itemId, out var item) ? item.Name : _content.Weapon(itemId).Name;
+    private string Named(string itemId) => _content.ItemName(itemId);
 
     private BattleUnit? Find(string id)
     {
@@ -1226,8 +1225,12 @@ public sealed class PlaySession
         _ => command.ToString() ?? "?",
     };
 
-    /// <summary>One line per event, the words a transcript reader sees.</summary>
-    public static string Describe(GameEvent e)
+    /// <summary>
+    /// One line per event, the words a transcript reader sees. Items, weapons, abilities, classes
+    /// and terrain print their display names from <paramref name="content"/>; units keep their ids,
+    /// the handles a command types.
+    /// </summary>
+    public static string Describe(GameEvent e, GameContent content)
     {
         switch (e)
         {
@@ -1254,7 +1257,7 @@ public sealed class PlaySession
             case RankRaised k:
                 return $"{k.UnitId} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
             case MasteryEarned m:
-                return $"{m.UnitId} masters the {m.ClassId} class and keeps {m.AbilityId}";
+                return $"{m.UnitId} masters the {ClassName(m.ClassId, content)} class and keeps {AbilityName(m.AbilityId, content)}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
             case UnitExited x:
@@ -1262,9 +1265,9 @@ public sealed class PlaySession
             case UnitLeftBehind b:
                 return $"{b.UnitId} is left behind at {b.At}";
             case KeepsakeLeft k:
-                return $"{k.FallenId}'s {k.ItemId} lies at {k.At}";
+                return $"{Keepsake.Name(k.ItemId, k.FallenId, content)} lies at {k.At}";
             case KeepsakeRecovered k:
-                return $"{k.UnitId} recovers {k.FallenId}'s {k.ItemId}";
+                return $"{k.UnitId} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case Cantoed c:
                 return c.From == c.To
                     ? $"{c.UnitId} stays at {c.To} (canto)"
@@ -1282,7 +1285,7 @@ public sealed class PlaySession
             case MapEventFired m:
                 return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
             case TerrainChanged t:
-                return $"  {t.At} becomes {t.TerrainId}";
+                return $"  {t.At} becomes {(content.Terrain.TryGetValue(t.TerrainId, out var terrain) ? terrain.Name : t.TerrainId)}";
             case UnitSpawned u:
                 return $"  {u.UnitId} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
             case FlagSet f:
@@ -1294,19 +1297,25 @@ public sealed class PlaySession
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:
-                return $"{i.UnitId} uses {i.ItemId}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
+                return $"{i.UnitId} uses {content.ItemName(i.ItemId)}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
             case WeaponEquipped w:
-                return $"{w.UnitId} equips {w.ItemId}";
+                return $"{w.UnitId} equips {content.ItemName(w.ItemId)}";
             case ArtDeclared a:
-                return $"{a.UnitId} declares {a.ArtId} with {a.ItemId}, spending {a.Cost} extra uses";
+                return $"{a.UnitId} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra uses";
             case WeaponBroke b:
-                return $"{b.UnitId}'s {b.ItemId} breaks";
+                return $"{b.UnitId}'s {content.ItemName(b.ItemId)} breaks";
             case SpellSpent s:
-                return $"{s.UnitId}'s {s.ItemId} is spent for this battle";
+                return $"{s.UnitId}'s {content.ItemName(s.ItemId)} is spent for this battle";
             default:
                 return e.ToString() ?? "?";
         }
     }
+
+    private static string AbilityName(string id, GameContent content) =>
+        content.Abilities.TryGetValue(id, out var ability) ? ability.Name : id;
+
+    private static string ClassName(string id, GameContent content) =>
+        content.Classes.TryGetValue(id, out var unitClass) ? unitClass.Name : id;
 }
 
 /// <summary>One recruit that ended a threatened player phase beside a rival (issues 16 and 209), and whether the enemy phase after struck it.</summary>

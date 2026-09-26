@@ -329,8 +329,8 @@ public class RivalryTests
         Assert.Equal(Starter.Rivalry.OverwriteAt, rivals.OutOf);
         Assert.Null(oneRegion.OutOf);
         Assert.Null(cured.OutOf);
-        Assert.Equal($"rapport ivo and wren +{rivals.Amount} ({rivals.Total} of {Starter.Rivalry.OverwriteAt})", PlaySession.Describe(rivals));
-        Assert.Equal($"rapport ivo and wren +{oneRegion.Amount} ({oneRegion.Total})", PlaySession.Describe(oneRegion));
+        Assert.Equal($"rapport ivo and wren +{rivals.Amount} ({rivals.Total} of {Starter.Rivalry.OverwriteAt})", PlaySession.Describe(rivals, Starter));
+        Assert.Equal($"rapport ivo and wren +{oneRegion.Amount} ({oneRegion.Total})", PlaySession.Describe(oneRegion, Starter));
     }
 
     [Fact]

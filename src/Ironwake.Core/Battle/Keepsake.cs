@@ -41,5 +41,15 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
     /// name, or the id when the fallen is not in the cast; empty for an ordinary stack.
     /// </summary>
     public static string Suffix(ItemStack stack, GameContent content) =>
-        stack.Keepsake is not { } id ? "" : $" ({content.Cast.FirstOrDefault(u => u.Id == id)?.Name ?? id}'s)";
+        stack.Keepsake is not { } id ? "" : Owner(id, content);
+
+    /// <summary>
+    /// The display form of a keepsake wherever the console names it: <c>Iron Sword (Wren's)</c>,
+    /// the weapon's name and then the fallen's cast name, as <see cref="Suffix"/> reads in a roster.
+    /// </summary>
+    public static string Name(string itemId, string fallenId, GameContent content) =>
+        content.ItemName(itemId) + Owner(fallenId, content);
+
+    private static string Owner(string fallenId, GameContent content) =>
+        $" ({content.Cast.FirstOrDefault(u => u.Id == fallenId)?.Name ?? fallenId}'s)";
 }

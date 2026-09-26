@@ -1318,7 +1318,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses field_dressing (2 left)
+wren uses Field Dressing (2 left)
 wren heals 9 (hp 21)
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
@@ -1710,7 +1710,7 @@ e  wingrider-1      Wingrider L2 skyrider      10,4   hp 4/17   Plain  group for
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > attack pell wingrider-1 2
 forecast pell -> wingrider-1: dmg 16 hit 100% crit 6%; counter: none
-pell equips gust
+pell equips Gust
 pell attacks wingrider-1
   pell hits wingrider-1 for 16 (hp 0)
   pell hp 16, wingrider-1 hp 0
@@ -1759,7 +1759,7 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 10/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > item teodor 2
-teodor uses field_dressing (2 left)
+teodor uses Field Dressing (2 left)
 teodor heals 10 (hp 20)
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
@@ -1947,7 +1947,7 @@ wren attacks archer-1
   wren hp 21, archer-1 hp 0
 wren gains 30 exp (22)
 wren reaches level 3: hp +1 dex +1 spd +1 res +1 cha +1
-wren masters the cadet class and keeps fundamentals
+wren masters the Cadet class and keeps Fundamentals
 archer-1 falls at 8,5
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
@@ -1968,7 +1968,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L3 cadet              7,5    hp 22/22  Plain  done
 > item teodor 2
-teodor uses field_dressing (1 left)
+teodor uses Field Dressing (1 left)
 teodor heals 6 (hp 21)
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
@@ -2568,7 +2568,7 @@ B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 bandit_leader-1 heals 5 (hp 21)
 enemy: attack bandit_leader-1 pell 2
 forecast bandit_leader-1 -> pell: dmg 14 hit 58% crit 0%; counter: dmg 10 hit 97% crit 6%
-bandit_leader-1 equips toll_axe
+bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks pell
   bandit_leader-1 misses pell
   pell hits bandit_leader-1 for 10 (hp 11)
@@ -2601,7 +2601,7 @@ pell attacks bandit_leader-1
   pell hits bandit_leader-1 for 10 (hp 1)
   bandit_leader-1 hits pell for 14 (hp 3)
   pell hp 3, bandit_leader-1 hp 1
-pell's gust is spent for this battle
+pell's Gust is spent for this battle
 pell gains 12 exp (53)
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
    01234567890123

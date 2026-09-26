@@ -172,7 +172,7 @@ public class WeaponRankTests
     [Fact]
     public void TheConsoleNamesARankRaised()
     {
-        Assert.Equal("wren reaches rank D in sword", Ironwake.Cli.PlaySession.Describe(new RankRaised("wren", WeaponType.Sword, WeaponRank.D)));
+        Assert.Equal("wren reaches rank D in sword", Ironwake.Cli.PlaySession.Describe(new RankRaised("wren", WeaponType.Sword, WeaponRank.D), Starter));
     }
 
     private static GameContent WithRank(string weaponId, WeaponRank rank) =>

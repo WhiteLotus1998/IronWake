@@ -278,7 +278,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses field_dressing (2 left)
+wren uses Field Dressing (2 left)
 wren heals 10 (hp 13)
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
