@@ -5,7 +5,7 @@ certification trial: captain plays as Outrider with iron_lance, iron_sword
   event: east_lever enter 4,2 terrain 4,1 =
 Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
    0123456
- 0 .......
+ 0 >>>>>>>
  1 #######
  2 .......
  3 ..^^...
@@ -13,10 +13,11 @@ Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
  5 ...A...
 
 A  captain          Alder Fenn L1 outrider     3,5    hp 23/23  Plain  captain
+exits (>): 0,0 1,0 2,0 3,0 4,0 5,0 6,0 (every living unit on an exit wins)
 > reach captain
 Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
    0123456
- 0 .......
+ 0 >>>>>>>
  1 #######
  2 *******
  3 *******
@@ -24,6 +25,7 @@ Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
  5 ***A***
 
 A  captain          Alder Fenn L1 outrider     3,5    hp 23/23  Plain  captain
+exits (>): 0,0 1,0 2,0 3,0 4,0 5,0 6,0 (every living unit on an exit wins)
 *  reach from 3,5: 27 tiles
 > move captain 4,2
 captain moves 3,5 -> 4,2 via 3,4 4,4 4,3
@@ -31,7 +33,7 @@ event east_lever
   4,1 becomes road
 Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
    0123456
- 0 .......
+ 0 >>>>>>>
  1 ####=##
  2 ....A..
  3 ..^^...
@@ -39,12 +41,13 @@ Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
  5 .......
 
 A  captain          Alder Fenn L1 outrider     4,2    hp 23/23  Plain  captain
+exits (>): 0,0 1,0 2,0 3,0 4,0 5,0 6,0 (every living unit on an exit wins)
 > wait captain
 captain waits
 captain may canto up to 2 movement: canto captain <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
    0123456
- 0 .......
+ 0 >>>>>>>
  1 ####=##
  2 ....A..
  3 ..^^...
@@ -52,11 +55,12 @@ Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
  5 .......
 
 A  captain          Alder Fenn L1 outrider     4,2    hp 23/23  Plain  captain  canto 2
+exits (>): 0,0 1,0 2,0 3,0 4,0 5,0 6,0 (every living unit on an exit wins)
 > canto captain 4,0
 captain cantos 4,2 -> 4,0 via 4,1
 Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
    0123456
- 0 ....A..
+ 0 >>>>A>>
  1 ####=##
  2 .......
  3 ..^^...
@@ -64,6 +68,7 @@ Trial of the Outrider  turn 1 of 1  player phase  escape  recall 0
  5 .......
 
 A  captain          Alder Fenn L1 outrider     4,0    hp 23/23  Plain  captain  done
+exits (>): 0,0 1,0 2,0 3,0 4,0 5,0 6,0 (every living unit on an exit wins)
 battle won: escape; only recall is left
 battle won: escape
 certification: captain earned Outrider

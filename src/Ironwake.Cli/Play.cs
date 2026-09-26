@@ -994,7 +994,8 @@ public sealed class PlaySession
     {
         var stats = _content.StatsOf(unit.Unit);
         _out.WriteLine($"{unit.Id}: {unit.Unit.Name}, {_content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {_state.Map.TerrainAt(unit.At, _content).Label(stats.Hp)}");
-        _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}");
+        var unitClass = _content.Class(unit.Unit.ClassId);
+        _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}  mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
         _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)} x{item.Uses}");
         _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
