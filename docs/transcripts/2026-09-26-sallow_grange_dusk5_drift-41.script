@@ -1,0 +1,133 @@
+move ansgar 4,9
+wait ansgar
+move ottilie 3,7
+wait ottilie
+move pell 3,6
+wait pell
+move captain 4,6
+wait captain
+move wren 4,5
+wait wren
+move teodor 3,5
+wait teodor
+end
+recall 0
+move ansgar 1,9
+wait ansgar
+wait ottilie
+wait pell
+wait captain
+wait wren
+wait teodor
+end
+move captain 5,6
+wait captain
+move teodor 3,6
+wait teodor
+move wren 2,7
+wait wren
+move pell 3,7
+wait pell
+move ottilie 3,8
+wait ottilie
+move ansgar 6,9
+wait ansgar
+end
+move captain 7,6
+wait captain
+move teodor 6,5
+wait teodor
+move wren 5,6
+wait wren
+move pell 6,7
+wait pell
+move ottilie 6,8
+wait ottilie
+move ansgar 7,8
+wait ansgar
+canto ansgar stay
+end
+move teodor 7,5
+wait teodor
+wait captain
+wait wren
+wait pell
+wait ottilie
+wait ansgar
+end
+move pell 8,7
+attack pell soldier-1
+move ottilie 6,5
+attack ottilie soldier-1
+attack teodor soldier-1
+move captain 9,6
+wait captain
+move wren 8,6
+wait wren
+move ansgar 9,7
+wait ansgar
+canto ansgar stay
+end
+move wren 10,6
+wait wren
+move captain 9,5
+wait captain
+move teodor 8,5
+wait teodor
+move ottilie 8,6
+wait ottilie
+wait pell
+wait ansgar
+canto ansgar stay
+end
+move wren 11,6
+attack wren archer-2
+move pell 10,6
+attack pell archer-2
+move ottilie 9,6
+wait ottilie
+move captain 10,5
+wait captain
+wait teodor
+wait ansgar
+canto ansgar stay
+end
+attack pell grange_reeve-1
+move ottilie 11,5
+attack ottilie grange_reeve-1
+move captain 12,5
+wait captain
+move wren 10,7
+wait wren
+move teodor 11,6
+wait teodor
+move ansgar 12,4
+wait ansgar
+canto ansgar stay
+end
+move ansgar 16,5
+forecast ansgar brawler-1
+forecast pell brawler-1 from 14,6
+forecast ottilie brawler-1 from 15,5
+forecast captain brawler-1 from 15,6
+forecast teodor brawler-1 from 15,6
+move pell 14,6
+attack pell brawler-1
+move ottilie 15,5
+attack ottilie brawler-1
+move captain 15,6
+attack captain brawler-1
+recall 158
+move ansgar 16,5
+wait ansgar
+move pell 14,6
+attack pell brawler-1
+move ottilie 15,5
+attack ottilie brawler-1
+canto ansgar 16,4
+move captain 14,5
+wait captain
+wait teodor
+wait wren
+end
+move captain 16,6

@@ -515,38 +515,49 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 317: Sallow Grange at <c>dusk: 5</c> with the field group Aggressive. Knowing of
-    /// nobody, it leaves 7,5 7,6 8,6 for the throne on enemy phase 1 and stops in the wall's
-    /// gap; on enemy phase 2 the archer takes the throne at 16,6, and the two in the gap wait
-    /// behind it, since the only objective tile is held.
+    /// Issues 317 and 321: Sallow Grange at <c>dusk: 5</c> with the field group Aggressive,
+    /// the brawler at 8,6 and the archer at 7,6 (fifty-second round). Knowing of nobody after
+    /// the turn 1 Recall, it leaves 7,5 7,6 8,6 for the throne on enemy phase 1 and stops in
+    /// the wall's gap; on enemy phase 2 the brawler takes the throne at 16,6, and the archer,
+    /// the only objective tile held, stops short at 14,6.
     /// </summary>
     [Fact]
     public void TheAggressiveFieldGroupDriftsToTheThroneInTheDark()
     {
-        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-29.script", 29, out var exit);
+        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-41.script", 41, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("unseen at 4,2 12,2 7,5 7,6 8,6 15,6 13,7\n", output);
-        Assert.Contains("-- player phase, turn 2 --", output);
-        var turnTwo = output[output.IndexOf("-- player phase, turn 2 --", StringComparison.Ordinal)..];
-        Assert.Contains("unseen at 4,2 12,2 11,5 11,6 12,6 15,6 13,7\n", turnTwo);
+        Assert.Contains("unseen at 4,2 12,2 11,5 11,6 12,6 15,6 13,7\n", output);
         var turnThree = output[output.IndexOf("-- player phase, turn 3 --", StringComparison.Ordinal)..];
-        Assert.Contains("unseen at 4,2 12,2 11,5 11,6 15,6 16,6 13,7\n", turnThree);
+        Assert.Contains("unseen at 4,2 12,2 11,5 14,6 15,6 16,6 13,7\n", turnThree);
     }
 
     /// <summary>
-    /// Issue 317: Code's play of the Seize drift sample on seed 29. Teodor and Wren bait the
-    /// two in the gap out on enemy phase 4, they die at sight 1 on turn 5, the drifted archer
-    /// leaves the throne to stand beside the woken Reeve, and the captain seizes on turn 9.
+    /// Issue 321: Code's replay of Chat's seed 41 line on the brawler placement, played on by
+    /// hand once it diverged. The brawler holds the throne through enemy phases 3 to 8, since
+    /// it can strike nobody; on enemy phase 9, with Pell on the ring at range 2, it steps off
+    /// to 15,6 to kill her, and the captain walks onto the empty throne on turn 10.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptSeizesTheDriftSample()
+    public void TheSeatedBrawlerStepsOffOnlyToStrikeAndTheCaptainSeizes()
     {
-        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-29.script", 29, out var exit);
+        var output = RunSample("sallow_grange_dusk5_drift.map", "2026-09-26-sallow_grange_dusk5_drift-41.script", 41, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("brawler-1 moves 11,6 -> 8,6 via 10,6 9,6\n", output);
-        Assert.Contains("grange_reeve-1 falls at 13,6\n", output);
+        string Between(string from, string to) =>
+            output[output.IndexOf(from, StringComparison.Ordinal)..output.IndexOf(to, StringComparison.Ordinal)];
+        IEnumerable<string> Lines(string text, string prefix) =>
+            text.Split('\n').Where(line => line.StartsWith(prefix, StringComparison.Ordinal));
+
+        var unseen = Lines(Between("-- player phase, turn 3 --", "-- player phase, turn 9 --"), "?  unseen at ").ToList();
+        var spotted = Lines(Between("-- player phase, turn 9 --", "-- enemy phase, turn 9 --"), "c  brawler-1 ").ToList();
+        Assert.NotEmpty(unseen);
+        Assert.NotEmpty(spotted);
+        Assert.All(unseen, line => Assert.Contains(" 16,6 ", line));
+        Assert.All(spotted, line => Assert.Contains(" 16,6 ", line));
+        Assert.Contains("brawler-1 moves 16,6 -> 15,6\nenemy: attack brawler-1 pell\n", output);
+        Assert.Contains("pell falls at 14,6\n", output);
         Assert.EndsWith("battle won: seize\n", output);
     }
 

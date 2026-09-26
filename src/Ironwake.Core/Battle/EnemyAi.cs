@@ -67,8 +67,8 @@ public static class EnemyAi
     /// <summary>
     /// One enemy's commands on the board as it stands: a <see cref="Retreat"/> first when
     /// <see cref="RetreatRule"/> says the unit falls back (issue 33); else the best-scoring attack from the
-    /// best tile if any tile allows one, else the approach rule for an Aggressive unit,
-    /// else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
+    /// best tile if any tile allows one, else the approach rule for an Aggressive unit
+    /// not holding a Seize throne (<see cref="HoldsTheThrone"/>, issue 321), else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
     /// On a dusk map (DESIGN.md 13.7, issue 302) both the attack and the approach range only
     /// over the player units the enemy knows of (<see cref="Dusk.Knows"/>): those its side
     /// sees and those within hearing of it. One that knows of nobody and may move makes for
@@ -109,7 +109,7 @@ public static class EnemyAi
                 : new Command[] { new Move(unit.Id, best.Tile), attack };
         }
 
-        if (!mayMove)
+        if (!mayMove || HoldsTheThrone(state, unit))
         {
             return new Command[] { new Wait(unit.Id) };
         }
@@ -121,6 +121,17 @@ public static class EnemyAi
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
     }
+
+    /// <summary>
+    /// The throne-holder rule (issue 321, DESIGN.md section 8): an enemy standing on a
+    /// Seize map's throne at the start of its action leaves it only to strike this phase.
+    /// <see cref="PlanUnit"/> reads it after the attack options, so a holder with a strike
+    /// from any reachable tile still moves and strikes, and one without Waits on the throne
+    /// instead of approaching or drifting. Strikes are untouched, so <c>threat</c> and the
+    /// exposure sum, which count only strikes, already agree with it.
+    /// </summary>
+    public static bool HoldsTheThrone(BattleState state, BattleUnit unit) =>
+        unit.Side == Side.Enemy && state.Map.Win == WinCondition.Seize && state.Map.IsThrone(unit.At);
 
     /// <summary>
     /// The attack <paramref name="unit"/> would make on <paramref name="target"/> if the
