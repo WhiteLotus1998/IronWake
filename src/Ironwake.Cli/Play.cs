@@ -635,7 +635,7 @@ public sealed class PlaySession
             {
                 var hidden = Resolve(command);
                 _state = hidden.Next;
-                _out.WriteLine("enemy: something moves in the dark");
+                _out.WriteLine("enemy: something in the dark acts");
                 foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
                 {
                     _out.WriteLine(Describe(e, _content));

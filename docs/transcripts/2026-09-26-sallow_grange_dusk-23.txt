@@ -397,9 +397,9 @@ enemy: wait archer-2
 archer-2 waits
 enemy: wait brawler-1
 brawler-1 waits
-enemy: something moves in the dark
-enemy: something moves in the dark
-enemy: something moves in the dark
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
 enemy: wait soldier-1
 soldier-1 waits
 enemy: end
@@ -869,7 +869,7 @@ enemy: wait grange_reeve-1
 grange_reeve-1 waits
 enemy: wait hexer-1
 hexer-1 waits
-enemy: something moves in the dark
+enemy: something in the dark acts
 enemy: move soldier-1 7,6
 soldier-1 moves 7,5 -> 7,6
 enemy: attack soldier-1 ottilie
@@ -1962,7 +1962,7 @@ dusk: sight 5, 4 next turn; 1 unseen (?); no side strikes what it cannot see
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
-enemy: something moves in the dark
+enemy: something in the dark acts
 enemy: move grange_reeve-1 14,7
 grange_reeve-1 moves 15,6 -> 14,7 via 14,6
 enemy: attack grange_reeve-1 wren 2
@@ -2276,8 +2276,8 @@ dusk: sight 4, 3 next turn; 2 unseen (?); no side strikes what it cannot see
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
-enemy: something moves in the dark
-enemy: something moves in the dark
+enemy: something in the dark acts
+enemy: something in the dark acts
 enemy: end
 -- enemy phase ends, turn 6 --
 -- player phase, turn 7 --
