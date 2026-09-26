@@ -10,14 +10,15 @@ public class SampleMapsTests
         MapFiles.LoadAll(Fixture.RealContentDirectory(), MapFixture.Content);
 
     [Fact]
-    public void TheFiveShippedMapsLoad()
+    public void TheSixShippedMapsLoad()
     {
         var maps = All();
 
-        Assert.Equal(new[] { "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
-        Assert.Equal(WinCondition.Seize, maps[4].Map.Win);
-        Assert.Equal(WinCondition.Seize, maps[2].Map.Win);
-        Assert.Equal(WinCondition.DefeatBoss, maps[0].Map.Win);
+        Assert.Equal(new[] { "brackwater_cut", "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "the_tollgate" }, maps.Select(m => m.Id));
+        Assert.Equal(WinCondition.Seize, maps[5].Map.Win);
+        Assert.Equal(WinCondition.Seize, maps[3].Map.Win);
+        Assert.Equal(WinCondition.DefeatBoss, maps[1].Map.Win);
+        Assert.Equal(WinCondition.Escape, maps[0].Map.Win);
     }
 
     /// <summary>
@@ -66,9 +67,11 @@ public class SampleMapsTests
     /// The thirty-sixth round: maps 4 to 8 each owe one enemy that fights with gauntlets and one
     /// at Def 7 or more, read as the map fields them (class and level included). Harrow Weir's
     /// brawler and its boss carry gauntlets and its bridge shieldbearer stands at Def 7 or more;
-    /// Sallow Grange's field brawler carries gauntlets and its north gate shieldbearer is the wall.
+    /// Sallow Grange's field brawler carries gauntlets and its north gate shieldbearer is the wall;
+    /// Brackwater Cut's bank fields both, a gauntlet brawler and a shieldbearer before the exits.
     /// </summary>
     [Theory]
+    [InlineData("brackwater_cut")]
     [InlineData("harrow_weir")]
     [InlineData("sallow_grange")]
     public void MapsFromFourFieldAGauntletEnemyAndOneAtDefSevenOrMore(string id)
@@ -79,6 +82,84 @@ public class SampleMapsTests
 
         Assert.Contains(enemies, e => e.Unit.Inventory.Items.Any(i => content.Weapons.TryGetValue(i.ItemId, out var w) && w.Type == WeaponType.Gauntlet));
         Assert.Contains(enemies, e => content.StatsOf(e.Unit).Def >= 7);
+    }
+
+    /// <summary>
+    /// Issue 80: the corridor is one tile. Column 11 of Brackwater Cut is wall or water on every
+    /// row but the gap at 11,3, so every ground unit crosses there, and the water at both ends is
+    /// the flyer's only other way through, since a wall blocks flyers too (section 4).
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutCrossesColumnElevenOnlyAtTheGapOrOverWater()
+    {
+        var map = All().Single(m => m.Id == "brackwater_cut").Map;
+
+        for (var y = 0; y < map.Height; y++)
+        {
+            var terrain = map.TerrainIdAt(new Coord(11, y));
+            if (y == 3)
+            {
+                Assert.Equal("plain", terrain);
+            }
+            else if (y is 0 or 10 or 11)
+            {
+                Assert.Equal("water", terrain);
+            }
+            else if (y == 1)
+            {
+                Assert.Equal("fort", terrain);
+            }
+            else
+            {
+                Assert.Equal("wall", terrain);
+            }
+        }
+
+        foreach (var flank in new[] { new Coord(10, 1), new Coord(12, 1), new Coord(10, 10), new Coord(12, 10) })
+        {
+            Assert.Equal("water", map.TerrainIdAt(flank));
+        }
+    }
+
+    /// <summary>
+    /// Issue 80: a bow the blocker cannot answer. A Hold archer stands on the fort island at 11,1,
+    /// water on three sides and wall on the fourth, exactly two from the gap, so a unit holding
+    /// 11,3 is under a range-2 bow; only a flyer reaches it in melee.
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutIslandArcherCoversTheGapFromWhereOnlyAFlyerReachesIt()
+    {
+        var map = All().Single(m => m.Id == "brackwater_cut").Map;
+
+        var archer = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.At == new Coord(11, 1));
+        Assert.Equal("archer", archer.TemplateId);
+        Assert.Equal(Behavior.Hold, archer.Behavior);
+        Assert.Equal(2, archer.At.DistanceTo(new Coord(11, 3)));
+        Assert.Equal("water", map.TerrainIdAt(new Coord(11, 0)));
+        Assert.Equal("wall", map.TerrainIdAt(new Coord(11, 2)));
+    }
+
+    /// <summary>
+    /// Issue 80: an Escape with a clock on both sides. Six exits on the east edge for five
+    /// deployed units, every pursuer aggressive and west of the wall, and a sleeping Guard bank
+    /// east of it standing in front of the exits, so the party clears the front while the gap
+    /// holds the rear. No <c>cheap_shots</c> waiver.
+    /// </summary>
+    [Fact]
+    public void BrackwaterCutPursuersComeFromTheWestAndABankSleepsBeforeTheExits()
+    {
+        var map = All().Single(m => m.Id == "brackwater_cut").Map;
+        var enemies = map.Placements.OfType<EnemyPlacement>().ToList();
+
+        Assert.Equal(WinCondition.Escape, map.Win);
+        Assert.False(map.CheapShotsAllowed);
+        Assert.Equal(6, map.Exits.Count);
+        Assert.All(map.Exits, e => Assert.Equal(map.Width - 1, e.X));
+        Assert.Equal(5, map.Placements.Count(p => p is not EnemyPlacement));
+        Assert.All(enemies.Where(e => e.Group == "chase"), e => { Assert.Equal(Behavior.Aggressive, e.Behavior); Assert.True(e.At.X < 11); });
+        var bank = enemies.Where(e => e.Group == "bank").ToList();
+        Assert.Equal(3, bank.Count);
+        Assert.All(bank, e => { Assert.Equal(Behavior.Guard, e.Behavior); Assert.True(e.At.X > 11); });
     }
 
     private static IReadOnlyList<Coord> FieldGroup(MapDefinition map) =>
