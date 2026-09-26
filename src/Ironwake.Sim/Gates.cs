@@ -29,6 +29,16 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
 
     /// <summary>The mastery points of every player unit as it last stood in the game (issue 69), by id.</summary>
     public IReadOnlyDictionary<string, MasteryProgress> Masteries { get; init; } = new Dictionary<string, MasteryProgress>(StringComparer.Ordinal);
+
+    /// <summary>The player units other than the captain deployed at the start of the game (issue 263).</summary>
+    public int Recruits { get; init; }
+
+    /// <summary>
+    /// The player units other than the captain that came out of the game alive, by
+    /// <see cref="BattleState.Survivors"/>: on an Escape map the ones that left through an
+    /// exit, so a recruit left behind is not counted (issues 263 and 269).
+    /// </summary>
+    public int RecruitsOut { get; init; }
 }
 
 /// <summary>A gate's printed line and verdict.</summary>
@@ -45,6 +55,7 @@ public static class Runner
     public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<TurnReading>? turns = null)
     {
         var state = BattleState.From(map, content, content.Cast, seed, scheme, benched);
+        var recruits = state.UnitsOf(Side.Player).Count(u => !u.IsCaptain);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
         foreach (var unit in state.UnitsOf(Side.Player))
         {
@@ -92,6 +103,8 @@ public static class Runner
         {
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
+            Recruits = recruits,
+            RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
         };
     }
 
@@ -153,7 +166,8 @@ public static class Gates
     /// reads; the losses by cause in section 7's order with the mean quiet tail of the
     /// timeouts (turns from the last combat to the limit, so a tail near the limit is a board
     /// that stopped and one near zero a fight that ran out of clock; issue 114); and the roll
-    /// scheme the games were fought under. With <paramref name="readings"/>, every game's
+    /// scheme the games were fought under. On an Escape map it also prints the survivors
+    /// over the wins (<see cref="Survivors"/>, issue 263). With <paramref name="readings"/>, every game's
     /// player phases are read for issue 47's turn-state counters, one list per seed.
     /// </summary>
     public static (GateResult Gate, IReadOnlyList<GameResult> Games) Gate1(GameContent content, MapDefinition map, string id, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<IReadOnlyList<TurnReading>>? readings = null)
@@ -174,8 +188,32 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
     }
+
+    /// <summary>
+    /// Over the won games, the median number of recruits that came out alive and the count
+    /// of wins with recruits deployed and none out, as <c>survivors p50 1 of 4, captain alone 12</c>,
+    /// or <c>survivors -</c> when nothing was won (issue 263). An Escape win is the captain
+    /// leaving, so a win rate alone cannot tell a party that got out from a captain who
+    /// walked away from everyone; this row can. Printed, never gated.
+    /// </summary>
+    public static string Survivors(IReadOnlyList<GameResult> games)
+    {
+        var wins = games.Where(g => g.Won).ToList();
+        if (wins.Count == 0)
+        {
+            return "survivors -";
+        }
+
+        var median = Median(wins.Select(g => (double)g.RecruitsOut).ToList()).ToString("0.#", CultureInfo.InvariantCulture);
+        var alone = wins.Count(g => g.Recruits > 0 && g.RecruitsOut == 0);
+        return $"survivors p50 {median} of {wins.Max(g => g.Recruits)}, captain alone {alone}";
+    }
+
+    /// <summary>The survivors row and a separator on an Escape map; nothing on any other.</summary>
+    private static string EscapeSurvivors(IReadOnlyList<GameResult> games, MapDefinition map) =>
+        map.Win == WinCondition.Escape ? $"{Survivors(games)}, " : "";
 
     /// <summary>The losses by cause, zeros printed so pasted rows line up, and the mean quiet tail of the timeouts or a dash when there were none.</summary>
     public static string Losses(IReadOnlyList<GameResult> games, MapDefinition map)
@@ -287,7 +325,8 @@ public static class Gates
     /// recruit's on a <c>protect:</c> map, print as data on their own lines and are not
     /// in the median. Each row also prints the benched arm's losses by cause and its
     /// refused-kill median (issue 125), so a large drop beside many captain deaths or a
-    /// refused kill near one is read as the veto's doing and not the recruit's.
+    /// refused kill near one is read as the veto's doing and not the recruit's. On an
+    /// Escape map each row also prints the benched arm's survivors (issue 263).
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -349,7 +388,7 @@ public static class Gates
         foreach (var r in rows)
         {
             var arm = r.Arm ?? Array.Empty<GameResult>();
-            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}] benched losses {LossCounts(arm)}, {RefusedKill(arm)}{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
+            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}] benched losses {LossCounts(arm)}, {RefusedKill(arm)}{(map.Win == WinCondition.Escape ? $", benched {Survivors(arm)}" : "")}{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
         }
 
         foreach (var unitId in unjudged)
