@@ -28,8 +28,8 @@ P recruit:pell 0,6
 P recruit:ottilie 0,7
 E archer 4,2 group:fort behavior:hold
 E soldier 7,5 group:field behavior:aggressive
-E brawler 7,6 group:field behavior:aggressive
-E archer 8,6 group:field behavior:aggressive
+E brawler 8,6 group:field behavior:aggressive
+E archer 7,6 group:field behavior:aggressive
 E shieldbearer 12,2 group:gate behavior:hold
 E hexer 13,7 group:yard behavior:hold
 B grange_reeve 15,6 group:hall behavior:guard
