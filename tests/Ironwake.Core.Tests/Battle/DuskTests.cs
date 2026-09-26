@@ -73,6 +73,22 @@ public class DuskTests
         Assert.True(Dusk.Sees(state, Side.Player, new Coord(6, 3), "ottilie", new Coord(5, 3)));
     }
 
+    /// <summary>
+    /// Issue 309: a forecast from a tile names an enemy the mover would see from there, on top
+    /// of what the side sees now; the mover's tile read elsewhere does not see for it.
+    /// </summary>
+    [Fact]
+    public void AnEnemyIsNamedFromATileTheMoverWouldSeeItFrom()
+    {
+        var state = Start(1);
+        var soldier = state.Find("soldier-1")!;
+
+        Assert.False(Dusk.Seen(state, soldier));
+        Assert.True(Dusk.Seen(state, soldier, "hale", new Coord(3, 1)));
+        Assert.False(Dusk.Seen(state, soldier, "ottilie", new Coord(2, 1)));
+        Assert.False(Dusk.Seen(state, soldier, "hale", new Coord(2, 1)));
+    }
+
     [Fact]
     public void APlayerCannotStrikeATargetItsSideCannotSee()
     {
