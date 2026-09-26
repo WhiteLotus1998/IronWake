@@ -1,5 +1,7 @@
 # 0053 — Map 5, Sallow Grange: a Seize with two gates, a sleeping field, and a clock that binds the long way
 
+Amended by DECISIONS/0055 (issue 259): the Reeve is now a guard boss alone in group `hall` at 15,6, and `turn_limit` is 10. He wakes, may leave his tile, and may seat himself on the healing Gate, which is the intended price of the dash (forty-first round). Decisions 1 and 5 below, and the measurements, describe the map before that change.
+
 Date: 2026-09-26. Issue 79 (DESIGN section 9, a mid map with a Seize), built by Code. The layout and the numbers are Code's lean, posted to the Table with the PR. The map is not `tuned` until both partners have played it cold (the Fun Gate). No rule, header or format changed; the map is content plus one enemy template.
 
 ## Decisions

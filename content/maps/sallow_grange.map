@@ -1,7 +1,7 @@
 name: Sallow Grange
 size: 18x12
 win: seize
-turn_limit: 8
+turn_limit: 10
 recall: 3
 enemy_level: 3
 
@@ -31,4 +31,4 @@ E brawler 7,6 group:field behavior:guard
 E archer 8,6 group:field behavior:guard
 E shieldbearer 12,2 group:gate behavior:hold
 E hexer 13,4 group:yard behavior:hold
-B grange_reeve 16,5 group:hall behavior:boss
+B grange_reeve 15,6 group:hall behavior:guard

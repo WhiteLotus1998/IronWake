@@ -140,7 +140,10 @@ public class MapParseErrorTests
     public void BossBehaviorBelongsOnABLine() => Fails(MapFixture.Replacing("E soldier 9,1 group:mill behavior:guard", "E soldier 9,1 group:mill behavior:boss"), 22, "B line");
 
     [Fact]
-    public void ABLineCannotBeAggressive() => Fails(MapFixture.Replacing("B bandit_leader 10,1 group:mill behavior:boss", "B bandit_leader 10,1 group:mill behavior:aggressive"), 25, "always boss");
+    public void ABLineCannotBeAggressive() => Fails(MapFixture.Replacing("B bandit_leader 10,1 group:mill behavior:boss", "B bandit_leader 10,1 group:mill behavior:aggressive"), 25, "boss or guard");
+
+    [Fact]
+    public void ABLineCannotBeHold() => Fails(MapFixture.Replacing("B bandit_leader 10,1 group:mill behavior:boss", "B bandit_leader 10,1 group:mill behavior:hold"), 25, "boss or guard");
 
     [Fact]
     public void TwoUnitsOnOneTile() => Fails(MapFixture.Replacing("P recruit:wren 2,8", "P recruit:wren 1,8"), 21, "occupied by the unit on line 20");

@@ -221,18 +221,30 @@ public class SampleMapsTests
     }
 
     /// <summary>
-    /// Issue 79 and the seventh round: a Hold boss beside the throne on a Seize map, so killing him
-    /// is optional and visibly so, and an enemy-held fort on the short way.
+    /// Issue 259: the Reeve is a guard boss alone in his group, beside the throne on the side the
+    /// west gate faces, and an enemy holds the fort on the short way. The one tile inside the
+    /// walls a captain could seize from in one move without ending within the wake radius of
+    /// him is 17,3, which only the north gate reaches: the short way cannot seize past a
+    /// sleeping Reeve, and the long way's quiet seize is its prize.
     /// </summary>
     [Fact]
-    public void SallowGrangeHasAHoldBossBesideTheThroneAndAnEnemyOnTheFort()
+    public void SallowGrangeHasAGuardBossBesideTheThroneAndAnEnemyOnTheFort()
     {
         var map = All().Single(m => m.Id == "sallow_grange").Map;
+        var content = MapFixture.Content;
+        var throne = new Coord(16, 6);
 
         Assert.Equal(WinCondition.Seize, map.Win);
         var boss = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.IsBoss);
-        Assert.Equal(1, boss.At.DistanceTo(new Coord(16, 6)));
-        Assert.Equal("throne", map.TerrainIdAt(new Coord(16, 6)));
+        Assert.Equal(Behavior.Guard, boss.Behavior);
+        Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.Group == boss.Group);
+        Assert.Equal(1, boss.At.DistanceTo(throne));
+        Assert.Equal("throne", map.TerrainIdAt(throne));
+        var captainMov = content.Class("cadet").Mov;
+        var quiet = Enumerable.Range(3, 6)
+            .SelectMany(y => Enumerable.Range(12, 6).Select(x => new Coord(x, y)))
+            .Where(c => map.TerrainIdAt(c) != "wall" && c.DistanceTo(throne) <= captainMov && c.DistanceTo(boss.At) > content.WakeRadius);
+        Assert.Equal(new[] { new Coord(17, 3) }, quiet);
         var fort = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => map.TerrainIdAt(e.At) == "fort");
         Assert.Equal(Behavior.Hold, fort.Behavior);
     }
