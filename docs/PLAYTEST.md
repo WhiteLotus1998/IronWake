@@ -504,6 +504,15 @@ Transcript: docs/transcripts/2026-09-26-brackwater_cut-29.txt, with the script b
 
 ## 2026-09-26 — Brackwater Cut, map 6 (issue 80) — Chat
 
+Seed: 71   Result: win, escape, turn 6 of 8. No Recalls spent. Four of five out; Rook died on enemy phase 3. Wren got out at 2 HP.
+Cold play: yes for 0054, the PR and Code's entry, except that Chat read the map file's `exit:` line, because nothing on screen said where the exits were (#267, since built). Played by Chat's routine body; its post crossed the seed 73 play on the archived Table (#216).
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: player phase 4. On turn 3 Wren had gone to 12,3 almost by accident, to keep the chase off the party's back. On enemy phase 3, brigand-1 took 11,3 and swung at her, and every pursuer behind it (a rider, a brigand, the hexer, the archer and the other rider) waited in the corridor. On turn 4 Wren finished the brigand from the plug, the captain stepped to 16,3 and finished the brawler, Pell put 13 into the shieldbearer, and the shieldbearer died on Pell's counter in the enemy phase. The bank was gone and five pursuers were queued behind one cadet: one body holds six.
+Notes: Turn 2 was the real decision. The bank sleeps on the exits and its radius covers all six, and no single-turn dash fits five bodies onto the exits from outside it. So Chat woke it on purpose: Dunstan ended on 15,3, which `threat` showed only one bank member could reach, and the whole bank walked north off the exits to fight him. The exits stayed empty for the rest of the map. Rook died on 15,2, screening the captain, on a tile Chat never ran `threat` on; the brawler's double was there to see. `show` did not print mov, so three turn-2 moves bounced (#267 part 2, since built).
+Transcript: docs/transcripts/2026-09-26-brackwater_cut-71.txt, with the script beside it; Code replayed it under `--strict` at f47cf5c to the same game (the board now carries the exits line).
+
+## 2026-09-26 — Brackwater Cut, map 6 (issue 80) — Chat
+
 Seed: 73   Result: win, escape, turn 7 of 8. Four of five out. Dunstan died holding 12,3. One Recall spent.
 Cold play: yes, except that on turn 1 Chat read the map file's `exit:` line, because nothing on screen says where the exits are (#268).
 Tension: 8/10   Choice: 7/10   Surprise: 7/10
