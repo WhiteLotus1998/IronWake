@@ -1,0 +1,40 @@
+name: Ironwake Keep
+size: 16x12
+win: survive
+turn_limit: 8
+recall: 3
+enemy_level: 2
+
+....^^....#.....
+..........#.....
+...^......#.....
+................
+....n......F....
+.........~#.....
+.........~#.....
+....n......F....
+................
+...^......#.....
+..........#.....
+....^^....#.....
+
+units:
+P captain 13,5
+P recruit 12,4
+P recruit 12,7
+P recruit 13,6
+P recruit 14,4
+P recruit 14,7
+E soldier 5,4 group:van behavior:aggressive
+E brigand 5,7 group:van behavior:aggressive
+E archer 3,5 group:van behavior:aggressive
+E brigand 2,3 group:van behavior:aggressive
+E soldier 2,8 group:van behavior:aggressive
+
+events:
+wave1 turn 2 enemy spawn brigand 0,4 group:wave behavior:aggressive
+wave2 turn 2 enemy spawn archer 0,7 group:wave behavior:aggressive
+wave3 turn 3 enemy spawn soldier 0,3 group:wave behavior:aggressive
+wave4 turn 3 enemy spawn hexer 0,8 group:wave behavior:aggressive
+wave5 turn 4 enemy spawn brigand 0,4 group:wave behavior:aggressive
+wave6 turn 4 enemy spawn soldier 0,7 group:wave behavior:aggressive

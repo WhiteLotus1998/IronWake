@@ -673,6 +673,27 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 82's experiment: Chat's play of seed 91 on the keep with the ditch and both forts,
+    /// the other half of the menu from seed 82's walls. The hexer walks the south row and dies
+    /// on 8,8 without reaching the ditch; Teodor falls to a sortie on turn 6 and a Recall takes
+    /// it back. Survived, nobody fallen.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptSurvivesTheDitchAndFortsKeepOnSeedNinetyOne()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep-ditchforts-91.script");
+
+        var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "91", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: survive\n", output);
+        Assert.Contains("hexer-1 falls at 8,8", output);
+        Assert.Contains("recalled to state 108", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 275: Code's play of seed 61 on Sallow Grange the long way, with the hexer moved
     /// to 13,7. Killing the fort archer wakes the field by noise on turn 3 and the field is
     /// fought out west (three Recalls on turn 4); Pell breaks the north lock from 11,1 in two
