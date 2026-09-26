@@ -19,6 +19,7 @@ A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 2,6
 captain moves 1,8 -> 2,6 via 1,7 1,6
 Old Mill Road  turn 1 of 12  player phase  rout  recall 3
@@ -41,6 +42,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 3,7
 wren moves 2,8 -> 3,7 via 2,7
 Old Mill Road  turn 1 of 12  player phase  rout  recall 3
@@ -63,6 +65,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -112,6 +115,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > forecast captain brigand-1
 forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
 > attack captain brigand-1 art cleave
@@ -142,6 +146,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain  
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 4,7
 wren moves 3,7 -> 4,7
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
@@ -163,6 +168,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain  
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
 forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
 wren attacks archer-2
@@ -188,6 +194,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain  
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -226,6 +233,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,7
 wren moves 4,7 -> 5,7
 Old Mill Road  turn 3 of 12  player phase  rout  recall 3
@@ -247,6 +255,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
 forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
 wren attacks archer-2
@@ -272,6 +281,7 @@ A  captain          Alder Fenn L1 cadet        2,6    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 1,3
 captain moves 2,6 -> 1,3 via 1,6 1,5 1,4
 Old Mill Road  turn 3 of 12  player phase  rout  recall 3
@@ -292,6 +302,7 @@ A  captain          Alder Fenn L1 cadet        1,3    hp 22/22  Road  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -322,6 +333,7 @@ A  captain          Alder Fenn L1 cadet        1,3    hp 22/22  Road  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 4,2
 captain moves 1,3 -> 4,2 via 2,3 3,3 4,3
 Old Mill Road  turn 4 of 12  player phase  rout  recall 3
@@ -342,6 +354,7 @@ A  captain          Alder Fenn L1 cadet        4,2    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,3
 wren moves 5,7 -> 5,3 via 5,6 5,5 5,4
 Old Mill Road  turn 4 of 12  player phase  rout  recall 3
@@ -362,6 +375,7 @@ A  captain          Alder Fenn L1 cadet        4,2    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,3    hp 20/20  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -392,6 +406,7 @@ A  captain          Alder Fenn L1 cadet        4,2    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, guard, asleep
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              5,3    hp 20/20  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,2
 captain moves 4,2 -> 6,2 via 5,2
 group mill wakes: proximity
