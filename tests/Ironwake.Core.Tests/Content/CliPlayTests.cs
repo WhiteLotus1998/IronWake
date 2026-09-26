@@ -590,28 +590,29 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 259: Code's play of seed 31 on Sallow Grange with the Reeve a sleeping guard boss at
-    /// 15,6 and the clock at 10. The field is woken on turn 2 and fought at the party's line; on
-    /// turn 5 Ansgar's kill on the hexer from 12,4 is noise within 6 of the Reeve and wakes him,
-    /// he walks out to 13,6 and spears Teodor, and on turn 6 the captain and Wren take his 26 to
-    /// 0 exactly; the captain seizes on turn 7 of 10 with nobody dead and no Recall.
+    /// Issue 275: Code's play of seed 61 on Sallow Grange the long way, with the hexer moved
+    /// to 13,7. Killing the fort archer wakes the field by noise on turn 3 and the field is
+    /// fought out west (three Recalls on turn 4); Pell breaks the north lock from 11,1 in two
+    /// casts, the captain stops at 13,3 and 17,3 with no enemy able to strike him, and seizes
+    /// on turn 10 of 10. The hexer never fires and the hall wakes only on the winning move.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptSeizesSallowGrangeOnSeedThirtyOne()
+    public void TheJournaledScriptSeizesSallowGrangeTheLongWayOnSeedSixtyOne()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-31.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-sallow_grange-61.script");
 
-        var output = Run(out var exit, "play", "sallow_grange", "--seed", "31", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "sallow_grange", "--seed", "61", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("group field wakes: proximity", output);
-        Assert.Contains("hexer-1 falls at 13,4\ngroup hall wakes: noise", output);
-        Assert.Contains("enemy: move grange_reeve-1 13,6", output);
-        Assert.Contains("grange_reeve-1 falls at 13,6", output);
-        Assert.Contains("Sallow Grange  turn 7 of 10", output);
+        Assert.Contains("group field wakes: noise", output);
+        Assert.Contains("shieldbearer-1 falls at 12,2", output);
+        Assert.DoesNotContain("hexer-1 attacks", output);
+        Assert.Equal(1, output.Split("group hall wakes").Length - 1);
+        Assert.Contains("captain moves 17,3 -> 16,6 via 16,3 16,4 16,5\ngroup hall wakes: proximity\n", output);
+        Assert.Contains("Sallow Grange  turn 10 of 10", output);
         Assert.All(new[] { "captain", "wren", "teodor", "pell", "ottilie", "ansgar" }, id => Assert.DoesNotContain(id + " falls at", output));
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

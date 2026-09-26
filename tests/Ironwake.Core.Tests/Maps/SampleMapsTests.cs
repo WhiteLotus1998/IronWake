@@ -250,6 +250,61 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 275: the long way is quiet on the enemy phase too. A captain on the broken north
+    /// gate at 12,2 has a stop that is within one move of both 12,2 and 17,3, more than the wake
+    /// radius from the Reeve, and outside the strike range of every enemy but the lock it has
+    /// just broken, so nothing fires on the lane and no combat wakes the hall. With the hexer
+    /// at 13,4 the only such stop, 13,3, is one tile from its Cinder.
+    /// </summary>
+    [Fact]
+    public void SallowGrangeNorthLaneHasAStopNoEnemyCanStrike()
+    {
+        var map = All().Single(m => m.Id == "sallow_grange").Map;
+        var content = MapFixture.Content;
+        var gate = new Coord(12, 2);
+        var stage = new Coord(17, 3);
+        var mov = content.Class("cadet").Mov;
+        var boss = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.IsBoss);
+        var strikers = map.Placements.OfType<EnemyPlacement>().Where(e => e.At != gate).ToList();
+
+        var stops = Enumerable.Range(0, map.Height)
+            .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Coord(x, y)))
+            .Where(c => map.TerrainIdAt(c) != "wall" && c.DistanceTo(gate) <= mov && c.DistanceTo(stage) <= mov)
+            .Where(c => c.DistanceTo(boss.At) > content.WakeRadius)
+            .Where(c => strikers.All(e => c.DistanceTo(e.At) > MaxRange(content, e.TemplateId)))
+            .ToList();
+
+        Assert.Contains(new Coord(13, 3), stops);
+        Assert.True(stage.DistanceTo(boss.At) > content.WakeRadius);
+        Assert.True(strikers.All(e => stage.DistanceTo(e.At) > MaxRange(content, e.TemplateId)));
+    }
+
+    /// <summary>
+    /// Issue 275: the hexer moved off the north lane still prices the short way. From 13,7 its
+    /// Cinder reaches 12,6, the yard tile beside the west gap's south half, so a unit stepping
+    /// through the mouth to fight the Reeve is in its range. A hexer at 13,8, three from 12,6,
+    /// fails this.
+    /// </summary>
+    [Fact]
+    public void SallowGrangeHexerCoversATileBesideTheWestGap()
+    {
+        var map = All().Single(m => m.Id == "sallow_grange").Map;
+        var content = MapFixture.Content;
+        var hexer = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.TemplateId == "hexer");
+        Assert.Equal(Behavior.Hold, hexer.Behavior);
+        var beside = new[] { new Coord(10, 5), new Coord(10, 6), new Coord(12, 5), new Coord(12, 6) };
+
+        Assert.Contains(beside, c => c.DistanceTo(hexer.At) <= MaxRange(content, hexer.TemplateId));
+    }
+
+    private static int MaxRange(GameContent content, string templateId) =>
+        content.Unit(templateId).Inventory.Items
+            .Where(item => content.Weapons.ContainsKey(item.ItemId))
+            .Select(item => content.Weapon(item.ItemId).MaxRange)
+            .DefaultIfEmpty(0)
+            .Max();
+
+    /// <summary>
     /// Issue 197: the Tollgate's woods group screens the hill. It holds its forest, so it
     /// never walks onto plain, and the toll brigand at 6,5 reaches 6,4 and every tile within 2
     /// of itself, so the hill is struck while it lives and a strike on it from range 2 is
