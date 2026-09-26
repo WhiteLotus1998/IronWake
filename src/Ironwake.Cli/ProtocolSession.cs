@@ -268,7 +268,7 @@ public sealed class ProtocolSession
             }
 
             w.WriteEndArray();
-            w.WriteNumber("ifAllLand", lines.Sum(l => l.IfAllLand));
+            w.WriteNumber("ifAllLand", Queries.IfAllLand(lines));
             w.WriteStartArray("asleep");
             foreach (var group in asleep)
             {

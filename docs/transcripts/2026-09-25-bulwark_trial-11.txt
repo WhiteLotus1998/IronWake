@@ -30,12 +30,12 @@ threat on captain at 4,3 (Plain):
   brigand-2 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
   hexer-1 from 4,1 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
   hexer-2 from 4,5 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
-  if all land: 38 against 25 hp
+  if all land: 30 against 25 hp
 > threat captain from 5,3
 threat on captain at 5,3 (Plain):
   brigand-1 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
   brigand-2 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  if all land: 16 against 25 hp
+  if all land: 8 against 25 hp
 > forecast captain hexer-1 from 3,1
 forecast captain -> hexer-1 from 3,1 (Plain): dmg 13 x2 hit 88% crit 4%; counter: dmg 11 hit 98% crit 0%
 > move captain 5,3
