@@ -128,33 +128,33 @@ public class SimGateTests
     }
 
     /// <summary>
-    /// Issue 105: an Escape map wins only when every living unit stands on an exit, and the
-    /// second recruit starts nine tiles from it with a two-turn limit, so the party wins
-    /// only with that recruit benched. The median drop is confidently negative and gate 4
-    /// fails the cast on the benching line, with no recruit labelled. Twenty seeds, since the
-    /// median of two rows is about -0.5 and the margin (issue 115) is twice the benched recruit's
-    /// standard error, 1 / sqrt(seeds): at ten seeds it would read as a ceiling instead. Under
-    /// section 5 as kept (DECISIONS/0028) the far recruit falls to the soldier in 2 of 20
-    /// baseline games, which wins the escape, so the row reads -0.900 rather than -1.000.
+    /// Issue 105: a map the party wins only with a recruit benched, so the median drop is
+    /// confidently negative and gate 4 fails the cast on the benching line, with no recruit
+    /// labelled. Twenty seeds, since the margin (issue 115) is twice the benched recruit's
+    /// standard error, 1 / sqrt(seeds): at ten seeds it would read as a ceiling instead. The
+    /// map was an Escape the far recruit could not reach in time until issue 269 let the
+    /// captain leave without it; now the recruit starts inside a sleeping Guard group's wake
+    /// radius, walled into a pocket no rider can reach, so its first phase wakes three riders
+    /// onto a captain who would otherwise hold out the one turn Survive asks.
     /// </summary>
     private const string OneBodyTooMany = """
         name: One body too many
-        size: 10x3
-        win: escape
-        turn_limit: 2
+        size: 12x3
+        win: survive
+        turn_limit: 1
         recall: 3
-        enemy_level: 1
-        exit: 0,0 0,1 0,2
+        enemy_level: 10
 
-        ..........
-        ..........
-        ..........
+        ........#...
+        .......#.#..
+        ........#...
 
         units:
-        P captain 1,1
-        P recruit 2,1
-        P recruit 9,1
-        E soldier 9,0 group:far behavior:hold
+        P captain 0,1
+        P recruit 8,1
+        E rider 5,0 group:far behavior:guard
+        E rider 5,1 group:far behavior:guard
+        E rider 5,2 group:far behavior:guard
 
         """;
 
@@ -162,12 +162,12 @@ public class SimGateTests
     public void GateFourFailsTheCastWhenBenchingTheMedianRecruitRaisesTheWinRate()
     {
         var map = MapFixture.Parse(OneBodyTooMany);
-        var (gate1, baseline) = Gates.Gate1(Starter, map, "escape", 20);
-        var result = Gates.Gate4(Starter, map, "escape", baseline);
+        var (gate1, baseline) = Gates.Gate1(Starter, map, "survive", 20);
+        var result = Gates.Gate4(Starter, map, "survive", baseline);
         Assert.False(result.Passed, gate1.Line + "\n" + result.Line);
         Assert.Contains("cast not earning its deployment: benching the median recruit raises the win rate", result.Line);
         Assert.DoesNotContain("changes no outcomes", result.Line);
-        Assert.Contains("teodor: drop -0.900", result.Line);
+        Assert.Contains("wren: drop -0.750", result.Line);
         Assert.DoesNotContain("DEAD WEIGHT", result.Line);
     }
 

@@ -37,6 +37,7 @@ public sealed class PlaySession
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
+          exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
@@ -298,6 +299,11 @@ public sealed class PlaySession
         _out.WriteLine(outcome.IsOver
             ? $"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}"
             : $"battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
+        if (EscapeSummary(_state) is { } escape && outcome.IsOver)
+        {
+            _out.WriteLine(escape);
+        }
+
         if (_state.Map.Certification is { } trial && outcome.IsOver)
         {
             var className = _content.Class(trial.ClassId).Name;
@@ -387,6 +393,12 @@ public sealed class PlaySession
                 break;
             case "canto":
                 Error("usage: canto <unit> <x,y|stay>");
+                break;
+            case "exit" when words.Length == 2:
+                Apply(new Exit(words[1]));
+                break;
+            case "exit":
+                Error("usage: exit <unit>");
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
@@ -533,6 +545,27 @@ public sealed class PlaySession
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Who came out of an Escape map and who did not (issue 269): the units that left
+    /// through an exit in the order they left, then the ones left behind and the ones that
+    /// fell, the deployed player units missing from both. Null on any other map.
+    /// </summary>
+    internal static string? EscapeSummary(BattleState state)
+    {
+        if (state.Map.Win != WinCondition.Escape)
+        {
+            return null;
+        }
+
+        var opening = state.History.Count > 0 ? state.History[0] : state;
+        var escaped = state.Escaped.Select(u => u.Id).ToList();
+        var behind = state.LeftBehind().Select(u => u.Id).ToList();
+        var fell = opening.UnitsOf(Side.Player).Select(u => u.Id)
+            .Where(id => !state.HasEscaped(id) && state.Find(id) is null).ToList();
+        static string List(List<string> ids) => ids.Count == 0 ? "none" : string.Join(", ", ids);
+        return $"escaped: {List(escaped)}; left behind: {List(behind)}; fell: {List(fell)}";
     }
 
     /// <summary>The player unit an Attack, Item or Wait just left owed a Canto (issue 71), or null.</summary>
@@ -1121,6 +1154,7 @@ public sealed class PlaySession
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
         Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
+        Exit x => $"exit {x.UnitId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -1159,6 +1193,10 @@ public sealed class PlaySession
                 return $"{m.UnitId} masters the {m.ClassId} class and keeps {m.AbilityId}";
             case UnitWaited w:
                 return $"{w.UnitId} waits";
+            case UnitExited x:
+                return $"{x.UnitId} leaves through the exit at {x.At}";
+            case UnitLeftBehind b:
+                return $"{b.UnitId} is left behind at {b.At}";
             case Cantoed c:
                 return c.From == c.To
                     ? $"{c.UnitId} stays at {c.To} (canto)"

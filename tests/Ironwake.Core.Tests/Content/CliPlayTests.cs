@@ -620,8 +620,8 @@ public class CliPlayTests
     /// Issue 80: Code's play of seed 29 on Brackwater Cut. The first pass holds the gap at 11,3
     /// and loses three units on turn 4, so a Recall goes back to turn 3; the second holds from
     /// 12,3, where the wall leaves one melee tile and one bow tile, until a second Recall to
-    /// turn 5. The captain steps onto 19,3 on turn 8 of 8 as the only one left alive, which
-    /// is an Escape by the rule (every living unit on an exit).
+    /// turn 5. The captain steps onto 19,3 on turn 8 of 8 as the only one left alive and
+    /// exits (issue 269, which appended the exit to the script).
     /// </summary>
     [Fact]
     public void TheJournaledScriptEscapesBrackwaterCutOnSeedTwentyNine()
@@ -632,13 +632,54 @@ public class CliPlayTests
         var output = Run(out var exit, "play", "brackwater_cut", "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: escape\n", output);
+        Assert.EndsWith("battle won: escape\nescaped: captain; left behind: none; fell: dunstan, pell, rook, wren\n", output);
         Assert.DoesNotContain("rejected ", output);
         Assert.Contains("recalled to state 54; 2 charges left", output);
         Assert.Contains("recalled to state 96; 1 charges left", output);
         Assert.Contains("archer-2 falls at 11,1", output);
         Assert.Contains("Brackwater Cut  turn 8 of 8", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 269: Code's replay of Chat's seed 73 line on Brackwater Cut under escape by
+    /// leaving. Rook leaves from 19,6 on turn 6 instead of standing on the exit at 6 HP,
+    /// Dunstan still falls holding 12,3, and on turn 7 Wren, Pell and then the captain exit.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptLeavesBrackwaterCutOnSeedSeventyThree()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-73-exit.script");
+
+        var output = Run(out var exit, "play", "brackwater_cut", "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: escape\nescaped: rook, wren, pell, captain; left behind: none; fell: dunstan\n", output);
+        Assert.Contains("rook leaves through the exit at 19,6", output);
+        Assert.Contains("dunstan falls at 12,3", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>Issue 269: <c>exit</c> takes one unit, and one off an exit tile is refused with the core's reason.</summary>
+    [Fact]
+    public void ExitNeedsAUnitOnAnExitTile()
+    {
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-exit-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "exit\nexit captain\n");
+        try
+        {
+            var output = Run(out var exit, "play", "brackwater_cut", "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("usage: exit <unit>", output);
+            Assert.Contains("captain cannot exit: ", output);
+            Assert.Contains(" is not an exit tile", output);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
     }
 
     /// <summary>Issue 267: <c>show</c> prints the class's Mov and movement type, one unit of each type on Brackwater Cut.</summary>

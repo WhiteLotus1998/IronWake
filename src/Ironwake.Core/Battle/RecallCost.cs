@@ -15,7 +15,7 @@ namespace Ironwake.Core;
 /// <param name="LevelsGivenBack">Level-ups player units gained since, over the same units.</param>
 /// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0.</param>
 /// <param name="ArrivalsUndone">Enemies on the board now that were not on it then (map-event spawns), in id order.</param>
-/// <param name="UnitsReturned">Player units alive then and dead now, in id order.</param>
+/// <param name="UnitsReturned">Player units alive then and dead now, in id order; a unit that left through an exit since is not dead (issue 269).</param>
 /// <param name="HpReturned">HP the player units alive then have lost since, a dead one counted from its HP then to 0; a unit healed since counts nothing.</param>
 public sealed record RecallCost(
     int ToIndex,
@@ -62,7 +62,7 @@ public sealed record RecallCost(
         var levels = 0;
         foreach (var unit in then.UnitsOf(Side.Player))
         {
-            var now = state.Find(unit.Id);
+            var now = state.Find(unit.Id) ?? state.Escaped.FirstOrDefault(u => u.Id == unit.Id);
             if (now is null)
             {
                 returned.Add(unit.Id);

@@ -33,9 +33,10 @@ public class CampaignRecordTests
         var throne = Enumerable.Range(0, map.Width * map.Height).Select(i => new Coord(i % map.Width, i / map.Width)).FirstOrDefault(map.IsThrone);
         var units = opening.Units.Where(u => u.Side == Side.Player)
             .Select(u => u.IsCaptain && map.Win == WinCondition.Seize ? u with { At = throne } : u)
-            .Select((u, i) => map.Win == WinCondition.Escape ? u with { At = map.Exits[i] } : u)
             .Select(u => player is null ? u : player(u)).OfType<BattleUnit>();
-        return opening with { Units = ValueList<BattleUnit>.From(units), Turn = 4, History = ValueList<BattleState>.Of(opening) };
+        return map.Win == WinCondition.Escape
+            ? opening with { Units = ValueList<BattleUnit>.Empty, Escaped = ValueList<BattleUnit>.From(units.OrderBy(u => u.IsCaptain)), Turn = 4, History = ValueList<BattleState>.Of(opening) }
+            : opening with { Units = ValueList<BattleUnit>.From(units), Turn = 4, History = ValueList<BattleState>.Of(opening) };
     }
 
     [Fact]
@@ -253,6 +254,23 @@ public class CampaignRecordTests
         var error = Assert.Throws<InvalidOperationException>(() => record.AfterBattle(opening, Content));
 
         Assert.Equal("only a won battle continues the campaign; a lost one ends it", error.Message);
+    }
+
+    /// <summary>Issue 269: on an Escape map a unit the captain's exit leaves behind has fallen, the answer death gets.</summary>
+    [Fact]
+    public void AUnitLeftBehindOnAnEscapeMapHasFallen()
+    {
+        var last = AtMap(Content.Campaign.Maps.Count - 1);
+        Assert.Equal(WinCondition.Escape, Map(last.NextMap(Content).MapId).Win);
+        var won = Won(last);
+        var left = won.Escaped.First(u => !u.IsCaptain);
+        var end = won with { Escaped = ValueList<BattleUnit>.From(won.Escaped.Where(u => u.Id != left.Id)), Units = ValueList<BattleUnit>.Of(left) };
+        Assert.Equal(BattleResult.Won, end.Outcome.Result);
+
+        var after = last.AfterBattle(end, Content);
+
+        Assert.Contains(left.Id, after.Fallen);
+        Assert.DoesNotContain(after.Roster, u => u.Id == left.Id);
     }
 
     [Fact]

@@ -226,6 +226,7 @@ public static class Program
         Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
         UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",
+        Exit x => $"exit {x.UnitId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
         EndPhase => "end",

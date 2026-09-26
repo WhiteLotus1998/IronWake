@@ -103,6 +103,14 @@ public static class ProtocolJson
             case UnitWaited u:
                 w.WriteString("unit", u.UnitId);
                 break;
+            case UnitExited x:
+                w.WriteString("unit", x.UnitId);
+                WriteCoord(w, "at", x.At);
+                break;
+            case UnitLeftBehind b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "at", b.At);
+                break;
             case Cantoed c:
                 w.WriteString("unit", c.UnitId);
                 WriteCoord(w, "from", c.From);
@@ -235,6 +243,10 @@ public static class ProtocolJson
                 w.WriteString("type", "wait");
                 w.WriteString("unit", wait.UnitId);
                 break;
+            case Exit exit:
+                w.WriteString("type", "exit");
+                w.WriteString("unit", exit.UnitId);
+                break;
             case Canto canto:
                 w.WriteString("type", "canto");
                 w.WriteString("unit", canto.UnitId);
@@ -272,9 +284,10 @@ public static class ProtocolJson
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
+            "exit" => new Exit(RequiredString(e, "unit")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, end, or recall"),
         };
     }
 
@@ -340,6 +353,13 @@ public static class ProtocolJson
         w.WriteNumber("recallCharges", state.RecallCharges);
         w.WriteStartArray("units");
         foreach (var unit in state.Units)
+        {
+            WriteUnit(w, unit, content);
+        }
+
+        w.WriteEndArray();
+        w.WriteStartArray("escaped");
+        foreach (var unit in state.Escaped)
         {
             WriteUnit(w, unit, content);
         }
@@ -444,7 +464,10 @@ public static class ProtocolJson
             ReadStrings(e, "awakeGroups"),
             ReadStrings(e, "fired"),
             ReadStrings(e, "flags"),
-            ValueList<Rapport>.From(Array(Required(e, "rapport"), "rapport").Select(r => new Rapport(RequiredString(r, "a"), RequiredString(r, "b"), RequiredInt(r, "points")))));
+            ValueList<Rapport>.From(Array(Required(e, "rapport"), "rapport").Select(r => new Rapport(RequiredString(r, "a"), RequiredString(r, "b"), RequiredInt(r, "points")))),
+            e.TryGetProperty("escaped", out var escaped)
+                ? ValueList<BattleUnit>.From(Array(escaped, "escaped").Select(u => ReadUnit(u, content)))
+                : ValueList<BattleUnit>.Empty);
     }
 
     private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content)

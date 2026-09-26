@@ -21,6 +21,7 @@ namespace Ironwake.Core;
 /// <param name="Fired">The names of the map events that have fired, blocked or not, sorted (issue 32). Each fires once; a Recall restores the list with the board.</param>
 /// <param name="Flags">The flags map events have set, sorted, for a win condition to read.</param>
 /// <param name="Rapport">Each recruit pair's rapport, sorted by pair (issue 16). Empty on a map without the <c>rivalry:</c> header; a Recall restores it with the board.</param>
+/// <param name="Escaped">The player units that have left the board through an exit on an Escape map (issue 269), in the order they left. Nothing on the board can see them; a Recall restores the list with the board.</param>
 public sealed record BattleState(
     MapDefinition Map,
     ValueList<BattleUnit> Units,
@@ -33,8 +34,27 @@ public sealed record BattleState(
     ValueList<string> AwakeGroups = default,
     ValueList<string> Fired = default,
     ValueList<string> Flags = default,
-    ValueList<Rapport> Rapport = default)
+    ValueList<Rapport> Rapport = default,
+    ValueList<BattleUnit> Escaped = default)
 {
+    /// <summary>Whether a player unit has left the board through an exit (issue 269).</summary>
+    public bool HasEscaped(string id) => Escaped.Any(u => u.Id == id);
+
+    /// <summary>
+    /// The player units still on the board once the captain has escaped (issue 269): left
+    /// behind, which counts as fallen. Empty until the captain leaves.
+    /// </summary>
+    public IEnumerable<BattleUnit> LeftBehind() =>
+        Escaped.Any(u => u.IsCaptain) ? UnitsOf(Side.Player) : Enumerable.Empty<BattleUnit>();
+
+    /// <summary>
+    /// The player units that come out of the battle alive: on an Escape map the ones that
+    /// left through an exit, since a unit left behind has fallen (issue 269); on every other
+    /// map the ones still on the board.
+    /// </summary>
+    public IEnumerable<BattleUnit> Survivors() =>
+        Map.Win == WinCondition.Escape ? Escaped : UnitsOf(Side.Player);
+
     /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
     public bool IsAwake(string group) => AwakeGroups.Contains(group);
 
@@ -241,8 +261,9 @@ public sealed record BattleState(
 
     /// <summary>
     /// Whether the battle is over and why, DESIGN.md section 7, computed from the board
-    /// and never stored. Checked in order: the captain dead, the protected recruit dead,
-    /// the map's win condition met, the turn limit passed (a win for Survive, a loss for
+    /// and never stored. Checked in order: the captain dead, the protected recruit dead or
+    /// left behind by the captain's exit (issue 269), the map's win condition met (on
+    /// Escape, the captain has left through an exit), the turn limit passed (a win for Survive, a loss for
     /// everything else), else ongoing. A finished battle refuses every command but Recall.
     /// </summary>
     public BattleOutcome Outcome
@@ -250,22 +271,31 @@ public sealed record BattleState(
         get
         {
             var captain = Units.FirstOrDefault(u => u.IsCaptain);
-            if (captain is null)
+            var captainEscaped = Escaped.Any(u => u.IsCaptain);
+            if (captain is null && !captainEscaped)
             {
                 return new BattleOutcome(BattleResult.Lost, "the captain is dead", LossCause.Captain);
             }
 
-            if (Map.ProtectId is { } protectId && Find(protectId) is null)
+            if (Map.ProtectId is { } protectId)
             {
-                return new BattleOutcome(BattleResult.Lost, $"{protectId} is dead", LossCause.Protected);
+                if (Find(protectId) is null && !HasEscaped(protectId))
+                {
+                    return new BattleOutcome(BattleResult.Lost, $"{protectId} is dead", LossCause.Protected);
+                }
+
+                if (captainEscaped && Find(protectId) is not null)
+                {
+                    return new BattleOutcome(BattleResult.Lost, $"{protectId} is left behind", LossCause.Protected);
+                }
             }
 
             var won = Map.Win switch
             {
                 WinCondition.Rout => !UnitsOf(Side.Enemy).Any(),
-                WinCondition.Seize => Map.IsThrone(captain.At),
+                WinCondition.Seize => Map.IsThrone(captain!.At),
                 WinCondition.DefeatBoss => !UnitsOf(Side.Enemy).Any(u => u.IsBoss),
-                WinCondition.Escape => UnitsOf(Side.Player).All(u => Map.IsExit(u.At)),
+                WinCondition.Escape => captainEscaped,
                 WinCondition.Survive => Turn > Map.TurnLimit,
                 _ => throw new ArgumentOutOfRangeException(nameof(Map), Map.Win, "unknown win condition"),
             };
@@ -431,6 +461,17 @@ public sealed record BattleState(
             foreach (var entry in Rapport)
             {
                 sb.Append(' ').Append(entry.A).Append('+').Append(entry.B).Append('=').Append(entry.Points);
+            }
+
+            sb.Append('\n');
+        }
+
+        if (Map.Win == WinCondition.Escape)
+        {
+            sb.Append("escaped");
+            foreach (var unit in Escaped)
+            {
+                sb.Append(' ').Append(unit.Id);
             }
 
             sb.Append('\n');

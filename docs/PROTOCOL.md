@@ -31,6 +31,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
 | `wait` | `unit` | `Wait` |
 | `canto` | `unit`, `to` (the unit's own tile declines it, issue 71) | `Canto` |
+| `exit` | `unit` (on an Escape map, from an exit tile, as the unit's action; issue 269) | `Exit` |
 | `end` | none | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
@@ -51,7 +52,7 @@ A **forecast** is `{"attacker":<side>,"defender":<side>,"scheme":..}`, each side
 
 ## State
 
-`protocolVersion`, `rulesVersion`, `mapName`, `map` (full only: the map's canonical `.map` text, `MapFormat.Write`, whose `exit:` header carries an Escape map's exit tiles for a renderer to draw, issue 267), `turn`, `phase`, `seed`, `scheme`, `recallCharges`, `units`, `awakeGroups`, `wakeRadius` and `noiseRadius` (the content's Guard wake and noise radii, DESIGN section 8, so a renderer can print the wake legend, issue 260), `fired` (map events spent), `flags`, `rapport` (each `a`, `b`, `points`), `outcome` (`result`: `ongoing`, `won`, `lost`; `reason`; `cause`: `none`, `captain`, `protected`, `timeout`), `historyCount`, `history` (full only: every prior state in this same shape, each with an empty history of its own).
+`protocolVersion`, `rulesVersion`, `mapName`, `map` (full only: the map's canonical `.map` text, `MapFormat.Write`, whose `exit:` header carries an Escape map's exit tiles for a renderer to draw, issue 267), `turn`, `phase`, `seed`, `scheme`, `recallCharges`, `units`, `escaped` (the player units that have left an Escape map through an exit, in the order they left, in the unit shape; issue 269; a state without it reads as none), `awakeGroups`, `wakeRadius` and `noiseRadius` (the content's Guard wake and noise radii, DESIGN section 8, so a renderer can print the wake legend, issue 260), `fired` (map events spent), `flags`, `rapport` (each `a`, `b`, `points`), `outcome` (`result`: `ongoing`, `won`, `lost`; `reason`; `cause`: `none`, `captain`, `protected`, `timeout`), `historyCount`, `history` (full only: every prior state in this same shape, each with an empty history of its own).
 
 A **unit** is `id`, `name`, `side`, `at`, `hp`, `maxHp`, `moved`, `acted`, `group`, `behavior` (null for a player unit), `isBoss`, `isCaptain`, `placementIndex` (the map placement it filled, which decides its letter), `retreated`, `canto` (the Mov a Canto unit has left this phase, issue 71; null when none is owed, and a state without it reads as null), `class`, `level`, `exp`, `stats`, `growths` (each `hp str mag dex spd lck def res cha`, the unit's own numbers before its class), `inventory` (each `item`, `uses`), `abilities`, `region`, `personality`, `hooks`, `weaponPoints` (rank points per weapon type, `sword` to `faith`, issue 67, then `gauntlet`, issue 70; a state without it reads as 0 in every type), `masteryPoints` (mastery points by class id, only classes with points, issue 69; a state without it reads as none).
 
@@ -71,6 +72,8 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `rankRaised` | `unit`, `weaponType`, `rank` (the new rank, `e` to `s`; issue 67) |
 | `masteryEarned` | `unit`, `class`, `ability` (the class's mastery ability, now in the unit's `abilities`; issue 69) |
 | `unitWaited` | `unit` |
+| `unitExited` | `unit`, `at` (the exit it left through; issue 269) |
+| `unitLeftBehind` | `unit`, `at` (on the board when the captain exited; counts as fallen) |
 | `cantoed` | `unit`, `from`, `to`, `path` (from equal to to and an empty path: the Canto declined) |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |

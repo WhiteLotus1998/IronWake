@@ -95,3 +95,4 @@ wait wren
 wait dunstan
 end
 move captain 19,3
+exit captain
