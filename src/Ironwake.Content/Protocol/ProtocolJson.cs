@@ -121,6 +121,21 @@ public static class ProtocolJson
                 w.WriteString("fallen", k.FallenId);
                 w.WriteString("item", k.ItemId);
                 break;
+            case KeepsakeTaken k:
+                w.WriteString("unit", k.UnitId);
+                w.WriteString("fallen", k.FallenId);
+                w.WriteString("item", k.ItemId);
+                break;
+            case KeepsakeLost k:
+                w.WriteString("fallen", k.FallenId);
+                w.WriteString("item", k.ItemId);
+                WriteCoord(w, "at", k.At);
+                if (k.CarrierId is { } carrier)
+                {
+                    w.WriteString("carrier", carrier);
+                }
+
+                break;
             case Cantoed c:
                 w.WriteString("unit", c.UnitId);
                 WriteCoord(w, "from", c.From);

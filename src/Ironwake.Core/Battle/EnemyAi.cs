@@ -152,14 +152,12 @@ public static class EnemyAi
         IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
-        var arms = Enumerable.Range(0, unit.Unit.Inventory.Count)
-            .Where(slot => unit.UsableWeaponAt(content, slot) is not null)
-            .Select(slot => (Slot: slot, Weapon: unit.UsableWeaponAt(content, slot)!, Armed: unit.WithSlotInFront(slot)))
-            .ToList();
-
+        var own = Arms(content, unit);
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
+            var carrier = state.Carrying(unit, tile);
+            var arms = ReferenceEquals(carrier, unit) ? own : Arms(content, carrier);
             var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
             var exposure = playerReach.Count(r => r.CanEnd(tile));
             var cost = reach.CostTo(tile)!.Value;
@@ -182,6 +180,24 @@ public static class EnemyAi
         }
 
         return best;
+    }
+
+    /// <summary>
+    /// The weapons <paramref name="carrier"/> may strike with, by slot in inventory order, each
+    /// with the unit as it strikes (that slot moved to the front). <see cref="BestOption"/>
+    /// reads a unit as it would be on each tile, holding the keepsakes it would take there
+    /// (<see cref="BattleState.Carrying"/>). A carrier strikes with a keepsake whenever it can
+    /// wield one (DESIGN.md 13.8, issue 295): the grudge overrides the score, so when any
+    /// keepsake is usable only keepsakes are offered; one it cannot wield it only carries.
+    /// </summary>
+    private static List<(int Slot, Weapon Weapon, BattleUnit Armed)> Arms(GameContent content, BattleUnit carrier)
+    {
+        var arms = Enumerable.Range(0, carrier.Unit.Inventory.Count)
+            .Where(slot => carrier.UsableWeaponAt(content, slot) is not null)
+            .Select(slot => (Slot: slot, Weapon: carrier.UsableWeaponAt(content, slot)!, Armed: carrier.WithSlotInFront(slot)))
+            .ToList();
+        var grudges = arms.Where(arm => carrier.Unit.Inventory.Items[arm.Slot].Keepsake is not null).ToList();
+        return grudges.Count > 0 ? grudges : arms;
     }
 
     /// <summary>

@@ -75,8 +75,10 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `unitWaited` | `unit` |
 | `unitExited` | `unit`, `at` (the exit it left through; issue 269) |
 | `unitLeftBehind` | `unit`, `at` (on the board when the captain exited; counts as fallen) |
-| `keepsakeLeft` | `fallen`, `item`, `at` (a fallen player unit's weapon stays on its tile on a `keepsakes: on` map; DESIGN 13.8) |
-| `keepsakeRecovered` | `unit`, `fallen`, `item` (the weapon goes to the end of the unit's inventory under the fallen's name) |
+| `keepsakeLeft` | `fallen`, `item`, `at` (a fallen player unit's weapon, or a keepsake a dying unit carried, stays on its tile on a `keepsakes: on` map; DESIGN 13.8, issue 295) |
+| `keepsakeRecovered` | `unit`, `fallen`, `item` (the newest keepsake on the tile goes to the end of the unit's inventory under the fallen's name) |
+| `keepsakeTaken` | `unit`, `fallen`, `item` (an enemy ended a move on a keepsake and carries it, past the inventory cap, until it dies; issue 295) |
+| `keepsakeLost` | `fallen`, `item`, `at`, optional `carrier` (the battle ended with the keepsake unrecovered: lying at `at`, or carried off by `carrier` from `at`; issue 295) |
 | `cantoed` | `unit`, `from`, `to`, `path` (from equal to to and an empty path: the Canto declined) |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |

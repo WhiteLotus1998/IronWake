@@ -440,6 +440,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 295's hand play of the keep with <c>keepsakes: on</c> on seed 5: Pell falls at 9,5
+    /// outside the wall and Dunstan at 11,8 on the last enemy phase, nobody goes back for
+    /// either, and the battle's end names both keepsakes where they were left.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptLeavesTwoKeepsakesOnTheKeep()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ironwake_keep_keepsakes.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_keep_keepsakes-5.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "5", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: survive\n", output);
+        Assert.Contains("pell falls at 9,5\nCinder (Pell's) lies at 9,5\n", output);
+        Assert.Contains("Cinder (Pell's) was left at 9,5\nIron Lance (Dunstan's) was left at 11,8\n", output);
+    }
+
+    /// <summary>
     /// Issue 32's acceptance: the map-events sample under docs/samples, played by hand on
     /// seed 7. Teodor ending on the lever at 3,1 opens the wall at 4,1, the reinforcement
     /// arrives from the east edge at the start of enemy phase 3 and walks through the new

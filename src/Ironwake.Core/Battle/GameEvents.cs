@@ -34,6 +34,15 @@ public sealed record KeepsakeLeft(string FallenId, string ItemId, Coord At) : Ga
 /// <summary>A player unit recovered a fallen ally's weapon; it carries the fallen's name from now on (DESIGN.md 13.8).</summary>
 public sealed record KeepsakeRecovered(string UnitId, string FallenId, string ItemId) : GameEvent;
 
+/// <summary>An enemy ended a move on a keepsake and took it; it carries the weapon until it dies (DESIGN.md 13.8, issue 295).</summary>
+public sealed record KeepsakeTaken(string UnitId, string FallenId, string ItemId) : GameEvent;
+
+/// <summary>
+/// The battle ended with a keepsake nobody recovered (issue 295): lying at <paramref name="At"/>,
+/// or carried off by the enemy <paramref name="CarrierId"/> when it is not null.
+/// </summary>
+public sealed record KeepsakeLost(string FallenId, string ItemId, Coord At, string? CarrierId) : GameEvent;
+
 /// <summary>A player unit left the board through the exit it stood on (issue 269).</summary>
 public sealed record UnitExited(string UnitId, Coord At) : GameEvent;
 

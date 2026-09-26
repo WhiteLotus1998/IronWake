@@ -13,6 +13,9 @@ public readonly record struct ItemStack(string ItemId, int Uses)
 /// <summary>
 /// A five-slot inventory. The equipped weapon is the first slot holding a usable weapon
 /// (<see cref="BattleUnit.EquippedSlot"/>); consumables are the entries of items.json.
+/// The cap counts ordinary stacks only: an enemy that takes a stack of keepsakes carries
+/// them past it (DESIGN.md 13.8, issue 295), so a fallen recruit's weapon is never dropped
+/// for want of a slot.
 /// </summary>
 public sealed record Inventory
 {
@@ -20,9 +23,10 @@ public sealed record Inventory
 
     public Inventory(ValueList<ItemStack> items)
     {
-        if (items.Count > Capacity)
+        var ordinary = items.Count(stack => stack.Keepsake is null);
+        if (ordinary > Capacity)
         {
-            throw new ArgumentException($"inventory holds at most {Capacity} items, got {items.Count}", nameof(items));
+            throw new ArgumentException($"inventory holds at most {Capacity} items, got {ordinary}", nameof(items));
         }
 
         Items = items;

@@ -209,6 +209,14 @@ public static class MapRenderer
                 sb.Append("  unarmed");
             }
 
+            var carried = unit.Side == Side.Enemy
+                ? unit.Unit.Inventory.Items.Where(stack => stack.Keepsake is not null).Select(stack => Keepsake.Name(stack.ItemId, stack.Keepsake!, content)).ToList()
+                : new List<string>();
+            if (carried.Count > 0)
+            {
+                sb.Append("  carries ").Append(string.Join(", ", carried));
+            }
+
             if (unit.Acted)
             {
                 sb.Append(unit.Canto is { } canto ? $"  canto {canto}" : "  done");
