@@ -7,6 +7,14 @@ public static class MapFiles
 {
     public const string MapsDirectory = "maps";
     public const string Extension = ".map";
+    public const string KeepDirectory = "keep";
+
+    /// <summary>
+    /// Where the campaign map <paramref name="mapId"/> lives: under <c>content/keep</c> for the keep
+    /// and its raid (issue 288), under <c>content/maps</c> for every other map.
+    /// </summary>
+    public static string CampaignPath(string contentRoot, GameContent content, string mapId) =>
+        Path.Combine(contentRoot, content.Campaign.Keep.IsKeepMap(mapId) ? KeepDirectory : MapsDirectory, mapId + Extension);
 
     /// <summary>Loads one map file. Errors name the file as given.</summary>
     public static MapDefinition Load(string path, GameContent content)

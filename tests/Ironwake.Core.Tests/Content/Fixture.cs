@@ -92,16 +92,45 @@ internal static class Fixture
     /// </summary>
     public static string LadderFreeContentDirectory() => LadderFree.Value;
 
-    private static string CopyWithoutLadder()
+    private static readonly Lazy<string> KeepCampaign = new(CopyWithKeepCampaign);
+
+    /// <summary>
+    /// A copy of the real content directory whose campaign is only the raid and the keep (issue
+    /// 288), in that order, so a scripted campaign reaches the keep's menu and the finale in two
+    /// battles. Made once per test run under the temp directory.
+    /// </summary>
+    public static string KeepCampaignContentDirectory() => KeepCampaign.Value;
+
+    private static string CopyWithKeepCampaign()
+    {
+        var target = CopyRealContent("ironwake-keep-campaign-");
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        var keep = campaign["keep"]!;
+        var ids = new[] { (string)keep["raid"]!, (string)keep["map"]! };
+        var maps = campaign["maps"]!.AsArray().Where(m => ids.Contains((string)m!["map"]!)).Select(m => m!.DeepClone()).ToArray();
+        campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
+        return target;
+    }
+
+    private static string CopyRealContent(string prefix)
     {
         var source = RealContentDirectory();
-        var target = Path.Combine(Path.GetTempPath(), "ironwake-ladder-free-" + Guid.NewGuid().ToString("N"));
+        var target = Path.Combine(Path.GetTempPath(), prefix + Guid.NewGuid().ToString("N"));
         foreach (var file in Directory.EnumerateFiles(source, "*", SearchOption.AllDirectories))
         {
             var copy = Path.Combine(target, Path.GetRelativePath(source, file));
             Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
             File.Copy(file, copy);
         }
+
+        return target;
+    }
+
+    private static string CopyWithoutLadder()
+    {
+        var target = CopyRealContent("ironwake-ladder-free-");
 
         var classesPath = Path.Combine(target, ContentFiles.ClassesName);
         var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;

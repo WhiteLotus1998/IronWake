@@ -603,7 +603,8 @@ public static class ProtocolJson
     /// (a ulong does not survive every JSON reader), the difficulty, the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
-    /// since the last map (issue 252). A campaign is a file.
+    /// since the last map (issue 252), and the edits bought for the keep in the order they were made
+    /// (issue 288). A campaign is a file.
     /// </summary>
     public static string Campaign(CampaignRecord record) => Write(w =>
     {
@@ -632,6 +633,16 @@ public static class ProtocolJson
             w.WriteStartObject();
             w.WriteString("unit", attempt.UnitId);
             w.WriteString("class", attempt.ClassId);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+        w.WriteStartArray("keep");
+        foreach (var work in record.Keep)
+        {
+            w.WriteStartObject();
+            w.WriteString("edit", work.EditId);
+            WriteCoord(w, "at", work.At);
             w.WriteEndObject();
         }
 
@@ -678,7 +689,25 @@ public static class ProtocolJson
             ReadStrings(e, "benched"))
         {
             TrialsTried = ReadTrialsTried(e),
+            Keep = ReadKeep(e, content),
         };
+    }
+
+    /// <summary>The optional <c>keep</c> array of a campaign record (issue 288); a record written before it reads as nothing built.</summary>
+    private static ValueList<KeepWork> ReadKeep(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("keep", out _))
+        {
+            return ValueList<KeepWork>.Empty;
+        }
+
+        var built = Array(Required(e, "keep"), "keep").Select(k => new KeepWork(RequiredString(k, "edit"), ReadCoord(k, "at"))).ToList();
+        foreach (var work in built.Where(w => content.Campaign.Keep.Edit(w.EditId) is null))
+        {
+            throw new ProtocolException($"field 'keep': '{work.EditId}' is not on the keep's menu");
+        }
+
+        return ValueList<KeepWork>.From(built);
     }
 
     /// <summary>The optional <c>trialsTried</c> array of a campaign record (issue 252); a record written before it reads as none tried.</summary>

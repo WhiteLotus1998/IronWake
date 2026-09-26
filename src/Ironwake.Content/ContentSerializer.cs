@@ -64,6 +64,11 @@ public static class ContentSerializer
             {
                 writer.WriteStartObject("keep");
                 writer.WriteString("map", campaign.Keep.MapId);
+                if (campaign.Keep.RaidId.Length > 0)
+                {
+                    writer.WriteString("raid", campaign.Keep.RaidId);
+                }
+
                 writer.WriteStartArray("edits");
                 foreach (var edit in campaign.Keep.Edits)
                 {

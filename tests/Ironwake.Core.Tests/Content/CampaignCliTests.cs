@@ -41,6 +41,39 @@ public class CampaignCliTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 288's acceptance: a scripted campaign through the raid, one edit bought at the camp
+    /// after it, and the finale fought on the edited keep, on content whose campaign is the raid and
+    /// the keep alone. The wall bought on the screen stands on the finale's board.
+    /// </summary>
+    [Fact]
+    public void TheJournaledKeepCampaignReplaysToItsTranscript()
+    {
+        var script = Transcript("2026-09-26-campaign-keep-288.script");
+
+        var output = Run(out var exit, "campaign", "--seed", "288", "--script", script, "--strict", "--content", Fixture.KeepCampaignContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("Raid on Ironwake won: rout; reward 1000, the purse holds 1500; nobody fell\n", output);
+        Assert.Contains("keep: Ironwake Keep; built: nothing; the purse holds 1500\n", output);
+        Assert.Contains("built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)\n", output);
+        Assert.Contains("map 2 of 2: Ironwake Keep, seed 289\nIronwake Keep  turn 1 of 8  player phase  survive  recall 3\n", output);
+        Assert.Contains("\n 8 ...e......#.....\n", output);
+        Assert.Contains("campaign won: all 2 maps, the purse holds 3100\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    [Fact]
+    public void TheKeepsMenuIsRefusedOnTheScreenBeforeTheRaid()
+    {
+        var output = Play(out _, "keep\nbuild wall 10,3\nbuild wall\n");
+
+        Assert.Contains("> keep\nERROR: the keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
+        Assert.Contains("> build wall 10,3\nERROR: the keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
+        Assert.Contains("ERROR: usage: build <edit> <x,y>\n", output);
+        Assert.DoesNotContain("keep: Ironwake Keep", output);
+    }
+
     [Fact]
     public void LeaveIsRefusedWhileTheBattleIsUndecided()
     {
@@ -87,7 +120,7 @@ public class CampaignCliTests
     {
         const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain 3,0\nleave\ntrial captain outrider\ntrial wren pikeman\n";
 
-        var output = Play(out var exit, script, "--seed", "6");
+        var output = Play(out var exit, script, "--seed", "4");
 
         Assert.Equal(1, exit);
         Assert.Contains("trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider\n", output);
@@ -96,7 +129,7 @@ public class CampaignCliTests
         Assert.Contains("captain passes the Outrider trial and certifies from Cadet to Outrider with no seal; L1 exp 30\n", output);
         Assert.Contains("ERROR: captain cannot certify as Outrider: ", output);
         Assert.Contains("ERROR: Pikeman has no trial; certify with a seal\n", output);
-        Assert.Contains("-- before map 1 of 6: Old Mill Road; the purse holds 500 --", output);
+        Assert.Contains("-- before map 1 of 8: Old Mill Road; the purse holds 500 --", output);
     }
 
     [Fact]
@@ -104,7 +137,7 @@ public class CampaignCliTests
     {
         const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain stay\nend\nleave\ntrial captain outrider\n";
 
-        var output = Play(out _, script, "--seed", "7");
+        var output = Play(out _, script, "--seed", "5");
 
         Assert.Contains("trial: Trial of the Outrider, seed 13\n", output);
         Assert.Contains("battle lost: turn 1 passed; no recall is left, so leave\n", output);
