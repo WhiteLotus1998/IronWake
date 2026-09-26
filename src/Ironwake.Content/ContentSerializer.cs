@@ -87,6 +87,11 @@ public static class ContentSerializer
                     writer.WriteEndObject();
                 }
 
+                if (modifier.Wielding is { } wielding)
+                {
+                    writer.WriteString("wielding", wielding.ToString().ToLowerInvariant());
+                }
+
                 writer.WriteNumber("hit", modifier.Hit);
                 writer.WriteNumber("avoid", modifier.Avoid);
                 writer.WriteNumber("crit", modifier.Crit);

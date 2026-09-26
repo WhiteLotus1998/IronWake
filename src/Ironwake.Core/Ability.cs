@@ -49,12 +49,21 @@ public sealed record StatDeltaEffect(Stats Delta) : AbilityEffect
 
 /// <summary>
 /// An on-combat modifier: hit and crit added to this side's strikes, avoid and crit avoid
-/// added against the opponent's, whenever the opponent matches <see cref="Against"/>.
-/// Lancebreaker (section 5) is <c>+20 hit, +20 avoid against lances</c>.
+/// added against the opponent's, whenever the opponent matches <see cref="Against"/> and,
+/// when <see cref="Wielding"/> is set, the holder strikes or counters with a weapon of that
+/// type (issue 245). Lancebreaker (section 5) is <c>+20 hit, +20 avoid against lances</c>;
+/// Bloodrush is <c>+15 crit, -10 avoid while wielding an axe</c>.
 /// </summary>
 public sealed record CombatModifierEffect(OpponentCondition Against, int Hit, int Avoid, int Crit, int CritAvoid) : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.OnCombat;
+
+    /// <summary>The weapon type the holder must fight with for the modifier to apply, or null for any; an unarmed holder never matches a type.</summary>
+    public WeaponType? Wielding { get; init; }
+
+    /// <summary>Whether the modifier applies to <paramref name="self"/> fighting <paramref name="opponent"/>.</summary>
+    public bool AppliesTo(Combatant self, Combatant opponent) =>
+        (Wielding is null || self.Weapon?.Type == Wielding) && Against.Matches(opponent);
 }
 
 /// <summary>
@@ -138,13 +147,13 @@ public static class AbilityRules
     /// <summary>Whether any of <paramref name="abilities"/> is Canto.</summary>
     public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
 
-    /// <summary>The sum of <paramref name="self"/>'s combat modifiers whose condition <paramref name="opponent"/> meets.</summary>
+    /// <summary>The sum of <paramref name="self"/>'s combat modifiers whose conditions hold: <paramref name="opponent"/> meets the opponent condition, and <paramref name="self"/>'s weapon the wielding one.</summary>
     public static CombatBonus Against(Combatant self, Combatant opponent)
     {
         var bonus = CombatBonus.None;
         foreach (var ability in self.Abilities)
         {
-            if (ability.Effect is CombatModifierEffect modifier && modifier.Against.Matches(opponent))
+            if (ability.Effect is CombatModifierEffect modifier && modifier.AppliesTo(self, opponent))
             {
                 bonus = new CombatBonus(
                     bonus.Hit + modifier.Hit,

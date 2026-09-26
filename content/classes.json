@@ -62,7 +62,7 @@
       "mov": 4,
       "weapons": ["faith"],
       "mastery": "grace",
-      "masteryPoints": 8,
+      "masteryPoints": 12,
       "modifiers": { "mag": 1, "res": 2 },
       "growthModifiers": { "res": 10, "lck": 5 }
     },
@@ -73,7 +73,7 @@
       "mov": 6,
       "abilities": ["canto"],
       "weapons": ["lance", "sword"],
-      "mastery": "lancebreaker",
+      "mastery": "swordbreaker",
       "masteryPoints": 12,
       "modifiers": { "hp": 1, "str": 1 },
       "growthModifiers": { "hp": 5, "str": 5 }

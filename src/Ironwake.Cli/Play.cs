@@ -1085,7 +1085,7 @@ public sealed class PlaySession
         var name = content.Ability(id).Name;
         return unit.Unit.Abilities.Contains(id)
             ? $"  mastery: {name}, mastered"
-            : $"  mastery: {name} ({unit.Unit.Mastery.Points(unitClass.Id)} of {unitClass.MasteryPoints} combats)";
+            : $"  mastery: {name} ({unit.Unit.Mastery.Points(unitClass.Id)} of {unitClass.MasteryPoints} {(content.Weapons.Values.Any(w => w.Heals && unitClass.CanUse(w.Type)) ? "combats or heals" : "combats")})";
     }
 
     /// <summary>

@@ -164,7 +164,8 @@ public static class ContentLoader
     /// its <c>stats</c> object a partial stat block with at least one non-zero value;
     /// <c>combat</c> is an on-combat modifier of <c>hit</c>, <c>avoid</c>, <c>crit</c> and
     /// <c>critAvoid</c> (each optional, at least one non-zero), applied against opponents
-    /// matching the optional <c>against</c> object's <c>weapon</c> and <c>movement</c>;
+    /// matching the optional <c>against</c> object's <c>weapon</c> and <c>movement</c> and
+    /// only while the holder fights with the optional <c>wielding</c> weapon type (issue 245);
     /// <c>art</c> is a combat art (issue 68): a <c>weapon</c> type, the <c>rank</c> it needs,
     /// its extra <c>cost</c> in uses (at least 1), and optional <c>mt</c>, <c>hit</c>,
     /// <c>crit</c>, <c>wt</c> and <c>range</c> deltas, at least one non-zero and
@@ -204,7 +205,7 @@ public static class ContentLoader
 
                 return new StatDeltaEffect(delta);
             case "combat":
-                RequireOnly(entry, effect, "effect", "kind", "against", "hit", "avoid", "crit", "critAvoid");
+                RequireOnly(entry, effect, "effect", "kind", "against", "wielding", "hit", "avoid", "crit", "critAvoid");
                 var against = OpponentCondition.Any;
                 if (effect.OptionalObject("against") is { } condition)
                 {
@@ -219,7 +220,11 @@ public static class ContentLoader
                     against = new OpponentCondition(weapon, movement);
                 }
 
-                var modifier = new CombatModifierEffect(against, effect.IntOr("hit", 0), effect.IntOr("avoid", 0), effect.IntOr("crit", 0), effect.IntOr("critAvoid", 0));
+                WeaponType? wielding = effect.Has("wielding") ? entry.ParseEnum<WeaponType>("effect.wielding", effect.String("wielding")) : null;
+                var modifier = new CombatModifierEffect(against, effect.IntOr("hit", 0), effect.IntOr("avoid", 0), effect.IntOr("crit", 0), effect.IntOr("critAvoid", 0))
+                {
+                    Wielding = wielding,
+                };
                 if (modifier.Hit == 0 && modifier.Avoid == 0 && modifier.Crit == 0 && modifier.CritAvoid == 0)
                 {
                     throw entry.Error("effect", "a combat effect must change hit, avoid, crit or critAvoid");
