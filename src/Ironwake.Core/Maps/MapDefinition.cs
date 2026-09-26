@@ -53,6 +53,12 @@ namespace Ironwake.Core;
 /// one less every turn after, never under 1 (<see cref="Ironwake.Core.Dusk"/>). Null for a map
 /// in daylight, where every unit sees the whole board.
 /// </param>
+/// <param name="ArsenalShown">
+/// The <c>arsenal: on</c> header (DESIGN.md 13.11, experiment): every forecast line names the
+/// weapon each side strikes with, the counter's included, so a boss carrying a heavy and a
+/// light weapon shows which one it took and which one it will counter with. Display only; no
+/// rule reads it. Off by default.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -74,7 +80,8 @@ public sealed record MapDefinition(
     CertificationTrial? Certification = null,
     bool Announced = false,
     bool KeepsakesEnabled = false,
-    int? Dusk = null)
+    int? Dusk = null,
+    bool ArsenalShown = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

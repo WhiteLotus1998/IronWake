@@ -666,7 +666,8 @@ public sealed class PlaySession
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
                 }
 
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", KeepsakeWith(attacker!, _content, attack.Slot)));
+                var (with, counterWith) = Arms(_state, _content, attacker!, target!, attack.Slot);
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith));
                 PrintRivalry(target!, countering: true);
             }
 
@@ -939,7 +940,8 @@ public sealed class PlaySession
     public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, KeepsakeWith(unit, content, slot)) };
+        var (with, counterWith) = Arms(state, content, unit, target, slot);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith) };
         if (art is not null)
         {
             lines.Add(ArtLine(content, unit, forecast, slot, art));
@@ -1086,9 +1088,38 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "")
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "")
     {
-        return $"forecast {unit.Id} -> {target.Id}{where}{with}: {StrikeText(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? StrikeText(forecast.Defender) : "none")}";
+        return $"forecast {unit.Id} -> {target.Id}{where}{with}: {StrikeText(forecast.Attacker)}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) : ": none")}";
+    }
+
+    /// <summary>
+    /// The weapon suffixes of a forecast line. On a map with the <c>arsenal: on</c> header
+    /// (DESIGN.md 13.11, experiment) both sides are named, <c> with Toll Axe</c> after the target
+    /// for the attacker's <paramref name="slot"/> (else its equipped weapon) and after
+    /// <c>counter</c> for the weapon the defender holds in front, which is the one it last swung;
+    /// a keepsake keeps its name. Elsewhere only a keepsake is named (<see cref="KeepsakeWith"/>)
+    /// and the counter is not.
+    /// </summary>
+    public static (string With, string CounterWith) Arms(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int? slot)
+    {
+        if (!state.Map.ArsenalShown)
+        {
+            return (KeepsakeWith(unit, content, slot), "");
+        }
+
+        return (WeaponWith(unit, content, slot ?? unit.EquippedSlot(content)), WeaponWith(target, content, target.EquippedSlot(content)));
+    }
+
+    private static string WeaponWith(BattleUnit unit, GameContent content, int slot)
+    {
+        if (slot < 0 || slot >= unit.Unit.Inventory.Count)
+        {
+            return "";
+        }
+
+        var stack = unit.Unit.Inventory.Items[slot];
+        return " with " + content.ItemName(stack.ItemId) + Keepsake.Suffix(stack, content);
     }
 
     /// <summary>
