@@ -112,7 +112,7 @@ public sealed class ProtocolSession
             w.WriteStartArray("events");
             foreach (var e in events)
             {
-                ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e));
+                ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e, _content));
             }
 
             w.WriteEndArray();

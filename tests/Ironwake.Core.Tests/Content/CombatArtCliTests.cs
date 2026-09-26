@@ -90,7 +90,7 @@ public class CombatArtCliTests : IDisposable
             "> forecast captain brigand-1\nforecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%\n"
             + "> attack captain brigand-1 art cleave\nforecast captain -> brigand-1: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%\n"
             + "  art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
-            + "captain declares cleave with iron_sword, spending 2 extra uses\n",
+            + "captain declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
@@ -124,7 +124,7 @@ public class CombatArtCliTests : IDisposable
 
             Assert.Contains("\"scheme\":\"twoRollAverage\",\"artCost\":2}", output);
             Assert.Contains("\\n  art Cleave: Iron Sword at mt 10", output);
-            Assert.Contains("{\"type\":\"artDeclared\",\"unit\":\"captain\",\"art\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"captain declares cleave with iron_sword, spending 2 extra uses\"}", output);
+            Assert.Contains("{\"type\":\"artDeclared\",\"unit\":\"captain\",\"art\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"captain declares Cleave with Iron Sword, spending 2 extra uses\"}", output);
         }
         finally
         {

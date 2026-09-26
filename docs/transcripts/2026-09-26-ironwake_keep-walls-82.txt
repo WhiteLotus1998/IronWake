@@ -1021,7 +1021,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 6/21   Plain
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > item teodor 2
-teodor uses field_dressing (2 left)
+teodor uses Field Dressing (2 left)
 teodor heals 10 (hp 16)
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
@@ -1598,7 +1598,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 3/21   Plain
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > item teodor 2
-teodor uses field_dressing (1 left)
+teodor uses Field Dressing (1 left)
 teodor heals 10 (hp 13)
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345

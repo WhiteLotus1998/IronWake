@@ -121,7 +121,7 @@ forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49
 > attack captain brigand-1 art cleave
 forecast captain -> brigand-1: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%
   art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss
-captain declares cleave with iron_sword, spending 2 extra uses
+captain declares Cleave with Iron Sword, spending 2 extra uses
 captain attacks brigand-1
   captain hits brigand-1 for 16 (hp 0)
   captain hp 22, brigand-1 hp 0
@@ -556,7 +556,7 @@ B  wren             Wren L1 cadet              6,1    hp 10/20  Plain  done
 > attack captain mill_bandit-1 art cleave
 forecast captain -> mill_bandit-1: dmg 15 hit 87% crit 3%; counter: dmg 9 hit 88% crit 2%
   art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss
-captain declares cleave with iron_sword, spending 2 extra uses
+captain declares Cleave with Iron Sword, spending 2 extra uses
 captain attacks mill_bandit-1
   captain hits mill_bandit-1 for 15 (hp 9)
   mill_bandit-1 hits captain for 9 (hp 13)

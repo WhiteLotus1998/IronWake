@@ -64,6 +64,14 @@ public class KeepsakeTests
     }
 
     [Fact]
+    public void TheKeepsakeLegendNamesTheWeaponAndTheFallenByTheirDisplayNames()
+    {
+        var (_, death) = WrenFalls();
+
+        Assert.Contains("keepsakes: Iron Sword (Wren's) at 2,1\n", MapRenderer.Render(death.Next, Starter));
+    }
+
+    [Fact]
     public void AMapWithoutTheHeaderLeavesNoKeepsake()
     {
         var (_, death) = WrenFalls(keepsakes: false);

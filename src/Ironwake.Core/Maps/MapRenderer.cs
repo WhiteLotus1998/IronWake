@@ -229,7 +229,7 @@ public static class MapRenderer
 
         if (state.Keepsakes.Count > 0)
         {
-            sb.Append("keepsakes: ").Append(string.Join(", ", state.Keepsakes.Select(k => $"{k.FallenId}'s {k.Item.ItemId} at {k.At}"))).Append('\n');
+            sb.Append("keepsakes: ").Append(string.Join(", ", state.Keepsakes.Select(k => $"{Keepsake.Name(k.Item.ItemId, k.FallenId, content)} at {k.At}"))).Append('\n');
         }
 
         if (state.Escaped.Count > 0)

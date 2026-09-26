@@ -60,6 +60,13 @@ public sealed record GameContent(
 
     public Difficulty Difficulty(string id) => Lookup(Difficulties, id, "difficulty");
 
+    /// <summary>
+    /// The display name of an inventory entry: the consumable's name, else the weapon's, else the
+    /// id itself when neither table knows it, so a console line never throws on a stale id.
+    /// </summary>
+    public string ItemName(string id) =>
+        Items.TryGetValue(id, out var item) ? item.Name : Weapons.TryGetValue(id, out var weapon) ? weapon.Name : id;
+
     /// <summary>The unit's abilities, resolved in the order it lists them, then its class's (issue 71) that it does not already list.</summary>
     public ValueList<Ability> AbilitiesOf(Unit unit) =>
         ValueList<Ability>.From(unit.Abilities.Concat(Class(unit.ClassId).Abilities.Where(id => !unit.Abilities.Contains(id))).Select(Ability));

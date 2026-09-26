@@ -45,7 +45,7 @@ A  captain          Alder Fenn L1 outrider     3,3    hp 23/23  Forest  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > attack captain hexer-1 2
 forecast captain -> hexer-1: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 81% crit 0%
-captain equips iron_sword
+captain equips Iron Sword
 captain attacks hexer-1
   captain hits hexer-1 for 13 (hp 3)
   hexer-1 hits captain for 10 (hp 13)
