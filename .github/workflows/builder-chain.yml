@@ -1,7 +1,7 @@
 name: builder-chain
 
-# Keeps the Builder running back to back. When a Builder PR (an issue/ or
-# claude/issue- branch) merges, this fires the next Builder run, which takes
+# Keeps the Builder running back to back. When a Builder PR (an issue/,
+# claude/issue-, or experiment/ branch) merges, this fires the next Builder run, which takes
 # one issue and exits. It runs only while the repo variable IRONWAKE_CHAIN is
 # "on" and the clock is before IRONWAKE_CHAIN_UNTIL (UTC, ISO 8601), and
 # never when the queue of ready, unblocked issues is empty, an issue labeled
@@ -21,7 +21,7 @@ on:
 
 jobs:
   chain:
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-')))
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-') || startsWith(github.event.pull_request.head.ref, 'experiment/')))
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether to fire the next Builder run
