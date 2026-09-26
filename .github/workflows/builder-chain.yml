@@ -12,17 +12,22 @@ name: builder-chain
 # stale label delays the chain by at most an hour, and the hourly cron slots
 # pick the queue up. An empty queue after an issue merge wakes one
 # experiment run instead of stopping; an empty queue after an experiment
-# merge stops until the Table files more. A refused wake (routine paused,
-# daily cap) is logged, not failed.
+# merge stops until the Table files more. A heartbeat every 20 minutes
+# restarts a stalled chain (issues filed by a Table PR wake nothing) when no
+# issue is in progress, no Builder PR is open, and no Builder PR merged in the
+# last 50 minutes. A refused wake (routine paused, daily cap) is logged, not
+# failed.
 
 on:
   pull_request:
     types: [closed]
   workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *'
 
 jobs:
   chain:
-    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-') || startsWith(github.event.pull_request.head.ref, 'experiment/')))
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' || (github.event.pull_request.merged == true && (startsWith(github.event.pull_request.head.ref, 'issue/') || startsWith(github.event.pull_request.head.ref, 'claude/issue-') || startsWith(github.event.pull_request.head.ref, 'experiment/')))
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether to fire the next Builder run
@@ -34,6 +39,7 @@ jobs:
           BUILDER_URL: ${{ secrets.IRONWAKE_BUILDER_URL }}
           BUILDER_TOKEN: ${{ secrets.IRONWAKE_BUILDER_TOKEN }}
           MERGED_BRANCH: ${{ github.event.pull_request.head.ref }}
+          EVENT: ${{ github.event_name }}
         run: |
           if [ "$CHAIN" != "on" ]; then echo "chain is off"; exit 0; fi
           if [ -z "$BUILDER_URL" ] || [ -z "$BUILDER_TOKEN" ]; then echo "builder secrets not set"; exit 0; fi
@@ -44,6 +50,20 @@ jobs:
           fi
           forks="$(gh api "repos/$REPO/issues?labels=fork&state=open&per_page=1" --jq 'length')"
           if [ "${forks:-0}" -gt 0 ]; then echo "a fork issue is open; the chain waits for Lotus"; exit 0; fi
+
+          # The heartbeat restarts a chain that stalled, and only that: it stands
+          # down if any Builder may be alive or about to fire the next run, and
+          # never spikes an experiment on an empty queue.
+          if [ "$EVENT" = "schedule" ]; then
+            cut20h="$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
+            fresh="$(gh api "repos/$REPO/issues?labels=in-progress&state=open&per_page=100" --jq "[.[] | select(.pull_request == null) | select(.updated_at > \"$cut20h\")] | length")"
+            if [ "${fresh:-0}" -gt 0 ]; then echo "heartbeat: an issue is in progress; the chain is alive"; exit 0; fi
+            openprs="$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '[.[] | select(.head.ref | test("^(issue/|claude/issue-|experiment/)"))] | length')"
+            if [ "${openprs:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR is open; its merge fires the next run"; exit 0; fi
+            cut50m="$(date -u -d '50 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+            recent="$(gh api "repos/$REPO/pulls?state=closed&sort=updated&direction=desc&per_page=30" --jq "[.[] | select(.merged_at != null and .merged_at > \"$cut50m\") | select(.head.ref | test(\"^(issue/|claude/issue-|experiment/)\"))] | length")"
+            if [ "${recent:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR merged in the last 50 minutes; a chained run may be alive"; exit 0; fi
+          fi
 
           # The merged branch's own issue may still carry in-progress for a beat
           # after the merge; it is the run that just finished, not a live one.
@@ -71,10 +91,10 @@ jobs:
               issue/*|claude/issue-*)
                 text="Chain mode: the queue is empty. Take the empty-queue branch of your prompt: one experiment from DESIGN.md section 13, proposed on the Design Table, spiked on experiment/<name>, played, and journaled. Its merge fires the next run. Woken by the merge of $MERGED_BRANCH." ;;
               *)
-                echo "queue is empty after ${MERGED_BRANCH:-a manual dispatch}; the Table files the next issues"; exit 0 ;;
+                echo "queue is empty after ${MERGED_BRANCH:-a $EVENT run}; the Table files the next issues"; exit 0 ;;
             esac
           else
-            text="Chain mode: do exactly one issue and stop; the merge of your PR fires the next run. Woken by the merge of ${MERGED_BRANCH:-a manual dispatch}; $ready issues ready."
+            text="Chain mode: do exactly one issue and stop; the merge of your PR fires the next run. Woken by ${MERGED_BRANCH:+the merge of }${MERGED_BRANCH:-the $EVENT check}; $ready issues ready."
           fi
           payload="$(jq -cn --arg text "$text" '{text: $text}')"
           code="$(curl --silent --show-error -o /tmp/fire.out -w '%{http_code}' -X POST "$BUILDER_URL" \
