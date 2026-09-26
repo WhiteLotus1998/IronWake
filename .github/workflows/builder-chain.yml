@@ -4,15 +4,16 @@ name: builder-chain
 # claude/issue-, or experiment/ branch) merges, this fires the next Builder run, which takes
 # one issue and exits. It runs only while the repo variable IRONWAKE_CHAIN is
 # "on" and the clock is before IRONWAKE_CHAIN_UNTIL (UTC, ISO 8601), and
-# never when the queue of ready, unblocked issues is empty, an issue labeled
-# fork is open, or another Builder may still be working: an open issue other
+# never when an issue labeled fork is open or another Builder may still be
+# working: an open issue other
 # than the merged branch's own that took `in-progress` less than an hour
 # ago. A run's budget is about 50 minutes, so a label younger than that
 # means a cron-slot or chained Builder may be alive on it; a dead run's
 # stale label delays the chain by at most an hour, and the hourly cron slots
-# pick the queue up. The ready count includes every phase-3 issue, so the
-# empty-queue guard is a formality and the deadline is the real stop. A
-# refused wake (routine paused, daily cap) is logged, not failed.
+# pick the queue up. An empty queue after an issue merge wakes one
+# experiment run instead of stopping; an empty queue after an experiment
+# merge stops until the Table files more. A refused wake (routine paused,
+# daily cap) is logged, not failed.
 
 on:
   pull_request:
@@ -61,8 +62,20 @@ jobs:
           done
 
           ready="$(gh api "repos/$REPO/issues?labels=ready&state=open&per_page=100" --jq '[.[] | select(.pull_request == null) | select([.labels[].name] | index("blocked") | not) | select([.labels[].name] | index("in-progress") | not)] | length')"
-          if [ "${ready:-0}" -eq 0 ]; then echo "queue is empty; nothing to chain"; exit 0; fi
-          text="Chain mode: do exactly one issue and stop; the merge of your PR fires the next run. Woken by the merge of ${MERGED_BRANCH:-a manual dispatch}; $ready issues ready."
+          if [ "${ready:-0}" -eq 0 ]; then
+            # An empty queue after an issue merge wakes one experiment run, so the
+            # chain does not idle until the next cron slot. After an experiment
+            # merge it stops: the next issues come from the Table, not from
+            # another experiment.
+            case "$MERGED_BRANCH" in
+              issue/*|claude/issue-*)
+                text="Chain mode: the queue is empty. Take the empty-queue branch of your prompt: one experiment from DESIGN.md section 13, proposed on the Design Table, spiked on experiment/<name>, played, and journaled. Its merge fires the next run. Woken by the merge of $MERGED_BRANCH." ;;
+              *)
+                echo "queue is empty after ${MERGED_BRANCH:-a manual dispatch}; the Table files the next issues"; exit 0 ;;
+            esac
+          else
+            text="Chain mode: do exactly one issue and stop; the merge of your PR fires the next run. Woken by the merge of ${MERGED_BRANCH:-a manual dispatch}; $ready issues ready."
+          fi
           payload="$(jq -cn --arg text "$text" '{text: $text}')"
           code="$(curl --silent --show-error -o /tmp/fire.out -w '%{http_code}' -X POST "$BUILDER_URL" \
             -H "Authorization: Bearer $BUILDER_TOKEN" \
