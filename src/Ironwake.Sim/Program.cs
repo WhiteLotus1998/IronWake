@@ -250,6 +250,7 @@ public static class Program
         Wait w => $"wait {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
+        Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
         EndPhase => "end",

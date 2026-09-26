@@ -39,6 +39,7 @@ public sealed class PlaySession
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
+          shove <unit> <target>    on a shove map, push an adjacent unit one tile away (heft Str+Def at least its own), as the action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
@@ -448,6 +449,12 @@ public sealed class PlaySession
                 break;
             case "recover":
                 Error("usage: recover <unit>");
+                break;
+            case "shove" when words.Length == 3:
+                Apply(new Shove(words[1], words[2]));
+                break;
+            case "shove":
+                Error("usage: shove <unit> <target>");
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
@@ -1376,6 +1383,7 @@ public sealed class PlaySession
         Wait w => $"wait {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
+        Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -1436,6 +1444,8 @@ public sealed class PlaySession
                 return c.From == c.To
                     ? $"{c.UnitId} stays at {c.To} (canto)"
                     : $"{c.UnitId} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
+            case Shoved s:
+                return $"{s.UnitId} shoves {s.TargetId} {s.From} -> {s.To}";
             case UnitRetreated r:
                 return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
             case GrudgeSworn g:

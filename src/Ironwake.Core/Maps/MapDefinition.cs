@@ -58,6 +58,11 @@ namespace Ironwake.Core;
 /// is sworn against by every living enemy of that enemy's group (<see cref="BattleUnit.Grudge"/>),
 /// and the planner strikes the sworn unit first. Off by default.
 /// </param>
+/// <param name="ShoveEnabled">
+/// The <c>shove: on</c> header (DESIGN.md 13.12, experiment): a player unit may push an
+/// orthogonally adjacent unit one tile directly away as its action (<see cref="Shove"/>).
+/// Off by default.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -80,7 +85,8 @@ public sealed record MapDefinition(
     bool Announced = false,
     bool KeepsakesEnabled = false,
     int? Dusk = null,
-    bool GrudgesEnabled = false)
+    bool GrudgesEnabled = false,
+    bool ShoveEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

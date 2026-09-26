@@ -142,6 +142,12 @@ public static class ProtocolJson
                 WriteCoord(w, "to", c.To);
                 WriteCoords(w, "path", c.Path);
                 break;
+            case Shoved s:
+                w.WriteString("unit", s.UnitId);
+                w.WriteString("target", s.TargetId);
+                WriteCoord(w, "from", s.From);
+                WriteCoord(w, "to", s.To);
+                break;
             case UnitRetreated r:
                 w.WriteString("unit", r.UnitId);
                 WriteCoord(w, "from", r.From);
@@ -280,6 +286,11 @@ public static class ProtocolJson
                 w.WriteString("type", "recover");
                 w.WriteString("unit", recover.UnitId);
                 break;
+            case Shove shove:
+                w.WriteString("type", "shove");
+                w.WriteString("unit", shove.UnitId);
+                w.WriteString("target", shove.TargetId);
+                break;
             case Canto canto:
                 w.WriteString("type", "canto");
                 w.WriteString("unit", canto.UnitId);
@@ -319,9 +330,10 @@ public static class ProtocolJson
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
+            "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, shove, end, or recall"),
         };
     }
 
