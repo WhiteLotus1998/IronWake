@@ -512,6 +512,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 313: Code's play of the reworked Ford Chief (Toll Axe in front, then Steel Axe) on
+    /// seed 47. With the captain inside the Toll Axe's reach on turn 10 the chief takes the free
+    /// range-2 swing and keeps the light axe; on turn 11 Teodor is the only unit in reach and it
+    /// equips the Steel Axe to strike him, so on turn 13, after a Recall and a standoff, the
+    /// cadets double into the heavy axe and the captain finishes it.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptBaitsTheFordChiefOntoTheSteelAxeAndRoutsIt()
+    {
+        var output = RunSample("saltmarsh_ford_chief.map", "2026-09-26-saltmarsh_ford_chief-47.script", 47, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("forecast ford_chief-1 -> captain: dmg 10 hit 43% crit 0%; counter: none\n", output);
+        Assert.Contains("forecast ford_chief-1 -> teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%\nford_chief-1 equips Steel Axe\n", output);
+        Assert.Contains("forecast captain -> ford_chief-1: dmg 8 x2 hit 74% crit 4%; counter with Steel Axe: dmg 15 hit 62% crit 0%\n", output);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-saltmarsh_ford_chief-47.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 313: with no header, a unit that could strike from that range with more than one
     /// weapon has it named on the forecast line. The Ford Chief starts with the Toll Axe in
     /// front, so its counter at range 1 is the light axe; the captain carries one sword and is
