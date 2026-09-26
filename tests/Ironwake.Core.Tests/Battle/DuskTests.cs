@@ -359,6 +359,58 @@ public class DuskTests
         Assert.NotNull(EnemyAi.Drift(state, Starter, state.Find("soldier-1")!, state.ReachOf(state.Find("soldier-1")!, Starter), Array.Empty<Reach>()));
     }
 
+    /// <summary>
+    /// Issue 326's cork: a 14x3 night with a wall down column 7 and one gap at 7,1, the exits
+    /// at 13,1 and 13,2 beyond it, and a soldier at 1,1. Ottilie holds the gap six tiles from the
+    /// soldier, past hearing; Hale stands far off at 12,0.
+    /// </summary>
+    private static BattleState Corked() =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), """
+            name: Cork
+            size: 14x3
+            win: escape
+            exit: 13,1 13,2
+            turn_limit: 10
+            recall: 3
+            enemy_level: 1
+            dusk: 1
+
+            .......#......
+            ..............
+            .......#......
+
+            units:
+            P captain 12,0
+            P recruit:ottilie 7,1
+            E soldier 1,1 group:a behavior:aggressive
+
+            """).Do(new EndPhase());
+
+    [Fact]
+    public void DriftPathsAsIfThePartyWereNotThereSoAHeldGapDoesNotFreezeTheChase()
+    {
+        var state = Corked();
+        var soldier = state.Find("soldier-1")!;
+
+        Assert.False(Dusk.Knows(state, Starter, soldier, state.Find("ottilie")!));
+        Assert.False(Dusk.Knows(state, Starter, soldier, state.Find("hale")!));
+        var move = Assert.IsType<Move>(EnemyAi.PlanUnit(state, Starter, soldier)[0]);
+        Assert.Equal(new Coord(5, 1), move.To);
+    }
+
+    [Fact]
+    public void ADriftingUnitStopsShortOfThePlayerUnitOnItsPath()
+    {
+        var state = Corked().WithUnit(Corked().Find("soldier-1")! with { At = new Coord(5, 1) });
+        var soldier = state.Find("soldier-1")!;
+        var reach = state.ReachOf(soldier, Starter);
+
+        var to = EnemyAi.Drift(state, Starter, soldier, reach, Array.Empty<Reach>());
+
+        Assert.Equal(new Coord(6, 1), to);
+        Assert.True(reach.CanEnd(to!.Value));
+    }
+
     [Fact]
     public void OnRoutAnEnemyThatKnowsOfNobodyStillWaits()
     {

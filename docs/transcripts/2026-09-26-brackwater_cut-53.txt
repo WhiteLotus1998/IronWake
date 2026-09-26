@@ -1,0 +1,2067 @@
+Brackwater Cut, seed 53, scheme TwoRollAverage
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E.B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move rook 10,1
+rook moves 8,2 -> 10,1 via 8,1 9,1
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^.......#........
+ 3 .......E.B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack rook archer-2
+forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+rook attacks archer-2
+  rook misses archer-2
+  rook hp 17, archer-2 hp 17
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^.......#........
+ 3 .......E.B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 10,2
+pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack pell archer-2
+forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+pell attacks archer-2
+  pell hits archer-2 for 10 (hp 7)
+  archer-2 hits pell for 8 (hp 8)
+  pell hp 8, archer-2 hp 7
+pell gains 14 exp (14)
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move captain 10,4
+captain moves 8,4 -> 10,4 via 9,4
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?........A#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait captain
+captain waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?........A#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move dunstan 11,3
+dunstan moves 9,3 -> 11,3 via 10,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ...........B.......>
+ 4 .?........A#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ...........B.......>
+ 4 .?........A#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 10,3
+wren moves 8,5 -> 10,3 via 8,4 8,3 9,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ..........DB.......>
+ 4 .?........A#...^^..>
+ 5 ?..........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ..........DB.......>
+ 4 .?........A#...^^..>
+ 5 ?..........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+archer-2 heals 3 (hp 10)
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: attack archer-2 pell
+forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+archer-2 attacks pell
+  archer-2 hits pell for 8 (hp 0)
+  archer-2 hp 10, pell hp 0
+pell falls at 10,2
+enemy: something in the dark acts
+enemy: move brigand-1 5,4
+brigand-1 moves 1,4 -> 5,4 via 2,4 3,4 4,4
+enemy: wait brigand-1
+brigand-1 waits
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....?....~~~.......
+ 1 ..^.......Cg~.......
+ 2 ..^^.......#........
+ 3 ..........DB.......>
+ 4 ??.?.?....A#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 10/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        10,4   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 5,0 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> recall list
+recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same
+  state 0  turn 1  the start  undoes: gives back 7 enemy hp; returns pell alive, 16 hp
+  state 1  turn 1  after move rook 10,1  undoes: gives back 7 enemy hp; returns pell alive, 16 hp
+  state 2  turn 1  after attack rook archer-2  undoes: gives back 7 enemy hp; returns pell alive, 16 hp
+  state 3  turn 1  after move pell 10,2  undoes: gives back 7 enemy hp; returns pell alive, 16 hp
+  state 4  turn 1  after attack pell archer-2  undoes: returns pell alive, 8 hp
+  state 5  turn 1  after move captain 10,4  undoes: returns pell alive, 8 hp
+  state 6  turn 1  after wait captain  undoes: returns pell alive, 8 hp
+  state 7  turn 1  after move dunstan 11,3  undoes: returns pell alive, 8 hp
+  state 8  turn 1  after wait dunstan  undoes: returns pell alive, 8 hp
+  state 9  turn 1  after move wren 10,3  undoes: returns pell alive, 8 hp
+  state 10  turn 1  after wait wren  undoes: returns pell alive, 8 hp
+> recall 3
+recalled to state 3; 2 charges left
+undone: gives back 7 enemy hp; returns pell alive, 16 hp
+the rolls do not change: the same attack will roll the same
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat pell
+threat on pell at 10,2 (Plain):
+  archer-2 from 11,1 with Iron Bow (slot 1): dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+  if all land: 8 against 16 hp
+  and whatever is in the dark (?), unpriced
+> wait pell
+pell waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?......A..#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat dunstan
+threat on dunstan at 9,3 (Plain): no enemy can strike it next phase
+  and whatever is in the dark (?), unpriced
+> move captain 9,4
+captain moves 8,4 -> 9,4
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?.......A.#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait captain
+captain waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 .........B.........>
+ 4 .?.......A.#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move dunstan 11,3
+dunstan moves 9,3 -> 11,3 via 10,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ...........B.......>
+ 4 .?.......A.#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ...........B.......>
+ 4 .?.......A.#...^^..>
+ 5 ?.......D..#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 10,3
+wren moves 8,5 -> 10,3 via 8,4 8,3 9,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ..........DB.......>
+ 4 .?.......A.#...^^..>
+ 5 ?..........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ?.^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ..........DB.......>
+ 4 .?.......A.#...^^..>
+ 5 ?..........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ?..........#.....?.>
+ 8 .?.........#...^...>
+ 9 ..^^.......#...^^...
+10 ?.^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 23/23  Plain  done
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
+?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: attack archer-2 dunstan
+forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+archer-2 attacks dunstan
+  archer-2 hits dunstan for 3 (hp 20)
+  archer-2 hp 17, dunstan hp 20
+enemy: something in the dark acts
+enemy: move brigand-1 5,4
+brigand-1 moves 1,4 -> 5,4 via 2,4 3,4 4,4
+enemy: wait brigand-1
+brigand-1 waits
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......Cg~.......
+ 2 ..^^......E#........
+ 3 ....?.....DB.......>
+ 4 ??.?.c...A.#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+c  brigand-1        Brigand L3 reaver          5,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 12,2
+pell moves 10,2 -> 12,2 via 10,3 11,3 12,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......Cg~.......
+ 2 ..^^.......#E.......
+ 3 ....?.....DB.......>
+ 4 ??.?.c...A.#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+c  brigand-1        Brigand L3 reaver          5,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 16/16  Plain
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack pell archer-2
+forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+pell attacks archer-2
+  pell hits archer-2 for 10 (hp 7)
+  archer-2 hits pell for 8 (hp 8)
+  pell hp 8, archer-2 hp 7
+pell gains 14 exp (14)
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......Cg~.......
+ 2 ..^^.......#E.......
+ 3 ....?.....DB.......>
+ 4 ??.?.c...A.#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+c  brigand-1        Brigand L3 reaver          5,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack rook archer-2
+forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+rook attacks archer-2
+  rook hits archer-2 for 7 (hp 0)
+  rook hp 17, archer-2 hp 0
+rook gains 40 exp (40)
+archer-2 falls at 11,1
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?.....DB.......>
+ 4 ??.?.c...A.#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          5,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move captain 12,3
+captain moves 9,4 -> 12,3 via 9,3 10,3 11,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?.....DBA......>
+ 4 ??.?.?.....#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait captain
+captain waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?.....DBA......>
+ 4 ??.?.?.....#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 14,3
+wren moves 10,3 -> 14,3 via 11,3 12,3 13,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?......BA.D....>
+ 4 ??.?.?.....#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,3 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?......BA.D....>
+ 4 ??.?.?.....#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+?  unseen at 4,3 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat dunstan
+threat on dunstan at 11,3 (Plain): no enemy can strike it next phase
+  and whatever is in the dark (?), unpriced
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^.......#E.......
+ 3 ....?......BA.D....>
+ 4 ??.?.?.....#...^^..>
+ 5 ..?........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 20/23  Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+?  unseen at 4,3 0,4 1,4 3,4 5,4 2,5 17,5 17,6 17,7
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: move brigand-1 8,3
+brigand-1 moves 5,4 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: move rider-1 10,3
+rider-1 moves 4,3 -> 10,3 via 5,3 6,3 7,3 8,3 9,3
+enemy: attack rider-1 dunstan
+forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+rider-1 attacks dunstan
+  rider-1 hits dunstan for 6 (hp 14)
+  dunstan hits rider-1 for 10 (hp 11)
+  rider-1 hp 11, dunstan hp 14
+dunstan gains 14 exp (14)
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^?......#E.......
+ 3 ......?.c.aBA.D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 14/23  Plain
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          10,3   hp 11/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack dunstan rider-1
+forecast dunstan -> rider-1: dmg 10 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+dunstan attacks rider-1
+  dunstan hits rider-1 for 10 (hp 1)
+  rider-1 hits dunstan for 6 (hp 8)
+  dunstan hp 8, rider-1 hp 1
+dunstan gains 14 exp (28)
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......CF~.......
+ 2 ..^^?......#E.......
+ 3 ......?.c.aBA.D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          10,3   hp 1/21   Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move rook 10,2
+rook moves 10,1 -> 10,2
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^?.....C#E.......
+ 3 ......?.c.aBA.D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          10,3   hp 1/21   Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack rook rider-1
+forecast rook -> rider-1: dmg 8 hit 79% crit 3%; counter: dmg 12 hit 63% crit 0%
+rook attacks rider-1
+  rook hits rider-1 for 8 (hp 0)
+  rook hp 17, rider-1 hp 0
+rook gains 40 exp (80)
+rider-1 falls at 10,3
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^?.....C#E.......
+ 3 ......?.c..BA.D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        12,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat rook
+threat on rook at 10,2 (Plain):
+  brigand-1 from 9,2 with Iron Axe (slot 1): dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
+  if all land: 15 against 17 hp
+  and whatever is in the dark (?), unpriced
+> move captain 15,2
+captain moves 12,3 -> 15,2 via 12,2 13,2 14,2
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^?.....C#E..A....
+ 3 ......?.c..B..D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait captain
+captain waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^?.....C#E..A....
+ 3 ......?.c..B..D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 14,1
+pell moves 12,2 -> 14,1 via 13,2 13,1
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.E.....
+ 2 ..^^?.....C#...A....
+ 3 ......?.c..B..D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait pell
+pell waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.E.....
+ 2 ..^^?.....C#...A....
+ 3 ......?.c..B..D....>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 15,1
+wren moves 14,3 -> 15,1 via 14,2 14,1
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.ED....
+ 2 ..^^?.....C#...A....
+ 3 ......?.c..B.......>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              15,1   hp 20/20  Plain
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.ED....
+ 2 ..^^?.....C#...A....
+ 3 ......?.c..B.......>
+ 4 .....?.....#...^^..>
+ 5 ......?....#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         11,3   hp 8/23   Plain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              15,1   hp 20/20  Plain  done
+?  unseen at 4,2 6,3 5,4 6,5 17,5 17,6 17,7
+dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: move archer-1 8,2
+archer-1 moves 6,3 -> 8,2 via 6,2 7,2
+enemy: attack archer-1 rook
+forecast archer-1 -> rook: dmg 19 hit 72% crit 1%; counter: none
+archer-1 attacks rook
+  archer-1 misses rook
+  archer-1 hp 17, rook hp 17
+enemy: something in the dark acts
+enemy: move brigand-1 10,3
+brigand-1 moves 8,3 -> 10,3 via 9,3
+enemy: attack brigand-1 dunstan
+forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+brigand-1 attacks dunstan
+  brigand-1 hits dunstan for 9 (hp 0)
+  brigand-1 hp 23, dunstan hp 0
+dunstan falls at 11,3
+enemy: move brigand-2 7,2
+brigand-2 moves 5,4 -> 7,2 via 5,3 5,2 6,2
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 8,3
+hexer-1 moves 6,5 -> 8,3 via 6,4 6,3 7,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-2 9,2
+rider-2 moves 4,2 -> 9,2 via 5,2 6,2 7,2 8,2
+enemy: attack rider-2 rook
+forecast rider-2 -> rook: dmg 12 hit 63% crit 0%; counter: dmg 8 hit 79% crit 3%
+rider-2 attacks rook
+  rider-2 misses rook
+  rook misses rider-2
+  rider-2 hp 21, rook hp 17
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.ED....
+ 2 ..^^...?ebC#...A....
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,2   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              15,1   hp 20/20  Plain
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move captain 18,1
+captain moves 15,2 -> 18,1 via 15,1 16,1 17,1
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.ED..A.
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              15,1   hp 20/20  Plain
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait captain
+captain waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.ED..A.
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              15,1   hp 20/20  Plain
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 19,1
+wren moves 15,1 -> 19,1 via 16,1 17,1 18,1
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.E...AD
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.E...AD
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              14,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 17,0
+pell moves 14,1 -> 17,0 via 14,0 15,0 16,0
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~....E..
+ 1 ..^.......~F~.....AD
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              17,0   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait pell
+pell waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~....E..
+ 1 ..^.......~F~.....AD
+ 2 ..^^...?ebC#........
+ 3 ........?.c........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           8,2    hp 17/17  Plain  group chase, aggressive
+c  brigand-1        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              17,0   hp 8/16   Plain  done
+b  rider-2          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           10,2   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 7,2 8,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move rook 15,1
+rook moves 10,2 -> 15,1 via 10,1 11,1 12,1 13,1 14,1
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~....E..
+ 1 ..^.......~F~..C..AD
+ 2 ..^^...???.#........
+ 3 ........?.?........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              17,0   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           15,1   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 7,2 8,2 9,2 8,3 10,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait rook
+rook waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~....E..
+ 1 ..^.......~F~..C..AD
+ 2 ..^^...???.#........
+ 3 ........?.?........>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              17,0   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           15,1   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 7,2 8,2 9,2 8,3 10,3 17,5 17,6 17,7
+dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat captain
+threat on captain at 18,1 (Plain): no enemy can strike it next phase
+  and whatever is in the dark (?), unpriced
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~....E..
+ 1 ..^.......~F~..C..AD
+ 2 ..^^.......#........
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              17,0   hp 8/16   Plain
+C  rook             Rook L1 skyrider           15,1   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 19,2
+pell moves 17,0 -> 19,2 via 18,0 19,0 19,1
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~..C..AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+C  rook             Rook L1 skyrider           15,1   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait pell
+pell waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~..C..AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           15,1   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move rook 18,0
+rook moves 15,1 -> 18,0 via 15,0 16,0 17,0
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.....C.
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           18,0   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait rook
+rook waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.....C.
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           18,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.....C.
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           18,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> threat pell
+threat on pell at 19,2 (Plain): no enemy can strike it next phase
+  and whatever is in the dark (?), unpriced
+> wait captain
+captain waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.....C.
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..........?????....>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           18,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
+?  unseen at 10,3 11,3 12,3 13,3 14,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: move rider-2 19,3
+rider-2 moves 13,3 -> 19,3 via 14,3 15,3 16,3 17,3 18,3
+enemy: wait rider-2
+rider-2 waits
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.....C.
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,0   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move rook 16,0
+rook moves 18,0 -> 16,0 via 17,0
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C...
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait rook
+rook waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C...
+ 1 ..^.......~F~.....AD
+ 2 ..^^.......#.......E
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              19,1   hp 20/20  Plain
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 18,0
+wren moves 19,1 -> 18,0 via 19,0
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~.....A.
+ 2 ..^^.......#.......E
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> wait wren
+wren waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~.....A.
+ 2 ..^^.......#.......E
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,2   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move pell 19,1
+pell moves 19,2 -> 19,1
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~.....AE
+ 2 ..^^.......#........
+ 3 ..............???.??
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        18,1   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,1   hp 8/16   Plain
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
+?  unseen at 14,3 15,3 16,3 18,3 19,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move captain 19,2
+captain moves 18,1 -> 19,2 via 19,1
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~......E
+ 2 ..^^.......#.......A
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+E  pell             Pell L1 adept              19,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack captain rider-2
+forecast captain -> rider-2: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks rider-2
+  captain hits rider-2 for 10 (hp 11)
+  rider-2 misses captain
+  captain hp 22, rider-2 hp 11
+captain gains 14 exp (14)
+group bank wakes: noise
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~......E
+ 2 ..^^.......#.......A
+ 3 ..............???.?b
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              19,1   hp 8/16   Plain
+b  rider-2          Rider L3 outrider          19,3   hp 11/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> attack pell rider-2
+forecast pell -> rider-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+pell attacks rider-2
+  pell hits rider-2 for 12 (hp 0)
+  pell hp 8, rider-2 hp 0
+pell gains 40 exp (54)
+rider-2 falls at 19,3
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~...C.D.
+ 1 ..^.......~F~......E
+ 2 ..^^.......#.......A
+ 3 ..............???.?>
+ 4 ...........#...^^..>
+ 5 ...........#...^.?.>
+ 6 ...........#.....?.>
+ 7 ...........#.....?.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain  done
+E  pell             Pell L1 adept              19,1   hp 8/16   Plain  done
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
+?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: move brigand-1 18,1
+brigand-1 moves 18,3 -> 18,1 via 18,2
+enemy: attack brigand-1 pell
+forecast brigand-1 -> pell: dmg 14 hit 70% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+brigand-1 attacks pell
+  brigand-1 hits pell for 14 (hp 0)
+  brigand-1 hp 23, pell hp 0
+pell falls at 19,1
+enemy: move brigand-2 16,1
+brigand-2 moves 14,3 -> 16,1 via 14,2 14,1 15,1
+enemy: wait brigand-2
+brigand-2 waits
+enemy: something in the dark acts
+enemy: attack hexer-1 wren
+forecast hexer-1 -> wren: dmg 11 hit 98% crit 0%; counter: none
+hexer-1 attacks wren
+  hexer-1 hits wren for 11 (hp 9)
+  hexer-1 hp 16, wren hp 9
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: something in the dark acts
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.C.D.
+ 1 ..^.......~F~...d?c.
+ 2 ..^^.......#.....?.A
+ 3 .................?.>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+c  brigand-1        Brigand L3 reaver          18,1   hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          16,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain
+D  wren             Wren L1 cadet              18,0   hp 9/20   Plain
+?  unseen at 14,0 17,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> move wren 19,3
+wren moves 18,0 -> 19,3 via 19,0 19,1 19,2
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.C...
+ 1 ..^.......~F~...d??.
+ 2 ..^^.......#.....?.A
+ 3 .................?.D
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+d  brigand-2        Brigand L3 reaver          16,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain
+D  wren             Wren L1 cadet              19,3   hp 9/20   Plain
+?  unseen at 14,0 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> exit wren
+wren leaves through the exit at 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.C...
+ 1 ..^.......~F~...d??.
+ 2 ..^^.......#.....?.A
+ 3 .................?.>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+d  brigand-2        Brigand L3 reaver          16,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain
+?  unseen at 14,0 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: wren
+> move rook 19,3
+rook moves 16,0 -> 19,3 via 17,0 18,0 19,0 19,1 19,2
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.....
+ 1 ..^.......~F~...???.
+ 2 ..^^.......#.....?.A
+ 3 .................?.C
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+C  rook             Rook L1 skyrider           19,3   hp 17/17  Plain
+?  unseen at 14,0 16,1 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: wren
+> exit rook
+rook leaves through the exit at 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.....
+ 1 ..^.......~F~...???.
+ 2 ..^^.......#.....?.A
+ 3 .................?.>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain
+?  unseen at 14,0 16,1 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: wren rook
+> move captain 19,3
+captain moves 19,2 -> 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.....
+ 1 ..^.......~F~...???.
+ 2 ..^^.......#.....?..
+ 3 .................?.A
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+A  captain          Alder Fenn L1 cadet        19,3   hp 22/22  Plain  captain
+?  unseen at 14,0 16,1 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: wren rook
+> exit captain
+captain leaves through the exit at 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.?.....
+ 1 ..^.......~F~...???.
+ 2 ..^^.......#.....?..
+ 3 .................?.>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......?
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+?  unseen at 14,0 16,1 17,1 18,1 17,2 17,3 19,7
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: wren rook captain
+battle won: escape; only recall is left
+battle won: escape
+escaped: wren, rook, captain; left behind: none; fell: dunstan, pell

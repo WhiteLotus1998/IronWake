@@ -594,22 +594,45 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 318: Code's play of the shipped Brackwater Cut at <c>dusk: 5</c> on seed 41. Rook
-    /// and Pell kill the fort archer on turn 1; Wren holds the gap at 11,3 to the end of turn 4,
-    /// and while she stands on it no chase unit has a path to an exit, so all nine enemies
-    /// wait. All five escape on turn 7 and the chase never reaches the wall.
+    /// Issue 318's play of the shipped Brackwater Cut at <c>dusk: 5</c> on seed 41, replayed
+    /// after issue 326. Its transcript is kept as the record of the cork: there, with Wren on
+    /// the gap at 11,3, no chase unit had a path to an exit and all nine waited. Drift now
+    /// paths as if the party were not there, so the chase walks up to the gap, strikes Wren
+    /// there on enemy phase 3 and kills her on enemy phase 4, and the script stops at its
+    /// first command for her.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptCorksTheGapOnTheShippedDuskMap()
+    public void TheJournaledCorkNoLongerFreezesTheChaseOnTheShippedDuskMap()
     {
         var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut-41.script", 41, out var exit);
 
+        Assert.NotEqual(0, exit);
+        var enemyThree = output[output.IndexOf("-- enemy phase, turn 3 --", StringComparison.Ordinal)..];
+        Assert.Contains("brigand-1 moves 8,3 -> 10,3 via 9,3\n", enemyThree);
+        Assert.Contains("  brigand-1 hits wren for 12 (hp 8)\n", enemyThree);
+        Assert.Contains("wren falls at 11,3\n", output);
+        Assert.Contains("strict: stopped at line 39 (move wren 15,3)", output);
+    }
+
+    /// <summary>
+    /// Issue 326: Code's play of the shipped Brackwater Cut at <c>dusk: 5</c> on seed 53 with
+    /// drift pathing as if the party were not there. The chase reaches Dunstan on the gap on
+    /// enemy phase 2 and kills him on phase 3; on phase 5 rider-2 drifts onto the exit at 19,3,
+    /// and the captain spots it so Pell can shoot it from 19,1. Wren, Rook and the captain
+    /// escape on turn 7.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptFightsTheChaseAtTheGapAndOnTheExit()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut-53.script", 53, out var exit);
+
         Assert.Equal(0, exit);
-        Assert.Contains("archer-2 falls at 11,1\n", output);
-        var turnFive = output[output.IndexOf("-- player phase, turn 5 --", StringComparison.Ordinal)..];
-        Assert.Contains("unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10\n", turnFive[..turnFive.IndexOf("> ", StringComparison.Ordinal)]);
-        Assert.EndsWith("escaped: rook, pell, dunstan, wren, captain; left behind: none; fell: none\n", output);
-        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-brackwater_cut-41.txt")).ReplaceLineEndings("\n"), output);
+        Assert.Contains("rider-1 attacks dunstan\n", output);
+        Assert.Contains("dunstan falls at 11,3\n", output);
+        Assert.Contains("rider-2 moves 13,3 -> 19,3 via 14,3 15,3 16,3 17,3 18,3\n", output);
+        Assert.Contains("  pell hits rider-2 for 12 (hp 0)\n", output);
+        Assert.EndsWith("escaped: wren, rook, captain; left behind: none; fell: dunstan, pell\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-brackwater_cut-53.txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>

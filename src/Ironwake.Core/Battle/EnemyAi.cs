@@ -325,9 +325,12 @@ public static class EnemyAi
     /// player unit moves on a dusk map. It knows the ground, not the party, so it makes for
     /// the objective: on Escape the exit nearest by its own movement cost, on Seize the
     /// throne. The destination is the reachable tile with the lowest remaining path cost to
-    /// any such tile nobody else stands on, ties as <see cref="Approach"/> breaks them. Null,
-    /// which means Wait, on Rout, Defeat Boss and Survive, and when no objective tile is free
-    /// or reachable. Stateless: nothing is remembered between phases.
+    /// any such tile nobody else stands on, ties as <see cref="Approach"/> breaks them. The
+    /// path cost is measured as if the party were not there (issue 326): player units neither
+    /// block nor slow the field, so one unit on a lone gap does not freeze the chase. The move
+    /// itself stays legal, so the unit stops at the best tile it can reach along that field,
+    /// up against the blocker. Null, which means Wait, on Rout, Defeat Boss and Survive, and
+    /// when no objective tile is free or reachable. Stateless: nothing is remembered between phases.
     /// </summary>
     public static Coord? Drift(BattleState state, GameContent content, BattleUnit unit, Reach reach, IReadOnlyList<Reach> playerReach)
     {
@@ -348,8 +351,9 @@ public static class EnemyAi
         }
 
         var movement = content.Class(unit.Unit.ClassId).Movement;
-        Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
-        var distances = Movement.DistancesTo(map, content, objective, movement, OccupantAt);
+        Occupant GroundOnly(Coord at) =>
+            at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
+        var distances = Movement.DistancesTo(map, content, objective, movement, GroundOnly);
         return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach);
     }
 
