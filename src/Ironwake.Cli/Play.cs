@@ -38,6 +38,7 @@ public sealed class PlaySession
           wait <unit>              end the unit's action
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
+          recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
@@ -430,6 +431,12 @@ public sealed class PlaySession
                 break;
             case "exit":
                 Error("usage: exit <unit>");
+                break;
+            case "recover" when words.Length == 2:
+                Apply(new Recover(words[1]));
+                break;
+            case "recover":
+                Error("usage: recover <unit>");
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
@@ -1086,7 +1093,7 @@ public sealed class PlaySession
         var unitClass = _content.Class(unit.Unit.ClassId);
         _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}  mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
         _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
-        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)} x{item.Uses}");
+        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)}{Keepsake.Suffix(item, _content)} x{item.Uses}");
         _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = _content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
@@ -1211,6 +1218,7 @@ public sealed class PlaySession
         Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
+        Recover r => $"recover {r.UnitId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -1253,6 +1261,10 @@ public sealed class PlaySession
                 return $"{x.UnitId} leaves through the exit at {x.At}";
             case UnitLeftBehind b:
                 return $"{b.UnitId} is left behind at {b.At}";
+            case KeepsakeLeft k:
+                return $"{k.FallenId}'s {k.ItemId} lies at {k.At}";
+            case KeepsakeRecovered k:
+                return $"{k.UnitId} recovers {k.FallenId}'s {k.ItemId}";
             case Cantoed c:
                 return c.From == c.To
                     ? $"{c.UnitId} stays at {c.To} (canto)"

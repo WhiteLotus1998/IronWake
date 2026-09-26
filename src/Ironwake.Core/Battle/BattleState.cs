@@ -21,6 +21,7 @@ namespace Ironwake.Core;
 /// <param name="Fired">The names of the map events that have fired, blocked or not, sorted (issue 32). Each fires once; a Recall restores the list with the board.</param>
 /// <param name="Flags">The flags map events have set, sorted, for a win condition to read.</param>
 /// <param name="Rapport">Each recruit pair's rapport, sorted by pair (issue 16). Empty on a map without the <c>rivalry:</c> header; a Recall restores it with the board.</param>
+/// <param name="Keepsakes">The weapons fallen player units left on their tiles on a <c>keepsakes: on</c> map (DESIGN.md 13.8, experiment), in the order they fell, until an ally recovers one; a Recall restores the list with the board.</param>
 /// <param name="Escaped">The player units that have left the board through an exit on an Escape map (issue 269), in the order they left. Nothing on the board can see them; a Recall restores the list with the board.</param>
 public sealed record BattleState(
     MapDefinition Map,
@@ -35,8 +36,12 @@ public sealed record BattleState(
     ValueList<string> Fired = default,
     ValueList<string> Flags = default,
     ValueList<Rapport> Rapport = default,
-    ValueList<BattleUnit> Escaped = default)
+    ValueList<BattleUnit> Escaped = default,
+    ValueList<Keepsake> Keepsakes = default)
 {
+    /// <summary>The keepsake lying on a tile (DESIGN.md 13.8), or null.</summary>
+    public Keepsake? KeepsakeAt(Coord at) => Keepsakes.FirstOrDefault(k => k.At == at);
+
     /// <summary>Whether a player unit has left the board through an exit (issue 269).</summary>
     public bool HasEscaped(string id) => Escaped.Any(u => u.Id == id);
 
@@ -477,6 +482,17 @@ public sealed record BattleState(
             sb.Append('\n');
         }
 
+        if (Map.KeepsakesEnabled)
+        {
+            sb.Append("keepsakes");
+            foreach (var keepsake in Keepsakes)
+            {
+                sb.Append(' ').Append(keepsake.Item.ItemId).Append('x').Append(keepsake.Item.Uses).Append('@').Append(keepsake.At).Append('/').Append(keepsake.FallenId);
+            }
+
+            sb.Append('\n');
+        }
+
         foreach (var unit in Units)
         {
             sb.Append("unit ").Append(unit.Id).Append(' ').Append(unit.Side).Append(' ').Append(unit.At)
@@ -489,6 +505,10 @@ public sealed record BattleState(
             foreach (var item in unit.Unit.Inventory.Items)
             {
                 sb.Append(' ').Append(item.ItemId).Append('x').Append(item.Uses);
+                if (item.Keepsake is { } fallen)
+                {
+                    sb.Append('/').Append(fallen);
+                }
             }
 
             if (unit.IsCaptain)

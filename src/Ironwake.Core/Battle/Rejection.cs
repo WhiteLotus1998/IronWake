@@ -25,6 +25,7 @@ public enum RejectionReason
     ArtRefused,
     NoCanto,
     NotOnAnExit,
+    NoKeepsake,
     BattleOver,
     UnknownCommand,
 }

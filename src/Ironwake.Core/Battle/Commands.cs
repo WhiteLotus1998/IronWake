@@ -53,6 +53,14 @@ public sealed record Canto(string UnitId, Coord To) : Command;
 /// </summary>
 public sealed record Exit(string UnitId) : Command;
 
+/// <summary>
+/// Recover the keepsake on the unit's tile (DESIGN.md 13.8, experiment): on a <c>keepsakes: on</c>
+/// map, a player unit standing where an ally fell takes that ally's weapon as its action, in place
+/// of Attack, Item or Wait, after its Move or without one. It needs a free inventory slot, and no
+/// Canto follows.
+/// </summary>
+public sealed record Recover(string UnitId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

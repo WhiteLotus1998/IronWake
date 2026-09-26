@@ -46,6 +46,9 @@ public static class Resolver
             case Exit exit:
                 (next, rejection) = ApplyExit(state, exit, events);
                 break;
+            case Recover recover:
+                (next, rejection) = ApplyRecover(state, recover, events);
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -312,13 +315,13 @@ public static class Resolver
         if (result.DefenderDied)
         {
             events.Add(new UnitDied(target.Id, target.Side, target.At));
-            next = next.WithoutUnit(target.Id);
+            next = LeaveKeepsake(next, targetAfter, content, events).WithoutUnit(target.Id);
         }
 
         if (result.AttackerDied)
         {
             events.Add(new UnitDied(unit.Id, unit.Side, unit.At));
-            next = next.WithoutUnit(unit.Id);
+            next = LeaveKeepsake(next, attackerAfter, content, events).WithoutUnit(unit.Id);
         }
 
         return (next, null);
@@ -661,6 +664,63 @@ public static class Resolver
     }
 
     /// <summary>
+    /// DESIGN.md 13.8 (Carry the fallen, experiment): on a <c>keepsakes: on</c> map a player
+    /// unit that dies leaves its weapon (<see cref="Keepsake.Of"/>) on its tile. An enemy leaves
+    /// nothing, and neither does a unit with no weapon or a map without the header.
+    /// </summary>
+    private static BattleState LeaveKeepsake(BattleState state, BattleUnit fallen, GameContent content, List<GameEvent> events)
+    {
+        if (!state.Map.KeepsakesEnabled || fallen.Side != Side.Player || Keepsake.Of(fallen, content) is not { } keepsake)
+        {
+            return state;
+        }
+
+        events.Add(new KeepsakeLeft(keepsake.FallenId, keepsake.Item.ItemId, keepsake.At));
+        return state with { Keepsakes = state.Keepsakes.Add(keepsake) };
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.8's recovery: a player unit that has not acted, standing on a keepsake's
+    /// tile with a free inventory slot, takes the weapon as its action, in place of Attack,
+    /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
+    /// under the fallen's name, and no Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyRecover(BattleState state, Recover recover, List<GameEvent> events)
+    {
+        var unit = Acting(state, recover.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (unit.Side != Side.Player)
+        {
+            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: only player units carry the fallen"));
+        }
+
+        if (state.KeepsakeAt(unit.At) is not { } keepsake)
+        {
+            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: nothing was left at {unit.At}"));
+        }
+
+        if (unit.Unit.Inventory.IsFull)
+        {
+            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: its inventory is full"));
+        }
+
+        events.Add(new KeepsakeRecovered(unit.Id, keepsake.FallenId, keepsake.Item.ItemId));
+        var carrier = unit with
+        {
+            Unit = unit.Unit with { Inventory = unit.Unit.Inventory.Add(keepsake.Item) },
+            Moved = true,
+            Acted = true,
+            Canto = null,
+        };
+        var next = state.WithUnit(carrier) with { Keepsakes = ValueList<Keepsake>.From(state.Keepsakes.Where(k => k != keepsake)) };
+        return (next, null);
+    }
+
+    /// <summary>
     /// Issue 269's exit: a unit that has not acted, standing on an exit tile of an Escape
     /// map, leaves the board for the state's escaped list. When the captain leaves, every
     /// player unit still on the board is left behind, one event each in id order. An enemy
@@ -783,7 +843,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -841,6 +901,11 @@ public static class Resolver
             if (unit.Side == Side.Player && state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At))
             {
                 yield return new Exit(unit.Id);
+            }
+
+            if (unit.Side == Side.Player && state.KeepsakeAt(unit.At) is not null && !unit.Unit.Inventory.IsFull)
+            {
+                yield return new Recover(unit.Id);
             }
 
             yield return new Wait(unit.Id);

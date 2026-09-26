@@ -227,6 +227,11 @@ public static class MapRenderer
             sb.Append(exits).Append('\n');
         }
 
+        if (state.Keepsakes.Count > 0)
+        {
+            sb.Append("keepsakes: ").Append(string.Join(", ", state.Keepsakes.Select(k => $"{k.FallenId}'s {k.Item.ItemId} at {k.At}"))).Append('\n');
+        }
+
         if (state.Escaped.Count > 0)
         {
             sb.Append("escaped: ").Append(string.Join(' ', state.Escaped.Select(u => u.Id))).Append('\n');

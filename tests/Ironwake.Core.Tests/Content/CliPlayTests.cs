@@ -416,6 +416,30 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// DESIGN.md 13.8 (Carry the fallen, experiment): Code's play of the raid with
+    /// <c>keepsakes: on</c> on seed 6, the heuristic's own trace to the end of enemy phase 2
+    /// and by hand from there. Teodor falls to the hexer at 8,7 and his lance stays there;
+    /// after the hexer dies, Dunstan steps onto the tile and recovers it, and it carries
+    /// Teodor's name in Dunstan's inventory until the rout.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptRecoversTeodorsLanceOnTheRaid()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ironwake_raid_keepsakes.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-ironwake_raid_keepsakes-6.script");
+
+        var output = Run(out var exit, "play", map, "--seed", "6", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Contains("teodor falls at 8,7\nteodor's iron_lance lies at 8,7\n", output);
+        Assert.Contains("keepsakes: teodor's iron_lance at 8,7\n", output);
+        Assert.Contains("dunstan recovers teodor's iron_lance\n", output);
+        Assert.Contains("  items: 1: Iron Lance x39, 2: Iron Lance (Teodor's) x37\n", output);
+    }
+
+    /// <summary>
     /// Issue 32's acceptance: the map-events sample under docs/samples, played by hand on
     /// seed 7. Teodor ending on the lever at 3,1 opens the wall at 4,1, the reinforcement
     /// arrives from the east edge at the start of enemy phase 3 and walks through the new

@@ -606,7 +606,7 @@ public sealed class CampaignSession
             return $"{item.Name} {stack.Uses}/{item.Uses}";
         }
 
-        var text = $"{weapon.Name} {stack.Uses}/{weapon.Durability}";
+        var text = $"{weapon.Name}{Keepsake.Suffix(stack, _content)} {stack.Uses}/{weapon.Durability}";
         if (stack.Uses < weapon.Durability && CampaignRules.RepairPricePerUse(weapon) is { } perUse)
         {
             text += $" (repair {(weapon.Durability - stack.Uses) * perUse})";

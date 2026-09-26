@@ -1,0 +1,83 @@
+# ironwake_raid seed 6, heuristic player, two-roll average
+move captain 10,4
+wait captain
+move dunstan 10,7
+wait dunstan
+move ottilie 11,7
+wait ottilie
+move pell 11,4
+wait pell
+move teodor 8,7
+wait teodor
+move wren 8,4
+wait wren
+end
+#   event wave1 fired
+#   event wave2 fired
+# enemy: move archer-1 7,6
+# enemy: attack archer-1 teodor
+#   archer-1 vs teodor: hit 5; archer-1 17 hp, teodor 16 hp
+# enemy: move brigand-1 7,7
+# enemy: attack brigand-1 teodor
+#   brigand-1 vs teodor: miss hit 12; brigand-1 10 hp, teodor 16 hp
+# enemy: move brigand-2 3,4
+# enemy: wait brigand-2
+# enemy: move hexer-1 4,8
+# enemy: wait hexer-1
+# enemy: move soldier-1 8,6
+# enemy: attack soldier-1 teodor
+#   soldier-1 vs teodor: hit 8 hit 10; soldier-1 10 hp, teodor 8 hp
+# enemy: end
+# turn 2
+move captain 8,2
+wait captain
+move dunstan 7,8
+attack dunstan brigand-1
+#   dunstan vs brigand-1: miss hit 8; dunstan 15 hp, brigand-1 10 hp
+move ottilie 8,8
+attack ottilie brigand-1
+#   ottilie vs brigand-1: hit 8; ottilie 17 hp, brigand-1 2 hp
+move pell 9,5
+attack pell soldier-1
+#   pell vs soldier-1: hit 12; pell 16 hp, soldier-1 0 hp
+#   soldier-1 died at 8,6
+attack teodor brigand-1
+#   teodor vs brigand-1: hit 12; teodor 8 hp, brigand-1 0 hp
+#   brigand-1 died at 7,7
+move wren 7,5
+attack wren archer-1
+#   wren vs archer-1: hit 10; wren 20 hp, archer-1 7 hp
+end
+#   event wave3 fired
+#   event wave4 fired
+# enemy: attack archer-1 teodor
+#   archer-1 vs teodor: miss; archer-1 7 hp, teodor 8 hp
+# enemy: move brigand-2 6,5
+# enemy: attack brigand-2 wren
+#   brigand-2 vs wren: miss crit 30; brigand-2 0 hp, wren 20 hp
+#   brigand-2 died at 6,5
+# enemy: move brigand-3 3,8
+# enemy: wait brigand-3
+# enemy: move hexer-1 6,7
+# enemy: attack hexer-1 teodor
+#   hexer-1 vs teodor: hit 11; hexer-1 16 hp, teodor 0 hp
+#   teodor died at 8,7
+# enemy: move soldier-2 4,3
+# enemy: wait soldier-2
+# enemy: end
+move captain 8,6
+attack captain archer-1
+move wren 6,6
+attack wren hexer-1
+forecast pell hexer-1 from 7,6
+move pell 7,6
+attack pell hexer-1
+move dunstan 8,7
+recover dunstan
+show dunstan
+wait ottilie
+end
+attack wren brigand-3
+move captain 7,5
+attack captain soldier-2
+attack pell soldier-2
