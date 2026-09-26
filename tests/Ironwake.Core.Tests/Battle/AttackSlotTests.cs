@@ -115,4 +115,18 @@ public class AttackSlotTests
         Assert.Matches(@"pell .*  unarmed", Ironwake.Core.MapRenderer.Render(bare, Starter));
         Assert.Equal("unarmed", Ironwake.Cli.PlaySession.WeaponLine(bare.Find("pell")!, Starter));
     }
+
+    /// <summary>Issue 313: the count that decides whether a line names a weapon covers only weapons that reach the distance, and two copies of one weapon count once.</summary>
+    [Fact]
+    public void WeaponChoicesCountDistinctWeaponsThatReachTheDistance()
+    {
+        var copies = Recruit("hale", new Stats(22, 8, 0, 7, 8, 6, 5, 2, 9), "iron_sword", "iron_sword", "field_dressing");
+        var state = Start(roster: ValueList<Unit>.Of(TwoSwords, Wren));
+        var hale = state.Find("hale")!;
+        var twins = hale with { Unit = copies };
+
+        Assert.Equal(2, hale.WeaponChoicesAt(Starter, 1));
+        Assert.Equal(0, hale.WeaponChoicesAt(Starter, 2));
+        Assert.Equal(1, twins.WeaponChoicesAt(Starter, 1));
+    }
 }

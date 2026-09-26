@@ -531,7 +531,7 @@ D  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell archer-1
-forecast pell -> archer-1: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-1 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 pell attacks archer-1
   pell hits archer-1 for 10 (hp 7)
   archer-1 misses pell
@@ -992,7 +992,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -1055,7 +1055,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar brawler-1
-forecast ansgar -> brawler-1: dmg 11 hit 77% crit 3%; counter: dmg 8 x2 hit 89% crit 0%
+forecast ansgar -> brawler-1 with Iron Lance: dmg 11 hit 77% crit 3%; counter: dmg 8 x2 hit 89% crit 0%
 ansgar attacks brawler-1
   ansgar misses brawler-1
   brawler-1 hits ansgar for 8 (hp 12)
@@ -1594,7 +1594,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brawler-1
-forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brawler-1
   pell hits brawler-1 for 13 (hp 10)
   pell hp 16, brawler-1 hp 10
@@ -2062,7 +2062,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-2
-forecast ansgar -> archer-2: dmg 11 hit 76% crit 2%; counter: none
+forecast ansgar -> archer-2 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
 ansgar attacks archer-2
   ansgar hits archer-2 for 11 (hp 0)
   ansgar hp 20, archer-2 hp 0
@@ -2402,7 +2402,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 13/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 12)
   pell hp 16, shieldbearer-1 hp 12
@@ -2773,7 +2773,7 @@ D  teodor           Teodor L1 pikeman          8,3    hp 13/21  Plain
 C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 16, shieldbearer-1 hp 0

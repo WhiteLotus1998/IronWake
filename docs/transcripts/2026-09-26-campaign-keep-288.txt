@@ -511,7 +511,7 @@ a  soldier-1        Soldier L2 pikeman         9,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell crits soldier-1 for 36 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -913,7 +913,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > attack pell archer-1
-forecast pell -> archer-1: dmg 12 hit 99% crit 2%; counter: dmg 8 hit 85% crit 2%
+forecast pell -> archer-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 8 hit 85% crit 2%
 pell attacks archer-1
   pell crits archer-1 for 36 (hp 0)
   pell hp 16, archer-1 hp 0
@@ -1185,7 +1185,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack pell soldier-2
-forecast pell -> soldier-2: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-2
   pell hits soldier-2 for 12 (hp 8)
   pell hp 16, soldier-2 hp 8
@@ -1532,7 +1532,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack pell soldier-2
-forecast pell -> soldier-2: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-2
   pell hits soldier-2 for 12 (hp 8)
   pell hp 16, soldier-2 hp 8
@@ -2082,7 +2082,7 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -2347,7 +2347,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 6/21   Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack pell brigand-2
-forecast pell -> brigand-2: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> brigand-2 with Cinder: dmg 13 hit 100% crit 3%; counter: none
 pell attacks brigand-2
   pell hits brigand-2 for 13 (hp 0)
   pell hp 16, brigand-2 hp 0
@@ -2719,7 +2719,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > attack pell soldier-2
-forecast pell -> soldier-2: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-2
   pell hits soldier-2 for 12 (hp 0)
   pell hp 16, soldier-2 hp 0
@@ -3299,7 +3299,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 14/20  Plain
 > attack pell soldier-3
-forecast pell -> soldier-3: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-3 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-3
   pell hits soldier-3 for 12 (hp 0)
   pell hp 16, soldier-3 hp 0
@@ -3664,7 +3664,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 3/20   Plain
 > attack pell brigand-4
-forecast pell -> brigand-4: dmg 14 hit 100% crit 4%; counter: none
+forecast pell -> brigand-4 with Cinder: dmg 14 hit 100% crit 4%; counter: none
 pell attacks brigand-4
   pell hits brigand-4 for 14 (hp 0)
   pell hp 16, brigand-4 hp 0
@@ -3967,7 +3967,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > attack pell soldier-4
-forecast pell -> soldier-4: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> soldier-4 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks soldier-4
   pell hits soldier-4 for 13 (hp 0)
   pell hp 16, soldier-4 hp 0

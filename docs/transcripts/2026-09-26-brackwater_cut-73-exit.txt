@@ -1715,7 +1715,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
-forecast pell -> brigand-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 0)
   pell hp 16, brigand-1 hp 0
@@ -2088,7 +2088,7 @@ j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              16,1   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell brawler-1
-forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brawler-1
   pell hits brawler-1 for 13 (hp 10)
   pell hp 16, brawler-1 hp 10
@@ -2384,7 +2384,7 @@ wren gains 14 exp (14)
 enemy: move soldier-1 15,2
 soldier-1 moves 17,2 -> 15,2 via 16,2
 enemy: attack soldier-1 pell
-forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter: dmg 12 hit 99% crit 2%
+forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
 soldier-1 attacks pell
   soldier-1 hits pell for 11 (hp 5)
   pell hits soldier-1 for 12 (hp 9)
@@ -2586,7 +2586,7 @@ D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 5, shieldbearer-1 hp 0

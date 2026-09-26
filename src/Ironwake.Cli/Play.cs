@@ -666,7 +666,7 @@ public sealed class PlaySession
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
                 }
 
-                var (with, counterWith) = Arms(_state, _content, attacker!, target!, attack.Slot);
+                var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith));
                 PrintRivalry(target!, countering: true);
             }
@@ -945,7 +945,7 @@ public sealed class PlaySession
     public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
-        var (with, counterWith) = Arms(state, content, unit, target, slot);
+        var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith) };
         if (art is not null)
         {
@@ -1058,7 +1058,7 @@ public sealed class PlaySession
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
-                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter{(line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none")}");
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
@@ -1099,22 +1099,29 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// The weapon suffixes of a forecast line. On a map with the <c>arsenal: on</c> header
-    /// (DESIGN.md 13.11, experiment) both sides are named, <c> with Toll Axe</c> after the target
-    /// for the attacker's <paramref name="slot"/> (else its equipped weapon) and after
-    /// <c>counter</c> for the weapon the defender holds in front, which is the one it last swung;
-    /// a keepsake keeps its name. Elsewhere only a keepsake is named (<see cref="KeepsakeWith"/>)
-    /// and the counter is not.
+    /// The weapon suffixes of a forecast line (DESIGN.md 13.11, issue 313): <c> with Toll Axe</c>
+    /// after the target for the attacker's <paramref name="slot"/> (else its equipped weapon), and
+    /// after <c>counter</c> for the weapon the defender holds in front, which is the one it last
+    /// swung. A side is named only when it could strike from that range with more than one
+    /// weapon (<see cref="BattleUnit.WeaponChoicesAt"/>), the attacker counted at
+    /// <paramref name="from"/>; an attacker's keepsake is named whatever the count
+    /// (<see cref="KeepsakeWith"/>).
     /// </summary>
-    public static (string With, string CounterWith) Arms(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int? slot)
+    public static (string With, string CounterWith) Arms(GameContent content, BattleUnit unit, BattleUnit target, int? slot, Coord from)
     {
-        if (!state.Map.ArsenalShown)
-        {
-            return (KeepsakeWith(unit, content, slot), "");
-        }
-
-        return (WeaponWith(unit, content, slot ?? unit.EquippedSlot(content)), WeaponWith(target, content, target.EquippedSlot(content)));
+        var distance = from.DistanceTo(target.At);
+        var with = unit.WeaponChoicesAt(content, distance) > 1
+            ? WeaponWith(unit, content, slot ?? unit.EquippedSlot(content))
+            : KeepsakeWith(unit, content, slot);
+        return (with, CounterWith(content, target, distance));
     }
+
+    /// <summary>
+    /// The counter's suffix, <c> with Steel Axe</c>, for a defender that could strike from
+    /// <paramref name="distance"/> with more than one weapon; empty otherwise (issue 313).
+    /// </summary>
+    public static string CounterWith(GameContent content, BattleUnit defender, int distance) =>
+        defender.WeaponChoicesAt(content, distance) > 1 ? WeaponWith(defender, content, defender.EquippedSlot(content)) : "";
 
     private static string WeaponWith(BattleUnit unit, GameContent content, int slot)
     {

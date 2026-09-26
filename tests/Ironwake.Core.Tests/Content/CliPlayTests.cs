@@ -490,8 +490,8 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.Contains("forecast pell -> archer-1: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%\n", output);
-        Assert.Contains("forecast pell -> archer-1: dmg 10 hit 91% crit 2%; counter: none\n", output);
+        Assert.Contains("forecast pell -> archer-1 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%\n", output);
+        Assert.Contains("forecast pell -> archer-1 with Cinder: dmg 10 hit 91% crit 2%; counter: none\n", output);
         Assert.Contains("forecast ottilie -> hexer-1: dmg 9 x2 hit 89% crit 4%; counter: none\n", output);
     }
 
@@ -512,69 +512,75 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// DESIGN.md 13.11, experiment: Code's play of Saltmarsh Ford with the Ford Chief (Steel
-    /// Axe, Toll Axe, Hatchet) under <c>arsenal: on</c>, seed 31. A bait at range 2 puts the
-    /// Toll Axe in its hand and costs the cadets their double; after the Recall on turn 8,
-    /// Teodor at full HP beside the fort draws the Steel Axe instead, and on turn 9 Wren and
-    /// the captain double into the heavy axe's counter and the chief falls.
+    /// Issue 313: with no header, a unit that could strike from that range with more than one
+    /// weapon has it named on the forecast line. The Ford Chief starts with the Toll Axe in
+    /// front, so its counter at range 1 is the light axe; the captain carries one sword and is
+    /// not named.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptRoutsTheFordChiefByBaitingTheHeavyAxe()
+    public void ATwoWeaponEnemysCounterIsNamedWithoutAHeaderAndTheChiefStartsWithTheTollAxe()
     {
-        var output = RunSample("saltmarsh_ford_chief.map", "2026-09-26-saltmarsh_ford_chief-31.script", 31, out var exit);
+        var output = RunInline(ArmsYard, "forecast captain ford_chief-1 from 2,1\n");
 
-        Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
-        Assert.Contains("ford_chief-1 equips Toll Axe\n", output);
-        Assert.Contains("ford_chief-1 equips Steel Axe\n", output);
-        Assert.Contains("forecast wren -> ford_chief-1 with Iron Sword: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%\n", output);
-        Assert.Contains("ford_chief-1 falls at 10,0\n", output);
+        Assert.Contains("forecast captain -> ford_chief-1 from 2,1 (Plain): dmg ", output);
+        Assert.Contains("; counter with Toll Axe: dmg ", output);
     }
 
     [Fact]
-    public void AnArsenalMapNamesBothWeaponsAndTheCounterIsTheWeaponLastSwung()
+    public void AOneWeaponEnemysLineNamesNoWeapon()
     {
-        var output = RunInline(ArsenalYard, "forecast captain ford_chief-1 from 2,1\nmove captain 2,1\nwait captain\nend\nforecast captain ford_chief-1\n");
+        var output = RunInline(ArmsYard, "forecast captain brigand-1 from 2,2\n");
 
-        Assert.Contains("forecast captain -> ford_chief-1 from 2,1 (Plain) with Iron Sword: dmg 9 x2", output);
-        Assert.Contains("counter with Steel Axe: dmg", output);
-        Assert.Contains("ford_chief-1 equips Hatchet\n", output);
-        Assert.Contains("forecast captain -> ford_chief-1 with Iron Sword: dmg 9 hit", output);
-        Assert.Contains("counter with Hatchet: dmg", output);
-    }
-
-    [Fact]
-    public void WithoutTheArsenalHeaderTheForecastLineNamesNoWeapon()
-    {
-        var output = RunInline(ArsenalYard.Replace("arsenal: on\n", ""), "forecast captain ford_chief-1 from 2,1\n");
-
-        Assert.Contains("forecast captain -> ford_chief-1 from 2,1 (Plain): dmg 9 x2", output);
-        Assert.Contains("; counter: dmg", output);
+        Assert.Contains("forecast captain -> brigand-1 from 2,2 (Plain): dmg ", output);
+        Assert.Contains("; counter: dmg ", output);
         Assert.DoesNotContain(" with ", output.Split('\n').Single(l => l.StartsWith("forecast captain", StringComparison.Ordinal)));
     }
 
-    private const string ArsenalYard = """
-        name: Arsenal Yard
-        size: 6x3
+    /// <summary>Issue 313: at range 2 only the Toll Axe reaches, so the chief's counter is not named there.</summary>
+    [Fact]
+    public void WhenOnlyOneWeaponReachesThatRangeTheCounterIsNotNamed()
+    {
+        var output = RunInline(ArmsYard, "forecast ottilie ford_chief-1 from 1,1\n");
+
+        Assert.Contains("forecast ottilie -> ford_chief-1 from 1,1 (Plain): dmg ", output);
+        Assert.Contains("; counter: dmg ", output);
+    }
+
+    /// <summary>Issue 313: a player unit with two spells names the one it strikes with, and <c>threat</c> names its counter's; against Pell the chief's planner takes the Steel Axe.</summary>
+    [Fact]
+    public void APlayerUnitWithTwoWeaponsInRangeIsNamedOnForecastAndThreat()
+    {
+        var output = RunInline(ArmsYard, "forecast pell ford_chief-1 from 1,1\nthreat pell from 2,1\n");
+
+        Assert.Contains("forecast pell -> ford_chief-1 from 1,1 (Plain) with Cinder: dmg ", output);
+        Assert.Contains("  ford_chief-1 from 3,1 with Steel Axe (slot 2): dmg ", output);
+        Assert.Contains("; counter with Cinder: dmg ", output);
+    }
+
+    private const string ArmsYard = """
+        name: Arms Yard
+        size: 7x3
         win: rout
         turn_limit: 5
         recall: 0
         enemy_level: 1
-        arsenal: on
 
-        ......
-        ......
-        ......
+        .......
+        .......
+        .......
 
         units:
         P captain 0,1
+        P recruit:ottilie 0,0
+        P recruit:pell 0,2
         B ford_chief 3,1 group:yard behavior:boss
+        E brigand 3,2 group:far behavior:hold
 
         """;
 
     private static string RunInline(string mapText, string scriptText)
     {
-        var map = Path.Combine(Path.GetTempPath(), "ironwake-arsenal-" + Guid.NewGuid().ToString("N") + ".map");
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
         var script = Path.ChangeExtension(map, ".script");
         File.WriteAllText(map, mapText);
         File.WriteAllText(script, scriptText);
@@ -959,7 +965,7 @@ public class CliPlayTests
         Assert.DoesNotContain("rejected ", output);
         Assert.Contains("event north1 is blocked: its tile is held\n", output);
         Assert.Contains("event north2 is blocked: its tile is held\n", output);
-        Assert.Contains("forecast keziah -> shieldbearer-1: dmg 3 x4 hit 97% crit 2%", output);
+        Assert.Contains("forecast keziah -> shieldbearer-1 with Iron Gauntlets: dmg 3 x4 hit 97% crit 2%", output);
         Assert.Contains("shieldbearer-1 falls at 11,6", output);
         Assert.Contains("  brigand-2 arrives at 0,11, group west, aggressive\n", output);
         Assert.Contains("weir_foreman-1 falls at 13,6", output);

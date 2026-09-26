@@ -248,8 +248,28 @@ public sealed class ProtocolSession
             w.WriteEndObject();
             w.WritePropertyName("forecast");
             ProtocolJson.WriteForecast(w, forecast);
+            w.WriteString("weapon", unit.Unit.Inventory.Items[slot ?? unit.EquippedSlot(_content)].ItemId);
+            WriteCounterWeapon(w, target, forecast);
             w.WriteString("text", PlaySession.ForecastText(_state, _content, unit, target, forecast, tile, from is not null, slot, art));
         });
+    }
+
+    /// <summary>
+    /// <c>counterWeapon</c>: the item id the defender counters with, its equipped weapon, or null
+    /// when it does not counter. Written on every forecast and threat line whatever the console's
+    /// filter says (issue 313); a renderer may hide it.
+    /// </summary>
+    private void WriteCounterWeapon(Utf8JsonWriter w, BattleUnit defender, CombatForecast forecast)
+    {
+        var slot = defender.EquippedSlot(_content);
+        if (forecast.Defender.Strikes && slot >= 0)
+        {
+            w.WriteString("counterWeapon", defender.Unit.Inventory.Items[slot].ItemId);
+        }
+        else
+        {
+            w.WriteNull("counterWeapon");
+        }
     }
 
     /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248).</summary>
@@ -300,6 +320,7 @@ public sealed class ProtocolSession
                 w.WriteNumber("ifAllLand", line.IfAllLand);
                 w.WritePropertyName("forecast");
                 ProtocolJson.WriteForecast(w, line.Forecast);
+                WriteCounterWeapon(w, unit, line.Forecast);
                 w.WriteEndObject();
             }
 
