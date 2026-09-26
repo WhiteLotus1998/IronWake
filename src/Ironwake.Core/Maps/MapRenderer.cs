@@ -123,7 +123,9 @@ public static class MapRenderer
     /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
     /// the Recall charges left; past the turn limit, where only a battle the clock decided stands, it
     /// says the battle is over after the last turn (issue 252) rather than naming a turn the map never had. Given a <see cref="Reach"/>, the tiles that unit may end on
-    /// are marked as in the map view.
+    /// are marked as in the map view. On a dusk map (DESIGN.md 13.7) an enemy no player unit
+    /// sees is drawn as <see cref="Dusk.Unseen"/> with no row of its own, only its tile on the
+    /// unseen line, and <see cref="Dusk.Line"/> gives the sight now and next turn.
     /// </summary>
     public static string Render(BattleState state, GameContent content, Reach? reach = null)
     {
@@ -170,7 +172,7 @@ public static class MapRenderer
             {
                 if (unit.At.Y == y)
                 {
-                    row[unit.At.X] = letters[unit.PlacementIndex];
+                    row[unit.At.X] = Dusk.Seen(state, unit) ? letters[unit.PlacementIndex] : Dusk.Unseen;
                 }
             }
 
@@ -180,6 +182,11 @@ public static class MapRenderer
         sb.Append('\n');
         foreach (var unit in state.Units)
         {
+            if (!Dusk.Seen(state, unit))
+            {
+                continue;
+            }
+
             var terrain = map.TerrainAt(unit.At, content).Label(unit.MaxHp(content));
             var who = $"{unit.Unit.Name} L{unit.Unit.Level} {content.Class(unit.Unit.ClassId).Name.ToLowerInvariant()}";
             var hp = $"hp {unit.Hp}/{unit.MaxHp(content)}";
@@ -225,7 +232,18 @@ public static class MapRenderer
             sb.Append('\n');
         }
 
-        if (state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group)))
+        var unseen = state.Units.Where(u => !Dusk.Seen(state, u)).Select(u => u.At).OrderBy(c => c.Y).ThenBy(c => c.X).Select(c => c.ToString()).ToList();
+        if (unseen.Count > 0)
+        {
+            sb.Append(Dusk.Unseen).Append("  unseen at ").Append(string.Join(' ', unseen)).Append('\n');
+        }
+
+        if (Dusk.Line(state) is { } dusk)
+        {
+            sb.Append(dusk).Append('\n');
+        }
+
+        if (state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group) && Dusk.Seen(state, u)))
         {
             sb.Append(WakeLegend(content)).Append('\n');
         }

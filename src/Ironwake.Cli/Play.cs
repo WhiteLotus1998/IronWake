@@ -631,6 +631,19 @@ public sealed class PlaySession
     {
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
+            if (command is Move or Wait && InTheDark(command))
+            {
+                var hidden = Resolve(command);
+                _state = hidden.Next;
+                _out.WriteLine("enemy: something moves in the dark");
+                foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
+                {
+                    _out.WriteLine(Describe(e, _content));
+                }
+
+                continue;
+            }
+
             _out.WriteLine("enemy: " + Describe(command));
             if (command is Attack attack)
             {
@@ -646,13 +659,7 @@ public sealed class PlaySession
                 PrintRivalry(target!, countering: true);
             }
 
-            var result = Resolver.Apply(_state, _content, command);
-            if (!result.Accepted)
-            {
-                throw new InvalidOperationException($"the enemy AI's {command} was rejected: {result.Rejection!.Message}");
-            }
-
-            Record(command);
+            var result = Resolve(command);
             _state = result.Next;
             foreach (var e in result.Events)
             {
@@ -669,6 +676,39 @@ public sealed class PlaySession
 
         _out.Write(MapRenderer.Render(_state, _content));
         AnnounceOutcome();
+    }
+
+    /// <summary>
+    /// Applies one of the enemy planner's commands and records it; the planner only emits
+    /// commands the resolver accepts, so a refusal is a harness fault.
+    /// </summary>
+    private ApplyResult Resolve(Command command)
+    {
+        var result = Resolver.Apply(_state, _content, command);
+        if (!result.Accepted)
+        {
+            throw new InvalidOperationException($"the enemy AI's {command} was rejected: {result.Rejection!.Message}");
+        }
+
+        Record(command);
+        return result;
+    }
+
+    /// <summary>
+    /// Whether an enemy's Move or Wait happens where no player unit sees it, before and after
+    /// (DESIGN.md 13.7): the console then prints only that something moved, since naming the
+    /// unit or its tiles would light the dark. A Move that ends in sight prints in full.
+    /// </summary>
+    private bool InTheDark(Command command)
+    {
+        var id = command switch { Move m => m.UnitId, Wait w => w.UnitId, _ => null };
+        if (Dusk.Sight(_state) is null || id is null || _state.Find(id) is not { } unit || Dusk.Seen(_state, unit))
+        {
+            return false;
+        }
+
+        var after = Resolver.Apply(_state, _content, command).Next.Find(id);
+        return after is null || !Dusk.Seen(_state, after);
     }
 
     /// <summary>
@@ -987,12 +1027,16 @@ public sealed class PlaySession
     /// an enemy an announced event brings marked with where it arrives, then one row per
     /// group <see cref="Queries.SleepingThreats"/> names, members and tiles and no numbers,
     /// and the wake rule under them (issue 248); the protocol's threat query carries it as
-    /// its <c>text</c> (issue 25).
+    /// its <c>text</c> (issue 25). On a dusk map (DESIGN.md 13.7) an enemy no player unit sees
+    /// is left out of the rows, the total and the sleeping groups, and one line says the dark is
+    /// unpriced, whether or not anything in it could strike.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         var rows = new List<string>();
+        lines = lines.Where(line => line.Arrives is not null || Dusk.Seen(state, line.Enemy)).ToList();
+        asleep = asleep.Select(g => g with { Members = g.Members.Where(m => Dusk.Seen(state, m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
         if (lines.Count == 0)
         {
             rows.Add($"threat on {unit.Id} at {where}: no enemy can strike it next phase");
@@ -1007,6 +1051,11 @@ public sealed class PlaySession
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
+        }
+
+        if (Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e)))
+        {
+            rows.Add($"  and whatever is in the dark ({Dusk.Unseen}), unpriced");
         }
 
         foreach (var group in asleep)
@@ -1199,6 +1248,11 @@ public sealed class PlaySession
         if (unit is null)
         {
             Error($"no living unit '{id}'");
+        }
+        else if (!Dusk.Seen(_state, unit))
+        {
+            Error($"no unit '{id}' in sight at dusk");
+            return null;
         }
 
         return unit;

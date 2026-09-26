@@ -336,6 +336,13 @@ public static class Resolver
                 $"{target.Id} at {target.At} is {distance} tiles from {unit.Id} at {unit.At}; {weapon.Name} reaches {weapon.MinRange}-{weapon.MaxRange}"));
         }
 
+        if (!Dusk.Sees(state, unit.Side, target.At))
+        {
+            return (state, new Rejection(
+                RejectionReason.Unseen,
+                $"no unit on {unit.Id}'s side can see {target.At} at dusk (sight {Dusk.Sight(state)})"));
+        }
+
         if (attack.Slot is { } chosen && chosen != state.Find(unit.Id)!.EquippedSlot(content))
         {
             events.Add(new WeaponEquipped(unit.Id, weapon.Id));

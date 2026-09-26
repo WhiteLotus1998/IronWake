@@ -15,7 +15,7 @@ public static class Queries
     public static Reach Reachable(BattleState state, GameContent content, BattleUnit unit) =>
         state.CantoReachOf(unit, content) ?? state.ReachOf(unit, content);
 
-    /// <summary>The enemy units the unit's equipped weapon reaches from where it stands, in id order. Empty when it has no weapon.</summary>
+    /// <summary>The enemy units the unit's equipped weapon reaches from where it stands and its side sees (DESIGN.md 13.7), in id order. Empty when it has no weapon.</summary>
     public static IEnumerable<BattleUnit> Targets(BattleState state, GameContent content, BattleUnit unit)
     {
         var weapon = unit.EquippedWeapon(content);
@@ -26,7 +26,7 @@ public static class Queries
 
         foreach (var other in state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
-            if (weapon.InRange(unit.At.DistanceTo(other.At)))
+            if (weapon.InRange(unit.At.DistanceTo(other.At)) && Dusk.Sees(state, unit.Side, other.At))
             {
                 yield return other;
             }
@@ -37,7 +37,7 @@ public static class Queries
     /// The section 5 forecast of the unit attacking the target from where it stands with
     /// its equipped weapon, or with the weapon in <paramref name="slot"/>; null when it
     /// cannot (no weapon, a slot that holds no usable weapon, the target out of range or
-    /// on its own side), the same combatants the resolver would build. With
+    /// on its own side, or a target the unit's side cannot see at dusk), the same combatants the resolver would build. With
     /// <paramref name="art"/> it is the forecast of that combat art (issue 68): the art's
     /// numbers, its cost in <see cref="CombatForecast.ArtCost"/>, and null when the resolver
     /// would refuse the art.
@@ -80,7 +80,7 @@ public static class Queries
         }
 
         var distance = from.DistanceTo(target.At);
-        if (!weapon!.InRange(distance) || target.Side == unit.Side)
+        if (!weapon!.InRange(distance) || target.Side == unit.Side || !Dusk.Sees(state, unit.Side, target.At, unit.Id, from))
         {
             return null;
         }

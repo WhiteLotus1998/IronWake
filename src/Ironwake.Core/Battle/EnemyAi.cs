@@ -146,6 +146,8 @@ public static class EnemyAi
     /// inventory order, and <paramref name="targets"/>, by <see cref="AttackOption.Beats"/>;
     /// null when no weapon reaches any target from any tile. The tile's exposure counts
     /// every player unit through <paramref name="playerReach"/>, whichever targets are asked.
+    /// On a dusk map a target the unit's side cannot see from where it would strike is no
+    /// option (DESIGN.md 13.7), the same rule the resolver holds.
     /// </summary>
     private static AttackOption? BestOption(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
@@ -165,7 +167,7 @@ public static class EnemyAi
             {
                 foreach (var target in targets)
                 {
-                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)))
+                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile))
                     {
                         continue;
                     }

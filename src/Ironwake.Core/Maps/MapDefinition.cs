@@ -48,6 +48,11 @@ namespace Ironwake.Core;
 /// its equipped weapon on its tile under its name, for an ally to recover (<see cref="Recover"/>).
 /// Off by default.
 /// </param>
+/// <param name="Dusk">
+/// The <c>dusk:</c> header (DESIGN.md 13.7, experiment): each side's sight in tiles on turn 1,
+/// one less every turn after, never under 1 (<see cref="Ironwake.Core.Dusk"/>). Null for a map
+/// in daylight, where every unit sees the whole board.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -68,7 +73,8 @@ public sealed record MapDefinition(
     string? DifficultyId = null,
     CertificationTrial? Certification = null,
     bool Announced = false,
-    bool KeepsakesEnabled = false)
+    bool KeepsakesEnabled = false,
+    int? Dusk = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
