@@ -39,6 +39,13 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// exit, so a recruit left behind is not counted (issues 263 and 269).
     /// </summary>
     public int RecruitsOut { get; init; }
+
+    /// <summary>
+    /// The ids of the player units counted in <see cref="RecruitsOut"/>, the captain aside,
+    /// so gate 4 on an Escape map can leave the benched recruit out of the baseline's count
+    /// (issue 339).
+    /// </summary>
+    public IReadOnlySet<string> Out { get; init; } = new HashSet<string>(StringComparer.Ordinal);
 }
 
 /// <summary>A gate's printed line and verdict.</summary>
@@ -105,6 +112,7 @@ public static class Runner
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
+            Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),
         };
     }
 
@@ -308,8 +316,10 @@ public static class Gates
     /// mixes over the same set of units on both sides of the bench: the recruit's own
     /// baseline mix, the rest of the cast's baseline mix, and the rest of the cast's mix
     /// with the recruit benched.
+    /// On an Escape map the drop is over units out and <paramref name="WinDrop"/> carries the
+    /// win-pair drop beside it, unjudged (issue 339); elsewhere it is null.
     /// </summary>
-    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched, IReadOnlyList<GameResult>? Arm = null);
+    public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched, IReadOnlyList<GameResult>? Arm = null, (double Drop, double StandardError)? WinDrop = null);
 
     /// <summary>
     /// Gate 4: each deployed recruit benched in turn over the baseline's seeds, outcomes
@@ -326,7 +336,12 @@ public static class Gates
     /// in the median. Each row also prints the benched arm's losses by cause and its
     /// refused-kill median (issue 125), so a large drop beside many captain deaths or a
     /// refused kill near one is read as the veto's doing and not the recruit's. On an
-    /// Escape map each row also prints the benched arm's survivors (issue 263).
+    /// Escape map each row also prints the benched arm's survivors (issue 263), and the
+    /// outcome paired is units out, not the win (issue 339): per seed a loss scores 0 and a
+    /// win scores the captain plus the recruits out, the benched recruit left out of the
+    /// baseline's count so both arms count the same units. The drop is the mean paired
+    /// difference and the standard error sqrt(sum d^2) / n, which is sqrt(b + c) / n when
+    /// every difference is -1, 0 or 1. The win-pair drop prints beside it, unjudged.
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -334,12 +349,15 @@ public static class Gates
         var captain = opening.UnitsOf(Side.Player).Single(u => u.IsCaptain).Id;
         var unjudged = opening.UnitsOf(Side.Player).Where(u => HeuristicPlayer.LosesTheMap(opening, u)).Select(u => u.Id).ToList();
         var recruits = opening.UnitsOf(Side.Player).Select(u => u.Id).Where(unitId => !unjudged.Contains(unitId)).ToList();
+        var escape = map.Win == WinCondition.Escape;
         var rows = new List<AblationRow>();
         foreach (var recruit in recruits)
         {
             var benched = ValueList<string>.Of(recruit);
             var flippedDown = 0;
             var flippedUp = 0;
+            var scoreSum = 0.0;
+            var scoreSquares = 0.0;
             var own = ActionMix.Zero;
             var restBaseline = ActionMix.Zero;
             var restBenched = ActionMix.Zero;
@@ -358,13 +376,19 @@ public static class Gates
                     flippedUp++;
                 }
 
+                var d = UnitsOut(before, except: recruit) - UnitsOut(arm, except: recruit);
+                scoreSum += d;
+                scoreSquares += d * d;
                 own = own.Plus(before.Mix.GetValueOrDefault(recruit, ActionMix.Zero));
                 restBaseline = restBaseline.Plus(Sum(before.Mix, except: recruit));
                 restBenched = restBenched.Plus(Sum(arm.Mix, except: recruit));
             }
 
             var n = (double)baseline.Count;
-            rows.Add(new AblationRow(recruit, (flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n, own, restBaseline, restBenched, arms));
+            var winDrop = ((flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n);
+            rows.Add(escape
+                ? new AblationRow(recruit, scoreSum / n, Math.Sqrt(scoreSquares) / n, own, restBaseline, restBenched, arms, winDrop)
+                : new AblationRow(recruit, winDrop.Item1, winDrop.Item2, own, restBaseline, restBenched, arms));
         }
 
         var median = rows.Count == 0 ? 0.0 : Median(rows.Select(r => r.Drop).ToList());
@@ -373,7 +397,7 @@ public static class Gates
         var passed = verdict == CastVerdictKind.Passes && failing.Count == 0;
         var lines = new List<string>
         {
-            $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, median drop {median:F3}: {Verdict(passed)}",
+            $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, {(escape ? $"paired on units out (a win scores 1 to {opening.UnitsOf(Side.Player).Count() - 1}, a loss 0), " : "")}median drop {median:F3}: {Verdict(passed)}",
         };
         switch (verdict)
         {
@@ -388,7 +412,8 @@ public static class Gates
         foreach (var r in rows)
         {
             var arm = r.Arm ?? Array.Empty<GameResult>();
-            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}] benched losses {LossCounts(arm)}, {RefusedKill(arm)}{(map.Win == WinCondition.Escape ? $", benched {Survivors(arm)}" : "")}{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
+            var win = r.WinDrop is { } w ? $" win drop {w.Drop:F3} se {w.StandardError:F3}" : "";
+            lines.Add($"  {r.RecruitId}: drop {r.Drop:F3} se {r.StandardError:F3}{win} own [{r.Own}] rest baseline [{r.RestBaseline}] rest benched [{r.RestBenched}] benched losses {LossCounts(arm)}, {RefusedKill(arm)}{(map.Win == WinCondition.Escape ? $", benched {Survivors(arm)}" : "")}{(failing.Contains(r.RecruitId) ? " DEAD WEIGHT" : "")}");
         }
 
         foreach (var unitId in unjudged)
@@ -403,6 +428,13 @@ public static class Gates
         }
         return new GateResult(string.Join('\n', lines), passed);
     }
+
+    /// <summary>
+    /// Gate 4's per-seed score on an Escape map (issue 339): 0 for a loss, else the captain
+    /// plus the recruits out, <paramref name="except"/> not counted whether or not it got out.
+    /// </summary>
+    public static int UnitsOut(GameResult game, string except) =>
+        game.Won ? 1 + game.Out.Count(unitId => !string.Equals(unitId, except, StringComparison.Ordinal)) : 0;
 
     private static ActionMix Sum(IReadOnlyDictionary<string, ActionMix> mix, string except)
     {
