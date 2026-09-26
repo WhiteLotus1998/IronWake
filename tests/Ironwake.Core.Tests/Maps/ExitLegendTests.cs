@@ -15,7 +15,7 @@ public class ExitLegendTests
         .Replace("win: rout", "win: escape")
         .Replace("enemy_level: 1\n", "enemy_level: 1\nexit: 0,9 1,9 1,8\n");
 
-    private const string Line = "exits (>): 0,9 1,9 1,8 (every living unit on an exit wins)";
+    private const string Line = "exits (>): 0,9 1,9 1,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)";
 
     private static string[] Rows(string view) => view.Split('\n');
 
@@ -30,7 +30,7 @@ public class ExitLegendTests
     {
         var map = MapFixture.Parse(EscapeText.Replace("exit: 0,9 1,9 1,8", "exit: 11,9 10,9"));
 
-        Assert.Equal("exits (>): 11,9 10,9 (every living unit on an exit wins)", MapRenderer.ExitLegend(map));
+        Assert.Equal("exits (>): 11,9 10,9 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)", MapRenderer.ExitLegend(map));
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public class ExitLegendTests
         var map = MapFixture.Parse(File.ReadAllText(Path.Combine(MapFixture.MapsDirectory, "brackwater_cut.map")), "brackwater_cut.map");
         var view = MapRenderer.Render(map, MapFixture.Content);
 
-        Assert.Contains("exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)\n", view);
+        Assert.Contains("exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)\n", view);
         Assert.Equal(6, Rows(view).Count(r => r.EndsWith(MapRenderer.ExitGlyph)));
     }
 

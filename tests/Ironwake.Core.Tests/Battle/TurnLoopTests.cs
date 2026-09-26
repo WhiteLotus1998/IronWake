@@ -79,17 +79,16 @@ public class TurnLoopTests
     }
 
     [Fact]
-    public void EscapeIsWonWhenEveryLivingPlayerUnitStandsOnAnExit()
+    public void EscapeIsWonWhenTheCaptainExitsAndNotByStandingOnAnExit()
     {
         var state = Start(map: YardWith("escape", "exit: 1,3 2,3"));
         Assert.Equal(ValueList<Coord>.Of(new Coord(1, 3), new Coord(2, 3)), state.Map.Exits);
 
-        var one = state.Do(new Move("hale", new Coord(1, 3)));
-        Assert.Equal(BattleOutcome.Ongoing, one.Outcome);
+        var standing = state.Do(new Move("hale", new Coord(1, 3))).Do(new Move("wren", new Coord(2, 3)));
+        Assert.Equal(BattleOutcome.Ongoing, standing.Outcome);
 
-        var both = one.Do(new Move("wren", new Coord(2, 3)));
-        Assert.Equal(new BattleOutcome(BattleResult.Won, "escape"), both.Outcome);
-        Assert.Equal(new BattleOutcome(BattleResult.Won, "escape"), one.WithoutUnit("wren").Outcome);
+        var won = standing.Do(new Exit("wren")).Do(new Exit("hale"));
+        Assert.Equal(new BattleOutcome(BattleResult.Won, "escape"), won.Outcome);
     }
 
     [Fact]

@@ -24,6 +24,7 @@ public enum RejectionReason
     NoSuchArt,
     ArtRefused,
     NoCanto,
+    NotOnAnExit,
     BattleOver,
     UnknownCommand,
 }

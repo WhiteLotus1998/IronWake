@@ -35,7 +35,8 @@ public sealed class RandomLegalPlayer : IPlayer
 /// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
-/// for Escape, hold for Survive. The veto is arithmetic (Design Table, seventh round)
+/// for Escape, hold for Survive. On Escape a unit that can reach an exit leaves through it
+/// ahead of all of that, and the captain plans last and leaves last (<see cref="ExitTile"/>, issue 269). The veto is arithmetic (Design Table, seventh round)
 /// and covers every unit whose death loses the map (fourteenth round, issue 141): the
 /// captain, and the recruit a <c>protect:</c> header names, by section 7's loss order.
 /// A plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole cycle
@@ -68,7 +69,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { PlanCanto(state, content, owed) };
         }
 
-        var unit = state.UnitsOf(Side.Player).FirstOrDefault(u => !u.Acted);
+        var unit = state.UnitsOf(Side.Player).OrderBy(u => state.Map.Win == WinCondition.Escape && u.IsCaptain).FirstOrDefault(u => !u.Acted);
         if (unit is null)
         {
             return new Command[] { new EndPhase() };
@@ -103,6 +104,11 @@ public sealed class HeuristicPlayer : IPlayer
         {
             tiles.Add(unit.At);
         }
+        if (ExitTile(state, content, unit, tiles, reach) is { } exit)
+        {
+            return WithMove(unit, exit, new Exit(unit.Id));
+        }
+
         var enemies = state.UnitsOf(Side.Enemy).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
@@ -166,6 +172,41 @@ public sealed class HeuristicPlayer : IPlayer
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
         return WithMove(unit, destination ?? unit.At, new Wait(unit.Id));
+    }
+
+    /// <summary>
+    /// Issue 269's Escape approach: the exit tile a unit leaves from this turn, the cheapest
+    /// in its reach and then row-major, or null. A recruit leaves as soon as it can, ahead
+    /// of any attack. The captain leaves last: only once no other player unit that has not
+    /// acted can reach an exit this turn, since its exit leaves everyone on the board behind.
+    /// Null on any other map.
+    /// </summary>
+    public static Coord? ExitTile(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach)
+    {
+        if (state.Map.Win != WinCondition.Escape)
+        {
+            return null;
+        }
+
+        if (unit.IsCaptain && state.UnitsOf(Side.Player).Any(other =>
+                other.Id != unit.Id && !other.Acted
+                && (other.Moved ? state.Map.IsExit(other.At) : state.ReachOf(other, content).Destinations.Any(state.Map.IsExit))))
+        {
+            return null;
+        }
+
+        Coord? chosen = null;
+        foreach (var tile in tiles)
+        {
+            if (state.Map.IsExit(tile)
+                && (chosen is not { } best || reach.CostTo(tile)!.Value < reach.CostTo(best)!.Value
+                    || (reach.CostTo(tile)!.Value == reach.CostTo(best)!.Value && tile.CompareTo(best) < 0)))
+            {
+                chosen = tile;
+            }
+        }
+
+        return chosen;
     }
 
     /// <summary>

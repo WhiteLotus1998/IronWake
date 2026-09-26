@@ -43,6 +43,9 @@ public static class Resolver
             case Wait wait:
                 (next, rejection) = ApplyWait(state, wait, events);
                 break;
+            case Exit exit:
+                (next, rejection) = ApplyExit(state, exit, events);
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -656,6 +659,48 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Issue 269's exit: a unit that has not acted, standing on an exit tile of an Escape
+    /// map, leaves the board for the state's escaped list. When the captain leaves, every
+    /// player unit still on the board is left behind, one event each in id order. An enemy
+    /// on an exit tile stays where it is.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyExit(BattleState state, Exit exit, List<GameEvent> events)
+    {
+        var unit = Acting(state, exit.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (unit.Side != Side.Player)
+        {
+            return (state, new Rejection(RejectionReason.NotOnAnExit, $"{unit.Id} cannot exit: only player units leave through an exit"));
+        }
+
+        if (state.Map.Win != WinCondition.Escape)
+        {
+            return (state, new Rejection(RejectionReason.NotOnAnExit, $"{unit.Id} cannot exit: {state.Map.Name} is not an Escape map"));
+        }
+
+        if (!state.Map.IsExit(unit.At))
+        {
+            return (state, new Rejection(RejectionReason.NotOnAnExit, $"{unit.Id} cannot exit: {unit.At} is not an exit tile"));
+        }
+
+        events.Add(new UnitExited(unit.Id, unit.At));
+        var next = state.WithoutUnit(unit.Id) with { Escaped = state.Escaped.Add(unit with { Moved = true, Acted = true, Canto = null }) };
+        if (unit.IsCaptain)
+        {
+            foreach (var left in next.UnitsOf(Side.Player))
+            {
+                events.Add(new UnitLeftBehind(left.Id, left.At));
+            }
+        }
+
+        return (next, null);
+    }
+
+    /// <summary>
     /// Issue 33's retreat through <see cref="RetreatRule"/>: the unit moves to a healing
     /// tile in its reach and ends its action, marked so it never retreats again. The path
     /// is the reach's, as for a Move.
@@ -736,7 +781,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), its Retreats (best tile first, issue 33), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -789,6 +834,11 @@ public static class Resolver
                 {
                     yield return new Retreat(unit.Id, to);
                 }
+            }
+
+            if (unit.Side == Side.Player && state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At))
+            {
+                yield return new Exit(unit.Id);
             }
 
             yield return new Wait(unit.Id);

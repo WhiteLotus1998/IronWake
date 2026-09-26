@@ -28,6 +28,12 @@ public sealed record MasteryEarned(string UnitId, string ClassId, string Ability
 
 public sealed record UnitWaited(string UnitId) : GameEvent;
 
+/// <summary>A player unit left the board through the exit it stood on (issue 269).</summary>
+public sealed record UnitExited(string UnitId, Coord At) : GameEvent;
+
+/// <summary>The captain's exit ended the battle with this player unit still on the board (issue 269); it counts as fallen.</summary>
+public sealed record UnitLeftBehind(string UnitId, Coord At) : GameEvent;
+
 /// <summary>A unit took its Canto (issue 71): <see cref="From"/> equal to <see cref="To"/> and an empty path is a Canto declined.</summary>
 public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
 

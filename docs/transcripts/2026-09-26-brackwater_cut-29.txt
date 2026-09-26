@@ -30,7 +30,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 10,1
 rook moves 8,2 -> 10,1 via 8,1 9,1
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -64,7 +64,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
 forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
 rook attacks archer-2
@@ -102,7 +102,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move pell 10,2
 pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -136,7 +136,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
 forecast pell -> archer-2: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 pell attacks archer-2
@@ -174,7 +174,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 12,3
 dunstan moves 9,3 -> 12,3 via 10,3 11,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -207,7 +207,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -240,7 +240,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 11,3
 captain moves 8,4 -> 11,3 via 8,3 9,3 10,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -273,7 +273,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -306,7 +306,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 10,4
 wren moves 8,5 -> 10,4 via 8,4 9,4
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -339,7 +339,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -372,7 +372,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -439,7 +439,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 14,3
 captain moves 11,3 -> 14,3 via 12,3 13,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -472,7 +472,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -505,7 +505,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 11,3
 dunstan moves 12,3 -> 11,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -538,7 +538,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -571,7 +571,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move pell 12,2
 pell moves 10,2 -> 12,2 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -604,7 +604,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait pell
 pell waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -637,7 +637,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 13,3
 wren moves 10,4 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -670,7 +670,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -703,7 +703,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 13,1
 rook moves 10,1 -> 13,1 via 11,1 12,1
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -736,7 +736,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -769,7 +769,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -836,7 +836,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 15,4
 wren moves 13,3 -> 15,4 via 14,3 15,3
 group bank wakes: proximity
@@ -869,7 +869,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -901,7 +901,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -933,7 +933,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait pell
 pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -965,7 +965,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -997,7 +997,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
@@ -1029,7 +1029,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -1114,7 +1114,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move pell 13,5
 pell moves 12,2 -> 13,5 via 13,2 13,3 13,4
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1146,7 +1146,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
 forecast pell -> soldier-1: dmg 12 hit 86% crit 2%; counter: none
 pell attacks soldier-1
@@ -1181,7 +1181,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 14,5
 captain moves 14,3 -> 14,5 via 14,4
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1213,7 +1213,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain soldier-1
 forecast captain -> soldier-1: dmg 8 hit 58% crit 4%; counter: dmg 8 hit 62% crit 0%
 captain attacks soldier-1
@@ -1249,7 +1249,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 17,2
 wren moves 15,4 -> 17,2 via 15,3 15,2 16,2
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1281,7 +1281,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1313,7 +1313,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 15,3
 dunstan moves 11,3 -> 15,3 via 12,3 13,3 14,3
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1345,7 +1345,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1377,7 +1377,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 16,3
 rook moves 13,1 -> 16,3 via 14,1 15,1 16,1 16,2
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1409,7 +1409,7 @@ C  rook             Rook L1 skyrider           16,3   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
@@ -1441,7 +1441,7 @@ C  rook             Rook L1 skyrider           16,3   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 23/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1536,7 +1536,7 @@ a  rider-1          Rider L3 outrider          13,4   hp 9/21   Plain  group cha
 b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,2   hp 23/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,6   hp 2/21   Plain  group bank, guard, awake
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall 54
 recalled to state 54; 2 charges left
 undone: gives back 28 exp, 44 enemy hp; returns dunstan alive, rook alive, wren alive, 68 hp
@@ -1571,7 +1571,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 12,3
 dunstan moves 11,3 -> 12,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1604,7 +1604,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1637,7 +1637,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1670,7 +1670,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1703,7 +1703,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait pell
 pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1736,7 +1736,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1769,7 +1769,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -1838,7 +1838,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
 forecast pell -> brigand-1: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brigand-1
@@ -1875,7 +1875,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 15,4
 wren moves 13,3 -> 15,4 via 14,3 15,3
 group bank wakes: proximity
@@ -1907,7 +1907,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1938,7 +1938,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -1969,7 +1969,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -2000,7 +2000,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
@@ -2031,7 +2031,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -2117,7 +2117,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
 forecast pell -> hexer-1: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
 pell attacks hexer-1
@@ -2153,7 +2153,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 13,0
 dunstan moves 12,3 -> 13,0 via 12,2 13,2 13,1
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2183,7 +2183,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2213,7 +2213,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 12,3
 captain moves 14,3 -> 12,3 via 13,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2243,7 +2243,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2273,7 +2273,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 13,3
 wren moves 15,4 -> 13,3 via 15,3 14,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2303,7 +2303,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2333,7 +2333,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 12,4
 rook moves 13,1 -> 12,4 via 12,1 12,2 12,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2363,7 +2363,7 @@ C  rook             Rook L1 skyrider           12,4   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -2393,7 +2393,7 @@ C  rook             Rook L1 skyrider           12,4   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
@@ -2468,7 +2468,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain rider-1
 forecast captain -> rider-1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 captain attacks rider-1
@@ -2501,7 +2501,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move pell 13,2
 pell moves 12,2 -> 13,2
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
@@ -2529,7 +2529,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
 forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
@@ -2561,7 +2561,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 1/21   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack wren soldier-1
 forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 wren attacks soldier-1
@@ -2593,7 +2593,7 @@ E  pell             Pell L2 adept              13,2   hp 9/17   Plain  done
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 17,0
 dunstan moves 13,0 -> 17,0 via 14,0 15,0 16,0
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
@@ -2620,7 +2620,7 @@ E  pell             Pell L2 adept              13,2   hp 9/17   Plain  done
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
@@ -2647,7 +2647,7 @@ E  pell             Pell L2 adept              13,2   hp 9/17   Plain  done
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
@@ -2704,7 +2704,7 @@ B  dunstan          Dunstan L1 bulwark         17,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 9/25   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall 96
 recalled to state 96; 1 charges left
 undone: gives back 3 kills (hexer-1, rider-1, soldier-1), 136 exp, 52 enemy hp; returns pell alive, rook alive, 40 hp
@@ -2737,7 +2737,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
 forecast pell -> hexer-1: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
 pell attacks hexer-1
@@ -2773,7 +2773,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move dunstan 13,0
 dunstan moves 12,3 -> 13,0 via 12,2 13,2 13,1
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2803,7 +2803,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2833,7 +2833,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 12,3
 captain moves 14,3 -> 12,3 via 13,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2863,7 +2863,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2893,7 +2893,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 13,3
 wren moves 15,4 -> 13,3 via 15,3 14,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2923,7 +2923,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2953,7 +2953,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
@@ -2983,7 +2983,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,4   hp 21/25  Forest  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
@@ -3056,7 +3056,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain rider-1
 forecast captain -> rider-1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 captain attacks rider-1
@@ -3090,7 +3090,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move pell 13,2
 pell moves 12,2 -> 13,2
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
@@ -3119,7 +3119,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
 forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
@@ -3152,7 +3152,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 j  soldier-1        Soldier L3 pikeman         13,4   hp 1/21   Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack wren soldier-1
 forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 wren attacks soldier-1
@@ -3185,7 +3185,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 14,2
 rook moves 13,1 -> 14,2 via 14,1
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
@@ -3213,7 +3213,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           14,2   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait rook
 rook waits
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
@@ -3241,7 +3241,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           14,2   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
@@ -3269,7 +3269,7 @@ b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           14,2   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
@@ -3327,7 +3327,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 16,3
 captain moves 12,3 -> 16,3 via 13,3 14,3 15,3
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
@@ -3353,7 +3353,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait captain
 captain waits
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
@@ -3379,7 +3379,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,3   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 17,3
 wren moves 13,3 -> 17,3 via 14,3 15,3 16,3
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
@@ -3405,7 +3405,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              17,3   hp 5/20   Plain
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait wren
 wren waits
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
@@ -3431,7 +3431,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              17,3   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
@@ -3457,7 +3457,7 @@ B  dunstan          Dunstan L1 bulwark         13,0   hp 2/23   Plain  done
 b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              17,3   hp 5/20   Plain  done
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
@@ -3519,7 +3519,7 @@ d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group cha
 A  captain          Alder Fenn L1 cadet        16,3   hp 10/22  Plain  captain
 b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,2   hp 7/25   Plain  group bank, guard, awake
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move captain 19,3
 captain moves 16,3 -> 19,3 via 17,3 18,3
 Brackwater Cut  turn 8 of 8  player phase  escape  recall 1
@@ -3543,6 +3543,31 @@ d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group cha
 A  captain          Alder Fenn L1 cadet        19,3   hp 10/22  Plain  captain
 b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,2   hp 7/25   Plain  group bank, guard, awake
-exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (every living unit on an exit wins)
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+> exit captain
+captain leaves through the exit at 19,3
+Brackwater Cut  turn 8 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.i.....
+ 1 ..^.......~F~.......
+ 2 ..^^.......#....h...
+ 3 ...........bd..e...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           15,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          14,0   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    16,2   hp 7/25   Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+escaped: captain
 battle won: escape; only recall is left
 battle won: escape
+escaped: captain; left behind: none; fell: dunstan, pell, rook, wren

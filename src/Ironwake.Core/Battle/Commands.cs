@@ -45,6 +45,14 @@ public sealed record Retreat(string UnitId, Coord To) : Command;
 /// </summary>
 public sealed record Canto(string UnitId, Coord To) : Command;
 
+/// <summary>
+/// Leave the board through an exit (issue 269): on an Escape map, a unit standing on an
+/// exit tile takes this as its action, in place of Attack, Item or Wait, after its Move or
+/// without one. The unit is gone and safe for the rest of the battle, and no Canto follows.
+/// The captain's exit ends the battle, and every player unit still on the board is left behind.
+/// </summary>
+public sealed record Exit(string UnitId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

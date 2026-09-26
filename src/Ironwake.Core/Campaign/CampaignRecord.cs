@@ -88,7 +88,9 @@ public sealed record CampaignRecord(
     /// The record after a won battle: every deployed unit still standing comes back as the battle
     /// left it, with its spells refreshed and any consumable uses a <c>supplies</c> cap held back
     /// returned (the cap is what a unit brings into the battle; the rest stays in the wagon); a
-    /// deployed unit missing from the board has fallen and leaves the roster; an undeployed unit
+    /// deployed unit missing from the board has fallen and leaves the roster, and on an Escape map
+    /// a unit left behind by the captain's exit has fallen the same way (issue 269), since only
+    /// the <see cref="BattleState.Survivors"/> come back; an undeployed unit
     /// is unchanged. The purse gains the map's reward, the bench is cleared, and the next map is
     /// the one after. A lost battle ends the campaign, so it has no record after it.
     /// </summary>
@@ -101,7 +103,7 @@ public sealed record CampaignRecord(
 
         var opening = end.History.Count > 0 ? end.History[0] : end;
         var deployed = opening.UnitsOf(Side.Player).ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
-        var standing = end.UnitsOf(Side.Player).ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
+        var standing = end.Survivors().ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
         var roster = new List<Unit>();
         var fallen = Fallen.ToList();
         foreach (var unit in Roster)

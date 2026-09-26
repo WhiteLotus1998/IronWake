@@ -68,7 +68,7 @@ public class CertificationTrialCliTests
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: escape\ncertification: captain earned Outrider\n", output);
+        Assert.EndsWith("battle won: seize\ncertification: captain earned Outrider\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

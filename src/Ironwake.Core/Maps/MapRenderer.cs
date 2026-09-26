@@ -217,6 +217,11 @@ public static class MapRenderer
             sb.Append(exits).Append('\n');
         }
 
+        if (state.Escaped.Count > 0)
+        {
+            sb.Append("escaped: ").Append(string.Join(' ', state.Escaped.Select(u => u.Id))).Append('\n');
+        }
+
         if (reach is not null)
         {
             var count = reach.Destinations.Count() - 1;
@@ -237,10 +242,10 @@ public static class MapRenderer
         $"asleep: wakes if a unit ends within {content.WakeRadius} tiles of a member, a combat happens within {content.NoiseRadius}, or a member dies";
 
     /// <summary>
-    /// What an Escape map asks, in the words of DESIGN.md section 7's outcome rule, printed
-    /// after the exit tiles in <see cref="ExitLegend"/>.
+    /// What an Escape map asks, in the words of DESIGN.md section 7's outcome rule (issue 269),
+    /// printed after the exit tiles in <see cref="ExitLegend"/>.
     /// </summary>
-    public const string EscapeRule = "every living unit on an exit wins";
+    public const string EscapeRule = "a unit on one may exit as its action; the captain's exit wins and leaves the rest behind";
 
     /// <summary>
     /// The one line both board views print under the unit rows on an Escape map (issue 267):

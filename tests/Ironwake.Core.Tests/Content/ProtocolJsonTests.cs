@@ -28,6 +28,8 @@ public class ProtocolJsonTests
         { new RankRaised("wren", WeaponType.Sword, WeaponRank.D), """{"type":"rankRaised","unit":"wren","weaponType":"sword","rank":"d"}""" },
         { new MasteryEarned("wren", "cadet", "axebreaker"), """{"type":"masteryEarned","unit":"wren","class":"cadet","ability":"axebreaker"}""" },
         { new UnitWaited("wren"), """{"type":"unitWaited","unit":"wren"}""" },
+        { new UnitExited("wren", new Coord(19, 3)), """{"type":"unitExited","unit":"wren","at":{"x":19,"y":3}}""" },
+        { new UnitLeftBehind("dunstan", new Coord(12, 3)), """{"type":"unitLeftBehind","unit":"dunstan","at":{"x":12,"y":3}}""" },
         { new Cantoed("ansgar", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"cantoed","unit":"ansgar","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
@@ -103,6 +105,7 @@ public class ProtocolJsonTests
         { new UseItem("mira", 0, "wren"), """{"type":"item","unit":"mira","slot":0,"target":"wren"}""" },
         { new Retreat("brigand-1", A), """{"type":"retreat","unit":"brigand-1","to":{"x":1,"y":2}}""" },
         { new Wait("wren"), """{"type":"wait","unit":"wren"}""" },
+        { new Exit("wren"), """{"type":"exit","unit":"wren"}""" },
         { new Canto("ansgar", B), """{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""" },
         { new EndPhase(), """{"type":"end"}""" },
         { new Recall(4), """{"type":"recall","toIndex":4}""" },
@@ -233,6 +236,21 @@ public class ProtocolJsonTests
         };
 
         Assert.Equal(marked, ProtocolJson.ReadState(ProtocolJson.State(marked, content), content));
+    }
+
+    /// <summary>Issue 269: the units that have left through an exit travel in <c>escaped</c>, and a state written before the field existed reads as none.</summary>
+    [Fact]
+    public void AStateReadsBackEqualWithItsEscapedUnits()
+    {
+        var (content, state) = PlayedTollgate();
+        var leaver = state.UnitsOf(Side.Player).First(u => !u.IsCaptain);
+        var marked = state.WithoutUnit(leaver.Id) with { Escaped = ValueList<BattleUnit>.Of(leaver with { Acted = true, Moved = true }), History = ValueList<BattleState>.Empty };
+        var json = ProtocolJson.State(marked, content);
+
+        Assert.Equal(marked, ProtocolJson.ReadState(json, content));
+        var older = System.Text.Json.Nodes.JsonNode.Parse(ProtocolJson.State(state with { History = ValueList<BattleState>.Empty }, content))!.AsObject();
+        older.Remove("escaped");
+        Assert.Empty(ProtocolJson.ReadState(older.ToJsonString(), content).Escaped);
     }
 
     /// <summary>Issue 71: a Canto owed travels in <c>canto</c>, null when none is, and a state written before the field existed reads as none.</summary>
