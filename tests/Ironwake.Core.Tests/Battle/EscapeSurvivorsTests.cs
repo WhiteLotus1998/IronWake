@@ -125,7 +125,7 @@ public class EscapeSurvivorsTests
         var (_, baseline) = Gates.Gate1(Starter, map, "yard", 3);
         Assert.All(baseline, g => Assert.Contains("wren", g.Out));
         var result = Gates.Gate4(Starter, map, "yard", baseline);
-        Assert.Contains("paired on units out (a win scores 1 to 1, a loss 0)", result.Line);
+        Assert.Contains("units out, 0 to 1, median drop", result.Line);
         Assert.Contains("wren: drop 0.000 se 0.000 win drop 0.000 se 0.000 own", result.Line);
     }
 
@@ -137,5 +137,46 @@ public class EscapeSurvivorsTests
         var gate4 = Gates.Gate4(Starter, rout, "rout", baseline);
         Assert.DoesNotContain("units out", gate4.Line);
         Assert.DoesNotContain("win drop", gate4.Line);
+    }
+    /// <summary>Hand-counted seeds: the baseline's outcomes, the benched arm's, and the per-seed scores with wren benched.</summary>
+    public static TheoryData<string, double, double> PairedTables => new()
+    {
+        // Seed by seed, baseline minus arm: (1+1) - (1+0) = 1, 0 - 0 = 0.
+        { "W:wren,pell L | W L:pell", 0.5, 0.5 },
+        // Wren's own exit is never counted: 1 - 1 = 0 on both seeds.
+        { "W:wren W:wren | W W", 0.0, 0.0 },
+        // A loss scores 0 even when units got out first: 0 - 1 = -1, 0 - 2 = -2.
+        { "L:pell L:pell,teodor | W W:pell", -1.5, 0.5 },
+    };
+
+    [Theory]
+    [MemberData(nameof(PairedTables))]
+    public void PairedUnitsOutIsTheMeanDifferenceWithThePairedDifferenceError(string table, double drop, double se)
+    {
+        var halves = table.Split(" | ");
+        var baseline = Parse(halves[0]);
+        var arm = Parse(halves[1]);
+        var result = Gates.PairedUnitsOut(baseline, arm, "wren");
+        Assert.Equal(drop, result.Drop, 6);
+        Assert.Equal(se, result.StandardError, 6);
+
+        static List<GameResult> Parse(string seeds) => seeds.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Select(seed => seed.Split(':'))
+            .Select(parts => Out(parts[0] == "W", parts.Length > 1 ? parts[1].Split(',') : Array.Empty<string>()))
+            .ToList();
+    }
+
+    [Fact]
+    public void PairedDifferenceErrorAgreesWithTheDiscordantSeedErrorOnAWinLossTable()
+    {
+        // 200 seeds, 20 flipped down and 10 flipped up: sqrt(b + c) / n is 0.0274.
+        var differences = Enumerable.Repeat(1.0, 20).Concat(Enumerable.Repeat(-1.0, 10)).Concat(Enumerable.Repeat(0.0, 170)).ToList();
+        Assert.Equal(Math.Sqrt(30) / 200, Gates.PairedDifferenceError(differences), 3);
+    }
+
+    [Fact]
+    public void PairedDifferenceErrorIsZeroUnderTwoSeeds()
+    {
+        Assert.Equal(0.0, Gates.PairedDifferenceError(new[] { 3.0 }));
     }
 }

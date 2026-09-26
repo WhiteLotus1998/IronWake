@@ -43,7 +43,7 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>
     /// The ids of the player units counted in <see cref="RecruitsOut"/>, the captain aside,
     /// so gate 4 on an Escape map can leave the benched recruit out of the baseline's count
-    /// (issue 339).
+    /// (issue 338).
     /// </summary>
     public IReadOnlySet<string> Out { get; init; } = new HashSet<string>(StringComparer.Ordinal);
 }
@@ -317,7 +317,7 @@ public static class Gates
     /// baseline mix, the rest of the cast's baseline mix, and the rest of the cast's mix
     /// with the recruit benched.
     /// On an Escape map the drop is over units out and <paramref name="WinDrop"/> carries the
-    /// win-pair drop beside it, unjudged (issue 339); elsewhere it is null.
+    /// win-pair drop beside it, unjudged (issue 338); elsewhere it is null.
     /// </summary>
     public sealed record AblationRow(string RecruitId, double Drop, double StandardError, ActionMix Own, ActionMix RestBaseline, ActionMix RestBenched, IReadOnlyList<GameResult>? Arm = null, (double Drop, double StandardError)? WinDrop = null);
 
@@ -337,11 +337,10 @@ public static class Gates
     /// refused-kill median (issue 125), so a large drop beside many captain deaths or a
     /// refused kill near one is read as the veto's doing and not the recruit's. On an
     /// Escape map each row also prints the benched arm's survivors (issue 263), and the
-    /// outcome paired is units out, not the win (issue 339): per seed a loss scores 0 and a
+    /// outcome paired is units out, not the win (issue 338): per seed a loss scores 0 and a
     /// win scores the captain plus the recruits out, the benched recruit left out of the
-    /// baseline's count so both arms count the same units. The drop is the mean paired
-    /// difference and the standard error sqrt(sum d^2) / n, which is sqrt(b + c) / n when
-    /// every difference is -1, 0 or 1. The win-pair drop prints beside it, unjudged.
+    /// baseline's count so both arms count the same units (<see cref="PairedUnitsOut"/>).
+    /// The win-pair drop prints beside it, unjudged.
     /// </summary>
     public static GateResult Gate4(GameContent content, MapDefinition map, string id, IReadOnlyList<GameResult> baseline, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -356,8 +355,6 @@ public static class Gates
             var benched = ValueList<string>.Of(recruit);
             var flippedDown = 0;
             var flippedUp = 0;
-            var scoreSum = 0.0;
-            var scoreSquares = 0.0;
             var own = ActionMix.Zero;
             var restBaseline = ActionMix.Zero;
             var restBenched = ActionMix.Zero;
@@ -376,19 +373,15 @@ public static class Gates
                     flippedUp++;
                 }
 
-                var d = UnitsOut(before, except: recruit) - UnitsOut(arm, except: recruit);
-                scoreSum += d;
-                scoreSquares += d * d;
                 own = own.Plus(before.Mix.GetValueOrDefault(recruit, ActionMix.Zero));
                 restBaseline = restBaseline.Plus(Sum(before.Mix, except: recruit));
                 restBenched = restBenched.Plus(Sum(arm.Mix, except: recruit));
             }
 
             var n = (double)baseline.Count;
-            var winDrop = ((flippedDown - flippedUp) / n, Math.Sqrt(flippedDown + flippedUp) / n);
-            rows.Add(escape
-                ? new AblationRow(recruit, scoreSum / n, Math.Sqrt(scoreSquares) / n, own, restBaseline, restBenched, arms, winDrop)
-                : new AblationRow(recruit, winDrop.Item1, winDrop.Item2, own, restBaseline, restBenched, arms));
+            var winDrop = (Drop: (flippedDown - flippedUp) / n, StandardError: Math.Sqrt(flippedDown + flippedUp) / n);
+            var (drop, se) = escape ? PairedUnitsOut(baseline, arms, recruit) : winDrop;
+            rows.Add(new AblationRow(recruit, drop, se, own, restBaseline, restBenched, arms, escape ? winDrop : null));
         }
 
         var median = rows.Count == 0 ? 0.0 : Median(rows.Select(r => r.Drop).ToList());
@@ -397,7 +390,7 @@ public static class Gates
         var passed = verdict == CastVerdictKind.Passes && failing.Count == 0;
         var lines = new List<string>
         {
-            $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, {(escape ? $"paired on units out (a win scores 1 to {opening.UnitsOf(Side.Player).Count() - 1}, a loss 0), " : "")}median drop {median:F3}: {Verdict(passed)}",
+            $"gate 4 no dead weight: {id}, {recruits.Count} recruits x {baseline.Count} seeds, {(escape ? $"units out, 0 to {opening.UnitsOf(Side.Player).Count() - 1}, " : "")}median drop {median:F3}: {Verdict(passed)}",
         };
         switch (verdict)
         {
@@ -430,7 +423,36 @@ public static class Gates
     }
 
     /// <summary>
-    /// Gate 4's per-seed score on an Escape map (issue 339): 0 for a loss, else the captain
+    /// Gate 4's paired outcome on an Escape map (issue 338): the mean per-seed difference of
+    /// <see cref="UnitsOut"/>, baseline minus benched arm, with <paramref name="recruit"/>
+    /// counted in neither, and its <see cref="PairedDifferenceError"/>.
+    /// </summary>
+    public static (double Drop, double StandardError) PairedUnitsOut(IReadOnlyList<GameResult> baseline, IReadOnlyList<GameResult> arm, string recruit)
+    {
+        var differences = baseline.Zip(arm, (before, after) => (double)(UnitsOut(before, recruit) - UnitsOut(after, recruit))).ToList();
+        return (differences.Count == 0 ? 0.0 : differences.Average(), PairedDifferenceError(differences));
+    }
+
+    /// <summary>
+    /// The paired-difference standard error, the sample standard deviation of the per-seed
+    /// differences over sqrt(n), zero under two differences. Gate 4 reads it on a count
+    /// (issue 338); on 0/1 outcomes it agrees with the discordant-seed sqrt(b + c) / n up to
+    /// the n / (n - 1) factor and the squared mean, so maps that are not Escape keep that one.
+    /// </summary>
+    public static double PairedDifferenceError(IReadOnlyList<double> differences)
+    {
+        var n = differences.Count;
+        if (n < 2)
+        {
+            return 0.0;
+        }
+
+        var mean = differences.Average();
+        return Math.Sqrt(differences.Sum(d => (d - mean) * (d - mean)) / (n - 1) / n);
+    }
+
+    /// <summary>
+    /// Gate 4's per-seed score on an Escape map (issue 338): 0 for a loss, else the captain
     /// plus the recruits out, <paramref name="except"/> not counted whether or not it got out.
     /// </summary>
     public static int UnitsOut(GameResult game, string except) =>
