@@ -30,5 +30,5 @@ E soldier 7,5 group:field behavior:guard
 E brawler 7,6 group:field behavior:guard
 E archer 8,6 group:field behavior:guard
 E shieldbearer 12,2 group:gate behavior:hold
-E hexer 13,4 group:yard behavior:hold
+E hexer 13,7 group:yard behavior:hold
 B grange_reeve 15,6 group:hall behavior:guard
