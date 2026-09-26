@@ -1408,6 +1408,8 @@ public sealed class PlaySession
                     : $"{c.UnitId} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
             case UnitRetreated r:
                 return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
+            case GrudgeSworn g:
+                return $"{g.UnitId} swears a grudge against {g.AgainstId}";
             case UnitHealed h:
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
             case PhaseEnded p:

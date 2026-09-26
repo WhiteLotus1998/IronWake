@@ -147,6 +147,10 @@ public static class ProtocolJson
                 WriteCoord(w, "from", r.From);
                 WriteCoord(w, "to", r.To);
                 break;
+            case GrudgeSworn g:
+                w.WriteString("unit", g.UnitId);
+                w.WriteString("against", g.AgainstId);
+                break;
             case RapportGained g:
                 w.WriteString("a", g.A);
                 w.WriteString("b", g.B);
@@ -579,6 +583,11 @@ public static class ProtocolJson
         w.WriteNumber("placementIndex", unit.PlacementIndex);
         w.WriteBoolean("retreated", unit.Retreated);
         WriteNullableNumber(w, "canto", unit.Canto);
+        if (unit.Grudge is { } grudge)
+        {
+            w.WriteString("grudge", grudge);
+        }
+
         WriteRosterFields(w, u);
         w.WriteEndObject();
     }
@@ -643,7 +652,8 @@ public static class ProtocolJson
             RequiredBool(e, "isCaptain"),
             RequiredInt(e, "placementIndex"),
             RequiredBool(e, "retreated"),
-            OptionalInt(e, "canto"));
+            OptionalInt(e, "canto"),
+            OptionalString(e, "grudge"));
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>

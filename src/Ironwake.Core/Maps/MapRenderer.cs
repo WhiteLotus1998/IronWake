@@ -204,6 +204,11 @@ public static class MapRenderer
                     role += ", holds its refuge until half hp";
                 }
 
+                if (unit.Grudge is { } sworn)
+                {
+                    role += ", sworn: " + sworn;
+                }
+
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
             }
             else if (unit.IsCaptain)
