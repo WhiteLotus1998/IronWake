@@ -138,7 +138,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 pell attacks archer-2
   pell hits archer-2 for 10 (hp 0)
   pell hp 16, archer-2 hp 0
@@ -1148,7 +1148,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 86% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 86% crit 2%; counter: none
 pell attacks soldier-1
   pell misses soldier-1
   pell hp 16, soldier-1 hp 14
@@ -1480,7 +1480,7 @@ hexer-1 waits
 enemy: move rider-1 13,4
 rider-1 moves 9,2 -> 13,4 via 10,2 10,3 11,3 12,3 13,3
 enemy: attack rider-1 pell
-forecast rider-1 -> pell: dmg 11 hit 80% crit 0%; counter: dmg 12 hit 99% crit 2%
+forecast rider-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
 rider-1 attacks pell
   rider-1 misses pell
   pell hits rider-1 for 12 (hp 9)
@@ -1501,7 +1501,7 @@ wren falls at 17,2
 enemy: move soldier-1 13,6
 soldier-1 moves 15,5 -> 13,6 via 15,6 14,6
 enemy: attack soldier-1 pell
-forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter: dmg 12 hit 99% crit 2%
+forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
 soldier-1 attacks pell
   soldier-1 misses pell
   pell hits soldier-1 for 12 (hp 2)
@@ -1840,7 +1840,7 @@ D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
-forecast pell -> brigand-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 0)
   pell hp 16, brigand-1 hp 0
@@ -2051,7 +2051,7 @@ brigand-2 waits
 enemy: move hexer-1 10,2
 hexer-1 moves 7,2 -> 10,2 via 8,2 9,2
 enemy: attack hexer-1 pell
-forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter: dmg 8 hit 99% crit 2%
+forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 8 hit 99% crit 2%
 hexer-1 attacks pell
   hexer-1 hits pell for 8 (hp 8)
   pell hits hexer-1 for 8 (hp 8)
@@ -2119,7 +2119,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
-forecast pell -> hexer-1: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
 pell attacks hexer-1
   pell hits hexer-1 for 8 (hp 0)
   pell hp 8, hexer-1 hp 0
@@ -2531,7 +2531,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 1)
   pell hp 9, soldier-1 hp 1
@@ -2661,7 +2661,7 @@ archer-1 attacks wren
 enemy: move brawler-1 14,2
 brawler-1 moves 15,3 -> 14,2 via 15,2
 enemy: attack brawler-1 pell
-forecast brawler-1 -> pell: dmg 9 x2 hit 94% crit 0%; counter: dmg 13 hit 99% crit 3%
+forecast brawler-1 -> pell: dmg 9 x2 hit 94% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 brawler-1 attacks pell
   brawler-1 hits pell for 9 (hp 0)
   brawler-1 hp 23, pell hp 0
@@ -2739,7 +2739,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
-forecast pell -> hexer-1: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
 pell attacks hexer-1
   pell hits hexer-1 for 8 (hp 0)
   pell hp 8, hexer-1 hp 0
@@ -3121,7 +3121,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 1)
   pell hp 9, soldier-1 hp 1
@@ -3296,7 +3296,7 @@ rider-2 waits
 enemy: move shieldbearer-1 14,2
 shieldbearer-1 moves 14,3 -> 14,2
 enemy: attack shieldbearer-1 pell
-forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter: dmg 13 hit 100% crit 3%
+forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 100% crit 3%
 shieldbearer-1 attacks pell
   shieldbearer-1 hits pell for 10 (hp 0)
   shieldbearer-1 hp 15, pell hp 0

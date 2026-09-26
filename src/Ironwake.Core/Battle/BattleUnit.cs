@@ -74,6 +74,20 @@ public sealed record BattleUnit(
             : null;
     }
 
+    /// <summary>
+    /// How many different weapons this unit could strike with at <paramref name="distance"/>:
+    /// distinct weapon ids among the slots <see cref="UsableWeaponAt"/> accepts whose range covers
+    /// it. More than one is when a forecast or <c>threat</c> line names the weapon (DESIGN.md
+    /// 13.11, issue 313); two copies of one weapon count once.
+    /// </summary>
+    public int WeaponChoicesAt(GameContent content, int distance) =>
+        Enumerable.Range(0, Unit.Inventory.Count)
+            .Select(slot => UsableWeaponAt(content, slot))
+            .Where(weapon => weapon is not null && weapon.InRange(distance))
+            .Select(weapon => weapon!.Id)
+            .Distinct()
+            .Count();
+
     /// <summary>This unit with the item in <paramref name="slot"/> moved to the front of its inventory, the other slots keeping their order.</summary>
     public BattleUnit WithSlotInFront(int slot)
     {

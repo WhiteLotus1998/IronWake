@@ -224,6 +224,29 @@ public class ProtocolSessionTests
         Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\",\"soldier-1\"]}]", asleep);
     }
 
+    /// <summary>
+    /// Issue 313: the protocol carries the weapon on every forecast and threat line, a
+    /// one-weapon enemy's included, and <c>counterWeapon</c> is null when nothing answers.
+    /// </summary>
+    [Fact]
+    public void ForecastAndThreatLinesAlwaysCarryTheWeapons()
+    {
+        var content = Content();
+        const string Yard = "name: Yard\nsize: 6x3\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\n\n"
+            + "......\n......\n......\n\n"
+            + "units:\nP captain 0,1\nE soldier 2,1 group:a behavior:hold\nE archer 0,0 group:b behavior:hold\n";
+        var session = new ProtocolSession(content, BattleState.From(MapFormat.Parse("yard.map", Yard, content), content, content.Cast, 7), new StringWriter());
+
+        var soldier = session.Answer("""{"query":"forecast","unit":"captain","target":"soldier-1","from":{"x":1,"y":1}}""");
+        var archer = session.Answer("""{"query":"forecast","unit":"captain","target":"archer-1"}""");
+        var threat = session.Answer("""{"query":"threat","unit":"captain","from":{"x":1,"y":1}}""");
+
+        Assert.Contains("\"weapon\":\"iron_sword\",\"counterWeapon\":\"iron_lance\"", soldier);
+        Assert.Contains("\"weapon\":\"iron_sword\",\"counterWeapon\":null", archer);
+        Assert.Contains("\"enemy\":\"soldier-1\",\"from\":{\"x\":2,\"y\":1},\"slot\":0,\"weapon\":\"iron_lance\"", threat);
+        Assert.Contains("\"counterWeapon\":\"iron_sword\"", threat);
+    }
+
     private const string Dark = "name: Dark\nsize: 12x3\nwin: rout\nturn_limit: 10\nrecall: 3\nenemy_level: 1\ndusk: 1\n\n"
         + "............\n............\n............\n\n"
         + "units:\nP captain 0,1\nE soldier 1,1 group:near behavior:hold\nE soldier 10,1 group:far behavior:hold\n";

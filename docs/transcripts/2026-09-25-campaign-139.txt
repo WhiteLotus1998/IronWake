@@ -1274,7 +1274,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 86% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 86% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -1694,7 +1694,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      10,4   hp 4/17   Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > attack pell wingrider-1 2
-forecast pell -> wingrider-1: dmg 16 hit 100% crit 6%; counter: none
+forecast pell -> wingrider-1 with Gust: dmg 16 hit 100% crit 6%; counter: none
 pell equips Gust
 pell attacks wingrider-1
   pell hits wingrider-1 for 16 (hp 0)
@@ -1825,7 +1825,7 @@ bandit_leader-1 waits
 enemy: move soldier-2 10,5
 soldier-2 moves 10,2 -> 10,5 via 10,3 10,4
 enemy: attack soldier-2 pell
-forecast soldier-2 -> pell: dmg 11 hit 74% crit 0%; counter: dmg 11 hit 100% crit 7%
+forecast soldier-2 -> pell: dmg 11 hit 74% crit 0%; counter with Gust: dmg 11 hit 100% crit 7%
 soldier-2 attacks pell
   soldier-2 misses pell
   pell hits soldier-2 for 11 (hp 9)
@@ -1877,7 +1877,7 @@ d  soldier-2        Soldier L2 pikeman         10,5   hp 9/20   Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > attack pell soldier-2
-forecast pell -> soldier-2: dmg 11 hit 100% crit 7%; counter: none
+forecast pell -> soldier-2 with Gust: dmg 11 hit 100% crit 7%; counter: none
 pell attacks soldier-2
   pell hits soldier-2 for 11 (hp 0)
   pell hp 16, soldier-2 hp 0
@@ -2226,7 +2226,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > attack pell bandit_leader-1
-forecast pell -> bandit_leader-1: dmg 10 hit 97% crit 6%; counter: none
+forecast pell -> bandit_leader-1 with Gust: dmg 10 hit 97% crit 6%; counter: none
 pell attacks bandit_leader-1
   pell hits bandit_leader-1 for 10 (hp 16)
   pell hp 17, bandit_leader-1 hp 16
@@ -2270,7 +2270,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 22/22  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 8 x2 hit 73% crit 3%; counter: dmg 15 hit 51% crit 0%
+forecast wren -> bandit_leader-1: dmg 8 x2 hit 73% crit 3%; counter with Steel Axe: dmg 15 hit 51% crit 0%
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 8 (hp 8)
   bandit_leader-1 hits wren for 15 (hp 7)
@@ -2380,7 +2380,7 @@ B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 -- enemy phase, turn 8 --
 bandit_leader-1 heals 5 (hp 13)
 enemy: attack bandit_leader-1 wren
-forecast bandit_leader-1 -> wren: dmg 15 hit 51% crit 0%; counter: dmg 8 x2 hit 73% crit 3%
+forecast bandit_leader-1 -> wren with Steel Axe: dmg 15 hit 51% crit 0%; counter: dmg 8 x2 hit 73% crit 3%
 bandit_leader-1 attacks wren
   bandit_leader-1 hits wren for 15 (hp 0)
   bandit_leader-1 hp 13, wren hp 0
@@ -2552,7 +2552,7 @@ B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 -- enemy phase, turn 8 --
 bandit_leader-1 heals 5 (hp 21)
 enemy: attack bandit_leader-1 pell 2
-forecast bandit_leader-1 -> pell: dmg 14 hit 58% crit 0%; counter: dmg 10 hit 97% crit 6%
+forecast bandit_leader-1 -> pell: dmg 14 hit 58% crit 0%; counter with Gust: dmg 10 hit 97% crit 6%
 bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks pell
   bandit_leader-1 misses pell
@@ -2581,7 +2581,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road
 > attack pell bandit_leader-1
-forecast pell -> bandit_leader-1: dmg 10 hit 97% crit 6%; counter: dmg 14 hit 58% crit 0%
+forecast pell -> bandit_leader-1 with Gust: dmg 10 hit 97% crit 6%; counter: dmg 14 hit 58% crit 0%
 pell attacks bandit_leader-1
   pell hits bandit_leader-1 for 10 (hp 1)
   bandit_leader-1 hits pell for 14 (hp 3)
@@ -2627,7 +2627,7 @@ D  pell             Pell L2 adept              10,2   hp 3/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 22/22  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 8 x2 hit 67% crit 3%; counter: dmg 10 hit 32% crit 0%
+forecast wren -> bandit_leader-1: dmg 8 x2 hit 67% crit 3%; counter with Toll Axe: dmg 10 hit 32% crit 0%
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 8 (hp 0)
   wren hp 22, bandit_leader-1 hp 0

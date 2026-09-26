@@ -62,7 +62,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brigand-1
-forecast pell -> brigand-1: dmg 13 hit 87% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 9)
   pell hp 16, brigand-1 hp 9
@@ -913,11 +913,11 @@ B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > forecast keziah shieldbearer-1
-forecast keziah -> shieldbearer-1: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
+forecast keziah -> shieldbearer-1 with Iron Axe: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
 > forecast keziah shieldbearer-1 2
-forecast keziah -> shieldbearer-1: dmg 3 x4 hit 97% crit 2%; counter: dmg 9 hit 72% crit 0%
+forecast keziah -> shieldbearer-1 with Iron Gauntlets: dmg 3 x4 hit 97% crit 2%; counter: dmg 9 hit 72% crit 0%
 > attack keziah shieldbearer-1
-forecast keziah -> shieldbearer-1: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
+forecast keziah -> shieldbearer-1 with Iron Axe: dmg 8 x2 hit 80% crit 2%; counter: dmg 9 hit 72% crit 0%
 keziah attacks shieldbearer-1
   keziah hits shieldbearer-1 for 8 (hp 16)
   shieldbearer-1 hits keziah for 9 (hp 14)
@@ -980,7 +980,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 16, shieldbearer-1 hp 0
@@ -1196,7 +1196,7 @@ e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          8,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 > attack pell brawler-1
-forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brawler-1
   pell hits brawler-1 for 13 (hp 9)
   pell hp 16, brawler-1 hp 9
@@ -1427,7 +1427,7 @@ archer-1 waits
 enemy: move soldier-1 11,6
 soldier-1 moves 12,7 -> 11,6 via 12,6
 enemy: attack soldier-1 keziah
-forecast soldier-1 -> keziah: dmg 10 hit 74% crit 0%; counter: dmg 12 hit 67% crit 1%
+forecast soldier-1 -> keziah: dmg 10 hit 74% crit 0%; counter with Iron Axe: dmg 12 hit 67% crit 1%
 soldier-1 attacks keziah
   soldier-1 hits keziah for 10 (hp 4)
   keziah hits soldier-1 for 12 (hp 8)
@@ -1541,7 +1541,7 @@ e  soldier-1        Soldier L2 pikeman         11,6   hp 8/20   Road  group ford
 B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -1813,7 +1813,7 @@ D  pell             Pell L1 adept              9,6    hp 16/16  Road
 B  teodor           Teodor L1 pikeman          8,6    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 > attack dunstan weir_foreman-1
-forecast dunstan -> weir_foreman-1: dmg 8 hit 56% crit 0%; counter: dmg 6 x2 hit 93% crit 2%
+forecast dunstan -> weir_foreman-1: dmg 8 hit 56% crit 0%; counter with Steel Gauntlets: dmg 6 x2 hit 93% crit 2%
 dunstan attacks weir_foreman-1
   dunstan hits weir_foreman-1 for 8 (hp 20)
   weir_foreman-1 hits dunstan for 6 (hp 11)
@@ -1871,7 +1871,7 @@ D  pell             Pell L1 adept              9,6    hp 16/16  Road
 B  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 20/28  Hill  group weir, boss
 > attack teodor weir_foreman-1
-forecast teodor -> weir_foreman-1: dmg 9 hit 60% crit 0%; counter: dmg 8 x2 hit 88% crit 2%
+forecast teodor -> weir_foreman-1: dmg 9 hit 60% crit 0%; counter with Steel Gauntlets: dmg 8 x2 hit 88% crit 2%
 teodor attacks weir_foreman-1
   teodor hits weir_foreman-1 for 9 (hp 11)
   weir_foreman-1 hits teodor for 8 (hp 13)
@@ -1985,7 +1985,7 @@ D  pell             Pell L1 adept              12,7   hp 16/16  Plain
 B  teodor           Teodor L1 pikeman          12,6   hp 5/21   Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss
 > attack pell weir_foreman-1
-forecast pell -> weir_foreman-1: dmg 12 hit 94% crit 1%; counter: none
+forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 94% crit 1%; counter: none
 pell attacks weir_foreman-1
   pell hits weir_foreman-1 for 12 (hp 0)
   pell hp 16, weir_foreman-1 hp 0

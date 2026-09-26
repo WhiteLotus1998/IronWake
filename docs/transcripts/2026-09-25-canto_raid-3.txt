@@ -219,7 +219,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
-forecast ansgar -> archer-1: dmg 11 hit 76% crit 2%; counter: none
+forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
 ansgar attacks archer-1
   ansgar hits archer-1 for 11 (hp 6)
   ansgar hp 20, archer-1 hp 6
@@ -346,7 +346,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
-forecast ansgar -> archer-1: dmg 11 hit 76% crit 2%; counter: none
+forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
 ansgar attacks archer-1
   ansgar hits archer-1 for 11 (hp 0)
   ansgar hp 20, archer-1 hp 0
@@ -513,7 +513,7 @@ c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 11)
   soldier-2 misses ansgar
@@ -560,7 +560,7 @@ soldier-1 waits
 enemy: move soldier-2 9,5
 soldier-2 moves 11,5 -> 9,5 via 10,5
 enemy: attack soldier-2 ansgar
-forecast soldier-2 -> ansgar: dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+forecast soldier-2 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
 soldier-2 attacks ansgar
   soldier-2 hits ansgar for 10 (hp 10)
   ansgar hits soldier-2 for 9 (hp 2)
@@ -585,7 +585,7 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0
@@ -607,7 +607,7 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat ansgar
 threat on ansgar at 8,5 (Plain):
-  soldier-1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+  soldier-1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
   if all land: 10 against 10 hp
 > canto ansgar 6,5
 ansgar cantos 8,5 -> 6,5 via 7,5
@@ -717,7 +717,7 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0
@@ -788,7 +788,7 @@ C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 enemy: move soldier-1 8,5
 soldier-1 moves 11,4 -> 8,5 via 10,4 9,4 8,4
 enemy: attack soldier-1 ansgar
-forecast soldier-1 -> ansgar: dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+forecast soldier-1 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
 soldier-1 attacks ansgar
   soldier-1 hits ansgar for 10 (hp 0)
   soldier-1 hp 20, ansgar hp 0
@@ -828,7 +828,7 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0
@@ -850,7 +850,7 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat ansgar from 7,5
 threat on ansgar at 7,5 (Plain):
-  soldier-1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter: dmg 9 hit 76% crit 2%
+  soldier-1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
   if all land: 10 against 10 hp
 > threat ansgar from 5,5
 threat on ansgar at 5,5 (Plain): no enemy can strike it next phase

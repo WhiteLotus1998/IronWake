@@ -142,7 +142,7 @@
       "level": 3,
       "stats": { "hp": 24, "str": 8, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 4, "res": 1, "cha": 4 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 25, "res": 10, "cha": 10 },
-      "inventory": [ { "item": "steel_axe" }, { "item": "toll_axe" }, { "item": "hatchet" } ]
+      "inventory": [ { "item": "toll_axe" }, { "item": "steel_axe" } ]
     }
   ]
 }

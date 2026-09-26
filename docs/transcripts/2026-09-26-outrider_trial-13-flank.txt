@@ -25,7 +25,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 A  captain          Alder Fenn L1 outrider     2,2    hp 23/23  Plain  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > attack captain hexer-1 2
-forecast captain -> hexer-1: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 98% crit 0%
+forecast captain -> hexer-1 with Iron Sword: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 98% crit 0%
 captain equips Iron Sword
 captain attacks hexer-1
   captain misses hexer-1
