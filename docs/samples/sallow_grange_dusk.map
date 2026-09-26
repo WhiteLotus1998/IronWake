@@ -1,0 +1,35 @@
+name: Sallow Grange
+size: 18x12
+win: seize
+turn_limit: 10
+recall: 3
+enemy_level: 3
+dusk: 9
+
+....^^^^^^^.......
+......^^^.........
+....F......#.#####
+...........#......
+...........#......
+..................
+................T.
+...........#......
+...........#......
+...........#######
+......^^^.........
+....^^^^^^^.......
+
+units:
+P captain 1,6
+P recruit:ansgar 0,10
+P recruit:wren 1,5
+P recruit:teodor 0,5
+P recruit:pell 0,6
+P recruit:ottilie 0,7
+E archer 4,2 group:fort behavior:hold
+E soldier 7,5 group:field behavior:guard
+E brawler 7,6 group:field behavior:guard
+E archer 8,6 group:field behavior:guard
+E shieldbearer 12,2 group:gate behavior:hold
+E hexer 13,7 group:yard behavior:hold
+B grange_reeve 15,6 group:hall behavior:guard
