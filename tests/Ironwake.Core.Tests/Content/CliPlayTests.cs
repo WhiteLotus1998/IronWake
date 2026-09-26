@@ -766,6 +766,36 @@ public class SimFullTests
         }
     }
 
+    /// <summary>
+    /// The heuristic's Canto (issue 262) prints as the CLI's own <c>canto</c> line, the tile
+    /// even when it is a stay. Seed 3 on Sallow Grange has Ansgar ride back from 5,8 after
+    /// striking; the trace replayed under --strict applies every line.
+    /// </summary>
+    [Fact]
+    public void ATraceWithACantoLineReplaysInTheCliUnderStrict()
+    {
+        Assert.Equal("canto ansgar 3,7", Ironwake.Sim.Program.Script(new Canto("ansgar", new Coord(3, 7))));
+        var trace = Capture(() => Ironwake.Sim.Program.Trace("sallow_grange", 3));
+        Assert.Contains("\ncanto ansgar 3,7\n", trace);
+
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-trace-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, trace);
+        try
+        {
+            var exit = 0;
+            var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "sallow_grange", "--seed", "3", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
+
+            Assert.Equal(0, exit);
+            Assert.DoesNotContain("rejected ", output);
+            Assert.DoesNotContain("strict: stopped", output);
+            Assert.Contains("ansgar cantos 5,8 -> 3,7", output);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     private static string Capture(Action run) =>
         ConsoleCapture.Run(run, Path.GetDirectoryName(Fixture.RealContentDirectory())!);
 }
