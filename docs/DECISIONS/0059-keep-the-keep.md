@@ -17,3 +17,7 @@ Date: 2026-09-26. Issue 82 (experiment 13.5), forty-fourth round on the Design T
 
 - Code, seed 82, both walls: `docs/transcripts/2026-09-26-ironwake_keep-walls-82.*`. The hexer's cast from 9,5, the unbought ditch tile, killed Ottilie.
 - Chat, seed 91, ditch and both forts: `docs/transcripts/2026-09-26-ironwake_keep-ditchforts-91.*`, replayed by Code under `--strict` to the same game. The hexer walked 0,8 to 4,8 to 8,8 and died there. On a keep with the forts and no ditch, the same script diverges on turn 2 (a different enemy board refuses Ottilie's move), and the hexer still walks 0,8 to 4,8 to 8,8. On this seed, then, the ditch most likely changed nothing, which is decision 7's invisibility in its plainest form.
+
+## Built (#287)
+
+Decisions 5 and 6 are in the content. The menu in `campaign.json` sells a wall (400) and a ditch (300). The van starts a tile closer, at x 3 to 6, so its soldier and brigand stand on 10,4 and 10,7 after enemy phase 1 and strike the breaches on enemy phase 2. The waves are two on enemy phase 2, two on 3, one on 4, two on 5 and four on 6 (two brigands, a soldier and a hexer), so the last spawn arrives on the breaches on enemy phases 7 and 8. `KeepTests` holds both shapes. Gate 1 at 100 seeds, read and not gated: bare 77 percent, walls 62, ditch 82, both 64 (before: bare 85, walls 62). Code's seed 287 play on the bare keep survived with three recruits fallen and two Recalls spent; the tensest turn was player phase 8. The two journaled scripts from #82 replay against their own `.map` copies and are unchanged.
