@@ -254,19 +254,50 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// Lists the map's events that have not fired, one line each in the file's own words, on a
-    /// certification trial and on a map with <c>announce: on</c> (issue 78).
+    /// Lists the map's events that have not fired, one line each in player words, on a
+    /// certification trial and on a map with <c>announce: on</c> (issues 78, 256): when it
+    /// fires, what it does, and for a spawn the held-tile rule that stops it.
     /// </summary>
     internal void WritePendingEvents()
     {
-        var lines = MapFormat.Write(_state.Map, _content).Split('\n').SkipWhile(l => l != "events:").Skip(1).Where(l => l.Length > 0).ToList();
-        for (var i = 0; i < _state.Map.Events.Count; i++)
+        foreach (var mapEvent in _state.Map.Events)
         {
-            if (!_state.HasFired(_state.Map.Events[i].Name))
+            if (!_state.HasFired(mapEvent.Name))
             {
-                _out.WriteLine("  event: " + lines[i]);
+                _out.WriteLine("  " + DescribeEvent(mapEvent, _content));
             }
         }
+    }
+
+    /// <summary>
+    /// A map event in player words, for example <c>turn 3, enemy phase: a rider arrives at
+    /// 7,0 (aggressive). A unit standing on 7,0 stops it.</c> The held-tile rule is the one
+    /// <see cref="MapEvents"/> applies: a spawn tile with any unit on it blocks the spawn.
+    /// </summary>
+    internal static string DescribeEvent(MapEvent mapEvent, GameContent content)
+    {
+        var when = mapEvent.Trigger switch
+        {
+            TurnTrigger turn => $"turn {turn.Turn}, {(turn.Phase == Side.Enemy ? "enemy" : "player")} phase",
+            EnterTrigger enter => $"when one of yours stops on {enter.At}",
+            _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
+        };
+        var what = mapEvent.Action switch
+        {
+            SpawnEnemy spawn => SpawnWords(spawn.Placement, content),
+            ChangeTerrain change => $"{change.At} becomes {content.TerrainById(change.TerrainId).Name.ToLowerInvariant()}.",
+            SetFlag flag => $"{flag.Flag} is set.",
+            _ => throw new InvalidOperationException("unknown action " + mapEvent.Action.GetType().Name),
+        };
+        return when + ": " + what;
+    }
+
+    private static string SpawnWords(EnemyPlacement placement, GameContent content)
+    {
+        var name = content.Unit(placement.TemplateId).Name.ToLowerInvariant();
+        var article = "aeiou".Contains(name[0]) ? "an" : "a";
+        var behavior = placement.Behavior.ToString().ToLowerInvariant();
+        return $"{article} {name} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops it.";
     }
 
     private int Play(TextReader input, bool strict, ulong seed)

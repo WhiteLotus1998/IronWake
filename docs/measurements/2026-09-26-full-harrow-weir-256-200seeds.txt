@@ -1,0 +1,36 @@
+full: 1 maps from content, 200 seeds, two-roll average
+gate 1 beatable: harrow_weir, heuristic wins 125/200 (62 %), winning turn median 8 p90 11 limit 14, losses 73 timeout 2 captain 0 protected, quiet tail 0.4, refused kill p50 0.9442 over 73, two-roll average: ok
+gate 2 decisions matter: harrow_weir, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: harrow_weir, 0 player units killed from deployment: ok
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.270: ok
+  dunstan: drop 0.195 se 0.044 own [atk 666 dmg 5843 heal 0 abs 252] rest baseline [atk 3018 dmg 37150 heal 0 abs 1823] rest benched [atk 3157 dmg 42595 heal 0 abs 2117] benched losses 100 timeout 14 captain 0 protected, refused kill p50 0.8868 over 100
+  keziah: drop 0.270 se 0.046 own [atk 389 dmg 5573 heal 0 abs 308] rest baseline [atk 3295 dmg 37420 heal 0 abs 1767] rest benched [atk 3201 dmg 41333 heal 0 abs 2126] benched losses 119 timeout 10 captain 0 protected, refused kill p50 0.9849 over 119
+  ottilie: drop 0.240 se 0.045 own [atk 805 dmg 4865 heal 0 abs 504] rest baseline [atk 2879 dmg 38128 heal 0 abs 1571] rest benched [atk 2816 dmg 40789 heal 0 abs 1831] benched losses 121 timeout 2 captain 0 protected, refused kill p50 0.9442 over 121
+  pell: drop 0.500 se 0.053 own [atk 733 dmg 10634 heal 0 abs 217] rest baseline [atk 2951 dmg 32359 heal 0 abs 1858] rest benched [atk 3229 dmg 40406 heal 0 abs 2638] benched losses 155 timeout 20 captain 0 protected, refused kill p50 0.9892 over 155
+  teodor: drop 0.425 se 0.050 own [atk 533 dmg 6784 heal 0 abs 348] rest baseline [atk 3151 dmg 36209 heal 0 abs 1727] rest benched [atk 3063 dmg 41319 heal 0 abs 2460] benched losses 145 timeout 15 captain 0 protected, refused kill p50 0.9442 over 145
+  captain captain: baseline [atk 558 dmg 9294 heal 0 abs 446] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 2029 ms: ok
+gate 5 forecast honesty: 10143 combats (4502 with gauntlets), 21173 strikes, hits 12969 expected 12960.3, crits 910 expected 884.0, damage mismatches 0: ok
+gate 7 speed: harrow_weir, 5 AI-vs-AI games, 57 turns, slowest 47 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 32776 ms: ok
+free prefix: harrow_weir, 0 of 2, 4, 6 tried, slack median 6 p90 3 (printed, not gated)
+  prefix 2: wins 80/200, drop 0.225 se 0.051, not free
+  prefix 4: wins 66/200, drop 0.295 se 0.053, not free
+  prefix 6: wins 37/200, drop 0.440 se 0.053, not free
+  prefix 2 refunded: wins 84/200, drop 0.205 se 0.051, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 0.0, first contact 3.0, first quiet at tax 0.25 1.0
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.83
+  turn 2: dead 172 quiet 0 live 28, wake tax 0.00
+  turn 3: dead 25 quiet 0 live 175, wake tax 0.09
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 0 quiet 0 live 195, wake tax 0.00
+  turn 7: dead 4 quiet 0 live 171, wake tax 0.00
+  turn 8: dead 17 quiet 0 live 128, wake tax 0.00
+  turn 9: dead 17 quiet 0 live 107, wake tax 0.00
+  turn 10: dead 14 quiet 0 live 92, wake tax 0.00
+  turn 11: dead 12 quiet 0 live 80, wake tax 0.00
+  turn 12: dead 13 quiet 0 live 68, wake tax 0.00
+  turn 13: dead 13 quiet 0 live 66, wake tax 0.00
+  turn 14: dead 17 quiet 0 live 60, wake tax 0.00
+full: ok

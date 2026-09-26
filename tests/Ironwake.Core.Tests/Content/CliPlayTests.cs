@@ -564,9 +564,38 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 78: on a map with <c>announce: on</c> the console lists every event before the
-    /// first command, and <c>map</c> lists only those still to fire; the Tollgate, which does
-    /// not announce, prints none.
+    /// Issue 256: every trigger and action an announced map can carry reads in player words,
+    /// a terrain change and a flag as well as a spawn, and a player-phase turn trigger names
+    /// its phase.
+    /// </summary>
+    [Fact]
+    public void AnnouncedEventsOfEveryKindReadInPlayerWords()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var sample = File.ReadAllText(Path.Combine(repo, "docs", "samples", "sluice_gate.map")).ReplaceLineEndings("\n");
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-announce-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, sample.Replace("enemy_level: 1\n", "enemy_level: 1\nannounce: on\n") + "alarm turn 2 player flag alarm\n");
+        File.WriteAllText(script, "");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("  when one of yours stops on 3,1: 4,1 becomes road.\n", output);
+            Assert.Contains("  turn 3, enemy phase: a brigand arrives at 9,0 (aggressive). A unit standing on 9,0 stops it.\n", output);
+            Assert.Contains("  turn 2, player phase: alarm is set.\n", output);
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
+    /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
+    /// lists only those still to fire; the Tollgate, which does not announce, prints none.
     /// </summary>
     [Fact]
     public void AnAnnouncedMapListsItsEventsAtTheStartAndMapListsThoseStillToFire()
@@ -579,14 +608,15 @@ public class CliPlayTests
             var tollgate = Run(out _, "play", "the_tollgate", "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
 
             var start = weir[..weir.IndexOf("> end", StringComparison.Ordinal)];
-            Assert.Contains("  event: north1 turn 3 enemy spawn rider 7,0 group:north behavior:aggressive\n", start);
-            Assert.Contains("  event: west1 turn 5 enemy spawn brigand 0,11 group:west behavior:aggressive\n", start);
-            Assert.Contains("  event: north2 turn 7 enemy spawn brigand 7,0 group:north behavior:aggressive\n", start);
+            Assert.Contains("  turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.\n", start);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.\n", start);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.\n", start);
+            Assert.DoesNotContain("event: ", start);
             var afterMap = weir[weir.IndexOf("> map", StringComparison.Ordinal)..];
-            Assert.DoesNotContain("event: north1", afterMap);
-            Assert.Contains("  event: west1 ", afterMap);
-            Assert.Contains("  event: north2 ", afterMap);
-            Assert.DoesNotContain("  event: ", tollgate);
+            Assert.DoesNotContain("turn 3, enemy phase", afterMap);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 0,11 ", afterMap);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 7,0 ", afterMap);
+            Assert.DoesNotContain(" enemy phase: a ", tollgate);
         }
         finally
         {
@@ -595,27 +625,30 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 78: Code's play of seed 7 on Harrow Weir. Wren walks north and stands on 7,0 as
-    /// enemy phase 3 opens, so the rider never arrives; Pell and Teodor break the shieldbearer
-    /// on turn 3; the west brigand arrives on enemy phase 5; the foreman crits Teodor for 24 at
-    /// 2 percent on enemy phase 6, and Pell kills him on turn 7 on 3 HP.
+    /// Issue 256: Code's play of seed 17 on Harrow Weir with Keziah in Wren's place and
+    /// north2 on enemy phase 5. The captain stands on 7,0 from turn 3, so both north waves
+    /// are spent; Keziah's axe (8 x2 against the shieldbearer's Def 8, the fists 3 x4) and her
+    /// counter leave it at 8 and Pell breaks it; the west brigand arrives on enemy phase 5;
+    /// Dunstan, Teodor, Ottilie and Pell take the foreman from 28 to 0 on turn 6.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptWinsHarrowWeirOnSeedSeven()
+    public void TheJournaledScriptWinsHarrowWeirOnSeedSeventeen()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-harrow_weir-7.script");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-harrow_weir-17.script");
 
-        var output = Run(out var exit, "play", "harrow_weir", "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", "harrow_weir", "--seed", "17", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: defeat_boss\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.DoesNotContain("rider-1", output);
+        Assert.Contains("event north1 is blocked: its tile is held\n", output);
+        Assert.Contains("event north2 is blocked: its tile is held\n", output);
+        Assert.Contains("forecast keziah -> shieldbearer-1: dmg 3 x4 hit 97% crit 2%", output);
         Assert.Contains("shieldbearer-1 falls at 11,6", output);
         Assert.Contains("  brigand-2 arrives at 0,11, group west, aggressive\n", output);
-        Assert.Contains("weir_foreman-1 crits teodor for 24 (hp 0)", output);
-        Assert.Contains("Harrow Weir  turn 7 of 14", output);
+        Assert.Contains("weir_foreman-1 falls at 13,6", output);
+        Assert.Contains("Harrow Weir  turn 6 of 14", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

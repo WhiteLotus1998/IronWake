@@ -41,6 +41,24 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 256: both north waves matter, so north2 arrives on enemy phase 5 beside the west
+    /// wave, and all five recruit slots are named, Keziah in Wren's place, so roster order no
+    /// longer decides who fights the Def 8 shieldbearer.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirSendsBothLateWavesOnPhaseFiveAndNamesKeziahNotWren()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+
+        var turns = map.Events.ToDictionary(e => e.Name, e => ((TurnTrigger)e.Trigger).Turn);
+        Assert.Equal(3, turns["north1"]);
+        Assert.Equal(5, turns["west1"]);
+        Assert.Equal(5, turns["north2"]);
+        var recruits = map.Placements.OfType<PlayerPlacement>().Where(p => p.Slot != PlayerSlot.Captain).ToList();
+        Assert.Equal(new[] { "teodor", "ottilie", "pell", "dunstan", "keziah" }, recruits.Select(p => p.RecruitId));
+    }
+
+    /// <summary>
     /// Issue 78 and section 9's authoring constraint: the weir's bridge is a one-tile corridor
     /// (water on both sides of 10,6 and 11,6) and the shieldbearer holds its east end, so the
     /// armored wall is absolute and the other way over is the ford on rows 10 and 11.
