@@ -346,6 +346,8 @@ public static class ProtocolJson
 
         w.WriteEndArray();
         WriteStrings(w, "awakeGroups", state.AwakeGroups);
+        w.WriteNumber("wakeRadius", content.WakeRadius);
+        w.WriteNumber("noiseRadius", content.NoiseRadius);
         WriteStrings(w, "fired", state.Fired);
         WriteStrings(w, "flags", state.Flags);
         w.WriteStartArray("rapport");
@@ -384,7 +386,8 @@ public static class ProtocolJson
     /// Reads a full state (<see cref="State"/>) back. The map text is parsed against
     /// <paramref name="content"/>, so a state names content the reader must have. A state
     /// written by another protocol version is refused rather than read into a different game.
-    /// Derived fields (<c>outcome</c>, <c>maxHp</c>, <c>historyCount</c>) are not read.
+    /// Derived fields (<c>outcome</c>, <c>maxHp</c>, <c>historyCount</c>, <c>wakeRadius</c>,
+    /// <c>noiseRadius</c>) are not read.
     /// </summary>
     public static BattleState ReadState(string json, GameContent content)
     {

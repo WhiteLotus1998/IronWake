@@ -29,6 +29,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 3,5
 ottilie moves 0,5 -> 3,5 via 1,5 2,5
 group wood wakes: proximity
@@ -59,6 +60,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 7 hit 56% crit 5%; counter: none
 ottilie attacks brigand-1
@@ -91,6 +93,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 3,4
 captain moves 1,6 -> 3,4 via 1,5 2,5 3,5
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -120,6 +123,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
 forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
 captain attacks brigand-1
@@ -155,6 +159,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 4,4
 wren moves 1,5 -> 4,4 via 2,5 3,5 3,4
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -184,6 +189,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -213,6 +219,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move dunstan 4,6
 dunstan moves 0,6 -> 4,6 via 1,6 2,6 3,6
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -242,6 +249,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -271,6 +279,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          1,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 5,7
 teodor moves 1,7 -> 5,7 via 2,7 3,7 4,7
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -300,6 +309,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -329,6 +339,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 4,7
 pell moves 0,7 -> 4,7 via 1,7 2,7 3,7
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -358,6 +369,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -387,6 +399,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -440,6 +453,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              4,4    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 7,3
 wren moves 4,4 -> 7,3 via 4,3 5,3 6,3
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -468,6 +482,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -496,6 +511,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 7,4
 captain moves 3,4 -> 7,4 via 4,4 5,4 6,4
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -524,6 +540,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -552,6 +569,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 6,6
 ottilie moves 3,5 -> 6,6 via 4,5 5,5 6,5
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -580,6 +598,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -608,6 +627,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 8,7
 pell moves 4,7 -> 8,7 via 5,7 6,7 7,7
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -636,6 +656,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -664,6 +685,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 9,7
 teodor moves 5,7 -> 9,7 via 6,7 7,7 8,7
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -692,6 +714,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -720,6 +743,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move dunstan 8,6
 dunstan moves 4,6 -> 8,6 via 5,6 6,6 7,6
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -748,6 +772,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -776,6 +801,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -818,6 +844,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,3    hp 9/20   Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 7,0
 wren moves 7,3 -> 7,0 via 7,2 7,1
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -846,6 +873,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,0    hp 9/20   Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -874,6 +902,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,0    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 9,6
 pell moves 8,7 -> 9,6 via 8,6
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -902,6 +931,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss
 B  wren             Wren L1 cadet              7,0    hp 9/20   Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
 forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1

@@ -27,6 +27,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 1,1
 wren moves 1,5 -> 1,1 via 1,4 1,3 1,2
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -57,6 +58,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -87,6 +89,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 0,2
 teodor moves 0,5 -> 0,2 via 0,4 0,3
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -117,6 +120,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -147,6 +151,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 2,3
 captain moves 1,6 -> 2,3 via 1,5 1,4 1,3
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -177,6 +182,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -207,6 +213,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 2,4
 pell moves 0,6 -> 2,4 via 0,5 0,4 1,4
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -237,6 +244,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -267,6 +275,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 1,4
 ottilie moves 0,7 -> 1,4 via 0,6 0,5 0,4
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -297,6 +306,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -327,6 +337,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 2,6
 ansgar moves 0,10 -> 2,6 via 0,9 0,8 0,7 0,6 1,6
 Sallow Grange  turn 1 of 8  player phase  seize  recall 3
@@ -357,6 +368,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 0 movement: canto ansgar <x,y|stay>
@@ -388,6 +400,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -436,6 +449,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 4,1
 captain moves 2,3 -> 4,1 via 2,2 2,1 3,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -466,6 +480,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -496,6 +511,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 3,0
 wren moves 1,1 -> 3,0 via 1,0 2,0
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -526,6 +542,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -556,6 +573,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 2,1
 teodor moves 0,2 -> 2,1 via 0,1 1,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -586,6 +604,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -616,6 +635,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 1,1
 pell moves 2,4 -> 1,1 via 2,3 2,2 2,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -646,6 +666,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -676,6 +697,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 0,1
 ottilie moves 1,4 -> 0,1 via 1,3 1,2 1,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -706,6 +728,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -736,6 +759,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 1,3
 ansgar moves 2,6 -> 1,3 via 2,5 2,4 2,3
 Sallow Grange  turn 2 of 8  player phase  seize  recall 3
@@ -766,6 +790,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
@@ -797,6 +822,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -845,6 +871,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,1
 captain moves 4,1 -> 6,1 via 5,1
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -875,6 +902,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -905,6 +933,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              3,0    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,0
 wren moves 3,0 -> 5,0 via 4,0
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -935,6 +964,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -965,6 +995,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 3,0
 teodor moves 2,1 -> 3,0 via 2,0
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -995,6 +1026,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1025,6 +1057,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 4,1
 pell moves 1,1 -> 4,1 via 2,1 3,1
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1055,6 +1088,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1085,6 +1119,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 2,1
 ottilie moves 0,1 -> 2,1 via 1,1
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1115,6 +1150,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1145,6 +1181,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 2,0
 ansgar moves 1,3 -> 2,0 via 1,2 1,1 1,0
 Sallow Grange  turn 3 of 8  player phase  seize  recall 3
@@ -1175,6 +1212,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
@@ -1206,6 +1244,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -1254,6 +1293,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 9,2
 captain moves 6,1 -> 9,2 via 6,2 7,2 8,2
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1284,6 +1324,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1314,6 +1355,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 6,1
 pell moves 4,1 -> 6,1 via 5,1
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1344,6 +1386,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1374,6 +1417,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              5,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 7,0
 wren moves 5,0 -> 7,0 via 6,0
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1404,6 +1448,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1434,6 +1479,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          3,0    hp 21/21  Plain
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 5,0
 teodor moves 3,0 -> 5,0 via 4,0
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1464,6 +1510,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1494,6 +1541,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 4,1
 ottilie moves 2,1 -> 4,1 via 3,1
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1524,6 +1572,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 3
@@ -1554,6 +1603,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
@@ -1585,6 +1635,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1633,6 +1684,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 11,0
 captain moves 9,2 -> 11,0 via 9,1 10,1 11,1
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1663,6 +1715,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1693,6 +1746,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 9,2
 pell moves 6,1 -> 9,2 via 6,2 7,2 8,2
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1723,6 +1777,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1753,6 +1808,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              7,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 9,0
 wren moves 7,0 -> 9,0 via 8,0
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1783,6 +1839,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1813,6 +1870,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          5,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 7,0
 teodor moves 5,0 -> 7,0 via 6,0
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1843,6 +1901,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          7,0    hp 21/21  Forest
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1873,6 +1932,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          7,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 6,1
 ottilie moves 4,1 -> 6,1 via 5,1
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1903,6 +1963,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          7,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1933,6 +1994,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          7,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 4,1
 ansgar moves 2,0 -> 4,1 via 3,0 3,1
 Sallow Grange  turn 5 of 8  player phase  seize  recall 3
@@ -1963,6 +2025,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          7,0    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              9,0    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > recall 21
 recalled to state 21; 2 charges left
 undone: moves only
@@ -1995,6 +2058,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 5,2
 captain moves 2,3 -> 5,2 via 3,3 4,3 5,3
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2025,6 +2089,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2055,6 +2120,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 4,3
 pell moves 2,4 -> 4,3 via 2,3 3,3
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2085,6 +2151,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2115,6 +2182,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 4,1
 wren moves 1,1 -> 4,1 via 2,1 3,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2145,6 +2213,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2175,6 +2244,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 2,1
 teodor moves 0,2 -> 2,1 via 0,1 1,1
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2205,6 +2275,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2235,6 +2306,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 1,2
 ottilie moves 1,4 -> 1,2 via 1,3
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2265,6 +2337,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2295,6 +2368,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 1,3
 ansgar moves 2,6 -> 1,3 via 2,5 2,4 2,3
 Sallow Grange  turn 2 of 8  player phase  seize  recall 2
@@ -2325,6 +2399,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
@@ -2356,6 +2431,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -2404,6 +2480,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 9,2
 captain moves 5,2 -> 9,2 via 6,2 7,2 8,2
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2434,6 +2511,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2464,6 +2542,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 5,2
 pell moves 4,3 -> 5,2 via 5,3
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2494,6 +2573,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2524,6 +2604,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              4,1    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 6,1
 wren moves 4,1 -> 6,1 via 5,1
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2554,6 +2635,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2584,6 +2666,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 4,1
 teodor moves 2,1 -> 4,1 via 3,1
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2614,6 +2697,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2644,6 +2728,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 3,0
 ottilie moves 1,2 -> 3,0 via 1,1 1,0 2,0
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2674,6 +2759,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2704,6 +2790,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 4,3
 ansgar moves 1,3 -> 4,3 via 2,3 3,3
 Sallow Grange  turn 3 of 8  player phase  seize  recall 2
@@ -2734,6 +2821,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 3 movement: canto ansgar <x,y|stay>
@@ -2765,6 +2853,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -2813,6 +2902,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 11,0
 captain moves 9,2 -> 11,0 via 9,1 10,1 11,1
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2843,6 +2933,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2873,6 +2964,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 9,2
 pell moves 5,2 -> 9,2 via 6,2 7,2 8,2
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2903,6 +2995,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2933,6 +3026,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 8,1
 wren moves 6,1 -> 8,1 via 7,1
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2963,6 +3057,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -2993,6 +3088,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          4,1    hp 21/21  Plain
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 6,1
 teodor moves 4,1 -> 6,1 via 5,1
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -3023,6 +3119,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
 teodor waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -3053,6 +3150,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 5,0
 ottilie moves 3,0 -> 5,0 via 4,0
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -3083,6 +3181,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -3113,6 +3212,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 5,2
 ansgar moves 4,3 -> 5,2 via 5,3
 Sallow Grange  turn 4 of 8  player phase  seize  recall 2
@@ -3143,6 +3243,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 ansgar waits
 ansgar may canto up to 4 movement: canto ansgar <x,y|stay>
@@ -3174,6 +3275,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest  done
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -3222,6 +3324,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 10,2
 pell moves 9,2 -> 10,2
 Sallow Grange  turn 5 of 8  player phase  seize  recall 2
@@ -3252,6 +3355,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group field, guard, asleep
 D  teodor           Teodor L1 pikeman          6,1    hp 21/21  Forest
 C  wren             Wren L1 cadet              8,1    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
 forecast pell -> shieldbearer-1: dmg 13 hit 100% crit 3%; counter: none
 pell attacks shieldbearer-1

@@ -29,6 +29,7 @@ C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move rook 10,1
 rook moves 8,2 -> 10,1 via 8,1 9,1
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -61,6 +62,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack rook archer-2
 forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
 rook attacks archer-2
@@ -97,6 +99,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 10,2
 pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -129,6 +132,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell archer-2
 forecast pell -> archer-2: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 pell attacks archer-2
@@ -165,6 +169,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move dunstan 12,3
 dunstan moves 9,3 -> 12,3 via 10,3 11,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -196,6 +201,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -227,6 +233,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 11,3
 captain moves 8,4 -> 11,3 via 8,3 9,3 10,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -258,6 +265,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -289,6 +297,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 10,4
 wren moves 8,5 -> 10,4 via 8,4 9,4
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -320,6 +329,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
@@ -351,6 +361,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -416,6 +427,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 14,3
 captain moves 11,3 -> 14,3 via 12,3 13,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -447,6 +459,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -478,6 +491,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move dunstan 11,3
 dunstan moves 12,3 -> 11,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -509,6 +523,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -540,6 +555,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 12,2
 pell moves 10,2 -> 12,2 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -571,6 +587,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -602,6 +619,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 13,3
 wren moves 10,4 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -633,6 +651,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -664,6 +683,7 @@ C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move rook 13,1
 rook moves 10,1 -> 13,1 via 11,1 12,1
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -695,6 +715,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait rook
 rook waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
@@ -726,6 +747,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -791,6 +813,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 15,4
 wren moves 13,3 -> 15,4 via 14,3 15,3
 group bank wakes: proximity
@@ -1506,6 +1529,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move dunstan 12,3
 dunstan moves 11,3 -> 12,3
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1537,6 +1561,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1568,6 +1593,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
 captain waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1599,6 +1625,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
 wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1630,6 +1657,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
 pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1661,6 +1689,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait rook
 rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1692,6 +1721,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -1759,6 +1789,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brigand-1
 forecast pell -> brigand-1: dmg 13 hit 99% crit 3%; counter: none
 pell attacks brigand-1
@@ -1794,6 +1825,7 @@ C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
 h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 15,4
 wren moves 13,3 -> 15,4 via 14,3 15,3
 group bank wakes: proximity

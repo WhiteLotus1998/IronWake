@@ -201,6 +201,25 @@ public class ProtocolJsonTests
         Assert.Equal(json, ProtocolJson.State(back, content));
     }
 
+    /// <summary>
+    /// Issue 260: the state carries the content's wake and noise radii beside
+    /// <c>awakeGroups</c>, so a renderer can print the wake legend; like <c>maxHp</c> they
+    /// are derived and not read back.
+    /// </summary>
+    [Fact]
+    public void TheStateCarriesTheWakeAndNoiseRadii()
+    {
+        var content = Ironwake.Core.Tests.Maps.MapFixture.Content with { WakeRadius = 3 };
+        var state = Ironwake.Core.Tests.Battle.BattleFixture.Start(map: Ironwake.Core.Tests.Maps.MapFixture.OldMillRoad);
+
+        foreach (var json in new[] { ProtocolJson.State(state, content), ProtocolJson.BoardState(state, content) })
+        {
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            Assert.Equal(3, doc.RootElement.GetProperty("wakeRadius").GetInt32());
+            Assert.Equal(5, doc.RootElement.GetProperty("noiseRadius").GetInt32());
+        }
+    }
+
     [Fact]
     public void AStateReadsBackEqualWithRapportGroupsAndFlags()
     {

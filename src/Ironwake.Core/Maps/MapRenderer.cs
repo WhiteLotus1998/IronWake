@@ -10,7 +10,8 @@ namespace Ironwake.Core;
 /// is for reading, not for parsing; the map file itself is written by the Content
 /// project's map writer. Output is plain ASCII. Given a <see cref="Reach"/>, the tiles
 /// the unit may end on are drawn as <see cref="ReachGlyph"/> and a line under the
-/// legend says whose reach it is.
+/// legend says whose reach it is. While any Guard group is asleep, both views print
+/// <see cref="WakeLegend"/> under the unit rows.
 /// </summary>
 public static class MapRenderer
 {
@@ -71,6 +72,11 @@ public static class MapRenderer
         for (var i = 0; i < map.Placements.Count; i++)
         {
             sb.Append(letters[i]).Append("  ").Append(Describe(map.Placements[i], map, content)).Append('\n');
+        }
+
+        if (map.Placements.OfType<EnemyPlacement>().Any(e => e.Behavior == Behavior.Guard))
+        {
+            sb.Append(WakeLegend(content)).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -189,6 +195,11 @@ public static class MapRenderer
             sb.Append('\n');
         }
 
+        if (state.Units.Any(u => u is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group)))
+        {
+            sb.Append(WakeLegend(content)).Append('\n');
+        }
+
         if (reach is not null)
         {
             var count = reach.Destinations.Count() - 1;
@@ -198,6 +209,15 @@ public static class MapRenderer
 
         return sb.ToString();
     }
+
+    /// <summary>
+    /// The one line both board views print under the unit rows while any Guard group is
+    /// asleep (issue 260), so the wake rule of DESIGN.md section 8 is on the screen and not
+    /// only in the doc. The numbers are the content's <see cref="GameContent.WakeRadius"/>
+    /// and <see cref="GameContent.NoiseRadius"/>, the ones <see cref="WakeCheck"/> reads.
+    /// </summary>
+    public static string WakeLegend(GameContent content) =>
+        $"asleep: wakes if a unit ends within {content.WakeRadius} tiles of a member, a combat happens within {content.NoiseRadius}, or a member dies";
 
     /// <summary>
     /// The letter each placement is drawn with, by placement index. Players take
