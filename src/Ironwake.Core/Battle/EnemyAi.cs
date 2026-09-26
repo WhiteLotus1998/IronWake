@@ -71,7 +71,8 @@ public static class EnemyAi
     /// else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
     /// On a dusk map (DESIGN.md 13.7, issue 302) both the attack and the approach range only
     /// over the player units the enemy knows of (<see cref="Dusk.Knows"/>): those its side
-    /// sees and those within hearing of it. One that knows of nobody Waits.
+    /// sees and those within hearing of it. One that knows of nobody and may move makes for
+    /// the objective (<see cref="Drift"/>, issue 308); a unit that holds keeps its hold.
     /// The attack options range over every weapon the unit can strike with, in inventory
     /// order; an Attack with a weapon other than the equipped one names its slot, which
     /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
@@ -113,7 +114,9 @@ public static class EnemyAi
             return new Command[] { new Wait(unit.Id) };
         }
 
-        var destination = Approach(state, content, unit, weapon, reach, known, playerReach);
+        var destination = known.Count == 0 && Dusk.Sight(state) is not null
+            ? Drift(state, content, unit, reach, playerReach)
+            : Approach(state, content, unit, weapon, reach, known, playerReach);
         return destination is { } to && to != unit.At
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
@@ -228,7 +231,7 @@ public static class EnemyAi
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var me = content.CombatantOf(attacker.Unit, weapon, state.Map.TerrainAt(from, content), attacker.Hp);
-        var them = target.ToCombatant(state, content, countering: true);
+        var them = target.Answering(state, content, from);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
         var strikes = forecast.Attacker.StrikeCount;
@@ -301,11 +304,50 @@ public static class EnemyAi
             }
         }
 
-        if (chosen is null)
+        return chosen is null ? null : Toward(state, content, unit, chosen, reach, playerReach);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.7's third arm (issue 308): where an Aggressive enemy that knows of no
+    /// player unit moves on a dusk map. It knows the ground, not the party, so it makes for
+    /// the objective: on Escape the exit nearest by its own movement cost, on Seize the
+    /// throne. The destination is the reachable tile with the lowest remaining path cost to
+    /// any such tile nobody else stands on, ties as <see cref="Approach"/> breaks them. Null,
+    /// which means Wait, on Rout, Defeat Boss and Survive, and when no objective tile is free
+    /// or reachable. Stateless: nothing is remembered between phases.
+    /// </summary>
+    public static Coord? Drift(BattleState state, GameContent content, BattleUnit unit, Reach reach, IReadOnlyList<Reach> playerReach)
+    {
+        var map = state.Map;
+        var objective = map.Win switch
+        {
+            WinCondition.Escape => map.Exits.ToList(),
+            WinCondition.Seize => Enumerable.Range(0, map.Height)
+                .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Coord(x, y)))
+                .Where(map.IsThrone)
+                .ToList(),
+            _ => new List<Coord>(),
+        };
+        objective.RemoveAll(tile => state.UnitAt(tile) is { } standing && standing.Id != unit.Id);
+        if (objective.Count == 0)
         {
             return null;
         }
 
+        var movement = content.Class(unit.Unit.ClassId).Movement;
+        Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
+        var distances = Movement.DistancesTo(map, content, objective, movement, OccupantAt);
+        return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach);
+    }
+
+    /// <summary>
+    /// The reachable tile with the lowest remaining path cost under <paramref name="chosen"/>,
+    /// ties by highest terrain avoid, then fewest player units whose reach set contains the
+    /// tile, then cost from the mover, then row-major; null when no reachable tile has a path.
+    /// </summary>
+    private static Coord? Toward(BattleState state, GameContent content, BattleUnit unit, Distances chosen, Reach reach, IReadOnlyList<Reach> playerReach)
+    {
+        var movement = content.Class(unit.Unit.ClassId).Movement;
         Coord? destination = null;
         var bestKey = (Remaining: int.MaxValue, Avoid: int.MinValue, Exposure: int.MaxValue, Cost: int.MaxValue);
         foreach (var tile in reach.Destinations)

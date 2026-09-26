@@ -5,8 +5,10 @@ namespace Ironwake.Core;
 /// fails one tile a turn. A side sees a tile when any of its living units stands within
 /// <see cref="Sight(MapDefinition, int)"/> tiles of it, counted the way movement and ranges are, and neither side
 /// may strike a unit its own side cannot see. Sight is shared: an archer at range 2 on a night
-/// of sight 1 needs a friend beside the target. Counters are not strikes chosen, so a unit
-/// always answers what hit it. The console draws an enemy no player unit sees as
+/// of sight 1 needs a friend beside the target. A counter needs sight the same as a strike
+/// (issue 308): a unit whose side cannot see the attacker's tile answers nothing
+/// (<see cref="BattleUnit.Answering"/>), so at sight 1 a spotted range-2 strike is free on
+/// both sides; an adjacent attacker is always seen. The console draws an enemy no player unit sees as
 /// <see cref="Unseen"/>, with no name, numbers or forecast. Sight is a function of the turn,
 /// so a Recall rewinds it with the board.
 /// </summary>

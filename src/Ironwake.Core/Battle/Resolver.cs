@@ -356,7 +356,7 @@ public static class Resolver
         var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
             unit.ToCombatant(state, content, art: art),
-            target.ToCombatant(state, content, countering: true),
+            target.Answering(state, content, unit.At),
             distance,
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),

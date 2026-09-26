@@ -460,30 +460,6 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// DESIGN.md 13.7 (Dusk maps, experiment): Code's play of Brackwater Cut with <c>dusk: 7</c>
-    /// on seed 7. The chase and the bank fall into the dark as sight shrinks, the moves made
-    /// there print only as something acting in the dark, Dunstan holds the gap and falls, and by turn 5
-    /// every enemy left is a question mark when Rook, Wren and the captain walk out. Since
-    /// issue 302 an enemy chases only what it knows, so on enemy phase 4 two chasers that
-    /// neither see nor hear the party stop west of the gap instead of coming through it.
-    /// </summary>
-    [Fact]
-    public void TheJournaledScriptEscapesBrackwaterAtDusk()
-    {
-        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var map = Path.Combine(repo, "docs", "samples", "brackwater_cut_dusk.map");
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut_dusk-7.script");
-
-        var output = Run(out var exit, "play", map, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
-
-        Assert.Equal(0, exit);
-        Assert.EndsWith("escaped: rook, wren, captain; left behind: none; fell: dunstan, pell\n", output);
-        Assert.Contains("enemy: something in the dark acts\n", output);
-        Assert.Contains("  and whatever is in the dark (?), unpriced\n", output);
-        Assert.Contains("?  unseen at 11,1 9,2 4,3 5,3 9,3 10,3 10,4 17,5 17,6 17,7\ndusk: sight 3, 2 next turn; 10 unseen (?); no side strikes what it cannot see\n", output);
-    }
-
-    /// <summary>
     /// Issue 302, 13.7's second arm: Code's play of Sallow Grange at <c>dusk: 5</c> on seed 5.
     /// The hexer lights up only when Wren steps beside it, so Pell's range-2 forecast is
     /// refused before and given after; the Reeve, woken by hearing, kills Ansgar from the
@@ -502,52 +478,37 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 302: Code's play of Brackwater Cut at <c>dusk: 5</c> on seed 5. At sight 1 the
-    /// rider in the gap cannot see Dunstan on 14,1, five tiles away and out of hearing, and
-    /// <c>threat</c> says so; the chase stands still in the dark and all five walk out on turn 7.
+    /// Issue 308, 13.7's third arm: Code's play of Sallow Grange at <c>dusk: 5</c> on seed 23.
+    /// At sight 2 the fort archer answers Pell's range-2 shot from its own tile and kills her;
+    /// after the Recall, the same shot at sight 1 with Ansgar beside the fort reads
+    /// <c>counter: none</c>, and Ottilie takes the hexer from 12,6 with no answer out of the dark.
     /// </summary>
     [Fact]
-    public void TheJournaledScriptEscapesBrackwaterAtDuskFiveWithEveryone()
+    public void TheJournaledScriptSeizesSallowGrangeUnderTheThirdArm()
     {
-        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-5.script", 5, out var exit);
-
-        Assert.Equal(0, exit);
-        Assert.EndsWith("escaped: rook, wren, pell, dunstan, captain; left behind: none; fell: none\n", output);
-        Assert.Contains("threat on dunstan at 14,1 (Plain): no enemy can strike it next phase\n  rider-1: cannot see you (dark)\n", output);
-        Assert.Contains("threat on dunstan at 13,1 (Plain):\n  rider-1 from 13,2 with Iron Lance", output);
-    }
-
-    /// <summary>
-    /// Chat's cold play of Sallow Grange at <c>dusk: 5</c> on seed 11 (the forty-eighth round).
-    /// The hexer counters Ottilie at range 2 though no enemy stands beside her, since a counter
-    /// does not need sight under the second arm; the Reeve comes out of the dark and leaves
-    /// Pell on 1; the captain seizes on turn 7 with nobody fallen.
-    /// </summary>
-    [Fact]
-    public void ChatsColdScriptSeizesSallowGrangeAtDuskFive()
-    {
-        var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-11.script", 11, out var exit);
+        var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.Contains("  hexer-1 hits ottilie for 11 (hp 6)\n", output);
-        Assert.Contains("  grange_reeve-1 hits pell for 15 (hp 1)\n", output);
-        Assert.Contains("grange_reeve-1 falls at 13,7\n", output);
+        Assert.Contains("forecast pell -> archer-1: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%\n", output);
+        Assert.Contains("forecast pell -> archer-1: dmg 10 hit 91% crit 2%; counter: none\n", output);
+        Assert.Contains("forecast ottilie -> hexer-1: dmg 9 x2 hit 89% crit 4%; counter: none\n", output);
     }
 
     /// <summary>
-    /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 11 (the forty-eighth round):
-    /// the chase stops at the gap once the party is out of the fort archer's sight and out of
-    /// hearing, and all five walk out on turn 6 without a single attack.
+    /// Issue 308: Code's play of Brackwater Cut at <c>dusk: 5</c> on seed 23. Knowing of
+    /// nobody, the chase makes for the exits through the gap instead of standing still; the
+    /// fight it brings to the staging tiles wakes the bank, and only Rook and the captain get out.
     /// </summary>
     [Fact]
-    public void ChatsColdScriptEscapesBrackwaterAtDuskFiveWithoutAnAttack()
+    public void TheJournaledScriptEscapesBrackwaterUnderTheThirdArm()
     {
-        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-11.script", 11, out var exit);
+        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("escaped: rook, dunstan, pell, wren, captain; left behind: none; fell: none\n", output);
-        Assert.DoesNotContain(" attacks ", output);
+        Assert.EndsWith("escaped: rook, captain; left behind: none; fell: dunstan, pell, wren\n", output);
+        Assert.Contains("rider-1 moves 9,3 -> 13,3 via 10,3 11,3 12,3\n", output);
+        Assert.Contains("group bank wakes: noise\n", output);
     }
 
     /// <summary>
