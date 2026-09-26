@@ -8,6 +8,15 @@ internal static class MapFixture
 {
     public static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
+    /// <summary>
+    /// <paramref name="content"/> with every class's certification requirements removed, for tests
+    /// of what certifying does rather than of the shipped ladder (issue 72).
+    /// </summary>
+    public static GameContent WithoutLadder(GameContent content) => content with
+    {
+        Classes = content.Classes.SetItems(content.Classes.Select(c => KeyValuePair.Create(c.Key, c.Value with { Certification = CertificationRequirements.None }))),
+    };
+
     /// <summary>The example from DESIGN.md section 10, as the sample file writes it.</summary>
     public const string OldMillRoad = """
         name: Old Mill Road

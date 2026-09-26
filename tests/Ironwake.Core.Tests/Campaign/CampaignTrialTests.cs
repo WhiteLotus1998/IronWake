@@ -9,11 +9,12 @@ namespace Ironwake.Core.Tests.Campaign;
 /// Certification trials in the campaign (issue 252, DESIGN sections 9 and 13.6): a trial stands
 /// in for the seal after the class's requirements, one attempt per unit and class per camp, a pass
 /// carries the trial's EXP and weapon points but no mastery, and a failure changes nothing but the
-/// attempt. The shipped content's campaign and trials.
+/// attempt. The shipped content's campaign and trials, with the class ladder removed so any
+/// recruit may try them: these are the trial's rules, and the ladder's are in ClassLadderTests.
 /// </summary>
 public class CampaignTrialTests
 {
-    private static GameContent Content => MapFixture.Content;
+    private static readonly GameContent Content = MapFixture.WithoutLadder(MapFixture.Content);
 
     private static MapDefinition Trial(string id) =>
         MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "trials", id + ".map"), Content);

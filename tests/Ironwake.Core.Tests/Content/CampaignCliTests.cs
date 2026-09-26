@@ -3,7 +3,9 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// <c>ironwake campaign</c> at the console (issue 74): the journaled two-map campaign replayed to
 /// its transcript, <c>leave</c> refused while the battle is undecided, a script that ends on the
-/// screen, the argument refusals, and a certification trial on the screen (issue 252).
+/// screen, the argument refusals, and a certification trial on the screen (issue 252). The
+/// scripts play on the content with the class ladder removed, as the journaled campaign was
+/// played before the ladder shipped; the shipped ladder's refusal on the screen has its own test.
 /// </summary>
 [Collection("console")]
 public class CampaignCliTests
@@ -17,7 +19,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-09-25-campaign-139.script");
 
-        var output = Run(out var exit, "campaign", "--seed", "139", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "campaign", "--seed", "139", "--script", script, "--content", Fixture.LadderFreeContentDirectory());
 
         Assert.Equal(1, exit);
         Assert.Contains("Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell\n", output);
@@ -25,6 +27,17 @@ public class CampaignCliTests
         Assert.Contains("deploys to Saltmarsh Ford: captain, wren, teodor, pell\n", output);
         Assert.Contains("Saltmarsh Ford won: rout; reward 800, the purse holds 1120; nobody fell\n", output);
         Assert.Contains("campaign stopped before The Tollgate: the script ended on the screen\n", output);
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    [Fact]
+    public void TheJournaledLadderReadingReplaysToItsTranscriptOnTheShippedContent()
+    {
+        var script = Transcript("2026-09-26-campaign-139-ladder.script");
+
+        var output = Run(out _, "campaign", "--seed", "139", "--script", script, "--content", Fixture.RealContentDirectory());
+
+        Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 3\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -99,13 +112,36 @@ public class CampaignCliTests
         Assert.Contains("ERROR: captain has tried the Outrider trial since the last map; it opens again after the next one\n", output);
     }
 
+    [Fact]
+    public void TheShippedLadderIsOnTheScreenAndRefusesALevelOneRecruitNamingEveryRequirement()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-campaign-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "trial captain outrider\ncertify brannock reaver\nclasses captain\nclasses nobody\n");
+        try
+        {
+            var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("ERROR: captain cannot certify as Outrider: needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("ERROR: brannock cannot certify as Reaver: needs level 3, has 1; needs axe D, has E\n", output);
+            Assert.Contains("classes: what each asks, read against a unit's own stats without its class's; a seal costs 500\n", output);
+            Assert.Contains("  Cadet: nothing -- captain's class\n", output);
+            Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("  Bowman: level 3, dex 8 -- needs level 3, has 1; needs dex 8, has 7\n", output);
+            Assert.Contains("ERROR: no unit 'nobody' on the roster\n", output);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
     private static string Play(out int exit, string script, params string[] extra)
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-campaign-" + Guid.NewGuid().ToString("N") + ".script");
         File.WriteAllText(path, script);
         try
         {
-            return Run(out exit, new[] { "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory() }.Concat(extra).ToArray());
+            return Run(out exit, new[] { "campaign", "--seed", "3", "--script", path, "--content", Fixture.LadderFreeContentDirectory() }.Concat(extra).ToArray());
         }
         finally
         {

@@ -9,6 +9,24 @@ namespace Ironwake.Core;
 public sealed record CertificationRequirements(int Level, ValueList<(WeaponType Type, WeaponRank Rank)> Ranks, Stats Stats)
 {
     public static CertificationRequirements None { get; } = new(Unit.MinLevel, ValueList<(WeaponType, WeaponRank)>.Empty, Stats.Zero);
+
+    /// <summary>
+    /// The requirements as the between-map screen prints them: the level, then each rank in
+    /// content order, then each stat minimum in draw order, as <c>level 4, sword D, spd 8</c>;
+    /// <c>nothing</c> when they ask nothing a new recruit lacks.
+    /// </summary>
+    public string Describe()
+    {
+        var parts = new List<string>();
+        if (Level > Unit.MinLevel)
+        {
+            parts.Add($"level {Level}");
+        }
+
+        parts.AddRange(Ranks.Select(r => $"{r.Type.ToString().ToLowerInvariant()} {r.Rank}"));
+        parts.AddRange(Stats.All.Where(s => Stats.Get(s) > 0).Select(s => $"{s.ToString().ToLowerInvariant()} {Stats.Get(s)}"));
+        return parts.Count == 0 ? "nothing" : string.Join(", ", parts);
+    }
 }
 
 /// <summary>One requirement a unit fails, with the text the screen prints for it.</summary>
@@ -34,7 +52,8 @@ public static class Certifications
         var refusals = new List<CertificationRefusal>();
         if (unit.ClassId == target.Id)
         {
-            refusals.Add(new("class", $"{unit.Id} is already a {target.Name}"));
+            var article = "AEIOU".Contains(target.Name[0]) ? "an" : "a";
+            refusals.Add(new("class", $"{unit.Id} is already {article} {target.Name}"));
         }
 
         var requirements = target.Certification;
