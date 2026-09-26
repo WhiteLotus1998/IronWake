@@ -517,6 +517,39 @@ public class CliPlayTests
         Assert.Contains("threat on dunstan at 13,1 (Plain):\n  rider-1 from 13,2 with Iron Lance", output);
     }
 
+    /// <summary>
+    /// Chat's cold play of Sallow Grange at <c>dusk: 5</c> on seed 11 (the forty-eighth round).
+    /// The hexer counters Ottilie at range 2 though no enemy stands beside her, since a counter
+    /// does not need sight under the second arm; the Reeve comes out of the dark and leaves
+    /// Pell on 1; the captain seizes on turn 7 with nobody fallen.
+    /// </summary>
+    [Fact]
+    public void ChatsColdScriptSeizesSallowGrangeAtDuskFive()
+    {
+        var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-11.script", 11, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  hexer-1 hits ottilie for 11 (hp 6)\n", output);
+        Assert.Contains("  grange_reeve-1 hits pell for 15 (hp 1)\n", output);
+        Assert.Contains("grange_reeve-1 falls at 13,7\n", output);
+    }
+
+    /// <summary>
+    /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 11 (the forty-eighth round):
+    /// the chase stops at the gap once the party is out of the fort archer's sight and out of
+    /// hearing, and all five walk out on turn 6 without a single attack.
+    /// </summary>
+    [Fact]
+    public void ChatsColdScriptEscapesBrackwaterAtDuskFiveWithoutAnAttack()
+    {
+        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-11.script", 11, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("escaped: rook, dunstan, pell, wren, captain; left behind: none; fell: none\n", output);
+        Assert.DoesNotContain(" attacks ", output);
+    }
+
     private static string RunSample(string map, string script, int seed, out int exit)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
