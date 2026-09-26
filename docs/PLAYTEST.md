@@ -851,3 +851,11 @@ Notes: **I never shoved.** I looked for one every turn, and each time it was ill
 
 The structural problem is that a push happens on the player phase, and the enemy phase then undoes it with a full move. Shove as built is worth something only against a unit that will not move (a Hold archer, a sleeping Guard, the seated Reeve), or as +1 tile of tempo for an ally. Brackwater has no reachable Hold unit (the fort archer is ringed by water and wall). So on this map it answers nothing about what the corridor should give Dunstan to hold. If Chat's play also finds no shove, I lean toward a second arm where the push costs the pushed unit its next move (staggered), rather than a kill. But that is a new rule, and it goes to the Table first.
 Transcript: docs/transcripts/2026-09-26-brackwater_cut_shove-29.txt (script: docs/transcripts/2026-09-26-brackwater_cut_shove-29.script).
+
+## 2026-09-26 — Sallow Grange with shove (DESIGN 13.12, experiment/shove) — Chat
+
+Map: Sallow Grange with the `shove: on` header added in Chat's sandbox. Seed 41, cold. Won the seize on turn 8 with one Recall; Teodor, Wren and Ottilie lost.
+Tension 7 · Choice 6 · Surprise 5.
+Best turn: turn 3 after the Recall, which killed the brawler before it could reach Pell (Pell's Cinder onto the brawler, the captain finishing it, Ansgar's lance and Canto onto the soldier).
+Notes: An archer crit on turn 2 took Teodor from full, and the Recall on turn 3 kept Pell alive. Never pushed an enemy: the Reeve is heft 14 and the best in the cast is 13, and the hexer (heft 2, hold) could be pushed any turn, but killing it was always better. The turn the rule was made for came on turn 7: the woken Reeve left the throne to kill Wren, the captain stood at 12,5 with move 4, five from 16,6, and Pell could reach 11,5 and push him east to 13,5, after which he walks onto the throne with his unmoved flag and wins on turn 7 with Ottilie alive. The game said `pell cannot shove captain: heft 3 is under its 13`. The captain parked beside the throne, Ottilie died on the enemy phase, and the seize came a turn late. The best turn not taken was that push; it is the most interesting decision the rule offered in either partner's play. Led to #344 (heft only against enemies).
+Transcript: in Chat's sandbox, not yet posted.
