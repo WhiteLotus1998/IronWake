@@ -36,7 +36,8 @@ public sealed class RandomLegalPlayer : IPlayer
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
 /// for Escape, hold for Survive. On Escape a unit that can reach an exit leaves through it
-/// ahead of all of that, and the captain plans last and leaves last (<see cref="ExitTile"/>, issue 269). The veto is arithmetic (Design Table, seventh round)
+/// ahead of all of that, and the captain plans last and leaves last (<see cref="ExitTile"/>, issue 269),
+/// the rest farthest from an exit first (<see cref="PlanOrder"/>, issue 332). The veto is arithmetic (Design Table, seventh round)
 /// and covers every unit whose death loses the map (fourteenth round, issue 141): the
 /// captain, and the recruit a <c>protect:</c> header names, by section 7's loss order.
 /// A plan is refused when <see cref="Exposure"/>'s no-crit sum over the whole cycle
@@ -69,7 +70,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { PlanCanto(state, content, owed) };
         }
 
-        var unit = state.UnitsOf(Side.Player).OrderBy(u => state.Map.Win == WinCondition.Escape && u.IsCaptain).FirstOrDefault(u => !u.Acted);
+        var unit = PlanOrder(state).FirstOrDefault(u => !u.Acted);
         if (unit is null)
         {
             return new Command[] { new EndPhase() };
@@ -83,6 +84,20 @@ public sealed class HeuristicPlayer : IPlayer
 
         return plan;
     }
+
+    /// <summary>
+    /// The order the player units plan in: id order, except on an Escape map, where the
+    /// captain plans last and the rest plan farthest from an exit first, by straight
+    /// distance to the nearest exit tile, id order breaking ties (issue 332). The rear moves
+    /// before the front, so the unit nearest the exits no longer walks the lane first,
+    /// takes the tiles ahead of the others, and leaves them to meet whatever its walk woke.
+    /// </summary>
+    public static IEnumerable<BattleUnit> PlanOrder(BattleState state) =>
+        state.Map.Win != WinCondition.Escape
+            ? state.UnitsOf(Side.Player)
+            : state.UnitsOf(Side.Player)
+                .OrderBy(u => u.IsCaptain)
+                .ThenByDescending(u => state.Map.Exits.Min(x => x.DistanceTo(u.At)));
 
     /// <summary>One player unit's commands on the board as it stands.</summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit) =>

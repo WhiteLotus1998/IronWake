@@ -7,7 +7,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// The Sim's Escape approach under issue 269: a unit that can reach an exit this turn moves
 /// there and exits, ahead of any attack; the captain plans last and exits only once no other
-/// player unit that has not acted can reach an exit this turn.
+/// player unit that has not acted can reach an exit this turn; the rest plan farthest from
+/// an exit first (issue 332).
 /// </summary>
 public class HeuristicExitTests
 {
@@ -79,5 +80,55 @@ public class HeuristicExitTests
         var state = BattleFixture.Start(map: Yard.Replace("win: escape", "win: rout").Replace("exit: 3,0 3,1 3,2 3,3\n", ""));
 
         Assert.Null(HeuristicPlayer.ExitTile(state, Starter, state.Find("wren")!, new[] { new Coord(3, 2) }, state.ReachOf(state.Find("wren")!, Starter)));
+    }
+
+    /// <summary>A 6x4 lane: Ivo one step from the exits on column 5, Wren and Hale at the far end.</summary>
+    private const string Lane = """
+        name: Lane
+        size: 6x4
+        win: escape
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+        exit: 5,0 5,1 5,2 5,3
+
+        ......
+        ......
+        ......
+        ......
+
+        units:
+        P captain 0,1
+        P recruit:ivo 4,2
+        P recruit:wren 0,2
+        E soldier 2,3 group:g behavior:hold
+
+        """;
+
+    private static BattleState LaneStart(string map = Lane) =>
+        BattleFixture.Start(map: map, roster: ValueList<Unit>.Of(Hale, Wren, Ivo));
+
+    [Fact]
+    public void OnAnEscapeMapTheUnitFarthestFromAnExitPlansFirst()
+    {
+        var order = HeuristicPlayer.PlanOrder(LaneStart()).Select(u => u.Id).ToList();
+
+        Assert.Equal(new[] { "wren", "ivo", "hale" }, order);
+    }
+
+    [Fact]
+    public void OnAnEscapeMapTheRearUnitTakesTheFirstTurn()
+    {
+        var plan = new HeuristicPlayer().Next(LaneStart(), Starter);
+
+        Assert.Equal("wren", plan[0] switch { Move m => m.UnitId, var other => other.ToString() });
+    }
+
+    [Fact]
+    public void OnAnyOtherMapThePlanOrderIsTheUnitsOwnOrder()
+    {
+        var state = LaneStart(Lane.Replace("win: escape", "win: rout").Replace("exit: 5,0 5,1 5,2 5,3\n", ""));
+
+        Assert.Equal(state.UnitsOf(Side.Player).Select(u => u.Id), HeuristicPlayer.PlanOrder(state).Select(u => u.Id));
     }
 }
