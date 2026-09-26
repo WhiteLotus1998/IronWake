@@ -1,0 +1,30 @@
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: brackwater_cut, heuristic wins 175/200 (88 %), winning turn median 5 p90 7 limit 8, losses 10 timeout 15 captain 0 protected, quiet tail 4.2, refused kill p50 0.8775 over 10, survivors p50 2 of 4, captain alone 0, two-roll average: ok
+gate 2 decisions matter: brackwater_cut, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: brackwater_cut, 0 player units killed from deployment: ok
+gate 4 no dead weight: brackwater_cut, 4 recruits x 200 seeds, median drop 0.025: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.025, se 0.028); rows are data, no recruit is judged
+  dunstan: drop -0.125 se 0.025 own [atk 0 dmg 2305 heal 0 abs 402] rest baseline [atk 990 dmg 13727 heal 0 abs 1256] rest benched [atk 975 dmg 13457 heal 0 abs 1280] benched losses 0 timeout 0 captain 0 protected, refused kill -, benched survivors p50 1 of 3, captain alone 95
+  pell: drop 0.560 se 0.054 own [atk 354 dmg 4861 heal 0 abs 280] rest baseline [atk 636 dmg 11171 heal 0 abs 1378] rest benched [atk 811 dmg 15609 heal 0 abs 2027] benched losses 18 timeout 119 captain 0 protected, refused kill p50 0.8775 over 18, benched survivors p50 1 of 3, captain alone 0
+  rook: drop 0.100 se 0.028 own [atk 395 dmg 2989 heal 0 abs 240] rest baseline [atk 595 dmg 13043 heal 0 abs 1418] rest benched [atk 530 dmg 16903 heal 0 abs 2027] benched losses 10 timeout 35 captain 0 protected, refused kill p50 0.8775 over 10, benched survivors p50 1 of 3, captain alone 0
+  wren: drop -0.050 se 0.017 own [atk 201 dmg 2835 heal 0 abs 360] rest baseline [atk 789 dmg 13197 heal 0 abs 1298] rest benched [atk 795 dmg 13621 heal 0 abs 1253] benched losses 1 timeout 14 captain 0 protected, refused kill p50 0.0438 over 1, benched survivors p50 2 of 3, captain alone 0
+  captain captain: baseline [atk 40 dmg 3042 heal 0 abs 376] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 2391 ms: ok
+gate 5 forecast honesty: 10146 combats (4437 with gauntlets), 21077 strikes, hits 12891 expected 12824.7, crits 864 expected 885.6, damage mismatches 0: ok
+gate 7 speed: brackwater_cut, 5 AI-vs-AI games, 22 turns, slowest 25 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 41249 ms: ok
+free prefix: brackwater_cut, 0 of 2, 4, 6 tried, slack median 3 p90 1 (printed, not gated)
+  prefix 2: wins 57/200, drop 0.590 se 0.060, not free
+  prefix 4: wins 11/200, drop 0.820 se 0.064, not free
+  prefix 6: wins 0/200, drop 0.875 se 0.066, not free
+  prefix 2 refunded: wins 67/200, drop 0.540 se 0.058, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 0.0, quiet 1.0, leading dead 0.0, first contact 1.0, first quiet at tax 0.25 2.0
+  turn 1: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 2: dead 0 quiet 105 live 95, wake tax 0.37
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 27 quiet 0 live 171, wake tax 0.00
+  turn 6: dead 24 quiet 0 live 39, wake tax 0.00
+  turn 7: dead 1 quiet 0 live 35, wake tax 0.00
+  turn 8: dead 0 quiet 0 live 13, wake tax 0.00
+full: FAILED

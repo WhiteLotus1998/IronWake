@@ -1,0 +1,61 @@
+move rook 10,1
+attack rook archer-2
+move pell 10,2
+attack pell archer-2
+move dunstan 13,3
+wait dunstan
+move captain 11,3
+wait captain
+move wren 10,3
+wait wren
+end
+move captain 14,2
+wait captain
+move wren 11,3
+wait wren
+move pell 12,2
+wait pell
+move dunstan 15,2
+wait dunstan
+move rook 15,0
+wait rook
+end
+move rook 19,0
+wait rook
+move dunstan 18,1
+wait dunstan
+move captain 16,0
+wait captain
+move pell 15,1
+wait pell
+end
+wait wren
+move pell 18,0
+wait pell
+wait captain
+wait dunstan
+wait rook
+end
+move wren 15,3
+wait wren
+move captain 17,0
+wait captain
+threat wren
+threat captain
+end
+move rook 19,3
+exit rook
+move pell 19,3
+exit pell
+move dunstan 19,3
+exit dunstan
+threat wren from 18,2
+move wren 18,2
+wait wren
+move captain 19,0
+wait captain
+end
+move wren 19,3
+exit wren
+move captain 19,3
+exit captain

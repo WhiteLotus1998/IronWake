@@ -989,6 +989,7 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Only targets the unit's side sees count, on a dusk map (13.7, issue 318).
     /// One Attack per target in range of the equipped weapon, slot unnamed; when the unit
     /// carries a second usable weapon, one per usable slot per target in its range, slots
     /// named. Then, per slot, one per art the unit knows and may declare with that weapon
@@ -1005,7 +1006,7 @@ public static class Resolver
             }
         }
 
-        var targets = state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player).ToList();
+        var targets = state.UnitsOf(state.Phase == Side.Player ? Side.Enemy : Side.Player).Where(t => Dusk.Sees(state, unit.Side, t.At)).ToList();
         foreach (var slot in slots)
         {
             var weapon = unit.UsableWeaponAt(content, slot)!;

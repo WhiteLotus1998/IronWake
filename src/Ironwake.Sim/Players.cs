@@ -122,7 +122,7 @@ public sealed class HeuristicPlayer : IPlayer
                 var cost = reach.CostTo(tile)!.Value;
                 foreach (var target in enemies)
                 {
-                    if (!weapon.InRange(tile.DistanceTo(target.At)))
+                    if (!weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile))
                     {
                         continue;
                     }

@@ -101,6 +101,43 @@ public class DuskTests
         Assert.Empty(Queries.Targets(state, Starter, state.Find("ottilie")!));
     }
 
+    /// <summary>
+    /// Issue 318: the legal list offers no strike on a target its side cannot see, so gate 2's
+    /// random player, which draws from it, never draws a command the resolver refuses.
+    /// </summary>
+    [Fact]
+    public void TheLegalListOffersNoStrikeOnATargetItsSideCannotSee()
+    {
+        var state = Start(1);
+
+        var attacks = Resolver.Legal(state, Starter).OfType<Attack>().ToList();
+
+        Assert.DoesNotContain(attacks, a => a.UnitId == "ottilie" && a.TargetId == "soldier-1");
+        Assert.All(attacks, a => Assert.True(state.Try(a).Accepted, a.ToString()));
+        Assert.Contains(Resolver.Legal(Start(1).Do(new Move("hale", new Coord(4, 0))), Starter), c => c is Attack { UnitId: "ottilie", TargetId: "soldier-1" });
+    }
+
+    /// <summary>
+    /// Issue 318: the Sim's heuristic player strikes only a target its side would see from the
+    /// tile it strikes from, so its plan is one the resolver accepts. Before the guard it
+    /// planned Ottilie's bow on the soldier from two tiles away at sight 1, and `--full` on
+    /// Brackwater Cut at dusk threw on the rejected Attack.
+    /// </summary>
+    [Fact]
+    public void TheHeuristicPlansNoStrikeOnATargetItsSideCannotSee()
+    {
+        var state = Start(1);
+
+        var plan = Ironwake.Sim.HeuristicPlayer.PlanUnit(state, Starter, state.Find("ottilie")!);
+
+        Assert.DoesNotContain(plan, c => c is Attack);
+        foreach (var command in plan)
+        {
+            Assert.True(state.Try(command).Accepted, command.ToString());
+            state = state.Do(command);
+        }
+    }
+
     [Fact]
     public void AFriendBesideTheTargetLetsTheArcherStrike()
     {
