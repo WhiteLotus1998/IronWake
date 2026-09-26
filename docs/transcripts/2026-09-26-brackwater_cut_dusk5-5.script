@@ -1,0 +1,65 @@
+move dunstan 12,3
+wait dunstan
+wait rook
+move pell 9,4
+wait pell
+move captain 10,4
+wait captain
+move wren 10,5
+wait wren
+end
+move dunstan 14,3
+wait dunstan
+move captain 13,3
+wait captain
+move wren 12,3
+wait wren
+move pell 10,3
+wait pell
+move rook 10,4
+wait rook
+end
+move captain 15,1
+wait captain
+move wren 14,1
+wait wren
+move rook 14,2
+wait rook
+move pell 13,4
+wait pell
+move dunstan 12,3
+wait dunstan
+end
+move captain 18,0
+wait captain
+move wren 18,1
+wait wren
+move rook 19,2
+wait rook
+move pell 15,2
+wait pell
+wait dunstan
+end
+move rook 19,3
+exit rook
+move wren 19,3
+exit wren
+move pell 18,1
+wait pell
+show dunstan
+threat dunstan from 14,1
+threat dunstan from 13,1
+move dunstan 14,1
+wait dunstan
+wait captain
+end
+move pell 19,3
+exit pell
+move dunstan 18,1
+wait dunstan
+wait captain
+end
+move dunstan 19,3
+exit dunstan
+move captain 19,3
+exit captain

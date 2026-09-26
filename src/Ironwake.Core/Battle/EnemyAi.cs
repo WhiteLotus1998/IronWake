@@ -69,6 +69,9 @@ public static class EnemyAi
     /// <see cref="RetreatRule"/> says the unit falls back (issue 33); else the best-scoring attack from the
     /// best tile if any tile allows one, else the approach rule for an Aggressive unit,
     /// else Wait. Hold, Boss, and a sleeping Guard never move; a woken Guard is Aggressive.
+    /// On a dusk map (DESIGN.md 13.7, issue 302) both the attack and the approach range only
+    /// over the player units the enemy knows of (<see cref="Dusk.Knows"/>): those its side
+    /// sees and those within hearing of it. One that knows of nobody Waits.
     /// The attack options range over every weapon the unit can strike with, in inventory
     /// order; an Attack with a weapon other than the equipped one names its slot, which
     /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
@@ -83,6 +86,7 @@ public static class EnemyAi
         var tiles = mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
 
         if (RetreatRule.Choose(state, content, unit) is { } refuge)
         {
@@ -95,7 +99,7 @@ public static class EnemyAi
         }
 
         var equipped = unit.EquippedSlot(content);
-        var best = BestOption(state, content, unit, tiles, reach, players, playerReach);
+        var best = BestOption(state, content, unit, tiles, reach, known, playerReach);
         if (best is not null)
         {
             var attack = new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot);
@@ -109,7 +113,7 @@ public static class EnemyAi
             return new Command[] { new Wait(unit.Id) };
         }
 
-        var destination = Approach(state, content, unit, weapon, reach, players, playerReach);
+        var destination = Approach(state, content, unit, weapon, reach, known, playerReach);
         return destination is { } to && to != unit.At
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
@@ -122,9 +126,12 @@ public static class EnemyAi
     /// own score and order, so when the planner's best option is this target the strike
     /// named here is the strike that comes. Null when the unit would retreat, has no
     /// weapon, or has no option against the target; a unit that holds strikes only from
-    /// its own tile, and one that has moved only from where it stands.
+    /// its own tile, and one that has moved only from where it stands. On a dusk map a target
+    /// the unit does not know of (<see cref="Dusk.Knows"/>) is no option; given
+    /// <paramref name="inDaylight"/>, the dark is ignored, both that and the sight a strike
+    /// needs, which is how <c>threat</c> names an enemy the dark alone keeps off the unit.
     /// </summary>
-    public static EnemyStrike? StrikeOn(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    public static EnemyStrike? StrikeOn(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, bool inDaylight = false)
     {
         var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
@@ -133,11 +140,16 @@ public static class EnemyAi
             return null;
         }
 
+        if (!inDaylight && !Dusk.Knows(state, content, unit, target))
+        {
+            return null;
+        }
+
         var reach = state.ReachOf(unit, content);
         var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
-        var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach);
+        var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach, inDaylight);
         return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
     }
 
@@ -147,11 +159,11 @@ public static class EnemyAi
     /// null when no weapon reaches any target from any tile. The tile's exposure counts
     /// every player unit through <paramref name="playerReach"/>, whichever targets are asked.
     /// On a dusk map a target the unit's side cannot see from where it would strike is no
-    /// option (DESIGN.md 13.7), the same rule the resolver holds.
+    /// option (DESIGN.md 13.7), the same rule the resolver holds, unless <paramref name="inDaylight"/>.
     /// </summary>
     private static AttackOption? BestOption(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
-        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach)
+        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach, bool inDaylight = false)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
@@ -167,7 +179,7 @@ public static class EnemyAi
             {
                 foreach (var target in targets)
                 {
-                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile))
+                    if (!arm.Weapon.InRange(tile.DistanceTo(target.At)) || (!inDaylight && !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile)))
                     {
                         continue;
                     }

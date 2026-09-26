@@ -142,4 +142,100 @@ public class DuskTests
 
         Assert.Contains("dusk", error.Message);
     }
+    private static string Night(int? dusk, string enemies) =>
+        $"""
+        name: Night
+        size: 12x3
+        win: rout
+        turn_limit: 10
+        recall: 3
+        enemy_level: 1
+        {(dusk is { } d ? $"dusk: {d}" : "")}
+
+        ............
+        ............
+        ............
+
+        units:
+        P captain 0,1
+        P recruit:ottilie 0,2
+        {enemies}
+
+        """.Replace("\n\n\n", "\n\n");
+
+    /// <summary>Hale at 0,1 and Ottilie at 0,2, then the player phase ended, so the enemy planner is asked at sight 1.</summary>
+    private static BattleState EnemyPhase(int? dusk, string enemies) =>
+        BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(dusk, enemies)).Do(new EndPhase());
+
+    [Fact]
+    public void AnEnemyThatNeitherSeesNorHearsAnyUnitWaits()
+    {
+        const string Far = "E soldier 5,1 group:a behavior:aggressive";
+        var dark = EnemyPhase(1, Far);
+        var day = EnemyPhase(null, Far);
+
+        Assert.True(new Coord(5, 1).DistanceTo(new Coord(0, 1)) > Starter.WakeRadius);
+        Assert.False(Dusk.Knows(dark, Starter, dark.Find("soldier-1")!, dark.Find("hale")!));
+        Assert.Equal(new Command[] { new Wait("soldier-1") }, EnemyAi.PlanUnit(dark, Starter, dark.Find("soldier-1")!));
+        Assert.Contains(EnemyAi.PlanUnit(day, Starter, day.Find("soldier-1")!), c => c is Attack);
+    }
+
+    [Fact]
+    public void AWokenEnemyPathsTowardAUnitItHearsButCannotSee()
+    {
+        var dark = EnemyPhase(1, "E archer 4,1 group:a behavior:aggressive");
+
+        var plan = EnemyAi.PlanUnit(dark, Starter, dark.Find("archer-1")!);
+
+        Assert.True(Dusk.Knows(dark, Starter, dark.Find("archer-1")!, dark.Find("hale")!));
+        Assert.Equal(2, plan.Count);
+        var move = Assert.IsType<Move>(plan[0]);
+        Assert.True(move.To.DistanceTo(new Coord(0, 1)) < 4);
+        Assert.IsType<Wait>(plan[1]);
+    }
+
+    [Fact]
+    public void WithinHearingAMeleeEnemyStepsUpSeesAndStrikes()
+    {
+        var dark = EnemyPhase(1, "E soldier 4,1 group:a behavior:aggressive");
+
+        var plan = EnemyAi.PlanUnit(dark, Starter, dark.Find("soldier-1")!);
+
+        Assert.Contains(plan, c => c is Attack);
+    }
+
+    [Fact]
+    public void AnEnemyKnowsAUnitAnotherOfItsSideSees()
+    {
+        var dark = EnemyPhase(1, "E soldier 5,1 group:a behavior:aggressive\nE soldier 0,0 group:b behavior:hold");
+
+        Assert.True(Dusk.Knows(dark, Starter, dark.Find("soldier-1")!, dark.Find("hale")!));
+        Assert.Contains(EnemyAi.PlanUnit(dark, Starter, dark.Find("soldier-1")!), c => c is Attack);
+    }
+
+    [Fact]
+    public void ThreatPricesAnUnseeingEnemyAtZeroAndSaysWhy()
+    {
+        var map = Night(1, "E soldier 5,1 group:a behavior:aggressive");
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), map.Replace("P recruit:ottilie 0,2", "P recruit:ottilie 6,1"));
+        var hale = state.Find("hale")!;
+
+        var lines = Queries.Threats(state, Starter, hale, hale.At)!;
+        var unseeing = Queries.Unseeing(state, Starter, hale, hale.At)!;
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, lines, Queries.SleepingThreats(state, Starter, hale, hale.At)!, unseeing);
+
+        Assert.DoesNotContain(lines, l => l.Enemy.Id == "soldier-1");
+        Assert.Equal(new[] { "soldier-1" }, unseeing.Select(u => u.Id));
+        Assert.Contains("\n  soldier-1: cannot see you (dark)", text);
+    }
+
+    [Fact]
+    public void InDaylightNoEnemyIsUnseeing()
+    {
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(null, "E soldier 5,1 group:a behavior:aggressive"));
+        var hale = state.Find("hale")!;
+
+        Assert.Empty(Queries.Unseeing(state, Starter, hale, hale.At)!);
+        Assert.Contains(Queries.Threats(state, Starter, hale, hale.At)!, l => l.Enemy.Id == "soldier-1");
+    }
 }

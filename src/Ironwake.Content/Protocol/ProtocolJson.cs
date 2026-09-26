@@ -365,11 +365,30 @@ public static class ProtocolJson
         w.WriteEndObject();
     }
 
-    public static void WriteState(Utf8JsonWriter w, BattleState state, GameContent content, bool full)
+    /// <summary>
+    /// Writes a state in the shape above. On a dusk map (DESIGN.md 13.7, issue 302), what the
+    /// player can see is a rule, so given <paramref name="playerView"/> the state is the
+    /// player's view: <c>view</c> is <c>player</c>, <c>units</c> leaves out every enemy no
+    /// player unit sees, and <c>unseen</c> lists their tiles in row-major order with no ids,
+    /// names or numbers, the history written the same way. Such a state is a view and not a
+    /// save, so <see cref="ReadState(JsonElement, GameContent)"/> refuses it. Without
+    /// <paramref name="playerView"/> a dusk map's state carries <c>view</c> <c>omniscient</c>;
+    /// a daylight state carries neither field.
+    /// </summary>
+    public static void WriteState(Utf8JsonWriter w, BattleState state, GameContent content, bool full, bool playerView = false)
     {
+        var dark = state.Map.Dusk is not null;
+        var hidden = dark && playerView
+            ? state.Units.Where(u => !Dusk.Seen(state, u)).ToList()
+            : new List<BattleUnit>();
         w.WriteStartObject();
         w.WriteNumber("protocolVersion", ProtocolVersion.Current);
         w.WriteNumber("rulesVersion", RulesVersion.Current);
+        if (dark)
+        {
+            w.WriteString("view", playerView ? "player" : "omniscient");
+        }
+
         w.WriteString("mapName", state.Map.Name);
         if (full)
         {
@@ -382,12 +401,17 @@ public static class ProtocolJson
         w.WriteString("scheme", Name(state.Scheme));
         w.WriteNumber("recallCharges", state.RecallCharges);
         w.WriteStartArray("units");
-        foreach (var unit in state.Units)
+        foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
             WriteUnit(w, unit, content);
         }
 
         w.WriteEndArray();
+        if (dark && playerView)
+        {
+            WriteCoords(w, "unseen", hidden.Select(u => u.At).OrderBy(c => c.Y).ThenBy(c => c.X));
+        }
+
         w.WriteStartArray("escaped");
         foreach (var unit in state.Escaped)
         {
@@ -439,7 +463,7 @@ public static class ProtocolJson
             w.WriteStartArray("history");
             foreach (var prior in state.History)
             {
-                WriteState(w, prior, content, full: true);
+                WriteState(w, prior, content, full: true, playerView);
             }
 
             w.WriteEndArray();
@@ -467,6 +491,11 @@ public static class ProtocolJson
         if (version != ProtocolVersion.Current)
         {
             throw new ProtocolException($"protocolVersion {version} is not this build's {ProtocolVersion.Current}");
+        }
+
+        if (OptionalString(e, "view") == "player")
+        {
+            throw new ProtocolException("field 'view': a player-view state hides what the player cannot see and cannot be read back; write it with --omniscient");
         }
 
         if (!e.TryGetProperty("map", out var mapText) || mapText.ValueKind != JsonValueKind.String)

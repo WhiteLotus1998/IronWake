@@ -15,20 +15,31 @@ namespace Ironwake.Cli;
 /// asks the core and answers with the data and the console's text; it changes nothing.
 /// A refused command or a malformed line answers <c>ok: false</c> with a reason and a
 /// message, and the session goes on. Like <see cref="PlaySession"/>, it computes nothing
-/// about the rules.
+/// about the rules. On a dusk map (DESIGN.md 13.7, issue 302) the session hides what the
+/// console hides: every state is the player's view (<see cref="ProtocolJson.WriteState"/>),
+/// an enemy's Move or Wait in the dark answers as one <c>unseenActs</c> event, and a query
+/// naming an enemy no player unit sees is refused as no such unit. <c>--omniscient</c>
+/// turns the view off for bug reports, and the first line then carries <c>omniscient: true</c>.
 /// </summary>
 public sealed class ProtocolSession
 {
     private readonly GameContent _content;
     private readonly TextWriter _out;
+    private readonly bool _omniscient;
     private BattleState _state;
 
-    public ProtocolSession(GameContent content, BattleState state, TextWriter output)
+    public ProtocolSession(GameContent content, BattleState state, TextWriter output, bool omniscient = false)
     {
         _content = content;
         _state = state;
         _out = output;
+        _omniscient = omniscient;
     }
+
+    /// <summary>The line the console prints, and the protocol's text, for an enemy command no player unit sees.</summary>
+    public const string DarkLine = "enemy: something in the dark acts";
+
+    private bool PlayerView => !_omniscient;
 
     public BattleState State => _state;
 
@@ -41,8 +52,13 @@ public sealed class ProtocolSession
             w.WriteBoolean("ok", true);
             w.WriteNumber("protocolVersion", ProtocolVersion.Current);
             w.WriteNumber("rulesVersion", RulesVersion.Current);
+            if (_omniscient)
+            {
+                w.WriteBoolean("omniscient", true);
+            }
+
             w.WritePropertyName("state");
-            ProtocolJson.WriteState(w, _state, _content, full: true);
+            ProtocolJson.WriteState(w, _state, _content, full: true, PlayerView);
             w.WriteEndObject();
         }));
         while (input.ReadLine() is { } line)
@@ -81,7 +97,7 @@ public sealed class ProtocolSession
 
     private string Command(Command command)
     {
-        var events = new List<GameEvent>();
+        var events = new List<GameEvent?>();
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
         {
@@ -94,6 +110,7 @@ public sealed class ProtocolSession
         {
             foreach (var enemy in EnemyAi.Plan(_state, _content))
             {
+                var dark = PlayerView && Dusk.InTheDark(_state, _content, enemy);
                 var step = Resolver.Apply(_state, _content, enemy);
                 if (!step.Accepted)
                 {
@@ -101,7 +118,14 @@ public sealed class ProtocolSession
                 }
 
                 _state = step.Next;
-                events.AddRange(step.Events);
+                if (dark)
+                {
+                    events.Add(null);
+                }
+                else
+                {
+                    events.AddRange(step.Events);
+                }
             }
         }
 
@@ -112,12 +136,22 @@ public sealed class ProtocolSession
             w.WriteStartArray("events");
             foreach (var e in events)
             {
-                ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e, _content));
+                if (e is null)
+                {
+                    w.WriteStartObject();
+                    w.WriteString("type", "unseenActs");
+                    w.WriteString("text", DarkLine);
+                    w.WriteEndObject();
+                }
+                else
+                {
+                    ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e, _content));
+                }
             }
 
             w.WriteEndArray();
             w.WritePropertyName("state");
-            ProtocolJson.WriteState(w, _state, _content, full: false);
+            ProtocolJson.WriteState(w, _state, _content, full: false, PlayerView);
             w.WriteEndObject();
         });
     }
@@ -130,7 +164,7 @@ public sealed class ProtocolSession
             return Ok(name, w =>
             {
                 w.WritePropertyName("state");
-                ProtocolJson.WriteState(w, _state, _content, full: true);
+                ProtocolJson.WriteState(w, _state, _content, full: true, PlayerView);
             });
         }
 
@@ -140,7 +174,7 @@ public sealed class ProtocolSession
         }
 
         var unitId = ProtocolJson.RequiredString(request, "unit");
-        if (_state.Find(unitId) is not { } unit)
+        if (_state.Find(unitId) is not { } unit || Hidden(unit))
         {
             return Error(ProtocolJson.Name(RejectionReason.NoSuchUnit), $"no living unit '{unitId}'");
         }
@@ -159,7 +193,7 @@ public sealed class ProtocolSession
                 {
                     w.WriteString("unit", unit.Id);
                     w.WriteStartArray("targets");
-                    foreach (var target in Queries.Targets(_state, _content, unit))
+                    foreach (var target in Queries.Targets(_state, _content, unit).Where(t => !Hidden(t)))
                     {
                         w.WriteStringValue(target.Id);
                     }
@@ -182,7 +216,7 @@ public sealed class ProtocolSession
     private string Forecast(JsonElement request, BattleUnit unit)
     {
         var targetId = ProtocolJson.RequiredString(request, "target");
-        if (_state.Find(targetId) is not { } target)
+        if (_state.Find(targetId) is not { } target || Hidden(target))
         {
             return Error(ProtocolJson.Name(RejectionReason.NoSuchTarget), $"no living unit '{targetId}'");
         }
@@ -235,6 +269,8 @@ public sealed class ProtocolSession
                 owed ? $"{unit.Id} cannot canto to {tile}" : unit.Moved ? $"{unit.Id} has already moved this phase; threat from {unit.At}" : $"{unit.Id} cannot move to {tile}");
         }
 
+        lines = lines.Where(line => line.Arrives is not null || !Hidden(line.Enemy)).ToList();
+        asleep = asleep.Select(g => g with { Members = g.Members.Where(m => !Hidden(m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
         return Ok("threat", w =>
         {
             w.WriteString("unit", unit.Id);
@@ -285,9 +321,29 @@ public sealed class ProtocolSession
             }
 
             w.WriteEndArray();
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep));
+            var unseeing = Queries.Unseeing(_state, _content, unit, tile)!;
+            if (_state.Map.Dusk is not null)
+            {
+                WriteIds("cannotSee", unseeing.Where(e => !Hidden(e)));
+            }
+
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing));
+
+            void WriteIds(string name, IEnumerable<BattleUnit> units)
+            {
+                w.WriteStartArray(name);
+                foreach (var u in units)
+                {
+                    w.WriteStringValue(u.Id);
+                }
+
+                w.WriteEndArray();
+            }
         });
     }
+
+    /// <summary>Whether the player view hides <paramref name="unit"/>: an enemy no player unit sees at dusk.</summary>
+    private bool Hidden(BattleUnit unit) => PlayerView && !Dusk.Seen(_state, unit);
 
     private static string Ok(string query, Action<Utf8JsonWriter> body) => ProtocolJson.Write(w =>
     {
