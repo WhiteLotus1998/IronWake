@@ -42,7 +42,8 @@ public sealed class RandomLegalPlayer : IPlayer
 /// reaches that unit's current HP, and among plans that pass, one a crit cannot kill on
 /// is preferred ahead of the tile keys. Every other recruit plays without a veto. The
 /// planner knows nothing of the wake rule and walks into sleeping groups; that is the
-/// baseline gate 1 measures.
+/// baseline gate 1 measures. A unit owed a Canto takes it before any other unit acts, to
+/// the safest tile in its Canto reach by <see cref="PlanCanto"/> (issue 262).
 /// </summary>
 public sealed class HeuristicPlayer : IPlayer
 {
@@ -59,6 +60,12 @@ public sealed class HeuristicPlayer : IPlayer
         if (state.Outcome.IsOver || state.Phase != Side.Player)
         {
             return Array.Empty<Command>();
+        }
+
+        var owed = state.UnitsOf(Side.Player).FirstOrDefault(u => state.CantoReachOf(u, content) is not null);
+        if (owed is not null)
+        {
+            return new Command[] { PlanCanto(state, content, owed) };
         }
 
         var unit = state.UnitsOf(Side.Player).FirstOrDefault(u => !u.Acted);
@@ -159,6 +166,57 @@ public sealed class HeuristicPlayer : IPlayer
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
         return WithMove(unit, destination ?? unit.At, new Wait(unit.Id));
+    }
+
+    /// <summary>
+    /// The Canto of a unit owed one after its Attack, Item or Wait (issue 262): the tile in
+    /// its Canto reach whose <see cref="Exposure"/> no-crit sum is lowest, priced on the
+    /// board the Canto itself certainly determines (a group its stop wakes by proximity is
+    /// awake on it; a wake already fired is already on the state). Lowest first is the
+    /// veto's refusal for a unit whose death loses the map (<see cref="LosesTheMap"/>): a
+    /// tile whose sum reaches its HP is taken only when no tile in reach is below it. Then
+    /// that unit's crit-lethal flag, then staying, so the unit stays whenever its own tile
+    /// is already as safe, then the approach's tile keys: avoid, fewer enemies reaching the
+    /// tile, cost, row-major. A recruit never ends on a Seize throne (<see cref="MayEndOn"/>),
+    /// and a unit standing on an Escape exit only moves between exits, since leaving one
+    /// undoes the escape. A stay is the Canto declined.
+    /// </summary>
+    public static Canto PlanCanto(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var reach = state.CantoReachOf(unit, content)
+            ?? throw new ArgumentException($"{unit.Id} is not owed a Canto", nameof(unit));
+        var movement = content.Class(unit.Unit.ClassId).Movement;
+        var enemyReach = state.UnitsOf(Side.Enemy).Select(e => state.ReachOf(e, content)).ToList();
+        var veto = LosesTheMap(state, unit);
+        var onExit = state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At);
+        var chosen = unit.At;
+        (int NoCrit, bool CritLethal, bool Moves, int Avoid, int Exposed, int Cost, Coord Tile) bestKey = default;
+        var found = false;
+        foreach (var tile in reach.Destinations)
+        {
+            if (!MayEndOn(state, content, unit, tile) || (onExit && !state.Map.IsExit(tile)))
+            {
+                continue;
+            }
+
+            var sum = Exposure.Of(state, content, unit, tile);
+            var key = (
+                sum.NoCrit,
+                veto && sum.WithCrit >= unit.Hp,
+                tile != unit.At,
+                -state.Map.TerrainAt(tile, content).AvoidFor(movement),
+                enemyReach.Count(r => r.CanEnd(tile)),
+                reach.CostTo(tile)!.Value,
+                tile);
+            if (!found || key.CompareTo(bestKey) < 0)
+            {
+                bestKey = key;
+                chosen = tile;
+                found = true;
+            }
+        }
+
+        return new Canto(unit.Id, chosen);
     }
 
     /// <summary>
