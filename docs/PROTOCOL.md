@@ -95,7 +95,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 
 ## Campaign record
 
-A campaign between maps (issue 74) is one JSON object, written by `ProtocolJson.Campaign` and read back equal by `ProtocolJson.ReadCampaign`, and printed by the `record` command on the campaign screen: `protocolVersion`, `seed` (a string, as in a state), `difficulty`, `purse`, `mapIndex` (the next map, 0-based, in `campaign.json` order), `roster` (in roster order, the captain first; each unit is `id`, `name` and the unit fields of a state from `class` on, without the battle fields `side` to `canto`), `fallen` and `benched` (unit ids). A record from another protocol version is refused.
+A campaign between maps (issue 74) is one JSON object, written by `ProtocolJson.Campaign` and read back equal by `ProtocolJson.ReadCampaign`, and printed by the `record` command on the campaign screen: `protocolVersion`, `seed` (a string, as in a state), `difficulty`, `purse`, `mapIndex` (the next map, 0-based, in `campaign.json` order), `roster` (in roster order, the captain first; each unit is `id`, `name` and the unit fields of a state from `class` on, without the battle fields `side` to `canto`), `fallen` and `benched` (unit ids), and `trialsTried` (issue 252: the certification trials tried since the last map, each `unit` and `class`; absent in a record written before it, which reads as none tried). A record from another protocol version is refused.
 
 ## A bug report
 

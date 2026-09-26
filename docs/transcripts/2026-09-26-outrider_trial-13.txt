@@ -1,0 +1,104 @@
+Trial of the Outrider, seed 13, scheme TwoRollAverage
+certification trial: captain plays as Outrider with iron_lance, iron_sword
+Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 ...a...
+ 3 .^^^^^.
+ 4 ...A...
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     3,4    hp 23/23  Plain  captain
+a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
+> reach captain
+Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 ***a***
+ 3 *******
+ 4 ***A***
+ 5 *******
+
+A  captain          Alder Fenn L1 outrider     3,4    hp 23/23  Plain  captain
+a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
+*  reach from 3,4: 26 tiles
+> forecast captain hexer-1 1 from 3,3
+forecast captain -> hexer-1 from 3,3 (Forest): dmg 14 x2 hit 88% crit 4%; counter: dmg 10 hit 81% crit 0%
+> forecast captain hexer-1 2 from 3,3
+forecast captain -> hexer-1 from 3,3 (Forest): dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 81% crit 0%
+> move captain 3,3
+captain moves 3,4 -> 3,3
+Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 ...a...
+ 3 .^^A^^.
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     3,3    hp 23/23  Forest  captain
+a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
+> attack captain hexer-1 2
+forecast captain -> hexer-1: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 81% crit 0%
+captain equips iron_sword
+captain attacks hexer-1
+  captain misses hexer-1
+  hexer-1 hits captain for 10 (hp 13)
+  captain hits hexer-1 for 13 (hp 3)
+  captain hp 13, hexer-1 hp 3
+captain gains 10 exp (10)
+captain may canto up to 3 movement: canto captain <x,y|stay>
+Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 ...a...
+ 3 .^^A^^.
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     3,3    hp 13/23  Forest  captain  canto 3
+a  hexer-1          Hexer L1 adept             3,2    hp 3/16   Plain  group gate, hold
+> canto captain stay
+captain stays at 3,3 (canto)
+Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 ...a...
+ 3 .^^A^^.
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     3,3    hp 13/23  Forest  captain  done
+a  hexer-1          Hexer L1 adept             3,2    hp 3/16   Plain  group gate, hold
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: attack hexer-1 captain
+forecast hexer-1 -> captain: dmg 10 hit 81% crit 0%; counter: dmg 13 x2 hit 92% crit 4%
+hexer-1 attacks captain
+  hexer-1 hits captain for 10 (hp 3)
+  captain hits hexer-1 for 13 (hp 0)
+  hexer-1 hp 0, captain hp 3
+captain gains 30 exp (40)
+hexer-1 falls at 3,2
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Trial of the Outrider  over after turn 1 of 1  seize  recall 0
+   0123456
+ 0 TTTTTTT
+ 1 ###.###
+ 2 .......
+ 3 .^^A^^.
+ 4 .......
+ 5 .......
+
+A  captain          Alder Fenn L1 outrider     3,3    hp 3/23   Forest  captain
+battle lost: turn 1 passed; no recall is left
+battle lost: turn 1 passed
+certification: Outrider not earned

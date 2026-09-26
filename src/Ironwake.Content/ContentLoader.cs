@@ -53,7 +53,7 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items) : CampaignRules.None;
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes) : CampaignRules.None;
         return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign };
     }
 
@@ -62,9 +62,13 @@ public static class ContentLoader
     /// least 0, and <c>maps</c>, at least one, each a <c>map</c> id (unique), a <c>reward</c> of at
     /// least 0 and a <c>stock</c> of weapon or item ids, each carrying a <c>price</c> and none
     /// listed twice. The map ids are checked against <c>content/maps</c> by whoever loads maps.
+    /// The optional <c>trials</c> object (issue 252) maps a class id to a trial map id under
+    /// <c>content/trials</c>; an unknown class or an empty map id is refused, and whoever loads the
+    /// trial checks that its <c>certification:</c> header names the same class.
     /// </summary>
     private static CampaignRules ParseCampaign(
-        ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items)
+        ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
+        ImmutableSortedDictionary<string, UnitClass> classes)
     {
         JsonDocument document;
         try
@@ -143,7 +147,29 @@ public static class ContentLoader
             throw root.Error("maps", "must list at least one map");
         }
 
-        return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps));
+        var trials = new List<CampaignTrial>();
+        if (root.OptionalObject("trials") is { } trialNode)
+        {
+            foreach (var property in trialNode.Element.EnumerateObject())
+            {
+                if (!classes.ContainsKey(property.Name))
+                {
+                    throw root.Error("trials." + property.Name, "is not a class");
+                }
+
+                if (property.Value.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(property.Value.GetString()))
+                {
+                    throw root.Error("trials." + property.Name, "must be a trial map id");
+                }
+
+                trials.Add(new CampaignTrial(property.Name, property.Value.GetString()!));
+            }
+        }
+
+        return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
+        {
+            Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
+        };
     }
 
     /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>

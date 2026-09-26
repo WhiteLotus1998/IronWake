@@ -103,6 +103,6 @@ b  brigand-2        Brigand L3 reaver          3,2    hp 23/23  Plain  group wes
 c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group west, aggressive
 d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
-battle lost: the captain is dead; only recall is left
+battle lost: the captain is dead; no recall is left
 battle lost: the captain is dead
 certification: Bulwark not earned

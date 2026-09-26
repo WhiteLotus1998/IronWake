@@ -602,7 +602,8 @@ public static class ProtocolJson
     /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
     /// (a ulong does not survive every JSON reader), the difficulty, the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
-    /// without the battle fields), and the fallen and benched ids. A campaign is a file.
+    /// without the battle fields), the fallen and benched ids, and the certification trials tried
+    /// since the last map (issue 252). A campaign is a file.
     /// </summary>
     public static string Campaign(CampaignRecord record) => Write(w =>
     {
@@ -625,6 +626,16 @@ public static class ProtocolJson
         w.WriteEndArray();
         WriteStrings(w, "fallen", record.Fallen);
         WriteStrings(w, "benched", record.Benched);
+        w.WriteStartArray("trialsTried");
+        foreach (var attempt in record.TrialsTried)
+        {
+            w.WriteStartObject();
+            w.WriteString("unit", attempt.UnitId);
+            w.WriteString("class", attempt.ClassId);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
         w.WriteEndObject();
     });
 
@@ -664,8 +675,18 @@ public static class ProtocolJson
             mapIndex,
             seed,
             RequiredString(e, "difficulty"),
-            ReadStrings(e, "benched"));
+            ReadStrings(e, "benched"))
+        {
+            TrialsTried = ReadTrialsTried(e),
+        };
     }
+
+    /// <summary>The optional <c>trialsTried</c> array of a campaign record (issue 252); a record written before it reads as none tried.</summary>
+    private static ValueList<TrialAttempt> ReadTrialsTried(JsonElement e) =>
+        e.TryGetProperty("trialsTried", out _)
+            ? ValueList<TrialAttempt>.From(Array(Required(e, "trialsTried"), "trialsTried")
+                .Select(a => new TrialAttempt(RequiredString(a, "unit"), RequiredString(a, "class"))))
+            : ValueList<TrialAttempt>.Empty;
 
     private static void WriteSide(Utf8JsonWriter w, string name, SideForecast side)
     {

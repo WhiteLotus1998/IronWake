@@ -1,0 +1,7 @@
+reach captain
+forecast captain hexer-1 1 from 3,3
+forecast captain hexer-1 2 from 3,3
+move captain 3,3
+attack captain hexer-1 2
+canto captain stay
+end

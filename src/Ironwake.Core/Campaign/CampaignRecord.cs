@@ -6,6 +6,9 @@ public sealed record ScreenResult(CampaignRecord Record, string Text, bool Accep
     public static ScreenResult Refused(CampaignRecord record, string reason) => new(record, reason, false);
 }
 
+/// <summary>A certification trial tried this camp (issue 252): the unit and the class it tried for.</summary>
+public sealed record TrialAttempt(string UnitId, string ClassId);
+
 /// <summary>
 /// A campaign between maps (issue 74, DESIGN section 9): the roster in roster order, the captain
 /// first, each unit as its last map left it (EXP, level, ranks, mastery, weapon uses); the ids of
@@ -25,6 +28,12 @@ public sealed record CampaignRecord(
     ValueList<string> Benched)
 {
     public const string NormalDifficulty = "normal";
+
+    /// <summary>
+    /// The certification trials tried since the last map (issue 252), passed or failed: one
+    /// attempt per unit and class per camp, so a failed trial opens again after the next map.
+    /// </summary>
+    public ValueList<TrialAttempt> TrialsTried { get; init; } = ValueList<TrialAttempt>.Empty;
 
     /// <summary>A new campaign: the cast in roster order, the starting purse, the first map, nobody benched.</summary>
     public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty)
@@ -129,6 +138,7 @@ public sealed record CampaignRecord(
             Purse = Purse + NextMap(content).Reward,
             MapIndex = MapIndex + 1,
             Benched = ValueList<string>.Empty,
+            TrialsTried = ValueList<TrialAttempt>.Empty,
         };
     }
 
@@ -291,6 +301,100 @@ public sealed record CampaignRecord(
         return new ScreenResult(
             Replace(Certifications.Certify(unit, target)) with { Purse = Purse - price },
             $"{unit.Id} certifies from {from} to {target.Name} for {price}; the purse holds {Purse - price}",
+            true);
+    }
+
+    /// <summary>
+    /// Why <paramref name="unitId"/> may not try the certification trial for <paramref name="classId"/>
+    /// now (issue 252), or null when it may: the unit and the class must exist, the unit must not be
+    /// in the class already, it must meet every requirement of <see cref="Certifications.Check"/>
+    /// (a trial comes after them and stands in only for the seal), the class must have a trial, and
+    /// the unit must not have tried that class's trial this camp.
+    /// </summary>
+    public string? TrialRefusal(string unitId, string classId, GameContent content)
+    {
+        if (Find(unitId) is not { } unit)
+        {
+            return $"no unit '{unitId}' on the roster";
+        }
+
+        if (!content.Classes.TryGetValue(classId, out var target))
+        {
+            return $"no class '{classId}'";
+        }
+
+        var refusals = Certifications.Check(unit, target);
+        if (refusals.Count > 0)
+        {
+            return $"{unit.Id} cannot certify as {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
+        }
+
+        if (content.Campaign.TrialFor(classId) is null)
+        {
+            return $"{target.Name} has no trial; certify with a seal";
+        }
+
+        return TrialsTried.Contains(new TrialAttempt(unitId, classId))
+            ? $"{unit.Id} has tried the {target.Name} trial since the last map; it opens again after the next one"
+            : null;
+    }
+
+    /// <summary>
+    /// Why <paramref name="trial"/>, the map <c>campaign.json</c> names for <paramref name="classId"/>,
+    /// cannot be played as that class's trial, or null when it can: its <c>certification:</c> header
+    /// must name the same class, since the loader reads the pairing without reading the map.
+    /// </summary>
+    public static string? TrialMapRefusal(MapDefinition trial, string classId) =>
+        trial.Certification?.ClassId == classId ? null : $"the trial map '{trial.Name}' does not certify '{classId}'";
+
+    /// <summary>
+    /// The seed a trial before the next map runs on: the campaign seed plus the number of maps plus
+    /// the next map's index, so no trial shares a seed with a map of the campaign.
+    /// </summary>
+    public ulong TrialSeed(GameContent content) => unchecked(Seed + (ulong)content.Campaign.Maps.Count + (ulong)MapIndex);
+
+    /// <summary>
+    /// The trial battle: <paramref name="trial"/> (the class's trial map, as the caller loaded it)
+    /// with <paramref name="unitId"/> as the candidate, on <see cref="TrialSeed"/>. No difficulty
+    /// applies, since a trial tests the class and not the campaign.
+    /// </summary>
+    public BattleState BeginTrial(MapDefinition trial, string unitId, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage) =>
+        BattleState.From(trial, content, ValueList<Unit>.From(new[] { Find(unitId) ?? throw new ArgumentException($"no unit '{unitId}' on the roster") }), TrialSeed(content), scheme);
+
+    /// <summary>
+    /// The record after a decided trial (issue 252). Either way the attempt is recorded. A pass
+    /// certifies the unit into the trial's class with no seal, carrying the level, EXP, stats and
+    /// weapon ranks the trial's fights left it; its own inventory, abilities and mastery points
+    /// come back, so a trial earns no mastery. A failure, a candidate who fell in it included,
+    /// changes nothing else: a trial is an exam, not a battle of the campaign.
+    /// </summary>
+    public ScreenResult AfterTrial(BattleState end, string unitId, GameContent content)
+    {
+        var trial = end.Map.Certification ?? throw new ArgumentException("the battle is not a certification trial");
+        if (!end.Outcome.IsOver)
+        {
+            throw new InvalidOperationException("the trial is not decided");
+        }
+
+        var unit = Find(unitId) ?? throw new ArgumentException($"no unit '{unitId}' on the roster");
+        var target = content.Class(trial.ClassId);
+        var tried = this with { TrialsTried = TrialsTried.Add(new TrialAttempt(unitId, trial.ClassId)) };
+        if (end.Outcome.Result != BattleResult.Won)
+        {
+            return new ScreenResult(tried, $"{unit.Id} fails the {target.Name} trial and stays a {content.Class(unit.ClassId).Name}; it opens again after the next map", true);
+        }
+
+        var after = end.UnitsOf(Side.Player).Single(u => u.Id == unitId).Unit;
+        var certified = Certifications.Certify(unit, target) with
+        {
+            Level = after.Level,
+            Exp = after.Exp,
+            Stats = after.Stats,
+            Skill = after.Skill,
+        };
+        return new ScreenResult(
+            tried.Replace(certified),
+            $"{unit.Id} passes the {target.Name} trial and certifies from {content.Class(unit.ClassId).Name} to {target.Name} with no seal; L{certified.Level} exp {certified.Exp}",
             true);
     }
 

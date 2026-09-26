@@ -3,7 +3,7 @@ namespace Ironwake.Core.Tests.Content;
 /// <summary>
 /// <c>ironwake campaign</c> at the console (issue 74): the journaled two-map campaign replayed to
 /// its transcript, <c>leave</c> refused while the battle is undecided, a script that ends on the
-/// screen, and the argument refusals.
+/// screen, the argument refusals, and a certification trial on the screen (issue 252).
 /// </summary>
 [Collection("console")]
 public class CampaignCliTests
@@ -67,6 +67,36 @@ public class CampaignCliTests
         Assert.Equal(2, difficultyExit);
         Assert.Contains("ERROR: no difficulty 'brutal'; the content declares normal", difficulty);
         Assert.NotEqual(0, noCampaignExit);
+    }
+
+    [Fact]
+    public void ATrialOnTheScreenCertifiesOnAPassWithNoSealAndIsRefusedAfterward()
+    {
+        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain 3,0\nleave\ntrial captain outrider\ntrial wren pikeman\n";
+
+        var output = Play(out var exit, script, "--seed", "6");
+
+        Assert.Equal(1, exit);
+        Assert.Contains("trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider\n", output);
+        Assert.Contains("> trial captain outrider\ntrial: Trial of the Outrider, seed 12\ncertification trial: captain plays as Outrider with iron_lance, iron_sword\n", output);
+        Assert.Contains("battle won: seize; no recall is left, so leave\n", output);
+        Assert.Contains("captain passes the Outrider trial and certifies from Cadet to Outrider with no seal; L1 exp 30\n", output);
+        Assert.Contains("ERROR: captain cannot certify as Outrider: ", output);
+        Assert.Contains("ERROR: Pikeman has no trial; certify with a seal\n", output);
+        Assert.Contains("-- before map 1 of 6: Old Mill Road; the purse holds 500 --", output);
+    }
+
+    [Fact]
+    public void AFailedTrialOnTheScreenOpensAgainOnlyAfterTheNextMap()
+    {
+        const string script = "trial captain outrider\nmove captain 3,3\nattack captain hexer-1 2\ncanto captain stay\nend\nleave\ntrial captain outrider\n";
+
+        var output = Play(out _, script, "--seed", "7");
+
+        Assert.Contains("trial: Trial of the Outrider, seed 13\n", output);
+        Assert.Contains("battle lost: turn 1 passed; no recall is left, so leave\n", output);
+        Assert.Contains("captain fails the Outrider trial and stays a Cadet; it opens again after the next map\n", output);
+        Assert.Contains("ERROR: captain has tried the Outrider trial since the last map; it opens again after the next one\n", output);
     }
 
     private static string Play(out int exit, string script, params string[] extra)

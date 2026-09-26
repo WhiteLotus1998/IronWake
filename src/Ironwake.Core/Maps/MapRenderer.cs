@@ -121,16 +121,26 @@ public static class MapRenderer
     /// 207), and for enemies its group and how it behaves now (a sleeping Guard reads <c>guard, asleep</c>, a refugee below half HP adds <c>holds its refuge until half hp</c>, issue 215), and <c>unarmed</c> for a unit with
     /// no usable weapon, since the enemy planner prices such a unit as free damage (issue
     /// 101) and seeing it coming is the player's whole defence. The turn line names the phase and
-    /// the Recall charges left. Given a <see cref="Reach"/>, the tiles that unit may end on
+    /// the Recall charges left; past the turn limit, where only a battle the clock decided stands, it
+    /// says the battle is over after the last turn (issue 252) rather than naming a turn the map never had. Given a <see cref="Reach"/>, the tiles that unit may end on
     /// are marked as in the map view.
     /// </summary>
     public static string Render(BattleState state, GameContent content, Reach? reach = null)
     {
         var map = state.Map;
         var sb = new StringBuilder();
-        sb.Append(map.Name).Append("  turn ").Append(state.Turn).Append(" of ").Append(map.TurnLimit)
-            .Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase")
-            .Append("  ").Append(WinName(map.Win))
+        sb.Append(map.Name);
+        if (state.Turn > map.TurnLimit)
+        {
+            sb.Append("  over after turn ").Append(map.TurnLimit).Append(" of ").Append(map.TurnLimit);
+        }
+        else
+        {
+            sb.Append("  turn ").Append(state.Turn).Append(" of ").Append(map.TurnLimit)
+                .Append("  ").Append(state.Phase.ToString().ToLowerInvariant()).Append(" phase");
+        }
+
+        sb.Append("  ").Append(WinName(map.Win))
             .Append("  recall ").Append(state.RecallCharges).Append('\n');
         var letters = Letters(map, content);
         sb.Append("   ");

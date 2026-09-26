@@ -3192,5 +3192,5 @@ G  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain
 E  pell             Pell L1 adept              11,1   hp 16/16  Plain
 D  teodor           Teodor L1 pikeman          8,3    hp 13/21  Plain
 C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
-battle won: seize; only recall is left
+battle won: seize; no recall is left
 battle won: seize
