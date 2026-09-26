@@ -222,7 +222,9 @@ public static class EnemyAi
     /// from <paramref name="from"/>. Expected damage on both lines carries the crit
     /// expectation, <c>Damage * (1 + 2 * CritChance / 100)</c>, times the strikes that side
     /// makes, capped at the HP it could remove; the kill flag reads deterministic damage
-    /// only, so an attack lethal only on a crit is never priced as a kill. The attacker
+    /// only, so an attack lethal only on a crit is never priced as a kill, and only over the
+    /// strikes the attacker lives to make, so a second strike a plain counter would kill it
+    /// before is not counted (<see cref="CombatForecast.AttackerDamageLivedFor"/>, issue 315). The attacker
     /// strikes with its equipped weapon; <see cref="PlanUnit"/> scores another slot by
     /// passing the unit with that slot moved to the front.
     /// </summary>
@@ -235,7 +237,7 @@ public static class EnemyAi
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
         var strikes = forecast.Attacker.StrikeCount;
-        var canKill = forecast.Attacker.Damage * strikes >= target.Hp;
+        var canKill = forecast.AttackerDamageLivedFor(attacker.Hp) >= target.Hp;
         var dealt = Math.Min(target.Hp, Expected(forecast.Attacker, strikes));
         var score = (canKill ? KillBonus : 0) + dealt * Combat.HitProbability(forecast.Attacker.HitChance, state.Scheme);
 
