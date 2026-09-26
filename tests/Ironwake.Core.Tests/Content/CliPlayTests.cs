@@ -550,6 +550,84 @@ public class CliPlayTests
         Assert.DoesNotContain(" attacks ", output);
     }
 
+    /// <summary>
+    /// DESIGN.md 13.11, experiment: Code's play of Saltmarsh Ford with the Ford Chief (Steel
+    /// Axe, Toll Axe, Hatchet) under <c>arsenal: on</c>, seed 31. A bait at range 2 puts the
+    /// Toll Axe in its hand and costs the cadets their double; after the Recall on turn 8,
+    /// Teodor at full HP beside the fort draws the Steel Axe instead, and on turn 9 Wren and
+    /// the captain double into the heavy axe's counter and the chief falls.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptRoutsTheFordChiefByBaitingTheHeavyAxe()
+    {
+        var output = RunSample("saltmarsh_ford_chief.map", "2026-09-26-saltmarsh_ford_chief-31.script", 31, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Contains("ford_chief-1 equips Toll Axe\n", output);
+        Assert.Contains("ford_chief-1 equips Steel Axe\n", output);
+        Assert.Contains("forecast wren -> ford_chief-1 with Iron Sword: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%\n", output);
+        Assert.Contains("ford_chief-1 falls at 10,0\n", output);
+    }
+
+    [Fact]
+    public void AnArsenalMapNamesBothWeaponsAndTheCounterIsTheWeaponLastSwung()
+    {
+        var output = RunInline(ArsenalYard, "forecast captain ford_chief-1 from 2,1\nmove captain 2,1\nwait captain\nend\nforecast captain ford_chief-1\n");
+
+        Assert.Contains("forecast captain -> ford_chief-1 from 2,1 (Plain) with Iron Sword: dmg 9 x2", output);
+        Assert.Contains("counter with Steel Axe: dmg", output);
+        Assert.Contains("ford_chief-1 equips Hatchet\n", output);
+        Assert.Contains("forecast captain -> ford_chief-1 with Iron Sword: dmg 9 hit", output);
+        Assert.Contains("counter with Hatchet: dmg", output);
+    }
+
+    [Fact]
+    public void WithoutTheArsenalHeaderTheForecastLineNamesNoWeapon()
+    {
+        var output = RunInline(ArsenalYard.Replace("arsenal: on\n", ""), "forecast captain ford_chief-1 from 2,1\n");
+
+        Assert.Contains("forecast captain -> ford_chief-1 from 2,1 (Plain): dmg 9 x2", output);
+        Assert.Contains("; counter: dmg", output);
+        Assert.DoesNotContain(" with ", output.Split('\n').Single(l => l.StartsWith("forecast captain", StringComparison.Ordinal)));
+    }
+
+    private const string ArsenalYard = """
+        name: Arsenal Yard
+        size: 6x3
+        win: rout
+        turn_limit: 5
+        recall: 0
+        enemy_level: 1
+        arsenal: on
+
+        ......
+        ......
+        ......
+
+        units:
+        P captain 0,1
+        B ford_chief 3,1 group:yard behavior:boss
+
+        """;
+
+    private static string RunInline(string mapText, string scriptText)
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-arsenal-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, mapText);
+        File.WriteAllText(script, scriptText);
+        try
+        {
+            return Run(out _, "play", map, "--seed", "1", "--script", script, "--content", Fixture.RealContentDirectory());
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
     private static string RunSample(string map, string script, int seed, out int exit)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
