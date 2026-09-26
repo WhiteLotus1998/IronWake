@@ -43,6 +43,11 @@ namespace Ironwake.Core;
 /// command and on <c>map</c> while any is still to fire, so a reinforcement turn is counted in
 /// advance. Off by default, and an unannounced event's only tell is its own line when it fires.
 /// </param>
+/// <param name="KeepsakesEnabled">
+/// The <c>keepsakes: on</c> header (DESIGN.md 13.8, experiment): a player unit that falls leaves
+/// its equipped weapon on its tile under its name, for an ally to recover (<see cref="Recover"/>).
+/// Off by default.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -62,7 +67,8 @@ public sealed record MapDefinition(
     int? Supplies = null,
     string? DifficultyId = null,
     CertificationTrial? Certification = null,
-    bool Announced = false)
+    bool Announced = false,
+    bool KeepsakesEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

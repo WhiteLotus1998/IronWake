@@ -111,6 +111,16 @@ public static class ProtocolJson
                 w.WriteString("unit", b.UnitId);
                 WriteCoord(w, "at", b.At);
                 break;
+            case KeepsakeLeft k:
+                w.WriteString("fallen", k.FallenId);
+                w.WriteString("item", k.ItemId);
+                WriteCoord(w, "at", k.At);
+                break;
+            case KeepsakeRecovered k:
+                w.WriteString("unit", k.UnitId);
+                w.WriteString("fallen", k.FallenId);
+                w.WriteString("item", k.ItemId);
+                break;
             case Cantoed c:
                 w.WriteString("unit", c.UnitId);
                 WriteCoord(w, "from", c.From);
@@ -247,6 +257,10 @@ public static class ProtocolJson
                 w.WriteString("type", "exit");
                 w.WriteString("unit", exit.UnitId);
                 break;
+            case Recover recover:
+                w.WriteString("type", "recover");
+                w.WriteString("unit", recover.UnitId);
+                break;
             case Canto canto:
                 w.WriteString("type", "canto");
                 w.WriteString("unit", canto.UnitId);
@@ -285,9 +299,10 @@ public static class ProtocolJson
             "wait" => new Wait(RequiredString(e, "unit")),
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
+            "recover" => new Recover(RequiredString(e, "unit")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, end, or recall"),
         };
     }
 
@@ -365,6 +380,22 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (state.Map.KeepsakesEnabled)
+        {
+            w.WriteStartArray("keepsakes");
+            foreach (var k in state.Keepsakes)
+            {
+                w.WriteStartObject();
+                WriteCoord(w, "at", k.At);
+                w.WriteString("fallen", k.FallenId);
+                w.WriteString("item", k.Item.ItemId);
+                w.WriteNumber("uses", k.Item.Uses);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         WriteStrings(w, "awakeGroups", state.AwakeGroups);
         w.WriteNumber("wakeRadius", content.WakeRadius);
         w.WriteNumber("noiseRadius", content.NoiseRadius);
@@ -467,7 +498,14 @@ public static class ProtocolJson
             ValueList<Rapport>.From(Array(Required(e, "rapport"), "rapport").Select(r => new Rapport(RequiredString(r, "a"), RequiredString(r, "b"), RequiredInt(r, "points")))),
             e.TryGetProperty("escaped", out var escaped)
                 ? ValueList<BattleUnit>.From(Array(escaped, "escaped").Select(u => ReadUnit(u, content)))
-                : ValueList<BattleUnit>.Empty);
+                : ValueList<BattleUnit>.Empty,
+            e.TryGetProperty("keepsakes", out var keepsakes)
+                ? ValueList<Keepsake>.From(Array(keepsakes, "keepsakes").Select(k =>
+                {
+                    var fallen = RequiredString(k, "fallen");
+                    return new Keepsake(ReadCoord(k, "at"), fallen, new ItemStack(RequiredString(k, "item"), RequiredInt(k, "uses")) { Keepsake = fallen });
+                }))
+                : ValueList<Keepsake>.Empty);
     }
 
     private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content)
@@ -515,6 +553,11 @@ public static class ProtocolJson
             w.WriteStartObject();
             w.WriteString("item", stack.ItemId);
             w.WriteNumber("uses", stack.Uses);
+            if (stack.Keepsake is { } fallen)
+            {
+                w.WriteString("keepsake", fallen);
+            }
+
             w.WriteEndObject();
         }
 
@@ -580,7 +623,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses"))))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake") }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))

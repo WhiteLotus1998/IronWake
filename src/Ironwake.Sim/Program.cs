@@ -238,6 +238,7 @@ public static class Program
         UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
+        Recover r => $"recover {r.UnitId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
         EndPhase => "end",
