@@ -10,6 +10,9 @@ namespace Ironwake.Core.Tests.Content;
 [Collection("console")]
 public class CliPlayTests
 {
+    /// <summary>Brackwater Cut as it shipped before <c>dusk: 5</c> (issue 318); its daylight plays replay on it.</summary>
+    private static string BrackwaterDaylight => Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "brackwater_cut_daylight.map");
+
     private static string OldMillRoad => Path.Combine(Fixture.RealContentDirectory(), "maps", "old_mill_road.map");
 
     private static string Play(out int exit, string script, string seed = "7")
@@ -548,13 +551,14 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 17 under the third arm:
+    /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 17 under the third arm, played
+    /// on the sample that is now the shipped map (issue 318):
     /// rider-1 drifts onto the route and is killed there, and all five walk out on turn 5.
     /// </summary>
     [Fact]
     public void ChatsBrackwaterScriptOnSeedSeventeenEscapesWithAllFive()
     {
-        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-17.script", 17, out var exit);
+        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut_dusk5-17.script", 17, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("rider-1 falls at", output);
@@ -562,19 +566,39 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 308: Code's play of Brackwater Cut at <c>dusk: 5</c> on seed 23. Knowing of
+    /// Issue 308: Code's play of Brackwater Cut at <c>dusk: 5</c> on seed 23, on the sample that is
+    /// now the shipped map (issue 318). Knowing of
     /// nobody, the chase makes for the exits through the gap instead of standing still; the
     /// fight it brings to the staging tiles wakes the bank, and only Rook and the captain get out.
     /// </summary>
     [Fact]
     public void TheJournaledScriptEscapesBrackwaterUnderTheThirdArm()
     {
-        var output = RunSample("brackwater_cut_dusk5.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
+        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
         Assert.EndsWith("escaped: rook, captain; left behind: none; fell: dunstan, pell, wren\n", output);
         Assert.Contains("rider-1 moves 9,3 -> 13,3 via 10,3 11,3 12,3\n", output);
         Assert.Contains("group bank wakes: noise\n", output);
+    }
+
+    /// <summary>
+    /// Issue 318: Code's play of the shipped Brackwater Cut at <c>dusk: 5</c> on seed 41. Rook
+    /// and Pell kill the fort archer on turn 1; Wren holds the gap at 11,3 to the end of turn 4,
+    /// and while she stands on it no chase unit has a path to an exit, so all nine enemies
+    /// wait. All five escape on turn 7 and the chase never reaches the wall.
+    /// </summary>
+    [Fact]
+    public void TheJournaledScriptCorksTheGapOnTheShippedDuskMap()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut-41.script", 41, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("archer-2 falls at 11,1\n", output);
+        var turnFive = output[output.IndexOf("-- player phase, turn 5 --", StringComparison.Ordinal)..];
+        Assert.Contains("unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10\n", turnFive[..turnFive.IndexOf("> ", StringComparison.Ordinal)]);
+        Assert.EndsWith("escaped: rook, pell, dunstan, wren, captain; left behind: none; fell: none\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-brackwater_cut-41.txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>
@@ -679,6 +703,22 @@ public class CliPlayTests
             File.Delete(map);
             File.Delete(script);
         }
+    }
+
+    private static string RunShipped(string map, string script, int seed, out int exit)
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        return Run(
+            out exit,
+            "play",
+            Path.Combine(Fixture.RealContentDirectory(), "maps", map),
+            "--seed",
+            seed.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            "--script",
+            Path.Combine(repo, "docs", "transcripts", script),
+            "--strict",
+            "--content",
+            Fixture.RealContentDirectory());
     }
 
     private static string RunSample(string map, string script, int seed, out int exit)
@@ -1150,7 +1190,7 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 80: Code's play of seed 29 on Brackwater Cut. The first pass holds the gap at 11,3
+    /// Issue 80: Code's play of seed 29 on Brackwater Cut in daylight (the sample since issue 318). The first pass holds the gap at 11,3
     /// and loses three units on turn 4, so a Recall goes back to turn 3; the second holds from
     /// 12,3, where the wall leaves one melee tile and one bow tile, until a second Recall to
     /// turn 5. The captain steps onto 19,3 on turn 8 of 8 as the only one left alive and
@@ -1162,7 +1202,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-29.script");
 
-        var output = Run(out var exit, "play", "brackwater_cut", "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: escape\nescaped: captain; left behind: none; fell: dunstan, pell, rook, wren\n", output);
@@ -1175,7 +1215,7 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 269: Code's replay of Chat's seed 73 line on Brackwater Cut under escape by
+    /// Issue 269: Code's replay of Chat's seed 73 line on Brackwater Cut in daylight under escape by
     /// leaving. Rook leaves from 19,6 on turn 6 instead of standing on the exit at 6 HP,
     /// Dunstan still falls holding 12,3, and on turn 7 Wren, Pell and then the captain exit.
     /// </summary>
@@ -1185,7 +1225,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-brackwater_cut-73-exit.script");
 
-        var output = Run(out var exit, "play", "brackwater_cut", "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: escape\nescaped: rook, wren, pell, captain; left behind: none; fell: dunstan\n", output);
@@ -1215,7 +1255,7 @@ public class CliPlayTests
         }
     }
 
-    /// <summary>Issue 267: <c>show</c> prints the class's Mov and movement type, one unit of each type on Brackwater Cut.</summary>
+    /// <summary>Issue 267: <c>show</c> prints the class's Mov and movement type, one unit of each type on Brackwater Cut in daylight.</summary>
     [Theory]
     [InlineData("captain", "mov 4 (infantry)")]
     [InlineData("rider-1", "mov 6 (cavalry)")]
@@ -1227,7 +1267,7 @@ public class CliPlayTests
         File.WriteAllText(script, "show " + unit + "\n");
         try
         {
-            var output = Run(out _, "play", "brackwater_cut", "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
+            var output = Run(out _, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
 
             var stats = output.Split('\n').SkipWhile(l => l != "> show " + unit).ElementAt(2);
             Assert.StartsWith("  hp ", stats);
