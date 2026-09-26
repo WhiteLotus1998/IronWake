@@ -89,6 +89,11 @@ public static class Resolver
         }
 
         next = WakeGroups(state, next, content, events);
+        if (next.Map.KeepsakesEnabled && next.Outcome.IsOver)
+        {
+            AddLostKeepsakes(next, events);
+        }
+
         next = next with { History = state.History.Add(state with { History = ValueList<BattleState>.Empty }) };
         return new ApplyResult(next, ValueList<GameEvent>.From(events), null);
     }
@@ -178,7 +183,56 @@ public static class Resolver
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
         int? canto = AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) ? reach.Mov - entry.Cost : null;
-        return (state.WithUnit(unit with { At = move.To, Moved = true, Canto = canto }), null);
+        return (EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events), null);
+    }
+
+    /// <summary>
+    /// Puts <paramref name="after"/> on the board where its move ended. On a <c>keepsakes: on</c>
+    /// map an enemy that ends a move on a stack of keepsakes takes all of it (DESIGN.md 13.8,
+    /// issue 295), one <see cref="KeepsakeTaken"/> each, oldest first, through
+    /// <see cref="BattleState.Carrying"/>; the stack leaves the tile.
+    /// </summary>
+    private static BattleState EndMove(BattleState state, BattleUnit before, BattleUnit after, List<GameEvent> events)
+    {
+        var carrier = state.Carrying(before, after.At);
+        if (ReferenceEquals(carrier, before))
+        {
+            return state.WithUnit(after);
+        }
+
+        foreach (var keepsake in state.KeepsakesAt(after.At))
+        {
+            events.Add(new KeepsakeTaken(before.Id, keepsake.FallenId, keepsake.Item.ItemId));
+        }
+
+        return state.WithUnit(after with { Unit = carrier.Unit }) with
+        {
+            Keepsakes = ValueList<Keepsake>.From(state.Keepsakes.Where(k => k.At != after.At)),
+        };
+    }
+
+    /// <summary>
+    /// Issue 295's closing lines: once the battle is over, one <see cref="KeepsakeLost"/> per
+    /// keepsake nobody recovered, those lying on the board in the order they were left, then
+    /// those still on a carrier, enemies in board order and stacks in inventory order.
+    /// </summary>
+    private static void AddLostKeepsakes(BattleState state, List<GameEvent> events)
+    {
+        foreach (var keepsake in state.Keepsakes)
+        {
+            events.Add(new KeepsakeLost(keepsake.FallenId, keepsake.Item.ItemId, keepsake.At, null));
+        }
+
+        foreach (var enemy in state.UnitsOf(Side.Enemy))
+        {
+            foreach (var stack in enemy.Unit.Inventory.Items)
+            {
+                if (stack.Keepsake is { } fallen)
+                {
+                    events.Add(new KeepsakeLost(fallen, stack.ItemId, enemy.At, enemy.Id));
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -664,24 +718,31 @@ public static class Resolver
     }
 
     /// <summary>
-    /// DESIGN.md 13.8 (Carry the fallen, experiment): on a <c>keepsakes: on</c> map a player
-    /// unit that dies leaves its weapon (<see cref="Keepsake.Of"/>) on its tile. An enemy leaves
-    /// nothing, and neither does a unit with no weapon or a map without the header.
+    /// DESIGN.md 13.8 (Carry the fallen, experiment): on a <c>keepsakes: on</c> map a unit
+    /// that dies leaves what <see cref="Keepsake.Dropped"/> names on its tile, one
+    /// <see cref="KeepsakeLeft"/> each: a player unit its weapon and any keepsake it carried,
+    /// an enemy every keepsake it carried (issue 295). Nothing is left on a map without the
+    /// header.
     /// </summary>
     private static BattleState LeaveKeepsake(BattleState state, BattleUnit fallen, GameContent content, List<GameEvent> events)
     {
-        if (!state.Map.KeepsakesEnabled || fallen.Side != Side.Player || Keepsake.Of(fallen, content) is not { } keepsake)
+        if (!state.Map.KeepsakesEnabled)
         {
             return state;
         }
 
-        events.Add(new KeepsakeLeft(keepsake.FallenId, keepsake.Item.ItemId, keepsake.At));
-        return state with { Keepsakes = state.Keepsakes.Add(keepsake) };
+        var dropped = Keepsake.Dropped(fallen, content);
+        foreach (var keepsake in dropped)
+        {
+            events.Add(new KeepsakeLeft(keepsake.FallenId, keepsake.Item.ItemId, keepsake.At));
+        }
+
+        return dropped.Count == 0 ? state : state with { Keepsakes = ValueList<Keepsake>.From(state.Keepsakes.Concat(dropped)) };
     }
 
     /// <summary>
     /// DESIGN.md 13.8's recovery: a player unit that has not acted, standing on a keepsake's
-    /// tile with a free inventory slot, takes the weapon as its action, in place of Attack,
+    /// tile with a free inventory slot, takes the newest keepsake of the tile's stack (issue 295) as its action, in place of Attack,
     /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
     /// under the fallen's name, and no Canto follows.
     /// </summary>
@@ -716,7 +777,13 @@ public static class Resolver
             Acted = true,
             Canto = null,
         };
-        var next = state.WithUnit(carrier) with { Keepsakes = ValueList<Keepsake>.From(state.Keepsakes.Where(k => k != keepsake)) };
+        var top = state.Keepsakes.Count - 1;
+        while (state.Keepsakes[top].At != unit.At)
+        {
+            top--;
+        }
+
+        var next = state.WithUnit(carrier) with { Keepsakes = state.Keepsakes.RemoveAt(top) };
         return (next, null);
     }
 
@@ -792,7 +859,7 @@ public static class Resolver
             events.Add(new UnitMoved(unit.Id, unit.At, retreat.To, path));
         }
 
-        return (state.WithUnit(unit with { At = retreat.To, Moved = true, Acted = true, Retreated = true }), null);
+        return (EndMove(state, unit, unit with { At = retreat.To, Moved = true, Acted = true, Retreated = true }, events), null);
     }
 
     /// <summary>

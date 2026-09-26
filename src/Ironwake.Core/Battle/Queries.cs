@@ -149,10 +149,11 @@ public static class Queries
                 continue;
             }
 
-            var forecast = Forecast(board, content, enemy, moved, strike.From, strike.Slot)
+            var carrier = board.Carrying(enemy, strike.From);
+            var forecast = Forecast(board, content, carrier, moved, strike.From, strike.Slot)
                 ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {unit.Id} from {strike.From} has no forecast");
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            lines.Add(new ThreatLine(enemy, strike.From, strike.Slot, enemy.UsableWeaponAt(content, strike.Slot)!, forecast, arrives, StrikeTiles(board, content, enemy, moved)));
+            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, carrier.UsableWeaponAt(content, strike.Slot)!, forecast, arrives, StrikeTiles(board, content, enemy, moved)));
         }
 
         return lines;

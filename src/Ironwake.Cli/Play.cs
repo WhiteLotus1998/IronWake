@@ -642,7 +642,7 @@ public sealed class PlaySession
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
                 }
 
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", KeepsakeWith(attacker!, _content, attack.Slot)));
                 PrintRivalry(target!, countering: true);
             }
 
@@ -898,7 +898,7 @@ public sealed class PlaySession
     public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where) };
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, KeepsakeWith(unit, content, slot)) };
         if (art is not null)
         {
             lines.Add(ArtLine(content, unit, forecast, slot, art));
@@ -1003,7 +1003,7 @@ public sealed class PlaySession
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
-                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
+                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter: {(line.Forecast.Defender.Strikes ? StrikeText(line.Forecast.Defender) : "none")}");
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
@@ -1028,9 +1028,25 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "")
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "")
     {
-        return $"forecast {unit.Id} -> {target.Id}{where}: {StrikeText(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? StrikeText(forecast.Defender) : "none")}";
+        return $"forecast {unit.Id} -> {target.Id}{where}{with}: {StrikeText(forecast.Attacker)}; counter: {(forecast.Defender.Strikes ? StrikeText(forecast.Defender) : "none")}";
+    }
+
+    /// <summary>
+    /// What a forecast line adds when the weapon struck with is a keepsake (DESIGN.md 13.8,
+    /// issue 295): <c> with Iron Lance (Teodor's)</c>, the slot named or else the equipped
+    /// one; empty for an ordinary weapon, so the line reads as it always has.
+    /// </summary>
+    public static string KeepsakeWith(BattleUnit unit, GameContent content, int? slot)
+    {
+        var at = slot ?? unit.EquippedSlot(content);
+        if (at < 0 || at >= unit.Unit.Inventory.Count || unit.Unit.Inventory.Items[at] is not { Keepsake: { } fallen } stack)
+        {
+            return "";
+        }
+
+        return " with " + Keepsake.Name(stack.ItemId, fallen, content);
     }
 
     /// <summary>One side of a forecast as the console prints it: damage, doubles, displayed hit, and crit.</summary>
@@ -1268,6 +1284,12 @@ public sealed class PlaySession
                 return $"{Keepsake.Name(k.ItemId, k.FallenId, content)} lies at {k.At}";
             case KeepsakeRecovered k:
                 return $"{k.UnitId} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
+            case KeepsakeTaken k:
+                return $"{k.UnitId} takes {Keepsake.Name(k.ItemId, k.FallenId, content)}";
+            case KeepsakeLost k:
+                return k.CarrierId is { } carrier
+                    ? $"{Keepsake.Name(k.ItemId, k.FallenId, content)} went with {carrier}"
+                    : $"{Keepsake.Name(k.ItemId, k.FallenId, content)} was left at {k.At}";
             case Cantoed c:
                 return c.From == c.To
                     ? $"{c.UnitId} stays at {c.To} (canto)"

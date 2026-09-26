@@ -21,7 +21,7 @@ namespace Ironwake.Core;
 /// <param name="Fired">The names of the map events that have fired, blocked or not, sorted (issue 32). Each fires once; a Recall restores the list with the board.</param>
 /// <param name="Flags">The flags map events have set, sorted, for a win condition to read.</param>
 /// <param name="Rapport">Each recruit pair's rapport, sorted by pair (issue 16). Empty on a map without the <c>rivalry:</c> header; a Recall restores it with the board.</param>
-/// <param name="Keepsakes">The weapons fallen player units left on their tiles on a <c>keepsakes: on</c> map (DESIGN.md 13.8, experiment), in the order they fell, until an ally recovers one; a Recall restores the list with the board.</param>
+/// <param name="Keepsakes">The weapons fallen player units left on their tiles on a <c>keepsakes: on</c> map (DESIGN.md 13.8, experiment), and those a carrier dropped where it died (issue 295), in the order they were left, until an ally recovers one or an enemy takes the tile's stack; a Recall restores the list with the board.</param>
 /// <param name="Escaped">The player units that have left the board through an exit on an Escape map (issue 269), in the order they left. Nothing on the board can see them; a Recall restores the list with the board.</param>
 public sealed record BattleState(
     MapDefinition Map,
@@ -39,8 +39,43 @@ public sealed record BattleState(
     ValueList<BattleUnit> Escaped = default,
     ValueList<Keepsake> Keepsakes = default)
 {
-    /// <summary>The keepsake lying on a tile (DESIGN.md 13.8), or null.</summary>
-    public Keepsake? KeepsakeAt(Coord at) => Keepsakes.FirstOrDefault(k => k.At == at);
+    /// <summary>
+    /// The keepsake on top of a tile's stack (DESIGN.md 13.8, issue 295): the newest left
+    /// there, which <c>recover</c> takes first; null when nothing lies there.
+    /// </summary>
+    public Keepsake? KeepsakeAt(Coord at) => Keepsakes.LastOrDefault(k => k.At == at);
+
+    /// <summary>Every keepsake lying on a tile, oldest first (issue 295).</summary>
+    public IReadOnlyList<Keepsake> KeepsakesAt(Coord at) => Keepsakes.Where(k => k.At == at).ToList();
+
+    /// <summary>
+    /// <paramref name="unit"/> as it would stand on <paramref name="tile"/> once it had taken
+    /// the stack lying there (issue 295): an enemy on a <c>keepsakes: on</c> map that ends a
+    /// move on keepsakes carries all of them, appended oldest first after its own items, so
+    /// the slots it already holds keep their numbers. Any other unit, or a tile with nothing
+    /// on it, is returned unchanged.
+    /// </summary>
+    public BattleUnit Carrying(BattleUnit unit, Coord tile)
+    {
+        if (!Map.KeepsakesEnabled || unit.Side != Side.Enemy || tile == unit.At)
+        {
+            return unit;
+        }
+
+        var stack = KeepsakesAt(tile);
+        if (stack.Count == 0)
+        {
+            return unit;
+        }
+
+        var items = unit.Unit.Inventory.Items;
+        foreach (var keepsake in stack)
+        {
+            items = items.Add(keepsake.Item);
+        }
+
+        return unit with { Unit = unit.Unit with { Inventory = new Inventory(items) } };
+    }
 
     /// <summary>Whether a player unit has left the board through an exit (issue 269).</summary>
     public bool HasEscaped(string id) => Escaped.Any(u => u.Id == id);

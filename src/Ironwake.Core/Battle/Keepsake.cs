@@ -10,7 +10,8 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
     /// <summary>
     /// What <paramref name="fallen"/> leaves on a <c>keepsakes: on</c> map: the weapon in its
     /// equipped slot, else the first slot holding any weapon, with the uses it had; null when it
-    /// carried no weapon. A stack already named for someone else keeps that name.
+    /// carried no weapon. A stack already named for someone else keeps that name, and the
+    /// keepsake is that one's.
     /// </summary>
     public static Keepsake? Of(BattleUnit fallen, GameContent content)
     {
@@ -33,7 +34,42 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
         }
 
         var stack = fallen.Unit.Inventory.Items[slot];
-        return new Keepsake(fallen.At, fallen.Id, stack with { Keepsake = stack.Keepsake ?? fallen.Id });
+        var name = stack.Keepsake ?? fallen.Id;
+        return new Keepsake(fallen.At, name, stack with { Keepsake = name });
+    }
+
+    /// <summary>
+    /// Everything <paramref name="fallen"/> leaves on its tile on a <c>keepsakes: on</c> map
+    /// (issue 295), in inventory order: for a player unit, <see cref="Of"/>'s weapon and every
+    /// other stack already named for someone; for an enemy, every named stack it carried. A
+    /// keepsake is never dropped silently, so whoever dies holding one leaves it.
+    /// </summary>
+    public static IReadOnlyList<Keepsake> Dropped(BattleUnit fallen, GameContent content)
+    {
+        var own = fallen.Side == Side.Player ? Of(fallen, content) : null;
+        var ownSlot = -1;
+        if (own is not null)
+        {
+            var equipped = fallen.EquippedSlot(content);
+            var items = fallen.Unit.Inventory.Items;
+            ownSlot = equipped >= 0 ? equipped : Enumerable.Range(0, items.Count).First(i => content.Weapons.ContainsKey(items[i].ItemId));
+        }
+
+        var dropped = new List<Keepsake>();
+        for (var i = 0; i < fallen.Unit.Inventory.Count; i++)
+        {
+            var stack = fallen.Unit.Inventory.Items[i];
+            if (i == ownSlot)
+            {
+                dropped.Add(own!);
+            }
+            else if (stack.Keepsake is { } name)
+            {
+                dropped.Add(new Keepsake(fallen.At, name, stack));
+            }
+        }
+
+        return dropped;
     }
 
     /// <summary>
