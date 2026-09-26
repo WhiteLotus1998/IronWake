@@ -462,7 +462,7 @@ public class CliPlayTests
     /// <summary>
     /// DESIGN.md 13.7 (Dusk maps, experiment): Code's play of Brackwater Cut with <c>dusk: 7</c>
     /// on seed 7. The chase and the bank fall into the dark as sight shrinks, the moves made
-    /// there print only as something moving, Dunstan holds the gap and falls, and by turn 5
+    /// there print only as something acting in the dark, Dunstan holds the gap and falls, and by turn 5
     /// every enemy left is a question mark when Rook, Wren and the captain walk out.
     /// </summary>
     [Fact]
@@ -476,9 +476,69 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("escaped: rook, wren, captain; left behind: none; fell: dunstan, pell\n", output);
-        Assert.Contains("enemy: something moves in the dark\n", output);
+        Assert.Contains("enemy: something in the dark acts\n", output);
         Assert.Contains("  and whatever is in the dark (?), unpriced\n", output);
         Assert.Contains("?  unseen at 11,1 13,2 4,3 9,3 10,3 11,3 10,4 17,5 17,6 17,7\ndusk: sight 3, 2 next turn; 10 unseen (?); no side strikes what it cannot see\n", output);
+    }
+
+    private const string DarkWaitMap = """
+        name: Dark Wait
+        size: 12x3
+        win: rout
+        turn_limit: 5
+        recall: 0
+        enemy_level: 1
+        dusk: 2
+
+        ............
+        ............
+        ............
+
+        units:
+        P captain 1,1
+        E soldier 3,1 group:near behavior:hold
+        E soldier 10,1 group:far behavior:hold
+        """;
+
+    private static string PlayDarkWait()
+    {
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-dark-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, DarkWaitMap);
+        File.WriteAllText(script, "end\n");
+        try
+        {
+            return Run(out _, "play", map, "--seed", "1", "--script", script, "--content", Fixture.RealContentDirectory());
+        }
+        finally
+        {
+            File.Delete(map);
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issue 301: an unseen enemy that waits prints the same neutral line as one that moves,
+    /// so the board never contradicts the line and the silence never tells the two apart.
+    /// </summary>
+    [Fact]
+    public void AnUnseenEnemyThatWaitsPrintsTheNeutralDarkLine()
+    {
+        var output = PlayDarkWait();
+
+        Assert.Contains("?  unseen at 10,1\n", output);
+        Assert.Contains("soldier-1 waits\nenemy: something in the dark acts\nenemy: end\n", output);
+        Assert.DoesNotContain("moves in the dark", output);
+        Assert.DoesNotContain("soldier-2", output);
+    }
+
+    /// <summary>Issue 301: an enemy a player unit can see still prints its own command and event at dusk.</summary>
+    [Fact]
+    public void ASeenEnemyAtDuskStillPrintsItsFullLine()
+    {
+        var output = PlayDarkWait();
+
+        Assert.Contains("-- enemy phase, turn 1 --\nenemy: wait soldier-1\nsoldier-1 waits\n", output);
     }
 
     /// <summary>
