@@ -26,7 +26,7 @@ public sealed record RankRaised(string UnitId, WeaponType Type, WeaponRank Rank)
 /// <summary>A player unit mastered its class (issue 69): the class's mastery ability is now its own.</summary>
 public sealed record MasteryEarned(string UnitId, string ClassId, string AbilityId) : GameEvent;
 
-public sealed record UnitWaited(string UnitId) : GameEvent;
+public sealed record UnitWaited(string UnitId, bool Braced = false) : GameEvent;
 
 /// <summary>A fallen player unit's weapon stays on its tile on a <c>keepsakes: on</c> map (DESIGN.md 13.8).</summary>
 public sealed record KeepsakeLeft(string FallenId, string ItemId, Coord At) : GameEvent;

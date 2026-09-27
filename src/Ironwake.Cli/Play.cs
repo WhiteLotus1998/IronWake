@@ -740,6 +740,11 @@ public sealed class PlaySession
                     _out.WriteLine(pincer);
                 }
 
+                foreach (var brace in BraceLines(attacker!, target!))
+                {
+                    _out.WriteLine(brace);
+                }
+
                 if (grudge is not null)
                 {
                     _out.WriteLine("  " + grudge);
@@ -1087,6 +1092,7 @@ public sealed class PlaySession
         }
 
         lines.AddRange(PincerLines(state, unit with { At = tile }, target));
+        lines.AddRange(BraceLines(unit, target));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
@@ -1158,6 +1164,34 @@ public sealed class PlaySession
         }
 
         _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile)));
+        if (BracedThreat(_state, _content, unit, tile) is { } braced)
+        {
+            _out.WriteLine(braced);
+        }
+    }
+
+    /// <summary>
+    /// On a <c>brace: on</c> map (DESIGN.md 13.14), for a unit asked about on its own tile that
+    /// would brace if it waited there and something can strike it: the same threat priced braced,
+    /// under a line saying so, so the choice between striking and bracing reads as two numbers.
+    /// Null otherwise.
+    /// </summary>
+    public static string? BracedThreat(BattleState state, GameContent content, BattleUnit unit, Coord tile)
+    {
+        if (tile != unit.At || unit.Acted || unit.Braced || !Brace.BracesOnWait(state, unit))
+        {
+            return null;
+        }
+
+        var braced = unit with { Braced = true };
+        var after = state.WithUnit(braced);
+        if (Queries.Threats(after, content, braced, tile) is not { Count: > 0 } lines)
+        {
+            return null;
+        }
+
+        return $"if {unit.Id} waits here it braces (hit -{Brace.Hit}):\n"
+            + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile));
     }
 
     /// <summary>
@@ -1483,6 +1517,24 @@ public sealed class PlaySession
         }
     }
 
+    /// <summary>
+    /// Under a forecast on a <c>brace: on</c> map (DESIGN.md 13.14): one line for each side that
+    /// is braced, naming the hit the forecast already took off, the strike first and the counter
+    /// second. Silent when neither is braced.
+    /// </summary>
+    public static IEnumerable<string> BraceLines(BattleUnit attacker, BattleUnit target)
+    {
+        if (target.Braced)
+        {
+            yield return $"  brace: {target.Id} braced: {attacker.Id} hit -{Brace.Hit}";
+        }
+
+        if (attacker.Braced)
+        {
+            yield return $"  brace: {attacker.Id} braced: {target.Id} hit -{Brace.Hit}";
+        }
+    }
+
     private string Named(string itemId) => _content.ItemName(itemId);
 
     /// <summary>
@@ -1580,7 +1632,7 @@ public sealed class PlaySession
             case MasteryEarned m:
                 return $"{m.UnitId} masters the {ClassName(m.ClassId, content)} class and keeps {AbilityName(m.AbilityId, content)}";
             case UnitWaited w:
-                return $"{w.UnitId} waits";
+                return w.Braced ? $"{w.UnitId} waits and braces" : $"{w.UnitId} waits";
             case UnitExited x:
                 return $"{x.UnitId} leaves through the exit at {x.At}";
             case UnitLeftBehind b:

@@ -27,6 +27,9 @@ public static class MapRenderer
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
     public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";
 
+    /// <summary>The legend a <c>brace: on</c> map prints (DESIGN.md 13.14, experiment).</summary>
+    public const string BraceLegend = "brace: a unit that waits without moving is struck at -15 hit, counters too, until its side's next phase";
+
     public const string ShoveLegend = "shove: a player unit may push an ally beside it one tile straight away, as its action, if the tile beyond is open";
 
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
@@ -108,6 +111,11 @@ public static class MapRenderer
         if (map.PincerEnabled)
         {
             sb.Append(PincerLegend).Append('\n');
+        }
+
+        if (map.BraceEnabled)
+        {
+            sb.Append(BraceLegend).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -229,11 +237,21 @@ public static class MapRenderer
                     role += ", sworn: " + sworn;
                 }
 
+                if (unit.Braced)
+                {
+                    role += ", braced";
+                }
+
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
             }
             else if (unit.IsCaptain)
             {
                 sb.Append("  captain");
+            }
+
+            if (unit.Side == Side.Player && unit.Braced)
+            {
+                sb.Append("  braced");
             }
 
             if (unit.EquippedWeapon(content) is null)
@@ -291,6 +309,11 @@ public static class MapRenderer
         if (map.PincerEnabled)
         {
             sb.Append(PincerLegend).Append('\n');
+        }
+
+        if (map.BraceEnabled)
+        {
+            sb.Append(BraceLegend).Append('\n');
         }
 
         if (state.Keepsakes.Count > 0)
