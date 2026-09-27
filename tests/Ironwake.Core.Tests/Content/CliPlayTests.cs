@@ -1019,6 +1019,26 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-409.txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Seventy-ninth round: Code's hand play of seed 419 replays to its journaled transcript. Pell on
+    /// 9,6 wakes the weir, his Gust breaks the shieldbearer on turn 5 and the noise wakes the ford,
+    /// the Foreman comes off his hill at full HP to throw at Keziah on 10,6, is broken to 2 on 12,6,
+    /// goes home to 13,6 and throws at her again, and falls to Pell on turn 7 after one Recall.
+    /// </summary>
+    [Fact]
+    public void TheJournaledSeed419PlayReplaysWithTheFullHpThrowAndTheWalkHome()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-419.script", 419, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("group weir wakes: proximity\n", output);
+        Assert.Contains("shieldbearer-1 falls at 11,6\ngroup ford wakes: noise\n", output);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 12,6\nenemy: attack weir_foreman-1 keziah\n", output);
+        Assert.Contains("weir_foreman-1 moves 12,6 -> 13,6\nenemy: attack weir_foreman-1 keziah\n", output);
+        Assert.Contains("weir_foreman-1 falls at 13,6\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-419.txt")).ReplaceLineEndings("\n"), output);
+    }
+
     /// <summary>A transcript script played on the shipped Harrow Weir without <c>--strict</c>, so a line the rules have moved past still plays on.</summary>
     private static string RunLoose(string script, int seed)
     {
