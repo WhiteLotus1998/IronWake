@@ -815,6 +815,46 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241-stand.txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Issue 379: Code's play of seed 379 on Harrow Weir with the Foreman a guard boss. Pell's
+    /// Cinder on the shieldbearer from 9,6 wakes the weir group, and the Foreman walks through
+    /// his own shieldbearer onto 10,6 and strikes Pell on 9,6, so a ranged opener has no safe
+    /// tile. His Toll Axe counter at range 2 kills Ottilie on turn 4, a Recall takes it back, and
+    /// Dunstan and Pell kill him on 10,6.
+    /// </summary>
+    [Fact]
+    public void TheJournaledGuardForemanTakesARecallOnSeed379()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-379.script", 379, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("group weir wakes: proximity\n", output);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 10,6 via 12,6 11,6\n", output);
+        Assert.Contains("  weir_foreman-1 hits pell for 13 (hp 3)\n", output);
+        Assert.Contains("ottilie falls at 8,6\n", output);
+        Assert.Contains("recalled to state 61; 2 charges left\n", output);
+        Assert.Contains("weir_foreman-1 falls at 10,6\n", output);
+        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-379.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 379, the bridge case: Chat's seed 257 script, made before the change, replayed on
+    /// the built file. Keziah on 10,6 breaks the shieldbearer on turn 3, and on that enemy phase
+    /// the woken Foreman steps to 12,6 and strikes her at range 2 with the Toll Axe.
+    /// </summary>
+    [Fact]
+    public void AWokenForemanStrikesTheBridgeFromTwelveSixOnSeed257()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var output = Run(out _, "play", "harrow_weir", "--seed", "257", "--script", Path.Combine(repo, "docs", "transcripts", "2026-09-27-harrow_weir-257.script"), "--content", Fixture.RealContentDirectory());
+
+        var phase = output[output.IndexOf("-- enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- enemy phase ends, turn 3 --", StringComparison.Ordinal)];
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 12,6\n", phase);
+        Assert.Contains("forecast weir_foreman-1 -> keziah: dmg 12 hit 60% crit 1%; counter: none\n", phase);
+        Assert.Contains("  weir_foreman-1 hits keziah for 12 (hp 2)\n", phase);
+    }
+
     private static string RunShipped(string map, string script, int seed, out int exit)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
@@ -1180,34 +1220,6 @@ public class CliPlayTests
         {
             File.Delete(path);
         }
-    }
-
-    /// <summary>
-    /// Issue 256: Code's play of seed 17 on Harrow Weir with Keziah in Wren's place and
-    /// north2 on enemy phase 5. The captain stands on 7,0 from turn 3, so both north waves
-    /// are spent; Keziah's axe (8 x2 against the shieldbearer's Def 8, the fists 3 x4) and her
-    /// counter leave it at 8 and Pell breaks it; the west brigand arrives on enemy phase 5;
-    /// Dunstan, Teodor, Ottilie and Pell take the foreman from 28 to 0 on turn 6.
-    /// </summary>
-    [Fact]
-    public void TheJournaledScriptWinsHarrowWeirOnSeedSeventeen()
-    {
-        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var script = Path.Combine(repo, "docs", "transcripts", "2026-09-26-harrow_weir-17.script");
-
-        var output = Run(out var exit, "play", "harrow_weir", "--seed", "17", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
-
-        Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: defeat_boss\n", output);
-        Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("event north1 is blocked: its tile is held\n", output);
-        Assert.Contains("event north2 is blocked: its tile is held\n", output);
-        Assert.Contains("forecast keziah -> shieldbearer-1 with Iron Gauntlets: dmg 3 x4 hit 97% crit 2%", output);
-        Assert.Contains("shieldbearer-1 falls at 11,6", output);
-        Assert.Contains("  brigand-2 arrives at 0,11, group west, aggressive\n", output);
-        Assert.Contains("weir_foreman-1 falls at 13,6", output);
-        Assert.Contains("Harrow Weir  turn 6 of 14", output);
-        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>

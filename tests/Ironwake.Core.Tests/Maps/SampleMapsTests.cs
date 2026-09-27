@@ -82,9 +82,39 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 379: the Weir Foreman is a guard boss in the weir group, so he sleeps on his hill
+    /// and the first strike on the bridge shieldbearer wakes him; he fights with the Toll Axe alone. Every tile a strike on 11,6
+    /// can come from (range 1 or 2) is within the noise radius (wake radius plus 2) of 13,6, and
+    /// the weir archer stays Hold on its tile.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirForemanIsAGuardBossThatAStrikeOnTheBridgeWakes()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+        var content = MapFixture.Content;
+        var wall = new Coord(11, 6);
+
+        Assert.Equal(WinCondition.DefeatBoss, map.Win);
+        var boss = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.IsBoss);
+        Assert.Equal("weir_foreman", boss.TemplateId);
+        Assert.Equal(Behavior.Guard, boss.Behavior);
+        Assert.Equal("weir", boss.Group);
+        var weapons = map.EnemyUnit(boss, content).Inventory.Items.Select(i => i.ItemId);
+        Assert.Equal(new[] { "toll_axe" }, weapons);
+        var archer = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.Group == "weir" && !e.IsBoss);
+        Assert.Equal(Behavior.Hold, archer.Behavior);
+        var strikeTiles = Enumerable.Range(0, map.Height)
+            .SelectMany(y => Enumerable.Range(0, map.Width).Select(x => new Coord(x, y)))
+            .Where(c => map.TerrainIdAt(c) != "water" && c.DistanceTo(wall) is >= 1 and <= 2)
+            .ToList();
+        Assert.Contains(new Coord(9, 6), strikeTiles);
+        Assert.All(strikeTiles, c => Assert.True(c.DistanceTo(boss.At) <= content.WakeRadius + 2, $"{c} is out of the noise radius"));
+    }
+
+    /// <summary>
     /// The thirty-sixth round: maps 4 to 8 each owe one enemy that fights with gauntlets and one
     /// at Def 7 or more, read as the map fields them (class and level included). Harrow Weir's
-    /// brawler and its boss carry gauntlets and its bridge shieldbearer stands at Def 7 or more;
+    /// brawler carries gauntlets (its boss only the Toll Axe since issue 379) and its bridge shieldbearer is at Def 7 or more;
     /// Sallow Grange's field brawler carries gauntlets and its north gate shieldbearer is the wall;
     /// Brackwater Cut's bank fields both, a gauntlet brawler and a shieldbearer before the exits.
     /// </summary>

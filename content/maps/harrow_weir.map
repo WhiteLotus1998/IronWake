@@ -29,7 +29,7 @@ P recruit:keziah 0,6
 E brigand 3,3 group:wood behavior:guard
 E shieldbearer 11,6 group:bridge behavior:hold
 E archer 14,4 group:weir behavior:hold
-B weir_foreman 13,6 group:weir behavior:boss
+B weir_foreman 13,6 group:weir behavior:guard
 E brawler 11,10 group:ford behavior:guard
 E soldier 12,11 group:ford behavior:guard
 
