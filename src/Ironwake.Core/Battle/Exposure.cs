@@ -88,6 +88,100 @@ public static class Exposure
     }
 
     /// <summary>
+    /// The no-crit exposure of an enemy boss ending on <paramref name="tile"/>, after
+    /// attacking <paramref name="target"/> from there when one is named: the question behind
+    /// the boss veto (issue 385). The board and the counter are <see cref="Of"/>'s, and the
+    /// party is priced as the player phase that follows can play it: every player unit may
+    /// move, so a strike tile another player unit stands on is open to it, since the phase
+    /// plays in any order, and each strike tile holds one striker, the worst case over the
+    /// seatings (<see cref="SeatedSum"/>, the count <c>threat</c>'s total makes, issue 253).
+    /// Each player unit is weighed at its worst plain damage over every weapon and tile.
+    /// </summary>
+    public static int OfBoss(BattleState state, GameContent content, BattleUnit boss, Coord tile, BattleUnit? target = null, int? slot = null)
+    {
+        var (board, counter, _) = Plan(state, content, boss, tile, target, slot);
+        var moved = board.Find(boss.Id)!;
+        var me = moved.ToCombatant(board, content, countering: true);
+        var players = board.UnitsOf(Side.Player).ToList();
+        var lines = new List<(int Weight, IReadOnlyList<Coord> Tiles)>();
+        foreach (var player in players)
+        {
+            var reach = board.ReachOf(player, content);
+            var worst = 0;
+            var tiles = new HashSet<Coord>();
+            for (var arm = 0; arm < player.Unit.Inventory.Count; arm++)
+            {
+                if (player.UsableWeaponAt(content, arm) is not { } weapon)
+                {
+                    continue;
+                }
+
+                foreach (var entry in reach.Entries)
+                {
+                    var from = entry.At;
+                    if (!weapon.InRange(from.DistanceTo(tile)) || (!entry.CanEnd && !players.Any(p => p.At == from)))
+                    {
+                        continue;
+                    }
+
+                    var striker = content.CombatantOf(player.Unit, weapon, board.Map.TerrainAt(from, content), player.Hp, 0, player.WithSlotInFront(arm).WeaponBroken(content));
+                    var here = Worst(Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme).Attacker).Plain;
+                    tiles.Add(from);
+                    worst = Math.Max(worst, here);
+                }
+            }
+
+            if (worst > 0)
+            {
+                lines.Add((worst, tiles.OrderBy(t => t).ToList()));
+            }
+        }
+
+        return counter + SeatedSum(lines);
+    }
+
+    /// <summary>
+    /// The heaviest total of <paramref name="lines"/> seated on distinct tiles, each line on
+    /// one of its tiles and at most one line per tile, a line left without a free tile
+    /// dropped. The lines are a transversal matroid over the tiles, so taking them heaviest
+    /// first (ties in list order) and keeping each one an augmenting path can still seat is
+    /// the maximum.
+    /// </summary>
+    public static int SeatedSum(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines)
+    {
+        var seated = new Dictionary<Coord, int>();
+        var total = 0;
+        foreach (var index in Enumerable.Range(0, lines.Count).OrderByDescending(i => lines[i].Weight).ThenBy(i => i))
+        {
+            if (Seat(index, new HashSet<Coord>()))
+            {
+                total += lines[index].Weight;
+            }
+        }
+
+        return total;
+
+        bool Seat(int index, HashSet<Coord> visited)
+        {
+            foreach (var at in lines[index].Tiles)
+            {
+                if (!visited.Add(at))
+                {
+                    continue;
+                }
+
+                if (!seated.TryGetValue(at, out var holder) || Seat(holder, visited))
+                {
+                    seated[at] = index;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /// <summary>
     /// The board the sum is priced on: <paramref name="unit"/> standing on
     /// <paramref name="tile"/>, <paramref name="target"/> removed when the named attack
     /// kills it with certainty, and every sleeping Guard group the command certainly

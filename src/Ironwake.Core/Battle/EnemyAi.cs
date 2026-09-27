@@ -118,10 +118,11 @@ public static class EnemyAi
             return new Command[] { new Wait(unit.Id) };
         }
 
+        Func<Coord, bool>? refused = BossVetoApplies(state, content, unit) ? tile => BossVetoRefuses(state, content, unit, tile) : null;
         var destination = known.Count == 0 && Dusk.Sight(state) is not null
-            ? Drift(state, content, unit, reach, playerReach)
-            : (sworn is null ? null : Approach(state, content, unit, weapon, reach, new[] { sworn }, playerReach))
-                ?? Approach(state, content, unit, weapon, reach, known, playerReach);
+            ? Drift(state, content, unit, reach, playerReach, refused)
+            : (sworn is null ? null : Approach(state, content, unit, weapon, reach, new[] { sworn }, playerReach, refused))
+                ?? Approach(state, content, unit, weapon, reach, known, playerReach, refused);
         return destination is { } to && to != unit.At
             ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
             : new Command[] { new Wait(unit.Id) };
@@ -137,6 +138,27 @@ public static class EnemyAi
     /// </summary>
     public static bool HoldsTheThrone(BattleState state, BattleUnit unit) =>
         unit.Side == Side.Enemy && state.Map.Win == WinCondition.Seize && state.Map.IsThrone(unit.At);
+
+    /// <summary>
+    /// The boss veto (issue 385, DESIGN.md section 8): on a Defeat Boss map the boss is the
+    /// enemy's captain, and it plans under the rule the Sim's captain plays by (section 11).
+    /// It applies while the boss may choose where it ends, Aggressive and not yet moved; a
+    /// boss that holds keeps striking from its own tile.
+    /// </summary>
+    public static bool BossVetoApplies(BattleState state, GameContent content, BattleUnit unit) =>
+        unit.Side == Side.Enemy && unit.IsBoss && state.Map.Win == WinCondition.DefeatBoss
+        && !unit.Moved && state.EffectiveBehavior(unit, content) == Behavior.Aggressive;
+
+    /// <summary>
+    /// Whether the boss veto refuses <paramref name="unit"/> ending on <paramref name="tile"/>,
+    /// after attacking <paramref name="target"/> with the weapon in <paramref name="slot"/> when
+    /// one is named: the no-crit exposure sum there (<see cref="Exposure.OfBoss"/>, the counter it
+    /// takes included) reaches its current HP. A refused strike is no option and a refused
+    /// tile no approach, so with every tile refused the boss holds. The sum is arithmetic, so
+    /// a party too thin to kill it on a tile leaves that tile open.
+    /// </summary>
+    public static bool BossVetoRefuses(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit? target = null, int? slot = null) =>
+        Exposure.OfBoss(state, content, unit, tile, target, slot) >= unit.Hp;
 
     /// <summary>
     /// The attack <paramref name="unit"/> would make on <paramref name="target"/> if the
@@ -311,6 +333,8 @@ public static class EnemyAi
     /// On a dusk map a target the unit's side cannot see from where it would strike is no
     /// option (DESIGN.md 13.7), the same rule the resolver holds, unless <paramref name="inDaylight"/>.
     /// Given <paramref name="keepsakesOnly"/>, only strikes with a keepsake count (issue 331).
+    /// A strike the boss veto refuses is no option (<see cref="BossVetoRefuses"/>, issue 385),
+    /// checked only for an option that would beat the best so far.
     /// </summary>
     private static AttackOption? BestOption(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
@@ -318,6 +342,7 @@ public static class EnemyAi
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
+        var veto = BossVetoApplies(state, content, unit);
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
@@ -341,7 +366,7 @@ public static class EnemyAi
                     }
 
                     var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot);
-                    if (best is null || option.Beats(best))
+                    if ((best is null || option.Beats(best)) && !(veto && BossVetoRefuses(state, content, carrier, tile, target, arm.Slot)))
                     {
                         best = option;
                     }
@@ -441,7 +466,7 @@ public static class EnemyAi
     /// </summary>
     public static Coord? Approach(
         BattleState state, GameContent content, BattleUnit unit, Weapon weapon, Reach reach,
-        IReadOnlyList<BattleUnit> players, IReadOnlyList<Reach> playerReach)
+        IReadOnlyList<BattleUnit> players, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
@@ -459,7 +484,7 @@ public static class EnemyAi
             }
         }
 
-        return chosen is null ? null : Toward(state, content, unit, chosen, reach, playerReach);
+        return chosen is null ? null : Toward(state, content, unit, chosen, reach, playerReach, refused);
     }
 
     /// <summary>
@@ -474,7 +499,7 @@ public static class EnemyAi
     /// up against the blocker. Null, which means Wait, on Rout, Defeat Boss and Survive, and
     /// when no objective tile is free or reachable. Stateless: nothing is remembered between phases.
     /// </summary>
-    public static Coord? Drift(BattleState state, GameContent content, BattleUnit unit, Reach reach, IReadOnlyList<Reach> playerReach)
+    public static Coord? Drift(BattleState state, GameContent content, BattleUnit unit, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
         var map = state.Map;
         var objective = map.Win switch
@@ -496,15 +521,17 @@ public static class EnemyAi
         Occupant GroundOnly(Coord at) =>
             at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
         var distances = Movement.DistancesTo(map, content, objective, movement, GroundOnly);
-        return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach);
+        return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach, refused);
     }
 
     /// <summary>
     /// The reachable tile with the lowest remaining path cost under <paramref name="chosen"/>,
     /// ties by highest terrain avoid, then fewest player units whose reach set contains the
     /// tile, then cost from the mover, then row-major; null when no reachable tile has a path.
+    /// A tile <paramref name="refused"/> names is skipped (the boss veto, issue 385), checked
+    /// only for a tile that would beat the best so far.
     /// </summary>
-    private static Coord? Toward(BattleState state, GameContent content, BattleUnit unit, Distances chosen, Reach reach, IReadOnlyList<Reach> playerReach)
+    private static Coord? Toward(BattleState state, GameContent content, BattleUnit unit, Distances chosen, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         Coord? destination = null;
@@ -521,7 +548,7 @@ public static class EnemyAi
                 Avoid: -state.Map.TerrainAt(tile, content).AvoidFor(movement),
                 Exposure: playerReach.Count(r => r.CanEnd(tile)),
                 Cost: reach.CostTo(tile)!.Value);
-            if (key.CompareTo(bestKey) < 0)
+            if (key.CompareTo(bestKey) < 0 && !(refused?.Invoke(tile) ?? false))
             {
                 bestKey = key;
                 destination = tile;
