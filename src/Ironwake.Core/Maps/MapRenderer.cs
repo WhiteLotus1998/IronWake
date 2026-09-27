@@ -25,7 +25,7 @@ public static class MapRenderer
     public const char ExitGlyph = '>';
 
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
-    public const string ShoveLegend = "shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's";
+    public const string ShoveLegend = "shove: a player unit may push an ally beside it one tile straight away, as its action, if the tile beyond is open";
 
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
     {
@@ -227,11 +227,6 @@ public static class MapRenderer
             if (unit.EquippedWeapon(content) is null)
             {
                 sb.Append("  unarmed");
-            }
-
-            if (map.ShoveEnabled)
-            {
-                sb.Append("  heft ").Append(Resolver.Heft(content, unit));
             }
 
             var carried = unit.Side == Side.Enemy

@@ -37,3 +37,14 @@ Date: 2026-09-27. Chat filed this from its cold seed 41 play of Sallow Grange wi
 - The sample is `docs/samples/sallow_grange_shove.map`, the shipped map with `shove: on` after `enemy_level: 3`. `ShoveSallowTests` pins Chat's refused position as a constructed state, with the Reeve's heft refusal as its falsifier.
 
 Code's seed 83 play of the sample (PLAYTEST.md, not cold) won on turn 6 with nobody lost. There were four pushes, all on allies, all after first contact, and each one taken where the pusher also had a strike on the table. That is one play of two toward the kill criterion.
+
+## Kept as ally pushes (issue 355)
+
+Date: 2026-09-27. The sixty-second round on the Design Table (#322), from Chat's cold Brackwater seed 67 play (8/7/7) and Code's reply. Both plays of the second arm are in, and in each one pushes were chosen over legal strikes, so the kill criterion is met and 13.12 is kept.
+
+- The rule is one sentence: a unit may use its action to push an orthogonally adjacent ally one tile straight away from itself, into an open tile. Everything else from the second arm stands: the pushed ally keeps its flags, fires the enter events of its landing tile, takes no keepsake, and leaves an Escape map only by its own `exit`. A shove is still noise at both tiles.
+- The enemy half is cut. Neither play pushed an enemy, and twice in Chat's play killing the enemy was better. `Resolver.ShoveRefusal` refuses any enemy target right after the player-side check, as `only allies are shoved`, so `Legal` never offers one. Stagger, the proposed rescue for the enemy half, is dropped untried.
+- Heft is cut: `Resolver.Heft`, the `heft N` on a unit's row on a shove map, the heft clause in the map legend and the CLI help, and the heft tests. The protocol never carried it.
+- The relay cap and its trigger are retired, not applied. The trigger fired on Chat's free turn-1 relay (Pell and Wren throwing the captain before any contact), which decided nothing. The cap, one push per unit per phase, would have left that relay legal and killed the double throw round the Reeve in Code's seed 83 play, the rule's best turn. A trigger that measures the wrong thing is retired rather than obeyed.
+- The header stays on the two samples. Which shipped maps get it is a later keep round.
+- `CliPlayTests.TheJournaledShovePlaysReplayWithNoHeft` replays both journaled scripts under `--strict` and checks that no `heft` is printed. The committed transcripts are kept as played, so their unit rows still carry the old `heft N`.

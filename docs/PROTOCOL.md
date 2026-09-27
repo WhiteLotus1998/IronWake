@@ -33,7 +33,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `canto` | `unit`, `to` (the unit's own tile declines it, issue 71) | `Canto` |
 | `exit` | `unit` (on an Escape map, from an exit tile, as the unit's action; issue 269) | `Exit` |
 | `recover` | `unit` (on a `keepsakes: on` map, from a keepsake's tile, as the unit's action; DESIGN 13.8, experiment) | `Recover` |
-| `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent unit pushed one tile away, as the unit's action; DESIGN 13.12, experiment) | `Shove` |
+| `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent ally pushed one tile away, as the unit's action; an enemy target is refused; DESIGN 13.12, experiment) | `Shove` |
 | `end` | none | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |

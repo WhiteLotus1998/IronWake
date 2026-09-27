@@ -740,6 +740,26 @@ public class CliPlayTests
 
         """;
 
+    /// <summary>
+    /// Issue 355's acceptance: both journaled plays of shove's second arm still replay under
+    /// <c>--strict</c> once the enemy half and heft are cut, since neither pushed an enemy, and
+    /// the console prints no heft on either map.
+    /// </summary>
+    [Theory]
+    [InlineData("sallow_grange_shove.map", "2026-09-27-sallow_grange_shove-83.script", 83, "battle won: seize\n")]
+    [InlineData("brackwater_cut_shove.map", "2026-09-27-brackwater_cut_shove-67.script", 67, "left behind: pell; fell: none\n")]
+    public void TheJournaledShovePlaysReplayWithNoHeft(string map, string script, int seed, string ending)
+    {
+        var output = RunSample(map, script, seed, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith(ending, output);
+        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("strict: stopped", output);
+        Assert.Contains(" shoves ", output);
+        Assert.DoesNotContain("heft", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
