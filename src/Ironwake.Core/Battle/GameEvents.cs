@@ -109,8 +109,15 @@ public enum WakeCause
     Proximity,
 }
 
-/// <summary>A Guard group woke; its members behave as Aggressive from now on.</summary>
-public sealed record GroupWoke(string Group, WakeCause Cause) : GameEvent;
+/// <summary>
+/// A Guard group woke; its members behave as Aggressive from now on. <paramref name="Lamps"/>
+/// names the members whose lamps a player-phase wake lit on a dusk map, row-major by tile
+/// (issue 382), and is empty for every other wake.
+/// </summary>
+public sealed record GroupWoke(string Group, WakeCause Cause, ValueList<Lamp> Lamps = default) : GameEvent;
+
+/// <summary>A member of a woken group whose lamp is lit, and where it stood when it woke (issue 382).</summary>
+public sealed record Lamp(string UnitId, Coord At);
 
 /// <summary>
 /// A map event fired (issue 32). <paramref name="Blocked"/> is true when its tile was held:

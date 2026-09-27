@@ -23,6 +23,7 @@ namespace Ironwake.Core;
 /// <param name="Rapport">Each recruit pair's rapport, sorted by pair (issue 16). Empty on a map without the <c>rivalry:</c> header; a Recall restores it with the board.</param>
 /// <param name="Keepsakes">The weapons fallen player units left on their tiles on a <c>keepsakes: on</c> map (DESIGN.md 13.8, experiment), and those a carrier dropped where it died (issue 295), in the order they were left, until an ally recovers one or an enemy takes the tile's stack; a Recall restores the list with the board.</param>
 /// <param name="Escaped">The player units that have left the board through an exit on an Escape map (issue 269), in the order they left. Nothing on the board can see them; a Recall restores the list with the board.</param>
+/// <param name="LitGroups">The Guard groups whose lamps are lit on a dusk map (issue 382), sorted by name: a group a player-phase command woke, whose members the player side sees wherever they stand until the enemy phase that follows ends (<see cref="Dusk.Lit"/>). A Recall restores the list with the board.</param>
 public sealed record BattleState(
     MapDefinition Map,
     ValueList<BattleUnit> Units,
@@ -37,7 +38,8 @@ public sealed record BattleState(
     ValueList<string> Flags = default,
     ValueList<Rapport> Rapport = default,
     ValueList<BattleUnit> Escaped = default,
-    ValueList<Keepsake> Keepsakes = default)
+    ValueList<Keepsake> Keepsakes = default,
+    ValueList<string> LitGroups = default)
 {
     /// <summary>
     /// The keepsake on top of a tile's stack (DESIGN.md 13.8, issue 295): the newest left
@@ -131,6 +133,22 @@ public sealed record BattleState(
         var groups = AwakeGroups.Add(group).ToList();
         groups.Sort(string.CompareOrdinal);
         return this with { AwakeGroups = ValueList<string>.From(groups) };
+    }
+
+    /// <summary>Whether a group's lamps are lit (issue 382).</summary>
+    public bool IsLit(string group) => LitGroups.Contains(group);
+
+    /// <summary>This state with a group's lamps lit (issue 382). Idempotent; the list stays sorted.</summary>
+    public BattleState Light(string group)
+    {
+        if (IsLit(group))
+        {
+            return this;
+        }
+
+        var groups = LitGroups.Add(group).ToList();
+        groups.Sort(string.CompareOrdinal);
+        return this with { LitGroups = ValueList<string>.From(groups) };
     }
 
     /// <summary>Whether the named map event has fired on this battle.</summary>
@@ -471,6 +489,17 @@ public sealed record BattleState(
         }
 
         sb.Append('\n');
+        if (LitGroups.Count > 0)
+        {
+            sb.Append("lit");
+            foreach (var group in LitGroups)
+            {
+                sb.Append(' ').Append(group);
+            }
+
+            sb.Append('\n');
+        }
+
         if (Map.Events.Count > 0)
         {
             sb.Append("fired");

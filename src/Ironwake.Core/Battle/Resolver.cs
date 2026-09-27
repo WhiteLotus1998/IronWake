@@ -110,7 +110,9 @@ public static class Resolver
     /// The Guard wake check of DESIGN.md section 8 through <see cref="WakeCheck"/>, run
     /// after every accepted command on where units stand afterwards, with the dead and
     /// the fought tiles read off the command's events. One <see cref="GroupWoke"/> per
-    /// group per command.
+    /// group per command. On a dusk map a group a player-phase command wakes has its lamps
+    /// lit (issue 382): the event names its members, and the player sees them until the
+    /// enemy phase that follows ends. A wake at a phase's turn is not a player-phase wake.
     /// </summary>
     private static BattleState WakeGroups(BattleState before, BattleState after, GameContent content, List<GameEvent> events)
     {
@@ -135,10 +137,19 @@ public static class Resolver
         }
 
         var next = after;
+        var lamps = Dusk.Sight(after) is not null && before.Phase == Side.Player && after.Phase == Side.Player;
         foreach (var woke in WakeCheck.Run(before, after, content, noisy, died))
         {
-            events.Add(woke);
             next = next.Wake(woke.Group);
+            if (!lamps)
+            {
+                events.Add(woke);
+                continue;
+            }
+
+            var members = next.UnitsOf(Side.Enemy).Where(u => u.Group == woke.Group).OrderBy(u => u.At.Y).ThenBy(u => u.At.X).Select(u => new Lamp(u.Id, u.At));
+            events.Add(woke with { Lamps = ValueList<Lamp>.From(members) });
+            next = next.Light(woke.Group);
         }
 
         return next;
@@ -1026,7 +1037,7 @@ public static class Resolver
         if (nextTurn > state.Map.TurnLimit)
         {
             var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null });
-            return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared) }, null);
+            return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
         events.Add(new PhaseBegan(nextPhase, nextTurn));
@@ -1048,6 +1059,11 @@ public static class Resolver
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
+        if (ended == Side.Enemy)
+        {
+            next = next with { LitGroups = ValueList<string>.Empty };
+        }
+
         return (MapEvents.AtPhaseStart(next, content, events), null);
     }
 

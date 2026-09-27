@@ -1274,7 +1274,7 @@ dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move rook 19,3
 rook moves 19,2 -> 19,3
-group bank wakes: proximity
+group bank wakes: proximity; its lamps are lit (shieldbearer-1 17,5, soldier-1 17,6, brawler-1 17,7)
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1282,21 +1282,24 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......C
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
 E  pell             Pell L1 adept              19,1   hp 16/16  Plain
 C  rook             Rook L1 skyrider           19,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > exit rook
 rook leaves through the exit at 19,3
@@ -1307,20 +1310,23 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......>
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
 E  pell             Pell L1 adept              19,1   hp 16/16  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook
 > move pell 19,3
@@ -1332,20 +1338,23 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......E
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
 E  pell             Pell L1 adept              19,3   hp 16/16  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook
 > exit pell
@@ -1357,19 +1366,22 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......>
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell
 > move wren 19,3
@@ -1381,19 +1393,22 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......D
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              19,3   hp 20/20  Plain
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell
 > exit wren
@@ -1405,18 +1420,21 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......>
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,0   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell wren
 > move captain 19,3
@@ -1428,18 +1446,21 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......A
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,3   hp 22/22  Plain  captain
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell wren
 > exit captain
@@ -1452,17 +1473,20 @@ Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
  2 ..^^.....?.#........
  3 ....??..??..B......>
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 B  dunstan          Dunstan L1 bulwark         12,3   hp 5/23   Plain  done
-?  unseen at 9,2 4,3 5,3 8,3 9,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+?  unseen at 9,2 4,3 5,3 8,3 9,3
+dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell wren captain
 battle won: escape; only recall is left
