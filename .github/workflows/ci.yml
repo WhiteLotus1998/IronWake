@@ -69,3 +69,68 @@ jobs:
         run: |
           timeout 120 xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT" --rendering-driver opengl3 --path src/Ironwake.Godot -- --map brackwater_cut --seed 53 --script "$PWD/docs/screenshots/brackwater_cut-53-turn3.script" --select 11,3 --hover 11,3 --screenshot "$RUNNER_TEMP/screenshot.png"
           test -s "$RUNNER_TEMP/screenshot.png"
+  godot-windows-export:
+    name: godot-windows-export
+    runs-on: ubuntu-latest
+    env:
+      GODOT_ZIP: Godot_v4.3-stable_mono_linux_x86_64.zip
+      GODOT_SHA512: 33d0539bc368ff6f30b5f15d64ec893da8639bd607df83050b5df746c3d30da99238c26dd03a16d7fe31b3a3e58680aeb5545af8784d8ce01edeff07b061ac80
+      TEMPLATES_TPZ: Godot_v4.3-stable_mono_export_templates.tpz
+      TEMPLATES_SHA512: 76796c1df810ecf351b48f303e5525100597be48043d3206bab7c44bd0bc576fb944b4b788619eb9848c31b4245ae0df6f3d665e63d4a083f6dae829919e8e8d
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - name: Fetch Godot 4.3-stable .NET and its export templates and check their SHA-512
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/$GODOT_ZIP" "https://github.com/godotengine/godot/releases/download/4.3-stable/$GODOT_ZIP"
+          echo "$GODOT_SHA512  $RUNNER_TEMP/$GODOT_ZIP" | sha512sum -c -
+          curl -sSfL -o "$RUNNER_TEMP/$TEMPLATES_TPZ" "https://github.com/godotengine/godot/releases/download/4.3-stable/$TEMPLATES_TPZ"
+          echo "$TEMPLATES_SHA512  $RUNNER_TEMP/$TEMPLATES_TPZ" | sha512sum -c -
+          unzip -q "$RUNNER_TEMP/$GODOT_ZIP" -d "$RUNNER_TEMP"
+          templates="$HOME/.local/share/godot/export_templates/4.3.stable.mono"
+          mkdir -p "$templates"
+          unzip -q -j "$RUNNER_TEMP/$TEMPLATES_TPZ" templates/version.txt 'templates/windows_*_x86_64*.exe' -d "$templates"
+          rm "$RUNNER_TEMP/$TEMPLATES_TPZ"
+          echo "GODOT=$RUNNER_TEMP/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64" >> "$GITHUB_ENV"
+      - name: Export the Windows Desktop preset
+        run: |
+          mkdir -p build/windows
+          timeout 600 "$GODOT" --headless --path src/Ironwake.Godot --export-release "Windows Desktop"
+          test -s build/windows/Ironwake.exe
+          # The export exits 0 even when its dotnet publish fails, leaving an exe with no scripts.
+          test -s build/windows/data_Ironwake.Godot_windows_x86_64/Ironwake.Godot.dll
+          cp -r content build/windows/content
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ironwake-windows
+          path: build/windows/
+          if-no-files-found: error
+  godot-windows-launch:
+    name: godot-windows-launch
+    needs: godot-windows-export
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - uses: actions/download-artifact@v4
+        with:
+          name: ironwake-windows
+          path: build/windows
+      - run: dotnet build src/Ironwake.Cli --configuration Release
+      - name: The exported Ironwake.exe matches play --log byte for byte
+        run: |
+          out=$(cygpath -u "$RUNNER_TEMP")/parity; mkdir -p "$out"
+          for script in tests/parity/*.script; do
+            name=$(basename "$script" .script); map=${name%-*}; seed=${name##*-}
+            timeout 120 build/windows/Ironwake.exe --headless -- --map "$map" --seed "$seed" --parity "$(cygpath -w "$PWD/$script")" "$(cygpath -w "$out/$name.client.log")"
+            dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$(cygpath -w "$out/$name.console.log")" > /dev/null
+            cmp "$out/$name.console.log" "$out/$name.client.log"
+            echo "$name: identical"
+          done

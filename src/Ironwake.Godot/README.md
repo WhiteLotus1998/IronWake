@@ -20,10 +20,10 @@ The C# side builds with the .NET SDK alone. `Godot.NET.Sdk` comes from NuGet. Ru
 `export_presets.cfg` holds a `Windows Desktop` preset. On a machine with the Godot 4.3 .NET editor:
 
 1. Install the export templates once: Editor > Manage Export Templates > Download and Install (4.3.stable.mono).
-2. Export from the repo root: `godot --headless --path src/Ironwake.Godot --export-release "Windows Desktop"`. The preset writes `build/windows/Ironwake.exe` beside its .NET data folder, and `build/` is ignored by git.
+2. Export from the repo root: `mkdir -p build/windows`, then `godot --headless --path src/Ironwake.Godot --export-release "Windows Desktop"`. The export refuses a folder that does not exist. It publishes the C# through `Ironwake.Godot.sln`, which Godot requires beside the project, and it exits 0 even when that publish fails, so check that `build/windows/data_Ironwake.Godot_windows_x86_64/Ironwake.Godot.dll` exists. The preset writes `build/windows/Ironwake.exe` beside its .NET data folder, and `build/` is ignored by git.
 3. Copy the repo's `content/` folder into `build/windows/`, next to `Ironwake.exe`. An exported build has no source tree, so it reads `content/` from beside its executable.
 
-Double-click `Ironwake.exe`. It opens the Tollgate on seed 1. To pick a map and seed, run `Ironwake.exe -- --map sallow_grange --seed 61` from a shell. The preset is not built in CI yet.
+Double-click `Ironwake.exe`. It opens the Tollgate on seed 1. To pick a map and seed, run `Ironwake.exe -- --map sallow_grange --seed 61` from a shell. CI builds the same folder (#361): the `godot-windows-export` job fetches the 4.3-stable .NET export templates against a pinned SHA-512, exports, copies `content/` in, and uploads it as the `ironwake-windows` artifact on every run. The `godot-windows-launch` job then downloads that artifact on a Windows runner and holds the exported `Ironwake.exe`'s `--parity` log on each `tests/parity/*.script` to `play --log`, byte for byte.
 
 ## The parity gate
 
