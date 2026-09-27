@@ -52,6 +52,7 @@ public class ProtocolJsonTests
         { new WeaponBroke("wren", "iron_sword"), """{"type":"weaponBroke","unit":"wren","item":"iron_sword"}""" },
         { new SpellSpent("mira", "mend"), """{"type":"spellSpent","unit":"mira","item":"mend"}""" },
         { new GroupWoke("fort", WakeCause.Proximity), """{"type":"groupWoke","group":"fort","cause":"proximity"}""" },
+        { new GroupWoke("bank", WakeCause.Proximity, ValueList<Lamp>.Of(new Lamp("soldier-1", A), new Lamp("brawler-1", B))), """{"type":"groupWoke","group":"bank","cause":"proximity","lamps":[{"unit":"soldier-1","at":{"x":1,"y":2}},{"unit":"brawler-1","at":{"x":3,"y":4}}]}""" },
         { new MapEventFired("riders", false), """{"type":"mapEventFired","name":"riders","blocked":false}""" },
         { new TerrainChanged(A, "plain"), """{"type":"terrainChanged","at":{"x":1,"y":2},"terrain":"plain"}""" },
         { new UnitSpawned("rider-1", B, "flank", Behavior.Aggressive), """{"type":"unitSpawned","unit":"rider-1","at":{"x":3,"y":4},"group":"flank","behavior":"aggressive"}""" },
@@ -238,6 +239,7 @@ public class ProtocolJsonTests
         var marked = state with
         {
             AwakeGroups = ValueList<string>.Of("fort", "woods"),
+            LitGroups = ValueList<string>.Of("woods"),
             Flags = ValueList<string>.Of("gate_open"),
             Rapport = ValueList<Rapport>.Of(new Rapport("ottilie", "wren", 8)),
             History = ValueList<BattleState>.Empty,

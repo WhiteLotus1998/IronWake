@@ -32,10 +32,16 @@ public static class Dusk
     /// daylight, otherwise when a living unit of that side stands within sight of it. Given
     /// <paramref name="moverId"/> and <paramref name="moverAt"/>, that unit is read as standing
     /// on the tile it would strike from, which is how the enemy planner asks before it moves.
+    /// The player side also sees a tile a lit enemy stands on (<see cref="Lit"/>).
     /// </summary>
     public static bool Sees(BattleState state, Side side, Coord at, string? moverId = null, Coord? moverAt = null)
     {
         if (Sight(state) is not { } sight)
+        {
+            return true;
+        }
+
+        if (side == Side.Player && state.LitGroups.Count > 0 && state.UnitAt(at) is { } there && Lit(state, there))
         {
             return true;
         }
@@ -81,7 +87,16 @@ public static class Dusk
         return after is null || !Seen(state, after);
     }
 
-    /// <summary>Whether the player sees <paramref name="unit"/>: every player unit is seen, an enemy only within the player's sight.</summary>
+    /// <summary>
+    /// Whether <paramref name="unit"/> carries a lit lamp (issue 382): an enemy whose group a
+    /// player-phase command woke on a dusk map, seen by the player side wherever it stands,
+    /// whatever the sight, until the enemy phase that follows ends. A group still asleep is
+    /// never lit, and knowledge for the enemy side is unchanged.
+    /// </summary>
+    public static bool Lit(BattleState state, BattleUnit unit) =>
+        unit is { Side: Side.Enemy, Group: { } group } && state.IsLit(group);
+
+    /// <summary>Whether the player sees <paramref name="unit"/>: every player unit is seen, an enemy only within the player's sight or while its lamp is lit.</summary>
     public static bool Seen(BattleState state, BattleUnit unit) =>
         unit.Side == Side.Player || Sees(state, Side.Player, unit.At);
 

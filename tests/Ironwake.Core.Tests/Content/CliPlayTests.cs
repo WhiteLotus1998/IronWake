@@ -816,6 +816,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 382: Code's play of seed 241 on Brackwater Cut with the lamps. The captain's step
+    /// onto 19,3 wakes the bank and lights its lamps, <c>threat</c> prices the brawler on 19,6,
+    /// so nobody stands there; the lamps go out on turn 6 and the brawler, last seen walking to
+    /// 19,8, takes Rook on 19,4 out of the dark.
+    /// </summary>
+    [Fact]
+    public void TheJournaledLampsPlayPricesTheBankOnSeed241()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-241-lamps.script", 241, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("group bank wakes: proximity; its lamps are lit (shieldbearer-1 17,5, soldier-1 17,6, brawler-1 17,7)\n", output);
+        Assert.Contains("  brawler-1 from 18,6 with Iron Gauntlets (slot 1): dmg 10 x2 hit 83% crit 0%;", output);
+        Assert.Contains("brawler-1 moves 17,7 -> 19,8 via 18,7 19,7\n", output);
+        Assert.Contains("rook falls at 19,4\n", output);
+        Assert.EndsWith("escaped: wren, captain; left behind: pell; fell: dunstan, rook\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241-lamps.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 379: Code's play of seed 379 on Harrow Weir with the Foreman a guard boss. Pell's
     /// Cinder on the shieldbearer from 9,6 wakes the weir group, and the Foreman walks through
     /// his own shieldbearer onto 10,6 and strikes Pell on 9,6, so a ranged opener has no safe

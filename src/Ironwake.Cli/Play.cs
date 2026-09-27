@@ -1555,7 +1555,8 @@ public sealed class PlaySession
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
-                return $"group {g.Group} wakes: {g.Cause.ToString().ToLowerInvariant()}";
+                return $"group {g.Group} wakes: {g.Cause.ToString().ToLowerInvariant()}"
+                    + (g.Lamps.Count > 0 ? $"; its lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{l.UnitId} {l.At}"))})" : "");
             case MapEventFired m:
                 return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
             case TerrainChanged t:

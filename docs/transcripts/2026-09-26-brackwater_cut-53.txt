@@ -1819,7 +1819,7 @@ captain attacks rider-2
   rider-2 misses captain
   captain hp 22, rider-2 hp 11
 captain gains 14 exp (14)
-group bank wakes: noise
+group bank wakes: noise; its lamps are lit (shieldbearer-1 17,5, soldier-1 17,6, brawler-1 17,7)
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~...C.D.
@@ -1827,21 +1827,24 @@ Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
  2 ..^^.......#.......A
  3 ..............???.?b
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain  done
 E  pell             Pell L1 adept              19,1   hp 8/16   Plain
 b  rider-2          Rider L3 outrider          19,3   hp 11/21  Plain  group chase, aggressive
 C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
-?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+?  unseen at 14,3 15,3 16,3 18,3
+dusk: sight 1; it gets no darker; 4 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell rider-2
 forecast pell -> rider-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
@@ -1857,28 +1860,33 @@ Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
  2 ..^^.......#.......A
  3 ..............???.?>
  4 ...........#...^^..>
- 5 ...........#...^.?.>
- 6 ...........#.....?.>
- 7 ...........#.....?.>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
  8 ...........#...^...>
  9 ..^^.......#...^^...
 10 ..^.......~~~.......
 11 ..........~~~.......
 
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
 A  captain          Alder Fenn L1 cadet        19,2   hp 22/22  Plain  captain  done
 E  pell             Pell L1 adept              19,1   hp 8/16   Plain  done
 C  rook             Rook L1 skyrider           16,0   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
-?  unseen at 14,3 15,3 16,3 18,3 17,5 17,6 17,7
-dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+?  unseen at 14,3 15,3 16,3 18,3
+dusk: sight 1; it gets no darker; 4 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: something in the dark acts
 enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: move brawler-1 19,7
+brawler-1 moves 17,7 -> 19,7 via 18,7
+enemy: wait brawler-1
+brawler-1 waits
 enemy: move brigand-1 18,1
 brigand-1 moves 18,3 -> 18,1 via 18,2
 enemy: attack brigand-1 pell
@@ -1897,10 +1905,14 @@ forecast hexer-1 -> wren: dmg 11 hit 98% crit 0%; counter: none
 hexer-1 attacks wren
   hexer-1 hits wren for 11 (hp 9)
   hexer-1 hp 16, wren hp 9
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: move shieldbearer-1 17,2
+shieldbearer-1 moves 17,5 -> 17,2 via 17,4 17,3
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: move soldier-1 17,3
+soldier-1 moves 17,6 -> 17,3 via 17,5 17,4
+enemy: wait soldier-1
+soldier-1 waits
 enemy: end
 -- enemy phase ends, turn 6 --
 -- player phase, turn 7 --

@@ -212,6 +212,20 @@ public static class ProtocolJson
             case GroupWoke g:
                 w.WriteString("group", g.Group);
                 w.WriteString("cause", Name(g.Cause));
+                if (g.Lamps.Count > 0)
+                {
+                    w.WriteStartArray("lamps");
+                    foreach (var lamp in g.Lamps)
+                    {
+                        w.WriteStartObject();
+                        w.WriteString("unit", lamp.UnitId);
+                        WriteCoord(w, "at", lamp.At);
+                        w.WriteEndObject();
+                    }
+
+                    w.WriteEndArray();
+                }
+
                 break;
             case MapEventFired m:
                 w.WriteString("name", m.Name);
@@ -452,6 +466,11 @@ public static class ProtocolJson
         }
 
         WriteStrings(w, "awakeGroups", state.AwakeGroups);
+        if (state.LitGroups.Count > 0)
+        {
+            WriteStrings(w, "litGroups", state.LitGroups);
+        }
+
         w.WriteNumber("wakeRadius", content.WakeRadius);
         w.WriteNumber("noiseRadius", content.NoiseRadius);
         WriteStrings(w, "fired", state.Fired);
@@ -565,7 +584,8 @@ public static class ProtocolJson
                     var fallen = RequiredString(k, "fallen");
                     return new Keepsake(ReadCoord(k, "at"), fallen, new ItemStack(RequiredString(k, "item"), RequiredInt(k, "uses")) { Keepsake = fallen });
                 }))
-                : ValueList<Keepsake>.Empty);
+                : ValueList<Keepsake>.Empty,
+            e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty);
     }
 
     private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content)
