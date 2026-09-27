@@ -14,9 +14,9 @@ public static class MapEvents
     public static BattleState AtPhaseStart(BattleState state, GameContent content, List<GameEvent> events) =>
         Fire(state, content, events, t => t is TurnTrigger turn && turn.Turn == state.Turn && turn.Phase == state.Phase);
 
-    /// <summary>The events whose enter trigger names the tile a player unit has just ended a move on.</summary>
+    /// <summary>The events whose enter trigger lists the tile a player unit has just ended a move on.</summary>
     public static BattleState AfterMove(BattleState state, GameContent content, BattleUnit mover, List<GameEvent> events) =>
-        mover.Side != Side.Player ? state : Fire(state, content, events, t => t is EnterTrigger enter && enter.At == mover.At);
+        mover.Side != Side.Player ? state : Fire(state, content, events, t => t is EnterTrigger enter && enter.Tiles.Contains(mover.At));
 
     private static BattleState Fire(BattleState state, GameContent content, List<GameEvent> events, Func<MapEventTrigger, bool> triggered)
     {

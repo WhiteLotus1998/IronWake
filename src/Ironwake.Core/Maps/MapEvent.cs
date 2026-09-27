@@ -14,8 +14,19 @@ public abstract record MapEventTrigger;
 /// <summary>At the start of <paramref name="Phase"/> on turn <paramref name="Turn"/>, after healing terrain has healed. Never turn 1's player phase: that board is the placements.</summary>
 public sealed record TurnTrigger(int Turn, Side Phase) : MapEventTrigger;
 
-/// <summary>When a player unit ends a Move on the tile. Passing through, or starting there, does not fire it.</summary>
-public sealed record EnterTrigger(Coord At) : MapEventTrigger;
+/// <summary>
+/// When a player unit ends a Move on any of the tiles (issue 370). Passing through, or
+/// starting there, does not fire it. The event still fires once, so a second listed tile
+/// entered later does nothing. The tiles are in file order, at least one, none twice.
+/// </summary>
+public sealed record EnterTrigger(ValueList<Coord> Tiles) : MapEventTrigger
+{
+    /// <summary>An enter trigger on one tile.</summary>
+    public EnterTrigger(Coord at)
+        : this(ValueList<Coord>.Of(at))
+    {
+    }
+}
 
 /// <summary>What a map event does.</summary>
 public abstract record MapEventAction;

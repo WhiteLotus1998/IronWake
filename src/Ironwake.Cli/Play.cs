@@ -330,7 +330,7 @@ public sealed class PlaySession
         var when = mapEvent.Trigger switch
         {
             TurnTrigger turn => $"turn {turn.Turn}, {(turn.Phase == Side.Enemy ? "enemy" : "player")} phase",
-            EnterTrigger enter => $"when one of yours stops on {enter.At}",
+            EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch

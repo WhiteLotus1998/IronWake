@@ -110,6 +110,9 @@ public class MapEventTests
     [InlineData("a turn 1 player flag x", "turn 1 player never begins")]
     [InlineData("a enter 9,0 flag x", "outside the 8x4 grid")]
     [InlineData("a enter", "enter trigger needs a tile")]
+    [InlineData("a enter flag x", "enter trigger needs a tile")]
+    [InlineData("a enter 1,1 9,0 flag x", "outside the 8x4 grid")]
+    [InlineData("a enter 1,1 2,1 1,1 flag x", "enter trigger lists 1,1 twice")]
     [InlineData("a dawn 2 flag x", "unknown event trigger 'dawn'")]
     [InlineData("a turn 2 enemy", "needs an action")]
     [InlineData("a turn 2 enemy explode 1,1", "unknown event action 'explode'")]
@@ -199,6 +202,61 @@ public class MapEventTests
 
         var ended = result.Next.Try(new Move("wren", new Coord(1, 1)));
         Assert.Contains(new MapEventFired("crossed", false), ended.Events);
+    }
+
+    /// <summary>
+    /// Issue 370: an enter trigger may list several tiles. The Gate's crossing event takes
+    /// 1,1 and 1,2, and a spawn on the same pair shows the event firing once however many
+    /// of its tiles are entered.
+    /// </summary>
+    private static string TwoTiles => Gate.Replace(
+        "crossed enter 1,1 flag crossed",
+        "crossed enter 1,1 1,2 flag crossed\nriders enter 1,1 1,2 spawn brigand 7,2 group:flank behavior:aggressive");
+
+    [Fact]
+    public void AnEnterTriggerOnSeveralTilesParsesAndWritesBackInFileOrder()
+    {
+        var map = MapFixture.Parse(TwoTiles);
+
+        var crossed = map.Events.Single(e => e.Name == "crossed");
+        Assert.Equal(new EnterTrigger(ValueList<Coord>.Of(new Coord(1, 1), new Coord(1, 2))), crossed.Trigger);
+        Assert.Equal(new SpawnEnemy(new EnemyPlacement(new Coord(7, 2), "brigand", "flank", Behavior.Aggressive, false)), map.Events.Single(e => e.Name == "riders").Action);
+        var text = MapFormat.Write(map, Starter);
+        Assert.Equal(TwoTiles.Replace("\r\n", "\n"), text);
+        Assert.Equal(map, MapFixture.Parse(text));
+    }
+
+    [Theory]
+    [InlineData("hale", 1, 1)]
+    [InlineData("wren", 1, 2)]
+    public void AnEnterTriggerOnSeveralTilesFiresOnEndingAMoveOnAnyOfThem(string unit, int x, int y)
+    {
+        var result = BattleFixture.Start(map: TwoTiles).Try(new Move(unit, new Coord(x, y)));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Contains(new MapEventFired("crossed", false), result.Events);
+        Assert.True(result.Next.HasFired("crossed"));
+    }
+
+    [Fact]
+    public void AnEnterTriggerOnSeveralTilesSpawnsOnceWhenEachTileIsEntered()
+    {
+        var first = BattleFixture.Start(map: TwoTiles).Try(new Move("hale", new Coord(1, 1)));
+        var second = first.Next.Try(new Move("wren", new Coord(1, 2)));
+
+        Assert.Contains(new MapEventFired("riders", false), first.Events);
+        Assert.True(second.Accepted, second.Rejection?.Message);
+        Assert.DoesNotContain(second.Events, e => e is MapEventFired);
+        Assert.Single(second.Next.Units, u => u.Group == "flank");
+    }
+
+    [Fact]
+    public void AnEnterTriggerOnSeveralTilesDoesNotFireOnATileItDoesNotList()
+    {
+        var result = BattleFixture.Start(map: TwoTiles).Try(new Move("wren", new Coord(0, 3)));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.DoesNotContain(result.Events, e => e is MapEventFired);
     }
 
     [Fact]

@@ -410,24 +410,24 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 222's rule, on issue 351's tile: the Tollgate places no rider, and one spawn event
-    /// brings rider-1 to 13,4 at the start of enemy phase 4, under the same id on every replay.
+    /// Issue 370: the Tollgate places no rider and no longer brings one on a clock. With no
+    /// player unit stopping on the door's tiles 6,4 or 6,3, four full turns pass and rider-1
+    /// never arrives; the same script replays to the same text.
     /// </summary>
     [Fact]
-    public void TheTollgateRiderArrivesByEventOnEnemyPhaseFour()
+    public void TheTollgateRiderDoesNotArriveOnAClock()
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-play-" + Guid.NewGuid().ToString("N") + ".script");
-        File.WriteAllText(path, "show rider-1\nend\nend\nend\nend\n");
+        File.WriteAllText(path, "show rider-1\nend\nend\nend\nend\nend\nshow rider-1\n");
         try
         {
             var first = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
             var second = Run(out _, "play", "the_tollgate", "--seed", "163", "--script", path, "--content", Fixture.RealContentDirectory());
 
-            var turnOne = first[..first.IndexOf("-- player phase ends, turn 1 --", StringComparison.Ordinal)];
-            Assert.DoesNotContain("rider", turnOne.Replace("show rider-1", "").Replace("'rider-1'", ""));
-            Assert.Contains("no living unit 'rider-1'", turnOne);
-            Assert.DoesNotContain("arrives", first[..first.IndexOf("-- enemy phase, turn 4 --", StringComparison.Ordinal)]);
-            Assert.Contains("-- enemy phase, turn 4 --\nevent riders\n  rider-1 arrives at 13,4, group flank, aggressive\n", first);
+            Assert.Contains("-- enemy phase, turn 4 --", first);
+            Assert.DoesNotContain("event riders", first);
+            Assert.DoesNotContain("rider-1 arrives", first);
+            Assert.Equal(2, first.Split("ERROR: no living unit 'rider-1'").Length - 1);
             Assert.Equal(first, second);
         }
         finally
@@ -1085,7 +1085,7 @@ public class CliPlayTests
     /// <summary>
     /// Issue 256: every trigger and action an announced map can carry reads in player words,
     /// a terrain change and a flag as well as a spawn, and a player-phase turn trigger names
-    /// its phase.
+    /// its phase. An enter trigger on several tiles names each, joined by "or" (issue 370).
     /// </summary>
     [Fact]
     public void AnnouncedEventsOfEveryKindReadInPlayerWords()
@@ -1094,7 +1094,7 @@ public class CliPlayTests
         var sample = File.ReadAllText(Path.Combine(repo, "docs", "samples", "sluice_gate.map")).ReplaceLineEndings("\n");
         var map = Path.Combine(Path.GetTempPath(), "ironwake-announce-" + Guid.NewGuid().ToString("N") + ".map");
         var script = Path.ChangeExtension(map, ".script");
-        File.WriteAllText(map, sample.Replace("enemy_level: 1\n", "enemy_level: 1\nannounce: on\n") + "alarm turn 2 player flag alarm\n");
+        File.WriteAllText(map, sample.Replace("enemy_level: 1\n", "enemy_level: 1\nannounce: on\n") + "alarm turn 2 player flag alarm\nbell enter 2,1 3,2 flag bell\n");
         File.WriteAllText(script, "");
         try
         {
@@ -1103,6 +1103,7 @@ public class CliPlayTests
             Assert.Contains("  when one of yours stops on 3,1: 4,1 becomes road.\n", output);
             Assert.Contains("  turn 3, enemy phase: a brigand arrives at 9,0 (aggressive). A unit standing on 9,0 stops it.\n", output);
             Assert.Contains("  turn 2, player phase: alarm is set.\n", output);
+            Assert.Contains("  when one of yours stops on 2,1 or 3,2: bell is set.\n", output);
         }
         finally
         {
