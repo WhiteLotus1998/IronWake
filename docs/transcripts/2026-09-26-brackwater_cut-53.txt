@@ -296,8 +296,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
 archer-2 heals 3 (hp 10)
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: attack archer-2 pell
 forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
 archer-2 attacks pell
@@ -309,16 +308,7 @@ enemy: move brigand-1 5,4
 brigand-1 moves 1,4 -> 5,4 via 2,4 3,4 4,4
 enemy: wait brigand-1
 brigand-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x10)
 enemy: end
 -- enemy phase ends, turn 1 --
 -- player phase, turn 2 --
@@ -579,8 +569,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: attack archer-2 dunstan
 forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
 archer-2 attacks dunstan
@@ -591,16 +580,7 @@ enemy: move brigand-1 5,4
 brigand-1 moves 1,4 -> 5,4 via 2,4 3,4 4,4
 enemy: wait brigand-1
 brigand-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x10)
 enemy: end
 -- enemy phase ends, turn 1 --
 -- player phase, turn 2 --
@@ -850,17 +830,12 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: move brigand-1 8,3
 brigand-1 moves 5,4 -> 8,3 via 5,3 6,3 7,3
 enemy: wait brigand-1
 brigand-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x4)
 enemy: move rider-1 10,3
 rider-1 moves 4,3 -> 10,3 via 5,3 6,3 7,3 8,3 9,3
 enemy: attack rider-1 dunstan
@@ -870,10 +845,7 @@ rider-1 attacks dunstan
   dunstan hits rider-1 for 10 (hp 11)
   rider-1 hp 11, dunstan hp 14
 dunstan gains 14 exp (14)
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x4)
 enemy: end
 -- enemy phase ends, turn 2 --
 -- player phase, turn 3 --
@@ -1188,8 +1160,7 @@ rider-2 attacks rook
   rider-2 misses rook
   rook misses rider-2
   rider-2 hp 21, rook hp 17
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: end
 -- enemy phase ends, turn 3 --
 -- player phase, turn 4 --
@@ -1434,19 +1405,7 @@ threat on captain at 18,1 (Plain): no enemy in sight can strike it next phase
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x13)
 enemy: end
 -- enemy phase ends, turn 4 --
 -- player phase, turn 5 --
@@ -1622,21 +1581,12 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x9)
 enemy: move rider-2 19,3
 rider-2 moves 13,3 -> 19,3 via 14,3 15,3 16,3 17,3 18,3
 enemy: wait rider-2
 rider-2 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: end
 -- enemy phase ends, turn 5 --
 -- player phase, turn 6 --
@@ -1881,8 +1831,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: move brawler-1 19,7
 brawler-1 moves 17,7 -> 19,7 via 18,7
 enemy: wait brawler-1

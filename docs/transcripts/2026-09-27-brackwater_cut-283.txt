@@ -295,21 +295,7 @@ threat on rook at 10,1 (Water): no enemy in sight can strike it next phase
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x15)
 enemy: end
 -- enemy phase ends, turn 1 --
 -- player phase, turn 2 --
@@ -589,25 +575,17 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: move brigand-1 8,3
 brigand-1 moves 4,3 -> 8,3 via 5,3 6,3 7,3
 enemy: wait brigand-1
 brigand-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x4)
 enemy: move rider-1 9,3
 rider-1 moves 3,3 -> 9,3 via 4,3 5,3 6,3 7,3 8,3
 enemy: wait rider-1
 rider-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x4)
 enemy: end
 -- enemy phase ends, turn 2 --
 -- player phase, turn 3 --
@@ -890,14 +868,10 @@ brigand-1 attacks dunstan
   dunstan hits brigand-1 for 11 (hp 12)
   brigand-1 hp 12, dunstan hp 20
 dunstan gains 14 exp (14)
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: wait rider-1
 rider-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: end
 -- enemy phase ends, turn 3 --
 -- player phase, turn 4 --
@@ -1203,10 +1177,7 @@ enemy: move brawler-1 14,6
 brawler-1 moves 17,7 -> 14,6 via 17,6 16,6 15,6
 enemy: wait brawler-1
 brawler-1 waits
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x4)
 enemy: move rider-1 11,3
 rider-1 moves 9,3 -> 11,3 via 10,3
 enemy: attack rider-1 dunstan
@@ -1480,8 +1451,7 @@ brigand-2 attacks dunstan
   dunstan hits brigand-2 for 11 (hp 12)
   brigand-2 hp 12, dunstan hp 2
 dunstan gains 14 exp (42)
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x2)
 enemy: move shieldbearer-1 13,3
 shieldbearer-1 moves 15,3 -> 13,3 via 14,3
 enemy: attack shieldbearer-1 dunstan
@@ -1787,9 +1757,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: move brigand-2 11,3
 brigand-2 moves 8,3 -> 11,3 via 9,3 10,3
 enemy: attack brigand-2 dunstan
@@ -1799,9 +1767,7 @@ brigand-2 attacks dunstan
   dunstan hits brigand-2 for 11 (hp 12)
   brigand-2 hp 12, dunstan hp 2
 dunstan gains 14 exp (42)
-enemy: something in the dark acts
-enemy: something in the dark acts
-enemy: something in the dark acts
+enemy: something in the dark acts (x3)
 enemy: move shieldbearer-1 13,3
 shieldbearer-1 moves 15,3 -> 13,3 via 14,3
 enemy: attack shieldbearer-1 dunstan

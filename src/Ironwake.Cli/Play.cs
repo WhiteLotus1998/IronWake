@@ -690,10 +690,13 @@ public sealed class PlaySession
     /// not only the player's half (issue 152). The planner only emits attacks the core
     /// forecasts, so a null forecast here is a harness fault, like a rejected command.
     /// A grudge strike prints the planner's best alternative under its forecast (issue 331).
+    /// A run of consecutive dark commands prints as one counted line (issue 415), while the
+    /// event log keeps one line per command, the protocol's and the client's granularity.
     /// </summary>
     private void EnemyPhase()
     {
         var grudges = new Dictionary<string, EnemyAi.GrudgeStrike?>();
+        var darkRun = 0;
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
             var grudge = EnemyAi.GrudgeLog(_state, _content, command, grudges);
@@ -701,15 +704,18 @@ public sealed class PlaySession
             {
                 var hidden = Resolve(command);
                 _state = hidden.Next;
-                WriteEvent(ProtocolSession.DarkLine);
+                _log.WriteLine(ProtocolSession.DarkLine);
+                darkRun++;
                 foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
                 {
+                    darkRun = FlushDarkRun(darkRun);
                     WriteEvent(Describe(e, _content));
                 }
 
                 continue;
             }
 
+            darkRun = FlushDarkRun(darkRun);
             _out.WriteLine("enemy: " + CommandText(command));
             if (command is Attack attack)
             {
@@ -756,9 +762,28 @@ public sealed class PlaySession
             }
         }
 
+        FlushDarkRun(darkRun);
         _out.Write(MapRenderer.Render(_state, _content));
         AnnounceOutcome();
     }
+
+    /// <summary>
+    /// Prints a pending run of dark commands to the console as one line, counted when the run
+    /// is longer than one (issue 415); the count never tells a move from a wait (issue 301).
+    /// Returns the emptied run.
+    /// </summary>
+    private int FlushDarkRun(int run)
+    {
+        if (run > 0)
+        {
+            _out.WriteLine(DarkRunLine(run));
+        }
+
+        return 0;
+    }
+
+    /// <summary>The console line for <paramref name="run"/> consecutive dark commands: the bare dark line for one, counted for more.</summary>
+    public static string DarkRunLine(int run) => run == 1 ? ProtocolSession.DarkLine : $"{ProtocolSession.DarkLine} (x{run})";
 
     /// <summary>
     /// Applies one of the enemy planner's commands and records it; the planner only emits
