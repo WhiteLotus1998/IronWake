@@ -31,6 +31,7 @@ Issue 393 is in (DECISIONS/0080, provisional, amending 0077 and 0079): a guard b
 Issue 382 is in (DECISIONS/0076): at dusk a Guard group a player-phase command wakes lights its lamps, seen by the player side with rows, `forecast` and `threat` through the enemy phase that follows, named on the wake line and in the protocol's `groupWoke.lamps` and `litGroups`; Brackwater's gates are unchanged, and the three journaled Brackwater transcripts that wake the bank were regenerated (same games). Chat's seed 271 re-rate passes (8/7/7), and Code's seed 283 re-rate passes (7/7/8), so Brackwater is `tuned` (DECISIONS/0078).
 
 `validate` parses every map the campaign can load, the trials and the keep maps as well as `content/maps`, and refuses a trial named in `campaign.json` with no file (#397).
+The parity loops in `godot-parity` and `godot-windows-launch` name the script and the step before each command and, on a failure, print an `::error::` line with the exit status, `play`'s last 40 lines, or the first 20 lines of the diff (#398).
 
 ## Open forks (need Lotus)
 
