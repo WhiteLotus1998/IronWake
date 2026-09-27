@@ -103,7 +103,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
 
     private const int HitBandSeeds = 50;
 
@@ -264,7 +264,9 @@ public static class Program
     /// then issue 47's free prefix and turn-state counters, printed and never judged, with
     /// first quiet read at <paramref name="taxFloor"/>. Given a <paramref name="difficulty"/> from
     /// rules.json, every map is played under it (issue 76), so Hard is measured without the map
-    /// files changing; without one, maps are played as authored.
+    /// files changing; without one, maps are played as authored. A <paramref name="mapId"/> that
+    /// names no content map but is a map file on disk, such as a <c>docs/samples/</c> sample, is
+    /// loaded from that file (issue 429), as <c>--trace</c> already does.
     /// </summary>
     public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null)
     {
@@ -281,6 +283,11 @@ public static class Program
         if (maps.Count == 0 && content.Campaign.Keep.IsKeepMap(mapId))
         {
             maps = new[] { (mapId, MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content)) };
+        }
+
+        if (maps.Count == 0 && mapId != "--all" && File.Exists(mapId))
+        {
+            maps = new[] { (mapId, MapFiles.Load(mapId, content)) };
         }
 
         if (maps.Count == 0)

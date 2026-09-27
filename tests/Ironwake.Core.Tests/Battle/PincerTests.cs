@@ -203,4 +203,30 @@ public class PincerTests
         Assert.True(sample.PincerEnabled);
         Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(sample, Starter));
     }
+
+    /// <summary>
+    /// Issue 429: the Brackwater sample that judges the anvil arm is the shipped map in
+    /// daylight with the pincer on. Its only differences from <c>brackwater_cut.map</c> are the
+    /// added <c>pincer: on</c> line and the dropped <c>dusk</c> line; the exit rule stays 0074's.
+    /// </summary>
+    [Fact]
+    public void TheBrackwaterPincerSampleIsTheShippedMapInDaylightWithOnlyThePincerAdded()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var shippedPath = Path.Combine(repo, "content", "maps", "brackwater_cut.map");
+        var samplePath = Path.Combine(repo, "docs", "samples", "brackwater_cut_pincer.map");
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n');
+        var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
+        var sampleLines = sampleText.Split('\n');
+
+        Assert.Equal(new[] { "pincer: on" }, sampleLines.Except(shipped).ToArray());
+        Assert.Equal(new[] { "dusk: 5" }, shipped.Except(sampleLines).ToArray());
+
+        var sample = MapFiles.Load(samplePath, MapFixture.Content);
+        var original = MapFiles.Load(shippedPath, MapFixture.Content);
+        Assert.True(sample.PincerEnabled);
+        Assert.Null(sample.Dusk);
+        Assert.Equal(original.ExitAfterMove, sample.ExitAfterMove);
+        Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
+    }
 }
