@@ -79,6 +79,9 @@ public static class EnemyAi
     /// The attack options range over every weapon the unit can strike with, in inventory
     /// order; an Attack with a weapon other than the equipped one names its slot, which
     /// moves it to the front so the counter that follows uses it too (section 5, issue 99).
+    /// A boss under the veto (<see cref="BossVetoApplies"/>) whose every strike was refused
+    /// moves to the approach tile the veto passes, or stays, and then strikes the best target
+    /// in reach of that tile unvetoed: the veto picks the tile, not the swing (issue 389).
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -118,14 +121,31 @@ public static class EnemyAi
             return new Command[] { new Wait(unit.Id) };
         }
 
-        Func<Coord, bool>? refused = BossVetoApplies(state, content, unit) ? tile => BossVetoRefuses(state, content, unit, tile) : null;
-        var destination = known.Count == 0 && Dusk.Sight(state) is not null
+        var veto = BossVetoApplies(state, content, unit);
+        var destination = Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto);
+        var end = destination ?? unit.At;
+        var swing = veto ? Choose(state, content, unit, new[] { end }, reach, known, playerReach, sworn, unvetoed: true).Best : null;
+        var last = swing is null ? (Command)new Wait(unit.Id) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
+        return end != unit.At
+            ? new Command[] { new Move(unit.Id, end), last }
+            : new Command[] { last };
+    }
+
+    /// <summary>
+    /// Where a mover with no strike this phase ends: the objective drift on a dusk map when it
+    /// knows of nobody, else the approach toward the unit it is sworn against, else toward the
+    /// nearest it knows of; null means it stays. Under the boss veto (<paramref name="veto"/>)
+    /// a refused tile is no destination.
+    /// </summary>
+    private static Coord? Destination(
+        BattleState state, GameContent content, BattleUnit unit, Weapon weapon, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto)
+    {
+        Func<Coord, bool>? refused = veto ? tile => BossVetoRefuses(state, content, unit, tile) : null;
+        return known.Count == 0 && Dusk.Sight(state) is not null
             ? Drift(state, content, unit, reach, playerReach, refused)
             : (sworn is null ? null : Approach(state, content, unit, weapon, reach, new[] { sworn }, playerReach, refused))
                 ?? Approach(state, content, unit, weapon, reach, known, playerReach, refused);
-        return destination is { } to && to != unit.At
-            ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
-            : new Command[] { new Wait(unit.Id) };
     }
 
     /// <summary>
@@ -209,7 +229,46 @@ public static class EnemyAi
         }
 
         var best = BestOption(state, content, unit, tiles, reach, new[] { target }, playerReach, inDaylight);
+        if (best is null && BossVetoApplies(state, content, unit))
+        {
+            best = SwingFromEnd(state, content, unit, tiles, reach, known, playerReach, target, inDaylight);
+        }
+
         return best is null ? null : new EnemyStrike(best.Tile, best.Slot);
+    }
+
+    /// <summary>
+    /// The strike on <paramref name="target"/> a boss under the veto makes from the tile it
+    /// ends on when every strike was refused (issue 389): null unless the veto left it no
+    /// strike at all, and then the swing <see cref="PlanUnit"/> takes from its approach tile,
+    /// or its own tile when none passes, on this target, or the best on this target from
+    /// there when the swing goes to someone else by score alone.
+    /// </summary>
+    private static AttackOption? SwingFromEnd(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit target, bool inDaylight)
+    {
+        var sworn = Sworn(state, unit, known);
+        if (Choose(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight).Best is not null)
+        {
+            return null;
+        }
+
+        var end = new[] { Destination(state, content, unit, unit.EquippedWeapon(content)!, reach, known, playerReach, sworn, veto: true) ?? unit.At };
+        var swing = Choose(state, content, unit, end, reach, known, playerReach, sworn, inDaylight, unvetoed: true);
+        if (swing.Best is not { } strike)
+        {
+            return null;
+        }
+
+        if (strike.TargetId == target.Id)
+        {
+            return strike;
+        }
+
+        return swing.Keepsake || strike.TargetId == sworn?.Id
+            ? null
+            : BestOption(state, content, unit, end, reach, new[] { target }, playerReach, inDaylight, unvetoed: true);
     }
 
     /// <summary>
@@ -295,24 +354,24 @@ public static class EnemyAi
     /// </summary>
     private static (AttackOption? Best, bool Keepsake) Choose(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
-        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool inDaylight = false)
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool inDaylight = false, bool unvetoed = false)
     {
         if (sworn is not null)
         {
-            var keepsake = BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight, keepsakesOnly: true)
-                ?? BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight, keepsakesOnly: true);
+            var keepsake = BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight, keepsakesOnly: true, unvetoed)
+                ?? BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight, keepsakesOnly: true, unvetoed);
             if (keepsake is not null)
             {
                 return (keepsake, true);
             }
 
-            if (BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight) is { } grudge)
+            if (BestOption(state, content, unit, tiles, reach, new[] { sworn }, playerReach, inDaylight, unvetoed: unvetoed) is { } grudge)
             {
                 return (grudge, false);
             }
         }
 
-        return (BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight), false);
+        return (BestOption(state, content, unit, tiles, reach, known, playerReach, inDaylight, unvetoed: unvetoed), false);
     }
 
     /// <summary>
@@ -334,15 +393,16 @@ public static class EnemyAi
     /// option (DESIGN.md 13.7), the same rule the resolver holds, unless <paramref name="inDaylight"/>.
     /// Given <paramref name="keepsakesOnly"/>, only strikes with a keepsake count (issue 331).
     /// A strike the boss veto refuses is no option (<see cref="BossVetoRefuses"/>, issue 385),
-    /// checked only for an option that would beat the best so far.
+    /// checked only for an option that would beat the best so far, unless <paramref name="unvetoed"/>:
+    /// the swing from a boss's chosen end tile is not vetoed (issue 389).
     /// </summary>
     private static AttackOption? BestOption(
         BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
-        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach, bool inDaylight = false, bool keepsakesOnly = false)
+        IReadOnlyList<BattleUnit> targets, IReadOnlyList<Reach> playerReach, bool inDaylight = false, bool keepsakesOnly = false, bool unvetoed = false)
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
-        var veto = BossVetoApplies(state, content, unit);
+        var veto = !unvetoed && BossVetoApplies(state, content, unit);
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
