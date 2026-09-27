@@ -70,8 +70,7 @@ attack captain rider-2
 attack pell rider-2
 end
 move wren 19,3
-exit wren
-move rook 19,3
-exit rook
-move captain 19,3
-exit captain
+wait wren
+wait rook
+wait captain
+end
