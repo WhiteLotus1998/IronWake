@@ -28,6 +28,23 @@ public static class Dusk
     public static int? Sight(BattleState state) => Sight(state.Map, state.Turn);
 
     /// <summary>
+    /// The tiles of the living enemies no player unit sees within <paramref name="radius"/> of
+    /// <paramref name="from"/>, Manhattan, each with its distance, nearest first and ties in board
+    /// order (row, then column), the order the board's unseen line prints them. Only tiles: the
+    /// console already draws each as <see cref="Unseen"/>, so this adds salience, not knowledge
+    /// (issue 403). Empty in daylight.
+    /// </summary>
+    public static IReadOnlyList<(Coord At, int Distance)> UnseenNear(BattleState state, Coord from, int radius) =>
+        Sight(state) is null
+            ? Array.Empty<(Coord, int)>()
+            : state.UnitsOf(Side.Enemy)
+                .Where(e => !Seen(state, e))
+                .Select(e => (At: e.At, Distance: e.At.DistanceTo(from)))
+                .Where(t => t.Distance <= radius)
+                .OrderBy(t => t.Distance).ThenBy(t => t.At.Y).ThenBy(t => t.At.X)
+                .ToList();
+
+    /// <summary>
     /// Whether <paramref name="side"/> sees <paramref name="at"/> on the state's turn: always in
     /// daylight, otherwise when a living unit of that side stands within sight of it. Given
     /// <paramref name="moverId"/> and <paramref name="moverAt"/>, that unit is read as standing
