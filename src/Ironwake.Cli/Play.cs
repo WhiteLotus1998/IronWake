@@ -39,7 +39,7 @@ public sealed class PlaySession
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
-          shove <unit> <target>    on a shove map, push an adjacent unit one tile away (heft Str+Def at least its own), as the action
+          shove <unit> <target>    on a shove map, push an adjacent unit one tile away (an enemy needs heft Str+Def at least its own), as the action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
