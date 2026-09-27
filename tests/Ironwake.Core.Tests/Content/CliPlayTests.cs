@@ -783,6 +783,25 @@ public class CliPlayTests
         Assert.Contains("ottilie falls at 12,6\n", output);
     }
 
+    /// <summary>
+    /// 13.13's second play: Chat's cold seed 113 on <c>docs/samples/sallow_grange_pincer.map</c>.
+    /// Wren waits on 4,4 so the captain strikes the brawler pinned, Ansgar takes 6,5 so Teodor
+    /// pins the archer, and on turn 7 Ansgar stands on 14,8 as the anvil for the captain's strike
+    /// on the Reeve. Nobody falls; the captain seizes on turn 8.
+    /// </summary>
+    [Fact]
+    public void ChatsColdPincerPlayReplaysWithItsPins()
+    {
+        var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-113.script", 113, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  pincer: brawler-1 pinned by wren: captain hit +15\n", output);
+        Assert.Contains("  pincer: archer-2 pinned by teodor: ansgar hit +15\n", output);
+        Assert.Contains("  pincer: grange_reeve-1 pinned by ansgar: captain hit +15\n", output);
+        Assert.Contains("grange_reeve-1 falls at 14,7\n", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
