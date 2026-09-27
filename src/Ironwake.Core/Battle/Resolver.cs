@@ -808,10 +808,10 @@ public static class Resolver
     }
 
     /// <summary>
-    /// DESIGN.md 13.8's recovery: a player unit that has not acted, standing on a keepsake's
-    /// tile with a free inventory slot, takes the newest keepsake of the tile's stack (issue 295) as its action, in place of Attack,
-    /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
-    /// under the fallen's name, and no Canto follows.
+    /// DESIGN.md 13.12's shove: a player unit that has not acted pushes an orthogonally adjacent
+    /// ally one tile straight away as its action, refused by <see cref="ShoveRefusal"/>. The
+    /// pusher ends its turn; the pushed ally keeps its own Move and action, and is marked
+    /// <see cref="BattleUnit.Shoved"/> so it may not exit where it lands this phase (issue 396).
     /// </summary>
     private static (BattleState, Rejection?) ApplyShove(BattleState state, GameContent content, Shove shove, List<GameEvent> events)
     {
@@ -834,7 +834,7 @@ public static class Resolver
         var to = Beyond(unit.At, target.At);
         events.Add(new Shoved(unit.Id, target.Id, target.At, to));
         var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
-        return (next.WithUnit(target with { At = to }), null);
+        return (next.WithUnit(target with { At = to, Shoved = true }), null);
     }
 
     /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>
@@ -889,6 +889,12 @@ public static class Resolver
         return null;
     }
 
+    /// <summary>
+    /// DESIGN.md 13.8's recovery: a player unit that has not acted, standing on a keepsake's
+    /// tile with a free inventory slot, takes the newest keepsake of the tile's stack (issue 295) as its action, in place of Attack,
+    /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
+    /// under the fallen's name, and no Canto follows.
+    /// </summary>
     private static (BattleState, Rejection?) ApplyRecover(BattleState state, Recover recover, List<GameEvent> events)
     {
         var unit = Acting(state, recover.UnitId, out var rejection);
@@ -967,6 +973,11 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on"));
         }
 
+        if (unit.Shoved && !state.Map.ExitAfterMove)
+        {
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: it was shoved this turn; a unit exits from an exit it began its turn on"));
+        }
+
         events.Add(new UnitExited(unit.Id, unit.At));
         var next = state.WithoutUnit(unit.Id) with { Escaped = state.Escaped.Add(unit with { Moved = true, Acted = true, Canto = null }) };
         if (unit.IsCaptain)
@@ -1036,7 +1047,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -1055,7 +1066,7 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null });
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1130,7 +1141,7 @@ public static class Resolver
             }
 
             if (unit.Side == Side.Player && state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At)
-                && (!unit.Moved || state.Map.ExitAfterMove))
+                && ((!unit.Moved && !unit.Shoved) || state.Map.ExitAfterMove))
             {
                 yield return new Exit(unit.Id);
             }

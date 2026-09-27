@@ -200,20 +200,49 @@ public class ShoveTests
         Assert.True(result.Next.HasFired("crossed"));
     }
 
-    [Fact]
-    public void AnAllyPushedOntoAnExitStaysUntilItTakesItsOwnExit()
-    {
-        var map = Lane(true, """
+    private static string ExitLane(bool exitAfterMove) =>
+        Lane(true, """
             P captain 1,1
             P recruit:wren 1,2
-            E brigand 5,0 group:lane behavior:aggressive
+            E brigand 5,0 group:lane behavior:hold
 
-            """).Replace("win: rout", "win: escape").Replace("enemy_level: 1\n", "enemy_level: 1\nexit: 1,3 2,3\n");
+            """).Replace("win: rout", "win: escape")
+            .Replace("enemy_level: 1\n", $"enemy_level: 1\nexit: 1,3 2,3\n{(exitAfterMove ? "exit_after_move: on\n" : "")}");
 
-        var pushed = BattleFixture.Start(map: map).Do(new Shove("hale", "wren"));
+    /// <summary>
+    /// Issue 396: section 7's exit is taken only from an exit the unit began its turn on, so an
+    /// ally shoved onto one is refused with <see cref="RejectionReason.MovedBeforeExit"/> that
+    /// phase, and <see cref="Resolver.Legal"/> does not offer it.
+    /// </summary>
+    [Fact]
+    public void AnAllyShovedOntoAnExitMayNotExitThatTurn()
+    {
+        var pushed = BattleFixture.Start(map: ExitLane(false)).Do(new Shove("hale", "wren"));
 
         Assert.Equal(new Coord(1, 3), pushed.Find("wren")!.At);
-        Assert.False(pushed.HasEscaped("wren"));
+        Assert.True(pushed.Find("wren")!.Shoved);
+        var rejection = pushed.Refused(new Exit("wren"));
+        Assert.Equal(RejectionReason.MovedBeforeExit, rejection.Reason);
+        Assert.Contains("shoved", rejection.Message);
+        Assert.DoesNotContain(new Exit("wren"), Resolver.Legal(pushed, Starter));
+    }
+
+    [Fact]
+    public void AShovedAllyOnAnExitLeavesOnItsNextTurn()
+    {
+        var pushed = BattleFixture.Start(map: ExitLane(false)).Do(new Shove("hale", "wren"));
+
+        var next = pushed.Do(new EndPhase()).Do(new EndPhase());
+
+        Assert.False(next.Find("wren")!.Shoved);
+        Assert.True(next.Try(new Exit("wren")).Accepted);
+    }
+
+    [Fact]
+    public void AShovedAllyExitsAtOnceUnderExitAfterMove()
+    {
+        var pushed = BattleFixture.Start(map: ExitLane(true)).Do(new Shove("hale", "wren"));
+
         Assert.True(pushed.Try(new Exit("wren")).Accepted);
     }
 

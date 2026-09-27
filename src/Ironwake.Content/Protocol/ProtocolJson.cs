@@ -625,6 +625,11 @@ public static class ProtocolJson
             w.WriteString("grudge", grudge);
         }
 
+        if (unit.Shoved)
+        {
+            w.WriteBoolean("shoved", true);
+        }
+
         WriteRosterFields(w, u);
         w.WriteEndObject();
     }
@@ -690,7 +695,8 @@ public static class ProtocolJson
             RequiredInt(e, "placementIndex"),
             RequiredBool(e, "retreated"),
             OptionalInt(e, "canto"),
-            OptionalString(e, "grudge"));
+            OptionalString(e, "grudge"),
+            e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"));
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
