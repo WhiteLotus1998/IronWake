@@ -57,6 +57,17 @@ public static class Script
     public static string Play(GameContent content, BattleState state, string script)
     {
         var client = new ClientSession(content, state);
+        Apply(client, script);
+        return client.LogText;
+    }
+
+    /// <summary>
+    /// Submits each command a script names to a client that already exists, stepping each enemy
+    /// phase to its end, so the renderer can open a battle part of the way through (the
+    /// screenshot mode) on exactly the board the parity gate reaches.
+    /// </summary>
+    public static void Apply(ClientSession client, string script)
+    {
         foreach (var line in script.Split('\n'))
         {
             if (Parse(line, client.State) is { } command)
@@ -65,8 +76,6 @@ public static class Script
                 client.Continue();
             }
         }
-
-        return client.LogText;
     }
 
     private static bool TryCoord(string text, out Coord at)

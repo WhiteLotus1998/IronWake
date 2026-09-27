@@ -30,3 +30,42 @@ jobs:
       - run: dotnet build --no-restore --configuration Release
       - run: dotnet test --no-build --configuration Release
       - run: dotnet run --no-build --configuration Release --project src/Ironwake.Sim -- --smoke
+  godot-parity:
+    name: godot-parity
+    runs-on: ubuntu-latest
+    env:
+      GODOT_ZIP: Godot_v4.3-stable_mono_linux_x86_64.zip
+      GODOT_SHA512: 33d0539bc368ff6f30b5f15d64ec893da8639bd607df83050b5df746c3d30da99238c26dd03a16d7fe31b3a3e58680aeb5545af8784d8ce01edeff07b061ac80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - name: Fetch Godot 4.3-stable .NET and check its SHA-512
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/$GODOT_ZIP" "https://github.com/godotengine/godot/releases/download/4.3-stable/$GODOT_ZIP"
+          echo "$GODOT_SHA512  $RUNNER_TEMP/$GODOT_ZIP" | sha512sum -c -
+          unzip -q "$RUNNER_TEMP/$GODOT_ZIP" -d "$RUNNER_TEMP"
+          echo "GODOT=$RUNNER_TEMP/Godot_v4.3-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64" >> "$GITHUB_ENV"
+      - run: dotnet build --configuration Release
+      - run: dotnet build src/Ironwake.Godot/Ironwake.Godot.csproj
+      - name: Client event log matches play --log byte for byte
+        run: |
+          mkdir -p "$RUNNER_TEMP/parity"
+          for script in tests/parity/*.script; do
+            name=$(basename "$script" .script); map=${name%-*}; seed=${name##*-}
+            timeout 120 "$GODOT" --headless --path src/Ironwake.Godot -- --map "$map" --seed "$seed" --parity "$PWD/$script" "$RUNNER_TEMP/parity/$name.client.log"
+            dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$RUNNER_TEMP/parity/$name.console.log" > /dev/null
+            cmp "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log"
+            echo "$name: identical"
+          done
+      - name: The comparison fires on a log one character away
+        run: |
+          log="$RUNNER_TEMP/parity/brackwater_cut-53.console.log"
+          sed '1s/^./#/' "$log" > "$RUNNER_TEMP/parity/altered.log"
+          if cmp -s "$log" "$RUNNER_TEMP/parity/altered.log"; then echo "cmp missed an altered character"; exit 1; fi
+          echo "altered log refused"
+      - name: Mid-battle screenshot renders
+        run: |
+          timeout 120 xvfb-run -a -s "-screen 0 1280x800x24" "$GODOT" --rendering-driver opengl3 --path src/Ironwake.Godot -- --map brackwater_cut --seed 53 --script "$PWD/docs/screenshots/brackwater_cut-53-turn3.script" --select 11,3 --hover 11,3 --screenshot "$RUNNER_TEMP/screenshot.png"
+          test -s "$RUNNER_TEMP/screenshot.png"
