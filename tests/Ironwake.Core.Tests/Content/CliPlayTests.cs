@@ -836,6 +836,25 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Code's Fun Gate re-rate of Brackwater Cut on the built file (DECISIONS/0078), seed 283.
+    /// Pell's kill on the gap is noise that wakes the bank and lights its lamps; the bank marches
+    /// west on the units the chase can see, so the exits empty. One Recall moves Pell off the
+    /// brawler's path, and Wren, Rook and the captain leave on turn 6.
+    /// </summary>
+    [Fact]
+    public void TheJournaledReRateEmptiesTheExitsOnSeed283()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-283.script", 283, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("group bank wakes: noise; its lamps are lit (shieldbearer-1 17,5, soldier-1 17,6, brawler-1 17,7)\n", output);
+        Assert.Contains("shieldbearer-1 moves 17,5 -> 15,3 via 17,4 17,3 16,3\n", output);
+        Assert.Contains("pell falls at 13,3\n", output);
+        Assert.EndsWith("escaped: wren, rook, captain; left behind: pell; fell: dunstan\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-283.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 385, the boss veto: Code's seed 379 and Chat's seed 263 scripts, both made under
     /// issue 379, replayed on the built file. Each wakes the weir group with Pell on 9,6 and
     /// nobody on 10,6; under 379 the Foreman walked through his shieldbearer onto 10,6 and
