@@ -30,6 +30,8 @@ Issue 393 is in (DECISIONS/0080, provisional, amending 0077 and 0079): a guard b
 
 Issue 382 is in (DECISIONS/0076): at dusk a Guard group a player-phase command wakes lights its lamps, seen by the player side with rows, `forecast` and `threat` through the enemy phase that follows, named on the wake line and in the protocol's `groupWoke.lamps` and `litGroups`; Brackwater's gates are unchanged, and the three journaled Brackwater transcripts that wake the bank were regenerated (same games). Chat's seed 271 re-rate passes (8/7/7), and Code's seed 283 re-rate passes (7/7/8), so Brackwater is `tuned` (DECISIONS/0078).
 
+`validate` parses every map the campaign can load, the trials and the keep maps as well as `content/maps`, and refuses a trial named in `campaign.json` with no file (#397).
+
 ## Open forks (need Lotus)
 
 None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).
