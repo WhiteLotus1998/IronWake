@@ -7,6 +7,14 @@ namespace Ironwake.Client;
 public sealed record HoverForecast(string TargetId, Coord TargetAt, string Text);
 
 /// <summary>
+/// What the board marks for the event line last revealed in the enemy phase (issue 349): the
+/// line itself, the tile the actor started from, the tile it ended on or acted from, the path
+/// between them, and the tile it struck. Each is null where the event has none; a line the dark
+/// hides carries no tiles at all, since marking them would light the dark.
+/// </summary>
+public sealed record Highlight(string Line, Coord? From, Coord? To, IReadOnlyList<Coord> Path, Coord? Struck);
+
+/// <summary>
 /// The thin renderer's presenter (issue 347): everything the Godot client shows, with no
 /// rules in it. Reach, targets and forecasts are core queries; every line of the event log
 /// is the console's own text for an event (<see cref="PlaySession.Describe(GameEvent, GameContent)"/>),
@@ -19,7 +27,7 @@ public sealed class ClientSession
 {
     private readonly List<string> _log = new();
     private readonly Queue<Command> _enemy = new();
-    private readonly Queue<string> _pending = new();
+    private readonly Queue<Highlight> _pending = new();
 
     /// <summary>
     /// The command applied from each history state, by index, as the console's <c>recall list</c>
@@ -48,6 +56,13 @@ public sealed class ClientSession
     /// <summary>The last refusal or hint for the status bar, never part of the event log.</summary>
     public string? Status { get; private set; }
 
+    /// <summary>
+    /// The enemy-phase event last revealed by <see cref="Step"/>, its line the newest in the
+    /// log, kept until the next player command so the phase's last event stays marked; null
+    /// before any enemy phase and after a player command.
+    /// </summary>
+    public Highlight? Playing { get; private set; }
+
     /// <summary>The selected player unit's id, or null.</summary>
     public string? Selected { get; private set; }
 
@@ -71,6 +86,13 @@ public sealed class ClientSession
     }
 
     public void ClearSelection() => Selected = null;
+
+    /// <summary>
+    /// The unit panel (issue 349): the console's <c>show</c> lines for the unit on a tile, or
+    /// null for an empty tile or an enemy the dark hides, which the console refuses to show.
+    /// </summary>
+    public IReadOnlyList<string>? Show(Coord at) =>
+        UnitAt(at) is { } unit && Dusk.Seen(State, unit) ? PlaySession.ShowLines(State, Content, unit) : null;
 
     /// <summary>
     /// The forecast against each enemy the selected unit could strike from <paramref name="tile"/>
@@ -200,6 +222,7 @@ public sealed class ClientSession
         }
 
         Status = null;
+        Playing = null;
         Record(command);
         State = result.Next;
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
@@ -238,15 +261,16 @@ public sealed class ClientSession
             }
 
             Record(command);
+            var before = State;
             State = result.Next;
             if (dark)
             {
-                _pending.Enqueue(ProtocolSession.DarkLine);
+                _pending.Enqueue(new Highlight(ProtocolSession.DarkLine, null, null, Array.Empty<Coord>(), null));
             }
 
             foreach (var e in result.Events.Where(e => !dark || e is not UnitMoved and not UnitWaited))
             {
-                _pending.Enqueue(PlaySession.Describe(e, Content));
+                _pending.Enqueue(HighlightOf(e, PlaySession.Describe(e, Content), before, State));
             }
         }
 
@@ -255,8 +279,34 @@ public sealed class ClientSession
             return false;
         }
 
-        _log.Add(_pending.Dequeue());
+        Playing = _pending.Dequeue();
+        _log.Add(Playing.Line);
         return true;
+    }
+
+    /// <summary>
+    /// The tiles an event names, read from the state before its command (where an attacker
+    /// and its target stood) and after it (where a unit that waited, healed or gained stands).
+    /// </summary>
+    private static Highlight HighlightOf(GameEvent e, string line, BattleState before, BattleState after)
+    {
+        Coord? At(string id) => (after.Find(id) ?? before.Find(id))?.At;
+        var none = Array.Empty<Coord>();
+        return e switch
+        {
+            UnitMoved m => new Highlight(line, m.From, m.To, m.Path, null),
+            Cantoed m => new Highlight(line, m.From, m.To, m.Path, null),
+            UnitRetreated r => new Highlight(line, r.From, r.To, none, null),
+            CombatFought c => new Highlight(line, null, before.Find(c.AttackerId)?.At, none, before.Find(c.TargetId)?.At),
+            UnitDied d => new Highlight(line, null, null, none, d.At),
+            UnitSpawned s => new Highlight(line, null, s.At, none, null),
+            UnitWaited w => new Highlight(line, null, At(w.UnitId), none, null),
+            UnitHealed h => new Highlight(line, null, At(h.UnitId), none, null),
+            ExpGained x => new Highlight(line, null, At(x.UnitId), none, null),
+            LeveledUp l => new Highlight(line, null, At(l.UnitId), none, null),
+            ItemUsed i => new Highlight(line, null, At(i.UnitId), none, At(i.TargetId)),
+            _ => new Highlight(line, null, null, none, null),
+        };
     }
 
     /// <summary>

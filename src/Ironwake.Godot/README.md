@@ -1,6 +1,6 @@
 # Ironwake.Godot
 
-The thin renderer, slices 1 and 2 (issues 347 and 353, DECISIONS/0070). This is a Godot 4.3 .NET project, and it is outside `Ironwake.sln`, so `dotnet build`, `dotnet test` and `--smoke` at the repo root never need Godot. The renderer has no rules. `Main.cs` draws and routes input. Everything it shows comes from `Ironwake.Client.ClientSession`, which asks the core, and the event log is the console's own text.
+The thin renderer, slices 1 and 2 and the readability pass (issues 347, 353 and 349, DECISIONS/0070). This is a Godot 4.3 .NET project, and it is outside `Ironwake.sln`, so `dotnet build`, `dotnet test` and `--smoke` at the repo root never need Godot. The renderer has no rules. `Main.cs` draws and routes input. Everything it shows comes from `Ironwake.Client.ClientSession`, which asks the core, and the event log is the console's own text.
 
 ## Build and play
 
@@ -13,7 +13,13 @@ The C# side builds with the .NET SDK alone. `Godot.NET.Sdk` comes from NuGet. Ru
 
 - **Arguments** go after `--`: `--map <name|path>` (the default is `the_tollgate`), `--seed N`, and `--content <dir>` (the default is the repo's `content/`).
 - **Mouse.** Left-click one of your units to show its reach, then hover a tile to see the forecast from that tile against each target in range, and under it the threat on your unit if it ends there: the console's `threat` text, sleeping groups, arrivals and the dark included. Click a tile to move there, an enemy to attack it, or the unit itself to wait. A right-click clears the selection.
-- **Keys.** `E` ends the phase. The enemy phase then waits. `Space` shows its next event and `C` plays it to the end. `R` opens the Recall browser: the console's `recall list`, the newest 40 states, and a click on a state's row rewinds to it, with what it gave back in the status line. `Escape` clears the selection and closes the browser.
+- **Keys.** `E` ends the phase. The enemy phase then waits. `Space` shows its next event and `C` skips to its end. Each event is marked on the board as its line appears, and the line is drawn in the same yellow: the path a unit walked, its start tile dotted, the tile it ended on or acted from ringed, and the tile it struck bracketed in white. An act the dark hides marks nothing. `R` opens the Recall browser: the console's `recall list`, the newest 40 states, and a click on a state's row rewinds to it, with what it gave back in the status line. `Escape` clears the selection and closes the browser.
+
+## The screen (issue 349)
+
+The window is 1280x720 and scales up. The board is on the left, with each terrain present on the map in the legend under it, then what the shapes and marks mean. The side panel holds, top to bottom: the status line, the enemy phase's keys while it plays, the **forecast** box (a hint until a unit is selected and a tile pointed at, then the console's forecast and threat text), the **unit** panel (the first lines of the console's `show` for the unit pointed at, or the selected one), and the **event log**. Long lines wrap inside the panel (`TextLayout.Wrap`). Every line is in one monospaced face (DejaVu Sans Mono, Consolas or the system's monospace), so numbers align as they do in the console.
+
+Your units are blue circles and enemies are orange squares, so the side reads by shape when colour fails. At dusk an unseen tile is shaded and hatched, and an unseen enemy is a `?`. The colours live in `Ironwake.Client.Palette`. `PaletteTests` holds every terrain pair, the two sides, and each side on each terrain apart by a CIE76 distance, in full colour and under simulated deuteranopia and protanopia (Machado 2009). That is a check by arithmetic, not by eye, and it has a falsifier.
 
 ## A build to double-click (Windows)
 
@@ -43,7 +49,9 @@ dotnet run --project src/Ironwake.Cli -- campaign --from the_tollgate --seed 113
 cmp console.log client.log
 ```
 
-## The screenshot
+## The screenshots
+
+`docs/screenshots/render.sh` renders every review screenshot: each shipped map at turn 1 with the captain selected and a tile pointed at, and mid enemy phase with one event marked, plus the earlier slices' shots. It needs `GODOT` set and runs under xvfb. `--enemy-steps N` ends the player phase after any `--script` and reveals N enemy-phase events.
 
 ```
 xvfb-run -a godot --rendering-driver opengl3 --path src/Ironwake.Godot -- --map brackwater_cut --seed 53 \
