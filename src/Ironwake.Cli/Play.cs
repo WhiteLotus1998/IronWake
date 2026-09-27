@@ -1293,49 +1293,65 @@ public sealed class PlaySession
 
     private void Show(BattleUnit unit)
     {
-        var stats = _content.StatsOf(unit.Unit);
-        _out.WriteLine($"{unit.Id}: {unit.Unit.Name}, {_content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {_state.Map.TerrainAt(unit.At, _content).Label(stats.Hp)}");
-        var unitClass = _content.Class(unit.Unit.ClassId);
-        _out.WriteLine($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}  mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
-        _out.WriteLine($"  weapon: {WeaponLine(unit, _content)}");
-        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Named(item.ItemId)}{Keepsake.Suffix(item, _content)} x{item.Uses}");
-        _out.WriteLine($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
-        var ranks = _content.Class(unit.Unit.ClassId).Weapons
+        foreach (var line in ShowLines(_state, _content, unit))
+        {
+            _out.WriteLine(line);
+        }
+    }
+
+    /// <summary>
+    /// The lines <c>show &lt;unit&gt;</c> prints: who and where, stats, weapon, items, ranks,
+    /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
+    /// shows the same lines (issue 349).
+    /// </summary>
+    public static IReadOnlyList<string> ShowLines(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var lines = new List<string>();
+        var stats = content.StatsOf(unit.Unit);
+        lines.Add($"{unit.Id}: {unit.Unit.Name}, {content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {state.Map.TerrainAt(unit.At, content).Label(stats.Hp)}");
+        var unitClass = content.Class(unit.Unit.ClassId);
+        lines.Add($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}  mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
+        lines.Add($"  weapon: {WeaponLine(unit, content)}");
+        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
+        lines.Add($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
+        var ranks = content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
-        _out.WriteLine($"  ranks: {string.Join(", ", ranks)}");
-        var arts = _content.ArtsOf(unit.Unit).Select(a =>
+        lines.Add($"  ranks: {string.Join(", ", ranks)}");
+        var arts = content.ArtsOf(unit.Unit).Select(a =>
             $"{a.Ability.Id} ({a.Art.Weapon.ToString().ToLowerInvariant()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
         if (arts.Count > 0)
         {
-            _out.WriteLine($"  arts: {string.Join(", ", arts)}");
+            lines.Add($"  arts: {string.Join(", ", arts)}");
         }
 
-        var held = _content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
+        var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
         if (held.Count > 0)
         {
-            _out.WriteLine($"  abilities: {string.Join(", ", held)}");
+            lines.Add($"  abilities: {string.Join(", ", held)}");
         }
 
-        if (MasteryLine(unit, _content) is { } mastery)
+        if (MasteryLine(unit, content) is { } mastery)
         {
-            _out.WriteLine(mastery);
+            lines.Add(mastery);
         }
 
-        if (_state.CantoReachOf(unit, _content) is not null)
+        if (state.CantoReachOf(unit, content) is not null)
         {
-            _out.WriteLine($"  canto: {unit.Canto} movement left this phase");
+            lines.Add($"  canto: {unit.Canto} movement left this phase");
         }
 
-        var targets = string.Join(", ", Queries.Targets(_state, _content, unit).Select(t => t.Id));
-        _out.WriteLine($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
-        if (_state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
+        var targets = string.Join(", ", Queries.Targets(state, content, unit).Select(t => t.Id));
+        lines.Add($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
+        if (state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
         {
-            var rivals = _state.UnitsOf(Side.Player)
-                .Where(other => Rivalry.AreRivals(_state, _content, unit, other))
-                .Select(other => $"{other.Id} {Rivalry.PointsOf(_state, unit.Id, other.Id)}/{_content.Rivalry.OverwriteAt}");
+            var rivals = state.UnitsOf(Side.Player)
+                .Where(other => Rivalry.AreRivals(state, content, unit, other))
+                .Select(other => $"{other.Id} {Rivalry.PointsOf(state, unit.Id, other.Id)}/{content.Rivalry.OverwriteAt}");
             var list = string.Join(", ", rivals);
-            _out.WriteLine($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, _content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}");
+            lines.Add($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}");
         }
+
+        return lines;
     }
 
     /// <summary>
