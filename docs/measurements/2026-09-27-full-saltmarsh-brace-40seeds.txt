@@ -1,0 +1,38 @@
+full: 1 maps from /home/user/IronWake/content, 40 seeds, two-roll average
+gate 1 beatable: docs/samples/saltmarsh_ford_brace.map, heuristic wins 6/40 (15 %), winning turn median 10 p90 15 limit 18, losses 33 timeout 1 captain 0 protected, quiet tail 1.8, refused kill p50 0.8230 over 33, two-roll average: FAILED
+gate 2 decisions matter: docs/samples/saltmarsh_ford_brace.map, random wins 0/40 (0 %): ok
+gate 3 no cheap shots: docs/samples/saltmarsh_ford_brace.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: docs/samples/saltmarsh_ford_brace.map, 3 recruits x 40 seeds, median drop 0.025: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.025, se 0.066); rows are data, no recruit is judged
+  ottilie: drop 0.000 se 0.079 own [atk 214 dmg 1210 heal 0 abs 110] rest baseline [atk 323 dmg 4413 heal 0 abs 606] rest benched [atk 303 dmg 5658 heal 0 abs 700] benched losses 31 timeout 3 captain 0 protected, refused kill p50 0.8664 over 31
+  teodor: drop 0.025 se 0.066 own [atk 53 dmg 1233 heal 0 abs 189] rest baseline [atk 484 dmg 4390 heal 0 abs 527] rest benched [atk 455 dmg 5339 heal 0 abs 650] benched losses 31 timeout 4 captain 0 protected, refused kill p50 0.8674 over 31
+  wren: drop 0.025 se 0.083 own [atk 114 dmg 991 heal 0 abs 114] rest baseline [atk 423 dmg 4632 heal 0 abs 602] rest benched [atk 383 dmg 5490 heal 0 abs 784] benched losses 32 timeout 3 captain 0 protected, refused kill p50 0.8674 over 32
+  captain captain: baseline [atk 156 dmg 2189 heal 0 abs 303] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1582 ms: ok
+gate 5 forecast honesty: 10076 combats (4106 with gauntlets), 20765 strikes, hits 12538 expected 12506.0, crits 853 expected 872.3, damage mismatches 0: ok
+gate 7 speed: docs/samples/saltmarsh_ford_brace.map, 5 AI-vs-AI games, 48 turns, slowest 27 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 26269 ms: ok
+free prefix: docs/samples/saltmarsh_ford_brace.map, 6 of 2, 4, 6 tried, slack median 8 p90 3 (printed, not gated)
+  prefix 2: wins 7/40, drop -0.025 se 0.083, free
+  prefix 4: wins 10/40, drop -0.100 se 0.094, free
+  prefix 6: wins 3/40, drop 0.075 se 0.075, free
+  turns, medians over 40 games: dead 2.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 40 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 40, wake tax 0.24
+  turn 3: dead 0 quiet 0 live 40, wake tax 0.00
+  turn 4: dead 1 quiet 0 live 39, wake tax 0.00
+  turn 5: dead 2 quiet 0 live 37, wake tax 0.00
+  turn 6: dead 4 quiet 0 live 35, wake tax 0.00
+  turn 7: dead 2 quiet 0 live 37, wake tax 0.00
+  turn 8: dead 5 quiet 0 live 34, wake tax 0.00
+  turn 9: dead 6 quiet 0 live 32, wake tax 0.00
+  turn 10: dead 8 quiet 0 live 29, wake tax 0.00
+  turn 11: dead 7 quiet 0 live 29, wake tax 0.00
+  turn 12: dead 5 quiet 0 live 31, wake tax 0.00
+  turn 13: dead 0 quiet 0 live 36, wake tax 0.00
+  turn 14: dead 1 quiet 0 live 35, wake tax 0.00
+  turn 15: dead 0 quiet 0 live 34, wake tax 0.00
+  turn 16: dead 1 quiet 0 live 32, wake tax 0.00
+  turn 17: dead 1 quiet 0 live 32, wake tax 0.00
+  turn 18: dead 1 quiet 0 live 32, wake tax 0.00
+full: FAILED

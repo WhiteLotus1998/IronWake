@@ -314,4 +314,31 @@ public class BraceTests
         Assert.True(sample.BraceEnabled);
         Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(sample, Starter));
     }
+
+    /// <summary>
+    /// Issue 430: 13.14's keep round sample is the shipped Saltmarsh Ford with only
+    /// <c>brace: on</c> added, so a play of it reads against the plain map's re-rate (#131).
+    /// </summary>
+    [Fact]
+    public void TheSaltmarshBraceSampleIsTheShippedMapWithOnlyTheBraceHeaderAdded()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var shippedPath = Path.Combine(repo, "content", "maps", "saltmarsh_ford.map");
+        var samplePath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_brace.map");
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').ToList();
+        var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
+        var sampleLines = sampleText.Split('\n').ToList();
+
+        var at = sampleLines.IndexOf("brace: on");
+        Assert.True(at >= 0);
+        sampleLines.RemoveAt(at);
+        Assert.Equal(shipped, sampleLines);
+
+        var sample = MapFiles.Load(samplePath, MapFixture.Content);
+        var original = MapFiles.Load(shippedPath, MapFixture.Content);
+        Assert.True(sample.BraceEnabled);
+        Assert.False(original.BraceEnabled);
+        Assert.Equal(original with { BraceEnabled = true }, sample);
+        Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
+    }
 }

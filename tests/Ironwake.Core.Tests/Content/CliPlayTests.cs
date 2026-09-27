@@ -839,6 +839,23 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 430's hand play: Code's seed 449 on <c>docs/samples/saltmarsh_ford_brace.map</c>, the
+    /// 13.14 keep round. Ottilie steps into the braced leader's throw range as bait at 39 percent,
+    /// his answer strips the brace, and Wren kills him on the fort on turn 13.
+    /// </summary>
+    [Fact]
+    public void TheSaltmarshBracePlayReplaysWithItsBait()
+    {
+        var output = RunSample("saltmarsh_ford_brace.map", "2026-09-27-saltmarsh_ford_brace-449.script", 449, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Contains("forecast ottilie -> bandit_leader-1: dmg 4 hit 39% crit 3%; counter: none\n  brace: bandit_leader-1 braced: ottilie hit -15\n", output);
+        Assert.Contains("teodor falls at 10,1\n", output);
+        Assert.Contains("bandit_leader-1 falls at 10,0\n", output);
+    }
+
+    /// <summary>
     /// Chat's cold play of issue 419's anvil arm: seed 433 on <c>docs/samples/sallow_grange_pincer.map</c>.
     /// The closed formation leaves no tile behind the front in reach, so the archer walks to 6,7
     /// and shoots instead of anviling, and every pin in the game is the player's. The captain
