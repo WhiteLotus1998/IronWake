@@ -4,10 +4,10 @@ using static Ironwake.Core.Tests.Battle.BattleFixture;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// Shove (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map a player unit pushes an
-/// orthogonally adjacent unit one tile directly away as its action. The tile beyond must be on
-/// the map, passable for the pushed unit and empty, and the pusher's heft (Str + Def) must be at
-/// least the target's. The pushed unit keeps its flags; the AI never shoves.
+/// Shove (DESIGN.md 13.12, experiment, kept as ally pushes by issue 355): on a <c>shove: on</c>
+/// map a player unit pushes an orthogonally adjacent ally one tile directly away as its action.
+/// The tile beyond must be on the map, passable for the pushed unit and empty. An enemy is never
+/// pushed. The pushed unit keeps its flags; the AI never shoves.
 /// </summary>
 public class ShoveTests
 {
@@ -32,30 +32,25 @@ public class ShoveTests
 
     private const string Beside = """
         P captain 1,1
-        P recruit:wren 0,3
-        E brigand 2,1 group:lane behavior:aggressive
+        P recruit:wren 2,1
+        E brigand 5,0 group:lane behavior:aggressive
         E soldier 5,3 group:lane behavior:aggressive
 
         """;
 
-    /// <summary>A lane with Hale made heavy enough to move anything in the starter content.</summary>
-    private static BattleState Start(string units = Beside, bool shove = true)
-    {
-        var state = BattleFixture.Start(map: Lane(shove, units));
-        var hale = state.Find("hale")!;
-        return state.WithUnit(hale with { Unit = hale.Unit with { Stats = hale.Unit.Stats with { Str = 30 } } });
-    }
+    private static BattleState Start(string units = Beside, bool shove = true) =>
+        BattleFixture.Start(map: Lane(shove, units));
 
     [Fact]
-    public void AShovePushesTheTargetOneTileDirectlyAwayAndIsThePushersAction()
+    public void AShovePushesTheAllyOneTileDirectlyAwayAndIsThePushersAction()
     {
         var state = Start();
 
-        var result = state.Try(new Shove("hale", "brigand-1"));
+        var result = state.Try(new Shove("hale", "wren"));
 
         Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.Contains(new Shoved("hale", "brigand-1", new Coord(2, 1), new Coord(3, 1)), result.Events);
-        Assert.Equal(new Coord(3, 1), result.Next.Find("brigand-1")!.At);
+        Assert.Contains(new Shoved("hale", "wren", new Coord(2, 1), new Coord(3, 1)), result.Events);
+        Assert.Equal(new Coord(3, 1), result.Next.Find("wren")!.At);
         var hale = result.Next.Find("hale")!;
         Assert.Equal(new Coord(1, 1), hale.At);
         Assert.True(hale.Acted);
@@ -87,13 +82,13 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 0,1
-            P recruit:wren 0,3
-            E brigand 2,1 group:lane behavior:aggressive
+            P recruit:wren 2,1
+            E brigand 5,0 group:lane behavior:aggressive
             E soldier 5,3 group:lane behavior:aggressive
 
             """).Do(new Move("hale", new Coord(1, 1)));
 
-        Assert.True(state.Try(new Shove("hale", "brigand-1")).Accepted);
+        Assert.True(state.Try(new Shove("hale", "wren")).Accepted);
     }
 
     [Fact]
@@ -101,7 +96,7 @@ public class ShoveTests
     {
         var state = Start(shove: false);
 
-        Assert.Equal(RejectionReason.CannotShove, state.Refused(new Shove("hale", "brigand-1")).Reason);
+        Assert.Equal(RejectionReason.CannotShove, state.Refused(new Shove("hale", "wren")).Reason);
         Assert.DoesNotContain(Resolver.Legal(state, Starter), c => c is Shove);
     }
 
@@ -116,12 +111,12 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 1,1
-            P recruit:wren 0,3
-            E brigand 2,0 group:lane behavior:aggressive
+            P recruit:wren 2,0
+            E brigand 5,0 group:lane behavior:aggressive
 
             """);
 
-        var rejection = state.Refused(new Shove("hale", "brigand-1"));
+        var rejection = state.Refused(new Shove("hale", "wren"));
 
         Assert.Equal(RejectionReason.CannotShove, rejection.Reason);
         Assert.Contains("not beside", rejection.Message);
@@ -132,12 +127,12 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 4,1
-            P recruit:wren 0,3
-            E brigand 5,1 group:lane behavior:aggressive
+            P recruit:wren 5,1
+            E brigand 0,3 group:lane behavior:aggressive
 
             """);
 
-        Assert.Contains("off the map", state.Refused(new Shove("hale", "brigand-1")).Message);
+        Assert.Contains("off the map", state.Refused(new Shove("hale", "wren")).Message);
     }
 
     [Fact]
@@ -145,12 +140,12 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 3,0
-            P recruit:wren 0,3
-            E brigand 3,1 group:lane behavior:aggressive
+            P recruit:wren 3,1
+            E brigand 0,3 group:lane behavior:aggressive
 
             """);
 
-        Assert.Contains("cannot stand on 3,2", state.Refused(new Shove("hale", "brigand-1")).Message);
+        Assert.Contains("cannot stand on 3,2", state.Refused(new Shove("hale", "wren")).Message);
     }
 
     [Fact]
@@ -158,49 +153,31 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 1,1
-            P recruit:wren 0,3
-            E brigand 2,1 group:lane behavior:aggressive
-            E soldier 3,1 group:lane behavior:aggressive
+            P recruit:wren 2,1
+            E brigand 3,1 group:lane behavior:aggressive
 
             """);
 
-        Assert.Contains("stands on 3,1", state.Refused(new Shove("hale", "brigand-1")).Message);
+        Assert.Contains("brigand-1 stands on 3,1", state.Refused(new Shove("hale", "wren")).Message);
     }
 
     [Fact]
-    public void AShoveNeedsHeftAtLeastTheTargets()
+    public void AnEnemyIsNeverShovedHoweverHeavyThePusher()
     {
-        var state = Start();
-        var brigand = state.Find("brigand-1")!;
-        state = state.WithUnit(brigand with { Unit = brigand.Unit with { Stats = brigand.Unit.Stats with { Def = 60 } } });
+        var state = Start(units: """
+            P captain 1,1
+            P recruit:wren 0,3
+            E brigand 2,1 group:lane behavior:aggressive
+
+            """);
+        var hale = state.Find("hale")!;
+        state = state.WithUnit(hale with { Unit = hale.Unit with { Stats = hale.Unit.Stats with { Str = 60, Def = 60 } } });
 
         var rejection = state.Refused(new Shove("hale", "brigand-1"));
 
-        Assert.Contains("heft", rejection.Message);
-        Assert.True(Resolver.Heft(Starter, state.Find("hale")!) < Resolver.Heft(Starter, state.Find("brigand-1")!));
-    }
-
-    [Fact]
-    public void AnAllyShoveIgnoresHeftAndAnEnemyShoveStillChecksIt()
-    {
-        var state = BattleFixture.Start(map: Lane(true, """
-            P captain 1,2
-            P recruit:wren 1,1
-            E brigand 2,1 group:lane behavior:aggressive
-
-            """));
-        var brigand = state.Find("brigand-1")!;
-        state = state.WithUnit(brigand with { Unit = brigand.Unit with { Stats = brigand.Unit.Stats with { Def = 60 } } });
-        Assert.True(Resolver.Heft(Starter, state.Find("wren")!) < Resolver.Heft(Starter, state.Find("hale")!));
-
-        var ally = state.Try(new Shove("wren", "hale"));
-        var enemy = state.Refused(new Shove("wren", "brigand-1"));
-
-        Assert.True(ally.Accepted, ally.Rejection?.Message);
-        Assert.Equal(new Coord(1, 3), ally.Next.Find("hale")!.At);
-        Assert.Contains("heft", enemy.Message);
-        Assert.Contains(new Shove("wren", "hale"), Resolver.Legal(state, Starter));
-        Assert.DoesNotContain(new Shove("wren", "brigand-1"), Resolver.Legal(state, Starter));
+        Assert.Equal(RejectionReason.CannotShove, rejection.Reason);
+        Assert.Equal("hale cannot shove brigand-1: only allies are shoved", rejection.Message);
+        Assert.DoesNotContain(Resolver.Legal(state, Starter), c => c is Shove { TargetId: "brigand-1" });
     }
 
     [Fact]
@@ -224,28 +201,6 @@ public class ShoveTests
     }
 
     [Fact]
-    public void APushedEnemyFiresNoEnterEvent()
-    {
-        var map = Lane(true, """
-            P captain 1,1
-            P recruit:wren 5,3
-            E brigand 2,1 group:lane behavior:aggressive
-
-            events:
-            crossed enter 3,1 flag crossed
-
-            """);
-        var state = BattleFixture.Start(map: map);
-        var hale = state.Find("hale")!;
-        state = state.WithUnit(hale with { Unit = hale.Unit with { Stats = hale.Unit.Stats with { Str = 30 } } });
-
-        var result = state.Try(new Shove("hale", "brigand-1"));
-
-        Assert.True(result.Accepted, result.Rejection?.Message);
-        Assert.DoesNotContain(result.Events, e => e is FlagSet);
-    }
-
-    [Fact]
     public void AnAllyPushedOntoAnExitStaysUntilItTakesItsOwnExit()
     {
         var map = Lane(true, """
@@ -265,9 +220,15 @@ public class ShoveTests
     [Fact]
     public void OnlyPlayerUnitsShove()
     {
-        var state = Start().Do(new Wait("hale")).Do(new Wait("wren")).Do(new EndPhase());
+        var state = Start(units: """
+            P captain 1,1
+            P recruit:wren 0,3
+            E brigand 2,1 group:lane behavior:aggressive
+            E soldier 3,1 group:lane behavior:aggressive
 
-        var rejection = state.Refused(new Shove("brigand-1", "hale"));
+            """).Do(new Wait("hale")).Do(new Wait("wren")).Do(new EndPhase());
+
+        var rejection = state.Refused(new Shove("soldier-1", "brigand-1"));
 
         Assert.Equal(RejectionReason.CannotShove, rejection.Reason);
         Assert.Contains("only player units", rejection.Message);
@@ -280,7 +241,7 @@ public class ShoveTests
 
         var shoves = Resolver.Legal(state, Starter).OfType<Shove>().ToList();
 
-        Assert.Equal(new[] { new Shove("hale", "brigand-1") }, shoves);
+        Assert.Equal(new[] { new Shove("hale", "wren"), new Shove("wren", "hale") }, shoves);
         Assert.All(shoves, s => Assert.True(state.Try(s).Accepted));
     }
 
@@ -289,13 +250,13 @@ public class ShoveTests
     {
         var state = Start(units: """
             P captain 1,1
-            P recruit:wren 0,3
-            E brigand 2,1 group:post behavior:guard
+            P recruit:wren 2,1
+            E brigand 4,1 group:post behavior:guard
             E soldier 5,3 group:far behavior:aggressive
 
             """);
 
-        var result = state.Try(new Shove("hale", "brigand-1"));
+        var result = state.Try(new Shove("hale", "wren"));
 
         Assert.Contains(result.Events, e => e is GroupWoke { Group: "post" });
     }
@@ -304,11 +265,11 @@ public class ShoveTests
     public void RecallPutsTheShovedUnitBack()
     {
         var state = Start();
-        var shoved = state.Do(new Shove("hale", "brigand-1"));
+        var shoved = state.Do(new Shove("hale", "wren"));
 
         var back = shoved.Do(new Recall(state.History.Count));
 
-        Assert.Equal(new Coord(2, 1), back.Find("brigand-1")!.At);
+        Assert.Equal(new Coord(2, 1), back.Find("wren")!.At);
     }
 
     [Fact]
@@ -324,7 +285,7 @@ public class ShoveTests
     [Fact]
     public void AShoveRoundTripsThroughTheProtocol()
     {
-        var shove = new Shove("hale", "brigand-1");
+        var shove = new Shove("hale", "wren");
 
         Assert.Equal(shove, Ironwake.Content.Protocol.ProtocolJson.ReadCommand(Ironwake.Content.Protocol.ProtocolJson.Command(shove)));
     }

@@ -60,7 +60,7 @@ namespace Ironwake.Core;
 /// </param>
 /// <param name="ShoveEnabled">
 /// The <c>shove: on</c> header (DESIGN.md 13.12, experiment): a player unit may push an
-/// orthogonally adjacent unit one tile directly away as its action (<see cref="Shove"/>).
+/// orthogonally adjacent ally one tile directly away as its action (<see cref="Shove"/>).
 /// Off by default.
 /// </param>
 public sealed record MapDefinition(

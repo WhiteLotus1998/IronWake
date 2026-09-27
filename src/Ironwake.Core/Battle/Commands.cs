@@ -62,11 +62,10 @@ public sealed record Exit(string UnitId) : Command;
 public sealed record Recover(string UnitId) : Command;
 
 /// <summary>
-/// Shove an orthogonally adjacent unit (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
-/// a player unit pushes an enemy or an ally one tile directly away from itself, as its action in
-/// place of Attack, Item or Wait, after its Move or without one. The tile beyond must be on the
-/// map, passable for the pushed unit and empty, and against an enemy the pusher's heft (Str + Def)
-/// must be at least the target's; an ally consents, so no heft is checked (issue 344). A pushed ally
+/// Shove an orthogonally adjacent ally (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
+/// a player unit pushes an ally one tile directly away from itself, as its action in place of
+/// Attack, Item or Wait, after its Move or without one. The tile beyond must be on the map,
+/// passable for the pushed unit and empty. An enemy is never pushed (issue 355). The pushed ally
 /// fires the enter events of the tile it lands on. No Canto follows. The AI never shoves.
 /// </summary>
 public sealed record Shove(string UnitId, string TargetId) : Command;

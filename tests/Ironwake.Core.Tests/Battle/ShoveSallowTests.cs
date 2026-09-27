@@ -7,9 +7,10 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Issue 344's constructed position on <c>docs/samples/sallow_grange_shove.map</c> (the shipped
 /// Sallow Grange with <c>shove: on</c>): the Reeve has left the throne, the captain stands unmoved
-/// at 12,5 with Mov 4, five tiles from 16,6, and Pell can reach 11,5. An ally consents, so Pell
-/// throws the captain one tile east whatever the heft, the captain keeps his unmoved flag, and
-/// his own move seizes the throne. The same push on an enemy as heavy as the captain is refused.
+/// at 12,5 with Mov 4, five tiles from 16,6, and Pell can reach 11,5. Pell throws the captain one
+/// tile east, the captain keeps his unmoved flag, and his own move seizes the throne. The same
+/// push on the Reeve standing where the captain stood is refused, since an enemy is never pushed
+/// (issue 355).
 /// </summary>
 public class ShoveSallowTests
 {
@@ -33,7 +34,6 @@ public class ShoveSallowTests
         Assert.True(state.Map.ShoveEnabled);
         Assert.True(state.Map.IsThrone(Throne));
         Assert.Null(state.UnitAt(Throne));
-        Assert.True(Resolver.Heft(MapFixture.Content, state.Find("pell")!) < Resolver.Heft(MapFixture.Content, state.Find("captain")!));
 
         state = Apply(state, new Move("pell", new Coord(11, 5)));
         state = Apply(state, new Shove("pell", "captain"));
@@ -49,7 +49,7 @@ public class ShoveSallowTests
     }
 
     [Fact]
-    public void TheSamePushOnAnEnemyAsHeavyAsTheCaptainIsRefusedForHeft()
+    public void TheSamePushOnTheReeveIsRefused()
     {
         var state = Position();
         var captain = state.Find("captain")!;
@@ -58,13 +58,12 @@ public class ShoveSallowTests
         state = state.WithUnit(reeve with { At = new Coord(12, 5) });
         state = Apply(state, new Move("pell", new Coord(11, 5)));
         reeve = state.Find(reeve.Id)!;
-        Assert.True(Resolver.Heft(MapFixture.Content, reeve) >= Resolver.Heft(MapFixture.Content, captain));
 
         var result = Resolver.Apply(state, MapFixture.Content, new Shove("pell", reeve.Id));
 
         Assert.False(result.Accepted);
         Assert.Equal(RejectionReason.CannotShove, result.Rejection!.Reason);
-        Assert.Contains($"heft {Resolver.Heft(MapFixture.Content, state.Find("pell")!)} is under its {Resolver.Heft(MapFixture.Content, reeve)}", result.Rejection.Message);
+        Assert.EndsWith("only allies are shoved", result.Rejection.Message);
     }
 
     private static BattleState Apply(BattleState state, Command command)

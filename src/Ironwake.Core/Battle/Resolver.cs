@@ -833,10 +833,9 @@ public static class Resolver
     /// <summary>
     /// Why <paramref name="unit"/> may not shove <paramref name="target"/> (DESIGN.md 13.12), or null
     /// when it may: the map needs <c>shove: on</c>, the pusher must be a player unit, the target a
-    /// different unit orthogonally adjacent to it, the tile beyond on the map, passable for the target
-    /// and empty, and, when the target is an enemy, the pusher's heft (Str + Def) at least the
-    /// target's. An ally consents, so no heft is checked between allies (issue 344). The resolver
-    /// and <see cref="Legal"/> share it.
+    /// different ally orthogonally adjacent to it, and the tile beyond on the map, passable for the
+    /// target and empty. An enemy is never pushed (issue 355). The resolver and
+    /// <see cref="Legal"/> share it.
     /// </summary>
     public static string? ShoveRefusal(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
     {
@@ -848,6 +847,11 @@ public static class Resolver
         if (unit.Side != Side.Player)
         {
             return "only player units shove";
+        }
+
+        if (target.Side != unit.Side)
+        {
+            return "only allies are shoved";
         }
 
         if (target.Id == unit.Id || unit.At.DistanceTo(target.At) != 1)
@@ -871,26 +875,7 @@ public static class Resolver
             return $"{blocker.Id} stands on {to}";
         }
 
-        if (target.Side == unit.Side)
-        {
-            return null;
-        }
-
-        var heft = Heft(content, unit);
-        var weight = Heft(content, target);
-        if (heft < weight)
-        {
-            return $"heft {heft} is under its {weight}";
-        }
-
         return null;
-    }
-
-    /// <summary>A unit's heft for a shove (DESIGN.md 13.12): its effective Str plus Def.</summary>
-    public static int Heft(GameContent content, BattleUnit unit)
-    {
-        var stats = content.StatsOf(unit.Unit);
-        return stats.Str + stats.Def;
     }
 
     private static (BattleState, Rejection?) ApplyRecover(BattleState state, Recover recover, List<GameEvent> events)
