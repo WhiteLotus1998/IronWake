@@ -195,40 +195,8 @@ public static class Queries
     /// tiles, so taking them heaviest first (ties in line order) and keeping each one an
     /// augmenting path can still seat is the maximum.
     /// </summary>
-    public static int IfAllLand(IReadOnlyList<ThreatLine> lines)
-    {
-        var seated = new Dictionary<Coord, int>();
-        var total = 0;
-        var order = Enumerable.Range(0, lines.Count).OrderByDescending(i => lines[i].IfAllLand).ThenBy(i => i);
-        foreach (var index in order)
-        {
-            if (Seat(index, new HashSet<Coord>()))
-            {
-                total += lines[index].IfAllLand;
-            }
-        }
-
-        return total;
-
-        bool Seat(int index, HashSet<Coord> visited)
-        {
-            foreach (var tile in lines[index].Tiles ?? ValueList<Coord>.Of(lines[index].From))
-            {
-                if (!visited.Add(tile))
-                {
-                    continue;
-                }
-
-                if (!seated.TryGetValue(tile, out var holder) || Seat(holder, visited))
-                {
-                    seated[tile] = index;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
+    public static int IfAllLand(IReadOnlyList<ThreatLine> lines) =>
+        Exposure.SeatedSum(lines.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
 
     /// <summary>
     /// Every tile <paramref name="enemy"/> could strike <paramref name="target"/> from on the

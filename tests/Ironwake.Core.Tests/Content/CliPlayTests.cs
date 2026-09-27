@@ -836,26 +836,46 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 379: Code's play of seed 379 on Harrow Weir with the Foreman a guard boss. Pell's
-    /// Cinder on the shieldbearer from 9,6 wakes the weir group, and the Foreman walks through
-    /// his own shieldbearer onto 10,6 and strikes Pell on 9,6, so a ranged opener has no safe
-    /// tile. His Toll Axe counter at range 2 kills Ottilie on turn 4, a Recall takes it back, and
-    /// Dunstan and Pell kill him on 10,6.
+    /// Issue 385, the boss veto: Code's seed 379 and Chat's seed 263 scripts, both made under
+    /// issue 379, replayed on the built file. Each wakes the weir group with Pell on 9,6 and
+    /// nobody on 10,6; under 379 the Foreman walked through his shieldbearer onto 10,6 and
+    /// struck Pell there. Four party units reach 10,6, so the veto refuses it, and he waits
+    /// on 12,6 on the east bank. The 379 transcript no longer replays past that phase.
+    /// </summary>
+    [Theory]
+    [InlineData("2026-09-27-harrow_weir-379.script", 379)]
+    [InlineData("2026-09-27-harrow_weir-263.script", 263)]
+    public void TheWokenForemanRefusesTheTenSixPocket(string script, int seed)
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var output = Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
+
+        var phase = output[output.IndexOf("-- enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- enemy phase ends, turn 3 --", StringComparison.Ordinal)];
+        Assert.Contains("group weir wakes: proximity\n", output);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 12,6\n", phase);
+        Assert.Contains("enemy: wait weir_foreman-1\n", phase);
+        Assert.DoesNotContain("-> 10,6", phase);
+    }
+
+    /// <summary>
+    /// Issue 385: Code's play of seed 263 under the boss veto, the ranged-only opening. Pell
+    /// breaks the shieldbearer from 9,6 alone; the Foreman steps onto the bridge at 11,6,
+    /// where only 10,6 and 9,6 reach him, strikes nobody, and holds it. Pell's Cinder takes
+    /// his counter to 3, the ford's soldier kills Ottilie and a Recall takes it back, and
+    /// Pell kills him on turn 6.
     /// </summary>
     [Fact]
-    public void TheJournaledGuardForemanTakesARecallOnSeed379()
+    public void TheJournaledVetoForemanHoldsTheBridgeOnSeed263()
     {
-        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-379.script", 379, out var exit);
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-263-veto.script", 263, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("group weir wakes: proximity\n", output);
-        Assert.Contains("weir_foreman-1 moves 13,6 -> 10,6 via 12,6 11,6\n", output);
+        Assert.Contains("weir_foreman-1 moves 12,6 -> 11,6\n", output);
         Assert.Contains("  weir_foreman-1 hits pell for 13 (hp 3)\n", output);
-        Assert.Contains("ottilie falls at 8,6\n", output);
-        Assert.Contains("recalled to state 61; 2 charges left\n", output);
-        Assert.Contains("weir_foreman-1 falls at 10,6\n", output);
+        Assert.Contains("ottilie falls at 6,7\n", output);
+        Assert.Contains("weir_foreman-1 falls at 11,6\n", output);
         Assert.EndsWith("battle won: defeat_boss\n", output);
-        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-379.txt")).ReplaceLineEndings("\n"), output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-263-veto.txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>
