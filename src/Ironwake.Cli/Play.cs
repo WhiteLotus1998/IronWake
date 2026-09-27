@@ -1153,7 +1153,7 @@ public sealed class PlaySession
 
         var rows = new List<string>();
         lines = lines.Where(line => line.Arrives is not null || Dusk.Seen(state, line.Enemy)).ToList();
-        asleep = asleep.Select(g => g with { Members = g.Members.Where(m => Dusk.Seen(state, m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
+        asleep = asleep.Select(g => g with { Members = ValueList<BattleUnit>.From(g.Members.Where(m => Dusk.Seen(state, m))) }).Where(g => g.Members.Count > 0).ToList();
         var dark = Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e));
         if (lines.Count == 0)
         {
