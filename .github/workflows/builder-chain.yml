@@ -14,8 +14,9 @@ name: builder-chain
 # experiment run instead of stopping; an empty queue after an experiment
 # merge stops until the Table files more. A merged table/ PR (where new
 # issues are filed) and a best-effort heartbeat every 20 minutes restart a
-# stalled chain when no issue is in progress, no Builder PR is open, and no
-# Builder PR merged in the last 15 minutes. A refused wake (routine paused, daily cap) is logged, not
+# stalled chain when, 90 seconds after the trigger, no issue is in progress and
+# no Builder PR is open (a woken Builder claims its issue within about 30
+# seconds). A refused wake (routine paused, daily cap) is logged, not
 # failed.
 
 on:
@@ -58,14 +59,15 @@ jobs:
           # the schedule is best-effort and GitHub often skips it.
           case "$MERGED_BRANCH" in table/*) restart=yes ;; *) restart=no ;; esac
           if [ "$EVENT" = "schedule" ] || [ "$restart" = "yes" ]; then
+            # A woken Builder labels its issue in-progress within about 30
+            # seconds, so after 90 seconds a live run shows itself; the check
+            # looks for one instead of guessing from merge times.
+            sleep 90
             cut20h="$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
             fresh="$(gh api "repos/$REPO/issues?labels=in-progress&state=open&per_page=100" --jq "[.[] | select(.pull_request == null) | select(.updated_at > \"$cut20h\")] | length")"
             if [ "${fresh:-0}" -gt 0 ]; then echo "heartbeat: an issue is in progress; the chain is alive"; exit 0; fi
             openprs="$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '[.[] | select(.head.ref | test("^(issue/|claude/issue-|experiment/)"))] | length')"
             if [ "${openprs:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR is open; its merge fires the next run"; exit 0; fi
-            cut15m="$(date -u -d '15 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-            recent="$(gh api "repos/$REPO/pulls?state=closed&sort=updated&direction=desc&per_page=30" --jq "[.[] | select(.merged_at != null and .merged_at > \"$cut15m\") | select(.head.ref | test(\"^(issue/|claude/issue-|experiment/)\"))] | length")"
-            if [ "${recent:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR merged in the last 15 minutes and its chained run has not yet taken an issue"; exit 0; fi
           fi
 
           # The merged branch's own issue may still carry in-progress for a beat
