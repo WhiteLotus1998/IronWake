@@ -25,6 +25,8 @@ public static class MapRenderer
     public const char ExitGlyph = '>';
 
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
+    public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";
+
     public const string ShoveLegend = "shove: a player unit may push an ally beside it one tile straight away, as its action, if the tile beyond is open";
 
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
@@ -101,6 +103,11 @@ public static class MapRenderer
         if (map.ShoveEnabled)
         {
             sb.Append(ShoveLegend).Append('\n');
+        }
+
+        if (map.PincerEnabled)
+        {
+            sb.Append(PincerLegend).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -279,6 +286,11 @@ public static class MapRenderer
         if (map.ShoveEnabled)
         {
             sb.Append(ShoveLegend).Append('\n');
+        }
+
+        if (map.PincerEnabled)
+        {
+            sb.Append(PincerLegend).Append('\n');
         }
 
         if (state.Keepsakes.Count > 0)

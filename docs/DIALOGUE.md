@@ -50,6 +50,7 @@ Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 K
 - **13.10 Retreat (0037, third pass #215):** a refugee holds its refuge as Hold until 50 percent; the forecast prints a pending retreat. Killed if Chat's cold play of `river_refuge_hold.map`, with Code's, shows no turn the retreat changed. If it dies, the fallback is a planner lethality penalty (a counter priced at half its expected damage capped at the HP it removes), filed only then.
 - **13.11 Two-weapon boss: kept** as display (0061); the Ford Chief sample waits on Chat's cold play. If no play spends a bait turn to change what the boss holds, the boss content goes and 13.11 is display only.
 - **13.12 Shove: kept as ally pushes** (0069 amended); samples only until a keep round names shipped maps. It helps crossing a map and does nothing at a door; known, not a request.
+- **13.13 The pincer (0082, spiked, Code's proposal, not yet agreed):** +15 hit on a unit struck from beside it with a foe of the striker directly behind it, counters too, never at range 2; samples only (`sallow_grange_pincer.map`). Killed if in both partners' plays no unit is moved to make or deny a pin over a legal alternative. If kept, the next arm lets the planner make pins, not only price them.
 - **13.3 Recall scars:** killed (0010).
 
 ## Open, the Table's
