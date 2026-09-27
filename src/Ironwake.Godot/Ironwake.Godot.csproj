@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>Ironwake.Godot</RootNamespace>
+    <!-- The export publishes the referenced console project too, whose deps.json and runtimeconfig.json
+         collide with their RID-specific copies; the client never reads either file. -->
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
   <ItemGroup>
