@@ -7,22 +7,27 @@ using CoreSide = Ironwake.Core.Side;
 namespace Ironwake.Godot;
 
 /// <summary>
-/// The thin renderer, slice 1 (issue 347): flat tiles per terrain, units as letters in side
+/// The thin renderer, slices 1 and 2 (issues 347, 353): flat tiles per terrain, units as letters in side
 /// colours with their hp, the selected unit's reach, the forecast from a hovered tile against
-/// each target in range, and the event log in the console's own text. Every number comes from
+/// each target in range and the threat on the selected unit there, the Recall browser, and the
+/// event log in the console's own text. Every number comes from
 /// <see cref="ClientSession"/>, which asks the core; nothing here knows a rule.
 /// Arguments after <c>--</c>: <c>--map &lt;name|path&gt;</c>, <c>--seed N</c>, <c>--content dir</c>,
 /// and for the headless gate <c>--parity &lt;script&gt; &lt;out&gt;</c>, which writes the client's
 /// event log for the script and quits. <c>--script &lt;file&gt;</c> opens the battle with a script's
 /// commands already played, <c>--select &lt;x,y&gt;</c> and <c>--hover &lt;x,y&gt;</c> set the pointer
 /// as a click and a hover would, and <c>--screenshot &lt;file.png&gt;</c> saves one rendered frame
-/// and quits (issue 352; it needs a display, so CI runs it under xvfb). Keys: E ends the phase, Space steps the enemy phase one
-/// event, C continues it to the end, Escape clears the selection.
+/// and quits (issue 352; it needs a display, so CI runs it under xvfb); <c>--recall</c> opens the
+/// Recall browser. Keys: E ends the phase, Space steps the enemy phase one event, C continues it
+/// to the end, R opens or closes the Recall browser, where a click on a state's row recalls it,
+/// Escape clears the selection and closes the browser. An exported build finds <c>content/</c>
+/// beside its executable.
 /// </summary>
 public partial class Main : Node2D
 {
     private const int Tile = 40;
     private const int LogLines = 30;
+    private const int RecallRowsShown = 40;
     private static readonly Vector2 Board = new(16, 48);
 
     private ClientSession? _client;
@@ -31,11 +36,15 @@ public partial class Main : Node2D
     private string _error = "";
     private string? _screenshot;
     private int _framesDrawn;
+    private bool _recallOpen;
+
+    /// <summary>The side panel's lines as last drawn, each with the history state a click on it recalls, if any.</summary>
+    private List<(string Text, int? Recall)> _panel = new();
 
     public override void _Ready()
     {
         var args = OS.GetCmdlineUserArgs();
-        var contentDir = Arg(args, "--content") ?? ProjectSettings.GlobalizePath("res://../../content");
+        var contentDir = Arg(args, "--content") ?? DefaultContent();
         var mapArg = Arg(args, "--map") ?? "the_tollgate";
         var seed = ulong.TryParse(Arg(args, "--seed"), out var parsed) ? parsed : 1UL;
         try
@@ -65,6 +74,7 @@ public partial class Main : Node2D
             }
 
             _hover = CoordArg(args, "--hover");
+            _recallOpen = Array.IndexOf(args, "--recall") >= 0;
             _screenshot = Arg(args, "--screenshot");
         }
         catch (Exception e) when (e is ContentException or MapException or IOException)
@@ -76,6 +86,18 @@ public partial class Main : Node2D
                 GetTree().Quit(1);
             }
         }
+    }
+
+    /// <summary>
+    /// The repo's <c>content/</c> when run from the source tree; in an exported build, which has
+    /// no source tree, the <c>content/</c> folder beside the executable.
+    /// </summary>
+    private static string DefaultContent()
+    {
+        var source = ProjectSettings.GlobalizePath("res://../../content");
+        return OS.HasFeature("editor") || Directory.Exists(source)
+            ? source
+            : Path.Combine(Path.GetDirectoryName(OS.GetExecutablePath()) ?? ".", "content");
     }
 
     private static string? Arg(string[] args, string name)
@@ -121,6 +143,9 @@ public partial class Main : Node2D
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when TileAt(click.Position) is { } at:
                 _client.Click(at);
                 break;
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when PanelRecallAt(click.Position) is { } state:
+                _client.Recall(state);
+                break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right }:
                 _client.ClearSelection();
                 break;
@@ -136,8 +161,12 @@ public partial class Main : Node2D
                     case Key.C:
                         _client.Continue();
                         break;
+                    case Key.R:
+                        _recallOpen = !_recallOpen;
+                        break;
                     case Key.Escape:
                         _client.ClearSelection();
+                        _recallOpen = false;
                         break;
                     default:
                         return;
@@ -161,6 +190,21 @@ public partial class Main : Node2D
         var local = position - Board;
         var at = new Coord((int)Mathf.Floor(local.X / Tile), (int)Mathf.Floor(local.Y / Tile));
         return _client.State.Map.Contains(at) ? at : null;
+    }
+
+    /// <summary>The side panel's top-left, where its first line's baseline sits.</summary>
+    private Vector2 PanelOrigin => new(Board.X + _client!.State.Map.Width * Tile + 16, 48);
+
+    /// <summary>The history state of the Recall browser row under a click on the side panel, or null.</summary>
+    private int? PanelRecallAt(Vector2 position)
+    {
+        if (_client is null || !_recallOpen || position.X < PanelOrigin.X)
+        {
+            return null;
+        }
+
+        var line = (int)Mathf.Floor((position.Y - PanelOrigin.Y + 13) / 16);
+        return line >= 0 && line < _panel.Count ? _panel[line].Recall : null;
     }
 
     public override void _Draw()
@@ -221,33 +265,84 @@ public partial class Main : Node2D
             DrawString(font, corner + new Vector2(4, 37), unit.Hp.ToString(), fontSize: 11, modulate: Colors.White);
         }
 
-        var panel = new Vector2(Board.X + map.Width * Tile + 16, 48);
-        var line = 0;
-        foreach (var text in PanelLines())
+        var panel = PanelOrigin;
+        _panel = PanelLines().ToList();
+        for (var line = 0; line < _panel.Count; line++)
         {
-            DrawString(font, panel + new Vector2(0, line * 16), text, fontSize: 13, modulate: Colors.White);
-            line++;
+            var (text, recall) = _panel[line];
+            DrawString(font, panel + new Vector2(0, line * 16), text, fontSize: 13, modulate: recall is null ? Colors.White : new Color(0.6f, 0.8f, 1f));
         }
     }
 
-    private IEnumerable<string> PanelLines()
+    private IEnumerable<(string Text, int? Recall)> PanelLines()
+    {
+        foreach (var text in StatusLines())
+        {
+            yield return (text, null);
+        }
+
+        if (_recallOpen)
+        {
+            yield return ("-- recall: click a state to rewind to it; R closes --", null);
+            var rows = _client!.RecallRows;
+            var states = rows.Where(r => r.State is not null).ToList();
+            foreach (var row in rows.Where(r => r.State is null))
+            {
+                yield return (row.Text, null);
+            }
+
+            if (states.Count > RecallRowsShown)
+            {
+                yield return ($"  ({states.Count - RecallRowsShown} earlier states not shown; recall list in the console has them all)", null);
+            }
+
+            foreach (var row in states.Skip(Math.Max(0, states.Count - RecallRowsShown)))
+            {
+                yield return (row.Text, row.State);
+            }
+
+            yield break;
+        }
+
+        foreach (var text in BoardLines())
+        {
+            yield return (text, null);
+        }
+    }
+
+    private IEnumerable<string> StatusLines()
     {
         var client = _client!;
         if (client.Status is { } status)
         {
-            yield return "! " + status;
+            foreach (var text in status.Split('\n'))
+            {
+                yield return "! " + text;
+            }
         }
 
         if (client.EnemyPhasePlaying)
         {
             yield return "enemy phase: Space steps, C continues";
         }
+    }
 
+    private IEnumerable<string> BoardLines()
+    {
+        var client = _client!;
         if (_hover is { } tile && client.Selected is not null)
         {
             foreach (var forecast in client.Hover(tile))
             {
                 foreach (var text in forecast.Text.Split('\n'))
+                {
+                    yield return text;
+                }
+            }
+
+            if (client.Threat(tile) is { } threat)
+            {
+                foreach (var text in threat.Split('\n'))
                 {
                     yield return text;
                 }

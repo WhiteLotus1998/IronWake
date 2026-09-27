@@ -7,3 +7,6 @@ obj/
 .idea/
 TestResults/
 *.swp
+
+# Godot exports (src/Ironwake.Godot/export_presets.cfg)
+/build/
