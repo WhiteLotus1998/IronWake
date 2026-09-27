@@ -1,4 +1,5 @@
 using Godot;
+using Ironwake.Cli;
 using Ironwake.Client;
 using Ironwake.Content;
 using Ironwake.Core;
@@ -22,6 +23,12 @@ namespace Ironwake.Godot;
 /// to the end, R opens or closes the Recall browser, where a click on a state's row recalls it,
 /// Escape clears the selection and closes the browser. An exported build finds <c>content/</c>
 /// beside its executable.
+/// With <c>--campaign</c> (issue 360) it plays the campaign through <see cref="CampaignClient"/>
+/// instead, from the first map or from <c>--from &lt;map&gt;</c>: the between-map screen shows the
+/// console's roster, shop, deployment and keep lines; a click on a unit's row selects it, a click on
+/// a ware buys it for that unit, B benches or unbenches it, M or a click on the march row marches,
+/// and L leaves a decided battle. <c>--campaign-parity &lt;script&gt; &lt;out&gt;</c> writes the
+/// presenter's event log for a <c>campaign --script</c> file and quits.
 /// </summary>
 public partial class Main : Node2D
 {
@@ -31,6 +38,13 @@ public partial class Main : Node2D
     private static readonly Vector2 Board = new(16, 48);
 
     private ClientSession? _client;
+    private CampaignClient? _campaign;
+
+    /// <summary>The roster unit selected on the between-map screen, which a ware is bought for and B benches.</summary>
+    private string? _screenUnit;
+
+    /// <summary>The between-map screen's lines as last drawn, each with what a click on it does, if anything.</summary>
+    private List<(string Text, Action? Click, bool Selected)> _screen = new();
     private char[] _letters = Array.Empty<char>();
     private Coord? _hover;
     private string _error = "";
@@ -50,6 +64,22 @@ public partial class Main : Node2D
         try
         {
             var content = ContentLoader.Load(contentDir);
+            if (Array.IndexOf(args, "--campaign") >= 0 || Array.IndexOf(args, "--campaign-parity") >= 0)
+            {
+                var from = Arg(args, "--from");
+                _campaign = new CampaignClient(content, contentDir, from is null ? CampaignRecord.Start(content, seed) : CampaignRecord.StartAt(content, seed, from));
+                var campaignParity = Array.IndexOf(args, "--campaign-parity");
+                if (campaignParity >= 0 && campaignParity + 2 < args.Length)
+                {
+                    File.WriteAllText(args[campaignParity + 2], Ironwake.Client.Script.PlayCampaign(_campaign, File.ReadAllText(args[campaignParity + 1])));
+                    GetTree().Quit(0);
+                    return;
+                }
+
+                _screenshot = Arg(args, "--screenshot");
+                return;
+            }
+
             var mapPath = File.Exists(mapArg) ? mapArg : Path.Combine(contentDir, "maps", mapArg + ".map");
             var map = MapFiles.Load(mapPath, content);
             var state = BattleState.From(map, content, content.Cast, seed);
@@ -77,11 +107,11 @@ public partial class Main : Node2D
             _recallOpen = Array.IndexOf(args, "--recall") >= 0;
             _screenshot = Arg(args, "--screenshot");
         }
-        catch (Exception e) when (e is ContentException or MapException or IOException)
+        catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
         {
             _error = "ERROR: " + e.Message;
             GD.PrintErr(_error);
-            if (Array.IndexOf(args, "--parity") >= 0 || Array.IndexOf(args, "--screenshot") >= 0)
+            if (Array.IndexOf(args, "--parity") >= 0 || Array.IndexOf(args, "--campaign-parity") >= 0 || Array.IndexOf(args, "--screenshot") >= 0)
             {
                 GetTree().Quit(1);
             }
@@ -130,6 +160,12 @@ public partial class Main : Node2D
 
     public override void _UnhandledInput(InputEvent input)
     {
+        if (_campaign is not null && _client is null)
+        {
+            ScreenInput(input);
+            return;
+        }
+
         if (_client is null)
         {
             return;
@@ -168,6 +204,10 @@ public partial class Main : Node2D
                         _client.ClearSelection();
                         _recallOpen = false;
                         break;
+                    case Key.L when _campaign is not null:
+                        _campaign.Leave();
+                        SyncBattle();
+                        break;
                     default:
                         return;
                 }
@@ -178,6 +218,119 @@ public partial class Main : Node2D
         }
 
         QueueRedraw();
+    }
+
+    /// <summary>Opens the campaign's battle when one has begun, and returns to the screen when it is left.</summary>
+    private void SyncBattle()
+    {
+        _client = _campaign!.Battle;
+        _recallOpen = false;
+        _hover = null;
+        if (_client is not null)
+        {
+            _letters = MapRenderer.Letters(_client.State.Map, _client.Content);
+        }
+    }
+
+    /// <summary>The between-map screen's input: a click on a row does what it offers; M marches; B benches or unbenches the selected unit.</summary>
+    private void ScreenInput(InputEvent input)
+    {
+        var campaign = _campaign!;
+        switch (input)
+        {
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click:
+                var line = (int)Mathf.Floor((click.Position.Y - 48 + 13) / 16);
+                if (line >= 0 && line < _screen.Count && _screen[line].Click is { } action)
+                {
+                    action();
+                }
+
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
+                campaign.March();
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.B } when _screenUnit is { } unit:
+                if (campaign.Record.Benched.Contains(unit))
+                {
+                    campaign.Unbench(unit);
+                }
+                else
+                {
+                    campaign.Bench(unit);
+                }
+
+                break;
+            default:
+                return;
+        }
+
+        SyncBattle();
+        QueueRedraw();
+    }
+
+    /// <summary>
+    /// The between-map screen: the console's own lines, with the roster rows selecting a unit, a
+    /// row per ware buying it for that unit, and a march row; then the status and the event log.
+    /// </summary>
+    private IEnumerable<(string Text, Action? Click, bool Selected)> ScreenLines()
+    {
+        var campaign = _campaign!;
+        var record = campaign.Record;
+        var content = campaign.Content;
+        if (campaign.Status is { } status)
+        {
+            foreach (var text in status.Split('\n'))
+            {
+                yield return ("! " + text, null, false);
+            }
+        }
+
+        if (campaign.NextMap is { } map)
+        {
+            yield return (CampaignSession.ScreenHeading(record, content, map), null, false);
+            yield return ("roster: click a unit to select it; B benches or unbenches it", null, false);
+            foreach (var unit in record.Roster)
+            {
+                var id = unit.Id;
+                yield return (CampaignSession.UnitLines(record, content, unit, detail: false)[0], () => _screenUnit = id, id == _screenUnit);
+            }
+
+            if (record.Fallen.Count > 0)
+            {
+                yield return (CampaignSession.RosterLines(record, content)[^1], null, false);
+            }
+
+            foreach (var text in CampaignSession.ShopLines(record, content))
+            {
+                yield return (text, null, false);
+            }
+
+            yield return (_screenUnit is null ? "wares: select a unit to buy for it" : $"wares: click one to buy it for {_screenUnit}", null, false);
+            foreach (var ware in campaign.Stock)
+            {
+                var id = ware;
+                yield return ("  " + CampaignSession.WareText(content, id), _screenUnit is { } buyer ? () => campaign.Buy(id, buyer) : null, false);
+            }
+
+            yield return (CampaignSession.DeploymentLine(record, content, map), null, false);
+            if (record.KeepMenuRefusal(content) is null)
+            {
+                foreach (var text in campaign.KeepLines())
+                {
+                    yield return (text, null, false);
+                }
+            }
+
+            yield return ($"[ march to {map.Name} ]  (M)", () => campaign.March(), false);
+        }
+
+        yield return ("", null, false);
+        yield return ("-- event log --", null, false);
+        var log = campaign.LogText.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        foreach (var text in log.Skip(Math.Max(0, log.Length - LogLines)))
+        {
+            yield return (text, null, false);
+        }
     }
 
     private Coord? TileAt(Vector2 position)
@@ -210,6 +363,20 @@ public partial class Main : Node2D
     public override void _Draw()
     {
         var font = ThemeDB.FallbackFont;
+        if (_campaign is not null && _client is null)
+        {
+            DrawString(font, new Vector2(16, 28), _campaign.Over ? "campaign over" : "between maps", fontSize: 18, modulate: Colors.White);
+            _screen = ScreenLines().ToList();
+            for (var line = 0; line < _screen.Count; line++)
+            {
+                var (text, click, selected) = _screen[line];
+                var colour = selected ? Colors.Yellow : click is null ? Colors.White : new Color(0.6f, 0.8f, 1f);
+                DrawString(font, new Vector2(16, 48 + line * 16), text, fontSize: 13, modulate: colour);
+            }
+
+            return;
+        }
+
         if (_client is null)
         {
             DrawString(font, new Vector2(16, 32), _error, fontSize: 16, modulate: Colors.White);
@@ -324,6 +491,19 @@ public partial class Main : Node2D
         if (client.EnemyPhasePlaying)
         {
             yield return "enemy phase: Space steps, C continues";
+        }
+
+        if (_campaign is not null)
+        {
+            if (_campaign.Status is { } refusal)
+            {
+                yield return "! " + refusal;
+            }
+
+            if (client.State.Outcome.IsOver && !client.EnemyPhasePlaying)
+            {
+                yield return "the battle is decided: L leaves it";
+            }
         }
     }
 

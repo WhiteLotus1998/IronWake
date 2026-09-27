@@ -78,6 +78,50 @@ public static class Script
         }
     }
 
+    /// <summary>
+    /// Plays a whole <c>campaign --script</c> through a fresh campaign presenter (issue 360) and
+    /// returns its event log. On the between-map screen a line that changes the record is taken as
+    /// the screen's action (buy, repair, certify, trial, build, bench, unbench, march); a listing
+    /// prints no event and is skipped. In a battle, <c>leave</c> leaves it and every other line is
+    /// read as <see cref="Parse"/> reads a <c>play</c> line, each enemy phase stepped to its end.
+    /// </summary>
+    public static string PlayCampaign(CampaignClient campaign, string script)
+    {
+        foreach (var line in script.Split('\n'))
+        {
+            var words = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (campaign.Battle is { } battle)
+            {
+                if (words is ["leave"])
+                {
+                    campaign.Leave();
+                }
+                else if (Parse(line, battle.State) is { } command)
+                {
+                    battle.Submit(command);
+                    battle.Continue();
+                }
+
+                continue;
+            }
+
+            _ = words switch
+            {
+                ["buy", var item, var unit] => campaign.Buy(item, unit),
+                ["repair", var unit, var slot] when int.TryParse(slot, out var at) => campaign.Repair(unit, at - 1),
+                ["certify", var unit, var classId] => campaign.Certify(unit, classId),
+                ["trial", var unit, var classId] => campaign.Trial(unit, classId),
+                ["build", var edit, var at] when TryCoord(at, out var tile) => campaign.Build(edit, tile),
+                ["bench", var unit] => campaign.Bench(unit),
+                ["unbench", var unit] => campaign.Unbench(unit),
+                ["march"] => campaign.March(),
+                _ => false,
+            };
+        }
+
+        return campaign.LogText;
+    }
+
     private static bool TryCoord(string text, out Coord at)
     {
         at = default;

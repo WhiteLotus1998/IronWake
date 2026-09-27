@@ -63,6 +63,26 @@ public sealed record CampaignRecord(
         return new CampaignRecord(content.Cast, ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty);
     }
 
+    /// <summary>
+    /// A new campaign that opens on <paramref name="mapId"/> instead of the first map (issue 360):
+    /// the cast in roster order, the starting purse, nobody benched, the maps before it skipped. A
+    /// map is tuned on its own named roster, so the beta can open on the first tuned map. The
+    /// campaign seed is shifted back by the map's index so that its battle plays on
+    /// <paramref name="seed"/> itself, as <see cref="BattleSeed"/> promises for the opening map:
+    /// <c>play &lt;map&gt; --seed N</c> reproduces its rolls. Refuses a map the campaign does not list.
+    /// </summary>
+    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty)
+    {
+        var start = Start(content, seed, difficulty);
+        var index = content.Campaign.Maps.ToList().FindIndex(m => m.MapId == mapId);
+        if (index < 0)
+        {
+            throw new ArgumentException($"the campaign has no map '{mapId}'; it lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
+        }
+
+        return start with { MapIndex = index, Seed = unchecked(seed - (ulong)index) };
+    }
+
     /// <summary>Whether every map of the campaign has been won.</summary>
     public bool IsFinished(GameContent content) => MapIndex >= content.Campaign.Maps.Count;
 
