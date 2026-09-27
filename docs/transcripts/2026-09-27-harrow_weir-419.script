@@ -1,0 +1,80 @@
+move pell 3,5
+attack pell brigand-1
+move ottilie 1,3
+attack ottilie brigand-1
+move captain 3,4
+attack captain brigand-1
+move teodor 4,4
+wait teodor
+move keziah 3,6
+wait keziah
+move dunstan 3,7
+wait dunstan
+end
+move teodor 6,4
+wait teodor
+move captain 5,5
+wait captain
+move pell 4,6
+wait pell
+move keziah 6,6
+wait keziah
+move dunstan 5,8
+wait dunstan
+move ottilie 3,5
+wait ottilie
+end
+move teodor 6,3
+wait teodor
+move ottilie 4,5
+wait ottilie
+wait captain
+wait pell
+wait keziah
+move dunstan 6,7
+wait dunstan
+end
+attack ottilie rider-1
+move teodor 6,4
+attack teodor rider-1
+attack captain rider-1
+move keziah 8,6
+wait keziah
+move pell 7,6
+wait pell
+move dunstan 7,7
+wait dunstan
+end
+move pell 9,6
+attack pell shieldbearer-1 2
+move teodor 6,6
+wait teodor
+move dunstan 8,7
+wait dunstan
+move captain 7,6
+wait captain
+move ottilie 6,5
+wait ottilie
+move keziah 10,6
+wait keziah
+end
+move keziah 11,6
+attack keziah weir_foreman-1 2
+move pell 10,6
+attack pell weir_foreman-1 2
+move ottilie 5,4
+attack ottilie brigand-3
+move captain 7,5
+attack captain brigand-3
+move dunstan 8,8
+attack dunstan brawler-1
+move teodor 9,6
+wait teodor
+end
+move keziah 12,6
+attack keziah weir_foreman-1
+recall 121
+move keziah 12,6
+wait keziah
+move pell 11,6
+attack pell weir_foreman-1
