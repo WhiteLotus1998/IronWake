@@ -105,7 +105,7 @@ jobs:
             -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
             -H "anthropic-version: 2023-06-01" \
             -H "Content-Type: application/json" \
-            -d "$payload" || echo 000)"
+            -d "$payload" || true)"
           cat /tmp/fire.out; echo
           case "$code" in
             2*) echo "builder: woken ($ready ready)" ;;

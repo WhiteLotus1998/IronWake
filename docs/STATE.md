@@ -36,6 +36,8 @@ The parity loops in `godot-parity` and `godot-windows-launch` name the script an
 
 At dusk, while any enemy is in the dark, an empty `threat` reads `no enemy in sight can strike it next phase` (#399); the Brackwater seed 53 and 283 transcripts carry the new line.
 
+builder-chain's triggers (merged `issue/`, `claude/issue-`, `experiment/`, `table/`; dispatch; the 20-minute heartbeat) are recorded in DECISIONS/0050's amendment and ROUTINES.md section 6 (#400). Whether the heartbeat stays is Lotus's call on #406, and the chain stands down while that `fork` is open.
+
 ## Open forks (need Lotus)
 
 None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).
