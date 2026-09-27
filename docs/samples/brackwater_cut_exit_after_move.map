@@ -1,4 +1,4 @@
-name: Brackwater Cut (dusk)
+name: Brackwater Cut
 size: 20x12
 win: escape
 turn_limit: 8
@@ -6,7 +6,7 @@ recall: 3
 enemy_level: 3
 exit: 19,3 19,4 19,5 19,6 19,7 19,8
 exit_after_move: on
-dusk: 7
+dusk: 5
 
 ..........~~~.......
 ..^.......~F~.......

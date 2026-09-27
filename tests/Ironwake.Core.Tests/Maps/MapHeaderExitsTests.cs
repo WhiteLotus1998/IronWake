@@ -46,4 +46,24 @@ public class MapHeaderExitsTests
         var rout = Assert.Throws<MapException>(() => MapFixture.Parse(MapFixture.OldMillRoad.Replace("enemy_level: 1\n", "enemy_level: 1\nexit: 0,9 1,9\n")));
         Assert.Contains("exit tiles are only for win: escape, and this map's win is rout", rout.Message);
     }
+
+    [Fact]
+    public void TheExitAfterMoveHeaderRoundTripsAndIsOffByDefault()
+    {
+        var text = Escape("exit: 0,9 1,9\nexit_after_move: on");
+
+        var map = MapFixture.Parse(text);
+
+        Assert.True(map.ExitAfterMove);
+        Assert.Equal(text, MapFormat.Write(map, MapFixture.Content));
+        Assert.False(MapFixture.Parse(Escape("exit: 0,9 1,9")).ExitAfterMove);
+    }
+
+    [Fact]
+    public void TheExitAfterMoveHeaderIsRefusedOffAnEscapeMap()
+    {
+        var ex = Assert.Throws<MapException>(() => MapFixture.Parse(MapFixture.OldMillRoad.Replace("enemy_level: 1\n", "enemy_level: 1\nexit_after_move: on\n")));
+
+        Assert.Contains("exit_after_move: on needs win: escape", ex.Message);
+    }
 }

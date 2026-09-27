@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "difficulty", "certification" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "exit_after_move", "difficulty", "certification" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -83,6 +83,11 @@ public static class MapFormat
         if (map.ShoveEnabled)
         {
             sb.Append("shove: on\n");
+        }
+
+        if (map.ExitAfterMove)
+        {
+            sb.Append("exit_after_move: on\n");
         }
 
         if (map.Dusk is { } dusk)
@@ -206,6 +211,11 @@ public static class MapFormat
             var keepsakes = ParseOn(header, "keepsakes");
             var grudges = ParseOn(header, "grudges");
             var shove = ParseOn(header, "shove");
+            var exitAfterMove = ParseOn(header, "exit_after_move");
+            if (exitAfterMove && win != WinCondition.Escape)
+            {
+                throw ErrorAt(header["exit_after_move"].Line, "exit_after_move: on needs win: escape");
+            }
             int? dusk = header.ContainsKey("dusk") ? ParseInt(header, "dusk", 1, MapDefinition.MaxSide * 2, required: true, fallback: 0) : null;
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
@@ -222,7 +232,7 @@ public static class MapFormat
                 throw ErrorAt(header["announce"].Line, "announce: on needs an events: block to announce");
             }
 
-            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove);
+            var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
             Validate(map);
             return map;
         }

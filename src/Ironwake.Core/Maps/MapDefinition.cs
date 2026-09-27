@@ -63,6 +63,12 @@ namespace Ironwake.Core;
 /// orthogonally adjacent ally one tile directly away as its action (<see cref="Shove"/>).
 /// Off by default.
 /// </param>
+/// <param name="ExitAfterMove">
+/// The <c>exit_after_move: on</c> header: the Escape rule before issue 377, under which a unit
+/// may move onto an exit and exit in the same turn. It is kept only on the sample maps that
+/// replay journaled plays made under that rule. Off by default, and then an exit is taken
+/// without a Move, from the exit tile the unit began its turn on.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -86,7 +92,8 @@ public sealed record MapDefinition(
     bool KeepsakesEnabled = false,
     int? Dusk = null,
     bool GrudgesEnabled = false,
-    bool ShoveEnabled = false)
+    bool ShoveEnabled = false,
+    bool ExitAfterMove = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

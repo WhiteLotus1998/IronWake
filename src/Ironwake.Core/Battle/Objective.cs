@@ -24,7 +24,7 @@ public static class Objective
             WinCondition.Rout => $"defeat every enemy {by}",
             WinCondition.DefeatBoss => $"defeat the boss ({MapRenderer.BossGlyph}) {by}",
             WinCondition.Survive => $"hold until the end of turn {map.TurnLimit}",
-            WinCondition.Escape => $"the captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}) {by}; anyone still on the board is left behind",
+            WinCondition.Escape => $"the captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}) {by}{(map.ExitAfterMove ? "" : "; a unit that starts its turn on an exit may leave")}; anyone still on the board is left behind",
             _ => throw new ArgumentOutOfRangeException(nameof(state), map.Win, "unknown win condition"),
         };
         var lose = map.ProtectId is { } protect
