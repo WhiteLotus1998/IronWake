@@ -298,7 +298,61 @@ public class DuskTests
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
 
         Assert.StartsWith($"threat on hale at 0,0 (Plain): {claim}", text);
-        Assert.Equal(dark, text.Contains("and whatever is in the dark"));
+        Assert.Equal(dark, text.Contains("in the dark"));
+    }
+
+    /// <summary>
+    /// Issue 403: the longest reach is the most move of any class plus the most range of any
+    /// weapon, 8 on the shipped content (the outrider's 6 and range 2), and it follows the content,
+    /// so a longer weapon widens it and a content with no classes counts range alone.
+    /// </summary>
+    [Fact]
+    public void TheLongestReachIsTheMostMovePlusTheMostRangeInTheContent()
+    {
+        var longBow = Starter with { Weapons = Starter.Weapons.SetItem("long_bow", Starter.Weapon("iron_bow") with { Id = "long_bow", MaxRange = 3 }) };
+        var noClasses = Starter with { Classes = Starter.Classes.Clear() };
+
+        Assert.Equal(8, Starter.LongestReach);
+        Assert.Equal(9, longBow.LongestReach);
+        Assert.Equal(2, noClasses.LongestReach);
+    }
+
+    /// <summary>
+    /// Issue 403: at dusk <c>threat</c> lists the unseen tiles within the longest reach of the tile
+    /// asked about, nearest first with the distance, and never a name: a rider and a soldier at the
+    /// same distance print the same way, and a <c>?</c> at 9 is not listed.
+    /// </summary>
+    [Fact]
+    public void ThreatAtDuskListsTheUnseenTilesWithinReachNearestFirstAndUnnamed()
+    {
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(1, "E soldier 5,2 group:a behavior:hold\nE rider 5,0 group:b behavior:hold\nE soldier 9,1 group:c behavior:hold\nE soldier 4,1 group:d behavior:hold"));
+        var hale = state.Find("hale")!;
+
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.Contains("\n  in the dark, unpriced: ? at 4,1 (4), ? at 5,0 (6), ? at 5,2 (6)", text);
+        Assert.DoesNotContain("9,1", text);
+        Assert.DoesNotContain("rider", text);
+        Assert.DoesNotContain("whatever is in the dark", text);
+    }
+
+    /// <summary>
+    /// Issue 403: with every unseen enemy past the longest reach the bare dark line stays, and a
+    /// daylight map prints no dark row at all.
+    /// </summary>
+    [Theory]
+    [InlineData(1, true)]
+    [InlineData(null, false)]
+    public void WithNothingUnseenInReachTheBareDarkLineStays(int? dusk, bool dark)
+    {
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(dusk, "E soldier 9,1 group:c behavior:hold"));
+        var hale = state.Find("hale")!;
+
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.Equal(dark, text.Contains("\n  and whatever is in the dark (?), unpriced"));
+        Assert.DoesNotContain("in the dark, unpriced:", text);
+        Assert.Equal(dark ? 1 : 0, Dusk.UnseenNear(state, hale.At, 99).Count);
     }
 
     [Fact]

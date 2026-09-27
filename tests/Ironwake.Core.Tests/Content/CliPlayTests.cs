@@ -841,6 +841,19 @@ public class CliPlayTests
     /// west on the units the chase can see, so the exits empty. One Recall moves Pell off the
     /// brawler's path, and Wren, Rook and the captain leave on turn 6.
     /// </summary>
+    /// <summary>
+    /// Issue 403's acceptance on the Critic's cold board (issue 399, seed 509): Dunstan on 16,6 at
+    /// sight 1 is told the soldier's <c>?</c> at 15,4 is three tiles off, nearest first, unnamed.
+    /// </summary>
+    [Fact]
+    public void OnTheCriticsBoardThreatListsTheSoldiersTileThreeOff()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-509.script", 509, out _);
+
+        Assert.Contains("> threat dunstan\nthreat on dunstan at 16,6 (Plain): no enemy in sight can strike it next phase\n  in the dark, unpriced: ? at 15,4 (3), ", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-509.txt")).ReplaceLineEndings("\n"), output);
+    }
+
     [Fact]
     public void TheJournaledReRateEmptiesTheExitsOnSeed283()
     {

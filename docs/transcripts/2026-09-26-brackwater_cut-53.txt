@@ -821,7 +821,7 @@ dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
 threat on dunstan at 11,3 (Plain): no enemy in sight can strike it next phase
-  and whatever is in the dark (?), unpriced
+  in the dark, unpriced: ? at 4,3 (7), ? at 5,4 (7), ? at 17,5 (8)
 > wait dunstan
 dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
@@ -996,7 +996,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 threat on rook at 10,2 (Plain):
   brigand-1 from 9,2 with Iron Axe (slot 1): dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
   if all land: 15 against 17 hp
-  and whatever is in the dark (?), unpriced
+  in the dark, unpriced: ? at 6,3 (5), ? at 4,2 (6), ? at 5,4 (7), ? at 6,5 (7)
 > move captain 15,2
 captain moves 12,3 -> 15,2 via 12,2 13,2 14,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1430,7 +1430,7 @@ dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat captain
 threat on captain at 18,1 (Plain): no enemy in sight can strike it next phase
-  and whatever is in the dark (?), unpriced
+  in the dark, unpriced: ? at 17,5 (5), ? at 17,6 (6), ? at 17,7 (7)
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1594,7 +1594,7 @@ dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat pell
 threat on pell at 19,2 (Plain): no enemy in sight can strike it next phase
-  and whatever is in the dark (?), unpriced
+  in the dark, unpriced: ? at 17,5 (5), ? at 14,3 (6), ? at 17,6 (6), ? at 13,3 (7), ? at 17,7 (7), ? at 12,3 (8)
 > wait captain
 captain waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2

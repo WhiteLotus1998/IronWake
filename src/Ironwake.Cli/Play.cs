@@ -1137,7 +1137,10 @@ public sealed class PlaySession
     /// its <c>text</c> (issue 25). On a dusk map (DESIGN.md 13.7) an enemy no player unit sees
     /// is left out of the rows, the total and the sleeping groups, and one line says the dark is
     /// unpriced, whether or not anything in it could strike; while anything is in the dark, the
-    /// empty case says <c>no enemy in sight can strike it</c>, never a claim about the whole board (issue 399). An enemy the player sees that
+    /// empty case says <c>no enemy in sight can strike it</c>, never a claim about the whole board (issue 399). The dark
+    /// line lists the unseen tiles within <see cref="GameContent.LongestReach"/> of the tile, nearest first with
+    /// the distance, unpriced and unnamed (<see cref="Dusk.UnseenNear"/>, issue 403); with none that near it
+    /// keeps the bare <c>and whatever is in the dark</c> line. An enemy the player sees that
     /// would strike the unit in daylight but does not know where it is, or whose side cannot
     /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
     /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>. A move that wins the map
@@ -1178,7 +1181,10 @@ public sealed class PlaySession
 
         if (dark)
         {
-            rows.Add($"  and whatever is in the dark ({Dusk.Unseen}), unpriced");
+            var near = Dusk.UnseenNear(state, tile, content.LongestReach);
+            rows.Add(near.Count == 0
+                ? $"  and whatever is in the dark ({Dusk.Unseen}), unpriced"
+                : $"  in the dark, unpriced: {string.Join(", ", near.Select(n => $"{Dusk.Unseen} at {n.At} ({n.Distance})"))}");
         }
 
         foreach (var group in asleep)

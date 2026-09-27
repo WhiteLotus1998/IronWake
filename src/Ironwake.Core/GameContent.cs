@@ -46,6 +46,16 @@ public sealed record GameContent(
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
+    /// <summary>
+    /// The longest reach any unit in this content could have: the most <see cref="UnitClass.Mov"/>
+    /// of any class plus the most <see cref="Weapon.MaxRange"/> of any weapon, in tiles, Manhattan
+    /// (8 on the starter content: move 6 and range 2). One number for every unit, derived from the
+    /// loaded files and never from a unit on the board, so a listing bounded by it tells the player
+    /// nothing about what stands on a tile (issue 403). Zero when the content has no classes or no weapons.
+    /// </summary>
+    public int LongestReach =>
+        (Classes.IsEmpty ? 0 : Classes.Values.Max(c => c.Mov)) + (Weapons.IsEmpty ? 0 : Weapons.Values.Max(w => w.MaxRange));
+
     public UnitClass Class(string id) => Lookup(Classes, id, "class");
 
     public Weapon Weapon(string id) => Lookup(Weapons, id, "weapon");

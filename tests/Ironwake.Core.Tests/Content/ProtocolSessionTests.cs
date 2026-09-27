@@ -311,6 +311,24 @@ public class ProtocolSessionTests
         Assert.Equal(state, ProtocolJson.ReadState(json, content));
     }
 
+    /// <summary>
+    /// Issue 403: the threat query's <c>text</c> carries the dark row, built from the player view,
+    /// so <c>--omniscient</c> answers the same text; from 3,0 the far soldier is 8 off and listed,
+    /// from 0,1 it is 10 off and the bare line stays.
+    /// </summary>
+    [Fact]
+    public void TheThreatTextCarriesTheDarkRowUnderEitherView()
+    {
+        var (content, state) = DarkStart();
+        var session = new ProtocolSession(content, state, new StringWriter());
+        var open = new ProtocolSession(content, state, new StringWriter(), omniscient: true);
+        const string From = """{"query":"threat","unit":"captain","from":{"x":3,"y":0}}""";
+
+        Assert.Contains("\\n  in the dark, unpriced: ? at 10,1 (8)\"", session.Answer(From));
+        Assert.Equal(session.Answer(From), open.Answer(From));
+        Assert.Contains("\\n  and whatever is in the dark (?), unpriced\"", session.Answer("""{"query":"threat","unit":"captain"}"""));
+    }
+
     /// <summary>A daylight state carries neither <c>view</c> nor <c>unseen</c>, player view or not.</summary>
     [Fact]
     public void ADaylightStateCarriesNoViewField()
