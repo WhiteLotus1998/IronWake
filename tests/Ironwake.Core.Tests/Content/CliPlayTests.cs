@@ -822,6 +822,42 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
+    /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
+    /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.
+    /// </summary>
+    [Fact]
+    public void ChatsColdBracePlayReplaysWithItsBraces()
+    {
+        var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-439.script", 439, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.Contains("forecast weir_foreman-1 -> dunstan: dmg 8 hit 43% crit 2%; counter: none\n  brace: dunstan braced: weir_foreman-1 hit -15\n", output);
+        Assert.Contains("forecast dunstan -> weir_foreman-1: dmg 8 hit 29% crit 0%; counter: dmg 8 hit 70% crit 2%\n  brace: weir_foreman-1 braced: dunstan hit -15\n", output);
+        Assert.Contains("weir_foreman-1 falls at 13,6\n", output);
+    }
+
+    /// <summary>
+    /// Chat's cold play of issue 419's anvil arm: seed 433 on <c>docs/samples/sallow_grange_pincer.map</c>.
+    /// The closed formation leaves no tile behind the front in reach, so the archer walks to 6,7
+    /// and shoots instead of anviling, and every pin in the game is the player's. The captain
+    /// kills the Reeve in the open and seizes on turn 7.
+    /// </summary>
+    [Fact]
+    public void ChatsColdAnvilArmPlayReplaysWithNoEnemyPin()
+    {
+        var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-433.script", 433, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("archer-2 moves 8,6 -> 6,7 via 7,6 7,7\n", output);
+        Assert.Contains("  pincer: archer-2 pinned by ottilie: ansgar hit +15\n", output);
+        Assert.Single(output.Split('\n'), line => line.StartsWith("  pincer: ", StringComparison.Ordinal));
+        Assert.Contains("grange_reeve-1 falls at 13,6\n", output);
+    }
+
+    /// <summary>
     /// Issue 419's hand play: Code's seed 131 on <c>docs/samples/sallow_grange_pincer.map</c> with
     /// the planner's anvil arm built. The field group never had a tile behind the front in reach,
     /// so no enemy stepped in as an anvil and every pin was the player's: Ansgar on the brawler
