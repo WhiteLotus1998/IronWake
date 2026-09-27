@@ -97,7 +97,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with), `cost` (extra uses, spent hit or miss; issue 68); precedes the `combatFought` |
 | `weaponBroke` | `unit`, `item` |
 | `spellSpent` | `unit`, `item` |
-| `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`), and at dusk, on a wake a player-phase command caused, `lamps`: the lit members row-major by tile, each `{unit, at}` (issue 382; omitted otherwise) |
+| `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`, `call`), with `by`, the calling group, when the cause is `call` (the map's `wake_links:` header, issue 393), and at dusk, on a wake a player-phase command caused, `lamps`: the lit members row-major by tile, each `{unit, at}` (issue 382; omitted otherwise) |
 | `mapEventFired` | `name`, `blocked` |
 | `terrainChanged` | `at`, `terrain` |
 | `unitSpawned` | `unit`, `at`, `group`, `behavior` |

@@ -88,6 +88,11 @@ public static class MapRenderer
             sb.Append(WakeLegend(content)).Append('\n');
         }
 
+        if (LinkLegend(map, _ => true) is { } called)
+        {
+            sb.Append(called).Append('\n');
+        }
+
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
@@ -261,6 +266,11 @@ public static class MapRenderer
             sb.Append(WakeLegend(content)).Append('\n');
         }
 
+        if (LinkLegend(map, group => !state.IsAwake(group)) is { } called)
+        {
+            sb.Append(called).Append('\n');
+        }
+
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
@@ -298,6 +308,17 @@ public static class MapRenderer
     /// and <see cref="GameContent.NoiseRadius"/>, the ones <see cref="WakeCheck"/> reads.
     /// </summary>
     public static string WakeLegend(GameContent content) => $"asleep: {WakeCondition(content)}";
+
+    /// <summary>
+    /// The line under the wake legend on a map with a <c>wake_links:</c> header (issue 393):
+    /// <c>called: group weir wakes when group ford does</c>, one clause per link whose second
+    /// group <paramref name="asleep"/> says is still asleep, in header order; null when none is.
+    /// </summary>
+    public static string? LinkLegend(MapDefinition map, Func<string, bool> asleep)
+    {
+        var links = map.WakeLinks.Where(l => asleep(l.To)).Select(l => $"group {l.To} wakes when group {l.From} does").ToList();
+        return links.Count == 0 ? null : "called: " + string.Join("; ", links);
+    }
 
     /// <summary>The wake rule alone, as the legend and <c>threat</c>'s sleeping-group rows print it (issue 248).</summary>
     public static string WakeCondition(GameContent content) =>

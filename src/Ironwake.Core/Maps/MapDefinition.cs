@@ -69,6 +69,10 @@ namespace Ironwake.Core;
 /// replay journaled plays made under that rule. Off by default, and then an exit is taken
 /// without a Move, from the exit tile the unit began its turn on.
 /// </param>
+/// <param name="WakeLinks">
+/// The <c>wake_links:</c> header (issue 393): pairs of groups where the first group's waking wakes
+/// the second in the same check (<see cref="WakeCheck"/>). Empty by default.
+/// </param>
 public sealed record MapDefinition(
     string Name,
     int Width,
@@ -93,7 +97,8 @@ public sealed record MapDefinition(
     int? Dusk = null,
     bool GrudgesEnabled = false,
     bool ShoveEnabled = false,
-    bool ExitAfterMove = false)
+    bool ExitAfterMove = false,
+    ValueList<WakeLink> WakeLinks = default)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

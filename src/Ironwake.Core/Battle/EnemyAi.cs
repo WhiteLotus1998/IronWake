@@ -82,6 +82,7 @@ public static class EnemyAi
     /// A boss under the veto (<see cref="BossVetoApplies"/>) whose every strike was refused
     /// moves to the approach tile the veto passes, or stays, and then strikes the best target
     /// in reach of that tile unvetoed: the veto picks the tile, not the swing (issue 389).
+    /// A guard boss with a post goes home instead (<see cref="GoesHome"/>, issue 393).
     /// </summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -122,14 +123,68 @@ public static class EnemyAi
         }
 
         var veto = BossVetoApplies(state, content, unit);
-        var destination = Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto);
-        var end = destination ?? unit.At;
+        var end = End(state, content, unit, weapon, tiles, reach, known, playerReach, sworn, veto);
         var swing = veto ? Choose(state, content, unit, new[] { end }, reach, known, playerReach, sworn, unvetoed: true).Best : null;
         var last = swing is null ? (Command)new Wait(unit.Id) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
     }
+
+    /// <summary>
+    /// Where a mover with no strike this phase ends: its post when <see cref="GoesHome"/> says
+    /// so (issue 393), else <see cref="Destination"/>, else where it stands. <see cref="PlanUnit"/>
+    /// and <c>threat</c>'s swing read this one function, so they agree on the tile.
+    /// </summary>
+    private static Coord End(
+        BattleState state, GameContent content, BattleUnit unit, Weapon weapon, IReadOnlyList<Coord> tiles, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto, bool inDaylight = false) =>
+        veto && GoesHome(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight) is { } home
+            ? home
+            : Destination(state, content, unit, weapon, reach, known, playerReach, sworn, veto) ?? unit.At;
+
+    /// <summary>
+    /// A guard boss goes home (issue 393, DESIGN.md section 8): when the boss veto refused a strike
+    /// it could otherwise make this phase, a boss whose map behavior is Guard and that has a post
+    /// (<see cref="Post"/>) ends on the reachable tile nearest its post, by Manhattan distance,
+    /// then its own tile, then the lower movement cost, then the reach's order; that tile is not
+    /// vetoed, and the swing of issue 389 follows from it. Null when the rule does not apply:
+    /// not a guard boss, no post, or no strike in reach at all, in which case it approaches as
+    /// any woken guard does. So a boss the gathered party outweighs holds the ground it guards
+    /// instead of running from it.
+    /// </summary>
+    public static Coord? GoesHome(
+        BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach,
+        IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool inDaylight = false)
+    {
+        if (unit is not { IsBoss: true, Behavior: Behavior.Guard } || Post(state, unit) is not { } post)
+        {
+            return null;
+        }
+
+        if (Choose(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight, unvetoed: true).Best is null)
+        {
+            return null;
+        }
+
+        return reach.Destinations
+            .Select((tile, order) => (tile, order))
+            .OrderBy(t => t.tile.DistanceTo(post))
+            .ThenBy(t => t.tile == unit.At ? 0 : 1)
+            .ThenBy(t => reach.CostTo(t.tile) ?? int.MaxValue)
+            .ThenBy(t => t.order)
+            .First().tile;
+    }
+
+    /// <summary>
+    /// An enemy's post: the tile of the map placement it filled, where it stood when the battle
+    /// began. Null for a unit a map event spawned, which has no placement, and for a player unit.
+    /// </summary>
+    public static Coord? Post(BattleState state, BattleUnit unit) =>
+        unit.PlacementIndex >= 0 && unit.PlacementIndex < state.Map.Placements.Count
+            && state.Map.Placements[unit.PlacementIndex] is EnemyPlacement placement
+            ? placement.At
+            : null;
 
     /// <summary>
     /// Where a mover with no strike this phase ends: the objective drift on a dusk map when it
@@ -240,8 +295,8 @@ public static class EnemyAi
     /// <summary>
     /// The strike on <paramref name="target"/> a boss under the veto makes from the tile it
     /// ends on when every strike was refused (issue 389): null unless the veto left it no
-    /// strike at all, and then the swing <see cref="PlanUnit"/> takes from its approach tile,
-    /// or its own tile when none passes, on this target, or the best on this target from
+    /// strike at all, and then the swing <see cref="PlanUnit"/> takes from its end tile
+    /// (<see cref="End"/>: its post for a guard boss, else its approach tile or its own), on this target, or the best on this target from
     /// there when the swing goes to someone else by score alone.
     /// </summary>
     private static AttackOption? SwingFromEnd(
@@ -254,7 +309,7 @@ public static class EnemyAi
             return null;
         }
 
-        var end = new[] { Destination(state, content, unit, unit.EquippedWeapon(content)!, reach, known, playerReach, sworn, veto: true) ?? unit.At };
+        var end = new[] { End(state, content, unit, unit.EquippedWeapon(content)!, tiles, reach, known, playerReach, sworn, veto: true, inDaylight) };
         var swing = Choose(state, content, unit, end, reach, known, playerReach, sworn, inDaylight, unvetoed: true);
         if (swing.Best is not { } strike)
         {

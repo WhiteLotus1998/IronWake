@@ -107,6 +107,9 @@ public enum WakeCause
 
     /// <summary>A player unit stands within the wake radius of a member.</summary>
     Proximity,
+
+    /// <summary>A group linked to it by the map's <c>wake_links:</c> header woke (issue 393).</summary>
+    Call,
 }
 
 /// <summary>
@@ -114,7 +117,7 @@ public enum WakeCause
 /// names the members whose lamps a player-phase wake lit on a dusk map, row-major by tile
 /// (issue 382), and is empty for every other wake.
 /// </summary>
-public sealed record GroupWoke(string Group, WakeCause Cause, ValueList<Lamp> Lamps = default) : GameEvent;
+public sealed record GroupWoke(string Group, WakeCause Cause, ValueList<Lamp> Lamps = default, string? CalledBy = null) : GameEvent;
 
 /// <summary>A member of a woken group whose lamp is lit, and where it stood when it woke (issue 382).</summary>
 public sealed record Lamp(string UnitId, Coord At);

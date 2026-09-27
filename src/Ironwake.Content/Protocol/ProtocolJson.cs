@@ -212,6 +212,11 @@ public static class ProtocolJson
             case GroupWoke g:
                 w.WriteString("group", g.Group);
                 w.WriteString("cause", Name(g.Cause));
+                if (g.CalledBy is { } by)
+                {
+                    w.WriteString("by", by);
+                }
+
                 if (g.Lamps.Count > 0)
                 {
                     w.WriteStartArray("lamps");

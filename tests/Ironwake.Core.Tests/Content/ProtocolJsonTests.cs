@@ -53,6 +53,7 @@ public class ProtocolJsonTests
         { new SpellSpent("mira", "mend"), """{"type":"spellSpent","unit":"mira","item":"mend"}""" },
         { new GroupWoke("fort", WakeCause.Proximity), """{"type":"groupWoke","group":"fort","cause":"proximity"}""" },
         { new GroupWoke("bank", WakeCause.Proximity, ValueList<Lamp>.Of(new Lamp("soldier-1", A), new Lamp("brawler-1", B))), """{"type":"groupWoke","group":"bank","cause":"proximity","lamps":[{"unit":"soldier-1","at":{"x":1,"y":2}},{"unit":"brawler-1","at":{"x":3,"y":4}}]}""" },
+        { new GroupWoke("weir", WakeCause.Call, CalledBy: "ford"), """{"type":"groupWoke","group":"weir","cause":"call","by":"ford"}""" },
         { new MapEventFired("riders", false), """{"type":"mapEventFired","name":"riders","blocked":false}""" },
         { new TerrainChanged(A, "plain"), """{"type":"terrainChanged","at":{"x":1,"y":2},"terrain":"plain"}""" },
         { new UnitSpawned("rider-1", B, "flank", Behavior.Aggressive), """{"type":"unitSpawned","unit":"rider-1","at":{"x":3,"y":4},"group":"flank","behavior":"aggressive"}""" },
