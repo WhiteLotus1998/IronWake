@@ -59,6 +59,8 @@ public static class Program
         {
             var content = ContentLoader.Load(contentDir);
             var maps = MapFiles.LoadAll(contentDir, content);
+            var trials = MapFiles.LoadDirectory(contentDir, MapFiles.TrialsDirectory, content);
+            var keep = MapFiles.LoadDirectory(contentDir, MapFiles.KeepDirectory, content);
             foreach (var entry in content.Campaign.Maps)
             {
                 var path = MapFiles.CampaignPath(contentDir, content, entry.MapId);
@@ -69,9 +71,17 @@ public static class Program
                 }
             }
 
+            foreach (var trial in content.Campaign.Trials)
+            {
+                if (!trials.Any(t => t.Id == trial.MapId))
+                {
+                    throw new ContentException(ContentFiles.CampaignName, trial.ClassId, "trials", $"no file {MapFiles.TrialsDirectory}/{trial.MapId}.map under {contentDir}");
+                }
+            }
+
             Console.WriteLine(
                 $"OK: {content.Terrain.Count} terrain, {content.Classes.Count} classes, " +
-                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps from {contentDir}");
+                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps, {trials.Count} trials, {keep.Count} keep maps from {contentDir}");
             return 0;
         }
         catch (ContentException e)

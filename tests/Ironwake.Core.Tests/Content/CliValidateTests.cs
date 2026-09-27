@@ -98,6 +98,75 @@ public class CliValidateTests
         }
     }
 
+    /// <summary>Issue 397: validate parses the trial and keep maps too, and counts each kind apart.</summary>
+    [Fact]
+    public void ValidateCountsTrialAndKeepMaps()
+    {
+        var output = Run(out var exit, "validate", Fixture.RealContentDirectory());
+
+        Assert.Equal(0, exit);
+        Assert.Contains("6 maps, 2 trials, 2 keep maps from", output);
+    }
+
+    [Theory]
+    [InlineData("trials", "outrider_trial.map")]
+    [InlineData("keep", "ironwake_raid.map")]
+    public void ValidateReportsABrokenTrialOrKeepMapByFileAndLine(string subdirectory, string file)
+    {
+        var dir = CopyOfRealContent();
+        try
+        {
+            var path = Path.Combine(dir, subdirectory, file);
+            var lines = File.ReadAllLines(path);
+            var line = Array.FindIndex(lines, l => l.StartsWith("win:", StringComparison.Ordinal));
+            lines[line] = "win: bogus";
+            File.WriteAllLines(path, lines);
+
+            var output = Run(out var exit, "validate", dir);
+
+            Assert.Equal(1, exit);
+            Assert.StartsWith($"ERROR: {path}, line {line + 1}:", output);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void ValidateRefusesACampaignTrialWithNoFile()
+    {
+        var dir = CopyOfRealContent();
+        try
+        {
+            File.Delete(Path.Combine(dir, "trials", "bulwark_trial.map"));
+
+            var output = Run(out var exit, "validate", dir);
+
+            Assert.Equal(1, exit);
+            Assert.StartsWith("ERROR: campaign.json", output);
+            Assert.Contains("no file trials/bulwark_trial.map", output);
+        }
+        finally
+        {
+            Directory.Delete(dir, recursive: true);
+        }
+    }
+
+    private static string CopyOfRealContent()
+    {
+        var source = Fixture.RealContentDirectory();
+        var dir = Path.Combine(Path.GetTempPath(), "ironwake-cli-copy-" + Guid.NewGuid().ToString("N"));
+        foreach (var file in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
+        {
+            var target = Path.Combine(dir, Path.GetRelativePath(source, file));
+            Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+            File.Copy(file, target);
+        }
+
+        return dir;
+    }
+
     [Fact]
     public void ShowPrintsTheMapView()
     {
