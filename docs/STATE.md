@@ -34,6 +34,8 @@ Issue 382 is in (DECISIONS/0076): at dusk a Guard group a player-phase command w
 
 The parity loops in `godot-parity` and `godot-windows-launch` name the script and the step before each command and, on a failure, print an `::error::` line with the exit status, `play`'s last 40 lines, or the first 20 lines of the diff (#398).
 
+At dusk, while any enemy is in the dark, an empty `threat` reads `no enemy in sight can strike it next phase` (#399); the Brackwater seed 53 and 283 transcripts carry the new line.
+
 ## Open forks (need Lotus)
 
 None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).

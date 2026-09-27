@@ -1136,7 +1136,8 @@ public sealed class PlaySession
     /// and the wake rule under them (issue 248); the protocol's threat query carries it as
     /// its <c>text</c> (issue 25). On a dusk map (DESIGN.md 13.7) an enemy no player unit sees
     /// is left out of the rows, the total and the sleeping groups, and one line says the dark is
-    /// unpriced, whether or not anything in it could strike. An enemy the player sees that
+    /// unpriced, whether or not anything in it could strike; while anything is in the dark, the
+    /// empty case says <c>no enemy in sight can strike it</c>, never a claim about the whole board (issue 399). An enemy the player sees that
     /// would strike the unit in daylight but does not know where it is, or whose side cannot
     /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
     /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>. A move that wins the map
@@ -1153,9 +1154,10 @@ public sealed class PlaySession
         var rows = new List<string>();
         lines = lines.Where(line => line.Arrives is not null || Dusk.Seen(state, line.Enemy)).ToList();
         asleep = asleep.Select(g => g with { Members = g.Members.Where(m => Dusk.Seen(state, m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
+        var dark = Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e));
         if (lines.Count == 0)
         {
-            rows.Add($"threat on {unit.Id} at {where}: no enemy can strike it next phase");
+            rows.Add($"threat on {unit.Id} at {where}: no enemy {(dark ? "in sight " : "")}can strike it next phase");
         }
         else
         {
@@ -1174,7 +1176,7 @@ public sealed class PlaySession
             rows.Add($"  {blind.Id}: cannot see you (dark)");
         }
 
-        if (Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e)))
+        if (dark)
         {
             rows.Add($"  and whatever is in the dark ({Dusk.Unseen}), unpriced");
         }
