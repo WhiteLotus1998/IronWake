@@ -5,7 +5,8 @@ namespace Ironwake.Core;
 /// a mutator. <see cref="Plan"/> returns the command list for the whole phase; the caller
 /// applies it to the real state through <see cref="Resolver.Apply"/>, the same function
 /// the planner used, so the two agree. Enemies act in ascending unit id, each on the board
-/// as the one before it left it. A unit's plan is at most a Move then an Attack or a Wait.
+/// as the one before it left it, except that on a <c>pincer: on</c> map an anvil acts ahead
+/// of the rest (<see cref="Anvil"/>, issue 419). A unit's plan is at most a Move then an Attack or a Wait.
 /// The scorer prices a hit through <see cref="Combat.HitProbability"/> under the state's
 /// roll scheme, the one hit function the forecast and the resolver share, and the whole
 /// score is a double so the crit expectation is never eaten by integer division.
@@ -30,20 +31,29 @@ public static class EnemyAi
 
         var plan = new List<Command>();
         var working = state;
-        foreach (var id in state.UnitsOf(Side.Enemy).Select(u => u.Id).ToList())
+        var order = state.UnitsOf(Side.Enemy).Select(u => u.Id).ToList();
+        var claimed = new HashSet<string>();
+        while (order.Count > 0)
         {
             if (working.Outcome.IsOver)
             {
                 break;
             }
 
+            var (id, anvil) = Next(working, content, order, claimed);
+            order.Remove(id);
             var unit = working.Find(id);
             if (unit is null || unit.Acted)
             {
                 continue;
             }
 
-            foreach (var command in PlanUnit(working, content, unit))
+            if (anvil is not null)
+            {
+                claimed.Add(anvil.FollowerId);
+            }
+
+            foreach (var command in anvil?.Commands ?? PlanUnit(working, content, unit))
             {
                 var result = Resolver.Apply(working, content, command);
                 if (!result.Accepted)
@@ -62,6 +72,154 @@ public static class EnemyAi
         }
 
         return ValueList<Command>.From(plan);
+    }
+
+    /// <summary>
+    /// The enemy that acts next among <paramref name="order"/>, the ids not yet planned in
+    /// ascending order: the first of them, unless the map has the <c>pincer: on</c> header and
+    /// one of them is an anvil (<see cref="Anvil"/>, issue 419), in which case the first anvil
+    /// by id acts ahead of the rest with its anvil plan. Without the header, or with no anvil
+    /// on the board, the order is ascending id, exactly as before issue 419.
+    /// </summary>
+    private static (string Id, AnvilPlan? Anvil) Next(BattleState state, GameContent content, IReadOnlyList<string> order, IReadOnlySet<string> claimed)
+    {
+        if (state.Map.PincerEnabled)
+        {
+            foreach (var id in order)
+            {
+                if (state.Find(id) is { } unit && Anvil(state, content, unit, claimed) is { } anvil)
+                {
+                    return (id, anvil);
+                }
+            }
+        }
+
+        return (order[0], null);
+    }
+
+    /// <summary>
+    /// An enemy's plan to step in as the anvil of a pin (DESIGN.md 13.13, issue 419): the tile it
+    /// moves to, the player unit that tile pins, the group-mate promised the pinned strike, the
+    /// bonus that strike gains, and the commands (a Move when the tile is not its own, then its
+    /// best strike from that tile if it has one, else a Wait).
+    /// </summary>
+    public sealed record AnvilPlan(Coord Tile, string PinnedId, string FollowerId, double Bonus, ValueList<Command> Commands);
+
+    /// <summary>
+    /// The pincer's planner arm (DESIGN.md 13.13, issue 419), on a <c>pincer: on</c> map only.
+    /// For each tile T the unit may end on and each player unit U it knows of beside T, a
+    /// follower is a group-mate that has not acted, is not a boss and is not already claimed,
+    /// Aggressive and unmoved, not retreating, with an equipped weapon that strikes at range 1,
+    /// that can end on the tile across U from T with the unit already standing on T and see U
+    /// from there. The bonus is the follower's score on U from that tile pinned minus the same
+    /// score with the unit off the board: the +15 hit on its expected damage, since the kill
+    /// flag reads deterministic damage. The anvil's value on T is the best bonus there plus the
+    /// score of its own best strike from T, if any; the exposure of T is not priced (an anvil
+    /// left beside the party is the player's punish). The plan is the tile of highest value,
+    /// first in reach order on a tie, and it is taken only when that value beats the unit's
+    /// best strike by today's score. Null for an anchored unit (a boss, or a throne-holder),
+    /// one already claimed as a follower, one sworn against a unit it knows of, one that is not
+    /// Aggressive, has moved, retreats or is unarmed, one without a group, and when no tile
+    /// has a follower.
+    /// </summary>
+    public static AnvilPlan? Anvil(BattleState state, GameContent content, BattleUnit unit, IReadOnlySet<string> claimed)
+    {
+        if (!state.Map.PincerEnabled || unit.Side != Side.Enemy || unit.Acted || unit.Moved || unit.IsBoss
+            || unit.Group is null || claimed.Contains(unit.Id) || HoldsTheThrone(state, unit)
+            || state.EffectiveBehavior(unit, content) != Behavior.Aggressive || unit.EquippedWeapon(content) is null
+            || RetreatRule.Choose(state, content, unit) is not null)
+        {
+            return null;
+        }
+
+        var players = state.UnitsOf(Side.Player).ToList();
+        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
+        if (known.Count == 0 || Sworn(state, unit, known) is not null)
+        {
+            return null;
+        }
+
+        var followers = state.UnitsOf(Side.Enemy)
+            .Where(f => f.Id != unit.Id && f.Group == unit.Group && !f.Acted && !f.Moved && !f.IsBoss && !claimed.Contains(f.Id)
+                && state.EffectiveBehavior(f, content) == Behavior.Aggressive
+                && f.EquippedWeapon(content) is { } weapon && weapon.InRange(1)
+                && RetreatRule.Choose(state, content, f) is null)
+            .ToList();
+        if (followers.Count == 0)
+        {
+            return null;
+        }
+
+        var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
+        var reach = state.ReachOf(unit, content);
+        var tiles = reach.Destinations.ToList();
+        var bestStrike = Choose(state, content, unit, tiles, reach, known, playerReach, null).Best;
+        var chosenValue = bestStrike?.Score ?? double.NegativeInfinity;
+        AnvilPlan? chosen = null;
+        foreach (var tile in tiles)
+        {
+            BattleState? board = null;
+            BattleState? without = null;
+            var bonus = 0.0;
+            BattleUnit? pinned = null;
+            BattleUnit? follower = null;
+            foreach (var target in known)
+            {
+                if (tile.DistanceTo(target.At) != 1)
+                {
+                    continue;
+                }
+
+                var far = new Coord(2 * target.At.X - tile.X, 2 * target.At.Y - tile.Y);
+                if (!state.Map.Contains(far))
+                {
+                    continue;
+                }
+
+                board ??= state.WithUnit(unit with { At = tile });
+                without ??= board.WithoutUnit(unit.Id);
+                foreach (var candidate in followers)
+                {
+                    if (candidate.At.DistanceTo(far) > content.Class(candidate.Unit.ClassId).Mov
+                        || !board.ReachOf(candidate, content).CanEnd(far)
+                        || !Dusk.Sees(board, Side.Enemy, target.At, candidate.Id, far))
+                    {
+                        continue;
+                    }
+
+                    var gain = Score(board, content, candidate, far, target) - Score(without, content, candidate, far, target);
+                    if (gain > bonus)
+                    {
+                        bonus = gain;
+                        pinned = target;
+                        follower = candidate;
+                    }
+                }
+            }
+
+            if (follower is null)
+            {
+                continue;
+            }
+
+            var strike = BestOption(state, content, unit, new[] { tile }, reach, known, playerReach);
+            var value = bonus + (strike?.Score ?? 0);
+            if (value > chosenValue)
+            {
+                chosenValue = value;
+                var equipped = unit.EquippedSlot(content);
+                var commands = new List<Command>();
+                if (tile != unit.At)
+                {
+                    commands.Add(new Move(unit.Id, tile));
+                }
+
+                commands.Add(strike is null ? new Wait(unit.Id) : new Attack(unit.Id, strike.TargetId, strike.Slot == equipped ? null : strike.Slot));
+                chosen = new AnvilPlan(tile, pinned!.Id, follower.Id, bonus, ValueList<Command>.From(commands));
+            }
+        }
+
+        return chosen;
     }
 
     /// <summary>
