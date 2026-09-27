@@ -38,6 +38,8 @@ At dusk, while any enemy is in the dark, an empty `threat` reads `no enemy in si
 
 builder-chain's triggers (merged `issue/`, `claude/issue-`, `experiment/`, `table/`; dispatch; the 20-minute heartbeat) are recorded in DECISIONS/0050's amendment and ROUTINES.md section 6 (#400). Whether the heartbeat stays is Lotus's call on #406, and the chain stands down while that `fork` is open.
 
+`SleepingThreat.Members` is a `ValueList`, the rivalry-arm and threat-forecast invariants have falsifying tests, and the grudge comment names the exposure sum's exception (#402).
+
 ## Open forks (need Lotus)
 
 None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).

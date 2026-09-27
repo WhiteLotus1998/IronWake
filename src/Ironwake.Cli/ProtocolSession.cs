@@ -290,7 +290,7 @@ public sealed class ProtocolSession
         }
 
         lines = lines.Where(line => line.Arrives is not null || !Hidden(line.Enemy)).ToList();
-        asleep = asleep.Select(g => g with { Members = g.Members.Where(m => !Hidden(m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
+        asleep = asleep.Select(g => g with { Members = ValueList<BattleUnit>.From(g.Members.Where(m => !Hidden(m))) }).Where(g => g.Members.Count > 0).ToList();
         return Ok("threat", w =>
         {
             w.WriteString("unit", unit.Id);

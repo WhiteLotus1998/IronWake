@@ -67,6 +67,37 @@ public sealed class ThreatQueryTests
         throw new Xunit.Sdk.XunitException($"{enemyId} did not attack {targetId}");
     }
 
+    /// <summary>Issue 402: a sleeping group's members are an immutable list, so two answers with the same members are equal.</summary>
+    [Fact]
+    public void SleepingThreatsCompareByTheirMembers()
+    {
+        var start = Tollgate();
+        var members = start.UnitsOf(Side.Enemy).Take(2);
+
+        Assert.Equal(new SleepingThreat("keep", ValueList<BattleUnit>.From(members)), new SleepingThreat("keep", ValueList<BattleUnit>.From(members.ToList())));
+    }
+
+    /// <summary>
+    /// Issue 402: <see cref="Queries.StrikeForecast"/> prices the planner's strike, and a strike
+    /// the forecast cannot price is a broken
+    /// invariant that throws naming both units and the tile. Here the strike names a slot the enemy does not have.
+    /// </summary>
+    [Fact]
+    public void AStrikeWithNoForecastThrowsNamingTheStrike()
+    {
+        var start = Tollgate().WithoutUnit("toll_warden-1").WithoutUnit("archer-1").Wake("keep");
+        var captain = start.Find("captain")!;
+        var door = new Coord(6, 2);
+        var standing = start.WithUnit(captain with { At = door });
+        var line = Assert.Single(Queries.Threats(standing, Starter, standing.Find("captain")!, door)!);
+        var boss = standing.Find("bandit_leader-1")!;
+        var target = standing.Find("captain")!;
+
+        Assert.Equal(line.Forecast, Queries.StrikeForecast(standing, Starter, boss, target, new EnemyStrike(line.From, line.Slot)));
+        var error = Assert.Throws<InvalidOperationException>(() => Queries.StrikeForecast(standing, Starter, boss, target, new EnemyStrike(boss.At, 99)));
+        Assert.Contains($"bandit_leader-1 on captain from {boss.At}", error.Message);
+    }
+
     /// <summary>
     /// Chat's seed-151 board on the Tollgate, turn 8: the warden and archer-1 dead, the
     /// captain at the door at 6,2 beside the boss. The query names the Steel Axe, and the

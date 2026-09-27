@@ -53,6 +53,19 @@ public class RivalryTests
 
     private static RivalryArm ArmNamed(string id) => Starter.Rivalry.Arm(id)!;
 
+    /// <summary>Issue 402: a state built by hand whose map names an arm the content lacks is refused, naming the map and the arm.</summary>
+    [Fact]
+    public void AnArmTheContentLacksIsRefusedNamingIt()
+    {
+        var state = Begin();
+        var broken = state with { Map = state.Map with { RivalryArm = "no_such_arm" } };
+
+        var error = Assert.Throws<ArgumentException>(() => Rivalry.ArmOf(broken, Starter));
+
+        Assert.Contains("'no_such_arm'", error.Message);
+        Assert.Contains(state.Map.Name, error.Message);
+    }
+
     [Fact]
     public void RecruitsOfDifferentRegionsStandingAdjacentAreRivals()
     {

@@ -150,14 +150,24 @@ public static class Queries
             }
 
             var carrier = board.Carrying(enemy, strike.From);
-            var forecast = Forecast(board, content, carrier, moved, strike.From, strike.Slot)
-                ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {unit.Id} from {strike.From} has no forecast");
+            var forecast = StrikeForecast(board, content, carrier, moved, strike);
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
             lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, carrier.UsableWeaponAt(content, strike.Slot)!, forecast, arrives, StrikeTiles(board, content, enemy, moved)));
         }
 
         return lines;
     }
+
+    /// <summary>
+    /// The forecast of <paramref name="enemy"/>'s planned <paramref name="strike"/> on
+    /// <paramref name="target"/>, which <see cref="Threats"/> prices. The planner only plans a
+    /// strike the forecast can price, so a strike with no forecast is a broken invariant between
+    /// <see cref="EnemyAi.StrikeOn"/> and <see cref="Forecast(BattleState, GameContent, BattleUnit, BattleUnit, Coord, int?, string?)"/>
+    /// and throws <see cref="InvalidOperationException"/> naming both units and the tile.
+    /// </summary>
+    public static CombatForecast StrikeForecast(BattleState board, GameContent content, BattleUnit enemy, BattleUnit target, EnemyStrike strike) =>
+        Forecast(board, content, enemy, target, strike.From, strike.Slot)
+            ?? throw new InvalidOperationException($"the planner's strike of {enemy.Id} on {target.Id} from {strike.From} has no forecast");
 
     /// <summary>
     /// The enemies on <see cref="Threats"/>' board that would strike <paramref name="unit"/> on
@@ -256,7 +266,7 @@ public static class Queries
         foreach (var group in sleeping)
         {
             var woken = board.Wake(group);
-            var members = woken.UnitsOf(Side.Enemy).Where(u => u.Group == group).ToList();
+            var members = ValueList<BattleUnit>.From(woken.UnitsOf(Side.Enemy).Where(u => u.Group == group));
             if (members.Any(m => EnemyAi.StrikeOn(woken, content, m, moved) is not null))
             {
                 groups.Add(new SleepingThreat(group, members));
@@ -327,7 +337,7 @@ public static class Queries
 }
 
 /// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and able to strike the unit were it awake.</summary>
-public sealed record SleepingThreat(string Group, IReadOnlyList<BattleUnit> Members);
+public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members);
 
 /// <summary>
 /// One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from
