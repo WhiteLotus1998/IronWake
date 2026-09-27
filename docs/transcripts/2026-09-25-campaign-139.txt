@@ -24,6 +24,7 @@ deploys to Old Mill Road: captain, wren
 ERROR: Old Mill Road places wren by name at 2,8
 > march
 map 1 of 8: Old Mill Road, seed 139
+objective: defeat every enemy by the end of turn 12; lost if the captain falls
 Old Mill Road  turn 1 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -714,6 +715,7 @@ brannock certifies from Cadet to Reaver for 500; the purse holds 320
     mastery: Fundamentals (9 of 12 combats)
 > march
 map 2 of 8: Saltmarsh Ford, seed 140
+objective: defeat every enemy by the end of turn 18; lost if the captain falls
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...

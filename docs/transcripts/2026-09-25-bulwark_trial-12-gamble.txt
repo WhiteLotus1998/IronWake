@@ -1,5 +1,6 @@
 Trial of the Bulwark, seed 12, scheme TwoRollAverage
 certification trial: captain plays as Bulwark with iron_lance
+objective: hold until the end of turn 1; lost if the captain falls
 Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
    012345678
  0 .........
@@ -104,5 +105,6 @@ c  brigand-3        Brigand L3 reaver          0,1    hp 23/23  Plain  group wes
 d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group west, aggressive
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
 battle lost: the captain is dead; no recall is left
+lost because the captain, Alder Fenn (A), fell
 battle lost: the captain is dead
 certification: Bulwark not earned

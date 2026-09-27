@@ -63,6 +63,12 @@ public sealed class ClientSession
     /// </summary>
     public Highlight? Playing { get; private set; }
 
+    /// <summary>The map's objective in the console's words, shown for the whole battle (issue 374).</summary>
+    public string Objective => Ironwake.Core.Objective.Line(State, Content);
+
+    /// <summary>Why a lost battle was lost, in the console's words, or null while ongoing or won (issue 374).</summary>
+    public string? Verdict => EnemyPhasePlaying ? null : Ironwake.Core.Objective.Verdict(State, Content);
+
     /// <summary>The selected player unit's id, or null.</summary>
     public string? Selected { get; private set; }
 
@@ -224,8 +230,10 @@ public sealed class ClientSession
         Status = null;
         Playing = null;
         Record(command);
+        var before = State;
         State = result.Next;
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
+        _log.AddRange(Ironwake.Core.Objective.Notices(before, State, Content, command));
         if (command is EndPhase)
         {
             Selected = null;
@@ -271,6 +279,14 @@ public sealed class ClientSession
             foreach (var e in result.Events.Where(e => !dark || e is not UnitMoved and not UnitWaited))
             {
                 _pending.Enqueue(HighlightOf(e, PlaySession.Describe(e, Content), before, State));
+            }
+
+            if (!dark)
+            {
+                foreach (var notice in Ironwake.Core.Objective.Notices(before, State, Content, command))
+                {
+                    _pending.Enqueue(new Highlight(notice, null, null, Array.Empty<Coord>(), null));
+                }
             }
         }
 

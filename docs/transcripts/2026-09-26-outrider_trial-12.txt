@@ -1,5 +1,6 @@
 Trial of the Outrider, seed 12, scheme TwoRollAverage
 certification trial: captain plays as Outrider with iron_lance, iron_sword
+objective: the captain, Alder Fenn (A), must stand on the throne at any tile from 0,0 to 6,0 by the end of turn 1; only the captain seizes; lost if the captain falls
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -53,6 +54,7 @@ captain attacks hexer-1
   captain hp 13, hexer-1 hp 0
 captain gains 30 exp (30)
 hexer-1 falls at 3,2
+no enemy is left, but the map is not won: the captain, Alder Fenn (A), must still stand on the throne at any tile from 0,0 to 6,0 by the end of turn 1 (now turn 1)
 captain may canto up to 3 movement: canto captain <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456

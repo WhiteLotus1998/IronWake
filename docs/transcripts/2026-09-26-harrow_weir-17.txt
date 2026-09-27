@@ -1,4 +1,5 @@
 Harrow Weir, seed 17, scheme TwoRollAverage
+objective: defeat the boss (!) by the end of turn 14; lost if the captain falls
   turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.
   turn 5, enemy phase: a brigand arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.
   turn 5, enemy phase: a brigand arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.

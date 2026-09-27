@@ -10,7 +10,8 @@ namespace Ironwake.Godot;
 /// <summary>
 /// The thin renderer, slices 1 and 2 and the readability pass (issues 347, 353, 349): flat tiles in
 /// <see cref="Palette"/>'s colours with their glyphs and a legend, the dark shaded, units as
-/// letters on blue circles and orange squares with their hp, the selected unit's reach, the forecast from a hovered tile against
+/// letters on blue circles and orange squares with their hp, the captain crowned and a Seize map's
+/// throne framed, the objective atop the panel and a lost battle's reason under it (issue 374), the selected unit's reach, the forecast from a hovered tile against
 /// each target in range and the threat on the selected unit there, the Recall browser, and the
 /// event log in the console's own text. Every number comes from
 /// <see cref="ClientSession"/>, which asks the core; nothing here knows a rule.
@@ -439,6 +440,11 @@ public partial class Main : Node2D
                     DrawRect(Inset(rect, 2), Colors.White, filled: false, width: 3);
                 }
 
+                if (map.Win == WinCondition.Seize && map.IsThrone(at))
+                {
+                    DrawThrone(rect);
+                }
+
                 if (reach is not null && reach.CanEnd(at))
                 {
                     DrawRect(rect, new Color(1f, 1f, 1f, 0.3f));
@@ -498,6 +504,11 @@ public partial class Main : Node2D
             DrawRect(square, fill);
         }
 
+        if (unit.IsCaptain)
+        {
+            DrawCrown(centre + new Vector2(0, -radius - 1), radius * 0.6f);
+        }
+
         if (unit.Id == _client!.Selected)
         {
             DrawArc(centre, radius + 4, 0, Mathf.Tau, 32, Mark, 2);
@@ -511,6 +522,29 @@ public partial class Main : Node2D
         var hpWidth = _mono.GetStringSize(hp, fontSize: hpSize).X;
         DrawRect(new Rect2(rect.Position + new Vector2(rect.Size.X - hpWidth - 3, rect.Size.Y - hpSize - 1), new Vector2(hpWidth + 3, hpSize + 1)), new Color(0, 0, 0, 0.75f));
         Text(rect.Position + new Vector2(rect.Size.X - hpWidth - 1.5f, rect.Size.Y - 3), hp, Colors.White, hpSize);
+    }
+
+    /// <summary>The seize tile on a Seize map (issue 374): a double white frame, apart from an exit's single one.</summary>
+    private void DrawThrone(Rect2 rect)
+    {
+        DrawRect(Inset(rect, 1), Colors.Black, filled: false, width: 2);
+        DrawRect(Inset(rect, 3), Colors.White, filled: false, width: 2);
+        DrawRect(Inset(rect, 7), Colors.White, filled: false, width: 2);
+    }
+
+    /// <summary>The captain's mark (issue 374): a three-pointed white crown with a black edge, its base at <paramref name="baseCentre"/>.</summary>
+    private void DrawCrown(Vector2 baseCentre, float width)
+    {
+        var h = width * 0.7f;
+        var l = baseCentre.X - width / 2;
+        var points = new[]
+        {
+            new Vector2(l, baseCentre.Y), new Vector2(l, baseCentre.Y - h), new Vector2(l + width * 0.25f, baseCentre.Y - h * 0.45f),
+            new Vector2(l + width * 0.5f, baseCentre.Y - h), new Vector2(l + width * 0.75f, baseCentre.Y - h * 0.45f),
+            new Vector2(l + width, baseCentre.Y - h), new Vector2(l + width, baseCentre.Y),
+        };
+        DrawColoredPolygon(points, Colors.White);
+        DrawPolyline(points.Append(points[0]).ToArray(), Colors.Black, 1.5f);
     }
 
     /// <summary>The enemy-phase path: the line walked from the start tile through the path to the end tile, drawn under the units.</summary>
@@ -603,10 +637,19 @@ public partial class Main : Node2D
         x = LegendText(x + 18, y, "enemy");
         DrawRect(new Rect2(x, y - 11, 14, 14), Of(Palette.TerrainOf("plain")).Lerp(Colors.White, 0.3f));
         x = LegendText(x + 18, y, "can move");
+        DrawCrown(new Vector2(x + 7, y + 2), 14);
+        x = LegendText(x + 18, y, "captain");
         if (map.Exits.Count > 0)
         {
             DrawRect(new Rect2(x, y - 11, 14, 14), Colors.White, filled: false, width: 2);
             x = LegendText(x + 18, y, "exit");
+        }
+
+        if (map.Win == WinCondition.Seize)
+        {
+            DrawRect(new Rect2(x, y - 11, 14, 14), Colors.White, filled: false, width: 1);
+            DrawRect(new Rect2(x + 3, y - 8, 8, 8), Colors.White, filled: false, width: 1);
+            x = LegendText(x + 18, y, "throne");
         }
 
         if (Dusk.Sight(state) is not null)
@@ -636,6 +679,7 @@ public partial class Main : Node2D
     {
         var client = _client!;
         var y = PanelOrigin.Y;
+        y = Row(y, client.Objective, Accent) + 4;
         foreach (var text in StatusLines())
         {
             y = Row(y, text, Warn);
@@ -837,6 +881,11 @@ public partial class Main : Node2D
     private IEnumerable<string> StatusLines()
     {
         var client = _client!;
+        if (client.Verdict is { } verdict)
+        {
+            yield return "! " + verdict;
+        }
+
         if (client.Status is { } status)
         {
             foreach (var text in status.Split('\n'))
