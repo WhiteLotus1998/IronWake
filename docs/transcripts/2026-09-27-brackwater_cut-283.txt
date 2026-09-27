@@ -287,10 +287,10 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > threat pell
-threat on pell at 9,1 (Plain): no enemy can strike it next phase
+threat on pell at 9,1 (Plain): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > threat rook
-threat on rook at 10,1 (Water): no enemy can strike it next phase
+threat on rook at 10,1 (Water): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > end
 -- player phase ends, turn 1 --

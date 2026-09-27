@@ -418,7 +418,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 9,3 (Plain): no enemy can strike it next phase
+threat on dunstan at 9,3 (Plain): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > move captain 9,4
 captain moves 8,4 -> 9,4
@@ -820,7 +820,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 11,3 (Plain): no enemy can strike it next phase
+threat on dunstan at 11,3 (Plain): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > wait dunstan
 dunstan waits
@@ -1429,7 +1429,7 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat captain
-threat on captain at 18,1 (Plain): no enemy can strike it next phase
+threat on captain at 18,1 (Plain): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > end
 -- player phase ends, turn 4 --
@@ -1593,7 +1593,7 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat pell
-threat on pell at 19,2 (Plain): no enemy can strike it next phase
+threat on pell at 19,2 (Plain): no enemy in sight can strike it next phase
   and whatever is in the dark (?), unpriced
 > wait captain
 captain waits

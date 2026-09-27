@@ -282,6 +282,25 @@ public class DuskTests
         Assert.Contains("\n  soldier-1: cannot see you (dark)", text);
     }
 
+    /// <summary>
+    /// Issue 399: while an enemy is in the dark, the empty case of <c>threat</c> claims only the
+    /// enemies in sight; in daylight, or at dusk with every enemy seen, it keeps the plain line.
+    /// </summary>
+    [Theory]
+    [InlineData(1, "no enemy in sight can strike it next phase", true)]
+    [InlineData(9, "no enemy can strike it next phase", false)]
+    [InlineData(null, "no enemy can strike it next phase", false)]
+    public void AnEmptyThreatAtDuskClaimsOnlyTheEnemiesInSight(int? dusk, string claim, bool dark)
+    {
+        var state = Start(dusk);
+        var hale = state.Find("hale")!;
+
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
+
+        Assert.StartsWith($"threat on hale at 0,0 (Plain): {claim}", text);
+        Assert.Equal(dark, text.Contains("and whatever is in the dark"));
+    }
+
     [Fact]
     public void InDaylightNoEnemyIsUnseeing()
     {
