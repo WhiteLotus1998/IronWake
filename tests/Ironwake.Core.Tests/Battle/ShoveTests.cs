@@ -181,6 +181,88 @@ public class ShoveTests
     }
 
     [Fact]
+    public void AnAllyShoveIgnoresHeftAndAnEnemyShoveStillChecksIt()
+    {
+        var state = BattleFixture.Start(map: Lane(true, """
+            P captain 1,2
+            P recruit:wren 1,1
+            E brigand 2,1 group:lane behavior:aggressive
+
+            """));
+        var brigand = state.Find("brigand-1")!;
+        state = state.WithUnit(brigand with { Unit = brigand.Unit with { Stats = brigand.Unit.Stats with { Def = 60 } } });
+        Assert.True(Resolver.Heft(Starter, state.Find("wren")!) < Resolver.Heft(Starter, state.Find("hale")!));
+
+        var ally = state.Try(new Shove("wren", "hale"));
+        var enemy = state.Refused(new Shove("wren", "brigand-1"));
+
+        Assert.True(ally.Accepted, ally.Rejection?.Message);
+        Assert.Equal(new Coord(1, 3), ally.Next.Find("hale")!.At);
+        Assert.Contains("heft", enemy.Message);
+        Assert.Contains(new Shove("wren", "hale"), Resolver.Legal(state, Starter));
+        Assert.DoesNotContain(new Shove("wren", "brigand-1"), Resolver.Legal(state, Starter));
+    }
+
+    [Fact]
+    public void APushedAllyFiresTheEnterEventOfTheTileItLandsOn()
+    {
+        var map = Lane(true, """
+            P captain 1,1
+            P recruit:wren 1,2
+            E brigand 5,0 group:lane behavior:aggressive
+
+            events:
+            crossed enter 1,3 flag crossed
+
+            """);
+
+        var result = BattleFixture.Start(map: map).Try(new Shove("hale", "wren"));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Contains(new FlagSet("crossed"), result.Events);
+        Assert.True(result.Next.HasFired("crossed"));
+    }
+
+    [Fact]
+    public void APushedEnemyFiresNoEnterEvent()
+    {
+        var map = Lane(true, """
+            P captain 1,1
+            P recruit:wren 5,3
+            E brigand 2,1 group:lane behavior:aggressive
+
+            events:
+            crossed enter 3,1 flag crossed
+
+            """);
+        var state = BattleFixture.Start(map: map);
+        var hale = state.Find("hale")!;
+        state = state.WithUnit(hale with { Unit = hale.Unit with { Stats = hale.Unit.Stats with { Str = 30 } } });
+
+        var result = state.Try(new Shove("hale", "brigand-1"));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.DoesNotContain(result.Events, e => e is FlagSet);
+    }
+
+    [Fact]
+    public void AnAllyPushedOntoAnExitStaysUntilItTakesItsOwnExit()
+    {
+        var map = Lane(true, """
+            P captain 1,1
+            P recruit:wren 1,2
+            E brigand 5,0 group:lane behavior:aggressive
+
+            """).Replace("win: rout", "win: escape").Replace("enemy_level: 1\n", "enemy_level: 1\nexit: 1,3 2,3\n");
+
+        var pushed = BattleFixture.Start(map: map).Do(new Shove("hale", "wren"));
+
+        Assert.Equal(new Coord(1, 3), pushed.Find("wren")!.At);
+        Assert.False(pushed.HasEscaped("wren"));
+        Assert.True(pushed.Try(new Exit("wren")).Accepted);
+    }
+
+    [Fact]
     public void OnlyPlayerUnitsShove()
     {
         var state = Start().Do(new Wait("hale")).Do(new Wait("wren")).Do(new EndPhase());

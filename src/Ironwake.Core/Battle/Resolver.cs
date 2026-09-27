@@ -51,6 +51,11 @@ public static class Resolver
                 break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(shove.TargetId)!, events);
+                }
+
                 break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
@@ -829,8 +834,9 @@ public static class Resolver
     /// Why <paramref name="unit"/> may not shove <paramref name="target"/> (DESIGN.md 13.12), or null
     /// when it may: the map needs <c>shove: on</c>, the pusher must be a player unit, the target a
     /// different unit orthogonally adjacent to it, the tile beyond on the map, passable for the target
-    /// and empty, and the pusher's heft (Str + Def) at least the target's. The resolver and
-    /// <see cref="Legal"/> share it.
+    /// and empty, and, when the target is an enemy, the pusher's heft (Str + Def) at least the
+    /// target's. An ally consents, so no heft is checked between allies (issue 344). The resolver
+    /// and <see cref="Legal"/> share it.
     /// </summary>
     public static string? ShoveRefusal(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
     {
@@ -863,6 +869,11 @@ public static class Resolver
         if (state.UnitAt(to) is { } blocker)
         {
             return $"{blocker.Id} stands on {to}";
+        }
+
+        if (target.Side == unit.Side)
+        {
+            return null;
         }
 
         var heft = Heft(content, unit);
