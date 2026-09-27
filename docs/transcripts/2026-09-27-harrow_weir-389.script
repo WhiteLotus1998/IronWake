@@ -1,0 +1,146 @@
+move pell 3,5
+attack pell brigand-1
+move captain 3,4
+attack captain brigand-1
+move teodor 2,2
+wait teodor
+move keziah 3,7
+wait keziah
+move dunstan 1,10
+wait dunstan
+move ottilie 3,6
+wait ottilie
+end
+move teodor 5,1
+wait teodor
+move pell 7,5
+wait pell
+move ottilie 6,6
+wait ottilie
+move keziah 7,7
+wait keziah
+move captain 6,4
+wait captain
+move dunstan 5,10
+wait dunstan
+end
+move teodor 7,0
+wait teodor
+move pell 9,6
+attack pell shieldbearer-1
+move keziah 10,6
+attack keziah shieldbearer-1
+move dunstan 7,9
+wait dunstan
+move ottilie 8,7
+wait ottilie
+move captain 7,5
+wait captain
+end
+move pell 7,8
+attack pell brawler-1
+move ottilie 8,9
+attack ottilie brawler-1
+attack dunstan brawler-1
+wait keziah
+move captain 8,5
+wait captain
+wait teodor
+end
+move pell 6,10
+attack pell soldier-1
+move dunstan 7,10
+attack dunstan soldier-1
+move ottilie 8,8
+attack ottilie soldier-1
+move captain 8,9
+attack captain soldier-1
+wait keziah
+wait teodor
+end
+move pell 5,10
+attack pell brigand-2
+move dunstan 4,10
+attack dunstan brigand-2
+move ottilie 8,7
+wait ottilie
+move captain 8,6
+wait captain
+wait keziah
+move teodor 7,4
+wait teodor
+end
+move keziah 11,6
+attack keziah weir_foreman-1
+move captain 10,6
+wait captain
+move teodor 9,6
+wait teodor
+move pell 8,9
+wait pell
+move dunstan 7,9
+wait dunstan
+wait ottilie
+end
+move keziah 12,4
+attack keziah weir_foreman-1
+move captain 12,6
+wait captain
+move teodor 11,6
+wait teodor
+move pell 9,6
+wait pell
+move dunstan 9,7
+wait dunstan
+move ottilie 8,6
+wait ottilie
+end
+move keziah 13,4
+attack keziah archer-1
+move captain 12,3
+wait captain
+move teodor 13,5
+wait teodor
+move pell 12,6
+wait pell
+move ottilie 11,6
+wait ottilie
+move dunstan 10,6
+wait dunstan
+end
+move teodor 14,5
+attack teodor archer-1
+move pell 12,4
+attack pell archer-1
+move captain 14,1
+attack captain weir_foreman-1
+move keziah 12,5
+wait keziah
+move ottilie 12,3
+wait ottilie
+move dunstan 12,6
+wait dunstan
+end
+move captain 13,2
+wait captain
+move pell 14,2
+wait pell
+move teodor 15,3
+wait teodor
+move ottilie 12,2
+wait ottilie
+move dunstan 13,4
+wait dunstan
+move keziah 12,6
+wait keziah
+end
+move pell 14,1
+attack pell weir_foreman-1
+move ottilie 13,0
+attack ottilie weir_foreman-1
+wait captain
+wait teodor
+wait dunstan
+wait keziah
+end
+attack pell weir_foreman-1

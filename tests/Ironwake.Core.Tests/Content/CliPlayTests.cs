@@ -877,24 +877,84 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 385: Code's play of seed 263 under the boss veto, the ranged-only opening. Pell
-    /// breaks the shieldbearer from 9,6 alone; the Foreman steps onto the bridge at 11,6,
-    /// where only 10,6 and 9,6 reach him, strikes nobody, and holds it. Pell's Cinder takes
-    /// his counter to 3, the ford's soldier kills Ottilie and a Recall takes it back, and
-    /// Pell kills him on turn 6.
+    /// Issue 385's ranged-only opening (Code's seed 263 script) under issue 389: the veto picks
+    /// the tile, not the swing. Pell breaks the shieldbearer from 9,6 alone; on enemy phase 4
+    /// the Foreman steps onto the bridge head at 11,6, the approach tile the veto passes, and
+    /// now swings at Pell from it instead of waiting there. The 10,6 pocket stays closed. The
+    /// journaled 385 transcript is history and no longer replays past that phase.
     /// </summary>
     [Fact]
-    public void TheJournaledVetoForemanHoldsTheBridgeOnSeed263()
+    public void TheVetoedForemanSwingsFromTheBridgeHeadOnSeed263()
     {
-        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-263-veto.script", 263, out var exit);
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-263-veto.script", 263, out _);
+
+        var phase = output[output.IndexOf("-- enemy phase, turn 4 --", StringComparison.Ordinal)..];
+        Assert.Contains("weir_foreman-1 moves 12,6 -> 11,6\nenemy: attack weir_foreman-1 pell\n", phase);
+        Assert.DoesNotContain("-> 10,6", output);
+    }
+
+    /// <summary>
+    /// Issue 389, the veto picks the tile, not the swing: Chat's seed 293 script. On enemy
+    /// phase 10 the worn Foreman (13 hp) stays on 14,9 because every tile he could strike
+    /// from is refused, and before 389 he Waited there beside Keziah on 11 hp. Now he takes
+    /// the swing his own tile offers: the Toll Axe on her at 25 percent, which misses on
+    /// this seed.
+    /// </summary>
+    [Fact]
+    public void AWornBossSwingsFromTheTileTheVetoLeftHimOnSeed293()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-293.script", 293, out var exit);
+
+        var start = output.IndexOf("-- enemy phase, turn 10 --", StringComparison.Ordinal);
+        var phase = output[start..output.IndexOf("-- enemy phase ends, turn 10 --", start, StringComparison.Ordinal)];
+        Assert.Equal(0, exit);
+        Assert.DoesNotContain("weir_foreman-1 moves", phase);
+        Assert.Contains("enemy: attack weir_foreman-1 keziah\n", phase);
+        Assert.Contains("  weir_foreman-1 misses keziah\n", phase);
+        Assert.DoesNotContain("enemy: wait weir_foreman-1", phase);
+    }
+
+    /// <summary>
+    /// Issue 389: Code's hand play of seed 389 replays to its journaled transcript. The Foreman
+    /// runs to the mountain at 15,0 when the staging refuses his tile, then swings from it at
+    /// the captain on enemy phase 10 and at Pell on enemy phase 12, and falls on turn 13.
+    /// </summary>
+    [Fact]
+    public void TheJournaledSeed389PlayReplaysWithTheForemanSwingingFromHisMountain()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-389.script", 389, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("weir_foreman-1 moves 12,6 -> 11,6\n", output);
-        Assert.Contains("  weir_foreman-1 hits pell for 13 (hp 3)\n", output);
-        Assert.Contains("ottilie falls at 6,7\n", output);
-        Assert.Contains("weir_foreman-1 falls at 11,6\n", output);
-        Assert.EndsWith("battle won: defeat_boss\n", output);
-        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-263-veto.txt")).ReplaceLineEndings("\n"), output);
+        Assert.Contains("weir_foreman-1 moves 14,0 -> 15,0\nenemy: attack weir_foreman-1 captain\n", output);
+        Assert.Contains("weir_foreman-1 falls at 15,0\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-389.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 389: <c>threat</c> names the swing a vetoed boss takes from the tile it ends on,
+    /// since it reads the planner's strike. On Chat's seed 293 line at the end of turn 10's
+    /// player phase, <c>threat keziah</c> said nobody could strike her; it now names the
+    /// Foreman from 14,9, the swing enemy phase 10 makes.
+    /// </summary>
+    [Fact]
+    public void ThreatNamesTheSwingAVetoedBossTakesFromItsEndTile()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var lines = File.ReadAllLines(Path.Combine(repo, "docs", "transcripts", "2026-09-27-harrow_weir-293.script"));
+        var tenth = lines.Select((line, index) => (line, index)).Where(l => l.line == "end").ElementAt(9).index;
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-threat-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllLines(path, lines.Take(tenth).Append("threat keziah"));
+        string output;
+        try
+        {
+            output = Run(out _, "play", Path.Combine(Fixture.RealContentDirectory(), "maps", "harrow_weir.map"), "--seed", "293", "--script", path, "--strict", "--content", Fixture.RealContentDirectory());
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+
+        Assert.Contains("threat on keziah at 14,8 (Forest):\n  weir_foreman-1 from 14,9 with Toll Axe (slot 1): dmg 11 hit 25%", output);
     }
 
     /// <summary>
