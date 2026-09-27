@@ -387,7 +387,8 @@ public class CliPlayTests
     /// Issue 222: Code's play of seed 163 on the Tollgate with the rider arriving by map event.
     /// The woods fight opens on turn 3, the rider arrives at 13,5 as enemy phase 4 opens and
     /// strikes Pell on the flank of it, one Recall on turn 5 buys the rider's kill by the
-    /// captain, the captain takes the door, and he seizes on turn 10 of 10.
+    /// captain, the captain takes the door, and he seizes on turn 10 of 10. Issue 351 moved the
+    /// shipped spawn to 13,4, so the line replays on the map it was played on.
     /// </summary>
     [Fact]
     public void TheJournaledScriptWinsTheTollgateOnSeedOneSixtyThree()
@@ -395,7 +396,7 @@ public class CliPlayTests
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var script = Path.Combine(repo, "docs", "transcripts", "2026-09-25-the_tollgate-163.script");
 
-        var output = Run(out var exit, "play", "the_tollgate", "--seed", "163", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "play", ProtocolSessionTests.TollgateRowFive, "--seed", "163", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
@@ -409,8 +410,8 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 222's rule: the Tollgate places no rider, and one spawn event brings rider-1 to
-    /// 13,5 at the start of enemy phase 4, under the same id on every replay.
+    /// Issue 222's rule, on issue 351's tile: the Tollgate places no rider, and one spawn event
+    /// brings rider-1 to 13,4 at the start of enemy phase 4, under the same id on every replay.
     /// </summary>
     [Fact]
     public void TheTollgateRiderArrivesByEventOnEnemyPhaseFour()
@@ -426,7 +427,7 @@ public class CliPlayTests
             Assert.DoesNotContain("rider", turnOne.Replace("show rider-1", "").Replace("'rider-1'", ""));
             Assert.Contains("no living unit 'rider-1'", turnOne);
             Assert.DoesNotContain("arrives", first[..first.IndexOf("-- enemy phase, turn 4 --", StringComparison.Ordinal)]);
-            Assert.Contains("-- enemy phase, turn 4 --\nevent riders\n  rider-1 arrives at 13,5, group flank, aggressive\n", first);
+            Assert.Contains("-- enemy phase, turn 4 --\nevent riders\n  rider-1 arrives at 13,4, group flank, aggressive\n", first);
             Assert.Equal(first, second);
         }
         finally

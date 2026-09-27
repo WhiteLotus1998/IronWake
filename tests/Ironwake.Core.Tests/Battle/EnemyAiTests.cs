@@ -191,6 +191,31 @@ public class EnemyAiTests
     }
 
     /// <summary>
+    /// Issue 351: the Tollgate's rider arrives at 13,4 as enemy phase 4 opens, and row 4 is
+    /// open plain from 13 to 7, so on its arrival phase it reaches 7,4 beside the door's
+    /// ranged tile 6,4. From the old spawn at 13,5 it stops one tile short (Chat's seed 97).
+    /// </summary>
+    [Fact]
+    public void OnTheTollgateTheRiderReachesTheDoorOnItsArrivalPhase()
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_tollgate.map"), Starter);
+        var state = BattleState.From(map, Starter, Starter.Cast, 97);
+        for (var i = 0; i < 7; i++)
+        {
+            state = state.Do(new EndPhase());
+        }
+
+        Assert.Equal(Side.Enemy, state.Phase);
+        Assert.Equal(4, state.Turn);
+        var rider = state.Find("rider-1")!;
+        Assert.Equal(new Coord(13, 4), rider.At);
+        Assert.NotNull(Queries.Reachable(state, Starter, rider).EntryAt(new Coord(7, 4)));
+
+        var oldTile = state.WithUnit(rider with { At = new Coord(13, 5) });
+        Assert.Null(Queries.Reachable(oldTile, Starter, oldTile.Find("rider-1")!).EntryAt(new Coord(7, 4)));
+    }
+
+    /// <summary>
     /// Issue 131, target 1: Saltmarsh Ford's west crossing opens into forest at 3,4 and 4,4,
     /// so the approach rule's avoid key stops the brigand in the forest south of the bridge
     /// on enemy phase 1 instead of on open ground beside the party. The party stands where

@@ -368,7 +368,7 @@ public class ProtocolJsonTests
     private static (GameContent Content, BattleState State) PlayedTollgate()
     {
         var content = ContentLoader.Load(Fixture.RealContentDirectory());
-        var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "the_tollgate.map"), content);
+        var map = MapFiles.Load(ProtocolSessionTests.TollgateRowFive, content);
         var session = new ProtocolSession(content, BattleState.From(map, content, content.Cast, 163), TextWriter.Null);
         foreach (var line in ProtocolSessionTests.JsonCommands(ProtocolSessionTests.TollgateScript()))
         {

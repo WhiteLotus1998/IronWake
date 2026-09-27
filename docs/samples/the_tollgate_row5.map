@@ -30,4 +30,4 @@ E toll_brigand 6,5 group:woods behavior:hold
 E archer 5,5 group:woods behavior:hold
 
 events:
-riders turn 4 enemy spawn rider 13,4 group:flank behavior:aggressive
+riders turn 4 enemy spawn rider 13,5 group:flank behavior:aggressive
