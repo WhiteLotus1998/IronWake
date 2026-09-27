@@ -307,18 +307,25 @@ public static class MapRenderer
     /// What an Escape map asks, in the words of DESIGN.md section 7's outcome rule (issue 269),
     /// printed after the exit tiles in <see cref="ExitLegend"/>.
     /// </summary>
-    public const string EscapeRule = "a unit on one may exit as its action; the captain's exit wins and leaves the rest behind";
+    public const string EscapeRule = "a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind";
+
+    /// <summary>
+    /// <see cref="EscapeRule"/> before issue 377, printed on a map with
+    /// <see cref="MapDefinition.ExitAfterMove"/>, where a unit may move onto an exit and leave.
+    /// </summary>
+    public const string EscapeRuleAfterMove = "a unit on one may exit as its action; the captain's exit wins and leaves the rest behind";
 
     /// <summary>
     /// The one line both board views print under the unit rows on an Escape map (issue 267):
     /// the exit glyph in parentheses (never at the line's start, where the console echoes a
     /// command as <c>&gt; </c>), then every exit tile from <see cref="MapDefinition.Exits"/> in the
-    /// map's own order, then <see cref="EscapeRule"/>. Null on a map with no exits.
+    /// map's own order, then <see cref="EscapeRule"/> (<see cref="EscapeRuleAfterMove"/> on a map
+    /// that keeps the older rule). Null on a map with no exits.
     /// </summary>
     public static string? ExitLegend(MapDefinition map) =>
         map.Exits.Count == 0
             ? null
-            : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({EscapeRule})";
+            : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({(map.ExitAfterMove ? EscapeRuleAfterMove : EscapeRule)})";
 
     private static void DrawExits(MapDefinition map, int y, char[] row)
     {

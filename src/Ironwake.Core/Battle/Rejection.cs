@@ -25,6 +25,7 @@ public enum RejectionReason
     ArtRefused,
     NoCanto,
     NotOnAnExit,
+    MovedBeforeExit,
     NoKeepsake,
     Unseen,
     CannotShove,

@@ -50,28 +50,15 @@ move pell 17,0
 wait pell
 move rook 15,1
 wait rook
-threat captain
 end
+move rook 18,3
+wait rook
 move pell 19,2
 wait pell
-move rook 18,0
-wait rook
+move wren 19,4
 wait wren
-threat pell
+move captain 19,3
 wait captain
 end
-move rook 16,0
-wait rook
-move wren 18,0
-wait wren
-move pell 19,1
-move captain 19,2
-attack captain rider-2
-attack pell rider-2
-end
-move wren 19,3
 exit wren
-move rook 19,3
-exit rook
-move captain 19,3
 exit captain

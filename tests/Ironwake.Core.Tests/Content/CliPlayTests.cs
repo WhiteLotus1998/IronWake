@@ -583,11 +583,12 @@ public class CliPlayTests
     /// Chat's cold play of Brackwater Cut at <c>dusk: 5</c> on seed 17 under the third arm, played
     /// on the sample that is now the shipped map (issue 318):
     /// rider-1 drifts onto the route and is killed there, and all five walk out on turn 5.
+    /// Since issue 377 it replays on the shipped map's pre-377 copy, which carries <c>exit_after_move: on</c>.
     /// </summary>
     [Fact]
     public void ChatsBrackwaterScriptOnSeedSeventeenEscapesWithAllFive()
     {
-        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut_dusk5-17.script", 17, out var exit);
+        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut_dusk5-17.script", 17, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("rider-1 falls at", output);
@@ -599,11 +600,12 @@ public class CliPlayTests
     /// now the shipped map (issue 318). Knowing of
     /// nobody, the chase makes for the exits through the gap instead of standing still; the
     /// fight it brings to the staging tiles wakes the bank, and only Rook and the captain get out.
+    /// Since issue 377 it replays on the shipped map's pre-377 copy, which carries <c>exit_after_move: on</c>.
     /// </summary>
     [Fact]
     public void TheJournaledScriptEscapesBrackwaterUnderTheThirdArm()
     {
-        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
+        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
         Assert.EndsWith("escaped: rook, captain; left behind: none; fell: dunstan, pell, wren\n", output);
@@ -618,11 +620,12 @@ public class CliPlayTests
     /// paths as if the party were not there, so the chase walks up to the gap, strikes Wren
     /// there on enemy phase 3 and kills her on enemy phase 4, and the script stops at its
     /// first command for her.
+    /// Since issue 377 it replays on the shipped map's pre-377 copy, which carries <c>exit_after_move: on</c>.
     /// </summary>
     [Fact]
     public void TheJournaledCorkNoLongerFreezesTheChaseOnTheShippedDuskMap()
     {
-        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut-41.script", 41, out var exit);
+        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut-41.script", 41, out var exit);
 
         Assert.NotEqual(0, exit);
         var enemyThree = output[output.IndexOf("-- enemy phase, turn 3 --", StringComparison.Ordinal)..];
@@ -638,11 +641,12 @@ public class CliPlayTests
     /// enemy phase 2 and kills him on phase 3; on phase 5 rider-2 drifts onto the exit at 19,3,
     /// and the captain spots it so Pell can shoot it from 19,1. Wren, Rook and the captain
     /// escape on turn 7.
+    /// Since issue 377 it replays on the shipped map's pre-377 copy, which carries <c>exit_after_move: on</c>.
     /// </summary>
     [Fact]
     public void TheJournaledScriptFightsTheChaseAtTheGapAndOnTheExit()
     {
-        var output = RunShipped("brackwater_cut.map", "2026-09-26-brackwater_cut-53.script", 53, out var exit);
+        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut-53.script", 53, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("rider-1 attacks dunstan\n", output);
@@ -775,6 +779,40 @@ public class CliPlayTests
             File.Delete(map);
             File.Delete(script);
         }
+    }
+
+    /// <summary>
+    /// Issue 377: a unit exits without moving, from an exit it began its turn on. Chat's seed 241
+    /// play of Brackwater at dusk staged four units outside the bank's radius and walked them
+    /// out through 19,3 in one turn; on the sample that keeps the older rule it replays byte for
+    /// byte, and on the shipped map the first move and exit in one turn is refused.
+    /// </summary>
+    [Fact]
+    public void ChatsSeed241WalkOutReplaysOnlyUnderTheOlderExitRule()
+    {
+        var older = RunSample("brackwater_cut_exit_after_move.map", "2026-09-27-brackwater_cut-241.script", 241, out var olderExit);
+        var shipped = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-241.script", 241, out var shippedExit);
+
+        Assert.Equal(0, olderExit);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241.txt")).ReplaceLineEndings("\n"), older);
+        Assert.NotEqual(0, shippedExit);
+        Assert.Contains("rook cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on", shipped);
+    }
+
+    /// <summary>
+    /// Issue 377: Code's replay of Chat's seed 241 staging under the new rule. The party stands on
+    /// 19,3 to 19,6 through enemy phase 5 with the bank awake; the brawler kills Rook on 19,6,
+    /// the hexer kills Dunstan on the gap, and on turn 6 Wren, Pell and the captain leave.
+    /// </summary>
+    [Fact]
+    public void TheJournaledStandOnTheExitsPaysTheBankOnSeed241()
+    {
+        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-241-stand.script", 241, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("rook falls at 19,6\n", output);
+        Assert.EndsWith("escaped: wren, pell, captain; left behind: none; fell: dunstan, rook\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241-stand.txt")).ReplaceLineEndings("\n"), output);
     }
 
     private static string RunShipped(string map, string script, int seed, out int exit)

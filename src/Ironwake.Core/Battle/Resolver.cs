@@ -921,7 +921,10 @@ public static class Resolver
 
     /// <summary>
     /// Issue 269's exit: a unit that has not acted, standing on an exit tile of an Escape
-    /// map, leaves the board for the state's escaped list. When the captain leaves, every
+    /// map, leaves the board for the state's escaped list. Since issue 377 the exit is taken
+    /// without a Move, so only a unit that began its turn on the exit leaves, and whoever means
+    /// to leave stands on the edge through an enemy phase first; a map with
+    /// <see cref="MapDefinition.ExitAfterMove"/> keeps the older rule. When the captain leaves, every
     /// player unit still on the board is left behind, one event each in id order. An enemy
     /// on an exit tile stays where it is.
     /// </summary>
@@ -946,6 +949,11 @@ public static class Resolver
         if (!state.Map.IsExit(unit.At))
         {
             return (state, new Rejection(RejectionReason.NotOnAnExit, $"{unit.Id} cannot exit: {unit.At} is not an exit tile"));
+        }
+
+        if (unit.Moved && !state.Map.ExitAfterMove)
+        {
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on"));
         }
 
         events.Add(new UnitExited(unit.Id, unit.At));
@@ -1105,7 +1113,8 @@ public static class Resolver
                 }
             }
 
-            if (unit.Side == Side.Player && state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At))
+            if (unit.Side == Side.Player && state.Map.Win == WinCondition.Escape && state.Map.IsExit(unit.At)
+                && (!unit.Moved || state.Map.ExitAfterMove))
             {
                 yield return new Exit(unit.Id);
             }

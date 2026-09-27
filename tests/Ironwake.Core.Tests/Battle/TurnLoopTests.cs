@@ -84,7 +84,7 @@ public class TurnLoopTests
         var state = Start(map: YardWith("escape", "exit: 1,3 2,3"));
         Assert.Equal(ValueList<Coord>.Of(new Coord(1, 3), new Coord(2, 3)), state.Map.Exits);
 
-        var standing = state.Do(new Move("hale", new Coord(1, 3))).Do(new Move("wren", new Coord(2, 3)));
+        var standing = state.Stood("hale", new Coord(1, 3)).Stood("wren", new Coord(2, 3));
         Assert.Equal(BattleOutcome.Ongoing, standing.Outcome);
 
         var won = standing.Do(new Exit("wren")).Do(new Exit("hale"));

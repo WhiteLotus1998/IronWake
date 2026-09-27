@@ -39,7 +39,7 @@ public class ExitTests
     [Fact]
     public void AUnitOnAnExitLeavesTheBoardAsItsActionAndIsSafe()
     {
-        var onExit = Start().Do(new Move("wren", new Coord(1, 3)));
+        var onExit = Start().Stood("wren", new Coord(1, 3));
 
         var result = onExit.Try(new Exit("wren"));
 
@@ -62,9 +62,43 @@ public class ExitTests
     }
 
     [Fact]
+    public void AnExitIsTakenWithoutAMoveSoMovingOntoAnExitAndLeavingIsRefused()
+    {
+        var moved = Start().Do(new Move("wren", new Coord(1, 3)));
+
+        var rejection = moved.Refused(new Exit("wren"));
+
+        Assert.Equal(RejectionReason.MovedBeforeExit, rejection.Reason);
+        Assert.Equal("wren cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on", rejection.Message);
+        Assert.DoesNotContain(new Exit("wren"), Resolver.Legal(moved, Starter));
+    }
+
+    [Fact]
+    public void AUnitThatStoodOnAnExitThroughTheEnemyPhaseLeavesOnItsNextTurn()
+    {
+        var stood = Start().Do(new Move("wren", new Coord(1, 3))).Do(new Wait("wren")).Do(new EndPhase()).Do(new EndPhase());
+        Assert.Equal(Side.Player, stood.Phase);
+        Assert.Equal(new Coord(1, 3), stood.Find("wren")!.At);
+
+        var result = stood.Try(new Exit("wren"));
+
+        Assert.True(result.Accepted);
+        Assert.True(result.Next.HasEscaped("wren"));
+    }
+
+    [Fact]
+    public void AMapWithExitAfterMoveKeepsTheOlderRuleOfMovingOntoAnExitAndLeaving()
+    {
+        var moved = Start("exit_after_move: on").Do(new Move("wren", new Coord(1, 3)));
+
+        Assert.Contains(new Exit("wren"), Resolver.Legal(moved, Starter));
+        Assert.True(moved.Do(new Exit("wren")).HasEscaped("wren"));
+    }
+
+    [Fact]
     public void TheCaptainsExitWinsAndLeavesEveryUnitOnTheBoardBehind()
     {
-        var state = Start().Do(new Move("hale", new Coord(1, 3)));
+        var state = Start().Stood("hale", new Coord(1, 3));
 
         var result = state.Try(new Exit("hale"));
 
@@ -78,7 +112,7 @@ public class ExitTests
     [Fact]
     public void NobodyIsLeftBehindWhenEveryoneExitsBeforeTheCaptain()
     {
-        var state = Start().Do(new Move("wren", new Coord(2, 3))).Do(new Exit("wren")).Do(new Move("hale", new Coord(1, 3)));
+        var state = Start().Stood("wren", new Coord(2, 3)).Do(new Exit("wren")).Stood("hale", new Coord(1, 3));
 
         var result = state.Try(new Exit("hale"));
 
@@ -135,7 +169,7 @@ public class ExitTests
     [Fact]
     public void AProtectedRecruitLeftBehindLosesTheBattle()
     {
-        var state = Start("protect: wren").Do(new Move("hale", new Coord(1, 3)));
+        var state = Start("protect: wren").Stood("hale", new Coord(1, 3));
 
         var left = state.Do(new Exit("hale"));
 
@@ -145,10 +179,10 @@ public class ExitTests
     [Fact]
     public void AProtectedRecruitThatExitsFirstIsNotLeftBehind()
     {
-        var state = Start("protect: wren").Do(new Move("wren", new Coord(2, 3))).Do(new Exit("wren"));
+        var state = Start("protect: wren").Stood("wren", new Coord(2, 3)).Do(new Exit("wren"));
         Assert.Equal(BattleOutcome.Ongoing, state.Outcome);
 
-        var won = state.Do(new Move("hale", new Coord(1, 3))).Do(new Exit("hale"));
+        var won = state.Stood("hale", new Coord(1, 3)).Do(new Exit("hale"));
 
         Assert.Equal(new BattleOutcome(BattleResult.Won, "escape"), won.Outcome);
     }
@@ -156,7 +190,7 @@ public class ExitTests
     [Fact]
     public void RecallUndoesAnExit()
     {
-        var before = Start().Do(new Move("wren", new Coord(1, 3)));
+        var before = Start().Stood("wren", new Coord(1, 3));
         var exited = before.Do(new Exit("wren"));
 
         var recalled = exited.Do(new Recall(before.History.Count));
@@ -169,7 +203,7 @@ public class ExitTests
     [Fact]
     public void ARecallOverAnExitDoesNotCountTheUnitAsBroughtBack()
     {
-        var before = Start().Do(new Move("wren", new Coord(1, 3)));
+        var before = Start().Stood("wren", new Coord(1, 3));
         var exited = before.Do(new Exit("wren"));
 
         var cost = RecallCost.Of(exited, before.History.Count);
@@ -184,7 +218,7 @@ public class ExitTests
         var state = Start();
         Assert.DoesNotContain(Resolver.Legal(state, Starter), c => c is Exit);
 
-        var onExit = state.Do(new Move("wren", new Coord(1, 3)));
+        var onExit = state.Stood("wren", new Coord(1, 3));
         Assert.Contains(new Exit("wren"), Resolver.Legal(onExit, Starter));
         Assert.DoesNotContain(new Exit("wren"), Resolver.Legal(onExit.Do(new Wait("wren")), Starter));
     }
@@ -192,9 +226,16 @@ public class ExitTests
     [Fact]
     public void TheCanonicalStateNamesTheEscapedOnAnEscapeMapOnly()
     {
-        var exited = Start().Do(new Move("wren", new Coord(1, 3))).Do(new Exit("wren"));
+        var exited = Start().Stood("wren", new Coord(1, 3)).Do(new Exit("wren"));
 
         Assert.Contains("\nescaped wren\n", exited.Canonical());
         Assert.DoesNotContain("escaped", Start(win: "rout").Canonical());
     }
+}
+
+/// <summary>Puts a unit on a tile as if it had stood there since the phase began, without a Move.</summary>
+internal static class ExitFixture
+{
+    public static BattleState Stood(this BattleState state, string unitId, Coord at) =>
+        state.WithUnit(state.Find(unitId)! with { At = at });
 }

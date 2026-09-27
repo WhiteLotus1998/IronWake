@@ -5,10 +5,12 @@ using static Ironwake.Core.Tests.Battle.BattleFixture;
 namespace Ironwake.Core.Tests.Battle;
 
 /// <summary>
-/// The Sim's Escape approach under issue 269: a unit that can reach an exit this turn moves
-/// there and exits, ahead of any attack; the captain plans last and exits only once no other
-/// player unit that has not acted can reach an exit this turn; the rest plan farthest from
-/// an exit first (issue 332).
+/// The Sim's Escape approach under issues 269 and 377: a unit that began its turn on an exit
+/// leaves, and one that can reach an exit this turn moves there and stands, ahead of any
+/// attack, to leave on the next; the captain plans last and leaves only once no other player
+/// unit stands on an exit or can reach one this turn, or on the last turn; the rest plan
+/// farthest from an exit first (issue 332). A map with <c>exit_after_move: on</c> keeps
+/// issue 269's move and exit in one turn.
 /// </summary>
 public class HeuristicExitTests
 {
@@ -37,9 +39,29 @@ public class HeuristicExitTests
     private static BattleState Start() => BattleFixture.Start(map: Yard);
 
     [Fact]
-    public void ARecruitThatCanReachAnExitMovesThereAndExitsAheadOfAnAttack()
+    public void ARecruitThatCanReachAnExitMovesThereAndStandsAheadOfAnAttack()
     {
         var state = Start();
+
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("wren")!);
+
+        Assert.Equal(new Command[] { new Move("wren", new Coord(3, 2)), new Wait("wren") }, plan);
+    }
+
+    [Fact]
+    public void ARecruitThatBeganItsTurnOnAnExitLeaves()
+    {
+        var state = Start().Stood("wren", new Coord(3, 2));
+
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("wren")!);
+
+        Assert.Equal(new Command[] { new Exit("wren") }, plan);
+    }
+
+    [Fact]
+    public void OnAnExitAfterMoveMapARecruitMovesOntoAnExitAndLeavesInOneTurn()
+    {
+        var state = BattleFixture.Start(map: Yard.Replace("exit: 3,0 3,1 3,2 3,3\n", "exit: 3,0 3,1 3,2 3,3\nexit_after_move: on\n"));
 
         var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("wren")!);
 
@@ -65,13 +87,34 @@ public class HeuristicExitTests
     }
 
     [Fact]
-    public void TheCaptainExitsOnceNoOtherUnitCanReachAnExitThisTurn()
+    public void TheCaptainOnAnExitLeavesOnceNoOtherUnitStandsOnOrCanReachAnExit()
     {
-        var state = Start().Do(new Wait("wren"));
+        var state = Start().Stood("hale", new Coord(3, 1)).Do(new Wait("wren"));
 
         var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("hale")!);
 
-        Assert.Equal(new Command[] { new Move("hale", new Coord(3, 1)), new Exit("hale") }, plan);
+        Assert.Equal(new Command[] { new Exit("hale") }, plan);
+    }
+
+    [Fact]
+    public void TheCaptainOnAnExitHoldsItWhileAnotherUnitStandsOnAnExitToLeaveNextTurn()
+    {
+        var state = Start().Stood("hale", new Coord(3, 1)).Do(new Move("wren", new Coord(3, 2))).Do(new Wait("wren"));
+
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("hale")!);
+
+        Assert.Equal(new Command[] { new Wait("hale") }, plan);
+    }
+
+    [Fact]
+    public void OnTheLastTurnTheCaptainOnAnExitLeavesWhoeverElseStandsOnOne()
+    {
+        var state = Start().Stood("hale", new Coord(3, 1)).Do(new Move("wren", new Coord(3, 2))).Do(new Wait("wren"));
+        state = state with { Turn = state.Map.TurnLimit };
+
+        var plan = HeuristicPlayer.PlanUnit(state, Starter, state.Find("hale")!);
+
+        Assert.Equal(new Command[] { new Exit("hale") }, plan);
     }
 
     [Fact]

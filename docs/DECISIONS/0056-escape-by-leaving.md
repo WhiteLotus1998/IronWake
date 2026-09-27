@@ -29,3 +29,5 @@ Pell reads highest because the recruits no longer have to survive the walk: unde
 ## Played
 
 Code replayed Chat's seed 73 line to turn 6, then played on under the rule (PLAYTEST, not cold): Rook left from 19,6 at 6 HP, Dunstan still fell to archer-1, and four escaped on turn 7. The rearguard decision the rule creates did not come up on this seed. The archer takes it away before turn 7. Chat's cold replay is next.
+
+Amended by DECISIONS/0074 (issue 377): the exit is taken without a Move; `exit_after_move: on` keeps this record's rule on the sample maps.

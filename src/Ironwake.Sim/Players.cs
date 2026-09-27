@@ -124,6 +124,11 @@ public sealed class HeuristicPlayer : IPlayer
             return WithMove(unit, exit, new Exit(unit.Id));
         }
 
+        if (StandTile(state, unit, tiles, reach) is { } stand)
+        {
+            return WithMove(unit, stand, new Wait(unit.Id));
+        }
+
         var enemies = state.UnitsOf(Side.Enemy).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
@@ -190,17 +195,36 @@ public sealed class HeuristicPlayer : IPlayer
     }
 
     /// <summary>
-    /// Issue 269's Escape approach: the exit tile a unit leaves from this turn, the cheapest
-    /// in its reach and then row-major, or null. A recruit leaves as soon as it can, ahead
-    /// of any attack. The captain leaves last: only once no other player unit that has not
-    /// acted can reach an exit this turn, since its exit leaves everyone on the board behind.
-    /// Null on any other map.
+    /// Issue 269's Escape approach: the exit tile a unit leaves from this turn, or null. A
+    /// recruit leaves as soon as it can, ahead of any attack. The captain leaves last: only once
+    /// no other player unit could still leave this turn or the next, since its exit leaves
+    /// everyone on the board behind, and on the last turn regardless. Since issue 377 a unit
+    /// leaves only from the exit it began its turn on (<see cref="StandTile"/> puts it there);
+    /// on a map with <see cref="MapDefinition.ExitAfterMove"/> it leaves from the cheapest exit
+    /// in its reach, then row-major. Null on any other map.
     /// </summary>
     public static Coord? ExitTile(BattleState state, GameContent content, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach)
     {
         if (state.Map.Win != WinCondition.Escape)
         {
             return null;
+        }
+
+        if (!state.Map.ExitAfterMove)
+        {
+            if (unit.Moved || !state.Map.IsExit(unit.At))
+            {
+                return null;
+            }
+
+            if (unit.IsCaptain && state.Turn < state.Map.TurnLimit && state.UnitsOf(Side.Player).Any(other =>
+                    other.Id != unit.Id
+                    && (state.Map.IsExit(other.At) || (!other.Acted && !other.Moved && state.ReachOf(other, content).Destinations.Any(state.Map.IsExit)))))
+            {
+                return null;
+            }
+
+            return unit.At;
         }
 
         if (unit.IsCaptain && state.UnitsOf(Side.Player).Any(other =>
@@ -210,6 +234,28 @@ public sealed class HeuristicPlayer : IPlayer
             return null;
         }
 
+        return CheapestExit(state, tiles, reach);
+    }
+
+    /// <summary>
+    /// Issue 377's half of the Escape approach: the exit tile a unit that cannot leave this turn
+    /// ends its turn on, so that it leaves on the next, the cheapest in its reach and then
+    /// row-major, or null. A unit already on an exit stays on it. Null on a map with
+    /// <see cref="MapDefinition.ExitAfterMove"/>, where <see cref="ExitTile"/> moves and leaves
+    /// in one turn, and on any map that is not Escape.
+    /// </summary>
+    public static Coord? StandTile(BattleState state, BattleUnit unit, IReadOnlyList<Coord> tiles, Reach reach)
+    {
+        if (state.Map.Win != WinCondition.Escape || state.Map.ExitAfterMove)
+        {
+            return null;
+        }
+
+        return state.Map.IsExit(unit.At) ? unit.At : CheapestExit(state, tiles, reach);
+    }
+
+    private static Coord? CheapestExit(BattleState state, IReadOnlyList<Coord> tiles, Reach reach)
+    {
         Coord? chosen = null;
         foreach (var tile in tiles)
         {
