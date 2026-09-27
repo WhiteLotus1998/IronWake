@@ -876,6 +876,26 @@ public class CliPlayTests
         Assert.DoesNotContain(" falls at ", output.Replace("soldier-1 falls at", "").Replace("brawler-1 falls at", "").Replace("archer-2 falls at", "").Replace("grange_reeve-1 falls at", ""));
     }
 
+    /// <summary>
+    /// Issue 429's hand play: Code's seed 443 on <c>docs/samples/brackwater_cut_pincer.map</c>,
+    /// the shipped Brackwater in daylight with the pincer on. On enemy phase 5 two anvils act
+    /// ahead of id order (rider-1 beside Rook, brawler-1 beside Wren), rider-2 kills Wren pinned
+    /// by the brawler, and the soldier strikes the captain pinned by the shieldbearer on the
+    /// north edge. The captain falls on enemy phase 6; nobody escapes.
+    /// </summary>
+    [Fact]
+    public void TheBrackwaterPincerPlayReplaysWithTheEnemysPins()
+    {
+        var output = RunSample("brackwater_cut_pincer.map", "2026-09-27-brackwater_cut_pincer-443.script", 443, out var exit);
+
+        Assert.Equal(1, exit);
+        Assert.DoesNotContain("rejected", output);
+        Assert.Contains("enemy: move rider-1 13,0\nrider-1 moves 14,3 -> 13,0 via 15,3 15,2 15,1 15,0 14,0\n", output);
+        Assert.Contains("  pincer: wren pinned by brawler-1: rider-2 hit +15\n", output);
+        Assert.Contains("  pincer: captain pinned by shieldbearer-1: soldier-1 hit +15\n", output);
+        Assert.Contains("escaped: none; left behind: none; fell: captain, dunstan, pell, rook, wren\n", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
@@ -1777,6 +1797,19 @@ public class SimFullTests
         Assert.Equal(2, refused);
         Assert.Contains("full: no difficulty 'brutal'; they are normal", unknown);
         Assert.DoesNotContain("gate 1", unknown);
+    }
+
+    [Fact]
+    public void FullLoadsASampleMapFromItsFilePath()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var path = Path.Combine(repo, "docs", "samples", "brackwater_cut_pincer.map");
+        var exit = -1;
+        var output = Capture(() => exit = Ironwake.Sim.Program.Full(path, 2));
+        Assert.Contains("full: 1 maps from ", output);
+        Assert.Contains("gate 1 ", output);
+        Assert.DoesNotContain("no map", output);
+        Assert.NotEqual(2, exit);
     }
 
     [Fact]
