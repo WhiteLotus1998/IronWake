@@ -22,7 +22,7 @@ namespace Ironwake.Core;
 /// (DESIGN.md 13.12) and cleared with <see cref="Moved"/> when a phase begins: the shove leaves
 /// the unit its own Move, but it did not begin its turn where it stands, so it may not exit
 /// there this phase (section 7, issue 396).
-/// <see cref="Braced"/> is set when the unit waits without moving on a <c>brace: on</c> map
+/// <see cref="Braced"/> is set when the unit waits on the tile it began its phase on, on a <c>brace: on</c> map
 /// (DESIGN.md 13.14, experiment) and cleared when its side's next phase begins or an ally
 /// shoves it; while it is set, strikes against the unit lose <see cref="Brace.Hit"/> hit.
 /// </summary>
@@ -161,7 +161,7 @@ public sealed record BattleUnit(
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
         critAvoid += Grudges.CritAvoidAgainst(this, against);
-        hit += Pincer.HitAgainst(state, this, against) + Brace.HitAgainst(against);
+        hit += Brace.StrikeHit(state, this, against);
         var weapon = EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {

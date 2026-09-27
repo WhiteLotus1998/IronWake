@@ -28,7 +28,7 @@ public static class MapRenderer
     public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";
 
     /// <summary>The legend a <c>brace: on</c> map prints (DESIGN.md 13.14, experiment).</summary>
-    public const string BraceLegend = "brace: a unit that waits without moving is struck at -15 hit, counters too, until its side's next phase";
+    public const string BraceLegend = "brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase";
 
     public const string ShoveLegend = "shove: a player unit may push an ally beside it one tile straight away, as its action, if the tile beyond is open";
 

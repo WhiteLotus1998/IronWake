@@ -69,8 +69,8 @@ namespace Ironwake.Core;
 /// <see cref="Pincer.Hit"/> more, counters included (<see cref="Pincer"/>). Off by default.
 /// </param>
 /// <param name="BraceEnabled">
-/// The <c>brace: on</c> header (DESIGN.md 13.14, experiment): a unit that waits without moving
-/// is struck at <see cref="Brace.Hit"/> less hit until its side's next phase (<see cref="Brace"/>).
+/// The <c>brace: on</c> header (DESIGN.md 13.14, experiment): a unit that waits on the tile it
+/// began its phase on is struck at <see cref="Brace.Hit"/> less hit until its side's next phase (<see cref="Brace"/>).
 /// Off by default.
 /// </param>
 /// <param name="ExitAfterMove">

@@ -1518,20 +1518,15 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// Under a forecast on a <c>brace: on</c> map (DESIGN.md 13.14): one line for each side that
-    /// is braced, naming the hit the forecast already took off, the strike first and the counter
-    /// second. Silent when neither is braced.
+    /// Under a forecast on a <c>brace: on</c> map (DESIGN.md 13.14): one line when the target is
+    /// braced, naming the hit the forecast already took off. Silent otherwise; the striker is never
+    /// braced, since its brace ends before it can strike.
     /// </summary>
     public static IEnumerable<string> BraceLines(BattleUnit attacker, BattleUnit target)
     {
         if (target.Braced)
         {
             yield return $"  brace: {target.Id} braced: {attacker.Id} hit -{Brace.Hit}";
-        }
-
-        if (attacker.Braced)
-        {
-            yield return $"  brace: {attacker.Id} braced: {target.Id} hit -{Brace.Hit}";
         }
     }
 

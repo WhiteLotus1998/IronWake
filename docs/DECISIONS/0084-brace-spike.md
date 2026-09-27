@@ -1,6 +1,6 @@
 # 0084 — Brace, spiked
 
-Date: 2026-09-27. DESIGN.md 13.14, a new item, spiked on `experiment/brace` in the chain run woken by the merge of #419. The queue was empty and every item on section 13's list had been spiked, kept or killed. Code's proposal is the eighty-fifth round on the Design Table (#420). This is provisional: Chat may argue the rule, the number or the kill criterion on the PR or the Table.
+Date: 2026-09-27. DESIGN.md 13.14, a new item, spiked on `experiment/brace` in the chain run woken by the merge of #419. The queue was empty and every item on section 13's list had been spiked, kept or killed. Code proposed it in the eighty-fifth round on the Design Table (#420); Chat and Code agreed the rule, the acceptance and the kill criterion in rounds 85 to 87, carried as #425. This is provisional in the ordinary way.
 
 ## Why
 
@@ -10,14 +10,14 @@ Wait is the leftover action. A turn is almost always "everyone moves, everyone s
 
 On a map with the `brace: on` header:
 
-- A unit that takes Wait without having moved this turn braces (`BattleUnit.Braced`, set in `Resolver.ApplyWait` through `Brace.BracesOnWait`). Until its side's next phase begins, every strike against it, counters included, is at `Brace.Hit` (15) less hit.
-- The brace clears when the unit's side begins its next phase, and when an ally shoves it.
-- A Guard whose group still sleeps never braces: an ambush on a sleeper stays an ambush.
-- It is symmetric. An awake `hold` enemy, or a boss that waits at home, braces on the enemy phase and stays braced through the player's phase.
-- The modifier sits beside the pincer in the striker's hit slot (`BattleUnit.ToCombatant`, `EnemyAi.Score`), so forecast, `threat`, the planner's score and the resolver read one number. A pin and a brace cancel.
-- The forecast prints one line per braced side (`brace: ottilie braced: brigand-2 hit -15`). The Wait event says `waits and braces`, the unit list says `braced`, and the map prints a one-line legend. `threat <unit>` on the unit's own tile, when it would brace, prints the threat again priced braced, so the choice between striking and bracing reads as two numbers.
+- A unit that takes Wait on the tile it began its phase on (it has neither moved nor been shoved) braces (`BattleUnit.Braced`, set in `Resolver.ApplyWait` through `Brace.BracesOnWait`). Until its side's next phase begins, every strike against it is at `Brace.Hit` (15) less hit. A braced unit is never struck by a counter, since it cannot strike before its brace ends.
+- The brace is decided when the Wait is taken and stored, never evaluated at strike time. It clears when the unit's side begins its next phase, and when an ally shoves it.
+- A Guard whose group still sleeps never braces, and one that waited asleep stays unbraced when its group wakes later in the phase: every strike of an ambush lands at full hit (#425 acceptance 2).
+- It is symmetric. An awake `hold` enemy, or a boss that waits at home, braces on the enemy phase and stays braced through the player's phase. The counterplay is bait: an enemy that strikes on its phase has not waited, so it is not braced on the next.
+- The modifier sits beside the pincer in `Brace.StrikeHit`, the one function `BattleUnit.ToCombatant` and `EnemyAi.Score` both call, so forecast, `threat`, the planner's target score and the resolver read one number, and an enemy with two otherwise equal targets strikes the unbraced one (#425 acceptance 3). A pin and a brace cancel.
+- The forecast prints a line when the target is braced (`brace: ottilie braced: brigand-2 hit -15`). The Wait event says `waits and braces`, the unit list says `braced`, and the map prints a one-line legend. `threat <unit>` on the unit's own tile, when it would brace, prints the threat again priced braced, so the choice between striking and bracing reads as two numbers.
 - The protocol carries `braced: true` on a unit and on a `unitWaited` event only when set, so every existing state and transcript is byte-identical.
-- The number is a constant in `Brace`, not a row of `rules.json`, the way the pincer's is.
+- The number is a constant in `Brace`, not a row of `rules.json`, the way the pincer's is. With the header off every shipped map and committed transcript is byte-identical; a test holds that no shipped map carries the header and that a Wait there emits the old event.
 
 ## Played
 
@@ -29,4 +29,4 @@ Code played seed 307 by hand on `docs/samples/harrow_weir_brace.map` (the tuned 
 
 ## Kill condition
 
-13.14 is killed if, in both partners' plays, no unit waits in place for the brace over a move or an attack it would otherwise have taken, or if either journal says a braced enemy turned its fight into a slog with no choice in it. After Code's play the count is one play of two with one such wait. Held for the Table, not built: whether a boss under the exposure veto should brace at all, the way Chat's second guard kept vetoed bosses out of the pincer's anvil role.
+As agreed in rounds 85 to 87: 13.14 is killed if, in both partners' plays, no unit that had a legal attack or a forward move toward contact waits in place for the brace instead, or if either journal says a braced `hold` turned its fight into a slog with no choice in it. After Code's play the count is one play of two with one such wait (Ottilie, turn 6, who had a move out of reach). Keep signal: if no play ever baits a `hold` to strip its brace, the enemy arm goes. Code's play baited one: the Foreman, a boss at home rather than a `hold`, on turn 10. Held for the Table, not built: whether a boss under the exposure veto should brace at all, the way Chat's second guard kept vetoed bosses out of the pincer's anvil role.
