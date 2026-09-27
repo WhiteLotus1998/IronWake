@@ -13,10 +13,10 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 
 - #403 is built: at dusk `threat` lists the `?` tiles within the content's longest reach (8), nearest first, unpriced. Its deciding play is a cold dusk play of Brackwater.
 - #415 is built: at dusk a run of dark acts prints as one counted console line (`(x14)`), order kept; the event log and the protocol keep one per command.
-- #419 is built (0083): on a `pincer: on` map an enemy steps in as an anvil so a group-mate strikes pinned, and acts ahead of the rest to do it. Header-off plan order is unchanged. In the Sim an anvil acted in 19 of 40 heuristic games; in Code's hand play (seed 131, warm) none did, because Sallow's geometry kept the field group off every back tile. The deciding play is Chat's cold play of the sample.
+- #419 is built (0083): on a `pincer: on` map an enemy steps in as an anvil so a group-mate strikes pinned, and acts ahead of the rest to do it. Header-off plan order is unchanged. In the Sim an anvil acted in 19 of 40 heuristic games; in Code's hand play (seed 131, warm) none did, because Sallow's geometry kept the field group off every back tile. Chat's cold play (seed 433) drew no anvil either: Sallow cannot judge the arm, so its deciding play moves to a daylight Brackwater sample (#429).
 - The Table rotated to #420 (#364 closed, rounds 63 to 82). #420 is found by its title and `design-table` label; the tools cannot pin it.
-- 13.14 Brace is built (#425, 0084, rounds 85 to 87 on #420): on a `brace: on` map a unit that waits on the tile it began its phase on is struck at -15 hit until its side's next phase; a sleeping Guard never braces. Code's play is in (seed 307, warm); the deciding play is Chat's cold play of `docs/samples/harrow_weir_brace.map`. Held for the Table: whether a boss under the exposure veto braces at all.
-- Queue: empty. The queue order in DIALOGUE.md: bugs, map retunes with both entries in, the beta, the rest of Phase 3, Map 7 and Supports. An empty queue spikes an experiment (the gate is open).
+- 13.14 Brace is built (#425, 0084) and passed its kill criterion on Chat's cold-to-rule play (seed 439, 8/8/6; Code seed 307): on a `brace: on` map a unit that waits on the tile it began its phase on is struck at -15 hit until its side's next phase; a sleeping Guard never braces; a vetoed boss keeps his brace. Its keep round is `saltmarsh_ford_brace.map` (#430), after Chat's #131 re-rate.
+- Queue: #429 (the Brackwater pincer sample), #430 (the Saltmarsh brace sample). The queue order in DIALOGUE.md: bugs, map retunes with both entries in, the beta, the rest of Phase 3, Map 7 and Supports. An empty queue spikes an experiment (the gate is open).
 - #349's readability pass is built; both partners play the Tollgate in the client and journal it.
 - #157 (the refused-kill row prints the stall's refusal too) waits behind the Fun Gate under the veto freeze.
 - Blocked until plays or the Table: #13, #131, #160 (Chat's re-rates), #77 Supports, #78 to #81 (their maps' Fun Gates), #85 (after map 8), #83 Map 8 (open, `content`).
@@ -45,8 +45,8 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.8 carrier arm | `docs/samples/*_keepsakes.map` | Chat's cold carrier-arm plays |
 | 13.10 retreat, third pass | `docs/samples/river_refuge_hold.map` (0037) | Chat's cold play |
 | 13.11 two-weapon boss | `docs/samples/saltmarsh_ford_chief.map` (0061) | Chat's cold play |
-| 13.13 pincer | `docs/samples/sallow_grange_pincer.map` (0082, 0083) | Chat's cold play of the sample with the anvil arm (#419 built) |
-| 13.14 brace | `docs/samples/harrow_weir_brace.map` (0084) | Chat's cold play of the sample |
+| 13.13 pincer | `docs/samples/sallow_grange_pincer.map` (0082, 0083), arm 2 on `brackwater_cut_pincer.map` (#429) | Chat's cold play of the Brackwater sample |
+| 13.14 brace | `docs/samples/harrow_weir_brace.map` (0084), passed; keep round `saltmarsh_ford_brace.map` (#430) | both partners' plays of the Saltmarsh sample, after #131 |
 
 Kept behind headers on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions dropped (0044).
 
