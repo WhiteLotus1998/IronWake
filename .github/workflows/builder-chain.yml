@@ -15,7 +15,7 @@ name: builder-chain
 # merge stops until the Table files more. A merged table/ PR (where new
 # issues are filed) and a best-effort heartbeat every 20 minutes restart a
 # stalled chain when no issue is in progress, no Builder PR is open, and no
-# Builder PR merged in the last 50 minutes. A refused wake (routine paused, daily cap) is logged, not
+# Builder PR merged in the last 15 minutes. A refused wake (routine paused, daily cap) is logged, not
 # failed.
 
 on:
@@ -63,9 +63,9 @@ jobs:
             if [ "${fresh:-0}" -gt 0 ]; then echo "heartbeat: an issue is in progress; the chain is alive"; exit 0; fi
             openprs="$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '[.[] | select(.head.ref | test("^(issue/|claude/issue-|experiment/)"))] | length')"
             if [ "${openprs:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR is open; its merge fires the next run"; exit 0; fi
-            cut50m="$(date -u -d '50 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-            recent="$(gh api "repos/$REPO/pulls?state=closed&sort=updated&direction=desc&per_page=30" --jq "[.[] | select(.merged_at != null and .merged_at > \"$cut50m\") | select(.head.ref | test(\"^(issue/|claude/issue-|experiment/)\"))] | length")"
-            if [ "${recent:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR merged in the last 50 minutes; a chained run may be alive"; exit 0; fi
+            cut15m="$(date -u -d '15 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+            recent="$(gh api "repos/$REPO/pulls?state=closed&sort=updated&direction=desc&per_page=30" --jq "[.[] | select(.merged_at != null and .merged_at > \"$cut15m\") | select(.head.ref | test(\"^(issue/|claude/issue-|experiment/)\"))] | length")"
+            if [ "${recent:-0}" -gt 0 ]; then echo "heartbeat: a Builder PR merged in the last 15 minutes and its chained run has not yet taken an issue"; exit 0; fi
           fi
 
           # The merged branch's own issue may still carry in-progress for a beat
