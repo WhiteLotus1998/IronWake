@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "exit_after_move", "difficulty", "certification" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "exit_after_move", "difficulty", "certification", "wake_links" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -93,6 +93,11 @@ public static class MapFormat
         if (map.Dusk is { } dusk)
         {
             sb.Append("dusk: ").Append(dusk).Append('\n');
+        }
+
+        if (map.WakeLinks.Count > 0)
+        {
+            sb.Append("wake_links: ").Append(string.Join(", ", map.WakeLinks)).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -233,6 +238,7 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
+            map = map with { WakeLinks = ParseWakeLinks(header, map) };
             Validate(map);
             return map;
         }
@@ -378,6 +384,59 @@ public static class MapFormat
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// The <c>wake_links:</c> header (issue 393): comma-separated <c>from&gt;to</c> pairs of
+        /// group names. Each group must be on the map, as a placement's or a spawn's group; the
+        /// second must have a Guard member, since only a sleeping group can be called; a group
+        /// never links to itself, and a pair is listed once.
+        /// </summary>
+        private ValueList<WakeLink> ParseWakeLinks(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("wake_links", out var entry))
+            {
+                return ValueList<WakeLink>.Empty;
+            }
+
+            var enemies = map.Placements.OfType<EnemyPlacement>().Concat(map.Spawns()).ToList();
+            var links = new List<WakeLink>();
+            foreach (var part in entry.Value.Split(',', StringSplitOptions.TrimEntries))
+            {
+                var sides = part.Split('>', StringSplitOptions.TrimEntries);
+                if (sides.Length != 2 || sides[0].Length == 0 || sides[1].Length == 0)
+                {
+                    throw ErrorAt(entry.Line, $"wake_links: '{part}' is not a pair 'from>to'");
+                }
+
+                var link = new WakeLink(sides[0], sides[1]);
+                foreach (var group in sides)
+                {
+                    if (enemies.All(e => e.Group != group))
+                    {
+                        throw ErrorAt(entry.Line, $"wake_links: no enemy is in group '{group}'");
+                    }
+                }
+
+                if (link.From == link.To)
+                {
+                    throw ErrorAt(entry.Line, $"wake_links: group '{link.From}' links to itself");
+                }
+
+                if (enemies.All(e => e.Group != link.To || e.Behavior != Behavior.Guard))
+                {
+                    throw ErrorAt(entry.Line, $"wake_links: group '{link.To}' has no guard member, so nothing in it sleeps to be called");
+                }
+
+                if (links.Contains(link))
+                {
+                    throw ErrorAt(entry.Line, $"wake_links: '{link}' is listed twice");
+                }
+
+                links.Add(link);
+            }
+
+            return ValueList<WakeLink>.From(links);
         }
 
         private bool ParseOn(Dictionary<string, (string Value, int Line)> header, string key)

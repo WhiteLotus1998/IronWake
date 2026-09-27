@@ -20,6 +20,9 @@ public static class WakeCheck
     /// tiles of every combat the command fought, <paramref name="diedGroups"/> the group
     /// of every unit it killed. A Guard group a map event spawned during the command
     /// (issue 32) is asleep on <paramref name="before"/> and is checked with the rest.
+    /// After the three causes, each group that woke calls every sleeping group the map's
+    /// <c>wake_links:</c> header links it to (issue 393), transitively, and each called group
+    /// follows in the order it was called, with <see cref="WakeCause.Call"/> and the caller.
     /// </summary>
     public static IReadOnlyList<GroupWoke> Run(BattleState before, BattleState after, GameContent content, IReadOnlyCollection<Coord> noisy, IReadOnlyCollection<string> diedGroups)
     {
@@ -53,6 +56,17 @@ public static class WakeCheck
             if (cause is { } why)
             {
                 woke.Add(new GroupWoke(group, why));
+            }
+        }
+
+        for (var i = 0; i < woke.Count; i++)
+        {
+            foreach (var link in before.Map.WakeLinks.Where(l => l.From == woke[i].Group))
+            {
+                if (sleeping.Contains(link.To) && woke.All(w => w.Group != link.To))
+                {
+                    woke.Add(new GroupWoke(link.To, WakeCause.Call, CalledBy: link.From));
+                }
             }
         }
 

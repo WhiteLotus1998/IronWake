@@ -90,6 +90,85 @@ public class BossVetoTests
         Assert.False(EnemyAi.BossVetoApplies(state, Starter, state.Find("soldier-1")!));
     }
 
+    /// <summary>
+    /// A 15x3 field with the Reeve's post at 13,1, woken, and the Reeve moved off it to
+    /// <paramref name="at"/>, still to act (issue 393).
+    /// </summary>
+    private static BattleState OffPost(ValueList<Unit> roster, Coord at)
+    {
+        var map = Field("defeat_boss", roster.Count)
+            .Replace("size: 9x3", "size: 15x3")
+            .Replace(".........", "...............")
+            .Replace("B grange_reeve 6,1", "B grange_reeve 13,1");
+        var state = Start(roster: roster, map: map).Wake("hall").Do(new EndPhase());
+        return state.WithUnit(state.Find("grange_reeve-1")! with { At = at });
+    }
+
+    private static readonly Coord Home = new(13, 1);
+
+    private static Coord EndOf(IReadOnlyList<Command> plan, BattleUnit unit) =>
+        plan.OfType<Move>().Select(m => m.To).DefaultIfEmpty(unit.At).Single();
+
+    [Fact]
+    public void ARefusedGuardBossGoesHomeToItsPost()
+    {
+        var state = OffPost(Party, new Coord(7, 1));
+        var reeve = state.Find("grange_reeve-1")!;
+        var captain = state.Find("hale")!;
+
+        Assert.True(EnemyAi.BossVetoRefuses(state, Starter, reeve, new Coord(2, 1), captain));
+        Assert.Equal(Home, EnemyAi.Post(state, reeve));
+        var end = EndOf(EnemyAi.PlanUnit(state, Starter, reeve), reeve);
+        Assert.True(end.X > 7, $"the Reeve ended on {end}, not toward his post");
+        Assert.Equal(end, EnemyAi.GoesHome(state, Starter, reeve, state.ReachOf(reeve, Starter).Destinations.ToList(), state.ReachOf(reeve, Starter),
+            state.UnitsOf(Side.Player).ToList(), state.UnitsOf(Side.Player).Select(p => state.ReachOf(p, Starter)).ToList(), null));
+    }
+
+    [Fact]
+    public void ARefusedGuardBossAlreadyOnItsPostStaysThere()
+    {
+        var state = Woken("defeat_boss", Party);
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.Equal(reeve.At, EndOf(EnemyAi.PlanUnit(state, Starter, reeve), reeve));
+    }
+
+    [Fact]
+    public void AGuardBossWhoseStrikePassesDoesNotGoHome()
+    {
+        var state = OffPost(ValueList<Unit>.Of(Unarmed), new Coord(6, 1));
+        var reeve = state.Find("grange_reeve-1")!;
+
+        var plan = EnemyAi.PlanUnit(state, Starter, reeve);
+        Assert.IsType<Attack>(plan[^1]);
+        Assert.True(EndOf(plan, reeve).X < 6);
+    }
+
+    [Fact]
+    public void AGuardBossWithNothingInReachApproachesInsteadOfGoingHome()
+    {
+        var state = OffPost(Party, new Coord(12, 1));
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.Null(EnemyAi.GoesHome(state, Starter, reeve, state.ReachOf(reeve, Starter).Destinations.ToList(), state.ReachOf(reeve, Starter),
+            state.UnitsOf(Side.Player).ToList(), state.UnitsOf(Side.Player).Select(p => state.ReachOf(p, Starter)).ToList(), null));
+        Assert.True(EndOf(EnemyAi.PlanUnit(state, Starter, reeve), reeve).X < 12);
+    }
+
+    /// <summary>
+    /// <c>threat</c> reads the same end tile as the plan: sent toward his post at 13,1, out of reach
+    /// of a party at the west end, the Reeve swings at nobody, and <see cref="EnemyAi.StrikeOn"/> names no strike.
+    /// </summary>
+    [Fact]
+    public void ThreatAgreesWithTheRefusedGuardBossGoingHome()
+    {
+        var state = OffPost(Party, new Coord(7, 1));
+        var reeve = state.Find("grange_reeve-1")!;
+
+        Assert.DoesNotContain(EnemyAi.PlanUnit(state, Starter, reeve), c => c is Attack);
+        Assert.All(state.UnitsOf(Side.Player), player => Assert.Null(EnemyAi.StrikeOn(state, Starter, reeve, player)));
+    }
+
     [Fact]
     public void TheBossSumSeatsOneStrikerPerTile()
     {
