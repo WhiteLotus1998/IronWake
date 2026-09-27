@@ -947,6 +947,22 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// The seventy-eighth round: Chat's seed 401 re-rate of Harrow Weir replays to its journaled
+    /// transcript. Woken at full HP by a gathered party, the Foreman runs from his hill to the
+    /// corner at 15,3 and swings only once there is nowhere left to go.
+    /// </summary>
+    [Fact]
+    public void TheJournaledSeed401PlayReplaysWithTheFullHpForemanRunningToTheCorner()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-401.script", 401, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 14,8 via 14,6 14,7\n", output);
+        Assert.Contains("weir_foreman-1 falls at 15,3\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-401.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 389: <c>threat</c> names the swing a vetoed boss takes from the tile it ends on,
     /// since it reads the planner's strike. On Chat's seed 293 line at the end of turn 10's
     /// player phase, <c>threat keziah</c> said nobody could strike her; it now names the
