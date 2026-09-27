@@ -286,4 +286,33 @@ public class CampaignRecordTests
         Assert.True(after.IsFinished(Content));
         Assert.Throws<InvalidOperationException>(() => after.NextMap(Content));
     }
+    [Fact]
+    public void StartAtOpensOnTheNamedMapWithTheCastAndTheStartingPurse()
+    {
+        var record = CampaignRecord.StartAt(Content, 113, "the_tollgate");
+
+        Assert.Equal("the_tollgate", record.NextMap(Content).MapId);
+        Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
+        Assert.Equal(Content.Cast.Select(u => u.Id), record.Roster.Select(u => u.Id));
+        Assert.Empty(record.Fallen);
+        Assert.Empty(record.Benched);
+    }
+
+    [Fact]
+    public void StartAtPlaysItsFirstBattleOnTheSeedGiven()
+    {
+        var record = CampaignRecord.StartAt(Content, 113, "the_tollgate");
+        var map = Map("the_tollgate");
+
+        Assert.Equal(113UL, record.BattleSeed);
+        Assert.Equal(BattleState.From(map, Content, Content.Cast, 113).Units, record.Begin(map, Content).Units);
+    }
+
+    [Fact]
+    public void StartAtRefusesAMapTheCampaignDoesNotList()
+    {
+        var e = Assert.Throws<ArgumentException>(() => CampaignRecord.StartAt(Content, 1, "nowhere"));
+
+        Assert.StartsWith("the campaign has no map 'nowhere'; it lists old_mill_road,", e.Message);
+    }
 }

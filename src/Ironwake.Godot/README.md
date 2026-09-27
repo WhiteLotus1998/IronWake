@@ -35,6 +35,14 @@ cmp console.log client.log
 
 `--parity` plays the script through the client, writes the client's event log and quits. `play --log` writes the console's event log: every event line it prints, and nothing else. The two must match byte for byte. The same check runs in `dotnet test` without Godot (`ClientParityTests`), together with its falsifier. CI's `godot-parity` job runs the headless Godot side on every script in `tests/parity/` (#352), with Godot 4.3-stable .NET checked against the SHA-512 pinned in `.github/workflows/ci.yml`.
 
+The campaign (#360) plays the same way. `--campaign` opens the between-map screen, starting at the first map or at `--from <map>`. A click on a unit's row selects it, and a click on a ware then buys it for that unit. B benches or unbenches the selected unit, M or the march row marches, and L leaves a decided battle. `--campaign-parity` is the campaign's gate. It must match `ironwake campaign --log` byte for byte, and `CampaignClientTests` runs the same check in `dotnet test`. CI does not run the Godot side yet.
+
+```
+godot --headless --path src/Ironwake.Godot -- --campaign --from the_tollgate --seed 113 --campaign-parity $PWD/tests/parity/campaign/the_tollgate-113.script client.log
+dotnet run --project src/Ironwake.Cli -- campaign --from the_tollgate --seed 113 --script tests/parity/campaign/the_tollgate-113.script --log console.log
+cmp console.log client.log
+```
+
 ## The screenshot
 
 ```
