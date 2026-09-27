@@ -310,4 +310,50 @@ public sealed class ThreatQueryTests
         Assert.Equal(hits, Queries.IfAllLand(new[] { soft with { Tiles = ValueList<Coord>.Of(a) }, hard with { Tiles = ValueList<Coord>.Of(a) } }));
         Assert.Equal(0, Queries.IfAllLand(Array.Empty<ThreatLine>()));
     }
+    /// <summary>
+    /// The Tollgate with the door open (the warden and archer-1 dead), the captain on 6,3 and
+    /// Pell on 5,2, both unmoved, each with a path onto the throne at 7,1 beside the boss.
+    /// </summary>
+    private static BattleState TollgateDoorOpen()
+    {
+        var start = Tollgate(97).WithoutUnit("toll_warden-1").WithoutUnit("archer-1");
+        start = start.WithUnit(start.Find("captain")! with { At = new Coord(6, 3) });
+        return start.WithUnit(start.Find("pell")! with { At = new Coord(5, 2) });
+    }
+
+    /// <summary>
+    /// Issue 356: the captain's move onto a Seize throne wins the map, so no enemy phase
+    /// follows it, and <c>threat</c> says so instead of <c>no enemy can strike it</c>, which
+    /// read as an all-clear with the boss adjacent (Chat's seed 97).
+    /// </summary>
+    [Fact]
+    public void AThreatOnATileWhoseMoveWinsTheMapSaysSo()
+    {
+        var state = TollgateDoorOpen();
+        var captain = state.Find("captain")!;
+        var throne = new Coord(7, 1);
+
+        Assert.True(Queries.MoveWins(state, Starter, captain, throne));
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, captain, throne, Queries.Threats(state, Starter, captain, throne)!, Queries.SleepingThreats(state, Starter, captain, throne)!, Queries.Unseeing(state, Starter, captain, throne), Queries.MoveWins(state, Starter, captain, throne));
+        Assert.Equal("threat on captain at 7,1 (Gate): this move wins the map", text);
+    }
+
+    /// <summary>
+    /// Issue 356's falsifier: a recruit on the throne wins nothing, so the query prices the
+    /// boss beside it as before, and the captain's own tile off the throne is no win either.
+    /// </summary>
+    [Fact]
+    public void ANonCaptainOnTheThroneStillGetsTheEnemyList()
+    {
+        var state = TollgateDoorOpen();
+        var pell = state.Find("pell")!;
+        var throne = new Coord(7, 1);
+
+        Assert.False(Queries.MoveWins(state, Starter, pell, throne));
+        Assert.False(Queries.MoveWins(state, Starter, state.Find("captain")!, new Coord(6, 2)));
+        var lines = Queries.Threats(state, Starter, pell, throne)!;
+        Assert.Contains(lines, line => line.Enemy.Id == "bandit_leader-1");
+        var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, pell, throne, lines, Queries.SleepingThreats(state, Starter, pell, throne)!, Queries.Unseeing(state, Starter, pell, throne), Queries.MoveWins(state, Starter, pell, throne));
+        Assert.StartsWith("threat on pell at 7,1 (Gate):\n  bandit_leader-1 from ", text);
+    }
 }

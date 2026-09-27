@@ -299,6 +299,24 @@ public static class Queries
     }
 
     /// <summary>
+    /// Whether <paramref name="unit"/> ending its move on <paramref name="from"/> wins the
+    /// battle there and then (issue 356): the board with the unit on the tile and nothing else
+    /// changed reads <see cref="BattleResult.Won"/>, as the captain on a Seize throne does. No
+    /// enemy phase follows such a move, so <c>threat</c> says it wins instead of reading as an
+    /// all-clear. False when <see cref="Threats"/> would be null. Read-only.
+    /// </summary>
+    public static bool MoveWins(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable || state.Outcome.IsOver)
+        {
+            return false;
+        }
+
+        return state.WithUnit(unit with { At = from }).Outcome.Result == BattleResult.Won;
+    }
+
+    /// <summary>
     /// The board <see cref="Threats"/> and <see cref="SleepingThreats"/> read: the exposure
     /// sum's, <see cref="Exposure.Board"/> (the unit on the tile, every group its standing
     /// there certainly wakes awake), with the player phase then ended through the resolver,

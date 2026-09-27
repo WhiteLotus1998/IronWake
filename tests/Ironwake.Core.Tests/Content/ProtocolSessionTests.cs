@@ -207,7 +207,7 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"text":"threat on captain at 6,11 (Plain): no enemy can strike it next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
+        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"wins":false,"text":"threat on captain at 6,11 (Plain): no enemy can strike it next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
     }
 
     /// <summary>Issue 248: a threat line an announced event brings carries <c>arrives</c>, and <c>asleep</c> names each sleeping group that could strike the tile with its members.</summary>
@@ -228,6 +228,25 @@ public class ProtocolSessionTests
         Assert.Contains("\"enemy\":\"soldier-2\",\"from\":{\"x\":4,\"y\":0},\"arrives\":{\"x\":7,\"y\":0},\"slot\":0", arrival);
         Assert.Contains("\"asleep\":[]", arrival);
         Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\",\"soldier-1\"]}]", asleep);
+    }
+
+    /// <summary>Issue 356: the threat answer carries <c>wins</c>, true on a tile whose move wins the map, with the console's one line as its text.</summary>
+    [Fact]
+    public void TheThreatQueryCarriesWhetherTheMoveWinsTheMap()
+    {
+        var content = Content();
+        const string Hall = "name: Hall\nsize: 8x4\nwin: seize\nturn_limit: 10\nrecall: 3\nenemy_level: 1\n\n"
+            + "........\n...T....\n........\n........\n\n"
+            + "units:\nP captain 0,1\nP recruit:wren 2,2\nB soldier 4,1 group:g behavior:boss\n";
+        var map = MapFormat.Parse("hall.map", Hall, content);
+        var session = new ProtocolSession(content, BattleState.From(map, content, content.Cast, 7), new StringWriter());
+
+        var captain = session.Answer("""{"query":"threat","unit":"captain","from":{"x":3,"y":1}}""");
+        var wren = session.Answer("""{"query":"threat","unit":"wren","from":{"x":3,"y":1}}""");
+
+        Assert.EndsWith("\"wins\":true,\"text\":\"threat on captain at 3,1 (Gate): this move wins the map\"}", captain);
+        Assert.Contains("\"enemy\":\"soldier-1\"", wren);
+        Assert.Contains("\"wins\":false", wren);
     }
 
     /// <summary>
