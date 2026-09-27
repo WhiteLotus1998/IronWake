@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Ironwake.Client</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ironwake.Core\Ironwake.Core.csproj" />
+    <ProjectReference Include="..\Ironwake.Content\Ironwake.Content.csproj" />
+    <ProjectReference Include="..\Ironwake.Cli\Ironwake.Cli.csproj" />
+  </ItemGroup>
+
+</Project>

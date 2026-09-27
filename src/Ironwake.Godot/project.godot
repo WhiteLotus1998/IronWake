@@ -1,0 +1,18 @@
+; The thin renderer (issue 347). Godot 4.3 .NET; see README.md in this folder.
+
+config_version=5
+
+[application]
+
+config/name="Ironwake"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.3", "C#")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=800
+
+[dotnet]
+
+project/assembly_name="Ironwake.Godot"

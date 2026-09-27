@@ -22,7 +22,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id] [--log file]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -74,6 +74,23 @@ public sealed class PlaySession
     private readonly List<string> _made = new();
     private BattleState _state;
     private int _line;
+
+    /// <summary>
+    /// The event log (issue 347): every event line the console prints, in order and nothing
+    /// else, the same lines a renderer's event log prints. <c>--log</c> writes it to a file,
+    /// which is what the thin renderer's parity gate compares against byte for byte.
+    /// </summary>
+    private readonly StringWriter _log = new() { NewLine = "\n" };
+
+    /// <summary>The event lines printed so far, each ending in <c>\n</c>.</summary>
+    internal string EventLog => _log.ToString();
+
+    /// <summary>Prints one event line to the console and to the event log.</summary>
+    private void WriteEvent(string line)
+    {
+        _out.WriteLine(line);
+        _log.WriteLine(line);
+    }
     private string _command = "";
 
     private PlaySession(GameContent content, BattleState state, TextWriter output, bool scripted)
@@ -127,6 +144,7 @@ public sealed class PlaySession
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
         string? candidate = null;
+        string? log = null;
         for (var i = 1; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -156,6 +174,10 @@ public sealed class PlaySession
                     candidate = value;
                     i++;
                     break;
+                case "--log" when value is not null:
+                    log = value;
+                    i++;
+                    break;
                 case "--scheme" when value is not null && RollSchemes.Parse(value) is { } parsedScheme:
                     scheme = parsedScheme;
                     i++;
@@ -177,6 +199,13 @@ public sealed class PlaySession
         if (strict && protocol)
         {
             Console.WriteLine("ERROR: --strict applies to a text script; a protocol run answers every line with ok true or false");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (log is not null && protocol)
+        {
+            Console.WriteLine("ERROR: --log applies to a text run; a protocol run carries each event's text in its answer");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -247,7 +276,13 @@ public sealed class PlaySession
         }
 
         var session = new PlaySession(content, BattleState.From(map, content, roster, seed, scheme), Console.Out, scripted: script is not null);
-        return session.Play(input, strict, seed);
+        var code = session.Play(input, strict, seed);
+        if (log is not null)
+        {
+            File.WriteAllText(log, session.EventLog);
+        }
+
+        return code;
     }
 
     /// <summary>
@@ -581,7 +616,7 @@ public sealed class PlaySession
         _state = result.Next;
         foreach (var e in result.Events)
         {
-            _out.WriteLine(Describe(e, _content));
+            WriteEvent(Describe(e, _content));
         }
 
         if (after is not null)
@@ -656,10 +691,10 @@ public sealed class PlaySession
             {
                 var hidden = Resolve(command);
                 _state = hidden.Next;
-                _out.WriteLine(ProtocolSession.DarkLine);
+                WriteEvent(ProtocolSession.DarkLine);
                 foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
                 {
-                    _out.WriteLine(Describe(e, _content));
+                    WriteEvent(Describe(e, _content));
                 }
 
                 continue;
@@ -694,7 +729,7 @@ public sealed class PlaySession
             _state = result.Next;
             foreach (var e in result.Events)
             {
-                _out.WriteLine(Describe(e, _content));
+                WriteEvent(Describe(e, _content));
                 if (e is CombatFought fought)
                 {
                     foreach (var entry in _exposure.Where(x => x.UnitId == fought.TargetId && x.Turn == fought.Turn))
