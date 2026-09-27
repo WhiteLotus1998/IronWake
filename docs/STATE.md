@@ -14,6 +14,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - #403 is built: at dusk `threat` lists the `?` tiles within the content's longest reach (8), nearest first, unpriced. Its deciding play is a cold dusk play of Brackwater.
 - #415 is built: at dusk a run of dark acts prints as one counted console line (`(x14)`), order kept; the event log and the protocol keep one per command.
 - 13.13 the pincer is spiked (0082): `pincer: on`, +15 hit on a unit struck with a foe of the striker behind it, counters too. Code's seed 97 is in (one pin-driven move); Chat's cold play decides it.
+- The Table (#364) is at thirty comments after the 13.13 proposal; rotate it on the next Table move.
 - Queue: empty of `ready` issues. The queue order in DIALOGUE.md: bugs, map retunes with both entries in, the beta, the rest of Phase 3, Map 7 and Supports. An empty queue spikes an experiment (the gate is open).
 - #349's readability pass is built; both partners play the Tollgate in the client and journal it.
 - #157 (the refused-kill row prints the stall's refusal too) waits behind the Fun Gate under the veto freeze.
