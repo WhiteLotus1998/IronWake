@@ -143,7 +143,9 @@ public sealed record BattleUnit(
     /// <paramref name="art"/> is a combat art the attacker declared (issue 68): the equipped
     /// weapon strikes as the art makes it. A counter never carries one.
     /// <paramref name="against"/> is the unit it fights, when known: a unit sworn against by
-    /// that enemy loses <see cref="Grudges.SwornCritAvoid"/> crit avoid (issue 331).
+    /// that enemy loses <see cref="Grudges.SwornCritAvoid"/> crit avoid (issue 331), and on a
+    /// <c>pincer: on</c> map this unit strikes it at <see cref="Pincer.Hit"/> more when it is
+    /// pinned (DESIGN.md 13.13), read at both units' <see cref="At"/>.
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -154,6 +156,7 @@ public sealed record BattleUnit(
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
         critAvoid += Grudges.CritAvoidAgainst(this, against);
+        hit += Pincer.HitAgainst(state, this, against);
         var weapon = EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {

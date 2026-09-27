@@ -764,6 +764,25 @@ public class CliPlayTests
         Assert.DoesNotContain("heft", output);
     }
 
+    /// <summary>
+    /// 13.13's first play: Code's seed 97 on <c>docs/samples/sallow_grange_pincer.map</c>. Ansgar
+    /// rides to 5,6 so Wren pins the brawler (93 percent where 4,7 read 77), Wren finishes it
+    /// pinned by Ansgar after a Recall, and on turn 7 the captain's forecast on the Reeve reads
+    /// the pin Wren makes from 14,5. The captain seizes on turn 8.
+    /// </summary>
+    [Fact]
+    public void TheJournaledPincerPlayReplaysWithItsPins()
+    {
+        var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-97.script", 97, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  pincer: brawler-1 pinned by wren: ansgar hit +15\n", output);
+        Assert.Contains("  pincer: brawler-1 pinned by ansgar: wren hit +15\n", output);
+        Assert.Contains("  pincer: grange_reeve-1 pinned by wren: captain hit +15\n", output);
+        Assert.Contains("ottilie falls at 12,6\n", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");

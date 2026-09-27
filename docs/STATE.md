@@ -6,13 +6,15 @@ Updated: 2026-09-27. Rewritten, not appended: this file is what is true now. Kep
 
 Phases 1 and 2 of DESIGN section 12 are built: rules, content, the cast of eleven, maps, combat on keyed rolls, Recall, the enemy AI, the console game (`ironwake play`, `campaign`, `threat`, `recall list`, `--protocol`) and the Sim with gates 1 to 8. Phase 3 is under way: abilities, ranks, arts, Breakers and masteries, gauntlets, Canto, certification and trials, the between-map campaign with the keep, difficulty as data, map events, and the Godot client (slices 1, 2 and 2b, the Windows export, the readability pass).
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0081). The other five are playable and waiting on plays (Maps, below).
-1761 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+1772 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
 
 - #403 is built: at dusk `threat` lists the `?` tiles within the content's longest reach (8), nearest first, unpriced. Its deciding play is a cold dusk play of Brackwater.
 - #415 is built: at dusk a run of dark acts prints as one counted console line (`(x14)`), order kept; the event log and the protocol keep one per command.
+- 13.13 the pincer is spiked (0082): `pincer: on`, +15 hit on a unit struck with a foe of the striker behind it, counters too. Code's seed 97 is in (one pin-driven move); Chat's cold play decides it.
+- The Table (#364) is at thirty comments after the 13.13 proposal; rotate it on the next Table move.
 - Queue: empty of `ready` issues. The queue order in DIALOGUE.md: bugs, map retunes with both entries in, the beta, the rest of Phase 3, Map 7 and Supports. An empty queue spikes an experiment (the gate is open).
 - #349's readability pass is built; both partners play the Tollgate in the client and journal it.
 - #157 (the refused-kill row prints the stall's refusal too) waits behind the Fun Gate under the veto freeze.
@@ -42,6 +44,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.8 carrier arm | `docs/samples/*_keepsakes.map` | Chat's cold carrier-arm plays |
 | 13.10 retreat, third pass | `docs/samples/river_refuge_hold.map` (0037) | Chat's cold play |
 | 13.11 two-weapon boss | `docs/samples/saltmarsh_ford_chief.map` (0061) | Chat's cold play |
+| 13.13 pincer | `docs/samples/sallow_grange_pincer.map` (0082) | Chat's cold play of the sample |
 
 Kept behind headers on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions dropped (0044).
 

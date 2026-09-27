@@ -735,6 +735,11 @@ public sealed class PlaySession
                     _out.WriteLine(sworn);
                 }
 
+                foreach (var pincer in PincerLines(_state, attacker!, target!))
+                {
+                    _out.WriteLine(pincer);
+                }
+
                 if (grudge is not null)
                 {
                     _out.WriteLine("  " + grudge);
@@ -1081,6 +1086,7 @@ public sealed class PlaySession
             lines.Add(sworn);
         }
 
+        lines.AddRange(PincerLines(state, unit with { At = tile }, target));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
@@ -1457,6 +1463,24 @@ public sealed class PlaySession
         return enemy.Grudge == player.Id && enemy.Side != player.Side
             ? $"  sworn: {enemy.Id} on {player.Id}: {player.Id} crit avoid {Grudges.SwornCritAvoid:+0;-0;0}"
             : null;
+    }
+
+    /// <summary>
+    /// Under a forecast on a <c>pincer: on</c> map (DESIGN.md 13.13): one line for each side
+    /// that is pinned, naming the unit behind it and the hit the forecast already added, the
+    /// strike first and the counter second. Silent when neither is pinned.
+    /// </summary>
+    public static IEnumerable<string> PincerLines(BattleState state, BattleUnit attacker, BattleUnit target)
+    {
+        if (Pincer.PinnedBy(state, attacker, target) is { } behindTarget)
+        {
+            yield return $"  pincer: {target.Id} pinned by {behindTarget.Id}: {attacker.Id} hit +{Pincer.Hit}";
+        }
+
+        if (Pincer.PinnedBy(state, target, attacker) is { } behindAttacker)
+        {
+            yield return $"  pincer: {attacker.Id} pinned by {behindAttacker.Id}: {target.Id} hit +{Pincer.Hit}";
+        }
     }
 
     private string Named(string itemId) => _content.ItemName(itemId);
