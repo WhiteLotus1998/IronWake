@@ -264,6 +264,22 @@ public class ProtocolJsonTests
         Assert.Empty(ProtocolJson.ReadState(older.ToJsonString(), content).Escaped);
     }
 
+    /// <summary>Issue 396: a unit shoved this phase travels with <c>shoved</c>, written only when true, and a state without it reads as not shoved.</summary>
+    [Fact]
+    public void AStateReadsBackEqualWithAShovedUnit()
+    {
+        var (content, state) = PlayedTollgate();
+        var plain = state with { History = ValueList<BattleState>.Empty };
+        var captain = plain.UnitsOf(Side.Player).First();
+        var shoved = plain.WithUnit(captain with { Shoved = true });
+
+        var json = ProtocolJson.State(shoved, content);
+        Assert.Equal(1, json.Split("\"shoved\":true").Length - 1);
+        Assert.Equal(shoved, ProtocolJson.ReadState(json, content));
+        Assert.DoesNotContain("\"shoved\"", ProtocolJson.State(plain, content));
+        Assert.Equal(plain, ProtocolJson.ReadState(ProtocolJson.State(plain, content), content));
+    }
+
     /// <summary>Issue 71: a Canto owed travels in <c>canto</c>, null when none is, and a state written before the field existed reads as none.</summary>
     [Fact]
     public void AStateReadsBackEqualWithACantoOwed()

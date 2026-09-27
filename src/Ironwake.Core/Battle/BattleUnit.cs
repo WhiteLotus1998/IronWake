@@ -18,6 +18,10 @@ namespace Ironwake.Core;
 /// <see cref="Grudge"/> is the id of the player unit an enemy is sworn against on a
 /// <c>grudges: on</c> map (DESIGN.md 13.4, experiment): set when that unit kills one of the
 /// enemy's group, replaced by a newer such kill, and null otherwise.
+/// <see cref="Shoved"/> is set when an ally's <see cref="Shove"/> moved the unit this phase
+/// (DESIGN.md 13.12) and cleared with <see cref="Moved"/> when a phase begins: the shove leaves
+/// the unit its own Move, but it did not begin its turn where it stands, so it may not exit
+/// there this phase (section 7, issue 396).
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -33,7 +37,8 @@ public sealed record BattleUnit(
     int PlacementIndex = -1,
     bool Retreated = false,
     int? Canto = null,
-    string? Grudge = null)
+    string? Grudge = null,
+    bool Shoved = false)
 {
     public string Id => Unit.Id;
 
