@@ -802,6 +802,25 @@ public class CliPlayTests
         Assert.Contains("grange_reeve-1 falls at 14,7\n", output);
     }
 
+    /// <summary>
+    /// Issue 419's hand play: Code's seed 131 on <c>docs/samples/sallow_grange_pincer.map</c> with
+    /// the planner's anvil arm built. The field group never had a tile behind the front in reach,
+    /// so no enemy stepped in as an anvil and every pin was the player's: Ansgar on the brawler
+    /// with Wren behind it, the captain's kill with Teodor behind it. The captain seizes on turn 7.
+    /// </summary>
+    [Fact]
+    public void TheAnvilArmPlayReplaysWithThePlayersPinsOnly()
+    {
+        var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-131.script", 131, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  pincer: brawler-1 pinned by wren: ansgar hit +15\n", output);
+        Assert.Contains("  pincer: brawler-1 pinned by teodor: captain hit +15\n", output);
+        Assert.Contains("grange_reeve-1 falls at 13,6\n", output);
+        Assert.DoesNotContain(" falls at ", output.Replace("soldier-1 falls at", "").Replace("brawler-1 falls at", "").Replace("archer-2 falls at", "").Replace("grange_reeve-1 falls at", ""));
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");
