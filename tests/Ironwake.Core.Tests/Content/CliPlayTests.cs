@@ -931,6 +931,22 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// The seventy-seventh round: Code's seed 397 re-rate of Harrow Weir by the south crossing
+    /// replays to its journaled transcript. With every tile refused on 4 HP, the Foreman stays
+    /// on his hill, swings at Pell on enemy phase 8 and falls to Pell's counter at 13,6.
+    /// </summary>
+    [Fact]
+    public void TheJournaledSeed397PlayReplaysWithTheForemanDyingOnHisOwnSwing()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-397.script", 397, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("enemy: attack weir_foreman-1 pell\n", output);
+        Assert.Contains("weir_foreman-1 falls at 13,6\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-397.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
     /// Issue 389: <c>threat</c> names the swing a vetoed boss takes from the tile it ends on,
     /// since it reads the planner's strike. On Chat's seed 293 line at the end of turn 10's
     /// player phase, <c>threat keziah</c> said nobody could strike her; it now names the
