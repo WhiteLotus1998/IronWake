@@ -23,4 +23,4 @@ dotnet run --project src/Ironwake.Cli -- play brackwater_cut --seed 53 --script 
 cmp console.log client.log
 ```
 
-`--parity` plays the script through the client, writes the client's event log and quits. `play --log` writes the console's event log: every event line it prints, and nothing else. The two must match byte for byte. The same check runs in `dotnet test` without Godot (`ClientParityTests`), together with its falsifier. The headless Godot run in CI is still to come, and it is filed as its own issue.
+`--parity` plays the script through the client, writes the client's event log and quits. `play --log` writes the console's event log: every event line it prints, and nothing else. The two must match byte for byte. The same check runs in `dotnet test` without Godot (`ClientParityTests`), together with its falsifier. The headless Godot run in CI is still to come (#352).

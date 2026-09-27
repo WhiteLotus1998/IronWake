@@ -15,7 +15,7 @@ Date: 2026-09-27. Issue 347, built in a chain run. This restates the twenty-seco
 
 ## Not done here
 
-This sandbox had no Godot binary, and it could not fetch the release to pin its checksum. So two things were left, and they are filed as their own issue:
+This sandbox had no Godot binary, and it could not fetch the release to pin its checksum. So two things were left, and they are filed as #352:
 - a headless Godot run in CI (the `--parity` mode exists and is documented in the project's README)
 - the screenshot of the board mid-battle
 
