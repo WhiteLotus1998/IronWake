@@ -272,7 +272,7 @@ public sealed class ProtocolSession
         }
     }
 
-    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248).</summary>
+    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), and whether the move itself wins the map (issue 356).</summary>
     private string Threat(JsonElement request, BattleUnit unit)
     {
         if (unit.Side != Side.Player)
@@ -348,7 +348,9 @@ public sealed class ProtocolSession
                 WriteIds("cannotSee", unseeing.Where(e => !Hidden(e)));
             }
 
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing));
+            var wins = Queries.MoveWins(_state, _content, unit, tile);
+            w.WriteBoolean("wins", wins);
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins));
 
             void WriteIds(string name, IEnumerable<BattleUnit> units)
             {

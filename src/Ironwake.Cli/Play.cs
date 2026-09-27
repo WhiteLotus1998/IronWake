@@ -1086,7 +1086,7 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile)));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile)));
     }
 
     /// <summary>
@@ -1099,11 +1099,17 @@ public sealed class PlaySession
     /// unpriced, whether or not anything in it could strike. An enemy the player sees that
     /// would strike the unit in daylight but does not know where it is, or whose side cannot
     /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
-    /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>.
+    /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>. A move that wins the map
+    /// (<see cref="Queries.MoveWins"/>, issue 356) is one line saying so, since no enemy phase follows.
     /// </summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null)
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
+        if (wins)
+        {
+            return $"threat on {unit.Id} at {where}: this move wins the map";
+        }
+
         var rows = new List<string>();
         lines = lines.Where(line => line.Arrives is not null || Dusk.Seen(state, line.Enemy)).ToList();
         asleep = asleep.Select(g => g with { Members = g.Members.Where(m => Dusk.Seen(state, m)).ToList() }).Where(g => g.Members.Count > 0).ToList();
