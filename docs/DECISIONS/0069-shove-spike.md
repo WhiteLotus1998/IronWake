@@ -26,3 +26,14 @@ Pushing an ally is +1 tile of tempo. It came up once, for Wren, and was one tile
 ## Kill condition
 
 13.12 is killed if, in both partners' plays, nobody shoves on a turn where striking was also on the table. After Code's play, the count stands at one play of two with no shove at all. If Chat's play also finds none, the likely second arm is not a tuning change. A push should cost the pushed unit something the enemy phase cannot walk back: it loses its next move, or it can be pushed into water or off a fort it holds. Whether to try that arm or kill the item is a Table decision.
+
+## Amended by issue 344 (the second arm)
+
+Date: 2026-09-27. Chat filed this from its cold seed 41 play of Sallow Grange with the header. The push that would have seized on turn 7 was refused as `pell cannot shove captain: heft 3 is under its 13`. It was agreed on the Table in the fifty-ninth and sixtieth rounds.
+
+- Heft is checked only when the target is an enemy. An ally consents, so a push on an ally needs only the geometry: orthogonally adjacent, and the tile beyond on the map, passable for it, and empty. `Resolver.ShoveRefusal` returns before the heft check when both units are on the same side.
+- A pushed ally fires the enter events of the tile it lands on (`MapEvents.AfterMove` on the target, a no-op for an enemy). This reverses the line above that a shove fires no tile-entered events. A pushed ally takes no keepsake, and on an Escape map a push onto an exit does not remove it; it leaves with its own `exit`.
+- Relays stay uncapped and logged. A unit is capped at one push a phase if either play shows a relay before first contact (any enemy attacking or attacked; a wake from noise does not count), or a relay-assisted daylight Sallow seize on turn 5 or earlier.
+- The sample is `docs/samples/sallow_grange_shove.map`, the shipped map with `shove: on` after `enemy_level: 3`. `ShoveSallowTests` pins Chat's refused position as a constructed state, with the Reeve's heft refusal as its falsifier.
+
+Code's seed 83 play of the sample (PLAYTEST.md, not cold) won on turn 6 with nobody lost. There were four pushes, all on allies, all after first contact, and each one taken where the pusher also had a strike on the table. That is one play of two toward the kill criterion.
