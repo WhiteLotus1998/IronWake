@@ -360,6 +360,7 @@ public sealed class PlaySession
             _out.WriteLine($"certification trial: {candidate.Unit.Id} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
         }
 
+        _out.WriteLine(Objective.Line(_state, _content));
         if (_state.Map.Certification is not null || _state.Map.Announced)
         {
             WritePendingEvents();
@@ -616,10 +617,16 @@ public sealed class PlaySession
         }
 
         Record(command);
+        var before = _state;
         _state = result.Next;
         foreach (var e in result.Events)
         {
             WriteEvent(Describe(e, _content));
+        }
+
+        foreach (var notice in Objective.Notices(before, _state, _content, command))
+        {
+            WriteEvent(notice);
         }
 
         if (after is not null)
@@ -728,6 +735,7 @@ public sealed class PlaySession
                 }
             }
 
+            var before = _state;
             var result = Resolve(command);
             _state = result.Next;
             foreach (var e in result.Events)
@@ -740,6 +748,11 @@ public sealed class PlaySession
                         entry.Attacked = true;
                     }
                 }
+            }
+
+            foreach (var notice in Objective.Notices(before, _state, _content, command))
+            {
+                WriteEvent(notice);
             }
         }
 
@@ -920,6 +933,10 @@ public sealed class PlaySession
                 ? "only recall is left" + (_campaign ? ", or leave" : "")
                 : "no recall is left" + (_campaign ? ", so leave" : "");
             _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; {after}");
+            if (Objective.Verdict(_state, _content) is { } verdict)
+            {
+                _out.WriteLine(verdict);
+            }
         }
     }
 

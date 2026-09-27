@@ -1000,7 +1000,9 @@ public static class Resolver
     /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
     /// max, reported as the amount actually gained; a unit at full HP is not reported.
     /// Then the map events whose turn trigger names the phase that has begun fire, in
-    /// file order (issue 32).
+    /// file order (issue 32). The enemy phase of the last turn ends the battle (DESIGN.md
+    /// section 7), so past the turn limit the turn still advances, which decides the outcome,
+    /// but no phase begins: no <see cref="PhaseBegan"/>, no heal, no event (issue 374).
     /// </summary>
     private static (BattleState, Rejection?) ApplyEndPhase(BattleState state, GameContent content, List<GameEvent> events)
     {
@@ -1013,6 +1015,12 @@ public static class Resolver
         }
 
         events.Add(new PhaseEnded(ended, state.Turn));
+        if (nextTurn > state.Map.TurnLimit)
+        {
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null });
+            return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared) }, null);
+        }
+
         events.Add(new PhaseBegan(nextPhase, nextTurn));
         var units = new List<BattleUnit>(state.Units.Count);
         foreach (var unit in state.Units)

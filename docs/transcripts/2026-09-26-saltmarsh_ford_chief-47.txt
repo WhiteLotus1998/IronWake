@@ -1,4 +1,5 @@
 Saltmarsh Ford (two-weapon boss), seed 47, scheme TwoRollAverage
+objective: defeat every enemy by the end of turn 18; lost if the captain falls
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...

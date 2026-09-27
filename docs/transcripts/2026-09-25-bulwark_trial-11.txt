@@ -1,5 +1,6 @@
 Trial of the Bulwark, seed 11, scheme TwoRollAverage
 certification trial: captain plays as Bulwark with iron_lance
+objective: hold until the end of turn 1; lost if the captain falls
 Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
    012345678
  0 .........
@@ -99,7 +100,6 @@ enemy: wait hexer-2
 hexer-2 waits
 enemy: end
 -- enemy phase ends, turn 1 --
--- player phase, turn 2 --
 Trial of the Bulwark  over after turn 1 of 1  survive  recall 0
    012345678
  0 .........

@@ -1,4 +1,5 @@
 Sallow Grange, seed 61, scheme TwoRollAverage
+objective: the captain, Alder Fenn (A), must stand on the throne at 16,6 by the end of turn 10; only the captain seizes; lost if the captain falls
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......

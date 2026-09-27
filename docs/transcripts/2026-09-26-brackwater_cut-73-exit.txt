@@ -1,4 +1,5 @@
 Brackwater Cut, seed 73, scheme TwoRollAverage
+objective: the captain, Alder Fenn (A), must exit from an exit tile (>) by the end of turn 8; anyone still on the board is left behind; lost if the captain falls
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......

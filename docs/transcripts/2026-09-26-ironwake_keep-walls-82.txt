@@ -1,4 +1,5 @@
 Ironwake Keep, seed 82, scheme TwoRollAverage
+objective: hold until the end of turn 8; lost if the captain falls
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2031,7 +2032,6 @@ soldier-4 attacks captain
 captain gains 12 exp (59)
 enemy: end
 -- enemy phase ends, turn 8 --
--- player phase, turn 9 --
 Ironwake Keep  over after turn 8 of 8  survive  recall 3
    0123456789012345
  0 ....^^....#.....
