@@ -13,7 +13,13 @@ namespace Ironwake.Core.Tests.Content;
 [Collection("console")]
 public class ProtocolSessionTests
 {
-    /// <summary>The journaled seed-163 Tollgate line (a Recall, the rider's arrival, a seize on turn 10).</summary>
+    /// <summary>
+    /// The Tollgate as the seed-163 line was played on, with the rider arriving at 13,5
+    /// (DECISIONS/0045; the shipped map spawns it at 13,4 since issue 351).
+    /// </summary>
+    public static string TollgateRowFive => Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "the_tollgate_row5.map");
+
+    /// <summary>The journaled seed-163 Tollgate line (a Recall, the rider's arrival, a seize on turn 10), played on <see cref="TollgateRowFive"/>.</summary>
     public static string TollgateScript() =>
         File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-25-the_tollgate-163.script"));
 
@@ -70,8 +76,8 @@ public class ProtocolSessionTests
         File.WriteAllLines(jsonPath, JsonCommands(TollgateScript()));
         try
         {
-            var text = Run(out var textExit, "play", "the_tollgate", "--seed", "163", "--script", scriptPath, "--strict", "--content", Fixture.RealContentDirectory());
-            var protocol = Run(out var protocolExit, "play", "the_tollgate", "--seed", "163", "--script", jsonPath, "--protocol", "--content", Fixture.RealContentDirectory());
+            var text = Run(out var textExit, "play", TollgateRowFive, "--seed", "163", "--script", scriptPath, "--strict", "--content", Fixture.RealContentDirectory());
+            var protocol = Run(out var protocolExit, "play", TollgateRowFive, "--seed", "163", "--script", jsonPath, "--protocol", "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(0, textExit);
             Assert.Equal(0, protocolExit);
