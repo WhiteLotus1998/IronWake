@@ -58,6 +58,22 @@ public class ClientParityTests
     }
 
     [Fact]
+    public void ApplyingAScriptPrefixOpensTheBattleWhereTheParityRunWas()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var definition = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "brackwater_cut.map"), content);
+        var client = new ClientSession(content, BattleState.From(definition, content, content.Cast, 53));
+        var screenshot = File.ReadAllText(Path.Combine(Root(), "docs", "screenshots", "brackwater_cut-53-turn3.script"));
+
+        Script.Apply(client, screenshot);
+
+        Assert.False(client.State.Outcome.IsOver);
+        Assert.Equal(3, client.State.Turn);
+        Assert.StartsWith(client.LogText, ClientLog("brackwater_cut", 53));
+        Assert.True(client.Select(client.State.Find("dunstan")!.At));
+    }
+
+    [Fact]
     public void TheDuskParityScriptCarriesTheDarkLine()
     {
         Assert.Contains(ProtocolSession.DarkLine + "\n", ClientLog("brackwater_cut", 53));

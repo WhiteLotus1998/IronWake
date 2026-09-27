@@ -13,7 +13,10 @@ namespace Ironwake.Godot;
 /// <see cref="ClientSession"/>, which asks the core; nothing here knows a rule.
 /// Arguments after <c>--</c>: <c>--map &lt;name|path&gt;</c>, <c>--seed N</c>, <c>--content dir</c>,
 /// and for the headless gate <c>--parity &lt;script&gt; &lt;out&gt;</c>, which writes the client's
-/// event log for the script and quits. Keys: E ends the phase, Space steps the enemy phase one
+/// event log for the script and quits. <c>--script &lt;file&gt;</c> opens the battle with a script's
+/// commands already played, <c>--select &lt;x,y&gt;</c> and <c>--hover &lt;x,y&gt;</c> set the pointer
+/// as a click and a hover would, and <c>--screenshot &lt;file.png&gt;</c> saves one rendered frame
+/// and quits (issue 352; it needs a display, so CI runs it under xvfb). Keys: E ends the phase, Space steps the enemy phase one
 /// event, C continues it to the end, Escape clears the selection.
 /// </summary>
 public partial class Main : Node2D
@@ -26,6 +29,8 @@ public partial class Main : Node2D
     private char[] _letters = Array.Empty<char>();
     private Coord? _hover;
     private string _error = "";
+    private string? _screenshot;
+    private int _framesDrawn;
 
     public override void _Ready()
     {
@@ -49,12 +54,24 @@ public partial class Main : Node2D
 
             _client = new ClientSession(content, state);
             _letters = MapRenderer.Letters(map, content);
+            if (Arg(args, "--script") is { } script)
+            {
+                Ironwake.Client.Script.Apply(_client, File.ReadAllText(script));
+            }
+
+            if (CoordArg(args, "--select") is { } select)
+            {
+                _client.Select(select);
+            }
+
+            _hover = CoordArg(args, "--hover");
+            _screenshot = Arg(args, "--screenshot");
         }
         catch (Exception e) when (e is ContentException or MapException or IOException)
         {
             _error = "ERROR: " + e.Message;
             GD.PrintErr(_error);
-            if (Array.IndexOf(args, "--parity") >= 0)
+            if (Array.IndexOf(args, "--parity") >= 0 || Array.IndexOf(args, "--screenshot") >= 0)
             {
                 GetTree().Quit(1);
             }
@@ -65,6 +82,28 @@ public partial class Main : Node2D
     {
         var at = Array.IndexOf(args, name);
         return at >= 0 && at + 1 < args.Length ? args[at + 1] : null;
+    }
+
+    private static Coord? CoordArg(string[] args, string name)
+    {
+        var parts = Arg(args, name)?.Split(',');
+        return parts is { Length: 2 } && int.TryParse(parts[0], out var x) && int.TryParse(parts[1], out var y) ? new Coord(x, y) : null;
+    }
+
+    /// <summary>
+    /// The screenshot mode: waits a few frames so the board has been drawn at least once, saves
+    /// the viewport as a PNG and quits, with exit code 1 when the image cannot be written.
+    /// </summary>
+    public override void _Process(double delta)
+    {
+        if (_screenshot is null || ++_framesDrawn < 3)
+        {
+            return;
+        }
+
+        var saved = GetViewport().GetTexture().GetImage().SavePng(_screenshot);
+        GetTree().Quit(saved == global::Godot.Error.Ok ? 0 : 1);
+        _screenshot = null;
     }
 
     public override void _UnhandledInput(InputEvent input)

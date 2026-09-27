@@ -23,4 +23,13 @@ dotnet run --project src/Ironwake.Cli -- play brackwater_cut --seed 53 --script 
 cmp console.log client.log
 ```
 
-`--parity` plays the script through the client, writes the client's event log and quits. `play --log` writes the console's event log: every event line it prints, and nothing else. The two must match byte for byte. The same check runs in `dotnet test` without Godot (`ClientParityTests`), together with its falsifier. The headless Godot run in CI is still to come (#352).
+`--parity` plays the script through the client, writes the client's event log and quits. `play --log` writes the console's event log: every event line it prints, and nothing else. The two must match byte for byte. The same check runs in `dotnet test` without Godot (`ClientParityTests`), together with its falsifier. CI's `godot-parity` job runs the headless Godot side on every script in `tests/parity/` (#352), with Godot 4.3-stable .NET checked against the SHA-512 pinned in `.github/workflows/ci.yml`.
+
+## The screenshot
+
+```
+xvfb-run -a godot --rendering-driver opengl3 --path src/Ironwake.Godot -- --map brackwater_cut --seed 53 \
+  --script $PWD/docs/screenshots/brackwater_cut-53-turn3.script --select 11,3 --hover 11,3 --screenshot $PWD/shot.png
+```
+
+`--script` opens the battle with a script's commands already played, `--select` and `--hover` place the pointer as a click and a hover would, and `--screenshot` saves one rendered frame and quits. It needs a display, so CI runs it under xvfb. Paths are best given absolute, since Godot runs from the project folder.
