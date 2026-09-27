@@ -1039,6 +1039,28 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-419.txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Eightieth round: Chat's hand play of seed 421 replays to its journaled transcript. The ford wakes
+    /// on turn 3 and calls the weir, the Foreman crosses to 9,6, goes home to 12,6 and 13,6 when refused,
+    /// comes back out to 10,6 as a guard, takes the lone Teodor from 8,4 at full HP, and after one Recall
+    /// is boxed at 9,2 and falls on Teodor's counter on enemy phase 9.
+    /// </summary>
+    [Fact]
+    public void TheJournaledSeed421PlayReplaysWithThePatrolAndTheBox()
+    {
+        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-421.script", 421, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("group ford wakes: proximity\ngroup weir wakes: called by ford\n", output);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 9,6 via 12,6 11,6 10,6\n", output);
+        Assert.Contains("weir_foreman-1 moves 9,6 -> 12,6 via 10,6 11,6\n", output);
+        Assert.Contains("weir_foreman-1 moves 13,6 -> 10,6 via 12,6 11,6\n", output);
+        Assert.Contains("weir_foreman-1 moves 10,6 -> 8,4 via 9,6 8,6 8,5\nenemy: attack weir_foreman-1 teodor\n", output);
+        Assert.Contains("recalled to state 133; 2 charges left\n", output);
+        Assert.Contains("weir_foreman-1 falls at 9,2\n", output);
+        Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-421.txt")).ReplaceLineEndings("\n"), output);
+    }
+
     /// <summary>A transcript script played on the shipped Harrow Weir without <c>--strict</c>, so a line the rules have moved past still plays on.</summary>
     private static string RunLoose(string script, int seed)
     {
