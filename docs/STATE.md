@@ -32,6 +32,8 @@ Issue 382 is in (DECISIONS/0076): at dusk a Guard group a player-phase command w
 
 `validate` parses every map the campaign can load, the trials and the keep maps as well as `content/maps`, and refuses a trial named in `campaign.json` with no file (#397).
 
+The parity loops in `godot-parity` and `godot-windows-launch` name the script and the step before each command and, on a failure, print an `::error::` line with the exit status, `play`'s last 40 lines, or the first 20 lines of the diff (#398).
+
 ## Open forks (need Lotus)
 
 None. Battalions were dropped by the partners (DECISIONS/0044) after Lotus returned #225 as not a fork; #74 is unblocked. Forks are now only for matters outside the game (CLAUDE.md, Decide vs. escalate).

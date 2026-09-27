@@ -54,9 +54,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/parity"
           for script in tests/parity/*.script; do
             name=$(basename "$script" .script); map=${name%-*}; seed=${name##*-}
-            timeout 120 "$GODOT" --headless --path src/Ironwake.Godot -- --map "$map" --seed "$seed" --parity "$PWD/$script" "$RUNNER_TEMP/parity/$name.client.log"
-            dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$RUNNER_TEMP/parity/$name.console.log" > /dev/null
-            cmp "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log"
+            echo "$name: client (godot --parity)"
+            status=0; timeout 120 "$GODOT" --headless --path src/Ironwake.Godot -- --map "$map" --seed "$seed" --parity "$PWD/$script" "$RUNNER_TEMP/parity/$name.client.log" || status=$?
+            if [ "$status" -ne 0 ]; then echo "::error::$name: godot --parity exited $status (124 is the 120 s timeout)"; exit 1; fi
+            echo "$name: console (play --log)"
+            status=0; dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$RUNNER_TEMP/parity/$name.console.log" > "$RUNNER_TEMP/parity/$name.play.out" 2>&1 || status=$?
+            if [ "$status" -ne 0 ]; then echo "::error::$name: play exited $status; the tail of its output:"; tail -n 40 "$RUNNER_TEMP/parity/$name.play.out"; exit 1; fi
+            echo "$name: compare"
+            if ! cmp "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log"; then echo "::error::$name: the client log differs from play --log"; diff "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log" | head -n 20; exit 1; fi
             echo "$name: identical"
           done
       - name: The comparison fires on a log one character away
@@ -129,8 +134,13 @@ jobs:
           out=$(cygpath -u "$RUNNER_TEMP")/parity; mkdir -p "$out"
           for script in tests/parity/*.script; do
             name=$(basename "$script" .script); map=${name%-*}; seed=${name##*-}
-            timeout 120 build/windows/Ironwake.exe --headless -- --map "$map" --seed "$seed" --parity "$(cygpath -w "$PWD/$script")" "$(cygpath -w "$out/$name.client.log")"
-            dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$(cygpath -w "$out/$name.console.log")" > /dev/null
-            cmp "$out/$name.console.log" "$out/$name.client.log"
+            echo "$name: client (Ironwake.exe --parity)"
+            status=0; timeout 120 build/windows/Ironwake.exe --headless -- --map "$map" --seed "$seed" --parity "$(cygpath -w "$PWD/$script")" "$(cygpath -w "$out/$name.client.log")" || status=$?
+            if [ "$status" -ne 0 ]; then echo "::error::$name: Ironwake.exe --parity exited $status (124 is the 120 s timeout)"; exit 1; fi
+            echo "$name: console (play --log)"
+            status=0; dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- play "$map" --seed "$seed" --script "$script" --log "$(cygpath -w "$out/$name.console.log")" > "$out/$name.play.out" 2>&1 || status=$?
+            if [ "$status" -ne 0 ]; then echo "::error::$name: play exited $status; the tail of its output:"; tail -n 40 "$out/$name.play.out"; exit 1; fi
+            echo "$name: compare"
+            if ! cmp "$out/$name.console.log" "$out/$name.client.log"; then echo "::error::$name: the client log differs from play --log"; diff "$out/$name.console.log" "$out/$name.client.log" | head -n 20; exit 1; fi
             echo "$name: identical"
           done
