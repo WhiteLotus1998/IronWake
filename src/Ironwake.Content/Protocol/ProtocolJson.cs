@@ -102,6 +102,11 @@ public static class ProtocolJson
                 break;
             case UnitWaited u:
                 w.WriteString("unit", u.UnitId);
+                if (u.Braced)
+                {
+                    w.WriteBoolean("braced", true);
+                }
+
                 break;
             case UnitExited x:
                 w.WriteString("unit", x.UnitId);
@@ -630,6 +635,11 @@ public static class ProtocolJson
             w.WriteBoolean("shoved", true);
         }
 
+        if (unit.Braced)
+        {
+            w.WriteBoolean("braced", true);
+        }
+
         WriteRosterFields(w, u);
         w.WriteEndObject();
     }
@@ -696,7 +706,8 @@ public static class ProtocolJson
             RequiredBool(e, "retreated"),
             OptionalInt(e, "canto"),
             OptionalString(e, "grudge"),
-            e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"));
+            e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"),
+            e.TryGetProperty("braced", out _) && RequiredBool(e, "braced"));
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>

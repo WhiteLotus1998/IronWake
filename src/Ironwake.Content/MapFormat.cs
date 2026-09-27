@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "exit_after_move", "difficulty", "certification", "wake_links" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "exit_after_move", "difficulty", "certification", "wake_links" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -88,6 +88,11 @@ public static class MapFormat
         if (map.PincerEnabled)
         {
             sb.Append("pincer: on\n");
+        }
+
+        if (map.BraceEnabled)
+        {
+            sb.Append("brace: on\n");
         }
 
         if (map.ExitAfterMove)
@@ -222,6 +227,7 @@ public static class MapFormat
             var grudges = ParseOn(header, "grudges");
             var shove = ParseOn(header, "shove");
             var pincer = ParseOn(header, "pincer");
+            var brace = ParseOn(header, "brace");
             var exitAfterMove = ParseOn(header, "exit_after_move");
             if (exitAfterMove && win != WinCondition.Escape)
             {
@@ -244,7 +250,7 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace };
             Validate(map);
             return map;
         }

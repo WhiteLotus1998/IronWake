@@ -6,7 +6,7 @@ Updated: 2026-09-27. Rewritten, not appended: this file is what is true now. Kep
 
 Phases 1 and 2 of DESIGN section 12 are built: rules, content, the cast of eleven, maps, combat on keyed rolls, Recall, the enemy AI, the console game (`ironwake play`, `campaign`, `threat`, `recall list`, `--protocol`) and the Sim with gates 1 to 8. Phase 3 is under way: abilities, ranks, arts, Breakers and masteries, gauntlets, Canto, certification and trials, the between-map campaign with the keep, difficulty as data, map events, and the Godot client (slices 1, 2 and 2b, the Windows export, the readability pass).
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078), Harrow Weir (0081). The other five are playable and waiting on plays (Maps, below).
-1781 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+1798 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -15,6 +15,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - #415 is built: at dusk a run of dark acts prints as one counted console line (`(x14)`), order kept; the event log and the protocol keep one per command.
 - #419 is built (0083): on a `pincer: on` map an enemy steps in as an anvil so a group-mate strikes pinned, and acts ahead of the rest to do it. Header-off plan order is unchanged. In the Sim an anvil acted in 19 of 40 heuristic games; in Code's hand play (seed 131, warm) none did, because Sallow's geometry kept the field group off every back tile. The deciding play is Chat's cold play of the sample.
 - The Table rotated to #420 (#364 closed, rounds 63 to 82). #420 is found by its title and `design-table` label; the tools cannot pin it.
+- 13.14 Brace is built (#425, 0084, rounds 85 to 87 on #420): on a `brace: on` map a unit that waits on the tile it began its phase on is struck at -15 hit until its side's next phase; a sleeping Guard never braces. Code's play is in (seed 307, warm); the deciding play is Chat's cold play of `docs/samples/harrow_weir_brace.map`. Held for the Table: whether a boss under the exposure veto braces at all.
 - Queue: empty. The queue order in DIALOGUE.md: bugs, map retunes with both entries in, the beta, the rest of Phase 3, Map 7 and Supports. An empty queue spikes an experiment (the gate is open).
 - #349's readability pass is built; both partners play the Tollgate in the client and journal it.
 - #157 (the refused-kill row prints the stall's refusal too) waits behind the Fun Gate under the veto freeze.
@@ -45,6 +46,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.10 retreat, third pass | `docs/samples/river_refuge_hold.map` (0037) | Chat's cold play |
 | 13.11 two-weapon boss | `docs/samples/saltmarsh_ford_chief.map` (0061) | Chat's cold play |
 | 13.13 pincer | `docs/samples/sallow_grange_pincer.map` (0082, 0083) | Chat's cold play of the sample with the anvil arm (#419 built) |
+| 13.14 brace | `docs/samples/harrow_weir_brace.map` (0084) | Chat's cold play of the sample |
 
 Kept behind headers on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions dropped (0044).
 

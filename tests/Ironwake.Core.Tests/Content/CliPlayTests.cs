@@ -803,6 +803,25 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.14's first play: Code's seed 307 on <c>docs/samples/harrow_weir_brace.map</c>. Ottilie
+    /// waits braced as bait for the west brigand at 31 percent and it misses; the Foreman waits
+    /// braced on his hill until Teodor's strike draws his answer, and Pell kills him unbraced
+    /// on turn 11.
+    /// </summary>
+    [Fact]
+    public void TheJournaledBracePlayReplaysWithItsBraces()
+    {
+        var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-307.script", 307, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.Contains("forecast brigand-2 -> ottilie: dmg 12 hit 31% crit 0%; counter: none\n  brace: ottilie braced: brigand-2 hit -15\n", output);
+        Assert.Contains("  brace: weir_foreman-1 braced: teodor hit -15\n", output);
+        Assert.Contains("forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 94% crit 1%", output);
+        Assert.Contains("weir_foreman-1 falls at 13,6\n", output);
+    }
+
+    /// <summary>
     /// Issue 419's hand play: Code's seed 131 on <c>docs/samples/sallow_grange_pincer.map</c> with
     /// the planner's anvil arm built. The field group never had a tile behind the front in reach,
     /// so no enemy stepped in as an anvil and every pin was the player's: Ansgar on the brawler

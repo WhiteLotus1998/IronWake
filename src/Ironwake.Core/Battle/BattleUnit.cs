@@ -22,6 +22,9 @@ namespace Ironwake.Core;
 /// (DESIGN.md 13.12) and cleared with <see cref="Moved"/> when a phase begins: the shove leaves
 /// the unit its own Move, but it did not begin its turn where it stands, so it may not exit
 /// there this phase (section 7, issue 396).
+/// <see cref="Braced"/> is set when the unit waits on the tile it began its phase on, on a <c>brace: on</c> map
+/// (DESIGN.md 13.14, experiment) and cleared when its side's next phase begins or an ally
+/// shoves it; while it is set, strikes against the unit lose <see cref="Brace.Hit"/> hit.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -38,7 +41,8 @@ public sealed record BattleUnit(
     bool Retreated = false,
     int? Canto = null,
     string? Grudge = null,
-    bool Shoved = false)
+    bool Shoved = false,
+    bool Braced = false)
 {
     public string Id => Unit.Id;
 
@@ -145,7 +149,8 @@ public sealed record BattleUnit(
     /// <paramref name="against"/> is the unit it fights, when known: a unit sworn against by
     /// that enemy loses <see cref="Grudges.SwornCritAvoid"/> crit avoid (issue 331), and on a
     /// <c>pincer: on</c> map this unit strikes it at <see cref="Pincer.Hit"/> more when it is
-    /// pinned (DESIGN.md 13.13), read at both units' <see cref="At"/>.
+    /// pinned (DESIGN.md 13.13), read at both units' <see cref="At"/>, and at
+    /// <see cref="Brace.Hit"/> less when it is braced (DESIGN.md 13.14).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -156,7 +161,7 @@ public sealed record BattleUnit(
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
         critAvoid += Grudges.CritAvoidAgainst(this, against);
-        hit += Pincer.HitAgainst(state, this, against);
+        hit += Brace.StrikeHit(state, this, against);
         var weapon = EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {

@@ -780,8 +780,9 @@ public static class Resolver
             return (state, rejection);
         }
 
-        events.Add(new UnitWaited(unit.Id));
-        return (state.WithUnit(unit with { Moved = true, Acted = true }), null);
+        var braced = Brace.BracesOnWait(state, unit);
+        events.Add(new UnitWaited(unit.Id, braced));
+        return (state.WithUnit(unit with { Moved = true, Acted = true, Braced = braced }), null);
     }
 
     /// <summary>
@@ -834,7 +835,7 @@ public static class Resolver
         var to = Beyond(unit.At, target.At);
         events.Add(new Shoved(unit.Id, target.Id, target.At, to));
         var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
-        return (next.WithUnit(target with { At = to, Shoved = true }), null);
+        return (next.WithUnit(target with { At = to, Shoved = true, Braced = false }), null);
     }
 
     /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>
@@ -1066,7 +1067,7 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false });
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

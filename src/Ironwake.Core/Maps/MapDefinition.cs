@@ -68,6 +68,11 @@ namespace Ironwake.Core;
 /// tile while a unit of the striker's side stands on the tile directly behind it is hit at
 /// <see cref="Pincer.Hit"/> more, counters included (<see cref="Pincer"/>). Off by default.
 /// </param>
+/// <param name="BraceEnabled">
+/// The <c>brace: on</c> header (DESIGN.md 13.14, experiment): a unit that waits on the tile it
+/// began its phase on is struck at <see cref="Brace.Hit"/> less hit until its side's next phase (<see cref="Brace"/>).
+/// Off by default.
+/// </param>
 /// <param name="ExitAfterMove">
 /// The <c>exit_after_move: on</c> header: the Escape rule before issue 377, under which a unit
 /// may move onto an exit and exit in the same turn. It is kept only on the sample maps that
@@ -104,7 +109,8 @@ public sealed record MapDefinition(
     bool ShoveEnabled = false,
     bool ExitAfterMove = false,
     ValueList<WakeLink> WakeLinks = default,
-    bool PincerEnabled = false)
+    bool PincerEnabled = false,
+    bool BraceEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
