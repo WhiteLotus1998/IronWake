@@ -1,0 +1,37 @@
+end
+move captain 3,4
+wait captain
+move pell 2,4
+wait pell
+move ottilie 1,4
+wait ottilie
+move wren 2,5
+wait wren
+move teodor 1,5
+wait teodor
+move ansgar 2,8
+wait ansgar
+end
+move pell 2,2
+attack pell archer-1
+move captain 4,3
+attack captain archer-1
+move teodor 3,4
+wait teodor
+move wren 2,4
+wait wren
+move ottilie 1,3
+wait ottilie
+move ansgar 1,5
+wait ansgar
+canto ansgar stay
+end
+move pell 3,3
+attack pell soldier-1
+move ansgar 6,4
+attack ansgar brawler-1
+move captain 5,3
+attack captain brawler-1
+recall 56
+move captain 5,3
+attack captain brawler-1

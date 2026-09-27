@@ -4,6 +4,9 @@ using Ironwake.Core;
 
 namespace Ironwake.Cli;
 
+/// <summary>One row of <c>recall list</c> (issue 75): the history state a click on it recalls, or null for a heading, and the console's text.</summary>
+public sealed record RecallRow(int? State, string Text);
+
 /// <summary>
 /// The <c>play</c> command (issue 11): a battle on one map, commands from a script file or
 /// standard input, every event printed as a line and the board after every command. The
@@ -700,7 +703,7 @@ public sealed class PlaySession
                 continue;
             }
 
-            _out.WriteLine("enemy: " + Describe(command));
+            _out.WriteLine("enemy: " + CommandText(command));
             if (command is Attack attack)
             {
                 var attacker = _state.Find(attack.UnitId);
@@ -782,7 +785,7 @@ public sealed class PlaySession
     }
 
     /// <summary>The line a rewind prints under what it undoes: rolls are keyed (section 7), so a Recall is a choice and never a reroll.</summary>
-    private const string SameRolls = "the rolls do not change: the same attack will roll the same";
+    public const string SameRolls = "the rolls do not change: the same attack will roll the same";
 
     /// <summary>
     /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
@@ -799,7 +802,7 @@ public sealed class PlaySession
 
         if (_made.Count == _state.History.Count)
         {
-            _made.Add(Describe(command));
+            _made.Add(CommandText(command));
         }
     }
 
@@ -810,31 +813,51 @@ public sealed class PlaySession
     /// </summary>
     private void ListRecallHistory()
     {
-        var total = _state.Map.RecallCharges;
-        var spent = total - _state.RecallCharges;
-        _out.WriteLine($"recall: {_state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same");
-        if (_state.RecallCharges < 1)
+        foreach (var row in RecallRows(_state, _made))
         {
-            _out.WriteLine("  no charges left: nothing more can be recalled on this map");
-            return;
+            _out.WriteLine(row.Text);
+        }
+    }
+
+    /// <summary>
+    /// What <c>recall list</c> prints (issue 75), one row per line: the charges, then each
+    /// history state a Recall may return to with its index, or why there is none.
+    /// <paramref name="made"/> is the command applied from each history state, by index, as
+    /// <see cref="CommandText"/> names it. The thin renderer's Recall browser shows the same
+    /// rows and recalls the row clicked (issue 353).
+    /// </summary>
+    public static IReadOnlyList<RecallRow> RecallRows(BattleState state, IReadOnlyList<string> made)
+    {
+        var total = state.Map.RecallCharges;
+        var spent = total - state.RecallCharges;
+        var rows = new List<RecallRow>
+        {
+            new(null, $"recall: {state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same"),
+        };
+        if (state.RecallCharges < 1)
+        {
+            rows.Add(new(null, "  no charges left: nothing more can be recalled on this map"));
+            return rows;
         }
 
-        var targets = _state.RecallTargets().ToList();
+        var targets = state.RecallTargets().ToList();
         if (targets.Count == 0)
         {
-            _out.WriteLine("  no state to return to yet");
-            return;
+            rows.Add(new(null, "  no state to return to yet"));
+            return rows;
         }
 
         foreach (var i in targets)
         {
-            var made = i == 0
+            var from = i == 0
                 ? "the start"
-                : _state.History[i - 1].Phase != Side.Player
+                : state.History[i - 1].Phase != Side.Player
                     ? "turn start"
-                    : i - 1 < _made.Count ? "after " + _made[i - 1] : "after ?";
-            _out.WriteLine($"  state {i}  turn {_state.History[i].Turn}  {made}  undoes: {UndoText(RecallCost.Of(_state, i))}");
+                    : i - 1 < made.Count ? "after " + made[i - 1] : "after ?";
+            rows.Add(new(i, $"  state {i}  turn {state.History[i].Turn}  {from}  undoes: {UndoText(RecallCost.Of(state, i))}"));
         }
+
+        return rows;
     }
 
     /// <summary>A rewind's cost in the console's words, the player's gains given back first, then what comes back to the player.</summary>
@@ -1416,7 +1439,8 @@ public sealed class PlaySession
         return true;
     }
 
-    private static string Describe(Command command) => command switch
+    /// <summary>A command as a script line types it, the words <c>recall list</c> names a state by.</summary>
+    public static string CommandText(Command command) => command switch
     {
         Move m => $"move {m.UnitId} {m.To}",
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),

@@ -21,6 +21,13 @@ public sealed class ClientSession
     private readonly Queue<Command> _enemy = new();
     private readonly Queue<string> _pending = new();
 
+    /// <summary>
+    /// The command applied from each history state, by index, as the console's <c>recall list</c>
+    /// names it (issue 353): kept by the same rule as the console's, so the Recall browser's rows
+    /// read the same. A Recall truncates it to the state it returns to.
+    /// </summary>
+    private readonly List<string> _made = new();
+
     public ClientSession(GameContent content, BattleState state)
     {
         Content = content;
@@ -90,6 +97,47 @@ public sealed class ClientSession
     }
 
     /// <summary>
+    /// The threat panel (issue 353): what the coming enemy phase could do to the selected unit
+    /// if it ended on <paramref name="tile"/>, the console's <c>threat</c> text from the core's
+    /// queries, sleeping groups, arrivals and the dark included. Null with no selection, while
+    /// the enemy phase plays, or from a tile the unit cannot end on.
+    /// </summary>
+    public string? Threat(Coord tile)
+    {
+        if (Selected is not { } id || State.Find(id) is not { } unit || EnemyPhasePlaying
+            || Queries.Threats(State, Content, unit, tile) is not { } lines)
+        {
+            return null;
+        }
+
+        return PlaySession.ThreatText(State, Content, unit, tile, lines, Queries.SleepingThreats(State, Content, unit, tile)!, Queries.Unseeing(State, Content, unit, tile), Queries.MoveWins(State, Content, unit, tile));
+    }
+
+    /// <summary>
+    /// The Recall browser (issue 353): the console's <c>recall list</c> rows, each state row
+    /// carrying the history index a click on it recalls.
+    /// </summary>
+    public IReadOnlyList<RecallRow> RecallRows => PlaySession.RecallRows(State, _made);
+
+    /// <summary>
+    /// Rewinds to a history state, as a click on its row in the Recall browser does. The status
+    /// bar then reads what the rewind gave back and that the rolls do not change, the lines the
+    /// console prints under it; the event log gets only the Recall's own event, as the
+    /// console's does. False, with the refusal in <see cref="Status"/>, when it is refused.
+    /// </summary>
+    public bool Recall(int index)
+    {
+        var undone = index >= 0 && index < State.History.Count ? RecallCost.Of(State, index) : null;
+        if (!Submit(new Recall(index)))
+        {
+            return false;
+        }
+
+        Status = undone is null ? null : "undone: " + PlaySession.UndoText(undone) + "\n" + PlaySession.SameRolls;
+        return true;
+    }
+
+    /// <summary>
     /// What a click on a tile does with a unit selected: the unit itself waits, a hostile unit
     /// is attacked with the equipped weapon, a tile it can end on is moved to (a Canto when one
     /// is owed); anything else selects what is there. Returns the command applied, or null.
@@ -152,6 +200,7 @@ public sealed class ClientSession
         }
 
         Status = null;
+        Record(command);
         State = result.Next;
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
         if (command is EndPhase)
@@ -188,6 +237,7 @@ public sealed class ClientSession
                 throw new InvalidOperationException($"the enemy AI's {command} was rejected: {result.Rejection!.Message}");
             }
 
+            Record(command);
             State = result.Next;
             if (dark)
             {
@@ -207,6 +257,23 @@ public sealed class ClientSession
 
         _log.Add(_pending.Dequeue());
         return true;
+    }
+
+    /// <summary>
+    /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
+    /// state moves, by the console's rule: a Recall truncates it, anything else names the
+    /// command applied from the state it leaves.
+    /// </summary>
+    private void Record(Command command)
+    {
+        if (command is Recall recall)
+        {
+            _made.RemoveRange(recall.ToIndex, _made.Count - recall.ToIndex);
+        }
+        else if (_made.Count == State.History.Count)
+        {
+            _made.Add(PlaySession.CommandText(command));
+        }
     }
 
     /// <summary>Reveals every event left in the enemy phase.</summary>
