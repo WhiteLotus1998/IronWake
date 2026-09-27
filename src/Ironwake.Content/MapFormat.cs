@@ -137,7 +137,7 @@ public static class MapFormat
         var trigger = mapEvent.Trigger switch
         {
             TurnTrigger t => "turn " + t.Turn + " " + t.Phase.ToString().ToLowerInvariant(),
-            EnterTrigger e => "enter " + e.At,
+            EnterTrigger e => "enter " + string.Join(' ', e.Tiles),
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
         };
         var action = mapEvent.Action switch
@@ -705,12 +705,25 @@ public static class MapFormat
 
                     return (new TurnTrigger(turn, phase), tokens[4..]);
                 case "enter":
-                    if (tokens.Length < 3)
+                    var count = tokens.Skip(2).TakeWhile(t => t.Contains(',')).Count();
+                    if (count == 0)
                     {
-                        throw Error("enter trigger needs a tile: 'enter 6,2'");
+                        throw Error("enter trigger needs a tile: 'enter 6,2', or several: 'enter 6,4 6,3'");
                     }
 
-                    return (new EnterTrigger(ParseCoord(tokens[2], width, height)), tokens[3..]);
+                    var tiles = new List<Coord>();
+                    foreach (var token in tokens[2..(2 + count)])
+                    {
+                        var tile = ParseCoord(token, width, height);
+                        if (tiles.Contains(tile))
+                        {
+                            throw Error($"enter trigger lists {tile} twice");
+                        }
+
+                        tiles.Add(tile);
+                    }
+
+                    return (new EnterTrigger(ValueList<Coord>.From(tiles)), tokens[(2 + count)..]);
                 default:
                     throw Error($"unknown event trigger '{tokens[1]}'; expected turn or enter");
             }

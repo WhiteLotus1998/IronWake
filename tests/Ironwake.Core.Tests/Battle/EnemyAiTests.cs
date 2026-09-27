@@ -191,25 +191,30 @@ public class EnemyAiTests
     }
 
     /// <summary>
-    /// Issue 351: the Tollgate's rider arrives at 13,4 as enemy phase 4 opens, and row 4 is
-    /// open plain from 13 to 7, so on its arrival phase it reaches 7,4 beside the door's
-    /// ranged tile 6,4. From the old spawn at 13,5 it stops one tile short (Chat's seed 97).
+    /// Issues 351 and 370: the Tollgate's rider arrives at 13,4 when a player unit stops on
+    /// either of the door's tiles, 6,4 (range 2 on the warden) or 6,3 (melee), and row 4 is
+    /// open plain from 13 to 7, so on the enemy phase that follows it reaches 7,4 beside
+    /// 6,4. It cannot reach 6,4 itself, since forest costs cavalry 3. From the old spawn at
+    /// 13,5 it stops one tile short of 7,4 (Chat's seed 97).
     /// </summary>
-    [Fact]
-    public void OnTheTollgateTheRiderReachesTheDoorOnItsArrivalPhase()
+    [Theory]
+    [InlineData(6, 4)]
+    [InlineData(6, 3)]
+    public void OnTheTollgateTheRiderArrivesWhenTheDoorIsPricedAndReachesIt(int x, int y)
     {
         var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "the_tollgate.map"), Starter);
-        var state = BattleState.From(map, Starter, Starter.Cast, 97);
-        for (var i = 0; i < 7; i++)
-        {
-            state = state.Do(new EndPhase());
-        }
+        var start = BattleState.From(map, Starter, Starter.Cast, 97);
+        var pell = start.Find("pell")! with { At = new Coord(x, y) };
+        var events = new List<GameEvent>();
 
-        Assert.Equal(Side.Enemy, state.Phase);
-        Assert.Equal(4, state.Turn);
+        var state = MapEvents.AfterMove(start.WithUnit(pell), Starter, pell, events);
+
+        Assert.Contains(new MapEventFired("riders", false), events);
         var rider = state.Find("rider-1")!;
         Assert.Equal(new Coord(13, 4), rider.At);
-        Assert.NotNull(Queries.Reachable(state, Starter, rider).EntryAt(new Coord(7, 4)));
+        var reach = Queries.Reachable(state, Starter, rider);
+        Assert.NotNull(reach.EntryAt(new Coord(7, 4)));
+        Assert.Null(reach.EntryAt(new Coord(6, 4)));
 
         var oldTile = state.WithUnit(rider with { At = new Coord(13, 5) });
         Assert.Null(Queries.Reachable(oldTile, Starter, oldTile.Find("rider-1")!).EntryAt(new Coord(7, 4)));
