@@ -305,6 +305,87 @@ public class WindupTests
         Assert.Empty(Ironwake.Cli.PlaySession.WindupLines(Start(false).Do(new EndPhase()), Starter, mauler, hale, null));
     }
 
+    private static string ThreatOn(BattleState state, string unitId)
+    {
+        var unit = state.Find(unitId)!;
+        var lines = Queries.Threats(state, Starter, unit, unit.At)!;
+        return Ironwake.Cli.PlaySession.ThreatText(state, Starter, unit, unit.At, lines, Queries.SleepingThreats(state, Starter, unit, unit.At)!);
+    }
+
+    [Fact]
+    public void ARaiseThisPhaseIsPrintedButAddsNothingToTheThreatTotal()
+    {
+        var state = Start(true);
+        var hale = state.Find("hale")!;
+        var lines = Queries.Threats(state, Starter, hale, Door)!;
+        var enemyPhase = state.Do(new EndPhase());
+        var damage = Windup.Damage(enemyPhase, Starter, enemyPhase.Find("toll_mauler-1")!, enemyPhase.Find("hale")!);
+
+        var raise = Assert.Single(lines);
+        Assert.True(raise.Raises);
+        Assert.Equal(0, raise.IfAllLand);
+        Assert.Equal(0, Queries.IfAllLand(lines));
+        var text = ThreatOn(state, "hale");
+        Assert.Contains($"    windup: no strike; toll_mauler-1 raises over 2,2, lands next enemy phase for {damage}, sure, unless a hit breaks it (not in the total)\n", text);
+        Assert.EndsWith($"  if all land: 0 against {hale.Hp} hp", text);
+
+        var plain = Start(false);
+        var strike = Assert.Single(Queries.Threats(plain, Starter, plain.Find("hale")!, Door)!);
+        Assert.False(strike.Raises);
+        Assert.Equal(damage, strike.Forecast.Attacker.Damage);
+        Assert.True(Queries.IfAllLand(new[] { strike }) > 0);
+        Assert.DoesNotContain("windup", ThreatOn(plain, "hale"));
+    }
+
+    [Fact]
+    public void ABlowAlreadyRaisedOverTheTileIsInTheThreatTotal()
+    {
+        var playerPhase = Raise().Next.Do(new EndPhase());
+        var hale = playerPhase.Find("hale")!;
+        var landing = Windup.Damage(playerPhase, Starter, playerPhase.Find("toll_mauler-1")!, hale);
+        var lines = Queries.Threats(playerPhase, Starter, hale, Door)!;
+
+        var blow = Queries.RaisedBlowOn(playerPhase, Starter, hale, Door);
+        Assert.Equal(new RaisedBlow(playerPhase.Find("toll_mauler-1")!, Door, landing), blow);
+        Assert.Equal(0, Queries.IfAllLand(lines));
+        Assert.Equal(landing, Queries.IfAllLand(lines, blow));
+        var text = ThreatOn(playerPhase, "hale");
+        Assert.StartsWith($"threat on hale at 2,2 (Plain):\n  toll_mauler-1's raised blow lands here at the enemy phase start: {landing}, sure, unless a hit breaks it\n", text);
+        Assert.EndsWith($"  if all land: {landing} against {hale.Hp} hp", text);
+
+        Assert.Null(Queries.RaisedBlowOn(playerPhase, Starter, hale, new Coord(1, 2)));
+        Assert.Null(Queries.RaisedBlowOn(Start(false), Starter, hale, Door));
+    }
+
+    [Fact]
+    public void ABlowThatKillsIsStillPricedWhenNoStrikeFollows()
+    {
+        var playerPhase = Raise().Next.Do(new EndPhase());
+        var dying = playerPhase.WithUnit(playerPhase.Find("hale")! with { Hp = 1 });
+        var landing = Windup.Damage(dying, Starter, dying.Find("toll_mauler-1")!, dying.Find("hale")!);
+
+        Assert.Empty(Queries.Threats(dying, Starter, dying.Find("hale")!, Door)!);
+        var text = ThreatOn(dying, "hale");
+        Assert.DoesNotContain("no enemy can strike it", text);
+        Assert.EndsWith($"  if all land: {landing} against 1 hp", text);
+    }
+
+    [Fact]
+    public void TheProtocolsThreatTotalCountsARaisedBlowAndNotARaise()
+    {
+        var playerPhase = Raise().Next.Do(new EndPhase());
+        var hale = playerPhase.Find("hale")!;
+        var landing = Windup.Damage(playerPhase, Starter, playerPhase.Find("toll_mauler-1")!, hale);
+
+        var raised = new Ironwake.Cli.ProtocolSession(Starter, playerPhase, TextWriter.Null).Answer("""{"query":"threat","unit":"hale"}""");
+        var fresh = new Ironwake.Cli.ProtocolSession(Starter, Start(true), TextWriter.Null).Answer("""{"query":"threat","unit":"hale"}""");
+
+        Assert.Contains($"\"blow\":{{\"wielder\":\"toll_mauler-1\",\"damage\":{landing}}},\"ifAllLand\":{landing},", raised);
+        Assert.Contains("\"ifAllLand\":0,\"raises\":true,", raised);
+        Assert.Contains("],\"ifAllLand\":0,", fresh);
+        Assert.DoesNotContain("\"blow\"", fresh);
+    }
+
     [Fact]
     public void TheHeaderRoundTripsThroughTheMapFormat()
     {
