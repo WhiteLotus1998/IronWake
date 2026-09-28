@@ -980,7 +980,8 @@ public static class ContentLoader
                 healBase,
                 node.Enum<WeaponRank>("rank"),
                 Price(node),
-                node.BoolOr("ignites", false)));
+                node.BoolOr("ignites", false),
+                node.BoolOr("windup", false)));
         }
 
         if (builder.Count == 0)

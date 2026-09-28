@@ -616,7 +616,7 @@ public static class EnemyAi
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
         var veto = !unvetoed && BossVetoApplies(state, content, unit);
-        var scorched = Wildfire.Scorched(state.Map);
+        var scorched = Avoided(state);
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
@@ -813,7 +813,7 @@ public static class EnemyAi
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         Coord? destination = null;
-        var scorched = Wildfire.Scorched(state.Map);
+        var scorched = Avoided(state);
         var bestKey = (Scorch: int.MaxValue, Remaining: int.MaxValue, Avoid: int.MinValue, Exposure: int.MaxValue, Cost: int.MaxValue);
         foreach (var tile in reach.Destinations)
         {
@@ -867,6 +867,18 @@ public static class EnemyAi
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// The tiles a mover ranks below every other stop: <see cref="Wildfire.Scorched"/> on a
+    /// <c>wildfire: on</c> map, and on a <c>windup: on</c> map every tile under a raised blow
+    /// (<see cref="Windup.Marked"/>, DESIGN.md 13.16), since a unit left there is struck for sure.
+    /// </summary>
+    private static IReadOnlySet<Coord> Avoided(BattleState state)
+    {
+        var scorched = Wildfire.Scorched(state.Map);
+        var marked = Windup.Marked(state);
+        return marked.Count == 0 ? scorched : scorched.Concat(marked).ToHashSet();
     }
 
     /// <summary>

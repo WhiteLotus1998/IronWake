@@ -750,6 +750,11 @@ public sealed class PlaySession
                     _out.WriteLine(ignite);
                 }
 
+                foreach (var windup in WindupLines(_state, _content, attacker!, target!, attack.Slot))
+                {
+                    _out.WriteLine(windup);
+                }
+
                 if (grudge is not null)
                 {
                     _out.WriteLine("  " + grudge);
@@ -1099,6 +1104,7 @@ public sealed class PlaySession
         lines.AddRange(PincerLines(state, unit with { At = tile }, target));
         lines.AddRange(BraceLines(unit, target));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
+        lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
@@ -1240,9 +1246,19 @@ public sealed class PlaySession
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
                 rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter{(line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none")}");
+                if (Windup.Raises(state, line.Weapon))
+                {
+                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises a blow over {tile} that lands at the next enemy phase start for {line.Forecast.Attacker.Damage}, sure, unless a hit breaks it");
+                }
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
+        }
+
+        if (state.Map.WindupEnabled && Windup.Over(state, tile) is { } wielder && wielder.Id != unit.Id)
+        {
+            var blow = Windup.Damage(state, content, wielder, unit with { At = tile });
+            rows.Add($"  {wielder.Id}'s raised blow lands here at its next phase start: {blow}, sure, unless a hit breaks it");
         }
 
         foreach (var blind in (unseeing ?? Array.Empty<BattleUnit>()).Where(e => Dusk.Seen(state, e)))
@@ -1559,6 +1575,31 @@ public sealed class PlaySession
         }
     }
 
+    /// <summary>
+    /// Under a forecast on a <c>windup: on</c> map (DESIGN.md 13.16): one line when the attack
+    /// raises a blow instead of fighting, with what the blow would deal the target where it stands,
+    /// and one when the target has a raised blow a hit would break. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> WindupLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, int? slot)
+    {
+        if (!state.Map.WindupEnabled)
+        {
+            yield break;
+        }
+
+        var (armed, weapon, _) = Resolver.ChooseWeapon(attacker, content, slot);
+        if (Windup.Raises(state, weapon))
+        {
+            var damage = Windup.Damage(state, content, armed, target);
+            yield return $"  windup: no combat now; {attacker.Id} raises a blow over {target.At}, landing at its next phase start on whoever stands there ({target.Id}: {damage}, sure) unless a hit breaks it";
+        }
+
+        if (target.WindupAt is { } at)
+        {
+            yield return $"  windup: a hit on {target.Id} breaks its blow over {at}";
+        }
+    }
+
     private string Named(string itemId) => _content.ItemName(itemId);
 
     /// <summary>
@@ -1685,6 +1726,14 @@ public sealed class PlaySession
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
             case UnitBurned b:
                 return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
+            case BlowRaised b:
+                return $"{b.UnitId} raises a blow over {b.At} ({b.TargetId}); it lands at {b.UnitId}'s next phase start";
+            case BlowLanded b:
+                return $"{b.UnitId}'s blow lands on {b.TargetId} at {b.At} for {b.Damage} (hp {b.TargetHpAfter})";
+            case BlowFell b:
+                return $"{b.UnitId}'s blow falls on empty ground at {b.At}";
+            case BlowBroken b:
+                return $"{b.UnitId}'s blow over {b.At} is broken";
             case PhaseEnded p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase ends, turn {p.Turn} --";
             case PhaseBegan p:

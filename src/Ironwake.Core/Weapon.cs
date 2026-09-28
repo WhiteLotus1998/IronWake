@@ -9,6 +9,9 @@ namespace Ironwake.Core;
 /// between-map shop charges for one at full uses (issue 74); a weapon without one is never sold
 /// and never repaired. <see cref="Ignites"/> marks a fire weapon: on a <c>wildfire: on</c> map a
 /// hit from it sets a forest tile alight (DESIGN.md 13.15, experiment; <see cref="Wildfire"/>).
+/// <see cref="Windup"/> marks a slow weapon: on a <c>windup: on</c> map an attack with it raises a
+/// blow over the target's tile that lands at the wielder's side's next phase start
+/// (DESIGN.md 13.16, experiment; <see cref="Ironwake.Core.Windup"/>). It counters as any weapon does.
 /// </summary>
 public sealed record Weapon(
     string Id,
@@ -26,7 +29,8 @@ public sealed record Weapon(
     int HealBase = 0,
     WeaponRank Rank = WeaponRank.E,
     int? Price = null,
-    bool Ignites = false)
+    bool Ignites = false,
+    bool Windup = false)
 {
     public bool IsMagic => Type.IsMagic();
 

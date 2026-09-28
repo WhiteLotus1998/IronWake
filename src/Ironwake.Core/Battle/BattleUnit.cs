@@ -25,6 +25,9 @@ namespace Ironwake.Core;
 /// <see cref="Braced"/> is set when the unit waits on the tile it began its phase on, on a <c>brace: on</c> map
 /// (DESIGN.md 13.14, experiment) and cleared when its side's next phase begins or an ally
 /// shoves it; while it is set, strikes against the unit lose <see cref="Brace.Hit"/> hit.
+/// <see cref="WindupAt"/> is the tile a raised blow will land on, on a <c>windup: on</c> map
+/// (DESIGN.md 13.16, experiment): set by an attack with a windup weapon, cleared when the blow
+/// lands at the unit's side's next phase start or when a hit on the unit breaks it.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -42,7 +45,8 @@ public sealed record BattleUnit(
     int? Canto = null,
     string? Grudge = null,
     bool Shoved = false,
-    bool Braced = false)
+    bool Braced = false,
+    Coord? WindupAt = null)
 {
     public string Id => Unit.Id;
 

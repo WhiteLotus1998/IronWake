@@ -78,6 +78,11 @@ namespace Ironwake.Core;
 /// sets a forest tile alight, and fire spreads through forest at each player phase start
 /// (<see cref="Wildfire"/>). Off by default.
 /// </param>
+/// <param name="WindupEnabled">
+/// The <c>windup: on</c> header (DESIGN.md 13.16, experiment): an attack with a windup weapon
+/// raises a blow over the target's tile instead of fighting, and the blow lands at the wielder's
+/// side's next phase start unless a hit on the wielder breaks it (<see cref="Windup"/>). Off by default.
+/// </param>
 /// <param name="ExitAfterMove">
 /// The <c>exit_after_move: on</c> header: the Escape rule before issue 377, under which a unit
 /// may move onto an exit and exit in the same turn. It is kept only on the sample maps that
@@ -116,7 +121,8 @@ public sealed record MapDefinition(
     ValueList<WakeLink> WakeLinks = default,
     bool PincerEnabled = false,
     bool BraceEnabled = false,
-    bool WildfireEnabled = false)
+    bool WildfireEnabled = false,
+    bool WindupEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

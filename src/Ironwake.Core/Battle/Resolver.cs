@@ -376,6 +376,12 @@ public static class Resolver
             events.Add(new ArtDeclared(unit.Id, attack.Art!, weapon.Id, art.Cost));
         }
 
+        if (Windup.Raises(state, weapon))
+        {
+            events.Add(new BlowRaised(unit.Id, target.Id, target.At));
+            return (state.WithUnit(unit with { Moved = true, Acted = true, WindupAt = target.At }), null);
+        }
+
         var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
             unit.ToCombatant(state, content, art: art, against: target),
@@ -419,6 +425,7 @@ public static class Resolver
 
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
+        next = Windup.AfterCombat(next, result.Strikes, events);
         return (next, null);
     }
 
@@ -1085,12 +1092,58 @@ public static class Resolver
             next = next with { LitGroups = ValueList<string>.Empty };
         }
 
+        next = LandBlows(next, content, nextPhase, events);
         if (nextPhase == Side.Player)
         {
             next = Wildfire.Spread(next, events);
         }
 
         return (MapEvents.AtPhaseStart(next, content, events), null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.16's windup at a phase start, after heal and burn: each unit of
+    /// <paramref name="side"/> with a raised blow, in unit order, lands it on the unit standing on
+    /// its tile, of either side, for <see cref="Windup.Damage"/> (a certain hit, no crit, no
+    /// counter), or lets it fall on an empty tile. The blow is spent either way. A unit the blow
+    /// kills dies as in a combat, leaving its keepsake; nothing is earned for it.
+    /// </summary>
+    private static BattleState LandBlows(BattleState state, GameContent content, Side side, List<GameEvent> events)
+    {
+        if (!state.Map.WindupEnabled)
+        {
+            return state;
+        }
+
+        foreach (var id in state.Units.Where(u => u.Side == side && u.WindupAt is not null).Select(u => u.Id).ToList())
+        {
+            if (state.Find(id) is not { WindupAt: { } at } wielder)
+            {
+                continue;
+            }
+
+            state = state.WithUnit(wielder with { WindupAt = null });
+            wielder = state.Find(id)!;
+            var target = state.Units.FirstOrDefault(u => u.At == at && u.Id != id);
+            if (target is null)
+            {
+                events.Add(new BlowFell(id, at));
+                continue;
+            }
+
+            var damage = Windup.Damage(state, content, wielder, target);
+            var hp = Math.Max(0, target.Hp - damage);
+            events.Add(new BlowLanded(id, target.Id, at, target.Hp - hp, hp));
+            var struck = target with { Hp = hp };
+            state = state.WithUnit(struck);
+            if (hp == 0)
+            {
+                events.Add(new UnitDied(target.Id, target.Side, target.At));
+                state = LeaveKeepsake(state, struck, content, events).WithoutUnit(target.Id);
+            }
+        }
+
+        return state;
     }
 
     /// <summary>

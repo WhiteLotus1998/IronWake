@@ -82,6 +82,18 @@ public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEv
 /// <summary>Burning terrain at the start of the owner's phase (DESIGN.md 13.15, experiment). Amount is what was actually lost; fire never takes a unit below 1.</summary>
 public sealed record UnitBurned(string UnitId, int Amount, int HpAfter) : GameEvent;
 
+/// <summary>A windup weapon's attack raised a blow over <paramref name="At"/>, where <paramref name="TargetId"/> stood (DESIGN.md 13.16, experiment). No combat was fought.</summary>
+public sealed record BlowRaised(string UnitId, string TargetId, Coord At) : GameEvent;
+
+/// <summary>A raised blow landed at its wielder's phase start on the unit standing on its tile: a sure hit, no crit, no counter (DESIGN.md 13.16).</summary>
+public sealed record BlowLanded(string UnitId, string TargetId, Coord At, int Damage, int TargetHpAfter) : GameEvent;
+
+/// <summary>A raised blow fell on an empty tile at its wielder's phase start and harmed nobody (DESIGN.md 13.16).</summary>
+public sealed record BlowFell(string UnitId, Coord At) : GameEvent;
+
+/// <summary>A hit on the wielder broke its raised blow before it landed (DESIGN.md 13.16).</summary>
+public sealed record BlowBroken(string UnitId, Coord At) : GameEvent;
+
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 
 /// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>

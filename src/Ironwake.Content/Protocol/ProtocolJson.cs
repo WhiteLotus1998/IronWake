@@ -191,6 +191,26 @@ public static class ProtocolJson
                 w.WriteNumber("amount", b.Amount);
                 w.WriteNumber("hpAfter", b.HpAfter);
                 break;
+            case BlowRaised b:
+                w.WriteString("unit", b.UnitId);
+                w.WriteString("target", b.TargetId);
+                WriteCoord(w, "at", b.At);
+                break;
+            case BlowLanded b:
+                w.WriteString("unit", b.UnitId);
+                w.WriteString("target", b.TargetId);
+                WriteCoord(w, "at", b.At);
+                w.WriteNumber("damage", b.Damage);
+                w.WriteNumber("targetHpAfter", b.TargetHpAfter);
+                break;
+            case BlowFell b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "at", b.At);
+                break;
+            case BlowBroken b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "at", b.At);
+                break;
             case Recalled r:
                 w.WriteNumber("toIndex", r.ToIndex);
                 w.WriteNumber("chargesLeft", r.ChargesLeft);
@@ -655,6 +675,11 @@ public static class ProtocolJson
             w.WriteBoolean("burning", true);
         }
 
+        if (unit.WindupAt is { } windup)
+        {
+            WriteCoord(w, "windupAt", windup);
+        }
+
         WriteRosterFields(w, u);
         w.WriteEndObject();
     }
@@ -722,7 +747,8 @@ public static class ProtocolJson
             OptionalInt(e, "canto"),
             OptionalString(e, "grudge"),
             e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"),
-            e.TryGetProperty("braced", out _) && RequiredBool(e, "braced"));
+            e.TryGetProperty("braced", out _) && RequiredBool(e, "braced"),
+            e.TryGetProperty("windupAt", out _) ? ReadCoord(e, "windupAt") : null);
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
