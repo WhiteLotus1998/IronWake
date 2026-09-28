@@ -425,7 +425,7 @@ public static class Resolver
 
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
-        next = Windup.AfterCombat(next, result.Strikes, events);
+        next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
         return (next, null);
     }
 

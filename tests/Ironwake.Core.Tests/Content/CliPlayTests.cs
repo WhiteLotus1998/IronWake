@@ -849,7 +849,8 @@ public class CliPlayTests
     /// <summary>
     /// 13.16's first play: Code's seed 461 on <c>docs/samples/the_tollgate_windup.map</c>. On turn 5
     /// the mauler raises a blow over the door with Teodor on it at 5 hp; on turn 6 Pell's Cinder
-    /// from 6,4 breaks it, Teodor leaves the door, and the map is seized on turn 10.
+    /// from 6,4 hits the mauler from outside its reach, which leaves the blow raised (round 99),
+    /// Teodor steps off the door, and the blow falls on empty ground. The map is seized on turn 10.
     /// </summary>
     [Fact]
     public void TheJournaledWindupPlayReplaysWithItsBlow()
@@ -859,11 +860,12 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.Contains("toll_mauler-1 raises a blow over 6,3 (teodor); it lands at toll_mauler-1's next phase start\n", output);
-        Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor)\n", output);
-        Assert.Contains("under a blow from toll_mauler-1", output);
-        Assert.Contains("  windup: a hit on toll_mauler-1 breaks its blow over 6,3\n", output);
-        Assert.Contains("toll_mauler-1's blow over 6,3 is broken\n", output);
-        Assert.DoesNotContain("blow lands", output);
+        Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor 14, sure)\n", output);
+        Assert.Contains("under a blow from toll_mauler-1 (14, sure)", output);
+        Assert.Contains("  windup: a hit from 6,4 does not break toll_mauler-1's blow over 6,3 (outside its reach)\n", output);
+        Assert.Contains("toll_mauler-1's blow falls on empty ground at 6,3\n", output);
+        Assert.DoesNotContain("is broken", output);
+        Assert.DoesNotContain("blow lands on", output);
     }
 
     /// <summary>

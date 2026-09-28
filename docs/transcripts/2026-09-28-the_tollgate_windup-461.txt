@@ -1607,11 +1607,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        5,6    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,5    hp 16/16  Forest
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
 b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 24/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
-blows: toll_mauler-1 over 6,3 (teodor)
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > move pell 6,4
 pell moves 6,5 -> 6,4
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
@@ -1634,19 +1634,18 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        5,6    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
 b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 24/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
-blows: toll_mauler-1 over 6,3 (teodor)
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > attack pell toll_mauler-1
 forecast pell -> toll_mauler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-  windup: a hit on toll_mauler-1 breaks its blow over 6,3
+  windup: a hit from 6,4 does not break toll_mauler-1's blow over 6,3 (outside its reach)
 pell attacks toll_mauler-1
   pell hits toll_mauler-1 for 13 (hp 11)
   pell hp 16, toll_mauler-1 hp 11
 pell gains 14 exp (94)
-toll_mauler-1's blow over 6,3 is broken
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
    01234567890123
  0 MM############
@@ -1667,10 +1666,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        5,6    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > move wren 8,4
 wren moves 5,4 -> 8,4 via 6,4 7,4
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
@@ -1693,10 +1693,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        5,6    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 20/20  Plain
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > attack wren rider-1
 forecast wren -> rider-1: dmg 9 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 wren attacks rider-1
@@ -1723,10 +1724,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        5,6    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 11/20  Plain  done
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > move captain 7,5
 captain moves 5,6 -> 7,5 via 6,6 7,6
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
@@ -1749,10 +1751,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        7,5    hp 12/22  Forest  captain
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 21/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 11/20  Plain  done
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > attack captain rider-1
 forecast captain -> rider-1: dmg 10 hit 87% crit 4%; counter: dmg 7 hit 26% crit 0%
 captain attacks rider-1
@@ -1780,10 +1783,11 @@ a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group kee
 A  captain          Alder Fenn L1 cadet        7,5    hp 12/22  Forest  captain  done
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 11/21  Plain  group flank, aggressive
-C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain  under a blow from toll_mauler-1 (14, sure)
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 11/20  Plain  done
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (teodor 14, sure)
 > move teodor 5,4
 teodor moves 6,3 -> 5,4 via 6,4
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
@@ -1807,9 +1811,10 @@ A  captain          Alder Fenn L1 cadet        7,5    hp 12/22  Forest  captain 
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 11/21  Plain  group flank, aggressive
 C  teodor           Teodor L1 pikeman          5,4    hp 5/21   Plain
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 11/20  Plain  done
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (empty)
 > wait teodor
 teodor waits
 The Tollgate  turn 6 of 10  player phase  seize  recall 1
@@ -1833,12 +1838,14 @@ A  captain          Alder Fenn L1 cadet        7,5    hp 12/22  Forest  captain 
 D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
 e  rider-1          Rider L3 outrider          8,5    hp 11/21  Plain  group flank, aggressive
 C  teodor           Teodor L1 pikeman          5,4    hp 5/21   Plain  done
-b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold
+b  toll_mauler-1    Toll Mauler L3 reaver      6,2    hp 11/24  Plain  group keep, hold, winding up over 6,3
 B  wren             Wren L1 cadet              8,4    hp 11/20  Plain  done
 windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it
+blows: toll_mauler-1 over 6,3 (empty)
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
+toll_mauler-1's blow falls on empty ground at 6,3
 enemy: wait archer-1
 archer-1 waits
 enemy: wait bandit_leader-1

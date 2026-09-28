@@ -8,7 +8,7 @@ namespace Ironwake.Core;
 /// stands on that tile, of either side, the wielder excepted: one strike, a certain hit, no crit,
 /// no counter, for the damage a normal hit from the wielder would deal to that unit on that tile.
 /// An empty tile takes nothing, and either way the blow is spent. A hit on the wielder before
-/// then breaks the blow; a miss does not. The wielder counters with its weapon as usual. The
+/// then from within its weapon's range breaks the blow; a miss, or a hit from farther, does not. The wielder counters with its weapon as usual. The
 /// pending tile is <see cref="BattleUnit.WindupAt"/>, so Recall restores it with the unit.
 /// </summary>
 public static class Windup
@@ -28,17 +28,32 @@ public static class Windup
         state.Units.FirstOrDefault(u => u.WindupAt == at);
 
     /// <summary>
-    /// After a combat: every unit still living with a raised blow that took a hit in
-    /// <paramref name="strikes"/> has the blow broken, one <see cref="BlowBroken"/> each.
+    /// Whether a hit from <paramref name="from"/> on <paramref name="wielder"/> breaks its raised
+    /// blow: only a hit the wielder could counter does (rounds 98 and 99), one struck from within
+    /// its weapon's range, so every break costs an exchange. False when no blow is raised.
     /// </summary>
-    public static BattleState AfterCombat(BattleState state, ValueList<StrikeEvent> strikes, List<GameEvent> events)
+    public static bool Breaks(GameContent content, BattleUnit wielder, Coord from) =>
+        wielder.WindupAt is not null && wielder.EquippedWeapon(content) is { } weapon && weapon.InRange(wielder.At.DistanceTo(from));
+
+    /// <summary>
+    /// After a combat between <paramref name="a"/> and <paramref name="b"/>, read where they stood:
+    /// each one still living with a raised blow that the other hit from within its weapon's range
+    /// (<see cref="Breaks"/>) has the blow broken, one <see cref="BlowBroken"/> each. A miss, or a
+    /// hit from outside that range, leaves the blow raised.
+    /// </summary>
+    public static BattleState AfterCombat(BattleState state, GameContent content, BattleUnit a, BattleUnit b, ValueList<StrikeEvent> strikes, List<GameEvent> events)
     {
-        foreach (var id in strikes.Where(s => s.Hit).Select(s => s.TargetId).Distinct().ToList())
+        foreach (var (struck, striker) in new[] { (a, b), (b, a) })
         {
-            if (state.Find(id) is { WindupAt: { } at } unit)
+            if (!strikes.Any(s => s.TargetId == struck.Id && s.AttackerId == striker.Id && s.Hit) || !Breaks(content, struck, striker.At))
             {
-                events.Add(new BlowBroken(unit.Id, at));
-                state = state.WithUnit(unit with { WindupAt = null });
+                continue;
+            }
+
+            if (state.Find(struck.Id) is { WindupAt: { } at } living)
+            {
+                events.Add(new BlowBroken(living.Id, at));
+                state = state.WithUnit(living with { WindupAt = null });
             }
         }
 

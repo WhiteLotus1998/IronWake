@@ -9,7 +9,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// The windup (DESIGN.md 13.16, experiment; issue 441's acceptance): on a <c>windup: on</c> map
 /// an attack with a windup weapon raises a blow over the target's tile instead of fighting; the
 /// blow lands at the wielder's side's next phase start on whoever stands there, a certain hit for
-/// a normal hit's damage, falls on an empty tile, and is broken by a hit on the wielder.
+/// a normal hit's damage, falls on an empty tile, and is broken by a hit on the wielder from within its weapon's range.
 /// </summary>
 public class WindupTests
 {
@@ -121,7 +121,7 @@ public class WindupTests
     }
 
     [Fact]
-    public void AHitOnTheWielderBreaksTheBlowAndAMissDoesNot()
+    public void AnAdjacentHitOnTheWielderBreaksTheBlowAndAMissDoesNot()
     {
         var broken = 0;
         var kept = 0;
@@ -153,6 +153,61 @@ public class WindupTests
         }
 
         Assert.True(broken > 0 && kept > 0, $"broken {broken}, kept {kept}");
+    }
+
+    private static readonly Unit Pell = Recruit("pell", "adept", new Stats(18, 1, 7, 6, 6, 3, 2, 4, 2), "cinder");
+
+    private const string Perch = """
+        P captain 2,2
+        P recruit:pell 3,4
+        E toll_mauler 3,2 group:field behavior:aggressive
+        E brigand 6,4 group:far behavior:hold
+
+        """;
+
+    private static BattleState PerchPhase(ulong seed) =>
+        BattleFixture.Start(seed, ValueList<Unit>.Of(Hale, Pell), Field(true, Perch))
+            .Do(new EndPhase()).Do(new Attack("toll_mauler-1", "hale")).Do(new EndPhase());
+
+    [Fact]
+    public void AHitFromOutsideTheWieldersReachDoesNotBreakTheBlow()
+    {
+        var hits = 0;
+        for (ulong seed = 1; seed <= 20; seed++)
+        {
+            var result = PerchPhase(seed).Try(new Attack("pell", "toll_mauler-1"));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            if (!result.Events.OfType<CombatFought>().Single().Strikes.Any(s => s.AttackerId == "pell" && s.Hit) || result.Next.Find("toll_mauler-1") is null)
+            {
+                continue;
+            }
+
+            hits++;
+            Assert.Equal(Door, result.Next.Find("toll_mauler-1")!.WindupAt);
+            Assert.Empty(result.Events.OfType<BlowBroken>());
+        }
+
+        Assert.True(hits > 0);
+    }
+
+    [Fact]
+    public void TheForecastSaysWhetherAHitBreaksTheBlowAndWhatItLandsOnTheStriker()
+    {
+        var state = PerchPhase(7);
+        var mauler = state.Find("toll_mauler-1")!;
+        var pell = state.Find("pell")!;
+        var hale = state.Find("hale")!;
+
+        Assert.Equal(
+            new[] { "  windup: a hit from 3,4 does not break toll_mauler-1's blow over 2,2 (outside its reach)" },
+            Ironwake.Cli.PlaySession.WindupLines(state, Starter, pell, mauler, null).ToList());
+        Assert.Equal(
+            new[]
+            {
+                "  windup: a hit on toll_mauler-1 breaks its blow over 2,2",
+                $"  windup: toll_mauler-1's blow lands on 2,2 at its next phase start: {Windup.Damage(state, Starter, mauler, hale)} to hale, sure",
+            },
+            Ironwake.Cli.PlaySession.WindupLines(state, Starter, hale, mauler, null).ToList());
     }
 
     [Fact]
@@ -224,17 +279,22 @@ public class WindupTests
         var raised = Raise().Next;
         var playerPhase = raised.Do(new EndPhase());
 
-        Assert.Equal("blows: toll_mauler-1 over 2,2 (hale)", MapRenderer.BlowLine(playerPhase));
-        Assert.Null(MapRenderer.BlowLine(Start(true)));
+        var landing = Windup.Damage(playerPhase, Starter, playerPhase.Find("toll_mauler-1")!, playerPhase.Find("hale")!);
+        Assert.Equal($"blows: toll_mauler-1 over 2,2 (hale {landing}, sure)", MapRenderer.BlowLine(playerPhase, Starter));
+        Assert.Null(MapRenderer.BlowLine(Start(true), Starter));
         var board = MapRenderer.Render(playerPhase, Starter);
         Assert.Contains(MapRenderer.WindupLegend, board);
-        Assert.Contains("under a blow from toll_mauler-1", board);
+        Assert.Contains($"under a blow from toll_mauler-1 ({landing}, sure)", board);
         Assert.Contains("winding up over 2,2", board);
 
         var hale = playerPhase.Find("hale")!;
         var mauler = playerPhase.Find("toll_mauler-1")!;
         Assert.Equal(
-            new[] { "  windup: a hit on toll_mauler-1 breaks its blow over 2,2" },
+            new[]
+            {
+                "  windup: a hit on toll_mauler-1 breaks its blow over 2,2",
+                $"  windup: toll_mauler-1's blow lands on 2,2 at its next phase start: {landing} to hale, sure",
+            },
             Ironwake.Cli.PlaySession.WindupLines(playerPhase, Starter, hale, mauler, null).ToList());
 
         var enemyPhase = Start(true).Do(new EndPhase());

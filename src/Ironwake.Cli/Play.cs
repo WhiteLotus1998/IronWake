@@ -1577,8 +1577,10 @@ public sealed class PlaySession
 
     /// <summary>
     /// Under a forecast on a <c>windup: on</c> map (DESIGN.md 13.16): one line when the attack
-    /// raises a blow instead of fighting, with what the blow would deal the target where it stands,
-    /// and one when the target has a raised blow a hit would break. Silent otherwise.
+    /// raises a blow instead of fighting, with what the blow would deal the target where it stands;
+    /// one when the target has a raised blow, saying whether a hit from the attacker's tile breaks
+    /// it; and one when the attacker's tile is under another unit's blow, with the certain damage
+    /// it lands on the attacker. Silent otherwise.
     /// </summary>
     public static IEnumerable<string> WindupLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, int? slot)
     {
@@ -1596,7 +1598,14 @@ public sealed class PlaySession
 
         if (target.WindupAt is { } at)
         {
-            yield return $"  windup: a hit on {target.Id} breaks its blow over {at}";
+            yield return Windup.Breaks(content, target, attacker.At)
+                ? $"  windup: a hit on {target.Id} breaks its blow over {at}"
+                : $"  windup: a hit from {attacker.At} does not break {target.Id}'s blow over {at} (outside its reach)";
+        }
+
+        if (Windup.Over(state, attacker.At) is { } wielder && wielder.Id != attacker.Id)
+        {
+            yield return $"  windup: {wielder.Id}'s blow lands on {attacker.At} at its next phase start: {Windup.Damage(state, content, wielder, attacker)} to {attacker.Id}, sure";
         }
     }
 

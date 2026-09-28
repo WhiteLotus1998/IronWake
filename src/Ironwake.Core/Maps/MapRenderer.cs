@@ -56,9 +56,10 @@ public static class MapRenderer
     /// <summary>
     /// Under the windup legend while any blow is raised (DESIGN.md 13.16): each wielder and its
     /// tile in unit order, and who stands there now, as
-    /// <c>blows: toll_mauler-1 over 6,3 (teodor)</c>. Null when no blow is raised.
+    /// <c>blows: toll_mauler-1 over 6,3 (teodor 14, sure)</c>, with the certain damage it lands on
+    /// that unit. Null when no blow is raised.
     /// </summary>
-    public static string? BlowLine(BattleState state)
+    public static string? BlowLine(BattleState state, GameContent content)
     {
         var raised = state.Units.Where(u => u.WindupAt is not null).ToList();
         if (!state.Map.WindupEnabled || raised.Count == 0)
@@ -70,11 +71,11 @@ public static class MapRenderer
         {
             var at = u.WindupAt!.Value;
             var under = state.Units.FirstOrDefault(o => o.At == at && o.Id != u.Id);
-            return $"{u.Id} over {at} ({under?.Id ?? "empty"})";
+            return under is null ? $"{u.Id} over {at} (empty)" : $"{u.Id} over {at} ({under.Id} {Windup.Damage(state, content, u, under)}, sure)";
         }));
     }
 
-    private static string? WindupMark(BattleState state, BattleUnit unit)
+    private static string? WindupMark(BattleState state, GameContent content, BattleUnit unit)
     {
         if (!state.Map.WindupEnabled)
         {
@@ -86,7 +87,9 @@ public static class MapRenderer
             return "winding up over " + at;
         }
 
-        return Windup.Over(state, unit.At) is { } wielder && wielder.Id != unit.Id ? "under a blow from " + wielder.Id : null;
+        return Windup.Over(state, unit.At) is { } wielder && wielder.Id != unit.Id
+            ? $"under a blow from {wielder.Id} ({Windup.Damage(state, content, wielder, unit)}, sure)"
+            : null;
     }
 
     private static bool Burning(BattleState state, BattleUnit unit) =>
@@ -323,7 +326,7 @@ public static class MapRenderer
                     role += ", burning";
                 }
 
-                if (WindupMark(state, unit) is { } windup)
+                if (WindupMark(state, content, unit) is { } windup)
                 {
                     role += ", " + windup;
                 }
@@ -345,7 +348,7 @@ public static class MapRenderer
                 sb.Append("  burning");
             }
 
-            if (unit.Side == Side.Player && WindupMark(state, unit) is { } mark)
+            if (unit.Side == Side.Player && WindupMark(state, content, unit) is { } mark)
             {
                 sb.Append("  ").Append(mark);
             }
@@ -424,7 +427,7 @@ public static class MapRenderer
         if (map.WindupEnabled)
         {
             sb.Append(WindupLegend).Append('\n');
-            if (BlowLine(state) is { } blows)
+            if (BlowLine(state, content) is { } blows)
             {
                 sb.Append(blows).Append('\n');
             }
