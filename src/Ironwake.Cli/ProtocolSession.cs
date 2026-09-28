@@ -318,6 +318,11 @@ public sealed class ProtocolSession
                 w.WriteNumber("slot", line.Slot);
                 w.WriteString("weapon", line.Weapon.Id);
                 w.WriteNumber("ifAllLand", line.IfAllLand);
+                if (line.Raises)
+                {
+                    w.WriteBoolean("raises", true);
+                }
+
                 w.WritePropertyName("forecast");
                 ProtocolJson.WriteForecast(w, line.Forecast);
                 WriteCounterWeapon(w, unit, line.Forecast);
@@ -325,7 +330,16 @@ public sealed class ProtocolSession
             }
 
             w.WriteEndArray();
-            w.WriteNumber("ifAllLand", Queries.IfAllLand(lines));
+            var blow = Queries.RaisedBlowOn(_state, _content, unit, tile);
+            if (blow is not null)
+            {
+                w.WriteStartObject("blow");
+                w.WriteString("wielder", blow.Wielder.Id);
+                w.WriteNumber("damage", blow.Damage);
+                w.WriteEndObject();
+            }
+
+            w.WriteNumber("ifAllLand", Queries.IfAllLand(lines, blow));
             w.WriteStartArray("asleep");
             foreach (var group in asleep)
             {

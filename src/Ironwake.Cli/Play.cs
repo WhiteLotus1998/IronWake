@@ -1153,7 +1153,7 @@ public sealed class PlaySession
     /// one line per enemy with the weapon the planner would swing, its slot counted from
     /// one, the tile it strikes from, and the forecast line the enemy phase would print,
     /// then the total if every strike lands against the unit's HP, one enemy per strike
-    /// tile (<see cref="Queries.IfAllLand"/>, issue 253). Spends nothing.
+    /// tile (<see cref="Queries.IfAllLand(IReadOnlyList{ThreatLine})"/>, issue 253). Spends nothing.
     /// </summary>
     private void PrintThreat(string unitId, Coord? from)
     {
@@ -1222,6 +1222,9 @@ public sealed class PlaySession
     /// see it from where it would strike (<see cref="Queries.Unseeing"/>, issue 302), is priced
     /// at 0 with the reason: <c>archer-1: cannot see you (dark)</c>. A move that wins the map
     /// (<see cref="Queries.MoveWins"/>, issue 356) is one line saying so, since no enemy phase follows.
+    /// On a <c>windup: on</c> map (DESIGN.md 13.16, issue 444) a blow already raised over the tile
+    /// is a row before the strikes and is in the total, since it lands for certain at the enemy
+    /// phase start; a maul that would raise this phase says so under its row and adds nothing.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false)
     {
@@ -1235,30 +1238,30 @@ public sealed class PlaySession
         lines = lines.Where(line => line.Arrives is not null || Dusk.Seen(state, line.Enemy)).ToList();
         asleep = asleep.Select(g => g with { Members = ValueList<BattleUnit>.From(g.Members.Where(m => Dusk.Seen(state, m))) }).Where(g => g.Members.Count > 0).ToList();
         var dark = Dusk.Sight(state) is not null && state.UnitsOf(Side.Enemy).Any(e => !Dusk.Seen(state, e));
-        if (lines.Count == 0)
+        var blow = Queries.RaisedBlowOn(state, content, unit, tile);
+        if (lines.Count == 0 && blow is null)
         {
             rows.Add($"threat on {unit.Id} at {where}: no enemy {(dark ? "in sight " : "")}can strike it next phase");
         }
         else
         {
             rows.Add($"threat on {unit.Id} at {where}:");
+            if (blow is not null)
+            {
+                rows.Add($"  {blow.Wielder.Id}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit breaks it");
+            }
+
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
                 rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter{(line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none")}");
-                if (Windup.Raises(state, line.Weapon))
+                if (line.Raises)
                 {
-                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises a blow over {tile} that lands at the next enemy phase start for {line.Forecast.Attacker.Damage}, sure, unless a hit breaks it");
+                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit breaks it (not in the total)");
                 }
             }
 
-            rows.Add($"  if all land: {Queries.IfAllLand(lines)} against {unit.Hp} hp");
-        }
-
-        if (state.Map.WindupEnabled && Windup.Over(state, tile) is { } wielder && wielder.Id != unit.Id)
-        {
-            var blow = Windup.Damage(state, content, wielder, unit with { At = tile });
-            rows.Add($"  {wielder.Id}'s raised blow lands here at its next phase start: {blow}, sure, unless a hit breaks it");
+            rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
         }
 
         foreach (var blind in (unseeing ?? Array.Empty<BattleUnit>()).Where(e => Dusk.Seen(state, e)))

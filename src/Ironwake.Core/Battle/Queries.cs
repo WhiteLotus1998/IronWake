@@ -152,7 +152,8 @@ public static class Queries
             var carrier = board.Carrying(enemy, strike.From);
             var forecast = StrikeForecast(board, content, carrier, moved, strike);
             Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
-            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, carrier.UsableWeaponAt(content, strike.Slot)!, forecast, arrives, StrikeTiles(board, content, enemy, moved)));
+            var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
+            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(board, weapon)));
         }
 
         return lines;
@@ -204,9 +205,36 @@ public static class Queries
     /// <see cref="ThreatLine.IfAllLand"/>. The lines are a transversal matroid over the
     /// tiles, so taking them heaviest first (ties in line order) and keeping each one an
     /// augmenting path can still seat is the maximum.
+    /// A line that only raises a blow (<see cref="ThreatLine.Raises"/>) deals nothing that
+    /// phase and is left out, so it holds no tile (issue 444).
     /// </summary>
     public static int IfAllLand(IReadOnlyList<ThreatLine> lines) =>
-        Exposure.SeatedSum(lines.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
+        Exposure.SeatedSum(lines.Where(l => !l.Raises).Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
+
+    /// <summary>
+    /// <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/> with a blow already raised over the tile
+    /// (<see cref="RaisedBlow"/>) added: it lands for certain at the coming enemy phase start,
+    /// before any strike, so it is in the coming phase's total (DESIGN.md 13.16, issue 444).
+    /// </summary>
+    public static int IfAllLand(IReadOnlyList<ThreatLine> lines, RaisedBlow? blow) =>
+        IfAllLand(lines) + (blow?.Damage ?? 0);
+
+    /// <summary>
+    /// The blow already raised over <paramref name="tile"/> on a <c>windup: on</c> map (DESIGN.md
+    /// 13.16) by a unit other than <paramref name="unit"/>: its wielder, and the damage it lands
+    /// on the unit standing there at the wielder's next phase start, certain
+    /// (<see cref="Windup.Damage"/>). Null on a map without the header or with no blow over the
+    /// tile. Read-only.
+    /// </summary>
+    public static RaisedBlow? RaisedBlowOn(BattleState state, GameContent content, BattleUnit unit, Coord tile)
+    {
+        if (!state.Map.WindupEnabled || Windup.Over(state, tile) is not { } wielder || wielder.Id == unit.Id)
+        {
+            return null;
+        }
+
+        return new RaisedBlow(wielder, tile, Windup.Damage(state, content, wielder, unit with { At = tile }));
+    }
 
     /// <summary>
     /// Every tile <paramref name="enemy"/> could strike <paramref name="target"/> from on the
@@ -344,16 +372,27 @@ public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members)
 /// where, with which slot's weapon, and the forecast of that combat. <paramref name="Arrives"/>
 /// is the tile an announced event spawns the enemy on at the start of that enemy phase
 /// (issue 248), null for an enemy already on the board. <paramref name="Tiles"/> is every
-/// tile the enemy could strike the unit from, which <see cref="Queries.IfAllLand"/> reads
+/// tile the enemy could strike the unit from, which <see cref="Queries.IfAllLand(IReadOnlyList{ThreatLine})"/> reads
 /// so two enemies are never counted on one tile (issue 253); null reads as
-/// <paramref name="From"/> alone.
+/// <paramref name="From"/> alone. <paramref name="Raises"/> is true when the strike is a
+/// windup weapon's raise (<see cref="Windup.Raises"/>), which deals nothing that phase and
+/// lands the phase after (issue 444).
 /// </summary>
-public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null, ValueList<Coord>? Tiles = null)
+public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon Weapon, CombatForecast Forecast, Coord? Arrives = null, ValueList<Coord>? Tiles = null, bool Raises = false)
 {
     /// <summary>
     /// The damage the strike deals if every hit lands, no crit, over the strikes the enemy
     /// lives to make: a double stops at the first round when the unit's plain counter
     /// between them kills the enemy (<see cref="CombatForecast.AttackerDamageLivedFor"/>, issue 315).
+    /// 0 for a line that only raises a blow (<see cref="Raises"/>), which deals nothing that
+    /// phase (issue 444).
     /// </summary>
-    public int IfAllLand => Forecast.AttackerDamageLivedFor(Enemy.Hp);
+    public int IfAllLand => Raises ? 0 : Forecast.AttackerDamageLivedFor(Enemy.Hp);
 }
+
+/// <summary>
+/// A blow already raised over <paramref name="Over"/> by <paramref name="Wielder"/> (DESIGN.md
+/// 13.16), as <see cref="Queries.RaisedBlowOn"/> reads it: <paramref name="Damage"/> lands for
+/// certain at the wielder's next phase start on the unit standing there, unless a hit breaks it.
+/// </summary>
+public sealed record RaisedBlow(BattleUnit Wielder, Coord Over, int Damage);
