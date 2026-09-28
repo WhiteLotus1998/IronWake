@@ -300,7 +300,7 @@ public class WindupTests
         var enemyPhase = Start(true).Do(new EndPhase());
         var damage = Windup.Damage(enemyPhase, Starter, enemyPhase.Find("toll_mauler-1")!, enemyPhase.Find("hale")!);
         Assert.Equal(
-            new[] { $"  windup: no combat now; toll_mauler-1 raises a blow over 2,2, landing at its next phase start on whoever stands there (hale: {damage}, sure) unless a hit breaks it" },
+            new[] { $"  windup: no combat now; toll_mauler-1 raises a blow over 2,2, landing at its next phase start on whoever stands there (hale: {damage}, sure) unless a hit from within its reach breaks it" },
             Ironwake.Cli.PlaySession.WindupLines(enemyPhase, Starter, enemyPhase.Find("toll_mauler-1")!, enemyPhase.Find("hale")!, null).ToList());
         Assert.Empty(Ironwake.Cli.PlaySession.WindupLines(Start(false).Do(new EndPhase()), Starter, mauler, hale, null));
     }
@@ -326,7 +326,7 @@ public class WindupTests
         Assert.Equal(0, raise.IfAllLand);
         Assert.Equal(0, Queries.IfAllLand(lines));
         var text = ThreatOn(state, "hale");
-        Assert.Contains($"    windup: no strike; toll_mauler-1 raises over 2,2, lands next enemy phase for {damage}, sure, unless a hit breaks it (not in the total)\n", text);
+        Assert.Contains($"    windup: no strike; toll_mauler-1 raises over 2,2, lands next enemy phase for {damage}, sure, unless a hit from within its reach breaks it (not in the total)\n", text);
         Assert.EndsWith($"  if all land: 0 against {hale.Hp} hp", text);
 
         var plain = Start(false);
@@ -335,6 +335,35 @@ public class WindupTests
         Assert.Equal(damage, strike.Forecast.Attacker.Damage);
         Assert.True(Queries.IfAllLand(new[] { strike }) > 0);
         Assert.DoesNotContain("windup", ThreatOn(plain, "hale"));
+    }
+
+    [Fact]
+    public void TheLegendSaysOnlyAHitFromWithinTheWieldersReachBreaksABlow()
+    {
+        Assert.EndsWith("a hit from within the wielder's reach breaks it", MapRenderer.WindupLegend);
+        Assert.DoesNotContain("a hit on the wielder breaks it", MapRenderer.WindupLegend);
+    }
+
+    [Fact]
+    public void ARaisePrintsNoHitChanceInTheThreatRowOrTheForecast()
+    {
+        var state = Start(true);
+        var text = ThreatOn(state, "hale");
+        var enemyPhase = state.Do(new EndPhase());
+        var mauler = enemyPhase.Find("toll_mauler-1")!;
+        var hale = enemyPhase.Find("hale")!;
+        var damage = Windup.Damage(enemyPhase, Starter, mauler, hale);
+
+        Assert.Contains($"  toll_mauler-1 from 3,2 with Post Maul (slot 1): dmg {damage} hit -- crit --; counter: none\n", text);
+        Assert.DoesNotContain("%", text);
+
+        var forecast = Queries.Forecast(enemyPhase, Starter, mauler, hale, mauler.At, null)!;
+        var lines = Ironwake.Cli.PlaySession.ForecastText(enemyPhase, Starter, mauler, hale, forecast, mauler.At, false).Split('\n');
+        Assert.Equal($"forecast toll_mauler-1 -> hale: dmg {damage} hit -- crit --; counter: none", lines[0]);
+        Assert.DoesNotContain(lines, l => l.Contains('%'));
+
+        var plain = Start(false);
+        Assert.Contains("%", ThreatOn(plain, "hale"));
     }
 
     [Fact]
@@ -350,7 +379,7 @@ public class WindupTests
         Assert.Equal(0, Queries.IfAllLand(lines));
         Assert.Equal(landing, Queries.IfAllLand(lines, blow));
         var text = ThreatOn(playerPhase, "hale");
-        Assert.StartsWith($"threat on hale at 2,2 (Plain):\n  toll_mauler-1's raised blow lands here at the enemy phase start: {landing}, sure, unless a hit breaks it\n", text);
+        Assert.StartsWith($"threat on hale at 2,2 (Plain):\n  toll_mauler-1's raised blow lands here at the enemy phase start: {landing}, sure, unless a hit from within its reach breaks it\n", text);
         Assert.EndsWith($"  if all land: {landing} against {hale.Hp} hp", text);
 
         Assert.Null(Queries.RaisedBlowOn(playerPhase, Starter, hale, new Coord(1, 2)));

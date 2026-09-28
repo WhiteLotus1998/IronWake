@@ -393,6 +393,6 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
 /// <summary>
 /// A blow already raised over <paramref name="Over"/> by <paramref name="Wielder"/> (DESIGN.md
 /// 13.16), as <see cref="Queries.RaisedBlowOn"/> reads it: <paramref name="Damage"/> lands for
-/// certain at the wielder's next phase start on the unit standing there, unless a hit breaks it.
+/// certain at the wielder's next phase start on the unit standing there, unless a hit from within the wielder's reach breaks it.
 /// </summary>
 public sealed record RaisedBlow(BattleUnit Wielder, Coord Over, int Damage);

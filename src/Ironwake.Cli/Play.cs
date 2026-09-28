@@ -728,7 +728,7 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!) is { } sworn)
                 {
@@ -1085,7 +1085,7 @@ public sealed class PlaySession
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith) };
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, RaisesWith(state, content, unit, slot)) };
         if (art is not null)
         {
             lines.Add(ArtLine(content, unit, forecast, slot, art));
@@ -1248,16 +1248,16 @@ public sealed class PlaySession
             rows.Add($"threat on {unit.Id} at {where}:");
             if (blow is not null)
             {
-                rows.Add($"  {blow.Wielder.Id}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit breaks it");
+                rows.Add($"  {blow.Wielder.Id}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit from within its reach breaks it");
             }
 
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
-                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {StrikeText(line.Forecast.Attacker)}; counter{(line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none")}");
+                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
                 if (line.Raises)
                 {
-                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit breaks it (not in the total)");
+                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");
                 }
             }
 
@@ -1296,8 +1296,13 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "")
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false)
     {
+        if (raises)
+        {
+            return $"forecast {unit.Id} -> {target.Id}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
+        }
+
         return $"forecast {unit.Id} -> {target.Id}{where}{with}: {StrikeText(forecast.Attacker)}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) : ": none")}";
     }
 
@@ -1356,6 +1361,16 @@ public sealed class PlaySession
     /// <summary>One side of a forecast as the console prints it: damage, doubles, displayed hit, and crit.</summary>
     private static string StrikeText(SideForecast side) =>
         $"dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
+
+    /// <summary>
+    /// The strike columns of an attack that raises a blow (DESIGN.md 13.16, issue 447): the
+    /// landing's damage and no percentage, since the raise has no roll and the landing is sure.
+    /// </summary>
+    private static string RaiseText(SideForecast side) => $"dmg {side.Damage} hit -- crit --";
+
+    /// <summary>True when <paramref name="unit"/>'s attack with <paramref name="slot"/> raises a blow instead of fighting.</summary>
+    private static bool RaisesWith(BattleState state, GameContent content, BattleUnit unit, int? slot) =>
+        Windup.Raises(state, Resolver.ChooseWeapon(unit, content, slot).Weapon);
 
     /// <summary>
     /// Reads a one-based slot typed by the player into the core's zero-based one. Null text
@@ -1596,7 +1611,7 @@ public sealed class PlaySession
         if (Windup.Raises(state, weapon))
         {
             var damage = Windup.Damage(state, content, armed, target);
-            yield return $"  windup: no combat now; {attacker.Id} raises a blow over {target.At}, landing at its next phase start on whoever stands there ({target.Id}: {damage}, sure) unless a hit breaks it";
+            yield return $"  windup: no combat now; {attacker.Id} raises a blow over {target.At}, landing at its next phase start on whoever stands there ({target.Id}: {damage}, sure) unless a hit from within its reach breaks it";
         }
 
         if (target.WindupAt is { } at)
