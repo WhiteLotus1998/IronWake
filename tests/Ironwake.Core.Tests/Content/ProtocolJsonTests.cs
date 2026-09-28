@@ -45,6 +45,7 @@ public class ProtocolJsonTests
         { new PhaseEnded(Side.Player, 2), """{"type":"phaseEnded","side":"player","turn":2}""" },
         { new PhaseBegan(Side.Enemy, 2), """{"type":"phaseBegan","side":"enemy","turn":2}""" },
         { new UnitHealed("wren", 3, 17), """{"type":"unitHealed","unit":"wren","amount":3,"hpAfter":17}""" },
+        { new UnitBurned("wren", 4, 13), """{"type":"unitBurned","unit":"wren","amount":4,"hpAfter":13}""" },
         { new Recalled(12, 2), """{"type":"recalled","toIndex":12,"chargesLeft":2}""" },
         { new ItemUsed("wren", "field_dressing", "wren", 0), """{"type":"itemUsed","unit":"wren","item":"field_dressing","target":"wren","usesLeft":0}""" },
         { new WeaponEquipped("wren", "steel_sword"), """{"type":"weaponEquipped","unit":"wren","item":"steel_sword"}""" },

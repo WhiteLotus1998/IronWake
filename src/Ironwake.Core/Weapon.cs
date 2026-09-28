@@ -7,7 +7,8 @@ namespace Ironwake.Core;
 /// its Mt is unused and <see cref="HealBase"/> feeds the heal formula. <see cref="Rank"/> is
 /// the weapon skill rank a unit needs to equip it (issue 67). <see cref="Price"/> is what the
 /// between-map shop charges for one at full uses (issue 74); a weapon without one is never sold
-/// and never repaired.
+/// and never repaired. <see cref="Ignites"/> marks a fire weapon: on a <c>wildfire: on</c> map a
+/// hit from it sets a forest tile alight (DESIGN.md 13.15, experiment; <see cref="Wildfire"/>).
 /// </summary>
 public sealed record Weapon(
     string Id,
@@ -24,7 +25,8 @@ public sealed record Weapon(
     bool Heals = false,
     int HealBase = 0,
     WeaponRank Rank = WeaponRank.E,
-    int? Price = null)
+    int? Price = null,
+    bool Ignites = false)
 {
     public bool IsMagic => Type.IsMagic();
 

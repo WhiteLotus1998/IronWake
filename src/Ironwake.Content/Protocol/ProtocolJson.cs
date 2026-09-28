@@ -186,6 +186,11 @@ public static class ProtocolJson
                 w.WriteNumber("amount", h.Amount);
                 w.WriteNumber("hpAfter", h.HpAfter);
                 break;
+            case UnitBurned b:
+                w.WriteString("unit", b.UnitId);
+                w.WriteNumber("amount", b.Amount);
+                w.WriteNumber("hpAfter", b.HpAfter);
+                break;
             case Recalled r:
                 w.WriteNumber("toIndex", r.ToIndex);
                 w.WriteNumber("chargesLeft", r.ChargesLeft);
@@ -443,10 +448,15 @@ public static class ProtocolJson
         w.WriteStartArray("units");
         foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
-            WriteUnit(w, unit, content);
+            WriteUnit(w, unit, content, state.Map.TerrainIdAt(unit.At) == Wildfire.FireTerrainId);
         }
 
         w.WriteEndArray();
+        if (state.Map.WildfireEnabled)
+        {
+            WriteCoords(w, "nextFront", Wildfire.NextFront(state.Map));
+        }
+
         if (dark && playerView)
         {
             WriteCoords(w, "unseen", hidden.Select(u => u.At).OrderBy(c => c.Y).ThenBy(c => c.X));
@@ -598,7 +608,7 @@ public static class ProtocolJson
             e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty);
     }
 
-    private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content)
+    private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content, bool burning = false)
     {
         var u = unit.Unit;
         w.WriteStartObject();
@@ -638,6 +648,11 @@ public static class ProtocolJson
         if (unit.Braced)
         {
             w.WriteBoolean("braced", true);
+        }
+
+        if (burning)
+        {
+            w.WriteBoolean("burning", true);
         }
 
         WriteRosterFields(w, u);

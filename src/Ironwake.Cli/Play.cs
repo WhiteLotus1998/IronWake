@@ -745,6 +745,11 @@ public sealed class PlaySession
                     _out.WriteLine(brace);
                 }
 
+                foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes))
+                {
+                    _out.WriteLine(ignite);
+                }
+
                 if (grudge is not null)
                 {
                     _out.WriteLine("  " + grudge);
@@ -1093,6 +1098,7 @@ public sealed class PlaySession
 
         lines.AddRange(PincerLines(state, unit with { At = tile }, target));
         lines.AddRange(BraceLines(unit, target));
+        lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
@@ -1530,6 +1536,29 @@ public sealed class PlaySession
         }
     }
 
+    /// <summary>
+    /// Under a forecast on a <c>wildfire: on</c> map (DESIGN.md 13.15): one line when the strike's
+    /// weapon ignites and the target stands on forest, and one when the target counters with a
+    /// weapon that does and the striker's tile is forest, naming the tile a hit sets alight. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> IgniteLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, Coord tile, int? slot, bool counters)
+    {
+        if (!state.Map.WildfireEnabled)
+        {
+            yield break;
+        }
+
+        if (Resolver.ChooseWeapon(attacker, content, slot).Weapon is { Ignites: true } && state.Map.TerrainIdAt(target.At) == Wildfire.ForestTerrainId)
+        {
+            yield return $"  wildfire: {attacker.Id} ignites {target.At} on a hit";
+        }
+
+        if (counters && target.EquippedWeapon(content) is { Ignites: true } && state.Map.TerrainIdAt(tile) == Wildfire.ForestTerrainId)
+        {
+            yield return $"  wildfire: {target.Id} ignites {tile} on a hit";
+        }
+    }
+
     private string Named(string itemId) => _content.ItemName(itemId);
 
     /// <summary>
@@ -1654,6 +1683,8 @@ public sealed class PlaySession
                 return $"{g.UnitId} swears a grudge against {g.AgainstId}";
             case UnitHealed h:
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
+            case UnitBurned b:
+                return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
             case PhaseEnded p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase ends, turn {p.Turn} --";
             case PhaseBegan p:

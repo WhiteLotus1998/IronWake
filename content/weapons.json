@@ -17,7 +17,7 @@
     { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "price": 400, "effective": ["flying"] },
     { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "rank": "E", "price": 900, "effective": ["flying"] },
 
-    { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "price": 500 },
+    { "id": "cinder", "name": "Cinder", "type": "reason", "mt": 5, "hit": 90, "crit": 0, "wt": 3, "minRange": 1, "maxRange": 2, "durability": 8, "rank": "E", "price": 500, "ignites": true },
     { "id": "gust", "name": "Gust", "type": "reason", "mt": 4, "hit": 100, "crit": 5, "wt": 1, "minRange": 1, "maxRange": 2, "durability": 6, "rank": "E", "price": 600, "effective": ["flying"] },
     { "id": "bolt", "name": "Bolt", "type": "reason", "mt": 7, "hit": 75, "crit": 10, "wt": 5, "minRange": 1, "maxRange": 2, "durability": 5, "rank": "E", "price": 900 },
 
