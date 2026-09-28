@@ -1898,6 +1898,28 @@ public class SimFullTests
     }
 
     /// <summary>
+    /// Issue 438: on a <c>wildfire: on</c> map the trace shows the fire. Seed 1 on the Tollgate
+    /// sample: Pell's hit lights 5,5 under the archer, the archer burns at the enemy phase
+    /// start, the front steps at the next player phase start, and Pell burns on the tile it lit.
+    /// The plain Tollgate on the same seed prints no fire line.
+    /// </summary>
+    [Fact]
+    public void AWildfireTracePrintsBurnsIgnitionsAndTheFrontsStep()
+    {
+        var sample = Path.Combine(Path.GetDirectoryName(Fixture.RealContentDirectory())!, "docs", "samples", "the_tollgate_wildfire.map");
+        var trace = Capture(() => Ironwake.Sim.Program.Trace(sample, 1));
+        Assert.Contains("#   pell vs archer-2: hit 12; pell 16 hp, archer-2 5 hp\n#   5,5 ignites\n", trace);
+        Assert.Contains("\nend\n#   archer-2 burns 3, 2 hp\n# enemy: ", trace);
+        Assert.Contains("\n# turn 3\n#   fire: out 5,5 6,5; lit 6,4 7,5 5,6\n", trace);
+        Assert.Contains("\n# turn 4\n#   pell burns 3, 1 hp\n#   fire: out 6,4 7,5 5,6\n", trace);
+
+        var plain = Capture(() => Ironwake.Sim.Program.Trace("the_tollgate", 1));
+        Assert.DoesNotContain(" burns ", plain);
+        Assert.DoesNotContain(" ignites", plain);
+        Assert.DoesNotContain("fire:", plain);
+    }
+
+    /// <summary>
     /// Issue 118: a trace is a script the CLI replays. Slots print one-based as the CLI reads
     /// them, and the enemy's commands print as comments, since the CLI plays the enemy phase
     /// itself from the same planner. Seed 20 on Old Mill Road has Wren use her dressing; the

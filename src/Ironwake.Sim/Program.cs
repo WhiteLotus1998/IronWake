@@ -204,8 +204,14 @@ public static class Program
                     Console.WriteLine("#   " + grudge);
                 }
 
+                var fire = new FireLines(state.Map);
                 foreach (var e in result.Events)
                 {
+                    if (fire.Take(e) is { } line)
+                    {
+                        Console.WriteLine(line);
+                    }
+
                     switch (e)
                     {
                         case CombatFought f:
@@ -223,7 +229,15 @@ public static class Program
                         case PhaseBegan p when p.Side == Side.Player:
                             Console.WriteLine($"# turn {p.Turn}");
                             break;
+                        case UnitBurned b:
+                            Console.WriteLine($"#   {b.UnitId} burns {b.Amount}, {b.HpAfter} hp");
+                            break;
                     }
+                }
+
+                if (fire.Flush() is { } spread)
+                {
+                    Console.WriteLine(spread);
                 }
 
                 state = result.Next;
@@ -236,6 +250,61 @@ public static class Program
 
         Console.WriteLine($"# {state.Outcome.Result} on turn {state.Turn}: {state.Outcome.Reason}");
         return 0;
+    }
+
+    /// <summary>
+    /// The trace's fire lines on a <c>wildfire: on</c> map (issue 438), read from the
+    /// <see cref="TerrainChanged"/> events the rules already emit, so no new event is needed. A
+    /// tile set alight by a combat prints <c>x,y ignites</c> where it happens; the front's step
+    /// at a player phase start (<see cref="Wildfire.Spread"/>) prints as one line,
+    /// <c>fire: out a,b; lit c,d e,f</c>, once the step's run of changes ends. Every other
+    /// terrain change, and every change on any other map, prints nothing, so a trace without
+    /// the header is unchanged.
+    /// </summary>
+    private sealed class FireLines(MapDefinition before)
+    {
+        private readonly List<Coord> _out = new();
+        private readonly List<Coord> _lit = new();
+        private bool _spreading;
+
+        public string? Take(GameEvent e)
+        {
+            if (!before.WildfireEnabled)
+            {
+                return null;
+            }
+
+            switch (e)
+            {
+                case PhaseBegan { Side: Side.Player }:
+                    _spreading = true;
+                    return null;
+                case TerrainChanged t when _spreading && t.TerrainId == Wildfire.BurntTerrainId && before.TerrainIdAt(t.At) == Wildfire.FireTerrainId:
+                    _out.Add(t.At);
+                    return null;
+                case TerrainChanged t when _spreading && t.TerrainId == Wildfire.FireTerrainId:
+                    _lit.Add(t.At);
+                    return null;
+                case TerrainChanged t when !_spreading && t.TerrainId == Wildfire.FireTerrainId:
+                    return $"#   {t.At} ignites";
+                default:
+                    return _out.Count + _lit.Count > 0 ? Flush() : null;
+            }
+        }
+
+        public string? Flush()
+        {
+            _spreading = false;
+            if (_out.Count == 0 && _lit.Count == 0)
+            {
+                return null;
+            }
+
+            var line = "#   fire: out " + string.Join(" ", _out) + (_lit.Count > 0 ? "; lit " + string.Join(" ", _lit) : "");
+            _out.Clear();
+            _lit.Clear();
+            return line;
+        }
     }
 
     /// <summary>
