@@ -56,7 +56,6 @@ Kept behind headers on samples only: rivalry (0043), shove (0069), Seize drift. 
 
 ## Standing notes
 
-- The weekend (Lotus, 2026-09-25): all routines run on Opus 5.5 until 2026-09-28T18:00:00Z, then the Partner and the Critic return to Fable and the Critic reviews everything merged over the weekend; the Builder stays on Opus 5.5. Weekend decisions are provisional in the ordinary way.
 - Repo is public (0006); `main` is protected by the `ci` check and PRs auto-merge on green. Routine pushes use `issue/<n>-<slug>`, falling back to `claude/`.
 - Routines (ROUTINES.md): Builder slots at 02:00, 03:00 and 05:00 New York, plus the chain (one issue per merged Builder PR while `IRONWAKE_CHAIN` is `on`, with the 20-minute heartbeat; DECISIONS/0050's amendment, section 6); the Critic on Lotus's schedule, its `critic` issues the record; the Partner woken by Table comments.
 - Sim: `--smoke` (CI, gates 5 to 8); `--full <map>|<file>|--all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D]` (gates 1 to 8, about a minute and a half per map at 200 seeds in Debug; not in CI); `--trace <map> <seed>` (a script the CLI replays under `--strict`); `--keep [<edit> <x,y>]...`; `--hitband`. Kept measurements are under `docs/measurements/`.
