@@ -50,6 +50,48 @@ public static class MapRenderer
         return $"fire: burning {string.Join(" ", burning)}; next front {(front.Count == 0 ? "none" : string.Join(" ", front))}";
     }
 
+    /// <summary>The legend a <c>windup: on</c> map prints (DESIGN.md 13.16, experiment).</summary>
+    public const string WindupLegend = "windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it";
+
+    /// <summary>
+    /// Under the windup legend while any blow is raised (DESIGN.md 13.16): each wielder and its
+    /// tile in unit order, and who stands there now, as
+    /// <c>blows: toll_mauler-1 over 6,3 (teodor 14, sure)</c>, with the certain damage it lands on
+    /// that unit. Null when no blow is raised.
+    /// </summary>
+    public static string? BlowLine(BattleState state, GameContent content)
+    {
+        var raised = state.Units.Where(u => u.WindupAt is not null).ToList();
+        if (!state.Map.WindupEnabled || raised.Count == 0)
+        {
+            return null;
+        }
+
+        return "blows: " + string.Join(", ", raised.Select(u =>
+        {
+            var at = u.WindupAt!.Value;
+            var under = state.Units.FirstOrDefault(o => o.At == at && o.Id != u.Id);
+            return under is null ? $"{u.Id} over {at} (empty)" : $"{u.Id} over {at} ({under.Id} {Windup.Damage(state, content, u, under)}, sure)";
+        }));
+    }
+
+    private static string? WindupMark(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (!state.Map.WindupEnabled)
+        {
+            return null;
+        }
+
+        if (unit.WindupAt is { } at)
+        {
+            return "winding up over " + at;
+        }
+
+        return Windup.Over(state, unit.At) is { } wielder && wielder.Id != unit.Id
+            ? $"under a blow from {wielder.Id} ({Windup.Damage(state, content, wielder, unit)}, sure)"
+            : null;
+    }
+
     private static bool Burning(BattleState state, BattleUnit unit) =>
         state.Map.TerrainIdAt(unit.At) == Wildfire.FireTerrainId;
 
@@ -148,6 +190,11 @@ public static class MapRenderer
             {
                 sb.Append(fire).Append('\n');
             }
+        }
+
+        if (map.WindupEnabled)
+        {
+            sb.Append(WindupLegend).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -279,6 +326,11 @@ public static class MapRenderer
                     role += ", burning";
                 }
 
+                if (WindupMark(state, content, unit) is { } windup)
+                {
+                    role += ", " + windup;
+                }
+
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
             }
             else if (unit.IsCaptain)
@@ -294,6 +346,11 @@ public static class MapRenderer
             if (unit.Side == Side.Player && Burning(state, unit))
             {
                 sb.Append("  burning");
+            }
+
+            if (unit.Side == Side.Player && WindupMark(state, content, unit) is { } mark)
+            {
+                sb.Append("  ").Append(mark);
             }
 
             if (unit.EquippedWeapon(content) is null)
@@ -364,6 +421,15 @@ public static class MapRenderer
             if (FireLine(map) is { } fire)
             {
                 sb.Append(fire).Append('\n');
+            }
+        }
+
+        if (map.WindupEnabled)
+        {
+            sb.Append(WindupLegend).Append('\n');
+            if (BlowLine(state, content) is { } blows)
+            {
+                sb.Append(blows).Append('\n');
             }
         }
 

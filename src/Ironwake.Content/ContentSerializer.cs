@@ -382,6 +382,11 @@ public static class ContentSerializer
             writer.WriteBoolean("ignites", true);
         }
 
+        if (weapon.Windup)
+        {
+            writer.WriteBoolean("windup", true);
+        }
+
         writer.WriteEndObject();
     }
 

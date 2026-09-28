@@ -847,6 +847,28 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.16's first play: Code's seed 461 on <c>docs/samples/the_tollgate_windup.map</c>. On turn 5
+    /// the mauler raises a blow over the door with Teodor on it at 5 hp; on turn 6 Pell's Cinder
+    /// from 6,4 hits the mauler from outside its reach, which leaves the blow raised (round 99),
+    /// Teodor steps off the door, and the blow falls on empty ground. The map is seized on turn 10.
+    /// </summary>
+    [Fact]
+    public void TheJournaledWindupPlayReplaysWithItsBlow()
+    {
+        var output = RunSample("the_tollgate_windup.map", "2026-09-28-the_tollgate_windup-461.script", 461, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("toll_mauler-1 raises a blow over 6,3 (teodor); it lands at toll_mauler-1's next phase start\n", output);
+        Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor 14, sure)\n", output);
+        Assert.Contains("under a blow from toll_mauler-1 (14, sure)", output);
+        Assert.Contains("  windup: a hit from 6,4 does not break toll_mauler-1's blow over 6,3 (outside its reach)\n", output);
+        Assert.Contains("toll_mauler-1's blow falls on empty ground at 6,3\n", output);
+        Assert.DoesNotContain("is broken", output);
+        Assert.DoesNotContain("blow lands on", output);
+    }
+
+    /// <summary>
     /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
     /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
     /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.

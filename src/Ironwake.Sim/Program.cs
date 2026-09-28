@@ -232,6 +232,18 @@ public static class Program
                         case UnitBurned b:
                             Console.WriteLine($"#   {b.UnitId} burns {b.Amount}, {b.HpAfter} hp");
                             break;
+                        case BlowRaised b:
+                            Console.WriteLine($"#   {b.UnitId} raises a blow over {b.At} ({b.TargetId})");
+                            break;
+                        case BlowLanded b:
+                            Console.WriteLine($"#   {b.UnitId}'s blow lands on {b.TargetId} for {b.Damage}, {b.TargetHpAfter} hp");
+                            break;
+                        case BlowFell b:
+                            Console.WriteLine($"#   {b.UnitId}'s blow falls on {b.At}");
+                            break;
+                        case BlowBroken b:
+                            Console.WriteLine($"#   {b.UnitId}'s blow is broken");
+                            break;
                     }
                 }
 
@@ -723,9 +735,9 @@ public static class Program
                 throw new InvalidOperationException($"{command} was rejected: {result.Rejection!.Message}");
             }
 
-            if (forecast is not null)
+            if (forecast is not null && result.Events.OfType<CombatFought>().SingleOrDefault() is { } fought)
             {
-                tally!.Count(forecast, result.Events.OfType<CombatFought>().Single());
+                tally!.Count(forecast, fought);
             }
 
             record?.Add(command);
