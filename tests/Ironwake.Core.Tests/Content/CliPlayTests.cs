@@ -822,6 +822,27 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.15's first play: Code's seed 457 on <c>docs/samples/the_tollgate_wildfire.map</c>. Pell's
+    /// Cinder sets the archer's wood alight on turn 2, the fire walks onto the brigand's tile at
+    /// the next player phase and Wren doubles it at 88 with no forest under it, and on turn 4 the
+    /// fire has reached the door approach, where the warden strikes Teodor at 67 with no cover.
+    /// </summary>
+    [Fact]
+    public void TheJournaledWildfirePlayReplaysWithItsFire()
+    {
+        var output = RunSample("the_tollgate_wildfire.map", "2026-09-28-the_tollgate_wildfire-457.script", 457, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  5,5 becomes Fire\n", output);
+        Assert.Contains("archer-2 burns 3 (hp 2)\n", output);
+        Assert.Contains("  6,5 becomes Fire\n  5,6 becomes Fire\n", output);
+        Assert.Contains("forecast wren -> toll_brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 41% crit 0%\n", output);
+        Assert.Contains("  6,4 becomes Fire\n", output);
+        Assert.Contains("forecast toll_warden-1 -> teodor: dmg 7 hit 67% crit 1%; counter: none\n", output);
+    }
+
+    /// <summary>
     /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
     /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
     /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.

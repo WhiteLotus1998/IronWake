@@ -73,6 +73,11 @@ namespace Ironwake.Core;
 /// began its phase on is struck at <see cref="Brace.Hit"/> less hit until its side's next phase (<see cref="Brace"/>).
 /// Off by default.
 /// </param>
+/// <param name="WildfireEnabled">
+/// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
+/// sets a forest tile alight, and fire spreads through forest at each player phase start
+/// (<see cref="Wildfire"/>). Off by default.
+/// </param>
 /// <param name="ExitAfterMove">
 /// The <c>exit_after_move: on</c> header: the Escape rule before issue 377, under which a unit
 /// may move onto an exit and exit in the same turn. It is kept only on the sample maps that
@@ -110,7 +115,8 @@ public sealed record MapDefinition(
     bool ExitAfterMove = false,
     ValueList<WakeLink> WakeLinks = default,
     bool PincerEnabled = false,
-    bool BraceEnabled = false)
+    bool BraceEnabled = false,
+    bool WildfireEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

@@ -13,7 +13,7 @@ public class StarterContentTests
     [Fact]
     public void StarterContentLoads()
     {
-        Assert.Equal(9, Content.Terrain.Count);
+        Assert.Equal(10, Content.Terrain.Count);
         Assert.Equal(9, Content.Classes.Count);
         Assert.Equal(21, Content.Weapons.Count);
         Assert.Equal(27, Content.Units.Count);
@@ -111,6 +111,7 @@ public class StarterContentTests
     [InlineData("fort", 'F', 1, 1, 1, 1, 15, 2, 2, 20, true)]
     [InlineData("wall", '#', -1, -1, -1, -1, 0, 0, 0, 0, false)]
     [InlineData("throne", 'T', 1, 1, 1, 1, 30, 3, 3, 20, true)]
+    [InlineData("fire", '%', 2, 3, 1, 2, 0, 0, 0, 0, false)]
     public void TerrainMatchesTheDesignTable(
         string id, char glyph, int infantry, int cavalry, int flying, int armored,
         int avoid, int def, int res, int heal, bool appliesToFlyers)

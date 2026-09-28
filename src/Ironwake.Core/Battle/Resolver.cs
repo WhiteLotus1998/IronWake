@@ -417,6 +417,8 @@ public static class Resolver
             next = SwearGrudges(next, content, unit, target, events);
         }
 
+        next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
+        next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         return (next, null);
     }
 
@@ -1053,6 +1055,11 @@ public static class Resolver
         }
 
         events.Add(new PhaseBegan(nextPhase, nextTurn));
+        if (nextPhase == Side.Player)
+        {
+            state = Wildfire.Spread(state, events);
+        }
+
         var units = new List<BattleUnit>(state.Units.Count);
         foreach (var unit in state.Units)
         {
@@ -1064,6 +1071,13 @@ public static class Resolver
                 if (hp > unit.Hp)
                 {
                     events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
+                }
+
+                var burnt = Math.Max(Math.Min(1, hp), hp - state.Map.TerrainAt(unit.At, content).BurnFor(max));
+                if (burnt < hp)
+                {
+                    events.Add(new UnitBurned(unit.Id, hp - burnt, burnt));
+                    hp = burnt;
                 }
             }
 

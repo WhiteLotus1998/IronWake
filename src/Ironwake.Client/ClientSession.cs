@@ -318,6 +318,7 @@ public sealed class ClientSession
             UnitSpawned s => new Highlight(line, null, s.At, none, null),
             UnitWaited w => new Highlight(line, null, At(w.UnitId), none, null),
             UnitHealed h => new Highlight(line, null, At(h.UnitId), none, null),
+            UnitBurned b => new Highlight(line, null, At(b.UnitId), none, null),
             ExpGained x => new Highlight(line, null, At(x.UnitId), none, null),
             LeveledUp l => new Highlight(line, null, At(l.UnitId), none, null),
             ItemUsed i => new Highlight(line, null, At(i.UnitId), none, At(i.TargetId)),

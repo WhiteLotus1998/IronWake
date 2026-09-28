@@ -32,6 +32,7 @@ public static class Palette
         ["fort"] = new(180, 144, 232),
         ["wall"] = new(40, 40, 46),
         ["throne"] = new(244, 234, 150),
+        ["fire"] = new(112, 0, 0),
     };
 
     public static readonly Rgb UnknownTerrain = new(128, 128, 128);

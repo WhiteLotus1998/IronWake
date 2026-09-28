@@ -1654,6 +1654,8 @@ public sealed class PlaySession
                 return $"{g.UnitId} swears a grudge against {g.AgainstId}";
             case UnitHealed h:
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
+            case UnitBurned b:
+                return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
             case PhaseEnded p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase ends, turn {p.Turn} --";
             case PhaseBegan p:

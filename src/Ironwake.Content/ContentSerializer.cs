@@ -377,6 +377,11 @@ public static class ContentSerializer
             writer.WriteNumber("healBase", weapon.HealBase);
         }
 
+        if (weapon.Ignites)
+        {
+            writer.WriteBoolean("ignites", true);
+        }
+
         writer.WriteEndObject();
     }
 
@@ -407,6 +412,11 @@ public static class ContentSerializer
         writer.WriteNumber("res", terrain.Res);
         writer.WriteNumber("heal", terrain.HealPercent);
         writer.WriteBoolean("appliesToFlyers", terrain.AppliesToFlyers);
+        if (terrain.BurnPercent > 0)
+        {
+            writer.WriteNumber("burn", terrain.BurnPercent);
+        }
+
         writer.WriteEndObject();
     }
 

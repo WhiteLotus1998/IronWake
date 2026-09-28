@@ -710,6 +710,17 @@ public static class ContentLoader
                 throw node.Error("heal", "must be 0..100 (percent of max HP)");
             }
 
+            var burn = node.IntOr("burn", 0);
+            if (burn < 0 || burn > 100)
+            {
+                throw node.Error("burn", "must be 0..100 (percent of max HP)");
+            }
+
+            if (burn > 0 && heal > 0)
+            {
+                throw node.Error("burn", "a tile that heals cannot also burn");
+            }
+
             var avoid = node.IntOr("avoid", 0);
             if (avoid < 0)
             {
@@ -725,7 +736,8 @@ public static class ContentLoader
                 node.IntOr("def", 0),
                 node.IntOr("res", 0),
                 heal,
-                node.BoolOr("appliesToFlyers", false)));
+                node.BoolOr("appliesToFlyers", false),
+                burn));
         }
 
         if (builder.Count == 0)
@@ -967,7 +979,8 @@ public static class ContentLoader
                 heals,
                 healBase,
                 node.Enum<WeaponRank>("rank"),
-                Price(node)));
+                Price(node),
+                node.BoolOr("ignites", false)));
         }
 
         if (builder.Count == 0)

@@ -3,7 +3,9 @@ namespace Ironwake.Core;
 /// <summary>
 /// A terrain type from the table in DESIGN.md section 4. Movement cost is per movement
 /// type; null means impassable. Avoid and Def/Res bonuses do not apply to flyers unless
-/// <see cref="AppliesToFlyers"/> is set (Fort and Throne).
+/// <see cref="AppliesToFlyers"/> is set (Fort and Throne). <see cref="BurnPercent"/> is the
+/// heal inverted: a unit on the tile at the start of its side's phase loses that percent of
+/// its max HP, never below 1 (Fire, DESIGN.md 13.15, experiment).
 /// </summary>
 public sealed record Terrain(
     string Id,
@@ -14,7 +16,8 @@ public sealed record Terrain(
     int Def,
     int Res,
     int HealPercent,
-    bool AppliesToFlyers)
+    bool AppliesToFlyers,
+    int BurnPercent = 0)
 {
     /// <summary>Cost to enter for the given movement type, or null if impassable.</summary>
     public int? MoveCost(MovementType movement) => MoveCosts[(int)movement];
@@ -38,12 +41,20 @@ public sealed record Terrain(
     public int HealFor(int maxHp) => maxHp * HealPercent / 100;
 
     /// <summary>
+    /// HP a unit with <paramref name="maxHp"/> loses at the start of its side's phase on this
+    /// tile: <see cref="BurnPercent"/> of max, floored. The resolver never takes a unit below 1
+    /// with it (DESIGN.md 13.15, experiment).
+    /// </summary>
+    public int BurnFor(int maxHp) => maxHp * BurnPercent / 100;
+
+    /// <summary>
     /// The terrain's name for the console, with its heal where it has one:
     /// <c>Fort (heals 20 percent)</c>, or given a unit's max HP
     /// <c>Fort (heals 20 percent, 3 hp)</c>. A tile with no heal prints its name alone.
     /// </summary>
     public string Label(int? maxHp = null) =>
-        HealPercent <= 0 ? Name
+        BurnPercent > 0 ? (maxHp is int burnt ? $"{Name} (burns {BurnPercent} percent, {BurnFor(burnt)} hp)" : $"{Name} (burns {BurnPercent} percent)")
+        : HealPercent <= 0 ? Name
         : maxHp is int max ? $"{Name} (heals {HealPercent} percent, {HealFor(max)} hp)"
         : $"{Name} (heals {HealPercent} percent)";
 }

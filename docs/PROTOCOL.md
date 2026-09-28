@@ -91,6 +91,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `phaseEnded` | `side`, `turn` |
 | `phaseBegan` | `side`, `turn` |
 | `unitHealed` | `unit`, `amount`, `hpAfter` |
+| `unitBurned` | `unit`, `amount`, `hpAfter` (standing on burning terrain at its side's phase start; never below 1; DESIGN 13.15, experiment) |
 | `recalled` | `toIndex`, `chargesLeft` |
 | `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
 | `weaponEquipped` | `unit`, `item` |

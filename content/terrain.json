@@ -84,6 +84,16 @@
       "res": 3,
       "heal": 20,
       "appliesToFlyers": true
+    },
+    {
+      "id": "fire",
+      "name": "Fire",
+      "glyph": "%",
+      "cost": { "infantry": 2, "cavalry": 3, "flying": 1, "armored": 2 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0,
+      "burn": 20
     }
   ]
 }

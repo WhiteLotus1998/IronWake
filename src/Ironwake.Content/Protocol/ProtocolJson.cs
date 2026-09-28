@@ -186,6 +186,11 @@ public static class ProtocolJson
                 w.WriteNumber("amount", h.Amount);
                 w.WriteNumber("hpAfter", h.HpAfter);
                 break;
+            case UnitBurned b:
+                w.WriteString("unit", b.UnitId);
+                w.WriteNumber("amount", b.Amount);
+                w.WriteNumber("hpAfter", b.HpAfter);
+                break;
             case Recalled r:
                 w.WriteNumber("toIndex", r.ToIndex);
                 w.WriteNumber("chargesLeft", r.ChargesLeft);

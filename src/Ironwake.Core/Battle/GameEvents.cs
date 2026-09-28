@@ -79,6 +79,9 @@ public sealed record PhaseBegan(Side Side, int Turn) : GameEvent;
 /// <summary>Healing terrain at the start of the owner's phase (DESIGN.md section 4). Amount is what was actually gained.</summary>
 public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEvent;
 
+/// <summary>Burning terrain at the start of the owner's phase (DESIGN.md 13.15, experiment). Amount is what was actually lost; fire never takes a unit below 1.</summary>
+public sealed record UnitBurned(string UnitId, int Amount, int HpAfter) : GameEvent;
+
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 
 /// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>
