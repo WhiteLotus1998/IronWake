@@ -1055,11 +1055,6 @@ public static class Resolver
         }
 
         events.Add(new PhaseBegan(nextPhase, nextTurn));
-        if (nextPhase == Side.Player)
-        {
-            state = Wildfire.Spread(state, events);
-        }
-
         var units = new List<BattleUnit>(state.Units.Count);
         foreach (var unit in state.Units)
         {
@@ -1088,6 +1083,11 @@ public static class Resolver
         if (ended == Side.Enemy)
         {
             next = next with { LitGroups = ValueList<string>.Empty };
+        }
+
+        if (nextPhase == Side.Player)
+        {
+            next = Wildfire.Spread(next, events);
         }
 
         return (MapEvents.AtPhaseStart(next, content, events), null);

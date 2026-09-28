@@ -4,8 +4,9 @@ namespace Ironwake.Core;
 /// Wildfire (DESIGN.md 13.15, experiment), behind a map's <c>wildfire: on</c> header. A hit
 /// from an igniting weapon (<see cref="Weapon.Ignites"/>) on a unit standing on forest sets
 /// the tile alight once the combat ends, so the exchange itself is fought on the forest. At
-/// the start of every player phase, before any unit burns, every fire tile burns out to plain
-/// and sets alight each forest tile orthogonally beside it: a front walks through a wood one
+/// the start of each side's phase that side's units on fire burn first; then, at a player
+/// phase start only, every fire tile burns out to plain and sets alight each forest tile
+/// orthogonally beside it: a front walks through a wood one
 /// tile a round and leaves it bare. The burn itself is terrain (<see cref="Terrain.BurnPercent"/>)
 /// and the resolver applies it where it applies a fort's heal. Both sides ignite alike. The
 /// map is part of the state, so Recall restores the fire with the board.
@@ -45,18 +46,16 @@ public static class Wildfire
     }
 
     /// <summary>
-    /// The front's step at the start of a player phase: every fire tile becomes plain, and
-    /// every forest tile orthogonally beside one of them becomes fire, all read from the board
-    /// before the step, one <see cref="TerrainChanged"/> per tile in row-major order.
+    /// The tiles a unit should not end on, on a <c>wildfire: on</c> map: every tile burning now
+    /// and every forest tile the next front lights (<see cref="NextFront"/>). Empty on any other
+    /// map. The enemy planner's stop choices rank these below every other tile (DESIGN.md 13.15).
     /// </summary>
-    public static BattleState Spread(BattleState state, List<GameEvent> events)
-    {
-        var map = state.Map;
-        if (!map.WildfireEnabled)
-        {
-            return state;
-        }
+    public static IReadOnlySet<Coord> Scorched(MapDefinition map) =>
+        !map.WildfireEnabled ? Empty : Burning(map).Concat(NextFront(map)).ToHashSet();
 
+    /// <summary>The tiles burning now, row-major.</summary>
+    public static IReadOnlyList<Coord> Burning(MapDefinition map)
+    {
         var burning = new List<Coord>();
         for (var y = 0; y < map.Height; y++)
         {
@@ -69,15 +68,45 @@ public static class Wildfire
             }
         }
 
+        return burning;
+    }
+
+    /// <summary>
+    /// The forest tiles the next player phase start sets alight on a <c>wildfire: on</c> map:
+    /// each orthogonally beside a tile burning now, row-major. Empty on any other map.
+    /// </summary>
+    public static IReadOnlyList<Coord> NextFront(MapDefinition map) =>
+        !map.WildfireEnabled
+            ? Array.Empty<Coord>()
+            : Burning(map).SelectMany(c => c.Neighbors())
+                .Where(c => map.Contains(c) && map.TerrainIdAt(c) == ForestTerrainId)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+    private static readonly IReadOnlySet<Coord> Empty = new HashSet<Coord>();
+
+    /// <summary>
+    /// The front's step at the start of a player phase, after the player's units on fire have
+    /// burned: every fire tile becomes plain, and every forest tile orthogonally beside one of
+    /// them becomes fire, all read from the board before the step, one <see cref="TerrainChanged"/>
+    /// per tile in row-major order. A tile lit here harms nobody until the next phase start.
+    /// </summary>
+    public static BattleState Spread(BattleState state, List<GameEvent> events)
+    {
+        var map = state.Map;
+        if (!map.WildfireEnabled)
+        {
+            return state;
+        }
+
+        var burning = Burning(map);
         if (burning.Count == 0)
         {
             return state;
         }
 
-        var catching = burning
-            .SelectMany(c => c.Neighbors())
-            .Where(c => map.Contains(c) && map.TerrainIdAt(c) == ForestTerrainId)
-            .ToHashSet();
+        var catching = NextFront(map);
         var changes = burning.Select(c => (At: c, To: BurntTerrainId))
             .Concat(catching.Select(c => (At: c, To: FireTerrainId)))
             .OrderBy(change => change.At)

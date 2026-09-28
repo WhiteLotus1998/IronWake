@@ -33,6 +33,26 @@ public static class MapRenderer
     /// <summary>The legend a <c>wildfire: on</c> map prints (DESIGN.md 13.15, experiment).</summary>
     public const string WildfireLegend = "wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it";
 
+    /// <summary>
+    /// Under the wildfire legend while anything burns (DESIGN.md 13.15): the tiles on fire and the
+    /// forest the next player phase start sets alight, the front's mark, row-major, as
+    /// <c>fire: burning 6,5 5,6; next front 6,4 7,5</c>. Null when nothing burns.
+    /// </summary>
+    public static string? FireLine(MapDefinition map)
+    {
+        var burning = Wildfire.Burning(map);
+        if (burning.Count == 0)
+        {
+            return null;
+        }
+
+        var front = Wildfire.NextFront(map);
+        return $"fire: burning {string.Join(" ", burning)}; next front {(front.Count == 0 ? "none" : string.Join(" ", front))}";
+    }
+
+    private static bool Burning(BattleState state, BattleUnit unit) =>
+        state.Map.TerrainIdAt(unit.At) == Wildfire.FireTerrainId;
+
     public const string ShoveLegend = "shove: a player unit may push an ally beside it one tile straight away, as its action, if the tile beyond is open";
 
     public static string Render(MapDefinition map, GameContent content, Reach? reach = null)
@@ -124,6 +144,10 @@ public static class MapRenderer
         if (map.WildfireEnabled)
         {
             sb.Append(WildfireLegend).Append('\n');
+            if (FireLine(map) is { } fire)
+            {
+                sb.Append(fire).Append('\n');
+            }
         }
 
         sb.Append('\n').Append("terrain:");
@@ -250,6 +274,11 @@ public static class MapRenderer
                     role += ", braced";
                 }
 
+                if (Burning(state, unit))
+                {
+                    role += ", burning";
+                }
+
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
             }
             else if (unit.IsCaptain)
@@ -260,6 +289,11 @@ public static class MapRenderer
             if (unit.Side == Side.Player && unit.Braced)
             {
                 sb.Append("  braced");
+            }
+
+            if (unit.Side == Side.Player && Burning(state, unit))
+            {
+                sb.Append("  burning");
             }
 
             if (unit.EquippedWeapon(content) is null)
@@ -327,6 +361,10 @@ public static class MapRenderer
         if (map.WildfireEnabled)
         {
             sb.Append(WildfireLegend).Append('\n');
+            if (FireLine(map) is { } fire)
+            {
+                sb.Append(fire).Append('\n');
+            }
         }
 
         if (state.Keepsakes.Count > 0)

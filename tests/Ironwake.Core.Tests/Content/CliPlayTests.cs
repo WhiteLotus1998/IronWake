@@ -825,7 +825,8 @@ public class CliPlayTests
     /// 13.15's first play: Code's seed 457 on <c>docs/samples/the_tollgate_wildfire.map</c>. Pell's
     /// Cinder sets the archer's wood alight on turn 2, the fire walks onto the brigand's tile at
     /// the next player phase and Wren doubles it at 88 with no forest under it, and on turn 4 the
-    /// fire has reached the door approach, where the warden strikes Teodor at 67 with no cover.
+    /// fire has reached the door approach, where the warden strikes Teodor at 67 with no cover,
+    /// and Teodor, still standing in it at the next player phase start, burns for 4.
     /// </summary>
     [Fact]
     public void TheJournaledWildfirePlayReplaysWithItsFire()
@@ -840,6 +841,9 @@ public class CliPlayTests
         Assert.Contains("forecast wren -> toll_brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 41% crit 0%\n", output);
         Assert.Contains("  6,4 becomes Fire\n", output);
         Assert.Contains("forecast toll_warden-1 -> teodor: dmg 7 hit 67% crit 1%; counter: none\n", output);
+        Assert.Contains("  wildfire: pell ignites 5,5 on a hit\n", output);
+        Assert.Contains("fire: burning 5,5; next front 6,5 5,6\n", output);
+        Assert.Contains("teodor burns 4 (hp 2)\n", output);
     }
 
     /// <summary>

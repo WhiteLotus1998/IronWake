@@ -179,7 +179,7 @@ public class WildfireTests
     }
 
     [Fact]
-    public void AUnitInForestThatCatchesAtThePlayerPhaseStartBurnsAtOnce()
+    public void ATileTheSpreadLightsHarmsNoPlayerUnitAtThatPhaseStart()
     {
         const string units = """
             P captain 2,0
@@ -190,9 +190,140 @@ public class WildfireTests
         var start = Start(true, Front, units);
         var hale = start.Find("hale")!;
 
-        var next = start.Do(new EndPhase()).Do(new EndPhase());
+        var caught = start.Do(new EndPhase()).Do(new EndPhase());
 
-        Assert.Equal(hale.Hp - hale.MaxHp(Starter) * 20 / 100, next.Find("hale")!.Hp);
+        Assert.Equal(Wildfire.FireTerrainId, caught.Map.TerrainIdAt(new Coord(2, 0)));
+        Assert.Equal(hale.Hp, caught.Find("hale")!.Hp);
+
+        var result = Resolver.Apply(caught.Do(new EndPhase()), Starter, new EndPhase());
+
+        Assert.Equal(hale.Hp - hale.MaxHp(Starter) * 20 / 100, result.Next.Find("hale")!.Hp);
+        Assert.Equal(Wildfire.BurntTerrainId, result.Next.Map.TerrainIdAt(new Coord(2, 0)));
+    }
+
+    [Fact]
+    public void APlayerUnitOnFireAtItsPhaseStartBurnsBeforeTheTileBurnsOut()
+    {
+        const string units = """
+            P captain 2,1
+            P recruit:pell 6,4
+            E brigand 6,0 group:field behavior:guard
+
+            """;
+        var start = Start(true, Front, units);
+        var hale = start.Find("hale")!;
+
+        var result = Resolver.Apply(start.Do(new EndPhase()), Starter, new EndPhase());
+
+        Assert.Equal(hale.Hp - hale.MaxHp(Starter) * 20 / 100, result.Next.Find("hale")!.Hp);
+        Assert.Equal(Wildfire.BurntTerrainId, result.Next.Map.TerrainIdAt(new Coord(2, 1)));
+        var burned = result.Events.ToList().FindIndex(e => e is UnitBurned);
+        var burntOut = result.Events.ToList().FindIndex(e => e is TerrainChanged t && t.At == new Coord(2, 1));
+        Assert.True(burned >= 0 && burned < burntOut, "the burn comes before the burn-out");
+    }
+
+    private const string Approach = """
+        .......
+        .......
+        .......
+        .......
+        .......
+        """;
+
+    private static Coord EndTile(bool wildfire, string grid, string units)
+    {
+        var state = Start(wildfire, grid, units);
+        var enemyPhase = state.Do(new EndPhase());
+        var plan = EnemyAi.PlanUnit(enemyPhase, Starter, enemyPhase.Find("brigand-1")!);
+        return plan.OfType<Move>().Single().To;
+    }
+
+    [Fact]
+    public void AnEnemyWithTwoOtherwiseEqualStrikesTakesTheOneNotOnFire()
+    {
+        const string grid = """
+            .......
+            .......
+            ...%...
+            .......
+            .......
+            """;
+        const string units = """
+            P captain 3,3
+            P recruit:pell 6,4
+            E brigand 3,0 group:field behavior:aggressive
+
+            """;
+
+        Assert.Equal(new Coord(3, 2), EndTile(false, grid, units));
+        Assert.NotEqual(new Coord(3, 2), EndTile(true, grid, units));
+    }
+
+    [Fact]
+    public void AnEnemyWithTwoOtherwiseEqualStrikesTakesTheOneTheNextFrontMisses()
+    {
+        const string grid = """
+            .......
+            .......
+            .......
+            .%^.^..
+            .......
+            """;
+        const string units = """
+            P captain 3,3
+            P recruit:pell 6,4
+            E brigand 3,1 group:field behavior:aggressive
+
+            """;
+
+        Assert.Equal(new Coord(2, 3), EndTile(false, grid, units));
+        Assert.Equal(new Coord(4, 3), EndTile(true, grid, units));
+    }
+
+    [Fact]
+    public void AnApproachingEnemyStopsOutOfTheFire()
+    {
+        const string grid = """
+            .......
+            .......
+            .......
+            .......
+            .......
+            ...%...
+            .......
+            .......
+            .......
+            .......
+            """;
+        const string units = """
+            P captain 3,9
+            P recruit:pell 6,9
+            E brigand 3,2 group:field behavior:aggressive
+
+            """;
+        var map = $"""
+            name: Field
+            size: 7x10
+            win: rout
+            turn_limit: 10
+            recall: 3
+            enemy_level: 1
+            wildfire: on
+
+            {grid}
+
+            units:
+            {units}
+            """;
+        var plain = map.Replace("wildfire: on\n", "");
+        Coord EndOf(string text)
+        {
+            var enemyPhase = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Pell), text).Do(new EndPhase());
+            return EnemyAi.PlanUnit(enemyPhase, Starter, enemyPhase.Find("brigand-1")!).OfType<Move>().Single().To;
+        }
+
+        Assert.Equal(new Coord(3, 5), EndOf(plain));
+        Assert.NotEqual(new Coord(3, 5), EndOf(map));
     }
 
     [Fact]
@@ -211,6 +342,51 @@ public class WildfireTests
 
         Assert.Equal(1, result.Next.Find("brigand-1")!.Hp);
         Assert.Empty(result.Events.OfType<UnitBurned>());
+    }
+
+    [Fact]
+    public void TheProtocolCarriesTheFireTheFrontAndWhoIsBurning()
+    {
+        const string units = """
+            P captain 2,1
+            P recruit:pell 6,4
+            E brigand 6,0 group:field behavior:guard
+
+            """;
+        var state = Start(true, Front, units);
+
+        var board = Ironwake.Content.Protocol.ProtocolJson.BoardState(state, Starter);
+        var full = Ironwake.Content.Protocol.ProtocolJson.BoardState(Start(false, Front, units), Starter);
+
+        Assert.Contains("\"nextFront\":[{\"x\":2,\"y\":0},{\"x\":1,\"y\":1},{\"x\":3,\"y\":1},{\"x\":2,\"y\":2}]", board);
+        Assert.Single(System.Text.RegularExpressions.Regex.Matches(board, "\"burning\":true"));
+        Assert.DoesNotContain("nextFront", full);
+    }
+
+    [Fact]
+    public void TheBoardMarksTheNextFrontAndTheForecastSaysIgnites()
+    {
+        var state = Start(true, Front, Bystanders);
+
+        Assert.Equal("fire: burning 2,1; next front 2,0 1,1 3,1 2,2", MapRenderer.FireLine(state.Map));
+        Assert.Null(MapRenderer.FireLine(Start(true, Wood, Duel).Map));
+
+        var duel = Start(true, Wood, Duel);
+        var pell = duel.Find("pell")!;
+        var lines = Ironwake.Cli.PlaySession.IgniteLines(duel, Starter, pell, duel.Find("brigand-1")!, pell.At, null, counters: true).ToList();
+        Assert.Equal(new[] { "  wildfire: pell ignites 3,2 on a hit" }, lines);
+        Assert.Empty(Ironwake.Cli.PlaySession.IgniteLines(Start(false, Wood, Duel), Starter, pell, duel.Find("brigand-1")!, pell.At, null, counters: true));
+    }
+
+    [Fact]
+    public void ARecallRestoresTheForestTheFireTook()
+    {
+        var hit = Attacks(true, "pell", Wood, Duel).First(g => g.Hit).After;
+        Assert.Equal(Wildfire.FireTerrainId, hit.Map.TerrainIdAt(new Coord(3, 2)));
+
+        var back = hit.Do(new Recall(0));
+
+        Assert.Equal(Wildfire.ForestTerrainId, back.Map.TerrainIdAt(new Coord(3, 2)));
     }
 
     [Fact]

@@ -616,6 +616,7 @@ public static class EnemyAi
         var movement = content.Class(unit.Unit.ClassId).Movement;
         var own = Arms(content, unit);
         var veto = !unvetoed && BossVetoApplies(state, content, unit);
+        var scorched = Wildfire.Scorched(state.Map);
         AttackOption? best = null;
         foreach (var tile in tiles)
         {
@@ -638,7 +639,7 @@ public static class EnemyAi
                         continue;
                     }
 
-                    var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot);
+                    var option = new AttackOption(Score(state, content, arm.Armed, tile, target), target.Id, tile, avoid, exposure, cost, arm.Slot, scorched.Contains(tile));
                     if ((best is null || option.Beats(best)) && !(veto && BossVetoRefuses(state, content, carrier, tile, target, arm.Slot)))
                     {
                         best = option;
@@ -802,6 +803,9 @@ public static class EnemyAi
     /// The reachable tile with the lowest remaining path cost under <paramref name="chosen"/>,
     /// ties by highest terrain avoid, then fewest player units whose reach set contains the
     /// tile, then cost from the mover, then row-major; null when no reachable tile has a path.
+    /// On a <c>wildfire: on</c> map a tile that is burning or that the next front lights
+    /// (<see cref="Wildfire.Scorched"/>) loses to every tile that is not, ahead of the path
+    /// (DESIGN.md 13.15): a mover with nothing to hit gains nothing by standing in fire.
     /// A tile <paramref name="refused"/> names is skipped (the boss veto, issue 385), checked
     /// only for a tile that would beat the best so far.
     /// </summary>
@@ -809,7 +813,8 @@ public static class EnemyAi
     {
         var movement = content.Class(unit.Unit.ClassId).Movement;
         Coord? destination = null;
-        var bestKey = (Remaining: int.MaxValue, Avoid: int.MinValue, Exposure: int.MaxValue, Cost: int.MaxValue);
+        var scorched = Wildfire.Scorched(state.Map);
+        var bestKey = (Scorch: int.MaxValue, Remaining: int.MaxValue, Avoid: int.MinValue, Exposure: int.MaxValue, Cost: int.MaxValue);
         foreach (var tile in reach.Destinations)
         {
             if (chosen.From(tile) is not { } remaining)
@@ -818,6 +823,7 @@ public static class EnemyAi
             }
 
             var key = (
+                Scorch: scorched.Contains(tile) ? 1 : 0,
                 Remaining: remaining,
                 Avoid: -state.Map.TerrainAt(tile, content).AvoidFor(movement),
                 Exposure: playerReach.Count(r => r.CanEnd(tile)),
@@ -865,18 +871,24 @@ public static class EnemyAi
 
     /// <summary>
     /// One scored attack. <see cref="Beats"/> is section 8's whole order: higher score,
-    /// then lower target id, then higher terrain avoid on the tile, then fewer player
+    /// then, on a <c>wildfire: on</c> map, a tile that is not <see cref="Wildfire.Scorched"/>
+    /// (fire breaks ties between strikes and never cancels one, DESIGN.md 13.15), then lower target id, then higher terrain avoid on the tile, then fewer player
     /// units whose reach set contains it, then lower cost from the mover, then row-major.
     /// An option equal to the best on the whole order does not beat it, so of two weapons
     /// scoring the same the earlier slot strikes.
     /// </summary>
-    private sealed record AttackOption(double Score, string TargetId, Coord Tile, int Avoid, int Exposure, int Cost, int Slot)
+    private sealed record AttackOption(double Score, string TargetId, Coord Tile, int Avoid, int Exposure, int Cost, int Slot, bool Scorched = false)
     {
         public bool Beats(AttackOption other)
         {
             if (Score != other.Score)
             {
                 return Score > other.Score;
+            }
+
+            if (Scorched != other.Scorched)
+            {
+                return !Scorched;
             }
 
             var byId = string.CompareOrdinal(TargetId, other.TargetId);
