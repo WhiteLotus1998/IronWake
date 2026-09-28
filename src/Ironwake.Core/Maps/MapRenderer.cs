@@ -51,7 +51,7 @@ public static class MapRenderer
     }
 
     /// <summary>The legend a <c>windup: on</c> map prints (DESIGN.md 13.16, experiment).</summary>
-    public const string WindupLegend = "windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit on the wielder breaks it";
+    public const string WindupLegend = "windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit from within the wielder's reach breaks it";
 
     /// <summary>
     /// Under the windup legend while any blow is raised (DESIGN.md 13.16): each wielder and its

@@ -859,6 +859,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("forecast toll_mauler-1 -> teodor: dmg 14 hit -- crit --; counter: none\n", output);
         Assert.Contains("toll_mauler-1 raises a blow over 6,3 (teodor); it lands at toll_mauler-1's next phase start\n", output);
         Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor 14, sure)\n", output);
         Assert.Contains("under a blow from toll_mauler-1 (14, sure)", output);
