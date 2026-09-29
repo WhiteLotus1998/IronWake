@@ -232,6 +232,15 @@ public static class Program
                         case UnitBurned b:
                             Console.WriteLine($"#   {b.UnitId} burns {b.Amount}, {b.HpAfter} hp");
                             break;
+                        case WatchTaken t:
+                            Console.WriteLine($"#   {t.UnitId} watches from {t.At}" + (t.PassedUpTargetId is { } up ? $", passes up {up} at {t.PassedUpHit}" : ""));
+                            break;
+                        case WatchFired f:
+                            Console.WriteLine($"#   {f.UnitId}'s watch fires on {f.TargetId}: {(f.Strike.Hit ? (f.Strike.Crit ? "crit " : "hit ") + f.Strike.Damage : "miss")}, {f.Strike.TargetHpAfter} hp");
+                            break;
+                        case WatchEnded x:
+                            Console.WriteLine($"#   {x.UnitId} stops watching");
+                            break;
                         case BlowRaised b:
                             Console.WriteLine($"#   {b.UnitId} raises a blow over {b.At} ({b.TargetId})");
                             break;
@@ -255,6 +264,12 @@ public static class Program
                 state = result.Next;
                 if (state.Outcome.IsOver)
                 {
+                    break;
+                }
+
+                if (result.Events.OfType<WatchFired>().Any(f => f.Strike.TargetHpAfter == 0))
+                {
+                    // A watch shot killed the mover (DESIGN.md 13.17): the rest of its plan is void, so plan again.
                     break;
                 }
             }
@@ -329,6 +344,7 @@ public static class Program
         Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
         UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",
+        Watch w => $"watch {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",

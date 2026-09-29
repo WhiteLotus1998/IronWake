@@ -31,6 +31,7 @@ public static class Resolver
                 if (rejection is null)
                 {
                     next = MapEvents.AfterMove(next, content, next.Find(move.UnitId)!, events);
+                    next = FireWatches(next, content, move.UnitId, events);
                 }
 
                 break;
@@ -42,6 +43,9 @@ public static class Resolver
                 break;
             case Wait wait:
                 (next, rejection) = ApplyWait(state, wait, events);
+                break;
+            case Watch watch:
+                (next, rejection) = ApplyWatch(state, content, watch, events);
                 break;
             case Exit exit:
                 (next, rejection) = ApplyExit(state, exit, events);
@@ -62,6 +66,10 @@ public static class Resolver
                 if (rejection is null)
                 {
                     next = MapEvents.AfterMove(next, content, next.Find(canto.UnitId)!, events);
+                    if (next.Find(canto.UnitId) is { } cantoed && cantoed.At != state.Find(canto.UnitId)!.At)
+                    {
+                        next = FireWatches(next, content, canto.UnitId, events);
+                    }
                 }
 
                 break;
@@ -428,7 +436,92 @@ public static class Resolver
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
+        next = EndStruckWatches(next, result.Strikes, events);
         return (next, null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.17: a unit taking Watch. It needs the header and an equipped weapon reaching
+    /// range 2; the event names the best strike it passes up. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyWatch(BattleState state, GameContent content, Watch watch, List<GameEvent> events)
+    {
+        var unit = Acting(state, watch.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Overwatch.Refusal(state, content, unit) is { } why)
+        {
+            return (state, new Rejection(RejectionReason.CannotWatch, $"{unit.Id} cannot watch: {why}"));
+        }
+
+        var passed = Overwatch.PassedUp(state, content, unit);
+        events.Add(new WatchTaken(unit.Id, unit.At, passed?.TargetId, passed?.Hit));
+        return (state.WithUnit(unit with { Moved = true, Acted = true, Watching = true, Canto = null }), null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.17: after <paramref name="moverId"/> ends a move, each watcher whose ring
+    /// holds its tile, in id order, shoots it once (<see cref="Overwatch.Shoot"/>), until one
+    /// kills. A watch that fires is spent. The shot spends a use, gives EXP and rank as any
+    /// strike, and a kill is a death like any other.
+    /// </summary>
+    private static BattleState FireWatches(BattleState state, GameContent content, string moverId, List<GameEvent> events)
+    {
+        if (!state.Map.OverwatchEnabled || state.Find(moverId) is not { } mover)
+        {
+            return state;
+        }
+
+        foreach (var watcherId in Overwatch.WatchersOver(state, mover.Side, mover.At).Select(w => w.Id).ToList())
+        {
+            if (state.Find(moverId) is not { } target || state.Find(watcherId) is not { } watcher)
+            {
+                break;
+            }
+
+            var strike = Overwatch.Shoot(state, content, watcher, target, new KeyedRng(state.Seed));
+            var strikes = ValueList<StrikeEvent>.Empty.Add(strike);
+            events.Add(new WatchFired(watcher.Id, target.Id, target.At, strike));
+            var died = strike.TargetHpAfter == 0;
+            var weapon = watcher.EquippedWeapon(content);
+            var shooter = SpendDurability(watcher with { Watching = false }, strikes, content, events);
+            var struck = target with { Hp = strike.TargetHpAfter };
+            shooter = AwardExp(shooter, struck, strikes, died, content, state.Seed, events);
+            struck = AwardExp(struck, shooter, strikes, false, content, state.Seed, events);
+            shooter = AwardRank(shooter, weapon, strikes, died, events);
+            shooter = AwardMastery(shooter, content, events);
+            state = state.WithUnit(shooter).WithUnit(struck);
+            if (died)
+            {
+                events.Add(new UnitDied(target.Id, target.Side, target.At));
+                state = LeaveKeepsake(state, struck, content, events).WithoutUnit(target.Id);
+                state = SwearGrudges(state, content, target, shooter, events);
+                break;
+            }
+
+            state = Windup.AfterCombat(state, content, shooter, struck, strikes, events);
+            state = EndStruckWatches(state, strikes, events);
+        }
+
+        return state;
+    }
+
+    /// <summary>DESIGN.md 13.17: every watching unit a strike in <paramref name="strikes"/> targeted, hit or miss, stops watching.</summary>
+    private static BattleState EndStruckWatches(BattleState state, ValueList<StrikeEvent> strikes, List<GameEvent> events)
+    {
+        foreach (var id in strikes.Select(s => s.TargetId).Distinct().ToList())
+        {
+            if (state.Find(id) is { Watching: true } watcher)
+            {
+                events.Add(new WatchEnded(watcher.Id));
+                state = state.WithUnit(watcher with { Watching = false });
+            }
+        }
+
+        return state;
     }
 
     /// <summary>
@@ -1085,7 +1178,7 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase });
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1230,6 +1323,11 @@ public static class Resolver
                         yield return new Shove(unit.Id, other.Id);
                     }
                 }
+            }
+
+            if (state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null)
+            {
+                yield return new Watch(unit.Id);
             }
 
             yield return new Wait(unit.Id);

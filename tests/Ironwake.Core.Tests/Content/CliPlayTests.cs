@@ -871,6 +871,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.17's first play: Code's seed 491 on <c>docs/samples/harrow_weir_overwatch.map</c>. On turn 5
+    /// Pell's watch from 8,6 fires on the brigand that ends on 8,8, and Ottilie's from 9,2 fires on
+    /// the Foreman as he lands on the crest at 11,2; on turn 6 Teodor and Ottilie kill him there.
+    /// </summary>
+    [Fact]
+    public void TheJournaledOverwatchPlayReplaysWithItsShots()
+    {
+        var output = RunSample("harrow_weir_overwatch.map", "2026-09-29-harrow_weir_overwatch-491.script", 491, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.Contains("ottilie watches from 9,2; no strike passed up\n", output);
+        Assert.Contains("pell's watch fires on brigand-3 at 8,8: hit 12 (brigand-3 hp 10)\n", output);
+        Assert.Contains("ottilie's watch fires on weir_foreman-1 at 11,2: hit 6 (weir_foreman-1 hp 22)\n", output);
+        Assert.Contains("ottilie is struck and stops watching\n", output);
+        Assert.Contains("watches: archer-1 at 14,4 over 14,2 13,3 15,3 12,4 13,5 15,5 14,6\n", output);
+        Assert.Contains("weir_foreman-1 falls at 11,2\n", output);
+    }
+
+    /// <summary>
     /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
     /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
     /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.

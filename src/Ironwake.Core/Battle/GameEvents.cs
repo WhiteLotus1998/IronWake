@@ -94,6 +94,18 @@ public sealed record BlowFell(string UnitId, Coord At) : GameEvent;
 /// <summary>A hit on the wielder broke its raised blow before it landed (DESIGN.md 13.16).</summary>
 public sealed record BlowBroken(string UnitId, Coord At) : GameEvent;
 
+/// <summary>
+/// A unit took Watch (DESIGN.md 13.17) on its tile. <paramref name="PassedUpTargetId"/> and
+/// <paramref name="PassedUpHit"/> name the best legal strike it gave up, displayed hit, when it had one (round 115).
+/// </summary>
+public sealed record WatchTaken(string UnitId, Coord At, string? PassedUpTargetId = null, int? PassedUpHit = null) : GameEvent;
+
+/// <summary>A watch fired on the unit that ended a move in its ring, before that unit acts: one strike, no counter (DESIGN.md 13.17).</summary>
+public sealed record WatchFired(string UnitId, string TargetId, Coord At, StrikeEvent Strike) : GameEvent;
+
+/// <summary>A strike on a watching unit ended its watch unfired (DESIGN.md 13.17).</summary>
+public sealed record WatchEnded(string UnitId) : GameEvent;
+
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 
 /// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>

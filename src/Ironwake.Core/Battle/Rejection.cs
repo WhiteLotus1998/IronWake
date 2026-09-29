@@ -29,6 +29,7 @@ public enum RejectionReason
     NoKeepsake,
     Unseen,
     CannotShove,
+    CannotWatch,
     BattleOver,
     UnknownCommand,
 }

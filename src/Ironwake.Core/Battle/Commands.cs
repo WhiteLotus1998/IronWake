@@ -70,6 +70,14 @@ public sealed record Recover(string UnitId) : Command;
 /// </summary>
 public sealed record Shove(string UnitId, string TargetId) : Command;
 
+/// <summary>
+/// Watch (DESIGN.md 13.17, experiment): on an <c>overwatch: on</c> map, a unit whose equipped
+/// weapon reaches range 2 takes this as its action, in place of Attack, Item or Wait, after its
+/// Move or without one, and watches the tiles two steps from it until its side's next phase
+/// (<see cref="Overwatch"/>). No Canto follows. It is not a Wait, so it never braces.
+/// </summary>
+public sealed record Watch(string UnitId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 
