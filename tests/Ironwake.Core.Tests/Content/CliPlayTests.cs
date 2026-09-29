@@ -1318,19 +1318,37 @@ public class CliPlayTests
 
     /// <summary>
     /// Issue 131, the timing arm: Code's play of Saltmarsh Ford with the ford group arriving behind
-    /// the party (seed 511) replays on the shipped map to its transcript, the pair spawning on the
-    /// command that stops Teodor on 10,4 and the rout won on turn 11.
+    /// the party (seed 511) replays to its transcript on the file it was played on, kept as
+    /// <c>docs/samples/saltmarsh_ford_0090.map</c> once the shipped map took <c>brace: on</c>: the pair
+    /// spawning on the command that stops Teodor on 10,4 and the rout won on turn 11.
     /// </summary>
     [Fact]
-    public void TheTimingArmPlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    public void TheTimingArmPlayReplaysOnTheFileItWasPlayedOnToItsTranscript()
     {
-        var output = RunShipped("saltmarsh_ford.map", "2026-09-29-saltmarsh_ford-511.script", 511, out var exit);
+        var output = RunSample("saltmarsh_ford_0090.map", "2026-09-29-saltmarsh_ford-511.script", 511, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("  brigand-1 arrives at 0,9, group ford, aggressive\n", output);
         Assert.Contains("battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-511.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 131, the brace header: Code's play of the shipped Saltmarsh Ford with <c>brace: on</c>
+    /// on top of the timing arm (seed 523) replays to its transcript: the leader braced until the
+    /// adjacent bait on turn 8, one Recall, and the rout won on turn 10.
+    /// </summary>
+    [Fact]
+    public void TheBracePlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    {
+        var output = RunShipped("saltmarsh_ford.map", "2026-09-29-saltmarsh_ford-523.script", 523, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("bandit_leader-1 waits and braces\n", output);
+        Assert.Contains("battle won: rout", output);
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-523.txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>
