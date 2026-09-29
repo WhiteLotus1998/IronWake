@@ -2398,7 +2398,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          6,4    hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: dmg 10 hit 77% crit 0%
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: dmg 10 hit 77% crit 0%
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 11)
   shieldbearer-1 hits pell for 10 (hp 6)
@@ -2717,7 +2717,7 @@ B  teodor           Teodor L1 pikeman          7,4    hp 11/21  Road  done
 enemy: wait archer-1
 archer-1 waits
 enemy: attack shieldbearer-1 pell
-forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 100% crit 3%
+forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 shieldbearer-1 attacks pell
   shieldbearer-1 hits pell for 10 (hp 0)
   shieldbearer-1 hp 7, pell hp 0
@@ -2861,7 +2861,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          6,4    hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 11)
   pell hp 16, shieldbearer-1 hp 11
@@ -3151,7 +3151,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 11/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,4    hp 11/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 16, shieldbearer-1 hp 0

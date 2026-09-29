@@ -182,6 +182,32 @@ public class CombatFormulaTests
         Assert.Equal(displayed, Core.Combat.DisplayedHit(hitChance, RollScheme.TwoRollAverage));
     }
 
+    /// <summary>
+    /// Issue 452: the display never claims a certainty the dice lack. Under two rolls raw 95 to
+    /// 99 land 99.55 to 99.99 percent and print 99; raw 1 to 5 land 0.03 to 0.55 percent and
+    /// print 1. Only a certain hit prints 100 and only an impossible one prints 0.
+    /// </summary>
+    [Theory]
+    [InlineData(95, 0.9955, 99)]
+    [InlineData(99, 0.9999, 99)]
+    [InlineData(100, 1.0, 100)]
+    [InlineData(5, 0.0055, 1)]
+    [InlineData(1, 0.0003, 1)]
+    [InlineData(0, 0.0, 0)]
+    public void OnlyACertainHitPrints100AndOnlyAnImpossibleOnePrints0(int hitChance, double probability, int displayed)
+    {
+        Assert.Equal(probability, Core.Combat.HitProbability(hitChance, RollScheme.TwoRollAverage), 10);
+        Assert.Equal(displayed, Core.Combat.DisplayedHit(hitChance, RollScheme.TwoRollAverage));
+    }
+
+    [Theory]
+    [InlineData(99, 99)]
+    [InlineData(1, 1)]
+    [InlineData(100, 100)]
+    [InlineData(0, 0)]
+    public void OneRollPrintsTheRawChanceUnchanged(int hitChance, int displayed) =>
+        Assert.Equal(displayed, Core.Combat.DisplayedHit(hitChance, RollScheme.OneRoll));
+
     [Theory]
     [InlineData(75)]
     [InlineData(30)]
