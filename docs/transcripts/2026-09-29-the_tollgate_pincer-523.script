@@ -1,0 +1,53 @@
+move wren 4,8
+wait wren
+move captain 4,9
+wait captain
+move teodor 9,9
+wait teodor
+move pell 8,10
+wait pell
+end
+move wren 3,6
+wait wren
+move captain 4,7
+wait captain
+move teodor 8,6
+wait teodor
+move pell 9,7
+wait pell
+end
+move wren 5,4
+attack wren archer-2
+move captain 5,6
+attack captain archer-2
+move teodor 7,5
+attack teodor toll_brigand-1
+move pell 8,7
+wait pell
+end
+move captain 5,5
+attack captain toll_brigand-1
+move teodor 6,4
+wait teodor
+wait wren
+wait pell
+end
+move pell 8,5
+attack pell rider-1
+item teodor 2
+wait captain
+wait wren
+end
+move teodor 7,4
+wait teodor
+move pell 6,4
+attack pell toll_warden-1
+move captain 6,3
+attack captain toll_warden-1
+wait wren
+end
+move pell 5,1
+attack pell archer-1
+move wren 6,2
+attack wren archer-1
+move captain 7,1
