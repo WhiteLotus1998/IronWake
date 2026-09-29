@@ -22,6 +22,13 @@ public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed)
 /// </summary>
 public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDictionary<string, ActionMix> Mix, LossCause Cause = LossCause.None, int LastCombatTurn = 0, double? RefusedKill = null)
 {
+    /// <summary>
+    /// The highest kill probability the veto refused on the game's last player phase
+    /// (<see cref="HeuristicPlayer.LastPhaseRefusedKill"/>, issue 157): on a timeout, the
+    /// board the game stalled on. Null for any other player or when that phase refused nothing.
+    /// </summary>
+    public double? StallRefusedKill { get; init; }
+
     public bool Won => Result == BattleResult.Won;
 
     /// <summary>The weapon rank points of every player unit as it last stood in the game (issue 67), by id.</summary>
@@ -215,6 +222,7 @@ public static class Runner
 
         return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player))
         {
+            StallRefusedKill = StallRefusedKillOf(player),
             PlayerWatch = playerWatch,
             EnemyWatch = enemyWatch,
             Pins = pins,
@@ -245,6 +253,13 @@ public static class Runner
     {
         HeuristicPlayer heuristic => heuristic.HighestRefusedKill,
         PrefixPlayer prefix => prefix.HighestRefusedKill,
+        _ => null,
+    };
+
+    private static double? StallRefusedKillOf(IPlayer player) => player switch
+    {
+        HeuristicPlayer heuristic => heuristic.LastPhaseRefusedKill,
+        PrefixPlayer prefix => prefix.LastPhaseRefusedKill,
         _ => null,
     };
 
@@ -385,12 +400,24 @@ public static class Gates
     /// the attacker lives to make, the counter between them counted (issue 147). Printed, never classified: a value
     /// near one is a stall the veto caused by refusing a near-certain kill, a low value is a
     /// board the player judged too risky, and the row says which without a threshold. The
-    /// count is printed so one game reads as one game and not as a finding.
+    /// count is printed so one game reads as one game and not as a finding. Beside it, over
+    /// the same timeouts, the median of each game's highest refusal on its last player phase,
+    /// the board it stalled on, with its own count, as <c>, at the stall p50 0.7191 over 89</c>,
+    /// or <c>, at the stall -</c> when no timeout refused on its last phase (issue 157): the
+    /// game's highest can sit ten turns before the stall and read as a different board.
     /// </summary>
     public static string RefusedKill(IReadOnlyList<GameResult> games)
     {
-        var refused = games.Where(g => g.Cause == LossCause.Timeout && g.RefusedKill is not null).Select(g => g.RefusedKill!.Value).ToList();
-        return refused.Count == 0 ? "refused kill -" : $"refused kill p50 {FormatKill(Median(refused))} over {refused.Count}";
+        var timeouts = games.Where(g => g.Cause == LossCause.Timeout).ToList();
+        var refused = timeouts.Where(g => g.RefusedKill is not null).Select(g => g.RefusedKill!.Value).ToList();
+        if (refused.Count == 0)
+        {
+            return "refused kill -";
+        }
+
+        var stall = timeouts.Where(g => g.StallRefusedKill is not null).Select(g => g.StallRefusedKill!.Value).ToList();
+        var atStall = stall.Count == 0 ? "at the stall -" : $"at the stall p50 {FormatKill(Median(stall))} over {stall.Count}";
+        return $"refused kill p50 {FormatKill(Median(refused))} over {refused.Count}, {atStall}";
     }
 
     /// <summary>

@@ -57,11 +57,27 @@ public sealed class HeuristicPlayer : IPlayer
     /// </summary>
     public double? HighestRefusedKill { get; private set; }
 
+    /// <summary>
+    /// The highest kill probability among the attack plans the veto refused on the last
+    /// player phase this player planned, or null when it refused none there (issue 157).
+    /// On a timeout that phase is the board the game stalled on, which the game's highest,
+    /// often ten turns earlier, does not name.
+    /// </summary>
+    public double? LastPhaseRefusedKill { get; private set; }
+
+    private int _lastPhaseTurn;
+
     public IReadOnlyList<Command> Next(BattleState state, GameContent content)
     {
         if (state.Outcome.IsOver || state.Phase != Side.Player)
         {
             return Array.Empty<Command>();
+        }
+
+        if (state.Turn != _lastPhaseTurn)
+        {
+            _lastPhaseTurn = state.Turn;
+            LastPhaseRefusedKill = null;
         }
 
         var owed = state.UnitsOf(Side.Player).FirstOrDefault(u => state.CantoReachOf(u, content) is not null);
@@ -80,6 +96,11 @@ public sealed class HeuristicPlayer : IPlayer
         if (refused is { } p && (HighestRefusedKill is null || p > HighestRefusedKill))
         {
             HighestRefusedKill = p;
+        }
+
+        if (refused is { } q && (LastPhaseRefusedKill is null || q > LastPhaseRefusedKill))
+        {
+            LastPhaseRefusedKill = q;
         }
 
         return plan;
