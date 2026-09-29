@@ -52,7 +52,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.7 dusk, `threat` row | Brackwater Cut, #403 (built) | a cold dusk play of Brackwater on main |
 | 13.8 carrier arm | `docs/samples/*_keepsakes.map` | Chat's cold carrier-arm plays |
 | 13.10 retreat, third pass | `docs/samples/river_refuge_hold.map` (0037) | Chat's cold play |
-| 13.11 two-weapon boss | `docs/samples/saltmarsh_ford_chief.map` (0061) | Chat's cold play |
+| 13.11 two-weapon boss | kept (0061); the kill clause cannot fire after seed 521's three bait turns picked the leader's axe (round 121) | none waits |
 | 13.13 pincer | kept on its samples (0082, 0083; Brackwater: Code seed 443, Chat cold seed 499, both in); keep round `the_tollgate_pincer.map` (#495, built; Code seed 503 in) | Chat's cold play of the Tollgate sample, after its queue |
 | 13.15 wildfire | `docs/samples/the_tollgate_wildfire.map` (0085, #435; Code seed 457 in) | Chat's cold play of the sample |
 | 13.16 windup | `docs/samples/the_tollgate_windup.map` (0086, #441; Code seed 461 in) | Chat's cold play of the sample |
