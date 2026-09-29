@@ -310,7 +310,9 @@ public static class Resolver
         }
 
         events.Add(new Cantoed(unit.Id, unit.At, canto.To, entry.Path));
-        return (state.WithUnit(unit with { At = canto.To, Canto = null }), null);
+        // A Canto that leaves the tile takes a brace off (DESIGN 13.14); staying keeps it.
+        var braced = unit.Braced && canto.To == unit.At;
+        return (state.WithUnit(unit with { At = canto.To, Canto = null, Braced = braced }), null);
     }
 
     private static (BattleState, Rejection?) ApplyAttack(BattleState state, GameContent content, Attack attack, List<GameEvent> events)
