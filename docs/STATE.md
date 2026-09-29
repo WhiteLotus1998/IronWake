@@ -6,7 +6,7 @@ Updated: 2026-09-29. Rewritten, not appended: this file is what is true now. Kep
 
 Phases 1 and 2 of DESIGN section 12 are built: rules, content, the cast of eleven, maps, combat on keyed rolls, Recall, the enemy AI, the console game (`ironwake play`, `campaign`, `threat`, `recall list`, `--protocol`) and the Sim with gates 1 to 8. Phase 3 is under way: abilities, ranks, arts, Breakers and masteries, gauntlets, Canto, certification and trials, the between-map campaign with the keep, difficulty as data, map events, and the Godot client (slices 1, 2 and 2b, the Windows export, the readability pass).
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir on the crest (0088; reopened under 0087, retuned by #456 and #471, both re-rates 7/8/7 with two yeses; gate 1 58 read under DESIGN 11's stall clause, provisional). The other five are playable and waiting on plays (Maps, below).
-1933 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+1935 tests green (four hold STATE.md and DIALOGUE.md to their caps, #401); `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
