@@ -464,6 +464,12 @@ public sealed class PlaySession
             case "wait":
                 Error("usage: wait <unit>");
                 break;
+            case "watch" when words.Length == 2:
+                Apply(new Watch(words[1]));
+                break;
+            case "watch":
+                Error("usage: watch <unit>");
+                break;
             case "canto" when words.Length == 3 && TryCoord(words[2], out var cantoTo):
                 Apply(new Canto(words[1], cantoTo));
                 break;
@@ -1752,6 +1758,7 @@ public sealed class PlaySession
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
         Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
+        Watch w => $"watch {w.UnitId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
@@ -1825,6 +1832,12 @@ public sealed class PlaySession
                 return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
             case UnitBurned b:
                 return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
+            case WatchTaken w:
+                return $"{w.UnitId} watches from {w.At}" + (w.PassedUpTargetId is { } passed ? $"; passes up {passed} at {w.PassedUpHit}" : "; no strike passed up");
+            case WatchFired w:
+                return $"{w.UnitId}'s watch fires on {w.TargetId} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({w.TargetId} hp {w.Strike.TargetHpAfter})";
+            case WatchEnded w:
+                return $"{w.UnitId} is struck and stops watching";
             case BlowRaised b:
                 return $"{b.UnitId} raises a blow over {b.At} ({b.TargetId}); it lands at {b.UnitId}'s next phase start";
             case BlowLanded b:

@@ -28,6 +28,9 @@ namespace Ironwake.Core;
 /// <see cref="WindupAt"/> is the tile a raised blow will land on, on a <c>windup: on</c> map
 /// (DESIGN.md 13.16, experiment): set by an attack with a windup weapon, cleared when the blow
 /// lands at the unit's side's next phase start or when a hit on the unit breaks it.
+/// <see cref="Watching"/> is set by a <see cref="Watch"/> on an <c>overwatch: on</c> map
+/// (DESIGN.md 13.17, experiment) and cleared when the watch fires, when the unit is struck, or
+/// when its side's next phase begins.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -46,7 +49,8 @@ public sealed record BattleUnit(
     string? Grudge = null,
     bool Shoved = false,
     bool Braced = false,
-    Coord? WindupAt = null)
+    Coord? WindupAt = null,
+    bool Watching = false)
 {
     public string Id => Unit.Id;
 

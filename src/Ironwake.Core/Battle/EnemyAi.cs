@@ -63,6 +63,11 @@ public static class EnemyAi
 
                 plan.Add(command);
                 working = result.Next;
+                if (working.Find(id) is null || working.Outcome.IsOver)
+                {
+                    // A watch shot (DESIGN.md 13.17) killed the mover before it acted.
+                    break;
+                }
             }
         }
 
@@ -277,17 +282,24 @@ public static class EnemyAi
 
         if (!mayMove || HoldsTheThrone(state, unit))
         {
-            return new Command[] { new Wait(unit.Id) };
+            return new Command[] { Idle(state, content, unit) };
         }
 
         var veto = BossVetoApplies(state, content, unit);
         var end = End(state, content, unit, weapon, tiles, reach, known, playerReach, sworn, veto);
         var swing = veto ? Choose(state, content, unit, new[] { end }, reach, known, playerReach, sworn, unvetoed: true).Best : null;
-        var last = swing is null ? (Command)new Wait(unit.Id) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
+        var last = swing is null ? Idle(state, content, unit) : new Attack(unit.Id, swing.TargetId, swing.Slot == equipped ? null : swing.Slot);
         return end != unit.At
             ? new Command[] { new Move(unit.Id, end), last }
             : new Command[] { last };
     }
+
+    /// <summary>
+    /// What an enemy with no strike this phase does with its action: Watch under
+    /// <see cref="Overwatch.EnemyWatches"/> (DESIGN.md 13.17), else Wait.
+    /// </summary>
+    private static Command Idle(BattleState state, GameContent content, BattleUnit unit) =>
+        Overwatch.EnemyWatches(state, content, unit) ? new Watch(unit.Id) : new Wait(unit.Id);
 
     /// <summary>
     /// Where a mover with no strike this phase ends: its post when <see cref="GoesHome"/> says

@@ -31,6 +31,13 @@ public sealed record RollKey
         new($"combat/{turn}/{phase}/{attackerId}/{targetId}/{strikeIndex}/{roll}");
 
     /// <summary>
+    /// A watch shot's roll (DESIGN.md 13.17): (turn, phase, watcher, target, roll). Its own
+    /// prefix, so a shot never shares a key with the watcher's counter on the same phase.
+    /// </summary>
+    public static RollKey Watch(int turn, Side phase, string watcherId, string targetId, CombatRoll roll) =>
+        new($"watch/{turn}/{phase}/{watcherId}/{targetId}/{roll}");
+
+    /// <summary>
     /// A growth roll at level-up: (unit, new level, stat) and nothing else, so a recruit's
     /// trajectory is fixed at the campaign seed whatever else happens (DESIGN.md section 3).
     /// </summary>

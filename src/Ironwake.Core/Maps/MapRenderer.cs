@@ -50,6 +50,41 @@ public static class MapRenderer
         return $"fire: burning {string.Join(" ", burning)}; next front {(front.Count == 0 ? "none" : string.Join(" ", front))}";
     }
 
+    /// <summary>The legend an <c>overwatch: on</c> map prints (DESIGN.md 13.17, experiment).</summary>
+    public const string OverwatchLegend = "overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch";
+
+    /// <summary>
+    /// Under the overwatch legend while any unit watches (DESIGN.md 13.17): each watcher in id
+    /// order with the ring's tiles inside the map, row-major, as
+    /// <c>watches: archer-1 at 5,5 over 5,3 4,4 ...</c>. Null when nobody watches.
+    /// </summary>
+    public static string? WatchLine(BattleState state)
+    {
+        var watchers = state.Units.Where(u => u.Watching).OrderBy(u => u.Id, StringComparer.Ordinal).ToList();
+        if (!state.Map.OverwatchEnabled || watchers.Count == 0)
+        {
+            return null;
+        }
+
+        return "watches: " + string.Join("; ", watchers.Select(u =>
+        {
+            var ring = new List<Coord>();
+            for (var y = 0; y < state.Map.Height; y++)
+            {
+                for (var x = 0; x < state.Map.Width; x++)
+                {
+                    var tile = new Coord(x, y);
+                    if (Overwatch.InRing(u, tile))
+                    {
+                        ring.Add(tile);
+                    }
+                }
+            }
+
+            return $"{u.Id} at {u.At} over {string.Join(" ", ring)}";
+        }));
+    }
+
     /// <summary>The legend a <c>windup: on</c> map prints (DESIGN.md 13.16, experiment).</summary>
     public const string WindupLegend = "windup: a maul's attack raises a blow over the target's tile; at its side's next phase start it lands on whoever stands there, a sure hit; a hit from within the wielder's reach breaks it";
 
@@ -197,6 +232,11 @@ public static class MapRenderer
             sb.Append(WindupLegend).Append('\n');
         }
 
+        if (map.OverwatchEnabled)
+        {
+            sb.Append(OverwatchLegend).Append('\n');
+        }
+
         sb.Append('\n').Append("terrain:");
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var id in map.TerrainIds)
@@ -321,6 +361,11 @@ public static class MapRenderer
                     role += ", braced";
                 }
 
+                if (unit.Watching)
+                {
+                    role += ", watching";
+                }
+
                 if (Burning(state, unit))
                 {
                     role += ", burning";
@@ -341,6 +386,11 @@ public static class MapRenderer
             if (unit.Side == Side.Player && unit.Braced)
             {
                 sb.Append("  braced");
+            }
+
+            if (unit.Side == Side.Player && unit.Watching)
+            {
+                sb.Append("  watching");
             }
 
             if (unit.Side == Side.Player && Burning(state, unit))
@@ -421,6 +471,15 @@ public static class MapRenderer
             if (FireLine(map) is { } fire)
             {
                 sb.Append(fire).Append('\n');
+            }
+        }
+
+        if (map.OverwatchEnabled)
+        {
+            sb.Append(OverwatchLegend).Append('\n');
+            if (WatchLine(state) is { } watches)
+            {
+                sb.Append(watches).Append('\n');
             }
         }
 

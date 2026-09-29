@@ -187,12 +187,20 @@ public sealed class HeuristicPlayer : IPlayer
 
         if (unit.Moved || state.Map.Win == WinCondition.Survive)
         {
-            return new Command[] { new Wait(unit.Id) };
+            return new Command[] { Idle(state, content, unit) };
         }
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
-        return WithMove(unit, destination ?? unit.At, new Wait(unit.Id));
+        return WithMove(unit, destination ?? unit.At, Idle(state, content, unit));
     }
+
+    /// <summary>
+    /// The heuristic's action with no strike and no heal: Watch on an <c>overwatch: on</c> map when
+    /// its equipped weapon reaches range 2 (DESIGN.md 13.17, the enemy's rule), else Wait. It never
+    /// watches over a strike, so its own watches-over-a-strike figure is 0 by construction.
+    /// </summary>
+    private static Command Idle(BattleState state, GameContent content, BattleUnit unit) =>
+        state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null ? new Watch(unit.Id) : new Wait(unit.Id);
 
     /// <summary>
     /// Issue 269's Escape approach: the exit tile a unit leaves from this turn, or null. A

@@ -191,6 +191,28 @@ public static class ProtocolJson
                 w.WriteNumber("amount", b.Amount);
                 w.WriteNumber("hpAfter", b.HpAfter);
                 break;
+            case WatchTaken t:
+                w.WriteString("unit", t.UnitId);
+                WriteCoord(w, "at", t.At);
+                if (t.PassedUpTargetId is { } passed)
+                {
+                    w.WriteString("passesUp", passed);
+                    w.WriteNumber("passesUpHit", t.PassedUpHit!.Value);
+                }
+
+                break;
+            case WatchFired f:
+                w.WriteString("unit", f.UnitId);
+                w.WriteString("target", f.TargetId);
+                WriteCoord(w, "at", f.At);
+                w.WriteBoolean("hit", f.Strike.Hit);
+                w.WriteBoolean("crit", f.Strike.Crit);
+                w.WriteNumber("damage", f.Strike.Damage);
+                w.WriteNumber("targetHpAfter", f.Strike.TargetHpAfter);
+                break;
+            case WatchEnded x:
+                w.WriteString("unit", x.UnitId);
+                break;
             case BlowRaised b:
                 w.WriteString("unit", b.UnitId);
                 w.WriteString("target", b.TargetId);
@@ -327,6 +349,10 @@ public static class ProtocolJson
                 w.WriteString("type", "wait");
                 w.WriteString("unit", wait.UnitId);
                 break;
+            case Watch watch:
+                w.WriteString("type", "watch");
+                w.WriteString("unit", watch.UnitId);
+                break;
             case Exit exit:
                 w.WriteString("type", "exit");
                 w.WriteString("unit", exit.UnitId);
@@ -376,6 +402,7 @@ public static class ProtocolJson
             "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
+            "watch" => new Watch(RequiredString(e, "unit")),
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
@@ -678,6 +705,11 @@ public static class ProtocolJson
         if (unit.WindupAt is { } windup)
         {
             WriteCoord(w, "windupAt", windup);
+        }
+
+        if (unit.Watching)
+        {
+            w.WriteBoolean("watching", true);
         }
 
         WriteRosterFields(w, u);

@@ -46,6 +46,29 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// (issue 338).
     /// </summary>
     public IReadOnlySet<string> Out { get; init; } = new HashSet<string>(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Overwatch's counts for the game (DESIGN.md 13.17, round 115), per side: watches taken,
+    /// watches taken while a strike at a displayed 50 or more was legal, and watch shots fired.
+    /// </summary>
+    public WatchCounts PlayerWatch { get; init; } = WatchCounts.Zero;
+
+    /// <inheritdoc cref="PlayerWatch"/>
+    public WatchCounts EnemyWatch { get; init; } = WatchCounts.Zero;
+}
+
+/// <summary>One side's overwatch counts in a game (DESIGN.md 13.17).</summary>
+public sealed record WatchCounts(int Taken, int OverStrike, int Shots)
+{
+    public static WatchCounts Zero { get; } = new(0, 0, 0);
+
+    /// <summary>The counts after one event, read on the phase <paramref name="phase"/> it happened in.</summary>
+    public WatchCounts After(GameEvent e, Side side, Side phase) => e switch
+    {
+        WatchTaken t when phase == side => this with { Taken = Taken + 1, OverStrike = OverStrike + (t.PassedUpHit >= Overwatch.OverStrikeHit ? 1 : 0) },
+        WatchFired when phase != side => this with { Shots = Shots + 1 },
+        _ => this,
+    };
 }
 
 /// <summary>A gate's printed line and verdict.</summary>
@@ -70,6 +93,8 @@ public static class Runner
         }
 
         var lastCombatTurn = 0;
+        var playerWatch = WatchCounts.Zero;
+        var enemyWatch = WatchCounts.Zero;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -93,6 +118,12 @@ public static class Runner
                 }
 
                 Tally(mix, result.Events);
+                foreach (var e in result.Events)
+                {
+                    playerWatch = playerWatch.After(e, Side.Player, state.Phase);
+                    enemyWatch = enemyWatch.After(e, Side.Enemy, state.Phase);
+                }
+
                 if (result.Events.OfType<CombatFought>().Any())
                 {
                     lastCombatTurn = state.Turn;
@@ -103,11 +134,19 @@ public static class Runner
                 {
                     break;
                 }
+
+                if (result.Events.OfType<WatchFired>().Any(f => f.Strike.TargetHpAfter == 0))
+                {
+                    // A watch shot killed the mover (DESIGN.md 13.17): the rest of its plan is void, so plan again.
+                    break;
+                }
             }
         }
 
         return new GameResult(state.Outcome.Result, state.Turn, mix, state.Outcome.Cause, lastCombatTurn, RefusedKillOf(player))
         {
+            PlayerWatch = playerWatch,
+            EnemyWatch = enemyWatch,
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
@@ -196,7 +235,23 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+    }
+
+    /// <summary>
+    /// On an <c>overwatch: on</c> map, the per-game means of each side's watch counts (DESIGN.md
+    /// 13.17, round 115), as <c>watch player 1.2 taken 0.0 over 50 0.3 shots, enemy ...</c>; nothing on any other map.
+    /// </summary>
+    public static string Watches(IReadOnlyList<GameResult> games, MapDefinition map)
+    {
+        if (!map.OverwatchEnabled || games.Count == 0)
+        {
+            return "";
+        }
+
+        string Side(Func<GameResult, WatchCounts> of) =>
+            string.Create(CultureInfo.InvariantCulture, $"{games.Average(g => of(g).Taken):0.0} taken {games.Average(g => of(g).OverStrike):0.0} over 50 {games.Average(g => of(g).Shots):0.0} shots");
+        return $"watch player {Side(g => g.PlayerWatch)}, enemy {Side(g => g.EnemyWatch)}, ";
     }
 
     /// <summary>
