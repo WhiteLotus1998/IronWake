@@ -26,7 +26,7 @@ public static class Exposure
     /// on it, and a strike that certainly misses is not thrown on it. Certainly dead is
     /// exact and constant-free (issue 117): the raw hit at 100, so the resolved
     /// probability is one under either scheme, and the first strike's plain damage at
-    /// least the target's current HP; raw 99 prints as 100 under two rolls and still
+    /// least the target's current HP; raw 99 prints as 99 under two rolls and still
     /// counts, and a probable kill counts in full. Certainly woken is section 8's three
     /// causes through <see cref="WakeCheck"/>, on the board <see cref="Board"/> builds
     /// (issue 128); a group this command does not wake is counted from where it stands,

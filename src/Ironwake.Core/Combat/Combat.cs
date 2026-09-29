@@ -137,9 +137,23 @@ public static class Combat
         }
     }
 
-    /// <summary>The resolved probability as the forecast prints it: a percentage rounded to the nearest integer, halves away from zero.</summary>
-    public static int DisplayedHit(int hitChance, RollScheme scheme) =>
-        (int)Math.Round(HitProbability(hitChance, scheme) * 100, MidpointRounding.AwayFromZero);
+    /// <summary>
+    /// The resolved probability as the forecast prints it: a percentage rounded to the nearest
+    /// integer, halves away from zero, then held inside 1 to 99 unless the hit is certain or
+    /// impossible, so 100 prints only for a hit that cannot miss and 0 only for one that cannot
+    /// land (issue 452): a raw 95 under two rolls lands 99.55 percent and prints 99.
+    /// </summary>
+    public static int DisplayedHit(int hitChance, RollScheme scheme)
+    {
+        var probability = HitProbability(hitChance, scheme);
+        var rounded = (int)Math.Round(probability * 100, MidpointRounding.AwayFromZero);
+        return probability switch
+        {
+            <= 0 => 0,
+            >= 1 => 100,
+            _ => Math.Clamp(rounded, 1, 99),
+        };
+    }
 
     /// <summary>
     /// Whether a strike lands given its rolls: under one roll the first roll alone is read;

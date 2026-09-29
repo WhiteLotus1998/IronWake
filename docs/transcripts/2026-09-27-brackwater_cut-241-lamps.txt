@@ -1549,7 +1549,7 @@ D  wren             Wren L1 cadet              19,4   hp 11/20  Plain
 dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 6)
   pell hp 16, shieldbearer-1 hp 6
@@ -1678,7 +1678,7 @@ enemy: something in the dark acts (x2)
 enemy: move shieldbearer-1 18,3
 shieldbearer-1 moves 18,4 -> 18,3
 enemy: attack shieldbearer-1 pell
-forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 100% crit 3%
+forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 shieldbearer-1 attacks pell
   shieldbearer-1 hits pell for 10 (hp 6)
   pell hits shieldbearer-1 for 13 (hp 0)

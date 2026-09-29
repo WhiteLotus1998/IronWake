@@ -2587,7 +2587,7 @@ D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 5, shieldbearer-1 hp 0

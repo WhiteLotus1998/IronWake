@@ -2403,7 +2403,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 13/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 12)
   pell hp 16, shieldbearer-1 hp 12
@@ -2774,7 +2774,7 @@ D  teodor           Teodor L1 pikeman          8,3    hp 13/21  Plain
 C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 100% crit 3%; counter: none
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 pell attacks shieldbearer-1
   pell hits shieldbearer-1 for 13 (hp 0)
   pell hp 16, shieldbearer-1 hp 0

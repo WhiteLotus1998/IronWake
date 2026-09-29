@@ -323,17 +323,17 @@ public class ExposureTests
 
     /// <summary>
     /// Issue 117, falsified the other way: certainty is the raw hit, not the displayed one.
-    /// A raw 99 prints as 100 under two-roll averaging and the target still counts.
+    /// A raw 99 lands 99.99 percent under two-roll averaging, prints 99 (issue 452), and the target still counts.
     /// </summary>
     [Fact]
-    public void ARawNinetyNineThatPrintsAsOneHundredStillCounts()
+    public void ARawNinetyNineStillCounts()
     {
         var (state, hale, brigand) = CertainKillBoard(hpShort: 0, rawHit: 99);
         var tile = new Coord(2, 1);
         var forecast = Queries.Forecast(state.WithUnit(hale with { At = tile }), Starter, hale with { At = tile }, brigand)!.Attacker;
         Assert.Equal(RollScheme.TwoRollAverage, state.Scheme);
         Assert.Equal(99, forecast.HitChance);
-        Assert.Equal(100, forecast.DisplayedHit);
+        Assert.Equal(99, forecast.DisplayedHit);
         Assert.True(forecast.Damage >= brigand.Hp);
 
         var sum = Exposure.Of(state, Starter, hale, tile, brigand);

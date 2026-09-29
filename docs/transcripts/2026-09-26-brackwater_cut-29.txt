@@ -3297,7 +3297,7 @@ rider-2 waits
 enemy: move shieldbearer-1 14,2
 shieldbearer-1 moves 14,3 -> 14,2
 enemy: attack shieldbearer-1 pell
-forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 100% crit 3%
+forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 shieldbearer-1 attacks pell
   shieldbearer-1 hits pell for 10 (hp 0)
   shieldbearer-1 hp 15, pell hp 0
