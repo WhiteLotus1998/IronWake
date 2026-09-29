@@ -403,11 +403,11 @@ public class RivalryTests
     }
 
     [Fact]
-    public void TheRivalrySampleIsSaltmarshFordWithTheHeader()
+    public void TheRivalrySampleIsSaltmarshFordAsOf0030WithTheHeader()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var text = File.ReadAllText(Path.Combine(repo, "docs", "samples", "saltmarsh_ford_rivalry.map")).Replace("\r\n", "\n");
-        var shipped = File.ReadAllText(Path.Combine(repo, "content", "maps", "saltmarsh_ford.map")).Replace("\r\n", "\n");
+        var shipped = File.ReadAllText(Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0030.map")).Replace("\r\n", "\n");
         var map = MapFixture.Parse(text, "saltmarsh_ford_rivalry.map");
 
         Assert.Equal(text, MapFormat.Write(map, Starter));

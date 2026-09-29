@@ -114,6 +114,33 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> Saltmarsh0030 = new(() => WithSaltmarsh0030(CopyRealContent("ironwake-saltmarsh-0030-")));
+
+    private static readonly Lazy<string> LadderFreeSaltmarsh0030 = new(() => WithSaltmarsh0030(CopyWithoutLadder()));
+
+    /// <summary>
+    /// A copy of the real content directory with Saltmarsh Ford as it stood under DECISIONS/0030,
+    /// before issue 131's timing arm, kept as <c>docs/samples/saltmarsh_ford_0030.map</c>, so a
+    /// campaign journaled on that file replays on it. Made once per test run under the temp directory.
+    /// </summary>
+    public static string Saltmarsh0030ContentDirectory() => Saltmarsh0030.Value;
+
+    /// <summary>
+    /// <see cref="LadderFreeContentDirectory"/> with Saltmarsh Ford as it stood under DECISIONS/0030,
+    /// as <see cref="Saltmarsh0030ContentDirectory"/> says.
+    /// </summary>
+    public static string LadderFreeSaltmarsh0030ContentDirectory() => LadderFreeSaltmarsh0030.Value;
+
+    private static string WithSaltmarsh0030(string target)
+    {
+        var repo = Directory.GetParent(RealContentDirectory())!.FullName;
+        File.Copy(
+            Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0030.map"),
+            Path.Combine(target, "maps", "saltmarsh_ford.map"),
+            overwrite: true);
+        return target;
+    }
+
     private static string CopyRealContent(string prefix)
     {
         var source = RealContentDirectory();

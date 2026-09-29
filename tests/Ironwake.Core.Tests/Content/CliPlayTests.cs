@@ -1317,6 +1317,39 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 131, the timing arm: Code's play of Saltmarsh Ford with the ford group arriving behind
+    /// the party (seed 511) replays on the shipped map to its transcript, the pair spawning on the
+    /// command that stops Teodor on 10,4 and the rout won on turn 11.
+    /// </summary>
+    [Fact]
+    public void TheTimingArmPlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    {
+        var output = RunShipped("saltmarsh_ford.map", "2026-09-29-saltmarsh_ford-511.script", 511, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("  brigand-1 arrives at 0,9, group ford, aggressive\n", output);
+        Assert.Contains("battle won: rout", output);
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-511.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 131: Chat's cold re-rate of Saltmarsh Ford (seed 503) replays on the file it was played
+    /// on, kept as <c>docs/samples/saltmarsh_ford_0030.map</c> once the ford group became a spawn on
+    /// the shipped map: every line accepted and the rout won on turn 10.
+    /// </summary>
+    [Fact]
+    public void TheReRateBeforeTheTimingArmReplaysOnTheFileItWasPlayedOn()
+    {
+        var output = RunSample("saltmarsh_ford_0030.map", "2026-09-29-saltmarsh_ford-503.script", 503, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.DoesNotContain("rejected", output);
+        Assert.Contains("-- player phase, turn 10 --", output);
+        Assert.Contains("battle won: rout", output);
+    }
+
+    /// <summary>
     /// Issue 471: the two re-rates of the retuned Harrow Weir (Code's seed 463, Chat's seed 473) replay
     /// on the file they were played on, kept as <c>docs/samples/harrow_weir_0087.map</c> once the weir
     /// crest became a crossing on the shipped map: every line accepted and the Foreman dead on turn 6.
