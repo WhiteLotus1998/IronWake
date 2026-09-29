@@ -349,6 +349,26 @@ public static class Queries
     }
 
     /// <summary>
+    /// The sleeping groups <paramref name="unit"/> would wake by stopping on <paramref name="from"/>
+    /// (issue 458): <see cref="WakeCheck.Run"/> on the board as it stands and the same board with
+    /// the unit moved there, no combat and no death, so the causes are proximity and the
+    /// <c>wake_links:</c> calls it sets off, in the check's own order. The unit's own tile wakes
+    /// nothing new, since the check already ran on where it stands. Unpriced: who could then strike
+    /// is <see cref="Threats"/>' and <see cref="SleepingThreats"/>' business. Null when the unit
+    /// cannot stand on the tile this phase, or when the state is not a player phase. Read-only.
+    /// </summary>
+    public static IReadOnlyList<GroupWoke>? StopWakes(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        var standable = CanStandOn(state, content, unit, from) || state.CantoReachOf(unit, content)?.CanEnd(from) == true;
+        if (state.Phase != Side.Player || unit.Side != Side.Player || !standable)
+        {
+            return null;
+        }
+
+        return WakeCheck.Run(state, state.WithUnit(unit with { At = from }), content, Array.Empty<Coord>(), Array.Empty<string>());
+    }
+
+    /// <summary>
     /// Whether <paramref name="unit"/> ending its move on <paramref name="from"/> wins the
     /// battle there and then (issue 356): the board with the unit on the tile and nothing else
     /// changed reads <see cref="BattleResult.Won"/>, as the captain on a Seize throne does. No

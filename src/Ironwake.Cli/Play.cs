@@ -1175,7 +1175,7 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile)));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile), Queries.StopWakes(_state, _content, unit, tile)));
         if (BracedThreat(_state, _content, unit, tile) is { } braced)
         {
             _out.WriteLine(braced);
@@ -1230,8 +1230,11 @@ public sealed class PlaySession
     /// and unpriced: <c>anvil: shieldbearer-1 could step to 17,0 so soldier-1 strikes you pinned
     /// from 19,0</c>, or <c>could hold 17,0</c> when the tile is the anvil's own; a plan with an
     /// enemy the player does not see is left out.
+    /// A stop that wakes a sleeping group (<see cref="Queries.StopWakes"/>, issue 458) is one row
+    /// before the sleeping groups, naming each group and why, unpriced:
+    /// <c>stopping here wakes: ford (proximity), weir (called by ford)</c>.
     /// </summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null)
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         if (wins)
@@ -1288,6 +1291,11 @@ public sealed class PlaySession
                 : $"  in the dark, unpriced: {string.Join(", ", near.Select(n => $"{Dusk.Unseen} at {n.At} ({n.Distance})"))}");
         }
 
+        if (wakes is { Count: > 0 })
+        {
+            rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{w.Group} ({WakeCauseText(w)})"))}");
+        }
+
         foreach (var group in asleep)
         {
             rows.Add($"  group {group.Group} asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{m.Id} at {m.At}"))}");
@@ -1300,6 +1308,9 @@ public sealed class PlaySession
 
         return string.Join("\n", rows);
     }
+
+    /// <summary>Why a group wakes, as the wake event prints it: <c>called by ford</c> for a linked call, else the cause in lower case.</summary>
+    public static string WakeCauseText(GroupWoke woke) => woke.CalledBy is { } by ? $"called by {by}" : woke.Cause.ToString().ToLowerInvariant();
 
     /// <summary>
     /// The one forecast line, printed before an attack from either side and by the
@@ -1777,7 +1788,7 @@ public sealed class PlaySession
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
-                return $"group {g.Group} wakes: {(g.CalledBy is { } by ? $"called by {by}" : g.Cause.ToString().ToLowerInvariant())}"
+                return $"group {g.Group} wakes: {WakeCauseText(g)}"
                     + (g.Lamps.Count > 0 ? $"; its lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{l.UnitId} {l.At}"))})" : "");
             case MapEventFired m:
                 return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
