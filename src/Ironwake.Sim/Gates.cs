@@ -55,6 +55,57 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
 
     /// <inheritdoc cref="PlayerWatch"/>
     public WatchCounts EnemyWatch { get; init; } = WatchCounts.Zero;
+
+    /// <summary>The pincer's counts for the game (DESIGN.md 13.13, issue 495); zero on a map without the header.</summary>
+    public PinCounts Pins { get; init; } = PinCounts.Zero;
+}
+
+/// <summary>
+/// The pincer's counts in a game (DESIGN.md 13.13, issue 495): the enemy anvils that acted
+/// (<see cref="EnemyAi.PlanWithAnvils"/>, counted when an anvil plan's first command is
+/// applied), and each side's strikes made pinned and landed pinned. A strike is read from
+/// the resolver's <see cref="CombatFought"/>; whether it was pinned is
+/// <see cref="Pincer.PinnedBy"/> on the board the resolver struck on, the one function its
+/// hit reads, so the count is of what happened and never of a plan.
+/// </summary>
+public sealed record PinCounts(int Anvils, int EnemyStrikes, int EnemyLanded, int PlayerStrikes, int PlayerLanded)
+{
+    public static PinCounts Zero { get; } = new(0, 0, 0, 0, 0);
+
+    /// <summary>
+    /// The counts after <paramref name="command"/> was applied to <paramref name="before"/>
+    /// with <paramref name="events"/>: every strike of a <see cref="CombatFought"/> an Attack
+    /// raised, counted for its striker's side when that striker was pinning its foe.
+    /// </summary>
+    public PinCounts After(BattleState before, Command command, IReadOnlyList<GameEvent> events)
+    {
+        if (command is not Attack attack || before.Find(attack.UnitId) is not { } attacker || before.Find(attack.TargetId) is not { } target)
+        {
+            return this;
+        }
+
+        var pinning = new HashSet<string>(StringComparer.Ordinal);
+        if (Pincer.PinnedBy(before, attacker, target) is not null)
+        {
+            pinning.Add(attacker.Id);
+        }
+
+        if (Pincer.PinnedBy(before, target, attacker) is not null)
+        {
+            pinning.Add(target.Id);
+        }
+
+        var next = this;
+        foreach (var strike in events.OfType<CombatFought>().SelectMany(f => f.Strikes).Where(s => pinning.Contains(s.AttackerId)))
+        {
+            var landed = strike.Hit ? 1 : 0;
+            next = before.Find(strike.AttackerId)!.Side == Side.Enemy
+                ? next with { EnemyStrikes = next.EnemyStrikes + 1, EnemyLanded = next.EnemyLanded + landed }
+                : next with { PlayerStrikes = next.PlayerStrikes + 1, PlayerLanded = next.PlayerLanded + landed };
+        }
+
+        return next;
+    }
 }
 
 /// <summary>One side's overwatch counts in a game (DESIGN.md 13.17).</summary>
@@ -95,6 +146,7 @@ public static class Runner
         var lastCombatTurn = 0;
         var playerWatch = WatchCounts.Zero;
         var enemyWatch = WatchCounts.Zero;
+        var pins = PinCounts.Zero;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -102,7 +154,18 @@ public static class Runner
                 turns.Add(TurnState.Read(state, content));
             }
 
-            var commands = state.Phase == Side.Player ? player.Next(state, content) : EnemyAi.Plan(state, content);
+            var anvils = new List<EnemyAi.AnvilPlan>();
+            IReadOnlyList<Command> commands;
+            if (state.Phase == Side.Player)
+            {
+                commands = player.Next(state, content);
+            }
+            else
+            {
+                (commands, var planned) = EnemyAi.PlanWithAnvils(state, content);
+                anvils.AddRange(planned);
+            }
+
             if (commands.Count == 0)
             {
                 throw new InvalidOperationException($"the player produced no command on turn {state.Turn}");
@@ -118,6 +181,13 @@ public static class Runner
                 }
 
                 Tally(mix, result.Events);
+                pins = pins.After(state, command, result.Events);
+                if (anvils.FindIndex(a => a.Commands[0] == command) is var anvil and >= 0)
+                {
+                    pins = pins with { Anvils = pins.Anvils + 1 };
+                    anvils.RemoveAt(anvil);
+                }
+
                 foreach (var e in result.Events)
                 {
                     playerWatch = playerWatch.After(e, Side.Player, state.Phase);
@@ -147,6 +217,7 @@ public static class Runner
         {
             PlayerWatch = playerWatch,
             EnemyWatch = enemyWatch,
+            Pins = pins,
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
@@ -235,7 +306,7 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Pins(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
     }
 
     /// <summary>
@@ -252,6 +323,23 @@ public static class Gates
         string Side(Func<GameResult, WatchCounts> of) =>
             string.Create(CultureInfo.InvariantCulture, $"{games.Average(g => of(g).Taken):0.0} taken {games.Average(g => of(g).OverStrike):0.0} over 50 {games.Average(g => of(g).Shots):0.0} shots");
         return $"watch player {Side(g => g.PlayerWatch)}, enemy {Side(g => g.EnemyWatch)}, ";
+    }
+
+    /// <summary>
+    /// On a <c>pincer: on</c> map, the pincer's totals over the games (DESIGN.md 13.13, issue
+    /// 495), as <c>pins enemy anvils in 40/40 games 167 anvils 158 strikes pinned 120 landed,
+    /// player 12 strikes pinned 9 landed, </c>; nothing on any other map.
+    /// </summary>
+    public static string Pins(IReadOnlyList<GameResult> games, MapDefinition map)
+    {
+        if (!map.PincerEnabled || games.Count == 0)
+        {
+            return "";
+        }
+
+        return $"pins enemy anvils in {games.Count(g => g.Pins.Anvils > 0)}/{games.Count} games {games.Sum(g => g.Pins.Anvils)} anvils "
+            + $"{games.Sum(g => g.Pins.EnemyStrikes)} strikes pinned {games.Sum(g => g.Pins.EnemyLanded)} landed, "
+            + $"player {games.Sum(g => g.Pins.PlayerStrikes)} strikes pinned {games.Sum(g => g.Pins.PlayerLanded)} landed, ";
     }
 
     /// <summary>

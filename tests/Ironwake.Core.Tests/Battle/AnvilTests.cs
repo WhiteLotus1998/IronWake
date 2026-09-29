@@ -1,3 +1,5 @@
+using Ironwake.Core.Tests.Maps;
+using Ironwake.Sim;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
 namespace Ironwake.Core.Tests.Battle;
@@ -112,6 +114,38 @@ public class AnvilTests
         }
 
         Assert.True(pinned, "the soldier strikes pell pinned by the brigand");
+    }
+
+    [Fact]
+    public void ThePlanReportsTheAnvilsItTookAndNoneWithoutTheHeader()
+    {
+        var state = Enemy(Trio, roster: Bare);
+
+        var (commands, anvils) = EnemyAi.PlanWithAnvils(state, Starter);
+
+        Assert.Equal(EnemyAi.Plan(state, Starter), commands);
+        Assert.Equal(EnemyAi.Anvil(state, Starter, state.Find("brigand-1")!, None), Assert.Single(anvils));
+        Assert.Equal(anvils[0].Commands[0], commands[0]);
+        Assert.Empty(EnemyAi.PlanWithAnvils(Enemy(Trio, pincer: false, roster: Bare), Starter).Anvils);
+    }
+
+    /// <summary>
+    /// Issue 495: the Sim's runner counts an enemy anvil when the plan's first command for it is
+    /// applied. On the Brackwater sample the chase group anvils (#429); on the Tollgate sample the
+    /// rider, the only Aggressive unit, is alone in its group, so no enemy anvil acts there.
+    /// </summary>
+    [Fact]
+    public void TheSimCountsAnvilsOnTheBrackwaterSampleAndNoneOnTheTollgateSample()
+    {
+        var repo = Directory.GetParent(Content.Fixture.RealContentDirectory())!.FullName;
+        MapDefinition Sample(string file) => Ironwake.Content.MapFiles.Load(Path.Combine(repo, "docs", "samples", file), MapFixture.Content);
+
+        var brackwater = Runner.Play(MapFixture.Content, Sample("brackwater_cut_pincer.map"), 1, new HeuristicPlayer());
+        var tollgate = Runner.Play(MapFixture.Content, Sample("the_tollgate_pincer.map"), 1, new HeuristicPlayer());
+
+        Assert.True(brackwater.Pins.Anvils > 0, $"anvils {brackwater.Pins.Anvils}");
+        Assert.True(brackwater.Pins.EnemyStrikes > 0, $"enemy pinned strikes {brackwater.Pins.EnemyStrikes}");
+        Assert.Equal(0, tollgate.Pins.Anvils);
     }
 
     [Fact]
