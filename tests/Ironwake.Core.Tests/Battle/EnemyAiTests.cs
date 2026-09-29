@@ -221,15 +221,48 @@ public class EnemyAiTests
     }
 
     /// <summary>
+    /// Issue 131, the timing arm: Saltmarsh Ford's ford group is not on the board at the start.
+    /// It arrives, unannounced, on the south edge at 0,9 and 1,9, behind the party, when a player
+    /// unit stops on any tile of the east crossing's mouth (10,4, 9,4, 11,4, 10,5), which is where
+    /// the fort wakes, so whoever holds 10,4 faces the fort and the pair at once.
+    /// </summary>
+    [Theory]
+    [InlineData(10, 4)]
+    [InlineData(9, 4)]
+    [InlineData(11, 4)]
+    [InlineData(10, 5)]
+    public void OnSaltmarshFordTheFordGroupArrivesBehindThePartyWhenTheEastCrossingIsEntered(int x, int y)
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map"), Starter);
+        var start = BattleState.From(map, Starter, Starter.Cast, 503);
+        Assert.Null(start.Find("brigand-1"));
+        Assert.DoesNotContain(start.UnitsOf(Side.Enemy), u => u.Group == "ford");
+        var teodor = start.Find("teodor")! with { At = new Coord(x, y) };
+        var events = new List<GameEvent>();
+
+        var state = MapEvents.AfterMove(start.WithUnit(teodor), Starter, teodor, events);
+
+        Assert.Contains(new MapEventFired("ford", false), events);
+        Assert.Contains(new MapEventFired("ford_second", false), events);
+        var brigand = state.Find("brigand-1")!;
+        var soldier = state.Find("soldier-2")!;
+        Assert.Equal((new Coord(0, 9), "ford", Behavior.Aggressive), (brigand.At, brigand.Group, brigand.Behavior));
+        Assert.Equal((new Coord(1, 9), "ford", Behavior.Aggressive), (soldier.At, soldier.Group, soldier.Behavior));
+    }
+
+    /// <summary>
     /// Issue 131, target 1: Saltmarsh Ford's west crossing opens into forest at 3,4 and 4,4,
     /// so the approach rule's avoid key stops the brigand in the forest south of the bridge
     /// on enemy phase 1 instead of on open ground beside the party. The party stands where
-    /// the heuristic puts it on turn 1, out of the brigand's reach that phase.
+    /// the heuristic puts it on turn 1, out of the brigand's reach that phase. Read on the map
+    /// as of DECISIONS/0030, where the ford group starts on the north bank; the shipped map
+    /// spawns it later (issue 131's timing arm) and keeps the forest.
     /// </summary>
     [Fact]
-    public void OnSaltmarshFordTheBrigandsApproachStopsInTheForestSouthOfTheWestCrossing()
+    public void OnSaltmarshFordAsOf0030TheBrigandsApproachStopsInTheForestSouthOfTheWestCrossing()
     {
-        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map"), Starter);
+        var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
+        var map = MapFiles.Load(Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0030.map"), Starter);
         var start = BattleState.From(map, Starter, Starter.Cast, 7);
         foreach (var (id, x, y) in new[] { ("captain", 6, 4), ("ottilie", 6, 5), ("teodor", 7, 4), ("wren", 5, 5) })
             start = start.WithUnit(start.Find(id)! with { At = new Coord(x, y) });

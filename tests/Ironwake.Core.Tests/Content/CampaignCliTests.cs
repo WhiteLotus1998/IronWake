@@ -19,7 +19,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-09-25-campaign-139.script");
 
-        var output = Run(out var exit, "campaign", "--seed", "139", "--script", script, "--content", Fixture.LadderFreeContentDirectory());
+        var output = Run(out var exit, "campaign", "--seed", "139", "--script", script, "--content", Fixture.LadderFreeSaltmarsh0030ContentDirectory());
 
         Assert.Equal(1, exit);
         Assert.Contains("Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell\n", output);
@@ -35,7 +35,7 @@ public class CampaignCliTests
     {
         var script = Transcript("2026-09-26-campaign-139-ladder.script");
 
-        var output = Run(out _, "campaign", "--seed", "139", "--script", script, "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "campaign", "--seed", "139", "--script", script, "--content", Fixture.Saltmarsh0030ContentDirectory());
 
         Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 3\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

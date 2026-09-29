@@ -350,10 +350,10 @@ public class BraceTests
     /// <c>brace: on</c> added, so a play of it reads against the plain map's re-rate (#131).
     /// </summary>
     [Fact]
-    public void TheSaltmarshBraceSampleIsTheShippedMapWithOnlyTheBraceHeaderAdded()
+    public void TheSaltmarshBraceSampleIsTheMapAsOf0030WithOnlyTheBraceHeaderAdded()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var shippedPath = Path.Combine(repo, "content", "maps", "saltmarsh_ford.map");
+        var shippedPath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0030.map");
         var samplePath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_brace.map");
         var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').ToList();
         var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
