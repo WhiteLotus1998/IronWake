@@ -272,7 +272,7 @@ public sealed class ProtocolSession
         }
     }
 
-    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), and whether the move itself wins the map (issue 356).</summary>
+    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), on a <c>pincer: on</c> map the planner's anvil plans against the unit, unpriced (<see cref="Queries.Anvils"/>, issue 457), and whether the move itself wins the map (issue 356).</summary>
     private string Threat(JsonElement request, BattleUnit unit)
     {
         if (unit.Side != Side.Player)
@@ -362,9 +362,32 @@ public sealed class ProtocolSession
                 WriteIds("cannotSee", unseeing.Where(e => !Hidden(e)));
             }
 
+            var anvils = Queries.Anvils(_state, _content, unit, tile)!.Where(a => !Hidden(a.Anvil) && !Hidden(a.Follower)).ToList();
+            if (_state.Map.PincerEnabled)
+            {
+                w.WriteStartArray("anvils");
+                foreach (var anvil in anvils)
+                {
+                    w.WriteStartObject();
+                    w.WriteString("anvil", anvil.Anvil.Id);
+                    w.WriteStartObject("tile");
+                    w.WriteNumber("x", anvil.Tile.X);
+                    w.WriteNumber("y", anvil.Tile.Y);
+                    w.WriteEndObject();
+                    w.WriteString("follower", anvil.Follower.Id);
+                    w.WriteStartObject("from");
+                    w.WriteNumber("x", anvil.From.X);
+                    w.WriteNumber("y", anvil.From.Y);
+                    w.WriteEndObject();
+                    w.WriteEndObject();
+                }
+
+                w.WriteEndArray();
+            }
+
             var wins = Queries.MoveWins(_state, _content, unit, tile);
             w.WriteBoolean("wins", wins);
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins));
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins, anvils));
 
             void WriteIds(string name, IEnumerable<BattleUnit> units)
             {

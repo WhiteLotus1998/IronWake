@@ -229,6 +229,106 @@ public class AnvilTests
         }
     }
 
+    /// <summary>The trio on the player phase before the one <see cref="Enemy"/> plans.</summary>
+    private static BattleState Player(bool pincer = true) => BattleFixture.Start(map: Field(pincer, Trio), roster: Bare);
+
+    private static string ThreatText(BattleState state, string unitId)
+    {
+        var unit = state.Find(unitId)!;
+        var lines = Queries.Threats(state, Starter, unit, unit.At)!;
+        return Ironwake.Cli.PlaySession.ThreatText(state, Starter, unit, unit.At, lines, Queries.SleepingThreats(state, Starter, unit, unit.At)!, anvils: Queries.Anvils(state, Starter, unit, unit.At));
+    }
+
+    /// <summary>
+    /// Issue 457: on a <c>pincer: on</c> map <c>threat</c> lists the planner's anvil plan against
+    /// the unit, and the plan it lists is the one <see cref="EnemyAi.Anvil"/> returns on the board
+    /// the enemy phase starts from: the anvil, its tile, the follower, and the tile across.
+    /// </summary>
+    [Fact]
+    public void TheThreatQueryListsTheAnvilPlanThePlannerWouldTake()
+    {
+        var state = Player();
+        var pell = state.Find("pell")!;
+        var enemyPhase = Resolver.Apply(state, Starter, new EndPhase()).Next;
+
+        var line = Assert.Single(Queries.Anvils(state, Starter, pell, pell.At)!);
+        var plan = EnemyAi.Anvil(enemyPhase, Starter, enemyPhase.Find("brigand-1")!, None)!;
+
+        Assert.Equal("brigand-1", line.Anvil.Id);
+        Assert.Equal(plan.Tile, line.Tile);
+        Assert.Equal(plan.FollowerId, line.Follower.Id);
+        Assert.Equal(new Coord(2 * pell.At.X - plan.Tile.X, 2 * pell.At.Y - plan.Tile.Y), line.From);
+        Assert.Contains($"  anvil: brigand-1 could step to {plan.Tile} so soldier-1 strikes you pinned from {line.From}", ThreatText(state, "pell"));
+    }
+
+    /// <summary>Issue 457: an anvil already beside the unit on its tile is printed as holding it, not stepping to it.</summary>
+    [Fact]
+    public void AnAnvilOnItsOwnTileIsPrintedAsHoldingIt()
+    {
+        var edge = Trio.Replace("P captain 4,2", "P captain 4,0").Replace("E brigand 1,2", "E brigand 3,0").Replace("E soldier 7,2", "E soldier 7,0");
+        var state = BattleFixture.Start(map: Field(true, edge), roster: Bare);
+        var pell = state.Find("pell")!;
+
+        var line = Assert.Single(Queries.Anvils(state, Starter, pell, pell.At)!);
+
+        Assert.Equal(line.Anvil.At, line.Tile);
+        Assert.Contains($"  anvil: brigand-1 could hold {line.Tile} so soldier-1 strikes you pinned from {line.From}", ThreatText(state, "pell"));
+    }
+
+    /// <summary>Issue 457 at dusk: a plan whose follower the player does not see is not printed, as a strike row from it would not be.</summary>
+    [Fact]
+    public void AtDuskAPlanWithAnUnseenFollowerIsNotPrinted()
+    {
+        var dark = Field(true, Trio.Replace("E brigand 1,2", "E brigand 3,2")).Replace("pincer: on\n", "pincer: on\ndusk: 2\n");
+        var state = BattleFixture.Start(map: dark, roster: Bare);
+        var pell = state.Find("pell")!;
+
+        var line = Assert.Single(Queries.Anvils(state, Starter, pell, pell.At)!);
+
+        Assert.Equal("soldier-1", line.Follower.Id);
+        Assert.False(Dusk.Seen(state, line.Follower));
+        Assert.DoesNotContain("anvil:", ThreatText(state, "pell"));
+        Assert.DoesNotContain("\"anvil\":", new Ironwake.Cli.ProtocolSession(Starter, state, TextWriter.Null).Answer("""{"query":"threat","unit":"pell"}"""));
+    }
+
+    /// <summary>Issue 457: the anvil line is unpriced, so the threat total reads the same with the header as without it.</summary>
+    [Fact]
+    public void TheAnvilLineAddsNothingToTheThreatTotal()
+    {
+        var pincer = ThreatText(Player(), "pell");
+        var plain = ThreatText(Player(pincer: false), "pell");
+
+        Assert.Contains("  anvil: ", pincer);
+        Assert.Equal(plain.Split('\n').Single(l => l.StartsWith("  if all land: ", StringComparison.Ordinal)), pincer.Split('\n').Single(l => l.StartsWith("  if all land: ", StringComparison.Ordinal)));
+        Assert.Equal(plain, string.Join("\n", pincer.Split('\n').Where(l => !l.StartsWith("  anvil: ", StringComparison.Ordinal))));
+    }
+
+    /// <summary>Issue 457: without the header the query lists no anvil, the text has no anvil line, and the protocol carries no <c>anvils</c>.</summary>
+    [Fact]
+    public void WithoutTheHeaderTheThreatQueryListsNoAnvil()
+    {
+        var state = Player(pincer: false);
+        var pell = state.Find("pell")!;
+
+        Assert.Empty(Queries.Anvils(state, Starter, pell, pell.At)!);
+        Assert.DoesNotContain("anvil", ThreatText(state, "pell"));
+        Assert.DoesNotContain("\"anvils\"", new Ironwake.Cli.ProtocolSession(Starter, state, TextWriter.Null).Answer("""{"query":"threat","unit":"pell"}"""));
+    }
+
+    /// <summary>Issue 457: the protocol's threat answer carries the anvil plan beside the strikes, and its text carries the line.</summary>
+    [Fact]
+    public void TheProtocolsThreatAnswerCarriesTheAnvils()
+    {
+        var state = Player();
+        var pell = state.Find("pell")!;
+        var line = Assert.Single(Queries.Anvils(state, Starter, pell, pell.At)!);
+
+        var answer = new Ironwake.Cli.ProtocolSession(Starter, state, TextWriter.Null).Answer("""{"query":"threat","unit":"pell"}""");
+
+        Assert.Contains($"\"anvils\":[{{\"anvil\":\"brigand-1\",\"tile\":{{\"x\":{line.Tile.X},\"y\":{line.Tile.Y}}},\"follower\":\"soldier-1\",\"from\":{{\"x\":{line.From.X},\"y\":{line.From.Y}}}}}]", answer);
+        Assert.Contains("  anvil: brigand-1 could step to ", answer);
+    }
+
     private static MapDefinition Throne(string units, string row0) =>
         Maps.MapFixture.Parse(Field(true, units, "seize").Replace("\n\n.........\n", $"\n\n{row0}\n"), "throne.map");
 }
