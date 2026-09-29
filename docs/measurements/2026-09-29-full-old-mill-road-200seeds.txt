@@ -1,0 +1,30 @@
+full: 1 maps from content, 200 seeds, two-roll average
+gate 1 beatable: old_mill_road, heuristic wins 65/200 (33 %), winning turn median 8 p90 10 limit 12, losses 31 timeout 104 captain 0 protected, quiet tail 6.0, refused kill p50 0.9892 over 31, two-roll average: FAILED
+gate 2 decisions matter: old_mill_road, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: old_mill_road, 0 player units killed from deployment: ok
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.315: ok
+  wren: drop 0.315 se 0.040 own [atk 273 dmg 8443 heal 0 abs 918] rest baseline [atk 514 dmg 11755 heal 0 abs 1336] rest benched [atk 357 dmg 9420 heal 0 abs 1026] benched losses 134 timeout 64 captain 0 protected, refused kill p50 0.0346 over 134
+  captain captain: baseline [atk 514 dmg 11755 heal 0 abs 1336] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 438 ms: ok
+gate 5 forecast honesty: 10094 combats (4075 with gauntlets), 20476 strikes, hits 12655 expected 12663.1, crits 861 expected 888.4, damage mismatches 0: ok
+gate 7 speed: old_mill_road, 5 AI-vs-AI games, 53 turns, slowest 3 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 5512 ms: ok
+free prefix: old_mill_road, 2 of 2, 4, 6 tried, slack median 4 p90 2 (printed, not gated)
+  prefix 2: wins 57/200, drop 0.040 se 0.042, free
+  prefix 4: wins 19/200, drop 0.230 se 0.039, not free
+  prefix 6: wins 2/200, drop 0.315 se 0.040, not free
+  prefix 4 refunded: wins 30/200, drop 0.175 se 0.042, not free, limit raised by 4 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 5.0
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 10 quiet 99 live 91, wake tax 0.15
+  turn 4: dead 45 quiet 107 live 48, wake tax 0.06
+  turn 5: dead 0 quiet 71 live 125, wake tax 0.00
+  turn 6: dead 0 quiet 20 live 170, wake tax 0.00
+  turn 7: dead 0 quiet 15 live 158, wake tax 0.00
+  turn 8: dead 0 quiet 15 live 121, wake tax 0.00
+  turn 9: dead 0 quiet 15 live 77, wake tax 0.00
+  turn 10: dead 0 quiet 15 live 42, wake tax 0.00
+  turn 11: dead 0 quiet 15 live 25, wake tax 0.00
+  turn 12: dead 0 quiet 15 live 19, wake tax 0.00
+full: FAILED
