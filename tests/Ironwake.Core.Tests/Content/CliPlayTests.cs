@@ -1128,7 +1128,7 @@ public class CliPlayTests
         var dir = Path.Combine(Path.GetTempPath(), "ironwake-393-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(dir);
         var map = Path.Combine(dir, "harrow_weir.map");
-        File.WriteAllText(map, File.ReadAllText(Path.Combine(Fixture.RealContentDirectory(), "maps", "harrow_weir.map")).Replace("wake_links: ford>weir\n", ""));
+        File.WriteAllText(map, File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "samples", "harrow_weir_0081.map")).Replace("wake_links: ford>weir\n", ""));
         string output;
         try
         {
@@ -1202,7 +1202,7 @@ public class CliPlayTests
     public void AWokenForemanStrikesTheBridgeFromTwelveSixOnSeed257()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var output = Run(out _, "play", "harrow_weir", "--seed", "257", "--script", Path.Combine(repo, "docs", "transcripts", "2026-09-27-harrow_weir-257.script"), "--content", Fixture.RealContentDirectory());
+        var output = Run(out _, "play", Path.Combine(repo, "docs", "samples", "harrow_weir_0081.map"), "--seed", "257", "--script", Path.Combine(repo, "docs", "transcripts", "2026-09-27-harrow_weir-257.script"), "--content", Fixture.RealContentDirectory());
 
         var phase = output[output.IndexOf("-- enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- enemy phase ends, turn 3 --", StringComparison.Ordinal)];
         Assert.Contains("weir_foreman-1 moves 13,6 -> 12,6\n", phase);
@@ -1219,7 +1219,7 @@ public class CliPlayTests
     [Fact]
     public void TheJournaledSeed409PlayReplaysWithTheCalledForeman()
     {
-        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-409.script", 409, out var exit);
+        var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-409.script", 409, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("group weir wakes: called by ford\n", output);
@@ -1238,7 +1238,7 @@ public class CliPlayTests
     [Fact]
     public void TheJournaledSeed419PlayReplaysWithTheFullHpThrowAndTheWalkHome()
     {
-        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-419.script", 419, out var exit);
+        var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-419.script", 419, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("group weir wakes: proximity\n", output);
@@ -1258,7 +1258,7 @@ public class CliPlayTests
     [Fact]
     public void TheJournaledSeed421PlayReplaysWithThePatrolAndTheBox()
     {
-        var output = RunShipped("harrow_weir.map", "2026-09-27-harrow_weir-421.script", 421, out var exit);
+        var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-421.script", 421, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("group ford wakes: proximity\ngroup weir wakes: called by ford\n", output);
@@ -1271,11 +1271,73 @@ public class CliPlayTests
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-harrow_weir-421.txt")).ReplaceLineEndings("\n"), output);
     }
 
-    /// <summary>A transcript script played on the shipped Harrow Weir without <c>--strict</c>, so a line the rules have moved past still plays on.</summary>
+    /// <summary>
+    /// Issue 456's first check: the Critic's seed 601 line (captain on 7,0, Gust from 9,6 on turn 4)
+    /// on the retuned file, its <c>shieldbearer-1</c> read as the weir-only bulwark. At res 3 the Gust
+    /// reads 9 x2 and leaves the bulwark on 6, and the second hit comes from 10,6: on enemy phase 4
+    /// the Foreman throws at Teodor there and the bulwark falls on Teodor's counter.
+    /// </summary>
+    [Fact]
+    public void OnTheRetunedWeirTheCriticsGustFromNineSixLeavesTheBulwarkStanding()
+    {
+        var output = RunRetuned("2026-09-28-harrow_weir-601.script", 601, dropTail: 0);
+
+        Assert.Contains("event north1 is blocked: its tile is held\n", output);
+        Assert.Contains("forecast pell -> weir_shieldbearer-1 with Gust: dmg 9 x2 hit 100% crit 8%; counter: none\n", output);
+        Assert.Contains("  pell hits weir_shieldbearer-1 for 9 (hp 6)\n", output);
+        var fourth = output[output.IndexOf("-- enemy phase, turn 4 --", StringComparison.Ordinal)..output.IndexOf("-- player phase, turn 5 --", StringComparison.Ordinal)];
+        Assert.Contains("enemy: attack weir_foreman-1 teodor\n", fourth);
+        Assert.Contains("  teodor hits weir_shieldbearer-1 for 6 (hp 0)\n", fourth);
+    }
+
+    /// <summary>
+    /// Issue 456, one spawn per door: on the seed 601 line with the last turn's two strikes left out,
+    /// the captain on 7,0 spends only the rider, and on enemy phase 5 the turn-5 brigand arrives at
+    /// 9,11 on the south edge beside the west wave.
+    /// </summary>
+    [Fact]
+    public void OnTheRetunedWeirTheCaptainOnSevenZeroSpendsOnlyTheRider()
+    {
+        var output = RunRetuned("2026-09-28-harrow_weir-601.script", 601, dropTail: 2);
+
+        Assert.Contains("event north1 is blocked: its tile is held\n", output);
+        var fifth = output[output.IndexOf("-- enemy phase, turn 5 --", StringComparison.Ordinal)..];
+        Assert.Contains("arrives at 0,11, group west, aggressive\n", fifth);
+        Assert.Contains("arrives at 9,11, group south, aggressive\n", fifth);
+        Assert.DoesNotContain("is blocked", fifth);
+    }
+
+    /// <summary>
+    /// A Critic script from before issue 456 played loose on the shipped, retuned Harrow Weir, its
+    /// <c>shieldbearer-1</c> renamed to the weir-only bulwark, its last <paramref name="dropTail"/>
+    /// lines left out and the turn ended.
+    /// </summary>
+    private static string RunRetuned(string script, int seed, int dropTail)
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var lines = File.ReadAllLines(Path.Combine(repo, "docs", "transcripts", script)).Where(l => l.Length > 0).ToList();
+        var kept = lines.Take(lines.Count - dropTail).Select(l => l.Replace("shieldbearer-1", "weir_shieldbearer-1", StringComparison.Ordinal));
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-456-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, string.Join("\n", kept) + (dropTail > 0 ? "\nend\n" : "\n"));
+        try
+        {
+            return Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", path, "--content", Fixture.RealContentDirectory());
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    /// <summary>
+    /// A transcript script played without <c>--strict</c>, so a line the rules have moved past still
+    /// plays on, on Harrow Weir as issue 456 found it: <c>docs/samples/harrow_weir_0081.map</c>, the
+    /// file every Harrow Weir play before the retune was made on.
+    /// </summary>
     private static string RunLoose(string script, int seed)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        return Run(out _, "play", "harrow_weir", "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
+        return Run(out _, "play", Path.Combine(repo, "docs", "samples", "harrow_weir_0081.map"), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
     }
 
     private static string RunShipped(string map, string script, int seed, out int exit)
@@ -1631,12 +1693,12 @@ public class CliPlayTests
             var start = weir[..weir.IndexOf("> end", StringComparison.Ordinal)];
             Assert.Contains("  turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.\n", start);
             Assert.Contains("  turn 5, enemy phase: a brigand arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.\n", start);
-            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.\n", start);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 9,11 (aggressive). A unit standing on 9,11 stops it.\n", start);
             Assert.DoesNotContain("event: ", start);
             var afterMap = weir[weir.IndexOf("> map", StringComparison.Ordinal)..];
             Assert.DoesNotContain("turn 3, enemy phase", afterMap);
             Assert.Contains("  turn 5, enemy phase: a brigand arrives at 0,11 ", afterMap);
-            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 7,0 ", afterMap);
+            Assert.Contains("  turn 5, enemy phase: a brigand arrives at 9,11 ", afterMap);
             Assert.DoesNotContain(" enemy phase: a ", tollgate);
         }
         finally

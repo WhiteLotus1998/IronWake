@@ -23,21 +23,26 @@ public class SampleMapsTests
 
     /// <summary>
     /// Issue 78: Harrow Weir announces its reinforcements. Every event is a spawn on a turn
-    /// trigger at the start of an enemy phase, the header says <c>announce: on</c>, and the two
-    /// north waves share the road's edge tile 7,0, so one body standing there spends both.
+    /// trigger at the start of an enemy phase and the header says <c>announce: on</c>. Issue 456:
+    /// one spawn per door, so one body can spend at most one wave; the turn-5 brigand's door is
+    /// 9,11 on the south edge, within the wake radius of the ford's brawler, so a body holding it
+    /// stands inside the ford's reach.
     /// </summary>
     [Fact]
-    public void HarrowWeirAnnouncesTurnSpawnsAndTheNorthWavesShareOneTile()
+    public void HarrowWeirAnnouncesTurnSpawnsOnePerDoor()
     {
         var map = All().Single(m => m.Id == "harrow_weir").Map;
 
         Assert.True(map.Announced);
-        Assert.Equal(new[] { "north1", "west1", "north2" }, map.Events.Select(e => e.Name));
+        Assert.Equal(new[] { "north1", "west1", "south1" }, map.Events.Select(e => e.Name));
         Assert.All(map.Events, e => Assert.Equal(Side.Enemy, Assert.IsType<TurnTrigger>(e.Trigger).Phase));
         var tiles = map.Events.ToDictionary(e => e.Name, e => Assert.IsType<SpawnEnemy>(e.Action).Placement.At);
         Assert.Equal(new Coord(7, 0), tiles["north1"]);
-        Assert.Equal(new Coord(7, 0), tiles["north2"]);
         Assert.Equal(new Coord(0, 11), tiles["west1"]);
+        Assert.Equal(new Coord(9, 11), tiles["south1"]);
+        Assert.Equal(tiles.Count, tiles.Values.Distinct().Count());
+        var brawler = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.TemplateId == "brawler" && e.Group == "ford");
+        Assert.True(tiles["south1"].DistanceTo(brawler.At) <= MapFixture.Content.WakeRadius);
     }
 
     /// <summary>
@@ -53,7 +58,7 @@ public class SampleMapsTests
         var turns = map.Events.ToDictionary(e => e.Name, e => ((TurnTrigger)e.Trigger).Turn);
         Assert.Equal(3, turns["north1"]);
         Assert.Equal(5, turns["west1"]);
-        Assert.Equal(5, turns["north2"]);
+        Assert.Equal(5, turns["south1"]);
         var recruits = map.Placements.OfType<PlayerPlacement>().Where(p => p.Slot != PlayerSlot.Captain).ToList();
         Assert.Equal(new[] { "teodor", "ottilie", "pell", "dunstan", "keziah" }, recruits.Select(p => p.RecruitId));
     }
@@ -61,7 +66,9 @@ public class SampleMapsTests
     /// <summary>
     /// Issue 78 and section 9's authoring constraint: the weir's bridge is a one-tile corridor
     /// (water on both sides of 10,6 and 11,6) and the shieldbearer holds its east end, so the
-    /// armored wall is absolute and the other way over is the ford on rows 10 and 11.
+    /// armored wall is absolute and the other way over is the ford on rows 10 and 11. Issue 456:
+    /// the wall is the weir-only bulwark, the shared shieldbearer with res 3, so one Gust from 9,6
+    /// no longer breaks it and the shared entry other maps field is untouched.
     /// </summary>
     [Fact]
     public void HarrowWeirBridgeIsOneTileWideAndTheShieldbearerHoldsIt()
@@ -77,8 +84,15 @@ public class SampleMapsTests
         }
 
         var wall = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.At == new Coord(11, 6));
-        Assert.Equal("shieldbearer", wall.TemplateId);
+        Assert.Equal("weir_shieldbearer", wall.TemplateId);
         Assert.Equal(Behavior.Hold, wall.Behavior);
+        var weir = MapFixture.Content.Unit("weir_shieldbearer");
+        var shared = MapFixture.Content.Unit("shieldbearer");
+        Assert.Equal(3, weir.Stats.Res);
+        Assert.Equal(0, shared.Stats.Res);
+        Assert.Equal(shared.Stats with { Res = 3 }, weir.Stats);
+        Assert.Equal(shared.ClassId, weir.ClassId);
+        Assert.Equal(shared.Growths, weir.Growths);
     }
 
     /// <summary>

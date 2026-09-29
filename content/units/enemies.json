@@ -73,6 +73,15 @@
       "inventory": [ { "item": "iron_lance" } ]
     },
     {
+      "id": "weir_shieldbearer",
+      "name": "Weir Shieldbearer",
+      "class": "bulwark",
+      "level": 1,
+      "stats": { "hp": 21, "str": 6, "mag": 0, "dex": 3, "spd": 3, "lck": 1, "def": 5, "res": 3, "cha": 2 },
+      "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 20, "spd": 15, "lck": 10, "def": 35, "res": 10, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" } ]
+    },
+    {
       "id": "mill_bandit",
       "name": "Mill Bandit",
       "class": "reaver",

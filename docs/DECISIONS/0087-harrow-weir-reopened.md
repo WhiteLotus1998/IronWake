@@ -18,3 +18,11 @@ Date: 2026-09-28. Rounds 105 and 106 on the Design Table (#420). Amends DECISION
 ## Records
 
 Transcripts and scripts: `docs/transcripts/2026-09-28-harrow_weir-601.*` and `docs/transcripts/2026-09-28-harrow_weir-541.*` (the Critic, replayed by Code on ada6363). The PLAYTEST.md entries are there too. The 0081 plays (419, 421) stay on record as the plays on the file that was tuned.
+
+## Built (issue 456, 2026-09-29)
+
+- `weir_shieldbearer` ("Weir Shieldbearer") in `content/units/enemies.json`: the shared `shieldbearer`'s class, stats, growths and lance with `res` 3, on 11,6. On the board it is `weir_shieldbearer-1`.
+- `south1 turn 5 enemy spawn brigand 9,11 group:south behavior:aggressive` replaces `north2` on 7,0; 9,11 is the lean, not the 8,11 fallback.
+- The pre-456 file is kept as `docs/samples/harrow_weir_0081.map`, like `brackwater_cut_exit_after_move.map` for issue 377: the journaled plays (409, 419, 421 byte for byte) and the Foreman's AI replays run on the file they were made on. No map under `content/maps` is that file.
+- Measured, 200 seeds, two rolls: gate 1 67 percent on the old file (46 timeouts, 21 captain deaths), 57 percent on the retune (58 timeouts, 27 captain deaths, refused kill p50 0.9892 over 58), FAILED against 60; gate 4 ok at 0.275. One lever at a time: the door alone 65 percent, res 3 alone 58, res 2 with the door 57, res 3 with the 8,11 door 51. The drop is res, it comes as timeouts with a refused kill near one, and under the sixteenth round's reading that is the veto's stall, not the map; no lever is pulled for it. The Table reads it with the re-rates.
+- The Critic's scripts on the new file (`shieldbearer-1` read as `weir_shieldbearer-1`): the turn 4 Gust from 9,6 reads `9 x2` and leaves the bulwark on 6 in both, and it falls on enemy phase 4 on the counter of the body at 10,6 while the Foreman throws at it. Both still end on turn 5 on the Foreman's 6 percent crit from 10,6, which the keyed dice keep; without it he stands on 7.
