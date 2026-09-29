@@ -1175,7 +1175,7 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile)));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile)));
         if (BracedThreat(_state, _content, unit, tile) is { } braced)
         {
             _out.WriteLine(braced);
@@ -1203,7 +1203,7 @@ public sealed class PlaySession
         }
 
         return $"if {unit.Id} waits here it braces (hit -{Brace.Hit}):\n"
-            + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile));
+            + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile), anvils: Queries.Anvils(after, content, braced, tile));
     }
 
     /// <summary>
@@ -1225,8 +1225,13 @@ public sealed class PlaySession
     /// On a <c>windup: on</c> map (DESIGN.md 13.16, issue 444) a blow already raised over the tile
     /// is a row before the strikes and is in the total, since it lands for certain at the enemy
     /// phase start; a maul that would raise this phase says so under its row and adds nothing.
+    /// On a <c>pincer: on</c> map (DESIGN.md 13.13, issue 457) each of the planner's anvil plans
+    /// against the unit (<see cref="Queries.Anvils"/>) is one row after the total, phrased as could
+    /// and unpriced: <c>anvil: shieldbearer-1 could step to 17,0 so soldier-1 strikes you pinned
+    /// from 19,0</c>, or <c>could hold 17,0</c> when the tile is the anvil's own; a plan with an
+    /// enemy the player does not see is left out.
     /// </summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false)
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         if (wins)
@@ -1262,6 +1267,12 @@ public sealed class PlaySession
             }
 
             rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
+        }
+
+        foreach (var anvil in (anvils ?? Array.Empty<AnvilLine>()).Where(a => Dusk.Seen(state, a.Anvil) && Dusk.Seen(state, a.Follower)))
+        {
+            var step = anvil.Tile == anvil.Anvil.At ? $"hold {anvil.Tile}" : $"step to {anvil.Tile}";
+            rows.Add($"  anvil: {anvil.Anvil.Id} could {step} so {anvil.Follower.Id} strikes you pinned from {anvil.From}");
         }
 
         foreach (var blind in (unseeing ?? Array.Empty<BattleUnit>()).Where(e => Dusk.Seen(state, e)))

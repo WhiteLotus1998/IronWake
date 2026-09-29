@@ -305,6 +305,50 @@ public static class Queries
     }
 
     /// <summary>
+    /// The planner's anvil plans against <paramref name="unit"/> on <paramref name="from"/> (DESIGN.md
+    /// 13.13, issue 457), on a <c>pincer: on</c> map only: on <see cref="Threats"/>' board, the
+    /// enemies in ascending id each asked for <see cref="EnemyAi.Anvil"/> as the phase's
+    /// planner asks, with a claimed set that grows by each plan's follower and anvil so neither is
+    /// used twice, and the plans whose pinned unit is this one kept, in that order. Each is a
+    /// forecast of intent, never binding and never priced: nothing here enters
+    /// <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/>. Like every line of <see cref="Threats"/>
+    /// it reads the phase-start board, so a plan that exists only after another enemy's move is
+    /// not listed. Empty on any other map. Null exactly when <see cref="Threats"/> is. Read-only.
+    /// </summary>
+    public static IReadOnlyList<AnvilLine>? Anvils(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        if (ThreatBoard(state, content, unit, from) is not (var board, var moved, _))
+        {
+            return null;
+        }
+
+        var lines = new List<AnvilLine>();
+        if (moved is null || !board.Map.PincerEnabled)
+        {
+            return lines;
+        }
+
+        var claimed = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var enemy in board.UnitsOf(Side.Enemy).OrderBy(u => u.Id, StringComparer.Ordinal))
+        {
+            if (claimed.Contains(enemy.Id) || EnemyAi.Anvil(board, content, enemy, claimed) is not { } plan)
+            {
+                continue;
+            }
+
+            claimed.Add(plan.FollowerId);
+            claimed.Add(enemy.Id);
+            if (plan.PinnedId == moved.Id)
+            {
+                var far = new Coord(2 * moved.At.X - plan.Tile.X, 2 * moved.At.Y - plan.Tile.Y);
+                lines.Add(new AnvilLine(enemy, plan.Tile, board.Find(plan.FollowerId)!, far));
+            }
+        }
+
+        return lines;
+    }
+
+    /// <summary>
     /// Whether <paramref name="unit"/> ending its move on <paramref name="from"/> wins the
     /// battle there and then (issue 356): the board with the unit on the tile and nothing else
     /// changed reads <see cref="BattleResult.Won"/>, as the captain on a Seize throne does. No
@@ -363,6 +407,13 @@ public static class Queries
         return (board, moved, arrivals);
     }
 }
+
+/// <summary>
+/// One anvil plan <see cref="Queries.Anvils"/> lists (issue 457): <paramref name="Anvil"/> could
+/// end on <paramref name="Tile"/> beside the unit so <paramref name="Follower"/> strikes it pinned
+/// from <paramref name="From"/>, the tile across the unit. Unpriced and not binding.
+/// </summary>
+public sealed record AnvilLine(BattleUnit Anvil, Coord Tile, BattleUnit Follower, Coord From);
 
 /// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and <see cref="Members"/> the ones able to strike the unit were it awake.</summary>
 public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members);
