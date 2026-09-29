@@ -1,0 +1,64 @@
+move pell 4,8
+wait pell
+move ottilie 3,9
+wait ottilie
+move captain 4,9
+wait captain
+move teodor 9,9
+wait teodor
+end
+move teodor 8,6
+wait teodor
+move pell 4,7
+wait pell
+move captain 3,7
+wait captain
+move ottilie 3,8
+wait ottilie
+end
+move teodor 7,5
+attack teodor toll_brigand-1
+move pell 4,6
+attack pell archer-2 gust
+move ottilie 5,7
+attack ottilie archer-2
+move captain 3,6
+wait captain
+end
+attack teodor toll_brigand-1
+move captain 6,6
+attack captain toll_brigand-1
+move ottilie 4,5
+wait ottilie
+wait pell
+end
+move teodor 6,4
+wait teodor
+move captain 5,6
+wait captain
+move pell 3,7
+wait pell
+move ottilie 6,6
+watch ottilie
+end
+attack teodor rider-1
+move captain 5,5
+wait captain
+move pell 5,6
+wait pell
+move ottilie 7,6
+wait ottilie
+end
+move teodor 6,3
+attack teodor toll_warden-1
+recall list
+recall 82
+move teodor 5,4
+wait teodor
+move captain 6,3
+attack captain toll_warden-1
+move pell 5,5
+wait pell
+move ottilie 6,5
+wait ottilie
+end
