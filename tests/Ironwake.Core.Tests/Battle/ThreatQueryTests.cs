@@ -260,7 +260,8 @@ public sealed class ThreatQueryTests
 
     /// <summary>
     /// Issue 248, shape one: a Guard group asleep on the board the query reads is named,
-    /// with its members, when some member could strike the tile were it awake; a group too
+    /// with the members that could strike the tile were it awake (the archer on 7,3 cannot
+    /// reach 2,1, issue 454); a group too
     /// far to reach it is not; a group the tile certainly wakes is priced instead.
     /// </summary>
     [Fact]
@@ -271,10 +272,26 @@ public sealed class ThreatQueryTests
 
         var asleep = Assert.Single(Queries.SleepingThreats(state, Starter, hale, new Coord(2, 1))!);
         Assert.Equal("y", asleep.Group);
-        Assert.Equal(new[] { "archer-1", "soldier-1" }, asleep.Members.Select(m => m.Id).OrderBy(i => i, StringComparer.Ordinal));
+        Assert.Equal(new[] { "soldier-1" }, asleep.Members.Select(m => m.Id));
         Assert.Empty(Queries.Threats(state, Starter, hale, new Coord(2, 1))!);
         Assert.Empty(Queries.SleepingThreats(state, Starter, hale, new Coord(3, 1))!);
         Assert.NotEmpty(Queries.Threats(state, Starter, hale, new Coord(3, 1))!);
+    }
+
+    /// <summary>
+    /// Issue 454: the group is named for the members that could strike the tile, and only
+    /// those are listed; a member that could never reach it (the Critic's archer on 14,4 of
+    /// Harrow Weir) is left off the row.
+    /// </summary>
+    [Fact]
+    public void ASleepingGroupListsOnlyTheMembersThatCouldStrikeTheTile()
+    {
+        var state = Start(map: string.Format(Lane, "", "E soldier 8,1 group:y behavior:guard\nE archer 15,3 group:y behavior:guard"));
+        var hale = state.Find("hale")!;
+
+        var asleep = Assert.Single(Queries.SleepingThreats(state, Starter, hale, new Coord(3, 1))!);
+        Assert.Equal("y", asleep.Group);
+        Assert.Equal(new[] { "soldier-1" }, asleep.Members.Select(m => m.Id));
     }
 
     [Fact]

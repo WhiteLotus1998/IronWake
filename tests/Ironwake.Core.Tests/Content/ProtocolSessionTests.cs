@@ -227,7 +227,7 @@ public class ProtocolSessionTests
 
         Assert.Contains("\"enemy\":\"soldier-2\",\"from\":{\"x\":4,\"y\":0},\"arrives\":{\"x\":7,\"y\":0},\"slot\":0", arrival);
         Assert.Contains("\"asleep\":[]", arrival);
-        Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\",\"soldier-1\"]}]", asleep);
+        Assert.Contains("\"threats\":[],\"ifAllLand\":0,\"asleep\":[{\"group\":\"y\",\"members\":[\"archer-1\"]}]", asleep);
     }
 
     /// <summary>Issue 356: the threat answer carries <c>wins</c>, true on a tile whose move wins the map, with the console's one line as its text.</summary>
