@@ -416,8 +416,8 @@ public class SimGateTests
         Assert.Equal("0.9994", Gates.FormatKill(0.9994));
         Assert.Equal("0.7191", Gates.FormatKill(0.71915));
         Assert.Equal("0.0000", Gates.FormatKill(0));
-        Assert.Equal("refused kill p50 0.9999 over 1", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double99) }));
-        Assert.Equal("refused kill p50 1.0000 over 1", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double100) }));
+        Assert.Equal("refused kill p50 0.9999 over 1, at the stall -", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double99) }));
+        Assert.Equal("refused kill p50 1.0000 over 1, at the stall -", Gates.RefusedKill(new[] { new GameResult(BattleResult.Lost, 6, new Dictionary<string, ActionMix>(), LossCause.Timeout, 2, double100) }));
     }
 
     /// <summary>
@@ -449,6 +449,61 @@ public class SimGateTests
         player.Next(state, Starter);
         Assert.Equal(expected, player.HighestRefusedKill!.Value, 12);
         Assert.Equal(Ironwake.Core.Combat.HitProbability(side.HitChance, scheme), Ironwake.Core.Combat.HitProbability(side.HitChance, scheme));
+    }
+
+    /// <summary>
+    /// Issue 157: the stall's refusal is the highest on the last player phase planned, not a
+    /// running maximum. On the Veto board the turn-1 plan refuses the captain's attack on a
+    /// 1 HP brigand, so both readings hold its chance. On turn 2, with one soldier left and
+    /// the brigand gone, the only refusal is an attack with no chance to kill, so the game's
+    /// highest keeps turn 1's number and the last phase's reads turn 2's own, which a fresh
+    /// player on that board agrees with and a running maximum would not.
+    /// </summary>
+    [Fact]
+    public void TheStallRefusalIsTheLastPlayerPhasesAndResetsEachTurn()
+    {
+        var start = BattleState.From(MapFixture.Parse(Veto), Starter, ValueList<Unit>.Of(Hale), 7, RollScheme.TwoRollAverage);
+        var state = start.WithUnit(start.Find("brigand-1")! with { Hp = 1 });
+        var expected = HeuristicPlayer.KillProbability(state, Starter, state.Find("hale")!, new Coord(3, 1), state.Find("brigand-1")!);
+
+        var player = new HeuristicPlayer();
+        player.Next(state, Starter);
+        Assert.Equal(expected, player.LastPhaseRefusedKill!.Value, 12);
+        Assert.Equal(expected, player.HighestRefusedKill!.Value, 12);
+
+        var later = state.WithoutUnit("brigand-1").WithoutUnit("soldier-1") with { Turn = 2 };
+        var fresh = new HeuristicPlayer();
+        fresh.Next(later, Starter);
+        Assert.True(fresh.LastPhaseRefusedKill < expected, "turn 2's refusal is lower than turn 1's, so a running maximum would keep turn 1's");
+
+        player.Next(later, Starter);
+        Assert.Equal(fresh.LastPhaseRefusedKill!.Value, player.LastPhaseRefusedKill!.Value, 12);
+        Assert.Equal(expected, player.HighestRefusedKill!.Value, 12);
+    }
+
+    /// <summary>
+    /// Issue 157: the refused-kill row prints, beside the game's highest, the median over the
+    /// same timeouts of each one's refusal on its last player phase, with its own count, and
+    /// a dash for that half when no timeout refused on its last phase. Wins and captain
+    /// losses carry refusals too and count in neither half.
+    /// </summary>
+    [Fact]
+    public void TheRefusedKillRowPrintsTheStallsRefusalBesideTheGamesHighest()
+    {
+        var none = new Dictionary<string, ActionMix>();
+        GameResult Timeout(double? highest, double? stall) => new(BattleResult.Lost, 16, none, LossCause.Timeout, 6, highest) { StallRefusedKill = stall };
+        var games = new[]
+        {
+            Timeout(1.0, 0.7191),
+            Timeout(1.0, 0.72),
+            Timeout(0.99, null),
+            new GameResult(BattleResult.Won, 9, none, LossCause.None, 9, 0.1) { StallRefusedKill = 0.1 },
+            new GameResult(BattleResult.Lost, 5, none, LossCause.Captain, 5, 0.2) { StallRefusedKill = 0.2 },
+        };
+
+        Assert.Equal("refused kill p50 1.0000 over 3, at the stall p50 0.7195 over 2", Gates.RefusedKill(games));
+        Assert.Equal("refused kill p50 0.9900 over 1, at the stall -", Gates.RefusedKill(new[] { games[2] }));
+        Assert.Equal("refused kill -", Gates.RefusedKill(new[] { games[3], games[4] }));
     }
 
     /// <summary>

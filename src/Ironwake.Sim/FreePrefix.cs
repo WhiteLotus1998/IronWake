@@ -23,6 +23,9 @@ public sealed class PrefixPlayer : IPlayer
     /// <summary>The heuristic's highest refused kill over the turns it played (issue 125).</summary>
     public double? HighestRefusedKill => _heuristic.HighestRefusedKill;
 
+    /// <summary>The heuristic's highest refused kill on the last player phase it planned (issue 157); null when the game ended inside the prefix.</summary>
+    public double? LastPhaseRefusedKill => _heuristic.LastPhaseRefusedKill;
+
     public IReadOnlyList<Command> Next(BattleState state, GameContent content) =>
         state.Turn <= _prefix ? _random.Next(state, content) : _heuristic.Next(state, content);
 }
