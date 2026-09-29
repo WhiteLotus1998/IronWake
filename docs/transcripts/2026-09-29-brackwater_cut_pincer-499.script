@@ -1,0 +1,71 @@
+move dunstan 13,3
+wait dunstan
+move captain 11,3
+wait captain
+wait rook
+move wren 10,3
+wait wren
+move pell 10,2
+wait pell
+end
+move captain 14,2
+wait captain
+move dunstan 12,3
+wait dunstan
+move wren 13,4
+wait wren
+move pell 12,4
+wait pell
+move rook 13,3
+wait rook
+end
+move pell 14,4
+wait pell
+move wren 14,3
+wait wren
+wait captain
+wait rook
+wait dunstan
+end
+move rook 13,4
+wait rook
+attack wren shieldbearer-1
+move pell 13,3
+attack pell shieldbearer-1
+move captain 13,5
+attack captain soldier-1
+recall 84
+move captain 14,4
+attack captain soldier-1
+wait dunstan
+end
+move pell 14,6
+attack pell brawler-1
+move captain 14,5
+attack captain brawler-1
+attack dunstan brigand-1
+move wren 12,5
+attack wren soldier-1
+move rook 19,4
+wait rook
+end
+exit rook
+move dunstan 16,3
+wait dunstan
+move captain 15,3
+wait captain
+move wren 15,6
+item wren 2
+move pell 18,6
+wait pell
+end
+move pell 19,8
+wait pell
+move wren 19,6
+wait wren
+move captain 19,3
+wait captain
+end
+exit pell
+exit wren
+exit captain

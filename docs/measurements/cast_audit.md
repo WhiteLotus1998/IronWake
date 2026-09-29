@@ -51,7 +51,7 @@ The budget is kinds, not signatures (round 114). DESIGN 5's closed set is stats,
 | Recruit | Candidate shape | Kind | New? |
 |---|---|---|---|
 | Keziah | an art that pays HP in place of uses, paid on declaring, hit or miss (agreed, round 114) | art, one field | a field on an existing kind |
-| Rook | below half HP (HP x 2 < max, read at the command), +1 Mov and cannot initiate an attack; counters stand (agreed, round 116) | condition on the holder over stats and combat | new kind, shared |
+| Rook | below half HP (HP x 2 < max, read at the command), +1 Mov and cannot initiate an attack; counters stand (agreed, round 116; on Brackwater she is below half from enemy phase 4 to the end on Chat's seed 499, no strike lost, round 119) | condition on the holder over stats and combat | new kind, shared |
 | Dunstan | cannot be shoved; if an enemy is adjacent when he moves, ends adjacent to one of them or stays (agreed, round 115) | movement rule | new kind |
 | Ottilie | bills for every arrow: a strike or watch shot at a displayed hit under 50 is refused, the reason named, the watch held for the next arrival; counters stand (agreed, round 117; the held watch closed, round 118; the ledger draft went as a perk nobody fears) | condition on the holder over combat | Rook's kind |
 | Teodor | orders: an ally within 2 who acts after him this phase strikes at +5 hit, printed in that ally's forecast; watched: with an ally within 2 of him his own strike is at -10 hit, counters stand (agreed, round 117; one radius, 2, for both halves closed, round 118) | the flaw is Rook's kind; the orders are an order on an ally, 13.2's kind arriving early | one shared, one new |

@@ -1,0 +1,2648 @@
+Brackwater Cut, seed 499, scheme TwoRollAverage
+objective: the captain, Alder Fenn (A), must exit from an exit tile (>) by the end of turn 8; a unit that starts its turn on an exit may leave; anyone still on the board is left behind; lost if the captain falls
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E.B.........>
+ 4 .c......A..#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move dunstan 13,3
+dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E.....B.....>
+ 4 .c......A..#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E.....B.....>
+ 4 .c......A..#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move captain 11,3
+captain moves 8,4 -> 11,3 via 8,3 9,3 10,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E...A.B.....>
+ 4 .c.........#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait captain
+captain waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E...A.B.....>
+ 4 .c.........#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait rook
+rook waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E...A.B.....>
+ 4 .c.........#...^^..>
+ 5 e.......D..#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move wren 10,3
+wren moves 8,5 -> 10,3 via 8,4 8,3 9,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E..DA.B.....>
+ 4 .c.........#...^^..>
+ 5 e..........#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait wren
+wren waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C..#........
+ 3 .......E..DA.B.....>
+ 4 .c.........#...^^..>
+ 5 e..........#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move pell 10,2
+pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C.E#........
+ 3 ..........DA.B.....>
+ 4 .c.........#...^^..>
+ 5 e..........#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait pell
+pell waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C.E#........
+ 3 ..........DA.B.....>
+ 4 .c.........#...^^..>
+ 5 e..........#...^.h.>
+ 6 ...........#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: move archer-1 2,3
+archer-1 moves 0,5 -> 2,3 via 0,4 0,3 1,3
+enemy: wait archer-1
+archer-1 waits
+enemy: attack archer-2 captain
+forecast archer-2 -> captain: dmg 5 hit 70% crit 0%; counter: none
+archer-2 attacks captain
+  archer-2 hits captain for 5 (hp 17)
+  archer-2 hp 17, captain hp 17
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 4,3
+brigand-1 moves 1,4 -> 4,3 via 1,3 2,3 3,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move brigand-2 1,4
+brigand-2 moves 1,8 -> 1,4 via 1,7 1,6 1,5
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 0,3
+hexer-1 moves 0,7 -> 0,3 via 0,6 0,5 0,4
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 5,0
+rider-1 moves 0,1 -> 5,0 via 0,0 1,0 2,0 3,0 4,0
+enemy: wait rider-1
+rider-1 waits
+enemy: move rider-2 0,4
+rider-2 moves 0,10 -> 0,4 via 0,9 0,8 0,7 0,6 0,5
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#........
+ 3 f.e.c.....DA.B.....>
+ 4 bd.........#...^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,3   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move captain 14,2
+captain moves 11,3 -> 14,2 via 12,3 12,2 13,2
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.....D..B.....>
+ 4 bd.........#...^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait captain
+captain waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.....D..B.....>
+ 4 bd.........#...^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move dunstan 12,3
+dunstan moves 13,3 -> 12,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.....D.B......>
+ 4 bd.........#...^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.....D.B......>
+ 4 bd.........#...^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move wren 13,4
+wren moves 10,3 -> 13,4 via 11,3 12,3 13,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.......B......>
+ 4 bd.........#.D.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait wren
+wren waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C.E#..A.....
+ 3 f.e.c.......B......>
+ 4 bd.........#.D.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              10,2   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move pell 12,4
+pell moves 10,2 -> 12,4 via 10,3 11,3 12,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C..#..A.....
+ 3 f.e.c.......B......>
+ 4 bd.........#ED.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,4   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait pell
+pell waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....C..#..A.....
+ 3 f.e.c.......B......>
+ 4 bd.........#ED.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move rook 13,3
+rook moves 8,2 -> 13,3 via 9,2 10,2 10,3 11,3 12,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#..A.....
+ 3 f.e.c.......BC.....>
+ 4 bd.........#ED.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait rook
+rook waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 .....a....~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#..A.....
+ 3 f.e.c.......BC.....>
+ 4 bd.........#ED.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           2,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          5,0    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: move archer-1 6,3
+archer-1 moves 2,3 -> 6,3 via 3,3 4,3 5,3
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 8,3
+brigand-1 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move brigand-2 4,3
+brigand-2 moves 1,4 -> 4,3 via 1,3 2,3 3,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 3,3
+hexer-1 moves 0,3 -> 3,3 via 1,3 2,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 9,2
+rider-1 moves 5,0 -> 9,2 via 6,0 7,0 8,0 9,0 9,1
+enemy: wait rider-1
+rider-1 waits
+enemy: move rider-2 5,3
+rider-2 moves 0,4 -> 5,3 via 0,3 1,3 2,3 3,3 4,3
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BC.....>
+ 4 ...........#ED.^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,4   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move pell 14,4
+pell moves 12,4 -> 14,4 via 13,4
+group bank wakes: proximity
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BC.....>
+ 4 ...........#.DE^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait pell
+pell waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BC.....>
+ 4 ...........#.DE^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move wren 14,3
+wren moves 13,4 -> 14,3 via 13,3
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BCD....>
+ 4 ...........#..E^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait wren
+wren waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BCD....>
+ 4 ...........#..E^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait captain
+captain waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BCD....>
+ 4 ...........#..E^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait rook
+rook waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BCD....>
+ 4 ...........#..E^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdbe.c...BCD....>
+ 4 ...........#..E^^..>
+ 5 ...........#...^.h.>
+ 6 ...........#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: move archer-1 10,3
+archer-1 moves 6,3 -> 10,3 via 7,3 8,3 9,3
+enemy: attack archer-1 dunstan
+forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+archer-1 attacks dunstan
+  archer-1 hits dunstan for 3 (hp 20)
+  archer-1 hp 17, dunstan hp 20
+enemy: wait archer-2
+archer-2 waits
+enemy: move brawler-1 14,6
+brawler-1 moves 17,7 -> 14,6 via 17,6 16,6 15,6
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 11,3
+brigand-1 moves 8,3 -> 11,3 via 9,3 10,3
+enemy: attack brigand-1 dunstan
+forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+brigand-1 attacks dunstan
+  brigand-1 misses dunstan
+  dunstan hits brigand-1 for 11 (hp 12)
+  brigand-1 hp 12, dunstan hp 20
+dunstan gains 14 exp (14)
+enemy: wait brigand-2
+brigand-2 waits
+enemy: wait hexer-1
+hexer-1 waits
+enemy: wait rider-1
+rider-1 waits
+enemy: wait rider-2
+rider-2 waits
+enemy: move shieldbearer-1 15,3
+shieldbearer-1 moves 17,5 -> 15,3 via 17,4 17,3 16,3
+enemy: attack shieldbearer-1 wren
+forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+shieldbearer-1 attacks wren
+  shieldbearer-1 misses wren
+  wren hits shieldbearer-1 for 3 (hp 22)
+  wren hits shieldbearer-1 for 3 (hp 19)
+  shieldbearer-1 hp 19, wren hp 20
+wren gains 14 exp (14)
+enemy: move soldier-1 14,5
+soldier-1 moves 17,6 -> 14,5 via 16,6 15,6 14,6
+enemy: attack soldier-1 pell
+forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+soldier-1 attacks pell
+  soldier-1 hits pell for 11 (hp 5)
+  pell hits soldier-1 for 12 (hp 9)
+  soldier-1 hp 9, pell hp 5
+pell gains 14 exp (14)
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecBCDh...>
+ 4 ...........#..E^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 19/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move rook 13,4
+rook moves 13,3 -> 13,4
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecB.Dh...>
+ 4 ...........#.CE^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 19/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait rook
+rook waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecB.Dh...>
+ 4 ...........#.CE^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 19/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack wren shieldbearer-1
+forecast wren -> shieldbearer-1: dmg 3 x2 hit 93% crit 4%; counter: dmg 8 hit 60% crit 0%
+wren attacks shieldbearer-1
+  wren crits shieldbearer-1 for 9 (hp 10)
+  shieldbearer-1 hits wren for 8 (hp 12)
+  wren hits shieldbearer-1 for 3 (hp 7)
+  wren hp 12, shieldbearer-1 hp 7
+wren gains 14 exp (28)
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecB.Dh...>
+ 4 ...........#.CE^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,4   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 7/25   Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move pell 13,3
+pell moves 14,4 -> 13,3 via 14,3
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecBEDh...>
+ 4 ...........#.C.^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 7/25   Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack pell shieldbearer-1
+forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+pell attacks shieldbearer-1
+  pell hits shieldbearer-1 for 13 (hp 0)
+  pell hp 5, shieldbearer-1 hp 0
+pell gains 40 exp (54)
+shieldbearer-1 falls at 15,3
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecBED....>
+ 4 ...........#.C.^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move captain 13,5
+captain moves 14,2 -> 13,5 via 13,2 13,3 13,4
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#.C.^^..>
+ 5 ...........#.Aj^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        13,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks soldier-1
+  captain misses soldier-1
+  soldier-1 misses captain
+  captain hp 17, soldier-1 hp 9
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#.C.^^..>
+ 5 ...........#.Aj^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        13,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> recall 84
+recalled to state 84; 2 charges left
+undone: moves only
+the rolls do not change: the same attack will roll the same
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#..A.....
+ 3 ...fdb....ecBED....>
+ 4 ...........#.C.^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,2   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move captain 14,4
+captain moves 14,2 -> 14,4 via 14,3
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#.CA^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks soldier-1
+  captain misses soldier-1
+  soldier-1 misses captain
+  captain hp 17, soldier-1 hp 9
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#.CA^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#.CA^^..>
+ 5 ...........#..j^...>
+ 6 ...........#..i....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          14,6   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 20/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 17/17  Plain  done
+j  soldier-1        Soldier L3 pikeman         14,5   hp 9/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: attack archer-1 dunstan
+forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+archer-1 attacks dunstan
+  archer-1 hits dunstan for 3 (hp 17)
+  archer-1 hp 17, dunstan hp 17
+enemy: wait archer-2
+archer-2 waits
+enemy: move brawler-1 13,5
+brawler-1 moves 14,6 -> 13,5 via 14,5
+enemy: attack brawler-1 rook
+forecast brawler-1 -> rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
+brawler-1 attacks rook
+  brawler-1 misses rook
+  brawler-1 misses rook
+  rook misses brawler-1
+  brawler-1 hp 23, rook hp 17
+enemy: attack brigand-1 dunstan
+forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+brigand-1 attacks dunstan
+  brigand-1 hits dunstan for 9 (hp 8)
+  dunstan hits brigand-1 for 11 (hp 1)
+  brigand-1 hp 1, dunstan hp 8
+dunstan gains 14 exp (28)
+enemy: wait brigand-2
+brigand-2 waits
+enemy: wait hexer-1
+hexer-1 waits
+enemy: wait rider-1
+rider-1 waits
+enemy: wait rider-2
+rider-2 waits
+enemy: move soldier-1 12,4
+soldier-1 moves 14,5 -> 12,4 via 13,5 12,5
+enemy: attack soldier-1 rook
+forecast soldier-1 -> rook: dmg 12 hit 63% crit 0%; counter: dmg 7 hit 79% crit 3%
+soldier-1 attacks rook
+  soldier-1 hits rook for 12 (hp 5)
+  rook hits soldier-1 for 7 (hp 2)
+  soldier-1 hp 2, rook hp 5
+rook gains 14 exp (14)
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecBED....>
+ 4 ...........#jCA^^..>
+ 5 ...........#.i.^...>
+ 6 ...........#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          13,5   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 1/23   Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move pell 14,6
+pell moves 13,3 -> 14,6 via 14,3 14,4 14,5
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecB.D....>
+ 4 ...........#jCA^^..>
+ 5 ...........#.i.^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          13,5   hp 23/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 1/23   Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack pell brawler-1
+forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+pell attacks brawler-1
+  pell hits brawler-1 for 13 (hp 10)
+  pell hp 5, brawler-1 hp 10
+pell gains 14 exp (68)
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecB.D....>
+ 4 ...........#jCA^^..>
+ 5 ...........#.i.^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          13,5   hp 10/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 1/23   Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,4   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move captain 14,5
+captain moves 14,4 -> 14,5
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecB.D....>
+ 4 ...........#jC.^^..>
+ 5 ...........#.iA^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          13,5   hp 10/23  Plain  group bank, guard, awake
+c  brigand-1        Brigand L3 reaver          11,3   hp 1/23   Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack captain brawler-1
+forecast captain -> brawler-1: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+captain attacks brawler-1
+  captain hits brawler-1 for 11 (hp 0)
+  captain hp 17, brawler-1 hp 0
+captain gains 40 exp (40)
+brawler-1 falls at 13,5
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....ecB.D....>
+ 4 ...........#jC.^^..>
+ 5 ...........#..A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+c  brigand-1        Brigand L3 reaver          11,3   hp 1/23   Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack dunstan brigand-1
+forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
+dunstan attacks brigand-1
+  dunstan hits brigand-1 for 11 (hp 0)
+  dunstan hp 8, brigand-1 hp 0
+dunstan gains 40 exp (68)
+brigand-1 falls at 11,3
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....e.B.D....>
+ 4 ...........#jC.^^..>
+ 5 ...........#..A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              14,3   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move wren 12,5
+wren moves 14,3 -> 12,5 via 13,3 13,4 13,5
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....e.B......>
+ 4 ...........#jC.^^..>
+ 5 ...........#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+j  soldier-1        Soldier L3 pikeman         12,4   hp 2/21   Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              12,5   hp 12/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> attack wren soldier-1
+forecast wren -> soldier-1: dmg 8 hit 97% crit 3%; counter: dmg 9 hit 63% crit 0%
+  pincer: soldier-1 pinned by dunstan: wren hit +15
+wren attacks soldier-1
+  wren hits soldier-1 for 8 (hp 0)
+  wren hp 12, soldier-1 hp 0
+wren gains 40 exp (68)
+soldier-1 falls at 12,4
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....e.B......>
+ 4 ...........#.C.^^..>
+ 5 ...........#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,4   hp 5/17   Plain
+D  wren             Wren L1 cadet              12,5   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> move rook 19,4
+rook moves 13,4 -> 19,4 via 14,4 15,4 16,4 17,4 18,4
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....e.B......>
+ 4 ...........#...^^..C
+ 5 ...........#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           19,4   hp 5/17   Plain
+D  wren             Wren L1 cadet              12,5   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> wait rook
+rook waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.....a.#........
+ 3 ...fdb....e.B......>
+ 4 ...........#...^^..C
+ 5 ...........#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 8/23   Plain  done
+f  hexer-1          Hexer L3 adept             3,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          9,2    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           19,4   hp 5/17   Plain  done
+D  wren             Wren L1 cadet              12,5   hp 12/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: move archer-1 10,5
+archer-1 moves 10,3 -> 10,5 via 10,4
+enemy: attack archer-1 wren
+forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+archer-1 attacks wren
+  archer-1 hits wren for 6 (hp 6)
+  archer-1 hp 17, wren hp 6
+enemy: wait archer-2
+archer-2 waits
+enemy: move brigand-2 8,3
+brigand-2 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 7,3
+hexer-1 moves 3,3 -> 7,3 via 4,3 5,3 6,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 11,3
+rider-1 moves 9,2 -> 11,3 via 10,2 10,3
+enemy: attack rider-1 dunstan
+forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+rider-1 attacks dunstan
+  rider-1 hits dunstan for 6 (hp 2)
+  dunstan misses rider-1
+  rider-1 hp 21, dunstan hp 2
+enemy: wait rider-2
+rider-2 waits
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..aB......>
+ 4 ...........#...^^..C
+ 5 ..........e#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 2/23   Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           19,4   hp 5/17   Plain
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+> exit rook
+rook leaves through the exit at 19,4
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..aB......>
+ 4 ...........#...^^..>
+ 5 ..........e#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 2/23   Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move dunstan 16,3
+dunstan moves 12,3 -> 16,3 via 13,3 14,3 15,3
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a....B..>
+ 4 ...........#...^^..>
+ 5 ..........e#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a....B..>
+ 4 ...........#...^^..>
+ 5 ..........e#D.A^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,5   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move captain 15,3
+captain moves 14,5 -> 15,3 via 14,4 14,3
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#D..^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait captain
+captain waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#D..^...>
+ 6 ...........#..E....>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              12,5   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move wren 15,6
+wren moves 12,5 -> 15,6 via 13,5 14,5 14,6
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#...^...>
+ 6 ...........#..ED...>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 6/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> item wren 2
+wren uses Field Dressing (2 left)
+wren heals 10 (hp 16)
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#...^...>
+ 6 ...........#..ED...>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move pell 18,6
+pell moves 14,6 -> 18,6 via 15,6 16,6 17,6
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#...^...>
+ 6 ...........#...D..E>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              18,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait pell
+pell waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .....b.fd..a...AB..>
+ 4 ...........#...^^..>
+ 5 ..........e#...^...>
+ 6 ...........#...D..E>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,5   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         16,3   hp 2/23   Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              18,6   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: move archer-1 12,3
+archer-1 moves 10,5 -> 12,3 via 10,4 10,3 11,3
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: move brigand-2 10,3
+brigand-2 moves 8,3 -> 10,3 via 9,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 9,3
+hexer-1 moves 7,3 -> 9,3 via 8,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 16,2
+rider-1 moves 11,3 -> 16,2 via 12,3 12,2 13,2 14,2 15,2
+enemy: attack rider-1 dunstan
+forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+rider-1 attacks dunstan
+  rider-1 hits dunstan for 6 (hp 0)
+  rider-1 hp 21, dunstan hp 0
+dunstan falls at 16,3
+enemy: move rider-2 11,3
+rider-2 moves 5,3 -> 11,3 via 6,3 7,3 8,3 9,3 10,3
+enemy: wait rider-2
+rider-2 waits
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe..A...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#...D..E>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              18,6   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move pell 19,8
+pell moves 18,6 -> 19,8 via 19,6 19,7
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe..A...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#...D...>
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait pell
+pell waits
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe..A...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#...D...>
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              15,6   hp 16/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move wren 19,6
+wren moves 15,6 -> 19,6 via 16,6 17,6 18,6
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe..A...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 16/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait wren
+wren waits
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe..A...>
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        15,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> move captain 19,3
+captain moves 15,3 -> 19,3 via 16,3 17,3 18,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe......A
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> wait captain
+captain waits
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#....a...
+ 3 .........fdbe......A
+ 4 ...........#...^^..>
+ 5 ...........#...^...>
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           12,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          10,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 17/22  Plain  captain  done
+f  hexer-1          Hexer L3 adept             9,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain  done
+a  rider-1          Rider L3 outrider          16,2   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 16/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> end
+-- player phase ends, turn 7 --
+-- enemy phase, turn 7 --
+enemy: move archer-1 16,3
+archer-1 moves 12,3 -> 16,3 via 13,3 14,3 15,3
+enemy: wait archer-1
+archer-1 waits
+enemy: wait archer-2
+archer-2 waits
+enemy: move brigand-2 14,3
+brigand-2 moves 10,3 -> 14,3 via 11,3 12,3 13,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 13,3
+hexer-1 moves 9,3 -> 13,3 via 10,3 11,3 12,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 19,5
+rider-1 moves 16,2 -> 19,5 via 17,2 18,2 18,3 18,4 19,4
+enemy: attack rider-1 wren
+forecast rider-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 9 hit 85% crit 3%
+rider-1 attacks wren
+  rider-1 hits wren for 9 (hp 7)
+  wren hits rider-1 for 9 (hp 12)
+  rider-1 hp 12, wren hp 7
+wren gains 14 exp (82)
+enemy: move rider-2 17,3
+rider-2 moves 11,3 -> 17,3 via 12,3 13,3 14,3 15,3 16,3
+enemy: wait rider-2
+rider-2 waits
+enemy: end
+-- enemy phase ends, turn 7 --
+-- player phase, turn 8 --
+Brackwater Cut  turn 8 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .............fd.eb.A
+ 4 ...........#...^^..>
+ 5 ...........#...^...a
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...E
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          14,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             13,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              19,8   hp 5/16   Plain
+a  rider-1          Rider L3 outrider          19,5   hp 12/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          17,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 7/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook
+> exit pell
+pell leaves through the exit at 19,8
+Brackwater Cut  turn 8 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .............fd.eb.A
+ 4 ...........#...^^..>
+ 5 ...........#...^...a
+ 6 ...........#.......D
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          14,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             13,3   hp 16/16  Plain  group chase, aggressive
+a  rider-1          Rider L3 outrider          19,5   hp 12/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          17,3   hp 21/21  Plain  group chase, aggressive
+D  wren             Wren L1 cadet              19,6   hp 7/20   Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook pell
+> exit wren
+wren leaves through the exit at 19,6
+Brackwater Cut  turn 8 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .............fd.eb.A
+ 4 ...........#...^^..>
+ 5 ...........#...^...a
+ 6 ...........#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          14,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 17/22  Plain  captain
+f  hexer-1          Hexer L3 adept             13,3   hp 16/16  Plain  group chase, aggressive
+a  rider-1          Rider L3 outrider          19,5   hp 12/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          17,3   hp 21/21  Plain  group chase, aggressive
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook pell wren
+> exit captain
+captain leaves through the exit at 19,3
+Brackwater Cut  turn 8 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^.......#........
+ 3 .............fd.eb.>
+ 4 ...........#...^^..>
+ 5 ...........#...^...a
+ 6 ...........#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,3   hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+d  brigand-2        Brigand L3 reaver          14,3   hp 23/23  Plain  group chase, aggressive
+f  hexer-1          Hexer L3 adept             13,3   hp 16/16  Plain  group chase, aggressive
+a  rider-1          Rider L3 outrider          19,5   hp 12/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          17,3   hp 21/21  Plain  group chase, aggressive
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+escaped: rook pell wren captain
+battle won: escape; only recall is left
+battle won: escape
+escaped: rook, pell, wren, captain; left behind: none; fell: dunstan
