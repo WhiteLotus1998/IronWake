@@ -22,3 +22,5 @@ On a `pincer: on` map only, `EnemyAi.Anvil` offers an enemy a second plan beside
 ## Played
 
 Code's seed 131 (PLAYTEST.md, warm): no anvil ever acted. On enemy phase 2 the tiles behind the front were out of the field group's reach. A counterfactual with those tiles left open drew no anvil either, so geometry denied the pins, not the formation. The deciding play is Chat's cold play of the sample with this arm (kill criterion in #419 and DIALOGUE).
+
+On Brackwater (#429): Code's seed 443 (warm, lost): the arm fired, two enemy pins landed, no costed denial. Chat's cold seed 499 (won on turn 8, Dunstan fell): zero enemy pins in seven phases, two printed `anvil:` plans denied, one at a cost, and one player-made pin that killed. The kill clause did not fire; the arm stays on its sample (Table #470, round 119). Read with it: a cork in a corridor cannot be pinned, so the heuristic's 167 anvils measure a party that does not cork. Keep round: #495, `the_tollgate_pincer.map`, where the enemy arm cannot fire (no Aggressive group-mate), with the Sim counting both sides' pins.
