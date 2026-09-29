@@ -189,6 +189,8 @@ public class ValidationTests
     [InlineData("{ \"infantry\": \"x\", \"cavalry\": 1, \"flying\": 1, \"armored\": 1 }", "", "infantry")]
     [InlineData("3", "", "cost")]
     [InlineData(AllOne, ", \"heal\": 101", "heal")]
+    [InlineData(AllOne, ", \"burn\": 101", "burn")]
+    [InlineData(AllOne, ", \"burn\": -1", "burn")]
     [InlineData(AllOne, ", \"avoid\": -1", "avoid")]
     [InlineData(AllOne, ", \"appliesToFlyers\": \"yes\"", "appliesToFlyers")]
     public void TerrainFieldRulesFire(string cost, string extra, string expectedField)
@@ -196,6 +198,17 @@ public class ValidationTests
         var e = Fails(Fixture.Files(terrain: TerrainWith(cost, extra)));
 
         AssertNames(e, "terrain.json", "plain", expectedField);
+    }
+
+    /// <summary>Issue 453: a tile that heals cannot also burn (DECISIONS/0085); each value alone is legal.</summary>
+    [Fact]
+    public void ATileThatHealsCannotAlsoBurn()
+    {
+        var e = Fails(Fixture.Files(terrain: TerrainWith(AllOne, ", \"heal\": 20, \"burn\": 20")));
+
+        AssertNames(e, "terrain.json", "plain", "burn");
+        Assert.Contains("a tile that heals cannot also burn", e.Message);
+        Assert.Equal(20, ContentLoader.Parse(Fixture.Files(terrain: TerrainWith(AllOne, ", \"burn\": 20"))).Terrain["plain"].BurnPercent);
     }
 
     [Fact]
