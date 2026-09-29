@@ -48,3 +48,7 @@ Transcripts and scripts: `docs/transcripts/2026-09-28-harrow_weir-601.*` and `do
 - The count: the heuristic crossed the crest in 57 games (first crossing median turn 6), 25 of them while the bulwark stood. It won 29 of those, all with the bulwark dead at the win, so the replacement fail (crest crossed, bulwark alive, Foreman dead on 12,6 or 13,6 no later than the bridge games) fired in 0 games. Crest wins came at median turn 9 against 8 for bridge games, and crest games lost the captain in 14 of 57 against 20 of 143.
 - The Foreman's death tile: 12,6 or 13,6 in 94 of 116 wins (91 of 115 on the #456 file), and in 25 of the 29 crest wins. On the Sim's side the crest did not move him. Read: the heuristic takes the crest as a late detour when the bridge is shut, one body at a time, not as a flank timed with the bridge pair, so the death tile measures its pathing more than the map. Neither fallback is pulled: the crest is not a replacement (forest cost is for that), and it does not land after the boss is dead (row 3 is for that). The partners' cold re-rates decide, and the Builder's lean is recorded as provisional.
 - Code's hand play (seed 481, warm, disclosed) is in PLAYTEST.md; per the seventeenth round its scores and verdict wait for Chat's entry.
+
+## Closed (round 110, 2026-09-29)
+
+Both re-rates on the crest passed the gate with two yeses (Code seed 481 7/8/7, Chat seed 487 7/8/7). Harrow Weir is `tuned` again under DECISIONS/0088, which also records the gate 1 reading.
