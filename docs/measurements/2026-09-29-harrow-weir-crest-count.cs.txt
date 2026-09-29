@@ -1,0 +1,68 @@
+using Ironwake.Content;
+using Ironwake.Core;
+using Ironwake.Sim;
+
+var mapPath = args[0];
+int seeds = int.Parse(args[1]);
+var content = ContentLoader.Load("/home/user/IronWake/content");
+var map = MapFiles.Load(mapPath, content);
+var crest = new HashSet<Coord> { new(10, 2), new(11, 2) };
+int won = 0, lost = 0, timeout = 0, crossed = 0, replacement = 0;
+var deathTiles = new Dictionary<string, int>();
+var winTurnCrest = new List<int>(); var winTurnBridge = new List<int>();
+var bulwarkAliveAtWinCrest = 0; var firstCrossTurns = new List<int>();
+var foremanNorth = 0; var crestDeathTiles = new Dictionary<string,int>(); int crestFirst = 0; // Foreman ever stood on row <= 4
+var lines = new List<string>();
+for (ulong seed = 1; seed <= (ulong)seeds; seed++)
+{
+    var state = BattleState.From(map, content, content.Cast, seed, RollScheme.TwoRollAverage);
+    var player = new HeuristicPlayer();
+    bool cr = false; int crossTurn = 0; string? death = null; int deathTurn = 0; bool north = false; int bulwarkTurn = 0; bool crossedBeforeBulwark = false;
+    while (!state.Outcome.IsOver)
+    {
+        var enemy = state.Phase == Side.Enemy;
+        var commands = enemy ? EnemyAi.Plan(state, content) : player.Next(state, content);
+        foreach (var c in commands)
+        {
+            var r = Resolver.Apply(state, content, c);
+            if (!r.Accepted) throw new Exception($"seed {seed}: {c} rejected");
+            foreach (var e in r.Events)
+            {
+                if (e is UnitMoved m && m.UnitId.StartsWith("weir_foreman") && m.Path.Any(p => p.Y <= 4)) north = true;
+                if (e is UnitMoved mv && !enemy && mv.Path.Any(crest.Contains) && !cr) { cr = true; crossTurn = state.Turn; }
+                if (e is UnitDied b && b.UnitId.StartsWith("weir_shieldbearer")) { bulwarkTurn = state.Turn; crossedBeforeBulwark = cr; }
+                if (e is UnitDied d && d.UnitId.StartsWith("weir_foreman")) { death = d.At.ToString(); deathTurn = state.Turn; }
+            }
+            state = r.Next;
+            if (state.Outcome.IsOver) break;
+        }
+    }
+    var res = state.Outcome.Result;
+    bool bulwarkAlive = state.Units.Any(u => u.Unit.Id.StartsWith("weir_shieldbearer") && u.Hp > 0);
+    if (north) foremanNorth++;
+    if (res == BattleResult.Won)
+    {
+        won++;
+        (cr ? winTurnCrest : winTurnBridge).Add(state.Turn);
+        if (death != null) deathTiles[death] = deathTiles.GetValueOrDefault(death) + 1;
+        if (cr && bulwarkAlive) bulwarkAliveAtWinCrest++;
+        if (cr && death != null) crestDeathTiles[death] = crestDeathTiles.GetValueOrDefault(death) + 1;
+    }
+    else if (state.Outcome.Reason.Contains("turn")) timeout++; else lost++;
+    if (cr && (crossedBeforeBulwark || bulwarkTurn == 0)) crestFirst++;
+    if (cr) { crossed++; firstCrossTurns.Add(crossTurn); }
+    lines.Add($"seed {seed}: {res} t{state.Turn} crest={(cr ? "t" + crossTurn : "no")} bulwark={(bulwarkAlive ? "alive" : "dead")} foreman={(death ?? "alive")}{(death != null ? " t" + deathTurn : "")} bulwarkfell={(bulwarkTurn > 0 ? "t" + bulwarkTurn : "no")} crossedfirst={(cr && (crossedBeforeBulwark || bulwarkTurn == 0) ? "yes" : "no")} ({state.Outcome.Reason})");
+}
+double Med(List<int> l) { if (l.Count == 0) return double.NaN; var s = l.OrderBy(x => x).ToList(); return s.Count % 2 == 1 ? s[s.Count / 2] : (s[s.Count / 2 - 1] + s[s.Count / 2]) / 2.0; }
+double Mean(List<int> l) => l.Count == 0 ? double.NaN : l.Average();
+var bridgeMax = Med(winTurnBridge);
+Console.WriteLine($"# crest count on {mapPath}, {seeds} seeds, heuristic player, two rolls");
+Console.WriteLine($"won {won}, timeouts {timeout}, other losses {lost}");
+Console.WriteLine($"crest crossed (a player path through 10,2 or 11,2): {crossed} games; first crossing turn median {Med(firstCrossTurns)}");
+Console.WriteLine($"wins with the crest crossed: {winTurnCrest.Count}, win turn median {Med(winTurnCrest)} mean {Mean(winTurnCrest):0.00}");
+Console.WriteLine($"wins without it (bridge games): {winTurnBridge.Count}, win turn median {Med(winTurnBridge)} mean {Mean(winTurnBridge):0.00}");
+Console.WriteLine($"wins with the crest crossed and the bulwark alive at the win: {bulwarkAliveAtWinCrest}");
+Console.WriteLine($"games in which the crest was crossed while the bulwark stood: {crestFirst}");
+Console.WriteLine("Foreman death tile in wins with the crest crossed: " + string.Join(", ", crestDeathTiles.OrderByDescending(k => k.Value).Select(k => $"{k.Key} {k.Value}")));
+Console.WriteLine("Foreman death tile in wins: " + string.Join(", ", deathTiles.OrderByDescending(k => k.Value).Select(k => $"{k.Key} {k.Value}")));
+foreach (var l in lines) Console.WriteLine(l);

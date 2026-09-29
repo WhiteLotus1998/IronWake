@@ -96,6 +96,32 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 471, the geometry lever after two noes: the weir crest on row 2 is a second crossing,
+    /// a one-wide road over 10,2 and 11,2 between plain banks, landing on 12,2 within the wake
+    /// radius of the weir archer on 14,4, so a body that lands there wakes the weir. The rest of
+    /// the river stays water, so the crest and the bridge are the only two ways over north of the ford.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirCrestIsAOneWideCrossingLandingInsideTheArchersWake()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+
+        Assert.Equal("road", map.TerrainIdAt(new Coord(10, 2)));
+        Assert.Equal("road", map.TerrainIdAt(new Coord(11, 2)));
+        Assert.Equal("plain", map.TerrainIdAt(new Coord(9, 2)));
+        Assert.Equal("plain", map.TerrainIdAt(new Coord(12, 2)));
+        foreach (var x in new[] { 10, 11 })
+        {
+            var crossings = Enumerable.Range(0, 10).Where(y => map.TerrainIdAt(new Coord(x, y)) != "water").ToArray();
+            Assert.Equal(new[] { 2, 6 }, crossings);
+        }
+
+        var archer = Assert.Single(map.Placements.OfType<EnemyPlacement>(), e => e.Group == "weir" && !e.IsBoss);
+        Assert.True(new Coord(12, 2).DistanceTo(archer.At) <= MapFixture.Content.WakeRadius);
+        Assert.True(new Coord(11, 2).DistanceTo(archer.At) > MapFixture.Content.WakeRadius);
+    }
+
+    /// <summary>
     /// Issue 379: the Weir Foreman is a guard boss in the weir group, so he sleeps on his hill
     /// and the first strike on the bridge shieldbearer wakes him; he fights with the Toll Axe alone. Every tile a strike on 11,6
     /// can come from (range 1 or 2) is within the noise radius (wake radius plus 2) of 13,6, and
