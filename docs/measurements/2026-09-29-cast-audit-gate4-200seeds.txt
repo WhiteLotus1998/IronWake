@@ -1,0 +1,65 @@
+# Gate 1 and gate 4 on every shipped map, 200 seeds, two-roll average, Release build, at 0941465 (the #490 head; overwatch changes nothing on a map without its header). Issue 487's cast audit (docs/measurements/cast_audit.md) reads these rows.
+
+gate 1 beatable: the_tollgate, heuristic wins 148/200 (74 %), winning turn median 8 p90 10 limit 10, losses 52 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 52, two-roll average: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.245: ok
+  pell: drop 0.565 se 0.055 own [atk 843 dmg 14152 heal 0 abs 487] rest baseline [atk 1329 dmg 12538 heal 0 abs 1716] rest benched [atk 2148 dmg 21084 heal 0 abs 2528] benched losses 165 timeout 0 captain 0 protected, refused kill p50 0.8664 over 165
+  teodor: drop 0.245 se 0.046 own [atk 446 dmg 3784 heal 0 abs 537] rest baseline [atk 1726 dmg 22906 heal 0 abs 1666] rest benched [atk 1826 dmg 24753 heal 0 abs 2145] benched losses 101 timeout 0 captain 0 protected, refused kill p50 0.8674 over 101
+  wren: drop 0.215 se 0.042 own [atk 382 dmg 4029 heal 0 abs 701] rest baseline [atk 1790 dmg 22661 heal 0 abs 1502] rest benched [atk 1807 dmg 23846 heal 0 abs 2078] benched losses 95 timeout 0 captain 0 protected, refused kill p50 0.8674 over 95
+  captain captain: baseline [atk 501 dmg 4725 heal 0 abs 478] never benched, not judged
+
+gate 1 beatable: brackwater_cut, heuristic wins 128/200 (64 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 72 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 81, two-roll average: ok
+gate 4 no dead weight: brackwater_cut, 4 recruits x 200 seeds, units out, 0 to 4, median drop 0.158: ok
+  dunstan: drop 0.020 se 0.052 win drop 0.005 se 0.042 own [atk 107 dmg 4001 heal 0 abs 712] rest baseline [atk 1176 dmg 18844 heal 0 abs 1881] rest benched [atk 970 dmg 16230 heal 0 abs 1821] benched losses 0 timeout 73 captain 0 protected, refused kill -, benched survivors p50 0 of 3, captain alone 114
+  pell: drop 0.370 se 0.066 win drop 0.315 se 0.046 own [atk 354 dmg 4728 heal 0 abs 277] rest baseline [atk 929 dmg 18117 heal 0 abs 2316] rest benched [atk 1027 dmg 21295 heal 0 abs 2921] benched losses 5 timeout 130 captain 0 protected, refused kill p50 0.9660 over 5, benched survivors p50 1 of 3, captain alone 25
+  rook: drop 0.185 se 0.061 win drop 0.210 se 0.042 own [atk 393 dmg 3411 heal 0 abs 385] rest baseline [atk 890 dmg 19434 heal 0 abs 2208] rest benched [atk 629 dmg 19447 heal 0 abs 2513] benched losses 0 timeout 114 captain 0 protected, refused kill -, benched survivors p50 1 of 3, captain alone 40
+  wren: drop 0.130 se 0.055 win drop 0.080 se 0.036 own [atk 428 dmg 6388 heal 0 abs 639] rest baseline [atk 855 dmg 16457 heal 0 abs 1954] rest benched [atk 890 dmg 18306 heal 0 abs 2123] benched losses 0 timeout 88 captain 0 protected, refused kill -, benched survivors p50 0 of 3, captain alone 78
+  captain captain: baseline [atk 1 dmg 4317 heal 0 abs 580] never benched, not judged
+
+gate 1 beatable: harrow_weir, heuristic wins 116/200 (58 %), winning turn median 9 p90 12 limit 14, losses 50 timeout 34 captain 0 protected, quiet tail 0.5, refused kill p50 0.9892 over 50, two-roll average: FAILED
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.255: ok
+  dunstan: drop 0.220 se 0.042 own [atk 628 dmg 6133 heal 0 abs 365] rest baseline [atk 2701 dmg 34157 heal 0 abs 2361] rest benched [atk 2742 dmg 38028 heal 0 abs 3017] benched losses 64 timeout 64 captain 0 protected, refused kill p50 0.9651 over 64
+  keziah: drop 0.350 se 0.049 own [atk 381 dmg 6260 heal 0 abs 440] rest baseline [atk 2948 dmg 34030 heal 0 abs 2286] rest benched [atk 2741 dmg 37159 heal 0 abs 3293] benched losses 86 timeout 68 captain 0 protected, refused kill p50 0.9892 over 86
+  ottilie: drop 0.190 se 0.044 own [atk 729 dmg 4426 heal 0 abs 467] rest baseline [atk 2600 dmg 35864 heal 0 abs 2259] rest benched [atk 2609 dmg 38738 heal 0 abs 2861] benched losses 80 timeout 42 captain 0 protected, refused kill p50 0.9716 over 80
+  pell: drop 0.440 se 0.053 own [atk 578 dmg 8694 heal 0 abs 254] rest baseline [atk 2751 dmg 31596 heal 0 abs 2472] rest benched [atk 2727 dmg 35626 heal 0 abs 3463] benched losses 90 timeout 82 captain 0 protected, refused kill p50 0.9892 over 90
+  teodor: drop 0.255 se 0.049 own [atk 540 dmg 6485 heal 0 abs 513] rest baseline [atk 2789 dmg 33805 heal 0 abs 2213] rest benched [atk 2723 dmg 36529 heal 0 abs 3075] benched losses 84 timeout 51 captain 0 protected, refused kill p50 0.9892 over 84
+  captain captain: baseline [atk 473 dmg 8292 heal 0 abs 687] never benched, not judged
+
+gate 1 beatable: old_mill_road, heuristic wins 65/200 (33 %), winning turn median 8 p90 10 limit 12, losses 31 timeout 104 captain 0 protected, quiet tail 6.0, refused kill p50 0.9892 over 31, two-roll average: FAILED
+gate 4 no dead weight: old_mill_road, 1 recruits x 200 seeds, median drop 0.315: ok
+  wren: drop 0.315 se 0.040 own [atk 273 dmg 8443 heal 0 abs 918] rest baseline [atk 514 dmg 11755 heal 0 abs 1336] rest benched [atk 357 dmg 9420 heal 0 abs 1026] benched losses 134 timeout 64 captain 0 protected, refused kill p50 0.0346 over 134
+  captain captain: baseline [atk 514 dmg 11755 heal 0 abs 1336] never benched, not judged
+
+gate 1 beatable: sallow_grange, heuristic wins 157/200 (79 %), winning turn median 9 p90 10 limit 10, losses 39 timeout 4 captain 0 protected, quiet tail 0.4, refused kill p50 0.8775 over 39, two-roll average: ok
+gate 4 no dead weight: sallow_grange, 5 recruits x 200 seeds, median drop 0.380: ok
+  ansgar: drop 0.530 se 0.053 own [atk 441 dmg 4592 heal 0 abs 432] rest baseline [atk 2553 dmg 26065 heal 0 abs 1730] rest benched [atk 2139 dmg 22926 heal 0 abs 2699] benched losses 127 timeout 22 captain 0 protected, refused kill p50 0.8775 over 127
+  ottilie: drop 0.325 se 0.050 own [atk 365 dmg 2609 heal 0 abs 460] rest baseline [atk 2629 dmg 28048 heal 0 abs 1702] rest benched [atk 2392 dmg 27483 heal 0 abs 2135] benched losses 100 timeout 8 captain 0 protected, refused kill p50 0.8775 over 100
+  pell: drop 0.450 se 0.052 own [atk 690 dmg 8763 heal 0 abs 152] rest baseline [atk 2304 dmg 21894 heal 0 abs 2010] rest benched [atk 2313 dmg 24303 heal 0 abs 2536] benched losses 115 timeout 18 captain 0 protected, refused kill p50 0.8775 over 115
+  teodor: drop 0.380 se 0.052 own [atk 639 dmg 6002 heal 0 abs 354] rest baseline [atk 2355 dmg 24655 heal 0 abs 1808] rest benched [atk 2268 dmg 25767 heal 0 abs 2269] benched losses 103 timeout 16 captain 0 protected, refused kill p50 0.8775 over 103
+  wren: drop 0.120 se 0.041 own [atk 265 dmg 2760 heal 0 abs 439] rest baseline [atk 2729 dmg 27897 heal 0 abs 1723] rest benched [atk 2732 dmg 29341 heal 0 abs 1893] benched losses 63 timeout 4 captain 0 protected, refused kill p50 0.8775 over 63
+  captain captain: baseline [atk 594 dmg 5931 heal 0 abs 325] never benched, not judged
+
+gate 1 beatable: saltmarsh_ford, heuristic wins 23/200 (12 %), winning turn median 9 p90 13 limit 18, losses 169 timeout 8 captain 0 protected, quiet tail 2.8, refused kill p50 0.8230 over 169, two-roll average: FAILED
+gate 4 no dead weight: saltmarsh_ford, 3 recruits x 200 seeds, median drop 0.015: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.015, se 0.029); rows are data, no recruit is judged
+  ottilie: drop -0.020 se 0.029 own [atk 1097 dmg 6478 heal 0 abs 606] rest baseline [atk 1512 dmg 21459 heal 0 abs 2768] rest benched [atk 1516 dmg 27315 heal 0 abs 3304] benched losses 148 timeout 25 captain 0 protected, refused kill p50 0.8669 over 148
+  teodor: drop 0.015 se 0.029 own [atk 260 dmg 6079 heal 0 abs 942] rest baseline [atk 2349 dmg 21858 heal 0 abs 2432] rest benched [atk 2207 dmg 26667 heal 0 abs 3014] benched losses 164 timeout 16 captain 0 protected, refused kill p50 0.8674 over 164
+  wren: drop 0.015 se 0.030 own [atk 488 dmg 5001 heal 0 abs 530] rest baseline [atk 2121 dmg 22936 heal 0 abs 2844] rest benched [atk 1982 dmg 27355 heal 0 abs 3778] benched losses 163 timeout 17 captain 0 protected, refused kill p50 0.8674 over 163
+  captain captain: baseline [atk 764 dmg 10379 heal 0 abs 1296] never benched, not judged
+
+gate 1 beatable: content/keep/ironwake_raid.map, heuristic wins 186/200 (93 %), winning turn median 4 p90 6 limit 7, losses 12 timeout 2 captain 0 protected, quiet tail 0.2, refused kill p50 0.9892 over 12, two-roll average: ok
+gate 4 no dead weight: content/keep/ironwake_raid.map, 5 recruits x 200 seeds, median drop 0.195: ok
+  dunstan: drop 0.195 se 0.035 own [atk 622 dmg 6054 heal 0 abs 251] rest baseline [atk 1926 dmg 28301 heal 0 abs 1579] rest benched [atk 1981 dmg 33936 heal 0 abs 2351] benched losses 38 timeout 15 captain 0 protected, refused kill p50 0.9892 over 38
+  ottilie: drop 0.105 se 0.031 own [atk 565 dmg 4938 heal 0 abs 183] rest baseline [atk 1983 dmg 29417 heal 0 abs 1647] rest benched [atk 2037 dmg 33378 heal 0 abs 2062] benched losses 23 timeout 12 captain 0 protected, refused kill p50 0.9892 over 23
+  pell: drop 0.475 se 0.051 own [atk 558 dmg 8370 heal 0 abs 180] rest baseline [atk 1990 dmg 25985 heal 0 abs 1650] rest benched [atk 1833 dmg 30861 heal 0 abs 2858] benched losses 52 timeout 57 captain 0 protected, refused kill p50 0.9892 over 52
+  teodor: drop 0.130 se 0.034 own [atk 195 dmg 5007 heal 0 abs 772] rest baseline [atk 2353 dmg 29348 heal 0 abs 1058] rest benched [atk 2182 dmg 32509 heal 0 abs 1888] benched losses 30 timeout 10 captain 0 protected, refused kill p50 0.9892 over 30
+  wren: drop 0.330 se 0.044 own [atk 391 dmg 7274 heal 0 abs 365] rest baseline [atk 2157 dmg 27081 heal 0 abs 1465] rest benched [atk 2057 dmg 31325 heal 0 abs 2449] benched losses 47 timeout 33 captain 0 protected, refused kill p50 0.9892 over 47
+  captain captain: baseline [atk 217 dmg 2712 heal 0 abs 79] never benched, not judged
+
+gate 1 beatable: content/keep/ironwake_keep.map, heuristic wins 145/200 (72 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 55 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+gate 4 no dead weight: content/keep/ironwake_keep.map, 5 recruits x 200 seeds, median drop 0.395: ok
+  dunstan: drop 0.425 se 0.054 own [atk 718 dmg 8160 heal 0 abs 482] rest baseline [atk 3120 dmg 44063 heal 0 abs 2814] rest benched [atk 2814 dmg 43777 heal 0 abs 3102] benched losses 0 timeout 140 captain 0 protected, refused kill -
+  ottilie: drop 0.280 se 0.049 own [atk 843 dmg 6953 heal 0 abs 446] rest baseline [atk 2995 dmg 45270 heal 0 abs 2850] rest benched [atk 3049 dmg 48904 heal 0 abs 3108] benched losses 0 timeout 111 captain 0 protected, refused kill -
+  pell: drop 0.445 se 0.056 own [atk 901 dmg 15169 heal 0 abs 493] rest baseline [atk 2937 dmg 37054 heal 0 abs 2803] rest benched [atk 2628 dmg 37569 heal 0 abs 3517] benched losses 0 timeout 144 captain 0 protected, refused kill -
+  teodor: drop 0.340 se 0.051 own [atk 570 dmg 7621 heal 0 abs 707] rest baseline [atk 3268 dmg 44602 heal 0 abs 2589] rest benched [atk 2998 dmg 45715 heal 0 abs 3202] benched losses 0 timeout 123 captain 0 protected, refused kill -
+  wren: drop 0.395 se 0.051 own [atk 660 dmg 10299 heal 0 abs 734] rest baseline [atk 3178 dmg 41924 heal 0 abs 2562] rest benched [atk 2971 dmg 42515 heal 0 abs 3201] benched losses 0 timeout 134 captain 0 protected, refused kill -
+  captain captain: baseline [atk 146 dmg 4021 heal 0 abs 434] never benched, not judged
