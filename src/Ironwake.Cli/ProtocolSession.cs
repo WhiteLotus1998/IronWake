@@ -272,7 +272,7 @@ public sealed class ProtocolSession
         }
     }
 
-    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), on a <c>pincer: on</c> map the planner's anvil plans against the unit, unpriced (<see cref="Queries.Anvils"/>, issue 457), and whether the move itself wins the map (issue 356).</summary>
+    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), on a <c>pincer: on</c> map the planner's anvil plans against the unit, unpriced (<see cref="Queries.Anvils"/>, issue 457), the sleeping groups the stop would wake (<see cref="Queries.StopWakes"/>, issue 458), and whether the move itself wins the map (issue 356).</summary>
     private string Threat(JsonElement request, BattleUnit unit)
     {
         if (unit.Side != Side.Player)
@@ -385,9 +385,25 @@ public sealed class ProtocolSession
                 w.WriteEndArray();
             }
 
+            var wakes = Queries.StopWakes(_state, _content, unit, tile)!;
+            w.WriteStartArray("wakes");
+            foreach (var woke in wakes)
+            {
+                w.WriteStartObject();
+                w.WriteString("group", woke.Group);
+                w.WriteString("cause", woke.Cause.ToString().ToLowerInvariant());
+                if (woke.CalledBy is { } by)
+                {
+                    w.WriteString("by", by);
+                }
+
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
             var wins = Queries.MoveWins(_state, _content, unit, tile);
             w.WriteBoolean("wins", wins);
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins, anvils));
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins, anvils, wakes));
 
             void WriteIds(string name, IEnumerable<BattleUnit> units)
             {
