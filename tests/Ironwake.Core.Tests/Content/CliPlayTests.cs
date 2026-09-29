@@ -982,6 +982,30 @@ public class CliPlayTests
         Assert.Contains("escaped: none; left behind: none; fell: captain, dunstan, pell, rook, wren\n", output);
     }
 
+    /// <summary>
+    /// Issue 495's hand play: Code's seed 503 on <c>docs/samples/the_tollgate_pincer.map</c>, the
+    /// keep round. The enemy's arm cannot fire there (the rider is alone in its group), so every
+    /// pin is the player's: Teodor's on the woods archer with Wren behind it misses at 68, Wren's
+    /// with Teodor behind it kills at 79, and Wren's on the brigand with the captain behind it
+    /// kills. The captain seizes on turn 9 with two Recalls spent and nobody lost.
+    /// </summary>
+    [Fact]
+    public void TheTollgatePincerPlayReplaysWithThePlayersPinsOnly()
+    {
+        var output = RunSample("the_tollgate_pincer.map", "2026-09-29-the_tollgate_pincer-503.script", 503, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.DoesNotContain("rejected", output);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("  pincer: archer-2 pinned by wren: teodor hit +15\n", output);
+        Assert.Contains("  pincer: archer-2 pinned by teodor: wren hit +15\n", output);
+        Assert.Contains("  pincer: toll_brigand-1 pinned by captain: wren hit +15\n", output);
+        Assert.DoesNotContain("pinned by toll_", output);
+        Assert.DoesNotContain("pinned by archer", output);
+        Assert.DoesNotContain("pinned by rider", output);
+        Assert.DoesNotContain("pinned by bandit", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");

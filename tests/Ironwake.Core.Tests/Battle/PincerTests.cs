@@ -2,6 +2,7 @@ using Ironwake.Cli;
 using Ironwake.Content;
 using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
+using Ironwake.Sim;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
 namespace Ironwake.Core.Tests.Battle;
@@ -228,5 +229,87 @@ public class PincerTests
         Assert.Null(sample.Dusk);
         Assert.Equal(original.ExitAfterMove, sample.ExitAfterMove);
         Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
+    }
+
+    /// <summary>
+    /// Issue 495: the Tollgate sample that reads the player's arm in 13.13's keep round is the
+    /// shipped map with the pincer on. The header line is its only difference, and it is canonical.
+    /// </summary>
+    [Fact]
+    public void TheTollgatePincerSampleIsTheShippedMapWithOnlyThePincerAdded()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var shippedPath = Path.Combine(repo, "content", "maps", "the_tollgate.map");
+        var samplePath = Path.Combine(repo, "docs", "samples", "the_tollgate_pincer.map");
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n');
+        var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
+        var sampleLines = sampleText.Split('\n');
+
+        Assert.Equal(new[] { "pincer: on" }, sampleLines.Except(shipped).ToArray());
+        Assert.Empty(shipped.Except(sampleLines));
+        Assert.Equal(shipped.Length + 1, sampleLines.Length);
+
+        var sample = MapFiles.Load(samplePath, MapFixture.Content);
+        Assert.True(sample.PincerEnabled);
+        Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
+    }
+
+    /// <summary>The pin counts after one Attack applied to <paramref name="state"/>, as the Sim's runner reads them.</summary>
+    private static PinCounts CountAttack(BattleState state, string unit, string target)
+    {
+        var command = new Attack(unit, target);
+        var result = Resolver.Apply(state, Starter, command);
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        return PinCounts.Zero.After(state, command, result.Events);
+    }
+
+    private static IReadOnlyList<StrikeEvent> Strikes(BattleState state, string unit, string target) =>
+        Resolver.Apply(state, Starter, new Attack(unit, target)).Events.OfType<CombatFought>().Single().Strikes;
+
+    [Fact]
+    public void TheSimCountsAPinnedStrikeForItsStrikersSideAndItsHitsAsLanded()
+    {
+        var state = Start(Pinned);
+        var strikes = Strikes(state, "hale", "brigand-1");
+
+        var pins = CountAttack(state, "hale", "brigand-1");
+
+        Assert.Equal(strikes.Count(s => s.AttackerId == "hale"), pins.PlayerStrikes);
+        Assert.Equal(strikes.Count(s => s.AttackerId == "hale" && s.Hit), pins.PlayerLanded);
+        Assert.True(pins.PlayerStrikes > 0);
+        Assert.Equal(0, pins.EnemyStrikes);
+        Assert.Equal(0, pins.Anvils);
+    }
+
+    [Fact]
+    public void TheSimCountsAPinnedCounterForTheCounteringSide()
+    {
+        var state = Start("""
+            P captain 1,2
+            E brigand 2,2 group:field behavior:aggressive
+            E soldier 0,2 group:field behavior:aggressive
+
+            """);
+        var strikes = Strikes(state, "hale", "brigand-1");
+
+        var pins = CountAttack(state, "hale", "brigand-1");
+
+        Assert.Equal(strikes.Count(s => s.AttackerId == "brigand-1"), pins.EnemyStrikes);
+        Assert.Equal(strikes.Count(s => s.AttackerId == "brigand-1" && s.Hit), pins.EnemyLanded);
+        Assert.Equal(0, pins.PlayerStrikes);
+    }
+
+    [Fact]
+    public void WithoutTheHeaderTheSimCountsNoPinAndPrintsNoPinRow()
+    {
+        var state = Start(Pinned, pincer: false);
+
+        Assert.Equal(PinCounts.Zero, CountAttack(state, "hale", "brigand-1"));
+        Assert.Equal(PinCounts.Zero, PinCounts.Zero.After(Start(Pinned), new Wait("hale"), []));
+        var game = new GameResult(BattleResult.Won, 3, new Dictionary<string, ActionMix>()) { Pins = new PinCounts(1, 2, 1, 3, 2) };
+        Assert.Equal("", Gates.Pins([game], state.Map));
+        Assert.Equal(
+            "pins enemy anvils in 1/2 games 1 anvils 2 strikes pinned 1 landed, player 3 strikes pinned 2 landed, ",
+            Gates.Pins([game, game with { Pins = PinCounts.Zero }], Start(Pinned).Map));
     }
 }

@@ -22,7 +22,15 @@ public static class EnemyAi
     /// The commands of the enemy phase in order, ending with <see cref="EndPhase"/> unless
     /// the battle was decided on the way. The state must be at the start of an enemy phase.
     /// </summary>
-    public static ValueList<Command> Plan(BattleState state, GameContent content)
+    public static ValueList<Command> Plan(BattleState state, GameContent content) =>
+        PlanWithAnvils(state, content).Commands;
+
+    /// <summary>
+    /// <see cref="Plan"/>'s commands together with the anvil plans (<see cref="Anvil"/>, issue
+    /// 419) the phase took, in the order they act, so a caller can count the anvils that acted
+    /// without planning again (issue 495). Empty on a map without the <c>pincer: on</c> header.
+    /// </summary>
+    public static (ValueList<Command> Commands, ValueList<AnvilPlan> Anvils) PlanWithAnvils(BattleState state, GameContent content)
     {
         if (state.Phase != Side.Enemy)
         {
@@ -33,6 +41,7 @@ public static class EnemyAi
         var working = state;
         var order = state.UnitsOf(Side.Enemy).Select(u => u.Id).ToList();
         var claimed = new HashSet<string>();
+        var anvils = new List<AnvilPlan>();
         while (order.Count > 0)
         {
             if (working.Outcome.IsOver)
@@ -51,6 +60,7 @@ public static class EnemyAi
             if (anvil is not null)
             {
                 claimed.Add(anvil.FollowerId);
+                anvils.Add(anvil);
             }
 
             foreach (var command in anvil?.Commands ?? PlanUnit(working, content, unit))
@@ -76,7 +86,7 @@ public static class EnemyAi
             plan.Add(new EndPhase());
         }
 
-        return ValueList<Command>.From(plan);
+        return (ValueList<Command>.From(plan), ValueList<AnvilPlan>.From(anvils));
     }
 
     /// <summary>
