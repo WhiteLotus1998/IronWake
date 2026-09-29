@@ -16,7 +16,8 @@ name: builder-chain
 # issues are filed) and a best-effort heartbeat every 20 minutes restart a
 # stalled chain when, 90 seconds after the trigger, no issue is in progress and
 # no Builder PR is open (a woken Builder claims its issue within about 30
-# seconds). A refused wake (routine paused, daily cap) is logged, not
+# seconds), or when an open Builder PR is conflicting with main and untouched
+# for three minutes (its run has exited; a woken Builder rebases it first). A refused wake (routine paused, daily cap) is logged, not
 # failed.
 
 on:
@@ -63,6 +64,26 @@ jobs:
             # seconds, so after 90 seconds a live run shows itself; the check
             # looks for one instead of guessing from merge times.
             sleep 90
+            # A chained Builder exits as soon as its PR is armed, so a Table merge
+            # after that can leave the PR conflicting with nobody to rebase it;
+            # auto-merge never fires on a dirty PR and the issue stays in-progress.
+            # A conflicting Builder PR untouched for three minutes is a stall:
+            # wake a Builder, whose housekeeping rebases it before new work.
+            cut3m="$(date -u -d '3 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+            dirty=""
+            for pr in $(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq "[.[] | select(.head.ref | test(\"^(issue/|claude/issue-|experiment/)\")) | select(.updated_at < \"$cut3m\") | .number] | join(\" \")"); do
+              if [ "$(gh api "repos/$REPO/pulls/$pr" --jq '.mergeable_state')" = "dirty" ]; then dirty="$pr"; break; fi
+            done
+            if [ -n "$dirty" ]; then
+              echo "heartbeat: Builder PR #$dirty is conflicting and its run has exited; waking a Builder to rebase it"
+              ready=0
+              text="Chain mode: PR #$dirty on a Builder branch is conflicting with main and its run has exited. Rebase it on main, make it green, and re-enable auto-merge (housekeeping step 1). Then, if any issue is ready, take exactly one and stop; otherwise stop."
+              payload="$(jq -cn --arg text "$text" '{text: $text}')"
+              code="$(curl --silent --show-error -o /tmp/fire.out -w '%{http_code}' -X POST "$BUILDER_URL" -H "Authorization: Bearer $BUILDER_TOKEN" -H "anthropic-beta: experimental-cc-routine-2026-04-01" -H "anthropic-version: 2023-06-01" -H "Content-Type: application/json" -d "$payload" || echo 000)"
+              cat /tmp/fire.out; echo
+              case "$code" in 2*) echo "builder: woken to rebase #$dirty" ;; *) echo "builder: wake refused (HTTP $code)" ;; esac
+              exit 0
+            fi
             cut20h="$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
             fresh="$(gh api "repos/$REPO/issues?labels=in-progress&state=open&per_page=100" --jq "[.[] | select(.pull_request == null) | select(.updated_at > \"$cut20h\")] | length")"
             if [ "${fresh:-0}" -gt 0 ]; then echo "heartbeat: an issue is in progress; the chain is alive"; exit 0; fi
