@@ -187,14 +187,19 @@ public class BraceTests
         Assert.True(state.Find("hale")!.Braced);
     }
 
+    /// <summary>
+    /// Issue 131: Saltmarsh Ford is the one shipped map with <c>brace: on</c>; every other shipped
+    /// map leaves the header off, and without it a Wait braces nobody.
+    /// </summary>
     [Fact]
-    public void EveryShippedMapLeavesTheHeaderOffAndItsWaitsBraceNobody()
+    public void OnlySaltmarshFordShipsTheHeaderAndWithoutItWaitsBraceNobody()
     {
         var files = Directory.GetFiles(MapFixture.MapsDirectory, "*.map", SearchOption.AllDirectories);
         Assert.NotEmpty(files);
         foreach (var file in files)
         {
-            Assert.False(MapFiles.Load(file, MapFixture.Content).BraceEnabled, file);
+            var expected = Path.GetFileName(file) == "saltmarsh_ford.map";
+            Assert.True(expected == MapFiles.Load(file, MapFixture.Content).BraceEnabled, file);
         }
 
         var result = Start(brace: false).Try(new Wait("hale"));
@@ -370,5 +375,32 @@ public class BraceTests
         Assert.False(original.BraceEnabled);
         Assert.Equal(original with { BraceEnabled = true }, sample);
         Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
+    }
+
+    /// <summary>
+    /// Issue 131: the shipped Saltmarsh Ford is the timing arm's file (DECISIONS/0090, kept as
+    /// <c>docs/samples/saltmarsh_ford_0090.map</c>) with only <c>brace: on</c> added, and canonical.
+    /// </summary>
+    [Fact]
+    public void TheShippedSaltmarshIsTheTimingArmsFileWithOnlyTheBraceHeaderAdded()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var armPath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0090.map");
+        var shippedPath = Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map");
+        var arm = File.ReadAllText(armPath).Replace("\r\n", "\n").Split('\n').ToList();
+        var shippedText = File.ReadAllText(shippedPath).Replace("\r\n", "\n");
+        var shippedLines = shippedText.Split('\n').ToList();
+
+        var at = shippedLines.IndexOf("brace: on");
+        Assert.True(at >= 0);
+        shippedLines.RemoveAt(at);
+        Assert.Equal(arm, shippedLines);
+
+        var shipped = MapFiles.Load(shippedPath, MapFixture.Content);
+        var original = MapFiles.Load(armPath, MapFixture.Content);
+        Assert.True(shipped.BraceEnabled);
+        Assert.False(original.BraceEnabled);
+        Assert.Equal(original with { BraceEnabled = true }, shipped);
+        Assert.Equal(shippedText, MapFormat.Write(shipped, Starter));
     }
 }
