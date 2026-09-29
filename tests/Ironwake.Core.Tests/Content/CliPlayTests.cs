@@ -1272,6 +1272,27 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 471: the two re-rates of the retuned Harrow Weir (Code's seed 463, Chat's seed 473) replay
+    /// on the file they were played on, kept as <c>docs/samples/harrow_weir_0087.map</c> once the weir
+    /// crest became a crossing on the shipped map: every line accepted and the Foreman dead on turn 6.
+    /// Seed 463's transcript predates issue 458's wake lines, so the game is checked, not the bytes.
+    /// </summary>
+    [Theory]
+    [InlineData(463)]
+    [InlineData(473)]
+    public void TheRetuneReRatesReplayOnTheFileBeforeTheCrest(int seed)
+    {
+        var output = RunSample("harrow_weir_0087.map", $"2026-09-29-harrow_weir-{seed}.script", seed, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.DoesNotContain("rejected", output);
+        Assert.Contains("-- player phase, turn 6 --", output);
+        Assert.DoesNotContain("-- player phase, turn 7 --", output);
+        Assert.Contains("weir_foreman-1 falls at", output);
+        Assert.Contains("battle won: defeat_boss", output);
+    }
+
+    /// <summary>
     /// Issue 456's first check: the Critic's seed 601 line (captain on 7,0, Gust from 9,6 on turn 4)
     /// on the retuned file, its <c>shieldbearer-1</c> read as the weir-only bulwark. At res 3 the Gust
     /// reads 9 x2 and leaves the bulwark on 6, and the second hit comes from 10,6: on enemy phase 4
