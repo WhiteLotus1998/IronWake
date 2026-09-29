@@ -36,7 +36,7 @@ public sealed class PlaySession
     private const string Help = """
         commands:
           move <unit> <x,y>        move a unit to a tile in its reach
-          attack <unit> <target> [slot] [art <id>]  attack an enemy in range, with the weapon in a slot, declaring a combat art (the forecast prints first)
+          attack <unit> <target> [slot|weapon] [art <id>]  attack an enemy in range, with the weapon in a slot or named, declaring a combat art (the forecast prints first)
           item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
           wait <unit>              end the unit's action
           canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
@@ -47,13 +47,13 @@ public sealed class PlaySession
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   list the state each player turn started at, and the charges left
-          forecast <unit> <target> [slot] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
+          forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
           threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
           map                      show the board
           help                     this list
-        slots count from 1, as show lists them
+        slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
         a scripted run ends with a summary of every rejected line; --strict stops at the first
         """;
 
@@ -448,15 +448,15 @@ public sealed class PlaySession
             case "move":
                 Error("usage: move <unit> <x,y>");
                 break;
-            case "attack" when words.Length == 3 || (words.Length == 4 && int.TryParse(words[3], out _)):
-                if (TrySlot(words[1], words.Length == 4 ? words[3] : null, out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art))
+            case "attack" when words.Length >= 3 && IsSlotText(words[3..]):
+                if (TrySlot(words[1], SlotText(words[3..]), out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art))
                 {
                     Apply(new Attack(words[1], words[2], attackSlot, art));
                 }
 
                 break;
             case "attack":
-                Error("usage: attack <unit> <target> [slot] [art <id>]");
+                Error("usage: attack <unit> <target> [slot|weapon] [art <id>]");
                 break;
             case "wait" when words.Length == 2:
                 Apply(new Wait(words[1]));
@@ -544,7 +544,7 @@ public sealed class PlaySession
 
                 break;
             case "forecast":
-                Error("usage: forecast <unit> <target> [slot] [art <id>] [from <x,y>]");
+                Error("usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]");
                 break;
             case "threat" when words.Length == 2:
                 PrintThreat(words[1], null);
@@ -1006,8 +1006,22 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// Reads the words after <c>forecast &lt;unit&gt; &lt;target&gt;</c>: an optional slot, then
-    /// an optional <c>from &lt;x,y&gt;</c> (issue 151). False when they are anything else.
+    /// True when the words after the target can be an <c>attack</c> or <c>forecast</c> slot
+    /// (issue 477): none, one number, or a weapon's id or name, whose words are letters,
+    /// <c>_</c>, <c>-</c> and <c>'</c> only, so a coordinate or a stray keyword stays a usage error.
+    /// </summary>
+    private static bool IsSlotText(string[] words) =>
+        words.Length == 0
+        || (words.Length == 1 && int.TryParse(words[0], out _))
+        || words.All(word => word is not ("from" or "art") && word.All(c => char.IsAsciiLetter(c) || c is '_' or '-' or '\''));
+
+    /// <summary>The slot words joined with one space, or null when there are none.</summary>
+    private static string? SlotText(string[] words) => words.Length == 0 ? null : string.Join(' ', words);
+
+    /// <summary>
+    /// Reads the words after <c>forecast &lt;unit&gt; &lt;target&gt;</c>: an optional slot or
+    /// weapon name, then an optional <c>from &lt;x,y&gt;</c> (issues 151, 477). False when they
+    /// are anything else.
     /// </summary>
     private static bool TryForecastWords(string[] words, out string? slotText, out Coord? from)
     {
@@ -1019,11 +1033,15 @@ public sealed class PlaySession
         }
 
         var next = 3;
-        if (next < words.Length && int.TryParse(words[next], out _))
+        var fromAt = Array.IndexOf(words, "from", next);
+        var slotWords = words[next..(fromAt < 0 ? words.Length : fromAt)];
+        if (!IsSlotText(slotWords))
         {
-            slotText = words[next];
-            next++;
+            return false;
         }
+
+        slotText = SlotText(slotWords);
+        next += slotWords.Length;
 
         if (next < words.Length)
         {
@@ -1397,7 +1415,10 @@ public sealed class PlaySession
     /// <summary>
     /// Reads a one-based slot typed by the player into the core's zero-based one. Null text
     /// is no slot. A slot outside 1..count is refused here, naming the range the player
-    /// sees, so the core's zero-based message never reaches the screen.
+    /// sees, so the core's zero-based message never reaches the screen. Text that is not a
+    /// number names a carried item by id or display name, ignoring case, a space standing for
+    /// the id's <c>_</c> (issue 477); a name that matches no slot, or more than one, is refused
+    /// with the unit's slots listed by number and name.
     /// </summary>
     private bool TrySlot(string unitId, string? text, out int? slot)
     {
@@ -1412,8 +1433,25 @@ public sealed class PlaySession
             return false;
         }
 
-        var typed = int.Parse(text);
         var count = unit.Unit.Inventory.Count;
+        if (!int.TryParse(text, out var typed))
+        {
+            var named = SlotsNamed(unit.Unit.Inventory, _content, text);
+            if (named.Count == 1)
+            {
+                slot = named[0];
+                return true;
+            }
+
+            var slots = count == 0
+                ? "carries nothing"
+                : "slots: " + string.Join(", ", unit.Unit.Inventory.Items.Select((item, at) => $"{at + 1} {_content.ItemName(item.ItemId)}"));
+            Error(named.Count == 0
+                ? $"{unit.Id} carries no '{text}'; {slots}"
+                : $"{unit.Id} carries '{text}' in slots {string.Join(" and ", named.Select(at => at + 1))}; give the slot number; {slots}");
+            return false;
+        }
+
         if (typed < 1 || typed > count)
         {
             Error(count == 0 ? $"{unit.Id} carries nothing" : $"{unit.Id} has nothing in slot {typed}; slots run 1-{count}");
@@ -1423,6 +1461,18 @@ public sealed class PlaySession
         slot = typed - 1;
         return true;
     }
+
+    /// <summary>
+    /// The zero-based slots whose item is named by <paramref name="text"/> (issue 477): its id
+    /// or its display name, ignoring case, a space standing for the id's <c>_</c>.
+    /// </summary>
+    public static IReadOnlyList<int> SlotsNamed(Inventory inventory, GameContent content, string text) =>
+        inventory.Items
+            .Select((item, at) => (item, at))
+            .Where(entry => string.Equals(entry.item.ItemId, text.Replace(' ', '_'), StringComparison.OrdinalIgnoreCase)
+                || string.Equals(content.ItemName(entry.item.ItemId), text, StringComparison.OrdinalIgnoreCase))
+            .Select(entry => entry.at)
+            .ToList();
 
     /// <summary>
     /// The <c>show</c> weapon line: the equipped weapon's numbers, or <c>unarmed</c> for a
