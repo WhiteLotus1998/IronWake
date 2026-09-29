@@ -1,0 +1,1917 @@
+The Tollgate, seed 493, scheme TwoRollAverage
+objective: the captain, Alder Fenn (A), must stand on the throne at 7,1 by the end of turn 10; only the captain seizes; lost if the captain falls
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ......D.......
+11 .....BAC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,11   hp 17/17  Plain
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move pell 4,8
+pell moves 6,10 -> 4,8 via 5,10 4,10 4,9
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 .....BAC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,11   hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait pell
+pell waits
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 .....BAC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,11   hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move ottilie 3,9
+ottilie moves 5,11 -> 3,9 via 5,10 4,10 4,9
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...B.~~~~.....
+10 ..............
+11 ......AC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait ottilie
+ottilie waits
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...B.~~~~.....
+10 ..............
+11 ......AC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move captain 4,9
+captain moves 6,11 -> 4,9 via 6,10 5,10 4,10
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 .......C......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait captain
+captain waits
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 .......C......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move teodor 9,9
+teodor moves 7,11 -> 9,9 via 7,10 8,10 9,10
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~C....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait teodor
+teodor waits
+The Tollgate  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~C....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: watch archer-2
+archer-2 watches from 5,5; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: watch toll_brigand-1
+toll_brigand-1 watches from 6,5; no strike passed up
+enemy: watch toll_warden-1
+toll_warden-1 watches from 6,2; no strike passed up
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~C....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move teodor 8,6
+teodor moves 9,9 -> 8,6 via 9,8 9,7 9,6
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait teodor
+teodor waits
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ..........F...
+ 8 ....D.~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move pell 4,7
+pell moves 4,8 -> 4,7
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ....D.....F...
+ 8 ......~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait pell
+pell waits
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ....D.....F...
+ 8 ......~~......
+ 9 ...BA~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move captain 3,7
+captain moves 4,9 -> 3,7 via 4,8 4,7
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...AD.....F...
+ 8 ......~~......
+ 9 ...B.~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait captain
+captain waits
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...AD.....F...
+ 8 ......~~......
+ 9 ...B.~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,9    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move ottilie 3,8
+ottilie moves 3,9 -> 3,8
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...AD.....F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait ottilie
+ottilie waits
+The Tollgate  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...AD.....F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: watch archer-2
+archer-2 watches from 5,5; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: watch toll_brigand-1
+toll_brigand-1 watches from 6,5; no strike passed up
+enemy: watch toll_warden-1
+toll_warden-1 watches from 6,2; no strike passed up
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...AD.....F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; archer-2 at 5,5 over 5,3 4,4 6,4 3,5 7,5 4,6 6,6 5,7; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move teodor 7,5
+teodor moves 8,6 -> 7,5 via 8,5
+archer-2's watch fires on teodor at 7,5: hit 4 (teodor hp 17)
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...AD.....F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold, watching
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_brigand-1 at 6,5 over 6,3 5,4 7,4 4,5 8,5 5,6 7,6 6,7; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> attack teodor toll_brigand-1
+forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 9 hit 21% crit 0%
+teodor attacks toll_brigand-1
+  teodor misses toll_brigand-1
+  toll_brigand-1 misses teodor
+  teodor hp 17, toll_brigand-1 hp 23
+toll_brigand-1 is struck and stops watching
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...AD.....F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move pell 4,6
+pell moves 4,7 -> 4,6
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 ....D^........
+ 7 ...A......F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> attack pell archer-2 gust
+forecast pell -> archer-2 with Gust: dmg 11 hit 94% crit 7%; counter: dmg 8 hit 81% crit 2%
+pell equips Gust
+pell attacks archer-2
+  pell hits archer-2 for 11 (hp 6)
+  archer-2 hits pell for 8 (hp 8)
+  pell hp 8, archer-2 hp 6
+pell gains 14 exp (14)
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 ....D^........
+ 7 ...A......F...
+ 8 ...B..~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 6/17   Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move ottilie 5,7
+ottilie moves 3,8 -> 5,7 via 3,7 4,7
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 ....D^........
+ 7 ...A.B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+d  archer-2         Archer L3 bowman           5,5    hp 6/17   Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> attack ottilie archer-2
+forecast ottilie -> archer-2: dmg 7 hit 51% crit 4%; counter: dmg 7 hit 77% crit 1%
+ottilie attacks archer-2
+  ottilie hits archer-2 for 7 (hp 0)
+  ottilie hp 17, archer-2 hp 0
+ottilie gains 40 exp (40)
+archer-2 falls at 5,5
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ....D^........
+ 7 ...A.B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move captain 3,6
+captain moves 3,7 -> 3,6
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ...AD^........
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait captain
+captain waits
+The Tollgate  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ...AD^........
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,6    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain  done
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: attack toll_brigand-1 teodor
+forecast toll_brigand-1 -> teodor: dmg 9 hit 21% crit 0%; counter: dmg 11 hit 47% crit 2%
+toll_brigand-1 attacks teodor
+  toll_brigand-1 misses teodor
+  teodor misses toll_brigand-1
+  toll_brigand-1 hp 23, teodor hp 17
+enemy: watch toll_warden-1
+toll_warden-1 watches from 6,2; no strike passed up
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ...AD^........
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> attack teodor toll_brigand-1
+forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 9 hit 21% crit 0%
+teodor attacks toll_brigand-1
+  teodor misses toll_brigand-1
+  toll_brigand-1 misses teodor
+  teodor hp 17, toll_brigand-1 hp 23
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ...AD^........
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move captain 6,6
+captain moves 3,6 -> 6,6 via 4,6 5,6
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^cC......
+ 6 ....D^A.......
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> attack captain toll_brigand-1
+forecast captain -> toll_brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 39% crit 0%
+captain attacks toll_brigand-1
+  captain misses toll_brigand-1
+  toll_brigand-1 misses captain
+  captain crits toll_brigand-1 for 30 (hp 0)
+  captain hp 22, toll_brigand-1 hp 0
+captain gains 40 exp (40)
+toll_brigand-1 falls at 6,5
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^^C......
+ 6 ....D^A.......
+ 7 .....B....F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move ottilie 4,5
+ottilie moves 5,7 -> 4,5 via 4,7 4,6
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....B^^C......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait ottilie
+ottilie waits
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....B^^C......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill  done
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> wait pell
+pell waits
+The Tollgate  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....B^^C......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill  done
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: watch toll_warden-1
+toll_warden-1 watches from 6,2; no strike passed up
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....B^^C......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold, watching
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; toll_warden-1 at 6,2 over 6,0 5,1 7,1 4,2 8,2 5,3 7,3 6,4
+> move teodor 6,4
+teodor moves 7,5 -> 6,4 via 7,4
+event riders
+  rider-1 arrives at 13,4, group flank, aggressive
+toll_warden-1's watch fires on teodor at 6,4: miss (teodor hp 17)
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait teodor
+teodor waits
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 ....D^A.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move captain 5,6
+captain moves 6,6 -> 5,6
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 ....DA........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait captain
+captain waits
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 ....DA........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              4,6    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move pell 3,7
+pell moves 4,6 -> 3,7 via 3,6
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 .....A........
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait pell
+pell waits
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....B^^^......
+ 6 .....A........
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          4,5    hp 17/17  Hill
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain  done
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move ottilie 6,6
+ottilie moves 4,5 -> 6,6 via 4,6 5,6
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....n^^^......
+ 6 .....AB.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain  done
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> watch ottilie
+ottilie watches from 6,6; no strike passed up
+The Tollgate  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....n^^^......
+ 6 .....AB.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  watching  done
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain  done
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3; ottilie at 6,6 over 6,4 5,5 7,5 4,6 8,6 5,7 7,7 6,8
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: move rider-1 7,4
+rider-1 moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
+enemy: attack rider-1 teodor
+forecast rider-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 11 hit 76% crit 1%
+rider-1 attacks teodor
+  rider-1 misses teodor
+  teodor hits rider-1 for 11 (hp 10)
+  rider-1 hp 10, teodor hp 17
+teodor gains 14 exp (14)
+enemy: attack toll_warden-1 teodor
+forecast toll_warden-1 -> teodor: dmg 6 hit 31% crit 1%; counter: none
+toll_warden-1 attacks teodor
+  toll_warden-1 hits teodor for 6 (hp 11)
+  toll_warden-1 hp 21, teodor hp 11
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......Ce......
+ 5 ....n^^^......
+ 6 .....AB.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain
+e  rider-1          Rider L3 outrider          7,4    hp 10/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> attack teodor rider-1
+forecast teodor -> rider-1: dmg 11 hit 76% crit 1%; counter: dmg 7 hit 39% crit 1%
+teodor attacks rider-1
+  teodor hits rider-1 for 11 (hp 0)
+  teodor hp 11, rider-1 hp 0
+teodor gains 40 exp (54)
+rider-1 falls at 7,4
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....n^^^......
+ 6 .....AB.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move captain 5,5
+captain moves 5,6 -> 5,5
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....^B.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait captain
+captain waits
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....^B.......
+ 7 ...D......F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              3,7    hp 8/16   Plain
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move pell 5,6
+pell moves 3,7 -> 5,6 via 3,6 4,6
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....DB.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait pell
+pell waits
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....DB.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move ottilie 7,6
+ottilie moves 6,6 -> 7,6
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait ottilie
+ottilie waits
+The Tollgate  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: watch archer-1
+archer-1 watches from 6,1; no strike passed up
+enemy: wait bandit_leader-1
+bandit_leader-1 waits
+enemy: attack toll_warden-1 teodor
+forecast toll_warden-1 -> teodor: dmg 6 hit 31% crit 1%; counter: none
+toll_warden-1 attacks teodor
+  toll_warden-1 misses teodor
+  toll_warden-1 hp 21, teodor hp 11
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+The Tollgate  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move teodor 6,3
+teodor moves 6,4 -> 6,3
+archer-1's watch fires on teodor at 6,3: hit 5 (teodor hp 6)
+The Tollgate  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 ......^.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          6,3    hp 6/21   Plain
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> attack teodor toll_warden-1
+forecast teodor -> toll_warden-1: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+teodor attacks toll_warden-1
+  teodor hits toll_warden-1 for 10 (hp 11)
+  toll_warden-1 hits teodor for 7 (hp 0)
+  teodor hp 0, toll_warden-1 hp 11
+teodor falls at 6,3
+The Tollgate  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 11/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> recall list
+recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same
+  state 0  turn 1  the start  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 1  turn 1  after move pell 4,8  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 2  turn 1  after wait pell  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 3  turn 1  after move ottilie 3,9  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 4  turn 1  after wait ottilie  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 5  turn 1  after move captain 4,9  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 6  turn 1  after wait captain  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 7  turn 1  after move teodor 9,9  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 8  turn 1  after wait teodor  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 15  turn 2  turn start  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 16  turn 2  after move teodor 8,6  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 17  turn 2  after wait teodor  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 18  turn 2  after move pell 4,7  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 19  turn 2  after wait pell  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 20  turn 2  after move captain 3,7  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 21  turn 2  after wait captain  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 22  turn 2  after move ottilie 3,8  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 23  turn 2  after wait ottilie  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 30  turn 3  turn start  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 29 hp
+  state 31  turn 3  after move teodor 7,5  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 25 hp
+  state 32  turn 3  after attack teodor toll_brigand-1  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 25 hp
+  state 33  turn 3  after move pell 4,6  undoes: gives back 2 kills (archer-2, toll_brigand-1), 94 exp, 50 enemy hp; returns teodor alive, 25 hp
+  state 34  turn 3  after attack pell archer-2 2  undoes: gives back 2 kills (archer-2, toll_brigand-1), 80 exp, 39 enemy hp; returns teodor alive, 17 hp
+  state 35  turn 3  after move ottilie 5,7  undoes: gives back 2 kills (archer-2, toll_brigand-1), 80 exp, 39 enemy hp; returns teodor alive, 17 hp
+  state 36  turn 3  after attack ottilie archer-2  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 37  turn 3  after move captain 3,6  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 38  turn 3  after wait captain  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 44  turn 4  turn start  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 45  turn 4  after attack teodor toll_brigand-1  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 46  turn 4  after move captain 6,6  undoes: gives back 1 kill (toll_brigand-1), 40 exp, 33 enemy hp; returns teodor alive, 17 hp
+  state 47  turn 4  after attack captain toll_brigand-1  undoes: gives back 10 enemy hp; returns teodor alive, 17 hp
+  state 48  turn 4  after move ottilie 4,5  undoes: gives back 10 enemy hp; returns teodor alive, 17 hp
+  state 49  turn 4  after wait ottilie  undoes: gives back 10 enemy hp; returns teodor alive, 17 hp
+  state 50  turn 4  after wait pell  undoes: gives back 10 enemy hp; returns teodor alive, 17 hp
+  state 55  turn 5  turn start  undoes: gives back 10 enemy hp; returns teodor alive, 17 hp
+  state 56  turn 5  after move teodor 6,4  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 57  turn 5  after wait teodor  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 58  turn 5  after move captain 5,6  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 59  turn 5  after wait captain  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 60  turn 5  after move pell 3,7  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 61  turn 5  after wait pell  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 62  turn 5  after move ottilie 6,6  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 63  turn 5  after watch ottilie  undoes: gives back 1 kill (rider-1), 31 enemy hp; returns teodor alive, 17 hp
+  state 70  turn 6  turn start  undoes: gives back 1 kill (rider-1), 20 enemy hp; returns teodor alive, 11 hp
+  state 71  turn 6  after attack teodor rider-1  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 72  turn 6  after move captain 5,5  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 73  turn 6  after wait captain  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 74  turn 6  after move pell 5,6  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 75  turn 6  after wait pell  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 76  turn 6  after move ottilie 7,6  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 77  turn 6  after wait ottilie  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 82  turn 7  turn start  undoes: gives back 10 enemy hp; returns teodor alive, 11 hp
+  state 83  turn 7  after move teodor 6,3  undoes: gives back 10 enemy hp; returns teodor alive, 6 hp
+> recall 82
+recalled to state 82; 2 charges left
+undone: gives back 10 enemy hp; returns teodor alive, 11 hp
+the rolls do not change: the same attack will roll the same
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          6,4    hp 11/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move teodor 5,4
+teodor moves 6,4 -> 5,4
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....C^.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> wait teodor
+teodor waits
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....C^.......
+ 5 ....nA^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold, watching
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+watches: archer-1 at 6,1 over 5,0 7,0 4,1 8,1 5,2 7,2 6,3
+> move captain 6,3
+captain moves 5,5 -> 6,3 via 5,4 6,4
+archer-1's watch fires on captain at 6,3: hit 5 (captain hp 17)
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....n^^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 17/22  Plain  captain
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> attack captain toll_warden-1
+forecast captain -> toll_warden-1: dmg 9 hit 87% crit 4%; counter: dmg 7 hit 52% crit 0%
+captain attacks toll_warden-1
+  captain hits toll_warden-1 for 9 (hp 12)
+  toll_warden-1 hits captain for 7 (hp 10)
+  captain hp 10, toll_warden-1 hp 12
+captain gains 14 exp (54)
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....n^^^......
+ 6 .....D.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 10/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,6    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move pell 5,5
+pell moves 5,6 -> 5,5
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....nD^^......
+ 6 .....^.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 10/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,5    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait pell
+pell waits
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....nD^^......
+ 6 .....^.B......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 10/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          7,6    hp 17/17  Plain
+D  pell             Pell L1 adept              5,5    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> move ottilie 6,5
+ottilie moves 7,6 -> 6,5 via 6,6
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....nDB^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 10/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          6,5    hp 17/17  Forest
+D  pell             Pell L1 adept              5,5    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> wait ottilie
+ottilie waits
+The Tollgate  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####A#######
+ 4 .....C^.......
+ 5 ....nDB^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,3    hp 10/22  Plain  captain  done
+B  ottilie          Ottilie L1 bowman          6,5    hp 17/17  Forest  done
+D  pell             Pell L1 adept              5,5    hp 8/16   Forest  done
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+> end
+-- player phase ends, turn 7 --
+-- enemy phase, turn 7 --
+enemy: attack archer-1 captain
+forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+archer-1 attacks captain
+  archer-1 misses captain
+  archer-1 hp 17, captain hp 10
+enemy: attack bandit_leader-1 captain 2
+forecast bandit_leader-1 -> captain: dmg 11 hit 43% crit 0%; counter: none
+bandit_leader-1 equips Toll Axe
+bandit_leader-1 attacks captain
+  bandit_leader-1 hits captain for 11 (hp 0)
+  bandit_leader-1 hp 26, captain hp 0
+captain falls at 6,3
+The Tollgate  turn 7 of 10  enemy phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....C^.......
+ 5 ....nDB^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold  done
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss  done
+B  ottilie          Ottilie L1 bowman          6,5    hp 17/17  Forest
+D  pell             Pell L1 adept              5,5    hp 8/16   Forest
+C  teodor           Teodor L1 pikeman          5,4    hp 11/21  Plain
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
+overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch
+battle lost: the captain is dead; only recall is left
+lost because the captain, Alder Fenn (A), fell
+battle lost: the captain is dead
