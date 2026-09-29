@@ -104,7 +104,7 @@ public class CombatArtCliTests : IDisposable
 
         Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: wren knows no art 'cleave'\n", output);
         Assert.Contains("> attack captain brigand-1 art sunder\nERROR: captain knows no art 'sunder'\n", output);
-        Assert.Contains("> attack captain brigand-1 art\nERROR: usage: attack <unit> <target> [slot] [art <id>]\n", output);
+        Assert.Contains("> attack captain brigand-1 art\nERROR: usage: attack <unit> <target> [slot|weapon] [art <id>]\n", output);
     }
 
     [Fact]
