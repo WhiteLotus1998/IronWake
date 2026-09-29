@@ -267,8 +267,8 @@ public static class Queries
     /// <summary>
     /// The Guard groups still asleep on <see cref="ThreatBoard"/>'s board of which some
     /// member could strike <paramref name="unit"/> on <paramref name="from"/> were the group
-    /// awake (issue 248, the thirty-sixth round's shape one): each group with every living
-    /// member, in group order, and no numbers, so the player learns a sleeping group is a
+    /// awake (issue 248, the thirty-sixth round's shape one): each group with the members that
+    /// could strike the tile were it awake, never one that could not (issue 454), in group order, and no numbers, so the player learns a sleeping group is a
     /// question without being handed its answer. A group the tile itself certainly wakes is
     /// already awake on that board and priced by <see cref="Threats"/> instead. Null exactly
     /// when <see cref="Threats"/> is. Read-only.
@@ -294,8 +294,8 @@ public static class Queries
         foreach (var group in sleeping)
         {
             var woken = board.Wake(group);
-            var members = ValueList<BattleUnit>.From(woken.UnitsOf(Side.Enemy).Where(u => u.Group == group));
-            if (members.Any(m => EnemyAi.StrikeOn(woken, content, m, moved) is not null))
+            var members = ValueList<BattleUnit>.From(woken.UnitsOf(Side.Enemy).Where(u => u.Group == group && EnemyAi.StrikeOn(woken, content, u, moved) is not null));
+            if (members.Count > 0)
             {
                 groups.Add(new SleepingThreat(group, members));
             }
@@ -364,7 +364,7 @@ public static class Queries
     }
 }
 
-/// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and able to strike the unit were it awake.</summary>
+/// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and <see cref="Members"/> the ones able to strike the unit were it awake.</summary>
 public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members);
 
 /// <summary>
