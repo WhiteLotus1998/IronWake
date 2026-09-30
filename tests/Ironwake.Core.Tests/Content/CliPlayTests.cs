@@ -863,6 +863,28 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.15's keep round, Code's warm chair: seed 613 on <c>docs/samples/brackwater_cut_wildfire.map</c>,
+    /// Brackwater in daylight with a wood at the cut's west mouth and the aggressive hexer. The one
+    /// ignition on offer, Pell's Cinder on the archer in the wood at 10,4, is read and refused for
+    /// its lethal counter, and nothing burns all game. Wren dies to a strike the phase-start
+    /// `threat` could not price: her counter kills the brigand in the gap, and the rider behind it
+    /// steps through. The captain escapes on turn 7 with Dunstan; three fall.
+    /// </summary>
+    [Fact]
+    public void TheWildfireKeepRoundPlayReplaysWithNoFire()
+    {
+        var output = RunSample("brackwater_cut_wildfire.map", "2026-09-30-brackwater_cut_wildfire-613.script", 613, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("escaped: dunstan, captain; left behind: none; fell: pell, rook, wren\n", output);
+        Assert.Contains("forecast pell -> archer-1 from 12,4 (Plain) with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%\n  counter: lethal to pell (8 against 8 hp)\n  wildfire: pell ignites 10,4 on a hit\n", output);
+        Assert.Contains("  wren hits brigand-1 for 10 (hp 0)\n", output);
+        Assert.Contains("  rider-1 hits wren for 9 (hp 0)\n", output);
+        Assert.DoesNotContain("becomes Fire", output);
+        Assert.DoesNotMatch(@"\w burns \d", output);
+    }
+
+    /// <summary>
     /// 13.16's first play: Code's seed 461 on <c>docs/samples/the_tollgate_windup.map</c>. On turn 5
     /// the mauler raises a blow over the door with Teodor on it at 5 hp; on turn 6 Pell's Cinder
     /// from 6,4 hits the mauler from outside its reach, which leaves the blow raised (round 99),
