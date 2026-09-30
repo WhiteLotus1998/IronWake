@@ -1366,6 +1366,7 @@ B  wren             Wren L1 cadet              6,5    hp 20/20  Plain
 wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
 > attack pell toll_warden-1
 forecast pell -> toll_warden-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 10 hit 73% crit 0%
+  counter: lethal to pell (10 against 8 hp)
 pell attacks toll_warden-1
   pell hits toll_warden-1 for 12 (hp 0)
   pell hp 8, toll_warden-1 hp 0

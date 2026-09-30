@@ -1475,6 +1475,7 @@ B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
 > attack wren toll_brigand-1
 forecast wren -> toll_brigand-1: dmg 9 x2 hit 82% crit 4%; counter: dmg 10 hit 13% crit 0%
+  counter: lethal to wren (10 against 10 hp)
   pincer: toll_brigand-1 pinned by captain: wren hit +15
 wren attacks toll_brigand-1
   wren hits toll_brigand-1 for 9 (hp 0)
@@ -2278,6 +2279,7 @@ B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
 > attack pell toll_warden-1
 forecast pell -> toll_warden-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%
+  counter: lethal to pell (9 against 8 hp)
 pell attacks toll_warden-1
   pell hits toll_warden-1 for 12 (hp 0)
   pell hp 8, toll_warden-1 hp 0

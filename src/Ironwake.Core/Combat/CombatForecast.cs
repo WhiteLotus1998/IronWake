@@ -64,4 +64,19 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
 
     /// <summary>The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit.</summary>
     public int AttackerDamageLivedFor(int attackerHp) => Attacker.Damage * AttackerStrikesLivedFor(attackerHp);
+
+    /// <summary>
+    /// Whether the defender's counter kills the attacker if every counter strike lands (issue 539):
+    /// its plain damage over all the strikes it can make reaches <paramref name="attackerHp"/>, no
+    /// crit counted, the deterministic reading <c>threat</c>'s "if all land" uses. False when the
+    /// defender does not counter, and when the attacker's first round is certain to kill it first
+    /// (displayed hit 100, its plain damage over that round reaching <paramref name="defenderHp"/>).
+    /// </summary>
+    public bool CounterIsLethal(int attackerHp, int defenderHp) =>
+        Defender.Strikes
+        && Defender.Damage * Defender.StrikeCount >= attackerHp
+        && !(Attacker.Strikes && Attacker.DisplayedHit == 100 && Attacker.Damage * Attacker.StrikesPerRound >= defenderHp);
+
+    /// <summary>The counter's plain damage if every strike it can make lands, no crit (issue 539).</summary>
+    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount : 0;
 }

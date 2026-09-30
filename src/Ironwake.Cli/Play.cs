@@ -1130,7 +1130,13 @@ public sealed class PlaySession
     {
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, RaisesWith(state, content, unit, slot)) };
+        var raises = RaisesWith(state, content, unit, slot);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises) };
+        if (LethalCounterLine(unit, target, forecast, raises) is { } lethal)
+        {
+            lines.Add(lethal);
+        }
+
         if (art is not null)
         {
             lines.Add(ArtLine(content, unit, forecast, slot, art));
@@ -1154,6 +1160,16 @@ public sealed class PlaySession
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
+
+    /// <summary>
+    /// Under a forecast whose counter kills the attacker if every counter strike lands (issue 539):
+    /// <c>  counter: lethal to wren (17 against 17 hp)</c>, read by
+    /// <see cref="CombatForecast.CounterIsLethal"/>; null otherwise, and for a raise, which draws no counter.
+    /// </summary>
+    public static string? LethalCounterLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises) =>
+        !raises && forecast.CounterIsLethal(unit.Hp, target.Hp)
+            ? $"  counter: lethal to {unit.Id} ({forecast.CounterIfAllLand} against {unit.Hp} hp)"
+            : null;
 
     /// <summary>
     /// Under a forecast of a combat art (issue 68): the art, the weapon as the art makes it,
@@ -1452,7 +1468,7 @@ public sealed class PlaySession
     private static string RaiseText(SideForecast side) => $"dmg {side.Damage} hit -- crit --";
 
     /// <summary>True when <paramref name="unit"/>'s attack with <paramref name="slot"/> raises a blow instead of fighting.</summary>
-    private static bool RaisesWith(BattleState state, GameContent content, BattleUnit unit, int? slot) =>
+    internal static bool RaisesWith(BattleState state, GameContent content, BattleUnit unit, int? slot) =>
         Windup.Raises(state, Resolver.ChooseWeapon(unit, content, slot).Weapon);
 
     /// <summary>

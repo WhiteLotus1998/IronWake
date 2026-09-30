@@ -745,6 +745,7 @@ B  wren             Wren L1 cadet              11,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor soldier-1
 forecast teodor -> soldier-1: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+  counter: lethal to teodor (8 against 8 hp)
 teodor attacks soldier-1
   teodor hits soldier-1 for 10 (hp 0)
   teodor hp 8, soldier-1 hp 0
@@ -1016,6 +1017,7 @@ B  wren             Wren L1 cadet              8,7    hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie archer-1
 forecast ottilie -> archer-1: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 76% crit 1%
+  counter: lethal to ottilie (7 against 7 hp)
 ottilie attacks archer-1
   ottilie hits archer-1 for 8 (hp 0)
   ottilie hp 7, archer-1 hp 0

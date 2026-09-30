@@ -528,6 +528,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mil
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
 > attack wren mill_bandit-1
 forecast wren -> mill_bandit-1: dmg 9 hit 85% crit 2%; counter: dmg 10 hit 85% crit 3%
+  counter: lethal to wren (10 against 10 hp)
 wren attacks mill_bandit-1
   wren hits mill_bandit-1 for 9 (hp 0)
   wren hp 10, mill_bandit-1 hp 0

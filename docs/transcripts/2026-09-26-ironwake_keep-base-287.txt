@@ -537,6 +537,7 @@ C  teodor           Teodor L1 pikeman          11,7   hp 3/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 14/20  Plain
 > attack teodor soldier-2
 forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+  counter: lethal to teodor (8 against 3 hp)
 teodor attacks soldier-2
   teodor hits soldier-2 for 10 (hp 0)
   teodor hp 3, soldier-2 hp 0

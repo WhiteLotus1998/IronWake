@@ -2121,6 +2121,7 @@ D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
 forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+  counter: lethal to pell (8 against 8 hp)
 pell attacks hexer-1
   pell hits hexer-1 for 8 (hp 0)
   pell hp 8, hexer-1 hp 0
@@ -2741,6 +2742,7 @@ D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
 forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+  counter: lethal to pell (8 against 8 hp)
 pell attacks hexer-1
   pell hits hexer-1 for 8 (hp 0)
   pell hp 8, hexer-1 hp 0

@@ -2623,6 +2623,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 escaped: rook
 > attack dunstan rider-1
 forecast dunstan -> rider-1: dmg 10 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+  counter: lethal to dunstan (6 against 2 hp)
 dunstan attacks rider-1
   dunstan hits rider-1 for 10 (hp 0)
   dunstan hp 2, rider-1 hp 0
