@@ -21,6 +21,11 @@ Every design is original. No character, costume, weapon, crest, creature or pose
 - Player tokens: the silhouette in ink (`#15181D`) on the amber disc. Enemy tokens: the silhouette in bone on the slate disc. The client draws the 1 px bone hairline rim, the boss's dashed ring, and the captain's crown itself; do not paint them into the art.
 - Facing: the silhouette is drawn upright and never mirrored, because the side is carried by value, not by direction.
 
+## Tiles
+
+- One tile per terrain in `content/terrain.json`: **48 x 48 px**, delivered at 2x (96 x 96), a flat square of the terrain's LOOK.md colour with its detail laid over it: ink at 25 to 35 percent (forest's three pines, hill's swell, mountain's ridge, fort's battlement, the gate's arch), frost ripples on water, iron coursing on wall. No outline, no grid, no shadow: the client draws the hairline grid and the north light's shadows, which depend on the neighbours.
+- Fire (`tile_fire`) is never a fill: an ember hatch on clear ground, which the client lays over whatever burns.
+
 ## Battle-scene clips
 
 One combatant per sheet, facing **right**. The client mirrors the sheet for the left side. The frame is **256 x 256 px**, the pivot is the feet's centre at (128, 232), and the art runs at 12 frames a second. One sheet is delivered per (class, weapon kind, clip), with an extra set for each named boss by weapon. The contact frame is where the blow lands: hit-stop holds there and the damage number fires. Clip lengths are a guide; the contact frame's index is the contract.
@@ -48,11 +53,12 @@ Both are out of the showcase and listed so the names are reserved. There is one 
 - **Format:** PNG, RGBA, sRGB, no premultiplied alpha, delivered at 2x.
 - **Palette:** the values in `docs/LOOK.md`'s palette table, plus at most one shade and one highlight per value. The player keeps chroma (the amber); every enemy and world colour stays grey-leaning. `LookPaletteTests` checks the palette by arithmetic, and a new colour goes into LOOK.md before it goes into art.
 - **Licence and ownership:** the delivery carries a written grant letting the project use, modify and redistribute the art in the game and its promotional material, with the artist's credit line. Each file set is listed in `LICENSES` at the repository root with its source and terms, as the fonts are.
+- **Generated set (issue 564):** `docs/art/make_art.py` draws every token but the captain's (Lotus models him) and every tile from coded shapes, hard-edged, the same bytes every run, into `src/Ironwake.Godot/assets/art/<name>.png`, and lists what it owns in `generated.txt` there; `ArtGeneratedTests` holds those files to the look's colours. A delivered file replaces a generated one by name and comes off the list. `docs/art/contact-tokens.png` shows the set at 2x and 1x.
 - **Placeholders:** until a file is delivered, the client draws its own vector placeholder under the same name, so real art drops in without code changes. The map tokens have placeholders now (`Main.Look.cs`). The clips get theirs with the battle scene (#535).
 
 ## The name list
 
-Every asset, one per line, in order: tokens, class clips, boss clips, then the optional level-up poses and portraits. A clip row names a sheet, whose frames follow the clip table above.
+Every asset, one per line, in order: tokens, tiles, class clips, boss clips, then the optional level-up poses and portraits. A clip row names a sheet, whose frames follow the clip table above.
 
 ```names
 token_adept_player
@@ -74,6 +80,16 @@ token_reaver_enemy
 token_skyrider_player
 token_skyrider_enemy
 token_captain_player
+tile_fire
+tile_forest
+tile_fort
+tile_hill
+tile_mountain
+tile_plain
+tile_road
+tile_throne
+tile_wall
+tile_water
 adept_reason_idle
 adept_reason_advance
 adept_reason_strike
