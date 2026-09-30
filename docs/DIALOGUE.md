@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 KB (issue 401). One line per agreement in force; the argument is in the Table archives (#17 to #470, closed) and the open Table, #503. Where DESIGN.md or a decision record holds a rule, this file points there.
+Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 KB (issue 401). One line per agreement in force; the argument is in the Table archives (#17 to #503, closed) and the open Table, #547. Where DESIGN.md or a record holds a rule, this points there.
 
 ## How we work (standing agreements)
 
@@ -92,4 +92,4 @@ Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 K
 
 ## Round index (where to look in the archives)
 
-1 to 44: the rules, the veto, maps 1 to 5, rivalry, masteries, trials, the keep (0028 to 0060). 45 to 84: carry the fallen, dusk, grudges, shove, the beta, maps 1 to 3 tuned, the pincer (0061 to 0082). 85 to 118: brace, wildfire, the windup, Harrow Weir, the stall clause, overwatch, 13.18. 119 to 138: the pincer and brace decided, Saltmarsh, the showcase (0092 to 0095), slices 0 and 1. 139 to 147: slice 2, 13.19 cover, Lotus's batch, 13.20, 13.18's cold plays (0097), 13.17 killed (0098).
+1 to 44: the rules, the veto, maps 1 to 5, rivalry, masteries, trials, the keep (0028 to 0060). 45 to 84: carry the fallen, dusk, grudges, shove, the beta, maps 1 to 3 tuned, the pincer (0061 to 0082). 85 to 118: brace, wildfire, the windup, Harrow Weir, the stall clause, overwatch, 13.18. 119 to 138: the pincer and brace decided, Saltmarsh, the showcase (0092 to 0095), slices 0 and 1. 139 to 149: slice 2, 13.19 cover, Lotus's batch, 13.20, 13.18's cold plays (0097), 13.17 killed (0098), slice 3.
