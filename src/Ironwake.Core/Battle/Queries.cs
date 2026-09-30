@@ -398,6 +398,40 @@ public static class Queries
     }
 
     /// <summary>
+    /// The bosses under the veto that could strike <paramref name="unit"/> on <paramref name="from"/>
+    /// but refuse every tile they would strike it from (issue 565, DESIGN.md section 8), in unit
+    /// order, each with <see cref="EnemyAi.Refusal"/>'s nearest refused tile and the tile its plan
+    /// ends on. Read on <see cref="Threats"/>' board, so a boss the tile reads clear of for this
+    /// reason is named, and a boss that swings at the unit anyway is a line of <see cref="Threats"/>
+    /// instead. A sleeping boss and one that cannot reach are not listed. Unpriced: nothing here
+    /// enters <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/>. Null exactly when
+    /// <see cref="Threats"/> is. Read-only.
+    /// </summary>
+    public static IReadOnlyList<RefusalLine>? Refusals(BattleState state, GameContent content, BattleUnit unit, Coord from)
+    {
+        if (ThreatBoard(state, content, unit, from) is not (var board, var moved, _))
+        {
+            return null;
+        }
+
+        var lines = new List<RefusalLine>();
+        if (moved is null)
+        {
+            return lines;
+        }
+
+        foreach (var enemy in board.UnitsOf(Side.Enemy))
+        {
+            if (board.EffectiveBehavior(enemy, content) is not null && EnemyAi.Refusal(board, content, enemy, moved) is { } refusal)
+            {
+                lines.Add(new RefusalLine(enemy, refusal.Refused, refusal.Ends));
+            }
+        }
+
+        return lines;
+    }
+
+    /// <summary>
     /// The sleeping groups <paramref name="unit"/> would wake by stopping on <paramref name="from"/>
     /// (issue 458): <see cref="WakeCheck.Run"/> on the board as it stands and the same board with
     /// the unit moved there, no combat and no death, so the causes are proximity and the
@@ -483,6 +517,13 @@ public static class Queries
 /// from <paramref name="From"/>, the tile across the unit. Unpriced and not binding.
 /// </summary>
 public sealed record AnvilLine(BattleUnit Anvil, Coord Tile, BattleUnit Follower, Coord From);
+
+/// <summary>
+/// One refusal <see cref="Queries.Refusals"/> lists (issue 565): <paramref name="Boss"/> could strike
+/// the unit from <paramref name="Refused"/> but the veto refuses it there, and it ends on
+/// <paramref name="Ends"/> instead. Unpriced and read from the planner's own call.
+/// </summary>
+public sealed record RefusalLine(BattleUnit Boss, Coord Refused, Coord Ends);
 
 /// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and <see cref="Members"/> the ones able to strike the unit were it awake.</summary>
 public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members);

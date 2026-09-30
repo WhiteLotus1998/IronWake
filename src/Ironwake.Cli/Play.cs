@@ -1254,7 +1254,7 @@ public sealed class PlaySession
             return;
         }
 
-        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile), Queries.StopWakes(_state, _content, unit, tile)));
+        _out.WriteLine(ThreatText(_state, _content, unit, tile, lines, Queries.SleepingThreats(_state, _content, unit, tile)!, Queries.Unseeing(_state, _content, unit, tile), Queries.MoveWins(_state, _content, unit, tile), Queries.Anvils(_state, _content, unit, tile), Queries.StopWakes(_state, _content, unit, tile), Queries.Refusals(_state, _content, unit, tile)));
         if (BracedThreat(_state, _content, unit, tile) is { } braced)
         {
             _out.WriteLine(braced);
@@ -1282,7 +1282,7 @@ public sealed class PlaySession
         }
 
         return $"if {unit.Id} waits here it braces (hit -{Brace.Hit}):\n"
-            + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile), anvils: Queries.Anvils(after, content, braced, tile));
+            + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile), anvils: Queries.Anvils(after, content, braced, tile), refusals: Queries.Refusals(after, content, braced, tile));
     }
 
     /// <summary>
@@ -1316,8 +1316,13 @@ public sealed class PlaySession
     /// priced against the coverer on the tile, <c>covered by teodor, strikes teodor on 7,5</c>,
     /// and the total says the first strike swaps them and where the unit lands, the strikes after
     /// the swap unpriced.
+    /// A boss under the veto that could strike the unit but refuses every tile it would strike
+    /// from (<see cref="Queries.Refusals"/>, issue 565) is one row after the strikes, naming the
+    /// nearest refused tile and where its plan ends, unpriced:
+    /// <c>weir_foreman-1 could reach 12,4 but refuses it: too exposed there; holds 14,6</c>, or
+    /// <c>ends on 13,6</c> when the plan moves it; a boss the player does not see is left out.
     /// </summary>
-    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null)
+    public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
         if (wins)
@@ -1364,6 +1369,12 @@ public sealed class PlaySession
             {
                 rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
             }
+        }
+
+        foreach (var refusal in (refusals ?? Array.Empty<RefusalLine>()).Where(r => Dusk.Seen(state, r.Boss)))
+        {
+            var ends = refusal.Ends == refusal.Boss.At ? $"holds {refusal.Ends}" : $"ends on {refusal.Ends}";
+            rows.Add($"  {refusal.Boss.Id} could reach {refusal.Refused} but refuses it: too exposed there; {ends}");
         }
 
         foreach (var anvil in (anvils ?? Array.Empty<AnvilLine>()).Where(a => Dusk.Seen(state, a.Anvil) && Dusk.Seen(state, a.Follower)))
