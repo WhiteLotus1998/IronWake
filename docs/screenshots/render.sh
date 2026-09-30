@@ -35,6 +35,14 @@ shot the_tollgate-113-camp --campaign --from the_tollgate --seed 113
 # 4x crops (a player token, an enemy token on forest, the forecast), which need Pillow.
 shot the_tollgate-113-turn3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn3.script" --select 8,7 --hover 7,5
 shot the_tollgate-113-threat --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 5 --threat
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-player-4x.png" 368 356 44 44
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-enemy-forest-4x.png" 280 268 44 44
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-forecast-4x.png" 756 88 516 170
+# Showcase slice 2 (issue 512): the block now sits centred between the top bar and the footer,
+# so the Tollgate's board starts at y 62 and Brackwater's at 110. Seed 113 turn 4 with Teodor on
+# 7,5 is the wounded forecast (both sides already hurt); the enemy frame again with the log open
+# on Tab; Brackwater seed 53 turn 3 at dusk is the rim frame, a rider lit on 8,3 beside the dark.
+shot the_tollgate-113-turn4 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn4.script" --select 7,5 --hover 7,5
+shot the_tollgate-113-log --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 5 --log-open
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-player-4x.png" 368 370 44 44
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-enemy-forest-4x.png" 280 282 44 44
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-forecast-4x.png" 752 116 524 238
+python3 docs/look/crop.py "$out/the_tollgate-113-turn4.png" "$out/crop-forecast-wounded-4x.png" 752 116 524 238
+python3 docs/look/crop.py "$out/brackwater_cut-53-turn3.png" "$out/crop-dusk-edge-4x.png" 268 182 108 72

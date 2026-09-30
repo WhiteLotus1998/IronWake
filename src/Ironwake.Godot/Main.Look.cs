@@ -9,7 +9,7 @@ namespace Ironwake.Godot;
 /// The showcase's look on the board (issue 511, <c>docs/LOOK.md</c>): tiles in
 /// <see cref="LookPalette"/>'s colours with ink detail and a hairline grid, the walls lit from
 /// the north with a shadow on their south face, a mat under the board, each unit a class
-/// silhouette on a side's disc with its name and HP under it, and the marks (reach, threat,
+/// silhouette on a side's disc with its HP under it (its name only while pointed at or selected, issue 512), and the marks (reach, threat,
 /// hover, selection, the enemy phase's path and rings) in the same flat language. Shapes are
 /// laid out on LOOK.md's 48-pixel tile and scaled to the map's tile.
 /// </summary>
@@ -69,26 +69,31 @@ public partial class Main
         DrawRect(board.Grow(1.5f), UiColour("ink"), filled: false, width: 3);
     }
 
-    /// <summary>One tile's ground and ink detail. Detail is ink over the tile's own colour, so terrain never adds a hue.</summary>
+    /// <summary>One tile's ground: its colour, and fire's ember hatch over the forest it burns (round 129).</summary>
     private void DrawGround(MapDefinition map, Coord at, string id)
     {
         var r = Cell(at);
-        var p = r.Position;
+        if (id == "fire")
+        {
+            DrawRect(r, TerrainColour("forest"));
+            Hatch(r, TerrainColour("fire"), 3 * S, 8 * S);
+            return;
+        }
+
+        DrawRect(r, TerrainColour(id));
+    }
+
+    /// <summary>
+    /// One tile's ink detail, drawn after the threat hatch so a glyph sits on the danger rather
+    /// than under it (issue 512, round 138). Detail is ink over the tile's own colour, so terrain
+    /// never adds a hue.
+    /// </summary>
+    private void DrawDetail(MapDefinition map, Coord at, string id)
+    {
+        var p = Cell(at).Position;
         var s = S;
         var ink = UiColour("ink");
         Vector2 P(float x, float y) => p + new Vector2(x * s, y * s);
-        switch (id)
-        {
-            case "fire":
-                // Fire lights forest only; the ground stays the forest's, under an ember hatch (round 129).
-                DrawRect(r, TerrainColour("forest"));
-                Hatch(r, TerrainColour("fire"), 3 * s, 8 * s);
-                return;
-            default:
-                DrawRect(r, TerrainColour(id));
-                break;
-        }
-
         switch (id)
         {
             case "forest":
@@ -234,7 +239,7 @@ public partial class Main
     /// <summary>
     /// A unit (issue 511): the class silhouette on its side's disc about two thirds of a tile
     /// across, the enemy's with a hairline bone rim and the boss's with a dashed ring outside it,
-    /// the captain's amber crown above, the HP bar in the side's colour and the name under it.
+    /// the captain's amber crown above, the HP bar in the side's colour and the name under it while it is pointed at or selected.
     /// A unit that has acted draws its disc sunk toward the ink.
     /// </summary>
     private void DrawToken(BattleState state, BattleUnit unit)
@@ -299,6 +304,12 @@ public partial class Main
         var bar = new Rect2(centre + new Vector2(-barWidth / 2, radius + 3 * s), new Vector2(barWidth, 4 * s));
         DrawRect(bar.Grow(1), ink);
         DrawRect(new Rect2(bar.Position, new Vector2(barWidth * Math.Clamp(unit.Hp, 0, max) / Math.Max(1, max), bar.Size.Y)), player ? Look(LookPalette.Player) : bone);
+        // Names live on the unit card (round 138); a token carries its name only while pointed at or selected.
+        if (unit.Id != _client.Selected && unit.At != _hover)
+        {
+            return;
+        }
+
         var nameSize = Math.Max(8, (int)(9 * s));
         var name = FitName(unit.Unit.Name, nameSize, _tile - 2);
         var at = new Vector2(centre.X, cell.End.Y - 2 * s);
