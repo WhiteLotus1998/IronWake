@@ -12,6 +12,10 @@ Slice 1: the map tokens (every class, both sides; the captain's is Lotus's own) 
 (every terrain), at 2x (96 x 96), plus docs/art/contact-tokens.png, a contact sheet at 2x and at
 the 1x the client draws.
 
+Slice 2: every class and boss clip row of docs/ART_SPEC.md's names block, one-row sheets of
+256 x 256 frames with a <name>.json sidecar, drawn in three neutral greys the client tints with
+the side's colour (0105), plus docs/art/contact-clips.png.
+
 Run from the repository root: python3 docs/art/make_art.py
 """
 import json
@@ -22,6 +26,7 @@ import zlib
 
 OUT = os.path.join("src", "Ironwake.Godot", "assets", "art")
 SHEET = os.path.join("docs", "art", "contact-tokens.png")
+CLIP_SHEET = os.path.join("docs", "art", "contact-clips.png")
 FRAME = 96  # ART_SPEC: 48 px tokens and tiles, delivered at 2x
 
 
@@ -51,23 +56,27 @@ def mix(base, over, alpha):
 
 
 class Canvas:
-    """An RGBA raster; shapes are tested at pixel centres."""
+    """An RGBA raster; shapes are tested at pixel centres, and only columns inside `clip` are painted."""
 
     def __init__(self, width, height, fill=(0, 0, 0, 0)):
         self.width, self.height = width, height
-        self.px = [list(fill) for _ in range(width * height)]
+        self.px = bytearray(bytes(fill) * (width * height))
+        self.clip = (0, width)
+        self.ground = height
 
     def put(self, x, y, rgba):
-        if 0 <= x < self.width and 0 <= y < self.height:
-            self.px[y * self.width + x] = list(rgba)
+        if self.clip[0] <= x < self.clip[1] and 0 <= y < self.ground:
+            i = 4 * (y * self.width + x)
+            self.px[i:i + 4] = bytes(rgba)
 
     def get(self, x, y):
-        return tuple(self.px[y * self.width + x])
+        i = 4 * (y * self.width + x)
+        return tuple(self.px[i:i + 4])
 
     def paint(self, inside, rgba, box=None):
         x0, y0, x1, y1 = box or (0, 0, self.width, self.height)
-        for y in range(max(0, int(y0)), min(self.height, int(math.ceil(y1)) + 1)):
-            for x in range(max(0, int(x0)), min(self.width, int(math.ceil(x1)) + 1)):
+        for y in range(max(0, int(y0)), min(self.ground, int(math.ceil(y1)) + 1)):
+            for x in range(max(self.clip[0], int(x0)), min(self.clip[1], int(math.ceil(x1)) + 1)):
                 if inside(x + 0.5, y + 0.5):
                     self.put(x, y, rgba)
 
@@ -132,8 +141,8 @@ class Canvas:
         return out
 
     def png(self, path):
-        raw = b"".join(b"\x00" + bytes(v for p in self.px[y * self.width:(y + 1) * self.width] for v in p)
-                       for y in range(self.height))
+        stride = 4 * self.width
+        raw = b"".join(b"\x00" + bytes(self.px[y * stride:(y + 1) * stride]) for y in range(self.height))
 
         def chunk(kind, data):
             return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
@@ -259,6 +268,299 @@ def tile(terrain):
     return c
 
 
+# Slice 2: the battle clips. A sheet is per class, not per side, so the figures are drawn in three
+# neutral greys (a base, its shade, and the dark of steel, hair and boots) and the client tints a
+# sheet with the side's colour when it plays it, as it mirrors one for facing.
+CLIP = 256  # ART_SPEC: the battle-scene frame, pivot at the feet's centre
+PIVOT = (128, 232)
+LIGHT = (0xD6, 0xD6, 0xD6, 255)
+SHADE = (0x9A, 0x9A, 0x9A, 255)
+DARK = (0x4E, 0x4E, 0x4E, 255)
+GREYS = (LIGHT, SHADE, DARK)
+
+# ArtSpec.Clips: frames and the contact frame of each clip, in the spec's order.
+CLIPS = {"idle": (8, None), "advance": (6, None), "strike": (8, 5), "strike_crit": (12, 8),
+         "miss_recover": (8, 5), "dodge": (6, None), "hit_react": (4, 1), "fall": (10, None)}
+
+
+def rotate(p, about, angle):
+    """`p` turned by `angle` about `about`; a positive angle turns clockwise on the screen."""
+    c, s = math.cos(angle), math.sin(angle)
+    x, y = p[0] - about[0], p[1] - about[1]
+    return (about[0] + x * c - y * s, about[1] + x * s + y * c)
+
+
+def along(p, angle, length):
+    return (p[0] + math.cos(angle) * length, p[1] + math.sin(angle) * length)
+
+
+def pose(clip, i):
+    """The pose of frame `i`: body offset, lean, crouch, swing (-1 wound up, 0 on guard, 1 the blow), stride, fall."""
+    n, contact = CLIPS[clip]
+    t = i / n
+    p = {"dx": 0.0, "dy": 0.0, "lean": 0.0, "crouch": 0.0, "swing": 0.0, "stride": 0.0, "fall": 0.0}
+    if clip == "idle":
+        p["crouch"] = 1.5 - 1.5 * math.cos(2 * math.pi * t)
+        p["swing"] = 0.06 * math.sin(2 * math.pi * t)
+    elif clip == "advance":
+        p["dx"] = -40 * (1 - (i + 1) / n)
+        p["stride"] = math.sin(2 * math.pi * (i + 1) / n * 1.5)
+        p["dy"] = -2 * abs(math.sin(2 * math.pi * (i + 1) / n * 1.5))
+    elif clip in ("strike", "miss_recover"):
+        p["swing"] = [0, -0.4, -0.8, -1, -1, 1, 0.6, 0.2][i]
+        p["dx"] = [0, 0, -2, -4, -4, 14, 8, 2][i]
+        p["lean"] = 0.12 * p["swing"]
+        if clip == "miss_recover":
+            p["swing"] = [0, -0.4, -0.8, -1, -1, 1.3, 0.8, 0.3][i]
+            p["dx"] = [0, 0, -2, -4, -4, 22, 16, 6][i]
+            p["lean"] = [0, -0.05, -0.1, -0.12, -0.12, 0.38, 0.22, 0.06][i]
+            p["stride"] = [0, 0, 0, 0, 0, 1, 0.7, 0.2][i]
+    elif clip == "strike_crit":
+        p["swing"] = [0, -0.3, -0.6, -0.9, -1.1, -1.2, -1.25, -1.25, 1.15, 0.9, 0.5, 0.2][i]
+        p["dx"] = [0, -2, -4, -6, -8, -8, -8, -8, 26, 18, 10, 4][i]
+        p["crouch"] = [0, 2, 4, 6, 8, 9, 10, 10, 4, 3, 1, 0][i]
+        p["lean"] = 0.14 * p["swing"]
+        p["stride"] = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0.8, 0.5, 0.2][i]
+    elif clip == "dodge":
+        p["dx"] = [0, -10, -22, -26, -16, -4][i]
+        p["lean"] = [0, -0.12, -0.25, -0.25, -0.12, 0][i]
+        p["crouch"] = [0, 4, 7, 7, 4, 1][i]
+    elif clip == "hit_react":
+        p["dx"] = [0, -9, -6, -2][i]
+        p["lean"] = [0, -0.22, -0.12, -0.04][i]
+        p["swing"] = [0, -0.2, -0.1, 0][i]
+    elif clip == "fall":
+        k = min(1.0, i / 7)
+        p["fall"] = k * k * (3 - 2 * k)
+        p["crouch"] = 16 * min(1.0, i / 3)
+        p["swing"] = 0.4 * min(1.0, i / 3)
+    return p
+
+
+class Figure:
+    """One combatant facing right, drawn in local coordinates (the feet's centre at 0,0) and placed on a frame."""
+
+    def __init__(self, canvas, class_id, kind, weapon_id, boss):
+        self.c = canvas
+        self.class_id, self.kind, self.weapon_id, self.boss = class_id, kind, weapon_id, boss
+        self.mount = {"outrider": "horse", "skyrider": "wings"}.get(class_id)
+        self.bulk = 1.18 if boss or class_id == "bulwark" else 1.0
+
+    def draw(self, p, origin):
+        c = self.c
+        ox, oy = origin[0] + p["dx"], origin[1] + p["dy"]
+        seat = 0.0
+        if self.mount:
+            seat = self.draw_mount(p, ox, oy)
+        hip_y = -62 + p["crouch"] if not self.mount else seat
+        hip = (0.0, hip_y)
+        fall = p["fall"]
+
+        def place(q):
+            """Local to frame: a mounted rider slumps forward on the neck, one on foot goes over backwards."""
+            if self.mount:
+                q = rotate(q, hip, 1.0 * fall)
+                return (ox + q[0], oy + q[1] + 30 * fall)
+            q = rotate(q, hip, -math.pi / 2 * fall)
+            return (ox + q[0], oy + q[1] + fall * (-hip_y - 13))
+
+        def upper(q):
+            return place(rotate((q[0], q[1] + hip_y), hip, p["lean"]))
+
+        w = self.bulk
+        # Legs: the far one in the shade, the near one in the base, boots dark.
+        if not self.mount:
+            stride = p["stride"] * 14
+            for foot_x, colour in ((-10 - stride, SHADE), (10 + stride, LIGHT)):
+                foot = (foot_x, -4.0)
+                knee = ((hip[0] + foot_x) / 2 + 6 + p["crouch"] * 0.8, (hip_y - 4) / 2)
+                c.stroke([place(hip), place(knee), place(foot)], 11 * w, colour)
+                c.stroke([place((foot_x - 2, -4)), place((foot_x + 8, -4))], 8, DARK)
+        else:
+            c.stroke([place(hip), place((10, hip_y + 18)), place((6, hip_y + 34))], 10, LIGHT)
+        shoulder = (3.0, -46.0)
+        swing = p["swing"]
+        hand, angle, grip = self.hand(shoulder, swing)
+        # The far arm and anything carried behind the body.
+        if self.class_id == "bulwark" or (self.boss and self.kind == "lance"):
+            shield = [upper((-2, -44)), upper((18, -44)), upper((18, -14)), upper((8, -2)), upper((-2, -14))]
+            c.polygon(shield, DARK)
+        c.stroke([upper(shoulder), upper(((shoulder[0] + grip[0]) / 2 - 6, (shoulder[1] + grip[1]) / 2 + 8)), upper(grip)], 8, SHADE)
+        # Torso and head.
+        c.polygon([upper((-11 * w, 0)), upper((11 * w, 0)), upper((14 * w, -50)), upper((-13 * w, -50))], LIGHT)
+        c.polygon([upper((-11 * w, 0)), upper((11 * w, 0)), upper((12 * w, -8)), upper((-12 * w, -8))], DARK)
+        head = upper((2, -66))
+        c.ellipse(head[0], head[1], 12, 12, LIGHT)
+        top = upper((2, -71))
+        c.paint(lambda x, y: (x - head[0]) ** 2 + (y - head[1]) ** 2 <= 144 and (x - head[0]) * (top[0] - head[0]) + (y - head[1]) * (top[1] - head[1]) > 0,
+                DARK, (head[0] - 13, head[1] - 13, head[0] + 13, head[1] + 13))
+        # The weapon, then the near arm over its grip.
+        self.weapon(upper, hand, angle, grip, swing)
+        elbow = ((shoulder[0] + hand[0]) / 2 + 2, (shoulder[1] + hand[1]) / 2 + 9)
+        c.stroke([upper(shoulder), upper(elbow), upper(hand)], 9 * w, LIGHT)
+        if self.kind == "gauntlet":
+            f = [upper((hand[0] + dx, hand[1] + dy)) for dx, dy in ((-7, -8), (9, -8), (9, 8), (-7, 8))]
+            c.polygon(f, DARK)
+
+    def hand(self, shoulder, swing):
+        """Where the near hand is, which way the weapon points from it, and where the far hand grips."""
+        kind = self.kind
+        if kind in ("sword", "axe"):
+            # Overhead: wound up behind the head, the blow ends forward and low.
+            arm = -0.7 + (1.05 * swing if swing > 0 else 0.85 * swing)
+            hand = along(shoulder, arm, 34)
+            angle = arm - 0.25
+            return hand, angle, along(hand, angle + math.pi, 10)
+        if kind == "lance":
+            reach = 30 + 16 * swing
+            hand = along(shoulder, 0.55 - 0.1 * swing, reach)
+            angle = -0.12 - 0.05 * swing
+            return hand, angle, along(hand, angle + math.pi, 26)
+        if kind == "bow":
+            hand = along(shoulder, 0.05, 40)
+            return hand, 0.0, hand
+        if kind == "reason":
+            hand = along(shoulder, 0.1 - 0.5 * max(0.0, -swing), 30 + 10 * max(0.0, swing))
+            return hand, 0.0, along(shoulder, 1.2, 22)
+        if kind == "faith":
+            hand = along(shoulder, 0.5 - 0.4 * swing, 30)
+            return hand, -math.pi / 2 + 0.6 * max(0.0, swing), along(shoulder, 1.3, 22)
+        # gauntlet: drawn back, then the punch.
+        hand = along(shoulder, 0.45 - 0.25 * swing, 28 + 14 * swing)
+        return hand, 0.0, along(shoulder, 0.9 - 0.4 * max(0.0, -swing), 20)
+
+    def weapon(self, upper, hand, angle, grip, swing):
+        c = self.c
+        kind, wid = self.kind, self.weapon_id
+
+        def at(length, side=0.0):
+            q = along(hand, angle, length)
+            return upper(along(q, angle + math.pi / 2, side))
+        if kind == "sword":
+            c.stroke([at(-8), at(52)], 6, DARK)
+            c.polygon([at(50, -3), at(60), at(50, 3)], DARK)
+            c.stroke([at(0, -9), at(0, 9)], 5, DARK)
+        elif kind == "axe":
+            c.stroke([at(-14), at(56)], 5, DARK)
+            bits = (1, -1) if wid == "toll_axe" else (1,)
+            for side in bits:
+                c.polygon([at(40, 2 * side), at(36, 14 * side), at(46, 20 * side), at(58, 16 * side), at(54, 2 * side)], DARK)
+        elif kind == "lance":
+            c.stroke([at(-40), at(78)], 5, DARK)
+            c.polygon([at(74, -4), at(86, -5), at(98), at(86, 5), at(74, 4)], DARK)
+            if wid == "toll_spear":
+                c.stroke([at(70, -12), at(70, 12)], 4, DARK)
+                c.stroke([at(70, -12), at(76, -16)], 4, DARK)
+        elif kind == "bow":
+            draw = max(0.0, -swing) if swing <= 0 else 0.0
+            tip_top, tip_bottom = upper((hand[0] - 8, hand[1] - 42)), upper((hand[0] - 8, hand[1] + 42))
+            curve = [upper(quad((hand[0] - 8, hand[1] - 42), (hand[0] + 22, hand[1]), (hand[0] - 8, hand[1] + 42), k / 12)) for k in range(13)]
+            c.stroke(curve, 5, DARK)
+            nock = upper((hand[0] - 8 - 30 * draw, hand[1]))
+            c.stroke([tip_top, nock, tip_bottom], 2, SHADE)
+            if swing <= 0:
+                c.stroke([nock, upper((hand[0] + 14, hand[1]))], 3, DARK)
+            elif swing >= 0.9:
+                # Loosed: the arrow already on its way out of the frame.
+                c.stroke([upper((hand[0] + 40, hand[1] - 2)), upper((hand[0] + 76, hand[1] - 2))], 3, DARK)
+        elif kind == "reason":
+            size = 0.7 + 0.5 * max(0.0, -swing) + 0.3 * max(0.0, swing)
+            cx, cy = hand[0] + 14 + 44 * max(0.0, swing), hand[1] - 6
+
+            def F(x, y):
+                return upper((cx + x * size, cy + y * size))
+            c.polygon(bezier(F(0, -12), F(8, -4), F(7, 8), F(0, 9)) + bezier(F(0, 9), F(-7, 8), F(-8, -2), F(-2, -6))
+                      + bezier(F(-2, -6), F(-2, -2), F(0, 0), F(1, -2)) + bezier(F(1, -2), F(2, -6), F(0, -9), F(0, -12)), DARK)
+        elif kind == "faith":
+            c.stroke([at(-52), at(54)], 5, DARK)
+            ring = at(62)
+            c.ring(ring[0], ring[1], 8, 4, DARK)
+
+    def draw_mount(self, p, ox, oy):
+        """The outrider's horse or the skyrider's winged mount; returns the rider's seat height."""
+        c = self.c
+        fall = p["fall"]
+        stride = p["stride"]
+        sink = 36 * fall
+        if self.mount == "horse":
+            body_y = -64 + sink
+            for x, phase, colour in ((-30, 1, SHADE), (26, -1, SHADE), (-24, -1, LIGHT), (32, 1, LIGHT)):
+                swing = 10 * stride * phase
+                knee_y = body_y + 26 + (sink * 0.4)
+                foot_y = -4 if fall < 0.5 else -4 - 8 * (fall - 0.5)
+                c.stroke([(ox + x, oy + body_y + 6), (ox + x + swing * 0.5 - 16 * fall, oy + knee_y), (ox + x + swing - 22 * fall, oy + foot_y)], 8, colour)
+            c.ellipse(ox, oy + body_y, 46, 18, SHADE)
+            neck = [(ox + 30, oy + body_y - 8), (ox + 46, oy + body_y - 40 + sink * 0.3), (ox + 58, oy + body_y - 38 + sink * 0.3),
+                    (ox + 48, oy + body_y + 2)]
+            c.polygon(neck, SHADE)
+            c.polygon([(ox + 46, oy + body_y - 42 + sink * 0.3), (ox + 70, oy + body_y - 30 + sink * 0.3), (ox + 66, oy + body_y - 24 + sink * 0.3),
+                       (ox + 50, oy + body_y - 28 + sink * 0.3)], SHADE)
+            c.stroke([(ox - 44, oy + body_y - 6), (ox - 56, oy + body_y + 18)], 6, DARK)
+            return body_y - 16
+        # The winged mount: a heavy-bodied bird of the high moors, wings up, legs tucked.
+        body_y = -62 + p["crouch"] + sink
+        flap = 0.35 * stride + 0.1 * p["swing"] if fall == 0 else -0.9 * fall
+        root = (ox - 6, oy + body_y - 10)
+        wing = [root, along(root, -2.2 + flap, 70), along(root, -1.8 + flap, 86), along(root, -1.3 + flap, 60), (ox + 18, oy + body_y - 10)]
+        c.polygon(wing, DARK)
+        for x in (-6, 10):
+            c.stroke([(ox + x, oy + body_y + 14), (ox + x + 6 - 20 * fall, oy - 20 - 6 * sink / 36), (ox + x + 2 - 24 * fall, oy - 3)], 6, SHADE)
+        c.ellipse(ox, oy + body_y, 40, 18, SHADE)
+        c.polygon([(ox - 38, oy + body_y - 4), (ox - 64, oy + body_y - 10), (ox - 60, oy + body_y + 6)], SHADE)
+        c.ellipse(ox + 40, oy + body_y - 18, 12, 11, SHADE)
+        c.polygon([(ox + 50, oy + body_y - 22), (ox + 66, oy + body_y - 14), (ox + 50, oy + body_y - 12)], DARK)
+        return body_y - 14
+
+
+def spec_names():
+    """The rows of docs/ART_SPEC.md's fenced names block, the contract the generator writes to."""
+    with open(os.path.join("docs", "ART_SPEC.md")) as f:
+        lines = f.read().split("\n")
+    start = lines.index("```names")
+    out = []
+    for line in lines[start + 1:]:
+        if line == "```":
+            return out
+        out.append(line)
+    raise SystemExit("make_art: ART_SPEC.md's names block is not closed")
+
+
+def clip_sheet(class_id, kind, weapon_id, boss, clip):
+    frames, contact = CLIPS[clip]
+    sheet = Canvas(CLIP * frames, CLIP)
+    sheet.ground = PIVOT[1]  # nothing below the feet: a fallen weapon lies on the ground, not through it
+    figure = Figure(sheet, class_id, kind, weapon_id, boss)
+    for i in range(frames):
+        sheet.clip = (i * CLIP, (i + 1) * CLIP)
+        figure.draw(pose(clip, i), (i * CLIP + PIVOT[0], PIVOT[1]))
+    sheet.clip = (0, sheet.width)
+    sidecar = {"frame": [CLIP, CLIP], "frames": frames, "pivot": list(PIVOT), "contact": contact}
+    return sheet, sidecar
+
+
+def clips(classes):
+    """Every class clip and boss clip row of the spec, as (name, sheet, sidecar)."""
+    with open(os.path.join("content", "weapons.json")) as f:
+        weapons = {w["id"]: w["type"] for w in json.load(f)["weapons"]}
+    with open(os.path.join("content", "units", "enemies.json")) as f:
+        units = {u["id"]: u["class"] for u in json.load(f)["units"]}
+    out = []
+    for name in spec_names():
+        clip = next((c for c in sorted(CLIPS, key=len, reverse=True) if name.endswith("_" + c)), None)
+        if clip is None or name.startswith(("token_", "tile_")):
+            continue
+        stem = name[:-len(clip) - 1]
+        if stem.startswith("boss_"):
+            unit, weapon_id = next((u, stem[len("boss_" + u) + 1:]) for u in units if stem.startswith("boss_" + u + "_"))
+            class_id, kind, boss = units[unit], weapons[weapon_id], True
+        else:
+            class_id, kind = next((c, stem[len(c) + 1:]) for c in classes if stem.startswith(c + "_"))
+            weapon_id, boss = None, False
+        sheet, sidecar = clip_sheet(class_id, kind, weapon_id, boss, clip)
+        out.append((name, sheet, sidecar))
+    return out
+
+
 def main():
     with open(os.path.join("content", "classes.json")) as f:
         classes = sorted(c["id"] for c in json.load(f)["classes"])
@@ -271,11 +573,17 @@ def main():
             art[f"token_{class_id}_{side}"] = token(class_id, side)
     for terrain in terrains:
         art[f"tile_{terrain}"] = tile(terrain)
+    clip_rows = clips(classes)
     for name, canvas in art.items():
         canvas.png(os.path.join(OUT, name + ".png"))
+    for name, sheet, sidecar in clip_rows:
+        sheet.png(os.path.join(OUT, name + ".png"))
+        with open(os.path.join(OUT, name + ".json"), "w", newline="\n") as f:
+            f.write(json.dumps(sidecar) + "\n")
     with open(os.path.join(OUT, "generated.txt"), "w", newline="\n") as f:
         f.write("# Written by docs/art/make_art.py; a file an artist replaces comes off this list.\n")
-        f.write("".join(name + ".png\n" for name in art))
+        f.write("# A clip sheet's sidecar <name>.json goes with it.\n")
+        f.write("".join(name + ".png\n" for name in list(art) + [row[0] for row in clip_rows]))
 
     # The contact sheet: every file at 2x, and under it at 1x, on the panel colour.
     names = list(art)
@@ -289,7 +597,27 @@ def main():
             sheet.blit(art[name], 8 + i * cell, top)
             sheet.blit(art[name].half(), 8 + i * cell + FRAME // 4, top + FRAME + 4)
     sheet.png(SHEET)
-    print(f"make_art: {len(art)} files under {OUT}, sheet {SHEET}")
+
+    # The clip sheet: one row per (class or boss, weapon), one frame per clip (the contact frame,
+    # else the middle one), at half size, on the panel colour.
+    sets = []
+    for name, strip, sidecar in clip_rows:
+        clip = next(c for c in sorted(CLIPS, key=len, reverse=True) if name.endswith("_" + c))
+        stem = name[:-len(clip) - 1]
+        if not sets or sets[-1][0] != stem:
+            sets.append((stem, []))
+        frame = sidecar["contact"] if sidecar["contact"] is not None else sidecar["frames"] // 2
+        cut = Canvas(CLIP, CLIP)
+        cut.px = bytearray(b"".join(bytes(strip.px[4 * (y * strip.width + frame * CLIP):4 * (y * strip.width + (frame + 1) * CLIP)])
+                                    for y in range(CLIP)))
+        sets[-1][1].append(cut.half())
+    half = CLIP // 2
+    board = Canvas(len(CLIPS) * (half + 4) + 4, len(sets) * (half + 4) + 4, PANEL + (255,))
+    for r, (stem, cuts) in enumerate(sets):
+        for i, cut in enumerate(cuts):
+            board.blit(cut, 4 + i * (half + 4), 4 + r * (half + 4))
+    board.png(CLIP_SHEET)
+    print(f"make_art: {len(art) + len(clip_rows)} files under {OUT}, sheets {SHEET} and {CLIP_SHEET}")
 
 
 if __name__ == "__main__":

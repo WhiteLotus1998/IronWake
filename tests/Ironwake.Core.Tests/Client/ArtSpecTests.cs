@@ -25,7 +25,7 @@ public class ArtSpecTests
     }
 
     /// <summary>Every unit a shipped map places as a boss, from the maps and the keep.</summary>
-    private static IEnumerable<string> ShippedBosses(GameContent content)
+    internal static IEnumerable<string> ShippedBosses(GameContent content)
     {
         var root = Fixture.RealContentDirectory();
         var files = Directory.GetFiles(Path.Combine(root, "maps"), "*.map").Concat(Directory.GetFiles(Path.Combine(root, "keep"), "*.map"));

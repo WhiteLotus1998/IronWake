@@ -7,10 +7,12 @@ namespace Ironwake.Core.Tests.Client;
 
 /// <summary>
 /// The generated art (issue 564): <c>docs/art/make_art.py</c> writes every token but the
-/// captain's and every tile under <c>src/Ironwake.Godot/assets/art/</c> at the art spec's names,
-/// and lists them in <c>generated.txt</c>. Every listed file is the spec's 2x frame and keeps
-/// LOOK.md's colours: a token is its side's values and nothing else, a tile its terrain's colour
-/// with detail laid over it, so terrain never adds a hue.
+/// captain's, every tile and every class and boss clip under <c>src/Ironwake.Godot/assets/art/</c>
+/// at the art spec's names, and lists them in <c>generated.txt</c>. Every token and tile is the
+/// spec's 2x frame and keeps LOOK.md's colours: a token is its side's values and nothing else, a
+/// tile its terrain's colour with detail laid over it, so terrain never adds a hue. A clip is a
+/// one-row sheet of the spec's frames with its sidecar, drawn in three neutral greys the client
+/// tints with the side's colour, the feet on the pivot.
 /// </summary>
 public class ArtGeneratedTests
 {
@@ -30,20 +32,26 @@ public class ArtGeneratedTests
             .Select(l => Path.GetFileNameWithoutExtension(l))
             .ToList();
 
+    /// <summary>The clip sheets' three greys: a base, its shade, and the dark of steel, hair and boots.</summary>
+    private static readonly Rgba[] Greys = { new(0xD6, 0xD6, 0xD6, 255), new(0x9A, 0x9A, 0x9A, 255), new(0x4E, 0x4E, 0x4E, 255) };
+
+    private static bool IsClip(string name) => !name.StartsWith("token_", StringComparison.Ordinal) && !name.StartsWith("tile_", StringComparison.Ordinal);
+
     [Fact]
-    public void TheGeneratorWritesEveryTokenButTheCaptainsAndEveryTile()
+    public void TheGeneratorWritesEveryTokenButTheCaptainsEveryTileAndEveryClip()
     {
         var content = ContentLoader.Load(Fixture.RealContentDirectory());
-        var expected = ArtSpec.Tokens(content).Where(n => n != "token_captain_player").Concat(ArtSpec.Tiles(content)).ToHashSet();
+        var expected = ArtSpec.Tokens(content).Where(n => n != "token_captain_player").Concat(ArtSpec.Tiles(content))
+            .Concat(ArtSpec.ClassClips(content)).Concat(ArtSpec.BossClips(content, ArtSpecTests.ShippedBosses(content))).ToHashSet();
 
         Assert.Equal(expected.OrderBy(n => n, StringComparer.Ordinal), Generated().OrderBy(n => n, StringComparer.Ordinal));
         Assert.All(Generated(), name => Assert.True(File.Exists(Path.Combine(ArtDirectory(), name + ".png")), name));
     }
 
     [Fact]
-    public void EveryGeneratedFileIsTheSpecsFrameAtTwoX()
+    public void EveryGeneratedTokenAndTileIsTheSpecsFrameAtTwoX()
     {
-        Assert.All(Generated(), name =>
+        Assert.All(Generated().Where(n => !IsClip(n)), name =>
         {
             var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
             Assert.Equal((Frame, Frame), (image.Width, image.Height));
@@ -90,6 +98,85 @@ public class ArtGeneratedTests
         Assert.NotNull(TileFault(image.With(10, 10, new Rgba(200, 40, 40, 255)), "forest"));
         Assert.NotNull(TileFault(image.With(10, 10, new Rgba(0, 0, 0, 0)), "forest"));
         Assert.NotNull(TileFault(image, "plain"));
+    }
+
+    [Fact]
+    public void AClipIsOneRowOfTheSpecsFramesWithItsSidecar()
+    {
+        Assert.All(Generated().Where(IsClip), name =>
+        {
+            var clip = ArtSpec.Clips.Where(c => name.EndsWith("_" + c.Name, StringComparison.Ordinal)).MaxBy(c => c.Name.Length)!;
+            var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
+            Assert.Equal((clip.Frames * ArtSpec.ClipFrame, ArtSpec.ClipFrame), (image.Width, image.Height));
+
+            using var sidecar = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(ArtDirectory(), name + ".json")));
+            var root = sidecar.RootElement;
+            Assert.Equal(new[] { ArtSpec.ClipFrame, ArtSpec.ClipFrame }, root.GetProperty("frame").EnumerateArray().Select(e => e.GetInt32()));
+            Assert.Equal(clip.Frames, root.GetProperty("frames").GetInt32());
+            Assert.Equal(new[] { 128, 232 }, root.GetProperty("pivot").EnumerateArray().Select(e => e.GetInt32()));
+            var contact = root.GetProperty("contact");
+            Assert.Equal(clip.Contact, contact.ValueKind == System.Text.Json.JsonValueKind.Null ? null : contact.GetInt32());
+        });
+    }
+
+    [Fact]
+    public void AClipIsTheThreeGreysAndStandsOnThePivot()
+    {
+        Assert.All(Generated().Where(IsClip), name =>
+        {
+            var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
+            Assert.Null(ClipFault(image));
+        });
+    }
+
+    [Fact]
+    public void AClipWithAHueOrOffThePivotFailsTheClipRule()
+    {
+        var image = Png.Read(Path.Combine(ArtDirectory(), "cadet_sword_idle.png"));
+        Assert.Null(ClipFault(image));
+
+        Assert.NotNull(ClipFault(image.With(128, 180, new Rgba(232, 163, 61, 255))));
+        Assert.NotNull(ClipFault(image.With(128, 180, new Rgba(0xD6, 0xD6, 0xD6, 128))));
+        Assert.NotNull(ClipFault(image.With(128, 250, new Rgba(0x4E, 0x4E, 0x4E, 255))));
+        Assert.NotNull(ClipFault(image.Blank(0, ArtSpec.ClipFrame)));
+    }
+
+    /// <summary>
+    /// Why a clip sheet breaks the look, or null: every pixel clear or one of the three greys, so
+    /// the client's tint carries the side; nothing below the pivot's row; and the first frame's
+    /// lowest pixel within four rows of the pivot, so the figure stands where the client plants it.
+    /// </summary>
+    private static string? ClipFault(Png image)
+    {
+        var lowest = -1;
+        for (var y = 0; y < image.Height; y++)
+        {
+            for (var x = 0; x < image.Width; x++)
+            {
+                var p = image.At(x, y);
+                if (p.A == 0)
+                {
+                    continue;
+                }
+
+                if (!Greys.Contains(p))
+                {
+                    return $"pixel {x},{y} is {p}, not one of the three greys";
+                }
+
+                if (y >= 232)
+                {
+                    return $"pixel {x},{y} is below the pivot";
+                }
+
+                if (x < ArtSpec.ClipFrame)
+                {
+                    lowest = y;
+                }
+            }
+        }
+
+        return lowest >= 228 ? null : $"the first frame's feet end at row {lowest}, not on the pivot's";
     }
 
     /// <summary>
@@ -201,6 +288,17 @@ public class ArtGeneratedTests
             var copy = (byte[])Pixels.Clone();
             var i = 4 * (y * Width + x);
             (copy[i], copy[i + 1], copy[i + 2], copy[i + 3]) = (p.R, p.G, p.B, p.A);
+            return this with { Pixels = copy };
+        }
+
+        public Png Blank(int x0, int x1)
+        {
+            var copy = (byte[])Pixels.Clone();
+            for (var y = 0; y < Height; y++)
+            {
+                Array.Clear(copy, 4 * (y * Width + x0), 4 * (x1 - x0));
+            }
+
             return this with { Pixels = copy };
         }
 
