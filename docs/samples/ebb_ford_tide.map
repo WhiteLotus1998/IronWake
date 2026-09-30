@@ -1,0 +1,46 @@
+name: Ebb Ford
+size: 13x11
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 3
+announce: on
+
+.....^.......
+..n.....^....
+.............
+...^.....n...
+.............
+~~~~====~~~~~
+.............
+..^.......^..
+.............
+.....n.......
+.............
+
+units:
+P captain 6,9
+P recruit:dunstan 5,8
+P recruit:wren 7,8
+P recruit:pell 4,9
+P recruit:rook 8,9
+E soldier 5,2 group:van behavior:aggressive
+E brigand 7,1 group:van behavior:aggressive
+E rider 9,2 group:van behavior:aggressive
+E archer 3,0 group:rear behavior:guard
+E soldier 6,0 group:rear behavior:guard
+E hexer 10,0 group:rear behavior:guard
+
+events:
+flood1 turn 3 enemy terrain 4,5 ~
+flood2 turn 3 enemy terrain 5,5 ~
+flood3 turn 3 enemy terrain 6,5 ~
+flood4 turn 3 enemy terrain 7,5 ~
+ebb1 turn 6 player terrain 4,5 =
+ebb2 turn 6 player terrain 5,5 =
+ebb3 turn 6 player terrain 6,5 =
+ebb4 turn 6 player terrain 7,5 =
+flood5 turn 8 enemy terrain 4,5 ~
+flood6 turn 8 enemy terrain 5,5 ~
+flood7 turn 8 enemy terrain 6,5 ~
+flood8 turn 8 enemy terrain 7,5 ~
