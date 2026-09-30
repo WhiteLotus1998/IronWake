@@ -1,0 +1,3045 @@
+Brackwater Cut, seed 613, scheme TwoRollAverage
+objective: the captain, Alder Fenn (A), must exit from an exit tile (>) by the end of turn 8; anyone still on the board is left behind; lost if the captain falls
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.B.........>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 13,3
+dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move rook 12,2
+rook moves 8,2 -> 12,2 via 9,2 10,2 10,3 11,3 12,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 11,3
+pell moves 7,3 -> 11,3 via 8,3 9,3 10,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ...........E.B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait pell
+pell waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ...........E.B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move captain 10,3
+captain moves 8,4 -> 10,3 via 8,3 9,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ..........AE.B.....>
+ 4 .c.......^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ..........AE.B.....>
+ 4 .c.......^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 10,5
+wren moves 8,5 -> 10,5 via 9,5
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ..........AE.B.....>
+ 4 .c.......^^#...^^..>
+ 5 e........^D#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#C.......
+ 3 ..........AE.B.....>
+ 4 .c.......^^#...^^..>
+ 5 e........^D#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+lethal if all land: rook (archer-2 19 against 17 hp)
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: move archer-1 4,5
+archer-1 moves 0,5 -> 4,5 via 1,5 2,5 3,5
+enemy: wait archer-1
+archer-1 waits
+enemy: attack archer-2 rook
+forecast archer-2 -> rook: dmg 19 hit 72% crit 1%; counter: none
+archer-2 attacks rook
+  archer-2 hits rook for 19 (hp 0)
+  archer-2 hp 17, rook hp 0
+rook falls at 12,2
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 4,3
+brigand-1 moves 1,4 -> 4,3 via 1,3 2,3 3,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move brigand-2 2,5
+brigand-2 moves 1,8 -> 2,5 via 1,7 1,6 1,5
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 3,6
+hexer-1 moves 0,7 -> 3,6 via 0,6 1,6 2,6
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 3,3
+rider-1 moves 0,1 -> 3,3 via 1,1 1,2 1,3 2,3
+enemy: wait rider-1
+rider-1 waits
+enemy: move rider-2 0,4
+rider-2 moves 0,10 -> 0,4 via 0,9 0,8 0,7 0,6 0,5
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ...ac.....AE.B.....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> recall 0
+recalled to state 0; 2 charges left
+undone: returns rook alive at 17 hp
+the rolls do not change: the same attack will roll the same
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.B.........>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         9,3    hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 13,3
+dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....C^^#........
+ 3 .......E.....B.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           8,2    hp 17/17  Forest
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move rook 12,3
+rook moves 8,2 -> 12,3 via 9,2 10,2 10,3 11,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 .......E....CB.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 .......E....CB.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              7,3    hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 11,3
+pell moves 7,3 -> 11,3 via 8,3 9,3 10,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ...........ECB.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait pell
+pell waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ...........ECB.....>
+ 4 .c......A^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        8,4    hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move captain 10,3
+captain moves 8,4 -> 10,3 via 8,3 9,3
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ..........AECB.....>
+ 4 .c.......^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ..........AECB.....>
+ 4 .c.......^^#...^^..>
+ 5 e.......D^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 10,5
+wren moves 8,5 -> 10,5 via 9,5
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ..........AECB.....>
+ 4 .c.......^^#...^^..>
+ 5 e........^D#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 a.^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ..........AECB.....>
+ 4 .c.......^^#...^^..>
+ 5 e........^D#...^.h.>
+ 6 ..........^#.....j.>
+ 7 f..........#.....i.>
+ 8 .d.........#...^...>
+ 9 ..^^.......#...^^...
+10 b.^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           0,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 17/17  Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          1,4    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          1,8    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             0,7    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 16/16  Plain  done
+a  rider-1          Rider L3 outrider          0,1    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,10   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: move archer-1 4,5
+archer-1 moves 0,5 -> 4,5 via 1,5 2,5 3,5
+enemy: wait archer-1
+archer-1 waits
+enemy: attack archer-2 pell
+forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+archer-2 attacks pell
+  archer-2 hits pell for 8 (hp 8)
+  pell hits archer-2 for 10 (hp 7)
+  archer-2 hp 7, pell hp 8
+pell gains 14 exp (14)
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 4,3
+brigand-1 moves 1,4 -> 4,3 via 1,3 2,3 3,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move brigand-2 2,5
+brigand-2 moves 1,8 -> 2,5 via 1,7 1,6 1,5
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 3,6
+hexer-1 moves 0,7 -> 3,6 via 0,6 1,6 2,6
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 3,3
+rider-1 moves 0,1 -> 3,3 via 1,1 1,2 1,3 2,3
+enemy: wait rider-1
+rider-1 waits
+enemy: move rider-2 0,4
+rider-2 moves 0,10 -> 0,4 via 0,9 0,8 0,7 0,6 0,5
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....^^^#........
+ 3 ...ac.....AECB.....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              11,3   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 12,2
+pell moves 11,3 -> 12,2 via 12,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~g~.......
+ 2 ..^^....^^^#E.......
+ 3 ...ac.....A.CB.....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+g  archer-2         Archer L3 bowman           11,1   hp 7/17   Fort (heals 20 percent, 3 hp)  group cut, hold
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> attack pell archer-2 cinder
+forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+  counter: lethal to pell (8 against 8 hp)
+pell attacks archer-2
+  pell hits archer-2 for 10 (hp 0)
+  pell hp 8, archer-2 hp 0
+pell gains 40 exp (54)
+archer-2 falls at 11,1
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E.......
+ 3 ...ac.....A.CB.....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move captain 14,3
+captain moves 10,3 -> 14,3 via 11,3 12,3 13,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E.......
+ 3 ...ac.......CBA....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E.......
+ 3 ...ac.......CBA....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 15,2
+dunstan moves 13,3 -> 15,2 via 13,2 14,2
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ...ac.......C.A....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ...ac.......C.A....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^D#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              10,5   hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 11,3
+wren moves 10,5 -> 11,3 via 10,4 10,3
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ...ac......DC.A....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^^#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ...ac......DC.A....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^^#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ...ac......DC.A....>
+ 4 b........^^#...^^..>
+ 5 ..d.e....^^#...^.h.>
+ 6 ...f......^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           4,5    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          2,5    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             3,6    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          3,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          0,4    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: move archer-1 6,3
+archer-1 moves 4,5 -> 6,3 via 4,4 4,3 5,3
+enemy: wait archer-1
+archer-1 waits
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 8,3
+brigand-1 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move brigand-2 4,3
+brigand-2 moves 2,5 -> 4,3 via 2,4 2,3 3,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 5,4
+hexer-1 moves 3,6 -> 5,4 via 3,5 3,4 4,4
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 9,3
+rider-1 moves 3,3 -> 9,3 via 4,3 5,3 6,3 7,3 8,3
+enemy: wait rider-1
+rider-1 waits
+enemy: move rider-2 5,3
+rider-2 moves 0,4 -> 5,3 via 0,3 1,3 2,3 3,3 4,3
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#E..B....
+ 3 ....dbe.ca.DC.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           12,3   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move rook 13,2
+rook moves 12,3 -> 13,2 via 12,2
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#EC.B....
+ 3 ....dbe.ca.D..A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#EC.B....
+ 3 ....dbe.ca.D..A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              12,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 14,2
+pell moves 12,2 -> 14,2 via 13,2
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CEB....
+ 3 ....dbe.ca.D..A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait pell
+pell waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CEB....
+ 3 ....dbe.ca.D..A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         15,2   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 12,3
+dunstan moves 15,2 -> 12,3 via 14,2 13,2 12,2
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....dbe.ca.DB.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....dbe.ca.DB.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 13,4
+wren moves 11,3 -> 13,4 via 12,3 13,3
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....dbe.ca..B.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....dbe.ca..B.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           6,3    hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 23/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: move archer-1 10,3
+archer-1 moves 6,3 -> 10,3 via 7,3 8,3 9,3
+enemy: attack archer-1 dunstan
+forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+archer-1 attacks dunstan
+  archer-1 hits dunstan for 3 (hp 20)
+  archer-1 hp 17, dunstan hp 20
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-1 11,3
+brigand-1 moves 8,3 -> 11,3 via 9,3 10,3
+enemy: attack brigand-1 dunstan
+forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+brigand-1 attacks dunstan
+  brigand-1 hits dunstan for 9 (hp 11)
+  dunstan hits brigand-1 for 11 (hp 12)
+  brigand-1 hp 12, dunstan hp 11
+dunstan gains 14 exp (14)
+enemy: wait brigand-2
+brigand-2 waits
+enemy: wait hexer-1
+hexer-1 waits
+enemy: wait rider-1
+rider-1 waits
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....db...aecB.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 13,3
+pell moves 14,2 -> 13,3 via 13,2
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aecBEA....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> attack pell brigand-1 cinder
+forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+pell attacks brigand-1
+  pell hits brigand-1 for 13 (hp 0)
+  pell hp 8, brigand-1 hp 0
+pell gains 40 exp (94)
+brigand-1 falls at 11,3
+group bank wakes: noise
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...ae.BEA....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 11,3
+wren moves 13,4 -> 11,3 via 13,3 12,3
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aeDBEA....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aeDBEA....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aeDBEA....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aeDBEA....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 ....db...aeDBEA....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: move archer-1 10,4
+archer-1 moves 10,3 -> 10,4
+enemy: attack archer-1 wren
+forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+archer-1 attacks wren
+  archer-1 misses wren
+  archer-1 hp 17, wren hp 20
+enemy: move brawler-1 17,3
+brawler-1 moves 17,7 -> 17,3 via 17,6 17,5 17,4
+enemy: wait brawler-1
+brawler-1 waits
+enemy: move brigand-2 8,3
+brigand-2 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 7,3
+hexer-1 moves 5,4 -> 7,3 via 5,3 6,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 10,3
+rider-1 moves 9,3 -> 10,3
+enemy: attack rider-1 wren
+forecast rider-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 9 hit 85% crit 3%
+rider-1 attacks wren
+  rider-1 hits wren for 9 (hp 11)
+  wren hits rider-1 for 9 (hp 12)
+  rider-1 hp 12, wren hp 11
+wren gains 14 exp (14)
+enemy: wait rider-2
+rider-2 waits
+enemy: move shieldbearer-1 15,3
+shieldbearer-1 moves 17,5 -> 15,3 via 17,4 17,3 16,3
+enemy: attack shieldbearer-1 captain
+forecast shieldbearer-1 -> captain: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
+shieldbearer-1 attacks captain
+  shieldbearer-1 misses captain
+  captain hits shieldbearer-1 for 4 (hp 21)
+  captain hits shieldbearer-1 for 4 (hp 17)
+  shieldbearer-1 hp 17, captain hp 22
+captain gains 14 exp (14)
+enemy: move soldier-1 14,5
+soldier-1 moves 17,6 -> 14,5 via 16,6 15,6 14,6
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.C......
+ 3 .....b.fd.aDBEAh.i.>
+ 4 .........^e#...^^..>
+ 5 .........^^#..j^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,4   hp 17/17  Forest  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,3   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              13,3   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          10,3   hp 12/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    15,3   hp 17/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         14,5   hp 21/21  Plain  group bank, guard, awake
+D  wren             Wren L1 cadet              11,3   hp 11/20  Plain
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> forecast pell archer-1 from 12,4
+forecast pell -> archer-1 from 12,4 (Plain) with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%
+  counter: lethal to pell (8 against 8 hp)
+  wildfire: pell ignites 10,4 on a hit
+> recall 75
+recalled to state 75; 1 charges left
+undone: gives back 1 kill (brigand-1), 68 exp, 29 enemy hp; returns 9 hp to wren
+the rolls do not change: the same attack will roll the same
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.CE.....
+ 3 ....db...aecB.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move rook 13,1
+rook moves 13,2 -> 13,1
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#..E.....
+ 3 ....db...aecB.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#..E.....
+ 3 ....db...aecB.A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         12,3   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 13,2
+dunstan moves 12,3 -> 13,2 via 12,2
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aec..A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aec..A....>
+ 4 .....f...^^#.D.^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move wren 12,3
+wren moves 13,4 -> 12,3 via 13,3
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aecD.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              12,3   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait wren
+wren waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aecD.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait pell
+pell waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aecD.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 4 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 ....db...aecD.A....>
+ 4 .....f...^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+c  brigand-1        Brigand L3 reaver          11,3   hp 12/23  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          4,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             5,4    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          5,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+D  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: attack archer-1 wren
+forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+archer-1 attacks wren
+  archer-1 misses wren
+  archer-1 hp 17, wren hp 20
+enemy: wait brawler-1
+brawler-1 waits
+enemy: attack brigand-1 wren
+forecast brigand-1 -> wren: dmg 12 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+brigand-1 attacks wren
+  brigand-1 hits wren for 12 (hp 8)
+  wren hits brigand-1 for 10 (hp 2)
+  wren hits brigand-1 for 10 (hp 0)
+  brigand-1 hp 0, wren hp 8
+wren gains 40 exp (40)
+brigand-1 falls at 11,3
+enemy: move brigand-2 8,3
+brigand-2 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 7,3
+hexer-1 moves 5,4 -> 7,3 via 5,3 6,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 11,3
+rider-1 moves 9,3 -> 11,3 via 10,3
+enemy: attack rider-1 wren
+forecast rider-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 9 hit 85% crit 3%
+rider-1 attacks wren
+  rider-1 hits wren for 9 (hp 0)
+  rider-1 hp 21, wren hp 0
+wren falls at 12,3
+enemy: move rider-2 9,3
+rider-2 moves 5,3 -> 9,3 via 6,3 7,3 8,3
+enemy: wait rider-2
+rider-2 waits
+enemy: wait shieldbearer-1
+shieldbearer-1 waits
+enemy: wait soldier-1
+soldier-1 waits
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~C......
+ 2 ..^^....^^^#.BE.....
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, asleep
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           13,1   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, asleep
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, asleep
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move rook 18,2
+rook moves 13,1 -> 18,2 via 14,1 15,1 16,1 17,1 18,1
+group bank wakes: proximity
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.BE...C.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.......
+ 2 ..^^....^^^#.BE...C.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              14,2   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move pell 17,1
+pell moves 14,2 -> 17,1 via 14,1 15,1 16,1
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.B....C.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait pell
+pell waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.B....C.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         13,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 17,2
+dunstan moves 13,2 -> 17,2 via 14,2 15,2 16,2
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.....BC.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         17,2   hp 11/23  Plain
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.....BC.
+ 3 .......fdbea..A....>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        14,3   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         17,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move captain 16,2
+captain moves 14,3 -> 16,2 via 14,2 15,2
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#....ABC.
+ 3 .......fdbea.......>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 22/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         17,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait captain
+captain waits
+Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#....ABC.
+ 3 .......fdbea.......>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^.h.>
+ 6 ..........^#.....j.>
+ 7 ...........#.....i.>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           10,3   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,7   hp 23/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          8,3    hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 22/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         17,2   hp 11/23  Plain  done
+f  hexer-1          Hexer L3 adept             7,3    hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          11,3   hp 21/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          9,3    hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 17/17  Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group bank, guard, awake
+j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: move archer-1 13,2
+archer-1 moves 10,3 -> 13,2 via 11,3 12,3 12,2
+enemy: wait archer-1
+archer-1 waits
+enemy: move brawler-1 17,3
+brawler-1 moves 17,7 -> 17,3 via 17,6 17,5 17,4
+enemy: attack brawler-1 dunstan
+forecast brawler-1 -> dunstan: dmg 4 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
+brawler-1 attacks dunstan
+  brawler-1 hits dunstan for 4 (hp 7)
+  brawler-1 hits dunstan for 4 (hp 3)
+  dunstan hits brawler-1 for 11 (hp 12)
+  brawler-1 hp 12, dunstan hp 3
+dunstan gains 14 exp (28)
+enemy: move brigand-2 12,3
+brigand-2 moves 8,3 -> 12,3 via 9,3 10,3 11,3
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 10,3
+hexer-1 moves 7,3 -> 10,3 via 8,3 9,3
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 15,2
+rider-1 moves 11,3 -> 15,2 via 12,3 12,2 13,2 14,2
+enemy: attack rider-1 captain
+forecast rider-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
+rider-1 attacks captain
+  rider-1 hits captain for 8 (hp 14)
+  captain hits rider-1 for 10 (hp 11)
+  rider-1 hp 11, captain hp 14
+captain gains 14 exp (14)
+enemy: move rider-2 15,3
+rider-2 moves 9,3 -> 15,3 via 10,3 11,3 12,3 13,3 14,3
+enemy: wait rider-2
+rider-2 waits
+enemy: move shieldbearer-1 18,3
+shieldbearer-1 moves 17,5 -> 18,3 via 17,4 17,3
+enemy: attack shieldbearer-1 rook
+forecast shieldbearer-1 -> rook: dmg 11 hit 60% crit 0%; counter: dmg 2 x2 hit 89% crit 4%
+shieldbearer-1 attacks rook
+  shieldbearer-1 hits rook for 11 (hp 6)
+  rook hits shieldbearer-1 for 2 (hp 23)
+  rook hits shieldbearer-1 for 2 (hp 21)
+  shieldbearer-1 hp 21, rook hp 6
+rook gains 14 exp (14)
+enemy: move soldier-1 16,3
+soldier-1 moves 17,6 -> 16,3 via 17,5 17,4 17,3
+enemy: attack soldier-1 captain
+forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+soldier-1 attacks captain
+  soldier-1 hits captain for 8 (hp 6)
+  captain crits soldier-1 for 27 (hp 0)
+  soldier-1 hp 0, captain hp 6
+captain gains 40 exp (54)
+soldier-1 falls at 16,3
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.e.aABC.
+ 3 ..........f.d..b.ih>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+i  brawler-1        Brawler L3 reaver          17,3   hp 12/23  Plain  group bank, guard, awake
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         17,2   hp 3/23   Plain
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> attack pell brawler-1 cinder
+forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+pell attacks brawler-1
+  pell hits brawler-1 for 13 (hp 0)
+  pell hp 8, brawler-1 hp 0
+pell gains 40 exp (94)
+brawler-1 falls at 17,3
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E..
+ 2 ..^^....^^^#.e.aABC.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         17,2   hp 3/23   Plain
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 19,1
+dunstan moves 17,2 -> 19,1 via 17,1 18,1
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E.B
+ 2 ..^^....^^^#.e.aA.C.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait dunstan
+dunstan waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E.B
+ 2 ..^^....^^^#.e.aA.C.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain  done
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> wait rook
+rook waits
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....E.B
+ 2 ..^^....^^^#.e.aA.C.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        16,2   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain  done
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move captain 18,1
+captain moves 16,2 -> 18,1 via 16,1 17,1
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....EAB
+ 2 ..^^....^^^#.e.a..C.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 6/22   Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain  done
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> item captain 2
+captain uses Field Dressing (2 left)
+captain heals 10 (hp 16)
+Brackwater Cut  turn 6 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~....EAB
+ 2 ..^^....^^^#.e.a..C.
+ 3 ..........f.d..b..h>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           13,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          12,3   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 16/22  Plain  captain  done
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain  done
+f  hexer-1          Hexer L3 adept             10,3   hp 16/16  Plain  group chase, aggressive
+E  pell             Pell L1 adept              17,1   hp 8/16   Plain  done
+a  rider-1          Rider L3 outrider          15,2   hp 11/21  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          15,3   hp 21/21  Plain  group chase, aggressive
+C  rook             Rook L1 skyrider           18,2   hp 6/17   Plain  done
+h  shieldbearer-1   Shieldbearer L3 bulwark    18,3   hp 21/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> end
+lethal if all land: dunstan (rider-1 6, rider-2 6 against 3 hp)
+lethal if all land: pell (archer-1 8, rider-1 11, rider-2 11, shieldbearer-1 10 against 8 hp)
+lethal if all land: rook (archer-1 19, rider-1 12, rider-2 12, shieldbearer-1 11 against 6 hp)
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: move archer-1 16,2
+archer-1 moves 13,2 -> 16,2 via 14,2 15,2
+enemy: attack archer-1 rook
+forecast archer-1 -> rook: dmg 19 hit 72% crit 1%; counter: none
+archer-1 attacks rook
+  archer-1 hits rook for 19 (hp 0)
+  archer-1 hp 17, rook hp 0
+rook falls at 18,2
+enemy: move brigand-2 14,1
+brigand-2 moves 12,3 -> 14,1 via 12,2 13,2 13,1
+enemy: wait brigand-2
+brigand-2 waits
+enemy: move hexer-1 13,2
+hexer-1 moves 10,3 -> 13,2 via 11,3 12,3 12,2
+enemy: wait hexer-1
+hexer-1 waits
+enemy: move rider-1 16,1
+rider-1 moves 15,2 -> 16,1 via 15,1
+enemy: attack rider-1 pell
+forecast rider-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+rider-1 attacks pell
+  rider-1 misses pell
+  pell hits rider-1 for 12 (hp 0)
+  rider-1 hp 0, pell hp 8
+pell gains 40 exp (34)
+pell reaches level 2: spd +1 lck +1
+rider-1 falls at 16,1
+enemy: move rider-2 16,1
+rider-2 moves 15,3 -> 16,1 via 15,2 15,1
+enemy: attack rider-2 pell
+forecast rider-2 -> pell: dmg 11 hit 76% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+rider-2 attacks pell
+  rider-2 hits pell for 11 (hp 0)
+  rider-2 hp 21, pell hp 0
+pell falls at 17,1
+enemy: move shieldbearer-1 19,2
+shieldbearer-1 moves 18,3 -> 19,2 via 18,2
+enemy: attack shieldbearer-1 dunstan
+forecast shieldbearer-1 -> dunstan: dmg 5 hit 80% crit 0%; counter: dmg 4 hit 85% crit 1%
+shieldbearer-1 attacks dunstan
+  shieldbearer-1 misses dunstan
+  dunstan hits shieldbearer-1 for 4 (hp 17)
+  shieldbearer-1 hp 17, dunstan hp 3
+dunstan gains 14 exp (42)
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.d.b.AB
+ 2 ..^^....^^^#.f..e..h
+ 3 ...................>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          14,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 16/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,1   hp 3/23   Plain
+f  hexer-1          Hexer L3 adept             13,2   hp 16/16  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          16,1   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    19,2   hp 17/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> move dunstan 19,3
+dunstan moves 19,1 -> 19,3 via 18,1 18,2 18,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.d.b.A.
+ 2 ..^^....^^^#.f..e..h
+ 3 ...................B
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          14,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 16/22  Plain  captain
+B  dunstan          Dunstan L1 bulwark         19,3   hp 3/23   Plain
+f  hexer-1          Hexer L3 adept             13,2   hp 16/16  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          16,1   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    19,2   hp 17/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+> exit dunstan
+dunstan leaves through the exit at 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.d.b.A.
+ 2 ..^^....^^^#.f..e..h
+ 3 ...................>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          14,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        18,1   hp 16/22  Plain  captain
+f  hexer-1          Hexer L3 adept             13,2   hp 16/16  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          16,1   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    19,2   hp 17/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+escaped: dunstan
+> move captain 19,3
+captain moves 18,1 -> 19,3 via 18,2 18,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.d.b...
+ 2 ..^^....^^^#.f..e..h
+ 3 ...................A
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          14,1   hp 23/23  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        19,3   hp 16/22  Plain  captain
+f  hexer-1          Hexer L3 adept             13,2   hp 16/16  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          16,1   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    19,2   hp 17/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+escaped: dunstan
+> exit captain
+captain leaves through the exit at 19,3
+Brackwater Cut  turn 7 of 8  player phase  escape  recall 1
+   01234567890123456789
+ 0 ..........~~~.......
+ 1 ..^.......~F~.d.b...
+ 2 ..^^....^^^#.f..e..h
+ 3 ...................>
+ 4 .........^^#...^^..>
+ 5 .........^^#...^...>
+ 6 ..........^#.......>
+ 7 ...........#.......>
+ 8 ...........#...^...>
+ 9 ..^^.......#...^^...
+10 ..^.......~~~.......
+11 ..........~~~.......
+
+e  archer-1         Archer L3 bowman           16,2   hp 17/17  Plain  group chase, aggressive
+d  brigand-2        Brigand L3 reaver          14,1   hp 23/23  Plain  group chase, aggressive
+f  hexer-1          Hexer L3 adept             13,2   hp 16/16  Plain  group chase, aggressive
+b  rider-2          Rider L3 outrider          16,1   hp 21/21  Plain  group chase, aggressive
+h  shieldbearer-1   Shieldbearer L3 bulwark    19,2   hp 17/25  Plain  group bank, guard, awake
+exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
+wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it
+escaped: dunstan captain
+battle won: escape; only recall is left
+battle won: escape
+escaped: dunstan, captain; left behind: none; fell: pell, rook, wren
