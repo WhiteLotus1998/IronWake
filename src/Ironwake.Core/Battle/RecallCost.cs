@@ -16,7 +16,7 @@ namespace Ironwake.Core;
 /// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0.</param>
 /// <param name="ArrivalsUndone">Enemies on the board now that were not on it then (map-event spawns), in id order.</param>
 /// <param name="UnitsReturned">Player units alive then and dead now, in id order; a unit that left through an exit since is not dead (issue 269).</param>
-/// <param name="HpReturned">HP the player units alive then have lost since, a dead one counted from its HP then to 0; a unit healed since counts nothing.</param>
+/// <param name="HpByUnit">HP each player unit alive then has lost since, a dead one counted from its HP then to 0, in id order; a unit that lost nothing, or was healed since, is not listed (issue 552).</param>
 public sealed record RecallCost(
     int ToIndex,
     int Turn,
@@ -26,8 +26,14 @@ public sealed record RecallCost(
     int EnemyHpBack,
     ValueList<string> ArrivalsUndone,
     ValueList<string> UnitsReturned,
-    int HpReturned)
+    ValueList<HpReturn> HpByUnit)
 {
+    /// <summary>HP the player units alive then have lost since, summed over <see cref="HpByUnit"/>.</summary>
+    public int HpReturned => HpByUnit.Sum(entry => entry.Hp);
+
+    /// <summary>The HP a Recall returns to one unit, alive now or not; the whole of its HP then when it is dead now.</summary>
+    public int HpFor(string id) => HpByUnit.FirstOrDefault(entry => entry.Id == id)?.Hp ?? 0;
+
     /// <summary>
     /// The cost of recalling from <paramref name="state"/> to its history state
     /// <paramref name="index"/>. The index must be in the history; whether the Recall is legal
@@ -57,7 +63,7 @@ public sealed record RecallCost(
         var arrivals = state.UnitsOf(Side.Enemy).Where(u => then.Find(u.Id) is null).Select(u => u.Id).ToList();
 
         var returned = new List<string>();
-        var hp = 0;
+        var hp = new List<HpReturn>();
         var exp = 0;
         var levels = 0;
         foreach (var unit in then.UnitsOf(Side.Player))
@@ -73,12 +79,17 @@ public sealed record RecallCost(
                 levels += Math.Max(0, now.Unit.Level - unit.Unit.Level);
             }
 
-            hp += Math.Max(0, unit.Hp - (now?.Hp ?? 0));
+            var lost = unit.Hp - (now?.Hp ?? 0);
+            if (lost > 0)
+            {
+                hp.Add(new HpReturn(unit.Id, lost));
+            }
         }
 
         kills.Sort(string.CompareOrdinal);
         arrivals.Sort(string.CompareOrdinal);
         returned.Sort(string.CompareOrdinal);
+        hp.Sort((a, b) => string.CompareOrdinal(a.Id, b.Id));
         return new RecallCost(
             index,
             then.Turn,
@@ -88,7 +99,7 @@ public sealed record RecallCost(
             enemyHp,
             ValueList<string>.From(arrivals),
             ValueList<string>.From(returned),
-            hp);
+            ValueList<HpReturn>.From(hp));
     }
 
     /// <summary>Whether the Recall undoes none of the things this record counts: only moves and waits since.</summary>
@@ -98,3 +109,8 @@ public sealed record RecallCost(
 
     private static int TotalExp(Unit unit) => unit.Level * 100 + unit.Exp;
 }
+
+/// <summary>The HP a Recall returns to one player unit (issue 552).</summary>
+/// <param name="Id">The unit's id.</param>
+/// <param name="Hp">HP it lost since the target state; for a unit dead now, its HP then.</param>
+public sealed record HpReturn(string Id, int Hp);

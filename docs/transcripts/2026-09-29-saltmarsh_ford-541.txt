@@ -1883,7 +1883,7 @@ B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > recall 110
 recalled to state 110; 2 charges left
-undone: gives back 28 exp, 25 enemy hp; returns 35 hp
+undone: gives back 28 exp, 25 enemy hp; returns 11 hp to captain, 13 hp to ottilie, 11 hp to teodor
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
@@ -2223,7 +2223,7 @@ B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > recall 120
 recalled to state 120; 1 charges left
-undone: gives back 14 exp, 4 enemy hp; returns 13 hp
+undone: gives back 14 exp, 4 enemy hp; returns 13 hp to ottilie
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
