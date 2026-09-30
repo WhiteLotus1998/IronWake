@@ -2,6 +2,8 @@
 
 Date: 2026-09-29. Round 110 on the Design Table (#470). Closes the reopening in DECISIONS/0087 and supersedes DECISIONS/0081 as the record of the file that is tuned.
 
+Amended by DECISIONS/0100 (issue 561, round 160): item 2's reading is withdrawn. The stall clause reads the `at the stall` median, 0.0260 on this file, so its timeouts are a clock, not a stall; the map clears gate 1 at `turn_limit: 15` (123 of 200) instead. Item 5's cold chair is the Critic's seed 617, 7/6/6.
+
 ## Decision
 
 1. Harrow Weir is `tuned` again, on the crest file (#471, PR #476: 10,2 and 11,2 as road, a one-wide crest landing on 12,2 under the archer; the #456 bulwark at res 3 and the 9,11 door kept). Both Fun Gate entries on that file are 7 or better on every axis, and both chairs answered yes to 0087's question (does work outside the two bridge seats decide the result?):

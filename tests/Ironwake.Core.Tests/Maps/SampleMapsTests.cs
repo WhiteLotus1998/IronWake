@@ -46,6 +46,19 @@ public class SampleMapsTests
     }
 
     /// <summary>
+    /// Issue 561, DECISIONS/0100: Harrow Weir's timeouts were a clock that ran out, not the
+    /// veto's stall (at the stall p50 0.0260), so the map clears gate 1 on the count with a
+    /// fifteenth turn rather than under DESIGN 11's stall clause.
+    /// </summary>
+    [Fact]
+    public void HarrowWeirGivesFifteenTurnsSoGateOneClearsOnTheCount()
+    {
+        var map = All().Single(m => m.Id == "harrow_weir").Map;
+
+        Assert.Equal(15, map.TurnLimit);
+    }
+
+    /// <summary>
     /// Issue 256: both north waves matter, so north2 arrives on enemy phase 5 beside the west
     /// wave, and all five recruit slots are named, Keziah in Wren's place, so roster order no
     /// longer decides who fights the Def 8 shieldbearer.

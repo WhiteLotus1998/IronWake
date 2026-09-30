@@ -1,0 +1,43 @@
+# Harrow Weir at turn_limit 15, --full, 200 seeds, two rolls, Release, on issue/561 over 013aee1 (issue 561, round 160)
+# At 14 (shipped until this PR) the same run printed: wins 116/200 (58 %), median 9 p90 12, losses 50 timeout 34 captain, quiet tail 0.5, refused kill p50 0.9892 over 50, at the stall p50 0.0260 over 42: FAILED
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: harrow_weir, heuristic wins 123/200 (61 %), winning turn median 9 p90 14 limit 15, losses 41 timeout 36 captain 0 protected, quiet tail 0.7, refused kill p50 0.9892 over 41, at the stall p50 0.0260 over 39, two-roll average: ok
+gate 2 decisions matter: harrow_weir, random wins 1/200 (1 %): ok
+gate 3 no cheap shots: harrow_weir, 0 player units killed from deployment: ok
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.280: ok
+  dunstan: drop 0.245 se 0.044 own [atk 629 dmg 6143 heal 0 abs 365] rest baseline [atk 2705 dmg 34293 heal 0 abs 2399] rest benched [atk 2747 dmg 38286 heal 0 abs 3068] benched losses 54 timeout 72 captain 0 protected, refused kill p50 0.9858 over 54, at the stall p50 0.0497 over 50
+  keziah: drop 0.370 se 0.049 own [atk 381 dmg 6260 heal 0 abs 440] rest baseline [atk 2953 dmg 34176 heal 0 abs 2324] rest benched [atk 2745 dmg 37352 heal 0 abs 3351] benched losses 78 timeout 73 captain 0 protected, refused kill p50 0.9892 over 78, at the stall p50 0.0550 over 73
+  ottilie: drop 0.210 se 0.046 own [atk 732 dmg 4450 heal 0 abs 468] rest baseline [atk 2602 dmg 35986 heal 0 abs 2296] rest benched [atk 2611 dmg 38927 heal 0 abs 2922] benched losses 75 timeout 44 captain 0 protected, refused kill p50 0.9824 over 75, at the stall p50 0.0351 over 70
+  pell: drop 0.440 se 0.054 own [atk 578 dmg 8694 heal 0 abs 254] rest baseline [atk 2756 dmg 31742 heal 0 abs 2510] rest benched [atk 2737 dmg 35857 heal 0 abs 3527] benched losses 77 timeout 88 captain 0 protected, refused kill p50 0.9892 over 77, at the stall p50 0.0357 over 68
+  teodor: drop 0.280 se 0.049 own [atk 540 dmg 6485 heal 0 abs 513] rest baseline [atk 2794 dmg 33951 heal 0 abs 2251] rest benched [atk 2730 dmg 36766 heal 0 abs 3145] benched losses 77 timeout 56 captain 0 protected, refused kill p50 0.9892 over 77, at the stall p50 0.0293 over 72
+  captain captain: baseline [atk 474 dmg 8404 heal 0 abs 724] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 714 ms: ok
+gate 5 forecast honesty: 10138 combats (4113 with gauntlets), 20876 strikes, hits 13096 expected 13019.3, crits 856 expected 900.7, damage mismatches 0: ok
+gate 7 speed: harrow_weir, 5 AI-vs-AI games, 45 turns, slowest 15 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 11050 ms: ok
+free prefix: harrow_weir, 0 of 2, 4, 6 tried, slack median 6 p90 1 (printed, not gated)
+  prefix 2: wins 92/200, drop 0.155 se 0.051, not free
+  prefix 4: wins 65/200, drop 0.290 se 0.051, not free
+  prefix 6: wins 48/200, drop 0.375 se 0.054, not free
+  prefix 2 refunded: wins 95/200, drop 0.140 se 0.051, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 0.0, first contact 3.0, first quiet at tax 0.25 1.0
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.83
+  turn 2: dead 172 quiet 0 live 28, wake tax 0.00
+  turn 3: dead 25 quiet 0 live 175, wake tax 0.17
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 0 quiet 0 live 189, wake tax 0.00
+  turn 7: dead 0 quiet 0 live 166, wake tax 0.00
+  turn 8: dead 5 quiet 0 live 145, wake tax 0.00
+  turn 9: dead 6 quiet 0 live 125, wake tax 0.00
+  turn 10: dead 4 quiet 0 live 104, wake tax 0.00
+  turn 11: dead 3 quiet 0 live 85, wake tax 0.00
+  turn 12: dead 0 quiet 0 live 77, wake tax 0.00
+  turn 13: dead 0 quiet 0 live 69, wake tax 0.00
+  turn 14: dead 1 quiet 0 live 59, wake tax 0.00
+  turn 15: dead 0 quiet 0 live 50, wake tax 0.00
+full: ok
+
+# Recheck at 400 seeds, same build:
+full: 1 maps from /home/user/IronWake/content, 400 seeds, two-roll average
+gate 1 beatable: harrow_weir, heuristic wins 252/400 (63 %), winning turn median 9 p90 13 limit 15, losses 80 timeout 68 captain 0 protected, quiet tail 0.5, refused kill p50 0.9892 over 80, at the stall p50 0.0260 over 77, two-roll average: ok
