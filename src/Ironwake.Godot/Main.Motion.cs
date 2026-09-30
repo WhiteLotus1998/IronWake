@@ -402,7 +402,7 @@ public partial class Main
     /// </summary>
     private void DrawTokenMoved(BattleState state, BattleUnit unit, float scale)
     {
-        var centre = Cell(unit.At).Position + new Vector2(_tile / 2f, 19 * S);
+        var centre = TokenCentre(unit.At);
         var shift = Shift(unit.Id, unit.At);
         _tokenFrame = new Transform2D(0, new Vector2(scale, scale), 0, centre + shift - scale * centre);
         DrawSetTransformMatrix(_tokenFrame);
@@ -421,7 +421,7 @@ public partial class Main
     /// </summary>
     private void DrawFallenMark(FallenMark mark)
     {
-        var centre = Cell(mark.At).Position + new Vector2(_tile / 2f, 19 * S);
+        var centre = TokenCentre(mark.At);
         var radius = 12 * S;
         var side = mark.Unit.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone);
         DrawCircle(centre, radius, UiColour("lost", 0.85f));

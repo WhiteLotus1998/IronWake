@@ -84,6 +84,45 @@ public class ArtSpecTests
     }
 
     [Fact]
+    public void TheCaptainLooksOnlyForHisOwnToken()
+    {
+        var content = Content();
+
+        Assert.Equal(new[] { "token_captain_player" }, ArtSpec.TokenFiles(content, content.Units["toll_brigand"], Side.Player, isBoss: false, isCaptain: true));
+    }
+
+    [Fact]
+    public void AnEnemyWithATellTriesItsVariantThenItsClassToken()
+    {
+        var content = Content();
+
+        Assert.Equal(new[] { "token_pikeman_enemy_hooked", "token_pikeman_enemy" }, ArtSpec.TokenFiles(content, content.Units["toll_warden"], Side.Enemy, isBoss: false, isCaptain: false));
+        Assert.Equal(new[] { "token_reaver_enemy_double", "token_reaver_enemy" }, ArtSpec.TokenFiles(content, content.Units["toll_brigand"], Side.Enemy, isBoss: true, isCaptain: false));
+        Assert.Equal(new[] { "token_reaver_enemy" }, ArtSpec.TokenFiles(content, content.Units["toll_brigand"], Side.Enemy, isBoss: false, isCaptain: false));
+    }
+
+    [Fact]
+    public void APlayerUnitTriesItsClassTokenForItsSideAndNoTell()
+    {
+        var content = Content();
+
+        Assert.Equal(new[] { "token_pikeman_player" }, ArtSpec.TokenFiles(content, content.Units["toll_warden"], Side.Player, isBoss: false, isCaptain: false));
+    }
+
+    [Fact]
+    public void EveryTokenFileARendererTriesIsARowOfTheSpec()
+    {
+        var content = Content();
+        var rows = ArtSpec.Tokens(content).Concat(ArtSpec.TokenVariants(content, content.Units.Keys.SelectMany(id => new[] { (id, false), (id, true) }))).ToHashSet();
+
+        var tried = content.Units.Values.SelectMany(u => new[] { Side.Player, Side.Enemy }.SelectMany(side =>
+            new[] { false, true }.SelectMany(boss => ArtSpec.TokenFiles(content, u, side, boss, isCaptain: false))))
+            .Append("token_captain_player").Distinct().ToList();
+
+        Assert.All(tried, name => Assert.Contains(name, rows));
+    }
+
+    [Fact]
     public void APlainPikemanOrAReaverNotPlacedAsABossGetsNoVariant()
     {
         var content = Content();

@@ -79,6 +79,25 @@ public static class ArtSpec
     };
 
     /// <summary>
+    /// The token files a renderer tries for one unit on the board, first found wins (issue 564):
+    /// the captain's own token and nothing else, since the class's disc is not him; else the
+    /// variant for the unit's tell, then its class's token for its side. When none is on disk the
+    /// renderer draws its vector placeholder.
+    /// </summary>
+    public static IReadOnlyList<string> TokenFiles(GameContent content, Unit unit, Side side, bool isBoss, bool isCaptain)
+    {
+        if (isCaptain)
+        {
+            return new[] { "token_captain_player" };
+        }
+
+        var own = $"token_{unit.ClassId}_{(side == Side.Player ? "player" : "enemy")}";
+        return side == Side.Enemy && TokenTell(content, unit, isBoss) is { } tell
+            ? new[] { $"{own}_{tell}", own }
+            : new[] { own };
+    }
+
+    /// <summary>
     /// The variant tokens: <c>token_&lt;class&gt;_enemy_&lt;tell&gt;</c> for every tell an enemy placed
     /// on a shipped map carries, one row per tell, not per unit, sorted. A renderer without the
     /// variant's file falls back to the class's own token.

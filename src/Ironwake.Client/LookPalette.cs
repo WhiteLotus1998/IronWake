@@ -28,7 +28,7 @@ public static class LookPalette
         ["plain"] = Hex("7E9470"),
         ["road"] = Hex("B3AE9C"),
         ["forest"] = Hex("4F6E54"),
-        ["hill"] = Hex("B89E6C"),
+        ["hill"] = Hex("C8C8A0"),
         ["mountain"] = Hex("77767C"),
         ["water"] = Hex("41667F"),
         ["fort"] = Hex("9FB0C4"),
@@ -62,21 +62,14 @@ public static class LookPalette
     };
 
     /// <summary>
-    /// How far a ground's red must pass its blue for it to count as warm (issue 578, round 166):
-    /// the hill (76) is warm, the road (23) and every cold ground are not.
+    /// How far a ground's red may pass its blue before it counts as warm (issue 578, round 166):
+    /// the old hill `#B89E6C` (76) was warm and turned the bone hatch peach; since round 170 no
+    /// ground but fire is, so the hatch is bone everywhere (issue 564).
     /// </summary>
     public const int WarmGroundMargin = 40;
 
-    /// <summary>Whether a terrain's ground is warm: its red passes its blue by more than <see cref="WarmGroundMargin"/>.</summary>
-    public static bool WarmGround(string terrain) =>
-        Terrain.TryGetValue(terrain, out var colour) && colour.R - colour.B > WarmGroundMargin;
-
-    /// <summary>
-    /// The colour the enemy's threat hatch is drawn in over <paramref name="terrain"/> (issue 578):
-    /// the threat mark's bone, but the enemy's slate over a warm ground, where bone at half alpha
-    /// blends to a peach near the player's amber and reads as ours.
-    /// </summary>
-    public static Rgb ThreatHatch(string terrain) => WarmGround(terrain) ? Enemy : Marks["threat"];
+    /// <summary>Whether a ground colour is warm: its red passes its blue by more than <see cref="WarmGroundMargin"/>.</summary>
+    public static bool IsWarmGround(Rgb colour) => colour.R - colour.B > WarmGroundMargin;
 
     /// <summary>The marks that belong to the player's side, and so may be warm.</summary>
     public static readonly IReadOnlySet<string> PlayerMarks = new HashSet<string> { "selected" };

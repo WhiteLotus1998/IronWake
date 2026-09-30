@@ -76,7 +76,21 @@ public partial class Main
         if (id == "fire")
         {
             DrawRect(r, TerrainColour("forest"));
-            Hatch(r, TerrainColour("fire"), 3 * S, 8 * S);
+            if (TileArt("fire") is { } hatch)
+            {
+                DrawTextureRect(hatch, r, false);
+            }
+            else
+            {
+                Hatch(r, TerrainColour("fire"), 3 * S, 8 * S);
+            }
+
+            return;
+        }
+
+        if (TileArt(id) is { } tile)
+        {
+            DrawTextureRect(tile, r, false);
             return;
         }
 
@@ -94,6 +108,19 @@ public partial class Main
         var s = S;
         var ink = UiColour("ink");
         Vector2 P(float x, float y) => p + new Vector2(x * s, y * s);
+        if (id != "fire" && TileArt(id, detailOnly: true) is { } detail)
+        {
+            // The file's detail laid again over the hatch its ground went under (issue 564); the
+            // wall's lit top edge stays drawn here, since it depends on the tile above.
+            DrawTextureRect(detail, Cell(at), false);
+            if (id == "wall" && !IsHigh(map, new Coord(at.X, at.Y - 1)))
+            {
+                DrawLine(P(0, 0.5f), P(48, 0.5f), TerrainColour("mountain", 0.6f), 1);
+            }
+
+            return;
+        }
+
         switch (id)
         {
             case "forest":
@@ -210,9 +237,9 @@ public partial class Main
         DrawRect(r, MarkColour("reach", 0.7f), filled: false, width: Mathf.Max(1, 1.5f * S));
     }
 
-    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill, drawn in slate over a warm ground (issue 578).</summary>
-    private void DrawThreatMark(Coord at, string terrain, bool faint = false) =>
-        Hatch(Cell(at).Grow(-1), Look(LookPalette.ThreatHatch(terrain), faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; no ground under it is warm, so it never blends to a peach (issue 564).</summary>
+    private void DrawThreatMark(Coord at, bool faint = false) =>
+        Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
 
     /// <summary>The hatch's alpha for a sleeping group's reach (issue 533): there, but never mistaken for a waking one's.</summary>
     private const float FaintThreat = 0.2f;
@@ -273,8 +300,8 @@ public partial class Main
     {
         var cell = Cell(unit.At);
         var s = S;
-        var centre = cell.Position + new Vector2(_tile / 2f, 19 * s);
-        var radius = 14 * s;
+        var centre = TokenCentre(unit.At);
+        var radius = TokenRadius * s;
         var ink = UiColour("ink");
         if (!Dusk.Seen(state, unit))
         {
@@ -291,10 +318,15 @@ public partial class Main
             deep = deep.Lerp(ink, 0.45f);
         }
 
-        DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
-        DrawCircle(Vector2.Zero, radius, deep);
-        DrawSetTransformMatrix(_tokenFrame);
-        DrawCircle(centre, radius, fill);
+        var drawn = DrawTokenArt(unit, centre, radius, player && unit.Acted ? 0.45f : 0);
+        if (!drawn)
+        {
+            DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
+            DrawCircle(Vector2.Zero, radius, deep);
+            DrawSetTransformMatrix(_tokenFrame);
+            DrawCircle(centre, radius, fill);
+        }
+
         var bone = Look(LookPalette.EnemyBone);
         if (!player)
         {
@@ -310,7 +342,11 @@ public partial class Main
             }
         }
 
-        DrawSilhouette(state, unit, centre + new Vector2(0, -1 * s), radius / 16f, player ? ink : bone);
+        if (!drawn)
+        {
+            DrawSilhouette(state, unit, centre + new Vector2(0, -1 * s), radius / 16f, player ? ink : bone);
+        }
+
         if (unit.IsCaptain)
         {
             var c = centre + new Vector2(0, -radius - 1 * s);
@@ -339,7 +375,9 @@ public partial class Main
 
         var nameSize = Math.Max(8, (int)(9 * s));
         var name = FitName(unit.Unit.Name, nameSize, _tile - 2);
-        var at = new Vector2(centre.X, cell.End.Y - 2 * s);
+        // Under the HP bar at the tile's foot, spilling a few pixels onto the tile below (issue 564:
+        // ART_SPEC's 32-pixel disc leaves the bar the tile's last 8 pixels).
+        var at = new Vector2(centre.X, cell.End.Y + 5 * s);
         UiText(at + new Vector2(1, 1), name, new Color(ink, 0.8f), nameSize, bold: true, centred: true);
         UiText(at, name, UiColour("text"), nameSize, bold: true, centred: true);
     }
@@ -385,20 +423,22 @@ public partial class Main
                 Fill(P(-2, -8), P(0, -13), P(2, -8));
                 break;
             case "pikeman":
-            case "outrider":
                 Stroke(P(-9, 10), P(7, -8));
                 Fill(P(5, -6), P(11, -12), P(9, -4));
-                if (unit.Unit.ClassId == "pikeman" && reach >= 2)
+                if (reach >= 2)
                 {
                     Stroke(P(1, -2), P(-3, -6));
                     Stroke(P(1, -2), P(5, 2));
                 }
 
-                if (unit.Unit.ClassId == "outrider")
-                {
-                    Fill(P(-3, 4), P(-10, 0), P(-5, 8));
-                }
-
+                break;
+            case "outrider":
+                // Apart from the pike at 32 px (round 170): the lance couched flatter, the pennant
+                // under its head, a horseshoe at the foot; the same shape make_art.py draws.
+                Stroke(P(-11, 3), P(7, -5));
+                Fill(P(6.2f, -6.8f), P(12.5f, -7), P(7.8f, -3.2f));
+                Fill(P(-1, -0.4f), P(-7, 2.2f), P(-5, 5));
+                Stroke(Enumerable.Range(0, 9).Select(i => P(4.5f * Mathf.Cos(Mathf.Pi * i / 8), 7.5f + 4.5f * Mathf.Sin(Mathf.Pi * i / 8))).ToArray());
                 break;
             case "bowman":
                 Stroke(Enumerable.Range(0, 13).Select(i => Quad(P(-4, -11), P(10, 0), P(-4, 11), i / 12f)).ToArray());

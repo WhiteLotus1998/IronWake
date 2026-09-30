@@ -160,6 +160,16 @@ public partial class Main
 
         var player = unit.Side == CoreSide.Player;
         var ink = UiColour("ink");
+        if (DrawTokenArt(unit, centre, radius))
+        {
+            if (!player)
+            {
+                DrawArc(centre, radius - 1.5f, 0, Mathf.Tau, 48, Look(LookPalette.EnemyBone), 0.75f, antialiased: true);
+            }
+
+            return;
+        }
+
         DrawSetTransform(centre + new Vector2(0, 3), 0, new Vector2(1, (radius - 1) / radius));
         DrawCircle(Vector2.Zero, radius, player ? Look(LookPalette.PlayerDeep) : new Color(ink, 0.55f));
         DrawSetTransform(Vector2.Zero, 0, Vector2.One);
