@@ -1,0 +1,2243 @@
+Saltmarsh Ford, seed 547, scheme TwoRollAverage
+objective: defeat every enemy by the end of turn 18; lost if the captain falls
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 .....BAC......
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 10,7
+teodor moves 7,8 -> 10,7 via 7,7 8,7 9,7
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..........C...
+ 8 .....BA.......
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..........C...
+ 8 .....BA.......
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 8,7
+wren moves 5,8 -> 8,7 via 5,7 6,7 7,7
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ......A.......
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ......A.......
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 8,8
+captain moves 6,8 -> 8,8 via 7,8
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ........A.....
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ........A.....
+ 9 ......D.......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          6,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 7,9
+ottilie moves 6,9 -> 7,9
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait ottilie
+ottilie waits
+Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 1 --
+-- enemy phase, turn 1 --
+enemy: wait archer-1
+archer-1 waits
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: wait soldier-1
+soldier-1 waits
+enemy: wait wingrider-1
+wingrider-1 waits
+enemy: end
+-- enemy phase ends, turn 1 --
+-- player phase, turn 2 --
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ........B.C...
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, asleep
+C  teodor           Teodor L1 pikeman          10,7   hp 21/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 10,5
+teodor moves 10,7 -> 10,5 via 10,6
+group fort wakes: proximity
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....C...
+ 6 ..^^..........
+ 7 ........B.....
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....C...
+ 6 ..^^..........
+ 7 ........B.....
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              8,7    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 9,5
+wren moves 8,7 -> 9,5 via 8,6 8,5
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^..........
+ 7 ..............
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^..........
+ 7 ..............
+ 8 ........A.....
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 9,6
+captain moves 8,8 -> 9,6 via 8,7 8,6
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^.....A....
+ 7 ..............
+ 8 ..............
+ 9 .......D......
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,9    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 9,7
+ottilie moves 7,9 -> 9,7 via 7,8 7,7 8,7
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^.....A....
+ 7 .........D....
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          9,7    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait ottilie
+ottilie waits
+Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^...b!...
+ 1 ..^....nn.a...
+ 2 ......n.....c.
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^.....A....
+ 7 .........D....
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,1   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          9,7    hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         9,0    hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
+c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 2 --
+-- enemy phase, turn 2 --
+enemy: move archer-1 10,3
+archer-1 moves 10,1 -> 10,3 via 10,2
+enemy: attack archer-1 teodor
+forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+archer-1 attacks teodor
+  archer-1 hits teodor for 5 (hp 16)
+  archer-1 hp 17, teodor hp 16
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: move soldier-1 10,2
+soldier-1 moves 9,0 -> 10,2 via 10,0 10,1
+enemy: wait soldier-1
+soldier-1 waits
+enemy: move wingrider-1 10,4
+wingrider-1 moves 12,2 -> 10,4 via 11,2 10,2 10,3
+enemy: attack wingrider-1 teodor
+forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
+wingrider-1 attacks teodor
+  wingrider-1 hits teodor for 6 (hp 10)
+  teodor misses wingrider-1
+  wingrider-1 hp 17, teodor hp 10
+enemy: end
+-- enemy phase ends, turn 2 --
+-- player phase, turn 3 --
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.....c...
+ 5 ....^^...BC...
+ 6 ..^^.....A....
+ 7 .........D....
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          9,7    hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      10,4   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,6
+ottilie moves 9,7 -> 10,6 via 9,6
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.....c...
+ 5 ....^^...BC...
+ 6 ..^^.....AD...
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+c  wingrider-1      Wingrider L2 skyrider      10,4   hp 17/17  Plain  group fort, guard, awake
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack ottilie wingrider-1
+forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
+ottilie attacks wingrider-1
+  ottilie hits wingrider-1 for 19 (hp 0)
+  ottilie hp 17, wingrider-1 hp 0
+ottilie gains 35 exp (35)
+wingrider-1 falls at 10,4
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.........
+ 5 ....^^...BC...
+ 6 ..^^.....AD...
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 11,7
+teodor moves 10,5 -> 11,7 via 11,5 11,6
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.........
+ 5 ....^^...B....
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.........
+ 5 ....^^...B....
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits and braces
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.........
+ 5 ....^^...B....
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  braced  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits and braces
+Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n...b...
+ 3 ~~~=~~~~~~a~~~
+ 4 ...^^.........
+ 5 ....^^...B....
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           10,3   hp 17/17  Road  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,2   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  braced  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 3 --
+-- enemy phase, turn 3 --
+enemy: move archer-1 11,5
+archer-1 moves 10,3 -> 11,5 via 10,4 11,4
+enemy: attack archer-1 teodor
+forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+archer-1 attacks teodor
+  archer-1 hits teodor for 5 (hp 5)
+  archer-1 hp 17, teodor hp 5
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: move soldier-1 10,5
+soldier-1 moves 10,2 -> 10,5 via 10,3 10,4
+enemy: attack soldier-1 ottilie
+forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+soldier-1 attacks ottilie
+  soldier-1 hits ottilie for 10 (hp 7)
+  soldier-1 hp 20, ottilie hp 7
+enemy: end
+-- enemy phase ends, turn 3 --
+-- player phase, turn 4 --
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bba..
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 12,5
+teodor moves 11,7 -> 12,5 via 11,6 12,6
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BbaC.
+ 6 ..^^.....AD...
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack teodor archer-1
+forecast teodor -> archer-1: dmg 12 hit 76% crit 1%; counter: none
+teodor attacks archer-1
+  teodor hits archer-1 for 12 (hp 5)
+  teodor hp 5, archer-1 hp 5
+teodor gains 12 exp (12)
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BbaC.
+ 6 ..^^.....AD...
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 5/17   Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 11,6
+captain moves 9,6 -> 11,6 via 10,6
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...BbaC.
+ 6 ..^^......DA..
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 5/17   Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack captain archer-1
+forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+captain attacks archer-1
+  captain hits archer-1 for 11 (hp 0)
+  captain hp 22, archer-1 hp 0
+captain gains 35 exp (35)
+archer-1 falls at 11,5
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bb.C.
+ 6 ..^^......DA..
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,7
+ottilie moves 10,6 -> 10,7
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bb.C.
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack ottilie soldier-1
+forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+ottilie attacks soldier-1
+  ottilie hits soldier-1 for 6 (hp 14)
+  ottilie hp 7, soldier-1 hp 14
+ottilie gains 12 exp (47)
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bb.C.
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 14/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack wren soldier-1
+forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+wren attacks soldier-1
+  wren hits soldier-1 for 8 (hp 6)
+  soldier-1 misses wren
+  wren hp 20, soldier-1 hp 6
+wren gains 12 exp (12)
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bb.C.
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 6/20   Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: move soldier-1 9,7
+soldier-1 moves 10,5 -> 9,7 via 10,6 9,6
+enemy: attack soldier-1 ottilie
+forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+soldier-1 attacks ottilie
+  soldier-1 hits ottilie for 10 (hp 0)
+  soldier-1 hp 6, ottilie hp 0
+ottilie falls at 10,7
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...B..C.
+ 6 ..^^.......A..
+ 7 .........b....
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+b  soldier-1        Soldier L2 pikeman         9,7    hp 6/20   Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> recall 44
+recalled to state 44; 2 charges left
+undone: gives back 1 kill (archer-1), 59 exp, 31 enemy hp; returns ottilie alive, 7 hp
+the rolls do not change: the same attack will roll the same
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bba..
+ 6 ..^^.....AD...
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,6    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 11,6
+captain moves 9,6 -> 11,6 via 10,6
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bba..
+ 6 ..^^......DA..
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 17/17  Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack captain archer-1
+forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+captain attacks archer-1
+  captain hits archer-1 for 11 (hp 6)
+  captain hp 22, archer-1 hp 6
+captain gains 12 exp (12)
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^...Bba..
+ 6 ..^^......DA..
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 6/17   Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 11,4
+wren moves 9,5 -> 11,4 via 9,4 10,4
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....ba..
+ 6 ..^^......DA..
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+a  archer-1         Archer L2 bowman           11,5   hp 6/17   Plain  group fort, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack wren archer-1
+forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+wren attacks archer-1
+  wren hits archer-1 for 10 (hp 0)
+  wren hp 20, archer-1 hp 0
+wren gains 35 exp (35)
+archer-1 falls at 11,5
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^......DA..
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> item ottilie 2
+ottilie uses Field Dressing (2 left)
+ottilie heals 10 (hp 17)
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^......DA..
+ 7 ...........C..
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 13,9
+teodor moves 11,7 -> 13,9 via 12,7 13,7 13,8
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^......DA..
+ 7 ..............
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^......DA..
+ 7 ..............
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,6   hp 17/17  Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain  done
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 4 --
+-- enemy phase, turn 4 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: attack soldier-1 ottilie
+forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+soldier-1 attacks ottilie
+  soldier-1 hits ottilie for 10 (hp 7)
+  soldier-1 hp 20, ottilie hp 7
+enemy: end
+-- enemy phase ends, turn 4 --
+-- player phase, turn 5 --
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^......DA..
+ 7 ..............
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,6   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,7
+ottilie moves 10,6 -> 10,7
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+b  soldier-1        Soldier L2 pikeman         10,5   hp 20/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack ottilie soldier-1
+forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+ottilie attacks soldier-1
+  ottilie hits soldier-1 for 6 (hp 14)
+  ottilie hp 7, soldier-1 hp 14
+ottilie gains 12 exp (47)
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^......B..
+ 5 ....^^....b...
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 14/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 11,5
+wren moves 11,4 -> 11,5
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....bB..
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 14/20  Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack wren soldier-1
+forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+wren attacks soldier-1
+  wren hits soldier-1 for 8 (hp 6)
+  soldier-1 misses wren
+  wren hp 20, soldier-1 hp 6
+wren gains 12 exp (47)
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....bB..
+ 6 ..^^.......A..
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        11,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 6/20   Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 10,6
+captain moves 11,6 -> 10,6
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^....bB..
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+b  soldier-1        Soldier L2 pikeman         10,5   hp 6/20   Plain  group fort, guard, awake
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack captain soldier-1
+forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+captain attacks soldier-1
+  captain hits soldier-1 for 9 (hp 0)
+  captain hp 22, soldier-1 hp 0
+captain gains 35 exp (47)
+soldier-1 falls at 10,5
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^.....B..
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> item teodor 2
+teodor uses Field Dressing (2 left)
+teodor heals 10 (hp 15)
+Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^.....B..
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain  done
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 5 --
+-- enemy phase, turn 5 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: end
+-- enemy phase ends, turn 5 --
+-- player phase, turn 6 --
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.........
+ 5 ....^^.....B..
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              11,5   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 10,4
+wren moves 11,5 -> 10,4 via 11,4
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....B...
+ 5 ....^^........
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^.....B...
+ 5 ....^^........
+ 6 ..^^......A...
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move captain 9,4
+captain moves 10,6 -> 9,4 via 10,5 10,4
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..........D...
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,7   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,5
+ottilie moves 10,7 -> 10,5 via 10,6
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^....D...
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait ottilie
+ottilie waits
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^....D...
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 .............C
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          13,9   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 12,6
+teodor moves 13,9 -> 12,6 via 13,8 13,7 13,6
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain  done
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 6 --
+-- enemy phase, turn 6 --
+enemy: wait bandit_leader-1
+bandit_leader-1 waits and braces
+enemy: end
+-- enemy phase ends, turn 6 --
+-- player phase, turn 7 --
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.....
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AB...
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move wren 10,1
+wren moves 10,4 -> 10,1 via 10,3 10,2
+event ford
+  brigand-1 arrives at 0,9, group ford, aggressive
+event ford_second
+  soldier-2 arrives at 1,9, group ford, aggressive
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A....
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A....
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits and braces
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A....
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait ottilie
+ottilie waits and braces
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A....
+ 5 ....^^....D...
+ 6 ..^^........C.
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  braced  done
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          12,6   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 11,4
+teodor moves 12,6 -> 11,4 via 12,5 12,4
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^....D...
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  braced  done
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits
+Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^....D...
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 de............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 26/26  Fort (heals 20 percent, 5 hp)  group fort, boss, braced
+d  brigand-1        Brigand L2 reaver          0,9    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain  braced  done
+e  soldier-2        Soldier L2 pikeman         1,9    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain  done
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 7 --
+-- enemy phase, turn 7 --
+enemy: attack bandit_leader-1 wren
+forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+bandit_leader-1 attacks wren
+  bandit_leader-1 misses wren
+  wren hits bandit_leader-1 for 6 (hp 20)
+  wren hits bandit_leader-1 for 6 (hp 14)
+  bandit_leader-1 hp 14, wren hp 20
+wren gains 14 exp (61)
+enemy: move brigand-1 2,7
+brigand-1 moves 0,9 -> 2,7 via 0,8 0,7 1,7
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move soldier-2 3,7
+soldier-2 moves 1,9 -> 3,7 via 1,8 1,7 2,7
+enemy: wait soldier-2
+soldier-2 waits
+enemy: end
+-- enemy phase ends, turn 7 --
+-- player phase, turn 8 --
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^....D...
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 14/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,5   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,2
+ottilie moves 10,5 -> 10,2 via 10,4 10,3
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 14/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack ottilie bandit_leader-1
+forecast ottilie -> bandit_leader-1: dmg 4 hit 67% crit 3%; counter: none
+ottilie attacks bandit_leader-1
+  ottilie misses bandit_leader-1
+  ottilie hp 7, bandit_leader-1 hp 14
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 14/26  Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack wren bandit_leader-1
+forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+wren attacks bandit_leader-1
+  wren hits bandit_leader-1 for 6 (hp 8)
+  bandit_leader-1 misses wren
+  wren misses bandit_leader-1
+  wren hp 20, bandit_leader-1 hp 8
+wren gains 14 exp (75)
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 8/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits and braces
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 8/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits and braces
+Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..de..........
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 8/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          2,7    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         3,7    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain  braced  done
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 8 --
+-- enemy phase, turn 8 --
+bandit_leader-1 heals 5 (hp 13)
+enemy: attack bandit_leader-1 ottilie 2
+forecast bandit_leader-1 -> ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
+bandit_leader-1 equips Toll Axe
+bandit_leader-1 attacks ottilie
+  bandit_leader-1 misses ottilie
+  ottilie hits bandit_leader-1 for 4 (hp 9)
+  bandit_leader-1 hp 9, ottilie hp 7
+ottilie gains 14 exp (61)
+enemy: move brigand-1 5,6
+brigand-1 moves 2,7 -> 5,6 via 3,7 4,7 4,6
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move soldier-2 6,6
+soldier-2 moves 3,7 -> 6,6 via 4,7 4,6 5,6
+enemy: wait soldier-2
+soldier-2 waits
+enemy: end
+-- enemy phase ends, turn 8 --
+-- player phase, turn 9 --
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n...D...
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,2   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 11,2
+ottilie moves 10,2 -> 11,2
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait ottilie
+ottilie waits
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait wren
+wren waits and braces
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  braced  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits and braces
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  braced  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait teodor
+teodor waits and braces
+Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....A.C..
+ 5 ....^^........
+ 6 ..^^.de.......
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 9/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          5,6    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain  braced  done
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  braced  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 9 --
+-- enemy phase, turn 9 --
+bandit_leader-1 heals 5 (hp 14)
+enemy: attack bandit_leader-1 wren 2
+forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 36% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+  brace: wren braced: bandit_leader-1 hit -15
+bandit_leader-1 equips Steel Axe
+bandit_leader-1 attacks wren
+  bandit_leader-1 misses wren
+  wren hits bandit_leader-1 for 6 (hp 8)
+  wren hits bandit_leader-1 for 6 (hp 2)
+  bandit_leader-1 hp 2, wren hp 20
+wren gains 14 exp (89)
+enemy: move brigand-1 7,4
+brigand-1 moves 5,6 -> 7,4 via 6,6 6,5 6,4
+enemy: wait brigand-1
+brigand-1 waits
+enemy: move soldier-2 8,4
+soldier-2 moves 6,6 -> 8,4 via 6,5 6,4 7,4
+enemy: attack soldier-2 captain
+forecast soldier-2 -> captain: dmg 8 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+  brace: captain braced: soldier-2 hit -15
+soldier-2 attacks captain
+  soldier-2 misses captain
+  captain hits soldier-2 for 9 (hp 11)
+  soldier-2 hp 11, captain hp 22
+captain gains 12 exp (59)
+enemy: end
+-- enemy phase ends, turn 9 --
+-- player phase, turn 10 --
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....!...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..deA.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    10,0   hp 2/26   Fort (heals 20 percent, 5 hp)  group fort, boss
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         8,4    hp 11/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack wren bandit_leader-1
+forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+wren attacks bandit_leader-1
+  wren misses bandit_leader-1
+  bandit_leader-1 misses wren
+  wren hits bandit_leader-1 for 6 (hp 0)
+  wren hp 20, bandit_leader-1 hp 0
+wren gains 60 exp (49)
+wren reaches level 2: dex +1
+bandit_leader-1 falls at 10,0
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n....D..
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..deA.C..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          11,2   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         8,4    hp 11/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move ottilie 10,4
+ottilie moves 11,2 -> 10,4 via 10,2 10,3
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..deADC..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain
+e  soldier-2        Soldier L2 pikeman         8,4    hp 11/20  Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack ottilie soldier-2
+forecast ottilie -> soldier-2: dmg 6 hit 82% crit 4%; counter: none
+ottilie attacks soldier-2
+  ottilie hits soldier-2 for 6 (hp 5)
+  ottilie hp 7, soldier-2 hp 5
+ottilie gains 12 exp (73)
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..deADC..
+ 5 ....^^........
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         8,4    hp 5/20   Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> move teodor 8,5
+teodor moves 11,4 -> 8,5 via 10,4 9,4 9,5
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..deAD...
+ 5 ....^^..C.....
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain  done
+e  soldier-2        Soldier L2 pikeman         8,4    hp 5/20   Plain  group ford, aggressive
+C  teodor           Teodor L1 pikeman          8,5    hp 15/21  Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack teodor soldier-2
+forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+teodor attacks soldier-2
+  teodor hits soldier-2 for 10 (hp 0)
+  teodor hp 15, soldier-2 hp 0
+teodor gains 35 exp (35)
+soldier-2 falls at 8,4
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..d.AD...
+ 5 ....^^..C.....
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          8,5    hp 15/21  Plain  done
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> wait captain
+captain waits and braces
+Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^..d.AD...
+ 5 ....^^..C.....
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          7,4    hp 22/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  braced  done
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain  done
+C  teodor           Teodor L1 pikeman          8,5    hp 15/21  Plain  done
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> end
+-- player phase ends, turn 10 --
+-- enemy phase, turn 10 --
+enemy: move brigand-1 8,4
+brigand-1 moves 7,4 -> 8,4
+enemy: attack brigand-1 teodor
+forecast brigand-1 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
+brigand-1 attacks teodor
+  brigand-1 hits teodor for 10 (hp 5)
+  teodor hits brigand-1 for 12 (hp 10)
+  brigand-1 hp 10, teodor hp 5
+teodor gains 12 exp (47)
+enemy: end
+-- enemy phase ends, turn 10 --
+-- player phase, turn 11 --
+Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^...dAD...
+ 5 ....^^..C.....
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+d  brigand-1        Brigand L2 reaver          8,4    hp 10/22  Plain  group ford, aggressive
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          8,5    hp 5/21   Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+> attack captain brigand-1
+forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+captain attacks brigand-1
+  captain hits brigand-1 for 11 (hp 0)
+  captain hp 22, brigand-1 hp 0
+captain gains 35 exp (94)
+brigand-1 falls at 8,4
+Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
+   01234567890123
+ 0 ....^^....F...
+ 1 ..^....nn.B...
+ 2 ......n.......
+ 3 ~~~=~~~~~~=~~~
+ 4 ...^^....AD...
+ 5 ....^^..C.....
+ 6 ..^^..........
+ 7 ..............
+ 8 ..............
+ 9 ..............
+
+A  captain          Alder Fenn L1 cadet        9,4    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain
+C  teodor           Teodor L1 pikeman          8,5    hp 5/21   Plain
+B  wren             Wren L2 cadet              10,1   hp 20/20  Plain
+brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+battle won: rout; only recall is left
+battle won: rout

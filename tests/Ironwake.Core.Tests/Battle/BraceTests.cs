@@ -378,15 +378,17 @@ public class BraceTests
     }
 
     /// <summary>
-    /// Issue 131: the shipped Saltmarsh Ford is the timing arm's file (DECISIONS/0090, kept as
-    /// <c>docs/samples/saltmarsh_ford_0090.map</c>) with only <c>brace: on</c> added, and canonical.
+    /// Issue 131: the braced Saltmarsh Ford (DECISIONS/0091, kept as
+    /// <c>docs/samples/saltmarsh_ford_0091.map</c> once the enter line moved north) is the timing
+    /// arm's file (DECISIONS/0090, <c>docs/samples/saltmarsh_ford_0090.map</c>) with only
+    /// <c>brace: on</c> added, and canonical.
     /// </summary>
     [Fact]
-    public void TheShippedSaltmarshIsTheTimingArmsFileWithOnlyTheBraceHeaderAdded()
+    public void TheBracedSaltmarshIsTheTimingArmsFileWithOnlyTheBraceHeaderAdded()
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         var armPath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0090.map");
-        var shippedPath = Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map");
+        var shippedPath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0091.map");
         var arm = File.ReadAllText(armPath).Replace("\r\n", "\n").Split('\n').ToList();
         var shippedText = File.ReadAllText(shippedPath).Replace("\r\n", "\n");
         var shippedLines = shippedText.Split('\n').ToList();
@@ -402,5 +404,24 @@ public class BraceTests
         Assert.False(original.BraceEnabled);
         Assert.Equal(original with { BraceEnabled = true }, shipped);
         Assert.Equal(shippedText, MapFormat.Write(shipped, Starter));
+    }
+
+    /// <summary>
+    /// Issue 131, the north cut (DECISIONS/0093): the shipped Saltmarsh Ford is the braced file
+    /// (<c>docs/samples/saltmarsh_ford_0091.map</c>) with only the two enter lines moved from the
+    /// east crossing's mouth to the north bank east of the walls, and canonical.
+    /// </summary>
+    [Fact]
+    public void TheShippedSaltmarshIsTheBracedFileWithOnlyTheEnterLineMovedNorth()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var bracedPath = Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0091.map");
+        var shippedPath = Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map");
+        var shippedText = File.ReadAllText(shippedPath).Replace("\r\n", "\n");
+        const string North = "enter 7,0 8,0 9,0 11,0 12,0 13,0 9,1 10,1 11,1 12,1 13,1 7,2 8,2 9,2 10,2 11,2 12,2 13,2 ";
+
+        Assert.Equal(2, shippedText.Split(North).Length - 1);
+        Assert.Equal(File.ReadAllText(bracedPath).Replace("\r\n", "\n"), shippedText.Replace(North, "enter 10,4 9,4 11,4 10,5 "));
+        Assert.Equal(shippedText, MapFormat.Write(MapFiles.Load(shippedPath, MapFixture.Content), Starter));
     }
 }
