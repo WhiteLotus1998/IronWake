@@ -100,3 +100,7 @@ shot the_tollgate-113-reach-all --map the_tollgate --seed 113 --script "$PWD/$ou
 shot brackwater_cut-53-reach-all --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-turn3.script" --threat
 shot the_tollgate-113-levelup --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-levelup.script" --select 6,4 --hover 7,6
 shot saltmarsh_ford-7-reach-asleep --map saltmarsh_ford --seed 7 --threat
+# Issue 601: the captain's gold ring and crown beside Dunstan's plain cadet disc on Brackwater
+# seed 53 turn 3, and the threat hatch laid over the dark at dusk (columns 3 to 8).
+python3 docs/look/crop.py "$out/brackwater_cut-53-reach-all.png" "$out/crop-captain-4x.png" 390 222 102 40
+python3 docs/look/crop.py "$out/brackwater_cut-53-reach-all.png" "$out/crop-dusk-hatch-4x.png" 126 190 136 102

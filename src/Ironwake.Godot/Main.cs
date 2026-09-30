@@ -699,6 +699,13 @@ public partial class Main : Node2D
                 if (dusk && !Dusk.Sees(state, CoreSide.Player, at))
                 {
                     DrawRect(rect, UiColour("ink", 0.62f));
+                    // The hatch laid again over the dark (issue 601): under the veil it read dark
+                    // on dark, and it is the priced part of an unseen tile.
+                    var standable = _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null);
+                    if (standable && (threat.Contains(at) || faint.Contains(at)))
+                    {
+                        DrawThreatMark(at, faint: !threat.Contains(at), unseen: true);
+                    }
                 }
 
                 if (map.IsExit(at))
@@ -854,7 +861,8 @@ public partial class Main : Node2D
             {
                 var c = r.GetCenter() + new Vector2(0, 5);
                 var crown = new[] { new Vector2(-7, 0), new Vector2(-7, -8), new Vector2(-3, -3), new Vector2(0, -10), new Vector2(3, -3), new Vector2(7, -8), new Vector2(7, 0) }.Select(v => c + v).ToArray();
-                DrawColoredPolygon(crown, Look(LookPalette.Player));
+                DrawColoredPolygon(crown, MarkColour("captain"));
+                DrawPolyline(crown.Append(crown[0]).ToArray(), UiColour("ink"), 1.2f, antialiased: true);
             }, "captain"));
         }
 

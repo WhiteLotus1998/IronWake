@@ -238,8 +238,12 @@ public partial class Main
     }
 
     /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; no ground under it is warm, so it never blends to a peach (issue 564).</summary>
-    private void DrawThreatMark(Coord at, bool faint = false) =>
-        Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    /// <remarks>On a tile the dark hides (issue 601) it is laid again over the veil, so its stroke reads lighter than the veil would leave it, so dark ground never swallows it.</remarks>
+    private void DrawThreatMark(Coord at, bool faint = false, bool unseen = false) =>
+        Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : unseen ? UnseenThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+
+    /// <summary>The hatch's alpha over the dark (issue 601): brighter than on seen ground, which the veil would otherwise dim to 0.19.</summary>
+    private const float UnseenThreat = 0.4f;
 
     /// <summary>The hatch's alpha for a sleeping group's reach (issue 533): there, but never mistaken for a waking one's.</summary>
     private const float FaintThreat = 0.2f;
@@ -293,7 +297,7 @@ public partial class Main
     /// <summary>
     /// A unit (issue 511): the class silhouette on its side's disc about two thirds of a tile
     /// across, the enemy's with a hairline bone rim and the boss's with a dashed ring outside it,
-    /// the captain's amber crown above, the HP bar in the side's colour and the name under it while it is pointed at or selected.
+    /// the captain's gold ring and crown (issue 601), the HP bar in the side's colour and the name under it while it is pointed at or selected.
     /// A unit that has acted draws its disc sunk toward the ink.
     /// </summary>
     private void DrawToken(BattleState state, BattleUnit unit)
@@ -349,17 +353,14 @@ public partial class Main
 
         if (unit.IsCaptain)
         {
-            var c = centre + new Vector2(0, -radius - 1 * s);
-            var k = radius / 16f;
-            var crown = new[] { new Vector2(-8, 0), new Vector2(-8, -8), new Vector2(-4, -3), new Vector2(0, -10), new Vector2(4, -3), new Vector2(8, -8), new Vector2(8, 0) }
-                .Select(v => c + v * k).ToArray();
-            DrawColoredPolygon(crown, Look(LookPalette.Player));
-            DrawPolyline(crown.Append(crown[0]).ToArray(), ink, 1.2f, antialiased: true);
+            DrawCaptainMark(centre, radius);
         }
 
         if (unit.Id == _client!.Selected)
         {
-            DrawArc(centre, radius + 4 * s, 0, Mathf.Tau, 48, MarkColour("selected"), 2.5f, antialiased: true);
+            // The captain's ring already hugs his disc, so his selection sits outside it.
+            var gap = unit.IsCaptain ? CaptainRingOut + 2.5f : 4;
+            DrawArc(centre, radius + gap * s, 0, Mathf.Tau, 48, MarkColour("selected"), 2.5f, antialiased: true);
         }
 
         var max = unit.MaxHp(_client.Content);
@@ -380,6 +381,31 @@ public partial class Main
         var at = new Vector2(centre.X, cell.End.Y + 5 * s);
         UiText(at + new Vector2(1, 1), name, new Color(ink, 0.8f), nameSize, bold: true, centred: true);
         UiText(at, name, UiColour("text"), nameSize, bold: true, centred: true);
+    }
+
+    /// <summary>How far past the disc the captain's gold ring's outer ink edge reaches, in 48-pixel frame units.</summary>
+    private const float CaptainRingOut = 4.5f;
+
+    /// <summary>
+    /// The captain's mark (issue 601): a gold ring on the disc between two ink edges, which no
+    /// other token wears, and a gold crown outlined in ink rising from the disc's top edge, its
+    /// base sunk into the disc so the whole mark stays inside his own tile. The unit whose death
+    /// loses the map is the first one found.
+    /// </summary>
+    private void DrawCaptainMark(Vector2 centre, float radius)
+    {
+        var s = S;
+        var ink = UiColour("ink");
+        var gold = MarkColour("captain");
+        DrawArc(centre, radius + 0.75f * s, 0, Mathf.Tau, 48, ink, 1.5f * s, antialiased: true);
+        DrawArc(centre, radius + 2.5f * s, 0, Mathf.Tau, 48, gold, 2.5f * s, antialiased: true);
+        DrawArc(centre, radius + (CaptainRingOut - 0.5f) * s, 0, Mathf.Tau, 48, ink, 1f * s, antialiased: true);
+        var k = radius / 16f;
+        var c = centre + new Vector2(0, -radius + 6 * k);
+        var crown = new[] { new Vector2(-9, 0), new Vector2(-9, -9), new Vector2(-4.5f, -4), new Vector2(0, -11), new Vector2(4.5f, -4), new Vector2(9, -9), new Vector2(9, 0) }
+            .Select(v => c + v * k).ToArray();
+        DrawColoredPolygon(crown, gold);
+        DrawPolyline(crown.Append(crown[0]).ToArray(), ink, Mathf.Max(1f, 1.2f * k), antialiased: true);
     }
 
     /// <summary>The name as wide as the tile allows: whole, else its last word (the noun: Brigand, Warden), else cut to fit.</summary>
