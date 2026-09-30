@@ -1,4 +1,5 @@
 using Ironwake.Content;
+using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
@@ -251,5 +252,31 @@ public class OverwatchTests
 
         var error = Assert.Throws<MapException>(() => MapFixture.Parse(Field(true, Line, brace: true), "both.map"));
         Assert.Contains("exclusive", error.Message);
+    }
+    /// <summary>
+    /// Issue 501: 13.17's keep round sample is the shipped Sallow Grange with only
+    /// <c>overwatch: on</c> added, so a play of it reads against the plain map's entries.
+    /// </summary>
+    [Fact]
+    public void TheSallowOverwatchSampleIsTheShippedMapWithOnlyTheOverwatchHeaderAdded()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var shippedPath = Path.Combine(repo, "content", "maps", "sallow_grange.map");
+        var samplePath = Path.Combine(repo, "docs", "samples", "sallow_grange_overwatch.map");
+        var shipped = File.ReadAllText(shippedPath).Replace("\r\n", "\n").Split('\n').ToList();
+        var sampleText = File.ReadAllText(samplePath).Replace("\r\n", "\n");
+        var sampleLines = sampleText.Split('\n').ToList();
+
+        var at = sampleLines.IndexOf("overwatch: on");
+        Assert.True(at >= 0);
+        sampleLines.RemoveAt(at);
+        Assert.Equal(shipped, sampleLines);
+
+        var sample = MapFiles.Load(samplePath, MapFixture.Content);
+        var original = MapFiles.Load(shippedPath, MapFixture.Content);
+        Assert.True(sample.OverwatchEnabled);
+        Assert.False(original.OverwatchEnabled);
+        Assert.Equal(original with { OverwatchEnabled = true }, sample);
+        Assert.Equal(sampleText, MapFormat.Write(sample, Starter));
     }
 }

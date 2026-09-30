@@ -891,6 +891,24 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.17's keep round, Code's play: seed 577 on <c>docs/samples/sallow_grange_overwatch.map</c>.
+    /// Pell's watch behind the bait crits the brawler dead as it arrives on turn 1; Ansgar kills the
+    /// hexer from the tile beside it, off its ring; Ottilie's watch fires on the Reeve as he comes out.
+    /// </summary>
+    [Fact]
+    public void TheSallowOverwatchKeepPlayReplaysWithItsShots()
+    {
+        var output = RunSample("sallow_grange_overwatch.map", "2026-09-30-sallow_grange_overwatch-577.script", 577, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains("pell's watch fires on brawler-1 at 4,6: crit 39 (brawler-1 hp 0)\n", output);
+        Assert.Contains("hexer-1 falls at 13,7\n", output);
+        Assert.Contains("ottilie's watch fires on grange_reeve-1 at 12,5: hit 4 (grange_reeve-1 hp 22)\n", output);
+        Assert.Contains("grange_reeve-1 falls at 12,5\n", output);
+    }
+
+    /// <summary>
     /// 13.14's deciding play: Chat's seed 439 on <c>docs/samples/harrow_weir_brace.map</c>. Dunstan
     /// waits braced on 10,10 and the Foreman, let out by the veto, takes the one strike at 43; on
     /// turn 13 the Foreman sits braced on his hill and Dunstan kills him at 29.
