@@ -219,6 +219,26 @@ public static class ProtocolJson
             case WatchEnded x:
                 w.WriteString("unit", x.UnitId);
                 break;
+            case CoverTaken c:
+                w.WriteString("unit", c.UnitId);
+                w.WriteString("ally", c.AllyId);
+                WriteCoord(w, "allyLandsOn", c.AllyLandsOn);
+                if (c.PassedUpTargetId is { } coverPassed)
+                {
+                    w.WriteString("passesUp", coverPassed);
+                    w.WriteNumber("passesUpHit", c.PassedUpHit!.Value);
+                }
+
+                break;
+            case CoverFired c:
+                w.WriteString("unit", c.UnitId);
+                w.WriteString("ally", c.AllyId);
+                w.WriteString("attacker", c.AttackerId);
+                WriteCoord(w, "at", c.At);
+                WriteCoord(w, "allyTo", c.AllyTo);
+                w.WriteBoolean("wouldHaveKilled", c.WouldHaveKilled);
+                w.WriteBoolean("counters", c.Counters);
+                break;
             case BlowRaised b:
                 w.WriteString("unit", b.UnitId);
                 w.WriteString("target", b.TargetId);
@@ -359,6 +379,11 @@ public static class ProtocolJson
                 w.WriteString("type", "watch");
                 w.WriteString("unit", watch.UnitId);
                 break;
+            case Cover cover:
+                w.WriteString("type", "cover");
+                w.WriteString("unit", cover.UnitId);
+                w.WriteString("ally", cover.AllyId);
+                break;
             case Exit exit:
                 w.WriteString("type", "exit");
                 w.WriteString("unit", exit.UnitId);
@@ -409,6 +434,7 @@ public static class ProtocolJson
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "wait" => new Wait(RequiredString(e, "unit")),
             "watch" => new Watch(RequiredString(e, "unit")),
+            "cover" => new Cover(RequiredString(e, "unit"), RequiredString(e, "ally")),
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
@@ -722,6 +748,11 @@ public static class ProtocolJson
         if (unit.Watching)
         {
             w.WriteBoolean("watching", true);
+        }
+
+        if (unit.CoveredBy is { } coveredBy)
+        {
+            w.WriteString("coveredBy", coveredBy);
         }
 
         WriteRosterFields(w, u);

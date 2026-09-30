@@ -31,6 +31,9 @@ namespace Ironwake.Core;
 /// <see cref="Watching"/> is set by a <see cref="Watch"/> on an <c>overwatch: on</c> map
 /// (DESIGN.md 13.17, experiment) and cleared when the watch fires, when the unit is struck, or
 /// when its side's next phase begins.
+/// <see cref="CoveredBy"/> is the id of the ally covering this unit on a <c>cover: on</c> map
+/// (DESIGN.md 13.19, experiment): set by that ally's <see cref="Cover"/>, cleared when the cover
+/// fires and when this unit's side's next phase begins.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -50,7 +53,8 @@ public sealed record BattleUnit(
     bool Shoved = false,
     bool Braced = false,
     Coord? WindupAt = null,
-    bool Watching = false)
+    bool Watching = false,
+    string? CoveredBy = null)
 {
     public string Id => Unit.Id;
 

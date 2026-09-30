@@ -700,10 +700,18 @@ public static class EnemyAi
     /// strikes the attacker lives to make, so a second strike a plain counter would kill it
     /// before is not counted (<see cref="CombatForecast.AttackerDamageLivedFor"/>, issue 315). The attacker
     /// strikes with its equipped weapon; <see cref="PlanUnit"/> scores another slot by
-    /// passing the unit with that slot moved to the front.
+    /// passing the unit with that slot moved to the front. A strike on an ally a cover would
+    /// swap out (DESIGN.md 13.19) is scored against the coverer on the ally's tile
+    /// (<see cref="CoverRule.Swapped"/>), so the planner prices the swap.
     /// </summary>
     public static double Score(BattleState state, GameContent content, BattleUnit attacker, Coord from, BattleUnit target)
     {
+        if (CoverRule.Swapped(state, target) is ({ } covered, { } coverer, _))
+        {
+            state = covered;
+            target = coverer;
+        }
+
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var there = attacker with { At = from };

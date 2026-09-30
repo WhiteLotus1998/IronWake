@@ -78,6 +78,15 @@ public sealed record Shove(string UnitId, string TargetId) : Command;
 /// </summary>
 public sealed record Watch(string UnitId) : Command;
 
+/// <summary>
+/// Cover (DESIGN.md 13.19, experiment): on a <c>cover: on</c> map, a player unit orthogonally
+/// beside an ally takes this as its action, in place of Attack, Item or Wait, after its Move or
+/// without one. Until the ally's side's next phase, the first Attack aimed at the ally while the
+/// two stand side by side swaps them and strikes the coverer (<see cref="CoverRule"/>).
+/// No Canto follows. It is not a Wait, so it never braces.
+/// </summary>
+public sealed record Cover(string UnitId, string AllyId) : Command;
+
 /// <summary>End the unit's action without attacking.</summary>
 public sealed record Wait(string UnitId) : Command;
 

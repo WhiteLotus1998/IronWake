@@ -126,7 +126,9 @@ public static class Queries
     /// on the board the query reads (DECISIONS/0045). Each line reads that phase-start
     /// board; an earlier enemy's move or kill in the phase is not played out. A unit owed a
     /// Canto (issue 71) is asked from any tile its Canto can end on, since that is where it
-    /// still chooses to stand. Null when the unit cannot stand on the tile this phase, or
+    /// still chooses to stand. A strike a cover would swap onto the coverer (DESIGN.md 13.19)
+    /// is priced against the coverer on the unit's tile and carries it as <see cref="ThreatLine.CoveredBy"/>.
+    /// Null when the unit cannot stand on the tile this phase, or
     /// when the state is not a player phase. Read-only.
     /// </summary>
     public static IReadOnlyList<ThreatLine>? Threats(BattleState state, GameContent content, BattleUnit unit, Coord from)
@@ -150,10 +152,13 @@ public static class Queries
             }
 
             var carrier = board.Carrying(enemy, strike.From);
-            var forecast = StrikeForecast(board, content, carrier, moved, strike);
-            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
             var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
-            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(board, weapon)));
+            var covered = Windup.Raises(board, weapon) ? null : CoverRule.Swapped(board, moved);
+            var forecast = covered is ({ } swapped, { } coverer, _)
+                ? StrikeForecast(swapped, content, carrier, coverer, strike)
+                : StrikeForecast(board, content, carrier, moved, strike);
+            Coord? arrives = arrivals.TryGetValue(enemy.Id, out var at) ? at : null;
+            lines.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, forecast, arrives, StrikeTiles(board, content, enemy, moved), Windup.Raises(board, weapon)) { CoveredBy = covered?.Struck });
         }
 
         return lines;
@@ -459,6 +464,12 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
     /// phase (issue 444).
     /// </summary>
     public int IfAllLand => Raises ? 0 : Forecast.AttackerDamageLivedFor(Enemy.Hp);
+
+    /// <summary>
+    /// The coverer this strike lands on instead of the unit (DESIGN.md 13.19), standing on the
+    /// unit's tile, when a cover would swap them; <see cref="Forecast"/> is then against it. Null otherwise.
+    /// </summary>
+    public BattleUnit? CoveredBy { get; init; }
 }
 
 /// <summary>

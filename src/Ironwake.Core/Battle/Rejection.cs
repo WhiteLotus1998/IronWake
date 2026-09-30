@@ -30,6 +30,7 @@ public enum RejectionReason
     Unseen,
     CannotShove,
     CannotWatch,
+    CannotCover,
     SignatureRefused,
     BattleOver,
     UnknownCommand,

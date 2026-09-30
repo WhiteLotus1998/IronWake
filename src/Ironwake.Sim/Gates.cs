@@ -65,6 +65,26 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
 
     /// <summary>The pincer's counts for the game (DESIGN.md 13.13, issue 495); zero on a map without the header.</summary>
     public PinCounts Pins { get; init; } = PinCounts.Zero;
+
+    /// <summary>Cover's counts for the game (DESIGN.md 13.19, issue 531); zero on a map without the header.</summary>
+    public CoverCounts Covers { get; init; } = CoverCounts.Zero;
+}
+
+/// <summary>
+/// One game's cover counts (DESIGN.md 13.19): covers taken, of them taken with a legal strike
+/// passed up, swaps fired, and enemy actors the cover turned away (<see cref="CoverRule.PassedLine"/>).
+/// </summary>
+public sealed record CoverCounts(int Taken, int OverStrike, int Fired, int Passed)
+{
+    public static CoverCounts Zero { get; } = new(0, 0, 0, 0);
+
+    /// <summary>The counts after one event.</summary>
+    public CoverCounts After(GameEvent e) => e switch
+    {
+        CoverTaken t => this with { Taken = Taken + 1, OverStrike = OverStrike + (t.PassedUpTargetId is null ? 0 : 1) },
+        CoverFired => this with { Fired = Fired + 1 },
+        _ => this,
+    };
 }
 
 /// <summary>
@@ -154,6 +174,7 @@ public static class Runner
         var playerWatch = WatchCounts.Zero;
         var enemyWatch = WatchCounts.Zero;
         var pins = PinCounts.Zero;
+        var covers = CoverCounts.Zero;
         while (!state.Outcome.IsOver)
         {
             if (turns is not null && state.Phase == Side.Player && (turns.Count == 0 || turns[^1].Turn < state.Turn))
@@ -181,6 +202,11 @@ public static class Runner
             foreach (var command in commands)
             {
                 hits?.Record(state, content, command);
+                if (state.Phase == Side.Enemy && CoverRule.PassedLine(state, content, command) is not null)
+                {
+                    covers = covers with { Passed = covers.Passed + 1 };
+                }
+
                 var result = Resolver.Apply(state, content, command);
                 if (!result.Accepted)
                 {
@@ -199,6 +225,7 @@ public static class Runner
                 {
                     playerWatch = playerWatch.After(e, Side.Player, state.Phase);
                     enemyWatch = enemyWatch.After(e, Side.Enemy, state.Phase);
+                    covers = covers.After(e);
                 }
 
                 if (result.Events.OfType<CombatFought>().Any())
@@ -226,6 +253,7 @@ public static class Runner
             PlayerWatch = playerWatch,
             EnemyWatch = enemyWatch,
             Pins = pins,
+            Covers = covers,
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
@@ -321,8 +349,17 @@ public static class Gates
         var winning = games.Where(g => g.Won).Select(g => g.Turns).OrderBy(t => t).ToList();
         var turns = winning.Count == 0 ? "no wins" : $"winning turn median {Percentile(winning, 0.5)} p90 {Percentile(winning, 0.9)} limit {map.TurnLimit}";
         var passed = rate >= BeatableRate;
-        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Pins(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
+        return (new GateResult($"gate 1 beatable: {id}, heuristic wins {wins}/{seeds} ({rate:P0}), {turns}, {Losses(games, map)}, {RefusedKill(games)}, {EscapeSurvivors(games, map)}{Watches(games, map)}{Pins(games, map)}{Covers(games, map)}{Name(scheme)}: {Verdict(passed)}", passed), games);
     }
+
+    /// <summary>
+    /// On a <c>cover: on</c> map, the per-game means of the cover counts (DESIGN.md 13.19, issue 531),
+    /// as <c>cover 1.2 taken 0.0 over a strike 0.4 fired 0.3 passed, </c>; nothing on any other map.
+    /// </summary>
+    public static string Covers(IReadOnlyList<GameResult> games, MapDefinition map) =>
+        !map.CoverEnabled || games.Count == 0
+            ? ""
+            : string.Create(CultureInfo.InvariantCulture, $"cover {games.Average(g => g.Covers.Taken):0.0} taken {games.Average(g => g.Covers.OverStrike):0.0} over a strike {games.Average(g => g.Covers.Fired):0.0} fired {games.Average(g => g.Covers.Passed):0.0} passed, ");
 
     /// <summary>
     /// On an <c>overwatch: on</c> map, the per-game means of each side's watch counts (DESIGN.md

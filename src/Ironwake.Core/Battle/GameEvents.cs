@@ -112,6 +112,22 @@ public sealed record WatchHeld(string UnitId, string TargetId, Coord At, int Hit
 /// <summary>A strike on a watching unit ended its watch unfired (DESIGN.md 13.17).</summary>
 public sealed record WatchEnded(string UnitId) : GameEvent;
 
+/// <summary>
+/// A unit took Cover on an ally beside it (DESIGN.md 13.19): <paramref name="AllyLandsOn"/> is
+/// where the ally lands if the swap fires, the coverer's tile. <paramref name="PassedUpTargetId"/>
+/// and <paramref name="PassedUpHit"/> name the best legal strike it gave up, displayed hit, when it had one.
+/// </summary>
+public sealed record CoverTaken(string UnitId, string AllyId, Coord AllyLandsOn, string? PassedUpTargetId = null, int? PassedUpHit = null) : GameEvent;
+
+/// <summary>
+/// A cover fired (DESIGN.md 13.19): <paramref name="AttackerId"/>'s Attack aimed at
+/// <paramref name="AllyId"/> swapped the two, the coverer now on <paramref name="At"/> and the ally
+/// on <paramref name="AllyTo"/>. <paramref name="WouldHaveKilled"/> is whether the strike, every
+/// hit landing and no crit, would have killed the ally where it stood; <paramref name="Counters"/>
+/// is whether the coverer can answer from the ally's tile.
+/// </summary>
+public sealed record CoverFired(string UnitId, string AllyId, string AttackerId, Coord At, Coord AllyTo, bool WouldHaveKilled, bool Counters) : GameEvent;
+
 public sealed record Recalled(int ToIndex, int ChargesLeft) : GameEvent;
 
 /// <summary>An item or a healing spell was used (section 7's Item action); a <see cref="UnitHealed"/> for the target follows.</summary>
