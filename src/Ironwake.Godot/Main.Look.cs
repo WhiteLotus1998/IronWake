@@ -76,7 +76,21 @@ public partial class Main
         if (id == "fire")
         {
             DrawRect(r, TerrainColour("forest"));
-            Hatch(r, TerrainColour("fire"), 3 * S, 8 * S);
+            if (TileArt("fire") is { } hatch)
+            {
+                DrawTextureRect(hatch, r, false);
+            }
+            else
+            {
+                Hatch(r, TerrainColour("fire"), 3 * S, 8 * S);
+            }
+
+            return;
+        }
+
+        if (TileArt(id) is { } tile)
+        {
+            DrawTextureRect(tile, r, false);
             return;
         }
 
@@ -94,6 +108,19 @@ public partial class Main
         var s = S;
         var ink = UiColour("ink");
         Vector2 P(float x, float y) => p + new Vector2(x * s, y * s);
+        if (id != "fire" && TileArt(id, detailOnly: true) is { } detail)
+        {
+            // The file's detail laid again over the hatch its ground went under (issue 564); the
+            // wall's lit top edge stays drawn here, since it depends on the tile above.
+            DrawTextureRect(detail, Cell(at), false);
+            if (id == "wall" && !IsHigh(map, new Coord(at.X, at.Y - 1)))
+            {
+                DrawLine(P(0, 0.5f), P(48, 0.5f), TerrainColour("mountain", 0.6f), 1);
+            }
+
+            return;
+        }
+
         switch (id)
         {
             case "forest":
@@ -273,8 +300,8 @@ public partial class Main
     {
         var cell = Cell(unit.At);
         var s = S;
-        var centre = cell.Position + new Vector2(_tile / 2f, 19 * s);
-        var radius = 14 * s;
+        var centre = TokenCentre(unit.At);
+        var radius = TokenRadius * s;
         var ink = UiColour("ink");
         if (!Dusk.Seen(state, unit))
         {
@@ -291,10 +318,15 @@ public partial class Main
             deep = deep.Lerp(ink, 0.45f);
         }
 
-        DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
-        DrawCircle(Vector2.Zero, radius, deep);
-        DrawSetTransformMatrix(_tokenFrame);
-        DrawCircle(centre, radius, fill);
+        var drawn = DrawTokenArt(unit, centre, radius, player && unit.Acted ? 0.45f : 0);
+        if (!drawn)
+        {
+            DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
+            DrawCircle(Vector2.Zero, radius, deep);
+            DrawSetTransformMatrix(_tokenFrame);
+            DrawCircle(centre, radius, fill);
+        }
+
         var bone = Look(LookPalette.EnemyBone);
         if (!player)
         {
@@ -310,7 +342,11 @@ public partial class Main
             }
         }
 
-        DrawSilhouette(state, unit, centre + new Vector2(0, -1 * s), radius / 16f, player ? ink : bone);
+        if (!drawn)
+        {
+            DrawSilhouette(state, unit, centre + new Vector2(0, -1 * s), radius / 16f, player ? ink : bone);
+        }
+
         if (unit.IsCaptain)
         {
             var c = centre + new Vector2(0, -radius - 1 * s);
@@ -339,7 +375,9 @@ public partial class Main
 
         var nameSize = Math.Max(8, (int)(9 * s));
         var name = FitName(unit.Unit.Name, nameSize, _tile - 2);
-        var at = new Vector2(centre.X, cell.End.Y - 2 * s);
+        // Under the HP bar at the tile's foot, spilling a few pixels onto the tile below (issue 564:
+        // ART_SPEC's 32-pixel disc leaves the bar the tile's last 8 pixels).
+        var at = new Vector2(centre.X, cell.End.Y + 5 * s);
         UiText(at + new Vector2(1, 1), name, new Color(ink, 0.8f), nameSize, bold: true, centred: true);
         UiText(at, name, UiColour("text"), nameSize, bold: true, centred: true);
     }
