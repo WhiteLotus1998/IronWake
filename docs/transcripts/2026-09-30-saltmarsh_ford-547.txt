@@ -647,6 +647,7 @@ C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
+lethal if all land: ottilie (archer-1 7, soldier-1 10 against 17 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: move archer-1 11,5
@@ -865,6 +866,8 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
+lethal if all land: ottilie (soldier-1 10 against 7 hp)
+lethal if all land: teodor (soldier-1 8 against 5 hp)
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
 enemy: wait bandit_leader-1
@@ -1823,6 +1826,7 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
+lethal if all land: ottilie (bandit_leader-1 13 against 7 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 bandit_leader-1 heals 5 (hp 13)

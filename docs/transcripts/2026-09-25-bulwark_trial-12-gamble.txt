@@ -72,6 +72,7 @@ d  brigand-4        Brigand L3 reaver          0,5    hp 23/23  Plain  group wes
 A  captain          Alder Fenn L1 bulwark      3,1    hp 14/25  Plain  captain  done
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
 > end
+lethal if all land: captain (brigand-1 8, brigand-2 8, brigand-3 8 against 14 hp)
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
 enemy: attack brigand-1 captain

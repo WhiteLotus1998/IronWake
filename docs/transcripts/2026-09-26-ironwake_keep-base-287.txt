@@ -743,6 +743,7 @@ E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          11,7   hp 3/21   Plain  done
 B  wren             Wren L1 cadet              9,3    hp 14/20  Plain  done
 > end
+lethal if all land: teodor (archer-1 5 against 3 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 event wave3
@@ -1126,6 +1127,7 @@ E  pell             Pell L1 adept              12,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 14/20  Plain  done
 > end
+lethal if all land: ottilie (archer-1 7, brigand-1 12 against 17 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 event wave3
@@ -1846,6 +1848,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 18/20  Plain  done
 > end
+lethal if all land: pell (archer-1 8, soldier-3 11 against 16 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 event wave6
@@ -2677,6 +2680,8 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,7   hp 18/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 20/20  Plain  done
 > end
+lethal if all land: dunstan (archer-2 3, hexer-1 11 against 7 hp)
+lethal if all land: pell (archer-2 8 against 5 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 event wave8
@@ -2985,6 +2990,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,4   hp 18/21  Plain  done
 B  wren             Wren L2 cadet              12,3   hp 20/20  Plain  done
 > end
+lethal if all land: wren (archer-2 5, hexer-1 10, soldier-4 8 against 20 hp)
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: move archer-2 10,4
@@ -3293,6 +3299,7 @@ o  soldier-5        Soldier L2 pikeman         6,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          15,3   hp 15/21  Plain  done
 B  wren             Wren L2 cadet              11,3   hp 12/20  Plain  done
 > end
+lethal if all land: wren (archer-2 5, archer-3 5, brigand-5 10, soldier-4 8 against 12 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: move archer-2 13,3

@@ -1371,6 +1371,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
+lethal if all land: wren (brigand-1 11 against 11 hp)
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: wait bandit_leader-1

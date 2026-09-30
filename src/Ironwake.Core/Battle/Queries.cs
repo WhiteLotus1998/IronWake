@@ -217,6 +217,50 @@ public static class Queries
         Exposure.SeatedSum(lines.Where(l => !l.Raises).Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
 
     /// <summary>
+    /// Every player unit that the coming enemy phase kills if every strike <c>threat</c> prices
+    /// on it lands (issue 558, rounds 158 and 159): the unit's <see cref="Threats"/> from where it
+    /// stands, summed as <see cref="IfAllLand(IReadOnlyList{ThreatLine}, RaisedBlow?)"/> sums them,
+    /// at least its HP. When <paramref name="playerView"/> is set an enemy the player cannot see
+    /// at dusk is left out unless an announced event spawns it, as <c>threat</c> leaves it out; a
+    /// sleeping group counts for nothing. A strike a cover would swap onto the coverer (DESIGN.md
+    /// 13.19) is not in the unit's own total. In deployment order; empty off the player phase or
+    /// when the map is over. Read-only.
+    /// </summary>
+    public static IReadOnlyList<LethalThreat> Lethal(BattleState state, GameContent content, bool playerView = true)
+    {
+        var found = new List<LethalThreat>();
+        if (state.Phase != Side.Player || state.Outcome.IsOver)
+        {
+            return found;
+        }
+
+        foreach (var unit in state.UnitsOf(Side.Player))
+        {
+            if (Threats(state, content, unit, unit.At) is not { } all)
+            {
+                continue;
+            }
+
+            var lines = all.Where(l => !l.Raises && l.CoveredBy is null && (!playerView || l.Arrives is not null || Dusk.Seen(state, l.Enemy))).ToList();
+            var seated = Exposure.Seated(lines.Select(l => (l.IfAllLand, (IReadOnlyList<Coord>)(l.Tiles ?? ValueList<Coord>.Of(l.From)))).ToList());
+            var strikers = new List<LethalStriker>();
+            if (RaisedBlowOn(state, content, unit, unit.At) is { } blow)
+            {
+                strikers.Add(new LethalStriker(blow.Wielder, blow.Damage));
+            }
+
+            strikers.AddRange(seated.Select(i => new LethalStriker(lines[i].Enemy, lines[i].IfAllLand)).Where(s => s.Damage > 0));
+            var total = strikers.Sum(s => s.Damage);
+            if (strikers.Count > 0 && total >= unit.Hp)
+            {
+                found.Add(new LethalThreat(unit, total, ValueList<LethalStriker>.From(strikers)));
+            }
+        }
+
+        return found;
+    }
+
+    /// <summary>
     /// <see cref="IfAllLand(IReadOnlyList{ThreatLine})"/> with a blow already raised over the tile
     /// (<see cref="RaisedBlow"/>) added: it lands for certain at the coming enemy phase start,
     /// before any strike, so it is in the coming phase's total (DESIGN.md 13.16, issue 444).
@@ -478,3 +522,13 @@ public sealed record ThreatLine(BattleUnit Enemy, Coord From, int Slot, Weapon W
 /// certain at the wielder's next phase start on the unit standing there, unless a hit from within the wielder's reach breaks it.
 /// </summary>
 public sealed record RaisedBlow(BattleUnit Wielder, Coord Over, int Damage);
+
+/// <summary>
+/// A player unit <see cref="Queries.Lethal"/> names (issue 558): <paramref name="Total"/> is the
+/// coming enemy phase's damage on it if every strike lands, at least its HP, and
+/// <paramref name="Strikers"/> the enemies that total sums, in <c>threat</c>'s order.
+/// </summary>
+public sealed record LethalThreat(BattleUnit Unit, int Total, ValueList<LethalStriker> Strikers);
+
+/// <summary>One enemy in a <see cref="LethalThreat"/>'s total, and the damage it deals if every strike lands.</summary>
+public sealed record LethalStriker(BattleUnit Enemy, int Damage);

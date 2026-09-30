@@ -2964,6 +2964,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > end
+lethal if all land: pell (weir_foreman-1 13 against 3 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: wait archer-1

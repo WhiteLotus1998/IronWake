@@ -1814,6 +1814,7 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 20/21  Plain  done
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
 > end
+lethal if all land: pell (archer-1 8, soldier-2 11 against 16 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: move archer-1 8,5
@@ -2379,6 +2380,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > end
+lethal if all land: wren (bandit_leader-1 15 against 7 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 bandit_leader-1 heals 5 (hp 13)

@@ -147,19 +147,23 @@ public static class Exposure
     /// first (ties in list order) and keeping each one an augmenting path can still seat is
     /// the maximum.
     /// </summary>
-    public static int SeatedSum(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines)
+    public static int SeatedSum(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines) =>
+        Seated(lines).Sum(index => lines[index].Weight);
+
+    /// <summary>
+    /// The indices of the <paramref name="lines"/> <see cref="SeatedSum"/> seats, in ascending
+    /// order: the strikers its total sums (issue 558). One walk serves both, so a list of the
+    /// strikers cannot disagree with the total.
+    /// </summary>
+    public static IReadOnlyList<int> Seated(IReadOnlyList<(int Weight, IReadOnlyList<Coord> Tiles)> lines)
     {
         var seated = new Dictionary<Coord, int>();
-        var total = 0;
         foreach (var index in Enumerable.Range(0, lines.Count).OrderByDescending(i => lines[i].Weight).ThenBy(i => i))
         {
-            if (Seat(index, new HashSet<Coord>()))
-            {
-                total += lines[index].Weight;
-            }
+            Seat(index, new HashSet<Coord>());
         }
 
-        return total;
+        return seated.Values.OrderBy(i => i).ToList();
 
         bool Seat(int index, HashSet<Coord> visited)
         {

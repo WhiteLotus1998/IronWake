@@ -1049,6 +1049,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > end
+lethal if all land: wren (brigand-2 11, brigand-3 11 against 20 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: move brigand-2 8,5
@@ -1363,6 +1364,8 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > end
+lethal if all land: ottilie (soldier-2 10 against 7 hp)
+lethal if all land: wren (soldier-2 9 against 9 hp)
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
 enemy: move soldier-2 8,4

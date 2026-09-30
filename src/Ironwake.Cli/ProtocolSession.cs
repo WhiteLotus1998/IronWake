@@ -98,6 +98,7 @@ public sealed class ProtocolSession
     private string Command(Command command)
     {
         var events = new List<GameEvent?>();
+        var lethal = command is EndPhase ? Queries.Lethal(_state, _content, PlayerView) : null;
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
         {
@@ -150,6 +151,31 @@ public sealed class ProtocolSession
             }
 
             w.WriteEndArray();
+            if (lethal is not null)
+            {
+                w.WriteStartArray("lethal");
+                foreach (var threat in lethal)
+                {
+                    w.WriteStartObject();
+                    w.WriteString("unit", threat.Unit.Id);
+                    w.WriteNumber("total", threat.Total);
+                    w.WriteNumber("hp", threat.Unit.Hp);
+                    w.WriteStartArray("strikers");
+                    foreach (var striker in threat.Strikers)
+                    {
+                        w.WriteStartObject();
+                        w.WriteString("enemy", striker.Enemy.Id);
+                        w.WriteNumber("damage", striker.Damage);
+                        w.WriteEndObject();
+                    }
+
+                    w.WriteEndArray();
+                    w.WriteEndObject();
+                }
+
+                w.WriteEndArray();
+            }
+
             w.WritePropertyName("state");
             ProtocolJson.WriteState(w, _state, _content, full: false, PlayerView);
             w.WriteEndObject();
