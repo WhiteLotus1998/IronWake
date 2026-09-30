@@ -1950,6 +1950,31 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// DESIGN.md 13.21, the tide: an announced change to a terrain some movement type cannot
+    /// enter names the held-tile rule that stops it, and a change to ground every type can
+    /// enter does not, since nothing could hold it.
+    /// </summary>
+    [Fact]
+    public void AnnouncedFloodNamesTheHeldTileRule()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ebb_ford_tide.map");
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-tide-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("  turn 3, enemy phase: 4,5 becomes water, unless one who cannot enter water stands on it.\n", output);
+            Assert.Contains("  turn 6, player phase: 4,5 becomes road.\n", output);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.

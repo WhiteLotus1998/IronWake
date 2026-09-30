@@ -1474,3 +1474,25 @@ Against the kill condition (#593): a unit left a burning tile because it was bur
 The moment I stopped caring: none; turn 6 was the only quiet phase.
 Trace gate (before this play): `--trace` on seeds 1 to 40, an enemy hexer ignited a player unit's tile in 40 of 40 (west hexer on turn 1 in 38, east hexer on the captain's tile on turn 2 in 32). The heuristic, which knows nothing of fire, survives 20 of 40.
 Transcript: docs/transcripts/2026-09-30-cinder_copse_wildfire-631.txt (script beside it), replayed under `--strict`, exit 0: `recall 54` on turn 4, `battle won: survive` after turn 6.
+
+## 2026-09-30 — Cinder Copse, wildfire's last keep round (13.15, #593), the cold play — Chat
+
+Copied from the Table (#592, round 175).
+
+Seed: 641 on `docs/samples/cinder_copse_wildfire.map` (#597's head). Result: won, survive, after turn 6. Dunstan dead, two Recalls. **No tile ever lit.** Every Cinder hit, ours and theirs, landed on a unit standing on plain.
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 4. Rook finished the west hexer at 6,1 (86, both strikes landed), which cleared the north. Then Pell and Dunstan killed the east soldier at 8,0 (12, then 9 at 73). Dunstan was on 5 HP, and `end` printed `lethal if all land: dunstan (hexer-2 12 against 5 hp)`. I ended the phase anyway and paid for the soldier with him. It was the one real price on the map, and I paid it knowingly.
+Notes: On turn 1 I read `threat` and stepped everyone off the wood's two bank columns (5 and 8). The eight inner tiles are out of reach of a hexer on either bank. Both bank hexers found nobody to hit and walked to the north ford. From then on the channels did the work: the enemy arrived through the fords in four separate pieces, and I killed each piece on plain as it came round, before any of them reached the wood. Turn 3's first attempt went wrong on Rook's keyed miss (captain facing 19 against 14); recalled and swapped the killers. Turn 5 Rook died on a 14 percent miss into a printed lethal counter; recalled again. Fire never came into a decision.
+The moment I stopped caring: turn 6. One hexer, nobody in its reach, and the clock doing the rest.
+Transcript: docs/transcripts/2026-09-30-cinder_copse_wildfire-641-chat.txt (script beside it), replayed under `--strict`, exit 0.
+
+## 2026-09-30 — Ebb Ford, the tide's spike (13.21), the warm play — Code
+
+Seed: 653 on `docs/samples/ebb_ford_tide.map`, drawn this run: rout, 13x11, limit 10, `announce: on`. A river across row 5 with a four-tile road ford that floods at enemy phase 3, drains at player phase 6 and floods again at enemy phase 8, all printed before turn 1 with the held-tile rule. Van north (soldier, brigand, rider, aggressive), rear behind it (archer, soldier, hexer, guard). Warm: I drew it. Result: won, rout, on turn 6, Dunstan dead, all three Recalls spent.
+Tension: 6/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 3, the flood coming. The rear had woken on turn 2 (the captain's crit on the rider was six from soldier-2) and stood on the north bank. Waiting south meant the ford closed on them until turn 6 of 10, so I crossed: Dunstan to 5,4 on the soldier, Pell's Cinder from 6,6 to finish it. Wren went to 5,5 to dress Dunstan and learned the dressing heals only its user, so she waited on the ford, and at the enemy phase `event flood2 is blocked: its tile is held`. One lane stayed open through the flood, and Pell used it on turn 4.
+Notes: Turn 1 Dunstan baited the van across; the brigand waited on the ford tile 7,5, the first time I read the map from the enemy's side: a foe standing in the ford holds it too. Turn 2 the van died on the south bank (the captain's 4 percent crit on the rider). Dunstan, stranded north by my own crossing, died on turn 3 to the hexer's 12 on 11 HP, 15 against 11 printed. Recalls: turn 3 (the captain's 87 miss left him 24 against 14 on the ford), turn 4 (Rook's miss on the hexer, 9 against 8), turn 5 (I ended through `lethal if all land: captain` and lost the map; recalled to the turn's start and hid everyone). The drain on turn 6 opened the ford for a fight that was already over: Rook killed the hexer on the drained board.
+What the tide did: it decided turn 3 (cross now or wait three turns) and the lane on turn 4. What it did not: the second flood never mattered, and nothing the enemy did answered the schedule, since the planner does not read it.
+The moment I stopped caring: turn 5, after the second recall, hiding from one hexer.
+Transcript: docs/transcripts/2026-09-30-ebb_ford_tide-653.txt (script beside it), replayed under `--strict`, exit 0: `recall 34` on turn 3, `recall 54` on turn 4, `recall 61` after the loss on turn 5, `battle won: rout` on turn 6.
+Sim at 40 seeds (the heuristic ignores the schedule): gate 1 17/40, 18 timeouts; gates 2 to 8 ok. A sample, not gated.

@@ -338,11 +338,26 @@ public sealed class PlaySession
         var what = mapEvent.Action switch
         {
             SpawnEnemy spawn => SpawnWords(spawn.Placement, content),
-            ChangeTerrain change => $"{change.At} becomes {content.TerrainById(change.TerrainId).Name.ToLowerInvariant()}.",
+            ChangeTerrain change => TerrainWords(change, content),
             SetFlag flag => $"{flag.Flag} is set.",
             _ => throw new InvalidOperationException("unknown action " + mapEvent.Action.GetType().Name),
         };
         return when + ": " + what;
+    }
+
+    /// <summary>
+    /// A terrain change in player words, with the held-tile rule <see cref="MapEvents"/>
+    /// applies when the new terrain is impassable to some movement type: the change does not
+    /// happen under a unit that could not stand on it (the tide sample, DESIGN.md 13.21).
+    /// </summary>
+    private static string TerrainWords(ChangeTerrain change, GameContent content)
+    {
+        var terrain = content.TerrainById(change.TerrainId);
+        var name = terrain.Name.ToLowerInvariant();
+        var impassable = Enum.GetValues<MovementType>().Any(movement => !terrain.IsPassable(movement));
+        return impassable
+            ? $"{change.At} becomes {name}, unless one who cannot enter {name} stands on it."
+            : $"{change.At} becomes {name}.";
     }
 
     private static string SpawnWords(EnemyPlacement placement, GameContent content)
