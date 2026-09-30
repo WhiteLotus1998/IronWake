@@ -105,7 +105,7 @@ public sealed record WatchFired(string UnitId, string TargetId, Coord At, Strike
 
 /// <summary>
 /// A watch held its shot at a unit that ended a move in its ring: Ottilie's ledger refused a shot
-/// at <paramref name="Hit"/>, displayed, under 50 (DESIGN.md 13.18). The watch stays for the next arrival.
+/// at <paramref name="Hit"/>, displayed, under 65 (DESIGN.md 13.18). The watch stays for the next arrival.
 /// </summary>
 public sealed record WatchHeld(string UnitId, string TargetId, Coord At, int Hit) : GameEvent;
 

@@ -23,3 +23,5 @@ Date: 2026-09-30. Agreed on the Design Table (#503): Chat's two cold plays in ro
 ## Consequences
 
 DIALOGUE.md and STATE.md carry the reading; #540 is `ready` with its own kill test; DESIGN 13.18 changes only with #540's number.
+
+Amended by #540: the ledger is 65 (`Signatures.LedgerFloor`) and DESIGN 13.18 says so. Code's 563 shot a soldier in forest at 60 under orders on turn 3, a shot inside the new band, so that transcript stops there under `--strict` and stays the record of the 50 reading; Chat's 587 and 113 replay whole.
