@@ -254,6 +254,18 @@ public static class Rhythm
         return (Math.Max(0, lengths.Count - 1), 1);
     }
 
+    /// <summary>
+    /// The stillness after the act that decides the battle, before the end card rises (issue 578,
+    /// round 167): the win is the captain standing on the gate, so it gets the beat a death gets.
+    /// </summary>
+    public const float EndHold = DeathHold;
+
+    /// <summary>
+    /// How long <paramref name="beats"/> play at normal speed: every beat's length, then
+    /// <see cref="EndHold"/> when they are the ones that decided the battle.
+    /// </summary>
+    public static float Total(IEnumerable<Beat> beats, bool decided) => beats.Sum(Length) + (decided ? EndHold : 0);
+
     /// <summary>A beat's whole length: a walk by its steps, a strike by its numbers, a death by its fade and hold.</summary>
     public static float Length(Beat beat) =>
         beat.IsMove ? 0.1f + 0.07f * (beat.Path.Count + 1)

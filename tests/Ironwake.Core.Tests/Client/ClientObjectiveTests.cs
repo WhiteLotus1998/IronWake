@@ -35,8 +35,18 @@ public class ClientObjectiveTests
     {
         var client = Client();
 
-        Assert.Equal(Objective.Line(client.State, client.Content), client.Objective);
+        Assert.Equal(Objective.Line(client.State, client.Content, letters: false), client.Objective);
         Assert.Contains("gate at 12,1", client.Objective);
+    }
+
+    [Fact]
+    public void TheClientsObjectiveLineDropsTheConsolesPlacementLetter()
+    {
+        var client = Client();
+
+        Assert.Contains("the captain, hale, must stand", client.Objective, StringComparison.Ordinal);
+        Assert.DoesNotContain("(A)", client.Objective, StringComparison.Ordinal);
+        Assert.Contains("the captain, hale (A), must stand", Objective.Line(client.State, client.Content), StringComparison.Ordinal);
     }
 
     [Fact]

@@ -210,8 +210,9 @@ public partial class Main
         DrawRect(r, MarkColour("reach", 0.7f), filled: false, width: Mathf.Max(1, 1.5f * S));
     }
 
-    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill.</summary>
-    private void DrawThreatMark(Coord at, bool faint = false) => Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill, drawn in slate over a warm ground (issue 578).</summary>
+    private void DrawThreatMark(Coord at, string terrain, bool faint = false) =>
+        Hatch(Cell(at).Grow(-1), Look(LookPalette.ThreatHatch(terrain), faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
 
     /// <summary>The hatch's alpha for a sleeping group's reach (issue 533): there, but never mistaken for a waking one's.</summary>
     private const float FaintThreat = 0.2f;

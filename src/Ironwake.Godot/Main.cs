@@ -676,11 +676,11 @@ public partial class Main : Node2D
                 var standable = _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null);
                 if (threat.Contains(at) && standable)
                 {
-                    DrawThreatMark(at);
+                    DrawThreatMark(at, map.TerrainIdAt(at));
                 }
                 else if (faint.Contains(at) && standable)
                 {
-                    DrawThreatMark(at, faint: true);
+                    DrawThreatMark(at, map.TerrainIdAt(at), faint: true);
                 }
 
                 DrawDetail(map, at, map.TerrainIdAt(at));

@@ -61,6 +61,23 @@ public static class LookPalette
         ["struck"] = Hex("FFFFFF"),
     };
 
+    /// <summary>
+    /// How far a ground's red must pass its blue for it to count as warm (issue 578, round 166):
+    /// the hill (76) is warm, the road (23) and every cold ground are not.
+    /// </summary>
+    public const int WarmGroundMargin = 40;
+
+    /// <summary>Whether a terrain's ground is warm: its red passes its blue by more than <see cref="WarmGroundMargin"/>.</summary>
+    public static bool WarmGround(string terrain) =>
+        Terrain.TryGetValue(terrain, out var colour) && colour.R - colour.B > WarmGroundMargin;
+
+    /// <summary>
+    /// The colour the enemy's threat hatch is drawn in over <paramref name="terrain"/> (issue 578):
+    /// the threat mark's bone, but the enemy's slate over a warm ground, where bone at half alpha
+    /// blends to a peach near the player's amber and reads as ours.
+    /// </summary>
+    public static Rgb ThreatHatch(string terrain) => WarmGround(terrain) ? Enemy : Marks["threat"];
+
     /// <summary>The marks that belong to the player's side, and so may be warm.</summary>
     public static readonly IReadOnlySet<string> PlayerMarks = new HashSet<string> { "selected" };
 
