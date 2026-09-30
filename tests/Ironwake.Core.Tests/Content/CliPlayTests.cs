@@ -304,9 +304,9 @@ public class CliPlayTests
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nrecall list\nrecall 11\nattack wren brigand-1 1\n");
 
         Assert.Contains("> recall list\nrecall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same\n"
-            + "  state 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
-            + "  state 1  turn 1  after move captain 1,4  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
-            + "  state 2  turn 1  after move wren 2,6  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp\n"
+            + "  state 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
+            + "  state 1  turn 1  after move captain 1,4  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
+            + "  state 2  turn 1  after move wren 2,6  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
             + "  state 11  turn 2  turn start  undoes: gives back 10 exp, 10 enemy hp\n", output);
         Assert.Contains("> recall 11\nrecalled to state 11; 2 charges left\nundone: gives back 10 exp, 10 enemy hp\nthe rolls do not change: the same attack will roll the same\n", output);
         const string Strikes = "wren attacks brigand-1\n  wren misses brigand-1\n  brigand-1 misses wren\n  wren hits brigand-1 for 10 (hp 2)\n";
@@ -314,6 +314,21 @@ public class CliPlayTests
         Assert.True(first >= 0);
         Assert.True(output.IndexOf(Strikes, first + 1, StringComparison.Ordinal) > output.IndexOf("> recall 11", StringComparison.Ordinal));
         Assert.Contains("  recall list              every state recall can return to", Play(out _, "help\n"));
+    }
+
+    /// <summary>
+    /// Issue 552: a number printed next to a unit's name is that unit's own number. A Recall that
+    /// returns Teodor dead at 17 and gives Wren back 14 names each with its own HP, never the 31
+    /// they sum to beside Teodor's name (seed 113's turn-4 rewind on the Tollgate).
+    /// </summary>
+    [Fact]
+    public void ANumberNextToANameIsThatUnitsOwnHp()
+    {
+        var cost = new RecallCost(
+            49, 4, ValueList<string>.Empty, 14, 0, 8, ValueList<string>.Empty,
+            ValueList<string>.Of("teodor"), ValueList<HpReturn>.Of(new HpReturn("teodor", 17), new HpReturn("wren", 14)));
+
+        Assert.Equal("gives back 14 exp, 8 enemy hp; returns teodor alive at 17 hp, 14 hp to wren", PlaySession.UndoText(cost));
     }
 
     /// <summary>Issue 75: a rewind names the kill it gives back and the unit it returns, and one over moves alone says so.</summary>
@@ -324,7 +339,7 @@ public class CliPlayTests
 
         Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\nundone: gives back 1 kill (brigand-1), 40 exp, 22 enemy hp\n", Play(out _, Script, seed: "5"));
         Assert.Contains("wren falls at 2,6\n", Play(out _, Script, seed: "3"));
-        Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\nundone: gives back 20 enemy hp; returns wren alive, 20 hp\n", Play(out _, Script, seed: "3"));
+        Assert.Contains("> recall 0\nrecalled to state 0; 2 charges left\nundone: gives back 20 enemy hp; returns wren alive at 20 hp\n", Play(out _, Script, seed: "3"));
         Assert.Contains("undone: moves only\n", Play(out _, "move captain 1,4\nrecall 0\n"));
     }
 

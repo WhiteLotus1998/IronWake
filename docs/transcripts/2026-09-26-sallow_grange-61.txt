@@ -1156,7 +1156,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > recall 56
 recalled to state 56; 2 charges left
-undone: gives back 14 exp, 11 enemy hp; returns 22 hp
+undone: gives back 14 exp, 11 enemy hp; returns 16 hp to ansgar, 6 hp to captain
 the rolls do not change: the same attack will roll the same
 Sallow Grange  turn 4 of 10  player phase  seize  recall 2
    012345678901234567
@@ -1314,7 +1314,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > recall 56
 recalled to state 56; 1 charges left
-undone: gives back 14 exp, 11 enemy hp; returns 18 hp
+undone: gives back 14 exp, 11 enemy hp; returns 6 hp to captain, 12 hp to teodor
 the rolls do not change: the same attack will roll the same
 Sallow Grange  turn 4 of 10  player phase  seize  recall 1
    012345678901234567
@@ -1534,7 +1534,7 @@ C  wren             Wren L1 cadet              6,4    hp 6/20   Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > recall 54
 recalled to state 54; 0 charges left
-undone: gives back 1 kill (soldier-1), 68 exp, 32 enemy hp; returns 20 hp
+undone: gives back 1 kill (soldier-1), 68 exp, 32 enemy hp; returns 6 hp to captain, 14 hp to wren
 the rolls do not change: the same attack will roll the same
 Sallow Grange  turn 4 of 10  player phase  seize  recall 0
    012345678901234567
