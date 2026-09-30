@@ -51,10 +51,10 @@ public static class ContentLoader
         var classes = ParseClasses(files.Classes, abilities);
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
-        var (units, cast) = ParseUnits(files.Units, classes, weapons, items, abilities);
+        var (units, cast, signatures) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain) : CampaignRules.None;
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign };
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures };
     }
 
     /// <summary>
@@ -1000,9 +1000,10 @@ public static class ContentLoader
     /// sidearm a caster can hold is a second book (Design Table, seventh round), at least
     /// one of them an attacking spell, since a healing spell is legal only when an ally in
     /// range is hurt and two of them leave the unit with Move and Wait on a healthy turn
-    /// (issue 113, ninth round).
+    /// (issue 113, ninth round). A cast entry may name a <c>signature</c> (DESIGN.md 13.18, issue
+    /// 486), one of <see cref="SignatureKind"/>; a template may not.
     /// </summary>
-    private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast) ParseUnits(
+    private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast, ImmutableSortedDictionary<string, SignatureKind> Signatures) ParseUnits(
         IReadOnlyList<ContentFile> files,
         ImmutableSortedDictionary<string, UnitClass> classes,
         ImmutableSortedDictionary<string, Weapon> weapons,
@@ -1013,6 +1014,7 @@ public static class ContentLoader
         var origin = new Dictionary<string, string>(StringComparer.Ordinal);
         var cast = new List<Unit>();
         var castNodes = new List<EntryNode>();
+        var signatures = ImmutableSortedDictionary.CreateBuilder<string, SignatureKind>(StringComparer.Ordinal);
         foreach (var file in files)
         {
             var entries = Entries(file, "units");
@@ -1030,6 +1032,14 @@ public static class ContentLoader
                 if (!isCast)
                 {
                     ValidateTemplateRanks(node, unit, classes, weapons);
+                    if (node.OptionalString("signature") is not null)
+                    {
+                        throw node.Error("signature", "only a cast member carries a signature");
+                    }
+                }
+                else if (node.OptionalString("signature") is { } signature)
+                {
+                    signatures.Add(node.Entry!, node.ParseEnum<SignatureKind>("signature", signature));
                 }
 
                 builder.Add(node.Entry!, unit);
@@ -1047,7 +1057,7 @@ public static class ContentLoader
             ValidateCastEntry(castNodes[i], cast[i], castIds, classes, weapons);
         }
 
-        return (builder.ToImmutable(), ValueList<Unit>.From(cast));
+        return (builder.ToImmutable(), ValueList<Unit>.From(cast), signatures.ToImmutable());
     }
 
     /// <summary>

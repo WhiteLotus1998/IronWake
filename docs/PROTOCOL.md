@@ -99,6 +99,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `blowBroken` | `unit`, `at` (a hit on the wielder broke its raised blow) |
 | `watchTaken` | `unit`, `at`, `passesUp` and `passesUpHit` (only when the unit had a legal strike: the target of the best one and its displayed hit; round 115) (DESIGN 13.17, experiment) |
 | `watchFired` | `unit` (the watcher), `target`, `at` (where the target ended its move), `hit`, `crit`, `damage`, `targetHpAfter` (one strike, no counter, before the target acts) |
+| `watchHeld` | `unit` (the watcher), `target`, `at`, `hit` (the displayed hit its signature refused, DESIGN 13.18; the watch stays) |
 | `watchEnded` | `unit` (a strike on the watcher ended its watch unfired) |
 | `recalled` | `toIndex`, `chargesLeft` |
 | `itemUsed` | `unit`, `item`, `target`, `usesLeft` |

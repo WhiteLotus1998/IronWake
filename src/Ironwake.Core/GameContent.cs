@@ -43,6 +43,13 @@ public sealed record GameContent(
     /// <summary>The campaign of <c>campaign.json</c> (issue 74): its purse, seal price and maps; <see cref="CampaignRules.None"/> when the content has none.</summary>
     public CampaignRules Campaign { get; init; } = CampaignRules.None;
 
+    /// <summary>
+    /// Each cast member's signature kind by unit id (DESIGN.md 13.18, issue 486), from the cast
+    /// file's optional <c>signature</c>; read only on a <c>signatures: on</c> map (<see cref="Core.Signatures"/>).
+    /// </summary>
+    public ImmutableSortedDictionary<string, SignatureKind> Signatures { get; init; } =
+        ImmutableSortedDictionary<string, SignatureKind>.Empty.WithComparers(StringComparer.Ordinal);
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -123,6 +130,7 @@ public sealed record GameContent(
         && DictEquals(Items, other.Items)
         && DictEquals(Abilities, other.Abilities)
         && DictEquals(Difficulties, other.Difficulties)
+        && DictEquals(Signatures, other.Signatures)
         && Cast == other.Cast
         && Rivalry == other.Rivalry
         && Campaign == other.Campaign

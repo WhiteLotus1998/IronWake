@@ -210,6 +210,12 @@ public static class ProtocolJson
                 w.WriteNumber("damage", f.Strike.Damage);
                 w.WriteNumber("targetHpAfter", f.Strike.TargetHpAfter);
                 break;
+            case WatchHeld h:
+                w.WriteString("unit", h.UnitId);
+                w.WriteString("target", h.TargetId);
+                WriteCoord(w, "at", h.At);
+                w.WriteNumber("hit", h.Hit);
+                break;
             case WatchEnded x:
                 w.WriteString("unit", x.UnitId);
                 break;
@@ -495,7 +501,7 @@ public static class ProtocolJson
         w.WriteStartArray("units");
         foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
-            WriteUnit(w, unit, content, state.Map.TerrainIdAt(unit.At) == Wildfire.FireTerrainId);
+            WriteUnit(w, unit, content, state.Map.TerrainIdAt(unit.At) == Wildfire.FireTerrainId, Signatures.Of(state, content, unit));
         }
 
         w.WriteEndArray();
@@ -655,7 +661,7 @@ public static class ProtocolJson
             e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty);
     }
 
-    private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content, bool burning = false)
+    private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content, bool burning = false, SignatureKind? signature = null)
     {
         var u = unit.Unit;
         w.WriteStartObject();
@@ -690,6 +696,12 @@ public static class ProtocolJson
         if (unit.Shoved)
         {
             w.WriteBoolean("shoved", true);
+        }
+
+        if (signature is { } kind)
+        {
+            w.WriteString("signature", Name(kind));
+            w.WriteString("signatureText", Signatures.Describe(kind));
         }
 
         if (unit.Braced)

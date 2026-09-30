@@ -103,6 +103,12 @@ public sealed record WatchTaken(string UnitId, Coord At, string? PassedUpTargetI
 /// <summary>A watch fired on the unit that ended a move in its ring, before that unit acts: one strike, no counter (DESIGN.md 13.17).</summary>
 public sealed record WatchFired(string UnitId, string TargetId, Coord At, StrikeEvent Strike) : GameEvent;
 
+/// <summary>
+/// A watch held its shot at a unit that ended a move in its ring: Ottilie's ledger refused a shot
+/// at <paramref name="Hit"/>, displayed, under 50 (DESIGN.md 13.18). The watch stays for the next arrival.
+/// </summary>
+public sealed record WatchHeld(string UnitId, string TargetId, Coord At, int Hit) : GameEvent;
+
 /// <summary>A strike on a watching unit ended its watch unfired (DESIGN.md 13.17).</summary>
 public sealed record WatchEnded(string UnitId) : GameEvent;
 

@@ -53,6 +53,7 @@ public class ProtocolJsonTests
         { new WatchTaken("ottilie", A, "brigand-1", 70), """{"type":"watchTaken","unit":"ottilie","at":{"x":1,"y":2},"passesUp":"brigand-1","passesUpHit":70}""" },
         { new WatchTaken("archer-1", A), """{"type":"watchTaken","unit":"archer-1","at":{"x":1,"y":2}}""" },
         { new WatchFired("ottilie", "rider-1", A, new StrikeEvent(0, "ottilie", "rider-1", true, false, 7, 13)), """{"type":"watchFired","unit":"ottilie","target":"rider-1","at":{"x":1,"y":2},"hit":true,"crit":false,"damage":7,"targetHpAfter":13}""" },
+        { new WatchHeld("ottilie", "rider-1", A, 38), """{"type":"watchHeld","unit":"ottilie","target":"rider-1","at":{"x":1,"y":2},"hit":38}""" },
         { new WatchEnded("ottilie"), """{"type":"watchEnded","unit":"ottilie"}""" },
         { new Recalled(12, 2), """{"type":"recalled","toIndex":12,"chargesLeft":2}""" },
         { new ItemUsed("wren", "field_dressing", "wren", 0), """{"type":"itemUsed","unit":"wren","item":"field_dressing","target":"wren","usesLeft":0}""" },

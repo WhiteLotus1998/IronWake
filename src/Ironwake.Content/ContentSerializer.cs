@@ -175,7 +175,7 @@ public static class ContentSerializer
         };
         if (content.Cast.Count > 0)
         {
-            files.Add(new ContentFile(ContentFiles.CastName, WriteArray("units", content.Cast, WriteUnit)));
+            files.Add(new ContentFile(ContentFiles.CastName, WriteArray("units", content.Cast, (writer, unit) => WriteUnit(writer, unit, content.Signatures.TryGetValue(unit.Id, out var kind) ? kind : null))));
         }
 
         return files;
@@ -425,7 +425,10 @@ public static class ContentSerializer
         writer.WriteEndObject();
     }
 
-    private static void WriteUnit(Utf8JsonWriter writer, Unit unit)
+    private static void WriteUnit(Utf8JsonWriter writer, Unit unit) => WriteUnit(writer, unit, null);
+
+    /// <summary>A unit entry; a cast member's <paramref name="signature"/> (DESIGN.md 13.18) is written when it has one.</summary>
+    private static void WriteUnit(Utf8JsonWriter writer, Unit unit, SignatureKind? signature)
     {
         writer.WriteStartObject();
         writer.WriteString("id", unit.Id);
@@ -460,6 +463,11 @@ public static class ContentSerializer
         if (unit.Personality is not null)
         {
             writer.WriteString("personality", unit.Personality);
+        }
+
+        if (signature is { } kind)
+        {
+            writer.WriteString("signature", kind.ToString().ToLowerInvariant());
         }
 
         if (unit.Skill != WeaponSkill.Zero)

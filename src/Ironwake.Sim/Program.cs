@@ -238,6 +238,9 @@ public static class Program
                         case WatchFired f:
                             Console.WriteLine($"#   {f.UnitId}'s watch fires on {f.TargetId}: {(f.Strike.Hit ? (f.Strike.Crit ? "crit " : "hit ") + f.Strike.Damage : "miss")}, {f.Strike.TargetHpAfter} hp");
                             break;
+                        case WatchHeld h:
+                            Console.WriteLine($"#   {h.UnitId}'s watch holds on {h.TargetId} at {h.Hit}");
+                            break;
                         case WatchEnded x:
                             Console.WriteLine($"#   {x.UnitId} stops watching");
                             break;

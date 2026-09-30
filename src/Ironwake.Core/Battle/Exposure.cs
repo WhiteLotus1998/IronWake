@@ -197,7 +197,7 @@ public static class Exposure
         var board = state.WithUnit(moved);
         var counter = 0;
         var counterCrit = 0;
-        var noisy = new List<Coord>();
+        var noisy = new List<Noise>();
         var died = new List<string>();
         if (target is not null)
         {
@@ -206,8 +206,9 @@ public static class Exposure
             if (rejection is null && weapon!.InRange(distance))
             {
                 var forecast = Combat.Forecast(armed.ToCombatant(board, content, against: target), target.Answering(board, content, tile, armed), distance, state.Scheme);
-                noisy.Add(tile);
-                noisy.Add(target.At);
+                var radius = Signatures.NoiseRadius(state, content, armed, target);
+                noisy.Add(new Noise(tile, radius));
+                noisy.Add(new Noise(target.At, radius));
                 if (KillsWithCertainty(forecast.Attacker, target.Hp))
                 {
                     board = board.WithoutUnit(target.Id);

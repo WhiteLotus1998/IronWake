@@ -1127,6 +1127,7 @@ public sealed class PlaySession
 
         lines.AddRange(PincerLines(state, unit with { At = tile }, target));
         lines.AddRange(BraceLines(unit, target));
+        lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
@@ -1543,6 +1544,11 @@ public sealed class PlaySession
             lines.Add(mastery);
         }
 
+        if (Signatures.Of(state, content, unit) is { } signature)
+        {
+            lines.Add($"  signature: {Signatures.Describe(signature)}");
+        }
+
         if (state.CantoReachOf(unit, content) is not null)
         {
             lines.Add($"  canto: {unit.Canto} movement left this phase");
@@ -1645,6 +1651,29 @@ public sealed class PlaySession
         if (target.Braced)
         {
             yield return $"  brace: {target.Id} braced: {attacker.Id} hit -{Brace.Hit}";
+        }
+    }
+
+    /// <summary>
+    /// Under a forecast on a <c>signatures: on</c> map (DESIGN.md 13.18): Teodor's orders on the
+    /// striker, Teodor's own watched penalty, each naming the hit the forecast already holds, and
+    /// Ottilie's refusal with the displayed hit it refuses. The forecast still answers. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> SignatureLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, CombatForecast forecast)
+    {
+        if (Signatures.OrderedBy(state, content, attacker) is { } teodor)
+        {
+            yield return $"  signature: {teodor.Id}'s orders: {attacker.Id} hit +{Signatures.OrdersHit}";
+        }
+
+        if (Signatures.Watched(state, content, attacker))
+        {
+            yield return $"  signature: {attacker.Id} hit -{Signatures.WatchedHit} (ally within {Signatures.OrdersRadius})";
+        }
+
+        if (Signatures.Refuses(state, content, attacker, forecast.Attacker.DisplayedHit))
+        {
+            yield return $"  signature: {attacker.Id} refuses this strike: {forecast.Attacker.DisplayedHit} is under {Signatures.LedgerFloor}";
         }
     }
 
@@ -1836,6 +1865,8 @@ public sealed class PlaySession
                 return $"{w.UnitId} watches from {w.At}" + (w.PassedUpTargetId is { } passed ? $"; passes up {passed} at {w.PassedUpHit}" : "; no strike passed up");
             case WatchFired w:
                 return $"{w.UnitId}'s watch fires on {w.TargetId} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({w.TargetId} hp {w.Strike.TargetHpAfter})";
+            case WatchHeld w:
+                return $"{w.UnitId}'s watch holds on {w.TargetId} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; she still watches";
             case WatchEnded w:
                 return $"{w.UnitId} is struck and stops watching";
             case BlowRaised b:
