@@ -20,6 +20,10 @@ Slice 3: every effect row (fx_*), one-row sheets of 256 x 256 frames with a side
 is the point the scene lays the effect on (128, 128), drawn in LOOK.md's own values and never
 tinted, ember only where fire is, plus docs/art/contact-effects.png.
 
+Slice 4: the variant tokens (token_<class>_enemy_<tell>, ArtSpec.TokenVariants), a weapon's tell
+a shipped enemy carries on its token: the hooked pike, the boss's double bit. They sit in a third
+row of the tokens contact sheet.
+
 Run from the repository root: python3 docs/art/make_art.py
 """
 import json
@@ -171,8 +175,12 @@ def quad(a, b, c, t):
     return tuple(ab[k] + (bc[k] - ab[k]) * t for k in (0, 1))
 
 
-def silhouette(canvas, class_id, cx, cy, k, rgba):
-    """The class silhouette of LOOK.md (the shapes Main.Look.cs draws), on a disc of radius 16 k."""
+def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
+    """The class silhouette of LOOK.md (the shapes Main.Look.cs draws), on a disc of radius 16 k.
+
+    A tell (ArtSpec.TokenTell) adds the variant's mark: "hooked" the Toll Spear's crossbar on the
+    pike, "double" the second bit on a boss reaver's axe.
+    """
     def P(x, y):
         return (cx + x * k, cy + y * k)
     width = 2.6 * k
@@ -190,6 +198,9 @@ def silhouette(canvas, class_id, cx, cy, k, rgba):
     elif class_id in ("pikeman", "outrider"):
         stroke(P(-9, 10), P(7, -8))
         fill(P(5, -6), P(11, -12), P(9, -4))
+        if tell == "hooked":
+            stroke(P(1, -2), P(-3, -6))
+            stroke(P(1, -2), P(5, 2))
         if class_id == "outrider":
             fill(P(-3, 4), P(-10, 0), P(-5, 8))
     elif class_id == "bowman":
@@ -202,6 +213,8 @@ def silhouette(canvas, class_id, cx, cy, k, rgba):
     elif class_id == "reaver":
         stroke(P(-6, 11), P(4, -9))
         fill(*(bezier(P(1, -5), P(6, -12), P(12, -8), P(11, -3)) + bezier(P(11, -3), P(8, -4), P(6, -1), P(5, 2))))
+        if tell == "double":
+            fill(*(bezier(P(1, -5), P(-5, -10), P(-9, -4), P(-8, 1)) + bezier(P(-8, 1), P(-5, -1), P(-3, 0), P(-2, 1))))
     elif class_id == "chaplain":
         stroke(P(0, -6), P(0, 11))
         canvas.ring(*P(0, -9), 3.5 * k, width, rgba)
@@ -212,9 +225,11 @@ def silhouette(canvas, class_id, cx, cy, k, rgba):
         fill(P(-8, -9), P(8, -9), P(8, 1), P(0, 10), P(-8, 1))
     else:
         raise SystemExit(f"make_art: class '{class_id}' has no silhouette; add one here and in Main.Look.cs")
+    if tell is not None and (class_id, tell) not in (("pikeman", "hooked"), ("reaver", "double")):
+        raise SystemExit(f"make_art: no '{tell}' tell for class '{class_id}'; add one here and in Main.Look.cs")
 
 
-def token(class_id, side):
+def token(class_id, side, tell=None):
     """ART_SPEC's token: a 64 px disc (32 at 1x) centred 6 px above the frame's centre, the bottom 16 px clear."""
     c = Canvas(FRAME, FRAME)
     cx, cy, r = FRAME / 2, FRAME / 2 - 6, 32
@@ -226,7 +241,7 @@ def token(class_id, side):
         c.ellipse(cx, cy + 6, r, r - 1, INK + (SHADOW_ALPHA,))
         c.ellipse(cx, cy, r, r, ENEMY + (255,))
         ink = BONE + (255,)
-    silhouette(c, class_id, cx, cy - 2, r / 16, ink)
+    silhouette(c, class_id, cx, cy - 2, r / 16, ink, tell)
     return c
 
 
@@ -733,6 +748,12 @@ def main():
     for class_id in classes:
         for side in ("player", "enemy"):
             art[f"token_{class_id}_{side}"] = token(class_id, side)
+    variants = []
+    for name in spec_names():
+        parts = name.split("_")
+        if name.startswith("token_") and len(parts) == 4 and parts[2] == "enemy":
+            art[name] = token(parts[1], "enemy", parts[3])
+            variants.append(name)
     for terrain in terrains:
         art[f"tile_{terrain}"] = tile(terrain)
     clip_rows = clips(classes)
@@ -752,7 +773,7 @@ def main():
     names = list(art)
     columns = len(classes) * 2 if len(classes) * 2 >= len(terrains) else len(terrains)
     cell = FRAME + 8
-    rows = [names[:len(classes) * 2], names[len(classes) * 2:]]
+    rows = [names[:len(classes) * 2], names[len(classes) * 2 + len(variants):], variants]
     sheet = Canvas(columns * cell + 8, len(rows) * (cell + FRAME // 2 + 8) + 8, PANEL + (255,))
     for r, row in enumerate(rows):
         top = 8 + r * (cell + FRAME // 2 + 8)

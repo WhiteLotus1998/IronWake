@@ -70,7 +70,7 @@ public class ArtGeneratedTests
     public void TheGeneratorWritesEveryTokenButTheCaptainsEveryTileEveryClipAndEveryEffect()
     {
         var content = ContentLoader.Load(Fixture.RealContentDirectory());
-        var expected = ArtSpec.Tokens(content).Where(n => n != "token_captain_player").Concat(ArtSpec.Tiles(content))
+        var expected = ArtSpec.Tokens(content).Where(n => n != "token_captain_player").Concat(ArtSpec.TokenVariants(content, ArtSpecTests.ShippedEnemies(content))).Concat(ArtSpec.Tiles(content))
             .Concat(ArtSpec.ClassClips(content)).Concat(ArtSpec.BossClips(content, ArtSpecTests.ShippedBosses(content)))
             .Concat(ArtSpec.EffectNames(content)).ToHashSet();
 
@@ -106,6 +106,52 @@ public class ArtGeneratedTests
             var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
             Assert.Null(TileFault(image, name["tile_".Length..]));
         });
+    }
+
+    [Fact]
+    public void AVariantTokenIsItsClassTokenWithTheTellAdded()
+    {
+        Assert.All(Generated().Where(n => n.StartsWith("token_", StringComparison.Ordinal) && n.Split('_').Length == 4), name =>
+        {
+            var variant = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
+            var plain = Png.Read(Path.Combine(ArtDirectory(), string.Join('_', name.Split('_')[..3]) + ".png"));
+            Assert.Null(TellFault(variant, plain));
+        });
+    }
+
+    [Fact]
+    public void AVariantWithNoTellOrAMissingStrokeFailsTheTellRule()
+    {
+        var plain = Png.Read(Path.Combine(ArtDirectory(), "token_reaver_enemy.png"));
+        var variant = Png.Read(Path.Combine(ArtDirectory(), "token_reaver_enemy_double.png"));
+        Assert.Null(TellFault(variant, plain));
+
+        Assert.NotNull(TellFault(plain, plain));
+        var bone = Opaque(LookPalette.EnemyBone);
+        var (bx, by) = Enumerable.Range(0, plain.Width * plain.Height).Select(i => (i % plain.Width, i / plain.Width)).First(p => plain.At(p.Item1, p.Item2) == bone);
+        Assert.NotNull(TellFault(variant.With(bx, by, Opaque(LookPalette.Enemy)), plain));
+    }
+
+    /// <summary>
+    /// Why a variant token is not its class's token with the tell added, or null: every bone pixel
+    /// of the plain token stays bone, and the variant adds at least 20 more (the tell reads at 1x).
+    /// </summary>
+    private static string? TellFault(Png variant, Png plain)
+    {
+        var bone = Opaque(LookPalette.EnemyBone);
+        for (var y = 0; y < plain.Height; y++)
+        {
+            for (var x = 0; x < plain.Width; x++)
+            {
+                if (plain.At(x, y) == bone && variant.At(x, y) != bone)
+                {
+                    return $"pixel {x},{y} of the class's silhouette is missing";
+                }
+            }
+        }
+
+        var added = variant.Count(bone) - plain.Count(bone);
+        return added >= 20 ? null : $"the tell adds {added} pixels, fewer than 20";
     }
 
     [Fact]

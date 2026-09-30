@@ -6,7 +6,7 @@ Issue 532, from Lotus's batch (#503, item 4). This is what an artist needs befor
 
 - **Cold world, warm player.** The world is peat green, salt grey, slate water and cold stone. The player's side is lamplight amber (`#E8A33D` on a deeper `#9A6420`), the only warm colour on the board. The enemy lives inside the cold: slate (`#2F3742`) with bone (`#E6E0D0`) for its silhouette, rim and marks. Threat is carried by the blade in a silhouette, never by a hot red.
 - **Fire is the one warm world colour**, ember `#943C0C`, drawn as a hatch over the ground and never as a flat fill, so a burning tile never reads as ours.
-- **Silhouettes over letters.** Each class is read from its weapon: cadet a short upright sword, pikeman a long diagonal shaft with a leaf head, bowman a bow with its arrow, reaver a haft with a single crescent head, adept a flame, outrider the pike with a pennant (`docs/look/silhouettes.png` draws these). Chaplain, skyrider and bulwark have no silhouette yet; the artist proposes one, a weapon or the tool of the trade, and the partners agree it before tokens are drawn. The Tollgate's enemies vary theirs by weapon: the toll warden's pike carries a hooked crossbar, and the bandit leader has a double-bitted head. A token must read at 32 px in one colour.
+- **Silhouettes over letters.** Each class is read from its weapon: cadet a short upright sword, pikeman a long diagonal shaft with a leaf head, bowman a bow with its arrow, reaver a haft with a single crescent head, adept a flame, outrider the pike with a pennant (`docs/look/silhouettes.png` draws these). Chaplain, skyrider and bulwark have no silhouette yet; the artist proposes one, a weapon or the tool of the trade, and the partners agree it before tokens are drawn. The Tollgate's enemies vary theirs by weapon: the toll warden's pike carries a hooked crossbar, and the bandit leader has a double-bitted head. These tells have token rows of their own, `token_<class>_enemy_<tell>`, one per tell a shipped enemy carries (`ArtSpec.TokenVariants`, the client's rule): `hooked` for a pikeman whose weapon reaches 2 (the toll warden, the Grange Reeve), `double` for a reaver placed as a boss (the Bandit Leader, the Weir Foreman). A missing variant falls back to the class's token. A token must read at 32 px in one colour.
 - **Tone: low fantasy on a frontier.** Steel, keeps, tollgates and a fraying armistice. People are young adults in worn kit, not heroes in polished plate. Magic reads as a craft: ink, breath, a worked hand. It is never a spectacle, so no glowing runes, no sparkles and no auras. It is grounded and a little dry, with warmth underneath.
 - **Flat and vector-like.** Shapes are flat with hard edges and at most two values per colour (a base and a shade), with light from the north. No gradients on tokens, no outlines around terrain, no texture noise.
 
@@ -94,6 +94,8 @@ token_reaver_enemy
 token_skyrider_player
 token_skyrider_enemy
 token_captain_player
+token_pikeman_enemy_hooked
+token_reaver_enemy_double
 tile_fire
 tile_forest
 tile_fort
