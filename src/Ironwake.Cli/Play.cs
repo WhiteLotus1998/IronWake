@@ -44,6 +44,7 @@ public sealed class PlaySession
           recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           shove <unit> <target>    on a shove map, push an adjacent ally one tile away, as the action
           cover <unit> <ally>      on a cover map, take the first strike aimed at the ally beside it, as the action
+          watch <unit>             on an overwatch map, strike the first foe to end a move in the unit's ring, as the action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
@@ -1917,7 +1918,9 @@ public sealed class PlaySession
             case UnitBurned b:
                 return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
             case WatchTaken w:
-                return $"{w.UnitId} watches from {w.At}" + (w.PassedUpTargetId is { } passed ? $"; passes up {passed} at {w.PassedUpHit}" : "; no strike passed up");
+                return $"{w.UnitId} watches from {w.At}"
+                    + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")
+                    + (w.PassedUpTargetId is { } passed ? $"; passes up {passed} at {w.PassedUpHit}" : "; no strike passed up");
             case WatchFired w:
                 return $"{w.UnitId}'s watch fires on {w.TargetId} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({w.TargetId} hp {w.Strike.TargetHpAfter})";
             case WatchHeld w:

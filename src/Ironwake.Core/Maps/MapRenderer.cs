@@ -63,6 +63,9 @@ public static class MapRenderer
             .Where(x => x.Kind is not null)
             .Select(x => $"  {x.Unit.Id}: {Signatures.Describe(x.Kind!.Value)}");
 
+    /// <summary>The legend an <c>overwatch: hold</c> map prints (DESIGN.md 13.17b, experiment).</summary>
+    public const string OverwatchHoldLegend = "overwatch (hold): a unit that has not moved this turn may watch as its action; the first foe to end a move where its weapon reaches is struck once before it acts, no counter; a strike on the watcher ends the watch";
+
     /// <summary>The legend an <c>overwatch: on</c> map prints (DESIGN.md 13.17, experiment).</summary>
     public const string OverwatchLegend = "overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch";
 
@@ -74,7 +77,7 @@ public static class MapRenderer
     /// order with the ring's tiles inside the map, row-major, as
     /// <c>watches: archer-1 at 5,5 over 5,3 4,4 ...</c>. Null when nobody watches.
     /// </summary>
-    public static string? WatchLine(BattleState state)
+    public static string? WatchLine(BattleState state, GameContent content)
     {
         var watchers = state.Units.Where(u => u.Watching).OrderBy(u => u.Id, StringComparer.Ordinal).ToList();
         if (!state.Map.OverwatchEnabled || watchers.Count == 0)
@@ -82,23 +85,7 @@ public static class MapRenderer
             return null;
         }
 
-        return "watches: " + string.Join("; ", watchers.Select(u =>
-        {
-            var ring = new List<Coord>();
-            for (var y = 0; y < state.Map.Height; y++)
-            {
-                for (var x = 0; x < state.Map.Width; x++)
-                {
-                    var tile = new Coord(x, y);
-                    if (Overwatch.InRing(u, tile))
-                    {
-                        ring.Add(tile);
-                    }
-                }
-            }
-
-            return $"{u.Id} at {u.At} over {string.Join(" ", ring)}";
-        }));
+        return "watches: " + string.Join("; ", watchers.Select(u => $"{u.Id} at {u.At} over {string.Join(" ", Overwatch.RingOf(state, content, u))}"));
     }
 
     /// <summary>The legend a <c>windup: on</c> map prints (DESIGN.md 13.16, experiment).</summary>
@@ -250,7 +237,7 @@ public static class MapRenderer
 
         if (map.OverwatchEnabled)
         {
-            sb.Append(OverwatchLegend).Append('\n');
+            sb.Append(map.OverwatchHold ? OverwatchHoldLegend : OverwatchLegend).Append('\n');
         }
 
         if (map.CoverEnabled)
@@ -507,8 +494,8 @@ public static class MapRenderer
 
         if (map.OverwatchEnabled)
         {
-            sb.Append(OverwatchLegend).Append('\n');
-            if (WatchLine(state) is { } watches)
+            sb.Append(map.OverwatchHold ? OverwatchHoldLegend : OverwatchLegend).Append('\n');
+            if (WatchLine(state, content) is { } watches)
             {
                 sb.Append(watches).Append('\n');
             }

@@ -88,6 +88,12 @@ namespace Ironwake.Core;
 /// reaches range 2 may watch, and shoots the first unit of the other side to end a move two steps
 /// from it (<see cref="Overwatch"/>). Not on a map with <c>brace: on</c>. Off by default.
 /// </param>
+/// <param name="OverwatchHold">
+/// The <c>overwatch: hold</c> header (DESIGN.md 13.17b, experiment), which also sets
+/// <paramref name="OverwatchEnabled"/>: the redraft in which only a player unit that has not moved
+/// this turn may watch, and its ring is its equipped weapon's whole reach on tiles a unit can
+/// stand on (<see cref="Overwatch"/>). Off by default.
+/// </param>
 /// <param name="SignaturesEnabled">
 /// The <c>signatures: on</c> header (DESIGN.md 13.18, experiment): each cast member the cast file
 /// gives a signature plays it (<see cref="Signatures"/>). Off by default.
@@ -139,7 +145,8 @@ public sealed record MapDefinition(
     bool WindupEnabled = false,
     bool OverwatchEnabled = false,
     bool CoverEnabled = false,
-    bool SignaturesEnabled = false)
+    bool SignaturesEnabled = false,
+    bool OverwatchHold = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

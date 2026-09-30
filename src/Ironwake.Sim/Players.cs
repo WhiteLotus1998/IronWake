@@ -227,11 +227,14 @@ public sealed class HeuristicPlayer : IPlayer
     /// <summary>
     /// The heuristic's action with no strike and no heal: Watch on an <c>overwatch: on</c> map when
     /// its equipped weapon reaches range 2 (DESIGN.md 13.17, the enemy's rule), else Wait. It never
-    /// watches over a strike, so its own watches-over-a-strike figure is 0 by construction.
+    /// watches over a strike, so its own watches-over-a-strike figure is 0 by construction. On an
+    /// <c>overwatch: hold</c> map (13.17b) it watches only when it stays where it began, since a
+    /// watch there costs the move; the heuristic always takes the move when it has one.
     /// </summary>
     private static Command Idle(BattleState state, GameContent content, BattleUnit unit, Coord? at = null)
     {
-        if (state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null)
+        var moves = at is { } to && to != unit.At;
+        if (state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null && !(state.Map.OverwatchHold && moves))
         {
             return new Watch(unit.Id);
         }

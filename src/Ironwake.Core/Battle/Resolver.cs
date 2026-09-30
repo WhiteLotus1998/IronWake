@@ -465,7 +465,9 @@ public static class Resolver
 
     /// <summary>
     /// DESIGN.md 13.17: a unit taking Watch. It needs the header and an equipped weapon reaching
-    /// range 2; the event names the best strike it passes up. No Canto follows.
+    /// range 2; the event names the best strike it passes up. No Canto follows. Under
+    /// <c>overwatch: hold</c> (13.17b) only an unmoved player unit watches, with any weapon, and the
+    /// event also names the move it gives up.
     /// </summary>
     private static (BattleState, Rejection?) ApplyWatch(BattleState state, GameContent content, Watch watch, List<GameEvent> events)
     {
@@ -481,7 +483,8 @@ public static class Resolver
         }
 
         var passed = Overwatch.PassedUp(state, content, unit);
-        events.Add(new WatchTaken(unit.Id, unit.At, passed?.TargetId, passed?.Hit));
+        var hold = state.Map.OverwatchHold;
+        events.Add(new WatchTaken(unit.Id, unit.At, passed?.TargetId, passed?.Hit, hold, hold ? Overwatch.GivesUp(state, content, unit) : null));
         return (state.WithUnit(unit with { Moved = true, Acted = true, Watching = true, Canto = null }), null);
     }
 
@@ -527,7 +530,7 @@ public static class Resolver
             return state;
         }
 
-        foreach (var watcherId in Overwatch.WatchersOver(state, mover.Side, mover.At).Select(w => w.Id).ToList())
+        foreach (var watcherId in Overwatch.WatchersOver(state, content, mover.Side, mover.At).Select(w => w.Id).ToList())
         {
             if (state.Find(moverId) is not { } target || state.Find(watcherId) is not { } watcher)
             {
