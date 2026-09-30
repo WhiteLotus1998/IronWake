@@ -707,7 +707,7 @@ public static class EnemyAi
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var there = attacker with { At = from };
-        var me = content.CombatantOf(attacker.Unit, weapon, state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target));
+        var me = content.CombatantOf(attacker.Unit, weapon, state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false));
         var them = target.Answering(state, content, from, there);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 

@@ -13,18 +13,23 @@ namespace Ironwake.Core;
 /// </summary>
 public static class WakeCheck
 {
+    /// <summary>Every tile in <paramref name="tiles"/> as noise at the content's radius: a combat with no signature in it.</summary>
+    public static IReadOnlyCollection<Noise> At(GameContent content, params Coord[] tiles) =>
+        tiles.Select(t => new Noise(t, content.NoiseRadius)).ToList();
+
     /// <summary>
     /// One <see cref="GroupWoke"/> per group that was asleep on <paramref name="before"/>
     /// and wakes on <paramref name="after"/>, in group order, each naming the loudest
     /// cause in the order death, noise, proximity. <paramref name="noisy"/> holds the
-    /// tiles of every combat the command fought, <paramref name="diedGroups"/> the group
+    /// tiles of every combat the command fought, each with its radius (the content's, or Wren's
+    /// <see cref="Signatures.TalkRadius"/>, DESIGN.md 13.18), <paramref name="diedGroups"/> the group
     /// of every unit it killed. A Guard group a map event spawned during the command
     /// (issue 32) is asleep on <paramref name="before"/> and is checked with the rest.
     /// After the three causes, each group that woke calls every sleeping group the map's
     /// <c>wake_links:</c> header links it to (issue 393), transitively, and each called group
     /// follows in the order it was called, with <see cref="WakeCause.Call"/> and the caller.
     /// </summary>
-    public static IReadOnlyList<GroupWoke> Run(BattleState before, BattleState after, GameContent content, IReadOnlyCollection<Coord> noisy, IReadOnlyCollection<string> diedGroups)
+    public static IReadOnlyList<GroupWoke> Run(BattleState before, BattleState after, GameContent content, IReadOnlyCollection<Noise> noisy, IReadOnlyCollection<string> diedGroups)
     {
         var sleeping = new SortedSet<string>(StringComparer.Ordinal);
         foreach (var unit in before.Units.Concat(after.Units))
@@ -44,7 +49,7 @@ public static class WakeCheck
             {
                 cause = WakeCause.Death;
             }
-            else if (noisy.Any(tile => members.Any(m => m.DistanceTo(tile) <= content.NoiseRadius)))
+            else if (noisy.Any(noise => members.Any(m => m.DistanceTo(noise.At) <= noise.Radius)))
             {
                 cause = WakeCause.Noise;
             }
@@ -73,3 +78,6 @@ public static class WakeCheck
         return woke;
     }
 }
+
+/// <summary>A tile a combat or a shove was fought on and the radius its noise wakes a group within (DESIGN.md section 8, 13.18).</summary>
+public readonly record struct Noise(Coord At, int Radius);

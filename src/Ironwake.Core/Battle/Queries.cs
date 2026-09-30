@@ -365,7 +365,7 @@ public static class Queries
             return null;
         }
 
-        return WakeCheck.Run(state, state.WithUnit(unit with { At = from }), content, Array.Empty<Coord>(), Array.Empty<string>());
+        return WakeCheck.Run(state, state.WithUnit(unit with { At = from }), content, Array.Empty<Noise>(), Array.Empty<string>());
     }
 
     /// <summary>

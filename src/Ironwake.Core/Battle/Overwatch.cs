@@ -120,6 +120,26 @@ public static class Overwatch
         return new StrikeEvent(0, watcher.Id, target.Id, hit, crit, damage, after);
     }
 
+    /// <summary>
+    /// The displayed hit of <paramref name="watcher"/>'s shot at <paramref name="target"/> when
+    /// Ottilie's ledger refuses it (DESIGN.md 13.18): under <see cref="Signatures.LedgerFloor"/>,
+    /// read as the forecast prints it. Null when the shot is taken.
+    /// </summary>
+    public static int? Refused(BattleState state, GameContent content, BattleUnit watcher, BattleUnit target)
+    {
+        if (Signatures.Of(state, content, watcher) != SignatureKind.Ledger)
+        {
+            return null;
+        }
+
+        var shown = Combat.Forecast(
+            watcher.ToCombatant(state, content, against: target),
+            target.Answering(state, content, watcher.At, watcher),
+            watcher.At.DistanceTo(target.At),
+            state.Scheme).Attacker.DisplayedHit;
+        return Signatures.Refuses(state, content, watcher, shown) ? shown : null;
+    }
+
     private static IEnumerable<Coord> Ring(Coord at)
     {
         for (var dx = -Distance; dx <= Distance; dx++)

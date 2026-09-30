@@ -445,6 +445,31 @@ public class ValidationTests
         AssertNames(e, ContentFiles.CastName, "captain", "personality");
     }
 
+    /// <summary>DESIGN.md 13.18 (issue 486): a cast entry's optional <c>signature</c> is read into the content by unit id.</summary>
+    [Fact]
+    public void ACastMembersSignatureIsReadByUnitId()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored) + ", " + CastMember("wren", Authored + " \"signature\": \"counting\",") + " ] }"));
+
+        Assert.Equal(SignatureKind.Counting, content.Signatures["wren"]);
+        Assert.False(content.Signatures.ContainsKey("captain"));
+    }
+
+    [Fact]
+    public void AnUnknownSignatureIsRefused()
+    {
+        var e = Fails(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored + " \"signature\": \"bravado\",") + " ] }"));
+        AssertNames(e, ContentFiles.CastName, "captain", "signature");
+        Assert.Contains("bravado", e.Message);
+    }
+
+    [Fact]
+    public void ATemplateCarryingASignatureIsRefused()
+    {
+        var e = Fails(Fixture.Files(secondUnitsFile: "{ \"units\": [ " + CastMember("brute", "\"signature\": \"orders\",") + " ] }"));
+        AssertNames(e, "units/more.json", "brute", "signature");
+    }
+
     [Theory]
     [InlineData("nobody")]
     [InlineData("wren")]

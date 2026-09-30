@@ -50,6 +50,19 @@ public static class MapRenderer
         return $"fire: burning {string.Join(" ", burning)}; next front {(front.Count == 0 ? "none" : string.Join(" ", front))}";
     }
 
+    /// <summary>The legend a <c>signatures: on</c> map prints (DESIGN.md 13.18, experiment).</summary>
+    public const string SignaturesLegend = "signatures: each recruit with a signature plays it, flaw included; show <unit> prints it";
+
+    /// <summary>
+    /// Under the signatures legend on a board (DESIGN.md 13.18): one line per living player unit
+    /// that plays a signature, in board order, in the words <c>show</c> uses, so Wren's radius is printed.
+    /// </summary>
+    public static IEnumerable<string> SignatureLines(BattleState state, GameContent content) =>
+        state.UnitsOf(Side.Player)
+            .Select(u => (Unit: u, Kind: Signatures.Of(state, content, u)))
+            .Where(x => x.Kind is not null)
+            .Select(x => $"  {x.Unit.Id}: {Signatures.Describe(x.Kind!.Value)}");
+
     /// <summary>The legend an <c>overwatch: on</c> map prints (DESIGN.md 13.17, experiment).</summary>
     public const string OverwatchLegend = "overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch";
 
@@ -235,6 +248,11 @@ public static class MapRenderer
         if (map.OverwatchEnabled)
         {
             sb.Append(OverwatchLegend).Append('\n');
+        }
+
+        if (map.SignaturesEnabled)
+        {
+            sb.Append(SignaturesLegend).Append('\n');
         }
 
         sb.Append('\n').Append("terrain:");
@@ -489,6 +507,15 @@ public static class MapRenderer
             if (BlowLine(state, content) is { } blows)
             {
                 sb.Append(blows).Append('\n');
+            }
+        }
+
+        if (map.SignaturesEnabled)
+        {
+            sb.Append(SignaturesLegend).Append('\n');
+            foreach (var line in SignatureLines(state, content))
+            {
+                sb.Append(line).Append('\n');
             }
         }
 

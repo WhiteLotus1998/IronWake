@@ -125,7 +125,7 @@ public static class Resolver
     private static BattleState WakeGroups(BattleState before, BattleState after, GameContent content, List<GameEvent> events)
     {
         var died = new List<string>();
-        var noisy = new List<Coord>();
+        var noisy = new List<Noise>();
         foreach (var e in events)
         {
             switch (e)
@@ -134,12 +134,15 @@ public static class Resolver
                     died.Add(group);
                     break;
                 case CombatFought fought:
-                    noisy.Add(before.Find(fought.AttackerId)!.At);
-                    noisy.Add(before.Find(fought.TargetId)!.At);
+                    var attacker = before.Find(fought.AttackerId)!;
+                    var target = before.Find(fought.TargetId)!;
+                    var radius = Signatures.NoiseRadius(before, content, attacker, target);
+                    noisy.Add(new Noise(attacker.At, radius));
+                    noisy.Add(new Noise(target.At, radius));
                     break;
                 case Shoved shoved:
-                    noisy.Add(shoved.From);
-                    noisy.Add(shoved.To);
+                    noisy.Add(new Noise(shoved.From, content.NoiseRadius));
+                    noisy.Add(new Noise(shoved.To, content.NoiseRadius));
                     break;
             }
         }
@@ -213,7 +216,7 @@ public static class Resolver
         }
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
-        int? canto = AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) ? reach.Mov - entry.Cost : null;
+        int? canto = Signatures.HasCanto(state, content, unit) ? reach.Mov - entry.Cost : null;
         return (EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events), null);
     }
 
@@ -273,7 +276,7 @@ public static class Resolver
     /// </summary>
     private static BattleState OpenCanto(BattleState state, GameContent content, string unitId)
     {
-        if (state.Find(unitId) is not { } unit || !AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)))
+        if (state.Find(unitId) is not { } unit || !Signatures.HasCanto(state, content, unit))
         {
             return state;
         }
@@ -302,7 +305,7 @@ public static class Resolver
 
         if (state.CantoReachOf(unit, content) is not { } reach)
         {
-            var why = !AbilityRules.HasCanto(content.AbilitiesOf(unit.Unit)) ? "it has no Canto"
+            var why = !Signatures.HasCanto(state, content, unit) ? "it has no Canto"
                 : !unit.Acted ? "it has not acted yet this phase"
                 : "its Canto is spent this phase";
             return (state, new Rejection(RejectionReason.NoCanto, $"{unit.Id} cannot Canto: {why}"));
@@ -392,10 +395,18 @@ public static class Resolver
             return (state.WithUnit(unit with { Moved = true, Acted = true, WindupAt = target.At }), null);
         }
 
+        var striker = unit.ToCombatant(state, content, art: art, against: target);
+        var answer = target.Answering(state, content, unit.At, unit);
+        var shown = Combat.Forecast(striker, answer, distance, state.Scheme).Attacker.DisplayedHit;
+        if (Signatures.Refuses(state, content, unit, shown))
+        {
+            return (state, new Rejection(RejectionReason.SignatureRefused, Signatures.LedgerRefusal(unit, target.Id, shown)));
+        }
+
         var defenderWeapon = target.EquippedWeapon(content);
         var result = CombatResolver.Resolve(
-            unit.ToCombatant(state, content, art: art, against: target),
-            target.Answering(state, content, unit.At, unit),
+            striker,
+            answer,
             distance,
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),
@@ -466,7 +477,8 @@ public static class Resolver
     /// DESIGN.md 13.17: after <paramref name="moverId"/> ends a move, each watcher whose ring
     /// holds its tile, in id order, shoots it once (<see cref="Overwatch.Shoot"/>), until one
     /// kills. A watch that fires is spent. The shot spends a use, gives EXP and rank as any
-    /// strike, and a kill is a death like any other.
+    /// strike, and a kill is a death like any other. A shot Ottilie's ledger refuses (DESIGN.md
+    /// 13.18) is printed as held and the watch stays for the next arrival.
     /// </summary>
     private static BattleState FireWatches(BattleState state, GameContent content, string moverId, List<GameEvent> events)
     {
@@ -480,6 +492,12 @@ public static class Resolver
             if (state.Find(moverId) is not { } target || state.Find(watcherId) is not { } watcher)
             {
                 break;
+            }
+
+            if (Overwatch.Refused(state, content, watcher, target) is { } held)
+            {
+                events.Add(new WatchHeld(watcher.Id, target.Id, target.At, held));
+                continue;
             }
 
             var strike = Overwatch.Shoot(state, content, watcher, target, new KeyedRng(state.Seed));
@@ -1360,7 +1378,7 @@ public static class Resolver
             var weapon = unit.UsableWeaponAt(content, slot)!;
             foreach (var target in targets)
             {
-                if (weapon.InRange(unit.At.DistanceTo(target.At)))
+                if (weapon.InRange(unit.At.DistanceTo(target.At)) && !LedgerRefuses(state, content, unit, target, slot, null))
                 {
                     yield return slots.Count == 1 ? new Attack(unit.Id, target.Id) : new Attack(unit.Id, target.Id, slot);
                 }
@@ -1377,7 +1395,7 @@ public static class Resolver
                 var reach = art!.Apply(weapon);
                 foreach (var target in targets)
                 {
-                    if (reach.InRange(unit.At.DistanceTo(target.At)))
+                    if (reach.InRange(unit.At.DistanceTo(target.At)) && !LedgerRefuses(state, content, unit, target, slot, ability.Id))
                     {
                         yield return new Attack(unit.Id, target.Id, slots.Count == 1 ? null : slot, ability.Id);
                     }
@@ -1385,6 +1403,12 @@ public static class Resolver
             }
         }
     }
+
+    /// <summary>Whether Ottilie's ledger (DESIGN.md 13.18) refuses this attack from where the unit stands, so <see cref="Legal"/> never lists it.</summary>
+    private static bool LedgerRefuses(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, int slot, string? art) =>
+        Signatures.Of(state, content, unit) == SignatureKind.Ledger
+        && Queries.Forecast(state, content, unit, target, slot, art) is { } forecast
+        && Signatures.Refuses(state, content, unit, forecast.Attacker.DisplayedHit);
 
     private static IEnumerable<UseItem> LegalItemUses(BattleState state, GameContent content, BattleUnit unit)
     {

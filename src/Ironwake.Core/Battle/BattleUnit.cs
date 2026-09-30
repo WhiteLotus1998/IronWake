@@ -158,7 +158,8 @@ public sealed record BattleUnit(
     /// that enemy loses <see cref="Grudges.SwornCritAvoid"/> crit avoid (issue 331), and on a
     /// <c>pincer: on</c> map this unit strikes it at <see cref="Pincer.Hit"/> more when it is
     /// pinned (DESIGN.md 13.13), read at both units' <see cref="At"/>, and at
-    /// <see cref="Brace.Hit"/> less when it is braced (DESIGN.md 13.14).
+    /// <see cref="Brace.Hit"/> less when it is braced (DESIGN.md 13.14). On a <c>signatures: on</c>
+    /// map a strike, never a counter, carries Teodor's orders or his watched penalty (DESIGN.md 13.18).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -169,7 +170,7 @@ public sealed record BattleUnit(
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, this, countering);
         critAvoid += Grudges.CritAvoidAgainst(this, against);
-        hit += Brace.StrikeHit(state, this, against);
+        hit += Brace.StrikeHit(state, this, against) + Signatures.StrikeHit(state, content, this, countering);
         var weapon = EquippedWeapon(content);
         if (art is not null && weapon is not null)
         {

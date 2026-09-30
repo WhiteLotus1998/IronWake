@@ -925,6 +925,26 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 486's hand play: Code's seed 563 on <c>docs/samples/saltmarsh_ford_brace_signatures.map</c>,
+    /// the cadets' signature sample. Teodor waits so Ottilie and Wren strike under his orders, Wren
+    /// wakes the fort from 10,5 and cantos back behind the braced line, Teodor strikes the leader
+    /// from 9,0 where no ally is within 2 of him, and the captain kills under his orders on turn 10.
+    /// </summary>
+    [Fact]
+    public void TheSignatureSamplePlayReplaysWithTheCadetsSignatures()
+    {
+        var output = RunSample("saltmarsh_ford_brace_signatures.map", "2026-09-30-saltmarsh_ford_brace_signatures-563.script", 563, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: rout\n", output);
+        Assert.Contains("forecast ottilie -> wingrider-1: dmg 19 hit 83% crit 3%; counter: none\n  signature: teodor's orders: ottilie hit +5\n", output);
+        Assert.Contains("group fort wakes: proximity\n", output);
+        Assert.Contains("wren cantos 10,5 -> 9,7 via 9,5 9,6\n", output);
+        Assert.Contains("forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%\n", output);
+        Assert.Contains("bandit_leader-1 falls at 10,0\n", output);
+    }
+
+    /// <summary>
     /// Chat's cold play of issue 419's anvil arm: seed 433 on <c>docs/samples/sallow_grange_pincer.map</c>.
     /// The closed formation leaves no tile behind the front in reach, so the archer walks to 6,7
     /// and shoots instead of anviling, and every pin in the game is the player's. The captain

@@ -251,7 +251,7 @@ public class ExposureTests
         Assert.Null(board.Find("brigand-1"));
         Assert.True(board.IsAwake("watch"));
 
-        var noisy = new[] { tile, brigand.At };
+        var noisy = WakeCheck.At(Starter, tile, brigand.At);
         Assert.Empty(WakeCheck.Run(state, board, Starter, noisy, Array.Empty<string>()));
         Assert.Equal(new[] { new GroupWoke("watch", WakeCause.Death) }, WakeCheck.Run(state, board, Starter, noisy, new[] { "watch" }));
 

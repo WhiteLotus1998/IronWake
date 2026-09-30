@@ -120,6 +120,15 @@ public sealed class HeuristicPlayer : IPlayer
                 .OrderBy(u => u.IsCaptain)
                 .ThenByDescending(u => state.Map.Exits.Min(x => x.DistanceTo(u.At)));
 
+    /// <summary>
+    /// Whether Ottilie's ledger (DESIGN.md 13.18) would refuse this attack from <paramref name="tile"/>.
+    /// The heuristic plays no signature, but it obeys a refusal, so every plan it makes is legal.
+    /// </summary>
+    private static bool LedgerRefuses(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target) =>
+        Signatures.Of(state, content, unit) == SignatureKind.Ledger
+        && Queries.Forecast(state, content, unit, target, tile) is { } forecast
+        && Signatures.Refuses(state, content, unit, forecast.Attacker.DisplayedHit);
+
     /// <summary>One player unit's commands on the board as it stands.</summary>
     public static IReadOnlyList<Command> PlanUnit(BattleState state, GameContent content, BattleUnit unit) =>
         PlanUnit(state, content, unit, out _);
@@ -163,7 +172,7 @@ public sealed class HeuristicPlayer : IPlayer
                 var cost = reach.CostTo(tile)!.Value;
                 foreach (var target in enemies)
                 {
-                    if (!weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile))
+                    if (!weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile) || LedgerRefuses(state, content, unit, tile, target))
                     {
                         continue;
                     }
