@@ -36,7 +36,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `exit` | `unit` (on an Escape map, from an exit tile, as the unit's action; issue 269) | `Exit` |
 | `recover` | `unit` (on a `keepsakes: on` map, from a keepsake's tile, as the unit's action; DESIGN 13.8, experiment) | `Recover` |
 | `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent ally pushed one tile away, as the unit's action; an enemy target is refused; DESIGN 13.12, experiment) | `Shove` |
-| `end` | none | `EndPhase` |
+| `end` | none; the response also carries `lethal` (read before the phase ends: each player unit the coming enemy phase kills if every strike `threat` prices on it lands, in deployment order, as `unit`, `total`, `hp` and `strikers`, each `enemy` and `damage`, the strikers the total sums; the console's `lethal if all land:` lines, issue 558; empty when none) | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
 

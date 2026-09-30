@@ -620,6 +620,7 @@ e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > end
+lethal if all land: wren (brigand-2 11 against 11 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 event wave3
@@ -1233,6 +1234,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 16/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
+lethal if all land: ottilie (archer-2 7, hexer-1 10 against 10 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: attack archer-2 captain
@@ -1511,6 +1513,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 8/21   Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
+lethal if all land: teodor (archer-2 5, soldier-2 8 against 8 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: attack archer-2 teodor
@@ -1771,6 +1774,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
+lethal if all land: captain (archer-2 5, brigand-4 10 against 14 hp)
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: attack archer-2 captain
@@ -2004,6 +2008,7 @@ k  soldier-4        Soldier L2 pikeman         6,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain  done
 > end
+lethal if all land: wren (archer-2 6, soldier-3 9 against 11 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: move archer-2 9,4

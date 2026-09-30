@@ -1159,6 +1159,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
+lethal if all land: rook (archer-1 19 against 17 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: move archer-1 10,5
@@ -2348,6 +2349,8 @@ j  soldier-1        Soldier L3 pikeman         17,2   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              18,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
+lethal if all land: dunstan (hexer-1 12, rider-1 6 against 8 hp)
+lethal if all land: pell (shieldbearer-1 10, soldier-1 11 against 16 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: move archer-1 10,3
@@ -2656,6 +2659,7 @@ D  wren             Wren L1 cadet              18,3   hp 12/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook
 > end
+lethal if all land: dunstan (brigand-2 9, hexer-1 12 against 2 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: attack archer-1 dunstan

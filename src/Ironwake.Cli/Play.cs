@@ -513,7 +513,8 @@ public sealed class PlaySession
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
                     ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
                     : new List<ExposureEntry>();
-                if (Apply(new EndPhase()))
+                var lethal = Queries.Lethal(_state, _content);
+                if (Apply(new EndPhase(), first: lethal.Count == 0 ? null : string.Join("\n", lethal.Select(LethalLine))))
                 {
                     _exposure.AddRange(exposed);
                     EnemyPhase();
@@ -618,16 +619,21 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// Applies a player command and prints its events, then <paramref name="after"/> if it was
-    /// accepted, then the board. False, with the rejection printed, if it was refused.
+    /// Applies a player command and, if it was accepted, prints <paramref name="first"/>, its
+    /// events, then <paramref name="after"/>, then the board. False, with the rejection printed, if it was refused.
     /// </summary>
-    private bool Apply(Command command, string? after = null)
+    private bool Apply(Command command, string? after = null, string? first = null)
     {
         var result = Resolver.Apply(_state, _content, command);
         if (!result.Accepted)
         {
             Error(result.Rejection!.Message);
             return false;
+        }
+
+        if (first is not null)
+        {
+            _out.WriteLine(first);
         }
 
         Record(command);
@@ -1163,6 +1169,14 @@ public sealed class PlaySession
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
         return string.Join("\n", lines);
     }
+
+    /// <summary>
+    /// What <c>end</c> prints before a player phase ends for a unit the coming enemy phase kills
+    /// if every strike <c>threat</c> prices lands (issue 558, <see cref="Queries.Lethal"/>):
+    /// <c>lethal if all land: wren (soldier-2 9, archer-1 6 against 15 hp)</c>.
+    /// </summary>
+    public static string LethalLine(LethalThreat lethal) =>
+        $"lethal if all land: {lethal.Unit.Id} ({string.Join(", ", lethal.Strikers.Select(s => $"{s.Enemy.Id} {s.Damage}"))} against {lethal.Unit.Hp} hp)";
 
     /// <summary>
     /// Under a forecast whose counter kills the attacker if every counter strike lands (issue 539):

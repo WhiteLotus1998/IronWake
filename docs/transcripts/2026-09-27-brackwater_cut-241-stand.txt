@@ -1466,6 +1466,8 @@ D  wren             Wren L1 cadet              19,3   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
+lethal if all land: pell (brawler-1 18 against 16 hp)
+lethal if all land: rook (brawler-1 20, soldier-1 12 against 17 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: something in the dark acts (x2)

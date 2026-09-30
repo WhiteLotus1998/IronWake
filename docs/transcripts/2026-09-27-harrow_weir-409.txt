@@ -2318,6 +2318,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          6,4    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 10/28  Road  group weir, boss, awake
 > end
+lethal if all land: keziah (brigand-3 12 against 11 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: wait archer-1
@@ -2712,6 +2713,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 7/24   Road  group brid
 B  teodor           Teodor L1 pikeman          7,4    hp 11/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
 > end
+lethal if all land: pell (shieldbearer-1 10 against 6 hp)
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: wait archer-1

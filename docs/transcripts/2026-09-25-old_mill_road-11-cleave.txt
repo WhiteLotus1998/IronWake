@@ -581,6 +581,8 @@ A  captain          Alder Fenn L1 cadet        7,2    hp 13/22  Plain  captain  
 d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 9/24   Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              6,1    hp 10/20  Plain  done
 > end
+lethal if all land: captain (archer-1 5, mill_bandit-1 9 against 13 hp)
+lethal if all land: wren (archer-1 6, mill_bandit-1 10 against 10 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: move archer-1 8,1

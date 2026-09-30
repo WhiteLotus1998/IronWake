@@ -2078,6 +2078,8 @@ k  soldier-4        Soldier L2 pikeman         6,8    hp 10/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          7,8    hp 13/21  Plain  done
 B  wren             Wren L1 cadet              7,4    hp 20/20  Plain  done
 > end
+lethal if all land: captain (brigand-4 10, soldier-4 8 against 14 hp)
+lethal if all land: teodor (brigand-4 10, soldier-4 8 against 13 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: move brigand-4 7,7

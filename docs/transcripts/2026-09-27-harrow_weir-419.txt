@@ -2314,6 +2314,7 @@ e  soldier-1        Soldier L2 pikeman         12,7   hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          9,6    hp 13/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 2/28   Plain  group weir, boss, awake
 > end
+lethal if all land: keziah (weir_foreman-1 12 against 11 hp)
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: wait archer-1

@@ -677,6 +677,7 @@ A  captain          Alder Fenn L1 cadet        10,4   hp 8/22   Plain  captain  
 c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
 > end
+lethal if all land: captain (soldier-1 8 against 8 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: attack soldier-1 captain
@@ -787,6 +788,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > end
+lethal if all land: ansgar (soldier-1 10 against 10 hp)
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
 enemy: move soldier-1 8,5

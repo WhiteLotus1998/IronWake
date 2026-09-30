@@ -293,6 +293,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
+lethal if all land: pell (archer-2 8 against 8 hp)
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
 archer-2 heals 3 (hp 10)
@@ -1126,6 +1127,7 @@ D  wren             Wren L1 cadet              15,1   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
+lethal if all land: dunstan (brigand-1 9 against 8 hp)
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: move archer-1 8,2
