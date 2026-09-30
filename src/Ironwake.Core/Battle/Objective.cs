@@ -20,7 +20,7 @@ public static class Objective
         var by = $"by the end of turn {map.TurnLimit}";
         var win = map.Win switch
         {
-            WinCondition.Seize => $"the captain, {captain}, must stand on the throne at {Thrones(map)} {by}; only the captain seizes",
+            WinCondition.Seize => $"the captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)} {by}; only the captain seizes",
             WinCondition.Rout => $"defeat every enemy {by}",
             WinCondition.DefeatBoss => $"defeat the boss ({MapRenderer.BossGlyph}) {by}",
             WinCondition.Survive => $"hold until the end of turn {map.TurnLimit}",
@@ -57,8 +57,8 @@ public static class Objective
         var missed = map.Win switch
         {
             WinCondition.Seize => state.Units.FirstOrDefault(u => u.IsCaptain) is { } captain
-                ? $"the captain ended at {captain.At}, not on the throne at {Thrones(map)}"
-                : $"the captain never stood on the throne at {Thrones(map)}",
+                ? $"the captain ended at {captain.At}, not on the {SeizeName(content)} at {Thrones(map)}"
+                : $"the captain never stood on the {SeizeName(content)} at {Thrones(map)}",
             WinCondition.Rout => state.UnitsOf(Side.Enemy).Count() is var left && left == 1 ? "1 enemy still stands" : $"{left} enemies still stand",
             WinCondition.DefeatBoss => "the boss still stands",
             WinCondition.Escape => "the captain never exited",
@@ -89,16 +89,27 @@ public static class Objective
         };
         if (mover is not null && after.Find(mover) is { Side: Side.Player, IsCaptain: false } unit && map.IsThrone(unit.At))
         {
-            lines.Add($"{unit.Id} stands on the throne, but only the captain, {Captain(after, content)}, seizes");
+            lines.Add($"{unit.Id} stands on the {SeizeName(content)}, but only the captain, {Captain(after, content)}, seizes");
         }
 
         if (before.UnitsOf(Side.Enemy).Any() && !after.UnitsOf(Side.Enemy).Any())
         {
-            lines.Add($"no enemy is left, but the map is not won: the captain, {Captain(after, content)}, must still stand on the throne at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn})");
+            lines.Add($"no enemy is left, but the map is not won: the captain, {Captain(after, content)}, must still stand on the {SeizeName(content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn})");
         }
 
         return lines;
     }
+
+    /// <summary>
+    /// The seize tile as the player reads it (issue 569): the throne terrain's display name,
+    /// lowercased, so every line here, the protocol's <c>seizeName</c> and the client's legend,
+    /// how-to-play and end card read one value. The rules still call the tile the throne;
+    /// without a throne terrain in the content the name is its id.
+    /// </summary>
+    public static string SeizeName(GameContent content) =>
+        content.Terrain.TryGetValue(MapDefinition.ThroneTerrainId, out var throne)
+            ? throne.Name.ToLowerInvariant()
+            : MapDefinition.ThroneTerrainId;
 
     /// <summary>The captain as the objective names it: the unit's name and the letter the board draws it with.</summary>
     private static string Captain(BattleState state, GameContent content)
