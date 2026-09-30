@@ -19,11 +19,11 @@ public static class Screens
     };
 
     /// <summary>
-    /// Recall in one sentence a stranger gets on the first read (issue 515, Chat's question on
-    /// slice 4): the screen was built around it.
+    /// Recall as a stranger gets it on the first read (issue 515, Chat's question on slice 4): the
+    /// screen was built around it. Chat's wording from round 163, taken word for word in round 164.
     /// </summary>
     public const string RecallSentence =
-        "Recall rewinds the battle to any earlier moment of one of your turns; you get a few charges a map, and the dice remember, so the same swing rolls the same.";
+        "Recall rewinds the battle to any earlier moment in one of your turns. You get a few charges a map, and the dice remember: the same swing rolls the same.";
 
     /// <summary>The how-to-play screen: each section's heading and its lines, short enough to be read standing up.</summary>
     public static readonly IReadOnlyList<(string Heading, IReadOnlyList<string> Lines)> HowTo = new (string, IReadOnlyList<string>)[]
@@ -121,7 +121,8 @@ public sealed class Callouts
 /// <summary>
 /// The end card (issue 515): won or lost, a line on what it cost or why, and the turn it ended
 /// on. The reason for a loss is the console's own verdict, without its "lost because", which
-/// the headline already says.
+/// the headline already says; a Seize map run out of turns says it without the coordinates
+/// (issue 516, round 163), which stay in the log.
 /// </summary>
 public sealed record EndCard(bool Won, string Headline, string Line, string Turn)
 {
@@ -131,6 +132,13 @@ public sealed record EndCard(bool Won, string Headline, string Line, string Turn
         var won = state.Outcome.Result == BattleResult.Won;
         // A map lost on its clock is decided after its last turn: the card counts that turn, not the next.
         var turn = $"turn {Math.Min(state.Turn, state.Map.TurnLimit)} of {state.Map.TurnLimit}";
+        if (!won && state.Map.Win == WinCondition.Seize && state.Outcome.Cause == LossCause.Timeout)
+        {
+            // The seize tile by the name the legend gives it, so the card and the legend agree.
+            var tile = content.Terrain.TryGetValue(MapDefinition.ThroneTerrainId, out var throne) ? throne.Name.ToLowerInvariant() : MapDefinition.ThroneTerrainId;
+            return new EndCard(false, "Lost", $"Turn {state.Map.TurnLimit} ran out with the captain short of the {tile}.", turn);
+        }
+
         if (!won)
         {
             const string lead = "lost because ";

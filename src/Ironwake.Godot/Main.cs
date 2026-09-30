@@ -51,7 +51,7 @@ public partial class Main : Node2D
     private const int RecallRowsShown = 40;
     private static readonly (string Key, string Does)[] Keys =
     {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), ("Esc", "clear"),
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), (Sound.MuteKey, "sound"), ("Esc", "clear"),
     };
 
     /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
@@ -170,6 +170,7 @@ public partial class Main : Node2D
                 }
 
                 _screenshot = Arg(args, "--screenshot");
+                StartSound();
                 return;
             }
 
@@ -228,6 +229,7 @@ public partial class Main : Node2D
             _still = _screenshot is not null;
             _recallAfter = int.TryParse(Arg(args, "--recall-after"), out var recallAfter) ? recallAfter : null;
             SyncBeats();
+            StartSound();
         }
         catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
         {
@@ -271,6 +273,7 @@ public partial class Main : Node2D
     public override void _Process(double delta)
     {
         Advance(delta);
+        SoundBeats();
         SaveStripFrame();
         if (_screenshot is null || ++_framesDrawn < 3)
         {
@@ -314,9 +317,11 @@ public partial class Main : Node2D
                 _hover = TileAt(motion.Position);
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when TileAt(click.Position) is { } at:
+                Play(Cue.Click);
                 _client.Click(at);
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when HitAt(click.Position) is { } hit:
+                Play(Cue.Click);
                 hit();
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right }:
@@ -348,6 +353,9 @@ public partial class Main : Node2D
                         break;
                     case Key.Tab:
                         _logOpen = !_logOpen;
+                        break;
+                    case Key.M:
+                        ToggleMute();
                         break;
                     case Key.Escape:
                         _client.ClearSelection();
@@ -392,7 +400,7 @@ public partial class Main : Node2D
         switch (input)
         {
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click:
-                HitAt(click.Position)?.Invoke();
+                PressAt(click.Position);
                 break;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
                 campaign.March();
@@ -614,7 +622,7 @@ public partial class Main : Node2D
             var width = UiWidth(key, 12, bold: true) + 14;
             if (key == "E")
             {
-                _endKeyAt = new Vector2(x + width / 2, y - 9);
+                _endKey = new Rect2(x, y - 7, width, 22);
             }
 
             Card(new Rect2(x, y - 7, width, 22), Box, 5);

@@ -2,7 +2,6 @@ using Godot;
 using Ironwake.Client;
 using Ironwake.Content;
 using Ironwake.Core;
-using CoreSide = Ironwake.Core.Side;
 
 namespace Ironwake.Godot;
 
@@ -28,8 +27,8 @@ public partial class Main
     /// <summary>The turn-1 callouts, on for a battle opened from the title; null when off.</summary>
     private Callouts? _callouts;
 
-    /// <summary>Where the footer drew the E key, for the third callout to point at.</summary>
-    private Vector2 _endKeyAt;
+    /// <summary>Where the footer drew the E key, for the third callout to light.</summary>
+    private Rect2 _endKey;
 
     /// <summary>The end card is up once the battle is decided, every beat and the scrub have played, outside the campaign (which has its own leave).</summary>
     private bool EndCardShown => _campaign is null && _client?.Ending is not null && !Animating && !Scrubbing;
@@ -56,7 +55,10 @@ public partial class Main
         switch (input)
         {
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click:
-                HitAt(click.Position)?.Invoke();
+                PressAt(click.Position);
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
+                ToggleMute();
                 break;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Enter or Key.KpEnter or Key.Space }:
                 StartBattle(_seed, callouts: true);
@@ -90,7 +92,10 @@ public partial class Main
                 _screen = Screen.Title;
                 return true;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click:
-                HitAt(click.Position)?.Invoke();
+                PressAt(click.Position);
+                return true;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
+                ToggleMute();
                 return true;
             default:
                 return input is not InputEventMouseMotion;
@@ -165,6 +170,16 @@ public partial class Main
             _hits.Add((rect, act));
             y += 56;
         }
+
+        // The mute key (issue 516), a keycap and what it does now, clickable like the choices.
+        var does = _muted ? "sound off" : "sound on";
+        var capWidth = UiWidth(Sound.MuteKey, 12, bold: true) + 16;
+        var row = capWidth + 8 + UiWidth(does, 13);
+        var mx = centre - row / 2;
+        Card(new Rect2(mx, y + 4, capWidth, 22), Box, 5);
+        UiText(new Vector2(mx + capWidth / 2, y + 20), Sound.MuteKey, Ink, 12, bold: true, centred: true);
+        UiText(new Vector2(mx + capWidth + 8, y + 20), does, Muted, 13);
+        _hits.Add((new Rect2(mx, y, row, 30), ToggleMute));
 
         UiText(new Vector2(centre, ViewHeight - 28), "One map, the Tollgate. Four of the company against the toll road's keepers.", Muted, 12, centred: true);
     }
@@ -251,9 +266,9 @@ public partial class Main
     }
 
     /// <summary>
-    /// The turn-1 callout on screen (issue 515), moved on by what the player has done: a card
-    /// with a pointer at what it asks about, the captain for a selection and the footer's E for
-    /// the end of the phase; the forecast's sits in the column under the forecast.
+    /// The turn-1 callout on screen (issue 515), moved on by what the player has done. All three
+    /// sit at the foot of the column, whose log is empty on turn 1, so none covers a unit, a tile
+    /// or the legend it asks about (issue 516, round 163); the third lights the footer's E key.
     /// </summary>
     private void DrawCallout()
     {
@@ -268,30 +283,21 @@ public partial class Main
             return;
         }
 
-        var state = _client.State;
         var step = (int)callout + 1;
-        var lines = WrapUi(Callouts.Text(callout), 14, callout == Callout.Forecast ? PanelWidth - 32 : 330);
+        var lines = WrapUi(Callouts.Text(callout), 14, PanelWidth - 32);
         var width = Math.Max(lines.Max(line => UiWidth(line, 14)), UiWidth("STEP 3 OF 3", 10, bold: true)) + 32;
         var height = 40 + lines.Count * 19;
         var amber = Look(LookPalette.Player);
-
-        // The forecast's callout sits in the column under the forecast, whose log is empty on turn 1,
-        // so it never covers the tiles it asks the player to point at; the other two point at what they name.
-        Vector2? anchor = callout switch
-        {
-            Callout.Select when state.UnitsOf(CoreSide.Player).FirstOrDefault(u => u.IsCaptain) is { } captain => TopOf(captain.At),
-            Callout.Forecast => null,
-            _ => _endKeyAt,
-        };
-        var x = anchor is { } point ? Math.Clamp(point.X - width / 2, Margin, ViewWidth - Margin - width) : PanelOrigin.X - 8;
-        var y = anchor is { } above ? Math.Max(Top + 4, above.Y - 14 - height) : PanelBottom - height;
+        var x = PanelOrigin.X - 8;
+        var y = PanelBottom - height;
         var rect = new Rect2(x, y, width, height);
         Card(rect.Grow(2), amber, 10);
         Card(rect, Box, 9);
-        if (anchor is { } tip)
+        if (callout == Callout.End)
         {
-            DrawColoredPolygon(new[] { new Vector2(tip.X - 8, y + height + 1), new Vector2(tip.X + 8, y + height + 1), new Vector2(tip.X, tip.Y - 3) }, amber);
+            Ring(_endKey.Grow(3), amber, 7, 2);
         }
+
         UiText(new Vector2(x + 16, y + 22), $"STEP {step} OF 3", amber, 10, bold: true);
         var ly = y + 42;
         foreach (var line in lines)
@@ -299,13 +305,6 @@ public partial class Main
             UiText(new Vector2(x + 16, ly), line, Ink, 14);
             ly += 19;
         }
-    }
-
-    /// <summary>The point just above a tile's centre, where a callout's pointer lands.</summary>
-    private Vector2 TopOf(Coord at)
-    {
-        var cell = Cell(at);
-        return new Vector2(cell.GetCenter().X, cell.Position.Y - 6);
     }
 
     /// <summary>
