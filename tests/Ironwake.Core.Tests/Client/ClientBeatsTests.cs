@@ -316,4 +316,16 @@ public class ClientBeatsTests
 
         Assert.True(Rhythm.Length(beat) > times[^1]);
     }
+
+    [Fact]
+    public void TheActThatDecidesTheBattleHoldsStillBeforeTheEndCard()
+    {
+        var at = new Coord(0, 0);
+        var walk = new Beat("pell", at, Array.Empty<Coord>(), new Coord(1, 0), null, Array.Empty<Pop>(), new Dictionary<string, int>(), null);
+
+        Assert.Equal(Rhythm.DeathHold, Rhythm.EndHold);
+        Assert.Equal(Rhythm.Length(walk), Rhythm.Total(new[] { walk }, decided: false), 5);
+        Assert.Equal(Rhythm.Length(walk) + Rhythm.EndHold, Rhythm.Total(new[] { walk }, decided: true), 5);
+        Assert.Equal(Rhythm.EndHold, Rhythm.Total(Array.Empty<Beat>(), decided: true));
+    }
 }

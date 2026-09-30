@@ -32,7 +32,7 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 | `enemy.bone` | `#E6E0D0` | bone: the enemy's silhouette, its hairline rim, HP and numerals, the enemy phase's marks |
 | `mark.selected` | `#F6D38A` | the selected unit, the hovered tile (dashed), the planned path (dotted) |
 | `mark.reach` | `#BFD9EA` | frost: tiles the selected unit can reach, a mark laid on the tile (a wash at about 16 percent, an inset edge), never a surface |
-| `mark.threat` | `#EDE6D6` | the enemy's reach, drawn as a diagonal hatch, never a fill; a sleeping group's reach at alpha 0.2 against 0.5, its wake ring a dashed edge (issue 533) |
+| `mark.threat` | `#EDE6D6` | the enemy's reach, drawn as a diagonal hatch, never a fill; a sleeping group's reach at alpha 0.2 against 0.5, its wake ring a dashed edge (issue 533); over a warm ground (the hill, `LookPalette.WarmGround`) drawn in `enemy` slate, never a peach (issue 578) |
 | `mark.struck` | `#FFFFFF` | a unit just struck: a one-beat ring flash |
 | `ui.ink` | `#15181D` | the screen behind everything; glyphs on amber |
 | `ui.panel` | `#1E232A` | cards and chips |

@@ -142,7 +142,8 @@ public partial class Main
             t += BeatLength(_playing[i]);
         }
 
-        _beatsEnd = _still ? _clock : t;
+        // The act that decides the battle holds still before the end card rises (issue 578).
+        _beatsEnd = _still ? _clock : _clock + Factor * Rhythm.Total(_playing, _client.Ending is not null);
         if (_still)
         {
             _beatsStart = float.NegativeInfinity;
@@ -238,6 +239,12 @@ public partial class Main
         if (_scrubShift.TryGetValue(id, out var sliding))
         {
             return sliding;
+        }
+
+        // A still capture shows every beat already played (issue 578): no token mid-walk or mid-lunge.
+        if (_still)
+        {
+            return Vector2.Zero;
         }
 
         for (var i = 0; i < _playing.Count; i++)

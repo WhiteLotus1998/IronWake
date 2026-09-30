@@ -235,8 +235,11 @@ public sealed class ClientSession
     /// <summary>The Recall charges the map opened with, for the pips beside the ones left (issue 514).</summary>
     public int RecallChargesAtStart => State.History.Count > 0 ? State.History[0].RecallCharges : State.RecallCharges;
 
-    /// <summary>The map's objective in the console's words, shown for the whole battle (issue 374).</summary>
-    public string Objective => Ironwake.Core.Objective.Line(State, Content);
+    /// <summary>
+    /// The map's objective in the console's words, shown for the whole battle (issue 374), without
+    /// the console's placement letter after the captain's name: the client draws no letters (issue 578).
+    /// </summary>
+    public string Objective => Ironwake.Core.Objective.Line(State, Content, letters: false);
 
     /// <summary>Why a lost battle was lost, in the console's words, or null while ongoing or won (issue 374).</summary>
     public string? Verdict => EnemyPhasePlaying ? null : Ironwake.Core.Objective.Verdict(State, Content);

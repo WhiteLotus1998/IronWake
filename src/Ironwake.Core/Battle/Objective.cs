@@ -11,12 +11,13 @@ public static class Objective
 {
     /// <summary>
     /// The objective line: which unit must do what by which turn, then what loses the battle,
-    /// the captain named with the letter the board draws it with.
+    /// the captain named with the letter the console's board draws it with, unless
+    /// <paramref name="letters"/> is false for a renderer that draws no letters (issue 578).
     /// </summary>
-    public static string Line(BattleState state, GameContent content)
+    public static string Line(BattleState state, GameContent content, bool letters = true)
     {
         var map = state.Map;
-        var captain = Captain(state, content);
+        var captain = Captain(state, content, letters);
         var by = $"by the end of turn {map.TurnLimit}";
         var win = map.Win switch
         {
@@ -111,8 +112,8 @@ public static class Objective
             ? throne.Name.ToLowerInvariant()
             : MapDefinition.ThroneTerrainId;
 
-    /// <summary>The captain as the objective names it: the unit's name and the letter the board draws it with.</summary>
-    private static string Captain(BattleState state, GameContent content)
+    /// <summary>The captain as the objective names it: the unit's name, then the letter the board draws it with when <paramref name="letters"/> is true.</summary>
+    private static string Captain(BattleState state, GameContent content, bool letters = true)
     {
         var captain = state.Units.FirstOrDefault(u => u.IsCaptain)
             ?? state.Escaped.FirstOrDefault(u => u.IsCaptain)
@@ -122,8 +123,13 @@ public static class Objective
             return "the captain";
         }
 
-        var letters = MapRenderer.Letters(state.Map, content);
-        return $"{captain.Unit.Name} ({letters[captain.PlacementIndex]})";
+        if (!letters)
+        {
+            return captain.Unit.Name;
+        }
+
+        var glyphs = MapRenderer.Letters(state.Map, content);
+        return $"{captain.Unit.Name} ({glyphs[captain.PlacementIndex]})";
     }
 
     private static string Thrones(MapDefinition map)

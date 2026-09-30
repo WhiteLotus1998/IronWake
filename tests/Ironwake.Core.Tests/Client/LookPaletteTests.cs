@@ -75,6 +75,27 @@ public partial class LookPaletteTests
     }
 
     [Fact]
+    public void TheThreatHatchIsSlateOverAWarmGroundAndBoneElsewhere()
+    {
+        Assert.True(LookPalette.WarmGround("hill"));
+        Assert.Equal(LookPalette.Enemy, LookPalette.ThreatHatch("hill"));
+        var cold = LookPalette.Terrain.Keys.Where(id => id is not ("hill" or "fire")).ToList();
+        Assert.All(cold, id => Assert.Equal(LookPalette.Marks["threat"], LookPalette.ThreatHatch(id)));
+    }
+
+    [Fact]
+    public void TheSlateHatchOverTheHillReadsFartherFromOursThanBone()
+    {
+        static Rgb Half(Rgb a, Rgb b) => new((byte)((a.R + b.R) / 2), (byte)((a.G + b.G) / 2), (byte)((a.B + b.B) / 2));
+        var hill = LookPalette.Terrain["hill"];
+
+        var bone = ColourVision.Distance(Half(LookPalette.Marks["threat"], hill), LookPalette.Player);
+        var slate = ColourVision.Distance(Half(LookPalette.ThreatHatch("hill"), hill), LookPalette.Player);
+
+        Assert.True(slate > bone, $"slate {slate:F1} against bone {bone:F1}");
+    }
+
+    [Fact]
     public void TheWarmthCheckRefusesTheDebugClientsOrangeEnemy()
     {
         Assert.True(Chroma(Palette.Enemy) > LookPalette.WorldChromaCeiling);
