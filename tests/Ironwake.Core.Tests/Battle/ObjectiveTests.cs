@@ -34,7 +34,7 @@ public class ObjectiveTests
     {
         var line = Objective.Line(Start(map: Hall()), Starter);
 
-        Assert.Equal("objective: the captain, hale (A), must stand on the throne at 12,1 by the end of turn 10; only the captain seizes; lost if the captain falls", line);
+        Assert.Equal("objective: the captain, hale (A), must stand on the gate at 12,1 by the end of turn 10; only the captain seizes; lost if the captain falls", line);
     }
 
     [Theory]
@@ -81,7 +81,7 @@ public class ObjectiveTests
     {
         var lost = Start(map: Hall(limit: 1)).Do(new EndPhase()).Do(new EndPhase());
 
-        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the throne at 12,1", Objective.Verdict(lost, Starter));
+        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1", Objective.Verdict(lost, Starter));
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class ObjectiveTests
 
         var notice = Assert.Single(Objective.Notices(before, after, Starter, new Attack("hale", "brigand-1")));
 
-        Assert.Equal("no enemy is left, but the map is not won: the captain, hale (A), must still stand on the throne at 12,1 by the end of turn 10 (now turn 1)", notice);
+        Assert.Equal("no enemy is left, but the map is not won: the captain, hale (A), must still stand on the gate at 12,1 by the end of turn 10 (now turn 1)", notice);
     }
 
     [Fact]
@@ -140,7 +140,7 @@ public class ObjectiveTests
 
         var notice = Assert.Single(Objective.Notices(before, after, Starter, new Move("wren", new Coord(12, 1))));
 
-        Assert.Equal("wren stands on the throne, but only the captain, hale (A), seizes", notice);
+        Assert.Equal("wren stands on the gate, but only the captain, hale (A), seizes", notice);
         Assert.False(after.Outcome.IsOver);
     }
 

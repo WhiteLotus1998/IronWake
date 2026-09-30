@@ -134,9 +134,7 @@ public sealed record EndCard(bool Won, string Headline, string Line, string Turn
         var turn = $"turn {Math.Min(state.Turn, state.Map.TurnLimit)} of {state.Map.TurnLimit}";
         if (!won && state.Map.Win == WinCondition.Seize && state.Outcome.Cause == LossCause.Timeout)
         {
-            // The seize tile by the name the legend gives it, so the card and the legend agree.
-            var tile = content.Terrain.TryGetValue(MapDefinition.ThroneTerrainId, out var throne) ? throne.Name.ToLowerInvariant() : MapDefinition.ThroneTerrainId;
-            return new EndCard(false, "Lost", $"Turn {state.Map.TurnLimit} ran out with the captain short of the {tile}.", turn);
+            return new EndCard(false, "Lost", $"Turn {state.Map.TurnLimit} ran out with the captain short of the {Objective.SeizeName(content)}.", turn);
         }
 
         if (!won)

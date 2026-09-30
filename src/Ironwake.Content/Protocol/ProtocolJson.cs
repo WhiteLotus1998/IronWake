@@ -519,6 +519,12 @@ public static class ProtocolJson
             w.WriteString("map", MapFormat.Write(state.Map, content));
         }
 
+        if (state.Map.Win == WinCondition.Seize)
+        {
+            // Derived (issue 569): the seize tile by the name the objective prints, never read back.
+            w.WriteString("seizeName", Objective.SeizeName(content));
+        }
+
         w.WriteNumber("turn", state.Turn);
         w.WriteString("phase", Name(state.Phase));
         w.WriteString("seed", state.Seed.ToString(System.Globalization.CultureInfo.InvariantCulture));
@@ -611,7 +617,7 @@ public static class ProtocolJson
     /// <paramref name="content"/>, so a state names content the reader must have. A state
     /// written by another protocol version is refused rather than read into a different game.
     /// Derived fields (<c>outcome</c>, <c>maxHp</c>, <c>historyCount</c>, <c>wakeRadius</c>,
-    /// <c>noiseRadius</c>) are not read.
+    /// <c>noiseRadius</c>, <c>seizeName</c>) are not read.
     /// </summary>
     public static BattleState ReadState(string json, GameContent content)
     {

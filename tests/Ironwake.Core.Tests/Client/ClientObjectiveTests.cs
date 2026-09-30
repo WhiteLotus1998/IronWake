@@ -36,7 +36,7 @@ public class ClientObjectiveTests
         var client = Client();
 
         Assert.Equal(Objective.Line(client.State, client.Content), client.Objective);
-        Assert.Contains("throne at 12,1", client.Objective);
+        Assert.Contains("gate at 12,1", client.Objective);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class ClientObjectiveTests
 
         Assert.True(client.Submit(new Move("wren", new Coord(12, 1))));
 
-        Assert.Equal("wren stands on the throne, but only the captain, hale (A), seizes", client.Log[^1]);
+        Assert.Equal("wren stands on the gate, but only the captain, hale (A), seizes", client.Log[^1]);
     }
 
     [Fact]
@@ -60,6 +60,6 @@ public class ClientObjectiveTests
 
         Assert.Equal("-- enemy phase ends, turn 1 --", client.Log[^1]);
         Assert.DoesNotContain(client.Log, line => line.Contains("turn 2", StringComparison.Ordinal));
-        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the throne at 12,1", client.Verdict);
+        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1", client.Verdict);
     }
 }
