@@ -141,10 +141,13 @@ public partial class Main
     }
 
     /// <summary>A unit's disc and class silhouette at a card's scale, by its id; nothing when it has left the board.</summary>
-    private void DrawDisc(Vector2 centre, float radius, string id)
+    private void DrawDisc(Vector2 centre, float radius, string id) => DrawUnitDisc(centre, radius, _client!.State.Find(id));
+
+    /// <summary>A unit's disc and class silhouette at a card's scale; nothing for no unit.</summary>
+    private void DrawUnitDisc(Vector2 centre, float radius, BattleUnit? unit)
     {
         var state = _client!.State;
-        if (state.Find(id) is not { } unit)
+        if (unit is null)
         {
             return;
         }

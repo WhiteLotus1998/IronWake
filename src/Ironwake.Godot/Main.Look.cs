@@ -264,9 +264,9 @@ public partial class Main
             deep = deep.Lerp(ink, 0.45f);
         }
 
-        DrawSetTransform(centre + new Vector2(0, 3 * s), 0, new Vector2(1, (radius - 1) / radius));
+        DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
         DrawCircle(Vector2.Zero, radius, deep);
-        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        DrawSetTransformMatrix(_tokenFrame);
         DrawCircle(centre, radius, fill);
         var bone = Look(LookPalette.EnemyBone);
         if (!player)
