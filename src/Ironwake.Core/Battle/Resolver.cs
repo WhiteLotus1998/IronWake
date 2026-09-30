@@ -47,6 +47,9 @@ public static class Resolver
             case Watch watch:
                 (next, rejection) = ApplyWatch(state, content, watch, events);
                 break;
+            case Cover cover:
+                (next, rejection) = ApplyCover(state, content, cover, events);
+                break;
             case Exit exit:
                 (next, rejection) = ApplyExit(state, exit, events);
                 break;
@@ -395,6 +398,15 @@ public static class Resolver
             return (state.WithUnit(unit with { Moved = true, Acted = true, WindupAt = target.At }), null);
         }
 
+        if (CoverRule.Swapped(state, target) is ({ } swappedBoard, { } coverer, { } ally))
+        {
+            var aimed = Combat.Forecast(unit.ToCombatant(state, content, art: art, against: target), target.Answering(state, content, unit.At, unit), distance, state.Scheme);
+            var covering = Combat.Forecast(unit.ToCombatant(swappedBoard, content, art: art, against: coverer), coverer.Answering(swappedBoard, content, unit.At, unit), distance, state.Scheme);
+            events.Add(new CoverFired(coverer.Id, ally.Id, unit.Id, coverer.At, ally.At, aimed.AttackerDamageLivedFor(unit.Hp) >= target.Hp, covering.Defender.Strikes));
+            state = swappedBoard;
+            target = coverer;
+        }
+
         var striker = unit.ToCombatant(state, content, art: art, against: target);
         var answer = target.Answering(state, content, unit.At, unit);
         var shown = Combat.Forecast(striker, answer, distance, state.Scheme).Attacker.DisplayedHit;
@@ -471,6 +483,34 @@ public static class Resolver
         var passed = Overwatch.PassedUp(state, content, unit);
         events.Add(new WatchTaken(unit.Id, unit.At, passed?.TargetId, passed?.Hit));
         return (state.WithUnit(unit with { Moved = true, Acted = true, Watching = true, Canto = null }), null);
+    }
+
+    /// <summary>
+    /// DESIGN.md 13.19: a unit taking Cover on an ally beside it, refused by
+    /// <see cref="CoverRule.Refusal"/>. The event names where the ally lands if the swap
+    /// fires and the best strike the coverer passes up. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyCover(BattleState state, GameContent content, Cover cover, List<GameEvent> events)
+    {
+        var unit = Acting(state, cover.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (state.Find(cover.AllyId) is not { } ally)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchTarget, $"no living unit '{cover.AllyId}' to cover"));
+        }
+
+        if (CoverRule.Refusal(state, unit, ally) is { } why)
+        {
+            return (state, new Rejection(RejectionReason.CannotCover, $"{unit.Id} cannot cover {ally.Id}: {why}"));
+        }
+
+        var passed = Overwatch.PassedUp(state, content, unit);
+        events.Add(new CoverTaken(unit.Id, ally.Id, unit.At, passed?.TargetId, passed?.Hit));
+        return (state.WithUnit(unit with { Moved = true, Acted = true, Canto = null }).WithUnit(ally with { CoveredBy = unit.Id }), null);
     }
 
     /// <summary>
@@ -1196,7 +1236,7 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase });
+            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1346,6 +1386,17 @@ public static class Resolver
             if (state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null)
             {
                 yield return new Watch(unit.Id);
+            }
+
+            if (state.Map.CoverEnabled)
+            {
+                foreach (var ally in state.UnitsOf(unit.Side).OrderBy(u => u.Id, StringComparer.Ordinal))
+                {
+                    if (CoverRule.Refusal(state, unit, ally) is null)
+                    {
+                        yield return new Cover(unit.Id, ally.Id);
+                    }
+                }
             }
 
             yield return new Wait(unit.Id);

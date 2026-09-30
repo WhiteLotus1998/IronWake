@@ -191,6 +191,10 @@ public static class Program
             foreach (var command in commands)
             {
                 var grudge = enemy ? EnemyAi.GrudgeLog(state, content, command, grudges) : null;
+                if (enemy && CoverRule.PassedLine(state, content, command) is { } passedLine)
+                {
+                    Console.WriteLine($"#   {passedLine}");
+                }
                 var result = Resolver.Apply(state, content, command);
                 if (!result.Accepted)
                 {
@@ -243,6 +247,12 @@ public static class Program
                             break;
                         case WatchEnded x:
                             Console.WriteLine($"#   {x.UnitId} stops watching");
+                            break;
+                        case CoverTaken c:
+                            Console.WriteLine($"#   {c.UnitId} covers {c.AllyId}, who lands on {c.AllyLandsOn} if struck" + (c.PassedUpTargetId is { } coverUp ? $", passes up {coverUp} at {c.PassedUpHit}" : ""));
+                            break;
+                        case CoverFired c:
+                            Console.WriteLine($"#   {c.UnitId} covers {c.AllyId} against {c.AttackerId}: onto {c.At}, {c.AllyId} to {c.AllyTo}" + (c.WouldHaveKilled ? ", would have killed" : ""));
                             break;
                         case BlowRaised b:
                             Console.WriteLine($"#   {b.UnitId} raises a blow over {b.At} ({b.TargetId})");
@@ -348,6 +358,7 @@ public static class Program
         UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
+        Cover c => $"cover {c.UnitId} {c.AllyId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",

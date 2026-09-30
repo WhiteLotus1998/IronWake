@@ -92,6 +92,11 @@ namespace Ironwake.Core;
 /// The <c>signatures: on</c> header (DESIGN.md 13.18, experiment): each cast member the cast file
 /// gives a signature plays it (<see cref="Signatures"/>). Off by default.
 /// </param>
+/// <param name="CoverEnabled">
+/// The <c>cover: on</c> header (DESIGN.md 13.19, experiment): a player unit beside an ally may
+/// cover it, and the first Attack aimed at that ally swaps the two and strikes the coverer
+/// (<see cref="CoverRule"/>). Off by default.
+/// </param>
 /// <param name="ExitAfterMove">
 /// The <c>exit_after_move: on</c> header: the Escape rule before issue 377, under which a unit
 /// may move onto an exit and exit in the same turn. It is kept only on the sample maps that
@@ -133,6 +138,7 @@ public sealed record MapDefinition(
     bool WildfireEnabled = false,
     bool WindupEnabled = false,
     bool OverwatchEnabled = false,
+    bool CoverEnabled = false,
     bool SignaturesEnabled = false)
 {
     public const int DefaultRecallCharges = 3;

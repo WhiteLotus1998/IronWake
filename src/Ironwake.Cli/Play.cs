@@ -43,6 +43,7 @@ public sealed class PlaySession
           exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           shove <unit> <target>    on a shove map, push an adjacent ally one tile away, as the action
+          cover <unit> <ally>      on a cover map, take the first strike aimed at the ally beside it, as the action
           end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
           recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
@@ -470,6 +471,12 @@ public sealed class PlaySession
             case "watch":
                 Error("usage: watch <unit>");
                 break;
+            case "cover" when words.Length == 3:
+                Apply(new Cover(words[1], words[2]));
+                break;
+            case "cover":
+                Error("usage: cover <unit> <ally>");
+                break;
             case "canto" when words.Length == 3 && TryCoord(words[2], out var cantoTo):
                 Apply(new Canto(words[1], cantoTo));
                 break;
@@ -706,6 +713,7 @@ public sealed class PlaySession
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
             var grudge = EnemyAi.GrudgeLog(_state, _content, command, grudges);
+            var passed = CoverRule.PassedLine(_state, _content, command);
             if (command is Move or Wait && InTheDark(command))
             {
                 var hidden = Resolve(command);
@@ -722,12 +730,25 @@ public sealed class PlaySession
             }
 
             darkRun = FlushDarkRun(darkRun);
+            if (passed is not null)
+            {
+                _out.WriteLine(passed);
+            }
+
             _out.WriteLine("enemy: " + CommandText(command));
             if (command is Attack attack)
             {
                 var attacker = _state.Find(attack.UnitId);
-                var target = _state.Find(attack.TargetId);
-                var forecast = attacker is null || target is null ? null : Queries.Forecast(_state, _content, attacker, target, attacker.At, attack.Slot);
+                var aimed = _state.Find(attack.TargetId);
+                var covered = aimed is null ? null : CoverRule.Swapped(_state, aimed);
+                var target = covered?.Struck ?? aimed;
+                var board = covered?.Board ?? _state;
+                if (covered is { } swap)
+                {
+                    _out.WriteLine($"  cover: {swap.Struck.Id} takes the strike aimed at {aimed!.Id}");
+                }
+
+                var forecast = attacker is null || target is null ? null : Queries.Forecast(board, _content, attacker, target, attacker.At, attack.Slot);
                 if (forecast is null)
                 {
                     throw new InvalidOperationException($"the enemy AI's {command} has no forecast");
@@ -1258,6 +1279,10 @@ public sealed class PlaySession
     /// A stop that wakes a sleeping group (<see cref="Queries.StopWakes"/>, issue 458) is one row
     /// before the sleeping groups, naming each group and why, unpriced:
     /// <c>stopping here wakes: ford (proximity), weir (called by ford)</c>.
+    /// On a <c>cover: on</c> map (DESIGN.md 13.19, round 142) a strike a cover would swap is
+    /// priced against the coverer on the tile, <c>covered by teodor, strikes teodor on 7,5</c>,
+    /// and the total says the first strike swaps them and where the unit lands, the strikes after
+    /// the swap unpriced.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null)
     {
@@ -1287,14 +1312,25 @@ public sealed class PlaySession
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
-                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
+                var covered = line.CoveredBy is { } by ? $"covered by {by.Id}, strikes {by.Id} on {tile}, " : "";
+                var answers = line.CoveredBy ?? unit;
+                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
                 if (line.Raises)
                 {
                     rows.Add($"    windup: no strike; {line.Enemy.Id} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");
                 }
             }
 
-            rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
+            if (lines.FirstOrDefault(l => l.CoveredBy is not null)?.CoveredBy is { } coverer)
+            {
+                var landing = state.Find(coverer.Id)?.At ?? coverer.At;
+                var worst = lines.Where(l => l.CoveredBy is not null).Max(l => l.IfAllLand);
+                rows.Add($"  if all land: the first strike swaps them; {coverer.Id} takes up to {worst} against {coverer.Hp} hp on {tile}, {unit.Id} lands on {landing}, and any strike after it is unpriced");
+            }
+            else
+            {
+                rows.Add($"  if all land: {Queries.IfAllLand(lines, blow)} against {unit.Hp} hp");
+            }
         }
 
         foreach (var anvil in (anvils ?? Array.Empty<AnvilLine>()).Where(a => Dusk.Seen(state, a.Anvil) && Dusk.Seen(state, a.Follower)))
@@ -1788,6 +1824,7 @@ public sealed class PlaySession
         Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",
         Watch w => $"watch {w.UnitId}",
+        Cover c => $"cover {c.UnitId} {c.AllyId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
@@ -1869,6 +1906,11 @@ public sealed class PlaySession
                 return $"{w.UnitId}'s watch holds on {w.TargetId} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; she still watches";
             case WatchEnded w:
                 return $"{w.UnitId} is struck and stops watching";
+            case CoverTaken c:
+                return $"{c.UnitId} covers {c.AllyId}; if struck, {c.AllyId} lands on {c.AllyLandsOn}" + (c.PassedUpTargetId is { } passedUp ? $"; passes up {passedUp} at {c.PassedUpHit}" : "; no strike passed up");
+            case CoverFired c:
+                return $"{c.UnitId} covers {c.AllyId}: steps onto {c.At}, {c.AllyId} to {c.AllyTo}; {c.AttackerId}'s strike "
+                    + (c.WouldHaveKilled ? "would have killed" : "would not have killed") + $" {c.AllyId}" + (c.Counters ? "" : $"; {c.UnitId} cannot counter");
             case BlowRaised b:
                 return $"{b.UnitId} raises a blow over {b.At} ({b.TargetId}); it lands at {b.UnitId}'s next phase start";
             case BlowLanded b:

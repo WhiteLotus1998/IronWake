@@ -66,6 +66,9 @@ public static class MapRenderer
     /// <summary>The legend an <c>overwatch: on</c> map prints (DESIGN.md 13.17, experiment).</summary>
     public const string OverwatchLegend = "overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move two tiles from it is struck once before it acts, no counter; a strike on the watcher ends the watch";
 
+    /// <summary>The legend a <c>cover: on</c> map prints (DESIGN.md 13.19, experiment).</summary>
+    public const string CoverLegend = "cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile";
+
     /// <summary>
     /// Under the overwatch legend while any unit watches (DESIGN.md 13.17): each watcher in id
     /// order with the ring's tiles inside the map, row-major, as
@@ -250,6 +253,11 @@ public static class MapRenderer
             sb.Append(OverwatchLegend).Append('\n');
         }
 
+        if (map.CoverEnabled)
+        {
+            sb.Append(CoverLegend).Append('\n');
+        }
+
         if (map.SignaturesEnabled)
         {
             sb.Append(SignaturesLegend).Append('\n');
@@ -411,6 +419,11 @@ public static class MapRenderer
                 sb.Append("  watching");
             }
 
+            if (unit.CoveredBy is { } coverer)
+            {
+                sb.Append("  covered by ").Append(coverer);
+            }
+
             if (unit.Side == Side.Player && Burning(state, unit))
             {
                 sb.Append("  burning");
@@ -499,6 +512,11 @@ public static class MapRenderer
             {
                 sb.Append(watches).Append('\n');
             }
+        }
+
+        if (map.CoverEnabled)
+        {
+            sb.Append(CoverLegend).Append('\n');
         }
 
         if (map.WindupEnabled)

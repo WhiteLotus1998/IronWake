@@ -221,7 +221,7 @@ public sealed class HeuristicPlayer : IPlayer
         }
 
         var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
-        return WithMove(unit, destination ?? unit.At, Idle(state, content, unit));
+        return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
     }
 
     /// <summary>
@@ -229,8 +229,37 @@ public sealed class HeuristicPlayer : IPlayer
     /// its equipped weapon reaches range 2 (DESIGN.md 13.17, the enemy's rule), else Wait. It never
     /// watches over a strike, so its own watches-over-a-strike figure is 0 by construction.
     /// </summary>
-    private static Command Idle(BattleState state, GameContent content, BattleUnit unit) =>
-        state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null ? new Watch(unit.Id) : new Wait(unit.Id);
+    private static Command Idle(BattleState state, GameContent content, BattleUnit unit, Coord? at = null)
+    {
+        if (state.Map.OverwatchEnabled && Overwatch.Refusal(state, content, unit) is null)
+        {
+            return new Watch(unit.Id);
+        }
+
+        return CoverChoice(state, content, unit with { At = at ?? unit.At }) is { } ally ? new Cover(unit.Id, ally) : new Wait(unit.Id);
+    }
+
+    /// <summary>
+    /// The ally the heuristic covers in place of an idle Wait on a <c>cover: on</c> map (DESIGN.md
+    /// 13.19), standing on <paramref name="unit"/>'s <see cref="BattleUnit.At"/>: of the allies beside
+    /// it it may cover that some enemy could strike next phase, the lowest HP, then the lowest id.
+    /// Null when none. It never covers over a strike, so every heuristic cover is one by a unit with
+    /// nothing else to do, the case the kill criterion's second clause names.
+    /// </summary>
+    private static string? CoverChoice(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (!state.Map.CoverEnabled)
+        {
+            return null;
+        }
+
+        var struck = Threat.StruckBy(state, content, Side.Enemy);
+        return state.UnitsOf(Side.Player)
+            .Where(ally => CoverRule.Refusal(state, unit, ally) is null && struck.Contains(ally.At))
+            .OrderBy(ally => ally.Hp)
+            .ThenBy(ally => ally.Id, StringComparer.Ordinal)
+            .FirstOrDefault()?.Id;
+    }
 
     /// <summary>
     /// Issue 269's Escape approach: the exit tile a unit leaves from this turn, or null. A
