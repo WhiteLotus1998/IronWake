@@ -1,0 +1,59 @@
+# Issue 524 (issue 131's next lever): the ford pair's spawn tiles. --full at 200 seeds, two-roll average, on main at 0f8ef2a.
+# shipped: content/maps/saltmarsh_ford.map, the north cut (DECISIONS/0093), pair at 0,9 and 1,9 (unchanged).
+# sf_45.map: the shipped file with the pair at 4,9 and 5,9 (the lean, not shipped: under the floor).
+# sf_78.map: the shipped file with the pair at 7,9 and 8,9 (the slope, not shipped).
+# Floor: gate 1 at 40/200 on the setting shipped. Neither setting holds it; content is unchanged (DECISIONS/0095).
+
+## summary
+setting    gate 1        timeouts  captain  win median  win p90  gate 4 median
+shipped    47/200 (23%)  129       24       11          16       0.055
+4,9 5,9    33/200 (17%)  150       17       11          17       0.010
+7,9 8,9    31/200 (15%)  156       13       11          15       0.010
+
+## saltmarsh_ford
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: content/maps/saltmarsh_ford.map, heuristic wins 47/200 (23 %), winning turn median 11 p90 16 limit 18, losses 129 timeout 24 captain 0 protected, quiet tail 2.2, refused kill p50 0.8674 over 129, at the stall p50 0.0111 over 128, two-roll average: FAILED
+gate 2 decisions matter: content/maps/saltmarsh_ford.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: content/maps/saltmarsh_ford.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: content/maps/saltmarsh_ford.map, 3 recruits x 200 seeds, median drop 0.055: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.055, se 0.038); rows are data, no recruit is judged
+  ottilie: drop 0.055 se 0.038 own [atk 608 dmg 5935 heal 0 abs 473] rest baseline [atk 1206 dmg 23139 heal 0 abs 3099] rest benched [atk 1343 dmg 28647 heal 0 abs 3382] benched losses 144 timeout 20 captain 0 protected, refused kill p50 0.8674 over 144, at the stall p50 0.0197 over 143
+  teodor: drop 0.040 se 0.040 own [atk 388 dmg 4608 heal 0 abs 771] rest baseline [atk 1426 dmg 24466 heal 0 abs 2801] rest benched [atk 1882 dmg 28763 heal 0 abs 3189] benched losses 139 timeout 22 captain 0 protected, refused kill p50 0.8775 over 139, at the stall p50 0.0192 over 139
+  wren: drop 0.125 se 0.037 own [atk 639 dmg 5097 heal 0 abs 473] rest baseline [atk 1175 dmg 23977 heal 0 abs 3099] rest benched [atk 1329 dmg 26450 heal 0 abs 3328] benched losses 148 timeout 30 captain 0 protected, refused kill p50 0.8674 over 148, at the stall p50 0.0084 over 146
+  captain captain: baseline [atk 179 dmg 13434 heal 0 abs 1855] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1473 ms: ok
+gate 5 forecast honesty: 10083 combats (4105 with gauntlets), 20766 strikes, hits 13005 expected 12927.5, crits 853 expected 896.7, damage mismatches 0: ok
+gate 7 speed: content/maps/saltmarsh_ford.map, 5 AI-vs-AI games, 83 turns, slowest 32 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 23247 ms: ok
+
+## sf_45
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sf_45.map, heuristic wins 33/200 (17 %), winning turn median 11 p90 17 limit 18, losses 150 timeout 17 captain 0 protected, quiet tail 2.3, refused kill p50 0.8664 over 150, at the stall p50 0.0111 over 150, two-roll average: FAILED
+gate 2 decisions matter: sf_45.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: sf_45.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: sf_45.map, 3 recruits x 200 seeds, median drop 0.010: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.010, se 0.037); rows are data, no recruit is judged
+  ottilie: drop 0.010 se 0.037 own [atk 613 dmg 6264 heal 0 abs 637] rest baseline [atk 1212 dmg 21803 heal 0 abs 3097] rest benched [atk 1310 dmg 28502 heal 0 abs 3388] benched losses 153 timeout 16 captain 0 protected, refused kill p50 0.8674 over 153, at the stall p50 0.0084 over 153
+  teodor: drop -0.030 se 0.036 own [atk 383 dmg 4630 heal 0 abs 774] rest baseline [atk 1442 dmg 23437 heal 0 abs 2960] rest benched [atk 1952 dmg 28346 heal 0 abs 3138] benched losses 145 timeout 16 captain 0 protected, refused kill p50 0.8674 over 145, at the stall p50 0.0160 over 143
+  wren: drop 0.040 se 0.035 own [atk 623 dmg 5523 heal 0 abs 518] rest baseline [atk 1202 dmg 22544 heal 0 abs 3216] rest benched [atk 1378 dmg 26693 heal 0 abs 3420] benched losses 152 timeout 23 captain 0 protected, refused kill p50 0.8674 over 152, at the stall p50 0.0084 over 151
+  captain captain: baseline [atk 206 dmg 11650 heal 0 abs 1805] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1396 ms: ok
+gate 5 forecast honesty: 10088 combats (4105 with gauntlets), 20773 strikes, hits 13008 expected 12932.2, crits 854 expected 896.8, damage mismatches 0: ok
+gate 7 speed: sf_45.map, 5 AI-vs-AI games, 83 turns, slowest 31 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 22826 ms: ok
+
+## sf_78
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sf_78.map, heuristic wins 31/200 (15 %), winning turn median 11 p90 15 limit 18, losses 156 timeout 13 captain 0 protected, quiet tail 2.8, refused kill p50 0.8674 over 156, at the stall p50 0.0000 over 154, two-roll average: FAILED
+gate 2 decisions matter: sf_78.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: sf_78.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: sf_78.map, 3 recruits x 200 seeds, median drop 0.010: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.010, se 0.035); rows are data, no recruit is judged
+  ottilie: drop -0.015 se 0.036 own [atk 458 dmg 5162 heal 0 abs 583] rest baseline [atk 1133 dmg 21533 heal 0 abs 3054] rest benched [atk 1335 dmg 26765 heal 0 abs 3404] benched losses 145 timeout 21 captain 0 protected, refused kill p50 0.8674 over 145, at the stall p50 0.0090 over 145
+  teodor: drop 0.010 se 0.035 own [atk 383 dmg 4742 heal 0 abs 792] rest baseline [atk 1208 dmg 21953 heal 0 abs 2845] rest benched [atk 1669 dmg 27105 heal 0 abs 3111] benched losses 149 timeout 22 captain 0 protected, refused kill p50 0.8674 over 149, at the stall p50 0.0212 over 149
+  wren: drop 0.030 se 0.036 own [atk 561 dmg 6364 heal 0 abs 593] rest baseline [atk 1030 dmg 20331 heal 0 abs 3044] rest benched [atk 1236 dmg 25309 heal 0 abs 3460] benched losses 147 timeout 28 captain 0 protected, refused kill p50 0.8674 over 147, at the stall p50 0.0090 over 146
+  captain captain: baseline [atk 189 dmg 10427 heal 0 abs 1669] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1402 ms: ok
+gate 5 forecast honesty: 10093 combats (4105 with gauntlets), 20779 strikes, hits 13015 expected 12937.4, crits 854 expected 897.0, damage mismatches 0: ok
+gate 7 speed: sf_78.map, 5 AI-vs-AI games, 84 turns, slowest 36 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 22611 ms: ok
