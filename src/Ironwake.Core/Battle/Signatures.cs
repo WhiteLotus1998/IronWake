@@ -13,7 +13,7 @@ public enum SignatureKind
     /// <summary>Teodor: an ally within 2 acting after him strikes at +5; his own strike with an ally within 2 is at -10.</summary>
     Orders,
 
-    /// <summary>Ottilie: a strike or watch shot at a displayed hit under 50 is refused.</summary>
+    /// <summary>Ottilie: a strike or watch shot at a displayed hit under 65 is refused.</summary>
     Ledger,
 }
 
@@ -40,7 +40,7 @@ public static class Signatures
     public const int WatchedHit = 10;
 
     /// <summary>The displayed hit below which Ottilie refuses a strike or a watch shot.</summary>
-    public const int LedgerFloor = 50;
+    public const int LedgerFloor = 65;
 
     /// <summary>The signature <paramref name="unit"/> plays with on this board: its cast kind on a <c>signatures: on</c> map for a player unit, else null.</summary>
     public static SignatureKind? Of(BattleState state, GameContent content, BattleUnit unit) =>

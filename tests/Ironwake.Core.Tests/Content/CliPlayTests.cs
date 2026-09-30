@@ -959,22 +959,34 @@ public class CliPlayTests
 
     /// <summary>
     /// Issue 486's hand play: Code's seed 563 on <c>docs/samples/saltmarsh_ford_brace_signatures.map</c>,
-    /// the cadets' signature sample. Teodor waits so Ottilie and Wren strike under his orders, Wren
-    /// wakes the fort from 10,5 and cantos back behind the braced line, Teodor strikes the leader
-    /// from 9,0 where no ally is within 2 of him, and the captain kills under his orders on turn 10.
+    /// played under the ledger at 50. On turn 3 Ottilie shot a soldier in the forest at 60 under
+    /// Teodor's orders; with the ledger at 65 (issue 540) she refuses that shot, orders or not, so
+    /// the recorded play stops there under <c>--strict</c> and the transcript stays the 50 record.
     /// </summary>
     [Fact]
-    public void TheSignatureSamplePlayReplaysWithTheCadetsSignatures()
+    public void TheWarmSignaturePlayStopsWhereTheLedgerAtSixtyFiveRefusesOttilie()
     {
         var output = RunSample("saltmarsh_ford_brace_signatures.map", "2026-09-30-saltmarsh_ford_brace_signatures-563.script", 563, out var exit);
 
+        Assert.Equal(PlaySession.StrictStop, exit);
+        Assert.Contains("ottilie will not shoot soldier-1 at 60: she bills the crown for every arrow and looses none under 65 (signature)\n", output);
+        Assert.Contains("strict: stopped at line 22 (attack ottilie soldier-1); no later command applied\n", output);
+    }
+
+    /// <summary>
+    /// Chat's cold play of the signature sample, seed 587 (round 145): every shot Ottilie took was
+    /// 65 or more, so it replays whole under the ledger at 65 (issue 540); Teodor's orders lift her
+    /// strike on the brigand, and the party routs the map.
+    /// </summary>
+    [Fact]
+    public void ChatsColdSignaturePlayReplaysUnderTheLedgerAtSixtyFive()
+    {
+        var output = RunSample("saltmarsh_ford_brace_signatures.map", "2026-09-30-saltmarsh_ford_brace_signatures-587.script", 587, out var exit);
+
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
-        Assert.Contains("forecast ottilie -> wingrider-1: dmg 19 hit 83% crit 3%; counter: none\n  signature: teodor's orders: ottilie hit +5\n", output);
-        Assert.Contains("group fort wakes: proximity\n", output);
-        Assert.Contains("wren cantos 10,5 -> 9,7 via 9,5 9,6\n", output);
-        Assert.Contains("forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%\n", output);
-        Assert.Contains("bandit_leader-1 falls at 10,0\n", output);
+        Assert.Contains("forecast ottilie -> brigand-1: dmg 8 hit 91% crit 5%; counter: none\n  signature: teodor's orders: ottilie hit +5\n", output);
+        Assert.DoesNotContain("will not shoot", output);
     }
 
     /// <summary>

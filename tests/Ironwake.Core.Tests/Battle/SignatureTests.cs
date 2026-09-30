@@ -11,7 +11,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// specify it), behind a map's <c>signatures: on</c> header: Wren counts tiles (Canto after any
 /// action) and talks (a combat she is in wakes a group at 8); Teodor orders (an ally within 2
 /// acting after him strikes at +5) and is watched (his own strike with an ally within 2 is at
-/// -10); Ottilie keeps a ledger (a strike or watch shot under 50 displayed is refused). Every
+/// -10); Ottilie keeps a ledger (a strike or watch shot under 65 displayed is refused). Every
 /// rule is falsified by the same board without the header.
 /// </summary>
 public class SignatureTests
@@ -291,7 +291,7 @@ public class SignatureTests
 
         Assert.Equal(RejectionReason.SignatureRefused, refused.Reason);
         Assert.Contains(shown.ToString(System.Globalization.CultureInfo.InvariantCulture), refused.Message);
-        Assert.Contains("under 50", refused.Message);
+        Assert.Contains("under 65", refused.Message);
     }
 
     [Fact]
@@ -329,7 +329,39 @@ public class SignatureTests
 
         var text = PlaySession.ForecastText(state, Starter, ottilie, brigand, forecast, ottilie.At, fromTile: false);
 
-        Assert.Contains($"  signature: ottilie refuses this strike: {forecast.Attacker.DisplayedHit} is under 50", text);
+        Assert.Contains($"  signature: ottilie refuses this strike: {forecast.Attacker.DisplayedHit} is under 65", text);
+    }
+
+    // The ledger and the orders interlock (issue 540): a soldier on a fort reads 60 alone and 68
+    // once Teodor has acted within 2 of her, so the hard shot is his to unlock.
+
+    private const string FortRows = """
+        ......
+        ......
+        ....F.
+        ......
+        ......
+        """;
+
+    private const string FortLine = """
+        P captain 0,0
+        P recruit:teodor 2,1
+        P recruit:ottilie 2,2
+        E soldier 4,2 group:fort behavior:hold
+        """;
+
+    [Fact]
+    public void TeodorsOrdersLiftOttiliesRefusedShotOverTheLedger()
+    {
+        var alone = Start(true, FortRows, FortLine);
+        var shownAlone = Queries.Forecast(alone, Starter, alone.Find("ottilie")!, alone.Find("soldier-1")!)!.Attacker.DisplayedHit;
+        Assert.InRange(shownAlone, Signatures.LedgerFloor - Signatures.OrdersHit, Signatures.LedgerFloor - 1);
+        Assert.Equal(RejectionReason.SignatureRefused, alone.Refused(new Attack("ottilie", "soldier-1")).Reason);
+
+        var ordered = Step(alone, new Wait("teodor")).Next;
+        Assert.True(Queries.Forecast(ordered, Starter, ordered.Find("ottilie")!, ordered.Find("soldier-1")!)!.Attacker.DisplayedHit >= Signatures.LedgerFloor);
+
+        Step(ordered, new Attack("ottilie", "soldier-1"));
     }
 
     private const string WatchLine = """
