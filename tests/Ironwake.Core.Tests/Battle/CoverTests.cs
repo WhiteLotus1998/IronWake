@@ -175,6 +175,17 @@ public class CoverTests
     }
 
     [Fact]
+    public void AUnitCannotCoverItself()
+    {
+        var result = Start().Try(new Cover("ta", "ta"));
+
+        Assert.False(result.Accepted);
+        Assert.Equal(RejectionReason.CannotCover, result.Rejection!.Reason);
+        Assert.Contains("ta cannot cover itself", result.Rejection.Message);
+        Assert.DoesNotContain(Resolver.Legal(Start(), Starter), c => c == new Cover("ta", "ta"));
+    }
+
+    [Fact]
     public void OneCoverPerAllyASecondCoverIsRefused()
     {
         var units = """

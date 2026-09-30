@@ -196,6 +196,25 @@ public class OverwatchTests
     }
 
     [Fact]
+    public void AnUnarmedUnitCannotWatch()
+    {
+        var units = """
+            P captain 0,0
+            P recruit:pell 2,1
+            E brigand 6,1 group:field behavior:aggressive
+
+            """;
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Unarmed), Field(true, units));
+
+        var result = state.Try(new Watch("pell"));
+
+        Assert.False(result.Accepted);
+        Assert.Equal(RejectionReason.CannotWatch, result.Rejection!.Reason);
+        Assert.Contains("pell has no weapon equipped", result.Rejection.Message);
+        Assert.DoesNotContain(Resolver.Legal(state, Starter), c => c is Watch { UnitId: "pell" });
+    }
+
+    [Fact]
     public void WatchNamesTheBestStrikeItPassesUp()
     {
         var units = """
