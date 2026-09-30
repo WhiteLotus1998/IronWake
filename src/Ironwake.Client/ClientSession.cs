@@ -25,8 +25,52 @@ public sealed record MovePreview(Coord Tile, string Terrain, int Cost, int Mov, 
         + (Asleep.Count > 0 ? $"  asleep: {string.Join(", ", Asleep)}" : "");
 }
 
-/// <summary>One forecast shown while a tile is hovered: the target, where it stands, and the console's forecast text.</summary>
-public sealed record HoverForecast(string TargetId, Coord TargetAt, string Text);
+/// <summary>One forecast shown while a tile is hovered: the target, where it stands, the console's forecast text, and the same forecast as the drawn card's data.</summary>
+public sealed record HoverForecast(string TargetId, Coord TargetAt, string Text, ForecastCard Card);
+
+/// <summary>
+/// One side of the drawn forecast (issue 512): who, with what, standing where, and the source of
+/// its avoid there (the terrain's name, tile and avoid for its movement), its HP now and at most,
+/// what it would have left if every strike the other side can make lands, and its own strike as
+/// the core forecast it (<see cref="SideForecast"/>), the very object the console's line formats.
+/// </summary>
+public sealed record ForecastSide(string Id, string Name, string ClassId, bool IsBoss, string Weapon, string Terrain, Coord Tile, int Avoid, int Hp, int MaxHp, int After, SideForecast Strike)
+{
+    /// <summary>The source of avoid as the card prints it beside the tile: <c>Forest 7,5 +20</c>.</summary>
+    public string Ground => $"{Terrain} {Tile.X},{Tile.Y} +{Avoid}";
+
+    /// <summary>The HP this side can lose to the other's strikes: the hatched part of its bar.</summary>
+    public int Cost => Hp - After;
+}
+
+/// <summary>
+/// The forecast as the showcase draws it (issue 512, <c>docs/look/forecast.svg</c>): the attacker
+/// on its hovered tile, the defender where it stands, and whether the attack raises a blow instead
+/// of fighting (DESIGN.md 13.16), which has no roll. Every number is a field of the
+/// <see cref="CombatForecast"/> <see cref="PlaySession.ForecastText"/> prints, never recomputed.
+/// </summary>
+public sealed record ForecastCard(ForecastSide Attacker, ForecastSide Defender, bool Raises)
+{
+    /// <summary>Who strikes first, the card's heading.</summary>
+    public string Heading => $"{Attacker.Name} strikes first";
+
+    /// <summary>The doubling note under the pips: who doubles, or that neither does.</summary>
+    public string Doubling =>
+        (Attacker.Strike.Doubles, Defender.Strike.Doubles) switch
+        {
+            (true, true) => "both double",
+            (true, false) => $"{Attacker.Name} doubles",
+            (false, true) => $"{Defender.Name} doubles",
+            _ => "neither doubles",
+        };
+}
+
+/// <summary>
+/// The drawn unit card (issue 512): the values the console's <c>show</c> prints on its first
+/// three lines, as data: name, class and level, the side, HP, the stats, Mov, the equipped
+/// weapon's name (or <c>unarmed</c>), and the terrain the unit stands on.
+/// </summary>
+public sealed record UnitCard(string Id, string Name, string ClassId, string ClassName, int Level, Side Side, bool IsCaptain, bool IsBoss, int Hp, int MaxHp, Stats Stats, int Mov, string Weapon, string WeaponLine, string Terrain, Coord At);
 
 /// <summary>
 /// What the board marks for the event line last revealed in the enemy phase (issue 349): the
@@ -139,11 +183,50 @@ public sealed class ClientSession
         {
             if (Queries.Forecast(State, Content, unit, target, tile) is { } forecast)
             {
-                lines.Add(new HoverForecast(target.Id, target.At, PlaySession.ForecastText(State, Content, unit, target, forecast, tile, tile != unit.At)));
+                lines.Add(new HoverForecast(target.Id, target.At, PlaySession.ForecastText(State, Content, unit, target, forecast, tile, tile != unit.At), CardOf(unit, target, forecast, tile)));
             }
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// The drawn forecast's data for <paramref name="unit"/> striking <paramref name="target"/>
+    /// from <paramref name="tile"/>: both sides read from the one <see cref="CombatForecast"/>.
+    /// A side's HP after is its HP less the other side's damage times every strike it can make,
+    /// never below 0, the no-crit reading of <c>threat</c>'s "if all land".
+    /// </summary>
+    private ForecastCard CardOf(BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile)
+    {
+        var raises = Windup.Raises(State, Resolver.ChooseWeapon(unit, Content, null).Weapon);
+        ForecastSide Side(BattleUnit who, Coord at, SideForecast own, SideForecast against)
+        {
+            var terrain = State.Map.TerrainAt(at, Content);
+            var max = who.MaxHp(Content);
+            var lost = against.Strikes ? against.Damage * against.StrikeCount : 0;
+            var weapon = who.EquippedWeapon(Content)?.Name ?? "unarmed";
+            return new ForecastSide(who.Id, who.Unit.Name, who.Unit.ClassId, who.IsBoss, weapon, terrain.Name, at,
+                terrain.AvoidFor(Content.Class(who.Unit.ClassId).Movement), who.Hp, max, Math.Max(0, who.Hp - lost), own);
+        }
+
+        return new ForecastCard(Side(unit, tile, forecast.Attacker, forecast.Defender), Side(target, target.At, forecast.Defender, forecast.Attacker), raises);
+    }
+
+    /// <summary>
+    /// The unit card (issue 512) for the unit on a tile, or null for an empty tile or an enemy the
+    /// dark hides, as <see cref="Show"/> refuses it; read from the values <c>show</c> prints.
+    /// </summary>
+    public UnitCard? Card(Coord at)
+    {
+        if (UnitAt(at) is not { } unit || !Dusk.Seen(State, unit))
+        {
+            return null;
+        }
+
+        var stats = Content.StatsOf(unit.Unit);
+        var unitClass = Content.Class(unit.Unit.ClassId);
+        return new UnitCard(unit.Id, unit.Unit.Name, unit.Unit.ClassId, unitClass.Name, unit.Unit.Level, unit.Side, unit.IsCaptain, unit.IsBoss,
+            unit.Hp, stats.Hp, stats, unitClass.Mov, unit.EquippedWeapon(Content)?.Name ?? "unarmed", PlaySession.WeaponLine(unit, Content), State.Map.TerrainAt(unit.At, Content).Name, unit.At);
     }
 
     /// <summary>
@@ -169,10 +252,18 @@ public sealed class ClientSession
     /// with no selection, while the enemy phase plays, from a tile the unit cannot end on, and
     /// whenever <see cref="Hover"/> has a strike to price there.
     /// </summary>
-    public MovePreview? Preview(Coord tile)
+    public MovePreview? Preview(Coord tile) => Hover(tile).Count > 0 ? null : Stop(tile);
+
+    /// <summary>
+    /// The move preview's values for a stop on <paramref name="tile"/> whether or not a strike
+    /// is priced there (issue 512): the drawn forecast prints it under the card, as the threat
+    /// on the selected unit in the preview's own words. Null with no selection, while the enemy
+    /// phase plays, and from a tile the unit cannot end on.
+    /// </summary>
+    public MovePreview? Stop(Coord tile)
     {
         if (Selected is not { } id || State.Find(id) is not { } unit || EnemyPhasePlaying
-            || Reach?.EntryAt(tile) is not { CanEnd: true } entry || Hover(tile).Count > 0
+            || Reach?.EntryAt(tile) is not { CanEnd: true } entry
             || Queries.Threats(State, Content, unit, tile) is not { } lines)
         {
             return null;

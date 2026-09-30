@@ -25,7 +25,8 @@ namespace Ironwake.Godot;
 /// Recall browser; <c>--enemy-steps N</c> ends the player phase and reveals N enemy events. Keys: E
 /// ends the phase, Space reveals the enemy phase's next event and marks it on the board, C skips
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
-/// Escape clears the selection and closes the browser. An exported build finds <c>content/</c>
+/// Tab gives the column to the event log (<c>--log-open</c> opens with it), Escape clears the
+/// selection and closes the browser. An exported build finds <c>content/</c>
 /// beside its executable.
 /// With <c>--campaign</c> (issue 360) it plays the campaign through <see cref="CampaignClient"/>
 /// instead, from the first map or from <c>--from &lt;map&gt;</c>: the between-map screen shows the
@@ -47,11 +48,29 @@ public partial class Main : Node2D
     private const int RecallRowsShown = 40;
     private static readonly (string Key, string Does)[] Keys =
     {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("R", "recall"), ("T", "threat"), ("Esc", "clear"),
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), ("Esc", "clear"),
     };
-    private const float PanelBottom = ViewHeight - 30;
-    private static readonly Vector2 Board = new(Margin, Top);
-    private static readonly Vector2 PanelOrigin = new(ViewWidth - PanelWidth - Margin, Top);
+
+    /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
+    private const int LegendRoom = 76;
+
+    /// <summary>The lowest baseline the footer leaves free.</summary>
+    private const int FooterTop = ViewHeight - 40;
+
+    /// <summary>
+    /// How far the board and the column drop below the top bar (issue 512): the board, its legend
+    /// and the column beside them are one block centred between the top bar and the footer, so a
+    /// short map leaves an even margin rather than a dead quadrant under its legend.
+    /// </summary>
+    private float Lift => _client is null ? 0 : Math.Max(0, (FooterTop - Top - (_client.State.Map.Height * _tile + LegendRoom)) / 2f);
+
+    private Vector2 Board => new(Margin, Top + Lift);
+
+    /// <summary>The column's top left, level with the board's top.</summary>
+    private Vector2 PanelOrigin => new(ViewWidth - PanelWidth - Margin, Board.Y + 12);
+
+    /// <summary>The column's lowest baseline (issue 512): its height follows the board's and its legend's, not the window's.</summary>
+    private float PanelBottom => _client is null ? FooterTop : Board.Y + _client.State.Map.Height * _tile + LegendRoom;
 
     private static readonly Color Background = UiColour("ink");
     private static readonly Color Box = UiColour("panel");
@@ -81,6 +100,9 @@ public partial class Main : Node2D
 
     /// <summary>Whether the board hatches every tile a seen enemy could strike next phase, a tile no unit can stand on left bare; T toggles it.</summary>
     private bool _threatShown;
+
+    /// <summary>Whether the column shows the event log (issue 512); Tab toggles it, and while it is closed the newest line stays on screen as one row.</summary>
+    private bool _logOpen;
 
     /// <summary>The tile size for the open map, the largest up to 44 px that leaves room for the legend and the panel.</summary>
     private int _tile = 40;
@@ -166,6 +188,7 @@ public partial class Main : Node2D
             _hover = CoordArg(args, "--hover");
             _recallOpen = Array.IndexOf(args, "--recall") >= 0;
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
+            _logOpen = Array.IndexOf(args, "--log-open") >= 0;
             _screenshot = Arg(args, "--screenshot");
         }
         catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
@@ -263,6 +286,9 @@ public partial class Main : Node2D
                         break;
                     case Key.T:
                         _threatShown = !_threatShown;
+                        break;
+                    case Key.Tab:
+                        _logOpen = !_logOpen;
                         break;
                     case Key.Escape:
                         _client.ClearSelection();
@@ -506,9 +532,24 @@ public partial class Main : Node2D
             }
         }
 
+        // The threat hatch goes under the terrain's ink (round 138): the pines sit on the danger.
+        var threat = _threatShown ? _client.EnemyThreat : null;
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < map.Width; x++)
+            {
+                var at = new Coord(x, y);
+                if (threat is not null && threat.Contains(at) && _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null))
+                {
+                    DrawThreatMark(at);
+                }
+
+                DrawDetail(map, at, map.TerrainIdAt(at));
+            }
+        }
+
         DrawShadows(map);
         DrawGrid(map);
-        var threat = _threatShown ? _client.EnemyThreat : null;
         for (var y = 0; y < map.Height; y++)
         {
             for (var x = 0; x < map.Width; x++)
@@ -528,11 +569,6 @@ public partial class Main : Node2D
                 if (map.Win == WinCondition.Seize && map.IsThrone(at))
                 {
                     DrawRect(rect.Grow(-2 * S), UiColour("ink"), filled: false, width: 2 * S);
-                }
-
-                if (threat is not null && threat.Contains(at) && _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null))
-                {
-                    DrawThreatMark(at);
                 }
 
                 if (reach is not null && reach.CanEnd(at))
@@ -735,14 +771,14 @@ public partial class Main : Node2D
 
     /// <summary>
     /// The side panel, top to bottom: status, the enemy phase's keys, then either the Recall
-    /// browser or the forecast and threat (boxed, first, where the eye lands), the unit panel,
-    /// and the event log, newest at the bottom, the line the board marks drawn in the mark colour.
+    /// browser or the drawn forecast with the threat on a stop under it (issue 512; boxed, first,
+    /// where the eye lands), the drawn unit card, and the event log, open on Tab.
     /// </summary>
     private void DrawPanel()
     {
         var client = _client!;
         var y = PanelOrigin.Y;
-        y = Row(y, client.Objective, Ink) + 4;
+        y = UiRows(y, client.Objective, Ink, 13) + 4;
         foreach (var text in StatusLines())
         {
             y = Row(y, text, Warn);
@@ -781,20 +817,40 @@ public partial class Main : Node2D
             return;
         }
 
-        y = Title(y, "FORECAST");
-        var boxTop = y;
-        if (_hover is { } spot && client.Preview(spot) is { } preview)
+        if (_logOpen)
         {
-            // The move preview (issue 511): one line, the verdict's dot frost when safe and bone when struck.
-            Card(new Rect2(PanelOrigin.X - 8, boxTop - LineHeight + 1, PanelWidth + 16, LineHeight + 10), Box, 8);
-            DrawCircle(new Vector2(PanelOrigin.X + 5, y - 4), 5, preview.Safe ? MarkColour("reach") : EnemyMark);
-            UiText(new Vector2(PanelOrigin.X + 16, y), preview.Text, Ink, 13);
-            y += LineHeight;
+            DrawLog(y);
+            return;
+        }
+
+        var boxTop = y - LineHeight + 4;
+        var cards = _hover is { } tile && !client.EnemyPhasePlaying ? client.Hover(tile) : Array.Empty<HoverForecast>();
+        if (cards.Count > 0)
+        {
+            // The drawn forecast (issue 512), then the threat on the unit if it stops there, in the move preview's words.
+            y = DrawForecastCard(boxTop, cards[0].Card) + 22;
+            foreach (var other in cards.Skip(1))
+            {
+                var o = other.Card.Defender;
+                UiText(new Vector2(PanelOrigin.X, y), $"also in reach: {o.Name} {other.TargetAt.X},{other.TargetAt.Y}  hit {other.Card.Attacker.Strike.DisplayedHit}  dmg {other.Card.Attacker.Strike.Damage}", Muted, 12);
+                y += LineHeight;
+            }
+
+            if (client.Stop(_hover!.Value) is { } stop)
+            {
+                y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
+            }
+        }
+        else if (_hover is { } spot && client.Preview(spot) is { } preview)
+        {
+            y = Title(y, "FORECAST");
+            y = PreviewRow(y, preview, "");
         }
         else
         {
+            y = Title(y, "FORECAST");
             var forecast = ForecastLines().ToList();
-            Card(new Rect2(PanelOrigin.X - 8, boxTop - LineHeight + 1, PanelWidth + 16, Wrapped(forecast).Count() * LineHeight + 10), Box, 8);
+            Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, Wrapped(forecast).Count() * LineHeight + 10), Box, 8);
             foreach (var text in forecast)
             {
                 y = Row(y, text, Ink);
@@ -803,20 +859,34 @@ public partial class Main : Node2D
 
         y += 10;
         var unitAt = _hover is { } over && client.UnitAt(over) is not null ? over : client.Selected is { } id ? client.State.Find(id)?.At : null;
-        if (unitAt is { } at && client.Show(at) is { } show)
+        if (unitAt is { } at && client.Card(at) is { } unitCard && y - LineHeight + 4 + UnitCardHeight <= PanelBottom - 2 * LineHeight)
         {
-            y = Title(y, "UNIT");
-            foreach (var text in show.Take(3))
-            {
-                y = Row(y, text, Ink);
-            }
-
-            y += 10;
+            y = DrawUnitCard(y - LineHeight + 4, unitCard) + LineHeight + 12;
         }
 
-        y = Title(y, "EVENT LOG");
+        DrawLog(y);
+    }
+
+    /// <summary>The move preview's one line on a card (issue 511): the verdict's dot frost when safe and bone when struck.</summary>
+    private float PreviewRow(float y, MovePreview preview, string lead)
+    {
+        Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, LineHeight + 10), Box, 8);
+        DrawCircle(new Vector2(PanelOrigin.X + 5, y - 4), 5, preview.Safe ? MarkColour("reach") : EnemyMark);
+        UiText(new Vector2(PanelOrigin.X + 16, y), lead + preview.Text, Ink, 13);
+        return y + LineHeight + 4;
+    }
+
+    /// <summary>
+    /// The event log (issue 512) from <paramref name="y"/> to the column's foot, newest at the
+    /// bottom, the line the board marks drawn in the mark colour: under the cards, the newest
+    /// lines that fit and at least one, so the enemy phase still reads; with Tab, the whole column
+    /// under the status lines, the cards set aside.
+    /// </summary>
+    private void DrawLog(float y)
+    {
+        var client = _client!;
         var log = client.Log;
-        var rows2 = new List<(string Text, bool Marked)>();
+        var rows = new List<(string Text, bool Marked)>();
         for (var i = 0; i < log.Count; i++)
         {
             var marked = i == log.Count - 1 && client.Playing is not null && client.EnemyPhasePlaying;
@@ -824,13 +894,15 @@ public partial class Main : Node2D
             {
                 foreach (var row in TextLayout.Wrap(line, Columns))
                 {
-                    rows2.Add((row, marked));
+                    rows.Add((row, marked));
                 }
             }
         }
 
-        var room = Math.Max(0, (int)((PanelBottom - y) / LineHeight));
-        foreach (var (text, marked) in rows2.Skip(Math.Max(0, rows2.Count - room)))
+        // Closed, the newest lines fill what the cards leave, one at the least; open, the log has the column.
+        y = Title(Math.Min(y, PanelBottom - LineHeight - 4), _logOpen ? "EVENT LOG  Tab closes it" : "EVENT LOG  Tab for the whole log");
+        var room = Math.Max(0, (int)((PanelBottom + LineHeight - y) / LineHeight));
+        foreach (var (text, marked) in rows.Skip(Math.Max(0, rows.Count - room)))
         {
             if (marked)
             {
@@ -934,6 +1006,30 @@ public partial class Main : Node2D
         }
 
         return y;
+    }
+
+    /// <summary>
+    /// Text in the UI face wrapped at word breaks to the column's width in pixels (issue 512), a
+    /// row every <paramref name="size"/> plus five pixels; returns the baseline below it.
+    /// </summary>
+    private float UiRows(float y, string text, Color colour, int size)
+    {
+        var line = "";
+        foreach (var word in text.Split(' '))
+        {
+            var next = line.Length == 0 ? word : line + " " + word;
+            if (line.Length > 0 && UiWidth(next, size) > PanelWidth)
+            {
+                UiText(new Vector2(PanelOrigin.X, y), line, colour, size);
+                y += size + 5;
+                next = word;
+            }
+
+            line = next;
+        }
+
+        UiText(new Vector2(PanelOrigin.X, y), line, colour, size);
+        return y + size + 5;
     }
 
     private float Title(float y, string title)
