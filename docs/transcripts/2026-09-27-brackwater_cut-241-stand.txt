@@ -1211,6 +1211,7 @@ dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack dunstan brigand-1
 forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
+  counter: lethal to dunstan (9 against 5 hp)
 dunstan attacks brigand-1
   dunstan hits brigand-1 for 11 (hp 0)
   dunstan hp 5, brigand-1 hp 0

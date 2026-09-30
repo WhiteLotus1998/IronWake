@@ -587,6 +587,7 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  counter: lethal to ansgar (10 against 10 hp)
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0
@@ -720,6 +721,7 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  counter: lethal to ansgar (10 against 10 hp)
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0
@@ -831,6 +833,7 @@ d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  counter: lethal to ansgar (10 against 10 hp)
 ansgar attacks soldier-2
   ansgar hits soldier-2 for 9 (hp 0)
   ansgar hp 10, soldier-2 hp 0

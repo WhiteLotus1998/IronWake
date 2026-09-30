@@ -2227,6 +2227,7 @@ overwatch: a unit whose weapon reaches 2 may watch; the first foe to end a move 
 watches: archer-1 at 14,4 over 14,2 13,3 15,3 12,4 13,5 15,5 14,6
 > attack ottilie weir_foreman-1
 forecast ottilie -> weir_foreman-1: dmg 6 hit 82% crit 3%; counter: dmg 12 hit 54% crit 0%
+  counter: lethal to ottilie (12 against 5 hp)
 ottilie attacks weir_foreman-1
   ottilie hits weir_foreman-1 for 6 (hp 0)
   ottilie hp 5, weir_foreman-1 hp 0

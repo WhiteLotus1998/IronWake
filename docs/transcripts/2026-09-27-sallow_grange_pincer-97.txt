@@ -992,6 +992,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
 > attack wren brawler-1
 forecast wren -> brawler-1: dmg 10 hit 86% crit 4%; counter: dmg 7 x2 hit 83% crit 0%
+  counter: lethal to wren (14 against 6 hp)
 wren attacks brawler-1
   wren hits brawler-1 for 10 (hp 3)
   brawler-1 hits wren for 7 (hp 0)
@@ -1197,6 +1198,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
 > attack wren brawler-1
 forecast wren -> brawler-1: dmg 10 hit 97% crit 4%; counter: dmg 7 x2 hit 83% crit 0%
+  counter: lethal to wren (14 against 6 hp)
   pincer: brawler-1 pinned by ansgar: wren hit +15
 wren attacks brawler-1
   wren hits brawler-1 for 10 (hp 0)

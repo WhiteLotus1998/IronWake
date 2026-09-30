@@ -2518,6 +2518,7 @@ B  wren             Wren L1 cadet              10,1   hp 12/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 6 hit 63% crit 2%; counter with Toll Axe: dmg 12 hit 45% crit 0%
+  counter: lethal to wren (12 against 12 hp)
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 6 (hp 0)
   wren hp 12, bandit_leader-1 hp 0

@@ -2513,6 +2513,7 @@ B  teodor           Teodor L1 pikeman          12,7   hp 1/21   Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 7/28   Hill  group weir, boss, awake
 > attack pell weir_foreman-1 1
 forecast pell -> weir_foreman-1 with Gust: dmg 11 hit 99% crit 6%; counter: dmg 13 hit 60% crit 1%
+  counter: lethal to pell (13 against 3 hp)
 pell attacks weir_foreman-1
   pell hits weir_foreman-1 for 11 (hp 0)
   pell hp 3, weir_foreman-1 hp 0
