@@ -1965,11 +1965,80 @@ public class CliPlayTests
         {
             var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("  turn 3, enemy phase: 4,5 becomes water, unless one who cannot enter water stands on it.\n", output);
-            Assert.Contains("  turn 6, player phase: 4,5 becomes road.\n", output);
+            Assert.Contains("  turn 3, enemy phase: 4,5 5,5 6,5 7,5 become water, unless one who cannot enter water stands on it.\n", output);
+            Assert.Contains("  turn 6, player phase: 4,5 5,5 6,5 7,5 become road.\n", output);
         }
         finally
         {
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issue 600: terrain changes that share a turn, a phase and a target terrain are one
+    /// decision and announce as one line, the tiles in map order and the held-tile rule printed
+    /// once, where the tide sample printed four lines per flood.
+    /// </summary>
+    [Fact]
+    public void SameTurnFloodsAnnounceAsOneLineWithTheRuleOnce()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ebb_ford_tide.map");
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-tide-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+            var announce = output.Split('\n').Where(line => line.StartsWith("  turn ", StringComparison.Ordinal)).ToList();
+            Assert.Equal(
+                new[]
+                {
+                    "  turn 3, enemy phase: 4,5 5,5 6,5 7,5 become water, unless one who cannot enter water stands on it.",
+                    "  turn 6, player phase: 4,5 5,5 6,5 7,5 become road.",
+                    "  turn 8, enemy phase: 4,5 5,5 6,5 7,5 become water, unless one who cannot enter water stands on it.",
+                },
+                announce);
+            Assert.Equal(2, output.Split("unless one who cannot enter").Length - 1);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issue 600, the guard's other side: terrain changes on different turns, in different
+    /// phases or to different terrains stay on their own lines, and a lone change keeps the
+    /// singular.
+    /// </summary>
+    [Fact]
+    public void TerrainChangesOnOtherTurnsPhasesOrTerrainsAnnounceApart()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var sample = File.ReadAllText(Path.Combine(repo, "docs", "samples", "ebb_ford_tide.map")).ReplaceLineEndings("\n");
+        var events = sample.IndexOf("events:\n", StringComparison.Ordinal);
+        var map = Path.Combine(Path.GetTempPath(), "ironwake-tide-" + Guid.NewGuid().ToString("N") + ".map");
+        var script = Path.ChangeExtension(map, ".script");
+        File.WriteAllText(map, sample[..events] + "events:\na turn 3 enemy terrain 4,5 ~\nb turn 4 enemy terrain 5,5 ~\nc turn 3 player terrain 6,5 ~\nd turn 3 enemy terrain 7,5 .\ne turn 3 enemy terrain 5,5 ~\n");
+        File.WriteAllText(script, "");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            var announce = output.Split('\n').Where(line => line.StartsWith("  turn ", StringComparison.Ordinal)).ToList();
+            Assert.Equal(
+                new[]
+                {
+                    "  turn 3, enemy phase: 4,5 5,5 become water, unless one who cannot enter water stands on it.",
+                    "  turn 4, enemy phase: 5,5 becomes water, unless one who cannot enter water stands on it.",
+                    "  turn 3, player phase: 6,5 becomes water, unless one who cannot enter water stands on it.",
+                    "  turn 3, enemy phase: 7,5 becomes plain.",
+                },
+                announce);
+        }
+        finally
+        {
+            File.Delete(map);
             File.Delete(script);
         }
     }
