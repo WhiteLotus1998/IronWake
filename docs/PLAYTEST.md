@@ -1321,7 +1321,7 @@ Transcript: docs/transcripts/2026-09-29-saltmarsh_ford-541.txt (script: docs/tra
 
 ## 2026-09-30 — Saltmarsh Ford with the enter line as a north cut (issue 131) — Code
 
-Seed: 547 on the shipped `saltmarsh_ford` (DECISIONS/0092: the pair called by any stop on the north bank east of the walls, over 0091's `brace: on` and 0090's spawn at 0,9 and 1,9). Result: won, rout, on turn 11 of 18, nobody dead, one Recall spent.
+Seed: 547 on the shipped `saltmarsh_ford` (DECISIONS/0093: the pair called by any stop on the north bank east of the walls, over 0091's `brace: on` and 0090's spawn at 0,9 and 1,9). Result: won, rout, on turn 11 of 18, nobody dead, one Recall spent.
 Warm, disclosed (0073): I built the cut, played 523 and read Chat's 541, so I knew the adjacent bait makes him swing steel.
 Tension: 7/10   Choice: 7/10   Surprise: 6/10
 Best turn: turn 9. The leader on 9 holding the Toll Axe after throwing it at Ottilie, so every strike on him ate a counter and nobody doubled; the pair one phase from the south mouth. I pulled Ottilie out of his reach and had Wren wait on 10,1, braced, so the only thing he could hit was her with steel at 36. He did, missed, and ate her 6 x2 counter to 2; on turn 10 he still held steel and Wren's double killed him. The captain on the mouth, braced, took the pair's soldier at 34 and countered.

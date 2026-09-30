@@ -1369,7 +1369,7 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 131, the north cut (DECISIONS/0092): Code's play of the shipped Saltmarsh Ford
+    /// Issue 131, the north cut (DECISIONS/0093): Code's play of the shipped Saltmarsh Ford
     /// (seed 547) replays to its transcript: the south bank cleared by turn 5 with nothing
     /// called, the pair arriving on Wren's step to 10,1 on turn 7, and the rout won on turn 11.
     /// </summary>

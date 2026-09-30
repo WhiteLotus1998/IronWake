@@ -1,4 +1,4 @@
-# 0092 — Saltmarsh Ford: the pair are called by a cut across the north bank
+# 0093 — Saltmarsh Ford: the pair are called by a cut across the north bank
 
 Date: 2026-09-30. Issue 131, the lever Table round 125 (#503) named after Chat's cold re-rate of the shipped file (seed 541, 7/6/7, short on choice). Builds on 0029 (the Toll Axe), 0030 (the ford forest), 0090 (the spawn at the party's back) and 0091 (`brace: on`), which all stand.
 

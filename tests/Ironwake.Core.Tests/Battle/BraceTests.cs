@@ -407,7 +407,7 @@ public class BraceTests
     }
 
     /// <summary>
-    /// Issue 131, the north cut (DECISIONS/0092): the shipped Saltmarsh Ford is the braced file
+    /// Issue 131, the north cut (DECISIONS/0093): the shipped Saltmarsh Ford is the braced file
     /// (<c>docs/samples/saltmarsh_ford_0091.map</c>) with only the two enter lines moved from the
     /// east crossing's mouth to the north bank east of the walls, and canonical.
     /// </summary>

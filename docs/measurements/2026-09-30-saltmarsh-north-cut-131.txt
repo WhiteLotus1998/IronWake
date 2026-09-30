@@ -1,4 +1,4 @@
-# Issue 131, the enter line's cut (DECISIONS/0092). --full at 200 seeds, two rolls, on main at 2c0ea50.
+# Issue 131, the enter line's cut (DECISIONS/0093). --full at 200 seeds, two rolls, on main at 2c0ea50.
 # sf_north.map: the shipped file with both enter lines on the north cut (now shipped).
 # sf_south.map: the shipped file with the six south wake tiles added to the old mouth (not shipped).
 

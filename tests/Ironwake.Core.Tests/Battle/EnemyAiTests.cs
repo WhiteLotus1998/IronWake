@@ -221,7 +221,7 @@ public class EnemyAiTests
     }
 
     /// <summary>
-    /// Issue 131, the timing arm with the enter line as a north cut (DECISIONS/0090, 0092):
+    /// Issue 131, the timing arm with the enter line as a north cut (DECISIONS/0090, 0093):
     /// Saltmarsh Ford's ford group is not on the board at the start. It arrives, unannounced, on
     /// the south edge at 0,9 and 1,9, behind the party, when a player unit ends a Move on any
     /// north-bank tile east of the walls (rows 0 to 2, x 7 to 13, less the walls 7,1 and 8,1 and
@@ -257,7 +257,7 @@ public class EnemyAiTests
     }
 
     /// <summary>
-    /// Issue 131, the north cut (DECISIONS/0092): the south bank no longer calls the pair. The old
+    /// Issue 131, the north cut (DECISIONS/0093): the south bank no longer calls the pair. The old
     /// mouth (10,4, 9,4, 11,4, 10,5) and the six tiles that wake the fort by proximity off it
     /// (11,5, 12,4, 12,5, 12,6, 13,4, 13,5) fire nothing, so the fort can be fought south of the
     /// river and the pair still come only on the crossing.
