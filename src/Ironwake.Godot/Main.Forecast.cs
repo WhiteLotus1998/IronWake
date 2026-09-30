@@ -33,6 +33,12 @@ public partial class Main
         Vector2 P(float x, float y) => new(x0 + x, top + y);
         Card(new Rect2(x0 - 12, top, PanelWidth + 24, ForecastHeight), Box, 10);
         DrawString(_caps, P(8, 24), "FORECAST", fontSize: 11, modulate: Muted);
+        if (card.LevelUpLine is { } levelUp)
+        {
+            // A strike that would carry the unit across a level says so beside the title (issue 533).
+            UiText(P(20 + _caps.GetStringSize("FORECAST", fontSize: 11).X, 24), levelUp, Look(LookPalette.Player), 12, bold: true);
+        }
+
         UiText(P(PanelWidth - 8 - UiWidth(card.Heading, 12), 24), card.Heading, Muted, 12);
 
         // Who, with what, from where: the source of avoid beside each tile.
@@ -168,7 +174,7 @@ public partial class Main
 
     /// <summary>
     /// The unit card (issue 512): the silhouette on its disc, the name, class and level, where it
-    /// stands, the HP bar, the stats as a row of labelled numerals, and the weapon as the console's
+    /// stands, the HP bar and a player unit's EXP bar beside it (issue 533), the stats as a row of labelled numerals, and the weapon as the console's
     /// <c>show</c> prints it. Returns the card's bottom edge.
     /// </summary>
     private float DrawUnitCard(float top, UnitCard card)
@@ -181,8 +187,21 @@ public partial class Main
         var sub = $"{card.ClassName} L{card.Level}  |  {card.Terrain} {card.At.X},{card.At.Y}";
         UiText(P(60 + UiWidth(card.Name, 17, bold: true) + 10, 30), sub, Muted, 12);
         var colour = card.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone);
-        HpBar(new Rect2(P(60, 40), new Vector2(200, 10)), card.Hp, card.Hp, card.MaxHp, colour);
-        UiText(P(270, 50), $"{card.Hp} / {card.MaxHp}", Ink, 13, bold: true);
+        HpBar(new Rect2(P(60, 40), new Vector2(160, 10)), card.Hp, card.Hp, card.MaxHp, colour);
+        UiText(P(228, 50), $"{card.Hp} / {card.MaxHp}", Ink, 13, bold: true);
+        if (card.Exp is { } exp)
+        {
+            // The EXP bar beside HP (issue 533): a thin rule filling toward the next level, the number after it.
+            DrawString(_caps, P(318, 50), "EXP", fontSize: 9, modulate: Muted);
+            var bar = new Rect2(P(346, 42), new Vector2(110, 6));
+            Card(bar, UiColour("ink"), 3);
+            if (exp > 0)
+            {
+                Card(new Rect2(bar.Position, new Vector2(bar.Size.X * exp / Experience.LevelUpAt, bar.Size.Y)), new Color(colour, 0.8f), 3);
+            }
+
+            RightText(P(PanelWidth - 8, 50), exp.ToString(), Ink, 13, bold: true);
+        }
         var s = card.Stats;
         var columns = new (string Label, int Value)[]
         {

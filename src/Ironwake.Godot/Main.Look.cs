@@ -211,7 +211,33 @@ public partial class Main
     }
 
     /// <summary>The enemy's threat on a tile: a bone hatch, never a fill.</summary>
-    private void DrawThreatMark(Coord at) => Hatch(Cell(at).Grow(-1), MarkColour("threat", 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    private void DrawThreatMark(Coord at, bool faint = false) => Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+
+    /// <summary>The hatch's alpha for a sleeping group's reach (issue 533): there, but never mistaken for a waking one's.</summary>
+    private const float FaintThreat = 0.2f;
+
+    /// <summary>
+    /// A sleeping group's wake ring (issue 533): a dashed line in the threat mark along every edge
+    /// between a tile inside the ring and one outside it, so the reach never hides that stopping in wakes it.
+    /// </summary>
+    private void DrawWakeRing(IReadOnlySet<Coord> ring)
+    {
+        foreach (var at in ring)
+        {
+            var r = Cell(at);
+            var edges = new (Coord Next, Vector2 From, Vector2 To)[]
+            {
+                (new Coord(at.X, at.Y - 1), r.Position, new Vector2(r.End.X, r.Position.Y)),
+                (new Coord(at.X + 1, at.Y), new Vector2(r.End.X, r.Position.Y), r.End),
+                (new Coord(at.X, at.Y + 1), new Vector2(r.Position.X, r.End.Y), r.End),
+                (new Coord(at.X - 1, at.Y), r.Position, new Vector2(r.Position.X, r.End.Y)),
+            };
+            foreach (var (next, from, to) in edges.Where(e => !ring.Contains(e.Next)))
+            {
+                DrawDashedLine(from, to, MarkColour("threat", 0.9f), 2 * S, 5 * S, aligned: true, antialiased: true);
+            }
+        }
+    }
 
     /// <summary>The hovered tile: a dashed rectangle in the selected mark.</summary>
     private void DrawHoverMark(Coord at) => DashedRect(Cell(at).Grow(-3 * S), MarkColour("selected"), 2, 5 * S);

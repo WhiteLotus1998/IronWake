@@ -90,3 +90,13 @@ shot the_tollgate-113-callout-2 --map the_tollgate --seed 113 --callouts --selec
 shot the_tollgate-113-callout-3 --map the_tollgate --seed 113 --callouts --select 6,11 --hover 4,11
 shot the_tollgate-113-won --map the_tollgate --seed 113 --script "$PWD/docs/transcripts/2026-09-27-the_tollgate-113.script"
 shot the_tollgate-113-lost --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-lost.script"
+# Issue 533: the enemy reach overlay, one enemy's reach picked out by a click (the archer on 5,5)
+# and every seen reach on T, at the Tollgate's turn 3 and at Brackwater's dusk on seed 53; then the
+# unit card's EXP bar and a forecast that crosses a level: seed 113's transcript to turn 6, Pell
+# (68 EXP) selected on 6,4 pointing at 7,6 against the rider; on Saltmarsh seed 7 the fort group
+# asleep, its reach faint and its wake ring dashed.
+shot the_tollgate-113-reach-one --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn3.script" --select 5,5
+shot the_tollgate-113-reach-all --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn3.script" --threat
+shot brackwater_cut-53-reach-all --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-turn3.script" --threat
+shot the_tollgate-113-levelup --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-levelup.script" --select 6,4 --hover 7,6
+shot saltmarsh_ford-7-reach-asleep --map saltmarsh_ford --seed 7 --threat

@@ -10,11 +10,13 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 
 ## Palette
 
+**Lighter plain (issue 533).** Plain was lifted from `#748A66` (CIELAB L 54.9) to `#7E9470` (L 58.9), its hue and chroma held, one step under where `LookPaletteTests` first fails. The limit is hill, not road or amber: at `#7E9470` plain sits 12.1 from hill at its worst simulated vision, and at L 59.4 it would sit 11.8, under the 12 terrain floor. Against road it stays 14.0 apart and against amber (L 72) 43.1, so neither binds. A lighter plain than this needs hill moved too.
+
 `Ironwake.Client.LookPalette` holds these values; `LookPaletteTests` fails if this table, the class, or any colour in `docs/look/*.svg` disagree, and runs the readability pass's CIE76 and colour-vision checks on them (terrain 12 apart, sides 40, a side 20 from any ground it stands on, marks 12), plus the warmth rule: the player at chroma 55 or more, every other token at 32 or less, fire exempt as hatched. The client draws with it since slice 1 (#511); `Palette` stays for the colour-vision arithmetic it holds and its tests.
 
 | token | value | use |
 |---|---|---|
-| `terrain.plain` | `#748A66` | peat green, the board's ground |
+| `terrain.plain` | `#7E9470` | peat green, the board's ground; lightened from `#748A66` (issue 533) |
 | `terrain.road` | `#B3AE9C` | salt grey |
 | `terrain.forest` | `#4F6E54` | peat, between plain and water, three ink pines |
 | `terrain.hill` | `#B89E6C` | dry heath, one ink swell |
@@ -30,7 +32,7 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 | `enemy.bone` | `#E6E0D0` | bone: the enemy's silhouette, its hairline rim, HP and numerals, the enemy phase's marks |
 | `mark.selected` | `#F6D38A` | the selected unit, the hovered tile (dashed), the planned path (dotted) |
 | `mark.reach` | `#BFD9EA` | frost: tiles the selected unit can reach, a mark laid on the tile (a wash at about 16 percent, an inset edge), never a surface |
-| `mark.threat` | `#EDE6D6` | the enemy's reach, drawn as a diagonal hatch, never a fill |
+| `mark.threat` | `#EDE6D6` | the enemy's reach, drawn as a diagonal hatch, never a fill; a sleeping group's reach at alpha 0.2 against 0.5, its wake ring a dashed edge (issue 533) |
 | `mark.struck` | `#FFFFFF` | a unit just struck: a one-beat ring flash |
 | `ui.ink` | `#15181D` | the screen behind everything; glyphs on amber |
 | `ui.panel` | `#1E232A` | cards and chips |
