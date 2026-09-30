@@ -61,5 +61,8 @@ strip() {
   rm -rf "$tmp"
   echo "$name"
 }
-STILLS=(13 17 19)
-strip the_tollgate-113-enemy-strip 32 0.3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0
+# Slice 3b (issue 544): the death holds, so the phase runs longer; the stills are the kill with
+# its headline card, the fade, and the mark in its side's ring during the hold, then a 4x crop of it.
+STILLS=(12 15 18)
+strip the_tollgate-113-enemy-strip 36 0.3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0
+python3 docs/look/crop.py "$out/the_tollgate-113-enemy-strip-18.png" "$out/crop-fallen-mark-4x.png" 300 190 160 110

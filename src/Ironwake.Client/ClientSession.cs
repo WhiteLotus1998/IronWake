@@ -93,7 +93,8 @@ public sealed class ClientSession
 {
     private readonly List<string> _log = new();
     private readonly Queue<Command> _enemy = new();
-    private readonly Queue<(Highlight Mark, Beat? Beat, ActCard? Act)> _pending = new();
+    private readonly Queue<(Highlight Mark, Beat? Beat, ActCard? Act, bool First)> _pending = new();
+    private int _actLogStart;
     private readonly List<FallenMark> _fallen = new();
     private readonly Dictionary<string, BattleUnit> _ghosts = new();
 
@@ -154,8 +155,18 @@ public sealed class ClientSession
     /// </summary>
     public IReadOnlyCollection<BattleUnit> Ghosts => _ghosts.Values;
 
-    /// <summary>The enemy-act card (issue 513): the newest act the enemy phase has shown, or null outside it.</summary>
+    /// <summary>
+    /// The enemy-act card (issue 513): the newest act the enemy phase has shown, or null outside
+    /// it. A move, wait or other act without a strike leaves the phase's last strike's card up
+    /// (issue 544).
+    /// </summary>
     public ActCard? Act { get; private set; }
+
+    /// <summary>
+    /// The log while the enemy phase plays (issue 544, round 148): the lines of the command being
+    /// shown, from its first revealed line to the newest; the whole log once the phase has played.
+    /// </summary>
+    public IReadOnlyList<string> ActLog => EnemyPhasePlaying && Playing is not null ? _log.Skip(_actLogStart).ToList() : _log;
 
     /// <summary>The map's objective in the console's words, shown for the whole battle (issue 374).</summary>
     public string Objective => Ironwake.Core.Objective.Line(State, Content);
@@ -453,9 +464,11 @@ public sealed class ClientSession
             Record(command);
             var before = State;
             State = result.Next;
+            var first = true;
             if (dark)
             {
-                _pending.Enqueue((new Highlight(ProtocolSession.DarkLine, null, null, Array.Empty<Coord>(), null), null, null));
+                _pending.Enqueue((new Highlight(ProtocolSession.DarkLine, null, null, Array.Empty<Coord>(), null), null, null, first));
+                first = false;
             }
 
             foreach (var e in result.Events.Where(e => !dark || e is not UnitMoved and not UnitWaited))
@@ -465,14 +478,16 @@ public sealed class ClientSession
                     _ghosts[dead.Id] = dead;
                 }
 
-                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content)));
+                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content), first));
+                first = false;
             }
 
             if (!dark)
             {
                 foreach (var notice in Ironwake.Core.Objective.Notices(before, State, Content, command))
                 {
-                    _pending.Enqueue((new Highlight(notice, null, null, Array.Empty<Coord>(), null), null, null));
+                    _pending.Enqueue((new Highlight(notice, null, null, Array.Empty<Coord>(), null), null, null, first));
+                    first = false;
                 }
             }
         }
@@ -482,7 +497,12 @@ public sealed class ClientSession
             return false;
         }
 
-        var (mark, beat, act) = _pending.Dequeue();
+        var (mark, beat, act, opens) = _pending.Dequeue();
+        if (opens)
+        {
+            _actLogStart = _log.Count;
+        }
+
         Playing = mark;
         _log.Add(Playing.Line);
         Beats = beat is null ? Array.Empty<Beat>() : new[] { beat };
@@ -493,7 +513,7 @@ public sealed class ClientSession
             _fallen.Add(fell);
         }
 
-        Act = act ?? Act;
+        Act = act is { Attacker: null } && Act is { Attacker: not null } ? Act : act ?? Act;
         return true;
     }
 

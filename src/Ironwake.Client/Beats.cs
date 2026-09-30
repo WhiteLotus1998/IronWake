@@ -81,9 +81,17 @@ public sealed record Beat(
 /// <summary>
 /// The enemy-act card (issue 513, round 141): the forecast card's slot during the enemy phase,
 /// read after the fact. Who acted, what it did in the console's words, and for a strike both
-/// sides' HP before and after with each strike's result in order.
+/// sides' HP before and after with each strike's result in order. A strike that kills names the
+/// fallen unit (issue 544, round 148), so the card can put the death in its headline.
 /// </summary>
-public sealed record ActCard(string ActorId, string ActorName, string ActorClassId, string Doing, ActSide? Attacker, ActSide? Defender);
+public sealed record ActCard(string ActorId, string ActorName, string ActorClassId, string Doing, ActSide? Attacker, ActSide? Defender, string? Fallen = null)
+{
+    /// <summary>What the card leads with: the fallen unit's death when the act killed, else the actor's name.</summary>
+    public string Headline => Fallen is { } name ? $"{name} falls" : ActorName;
+
+    /// <summary>The line under the headline: what the actor did, or on a kill who struck the blow.</summary>
+    public string Subtitle => Fallen is null ? Doing : Attacker is { HpAfter: 0 } ? $"falls on the counter, striking {Defender?.Name}" : $"struck down by {ActorName}";
+}
 
 /// <summary>One side of a fought act: the unit, its HP before and after out of its max, and its strikes' results (<c>7</c>, <c>miss</c>, <c>crit 21</c>).</summary>
 public sealed record ActSide(string Id, string Name, string ClassId, bool IsBoss, int HpBefore, int HpAfter, int MaxHp, IReadOnlyList<string> Strikes);
@@ -104,8 +112,9 @@ public static class ActCards
             case CombatFought c when before.Find(c.AttackerId) is { } a && before.Find(c.TargetId) is { } t:
                 ActSide Side(BattleUnit u, int hpAfter) => new(u.Id, u.Unit.Name, u.Unit.ClassId, u.IsBoss, u.Hp, hpAfter, u.MaxHp(content),
                     c.Strikes.Where(s => s.AttackerId == u.Id).Select(s => !s.Hit ? "miss" : s.Crit ? $"crit {s.Damage}" : s.Damage.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToList());
-                var result = c.TargetHpAfter == 0 ? $"{t.Unit.Name} falls" : c.AttackerHpAfter == 0 ? $"{a.Unit.Name} falls" : "both stand";
-                return new ActCard(a.Id, a.Unit.Name, a.Unit.ClassId, $"strikes {t.Unit.Name}: {result}", Side(a, c.AttackerHpAfter), Side(t, c.TargetHpAfter));
+                var fallen = c.TargetHpAfter == 0 ? t.Unit.Name : c.AttackerHpAfter == 0 ? a.Unit.Name : null;
+                var result = fallen is null ? "both stand" : $"{fallen} falls";
+                return new ActCard(a.Id, a.Unit.Name, a.Unit.ClassId, $"strikes {t.Unit.Name}: {result}", Side(a, c.AttackerHpAfter), Side(t, c.TargetHpAfter), fallen);
             case UnitMoved m:
                 return Solo(m.UnitId, $"moves to {m.To.X},{m.To.Y}");
             case Cantoed m:
@@ -120,4 +129,54 @@ public static class ActCards
                 return null;
         }
     }
+}
+
+/// <summary>
+/// The rhythm beats play to (issue 544, round 148), in seconds at normal speed: a walk and a miss
+/// are quick, a hit gets a beat, a crit a longer one, and a death holds still before the next act,
+/// so the one story beat of a phase is not played at the weight of a miss. The renderer scales
+/// every number by its speed; skipping a beat skips its hold.
+/// </summary>
+public static class Rhythm
+{
+    /// <summary>The lean before a strike's first number lands.</summary>
+    public const float Lead = 0.15f;
+
+    /// <summary>How long a death's token takes to shrink into its mark.</summary>
+    public const float Fade = 0.5f;
+
+    /// <summary>The stillness after a death, before anything else moves.</summary>
+    public const float DeathHold = 0.6f;
+
+    /// <summary>The pause after an act before the next is shown.</summary>
+    public const float Gap = 0.3f;
+
+    /// <summary>How long one strike holds the stage before the next: a miss is quick, a hit gets a beat, a crit more.</summary>
+    public static float StrikeStep(Pop pop) => pop.Kind switch
+    {
+        PopKind.Miss => 0.35f,
+        PopKind.Crit => 0.75f,
+        _ => 0.55f,
+    };
+
+    /// <summary>When each of a strike beat's numbers lands, from the beat's start.</summary>
+    public static IReadOnlyList<float> PopTimes(Beat beat)
+    {
+        var times = new float[beat.Pops.Count];
+        var t = Lead;
+        for (var i = 0; i < beat.Pops.Count; i++)
+        {
+            times[i] = t;
+            t += StrikeStep(beat.Pops[i]);
+        }
+
+        return times;
+    }
+
+    /// <summary>A beat's whole length: a walk by its steps, a strike by its numbers, a death by its fade and hold.</summary>
+    public static float Length(Beat beat) =>
+        beat.IsMove ? 0.1f + 0.07f * (beat.Path.Count + 1)
+        : beat.IsStrike ? Lead + beat.Pops.Sum(StrikeStep) + 0.1f
+        : beat.Fell is not null ? Fade + DeathHold
+        : 0;
 }
