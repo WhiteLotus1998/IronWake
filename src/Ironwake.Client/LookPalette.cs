@@ -5,7 +5,7 @@ namespace Ironwake.Client;
 /// side the only warm thing on the board, and the enemy inside the world's cold. These are
 /// the literal values <c>docs/LOOK.md</c> lists and <c>docs/look/*.svg</c> draws with; the
 /// palette tests hold all three to each other and to the same colour-vision checks as
-/// <see cref="Palette"/>, which the client keeps drawing with until the next slice swaps it.
+/// <see cref="Palette"/>. The Godot client draws with it since slice 1 (issue 511).
 /// </summary>
 public static class LookPalette
 {
@@ -27,7 +27,7 @@ public static class LookPalette
     {
         ["plain"] = Hex("748A66"),
         ["road"] = Hex("B3AE9C"),
-        ["forest"] = Hex("3E5A45"),
+        ["forest"] = Hex("4F6E54"),
         ["hill"] = Hex("B89E6C"),
         ["mountain"] = Hex("77767C"),
         ["water"] = Hex("41667F"),

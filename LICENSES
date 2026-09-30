@@ -1,0 +1,16 @@
+Third-party files in this repository and their licences (DECISIONS/0092: fonts are OFL, sound
+is CC0 or cut). Everything not listed here is the project's own.
+
+Fonts (SIL Open Font License 1.1), vendored for the Godot client under src/Ironwake.Godot/fonts/:
+
+  Inter-Regular.ttf, Inter-Bold.ttf
+    Inter 4.1, https://github.com/rsms/inter (release v4.1, extras/ttf)
+    Copyright (c) 2016 The Inter Project Authors
+    Licence: src/Ironwake.Godot/fonts/Inter-OFL.txt
+
+  JetBrainsMono-Regular.ttf
+    JetBrains Mono 2.304, https://github.com/JetBrains/JetBrainsMono (release v2.304, fonts/ttf)
+    Copyright 2020 The JetBrains Mono Project Authors
+    Licence: src/Ironwake.Godot/fonts/JetBrainsMono-OFL.txt
+
+Sound: none yet.

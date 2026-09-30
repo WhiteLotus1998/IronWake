@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Renders the Godot client's review screenshots (issue 349): each shipped map at turn 1 with the
 # captain selected and a tile hovered, and mid enemy phase with one event marked; then the
-# slice screenshots CI and the earlier issues keep. Needs GODOT set to a Godot 4.3 .NET binary
+# slice screenshots CI and the earlier issues keep, and the showcase's review frames. Needs GODOT set to a Godot 4.3 .NET binary
 # and a display (xvfb-run supplies one). Run from the repository root.
 set -euo pipefail
 : "${GODOT:?set GODOT to the Godot 4.3 .NET binary}"
@@ -30,3 +30,11 @@ SHOTS
 shot brackwater_cut-53-turn3 --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-turn3.script" --select 11,3 --hover 11,3
 shot sallow_grange-61-recall --map sallow_grange --seed 61 --script "$PWD/$out/sallow_grange-61-recall.script" --recall
 shot the_tollgate-113-camp --campaign --from the_tollgate --seed 113
+# Showcase slice 1 (issue 511): seed 113 turn 3 with Teodor on 8,7 hovering 7,5, the forecast
+# priced against the Toll Brigand; the enemy frame again with the threat hatch on; then the
+# 4x crops (a player token, an enemy token on forest, the forecast), which need Pillow.
+shot the_tollgate-113-turn3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn3.script" --select 8,7 --hover 7,5
+shot the_tollgate-113-threat --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 5 --threat
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-player-4x.png" 368 356 44 44
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-enemy-forest-4x.png" 280 268 44 44
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-forecast-4x.png" 756 88 516 170

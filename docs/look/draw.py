@@ -1,5 +1,5 @@
 # Draws docs/look/*.svg (issue 510). Every colour comes from the CSS classes in style(), whose values are LookPalette.Tokens; PaletteTests holds the files to them.
-T=dict(plain='748A66',road='B3AE9C',forest='3E5A45',hill='B89E6C',mountain='77767C',water='41667F',fort='9FB0C4',wall='23272E',throne='E4E7EA',fire='943C0C')
+T=dict(plain='748A66',road='B3AE9C',forest='4F6E54',hill='B89E6C',mountain='77767C',water='41667F',fort='9FB0C4',wall='23272E',throne='E4E7EA',fire='943C0C')
 P='E8A33D'; PD='9A6420'; E='2F3742'; EB='E6E0D0'
 M=dict(selected='F6D38A',reach='BFD9EA',threat='EDE6D6',struck='FFFFFF')
 U=dict(ink='15181D',panel='1E232A',text='E9ECEF',muted='8C96A3',lost='5A6270')
@@ -12,7 +12,7 @@ def style():
          f".glyph-pf{{fill:#{U['ink']}}}",
          f".glyph-e{{fill:none;stroke:#{EB};stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}}",
          f".glyph-ef{{fill:#{EB}}}",
-         f".rim-e{{fill:none;stroke:#{EB};stroke-width:1.6}}", f".ring-lost{{fill:none;stroke:#{U['lost']};stroke-width:1.5}}"]
+         f".rim-e{{fill:none;stroke:#{EB};stroke-width:0.75}}", f".ring-lost{{fill:none;stroke:#{U['lost']};stroke-width:1.5}}"]
     for k,v in M.items(): s.append(f".m-{k}{{fill:#{v}}} .ms-{k}{{fill:none;stroke:#{v}}}")
     for k,v in U.items(): s.append(f".u-{k}{{fill:#{v}}}")
     s.append(f".ui{{font-family:{UIF};font-variant-numeric:tabular-nums}} .mono{{font-family:{MONO}}}")

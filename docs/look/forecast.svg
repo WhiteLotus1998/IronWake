@@ -3,7 +3,7 @@
 <style>
     .t-plain{fill:#748A66}
     .t-road{fill:#B3AE9C}
-    .t-forest{fill:#3E5A45}
+    .t-forest{fill:#4F6E54}
     .t-hill{fill:#B89E6C}
     .t-mountain{fill:#77767C}
     .t-water{fill:#41667F}
@@ -19,7 +19,7 @@
     .glyph-pf{fill:#15181D}
     .glyph-e{fill:none;stroke:#E6E0D0;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
     .glyph-ef{fill:#E6E0D0}
-    .rim-e{fill:none;stroke:#E6E0D0;stroke-width:1.6}
+    .rim-e{fill:none;stroke:#E6E0D0;stroke-width:0.75}
     .ring-lost{fill:none;stroke:#5A6270;stroke-width:1.5}
     .m-selected{fill:#F6D38A} .ms-selected{fill:none;stroke:#F6D38A}
     .m-reach{fill:#BFD9EA} .ms-reach{fill:none;stroke:#BFD9EA}
