@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300">
+<title>Ironwake silhouettes (issue 510)</title>
+<style>
+    .t-plain{fill:#748A66}
+    .t-road{fill:#B3AE9C}
+    .t-forest{fill:#3E5A45}
+    .t-hill{fill:#B89E6C}
+    .t-mountain{fill:#77767C}
+    .t-water{fill:#41667F}
+    .t-fort{fill:#9FB0C4}
+    .t-wall{fill:#23272E}
+    .t-throne{fill:#E4E7EA}
+    .t-fire{fill:#943C0C}
+    .player{fill:#E8A33D}
+    .player-deep{fill:#9A6420}
+    .enemy{fill:#2F3742}
+    .enemy-bone{fill:#E6E0D0}
+    .glyph-p{fill:none;stroke:#15181D;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .glyph-pf{fill:#15181D}
+    .glyph-e{fill:none;stroke:#E6E0D0;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .glyph-ef{fill:#E6E0D0}
+    .rim-e{fill:none;stroke:#E6E0D0;stroke-width:1.6}
+    .ring-lost{fill:none;stroke:#5A6270;stroke-width:1.5}
+    .m-selected{fill:#F6D38A} .ms-selected{fill:none;stroke:#F6D38A}
+    .m-reach{fill:#BFD9EA} .ms-reach{fill:none;stroke:#BFD9EA}
+    .m-threat{fill:#EDE6D6} .ms-threat{fill:none;stroke:#EDE6D6}
+    .m-struck{fill:#FFFFFF} .ms-struck{fill:none;stroke:#FFFFFF}
+    .u-ink{fill:#15181D}
+    .u-panel{fill:#1E232A}
+    .u-text{fill:#E9ECEF}
+    .u-muted{fill:#8C96A3}
+    .u-lost{fill:#5A6270}
+    .ui{font-family:Inter, 'DejaVu Sans', sans-serif;font-variant-numeric:tabular-nums} .mono{font-family:'JetBrains Mono', 'DejaVu Sans Mono', monospace}
+    .hatch-line{stroke:#943C0C;stroke-width:3}
+  </style>
+<rect class="u-ink" width="640" height="300"/>
+<rect class="t-plain" x="36" y="30" width="88" height="88" rx="6"/>
+<ellipse class="player-deep" cx="80" cy="73" rx="26" ry="25"/><circle class="player" cx="80" cy="70" r="26"/><path class="glyph-p" d="M80 58 L80 75 M74 73 L86 73 M80 75 L80 79"/><path class="glyph-pf" d="M78 61 L80 56 L82 61 Z"/><path class="player" d="M72 43 L72 35 L76 40 L80 33 L84 40 L88 35 L88 43 Z"/><path class="glyph-p" style="stroke-width:1.2" d="M72 43 L72 35 L76 40 L80 33 L84 40 L88 35 L88 43 Z"/><rect class="u-ink" x="64.0" y="97" width="32" height="6" rx="2"/><rect class="player" x="65.0" y="98" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="80" y="140" font-size="13" font-weight="700" text-anchor="middle" >Captain</text>
+<rect class="t-plain" x="156" y="30" width="88" height="88" rx="6"/>
+<ellipse class="player-deep" cx="200" cy="73" rx="26" ry="25"/><circle class="player" cx="200" cy="70" r="26"/><path class="glyph-p" d="M200 58 L200 75 M194 73 L206 73 M200 75 L200 79"/><path class="glyph-pf" d="M198 61 L200 56 L202 61 Z"/><rect class="u-ink" x="184.0" y="97" width="32" height="6" rx="2"/><rect class="player" x="185.0" y="98" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="200" y="140" font-size="13" font-weight="700" text-anchor="middle" >Cadet</text>
+<rect class="t-plain" x="276" y="30" width="88" height="88" rx="6"/>
+<ellipse class="player-deep" cx="320" cy="73" rx="26" ry="25"/><circle class="player" cx="320" cy="70" r="26"/><path class="glyph-p" d="M311 79 L327 61"/><path class="glyph-pf" d="M325 63 L331 57 L329 65 Z"/><rect class="u-ink" x="304.0" y="97" width="32" height="6" rx="2"/><rect class="player" x="305.0" y="98" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="320" y="140" font-size="13" font-weight="700" text-anchor="middle" >Pikeman</text>
+<rect class="t-plain" x="396" y="30" width="88" height="88" rx="6"/>
+<ellipse class="player-deep" cx="440" cy="73" rx="26" ry="25"/><circle class="player" cx="440" cy="70" r="26"/><path class="glyph-pf" d="M440 57 C448 65 447 77 440 78 C433 77 432 67 438 63 C438 67 440 69 441 67 C442 63 440 60 440 57 Z"/><rect class="u-ink" x="424.0" y="97" width="32" height="6" rx="2"/><rect class="player" x="425.0" y="98" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="440" y="140" font-size="13" font-weight="700" text-anchor="middle" >Adept</text>
+<rect class="t-plain" x="516" y="30" width="88" height="88" rx="6"/>
+<ellipse class="player-deep" cx="560" cy="73" rx="26" ry="25"/><circle class="player" cx="560" cy="70" r="26"/><path class="glyph-p" d="M556 58 Q570 69 556 80 M556 58 L556 80"/><path class="glyph-p" d="M551 69 L568 69"/><rect class="u-ink" x="544.0" y="97" width="32" height="6" rx="2"/><rect class="player" x="545.0" y="98" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="560" y="140" font-size="13" font-weight="700" text-anchor="middle" >Bowman</text>
+<rect class="t-plain" x="36" y="160" width="88" height="88" rx="6"/>
+<ellipse class="u-ink" opacity="0.55" cx="80" cy="203" rx="26" ry="25"/><circle class="enemy" cx="80" cy="200" r="26"/><circle class="rim-e" cx="80" cy="200" r="24.5"/><path class="glyph-e" d="M74 210 L84 190"/><path class="glyph-ef" d="M81 194 C86 187 92 191 91 196 C88 195 86 198 85 201 Z"/><rect class="u-ink" x="64.0" y="227" width="32" height="6" rx="2"/><rect class="enemy-bone" x="65.0" y="228" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="80" y="270" font-size="13" font-weight="700" text-anchor="middle" >Reaver</text>
+<rect class="t-plain" x="156" y="160" width="88" height="88" rx="6"/>
+<ellipse class="u-ink" opacity="0.55" cx="200" cy="203" rx="26" ry="25"/><circle class="enemy" cx="200" cy="200" r="26"/><circle class="rim-e" cx="200" cy="200" r="24.5"/><path class="glyph-e" d="M191 209 L207 191"/><path class="glyph-ef" d="M205 193 L211 187 L209 195 Z"/><path class="glyph-ef" d="M197 203 L190 199 L195 207 Z"/><rect class="u-ink" x="184.0" y="227" width="32" height="6" rx="2"/><rect class="enemy-bone" x="185.0" y="228" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="200" y="270" font-size="13" font-weight="700" text-anchor="middle" >Outrider</text>
+<rect class="t-plain" x="276" y="160" width="88" height="88" rx="6"/>
+<ellipse class="u-ink" opacity="0.55" cx="320" cy="203" rx="26" ry="25"/><circle class="enemy" cx="320" cy="200" r="26"/><circle class="rim-e" cx="320" cy="200" r="24.5"/><path class="glyph-e" d="M311 209 L327 191"/><path class="glyph-ef" d="M325 193 L331 187 L329 195 Z"/><path class="glyph-e" d="M321 197 L317 193 M321 197 L325 201"/><rect class="u-ink" x="304.0" y="227" width="32" height="6" rx="2"/><rect class="enemy-bone" x="305.0" y="228" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="320" y="270" font-size="13" font-weight="700" text-anchor="middle" >Toll Warden</text>
+<rect class="t-plain" x="396" y="160" width="88" height="88" rx="6"/>
+<ellipse class="u-ink" opacity="0.55" cx="440" cy="203" rx="26" ry="25"/><circle class="enemy" cx="440" cy="200" r="26"/><circle class="rim-e" cx="440" cy="200" r="24.5"/><circle class="rim-e" cx="440" cy="200" r="29" stroke-dasharray="3 2"/><path class="glyph-e" d="M434 210 L444 190"/><path class="glyph-ef" d="M441 194 C446 187 452 191 451 196 C448 195 446 198 445 201 Z"/><path class="glyph-ef" d="M441 194 C435 189 431 195 432 200 C435 198 437 199 438 200 Z"/><rect class="u-ink" x="424.0" y="227" width="32" height="6" rx="2"/><rect class="enemy-bone" x="425.0" y="228" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="440" y="270" font-size="13" font-weight="700" text-anchor="middle" >Bandit Leader</text>
+<rect class="t-plain" x="516" y="160" width="88" height="88" rx="6"/>
+<ellipse class="u-ink" opacity="0.55" cx="560" cy="203" rx="26" ry="25"/><circle class="enemy" cx="560" cy="200" r="26"/><circle class="rim-e" cx="560" cy="200" r="24.5"/><path class="glyph-e" d="M556 188 Q570 199 556 210 M556 188 L556 210"/><path class="glyph-e" d="M551 199 L568 199"/><rect class="u-ink" x="544.0" y="227" width="32" height="6" rx="2"/><rect class="enemy-bone" x="545.0" y="228" width="22" height="4" rx="1.5"/>
+<text class="ui u-text" x="560" y="270" font-size="13" font-weight="700" text-anchor="middle" >Archer</text>
+</svg>

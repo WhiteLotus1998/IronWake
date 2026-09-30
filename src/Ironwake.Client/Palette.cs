@@ -107,6 +107,13 @@ public static class ColourVision
     public static double WorstDistance(Rgb a, Rgb b) =>
         Enum.GetValues<Vision>().Min(vision => Distance(a, b, vision));
 
+    /// <summary>A colour's CIELAB chroma under D65: how far it sits from grey, whatever its hue.</summary>
+    public static double Chroma(Rgb colour)
+    {
+        var (_, a, b) = Lab(colour);
+        return Math.Sqrt(a * a + b * b);
+    }
+
     private static double ToLinear(byte channel)
     {
         var c = channel / 255.0;
