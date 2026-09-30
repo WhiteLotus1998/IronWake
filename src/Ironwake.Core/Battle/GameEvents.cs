@@ -97,8 +97,10 @@ public sealed record BlowBroken(string UnitId, Coord At) : GameEvent;
 /// <summary>
 /// A unit took Watch (DESIGN.md 13.17) on its tile. <paramref name="PassedUpTargetId"/> and
 /// <paramref name="PassedUpHit"/> name the best legal strike it gave up, displayed hit, when it had one (round 115).
+/// <paramref name="Holds"/> is set on an <c>overwatch: hold</c> map (13.17b), where
+/// <paramref name="HoldsInsteadOf"/> is the tile the move it gave up would have reached, null when no move was closer.
 /// </summary>
-public sealed record WatchTaken(string UnitId, Coord At, string? PassedUpTargetId = null, int? PassedUpHit = null) : GameEvent;
+public sealed record WatchTaken(string UnitId, Coord At, string? PassedUpTargetId = null, int? PassedUpHit = null, bool Holds = false, Coord? HoldsInsteadOf = null) : GameEvent;
 
 /// <summary>A watch fired on the unit that ended a move in its ring, before that unit acts: one strike, no counter (DESIGN.md 13.17).</summary>
 public sealed record WatchFired(string UnitId, string TargetId, Coord At, StrikeEvent Strike) : GameEvent;

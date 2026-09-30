@@ -107,7 +107,7 @@ public static class MapFormat
 
         if (map.OverwatchEnabled)
         {
-            sb.Append("overwatch: on\n");
+            sb.Append(map.OverwatchHold ? "overwatch: hold\n" : "overwatch: on\n");
         }
 
         if (map.CoverEnabled)
@@ -255,7 +255,13 @@ public static class MapFormat
             var brace = ParseOn(header, "brace");
             var wildfire = ParseOn(header, "wildfire");
             var windup = ParseOn(header, "windup");
-            var overwatch = ParseOn(header, "overwatch");
+            if (header.TryGetValue("overwatch", out var overwatchEntry) && overwatchEntry.Value is not ("on" or "hold"))
+            {
+                throw ErrorAt(overwatchEntry.Line, $"overwatch may only be 'on' or 'hold' (or absent), got '{overwatchEntry.Value}'");
+            }
+
+            var overwatchHold = overwatchEntry.Value == "hold";
+            var overwatch = header.ContainsKey("overwatch");
             if (overwatch && brace)
             {
                 throw ErrorAt(header["overwatch"].Line, "overwatch: on and brace: on are exclusive (DESIGN 13.17)");
@@ -284,7 +290,7 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, CoverEnabled = cover, SignaturesEnabled = signatures };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures };
             Validate(map);
             return map;
         }

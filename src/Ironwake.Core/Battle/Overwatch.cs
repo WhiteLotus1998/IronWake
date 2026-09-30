@@ -4,13 +4,18 @@ namespace Ironwake.Core;
 /// Overwatch (DESIGN.md 13.17, experiment), behind a map's <c>overwatch: on</c> header. A unit
 /// whose equipped weapon reaches range 2 may take <see cref="Watch"/> as its action. Until its
 /// side's next phase begins it watches its ring, the tiles exactly two steps away
-/// (<see cref="InRing"/>), never the tile beside it. The first unit of the other side to end a
+/// (<see cref="InRing(BattleUnit, Coord)"/>), never the tile beside it. The first unit of the other side to end a
 /// move (a Move or a Canto, never a shove or a spawn) on a ring tile its side can see is struck
 /// once before it acts: the watcher's normal hit, damage and crit, no counter, no double, keyed
 /// under <see cref="RollKey.Watch"/>. The watch is then spent. A strike on the watcher, hit or
 /// miss, ends the watch. An arrival inside two rings is shot by each in id order until one kills.
 /// A watch is its own action, not a Wait, so a watcher never braces. The watch is
 /// <see cref="BattleUnit.Watching"/>, so Recall restores it with the unit.
+/// Under <c>overwatch: hold</c> (DESIGN.md 13.17b, <see cref="MapDefinition.OverwatchHold"/>) the
+/// watch costs the move: only a player unit that has neither moved nor been shoved this turn may
+/// take it, its ring is every tile its equipped weapon reaches from where it stands on which some
+/// unit could stand (walls out), the enemy never watches, and the event names the move given up
+/// (<see cref="GivesUp"/>). Everything else is as above.
 /// </summary>
 public static class Overwatch
 {
@@ -23,15 +28,54 @@ public static class Overwatch
     /// <summary>Why <paramref name="unit"/> cannot watch now, or null when it can: the map needs the header and the equipped weapon must reach range 2.</summary>
     public static string? Refusal(BattleState state, GameContent content, BattleUnit unit) =>
         !state.Map.OverwatchEnabled ? "this map has no overwatch (overwatch: on)"
+        : state.Map.OverwatchHold && unit.Side != Side.Player ? "the enemy does not watch on this map (overwatch: hold)"
+        : state.Map.OverwatchHold && (unit.Moved || unit.Shoved) ? $"{unit.Id} has moved this turn; a watch holds the tile it began on"
         : unit.EquippedWeapon(content) is not { } weapon ? $"{unit.Id} has no weapon equipped"
-        : !weapon.InRange(Distance) ? $"{unit.Id}'s {weapon.Name} does not reach range {Distance}"
+        : !state.Map.OverwatchHold && !weapon.InRange(Distance) ? $"{unit.Id}'s {weapon.Name} does not reach range {Distance}"
         : null;
 
     /// <summary>Whether <paramref name="tile"/> lies in <paramref name="watcher"/>'s ring: exactly <see cref="Distance"/> steps away.</summary>
     public static bool InRing(BattleUnit watcher, Coord tile) => watcher.At.DistanceTo(tile) == Distance;
 
+    /// <summary>
+    /// Whether <paramref name="tile"/> lies in <paramref name="watcher"/>'s ring on this map: under
+    /// <c>overwatch: hold</c> a tile inside the map that its equipped weapon reaches and some unit
+    /// could stand on; otherwise exactly <see cref="Distance"/> steps away.
+    /// </summary>
+    public static bool InRing(BattleState state, GameContent content, BattleUnit watcher, Coord tile)
+    {
+        if (!state.Map.OverwatchHold)
+        {
+            return InRing(watcher, tile);
+        }
+
+        return state.Map.Contains(tile)
+            && watcher.EquippedWeapon(content) is { } weapon
+            && weapon.InRange(watcher.At.DistanceTo(tile))
+            && Enum.GetValues<MovementType>().Any(state.Map.TerrainAt(tile, content).IsPassable);
+    }
+
+    /// <summary><paramref name="watcher"/>'s ring on this map (<see cref="InRing(BattleState, GameContent, BattleUnit, Coord)"/>), row-major.</summary>
+    public static IReadOnlyList<Coord> RingOf(BattleState state, GameContent content, BattleUnit watcher)
+    {
+        var ring = new List<Coord>();
+        for (var y = 0; y < state.Map.Height; y++)
+        {
+            for (var x = 0; x < state.Map.Width; x++)
+            {
+                var tile = new Coord(x, y);
+                if (InRing(state, content, watcher, tile))
+                {
+                    ring.Add(tile);
+                }
+            }
+        }
+
+        return ring;
+    }
+
     /// <summary>The tiles under a watch, row-major: every watcher's ring inside the map. Empty on a map without the header.</summary>
-    public static IReadOnlyList<Coord> Marked(BattleState state)
+    public static IReadOnlyList<Coord> Marked(BattleState state, GameContent content)
     {
         if (!state.Map.OverwatchEnabled)
         {
@@ -41,7 +85,7 @@ public static class Overwatch
         var tiles = new SortedSet<Coord>();
         foreach (var watcher in state.Units.Where(u => u.Watching))
         {
-            foreach (var tile in Ring(watcher.At).Where(state.Map.Contains))
+            foreach (var tile in RingOf(state, content, watcher))
             {
                 tiles.Add(tile);
             }
@@ -51,10 +95,29 @@ public static class Overwatch
     }
 
     /// <summary>The living watchers whose ring holds <paramref name="tile"/> and who would shoot a unit of <paramref name="side"/> ending a move there, in id order.</summary>
-    public static IReadOnlyList<BattleUnit> WatchersOver(BattleState state, Side side, Coord tile) =>
-        state.Units.Where(u => u.Watching && u.Side != side && InRing(u, tile) && Dusk.Sees(state, u.Side, tile))
+    public static IReadOnlyList<BattleUnit> WatchersOver(BattleState state, GameContent content, Side side, Coord tile) =>
+        state.Units.Where(u => u.Watching && u.Side != side && InRing(state, content, u, tile) && Dusk.Sees(state, u.Side, tile))
             .OrderBy(u => u.Id, StringComparer.Ordinal)
             .ToList();
+
+    /// <summary>
+    /// Under <c>overwatch: hold</c> (DESIGN.md 13.17b), the move <paramref name="unit"/> gives up by
+    /// watching: the tile the Sim's planner walks a recruit to toward the nearest foe
+    /// (<see cref="EnemyAi.Approach"/> against every living unit of the other side). Null when that
+    /// tile is its own, when no foe can be approached, or when it has no weapon: <c>holds (no move closer)</c>.
+    /// </summary>
+    public static Coord? GivesUp(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (unit.EquippedWeapon(content) is not { } weapon)
+        {
+            return null;
+        }
+
+        var foes = state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).ToList();
+        var foesReach = foes.Select(f => state.ReachOf(f, content)).ToList();
+        var to = EnemyAi.Approach(state, content, unit, weapon, state.ReachOf(unit, content), foes, foesReach);
+        return to is { } tile && tile != unit.At ? tile : null;
+    }
 
     /// <summary>
     /// The best legal strike <paramref name="unit"/> passes up by watching where it stands: the
@@ -138,18 +201,5 @@ public static class Overwatch
             watcher.At.DistanceTo(target.At),
             state.Scheme).Attacker.DisplayedHit;
         return Signatures.Refuses(state, content, watcher, shown) ? shown : null;
-    }
-
-    private static IEnumerable<Coord> Ring(Coord at)
-    {
-        for (var dx = -Distance; dx <= Distance; dx++)
-        {
-            var dy = Distance - Math.Abs(dx);
-            yield return new Coord(at.X + dx, at.Y + dy);
-            if (dy != 0)
-            {
-                yield return new Coord(at.X + dx, at.Y - dy);
-            }
-        }
     }
 }

@@ -200,6 +200,18 @@ public static class ProtocolJson
                     w.WriteNumber("passesUpHit", t.PassedUpHit!.Value);
                 }
 
+                if (t.Holds)
+                {
+                    if (t.HoldsInsteadOf is { } instead)
+                    {
+                        WriteCoord(w, "holdsInsteadOf", instead);
+                    }
+                    else
+                    {
+                        w.WriteBoolean("noMoveCloser", true);
+                    }
+                }
+
                 break;
             case WatchFired f:
                 w.WriteString("unit", f.UnitId);
