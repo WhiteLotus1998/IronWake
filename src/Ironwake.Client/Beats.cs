@@ -195,10 +195,37 @@ public static class Rhythm
     }
 
     /// <summary>
-    /// How long a Recall's scrub runs (issue 514): the board folds back through every state the
-    /// rewind passes, each getting its share of this second.
+    /// How long a step of a Recall's scrub holds when it brings a unit back (issue 515, round
+    /// 153): a death or a kill undone is the one beat of the rewind nobody should miss.
     /// </summary>
-    public const float Scrub = 1.0f;
+    public const float ScrubHold = 0.3f;
+
+    /// <summary>How long every other step of a scrub takes at most: the blur around the holds.</summary>
+    public const float ScrubStep = 0.04f;
+
+    /// <summary>The length a scrub keeps under: the plain steps shrink to fit it, down to a frame each; the holds never shrink.</summary>
+    public const float ScrubCap = 1.5f;
+
+    /// <summary>The shortest a plain step gets when a long rewind is squeezed under the cap: one frame at 60 per second.</summary>
+    public const float ScrubFrame = 1f / 60;
+
+    /// <summary>
+    /// The length of each step of a scrub through <paramref name="frames"/> (newest first, as
+    /// <see cref="ClientSession.Scrub"/> holds them): <see cref="ScrubHold"/> for a step into a
+    /// frame holding a unit the newer one lacks, <see cref="ScrubStep"/> for the rest, the rest
+    /// shrunk so the whole stays within <see cref="ScrubCap"/> while it can. When the holds alone
+    /// pass the cap they win: each keeps its <see cref="ScrubHold"/> and the others take a frame.
+    /// </summary>
+    public static IReadOnlyList<float> ScrubLengths(IReadOnlyList<BattleState> frames)
+    {
+        var holds = Enumerable.Range(0, Math.Max(0, frames.Count - 1))
+            .Select(i => frames[i + 1].Units.Any(unit => frames[i].Find(unit.Id) is null))
+            .ToList();
+        var plain = holds.Count(hold => !hold);
+        var room = ScrubCap - ScrubHold * (holds.Count - plain);
+        var step = plain == 0 ? ScrubStep : Math.Clamp(room / plain, ScrubFrame, ScrubStep);
+        return holds.Select(hold => hold ? ScrubHold : step).ToList();
+    }
 
     /// <summary>
     /// When the RECALL chip starts to pulse on a death beat that carries one (issue 514, round
@@ -207,20 +234,24 @@ public static class Rhythm
     public const float PulseStart = Fade;
 
     /// <summary>
-    /// Where a scrub of <paramref name="frames"/> states stands at <paramref name="u"/> of its
-    /// length: the step it is on (from frame <c>Step</c> to frame <c>Step + 1</c>) and how far
-    /// through that step, each step an equal share. Past the end it rests on the last frame.
+    /// Where a scrub whose steps last <paramref name="lengths"/> stands <paramref name="seconds"/>
+    /// after it began: the step it is on (from frame <c>Step</c> to frame <c>Step + 1</c>) and how
+    /// far through that step. Past the end it rests on the last frame.
     /// </summary>
-    public static (int Step, float Through) ScrubAt(int frames, float u)
+    public static (int Step, float Through) ScrubAt(IReadOnlyList<float> lengths, float seconds)
     {
-        if (frames < 2 || u >= 1)
+        var t = Math.Max(0, seconds);
+        for (var i = 0; i < lengths.Count; i++)
         {
-            return (Math.Max(0, frames - 2), 1);
+            if (t < lengths[i])
+            {
+                return (i, t / lengths[i]);
+            }
+
+            t -= lengths[i];
         }
 
-        var f = Math.Max(0, u) * (frames - 1);
-        var step = Math.Min((int)f, frames - 2);
-        return (step, f - step);
+        return (Math.Max(0, lengths.Count - 1), 1);
     }
 
     /// <summary>A beat's whole length: a walk by its steps, a strike by its numbers, a death by its fade and hold.</summary>

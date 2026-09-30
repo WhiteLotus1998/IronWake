@@ -73,14 +73,109 @@ public class ClientRecallScrubTests
     }
 
     [Fact]
-    public void TheScrubGivesEachStepAnEqualShareAndRestsOnTheLastFrame()
+    public void TheScrubStandsOnTheStepItsLengthsReachAndRestsOnTheLastFrame()
     {
-        Assert.Equal((0, 0f), Rhythm.ScrubAt(5, 0));
-        Assert.Equal((2, 0f), Rhythm.ScrubAt(5, 0.5f));
-        Assert.Equal((3, 0.5f), Rhythm.ScrubAt(5, 0.875f));
-        Assert.Equal((3, 1f), Rhythm.ScrubAt(5, 1));
-        Assert.Equal((3, 1f), Rhythm.ScrubAt(5, 7));
-        Assert.Equal((0, 1f), Rhythm.ScrubAt(2, 1));
+        var lengths = new[] { 0.04f, 0.3f, 0.04f };
+        Assert.Equal((0, 0f), Rhythm.ScrubAt(lengths, 0));
+        Assert.Equal((0, 0.5f), Rhythm.ScrubAt(lengths, 0.02f));
+        Assert.Equal((1, 0.5f), Rhythm.ScrubAt(lengths, 0.19f));
+        var (step, through) = Rhythm.ScrubAt(lengths, 0.36f);
+        Assert.Equal(2, step);
+        Assert.Equal(0.5f, through, 4);
+        Assert.Equal((2, 1f), Rhythm.ScrubAt(lengths, 0.5f));
+        Assert.Equal((2, 1f), Rhythm.ScrubAt(lengths, 7));
+        Assert.Equal((0, 1f), Rhythm.ScrubAt(Array.Empty<float>(), 0));
+    }
+
+    [Fact]
+    public void TheScrubHoldsOnTheStepThatBringsTeodorBackAndBlursTheRest()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        client.Continue();
+
+        Assert.True(client.Recall(49));
+
+        var lengths = client.ScrubLengths;
+        Assert.Equal(client.Scrub.Count - 1, lengths.Count);
+        var rise = Enumerable.Range(0, lengths.Count).Single(i => client.Scrub[i].Find("teodor") is null && client.Scrub[i + 1].Find("teodor") is not null);
+        Assert.Equal(Rhythm.ScrubHold, lengths[rise]);
+        Assert.All(lengths.Where((_, i) => client.Scrub[i + 1].Units.All(u => client.Scrub[i].Find(u.Id) is not null)), length => Assert.True(length <= Rhythm.ScrubStep));
+        Assert.True(lengths.Sum() <= Rhythm.ScrubCap + 1e-4f);
+    }
+
+    [Fact]
+    public void ALongScrubSqueezesItsPlainStepsUnderTheCapDownToAFrame()
+    {
+        var client = TurnFour();
+        var still = client.State;
+
+        var sixty = Rhythm.ScrubLengths(Enumerable.Repeat(still, 61).ToList());
+        var thousand = Rhythm.ScrubLengths(Enumerable.Repeat(still, 1001).ToList());
+        var short3 = Rhythm.ScrubLengths(Enumerable.Repeat(still, 4).ToList());
+
+        Assert.All(sixty, length => Assert.Equal(Rhythm.ScrubCap / 60, length, 5));
+        Assert.All(thousand, length => Assert.Equal(Rhythm.ScrubFrame, length));
+        Assert.All(short3, length => Assert.Equal(Rhythm.ScrubStep, length));
+    }
+
+    [Fact]
+    public void HoldsWinOverTheCap()
+    {
+        // Back and forth between the phase's end (Teodor dead) and the Recall's state (Teodor
+        // alive): every step into the Recall's state brings him back, six holds past the cap.
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        client.Continue();
+        var after = client.State;
+        Assert.True(client.Recall(49));
+        var before = client.State;
+        var frames = Enumerable.Range(0, 13).Select(i => i % 2 == 0 ? after : before).ToList();
+
+        var lengths = Rhythm.ScrubLengths(frames);
+
+        Assert.Equal(12, lengths.Count);
+        Assert.All(lengths.Where((_, i) => i % 2 == 0), length => Assert.Equal(Rhythm.ScrubHold, length));
+        Assert.All(lengths.Where((_, i) => i % 2 == 1 && after.Units.All(u => before.Find(u.Id) is not null)), length => Assert.Equal(Rhythm.ScrubFrame, length));
+        Assert.True(lengths.Sum() > Rhythm.ScrubCap);
+    }
+
+    [Fact]
+    public void ARecallMarksTheLogLinesItUndidAndNotItsOwnOrEarlierOnes()
+    {
+        var client = TurnFour();
+        var before = client.Log.Count;
+        client.Submit(new EndPhase());
+        client.Continue();
+        var death = client.Log.ToList().FindIndex(line => line.StartsWith("teodor falls", StringComparison.Ordinal));
+        var left = client.Log.Count;
+
+        Assert.True(client.Recall(49));
+
+        Assert.True(death >= 0);
+        Assert.True(client.Undone(death));
+        Assert.True(client.Undone(left - 1));
+        Assert.True(client.Undone(before));
+        Assert.False(client.Undone(0));
+        Assert.False(client.Undone(client.Log.Count - 1));
+        Assert.Contains(Enumerable.Range(0, before), i => !client.Undone(i));
+    }
+
+    [Fact]
+    public void NoLineIsUndoneWithoutARecall()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "the_tollgate.map"), content);
+        var client = new ClientSession(content, BattleState.From(map, content, content.Cast, 113));
+        for (var turn = 0; turn < 3; turn++)
+        {
+            client.Submit(new EndPhase());
+            client.Continue();
+        }
+
+        Assert.NotEmpty(client.Log);
+
+        Assert.All(Enumerable.Range(0, client.Log.Count), i => Assert.False(client.Undone(i)));
     }
 
     [Fact]

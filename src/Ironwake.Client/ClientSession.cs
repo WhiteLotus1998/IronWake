@@ -105,6 +105,12 @@ public sealed class ClientSession
     /// </summary>
     private readonly List<string> _made = new();
 
+    /// <summary>The log's length when each history state was the board, by history index, so a Recall knows which lines it undid.</summary>
+    private readonly Dictionary<int, int> _logAt = new();
+
+    /// <summary>The log's ranges a Recall undid, start inclusive and end exclusive.</summary>
+    private readonly List<(int Start, int End)> _undone = new();
+
     public ClientSession(GameContent content, BattleState state)
     {
         Content = content;
@@ -177,10 +183,27 @@ public sealed class ClientSession
 
     /// <summary>
     /// The states the last Recall folded back through (issue 514), from the state it left to the
-    /// one it returned to, newest first: the renderer scrubs the board through them over
-    /// <see cref="Rhythm.Scrub"/>. Empty before any Recall. <see cref="ScrubSerial"/> counts each new one.
+    /// one it returned to, newest first: the renderer scrubs the board through them, each step
+    /// for its <see cref="ScrubLengths"/>. Empty before any Recall. <see cref="ScrubSerial"/> counts each new one.
     /// </summary>
     public IReadOnlyList<BattleState> Scrub { get; private set; } = Array.Empty<BattleState>();
+
+    /// <summary>How long each step of <see cref="Scrub"/> plays (issue 515), by <see cref="Rhythm.ScrubLengths"/>.</summary>
+    public IReadOnlyList<float> ScrubLengths { get; private set; } = Array.Empty<float>();
+
+    /// <summary>
+    /// Whether the log line at <paramref name="index"/> of <see cref="Log"/> tells of something a
+    /// Recall undid (issue 515): a line printed after the state a Recall returned to and before
+    /// the Recall's own line. The log keeps it, as the console's does; the column dims it, so the
+    /// log agrees with the board about what is true.
+    /// </summary>
+    public bool Undone(int index) => _undone.Any(range => index >= range.Start && index < range.End);
+
+    /// <summary>
+    /// How the battle ended, for the end card (issue 515), once it is decided and the enemy phase
+    /// has played out; null before.
+    /// </summary>
+    public EndCard? Ending => State.Outcome.IsOver && !EnemyPhasePlaying ? EndCard.Of(State, Content) : null;
 
     /// <summary>Rises by one each time <see cref="Scrub"/> is replaced, so a renderer knows to start the rewind.</summary>
     public int ScrubSerial { get; private set; }
@@ -373,6 +396,7 @@ public sealed class ClientSession
 
         frames.Add(State);
         Scrub = frames;
+        ScrubLengths = Rhythm.ScrubLengths(frames);
         ScrubSerial++;
 
         Status = undone is null ? null : "undone: " + PlaySession.UndoText(undone) + "\n" + PlaySession.SameRolls;
@@ -610,17 +634,27 @@ public sealed class ClientSession
     /// <summary>
     /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
     /// state moves, by the console's rule: a Recall truncates it, anything else names the
-    /// command applied from the state it leaves.
+    /// command applied from the state it leaves. It also notes the log's length at the state
+    /// left, and for a Recall the lines it undoes.
     /// </summary>
     private void Record(Command command)
     {
         if (command is Recall recall)
         {
+            if (_logAt.TryGetValue(recall.ToIndex, out var from) && from < _log.Count)
+            {
+                _undone.Add((from, _log.Count));
+            }
+
             _made.RemoveRange(recall.ToIndex, _made.Count - recall.ToIndex);
         }
-        else if (_made.Count == State.History.Count)
+        else
         {
-            _made.Add(PlaySession.CommandText(command));
+            _logAt[State.History.Count] = _log.Count;
+            if (_made.Count == State.History.Count)
+            {
+                _made.Add(PlaySession.CommandText(command));
+            }
         }
     }
 

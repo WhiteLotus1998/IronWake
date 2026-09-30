@@ -53,6 +53,12 @@ public partial class Main
     private float _scrubStart = float.NegativeInfinity;
     private IReadOnlyList<BattleState> _scrubbing = Array.Empty<BattleState>();
 
+    /// <summary>Each step's length in the scrub playing (issue 515): a hold where a unit comes back, a blur elsewhere.</summary>
+    private IReadOnlyList<float> _scrubLengths = Array.Empty<float>();
+
+    /// <summary>The scrub's whole length.</summary>
+    private float _scrubLength;
+
     /// <summary>Each token's offset while the scrub slides it home, in pixels from its tile in the frame drawn.</summary>
     private readonly Dictionary<string, Vector2> _scrubShift = new();
 
@@ -67,7 +73,7 @@ public partial class Main
     private float _phaseDoneAt = float.NaN;
 
     /// <summary>True while a Recall's scrub is folding the board back (issue 514).</summary>
-    private bool Scrubbing => _clock < _scrubStart + Rhythm.Scrub && _scrubbing.Count > 1;
+    private bool Scrubbing => _clock < _scrubStart + _scrubLength && _scrubbing.Count > 1;
 
     /// <summary>
     /// The state the board draws: the client's, or during a scrub the frame the rewind has
@@ -84,8 +90,7 @@ public partial class Main
             return _client!.State;
         }
 
-        var u = (_clock - _scrubStart) / Rhythm.Scrub;
-        var (step, through) = Rhythm.ScrubAt(_scrubbing.Count, u);
+        var (step, through) = Rhythm.ScrubAt(_scrubLengths, _clock - _scrubStart);
         var from = _scrubbing[step];
         var to = _scrubbing[step + 1];
         var e = through * through * (3 - 2 * through);
@@ -178,6 +183,8 @@ public partial class Main
         {
             _scrubSerialSeen = c.ScrubSerial;
             _scrubbing = c.Scrub;
+            _scrubLengths = c.ScrubLengths;
+            _scrubLength = _scrubLengths.Sum();
             _scrubStart = _still ? float.NegativeInfinity : _clock;
         }
 
