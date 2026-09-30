@@ -16,6 +16,10 @@ Slice 2: every class and boss clip row of docs/ART_SPEC.md's names block, one-ro
 256 x 256 frames with a <name>.json sidecar, drawn in three neutral greys the client tints with
 the side's colour (0105), plus docs/art/contact-clips.png.
 
+Slice 3: every effect row (fx_*), one-row sheets of 256 x 256 frames with a sidecar whose pivot
+is the point the scene lays the effect on (128, 128), drawn in LOOK.md's own values and never
+tinted, ember only where fire is, plus docs/art/contact-effects.png.
+
 Run from the repository root: python3 docs/art/make_art.py
 """
 import json
@@ -27,6 +31,7 @@ import zlib
 OUT = os.path.join("src", "Ironwake.Godot", "assets", "art")
 SHEET = os.path.join("docs", "art", "contact-tokens.png")
 CLIP_SHEET = os.path.join("docs", "art", "contact-clips.png")
+FX_SHEET = os.path.join("docs", "art", "contact-effects.png")
 FRAME = 96  # ART_SPEC: 48 px tokens and tiles, delivered at 2x
 
 
@@ -547,7 +552,7 @@ def clips(classes):
     out = []
     for name in spec_names():
         clip = next((c for c in sorted(CLIPS, key=len, reverse=True) if name.endswith("_" + c)), None)
-        if clip is None or name.startswith(("token_", "tile_")):
+        if clip is None or name.startswith(("token_", "tile_", "fx_")):
             continue
         stem = name[:-len(clip) - 1]
         if stem.startswith("boss_"):
@@ -559,6 +564,163 @@ def clips(classes):
         sheet, sidecar = clip_sheet(class_id, kind, weapon_id, boss, clip)
         out.append((name, sheet, sidecar))
     return out
+
+
+# Slice 3: the effects. One sheet per effect, not per side, drawn in LOOK.md's own values, opaque
+# and hard-edged: white (mark.struck), text (ui.text), frost (mark.reach), salt grey (terrain.road)
+# and ember (terrain.fire), the last only where fire is.
+FX_PIVOT = (128, 128)
+WHITE = (0xFF, 0xFF, 0xFF, 255)
+TEXT = hex_rgb("E9ECEF") + (255,)
+FROST = REACH + (255,)
+SALT = hex_rgb(TERRAIN["road"]) + (255,)
+EMBER = hex_rgb(TERRAIN["fire"]) + (255,)
+
+# ArtSpec.FixedEffects and ArtSpec.SpellFrames: the frames of each effect.
+FX_FRAMES = {"hit_spark": 5, "slash_arc": 5, "crit_flash": 6, "heal": 10, "dust": 6, "embers": 12}
+SPELL_FRAMES = 8
+
+
+def diamond(c, x, y, r, rgba):
+    c.polygon([(x, y - r), (x + r, y), (x, y + r), (x - r, y)], rgba)
+
+
+def star(c, x, y, long, short, turn, rgba):
+    """A four-point star: long points on the axes turned by `turn`, short ones between."""
+    points = []
+    for k in range(8):
+        a = turn + k * math.pi / 4
+        r = long if k % 2 == 0 else short
+        points.append((x + math.cos(a) * r, y + math.sin(a) * r))
+    c.polygon(points, rgba)
+
+
+def crescent(c, x, y, radius, a0, a1, thick, rgba):
+    """A crescent along the circle of `radius` from angle a0 to a1, `thick` at its widest, pointed at both ends."""
+    steps = 16
+    outer = [along((x, y), a0 + (a1 - a0) * k / steps, radius) for k in range(steps + 1)]
+    inner = [along((x, y), a0 + (a1 - a0) * k / steps, radius - thick * math.sin(math.pi * k / steps)) for k in range(steps + 1)]
+    c.polygon(outer + inner[::-1], rgba)
+
+
+def fx_frame(c, name, i, n, cx, cy):
+    """Frame `i` of `n` of effect `name`, laid on the pivot (cx, cy)."""
+    t = i / (n - 1)
+    rays = [k * math.pi / 4 + (0.2 if k % 2 else 0.0) for k in range(8)]
+    if name == "hit_spark":
+        if i == 0:
+            diamond(c, cx, cy, 14, WHITE)
+        elif i < n - 1:
+            for k, a in enumerate(rays):
+                reach = (1.0 if k % 2 == 0 else 0.65) * (30 + 22 * i)
+                c.stroke([along((cx, cy), a, 10 + 14 * i), along((cx, cy), a, reach)], 9 - 2 * i, WHITE)
+        else:
+            for a in rays[::2]:
+                x, y = along((cx, cy), a, 96)
+                diamond(c, x, y, 4, WHITE)
+    elif name == "slash_arc":
+        head = -2.3 + 2.9 * (i + 1) / n
+        tail = max(-2.3, head - 1.9)
+        crescent(c, cx - 30, cy + 10, 96, tail, head, 26 * (1 - 0.6 * t), TEXT)
+    elif name == "crit_flash":
+        if i < 4:
+            size = [120, 100, 70, 36][i]
+            star(c, cx, cy, size, size * 0.18, math.pi / 4 * 0.0, WHITE)
+        if i > 0:
+            c.ring(cx, cy, 28 + 17 * i, max(3, 14 - 2.4 * i), TEXT)
+    elif name == "heal":
+        for k in range(7):
+            phase = (k * 0.37) % 1.0
+            rise = (t + phase) % 1.0
+            x = cx - 48 + k * 16 + 6 * math.sin(2 * math.pi * (rise + k * 0.2))
+            y = cy + 70 - 150 * rise
+            size = 10 * math.sin(math.pi * rise)
+            if size >= 2:
+                diamond(c, x, y, size, FROST if k % 3 else WHITE)
+    elif name == "dust":
+        for side in (-1, 1):
+            for k in range(3):
+                spread = 14 + 11 * i + 10 * k
+                r = (16 - 3 * k) * math.sin(math.pi * (i + 1) / (n + 1)) + 4
+                c.ellipse(cx + side * spread, cy - 4 - 5 * i - 6 * k, r * 1.3, r, SALT)
+    elif name == "embers":
+        for k in range(9):
+            rise = ((k * 0.29) + i / n) % 1.0
+            x = cx - 60 + k * 15 + 8 * math.sin(2 * math.pi * (rise + k * 0.13))
+            y = cy + 90 - 180 * rise
+            size = 6 * (1 - rise) + 2
+            diamond(c, x, y, size, EMBER)
+    elif name == "spell_cinder":
+        if i < 4:
+            fx, fy, size = cx - 96 + 32 * i, cy - 6, 1.6 + 0.3 * i
+
+            def F(x, y):
+                return (fx + y * size, fy - x * size)  # the adept's flame laid on its side, point trailing
+            c.polygon(bezier(F(0, -12), F(8, -4), F(7, 8), F(0, 9)) + bezier(F(0, 9), F(-7, 8), F(-8, -2), F(-2, -6))
+                      + bezier(F(-2, -6), F(-2, -2), F(0, 0), F(1, -2)) + bezier(F(1, -2), F(2, -6), F(0, -9), F(0, -12)), EMBER)
+        else:
+            k = i - 4
+            for j in range(6):
+                a = -math.pi / 2 + (j - 2.5) * 0.45
+                base = along((cx, cy + 30), a, 10 + 8 * k)
+                tip = along((cx, cy + 30), a, 50 + 22 * k - 10 * k * k / 3)
+                side = along(base, a + math.pi / 2, 10 - 2 * k)
+                other = along(base, a - math.pi / 2, 10 - 2 * k)
+                c.polygon([side, tip, other], EMBER)
+            if k >= 2:
+                for j in (-1, 1):
+                    c.ellipse(cx + j * 24, cy - 40 - 12 * k, 10 + 3 * k, 8 + 2 * k, SALT)
+    elif name == "spell_gust":
+        for j in range(3):
+            y = cy - 40 + 40 * j
+            head = -110 + 38 * i + 18 * j
+            points = [(cx + x, y + 10 * math.sin((x - head) / 22)) for x in range(int(head - 90), int(head) + 1, 6)
+                      if -128 <= x <= 127]
+            if len(points) > 1:
+                c.stroke(points, 6 if j != 1 else 9, TEXT if j == 1 else FROST)
+    elif name == "spell_bolt":
+        if i < 2:
+            for j in range(4):
+                x, y = along((cx, 26), j * math.pi / 2 + i * 0.4, 30 - 12 * i)
+                diamond(c, x, y, 5, FROST)
+        elif i < 5:
+            path = [(cx - 4, 0), (cx + 18, 40), (cx - 14, 64), (cx + 12, 96), (cx, cy)]
+            c.stroke(path, 16 - 3 * (i - 2), FROST)
+            c.stroke(path, 5, WHITE)
+            if i == 4:
+                for a in rays[::2]:
+                    c.stroke([(cx, cy), along((cx, cy), a + 0.4, 34)], 5, FROST)
+        else:
+            k = i - 5
+            for a in rays[1::2]:
+                c.stroke([along((cx, cy), a, 20 + 18 * k), along((cx, cy), a, 34 + 20 * k)], 6 - 2 * k, FROST)
+    elif name == "spell_radiance":
+        spread = [0.2, 0.5, 0.85, 1.0, 1.0, 0.8, 0.5, 0.2][i]
+        source = (cx, -30)
+        for j in range(-2, 3):
+            a = math.pi / 2 + j * 0.16 * spread
+            half = 0.03 + 0.03 * spread
+            c.polygon([source, along(source, a - half, 200), along(source, a + half, 200)], TEXT)
+        if 2 <= i <= 5:
+            c.stroke([(cx, 0), (cx, cy + 40)], 4, WHITE)
+    else:
+        raise SystemExit(f"make_art: effect '{name}' has no drawing; add one here")
+
+
+def effect_sheet(name):
+    frames = SPELL_FRAMES if name.startswith("spell_") else FX_FRAMES[name]
+    sheet = Canvas(CLIP * frames, CLIP)
+    for i in range(frames):
+        sheet.clip = (i * CLIP, (i + 1) * CLIP)
+        fx_frame(sheet, name, i, frames, i * CLIP + FX_PIVOT[0], FX_PIVOT[1])
+    sheet.clip = (0, sheet.width)
+    sidecar = {"frame": [CLIP, CLIP], "frames": frames, "pivot": list(FX_PIVOT), "contact": None}
+    return sheet, sidecar
+
+
+def effects():
+    """Every effect row of the spec, as (name, sheet, sidecar)."""
+    return [(name,) + effect_sheet(name[len("fx_"):]) for name in spec_names() if name.startswith("fx_")]
 
 
 def main():
@@ -574,16 +736,17 @@ def main():
     for terrain in terrains:
         art[f"tile_{terrain}"] = tile(terrain)
     clip_rows = clips(classes)
+    fx_rows = effects()
     for name, canvas in art.items():
         canvas.png(os.path.join(OUT, name + ".png"))
-    for name, sheet, sidecar in clip_rows:
+    for name, sheet, sidecar in clip_rows + fx_rows:
         sheet.png(os.path.join(OUT, name + ".png"))
         with open(os.path.join(OUT, name + ".json"), "w", newline="\n") as f:
             f.write(json.dumps(sidecar) + "\n")
     with open(os.path.join(OUT, "generated.txt"), "w", newline="\n") as f:
         f.write("# Written by docs/art/make_art.py; a file an artist replaces comes off this list.\n")
-        f.write("# A clip sheet's sidecar <name>.json goes with it.\n")
-        f.write("".join(name + ".png\n" for name in list(art) + [row[0] for row in clip_rows]))
+        f.write("# A clip or effect sheet's sidecar <name>.json goes with it.\n")
+        f.write("".join(name + ".png\n" for name in list(art) + [row[0] for row in clip_rows + fx_rows]))
 
     # The contact sheet: every file at 2x, and under it at 1x, on the panel colour.
     names = list(art)
@@ -617,7 +780,18 @@ def main():
         for i, cut in enumerate(cuts):
             board.blit(cut, 4 + i * (half + 4), 4 + r * (half + 4))
     board.png(CLIP_SHEET)
-    print(f"make_art: {len(art) + len(clip_rows)} files under {OUT}, sheets {SHEET} and {CLIP_SHEET}")
+
+    # The effects sheet: one row per effect, every frame at half size, on the panel colour.
+    widest = max(sidecar["frames"] for _, _, sidecar in fx_rows)
+    board = Canvas(widest * (half + 4) + 4, len(fx_rows) * (half + 4) + 4, PANEL + (255,))
+    for r, (name, strip, sidecar) in enumerate(fx_rows):
+        for i in range(sidecar["frames"]):
+            cut = Canvas(CLIP, CLIP)
+            cut.px = bytearray(b"".join(bytes(strip.px[4 * (y * strip.width + i * CLIP):4 * (y * strip.width + (i + 1) * CLIP)])
+                                        for y in range(CLIP)))
+            board.blit(cut.half(), 4 + i * (half + 4), 4 + r * (half + 4))
+    board.png(FX_SHEET)
+    print(f"make_art: {len(art) + len(clip_rows) + len(fx_rows)} files under {OUT}, sheets {SHEET}, {CLIP_SHEET} and {FX_SHEET}")
 
 
 if __name__ == "__main__":

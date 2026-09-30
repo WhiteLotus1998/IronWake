@@ -5,12 +5,16 @@ namespace Ironwake.Client;
 /// <summary>One battle-scene clip (issue 532): its name, its frame count, and the frame where the blow lands (hit-stop and the number fire there), or null for a clip with no contact.</summary>
 public sealed record Clip(string Name, int Frames, int? Contact);
 
+/// <summary>One battle-scene effect (issue 564): its name without the <c>fx_</c> prefix and its frame count. An effect has no contact frame; the scene lays it on its pivot when the beat that calls it starts.</summary>
+public sealed record Effect(string Name, int Frames);
+
 /// <summary>
 /// The art spec's names (issue 532, <c>docs/ART_SPEC.md</c>): every asset an outside artist
 /// delivers, derived from the content so a new class, weapon, boss or cast member adds its rows
 /// here and the spec's test fails until the document lists them. Tokens are one file per class per
 /// side; battle clips are one sheet per (class, weapon kind, clip) and per (boss, weapon, clip);
-/// level-up poses and portraits are one per cast member and optional. A renderer looks each name
+/// effects are one sheet each, the spells' from the weapons; level-up poses and portraits are one
+/// per cast member and optional. A renderer looks each name
 /// up and draws its own vector placeholder where no file is delivered, so real art drops in
 /// without code changes.
 /// </summary>
@@ -33,6 +37,23 @@ public static class ArtSpec
         new Clip("dodge", 6, null),
         new Clip("hit_react", 4, 1),
         new Clip("fall", 10, null),
+    };
+
+    /// <summary>The effect sheet's pivot: the point the scene lays it on, the struck body's centre (or, for dust, the ground under the feet).</summary>
+    public static readonly (int X, int Y) EffectPivot = (128, 128);
+
+    /// <summary>The frames of every spell's burst.</summary>
+    public const int SpellFrames = 8;
+
+    /// <summary>The effects every battle needs whatever its weapons, in the spec's order; the spells' bursts follow from the content.</summary>
+    public static IReadOnlyList<Effect> FixedEffects { get; } = new[]
+    {
+        new Effect("hit_spark", 5),
+        new Effect("slash_arc", 5),
+        new Effect("crit_flash", 6),
+        new Effect("heal", 10),
+        new Effect("dust", 6),
+        new Effect("embers", 12),
     };
 
     /// <summary>A weapon kind as the file names spell it.</summary>
@@ -69,11 +90,23 @@ public static class ArtSpec
         from clip in Clips
         select $"boss_{id}_{weapon}_{clip.Name}";
 
+    /// <summary>
+    /// The effects (issue 564): the fixed ones, then a burst <c>spell_&lt;weapon&gt;</c> for every
+    /// Reason or Faith weapon that strikes, by weapon id, so a new spell adds a row. The healing
+    /// spells share <c>heal</c>.
+    /// </summary>
+    public static IEnumerable<Effect> Effects(GameContent content) =>
+        FixedEffects.Concat(content.Weapons.Values.Where(w => w.IsMagic && !w.Heals).Select(w => new Effect($"spell_{w.Id}", SpellFrames)));
+
+    /// <summary>The effect sheets: <c>fx_&lt;effect&gt;</c> for every effect.</summary>
+    public static IEnumerable<string> EffectNames(GameContent content) => Effects(content).Select(e => $"fx_{e.Name}");
+
     /// <summary>The optional rows: a level-up pose and a portrait for each cast member, in roster order.</summary>
     public static IEnumerable<string> Optional(GameContent content) =>
         content.Cast.Select(u => $"levelup_{u.Id}").Concat(content.Cast.Select(u => $"portrait_{u.Id}"));
 
-    /// <summary>Every name the spec lists, in its order: tokens, tiles, class clips, boss clips, then the optional rows.</summary>
+    /// <summary>Every name the spec lists, in its order: tokens, tiles, class clips, boss clips, effects, then the optional rows.</summary>
     public static IEnumerable<string> Names(GameContent content, IEnumerable<string> bossIds) =>
-        Tokens(content).Concat(Tiles(content)).Concat(ClassClips(content)).Concat(BossClips(content, bossIds)).Concat(Optional(content));
+        Tokens(content).Concat(Tiles(content)).Concat(ClassClips(content)).Concat(BossClips(content, bossIds))
+            .Concat(EffectNames(content)).Concat(Optional(content));
 }
