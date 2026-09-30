@@ -309,17 +309,61 @@ public sealed class PlaySession
     /// <summary>
     /// Lists the map's events that have not fired, one line each in player words, on a
     /// certification trial and on a map with <c>announce: on</c> (issues 78, 256): when it
-    /// fires, what it does, and for a spawn the held-tile rule that stops it.
+    /// fires, what it does, and for a spawn the held-tile rule that stops it. Terrain changes
+    /// that share a turn, a phase and a target terrain print as one line (issue 600).
     /// </summary>
     internal void WritePendingEvents()
     {
-        foreach (var mapEvent in _state.Map.Events)
+        foreach (var line in PendingEventLines(_state.Map.Events.Where(mapEvent => !_state.HasFired(mapEvent.Name)), _content))
         {
-            if (!_state.HasFired(mapEvent.Name))
+            _out.WriteLine("  " + line);
+        }
+    }
+
+    /// <summary>
+    /// The announce lines for <paramref name="events"/>, in map order: one line per event,
+    /// except that turn-triggered terrain changes to the same terrain on the same turn and
+    /// phase are one decision and print as one line at the first one's place, the tiles in map
+    /// order and the held-tile rule once (issue 600, the tide sample). Presentation only.
+    /// </summary>
+    internal static IReadOnlyList<string> PendingEventLines(IEnumerable<MapEvent> events, GameContent content)
+    {
+        var lines = new List<string>();
+        var groups = new Dictionary<(int Turn, Side Phase, string TerrainId), int>();
+        var tiles = new List<List<Coord>>();
+        var heads = new List<MapEvent?>();
+        foreach (var mapEvent in events)
+        {
+            if (mapEvent is { Trigger: TurnTrigger turn, Action: ChangeTerrain change })
             {
-                _out.WriteLine("  " + DescribeEvent(mapEvent, _content));
+                var key = (turn.Turn, turn.Phase, change.TerrainId);
+                if (groups.TryGetValue(key, out var at))
+                {
+                    tiles[at].Add(change.At);
+                    continue;
+                }
+
+                groups[key] = lines.Count;
+                lines.Add("");
+                tiles.Add(new List<Coord> { change.At });
+                heads.Add(mapEvent);
+                continue;
+            }
+
+            lines.Add(DescribeEvent(mapEvent, content));
+            tiles.Add(new List<Coord>());
+            heads.Add(null);
+        }
+
+        for (var i = 0; i < lines.Count; i++)
+        {
+            if (heads[i] is { Trigger: TurnTrigger turn, Action: ChangeTerrain change })
+            {
+                lines[i] = WhenWords(turn) + ": " + TerrainWords(tiles[i], change.TerrainId, content);
             }
         }
+
+        return lines;
     }
 
     /// <summary>
@@ -331,33 +375,39 @@ public sealed class PlaySession
     {
         var when = mapEvent.Trigger switch
         {
-            TurnTrigger turn => $"turn {turn.Turn}, {(turn.Phase == Side.Enemy ? "enemy" : "player")} phase",
+            TurnTrigger turn => WhenWords(turn),
             EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch
         {
             SpawnEnemy spawn => SpawnWords(spawn.Placement, content),
-            ChangeTerrain change => TerrainWords(change, content),
+            ChangeTerrain change => TerrainWords(new[] { change.At }, change.TerrainId, content),
             SetFlag flag => $"{flag.Flag} is set.",
             _ => throw new InvalidOperationException("unknown action " + mapEvent.Action.GetType().Name),
         };
         return when + ": " + what;
     }
 
+    private static string WhenWords(TurnTrigger turn) =>
+        $"turn {turn.Turn}, {(turn.Phase == Side.Enemy ? "enemy" : "player")} phase";
+
     /// <summary>
-    /// A terrain change in player words, with the held-tile rule <see cref="MapEvents"/>
-    /// applies when the new terrain is impassable to some movement type: the change does not
-    /// happen under a unit that could not stand on it (the tide sample, DESIGN.md 13.21).
+    /// A terrain change to one or more tiles in player words, with the held-tile rule
+    /// <see cref="MapEvents"/> applies when the new terrain is impassable to some movement type:
+    /// the change does not happen under a unit that could not stand on it (the tide sample,
+    /// DESIGN.md 13.21). The rule is printed once however many tiles change.
     /// </summary>
-    private static string TerrainWords(ChangeTerrain change, GameContent content)
+    private static string TerrainWords(IReadOnlyList<Coord> tiles, string terrainId, GameContent content)
     {
-        var terrain = content.TerrainById(change.TerrainId);
+        var terrain = content.TerrainById(terrainId);
         var name = terrain.Name.ToLowerInvariant();
         var impassable = Enum.GetValues<MovementType>().Any(movement => !terrain.IsPassable(movement));
+        var verb = tiles.Count == 1 ? "becomes" : "become";
+        var change = $"{string.Join(" ", tiles)} {verb} {name}";
         return impassable
-            ? $"{change.At} becomes {name}, unless one who cannot enter {name} stands on it."
-            : $"{change.At} becomes {name}.";
+            ? $"{change}, unless one who cannot enter {name} stands on it."
+            : $"{change}.";
     }
 
     private static string SpawnWords(EnemyPlacement placement, GameContent content)
