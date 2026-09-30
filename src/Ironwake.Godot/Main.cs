@@ -28,7 +28,9 @@ namespace Ironwake.Godot;
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
 /// Tab gives the column to the event log (<c>--log-open</c> opens with it), Escape clears the
 /// selection and closes the browser. An exported build finds <c>content/</c>
-/// beside its executable.
+/// beside its executable, and with no <c>--map</c> opens on the title (<c>Main.Screens.cs</c>,
+/// issue 515), whose Play opens the Tollgate with the turn-1 callouts; a decided battle shows the
+/// end card, Enter playing again on the next seed.
 /// With <c>--campaign</c> (issue 360) it plays the campaign through <see cref="CampaignClient"/>
 /// instead, from the first map or from <c>--from &lt;map&gt;</c>: the between-map screen shows the
 /// console's roster, shop, deployment and keep lines; a click on a unit's row selects it, a click on
@@ -123,6 +125,14 @@ public partial class Main : Node2D
     private ClientSession? _client;
     private CampaignClient? _campaign;
 
+    /// <summary>The loaded content and the folder it came from, kept so the title's Play and the end card's play again can open a battle.</summary>
+    private GameContent? _content;
+    private string _contentDir = "";
+
+    /// <summary>The map and seed the open battle was started from, for play again.</summary>
+    private string _mapArg = "the_tollgate";
+    private ulong _seed = 1;
+
     /// <summary>The roster unit selected on the between-map screen, which a ware is bought for and B benches.</summary>
     private string? _screenUnit;
 
@@ -146,6 +156,7 @@ public partial class Main : Node2D
         try
         {
             var content = ContentLoader.Load(contentDir);
+            (_content, _contentDir, _mapArg, _seed) = (content, contentDir, mapArg, seed);
             if (Array.IndexOf(args, "--campaign") >= 0 || Array.IndexOf(args, "--campaign-parity") >= 0)
             {
                 var from = Arg(args, "--from");
@@ -173,8 +184,19 @@ public partial class Main : Node2D
                 return;
             }
 
+            // The exported build opens on the title (issue 515): no map named, nothing to replay.
+            if (Arg(args, "--screen") is { } screen)
+            {
+                _screen = screen == "howto" ? Screen.HowTo : Screen.Title;
+            }
+            else if (Arg(args, "--map") is null && Array.IndexOf(args, "--script") < 0 && Array.IndexOf(args, "--screenshot") < 0 && Array.IndexOf(args, "--strip") < 0)
+            {
+                _screen = Screen.Title;
+            }
+
             _client = new ClientSession(content, state);
             _tile = TileFor(map);
+            _callouts = Array.IndexOf(args, "--callouts") >= 0 ? new Callouts() : null;
             if (Arg(args, "--script") is { } script)
             {
                 Ironwake.Client.Script.Apply(_client, File.ReadAllText(script));
@@ -270,6 +292,19 @@ public partial class Main : Node2D
 
         if (_client is null)
         {
+            return;
+        }
+
+        if (_screen != Screen.Battle)
+        {
+            TitleInput(input);
+            QueueRedraw();
+            return;
+        }
+
+        if (EndCardShown && EndCardInput(input))
+        {
+            QueueRedraw();
             return;
         }
 
@@ -477,12 +512,20 @@ public partial class Main : Node2D
             return;
         }
 
+        if (_screen != Screen.Battle)
+        {
+            DrawTitleOrHowTo();
+            return;
+        }
+
         var state = Shown();
         DrawTopBar(state);
         DrawBoard(state);
         DrawLegend(state);
         DrawPanel();
         DrawKeys();
+        DrawCallout();
+        DrawEndCard();
     }
 
     /// <summary>
@@ -499,7 +542,8 @@ public partial class Main : Node2D
             return;
         }
 
-        var ours = state.Phase == CoreSide.Player;
+        // The chip flips with the act card (issue 515): Theirs while the enemy's act is on show.
+        var ours = state.Phase == CoreSide.Player && _client!.ActShown(Animating) is null;
         foreach (var (label, value, colour) in new[]
         {
             ("TURN", $"{state.Turn} / {state.Map.TurnLimit}", Ink),
@@ -528,8 +572,9 @@ public partial class Main : Node2D
         var pulse = PulseNow();
         if (pulse > 0)
         {
-            var glow = Look(LookPalette.Player, 0.25f + 0.55f * pulse);
-            DrawRect(rect.Grow(3 + 3 * pulse), glow, filled: false, width: 2 + 2 * pulse);
+            // The ring follows the chip's rounded ends (issue 515): a square ring reads as keyboard focus.
+            var grow = 3 + 3 * pulse;
+            Ring(rect.Grow(grow), Look(LookPalette.Player, 0.25f + 0.55f * pulse), 14 + grow, 2 + 2 * pulse);
         }
 
         Card(rect, Box, 14);
@@ -567,6 +612,11 @@ public partial class Main : Node2D
         foreach (var (key, does) in Keys)
         {
             var width = UiWidth(key, 12, bold: true) + 14;
+            if (key == "E")
+            {
+                _endKeyAt = new Vector2(x + width / 2, y - 9);
+            }
+
             Card(new Rect2(x, y - 7, width, 22), Box, 5);
             UiText(new Vector2(x + width / 2, y + 9), key, Ink, 12, bold: true, centred: true);
             UiText(new Vector2(x + width + 7, y + 9), does, Muted, 12);
@@ -960,15 +1010,17 @@ public partial class Main : Node2D
 
         // While the enemy phase plays, the column shows the act on show; Tab still opens it all (issue 544).
         var log = _logOpen ? client.Log : client.ActLog;
-        var rows = new List<(string Text, bool Marked)>();
+        var offset = client.Log.Count - log.Count;
+        var rows = new List<(string Text, bool Marked, bool Undone)>();
         for (var i = 0; i < log.Count; i++)
         {
             var marked = i == log.Count - 1 && client.Playing is not null && client.EnemyPhasePlaying;
+            var undone = client.Undone(offset + i);
             foreach (var line in log[i].Split('\n'))
             {
                 foreach (var row in TextLayout.Wrap(line, Columns))
                 {
-                    rows.Add((row, marked));
+                    rows.Add((row, marked, undone));
                 }
             }
         }
@@ -976,14 +1028,15 @@ public partial class Main : Node2D
         // Closed, the newest lines fill what the cards leave, one at the least; open, the log has the column.
         y = Title(Math.Min(y, PanelBottom - LineHeight - 4), _logOpen ? "EVENT LOG  Tab closes it" : client.EnemyPhasePlaying ? "THIS ACT  Tab for the whole log" : "EVENT LOG  Tab for the whole log");
         var room = Math.Max(0, (int)((PanelBottom + LineHeight - y) / LineHeight));
-        foreach (var (text, marked) in rows.Skip(Math.Max(0, rows.Count - room)))
+        foreach (var (text, marked, undone) in rows.Skip(Math.Max(0, rows.Count - room)))
         {
             if (marked)
             {
                 DrawRect(new Rect2(PanelOrigin.X - 6, y - LineHeight + 4, PanelWidth + 12, LineHeight), new Color(EnemyMark, 0.16f));
             }
 
-            Text(new Vector2(PanelOrigin.X, y), text, marked ? EnemyMark : Ink, FontSize);
+            // A line a Recall undid is dimmed (issue 515): the log keeps it, the board no longer holds it.
+            Text(new Vector2(PanelOrigin.X, y), text, marked ? EnemyMark : undone ? UiColour("muted", 0.55f) : Ink, FontSize);
             y += LineHeight;
         }
     }
