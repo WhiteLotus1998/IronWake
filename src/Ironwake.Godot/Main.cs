@@ -204,6 +204,7 @@ public partial class Main : Node2D
             }
 
             _still = _screenshot is not null;
+            _recallAfter = int.TryParse(Arg(args, "--recall-after"), out var recallAfter) ? recallAfter : null;
             SyncBeats();
         }
         catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
@@ -476,7 +477,7 @@ public partial class Main : Node2D
             return;
         }
 
-        var state = _client.State;
+        var state = Shown();
         DrawTopBar(state);
         DrawBoard(state);
         DrawLegend(state);
@@ -504,10 +505,47 @@ public partial class Main : Node2D
             ("TURN", $"{state.Turn} / {state.Map.TurnLimit}", Ink),
             ("PHASE", ours ? "Yours" : "Theirs", ours ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone)),
             ("GOAL", MapRenderer.WinName(state.Map.Win).Replace('_', ' '), Ink),
-            ("RECALL", state.RecallCharges.ToString(), Ink),
         })
         {
             x = Chip(x, label, value, colour) + 8;
+        }
+
+        RecallChip(x, state);
+    }
+
+    /// <summary>
+    /// The RECALL chip (issue 514): a pip per charge the map opened with, filled while left and
+    /// hollow once spent, ringed in amber while a death on the enemy phase pulses it, and reading
+    /// REWIND while a scrub plays.
+    /// </summary>
+    private void RecallChip(float x, BattleState state)
+    {
+        var total = Math.Max(_client!.RecallChargesAtStart, state.RecallCharges);
+        var label = Scrubbing ? "REWIND" : "RECALL";
+        var labelWidth = UiWidth(label, 10, bold: true);
+        var width = labelWidth + 36 + total * 14;
+        var rect = new Rect2(x, 12, width, 28);
+        var pulse = PulseNow();
+        if (pulse > 0)
+        {
+            var glow = Look(LookPalette.Player, 0.25f + 0.55f * pulse);
+            DrawRect(rect.Grow(3 + 3 * pulse), glow, filled: false, width: 2 + 2 * pulse);
+        }
+
+        Card(rect, Box, 14);
+        UiText(new Vector2(x + 14, 30), label, Scrubbing || pulse > 0 ? Look(LookPalette.Player) : Muted, 10, bold: true);
+        var amber = Look(LookPalette.Player);
+        for (var i = 0; i < total; i++)
+        {
+            var centre = new Vector2(x + 22 + labelWidth + 7 + i * 14, 26);
+            if (i < state.RecallCharges)
+            {
+                DrawCircle(centre, 5 * (1 + 0.25f * pulse), amber);
+            }
+            else
+            {
+                DrawArc(centre, 4.5f, 0, Mathf.Tau, 20, Muted, 1.5f, antialiased: true);
+            }
         }
     }
 
@@ -619,6 +657,14 @@ public partial class Main : Node2D
         }
 
         DrawPops();
+        DrawHeld();
+        if (Scrubbing)
+        {
+            // The rewind (issue 514): the board dims under an amber frame while it folds back.
+            var board = new Rect2(Board, new Vector2(map.Width * _tile, map.Height * _tile));
+            DrawRect(board, UiColour("ink", 0.16f));
+            DrawRect(board.Grow(3 * S), Look(LookPalette.Player, 0.85f), filled: false, width: 3 * S);
+        }
     }
 
     /// <summary>The enemy-phase path: the line walked from the start tile through the path to the end tile, bone on an ink edge, drawn under the units.</summary>
@@ -863,7 +909,7 @@ public partial class Main : Node2D
                 y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
             }
         }
-        else if (client.Act is { } act)
+        else if (client.ActShown(Animating) is { } act)
         {
             y = DrawActCard(boxTop, act) + 22;
         }

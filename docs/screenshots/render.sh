@@ -66,3 +66,13 @@ strip() {
 STILLS=(12 15 18)
 strip the_tollgate-113-enemy-strip 36 0.3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0
 python3 docs/look/crop.py "$out/the_tollgate-113-enemy-strip-18.png" "$out/crop-fallen-mark-4x.png" 300 190 160 110
+# Showcase slice 4 (issue 514): the same turn-4 enemy phase, now with the lethal number held
+# through the death beat and the RECALL chip pulsing on the hold, the act card clearing on the
+# flip to turn 5, then a Recall to state 49 (turn 4, before Teodor walked to 7,4) scrubbing the
+# board back. The stills are the kill with its number, the pulse on the hold, the first
+# player-phase frame after it and the rewind mid-scrub; then the scrub alone at 0.1 s a frame.
+STILLS=(12 18 27 31)
+strip the_tollgate-113-recall-strip 40 0.3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0 --recall-after 49
+STILLS=(13 15 17 19)
+strip the_tollgate-113-scrub-strip 24 0.1 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 200 --recall-after 49
+python3 docs/look/crop.py "$out/the_tollgate-113-recall-strip-18.png" "$out/crop-lethal-pulse-4x.png" 320 0 320 290

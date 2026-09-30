@@ -15,7 +15,15 @@ public enum PopKind
 /// One strike's number as it rises off its target (issue 513): the tile it rises from, the text
 /// (the damage, or <c>miss</c>), how loud it is, the unit struck and its HP once the strike lands.
 /// </summary>
-public sealed record Pop(Coord At, string Text, PopKind Kind, string TargetId, int TargetHpAfter);
+public sealed record Pop(Coord At, string Text, PopKind Kind, string TargetId, int TargetHpAfter)
+{
+    /// <summary>
+    /// True for the strike that kills (issue 514, round 151): a hit that leaves its target at 0.
+    /// It is drawn at least the unit glyph's size, outlined, and held through the death beat, so
+    /// the loudest number on screen is always the one that killed someone.
+    /// </summary>
+    public bool Lethal => Kind != PopKind.Miss && TargetHpAfter == 0;
+}
 
 /// <summary>
 /// A unit fallen this phase (issue 513, round 141): the unit as it stood before the strike that
@@ -40,6 +48,19 @@ public sealed record Beat(
     IReadOnlyDictionary<string, int> HpBefore,
     FallenMark? Fell)
 {
+    /// <summary>
+    /// On a death beat, the number of the strike that killed (issue 514): the renderer holds it
+    /// over the fallen unit's tile through the fade and the hold, after the strike beat has ended.
+    /// </summary>
+    public Pop? Held { get; init; }
+
+    /// <summary>
+    /// On a death beat, whether the RECALL chip pulses (issue 514, round 152): a player unit
+    /// killed in the enemy phase with a charge left, so the death and its answer sit together.
+    /// The pulse starts on the hold (<see cref="Rhythm.Fade"/>), never on the number's beat.
+    /// </summary>
+    public bool Pulse { get; init; }
+
     private static readonly IReadOnlyDictionary<string, int> NoHp = new Dictionary<string, int>();
 
     public bool IsMove => From is not null && To is not null;
@@ -171,6 +192,35 @@ public static class Rhythm
         }
 
         return times;
+    }
+
+    /// <summary>
+    /// How long a Recall's scrub runs (issue 514): the board folds back through every state the
+    /// rewind passes, each getting its share of this second.
+    /// </summary>
+    public const float Scrub = 1.0f;
+
+    /// <summary>
+    /// When the RECALL chip starts to pulse on a death beat that carries one (issue 514, round
+    /// 152): on the hold, after the fade, so the lethal number and the pulse never share a beat.
+    /// </summary>
+    public const float PulseStart = Fade;
+
+    /// <summary>
+    /// Where a scrub of <paramref name="frames"/> states stands at <paramref name="u"/> of its
+    /// length: the step it is on (from frame <c>Step</c> to frame <c>Step + 1</c>) and how far
+    /// through that step, each step an equal share. Past the end it rests on the last frame.
+    /// </summary>
+    public static (int Step, float Through) ScrubAt(int frames, float u)
+    {
+        if (frames < 2 || u >= 1)
+        {
+            return (Math.Max(0, frames - 2), 1);
+        }
+
+        var f = Math.Max(0, u) * (frames - 1);
+        var step = Math.Min((int)f, frames - 2);
+        return (step, f - step);
     }
 
     /// <summary>A beat's whole length: a walk by its steps, a strike by its numbers, a death by its fade and hold.</summary>

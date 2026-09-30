@@ -49,6 +49,69 @@ public partial class Main
 
     private float Factor => Speeds[_speed].Factor;
 
+    private int _scrubSerialSeen;
+    private float _scrubStart = float.NegativeInfinity;
+    private IReadOnlyList<BattleState> _scrubbing = Array.Empty<BattleState>();
+
+    /// <summary>Each token's offset while the scrub slides it home, in pixels from its tile in the frame drawn.</summary>
+    private readonly Dictionary<string, Vector2> _scrubShift = new();
+
+    /// <summary>Each token's scale while the scrub stands it back up (a unit dead in the newer frame, alive in the older).</summary>
+    private readonly Dictionary<string, float> _scrubRise = new();
+
+    /// <summary>Units in the newer frame and not the older (the rider not yet arrived), shrinking away through the step.</summary>
+    private readonly List<(BattleUnit Unit, float Scale)> _scrubLeaving = new();
+
+    /// <summary>The Recall to play once the enemy phase has played and held (<c>--recall-after</c>), for the strip.</summary>
+    private int? _recallAfter;
+    private float _phaseDoneAt = float.NaN;
+
+    /// <summary>True while a Recall's scrub is folding the board back (issue 514).</summary>
+    private bool Scrubbing => _clock < _scrubStart + Rhythm.Scrub && _scrubbing.Count > 1;
+
+    /// <summary>
+    /// The state the board draws: the client's, or during a scrub the frame the rewind has
+    /// reached, with each token's slide and rise set for this frame (issue 514). The turn chip,
+    /// the terrain and fired events all read from it, so they count down and fold back with it.
+    /// </summary>
+    private BattleState Shown()
+    {
+        _scrubShift.Clear();
+        _scrubRise.Clear();
+        _scrubLeaving.Clear();
+        if (!Scrubbing)
+        {
+            return _client!.State;
+        }
+
+        var u = (_clock - _scrubStart) / Rhythm.Scrub;
+        var (step, through) = Rhythm.ScrubAt(_scrubbing.Count, u);
+        var from = _scrubbing[step];
+        var to = _scrubbing[step + 1];
+        var e = through * through * (3 - 2 * through);
+        foreach (var unit in to.Units)
+        {
+            if (from.Find(unit.Id) is { } was)
+            {
+                if (was.At != unit.At)
+                {
+                    _scrubShift[unit.Id] = (Cell(was.At).Position - Cell(unit.At).Position) * (1 - e);
+                }
+            }
+            else
+            {
+                _scrubRise[unit.Id] = Math.Max(0.05f, e);
+            }
+        }
+
+        foreach (var unit in from.Units.Where(u => to.Find(u.Id) is null))
+        {
+            _scrubLeaving.Add((unit, 1 - e));
+        }
+
+        return to;
+    }
+
     private bool Animating => _clock < _beatsEnd;
 
     /// <summary>A beat's length at the current speed, by the client's <see cref="Rhythm"/> (issue 544).</summary>
@@ -96,6 +159,28 @@ public partial class Main
     {
         _clock += _stripPrefix is not null ? StripStep : (float)delta;
         SyncBeats();
+
+        // The strip's Recall: once the enemy phase has played out and the player's phase has held a beat.
+        if (_recallAfter is { } index && _client is { EnemyPhasePlaying: false } done && !Animating)
+        {
+            if (float.IsNaN(_phaseDoneAt))
+            {
+                _phaseDoneAt = _clock;
+            }
+            else if (_clock - _phaseDoneAt >= 1.2f)
+            {
+                _recallAfter = null;
+                done.Recall(index);
+            }
+        }
+
+        if (_client is { } c && c.ScrubSerial != _scrubSerialSeen)
+        {
+            _scrubSerialSeen = c.ScrubSerial;
+            _scrubbing = c.Scrub;
+            _scrubStart = _still ? float.NegativeInfinity : _clock;
+        }
+
         if (_client is { EnemyPhasePlaying: true } client && !_still && _clock >= _beatsEnd + Rhythm.Gap * Factor * (_playing.Count == 0 ? 0.5f : 1))
         {
             client.Step();
@@ -143,6 +228,11 @@ public partial class Main
     /// <summary>Where a unit's token sits now and how far it has lunged, in pixels from its tile's own place.</summary>
     private Vector2 Shift(string id, Coord at)
     {
+        if (_scrubShift.TryGetValue(id, out var sliding))
+        {
+            return sliding;
+        }
+
         for (var i = 0; i < _playing.Count; i++)
         {
             var beat = _playing[i];
@@ -253,7 +343,12 @@ public partial class Main
 
         foreach (var unit in state.Units)
         {
-            DrawTokenMoved(state, unit with { Hp = ShownHp(unit.Id, unit.Hp) }, 1);
+            DrawTokenMoved(state, unit with { Hp = ShownHp(unit.Id, unit.Hp) }, _scrubRise.GetValueOrDefault(unit.Id, 1));
+        }
+
+        foreach (var (leaving, scale) in _scrubLeaving.Where(l => l.Scale > 0.05f))
+        {
+            DrawTokenMoved(state, leaving, scale);
         }
 
         foreach (var ghost in _client.Ghosts)
@@ -352,6 +447,11 @@ public partial class Main
                     life = Math.Min(life, PopTime(i, j + 1) - PopTime(i, j));
                 }
 
+                if (pop.Lethal)
+                {
+                    life = Math.Max(life, BeatLength(beat) - (PopTime(i, j) - _beatStarts[i]) + Rhythm.Gap * Factor);
+                }
+
                 if (age < 0 || age > life)
                 {
                     continue;
@@ -365,6 +465,14 @@ public partial class Main
                 var striker = pop.TargetId == beat.UnitId ? beat.Struck : beat.To;
                 var away = striker is { } s0 && s0.X != pop.At.X ? Math.Sign(pop.At.X - s0.X) : pop.TargetId == beat.UnitId ? -1 : 1;
                 var at = Cell(pop.At).Position + new Vector2(_tile / 2f + away * _tile * 0.3f, 14 * S - rise + _tile * 0.25f);
+                if (pop.Lethal)
+                {
+                    // The killing number (issue 514): glyph-sized and outlined, it holds at its
+                    // height until the death beat takes it over.
+                    DrawLethal(pop, Math.Min(1, age / (0.15f * Factor)), 1);
+                    continue;
+                }
+
                 var (size, colour) = pop.Kind switch
                 {
                     PopKind.Crit => ((int)(30 * S), MarkColour("struck", alpha)),
@@ -379,6 +487,74 @@ public partial class Main
                 Outlined(at, pop.Text, size, colour, alpha);
             }
         }
+    }
+
+    /// <summary>
+    /// The lethal number held over the death beat (issue 514): drawn where the strike left it
+    /// through the fade and the hold, fading only over the hold's last fifth.
+    /// </summary>
+    private void DrawHeld()
+    {
+        for (var i = 0; i < _playing.Count; i++)
+        {
+            if (_playing[i].Held is not { } pop)
+            {
+                continue;
+            }
+
+            var length = BeatLength(_playing[i]);
+            var age = _clock - _beatStarts[i];
+            if (age < 0 || age > length)
+            {
+                continue;
+            }
+
+            var tail = 0.2f * length;
+            DrawLethal(pop, 1, age < length - tail ? 1 : (length - age) / tail);
+        }
+    }
+
+    /// <summary>
+    /// A killing number: at least the unit glyph's size (the token's 24 px disc), in the struck
+    /// colour with a heavy ink edge, set above its target's tile where every number rises to.
+    /// <paramref name="grow"/> eases it in over its first instant.
+    /// </summary>
+    private void DrawLethal(Pop pop, float grow, float alpha)
+    {
+        var size = (int)(34 * S * (0.7f + 0.3f * grow));
+        var at = Cell(pop.At).Position + new Vector2(_tile / 2f, 19 * S - _tile * 0.55f);
+        var ink = UiColour("ink", alpha);
+        var e = Math.Max(2, size / 9f);
+        for (var k = 0; k < 8; k++)
+        {
+            var d = new Vector2(Mathf.Cos(k * Mathf.Pi / 4), Mathf.Sin(k * Mathf.Pi / 4)) * e;
+            UiText(at + d, pop.Text, ink, size, bold: true, centred: true);
+        }
+
+        UiText(at, pop.Text, MarkColour("struck", alpha), size, bold: true, centred: true);
+    }
+
+    /// <summary>
+    /// How strongly the RECALL chip pulses now (issue 514, round 152): 0 unless a death beat that
+    /// pulses is on its hold, then a swell from the hold's start that fades out over a second.
+    /// </summary>
+    private float PulseNow()
+    {
+        for (var i = 0; i < _playing.Count; i++)
+        {
+            if (!_playing[i].Pulse)
+            {
+                continue;
+            }
+
+            var age = _clock - (_beatStarts[i] + Factor * Rhythm.PulseStart);
+            if (age >= 0 && age < 1.6f)
+            {
+                return (0.5f + 0.5f * Mathf.Sin(age * Mathf.Tau * 1.25f - Mathf.Pi / 2)) * (age < 1.0f ? 1 : (1.6f - age) / 0.6f);
+            }
+        }
+
+        return 0;
     }
 
     /// <summary>Bold UI text centred on <paramref name="at"/> with a four-way ink edge so it reads over any tile.</summary>
