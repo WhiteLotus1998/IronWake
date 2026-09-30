@@ -3,6 +3,28 @@ using Ironwake.Core;
 
 namespace Ironwake.Client;
 
+/// <summary>
+/// The move preview's line (issue 511): the tile and its terrain, the move it spends of the
+/// unit's Mov, the terrain's avoid for the unit, and the coming enemy phase's verdict for a
+/// stop there: how many enemies <c>threat</c> prices against it, what they deal if every
+/// strike lands, and the sleeping groups that could strike it awake, named without numbers as
+/// <c>threat</c> names them.
+/// </summary>
+public sealed record MovePreview(Coord Tile, string Terrain, int Cost, int Mov, int Avoid, int Strikers, int IfAllLand, IReadOnlyList<string> Asleep)
+{
+    /// <summary>True when no awake enemy the player can see prices a strike on the tile.</summary>
+    public bool Safe => Strikers == 0;
+
+    /// <summary>The verdict in two words, as the dot beside it says it in colour.</summary>
+    public string Verdict => Safe ? "safe here" : Strikers == 1 ? "1 strikes" : $"{Strikers} strike";
+
+    /// <summary>The line: tile, move spent, avoid, then the verdict with its numbers.</summary>
+    public string Text =>
+        $"{Terrain} {Tile.X},{Tile.Y}  move {Cost} of {Mov}  avoid {Avoid}  {Verdict}"
+        + (Safe ? "" : $" for {IfAllLand}")
+        + (Asleep.Count > 0 ? $"  asleep: {string.Join(", ", Asleep)}" : "");
+}
+
 /// <summary>One forecast shown while a tile is hovered: the target, where it stands, and the console's forecast text.</summary>
 public sealed record HoverForecast(string TargetId, Coord TargetAt, string Text);
 
@@ -140,6 +162,37 @@ public sealed class ClientSession
 
         return PlaySession.ThreatText(State, Content, unit, tile, lines, Queries.SleepingThreats(State, Content, unit, tile)!, Queries.Unseeing(State, Content, unit, tile), Queries.MoveWins(State, Content, unit, tile));
     }
+
+    /// <summary>
+    /// The move preview (issue 511): the one line the forecast slot shows for a hovered tile
+    /// with no strike to price, read from the same core queries as <see cref="Threat"/>. Null
+    /// with no selection, while the enemy phase plays, from a tile the unit cannot end on, and
+    /// whenever <see cref="Hover"/> has a strike to price there.
+    /// </summary>
+    public MovePreview? Preview(Coord tile)
+    {
+        if (Selected is not { } id || State.Find(id) is not { } unit || EnemyPhasePlaying
+            || Reach?.EntryAt(tile) is not { CanEnd: true } entry || Hover(tile).Count > 0
+            || Queries.Threats(State, Content, unit, tile) is not { } lines)
+        {
+            return null;
+        }
+
+        var terrain = Content.TerrainById(State.Map.TerrainIdAt(tile));
+        var strikers = lines.Count(line => !line.Raises);
+        var asleep = (Queries.SleepingThreats(State, Content, unit, tile) ?? Array.Empty<SleepingThreat>()).Select(group => group.Group).ToList();
+        return new MovePreview(tile, terrain.Name, entry.Cost, Reach!.Mov, terrain.AvoidFor(Reach.Movement), strikers, Queries.IfAllLand(lines), asleep);
+    }
+
+    /// <summary>
+    /// Every tile an enemy the player can see could strike next phase (issue 511), the strike
+    /// set of DESIGN.md section 8 as <see cref="Ironwake.Core.Threat.StruckByUnit"/> answers it
+    /// for each seen enemy; an enemy the dark hides adds nothing, so the hatch never lights the dark.
+    /// </summary>
+    public IReadOnlySet<Coord> EnemyThreat =>
+        State.UnitsOf(Side.Enemy).Where(enemy => Dusk.Seen(State, enemy))
+            .SelectMany(enemy => Ironwake.Core.Threat.StruckByUnit(State, Content, enemy))
+            .ToHashSet();
 
     /// <summary>
     /// The Recall browser (issue 353): the console's <c>recall list</c> rows, each state row

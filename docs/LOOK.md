@@ -1,6 +1,6 @@
 # LOOK — how Ironwake is drawn
 
-The showcase's style sheet (epic #509, slice 0 #510, DECISIONS/0092). Provisional until Lotus reads the mocked frame; the partners' scores decide after a week of silence. Tone from CLAUDE.md: grounded, a little dry, warm underneath. The frame: `docs/look/the_tollgate-turn1.png` (seed 113, turn 1, the captain selected, 4,9 hovered), beside the debug client's `docs/screenshots/the_tollgate-113-turn1.png`.
+The showcase's style sheet (epic #509, slice 0 #510, DECISIONS/0092). Provisional until Lotus reads the mocked frame; the partners' scores decide after a week of silence. Tone from CLAUDE.md: grounded, a little dry, warm underneath. The mocked frame: `docs/look/the_tollgate-turn1.png` (seed 113, turn 1, the captain selected, 4,9 hovered). From slice 1 (#511) the client draws in the look: `docs/screenshots/the_tollgate-113-turn1.png`, `-turn3.png` (the forecast priced), `-threat.png` (the enemy phase with the hatch on) and the 4x crops beside them.
 
 ## The one rule
 
@@ -10,13 +10,13 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 
 ## Palette
 
-`Ironwake.Client.LookPalette` holds these values; `LookPaletteTests` fails if this table, the class, or any colour in `docs/look/*.svg` disagree, and runs the readability pass's CIE76 and colour-vision checks on them (terrain 12 apart, sides 40, a side 20 from any ground it stands on, marks 12), plus the warmth rule: the player at chroma 55 or more, every other token at 32 or less, fire exempt as hatched. The debug client keeps `Palette` until slice 1 swaps it.
+`Ironwake.Client.LookPalette` holds these values; `LookPaletteTests` fails if this table, the class, or any colour in `docs/look/*.svg` disagree, and runs the readability pass's CIE76 and colour-vision checks on them (terrain 12 apart, sides 40, a side 20 from any ground it stands on, marks 12), plus the warmth rule: the player at chroma 55 or more, every other token at 32 or less, fire exempt as hatched. The client draws with it since slice 1 (#511); `Palette` stays for the colour-vision arithmetic it holds and its tests.
 
 | token | value | use |
 |---|---|---|
 | `terrain.plain` | `#748A66` | peat green, the board's ground |
 | `terrain.road` | `#B3AE9C` | salt grey |
-| `terrain.forest` | `#3E5A45` | dark peat, three ink pines |
+| `terrain.forest` | `#4F6E54` | peat, between plain and water, three ink pines |
 | `terrain.hill` | `#B89E6C` | dry heath, one ink swell |
 | `terrain.mountain` | `#77767C` | iron, an ink ridge |
 | `terrain.water` | `#41667F` | slate water, two frost ripples |
@@ -27,9 +27,9 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 | `player` | `#E8A33D` | lamplight amber: the player's tokens, HP, numerals |
 | `player.deep` | `#9A6420` | the amber token's base and shadow |
 | `enemy` | `#2F3742` | slate: the enemy's token |
-| `enemy.bone` | `#E6E0D0` | bone: the enemy's silhouette, rim, HP and numerals |
+| `enemy.bone` | `#E6E0D0` | bone: the enemy's silhouette, its hairline rim, HP and numerals, the enemy phase's marks |
 | `mark.selected` | `#F6D38A` | the selected unit, the hovered tile (dashed), the planned path (dotted) |
-| `mark.reach` | `#BFD9EA` | frost: tiles the selected unit can reach, filled at about 40 percent |
+| `mark.reach` | `#BFD9EA` | frost: tiles the selected unit can reach, a mark laid on the tile (a wash at about 16 percent, an inset edge), never a surface |
 | `mark.threat` | `#EDE6D6` | the enemy's reach, drawn as a diagonal hatch, never a fill |
 | `mark.struck` | `#FFFFFF` | a unit just struck: a one-beat ring flash |
 | `ui.ink` | `#15181D` | the screen behind everything; glyphs on amber |
@@ -40,8 +40,8 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 
 ## Shape language
 
-- **Tiles** are flat squares with a hairline ink grid at 18 percent. Detail is ink at 25 to 35 percent over the tile's own colour, so terrain never adds a hue. No outlines around terrain; edges come from value.
-- **Tokens** are discs, about two thirds of a tile. The player's: an amber disc on a deeper amber base offset downward, its silhouette in ink. The enemy's: a slate disc with a bone rim and a bone silhouette, an ink shadow. A boss adds a dashed bone ring outside the rim. The captain wears a small amber crown above the disc (the old crown, kept).
+- **Tiles** are flat squares with a hairline ink grid at 18 percent. Detail is ink at 25 to 35 percent over the tile's own colour, so terrain never adds a hue. No outlines around terrain; edges come from value. The board's one depth cue is light from the north: every wall and mountain casts an ink shadow onto the tile south of it (deep at the foot, fading down the tile), a wall's north edge catches a line of light, and the fort's battlement throws its own small shadow. The board sits on a lifted mat (`ui.panel`, an ink hairline at its edge), so the map is an object and the walls never merge with the screen.
+- **Tokens** are discs, about two thirds of a tile. The player's: an amber disc on a deeper amber base offset downward, its silhouette in ink. The enemy's: a slate disc with a one-pixel bone rim (a hairline; round 130 found a thicker rim lightened the token) and a bone silhouette, an ink shadow. A boss adds a dashed bone ring outside the rim. The captain wears a small amber crown above the disc (the old crown, kept). The unit's name sits under its HP bar, its last word when the whole name is wider than the tile (Brigand, Warden). A unit that has acted sinks toward the ink.
 - **Silhouettes, by class** (`docs/look/silhouettes.png`): cadet, a short upright sword; captain, the cadet's sword and the crown; pikeman, a long diagonal shaft with a leaf head; toll warden, the pike with a hooked crossbar (the Toll Spear reaches 2); bowman and archer, a bow with its arrow; reaver, a haft with a single crescent head; bandit leader, a double-bitted head and the boss ring; outrider, the pike with a pennant; adept, a flame. Each silhouette is a weapon, since the weapon is what the forecast is about. Classes not on the Tollgate get theirs in the slice that first draws them.
 - **HP** sits under the token as a thin bar in the side's colour on ink. Numbers live in the panels, not on the board.
 - **The forecast** (`docs/look/crop-forecast-4x.png`, real numbers: seed 113, turn 3, Teodor on 7,5 against the Toll Brigand on 6,5) is the screen's centrepiece. Both tokens, names, weapon and tile; two HP bars with the damage shaded in as a hatch before you commit (the attacker's shaded by the counter's damage, labelled "if countered"); hit, damage and crit as big numerals, ours amber on the left, theirs bone on the right, one label between each pair; strikes as pips, a second pip filled only when a side doubles, "no counter" as an empty slot.
@@ -51,13 +51,13 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 
 - **UI:** Inter (OFL), tabular numerals (`font-variant-numeric: tabular-nums`), 700 for names and numerals, 400 for the rest, labels in spaced capitals.
 - **Log:** JetBrains Mono (OFL), the console's text as it is.
-- Both come from their own GitHub repositories with their licence files (the sandbox's proxy refuses Google Fonts) when slice 1 vendors them. Until then the mocked frames name them first and rasterise with DejaVu Sans and DejaVu Sans Mono.
+- Both are vendored in `src/Ironwake.Godot/fonts/` from their own GitHub releases (Inter 4.1, JetBrains Mono 2.304; the sandbox's proxy refuses Google Fonts), each with its OFL beside it and listed in `LICENSES`. The client reads them from the source tree, or as imported resources in an export, and falls back to a system face. The console's own lines (the forecast and unit text until slice 2 draws them, the log) stay in the monospace; everything else is Inter. The mocked frames in `docs/look/` still rasterise with DejaVu.
 
 ## Layout at 1280x720
 
 - **Top bar:** the map's name, then chips: turn, phase (amber when it is ours), goal in player words, Recall charges.
 - **Board, left:** 48-pixel tiles (the Tollgate's 14x12 is 672x576), on an ink mat.
-- **Right column:** the forecast card on top and largest; hovering a tile with no strike shows the move preview there instead (tile, move spent, avoid, and `threat`'s verdict for that stop in words); the unit card under it (name, class, HP bar, the stats in one row, the weapon); the log as a one-line bar showing the newest line, `L` to open it full height over the column. The log stays parity-checked.
+- **Right column:** the forecast card on top and largest; hovering a tile with no strike shows the move preview there instead, one line (#511): terrain and tile, move spent of Mov, avoid, and the verdict as a dot (frost safe, bone struck) with two words, the strikers' total if all land, and the sleeping groups named without numbers; the unit card under it (name, class, HP bar, the stats in one row, the weapon); the log as a one-line bar showing the newest line, `L` to open it full height over the column. The log stays parity-checked.
 - **Legend** under the log: only the marks on screen.
 - **Footer:** the keys, as keycaps.
 

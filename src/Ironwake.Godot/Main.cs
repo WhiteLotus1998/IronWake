@@ -8,10 +8,11 @@ using CoreSide = Ironwake.Core.Side;
 namespace Ironwake.Godot;
 
 /// <summary>
-/// The thin renderer, slices 1 and 2 and the readability pass (issues 347, 353, 349): flat tiles in
-/// <see cref="Palette"/>'s colours with their glyphs and a legend, the dark shaded, units as
-/// letters on blue circles and orange squares with their hp, the captain crowned and a Seize map's
-/// throne framed, the objective atop the panel and a lost battle's reason under it (issue 374), the selected unit's reach, the forecast from a hovered tile against
+/// The thin renderer, slices 1 and 2 and the readability pass (issues 347, 353, 349), drawn in the
+/// showcase's look since its slice 1 (issue 511, <c>Main.Look.cs</c>): tiles and a legend in
+/// <see cref="LookPalette"/>'s colours, the dark shaded, units as class silhouettes on the sides'
+/// discs with their names and HP, the captain crowned and a Seize map's gate framed, the enemy's
+/// threat hatched on T, the objective atop the panel and a lost battle's reason under it (issue 374), the selected unit's reach, the forecast from a hovered tile against
 /// each target in range and the threat on the selected unit there, the Recall browser, and the
 /// event log in the console's own text. Every number comes from
 /// <see cref="ClientSession"/>, which asks the core; nothing here knows a rule.
@@ -44,30 +45,48 @@ public partial class Main : Node2D
     private const int LineHeight = 17;
     private const int LogLines = 30;
     private const int RecallRowsShown = 40;
-    private const string KeyLine = "click: select, move, attack   E: end phase   Space: next enemy event   C: skip to end   R: recall   Esc: clear";
+    private static readonly (string Key, string Does)[] Keys =
+    {
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("R", "recall"), ("T", "threat"), ("Esc", "clear"),
+    };
     private const float PanelBottom = ViewHeight - 30;
     private static readonly Vector2 Board = new(Margin, Top);
     private static readonly Vector2 PanelOrigin = new(ViewWidth - PanelWidth - Margin, Top);
 
-    private static readonly Color Background = new(0.13f, 0.14f, 0.16f);
-    private static readonly Color Box = new(0.2f, 0.22f, 0.27f);
-    private static readonly Color Ink = new(0.93f, 0.93f, 0.9f);
-    private static readonly Color Muted = new(0.65f, 0.66f, 0.68f);
-    private static readonly Color Accent = new(0.55f, 0.78f, 1f);
-    private static readonly Color Link = new(0.6f, 0.82f, 1f);
-    private static readonly Color Warn = new(1f, 0.75f, 0.35f);
+    private static readonly Color Background = UiColour("ink");
+    private static readonly Color Box = UiColour("panel");
+    private static readonly Color Ink = UiColour("text");
+    private static readonly Color Muted = UiColour("muted");
+    private static readonly Color Rule = UiColour("lost");
+    private static readonly Color Link = MarkColour("reach");
+    private static readonly Color Warn = MarkColour("selected");
 
-    /// <summary>The pointer and the enemy-phase mark: a yellow, which every common colour-vision deficiency keeps apart from both sides.</summary>
-    private static readonly Color Mark = new(1f, 0.9f, 0.1f);
+    /// <summary>The player's own marks: the pointer, the selection and the between-map screen's selected row.</summary>
+    private static readonly Color Mark = MarkColour("selected");
 
-    /// <summary>One monospaced face for every line, so forecast numbers and hp align as they do in the console.</summary>
-    private readonly Font _mono = new SystemFont { FontNames = new[] { "DejaVu Sans Mono", "Consolas", "Cascadia Mono", "Liberation Mono", "Menlo", "monospace" } };
+    /// <summary>The enemy phase's marks on the board and in the log: bone, the enemy's own light colour.</summary>
+    private static readonly Color EnemyMark = Look(LookPalette.EnemyBone);
+
+    /// <summary>The console's monospaced face for every console line (the log, the forecast and unit text), so numbers align as they do in the console.</summary>
+    private readonly Font _mono = LoadFont("JetBrainsMono-Regular.ttf", tabular: false, "DejaVu Sans Mono", "Consolas", "Menlo", "monospace");
+
+    /// <summary>The UI face (LOOK.md: Inter, OFL) with tabular numerals, for everything that is not a console line.</summary>
+    private readonly Font _ui = LoadFont("Inter-Regular.ttf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
+
+    /// <summary>The UI face at 700, for names, numerals and chips.</summary>
+    private readonly Font _bold = LoadFont("Inter-Bold.ttf", tabular: true, "DejaVu Sans", "Segoe UI", "Helvetica", "sans-serif");
+
+    /// <summary>The panel titles' spaced capitals: the UI face at 700 with its letters set apart.</summary>
+    private readonly FontVariation _caps;
+
+    /// <summary>Whether the board hatches every tile a seen enemy could strike next phase, a tile no unit can stand on left bare; T toggles it.</summary>
+    private bool _threatShown;
 
     /// <summary>The tile size for the open map, the largest up to 44 px that leaves room for the legend and the panel.</summary>
     private int _tile = 40;
 
-    /// <summary>How many characters of the monospaced face fit across the panel.</summary>
-    private int Columns => (int)(PanelWidth / _mono.GetStringSize("M", fontSize: FontSize).X);
+    /// <summary>How many characters of the monospaced face fit across the panel, measured over ten so one glyph's rounding cannot overflow a line.</summary>
+    private int Columns => (int)((PanelWidth - 4) / (_mono.GetStringSize("MMMMMMMMMM", fontSize: FontSize).X / 10));
 
     /// <summary>The clickable regions drawn last frame (Recall rows, between-map rows) and what a click on each does.</summary>
     private readonly List<(Rect2 Area, Action Click)> _hits = new();
@@ -78,12 +97,16 @@ public partial class Main : Node2D
     /// <summary>The roster unit selected on the between-map screen, which a ware is bought for and B benches.</summary>
     private string? _screenUnit;
 
-    private char[] _letters = Array.Empty<char>();
     private Coord? _hover;
     private string _error = "";
     private string? _screenshot;
     private int _framesDrawn;
     private bool _recallOpen;
+
+    public Main()
+    {
+        _caps = new FontVariation { BaseFont = _bold, SpacingGlyph = 2 };
+    }
 
     public override void _Ready()
     {
@@ -122,7 +145,6 @@ public partial class Main : Node2D
             }
 
             _client = new ClientSession(content, state);
-            _letters = MapRenderer.Letters(map, content);
             _tile = TileFor(map);
             if (Arg(args, "--script") is { } script)
             {
@@ -143,6 +165,7 @@ public partial class Main : Node2D
 
             _hover = CoordArg(args, "--hover");
             _recallOpen = Array.IndexOf(args, "--recall") >= 0;
+            _threatShown = Array.IndexOf(args, "--threat") >= 0;
             _screenshot = Arg(args, "--screenshot");
         }
         catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
@@ -238,6 +261,9 @@ public partial class Main : Node2D
                     case Key.R:
                         _recallOpen = !_recallOpen;
                         break;
+                    case Key.T:
+                        _threatShown = !_threatShown;
+                        break;
                     case Key.Escape:
                         _client.ClearSelection();
                         _recallOpen = false;
@@ -266,7 +292,6 @@ public partial class Main : Node2D
         _hover = null;
         if (_client is not null)
         {
-            _letters = MapRenderer.Letters(_client.State.Map, _client.Content);
             _tile = TileFor(_client.State.Map);
         }
     }
@@ -402,53 +427,117 @@ public partial class Main : Node2D
         }
 
         var state = _client.State;
-        Text(new Vector2(Margin, 28), Header(state), Ink, 18);
+        DrawTopBar(state);
         DrawBoard(state);
         DrawLegend(state);
         DrawPanel();
-        Text(new Vector2(Margin, ViewHeight - 10), KeyLine, Muted, 13);
+        DrawKeys();
     }
 
-    /// <summary>The board: terrain with its glyph, exits, reach, the dark, the pointer, the units, and the enemy-phase mark.</summary>
+    /// <summary>
+    /// The top bar (LOOK.md's layout): the map's name, then chips for the turn, the phase (amber
+    /// when it is ours), the goal and the Recall charges; a decided battle's verdict replaces them.
+    /// </summary>
+    private void DrawTopBar(BattleState state)
+    {
+        UiText(new Vector2(Margin, 31), state.Map.Name, Ink, 20, bold: true);
+        var x = Margin + UiWidth(state.Map.Name, 20, bold: true) + 18;
+        if (state.Outcome.IsOver)
+        {
+            Chip(x, state.Outcome.Result == BattleResult.Won ? "WON" : "LOST", state.Outcome.Reason, Ink);
+            return;
+        }
+
+        var ours = state.Phase == CoreSide.Player;
+        foreach (var (label, value, colour) in new[]
+        {
+            ("TURN", $"{state.Turn} / {state.Map.TurnLimit}", Ink),
+            ("PHASE", ours ? "Yours" : "Theirs", ours ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone)),
+            ("GOAL", MapRenderer.WinName(state.Map.Win).Replace('_', ' '), Ink),
+            ("RECALL", state.RecallCharges.ToString(), Ink),
+        })
+        {
+            x = Chip(x, label, value, colour) + 8;
+        }
+    }
+
+    /// <summary>A chip: a spaced-capital label and a bold value on a rounded panel; returns its right edge.</summary>
+    private float Chip(float x, string label, string value, Color colour)
+    {
+        var width = UiWidth(label, 10, bold: true) + UiWidth(value, 14, bold: true) + 36;
+        Card(new Rect2(x, 12, width, 28), Box, 14);
+        UiText(new Vector2(x + 14, 30), label, Muted, 10, bold: true);
+        UiText(new Vector2(x + 22 + UiWidth(label, 10, bold: true), 31), value, colour, 14, bold: true);
+        return x + width;
+    }
+
+    /// <summary>The footer: each key as a keycap and what it does.</summary>
+    private void DrawKeys()
+    {
+        var x = (float)Margin;
+        var y = ViewHeight - 24;
+        foreach (var (key, does) in Keys)
+        {
+            var width = UiWidth(key, 12, bold: true) + 14;
+            Card(new Rect2(x, y - 7, width, 22), Box, 5);
+            UiText(new Vector2(x + width / 2, y + 9), key, Ink, 12, bold: true, centred: true);
+            UiText(new Vector2(x + width + 7, y + 9), does, Muted, 12);
+            x += width + 7 + UiWidth(does, 12) + 20;
+        }
+    }
+
+    /// <summary>
+    /// The board (issue 511): the mat, each tile's ground and detail, the walls' shadows, the grid,
+    /// the dark, exits, then the marks (the threat hatch when shown, the reach), the enemy phase's
+    /// path, the units, the enemy phase's rings, and the pointer on top.
+    /// </summary>
     private void DrawBoard(BattleState state)
     {
         var map = state.Map;
         var reach = _client!.Reach;
         var dusk = Dusk.Sight(state) is not null;
+        DrawMat(map);
         for (var y = 0; y < map.Height; y++)
         {
             for (var x = 0; x < map.Width; x++)
             {
                 var at = new Coord(x, y);
-                var rect = TileRect(at);
-                var terrain = _client.Content.TerrainById(map.TerrainIdAt(at));
-                DrawRect(rect, Of(Palette.TerrainOf(terrain.Id)));
-                if (terrain.Glyph != '.')
-                {
-                    Text(rect.Position + new Vector2(3, 12), terrain.Glyph.ToString(), new Color(0, 0, 0, 0.45f), 11);
-                }
+                DrawGround(map, at, map.TerrainIdAt(at));
+            }
+        }
 
+        DrawShadows(map);
+        DrawGrid(map);
+        var threat = _threatShown ? _client.EnemyThreat : null;
+        for (var y = 0; y < map.Height; y++)
+        {
+            for (var x = 0; x < map.Width; x++)
+            {
+                var at = new Coord(x, y);
+                var rect = Cell(at);
                 if (dusk && !Dusk.Sees(state, CoreSide.Player, at))
                 {
-                    DrawRect(rect, new Color(0.03f, 0.03f, 0.08f, 0.62f));
-                    DrawLine(rect.Position + new Vector2(0, _tile * 0.5f), rect.Position + new Vector2(_tile * 0.5f, 0), new Color(1, 1, 1, 0.12f), 1);
-                    DrawLine(rect.Position + new Vector2(0, _tile - 1), rect.Position + new Vector2(_tile - 1, 0), new Color(1, 1, 1, 0.12f), 1);
+                    DrawRect(rect, UiColour("ink", 0.62f));
                 }
 
                 if (map.IsExit(at))
                 {
-                    DrawRect(Inset(rect, 2), Colors.White, filled: false, width: 3);
+                    DrawRect(rect.Grow(-3 * S), Ink, filled: false, width: 3 * S);
                 }
 
                 if (map.Win == WinCondition.Seize && map.IsThrone(at))
                 {
-                    DrawThrone(rect);
+                    DrawRect(rect.Grow(-2 * S), UiColour("ink"), filled: false, width: 2 * S);
+                }
+
+                if (threat is not null && threat.Contains(at) && _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null))
+                {
+                    DrawThreatMark(at);
                 }
 
                 if (reach is not null && reach.CanEnd(at))
                 {
-                    DrawRect(rect, new Color(1f, 1f, 1f, 0.3f));
-                    DrawRect(Inset(rect, 1), new Color(0.1f, 0.2f, 0.6f, 0.9f), filled: false, width: 1);
+                    DrawReachMark(at);
                 }
             }
         }
@@ -460,7 +549,7 @@ public partial class Main : Node2D
 
         foreach (var unit in state.Units)
         {
-            DrawUnit(state, unit);
+            DrawToken(state, unit);
         }
 
         if (_client.Playing is { } mark)
@@ -470,133 +559,63 @@ public partial class Main : Node2D
 
         if (_hover is { } hover)
         {
-            DrawRect(Inset(TileRect(hover), 1), Mark, filled: false, width: 2);
+            DrawHoverMark(hover);
         }
     }
 
-    private void DrawUnit(BattleState state, BattleUnit unit)
-    {
-        var rect = TileRect(unit.At);
-        var centre = rect.GetCenter();
-        if (!Dusk.Seen(state, unit))
-        {
-            Text(centre + new Vector2(-_tile * 0.15f, _tile * 0.2f), Dusk.Unseen.ToString(), new Color(0.85f, 0.85f, 0.9f), (int)(_tile * 0.5f));
-            return;
-        }
-
-        var player = unit.Side == CoreSide.Player;
-        var fill = Of(player ? Palette.Player : Palette.Enemy);
-        if (player && unit.Acted)
-        {
-            fill = fill.Darkened(0.55f);
-        }
-
-        var radius = _tile * 0.4f;
-        if (player)
-        {
-            DrawCircle(centre, radius + 1.5f, Colors.Black);
-            DrawCircle(centre, radius, fill);
-        }
-        else
-        {
-            var square = new Rect2(centre - new Vector2(radius, radius), new Vector2(radius * 2, radius * 2));
-            DrawRect(Inset(square, -1.5f), Colors.Black);
-            DrawRect(square, fill);
-        }
-
-        if (unit.IsCaptain)
-        {
-            DrawCrown(centre + new Vector2(0, -radius - 1), radius * 0.6f);
-        }
-
-        if (unit.Id == _client!.Selected)
-        {
-            DrawArc(centre, radius + 4, 0, Mathf.Tau, 32, Mark, 2);
-        }
-
-        var letter = _letters[unit.PlacementIndex].ToString();
-        var size = (int)(_tile * 0.45f);
-        Text(centre + new Vector2(-_mono.GetStringSize(letter, fontSize: size).X / 2, size * 0.35f), letter, player ? Colors.White : Colors.Black, size);
-        var hp = unit.Hp.ToString();
-        var hpSize = Math.Max(10, (int)(_tile * 0.3f));
-        var hpWidth = _mono.GetStringSize(hp, fontSize: hpSize).X;
-        DrawRect(new Rect2(rect.Position + new Vector2(rect.Size.X - hpWidth - 3, rect.Size.Y - hpSize - 1), new Vector2(hpWidth + 3, hpSize + 1)), new Color(0, 0, 0, 0.75f));
-        Text(rect.Position + new Vector2(rect.Size.X - hpWidth - 1.5f, rect.Size.Y - 3), hp, Colors.White, hpSize);
-    }
-
-    /// <summary>The seize tile on a Seize map (issue 374): a double white frame, apart from an exit's single one.</summary>
-    private void DrawThrone(Rect2 rect)
-    {
-        DrawRect(Inset(rect, 1), Colors.Black, filled: false, width: 2);
-        DrawRect(Inset(rect, 3), Colors.White, filled: false, width: 2);
-        DrawRect(Inset(rect, 7), Colors.White, filled: false, width: 2);
-    }
-
-    /// <summary>The captain's mark (issue 374): a three-pointed white crown with a black edge, its base at <paramref name="baseCentre"/>.</summary>
-    private void DrawCrown(Vector2 baseCentre, float width)
-    {
-        var h = width * 0.7f;
-        var l = baseCentre.X - width / 2;
-        var points = new[]
-        {
-            new Vector2(l, baseCentre.Y), new Vector2(l, baseCentre.Y - h), new Vector2(l + width * 0.25f, baseCentre.Y - h * 0.45f),
-            new Vector2(l + width * 0.5f, baseCentre.Y - h), new Vector2(l + width * 0.75f, baseCentre.Y - h * 0.45f),
-            new Vector2(l + width, baseCentre.Y - h), new Vector2(l + width, baseCentre.Y),
-        };
-        DrawColoredPolygon(points, Colors.White);
-        DrawPolyline(points.Append(points[0]).ToArray(), Colors.Black, 1.5f);
-    }
-
-    /// <summary>The enemy-phase path: the line walked from the start tile through the path to the end tile, drawn under the units.</summary>
+    /// <summary>The enemy-phase path: the line walked from the start tile through the path to the end tile, bone on an ink edge, drawn under the units.</summary>
     private void DrawPath(Highlight mark)
     {
         var points = new List<Vector2>();
         if (mark.From is { } from)
         {
-            points.Add(TileRect(from).GetCenter());
+            points.Add(Cell(from).GetCenter());
         }
 
-        points.AddRange(mark.Path.Select(tile => TileRect(tile).GetCenter()));
+        points.AddRange(mark.Path.Select(tile => Cell(tile).GetCenter()));
         if (mark.To is { } to && mark.From is not null)
         {
-            points.Add(TileRect(to).GetCenter());
+            points.Add(Cell(to).GetCenter());
         }
 
         if (points.Count > 1)
         {
-            DrawPolyline(points.ToArray(), Colors.Black, 6);
-            DrawPolyline(points.ToArray(), Mark, 3);
+            DrawPolyline(points.ToArray(), UiColour("ink", 0.8f), 6 * S, antialiased: true);
+            DrawPolyline(points.ToArray(), EnemyMark, 2.5f * S, antialiased: true);
         }
     }
 
     /// <summary>
-    /// The enemy-phase mark over the units: the start tile's corners dotted, the tile the unit
-    /// ended on or acted from ringed, and the tile it struck bracketed in white at its corners.
+    /// The enemy-phase mark over the units: the start tile's corners dotted in bone, the tile the
+    /// unit ended on or acted from ringed in bone, and the tile it struck bracketed at its corners
+    /// in the struck mark, each on an ink edge.
     /// </summary>
     private void DrawMark(Highlight mark)
     {
         if (mark.From is { } from)
         {
-            var start = Inset(TileRect(from), 4);
+            var start = Cell(from).Grow(-5 * S);
             for (var i = 0; i < 4; i++)
             {
-                DrawCircle(start.Position + new Vector2(i % 2 * start.Size.X, i / 2 * start.Size.Y), 3, Mark);
+                var corner = start.Position + new Vector2(i % 2 * start.Size.X, i / 2 * start.Size.Y);
+                DrawCircle(corner, 3.5f * S, UiColour("ink"));
+                DrawCircle(corner, 2.5f * S, EnemyMark);
             }
         }
 
         if (mark.To is { } to)
         {
-            DrawRect(Inset(TileRect(to), -1), Colors.Black, filled: false, width: 5);
-            DrawRect(Inset(TileRect(to), -1), Mark, filled: false, width: 3);
+            DrawRect(Cell(to).Grow(-1), UiColour("ink"), filled: false, width: 5 * S);
+            DrawRect(Cell(to).Grow(-1), EnemyMark, filled: false, width: 2.5f * S);
         }
 
         if (mark.Struck is { } struck)
         {
-            var r = Inset(TileRect(struck), -2);
+            var r = Cell(struck).Grow(-1);
             var arm = _tile * 0.3f;
             foreach (var (corner, dx, dy) in new[] { (r.Position, 1, 1), (new Vector2(r.End.X, r.Position.Y), -1, 1), (new Vector2(r.Position.X, r.End.Y), 1, -1), (r.End, -1, -1) })
             {
-                foreach (var (colour, width) in new[] { (Colors.Black, 7f), (Colors.White, 4f) })
+                foreach (var (colour, width) in new[] { (UiColour("ink"), 7 * S), (MarkColour("struck"), 3.5f * S) })
                 {
                     DrawLine(corner, corner + new Vector2(dx * arm, 0), colour, width);
                     DrawLine(corner, corner + new Vector2(0, dy * arm), colour, width);
@@ -605,69 +624,113 @@ public partial class Main : Node2D
         }
     }
 
-    /// <summary>The legend under the board: each terrain on this map with its glyph, then what the shapes and marks mean.</summary>
+    /// <summary>
+    /// The legend under the board: each terrain on this map by its swatch and name, then only the
+    /// marks on screen now (LOOK.md): the sides, the captain, reach, threat, exits, the gate, the
+    /// dark, and the enemy phase's act and strike.
+    /// </summary>
     private void DrawLegend(BattleState state)
     {
         var map = state.Map;
-        var y = Board.Y + map.Height * _tile + 22;
+        var y = Board.Y + map.Height * _tile + 30;
         var x = Board.X;
+        var right = PanelOrigin.X - Margin;
         var ids = Enumerable.Range(0, map.Height).SelectMany(row => Enumerable.Range(0, map.Width).Select(col => map.TerrainIdAt(new Coord(col, row)))).Distinct().ToList();
         foreach (var id in ids)
         {
-            var terrain = _client!.Content.TerrainById(id);
-            var label = $"{terrain.Glyph} {terrain.Name}";
-            var width = 18 + _mono.GetStringSize(label, fontSize: 13).X + 14;
-            if (x + width > PanelOrigin.X - Margin)
+            var name = _client!.Content.TerrainById(id).Name;
+            if (x + 22 + UiWidth(name, 12) > right)
             {
                 x = Board.X;
                 y += 20;
             }
 
-            DrawRect(new Rect2(x, y - 11, 14, 14), Of(Palette.TerrainOf(id)));
-            DrawRect(new Rect2(x, y - 11, 14, 14), Colors.Black, filled: false, width: 1);
-            Text(new Vector2(x + 18, y), label, Ink, 13);
-            x += width;
+            var swatch = new Rect2(x, y - 11, 14, 14);
+            DrawRect(swatch, TerrainColour(id == "fire" ? "forest" : id));
+            if (id == "fire")
+            {
+                Hatch(swatch, TerrainColour("fire"), 2, 5);
+            }
+
+            x = LegendText(x + 20, y, name);
         }
 
-        y += 24;
+        y += 22;
         x = Board.X;
-        DrawCircle(new Vector2(x + 7, y - 4), 7, Of(Palette.Player));
-        x = LegendText(x + 18, y, "yours");
-        DrawRect(new Rect2(x, y - 11, 14, 14), Of(Palette.Enemy));
-        x = LegendText(x + 18, y, "enemy");
-        DrawRect(new Rect2(x, y - 11, 14, 14), Of(Palette.TerrainOf("plain")).Lerp(Colors.White, 0.3f));
-        x = LegendText(x + 18, y, "can move");
-        DrawCrown(new Vector2(x + 7, y + 2), 14);
-        x = LegendText(x + 18, y, "captain");
+        var entries = new List<(Action<Rect2> Swatch, string Label)>
+        {
+            (r => DrawCircle(r.GetCenter(), 7, Look(LookPalette.Player)), "yours"),
+            (r =>
+            {
+                DrawCircle(r.GetCenter(), 7, Look(LookPalette.Enemy));
+                DrawArc(r.GetCenter(), 6.5f, 0, Mathf.Tau, 24, EnemyMark, 1, antialiased: true);
+            }, "theirs"),
+        };
+        if (state.Units.Any(u => u.IsCaptain))
+        {
+            entries.Add((r =>
+            {
+                var c = r.GetCenter() + new Vector2(0, 5);
+                var crown = new[] { new Vector2(-7, 0), new Vector2(-7, -8), new Vector2(-3, -3), new Vector2(0, -10), new Vector2(3, -3), new Vector2(7, -8), new Vector2(7, 0) }.Select(v => c + v).ToArray();
+                DrawColoredPolygon(crown, Look(LookPalette.Player));
+            }, "captain"));
+        }
+
+        if (_client!.Reach is not null)
+        {
+            entries.Add((r =>
+            {
+                Card(r, MarkColour("reach", 0.16f), 3);
+                DrawRect(r, MarkColour("reach", 0.7f), filled: false, width: 1.5f);
+            }, "can move"));
+        }
+
+        if (_threatShown)
+        {
+            entries.Add((r => Hatch(r, MarkColour("threat", 0.6f), 1.5f, 5), "enemy can strike"));
+        }
+
         if (map.Exits.Count > 0)
         {
-            DrawRect(new Rect2(x, y - 11, 14, 14), Colors.White, filled: false, width: 2);
-            x = LegendText(x + 18, y, "exit");
-        }
-
-        if (map.Win == WinCondition.Seize)
-        {
-            DrawRect(new Rect2(x, y - 11, 14, 14), Colors.White, filled: false, width: 1);
-            DrawRect(new Rect2(x + 3, y - 8, 8, 8), Colors.White, filled: false, width: 1);
-            x = LegendText(x + 18, y, "throne");
+            entries.Add((r => DrawRect(r, Ink, filled: false, width: 2), "exit"));
         }
 
         if (Dusk.Sight(state) is not null)
         {
-            DrawRect(new Rect2(x, y - 11, 14, 14), new Color(0.03f, 0.03f, 0.08f, 0.9f));
-            x = LegendText(x + 18, y, "? unseen");
+            entries.Add((r =>
+            {
+                DrawRect(r, TerrainColour("plain"));
+                DrawRect(r, UiColour("ink", 0.62f));
+                DrawRect(r, Muted, filled: false, width: 1);
+            }, "unseen"));
         }
 
-        DrawRect(new Rect2(x, y - 11, 14, 14), Mark, filled: false, width: 2);
-        x = LegendText(x + 18, y, "enemy act");
-        DrawRect(new Rect2(x, y - 11, 14, 14), Colors.White, filled: false, width: 1);
-        LegendText(x + 18, y, "struck");
+        if (_client.Playing is { } playing)
+        {
+            entries.Add((r => DrawRect(r, EnemyMark, filled: false, width: 2), "enemy act"));
+            if (playing.Struck is not null)
+            {
+                entries.Add((r => DrawRect(r, MarkColour("struck"), filled: false, width: 2), "struck"));
+            }
+        }
+
+        foreach (var (swatch, label) in entries)
+        {
+            if (x + 22 + UiWidth(label, 12) > right)
+            {
+                x = Board.X;
+                y += 20;
+            }
+
+            swatch(new Rect2(x, y - 11, 14, 14));
+            x = LegendText(x + 20, y, label);
+        }
     }
 
     private float LegendText(float x, float y, string text)
     {
-        Text(new Vector2(x, y), text, Ink, 13);
-        return x + _mono.GetStringSize(text, fontSize: 13).X + 16;
+        UiText(new Vector2(x, y), text, Muted, 12);
+        return x + UiWidth(text, 12) + 16;
     }
 
     /// <summary>
@@ -679,7 +742,7 @@ public partial class Main : Node2D
     {
         var client = _client!;
         var y = PanelOrigin.Y;
-        y = Row(y, client.Objective, Accent) + 4;
+        y = Row(y, client.Objective, Ink) + 4;
         foreach (var text in StatusLines())
         {
             y = Row(y, text, Warn);
@@ -687,7 +750,7 @@ public partial class Main : Node2D
 
         if (client.EnemyPhasePlaying)
         {
-            y = Row(y, "ENEMY PHASE  Space: next event  C: skip to end", Mark) + 6;
+            y = Row(y, "ENEMY PHASE  Space: next event  C: skip to end", EnemyMark) + 6;
         }
 
         if (_recallOpen)
@@ -720,11 +783,22 @@ public partial class Main : Node2D
 
         y = Title(y, "FORECAST");
         var boxTop = y;
-        var forecast = ForecastLines().ToList();
-        DrawRect(new Rect2(PanelOrigin.X - 6, boxTop - LineHeight + 3, PanelWidth + 12, Wrapped(forecast).Count() * LineHeight + 6), Box);
-        foreach (var text in forecast)
+        if (_hover is { } spot && client.Preview(spot) is { } preview)
         {
-            y = Row(y, text, Ink);
+            // The move preview (issue 511): one line, the verdict's dot frost when safe and bone when struck.
+            Card(new Rect2(PanelOrigin.X - 8, boxTop - LineHeight + 1, PanelWidth + 16, LineHeight + 10), Box, 8);
+            DrawCircle(new Vector2(PanelOrigin.X + 5, y - 4), 5, preview.Safe ? MarkColour("reach") : EnemyMark);
+            UiText(new Vector2(PanelOrigin.X + 16, y), preview.Text, Ink, 13);
+            y += LineHeight;
+        }
+        else
+        {
+            var forecast = ForecastLines().ToList();
+            Card(new Rect2(PanelOrigin.X - 8, boxTop - LineHeight + 1, PanelWidth + 16, Wrapped(forecast).Count() * LineHeight + 10), Box, 8);
+            foreach (var text in forecast)
+            {
+                y = Row(y, text, Ink);
+            }
         }
 
         y += 10;
@@ -760,10 +834,10 @@ public partial class Main : Node2D
         {
             if (marked)
             {
-                DrawRect(new Rect2(PanelOrigin.X - 6, y - LineHeight + 4, PanelWidth + 12, LineHeight), new Color(Mark, 0.22f));
+                DrawRect(new Rect2(PanelOrigin.X - 6, y - LineHeight + 4, PanelWidth + 12, LineHeight), new Color(EnemyMark, 0.16f));
             }
 
-            Text(new Vector2(PanelOrigin.X, y), text, marked ? Mark : Ink, FontSize);
+            Text(new Vector2(PanelOrigin.X, y), text, marked ? EnemyMark : Ink, FontSize);
             y += LineHeight;
         }
     }
@@ -780,7 +854,7 @@ public partial class Main : Node2D
 
         if (client.Selected is null)
         {
-            yield return "Click one of your units (a blue circle) to select it,";
+            yield return "Click one of your units (an amber disc) to select it,";
             yield return "then point at a tile to see the forecast from there.";
             yield break;
         }
@@ -820,7 +894,7 @@ public partial class Main : Node2D
     private void DrawScreen()
     {
         Text(new Vector2(Margin, 28), _campaign!.Over ? "campaign over" : "between maps", Ink, 18);
-        var columns = (int)((ViewWidth - 2 * Margin) / _mono.GetStringSize("M", fontSize: FontSize).X);
+        var columns = (int)((ViewWidth - 2 * Margin) / (_mono.GetStringSize("MMMMMMMMMM", fontSize: FontSize).X / 10));
         var y = (float)Top;
         foreach (var (text, click, selected) in ScreenLines())
         {
@@ -864,17 +938,20 @@ public partial class Main : Node2D
 
     private float Title(float y, string title)
     {
-        Text(new Vector2(PanelOrigin.X, y), title, Accent, FontSize);
-        DrawLine(new Vector2(PanelOrigin.X, y + 4), new Vector2(PanelOrigin.X + PanelWidth, y + 4), Accent, 1);
+        var split = title.IndexOf("  ", StringComparison.Ordinal);
+        var head = split < 0 ? title : title[..split];
+        DrawString(_caps, new Vector2(PanelOrigin.X, y), head, fontSize: 11, modulate: Muted);
+        if (split >= 0)
+        {
+            UiText(new Vector2(PanelOrigin.X + _caps.GetStringSize(head, fontSize: 11).X + 12, y), title[(split + 2)..], Muted, 12);
+        }
+
+        DrawLine(new Vector2(PanelOrigin.X, y + 5), new Vector2(PanelOrigin.X + PanelWidth, y + 5), Rule, 1);
         return y + LineHeight + 4;
     }
 
     private void Text(Vector2 at, string text, Color colour, int size) =>
         DrawString(_mono, at, text, fontSize: size, modulate: colour);
-
-    private Rect2 TileRect(Coord at) => new(Board + new Vector2(at.X * _tile, at.Y * _tile), new Vector2(_tile - 1, _tile - 1));
-
-    private static Rect2 Inset(Rect2 rect, float by) => rect.Grow(-by);
 
     private static Color Of(Rgb rgb) => Color.Color8(rgb.R, rgb.G, rgb.B);
 
@@ -908,8 +985,4 @@ public partial class Main : Node2D
         }
     }
 
-    private static string Header(BattleState state) =>
-        state.Outcome.IsOver
-            ? $"{state.Map.Name}  battle {(state.Outcome.Result == BattleResult.Won ? "won" : "lost")}: {state.Outcome.Reason}"
-            : $"{state.Map.Name}  turn {state.Turn} of {state.Map.TurnLimit}  {state.Phase.ToString().ToLowerInvariant()} phase  {MapRenderer.WinName(state.Map.Win)}  recall {state.RecallCharges}";
 }

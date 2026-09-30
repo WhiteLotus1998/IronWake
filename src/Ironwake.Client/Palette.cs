@@ -4,7 +4,8 @@ namespace Ironwake.Client;
 public readonly record struct Rgb(byte R, byte G, byte B);
 
 /// <summary>
-/// The Godot client's colours (issue 349): a terrain palette, the two sides, and the dusk shade,
+/// The readability pass's colours (issue 349), which the Godot client drew with until the
+/// showcase's <see cref="LookPalette"/> replaced them (issue 511): a terrain palette, the two sides, and the dusk shade,
 /// chosen so every pair the board must tell apart stays apart under deuteranopia and
 /// protanopia as well as in full colour. <see cref="ColourVision"/> is the check; the
 /// palette tests run it, so a colour is changed here and nowhere else.
