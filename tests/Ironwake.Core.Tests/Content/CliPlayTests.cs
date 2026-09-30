@@ -885,6 +885,31 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// 13.15's last keep round (issue 593), Code's warm chair: seed 631 on
+    /// <c>docs/samples/cinder_copse_wildfire.map</c>. Rook kills the east hexer from the channel
+    /// before it strikes; after one Recall on turn 4 Pell lights the west soldier's wood with the
+    /// next front printed onto the captain's and Dunstan's tiles, the west hexer lights Dunstan's,
+    /// and on turn 5 Pell and the captain strike from plain off their burning tiles, the captain
+    /// at 92 on a hexer standing in its own fire. Won on turn 6, nobody dead.
+    /// </summary>
+    [Fact]
+    public void TheCinderCopseKeepRoundPlayReplaysWithItsFire()
+    {
+        var output = RunSample("cinder_copse_wildfire.map", "2026-09-30-cinder_copse_wildfire-631.script", 631, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.EndsWith("battle won: survive\n", output);
+        Assert.Contains("  wildfire: pell ignites 7,4 on a hit\n", output);
+        Assert.Contains("fire: burning 7,4; next front 6,4 7,5\n", output);
+        Assert.Contains("  wildfire: hexer-1 ignites 6,4 on a hit\n", output);
+        Assert.Contains("dunstan burns 4 (hp 7)\n", output);
+        Assert.Contains("captain moves 7,5 -> 5,4 via 7,4 6,4\n", output);
+        Assert.Contains("forecast captain -> hexer-1: dmg 12 x2 hit 92% crit 4%; counter: dmg 11 hit 98% crit 0%\n", output);
+        Assert.DoesNotContain("captain burns", output);
+        Assert.DoesNotContain("pell burns", output);
+    }
+
+    /// <summary>
     /// 13.16's first play: Code's seed 461 on <c>docs/samples/the_tollgate_windup.map</c>. On turn 5
     /// the mauler raises a blow over the door with Teodor on it at 5 hp; on turn 6 Pell's Cinder
     /// from 6,4 hits the mauler from outside its reach, which leaves the blow raised (round 99),
