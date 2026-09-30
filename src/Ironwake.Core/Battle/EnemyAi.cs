@@ -473,6 +473,54 @@ public static class EnemyAi
     }
 
     /// <summary>
+    /// Why a boss under the veto does not strike <paramref name="target"/> this phase, when the
+    /// veto is the reason (issue 565, DESIGN.md section 8): null unless <see cref="BossVetoApplies"/>,
+    /// <see cref="StrikeOn"/> names no strike on the target, the boss has a strike on it from
+    /// some reachable tile once the veto is lifted, and the veto refuses every one of them. Then
+    /// the refused striking tile nearest the boss, by movement cost and then the reach's order,
+    /// and the tile <see cref="PlanUnit"/> ends it on, read from the same plan the enemy phase
+    /// runs. Unpriced: it names the rule, not the numbers. On a dusk map a target the boss does
+    /// not know of is no refusal, as it is no strike.
+    /// </summary>
+    public static VetoRefusal? Refusal(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    {
+        if (!BossVetoApplies(state, content, unit) || unit.EquippedWeapon(content) is null
+            || RetreatRule.Choose(state, content, unit) is not null || !Dusk.Knows(state, content, unit, target)
+            || StrikeOn(state, content, unit, target) is not null)
+        {
+            return null;
+        }
+
+        var reach = state.ReachOf(unit, content);
+        var tiles = reach.Destinations.ToList();
+        var playerReach = state.UnitsOf(Side.Player).Select(p => state.ReachOf(p, content)).ToList();
+        var targets = new[] { target };
+        if (BestOption(state, content, unit, tiles, reach, targets, playerReach) is not null
+            || BestOption(state, content, unit, tiles, reach, targets, playerReach, unvetoed: true) is null)
+        {
+            return null;
+        }
+
+        var refused = tiles
+            .Select((tile, order) => (tile, order))
+            .Where(t => Arms(content, state.Carrying(unit, t.tile)).Any(arm =>
+                arm.Weapon.InRange(t.tile.DistanceTo(target.At))
+                && Dusk.Sees(state, unit.Side, target.At, unit.Id, t.tile)
+                && BossVetoRefuses(state, content, state.Carrying(unit, t.tile), t.tile, target, arm.Slot)))
+            .OrderBy(t => reach.CostTo(t.tile) ?? int.MaxValue)
+            .ThenBy(t => t.order)
+            .Select(t => (Coord?)t.tile)
+            .FirstOrDefault();
+        if (refused is not { } tile)
+        {
+            return null;
+        }
+
+        var ends = PlanUnit(state, content, unit).OfType<Move>().Select(m => m.To).DefaultIfEmpty(unit.At).Single();
+        return new VetoRefusal(tile, ends);
+    }
+
+    /// <summary>
     /// The strike on <paramref name="target"/> a boss under the veto makes from the tile it
     /// ends on when every strike was refused (issue 389): null unless the veto left it no
     /// strike at all, and then the swing <see cref="PlanUnit"/> takes from its end tile
@@ -961,4 +1009,11 @@ public static class EnemyAi
 
 /// <summary>An enemy's strike as the planner would make it: the tile it strikes from and the inventory slot of the weapon it swings.</summary>
 public sealed record EnemyStrike(Coord From, int Slot);
+
+/// <summary>
+/// A boss's refusal <see cref="EnemyAi.Refusal"/> names (issue 565): the nearest tile it could
+/// strike the unit from that the veto refused (<paramref name="Refused"/>), and the tile its plan
+/// ends on instead (<paramref name="Ends"/>), its own tile when it holds.
+/// </summary>
+public sealed record VetoRefusal(Coord Refused, Coord Ends);
 

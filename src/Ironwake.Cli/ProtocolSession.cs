@@ -299,7 +299,7 @@ public sealed class ProtocolSession
         }
     }
 
-    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), on a <c>pincer: on</c> map the planner's anvil plans against the unit, unpriced (<see cref="Queries.Anvils"/>, issue 457), the sleeping groups the stop would wake (<see cref="Queries.StopWakes"/>, issue 458), and whether the move itself wins the map (issue 356).</summary>
+    /// <summary>The threat query: <see cref="Queries.Threats"/> on a player unit from its tile or <c>from</c>, each line with the enemy, its tile, the tile an announced event brings it on, its 0-based slot and weapon, the forecast, and what lands if every hit does, then the sleeping groups that could strike the tile if woken (issue 248), on a <c>pincer: on</c> map the planner's anvil plans against the unit, unpriced (<see cref="Queries.Anvils"/>, issue 457), the sleeping groups the stop would wake (<see cref="Queries.StopWakes"/>, issue 458), the vetoed bosses that refuse every tile they would strike it from (<see cref="Queries.Refusals"/>, issue 565), and whether the move itself wins the map (issue 356).</summary>
     private string Threat(JsonElement request, BattleUnit unit)
     {
         if (unit.Side != Side.Player)
@@ -412,6 +412,24 @@ public sealed class ProtocolSession
                 w.WriteEndArray();
             }
 
+            var refusals = Queries.Refusals(_state, _content, unit, tile)!.Where(r => !Hidden(r.Boss)).ToList();
+            w.WriteStartArray("refusals");
+            foreach (var refusal in refusals)
+            {
+                w.WriteStartObject();
+                w.WriteString("boss", refusal.Boss.Id);
+                w.WriteStartObject("tile");
+                w.WriteNumber("x", refusal.Refused.X);
+                w.WriteNumber("y", refusal.Refused.Y);
+                w.WriteEndObject();
+                w.WriteStartObject("ends");
+                w.WriteNumber("x", refusal.Ends.X);
+                w.WriteNumber("y", refusal.Ends.Y);
+                w.WriteEndObject();
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
             var wakes = Queries.StopWakes(_state, _content, unit, tile)!;
             w.WriteStartArray("wakes");
             foreach (var woke in wakes)
@@ -430,7 +448,7 @@ public sealed class ProtocolSession
             w.WriteEndArray();
             var wins = Queries.MoveWins(_state, _content, unit, tile);
             w.WriteBoolean("wins", wins);
-            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins, anvils, wakes));
+            w.WriteString("text", PlaySession.ThreatText(_state, _content, unit, tile, lines, asleep, unseeing, wins, anvils, wakes, refusals));
 
             void WriteIds(string name, IEnumerable<BattleUnit> units)
             {
