@@ -51,7 +51,7 @@ public partial class Main : Node2D
     private const int RecallRowsShown = 40;
     private static readonly (string Key, string Does)[] Keys =
     {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), (Sound.MuteKey, "sound"), ("Esc", "clear"),
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("P", "price"), ("Tab", "log"), (Sound.MuteKey, "sound"), ("Esc", "clear"),
     };
 
     /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
@@ -109,6 +109,12 @@ public partial class Main : Node2D
 
     /// <summary>Whether the board hatches every tile a seen enemy could strike next phase, a tile no unit can stand on left bare; T toggles it.</summary>
     private bool _threatShown;
+
+    /// <summary>
+    /// Whether the column prices the threat on the hovered stop, hit and damage per striker (issue
+    /// 533); P toggles it. Off, a stop shows only its one-line preview and the board its unpriced reach.
+    /// </summary>
+    private bool _pricedShown;
 
     /// <summary>Whether the column shows the event log (issue 512); Tab toggles it, and while it is closed the newest line stays on screen as one row.</summary>
     private bool _logOpen;
@@ -218,6 +224,7 @@ public partial class Main : Node2D
             _hover = CoordArg(args, "--hover");
             _recallOpen = Array.IndexOf(args, "--recall") >= 0;
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
+            _pricedShown = Array.IndexOf(args, "--priced") >= 0;
             _logOpen = Array.IndexOf(args, "--log-open") >= 0;
             _screenshot = Arg(args, "--screenshot");
             var strip = Array.IndexOf(args, "--strip");
@@ -350,6 +357,9 @@ public partial class Main : Node2D
                         break;
                     case Key.T:
                         _threatShown = !_threatShown;
+                        break;
+                    case Key.P:
+                        _pricedShown = !_pricedShown;
                         break;
                     case Key.Tab:
                         _logOpen = !_logOpen;
@@ -653,15 +663,24 @@ public partial class Main : Node2D
         }
 
         // The threat hatch goes under the terrain's ink (round 138): the pines sit on the danger.
-        var threat = _threatShown ? _client.EnemyThreat : null;
+        // It draws every seen enemy's reach on T, or the one enemy a click inspected (issue 533);
+        // a sleeping group's reach is faint, and its wake ring is outlined after the grid.
+        var reaches = ShownReaches();
+        var threat = reaches.Where(r => !r.Asleep).SelectMany(r => r.Tiles).ToHashSet();
+        var faint = reaches.Where(r => r.Asleep).SelectMany(r => r.Tiles).Where(at => !threat.Contains(at)).ToHashSet();
         for (var y = 0; y < map.Height; y++)
         {
             for (var x = 0; x < map.Width; x++)
             {
                 var at = new Coord(x, y);
-                if (threat is not null && threat.Contains(at) && _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null))
+                var standable = _client.Content.TerrainById(map.TerrainIdAt(at)).MoveCosts.Any(cost => cost is not null);
+                if (threat.Contains(at) && standable)
                 {
                     DrawThreatMark(at);
+                }
+                else if (faint.Contains(at) && standable)
+                {
+                    DrawThreatMark(at, faint: true);
                 }
 
                 DrawDetail(map, at, map.TerrainIdAt(at));
@@ -670,6 +689,7 @@ public partial class Main : Node2D
 
         DrawShadows(map);
         DrawGrid(map);
+        DrawWakeRing(reaches.Where(r => r.Asleep).SelectMany(r => r.WakeRing).ToHashSet());
         for (var y = 0; y < map.Height; y++)
         {
             for (var x = 0; x < map.Width; x++)
@@ -847,9 +867,16 @@ public partial class Main : Node2D
             }, "can move"));
         }
 
-        if (_threatShown)
+        var reaches = ShownReaches();
+        if (reaches.Any(r => !r.Asleep))
         {
-            entries.Add((r => Hatch(r, MarkColour("threat", 0.6f), 1.5f, 5), "enemy can strike"));
+            entries.Add((r => Hatch(r, MarkColour("threat", 0.6f), 1.5f, 5), _threatShown ? "enemy can strike" : "it can strike"));
+        }
+
+        if (reaches.Any(r => r.Asleep))
+        {
+            entries.Add((r => Hatch(r, MarkColour("threat", FaintThreat), 1.5f, 5), "if woken"));
+            entries.Add((r => DashedRect(r, MarkColour("threat", 0.9f), 2, 4), "stop inside: wakes"));
         }
 
         if (map.Exits.Count > 0)
@@ -965,6 +992,7 @@ public partial class Main : Node2D
             if (client.Stop(_hover!.Value) is { } stop)
             {
                 y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
+                y = PricedRows(y, _hover.Value);
             }
         }
         else if (client.ActShown(Animating) is { } act)
@@ -975,6 +1003,7 @@ public partial class Main : Node2D
         {
             y = Title(y, "FORECAST");
             y = PreviewRow(y, preview, "");
+            y = PricedRows(y, spot);
         }
         else
         {
@@ -996,6 +1025,29 @@ public partial class Main : Node2D
 
         DrawLog(y);
     }
+
+    /// <summary>
+    /// The priced threat on a stop (issue 533), shown only while P is on: the console's <c>threat</c>
+    /// lines after its heading, hit and damage per striker, in muted text under the preview.
+    /// </summary>
+    private float PricedRows(float y, Coord tile)
+    {
+        if (!_pricedShown || _client!.Threat(tile) is not { } threat)
+        {
+            return y;
+        }
+
+        foreach (var line in threat.Split('\n').Skip(1))
+        {
+            y = Row(y, line, Muted);
+        }
+
+        return y + 4;
+    }
+
+    /// <summary>The reaches the board draws: every seen enemy's on T, else the inspected enemy's alone, else none.</summary>
+    private IReadOnlyList<EnemyReach> ShownReaches() =>
+        _threatShown ? _client!.EnemyReaches : _client!.InspectedReach is { } one ? new[] { one } : Array.Empty<EnemyReach>();
 
     /// <summary>The move preview's one line on a card (issue 511): the verdict's dot frost when safe and bone when struck.</summary>
     private float PreviewRow(float y, MovePreview preview, string lead)

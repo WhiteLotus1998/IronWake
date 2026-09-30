@@ -51,6 +51,16 @@ public sealed record ForecastSide(string Id, string Name, string ClassId, bool I
 /// </summary>
 public sealed record ForecastCard(ForecastSide Attacker, ForecastSide Defender, bool Raises)
 {
+    /// <summary>
+    /// The EXP the attacker earns if every strike lands (issue 533), DESIGN.md section 6 on the
+    /// card's own reading: a landing strike, and the kill when the defender's HP after is 0.
+    /// Set only when that EXP would carry a player unit across a level; null otherwise.
+    /// </summary>
+    public int? LevelUpExp { get; init; }
+
+    /// <summary>The line the card prints when <see cref="LevelUpExp"/> is set: <c>+34 EXP, level up</c>.</summary>
+    public string? LevelUpLine => LevelUpExp is { } exp ? $"+{exp} EXP, level up" : null;
+
     /// <summary>Who strikes first, the card's heading.</summary>
     public string Heading => $"{Attacker.Name} strikes first";
 
@@ -68,9 +78,23 @@ public sealed record ForecastCard(ForecastSide Attacker, ForecastSide Defender, 
 /// <summary>
 /// The drawn unit card (issue 512): the values the console's <c>show</c> prints on its first
 /// three lines, as data: name, class and level, the side, HP, the stats, Mov, the equipped
-/// weapon's name (or <c>unarmed</c>), and the terrain the unit stands on.
+/// weapon's name (or <c>unarmed</c>), and the terrain the unit stands on; and a player unit's
+/// EXP toward its next level (issue 533), null for an enemy, which earns none (DECISIONS/0017).
 /// </summary>
-public sealed record UnitCard(string Id, string Name, string ClassId, string ClassName, int Level, Side Side, bool IsCaptain, bool IsBoss, int Hp, int MaxHp, Stats Stats, int Mov, string Weapon, string WeaponLine, string Terrain, Coord At);
+public sealed record UnitCard(string Id, string Name, string ClassId, string ClassName, int Level, Side Side, bool IsCaptain, bool IsBoss, int Hp, int MaxHp, Stats Stats, int Mov, string Weapon, string WeaponLine, string Terrain, Coord At)
+{
+    /// <summary>EXP toward the next level, 0 to 99, for a player unit; null for an enemy.</summary>
+    public int? Exp { get; init; }
+}
+
+/// <summary>
+/// One enemy's reach as the board draws it (issue 533): every tile it could strike next phase,
+/// <see cref="Ironwake.Core.Threat.StruckByUnit"/>'s strike set. A sleeping Guard's reach is the
+/// set it would have awake and <see cref="Asleep"/> is true, so the board draws it faint; its
+/// <see cref="WakeRing"/> is every tile a player unit ending there would wake the group from
+/// (within the content's wake radius of a member), empty for an enemy already awake.
+/// </summary>
+public sealed record EnemyReach(string Id, Coord At, IReadOnlySet<Coord> Tiles, bool Asleep, IReadOnlySet<Coord> WakeRing);
 
 /// <summary>
 /// What the board marks for the event line last revealed in the enemy phase (issue 349): the
@@ -236,10 +260,21 @@ public sealed class ClientSession
     public bool Select(Coord at)
     {
         Selected = UnitAt(at) is { Side: Side.Player } unit && (!unit.Acted || State.CantoReachOf(unit, Content) is not null) ? unit.Id : null;
+        Inspected = Selected is null && UnitAt(at) is { Side: Side.Enemy } enemy && Dusk.Seen(State, enemy) ? enemy.Id : null;
         return Selected is not null;
     }
 
-    public void ClearSelection() => Selected = null;
+    /// <summary>Clears the selected unit and the inspected enemy.</summary>
+    public void ClearSelection() => (Selected, Inspected) = (null, null);
+
+    /// <summary>
+    /// The seen enemy a click picked out when no unit of ours was selected (issue 533), whose reach
+    /// the board draws; null when none is, and cleared by the next selection.
+    /// </summary>
+    public string? Inspected { get; private set; }
+
+    /// <summary>The inspected enemy's reach, or null when none is inspected or it has died or gone dark since.</summary>
+    public EnemyReach? InspectedReach => Inspected is { } id && State.Find(id) is { } enemy && Dusk.Seen(State, enemy) ? ReachOfEnemy(enemy) : null;
 
     /// <summary>
     /// The unit panel (issue 349): the console's <c>show</c> lines for the unit on a tile, or
@@ -291,7 +326,27 @@ public sealed class ClientSession
                 terrain.AvoidFor(Content.Class(who.Unit.ClassId).Movement), who.Hp, max, Math.Max(0, who.Hp - lost), own);
         }
 
-        return new ForecastCard(Side(unit, tile, forecast.Attacker, forecast.Defender), Side(target, target.At, forecast.Defender, forecast.Attacker), raises);
+        var attacker = Side(unit, tile, forecast.Attacker, forecast.Defender);
+        var defender = Side(target, target.At, forecast.Defender, forecast.Attacker);
+        return new ForecastCard(attacker, defender, raises) { LevelUpExp = raises ? null : LevelUpExp(unit, target, forecast.Attacker, defender.After) };
+    }
+
+    /// <summary>
+    /// Section 6's EXP for <paramref name="unit"/>'s combat with <paramref name="target"/> if every
+    /// strike lands (issue 533), when it would cross a level: a strike that can land earns the
+    /// strike formula, and the kill when <paramref name="targetAfter"/> is 0. Null for an enemy
+    /// attacker, a unit at the level cap, a strike that cannot land, or EXP short of the next level;
+    /// a raised blow (DESIGN.md 13.16) is no combat and earns none here.
+    /// </summary>
+    private static int? LevelUpExp(BattleUnit unit, BattleUnit target, SideForecast strike, int targetAfter)
+    {
+        if (unit.Side != Side.Player || unit.Unit.Level >= Unit.MaxLevel || !strike.Strikes || strike.HitChance <= 0)
+        {
+            return null;
+        }
+
+        var exp = Experience.ForCombat(unit.Unit.Level, target.Unit.Level, landed: true, killed: targetAfter == 0, boss: target.IsBoss);
+        return unit.Unit.Exp + exp >= Experience.LevelUpAt ? exp : null;
     }
 
     /// <summary>
@@ -308,7 +363,10 @@ public sealed class ClientSession
         var stats = Content.StatsOf(unit.Unit);
         var unitClass = Content.Class(unit.Unit.ClassId);
         return new UnitCard(unit.Id, unit.Unit.Name, unit.Unit.ClassId, unitClass.Name, unit.Unit.Level, unit.Side, unit.IsCaptain, unit.IsBoss,
-            unit.Hp, stats.Hp, stats, unitClass.Mov, unit.EquippedWeapon(Content)?.Name ?? "unarmed", PlaySession.WeaponLine(unit, Content), State.Map.TerrainAt(unit.At, Content).Name, unit.At);
+            unit.Hp, stats.Hp, stats, unitClass.Mov, unit.EquippedWeapon(Content)?.Name ?? "unarmed", PlaySession.WeaponLine(unit, Content), State.Map.TerrainAt(unit.At, Content).Name, unit.At)
+        {
+            Exp = unit.Side == Side.Player ? unit.Unit.Exp : null,
+        };
     }
 
     /// <summary>
@@ -366,6 +424,45 @@ public sealed class ClientSession
         State.UnitsOf(Side.Enemy).Where(enemy => Dusk.Seen(State, enemy))
             .SelectMany(enemy => Ironwake.Core.Threat.StruckByUnit(State, Content, enemy))
             .ToHashSet();
+
+    /// <summary>
+    /// Every seen enemy's reach (issue 533), in ascending id: the board's overlay reads this, so
+    /// its tiles are <see cref="Ironwake.Core.Threat.StruckByUnit"/>'s and can never disagree with
+    /// the planner's strike set. A sleeping Guard's tiles are read on the board with its group
+    /// woken, and its wake ring from the content's wake radius; an enemy the dark hides is left out.
+    /// </summary>
+    public IReadOnlyList<EnemyReach> EnemyReaches =>
+        State.UnitsOf(Side.Enemy).Where(enemy => Dusk.Seen(State, enemy)).OrderBy(enemy => enemy.Id, StringComparer.Ordinal)
+            .Select(ReachOfEnemy).ToList();
+
+    /// <summary>The seen enemy on <paramref name="at"/>'s reach, or null when no seen enemy stands there.</summary>
+    public EnemyReach? EnemyReachAt(Coord at) =>
+        UnitAt(at) is { Side: Side.Enemy } enemy && Dusk.Seen(State, enemy) ? ReachOfEnemy(enemy) : null;
+
+    private EnemyReach ReachOfEnemy(BattleUnit enemy)
+    {
+        if (enemy is not { Behavior: Behavior.Guard, Group: { } group } || State.IsAwake(group))
+        {
+            return new EnemyReach(enemy.Id, enemy.At, Ironwake.Core.Threat.StruckByUnit(State, Content, enemy), false, new HashSet<Coord>());
+        }
+
+        var woken = State.Wake(group);
+        var members = State.UnitsOf(Side.Enemy).Where(u => u.Group == group).Select(u => u.At).ToList();
+        var ring = new HashSet<Coord>();
+        for (var y = 0; y < State.Map.Height; y++)
+        {
+            for (var x = 0; x < State.Map.Width; x++)
+            {
+                var at = new Coord(x, y);
+                if (members.Any(m => m.DistanceTo(at) <= Content.WakeRadius))
+                {
+                    ring.Add(at);
+                }
+            }
+        }
+
+        return new EnemyReach(enemy.Id, enemy.At, Ironwake.Core.Threat.StruckByUnit(woken, Content, woken.Find(enemy.Id)!), true, ring);
+    }
 
     /// <summary>
     /// The Recall browser (issue 353): the console's <c>recall list</c> rows, each state row

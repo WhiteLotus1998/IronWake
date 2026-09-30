@@ -25,7 +25,7 @@ public static class LookPalette
     /// </summary>
     public static readonly IReadOnlyDictionary<string, Rgb> Terrain = new Dictionary<string, Rgb>
     {
-        ["plain"] = Hex("748A66"),
+        ["plain"] = Hex("7E9470"),
         ["road"] = Hex("B3AE9C"),
         ["forest"] = Hex("4F6E54"),
         ["hill"] = Hex("B89E6C"),
