@@ -1335,20 +1335,54 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 131, the brace header: Code's play of the shipped Saltmarsh Ford with <c>brace: on</c>
-    /// on top of the timing arm (seed 523) replays to its transcript: the leader braced until the
-    /// adjacent bait on turn 8, one Recall, and the rout won on turn 10.
+    /// Issue 131, the brace header: Code's play of Saltmarsh Ford with <c>brace: on</c> on top of
+    /// the timing arm (seed 523, on the file kept as <c>docs/samples/saltmarsh_ford_0091.map</c>)
+    /// replays to its transcript: the leader braced until the adjacent bait on turn 8, one Recall,
+    /// and the rout won on turn 10.
     /// </summary>
     [Fact]
-    public void TheBracePlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    public void TheBracePlayReplaysOnTheBracedSaltmarshToItsTranscript()
     {
-        var output = RunShipped("saltmarsh_ford.map", "2026-09-29-saltmarsh_ford-523.script", 523, out var exit);
+        var output = RunSample("saltmarsh_ford_0091.map", "2026-09-29-saltmarsh_ford-523.script", 523, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("bandit_leader-1 waits and braces\n", output);
         Assert.Contains("battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-523.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 131, round 125: Chat's cold play of the braced Saltmarsh Ford (seed 541, on the file
+    /// kept as <c>docs/samples/saltmarsh_ford_0091.map</c>) replays to its transcript: the pair
+    /// called from the south bank onto a braced line, and the rout won on turn 12.
+    /// </summary>
+    [Fact]
+    public void ChatsColdPlayReplaysOnTheBracedSaltmarshToItsTranscript()
+    {
+        var output = RunSample("saltmarsh_ford_0091.map", "2026-09-29-saltmarsh_ford-541.script", 541, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("battle won: rout", output);
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-541.txt")).ReplaceLineEndings("\n"), output);
+    }
+
+    /// <summary>
+    /// Issue 131, the north cut (DECISIONS/0092): Code's play of the shipped Saltmarsh Ford
+    /// (seed 547) replays to its transcript: the south bank cleared by turn 5 with nothing
+    /// called, the pair arriving on Wren's step to 10,1 on turn 7, and the rout won on turn 11.
+    /// </summary>
+    [Fact]
+    public void TheNorthCutPlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    {
+        var output = RunShipped("saltmarsh_ford.map", "2026-09-30-saltmarsh_ford-547.script", 547, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.Contains("wren moves 10,4 -> 10,1 via 10,3 10,2\nevent ford\n", output);
+        Assert.Contains("battle won: rout", output);
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-30-saltmarsh_ford-547.txt")).ReplaceLineEndings("\n"), output);
     }
 
     /// <summary>

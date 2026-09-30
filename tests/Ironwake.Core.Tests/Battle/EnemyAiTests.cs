@@ -221,17 +221,23 @@ public class EnemyAiTests
     }
 
     /// <summary>
-    /// Issue 131, the timing arm: Saltmarsh Ford's ford group is not on the board at the start.
-    /// It arrives, unannounced, on the south edge at 0,9 and 1,9, behind the party, when a player
-    /// unit stops on any tile of the east crossing's mouth (10,4, 9,4, 11,4, 10,5), which is where
-    /// the fort wakes, so whoever holds 10,4 faces the fort and the pair at once.
+    /// Issue 131, the timing arm with the enter line as a north cut (DECISIONS/0090, 0092):
+    /// Saltmarsh Ford's ford group is not on the board at the start. It arrives, unannounced, on
+    /// the south edge at 0,9 and 1,9, behind the party, when a player unit ends a Move on any
+    /// north-bank tile east of the walls (rows 0 to 2, x 7 to 13, less the walls 7,1 and 8,1 and
+    /// the fort 10,0), so the pair come when the party crosses. A row is hopped at Mov 4, so the
+    /// cut covers every tile a Move over either crossing can end on; the corners are sampled here.
     /// </summary>
     [Theory]
-    [InlineData(10, 4)]
-    [InlineData(9, 4)]
-    [InlineData(11, 4)]
-    [InlineData(10, 5)]
-    public void OnSaltmarshFordTheFordGroupArrivesBehindThePartyWhenTheEastCrossingIsEntered(int x, int y)
+    [InlineData(10, 2)]
+    [InlineData(10, 1)]
+    [InlineData(9, 1)]
+    [InlineData(11, 1)]
+    [InlineData(7, 2)]
+    [InlineData(7, 0)]
+    [InlineData(13, 0)]
+    [InlineData(13, 2)]
+    public void OnSaltmarshFordTheFordGroupArrivesBehindThePartyWhenTheNorthBankIsEntered(int x, int y)
     {
         var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map"), Starter);
         var start = BattleState.From(map, Starter, Starter.Cast, 503);
@@ -248,6 +254,32 @@ public class EnemyAiTests
         var soldier = state.Find("soldier-2")!;
         Assert.Equal((new Coord(0, 9), "ford", Behavior.Aggressive), (brigand.At, brigand.Group, brigand.Behavior));
         Assert.Equal((new Coord(1, 9), "ford", Behavior.Aggressive), (soldier.At, soldier.Group, soldier.Behavior));
+    }
+
+    /// <summary>
+    /// Issue 131, the north cut (DECISIONS/0092): the south bank no longer calls the pair. The old
+    /// mouth (10,4, 9,4, 11,4, 10,5) and the six tiles that wake the fort by proximity off it
+    /// (11,5, 12,4, 12,5, 12,6, 13,4, 13,5) fire nothing, so the fort can be fought south of the
+    /// river and the pair still come only on the crossing.
+    /// </summary>
+    [Theory]
+    [InlineData(10, 4)]
+    [InlineData(9, 4)]
+    [InlineData(11, 4)]
+    [InlineData(10, 5)]
+    [InlineData(12, 6)]
+    [InlineData(13, 4)]
+    public void OnSaltmarshFordTheSouthBankNoLongerCallsTheFordGroup(int x, int y)
+    {
+        var map = MapFiles.Load(Path.Combine(MapFixture.MapsDirectory, "saltmarsh_ford.map"), Starter);
+        var start = BattleState.From(map, Starter, Starter.Cast, 503);
+        var teodor = start.Find("teodor")! with { At = new Coord(x, y) };
+        var events = new List<GameEvent>();
+
+        var state = MapEvents.AfterMove(start.WithUnit(teodor), Starter, teodor, events);
+
+        Assert.DoesNotContain(events, e => e is MapEventFired);
+        Assert.Null(state.Find("brigand-1"));
     }
 
     /// <summary>

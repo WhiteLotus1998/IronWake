@@ -1,0 +1,124 @@
+# Issue 131, the enter line's cut (DECISIONS/0092). --full at 200 seeds, two rolls, on main at 2c0ea50.
+# sf_north.map: the shipped file with both enter lines on the north cut (now shipped).
+# sf_south.map: the shipped file with the six south wake tiles added to the old mouth (not shipped).
+
+## shipped as of 0091
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: content/maps/saltmarsh_ford.map, heuristic wins 34/200 (17 %), winning turn median 13 p90 17 limit 18, losses 158 timeout 8 captain 0 protected, quiet tail 2.3, refused kill p50 0.8664 over 158, two-roll average: FAILED
+gate 2 decisions matter: content/maps/saltmarsh_ford.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: content/maps/saltmarsh_ford.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: content/maps/saltmarsh_ford.map, 3 recruits x 200 seeds, median drop -0.025: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop -0.025, se 0.038); rows are data, no recruit is judged
+  ottilie: drop -0.025 se 0.038 own [atk 546 dmg 5920 heal 0 abs 648] rest baseline [atk 1235 dmg 22056 heal 0 abs 3228] rest benched [atk 1333 dmg 28245 heal 0 abs 3385] benched losses 134 timeout 27 captain 0 protected, refused kill p50 0.8674 over 134
+  teodor: drop -0.040 se 0.039 own [atk 382 dmg 4618 heal 0 abs 774] rest baseline [atk 1399 dmg 23358 heal 0 abs 3102] rest benched [atk 1707 dmg 28450 heal 0 abs 3161] benched losses 150 timeout 8 captain 0 protected, refused kill p50 0.8674 over 150
+  wren: drop 0.030 se 0.034 own [atk 610 dmg 5837 heal 0 abs 527] rest baseline [atk 1171 dmg 22139 heal 0 abs 3349] rest benched [atk 1125 dmg 25048 heal 0 abs 3673] benched losses 133 timeout 39 captain 0 protected, refused kill p50 0.8674 over 133
+  captain captain: baseline [atk 243 dmg 11601 heal 0 abs 1927] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1939 ms: ok
+gate 5 forecast honesty: 10089 combats (4105 with gauntlets), 20783 strikes, hits 13032 expected 12940.3, crits 855 expected 897.3, damage mismatches 0: ok
+gate 7 speed: content/maps/saltmarsh_ford.map, 5 AI-vs-AI games, 76 turns, slowest 44 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 28121 ms: ok
+free prefix: content/maps/saltmarsh_ford.map, 6 of 2, 4, 6 tried, slack median 5 p90 1 (printed, not gated)
+  prefix 2: wins 44/200, drop -0.050 se 0.041, free
+  prefix 4: wins 33/200, drop 0.005 se 0.038, free
+  prefix 6: wins 29/200, drop 0.025 se 0.036, free
+  turns, medians over 200 games: dead 2.0, quiet 1.0, leading dead 1.0, first contact 3.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 200 live 0, wake tax 0.24
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 3 quiet 0 live 195, wake tax 0.00
+  turn 7: dead 26 quiet 0 live 169, wake tax 0.00
+  turn 8: dead 48 quiet 0 live 142, wake tax 0.00
+  turn 9: dead 53 quiet 0 live 137, wake tax 0.00
+  turn 10: dead 56 quiet 0 live 131, wake tax 0.00
+  turn 11: dead 38 quiet 0 live 146, wake tax 0.00
+  turn 12: dead 24 quiet 0 live 154, wake tax 0.00
+  turn 13: dead 18 quiet 0 live 159, wake tax 0.00
+  turn 14: dead 14 quiet 0 live 157, wake tax 0.00
+  turn 15: dead 2 quiet 0 live 166, wake tax 0.00
+  turn 16: dead 0 quiet 0 live 165, wake tax 0.00
+  turn 17: dead 1 quiet 0 live 161, wake tax 0.00
+  turn 18: dead 0 quiet 0 live 160, wake tax 0.00
+full: FAILED
+
+## north cut
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sf_north.map, heuristic wins 47/200 (23 %), winning turn median 11 p90 16 limit 18, losses 129 timeout 24 captain 0 protected, quiet tail 2.2, refused kill p50 0.8674 over 129, two-roll average: FAILED
+gate 2 decisions matter: sf_north.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: sf_north.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: sf_north.map, 3 recruits x 200 seeds, median drop 0.055: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.055, se 0.038); rows are data, no recruit is judged
+  ottilie: drop 0.055 se 0.038 own [atk 608 dmg 5935 heal 0 abs 473] rest baseline [atk 1206 dmg 23139 heal 0 abs 3099] rest benched [atk 1343 dmg 28647 heal 0 abs 3382] benched losses 144 timeout 20 captain 0 protected, refused kill p50 0.8674 over 144
+  teodor: drop 0.040 se 0.040 own [atk 388 dmg 4608 heal 0 abs 771] rest baseline [atk 1426 dmg 24466 heal 0 abs 2801] rest benched [atk 1882 dmg 28763 heal 0 abs 3189] benched losses 139 timeout 22 captain 0 protected, refused kill p50 0.8775 over 139
+  wren: drop 0.125 se 0.037 own [atk 639 dmg 5097 heal 0 abs 473] rest baseline [atk 1175 dmg 23977 heal 0 abs 3099] rest benched [atk 1329 dmg 26450 heal 0 abs 3328] benched losses 148 timeout 30 captain 0 protected, refused kill p50 0.8674 over 148
+  captain captain: baseline [atk 179 dmg 13434 heal 0 abs 1855] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1840 ms: ok
+gate 5 forecast honesty: 10083 combats (4105 with gauntlets), 20766 strikes, hits 13005 expected 12927.5, crits 853 expected 896.7, damage mismatches 0: ok
+gate 7 speed: sf_north.map, 5 AI-vs-AI games, 83 turns, slowest 41 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 28634 ms: ok
+free prefix: sf_north.map, 4 of 2, 4, 6 tried, slack median 7 p90 2 (printed, not gated)
+  prefix 2: wins 38/200, drop 0.045 se 0.040, free
+  prefix 4: wins 41/200, drop 0.030 se 0.041, free
+  prefix 6: wins 25/200, drop 0.110 se 0.037, not free
+  prefix 6 refunded: wins 37/200, drop 0.050 se 0.038, free, limit raised by 6 against the unraised baseline: at most tempo
+  turns, medians over 200 games: dead 2.0, quiet 1.0, leading dead 1.0, first contact 3.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 200 live 0, wake tax 0.24
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 3 quiet 0 live 188, wake tax 0.00
+  turn 7: dead 18 quiet 0 live 168, wake tax 0.00
+  turn 8: dead 42 quiet 0 live 139, wake tax 0.00
+  turn 9: dead 44 quiet 0 live 130, wake tax 0.00
+  turn 10: dead 30 quiet 0 live 143, wake tax 0.00
+  turn 11: dead 13 quiet 0 live 153, wake tax 0.00
+  turn 12: dead 12 quiet 0 live 148, wake tax 0.00
+  turn 13: dead 7 quiet 0 live 148, wake tax 0.00
+  turn 14: dead 3 quiet 0 live 148, wake tax 0.00
+  turn 15: dead 2 quiet 0 live 145, wake tax 0.00
+  turn 16: dead 4 quiet 0 live 136, wake tax 0.00
+  turn 17: dead 3 quiet 0 live 130, wake tax 0.00
+  turn 18: dead 1 quiet 0 live 129, wake tax 0.00
+full: FAILED
+
+## south line plus the six wake tiles
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sf_south.map, heuristic wins 34/200 (17 %), winning turn median 13 p90 17 limit 18, losses 158 timeout 8 captain 0 protected, quiet tail 2.3, refused kill p50 0.8664 over 158, two-roll average: FAILED
+gate 2 decisions matter: sf_south.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: sf_south.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: sf_south.map, 3 recruits x 200 seeds, median drop -0.025: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop -0.025, se 0.038); rows are data, no recruit is judged
+  ottilie: drop -0.025 se 0.038 own [atk 546 dmg 5920 heal 0 abs 648] rest baseline [atk 1235 dmg 22056 heal 0 abs 3228] rest benched [atk 1333 dmg 28245 heal 0 abs 3385] benched losses 134 timeout 27 captain 0 protected, refused kill p50 0.8674 over 134
+  teodor: drop -0.040 se 0.039 own [atk 382 dmg 4618 heal 0 abs 774] rest baseline [atk 1399 dmg 23358 heal 0 abs 3102] rest benched [atk 1707 dmg 28450 heal 0 abs 3161] benched losses 150 timeout 8 captain 0 protected, refused kill p50 0.8674 over 150
+  wren: drop 0.030 se 0.034 own [atk 610 dmg 5837 heal 0 abs 527] rest baseline [atk 1171 dmg 22139 heal 0 abs 3349] rest benched [atk 1125 dmg 25048 heal 0 abs 3673] benched losses 133 timeout 39 captain 0 protected, refused kill p50 0.8674 over 133
+  captain captain: baseline [atk 243 dmg 11601 heal 0 abs 1927] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1918 ms: ok
+gate 5 forecast honesty: 10097 combats (4105 with gauntlets), 20797 strikes, hits 13036 expected 12950.8, crits 854 expected 897.4, damage mismatches 0: ok
+gate 7 speed: sf_south.map, 5 AI-vs-AI games, 77 turns, slowest 40 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 28548 ms: ok
+free prefix: sf_south.map, 6 of 2, 4, 6 tried, slack median 5 p90 1 (printed, not gated)
+  prefix 2: wins 44/200, drop -0.050 se 0.041, free
+  prefix 4: wins 32/200, drop 0.010 se 0.039, free
+  prefix 6: wins 31/200, drop 0.015 se 0.038, free
+  turns, medians over 200 games: dead 2.0, quiet 1.0, leading dead 1.0, first contact 3.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 200 live 0, wake tax 0.24
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 3 quiet 0 live 195, wake tax 0.00
+  turn 7: dead 26 quiet 0 live 169, wake tax 0.00
+  turn 8: dead 48 quiet 0 live 142, wake tax 0.00
+  turn 9: dead 53 quiet 0 live 137, wake tax 0.00
+  turn 10: dead 56 quiet 0 live 131, wake tax 0.00
+  turn 11: dead 38 quiet 0 live 146, wake tax 0.00
+  turn 12: dead 24 quiet 0 live 154, wake tax 0.00
+  turn 13: dead 18 quiet 0 live 159, wake tax 0.00
+  turn 14: dead 14 quiet 0 live 157, wake tax 0.00
+  turn 15: dead 2 quiet 0 live 166, wake tax 0.00
+  turn 16: dead 0 quiet 0 live 165, wake tax 0.00
+  turn 17: dead 1 quiet 0 live 161, wake tax 0.00
+  turn 18: dead 0 quiet 0 live 160, wake tax 0.00
+full: FAILED
