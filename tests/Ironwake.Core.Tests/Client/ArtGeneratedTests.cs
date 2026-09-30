@@ -260,6 +260,28 @@ public class ArtGeneratedTests
         Assert.NotNull(EffectFault(image.Blank(0, ArtSpec.ClipFrame), "fx_hit_spark"));
     }
 
+    [Fact]
+    public void TheSheetForLotusNamesEveryGeneratedFile()
+    {
+        var page = File.ReadAllText(Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "art", "for-lotus.html"));
+        Assert.Empty(UnnamedOnSheet(page, Generated()));
+    }
+
+    [Fact]
+    public void ASheetThatMissesAGeneratedFileFailsTheSheetRule()
+    {
+        var page = File.ReadAllText(Path.Combine(Fixture.RealContentDirectory(), "..", "docs", "art", "for-lotus.html"));
+        Assert.Equal(new[] { "token_newclass_enemy" }, UnnamedOnSheet(page, Generated().Append("token_newclass_enemy")));
+        Assert.Equal(new[] { "fx_dust" }, UnnamedOnSheet(page.Replace("<code>fx_dust</code>", ""), Generated()));
+    }
+
+    /// <summary>
+    /// The generated files the sheet for Lotus (<c>docs/art/for-lotus.html</c>, written by
+    /// <c>docs/art/for_lotus.py</c>) does not name, so a new row cannot miss the sheet an artist works from.
+    /// </summary>
+    private static List<string> UnnamedOnSheet(string page, IEnumerable<string> generated) =>
+        generated.Where(n => !page.Contains("<code>" + n + "</code>", StringComparison.Ordinal)).ToList();
+
     /// <summary>
     /// Why an effect sheet breaks the look, or null: every pixel clear or opaque in one of the
     /// effect's own values (ember only in the fire effects), and every frame drawing something.
