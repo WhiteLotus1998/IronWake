@@ -18,11 +18,11 @@ public class ClientScreensTests
     }
 
     [Fact]
-    public void RecallIsExplainedInOneSentenceOnTheHowToPlayScreen()
+    public void RecallIsExplainedInTheRecallCardsFirstLine()
     {
         var sentence = Screens.RecallSentence;
         Assert.EndsWith(".", sentence, StringComparison.Ordinal);
-        Assert.Equal(1, sentence.Count(c => c == '.'));
+        Assert.Contains("the dice remember", sentence, StringComparison.Ordinal);
         Assert.Contains(Screens.HowTo, section => section.Heading == "Recall" && section.Lines[0] == sentence);
     }
 
@@ -151,7 +151,7 @@ public class ClientScreensTests
     }
 
     [Fact]
-    public void ALostBattleSaysWhyInTheConsolesWords()
+    public void ASeizeLostOnTheClockSaysSoWithoutCoordinatesAndTheLogKeepsThem()
     {
         var client = Fresh(113);
         for (var turn = 0; turn < 12 && !client.State.Outcome.IsOver; turn++)
@@ -165,12 +165,29 @@ public class ClientScreensTests
         Assert.NotNull(card);
         Assert.False(card!.Won);
         Assert.Equal("Lost", card.Headline);
+        Assert.Equal("Turn 10 ran out with the captain short of the gate.", card.Line);
+        Assert.DoesNotMatch(@"\d+,\d+", card.Line);
         var verdict = Ironwake.Core.Objective.Verdict(client.State, client.Content)!;
+        Assert.Contains("7,1", verdict, StringComparison.Ordinal);
+        Assert.Equal("turn 10 of 10", card.Turn);
+        Assert.Equal(11, client.State.Turn);
+    }
+
+    [Fact]
+    public void AnyOtherLossSaysWhyInTheConsolesWords()
+    {
+        var client = Fresh(113);
+        var captain = client.State.UnitsOf(Side.Player).Single(u => u.IsCaptain);
+        var state = client.State.WithoutUnit(captain.Id);
+        Assert.Equal(LossCause.Captain, state.Outcome.Cause);
+
+        var card = EndCard.Of(state, client.Content);
+
+        var verdict = Ironwake.Core.Objective.Verdict(state, client.Content)!;
         Assert.StartsWith("lost because ", verdict, StringComparison.Ordinal);
         var why = verdict["lost because ".Length..];
         Assert.Equal(char.ToUpperInvariant(why[0]) + why[1..] + ".", card.Line);
-        Assert.Equal("turn 10 of 10", card.Turn);
-        Assert.Equal(11, client.State.Turn);
+        Assert.StartsWith("The captain, ", card.Line, StringComparison.Ordinal);
     }
 
     [Fact]

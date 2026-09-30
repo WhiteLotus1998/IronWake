@@ -13,4 +13,12 @@ Fonts (SIL Open Font License 1.1), vendored for the Godot client under src/Ironw
     Copyright 2020 The JetBrains Mono Project Authors
     Licence: src/Ironwake.Godot/fonts/JetBrainsMono-OFL.txt
 
-Sound: none yet.
+Sound (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/), for the Godot client under
+src/Ironwake.Godot/assets/sound/:
+
+  hit.wav, miss.wav, crit.wav, fall.wav, click.wav, ambient.wav
+    The project's own: synthesised from sines and seeded noise by docs/sound/make_sounds.py,
+    which writes the same bytes on every run. Dedicated to the public domain under CC0 1.0.
+    A clip from elsewhere replaces one only under the same file name, only with a CC0 licence
+    stated at its source, and gets its own entry here naming that source; an ambiguous
+    licence means the clip is cut, never guessed.

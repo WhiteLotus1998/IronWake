@@ -80,8 +80,9 @@ STILLS=(12 14 16 18)
 strip the_tollgate-113-scrub-strip 30 0.1 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 200 --recall-after 49
 python3 docs/look/crop.py "$out/the_tollgate-113-recall-strip-18.png" "$out/crop-lethal-pulse-4x.png" 320 0 320 290
 # Showcase slice 5 (issue 515): the title and how-to-play screens; the three turn-1 callouts on
-# seed 113 (nothing selected, the captain selected, then a tile pointed at); the end card won on
-# the seed-113 transcript's play and lost on ten empty phases.
+# seed 113 (nothing selected, the captain selected, then a tile pointed at; since slice 6, issue 516,
+# all three at the foot of the column, the third lighting E); the end card won on the seed-113
+# transcript's play and lost on ten empty phases.
 shot title --screen title
 shot how-to-play --screen howto
 shot the_tollgate-113-callout-1 --map the_tollgate --seed 113 --callouts
