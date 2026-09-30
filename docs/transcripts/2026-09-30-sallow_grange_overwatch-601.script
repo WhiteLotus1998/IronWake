@@ -1,0 +1,69 @@
+move wren 3,4
+wait wren
+move captain 2,4
+wait captain
+move pell 0,3
+wait pell
+move ottilie 1,5
+wait ottilie
+move teodor 2,5
+wait teodor
+move ansgar 1,7
+wait ansgar
+end
+move pell 3,2
+attack pell archer-1
+move captain 4,3
+attack captain archer-1
+move wren 5,2
+attack wren archer-1
+move ottilie 3,3
+watch ottilie
+move teodor 3,4
+wait teodor
+move ansgar 2,4
+wait ansgar
+canto ansgar stay
+end
+move wren 7,2
+attack wren archer-2
+move captain 7,4
+attack captain archer-2
+attack ottilie soldier-1
+move pell 5,4
+attack pell brawler-1
+move ansgar 5,3
+attack ansgar brawler-1
+canto ansgar 6,4
+move teodor 6,5
+item teodor 2
+end
+move captain 10,5
+wait captain
+move ansgar 11,5
+wait ansgar
+canto ansgar stay
+move wren 10,3
+wait wren
+move teodor 9,6
+wait teodor
+move pell 9,4
+wait pell
+move ottilie 7,3
+wait ottilie
+end
+move ansgar 12,7
+attack ansgar hexer-1
+canto ansgar 10,6
+move captain 14,5
+wait captain
+move teodor 12,6
+wait teodor
+move wren 11,6
+wait wren
+move pell 10,5
+watch pell
+move ottilie 10,4
+watch ottilie
+end
+move captain 16,6
