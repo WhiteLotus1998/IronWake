@@ -1,0 +1,61 @@
+move dunstan 6,4
+wait dunstan
+move wren 6,7
+wait wren
+wait pell
+wait rook
+wait captain
+end
+move captain 7,5
+wait captain
+move rook 8,6
+wait rook
+wait dunstan
+wait pell
+wait wren
+end
+move rook 9,5
+attack rook hexer-2
+move pell 5,6
+attack pell brigand-1
+move wren 6,8
+attack wren brigand-1
+wait dunstan
+wait captain
+end
+move dunstan 5,3
+attack dunstan hexer-1
+move pell 5,4
+attack pell hexer-1
+move rook 6,2
+attack rook hexer-1
+attack captain soldier-1
+move wren 6,6
+wait wren
+end
+recall 54
+move pell 6,5
+attack pell soldier-1
+attack captain soldier-1
+move rook 8,6
+wait rook
+move wren 6,6
+wait wren
+wait dunstan
+end
+move pell 5,3
+attack pell hexer-1
+move captain 5,4
+attack captain hexer-1
+wait dunstan
+wait rook
+wait wren
+end
+attack pell soldier-2
+move captain 7,2
+attack captain soldier-2
+move rook 12,5
+wait rook
+wait wren
+wait dunstan
+end

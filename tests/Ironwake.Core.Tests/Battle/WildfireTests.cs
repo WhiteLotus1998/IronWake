@@ -410,6 +410,31 @@ public class WildfireTests
         Assert.Equal(shipped, sample.Replace("wildfire: on\n", ""));
     }
 
+    /// <summary>
+    /// Issue 593, 13.15's last keep round: the Cinder Copse sample is a survive map with the whole
+    /// party deployed in forest, one wood between two water channels, a hexer on each side (the
+    /// east one announced), so the fire can reach the party from both edges.
+    /// </summary>
+    [Fact]
+    public void TheCinderCopseSampleDeploysThePartyInForestWithAHexerOnEachSide()
+    {
+        var path = Path.Combine(RepoRoot(), "docs", "samples", "cinder_copse_wildfire.map");
+        var map = MapFiles.Load(path, MapFixture.Content);
+
+        Assert.True(map.WildfireEnabled);
+        Assert.True(map.Announced);
+        Assert.Equal(WinCondition.Survive, map.Win);
+        var party = map.Placements.OfType<PlayerPlacement>().ToList();
+        Assert.Equal(5, party.Count);
+        Assert.Contains(party, p => p.RecruitId == "pell");
+        Assert.All(party, p => Assert.Equal("forest", map.TerrainIdAt(p.At)));
+        Assert.Contains(map.Placements.OfType<EnemyPlacement>(), e => e.TemplateId == "hexer" && e.At.X < 4);
+        Assert.Contains(
+            map.Events,
+            e => e.Action is SpawnEnemy { Placement: { TemplateId: "hexer" } spawn } && spawn.At.X > 9);
+        Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(map, Starter));
+    }
+
     private static string RepoRoot()
     {
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
