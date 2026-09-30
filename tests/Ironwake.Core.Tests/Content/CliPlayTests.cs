@@ -249,6 +249,17 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 595: <c>threat</c> prices the board as it stands at phase start, so a lane a
+    /// counter-kill opens mid-phase is never on it (a known limit, Design Table round 173);
+    /// the help line says so.
+    /// </summary>
+    [Fact]
+    public void ThreatHelpSaysItPricesTheBoardAsItStandsNow()
+    {
+        Assert.Contains("on the board as it stands now (a foe freed by a kill mid-phase is not counted)\n", Play(out _, "help\n"));
+    }
+
+    /// <summary>
     /// Issue 248: on an announced map <c>threat</c> prices the enemy an event brings this
     /// enemy phase and marks where it arrives, and it names a sleeping group that could
     /// strike the tile if woken, members and tiles and no numbers, with the wake rule.
