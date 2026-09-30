@@ -63,6 +63,18 @@ public partial class LookPaletteTests
     }
 
     [Fact]
+    public void TheCaptainsGoldStandsApartFromTheAmberDiscItRings()
+    {
+        Assert.True(WorstDistance(LookPalette.Marks["captain"], LookPalette.Player) >= LookPalette.MarkSeparation);
+    }
+
+    [Fact]
+    public void TheCaptainsGoldIsAPlayerMark()
+    {
+        Assert.Contains("captain", LookPalette.PlayerMarks);
+    }
+
+    [Fact]
     public void WarmthBelongsToThePlayerAlone()
     {
         Assert.True(Chroma(LookPalette.Player) >= LookPalette.PlayerChromaFloor);

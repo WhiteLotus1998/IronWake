@@ -52,13 +52,14 @@ public static class LookPalette
     /// <summary>The enemy's silhouette and rim: bone.</summary>
     public static readonly Rgb EnemyBone = Hex("E6E0D0");
 
-    /// <summary>The board's marks by name: the selected unit, its reach, the enemy's threat, and a unit just struck.</summary>
+    /// <summary>The board's marks by name: the selected unit, its reach, the enemy's threat, a unit just struck, and the captain's ring and crown (issue 601).</summary>
     public static readonly IReadOnlyDictionary<string, Rgb> Marks = new Dictionary<string, Rgb>
     {
         ["selected"] = Hex("F6D38A"),
         ["reach"] = Hex("BFD9EA"),
         ["threat"] = Hex("EDE6D6"),
         ["struck"] = Hex("FFFFFF"),
+        ["captain"] = Hex("FFC61A"),
     };
 
     /// <summary>
@@ -72,7 +73,7 @@ public static class LookPalette
     public static bool IsWarmGround(Rgb colour) => colour.R - colour.B > WarmGroundMargin;
 
     /// <summary>The marks that belong to the player's side, and so may be warm.</summary>
-    public static readonly IReadOnlySet<string> PlayerMarks = new HashSet<string> { "selected" };
+    public static readonly IReadOnlySet<string> PlayerMarks = new HashSet<string> { "selected", "captain" };
 
     /// <summary>The screen around the board: ink behind, panels, text, muted text, and the lost part of an HP bar.</summary>
     public static readonly IReadOnlyDictionary<string, Rgb> Ui = new Dictionary<string, Rgb>
