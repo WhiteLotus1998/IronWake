@@ -50,7 +50,7 @@ public sealed class PlaySession
           recall list              every state recall can return to, the command that made it, and what a rewind there gives back
           recall                   list the state each player turn started at, and the charges left
           forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
-          threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach
+          threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
           map                      show the board
