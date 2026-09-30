@@ -217,6 +217,64 @@ public class ArtGeneratedTests
         Assert.NotNull(ClipFault(image.Blank(0, ArtSpec.ClipFrame)));
     }
 
+    private static bool IsLanceClip(string name) =>
+        IsClip(name) && (name.Contains("_lance_", StringComparison.Ordinal) || name.Contains("_toll_spear_", StringComparison.Ordinal));
+
+    private static readonly string[] Thrusts = { "strike", "strike_crit", "miss_recover" };
+
+    [Fact]
+    public void ALanceThrustPeaksOnItsContactFrameInsideItsFrame()
+    {
+        var thrusts = Generated().Where(IsLanceClip)
+            .Select(name => (name, clip: ArtSpec.Clips.SingleOrDefault(c => Thrusts.Contains(c.Name) && name.EndsWith("_" + c.Name, StringComparison.Ordinal))))
+            .Where(t => t.clip is not null).ToList();
+        Assert.NotEmpty(thrusts);
+        Assert.All(thrusts, t => Assert.Null(LanceFault(Png.Read(Path.Combine(ArtDirectory(), t.name + ".png")), t.clip!.Contact!.Value)));
+    }
+
+    [Fact]
+    public void ALanceCutByItsFrameOrPeakingOffContactFailsTheLanceRule()
+    {
+        var image = Png.Read(Path.Combine(ArtDirectory(), "pikeman_lance_strike.png"));
+        Assert.Null(LanceFault(image, 5));
+
+        Assert.NotNull(LanceFault(image.With(5 * ArtSpec.ClipFrame + 252, 100, new Rgba(0x4E, 0x4E, 0x4E, 255)), 5));
+        Assert.NotNull(LanceFault(image.Blank(5 * ArtSpec.ClipFrame, 6 * ArtSpec.ClipFrame), 5));
+    }
+
+    /// <summary>The margin a lance's tip keeps from its frame's right edge (round 170: the crop ate the reach).</summary>
+    private const int LanceMargin = 8;
+
+    /// <summary>Why a lance thrust breaks the rule, or null: every frame keeps the tip <see cref="LanceMargin"/> inside the frame, and the contact frame reaches furthest.</summary>
+    private static string? LanceFault(Png image, int contact)
+    {
+        var frames = image.Width / ArtSpec.ClipFrame;
+        var reach = new int[frames];
+        for (var f = 0; f < frames; f++)
+        {
+            reach[f] = -1;
+            for (var x = 0; x < ArtSpec.ClipFrame; x++)
+            {
+                for (var y = 0; y < image.Height; y++)
+                {
+                    if (image.At(f * ArtSpec.ClipFrame + x, y).A != 0)
+                    {
+                        reach[f] = x;
+                        break;
+                    }
+                }
+            }
+
+            if (reach[f] >= ArtSpec.ClipFrame - LanceMargin)
+            {
+                return $"frame {f} reaches column {reach[f]}, inside the last {LanceMargin}";
+            }
+        }
+
+        var widest = Array.IndexOf(reach, reach.Max());
+        return reach[contact] == reach.Max() ? null : $"the tip is furthest on frame {widest}, not the contact frame {contact}";
+    }
+
     [Fact]
     public void AnEffectIsOneRowOfItsFramesWithItsSidecar()
     {

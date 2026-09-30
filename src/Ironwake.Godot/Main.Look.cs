@@ -237,9 +237,9 @@ public partial class Main
         DrawRect(r, MarkColour("reach", 0.7f), filled: false, width: Mathf.Max(1, 1.5f * S));
     }
 
-    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill, drawn in slate over a warm ground (issue 578).</summary>
-    private void DrawThreatMark(Coord at, string terrain, bool faint = false) =>
-        Hatch(Cell(at).Grow(-1), Look(LookPalette.ThreatHatch(terrain), faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
+    /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; no ground under it is warm, so it never blends to a peach (issue 564).</summary>
+    private void DrawThreatMark(Coord at, bool faint = false) =>
+        Hatch(Cell(at).Grow(-1), MarkColour("threat", faint ? FaintThreat : 0.5f), Mathf.Max(1, 1.5f * S), 9 * S);
 
     /// <summary>The hatch's alpha for a sleeping group's reach (issue 533): there, but never mistaken for a waking one's.</summary>
     private const float FaintThreat = 0.2f;
@@ -423,20 +423,22 @@ public partial class Main
                 Fill(P(-2, -8), P(0, -13), P(2, -8));
                 break;
             case "pikeman":
-            case "outrider":
                 Stroke(P(-9, 10), P(7, -8));
                 Fill(P(5, -6), P(11, -12), P(9, -4));
-                if (unit.Unit.ClassId == "pikeman" && reach >= 2)
+                if (reach >= 2)
                 {
                     Stroke(P(1, -2), P(-3, -6));
                     Stroke(P(1, -2), P(5, 2));
                 }
 
-                if (unit.Unit.ClassId == "outrider")
-                {
-                    Fill(P(-3, 4), P(-10, 0), P(-5, 8));
-                }
-
+                break;
+            case "outrider":
+                // Apart from the pike at 32 px (round 170): the lance couched flatter, the pennant
+                // under its head, a horseshoe at the foot; the same shape make_art.py draws.
+                Stroke(P(-11, 3), P(7, -5));
+                Fill(P(6.2f, -6.8f), P(12.5f, -7), P(7.8f, -3.2f));
+                Fill(P(-1, -0.4f), P(-7, 2.2f), P(-5, 5));
+                Stroke(Enumerable.Range(0, 9).Select(i => P(4.5f * Mathf.Cos(Mathf.Pi * i / 8), 7.5f + 4.5f * Mathf.Sin(Mathf.Pi * i / 8))).ToArray());
                 break;
             case "bowman":
                 Stroke(Enumerable.Range(0, 13).Select(i => Quad(P(-4, -11), P(10, 0), P(-4, 11), i / 12f)).ToArray());

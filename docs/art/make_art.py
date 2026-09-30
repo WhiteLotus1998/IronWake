@@ -45,7 +45,7 @@ def hex_rgb(value):
 
 # docs/LOOK.md's palette table; LookPalette holds the same values.
 TERRAIN = {
-    "plain": "7E9470", "road": "B3AE9C", "forest": "4F6E54", "hill": "B89E6C",
+    "plain": "7E9470", "road": "B3AE9C", "forest": "4F6E54", "hill": "C8C8A0",
     "mountain": "77767C", "water": "41667F", "fort": "9FB0C4", "wall": "23272E",
     "throne": "E4E7EA", "fire": "943C0C",
 }
@@ -195,14 +195,19 @@ def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
         stroke(P(0, -11), P(0, 10))
         stroke(P(-6, 4), P(6, 4))
         fill(P(-2, -8), P(0, -13), P(2, -8))
-    elif class_id in ("pikeman", "outrider"):
+    elif class_id == "outrider":
+        # Cavalry reads apart from the pike at 32 px (round 170): the lance couched flatter, its
+        # pennant under the head, and a horseshoe at the foot.
+        stroke(P(-11, 3), P(7, -5))
+        fill(P(6.2, -6.8), P(12.5, -7), P(7.8, -3.2))
+        fill(P(-1, -0.4), P(-7, 2.2), P(-5, 5))
+        stroke(*[P(4.5 * math.cos(math.pi * i / 8), 7.5 + 4.5 * math.sin(math.pi * i / 8)) for i in range(9)])
+    elif class_id == "pikeman":
         stroke(P(-9, 10), P(7, -8))
         fill(P(5, -6), P(11, -12), P(9, -4))
         if tell == "hooked":
             stroke(P(1, -2), P(-3, -6))
             stroke(P(1, -2), P(5, 2))
-        if class_id == "outrider":
-            fill(P(-3, 4), P(-10, 0), P(-5, 8))
     elif class_id == "bowman":
         stroke(*[quad(P(-4, -11), P(10, 0), P(-4, 11), i / 12) for i in range(13)])
         stroke(P(-4, -11), P(-4, 11))
@@ -357,6 +362,9 @@ def pose(clip, i):
     return p
 
 
+LANCE_BACK = 56  # how far the lance sits back along its shaft from where it first drew
+
+
 class Figure:
     """One combatant facing right, drawn in local coordinates (the feet's centre at 0,0) and placed on a frame."""
 
@@ -466,11 +474,14 @@ class Figure:
             for side in bits:
                 c.polygon([at(40, 2 * side), at(36, 14 * side), at(46, 20 * side), at(58, 16 * side), at(54, 2 * side)], DARK)
         elif kind == "lance":
-            c.stroke([at(-40), at(78)], 5, DARK)
-            c.polygon([at(74, -4), at(86, -5), at(98), at(86, 5), at(74, 4)], DARK)
+            # Held back along the shaft (round 170): the tip at full reach, the crit's lunge
+            # included, stays inside the 256 px frame with a margin instead of being cropped.
+            b = LANCE_BACK
+            c.stroke([at(-40 - b), at(78 - b)], 5, DARK)
+            c.polygon([at(74 - b, -4), at(86 - b, -5), at(98 - b), at(86 - b, 5), at(74 - b, 4)], DARK)
             if wid == "toll_spear":
-                c.stroke([at(70, -12), at(70, 12)], 4, DARK)
-                c.stroke([at(70, -12), at(76, -16)], 4, DARK)
+                c.stroke([at(70 - b, -12), at(70 - b, 12)], 4, DARK)
+                c.stroke([at(70 - b, -12), at(76 - b, -16)], 4, DARK)
         elif kind == "bow":
             draw = max(0.0, -swing) if swing <= 0 else 0.0
             tip_top, tip_bottom = upper((hand[0] - 8, hand[1] - 42)), upper((hand[0] - 8, hand[1] + 42))
