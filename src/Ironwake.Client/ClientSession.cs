@@ -168,6 +168,26 @@ public sealed class ClientSession
     /// </summary>
     public IReadOnlyList<string> ActLog => EnemyPhasePlaying && Playing is not null ? _log.Skip(_actLogStart).ToList() : _log;
 
+    /// <summary>
+    /// The enemy-act card as the panel shows it (issue 514, round 151): the act while the enemy
+    /// phase plays or its last beat is still on screen, and nothing once the phase has flipped
+    /// to the player, so a stale <c>ENEMY ACT</c> never sits under the player's own phase.
+    /// </summary>
+    public ActCard? ActShown(bool beatsPlaying) => EnemyPhasePlaying || beatsPlaying ? Act : null;
+
+    /// <summary>
+    /// The states the last Recall folded back through (issue 514), from the state it left to the
+    /// one it returned to, newest first: the renderer scrubs the board through them over
+    /// <see cref="Rhythm.Scrub"/>. Empty before any Recall. <see cref="ScrubSerial"/> counts each new one.
+    /// </summary>
+    public IReadOnlyList<BattleState> Scrub { get; private set; } = Array.Empty<BattleState>();
+
+    /// <summary>Rises by one each time <see cref="Scrub"/> is replaced, so a renderer knows to start the rewind.</summary>
+    public int ScrubSerial { get; private set; }
+
+    /// <summary>The Recall charges the map opened with, for the pips beside the ones left (issue 514).</summary>
+    public int RecallChargesAtStart => State.History.Count > 0 ? State.History[0].RecallCharges : State.RecallCharges;
+
     /// <summary>The map's objective in the console's words, shown for the whole battle (issue 374).</summary>
     public string Objective => Ironwake.Core.Objective.Line(State, Content);
 
@@ -339,10 +359,21 @@ public sealed class ClientSession
     public bool Recall(int index)
     {
         var undone = index >= 0 && index < State.History.Count ? RecallCost.Of(State, index) : null;
+        var left = State;
         if (!Submit(new Recall(index)))
         {
             return false;
         }
+
+        var frames = new List<BattleState> { left };
+        for (var i = left.History.Count - 1; i > index; i--)
+        {
+            frames.Add(left.History[i]);
+        }
+
+        frames.Add(State);
+        Scrub = frames;
+        ScrubSerial++;
 
         Status = undone is null ? null : "undone: " + PlaySession.UndoText(undone) + "\n" + PlaySession.SameRolls;
         return true;
@@ -423,7 +454,7 @@ public sealed class ClientSession
         var before = State;
         State = result.Next;
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
-        Beats = result.Events.Select(e => Beat.Of(e, before, State)).OfType<Beat>().ToList();
+        Beats = Hold(result.Events.Select(e => Beat.Of(e, before, State)).OfType<Beat>(), enemyPhase: false).ToList();
         BeatSerial++;
         _fallen.AddRange(Beats.Select(b => b.Fell).OfType<FallenMark>());
         _log.AddRange(Ironwake.Core.Objective.Notices(before, State, Content, command));
@@ -505,7 +536,7 @@ public sealed class ClientSession
 
         Playing = mark;
         _log.Add(Playing.Line);
-        Beats = beat is null ? Array.Empty<Beat>() : new[] { beat };
+        Beats = beat is null ? Array.Empty<Beat>() : Hold(new[] { beat }, enemyPhase: true).ToList();
         BeatSerial++;
         if (beat?.Fell is { } fell)
         {
@@ -515,6 +546,35 @@ public sealed class ClientSession
 
         Act = act is { Attacker: null } && Act is { Attacker: not null } ? Act : act ?? Act;
         return true;
+    }
+
+    /// <summary>The last lethal number shown, kept so the death beat that follows it can hold it (issue 514).</summary>
+    private Pop? _lethal;
+
+    /// <summary>
+    /// Carries each kill's number into its death beat (issue 514): a death beat holds the lethal
+    /// number struck on that unit, and in the enemy phase a player unit's death pulses the RECALL
+    /// chip while a charge is left.
+    /// </summary>
+    private IEnumerable<Beat> Hold(IEnumerable<Beat> beats, bool enemyPhase)
+    {
+        foreach (var beat in beats)
+        {
+            if (beat.Pops.LastOrDefault(p => p.Lethal) is { } lethal)
+            {
+                _lethal = lethal;
+            }
+
+            if (beat.Fell is { } fell)
+            {
+                var held = _lethal is { } pop && pop.TargetId == fell.Unit.Id ? pop : null;
+                _lethal = null;
+                yield return beat with { Held = held, Pulse = enemyPhase && fell.Unit.Side == Side.Player && State.RecallCharges > 0 };
+                continue;
+            }
+
+            yield return beat;
+        }
     }
 
     /// <summary>
