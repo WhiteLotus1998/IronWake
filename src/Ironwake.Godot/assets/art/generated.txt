@@ -1,5 +1,5 @@
 # Written by docs/art/make_art.py; a file an artist replaces comes off this list.
-# A clip sheet's sidecar <name>.json goes with it.
+# A clip or effect sheet's sidecar <name>.json goes with it.
 token_adept_player.png
 token_adept_enemy.png
 token_bowman_player.png
@@ -180,3 +180,13 @@ boss_weir_foreman_toll_axe_miss_recover.png
 boss_weir_foreman_toll_axe_dodge.png
 boss_weir_foreman_toll_axe_hit_react.png
 boss_weir_foreman_toll_axe_fall.png
+fx_hit_spark.png
+fx_slash_arc.png
+fx_crit_flash.png
+fx_heal.png
+fx_dust.png
+fx_embers.png
+fx_spell_bolt.png
+fx_spell_cinder.png
+fx_spell_gust.png
+fx_spell_radiance.png

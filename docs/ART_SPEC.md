@@ -43,6 +43,20 @@ One combatant per sheet, facing **right**. The client mirrors the sheet for the 
 
 Classes and the weapon kinds each needs, from `content/classes.json`: adept (reason), bowman (bow), bulwark (lance, axe), cadet (sword, lance, axe), chaplain (faith), outrider (lance, sword), pikeman (lance), reaver (axe, gauntlet), skyrider (lance). Named bosses from the shipped maps, one set per weapon each carries: the Bandit Leader (the Tollgate; steel axe and the Toll Axe, a two-weapon boss whose chosen axe must read at a glance), the Grange Reeve (Sallow Grange; steel lance and the Toll Spear), and the Weir Foreman (Harrow Weir; the Toll Axe).
 
+## Effects
+
+Laid over the battle scene, not part of a combatant: one-row sheets of **256 x 256 px** frames at 12 frames a second, delivered as a clip is, with a sidecar whose `pivot` is **(128, 128)**, the point the scene lays the effect on (the struck body's centre; for dust, the ground under the feet), and whose `contact` is `null`. An effect is not per side, so it is drawn in LOOK.md's own values and never tinted: white (`mark.struck`) for sparks and the crit flash, text (`ui.text`) for the slash arc and Radiance, frost (`mark.reach`) for Gust, Bolt and the heal, salt grey (`terrain.road`) for dust and smoke, and ember (`terrain.fire`) only for Cinder and the embers, since fire is the one warm thing. The tone rule holds here too: a heal is a few motes rising, not a halo; Radiance is a hard-edged fan of rays, not a glow.
+
+| effect | frames | what it shows |
+|---|---|---|
+| `hit_spark` | 5 | a blow that lands: short rays out from the point |
+| `slash_arc` | 5 | the edge's path, a crescent that sweeps and thins |
+| `crit_flash` | 6 | a four-point flash and a ring thrown outward |
+| `heal` | 10 | motes rising through the body |
+| `dust` | 6 | puffs thrown sideways from the feet |
+| `embers` | 12 | sparks rising from a burning tile, loops |
+| `spell_<weapon>` | 8 | one burst per Reason or Faith weapon that strikes (Salve and Beacon use `heal`) |
+
 ## Optional: level-up poses and portraits
 
 Both are out of the showcase and listed so the names are reserved. There is one **level-up pose** per cast member (256 x 256, one frame, three-quarter view, the pose that says who they are) and one **portrait** per cast member (192 x 192 bust, facing right, a plain panel-colour `#1E232A` background). The cast, in roster order: the captain Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan, Maud, Ansgar, Rook, Keziah, Brannock. Their lines are in `content/units/cast.json`.
@@ -53,12 +67,12 @@ Both are out of the showcase and listed so the names are reserved. There is one 
 - **Format:** PNG, RGBA, sRGB, no premultiplied alpha, delivered at 2x.
 - **Palette:** the values in `docs/LOOK.md`'s palette table, plus at most one shade and one highlight per value. The player keeps chroma (the amber); every enemy and world colour stays grey-leaning. `LookPaletteTests` checks the palette by arithmetic, and a new colour goes into LOOK.md before it goes into art.
 - **Licence and ownership:** the delivery carries a written grant letting the project use, modify and redistribute the art in the game and its promotional material, with the artist's credit line. Each file set is listed in `LICENSES` at the repository root with its source and terms, as the fonts are.
-- **Generated set (issue 564):** `docs/art/make_art.py` draws every token but the captain's (Lotus models him), every tile, and every class and boss clip in the list below from coded shapes. The output is hard-edged and the same bytes every run. Each file goes to `src/Ironwake.Godot/assets/art/<name>.png`, and each clip also gets its sidecar `<name>.json`. The script lists what it owns in `generated.txt` there, and `ArtGeneratedTests` holds those files to the look. The clips are drawn in three neutral greys, and the client tints each sheet with the side's colour when it plays it (0105). A delivered file replaces a generated one by name and comes off the list. `docs/art/contact-tokens.png` shows the tokens and tiles at 2x and 1x, and `docs/art/contact-clips.png` shows one frame of every clip.
+- **Generated set (issue 564):** `docs/art/make_art.py` draws every token but the captain's (Lotus models him), every tile, every class and boss clip, and every effect in the list below from coded shapes. The output is hard-edged and the same bytes every run. Each file goes to `src/Ironwake.Godot/assets/art/<name>.png`, and each clip and effect also gets its sidecar `<name>.json`. The script lists what it owns in `generated.txt` there, and `ArtGeneratedTests` holds those files to the look. The clips are drawn in three neutral greys, and the client tints each sheet with the side's colour when it plays it (0105). A delivered file replaces a generated one by name and comes off the list. `docs/art/contact-tokens.png` shows the tokens and tiles at 2x and 1x, `docs/art/contact-clips.png` shows one frame of every clip, and `docs/art/contact-effects.png` every frame of every effect.
 - **Placeholders:** until a file is delivered, the client draws its own vector placeholder under the same name, so real art drops in without code changes. The map tokens have placeholders now (`Main.Look.cs`). The clips get theirs with the battle scene (#535).
 
 ## The name list
 
-Every asset, one per line, in order: tokens, tiles, class clips, boss clips, then the optional level-up poses and portraits. A clip row names a sheet, whose frames follow the clip table above.
+Every asset, one per line, in order: tokens, tiles, class clips, boss clips, effects, then the optional level-up poses and portraits. A clip row names a sheet, whose frames follow the clip table above.
 
 ```names
 token_adept_player
@@ -242,6 +256,16 @@ boss_weir_foreman_toll_axe_miss_recover
 boss_weir_foreman_toll_axe_dodge
 boss_weir_foreman_toll_axe_hit_react
 boss_weir_foreman_toll_axe_fall
+fx_hit_spark
+fx_slash_arc
+fx_crit_flash
+fx_heal
+fx_dust
+fx_embers
+fx_spell_bolt
+fx_spell_cinder
+fx_spell_gust
+fx_spell_radiance
 levelup_captain
 levelup_wren
 levelup_teodor

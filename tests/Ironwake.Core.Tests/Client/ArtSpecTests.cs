@@ -97,4 +97,29 @@ public class ArtSpecTests
             Assert.Contains($"| `{clip.Name}` | {clip.Frames} | {(clip.Contact is { } c ? c.ToString(System.Globalization.CultureInfo.InvariantCulture) : "none")} |", text);
         }
     }
+
+    [Fact]
+    public void EveryStrikingSpellGetsABurstAndTheHealsShareOne()
+    {
+        var content = Content();
+        var names = ArtSpec.EffectNames(content).ToList();
+
+        Assert.All(content.Weapons.Values.Where(w => w.IsMagic && !w.Heals), w => Assert.Contains($"fx_spell_{w.Id}", names));
+        Assert.All(content.Weapons.Values.Where(w => w.Heals), w => Assert.DoesNotContain($"fx_spell_{w.Id}", names));
+        Assert.All(content.Weapons.Values.Where(w => !w.IsMagic), w => Assert.DoesNotContain($"fx_spell_{w.Id}", names));
+        Assert.Contains("fx_heal", names);
+        Assert.Equal(names.Count, names.Distinct().Count());
+    }
+
+    [Fact]
+    public void TheSpecsEffectTableMatchesTheEffectsFrames()
+    {
+        var text = File.ReadAllText(SpecPath());
+        foreach (var effect in ArtSpec.FixedEffects)
+        {
+            Assert.Contains($"| `{effect.Name}` | {effect.Frames} |", text);
+        }
+
+        Assert.Contains($"| `spell_<weapon>` | {ArtSpec.SpellFrames} |", text);
+    }
 }

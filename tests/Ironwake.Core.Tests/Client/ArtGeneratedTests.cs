@@ -12,7 +12,8 @@ namespace Ironwake.Core.Tests.Client;
 /// spec's 2x frame and keeps LOOK.md's colours: a token is its side's values and nothing else, a
 /// tile its terrain's colour with detail laid over it, so terrain never adds a hue. A clip is a
 /// one-row sheet of the spec's frames with its sidecar, drawn in three neutral greys the client
-/// tints with the side's colour, the feet on the pivot.
+/// tints with the side's colour, the feet on the pivot. An effect is a one-row sheet with its
+/// sidecar, drawn opaque in LOOK.md's own values and never tinted, ember only where fire is.
 /// </summary>
 public class ArtGeneratedTests
 {
@@ -35,14 +36,43 @@ public class ArtGeneratedTests
     /// <summary>The clip sheets' three greys: a base, its shade, and the dark of steel, hair and boots.</summary>
     private static readonly Rgba[] Greys = { new(0xD6, 0xD6, 0xD6, 255), new(0x9A, 0x9A, 0x9A, 255), new(0x4E, 0x4E, 0x4E, 255) };
 
-    private static bool IsClip(string name) => !name.StartsWith("token_", StringComparison.Ordinal) && !name.StartsWith("tile_", StringComparison.Ordinal);
+    private static bool IsEffect(string name) => name.StartsWith("fx_", StringComparison.Ordinal);
+
+    private static bool IsClip(string name) =>
+        !name.StartsWith("token_", StringComparison.Ordinal) && !name.StartsWith("tile_", StringComparison.Ordinal) && !IsEffect(name);
+
+    private static Rgba Value(Rgb c) => Opaque(c);
+
+    /// <summary>
+    /// The values each effect may use: white (<c>mark.struck</c>) for sparks and flashes, text for
+    /// the slash arc and Radiance, frost (<c>mark.reach</c>) for Gust, Bolt and the heal, salt grey
+    /// (<c>terrain.road</c>) for dust and smoke, and ember (<c>terrain.fire</c>) only where fire is.
+    /// A new effect fails until it is given its values here.
+    /// </summary>
+    private static readonly IReadOnlyDictionary<string, Rgba[]> EffectValues = new Dictionary<string, Rgba[]>
+    {
+        ["fx_hit_spark"] = new[] { Value(LookPalette.Marks["struck"]) },
+        ["fx_slash_arc"] = new[] { Value(LookPalette.Ui["text"]) },
+        ["fx_crit_flash"] = new[] { Value(LookPalette.Marks["struck"]), Value(LookPalette.Ui["text"]) },
+        ["fx_heal"] = new[] { Value(LookPalette.Marks["reach"]), Value(LookPalette.Marks["struck"]) },
+        ["fx_dust"] = new[] { Value(LookPalette.Terrain["road"]) },
+        ["fx_embers"] = new[] { Value(LookPalette.Terrain["fire"]) },
+        ["fx_spell_bolt"] = new[] { Value(LookPalette.Marks["reach"]), Value(LookPalette.Marks["struck"]) },
+        ["fx_spell_cinder"] = new[] { Value(LookPalette.Terrain["fire"]), Value(LookPalette.Terrain["road"]) },
+        ["fx_spell_gust"] = new[] { Value(LookPalette.Marks["reach"]), Value(LookPalette.Ui["text"]) },
+        ["fx_spell_radiance"] = new[] { Value(LookPalette.Ui["text"]), Value(LookPalette.Marks["struck"]) },
+    };
+
+    /// <summary>The effects that are fire, the only ones ember may appear in.</summary>
+    private static readonly IReadOnlySet<string> FireEffects = new HashSet<string> { "fx_embers", "fx_spell_cinder" };
 
     [Fact]
-    public void TheGeneratorWritesEveryTokenButTheCaptainsEveryTileAndEveryClip()
+    public void TheGeneratorWritesEveryTokenButTheCaptainsEveryTileEveryClipAndEveryEffect()
     {
         var content = ContentLoader.Load(Fixture.RealContentDirectory());
         var expected = ArtSpec.Tokens(content).Where(n => n != "token_captain_player").Concat(ArtSpec.Tiles(content))
-            .Concat(ArtSpec.ClassClips(content)).Concat(ArtSpec.BossClips(content, ArtSpecTests.ShippedBosses(content))).ToHashSet();
+            .Concat(ArtSpec.ClassClips(content)).Concat(ArtSpec.BossClips(content, ArtSpecTests.ShippedBosses(content)))
+            .Concat(ArtSpec.EffectNames(content)).ToHashSet();
 
         Assert.Equal(expected.OrderBy(n => n, StringComparer.Ordinal), Generated().OrderBy(n => n, StringComparer.Ordinal));
         Assert.All(Generated(), name => Assert.True(File.Exists(Path.Combine(ArtDirectory(), name + ".png")), name));
@@ -51,7 +81,7 @@ public class ArtGeneratedTests
     [Fact]
     public void EveryGeneratedTokenAndTileIsTheSpecsFrameAtTwoX()
     {
-        Assert.All(Generated().Where(n => !IsClip(n)), name =>
+        Assert.All(Generated().Where(n => !IsClip(n) && !IsEffect(n)), name =>
         {
             var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
             Assert.Equal((Frame, Frame), (image.Width, image.Height));
@@ -139,6 +169,80 @@ public class ArtGeneratedTests
         Assert.NotNull(ClipFault(image.With(128, 180, new Rgba(0xD6, 0xD6, 0xD6, 128))));
         Assert.NotNull(ClipFault(image.With(128, 250, new Rgba(0x4E, 0x4E, 0x4E, 255))));
         Assert.NotNull(ClipFault(image.Blank(0, ArtSpec.ClipFrame)));
+    }
+
+    [Fact]
+    public void AnEffectIsOneRowOfItsFramesWithItsSidecar()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var frames = ArtSpec.Effects(content).ToDictionary(e => $"fx_{e.Name}", e => e.Frames);
+        Assert.All(Generated().Where(IsEffect), name =>
+        {
+            var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
+            Assert.Equal((frames[name] * ArtSpec.ClipFrame, ArtSpec.ClipFrame), (image.Width, image.Height));
+
+            using var sidecar = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(ArtDirectory(), name + ".json")));
+            var root = sidecar.RootElement;
+            Assert.Equal(new[] { ArtSpec.ClipFrame, ArtSpec.ClipFrame }, root.GetProperty("frame").EnumerateArray().Select(e => e.GetInt32()));
+            Assert.Equal(frames[name], root.GetProperty("frames").GetInt32());
+            Assert.Equal(new[] { ArtSpec.EffectPivot.X, ArtSpec.EffectPivot.Y }, root.GetProperty("pivot").EnumerateArray().Select(e => e.GetInt32()));
+            Assert.Equal(System.Text.Json.JsonValueKind.Null, root.GetProperty("contact").ValueKind);
+        });
+    }
+
+    [Fact]
+    public void AnEffectIsItsOwnLookValuesAndEmberOnlyWhereFireIs()
+    {
+        Assert.All(Generated().Where(IsEffect), name =>
+        {
+            Assert.True(EffectValues.ContainsKey(name), $"{name} has no values in EffectValues");
+            var image = Png.Read(Path.Combine(ArtDirectory(), name + ".png"));
+            Assert.Null(EffectFault(image, name));
+        });
+        Assert.All(EffectValues.Where(e => !FireEffects.Contains(e.Key)), e => Assert.DoesNotContain(Value(LookPalette.Terrain["fire"]), e.Value));
+    }
+
+    [Fact]
+    public void AnEffectWithAForeignValueEmberOrAnEmptyFrameFailsTheEffectRule()
+    {
+        var image = Png.Read(Path.Combine(ArtDirectory(), "fx_hit_spark.png"));
+        Assert.Null(EffectFault(image, "fx_hit_spark"));
+
+        var fire = LookPalette.Terrain["fire"];
+        Assert.NotNull(EffectFault(image.With(128, 128, new Rgba(fire.R, fire.G, fire.B, 255)), "fx_hit_spark"));
+        Assert.NotNull(EffectFault(image.With(128, 128, new Rgba(255, 255, 255, 128)), "fx_hit_spark"));
+        Assert.NotNull(EffectFault(image.Blank(0, ArtSpec.ClipFrame), "fx_hit_spark"));
+    }
+
+    /// <summary>
+    /// Why an effect sheet breaks the look, or null: every pixel clear or opaque in one of the
+    /// effect's own values (ember only in the fire effects), and every frame drawing something.
+    /// </summary>
+    private static string? EffectFault(Png image, string name)
+    {
+        var allowed = EffectValues[name];
+        var drawn = new bool[image.Width / ArtSpec.ClipFrame];
+        for (var y = 0; y < image.Height; y++)
+        {
+            for (var x = 0; x < image.Width; x++)
+            {
+                var p = image.At(x, y);
+                if (p.A == 0)
+                {
+                    continue;
+                }
+
+                if (!allowed.Contains(p))
+                {
+                    return $"pixel {x},{y} is {p}, not one of {name}'s values";
+                }
+
+                drawn[x / ArtSpec.ClipFrame] = true;
+            }
+        }
+
+        var empty = Array.IndexOf(drawn, false);
+        return empty < 0 ? null : $"frame {empty} draws nothing";
     }
 
     /// <summary>
