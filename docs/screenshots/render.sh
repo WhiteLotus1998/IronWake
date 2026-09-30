@@ -41,8 +41,25 @@ shot the_tollgate-113-threat --map the_tollgate --seed 113 --script "$PWD/$out/t
 # on Tab; Brackwater seed 53 turn 3 at dusk is the rim frame, a rider lit on 8,3 beside the dark.
 shot the_tollgate-113-turn4 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn4.script" --select 7,5 --hover 7,5
 shot the_tollgate-113-log --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 5 --log-open
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-player-4x.png" 368 370 44 44
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-enemy-forest-4x.png" 280 282 44 44
-python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-forecast-4x.png" 752 116 524 238
-python3 docs/look/crop.py "$out/the_tollgate-113-turn4.png" "$out/crop-forecast-wounded-4x.png" 752 116 524 238
-python3 docs/look/crop.py "$out/brackwater_cut-53-turn3.png" "$out/crop-dusk-edge-4x.png" 268 182 108 72
+# Crops at the layout of slice 3 (issue 513): the Tollgate's tile is 45 with its board at 49,56
+# and the column at 719; Brackwater's tile is 34 with its board at 24,122.
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-player-4x.png" 409 371 45 45
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-enemy-forest-4x.png" 319 281 45 45
+python3 docs/look/crop.py "$out/the_tollgate-113-turn3.png" "$out/crop-forecast-4x.png" 707 110 524 238
+python3 docs/look/crop.py "$out/the_tollgate-113-turn4.png" "$out/crop-forecast-wounded-4x.png" 707 110 524 238
+python3 docs/look/crop.py "$out/brackwater_cut-53-turn3.png" "$out/crop-dusk-edge-4x.png" 262 190 102 68
+# Showcase slice 3 (issue 513): the Tollgate's turn-4 enemy phase on seed 113 played by itself at
+# normal speed, a frame every 0.3 s on a fixed clock (the archer on Wren, the leader on Teodor, the
+# rider's arrival and its kill, the mark he leaves), laid out as contact sheets; then three stills
+# of it at full size: a number in the air, the fade, and the mark with the act card.
+strip() {
+  local name=$1 count=$2 every=$3; shift 3
+  local tmp; tmp=$(mktemp -d)
+  timeout 300 xvfb-run -a -s "-screen 0 1280x720x24" "$GODOT" --rendering-driver opengl3 --path src/Ironwake.Godot -- "$@" --strip "$tmp/f" "$count" "$every" > /dev/null 2>&1
+  python3 docs/look/strip.py "$tmp/f" "$every" "$out/$name"
+  for keep in "${STILLS[@]}"; do cp "$tmp/f-$keep.png" "$out/$name-$keep.png"; done
+  rm -rf "$tmp"
+  echo "$name"
+}
+STILLS=(13 17 19)
+strip the_tollgate-113-enemy-strip 32 0.3 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0

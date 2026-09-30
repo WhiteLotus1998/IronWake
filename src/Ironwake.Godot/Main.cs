@@ -23,7 +23,8 @@ namespace Ironwake.Godot;
 /// as a click and a hover would, and <c>--screenshot &lt;file.png&gt;</c> saves one rendered frame
 /// and quits (issue 352; it needs a display, so CI runs it under xvfb); <c>--recall</c> opens the
 /// Recall browser; <c>--enemy-steps N</c> ends the player phase and reveals N enemy events. Keys: E
-/// ends the phase, Space reveals the enemy phase's next event and marks it on the board, C skips
+/// ends the phase, after which the enemy phase plays itself (<c>Main.Motion.cs</c>, issue 513) at
+/// the speed S cycles; Space reveals its next event at once and marks it on the board, C skips
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
 /// Tab gives the column to the event log (<c>--log-open</c> opens with it), Escape clears the
 /// selection and closes the browser. An exported build finds <c>content/</c>
@@ -48,7 +49,7 @@ public partial class Main : Node2D
     private const int RecallRowsShown = 40;
     private static readonly (string Key, string Does)[] Keys =
     {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), ("Esc", "clear"),
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("Tab", "log"), ("Esc", "clear"),
     };
 
     /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
@@ -64,10 +65,16 @@ public partial class Main : Node2D
     /// </summary>
     private float Lift => _client is null ? 0 : Math.Max(0, (FooterTop - Top - (_client.State.Map.Height * _tile + LegendRoom)) / 2f);
 
-    private Vector2 Board => new(Margin, Top + Lift);
+    /// <summary>The gap between the board's right edge and the column (issue 513): fixed, so the column follows the board.</summary>
+    private const int ColumnGap = 40;
 
-    /// <summary>The column's top left, level with the board's top.</summary>
-    private Vector2 PanelOrigin => new(ViewWidth - PanelWidth - Margin, Board.Y + 12);
+    /// <summary>The board's left edge: the board, the gap and the column are one block centred across the window (issue 513).</summary>
+    private float Left => _client is null ? Margin : Math.Max(Margin, (ViewWidth - (_client.State.Map.Width * _tile + ColumnGap + PanelWidth + 12)) / 2f);
+
+    private Vector2 Board => new(Left, Top + Lift);
+
+    /// <summary>The column's top left, level with the board's top, a fixed gap right of the board.</summary>
+    private Vector2 PanelOrigin => new(_client is null ? ViewWidth - PanelWidth - Margin : Board.X + _client.State.Map.Width * _tile + ColumnGap, Board.Y + 12);
 
     /// <summary>The column's lowest baseline (issue 512): its height follows the board's and its legend's, not the window's.</summary>
     private float PanelBottom => _client is null ? FooterTop : Board.Y + _client.State.Map.Height * _tile + LegendRoom;
@@ -190,6 +197,14 @@ public partial class Main : Node2D
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
             _logOpen = Array.IndexOf(args, "--log-open") >= 0;
             _screenshot = Arg(args, "--screenshot");
+            var strip = Array.IndexOf(args, "--strip");
+            if (strip >= 0 && strip + 3 < args.Length && int.TryParse(args[strip + 2], out var count) && float.TryParse(args[strip + 3], System.Globalization.CultureInfo.InvariantCulture, out var every))
+            {
+                (_stripPrefix, _stripCount, _stripEvery) = (args[strip + 1], count, every);
+            }
+
+            _still = _screenshot is not null;
+            SyncBeats();
         }
         catch (Exception e) when (e is ContentException or MapException or IOException or ArgumentException)
         {
@@ -232,6 +247,8 @@ public partial class Main : Node2D
     /// </summary>
     public override void _Process(double delta)
     {
+        Advance(delta);
+        SaveStripFrame();
         if (_screenshot is null || ++_framesDrawn < 3)
         {
             return;
@@ -276,10 +293,16 @@ public partial class Main : Node2D
                         _client.Submit(new EndPhase());
                         break;
                     case Key.Space:
+                        FinishBeats();
                         _client.Step();
                         break;
                     case Key.C:
                         _client.Continue();
+                        SyncBeats();
+                        FinishBeats();
+                        break;
+                    case Key.S:
+                        _speed = (_speed + 1) % Speeds.Length;
                         break;
                     case Key.R:
                         _recallOpen = !_recallOpen;
@@ -322,8 +345,9 @@ public partial class Main : Node2D
         }
     }
 
+    /// <summary>The tile (issue 513): as large as fills the height the block allows under the top bar and above the legend and footer, and never so wide the column does not fit.</summary>
     private static int TileFor(MapDefinition map) =>
-        Math.Min(44, Math.Min((ViewWidth - PanelWidth - 3 * Margin) / map.Width, (ViewHeight - Top - 110) / map.Height));
+        Math.Min((ViewWidth - PanelWidth - ColumnGap - 2 * Margin - 12) / map.Width, (FooterTop - Top - LegendRoom - 8) / map.Height);
 
     /// <summary>The between-map screen's input: a click on a row does what it offers; M marches; B benches or unbenches the selected unit.</summary>
     private void ScreenInput(InputEvent input)
@@ -583,11 +607,7 @@ public partial class Main : Node2D
             DrawPath(walked);
         }
 
-        foreach (var unit in state.Units)
-        {
-            DrawToken(state, unit);
-        }
-
+        DrawTokens(state);
         if (_client.Playing is { } mark)
         {
             DrawMark(mark);
@@ -597,6 +617,8 @@ public partial class Main : Node2D
         {
             DrawHoverMark(hover);
         }
+
+        DrawPops();
     }
 
     /// <summary>The enemy-phase path: the line walked from the start tile through the path to the end tile, bone on an ink edge, drawn under the units.</summary>
@@ -786,7 +808,7 @@ public partial class Main : Node2D
 
         if (client.EnemyPhasePlaying)
         {
-            y = Row(y, "ENEMY PHASE  Space: next event  C: skip to end", EnemyMark) + 6;
+            y = DrawEnemyHeader(y);
         }
 
         if (_recallOpen)
@@ -840,6 +862,10 @@ public partial class Main : Node2D
             {
                 y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
             }
+        }
+        else if (client.Act is { } act)
+        {
+            y = DrawActCard(boxTop, act) + 22;
         }
         else if (_hover is { } spot && client.Preview(spot) is { } preview)
         {

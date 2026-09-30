@@ -93,7 +93,9 @@ public sealed class ClientSession
 {
     private readonly List<string> _log = new();
     private readonly Queue<Command> _enemy = new();
-    private readonly Queue<Highlight> _pending = new();
+    private readonly Queue<(Highlight Mark, Beat? Beat, ActCard? Act)> _pending = new();
+    private readonly List<FallenMark> _fallen = new();
+    private readonly Dictionary<string, BattleUnit> _ghosts = new();
 
     /// <summary>
     /// The command applied from each history state, by index, as the console's <c>recall list</c>
@@ -128,6 +130,32 @@ public sealed class ClientSession
     /// before any enemy phase and after a player command.
     /// </summary>
     public Highlight? Playing { get; private set; }
+
+    /// <summary>
+    /// What the client animates for the last thing revealed (issue 513): every beat of a player
+    /// command's events at once, or the one beat of the enemy-phase line <see cref="Step"/> just
+    /// showed; empty when it animates nothing. <see cref="BeatSerial"/> counts each new set.
+    /// </summary>
+    public IReadOnlyList<Beat> Beats { get; private set; } = Array.Empty<Beat>();
+
+    /// <summary>Rises by one each time <see cref="Beats"/> is replaced, so a renderer knows to start playing them.</summary>
+    public int BeatSerial { get; private set; }
+
+    /// <summary>
+    /// The units fallen this phase (issue 513, round 141), each with the tile it fell on, so a
+    /// death is read on the board and not three log lines later. Cleared when a phase ends,
+    /// by the player's first command after the enemy phase, and by a Recall.
+    /// </summary>
+    public IReadOnlyList<FallenMark> Fallen => _fallen;
+
+    /// <summary>
+    /// Units the enemy phase has killed whose death line is not yet shown: the board draws them
+    /// where they stood until the line that names their death, so the board is never ahead of the log.
+    /// </summary>
+    public IReadOnlyCollection<BattleUnit> Ghosts => _ghosts.Values;
+
+    /// <summary>The enemy-act card (issue 513): the newest act the enemy phase has shown, or null outside it.</summary>
+    public ActCard? Act { get; private set; }
 
     /// <summary>The map's objective in the console's words, shown for the whole battle (issue 374).</summary>
     public string Objective => Ironwake.Core.Objective.Line(State, Content);
@@ -372,11 +400,21 @@ public sealed class ClientSession
         }
 
         Status = null;
+        if (command is EndPhase or Ironwake.Core.Recall || Playing is not null)
+        {
+            _fallen.Clear();
+            _ghosts.Clear();
+        }
+
         Playing = null;
+        Act = null;
         Record(command);
         var before = State;
         State = result.Next;
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
+        Beats = result.Events.Select(e => Beat.Of(e, before, State)).OfType<Beat>().ToList();
+        BeatSerial++;
+        _fallen.AddRange(Beats.Select(b => b.Fell).OfType<FallenMark>());
         _log.AddRange(Ironwake.Core.Objective.Notices(before, State, Content, command));
         if (command is EndPhase)
         {
@@ -417,19 +455,24 @@ public sealed class ClientSession
             State = result.Next;
             if (dark)
             {
-                _pending.Enqueue(new Highlight(ProtocolSession.DarkLine, null, null, Array.Empty<Coord>(), null));
+                _pending.Enqueue((new Highlight(ProtocolSession.DarkLine, null, null, Array.Empty<Coord>(), null), null, null));
             }
 
             foreach (var e in result.Events.Where(e => !dark || e is not UnitMoved and not UnitWaited))
             {
-                _pending.Enqueue(HighlightOf(e, PlaySession.Describe(e, Content), before, State));
+                if (e is UnitDied died && before.Find(died.UnitId) is { } dead)
+                {
+                    _ghosts[dead.Id] = dead;
+                }
+
+                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content)));
             }
 
             if (!dark)
             {
                 foreach (var notice in Ironwake.Core.Objective.Notices(before, State, Content, command))
                 {
-                    _pending.Enqueue(new Highlight(notice, null, null, Array.Empty<Coord>(), null));
+                    _pending.Enqueue((new Highlight(notice, null, null, Array.Empty<Coord>(), null), null, null));
                 }
             }
         }
@@ -439,8 +482,18 @@ public sealed class ClientSession
             return false;
         }
 
-        Playing = _pending.Dequeue();
+        var (mark, beat, act) = _pending.Dequeue();
+        Playing = mark;
         _log.Add(Playing.Line);
+        Beats = beat is null ? Array.Empty<Beat>() : new[] { beat };
+        BeatSerial++;
+        if (beat?.Fell is { } fell)
+        {
+            _ghosts.Remove(fell.Unit.Id);
+            _fallen.Add(fell);
+        }
+
+        Act = act ?? Act;
         return true;
     }
 
