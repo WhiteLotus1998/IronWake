@@ -12,7 +12,7 @@ public sealed record Effect(string Name, int Frames);
 /// The art spec's names (issue 532, <c>docs/ART_SPEC.md</c>): every asset an outside artist
 /// delivers, derived from the content so a new class, weapon, boss or cast member adds its rows
 /// here and the spec's test fails until the document lists them. Tokens are one file per class per
-/// side; battle clips are one sheet per (class, weapon kind, clip) and per (boss, weapon, clip);
+/// side, plus a variant per weapon tell a shipped enemy carries; battle clips are one sheet per (class, weapon kind, clip) and per (boss, weapon, clip);
 /// effects are one sheet each, the spells' from the weapons; level-up poses and portraits are one
 /// per cast member and optional. A renderer looks each name
 /// up and draws its own vector placeholder where no file is delivered, so real art drops in
@@ -65,6 +65,30 @@ public static class ArtSpec
             .Append("token_captain_player");
 
     /// <summary>
+    /// A token's tell (issue 564, ART_SPEC's silhouettes): <c>hooked</c> for a pikeman whose weapons
+    /// reach 2 (the toll warden's and the reeve's Toll Spear), <c>double</c> for a boss reaver (the
+    /// bandit leader's and the foreman's double bit), else null. The same rule
+    /// <c>Main.Look.cs</c>'s silhouette draws, so a variant token file and the placeholder it
+    /// replaces carry one shape.
+    /// </summary>
+    public static string? TokenTell(GameContent content, Unit unit, bool isBoss) => unit.ClassId switch
+    {
+        "pikeman" when unit.Inventory.Items.Select(i => i.ItemId).Where(content.Weapons.ContainsKey).Any(id => content.Weapons[id].MaxRange >= 2) => "hooked",
+        "reaver" when isBoss => "double",
+        _ => null,
+    };
+
+    /// <summary>
+    /// The variant tokens: <c>token_&lt;class&gt;_enemy_&lt;tell&gt;</c> for every tell an enemy placed
+    /// on a shipped map carries, one row per tell, not per unit, sorted. A renderer without the
+    /// variant's file falls back to the class's own token.
+    /// </summary>
+    public static IEnumerable<string> TokenVariants(GameContent content, IEnumerable<(string TemplateId, bool IsBoss)> enemies) =>
+        enemies.Select(e => (Unit: content.Units[e.TemplateId], e.IsBoss))
+            .Select(e => TokenTell(content, e.Unit, e.IsBoss) is { } tell ? $"token_{e.Unit.ClassId}_enemy_{tell}" : null)
+            .OfType<string>().Distinct().OrderBy(n => n, StringComparer.Ordinal);
+
+    /// <summary>
     /// The map tiles (issue 564): <c>tile_&lt;terrain&gt;</c> for every terrain, a 48 px square at
     /// 2x with its detail laid over its own colour; fire is an ember hatch on clear ground, laid
     /// over whatever burns. The grid and the north light's shadows stay the renderer's, since they
@@ -105,8 +129,16 @@ public static class ArtSpec
     public static IEnumerable<string> Optional(GameContent content) =>
         content.Cast.Select(u => $"levelup_{u.Id}").Concat(content.Cast.Select(u => $"portrait_{u.Id}"));
 
-    /// <summary>Every name the spec lists, in its order: tokens, tiles, class clips, boss clips, effects, then the optional rows.</summary>
-    public static IEnumerable<string> Names(GameContent content, IEnumerable<string> bossIds) =>
-        Tokens(content).Concat(Tiles(content)).Concat(ClassClips(content)).Concat(BossClips(content, bossIds))
+    /// <summary>
+    /// Every name the spec lists, in its order: tokens, the variant tokens, tiles, class clips, boss
+    /// clips, effects, then the optional rows. <paramref name="enemies"/> is every enemy the shipped
+    /// maps place, with whether it is placed as a boss.
+    /// </summary>
+    public static IEnumerable<string> Names(GameContent content, IEnumerable<(string TemplateId, bool IsBoss)> enemies)
+    {
+        var placed = enemies.ToList();
+        return Tokens(content).Concat(TokenVariants(content, placed)).Concat(Tiles(content)).Concat(ClassClips(content))
+            .Concat(BossClips(content, placed.Where(e => e.IsBoss).Select(e => e.TemplateId)))
             .Concat(EffectNames(content)).Concat(Optional(content));
+    }
 }

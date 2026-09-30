@@ -24,21 +24,25 @@ public class ArtSpecTests
         return lines.Skip(start + 1).TakeWhile(l => l != "```").ToList();
     }
 
-    /// <summary>Every unit a shipped map places as a boss, from the maps and the keep.</summary>
-    internal static IEnumerable<string> ShippedBosses(GameContent content)
+    /// <summary>Every enemy a shipped map places, with whether it is placed as a boss, from the maps and the keep.</summary>
+    internal static IEnumerable<(string TemplateId, bool IsBoss)> ShippedEnemies(GameContent content)
     {
         var root = Fixture.RealContentDirectory();
         var files = Directory.GetFiles(Path.Combine(root, "maps"), "*.map").Concat(Directory.GetFiles(Path.Combine(root, "keep"), "*.map"));
         return files.Select(f => MapFiles.Load(f, content))
             .SelectMany(m => m.Placements.OfType<EnemyPlacement>().Concat(m.Spawns()))
-            .Where(p => p.IsBoss).Select(p => p.TemplateId);
+            .Select(p => (p.TemplateId, p.IsBoss));
     }
+
+    /// <summary>Every unit a shipped map places as a boss.</summary>
+    internal static IEnumerable<string> ShippedBosses(GameContent content) =>
+        ShippedEnemies(content).Where(e => e.IsBoss).Select(e => e.TemplateId);
 
     [Fact]
     public void TheSpecListsExactlyTheNamesTheContentDerives()
     {
         var content = Content();
-        var expected = ArtSpec.Names(content, ShippedBosses(content)).ToList();
+        var expected = ArtSpec.Names(content, ShippedEnemies(content)).ToList();
 
         Assert.Equal(expected, SpecNames(File.ReadAllText(SpecPath())));
     }
@@ -47,7 +51,7 @@ public class ArtSpecTests
     public void AMissingRowFailsTheSpec()
     {
         var content = Content();
-        var expected = ArtSpec.Names(content, ShippedBosses(content)).ToList();
+        var expected = ArtSpec.Names(content, ShippedEnemies(content)).ToList();
         var text = File.ReadAllText(SpecPath()).Replace("\ncadet_sword_strike\n", "\n", StringComparison.Ordinal);
 
         Assert.NotEqual(expected, SpecNames(text));
@@ -57,7 +61,7 @@ public class ArtSpecTests
     public void EveryClassGetsATokenPerSideAndEveryClipPerWeaponKind()
     {
         var content = Content();
-        var names = ArtSpec.Names(content, Array.Empty<string>()).ToHashSet();
+        var names = ArtSpec.Names(content, Array.Empty<(string, bool)>()).ToHashSet();
 
         foreach (var unitClass in content.Classes.Values)
         {
@@ -68,6 +72,26 @@ public class ArtSpecTests
                 Assert.All(ArtSpec.Clips, clip => Assert.Contains($"{unitClass.Id}_{ArtSpec.Kind(type)}_{clip.Name}", names));
             }
         }
+    }
+
+    [Fact]
+    public void AReachTwoPikemanAndABossReaverGetAVariantTokenEach()
+    {
+        var content = Content();
+        var names = ArtSpec.TokenVariants(content, new[] { ("toll_warden", false), ("grange_reeve", true), ("bandit_leader", true), ("weir_foreman", true) }).ToList();
+
+        Assert.Equal(new[] { "token_pikeman_enemy_hooked", "token_reaver_enemy_double" }, names);
+    }
+
+    [Fact]
+    public void APlainPikemanOrAReaverNotPlacedAsABossGetsNoVariant()
+    {
+        var content = Content();
+
+        Assert.Null(ArtSpec.TokenTell(content, content.Units["soldier"], isBoss: false));
+        Assert.Null(ArtSpec.TokenTell(content, content.Units["toll_brigand"], isBoss: false));
+        Assert.Equal("double", ArtSpec.TokenTell(content, content.Units["toll_brigand"], isBoss: true));
+        Assert.Empty(ArtSpec.TokenVariants(content, new[] { ("soldier", false), ("toll_brigand", false), ("archer", true) }));
     }
 
     [Fact]
