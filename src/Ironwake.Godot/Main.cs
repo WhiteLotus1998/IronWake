@@ -911,7 +911,9 @@ public partial class Main : Node2D
     private void DrawLog(float y)
     {
         var client = _client!;
-        var log = client.Log;
+
+        // While the enemy phase plays, the column shows the act on show; Tab still opens it all (issue 544).
+        var log = _logOpen ? client.Log : client.ActLog;
         var rows = new List<(string Text, bool Marked)>();
         for (var i = 0; i < log.Count; i++)
         {
@@ -926,7 +928,7 @@ public partial class Main : Node2D
         }
 
         // Closed, the newest lines fill what the cards leave, one at the least; open, the log has the column.
-        y = Title(Math.Min(y, PanelBottom - LineHeight - 4), _logOpen ? "EVENT LOG  Tab closes it" : "EVENT LOG  Tab for the whole log");
+        y = Title(Math.Min(y, PanelBottom - LineHeight - 4), _logOpen ? "EVENT LOG  Tab closes it" : client.EnemyPhasePlaying ? "THIS ACT  Tab for the whole log" : "EVENT LOG  Tab for the whole log");
         var room = Math.Max(0, (int)((PanelBottom + LineHeight - y) / LineHeight));
         foreach (var (text, marked) in rows.Skip(Math.Max(0, rows.Count - room)))
         {

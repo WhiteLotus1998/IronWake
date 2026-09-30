@@ -19,14 +19,8 @@ public partial class Main
 {
     private static readonly (string Name, float Factor)[] Speeds = { ("slow", 1.6f), ("normal", 1f), ("fast", 0.5f) };
 
-    /// <summary>The pause after an enemy event before the next is revealed, at normal speed.</summary>
-    private const float EnemyGap = 0.35f;
-
     /// <summary>How long a strike's number takes to rise and fade.</summary>
     private const float PopLife = 1.0f;
-
-    private const float LungeLead = 0.15f;
-    private const float StrikeStep = 0.45f;
 
     /// <summary>The fixed frame step on the strip's clock.</summary>
     private const float StripStep = 1f / 30;
@@ -40,6 +34,7 @@ public partial class Main
     private float _beatsStart;
     private IReadOnlyList<Beat> _playing = Array.Empty<Beat>();
     private float[] _beatStarts = Array.Empty<float>();
+    private IReadOnlyList<float>[] _popTimes = Array.Empty<IReadOnlyList<float>>();
     private float _beatsEnd;
 
     /// <summary>True for a single still frame: beats count as played and the enemy phase waits for keys.</summary>
@@ -56,10 +51,8 @@ public partial class Main
 
     private bool Animating => _clock < _beatsEnd;
 
-    private float BeatLength(Beat beat) => Factor * (beat.IsMove
-        ? 0.12f + 0.09f * (beat.Path.Count + 1)
-        : beat.IsStrike ? LungeLead + StrikeStep * beat.Pops.Count + 0.2f
-        : beat.Fell is not null ? 0.6f : 0);
+    /// <summary>A beat's length at the current speed, by the client's <see cref="Rhythm"/> (issue 544).</summary>
+    private float BeatLength(Beat beat) => Factor * Rhythm.Length(beat);
 
     /// <summary>Starts playing the client's newest beats when they have changed since the last frame.</summary>
     private void SyncBeats()
@@ -73,6 +66,7 @@ public partial class Main
         _playing = _client.Beats;
         _beatsStart = _clock;
         _beatStarts = new float[_playing.Count];
+        _popTimes = _playing.Select(Rhythm.PopTimes).ToArray();
         var t = _clock;
         for (var i = 0; i < _playing.Count; i++)
         {
@@ -102,7 +96,7 @@ public partial class Main
     {
         _clock += _stripPrefix is not null ? StripStep : (float)delta;
         SyncBeats();
-        if (_client is { EnemyPhasePlaying: true } client && !_still && _clock >= _beatsEnd + EnemyGap * Factor * (_playing.Count == 0 ? 0.5f : 1))
+        if (_client is { EnemyPhasePlaying: true } client && !_still && _clock >= _beatsEnd + Rhythm.Gap * Factor * (_playing.Count == 0 ? 0.5f : 1))
         {
             client.Step();
             SyncBeats();
@@ -194,8 +188,9 @@ public partial class Main
                     continue;
                 }
 
-                var t0 = _beatStarts[i] + Factor * (StrikeStep * j);
-                var u = (_clock - t0) / (Factor * StrikeStep);
+                var step = Factor * Rhythm.StrikeStep(pop);
+                var t0 = PopTime(i, j) - Factor * Rhythm.Lead;
+                var u = (_clock - t0) / step;
                 if (u is > 0 and < 1)
                 {
                     var dir = new Vector2(target.X - striker.X, target.Y - striker.Y).Normalized();
@@ -233,8 +228,8 @@ public partial class Main
         return hp;
     }
 
-    /// <summary>When strike <paramref name="j"/> of beat <paramref name="i"/> lands: at the height of its lunge.</summary>
-    private float PopTime(int i, int j) => _beatStarts[i] + Factor * (StrikeStep * j + LungeLead);
+    /// <summary>When strike <paramref name="j"/> of beat <paramref name="i"/> lands: at the height of its lunge, on the client's rhythm.</summary>
+    private float PopTime(int i, int j) => _beatStarts[i] + Factor * _popTimes[i][j];
 
     /// <summary>
     /// The tokens: every unit on the board where its beat puts it, then the units killed and not
@@ -273,9 +268,11 @@ public partial class Main
                 continue;
             }
 
-            var u = Math.Clamp((_clock - _beatStarts[i]) / BeatLength(_playing[i]), 0, 1);
+            // The token shrinks into its mark over the fade; the hold after it is the mark alone.
+            var u = Math.Clamp((_clock - _beatStarts[i]) / (Factor * Rhythm.Fade), 0, 1);
             if (u >= 1)
             {
+                DrawFallenMark(fell);
                 continue;
             }
 
@@ -309,18 +306,28 @@ public partial class Main
     private Transform2D _tokenFrame = Transform2D.Identity;
 
     /// <summary>
-    /// A fallen unit's mark (round 141): its disc greyed to the lost colour, its silhouette in ink,
-    /// crossed by a hairline, on the tile it fell on, for the rest of the phase.
+    /// A fallen unit's mark (round 141, issue 544): its disc greyed to the lost colour inside its
+    /// side's ring, so a player reads whose it was, its silhouette dimmed under a full cross in
+    /// ink edged with the text colour, which cannot merge with the glyph or read as one slash.
     /// </summary>
     private void DrawFallenMark(FallenMark mark)
     {
         var centre = Cell(mark.At).Position + new Vector2(_tile / 2f, 19 * S);
         var radius = 12 * S;
+        var side = mark.Unit.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone);
         DrawCircle(centre, radius, UiColour("lost", 0.85f));
-        DrawArc(centre, radius, 0, Mathf.Tau, 32, UiColour("ink"), 1.5f * S, antialiased: true);
-        DrawSilhouette(_client!.State, mark.Unit, centre, radius / 16f, UiColour("ink", 0.8f));
-        var d = radius * 0.7f;
-        DrawLine(centre + new Vector2(-d, d), centre + new Vector2(d, -d), UiColour("ink"), 2 * S, antialiased: true);
+        DrawArc(centre, radius, 0, Mathf.Tau, 32, side, 2.5f * S, antialiased: true);
+        DrawSilhouette(_client!.State, mark.Unit, centre, radius / 16f, UiColour("ink", 0.35f));
+        var d = radius * 0.62f;
+        foreach (var (a, b) in new[] { (new Vector2(-d, -d), new Vector2(d, d)), (new Vector2(-d, d), new Vector2(d, -d)) })
+        {
+            DrawLine(centre + a, centre + b, UiColour("ink"), 4.5f * S, antialiased: true);
+        }
+
+        foreach (var (a, b) in new[] { (new Vector2(-d, -d), new Vector2(d, d)), (new Vector2(-d, d), new Vector2(d, -d)) })
+        {
+            DrawLine(centre + a, centre + b, UiColour("text"), 2 * S, antialiased: true);
+        }
     }
 
     /// <summary>
@@ -333,17 +340,31 @@ public partial class Main
         {
             for (var j = 0; j < _playing[i].Pops.Count; j++)
             {
-                var pop = _playing[i].Pops[j];
+                var beat = _playing[i];
+                var pop = beat.Pops[j];
                 var age = _clock - PopTime(i, j);
-                if (age < 0 || age > PopLife * Math.Max(Factor, 0.7f))
+                var life = PopLife * Math.Max(Factor, 0.7f);
+
+                // A number clears once the next strike on the other side lands (issue 544), so a
+                // counter's number never stacks on the first one's.
+                if (j + 1 < beat.Pops.Count && beat.Pops[j + 1].TargetId != pop.TargetId)
+                {
+                    life = Math.Min(life, PopTime(i, j + 1) - PopTime(i, j));
+                }
+
+                if (age < 0 || age > life)
                 {
                     continue;
                 }
 
-                var u = age / (PopLife * Math.Max(Factor, 0.7f));
+                var u = age / life;
                 var alpha = u < 0.6f ? 1 : 1 - (u - 0.6f) / 0.4f;
-                var rise = _tile * (0.25f + 0.55f * (1 - (1 - u) * (1 - u)));
-                var at = Cell(pop.At).Position + new Vector2(_tile / 2f, 14 * S - rise + _tile * 0.25f);
+                var rise = _tile * (0.25f + 0.4f * (1 - (1 - u) * (1 - u)));
+
+                // It rises on the far side of its target from the striker, never into the striker's tile.
+                var striker = pop.TargetId == beat.UnitId ? beat.Struck : beat.To;
+                var away = striker is { } s0 && s0.X != pop.At.X ? Math.Sign(pop.At.X - s0.X) : pop.TargetId == beat.UnitId ? -1 : 1;
+                var at = Cell(pop.At).Position + new Vector2(_tile / 2f + away * _tile * 0.3f, 14 * S - rise + _tile * 0.25f);
                 var (size, colour) = pop.Kind switch
                 {
                     PopKind.Crit => ((int)(30 * S), MarkColour("struck", alpha)),
@@ -402,8 +423,9 @@ public partial class Main
         Card(new Rect2(x0 - 12, top, PanelWidth + 24, height), Box, 10);
         DrawString(_caps, P(8, 24), "ENEMY ACT", fontSize: 11, modulate: EnemyMark);
         DrawUnitDisc(P(34, 62), 20, UnitById(act.ActorId));
-        UiText(P(66, 58), act.ActorName, Ink, 18, bold: true);
-        UiText(P(66, 78), act.Doing, Muted, 13);
+        // A killing act leads with the death, in the fallen unit's name and the struck colour (issue 544).
+        UiText(P(66, 58), act.Headline, act.Fallen is null ? Ink : MarkColour("struck"), act.Fallen is null ? 18 : 22, bold: true);
+        UiText(P(66, 78), act.Subtitle, Muted, 13);
         if (!fought)
         {
             return top + height;

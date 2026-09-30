@@ -205,4 +205,115 @@ public class ClientBeatsTests
 
         Assert.Null(Beat.Of(new UnitMoved(unit.Id, unit.At, unit.At, ValueList<Coord>.Empty), client.State, client.State));
     }
+
+    [Fact]
+    public void AKillingActsCardHeadlinesTheDeathInTheFallenUnitsName()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "rider-1 attacks teodor");
+
+        var act = client.Act!;
+        Assert.Equal(client.State.Find("rider-1")!.Unit.Name, act.ActorName);
+        Assert.Equal("Teodor", act.Fallen);
+        Assert.Equal("Teodor falls", act.Headline);
+        Assert.Equal($"struck down by {act.ActorName}", act.Subtitle);
+    }
+
+    [Fact]
+    public void AnActThatKillsNobodyLeadsWithItsActor()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "bandit_leader-1 attacks teodor");
+
+        var act = client.Act!;
+        Assert.Null(act.Fallen);
+        Assert.Equal(act.ActorName, act.Headline);
+        Assert.Equal(act.Doing, act.Subtitle);
+    }
+
+    [Fact]
+    public void AMoveAfterAStrikeLeavesTheStrikesCardUp()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "bandit_leader-1 attacks teodor");
+        StepUntil(client, "rider-1 moves");
+
+        Assert.Equal("bandit_leader-1", client.Act!.ActorId);
+        Assert.NotNull(client.Act.Defender);
+    }
+
+    [Fact]
+    public void AMoveWithNoStrikeBeforeItShowsItsOwnCard()
+    {
+        var content = ContentLoader.Load(Fixture.RealContentDirectory());
+        var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "the_tollgate.map"), content);
+        var client = new ClientSession(content, BattleState.From(map, content, content.Cast, 113));
+        client.Submit(new EndPhase());
+        while (client.Step() && client.Act is null)
+        {
+        }
+
+        var act = client.Act!;
+        Assert.Null(act.Defender);
+        Assert.StartsWith(act.ActorId, client.Playing!.Line, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void WhileTheEnemyPhasePlaysTheActLogHoldsOnlyTheShownCommandsLines()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "rider-1 attacks teodor");
+
+        Assert.StartsWith("rider-1 attacks teodor", client.ActLog[0], StringComparison.Ordinal);
+        Assert.DoesNotContain(client.ActLog, line => line.StartsWith("rider-1 moves", StringComparison.Ordinal));
+
+        StepUntil(client, "teodor falls");
+        Assert.StartsWith("rider-1 attacks teodor", client.ActLog[0], StringComparison.Ordinal);
+        Assert.StartsWith("teodor falls", client.ActLog[^1], StringComparison.Ordinal);
+
+        client.Continue();
+        Assert.Equal(client.Log, client.ActLog);
+    }
+
+    [Fact]
+    public void ADeathHoldsStillAfterItsFade()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "teodor falls");
+
+        var death = Assert.Single(client.Beats);
+        Assert.Equal(Rhythm.Fade + Rhythm.DeathHold, Rhythm.Length(death));
+        Assert.True(Rhythm.DeathHold >= 0.6f);
+    }
+
+    [Fact]
+    public void AHitHoldsTheStageLongerThanAMissAndACritLongerThanAHit()
+    {
+        var at = new Coord(0, 0);
+        Assert.True(Rhythm.StrikeStep(new Pop(at, "7", PopKind.Damage, "a", 3)) > Rhythm.StrikeStep(new Pop(at, "miss", PopKind.Miss, "a", 10)));
+        Assert.True(Rhythm.StrikeStep(new Pop(at, "21", PopKind.Crit, "a", 0)) > Rhythm.StrikeStep(new Pop(at, "7", PopKind.Damage, "a", 3)));
+    }
+
+    [Fact]
+    public void EachStrikesNumberLandsOneStepAfterTheLast()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "bandit_leader-1 attacks teodor");
+
+        var beat = Assert.Single(client.Beats);
+        var times = Rhythm.PopTimes(beat);
+        Assert.Equal(Rhythm.Lead, times[0]);
+        for (var j = 1; j < times.Count; j++)
+        {
+            Assert.Equal(times[j - 1] + Rhythm.StrikeStep(beat.Pops[j - 1]), times[j], 5);
+        }
+
+        Assert.True(Rhythm.Length(beat) > times[^1]);
+    }
 }
