@@ -1,0 +1,188 @@
+move pell 2,4
+attack pell brigand-1 gust
+move ottilie 3,5
+attack ottilie brigand-1
+move teodor 3,4
+attack teodor brigand-1
+move keziah 2,5
+wait keziah
+move captain 2,6
+wait captain
+move dunstan 1,6
+wait dunstan
+threat ottilie
+threat teodor
+threat pell
+threat captain
+end
+move pell 4,3
+attack pell brigand-1 gust
+item ottilie 2
+move teodor 7,4
+wait teodor
+move keziah 5,5
+wait keziah
+move captain 5,6
+wait captain
+move dunstan 4,6
+wait dunstan
+threat teodor
+end
+move teodor 7,0
+wait teodor
+move pell 7,3
+wait pell
+move keziah 7,5
+wait keziah
+move captain 8,6
+wait captain
+move dunstan 7,6
+wait dunstan
+move ottilie 6,5
+wait ottilie
+threat captain
+threat teodor
+end
+move pell 9,5
+wait pell
+move ottilie 8,5
+wait ottilie
+move teodor 8,2
+wait teodor
+wait keziah
+wait captain
+wait dunstan
+threat pell
+end
+move pell 9,6
+attack pell weir_shieldbearer-1 gust
+move keziah 10,6
+attack keziah weir_shieldbearer-1
+move dunstan 9,7
+wait dunstan
+move captain 9,5
+wait captain
+move ottilie 8,6
+wait ottilie
+move teodor 10,2
+wait teodor
+threat pell
+threat keziah
+threat dunstan
+end
+move keziah 8,5
+wait keziah
+move dunstan 10,6
+wait dunstan
+move captain 9,7
+attack captain brawler-1
+attack ottilie brigand-3
+move pell 7,6
+wait pell
+move teodor 12,3
+wait teodor
+threat dunstan
+threat captain
+threat pell
+threat keziah
+threat ottilie
+threat teodor
+end
+attack captain brigand-3
+attack teodor soldier-1
+move ottilie 8,4
+item ottilie 2
+move keziah 9,4
+wait keziah
+move pell 9,5
+wait pell
+move dunstan 12,5
+wait dunstan
+threat teodor
+threat dunstan
+end
+move teodor 12,2
+item teodor 2
+move pell 10,2
+wait pell
+move keziah 9,2
+wait keziah
+move ottilie 9,3
+wait ottilie
+move captain 12,6
+wait captain
+wait dunstan
+threat teodor
+threat dunstan
+threat captain
+threat pell
+threat keziah
+threat ottilie
+end
+move ottilie 9,4
+attack ottilie brigand-2
+move pell 9,5
+attack pell brigand-2 cinder
+move captain 10,6
+attack captain brigand-2
+move keziah 10,2
+wait keziah
+wait teodor
+wait dunstan
+threat teodor
+threat dunstan
+threat captain
+threat keziah
+threat pell
+threat ottilie
+end
+move dunstan 13,5
+attack dunstan weir_foreman-1
+move teodor 13,4
+attack teodor archer-1
+wait keziah
+move ottilie 9,3
+wait ottilie
+wait pell
+threat dunstan
+threat captain
+threat teodor
+end
+attack teodor archer-1
+attack dunstan weir_foreman-1
+move captain 12,6
+attack captain weir_foreman-1
+recall 170
+move dunstan 13,5
+attack dunstan weir_foreman-1
+move teodor 13,4
+attack teodor archer-1
+move captain 13,6
+wait captain
+wait keziah
+wait ottilie
+wait pell
+threat teodor
+threat dunstan
+threat captain
+threat pell
+end
+attack teodor archer-1
+attack captain weir_foreman-1
+move dunstan 14,5
+attack dunstan weir_foreman-1
+recall 186
+move dunstan 12,2
+wait dunstan
+move keziah 11,2
+wait keziah
+move ottilie 10,2
+wait ottilie
+wait pell
+threat dunstan
+threat keziah
+threat ottilie
+threat teodor
+threat captain
+end
+attack captain weir_foreman-1

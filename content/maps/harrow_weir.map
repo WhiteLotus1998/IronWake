@@ -1,7 +1,7 @@
 name: Harrow Weir
 size: 16x12
 win: defeat_boss
-turn_limit: 14
+turn_limit: 15
 recall: 3
 enemy_level: 2
 announce: on
