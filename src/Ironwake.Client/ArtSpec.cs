@@ -43,6 +43,15 @@ public static class ArtSpec
         content.Classes.Keys.SelectMany(id => new[] { $"token_{id}_player", $"token_{id}_enemy" })
             .Append("token_captain_player");
 
+    /// <summary>
+    /// The map tiles (issue 564): <c>tile_&lt;terrain&gt;</c> for every terrain, a 48 px square at
+    /// 2x with its detail laid over its own colour; fire is an ember hatch on clear ground, laid
+    /// over whatever burns. The grid and the north light's shadows stay the renderer's, since they
+    /// depend on the neighbours.
+    /// </summary>
+    public static IEnumerable<string> Tiles(GameContent content) =>
+        content.Terrain.Keys.Select(id => $"tile_{id}");
+
     /// <summary>The battle clips: <c>&lt;class&gt;_&lt;kind&gt;_&lt;clip&gt;</c> for every weapon kind a class can use, class by class.</summary>
     public static IEnumerable<string> ClassClips(GameContent content) =>
         from unitClass in content.Classes.Values
@@ -64,7 +73,7 @@ public static class ArtSpec
     public static IEnumerable<string> Optional(GameContent content) =>
         content.Cast.Select(u => $"levelup_{u.Id}").Concat(content.Cast.Select(u => $"portrait_{u.Id}"));
 
-    /// <summary>Every name the spec lists, in its order: tokens, class clips, boss clips, then the optional rows.</summary>
+    /// <summary>Every name the spec lists, in its order: tokens, tiles, class clips, boss clips, then the optional rows.</summary>
     public static IEnumerable<string> Names(GameContent content, IEnumerable<string> bossIds) =>
-        Tokens(content).Concat(ClassClips(content)).Concat(BossClips(content, bossIds)).Concat(Optional(content));
+        Tokens(content).Concat(Tiles(content)).Concat(ClassClips(content)).Concat(BossClips(content, bossIds)).Concat(Optional(content));
 }
