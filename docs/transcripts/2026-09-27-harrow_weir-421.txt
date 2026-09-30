@@ -3006,7 +3006,7 @@ B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 6/28   Road  group weir, boss, awake
 > recall 133
 recalled to state 133; 2 charges left
-undone: gives back 14 exp, 22 enemy hp; returns pell alive, 16 hp
+undone: gives back 14 exp, 22 enemy hp; returns pell alive at 16 hp
 the rolls do not change: the same attack will roll the same
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345

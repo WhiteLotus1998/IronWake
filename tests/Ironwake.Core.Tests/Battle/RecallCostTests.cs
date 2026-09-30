@@ -95,6 +95,25 @@ public class RecallCostTests
     }
 
     [Fact]
+    public void HpReturnedIsListedPerUnitWithADeadUnitAtItsHpThen()
+    {
+        var then = Start().Do(new Wait("hale"));
+        var wren = then.Find("wren")!;
+        var now = then with
+        {
+            Units = then.WithoutUnit("hale").WithUnit(wren with { Hp = wren.Hp - 6 }).Units,
+            History = then.History.Add(then with { History = ValueList<BattleState>.Empty }),
+        };
+
+        var cost = RecallCost.Of(now, 1);
+
+        Assert.Equal(new[] { new HpReturn("hale", then.Find("hale")!.Hp), new HpReturn("wren", 6) }, cost.HpByUnit);
+        Assert.Equal(then.Find("hale")!.Hp, cost.HpFor("hale"));
+        Assert.Equal(6, cost.HpFor("wren"));
+        Assert.Equal(0, cost.HpFor("captain"));
+    }
+
+    [Fact]
     public void AHealSinceIsNotCountedAsHpReturned()
     {
         var then = Start().Do(new Wait("hale"));

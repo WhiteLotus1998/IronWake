@@ -1399,7 +1399,7 @@ C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > recall 64
 recalled to state 64; 2 charges left
-undone: gives back 2 kills (brigand-2, brigand-3), 82 exp, 22 enemy hp; returns ottilie alive, 7 hp
+undone: gives back 2 kills (brigand-2, brigand-3), 82 exp, 22 enemy hp; returns ottilie alive at 7 hp
 the rolls do not change: the same attack will roll the same
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345

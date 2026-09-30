@@ -945,7 +945,12 @@ public sealed class PlaySession
         return rows;
     }
 
-    /// <summary>A rewind's cost in the console's words, the player's gains given back first, then what comes back to the player.</summary>
+    /// <summary>
+    /// A rewind's cost in the console's words, the player's gains given back first, then what
+    /// comes back to the player. A number printed next to a unit's name is that unit's own
+    /// number (issue 552): a returned unit is named with the HP it comes back at, and each other
+    /// unit with the HP it gets back, read from <see cref="RecallCost.HpByUnit"/>.
+    /// </summary>
     public static string UndoText(RecallCost cost)
     {
         if (cost.IsEmpty)
@@ -975,11 +980,8 @@ public sealed class PlaySession
         }
 
         var returned = new List<string>();
-        returned.AddRange(cost.UnitsReturned.Select(id => id + " alive"));
-        if (cost.HpReturned > 0)
-        {
-            returned.Add($"{cost.HpReturned} hp");
-        }
+        returned.AddRange(cost.UnitsReturned.Select(id => $"{id} alive at {cost.HpFor(id)} hp"));
+        returned.AddRange(cost.HpByUnit.Where(entry => !cost.UnitsReturned.Contains(entry.Id)).Select(entry => $"{entry.Hp} hp to {entry.Id}"));
 
         returned.AddRange(cost.ArrivalsUndone.Select(id => id + " not yet arrived"));
         var parts = new List<string>();
