@@ -74,6 +74,20 @@ public static class Program
             }
         }
 
+        if (args.Length > 1 && args[0] == "--heirloom")
+        {
+            var seeds = Gates.DefaultSeeds;
+            for (var i = 2; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+            }
+
+            return HeirloomTable(args[1], seeds);
+        }
+
         if (args.Length > 0 && args[0] == "--keep")
         {
             return KeepGates(args.Skip(1).ToList());
@@ -114,9 +128,37 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --heirloom <item> [--seeds N]";
 
     private const int HitBandSeeds = 50;
+
+    /// <summary>
+    /// The heirloom's timing table (issue 646, <see cref="HeirloomRun"/>): the campaign map each
+    /// stage turns on under the heuristic player, and the combats fought with it by each map's end.
+    /// </summary>
+    public static int HeirloomTable(string itemId, int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("heirloom: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        if (!content.Weapons.TryGetValue(itemId, out var item) || item.Heirloom is null)
+        {
+            Console.WriteLine($"heirloom: '{itemId}' is not an heirloom; heirlooms are {string.Join(", ", content.Weapons.Values.Where(w => w.Heirloom is not null).Select(w => w.Id))}");
+            return 2;
+        }
+
+        foreach (var line in HeirloomRun.Lines(content, itemId, HeirloomRun.Measure(contentDir, content, itemId, seeds)))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
 
     /// <summary>
     /// The hit-band table of issue 158 for one map or every map: section 5's formulas under

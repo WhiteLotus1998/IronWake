@@ -52,9 +52,10 @@ public static class SignatureCeiling
     public static IReadOnlyList<CeilingReading> ReadAll(GameContent content, RollScheme scheme) =>
         Items(content).Select(item => Read(content, item, scheme)).ToList();
 
-    /// <summary>Reads one bound weapon against the shop, as the class summary describes.</summary>
+    /// <summary>Reads one bound weapon against the shop, as the class summary describes; an heirloom at its last stage (issue 646).</summary>
     public static CeilingReading Read(GameContent content, Weapon item, RollScheme scheme)
     {
+        item = Heirloom.Last(item);
         if (item.BoundTo is not { } ownerId || content.Cast.FirstOrDefault(u => u.Id == ownerId) is not { } owner)
         {
             return new CeilingReading(item, null, 0, ValueList<ArtReading>.Empty, $"{item.Id} is bound to no cast member");

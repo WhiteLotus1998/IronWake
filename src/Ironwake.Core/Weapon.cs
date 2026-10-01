@@ -44,6 +44,13 @@ public sealed record Weapon(
     /// </summary>
     public bool Hungers { get; init; }
 
+    /// <summary>
+    /// Marks an heirloom (issue 646; <see cref="Ironwake.Core.Heirloom"/>): the weapon's own numbers
+    /// are its first stage, and the ladder's turns replace them as a hidden combat counter grows.
+    /// Null for an ordinary weapon.
+    /// </summary>
+    public HeirloomLadder? Heirloom { get; init; }
+
     /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
     public string Description { get; init; } = "";
 
@@ -53,3 +60,17 @@ public sealed record Weapon(
 
     public bool IsEffectiveAgainst(MovementType movement) => EffectiveAgainst.Contains(movement);
 }
+
+/// <summary>
+/// One stage an heirloom turns to (issue 646): its id (the art key and the word the card prints),
+/// its numbers, the combats fought with it at which it turns (<paramref name="At"/>), and the one
+/// line its card prints in place of the weapon's description.
+/// </summary>
+public sealed record WeaponStage(string Id, int Mt, int Hit, int Crit, int Wt, int At, string Description);
+
+/// <summary>
+/// An heirloom's ladder (issue 646): the campaign map, counted from 1, before which no stage turns
+/// (<paramref name="FromMap"/>), the id of the first stage, whose numbers are the weapon's own
+/// (<paramref name="First"/>), and the stages it turns to, in order, their thresholds rising.
+/// </summary>
+public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponStage> Turns);

@@ -453,6 +453,8 @@ public static class Resolver
         targetAfter = AwardMastery(targetAfter, content, events);
         attackerAfter = Kinsbane.AfterCombat(attackerAfter, content, result.Strikes, result.DefenderDied, events);
         targetAfter = Kinsbane.AfterCombat(targetAfter, content, result.Strikes, result.AttackerDied, events);
+        attackerAfter = Heirloom.AfterCombat(attackerAfter, state, content, result.Strikes, events);
+        targetAfter = Heirloom.AfterCombat(targetAfter, state, content, result.Strikes, events);
         var next = state.WithUnit(attackerAfter);
         next = next.WithUnit(targetAfter);
         if (result.DefenderDied)
@@ -710,7 +712,8 @@ public static class Resolver
     /// empties a physical weapon emits <see cref="WeaponBroke"/> and the weapon stays,
     /// broken; the one that empties a spell emits <see cref="SpellSpent"/>. A gauntlet spends
     /// one use for the combat however many strikes it made (issue 70). A hungering weapon never
-    /// spends below 1 (DESIGN.md 13.23, <see cref="Kinsbane"/>), so it never breaks.
+    /// spends below 1 (DESIGN.md 13.23, <see cref="Kinsbane"/>), nor does an heirloom (issue 646,
+    /// <see cref="Heirloom"/>), so neither ever breaks.
     /// </summary>
     private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events, int artCost = 0)
     {
@@ -729,7 +732,7 @@ public static class Resolver
 
         var made = (content.Weapon(stack.ItemId).Type.SpendsPerStrike() ? struck : Math.Min(1, struck)) + artCost;
 
-        var left = Math.Max(content.Weapon(stack.ItemId).Hungers ? 1 : 0, stack.Uses - made);
+        var left = Math.Max(content.Weapon(stack.ItemId) is { Hungers: true } or { Heirloom: not null } ? 1 : 0, stack.Uses - made);
         if (left == 0)
         {
             events.Add(content.Weapon(stack.ItemId).IsMagic ? new SpellSpent(unit.Id, stack.ItemId) : new WeaponBroke(unit.Id, stack.ItemId));

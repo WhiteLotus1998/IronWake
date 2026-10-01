@@ -465,6 +465,29 @@ public static class ContentSerializer
             writer.WriteString("boundTo", owner);
         }
 
+        if (weapon.Heirloom is { } ladder)
+        {
+            writer.WriteStartObject("heirloom");
+            writer.WriteNumber("fromMap", ladder.FromMap);
+            writer.WriteString("first", ladder.First);
+            writer.WriteStartArray("stages");
+            foreach (var stage in ladder.Turns)
+            {
+                writer.WriteStartObject();
+                writer.WriteString("id", stage.Id);
+                writer.WriteNumber("at", stage.At);
+                writer.WriteNumber("mt", stage.Mt);
+                writer.WriteNumber("hit", stage.Hit);
+                writer.WriteNumber("crit", stage.Crit);
+                writer.WriteNumber("wt", stage.Wt);
+                writer.WriteString("description", stage.Description);
+                writer.WriteEndObject();
+            }
+
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+
         writer.WriteString("description", weapon.Description);
 
         writer.WriteEndObject();

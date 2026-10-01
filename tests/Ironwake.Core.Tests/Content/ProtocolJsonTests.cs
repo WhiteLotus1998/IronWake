@@ -51,6 +51,7 @@ public class ProtocolJsonTests
         { new HungerDrained("keziah", "kinsbane", 5, 1, true), """{"type":"hungerDrained","unit":"keziah","item":"kinsbane","amount":5,"hpAfter":1,"starved":true}""" },
         { new HungerFed("keziah", "kinsbane", 3, 10, 16, 1, false), """{"type":"hungerFed","unit":"keziah","item":"kinsbane","fed":3,"healed":10,"hpAfter":16,"mtBonus":1,"woke":false}""" },
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
+        { new HeirloomTurned("teodor", "family_lance", 2, "sound"), """{"type":"heirloomTurned","unit":"teodor","item":"family_lance","stage":2,"stageId":"sound"}""" },
         { new BlowRaised("toll_mauler-1", "teodor", A), """{"type":"blowRaised","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2}}""" },
         { new BlowLanded("toll_mauler-1", "teodor", A, 11, 9), """{"type":"blowLanded","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2},"damage":11,"targetHpAfter":9}""" },
         { new BlowFell("toll_mauler-1", A), """{"type":"blowFell","unit":"toll_mauler-1","at":{"x":1,"y":2}}""" },

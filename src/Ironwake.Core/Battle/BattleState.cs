@@ -42,6 +42,13 @@ public sealed record BattleState(
     ValueList<string> LitGroups = default)
 {
     /// <summary>
+    /// The campaign map this battle is, counted from 1 (<see cref="CampaignRecord.Begin"/>), or null
+    /// for a battle played outside the campaign. An heirloom turns no stage before its ladder's
+    /// first map (issue 646, <see cref="Heirloom"/>); outside the campaign nothing holds it back.
+    /// </summary>
+    public int? CampaignMap { get; init; }
+
+    /// <summary>
     /// The keepsake on top of a tile's stack (DESIGN.md 13.8, issue 295): the newest left
     /// there, which <c>recover</c> takes first; null when nothing lies there.
     /// </summary>
