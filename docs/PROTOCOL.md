@@ -66,7 +66,7 @@ The **full** state (the first line out and the `state` query) reads back to an e
 
 ## Events
 
-Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the order the resolver emitted them.
+Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the order the resolver emitted them. The fields carry unit ids; the `text` names units by display name, numbered only where two on the map share one (`Archer 1`), in sentence case (issue 609).
 
 | `type` | fields |
 |---|---|

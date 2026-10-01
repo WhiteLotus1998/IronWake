@@ -262,8 +262,8 @@ public class KeepsakeCarrierTests
             var lost = result.Events.OfType<KeepsakeLost>().ToArray();
             Assert.Contains(new KeepsakeLost("teodor", "iron_lance", new Coord(5, 0), null), lost);
             Assert.Contains(new KeepsakeLost("wren", "iron_sword", new Coord(3, 1), "brigand-1"), lost);
-            Assert.Equal("Iron Lance (Teodor's) was left at 5,0", PlaySession.Describe(lost[0], Starter));
-            Assert.Equal("Iron Sword (Wren's) went with brigand-1", PlaySession.Describe(lost.Single(l => l.CarrierId is not null), Starter));
+            Assert.Equal("Iron Lance (Teodor's) was left at 5,0", PlaySession.Describe(lost[0], Starter, UnitNames.None));
+            Assert.Equal("Iron Sword (Wren's) went with brigand-1", PlaySession.Describe(lost.Single(l => l.CarrierId is not null), Starter, UnitNames.None));
             return;
         }
 
@@ -273,7 +273,7 @@ public class KeepsakeCarrierTests
     [Fact]
     public void AKeepsakeTakenReadsByItsDisplayName()
     {
-        Assert.Equal("brigand-2 takes Iron Lance (Teodor's)", PlaySession.Describe(new KeepsakeTaken("brigand-2", "teodor", "iron_lance"), Starter));
+        Assert.Equal("Brigand-2 takes Iron Lance (Teodor's)", PlaySession.Describe(new KeepsakeTaken("brigand-2", "teodor", "iron_lance"), Starter, UnitNames.None));
     }
 
     [Fact]

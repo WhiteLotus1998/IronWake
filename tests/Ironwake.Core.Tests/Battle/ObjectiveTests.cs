@@ -30,16 +30,32 @@ public class ObjectiveTests
         """;
 
     [Fact]
-    public void TheSeizeObjectiveNamesTheCaptainWithItsLetterAndTheThrone()
+    public void TheSeizeObjectiveSaysWhereTheCaptainGoesByWhenAndWhoMustSurvive()
     {
         var line = Objective.Line(Start(map: Hall()), Starter);
 
-        Assert.Equal("objective: the captain, hale (A), must stand on the gate at 12,1 by the end of turn 10; only the captain seizes; lost if the captain falls", line);
+        Assert.Equal("Get the captain to the gate by the end of turn 10. Captain hale must survive.", line);
+    }
+
+    [Fact]
+    public void TheSeizeRulesNameTheCaptainWithItsLetterAndTheTile()
+    {
+        var rule = Assert.Single(Objective.Rules(Start(map: Hall()), Starter));
+
+        Assert.Equal("The captain, hale (A), must stand on the gate at 12,1. Only the captain seizes.", rule);
     }
 
     [Theory]
-    [InlineData("rout", "objective: defeat every enemy by the end of turn 10; lost if the captain falls")]
-    [InlineData("survive", "objective: hold until the end of turn 10; lost if the captain falls")]
+    [InlineData("rout")]
+    [InlineData("survive")]
+    public void ARoutOrSurviveMapNeedsNoRulesBeyondItsLine(string win)
+    {
+        Assert.Empty(Objective.Rules(Start(map: Hall(win)), Starter));
+    }
+
+    [Theory]
+    [InlineData("rout", "Defeat every enemy by the end of turn 10. Captain hale must survive.")]
+    [InlineData("survive", "Hold out until the end of turn 10. Captain hale must survive.")]
     public void EveryWinConditionHasAnObjectiveLine(string win, string expected)
     {
         Assert.Equal(expected, Objective.Line(Start(map: Hall(win)), Starter));
@@ -50,7 +66,7 @@ public class ObjectiveTests
     {
         var line = Objective.Line(Start(map: Hall(protect: "protect: wren")), Starter);
 
-        Assert.EndsWith("; lost if the captain or wren falls", line);
+        Assert.EndsWith(" Captain hale and wren must survive.", line);
     }
 
     [Fact]
@@ -81,7 +97,7 @@ public class ObjectiveTests
     {
         var lost = Start(map: Hall(limit: 1)).Do(new EndPhase()).Do(new EndPhase());
 
-        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1", Objective.Verdict(lost, Starter));
+        Assert.Equal("Lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1.", Objective.Verdict(lost, Starter));
     }
 
     [Fact]
@@ -89,7 +105,7 @@ public class ObjectiveTests
     {
         var lost = Start(map: Hall("rout", limit: 1)).Do(new EndPhase()).Do(new EndPhase());
 
-        Assert.Equal("lost because turn 1 ended and 1 enemy still stands", Objective.Verdict(lost, Starter));
+        Assert.Equal("Lost because turn 1 ended and 1 enemy still stands.", Objective.Verdict(lost, Starter));
     }
 
     [Fact]
@@ -98,7 +114,7 @@ public class ObjectiveTests
         var state = Start(map: Hall()).Do(new Wait("wren"));
         var dead = state with { Units = ValueList<BattleUnit>.From(state.Units.Where(u => !u.IsCaptain)) };
 
-        Assert.Equal("lost because the captain, hale (A), fell", Objective.Verdict(dead, Starter));
+        Assert.Equal("Lost because the captain, hale, fell.", Objective.Verdict(dead, Starter));
     }
 
     [Fact]
@@ -120,7 +136,7 @@ public class ObjectiveTests
 
         var notice = Assert.Single(Objective.Notices(before, after, Starter, new Attack("hale", "brigand-1")));
 
-        Assert.Equal("no enemy is left, but the map is not won: the captain, hale (A), must still stand on the gate at 12,1 by the end of turn 10 (now turn 1)", notice);
+        Assert.Equal("No enemy is left, but the map is not won: the captain, hale, must still stand on the gate at 12,1 by the end of turn 10 (now turn 1).", notice);
     }
 
     [Fact]
@@ -140,7 +156,7 @@ public class ObjectiveTests
 
         var notice = Assert.Single(Objective.Notices(before, after, Starter, new Move("wren", new Coord(12, 1))));
 
-        Assert.Equal("wren stands on the gate, but only the captain, hale (A), seizes", notice);
+        Assert.Equal("Wren stands on the gate, but only the captain, hale, seizes.", notice);
         Assert.False(after.Outcome.IsOver);
     }
 

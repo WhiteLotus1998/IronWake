@@ -12,7 +12,7 @@ public class EventDisplayNameTests
 {
     private static GameContent Content => MapFixture.Content;
 
-    private static string Line(GameEvent e) => PlaySession.Describe(e, Content);
+    private static string Line(GameEvent e) => PlaySession.Describe(e, Content, UnitNames.None);
 
     [Fact]
     public void AKeepsakeLeftOnItsTileReadsByItsDisplayName()
@@ -23,7 +23,7 @@ public class EventDisplayNameTests
     [Fact]
     public void AKeepsakeRecoveredReadsByItsDisplayName()
     {
-        Assert.Equal("dunstan recovers Iron Sword (Wren's)", Line(new KeepsakeRecovered("dunstan", "wren", "iron_sword")));
+        Assert.Equal("Dunstan recovers Iron Sword (Wren's)", Line(new KeepsakeRecovered("dunstan", "wren", "iron_sword")));
     }
 
     [Fact]
@@ -35,44 +35,44 @@ public class EventDisplayNameTests
     [Fact]
     public void AnItemUsedReadsByItsDisplayName()
     {
-        Assert.Equal("teodor uses Field Dressing (2 left)", Line(new ItemUsed("teodor", "field_dressing", "teodor", 2)));
-        Assert.Equal("teodor uses Field Dressing on wren (1 left)", Line(new ItemUsed("teodor", "field_dressing", "wren", 1)));
+        Assert.Equal("Teodor uses Field Dressing (2 left)", Line(new ItemUsed("teodor", "field_dressing", "teodor", 2)));
+        Assert.Equal("Teodor uses Field Dressing on wren (1 left)", Line(new ItemUsed("teodor", "field_dressing", "wren", 1)));
     }
 
     [Fact]
     public void AWeaponEquippedReadsByItsDisplayName()
     {
-        Assert.Equal("captain equips Iron Sword", Line(new WeaponEquipped("captain", "iron_sword")));
+        Assert.Equal("Captain equips Iron Sword", Line(new WeaponEquipped("captain", "iron_sword")));
     }
 
     [Fact]
     public void AnArtDeclaredReadsTheArtAndTheWeaponByTheirDisplayNames()
     {
-        Assert.Equal("ansgar declares Canto with Iron Lance, spending 2 extra uses", Line(new ArtDeclared("ansgar", "canto", "iron_lance", 2)));
+        Assert.Equal("Ansgar declares Canto with Iron Lance, spending 2 extra uses", Line(new ArtDeclared("ansgar", "canto", "iron_lance", 2)));
     }
 
     [Fact]
     public void AnArtTheContentDoesNotKnowFallsBackToTheId()
     {
-        Assert.Equal("captain declares cleave with Iron Sword, spending 2 extra uses", Line(new ArtDeclared("captain", "cleave", "iron_sword", 2)));
+        Assert.Equal("Captain declares cleave with Iron Sword, spending 2 extra uses", Line(new ArtDeclared("captain", "cleave", "iron_sword", 2)));
     }
 
     [Fact]
     public void AWeaponBrokeReadsByItsDisplayName()
     {
-        Assert.Equal("wren's Iron Sword breaks", Line(new WeaponBroke("wren", "iron_sword")));
+        Assert.Equal("Wren's Iron Sword breaks", Line(new WeaponBroke("wren", "iron_sword")));
     }
 
     [Fact]
     public void ASpellSpentReadsByItsDisplayName()
     {
-        Assert.Equal("keziah's Cinder is spent for this battle", Line(new SpellSpent("keziah", "cinder")));
+        Assert.Equal("Keziah's Cinder is spent for this battle", Line(new SpellSpent("keziah", "cinder")));
     }
 
     [Fact]
     public void AMasteryEarnedReadsTheClassAndTheAbilityByTheirDisplayNames()
     {
-        Assert.Equal("hale masters the Cadet class and keeps Axebreaker", Line(new MasteryEarned("hale", "cadet", "axebreaker")));
+        Assert.Equal("Hale masters the Cadet class and keeps Axebreaker", Line(new MasteryEarned("hale", "cadet", "axebreaker")));
     }
 
     [Fact]
@@ -84,6 +84,6 @@ public class EventDisplayNameTests
     [Fact]
     public void AnUnknownItemFallsBackToTheId()
     {
-        Assert.Equal("captain equips relic", Line(new WeaponEquipped("captain", "relic")));
+        Assert.Equal("Captain equips relic", Line(new WeaponEquipped("captain", "relic")));
     }
 }

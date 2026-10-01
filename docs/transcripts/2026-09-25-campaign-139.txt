@@ -24,7 +24,7 @@ deploys to Old Mill Road: captain, wren
 ERROR: Old Mill Road places wren by name at 2,8
 > march
 map 1 of 8: Old Mill Road, seed 139
-objective: defeat every enemy by the end of turn 12; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 12. Captain Fenn must survive.
 Old Mill Road  turn 1 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -47,25 +47,25 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: wait archer-1
-archer-1 waits
+Archer 1 waits
 enemy: move archer-2 4,7
-archer-2 moves 8,7 -> 4,7 via 7,7 6,7 5,7
+Archer 2 moves 8,7 -> 4,7 via 7,7 6,7 5,7
 enemy: wait archer-2
-archer-2 waits
+Archer 2 waits
 enemy: move brigand-1 3,6
-brigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6
+Brigand moves 6,5 -> 3,6 via 5,5 4,5 4,6
 enemy: wait brigand-1
-brigand-1 waits
+Brigand waits
 enemy: wait mill_bandit-1
-mill_bandit-1 waits
+Mill Bandit waits
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -88,7 +88,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 4,8
-wren moves 2,8 -> 4,8 via 3,8
+Wren moves 2,8 -> 4,8 via 3,8
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -112,10 +112,10 @@ B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
 forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
-wren attacks archer-2
-  wren hits archer-2 for 10 (hp 7)
-  wren hp 20, archer-2 hp 7
-wren gains 10 exp (10)
+Wren attacks Archer 2
+  Wren hits Archer 2 for 10 (hp 7)
+  Wren hp 20, Archer 2 hp 7
+Wren gains 10 exp (10)
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -138,7 +138,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 3,7
-captain moves 1,8 -> 3,7 via 1,7 2,7
+Alder Fenn moves 1,8 -> 3,7 via 1,7 2,7
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -162,11 +162,11 @@ B  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain archer-2
 forecast captain -> archer-2: dmg 11 hit 87% crit 4%; counter: none
-captain attacks archer-2
-  captain hits archer-2 for 11 (hp 0)
-  captain hp 22, archer-2 hp 0
-captain gains 30 exp (30)
-archer-2 falls at 4,7
+Alder Fenn attacks Archer 2
+  Alder Fenn hits Archer 2 for 11 (hp 0)
+  Alder Fenn hp 22, Archer 2 hp 0
+Alder Fenn gains 30 exp (30)
+Archer 2 falls at 4,7
 Old Mill Road  turn 2 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -188,27 +188,27 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: wait archer-1
-archer-1 waits
+Archer 1 waits
 enemy: move brigand-1 4,7
-brigand-1 moves 3,6 -> 4,7 via 4,6
+Brigand moves 3,6 -> 4,7 via 4,6
 enemy: attack brigand-1 wren
 forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-1 attacks wren
-  brigand-1 misses wren
-  wren hits brigand-1 for 10 (hp 12)
-  wren hits brigand-1 for 10 (hp 2)
-  brigand-1 hp 2, wren hp 20
-wren gains 10 exp (20)
+Brigand attacks Wren
+  Brigand misses Wren
+  Wren hits Brigand for 10 (hp 12)
+  Wren hits Brigand for 10 (hp 2)
+  Brigand hp 2, Wren hp 20
+Wren gains 10 exp (20)
 enemy: wait mill_bandit-1
-mill_bandit-1 waits
+Mill Bandit waits
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Old Mill Road  turn 3 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -231,11 +231,11 @@ B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren brigand-1
 forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
-wren attacks brigand-1
-  wren hits brigand-1 for 10 (hp 0)
-  wren hp 20, brigand-1 hp 0
-wren gains 30 exp (50)
-brigand-1 falls at 4,7
+Wren attacks Brigand
+  Wren hits Brigand for 10 (hp 0)
+  Wren hp 20, Brigand hp 0
+Wren gains 30 exp (50)
+Brigand falls at 4,7
 Old Mill Road  turn 3 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -256,7 +256,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 5,5
-captain moves 3,7 -> 5,5 via 3,6 4,6 4,5
+Alder Fenn moves 3,7 -> 5,5 via 3,6 4,6 4,5
 Old Mill Road  turn 3 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -277,17 +277,17 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: wait archer-1
-archer-1 waits
+Archer 1 waits
 enemy: wait mill_bandit-1
-mill_bandit-1 waits
+Mill Bandit waits
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Old Mill Road  turn 4 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -308,8 +308,8 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,2
-captain moves 5,5 -> 6,2 via 5,4 5,3 5,2
-group mill wakes: proximity
+Alder Fenn moves 5,5 -> 6,2 via 5,4 5,3 5,2
+Group mill wakes: proximity
 Old Mill Road  turn 4 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -329,7 +329,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 > move wren 5,5
-wren moves 4,8 -> 5,5 via 4,7 4,6 4,5
+Wren moves 4,8 -> 5,5 via 4,7 4,6 4,5
 Old Mill Road  turn 4 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -349,32 +349,32 @@ d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,5    hp 20/20  Plain
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: move archer-1 8,2
-archer-1 moves 10,2 -> 8,2 via 9,2
+Archer 1 moves 10,2 -> 8,2 via 9,2
 enemy: attack archer-1 captain
 forecast archer-1 -> captain: dmg 3 hit 41% crit 0%; counter: none
-archer-1 attacks captain
-  archer-1 misses captain
-  archer-1 hp 17, captain hp 22
+Archer 1 attacks Alder Fenn
+  Archer 1 misses Alder Fenn
+  Archer 1 hp 17, Alder Fenn hp 22
 enemy: move mill_bandit-1 7,1
-mill_bandit-1 moves 10,1 -> 7,1 via 9,1 8,1
+Mill Bandit moves 10,1 -> 7,1 via 9,1 8,1
 enemy: wait mill_bandit-1
-mill_bandit-1 waits
+Mill Bandit waits
 enemy: move soldier-1 6,1
-soldier-1 moves 9,1 -> 6,1 via 8,1 7,1
+Soldier moves 9,1 -> 6,1 via 8,1 7,1
 enemy: attack soldier-1 captain
 forecast soldier-1 -> captain: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-1 attacks captain
-  soldier-1 hits captain for 6 (hp 16)
-  captain hits soldier-1 for 9 (hp 11)
-  soldier-1 hp 11, captain hp 16
-captain gains 10 exp (40)
+Soldier attacks Alder Fenn
+  Soldier hits Alder Fenn for 6 (hp 16)
+  Alder Fenn hits Soldier for 9 (hp 11)
+  Soldier hp 11, Alder Fenn hp 16
+Alder Fenn gains 10 exp (40)
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
-captain heals 4 (hp 20)
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Alder Fenn heals 4 (hp 20)
 Old Mill Road  turn 5 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -395,11 +395,11 @@ a  soldier-1        Soldier L1 pikeman         6,1    hp 11/20  Plain  group mil
 B  wren             Wren L1 cadet              5,5    hp 20/20  Plain
 > attack captain soldier-1
 forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 6 hit 34% crit 0%
-captain attacks soldier-1
-  captain hits soldier-1 for 9 (hp 2)
-  soldier-1 hits captain for 6 (hp 14)
-  captain hp 14, soldier-1 hp 2
-captain gains 10 exp (50)
+Alder Fenn attacks Soldier
+  Alder Fenn hits Soldier for 9 (hp 2)
+  Soldier hits Alder Fenn for 6 (hp 14)
+  Alder Fenn hp 14, Soldier hp 2
+Alder Fenn gains 10 exp (50)
 Old Mill Road  turn 5 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -419,7 +419,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         6,1    hp 2/20   Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,5    hp 20/20  Plain
 > move wren 5,1
-wren moves 5,5 -> 5,1 via 5,4 5,3 5,2
+Wren moves 5,5 -> 5,1 via 5,4 5,3 5,2
 Old Mill Road  turn 5 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -440,11 +440,11 @@ a  soldier-1        Soldier L1 pikeman         6,1    hp 2/20   Plain  group mil
 B  wren             Wren L1 cadet              5,1    hp 20/20  Plain
 > attack wren soldier-1
 forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
-wren attacks soldier-1
-  wren hits soldier-1 for 8 (hp 0)
-  wren hp 20, soldier-1 hp 0
-wren gains 30 exp (80)
-soldier-1 falls at 6,1
+Wren attacks Soldier
+  Wren hits Soldier for 8 (hp 0)
+  Wren hp 20, Soldier hp 0
+Wren gains 30 exp (80)
+Soldier falls at 6,1
 Old Mill Road  turn 5 of 12  player phase  rout  recall 3
    012345678901
  0 ............
@@ -463,28 +463,28 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 14/22  Fort (heals 20 p
 d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,1    hp 20/20  Plain  done
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: move archer-1 6,0
-archer-1 moves 8,2 -> 6,0 via 7,2 7,1 7,0
+Archer 1 moves 8,2 -> 6,0 via 7,2 7,1 7,0
 enemy: attack archer-1 wren
 forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
-archer-1 attacks wren
-  archer-1 misses wren
-  archer-1 hp 17, wren hp 20
+Archer 1 attacks Wren
+  Archer 1 misses Wren
+  Archer 1 hp 17, Wren hp 20
 enemy: move mill_bandit-1 6,1
-mill_bandit-1 moves 7,1 -> 6,1
+Mill Bandit moves 7,1 -> 6,1
 enemy: attack mill_bandit-1 wren
 forecast mill_bandit-1 -> wren: dmg 10 hit 85% crit 3%; counter: dmg 9 hit 85% crit 2%
-mill_bandit-1 attacks wren
-  mill_bandit-1 hits wren for 10 (hp 10)
-  wren hits mill_bandit-1 for 9 (hp 15)
-  mill_bandit-1 hp 15, wren hp 10
-wren gains 12 exp (92)
+Mill Bandit attacks Wren
+  Mill Bandit hits Wren for 10 (hp 10)
+  Wren hits Mill Bandit for 9 (hp 15)
+  Mill Bandit hp 15, Wren hp 10
+Wren gains 12 exp (92)
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
-captain heals 4 (hp 18)
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Alder Fenn heals 4 (hp 18)
 Old Mill Road  turn 6 of 12  player phase  rout  recall 3
    012345678901
  0 ......b.....
@@ -504,11 +504,11 @@ d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 15/24  Plain  group mil
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
 > attack captain mill_bandit-1
 forecast captain -> mill_bandit-1: dmg 10 hit 87% crit 3%; counter: dmg 7 hit 62% crit 2%
-captain attacks mill_bandit-1
-  captain hits mill_bandit-1 for 10 (hp 5)
-  mill_bandit-1 misses captain
-  captain hp 18, mill_bandit-1 hp 5
-captain gains 12 exp (62)
+Alder Fenn attacks Mill Bandit
+  Alder Fenn hits Mill Bandit for 10 (hp 5)
+  Mill Bandit misses Alder Fenn
+  Alder Fenn hp 18, Mill Bandit hp 5
+Alder Fenn gains 12 exp (62)
 Old Mill Road  turn 6 of 12  player phase  rout  recall 3
    012345678901
  0 ......b.....
@@ -529,12 +529,12 @@ B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
 > attack wren mill_bandit-1
 forecast wren -> mill_bandit-1: dmg 9 hit 85% crit 2%; counter: dmg 10 hit 85% crit 3%
   counter: lethal to wren (10 against 10 hp)
-wren attacks mill_bandit-1
-  wren hits mill_bandit-1 for 9 (hp 0)
-  wren hp 10, mill_bandit-1 hp 0
-wren gains 35 exp (27)
-wren reaches level 2: hp +1 str +1 mag +1 spd +1 lck +1 def +1
-mill_bandit-1 falls at 6,1
+Wren attacks Mill Bandit
+  Wren hits Mill Bandit for 9 (hp 0)
+  Wren hp 10, Mill Bandit hp 0
+Wren gains 35 exp (27)
+Wren reaches level 2: hp +1 str +1 mag +1 spd +1 lck +1 def +1
+Mill Bandit falls at 6,1
 Old Mill Road  turn 6 of 12  player phase  rout  recall 3
    012345678901
  0 ......b.....
@@ -552,17 +552,17 @@ b  archer-1         Archer L1 bowman           6,0    hp 17/17  Plain  group mil
 A  captain          Alder Fenn L1 cadet        6,2    hp 18/22  Fort (heals 20 percent, 4 hp)  captain  done
 B  wren             Wren L2 cadet              5,1    hp 11/21  Plain  done
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: attack archer-1 wren
 forecast archer-1 -> wren: dmg 5 hit 65% crit 0%; counter: none
-archer-1 attacks wren
-  archer-1 hits wren for 5 (hp 6)
-  archer-1 hp 17, wren hp 6
+Archer 1 attacks Wren
+  Archer 1 hits Wren for 5 (hp 6)
+  Archer 1 hp 17, Wren hp 6
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
-captain heals 4 (hp 22)
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Alder Fenn heals 4 (hp 22)
 Old Mill Road  turn 7 of 12  player phase  rout  recall 3
    012345678901
  0 ......b.....
@@ -580,7 +580,7 @@ b  archer-1         Archer L1 bowman           6,0    hp 17/17  Plain  group mil
 A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort (heals 20 percent, 4 hp)  captain
 B  wren             Wren L2 cadet              5,1    hp 6/21   Plain
 > move captain 7,0
-captain moves 6,2 -> 7,0 via 6,1 7,1
+Alder Fenn moves 6,2 -> 7,0 via 6,1 7,1
 Old Mill Road  turn 7 of 12  player phase  rout  recall 3
    012345678901
  0 ......bA....
@@ -599,10 +599,10 @@ A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Plain  captain
 B  wren             Wren L2 cadet              5,1    hp 6/21   Plain
 > attack captain archer-1
 forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
-captain attacks archer-1
-  captain hits archer-1 for 11 (hp 6)
-  captain hp 22, archer-1 hp 6
-captain gains 10 exp (72)
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 11 (hp 6)
+  Alder Fenn hp 22, Archer 1 hp 6
+Alder Fenn gains 10 exp (72)
 Old Mill Road  turn 7 of 12  player phase  rout  recall 3
    012345678901
  0 ......bA....
@@ -620,7 +620,7 @@ b  archer-1         Archer L1 bowman           6,0    hp 6/17   Plain  group mil
 A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Plain  captain  done
 B  wren             Wren L2 cadet              5,1    hp 6/21   Plain
 > move wren 5,0
-wren moves 5,1 -> 5,0
+Wren moves 5,1 -> 5,0
 Old Mill Road  turn 7 of 12  player phase  rout  recall 3
    012345678901
  0 .....BbA....
@@ -639,11 +639,11 @@ A  captain          Alder Fenn L1 cadet        7,0    hp 22/22  Plain  captain  
 B  wren             Wren L2 cadet              5,0    hp 6/21   Plain
 > attack wren archer-1
 forecast wren -> archer-1: dmg 11 x2 hit 86% crit 4%; counter: none
-wren attacks archer-1
-  wren hits archer-1 for 11 (hp 0)
-  wren hp 6, archer-1 hp 0
-wren gains 25 exp (52)
-archer-1 falls at 6,0
+Wren attacks Archer 1
+  Wren hits Archer 1 for 11 (hp 0)
+  Wren hp 6, Archer 1 hp 0
+Wren gains 25 exp (52)
+Archer 1 falls at 6,0
 Old Mill Road  turn 7 of 12  player phase  rout  recall 3
    012345678901
  0 .....B.A....
@@ -716,7 +716,7 @@ brannock certifies from Cadet to Reaver for 500; the purse holds 320
     mastery: Fundamentals (9 of 12 combats)
 > march
 map 2 of 8: Saltmarsh Ford, seed 140
-objective: defeat every enemy by the end of turn 18; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 18. Captain Fenn must survive.
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -742,7 +742,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,8    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,5
-wren moves 5,8 -> 5,5 via 5,7 5,6
+Wren moves 5,8 -> 5,5 via 5,7 5,6
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -768,7 +768,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -794,7 +794,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 6,6
-teodor moves 7,8 -> 6,6 via 7,7 7,6
+Teodor moves 7,8 -> 6,6 via 7,7 7,6
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -820,7 +820,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -846,7 +846,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,7
-captain moves 6,8 -> 6,7
+Alder Fenn moves 6,8 -> 6,7
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -872,7 +872,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -898,7 +898,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 5,7
-pell moves 6,9 -> 5,7 via 6,8 6,7
+Pell moves 6,9 -> 5,7 via 6,8 6,7
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -924,7 +924,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
-pell waits
+Pell waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -950,27 +950,27 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: move brigand-1 3,5
-brigand-1 moves 3,2 -> 3,5 via 3,3 3,4
+Brigand moves 3,2 -> 3,5 via 3,3 3,4
 enemy: wait brigand-1
-brigand-1 waits
+Brigand waits
 enemy: move soldier-1 3,3
-soldier-1 moves 2,1 -> 3,3 via 3,1 3,2
+Soldier 1 moves 2,1 -> 3,3 via 3,1 3,2
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -996,7 +996,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              5,5    hp 21/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 4,5
-wren moves 5,5 -> 4,5
+Wren moves 5,5 -> 4,5
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1023,14 +1023,14 @@ B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren brigand-1
 forecast wren -> brigand-1: dmg 11 x2 hit 89% crit 5%; counter: dmg 9 hit 15% crit 0%
-wren attacks brigand-1
-  wren hits brigand-1 for 11 (hp 11)
-  brigand-1 hits wren for 9 (hp 12)
-  wren hits brigand-1 for 11 (hp 0)
-  wren hp 12, brigand-1 hp 0
-wren gains 30 exp (82)
-wren reaches rank D in sword
-brigand-1 falls at 3,5
+Wren attacks Brigand
+  Wren hits Brigand for 11 (hp 11)
+  Brigand hits Wren for 9 (hp 12)
+  Wren hits Brigand for 11 (hp 0)
+  Wren hp 12, Brigand hp 0
+Wren gains 30 exp (82)
+Wren reaches rank D in sword
+Brigand falls at 3,5
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1055,7 +1055,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 5,5
-teodor moves 6,6 -> 5,5 via 6,5
+Teodor moves 6,6 -> 5,5 via 6,5
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1080,7 +1080,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1105,7 +1105,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 5,6
-pell moves 5,7 -> 5,6
+Pell moves 5,7 -> 5,6
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1130,7 +1130,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait pell
-pell waits
+Pell waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1155,7 +1155,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,5
-captain moves 6,7 -> 6,5 via 6,6
+Alder Fenn moves 6,7 -> 6,5 via 6,6
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1180,7 +1180,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1205,29 +1205,29 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: move soldier-1 4,4
-soldier-1 moves 3,3 -> 4,4 via 3,4
+Soldier 1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 wren
 forecast soldier-1 -> wren: dmg 7 hit 23% crit 0%; counter: dmg 8 x2 hit 56% crit 4%
-soldier-1 attacks wren
-  soldier-1 misses wren
-  wren hits soldier-1 for 8 (hp 12)
-  wren misses soldier-1
-  soldier-1 hp 12, wren hp 12
-wren gains 10 exp (92)
+Soldier 1 attacks Wren
+  Soldier 1 misses Wren
+  Wren hits Soldier 1 for 8 (hp 12)
+  Wren misses Soldier 1
+  Soldier 1 hp 12, Wren hp 12
+Wren gains 10 exp (92)
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1252,7 +1252,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move pell 4,6
-pell moves 5,6 -> 4,6
+Pell moves 5,6 -> 4,6
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1278,11 +1278,11 @@ B  wren             Wren L2 cadet              4,5    hp 12/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell soldier-1
 forecast pell -> soldier-1 with Cinder: dmg 12 hit 86% crit 2%; counter: none
-pell attacks soldier-1
-  pell hits soldier-1 for 12 (hp 0)
-  pell hp 16, soldier-1 hp 0
-pell gains 35 exp (35)
-soldier-1 falls at 4,4
+Pell attacks Soldier 1
+  Pell hits Soldier 1 for 12 (hp 0)
+  Pell hp 16, Soldier 1 hp 0
+Pell gains 35 exp (35)
+Soldier 1 falls at 4,4
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1306,8 +1306,8 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 12/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses Field Dressing (2 left)
-wren heals 9 (hp 21)
+Wren uses Field Dressing (2 left)
+Wren heals 9 (hp 21)
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1331,7 +1331,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 7,5
-teodor moves 5,5 -> 7,5 via 6,5
+Teodor moves 5,5 -> 7,5 via 6,5
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1355,7 +1355,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1379,7 +1379,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 7,6
-captain moves 6,5 -> 7,6 via 7,5
+Alder Fenn moves 6,5 -> 7,6 via 7,5
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1403,7 +1403,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1427,19 +1427,19 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1463,8 +1463,8 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 10,5
-teodor moves 7,5 -> 10,5 via 8,5 9,5
-group fort wakes: proximity
+Teodor moves 7,5 -> 10,5 via 8,5 9,5
+Group fort wakes: proximity
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1487,7 +1487,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1510,7 +1510,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 > move pell 8,6
-pell moves 4,6 -> 8,6 via 5,6 6,6 7,6
+Pell moves 4,6 -> 8,6 via 5,6 6,6 7,6
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1533,7 +1533,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 > wait pell
-pell waits
+Pell waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1556,7 +1556,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              4,5    hp 21/21  Forest
 > move wren 6,5
-wren moves 4,5 -> 6,5 via 5,5
+Wren moves 4,5 -> 6,5 via 5,5
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1579,7 +1579,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1602,7 +1602,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1625,33 +1625,33 @@ C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: move archer-1 10,3
-archer-1 moves 10,1 -> 10,3 via 10,2
+Archer moves 10,1 -> 10,3 via 10,2
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 hits teodor for 5 (hp 16)
-  archer-1 hp 17, teodor hp 16
+Archer attacks Teodor
+  Archer hits Teodor for 5 (hp 16)
+  Archer hp 17, Teodor hp 16
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: move soldier-2 10,2
-soldier-2 moves 9,0 -> 10,2 via 10,0 10,1
+Soldier 2 moves 9,0 -> 10,2 via 10,0 10,1
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: move wingrider-1 10,4
-wingrider-1 moves 12,2 -> 10,4 via 11,2 10,2 10,3
+Wingrider moves 12,2 -> 10,4 via 11,2 10,2 10,3
 enemy: attack wingrider-1 teodor
 forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
-wingrider-1 attacks teodor
-  wingrider-1 hits teodor for 6 (hp 10)
-  teodor hits wingrider-1 for 13 (hp 4)
-  wingrider-1 hp 4, teodor hp 10
-teodor gains 12 exp (12)
+Wingrider attacks Teodor
+  Wingrider hits Teodor for 6 (hp 10)
+  Teodor hits Wingrider for 13 (hp 4)
+  Wingrider hp 4, Teodor hp 10
+Teodor gains 12 exp (12)
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1674,7 +1674,7 @@ C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      10,4   hp 4/17   Plain  group fort, guard, awake
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > move pell 10,6
-pell moves 8,6 -> 10,6 via 9,6
+Pell moves 8,6 -> 10,6 via 9,6
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1698,12 +1698,12 @@ e  wingrider-1      Wingrider L2 skyrider      10,4   hp 4/17   Plain  group for
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > attack pell wingrider-1 2
 forecast pell -> wingrider-1 with Gust: dmg 16 hit 100% crit 6%; counter: none
-pell equips Gust
-pell attacks wingrider-1
-  pell hits wingrider-1 for 16 (hp 0)
-  pell hp 16, wingrider-1 hp 0
-pell gains 35 exp (70)
-wingrider-1 falls at 10,4
+Pell equips Gust
+Pell attacks Wingrider
+  Pell hits Wingrider for 16 (hp 0)
+  Pell hp 16, Wingrider hp 0
+Pell gains 35 exp (70)
+Wingrider falls at 10,4
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1725,7 +1725,7 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          10,5   hp 10/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > move teodor 8,7
-teodor moves 10,5 -> 8,7 via 9,5 8,5 8,6
+Teodor moves 10,5 -> 8,7 via 9,5 8,5 8,6
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1747,8 +1747,8 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 10/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > item teodor 2
-teodor uses Field Dressing (2 left)
-teodor heals 10 (hp 20)
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 20)
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1770,7 +1770,7 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 20/21  Plain  done
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1792,7 +1792,7 @@ d  soldier-2        Soldier L2 pikeman         10,2   hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 20/21  Plain  done
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1815,29 +1815,29 @@ C  teodor           Teodor L1 pikeman          8,7    hp 20/21  Plain  done
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain  done
 > end
 lethal if all land: pell (archer-1 8, soldier-2 11 against 16 hp)
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: move archer-1 8,5
-archer-1 moves 10,3 -> 8,5 via 10,4 9,4 8,4
+Archer moves 10,3 -> 8,5 via 10,4 9,4 8,4
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 hits teodor for 5 (hp 15)
-  archer-1 hp 17, teodor hp 15
+Archer attacks Teodor
+  Archer hits Teodor for 5 (hp 15)
+  Archer hp 17, Teodor hp 15
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: move soldier-2 10,5
-soldier-2 moves 10,2 -> 10,5 via 10,3 10,4
+Soldier 2 moves 10,2 -> 10,5 via 10,3 10,4
 enemy: attack soldier-2 pell
 forecast soldier-2 -> pell: dmg 11 hit 74% crit 0%; counter with Gust: dmg 11 hit 100% crit 7%
-soldier-2 attacks pell
-  soldier-2 misses pell
-  pell hits soldier-2 for 11 (hp 9)
-  soldier-2 hp 9, pell hp 16
-pell gains 12 exp (82)
+Soldier 2 attacks Pell
+  Soldier 2 misses Pell
+  Pell hits Soldier 2 for 11 (hp 9)
+  Soldier 2 hp 9, Pell hp 16
+Pell gains 12 exp (82)
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1859,7 +1859,7 @@ d  soldier-2        Soldier L2 pikeman         10,5   hp 9/20   Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > move pell 10,7
-pell moves 10,6 -> 10,7
+Pell moves 10,6 -> 10,7
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1882,12 +1882,12 @@ C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > attack pell soldier-2
 forecast pell -> soldier-2 with Gust: dmg 11 hit 100% crit 7%; counter: none
-pell attacks soldier-2
-  pell hits soldier-2 for 11 (hp 0)
-  pell hp 16, soldier-2 hp 0
-pell gains 35 exp (17)
-pell reaches level 2: hp +1 mag +1 dex +1 res +1 cha +1
-soldier-2 falls at 10,5
+Pell attacks Soldier 2
+  Pell hits Soldier 2 for 11 (hp 0)
+  Pell hp 16, Soldier 2 hp 0
+Pell gains 35 exp (17)
+Pell reaches level 2: hp +1 mag +1 dex +1 res +1 cha +1
+Soldier 2 falls at 10,5
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1908,7 +1908,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L2 cadet              6,5    hp 21/21  Plain
 > move wren 7,5
-wren moves 6,5 -> 7,5
+Wren moves 6,5 -> 7,5
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1930,14 +1930,14 @@ C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L2 cadet              7,5    hp 21/21  Plain
 > attack wren archer-1
 forecast wren -> archer-1: dmg 11 x2 hit 86% crit 4%; counter: none
-wren attacks archer-1
-  wren hits archer-1 for 11 (hp 6)
-  wren hits archer-1 for 11 (hp 0)
-  wren hp 21, archer-1 hp 0
-wren gains 30 exp (22)
-wren reaches level 3: hp +1 dex +1 spd +1 res +1 cha +1
-wren masters the Cadet class and keeps Fundamentals
-archer-1 falls at 8,5
+Wren attacks Archer
+  Wren hits Archer for 11 (hp 6)
+  Wren hits Archer for 11 (hp 0)
+  Wren hp 21, Archer hp 0
+Wren gains 30 exp (22)
+Wren reaches level 3: hp +1 dex +1 spd +1 res +1 cha +1
+Wren masters the Cadet class and keeps Fundamentals
+Archer falls at 8,5
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1957,8 +1957,8 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 15/21  Plain
 B  wren             Wren L3 cadet              7,5    hp 22/22  Plain  done
 > item teodor 2
-teodor uses Field Dressing (1 left)
-teodor heals 6 (hp 21)
+Teodor uses Field Dressing (1 left)
+Teodor heals 6 (hp 21)
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1978,7 +1978,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 B  wren             Wren L3 cadet              7,5    hp 22/22  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1998,13 +1998,13 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 B  wren             Wren L3 cadet              7,5    hp 22/22  Plain  done
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2024,7 +2024,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L3 cadet              7,5    hp 22/22  Plain
 > move wren 10,4
-wren moves 7,5 -> 10,4 via 7,4 8,4 9,4
+Wren moves 7,5 -> 10,4 via 7,4 8,4 9,4
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2044,7 +2044,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2064,7 +2064,7 @@ D  pell             Pell L2 adept              10,7   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > move pell 10,5
-pell moves 10,7 -> 10,5 via 10,6
+Pell moves 10,7 -> 10,5 via 10,6
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2084,7 +2084,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > wait pell
-pell waits
+Pell waits
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2104,7 +2104,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > move teodor 9,5
-teodor moves 8,7 -> 9,5 via 8,6 8,5
+Teodor moves 8,7 -> 9,5 via 8,6 8,5
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2124,7 +2124,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2144,7 +2144,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > move captain 8,5
-captain moves 7,6 -> 8,5 via 7,5
+Alder Fenn moves 7,6 -> 8,5 via 7,5
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2164,7 +2164,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2184,13 +2184,13 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain  done
 > end
--- player phase ends, turn 7 --
--- enemy phase, turn 7 --
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits
+Bandit Leader waits
 enemy: end
--- enemy phase ends, turn 7 --
--- player phase, turn 8 --
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2210,7 +2210,7 @@ D  pell             Pell L2 adept              10,5   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > move pell 10,2
-pell moves 10,5 -> 10,2 via 10,4 10,3
+Pell moves 10,5 -> 10,2 via 10,4 10,3
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2231,10 +2231,10 @@ C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > attack pell bandit_leader-1
 forecast pell -> bandit_leader-1 with Gust: dmg 10 hit 97% crit 6%; counter: none
-pell attacks bandit_leader-1
-  pell hits bandit_leader-1 for 10 (hp 16)
-  pell hp 17, bandit_leader-1 hp 16
-pell gains 12 exp (29)
+Pell attacks Bandit Leader
+  Pell hits Bandit Leader for 10 (hp 16)
+  Pell hp 17, Bandit Leader hp 16
+Pell gains 12 exp (29)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2254,7 +2254,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > move wren 10,1
-wren moves 10,4 -> 10,1 via 10,3 10,2
+Wren moves 10,4 -> 10,1 via 10,3 10,2
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2275,12 +2275,12 @@ C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 22/22  Plain
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 8 x2 hit 73% crit 3%; counter with Steel Axe: dmg 15 hit 51% crit 0%
-wren attacks bandit_leader-1
-  wren hits bandit_leader-1 for 8 (hp 8)
-  bandit_leader-1 hits wren for 15 (hp 7)
-  wren misses bandit_leader-1
-  wren hp 7, bandit_leader-1 hp 8
-wren gains 10 exp (32)
+Wren attacks Bandit Leader
+  Wren hits Bandit Leader for 8 (hp 8)
+  Bandit Leader hits Wren for 15 (hp 7)
+  Wren misses Bandit Leader
+  Wren hp 7, Bandit Leader hp 8
+Wren gains 10 exp (32)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2300,7 +2300,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > move teodor 10,4
-teodor moves 9,5 -> 10,4 via 9,4
+Teodor moves 9,5 -> 10,4 via 9,4
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2320,7 +2320,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2340,7 +2340,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > move captain 10,5
-captain moves 8,5 -> 10,5 via 9,5
+Alder Fenn moves 8,5 -> 10,5 via 9,5
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2360,7 +2360,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2381,18 +2381,18 @@ C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,1   hp 7/22   Plain  done
 > end
 lethal if all land: wren (bandit_leader-1 15 against 7 hp)
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
-bandit_leader-1 heals 5 (hp 13)
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+Bandit Leader heals 5 (hp 13)
 enemy: attack bandit_leader-1 wren
 forecast bandit_leader-1 -> wren with Steel Axe: dmg 15 hit 51% crit 0%; counter: dmg 8 x2 hit 73% crit 3%
-bandit_leader-1 attacks wren
-  bandit_leader-1 hits wren for 15 (hp 0)
-  bandit_leader-1 hp 13, wren hp 0
-wren falls at 10,1
+Bandit Leader attacks Wren
+  Bandit Leader hits Wren for 15 (hp 0)
+  Bandit Leader hp 13, Wren hp 0
+Wren falls at 10,1
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2411,7 +2411,7 @@ A  captain          Alder Fenn L1 cadet        10,5   hp 22/22  Plain  captain
 D  pell             Pell L2 adept              10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 > recall 98
-recalled to state 98; 2 charges left
+Recalled to state 98; 2 charges left
 undone: gives back 3 enemy hp; returns wren alive at 22 hp
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
@@ -2433,7 +2433,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,4   hp 22/22  Plain
 > move wren 10,3
-wren moves 10,4 -> 10,3
+Wren moves 10,4 -> 10,3
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2453,7 +2453,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2473,7 +2473,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 > move teodor 10,4
-teodor moves 9,5 -> 10,4 via 9,4
+Teodor moves 9,5 -> 10,4 via 9,4
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2493,7 +2493,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2513,7 +2513,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 > move captain 10,5
-captain moves 8,5 -> 10,5 via 9,5
+Alder Fenn moves 8,5 -> 10,5 via 9,5
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2533,7 +2533,7 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2553,20 +2553,20 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain  done
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road  done
 > end
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
-bandit_leader-1 heals 5 (hp 21)
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+Bandit Leader heals 5 (hp 21)
 enemy: attack bandit_leader-1 pell 2
 forecast bandit_leader-1 -> pell: dmg 14 hit 58% crit 0%; counter with Gust: dmg 10 hit 97% crit 6%
-bandit_leader-1 equips Toll Axe
-bandit_leader-1 attacks pell
-  bandit_leader-1 misses pell
-  pell hits bandit_leader-1 for 10 (hp 11)
-  bandit_leader-1 hp 11, pell hp 17
-pell gains 12 exp (41)
+Bandit Leader equips Toll Axe
+Bandit Leader attacks Pell
+  Bandit Leader misses Pell
+  Pell hits Bandit Leader for 10 (hp 11)
+  Bandit Leader hp 11, Pell hp 17
+Pell gains 12 exp (41)
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2587,12 +2587,12 @@ C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road
 > attack pell bandit_leader-1
 forecast pell -> bandit_leader-1 with Gust: dmg 10 hit 97% crit 6%; counter: dmg 14 hit 58% crit 0%
-pell attacks bandit_leader-1
-  pell hits bandit_leader-1 for 10 (hp 1)
-  bandit_leader-1 hits pell for 14 (hp 3)
-  pell hp 3, bandit_leader-1 hp 1
-pell's Gust is spent for this battle
-pell gains 12 exp (53)
+Pell attacks Bandit Leader
+  Pell hits Bandit Leader for 10 (hp 1)
+  Bandit Leader hits Pell for 14 (hp 3)
+  Pell hp 3, Bandit Leader hp 1
+Pell's Gust is spent for this battle
+Pell gains 12 exp (53)
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2612,7 +2612,7 @@ D  pell             Pell L2 adept              10,2   hp 3/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,3   hp 22/22  Road
 > move wren 10,1
-wren moves 10,3 -> 10,1 via 10,2
+Wren moves 10,3 -> 10,1 via 10,2
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2633,11 +2633,11 @@ C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L3 cadet              10,1   hp 22/22  Plain
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 8 x2 hit 67% crit 3%; counter with Toll Axe: dmg 10 hit 32% crit 0%
-wren attacks bandit_leader-1
-  wren hits bandit_leader-1 for 8 (hp 0)
-  wren hp 22, bandit_leader-1 hp 0
-wren gains 50 exp (72)
-bandit_leader-1 falls at 10,0
+Wren attacks Bandit Leader
+  Wren hits Bandit Leader for 8 (hp 0)
+  Wren hp 22, Bandit Leader hp 0
+Wren gains 50 exp (72)
+Bandit Leader falls at 10,0
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....F...

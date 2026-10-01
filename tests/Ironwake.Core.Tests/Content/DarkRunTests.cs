@@ -39,7 +39,7 @@ public class DarkRunTests
         var output = Seed53();
 
         Assert.Equal("enemy: something in the dark acts (x3)", PlaySession.DarkRunLine(3));
-        Assert.Contains("-- enemy phase, turn 2 --\nenemy: something in the dark acts (x3)\nenemy: move brigand-1 8,3\n", output);
+        Assert.Contains("-- Enemy phase, turn 2 --\nenemy: something in the dark acts (x3)\nenemy: move brigand-1 8,3\n", output);
         Assert.DoesNotContain(ProtocolSession.DarkLine + "\n" + ProtocolSession.DarkLine, output);
     }
 
@@ -49,7 +49,7 @@ public class DarkRunTests
         var output = Seed53();
 
         Assert.Equal(ProtocolSession.DarkLine, PlaySession.DarkRunLine(1));
-        Assert.Contains("pell falls at 10,2\nenemy: something in the dark acts\nenemy: move brigand-1 5,4\n", output);
+        Assert.Contains("Pell falls at 10,2\nenemy: something in the dark acts\nenemy: move brigand-1 5,4\n", output);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class DarkRunTests
         var output = Seed53();
 
         Assert.Contains(
-            "enemy: something in the dark acts (x3)\nenemy: move brigand-1 8,3\nbrigand-1 moves 5,4 -> 8,3 via 5,3 6,3 7,3\nenemy: wait brigand-1\nbrigand-1 waits\nenemy: something in the dark acts (x4)\nenemy: move rider-1 10,3\n",
+            "enemy: something in the dark acts (x3)\nenemy: move brigand-1 8,3\nBrigand 1 moves 5,4 -> 8,3 via 5,3 6,3 7,3\nenemy: wait brigand-1\nBrigand 1 waits\nenemy: something in the dark acts (x4)\nenemy: move rider-1 10,3\n",
             output);
     }
 
@@ -98,7 +98,7 @@ public class DarkRunTests
             Assert.Contains("dark acts (x", console);
             Assert.True(unseen > 1);
             Assert.DoesNotContain("dark acts (x", answer);
-            Assert.Equal(DarkActs(console[console.IndexOf("-- enemy phase, turn 1 --", StringComparison.Ordinal)..]), unseen);
+            Assert.Equal(DarkActs(console[console.IndexOf("-- Enemy phase, turn 1 --", StringComparison.Ordinal)..]), unseen);
         }
         finally
         {

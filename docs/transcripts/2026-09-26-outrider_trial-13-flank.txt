@@ -1,6 +1,6 @@
 Trial of the Outrider, seed 13, scheme TwoRollAverage
 certification trial: captain plays as Outrider with iron_lance, iron_sword
-objective: the captain, Alder Fenn (A), must stand on the gate at any tile from 0,0 to 6,0 by the end of turn 1; only the captain seizes; lost if the captain falls
+Objective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -13,7 +13,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 A  captain          Alder Fenn L1 outrider     3,4    hp 23/23  Plain  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > move captain 2,2
-captain moves 3,4 -> 2,2 via 2,4 2,3
+Alder Fenn moves 3,4 -> 2,2 via 2,4 2,3
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -27,13 +27,13 @@ A  captain          Alder Fenn L1 outrider     2,2    hp 23/23  Plain  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > attack captain hexer-1 2
 forecast captain -> hexer-1 with Iron Sword: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 98% crit 0%
-captain equips Iron Sword
-captain attacks hexer-1
-  captain misses hexer-1
-  hexer-1 hits captain for 10 (hp 13)
-  captain hits hexer-1 for 13 (hp 3)
-  captain hp 13, hexer-1 hp 3
-captain gains 10 exp (10)
+Alder Fenn equips Iron Sword
+Alder Fenn attacks Hexer
+  Alder Fenn misses Hexer
+  Hexer hits Alder Fenn for 10 (hp 13)
+  Alder Fenn hits Hexer for 13 (hp 3)
+  Alder Fenn hp 13, Hexer hp 3
+Alder Fenn gains 10 exp (10)
 captain may canto up to 1 movement: canto captain <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456

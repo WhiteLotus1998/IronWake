@@ -41,5 +41,16 @@ public class ClientPanelLayoutTests
     public void TheKeyStripSaysTabOpensTheEventLog()
     {
         Assert.Equal("event log", PanelLayout.TabLabel);
+        Assert.Contains(("Tab", "event log"), KeyStrip.Keys);
+    }
+
+    /// <summary>Issue 609: Lotus asked what P and S do; each label names what its key does.</summary>
+    [Theory]
+    [InlineData("P", "threat on tile")]
+    [InlineData("S", "enemy speed")]
+    [InlineData("T", "enemy reach")]
+    public void EachKeyLabelSaysWhatTheKeyDoes(string key, string does)
+    {
+        Assert.Equal(does, KeyStrip.Keys.Single(k => k.Key == key).Does);
     }
 }

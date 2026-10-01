@@ -57,7 +57,7 @@ public class CampaignCliTests
         Assert.Contains("Raid on Ironwake won: rout; reward 1000, the purse holds 1500; nobody fell\n", output);
         Assert.Contains("keep: Ironwake Keep; built: nothing; the purse holds 1500\n", output);
         Assert.Contains("built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)\n", output);
-        Assert.Contains("map 2 of 2: Ironwake Keep, seed 289\nobjective: hold until the end of turn 8; lost if the captain falls\nIronwake Keep  turn 1 of 8  player phase  survive  recall 3\n", output);
+        Assert.Contains("map 2 of 2: Ironwake Keep, seed 289\nObjective: Hold out until the end of turn 8. Captain Fenn must survive.\nIronwake Keep  turn 1 of 8  player phase  survive  recall 3\n", output);
         Assert.Contains("\n 8 ...e......#.....\n", output);
         Assert.Contains("campaign won: all 2 maps, the purse holds 3100\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

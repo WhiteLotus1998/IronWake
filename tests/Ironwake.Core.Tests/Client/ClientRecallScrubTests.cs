@@ -147,7 +147,7 @@ public class ClientRecallScrubTests
         var before = client.Log.Count;
         client.Submit(new EndPhase());
         client.Continue();
-        var death = client.Log.ToList().FindIndex(line => line.StartsWith("teodor falls", StringComparison.Ordinal));
+        var death = client.Log.ToList().FindIndex(line => line.StartsWith("Teodor falls", StringComparison.Ordinal));
         var left = client.Log.Count;
 
         Assert.True(client.Recall(49));

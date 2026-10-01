@@ -1,5 +1,5 @@
 Saltmarsh Ford (two-weapon boss), seed 47, scheme TwoRollAverage
-objective: defeat every enemy by the end of turn 18; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 18. Captain Fenn must survive.
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -25,7 +25,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 5,6
-teodor moves 7,8 -> 5,6 via 7,7 7,6 6,6
+Teodor moves 7,8 -> 5,6 via 7,7 7,6 6,6
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -51,7 +51,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -77,7 +77,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,7
-captain moves 6,8 -> 6,7
+Alder Fenn moves 6,8 -> 6,7
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -103,7 +103,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -129,7 +129,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 7,7
-wren moves 5,8 -> 7,7 via 5,7 6,7
+Wren moves 5,8 -> 7,7 via 5,7 6,7
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -155,7 +155,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -181,7 +181,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 6,8
-ottilie moves 6,9 -> 6,8
+Ottilie moves 6,9 -> 6,8
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -207,7 +207,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -233,27 +233,27 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: move brigand-1 3,5
-brigand-1 moves 3,2 -> 3,5 via 3,3 3,4
+Brigand moves 3,2 -> 3,5 via 3,3 3,4
 enemy: wait brigand-1
-brigand-1 waits
+Brigand waits
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: move soldier-1 3,3
-soldier-1 moves 2,1 -> 3,3 via 3,1 3,2
+Soldier 1 moves 2,1 -> 3,3 via 3,1 3,2
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -279,7 +279,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 3,7
-ottilie moves 6,8 -> 3,7 via 6,7 5,7 4,7
+Ottilie moves 6,8 -> 3,7 via 6,7 5,7 4,7
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -306,10 +306,10 @@ B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
-ottilie attacks brigand-1
-  ottilie hits brigand-1 for 8 (hp 14)
-  ottilie hp 17, brigand-1 hp 14
-ottilie gains 12 exp (12)
+Ottilie attacks Brigand
+  Ottilie hits Brigand for 8 (hp 14)
+  Ottilie hp 17, Brigand hp 14
+Ottilie gains 12 exp (12)
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -335,7 +335,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 4,5
-teodor moves 5,6 -> 4,5 via 4,6
+Teodor moves 5,6 -> 4,5 via 4,6
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -362,10 +362,10 @@ B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor brigand-1
 forecast teodor -> brigand-1: dmg 12 hit 80% crit 2%; counter: dmg 9 hit 28% crit 0%
-teodor attacks brigand-1
-  teodor misses brigand-1
-  brigand-1 misses teodor
-  teodor hp 21, brigand-1 hp 14
+Teodor attacks Brigand
+  Teodor misses Brigand
+  Brigand misses Teodor
+  Teodor hp 21, Brigand hp 14
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -391,7 +391,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 5,6
-captain moves 6,7 -> 5,6 via 6,6
+Alder Fenn moves 6,7 -> 5,6 via 6,6
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -417,7 +417,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -443,7 +443,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,7
-wren moves 7,7 -> 5,7 via 6,7
+Wren moves 7,7 -> 5,7 via 6,7
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -469,7 +469,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -495,34 +495,34 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: move brigand-1 3,6
-brigand-1 moves 3,5 -> 3,6
+Brigand moves 3,5 -> 3,6
 enemy: attack brigand-1 ottilie
 forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
-brigand-1 attacks ottilie
-  brigand-1 misses ottilie
-  brigand-1 hp 14, ottilie hp 17
+Brigand attacks Ottilie
+  Brigand misses Ottilie
+  Brigand hp 14, Ottilie hp 17
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: move soldier-1 4,4
-soldier-1 moves 3,3 -> 4,4 via 3,4
+Soldier 1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 teodor
 forecast soldier-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
-soldier-1 attacks teodor
-  soldier-1 misses teodor
-  teodor misses soldier-1
-  soldier-1 hp 20, teodor hp 21
+Soldier 1 attacks Teodor
+  Soldier 1 misses Teodor
+  Teodor misses Soldier 1
+  Soldier 1 hp 20, Teodor hp 21
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -548,7 +548,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 3,8
-ottilie moves 3,7 -> 3,8
+Ottilie moves 3,7 -> 3,8
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -575,10 +575,10 @@ B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 7 hit 56% crit 5%; counter: none
-ottilie attacks brigand-1
-  ottilie hits brigand-1 for 7 (hp 7)
-  ottilie hp 17, brigand-1 hp 7
-ottilie gains 12 exp (24)
+Ottilie attacks Brigand
+  Ottilie hits Brigand for 7 (hp 7)
+  Ottilie hp 17, Brigand hp 7
+Ottilie gains 12 exp (24)
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -604,7 +604,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 4,6
-captain moves 5,6 -> 4,6
+Alder Fenn moves 5,6 -> 4,6
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -631,11 +631,11 @@ B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
 forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
-captain attacks brigand-1
-  captain hits brigand-1 for 10 (hp 0)
-  captain hp 22, brigand-1 hp 0
-captain gains 35 exp (35)
-brigand-1 falls at 3,6
+Alder Fenn attacks Brigand
+  Alder Fenn hits Brigand for 10 (hp 0)
+  Alder Fenn hp 22, Brigand hp 0
+Alder Fenn gains 35 exp (35)
+Brigand falls at 3,6
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -661,11 +661,11 @@ B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
 forecast teodor -> soldier-1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
-teodor attacks soldier-1
-  teodor hits soldier-1 for 9 (hp 11)
-  soldier-1 misses teodor
-  teodor hp 21, soldier-1 hp 11
-teodor gains 12 exp (12)
+Teodor attacks Soldier 1
+  Teodor hits Soldier 1 for 9 (hp 11)
+  Soldier 1 misses Teodor
+  Teodor hp 21, Soldier 1 hp 11
+Teodor gains 12 exp (12)
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -690,7 +690,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,5
-wren moves 5,7 -> 5,5 via 5,6
+Wren moves 5,7 -> 5,5 via 5,6
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -715,7 +715,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,5    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -740,25 +740,25 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,5    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: attack soldier-1 teodor
 forecast soldier-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
-soldier-1 attacks teodor
-  soldier-1 misses teodor
-  teodor misses soldier-1
-  soldier-1 hp 11, teodor hp 21
+Soldier 1 attacks Teodor
+  Soldier 1 misses Teodor
+  Teodor misses Soldier 1
+  Soldier 1 hp 11, Teodor hp 21
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -784,10 +784,10 @@ B  wren             Wren L1 cadet              5,5    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
 forecast teodor -> soldier-1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
-teodor attacks soldier-1
-  teodor misses soldier-1
-  soldier-1 misses teodor
-  teodor hp 21, soldier-1 hp 11
+Teodor attacks Soldier 1
+  Teodor misses Soldier 1
+  Soldier 1 misses Teodor
+  Teodor hp 21, Soldier 1 hp 11
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -812,7 +812,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,5    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 5,4
-wren moves 5,5 -> 5,4
+Wren moves 5,5 -> 5,4
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -838,11 +838,11 @@ B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren soldier-1
 forecast wren -> soldier-1: dmg 7 hit 54% crit 3%; counter: dmg 9 hit 63% crit 0%
-wren attacks soldier-1
-  wren hits soldier-1 for 7 (hp 4)
-  soldier-1 hits wren for 9 (hp 11)
-  wren hp 11, soldier-1 hp 4
-wren gains 12 exp (12)
+Wren attacks Soldier 1
+  Wren hits Soldier 1 for 7 (hp 4)
+  Soldier 1 hits Wren for 9 (hp 11)
+  Wren hp 11, Soldier 1 hp 4
+Wren gains 12 exp (12)
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -867,7 +867,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 5,6
-ottilie moves 3,8 -> 5,6 via 3,7 4,7 4,6
+Ottilie moves 3,8 -> 5,6 via 3,7 4,7 4,6
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -892,7 +892,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -917,7 +917,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,5
-captain moves 4,6 -> 6,5 via 5,6 6,6
+Alder Fenn moves 4,6 -> 6,5 via 5,6 6,6
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -942,7 +942,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -967,25 +967,25 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: attack soldier-1 wren
 forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 7 hit 54% crit 3%
-soldier-1 attacks wren
-  soldier-1 hits wren for 9 (hp 2)
-  wren misses soldier-1
-  soldier-1 hp 4, wren hp 2
+Soldier 1 attacks Wren
+  Soldier 1 hits Wren for 9 (hp 2)
+  Wren misses Soldier 1
+  Soldier 1 hp 4, Wren hp 2
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1010,7 +1010,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 4,6
-ottilie moves 5,6 -> 4,6
+Ottilie moves 5,6 -> 4,6
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1036,9 +1036,9 @@ B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie soldier-1
 forecast ottilie -> soldier-1: dmg 5 hit 51% crit 4%; counter: none
-ottilie attacks soldier-1
-  ottilie misses soldier-1
-  ottilie hp 17, soldier-1 hp 4
+Ottilie attacks Soldier 1
+  Ottilie misses Soldier 1
+  Ottilie hp 17, Soldier 1 hp 4
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1064,11 +1064,11 @@ B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
 forecast teodor -> soldier-1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
-teodor attacks soldier-1
-  teodor hits soldier-1 for 9 (hp 0)
-  teodor hp 21, soldier-1 hp 0
-teodor gains 35 exp (47)
-soldier-1 falls at 4,4
+Teodor attacks Soldier 1
+  Teodor hits Soldier 1 for 9 (hp 0)
+  Teodor hp 21, Soldier 1 hp 0
+Teodor gains 35 exp (47)
+Soldier 1 falls at 4,4
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1092,8 +1092,8 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses Field Dressing (2 left)
-wren heals 10 (hp 12)
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 12)
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1117,7 +1117,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 7,5
-captain moves 6,5 -> 7,5
+Alder Fenn moves 6,5 -> 7,5
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1141,7 +1141,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1165,19 +1165,19 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1201,7 +1201,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 7,6
-teodor moves 4,5 -> 7,6 via 4,6 5,6 6,6
+Teodor moves 4,5 -> 7,6 via 4,6 5,6 6,6
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1225,7 +1225,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1249,7 +1249,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 8,5
-captain moves 7,5 -> 8,5
+Alder Fenn moves 7,5 -> 8,5
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1273,7 +1273,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1297,7 +1297,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ottilie 8,6
-ottilie moves 4,6 -> 8,6 via 5,6 6,6 7,6
+Ottilie moves 4,6 -> 8,6 via 5,6 6,6 7,6
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1321,7 +1321,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1345,7 +1345,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 7,5
-wren moves 5,4 -> 7,5 via 6,4 7,4
+Wren moves 5,4 -> 7,5 via 6,4 7,4
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1369,8 +1369,8 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,5    hp 12/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses Field Dressing (1 left)
-wren heals 8 (hp 20)
+Wren uses Field Dressing (1 left)
+Wren heals 8 (hp 20)
 Saltmarsh Ford (two-weapon boss)  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1394,19 +1394,19 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1430,8 +1430,8 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 9,4
-teodor moves 7,6 -> 9,4 via 7,5 7,4 8,4
-group fort wakes: proximity
+Teodor moves 7,6 -> 9,4 via 7,5 7,4 8,4
+Group fort wakes: proximity
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1454,7 +1454,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1477,7 +1477,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain
 > move captain 8,5
-captain moves 8,5 -> 8,5
+Alder Fenn moves 8,5 -> 8,5
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1500,7 +1500,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1523,7 +1523,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              7,5    hp 20/20  Plain
 > move wren 9,5
-wren moves 7,5 -> 9,5 via 8,5
+Wren moves 7,5 -> 9,5 via 8,5
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1546,7 +1546,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1569,7 +1569,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 > move ottilie 8,6
-ottilie moves 8,6 -> 8,6
+Ottilie moves 8,6 -> 8,6
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1592,7 +1592,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1615,32 +1615,32 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 > end
--- player phase ends, turn 7 --
--- enemy phase, turn 7 --
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
 enemy: move archer-1 9,2
-archer-1 moves 10,1 -> 9,2 via 9,1
+Archer moves 10,1 -> 9,2 via 9,1
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 misses teodor
-  archer-1 hp 17, teodor hp 21
+Archer attacks Teodor
+  Archer misses Teodor
+  Archer hp 17, Teodor hp 21
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: move soldier-2 10,3
-soldier-2 moves 9,0 -> 10,3 via 10,0 10,1 10,2
+Soldier 2 moves 9,0 -> 10,3 via 10,0 10,1 10,2
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: move wingrider-1 9,3
-wingrider-1 moves 12,2 -> 9,3 via 11,2 10,2 9,2
+Wingrider moves 12,2 -> 9,3 via 11,2 10,2 9,2
 enemy: attack wingrider-1 teodor
 forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
-wingrider-1 attacks teodor
-  wingrider-1 misses teodor
-  teodor misses wingrider-1
-  wingrider-1 hp 17, teodor hp 21
+Wingrider attacks Teodor
+  Wingrider misses Teodor
+  Teodor misses Wingrider
+  Wingrider hp 17, Teodor hp 21
 enemy: end
--- enemy phase ends, turn 7 --
--- player phase, turn 8 --
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1663,7 +1663,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > move ottilie 8,4
-ottilie moves 8,6 -> 8,4 via 8,5
+Ottilie moves 8,6 -> 8,4 via 8,5
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1687,9 +1687,9 @@ e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group for
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack ottilie wingrider-1
 forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
-ottilie attacks wingrider-1
-  ottilie misses wingrider-1
-  ottilie hp 17, wingrider-1 hp 17
+Ottilie attacks Wingrider
+  Ottilie misses Wingrider
+  Ottilie hp 17, Wingrider hp 17
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1713,10 +1713,10 @@ e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group for
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack teodor wingrider-1
 forecast teodor -> wingrider-1: dmg 13 hit 70% crit 0%; counter: dmg 6 hit 76% crit 2%
-teodor attacks wingrider-1
-  teodor misses wingrider-1
-  wingrider-1 hits teodor for 6 (hp 15)
-  teodor hp 15, wingrider-1 hp 17
+Teodor attacks Wingrider
+  Teodor misses Wingrider
+  Wingrider hits Teodor for 6 (hp 15)
+  Teodor hp 15, Wingrider hp 17
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1739,7 +1739,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 15/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > move captain 10,4
-captain moves 8,5 -> 10,4 via 8,4 9,4
+Alder Fenn moves 8,5 -> 10,4 via 8,4 9,4
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1763,11 +1763,11 @@ e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group for
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack captain soldier-2
 forecast captain -> soldier-2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
-captain attacks soldier-2
-  captain crits soldier-2 for 27 (hp 0)
-  captain hp 22, soldier-2 hp 0
-captain gains 35 exp (70)
-soldier-2 falls at 10,3
+Alder Fenn attacks Soldier 2
+  Alder Fenn crits Soldier 2 for 27 (hp 0)
+  Alder Fenn hp 22, Soldier 2 hp 0
+Alder Fenn gains 35 exp (70)
+Soldier 2 falls at 10,3
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1789,7 +1789,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 15/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > move wren 8,5
-wren moves 9,5 -> 8,5
+Wren moves 9,5 -> 8,5
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1811,7 +1811,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 15/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1833,25 +1833,25 @@ C  teodor           Teodor L1 pikeman          9,4    hp 15/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain  done
 > end
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 hits teodor for 5 (hp 10)
-  archer-1 hp 17, teodor hp 10
+Archer attacks Teodor
+  Archer hits Teodor for 5 (hp 10)
+  Archer hp 17, Teodor hp 10
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: move wingrider-1 8,3
-wingrider-1 moves 9,3 -> 8,3
+Wingrider moves 9,3 -> 8,3
 enemy: attack wingrider-1 ottilie
 forecast wingrider-1 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
-wingrider-1 attacks ottilie
-  wingrider-1 hits ottilie for 8 (hp 9)
-  wingrider-1 hp 17, ottilie hp 9
+Wingrider attacks Ottilie
+  Wingrider hits Ottilie for 8 (hp 9)
+  Wingrider hp 17, Ottilie hp 9
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1873,7 +1873,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      8,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > move ottilie 7,4
-ottilie moves 8,4 -> 7,4
+Ottilie moves 8,4 -> 7,4
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1896,11 +1896,11 @@ e  wingrider-1      Wingrider L2 skyrider      8,3    hp 17/17  Water  group for
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > attack ottilie wingrider-1
 forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
-ottilie attacks wingrider-1
-  ottilie hits wingrider-1 for 19 (hp 0)
-  ottilie hp 9, wingrider-1 hp 0
-ottilie gains 35 exp (59)
-wingrider-1 falls at 8,3
+Ottilie attacks Wingrider
+  Ottilie hits Wingrider for 19 (hp 0)
+  Ottilie hp 9, Wingrider hp 0
+Ottilie gains 35 exp (59)
+Wingrider falls at 8,3
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1921,7 +1921,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > move captain 10,2
-captain moves 10,4 -> 10,2 via 10,3
+Alder Fenn moves 10,4 -> 10,2 via 10,3
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1943,10 +1943,10 @@ C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > attack captain archer-1
 forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
-captain attacks archer-1
-  captain hits archer-1 for 11 (hp 6)
-  captain hp 22, archer-1 hp 6
-captain gains 12 exp (82)
+Alder Fenn attacks Archer
+  Alder Fenn hits Archer for 11 (hp 6)
+  Alder Fenn hp 22, Archer hp 6
+Alder Fenn gains 12 exp (82)
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1967,8 +1967,8 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > item teodor 2
-teodor uses Field Dressing (2 left)
-teodor heals 10 (hp 20)
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 20)
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1989,7 +1989,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain  done
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > move wren 10,3
-wren moves 8,5 -> 10,3 via 8,4 9,4 10,4
+Wren moves 8,5 -> 10,3 via 8,4 9,4 10,4
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2010,7 +2010,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2031,21 +2031,21 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road  done
 > end
--- player phase ends, turn 9 --
--- enemy phase, turn 9 --
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 misses teodor
-  archer-1 hp 6, teodor hp 20
+Archer attacks Teodor
+  Archer misses Teodor
+  Archer hp 6, Teodor hp 20
 enemy: attack ford_chief-1 captain
 forecast ford_chief-1 -> captain: dmg 11 hit 43% crit 0%; counter: none
-ford_chief-1 attacks captain
-  ford_chief-1 misses captain
-  ford_chief-1 hp 26, captain hp 22
+Ford Chief attacks Alder Fenn
+  Ford Chief misses Alder Fenn
+  Ford Chief hp 26, Alder Fenn hp 22
 enemy: end
--- enemy phase ends, turn 9 --
--- player phase, turn 10 --
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2067,12 +2067,12 @@ C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack captain archer-1
 forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
-captain attacks archer-1
-  captain hits archer-1 for 11 (hp 0)
-  captain hp 22, archer-1 hp 0
-captain gains 35 exp (17)
-captain reaches level 2: str +1 dex +1 def +1
-archer-1 falls at 9,2
+Alder Fenn attacks Archer
+  Alder Fenn hits Archer for 11 (hp 0)
+  Alder Fenn hp 22, Archer hp 0
+Alder Fenn gains 35 exp (17)
+Alder Fenn reaches level 2: str +1 dex +1 def +1
+Archer falls at 9,2
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2092,7 +2092,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move teodor 10,1
-teodor moves 9,4 -> 10,1 via 10,4 10,3 10,2
+Teodor moves 9,4 -> 10,1 via 10,4 10,3 10,2
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2112,7 +2112,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2132,7 +2132,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move ottilie 8,4
-ottilie moves 7,4 -> 8,4
+Ottilie moves 7,4 -> 8,4
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2152,7 +2152,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2172,16 +2172,16 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > end
--- player phase ends, turn 10 --
--- enemy phase, turn 10 --
+-- Player phase ends, turn 10 --
+-- Enemy phase, turn 10 --
 enemy: attack ford_chief-1 captain
 forecast ford_chief-1 -> captain: dmg 10 hit 43% crit 0%; counter: none
-ford_chief-1 attacks captain
-  ford_chief-1 hits captain for 10 (hp 12)
-  ford_chief-1 hp 26, captain hp 12
+Ford Chief attacks Alder Fenn
+  Ford Chief hits Alder Fenn for 10 (hp 12)
+  Ford Chief hp 26, Alder Fenn hp 12
 enemy: end
--- enemy phase ends, turn 10 --
--- player phase, turn 11 --
+-- Enemy phase ends, turn 10 --
+-- Player phase, turn 11 --
 Saltmarsh Ford (two-weapon boss)  turn 11 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2201,7 +2201,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move captain 10,4
-captain moves 10,2 -> 10,4 via 10,3
+Alder Fenn moves 10,2 -> 10,4 via 10,3
 Saltmarsh Ford (two-weapon boss)  turn 11 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2221,8 +2221,8 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > item captain 2
-captain uses Field Dressing (2 left)
-captain heals 10 (hp 22)
+Alder Fenn uses Field Dressing (2 left)
+Alder Fenn heals 10 (hp 22)
 Saltmarsh Ford (two-weapon boss)  turn 11 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2242,7 +2242,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 11 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2262,20 +2262,20 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > end
--- player phase ends, turn 11 --
--- enemy phase, turn 11 --
+-- Player phase ends, turn 11 --
+-- Enemy phase, turn 11 --
 enemy: attack ford_chief-1 teodor 2
 forecast ford_chief-1 -> teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%
-ford_chief-1 equips Steel Axe
-ford_chief-1 attacks teodor
-  ford_chief-1 misses teodor
-  teodor hits ford_chief-1 for 8 (hp 18)
-  ford_chief-1 hp 18, teodor hp 20
-teodor gains 14 exp (61)
-teodor masters the Pikeman class and keeps Horsebane
+Ford Chief equips Steel Axe
+Ford Chief attacks Teodor
+  Ford Chief misses Teodor
+  Teodor hits Ford Chief for 8 (hp 18)
+  Ford Chief hp 18, Teodor hp 20
+Teodor gains 14 exp (61)
+Teodor masters the Pikeman class and keeps Horsebane
 enemy: end
--- enemy phase ends, turn 11 --
--- player phase, turn 12 --
+-- Enemy phase ends, turn 11 --
+-- Player phase, turn 12 --
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2295,7 +2295,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move ottilie 10,2
-ottilie moves 8,4 -> 10,2 via 9,4 10,4 10,3
+Ottilie moves 8,4 -> 10,2 via 9,4 10,4 10,3
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2316,9 +2316,9 @@ C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack ottilie ford_chief-1
 forecast ottilie -> ford_chief-1: dmg 4 hit 67% crit 3%; counter: none
-ottilie attacks ford_chief-1
-  ottilie misses ford_chief-1
-  ottilie hp 9, ford_chief-1 hp 18
+Ottilie attacks Ford Chief
+  Ottilie misses Ford Chief
+  Ottilie hp 9, Ford Chief hp 18
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2339,11 +2339,11 @@ C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack teodor ford_chief-1
 forecast teodor -> ford_chief-1: dmg 8 hit 58% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
-teodor attacks ford_chief-1
-  teodor misses ford_chief-1
-  ford_chief-1 hits teodor for 16 (hp 4)
-  teodor hp 4, ford_chief-1 hp 18
-teodor reaches rank D in lance
+Teodor attacks Ford Chief
+  Teodor misses Ford Chief
+  Ford Chief hits Teodor for 16 (hp 4)
+  Teodor hp 4, Ford Chief hp 18
+Teodor reaches rank D in lance
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2363,7 +2363,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move wren 11,0
-wren moves 10,3 -> 11,0 via 10,2 10,1 11,1
+Wren moves 10,3 -> 11,0 via 10,2 10,1 11,1
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!B..
@@ -2384,12 +2384,12 @@ C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              11,0   hp 20/20  Plain
 > attack wren ford_chief-1
 forecast wren -> ford_chief-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
-wren attacks ford_chief-1
-  wren hits ford_chief-1 for 6 (hp 12)
-  ford_chief-1 hits wren for 17 (hp 3)
-  wren misses ford_chief-1
-  wren hp 3, ford_chief-1 hp 12
-wren gains 14 exp (26)
+Wren attacks Ford Chief
+  Wren hits Ford Chief for 6 (hp 12)
+  Ford Chief hits Wren for 17 (hp 3)
+  Wren misses Ford Chief
+  Wren hp 3, Ford Chief hp 12
+Wren gains 14 exp (26)
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!B..
@@ -2409,7 +2409,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              11,0   hp 3/20   Plain  done
 > recall 145
-recalled to state 145; 2 charges left
+Recalled to state 145; 2 charges left
 undone: gives back 14 exp, 6 enemy hp; returns 16 hp to teodor, 17 hp to wren
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
@@ -2431,7 +2431,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move captain 11,2
-captain moves 10,4 -> 11,2 via 10,3 10,2
+Alder Fenn moves 10,4 -> 11,2 via 10,3 10,2
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2451,7 +2451,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2471,7 +2471,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move teodor 10,4
-teodor moves 10,1 -> 10,4 via 10,2 10,3
+Teodor moves 10,1 -> 10,4 via 10,2 10,3
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2491,7 +2491,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2511,7 +2511,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move ottilie 8,4
-ottilie moves 8,4 -> 8,4
+Ottilie moves 8,4 -> 8,4
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2531,7 +2531,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2551,7 +2551,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford (two-weapon boss)  turn 12 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2571,14 +2571,14 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road  done
 > end
--- player phase ends, turn 12 --
--- enemy phase, turn 12 --
-ford_chief-1 heals 5 (hp 23)
+-- Player phase ends, turn 12 --
+-- Enemy phase, turn 12 --
+Ford Chief heals 5 (hp 23)
 enemy: wait ford_chief-1
-ford_chief-1 waits
+Ford Chief waits
 enemy: end
--- enemy phase ends, turn 12 --
--- player phase, turn 13 --
+-- Enemy phase ends, turn 12 --
+-- Player phase, turn 13 --
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2598,7 +2598,7 @@ D  ottilie          Ottilie L1 bowman          8,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move ottilie 10,2
-ottilie moves 8,4 -> 10,2 via 9,4 10,4 10,3
+Ottilie moves 8,4 -> 10,2 via 9,4 10,4 10,3
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2619,10 +2619,10 @@ C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack ottilie ford_chief-1
 forecast ottilie -> ford_chief-1: dmg 4 hit 67% crit 3%; counter: none
-ottilie attacks ford_chief-1
-  ottilie hits ford_chief-1 for 4 (hp 19)
-  ottilie hp 9, ford_chief-1 hp 19
-ottilie gains 14 exp (73)
+Ottilie attacks Ford Chief
+  Ottilie hits Ford Chief for 4 (hp 19)
+  Ottilie hp 9, Ford Chief hp 19
+Ottilie gains 14 exp (73)
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2642,7 +2642,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > move wren 9,0
-wren moves 10,3 -> 9,0 via 10,2 10,1 9,1
+Wren moves 10,3 -> 9,0 via 10,2 10,1 9,1
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!...
@@ -2663,12 +2663,12 @@ C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren ford_chief-1
 forecast wren -> ford_chief-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
-wren attacks ford_chief-1
-  wren hits ford_chief-1 for 6 (hp 13)
-  ford_chief-1 hits wren for 17 (hp 3)
-  wren hits ford_chief-1 for 6 (hp 7)
-  wren hp 3, ford_chief-1 hp 7
-wren gains 14 exp (26)
+Wren attacks Ford Chief
+  Wren hits Ford Chief for 6 (hp 13)
+  Ford Chief hits Wren for 17 (hp 3)
+  Wren hits Ford Chief for 6 (hp 7)
+  Wren hp 3, Ford Chief hp 7
+Wren gains 14 exp (26)
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!...
@@ -2688,7 +2688,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > move teodor 10,1
-teodor moves 10,4 -> 10,1 via 10,3 10,2
+Teodor moves 10,4 -> 10,1 via 10,3 10,2
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!...
@@ -2709,11 +2709,11 @@ C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > attack teodor ford_chief-1
 forecast teodor -> ford_chief-1: dmg 8 hit 58% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
-teodor attacks ford_chief-1
-  teodor misses ford_chief-1
-  ford_chief-1 hits teodor for 16 (hp 4)
-  teodor hp 4, ford_chief-1 hp 7
-teodor reaches rank D in lance
+Teodor attacks Ford Chief
+  Teodor misses Ford Chief
+  Ford Chief hits Teodor for 16 (hp 4)
+  Teodor hp 4, Ford Chief hp 7
+Teodor reaches rank D in lance
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!...
@@ -2733,7 +2733,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > move captain 11,0
-captain moves 11,2 -> 11,0 via 11,1
+Alder Fenn moves 11,2 -> 11,0 via 11,1
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!A..
@@ -2754,11 +2754,11 @@ C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > attack captain ford_chief-1
 forecast captain -> ford_chief-1: dmg 8 x2 hit 74% crit 4%; counter with Steel Axe: dmg 15 hit 62% crit 0%
-captain attacks ford_chief-1
-  captain hits ford_chief-1 for 8 (hp 0)
-  captain hp 22, ford_chief-1 hp 0
-captain gains 55 exp (72)
-ford_chief-1 falls at 10,0
+Alder Fenn attacks Ford Chief
+  Alder Fenn hits Ford Chief for 8 (hp 0)
+  Alder Fenn hp 22, Ford Chief hp 0
+Alder Fenn gains 55 exp (72)
+Ford Chief falls at 10,0
 Saltmarsh Ford (two-weapon boss)  turn 13 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...BFA..

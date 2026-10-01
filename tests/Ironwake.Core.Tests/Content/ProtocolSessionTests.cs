@@ -132,7 +132,7 @@ public class ProtocolSessionTests
         var core = Resolver.Apply(session.State, Content(), new Wait("nobody")).Rejection!;
         Assert.Equal(RejectionReason.NoSuchUnit, core.Reason);
         Assert.Equal("{\"ok\":false,\"error\":{\"reason\":\"noSuchUnit\",\"message\":\"" + core.Message + "\"}}", session.Answer("""{"type":"wait","unit":"nobody"}"""));
-        Assert.StartsWith("""{"ok":true,"events":[{"type":"unitWaited","unit":"captain","text":"captain waits"}],"state":{""", session.Answer("""{"type":"wait","unit":"captain"}"""));
+        Assert.StartsWith("""{"ok":true,"events":[{"type":"unitWaited","unit":"captain","text":"Alder Fenn waits"}],"state":{""", session.Answer("""{"type":"wait","unit":"captain"}"""));
     }
 
     [Theory]

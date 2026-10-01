@@ -1,5 +1,5 @@
 Saltmarsh Ford, seed 541, scheme TwoRollAverage
-objective: defeat every enemy by the end of turn 18; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 18. Captain Fenn must survive.
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -24,7 +24,7 @@ B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 7,6
-wren moves 5,8 -> 7,6 via 5,7 5,6 6,6
+Wren moves 5,8 -> 7,6 via 5,7 5,6 6,6
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -49,7 +49,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -74,7 +74,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 8,7
-captain moves 6,8 -> 8,7 via 6,7 7,7
+Alder Fenn moves 6,8 -> 8,7 via 6,7 7,7
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -99,7 +99,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -124,7 +124,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 10,7
-teodor moves 7,8 -> 10,7 via 7,7 8,7 9,7
+Teodor moves 7,8 -> 10,7 via 7,7 8,7 9,7
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -149,7 +149,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -174,7 +174,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 8,8
-ottilie moves 6,9 -> 8,8 via 6,8 7,8
+Ottilie moves 6,9 -> 8,8 via 6,8 7,8
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -199,7 +199,7 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford  turn 1 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -224,19 +224,19 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait wingrider-1
-wingrider-1 waits
+Wingrider waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -261,8 +261,8 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 12,6
-teodor moves 10,7 -> 12,6 via 10,6 11,6
-group fort wakes: proximity
+Teodor moves 10,7 -> 12,6 via 10,6 11,6
+Group fort wakes: proximity
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -286,7 +286,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -310,7 +310,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,7
-wren moves 7,6 -> 10,7 via 8,6 9,6 10,6
+Wren moves 7,6 -> 10,7 via 8,6 9,6 10,6
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -334,7 +334,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -358,7 +358,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 9,8
-captain moves 8,7 -> 9,8 via 9,7
+Alder Fenn moves 8,7 -> 9,8 via 9,7
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -382,7 +382,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -406,7 +406,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 11,8
-ottilie moves 8,8 -> 11,8 via 9,8 10,8
+Ottilie moves 8,8 -> 11,8 via 9,8 10,8
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -430,7 +430,7 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -454,31 +454,31 @@ c  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: move archer-1 10,5
-archer-1 moves 10,1 -> 10,5 via 10,2 10,3 10,4
+Archer moves 10,1 -> 10,5 via 10,2 10,3 10,4
 enemy: attack archer-1 wren
 forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
-archer-1 attacks wren
-  archer-1 misses wren
-  archer-1 hp 17, wren hp 20
+Archer attacks Wren
+  Archer misses Wren
+  Archer hp 17, Wren hp 20
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move soldier-1 10,3
-soldier-1 moves 9,0 -> 10,3 via 10,0 10,1 10,2
+Soldier 1 moves 9,0 -> 10,3 via 10,0 10,1 10,2
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: move wingrider-1 11,7
-wingrider-1 moves 12,2 -> 11,7 via 11,2 11,3 11,4 11,5 11,6
+Wingrider moves 12,2 -> 11,7 via 11,2 11,3 11,4 11,5 11,6
 enemy: attack wingrider-1 ottilie
 forecast wingrider-1 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
-wingrider-1 attacks ottilie
-  wingrider-1 hits ottilie for 8 (hp 9)
-  wingrider-1 hp 17, ottilie hp 9
+Wingrider attacks Ottilie
+  Wingrider hits Ottilie for 8 (hp 9)
+  Wingrider hp 17, Ottilie hp 9
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -502,7 +502,7 @@ c  wingrider-1      Wingrider L2 skyrider      11,7   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 11,9
-ottilie moves 11,8 -> 11,9
+Ottilie moves 11,8 -> 11,9
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -527,11 +527,11 @@ B  wren             Wren L1 cadet              10,7   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie wingrider-1
 forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
-ottilie attacks wingrider-1
-  ottilie hits wingrider-1 for 19 (hp 0)
-  ottilie hp 9, wingrider-1 hp 0
-ottilie gains 35 exp (35)
-wingrider-1 falls at 11,7
+Ottilie attacks Wingrider
+  Ottilie hits Wingrider for 19 (hp 0)
+  Ottilie hp 9, Wingrider hp 0
+Ottilie gains 35 exp (35)
+Wingrider falls at 11,7
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -554,7 +554,7 @@ C  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,7   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,6
-wren moves 10,7 -> 10,6
+Wren moves 10,7 -> 10,6
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -578,9 +578,9 @@ B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren archer-1
 forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
-wren attacks archer-1
-  wren misses archer-1
-  wren hp 20, archer-1 hp 17
+Wren attacks Archer
+  Wren misses Archer
+  Wren hp 20, Archer hp 17
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -603,7 +603,7 @@ C  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 9,5
-captain moves 9,8 -> 9,5 via 9,7 9,6
+Alder Fenn moves 9,8 -> 9,5 via 9,7 9,6
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -627,10 +627,10 @@ B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain archer-1
 forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
-captain attacks archer-1
-  captain hits archer-1 for 11 (hp 6)
-  captain hp 22, archer-1 hp 6
-captain gains 12 exp (12)
+Alder Fenn attacks Archer
+  Alder Fenn hits Archer for 11 (hp 6)
+  Alder Fenn hp 22, Archer hp 6
+Alder Fenn gains 12 exp (12)
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -653,7 +653,7 @@ C  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 11,5
-teodor moves 12,6 -> 11,5 via 12,5
+Teodor moves 12,6 -> 11,5 via 12,5
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -677,11 +677,11 @@ B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor archer-1
 forecast teodor -> archer-1: dmg 12 hit 76% crit 1%; counter: none
-teodor attacks archer-1
-  teodor hits archer-1 for 12 (hp 0)
-  teodor hp 21, archer-1 hp 0
-teodor gains 35 exp (35)
-archer-1 falls at 10,5
+Teodor attacks Archer
+  Teodor hits Archer for 12 (hp 0)
+  Teodor hp 21, Archer hp 0
+Teodor gains 35 exp (35)
+Archer falls at 10,5
 Saltmarsh Ford  turn 3 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -703,22 +703,22 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move soldier-1 11,4
-soldier-1 moves 10,3 -> 11,4 via 10,4
+Soldier 1 moves 10,3 -> 11,4 via 10,4
 enemy: attack soldier-1 teodor
 forecast soldier-1 -> teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
-soldier-1 attacks teodor
-  soldier-1 hits teodor for 8 (hp 13)
-  teodor hits soldier-1 for 10 (hp 10)
-  soldier-1 hp 10, teodor hp 13
-teodor gains 12 exp (47)
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 13)
+  Teodor hits Soldier 1 for 10 (hp 10)
+  Soldier 1 hp 10, Teodor hp 13
+Teodor gains 12 exp (47)
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -741,11 +741,11 @@ B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor soldier-1
 forecast teodor -> soldier-1: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
-teodor attacks soldier-1
-  teodor hits soldier-1 for 10 (hp 0)
-  teodor hp 13, soldier-1 hp 0
-teodor gains 35 exp (82)
-soldier-1 falls at 11,4
+Teodor attacks Soldier 1
+  Teodor hits Soldier 1 for 10 (hp 0)
+  Teodor hp 13, Soldier 1 hp 0
+Teodor gains 35 exp (82)
+Soldier 1 falls at 11,4
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -766,11 +766,11 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,5
-wren moves 10,6 -> 10,5
-event ford
-  brigand-1 arrives at 0,9, group ford, aggressive
-event ford_second
-  soldier-2 arrives at 1,9, group ford, aggressive
+Wren moves 10,6 -> 10,5
+Event ford
+  Brigand arrives at 0,9, group ford, aggressive
+Event ford_second
+  Soldier 2 arrives at 1,9, group ford, aggressive
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -793,7 +793,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -816,7 +816,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 11,7
-ottilie moves 11,9 -> 11,7 via 11,8
+Ottilie moves 11,9 -> 11,7 via 11,8
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -839,8 +839,8 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item ottilie 2
-ottilie uses Field Dressing (2 left)
-ottilie heals 8 (hp 17)
+Ottilie uses Field Dressing (2 left)
+Ottilie heals 8 (hp 17)
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -863,7 +863,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 10,6
-captain moves 9,5 -> 10,6 via 10,5
+Alder Fenn moves 9,5 -> 10,6 via 10,5
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -886,7 +886,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -909,21 +909,21 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move brigand-1 2,7
-brigand-1 moves 0,9 -> 2,7 via 0,8 0,7 1,7
+Brigand moves 0,9 -> 2,7 via 0,8 0,7 1,7
 enemy: wait brigand-1
-brigand-1 waits
+Brigand waits
 enemy: move soldier-2 3,7
-soldier-2 moves 1,9 -> 3,7 via 1,8 1,7 2,7
+Soldier 2 moves 1,9 -> 3,7 via 1,8 1,7 2,7
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -946,8 +946,8 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item teodor 2
-teodor uses Field Dressing (2 left)
-teodor heals 8 (hp 21)
+Teodor uses Field Dressing (2 left)
+Teodor heals 8 (hp 21)
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -970,7 +970,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits and braces
+Wren waits and braces
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -993,7 +993,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits and braces
+Alder Fenn waits and braces
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1016,7 +1016,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits and braces
+Ottilie waits and braces
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1039,21 +1039,21 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move brigand-1 5,6
-brigand-1 moves 2,7 -> 5,6 via 3,7 4,7 4,6
+Brigand moves 2,7 -> 5,6 via 3,7 4,7 4,6
 enemy: wait brigand-1
-brigand-1 waits
+Brigand waits
 enemy: move soldier-2 6,6
-soldier-2 moves 3,7 -> 6,6 via 4,7 4,6 5,6
+Soldier 2 moves 3,7 -> 6,6 via 4,7 4,6 5,6
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1076,7 +1076,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits and braces
+Alder Fenn waits and braces
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1099,7 +1099,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits and braces
+Wren waits and braces
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1122,7 +1122,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait teodor
-teodor waits and braces
+Teodor waits and braces
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1145,7 +1145,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits and braces
+Ottilie waits and braces
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1168,33 +1168,33 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move brigand-1 9,6
-brigand-1 moves 5,6 -> 9,6 via 6,6 7,6 8,6
+Brigand moves 5,6 -> 9,6 via 6,6 7,6 8,6
 enemy: attack brigand-1 captain
 forecast brigand-1 -> captain: dmg 10 hit 23% crit 0%; counter: dmg 11 x2 hit 90% crit 5%
   brace: captain braced: brigand-1 hit -15
-brigand-1 attacks captain
-  brigand-1 misses captain
-  captain misses brigand-1
-  captain misses brigand-1
-  brigand-1 hp 22, captain hp 22
+Brigand attacks Alder Fenn
+  Brigand misses Alder Fenn
+  Alder Fenn misses Brigand
+  Alder Fenn misses Brigand
+  Brigand hp 22, Alder Fenn hp 22
 enemy: move soldier-2 9,5
-soldier-2 moves 6,6 -> 9,5 via 6,5 7,5 8,5
+Soldier 2 moves 6,6 -> 9,5 via 6,5 7,5 8,5
 enemy: attack soldier-2 wren
 forecast soldier-2 -> wren: dmg 9 hit 36% crit 0%; counter: dmg 8 hit 85% crit 3%
   brace: wren braced: soldier-2 hit -15
-soldier-2 attacks wren
-  soldier-2 hits wren for 9 (hp 11)
-  wren hits soldier-2 for 8 (hp 12)
-  soldier-2 hp 12, wren hp 11
-wren gains 12 exp (12)
+Soldier 2 attacks Wren
+  Soldier 2 hits Wren for 9 (hp 11)
+  Wren hits Soldier 2 for 8 (hp 12)
+  Soldier 2 hp 12, Wren hp 11
+Wren gains 12 exp (12)
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1217,7 +1217,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 9,4
-teodor moves 11,5 -> 9,4 via 11,4 10,4
+Teodor moves 11,5 -> 9,4 via 11,4 10,4
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1241,11 +1241,11 @@ B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor soldier-2
 forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
-teodor attacks soldier-2
-  teodor hits soldier-2 for 10 (hp 2)
-  soldier-2 hits teodor for 8 (hp 13)
-  teodor hp 13, soldier-2 hp 2
-teodor gains 12 exp (94)
+Teodor attacks Soldier 2
+  Teodor hits Soldier 2 for 10 (hp 2)
+  Soldier 2 hits Teodor for 8 (hp 13)
+  Teodor hp 13, Soldier 2 hp 2
+Teodor gains 12 exp (94)
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1269,11 +1269,11 @@ B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren soldier-2
 forecast wren -> soldier-2: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
-wren attacks soldier-2
-  wren hits soldier-2 for 8 (hp 0)
-  wren hp 11, soldier-2 hp 0
-wren gains 35 exp (47)
-soldier-2 falls at 9,5
+Wren attacks Soldier 2
+  Wren hits Soldier 2 for 8 (hp 0)
+  Wren hp 11, Soldier 2 hp 0
+Wren gains 35 exp (47)
+Soldier 2 falls at 9,5
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1296,12 +1296,12 @@ B  wren             Wren L1 cadet              10,5   hp 11/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain brigand-1
 forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
-captain attacks brigand-1
-  captain hits brigand-1 for 11 (hp 11)
-  brigand-1 hits captain for 10 (hp 12)
-  captain misses brigand-1
-  captain hp 12, brigand-1 hp 11
-captain gains 12 exp (24)
+Alder Fenn attacks Brigand
+  Alder Fenn hits Brigand for 11 (hp 11)
+  Brigand hits Alder Fenn for 10 (hp 12)
+  Alder Fenn misses Brigand
+  Alder Fenn hp 12, Brigand hp 11
+Alder Fenn gains 12 exp (24)
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1323,7 +1323,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 13/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,8
-ottilie moves 11,7 -> 9,8 via 10,7 9,7
+Ottilie moves 11,7 -> 9,8 via 10,7 9,7
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1346,10 +1346,10 @@ B  wren             Wren L1 cadet              10,5   hp 11/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
-ottilie attacks brigand-1
-  ottilie hits brigand-1 for 8 (hp 3)
-  ottilie hp 17, brigand-1 hp 3
-ottilie gains 12 exp (47)
+Ottilie attacks Brigand
+  Ottilie hits Brigand for 8 (hp 3)
+  Ottilie hp 17, Brigand hp 3
+Ottilie gains 12 exp (47)
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1372,23 +1372,23 @@ B  wren             Wren L1 cadet              10,5   hp 11/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
 lethal if all land: wren (brigand-1 11 against 11 hp)
--- player phase ends, turn 7 --
--- enemy phase, turn 7 --
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: move brigand-1 9,5
-brigand-1 moves 9,6 -> 9,5
+Brigand moves 9,6 -> 9,5
 enemy: attack brigand-1 wren
 forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-1 attacks wren
-  brigand-1 misses wren
-  wren hits brigand-1 for 10 (hp 0)
-  brigand-1 hp 0, wren hp 11
-wren gains 35 exp (82)
-brigand-1 falls at 9,5
+Brigand attacks Wren
+  Brigand misses Wren
+  Wren hits Brigand for 10 (hp 0)
+  Brigand hp 0, Wren hp 11
+Wren gains 35 exp (82)
+Brigand falls at 9,5
 enemy: end
--- enemy phase ends, turn 7 --
--- player phase, turn 8 --
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1409,8 +1409,8 @@ C  teodor           Teodor L1 pikeman          9,4    hp 13/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item captain 2
-captain uses Field Dressing (2 left)
-captain heals 10 (hp 22)
+Alder Fenn uses Field Dressing (2 left)
+Alder Fenn heals 10 (hp 22)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1431,8 +1431,8 @@ C  teodor           Teodor L1 pikeman          9,4    hp 13/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item wren 2
-wren uses Field Dressing (2 left)
-wren heals 9 (hp 20)
+Wren uses Field Dressing (2 left)
+Wren heals 9 (hp 20)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1453,8 +1453,8 @@ C  teodor           Teodor L1 pikeman          9,4    hp 13/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item teodor 2
-teodor uses Field Dressing (1 left)
-teodor heals 8 (hp 21)
+Teodor uses Field Dressing (1 left)
+Teodor heals 8 (hp 21)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1475,7 +1475,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,5
-ottilie moves 9,8 -> 9,5 via 9,7 9,6
+Ottilie moves 9,8 -> 9,5 via 9,7 9,6
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1496,7 +1496,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1517,13 +1517,13 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
 enemy: wait bandit_leader-1
-bandit_leader-1 waits and braces
+Bandit Leader waits and braces
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1544,7 +1544,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 10,2
-teodor moves 9,4 -> 10,2 via 10,4 10,3
+Teodor moves 9,4 -> 10,2 via 10,4 10,3
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1565,7 +1565,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait teodor
-teodor waits
+Teodor waits
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1586,7 +1586,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 10,4
-captain moves 10,6 -> 10,4 via 10,5
+Alder Fenn moves 10,6 -> 10,4 via 10,5
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1607,7 +1607,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1628,7 +1628,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,4
-ottilie moves 9,5 -> 9,4
+Ottilie moves 9,5 -> 9,4
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1649,7 +1649,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1670,7 +1670,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 11,4
-wren moves 10,5 -> 11,4 via 10,4
+Wren moves 10,5 -> 11,4 via 10,4
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1691,7 +1691,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1712,17 +1712,17 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 9 --
--- enemy phase, turn 9 --
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
 enemy: attack bandit_leader-1 teodor 2
 forecast bandit_leader-1 -> teodor: dmg 11 hit 58% crit 1%; counter: none
-bandit_leader-1 equips Toll Axe
-bandit_leader-1 attacks teodor
-  bandit_leader-1 misses teodor
-  bandit_leader-1 hp 26, teodor hp 21
+Bandit Leader equips Toll Axe
+Bandit Leader attacks Teodor
+  Bandit Leader misses Teodor
+  Bandit Leader hp 26, Teodor hp 21
 enemy: end
--- enemy phase ends, turn 9 --
--- player phase, turn 10 --
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1743,7 +1743,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 11,0
-teodor moves 10,2 -> 11,0 via 10,1 11,1
+Teodor moves 10,2 -> 11,0 via 10,1 11,1
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1765,10 +1765,10 @@ B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor bandit_leader-1
 forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%
-teodor attacks bandit_leader-1
-  teodor misses bandit_leader-1
-  bandit_leader-1 hits teodor for 11 (hp 10)
-  teodor hp 10, bandit_leader-1 hp 26
+Teodor attacks Bandit Leader
+  Teodor misses Bandit Leader
+  Bandit Leader hits Teodor for 11 (hp 10)
+  Teodor hp 10, Bandit Leader hp 26
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1789,7 +1789,7 @@ C  teodor           Teodor L1 pikeman          11,0   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 10,1
-captain moves 10,4 -> 10,1 via 10,3 10,2
+Alder Fenn moves 10,4 -> 10,1 via 10,3 10,2
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1811,11 +1811,11 @@ B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain bandit_leader-1
 forecast captain -> bandit_leader-1: dmg 7 hit 67% crit 3%; counter with Toll Axe: dmg 11 hit 43% crit 0%
-captain attacks bandit_leader-1
-  captain crits bandit_leader-1 for 21 (hp 5)
-  bandit_leader-1 hits captain for 11 (hp 11)
-  captain hp 11, bandit_leader-1 hp 5
-captain gains 14 exp (38)
+Alder Fenn attacks Bandit Leader
+  Alder Fenn crits Bandit Leader for 21 (hp 5)
+  Bandit Leader hits Alder Fenn for 11 (hp 11)
+  Alder Fenn hp 11, Bandit Leader hp 5
+Alder Fenn gains 14 exp (38)
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1836,7 +1836,7 @@ C  teodor           Teodor L1 pikeman          11,0   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 10,2
-ottilie moves 9,4 -> 10,2 via 10,4 10,3
+Ottilie moves 9,4 -> 10,2 via 10,4 10,3
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1858,11 +1858,11 @@ B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie bandit_leader-1
 forecast ottilie -> bandit_leader-1: dmg 4 hit 60% crit 3%; counter: dmg 13 hit 52% crit 0%
-ottilie attacks bandit_leader-1
-  ottilie hits bandit_leader-1 for 4 (hp 1)
-  bandit_leader-1 hits ottilie for 13 (hp 4)
-  ottilie hp 4, bandit_leader-1 hp 1
-ottilie gains 14 exp (61)
+Ottilie attacks Bandit Leader
+  Ottilie hits Bandit Leader for 4 (hp 1)
+  Bandit Leader hits Ottilie for 13 (hp 4)
+  Ottilie hp 4, Bandit Leader hp 1
+Ottilie gains 14 exp (61)
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!C..
@@ -1883,7 +1883,7 @@ C  teodor           Teodor L1 pikeman          11,0   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > recall 110
-recalled to state 110; 2 charges left
+Recalled to state 110; 2 charges left
 undone: gives back 28 exp, 25 enemy hp; returns 11 hp to captain, 13 hp to ottilie, 11 hp to teodor
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
@@ -1906,7 +1906,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait teodor
-teodor waits and braces
+Teodor waits and braces
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -1927,7 +1927,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move captain 11,2
-captain moves 10,4 -> 11,2 via 10,3 10,2
+Alder Fenn moves 10,4 -> 11,2 via 10,3 10,2
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -1948,7 +1948,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits
+Alder Fenn waits
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -1969,7 +1969,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,2
-ottilie moves 9,4 -> 9,2 via 10,4 10,3 10,2
+Ottilie moves 9,4 -> 9,2 via 10,4 10,3 10,2
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -1990,7 +1990,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits
+Ottilie waits
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2011,7 +2011,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,3
-wren moves 11,4 -> 10,3 via 10,4
+Wren moves 11,4 -> 10,3 via 10,4
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2032,7 +2032,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait wren
-wren waits
+Wren waits
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2053,17 +2053,17 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 10 --
--- enemy phase, turn 10 --
+-- Player phase ends, turn 10 --
+-- Enemy phase, turn 10 --
 enemy: attack bandit_leader-1 teodor
 forecast bandit_leader-1 -> teodor: dmg 11 hit 31% crit 1%; counter: none
   brace: teodor braced: bandit_leader-1 hit -15
-bandit_leader-1 attacks teodor
-  bandit_leader-1 misses teodor
-  bandit_leader-1 hp 26, teodor hp 21
+Bandit Leader attacks Teodor
+  Bandit Leader misses Teodor
+  Bandit Leader hp 26, Teodor hp 21
 enemy: end
--- enemy phase ends, turn 10 --
--- player phase, turn 11 --
+-- Enemy phase ends, turn 10 --
+-- Player phase, turn 11 --
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2084,7 +2084,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,1
-ottilie moves 9,2 -> 9,1
+Ottilie moves 9,2 -> 9,1
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2106,11 +2106,11 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie bandit_leader-1
 forecast ottilie -> bandit_leader-1: dmg 4 hit 60% crit 3%; counter: dmg 13 hit 52% crit 0%
-ottilie attacks bandit_leader-1
-  ottilie hits bandit_leader-1 for 4 (hp 22)
-  bandit_leader-1 hits ottilie for 13 (hp 4)
-  ottilie hp 4, bandit_leader-1 hp 22
-ottilie gains 14 exp (61)
+Ottilie attacks Bandit Leader
+  Ottilie hits Bandit Leader for 4 (hp 22)
+  Bandit Leader hits Ottilie for 13 (hp 4)
+  Ottilie hp 4, Bandit Leader hp 22
+Ottilie gains 14 exp (61)
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...
@@ -2131,7 +2131,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 9,0
-teodor moves 10,2 -> 9,0 via 10,1 9,1
+Teodor moves 10,2 -> 9,0 via 10,1 9,1
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...C!...
@@ -2153,10 +2153,10 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor bandit_leader-1
 forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%
-teodor attacks bandit_leader-1
-  teodor misses bandit_leader-1
-  bandit_leader-1 misses teodor
-  teodor hp 21, bandit_leader-1 hp 22
+Teodor attacks Bandit Leader
+  Teodor misses Bandit Leader
+  Bandit Leader misses Teodor
+  Teodor hp 21, Bandit Leader hp 22
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...C!...
@@ -2177,7 +2177,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,1
-wren moves 10,3 -> 10,1 via 10,2
+Wren moves 10,3 -> 10,1 via 10,2
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...C!...
@@ -2199,10 +2199,10 @@ B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 6 hit 63% crit 2%; counter with Toll Axe: dmg 12 hit 45% crit 0%
-wren attacks bandit_leader-1
-  wren misses bandit_leader-1
-  bandit_leader-1 misses wren
-  wren hp 20, bandit_leader-1 hp 22
+Wren attacks Bandit Leader
+  Wren misses Bandit Leader
+  Bandit Leader misses Wren
+  Wren hp 20, Bandit Leader hp 22
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...C!...
@@ -2223,7 +2223,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > recall 120
-recalled to state 120; 1 charges left
+Recalled to state 120; 1 charges left
 undone: gives back 14 exp, 4 enemy hp; returns 13 hp to ottilie
 the rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
@@ -2246,7 +2246,7 @@ C  teodor           Teodor L1 pikeman          10,2   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 9,0
-teodor moves 10,2 -> 9,0 via 10,1 9,1
+Teodor moves 10,2 -> 9,0 via 10,1 9,1
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2268,10 +2268,10 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor bandit_leader-1
 forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%
-teodor attacks bandit_leader-1
-  teodor misses bandit_leader-1
-  bandit_leader-1 misses teodor
-  teodor hp 21, bandit_leader-1 hp 26
+Teodor attacks Bandit Leader
+  Teodor misses Bandit Leader
+  Bandit Leader misses Teodor
+  Teodor hp 21, Bandit Leader hp 26
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2292,7 +2292,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,1
-wren moves 10,3 -> 10,1 via 10,2
+Wren moves 10,3 -> 10,1 via 10,2
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2314,10 +2314,10 @@ B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 6 hit 63% crit 2%; counter with Toll Axe: dmg 12 hit 45% crit 0%
-wren attacks bandit_leader-1
-  wren misses bandit_leader-1
-  bandit_leader-1 misses wren
-  wren hp 20, bandit_leader-1 hp 26
+Wren attacks Bandit Leader
+  Wren misses Bandit Leader
+  Bandit Leader misses Wren
+  Wren hp 20, Bandit Leader hp 26
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2338,7 +2338,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait ottilie
-ottilie waits and braces
+Ottilie waits and braces
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2359,7 +2359,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > wait captain
-captain waits and braces
+Alder Fenn waits and braces
 Saltmarsh Ford  turn 11 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2380,18 +2380,18 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
--- player phase ends, turn 11 --
--- enemy phase, turn 11 --
+-- Player phase ends, turn 11 --
+-- Enemy phase, turn 11 --
 enemy: attack bandit_leader-1 teodor 2
 forecast bandit_leader-1 -> teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%
-bandit_leader-1 equips Steel Axe
-bandit_leader-1 attacks teodor
-  bandit_leader-1 hits teodor for 16 (hp 5)
-  teodor misses bandit_leader-1
-  bandit_leader-1 hp 26, teodor hp 5
+Bandit Leader equips Steel Axe
+Bandit Leader attacks Teodor
+  Bandit Leader hits Teodor for 16 (hp 5)
+  Teodor misses Bandit Leader
+  Bandit Leader hp 26, Teodor hp 5
 enemy: end
--- enemy phase ends, turn 11 --
--- player phase, turn 12 --
+-- Enemy phase ends, turn 11 --
+-- Player phase, turn 12 --
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^...C!...
@@ -2412,7 +2412,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 5/21   Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 8,2
-teodor moves 9,0 -> 8,2 via 9,1 9,2
+Teodor moves 9,0 -> 8,2 via 9,1 9,2
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^....!...
@@ -2433,8 +2433,8 @@ C  teodor           Teodor L1 pikeman          8,2    hp 5/21   Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > item teodor 2
-teodor uses Field Dressing (0 left)
-teodor heals 10 (hp 15)
+Teodor uses Field Dressing (0 left)
+Teodor heals 10 (hp 15)
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^....!...
@@ -2455,7 +2455,7 @@ C  teodor           Teodor L1 pikeman          8,2    hp 15/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move ottilie 9,1
-ottilie moves 9,2 -> 9,1
+Ottilie moves 9,2 -> 9,1
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^....!...
@@ -2477,10 +2477,10 @@ B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie bandit_leader-1
 forecast ottilie -> bandit_leader-1: dmg 4 hit 67% crit 3%; counter: none
-ottilie attacks bandit_leader-1
-  ottilie hits bandit_leader-1 for 4 (hp 22)
-  ottilie hp 17, bandit_leader-1 hp 22
-ottilie gains 14 exp (61)
+Ottilie attacks Bandit Leader
+  Ottilie hits Bandit Leader for 4 (hp 22)
+  Ottilie hp 17, Bandit Leader hp 22
+Ottilie gains 14 exp (61)
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^....!...
@@ -2502,14 +2502,14 @@ B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
 forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
-wren attacks bandit_leader-1
-  wren crits bandit_leader-1 for 18 (hp 4)
-  bandit_leader-1 hits wren for 17 (hp 3)
-  wren hits bandit_leader-1 for 6 (hp 0)
-  wren hp 3, bandit_leader-1 hp 0
-wren gains 60 exp (42)
-wren reaches level 2: dex +1 def +1 res +1
-bandit_leader-1 falls at 10,0
+Wren attacks Bandit Leader
+  Wren crits Bandit Leader for 18 (hp 4)
+  Bandit Leader hits Wren for 17 (hp 3)
+  Wren hits Bandit Leader for 6 (hp 0)
+  Wren hp 3, Bandit Leader hp 0
+Wren gains 60 exp (42)
+Wren reaches level 2: dex +1 def +1 res +1
+Bandit Leader falls at 10,0
 Saltmarsh Ford  turn 12 of 18  player phase  rout  recall 1
    01234567890123
  0 ....^^....F...

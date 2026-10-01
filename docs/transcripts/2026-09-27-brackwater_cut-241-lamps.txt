@@ -1,5 +1,5 @@
 Brackwater Cut, seed 241, scheme TwoRollAverage
-objective: the captain, Alder Fenn (A), must exit from an exit tile (>) by the end of turn 8; a unit that starts its turn on an exit may leave; anyone still on the board is left behind; lost if the captain falls
+Objective: Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -25,7 +25,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 10,1
-rook moves 8,2 -> 10,1 via 8,1 9,1
+Rook moves 8,2 -> 10,1 via 8,1 9,1
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -52,10 +52,10 @@ dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
 forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
-rook attacks archer-2
-  rook hits archer-2 for 7 (hp 10)
-  rook hp 17, archer-2 hp 10
-rook gains 14 exp (14)
+Rook attacks Archer 2
+  Rook hits Archer 2 for 7 (hp 10)
+  Rook hp 17, Archer 2 hp 10
+Rook gains 14 exp (14)
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -81,7 +81,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 10,2
-pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
+Pell moves 7,3 -> 10,2 via 7,2 8,2 9,2
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -108,11 +108,11 @@ dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
 forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
-pell attacks archer-2
-  pell hits archer-2 for 10 (hp 0)
-  pell hp 16, archer-2 hp 0
-pell gains 40 exp (40)
-archer-2 falls at 11,1
+Pell attacks Archer 2
+  Pell hits Archer 2 for 10 (hp 0)
+  Pell hp 16, Archer 2 hp 0
+Pell gains 40 exp (40)
+Archer 2 falls at 11,1
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -137,7 +137,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 13,3
-dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
+Dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -162,7 +162,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait dunstan
-dunstan waits
+Dunstan waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -187,7 +187,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 11,3
-captain moves 8,4 -> 11,3 via 8,3 9,3 10,3
+Alder Fenn moves 8,4 -> 11,3 via 8,3 9,3 10,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -212,7 +212,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait captain
-captain waits
+Alder Fenn waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -237,7 +237,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 10,3
-wren moves 8,5 -> 10,3 via 8,4 8,3 9,3
+Wren moves 8,5 -> 10,3 via 8,4 8,3 9,3
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -262,7 +262,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait wren
-wren waits
+Wren waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -287,12 +287,12 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: something in the dark acts (x15)
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -317,7 +317,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 14,2
-captain moves 11,3 -> 14,2 via 12,3 12,2 13,2
+Alder Fenn moves 11,3 -> 14,2 via 12,3 12,2 13,2
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -342,7 +342,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait captain
-captain waits
+Alder Fenn waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -367,7 +367,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 13,4
-wren moves 10,3 -> 13,4 via 11,3 12,3 13,3
+Wren moves 10,3 -> 13,4 via 11,3 12,3 13,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -392,7 +392,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait wren
-wren waits
+Wren waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -417,7 +417,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 12,2
-pell moves 10,2 -> 12,2 via 10,3 11,3 12,3
+Pell moves 10,2 -> 12,2 via 10,3 11,3 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -442,7 +442,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait pell
-pell waits
+Pell waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -467,7 +467,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 13,2
-rook moves 10,1 -> 13,2 via 11,1 12,1 13,1
+Rook moves 10,1 -> 13,2 via 11,1 12,1 13,1
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -492,7 +492,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait rook
-rook waits
+Rook waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -517,7 +517,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 11,3
-dunstan moves 13,3 -> 11,3 via 12,3
+Dunstan moves 13,3 -> 11,3 via 12,3
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -542,7 +542,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait dunstan
-dunstan waits
+Dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -567,22 +567,22 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: something in the dark acts (x3)
 enemy: move brigand-1 8,3
-brigand-1 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+Brigand 1 moves 4,3 -> 8,3 via 5,3 6,3 7,3
 enemy: wait brigand-1
-brigand-1 waits
+Brigand 1 waits
 enemy: something in the dark acts (x4)
 enemy: move rider-1 9,3
-rider-1 moves 3,3 -> 9,3 via 4,3 5,3 6,3 7,3 8,3
+Rider 1 moves 3,3 -> 9,3 via 4,3 5,3 6,3 7,3 8,3
 enemy: wait rider-1
-rider-1 waits
+Rider 1 waits
 enemy: something in the dark acts (x4)
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -609,7 +609,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 16,0
-captain moves 14,2 -> 16,0 via 14,1 14,0 15,0
+Alder Fenn moves 14,2 -> 16,0 via 14,1 14,0 15,0
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -636,7 +636,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait captain
-captain waits
+Alder Fenn waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -663,7 +663,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 15,1
-pell moves 12,2 -> 15,1 via 13,2 13,1 14,1
+Pell moves 12,2 -> 15,1 via 13,2 13,1 14,1
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -690,7 +690,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait pell
-pell waits
+Pell waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -717,7 +717,7 @@ D  wren             Wren L1 cadet              13,4   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 15,2
-wren moves 13,4 -> 15,2 via 13,3 13,2 14,2
+Wren moves 13,4 -> 15,2 via 13,3 13,2 14,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -744,7 +744,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait wren
-wren waits
+Wren waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...A...
@@ -771,7 +771,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 17,0
-rook moves 13,2 -> 17,0 via 13,1 13,0 14,0 15,0 16,0
+Rook moves 13,2 -> 17,0 via 13,1 13,0 14,0 15,0 16,0
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...AC..
@@ -798,7 +798,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait rook
-rook waits
+Rook waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...AC..
@@ -825,7 +825,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait dunstan
-dunstan waits
+Dunstan waits
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...AC..
@@ -852,29 +852,29 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: move archer-1 9,2
-archer-1 moves 6,3 -> 9,2 via 6,2 7,2 8,2
+Archer 1 moves 6,3 -> 9,2 via 6,2 7,2 8,2
 enemy: wait archer-1
-archer-1 waits
+Archer 1 waits
 enemy: something in the dark acts
 enemy: move brigand-1 10,3
-brigand-1 moves 8,3 -> 10,3 via 9,3
+Brigand 1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
 forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
-brigand-1 attacks dunstan
-  brigand-1 hits dunstan for 9 (hp 14)
-  dunstan hits brigand-1 for 11 (hp 12)
-  brigand-1 hp 12, dunstan hp 14
-dunstan gains 14 exp (14)
+Brigand 1 attacks Dunstan
+  Brigand 1 hits Dunstan for 9 (hp 14)
+  Dunstan hits Brigand 1 for 11 (hp 12)
+  Brigand 1 hp 12, Dunstan hp 14
+Dunstan gains 14 exp (14)
 enemy: something in the dark acts (x3)
 enemy: wait rider-1
-rider-1 waits
+Rider 1 waits
 enemy: something in the dark acts (x3)
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~...AC..
@@ -901,7 +901,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 19,0
-captain moves 16,0 -> 19,0 via 17,0 18,0
+Alder Fenn moves 16,0 -> 19,0 via 17,0 18,0
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -928,7 +928,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait captain
-captain waits
+Alder Fenn waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -955,7 +955,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 19,1
-pell moves 15,1 -> 19,1 via 16,1 17,1 18,1
+Pell moves 15,1 -> 19,1 via 16,1 17,1 18,1
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -982,7 +982,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait pell
-pell waits
+Pell waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -1009,7 +1009,7 @@ D  wren             Wren L1 cadet              15,2   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 18,1
-wren moves 15,2 -> 18,1 via 15,1 16,1 17,1
+Wren moves 15,2 -> 18,1 via 15,1 16,1 17,1
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -1036,7 +1036,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait wren
-wren waits
+Wren waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~....C.A
@@ -1063,7 +1063,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 19,2
-rook moves 17,0 -> 19,2 via 18,0 19,0 19,1
+Rook moves 17,0 -> 19,2 via 18,0 19,0 19,1
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1090,7 +1090,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait rook
-rook waits
+Rook waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1117,7 +1117,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 12,3
-dunstan moves 11,3 -> 12,3
+Dunstan moves 11,3 -> 12,3
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1143,7 +1143,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait dunstan
-dunstan waits
+Dunstan waits
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1169,22 +1169,22 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: something in the dark acts (x2)
 enemy: move brigand-1 11,3
-brigand-1 moves 10,3 -> 11,3
+Brigand 1 moves 10,3 -> 11,3
 enemy: attack brigand-1 dunstan
 forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
-brigand-1 attacks dunstan
-  brigand-1 hits dunstan for 9 (hp 5)
-  dunstan hits brigand-1 for 11 (hp 1)
-  brigand-1 hp 1, dunstan hp 5
-dunstan gains 14 exp (28)
+Brigand 1 attacks Dunstan
+  Brigand 1 hits Dunstan for 9 (hp 5)
+  Dunstan hits Brigand 1 for 11 (hp 1)
+  Brigand 1 hp 1, Dunstan hp 5
+Dunstan gains 14 exp (28)
 enemy: something in the dark acts (x7)
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1212,11 +1212,11 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 > attack dunstan brigand-1
 forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
   counter: lethal to dunstan (9 against 5 hp)
-dunstan attacks brigand-1
-  dunstan hits brigand-1 for 11 (hp 0)
-  dunstan hp 5, brigand-1 hp 0
-dunstan gains 40 exp (68)
-brigand-1 falls at 11,3
+Dunstan attacks Brigand 1
+  Dunstan hits Brigand 1 for 11 (hp 0)
+  Dunstan hp 5, Brigand 1 hp 0
+Dunstan gains 40 exp (68)
+Brigand 1 falls at 11,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~......A
@@ -1241,8 +1241,8 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 19,3
-captain moves 19,0 -> 19,3 via 19,1 19,2
-group bank wakes: proximity; its lamps are lit (shieldbearer-1 17,5, soldier-1 17,6, brawler-1 17,7)
+Alder Fenn moves 19,0 -> 19,3 via 19,1 19,2
+Group bank wakes: proximity; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1290,7 +1290,7 @@ threat on wren at 19,4 (Plain):
   brawler-1: cannot see you (dark)
   and whatever is in the dark (?), unpriced
 > wait captain
-captain waits
+Alder Fenn waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1318,7 +1318,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 19,4
-wren moves 18,1 -> 19,4 via 19,1 19,2 19,3
+Wren moves 18,1 -> 19,4 via 19,1 19,2 19,3
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1346,7 +1346,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait wren
-wren waits
+Wren waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1374,7 +1374,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 18,2
-pell moves 19,1 -> 18,2 via 18,1
+Pell moves 19,1 -> 18,2 via 18,1
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1402,7 +1402,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait pell
-pell waits
+Pell waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1430,7 +1430,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 19,2
-rook moves 19,2 -> 19,2
+Rook moves 19,2 -> 19,2
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1458,7 +1458,7 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > wait rook
-rook waits
+Rook waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1486,46 +1486,46 @@ D  wren             Wren L1 cadet              19,4   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: something in the dark acts (x2)
 enemy: move brawler-1 19,8
-brawler-1 moves 17,7 -> 19,8 via 18,7 19,7
+Brawler moves 17,7 -> 19,8 via 18,7 19,7
 enemy: wait brawler-1
-brawler-1 waits
+Brawler waits
 enemy: something in the dark acts (x2)
 enemy: move hexer-1 11,3
-hexer-1 moves 8,3 -> 11,3 via 9,3 10,3
+Hexer moves 8,3 -> 11,3 via 9,3 10,3
 enemy: attack hexer-1 dunstan
 forecast hexer-1 -> dunstan: dmg 12 hit 99% crit 1%; counter: dmg 12 hit 81% crit 0%
-hexer-1 attacks dunstan
-  hexer-1 hits dunstan for 12 (hp 0)
-  hexer-1 hp 16, dunstan hp 0
-dunstan falls at 12,3
+Hexer attacks Dunstan
+  Hexer hits Dunstan for 12 (hp 0)
+  Hexer hp 16, Dunstan hp 0
+Dunstan falls at 12,3
 enemy: something in the dark acts (x4)
 enemy: move shieldbearer-1 18,4
-shieldbearer-1 moves 17,5 -> 18,4 via 17,4
+Shieldbearer moves 17,5 -> 18,4 via 17,4
 enemy: attack shieldbearer-1 wren
 forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
-shieldbearer-1 attacks wren
-  shieldbearer-1 misses wren
-  wren hits shieldbearer-1 for 3 (hp 22)
-  wren hits shieldbearer-1 for 3 (hp 19)
-  shieldbearer-1 hp 19, wren hp 20
-wren gains 14 exp (14)
+Shieldbearer attacks Wren
+  Shieldbearer misses Wren
+  Wren hits Shieldbearer for 3 (hp 22)
+  Wren hits Shieldbearer for 3 (hp 19)
+  Shieldbearer hp 19, Wren hp 20
+Wren gains 14 exp (14)
 enemy: move soldier-1 19,5
-soldier-1 moves 17,6 -> 19,5 via 17,5 18,5
+Soldier moves 17,6 -> 19,5 via 17,5 18,5
 enemy: attack soldier-1 wren
 forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
-soldier-1 attacks wren
-  soldier-1 hits wren for 9 (hp 11)
-  wren crits soldier-1 for 24 (hp 0)
-  soldier-1 hp 0, wren hp 11
-wren gains 40 exp (54)
-soldier-1 falls at 19,5
+Soldier attacks Wren
+  Soldier hits Wren for 9 (hp 11)
+  Wren crits Soldier for 24 (hp 0)
+  Soldier hp 0, Wren hp 11
+Wren gains 40 exp (54)
+Soldier falls at 19,5
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1551,10 +1551,10 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell shieldbearer-1
 forecast pell -> shieldbearer-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-pell attacks shieldbearer-1
-  pell hits shieldbearer-1 for 13 (hp 6)
-  pell hp 16, shieldbearer-1 hp 6
-pell gains 14 exp (54)
+Pell attacks Shieldbearer
+  Pell hits Shieldbearer for 13 (hp 6)
+  Pell hp 16, Shieldbearer hp 6
+Pell gains 14 exp (54)
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1579,7 +1579,7 @@ D  wren             Wren L1 cadet              19,4   hp 11/20  Plain
 dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > exit wren
-wren leaves through the exit at 19,4
+Wren leaves through the exit at 19,4
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1603,7 +1603,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > move rook 19,4
-rook moves 19,2 -> 19,4 via 19,3
+Rook moves 19,2 -> 19,4 via 19,3
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1628,7 +1628,7 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > wait rook
-rook waits
+Rook waits
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1653,43 +1653,43 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: something in the dark acts (x2)
 enemy: move brawler-1 19,5
-brawler-1 moves 19,8 -> 19,5 via 19,7 19,6
+Brawler moves 19,8 -> 19,5 via 19,7 19,6
 enemy: attack brawler-1 rook
 forecast brawler-1 -> rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
-brawler-1 attacks rook
-  brawler-1 hits rook for 10 (hp 7)
-  brawler-1 hits rook for 10 (hp 0)
-  brawler-1 hp 23, rook hp 0
-rook falls at 19,4
+Brawler attacks Rook
+  Brawler hits Rook for 10 (hp 7)
+  Brawler hits Rook for 10 (hp 0)
+  Brawler hp 23, Rook hp 0
+Rook falls at 19,4
 enemy: something in the dark acts (x4)
 enemy: move rider-1 17,2
-rider-1 moves 15,3 -> 17,2 via 15,2 16,2
+Rider 1 moves 15,3 -> 17,2 via 15,2 16,2
 enemy: attack rider-1 pell
 forecast rider-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
-rider-1 attacks pell
-  rider-1 misses pell
-  pell hits rider-1 for 12 (hp 9)
-  rider-1 hp 9, pell hp 16
-pell gains 14 exp (68)
+Rider 1 attacks Pell
+  Rider 1 misses Pell
+  Pell hits Rider 1 for 12 (hp 9)
+  Rider 1 hp 9, Pell hp 16
+Pell gains 14 exp (68)
 enemy: something in the dark acts (x2)
 enemy: move shieldbearer-1 18,3
-shieldbearer-1 moves 18,4 -> 18,3
+Shieldbearer moves 18,4 -> 18,3
 enemy: attack shieldbearer-1 pell
 forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
-shieldbearer-1 attacks pell
-  shieldbearer-1 hits pell for 10 (hp 6)
-  pell hits shieldbearer-1 for 13 (hp 0)
-  shieldbearer-1 hp 0, pell hp 6
-pell gains 40 exp (8)
-pell reaches level 2: res +1
-shieldbearer-1 falls at 18,3
+Shieldbearer attacks Pell
+  Shieldbearer hits Pell for 10 (hp 6)
+  Pell hits Shieldbearer for 13 (hp 0)
+  Shieldbearer hp 0, Pell hp 6
+Pell gains 40 exp (8)
+Pell reaches level 2: res +1
+Shieldbearer falls at 18,3
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1715,11 +1715,11 @@ escaped: wren
 > attack pell rider-1
 forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 11 hit 80% crit 0%
   counter: lethal to pell (11 against 6 hp)
-pell attacks rider-1
-  pell hits rider-1 for 12 (hp 0)
-  pell hp 6, rider-1 hp 0
-pell gains 35 exp (43)
-rider-1 falls at 17,2
+Pell attacks Rider 1
+  Pell hits Rider 1 for 12 (hp 0)
+  Pell hp 6, Rider 1 hp 0
+Pell gains 35 exp (43)
+Rider 1 falls at 17,2
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1742,8 +1742,8 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > exit captain
-captain leaves through the exit at 19,3
-pell is left behind at 18,2
+Alder Fenn leaves through the exit at 19,3
+Pell is left behind at 18,2
 Brackwater Cut  turn 7 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......

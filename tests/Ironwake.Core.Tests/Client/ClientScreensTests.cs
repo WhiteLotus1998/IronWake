@@ -184,10 +184,8 @@ public class ClientScreensTests
         var card = EndCard.Of(state, client.Content);
 
         var verdict = Ironwake.Core.Objective.Verdict(state, client.Content)!;
-        Assert.StartsWith("lost because ", verdict, StringComparison.Ordinal);
-        var why = verdict["lost because ".Length..];
-        Assert.Equal(char.ToUpperInvariant(why[0]) + why[1..] + ".", card.Line);
-        Assert.StartsWith("The captain, ", card.Line, StringComparison.Ordinal);
+        Assert.Equal("Lost because the captain fell.", verdict);
+        Assert.Equal("The captain fell.", card.Line);
     }
 
     [Fact]

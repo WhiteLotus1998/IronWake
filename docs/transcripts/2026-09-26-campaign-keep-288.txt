@@ -17,7 +17,7 @@ trials in place of a seal (one attempt per unit and class before each map): Bulw
 deploys to Raid on Ironwake: captain, wren, teodor, ottilie, pell, dunstan
 > march
 map 1 of 2: Raid on Ironwake, seed 288
-objective: defeat every enemy by the end of turn 7; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 7. Captain Fenn must survive.
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -43,7 +43,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > move dunstan 10,7
-dunstan moves 14,7 -> 10,7 via 13,7 12,7 11,7
+Dunstan moves 14,7 -> 10,7 via 13,7 12,7 11,7
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -69,7 +69,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > wait dunstan
-dunstan waits
+Dunstan waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -95,7 +95,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > move teodor 11,8
-teodor moves 12,7 -> 11,8 via 11,7
+Teodor moves 12,7 -> 11,8 via 11,7
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -121,7 +121,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > wait teodor
-teodor waits
+Teodor waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -147,7 +147,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > move wren 10,4
-wren moves 12,4 -> 10,4 via 11,4
+Wren moves 12,4 -> 10,4 via 11,4
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -173,7 +173,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -199,7 +199,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > move captain 11,3
-captain moves 13,5 -> 11,3 via 13,4 13,3 12,3
+Alder Fenn moves 13,5 -> 11,3 via 13,4 13,3 12,3
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -225,7 +225,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -251,7 +251,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > move pell 11,4
-pell moves 14,4 -> 11,4 via 13,4 12,4
+Pell moves 14,4 -> 11,4 via 13,4 12,4
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -277,7 +277,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > wait pell
-pell waits
+Pell waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -303,7 +303,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > move ottilie 11,6
-ottilie moves 13,6 -> 11,6 via 12,6
+Ottilie moves 13,6 -> 11,6 via 12,6
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -329,7 +329,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -355,44 +355,44 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
-event wave1
-  brigand-2 arrives at 0,4, group wave, aggressive
-event wave2
-  hexer-1 arrives at 0,8, group wave, aggressive
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+Event wave1
+  Brigand 2 arrives at 0,4, group wave, aggressive
+Event wave2
+  Hexer arrives at 0,8, group wave, aggressive
 enemy: move archer-1 7,4
-archer-1 moves 4,5 -> 7,4 via 5,5 5,4 6,4
+Archer moves 4,5 -> 7,4 via 5,5 5,4 6,4
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: move brigand-1 9,7
-brigand-1 moves 6,7 -> 9,7 via 7,7 8,7
+Brigand 1 moves 6,7 -> 9,7 via 7,7 8,7
 enemy: attack brigand-1 dunstan
 forecast brigand-1 -> dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
-brigand-1 attacks dunstan
-  brigand-1 hits dunstan for 8 (hp 15)
-  dunstan hits brigand-1 for 11 (hp 11)
-  brigand-1 hp 11, dunstan hp 15
-dunstan gains 12 exp (12)
+Brigand 1 attacks Dunstan
+  Brigand 1 hits Dunstan for 8 (hp 15)
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hp 11, Dunstan hp 15
+Dunstan gains 12 exp (12)
 enemy: move brigand-2 3,4
-brigand-2 moves 0,4 -> 3,4 via 1,4 2,4
+Brigand 2 moves 0,4 -> 3,4 via 1,4 2,4
 enemy: wait brigand-2
-brigand-2 waits
+Brigand 2 waits
 enemy: move hexer-1 4,8
-hexer-1 moves 0,8 -> 4,8 via 1,8 2,8 3,8
+Hexer moves 0,8 -> 4,8 via 1,8 2,8 3,8
 enemy: wait hexer-1
-hexer-1 waits
+Hexer waits
 enemy: move soldier-1 9,4
-soldier-1 moves 6,4 -> 9,4 via 7,4 8,4
+Soldier 1 moves 6,4 -> 9,4 via 7,4 8,4
 enemy: attack soldier-1 wren
 forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
-soldier-1 attacks wren
-  soldier-1 misses wren
-  wren misses soldier-1
-  soldier-1 hp 20, wren hp 20
+Soldier 1 attacks Wren
+  Soldier 1 misses Wren
+  Wren misses Soldier 1
+  Soldier 1 hp 20, Wren hp 20
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -420,7 +420,7 @@ a  soldier-1        Soldier L2 pikeman         9,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > move ottilie 11,7
-ottilie moves 11,6 -> 11,7
+Ottilie moves 11,6 -> 11,7
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -449,10 +449,10 @@ C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
-ottilie attacks brigand-1
-  ottilie hits brigand-1 for 8 (hp 3)
-  ottilie hp 17, brigand-1 hp 3
-ottilie gains 12 exp (12)
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 8 (hp 3)
+  Ottilie hp 17, Brigand 1 hp 3
+Ottilie gains 12 exp (12)
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -481,10 +481,10 @@ C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > attack dunstan brigand-1
 forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
-dunstan attacks brigand-1
-  dunstan misses brigand-1
-  brigand-1 hits dunstan for 8 (hp 7)
-  dunstan hp 7, brigand-1 hp 3
+Dunstan attacks Brigand 1
+  Dunstan misses Brigand 1
+  Brigand 1 hits Dunstan for 8 (hp 7)
+  Dunstan hp 7, Brigand 1 hp 3
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -513,11 +513,11 @@ C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > attack pell soldier-1
 forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-1
-  pell crits soldier-1 for 36 (hp 0)
-  pell hp 16, soldier-1 hp 0
-pell gains 35 exp (35)
-soldier-1 falls at 9,4
+Pell attacks Soldier 1
+  Pell crits Soldier 1 for 36 (hp 0)
+  Pell hp 16, Soldier 1 hp 0
+Pell gains 35 exp (35)
+Soldier 1 falls at 9,4
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -544,7 +544,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > move wren 9,6
-wren moves 10,4 -> 9,6 via 9,4 9,5
+Wren moves 10,4 -> 9,6 via 9,4 9,5
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -572,11 +572,11 @@ C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
 > attack wren brigand-1
 forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
-wren attacks brigand-1
-  wren hits brigand-1 for 10 (hp 0)
-  wren hp 20, brigand-1 hp 0
-wren gains 35 exp (35)
-brigand-1 falls at 9,7
+Wren attacks Brigand 1
+  Wren hits Brigand 1 for 10 (hp 0)
+  Wren hp 20, Brigand 1 hp 0
+Wren gains 35 exp (35)
+Brigand 1 falls at 9,7
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -602,7 +602,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > move captain 10,4
-captain moves 11,3 -> 10,4 via 10,3
+Alder Fenn moves 11,3 -> 10,4 via 10,3
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -628,7 +628,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -654,7 +654,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > move teodor 10,8
-teodor moves 11,8 -> 10,8
+Teodor moves 11,8 -> 10,8
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -680,7 +680,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          10,8   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Raid on Ironwake  turn 2 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -706,41 +706,41 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          10,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
-event wave3
-  soldier-2 arrives at 0,3, group wave, aggressive
-event wave4
-  brigand-3 arrives at 0,7, group wave, aggressive
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Event wave3
+  Soldier 2 arrives at 0,3, group wave, aggressive
+Event wave4
+  Brigand 3 arrives at 0,7, group wave, aggressive
 enemy: move archer-1 7,6
-archer-1 moves 7,4 -> 7,6 via 7,5
+Archer moves 7,4 -> 7,6 via 7,5
 enemy: attack archer-1 wren
 forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
-archer-1 attacks wren
-  archer-1 misses wren
-  archer-1 hp 17, wren hp 20
+Archer attacks Wren
+  Archer misses Wren
+  Archer hp 17, Wren hp 20
 enemy: move brigand-2 6,4
-brigand-2 moves 3,4 -> 6,4 via 4,4 5,4
+Brigand 2 moves 3,4 -> 6,4 via 4,4 5,4
 enemy: wait brigand-2
-brigand-2 waits
+Brigand 2 waits
 enemy: move brigand-3 3,6
-brigand-3 moves 0,7 -> 3,6 via 0,6 1,6 2,6
+Brigand 3 moves 0,7 -> 3,6 via 0,6 1,6 2,6
 enemy: wait brigand-3
-brigand-3 waits
+Brigand 3 waits
 enemy: move hexer-1 8,8
-hexer-1 moves 4,8 -> 8,8 via 5,8 6,8 7,8
+Hexer moves 4,8 -> 8,8 via 5,8 6,8 7,8
 enemy: attack hexer-1 teodor
 forecast hexer-1 -> teodor: dmg 11 hit 99% crit 1%; counter: none
-hexer-1 attacks teodor
-  hexer-1 hits teodor for 11 (hp 10)
-  hexer-1 hp 16, teodor hp 10
+Hexer attacks Teodor
+  Hexer hits Teodor for 11 (hp 10)
+  Hexer hp 16, Teodor hp 10
 enemy: move soldier-2 4,3
-soldier-2 moves 0,3 -> 4,3 via 1,3 2,3 3,3
+Soldier 2 moves 0,3 -> 4,3 via 1,3 2,3 3,3
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -768,7 +768,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
 > move ottilie 9,7
-ottilie moves 11,7 -> 9,7 via 10,7
+Ottilie moves 11,7 -> 9,7 via 10,7
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -797,13 +797,13 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
 > attack ottilie hexer-1
 forecast ottilie -> hexer-1: dmg 9 x2 hit 89% crit 4%; counter: dmg 10 hit 98% crit 0%
-ottilie attacks hexer-1
-  ottilie hits hexer-1 for 9 (hp 7)
-  hexer-1 hits ottilie for 10 (hp 7)
-  ottilie hits hexer-1 for 9 (hp 0)
-  ottilie hp 7, hexer-1 hp 0
-ottilie gains 35 exp (47)
-hexer-1 falls at 8,8
+Ottilie attacks Hexer
+  Ottilie hits Hexer for 9 (hp 7)
+  Hexer hits Ottilie for 10 (hp 7)
+  Ottilie hits Hexer for 9 (hp 0)
+  Ottilie hp 7, Hexer hp 0
+Ottilie gains 35 exp (47)
+Hexer falls at 8,8
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -830,7 +830,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain
 > move wren 8,6
-wren moves 9,6 -> 8,6
+Wren moves 9,6 -> 8,6
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -858,9 +858,9 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain
 > attack wren archer-1
 forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
-wren attacks archer-1
-  wren misses archer-1
-  wren hp 20, archer-1 hp 17
+Wren attacks Archer
+  Wren misses Archer
+  Wren hp 20, Archer hp 17
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -887,7 +887,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > move pell 9,6
-pell moves 11,4 -> 9,6 via 10,4 9,4 9,5
+Pell moves 11,4 -> 9,6 via 10,4 9,4 9,5
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -915,11 +915,11 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > attack pell archer-1
 forecast pell -> archer-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 8 hit 85% crit 2%
-pell attacks archer-1
-  pell crits archer-1 for 36 (hp 0)
-  pell hp 16, archer-1 hp 0
-pell gains 35 exp (70)
-archer-1 falls at 7,6
+Pell attacks Archer
+  Pell crits Archer for 36 (hp 0)
+  Pell hp 16, Archer hp 0
+Pell gains 35 exp (70)
+Archer falls at 7,6
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -945,7 +945,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > move captain 9,5
-captain moves 10,4 -> 9,5 via 9,4
+Alder Fenn moves 10,4 -> 9,5 via 9,4
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -971,7 +971,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -997,7 +997,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1023,7 +1023,7 @@ f  soldier-2        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Raid on Ironwake  turn 3 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1050,35 +1050,35 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > end
 lethal if all land: wren (brigand-2 11, brigand-3 11 against 20 hp)
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: move brigand-2 8,5
-brigand-2 moves 6,4 -> 8,5 via 7,4 8,4
+Brigand 2 moves 6,4 -> 8,5 via 7,4 8,4
 enemy: attack brigand-2 wren
 forecast brigand-2 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-2 attacks wren
-  brigand-2 misses wren
-  wren hits brigand-2 for 10 (hp 12)
-  wren hits brigand-2 for 10 (hp 2)
-  brigand-2 hp 2, wren hp 20
-wren gains 12 exp (47)
+Brigand 2 attacks Wren
+  Brigand 2 misses Wren
+  Wren hits Brigand 2 for 10 (hp 12)
+  Wren hits Brigand 2 for 10 (hp 2)
+  Brigand 2 hp 2, Wren hp 20
+Wren gains 12 exp (47)
 enemy: move brigand-3 7,6
-brigand-3 moves 3,6 -> 7,6 via 4,6 5,6 6,6
+Brigand 3 moves 3,6 -> 7,6 via 4,6 5,6 6,6
 enemy: attack brigand-3 wren
 forecast brigand-3 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-3 attacks wren
-  brigand-3 hits wren for 11 (hp 9)
-  wren hits brigand-3 for 10 (hp 12)
-  wren hits brigand-3 for 10 (hp 2)
-  brigand-3 hp 2, wren hp 9
-wren gains 12 exp (59)
+Brigand 3 attacks Wren
+  Brigand 3 hits Wren for 11 (hp 9)
+  Wren hits Brigand 3 for 10 (hp 12)
+  Wren hits Brigand 3 for 10 (hp 2)
+  Brigand 3 hp 2, Wren hp 9
+Wren gains 12 exp (59)
 enemy: move soldier-2 8,3
-soldier-2 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+Soldier 2 moves 4,3 -> 8,3 via 5,3 6,3 7,3
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1105,11 +1105,11 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > attack captain brigand-2
 forecast captain -> brigand-2: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
-captain attacks brigand-2
-  captain hits brigand-2 for 11 (hp 0)
-  captain hp 22, brigand-2 hp 0
-captain gains 35 exp (35)
-brigand-2 falls at 8,5
+Alder Fenn attacks Brigand 2
+  Alder Fenn hits Brigand 2 for 11 (hp 0)
+  Alder Fenn hp 22, Brigand 2 hp 0
+Alder Fenn gains 35 exp (35)
+Brigand 2 falls at 8,5
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1136,11 +1136,11 @@ B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > attack wren brigand-3
 forecast wren -> brigand-3: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
   counter: lethal to wren (11 against 9 hp)
-wren attacks brigand-3
-  wren hits brigand-3 for 10 (hp 0)
-  wren hp 9, brigand-3 hp 0
-wren gains 35 exp (94)
-brigand-3 falls at 7,6
+Wren attacks Brigand 3
+  Wren hits Brigand 3 for 10 (hp 0)
+  Wren hp 9, Brigand 3 hp 0
+Wren gains 35 exp (94)
+Brigand 3 falls at 7,6
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1164,7 +1164,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move pell 9,4
-pell moves 9,6 -> 9,4 via 9,5
+Pell moves 9,6 -> 9,4 via 9,5
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1189,10 +1189,10 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack pell soldier-2
 forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-2
-  pell hits soldier-2 for 12 (hp 8)
-  pell hp 16, soldier-2 hp 8
-pell gains 12 exp (82)
+Pell attacks Soldier 2
+  Pell hits Soldier 2 for 12 (hp 8)
+  Pell hp 16, Soldier 2 hp 8
+Pell gains 12 exp (82)
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1216,7 +1216,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 8/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move ottilie 8,5
-ottilie moves 9,7 -> 8,5 via 9,6 9,5
+Ottilie moves 9,7 -> 8,5 via 9,6 9,5
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1241,10 +1241,10 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack ottilie soldier-2
 forecast ottilie -> soldier-2: dmg 6 hit 82% crit 4%; counter: none
-ottilie attacks soldier-2
-  ottilie hits soldier-2 for 6 (hp 2)
-  ottilie hp 7, soldier-2 hp 2
-ottilie gains 12 exp (59)
+Ottilie attacks Soldier 2
+  Ottilie hits Soldier 2 for 6 (hp 2)
+  Ottilie hp 7, Soldier 2 hp 2
+Ottilie gains 12 exp (59)
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1268,7 +1268,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move dunstan 9,6
-dunstan moves 10,7 -> 9,6 via 9,7
+Dunstan moves 10,7 -> 9,6 via 9,7
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1292,7 +1292,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1316,7 +1316,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move teodor 9,7
-teodor moves 10,8 -> 9,7 via 10,7
+Teodor moves 10,8 -> 9,7 via 10,7
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1340,7 +1340,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1366,19 +1366,19 @@ B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > end
 lethal if all land: ottilie (soldier-2 10 against 7 hp)
 lethal if all land: wren (soldier-2 9 against 9 hp)
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: move soldier-2 8,4
-soldier-2 moves 8,3 -> 8,4
+Soldier 2 moves 8,3 -> 8,4
 enemy: attack soldier-2 ottilie
 forecast soldier-2 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
-soldier-2 attacks ottilie
-  soldier-2 hits ottilie for 10 (hp 0)
-  soldier-2 hp 2, ottilie hp 0
-ottilie falls at 8,5
+Soldier 2 attacks Ottilie
+  Soldier 2 hits Ottilie for 10 (hp 0)
+  Soldier 2 hp 2, Ottilie hp 0
+Ottilie falls at 8,5
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Raid on Ironwake  turn 5 of 7  player phase  rout  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1401,7 +1401,7 @@ f  soldier-2        Soldier L2 pikeman         8,4    hp 2/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          9,7    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > recall 64
-recalled to state 64; 2 charges left
+Recalled to state 64; 2 charges left
 undone: gives back 2 kills (brigand-2, brigand-3), 82 exp, 22 enemy hp; returns ottilie alive at 7 hp
 the rolls do not change: the same attack will roll the same
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
@@ -1431,11 +1431,11 @@ B  wren             Wren L1 cadet              8,6    hp 9/20   Plain
 > attack wren brigand-3
 forecast wren -> brigand-3: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
   counter: lethal to wren (11 against 9 hp)
-wren attacks brigand-3
-  wren hits brigand-3 for 10 (hp 0)
-  wren hp 9, brigand-3 hp 0
-wren gains 35 exp (94)
-brigand-3 falls at 7,6
+Wren attacks Brigand 3
+  Wren hits Brigand 3 for 10 (hp 0)
+  Wren hp 9, Brigand 3 hp 0
+Wren gains 35 exp (94)
+Brigand 3 falls at 7,6
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1460,7 +1460,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move ottilie 8,7
-ottilie moves 9,7 -> 8,7
+Ottilie moves 9,7 -> 8,7
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1486,11 +1486,11 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack ottilie brigand-2
 forecast ottilie -> brigand-2: dmg 8 hit 86% crit 5%; counter: none
-ottilie attacks brigand-2
-  ottilie hits brigand-2 for 8 (hp 0)
-  ottilie hp 7, brigand-2 hp 0
-ottilie gains 35 exp (82)
-brigand-2 falls at 8,5
+Ottilie attacks Brigand 2
+  Ottilie hits Brigand 2 for 8 (hp 0)
+  Ottilie hp 7, Brigand 2 hp 0
+Ottilie gains 35 exp (82)
+Brigand 2 falls at 8,5
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1514,7 +1514,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move pell 9,4
-pell moves 9,6 -> 9,4 via 9,5
+Pell moves 9,6 -> 9,4 via 9,5
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1539,10 +1539,10 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack pell soldier-2
 forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-2
-  pell hits soldier-2 for 12 (hp 8)
-  pell hp 16, soldier-2 hp 8
-pell gains 12 exp (82)
+Pell attacks Soldier 2
+  Pell hits Soldier 2 for 12 (hp 8)
+  Pell hp 16, Soldier 2 hp 8
+Pell gains 12 exp (82)
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1566,7 +1566,7 @@ f  soldier-2        Soldier L2 pikeman         8,3    hp 8/20   Plain  group wav
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > move captain 8,4
-captain moves 9,5 -> 8,4 via 9,4
+Alder Fenn moves 9,5 -> 8,4 via 9,4
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1591,11 +1591,11 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > attack captain soldier-2
 forecast captain -> soldier-2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
-captain attacks soldier-2
-  captain hits soldier-2 for 9 (hp 0)
-  captain hp 22, soldier-2 hp 0
-captain gains 35 exp (35)
-soldier-2 falls at 8,3
+Alder Fenn attacks Soldier 2
+  Alder Fenn hits Soldier 2 for 9 (hp 0)
+  Alder Fenn hp 22, Soldier 2 hp 0
+Alder Fenn gains 35 exp (35)
+Soldier 2 falls at 8,3
 Raid on Ironwake  turn 4 of 7  player phase  rout  recall 2
    0123456789012345
  0 ....^^....#.....
@@ -1663,7 +1663,7 @@ keep: Ironwake Keep; built: wall 10,8; the purse holds 1100
     ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 > march
 map 2 of 2: Ironwake Keep, seed 289
-objective: hold until the end of turn 8; lost if the captain falls
+Objective: Hold out until the end of turn 8. Captain Fenn must survive.
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1691,7 +1691,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > move wren 11,3
-wren moves 12,4 -> 11,3 via 12,3
+Wren moves 12,4 -> 11,3 via 12,3
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1719,7 +1719,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1747,7 +1747,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > move teodor 11,4
-teodor moves 12,7 -> 11,4 via 12,6 12,5 12,4
+Teodor moves 12,7 -> 11,4 via 12,6 12,5 12,4
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1775,7 +1775,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1803,7 +1803,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > move dunstan 11,7
-dunstan moves 14,7 -> 11,7 via 13,7 12,7
+Dunstan moves 14,7 -> 11,7 via 13,7 12,7
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1831,7 +1831,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1859,7 +1859,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > move pell 12,4
-pell moves 14,4 -> 12,4 via 13,4
+Pell moves 14,4 -> 12,4 via 13,4
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1887,7 +1887,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait pell
-pell waits
+Pell waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1915,7 +1915,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > move ottilie 12,3
-ottilie moves 13,6 -> 12,3 via 13,5 13,4 13,3
+Ottilie moves 13,6 -> 12,3 via 13,5 13,4 13,3
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1943,7 +1943,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1971,7 +1971,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > move captain 12,6
-captain moves 13,5 -> 12,6 via 12,5
+Alder Fenn moves 13,5 -> 12,6 via 12,5
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -1999,7 +1999,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2027,41 +2027,41 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: move archer-1 7,4
-archer-1 moves 4,5 -> 7,4 via 5,5 5,4 6,4
+Archer 1 moves 4,5 -> 7,4 via 5,5 5,4 6,4
 enemy: wait archer-1
-archer-1 waits
+Archer 1 waits
 enemy: move brigand-1 10,7
-brigand-1 moves 6,7 -> 10,7 via 7,7 8,7 9,7
+Brigand 1 moves 6,7 -> 10,7 via 7,7 8,7 9,7
 enemy: attack brigand-1 dunstan
 forecast brigand-1 -> dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
-brigand-1 attacks dunstan
-  brigand-1 misses dunstan
-  dunstan hits brigand-1 for 11 (hp 11)
-  brigand-1 hp 11, dunstan hp 23
-dunstan gains 12 exp (24)
+Brigand 1 attacks Dunstan
+  Brigand 1 misses Dunstan
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hp 11, Dunstan hp 23
+Dunstan gains 12 exp (24)
 enemy: move brigand-2 7,3
-brigand-2 moves 3,3 -> 7,3 via 4,3 5,3 6,3
+Brigand 2 moves 3,3 -> 7,3 via 4,3 5,3 6,3
 enemy: wait brigand-2
-brigand-2 waits
+Brigand 2 waits
 enemy: move soldier-1 10,4
-soldier-1 moves 6,4 -> 10,4 via 7,4 8,4 9,4
+Soldier 1 moves 6,4 -> 10,4 via 7,4 8,4 9,4
 enemy: attack soldier-1 teodor
 forecast soldier-1 -> teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
-soldier-1 attacks teodor
-  soldier-1 hits teodor for 8 (hp 13)
-  teodor hits soldier-1 for 10 (hp 10)
-  soldier-1 hp 10, teodor hp 13
-teodor gains 12 exp (12)
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 13)
+  Teodor hits Soldier 1 for 10 (hp 10)
+  Soldier 1 hp 10, Teodor hp 13
+Teodor gains 12 exp (12)
 enemy: move soldier-2 3,4
-soldier-2 moves 3,8 -> 3,4 via 3,7 3,6 3,5
+Soldier 2 moves 3,8 -> 3,4 via 3,7 3,6 3,5
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2090,12 +2090,12 @@ C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack pell soldier-1
 forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-1
-  pell hits soldier-1 for 12 (hp 0)
-  pell hp 16, soldier-1 hp 0
-pell gains 35 exp (17)
-pell reaches level 2: lck +1
-soldier-1 falls at 10,4
+Pell attacks Soldier 1
+  Pell hits Soldier 1 for 12 (hp 0)
+  Pell hp 16, Soldier 1 hp 0
+Pell gains 35 exp (17)
+Pell reaches level 2: lck +1
+Soldier 1 falls at 10,4
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2122,7 +2122,7 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > move ottilie 11,6
-ottilie moves 12,3 -> 11,6 via 11,3 11,4 11,5
+Ottilie moves 12,3 -> 11,6 via 11,3 11,4 11,5
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2150,10 +2150,10 @@ C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack ottilie brigand-1
 forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
-ottilie attacks brigand-1
-  ottilie hits brigand-1 for 8 (hp 3)
-  ottilie hp 17, brigand-1 hp 3
-ottilie gains 12 exp (94)
+Ottilie attacks Brigand 1
+  Ottilie hits Brigand 1 for 8 (hp 3)
+  Ottilie hp 17, Brigand 1 hp 3
+Ottilie gains 12 exp (94)
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2181,11 +2181,11 @@ C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack dunstan brigand-1
 forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
-dunstan attacks brigand-1
-  dunstan hits brigand-1 for 11 (hp 0)
-  dunstan hp 23, brigand-1 hp 0
-dunstan gains 35 exp (59)
-brigand-1 falls at 10,7
+Dunstan attacks Brigand 1
+  Dunstan hits Brigand 1 for 11 (hp 0)
+  Dunstan hp 23, Brigand 1 hp 0
+Dunstan gains 35 exp (59)
+Brigand 1 falls at 10,7
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2211,8 +2211,8 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 13/21  Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > item teodor 2
-teodor uses Field Dressing (2 left)
-teodor heals 8 (hp 21)
+Teodor uses Field Dressing (2 left)
+Teodor heals 8 (hp 21)
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2238,7 +2238,7 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2264,7 +2264,7 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 2 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2290,43 +2290,43 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
-event wave1
-  brigand-3 arrives at 0,4, group wave, aggressive
-event wave2
-  archer-2 arrives at 0,7, group wave, aggressive
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Event wave1
+  Brigand 3 arrives at 0,4, group wave, aggressive
+Event wave2
+  Archer 2 arrives at 0,7, group wave, aggressive
 enemy: move archer-1 9,4
-archer-1 moves 7,4 -> 9,4 via 8,4
+Archer 1 moves 7,4 -> 9,4 via 8,4
 enemy: attack archer-1 teodor
 forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-1 attacks teodor
-  archer-1 hits teodor for 5 (hp 16)
-  archer-1 hp 17, teodor hp 16
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 16)
+  Archer 1 hp 17, Teodor hp 16
 enemy: move archer-2 3,7
-archer-2 moves 0,7 -> 3,7 via 1,7 2,7
+Archer 2 moves 0,7 -> 3,7 via 1,7 2,7
 enemy: wait archer-2
-archer-2 waits
+Archer 2 waits
 enemy: move brigand-2 10,4
-brigand-2 moves 7,3 -> 10,4 via 8,3 9,3 10,3
+Brigand 2 moves 7,3 -> 10,4 via 8,3 9,3 10,3
 enemy: attack brigand-2 teodor
 forecast brigand-2 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
-brigand-2 attacks teodor
-  brigand-2 hits teodor for 10 (hp 6)
-  teodor hits brigand-2 for 12 (hp 10)
-  brigand-2 hp 10, teodor hp 6
-teodor gains 12 exp (24)
+Brigand 2 attacks Teodor
+  Brigand 2 hits Teodor for 10 (hp 6)
+  Teodor hits Brigand 2 for 12 (hp 10)
+  Brigand 2 hp 10, Teodor hp 6
+Teodor gains 12 exp (24)
 enemy: move brigand-3 3,3
-brigand-3 moves 0,4 -> 3,3 via 0,3 1,3 2,3
+Brigand 3 moves 0,4 -> 3,3 via 0,3 1,3 2,3
 enemy: wait brigand-3
-brigand-3 waits
+Brigand 3 waits
 enemy: move soldier-2 6,3
-soldier-2 moves 3,4 -> 6,3 via 3,3 4,3 5,3
+Soldier 2 moves 3,4 -> 6,3 via 3,3 4,3 5,3
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2355,11 +2355,11 @@ C  teodor           Teodor L1 pikeman          11,4   hp 6/21   Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > attack pell brigand-2
 forecast pell -> brigand-2 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-pell attacks brigand-2
-  pell hits brigand-2 for 13 (hp 0)
-  pell hp 16, brigand-2 hp 0
-pell gains 30 exp (47)
-brigand-2 falls at 10,4
+Pell attacks Brigand 2
+  Pell hits Brigand 2 for 13 (hp 0)
+  Pell hp 16, Brigand 2 hp 0
+Pell gains 30 exp (47)
+Brigand 2 falls at 10,4
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2386,7 +2386,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 6/21   Plain
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain
 > move wren 10,4
-wren moves 11,3 -> 10,4 via 10,3
+Wren moves 11,3 -> 10,4 via 10,3
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2414,11 +2414,11 @@ C  teodor           Teodor L1 pikeman          11,4   hp 6/21   Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 > attack wren archer-1
 forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
-wren attacks archer-1
-  wren hits archer-1 for 10 (hp 7)
-  wren hp 20, archer-1 hp 7
-wren gains 12 exp (6)
-wren reaches level 2: spd +1 cha +1
+Wren attacks Archer 1
+  Wren hits Archer 1 for 10 (hp 7)
+  Wren hp 20, Archer 1 hp 7
+Wren gains 12 exp (6)
+Wren reaches level 2: spd +1 cha +1
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2445,7 +2445,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 6/21   Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > move teodor 12,5
-teodor moves 11,4 -> 12,5 via 12,4
+Teodor moves 11,4 -> 12,5 via 12,4
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2472,8 +2472,8 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 6/21   Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > item teodor 2
-teodor uses Field Dressing (1 left)
-teodor heals 10 (hp 16)
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 16)
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2500,7 +2500,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > move ottilie 11,4
-ottilie moves 11,6 -> 11,4 via 11,5
+Ottilie moves 11,6 -> 11,4 via 11,5
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2528,12 +2528,12 @@ C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > attack ottilie archer-1
 forecast ottilie -> archer-1: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 76% crit 1%
-ottilie attacks archer-1
-  ottilie hits archer-1 for 8 (hp 0)
-  ottilie hp 17, archer-1 hp 0
-ottilie gains 35 exp (29)
-ottilie reaches level 2: hp +1 dex +1 spd +1
-archer-1 falls at 9,4
+Ottilie attacks Archer 1
+  Ottilie hits Archer 1 for 8 (hp 0)
+  Ottilie hp 17, Archer 1 hp 0
+Ottilie gains 35 exp (29)
+Ottilie reaches level 2: hp +1 dex +1 spd +1
+Archer 1 falls at 9,4
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2559,7 +2559,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > move captain 11,3
-captain moves 12,6 -> 11,3 via 12,5 12,4 12,3
+Alder Fenn moves 12,6 -> 11,3 via 12,5 12,4 12,3
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2585,7 +2585,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2611,7 +2611,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 3 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2637,40 +2637,40 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
-event wave3
-  soldier-3 arrives at 0,3, group wave, aggressive
-event wave4
-  hexer-1 arrives at 0,8, group wave, aggressive
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Event wave3
+  Soldier 3 arrives at 0,3, group wave, aggressive
+Event wave4
+  Hexer 1 arrives at 0,8, group wave, aggressive
 enemy: move archer-2 6,7
-archer-2 moves 3,7 -> 6,7 via 4,7 5,7
+Archer 2 moves 3,7 -> 6,7 via 4,7 5,7
 enemy: wait archer-2
-archer-2 waits
+Archer 2 waits
 enemy: move brigand-3 7,3
-brigand-3 moves 3,3 -> 7,3 via 4,3 5,3 6,3
+Brigand 3 moves 3,3 -> 7,3 via 4,3 5,3 6,3
 enemy: wait brigand-3
-brigand-3 waits
+Brigand 3 waits
 enemy: move hexer-1 4,8
-hexer-1 moves 0,8 -> 4,8 via 1,8 2,8 3,8
+Hexer 1 moves 0,8 -> 4,8 via 1,8 2,8 3,8
 enemy: wait hexer-1
-hexer-1 waits
+Hexer 1 waits
 enemy: move soldier-2 10,3
-soldier-2 moves 6,3 -> 10,3 via 7,3 8,3 9,3
+Soldier 2 moves 6,3 -> 10,3 via 7,3 8,3 9,3
 enemy: attack soldier-2 captain
 forecast soldier-2 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-2 attacks captain
-  soldier-2 misses captain
-  captain hits soldier-2 for 9 (hp 11)
-  soldier-2 hp 11, captain hp 22
-captain gains 12 exp (47)
+Soldier 2 attacks Alder Fenn
+  Soldier 2 misses Alder Fenn
+  Alder Fenn hits Soldier 2 for 9 (hp 11)
+  Soldier 2 hp 11, Alder Fenn hp 22
+Alder Fenn gains 12 exp (47)
 enemy: move soldier-3 4,3
-soldier-3 moves 0,3 -> 4,3 via 1,3 2,3 3,3
+Soldier 3 moves 0,3 -> 4,3 via 1,3 2,3 3,3
 enemy: wait soldier-3
-soldier-3 waits
+Soldier 3 waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2698,7 +2698,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > move pell 12,3
-pell moves 12,4 -> 12,3
+Pell moves 12,4 -> 12,3
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2727,11 +2727,11 @@ C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > attack pell soldier-2
 forecast pell -> soldier-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-2
-  pell hits soldier-2 for 12 (hp 0)
-  pell hp 16, soldier-2 hp 0
-pell gains 30 exp (77)
-soldier-2 falls at 10,3
+Pell attacks Soldier 2
+  Pell hits Soldier 2 for 12 (hp 0)
+  Pell hp 16, Soldier 2 hp 0
+Pell gains 30 exp (77)
+Soldier 2 falls at 10,3
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2758,7 +2758,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2785,7 +2785,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2812,7 +2812,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2839,7 +2839,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > move teodor 12,6
-teodor moves 12,5 -> 12,6
+Teodor moves 12,5 -> 12,6
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2866,7 +2866,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2893,7 +2893,7 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 4 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2920,43 +2920,43 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
-event wave5
-  brigand-4 arrives at 0,4, group wave, aggressive
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Event wave5
+  Brigand 4 arrives at 0,4, group wave, aggressive
 enemy: move archer-2 9,7
-archer-2 moves 6,7 -> 9,7 via 7,7 8,7
+Archer 2 moves 6,7 -> 9,7 via 7,7 8,7
 enemy: attack archer-2 dunstan
 forecast archer-2 -> dunstan: dmg 3 hit 87% crit 3%; counter: none
-archer-2 attacks dunstan
-  archer-2 hits dunstan for 3 (hp 20)
-  archer-2 hp 17, dunstan hp 20
+Archer 2 attacks Dunstan
+  Archer 2 hits Dunstan for 3 (hp 20)
+  Archer 2 hp 17, Dunstan hp 20
 enemy: move brigand-3 10,3
-brigand-3 moves 7,3 -> 10,3 via 8,3 9,3
+Brigand 3 moves 7,3 -> 10,3 via 8,3 9,3
 enemy: attack brigand-3 wren
 forecast brigand-3 -> wren: dmg 11 hit 47% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-3 attacks wren
-  brigand-3 misses wren
-  wren crits brigand-3 for 30 (hp 0)
-  brigand-3 hp 0, wren hp 20
-wren gains 30 exp (36)
-wren reaches rank D in sword
-brigand-3 falls at 10,3
+Brigand 3 attacks Wren
+  Brigand 3 misses Wren
+  Wren crits Brigand 3 for 30 (hp 0)
+  Brigand 3 hp 0, Wren hp 20
+Wren gains 30 exp (36)
+Wren reaches rank D in sword
+Brigand 3 falls at 10,3
 enemy: move brigand-4 3,4
-brigand-4 moves 0,4 -> 3,4 via 1,4 2,4
+Brigand 4 moves 0,4 -> 3,4 via 1,4 2,4
 enemy: wait brigand-4
-brigand-4 waits
+Brigand 4 waits
 enemy: move hexer-1 7,7
-hexer-1 moves 4,8 -> 7,7 via 5,8 5,7 6,7
+Hexer 1 moves 4,8 -> 7,7 via 5,8 5,7 6,7
 enemy: wait hexer-1
-hexer-1 waits
+Hexer 1 waits
 enemy: move soldier-3 8,3
-soldier-3 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+Soldier 3 moves 4,3 -> 8,3 via 5,3 6,3 7,3
 enemy: wait soldier-3
-soldier-3 waits
+Soldier 3 waits
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -2983,7 +2983,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > move dunstan 10,7
-dunstan moves 11,7 -> 10,7
+Dunstan moves 11,7 -> 10,7
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3011,10 +3011,10 @@ C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > attack dunstan archer-2
 forecast dunstan -> archer-2: dmg 11 hit 73% crit 0%; counter: none
-dunstan attacks archer-2
-  dunstan hits archer-2 for 11 (hp 6)
-  dunstan hp 20, archer-2 hp 6
-dunstan gains 12 exp (71)
+Dunstan attacks Archer 2
+  Dunstan hits Archer 2 for 11 (hp 6)
+  Dunstan hp 20, Archer 2 hp 6
+Dunstan gains 12 exp (71)
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3041,7 +3041,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > move ottilie 11,7
-ottilie moves 11,4 -> 11,7 via 11,5 11,6
+Ottilie moves 11,4 -> 11,7 via 11,5 11,6
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3069,10 +3069,10 @@ C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > attack ottilie archer-2
 forecast ottilie -> archer-2: dmg 8 hit 83% crit 5%; counter: dmg 7 hit 73% crit 1%
-ottilie attacks archer-2
-  ottilie misses archer-2
-  archer-2 misses ottilie
-  ottilie hp 18, archer-2 hp 6
+Ottilie attacks Archer 2
+  Ottilie misses Archer 2
+  Archer 2 misses Ottilie
+  Ottilie hp 18, Archer 2 hp 6
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3099,7 +3099,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain
 > move wren 11,4
-wren moves 10,4 -> 11,4
+Wren moves 10,4 -> 11,4
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3126,7 +3126,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain
 > wait wren
-wren waits
+Wren waits
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3153,7 +3153,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3180,7 +3180,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > wait pell
-pell waits
+Pell waits
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3207,7 +3207,7 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Ironwake Keep  turn 5 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3234,50 +3234,50 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
-event wave6
-  soldier-4 arrives at 0,3, group wave, aggressive
-event wave7
-  archer-3 arrives at 0,8, group wave, aggressive
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Event wave6
+  Soldier 4 arrives at 0,3, group wave, aggressive
+Event wave7
+  Archer 3 arrives at 0,8, group wave, aggressive
 enemy: move archer-2 9,4
-archer-2 moves 9,7 -> 9,4 via 9,6 9,5
+Archer 2 moves 9,7 -> 9,4 via 9,6 9,5
 enemy: attack archer-2 wren
 forecast archer-2 -> wren: dmg 6 hit 67% crit 0%; counter: none
-archer-2 attacks wren
-  archer-2 hits wren for 6 (hp 14)
-  archer-2 hp 6, wren hp 14
+Archer 2 attacks Wren
+  Archer 2 hits Wren for 6 (hp 14)
+  Archer 2 hp 6, Wren hp 14
 enemy: move archer-3 4,8
-archer-3 moves 0,8 -> 4,8 via 1,8 2,8 3,8
+Archer 3 moves 0,8 -> 4,8 via 1,8 2,8 3,8
 enemy: wait archer-3
-archer-3 waits
+Archer 3 waits
 enemy: move brigand-4 6,3
-brigand-4 moves 3,4 -> 6,3 via 3,3 4,3 5,3
+Brigand 4 moves 3,4 -> 6,3 via 3,3 4,3 5,3
 enemy: wait brigand-4
-brigand-4 waits
+Brigand 4 waits
 enemy: move hexer-1 8,7
-hexer-1 moves 7,7 -> 8,7
+Hexer 1 moves 7,7 -> 8,7
 enemy: attack hexer-1 dunstan
 forecast hexer-1 -> dunstan: dmg 11 hit 99% crit 1%; counter: none
-hexer-1 attacks dunstan
-  hexer-1 hits dunstan for 11 (hp 9)
-  hexer-1 hp 16, dunstan hp 9
+Hexer 1 attacks Dunstan
+  Hexer 1 hits Dunstan for 11 (hp 9)
+  Hexer 1 hp 16, Dunstan hp 9
 enemy: move soldier-3 10,3
-soldier-3 moves 8,3 -> 10,3 via 9,3
+Soldier 3 moves 8,3 -> 10,3 via 9,3
 enemy: attack soldier-3 captain
 forecast soldier-3 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-3 attacks captain
-  soldier-3 hits captain for 8 (hp 14)
-  captain hits soldier-3 for 9 (hp 11)
-  soldier-3 hp 11, captain hp 14
-captain gains 12 exp (59)
+Soldier 3 attacks Alder Fenn
+  Soldier 3 hits Alder Fenn for 8 (hp 14)
+  Alder Fenn hits Soldier 3 for 9 (hp 11)
+  Soldier 3 hp 11, Alder Fenn hp 14
+Alder Fenn gains 12 exp (59)
 enemy: move soldier-4 4,3
-soldier-4 moves 0,3 -> 4,3 via 1,3 2,3 3,3
+Soldier 4 moves 0,3 -> 4,3 via 1,3 2,3 3,3
 enemy: wait soldier-4
-soldier-4 waits
+Soldier 4 waits
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3307,13 +3307,13 @@ C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 14/20  Plain
 > attack pell soldier-3
 forecast pell -> soldier-3 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-3
-  pell hits soldier-3 for 12 (hp 0)
-  pell hp 16, soldier-3 hp 0
-pell gains 30 exp (7)
-pell reaches level 3: mag +1 lck +1
-pell reaches rank D in reason
-soldier-3 falls at 10,3
+Pell attacks Soldier 3
+  Pell hits Soldier 3 for 12 (hp 0)
+  Pell hp 16, Soldier 3 hp 0
+Pell gains 30 exp (7)
+Pell reaches level 3: mag +1 lck +1
+Pell reaches rank D in reason
+Soldier 3 falls at 10,3
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3341,7 +3341,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 14/20  Plain
 > move wren 10,4
-wren moves 11,4 -> 10,4
+Wren moves 11,4 -> 10,4
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3370,11 +3370,11 @@ C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain
 > attack wren archer-2
 forecast wren -> archer-2: dmg 10 x2 hit 85% crit 3%; counter: none
-wren attacks archer-2
-  wren hits archer-2 for 10 (hp 0)
-  wren hp 14, archer-2 hp 0
-wren gains 30 exp (66)
-archer-2 falls at 9,4
+Wren attacks Archer 2
+  Wren hits Archer 2 for 10 (hp 0)
+  Wren hp 14, Archer 2 hp 0
+Wren gains 30 exp (66)
+Archer 2 falls at 9,4
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3401,7 +3401,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > move dunstan 12,7
-dunstan moves 10,7 -> 12,7 via 11,7
+Dunstan moves 10,7 -> 12,7 via 11,7
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3428,7 +3428,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3455,7 +3455,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > move ottilie 10,7
-ottilie moves 11,7 -> 10,7
+Ottilie moves 11,7 -> 10,7
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3483,13 +3483,13 @@ C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > attack ottilie hexer-1
 forecast ottilie -> hexer-1: dmg 9 x2 hit 90% crit 5%; counter: dmg 10 hit 98% crit 0%
-ottilie attacks hexer-1
-  ottilie hits hexer-1 for 9 (hp 7)
-  hexer-1 hits ottilie for 10 (hp 8)
-  ottilie hits hexer-1 for 9 (hp 0)
-  ottilie hp 8, hexer-1 hp 0
-ottilie gains 30 exp (59)
-hexer-1 falls at 8,7
+Ottilie attacks Hexer 1
+  Ottilie hits Hexer 1 for 9 (hp 7)
+  Hexer 1 hits Ottilie for 10 (hp 8)
+  Ottilie hits Hexer 1 for 9 (hp 0)
+  Ottilie hp 8, Hexer 1 hp 0
+Ottilie gains 30 exp (59)
+Hexer 1 falls at 8,7
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3515,8 +3515,8 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > item captain 2
-captain uses Field Dressing (2 left)
-captain heals 8 (hp 22)
+Alder Fenn uses Field Dressing (2 left)
+Alder Fenn heals 8 (hp 22)
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3542,7 +3542,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > move teodor 11,7
-teodor moves 12,6 -> 11,7 via 11,6
+Teodor moves 12,6 -> 11,7 via 11,6
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3568,7 +3568,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3594,54 +3594,54 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
-event wave8
-  brigand-5 arrives at 0,3, group wave, aggressive
-event wave9
-  soldier-5 arrives at 0,4, group wave, aggressive
-event wave10
-  hexer-2 arrives at 0,7, group wave, aggressive
-event wave11
-  brigand-6 arrives at 0,8, group wave, aggressive
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+Event wave8
+  Brigand 5 arrives at 0,3, group wave, aggressive
+Event wave9
+  Soldier 5 arrives at 0,4, group wave, aggressive
+Event wave10
+  Hexer 2 arrives at 0,7, group wave, aggressive
+Event wave11
+  Brigand 6 arrives at 0,8, group wave, aggressive
 enemy: move archer-3 7,7
-archer-3 moves 4,8 -> 7,7 via 5,8 5,7 6,7
+Archer 3 moves 4,8 -> 7,7 via 5,8 5,7 6,7
 enemy: wait archer-3
-archer-3 waits
+Archer 3 waits
 enemy: move brigand-4 10,3
-brigand-4 moves 6,3 -> 10,3 via 7,3 8,3 9,3
+Brigand 4 moves 6,3 -> 10,3 via 7,3 8,3 9,3
 enemy: attack brigand-4 wren
 forecast brigand-4 -> wren: dmg 11 hit 47% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-4 attacks wren
-  brigand-4 hits wren for 11 (hp 3)
-  wren hits brigand-4 for 10 (hp 12)
-  wren misses brigand-4
-  brigand-4 hp 12, wren hp 3
-wren gains 10 exp (76)
-wren masters the Cadet class and keeps Fundamentals
+Brigand 4 attacks Wren
+  Brigand 4 hits Wren for 11 (hp 3)
+  Wren hits Brigand 4 for 10 (hp 12)
+  Wren misses Brigand 4
+  Brigand 4 hp 12, Wren hp 3
+Wren gains 10 exp (76)
+Wren masters the Cadet class and keeps Fundamentals
 enemy: move brigand-5 3,3
-brigand-5 moves 0,3 -> 3,3 via 1,3 2,3
+Brigand 5 moves 0,3 -> 3,3 via 1,3 2,3
 enemy: wait brigand-5
-brigand-5 waits
+Brigand 5 waits
 enemy: move brigand-6 4,8
-brigand-6 moves 0,8 -> 4,8 via 1,8 2,8 3,8
+Brigand 6 moves 0,8 -> 4,8 via 1,8 2,8 3,8
 enemy: wait brigand-6
-brigand-6 waits
+Brigand 6 waits
 enemy: move hexer-2 3,7
-hexer-2 moves 0,7 -> 3,7 via 1,7 2,7
+Hexer 2 moves 0,7 -> 3,7 via 1,7 2,7
 enemy: wait hexer-2
-hexer-2 waits
+Hexer 2 waits
 enemy: move soldier-4 8,3
-soldier-4 moves 4,3 -> 8,3 via 5,3 6,3 7,3
+Soldier 4 moves 4,3 -> 8,3 via 5,3 6,3 7,3
 enemy: wait soldier-4
-soldier-4 waits
+Soldier 4 waits
 enemy: move soldier-5 3,4
-soldier-5 moves 0,4 -> 3,4 via 1,4 2,4
+Soldier 5 moves 0,4 -> 3,4 via 1,4 2,4
 enemy: wait soldier-5
-soldier-5 waits
+Soldier 5 waits
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3672,11 +3672,11 @@ C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 3/20   Plain
 > attack pell brigand-4
 forecast pell -> brigand-4 with Cinder: dmg 14 hit 99% crit 4%; counter: none
-pell attacks brigand-4
-  pell hits brigand-4 for 14 (hp 0)
-  pell hp 16, brigand-4 hp 0
-pell gains 25 exp (32)
-brigand-4 falls at 10,3
+Pell attacks Brigand 4
+  Pell hits Brigand 4 for 14 (hp 0)
+  Pell hp 16, Brigand 4 hp 0
+Pell gains 25 exp (32)
+Brigand 4 falls at 10,3
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3705,7 +3705,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 3/20   Plain
 > move wren 11,4
-wren moves 10,4 -> 11,4
+Wren moves 10,4 -> 11,4
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3734,8 +3734,8 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 3/20   Plain
 > item wren 2
-wren uses Field Dressing (2 left)
-wren heals 10 (hp 13)
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 13)
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3764,7 +3764,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > move ottilie 12,6
-ottilie moves 10,7 -> 12,6 via 11,7 11,6
+Ottilie moves 10,7 -> 12,6 via 11,7 11,6
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3793,7 +3793,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3822,7 +3822,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3851,7 +3851,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > wait teodor
-teodor waits
+Teodor waits
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3880,7 +3880,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 7 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3909,43 +3909,43 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > end
--- player phase ends, turn 7 --
--- enemy phase, turn 7 --
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
 enemy: move archer-3 9,7
-archer-3 moves 7,7 -> 9,7 via 8,7
+Archer 3 moves 7,7 -> 9,7 via 8,7
 enemy: attack archer-3 teodor
 forecast archer-3 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-3 attacks teodor
-  archer-3 hits teodor for 5 (hp 11)
-  archer-3 hp 17, teodor hp 11
+Archer 3 attacks Teodor
+  Archer 3 hits Teodor for 5 (hp 11)
+  Archer 3 hp 17, Teodor hp 11
 enemy: move brigand-5 7,3
-brigand-5 moves 3,3 -> 7,3 via 4,3 5,3 6,3
+Brigand 5 moves 3,3 -> 7,3 via 4,3 5,3 6,3
 enemy: wait brigand-5
-brigand-5 waits
+Brigand 5 waits
 enemy: move brigand-6 7,7
-brigand-6 moves 4,8 -> 7,7 via 5,8 5,7 6,7
+Brigand 6 moves 4,8 -> 7,7 via 5,8 5,7 6,7
 enemy: wait brigand-6
-brigand-6 waits
+Brigand 6 waits
 enemy: move hexer-2 6,7
-hexer-2 moves 3,7 -> 6,7 via 4,7 5,7
+Hexer 2 moves 3,7 -> 6,7 via 4,7 5,7
 enemy: wait hexer-2
-hexer-2 waits
+Hexer 2 waits
 enemy: move soldier-4 10,3
-soldier-4 moves 8,3 -> 10,3 via 9,3
+Soldier 4 moves 8,3 -> 10,3 via 9,3
 enemy: attack soldier-4 captain
 forecast soldier-4 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-4 attacks captain
-  soldier-4 hits captain for 8 (hp 14)
-  captain hits soldier-4 for 9 (hp 11)
-  soldier-4 hp 11, captain hp 14
-captain gains 12 exp (71)
+Soldier 4 attacks Alder Fenn
+  Soldier 4 hits Alder Fenn for 8 (hp 14)
+  Alder Fenn hits Soldier 4 for 9 (hp 11)
+  Soldier 4 hp 11, Alder Fenn hp 14
+Alder Fenn gains 12 exp (71)
 enemy: move soldier-5 6,4
-soldier-5 moves 3,4 -> 6,4 via 4,4 5,4
+Soldier 5 moves 3,4 -> 6,4 via 4,4 5,4
 enemy: wait soldier-5
-soldier-5 waits
+Soldier 5 waits
 enemy: end
--- enemy phase ends, turn 7 --
--- player phase, turn 8 --
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -3975,11 +3975,11 @@ C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > attack pell soldier-4
 forecast pell -> soldier-4 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-pell attacks soldier-4
-  pell hits soldier-4 for 13 (hp 0)
-  pell hp 16, soldier-4 hp 0
-pell gains 25 exp (57)
-soldier-4 falls at 10,3
+Pell attacks Soldier 4
+  Pell hits Soldier 4 for 13 (hp 0)
+  Pell hp 16, Soldier 4 hp 0
+Pell gains 25 exp (57)
+Soldier 4 falls at 10,3
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4007,7 +4007,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > move captain 14,2
-captain moves 11,3 -> 14,2 via 11,2 12,2 13,2
+Alder Fenn moves 11,3 -> 14,2 via 11,2 12,2 13,2
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4035,7 +4035,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > wait captain
-captain waits
+Alder Fenn waits
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4063,7 +4063,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > move teodor 11,3
-teodor moves 11,7 -> 11,3 via 11,6 11,5 11,4
+Teodor moves 11,7 -> 11,3 via 11,6 11,5 11,4
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4091,8 +4091,8 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 11/21  Plain
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > item teodor 2
-teodor uses Field Dressing (0 left)
-teodor heals 10 (hp 21)
+Teodor uses Field Dressing (0 left)
+Teodor heals 10 (hp 21)
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4120,8 +4120,8 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain
 > item wren 2
-wren uses Field Dressing (1 left)
-wren heals 7 (hp 20)
+Wren uses Field Dressing (1 left)
+Wren heals 7 (hp 20)
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4149,7 +4149,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > move ottilie 15,5
-ottilie moves 12,6 -> 15,5 via 12,5 13,5 14,5
+Ottilie moves 12,6 -> 15,5 via 12,5 13,5 14,5
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4177,7 +4177,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > wait ottilie
-ottilie waits
+Ottilie waits
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4205,7 +4205,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > move dunstan 15,8
-dunstan moves 12,7 -> 15,8 via 13,7 14,7 15,7
+Dunstan moves 12,7 -> 15,8 via 13,7 14,7 15,7
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4233,7 +4233,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > wait dunstan
-dunstan waits
+Dunstan waits
 Ironwake Keep  turn 8 of 8  player phase  survive  recall 3
    0123456789012345
  0 ....^^....#.....
@@ -4261,44 +4261,44 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > end
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
 enemy: move archer-3 9,3
-archer-3 moves 9,7 -> 9,3 via 9,6 9,5 9,4
+Archer 3 moves 9,7 -> 9,3 via 9,6 9,5 9,4
 enemy: attack archer-3 teodor
 forecast archer-3 -> teodor: dmg 5 hit 80% crit 3%; counter: none
-archer-3 attacks teodor
-  archer-3 hits teodor for 5 (hp 16)
-  archer-3 hp 17, teodor hp 16
+Archer 3 attacks Teodor
+  Archer 3 hits Teodor for 5 (hp 16)
+  Archer 3 hp 17, Teodor hp 16
 enemy: move brigand-5 10,3
-brigand-5 moves 7,3 -> 10,3 via 8,3 9,3
+Brigand 5 moves 7,3 -> 10,3 via 8,3 9,3
 enemy: attack brigand-5 teodor
 forecast brigand-5 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
-brigand-5 attacks teodor
-  brigand-5 hits teodor for 10 (hp 6)
-  teodor hits brigand-5 for 12 (hp 10)
-  brigand-5 hp 10, teodor hp 6
-teodor gains 12 exp (36)
+Brigand 5 attacks Teodor
+  Brigand 5 hits Teodor for 10 (hp 6)
+  Teodor hits Brigand 5 for 12 (hp 10)
+  Brigand 5 hp 10, Teodor hp 6
+Teodor gains 12 exp (36)
 enemy: move brigand-6 8,4
-brigand-6 moves 7,7 -> 8,4 via 7,6 7,5 7,4
+Brigand 6 moves 7,7 -> 8,4 via 7,6 7,5 7,4
 enemy: wait brigand-6
-brigand-6 waits
+Brigand 6 waits
 enemy: move hexer-2 7,4
-hexer-2 moves 6,7 -> 7,4 via 6,6 6,5 6,4
+Hexer 2 moves 6,7 -> 7,4 via 6,6 6,5 6,4
 enemy: wait hexer-2
-hexer-2 waits
+Hexer 2 waits
 enemy: move soldier-5 10,4
-soldier-5 moves 6,4 -> 10,4 via 7,4 8,4 9,4
+Soldier 5 moves 6,4 -> 10,4 via 7,4 8,4 9,4
 enemy: attack soldier-5 wren
 forecast soldier-5 -> wren: dmg 8 hit 56% crit 0%; counter: dmg 9 x2 hit 85% crit 3%
-soldier-5 attacks wren
-  soldier-5 misses wren
-  wren hits soldier-5 for 9 (hp 11)
-  wren hits soldier-5 for 9 (hp 2)
-  soldier-5 hp 2, wren hp 20
-wren gains 10 exp (86)
+Soldier 5 attacks Wren
+  Soldier 5 misses Wren
+  Wren hits Soldier 5 for 9 (hp 11)
+  Wren hits Soldier 5 for 9 (hp 2)
+  Soldier 5 hp 2, Wren hp 20
+Wren gains 10 exp (86)
 enemy: end
--- enemy phase ends, turn 8 --
+-- Enemy phase ends, turn 8 --
 Ironwake Keep  over after turn 8 of 8  survive  recall 3
    0123456789012345
  0 ....^^....#.....

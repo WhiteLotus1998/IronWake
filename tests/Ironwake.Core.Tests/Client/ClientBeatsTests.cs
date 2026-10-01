@@ -39,7 +39,7 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 moves");
+        StepUntil(client, "Rider moves");
 
         var beat = Assert.Single(client.Beats);
         Assert.True(beat.IsMove);
@@ -54,9 +54,9 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 moves");
+        StepUntil(client, "Rider moves");
         var teodor = client.State.Find("teodor")!;
-        StepUntil(client, "rider-1 attacks teodor");
+        StepUntil(client, "Rider attacks Teodor");
 
         var beat = Assert.Single(client.Beats);
         Assert.True(beat.IsStrike);
@@ -74,14 +74,14 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 attacks teodor");
+        StepUntil(client, "Rider attacks Teodor");
 
         Assert.Null(client.State.Find("teodor"));
         Assert.Contains(client.Ghosts, g => g.Id == "teodor");
         Assert.DoesNotContain(client.Fallen, f => f.Unit.Id == "teodor");
 
         Assert.True(client.Step());
-        Assert.StartsWith("teodor falls", client.Playing!.Line, StringComparison.Ordinal);
+        Assert.StartsWith("Teodor falls", client.Playing!.Line, StringComparison.Ordinal);
         var beat = Assert.Single(client.Beats);
         Assert.Equal("teodor", beat.Fell!.Unit.Id);
         Assert.Empty(client.Ghosts);
@@ -171,9 +171,9 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 moves");
+        StepUntil(client, "Rider moves");
         var teodor = client.State.Find("teodor")!;
-        StepUntil(client, "rider-1 attacks teodor");
+        StepUntil(client, "Rider attacks Teodor");
 
         var act = client.Act!;
         Assert.Equal("rider-1", act.ActorId);
@@ -211,7 +211,7 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 attacks teodor");
+        StepUntil(client, "Rider attacks Teodor");
 
         var act = client.Act!;
         Assert.Equal(client.State.Find("rider-1")!.Unit.Name, act.ActorName);
@@ -225,7 +225,7 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "bandit_leader-1 attacks teodor");
+        StepUntil(client, "Bandit Leader attacks Teodor");
 
         var act = client.Act!;
         Assert.Null(act.Fallen);
@@ -238,8 +238,8 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "bandit_leader-1 attacks teodor");
-        StepUntil(client, "rider-1 moves");
+        StepUntil(client, "Bandit Leader attacks Teodor");
+        StepUntil(client, "Rider moves");
 
         Assert.Equal("bandit_leader-1", client.Act!.ActorId);
         Assert.NotNull(client.Act.Defender);
@@ -258,7 +258,7 @@ public class ClientBeatsTests
 
         var act = client.Act!;
         Assert.Null(act.Defender);
-        Assert.StartsWith(act.ActorId, client.Playing!.Line, StringComparison.Ordinal);
+        Assert.StartsWith(act.ActorName, client.Playing!.Line, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -266,14 +266,14 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "rider-1 attacks teodor");
+        StepUntil(client, "Rider attacks Teodor");
 
-        Assert.StartsWith("rider-1 attacks teodor", client.ActLog[0], StringComparison.Ordinal);
-        Assert.DoesNotContain(client.ActLog, line => line.StartsWith("rider-1 moves", StringComparison.Ordinal));
+        Assert.StartsWith("Rider attacks Teodor", client.ActLog[0], StringComparison.Ordinal);
+        Assert.DoesNotContain(client.ActLog, line => line.StartsWith("Rider moves", StringComparison.Ordinal));
 
-        StepUntil(client, "teodor falls");
-        Assert.StartsWith("rider-1 attacks teodor", client.ActLog[0], StringComparison.Ordinal);
-        Assert.StartsWith("teodor falls", client.ActLog[^1], StringComparison.Ordinal);
+        StepUntil(client, "Teodor falls");
+        Assert.StartsWith("Rider attacks Teodor", client.ActLog[0], StringComparison.Ordinal);
+        Assert.StartsWith("Teodor falls", client.ActLog[^1], StringComparison.Ordinal);
 
         client.Continue();
         Assert.Equal(client.Log, client.ActLog);
@@ -284,7 +284,7 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "teodor falls");
+        StepUntil(client, "Teodor falls");
 
         var death = Assert.Single(client.Beats);
         Assert.Equal(Rhythm.Fade + Rhythm.DeathHold, Rhythm.Length(death));
@@ -304,7 +304,7 @@ public class ClientBeatsTests
     {
         var client = TurnFour();
         client.Submit(new EndPhase());
-        StepUntil(client, "bandit_leader-1 attacks teodor");
+        StepUntil(client, "Bandit Leader attacks Teodor");
 
         var beat = Assert.Single(client.Beats);
         var times = Rhythm.PopTimes(beat);

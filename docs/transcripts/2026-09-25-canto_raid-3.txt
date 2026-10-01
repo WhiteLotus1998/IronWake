@@ -1,5 +1,5 @@
 Canto Raid, seed 3, scheme TwoRollAverage
-objective: defeat every enemy by the end of turn 10; lost if the captain falls
+Objective: Defeat every enemy by the end of turn 10. Captain Fenn must survive.
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -18,7 +18,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 2,2
-captain moves 1,2 -> 2,2
+Alder Fenn moves 1,2 -> 2,2
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -37,7 +37,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 2,3
-wren moves 0,2 -> 2,3 via 1,2 2,2
+Wren moves 0,2 -> 2,3 via 1,2 2,2
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -56,7 +56,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 0,3
-ansgar moves 1,3 -> 0,3
+Ansgar moves 1,3 -> 0,3
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -75,7 +75,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
-ansgar waits
+Ansgar waits
 ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
@@ -95,7 +95,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-ansgar stays at 0,3 (canto)
+Ansgar stays at 0,3 (canto)
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -114,32 +114,32 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: move archer-1 4,3
-archer-1 moves 7,4 -> 4,3 via 7,3 6,3 5,3
+Archer moves 7,4 -> 4,3 via 7,3 6,3 5,3
 enemy: attack archer-1 wren
 forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
-archer-1 attacks wren
-  archer-1 hits wren for 6 (hp 14)
-  archer-1 hp 17, wren hp 14
+Archer attacks Wren
+  Archer hits Wren for 6 (hp 14)
+  Archer hp 17, Wren hp 14
 enemy: move brigand-1 3,3
-brigand-1 moves 5,2 -> 3,3 via 4,2 3,2
+Brigand moves 5,2 -> 3,3 via 4,2 3,2
 enemy: attack brigand-1 wren
 forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
-brigand-1 attacks wren
-  brigand-1 hits wren for 11 (hp 3)
-  wren misses brigand-1
-  wren hits brigand-1 for 10 (hp 12)
-  brigand-1 hp 12, wren hp 3
-wren gains 10 exp (10)
+Brigand attacks Wren
+  Brigand hits Wren for 11 (hp 3)
+  Wren misses Brigand
+  Wren hits Brigand for 10 (hp 12)
+  Brigand hp 12, Wren hp 3
+Wren gains 10 exp (10)
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -158,7 +158,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 3,2
-captain moves 2,2 -> 3,2
+Alder Fenn moves 2,2 -> 3,2
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -178,13 +178,13 @@ C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
 forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
-captain attacks brigand-1
-  captain hits brigand-1 for 11 (hp 1)
-  brigand-1 hits captain for 10 (hp 12)
-  captain hits brigand-1 for 11 (hp 0)
-  captain hp 12, brigand-1 hp 0
-captain gains 30 exp (30)
-brigand-1 falls at 3,3
+Alder Fenn attacks Brigand
+  Alder Fenn hits Brigand for 11 (hp 1)
+  Brigand hits Alder Fenn for 10 (hp 12)
+  Alder Fenn hits Brigand for 11 (hp 0)
+  Alder Fenn hp 12, Brigand hp 0
+Alder Fenn gains 30 exp (30)
+Brigand falls at 3,3
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -202,7 +202,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 4,4
-ansgar moves 0,3 -> 4,4 via 1,3 2,3 3,3 3,4
+Ansgar moves 0,3 -> 4,4 via 1,3 2,3 3,3 3,4
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -221,10 +221,10 @@ C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
 forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
-ansgar attacks archer-1
-  ansgar hits archer-1 for 11 (hp 6)
-  ansgar hp 20, archer-1 hp 6
-ansgar gains 10 exp (10)
+Ansgar attacks Archer
+  Ansgar hits Archer for 11 (hp 6)
+  Ansgar hp 20, Archer hp 6
+Ansgar gains 10 exp (10)
 ansgar may canto up to 1 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
@@ -243,7 +243,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar 4,5
-ansgar cantos 4,4 -> 4,5
+Ansgar cantos 4,4 -> 4,5
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -261,7 +261,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 0,2
-wren moves 2,3 -> 0,2 via 2,2 1,2
+Wren moves 2,3 -> 0,2 via 2,2 1,2
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -279,8 +279,8 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > item wren 2
-wren uses Field Dressing (2 left)
-wren heals 10 (hp 13)
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 13)
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -298,20 +298,20 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: attack archer-1 ansgar
 forecast archer-1 -> ansgar: dmg 7 hit 77% crit 2%; counter: none
-archer-1 attacks ansgar
-  archer-1 misses ansgar
-  archer-1 hp 6, ansgar hp 20
+Archer attacks Ansgar
+  Archer misses Ansgar
+  Archer hp 6, Ansgar hp 20
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -329,7 +329,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 4,4
-ansgar moves 4,5 -> 4,4
+Ansgar moves 4,5 -> 4,4
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -348,11 +348,11 @@ C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
 forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
-ansgar attacks archer-1
-  ansgar hits archer-1 for 11 (hp 0)
-  ansgar hp 20, archer-1 hp 0
-ansgar gains 30 exp (40)
-archer-1 falls at 4,3
+Ansgar attacks Archer
+  Ansgar hits Archer for 11 (hp 0)
+  Ansgar hp 20, Archer hp 0
+Ansgar gains 30 exp (40)
+Archer falls at 4,3
 ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
@@ -387,7 +387,7 @@ C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 *  reach from 4,4: 41 tiles
 > canto ansgar 6,5
-ansgar cantos 4,4 -> 6,5 via 5,4 6,4
+Ansgar cantos 4,4 -> 6,5 via 5,4 6,4
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -404,7 +404,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 4,3
-captain moves 3,2 -> 4,3 via 4,2
+Alder Fenn moves 3,2 -> 4,3 via 4,2
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -421,7 +421,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 3,3
-wren moves 0,2 -> 3,3 via 1,2 2,2 3,2
+Wren moves 0,2 -> 3,3 via 1,2 2,2 3,2
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -438,15 +438,15 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: wait soldier-2
-soldier-2 waits
+Soldier 2 waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -463,7 +463,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 7,4
-captain moves 4,3 -> 7,4 via 5,3 6,3 7,3
+Alder Fenn moves 4,3 -> 7,4 via 5,3 6,3 7,3
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -480,7 +480,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              3,3    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move wren 6,3
-wren moves 3,3 -> 6,3 via 4,3 5,3
+Wren moves 3,3 -> 6,3 via 4,3 5,3
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -497,8 +497,8 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 10,5
-ansgar moves 6,5 -> 10,5 via 7,5 8,5 9,5
-group watch wakes: proximity
+Ansgar moves 6,5 -> 10,5 via 7,5 8,5 9,5
+Group watch wakes: proximity
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -515,11 +515,11 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
-ansgar attacks soldier-2
-  ansgar hits soldier-2 for 9 (hp 11)
-  soldier-2 misses ansgar
-  ansgar hp 20, soldier-2 hp 11
-ansgar gains 10 exp (50)
+Ansgar attacks Soldier 2
+  Ansgar hits Soldier 2 for 9 (hp 11)
+  Soldier 2 misses Ansgar
+  Ansgar hp 20, Soldier 2 hp 11
+Ansgar gains 10 exp (50)
 ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
@@ -536,7 +536,7 @@ c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         11,5   hp 11/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > canto ansgar 8,5
-ansgar cantos 10,5 -> 8,5 via 9,5
+Ansgar cantos 10,5 -> 8,5 via 9,5
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -552,25 +552,25 @@ c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         11,5   hp 11/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: move soldier-1 11,4
-soldier-1 moves 11,0 -> 11,4 via 11,1 11,2 11,3
+Soldier 1 moves 11,0 -> 11,4 via 11,1 11,2 11,3
 enemy: wait soldier-1
-soldier-1 waits
+Soldier 1 waits
 enemy: move soldier-2 9,5
-soldier-2 moves 11,5 -> 9,5 via 10,5
+Soldier 2 moves 11,5 -> 9,5 via 10,5
 enemy: attack soldier-2 ansgar
 forecast soldier-2 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
-soldier-2 attacks ansgar
-  soldier-2 hits ansgar for 10 (hp 10)
-  ansgar hits soldier-2 for 9 (hp 2)
-  soldier-2 hp 2, ansgar hp 10
-ansgar gains 10 exp (60)
+Soldier 2 attacks Ansgar
+  Soldier 2 hits Ansgar for 10 (hp 10)
+  Ansgar hits Soldier 2 for 9 (hp 2)
+  Soldier 2 hp 2, Ansgar hp 10
+Ansgar gains 10 exp (60)
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
-captain heals 4 (hp 16)
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Alder Fenn heals 4 (hp 16)
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -588,11 +588,11 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
   counter: lethal to ansgar (10 against 10 hp)
-ansgar attacks soldier-2
-  ansgar hits soldier-2 for 9 (hp 0)
-  ansgar hp 10, soldier-2 hp 0
-ansgar gains 30 exp (90)
-soldier-2 falls at 9,5
+Ansgar attacks Soldier 2
+  Ansgar hits Soldier 2 for 9 (hp 0)
+  Ansgar hp 10, Soldier 2 hp 0
+Ansgar gains 30 exp (90)
+Soldier 2 falls at 9,5
 ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
@@ -612,7 +612,7 @@ threat on ansgar at 8,5 (Plain):
   soldier-1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
   if all land: 10 against 10 hp
 > canto ansgar 6,5
-ansgar cantos 8,5 -> 6,5 via 7,5
+Ansgar cantos 8,5 -> 6,5 via 7,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -627,7 +627,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > move captain 10,4
-captain moves 7,4 -> 10,4 via 8,4 9,4
+Alder Fenn moves 7,4 -> 10,4 via 8,4 9,4
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -643,11 +643,11 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack captain soldier-1
 forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
-captain attacks soldier-1
-  captain hits soldier-1 for 9 (hp 11)
-  soldier-1 hits captain for 8 (hp 8)
-  captain hp 8, soldier-1 hp 11
-captain gains 10 exp (40)
+Alder Fenn attacks Soldier 1
+  Alder Fenn hits Soldier 1 for 9 (hp 11)
+  Soldier 1 hits Alder Fenn for 8 (hp 8)
+  Alder Fenn hp 8, Soldier 1 hp 11
+Alder Fenn gains 10 exp (40)
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -662,7 +662,7 @@ A  captain          Alder Fenn L1 cadet        10,4   hp 8/22   Plain  captain  
 c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > move wren 8,4
-wren moves 6,3 -> 8,4 via 7,3 8,3
+Wren moves 6,3 -> 8,4 via 7,3 8,3
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -678,14 +678,14 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group wat
 C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
 > end
 lethal if all land: captain (soldier-1 8 against 8 hp)
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: attack soldier-1 captain
 forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-1 attacks captain
-  soldier-1 hits captain for 8 (hp 0)
-  soldier-1 hp 11, captain hp 0
-captain falls at 10,4
+Soldier 1 attacks Alder Fenn
+  Soldier 1 hits Alder Fenn for 8 (hp 0)
+  Soldier 1 hp 11, Alder Fenn hp 0
+Alder Fenn falls at 10,4
 Canto Raid  turn 5 of 10  enemy phase  rout  recall 3
    012345678901
  0 ............
@@ -699,11 +699,11 @@ B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake  done
 C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
 battle lost: the captain is dead; only recall is left
-lost because the captain, Alder Fenn (A), fell
+Lost because the captain, Alder Fenn, fell.
 > recall
 player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
 > recall 45
-recalled to state 45; 2 charges left
+Recalled to state 45; 2 charges left
 undone: gives back 1 kill (soldier-2), 30 exp, 11 enemy hp; returns captain alive at 16 hp
 the rolls do not change: the same attack will roll the same
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
@@ -723,11 +723,11 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
   counter: lethal to ansgar (10 against 10 hp)
-ansgar attacks soldier-2
-  ansgar hits soldier-2 for 9 (hp 0)
-  ansgar hp 10, soldier-2 hp 0
-ansgar gains 30 exp (90)
-soldier-2 falls at 9,5
+Ansgar attacks Soldier 2
+  Ansgar hits Soldier 2 for 9 (hp 0)
+  Ansgar hp 10, Soldier 2 hp 0
+Ansgar gains 30 exp (90)
+Soldier 2 falls at 9,5
 ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
@@ -743,7 +743,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > canto ansgar 7,5
-ansgar cantos 8,5 -> 7,5
+Ansgar cantos 8,5 -> 7,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -758,7 +758,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > move wren 7,3
-wren moves 6,3 -> 7,3
+Wren moves 6,3 -> 7,3
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -773,7 +773,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > wait captain
-captain waits
+Alder Fenn waits
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -789,20 +789,20 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > end
 lethal if all land: ansgar (soldier-1 10 against 10 hp)
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: move soldier-1 8,5
-soldier-1 moves 11,4 -> 8,5 via 10,4 9,4 8,4
+Soldier 1 moves 11,4 -> 8,5 via 10,4 9,4 8,4
 enemy: attack soldier-1 ansgar
 forecast soldier-1 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
-soldier-1 attacks ansgar
-  soldier-1 hits ansgar for 10 (hp 0)
-  soldier-1 hp 20, ansgar hp 0
-ansgar falls at 7,5
+Soldier 1 attacks Ansgar
+  Soldier 1 hits Ansgar for 10 (hp 0)
+  Soldier 1 hp 20, Ansgar hp 0
+Ansgar falls at 7,5
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
-captain heals 4 (hp 20)
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Alder Fenn heals 4 (hp 20)
 Canto Raid  turn 6 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -816,7 +816,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 20/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > recall 45
-recalled to state 45; 1 charges left
+Recalled to state 45; 1 charges left
 undone: gives back 1 kill (soldier-2), 2 enemy hp; returns ansgar alive at 10 hp
 the rolls do not change: the same attack will roll the same
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
@@ -836,11 +836,11 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
 forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
   counter: lethal to ansgar (10 against 10 hp)
-ansgar attacks soldier-2
-  ansgar hits soldier-2 for 9 (hp 0)
-  ansgar hp 10, soldier-2 hp 0
-ansgar gains 30 exp (90)
-soldier-2 falls at 9,5
+Ansgar attacks Soldier 2
+  Ansgar hits Soldier 2 for 9 (hp 0)
+  Ansgar hp 10, Soldier 2 hp 0
+Ansgar gains 30 exp (90)
+Soldier 2 falls at 9,5
 ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
@@ -862,7 +862,7 @@ threat on ansgar at 7,5 (Plain):
 > threat ansgar from 5,5
 threat on ansgar at 5,5 (Plain): no enemy can strike it next phase
 > canto ansgar 5,5
-ansgar cantos 8,5 -> 5,5 via 7,5 6,5
+Ansgar cantos 8,5 -> 5,5 via 7,5 6,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............
@@ -879,7 +879,7 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat wren
 threat on wren at 6,3 (Plain): no enemy can strike it next phase
 > wait wren
-wren waits
+Wren waits
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............
@@ -894,7 +894,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain  done
 > wait captain
-captain waits
+Alder Fenn waits
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............
@@ -909,18 +909,18 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain  done
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
 enemy: move soldier-1 8,4
-soldier-1 moves 11,4 -> 8,4 via 10,4 9,4
+Soldier 1 moves 11,4 -> 8,4 via 10,4 9,4
 enemy: attack soldier-1 captain
 forecast soldier-1 -> captain: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
-soldier-1 attacks captain
-  soldier-1 hits captain for 6 (hp 10)
-  captain crits soldier-1 for 27 (hp 0)
-  soldier-1 hp 0, captain hp 10
-captain gains 30 exp (60)
-soldier-1 falls at 8,4
+Soldier 1 attacks Alder Fenn
+  Soldier 1 hits Alder Fenn for 6 (hp 10)
+  Alder Fenn crits Soldier 1 for 27 (hp 0)
+  Soldier 1 hp 0, Alder Fenn hp 10
+Alder Fenn gains 30 exp (60)
+Soldier 1 falls at 8,4
 Canto Raid  turn 5 of 10  enemy phase  rout  recall 1
    012345678901
  0 ............

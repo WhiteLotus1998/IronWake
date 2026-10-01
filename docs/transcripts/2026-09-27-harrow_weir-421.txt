@@ -1,5 +1,5 @@
 Harrow Weir, seed 421, scheme TwoRollAverage
-objective: defeat the boss (!) by the end of turn 14; lost if the captain falls
+Objective: Defeat the boss by the end of turn 14. Captain Fenn must survive.
   turn 3, enemy phase: a rider arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.
   turn 5, enemy phase: a brigand arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.
   turn 5, enemy phase: a brigand arrives at 7,0 (aggressive). A unit standing on 7,0 stops it.
@@ -33,8 +33,8 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move pell 3,5
-pell moves 0,5 -> 3,5 via 1,5 2,5
-group wood wakes: proximity
+Pell moves 0,5 -> 3,5 via 1,5 2,5
+Group wood wakes: proximity
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -66,10 +66,10 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > attack pell brigand-1
 forecast pell -> brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: none
-pell attacks brigand-1
-  pell hits brigand-1 for 13 (hp 9)
-  pell hp 16, brigand-1 hp 9
-pell gains 12 exp (12)
+Pell attacks Brigand 1
+  Pell hits Brigand 1 for 13 (hp 9)
+  Pell hp 16, Brigand 1 hp 9
+Pell gains 12 exp (12)
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -100,7 +100,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move captain 3,4
-captain moves 1,6 -> 3,4 via 1,5 2,5 3,5
+Alder Fenn moves 1,6 -> 3,4 via 1,5 2,5 3,5
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -132,13 +132,13 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > attack captain brigand-1
 forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
-captain attacks brigand-1
-  captain misses brigand-1
-  brigand-1 misses captain
-  captain hits brigand-1 for 10 (hp 0)
-  captain hp 22, brigand-1 hp 0
-captain gains 35 exp (35)
-brigand-1 falls at 3,3
+Alder Fenn attacks Brigand 1
+  Alder Fenn misses Brigand 1
+  Brigand 1 misses Alder Fenn
+  Alder Fenn hits Brigand 1 for 10 (hp 0)
+  Alder Fenn hp 22, Brigand 1 hp 0
+Alder Fenn gains 35 exp (35)
+Brigand 1 falls at 3,3
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -168,7 +168,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move teodor 4,4
-teodor moves 1,5 -> 4,4 via 2,5 3,5 3,4
+Teodor moves 1,5 -> 4,4 via 2,5 3,5 3,4
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -198,7 +198,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -228,7 +228,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move keziah 3,7
-keziah moves 0,6 -> 3,7 via 1,6 2,6 3,6
+Keziah moves 0,6 -> 3,7 via 1,6 2,6 3,6
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -258,7 +258,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -288,7 +288,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move dunstan 2,9
-dunstan moves 0,7 -> 2,9 via 1,7 1,8 1,9
+Dunstan moves 0,7 -> 2,9 via 1,7 1,8 1,9
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -318,7 +318,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -348,7 +348,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move ottilie 3,6
-ottilie moves 1,7 -> 3,6 via 1,6 2,6
+Ottilie moves 1,7 -> 3,6 via 1,6 2,6
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -378,7 +378,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -408,21 +408,21 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > end
--- player phase ends, turn 1 --
--- enemy phase, turn 1 --
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait brawler-1
-brawler-1 waits
+Brawler waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 1 --
--- player phase, turn 2 --
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -452,7 +452,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move teodor 6,2
-teodor moves 4,4 -> 6,2 via 4,3 4,2 5,2
+Teodor moves 4,4 -> 6,2 via 4,3 4,2 5,2
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -482,7 +482,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -512,7 +512,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move dunstan 5,10
-dunstan moves 2,9 -> 5,10 via 3,9 4,9 5,9
+Dunstan moves 2,9 -> 5,10 via 3,9 4,9 5,9
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -542,7 +542,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -572,7 +572,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move keziah 6,8
-keziah moves 3,7 -> 6,8 via 4,7 5,7 6,7
+Keziah moves 3,7 -> 6,8 via 4,7 5,7 6,7
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -602,7 +602,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -632,7 +632,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move ottilie 5,8
-ottilie moves 3,6 -> 5,8 via 4,6 5,6 5,7
+Ottilie moves 3,6 -> 5,8 via 4,6 5,6 5,7
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -662,7 +662,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -692,7 +692,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move pell 5,7
-pell moves 3,5 -> 5,7 via 4,5 5,5 5,6
+Pell moves 3,5 -> 5,7 via 4,5 5,5 5,6
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -722,7 +722,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait pell
-pell waits
+Pell waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -752,7 +752,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move captain 5,6
-captain moves 3,4 -> 5,6 via 4,4 5,4 5,5
+Alder Fenn moves 3,4 -> 5,6 via 4,4 5,4 5,5
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -782,7 +782,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -812,21 +812,21 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > end
--- player phase ends, turn 2 --
--- enemy phase, turn 2 --
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait brawler-1
-brawler-1 waits
+Brawler waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 2 --
--- player phase, turn 3 --
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -856,7 +856,7 @@ B  teodor           Teodor L1 pikeman          6,2    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move teodor 7,0
-teodor moves 6,2 -> 7,0 via 6,1 6,0
+Teodor moves 6,2 -> 7,0 via 6,1 6,0
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -886,7 +886,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -916,9 +916,9 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > move dunstan 7,10
-dunstan moves 5,10 -> 7,10 via 6,10
-group ford wakes: proximity
-group weir wakes: called by ford
+Dunstan moves 5,10 -> 7,10 via 6,10
+Group ford wakes: proximity
+Group weir wakes: called by ford
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -946,7 +946,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -974,7 +974,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move keziah 6,9
-keziah moves 6,8 -> 6,9
+Keziah moves 6,8 -> 6,9
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1002,7 +1002,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1030,7 +1030,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move ottilie 5,9
-ottilie moves 5,8 -> 5,9
+Ottilie moves 5,8 -> 5,9
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1058,7 +1058,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1086,7 +1086,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move pell 6,8
-pell moves 5,7 -> 6,8 via 6,7
+Pell moves 5,7 -> 6,8 via 6,7
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1114,7 +1114,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait pell
-pell waits
+Pell waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1142,7 +1142,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move captain 5,7
-captain moves 5,6 -> 5,7
+Alder Fenn moves 5,6 -> 5,7
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1170,7 +1170,7 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1198,33 +1198,33 @@ e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > end
--- player phase ends, turn 3 --
--- enemy phase, turn 3 --
-event north1 is blocked: its tile is held
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Event north1 is blocked: its tile is held
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: move brawler-1 8,10
-brawler-1 moves 11,10 -> 8,10 via 10,10 9,10
+Brawler moves 11,10 -> 8,10 via 10,10 9,10
 enemy: attack brawler-1 dunstan
 forecast brawler-1 -> dunstan: dmg 3 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
-brawler-1 attacks dunstan
-  brawler-1 misses dunstan
-  brawler-1 hits dunstan for 3 (hp 20)
-  dunstan misses brawler-1
-  brawler-1 hp 22, dunstan hp 20
+Brawler attacks Dunstan
+  Brawler misses Dunstan
+  Brawler hits Dunstan for 3 (hp 20)
+  Dunstan misses Brawler
+  Brawler hp 22, Dunstan hp 20
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move soldier-1 8,11
-soldier-1 moves 12,11 -> 8,11 via 11,11 10,11 9,11
+Soldier moves 12,11 -> 8,11 via 11,11 10,11 9,11
 enemy: wait soldier-1
-soldier-1 waits
+Soldier waits
 enemy: move weir_foreman-1 9,6
-weir_foreman-1 moves 13,6 -> 9,6 via 12,6 11,6 10,6
+Weir Foreman moves 13,6 -> 9,6 via 12,6 11,6 10,6
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 3 --
--- player phase, turn 4 --
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1252,7 +1252,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > move pell 7,9
-pell moves 6,8 -> 7,9 via 7,8
+Pell moves 6,8 -> 7,9 via 7,8
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1281,10 +1281,10 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > attack pell brawler-1
 forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-pell attacks brawler-1
-  pell hits brawler-1 for 13 (hp 9)
-  pell hp 16, brawler-1 hp 9
-pell gains 12 exp (24)
+Pell attacks Brawler
+  Pell hits Brawler for 13 (hp 9)
+  Pell hp 16, Brawler hp 9
+Pell gains 12 exp (24)
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1312,7 +1312,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > move ottilie 6,10
-ottilie moves 5,9 -> 6,10 via 6,9
+Ottilie moves 5,9 -> 6,10 via 6,9
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1341,9 +1341,9 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > attack ottilie brawler-1
 forecast ottilie -> brawler-1: dmg 8 hit 83% crit 5%; counter: none
-ottilie attacks brawler-1
-  ottilie misses brawler-1
-  ottilie hp 17, brawler-1 hp 9
+Ottilie attacks Brawler
+  Ottilie misses Brawler
+  Ottilie hp 17, Brawler hp 9
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1372,11 +1372,11 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > attack dunstan brawler-1
 forecast dunstan -> brawler-1: dmg 11 hit 74% crit 1%; counter: dmg 3 x2 hit 95% crit 0%
-dunstan attacks brawler-1
-  dunstan hits brawler-1 for 11 (hp 0)
-  dunstan hp 20, brawler-1 hp 0
-dunstan gains 35 exp (35)
-brawler-1 falls at 8,10
+Dunstan attacks Brawler
+  Dunstan hits Brawler for 11 (hp 0)
+  Dunstan hp 20, Brawler hp 0
+Dunstan gains 35 exp (35)
+Brawler falls at 8,10
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1403,7 +1403,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 20/20  Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > move keziah 8,10
-keziah moves 6,9 -> 8,10 via 7,9 8,9
+Keziah moves 6,9 -> 8,10 via 7,9 8,9
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1431,11 +1431,11 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > attack keziah soldier-1
 forecast keziah -> soldier-1 with Iron Axe: dmg 12 hit 67% crit 1%; counter: dmg 10 hit 74% crit 0%
-keziah attacks soldier-1
-  keziah hits soldier-1 for 12 (hp 8)
-  soldier-1 hits keziah for 10 (hp 13)
-  keziah hp 13, soldier-1 hp 8
-keziah gains 12 exp (12)
+Keziah attacks Soldier
+  Keziah hits Soldier for 12 (hp 8)
+  Soldier hits Keziah for 10 (hp 13)
+  Keziah hp 13, Soldier hp 8
+Keziah gains 12 exp (12)
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1462,7 +1462,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 8/20   Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > move captain 7,8
-captain moves 5,7 -> 7,8 via 6,7 7,7
+Alder Fenn moves 5,7 -> 7,8 via 6,7 7,7
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1489,7 +1489,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 8/20   Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1516,7 +1516,7 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 8/20   Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1543,26 +1543,26 @@ e  soldier-1        Soldier L2 pikeman         8,11   hp 8/20   Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,6    hp 28/28  Road  group weir, boss, awake
 > end
--- player phase ends, turn 4 --
--- enemy phase, turn 4 --
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move soldier-1 6,11
-soldier-1 moves 8,11 -> 6,11 via 7,11
+Soldier moves 8,11 -> 6,11 via 7,11
 enemy: attack soldier-1 ottilie
 forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
-soldier-1 attacks ottilie
-  soldier-1 hits ottilie for 10 (hp 7)
-  soldier-1 hp 8, ottilie hp 7
+Soldier attacks Ottilie
+  Soldier hits Ottilie for 10 (hp 7)
+  Soldier hp 8, Ottilie hp 7
 enemy: move weir_foreman-1 12,6
-weir_foreman-1 moves 9,6 -> 12,6 via 10,6 11,6
+Weir Foreman moves 9,6 -> 12,6 via 10,6 11,6
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 4 --
--- player phase, turn 5 --
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1589,7 +1589,7 @@ e  soldier-1        Soldier L2 pikeman         6,11   hp 8/20   Plain  group for
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > move pell 6,9
-pell moves 7,9 -> 6,9
+Pell moves 7,9 -> 6,9
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1617,11 +1617,11 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > attack pell soldier-1
 forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
-pell attacks soldier-1
-  pell crits soldier-1 for 36 (hp 0)
-  pell hp 16, soldier-1 hp 0
-pell gains 35 exp (59)
-soldier-1 falls at 6,11
+Pell attacks Soldier
+  Pell crits Soldier for 36 (hp 0)
+  Pell hp 16, Soldier hp 0
+Pell gains 35 exp (59)
+Soldier falls at 6,11
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1647,7 +1647,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > move captain 7,7
-captain moves 7,8 -> 7,7
+Alder Fenn moves 7,8 -> 7,7
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1673,7 +1673,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1699,7 +1699,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > move keziah 7,9
-keziah moves 8,10 -> 7,9 via 8,9
+Keziah moves 8,10 -> 7,9 via 8,9
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1725,7 +1725,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1751,7 +1751,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > move ottilie 6,8
-ottilie moves 6,10 -> 6,8 via 6,9
+Ottilie moves 6,10 -> 6,8 via 6,9
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1777,7 +1777,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1803,7 +1803,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > move dunstan 5,10
-dunstan moves 7,10 -> 5,10 via 6,10
+Dunstan moves 7,10 -> 5,10 via 6,10
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1829,7 +1829,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1855,7 +1855,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1881,26 +1881,26 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 28/28  Plain  group weir, boss, awake
 > end
--- player phase ends, turn 5 --
--- enemy phase, turn 5 --
-event west1
-  brigand-2 arrives at 0,11, group west, aggressive
-event north2 is blocked: its tile is held
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+Event west1
+  Brigand 2 arrives at 0,11, group west, aggressive
+Event north2 is blocked: its tile is held
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: move brigand-2 3,10
-brigand-2 moves 0,11 -> 3,10 via 0,10 1,10 2,10
+Brigand 2 moves 0,11 -> 3,10 via 0,10 1,10 2,10
 enemy: wait brigand-2
-brigand-2 waits
+Brigand 2 waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move weir_foreman-1 13,6
-weir_foreman-1 moves 12,6 -> 13,6
+Weir Foreman moves 12,6 -> 13,6
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 5 --
--- player phase, turn 6 --
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1927,7 +1927,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move pell 4,9
-pell moves 6,9 -> 4,9 via 5,9
+Pell moves 6,9 -> 4,9 via 5,9
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1955,10 +1955,10 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > attack pell brigand-2
 forecast pell -> brigand-2 with Cinder: dmg 13 hit 99% crit 3%; counter: none
-pell attacks brigand-2
-  pell hits brigand-2 for 13 (hp 9)
-  pell hp 16, brigand-2 hp 9
-pell gains 12 exp (71)
+Pell attacks Brigand 2
+  Pell hits Brigand 2 for 13 (hp 9)
+  Pell hp 16, Brigand 2 hp 9
+Pell gains 12 exp (71)
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1985,7 +1985,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move dunstan 4,10
-dunstan moves 5,10 -> 4,10
+Dunstan moves 5,10 -> 4,10
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2013,11 +2013,11 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > attack dunstan brigand-2
 forecast dunstan -> brigand-2: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
-dunstan attacks brigand-2
-  dunstan hits brigand-2 for 11 (hp 0)
-  dunstan hp 20, brigand-2 hp 0
-dunstan gains 35 exp (70)
-brigand-2 falls at 3,10
+Dunstan attacks Brigand 2
+  Dunstan hits Brigand 2 for 11 (hp 0)
+  Dunstan hp 20, Brigand 2 hp 0
+Dunstan gains 35 exp (70)
+Brigand 2 falls at 3,10
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2043,7 +2043,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move keziah 8,10
-keziah moves 7,9 -> 8,10 via 8,9
+Keziah moves 7,9 -> 8,10 via 8,9
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2069,7 +2069,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2095,7 +2095,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move captain 8,9
-captain moves 7,7 -> 8,9 via 8,7 8,8
+Alder Fenn moves 7,7 -> 8,9 via 8,7 8,8
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2121,7 +2121,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2147,7 +2147,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move ottilie 7,9
-ottilie moves 6,8 -> 7,9 via 7,8
+Ottilie moves 6,8 -> 7,9 via 7,8
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2173,7 +2173,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -2199,7 +2199,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > move teodor 8,3
-teodor moves 7,0 -> 8,3 via 8,0 8,1 8,2
+Teodor moves 7,0 -> 8,3 via 8,0 8,1 8,2
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2225,7 +2225,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          8,3    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2251,19 +2251,19 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          8,3    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 > end
--- player phase ends, turn 6 --
--- enemy phase, turn 6 --
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move weir_foreman-1 10,6
-weir_foreman-1 moves 13,6 -> 10,6 via 12,6 11,6
+Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6
 enemy: wait weir_foreman-1
-weir_foreman-1 waits
+Weir Foreman waits
 enemy: end
--- enemy phase ends, turn 6 --
--- player phase, turn 7 --
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2289,7 +2289,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          8,3    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move teodor 9,5
-teodor moves 8,3 -> 9,5 via 9,3 9,4
+Teodor moves 8,3 -> 9,5 via 9,3 9,4
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2315,7 +2315,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait teodor
-teodor waits
+Teodor waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2341,7 +2341,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move captain 11,10
-captain moves 8,9 -> 11,10 via 9,9 9,10 10,10
+Alder Fenn moves 8,9 -> 11,10 via 9,9 9,10 10,10
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2367,7 +2367,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2393,7 +2393,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move keziah 10,10
-keziah moves 8,10 -> 10,10 via 9,10
+Keziah moves 8,10 -> 10,10 via 9,10
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2419,7 +2419,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2445,7 +2445,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move ottilie 9,10
-ottilie moves 7,9 -> 9,10 via 8,9 9,9
+Ottilie moves 7,9 -> 9,10 via 8,9 9,9
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2471,7 +2471,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2497,7 +2497,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move pell 8,9
-pell moves 4,9 -> 8,9 via 5,9 6,9 7,9
+Pell moves 4,9 -> 8,9 via 5,9 6,9 7,9
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2523,7 +2523,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait pell
-pell waits
+Pell waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2549,7 +2549,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > move dunstan 8,10
-dunstan moves 4,10 -> 8,10 via 5,10 6,10 7,10
+Dunstan moves 4,10 -> 8,10 via 5,10 6,10 7,10
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2575,7 +2575,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2601,22 +2601,22 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 28/28  Road  group weir, boss, awake
 > end
--- player phase ends, turn 7 --
--- enemy phase, turn 7 --
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move weir_foreman-1 8,4
-weir_foreman-1 moves 10,6 -> 8,4 via 9,6 8,6 8,5
+Weir Foreman moves 10,6 -> 8,4 via 9,6 8,6 8,5
 enemy: attack weir_foreman-1 teodor
 forecast weir_foreman-1 -> teodor: dmg 10 hit 60% crit 2%; counter: none
-weir_foreman-1 attacks teodor
-  weir_foreman-1 misses teodor
-  weir_foreman-1 hp 28, teodor hp 21
+Weir Foreman attacks Teodor
+  Weir Foreman misses Teodor
+  Weir Foreman hp 28, Teodor hp 21
 enemy: end
--- enemy phase ends, turn 7 --
--- player phase, turn 8 --
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2642,7 +2642,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > move teodor 9,4
-teodor moves 9,5 -> 9,4
+Teodor moves 9,5 -> 9,4
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2669,11 +2669,11 @@ B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
 forecast teodor -> weir_foreman-1: dmg 10 hit 76% crit 0%; counter: dmg 10 hit 60% crit 2%
-teodor attacks weir_foreman-1
-  teodor hits weir_foreman-1 for 10 (hp 18)
-  weir_foreman-1 misses teodor
-  teodor hp 21, weir_foreman-1 hp 18
-teodor gains 14 exp (14)
+Teodor attacks Weir Foreman
+  Teodor hits Weir Foreman for 10 (hp 18)
+  Weir Foreman misses Teodor
+  Teodor hp 21, Weir Foreman hp 18
+Teodor gains 14 exp (14)
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2699,7 +2699,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move pell 8,6
-pell moves 8,9 -> 8,6 via 8,8 8,7
+Pell moves 8,9 -> 8,6 via 8,8 8,7
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2726,11 +2726,11 @@ B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > attack pell weir_foreman-1
 forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 99% crit 1%; counter: dmg 13 hit 67% crit 1%
-pell attacks weir_foreman-1
-  pell hits weir_foreman-1 for 12 (hp 6)
-  weir_foreman-1 hits pell for 13 (hp 3)
-  pell hp 3, weir_foreman-1 hp 6
-pell gains 14 exp (85)
+Pell attacks Weir Foreman
+  Pell hits Weir Foreman for 12 (hp 6)
+  Weir Foreman hits Pell for 13 (hp 3)
+  Pell hp 3, Weir Foreman hp 6
+Pell gains 14 exp (85)
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2756,7 +2756,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > move dunstan 8,7
-dunstan moves 8,10 -> 8,7 via 8,9 8,8
+Dunstan moves 8,10 -> 8,7 via 8,9 8,8
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2782,7 +2782,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2808,7 +2808,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > move ottilie 9,9
-ottilie moves 9,10 -> 9,9
+Ottilie moves 9,10 -> 9,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2834,7 +2834,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2860,7 +2860,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > move keziah 9,8
-keziah moves 10,10 -> 9,8 via 9,10 9,9
+Keziah moves 10,10 -> 9,8 via 9,10 9,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2886,7 +2886,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2912,7 +2912,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > move captain 10,10
-captain moves 11,10 -> 10,10
+Alder Fenn moves 11,10 -> 10,10
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2938,7 +2938,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -2965,23 +2965,23 @@ B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 6/28   Plain  group weir, boss, awake
 > end
 lethal if all land: pell (weir_foreman-1 13 against 3 hp)
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move weir_foreman-1 10,6
-weir_foreman-1 moves 8,4 -> 10,6 via 8,5 9,5 9,6
+Weir Foreman moves 8,4 -> 10,6 via 8,5 9,5 9,6
 enemy: attack weir_foreman-1 pell
 forecast weir_foreman-1 -> pell: dmg 13 hit 67% crit 1%; counter with Cinder: dmg 12 hit 99% crit 1%
-weir_foreman-1 attacks pell
-  weir_foreman-1 hits pell for 13 (hp 0)
-  weir_foreman-1 hp 6, pell hp 0
-pell falls at 8,6
+Weir Foreman attacks Pell
+  Weir Foreman hits Pell for 13 (hp 0)
+  Weir Foreman hp 6, Pell hp 0
+Pell falls at 8,6
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3006,7 +3006,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 6/28   Road  group weir, boss, awake
 > recall 133
-recalled to state 133; 2 charges left
+Recalled to state 133; 2 charges left
 undone: gives back 14 exp, 22 enemy hp; returns pell alive at 16 hp
 the rolls do not change: the same attack will roll the same
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3034,7 +3034,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > move teodor 9,4
-teodor moves 9,5 -> 9,4
+Teodor moves 9,5 -> 9,4
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3061,11 +3061,11 @@ B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
 forecast teodor -> weir_foreman-1: dmg 10 hit 76% crit 0%; counter: dmg 10 hit 60% crit 2%
-teodor attacks weir_foreman-1
-  teodor hits weir_foreman-1 for 10 (hp 18)
-  weir_foreman-1 misses teodor
-  teodor hp 21, weir_foreman-1 hp 18
-teodor gains 14 exp (14)
+Teodor attacks Weir Foreman
+  Teodor hits Weir Foreman for 10 (hp 18)
+  Weir Foreman misses Teodor
+  Teodor hp 21, Weir Foreman hp 18
+Teodor gains 14 exp (14)
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3091,7 +3091,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move pell 8,9
-pell moves 8,9 -> 8,9
+Pell moves 8,9 -> 8,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3117,7 +3117,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > wait pell
-pell waits
+Pell waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3143,7 +3143,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move dunstan 8,7
-dunstan moves 8,10 -> 8,7 via 8,9 8,8
+Dunstan moves 8,10 -> 8,7 via 8,9 8,8
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3169,7 +3169,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3195,7 +3195,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move ottilie 9,9
-ottilie moves 9,10 -> 9,9
+Ottilie moves 9,10 -> 9,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3221,7 +3221,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3247,7 +3247,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move keziah 9,8
-keziah moves 10,10 -> 9,8 via 9,10 9,9
+Keziah moves 10,10 -> 9,8 via 9,10 9,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3273,7 +3273,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3299,7 +3299,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > move captain 10,10
-captain moves 11,10 -> 10,10
+Alder Fenn moves 11,10 -> 10,10
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3325,7 +3325,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3351,22 +3351,22 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 18/28  Plain  group weir, boss, awake
 > end
--- player phase ends, turn 8 --
--- enemy phase, turn 8 --
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: move weir_foreman-1 9,2
-weir_foreman-1 moves 8,4 -> 9,2 via 8,3 8,2
+Weir Foreman moves 8,4 -> 9,2 via 8,3 8,2
 enemy: attack weir_foreman-1 teodor
 forecast weir_foreman-1 -> teodor: dmg 10 hit 60% crit 2%; counter: none
-weir_foreman-1 attacks teodor
-  weir_foreman-1 hits teodor for 10 (hp 11)
-  weir_foreman-1 hp 18, teodor hp 11
+Weir Foreman attacks Teodor
+  Weir Foreman hits Teodor for 10 (hp 11)
+  Weir Foreman hp 18, Teodor hp 11
 enemy: end
--- enemy phase ends, turn 8 --
--- player phase, turn 9 --
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3392,7 +3392,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 18/28  Plain  group weir, boss, awake
 > move teodor 9,3
-teodor moves 9,4 -> 9,3
+Teodor moves 9,4 -> 9,3
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3419,11 +3419,11 @@ B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 18/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
 forecast teodor -> weir_foreman-1: dmg 10 hit 76% crit 0%; counter: dmg 10 hit 60% crit 2%
-teodor attacks weir_foreman-1
-  teodor hits weir_foreman-1 for 10 (hp 8)
-  weir_foreman-1 misses teodor
-  teodor hp 11, weir_foreman-1 hp 8
-teodor gains 14 exp (28)
+Teodor attacks Weir Foreman
+  Teodor hits Weir Foreman for 10 (hp 8)
+  Weir Foreman misses Teodor
+  Teodor hp 11, Weir Foreman hp 8
+Teodor gains 14 exp (28)
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3449,7 +3449,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > move dunstan 8,4
-dunstan moves 8,7 -> 8,4 via 8,6 8,5
+Dunstan moves 8,7 -> 8,4 via 8,6 8,5
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3475,7 +3475,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > wait dunstan
-dunstan waits
+Dunstan waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3501,7 +3501,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > move keziah 9,5
-keziah moves 9,8 -> 9,5 via 9,7 9,6
+Keziah moves 9,8 -> 9,5 via 9,7 9,6
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3527,7 +3527,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > wait keziah
-keziah waits
+Keziah waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3553,7 +3553,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > move pell 8,6
-pell moves 8,9 -> 8,6 via 8,8 8,7
+Pell moves 8,9 -> 8,6 via 8,8 8,7
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3579,7 +3579,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > wait pell
-pell waits
+Pell waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3605,7 +3605,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > move ottilie 9,6
-ottilie moves 9,9 -> 9,6 via 9,8 9,7
+Ottilie moves 9,9 -> 9,6 via 9,8 9,7
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3631,7 +3631,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > wait ottilie
-ottilie waits
+Ottilie waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3657,7 +3657,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > move captain 9,7
-captain moves 10,10 -> 9,7 via 9,10 9,9 9,8
+Alder Fenn moves 10,10 -> 9,7 via 9,10 9,9 9,8
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3683,7 +3683,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > wait captain
-captain waits
+Alder Fenn waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM
@@ -3709,20 +3709,20 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 8/28   Plain  group weir, boss, awake
 > end
--- player phase ends, turn 9 --
--- enemy phase, turn 9 --
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
 enemy: wait archer-1
-archer-1 waits
+Archer waits
 enemy: wait shieldbearer-1
-shieldbearer-1 waits
+Shieldbearer waits
 enemy: attack weir_foreman-1 teodor
 forecast weir_foreman-1 -> teodor: dmg 10 hit 60% crit 2%; counter: dmg 10 hit 76% crit 0%
-weir_foreman-1 attacks teodor
-  weir_foreman-1 misses teodor
-  teodor hits weir_foreman-1 for 10 (hp 0)
-  weir_foreman-1 hp 0, teodor hp 11
-teodor gains 60 exp (88)
-weir_foreman-1 falls at 9,2
+Weir Foreman attacks Teodor
+  Weir Foreman misses Teodor
+  Teodor hits Weir Foreman for 10 (hp 0)
+  Weir Foreman hp 0, Teodor hp 11
+Teodor gains 60 exp (88)
+Weir Foreman falls at 9,2
 Harrow Weir  turn 9 of 14  enemy phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM

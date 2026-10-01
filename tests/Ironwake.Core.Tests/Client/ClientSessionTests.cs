@@ -72,8 +72,8 @@ public class ClientSessionTests
 
         Assert.IsType<Move>(client.Click(new Coord(10, 1)));
         Assert.IsType<Attack>(client.Click(client.State.Find("archer-2")!.At));
-        Assert.Equal("rook moves 8,2 -> 10,1 via 8,1 9,1", client.Log[0]);
-        Assert.StartsWith("rook attacks archer-2\n", client.Log[1]);
+        Assert.Equal("Rook moves 8,2 -> 10,1 via 8,1 9,1", client.Log[0]);
+        Assert.StartsWith("Rook attacks Archer 2\n", client.Log[1]);
         Assert.Null(client.Selected);
     }
 

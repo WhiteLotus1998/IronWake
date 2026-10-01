@@ -10,28 +10,46 @@ namespace Ironwake.Core;
 public static class Objective
 {
     /// <summary>
-    /// The objective line: which unit must do what by which turn, then what loses the battle,
-    /// the captain named with the letter the console's board draws it with, unless
-    /// <paramref name="letters"/> is false for a renderer that draws no letters (issue 578).
+    /// The objective line in the player's words (issue 609, Lotus's own line for the Tollgate):
+    /// what to do and by when, then who must survive, as two short sentences. Where the seize
+    /// tile is and the rule clauses that hang off the objective are <see cref="Rules"/>, printed
+    /// by <c>help</c>, never in the headline.
     /// </summary>
-    public static string Line(BattleState state, GameContent content, bool letters = true)
+    public static string Line(BattleState state, GameContent content)
     {
         var map = state.Map;
-        var captain = Captain(state, content, letters);
         var by = $"by the end of turn {map.TurnLimit}";
         var win = map.Win switch
         {
-            WinCondition.Seize => $"the captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)} {by}; only the captain seizes",
-            WinCondition.Rout => $"defeat every enemy {by}",
-            WinCondition.DefeatBoss => $"defeat the boss ({MapRenderer.BossGlyph}) {by}",
-            WinCondition.Survive => $"hold until the end of turn {map.TurnLimit}",
-            WinCondition.Escape => $"the captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}) {by}{(map.ExitAfterMove ? "" : "; a unit that starts its turn on an exit may leave")}; anyone still on the board is left behind",
+            WinCondition.Seize => $"Get the captain to the {SeizeName(content)} {by}.",
+            WinCondition.Rout => $"Defeat every enemy {by}.",
+            WinCondition.DefeatBoss => $"Defeat the boss {by}.",
+            WinCondition.Survive => $"Hold out until the end of turn {map.TurnLimit}.",
+            WinCondition.Escape => $"Get the captain out through an exit {by}.",
             _ => throw new ArgumentOutOfRangeException(nameof(state), map.Win, "unknown win condition"),
         };
-        var lose = map.ProtectId is { } protect
-            ? $"lost if the captain or {protect} falls"
-            : "lost if the captain falls";
-        return $"objective: {win}; {lose}";
+        var captain = Rank(state);
+        var survivors = map.ProtectId is { } protect ? $"{captain} and {UnitNames.Of(state, content)[protect]} must survive." : $"{captain} must survive.";
+        return $"{win} {survivors}";
+    }
+
+    /// <summary>
+    /// The clauses the objective line leaves out (issue 609), in sentence case, one per line:
+    /// where the seize tile is and that only the captain seizes, how an exit works, the boss's
+    /// mark. The console's <c>help</c> prints them under the commands; empty when the map's
+    /// objective needs nothing more than its line.
+    /// </summary>
+    public static IReadOnlyList<string> Rules(BattleState state, GameContent content)
+    {
+        var map = state.Map;
+        var captain = Captain(state, content);
+        return map.Win switch
+        {
+            WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)}. Only the captain seizes." },
+            WinCondition.Escape => new[] { $"The captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}).{(map.ExitAfterMove ? "" : " A unit that starts its turn on an exit may leave.")} Anyone still on the board is left behind." },
+            WinCondition.DefeatBoss => new[] { $"The boss is drawn {MapRenderer.BossGlyph} on the board." },
+            _ => Array.Empty<string>(),
+        };
     }
 
     /// <summary>
@@ -50,9 +68,12 @@ public static class Objective
         switch (outcome.Cause)
         {
             case LossCause.Captain:
-                return $"lost because the captain, {Captain(state, content)}, fell";
+                return CaptainUnit(state) is { } fallen ? $"Lost because the captain, {fallen.Unit.Name}, fell." : "Lost because the captain fell.";
             case LossCause.Protected:
-                return $"lost because {outcome.Reason}; this map is lost if {map.ProtectId} falls or is left behind";
+                var protect = UnitNames.Of(state, content)[map.ProtectId!];
+                return outcome.Reason.EndsWith("left behind", StringComparison.Ordinal)
+                    ? $"Lost because {protect} was left behind. This map is lost if {protect} falls or is left behind."
+                    : $"Lost because {protect} fell. This map is lost if {protect} falls or is left behind.";
         }
 
         var missed = map.Win switch
@@ -65,7 +86,7 @@ public static class Objective
             WinCondition.Escape => "the captain never exited",
             _ => "the objective was not met",
         };
-        return $"lost because turn {map.TurnLimit} ended and {missed}";
+        return $"Lost because turn {map.TurnLimit} ended and {missed}.";
     }
 
     /// <summary>
@@ -90,12 +111,12 @@ public static class Objective
         };
         if (mover is not null && after.Find(mover) is { Side: Side.Player, IsCaptain: false } unit && map.IsThrone(unit.At))
         {
-            lines.Add($"{unit.Id} stands on the {SeizeName(content)}, but only the captain, {Captain(after, content)}, seizes");
+            lines.Add(UnitNames.Sentence($"{UnitNames.Of(after, content)[unit.Id]} stands on the {SeizeName(content)}, but only the captain, {Captain(after, content, letters: false)}, seizes."));
         }
 
         if (before.UnitsOf(Side.Enemy).Any() && !after.UnitsOf(Side.Enemy).Any())
         {
-            lines.Add($"no enemy is left, but the map is not won: the captain, {Captain(after, content)}, must still stand on the {SeizeName(content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn})");
+            lines.Add($"No enemy is left, but the map is not won: the captain, {Captain(after, content, letters: false)}, must still stand on the {SeizeName(content)} at {Thrones(map)} by the end of turn {map.TurnLimit} (now turn {after.Turn}).");
         }
 
         return lines;
@@ -112,12 +133,19 @@ public static class Objective
             ? throne.Name.ToLowerInvariant()
             : MapDefinition.ThroneTerrainId;
 
-    /// <summary>The captain as the objective names it: the unit's name, then the letter the board draws it with when <paramref name="letters"/> is true.</summary>
-    private static string Captain(BattleState state, GameContent content, bool letters = true)
-    {
-        var captain = state.Units.FirstOrDefault(u => u.IsCaptain)
+    /// <summary>The captain by rank and surname, as the objective line names him: "Captain Fenn" for Alder Fenn; "The captain" when no captain was ever on the board.</summary>
+    private static string Rank(BattleState state) =>
+        CaptainUnit(state) is { } captain ? "Captain " + captain.Unit.Name.Split(' ')[^1] : "The captain";
+
+    private static BattleUnit? CaptainUnit(BattleState state) =>
+        state.Units.FirstOrDefault(u => u.IsCaptain)
             ?? state.Escaped.FirstOrDefault(u => u.IsCaptain)
             ?? state.History.SelectMany(h => h.Units).FirstOrDefault(u => u.IsCaptain);
+
+    /// <summary>The captain as the rules and verdicts name it: the unit's name, then the letter the board draws it with when <paramref name="letters"/> is true.</summary>
+    private static string Captain(BattleState state, GameContent content, bool letters = true)
+    {
+        var captain = CaptainUnit(state);
         if (captain is null)
         {
             return "the captain";
