@@ -804,10 +804,17 @@ public sealed class ClientSession
     /// <summary>
     /// The beat for <paramref name="e"/>, with its scene when <see cref="SceneSetting"/> plays the
     /// combat as one and its level-up card when <paramref name="events"/>, its command's events,
-    /// level a unit.
+    /// level a unit. A command with no combat whose events level a unit (a heal's EXP, slice 2)
+    /// gets the card alone, on its first heal.
     /// </summary>
     private Beat? Staged(GameEvent e, BattleState before, BattleState after, IReadOnlyList<GameEvent> events)
     {
+        if (e is UnitHealed && ReferenceEquals(e, events.OfType<UnitHealed>().First()) && !events.OfType<CombatFought>().Any()
+            && LevelUpCard.Of(events, after, Content) is { } card)
+        {
+            return Beat.CardOnly(card);
+        }
+
         var beat = Beat.Of(e, before, after);
         if (beat is null || e is not CombatFought combat)
         {

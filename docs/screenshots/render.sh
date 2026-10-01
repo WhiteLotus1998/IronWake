@@ -104,3 +104,10 @@ shot saltmarsh_ford-7-reach-asleep --map saltmarsh_ford --seed 7 --threat
 # seed 53 turn 3, and the threat hatch laid over the dark at dusk (columns 3 to 8).
 python3 docs/look/crop.py "$out/brackwater_cut-53-reach-all.png" "$out/crop-captain-4x.png" 390 222 102 40
 python3 docs/look/crop.py "$out/brackwater_cut-53-reach-all.png" "$out/crop-dusk-hatch-4x.png" 126 190 136 102
+# Issue 535 slice 2: the battle scene's procedural backdrop. The Tollgate's turn-4 phase at the
+# key-moments default (the rider's kill on Teodor, on plain), and Brackwater seed 53's turn-3
+# phase with every combat a scene (Rook in the ford under fog, the dusk over both halves).
+STILLS=(21)
+strip the_tollgate-113-scene 40 0.25 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0
+STILLS=(22)
+strip brackwater_cut-53-scene 40 0.25 --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-turn3.script" --enemy-steps 0 --scenes all

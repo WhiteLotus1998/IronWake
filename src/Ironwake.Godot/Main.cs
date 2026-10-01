@@ -210,6 +210,12 @@ public partial class Main : Node2D
             _client = new ClientSession(content, state);
             _tile = TileFor(map);
             _callouts = Array.IndexOf(args, "--callouts") >= 0 ? new Callouts() : null;
+            _client.SceneSetting = Arg(args, "--scenes") switch
+            {
+                "all" => SceneSetting.All,
+                "map" => SceneSetting.MapOnly,
+                _ => SceneSetting.KeyMoments,
+            };
             if (Arg(args, "--script") is { } script)
             {
                 Ironwake.Client.Script.Apply(_client, File.ReadAllText(script));
