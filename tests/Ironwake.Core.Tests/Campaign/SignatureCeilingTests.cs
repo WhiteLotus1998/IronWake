@@ -159,10 +159,19 @@ public class SignatureCeilingTests
     [Fact]
     public void TheSmokeRowPassesWhenNoSignatureItemShips()
     {
-        var row = Ironwake.Sim.Program.CeilingGate(Shipped);
+        var row = Ironwake.Sim.Program.CeilingGate(Ironwake.Content.ContentLoader.Parse(Ironwake.Core.Tests.Content.Fixture.Files()));
 
         Assert.True(row.Passed);
         Assert.Equal("signature ceiling: no signature item ships: ok", row.Line);
+    }
+
+    [Fact]
+    public void TheSmokeRowPassesOnTheShippedHeirloomAtItsLastStage()
+    {
+        var row = Ironwake.Sim.Program.CeilingGate(Shipped);
+
+        Assert.True(row.Passed);
+        Assert.Equal("signature ceiling: 1 items, highest 1.14 of 1.15: ok", row.Line);
     }
 
     [Fact]

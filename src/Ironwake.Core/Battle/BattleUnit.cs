@@ -112,7 +112,7 @@ public sealed record BattleUnit(
         var unitClass = content.Class(Unit.ClassId);
         return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
             && (item.Uses > 0 || !weapon.IsMagic)
-            ? Kinsbane.Shape(weapon, item)
+            ? Heirloom.Shape(Kinsbane.Shape(weapon, item), item)
             : null;
     }
 
@@ -152,12 +152,13 @@ public sealed record BattleUnit(
 
     /// <summary>
     /// The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.
-    /// A hungering weapon comes back as its stack has grown or starved it (<see cref="Kinsbane.Shape"/>).
+    /// A hungering weapon comes back as its stack has grown or starved it (<see cref="Kinsbane.Shape"/>),
+    /// an heirloom at the stage its stack has reached (<see cref="Heirloom.Shape"/>).
     /// </summary>
     public Weapon? EquippedWeapon(GameContent content)
     {
         var slot = EquippedSlot(content);
-        return slot < 0 ? null : Kinsbane.Shape(content.Weapon(Unit.Inventory.Items[slot].ItemId), Unit.Inventory.Items[slot]);
+        return slot < 0 ? null : Heirloom.Shape(Kinsbane.Shape(content.Weapon(Unit.Inventory.Items[slot].ItemId), Unit.Inventory.Items[slot]), Unit.Inventory.Items[slot]);
     }
 
     /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>

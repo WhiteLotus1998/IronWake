@@ -17,6 +17,15 @@ public readonly record struct ItemStack(string ItemId, int Uses)
 
     /// <summary>Whether a hungering weapon is in its starved form (DESIGN.md 13.23): half Mt, uses held at 1.</summary>
     public bool Starved { get; init; }
+
+    /// <summary>
+    /// The combats an heirloom has been fought with (issue 646; <see cref="Heirloom"/>), 0 for any
+    /// other stack. Never printed: only the stage it has reached is.
+    /// </summary>
+    public int Combats { get; init; }
+
+    /// <summary>An heirloom's stage: 0 is its first, n is the ladder's nth turn. 0 for any other stack.</summary>
+    public int Stage { get; init; }
 }
 
 /// <summary>

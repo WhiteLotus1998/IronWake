@@ -1779,6 +1779,11 @@ public sealed class PlaySession
             lines.Add($"  {hunger}");
         }
 
+        if (Heirloom.Card(unit, content) is { } heirloom)
+        {
+            lines.Add($"  {heirloom}");
+        }
+
         if (state.CantoReachOf(unit, content) is not null)
         {
             lines.Add($"  Canto: {unit.Canto} movement left this phase");
@@ -2160,6 +2165,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, Mt +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
+            case HeirloomTurned t:
+                return $"{content.ItemName(t.ItemId)} turns in {names[t.UnitId]}'s hands: {t.StageId}. {Heirloom.Shape(content.Weapon(t.ItemId), new ItemStack(t.ItemId, 0) { Stage = t.Stage }).Description}";
             case WatchTaken w:
                 return $"{names[w.UnitId]} watches from {w.At}"
                     + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")

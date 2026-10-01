@@ -221,6 +221,12 @@ public static class ProtocolJson
                 w.WriteNumber("healed", h.Healed);
                 w.WriteNumber("hpAfter", h.HpAfter);
                 break;
+            case HeirloomTurned t:
+                w.WriteString("unit", t.UnitId);
+                w.WriteString("item", t.ItemId);
+                w.WriteNumber("stage", t.Stage);
+                w.WriteString("stageId", t.StageId);
+                break;
             case WatchTaken t:
                 w.WriteString("unit", t.UnitId);
                 WriteCoord(w, "at", t.At);
@@ -577,6 +583,11 @@ public static class ProtocolJson
         w.WriteString("seed", state.Seed.ToString(System.Globalization.CultureInfo.InvariantCulture));
         w.WriteString("scheme", Name(state.Scheme));
         w.WriteNumber("recallCharges", state.RecallCharges);
+        if (state.CampaignMap is { } campaignMap)
+        {
+            w.WriteNumber("campaignMap", campaignMap);
+        }
+
         w.WriteStartArray("units");
         foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
@@ -737,7 +748,10 @@ public static class ProtocolJson
                     return new Keepsake(ReadCoord(k, "at"), fallen, new ItemStack(RequiredString(k, "item"), RequiredInt(k, "uses")) { Keepsake = fallen });
                 }))
                 : ValueList<Keepsake>.Empty,
-            e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty);
+            e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty)
+        {
+            CampaignMap = OptionalInt(e, "campaignMap"),
+        };
     }
 
     private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content, bool burning = false, SignatureKind? signature = null)
@@ -862,6 +876,16 @@ public static class ProtocolJson
                 w.WriteBoolean("starved", true);
             }
 
+            if (stack.Combats != 0)
+            {
+                w.WriteNumber("combats", stack.Combats);
+            }
+
+            if (stack.Stage != 0)
+            {
+                w.WriteNumber("stage", stack.Stage);
+            }
+
             w.WriteEndObject();
         }
 
@@ -936,7 +960,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved") }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0 }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))

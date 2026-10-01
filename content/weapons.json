@@ -15,6 +15,11 @@
     { "id": "toll_axe", "name": "Toll Axe", "type": "axe", "mt": 6, "hit": 60, "crit": 0, "wt": 8, "minRange": 1, "maxRange": 2, "durability": 20, "rank": "E", "description": "Bearded axe with a long haft. Reaches two paces for whoever can lift it." },
     { "id": "post_maul", "name": "Post Maul", "type": "axe", "mt": 9, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "windup": true, "description": "A fence-driver's maul. The swing takes a while; the landing does not." },
     { "id": "kinsbane", "name": "Kinsbane", "type": "axe", "mt": 9, "hit": 70, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E", "hungers": true, "description": "Placeholder. Drains 5 HP a phase it goes unfed; a kill heals 10." },
+    { "id": "family_lance", "name": "Family Lance", "type": "lance", "mt": 5, "hit": 60, "crit": 0, "wt": 10, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E", "boundTo": "teodor", "description": "Older than the house that kept it. Heavier than it should be.",
+      "heirloom": { "fromMap": 5, "first": "rusted", "stages": [
+        { "id": "pitted", "at": 3, "mt": 7, "hit": 70, "crit": 0, "wt": 10, "description": "Placeholder. The rust comes off in flakes. What is under it is not iron." },
+        { "id": "sound", "at": 6, "mt": 9, "hit": 75, "crit": 0, "wt": 10, "description": "Placeholder. Balanced now, or he has learned it. He will not say which." },
+        { "id": "woken", "at": 10, "mt": 10, "hit": 80, "crit": 0, "wt": 10, "description": "Placeholder. It sits in his hands as if it had waited for them." } ] } },
 
     { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "price": 400, "effective": ["flying"], "description": "Yew and gut, nothing fancy. Brings down birds and the people on them." },
     { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "rank": "E", "price": 900, "effective": ["flying"], "description": "Steel-backed and stiff to draw. Rewards the archer who keeps at it." },

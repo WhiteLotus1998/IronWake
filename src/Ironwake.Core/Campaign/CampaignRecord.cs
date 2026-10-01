@@ -147,7 +147,8 @@ public sealed record CampaignRecord(
     /// campaign's difficulty, with the roster less the bench filling its slots in roster order,
     /// so benching a unit lets the next recruit take its bare slot, which is a deployment and not
     /// gate 4's ablation. A named slot whose recruit has fallen stays empty. The map's arrivals
-    /// join the roster for it (<see cref="Present"/>, issue 632).
+    /// join the roster for it (<see cref="Present"/>, issue 632). The battle knows which campaign map
+    /// it is (<see cref="BattleState.CampaignMap"/>), for an heirloom's floor (issue 646).
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -158,7 +159,7 @@ public sealed record CampaignRecord(
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
-        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed));
+        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed)) with { CampaignMap = MapIndex + 1 };
     }
 
     /// <summary>

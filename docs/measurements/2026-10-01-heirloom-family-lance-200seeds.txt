@@ -1,0 +1,12 @@
+# dotnet run --project src/Ironwake.Sim -c Release -- --heirloom family_lance --seeds 200 (issue 646, thresholds 3 / 6 / 10)
+heirloom: family_lance, 200 runs, the heuristic player from its owner's first map to map 7
+  map 4: won 195, owner deployed in 195, tries p50 7, combats by its end p25 2 p50 3 p75 4
+  map 5: won 193, owner deployed in 193, tries p50 4, combats by its end p25 7 p50 8 p75 10
+  map 6: won 193, owner deployed in 193, tries p50 1, combats by its end p25 10 p50 11 p75 13
+  map 7: won 167, owner deployed in 167, tries p50 3, combats by its end p25 15 p50 17 p75 19
+  no try won map 4: 5
+  no try won map 5: 2
+  no try won map 7: 26
+  pitted (at 3): turned in 193 of 200, median map 5
+  sound (at 6): turned in 193 of 200, median map 5
+  woken (at 10): turned in 184 of 200, median map 6

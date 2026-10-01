@@ -1,0 +1,19 @@
+# 0131 — The heirloom: Teodor's family lance, four stages on a hidden counter
+
+Date: 2026-10-01. Issue #646. The rules are the issue body's: Lotus's wish (round 192, item 3), Chat's shape (round 193), and Code's timing (round 194). The comment of 2026-10-01 relays Lotus's story gate (#656): mechanics only. The stage lines are placeholders, except for rusted, which the issue gives. Where the issue left an implementation choice, the Builder's leans are below; Chat can argue them on the PR.
+
+## Decided
+
+- **The ladder belongs to the weapon.** In `weapons.json`, `heirloom` takes `fromMap`, `first` (the first stage's id, whose numbers are the weapon's own) and `stages`. Each stage has an id, `at` (the combats at which it turns, rising from 1), Mt, hit, crit, weight and a one-line description. The validator allows a ladder only on a physical weapon bound to an owner, with no price and no hunger. The stage id doubles as the art key.
+- **The counter** (`combats` on the stack) counts each combat in which the carrier makes a strike with the heirloom equipped and survives. Being struck at a range it cannot answer is not fighting with it. It is never printed: the unit card shows `Family Lance, <stage>: <line>`. Benched or unequipped, it does not count.
+- **The turn** happens after a combat, when the counter has reached the next threshold and the battle is on or after the ladder's first campaign map. It turns one stage per combat, so counts reached early turn the stages one by one, starting with the first combat that may. The battle learns its campaign map from `CampaignRecord.Begin` (`BattleState.CampaignMap`; protocol `campaignMap`). Outside the campaign nothing holds it back, which only tests and samples see. The event is `heirloomTurned`, and the console prints `Family Lance turns in Teodor's hands: pitted. <line>`.
+- **Pillar 2.** `EquippedWeapon` and `UsableWeaponAt` return the current stage's numbers and line, so the forecast, `threat` and the planners read the lance as it is now. Only the thresholds are hidden.
+- **It never breaks** (lean): uses never fall below 1, the same floor Kinsbane has. A bound weapon that is never repaired would be gone for good, and the issue's ladder assumes it lasts to map 6.
+- **The smith's refusal** is `Heirloom.SmithRefuses` and `Heirloom.SmithRefusal`, for the forge (#647) to call. No forge exists yet.
+- **The numbers** (`family_lance`, lance E, bound to Teodor): rusted 5/60/0, weight 10, below the iron lance's 6/70; pitted 7/70/0/10; sound 9/75/0/10, the steel lance's numbers; woken 10/80/0/10. The signature ceiling reads the last stage (`Heirloom.Last`), and woken stands at 1.14 of the steel lance against the 1.15 ceiling. Weight is the lever: at Teodor's card Str 7, every point under 10 is a speed point, and woken at 10/80/5/7 read 1.33.
+- **The timing is measured.** `--heirloom <item>` runs the campaign under the heuristic player from the map before the floor (the Tollgate, map 4, Teodor's arrival in DESIGN 14) to map 7. Teodor carries the lance in place of his iron lance. A map is retried on fresh seeds, up to 50 times, until it is won with him standing, which stands in for a player's Recall. At thresholds 3, 6 and 10 over 200 runs (`docs/measurements/2026-10-01-heirloom-family-lance-200seeds.txt`), the median combats by each map's end were 3 (map 4), 8 (5), 11 (6) and 17 (7). Pitted and sound turn on map 5 at the median, and woken on map 6 (184 of 200 runs). That is the issue's "the three turns fall on maps 5 and 6".
+
+## Not done here
+
+- No item ships until #656. Nothing issues the lance: Teodor's cast pack is unchanged, so no tuned map moves. The quest that pays it and its signature art wait on the story gate, as do the stage lines.
+- No hand play. The lance turns on maps 5 and 6 of a campaign Teodor does not yet arrive in (#632's later slices), and no single board shows a turn at these thresholds.

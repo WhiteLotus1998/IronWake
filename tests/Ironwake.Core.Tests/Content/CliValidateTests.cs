@@ -52,6 +52,7 @@ public class CliValidateTests
 
             Directory.CreateDirectory(Path.Combine(dir, "units"));
             File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "enemies.json"), Path.Combine(dir, "units", "enemies.json"));
+            File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "cast.json"), Path.Combine(dir, "units", "cast.json"));
             File.WriteAllText(Path.Combine(dir, "campaign.json"), """{ "startingPurse": 0, "certificationPrice": 0, "maps": [ { "map": "lost_road", "reward": 0, "stock": [] } ] }""");
 
             var output = Run(out var exit, "validate", dir);
@@ -85,6 +86,7 @@ public class CliValidateTests
 
             Directory.CreateDirectory(Path.Combine(dir, "units"));
             File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "enemies.json"), Path.Combine(dir, "units", "enemies.json"));
+            File.Copy(Path.Combine(Fixture.RealContentDirectory(), "units", "cast.json"), Path.Combine(dir, "units", "cast.json"));
             File.WriteAllText(Path.Combine(dir, "maps", "broken.map"), "name: Broken\nsize: 2x1\nwin: rout\nturn_limit: 5\n\n.?\n\nunits:\nP captain 0,0\n");
 
             var output = Run(out var exit, "validate", dir);

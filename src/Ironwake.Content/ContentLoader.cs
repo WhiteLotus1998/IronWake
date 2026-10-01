@@ -592,6 +592,66 @@ public static class ContentLoader
     /// line of at most <see cref="DescriptionMax"/> characters with no line break, read after the
     /// entry's other fields so an earlier field's error is the one named.
     /// </summary>
+    /// <summary>
+    /// A weapon's <c>heirloom</c> ladder (issue 646): <c>fromMap</c> (at least 1), <c>first</c> (the
+    /// first stage's id), and <c>stages</c>, each with an id, the combats it turns at (rising, from
+    /// 1), Mt, hit, crit, weight and a description. Only a physical weapon with no price and an
+    /// owner (<c>boundTo</c>) carries one; every id is distinct.
+    /// </summary>
+    private static HeirloomLadder ReadHeirloom(EntryNode weapon, bool magicOrHeals)
+    {
+        if (magicOrHeals || weapon.Has("price") || !weapon.Has("boundTo") || weapon.BoolOr("hungers", false))
+        {
+            throw weapon.Error("heirloom", "an heirloom is a physical weapon bound to its owner, with no price and no hunger");
+        }
+
+        var node = weapon.Object("heirloom");
+        var fromMap = node.Int("fromMap");
+        if (fromMap < 1)
+        {
+            throw weapon.Error("heirloom.fromMap", "must be at least 1");
+        }
+
+        var first = node.String("first");
+        var ids = new HashSet<string>(StringComparer.Ordinal) { first };
+        var turns = new List<WeaponStage>();
+        var stages = node.Array("stages");
+        if (stages.Count == 0)
+        {
+            throw weapon.Error("heirloom.stages", "must name at least one stage");
+        }
+
+        for (var i = 0; i < stages.Count; i++)
+        {
+            var field = $"heirloom.stages[{i}]";
+            var stage = new EntryNode(weapon.File, $"{weapon.Entry}.{field}", stages[i]);
+            var id = stage.String("id");
+            if (!ids.Add(id))
+            {
+                throw weapon.Error(field + ".id", $"'{id}' names a stage twice");
+            }
+
+            var at = stage.Int("at");
+            if (at < 1 || (turns.Count > 0 && at <= turns[^1].At))
+            {
+                throw weapon.Error(field + ".at", "must be at least 1 and above the stage before it");
+            }
+
+            var mt = stage.Int("mt");
+            var hit = stage.Int("hit");
+            var crit = stage.Int("crit");
+            var wt = stage.Int("wt");
+            if (mt < 0 || hit < 0 || hit > 200 || crit < 0 || crit > 100 || wt < 0)
+            {
+                throw weapon.Error(field, "mt and wt must be at least 0, hit 0..200, crit 0..100");
+            }
+
+            turns.Add(new WeaponStage(id, mt, hit, crit, wt, at, Description(stage)));
+        }
+
+        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns));
+    }
+
     private static string Description(EntryNode node)
     {
         var text = node.String("description");
@@ -1185,6 +1245,8 @@ public static class ContentLoader
                 throw node.Error("effective", "must not repeat a movement type");
             }
 
+            var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
+
             builder.Add(node.Entry!, new Weapon(
                 node.Entry!,
                 node.String("name"),
@@ -1207,6 +1269,7 @@ public static class ContentLoader
                 BoundTo = node.Has("boundTo") ? node.String("boundTo") : null,
                 Description = Description(node),
                 Hungers = node.BoolOr("hungers", false),
+                Heirloom = heirloom,
             });
         }
 

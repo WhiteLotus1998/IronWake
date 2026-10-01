@@ -215,3 +215,9 @@ public sealed record HungerFed(string UnitId, string ItemId, int Fed, int Healed
 
 /// <summary>A starved hungering weapon landed a hit that killed nothing (DESIGN.md 13.23, experiment): it leaves the starved form and its carrier heals what <paramref name="Healed"/> says.</summary>
 public sealed record HungerEased(string UnitId, string ItemId, int Healed, int HpAfter) : GameEvent;
+
+/// <summary>
+/// An heirloom turned to its next stage after a combat it was fought with (issue 646):
+/// <paramref name="Stage"/> is the stage reached, counted from 0, and <paramref name="StageId"/> its id.
+/// </summary>
+public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, string StageId) : GameEvent;
