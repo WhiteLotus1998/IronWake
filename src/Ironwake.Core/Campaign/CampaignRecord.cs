@@ -36,6 +36,12 @@ public sealed record CampaignRecord(
     public const string NormalDifficulty = "normal";
 
     /// <summary>
+    /// The most living members the company holds (issue 689): the captain and eleven. The fallen
+    /// keep their beds and never count toward it; a meeting or a hire past it is refused where it happens.
+    /// </summary>
+    public const int CompanyCap = 12;
+
+    /// <summary>
     /// The certification trials tried since the last map (issue 252), passed or failed: one
     /// attempt per unit and class per camp, so a failed trial opens again after the next map.
     /// </summary>
@@ -254,7 +260,7 @@ public sealed record CampaignRecord(
             return Roster;
         }
 
-        var arrivals = Arriving(content).Take(FreeBeds(content) ?? int.MaxValue).Select(content.Unit).ToList();
+        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).ToList();
         var order = content.Cast.Select(u => u.Id).ToList();
         return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
@@ -282,12 +288,28 @@ public sealed record CampaignRecord(
     /// <summary>The beds no member holds, or null when the campaign counts no beds.</summary>
     public int? FreeBeds(GameContent content) => Beds(content) is { } beds ? Math.Max(0, beds - BedsTaken) : null;
 
+    /// <summary>The company's living members (issue 689): the roster, the wounded included, the fallen not.</summary>
+    public int Living => Roster.Count;
+
     /// <summary>
-    /// The next map's arrivals who will not join because no bed is free (issue 687), in content
-    /// order: met on the map, never on the roster, never fallen, and never benched in their place.
+    /// How many more members may join now (issues 687 and 689): the free beds or the places left
+    /// under <see cref="CompanyCap"/>, whichever is fewer.
+    /// </summary>
+    public int Room(GameContent content) => Math.Min(FreeBeds(content) ?? int.MaxValue, Math.Max(0, CompanyCap - Living));
+
+    /// <summary>
+    /// Whether the cap, not the beds, is what turns the next arrival away (issue 689): the places
+    /// left under <see cref="CompanyCap"/> are no more than the free beds.
+    /// </summary>
+    public bool CompanyFull(GameContent content) => CompanyCap - Living <= (FreeBeds(content) ?? int.MaxValue);
+
+    /// <summary>
+    /// The next map's arrivals who will not join because no bed is free (issue 687) or the company
+    /// is full (issue 689), in content order: met on the map, never on the roster, never fallen,
+    /// and never benched in their place. <see cref="CompanyFull"/> says which limit bound.
     /// </summary>
     public IReadOnlyList<string> TurnedAway(GameContent content) =>
-        Arriving(content).Skip(FreeBeds(content) ?? int.MaxValue).ToList();
+        Arriving(content).Skip(Room(content)).ToList();
 
     /// <summary>Whether every map of the campaign has been won.</summary>
     public bool IsFinished(GameContent content) => MapIndex >= content.Campaign.Maps.Count;
@@ -322,7 +344,7 @@ public sealed record CampaignRecord(
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
-        var roster = Present(content).Where(u => !Benched.Contains(u.Id)).ToList();
+        var roster = Present(content).Where(u => map.DeploysAll || !Benched.Contains(u.Id)).ToList();
         var turnedAway = TurnedAway(content);
         var fallenNamed = map.Placements.OfType<PlayerPlacement>()
             .Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && (Fallen.Contains(id) || turnedAway.Contains(id)))
@@ -960,6 +982,11 @@ public sealed record CampaignRecord(
         if (map.ProtectId == unit.Id)
         {
             return ScreenResult.Refused(this, $"{map.Name} must protect {unit.Id}, who cannot be benched");
+        }
+
+        if (map.DeploysAll)
+        {
+            return ScreenResult.Refused(this, $"the whole company fights on {map.Name}; nobody is benched");
         }
 
         if (map.Placements.OfType<PlayerPlacement>().FirstOrDefault(p => p.RecruitId == unit.Id) is { } named)

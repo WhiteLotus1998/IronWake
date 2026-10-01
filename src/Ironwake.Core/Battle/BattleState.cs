@@ -252,6 +252,8 @@ public sealed record BattleState(
             var placement = map.Placements[index];
             switch (placement)
             {
+                case PlayerPlacement { Slot: PlayerSlot.AnyRecruit } when map.DeploysAll && !HasBare(roster, named, deployed, nextBare):
+                    break;
                 case PlayerPlacement p:
                     var unit = map.Armed(map.Supplied(map.Trial(Fill(p, roster, named, deployed, ref nextBare), content), content), content);
                     if (benched.Contains(unit.Id))
@@ -282,6 +284,20 @@ public sealed record BattleState(
         }
 
         return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty);
+    }
+
+    /// <summary>Whether a recruit is left for a bare slot (issue 689): on <c>deploy: all</c> the bare slots past the company stay empty.</summary>
+    private static bool HasBare(ValueList<Unit> roster, HashSet<string> named, HashSet<string> deployed, int nextBare)
+    {
+        for (var i = nextBare; i < roster.Count; i++)
+        {
+            if (!deployed.Contains(roster[i].Id) && !named.Contains(roster[i].Id))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static Unit Fill(PlayerPlacement slot, ValueList<Unit> roster, HashSet<string> named, HashSet<string> deployed, ref int nextBare)

@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "deploy" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -158,6 +158,11 @@ public static class MapFormat
         if (map.DifficultyId is { } difficulty)
         {
             sb.Append("difficulty: ").Append(difficulty).Append('\n');
+        }
+
+        if (map.Deploy != MapDefinition.DefaultDeploy)
+        {
+            sb.Append("deploy: ").Append(map.DeploysAll ? "all" : map.Deploy.ToString(System.Globalization.CultureInfo.InvariantCulture)).Append('\n');
         }
 
         if (map.Certification is { } trial)
@@ -328,7 +333,44 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders };
             ValidateMessenger(map, header);
             Validate(map);
-            return map;
+            return map with { Deploy = ParseDeploy(header, map) };
+        }
+
+        /// <summary>
+        /// The <c>deploy:</c> header (issue 689): a count from 1, or <c>all</c> for the whole living
+        /// company; absent, <see cref="MapDefinition.DefaultDeploy"/>. A count must cover the map's
+        /// player placements, and <c>all</c> needs at least <see cref="CampaignRecord.CompanyCap"/> of them.
+        /// </summary>
+        private int ParseDeploy(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            var slots = map.Placements.Count(p => p is PlayerPlacement);
+            if (!header.TryGetValue("deploy", out var entry))
+            {
+                if (slots > MapDefinition.DefaultDeploy)
+                {
+                    throw new MapException(_file, 0, $"deploy: the map has {slots} player placements and fields {MapDefinition.DefaultDeploy} without a deploy: header; set 'deploy: {slots}' or 'deploy: all'");
+                }
+
+                return MapDefinition.DefaultDeploy;
+            }
+
+            if (entry.Value == "all")
+            {
+                if (slots < CampaignRecord.CompanyCap)
+                {
+                    throw ErrorAt(entry.Line, $"deploy: all needs at least {CampaignRecord.CompanyCap} player placements, one per member of a full company, got {slots}");
+                }
+
+                return MapDefinition.DeployAll;
+            }
+
+            var count = ParseInt(header, "deploy", 1, CampaignRecord.CompanyCap, required: true, fallback: 0);
+            if (slots > count)
+            {
+                throw ErrorAt(entry.Line, $"deploy: {count} is fewer than the map's {slots} player placements");
+            }
+
+            return count;
         }
 
         /// <summary>The <c>messenger:</c> header (DESIGN.md 13.24): two tiles, the messenger's placement and its road on the grid's edge.</summary>

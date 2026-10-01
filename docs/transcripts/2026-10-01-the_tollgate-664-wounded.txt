@@ -12,7 +12,7 @@ Campaign, seed 698, difficulty Captain, permadeath off, scheme TwoRollAverage, 9
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 11)
 == Keep ==
 Purse: 500
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
@@ -701,7 +701,7 @@ She has not said whether the day was worth it. She has started asking
 the company whether they want the prayer before she says it.
 
 > roster
-Roster:
+Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Wren: Cadet L1, EXP 0, Wounded (2); 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
@@ -2730,7 +2730,7 @@ The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah
+Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah (deploy 6 of 11)
 == Keep ==
 Purse: 1500
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
@@ -2742,7 +2742,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > roster
-Roster:
+Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3

@@ -24,7 +24,7 @@ public class CampaignCliTests
         Assert.Equal(1, exit);
         Assert.Contains("Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell\n", output);
         Assert.Contains("Brannock certifies from Cadet to Reaver for 500; the purse holds 320\n", output);
-        Assert.Contains("Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Pell\n", output);
+        Assert.Contains("Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Pell (deploy 4 of ", output);
         Assert.Contains("Saltmarsh Ford won: rout; reward 800, the purse holds 1120; nobody fell\n", output);
         Assert.Contains("Campaign stopped before The Tollgate: the script ended on the screen\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

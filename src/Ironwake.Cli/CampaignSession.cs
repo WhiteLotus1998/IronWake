@@ -1328,13 +1328,15 @@ public sealed class CampaignSession
         record.LowWeapons(content).Select(l => $"low: {l.Unit.Name}'s {l.Weapon.Name} has {l.Uses} {(l.Uses == 1 ? "use" : "uses")}").ToList();
 
     /// <summary>
-    /// One line per arrival of the next map who will not join because no bed is free (issue 687):
-    /// <c>no bed free: &lt;name&gt; will not join</c>, printed where they are met.
+    /// One line per arrival of the next map who will not join, printed where they are met: when the
+    /// company is at its cap (issue 689), <c>company full (12): &lt;name&gt; will not join</c>; else,
+    /// for want of a bed (issue 687), <c>no bed free: &lt;name&gt; will not join</c>.
     /// </summary>
     public static IReadOnlyList<string> TurnedAwayLines(CampaignRecord record, GameContent content)
     {
         var names = UnitNames.Of(record, content);
-        return record.TurnedAway(content).Select(id => $"no bed free: {names[id]} will not join").ToList();
+        var why = record.CompanyFull(content) ? $"company full ({CampaignRecord.CompanyCap})" : "no bed free";
+        return record.TurnedAway(content).Select(id => $"{why}: {names[id]} will not join").ToList();
     }
 
     private void Lines(IEnumerable<string> lines)
@@ -1377,13 +1379,14 @@ public sealed class CampaignSession
     }
 
     /// <summary>
-    /// The roster as the screen prints it: a heading, one row per unit, then the fallen if any,
+    /// The roster as the screen prints it: a heading with the living count against the company's
+    /// cap (issue 689, <c>Roster: company 7/12</c>), one row per unit, then the fallen if any,
     /// each by name (issue 615); with <paramref name="typed"/>, as the console prints it, a name a
     /// command types differently is followed by that id: <c>Alder Fenn (captain)</c>.
     /// </summary>
     public static IReadOnlyList<string> RosterLines(CampaignRecord record, GameContent content, bool typed = false)
     {
-        var lines = new List<string> { "Roster:" };
+        var lines = new List<string> { $"Roster: company {record.Living}/{CampaignRecord.CompanyCap}" };
         foreach (var unit in record.Roster)
         {
             lines.AddRange(UnitLines(record, content, unit, detail: false, typed));
@@ -1472,11 +1475,20 @@ public sealed class CampaignSession
         return lines;
     }
 
-    /// <summary>Who deploys to <paramref name="map"/>, in slot order, by name; throws <see cref="ArgumentException"/> as <see cref="CampaignRecord.Deployment"/> does.</summary>
+    /// <summary>
+    /// Who deploys to <paramref name="map"/>, in slot order, by name, then how many of the living
+    /// members present field (issue 689): <c>(deploy 2 of 3)</c>, or on <c>deploy: all</c>
+    /// <c>the whole company fights: 11;</c> before the names. Throws <see cref="ArgumentException"/>
+    /// as <see cref="CampaignRecord.Deployment"/> does.
+    /// </summary>
     public static string DeploymentLine(CampaignRecord record, GameContent content, MapDefinition map)
     {
         var names = UnitNames.Of(record, content);
-        return $"Deploys to {map.Name}: {string.Join(", ", record.Deployment(map, content).Select(id => names[id]))}";
+        var deployed = record.Deployment(map, content);
+        var who = string.Join(", ", deployed.Select(id => names[id]));
+        return map.DeploysAll
+            ? $"Deploys to {map.Name}: the whole company fights: {deployed.Count}; {who}"
+            : $"Deploys to {map.Name}: {who} (deploy {deployed.Count} of {record.Present(content).Count})";
     }
 
     /// <summary>The width a text card's paragraphs are wrapped to (issue 631).</summary>

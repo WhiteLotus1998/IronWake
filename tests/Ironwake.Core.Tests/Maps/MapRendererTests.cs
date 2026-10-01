@@ -69,7 +69,8 @@ public class MapRendererTests
     /// <summary>The example map's grid with a full row of players along y=9 and y=8, and enemies along y=0 and y=1.</summary>
     private static string WithUnits(int players, int enemies)
     {
-        var sb = new System.Text.StringBuilder(MapFixture.OldMillRoad[..MapFixture.OldMillRoad.IndexOf("units:", StringComparison.Ordinal)]);
+        var header = MapFixture.OldMillRoad[..MapFixture.OldMillRoad.IndexOf("units:", StringComparison.Ordinal)];
+        var sb = new System.Text.StringBuilder(players > MapDefinition.DefaultDeploy ? header.Replace("enemy_level: 1\n", "enemy_level: 1\ndeploy: all\n") : header);
         sb.Append("units:\nP captain 0,9\n");
         for (var i = 1; i < players; i++)
         {
