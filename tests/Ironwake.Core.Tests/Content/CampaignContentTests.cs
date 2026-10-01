@@ -12,8 +12,8 @@ public class CampaignContentTests
 {
     private const string PricedWeapons = """
         { "weapons": [
-          { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40, "rank": "E", "price": 400 },
-          { "id": "toll_sword", "name": "Toll Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 20, "rank": "E" }
+          { "id": "iron_sword", "name": "Iron Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 40, "description": "A test line.", "rank": "E", "price": 400 },
+          { "id": "toll_sword", "name": "Toll Sword", "type": "sword", "mt": 5, "hit": 90, "crit": 0, "wt": 5, "minRange": 1, "maxRange": 1, "durability": 20, "description": "A test line.", "rank": "E" }
         ] }
         """;
 
@@ -77,7 +77,7 @@ public class CampaignContentTests
     [Fact]
     public void APriceBelowOneIsRefused()
     {
-        var e = Fails(Fixture.Files(items: """{ "items": [ { "id": "field_dressing", "name": "Field Dressing", "heals": 10, "uses": 3, "price": 0 } ] }"""));
+        var e = Fails(Fixture.Files(items: """{ "items": [ { "id": "field_dressing", "name": "Field Dressing", "heals": 10, "uses": 3, "description": "A test line.", "price": 0 } ] }"""));
 
         Assert.Equal((ContentFiles.ItemsName, "field_dressing", "price"), (e.File, e.Entry, e.Field));
     }

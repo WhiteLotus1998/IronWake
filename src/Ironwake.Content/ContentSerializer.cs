@@ -260,6 +260,7 @@ public static class ContentSerializer
             writer.WriteNumber("price", price);
         }
 
+        writer.WriteString("description", item.Description);
         writer.WriteEndObject();
     }
 
@@ -458,6 +459,8 @@ public static class ContentSerializer
         {
             writer.WriteString("boundTo", owner);
         }
+
+        writer.WriteString("description", weapon.Description);
 
         writer.WriteEndObject();
     }
