@@ -236,26 +236,26 @@ public class ValidationTests
     private static string WeaponWith(string body) =>
         "{ \"weapons\": [ { \"id\": \"w\", \"name\": \"W\", " + body + " } ] }";
 
-    private const string Sword = "\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"";
+    private const string Sword = "\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"";
 
     [Theory]
-    [InlineData("\"type\": \"sword\", \"mt\": -1, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "mt")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 201, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "hit")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 101, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "crit")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": -1, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "wt")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 0, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "minRange")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 2, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "maxRange")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 0, \"rank\": \"E\"", "durability")]
+    [InlineData("\"type\": \"sword\", \"mt\": -1, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "mt")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 201, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "hit")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 101, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "crit")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": -1, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "wt")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 0, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "minRange")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 2, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "maxRange")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 0, \"description\": \"A test line.\", \"rank\": \"E\"", "durability")]
     [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1", "durability")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40", "rank")]
-    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"F\"", "rank")]
-    [InlineData("\"type\": \"club\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"rank\": \"E\"", "type")]
-    [InlineData("\"type\": \"gauntlet\", \"mt\": 2, \"hit\": 90, \"crit\": 0, \"wt\": 1, \"minRange\": 1, \"maxRange\": 2, \"durability\": 30, \"rank\": \"E\"", "maxRange")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\"", "rank")]
+    [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"F\"", "rank")]
+    [InlineData("\"type\": \"club\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "type")]
+    [InlineData("\"type\": \"gauntlet\", \"mt\": 2, \"hit\": 90, \"crit\": 0, \"wt\": 1, \"minRange\": 1, \"maxRange\": 2, \"durability\": 30, \"description\": \"A test line.\", \"rank\": \"E\"", "maxRange")]
     [InlineData(Sword + ", \"heals\": true", "heals")]
     [InlineData(Sword + ", \"healBase\": 3", "healBase")]
     [InlineData(Sword + ", \"effective\": [\"boats\"]", "effective")]
     [InlineData(Sword + ", \"effective\": [\"flying\", \"flying\"]", "effective")]
-    [InlineData("\"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 2, \"minRange\": 1, \"maxRange\": 1, \"durability\": 8, \"rank\": \"E\", \"heals\": true, \"healBase\": -1", "healBase")]
+    [InlineData("\"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 2, \"minRange\": 1, \"maxRange\": 1, \"durability\": 8, \"description\": \"A test line.\", \"rank\": \"E\", \"heals\": true, \"healBase\": -1", "healBase")]
     public void WeaponFieldRulesFire(string body, string expectedField)
     {
         var e = Fails(Fixture.Files(weapons: WeaponWith(body)));
@@ -376,9 +376,9 @@ public class ValidationTests
     }
 
     [Theory]
-    [InlineData("{ \"items\": [ { \"id\": \"iron_sword\", \"name\": \"Sword\", \"heals\": 1, \"uses\": 1 } ] }", "id")]
-    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 0, \"uses\": 1 } ] }", "heals")]
-    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 1, \"uses\": 0 } ] }", "uses")]
+    [InlineData("{ \"items\": [ { \"id\": \"iron_sword\", \"name\": \"Sword\", \"heals\": 1, \"uses\": 1, \"description\": \"A test line.\" } ] }", "id")]
+    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 0, \"uses\": 1, \"description\": \"A test line.\" } ] }", "heals")]
+    [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 1, \"uses\": 0, \"description\": \"A test line.\" } ] }", "uses")]
     [InlineData("{ \"items\": [ { \"id\": \"x\", \"name\": \"X\", \"heals\": 1 } ] }", "uses")]
     public void ItemFieldRulesFire(string items, string expectedField)
     {
@@ -393,7 +393,7 @@ public class ValidationTests
         var content = ContentLoader.Parse(Fixture.Files(units: UnitWith(Recruit(", \"inventory\": [ { \"item\": \"iron_sword\" }, { \"item\": \"field_dressing\" } ]"))));
 
         Assert.Equal(new ItemStack("field_dressing", 3), content.Unit("u").Inventory.Items[1]);
-        Assert.Equal(new Item("field_dressing", "Field Dressing", 10, 3), content.Item("field_dressing"));
+        Assert.Equal(new Item("field_dressing", "Field Dressing", 10, 3) { Description = "A test line." }, content.Item("field_dressing"));
     }
 
     [Fact]
@@ -525,7 +525,7 @@ public class ValidationTests
     public void ACasterWithOneSpellIsRefused()
     {
         const string classes = "{ \"classes\": [ { \"id\": \"cadet\", \"name\": \"Cadet\", \"movement\": \"infantry\", \"mov\": 4, \"weapons\": [\"reason\"] } ] }";
-        const string weapons = "{ \"weapons\": [ { \"id\": \"iron_sword\", \"name\": \"Cinder\", \"type\": \"reason\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 8, \"rank\": \"E\" } ] }";
+        const string weapons = "{ \"weapons\": [ { \"id\": \"iron_sword\", \"name\": \"Cinder\", \"type\": \"reason\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 8, \"description\": \"A test line.\", \"rank\": \"E\" } ] }";
         var one = "{ \"units\": [ " + CastMember("captain", Authored) + " ] }";
         var e = Fails(Fixture.Files(classes: classes, weapons: weapons, cast: one));
         AssertNames(e, ContentFiles.CastName, "captain", "inventory");
@@ -536,9 +536,9 @@ public class ValidationTests
     }
 
     private const string FaithSpells = "{ \"weapons\": [ " +
-        "{ \"id\": \"iron_sword\", \"name\": \"Salve\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 2, \"minRange\": 1, \"maxRange\": 1, \"durability\": 8, \"rank\": \"E\", \"heals\": true }, " +
-        "{ \"id\": \"beacon\", \"name\": \"Beacon\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 4, \"rank\": \"E\", \"heals\": true }, " +
-        "{ \"id\": \"radiance\", \"name\": \"Radiance\", \"type\": \"faith\", \"mt\": 6, \"hit\": 85, \"crit\": 0, \"wt\": 4, \"minRange\": 1, \"maxRange\": 2, \"durability\": 5, \"rank\": \"E\" } ] }";
+        "{ \"id\": \"iron_sword\", \"name\": \"Salve\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 2, \"minRange\": 1, \"maxRange\": 1, \"durability\": 8, \"description\": \"A test line.\", \"rank\": \"E\", \"heals\": true }, " +
+        "{ \"id\": \"beacon\", \"name\": \"Beacon\", \"type\": \"faith\", \"mt\": 0, \"hit\": 100, \"crit\": 0, \"wt\": 3, \"minRange\": 1, \"maxRange\": 2, \"durability\": 4, \"description\": \"A test line.\", \"rank\": \"E\", \"heals\": true }, " +
+        "{ \"id\": \"radiance\", \"name\": \"Radiance\", \"type\": \"faith\", \"mt\": 6, \"hit\": 85, \"crit\": 0, \"wt\": 4, \"minRange\": 1, \"maxRange\": 2, \"durability\": 5, \"description\": \"A test line.\", \"rank\": \"E\" } ] }";
 
     /// <summary>
     /// Issue 113: two healing spells pass the count and fail its purpose, since a healing

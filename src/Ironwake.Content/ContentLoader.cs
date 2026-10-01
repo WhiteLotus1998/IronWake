@@ -587,6 +587,30 @@ public static class ContentLoader
     }
 
     /// <summary>The consumables of DESIGN.md section 5 (issue 9): each heals its user and has a number of uses. An id shared with a weapon is refused, since an inventory entry names either.</summary>
+    /// <summary>
+    /// An item's <c>description</c> (issue 650): required on every weapon, spell and consumable, one
+    /// line of at most <see cref="DescriptionMax"/> characters with no line break, read after the
+    /// entry's other fields so an earlier field's error is the one named.
+    /// </summary>
+    private static string Description(EntryNode node)
+    {
+        var text = node.String("description");
+        if (text.Contains('\n') || text.Contains('\r'))
+        {
+            throw node.Error("description", "must be one line");
+        }
+
+        if (text.Length > DescriptionMax)
+        {
+            throw node.Error("description", $"must be at most {DescriptionMax} characters, not {text.Length}");
+        }
+
+        return text;
+    }
+
+    /// <summary>The longest <c>description</c> the validator accepts: one console line beside the card's label.</summary>
+    public const int DescriptionMax = 72;
+
     private static ImmutableSortedDictionary<string, Item> ParseItems(ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons)
     {
         var entries = Entries(file, "items");
@@ -610,7 +634,7 @@ public static class ContentLoader
                 throw node.Error("uses", "must be at least 1");
             }
 
-            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses, Price(node)));
+            builder.Add(node.Entry!, new Item(node.Entry!, node.String("name"), heals, uses, Price(node)) { Description = Description(node) });
         }
 
         return builder.ToImmutable();
@@ -1176,6 +1200,7 @@ public static class ContentLoader
                 node.BoolOr("windup", false))
             {
                 BoundTo = node.Has("boundTo") ? node.String("boundTo") : null,
+                Description = Description(node),
             });
         }
 

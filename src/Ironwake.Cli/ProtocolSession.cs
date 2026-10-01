@@ -209,9 +209,24 @@ public sealed class ProtocolSession
             });
         }
 
+        if (name == "about")
+        {
+            var named = ProtocolJson.RequiredString(request, "item");
+            if (ItemCard.Find(_content, named) is not { } itemId)
+            {
+                throw new ProtocolException($"no item '{named}'; name it by its id or name");
+            }
+
+            return Ok(name, w =>
+            {
+                w.WriteString("item", itemId);
+                w.WriteString("text", ItemCard.Text(_content, itemId));
+            });
+        }
+
         if (name is not ("reachable" or "targets" or "forecast" or "threat"))
         {
-            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat, terrain");
+            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat, terrain, about");
         }
 
         var unitId = ProtocolJson.RequiredString(request, "unit");

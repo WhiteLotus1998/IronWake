@@ -14,6 +14,7 @@ namespace Ironwake.Core;
 /// (DESIGN.md 13.16, experiment; <see cref="Ironwake.Core.Windup"/>). It counters as any weapon does.
 /// <see cref="BoundTo"/> marks a signature item (issue 635, DESIGN section 14): bound to one cast
 /// member, never sold, paid by their quest 2, and lost with them.
+/// <see cref="Description"/> is the one line the item card prints (issue 650), required by the content validator.
 /// </summary>
 public sealed record Weapon(
     string Id,
@@ -36,6 +37,9 @@ public sealed record Weapon(
 {
     /// <summary>The cast id this signature item is bound to (issue 635), or null for an ordinary weapon.</summary>
     public string? BoundTo { get; init; }
+
+    /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
+    public string Description { get; init; } = "";
 
     public bool IsMagic => Type.IsMagic();
 

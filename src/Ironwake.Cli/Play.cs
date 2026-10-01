@@ -54,6 +54,7 @@ public sealed class PlaySession
           reach <unit>             Show the board with the unit's reachable tiles marked
           show <unit>              Show a unit's numbers
           terrain [glyph|name]     What the ground does for a unit on it; with no name, every terrain on the board
+          about <item>             What a weapon, spell or item is: its numbers and one line on it
           map                      Show the board
           help                     This list
         Slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
@@ -676,6 +677,20 @@ public sealed class PlaySession
                 break;
             case "terrain":
                 Error("usage: terrain [glyph|name]");
+                break;
+            case "about" when words.Length >= 2:
+                if (ItemCard.Find(_content, string.Join(' ', words[1..])) is { } itemId)
+                {
+                    _out.WriteLine(ItemCard.Text(_content, itemId));
+                }
+                else
+                {
+                    Error($"no item '{string.Join(' ', words[1..])}'; name it by its id or name");
+                }
+
+                break;
+            case "about":
+                Error("usage: about <item>");
                 break;
             case "map":
                 _out.Write(MapRenderer.Render(_state, _content));
