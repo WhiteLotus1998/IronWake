@@ -77,6 +77,11 @@ namespace Ironwake.Core;
 /// The <c>break: on</c> header (DESIGN.md 13.22, experiment): when a boss dies, every member of
 /// his group at or below half HP leaves the board (<see cref="Break"/>). Off by default.
 /// </param>
+/// <param name="KinsbaneBearer">
+/// The <c>kinsbane:</c> header (DESIGN.md 13.23, experiment): the recruit, placed by name, who
+/// begins the map carrying <see cref="Kinsbane.ItemId"/> in front of their pack (<see cref="Armed"/>);
+/// null for none. The rule itself is the weapon's (<see cref="Kinsbane"/>).
+/// </param>
 /// <param name="WildfireEnabled">
 /// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
 /// sets a forest tile alight, and fire spreads through forest at each player phase start
@@ -151,7 +156,8 @@ public sealed record MapDefinition(
     bool CoverEnabled = false,
     bool SignaturesEnabled = false,
     bool OverwatchHold = false,
-    bool BreakEnabled = false)
+    bool BreakEnabled = false,
+    string? KinsbaneBearer = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -182,6 +188,28 @@ public sealed record MapDefinition(
         }
 
         return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+    }
+
+    /// <summary>
+    /// A player unit as the <c>kinsbane:</c> header issues it: the bearer gets the hungering weapon
+    /// at full uses in its first slot, and when the pack is full the last stack makes room. Any other
+    /// unit, and every unit on a map without the header, unchanged.
+    /// </summary>
+    public Unit Armed(Unit unit, GameContent content)
+    {
+        if (KinsbaneBearer != unit.Id)
+        {
+            return unit;
+        }
+
+        var weapon = content.Weapon(Kinsbane.ItemId);
+        var items = unit.Inventory.Items;
+        if (unit.Inventory.IsFull)
+        {
+            items = items.RemoveAt(items.Count - 1);
+        }
+
+        return unit with { Inventory = new Inventory(items.Insert(0, new ItemStack(weapon.Id, weapon.Durability))) };
     }
 
     /// <summary>A player unit as a certification trial fields it (<see cref="CertificationTrial.Candidate"/>); unchanged on an ordinary map.</summary>

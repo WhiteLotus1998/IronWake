@@ -33,6 +33,8 @@ public readonly struct ValueList<T> : IReadOnlyList<T>, IEquatable<ValueList<T>>
 
     public ValueList<T> RemoveAt(int index) => new(Items.RemoveAt(index));
 
+    public ValueList<T> Insert(int index, T item) => new(Items.Insert(index, item));
+
     public bool Contains(T item) => Items.Contains(item);
 
     public int IndexOf(T item) => Items.IndexOf(item);

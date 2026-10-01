@@ -210,7 +210,7 @@ public sealed record BattleState(
             switch (placement)
             {
                 case PlayerPlacement p:
-                    var unit = map.Supplied(map.Trial(Fill(p, roster, named, deployed, ref nextBare), content), content);
+                    var unit = map.Armed(map.Supplied(map.Trial(Fill(p, roster, named, deployed, ref nextBare), content), content), content);
                     if (benched.Contains(unit.Id))
                     {
                         break;

@@ -455,6 +455,11 @@ public static class ContentSerializer
             writer.WriteBoolean("windup", true);
         }
 
+        if (weapon.Hungers)
+        {
+            writer.WriteBoolean("hungers", true);
+        }
+
         if (weapon.BoundTo is { } owner)
         {
             writer.WriteString("boundTo", owner);

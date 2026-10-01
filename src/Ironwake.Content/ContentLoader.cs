@@ -1173,6 +1173,11 @@ public static class ContentLoader
                 throw node.Error("healBase", "is only valid when heals is true");
             }
 
+            if (node.BoolOr("hungers", false) && (node.Has("price") || heals || type.IsMagic()))
+            {
+                throw node.Error("hungers", "a hungering weapon is a physical weapon with no price: never sold, never repaired");
+            }
+
             var effective = node.StringArrayOrEmpty("effective")
                 .Select(e => node.ParseEnum<MovementType>("effective", e)).ToList();
             if (effective.Distinct().Count() != effective.Count)
@@ -1201,6 +1206,7 @@ public static class ContentLoader
             {
                 BoundTo = node.Has("boundTo") ? node.String("boundTo") : null,
                 Description = Description(node),
+                Hungers = node.BoolOr("hungers", false),
             });
         }
 

@@ -199,6 +199,28 @@ public static class ProtocolJson
             case UnitRested r:
                 w.WriteString("unit", r.UnitId);
                 break;
+            case HungerDrained h:
+                w.WriteString("unit", h.UnitId);
+                w.WriteString("item", h.ItemId);
+                w.WriteNumber("amount", h.Amount);
+                w.WriteNumber("hpAfter", h.HpAfter);
+                w.WriteBoolean("starved", h.Starved);
+                break;
+            case HungerFed h:
+                w.WriteString("unit", h.UnitId);
+                w.WriteString("item", h.ItemId);
+                w.WriteNumber("fed", h.Fed);
+                w.WriteNumber("healed", h.Healed);
+                w.WriteNumber("hpAfter", h.HpAfter);
+                w.WriteNumber("mtBonus", h.MtBonus);
+                w.WriteBoolean("woke", h.Woke);
+                break;
+            case HungerEased h:
+                w.WriteString("unit", h.UnitId);
+                w.WriteString("item", h.ItemId);
+                w.WriteNumber("healed", h.Healed);
+                w.WriteNumber("hpAfter", h.HpAfter);
+                break;
             case WatchTaken t:
                 w.WriteString("unit", t.UnitId);
                 WriteCoord(w, "at", t.At);
@@ -771,6 +793,11 @@ public static class ProtocolJson
             w.WriteNumber("spent", unit.Spent);
         }
 
+        if (unit.HasFed)
+        {
+            w.WriteBoolean("hasFed", true);
+        }
+
         if (unit.ArtsDeclared is { } declared)
         {
             w.WriteStartArray("artsDeclared");
@@ -825,6 +852,16 @@ public static class ProtocolJson
                 w.WriteString("keepsake", fallen);
             }
 
+            if (stack.Fed != 0)
+            {
+                w.WriteNumber("fed", stack.Fed);
+            }
+
+            if (stack.Starved)
+            {
+                w.WriteBoolean("starved", true);
+            }
+
             w.WriteEndObject();
         }
 
@@ -873,6 +910,7 @@ public static class ProtocolJson
             e.TryGetProperty("windupAt", out _) ? ReadCoord(e, "windupAt") : null)
         {
             Spent = OptionalInt(e, "spent") ?? 0,
+            HasFed = e.TryGetProperty("hasFed", out _) && RequiredBool(e, "hasFed"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
         };
     }
@@ -898,7 +936,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake") }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved") }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))

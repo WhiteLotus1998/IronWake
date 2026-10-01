@@ -40,6 +40,8 @@ namespace Ironwake.Core;
 /// <see cref="Spent"/> is the price of an art that costs the next phase (issue 636): 1 from the
 /// attack to the end of that phase, 2 through the unit's side's next phase, which it begins moved
 /// and acted, so it neither moves, acts, waits nor braces, and 0 otherwise.
+/// <see cref="HasFed"/> is set when a hungering weapon the unit carries feeds on a kill (DESIGN.md
+/// 13.23, experiment) and cleared at each of the unit's side's phase starts, after the drain reads it.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -62,7 +64,8 @@ public sealed record BattleUnit(
     bool Watching = false,
     string? CoveredBy = null,
     ValueList<string>? ArtsDeclared = null,
-    int Spent = 0)
+    int Spent = 0,
+    bool HasFed = false)
 {
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
@@ -109,7 +112,7 @@ public sealed record BattleUnit(
         var unitClass = content.Class(Unit.ClassId);
         return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
             && (item.Uses > 0 || !weapon.IsMagic)
-            ? weapon
+            ? Kinsbane.Shape(weapon, item)
             : null;
     }
 
@@ -147,11 +150,14 @@ public sealed record BattleUnit(
         return this with { Unit = Unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) } };
     }
 
-    /// <summary>The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.</summary>
+    /// <summary>
+    /// The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.
+    /// A hungering weapon comes back as its stack has grown or starved it (<see cref="Kinsbane.Shape"/>).
+    /// </summary>
     public Weapon? EquippedWeapon(GameContent content)
     {
         var slot = EquippedSlot(content);
-        return slot < 0 ? null : content.Weapon(Unit.Inventory.Items[slot].ItemId);
+        return slot < 0 ? null : Kinsbane.Shape(content.Weapon(Unit.Inventory.Items[slot].ItemId), Unit.Inventory.Items[slot]);
     }
 
     /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>
