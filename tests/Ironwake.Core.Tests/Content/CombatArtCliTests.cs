@@ -10,7 +10,7 @@ namespace Ironwake.Core.Tests.Content;
 /// <c>art &lt;id&gt;</c>, the forecast prints the art line, <c>show</c> lists the arts a
 /// unit knows, and the journaled play replays. The content is the shipped set with
 /// <c>docs/samples/arts/abilities.json</c> in place of <c>abilities.json</c> and the captain
-/// knowing its one art, since no shipped unit knows an art yet, and with no class naming a
+/// knowing its one art and no other unit knowing any, as when it was played (the shipped arts came with issue 611), and with no class naming a
 /// mastery: the journaled play predates the shipped masteries (issue 69), and a transcript
 /// is a record of the build it was played on, so the content is that build's.
 /// </summary>
@@ -40,6 +40,11 @@ public class CombatArtCliTests : IDisposable
         File.Copy(Path.Combine(repo, "docs", "samples", "arts", "abilities.json"), Path.Combine(copy, ContentFiles.AbilitiesName), overwrite: true);
         var castPath = Path.Combine(copy, "units", "cast.json");
         var cast = JsonNode.Parse(File.ReadAllText(castPath))!;
+        foreach (var unit in cast["units"]!.AsArray())
+        {
+            unit!.AsObject().Remove("abilities");
+        }
+
         cast["units"]![0]!["abilities"] = new JsonArray("cleave");
         File.WriteAllText(castPath, cast.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
         var classesPath = Path.Combine(copy, ContentFiles.ClassesName);

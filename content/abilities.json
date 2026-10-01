@@ -27,6 +27,18 @@
     { "id": "grace", "name": "Grace", "text": "+10 avoid and +20 crit avoid in every fight.",
       "effect": { "kind": "combat", "avoid": 10, "critAvoid": 20 } },
     { "id": "canto", "name": "Canto", "text": "After acting, move again on what the first move left.",
-      "effect": { "kind": "canto" } }
+      "effect": { "kind": "canto" } },
+    { "id": "feint", "name": "Feint", "text": "+25 hit, -2 mt. For the strike you cannot afford to miss.",
+      "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 1, "mt": -2, "hit": 25 } },
+    { "id": "heavy_cut", "name": "Heavy Cut", "text": "+4 mt, +3 wt, -10 hit. Hits harder and may lose the double.",
+      "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 2, "mt": 4, "hit": -10, "wt": 3 } },
+    { "id": "long_thrust", "name": "Long Thrust", "text": "+1 range, -3 mt. Reaches past a sword's answer.",
+      "effect": { "kind": "art", "weapon": "lance", "rank": "E", "cost": 2, "mt": -3, "range": 1 } },
+    { "id": "cleave", "name": "Cleave", "text": "+6 mt, +10 crit, -20 hit. All in.",
+      "effect": { "kind": "art", "weapon": "axe", "rank": "E", "cost": 3, "mt": 6, "hit": -20, "crit": 10 } },
+    { "id": "aimed_shot", "name": "Aimed Shot", "text": "+20 hit, +10 crit, +2 wt. Steady, and slower for it.",
+      "effect": { "kind": "art", "weapon": "bow", "rank": "E", "cost": 2, "hit": 20, "crit": 10, "wt": 2 } },
+    { "id": "overcast", "name": "Overcast", "text": "+5 mt, +4 wt. More fire than the caster can carry.",
+      "effect": { "kind": "art", "weapon": "reason", "rank": "E", "cost": 2, "mt": 5, "wt": 4 } }
   ]
 }

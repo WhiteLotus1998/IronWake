@@ -26,8 +26,10 @@ namespace Ironwake.Godot;
 /// ends the phase, after which the enemy phase plays itself (<c>Main.Motion.cs</c>, issue 513) at
 /// the speed S cycles; Space reveals its next event at once and marks it on the board, C skips
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
-/// Tab opens the event log under any live card (<c>--log-open</c> opens with it), Escape clears the
-/// selection and closes the browser. An exported build finds <c>content/</c>
+/// Tab opens the event log under any live card (<c>--log-open</c> opens with it), Escape closes the
+/// attack menu or else clears the selection and closes the browser. A click on an enemy with more
+/// than one legal way to strike opens the attack menu (issue 611): 1 to 9 or a hover shows a row's
+/// card, a click on it or Enter strikes. An exported build finds <c>content/</c>
 /// beside its executable, and with no <c>--map</c> opens on the title (<c>Main.Screens.cs</c>,
 /// issue 515), whose Play opens the Tollgate with the turn-1 callouts; a decided battle shows the
 /// end card, Enter playing again on the next seed.
@@ -122,6 +124,9 @@ public partial class Main : Node2D
 
     /// <summary>The clickable regions drawn last frame (Recall rows, between-map rows) and what a click on each does.</summary>
     private readonly List<(Rect2 Area, Action Click)> _hits = new();
+
+    /// <summary>The attack menu's rows as last drawn (issue 611), so hovering one shows its card.</summary>
+    private readonly List<Rect2> _menuRects = new();
 
     private ClientSession? _client;
     private CampaignClient? _campaign;
@@ -324,6 +329,11 @@ public partial class Main : Node2D
             case InputEventMouseMotion motion:
                 _hover = TileAt(motion.Position);
                 _mouse = motion.Position;
+                if (_menuRects.FindIndex(rect => rect.HasPoint(motion.Position)) is var row and >= 0)
+                {
+                    _client.MenuHover(row);
+                }
+
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when TileAt(click.Position) is { } at:
                 Play(Cue.Click);
@@ -369,9 +379,18 @@ public partial class Main : Node2D
                     case Key.M:
                         ToggleMute();
                         break;
+                    case Key.Escape when _client.Menu is not null:
+                        _client.CloseMenu();
+                        break;
                     case Key.Escape:
                         _client.ClearSelection();
                         _recallOpen = false;
+                        break;
+                    case >= Key.Key1 and <= Key.Key9 when _client.Menu is not null:
+                        _client.MenuHover((int)(key.Keycode - Key.Key1));
+                        break;
+                    case Key.Enter or Key.KpEnter when _client.Menu is { } menu:
+                        _client.Choose(menu.Hovered);
                         break;
                     case Key.L when _campaign is not null:
                         _campaign.Leave();
@@ -1011,6 +1030,13 @@ public partial class Main : Node2D
             return;
         }
 
+        _menuRects.Clear();
+        if (client.Menu is { } menu && !client.EnemyPhasePlaying)
+        {
+            DrawLog(DrawAttackMenu(y, menu));
+            return;
+        }
+
         // An open log takes what is left of the column, never the card being read (issue 608).
         var boxTop = y - LineHeight + 4;
         var cards = _hover is { } tile && !client.EnemyPhasePlaying ? client.Hover(tile) : Array.Empty<HoverForecast>();
@@ -1067,6 +1093,36 @@ public partial class Main : Node2D
         }
 
         DrawLog(y);
+    }
+
+    /// <summary>
+    /// The attack menu (issue 611) where the forecast card sits: the hovered row's card, then
+    /// one row per way to strike, its numbers under it, a greyed row giving the rule's refusal.
+    /// Hovering a row or pressing its number shows its card; a click or Enter strikes with it.
+    /// </summary>
+    private float DrawAttackMenu(float y, AttackMenu menu)
+    {
+        var client = _client!;
+        if (menu.Card is { } card)
+        {
+            y = DrawForecastCard(y - LineHeight + 4, card) + 22;
+        }
+
+        y = Title(y, "ATTACK  hover or 1-9 shows; click or Enter strikes; Esc backs out");
+        for (var i = 0; i < menu.Rows.Count; i++)
+        {
+            var row = menu.Rows[i];
+            var top = y - LineHeight + 4;
+            var colour = !row.Legal ? Muted : i == menu.Hovered ? Link : Ink;
+            y = Row(y, $"{(i == menu.Hovered ? ">" : " ")}{i + 1}. {row.Label}", colour);
+            y = Row(y, "     " + row.Line, Muted);
+            var area = new Rect2(PanelOrigin.X, top, PanelWidth, y - top);
+            _menuRects.Add(area);
+            var index = i;
+            _hits.Add((area, () => client.Choose(index)));
+        }
+
+        return y + 10;
     }
 
     /// <summary>

@@ -121,7 +121,7 @@ internal static class Fixture
     /// <summary>
     /// A copy of the real content directory with Saltmarsh Ford as it stood under DECISIONS/0030,
     /// before issue 131's timing arm, kept as <c>docs/samples/saltmarsh_ford_0030.map</c>, so a
-    /// campaign journaled on that file replays on it. Made once per test run under the temp directory.
+    /// campaign journaled on that file replays on it, the cast knowing no art as then (issue 611). Made once per test run under the temp directory.
     /// </summary>
     public static string Saltmarsh0030ContentDirectory() => Saltmarsh0030.Value;
 
@@ -138,6 +138,25 @@ internal static class Fixture
             Path.Combine(repo, "docs", "samples", "saltmarsh_ford_0030.map"),
             Path.Combine(target, "maps", "saltmarsh_ford.map"),
             overwrite: true);
+        WithoutCastArts(target);
+        return target;
+    }
+
+    /// <summary>
+    /// Takes every combat art out of the cast's <c>abilities</c> (issue 611): a campaign journaled
+    /// before the cast knew any art writes each unit's abilities empty, and a transcript is a
+    /// record of the build it was played on.
+    /// </summary>
+    public static string WithoutCastArts(string target)
+    {
+        var castPath = Path.Combine(target, "units", "cast.json");
+        var cast = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(castPath))!;
+        foreach (var entry in cast["units"]!.AsArray())
+        {
+            entry!.AsObject().Remove("abilities");
+        }
+
+        File.WriteAllText(castPath, cast.ToJsonString());
         return target;
     }
 

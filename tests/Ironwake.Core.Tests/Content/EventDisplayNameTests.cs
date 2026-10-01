@@ -54,7 +54,13 @@ public class EventDisplayNameTests
     [Fact]
     public void AnArtTheContentDoesNotKnowFallsBackToTheId()
     {
-        Assert.Equal("Captain declares cleave with Iron Sword, spending 2 extra uses", Line(new ArtDeclared("captain", "cleave", "iron_sword", 2)));
+        Assert.Equal("Captain declares sunder with Iron Sword, spending 2 extra uses", Line(new ArtDeclared("captain", "sunder", "iron_sword", 2)));
+    }
+
+    [Fact]
+    public void AnArtCostingOneUseSaysOneUseNotUses()
+    {
+        Assert.Equal("Captain declares Feint with Iron Sword, spending 1 extra use", Line(new ArtDeclared("captain", "feint", "iron_sword", 1)));
     }
 
     [Fact]

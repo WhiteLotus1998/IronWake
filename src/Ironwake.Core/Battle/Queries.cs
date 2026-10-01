@@ -90,6 +90,56 @@ public static class Queries
     }
 
     /// <summary>
+    /// Every way the unit could strike the target from where it stands (issue 611), the attack
+    /// menu's rows in order: the plain attack with each weapon it carries (healing spells and
+    /// items left out), then each art it knows under each carried weapon of the art's type, or
+    /// once under no weapon when it carries none of that type. Each row is the
+    /// <see cref="Attack"/> it would submit, with the forecast <see cref="Forecast(BattleState, GameContent, BattleUnit, BattleUnit, int?, string?)"/>
+    /// gives it when the resolver would accept it, or the resolver's own refusal, so a renderer
+    /// greys a row with the rule's words and never judges legality itself. The equipped
+    /// weapon's rows carry no slot, so a plain strike is the same command a click made before
+    /// the menu.
+    /// </summary>
+    public static IReadOnlyList<AttackOption> AttackOptions(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
+    {
+        var equipped = unit.EquippedSlot(content);
+        var slots = Enumerable.Range(0, unit.Unit.Inventory.Count)
+            .Where(slot => content.Weapons.TryGetValue(unit.Unit.Inventory.Items[slot].ItemId, out var weapon) && !weapon.Heals)
+            .ToList();
+        var rows = new List<AttackOption>();
+        void Add(int? slot, Ability? art)
+        {
+            var command = new Attack(unit.Id, target.Id, slot == equipped ? null : slot, art?.Id);
+            var weaponId = slot is { } s ? unit.Unit.Inventory.Items[s].ItemId : null;
+            var refusal = Resolver.Apply(state, content, command).Rejection;
+            var forecast = refusal is null ? Forecast(state, content, unit, target, command.Slot, command.Art) : null;
+            rows.Add(new AttackOption(command, weaponId, art, forecast, refusal));
+        }
+
+        foreach (var slot in slots)
+        {
+            Add(slot, null);
+        }
+
+        foreach (var (ability, art) in content.ArtsOf(unit.Unit))
+        {
+            var matching = slots.Where(slot => content.Weapon(unit.Unit.Inventory.Items[slot].ItemId).Type == art.Weapon).ToList();
+            if (matching.Count == 0)
+            {
+                Add(slots.Contains(equipped) ? equipped : slots.Count > 0 ? slots[0] : null, ability);
+                continue;
+            }
+
+            foreach (var slot in matching)
+            {
+                Add(slot, ability);
+            }
+        }
+
+        return rows;
+    }
+
+    /// <summary>
     /// Why the unit's weapon choice gives no forecast: the refusal of the slot
     /// (<see cref="Resolver.ChooseWeapon"/>) or of the art (<see cref="Resolver.ChooseArt"/>),
     /// the same the resolver would give; null when both would be accepted.
@@ -573,3 +623,15 @@ public sealed record LethalThreat(BattleUnit Unit, int Total, ValueList<LethalSt
 
 /// <summary>One enemy in a <see cref="LethalThreat"/>'s total, and the damage it deals if every strike lands.</summary>
 public sealed record LethalStriker(BattleUnit Enemy, int Damage);
+
+/// <summary>
+/// One row of the attack menu (issue 611, <see cref="Queries.AttackOptions"/>): the attack it
+/// submits, the id of the weapon it strikes with (null only for an art the unit has no weapon
+/// for), the art it declares or null for the plain attack, and either the forecast or the
+/// resolver's refusal, never both.
+/// </summary>
+public sealed record AttackOption(Attack Command, string? WeaponId, Ability? Art, CombatForecast? Forecast, Rejection? Refusal)
+{
+    /// <summary>True when the resolver would accept the row's attack.</summary>
+    public bool Legal => Refusal is null;
+}

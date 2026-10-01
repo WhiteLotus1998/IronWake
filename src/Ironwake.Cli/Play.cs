@@ -2116,7 +2116,7 @@ public sealed class PlaySession
             case WeaponEquipped w:
                 return $"{names[w.UnitId]} equips {content.ItemName(w.ItemId)}";
             case ArtDeclared a:
-                return $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra uses";
+                return $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra {(a.Cost == 1 ? "use" : "uses")}";
             case WeaponBroke b:
                 return $"{names[b.UnitId]}'s {content.ItemName(b.ItemId)} breaks";
             case SpellSpent s:

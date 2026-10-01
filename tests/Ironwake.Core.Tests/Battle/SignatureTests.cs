@@ -309,11 +309,21 @@ public class SignatureTests
         Step(Start(false, Hills, LedgerLine), new Attack("ottilie", "brigand-1"));
     }
 
+    /// <summary>Issue 611: Aimed Shot's +20 hit is a way past the ledger, so the art's strike on the target the plain shot is refused is legal.</summary>
+    [Fact]
+    public void AnAimedShotThatLiftsTheShownHitPastTheLedgerIsLegal()
+    {
+        var state = Start(true, Hills, LedgerLine);
+
+        Assert.Equal(RejectionReason.SignatureRefused, state.Refused(new Attack("ottilie", "brigand-1")).Reason);
+        Assert.Contains(new Attack("ottilie", "brigand-1", null, "aimed_shot"), Resolver.Legal(state, Starter).OfType<Attack>());
+    }
+
     [Fact]
     public void TheLegalListLeavesOutTheRefusedStrikeAndKeepsTheOther()
     {
         var state = Start(true, Hills, LedgerLine);
-        var attacks = Resolver.Legal(state, Starter).OfType<Attack>().Where(a => a.UnitId == "ottilie").Select(a => a.TargetId).ToList();
+        var attacks = Resolver.Legal(state, Starter).OfType<Attack>().Where(a => a.UnitId == "ottilie" && a.Art is null).Select(a => a.TargetId).ToList();
 
         Assert.Equal(new[] { "soldier-1" }, attacks);
         Assert.Contains("brigand-1", Resolver.Legal(Start(false, Hills, LedgerLine), Starter).OfType<Attack>().Where(a => a.UnitId == "ottilie").Select(a => a.TargetId));
