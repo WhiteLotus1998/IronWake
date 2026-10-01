@@ -245,6 +245,7 @@ public class DifficultyTests
     [InlineData("\"statPercent\": { \"def\": 110 }")]
     [InlineData("\"enemyLevelOffset\": 1")]
     [InlineData("\"recall\": 3")]
+    [InlineData("\"recallOffset\": 1")]
     public void ANormalThatIsNotTheIdentityIsRefused(string fields)
     {
         var e = Fails("\"normal\": { " + fields + " }");
@@ -261,6 +262,11 @@ public class DifficultyTests
     [InlineData("\"recall\": 100", "recall")]
     [InlineData("\"recall\": -1", "recall")]
     [InlineData("\"charges\": 1", "charges")]
+    [InlineData("\"recallOffset\": 100", "recallOffset")]
+    [InlineData("\"recall\": 2, \"recallOffset\": 1", "recallOffset")]
+    [InlineData("\"name\": \"\"", "name")]
+    [InlineData("\"unlockedBy\": \"nightmare\"", "unlockedBy")]
+    [InlineData("\"unlockedBy\": \"hard\"", "unlockedBy")]
     public void ABadFieldIsRefusedNamingTheEntryAndField(string fields, string field)
     {
         var e = Fails("\"normal\": {}, \"hard\": { " + fields + " }");
@@ -272,7 +278,7 @@ public class DifficultyTests
     [Fact]
     public void TheBlockRoundTripsThroughTheSerializer()
     {
-        var content = ContentLoader.Parse(Fixture.Files(rules: Rules("\"normal\": {}, \"hard\": { \"statPercent\": { \"hp\": 150 }, \"enemyLevelOffset\": -1, \"recall\": 2 }, \"soft\": { \"statPercent\": { \"str\": 80 } }")));
+        var content = ContentLoader.Parse(Fixture.Files(rules: Rules("\"normal\": {}, \"hard\": { \"statPercent\": { \"hp\": 150 }, \"enemyLevelOffset\": -1, \"recall\": 2, \"name\": \"Hard\", \"unlockedBy\": \"normal\" }, \"soft\": { \"statPercent\": { \"str\": 80 }, \"recallOffset\": -2 }")));
 
         var written = ContentSerializer.Write(content);
         var reloaded = ContentLoader.Parse(written);

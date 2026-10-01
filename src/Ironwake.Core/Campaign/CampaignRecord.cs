@@ -55,10 +55,18 @@ public sealed record CampaignRecord(
     public ValueList<KeepWork> Keep { get; init; } = ValueList<KeepWork>.Empty;
 
     /// <summary>
+    /// Whether a fall is for good (issue 664), chosen once at the start like the difficulty and
+    /// printed on the record. Off, a unit that falls on a won map or a side map comes back
+    /// <see cref="Core.Wound"/>ed instead of joining <see cref="Fallen"/>; the captain's death and
+    /// a <c>protect:</c> death still lose the map either way, since those are the battle's rules.
+    /// </summary>
+    public bool Permadeath { get; init; } = true;
+
+    /// <summary>
     /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
     /// the starting purse, the first map, nobody benched.
     /// </summary>
-    public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty)
+    public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty, bool permadeath = true)
     {
         if (content.Campaign.Maps.Count == 0)
         {
@@ -75,7 +83,7 @@ public sealed record CampaignRecord(
             content.Difficulty(difficulty);
         }
 
-        return new CampaignRecord(ArrivedBefore(content, 0), ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty);
+        return new CampaignRecord(ArrivedBefore(content, 0), ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty) { Permadeath = permadeath };
     }
 
     /// <summary>
@@ -87,9 +95,9 @@ public sealed record CampaignRecord(
     /// <paramref name="seed"/> itself, as <see cref="BattleSeed"/> promises for the opening map:
     /// <c>play &lt;map&gt; --seed N</c> reproduces its rolls. Refuses a map the campaign does not list.
     /// </summary>
-    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty)
+    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true)
     {
-        var start = Start(content, seed, difficulty);
+        var start = Start(content, seed, difficulty, permadeath);
         var index = content.Campaign.Maps.ToList().FindIndex(m => m.MapId == mapId);
         if (index < 0)
         {
@@ -171,7 +179,10 @@ public sealed record CampaignRecord(
     /// the <see cref="BattleState.Survivors"/> come back; an undeployed unit
     /// is unchanged. The map's arrivals are on the roster from here, or fallen like anyone deployed
     /// (issue 632). The purse gains the map's reward, the bench is cleared, and the next map is
-    /// the one after. A lost battle ends the campaign, so it has no record after it.
+    /// the one after. A lost battle ends the campaign, so it has no record after it. With
+    /// <see cref="Permadeath"/> off a unit that fell comes back as it began the battle, wounded
+    /// (<see cref="Wound.Inflict"/>); every other wound on the roster counts this main map down
+    /// (<see cref="Wound.Tick"/>), deployed or not.
     /// </summary>
     public CampaignRecord AfterBattle(BattleState end, GameContent content)
     {
@@ -189,11 +200,15 @@ public sealed record CampaignRecord(
         {
             if (!deployed.TryGetValue(unit.Id, out var started))
             {
-                roster.Add(unit);
+                roster.Add(Wound.Tick(unit));
             }
             else if (standing.TryGetValue(unit.Id, out var after))
             {
-                roster.Add(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content));
+                roster.Add(Wound.Tick(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content)));
+            }
+            else if (!Permadeath)
+            {
+                roster.Add(Wound.Inflict(unit, content.Class(unit.ClassId)));
             }
             else
             {
@@ -651,7 +666,9 @@ public sealed record CampaignRecord(
     /// which times the member's next quest. A loss never ends the campaign; the side map opens
     /// again after the next map unless its member fell. No purse reward: the quest's payout is
     /// the member's own, and a won quest that <see cref="CampaignQuest.Pays"/> puts that signature
-    /// item in the member's pack at full uses (<see cref="QuestRefusal"/> kept a slot free).
+    /// item in the member's pack at full uses (<see cref="QuestRefusal"/> kept a slot free). With
+    /// <see cref="Permadeath"/> off whoever fell comes back wounded instead (issue 664), the member
+    /// included, so the side map opens again; a side map never counts a wound down.
     /// </summary>
     public ScreenResult AfterQuest(BattleState end, string questId, GameContent content)
     {
@@ -667,6 +684,7 @@ public sealed record CampaignRecord(
         var roster = new List<Unit>();
         var fallen = Fallen.ToList();
         var lost = new List<string>();
+        var wounded = new List<string>();
         foreach (var unit in Roster)
         {
             if (!deployed.TryGetValue(unit.Id, out var started))
@@ -676,6 +694,11 @@ public sealed record CampaignRecord(
             else if (standing.TryGetValue(unit.Id, out var after))
             {
                 roster.Add(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content));
+            }
+            else if (!Permadeath)
+            {
+                roster.Add(Wound.Inflict(unit, content.Class(unit.ClassId)));
+                wounded.Add(unit.Id);
             }
             else
             {
@@ -699,7 +722,9 @@ public sealed record CampaignRecord(
             QuestsTried = QuestsTried.Add(questId),
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
         };
-        var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}" : "; nobody fell";
+        var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"
+            : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"
+            : "; nobody fell";
         var line = won
             ? $"{quest.MemberId} wins {questId}{paid}{dead}"
             : lost.Contains(quest.MemberId)

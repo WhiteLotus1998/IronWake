@@ -41,6 +41,12 @@ public sealed record Unit(
     /// </summary>
     public MasteryProgress Mastery { get; init; } = MasteryProgress.Empty;
 
+    /// <summary>
+    /// The wound a fall left when permadeath is off (issue 664), or null: its penalty is already
+    /// taken from <see cref="Stats"/>, and it is given back when the wound expires.
+    /// </summary>
+    public Wound? Wound { get; init; }
+
     /// <summary>Whether this unit may equip <paramref name="weapon"/>: its class uses the type and its rank in the type reaches the weapon's.</summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
         unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank;

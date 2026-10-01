@@ -1749,6 +1749,17 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// A wound as a card prints it (issue 664): <c>Wounded (2): Str -2, Dex -2 for 2 more main maps</c>,
+    /// the stats it took in stat order; the numbers above it are already the wounded ones.
+    /// </summary>
+    public static string WoundLine(Wound wound)
+    {
+        var taken = Stats.All.Where(s => wound.Penalty.Get(s) > 0).Select(s => $"{s} -{wound.Penalty.Get(s)}");
+        var maps = wound.MapsLeft == 1 ? "the next main map" : $"{wound.MapsLeft} more main maps";
+        return $"{wound.Label}: {string.Join(", ", taken)} for {maps}";
+    }
+
+    /// <summary>
     /// The lines <c>show &lt;unit&gt;</c> prints: who and where, stats, weapon, items, ranks,
     /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
     /// shows the same lines (issue 349). Units and arts read by the names a reader sees, every
@@ -1766,6 +1777,11 @@ public sealed class PlaySession
         lines.Add($"{Named(names[unit.Id], unit.Id)}, {content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {state.Map.TerrainAt(unit.At, content).Label(stats.Hp)}");
         var unitClass = content.Class(unit.Unit.ClassId);
         lines.Add($"  HP {unit.Hp}/{stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}  Mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
+        if (unit.Unit.Wound is { } wound)
+        {
+            lines.Add("  " + WoundLine(wound));
+        }
+
         lines.Add($"  Weapon: {WeaponLine(unit, content)}");
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
         lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");

@@ -159,7 +159,7 @@ public class CampaignSaveTests
             Assert.Contains("Autosaved as auto-1; the last 3 camps are kept\n", saved);
             Assert.Contains("> save first-camp\nSaved as first-camp: before map 1 of 9, starting_alone, the purse holds 500\n", saved);
             Assert.Contains("  auto-1: before map 1 of 9, starting_alone, the purse holds 500\n  first-camp: before map 1 of 9, starting_alone, the purse holds 500\n", saved);
-            Assert.Contains("Campaign, seed 3, difficulty normal", loaded);
+            Assert.Contains("Campaign, seed 3, difficulty Captain, permadeath on", loaded);
             Assert.Equal(new[] { "auto-1", "auto-2", "first-camp" }, new SaveStore(dir).Names());
         }
         finally
@@ -192,7 +192,7 @@ public class CampaignSaveTests
             Assert.Contains("Load from save (load <name>; saves lists them), New game (new), or Quit (quit)\n", output);
             Assert.Contains("  auto-1: before map 1 of 9, starting_alone, the purse holds 500\n", output);
             Assert.Contains("ERROR: No save 'nothing' in " + dir + "\n", output);
-            Assert.Contains("> new\nNew game, seed 3, difficulty normal\nAutosaved as auto-1", output);
+            Assert.Contains("> new\nNew game, seed 3, difficulty Captain, permadeath on\nAutosaved as auto-1", output);
             Assert.Contains("Suspended in Starting Alone at turn 1", output);
         }
         finally

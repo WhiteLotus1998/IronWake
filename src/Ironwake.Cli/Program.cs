@@ -50,7 +50,7 @@ public static class Program
         Console.WriteLine("       ironwake show <map-file> [content-dir]");
         Console.WriteLine("       ironwake reach <map-file> <x,y> [<movement>:<mov>] [content-dir]");
         Console.WriteLine("       ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id] [--log file]");
-        Console.WriteLine("       ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two]");
+        Console.WriteLine("       ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--scheme one|two]");
     }
 
     private static int Validate(string contentDir)

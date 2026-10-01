@@ -319,6 +319,21 @@ public static class ContentSerializer
                         writer.WriteNumber("recall", recall);
                     }
 
+                    if (difficulty.RecallOffset != 0)
+                    {
+                        writer.WriteNumber("recallOffset", difficulty.RecallOffset);
+                    }
+
+                    if (difficulty.Name is { } name)
+                    {
+                        writer.WriteString("name", name);
+                    }
+
+                    if (difficulty.UnlockedBy is { } needed)
+                    {
+                        writer.WriteString("unlockedBy", needed);
+                    }
+
                     writer.WriteEndObject();
                 }
 

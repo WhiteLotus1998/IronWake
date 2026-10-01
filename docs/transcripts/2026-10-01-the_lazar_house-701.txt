@@ -1,4 +1,4 @@
-Campaign, seed 698, difficulty normal, scheme TwoRollAverage, 9 maps
+Campaign, seed 698, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 maps
 -- Before map 4 of 9: The Tollgate; the purse holds 500 --
 Roster:
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
