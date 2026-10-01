@@ -320,7 +320,7 @@ public static class Resolver
         if (entry is not { CanEnd: true })
         {
             var why = !state.Map.Contains(canto.To) ? "outside the map"
-                : entry is null ? $"not within the {reach.Mov} movement its Canto has left from {unit.At}"
+                : entry is null ? $"not within the {reach.Mov} movement {Referent.For(content, unit.Id, unit.Id).Possessive} Canto has left from {unit.At}"
                 : "occupied by an ally";
             return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot Canto to {canto.To}: {why}"));
         }

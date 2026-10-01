@@ -425,7 +425,7 @@ public sealed class PlaySession
         if (_state.Map.Certification is { } trialHeader)
         {
             var candidate = _state.UnitsOf(Side.Player).Single();
-            _out.WriteLine($"certification trial: {candidate.Unit.Id} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
+            _out.WriteLine($"Certification trial: {candidate.Unit.Name} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
         }
 
         _out.WriteLine("Objective: " + Objective.Line(_state, _content));
@@ -439,7 +439,7 @@ public sealed class PlaySession
 
         if (_scripted && _rejections.Count > 0)
         {
-            _out.WriteLine($"rejected {_rejections.Count} of {commands} commands:");
+            _out.WriteLine($"Rejected {_rejections.Count} of {commands} commands:");
             foreach (var (at, command, reason) in _rejections)
             {
                 _out.WriteLine($"  line {at}: {command}: {reason}");
@@ -752,7 +752,7 @@ public sealed class PlaySession
 
         if (CantoOwed(command) is { } owed)
         {
-            _out.WriteLine($"{owed.Id} may canto up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
+            _out.WriteLine($"{UnitNames.Of(_state, _content)[owed.Id]} may Canto up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
         }
 
         if (command is not EndPhase)
@@ -1982,8 +1982,13 @@ public sealed class PlaySession
         return unit;
     }
 
+    /// <summary>
+    /// Prints <paramref name="message"/> after <c>ERROR:</c> as a reader sees it (issue 615):
+    /// unit ids as names, quoted ids as typed, sentence case; the scripted summary keeps the same text.
+    /// </summary>
     private void Error(string message)
     {
+        message = UnitNames.Of(_state, _content).Message(message);
         _out.WriteLine("ERROR: " + message);
         if (_scripted)
         {

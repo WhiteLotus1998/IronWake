@@ -98,7 +98,7 @@ public class CombatArtCliTests : IDisposable
             + "Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
         Assert.EndsWith("battle won: rout\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -107,9 +107,9 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "move captain 2,6\nmove wren 3,7\nend\nforecast wren brigand-1 art cleave\nattack captain brigand-1 art sunder\nattack captain brigand-1 art\n");
 
-        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: wren knows no art 'cleave'\n", output);
-        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: captain knows no art 'sunder'\n", output);
-        Assert.Contains("> attack captain brigand-1 art\nERROR: usage: attack <unit> <target> [slot|weapon] [art <id>]\n", output);
+        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: Wren knows no art 'cleave'\n", output);
+        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: Alder Fenn knows no art 'sunder'\n", output);
+        Assert.Contains("> attack captain brigand-1 art\nERROR: Usage: attack <unit> <target> [slot|weapon] [art <id>]\n", output);
     }
 
     [Fact]

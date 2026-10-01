@@ -1,5 +1,5 @@
 Trial of the Bulwark, seed 11, scheme TwoRollAverage
-certification trial: captain plays as Bulwark with iron_lance
+Certification trial: Alder Fenn plays as Bulwark with iron_lance
 Objective: Hold out until the end of turn 1. Captain Fenn must survive.
 Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
    012345678

@@ -128,19 +128,19 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":false,"error":{"reason":"outOfReach","message":"captain cannot move to 99,0: outside the map"}}""", session.Answer("""{"type":"move","unit":"captain","to":{"x":99,"y":0}}"""));
+        Assert.Equal("""{"ok":false,"error":{"reason":"outOfReach","message":"Alder Fenn cannot move to 99,0: outside the map"}}""", session.Answer("""{"type":"move","unit":"captain","to":{"x":99,"y":0}}"""));
         var core = Resolver.Apply(session.State, Content(), new Wait("nobody")).Rejection!;
         Assert.Equal(RejectionReason.NoSuchUnit, core.Reason);
-        Assert.Equal("{\"ok\":false,\"error\":{\"reason\":\"noSuchUnit\",\"message\":\"" + core.Message + "\"}}", session.Answer("""{"type":"wait","unit":"nobody"}"""));
+        Assert.Equal("{\"ok\":false,\"error\":{\"reason\":\"noSuchUnit\",\"message\":\"" + UnitNames.Sentence(core.Message) + "\"}}", session.Answer("""{"type":"wait","unit":"nobody"}"""));
         Assert.StartsWith("""{"ok":true,"events":[{"type":"unitWaited","unit":"captain","text":"Alder Fenn waits"}],"state":{""", session.Answer("""{"type":"wait","unit":"captain"}"""));
     }
 
     [Theory]
-    [InlineData("not json", "not JSON")]
-    [InlineData("[1]", "a request is a JSON object")]
-    [InlineData("""{"type":"jump"}""", "type 'jump' is not a command")]
-    [InlineData("""{"query":"weather"}""", "query 'weather' is not one of: state, reachable, targets, forecast, threat, terrain")]
-    [InlineData("""{"query":"reachable"}""", "field 'unit' is missing")]
+    [InlineData("not json", "Not JSON")]
+    [InlineData("[1]", "A request is a JSON object")]
+    [InlineData("""{"type":"jump"}""", "Type 'jump' is not a command")]
+    [InlineData("""{"query":"weather"}""", "Query 'weather' is not one of: state, reachable, targets, forecast, threat, terrain")]
+    [InlineData("""{"query":"reachable"}""", "Field 'unit' is missing")]
     public void AMalformedRequestAnswersBadRequestAndTheSessionGoesOn(string line, string message)
     {
         var (_, session, _) = Session();
@@ -164,7 +164,7 @@ public class ProtocolSessionTests
         Assert.Equal(Queries.Reachable(session.State, content, wren).Entries.Select(e => e.At), tiles);
 
         Assert.Equal("""{"ok":true,"query":"targets","unit":"wren","targets":[]}""", session.Answer("""{"query":"targets","unit":"wren"}"""));
-        Assert.Equal("""{"ok":false,"error":{"reason":"noSuchUnit","message":"no living unit 'ghost'"}}""", session.Answer("""{"query":"targets","unit":"ghost"}"""));
+        Assert.Equal("""{"ok":false,"error":{"reason":"noSuchUnit","message":"No living unit 'ghost'"}}""", session.Answer("""{"query":"targets","unit":"ghost"}"""));
 
         using var state = JsonDocument.Parse(session.Answer("""{"query":"state"}"""));
         Assert.Equal(session.State, ProtocolJson.ReadState(state.RootElement.GetProperty("state").GetRawText(), content));
@@ -197,9 +197,9 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":false,"error":{"reason":"outOfReach","message":"captain cannot move to 0,0"}}""", session.Answer("""{"query":"forecast","unit":"captain","target":"archer-1","from":{"x":0,"y":0}}"""));
-        Assert.Equal("""{"ok":false,"error":{"reason":"outOfRange","message":"captain cannot attack archer-1 from 6,11"}}""", session.Answer("""{"query":"forecast","unit":"captain","target":"archer-1"}"""));
-        Assert.Equal("""{"ok":false,"error":{"reason":"notThisSide","message":"archer-1 is an enemy; threat answers for a player unit"}}""", session.Answer("""{"query":"threat","unit":"archer-1"}"""));
+        Assert.Equal("""{"ok":false,"error":{"reason":"outOfReach","message":"Alder Fenn cannot move to 0,0"}}""", session.Answer("""{"query":"forecast","unit":"captain","target":"archer-1","from":{"x":0,"y":0}}"""));
+        Assert.Equal("""{"ok":false,"error":{"reason":"outOfRange","message":"Alder Fenn cannot attack Archer 1 from 6,11"}}""", session.Answer("""{"query":"forecast","unit":"captain","target":"archer-1"}"""));
+        Assert.Equal("""{"ok":false,"error":{"reason":"notThisSide","message":"Archer 1 is an enemy; threat answers for a player unit"}}""", session.Answer("""{"query":"threat","unit":"archer-1"}"""));
     }
 
     [Fact]

@@ -102,7 +102,7 @@ public class ClientPanelTests
         var logged = client.Log.Count;
 
         Assert.False(client.Recall(9999));
-        Assert.StartsWith("history holds ", client.Status);
+        Assert.StartsWith("History holds ", client.Status);
         Assert.Equal(logged, client.Log.Count);
     }
 

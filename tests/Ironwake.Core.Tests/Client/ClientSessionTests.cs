@@ -120,7 +120,7 @@ public class ClientSessionTests
         client.Submit(new EndPhase());
 
         Assert.False(client.Submit(new Wait("captain")));
-        Assert.Equal("the enemy phase is playing; step or continue", client.Status);
+        Assert.Equal("The enemy phase is playing; step or continue", client.Status);
         Assert.Null(client.Click(client.State.Find("captain")!.At));
 
         client.Continue();

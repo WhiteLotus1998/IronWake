@@ -89,6 +89,44 @@ public class UnitNamesTests
         Assert.DoesNotContain("archer-2", line, StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void ARefusalNamesEveryUnitTheBattleKnowsInSentenceCase()
+    {
+        var state = Start(map: Field);
+        var names = UnitNames.Of(state, Starter);
+        var unit = state.UnitsOf(Side.Player).First();
+        var refusal = names.Message(state.Refused(new Attack(unit.Id, "archer-2")).Message);
+
+        Assert.Equal(UnitNames.Sentence($"{unit.Unit.Name} cannot attack Archer 2 from 0,1"), names.Message($"{unit.Id} cannot attack archer-2 from 0,1"));
+        Assert.StartsWith("Archer 2 at 7,2 is ", refusal, StringComparison.Ordinal);
+        Assert.Contains($" from {unit.Unit.Name} at {unit.At}", refusal, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void ARefusalKeepsAnIdQuotedAsItWasTyped()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("No living unit 'archer-1' to attack", names.Message("no living unit 'archer-1' to attack"));
+    }
+
+    [Fact]
+    public void ARefusalNamesAnIdBeforeAPossessive()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal($"Brigand is not on {names["wren"]}'s side", names.Message("brigand-1 is not on wren's side"));
+    }
+
+    [Fact]
+    public void ARefusalLeavesWordsThatAreNoUnitsId()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("Usage: item <unit> <slot> [ally]; slots run 1-2; field_dressing; archer", names.Message("usage: item <unit> <slot> [ally]; slots run 1-2; field_dressing; archer"));
+        Assert.Equal("Stranger-9 is gone", names.Message("stranger-9 is gone"));
+    }
+
     [Theory]
     [InlineData("wren waits", "Wren waits")]
     [InlineData("-- enemy phase, turn 1 --", "-- Enemy phase, turn 1 --")]

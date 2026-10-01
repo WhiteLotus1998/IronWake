@@ -421,7 +421,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -846,7 +846,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1062,7 +1062,7 @@ Ansgar attacks Brawler
   Brawler hits Ansgar for 8 (hp 12)
   Brawler hits Ansgar for 8 (hp 4)
   Ansgar hp 4, Brawler hp 23
-ansgar may canto up to 0 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 0 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1818,7 +1818,7 @@ C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2069,7 +2069,7 @@ Ansgar attacks Archer 2
   Ansgar hp 20, Archer 2 hp 0
 Ansgar gains 40 exp (40)
 Archer 2 falls at 6,4
-ansgar may canto up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 1 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 5 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2575,7 +2575,7 @@ C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 6 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2884,7 +2884,7 @@ C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 6 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 7 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......

@@ -490,13 +490,14 @@ public sealed class ProtocolSession
         w.WriteEndObject();
     });
 
-    private static string Error(string reason, string message) => ProtocolJson.Write(w =>
+    /// <summary>A refusal: its reason code, and its message as a reader sees it (issue 615), unit ids as names in sentence case.</summary>
+    private string Error(string reason, string message) => ProtocolJson.Write(w =>
     {
         w.WriteStartObject();
         w.WriteBoolean("ok", false);
         w.WriteStartObject("error");
         w.WriteString("reason", reason);
-        w.WriteString("message", message);
+        w.WriteString("message", UnitNames.Of(_state, _content).Message(message));
         w.WriteEndObject();
         w.WriteEndObject();
     });

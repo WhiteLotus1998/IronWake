@@ -32,7 +32,7 @@ public class CertificationTrialCliTests
     {
         var output = Play(out _, "outrider_trial", "7", "reach captain\n");
 
-        Assert.Contains("certification trial: captain plays as Outrider with iron_lance, iron_sword\nObjective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.\nTrial of the Outrider  turn 1 of 1", output);
+        Assert.Contains("Certification trial: Alder Fenn plays as Outrider with iron_lance, iron_sword\nObjective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.\nTrial of the Outrider  turn 1 of 1", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.DoesNotContain("certification: ", output);
     }
@@ -42,7 +42,7 @@ public class CertificationTrialCliTests
     {
         var output = Play(out _, "bulwark_trial", "11", "show wren\n", "--candidate", "wren");
 
-        Assert.Contains("certification trial: wren plays as Bulwark with iron_lance\n", output);
+        Assert.Contains("Certification trial: Wren plays as Bulwark with iron_lance\n", output);
         Assert.Contains("> show wren\nWren, ", output);
         Assert.Contains("Bulwark L1", output);
         Assert.DoesNotContain("Alder Fenn", output);
@@ -68,7 +68,7 @@ public class CertificationTrialCliTests
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "12", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.Contains("captain may canto up to 3 movement", output);
+        Assert.Contains("Alder Fenn may Canto up to 3 movement", output);
         Assert.EndsWith("battle won: seize; no recall is left\nbattle won: seize\ncertification: captain earned Outrider\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
@@ -94,7 +94,7 @@ public class CertificationTrialCliTests
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "13", "--script", script, "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(1, exit);
-        Assert.Contains("captain cannot Canto to 3,0: not within the 1 movement its Canto has left from 2,2", output);
+        Assert.Contains("Alder Fenn cannot Canto to 3,0: not within the 1 movement his Canto has left from 2,2", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

@@ -64,7 +64,7 @@ public class CliPlayTests
     {
         var output = Play(out _, "item captain 2\nmove captain 2,6\nend\nend\nitem captain 2\nshow captain\nhelp\n");
 
-        Assert.Contains("> item captain 2\nERROR: captain is at full HP\n", output);
+        Assert.Contains("> item captain 2\nERROR: Alder Fenn is at full HP\n", output);
         Assert.Contains("> item captain 2\nAlder Fenn uses Field Dressing (0 left)\nAlder Fenn heals 10 (hp 22)\n", output);
         Assert.Contains("  Items: 1: Iron Sword x38\n", output);
         Assert.Contains("slots count from 1", output);
@@ -74,36 +74,36 @@ public class CliPlayTests
     }
 
     [Theory]
-    [InlineData("move captain", "ERROR: usage: move <unit> <x,y>")]
-    [InlineData("move captain 9", "ERROR: usage: move <unit> <x,y>")]
-    [InlineData("attack captain", "ERROR: usage: attack <unit> <target> [slot|weapon]")]
-    [InlineData("attack captain brigand-1 x", "ERROR: captain carries no 'x'; slots: 1 Iron Sword, 2 Field Dressing")]
-    [InlineData("attack captain brigand-1 1,4", "ERROR: usage: attack <unit> <target> [slot|weapon]")]
-    [InlineData("forecast captain brigand-1 2", "ERROR: captain cannot attack with field_dressing: an item, not a weapon")]
-    [InlineData("forecast captain brigand-1 0", "ERROR: captain has nothing in slot 0; slots run 1-2")]
-    [InlineData("attack captain brigand-1 3", "ERROR: captain has nothing in slot 3; slots run 1-2")]
-    [InlineData("item captain 3", "ERROR: captain has nothing in slot 3; slots run 1-2")]
-    [InlineData("wait", "ERROR: usage: wait <unit>")]
-    [InlineData("end now", "ERROR: usage: end")]
-    [InlineData("recall x", "ERROR: usage: recall <n>")]
-    [InlineData("item captain", "ERROR: usage: item <unit> <slot> [ally]")]
+    [InlineData("move captain", "ERROR: Usage: move <unit> <x,y>")]
+    [InlineData("move captain 9", "ERROR: Usage: move <unit> <x,y>")]
+    [InlineData("attack captain", "ERROR: Usage: attack <unit> <target> [slot|weapon]")]
+    [InlineData("attack captain brigand-1 x", "ERROR: Alder Fenn carries no 'x'; slots: 1 Iron Sword, 2 Field Dressing")]
+    [InlineData("attack captain brigand-1 1,4", "ERROR: Usage: attack <unit> <target> [slot|weapon]")]
+    [InlineData("forecast captain brigand-1 2", "ERROR: Alder Fenn cannot attack with field_dressing: an item, not a weapon")]
+    [InlineData("forecast captain brigand-1 0", "ERROR: Alder Fenn has nothing in slot 0; slots run 1-2")]
+    [InlineData("attack captain brigand-1 3", "ERROR: Alder Fenn has nothing in slot 3; slots run 1-2")]
+    [InlineData("item captain 3", "ERROR: Alder Fenn has nothing in slot 3; slots run 1-2")]
+    [InlineData("wait", "ERROR: Usage: wait <unit>")]
+    [InlineData("end now", "ERROR: Usage: end")]
+    [InlineData("recall x", "ERROR: Usage: recall <n>")]
+    [InlineData("item captain", "ERROR: Usage: item <unit> <slot> [ally]")]
     [InlineData("item captain 1", "ERROR: Iron Sword is a weapon, not an item; attack with it")]
-    [InlineData("forecast captain", "ERROR: usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from", "ERROR: usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
-    [InlineData("forecast captain brigand-1 from 9,9", "ERROR: captain cannot move to 9,9")]
-    [InlineData("show", "ERROR: usage: show <unit>")]
-    [InlineData("threat", "ERROR: usage: threat <unit> [from <x,y>]")]
-    [InlineData("threat captain at 1,4", "ERROR: usage: threat <unit> [from <x,y>]")]
-    [InlineData("threat captain from 9,9", "ERROR: captain cannot move to 9,9")]
-    [InlineData("threat brigand-1", "ERROR: brigand-1 is an enemy; threat answers for a player unit")]
-    [InlineData("reach", "ERROR: usage: reach <unit>")]
-    [InlineData("dance", "ERROR: unknown command 'dance'; type help")]
-    [InlineData("move captain 9,9", "ERROR: captain cannot move to 9,9")]
-    [InlineData("attack captain brigand-1", "ERROR: captain cannot attack brigand-1 from 1,8")]
-    [InlineData("show nobody", "ERROR: no living unit 'nobody'")]
-    [InlineData("recall 0", "ERROR: history holds 0 states")]
+    [InlineData("forecast captain", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 1,4 2", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 at 1,4", "ERROR: Usage: forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]")]
+    [InlineData("forecast captain brigand-1 from 9,9", "ERROR: Alder Fenn cannot move to 9,9")]
+    [InlineData("show", "ERROR: Usage: show <unit>")]
+    [InlineData("threat", "ERROR: Usage: threat <unit> [from <x,y>]")]
+    [InlineData("threat captain at 1,4", "ERROR: Usage: threat <unit> [from <x,y>]")]
+    [InlineData("threat captain from 9,9", "ERROR: Alder Fenn cannot move to 9,9")]
+    [InlineData("threat brigand-1", "ERROR: Brigand is an enemy; threat answers for a player unit")]
+    [InlineData("reach", "ERROR: Usage: reach <unit>")]
+    [InlineData("dance", "ERROR: Unknown command 'dance'; type help")]
+    [InlineData("move captain 9,9", "ERROR: Alder Fenn cannot move to 9,9")]
+    [InlineData("attack captain brigand-1", "ERROR: Alder Fenn cannot attack Brigand from 1,8")]
+    [InlineData("show nobody", "ERROR: No living unit 'nobody'")]
+    [InlineData("recall 0", "ERROR: History holds 0 states")]
     public void EveryCommandHasAUsageErrorPath(string command, string expected)
     {
         var output = Play(out _, command + "\n");
@@ -149,10 +149,10 @@ public class CliPlayTests
     {
         var output = Play(out var exit, "# a comment\n\nmove captain 9,9\nmove wren 2,6\nwait wren\nwait wren\nshow nobody\n");
 
-        Assert.Contains("> move captain 9,9\nERROR: captain cannot move to 9,9", output);
-        Assert.Contains("rejected 3 of 5 commands:\n  line 3: move captain 9,9: captain cannot move to 9,9", output);
-        Assert.Contains("\n  line 6: wait wren: wren has already acted", output);
-        Assert.Contains("\n  line 7: show nobody: no living unit 'nobody'\nbattle ongoing at turn 1, player phase\n", output);
+        Assert.Contains("> move captain 9,9\nERROR: Alder Fenn cannot move to 9,9", output);
+        Assert.Contains("Rejected 3 of 5 commands:\n  line 3: move captain 9,9: Alder Fenn cannot move to 9,9", output);
+        Assert.Contains("\n  line 6: wait wren: Wren has already acted", output);
+        Assert.Contains("\n  line 7: show nobody: No living unit 'nobody'\nbattle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);
     }
 
@@ -167,8 +167,8 @@ public class CliPlayTests
             Assert.Equal(PlaySession.StrictStop, exit);
             Assert.Contains("Wren moves ", output);
             Assert.Contains("-> 2,6", output);
-            Assert.Contains("> move captain 9,9\nERROR: captain cannot move to 9,9", output);
-            Assert.Contains("strict: stopped at line 2 (move captain 9,9); no later command applied\nrejected 1 of 2 commands:\n  line 2: move captain 9,9:", output);
+            Assert.Contains("> move captain 9,9\nERROR: Alder Fenn cannot move to 9,9", output);
+            Assert.Contains("strict: stopped at line 2 (move captain 9,9); no later command applied\nRejected 1 of 2 commands:\n  line 2: move captain 9,9:", output);
             Assert.DoesNotContain("> wait wren", output);
             Assert.DoesNotContain("Wren waits", output);
         }
@@ -200,7 +200,7 @@ public class CliPlayTests
 
         Assert.DoesNotContain("Unhandled", output);
         Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\n", output);
-        Assert.Contains("> recall 3\nERROR: state 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
+        Assert.Contains("> recall 3\nERROR: State 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
         Assert.Contains("-- Player phase, turn 3 --\n", output);
         Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
         Assert.Contains("  recall                   list the state each player turn started at", Play(out _, "help\n"));
@@ -218,10 +218,10 @@ public class CliPlayTests
 
         Assert.Contains("> forecast wren brigand-1 from 4,6\nForecast Wren -> Brigand from 4,6 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("> forecast wren brigand-1 1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
-        Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: wren cannot move to 3,5\n", output);
-        Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: wren cannot attack brigand-1 from 2,7\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: Wren cannot move to 3,5\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: Wren cannot attack Brigand from 2,7\n", output);
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n", output);
-        Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: Wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast", Play(out _, "help\n"));
     }
@@ -241,7 +241,7 @@ public class CliPlayTests
         const string Brigand = "Brigand from 3,6 with Iron Axe (slot 1): dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%";
         var expected = $"Threat on Wren at 4,6 (Plain):\n  {Archer}\n  {Brigand}\n  If all land: 17 against 9 hp\n";
         Assert.Contains("> threat wren from 4,6\n" + expected, output);
-        Assert.Contains("> threat wren from 3,7\nERROR: wren has already moved this phase; threat from 4,6\n", output);
+        Assert.Contains("> threat wren from 3,7\nERROR: Wren has already moved this phase; threat from 4,6\n", output);
         Assert.Contains("> threat wren\n" + expected, output);
         Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none\n", output);
         Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\n", output);
@@ -364,8 +364,8 @@ public class CliPlayTests
         var output = Play(out var exit, "move captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall list\nrecall 0\n");
 
         Assert.Contains("> recall list\nRecall: 0 of 3 charges left, 3 spent; a spent charge does not come back, and the same attack will roll the same\n  No charges left: nothing more can be recalled on this map\n", output);
-        Assert.Contains("> recall 0\nERROR: no Recall charges left on this map\n", output);
-        Assert.Contains("line 9: recall 0: no Recall charges left on this map", output);
+        Assert.Contains("> recall 0\nERROR: No Recall charges left on this map\n", output);
+        Assert.Contains("line 9: recall 0: No Recall charges left on this map", output);
     }
 
     /// <summary>
@@ -400,7 +400,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("Archer 2 falls at 4,7", output);
         Assert.Contains("The mill group wakes (proximity)", output);
@@ -427,7 +427,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("-- Enemy phase, turn 4 --\nReinforcements arrive\n  Rider arrives at 13,5 with the flank group, aggressive\n", output);
         Assert.Contains("Rider attacks Pell", output);
         Assert.Contains("Recalled to state 49; 2 charges left", output);
@@ -454,7 +454,7 @@ public class CliPlayTests
             Assert.Contains("-- Enemy phase, turn 4 --", first);
             Assert.DoesNotContain("Event riders", first);
             Assert.DoesNotContain("rider-1 arrives", first);
-            Assert.Equal(2, first.Split("ERROR: no living unit 'rider-1'").Length - 1);
+            Assert.Equal(2, first.Split("ERROR: No living unit 'rider-1'").Length - 1);
             Assert.Equal(first, second);
         }
         finally
@@ -785,7 +785,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith(ending, output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains(" shoves ", output);
         Assert.DoesNotContain("heft", output);
@@ -1027,7 +1027,7 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_brace_signatures.map", "2026-09-30-saltmarsh_ford_brace_signatures-563.script", 563, out var exit);
 
         Assert.Equal(PlaySession.StrictStop, exit);
-        Assert.Contains("ottilie will not shoot soldier-1 at 60: she bills the crown for every arrow and looses none under 65 (signature)\n", output);
+        Assert.Contains("Ottilie will not shoot Soldier 1 at 60: she bills the crown for every arrow and looses none under 65 (signature)\n", output);
         Assert.Contains("strict: stopped at line 22 (attack ottilie soldier-1); no later command applied\n", output);
     }
 
@@ -1180,7 +1180,7 @@ public class CliPlayTests
         Assert.Equal(0, olderExit);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241.txt")).ReplaceLineEndings("\n"), older);
         Assert.NotEqual(0, shippedExit);
-        Assert.Contains("rook cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on", shipped);
+        Assert.Contains("Rook cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on", shipped);
     }
 
     /// <summary>
@@ -1748,7 +1748,7 @@ public class CliPlayTests
         var output = PlayDarkReach("3,2", "forecast captain soldier-1 from 6,1\nforecast ottilie soldier-1 from 5,1\nend\n");
 
         Assert.Contains("> forecast captain soldier-1 from 6,1\nForecast Alder Fenn -> Soldier from 6,1 (", output);
-        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: no unit 'soldier-1' in sight at dusk\n", output);
+        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: No unit 'soldier-1' in sight at dusk\n", output);
     }
 
     /// <summary>
@@ -1763,7 +1763,7 @@ public class CliPlayTests
         var left = PlayDarkReach("6,1", "forecast ottilie soldier-1 from 5,1\nend\n");
 
         Assert.Contains("> forecast ottilie soldier-1 from 5,1\nForecast Ottilie -> Soldier from 5,1 (", spotted);
-        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: ottilie cannot attack soldier-1 from 5,1\n", left);
+        Assert.Contains("> forecast ottilie soldier-1 from 5,1\nERROR: Ottilie cannot attack Soldier from 5,1\n", left);
     }
 
     /// <summary>
@@ -1808,7 +1808,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Teodor moves 1,2 -> 3,1 via 2,2 3,2\nThe ground changes\n  4,1 becomes Road\n", output);
         Assert.Contains("-- Enemy phase, turn 3 --\nReinforcements arrive\n  Brigand arrives at 9,0 with the east group, aggressive\n", output);
         Assert.Contains("Brigand moves 9,0 -> 5,0", output);
@@ -1846,7 +1846,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.DoesNotContain("falls back", output);
         Assert.Contains("Wingrider 1 falls at 3,7", output);
     }
@@ -1862,7 +1862,7 @@ public class CliPlayTests
     {
         var output = RunRiver("2026-09-25-river_refuge_retreat-3-letgo.script", out _);
 
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("enemy: retreat wingrider-1 2,2\nWingrider 1 falls back to 2,2 and will not fight this phase\n", output);
         Assert.Contains("Wingrider 1 heals 3 (hp 8)\n", output);
         Assert.Contains("enemy: wait wingrider-1\n", output);
@@ -1888,7 +1888,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Forecast Alder Fenn -> Wingrider 2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%\n  Wingrider 2 would fall back to 2,2 at 5 hp\n", output);
         Assert.Contains("enemy: retreat wingrider-2 2,2\n", output);
         Assert.Contains("Wingrider 2 heals 3 (hp 8)\n", output);
@@ -2174,7 +2174,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("The field group wakes (noise)", output);
         Assert.Contains("Shieldbearer falls at 12,2", output);
         Assert.DoesNotContain("Hexer attacks", output);
@@ -2202,7 +2202,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: escape\nescaped: captain; left behind: none; fell: dunstan, pell, rook, wren\n", output);
-        Assert.DoesNotContain("rejected ", output);
+        Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Recalled to state 54; 2 charges left", output);
         Assert.Contains("Recalled to state 96; 1 charges left", output);
         Assert.Contains("Archer 2 falls at 11,1", output);
@@ -2241,8 +2241,8 @@ public class CliPlayTests
             var output = Run(out var exit, "play", "brackwater_cut", "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
 
             Assert.Equal(1, exit);
-            Assert.Contains("usage: exit <unit>", output);
-            Assert.Contains("captain cannot exit: ", output);
+            Assert.Contains("Usage: exit <unit>", output);
+            Assert.Contains("Alder Fenn cannot exit: ", output);
             Assert.Contains(" is not an exit tile", output);
         }
         finally
@@ -2442,7 +2442,7 @@ public class SimFullTests
             var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "old_mill_road", "--seed", "20", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
 
             Assert.Equal(0, exit);
-            Assert.DoesNotContain("rejected ", output);
+            Assert.DoesNotContain("Rejected ", output);
             Assert.DoesNotContain("strict: stopped", output);
             Assert.Contains("> item wren 2\nWren uses Field Dressing", output);
             Assert.Contains($"turn {turn} of ", output);
@@ -2475,7 +2475,7 @@ public class SimFullTests
             var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "sallow_grange", "--seed", "3", "--script", path, "--strict", "--content", Fixture.RealContentDirectory() }));
 
             Assert.Equal(0, exit);
-            Assert.DoesNotContain("rejected ", output);
+            Assert.DoesNotContain("Rejected ", output);
             Assert.DoesNotContain("strict: stopped", output);
             Assert.Contains("Ansgar cantos 5,8 -> 4,10", output);
         }
