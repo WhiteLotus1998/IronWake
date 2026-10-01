@@ -27,6 +27,12 @@ public class EventDisplayNameTests
     }
 
     [Fact]
+    public void AChestOpenedReadsItsContentsByDisplayName()
+    {
+        Assert.Equal("Wren opens the chest at 2,1: Steel Sword, Field Dressing", Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword", "field_dressing"))));
+    }
+
+    [Fact]
     public void AKeepsakeOfSomeoneOutsideTheCastFallsBackToTheId()
     {
         Assert.Equal("Iron Sword (stranger's) lies at 1,1", Line(new KeepsakeLeft("stranger", "iron_sword", new Coord(1, 1))));

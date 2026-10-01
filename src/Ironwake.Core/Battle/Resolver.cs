@@ -56,6 +56,9 @@ public static class Resolver
             case Recover recover:
                 (next, rejection) = ApplyRecover(state, content, recover, events);
                 break;
+            case Open open:
+                (next, rejection) = ApplyOpen(state, content, open, events);
+                break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
                 if (rejection is null)
@@ -1130,6 +1133,80 @@ public static class Resolver
     }
 
     /// <summary>
+    /// Issue 649's chest: a player unit that has not acted, on a closed chest's tile or orthogonally
+    /// beside it, with room in its pack for everything in it, takes the contents as its action, in
+    /// place of Attack, Item or Wait, after its Move or without one. The stacks go to the end of its
+    /// inventory at full uses, the chest stays open, and no Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyOpen(BattleState state, GameContent content, Open open, List<GameEvent> events)
+    {
+        var unit = Acting(state, open.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (OpenRefusal(state, unit, open.At) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotOpen, refusal));
+        }
+
+        var chest = state.Map.ChestAt(open.At)!;
+        events.Add(new ChestOpened(unit.Id, chest.At, chest.Items));
+        var inventory = unit.Unit.Inventory;
+        foreach (var stack in chest.Stacks(content))
+        {
+            inventory = inventory.Add(stack);
+        }
+
+        var opener = unit with
+        {
+            Unit = unit.Unit with { Inventory = inventory },
+            Moved = true,
+            Acted = true,
+            Canto = null,
+        };
+        var next = state.WithUnit(opener) with { Opened = ValueList<Coord>.From(state.Opened.Append(chest.At).Order()) };
+        return (next, null);
+    }
+
+    /// <summary>
+    /// Why <paramref name="unit"/> cannot open a chest at <paramref name="at"/> (issue 649), in the
+    /// order the rules are checked, or null when it can. Whether the unit may act at all is the
+    /// caller's check.
+    /// </summary>
+    public static string? OpenRefusal(BattleState state, BattleUnit unit, Coord at)
+    {
+        if (unit.Side != Side.Player)
+        {
+            return $"{unit.Id} cannot open a chest: only player units open chests";
+        }
+
+        if (state.Map.ChestAt(at) is not { } chest)
+        {
+            return $"{unit.Id} cannot open a chest at {at}: there is none";
+        }
+
+        if (state.Opened.Contains(at))
+        {
+            return $"{unit.Id} cannot open the chest at {at}: it is already open";
+        }
+
+        if (!chest.OpensFrom(unit.At))
+        {
+            return $"{unit.Id} cannot open the chest at {at}: open it from its tile or one beside it";
+        }
+
+        var room = Inventory.Capacity - unit.Unit.Inventory.Count;
+        if (room < chest.Items.Count)
+        {
+            return $"{unit.Id} cannot open the chest at {at}: it holds {chest.Items.Count} and there is room for {room}";
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Issue 269's exit: a unit that has not acted, standing on an exit tile of an Escape
     /// map, leaves the board for the state's escaped list. Since issue 377 the exit is taken
     /// without a Move, so only a unit that began its turn on the exit leaves, and whoever means
@@ -1345,7 +1422,7 @@ public static class Resolver
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
-    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), its Shoves on a <c>shove: on</c> map (targets in id order, 13.12), then Wait; then EndPhase. Empty once the battle is over.
+    /// something would heal), its Retreats (best tile first, issue 33), its Exit when it stands on an Escape exit (issue 269), its Recover when it stands on a keepsake with room for it (13.8), its Opens of the chests it can open (file order, issue 649), its Shoves on a <c>shove: on</c> map (targets in id order, 13.12), then Wait; then EndPhase. Empty once the battle is over.
     /// The random player of gates 2 and 8 draws from this list, so a command it picks is
     /// legal by construction.
     /// </summary>
@@ -1409,6 +1486,14 @@ public static class Resolver
             if (unit.Side == Side.Player && state.KeepsakeAt(unit.At) is not null && !unit.Unit.Inventory.IsFull)
             {
                 yield return new Recover(unit.Id);
+            }
+
+            foreach (var chest in state.ClosedChests)
+            {
+                if (OpenRefusal(state, unit, chest.At) is null)
+                {
+                    yield return new Open(unit.Id, chest.At);
+                }
             }
 
             if (unit.Side == Side.Player && state.Map.ShoveEnabled)

@@ -34,6 +34,9 @@ public sealed record KeepsakeLeft(string FallenId, string ItemId, Coord At) : Ga
 /// <summary>A player unit recovered a fallen ally's weapon; it carries the fallen's name from now on (DESIGN.md 13.8).</summary>
 public sealed record KeepsakeRecovered(string UnitId, string FallenId, string ItemId) : GameEvent;
 
+/// <summary>A player unit opened the chest at <paramref name="At"/> and took everything in it, in file order (issue 649).</summary>
+public sealed record ChestOpened(string UnitId, Coord At, ValueList<string> ItemIds) : GameEvent;
+
 /// <summary>An enemy ended a move on a keepsake and took it; it carries the weapon until it dies (DESIGN.md 13.8, issue 295).</summary>
 public sealed record KeepsakeTaken(string UnitId, string FallenId, string ItemId) : GameEvent;
 

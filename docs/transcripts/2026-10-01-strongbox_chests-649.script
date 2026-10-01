@@ -1,0 +1,92 @@
+move captain 4,9
+wait captain
+move ottilie 3,8
+wait ottilie
+move wren 6,8
+wait wren
+move teodor 7,9
+wait teodor
+end
+move captain 2,9
+open captain 1,9
+move teodor 10,9
+attack teodor archer-1
+move ottilie 2,7
+wait ottilie
+wait wren
+end
+attack wren brigand-1
+move ottilie 2,6
+open ottilie 2,5
+move teodor 10,8
+attack teodor archer-1
+move captain 5,9
+wait captain
+end
+move wren 9,7
+attack wren soldier-1
+move teodor 8,10
+item teodor 2
+move captain 8,9
+wait captain
+move ottilie 5,7
+wait ottilie
+end
+recall 53
+move teodor 7,9
+item teodor 2
+move wren 10,8
+attack wren soldier-1
+move captain 7,8
+wait captain
+wait ottilie
+end
+move wren 9,9
+attack wren soldier-1
+attack captain archer-1
+move ottilie 5,7
+attack ottilie archer-1 steel_bow
+end
+move captain 8,7
+attack captain archer-2
+move ottilie 7,7
+attack ottilie archer-2 steel_bow
+move wren 6,9
+item wren 2
+end
+move wren 6,8
+attack wren soldier-2
+move captain 8,8
+attack captain soldier-2
+move ottilie 5,5
+wait ottilie
+end
+move ottilie 4,3
+wait ottilie
+move captain 10,6
+wait captain
+move wren 8,6
+item wren 2
+end
+move ottilie 3,1
+open ottilie 3,0
+move captain 12,4
+wait captain
+move wren 10,4
+wait wren
+end
+attack captain shieldbearer-1
+move wren 13,3
+attack wren shieldbearer-1
+move ottilie 5,3
+wait ottilie
+end
+move wren 14,1
+open wren 14,0
+move captain 10,6
+wait captain
+move ottilie 9,3
+wait ottilie
+end
+move ottilie 11,4
+attack ottilie shieldbearer-1 steel_bow

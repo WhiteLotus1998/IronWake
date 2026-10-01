@@ -1,0 +1,42 @@
+name: Strongbox Hollow
+size: 15x11
+win: rout
+turn_limit: 14
+recall: 3
+enemy_level: 1
+announce: on
+
+^^.....n.......
+^^...n.....^...
+^.....^........
+..........=....
+~~~~~.....=..^.
+~~.~~.^...=....
+~~~~~.....=....
+..........=.^..
+.#....^...=....
+#.#.......=....
+.#...........n.
+
+units:
+P captain 6,9
+P recruit:wren 7,9
+P recruit:teodor 8,10
+P recruit:ottilie 5,10
+E brigand 9,4 group:van behavior:aggressive
+E soldier 11,3 group:van behavior:aggressive
+E archer 12,6 group:van behavior:aggressive
+E archer 7,1 group:camp behavior:guard
+E soldier 8,2 group:camp behavior:guard
+E shieldbearer 13,1 group:vault behavior:guard
+
+chests:
+1,9 field_dressing
+2,5 steel_bow
+3,0 steel_lance
+14,0 steel_sword field_dressing
+
+events:
+lever enter 4,9 terrain 2,9 .
+ebb turn 3 player terrain 2,6 =
+flood turn 5 enemy terrain 2,6 ~

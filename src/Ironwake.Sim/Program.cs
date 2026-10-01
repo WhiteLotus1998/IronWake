@@ -414,6 +414,7 @@ public static class Program
         Cover c => $"cover {c.UnitId} {c.AllyId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
+        Open o => $"open {o.UnitId} {o.At}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
