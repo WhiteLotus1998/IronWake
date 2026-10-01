@@ -138,6 +138,12 @@ public partial class Main : Node2D
     private string? _screenUnit;
 
     private Coord? _hover;
+
+    /// <summary>The pointer's position, for the legend's terrain hover (issue 610).</summary>
+    private Vector2? _mouse;
+
+    /// <summary>Each terrain entry the legend drew this frame, by its swatch and name, for the hover card (issue 610).</summary>
+    private readonly List<(Rect2 Rect, string Id)> _legendTerrain = new();
     private string _error = "";
     private string? _screenshot;
     private int _framesDrawn;
@@ -317,6 +323,7 @@ public partial class Main : Node2D
         {
             case InputEventMouseMotion motion:
                 _hover = TileAt(motion.Position);
+                _mouse = motion.Position;
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click when TileAt(click.Position) is { } at:
                 Play(Cue.Click);
@@ -538,6 +545,7 @@ public partial class Main : Node2D
         DrawPanel();
         DrawKeys();
         DrawCallout();
+        DrawTerrainHover();
         DrawEndCard();
     }
 
@@ -819,8 +827,8 @@ public partial class Main : Node2D
         var y = Board.Y + map.Height * _tile + 30;
         var x = Board.X;
         var right = PanelOrigin.X - Margin;
-        var ids = Enumerable.Range(0, map.Height).SelectMany(row => Enumerable.Range(0, map.Width).Select(col => map.TerrainIdAt(new Coord(col, row)))).Distinct().ToList();
-        foreach (var id in ids)
+        _legendTerrain.Clear();
+        foreach (var id in TerrainCard.OnBoard(map))
         {
             var name = _client!.Content.TerrainById(id).Name;
             if (x + 22 + UiWidth(name, 12) > right)
@@ -836,6 +844,7 @@ public partial class Main : Node2D
                 Hatch(swatch, TerrainColour("fire"), 2, 5);
             }
 
+            _legendTerrain.Add((new Rect2(x - 2, y - 14, 22 + UiWidth(name, 12), 20), id));
             x = LegendText(x + 20, y, name);
         }
 
@@ -916,6 +925,34 @@ public partial class Main : Node2D
 
             swatch(new Rect2(x, y - 11, 14, 14));
             x = LegendText(x + 20, y, label);
+        }
+    }
+
+    /// <summary>
+    /// The terrain card (issue 610): while the pointer is on a terrain entry in the legend, what
+    /// that ground does for a unit on it, the console's <c>terrain</c> text, in a box above the
+    /// entry. Hovering a board tile is unchanged.
+    /// </summary>
+    private void DrawTerrainHover()
+    {
+        if (_mouse is not { } mouse || _legendTerrain.FirstOrDefault(e => e.Rect.HasPoint(mouse)) is not { Id: not null } entry)
+        {
+            return;
+        }
+
+        const float width = 340;
+        var columns = (int)((width - 20) / (UiWidth("abcdefghijklmnopqrstuvwxyz", 12) / 26));
+        var rows = TextLayout.Wrap(_client!.TerrainText(entry.Id), columns).ToList();
+        var height = rows.Count * 17 + 14;
+        var x = Math.Clamp(entry.Rect.Position.X, Margin, ViewWidth - Margin - width);
+        var box = new Rect2(x, entry.Rect.Position.Y - height - 6, width, height);
+        Card(box, Box, 6);
+        DrawRect(box, Muted, filled: false, width: 1);
+        var y = box.Position.Y + 20;
+        foreach (var row in rows)
+        {
+            UiText(new Vector2(box.Position.X + 10, y), row, Ink, 12);
+            y += 17;
         }
     }
 

@@ -194,9 +194,24 @@ public sealed class ProtocolSession
             });
         }
 
+        if (name == "terrain")
+        {
+            var named = ProtocolJson.RequiredString(request, "terrain");
+            if (TerrainCard.Find(_content, named) is not { } terrain)
+            {
+                throw new ProtocolException($"no terrain '{named}'; name it by its glyph, id or name");
+            }
+
+            return Ok(name, w =>
+            {
+                w.WriteString("terrain", terrain.Id);
+                w.WriteString("text", TerrainCard.Text(_state, _content, terrain.Id));
+            });
+        }
+
         if (name is not ("reachable" or "targets" or "forecast" or "threat"))
         {
-            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat");
+            throw new ProtocolException($"query '{name}' is not one of: state, reachable, targets, forecast, threat, terrain");
         }
 
         var unitId = ProtocolJson.RequiredString(request, "unit");

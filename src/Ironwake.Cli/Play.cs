@@ -53,6 +53,7 @@ public sealed class PlaySession
           threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
           reach <unit>             show the board with the unit's reachable tiles marked
           show <unit>              show a unit's numbers
+          terrain [glyph|name]     what the ground does for a unit on it; with no name, every terrain on the board
           map                      show the board
           help                     this list
         slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
@@ -655,6 +656,27 @@ public sealed class PlaySession
             case "show":
                 Error("usage: show <unit>");
                 break;
+            case "terrain" when words.Length == 1:
+                foreach (var id in TerrainCard.OnBoard(_state.Map))
+                {
+                    PrintTerrainCard(_content.TerrainById(id));
+                }
+
+                break;
+            case "terrain" when words.Length == 2:
+                if (TerrainCard.Find(_content, words[1]) is { } named)
+                {
+                    PrintTerrainCard(named);
+                }
+                else
+                {
+                    Error($"no terrain '{words[1]}'; name it by its glyph, id or name");
+                }
+
+                break;
+            case "terrain":
+                Error("usage: terrain [glyph|name]");
+                break;
             case "map":
                 _out.Write(MapRenderer.Render(_state, _content));
                 if (_state.Map.Announced)
@@ -687,6 +709,10 @@ public sealed class PlaySession
                 break;
         }
     }
+
+    /// <summary>The terrain's card (issue 610) after its glyph: <c>^  Forest. -20 to hit a unit here, ...</c>.</summary>
+    private void PrintTerrainCard(Terrain terrain) =>
+        _out.WriteLine($"{terrain.Glyph}  {TerrainCard.Text(_state, _content, terrain.Id)}");
 
     /// <summary>
     /// Applies a player command and, if it was accepted, prints <paramref name="first"/>, its
