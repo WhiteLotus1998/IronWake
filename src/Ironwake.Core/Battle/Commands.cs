@@ -62,6 +62,14 @@ public sealed record Exit(string UnitId) : Command;
 public sealed record Recover(string UnitId) : Command;
 
 /// <summary>
+/// Open the chest at <paramref name="At"/> (issue 649): a player unit on the chest's tile or
+/// orthogonally beside it takes everything in it as its action, in place of Attack, Item or Wait,
+/// after its Move or without one. Every item must fit in its pack, or the chest stays shut.
+/// No Canto follows. The enemy never opens a chest.
+/// </summary>
+public sealed record Open(string UnitId, Coord At) : Command;
+
+/// <summary>
 /// Shove an orthogonally adjacent ally (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
 /// a player unit pushes an ally one tile directly away from itself, as its action in place of
 /// Attack, Item or Wait, after its Move or without one. The tile beyond must be on the map,

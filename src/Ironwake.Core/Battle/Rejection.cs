@@ -27,6 +27,7 @@ public enum RejectionReason
     NotOnAnExit,
     MovedBeforeExit,
     NoKeepsake,
+    CannotOpen,
     Unseen,
     CannotShove,
     CannotWatch,

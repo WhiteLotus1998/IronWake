@@ -84,7 +84,7 @@ Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 K
 - **Saves and difficulty** (rounds 199 to 202): camp autosaves (last three) and named saves, none mid-battle; a loss plays the bad-ending card, then Load, New game, Quit. Captain is `normal`; Recruit and Tactician about 15 points either side by the Sim; Tactician unlocks by profile. Permadeath off: the fallen return Wounded (2), -2 to the two highest stats for two main maps and the level's EXP; the captain's or a protect death still loses.
 - **Supports** (#77): 3 to 4 partners plus the captain; each pair gets a kind first; romance lifted, at least one same-sex recruit pair; marriage is an S bond with both alive (#634).
 - **The forge** (#647) is a 13.20 room; Refine +2 common, +3 rare; rare material exactly enough for the captain's and the five's signatures, by validator; the leave warning under 5 uses.
-- **Chests** (#649): elite-guarded or a puzzle in the map's own rules; opening costs the action; one early switch only. **Item descriptions** on every item, by validator (#650).
+- **Chests** (#649, built, 0132): guarded or a puzzle in the map's own rules; opening costs the action; one early switch only. **Item descriptions** by validator (#650).
 - **Names:** Promotion and Refine on screen, ids kept; Rook locked, Keziah an outlander, the rest placeholders. **Ascension is not built** (round 193). The captain's strike (#636) is measured with Recall; endings per #634.
 
 ## Open, the Table's

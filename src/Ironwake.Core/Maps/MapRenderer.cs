@@ -24,6 +24,12 @@ public static class MapRenderer
 
     public const char ExitGlyph = '>';
 
+    /// <summary>A closed chest no unit stands on (issue 649).</summary>
+    public const char ChestGlyph = '$';
+
+    /// <summary>The rule a map with chests prints after its chest list (issue 649).</summary>
+    public const string ChestRule = "a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room";
+
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
     public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";
 
@@ -166,6 +172,7 @@ public static class MapRenderer
             sb.Append(y.ToString().PadLeft(2)).Append(' ');
             var row = map.GlyphRow(y, content).ToCharArray();
             DrawExits(map, y, row);
+            DrawChests(map.Chests, y, row);
             if (reach is not null)
             {
                 for (var x = 0; x < map.Width; x++)
@@ -207,6 +214,11 @@ public static class MapRenderer
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
+        }
+
+        if (ChestLegend(map.Chests, content) is { } chests)
+        {
+            sb.Append(chests).Append('\n');
         }
 
         if (map.ShoveEnabled)
@@ -325,6 +337,7 @@ public static class MapRenderer
             sb.Append(y.ToString().PadLeft(2)).Append(' ');
             var row = map.GlyphRow(y, content).ToCharArray();
             DrawExits(map, y, row);
+            DrawChests(state.ClosedChests, y, row);
             if (reach is not null)
             {
                 for (var x = 0; x < map.Width; x++)
@@ -476,6 +489,11 @@ public static class MapRenderer
             sb.Append(exits).Append('\n');
         }
 
+        if (ChestLegend(state.ClosedChests, content) is { } chests)
+        {
+            sb.Append(chests).Append('\n');
+        }
+
         if (map.ShoveEnabled)
         {
             sb.Append(ShoveLegend).Append('\n');
@@ -603,6 +621,28 @@ public static class MapRenderer
         map.Exits.Count == 0
             ? null
             : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({(map.ExitAfterMove ? EscapeRuleAfterMove : EscapeRule)})";
+
+    /// <summary>
+    /// The chest line (issue 649): <c>chests ($): 3,1 Steel Sword, Field Dressing; 9,4 Iron Bow (</c>
+    /// <see cref="ChestRule"/><c>)</c>, each closed chest in file order with its tile and contents.
+    /// Null when no chest is left closed. The guard, if any, is a unit on the board; the way in is not printed.
+    /// </summary>
+    public static string? ChestLegend(IEnumerable<Chest> closed, GameContent content)
+    {
+        var listed = closed.Select(c => $"{c.At} {string.Join(", ", c.Items.Select(content.ItemName))}").ToList();
+        return listed.Count == 0 ? null : $"chests ({ChestGlyph}): {string.Join("; ", listed)} ({ChestRule})";
+    }
+
+    private static void DrawChests(IEnumerable<Chest> chests, int y, char[] row)
+    {
+        foreach (var chest in chests)
+        {
+            if (chest.At.Y == y)
+            {
+                row[chest.At.X] = ChestGlyph;
+            }
+        }
+    }
 
     private static void DrawExits(MapDefinition map, int y, char[] row)
     {

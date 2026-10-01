@@ -126,6 +126,11 @@ public static class ProtocolJson
                 w.WriteString("fallen", k.FallenId);
                 w.WriteString("item", k.ItemId);
                 break;
+            case ChestOpened c:
+                w.WriteString("unit", c.UnitId);
+                WriteCoord(w, "at", c.At);
+                WriteStrings(w, "items", c.ItemIds);
+                break;
             case KeepsakeTaken k:
                 w.WriteString("unit", k.UnitId);
                 w.WriteString("fallen", k.FallenId);
@@ -445,6 +450,11 @@ public static class ProtocolJson
                 w.WriteString("type", "recover");
                 w.WriteString("unit", recover.UnitId);
                 break;
+            case Open open:
+                w.WriteString("type", "open");
+                w.WriteString("unit", open.UnitId);
+                WriteCoord(w, "at", open.At);
+                break;
             case Shove shove:
                 w.WriteString("type", "shove");
                 w.WriteString("unit", shove.UnitId);
@@ -491,10 +501,11 @@ public static class ProtocolJson
             "canto" => new Canto(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
+            "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, shove, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, end, or recall"),
         };
     }
 
@@ -612,6 +623,21 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (state.Map.Chests.Count > 0)
+        {
+            w.WriteStartArray("chests");
+            foreach (var chest in state.Map.Chests)
+            {
+                w.WriteStartObject();
+                WriteCoord(w, "at", chest.At);
+                WriteStrings(w, "items", chest.Items);
+                w.WriteBoolean("open", state.Opened.Contains(chest.At));
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         if (state.Map.KeepsakesEnabled)
         {
             w.WriteStartArray("keepsakes");
@@ -751,6 +777,9 @@ public static class ProtocolJson
             e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty)
         {
             CampaignMap = OptionalInt(e, "campaignMap"),
+            Opened = e.TryGetProperty("chests", out var chests)
+                ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
+                : ValueList<Coord>.Empty,
         };
     }
 

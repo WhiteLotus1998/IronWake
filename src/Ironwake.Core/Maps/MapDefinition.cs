@@ -118,6 +118,10 @@ namespace Ironwake.Core;
 /// replay journaled plays made under that rule. Off by default, and then an exit is taken
 /// without a Move, from the exit tile the unit began its turn on.
 /// </param>
+/// <param name="Chests">
+/// The <c>chests:</c> block (issue 649): each chest's tile and contents, in file order. Empty on a
+/// map without one. Which are open is battle state (<see cref="BattleState.Opened"/>).
+/// </param>
 /// <param name="WakeLinks">
 /// The <c>wake_links:</c> header (issue 393): pairs of groups where the first group's waking wakes
 /// the second in the same check (<see cref="WakeCheck"/>). Empty by default.
@@ -157,7 +161,8 @@ public sealed record MapDefinition(
     bool SignaturesEnabled = false,
     bool OverwatchHold = false,
     bool BreakEnabled = false,
-    string? KinsbaneBearer = null)
+    string? KinsbaneBearer = null,
+    ValueList<Chest> Chests = default)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -167,6 +172,9 @@ public sealed record MapDefinition(
     public const string ThroneTerrainId = "throne";
 
     public bool IsExit(Coord at) => Exits.Contains(at);
+
+    /// <summary>The chest authored on a tile (issue 649), or null.</summary>
+    public Chest? ChestAt(Coord at) => Chests.FirstOrDefault(c => c.At == at);
 
     /// <summary>
     /// A player unit as this map issues it: every consumable stack (an entry of items.json;

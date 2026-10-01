@@ -42,6 +42,7 @@ public sealed class PlaySession
           canto <unit> <x,y|stay>  After acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
+          open <unit> <x,y>        Open the chest on or beside the unit, as its action; everything inside goes to its pack
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
           watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
@@ -569,6 +570,12 @@ public sealed class PlaySession
                 break;
             case "recover":
                 Error("usage: recover <unit>");
+                break;
+            case "open" when words.Length == 3 && TryCoord(words[2], out var chestAt):
+                Apply(new Open(words[1], chestAt));
+                break;
+            case "open":
+                Error("usage: open <unit> <x,y>");
                 break;
             case "shove" when words.Length == 3:
                 Apply(new Shove(words[1], words[2]));
@@ -2080,6 +2087,7 @@ public sealed class PlaySession
         Cover c => $"cover {c.UnitId} {c.AllyId}",
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
+        Open o => $"open {o.UnitId} {o.At}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
@@ -2135,6 +2143,8 @@ public sealed class PlaySession
                 return $"{Keepsake.Name(k.ItemId, k.FallenId, content)} lies at {k.At}";
             case KeepsakeRecovered k:
                 return $"{names[k.UnitId]} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
+            case ChestOpened c:
+                return $"{names[c.UnitId]} opens the chest at {c.At}: {string.Join(", ", c.ItemIds.Select(content.ItemName))}";
             case KeepsakeTaken k:
                 return $"{names[k.UnitId]} takes {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case KeepsakeLost k:

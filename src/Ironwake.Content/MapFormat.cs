@@ -6,7 +6,7 @@ namespace Ironwake.Content;
 /// <summary>
 /// Reads and writes the <c>.map</c> text format from DESIGN.md section 10: a header of
 /// <c>key: value</c> lines, a blank line, the terrain grid, a blank line, then a
-/// <c>units:</c> block, then an optional <c>events:</c> block (issue 32). <see cref="Write"/> is canonical (fixed header order, every
+/// <c>units:</c> block, then an optional <c>chests:</c> block (issue 649), then an optional <c>events:</c> block (issue 32). <see cref="Write"/> is canonical (fixed header order, every
 /// default written out), so <c>Write(Parse(text))</c> is a fixed point and a hand-edited
 /// file can be checked against it. Nothing here touches the disk; <see cref="MapFiles"/> does.
 /// </summary>
@@ -174,6 +174,16 @@ public static class MapFormat
             sb.Append(WriteUnitLine(placement)).Append('\n');
         }
 
+        if (map.Chests.Count > 0)
+        {
+            sb.Append('\n');
+            sb.Append("chests:\n");
+            foreach (var chest in map.Chests)
+            {
+                sb.Append(chest.At).Append(' ').Append(string.Join(' ', chest.Items)).Append('\n');
+            }
+        }
+
         if (map.Events.Count > 0)
         {
             sb.Append('\n');
@@ -295,6 +305,7 @@ public static class MapFormat
             var terrain = ParseGrid(width, height);
             SkipBlankLines();
             var placements = ParseUnits(width, height, terrain);
+            var chests = ParseChests(width, height);
             var events = ParseEvents(width, height, terrain, turnLimit);
             if (announce && events.Count == 0)
             {
@@ -302,7 +313,7 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests };
             Validate(map);
             return map;
         }
@@ -660,7 +671,7 @@ public static class MapFormat
             _index++;
             var placements = new List<Placement>();
             var occupied = new Dictionary<Coord, int>();
-            for (; !AtEnd && Current.Trim() != "events:"; _index++)
+            for (; !AtEnd && Current.Trim() is not ("events:" or "chests:"); _index++)
             {
                 if (string.IsNullOrWhiteSpace(Current))
                 {
@@ -759,6 +770,64 @@ public static class MapFormat
             }
 
             return new EnemyPlacement(at, tokens[1], group, behavior, isBoss);
+        }
+
+        /// <summary>
+        /// The optional <c>chests:</c> block after the units (issue 649): one line per chest,
+        /// <c>x,y item [item ...]</c>, one to <see cref="Chest.MaxItems"/> ids from weapons.json or
+        /// items.json, one chest per tile. A signature item (<c>boundTo</c>) is never in a chest:
+        /// it is lost with its owner, never found.
+        /// </summary>
+        private ValueList<Chest> ParseChests(int width, int height)
+        {
+            if (AtEnd || Current.Trim() != "chests:")
+            {
+                return ValueList<Chest>.Empty;
+            }
+
+            _index++;
+            var chests = new List<Chest>();
+            var lines = new Dictionary<Coord, int>();
+            for (; !AtEnd && Current.Trim() != "events:"; _index++)
+            {
+                if (string.IsNullOrWhiteSpace(Current))
+                {
+                    continue;
+                }
+
+                var tokens = Current.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var at = ParseCoord(tokens[0], width, height);
+                if (lines.TryGetValue(at, out var otherLine))
+                {
+                    throw Error($"tile {at} already has the chest on line {otherLine}");
+                }
+
+                var items = tokens[1..];
+                if (items.Length is 0 or > Chest.MaxItems)
+                {
+                    throw Error($"a chest holds 1 to {Chest.MaxItems} items, got {items.Length}");
+                }
+
+                foreach (var item in items)
+                {
+                    if (_content.Weapons.TryGetValue(item, out var weapon))
+                    {
+                        if (weapon.BoundTo is { } owner)
+                        {
+                            throw Error($"chest at {at} holds '{item}', a signature item bound to {owner}; it is lost with its owner, never found");
+                        }
+                    }
+                    else if (!_content.Items.ContainsKey(item))
+                    {
+                        throw Error($"chest at {at} holds '{item}', which is not a weapon in weapons.json or an item in items.json");
+                    }
+                }
+
+                lines[at] = LineNumber;
+                chests.Add(new Chest(at, ValueList<string>.From(items)));
+            }
+
+            return ValueList<Chest>.From(chests);
         }
 
         /// <summary>

@@ -1,0 +1,2603 @@
+Strongbox Hollow, seed 649, scheme TwoRollAverage
+Objective: Defeat every enemy by the end of turn 14. Captain Fenn must survive.
+  when one of yours stops on 4,9: 2,9 becomes plain.
+  turn 3, player phase: 2,6 becomes road.
+  turn 5, enemy phase: 2,6 becomes water, unless one who cannot enter water stands on it.
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #$#...AB..=....
+10 .#...D..C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        6,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,10   hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 4,9
+Alder Fenn moves 6,9 -> 4,9 via 5,9
+The ground changes
+  2,9 becomes Plain
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #$..A..B..=....
+10 .#...D..C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,10   hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #$..A..B..=....
+10 .#...D..C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,10   hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 3,8
+Ottilie moves 5,10 -> 3,8 via 5,9 5,8 4,8
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..^...=....
+ 9 #$..A..B..=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..^...=....
+ 9 #$..A..B..=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 6,8
+Wren moves 7,9 -> 6,8 via 7,8
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$..A.....=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait wren
+Wren waits
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$..A.....=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          8,10   hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move teodor 7,9
+Teodor moves 8,10 -> 7,9 via 8,9
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$..A..C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait teodor
+Teodor waits
+Strongbox Hollow  turn 1 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=b...
+ 4 ~~~~~....a=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~.....=.c..
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$..A..C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           12,6   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          9,4    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         11,3   hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 11,9
+Archer 1 moves 12,6 -> 11,9 via 11,6 11,7 11,8
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-1 7,6
+Brigand moves 9,4 -> 7,6 via 8,4 7,4 7,5
+enemy: wait brigand-1
+Brigand waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 7,3
+Soldier 1 moves 11,3 -> 7,3 via 10,3 9,3 8,3
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$..A..C..=c...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 2,9
+Alder Fenn moves 4,9 -> 2,9 via 3,9
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #$A....C..=c...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 1,9 Field Dressing; 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> open captain 1,9
+Alder Fenn opens the chest at 1,9: Field Dressing
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #.A....C..=c...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 21/21  Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move teodor 10,9
+Teodor moves 7,9 -> 10,9 via 8,9 9,9
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #.A.......Cc...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 21/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack teodor archer-1
+Forecast Teodor -> Archer 1: dmg 12 hit 76% crit 1%; counter: none
+Teodor attacks Archer 1
+  Teodor misses Archer 1
+  Teodor hp 21, Archer 1 hp 17
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..........=.^..
+ 8 .#.D..B...=....
+ 9 #.A.......Cc...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,8    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 21/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 2,7
+Ottilie moves 3,8 -> 2,7 via 3,7
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..D.......=.^..
+ 8 .#....B...=....
+ 9 #.A.......Cc...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 21/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..D.......=.^..
+ 8 .#....B...=....
+ 9 #.A.......Cc...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 21/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait wren
+Wren waits
+Strongbox Hollow  turn 2 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 .......b..=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~~~~..a..=....
+ 7 ..D.......=.^..
+ 8 .#....B...=....
+ 9 #.A.......Cc...
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,9   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          7,6    hp 22/22  Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,3    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 21/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: move archer-1 11,8
+Archer 1 moves 11,9 -> 11,8
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 16)
+  Archer 1 hp 17, Teodor hp 16
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-1 6,7
+Brigand moves 7,6 -> 6,7 via 6,6
+enemy: attack brigand-1 wren
+Forecast Brigand -> Wren: dmg 10 hit 18% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Brigand attacks Wren
+  Brigand misses Wren
+  Wren hits Brigand for 10 (hp 12)
+  Wren hits Brigand for 10 (hp 2)
+  Brigand hp 2, Wren hp 20
+Wren gains 10 exp (10)
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 7,7
+Soldier 1 moves 7,3 -> 7,7 via 7,4 7,5 7,6
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The ground changes
+  2,6 becomes Road
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~=~~.....=....
+ 7 ..D...ab..=.^..
+ 8 .#....B...=c...
+ 9 #.A.......C....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+a  brigand-1        Brigand L1 reaver          6,7    hp 2/22   Plain  group van, aggressive
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 16/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren brigand-1
+Forecast Wren -> Brigand: dmg 10 x2 hit 88% crit 4%; counter: dmg 10 hit 18% crit 0%
+Wren attacks Brigand
+  Wren hits Brigand for 10 (hp 0)
+  Wren hp 20, Brigand hp 0
+Wren gains 30 exp (40)
+Brigand falls at 6,7
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~=~~.....=....
+ 7 ..D....b..=.^..
+ 8 .#....B...=c...
+ 9 #.A.......C....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 16/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 2,6
+Ottilie moves 2,7 -> 2,6
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~$~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...=c...
+ 9 #.A.......C....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 16/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> open ottilie 2,5
+Ottilie opens the chest at 2,5: Steel Bow
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...=c...
+ 9 #.A.......C....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,9   hp 16/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move teodor 10,8
+Teodor moves 10,9 -> 10,8
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...Cc...
+ 9 #.A.......=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 16/21  Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack teodor archer-1
+Forecast Teodor -> Archer 1: dmg 12 hit 76% crit 1%; counter: none
+Teodor attacks Archer 1
+  Teodor misses Archer 1
+  Teodor hp 16, Archer 1 hp 17
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...Cc...
+ 9 #.A.......=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        2,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 16/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 5,9
+Alder Fenn moves 2,9 -> 5,9 via 3,9 4,9
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...Cc...
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 16/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 3 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .......b..=.^..
+ 8 .#....B...Cc...
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,8   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         7,7    hp 20/20  Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 16/21  Road  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: move archer-1 11,7
+Archer 1 moves 11,8 -> 11,7
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 11)
+  Archer 1 hp 17, Teodor hp 11
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 10,7
+Soldier 1 moves 7,7 -> 10,7 via 8,7 9,7
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 3)
+  Teodor hits Soldier 1 for 10 (hp 10)
+  Soldier 1 hp 10, Teodor hp 3
+Teodor gains 10 exp (10)
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....B...C....
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 3/21   Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 9,7
+Wren moves 6,8 -> 9,7 via 6,7 7,7 8,7
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...C....
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 3/21   Road
+B  wren             Wren L1 cadet              9,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren soldier-1
+Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Wren attacks Soldier 1
+  Wren hits Soldier 1 for 8 (hp 2)
+  Soldier 1 hits Wren for 9 (hp 11)
+  Wren hp 11, Soldier 1 hp 2
+Wren gains 10 exp (50)
+The camp group wakes (noise)
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...C....
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          10,8   hp 3/21   Road
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move teodor 8,10
+Teodor moves 10,8 -> 8,10 via 9,8 8,8 8,9
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...=....
+ 9 #....A....=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 3/21   Plain
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 13)
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...=....
+ 9 #....A....=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 8,9
+Alder Fenn moves 5,9 -> 8,9 via 6,9 7,9
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...=....
+ 9 #.......A.=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 .........Bbc^..
+ 8 .#....^...=....
+ 9 #.......A.=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 5,7
+Ottilie moves 2,6 -> 5,7 via 2,7 3,7 4,7
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~=~~.....=....
+ 7 .....D...Bbc^..
+ 8 .#....^...=....
+ 9 #.......A.=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~=~~.....=....
+ 7 .....D...Bbc^..
+ 8 .#....^...=....
+ 9 #.......A.=....
+10 .#......C....n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,9    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, awake
+C  teodor           Teodor L1 pikeman          8,10   hp 13/21  Plain  done
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+Lethal if all land: Teodor (Archer 1 for 5, Soldier 1 for 8, against 13 hp)
+Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move archer-1 9,9
+Archer 1 moves 11,7 -> 9,9 via 10,7 10,8 9,8
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 8)
+  Archer 1 hp 17, Teodor hp 8
+enemy: move archer-2 5,3
+Archer 2 moves 7,1 -> 5,3 via 7,2 7,3 6,3
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 9,10
+Soldier 1 moves 10,7 -> 9,10 via 10,8 9,8 9,9
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 0)
+  Soldier 1 hp 2, Teodor hp 0
+Teodor falls at 8,10
+enemy: move soldier-2 9,5
+Soldier 2 moves 8,2 -> 9,5 via 9,2 9,3 9,4
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 3
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 .....d....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^..e=....
+ 6 ~~=~~.....=....
+ 7 .....D...B=.^..
+ 8 .#....^...=....
+ 9 #.......Ac=....
+10 .#.......b...n.
+
+c  archer-1         Archer L1 bowman           9,9    hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           5,3    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         9,10   hp 2/20   Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         9,5    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,7    hp 11/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> recall 53
+Recalled to state 53; 2 charges left
+Undone: gives back 10 exp, 8 enemy hp; returns Teodor alive at 3 hp, 9 hp to Wren
+The rolls do not change: the same attack will roll the same
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....B...C....
+ 9 #....A....=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          10,8   hp 3/21   Road
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move teodor 7,9
+Teodor moves 10,8 -> 7,9 via 9,8 8,8 7,8
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....B...=....
+ 9 #....A.C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 3/21   Plain
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> item teodor 2
+Teodor uses Field Dressing (2 left)
+Teodor heals 10 (hp 13)
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....B...=....
+ 9 #....A.C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 10,8
+Wren moves 6,8 -> 10,8 via 7,8 8,8 9,8
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....^...B....
+ 9 #....A.C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 10/20  Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              10,8   hp 20/20  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren soldier-1
+Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Wren attacks Soldier 1
+  Wren hits Soldier 1 for 8 (hp 2)
+  Soldier 1 hits Wren for 9 (hp 11)
+  Wren hp 11, Soldier 1 hp 2
+Wren gains 10 exp (50)
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....^...B....
+ 9 #....A.C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              10,8   hp 11/20  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 7,8
+Alder Fenn moves 5,9 -> 7,8 via 6,9 7,9
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....^A..B....
+ 9 #......C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              10,8   hp 11/20  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....^A..B....
+ 9 #......C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              10,8   hp 11/20  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 4 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.d...^.f.
+ 2 ^.....^.e......
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~D~~.....=....
+ 7 ..........bc^..
+ 8 .#....^A..B....
+ 9 #......C..=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           11,7   hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,1    hp 17/17  Plain  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         10,7   hp 2/20   Road  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,2    hp 20/20  Plain  group camp, guard, asleep
+C  teodor           Teodor L1 pikeman          7,9    hp 13/21  Plain  done
+B  wren             Wren L1 cadet              10,8   hp 11/20  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+Lethal if all land: Teodor (Archer 1 for 5, Soldier 1 for 8, against 13 hp)
+Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move archer-1 7,7
+Archer 1 moves 11,7 -> 7,7 via 10,7 9,7 8,7
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 8)
+  Archer 1 hp 17, Teodor hp 8
+The camp group wakes (noise)
+enemy: move archer-2 7,5
+Archer 2 moves 7,1 -> 7,5 via 7,2 7,3 7,4
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 8,9
+Soldier 1 moves 10,7 -> 8,9 via 9,7 8,7 8,8
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 0)
+  Soldier 1 hp 2, Teodor hp 0
+Teodor falls at 7,9
+enemy: move soldier-2 8,6
+Soldier 2 moves 8,2 -> 8,6 via 8,3 8,4 8,5
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~D~~...e.=....
+ 7 .......c..=.^..
+ 8 .#....^A..B....
+ 9 #.......b.=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           7,7    hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         8,9    hp 2/20   Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              10,8   hp 11/20  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 9,9
+Wren moves 10,8 -> 9,9 via 9,8
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~D~~...e.=....
+ 7 .......c..=.^..
+ 8 .#....^A..=....
+ 9 #.......bB=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           7,7    hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+b  soldier-1        Soldier L1 pikeman         8,9    hp 2/20   Plain  group van, aggressive
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 11/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren soldier-1
+Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Wren attacks Soldier 1
+  Wren hits Soldier 1 for 8 (hp 0)
+  Wren hp 11, Soldier 1 hp 0
+Wren gains 30 exp (80)
+Soldier 1 falls at 8,9
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~D~~...e.=....
+ 7 .......c..=.^..
+ 8 .#....^A..=....
+ 9 #........B=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           7,7    hp 17/17  Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack captain archer-1
+Forecast Alder Fenn -> Archer 1: dmg 11 hit 87% crit 4%; counter: none
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 11 (hp 6)
+  Alder Fenn hp 22, Archer 1 hp 6
+Alder Fenn gains 10 exp (10)
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~D~~...e.=....
+ 7 .......c..=.^..
+ 8 .#....^A..=....
+ 9 #........B=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           7,7    hp 6/17   Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          2,6    hp 17/17  Road
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 5,7
+Ottilie moves 2,6 -> 5,7 via 2,7 3,7 4,7
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~=~~...e.=....
+ 7 .....D.c..=.^..
+ 8 .#....^A..=....
+ 9 #........B=....
+10 .#...........n.
+
+c  archer-1         Archer L1 bowman           7,7    hp 6/17   Plain  group van, aggressive
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack ottilie archer-1 steel_bow
+Forecast Ottilie -> Archer 1 with Steel Bow: dmg 11 hit 88% crit 9%; counter: dmg 7 hit 86% crit 1%
+Ottilie equips Steel Bow
+Ottilie attacks Archer 1
+  Ottilie hits Archer 1 for 11 (hp 0)
+  Ottilie hp 17, Archer 1 hp 0
+Ottilie gains 30 exp (30)
+Archer 1 falls at 7,7
+Strongbox Hollow  turn 5 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^d..=....
+ 6 ~~=~~...e.=....
+ 7 .....D....=.^..
+ 8 .#....^A..=....
+ 9 #........B=....
+10 .#...........n.
+
+d  archer-2         Archer L1 bowman           7,5    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         8,6    hp 20/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+Lethal if all land: Ottilie (Archer 2 for 7, Soldier 2 for 10, against 17 hp)
+Lethal if all land: Wren (Archer 2 for 6, Soldier 2 for 9, against 11 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+The ground changes
+  2,6 becomes Water
+enemy: move archer-2 9,7
+Archer 2 moves 7,5 -> 9,7 via 8,5 9,5 9,6
+enemy: attack archer-2 wren
+Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Archer 2 attacks Wren
+  Archer 2 hits Wren for 6 (hp 5)
+  Archer 2 hp 17, Wren hp 5
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-2 9,8
+Soldier 2 moves 8,6 -> 9,8 via 9,6 9,7
+enemy: attack soldier-2 wren
+Forecast Soldier 2 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Soldier 2 attacks Wren
+  Soldier 2 misses Wren
+  Wren hits Soldier 2 for 8 (hp 12)
+  Soldier 2 hp 12, Wren hp 5
+Wren gains 10 exp (90)
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .....D...d=.^..
+ 8 .#....^A.e=....
+ 9 #........B=....
+10 .#...........n.
+
+d  archer-2         Archer L1 bowman           9,7    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 8,7
+Alder Fenn moves 7,8 -> 8,7 via 7,7
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .....D..Ad=.^..
+ 8 .#....^..e=....
+ 9 #........B=....
+10 .#...........n.
+
+d  archer-2         Archer L1 bowman           9,7    hp 17/17  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack captain archer-2
+Forecast Alder Fenn -> Archer 2: dmg 11 hit 87% crit 4%; counter: none
+Alder Fenn attacks Archer 2
+  Alder Fenn hits Archer 2 for 11 (hp 6)
+  Alder Fenn hp 22, Archer 2 hp 6
+Alder Fenn gains 10 exp (20)
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .....D..Ad=.^..
+ 8 .#....^..e=....
+ 9 #........B=....
+10 .#...........n.
+
+d  archer-2         Archer L1 bowman           9,7    hp 6/17   Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 7,7
+Ottilie moves 5,7 -> 7,7 via 6,7
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DAd=.^..
+ 8 .#....^..e=....
+ 9 #........B=....
+10 .#...........n.
+
+d  archer-2         Archer L1 bowman           9,7    hp 6/17   Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack ottilie archer-2 steel_bow
+Forecast Ottilie -> Archer 2 with Steel Bow: dmg 11 hit 88% crit 9%; counter: dmg 7 hit 86% crit 1%
+Ottilie attacks Archer 2
+  Ottilie hits Archer 2 for 11 (hp 0)
+  Ottilie hp 17, Archer 2 hp 0
+Ottilie gains 30 exp (60)
+Archer 2 falls at 9,7
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....^..e=....
+ 9 #........B=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 6,9
+Wren moves 9,9 -> 6,9 via 8,9 7,9
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....^..e=....
+ 9 #.....B...=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              6,9    hp 5/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> item wren 2
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 15)
+Strongbox Hollow  turn 6 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....^..e=....
+ 9 #.....B...=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,7    hp 17/17  Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         9,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              6,9    hp 15/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-2 7,8
+Soldier 2 moves 9,8 -> 7,8 via 8,8
+enemy: attack soldier-2 ottilie
+Forecast Soldier 2 -> Ottilie: dmg 10 hit 81% crit 0%; counter: none
+Soldier 2 attacks Ottilie
+  Soldier 2 hits Ottilie for 10 (hp 7)
+  Soldier 2 hp 12, Ottilie hp 7
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....^e..=....
+ 9 #.....B...=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,7    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         7,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              6,9    hp 15/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 6,8
+Wren moves 6,9 -> 6,8
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....Be..=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,7    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         7,8    hp 12/20  Plain  group camp, guard, awake
+B  wren             Wren L1 cadet              6,8    hp 15/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren soldier-2
+Forecast Wren -> Soldier 2: dmg 8 hit 85% crit 3%; counter: dmg 8 hit 28% crit 0%
+Wren attacks Soldier 2
+  Wren hits Soldier 2 for 8 (hp 4)
+  Soldier 2 hits Wren for 8 (hp 7)
+  Wren hp 7, Soldier 2 hp 4
+Wren gains 10 exp (0)
+Wren reaches level 2: hp +1 mag +1
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......DA.=.^..
+ 8 .#....Be..=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,7    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         7,8    hp 4/20   Plain  group camp, guard, awake
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 8,8
+Alder Fenn moves 8,7 -> 8,8
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......D..=.^..
+ 8 .#....BeA.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          7,7    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+e  soldier-2        Soldier L1 pikeman         7,8    hp 4/20   Plain  group camp, guard, awake
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack captain soldier-2
+Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Alder Fenn attacks Soldier 2
+  Alder Fenn hits Soldier 2 for 9 (hp 0)
+  Alder Fenn hp 22, Soldier 2 hp 0
+Alder Fenn gains 30 exp (50)
+Soldier 2 falls at 7,8
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 .......D..=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          7,7    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 5,5
+Ottilie moves 7,7 -> 5,5 via 7,6 6,6 5,6
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~D^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,5    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 7 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~D^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,5    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~D^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          5,5    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 4,3
+Ottilie moves 5,5 -> 4,3 via 5,4 5,3
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....B.A.=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        8,8    hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 10,6
+Alder Fenn moves 8,8 -> 10,6 via 8,7 8,6 9,6
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....B...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....B...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain  done
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              6,8    hp 8/21   Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 8,6
+Wren moves 6,8 -> 8,6 via 6,7 6,6 7,6
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain  done
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              8,6    hp 8/21   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> item wren 2
+Wren uses Field Dressing (1 left)
+Wren heals 10 (hp 18)
+Strongbox Hollow  turn 8 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain  done
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^...n.....^.f.
+ 2 ^.....^........
+ 3 ....D.....=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain
+D  ottilie          Ottilie L1 bowman          4,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 3,1
+Ottilie moves 4,3 -> 3,1 via 4,2 4,1
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.$...n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> open ottilie 3,0
+Ottilie opens the chest at 3,0: Steel Lance
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Road  captain
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, asleep
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move captain 12,4
+Alder Fenn moves 10,6 -> 12,4 via 10,5 10,4 11,4
+The vault group wakes (proximity)
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=.A^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, awake
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=.A^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~...B.=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, awake
+B  wren             Wren L2 cadet              8,6    hp 18/21  Plain
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 10,4
+Wren moves 8,6 -> 10,4 via 8,5 8,4 9,4
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....B.A^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, awake
+B  wren             Wren L2 cadet              10,4   hp 18/21  Road
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait wren
+Wren waits
+Strongbox Hollow  turn 9 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^.f.
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....B.A^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 22/22  Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,1   hp 24/24  Plain  group vault, guard, awake
+B  wren             Wren L2 cadet              10,4   hp 18/21  Road  done
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
+enemy: move shieldbearer-1 13,4
+Shieldbearer moves 13,1 -> 13,4 via 13,2 13,3
+enemy: attack shieldbearer-1 captain
+Forecast Shieldbearer -> Alder Fenn: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 73% crit 5%
+Shieldbearer attacks Alder Fenn
+  Shieldbearer hits Alder Fenn for 7 (hp 15)
+  Alder Fenn hits Shieldbearer for 4 (hp 20)
+  Alder Fenn hits Shieldbearer for 4 (hp 16)
+  Shieldbearer hp 16, Alder Fenn hp 15
+Alder Fenn gains 10 exp (60)
+enemy: end
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^...
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....B.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 15/22  Plain  captain
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 16/24  Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              10,4   hp 18/21  Road
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack captain shieldbearer-1
+Forecast Alder Fenn -> Shieldbearer: dmg 4 x2 hit 73% crit 5%; counter: dmg 7 hit 58% crit 0%
+Alder Fenn attacks Shieldbearer
+  Alder Fenn hits Shieldbearer for 4 (hp 12)
+  Shieldbearer hits Alder Fenn for 7 (hp 8)
+  Alder Fenn hits Shieldbearer for 4 (hp 8)
+  Alder Fenn hp 8, Shieldbearer hp 8
+Alder Fenn gains 10 exp (70)
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^...
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....B.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 8/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              10,4   hp 18/21  Road
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 13,3
+Wren moves 10,4 -> 13,3 via 10,3 11,3 12,3
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^...
+ 2 ^.....^........
+ 3 ..........=..B.
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 8/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              13,3   hp 18/21  Plain
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> attack wren shieldbearer-1
+Forecast Wren -> Shieldbearer: dmg 3 x2 hit 70% crit 4%; counter: dmg 8 hit 60% crit 0%
+Wren attacks Shieldbearer
+  Wren misses Shieldbearer
+  Shieldbearer hits Wren for 8 (hp 10)
+  Wren hits Shieldbearer for 3 (hp 5)
+  Wren hp 10, Shieldbearer hp 5
+Wren gains 8 exp (8)
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^.D.n.....^...
+ 2 ^.....^........
+ 3 ..........=..B.
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain  done
+D  ottilie          Ottilie L1 bowman          3,1    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              13,3   hp 10/21  Plain  done
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move ottilie 5,3
+Ottilie moves 3,1 -> 5,3 via 4,1 4,2 5,2
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^...n.....^...
+ 2 ^.....^........
+ 3 .....D....=..B.
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              13,3   hp 10/21  Plain  done
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 10 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^...n.....^...
+ 2 ^.....^........
+ 3 .....D....=..B.
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain  done
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              13,3   hp 10/21  Plain  done
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> end
+-- Player phase ends, turn 10 --
+-- Enemy phase, turn 10 --
+enemy: attack shieldbearer-1 wren
+Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 70% crit 4%
+Shieldbearer attacks Wren
+  Shieldbearer misses Wren
+  Wren misses Shieldbearer
+  Wren misses Shieldbearer
+  Shieldbearer hp 5, Wren hp 10
+enemy: end
+-- Enemy phase ends, turn 10 --
+-- Player phase, turn 11 --
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^...n.....^...
+ 2 ^.....^........
+ 3 .....D....=..B.
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              13,3   hp 10/21  Plain
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> move wren 14,1
+Wren moves 13,3 -> 14,1 via 13,2 13,1
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n......$
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .....D....=....
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain
+chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
+> open wren 14,0
+Wren opens the chest at 14,0: Steel Sword, Field Dressing
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .....D....=....
+ 4 ~~~~~.....=.Af.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....=....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        12,4   hp 8/22   Plain  captain
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
+> move captain 10,6
+Alder Fenn moves 12,4 -> 10,6 via 11,4 10,4 10,5
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .....D....=....
+ 4 ~~~~~.....=..f.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
+> wait captain
+Alder Fenn waits
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .....D....=....
+ 4 ~~~~~.....=..f.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain  done
+D  ottilie          Ottilie L1 bowman          5,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
+> move ottilie 9,3
+Ottilie moves 5,3 -> 9,3 via 6,3 7,3 8,3
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .........D=....
+ 4 ~~~~~.....=..f.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain  done
+D  ottilie          Ottilie L1 bowman          9,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
+> wait ottilie
+Ottilie waits
+Strongbox Hollow  turn 11 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .........D=....
+ 4 ~~~~~.....=..f.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain  done
+D  ottilie          Ottilie L1 bowman          9,3    hp 7/17   Plain  done
+f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 5/24   Forest  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain  done
+> end
+Lethal if all land: Ottilie (Shieldbearer for 9, against 7 hp)
+-- Player phase ends, turn 11 --
+-- Enemy phase, turn 11 --
+enemy: move shieldbearer-1 10,3
+Shieldbearer moves 13,4 -> 10,3 via 13,3 12,3 11,3
+enemy: attack shieldbearer-1 ottilie
+Forecast Shieldbearer -> Ottilie: dmg 9 hit 79% crit 0%; counter: none
+Shieldbearer attacks Ottilie
+  Shieldbearer misses Ottilie
+  Shieldbearer hp 5, Ottilie hp 7
+enemy: end
+-- Enemy phase ends, turn 11 --
+-- Player phase, turn 12 --
+Strongbox Hollow  turn 12 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 .........Df....
+ 4 ~~~~~.....=..^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain
+D  ottilie          Ottilie L1 bowman          9,3    hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    10,3   hp 5/24   Road  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain
+> move ottilie 11,4
+Ottilie moves 9,3 -> 11,4 via 9,4 10,4
+Strongbox Hollow  turn 12 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 ..........f....
+ 4 ~~~~~.....=D.^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain
+D  ottilie          Ottilie L1 bowman          11,4   hp 7/17   Plain
+f  shieldbearer-1   Shieldbearer L1 bulwark    10,3   hp 5/24   Road  group vault, guard, awake
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain
+> attack ottilie shieldbearer-1 steel_bow
+Forecast Ottilie -> Shieldbearer with Steel Bow: dmg 5 hit 95% crit 10%; counter: none
+Ottilie attacks Shieldbearer
+  Ottilie hits Shieldbearer for 5 (hp 0)
+  Ottilie hp 7, Shieldbearer hp 0
+Ottilie gains 30 exp (90)
+Shieldbearer falls at 10,3
+Strongbox Hollow  turn 12 of 14  player phase  rout  recall 2
+   012345678901234
+ 0 ^^.....n.......
+ 1 ^^...n.....^..B
+ 2 ^.....^........
+ 3 ..........=....
+ 4 ~~~~~.....=D.^.
+ 5 ~~.~~.^...=....
+ 6 ~~~~~.....A....
+ 7 ..........=.^..
+ 8 .#....^...=....
+ 9 #.........=....
+10 .#...........n.
+
+A  captain          Alder Fenn L1 cadet        10,6   hp 8/22   Road  captain
+D  ottilie          Ottilie L1 bowman          11,4   hp 7/17   Plain  done
+B  wren             Wren L2 cadet              14,1   hp 10/21  Plain
+Battle won: rout; only recall is left
+Battle won: rout

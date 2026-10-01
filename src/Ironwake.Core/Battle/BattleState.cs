@@ -49,6 +49,15 @@ public sealed record BattleState(
     public int? CampaignMap { get; init; }
 
     /// <summary>
+    /// The tiles of the chests opened so far (issue 649), sorted row-major. A chest opens once and
+    /// stays open; a Recall restores the list with the board.
+    /// </summary>
+    public ValueList<Coord> Opened { get; init; }
+
+    /// <summary>The map's chests not yet opened, in file order (issue 649).</summary>
+    public IEnumerable<Chest> ClosedChests => Map.Chests.Where(c => !Opened.Contains(c.At));
+
+    /// <summary>
     /// The keepsake on top of a tile's stack (DESIGN.md 13.8, issue 295): the newest left
     /// there, which <c>recover</c> takes first; null when nothing lies there.
     /// </summary>
@@ -559,6 +568,17 @@ public sealed record BattleState(
             foreach (var keepsake in Keepsakes)
             {
                 sb.Append(' ').Append(keepsake.Item.ItemId).Append('x').Append(keepsake.Item.Uses).Append('@').Append(keepsake.At).Append('/').Append(keepsake.FallenId);
+            }
+
+            sb.Append('\n');
+        }
+
+        if (Map.Chests.Count > 0)
+        {
+            sb.Append("opened");
+            foreach (var at in Opened)
+            {
+                sb.Append(' ').Append(at);
             }
 
             sb.Append('\n');
