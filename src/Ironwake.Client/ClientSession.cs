@@ -307,6 +307,15 @@ public sealed class ClientSession
     public EnemyReach? InspectedReach => Inspected is { } id && State.Find(id) is { } enemy && Dusk.Seen(State, enemy) ? ReachOfEnemy(enemy) : null;
 
     /// <summary>
+    /// The one enemy reach the board draws without the threat overlay (issues 533 and 677): the
+    /// inspected enemy's, else, with <paramref name="onHover"/> (the profile's
+    /// <c>reach-on-hover</c>), the seen enemy under <paramref name="hover"/> while no unit is
+    /// selected and the player's phase is waiting, else none.
+    /// </summary>
+    public EnemyReach? ReachShown(Coord? hover, bool onHover) =>
+        InspectedReach ?? (onHover && hover is { } at && Selected is null && !EnemyPhasePlaying ? EnemyReachAt(at) : null);
+
+    /// <summary>
     /// The unit panel (issue 349): the console's <c>show</c> lines for the unit on a tile, or
     /// null for an empty tile or an enemy the dark hides, which the console refuses to show.
     /// </summary>

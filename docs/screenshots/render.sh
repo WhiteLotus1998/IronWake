@@ -85,6 +85,18 @@ python3 docs/look/crop.py "$out/the_tollgate-113-recall-strip-18.png" "$out/crop
 # transcript's play and lost on ten empty phases.
 shot title --screen title
 shot how-to-play --screen howto
+# Issue 677 slice 2: the campaign's title with no save and with one (Continue lit), New game,
+# Load, Options, and the end-turn confirm with all four of the Tollgate's units unmoved.
+saves=$(mktemp -d)
+shot campaign-title --campaign --screen title --saves "$saves"
+printf 'help\n' > "$saves/camp.script"
+dotnet run --project src/Ironwake.Cli -- campaign --script "$saves/camp.script" --saves "$saves" > /dev/null 2>&1
+shot campaign-title-continue --campaign --screen title --saves "$saves"
+shot campaign-new-game --campaign --screen new-game
+shot campaign-load --campaign --screen load --saves "$saves"
+shot options --campaign --screen options
+shot the_tollgate-113-confirm --map the_tollgate --seed 113 --confirm
+rm -rf "$saves"
 shot the_tollgate-113-callout-1 --map the_tollgate --seed 113 --callouts
 shot the_tollgate-113-callout-2 --map the_tollgate --seed 113 --callouts --select 6,11
 shot the_tollgate-113-callout-3 --map the_tollgate --seed 113 --callouts --select 6,11 --hover 4,11
