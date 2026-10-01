@@ -20,8 +20,12 @@ public class CampaignRecordTests
 
     private static CampaignRecord WithPurse(int purse) => Start() with { Purse = purse };
 
-    /// <summary>A record whose next map is <paramref name="index"/> (0-based) in campaign order.</summary>
-    private static CampaignRecord AtMap(int index) => Start() with { MapIndex = index };
+    /// <summary>
+    /// A record whose next map is <paramref name="index"/> (0-based) in campaign order, with every
+    /// recruit who arrives before it on the roster (issue 632).
+    /// </summary>
+    private static CampaignRecord AtMap(int index) =>
+        Start() with { MapIndex = index, Roster = ValueList<Unit>.From(Content.Cast.Where(u => Content.Campaign.ArrivalIndex(u.Id) < index)) };
 
     /// <summary>
     /// The battle <paramref name="record"/> begins, won by removing every enemy and, on a Seize map,
@@ -29,9 +33,9 @@ public class CampaignRecordTests
     /// or on a Survive map, the turn past the limit,
     /// with the opening kept as history.
     /// </summary>
-    private static BattleState Won(CampaignRecord record, Func<BattleUnit, BattleUnit?>? player = null)
+    private static BattleState Won(CampaignRecord record, Func<BattleUnit, BattleUnit?>? player = null, MapDefinition? on = null)
     {
-        var map = Map(record.NextMap(Content).MapId);
+        var map = on ?? Map(record.NextMap(Content).MapId);
         var opening = record.Begin(map, Content);
         var throne = Enumerable.Range(0, map.Width * map.Height).Select(i => new Coord(i % map.Width, i / map.Width)).FirstOrDefault(map.IsThrone);
         var units = opening.Units.Where(u => u.Side == Side.Player)
@@ -43,11 +47,11 @@ public class CampaignRecordTests
     }
 
     [Fact]
-    public void ANewCampaignStartsWithTheCastTheStartingPurseAndTheFirstMap()
+    public void ANewCampaignStartsWithTheCastLessItsArrivalsTheStartingPurseAndTheFirstMap()
     {
         var record = Start(9);
 
-        Assert.Equal(Content.Cast, record.Roster);
+        Assert.Equal(Content.Cast.Where(u => u.Id != "maud"), record.Roster);
         Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
         Assert.Equal("starting_alone", record.NextMap(Content).MapId);
         Assert.Equal("normal", record.Difficulty);
@@ -190,15 +194,15 @@ public class CampaignRecordTests
     [Fact]
     public void AWonBattlePaysTheRewardAndCarriesTheSurvivorsAsTheBattleLeftThem()
     {
-        var record = AtMap(1);
+        var record = AtMap(2);
         var end = Won(record, u => u.Id == "wren"
             ? u with { Unit = u.Unit with { Exp = 40, Inventory = new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 31), new ItemStack("field_dressing", 1))) } }
             : u);
 
         var after = record.AfterBattle(end, Content);
 
-        Assert.Equal(2, after.MapIndex);
-        Assert.Equal(record.Purse + 600, after.Purse);
+        Assert.Equal(3, after.MapIndex);
+        Assert.Equal(record.Purse + 800, after.Purse);
         Assert.Equal(40, after.Find("wren")!.Exp);
         Assert.Equal(31, after.Find("wren")!.Inventory.Items[0].Uses);
         Assert.Equal(record.Find("teodor"), after.Find("teodor"));
@@ -208,13 +212,13 @@ public class CampaignRecordTests
     [Fact]
     public void ADeployedUnitMissingFromTheWonBoardHasFallenAndLeavesTheRoster()
     {
-        var record = AtMap(1);
+        var record = AtMap(2);
 
         var after = record.AfterBattle(Won(record, u => u.Id == "wren" ? null : u), Content);
 
         Assert.Null(after.Find("wren"));
         Assert.Equal(ValueList<string>.Of("wren"), after.Fallen);
-        Assert.Equal(Content.Cast.Count - 1, after.Roster.Count);
+        Assert.Equal(record.Roster.Count - 1, after.Roster.Count);
     }
 
     [Fact]
@@ -235,14 +239,15 @@ public class CampaignRecordTests
     [Fact]
     public void TheUsesASuppliesCapHeldBackAreReturnedAfterTheBattle()
     {
-        var record = AtMap(1);
-        var opening = record.Begin(Map("old_mill_road"), Content);
+        var record = AtMap(2);
+        var capped = Map("saltmarsh_ford") with { Supplies = 1 };
+        var opening = record.Begin(capped, Content);
         Assert.Equal(1, opening.Find("wren")!.Unit.Inventory.Items[1].Uses);
 
         var spent = Won(record, u => u.Id == "wren"
             ? u with { Unit = u.Unit with { Inventory = new Inventory(ValueList<ItemStack>.Of(u.Unit.Inventory.Items[0])) } }
-            : u);
-        var kept = Won(record);
+            : u, capped);
+        var kept = Won(record, on: capped);
 
         Assert.Equal(new ItemStack("field_dressing", 2), record.AfterBattle(spent, Content).Find("wren")!.Inventory.Items[1]);
         Assert.Equal(new ItemStack("field_dressing", 3), record.AfterBattle(kept, Content).Find("wren")!.Inventory.Items[1]);
@@ -313,6 +318,6 @@ public class CampaignRecordTests
     {
         var e = Assert.Throws<ArgumentException>(() => CampaignRecord.StartAt(Content, 1, "nowhere"));
 
-        Assert.StartsWith("the campaign has no map 'nowhere'; it lists starting_alone, old_mill_road,", e.Message);
+        Assert.StartsWith("the campaign has no map 'nowhere'; it lists starting_alone, the_mill,", e.Message);
     }
 }

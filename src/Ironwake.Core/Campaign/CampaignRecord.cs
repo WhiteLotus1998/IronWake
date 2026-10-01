@@ -42,7 +42,10 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<KeepWork> Keep { get; init; } = ValueList<KeepWork>.Empty;
 
-    /// <summary>A new campaign: the cast in roster order, the starting purse, the first map, nobody benched.</summary>
+    /// <summary>
+    /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
+    /// the starting purse, the first map, nobody benched.
+    /// </summary>
     public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty)
     {
         if (content.Campaign.Maps.Count == 0)
@@ -60,12 +63,13 @@ public sealed record CampaignRecord(
             content.Difficulty(difficulty);
         }
 
-        return new CampaignRecord(content.Cast, ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty);
+        return new CampaignRecord(ArrivedBefore(content, 0), ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty);
     }
 
     /// <summary>
     /// A new campaign that opens on <paramref name="mapId"/> instead of the first map (issue 360):
-    /// the cast in roster order, the starting purse, nobody benched, the maps before it skipped. A
+    /// the cast in roster order less the recruits who arrive on it or later (issue 632), the
+    /// starting purse, nobody benched, the maps before it skipped. A
     /// map is tuned on its own named roster, so the beta can open on the first tuned map. The
     /// campaign seed is shifted back by the map's index so that its battle plays on
     /// <paramref name="seed"/> itself, as <see cref="BattleSeed"/> promises for the opening map:
@@ -80,7 +84,31 @@ public sealed record CampaignRecord(
             throw new ArgumentException($"the campaign has no map '{mapId}'; it lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
         }
 
-        return start with { MapIndex = index, Seed = unchecked(seed - (ulong)index) };
+        return start with { Roster = ArrivedBefore(content, index), MapIndex = index, Seed = unchecked(seed - (ulong)index) };
+    }
+
+    /// <summary>
+    /// The cast in roster order less every recruit who arrives on map <paramref name="index"/> or
+    /// later (issue 632): the roster a campaign opening on that map starts with.
+    /// </summary>
+    private static ValueList<Unit> ArrivedBefore(GameContent content, int index) =>
+        ValueList<Unit>.From(content.Cast.Where(u => content.Campaign.ArrivalIndex(u.Id) < index));
+
+    /// <summary>
+    /// The roster with the next map's arrivals joined (issue 632, DESIGN section 14), every unit in
+    /// cast order: who the next battle may deploy and who comes back from it. Equal to
+    /// <see cref="Roster"/> on a map nobody arrives on, and once the campaign is finished.
+    /// </summary>
+    public ValueList<Unit> Present(GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content).Arrives.Count == 0)
+        {
+            return Roster;
+        }
+
+        var arrivals = NextMap(content).Arrives.Where(id => Find(id) is null && !Fallen.Contains(id)).Select(content.Unit).ToList();
+        var order = content.Cast.Select(u => u.Id).ToList();
+        return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
 
     /// <summary>Whether every map of the campaign has been won.</summary>
@@ -106,12 +134,13 @@ public sealed record CampaignRecord(
     /// The next battle: <paramref name="map"/> (the next map, as the caller loaded it) under the
     /// campaign's difficulty, with the roster less the bench filling its slots in roster order,
     /// so benching a unit lets the next recruit take its bare slot, which is a deployment and not
-    /// gate 4's ablation. A named slot whose recruit has fallen stays empty.
+    /// gate 4's ablation. A named slot whose recruit has fallen stays empty. The map's arrivals
+    /// join the roster for it (<see cref="Present"/>, issue 632).
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
-        var roster = Roster.Where(u => !Benched.Contains(u.Id)).ToList();
+        var roster = Present(content).Where(u => !Benched.Contains(u.Id)).ToList();
         var fallenNamed = map.Placements.OfType<PlayerPlacement>()
             .Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && Fallen.Contains(id))
             .Select(p => p.RecruitId!)
@@ -127,7 +156,8 @@ public sealed record CampaignRecord(
     /// deployed unit missing from the board has fallen and leaves the roster, and on an Escape map
     /// a unit left behind by the captain's exit has fallen the same way (issue 269), since only
     /// the <see cref="BattleState.Survivors"/> come back; an undeployed unit
-    /// is unchanged. The purse gains the map's reward, the bench is cleared, and the next map is
+    /// is unchanged. The map's arrivals are on the roster from here, or fallen like anyone deployed
+    /// (issue 632). The purse gains the map's reward, the bench is cleared, and the next map is
     /// the one after. A lost battle ends the campaign, so it has no record after it.
     /// </summary>
     public CampaignRecord AfterBattle(BattleState end, GameContent content)
@@ -142,7 +172,7 @@ public sealed record CampaignRecord(
         var standing = end.Survivors().ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
         var roster = new List<Unit>();
         var fallen = Fallen.ToList();
-        foreach (var unit in Roster)
+        foreach (var unit in Present(content))
         {
             if (!deployed.TryGetValue(unit.Id, out var started))
             {

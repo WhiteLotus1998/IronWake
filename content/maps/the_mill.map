@@ -1,0 +1,26 @@
+name: The Mill
+size: 12x10
+win: rout
+turn_limit: 12
+recall: 3
+enemy_level: 1
+protect: maud
+
+......~.....
+.^^...~..nn.
+.^^...~..n..
+============
+......~.....
+..^...~.F...
+......~..^..
+..^.........
+......^.....
+............
+
+units:
+P captain 1,8
+P recruit:maud 8,5
+E soldier 10,1 group:mill behavior:guard
+E archer 11,1 group:mill behavior:guard
+E brigand 11,8 group:road behavior:aggressive
+E archer 11,9 group:road behavior:aggressive

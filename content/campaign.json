@@ -14,8 +14,18 @@
         "Three dead on a road nobody will remember. I have nobody to add to the list yet, which is its own kind of report.",
         "The waystation keeper says a Kestrow chaplain bound for Ironwake was taken off the mill road two days back. Her name is on my list. East it is, by way of the mill."
       ] },
-    { "map": "old_mill_road", "reward": 600,
-      "stock": ["iron_sword", "iron_lance", "iron_bow", "field_dressing"] },
+    { "map": "the_mill", "reward": 600,
+      "stock": ["iron_sword", "iron_lance", "iron_bow", "field_dressing"],
+      "arrives": ["maud"],
+      "before": [
+        "The mill road follows a stream that outlived its mill. The men who took the chaplain lost her two nights ago, the keeper says, and she has been holding the miller's house on the far bank since. Alone, two days. That is longer than I have managed anything.",
+        "Her name is on my list: Maud, Kestrow, chaplain. The list does not say whether she can fight. It says she mends things.",
+        "(This map is lost if Maud falls. She strikes at range 1 or 2 with Radiance and heals with her Salve. A fight within 6 tiles of a sleeping group wakes it; threat names what a stop would wake.)"
+      ],
+      "after": [
+        "Maud asked whether I was hurt before she asked my name. Then she said a prayer over the men we had killed, which I had not expected and did not stop.",
+        "Two names on the list are standing in the same place now. I read it twice this morning to be sure."
+      ] },
     { "map": "saltmarsh_ford", "reward": 800,
       "stock": ["iron_sword", "iron_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "salve", "field_dressing"] },
     { "map": "the_tollgate", "reward": 1000,
