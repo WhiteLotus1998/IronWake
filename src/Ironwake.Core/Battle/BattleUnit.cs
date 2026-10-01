@@ -81,6 +81,12 @@ public sealed record BattleUnit(
     /// </summary>
     public int EquippedSlot(GameContent content)
     {
+        var bound = Kinsbane.BoundSlot(Unit, content);
+        if (bound >= 0)
+        {
+            return UsableWeaponAt(content, bound) is null ? -1 : bound;
+        }
+
         for (var slot = 0; slot < Unit.Inventory.Count; slot++)
         {
             if (UsableWeaponAt(content, slot) is not null)
@@ -96,7 +102,9 @@ public sealed record BattleUnit(
     /// The weapon in a slot if the unit can strike with it: a weapon its class can use at a
     /// rank the unit has reached (issue 67) that is not a healing spell, skipping a spell with no uses left this battle
     /// (section 5: a physical weapon at zero uses still fights, broken; a spent spell
-    /// does not). Null for an empty slot, an item, a healing spell, or a spent spell.
+    /// does not). Null for an empty slot, an item, a healing spell, or a spent spell, and for every
+    /// slot but a fed hungering weapon's, which binds its wielder (DESIGN.md 13.23). A hungering
+    /// weapon is returned in its present form (<see cref="Kinsbane.Form"/>).
     /// </summary>
     public Weapon? UsableWeaponAt(GameContent content, int slot)
     {
@@ -107,9 +115,10 @@ public sealed record BattleUnit(
 
         var item = Unit.Inventory.Items[slot];
         var unitClass = content.Class(Unit.ClassId);
+        var bound = Kinsbane.BoundSlot(Unit, content);
         return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
-            && (item.Uses > 0 || !weapon.IsMagic)
-            ? weapon
+            && (item.Uses > 0 || !weapon.IsMagic) && (bound < 0 || bound == slot)
+            ? Kinsbane.Form(weapon, item)
             : null;
     }
 
@@ -151,7 +160,7 @@ public sealed record BattleUnit(
     public Weapon? EquippedWeapon(GameContent content)
     {
         var slot = EquippedSlot(content);
-        return slot < 0 ? null : content.Weapon(Unit.Inventory.Items[slot].ItemId);
+        return slot < 0 ? null : UsableWeaponAt(content, slot);
     }
 
     /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>

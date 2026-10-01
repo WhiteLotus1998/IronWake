@@ -88,6 +88,22 @@ public sealed record UnitBurned(string UnitId, int Amount, int HpAfter) : GameEv
 /// <summary>At the start of its side's phase a unit pays an art that cost it this phase (issue 636): it begins moved and acted and can neither move nor act until its side's next phase.</summary>
 public sealed record UnitRested(string UnitId) : GameEvent;
 
+/// <summary>
+/// A hungering weapon that fed nothing since its wielder's last phase start drained them at this one
+/// (DESIGN.md 13.23, experiment): <see cref="Amount"/> lost, never below 1; <see cref="Starved"/> when
+/// the drain reached 1 and the weapon entered its starved form.
+/// </summary>
+public sealed record HungerDrained(string UnitId, string ItemId, int Amount, int HpAfter, bool Starved) : GameEvent;
+
+/// <summary>
+/// A hungering weapon fed on a kill (DESIGN.md 13.23): <see cref="Fed"/> kills in all, its Mt bonus
+/// <see cref="MtBonus"/>, the wielder healed <see cref="Healed"/>; <see cref="Awake"/> once at the cap.
+/// </summary>
+public sealed record HungerFed(string UnitId, string ItemId, int Fed, int MtBonus, int Healed, int HpAfter, bool Awake) : GameEvent;
+
+/// <summary>A starved hungering weapon landed a hit that did not kill and returned to its normal form, healing its wielder (DESIGN.md 13.23).</summary>
+public sealed record HungerEased(string UnitId, string ItemId, int Healed, int HpAfter) : GameEvent;
+
 /// <summary>A windup weapon's attack raised a blow over <paramref name="At"/>, where <paramref name="TargetId"/> stood (DESIGN.md 13.16, experiment). No combat was fought.</summary>
 public sealed record BlowRaised(string UnitId, string TargetId, Coord At) : GameEvent;
 

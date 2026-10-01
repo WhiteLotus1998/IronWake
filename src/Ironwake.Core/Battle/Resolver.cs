@@ -474,6 +474,8 @@ public static class Resolver
             next = SwearGrudges(next, content, unit, target, events);
         }
 
+        next = Kinsbane.AfterCombat(next, content, unit.Id, weapon, result.DefenderDied, result.Strikes, events);
+        next = Kinsbane.AfterCombat(next, content, target.Id, defenderWeapon, result.AttackerDied, result.Strikes, events);
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
@@ -660,6 +662,8 @@ public static class Resolver
                 : content.Weapon(itemId).Heals ? "a healing spell; use it with item"
                 : content.Weapon(itemId).IsMagic && unit.Unit.Inventory.Items[slot.Value].Uses == 0 ? "spent for this battle"
                 : !content.Class(unit.Unit.ClassId).CanUse(content.Weapon(itemId).Type) ? $"not a weapon a {unit.Unit.ClassId} can use"
+                : Kinsbane.BoundSlot(unit.Unit, content) is var bound and >= 0 && bound != slot.Value && unit.Unit.CanWield(content.Weapon(itemId), content.Class(unit.Unit.ClassId))
+                    ? $"{content.ItemName(unit.Unit.Inventory.Items[bound].ItemId)} has fed and will not be put down"
                 : RankShort(unit.Unit, content.Weapon(itemId));
             return (unit, null, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot attack with {itemId}: {why}"));
         }
@@ -726,7 +730,7 @@ public static class Resolver
 
         var made = (content.Weapon(stack.ItemId).Type.SpendsPerStrike() ? struck : Math.Min(1, struck)) + artCost;
 
-        var left = Math.Max(0, stack.Uses - made);
+        var left = Math.Max(content.Weapon(stack.ItemId).Hungers ? 1 : 0, stack.Uses - made);
         if (left == 0)
         {
             events.Add(content.Weapon(stack.ItemId).IsMagic ? new SpellSpent(unit.Id, stack.ItemId) : new WeaponBroke(unit.Id, stack.ItemId));
@@ -1276,6 +1280,7 @@ public static class Resolver
             next = next with { LitGroups = ValueList<string>.Empty };
         }
 
+        next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
         if (nextPhase == Side.Player)
         {

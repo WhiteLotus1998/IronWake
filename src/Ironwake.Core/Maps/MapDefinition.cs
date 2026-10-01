@@ -77,6 +77,11 @@ namespace Ironwake.Core;
 /// The <c>break: on</c> header (DESIGN.md 13.22, experiment): when a boss dies, every member of
 /// his group at or below half HP leaves the board (<see cref="Break"/>). Off by default.
 /// </param>
+/// <param name="KinsbaneCarrier">
+/// The <c>kinsbane: &lt;cast id&gt;</c> header (DESIGN.md 13.23, experiment): that recruit, placed by a
+/// <c>P recruit:&lt;id&gt;</c> line, fields with the hungering scythe at the front of the pack
+/// (<see cref="Armed"/>). Null by default.
+/// </param>
 /// <param name="WildfireEnabled">
 /// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
 /// sets a forest tile alight, and fire spreads through forest at each player phase start
@@ -151,7 +156,8 @@ public sealed record MapDefinition(
     bool CoverEnabled = false,
     bool SignaturesEnabled = false,
     bool OverwatchHold = false,
-    bool BreakEnabled = false)
+    bool BreakEnabled = false,
+    string? KinsbaneCarrier = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -182,6 +188,32 @@ public sealed record MapDefinition(
         }
 
         return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+    }
+
+    /// <summary>
+    /// A player unit as a <c>kinsbane:</c> header fields it (DESIGN.md 13.23, experiment): the carrier
+    /// gets <see cref="Kinsbane.ItemId"/> at full uses in front of its pack, the last stack left behind
+    /// when the pack is full, and its axe rank lifted to the scythe's if below, so a level 1 recruit can
+    /// wield it on a sample. Any other unit, or a map without the header, is unchanged.
+    /// </summary>
+    public Unit Armed(Unit unit, GameContent content)
+    {
+        if (KinsbaneCarrier is null || unit.Id != KinsbaneCarrier)
+        {
+            return unit;
+        }
+
+        var scythe = content.Weapon(Kinsbane.ItemId);
+        var items = unit.Inventory.Items.ToList();
+        if (items.Count(stack => stack.Keepsake is null) >= Inventory.Capacity)
+        {
+            items.RemoveAt(items.Count - 1);
+        }
+
+        items.Insert(0, new ItemStack(scythe.Id, scythe.Durability));
+        var needed = WeaponRanks.Threshold(scythe.Rank);
+        var skill = unit.Skill.Points(scythe.Type) < needed ? unit.Skill.With(scythe.Type, needed) : unit.Skill;
+        return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)), Skill = skill };
     }
 
     /// <summary>A player unit as a certification trial fields it (<see cref="CertificationTrial.Candidate"/>); unchanged on an ordinary map.</summary>

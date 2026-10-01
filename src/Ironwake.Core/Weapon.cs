@@ -14,6 +14,8 @@ namespace Ironwake.Core;
 /// (DESIGN.md 13.16, experiment; <see cref="Ironwake.Core.Windup"/>). It counters as any weapon does.
 /// <see cref="BoundTo"/> marks a signature item (issue 635, DESIGN section 14): bound to one cast
 /// member, never sold, paid by their quest 2, and lost with them.
+/// <see cref="Hungers"/> marks a hungering weapon (DESIGN.md 13.23, experiment; <see cref="Kinsbane"/>): it
+/// drains its carrier when unfed, heals and grows on a kill, and starves.
 /// <see cref="Description"/> is the one line the item card prints (issue 650), required by the content validator.
 /// </summary>
 public sealed record Weapon(
@@ -40,6 +42,9 @@ public sealed record Weapon(
 
     /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
     public string Description { get; init; } = "";
+
+    /// <summary>Whether this is a hungering weapon (DESIGN.md 13.23, experiment): its state lives on its <see cref="ItemStack"/>.</summary>
+    public bool Hungers { get; init; }
 
     public bool IsMagic => Type.IsMagic();
 

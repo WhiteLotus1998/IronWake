@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "exit_after_move", "difficulty", "certification", "wake_links" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "exit_after_move", "difficulty", "certification", "wake_links" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -123,6 +123,11 @@ public static class MapFormat
         if (map.BreakEnabled)
         {
             sb.Append("break: on\n");
+        }
+
+        if (map.KinsbaneCarrier is { } carrier)
+        {
+            sb.Append("kinsbane: ").Append(carrier).Append('\n');
         }
 
         if (map.ExitAfterMove)
@@ -282,6 +287,7 @@ public static class MapFormat
             int? dusk = header.ContainsKey("dusk") ? ParseInt(header, "dusk", 1, MapDefinition.MaxSide * 2, required: true, fallback: 0) : null;
             var exits = ParseExits(header, width, height);
             var protect = header.TryGetValue("protect", out var protectEntry) ? protectEntry.Value : null;
+            var kinsbane = header.TryGetValue("kinsbane", out var kinsbaneEntry) ? kinsbaneEntry.Value : null;
             var difficulty = ParseDifficulty(header);
             var certification = ParseCertification(header);
 
@@ -296,7 +302,7 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneCarrier = kinsbane };
             Validate(map);
             return map;
         }
@@ -1004,6 +1010,11 @@ public static class MapFormat
             if (map.ProtectId is { } protect && !map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == protect))
             {
                 throw new MapException(_file, 0, $"protect names '{protect}' but no 'P recruit:{protect}' line places them");
+            }
+
+            if (map.KinsbaneCarrier is { } carrier && !map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == carrier))
+            {
+                throw new MapException(_file, 0, $"kinsbane names '{carrier}' but no 'P recruit:{carrier}' line places them");
             }
         }
     }

@@ -1,0 +1,30 @@
+name: The Hollow Road (Kinsbane)
+size: 16x10
+win: seize
+turn_limit: 10
+recall: 3
+enemy_level: 1
+kinsbane: keziah
+
+................
+.....^^n.....#T.
+....^^nn.....#..
+....^.....F..#..
+~~~~~~~=~~~~~...
+................
+..#######.......
+................
+................
+................
+
+units:
+P captain 1,8
+P recruit:keziah 2,8
+P recruit:wren 1,9
+P recruit:teodor 2,9
+E brigand 5,2 group:camp behavior:guard
+E archer 6,1 group:camp behavior:guard
+E soldier 7,2 group:camp behavior:guard
+E hexer 10,3 group:camp behavior:guard
+E soldier 15,3 group:throne behavior:guard
+B bandit_leader 14,1 group:throne behavior:boss

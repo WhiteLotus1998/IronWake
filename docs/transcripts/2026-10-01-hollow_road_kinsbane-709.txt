@@ -1,0 +1,1428 @@
+The Hollow Road (Kinsbane), seed 709, scheme TwoRollAverage
+Objective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .AB.............
+ 9 .CD.............
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           2,8    hp 23/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          2,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 6,8
+Keziah moves 2,8 -> 6,8 via 3,8 4,8 5,8
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .A....B.........
+ 9 .CD.............
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          2,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .A....B.........
+ 9 .CD.............
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          2,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 5,9
+Teodor moves 2,9 -> 5,9 via 3,9 4,9
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .A....B.........
+ 9 .C...D..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .A....B.........
+ 9 .C...D..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        1,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 5,8
+Alder Fenn moves 1,8 -> 5,8 via 2,8 3,8 4,8
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .....AB.........
+ 9 .C...D..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .....AB.........
+ 9 .C...D..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              1,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 4,9
+Wren moves 1,9 -> 4,9 via 2,9 3,9
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .....AB.........
+ 9 ....CD..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Hollow Road (Kinsbane)  turn 1 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .....AB.........
+ 9 ....CD..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 23/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait brigand-1
+Brigand waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kinsbane drains Keziah 5 (hp 18)
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 ................
+ 8 .....AB.........
+ 9 ....CD..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           6,8    hp 18/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 9,7
+Keziah moves 6,8 -> 9,7 via 6,7 7,7 8,7
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 .....A..........
+ 9 ....CD..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 .....A..........
+ 9 ....CD..........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          5,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 8,8
+Teodor moves 5,9 -> 8,8 via 5,8 6,8 7,8
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 .....A..D.......
+ 9 ....C...........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 .....A..D.......
+ 9 ....C...........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 9,8
+Alder Fenn moves 5,8 -> 9,8 via 6,8 7,8 8,8
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 ........DA......
+ 9 ....C...........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 ........DA......
+ 9 ....C...........
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              4,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 8,9
+Wren moves 4,9 -> 8,9 via 5,9 6,9 7,9
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 ........DA......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Hollow Road (Kinsbane)  turn 2 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 ........DA......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 18/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait brigand-1
+Brigand waits
+enemy: wait hexer-1
+Hexer waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Kinsbane drains Keziah 5 (hp 13)
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######.......
+ 7 .........B......
+ 8 ........DA......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, asleep
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, asleep
+B  keziah           Keziah L1 reaver           9,7    hp 13/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, asleep
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 9,6
+Keziah moves 9,7 -> 9,6
+The camp group wakes (proximity)
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 ................
+ 8 ........DA......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 ................
+ 8 ........DA......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          8,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 9,7
+Teodor moves 8,8 -> 9,7 via 8,7
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........D......
+ 8 .........A......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........D......
+ 8 .........A......
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        9,8    hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 10,7
+Alder Fenn moves 9,8 -> 10,7 via 9,7
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........DA.....
+ 8 ................
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........DA.....
+ 8 ................
+ 9 ........C.......
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 10,8
+Wren moves 8,9 -> 10,8 via 8,8 9,8
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........DA.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Hollow Road (Kinsbane)  turn 3 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^bn.....#!.
+ 2 ....^anc.....#..
+ 3 ....^.....d..#.e
+ 4 ~~~~~~~=~~~~~...
+ 5 ................
+ 6 ..#######B......
+ 7 .........DA.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           6,1    hp 17/17  Forest  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          5,2    hp 22/22  Forest  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             10,3   hp 16/16  Fort (heals 20 percent, 3 hp)  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 13/23  Plain  done
+c  soldier-1        Soldier L1 pikeman         7,2    hp 20/20  Hill  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: move archer-1 7,3
+Archer moves 6,1 -> 7,3 via 6,2 6,3
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-1 7,4
+Brigand moves 5,2 -> 7,4 via 5,3 6,3 7,3
+enemy: wait brigand-1
+Brigand waits
+enemy: move hexer-1 8,3
+Hexer moves 10,3 -> 8,3 via 9,3
+enemy: wait hexer-1
+Hexer waits
+enemy: move soldier-1 8,5
+Soldier 1 moves 7,2 -> 8,5 via 7,3 7,4 7,5
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Kinsbane drains Keziah 5 (hp 8)
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........c.......
+ 6 ..#######B......
+ 7 .........DA.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 8/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,7    hp 21/21  Plain
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move teodor 9,5
+Teodor moves 9,7 -> 9,5 via 9,6
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######B......
+ 7 ..........A.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 8/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack teodor soldier-1
+Forecast Teodor -> Soldier 1: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Teodor attacks Soldier 1
+  Teodor hits Soldier 1 for 10 (hp 10)
+  Soldier 1 misses Teodor
+  Teodor hp 21, Soldier 1 hp 10
+Teodor gains 10 exp (10)
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######B......
+ 7 ..........A.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,6    hp 8/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 11,6
+Keziah moves 9,6 -> 11,6 via 10,6
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######..B....
+ 7 ..........A.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######..B....
+ 7 ..........A.....
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,7   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain  done
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 10,6
+Alder Fenn moves 10,7 -> 10,6
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######.AB....
+ 7 ................
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain  done
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######.AB....
+ 7 ................
+ 8 ..........C.....
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain  done
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              10,8   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 11,7
+Wren moves 10,8 -> 11,7 via 10,7
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######.AB....
+ 7 ...........C....
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain  done
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              11,7   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Hollow Road (Kinsbane)  turn 4 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^..bd.F..#.e
+ 4 ~~~~~~~a~~~~~...
+ 5 ........cD......
+ 6 ..#######.AB....
+ 7 ...........C....
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           7,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          7,4    hp 22/22  Road  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             8,3    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 8/23   Plain  done
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         15,3   hp 20/20  Plain  group throne, guard, asleep
+D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              11,7   hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+Lethal if all land: Teodor (Archer for 5, Hexer for 11, Soldier 1 for 8, against 21 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move archer-1 9,3
+Archer moves 7,3 -> 9,3 via 8,3
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 5 (hp 16)
+  Archer hp 17, Teodor hp 16
+The throne group wakes (noise)
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-1 4,5
+Brigand moves 7,4 -> 4,5 via 7,5 6,5 5,5
+enemy: wait brigand-1
+Brigand waits
+enemy: move hexer-1 7,5
+Hexer moves 8,3 -> 7,5 via 7,3 7,4
+enemy: attack hexer-1 teodor
+Forecast Hexer -> Teodor: dmg 11 hit 99% crit 1%; counter: none
+Hexer attacks Teodor
+  Hexer hits Teodor for 11 (hp 5)
+  Hexer hp 16, Teodor hp 5
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 0)
+  Soldier 1 hp 10, Teodor hp 0
+Teodor falls at 9,5
+enemy: move soldier-2 13,5
+Soldier 2 moves 15,3 -> 13,5 via 14,3 14,4 13,4
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Kinsbane drains Keziah 5 (hp 3)
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..dc....e..
+ 6 ..#######.AB....
+ 7 ...........C....
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           11,6   hp 3/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         13,5   hp 20/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              11,7   hp 20/20  Plain
+> move keziah 9,5
+Keziah moves 11,6 -> 9,5 via 11,5 10,5
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..dcB...e..
+ 6 ..#######.A.....
+ 7 ...........C....
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 3/23   Plain
+c  soldier-1        Soldier L1 pikeman         8,5    hp 10/20  Plain  group camp, guard, awake
+e  soldier-2        Soldier L1 pikeman         13,5   hp 20/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              11,7   hp 20/20  Plain
+> attack keziah soldier-1
+Forecast Keziah -> Soldier 1 with Kinsbane: dmg 13 hit 74% crit 6%; counter: dmg 10 hit 74% crit 0%
+  Counter: lethal to Keziah (10 against 3 hp)
+  Kill: +10 HP to max, fed 1
+Keziah attacks Soldier 1
+  Keziah hits Soldier 1 for 13 (hp 0)
+  Keziah hp 3, Soldier 1 hp 0
+Keziah gains 30 exp (30)
+Soldier 1 falls at 8,5
+Kinsbane feeds: fed 1, Mt +0; Keziah heals 10 (hp 13)
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..d.B...e..
+ 6 ..#######.A.....
+ 7 ...........C....
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 13/23  Plain  done
+e  soldier-2        Soldier L1 pikeman         13,5   hp 20/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              11,7   hp 20/20  Plain
+> move wren 12,5
+Wren moves 11,7 -> 12,5 via 11,6 11,5
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..d.B..Ce..
+ 6 ..#######.A.....
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 13/23  Plain  done
+e  soldier-2        Soldier L1 pikeman         13,5   hp 20/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              12,5   hp 20/20  Plain
+> attack wren soldier-2
+Forecast Wren -> Soldier 2: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Wren attacks Soldier 2
+  Wren hits Soldier 2 for 8 (hp 12)
+  Soldier 2 misses Wren
+  Wren hp 20, Soldier 2 hp 12
+Wren gains 10 exp (10)
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..d.B..Ce..
+ 6 ..#######.A.....
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        10,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 13/23  Plain  done
+e  soldier-2        Soldier L1 pikeman         13,5   hp 12/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              12,5   hp 20/20  Plain  done
+> move captain 13,6
+Alder Fenn moves 10,6 -> 13,6 via 11,6 12,6
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..d.B..Ce..
+ 6 ..#######....A..
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        13,6   hp 22/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 13/23  Plain  done
+e  soldier-2        Soldier L1 pikeman         13,5   hp 12/20  Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              12,5   hp 20/20  Plain  done
+> attack captain soldier-2
+Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Alder Fenn attacks Soldier 2
+  Alder Fenn hits Soldier 2 for 9 (hp 3)
+  Soldier 2 hits Alder Fenn for 8 (hp 14)
+  Alder Fenn hp 14, Soldier 2 hp 3
+Alder Fenn gains 10 exp (10)
+The Hollow Road (Kinsbane)  turn 5 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 ....a..d.B..Ce..
+ 6 ..#######....A..
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          4,5    hp 22/22  Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        13,6   hp 14/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 13/23  Plain  done
+e  soldier-2        Soldier L1 pikeman         13,5   hp 3/20   Plain  group throne, guard, awake
+C  wren             Wren L1 cadet              12,5   hp 20/20  Plain  done
+> end
+Lethal if all land: Keziah (Archer for 7, Brigand for 12, Hexer for 12, against 13 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: attack archer-1 keziah
+Forecast Archer -> Keziah: dmg 7 hit 80% crit 2%; counter: none
+Archer attacks Keziah
+  Archer misses Keziah
+  Archer hp 17, Keziah hp 13
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-1 8,5
+Brigand moves 4,5 -> 8,5 via 5,5 6,5 7,5
+enemy: attack brigand-1 keziah
+Forecast Brigand -> Keziah: dmg 12 hit 63% crit 0%; counter: dmg 15 hit 79% crit 7%
+  Keziah kill on the counter: +10 HP to max, fed 2
+Brigand attacks Keziah
+  Brigand misses Keziah
+  Keziah hits Brigand for 15 (hp 7)
+  Brigand hp 7, Keziah hp 13
+Keziah gains 10 exp (40)
+enemy: attack hexer-1 keziah
+Forecast Hexer -> Keziah: dmg 12 hit 99% crit 0%; counter: none
+Hexer attacks Keziah
+  Hexer hits Keziah for 12 (hp 1)
+  Hexer hp 16, Keziah hp 1
+enemy: attack soldier-2 wren
+Forecast Soldier 2 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Soldier 2 attacks Wren
+  Soldier 2 hits Wren for 9 (hp 11)
+  Wren hits Soldier 2 for 8 (hp 0)
+  Soldier 2 hp 0, Wren hp 11
+Wren gains 30 exp (40)
+Soldier 2 falls at 13,5
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 .......daB..C...
+ 6 ..#######....A..
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+a  brigand-1        Brigand L1 reaver          8,5    hp 7/22   Plain  group camp, guard, awake
+A  captain          Alder Fenn L1 cadet        13,6   hp 14/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 1/23   Plain
+C  wren             Wren L1 cadet              12,5   hp 11/20  Plain
+> attack keziah brigand-1
+Forecast Keziah -> Brigand: dmg 15 hit 79% crit 7%; counter: dmg 12 hit 63% crit 0%
+  Counter: lethal to Keziah (12 against 1 hp)
+  Kill: +10 HP to max, fed 2
+Keziah attacks Brigand
+  Keziah hits Brigand for 15 (hp 0)
+  Keziah hp 1, Brigand hp 0
+Keziah gains 30 exp (70)
+Brigand falls at 8,5
+Kinsbane feeds: fed 2, Mt +0; Keziah heals 10 (hp 11)
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~...
+ 5 .......d.B..C...
+ 6 ..#######....A..
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        13,6   hp 14/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 11/23  Plain  done
+C  wren             Wren L1 cadet              12,5   hp 11/20  Plain
+> move captain 14,4
+Alder Fenn moves 13,6 -> 14,4 via 13,5 13,4
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~.A.
+ 5 .......d.B..C...
+ 6 ..#######.......
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        14,4   hp 14/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 11/23  Plain  done
+C  wren             Wren L1 cadet              12,5   hp 11/20  Plain
+> wait captain
+Alder Fenn waits
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~.A.
+ 5 .......d.B..C...
+ 6 ..#######.......
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        14,4   hp 14/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 11/23  Plain  done
+C  wren             Wren L1 cadet              12,5   hp 11/20  Plain
+> move wren 13,5
+Wren moves 12,5 -> 13,5
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~.A.
+ 5 .......d.B...C..
+ 6 ..#######.......
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        14,4   hp 14/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 11/23  Plain  done
+C  wren             Wren L1 cadet              13,5   hp 11/20  Plain
+> wait wren
+Wren waits
+The Hollow Road (Kinsbane)  turn 6 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~.A.
+ 5 .......d.B...C..
+ 6 ..#######.......
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        14,4   hp 14/22  Plain  captain  done
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+B  keziah           Keziah L1 reaver           9,5    hp 11/23  Plain  done
+C  wren             Wren L1 cadet              13,5   hp 11/20  Plain  done
+> end
+Lethal if all land: Keziah (Archer for 7, Hexer for 12, against 11 hp)
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: attack archer-1 keziah
+Forecast Archer -> Keziah: dmg 7 hit 80% crit 2%; counter: none
+Archer attacks Keziah
+  Archer hits Keziah for 7 (hp 4)
+  Archer hp 17, Keziah hp 4
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: attack hexer-1 keziah
+Forecast Hexer -> Keziah: dmg 12 hit 99% crit 0%; counter: none
+Hexer attacks Keziah
+  Hexer hits Keziah for 12 (hp 0)
+  Hexer hp 16, Keziah hp 0
+Keziah falls at 9,5
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Hollow Road (Kinsbane)  turn 7 of 10  player phase  seize  recall 3
+   0123456789012345
+ 0 ................
+ 1 .....^^n.....#!.
+ 2 ....^^nn.....#..
+ 3 ....^....bF..#..
+ 4 ~~~~~~~=~~~~~.A.
+ 5 .......d.....C..
+ 6 ..#######.......
+ 7 ................
+ 8 ................
+ 9 ................
+
+b  archer-1         Archer L1 bowman           9,3    hp 17/17  Plain  group camp, guard, awake
+!  bandit_leader-1  Bandit Leader L3 reaver    14,1   hp 26/26  Gate (heals 20 percent, 5 hp)  group throne, boss
+A  captain          Alder Fenn L1 cadet        14,4   hp 14/22  Plain  captain
+d  hexer-1          Hexer L1 adept             7,5    hp 16/16  Plain  group camp, guard, awake
+C  wren             Wren L1 cadet              13,5   hp 11/20  Plain
+Battle ongoing at turn 7, player phase

@@ -1201,6 +1201,7 @@ public static class ContentLoader
             {
                 BoundTo = node.Has("boundTo") ? node.String("boundTo") : null,
                 Description = Description(node),
+                Hungers = node.BoolOr("hungers", false),
             });
         }
 

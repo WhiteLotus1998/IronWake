@@ -1,0 +1,49 @@
+move keziah 6,8
+wait keziah
+move teodor 5,9
+wait teodor
+move captain 5,8
+wait captain
+move wren 4,9
+wait wren
+end
+move keziah 9,7
+wait keziah
+move teodor 8,8
+wait teodor
+move captain 9,8
+wait captain
+move wren 8,9
+wait wren
+end
+move keziah 9,6
+wait keziah
+move teodor 9,7
+wait teodor
+move captain 10,7
+wait captain
+move wren 10,8
+wait wren
+end
+move teodor 9,5
+attack teodor soldier-1
+move keziah 11,6
+wait keziah
+move captain 10,6
+wait captain
+move wren 11,7
+wait wren
+end
+move keziah 9,5
+attack keziah soldier-1
+move wren 12,5
+attack wren soldier-2
+move captain 13,6
+attack captain soldier-2
+end
+attack keziah brigand-1
+move captain 14,4
+wait captain
+move wren 13,5
+wait wren
+end

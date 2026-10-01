@@ -901,6 +901,11 @@ public sealed class PlaySession
                     _out.WriteLine(UnitNames.Sentence(ignite));
                 }
 
+                foreach (var hunger in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names))
+                {
+                    _out.WriteLine(UnitNames.Sentence(hunger));
+                }
+
                 foreach (var windup in WindupLines(_state, _content, attacker!, target!, attack.Slot, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(windup));
@@ -1289,6 +1294,7 @@ public sealed class PlaySession
         lines.AddRange(BreakLines(state, content, unit, target, names));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
+        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
         return UnitNames.Sentence(string.Join("\n", lines));
@@ -1740,6 +1746,11 @@ public sealed class PlaySession
         var unitClass = content.Class(unit.Unit.ClassId);
         lines.Add($"  HP {unit.Hp}/{stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}  Mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
         lines.Add($"  Weapon: {WeaponLine(unit, content)}");
+        if (HungerLine(unit, content) is { } hunger)
+        {
+            lines.Add(hunger);
+        }
+
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
         lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = content.Class(unit.Unit.ClassId).Weapons
@@ -1943,6 +1954,56 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// Under a forecast (DESIGN.md 13.23, experiment): for the striker with the slot it strikes from, then
+    /// the target when it counters, one line when it strikes with a hungering weapon, naming what a kill
+    /// pays: <c>kill: +10 HP to max</c>, the heal read after the combat's own damage, or that it is awake
+    /// and heals nothing. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool counters, UnitNames? names = null)
+    {
+        names ??= UnitNames.None;
+        var armed = Resolver.ChooseWeapon(attacker, content, slot).Unit;
+        if (Kinsbane.KillHeal(armed, content) is not null)
+        {
+            yield return $"  kill: {KillPays(armed, content)}";
+        }
+
+        if (counters && Kinsbane.KillHeal(target, content) is not null)
+        {
+            yield return $"  {names[target.Id]} kill on the counter: {KillPays(target, content)}";
+        }
+    }
+
+    private static string KillPays(BattleUnit unit, GameContent content)
+    {
+        var stack = unit.Unit.Inventory.Items[unit.EquippedSlot(content)];
+        var fed = stack.Fed + 1;
+        var grows = Kinsbane.MtBonus(fed) > Kinsbane.MtBonus(stack.Fed) ? $", Mt +{Kinsbane.MtBonus(fed)}" : "";
+        return Kinsbane.IsAwake(stack) ? $"{content.ItemName(stack.ItemId)} is awake, no heal" : $"+{Kinsbane.FeedHeal} HP to max, fed {fed}{grows}";
+    }
+
+    /// <summary>
+    /// The unit card's line for a hungering weapon the unit carries (DESIGN.md 13.23, experiment):
+    /// its kills, its Mt bonus, and its state (awake, starved, fed this phase, or hungry with the
+    /// drain the next phase start takes). Null when the unit carries none.
+    /// </summary>
+    public static string? HungerLine(BattleUnit unit, GameContent content)
+    {
+        var slot = Kinsbane.Slot(unit.Unit, content);
+        if (slot < 0)
+        {
+            return null;
+        }
+
+        var stack = unit.Unit.Inventory.Items[slot];
+        var state = Kinsbane.IsAwake(stack) ? "awake"
+            : stack.Starved ? "starved: Mt halved, uses held at 1 until a hit lands"
+            : stack.Ate ? "fed this phase"
+            : $"hungry: -{Kinsbane.DrainComing(unit, content)} HP at the next phase start unless it kills";
+        return $"  {content.ItemName(stack.ItemId)}: fed {stack.Fed}, Mt +{Kinsbane.MtBonus(stack.Fed)}, {state}" + (stack.Fed > 0 ? "; bound, no other weapon strikes" : "");
+    }
+
+    /// <summary>
     /// Under a forecast on a <c>windup: on</c> map (DESIGN.md 13.16): one line when the attack
     /// raises a blow instead of fighting, with what the blow would deal the target where it stands;
     /// one when the target has a raised blow, saying whether a hit from the attacker's tile breaks
@@ -2118,6 +2179,12 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
             case UnitRested r:
                 return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
+            case HungerDrained d:
+                return $"{content.ItemName(d.ItemId)} drains {names[d.UnitId]} {d.Amount} (hp {d.HpAfter})" + (d.Starved ? $"; it starves: Mt halved, uses held at 1 until a hit lands" : "");
+            case HungerFed f:
+                return $"{content.ItemName(f.ItemId)} feeds: fed {f.Fed}, Mt +{f.MtBonus}" + (f.Awake ? ", awake" : "") + (f.Healed > 0 ? $"; {names[f.UnitId]} heals {f.Healed} (hp {f.HpAfter})" : "");
+            case HungerEased eased:
+                return $"{content.ItemName(eased.ItemId)} is no longer starved; {names[eased.UnitId]} heals {eased.Healed} (hp {eased.HpAfter})";
             case WatchTaken w:
                 return $"{names[w.UnitId]} watches from {w.At}"
                     + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")

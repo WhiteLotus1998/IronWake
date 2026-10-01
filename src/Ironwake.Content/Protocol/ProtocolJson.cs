@@ -199,6 +199,28 @@ public static class ProtocolJson
             case UnitRested r:
                 w.WriteString("unit", r.UnitId);
                 break;
+            case HungerDrained d:
+                w.WriteString("unit", d.UnitId);
+                w.WriteString("item", d.ItemId);
+                w.WriteNumber("amount", d.Amount);
+                w.WriteNumber("hpAfter", d.HpAfter);
+                w.WriteBoolean("starved", d.Starved);
+                break;
+            case HungerFed f:
+                w.WriteString("unit", f.UnitId);
+                w.WriteString("item", f.ItemId);
+                w.WriteNumber("fed", f.Fed);
+                w.WriteNumber("mtBonus", f.MtBonus);
+                w.WriteNumber("healed", f.Healed);
+                w.WriteNumber("hpAfter", f.HpAfter);
+                w.WriteBoolean("awake", f.Awake);
+                break;
+            case HungerEased eased:
+                w.WriteString("unit", eased.UnitId);
+                w.WriteString("item", eased.ItemId);
+                w.WriteNumber("healed", eased.Healed);
+                w.WriteNumber("hpAfter", eased.HpAfter);
+                break;
             case WatchTaken t:
                 w.WriteString("unit", t.UnitId);
                 WriteCoord(w, "at", t.At);
@@ -825,6 +847,21 @@ public static class ProtocolJson
                 w.WriteString("keepsake", fallen);
             }
 
+            if (stack.Fed > 0)
+            {
+                w.WriteNumber("fed", stack.Fed);
+            }
+
+            if (stack.Starved)
+            {
+                w.WriteBoolean("starved", true);
+            }
+
+            if (stack.Ate)
+            {
+                w.WriteBoolean("ate", true);
+            }
+
             w.WriteEndObject();
         }
 
@@ -898,7 +935,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake") }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = s.TryGetProperty("fed", out var fed) ? fed.GetInt32() : 0, Starved = s.TryGetProperty("starved", out var starved) && starved.GetBoolean(), Ate = s.TryGetProperty("ate", out var ate) && ate.GetBoolean() }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))
