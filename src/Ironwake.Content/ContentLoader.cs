@@ -64,7 +64,8 @@ public static class ContentLoader
     /// listed twice. The map ids are checked against <c>content/maps</c> by whoever loads maps.
     /// The optional <c>trials</c> object (issue 252) maps a class id to a trial map id under
     /// <c>content/trials</c>; an unknown class or an empty map id is refused, and whoever loads the
-    /// trial checks that its <c>certification:</c> header names the same class.
+    /// trial checks that its <c>certification:</c> header names the same class. A map's optional
+    /// <c>before</c> and <c>after</c> are its text cards (issue 631), read by <see cref="Card"/>.
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
@@ -138,7 +139,7 @@ public static class ContentLoader
                 throw node.Error("stock", "must not list an id twice");
             }
 
-            maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock)));
+            maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock)) { Before = Card(node, "before"), After = Card(node, "after") });
             index++;
         }
 
@@ -186,6 +187,52 @@ public static class ContentLoader
     /// and a non-empty <c>at</c> list of <c>x,y</c> tiles; and an optional <c>raid</c>, the raid's map id
     /// under <c>content/keep</c> (issue 288). Whoever loads the map checks the tiles against it.
     /// </summary>
+    /// <summary>
+    /// A campaign map's optional text card (issue 631): an array of paragraphs, each a non-blank
+    /// line of printable ASCII (the console is the screen), at most <see cref="CardParagraphLength"/>
+    /// characters, and at most <see cref="CardParagraphs"/> of them. An absent field is an empty card.
+    /// </summary>
+    private static ValueList<string> Card(EntryNode node, string field)
+    {
+        var paragraphs = node.StringArrayOrEmpty(field);
+        if (node.Has(field) && paragraphs.Count == 0)
+        {
+            throw node.Error(field, "must hold at least one paragraph, or be left out");
+        }
+
+        if (paragraphs.Count > CardParagraphs)
+        {
+            throw node.Error(field, $"holds {paragraphs.Count} paragraphs; a card holds at most {CardParagraphs}");
+        }
+
+        for (var i = 0; i < paragraphs.Count; i++)
+        {
+            var text = paragraphs[i];
+            if (string.IsNullOrWhiteSpace(text) || text != text.Trim())
+            {
+                throw node.Error($"{field}[{i}]", "must be non-blank text with no leading or trailing space");
+            }
+
+            if (text.Any(c => c < ' ' || c > '~'))
+            {
+                throw node.Error($"{field}[{i}]", "must be printable ASCII on one line");
+            }
+
+            if (text.Length > CardParagraphLength)
+            {
+                throw node.Error($"{field}[{i}]", $"is {text.Length} characters; a paragraph holds at most {CardParagraphLength}");
+            }
+        }
+
+        return ValueList<string>.From(paragraphs);
+    }
+
+    /// <summary>The most paragraphs a text card holds (issue 631; the console is the screen).</summary>
+    public const int CardParagraphs = 6;
+
+    /// <summary>The longest paragraph a text card holds, in characters (issue 631).</summary>
+    public const int CardParagraphLength = 400;
+
     private static KeepMenu ParseKeep(EntryNode node, ImmutableSortedDictionary<string, Terrain> terrain)
     {
         var mapId = node.String("map");

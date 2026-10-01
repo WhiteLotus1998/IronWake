@@ -87,8 +87,9 @@ internal static class Fixture
 
     /// <summary>
     /// A copy of the real content directory whose classes ask nothing to certify into, for CLI
-    /// tests of what certifying does rather than of the shipped ladder (issue 72). Made once per
-    /// test run under the temp directory.
+    /// tests of what certifying does rather than of the shipped ladder (issue 72), its campaign
+    /// opening on Old Mill Road as every script written for it was (<see cref="WithoutStartingAlone"/>).
+    /// Made once per test run under the temp directory.
     /// </summary>
     public static string LadderFreeContentDirectory() => LadderFree.Value;
 
@@ -114,7 +115,7 @@ internal static class Fixture
         return target;
     }
 
-    private static readonly Lazy<string> Saltmarsh0030 = new(() => WithSaltmarsh0030(CopyRealContent("ironwake-saltmarsh-0030-")));
+    private static readonly Lazy<string> Saltmarsh0030 = new(() => WithSaltmarsh0030(WithoutStartingAlone(CopyRealContent("ironwake-saltmarsh-0030-"))));
 
     private static readonly Lazy<string> LadderFreeSaltmarsh0030 = new(() => WithSaltmarsh0030(CopyWithoutLadder()));
 
@@ -160,6 +161,20 @@ internal static class Fixture
         return target;
     }
 
+    /// <summary>
+    /// Takes Starting Alone (issue 631) out of the campaign's maps: a campaign journaled before it
+    /// shipped opens on Old Mill Road as map 1, and its battle seeds count from there.
+    /// </summary>
+    public static string WithoutStartingAlone(string target)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        var maps = campaign["maps"]!.AsArray().Where(m => (string)m!["map"]! != "starting_alone").Select(m => m!.DeepClone()).ToArray();
+        campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
+        return target;
+    }
+
     private static string CopyRealContent(string prefix)
     {
         var source = RealContentDirectory();
@@ -176,7 +191,7 @@ internal static class Fixture
 
     private static string CopyWithoutLadder()
     {
-        var target = CopyRealContent("ironwake-ladder-free-");
+        var target = WithoutStartingAlone(CopyRealContent("ironwake-ladder-free-"));
 
         var classesPath = Path.Combine(target, ContentFiles.ClassesName);
         var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;

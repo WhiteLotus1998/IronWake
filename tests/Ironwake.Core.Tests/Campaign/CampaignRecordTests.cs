@@ -49,7 +49,7 @@ public class CampaignRecordTests
 
         Assert.Equal(Content.Cast, record.Roster);
         Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
-        Assert.Equal("old_mill_road", record.NextMap(Content).MapId);
+        Assert.Equal("starting_alone", record.NextMap(Content).MapId);
         Assert.Equal("normal", record.Difficulty);
         Assert.Empty(record.Fallen);
     }
@@ -82,7 +82,7 @@ public class CampaignRecordTests
 
         Assert.False(result.Accepted);
         Assert.StartsWith("the shop does not stock 'steel_sword'; it sells iron_sword", result.Text);
-        Assert.True(AtMap(2).Buy("steel_sword", "wren", Content) is { Accepted: false, Text: "Steel Sword costs 900 and the purse holds 500" });
+        Assert.True(AtMap(3).Buy("steel_sword", "wren", Content) is { Accepted: false, Text: "Steel Sword costs 900 and the purse holds 500" });
     }
 
     [Fact]
@@ -149,7 +149,7 @@ public class CampaignRecordTests
     public void BenchingARecruitLetsTheNextInRosterOrderFillItsBareSlot()
     {
         var saltmarsh = Map("saltmarsh_ford");
-        var record = AtMap(1);
+        var record = AtMap(2);
 
         var benched = record.Bench("ottilie", saltmarsh);
 
@@ -176,7 +176,7 @@ public class CampaignRecordTests
     {
         var protecting = Map("the_tollgate") with { ProtectId = "wren" };
 
-        Assert.Equal("The Tollgate must protect wren, who cannot be benched", AtMap(2).Bench("wren", protecting).Text);
+        Assert.Equal("The Tollgate must protect wren, who cannot be benched", AtMap(3).Bench("wren", protecting).Text);
     }
 
     [Fact]
@@ -190,14 +190,14 @@ public class CampaignRecordTests
     [Fact]
     public void AWonBattlePaysTheRewardAndCarriesTheSurvivorsAsTheBattleLeftThem()
     {
-        var record = Start();
+        var record = AtMap(1);
         var end = Won(record, u => u.Id == "wren"
             ? u with { Unit = u.Unit with { Exp = 40, Inventory = new Inventory(ValueList<ItemStack>.Of(new ItemStack("iron_sword", 31), new ItemStack("field_dressing", 1))) } }
             : u);
 
         var after = record.AfterBattle(end, Content);
 
-        Assert.Equal(1, after.MapIndex);
+        Assert.Equal(2, after.MapIndex);
         Assert.Equal(record.Purse + 600, after.Purse);
         Assert.Equal(40, after.Find("wren")!.Exp);
         Assert.Equal(31, after.Find("wren")!.Inventory.Items[0].Uses);
@@ -208,7 +208,7 @@ public class CampaignRecordTests
     [Fact]
     public void ADeployedUnitMissingFromTheWonBoardHasFallenAndLeavesTheRoster()
     {
-        var record = Start();
+        var record = AtMap(1);
 
         var after = record.AfterBattle(Won(record, u => u.Id == "wren" ? null : u), Content);
 
@@ -220,7 +220,7 @@ public class CampaignRecordTests
     [Fact]
     public void ANamedSlotWhoseRecruitHasFallenStaysEmpty()
     {
-        var record = AtMap(2) with
+        var record = AtMap(3) with
         {
             Roster = ValueList<Unit>.From(Content.Cast.Where(u => u.Id != "wren")),
             Fallen = ValueList<string>.Of("wren"),
@@ -235,7 +235,7 @@ public class CampaignRecordTests
     [Fact]
     public void TheUsesASuppliesCapHeldBackAreReturnedAfterTheBattle()
     {
-        var record = Start();
+        var record = AtMap(1);
         var opening = record.Begin(Map("old_mill_road"), Content);
         Assert.Equal(1, opening.Find("wren")!.Unit.Inventory.Items[1].Uses);
 
@@ -313,6 +313,6 @@ public class CampaignRecordTests
     {
         var e = Assert.Throws<ArgumentException>(() => CampaignRecord.StartAt(Content, 1, "nowhere"));
 
-        Assert.StartsWith("the campaign has no map 'nowhere'; it lists old_mill_road,", e.Message);
+        Assert.StartsWith("the campaign has no map 'nowhere'; it lists starting_alone, old_mill_road,", e.Message);
     }
 }

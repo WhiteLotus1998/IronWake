@@ -23,6 +23,23 @@ public static class ContentSerializer
         new ContentFile(ContentFiles.AbilitiesName, WriteArray("abilities", content.Abilities.Values, WriteAbility)),
         content.Campaign == CampaignRules.None ? null : new ContentFile(ContentFiles.CampaignName, WriteCampaign(content.Campaign)));
 
+    /// <summary>A map's text card (issue 631) as a string array under <paramref name="name"/>; nothing for an empty card.</summary>
+    private static void WriteCard(Utf8JsonWriter writer, string name, ValueList<string> card)
+    {
+        if (card.Count == 0)
+        {
+            return;
+        }
+
+        writer.WriteStartArray(name);
+        foreach (var paragraph in card)
+        {
+            writer.WriteStringValue(paragraph);
+        }
+
+        writer.WriteEndArray();
+    }
+
     /// <summary>campaign.json (issue 74) in the shape <see cref="ContentLoader"/> reads.</summary>
     private static string WriteCampaign(CampaignRules campaign)
     {
@@ -45,6 +62,8 @@ public static class ContentSerializer
                 }
 
                 writer.WriteEndArray();
+                WriteCard(writer, "before", map.Before);
+                WriteCard(writer, "after", map.After);
                 writer.WriteEndObject();
             }
 

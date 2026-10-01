@@ -55,7 +55,8 @@ public sealed class CampaignClient
 
     /// <summary>
     /// The between-map screen's lines, as the console prints them on arriving at it: the heading,
-    /// the roster, the shop, the deployment, and the keep's menu once the raid is fought.
+    /// the roster, the shop, the deployment, and the keep's menu once the raid is fought, after the
+    /// map's text card when it has one (issue 631).
     /// </summary>
     public IReadOnlyList<string> ScreenLines()
     {
@@ -64,7 +65,7 @@ public sealed class CampaignClient
             return Array.Empty<string>();
         }
 
-        var lines = new List<string> { CampaignSession.ScreenHeading(Record, Content, map) };
+        var lines = new List<string>(CampaignSession.BeforeCard(Record, Content, map)) { CampaignSession.ScreenHeading(Record, Content, map) };
         lines.AddRange(CampaignSession.RosterLines(Record, Content, typed: true));
         lines.AddRange(CampaignSession.ShopLines(Record, Content));
         lines.Add(CampaignSession.DeploymentLine(Record, Content, map));
