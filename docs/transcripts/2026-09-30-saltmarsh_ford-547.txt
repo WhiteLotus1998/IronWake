@@ -459,7 +459,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 enemy: move archer-1 10,3
 Archer moves 10,1 -> 10,3 via 10,2
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 16)
   Archer hp 17, Teodor hp 16
@@ -472,7 +472,7 @@ Soldier 1 waits
 enemy: move wingrider-1 10,4
 Wingrider moves 12,2 -> 10,4 via 11,2 10,2 10,3
 enemy: attack wingrider-1 teodor
-forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
+Forecast Wingrider -> Teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
 Wingrider attacks Teodor
   Wingrider hits Teodor for 6 (hp 10)
   Teodor misses Wingrider
@@ -527,7 +527,7 @@ c  wingrider-1      Wingrider L2 skyrider      10,4   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie wingrider-1
-forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
+Forecast Ottilie -> Wingrider: dmg 19 hit 77% crit 3%; counter: none
 Ottilie attacks Wingrider
   Ottilie hits Wingrider for 19 (hp 0)
   Ottilie hp 17, Wingrider hp 0
@@ -647,13 +647,13 @@ C  teodor           Teodor L1 pikeman          11,7   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  braced  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
-lethal if all land: ottilie (archer-1 7, soldier-1 10 against 17 hp)
+Lethal if all land: Ottilie (Archer for 7, Soldier 1 for 10, against 17 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 enemy: move archer-1 11,5
 Archer moves 10,3 -> 11,5 via 10,4 11,4
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 5)
   Archer hp 17, Teodor hp 5
@@ -662,7 +662,7 @@ Bandit Leader waits and braces
 enemy: move soldier-1 10,5
 Soldier 1 moves 10,2 -> 10,5 via 10,3 10,4
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+Forecast Soldier 1 -> Ottilie: dmg 10 hit 70% crit 0%; counter: none
 Soldier 1 attacks Ottilie
   Soldier 1 hits Ottilie for 10 (hp 7)
   Soldier 1 hp 20, Ottilie hp 7
@@ -714,7 +714,7 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor archer-1
-forecast teodor -> archer-1: dmg 12 hit 76% crit 1%; counter: none
+Forecast Teodor -> Archer: dmg 12 hit 76% crit 1%; counter: none
 Teodor attacks Archer
   Teodor hits Archer for 12 (hp 5)
   Teodor hp 5, Archer hp 5
@@ -764,7 +764,7 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer: dmg 11 hit 87% crit 4%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 0)
   Alder Fenn hp 22, Archer hp 0
@@ -813,7 +813,7 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+Forecast Ottilie -> Soldier 1: dmg 6 hit 82% crit 4%; counter: none
 Ottilie attacks Soldier 1
   Ottilie hits Soldier 1 for 6 (hp 14)
   Ottilie hp 7, Soldier 1 hp 14
@@ -839,7 +839,7 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 8 (hp 6)
   Soldier 1 misses Wren
@@ -866,8 +866,8 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
-lethal if all land: ottilie (soldier-1 10 against 7 hp)
-lethal if all land: teodor (soldier-1 8 against 5 hp)
+Lethal if all land: Ottilie (Soldier 1 for 10, against 7 hp)
+Lethal if all land: Teodor (Soldier 1 for 8, against 5 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: wait bandit_leader-1
@@ -875,7 +875,7 @@ Bandit Leader waits and braces
 enemy: move soldier-1 9,7
 Soldier 1 moves 10,5 -> 9,7 via 10,6 9,6
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+Forecast Soldier 1 -> Ottilie: dmg 10 hit 70% crit 0%; counter: none
 Soldier 1 attacks Ottilie
   Soldier 1 hits Ottilie for 10 (hp 0)
   Soldier 1 hp 6, Ottilie hp 0
@@ -951,7 +951,7 @@ C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer: dmg 11 hit 87% crit 4%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 6)
   Alder Fenn hp 22, Archer hp 6
@@ -1001,7 +1001,7 @@ C  teodor           Teodor L1 pikeman          11,7   hp 5/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+Forecast Wren -> Archer: dmg 10 hit 85% crit 3%; counter: none
 Wren attacks Archer
   Wren hits Archer for 10 (hp 0)
   Wren hp 20, Archer hp 0
@@ -1100,7 +1100,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 enemy: wait bandit_leader-1
 Bandit Leader waits and braces
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+Forecast Soldier 1 -> Ottilie: dmg 10 hit 70% crit 0%; counter: none
 Soldier 1 attacks Ottilie
   Soldier 1 hits Ottilie for 10 (hp 7)
   Soldier 1 hp 20, Ottilie hp 7
@@ -1150,7 +1150,7 @@ C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+Forecast Ottilie -> Soldier 1: dmg 6 hit 82% crit 4%; counter: none
 Ottilie attacks Soldier 1
   Ottilie hits Soldier 1 for 6 (hp 14)
   Ottilie hp 7, Soldier 1 hp 14
@@ -1198,7 +1198,7 @@ C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
 B  wren             Wren L1 cadet              11,5   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 8 (hp 6)
   Soldier 1 misses Wren
@@ -1247,7 +1247,7 @@ C  teodor           Teodor L1 pikeman          13,9   hp 5/21   Plain
 B  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Soldier 1
   Alder Fenn hits Soldier 1 for 9 (hp 0)
   Alder Fenn hp 22, Soldier 1 hp 0
@@ -1662,7 +1662,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack bandit_leader-1 wren
-forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+Forecast Bandit Leader -> Wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
 Bandit Leader attacks Wren
   Bandit Leader misses Wren
   Wren hits Bandit Leader for 6 (hp 20)
@@ -1725,7 +1725,7 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie bandit_leader-1
-forecast ottilie -> bandit_leader-1: dmg 4 hit 67% crit 3%; counter: none
+Forecast Ottilie -> Bandit Leader: dmg 4 hit 67% crit 3%; counter: none
 Ottilie attacks Bandit Leader
   Ottilie misses Bandit Leader
   Ottilie hp 7, Bandit Leader hp 14
@@ -1751,7 +1751,7 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+Forecast Wren -> Bandit Leader: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
 Wren attacks Bandit Leader
   Wren hits Bandit Leader for 6 (hp 8)
   Bandit Leader misses Wren
@@ -1826,12 +1826,12 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain  braced  d
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > end
-lethal if all land: ottilie (bandit_leader-1 13 against 7 hp)
+Lethal if all land: Ottilie (Bandit Leader for 13, against 7 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
 Bandit Leader heals 5 (hp 13)
 enemy: attack bandit_leader-1 ottilie 2
-forecast bandit_leader-1 -> ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
+Forecast Bandit Leader -> Ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Ottilie
   Bandit Leader misses Ottilie
@@ -1990,8 +1990,8 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 -- Enemy phase, turn 9 --
 Bandit Leader heals 5 (hp 14)
 enemy: attack bandit_leader-1 wren 2
-forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 36% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
-  brace: wren braced: bandit_leader-1 hit -15
+Forecast Bandit Leader -> Wren with Steel Axe: dmg 17 hit 36% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+  Brace: wren braced: bandit_leader-1 hit -15
 Bandit Leader equips Steel Axe
 Bandit Leader attacks Wren
   Bandit Leader misses Wren
@@ -2006,8 +2006,8 @@ Brigand waits
 enemy: move soldier-2 8,4
 Soldier 2 moves 6,6 -> 8,4 via 6,5 6,4 7,4
 enemy: attack soldier-2 captain
-forecast soldier-2 -> captain: dmg 8 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
-  brace: captain braced: soldier-2 hit -15
+Forecast Soldier 2 -> Alder Fenn: dmg 8 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+  Brace: captain braced: soldier-2 hit -15
 Soldier 2 attacks Alder Fenn
   Soldier 2 misses Alder Fenn
   Alder Fenn hits Soldier 2 for 9 (hp 11)
@@ -2038,7 +2038,7 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+Forecast Wren -> Bandit Leader: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
 Wren attacks Bandit Leader
   Wren misses Bandit Leader
   Bandit Leader misses Wren
@@ -2090,7 +2090,7 @@ C  teodor           Teodor L1 pikeman          11,4   hp 15/21  Plain
 B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack ottilie soldier-2
-forecast ottilie -> soldier-2: dmg 6 hit 82% crit 4%; counter: none
+Forecast Ottilie -> Soldier 2: dmg 6 hit 82% crit 4%; counter: none
 Ottilie attacks Soldier 2
   Ottilie hits Soldier 2 for 6 (hp 5)
   Ottilie hp 7, Soldier 2 hp 5
@@ -2138,7 +2138,7 @@ C  teodor           Teodor L1 pikeman          8,5    hp 15/21  Plain
 B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack teodor soldier-2
-forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier 2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 10 (hp 0)
   Teodor hp 15, Soldier 2 hp 0
@@ -2190,7 +2190,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 enemy: move brigand-1 8,4
 Brigand moves 7,4 -> 8,4
 enemy: attack brigand-1 teodor
-forecast brigand-1 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
+Forecast Brigand -> Teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
 Brigand attacks Teodor
   Brigand hits Teodor for 10 (hp 5)
   Teodor hits Brigand for 12 (hp 10)
@@ -2219,7 +2219,7 @@ C  teodor           Teodor L1 pikeman          8,5    hp 5/21   Plain
 B  wren             Wren L2 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+Forecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 11 (hp 0)
   Alder Fenn hp 22, Brigand hp 0

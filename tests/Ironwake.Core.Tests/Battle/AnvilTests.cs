@@ -292,7 +292,7 @@ public class AnvilTests
         Assert.Equal(plan.Tile, line.Tile);
         Assert.Equal(plan.FollowerId, line.Follower.Id);
         Assert.Equal(new Coord(2 * pell.At.X - plan.Tile.X, 2 * pell.At.Y - plan.Tile.Y), line.From);
-        Assert.Contains($"  anvil: brigand-1 could step to {plan.Tile} so soldier-1 strikes you pinned from {line.From}", ThreatText(state, "pell"));
+        Assert.Contains($"  Anvil: Brigand could step to {plan.Tile} so Soldier strikes you pinned from {line.From}", ThreatText(state, "pell"));
     }
 
     /// <summary>Issue 457: an anvil already beside the unit on its tile is printed as holding it, not stepping to it.</summary>
@@ -306,7 +306,7 @@ public class AnvilTests
         var line = Assert.Single(Queries.Anvils(state, Starter, pell, pell.At)!);
 
         Assert.Equal(line.Anvil.At, line.Tile);
-        Assert.Contains($"  anvil: brigand-1 could hold {line.Tile} so soldier-1 strikes you pinned from {line.From}", ThreatText(state, "pell"));
+        Assert.Contains($"  Anvil: Brigand could hold {line.Tile} so Soldier strikes you pinned from {line.From}", ThreatText(state, "pell"));
     }
 
     /// <summary>Issue 457 at dusk: a plan whose follower the player does not see is not printed, as a strike row from it would not be.</summary>
@@ -332,9 +332,9 @@ public class AnvilTests
         var pincer = ThreatText(Player(), "pell");
         var plain = ThreatText(Player(pincer: false), "pell");
 
-        Assert.Contains("  anvil: ", pincer);
-        Assert.Equal(plain.Split('\n').Single(l => l.StartsWith("  if all land: ", StringComparison.Ordinal)), pincer.Split('\n').Single(l => l.StartsWith("  if all land: ", StringComparison.Ordinal)));
-        Assert.Equal(plain, string.Join("\n", pincer.Split('\n').Where(l => !l.StartsWith("  anvil: ", StringComparison.Ordinal))));
+        Assert.Contains("  Anvil: ", pincer);
+        Assert.Equal(plain.Split('\n').Single(l => l.StartsWith("  If all land: ", StringComparison.Ordinal)), pincer.Split('\n').Single(l => l.StartsWith("  If all land: ", StringComparison.Ordinal)));
+        Assert.Equal(plain, string.Join("\n", pincer.Split('\n').Where(l => !l.StartsWith("  Anvil: ", StringComparison.Ordinal))));
     }
 
     /// <summary>Issue 457: without the header the query lists no anvil, the text has no anvil line, and the protocol carries no <c>anvils</c>.</summary>
@@ -360,7 +360,7 @@ public class AnvilTests
         var answer = new Ironwake.Cli.ProtocolSession(Starter, state, TextWriter.Null).Answer("""{"query":"threat","unit":"pell"}""");
 
         Assert.Contains($"\"anvils\":[{{\"anvil\":\"brigand-1\",\"tile\":{{\"x\":{line.Tile.X},\"y\":{line.Tile.Y}}},\"follower\":\"soldier-1\",\"from\":{{\"x\":{line.From.X},\"y\":{line.From.Y}}}}}]", answer);
-        Assert.Contains("  anvil: brigand-1 could step to ", answer);
+        Assert.Contains("  Anvil: Brigand could step to ", answer);
     }
 
     private static MapDefinition Throne(string units, string row0) =>

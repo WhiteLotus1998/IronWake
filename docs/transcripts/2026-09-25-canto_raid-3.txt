@@ -119,14 +119,14 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 enemy: move archer-1 4,3
 Archer moves 7,4 -> 4,3 via 7,3 6,3 5,3
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer -> Wren: dmg 6 hit 70% crit 0%; counter: none
 Archer attacks Wren
   Archer hits Wren for 6 (hp 14)
   Archer hp 17, Wren hp 14
 enemy: move brigand-1 3,3
 Brigand moves 5,2 -> 3,3 via 4,2 3,2
 enemy: attack brigand-1 wren
-forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
 Brigand attacks Wren
   Brigand hits Wren for 11 (hp 3)
   Wren misses Brigand
@@ -177,7 +177,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+Forecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 11 (hp 1)
   Brigand hits Alder Fenn for 10 (hp 12)
@@ -220,7 +220,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              2,3    hp 3/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
-forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
+Forecast Ansgar -> Archer with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
 Ansgar attacks Archer
   Ansgar hits Archer for 11 (hp 6)
   Ansgar hp 20, Archer hp 6
@@ -301,7 +301,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
 enemy: attack archer-1 ansgar
-forecast archer-1 -> ansgar: dmg 7 hit 77% crit 2%; counter: none
+Forecast Archer -> Ansgar: dmg 7 hit 77% crit 2%; counter: none
 Archer attacks Ansgar
   Archer misses Ansgar
   Archer hp 6, Ansgar hp 20
@@ -347,7 +347,7 @@ d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              0,2    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-1
-forecast ansgar -> archer-1 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
+Forecast Ansgar -> Archer with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
 Ansgar attacks Archer
   Ansgar hits Archer for 11 (hp 0)
   Ansgar hp 20, Archer hp 0
@@ -514,7 +514,7 @@ c  soldier-1        Soldier L1 pikeman         11,0   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         11,5   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+Forecast Ansgar -> Soldier 2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 11)
   Soldier 2 misses Ansgar
@@ -561,7 +561,7 @@ Soldier 1 waits
 enemy: move soldier-2 9,5
 Soldier 2 moves 11,5 -> 9,5 via 10,5
 enemy: attack soldier-2 ansgar
-forecast soldier-2 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
+Forecast Soldier 2 -> Ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
 Soldier 2 attacks Ansgar
   Soldier 2 hits Ansgar for 10 (hp 10)
   Ansgar hits Soldier 2 for 9 (hp 2)
@@ -586,8 +586,8 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
-  counter: lethal to ansgar (10 against 10 hp)
+Forecast Ansgar -> Soldier 2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0
@@ -608,9 +608,9 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat ansgar
-threat on ansgar at 8,5 (Plain):
-  soldier-1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
-  if all land: 10 against 10 hp
+Threat on Ansgar at 8,5 (Plain):
+  Soldier 1 from 9,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
+  If all land: 10 against 10 hp
 > canto ansgar 6,5
 Ansgar cantos 8,5 -> 6,5 via 7,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
@@ -642,7 +642,7 @@ A  captain          Alder Fenn L1 cadet        10,4   hp 16/22  Plain  captain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Soldier 1
   Alder Fenn hits Soldier 1 for 9 (hp 11)
   Soldier 1 hits Alder Fenn for 8 (hp 8)
@@ -677,11 +677,11 @@ A  captain          Alder Fenn L1 cadet        10,4   hp 8/22   Plain  captain  
 c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
 > end
-lethal if all land: captain (soldier-1 8 against 8 hp)
+Lethal if all land: Alder Fenn (Soldier 1 for 8, against 8 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+Forecast Soldier 1 -> Alder Fenn: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
 Soldier 1 attacks Alder Fenn
   Soldier 1 hits Alder Fenn for 8 (hp 0)
   Soldier 1 hp 11, Alder Fenn hp 0
@@ -721,8 +721,8 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
-  counter: lethal to ansgar (10 against 10 hp)
+Forecast Ansgar -> Soldier 2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0
@@ -788,13 +788,13 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > end
-lethal if all land: ansgar (soldier-1 10 against 10 hp)
+Lethal if all land: Ansgar (Soldier 1 for 10, against 10 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: move soldier-1 8,5
 Soldier 1 moves 11,4 -> 8,5 via 10,4 9,4 8,4
 enemy: attack soldier-1 ansgar
-forecast soldier-1 -> ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
+Forecast Soldier 1 -> Ansgar: dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
 Soldier 1 attacks Ansgar
   Soldier 1 hits Ansgar for 10 (hp 0)
   Soldier 1 hp 20, Ansgar hp 0
@@ -834,8 +834,8 @@ c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group wat
 d  soldier-2        Soldier L1 pikeman         9,5    hp 2/20   Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > attack ansgar soldier-2
-forecast ansgar -> soldier-2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
-  counter: lethal to ansgar (10 against 10 hp)
+Forecast Ansgar -> Soldier 2 with Iron Lance: dmg 9 hit 76% crit 2%; counter: dmg 10 hit 72% crit 0%
+  Counter: lethal to Ansgar (10 against 10 hp)
 Ansgar attacks Soldier 2
   Ansgar hits Soldier 2 for 9 (hp 0)
   Ansgar hp 10, Soldier 2 hp 0
@@ -856,11 +856,11 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat ansgar from 7,5
-threat on ansgar at 7,5 (Plain):
-  soldier-1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
-  if all land: 10 against 10 hp
+Threat on Ansgar at 7,5 (Plain):
+  Soldier 1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
+  If all land: 10 against 10 hp
 > threat ansgar from 5,5
-threat on ansgar at 5,5 (Plain): no enemy can strike him next phase
+Threat on Ansgar at 5,5 (Plain): no enemy can strike him next phase
 > canto ansgar 5,5
 Ansgar cantos 8,5 -> 5,5 via 7,5 6,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
@@ -877,7 +877,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat wren
-threat on wren at 6,3 (Plain): no enemy can strike her next phase
+Threat on Wren at 6,3 (Plain): no enemy can strike her next phase
 > wait wren
 Wren waits
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
@@ -914,7 +914,7 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain  done
 enemy: move soldier-1 8,4
 Soldier 1 moves 11,4 -> 8,4 via 10,4 9,4
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+Forecast Soldier 1 -> Alder Fenn: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
 Soldier 1 attacks Alder Fenn
   Soldier 1 hits Alder Fenn for 6 (hp 10)
   Alder Fenn crits Soldier 1 for 27 (hp 0)

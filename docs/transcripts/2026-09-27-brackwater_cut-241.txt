@@ -51,7 +51,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Rook -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
 Rook attacks Archer 2
   Rook hits Archer 2 for 7 (hp 10)
   Rook hp 17, Archer 2 hp 10
@@ -107,7 +107,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 10 (hp 0)
   Pell hp 16, Archer 2 hp 0
@@ -862,7 +862,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 10,3
 Brigand 1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 14)
   Dunstan hits Brigand 1 for 11 (hp 12)
@@ -1175,7 +1175,7 @@ enemy: something in the dark acts (x2)
 enemy: move brigand-1 11,3
 Brigand 1 moves 10,3 -> 11,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 5)
   Dunstan hits Brigand 1 for 11 (hp 1)
@@ -1210,8 +1210,8 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack dunstan brigand-1
-forecast dunstan -> brigand-1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
-  counter: lethal to dunstan (9 against 5 hp)
+Forecast Dunstan -> Brigand 1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
+  Counter: lethal to Dunstan (9 against 5 hp)
 Dunstan attacks Brigand 1
   Dunstan hits Brigand 1 for 11 (hp 0)
   Dunstan hp 5, Brigand 1 hp 0

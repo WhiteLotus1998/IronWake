@@ -383,7 +383,7 @@ public sealed class ThreatQueryTests
 
         Assert.True(Queries.MoveWins(state, Starter, captain, throne));
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, captain, throne, Queries.Threats(state, Starter, captain, throne)!, Queries.SleepingThreats(state, Starter, captain, throne)!, Queries.Unseeing(state, Starter, captain, throne), Queries.MoveWins(state, Starter, captain, throne));
-        Assert.Equal("threat on captain at 7,1 (Gate): this move wins the map", text);
+        Assert.Equal("Threat on Alder Fenn at 7,1 (Gate): this move wins the map", text);
     }
 
     /// <summary>
@@ -402,6 +402,6 @@ public sealed class ThreatQueryTests
         var lines = Queries.Threats(state, Starter, pell, throne)!;
         Assert.Contains(lines, line => line.Enemy.Id == "bandit_leader-1");
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, pell, throne, lines, Queries.SleepingThreats(state, Starter, pell, throne)!, Queries.Unseeing(state, Starter, pell, throne), Queries.MoveWins(state, Starter, pell, throne));
-        Assert.StartsWith("threat on pell at 7,1 (Gate):\n  bandit_leader-1 from ", text);
+        Assert.StartsWith("Threat on Pell at 7,1 (Gate):\n  Bandit Leader from ", text);
     }
 }

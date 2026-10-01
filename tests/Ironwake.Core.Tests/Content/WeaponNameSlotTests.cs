@@ -35,7 +35,7 @@ public class WeaponNameSlotTests
     {
         var output = Play($"forecast pell brigand-1 {slot} from 2,4\nforecast pell brigand-1 {name} from 2,4\n");
 
-        var lines = output.Split('\n').Where(line => line.StartsWith("forecast pell -> ", StringComparison.Ordinal)).ToList();
+        var lines = output.Split('\n').Where(line => line.StartsWith("Forecast Pell -> ", StringComparison.Ordinal)).ToList();
         Assert.Equal(2, lines.Count);
         Assert.Equal(lines[0], lines[1]);
         Assert.DoesNotContain("ERROR", output);
@@ -46,9 +46,9 @@ public class WeaponNameSlotTests
     {
         var output = Play("move pell 2,4\nattack pell brigand-1 gust\nforecast pell brigand-1 cinder\nforecast pell brigand-1 1\n");
 
-        Assert.Contains("> attack pell brigand-1 gust\nforecast pell -> brigand-1 with Gust:", output);
-        Assert.Contains("> forecast pell brigand-1 cinder\nforecast pell -> brigand-1 with Cinder:", output);
-        Assert.Contains("> forecast pell brigand-1 1\nforecast pell -> brigand-1 with Gust:", output);
+        Assert.Contains("> attack pell brigand-1 gust\nForecast Pell -> Brigand 1 with Gust:", output);
+        Assert.Contains("> forecast pell brigand-1 cinder\nForecast Pell -> Brigand 1 with Cinder:", output);
+        Assert.Contains("> forecast pell brigand-1 1\nForecast Pell -> Brigand 1 with Gust:", output);
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class WeaponNameSlotTests
     {
         var output = Play("forecast ottilie brigand-1 iron bow from 3,5\nforecast ottilie brigand-1 iron_bow from 3,5\nforecast ottilie brigand-1 1 from 3,5\n");
 
-        var lines = output.Split('\n').Where(line => line.StartsWith("forecast ottilie -> ", StringComparison.Ordinal)).ToList();
+        var lines = output.Split('\n').Where(line => line.StartsWith("Forecast Ottilie -> ", StringComparison.Ordinal)).ToList();
         Assert.Equal(3, lines.Count);
         Assert.All(lines, line => Assert.Equal(lines[2], line));
         Assert.DoesNotContain("ERROR", output);

@@ -51,7 +51,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Rook -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
 Rook attacks Archer 2
   Rook misses Archer 2
   Rook hp 17, Archer 2 hp 17
@@ -106,7 +106,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 10 (hp 7)
   Archer 2 hits Pell for 8 (hp 8)
@@ -293,13 +293,13 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain  done
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: pell (archer-2 8 against 8 hp)
+Lethal if all land: Pell (Archer 2 for 8, against 8 hp)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
 Archer 2 heals 3 (hp 10)
 enemy: something in the dark acts (x2)
 enemy: attack archer-2 pell
-forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+Forecast Archer 2 -> Pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
 Archer 2 attacks Pell
   Archer 2 hits Pell for 8 (hp 0)
   Archer 2 hp 10, Pell hp 0
@@ -378,10 +378,10 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat pell
-threat on pell at 10,2 (Plain):
-  archer-2 from 11,1 with Iron Bow (slot 1): dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
-  if all land: 8 against 16 hp
-  and whatever is in the dark (?), unpriced
+Threat on Pell at 10,2 (Plain):
+  Archer 2 from 11,1 with Iron Bow (slot 1): dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+  If all land: 8 against 16 hp
+  And whatever is in the dark (?), unpriced
 > wait pell
 Pell waits
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
@@ -409,8 +409,8 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 9,3 (Plain): no enemy in sight can strike him next phase
-  and whatever is in the dark (?), unpriced
+Threat on Dunstan at 9,3 (Plain): no enemy in sight can strike him next phase
+  And whatever is in the dark (?), unpriced
 > move captain 9,4
 Alder Fenn moves 8,4 -> 9,4
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
@@ -572,7 +572,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 -- Enemy phase, turn 1 --
 enemy: something in the dark acts (x2)
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+Forecast Archer 2 -> Dunstan: dmg 3 hit 88% crit 3%; counter: none
 Archer 2 attacks Dunstan
   Archer 2 hits Dunstan for 3 (hp 20)
   Archer 2 hp 17, Dunstan hp 20
@@ -638,7 +638,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 10 (hp 7)
   Archer 2 hits Pell for 8 (hp 8)
@@ -670,7 +670,7 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Rook -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
 Rook attacks Archer 2
   Rook hits Archer 2 for 7 (hp 0)
   Rook hp 17, Archer 2 hp 0
@@ -801,8 +801,8 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 11,3 (Plain): no enemy in sight can strike him next phase
-  in the dark, unpriced: ? at 4,3 (7), ? at 5,4 (7), ? at 17,5 (8)
+Threat on Dunstan at 11,3 (Plain): no enemy in sight can strike him next phase
+  In the dark, unpriced: ? at 4,3 (7), ? at 5,4 (7), ? at 17,5 (8)
 > wait dunstan
 Dunstan waits
 Brackwater Cut  turn 2 of 8  player phase  escape  recall 2
@@ -840,7 +840,7 @@ enemy: something in the dark acts (x4)
 enemy: move rider-1 10,3
 Rider 1 moves 4,3 -> 10,3 via 5,3 6,3 7,3 8,3 9,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+Forecast Rider 1 -> Dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
 Rider 1 attacks Dunstan
   Rider 1 hits Dunstan for 6 (hp 14)
   Dunstan hits Rider 1 for 10 (hp 11)
@@ -876,7 +876,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack dunstan rider-1
-forecast dunstan -> rider-1: dmg 10 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+Forecast Dunstan -> Rider 1: dmg 10 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
 Dunstan attacks Rider 1
   Dunstan hits Rider 1 for 10 (hp 1)
   Rider 1 hits Dunstan for 6 (hp 8)
@@ -935,7 +935,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook rider-1
-forecast rook -> rider-1: dmg 8 hit 79% crit 3%; counter: dmg 12 hit 63% crit 0%
+Forecast Rook -> Rider 1: dmg 8 hit 79% crit 3%; counter: dmg 12 hit 63% crit 0%
 Rook attacks Rider 1
   Rook hits Rider 1 for 8 (hp 0)
   Rook hp 17, Rider 1 hp 0
@@ -966,10 +966,10 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat rook
-threat on rook at 10,2 (Plain):
-  brigand-1 from 9,2 with Iron Axe (slot 1): dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
-  if all land: 15 against 17 hp
-  in the dark, unpriced: ? at 6,3 (5), ? at 4,2 (6), ? at 5,4 (7), ? at 6,5 (7)
+Threat on Rook at 10,2 (Plain):
+  Brigand 1 from 9,2 with Iron Axe (slot 1): dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
+  If all land: 15 against 17 hp
+  In the dark, unpriced: ? at 6,3 (5), ? at 4,2 (6), ? at 5,4 (7), ? at 6,5 (7)
 > move captain 15,2
 Alder Fenn moves 12,3 -> 15,2 via 12,2 13,2 14,2
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
@@ -1127,13 +1127,13 @@ D  wren             Wren L1 cadet              15,1   hp 20/20  Plain  done
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: dunstan (brigand-1 9 against 8 hp)
+Lethal if all land: Dunstan (Brigand 1 for 9, against 8 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 enemy: move archer-1 8,2
 Archer 1 moves 6,3 -> 8,2 via 6,2 7,2
 enemy: attack archer-1 rook
-forecast archer-1 -> rook: dmg 19 hit 72% crit 1%; counter: none
+Forecast Archer 1 -> Rook: dmg 19 hit 72% crit 1%; counter: none
 Archer 1 attacks Rook
   Archer 1 misses Rook
   Archer 1 hp 17, Rook hp 17
@@ -1141,7 +1141,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 10,3
 Brigand 1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 0)
   Brigand 1 hp 23, Dunstan hp 0
@@ -1157,7 +1157,7 @@ Hexer waits
 enemy: move rider-2 9,2
 Rider 2 moves 4,2 -> 9,2 via 5,2 6,2 7,2 8,2
 enemy: attack rider-2 rook
-forecast rider-2 -> rook: dmg 12 hit 63% crit 0%; counter: dmg 8 hit 79% crit 3%
+Forecast Rider 2 -> Rook: dmg 12 hit 63% crit 0%; counter: dmg 8 hit 79% crit 3%
 Rider 2 attacks Rook
   Rider 2 misses Rook
   Rook misses Rider 2
@@ -1402,8 +1402,8 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat captain
-threat on captain at 18,1 (Plain): no enemy in sight can strike him next phase
-  in the dark, unpriced: ? at 17,5 (5), ? at 17,6 (6), ? at 17,7 (7)
+Threat on Alder Fenn at 18,1 (Plain): no enemy in sight can strike him next phase
+  In the dark, unpriced: ? at 17,5 (5), ? at 17,6 (6), ? at 17,7 (7)
 > end
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -1554,8 +1554,8 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat pell
-threat on pell at 19,2 (Plain): no enemy in sight can strike her next phase
-  in the dark, unpriced: ? at 17,5 (5), ? at 14,3 (6), ? at 17,6 (6), ? at 13,3 (7), ? at 17,7 (7), ? at 12,3 (8)
+Threat on Pell at 19,2 (Plain): no enemy in sight can strike her next phase
+  In the dark, unpriced: ? at 17,5 (5), ? at 14,3 (6), ? at 17,6 (6), ? at 13,3 (7), ? at 17,7 (7), ? at 12,3 (8)
 > wait captain
 Alder Fenn waits
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
@@ -1765,7 +1765,7 @@ D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain rider-2
-forecast captain -> rider-2: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Rider 2: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Rider 2
   Alder Fenn hits Rider 2 for 10 (hp 11)
   Rider 2 misses Alder Fenn
@@ -1799,7 +1799,7 @@ D  wren             Wren L1 cadet              18,0   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 4 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell rider-2
-forecast pell -> rider-2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+Forecast Pell -> Rider 2 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 Pell attacks Rider 2
   Pell hits Rider 2 for 12 (hp 0)
   Pell hp 8, Rider 2 hp 0
@@ -1841,7 +1841,7 @@ Brawler waits
 enemy: move brigand-1 18,1
 Brigand 1 moves 18,3 -> 18,1 via 18,2
 enemy: attack brigand-1 pell
-forecast brigand-1 -> pell: dmg 14 hit 70% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+Forecast Brigand 1 -> Pell: dmg 14 hit 70% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 Brigand 1 attacks Pell
   Brigand 1 hits Pell for 14 (hp 0)
   Brigand 1 hp 23, Pell hp 0
@@ -1852,7 +1852,7 @@ enemy: wait brigand-2
 Brigand 2 waits
 enemy: something in the dark acts
 enemy: attack hexer-1 wren
-forecast hexer-1 -> wren: dmg 11 hit 98% crit 0%; counter: none
+Forecast Hexer -> Wren: dmg 11 hit 98% crit 0%; counter: none
 Hexer attacks Wren
   Hexer hits Wren for 11 (hp 9)
   Hexer hp 16, Wren hp 9

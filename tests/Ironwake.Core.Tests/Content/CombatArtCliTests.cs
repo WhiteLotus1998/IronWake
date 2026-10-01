@@ -92,9 +92,9 @@ public class CombatArtCliTests : IDisposable
 
         Assert.Equal(0, exit);
         Assert.Contains(
-            "> forecast captain brigand-1\nforecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%\n"
-            + "> attack captain brigand-1 art cleave\nforecast captain -> brigand-1: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%\n"
-            + "  art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
+            "> forecast captain brigand-1\nForecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%\n"
+            + "> attack captain brigand-1 art cleave\nForecast Alder Fenn -> Brigand: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%\n"
+            + "  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
             + "Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
         Assert.EndsWith("battle won: rout\n", output);
@@ -128,7 +128,7 @@ public class CombatArtCliTests : IDisposable
             var output = Run(out _, "play", "old_mill_road", "--seed", "11", "--protocol", "--script", path, "--content", _content);
 
             Assert.Contains("\"scheme\":\"twoRollAverage\",\"artCost\":2}", output);
-            Assert.Contains("\\n  art Cleave: Iron Sword at mt 10", output);
+            Assert.Contains("\\n  Art Cleave: Iron Sword at mt 10", output);
             Assert.Contains("{\"type\":\"artDeclared\",\"unit\":\"captain\",\"art\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\"}", output);
         }
         finally

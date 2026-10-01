@@ -580,7 +580,7 @@ public sealed class PlaySession
                     ? Rivalry.Exposed(_state, _content).Select(u => new ExposureEntry(_state.History.Count, _state.Turn, u.Id)).ToList()
                     : new List<ExposureEntry>();
                 var lethal = Queries.Lethal(_state, _content);
-                if (Apply(new EndPhase(), first: lethal.Count == 0 ? null : string.Join("\n", lethal.Select(LethalLine))))
+                if (Apply(new EndPhase(), first: lethal.Count == 0 ? null : string.Join("\n", lethal.Select(l => LethalLine(l, UnitNames.Of(_state, _content))))))
                 {
                     _exposure.AddRange(exposed);
                     EnemyPhase();
@@ -848,7 +848,7 @@ public sealed class PlaySession
                 var board = covered?.Board ?? _state;
                 if (covered is { } swap)
                 {
-                    _out.WriteLine($"  cover: {swap.Struck.Id} takes the strike aimed at {aimed!.Id}");
+                    _out.WriteLine($"  Cover: {swap.Struck.Id} takes the strike aimed at {aimed!.Id}");
                 }
 
                 var forecast = attacker is null || target is null ? null : Queries.Forecast(board, _content, attacker, target, attacker.At, attack.Slot);
@@ -858,41 +858,41 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot)));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), UnitNames.Of(_state, _content)));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!) is { } sworn)
                 {
-                    _out.WriteLine(sworn);
+                    _out.WriteLine(UnitNames.Sentence(sworn));
                 }
 
                 foreach (var pincer in PincerLines(_state, attacker!, target!))
                 {
-                    _out.WriteLine(pincer);
+                    _out.WriteLine(UnitNames.Sentence(pincer));
                 }
 
                 foreach (var brace in BraceLines(attacker!, target!))
                 {
-                    _out.WriteLine(brace);
+                    _out.WriteLine(UnitNames.Sentence(brace));
                 }
 
                 foreach (var line in BreakLines(_state, _content, attacker!, target!))
                 {
-                    _out.WriteLine(line);
+                    _out.WriteLine(UnitNames.Sentence(line));
                 }
 
                 foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes))
                 {
-                    _out.WriteLine(ignite);
+                    _out.WriteLine(UnitNames.Sentence(ignite));
                 }
 
                 foreach (var windup in WindupLines(_state, _content, attacker!, target!, attack.Slot))
                 {
-                    _out.WriteLine(windup);
+                    _out.WriteLine(UnitNames.Sentence(windup));
                 }
 
                 if (grudge is not null)
                 {
-                    _out.WriteLine("  " + grudge);
+                    _out.WriteLine(UnitNames.Sentence("  " + grudge));
                 }
             }
 
@@ -1241,8 +1241,9 @@ public sealed class PlaySession
         var where = fromTile ? $" from {tile} ({state.Map.TerrainAt(tile, content).Name})" : "";
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises) };
-        if (LethalCounterLine(unit, target, forecast, raises) is { } lethal)
+        var names = UnitNames.Of(state, content);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names) };
+        if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             lines.Add(lethal);
         }
@@ -1268,26 +1269,28 @@ public sealed class PlaySession
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot));
-        lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast));
-        return string.Join("\n", lines);
+        lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
+        return UnitNames.Sentence(string.Join("\n", lines));
     }
 
     /// <summary>
     /// What <c>end</c> prints before a player phase ends for a unit the coming enemy phase kills
     /// if every strike <c>threat</c> prices lands (issue 558, <see cref="Queries.Lethal"/>):
-    /// <c>lethal if all land: wren (soldier-2 9, archer-1 6 against 15 hp)</c>.
+    /// <c>Lethal if all land: Wren (Soldier 2 for 9, Archer for 6, against 15 hp)</c>, each unit by
+    /// the name a reader sees (issue 615), the <c>for</c> keeping a numbered name off its damage.
     /// </summary>
-    public static string LethalLine(LethalThreat lethal) =>
-        $"lethal if all land: {lethal.Unit.Id} ({string.Join(", ", lethal.Strikers.Select(s => $"{s.Enemy.Id} {s.Damage}"))} against {lethal.Unit.Hp} hp)";
+    public static string LethalLine(LethalThreat lethal, UnitNames names) =>
+        $"Lethal if all land: {names[lethal.Unit.Id]} ({string.Join(", ", lethal.Strikers.Select(s => $"{names[s.Enemy.Id]} for {s.Damage}"))}, against {lethal.Unit.Hp} hp)";
 
     /// <summary>
     /// Under a forecast whose counter kills the attacker if every counter strike lands (issue 539):
-    /// <c>  counter: lethal to wren (17 against 17 hp)</c>, read by
+    /// <c>  Counter: lethal to Wren (17 against 17 hp)</c>, read by
     /// <see cref="CombatForecast.CounterIsLethal"/>; null otherwise, and for a raise, which draws no counter.
+    /// The unit is named as a reader sees it when <paramref name="names"/> is given (issue 615).
     /// </summary>
-    public static string? LethalCounterLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises) =>
+    public static string? LethalCounterLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, bool raises, UnitNames? names = null) =>
         !raises && forecast.CounterIsLethal(unit.Hp, target.Hp)
-            ? $"  counter: lethal to {unit.Id} ({forecast.CounterIfAllLand} against {unit.Hp} hp)"
+            ? $"  Counter: lethal to {(names ?? UnitNames.None)[unit.Id]} ({forecast.CounterIfAllLand} against {unit.Hp} hp)"
             : null;
 
     /// <summary>
@@ -1311,7 +1314,7 @@ public sealed class PlaySession
     /// can leave, from one hit up to every strike the attack can make, crits aside. Silent when no outcome
     /// sends it anywhere.
     /// </summary>
-    private static IEnumerable<string> PendingRetreatLines(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast)
+    private static IEnumerable<string> PendingRetreatLines(BattleState state, GameContent content, BattleUnit unit, Coord tile, BattleUnit target, CombatForecast forecast, UnitNames names)
     {
         if (!state.Map.RetreatEnabled || !forecast.Attacker.Strikes)
         {
@@ -1323,7 +1326,7 @@ public sealed class PlaySession
         {
             if (RetreatRule.Pending(state, content, unit, tile, target, hpAfter) is { } refuge)
             {
-                yield return $"  {target.Id} would fall back to {refuge} at {hpAfter} hp";
+                yield return $"  {names[target.Id]} would fall back to {refuge} at {hpAfter} hp";
             }
         }
     }
@@ -1383,7 +1386,7 @@ public sealed class PlaySession
             return null;
         }
 
-        return $"if {unit.Id} waits here it braces (hit -{Brace.Hit}):\n"
+        return $"If {UnitNames.Of(state, content)[unit.Id]} waits here and braces (hit -{Brace.Hit}):\n"
             + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile), anvils: Queries.Anvils(after, content, braced, tile), refusals: Queries.Refusals(after, content, braced, tile));
     }
 
@@ -1427,9 +1430,11 @@ public sealed class PlaySession
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
         var where = $"{tile} ({state.Map.TerrainAt(tile, content).Name})";
+        var names = UnitNames.Of(state, content);
+        var name = names[unit.Id];
         if (wins)
         {
-            return $"threat on {unit.Id} at {where}: this move wins the map";
+            return $"Threat on {name} at {where}: this move wins the map";
         }
 
         var rows = new List<string>();
@@ -1439,25 +1444,25 @@ public sealed class PlaySession
         var blow = Queries.RaisedBlowOn(state, content, unit, tile);
         if (lines.Count == 0 && blow is null)
         {
-            rows.Add($"threat on {unit.Id} at {where}: no enemy {(dark ? "in sight " : "")}can strike {Referent.For(content, unit.Id, unit.Id).Object} next phase");
+            rows.Add($"threat on {name} at {where}: no enemy {(dark ? "in sight " : "")}can strike {names.Refer(unit.Id).Object} next phase");
         }
         else
         {
-            rows.Add($"threat on {unit.Id} at {where}:");
+            rows.Add($"threat on {name} at {where}:");
             if (blow is not null)
             {
-                rows.Add($"  {blow.Wielder.Id}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit from within its reach breaks it");
+                rows.Add($"  {names[blow.Wielder.Id]}'s raised blow lands here at the enemy phase start: {blow.Damage}, sure, unless a hit from within its reach breaks it");
             }
 
             foreach (var line in lines)
             {
                 var arrives = line.Arrives is { } at ? $" (arrives this enemy phase at {at})" : "";
-                var covered = line.CoveredBy is { } by ? $"covered by {by.Id}, strikes {by.Id} on {tile}, " : "";
+                var covered = line.CoveredBy is { } by ? $"covered by {names[by.Id]}, strikes {names[by.Id]} on {tile}, " : "";
                 var answers = line.CoveredBy ?? unit;
-                rows.Add($"  {line.Enemy.Id}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
+                rows.Add($"  {names[line.Enemy.Id]}{arrives} from {line.From} with {line.Weapon.Name}{Keepsake.Suffix(line.Enemy.Unit.Inventory.Items[line.Slot], content)} (slot {line.Slot + 1}): {covered}{(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, answers, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
                 if (line.Raises)
                 {
-                    rows.Add($"    windup: no strike; {line.Enemy.Id} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");
+                    rows.Add($"    windup: no strike; {names[line.Enemy.Id]} raises over {tile}, lands next enemy phase for {line.Forecast.Attacker.Damage}, sure, unless a hit from within its reach breaks it (not in the total)");
                 }
             }
 
@@ -1465,7 +1470,7 @@ public sealed class PlaySession
             {
                 var landing = state.Find(coverer.Id)?.At ?? coverer.At;
                 var worst = lines.Where(l => l.CoveredBy is not null).Max(l => l.IfAllLand);
-                rows.Add($"  if all land: the first strike swaps them; {coverer.Id} takes up to {worst} against {coverer.Hp} hp on {tile}, {unit.Id} lands on {landing}, and any strike after it is unpriced");
+                rows.Add($"  if all land: the first strike swaps them; {names[coverer.Id]} takes up to {worst} against {coverer.Hp} hp on {tile}, {name} lands on {landing}, and any strike after it is unpriced");
             }
             else
             {
@@ -1476,18 +1481,18 @@ public sealed class PlaySession
         foreach (var refusal in (refusals ?? Array.Empty<RefusalLine>()).Where(r => Dusk.Seen(state, r.Boss)))
         {
             var ends = refusal.Ends == refusal.Boss.At ? $"holds {refusal.Ends}" : $"ends on {refusal.Ends}";
-            rows.Add($"  {refusal.Boss.Id} could reach {refusal.Refused} but refuses it: too exposed there; {ends}");
+            rows.Add($"  {names[refusal.Boss.Id]} could reach {refusal.Refused} but refuses it: too exposed there; {ends}");
         }
 
         foreach (var anvil in (anvils ?? Array.Empty<AnvilLine>()).Where(a => Dusk.Seen(state, a.Anvil) && Dusk.Seen(state, a.Follower)))
         {
             var step = anvil.Tile == anvil.Anvil.At ? $"hold {anvil.Tile}" : $"step to {anvil.Tile}";
-            rows.Add($"  anvil: {anvil.Anvil.Id} could {step} so {anvil.Follower.Id} strikes you pinned from {anvil.From}");
+            rows.Add($"  anvil: {names[anvil.Anvil.Id]} could {step} so {names[anvil.Follower.Id]} strikes you pinned from {anvil.From}");
         }
 
         foreach (var blind in (unseeing ?? Array.Empty<BattleUnit>()).Where(e => Dusk.Seen(state, e)))
         {
-            rows.Add($"  {blind.Id}: cannot see you (dark)");
+            rows.Add($"  {names[blind.Id]}: cannot see you (dark)");
         }
 
         if (dark)
@@ -1500,12 +1505,12 @@ public sealed class PlaySession
 
         if (wakes is { Count: > 0 })
         {
-            rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{w.Group} ({WakeCauseText(w)})"))}");
+            rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
         }
 
         foreach (var group in asleep)
         {
-            rows.Add($"  group {group.Group} asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{m.Id} at {m.At}"))}");
+            rows.Add($"  {UnitNames.Group(group.Group)} is asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{names[m.Id]} at {m.At}"))}");
         }
 
         if (asleep.Count > 0)
@@ -1513,7 +1518,7 @@ public sealed class PlaySession
             rows.Add($"  {MapRenderer.WakeLegend(content)}");
         }
 
-        return string.Join("\n", rows);
+        return UnitNames.Sentence(string.Join("\n", rows));
     }
 
     /// <summary>Why a group wakes, as the wake event prints it: <c>called by ford</c> for a linked call, else the cause in lower case.</summary>
@@ -1525,14 +1530,15 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false)
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (raises)
         {
-            return $"forecast {unit.Id} -> {target.Id}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
+            return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"forecast {unit.Id} -> {target.Id}{where}{with}: {StrikeText(forecast.Attacker)}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) : ": none")}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) : ": none")}";
     }
 
     /// <summary>
@@ -1777,7 +1783,7 @@ public sealed class PlaySession
     {
         if (RivalryLine(_state, _content, unit, countering) is { } line)
         {
-            _out.WriteLine(line);
+            _out.WriteLine(UnitNames.Sentence(line));
         }
     }
 

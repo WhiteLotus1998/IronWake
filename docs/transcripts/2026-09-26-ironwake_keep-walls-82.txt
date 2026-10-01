@@ -396,7 +396,7 @@ Reinforcements arrive
 enemy: move archer-1 9,5
 Archer 1 moves 7,5 -> 9,5 via 8,5
 enemy: attack archer-1 ottilie
-forecast archer-1 -> ottilie: dmg 7 hit 76% crit 1%; counter: dmg 8 hit 82% crit 4%
+Forecast Archer 1 -> Ottilie: dmg 7 hit 76% crit 1%; counter: dmg 8 hit 82% crit 4%
 Archer 1 attacks Ottilie
   Archer 1 hits Ottilie for 7 (hp 10)
   Ottilie misses Archer 1
@@ -408,7 +408,7 @@ Archer 2 waits
 enemy: move brigand-1 10,7
 Brigand 1 moves 9,7 -> 10,7
 enemy: attack brigand-1 teodor
-forecast brigand-1 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
+Forecast Brigand 1 -> Teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
 Brigand 1 attacks Teodor
   Brigand 1 misses Teodor
   Teodor misses Brigand 1
@@ -424,7 +424,7 @@ Brigand 3 waits
 enemy: move soldier-1 10,4
 Soldier 1 moves 9,4 -> 10,4
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier 1 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
 Soldier 1 attacks Wren
   Soldier 1 hits Wren for 9 (hp 11)
   Wren hits Soldier 1 for 8 (hp 12)
@@ -464,7 +464,7 @@ e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+Forecast Pell -> Soldier 1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
 Pell attacks Soldier 1
   Pell hits Soldier 1 for 12 (hp 0)
   Pell hp 16, Soldier 1 hp 0
@@ -498,7 +498,7 @@ e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > attack ottilie archer-1
-forecast ottilie -> archer-1: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 76% crit 1%
+Forecast Ottilie -> Archer 1: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 76% crit 1%
 Ottilie attacks Archer 1
   Ottilie crits Archer 1 for 24 (hp 0)
   Ottilie hp 10, Archer 1 hp 0
@@ -531,7 +531,7 @@ e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > attack teodor brigand-1
-forecast teodor -> brigand-1: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Teodor -> Brigand 1: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
 Teodor attacks Brigand 1
   Teodor hits Brigand 1 for 12 (hp 10)
   Brigand 1 misses Teodor
@@ -620,7 +620,7 @@ e  soldier-2        Soldier L2 pikeman         5,7    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,7   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > end
-lethal if all land: wren (brigand-2 11 against 11 hp)
+Lethal if all land: Wren (Brigand 2 for 11, against 11 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 Reinforcements arrive
@@ -632,7 +632,7 @@ Archer 2 moves 3,7 -> 6,7 via 4,7 5,7
 enemy: wait archer-2
 Archer 2 waits
 enemy: attack brigand-1 teodor
-forecast brigand-1 -> teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
+Forecast Brigand 1 -> Teodor: dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
 Brigand 1 attacks Teodor
   Brigand 1 hits Teodor for 10 (hp 11)
   Teodor misses Brigand 1
@@ -640,7 +640,7 @@ Brigand 1 attacks Teodor
 enemy: move brigand-2 10,4
 Brigand 2 moves 9,3 -> 10,4 via 9,4
 enemy: attack brigand-2 wren
-forecast brigand-2 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand 2 -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
 Brigand 2 attacks Wren
   Brigand 2 misses Wren
   Wren hits Brigand 2 for 10 (hp 12)
@@ -689,7 +689,7 @@ h  soldier-3        Soldier L2 pikeman         0,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > attack ottilie brigand-2
-forecast ottilie -> brigand-2: dmg 8 hit 86% crit 5%; counter: none
+Forecast Ottilie -> Brigand 2: dmg 8 hit 86% crit 5%; counter: none
 Ottilie attacks Brigand 2
   Ottilie hits Brigand 2 for 8 (hp 0)
   Ottilie hp 10, Brigand 2 hp 0
@@ -723,7 +723,7 @@ h  soldier-3        Soldier L2 pikeman         0,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 11/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 > attack teodor brigand-1
-forecast teodor -> brigand-1: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Teodor -> Brigand 1: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
 Teodor attacks Brigand 1
   Teodor hits Brigand 1 for 12 (hp 0)
   Teodor hp 11, Brigand 1 hp 0
@@ -933,7 +933,7 @@ Reinforcements arrive
 enemy: move archer-2 9,7
 Archer 2 moves 6,7 -> 9,7 via 7,7 8,7
 enemy: attack archer-2 teodor
-forecast archer-2 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 2 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
 Archer 2 attacks Teodor
   Archer 2 hits Teodor for 5 (hp 6)
   Archer 2 hp 17, Teodor hp 6
@@ -1234,18 +1234,18 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 16/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
-lethal if all land: ottilie (archer-2 7, hexer-1 10 against 10 hp)
+Lethal if all land: Ottilie (Archer 2 for 7, Hexer for 10, against 10 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-2 captain
-forecast archer-2 -> captain: dmg 5 hit 68% crit 0%; counter: none
+Forecast Archer 2 -> Alder Fenn: dmg 5 hit 68% crit 0%; counter: none
 Archer 2 attacks Alder Fenn
   Archer 2 misses Alder Fenn
   Archer 2 hp 17, Alder Fenn hp 22
 enemy: move brigand-3 10,4
 Brigand 3 moves 6,4 -> 10,4 via 7,4 8,4 9,4
 enemy: attack brigand-3 dunstan
-forecast brigand-3 -> dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 3 -> Dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 3 attacks Dunstan
   Brigand 3 misses Dunstan
   Dunstan hits Brigand 3 for 11 (hp 11)
@@ -1258,7 +1258,7 @@ Brigand 4 waits
 enemy: move hexer-1 9,5
 Hexer moves 7,7 -> 9,5 via 7,6 7,5 8,5
 enemy: attack hexer-1 ottilie
-forecast hexer-1 -> ottilie: dmg 10 hit 98% crit 0%; counter: dmg 9 x2 hit 89% crit 4%
+Forecast Hexer -> Ottilie: dmg 10 hit 98% crit 0%; counter: dmg 9 x2 hit 89% crit 4%
 Hexer attacks Ottilie
   Hexer hits Ottilie for 10 (hp 0)
   Hexer hp 16, Ottilie hp 0
@@ -1266,7 +1266,7 @@ Ottilie falls at 11,5
 enemy: move soldier-2 10,7
 Soldier 2 moves 8,7 -> 10,7 via 9,7
 enemy: attack soldier-2 captain
-forecast soldier-2 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+Forecast Soldier 2 -> Alder Fenn: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
 Soldier 2 attacks Alder Fenn
   Soldier 2 hits Alder Fenn for 8 (hp 14)
   Alder Fenn hits Soldier 2 for 9 (hp 11)
@@ -1307,7 +1307,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 16/21  Plain
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack dunstan brigand-3
-forecast dunstan -> brigand-3: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
+Forecast Dunstan -> Brigand 3: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
 Dunstan attacks Brigand 3
   Dunstan hits Brigand 3 for 11 (hp 0)
   Dunstan hp 23, Brigand 3 hp 0
@@ -1424,7 +1424,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack teodor soldier-2
-forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier 2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 10 (hp 1)
   Soldier 2 hits Teodor for 8 (hp 8)
@@ -1513,11 +1513,11 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 8/21   Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
-lethal if all land: teodor (archer-2 5, soldier-2 8 against 8 hp)
+Lethal if all land: Teodor (Archer 2 for 5, Soldier 2 for 8, against 8 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-2 teodor
-forecast archer-2 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 2 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
 Archer 2 attacks Teodor
   Archer 2 hits Teodor for 5 (hp 3)
   Archer 2 hp 17, Teodor hp 3
@@ -1528,14 +1528,14 @@ Brigand 4 waits
 enemy: move hexer-1 10,4
 Hexer moves 9,5 -> 10,4 via 9,4
 enemy: attack hexer-1 dunstan
-forecast hexer-1 -> dunstan: dmg 11 hit 99% crit 1%; counter: dmg 12 hit 81% crit 0%
+Forecast Hexer -> Dunstan: dmg 11 hit 99% crit 1%; counter: dmg 12 hit 81% crit 0%
 Hexer attacks Dunstan
   Hexer hits Dunstan for 11 (hp 12)
   Dunstan hits Hexer for 12 (hp 4)
   Hexer hp 4, Dunstan hp 12
 Dunstan gains 12 exp (59)
 enemy: attack soldier-2 teodor
-forecast soldier-2 -> teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 2 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
 Soldier 2 attacks Teodor
   Soldier 2 misses Teodor
   Teodor misses Soldier 2
@@ -1659,7 +1659,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack captain soldier-2
-forecast captain -> soldier-2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Soldier 2
   Alder Fenn hits Soldier 2 for 9 (hp 0)
   Alder Fenn hp 14, Soldier 2 hp 0
@@ -1691,7 +1691,7 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack pell hexer-1
-forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 7 hit 99% crit 0%
+Forecast Pell -> Hexer with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 7 hit 99% crit 0%
 Pell attacks Hexer
   Pell hits Hexer for 8 (hp 0)
   Pell hp 16, Hexer hp 0
@@ -1774,18 +1774,18 @@ k  soldier-4        Soldier L2 pikeman         3,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
-lethal if all land: captain (archer-2 5, brigand-4 10 against 14 hp)
+Lethal if all land: Alder Fenn (Archer 2 for 5, Brigand 4 for 10, against 14 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack archer-2 captain
-forecast archer-2 -> captain: dmg 5 hit 68% crit 0%; counter: none
+Forecast Archer 2 -> Alder Fenn: dmg 5 hit 68% crit 0%; counter: none
 Archer 2 attacks Alder Fenn
   Archer 2 misses Alder Fenn
   Archer 2 hp 17, Alder Fenn hp 14
 enemy: move brigand-4 10,4
 Brigand 4 moves 9,4 -> 10,4
 enemy: attack brigand-4 dunstan
-forecast brigand-4 -> dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 4 -> Dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 4 attacks Dunstan
   Brigand 4 hits Dunstan for 8 (hp 4)
   Dunstan hits Brigand 4 for 11 (hp 11)
@@ -1827,7 +1827,7 @@ k  soldier-4        Soldier L2 pikeman         6,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain
 B  wren             Wren L1 cadet              12,3   hp 11/20  Plain
 > attack pell brigand-4
-forecast pell -> brigand-4 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Brigand 4 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 Pell attacks Brigand 4
   Pell hits Brigand 4 for 13 (hp 0)
   Pell hp 16, Brigand 4 hp 0
@@ -2008,20 +2008,20 @@ k  soldier-4        Soldier L2 pikeman         6,7    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain  done
 B  wren             Wren L1 cadet              11,4   hp 11/20  Plain  done
 > end
-lethal if all land: wren (archer-2 6, soldier-3 9 against 11 hp)
+Lethal if all land: Wren (Archer 2 for 6, Soldier 3 for 9, against 11 hp)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
 enemy: move archer-2 9,4
 Archer 2 moves 9,7 -> 9,4 via 9,6 9,5
 enemy: attack archer-2 wren
-forecast archer-2 -> wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 hits Wren for 6 (hp 5)
   Archer 2 hp 17, Wren hp 5
 enemy: move soldier-3 10,4
 Soldier 3 moves 8,3 -> 10,4 via 9,3 9,4
 enemy: attack soldier-3 wren
-forecast soldier-3 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier 3 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
 Soldier 3 attacks Wren
   Soldier 3 hits Wren for 9 (hp 0)
   Soldier 3 hp 20, Wren hp 0
@@ -2029,7 +2029,7 @@ Wren falls at 11,4
 enemy: move soldier-4 10,7
 Soldier 4 moves 6,7 -> 10,7 via 7,7 8,7 9,7
 enemy: attack soldier-4 captain
-forecast soldier-4 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+Forecast Soldier 4 -> Alder Fenn: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
 Soldier 4 attacks Alder Fenn
   Soldier 4 hits Alder Fenn for 8 (hp 6)
   Alder Fenn hits Soldier 4 for 9 (hp 11)

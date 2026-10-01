@@ -44,7 +44,7 @@ public class ClientPanelTests
             Queries.SleepingThreats(client.State, client.Content, captain, tile)!, Queries.Unseeing(client.State, client.Content, captain, tile), Queries.MoveWins(client.State, client.Content, captain, tile));
 
         Assert.Equal(expected, client.Threat(tile));
-        Assert.StartsWith("threat on captain at 3,4", client.Threat(tile));
+        Assert.StartsWith("Threat on Alder Fenn at 3,4", client.Threat(tile));
     }
 
     [Fact]

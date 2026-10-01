@@ -148,8 +148,8 @@ public class DuskLampsTests
         var hale = woken.Find("hale")!;
         var text = PlaySession.ThreatText(woken, Starter, hale, hale.At, Queries.Threats(woken, Starter, hale, hale.At)!, Queries.SleepingThreats(woken, Starter, hale, hale.At)!, Queries.Unseeing(woken, Starter, hale, hale.At));
 
-        Assert.Contains("  soldier-1 from ", text);
-        Assert.Contains("if all land:", text);
+        Assert.Contains("  Soldier from ", text);
+        Assert.Contains("If all land:", text);
 
         var asleep = Start();
         var dark = PlaySession.ThreatText(asleep, Starter, asleep.Find("hale")!, new Coord(3, 0), Queries.Threats(asleep, Starter, asleep.Find("hale")!, new Coord(3, 0))!, Queries.SleepingThreats(asleep, Starter, asleep.Find("hale")!, new Coord(3, 0))!, Queries.Unseeing(asleep, Starter, asleep.Find("hale")!, new Coord(3, 0)));

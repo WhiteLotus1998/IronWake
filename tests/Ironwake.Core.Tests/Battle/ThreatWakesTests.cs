@@ -50,7 +50,7 @@ public class ThreatWakesTests
         var wakes = Queries.StopWakes(state, Starter, Captain(state), new Coord(4, 2))!;
 
         Assert.Equal(new[] { ("ford", WakeCause.Proximity, (string?)null), ("weir", WakeCause.Call, "ford") }, wakes.Select(w => (w.Group, w.Cause, w.CalledBy)));
-        Assert.Contains("\n  stopping here wakes: ford (proximity), weir (called by ford)", Text(state, new Coord(4, 2)));
+        Assert.Contains("\n  Stopping here wakes: the ford group (proximity), the weir group (called by the ford group)", Text(state, new Coord(4, 2)));
     }
 
     [Fact]

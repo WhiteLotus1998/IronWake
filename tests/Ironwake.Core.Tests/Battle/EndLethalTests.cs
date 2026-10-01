@@ -58,7 +58,7 @@ public sealed class EndLethalTests
         Assert.Equal("hale", lethal.Unit.Id);
         Assert.Equal(total, lethal.Total);
         Assert.Equal(new[] { "soldier-1" }, lethal.Strikers.Select(s => s.Enemy.Id));
-        Assert.Equal($"lethal if all land: hale (soldier-1 {total} against {total} hp)", PlaySession.LethalLine(lethal));
+        Assert.Equal($"Lethal if all land: hale (Soldier for {total}, against {total} hp)", PlaySession.LethalLine(lethal, UnitNames.Of(state, Starter)));
     }
 
     [Fact]
@@ -157,6 +157,6 @@ public sealed class EndLethalTests
         var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
         var transcript = File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-541.txt")).ReplaceLineEndings("\n");
 
-        Assert.Contains("> end\nlethal if all land: wren (brigand-1 11 against 11 hp)\n-- Player phase ends, turn 7 --\n-- Enemy phase, turn 7 --\n", transcript);
+        Assert.Contains("> end\nLethal if all land: Wren (Brigand for 11, against 11 hp)\n-- Player phase ends, turn 7 --\n-- Enemy phase, turn 7 --\n", transcript);
     }
 }
