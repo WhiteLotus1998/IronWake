@@ -54,7 +54,7 @@ public static class ContentLoader
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList()) : CampaignRules.None;
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList(), cast.Count > 0 ? cast[0] : null) : CampaignRules.None;
         var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
         if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
         {
@@ -120,7 +120,7 @@ public static class ContentLoader
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
-        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain, IReadOnlyList<string> cast)
+        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain, IReadOnlyList<string> cast, Unit? captain)
     {
         JsonDocument document;
         try
@@ -362,7 +362,70 @@ public static class ContentLoader
             Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,
             Forge = forge,
+            Origins = ParseOrigins(root, captain),
         };
+    }
+
+    /// <summary>
+    /// The optional <c>origins</c> array (issue 681): the captain's origins, each an <c>id</c>
+    /// (unique), a <c>name</c>, and <c>stats</c> and <c>growths</c> as deltas on the cast's captain,
+    /// keyed as a cast entry's are. Each delta set sums to 0, no stat of the captain's card may fall
+    /// below 0, and no growth may leave 0 to 100.
+    /// </summary>
+    private static ValueList<CaptainOrigin> ParseOrigins(EntryNode root, Unit? captain)
+    {
+        var origins = new List<CaptainOrigin>();
+        var index = 0;
+        foreach (var element in root.ArrayOrEmpty("origins"))
+        {
+            var node = new EntryNode(root.File, "origins[" + index + "]", element);
+            if (element.ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error(null, "must be an object");
+            }
+
+            var id = node.String("id");
+            node = node.WithEntry(id);
+            if (origins.Any(o => o.Id == id))
+            {
+                throw node.Error("id", "is listed twice");
+            }
+
+            if (captain is null)
+            {
+                throw node.Error("id", "an origin needs a cast, whose first entry is the captain it changes");
+            }
+
+            var name = node.String("name");
+            var stats = ParseStats(node.Object("stats"), allRequired: false);
+            var growths = ParseStats(node.Object("growths"), allRequired: false);
+            foreach (var (field, deltas) in new[] { ("stats", stats), ("growths", growths) })
+            {
+                if (CaptainOrigin.Sum(deltas) != 0)
+                {
+                    throw node.Error(field, $"sums to {CaptainOrigin.Sum(deltas)}; an origin moves the captain's card, it does not grow it, so each set sums to 0");
+                }
+            }
+
+            foreach (var stat in Stats.All)
+            {
+                var key = StatKeys[(int)stat];
+                if (captain.Stats.Get(stat) + stats.Get(stat) < 0)
+                {
+                    throw node.Error("stats." + key, $"takes the captain's {key} to {captain.Stats.Get(stat) + stats.Get(stat)}; a stat is at least 0");
+                }
+
+                if (captain.Growths.Get(stat) + growths.Get(stat) is var growth && (growth < 0 || growth > 100))
+                {
+                    throw node.Error("growths." + key, $"takes the captain's {key} growth to {growth}; a growth is 0 to 100");
+                }
+            }
+
+            origins.Add(new CaptainOrigin(id, name, stats, growths));
+            index++;
+        }
+
+        return ValueList<CaptainOrigin>.From(origins);
     }
 
     /// <summary>

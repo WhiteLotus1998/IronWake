@@ -28,6 +28,10 @@ public partial class Main
     private int _newDifficulty;
     private bool _newPermadeath = true;
 
+    /// <summary>New game's captain (issue 681): the origin's index in the campaign's origins and the pronoun.</summary>
+    private int _newOrigin;
+    private Pronoun _newCaptain = Pronoun.He;
+
     /// <summary>The end-turn confirm's lines while it is up, else null.</summary>
     private IReadOnlyList<string>? _confirm;
 
@@ -235,6 +239,12 @@ public partial class Main
             case Screen.NewGame when name == "P":
                 _newPermadeath = !_newPermadeath;
                 break;
+            case Screen.NewGame when name == "O":
+                _newOrigin++;
+                break;
+            case Screen.NewGame when name == "G":
+                _newCaptain = NextCaptain(_newCaptain);
+                break;
             case Screen.Load when name == "Esc":
                 _screen = Screen.CampaignTitle;
                 break;
@@ -250,7 +260,7 @@ public partial class Main
                 LoadCampaign(newest);
                 break;
             case TitleChoice.NewGame:
-                (_screen, _newDifficulty, _newPermadeath) = (Screen.NewGame, NewGameDefault(), true);
+                (_screen, _newDifficulty, _newPermadeath, _newOrigin, _newCaptain) = (Screen.NewGame, NewGameDefault(), true, 0, Pronoun.He);
                 break;
             case TitleChoice.Load:
                 _screen = Screen.Load;
@@ -270,12 +280,17 @@ public partial class Main
     /// <summary>The difficulty New game opens on: the campaign's normal one where it is offered, else the first.</summary>
     private int NewGameDefault() => Math.Max(0, NewGameDifficulties().ToList().FindIndex(d => d.Id == CampaignRecord.NormalDifficulty));
 
+    /// <summary>The captain pronoun New game steps to from <paramref name="current"/> (issue 681): he, then she.</summary>
+    private static Pronoun NextCaptain(Pronoun current) => current == Pronoun.He ? Pronoun.She : Pronoun.He;
+
     /// <summary>Starts a fresh campaign on New game's picks.</summary>
     private void BeginNewGame()
     {
         var difficulties = NewGameDifficulties();
         var difficulty = difficulties[_newDifficulty % difficulties.Count];
-        StartCampaign(CampaignRecord.Start(_content!, _seed, difficulty.Id, _newPermadeath));
+        var origins = _content!.Campaign.Origins;
+        var origin = origins.Count == 0 ? null : origins[_newOrigin % origins.Count].Id;
+        StartCampaign(CampaignRecord.Start(_content!, _seed, difficulty.Id, _newPermadeath, origin, origins.Count == 0 ? null : _newCaptain));
     }
 
     /// <summary>Loads the save <paramref name="name"/> into the campaign, or says why it cannot be.</summary>
@@ -406,7 +421,7 @@ public partial class Main
         UiText(new Vector2(centre, ViewHeight - 28), Screens.TitleFooter, Muted, 12, centred: true);
     }
 
-    /// <summary>New game (issue 677): the difficulty and permadeath, each a row a click or its key steps on, then Enter begins.</summary>
+    /// <summary>New game (issue 677): the difficulty and permadeath, and the captain's origin and pronoun (issue 681), each a row a click or its key steps on, then Enter begins.</summary>
     private void DrawNewGame()
     {
         Heading("NEW GAME");
@@ -416,6 +431,14 @@ public partial class Main
         var y = 120f;
         MenuRow(y, lines[0], null, "D", false, () => _newDifficulty++);
         MenuRow(y + 54, lines[1], null, "P", false, () => _newPermadeath = !_newPermadeath);
+        var captain = Screens.CaptainLines(_content!, _newOrigin, _newCaptain);
+        if (captain.Count > 0)
+        {
+            MenuRow(y + 108, captain[0], null, "O", false, () => _newOrigin++);
+            MenuRow(y + 162, captain[1], null, "G", false, () => _newCaptain = NextCaptain(_newCaptain));
+            y += 108;
+        }
+
         MenuRow(y + 128, "Begin", null, "Enter", true, BeginNewGame);
         KeyRow(64, ViewHeight - 33, new (string, string, Action)[] { ("Esc", "back to the title", () => _screen = Screen.CampaignTitle) });
     }

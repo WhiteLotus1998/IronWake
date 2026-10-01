@@ -47,6 +47,13 @@ public sealed record Unit(
     /// </summary>
     public Wound? Wound { get; init; }
 
+    /// <summary>
+    /// The pronoun chosen for this unit at a campaign's start (issue 681, the captain's gender), or
+    /// null to read the cast file's (<see cref="GameContent.Pronouns"/>). Text that refers back to
+    /// the unit reads it through <see cref="Referent.For(GameContent, Unit)"/>.
+    /// </summary>
+    public Pronoun? Pronoun { get; init; }
+
     /// <summary>Whether this unit may equip <paramref name="weapon"/>: its class uses the type and its rank in the type reaches the weapon's.</summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
         unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank;

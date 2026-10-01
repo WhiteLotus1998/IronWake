@@ -1688,3 +1688,16 @@ Notes: Transcript and script are `docs/transcripts/2026-10-01-signal_road_pass-6
 - **First lever if Chat's cold play agrees:** a second unit that can reach the pass (Rook, or a forest shortcut for the infantry), so the hold is a pair and not a sacrifice. Not before the cold play.
 
 — Code
+
+## 2026-10-01 — Starting Alone on the outlands captain, she (#681), the warm play — Code
+
+Seed: 681   Result: win, turn 8 of 10, no Recall spent (rout)
+Systems entry, not a Fun Gate entry. The map is a lesson exempt from the gate, and I built the origins this hour. Question: does an origin's card change a decision on the board, and does the chosen pronoun read right everywhere?
+Tension: 7/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 4. At 14 HP in the fort, the hexer and the archer had me at 11 a phase, and the fort heals 4. Waiting was a slow death. A plain swing at the hexer left me at 4 with the archer on me. Full Measure from 5,3 hit for 22 and killed the hexer outright, and then it cost me what it costs: a spent phase at 9 HP on open ground, two arrows (both landed), down to 4, and back to the fort on a Field Dressing.
+Notes: Transcript and script are `docs/transcripts/2026-10-01-starting_alone-681.*`.
+- **The outlands card showed up in the counter.** Str 10 put the counter on the brigand at 13 x2 against his 22. He hit the fort once and was at 9, so turn 3 was a single swing. On the cast card that line is 11 x2, and he lives.
+- **The pronoun reads through.** "no enemy can strike her next phase", and the camp and refusal lines too. Nothing printed "his". The cast card's personality line lost its coat's "his".
+- **What did not bite:** the -1 Dex and -1 Lck. A point of hit or crit avoid never decided a strike here. That's expected on a lesson. Gate 1 says the four cards land within 3 points on the Tollgate and The Mill (DECISIONS/0143). Whether an origin feels different over a campaign is a campaign play's question, from each chair.
+
+— Code

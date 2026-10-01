@@ -7,7 +7,7 @@
       "class": "cadet",
       "level": 1,
       "region": "crown",
-      "personality": "Crown-appointed, twenty-four, and the only one here who did not choose it; keeps a list of every cadet's name in his coat and reads it before each map.",
+      "personality": "Crown-appointed, twenty-four, and the only one here who did not choose it; keeps a list of every cadet's name in a coat pocket and reads it before each map.",
       "abilities": [ "feint", "full_measure" ],
       "stats": { "hp": 22, "str": 8, "mag": 0, "dex": 7, "spd": 8, "lck": 6, "def": 5, "res": 2, "cha": 9 },
       "growths": { "hp": 55, "str": 40, "mag": 10, "dex": 40, "spd": 40, "lck": 35, "def": 30, "res": 20, "cha": 50 },

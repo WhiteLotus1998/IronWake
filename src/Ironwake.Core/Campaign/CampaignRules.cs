@@ -80,6 +80,12 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The forge's numbers (issue 647); <see cref="ForgeRules.None"/> when the campaign has no <c>forge</c>.</summary>
     public ForgeRules Forge { get; init; } = ForgeRules.None;
 
+    /// <summary>The captain's origins (issue 681), in file order; empty when the campaign offers none and the captain is the cast file's.</summary>
+    public ValueList<CaptainOrigin> Origins { get; init; } = ValueList<CaptainOrigin>.Empty;
+
+    /// <summary>The origin <paramref name="originId"/>, or null when the campaign has none by that id.</summary>
+    public CaptainOrigin? Origin(string originId) => Origins.FirstOrDefault(o => o.Id == originId);
+
     /// <summary>
     /// The index of the map <paramref name="unitId"/> arrives on (issue 632), or -1 for a unit no
     /// map names, who is on the roster from the first map.

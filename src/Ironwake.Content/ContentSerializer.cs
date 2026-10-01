@@ -133,6 +133,22 @@ public static class ContentSerializer
                 writer.WriteEndObject();
             }
 
+            if (campaign.Origins.Count > 0)
+            {
+                writer.WriteStartArray("origins");
+                foreach (var origin in campaign.Origins)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("id", origin.Id);
+                    writer.WriteString("name", origin.Name);
+                    WriteStats(writer, "stats", origin.Stats);
+                    WriteStats(writer, "growths", origin.Growths);
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
+
             if (campaign.Keep != KeepMenu.None)
             {
                 writer.WriteStartObject("keep");

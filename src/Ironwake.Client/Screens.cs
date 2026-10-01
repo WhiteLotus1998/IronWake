@@ -67,6 +67,27 @@ public static class Screens
         "Permadeath: " + (permadeath ? "on, the fallen stay fallen" : $"off, the fallen come back wounded for {Wound.MainMaps} maps"),
     };
 
+    /// <summary>
+    /// New game's captain lines (issue 681): the origin picked with what it moves on the captain's
+    /// card, then the pronoun text uses for the captain. Empty when the campaign offers no origins.
+    /// </summary>
+    public static IReadOnlyList<string> CaptainLines(GameContent content, int origin, Pronoun captain)
+    {
+        if (content.Campaign.Origins.Count == 0)
+        {
+            return Array.Empty<string>();
+        }
+
+        var picked = content.Campaign.Origins[origin % content.Campaign.Origins.Count];
+        var moves = Stats.All.Where(s => picked.Stats.Get(s) != 0).Select(s => $"{s} {picked.Stats.Get(s):+0;-0}");
+        var words = Referent.For(captain, content.Cast[0].Name);
+        return new[]
+        {
+            $"Origin: {picked.Name}, {string.Join(" ", moves)}",
+            $"Captain: {content.Cast[0].Name}, {words.Subject}/{words.Object}",
+        };
+    }
+
     /// <summary>The one dry line under the title menu (issue 677): the game's name and the rules version.</summary>
     public static string TitleFooter => $"Ironwake, rules version {RulesVersion.Current}";
 

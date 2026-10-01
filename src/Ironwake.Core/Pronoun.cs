@@ -22,6 +22,13 @@ public sealed record Referent(string Subject, string Object, string Possessive, 
     public static Referent For(GameContent content, string unitId, string name) =>
         content.Pronouns.TryGetValue(unitId, out var pronoun) ? For(pronoun, name) : new Referent(name, name, name + "'s", false, name);
 
+    /// <summary>
+    /// How a line refers to <paramref name="unit"/> after naming it by its id: the pronoun chosen
+    /// for it (<see cref="Unit.Pronoun"/>, issue 681), else the cast file's, else its id.
+    /// </summary>
+    public static Referent For(GameContent content, Unit unit) =>
+        unit.Pronoun is { } chosen ? For(chosen, unit.Id) : For(content, unit.Id, unit.Id);
+
     /// <summary>The words for <paramref name="pronoun"/>.</summary>
     public static Referent For(Pronoun pronoun, string name) => pronoun switch
     {
