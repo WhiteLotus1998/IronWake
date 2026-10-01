@@ -126,7 +126,7 @@ Do not fix anything. Do not open PRs.
 
 ## 4. Partner routine (webhook trigger, fired by `.github/workflows/partner.yml`)
 
-Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Comments on issues labeled `fork` are routed the same way, so a ruling from Lotus is applied within minutes. Secrets: `IRONWAKE_PARTNER_URL` (the routine's fire URL) and `IRONWAKE_PARTNER_TOKEN` (generated from the routine's API trigger in the web UI; shown once). The fire call needs the `anthropic-beta: experimental-cc-routine-2026-04-01` and `anthropic-version: 2023-06-01` headers, which the workflow sends. Pacing: a partner gets three posts an hour. A wake beyond that is not dropped; the workflow waits until the oldest of the three leaves the trailing hour, then fires, so a long argument runs to its end at about a round every twenty minutes (Lotus, 2026-09-16: back-and-forth is fine, excess is not, and the design should be properly planned). Hard stop at eight comments in an hour. A refused wake (routine paused or daily cap) is logged, not failed. Both prompts tell a partner to batch its points and make its third post in an hour a summary of what is settled. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
+Routines offer no issue-comment trigger, so both conversational routines use the webhook trigger. The `partner.yml` workflow runs on every new comment on an issue labeled `design-table` and routes by signature: "— Chat" wakes this routine, "— Code" or "— Critic" wakes the Chat routine (section 5), unsigned (Lotus) wakes both. Comments on issues labeled `fork` are routed the same way, so a ruling from Lotus is applied within minutes. Secrets: `IRONWAKE_PARTNER_URL` (the routine's fire URL) and `IRONWAKE_PARTNER_TOKEN` (generated from the routine's API trigger in the web UI; shown once). The fire call needs the `anthropic-beta: experimental-cc-routine-2026-04-01` and `anthropic-version: 2023-06-01` headers, which the workflow sends. Pacing: a partner gets three posts an hour. A wake beyond that is not dropped; the workflow waits until the oldest of the three leaves the trailing hour, then fires, so a long argument runs to its end at about a round every twenty minutes (Lotus, 2026-09-16: back-and-forth is fine, excess is not, and the design should be properly planned). Hard stop at eight comments in an hour. Debounce (2026-10-01, after two Chat runs answered one burst in parallel with conflicting pitches): every wake waits 90 seconds, then stands down for any partner a newer comment on the issue will wake anyway, so a burst wakes each partner once. Both prompts also re-read the thread just before posting and never post a second answer to comments their own signature already answered. A refused wake (routine paused or daily cap) is logged, not failed. Both prompts tell a partner to batch its points and make its third post in an hour a summary of what is settled. If a routine's secrets are absent the workflow skips it and the nightly Builder answers on a one-day cadence.
 
 ```
 You are Code, the design partner on Ironwake. A new comment landed on
@@ -145,6 +145,10 @@ by --script and answer with a PLAYTEST.md entry.
 
 Sign "— Code". Do not build features in this routine; that's the
 Builder's job. Keep replies as long as they need to be and no longer.
+
+Just before you post, re-read the thread. If a comment signed "— Code"
+landed after this run began, it already answered: post only what it
+left open, or nothing.
 ```
 
 ---
@@ -163,6 +167,10 @@ nothing. If the thread has gone back and forth three times on one point
 without new information, do not post another round; say in one line
 that it is settled by play, and only once. Do not push code and do not
 open PRs; direction is yours, code is Code's.
+Just before you post, re-read the thread. If a comment signed "— Chat"
+landed after this run began, another wake already answered: post only
+what it left open, or nothing. Never post two answers to the same
+comments.
 ```
 
 ---

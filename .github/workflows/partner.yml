@@ -8,6 +8,10 @@ name: partner
 # fires, so a long argument runs to its end at a round every twenty minutes
 # instead of dying at an hour boundary. Hard stop: eight comments in an hour.
 # A refused wake (routine paused, daily cap) is logged, not failed.
+# Debounce: a wake waits 90 seconds, then stands down for any partner that a
+# newer comment on the same issue will wake anyway, since that later wake
+# reads the whole thread. A burst of comments wakes each partner once, so two
+# runs of one partner never answer the same comments in parallel.
 # Only the owner's account wakes anything: every partner, routine, and
 # Critic posts from it, so a comment from any other account is a stranger
 # on a public repo, and the job is skipped before any secret is loaded.
@@ -37,6 +41,7 @@ jobs:
           COMMENT_BODY: ${{ github.event.comment.body }}
           COMMENT_URL: ${{ github.event.comment.html_url }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          COMMENT_ID: ${{ github.event.comment.id }}
         run: |
           since="$(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ)"
           recent_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?since=$since&per_page=100" 2>/dev/null || echo '[]')"
@@ -54,6 +59,30 @@ jobs:
             *)                                                    target=both ;;
           esac
           echo "routing to: $target"
+
+          # Debounce: let a burst settle, then leave each partner to the
+          # newest comment that would wake it.
+          sleep 90
+          newer_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?per_page=100&since=$since" 2>/dev/null || echo '[]')"
+          newer_targets="$(printf '%s' "$newer_json" | jq -r --argjson id "$COMMENT_ID" --arg owner "$COMMENT_AUTHOR" '
+            [.[] | select(.id > $id and .user.login == $owner) | (.body | gsub(""; "") | .[-200:])
+             | if test("(—|--) Chat") then "partner"
+               elif test("(—|--) (Code|Critic)") then "chat"
+               else "both" end] | unique | join(" ")')"
+          echo "newer comments route to: ${newer_targets:-none}"
+          covered() { case " $newer_targets " in *" $1 "*|*" both "*) return 0 ;; *) return 1 ;; esac; }
+          case "$target" in
+            partner) covered partner && target=none ;;
+            chat)    covered chat && target=none ;;
+            both)    if covered partner && covered chat; then target=none
+                     elif covered partner; then target=chat
+                     elif covered chat; then target=partner; fi ;;
+          esac
+          if [ "$target" = none ]; then
+            echo "a newer comment wakes the same partner; standing down"
+            exit 0
+          fi
+          echo "after debounce, routing to: $target"
 
           # Wait until the named signer has fewer than three posts in the trailing hour.
           pace() {
