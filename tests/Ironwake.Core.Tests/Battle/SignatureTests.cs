@@ -339,7 +339,7 @@ public class SignatureTests
 
         var text = PlaySession.ForecastText(state, Starter, ottilie, brigand, forecast, ottilie.At, fromTile: false);
 
-        Assert.Contains($"  Signature: ottilie refuses this strike: {forecast.Attacker.DisplayedHit} is under 65", text);
+        Assert.Contains($"  Signature: Ottilie refuses this strike: {forecast.Attacker.DisplayedHit} is under 65", text);
     }
 
     // The ledger and the orders interlock (issue 540): a soldier on a fort reads 60 alone and 68
@@ -428,13 +428,13 @@ public class SignatureTests
         var wren = ordered.Find("wren")!;
         var brigand = ordered.Find("brigand-1")!;
         var text = PlaySession.ForecastText(ordered, Starter, wren, brigand, Queries.Forecast(ordered, Starter, wren, brigand)!, wren.At, fromTile: false);
-        Assert.Contains("  Signature: teodor's orders: wren hit +5", text);
+        Assert.Contains("  Signature: Teodor's orders: Wren hit +5", text);
 
         var watched = Start(true, Yard, WatchedLine);
         var teodor = watched.Find("teodor")!;
         var target = watched.Find("brigand-1")!;
         var own = PlaySession.ForecastText(watched, Starter, teodor, target, Queries.Forecast(watched, Starter, teodor, target)!, teodor.At, fromTile: false);
-        Assert.Contains("  Signature: teodor hit -10 (ally within 2)", own);
+        Assert.Contains("  Signature: Teodor hit -10 (ally within 2)", own);
 
         var plain = Start(false, Yard, WatchedLine);
         Assert.DoesNotContain("signature", PlaySession.ForecastText(plain, Starter, plain.Find("teodor")!, plain.Find("brigand-1")!, Queries.Forecast(plain, Starter, plain.Find("teodor")!, plain.Find("brigand-1")!)!, plain.Find("teodor")!.At, fromTile: false));

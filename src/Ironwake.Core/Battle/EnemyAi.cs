@@ -563,11 +563,14 @@ public static class EnemyAi
     /// </summary>
     public sealed record GrudgeStrike(string SwornId, double Score, string? AlternativeId, double? AlternativeScore)
     {
-        /// <summary>The log line for <paramref name="unitId"/>'s grudge strike, plain ASCII, scores to one decimal.</summary>
-        public string Line(string unitId) =>
-            FormattableString.Invariant($"grudge: {unitId} strikes sworn {SwornId} (score {Score:0.0}); ")
+        /// <summary>
+        /// The log line for <paramref name="unitId"/>'s grudge strike, plain ASCII, scores to one
+        /// decimal; units by the names a reader sees when <paramref name="names"/> is given (issue 615).
+        /// </summary>
+        public string Line(string unitId, UnitNames? names = null) =>
+            FormattableString.Invariant($"grudge: {(names ?? UnitNames.None)[unitId]} strikes sworn {(names ?? UnitNames.None)[SwornId]} (score {Score:0.0}); ")
             + (AlternativeId is { } other
-                ? FormattableString.Invariant($"best alternative {other} (score {AlternativeScore:0.0})")
+                ? FormattableString.Invariant($"best alternative {(names ?? UnitNames.None)[other]} (score {AlternativeScore:0.0})")
                 : "no other strike in reach");
     }
 
@@ -575,9 +578,10 @@ public static class EnemyAi
     /// The grudge line to print beside <paramref name="command"/> in an enemy phase (issue 331):
     /// asked on the board before the unit's first command, so a Move and the Attack after it
     /// share one answer. <paramref name="pending"/> holds the answer between the two.
-    /// Returns the line when the command is the grudge strike, else null.
+    /// Returns the line when the command is the grudge strike, else null; units by the names a
+    /// reader sees when <paramref name="names"/> is given (issue 615), by id for a script's comment.
     /// </summary>
-    public static string? GrudgeLog(BattleState state, GameContent content, Command command, Dictionary<string, GrudgeStrike?> pending)
+    public static string? GrudgeLog(BattleState state, GameContent content, Command command, Dictionary<string, GrudgeStrike?> pending, UnitNames? names = null)
     {
         var id = command switch { Move m => m.UnitId, Attack a => a.UnitId, _ => null };
         if (id is null || state.Find(id) is not { Side: Side.Enemy } unit || unit.Grudge is null)
@@ -590,7 +594,7 @@ public static class EnemyAi
             pending[id] = GrudgeChoice(state, content, unit);
         }
 
-        return command is Attack attack && pending[id] is { } choice && choice.SwornId == attack.TargetId ? choice.Line(id) : null;
+        return command is Attack attack && pending[id] is { } choice && choice.SwornId == attack.TargetId ? choice.Line(id, names) : null;
     }
 
     /// <summary>

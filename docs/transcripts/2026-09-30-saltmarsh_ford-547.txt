@@ -1991,7 +1991,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 Bandit Leader heals 5 (hp 14)
 enemy: attack bandit_leader-1 wren 2
 Forecast Bandit Leader -> Wren with Steel Axe: dmg 17 hit 36% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
-  Brace: wren braced: bandit_leader-1 hit -15
+  Brace: Wren braced: Bandit Leader hit -15
 Bandit Leader equips Steel Axe
 Bandit Leader attacks Wren
   Bandit Leader misses Wren
@@ -2007,7 +2007,7 @@ enemy: move soldier-2 8,4
 Soldier 2 moves 6,6 -> 8,4 via 6,5 6,4 7,4
 enemy: attack soldier-2 captain
 Forecast Soldier 2 -> Alder Fenn: dmg 8 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
-  Brace: captain braced: soldier-2 hit -15
+  Brace: Alder Fenn braced: Soldier 2 hit -15
 Soldier 2 attacks Alder Fenn
   Soldier 2 misses Alder Fenn
   Alder Fenn hits Soldier 2 for 9 (hp 11)

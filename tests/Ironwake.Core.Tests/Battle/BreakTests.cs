@@ -222,6 +222,19 @@ public class BreakTests
     }
 
     [Fact]
+    public void TheBreakLineNamesUnitsAsAReaderSeesThemWhenGivenNames()
+    {
+        var state = Wounded(breaks: true, hp: 1);
+        var names = UnitNames.Of(state, Starter);
+
+        var line = Assert.Single(PlaySession.BreakLines(state, Starter, state.Find("hale")!, state.Find("bandit_leader-1")!, names));
+
+        Assert.StartsWith($"  break if {names["bandit_leader-1"]} falls: {names["archer-1"]} (1/", line);
+        Assert.DoesNotContain("bandit_leader-1", line);
+        Assert.DoesNotContain("archer-1", line);
+    }
+
+    [Fact]
     public void TheBreakHeaderRoundTripsAndTheSampleCarriesIt()
     {
         var map = MapFixture.Parse(Field(true), "field.map");

@@ -191,6 +191,18 @@ public class PincerTests
     }
 
     [Fact]
+    public void ThePincerLineNamesUnitsAsAReaderSeesThemWhenGivenNames()
+    {
+        var state = Start(Pinned);
+        var names = UnitNames.Of(state, Starter);
+
+        var lines = PlaySession.PincerLines(state, state.Find("hale")!, state.Find("brigand-1")!, names).ToList();
+
+        Assert.Equal(new[] { $"  pincer: {names["brigand-1"]} pinned by {names["wren"]}: {names["hale"]} hit +15" }, lines);
+        Assert.DoesNotContain("brigand-1", lines[0]);
+    }
+
+    [Fact]
     public void ThePincerHeaderRoundTripsAndTheSampleCarriesIt()
     {
         var map = MapFixture.Parse(Field(true, Pinned), "field.map");
