@@ -303,10 +303,12 @@ public class ClientBeatsTests
     public void EachStrikesNumberLandsOneStepAfterTheLast()
     {
         var client = TurnFour();
+        client.SceneSetting = SceneSetting.MapOnly;
         client.Submit(new EndPhase());
         StepUntil(client, "Bandit Leader attacks Teodor");
 
         var beat = Assert.Single(client.Beats);
+        Assert.Null(beat.Scene);
         var times = Rhythm.PopTimes(beat);
         Assert.Equal(Rhythm.Lead, times[0]);
         for (var j = 1; j < times.Count; j++)

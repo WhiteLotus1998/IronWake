@@ -1,0 +1,321 @@
+using Godot;
+using Ironwake.Client;
+using Ironwake.Core;
+using CoreSide = Ironwake.Core.Side;
+
+namespace Ironwake.Godot;
+
+/// <summary>
+/// The battle scene (issue 535, slice 1): a combat the setting picks plays over the board as
+/// both combatants' clips, read from the generated sheets at ART_SPEC's names (mirrored for the
+/// right side, tinted with the side's colour, 0105), on a backdrop banded from each side's
+/// ground. Hit-stop holds the contact frame, the number rises there, the effects lay on the
+/// struck body, and the frame shakes by the scene's own measure. The scene is the strike beat
+/// itself, timed by <see cref="BattleScene"/>, so the board's HP under it keeps time, and Space
+/// or C ends it on the state the protocol already has. After a combat that levels, the level-up
+/// card shows whatever the setting. B steps the setting; its chip sits at the top bar's end.
+/// </summary>
+public partial class Main
+{
+    /// <summary>The scene's frame on the 1280x720 view.</summary>
+    private static readonly Rect2 SceneFrame = new(190, 120, 900, 430);
+
+    /// <summary>How far the ground line sits above the frame's foot.</summary>
+    private const float SceneGround = 92;
+
+    /// <summary>How long a number rises off a struck body in the scene.</summary>
+    private const float ScenePopLife = 0.8f;
+
+    /// <summary>How far above the feet a body's centre sits on a clip: the effect pivot's 128 under the clip pivot's 232.</summary>
+    private const float BodyCentre = 104;
+
+    private readonly Dictionary<string, Texture2D?> _sheets = new();
+
+    /// <summary>A whole sheet at its own size, loaded once, or null when no file is on disk.</summary>
+    private Texture2D? Sheet(string name)
+    {
+        if (_sheets.TryGetValue(name, out var known))
+        {
+            return known;
+        }
+
+        var texture = ArtImage(name) is { } image ? ImageTexture.CreateFromImage(image) : null;
+        _sheets[name] = texture;
+        return texture;
+    }
+
+    /// <summary>The setting's chip at the top bar's right end: the B key and the setting in force.</summary>
+    private void DrawSceneChip()
+    {
+        var value = Scenes.Label(_client!.SceneSetting)["scenes: ".Length..];
+        var label = "SCENES  B";
+        var width = UiWidth(label, 10, bold: true) + UiWidth(value, 14, bold: true) + 36;
+        Chip(ViewWidth - Margin - width, label, value, Ink);
+    }
+
+    /// <summary>The beat whose scene or level-up card is on show now, with the seconds into it at normal speed.</summary>
+    private (Beat Beat, float At)? SceneShown()
+    {
+        if (_still)
+        {
+            return null;
+        }
+
+        for (var i = 0; i < _playing.Count; i++)
+        {
+            var beat = _playing[i];
+            if (beat.Scene is null && beat.LevelUp is null)
+            {
+                continue;
+            }
+
+            var at = (_clock - _beatStarts[i]) / Factor;
+            if (at >= 0 && at < Rhythm.Length(beat))
+            {
+                return (beat, at);
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>The scene and the level-up card over the board, when a beat on show carries either.</summary>
+    private void DrawBattleScene()
+    {
+        if (SceneShown() is not var (beat, at))
+        {
+            return;
+        }
+
+        if (beat.Scene is { } scene && at < scene.Length)
+        {
+            DrawScene(scene, at);
+        }
+        else if (beat.LevelUp is { } card && at >= beat.LevelUpAt)
+        {
+            DrawLevelUp(card);
+        }
+    }
+
+    private void DrawScene(BattleScene scene, float t)
+    {
+        DrawRect(new Rect2(Vector2.Zero, new Vector2(ViewWidth, ViewHeight)), UiColour("ink", 0.72f));
+        var shake = Vector2.Zero;
+        foreach (var s in scene.Strikes.Where(s => s.Shake > 0 && t >= s.Contact && t < s.Contact + 0.25f))
+        {
+            var fade = 1 - (t - s.Contact) / 0.25f;
+            shake = new Vector2(Mathf.Sin(t * 90) * 14 * s.Shake * fade, Mathf.Cos(t * 70) * 6 * s.Shake * fade);
+        }
+
+        var frame = new Rect2(SceneFrame.Position + shake, SceneFrame.Size);
+        DrawBackdrop(frame, scene);
+
+        var left = scene.Attacker.Left ? scene.Attacker : scene.Defender;
+        var right = scene.Attacker.Left ? scene.Defender : scene.Attacker;
+        var ground = frame.End.Y - SceneGround;
+        var feet = new Dictionary<string, Vector2>
+        {
+            [left.Id] = new(frame.Position.X + frame.Size.X * 0.3f, ground),
+            [right.Id] = new(frame.Position.X + frame.Size.X * 0.7f, ground),
+        };
+
+        foreach (var side in new[] { left, right })
+        {
+            var (clip, index, alpha) = Pose(scene, side, t);
+            DrawCombatant(side, clip, index, feet[side.Id], alpha);
+        }
+
+        foreach (var s in scene.Strikes.Where(s => t >= s.Contact))
+        {
+            var body = feet[s.TargetId] - new Vector2(0, BodyCentre);
+            foreach (var name in s.Effects)
+            {
+                var frames = ArtSpec.Effects(_client!.Content).FirstOrDefault(e => e.Name == name)?.Frames ?? 6;
+                var index = (int)((t - s.Contact) * BattleScene.Fps);
+                if (index < frames)
+                {
+                    DrawSheetFrame($"fx_{name}", index, body, new Vector2(128, 128), Colors.White, mirrored: false);
+                }
+            }
+
+            var life = (t - s.Contact) / ScenePopLife;
+            if (life < 1)
+            {
+                var size = s.Kind == PopKind.Crit ? 40 : s.Kind == PopKind.Miss ? 22 : 30;
+                var colour = s.Kind == PopKind.Miss ? Muted : s.TargetHpAfter == 0 || s.Kind == PopKind.Crit ? MarkColour("struck") : Ink;
+                var rise = feet[s.TargetId] - new Vector2(0, 236 + 40 * life);
+                UiText(rise, s.Kind == PopKind.Crit ? $"crit {s.Text}" : s.Text, new Color(colour, 1 - life * life), size, bold: true, centred: true);
+            }
+        }
+
+        DrawSceneBars(frame, scene, left, right, t);
+    }
+
+    /// <summary>
+    /// The backdrop: the sky in the panel's value, then each half's ground in its tile's colour,
+    /// a far band of the tile's own detail, and a darker near band, so where each side stands
+    /// reads at a glance.
+    /// </summary>
+    private void DrawBackdrop(Rect2 frame, BattleScene scene)
+    {
+        Card(frame.Grow(4), UiColour("ink"), 10);
+        DrawRect(frame, Box);
+        var horizon = frame.End.Y - SceneGround - 70;
+        var leftSide = scene.Attacker.Left ? scene.Attacker : scene.Defender;
+        var rightSide = scene.Attacker.Left ? scene.Defender : scene.Attacker;
+        var half = frame.Size.X / 2;
+        foreach (var (side, x) in new[] { (leftSide, frame.Position.X), (rightSide, frame.Position.X + half) })
+        {
+            var band = new Rect2(x, horizon, half, frame.End.Y - horizon);
+            DrawRect(band, TerrainColour(side.Terrain));
+            if (Art($"tile_{side.Terrain}", 70) is { } tile)
+            {
+                for (var tx = x; tx < x + half; tx += 70)
+                {
+                    var w = Math.Min(70, x + half - tx);
+                    DrawTextureRectRegion(tile, new Rect2(tx, horizon, w, 70), new Rect2(0, 0, w, 70), new Color(1, 1, 1, 0.55f));
+                }
+            }
+
+            DrawRect(new Rect2(x, frame.End.Y - SceneGround + 6, half, SceneGround - 6), UiColour("ink", 0.28f));
+        }
+
+        DrawLine(new Vector2(frame.Position.X, horizon), new Vector2(frame.End.X, horizon), UiColour("ink", 0.5f), 2);
+    }
+
+    /// <summary>
+    /// Which clip and frame <paramref name="side"/> shows <paramref name="t"/> seconds in: the
+    /// attacker's advance before the first strike; the striker's clip through its strike, its
+    /// contact frame held through the hit-stop; the struck unit's reaction from contact; idle
+    /// otherwise; and a fallen unit's last fall frame, fading after the fall.
+    /// </summary>
+    private static (string Clip, int Index, float Alpha) Pose(BattleScene scene, SceneSide side, float t)
+    {
+        static int Frames(string clip) => ArtSpec.Clips.First(c => c.Name == clip).Frames;
+        int Idle() => (int)(t * BattleScene.Fps) % Frames("idle");
+
+        if (scene.FallenId == side.Id)
+        {
+            var fall = Frames("fall") / BattleScene.Fps;
+            if (t >= scene.FallStart)
+            {
+                var into = t - scene.FallStart;
+                var alpha = into < fall ? 1 : Math.Max(0, 1 - (into - fall) / Math.Max(0.01f, scene.Length - scene.FallStart - fall));
+                return ("fall", Math.Min(Frames("fall") - 1, (int)(into * BattleScene.Fps)), alpha);
+            }
+        }
+
+        if (scene.Strikes.Count > 0 && t < scene.Strikes[0].Start)
+        {
+            return side.Id == scene.Attacker.Id ? ("advance", Math.Min(Frames("advance") - 1, (int)(t * BattleScene.Fps)), 1) : ("idle", Idle(), 1);
+        }
+
+        foreach (var s in scene.Strikes)
+        {
+            if (t < s.Start || t >= s.End)
+            {
+                continue;
+            }
+
+            if (s.AttackerId == side.Id)
+            {
+                var contact = s.Contact - s.Start;
+                var stop = s.End - s.Start - Frames(s.AttackerClip) / BattleScene.Fps;
+                var into = t - s.Start;
+                var shown = into < contact ? into : into < contact + stop ? contact : into - stop;
+                return (s.AttackerClip, Math.Min(Frames(s.AttackerClip) - 1, (int)(shown * BattleScene.Fps)), 1);
+            }
+
+            if (s.TargetId == side.Id && t >= s.Contact)
+            {
+                var index = (int)((t - s.Contact) * BattleScene.Fps);
+                if (index < Frames(s.TargetClip))
+                {
+                    return (s.TargetClip, index, 1);
+                }
+            }
+        }
+
+        return ("idle", Idle(), 1);
+    }
+
+    /// <summary>
+    /// One combatant's frame with its feet at <paramref name="feet"/>: the first of its sheets on
+    /// disk, tinted with its side's colour and mirrored on the right; a disc and body in the side's
+    /// colour when no sheet is.
+    /// </summary>
+    private void DrawCombatant(SceneSide side, string clip, int index, Vector2 feet, float alpha)
+    {
+        var tint = side.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.Enemy).Lerp(Look(LookPalette.EnemyBone), 0.45f);
+        tint.A = alpha;
+        foreach (var name in side.ClipFiles(clip))
+        {
+            if (DrawSheetFrame(name, index, feet, new Vector2(128, 232), tint, mirrored: !side.Left))
+            {
+                return;
+            }
+        }
+
+        DrawRect(new Rect2(feet - new Vector2(22, 120), new Vector2(44, 120)), tint);
+        DrawCircle(feet - new Vector2(0, 140), 20, tint);
+    }
+
+    /// <summary>
+    /// Frame <paramref name="index"/> of a one-row sheet of 256-pixel frames, its pivot at
+    /// <paramref name="at"/>, mirrored about the pivot when asked; false when the sheet is not on disk.
+    /// </summary>
+    private bool DrawSheetFrame(string name, int index, Vector2 at, Vector2 pivot, Color modulate, bool mirrored)
+    {
+        if (Sheet(name) is not { } sheet)
+        {
+            return false;
+        }
+
+        var size = ArtSpec.ClipFrame;
+        var count = Math.Max(1, sheet.GetWidth() / size);
+        var source = new Rect2(Math.Clamp(index, 0, count - 1) * size, 0, size, size);
+        DrawSetTransform(at, 0, new Vector2(mirrored ? -1 : 1, 1));
+        DrawTextureRectRegion(sheet, new Rect2(-pivot, new Vector2(size, size)), source, modulate);
+        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        return true;
+    }
+
+    /// <summary>Each side's name and HP bar under its half of the frame, the HP stepping down on each contact.</summary>
+    private void DrawSceneBars(Rect2 frame, BattleScene scene, SceneSide left, SceneSide right, float t)
+    {
+        var half = frame.Size.X / 2;
+        foreach (var (side, x) in new[] { (left, frame.Position.X), (right, frame.Position.X + half) })
+        {
+            var hp = side.HpBefore;
+            foreach (var s in scene.Strikes.Where(s => s.TargetId == side.Id && t >= s.Contact))
+            {
+                hp = s.TargetHpAfter;
+            }
+
+            var colour = side.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone);
+            var y = frame.End.Y - 52;
+            UiText(new Vector2(x + 24, y), side.Name, colour, 16, bold: true);
+            RightText(new Vector2(x + half - 24, y), $"{hp} / {side.MaxHp}", Ink, 16, bold: true);
+            var bar = new Rect2(x + 24, y + 12, half - 48, 10);
+            DrawRect(bar, UiColour("ink"));
+            DrawRect(new Rect2(bar.Position, new Vector2(bar.Size.X * Math.Clamp((float)hp / Math.Max(1, side.MaxHp), 0, 1), bar.Size.Y)), colour);
+        }
+    }
+
+    /// <summary>The level-up card (issue 535): the unit and its new level, then each stat that rose, or its one dry line.</summary>
+    private void DrawLevelUp(LevelUpCard card)
+    {
+        DrawRect(new Rect2(Vector2.Zero, new Vector2(ViewWidth, ViewHeight)), UiColour("ink", 0.6f));
+        var lines = card.Lines();
+        var width = Math.Max(380, lines.Max(l => UiWidth(l, 18, bold: true)) + 80);
+        var height = 90 + 30 * (lines.Count - 1);
+        var rect = new Rect2((ViewWidth - width) / 2, (ViewHeight - height) / 2, width, height);
+        Card(rect, Box, 12);
+        UiText(new Vector2(rect.Position.X + 32, rect.Position.Y + 40), "LEVEL UP", Look(LookPalette.Player), 12, bold: true);
+        UiText(new Vector2(rect.Position.X + 32, rect.Position.Y + 64), lines[0], Ink, 20, bold: true);
+        for (var i = 1; i < lines.Count; i++)
+        {
+            UiText(new Vector2(rect.Position.X + 32, rect.Position.Y + 64 + 30 * i), lines[i], card.Rose.Count > 0 ? Look(LookPalette.Player) : Muted, 18, bold: card.Rose.Count > 0);
+        }
+    }
+}
