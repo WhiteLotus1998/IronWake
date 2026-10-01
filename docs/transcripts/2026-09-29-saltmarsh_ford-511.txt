@@ -1938,8 +1938,8 @@ C  teodor           Teodor L1 pikeman          10,1   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > recall 117
 Recalled to state 117; 2 charges left
-undone: gives back 12 exp, 7 enemy hp; returns 11 hp to captain, 11 hp to teodor
-the rolls do not change: the same attack will roll the same
+Undone: gives back 12 exp, 7 enemy hp; returns 11 hp to Alder Fenn, 11 hp to Teodor
+The rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 10 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^...B!...

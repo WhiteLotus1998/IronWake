@@ -701,11 +701,11 @@ C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
 battle lost: the captain is dead; only recall is left
 Lost because the captain, Alder Fenn, fell.
 > recall
-player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
+Player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
 > recall 45
 Recalled to state 45; 2 charges left
-undone: gives back 1 kill (soldier-2), 30 exp, 11 enemy hp; returns captain alive at 16 hp
-the rolls do not change: the same attack will roll the same
+Undone: gives back 1 kill (Soldier 2), 30 exp, 11 enemy hp; returns Alder Fenn alive at 16 hp
+The rolls do not change: the same attack will roll the same
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -817,8 +817,8 @@ c  soldier-1        Soldier L1 pikeman         8,5    hp 20/20  Plain  group wat
 C  wren             Wren L1 cadet              7,3    hp 13/20  Plain
 > recall 45
 Recalled to state 45; 1 charges left
-undone: gives back 1 kill (soldier-2), 2 enemy hp; returns ansgar alive at 10 hp
-the rolls do not change: the same attack will roll the same
+Undone: gives back 1 kill (Soldier 2), 2 enemy hp; returns Ansgar alive at 10 hp
+The rolls do not change: the same attack will roll the same
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............

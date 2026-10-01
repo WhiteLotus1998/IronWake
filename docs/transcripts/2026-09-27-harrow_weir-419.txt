@@ -2437,8 +2437,8 @@ B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 2/28   Hill  group weir, boss, awake
 > recall 121
 Recalled to state 121; 2 charges left
-undone: returns keziah alive at 11 hp
-the rolls do not change: the same attack will roll the same
+Undone: returns Keziah alive at 11 hp
+The rolls do not change: the same attack will roll the same
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM

@@ -109,10 +109,10 @@ public class ClientForecastCardTests
 
         Assert.Equal("Teodor", card.Name);
         Assert.Contains($"{card.Name}, {card.ClassName} L{card.Level}", show[0]);
-        Assert.Contains($"hp {card.Hp}/{card.MaxHp}  str {card.Stats.Str} mag {card.Stats.Mag} dex {card.Stats.Dex} spd {card.Stats.Spd}", show[1]);
-        Assert.Contains($"mov {card.Mov}", show[1]);
-        Assert.StartsWith($"  weapon: {card.Weapon}", show[2]);
-        Assert.Equal($"  weapon: {card.WeaponLine}", show[2]);
+        Assert.Contains($"HP {card.Hp}/{card.MaxHp}  Str {card.Stats.Str} Mag {card.Stats.Mag} Dex {card.Stats.Dex} Spd {card.Stats.Spd}", show[1]);
+        Assert.Contains($"Mov {card.Mov}", show[1]);
+        Assert.StartsWith($"  Weapon: {card.Weapon}", show[2]);
+        Assert.Equal($"  Weapon: {card.WeaponLine}", show[2]);
     }
 
     [Fact]

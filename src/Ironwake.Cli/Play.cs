@@ -592,7 +592,7 @@ public sealed class PlaySession
                 break;
             case "recall" when words.Length == 2 && int.TryParse(words[1], out var index):
                 var undone = index >= 0 && index < _state.History.Count ? RecallCost.Of(_state, index) : null;
-                if (Apply(new Recall(index), undone is null ? null : "undone: " + UndoText(undone) + "\n" + SameRolls))
+                if (Apply(new Recall(index), undone is null ? null : "Undone: " + UndoText(undone, UnitNames.Of(_state, _content)) + "\n" + SameRolls))
                 {
                     _exposure.RemoveAll(entry => entry.HistoryAt >= index);
                 }
@@ -974,11 +974,11 @@ public sealed class PlaySession
             .Select(i => $"turn {_state.History[i].Turn} state {i}")
             .ToList();
         var list = starts.Count == 0 ? "none yet" : string.Join(", ", starts);
-        _out.WriteLine($"player turns start at: {list}; history holds {_state.History.Count} states; {_state.RecallCharges} charges left");
+        _out.WriteLine($"Player turns start at: {list}; history holds {_state.History.Count} states; {_state.RecallCharges} charges left");
     }
 
     /// <summary>The line a rewind prints under what it undoes: rolls are keyed (section 7), so a Recall is a choice and never a reroll.</summary>
-    public const string SameRolls = "the rolls do not change: the same attack will roll the same";
+    public const string SameRolls = "The rolls do not change: the same attack will roll the same";
 
     /// <summary>
     /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
@@ -1006,7 +1006,7 @@ public sealed class PlaySession
     /// </summary>
     private void ListRecallHistory()
     {
-        foreach (var row in RecallRows(_state, _made))
+        foreach (var row in RecallRows(_state, _content, _made))
         {
             _out.WriteLine(row.Text);
         }
@@ -1017,26 +1017,28 @@ public sealed class PlaySession
     /// history state a Recall may return to with its index, or why there is none.
     /// <paramref name="made"/> is the command applied from each history state, by index, as
     /// <see cref="CommandText"/> names it. The thin renderer's Recall browser shows the same
-    /// rows and recalls the row clicked (issue 353).
+    /// rows and recalls the row clicked (issue 353). Units are named as a reader sees them,
+    /// in sentence case (issue 615); the command a state came after keeps its ids, as typed.
     /// </summary>
-    public static IReadOnlyList<RecallRow> RecallRows(BattleState state, IReadOnlyList<string> made)
+    public static IReadOnlyList<RecallRow> RecallRows(BattleState state, GameContent content, IReadOnlyList<string> made)
     {
+        var names = UnitNames.Of(state, content);
         var total = state.Map.RecallCharges;
         var spent = total - state.RecallCharges;
         var rows = new List<RecallRow>
         {
-            new(null, $"recall: {state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same"),
+            new(null, $"Recall: {state.RecallCharges} of {total} charges left, {spent} spent; a spent charge does not come back, and the same attack will roll the same"),
         };
         if (state.RecallCharges < 1)
         {
-            rows.Add(new(null, "  no charges left: nothing more can be recalled on this map"));
+            rows.Add(new(null, "  No charges left: nothing more can be recalled on this map"));
             return rows;
         }
 
         var targets = state.RecallTargets().ToList();
         if (targets.Count == 0)
         {
-            rows.Add(new(null, "  no state to return to yet"));
+            rows.Add(new(null, "  No state to return to yet"));
             return rows;
         }
 
@@ -1047,7 +1049,7 @@ public sealed class PlaySession
                 : state.History[i - 1].Phase != Side.Player
                     ? "turn start"
                     : i - 1 < made.Count ? "after " + made[i - 1] : "after ?";
-            rows.Add(new(i, $"  state {i}  turn {state.History[i].Turn}  {from}  undoes: {UndoText(RecallCost.Of(state, i))}"));
+            rows.Add(new(i, $"  State {i}  turn {state.History[i].Turn}  {from}  undoes: {UndoText(RecallCost.Of(state, i), names)}"));
         }
 
         return rows;
@@ -1057,9 +1059,10 @@ public sealed class PlaySession
     /// A rewind's cost in the console's words, the player's gains given back first, then what
     /// comes back to the player. A number printed next to a unit's name is that unit's own
     /// number (issue 552): a returned unit is named with the HP it comes back at, and each other
-    /// unit with the HP it gets back, read from <see cref="RecallCost.HpByUnit"/>.
+    /// unit with the HP it gets back, read from <see cref="RecallCost.HpByUnit"/>. Units read by
+    /// <paramref name="names"/> (issue 615): <c>returns Teodor alive at 17 hp, 14 hp to Wren</c>.
     /// </summary>
-    public static string UndoText(RecallCost cost)
+    public static string UndoText(RecallCost cost, UnitNames names)
     {
         if (cost.IsEmpty)
         {
@@ -1069,7 +1072,7 @@ public sealed class PlaySession
         var back = new List<string>();
         if (cost.KillsGivenBack.Count > 0)
         {
-            back.Add($"{cost.KillsGivenBack.Count} {(cost.KillsGivenBack.Count == 1 ? "kill" : "kills")} ({string.Join(", ", cost.KillsGivenBack)})");
+            back.Add($"{cost.KillsGivenBack.Count} {(cost.KillsGivenBack.Count == 1 ? "kill" : "kills")} ({string.Join(", ", cost.KillsGivenBack.Select(id => names[id]))})");
         }
 
         if (cost.ExpGivenBack > 0)
@@ -1088,10 +1091,10 @@ public sealed class PlaySession
         }
 
         var returned = new List<string>();
-        returned.AddRange(cost.UnitsReturned.Select(id => $"{id} alive at {cost.HpFor(id)} hp"));
-        returned.AddRange(cost.HpByUnit.Where(entry => !cost.UnitsReturned.Contains(entry.Id)).Select(entry => $"{entry.Hp} hp to {entry.Id}"));
+        returned.AddRange(cost.UnitsReturned.Select(id => $"{names[id]} alive at {cost.HpFor(id)} hp"));
+        returned.AddRange(cost.HpByUnit.Where(entry => !cost.UnitsReturned.Contains(entry.Id)).Select(entry => $"{entry.Hp} hp to {names[entry.Id]}"));
 
-        returned.AddRange(cost.ArrivalsUndone.Select(id => id + " not yet arrived"));
+        returned.AddRange(cost.ArrivalsUndone.Select(id => names[id] + " not yet arrived"));
         var parts = new List<string>();
         if (back.Count > 0)
         {
@@ -1690,7 +1693,7 @@ public sealed class PlaySession
 
     private void Show(BattleUnit unit)
     {
-        foreach (var line in ShowLines(_state, _content, unit))
+        foreach (var line in ShowLines(_state, _content, unit, typed: true))
         {
             _out.WriteLine(line);
         }
@@ -1699,58 +1702,64 @@ public sealed class PlaySession
     /// <summary>
     /// The lines <c>show &lt;unit&gt;</c> prints: who and where, stats, weapon, items, ranks,
     /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
-    /// shows the same lines (issue 349).
+    /// shows the same lines (issue 349). Units and arts read by the names a reader sees, every
+    /// line in sentence case (issue 615); with <paramref name="typed"/>, as the console prints
+    /// them, each name a command types differently is followed by that id in parentheses:
+    /// <c>Alder Fenn (captain)</c>, <c>Brigand 1 (brigand-1)</c>.
     /// </summary>
-    public static IReadOnlyList<string> ShowLines(BattleState state, GameContent content, BattleUnit unit)
+    public static IReadOnlyList<string> ShowLines(BattleState state, GameContent content, BattleUnit unit, bool typed = false)
     {
+        var names = UnitNames.Of(state, content);
+        string Named(string name, string id) =>
+            typed && !string.Equals(name, id, StringComparison.OrdinalIgnoreCase) ? $"{name} ({id})" : name;
         var lines = new List<string>();
         var stats = content.StatsOf(unit.Unit);
-        lines.Add($"{unit.Id}: {unit.Unit.Name}, {content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {state.Map.TerrainAt(unit.At, content).Label(stats.Hp)}");
+        lines.Add($"{Named(names[unit.Id], unit.Id)}, {content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {state.Map.TerrainAt(unit.At, content).Label(stats.Hp)}");
         var unitClass = content.Class(unit.Unit.ClassId);
-        lines.Add($"  hp {unit.Hp}/{stats.Hp}  str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}  mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
-        lines.Add($"  weapon: {WeaponLine(unit, content)}");
+        lines.Add($"  HP {unit.Hp}/{stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}  Mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
+        lines.Add($"  Weapon: {WeaponLine(unit, content)}");
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
-        lines.Add($"  items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
+        lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
-        lines.Add($"  ranks: {string.Join(", ", ranks)}");
+        lines.Add($"  Ranks: {string.Join(", ", ranks)}");
         var arts = content.ArtsOf(unit.Unit).Select(a =>
-            $"{a.Ability.Id} ({a.Art.Weapon.ToString().ToLowerInvariant()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
+            $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.ToString().ToLowerInvariant()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
         if (arts.Count > 0)
         {
-            lines.Add($"  arts: {string.Join(", ", arts)}");
+            lines.Add($"  Arts: {string.Join(", ", arts)}");
         }
 
         var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
         if (held.Count > 0)
         {
-            lines.Add($"  abilities: {string.Join(", ", held)}");
+            lines.Add($"  Abilities: {string.Join(", ", held)}");
         }
 
         if (MasteryLine(unit, content) is { } mastery)
         {
-            lines.Add(mastery);
+            lines.Add(UnitNames.Sentence(mastery));
         }
 
         if (Signatures.Of(state, content, unit) is { } signature)
         {
-            lines.Add($"  signature: {Signatures.Describe(signature)}");
+            lines.Add($"  Signature: {Signatures.Describe(signature)}");
         }
 
         if (state.CantoReachOf(unit, content) is not null)
         {
-            lines.Add($"  canto: {unit.Canto} movement left this phase");
+            lines.Add($"  Canto: {unit.Canto} movement left this phase");
         }
 
-        var targets = string.Join(", ", Queries.Targets(state, content, unit).Select(t => t.Id));
-        lines.Add($"  targets from here: {(targets.Length == 0 ? "none" : targets)}");
+        var targets = string.Join(", ", Queries.Targets(state, content, unit).Select(t => Named(names[t.Id], t.Id)));
+        lines.Add($"  Targets from here: {(targets.Length == 0 ? "none" : targets)}");
         if (state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
         {
             var rivals = state.UnitsOf(Side.Player)
                 .Where(other => Rivalry.AreRivals(state, content, unit, other))
-                .Select(other => $"{other.Id} {Rivalry.PointsOf(state, unit.Id, other.Id)}/{content.Rivalry.OverwriteAt}");
+                .Select(other => $"{names[other.Id]} {Rivalry.PointsOf(state, unit.Id, other.Id)}/{content.Rivalry.OverwriteAt}");
             var list = string.Join(", ", rivals);
-            lines.Add($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}");
+            lines.Add(UnitNames.Sentence($"  {unit.Unit.Region}; rapport {Rivalry.RateOf(unit, content)} per phase beside a recruit; rivals: {(list.Length == 0 ? "none" : list)}"));
         }
 
         return lines;

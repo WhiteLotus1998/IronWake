@@ -1496,8 +1496,8 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > recall 102
 Recalled to state 102; 2 charges left
-undone: gives back 1 kill (rider-1), 14 exp, 30 enemy hp; returns dunstan alive at 11 hp, pell alive at 16 hp
-the rolls do not change: the same attack will roll the same
+Undone: gives back 1 kill (Rider 1), 14 exp, 30 enemy hp; returns Dunstan alive at 11 hp, Pell alive at 16 hp
+The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.....AC
