@@ -1,0 +1,102 @@
+show captain
+order press preview
+move pell 1,3
+attack pell brigand-1
+move ottilie 3,5
+attack ottilie brigand-1
+move teodor 3,4
+attack teodor brigand-1
+move dunstan 1,4
+wait dunstan
+move keziah 2,5
+wait keziah
+move captain 2,6
+wait captain
+end
+move teodor 4,4
+attack teodor brigand-1
+item ottilie 2
+move keziah 6,5
+wait keziah
+move dunstan 4,5
+wait dunstan
+move pell 4,2
+wait pell
+move captain 6,6
+wait captain
+end
+order press preview
+order press preview from 5,4
+move captain 5,4
+order press
+move pell 7,0
+wait pell
+move teodor 8,3
+wait teodor
+move keziah 8,5
+wait keziah
+move dunstan 7,5
+wait dunstan
+move ottilie 6,4
+wait ottilie
+end
+move teodor 11,2
+wait teodor
+move keziah 9,2
+wait keziah
+move dunstan 8,2
+wait dunstan
+move ottilie 9,3
+wait ottilie
+move pell 9,1
+wait pell
+move captain 8,4
+wait captain
+end
+move teodor 13,1
+wait teodor
+move keziah 12,2
+wait keziah
+wait pell
+move dunstan 11,2
+wait dunstan
+move ottilie 10,2
+wait ottilie
+move captain 9,2
+wait captain
+end
+move teodor 14,3
+attack teodor archer-1
+move keziah 13,4
+attack keziah archer-1
+move dunstan 12,4
+wait dunstan
+move ottilie 12,3
+wait ottilie
+move pell 12,2
+wait pell
+move captain 11,2
+wait captain
+end
+move pell 12,5
+attack pell weir_foreman-1
+move keziah 13,5
+attack keziah weir_foreman-1
+move teodor 14,6
+attack teodor weir_foreman-1
+move ottilie 14,5
+attack ottilie weir_foreman-1
+move dunstan 13,4
+wait dunstan
+move captain 12,4
+item captain 2 pell
+end
+recall 121
+move ottilie 14,5
+attack ottilie weir_foreman-1
+move pell 12,5
+attack pell weir_foreman-1
+move teodor 14,6
+attack teodor weir_foreman-1
+move dunstan 13,5
+attack dunstan weir_foreman-1

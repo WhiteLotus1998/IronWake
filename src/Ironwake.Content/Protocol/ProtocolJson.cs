@@ -152,6 +152,21 @@ public static class ProtocolJson
                 WriteCoord(w, "to", c.To);
                 WriteCoords(w, "path", c.Path);
                 break;
+            case OrderCalled o:
+                w.WriteString("unit", o.CaptainId);
+                w.WriteString("kind", OrderName(o.Kind));
+                w.WriteNumber("radius", o.Radius);
+                WriteStrings(w, "reached", o.Reached);
+                w.WriteNumber("inRadius", o.InRadius);
+                w.WriteNumber("alive", o.Alive);
+                w.WriteNumber("exposure", o.Exposure);
+                break;
+            case FellBack f:
+                w.WriteString("unit", f.UnitId);
+                WriteCoord(w, "from", f.From);
+                WriteCoord(w, "to", f.To);
+                WriteCoords(w, "path", f.Path);
+                break;
             case Shoved s:
                 w.WriteString("unit", s.UnitId);
                 w.WriteString("target", s.TargetId);
@@ -469,6 +484,15 @@ public static class ProtocolJson
                 w.WriteString("unit", canto.UnitId);
                 WriteCoord(w, "to", canto.To);
                 break;
+            case Order order:
+                w.WriteString("type", "order");
+                w.WriteString("kind", OrderName(order.Kind));
+                break;
+            case FallBack fallBack:
+                w.WriteString("type", "fallBack");
+                w.WriteString("unit", fallBack.UnitId);
+                WriteCoord(w, "to", fallBack.To);
+                break;
             case EndPhase:
                 w.WriteString("type", "end");
                 break;
@@ -507,11 +531,29 @@ public static class ProtocolJson
             "recover" => new Recover(RequiredString(e, "unit")),
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
+            "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
+            "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, end, or recall"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, order, fallBack, end, or recall"),
         };
     }
+
+    /// <summary>An order's protocol name (issue 85): <c>press</c>, <c>rally</c> or <c>fallBack</c>.</summary>
+    private static string OrderName(OrderKind kind) => kind switch
+    {
+        OrderKind.Press => "press",
+        OrderKind.Rally => "rally",
+        _ => "fallBack",
+    };
+
+    private static OrderKind ReadOrderKind(string name) => name switch
+    {
+        "press" => OrderKind.Press,
+        "rally" => OrderKind.Rally,
+        "fallBack" => OrderKind.FallBack,
+        _ => throw new ProtocolException($"field 'kind' must be press, rally or fallBack, got '{name}'"),
+    };
 
     public static void WriteForecast(Utf8JsonWriter w, CombatForecast forecast)
     {
@@ -601,6 +643,11 @@ public static class ProtocolJson
         if (state.CampaignMap is { } campaignMap)
         {
             w.WriteNumber("campaignMap", campaignMap);
+        }
+
+        if (state.OrderCalled is { } order)
+        {
+            w.WriteString("order", OrderName(order));
         }
 
         w.WriteStartArray("units");
@@ -781,6 +828,7 @@ public static class ProtocolJson
             e.TryGetProperty("litGroups", out _) ? ReadStrings(e, "litGroups") : ValueList<string>.Empty)
         {
             CampaignMap = OptionalInt(e, "campaignMap"),
+            OrderCalled = OptionalString(e, "order") is { } order ? ReadOrderKind(order) : null,
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
@@ -833,6 +881,16 @@ public static class ProtocolJson
         if (unit.Braced)
         {
             w.WriteBoolean("braced", true);
+        }
+
+        if (unit.Pressed)
+        {
+            w.WriteBoolean("pressed", true);
+        }
+
+        if (unit.FallingBack)
+        {
+            w.WriteBoolean("fallingBack", true);
         }
 
         if (unit.Spent != 0)
@@ -975,6 +1033,8 @@ public static class ProtocolJson
         {
             Spent = OptionalInt(e, "spent") ?? 0,
             HasFed = e.TryGetProperty("hasFed", out _) && RequiredBool(e, "hasFed"),
+            Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
+            FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
         };
     }

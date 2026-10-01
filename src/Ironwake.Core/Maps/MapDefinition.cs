@@ -122,6 +122,11 @@ namespace Ironwake.Core;
 /// The <c>chests:</c> block (issue 649): each chest's tile and contents, in file order. Empty on a
 /// map without one. Which are open is battle state (<see cref="BattleState.Opened"/>).
 /// </param>
+/// <param name="OrdersEnabled">
+/// The <c>orders: on</c> header (DESIGN.md 13.2, issue 85): the captain may call Commander's Word
+/// once on this map outside the campaign, where it opens from map 2 (<see cref="BattleState.OrdersOpen"/>).
+/// Off by default.
+/// </param>
 /// <param name="Messenger">
 /// The <c>messenger:</c> header (DESIGN.md 13.24, experiment): the enemy placed on the route's
 /// first tile runs for its road instead of fighting, and on reaching it leaves the board and fires
@@ -168,7 +173,8 @@ public sealed record MapDefinition(
     bool BreakEnabled = false,
     string? KinsbaneBearer = null,
     ValueList<Chest> Chests = default,
-    MessengerRoute? Messenger = null)
+    MessengerRoute? Messenger = null,
+    bool OrdersEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

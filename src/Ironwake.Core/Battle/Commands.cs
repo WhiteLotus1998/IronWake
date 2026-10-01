@@ -103,3 +103,18 @@ public sealed record EndPhase : Command;
 
 /// <summary>Rewind to a prior state in this map's history, spending one Recall charge (section 7).</summary>
 public sealed record Recall(int ToIndex) : Command;
+
+/// <summary>
+/// Commander's Word (DESIGN.md 13.2, issue 85): the captain calls one order a map as his action,
+/// after his Move or without one, reaching the allies within <see cref="Orders.Radius"/> of him.
+/// Open on a map with <c>orders: on</c> and on every campaign map from the second
+/// (<see cref="BattleState.OrdersOpen"/>).
+/// </summary>
+public sealed record Order(OrderKind Kind) : Command;
+
+/// <summary>
+/// The move a <see cref="OrderKind.FallBack"/> order owes an ally who had already acted (issue 85):
+/// up to <see cref="Orders.FallBackMov"/> movement from where it stands, refused if the move would
+/// wake a sleeping group. Not a second action; the unit's own tile declines it.
+/// </summary>
+public sealed record FallBack(string UnitId, Coord To) : Command;

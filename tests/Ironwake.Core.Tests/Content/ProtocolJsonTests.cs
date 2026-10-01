@@ -37,6 +37,8 @@ public class ProtocolJsonTests
         { new KeepsakeTaken("brigand-2", "teodor", "iron_lance"), """{"type":"keepsakeTaken","unit":"brigand-2","fallen":"teodor","item":"iron_lance"}""" },
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), null), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3}}""" },
         { new KeepsakeLost("teodor", "iron_lance", new Coord(12, 3), "brigand-2"), """{"type":"keepsakeLost","fallen":"teodor","item":"iron_lance","at":{"x":12,"y":3},"carrier":"brigand-2"}""" },
+        { new OrderCalled("alder", OrderKind.FallBack, 4, ValueList<string>.Of("teodor", "wren"), 3, 4, 12), """{"type":"orderCalled","unit":"alder","kind":"fallBack","radius":4,"reached":["teodor","wren"],"inRadius":3,"alive":4,"exposure":12}""" },
+        { new FellBack("wren", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"fellBack","unit":"wren","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
         { new Cantoed("ansgar", A, B, ValueList<Coord>.Of(new Coord(2, 2), B)), """{"type":"cantoed","unit":"ansgar","from":{"x":1,"y":2},"to":{"x":3,"y":4},"path":[{"x":2,"y":2},{"x":3,"y":4}]}""" },
         { new UnitRetreated("brigand-1", A, B), """{"type":"unitRetreated","unit":"brigand-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new MessengerEscaped("rider-1", A), """{"type":"messengerEscaped","unit":"rider-1","at":{"x":1,"y":2}}""" },

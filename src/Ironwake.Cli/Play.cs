@@ -44,6 +44,9 @@ public sealed class PlaySession
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; everything inside goes to its pack
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
+          order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
+          order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
+          fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
           cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
           watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
           end                      End the player phase; the enemy phase plays out, each enemy attack printing its forecast first
@@ -580,6 +583,22 @@ public sealed class PlaySession
                 break;
             case "open":
                 Error("usage: open <unit> <x,y>");
+                break;
+            case "order":
+                OrderWords(words);
+                break;
+            case "fallback" when words.Length == 3 && TryCoord(words[2], out var fallTo):
+                Apply(new FallBack(words[1], fallTo));
+                break;
+            case "fallback" when words.Length == 3 && words[2] == "stay":
+                if (Find(words[1]) is { } holder)
+                {
+                    Apply(new FallBack(holder.Id, holder.At));
+                }
+
+                break;
+            case "fallback":
+                Error("usage: fallback <unit> <x,y|stay>");
                 break;
             case "shove" when words.Length == 3:
                 Apply(new Shove(words[1], words[2]));
@@ -1827,6 +1846,22 @@ public sealed class PlaySession
             lines.Add($"  Canto: {unit.Canto} movement left this phase");
         }
 
+        if (unit.IsCaptain && state.OrdersOpen)
+        {
+            var spent = state.OrderCalled is { } called ? $"spent ({Orders.Word(called)})" : "unspent";
+            lines.Add($"  Commander's Word: order press, rally or fall back, once a map, as the captain's action; reaches allies within {Orders.Radius(unit, content)} (2 + Cha / 4); {spent}");
+        }
+
+        if (unit.Pressed)
+        {
+            lines.Add("  Pressed: +1 Mov this phase");
+        }
+
+        if (unit.FallingBack)
+        {
+            lines.Add($"  Fall back: up to {Orders.FallBackMov} movement owed this phase, if it wakes no one");
+        }
+
         var targets = string.Join(", ", Queries.Targets(state, content, unit).Select(t => Named(names[t.Id], t.Id)));
         lines.Add($"  Targets from here: {(targets.Length == 0 ? "none" : targets)}");
         if (state.Map.RivalryArm is not null && Rivalry.IsRecruit(unit))
@@ -2081,6 +2116,72 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// <c>order &lt;kind&gt;</c> calls Commander's Word (issue 85); <c>order &lt;kind&gt; preview [from &lt;x,y&gt;]</c>
+    /// prints who it would reach and changes nothing. The kind <c>fall back</c> may be typed as two words.
+    /// </summary>
+    private void OrderWords(string[] words)
+    {
+        const string usage = "usage: order <press|rally|fall back> [preview [from <x,y>]]";
+        var rest = words.Skip(1).ToList();
+        if (rest.Count >= 2 && rest[0] == "fall" && rest[1] == "back")
+        {
+            rest = new[] { "fall back" }.Concat(rest.Skip(2)).ToList();
+        }
+
+        if (rest.Count == 0 || Orders.Parse(rest[0]) is not { } kind)
+        {
+            Error(usage);
+            return;
+        }
+
+        if (rest.Count == 1)
+        {
+            Apply(new Order(kind));
+            return;
+        }
+
+        Coord? from = null;
+        if (rest[1] != "preview" || rest.Count is not (2 or 4)
+            || (rest.Count == 4 && (rest[2] != "from" || !TryCoord(rest[3], out var tile) || (from = tile) is null)))
+        {
+            Error(usage);
+            return;
+        }
+
+        _out.WriteLine(OrderPreview(_state, _content, kind, from));
+    }
+
+    /// <summary>
+    /// The order preview (issue 85): <c>Press would reach Wren, Teodor (2 of 4; radius 4 from 3,4)</c>,
+    /// the allies <see cref="Orders.Reached"/> lists from the captain's tile or <paramref name="from"/>,
+    /// over the living allies. A spent or closed order says why after the count.
+    /// </summary>
+    public static string OrderPreview(BattleState state, GameContent content, OrderKind kind, Coord? from = null)
+    {
+        if (!state.OrdersOpen)
+        {
+            return "There are no orders on this map";
+        }
+
+        if (state.UnitsOf(Side.Player).FirstOrDefault(u => u.IsCaptain) is not { } captain)
+        {
+            return "There is no captain on the board to call an order";
+        }
+
+        var names = UnitNames.Of(state, content);
+        var at = from ?? captain.At;
+        var reached = Orders.Reached(state, content, captain, at, kind);
+        var who = reached.Count == 0 ? "no one" : string.Join(", ", reached.Select(u => names[u.Id]));
+        var line = $"{Orders.Word(kind)} would reach {who} ({reached.Count} of {Orders.Allies(state).Count}; radius {Orders.Radius(captain, content)} from {at})";
+        if (Orders.Refusal(state) is { } refusal)
+        {
+            line += $"; not now: {refusal}";
+        }
+
+        return UnitNames.Sentence(names.Message(line));
+    }
+
+    /// <summary>
     /// Prints <paramref name="message"/> after <c>ERROR:</c> as a reader sees it (issue 615):
     /// unit ids as names, quoted ids as typed, sentence case; the scripted summary keeps the same text.
     /// </summary>
@@ -2119,6 +2220,8 @@ public sealed class PlaySession
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Open o => $"open {o.UnitId} {o.At}",
+        Order o => $"order {Orders.Word(o.Kind)}",
+        FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
@@ -2186,6 +2289,12 @@ public sealed class PlaySession
                 return c.From == c.To
                     ? $"{names[c.UnitId]} stays at {c.To} (canto)"
                     : $"{names[c.UnitId]} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
+            case OrderCalled o:
+                return $"{names[o.CaptainId]} calls {Orders.Word(o.Kind)} (radius {o.Radius}): " + (o.Reached.Count == 0 ? "it reaches no one" : string.Join(", ", o.Reached.Select(id => names[id]))) + $" ({o.Reached.Count} of {o.Alive})";
+            case FellBack f:
+                return f.From == f.To
+                    ? $"{names[f.UnitId]} holds at {f.To} (fall back)"
+                    : $"{names[f.UnitId]} falls back {f.From} -> {f.To}" + (f.Path.Count > 1 ? " via " + string.Join(" ", f.Path.Take(f.Path.Count - 1)) : "");
             case Shoved s:
                 return $"{names[s.UnitId]} shoves {names[s.TargetId]} {s.From} -> {s.To}";
             case UnitRetreated r:

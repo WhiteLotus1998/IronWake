@@ -61,6 +61,18 @@ public sealed record BattleState(
     /// </summary>
     public MessengerFate? MessengerGone { get; init; }
 
+    /// <summary>
+    /// The order the captain has called this map (DESIGN.md 13.2, issue 85), or null while it is
+    /// unspent. Once a map; a Recall restores it with the board.
+    /// </summary>
+    public OrderKind? OrderCalled { get; init; }
+
+    /// <summary>
+    /// Whether Commander's Word is open on this battle (issue 85): on a map with <c>orders: on</c>,
+    /// and on every campaign map from the second, where it is the captain's from Maud's arrival.
+    /// </summary>
+    public bool OrdersOpen => Map.OrdersEnabled || CampaignMap >= 2;
+
     /// <summary>The map's chests not yet opened, in file order (issue 649).</summary>
     public IEnumerable<Chest> ClosedChests => Map.Chests.Where(c => !Opened.Contains(c.At));
 
@@ -446,7 +458,23 @@ public sealed record BattleState(
     public Reach ReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        return Movement.Reach(Map, content, unit.At, unitClass.Movement, unitClass.Mov, at => OccupantAt(at, unit.Side));
+        var mov = unitClass.Mov + (unit.Pressed ? 1 : 0);
+        return Movement.Reach(Map, content, unit.At, unitClass.Movement, mov, at => OccupantAt(at, unit.Side));
+    }
+
+    /// <summary>
+    /// Where a Fall back order's move may take a unit (issue 85): the section 4 reach from where it
+    /// stands on <see cref="Orders.FallBackMov"/>, or null when no such move is owed.
+    /// </summary>
+    public Reach? FallBackReachOf(BattleUnit unit, GameContent content)
+    {
+        if (!unit.FallingBack)
+        {
+            return null;
+        }
+
+        var unitClass = content.Class(unit.Unit.ClassId);
+        return Movement.Reach(Map, content, unit.At, unitClass.Movement, Orders.FallBackMov, at => OccupantAt(at, unit.Side));
     }
 
     /// <summary>
@@ -596,6 +624,11 @@ public sealed record BattleState(
             sb.Append('\n');
         }
 
+        if (OrderCalled is { } order)
+        {
+            sb.Append("order ").Append(Orders.Word(order)).Append('\n');
+        }
+
         if (MessengerGone is { } fate)
         {
             sb.Append("messenger ").Append(fate.Escaped ? "escaped" : "fallen").Append(' ').Append(fate.At).Append('\n');
@@ -627,6 +660,16 @@ public sealed record BattleState(
             if (unit.Canto is { } canto)
             {
                 sb.Append(" canto ").Append(canto);
+            }
+
+            if (unit.Pressed)
+            {
+                sb.Append(" pressed");
+            }
+
+            if (unit.FallingBack)
+            {
+                sb.Append(" fallingback");
             }
 
             if (unit.Side == Side.Enemy)

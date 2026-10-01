@@ -83,6 +83,21 @@ public static class Resolver
                 }
 
                 break;
+            case Order order:
+                (next, rejection) = ApplyOrder(state, content, order, events);
+                break;
+            case FallBack fallBack:
+                (next, rejection) = ApplyFallBack(state, content, fallBack, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(fallBack.UnitId)!, events);
+                    if (next.Find(fallBack.UnitId) is { } fellBack && fellBack.At != state.Find(fallBack.UnitId)!.At)
+                    {
+                        next = FireWatches(next, content, fallBack.UnitId, events);
+                    }
+                }
+
+                break;
             case Retreat retreat:
                 (next, rejection) = ApplyRetreat(state, content, retreat, events);
                 break;
@@ -342,6 +357,93 @@ public static class Resolver
         // A Canto that leaves the tile takes a brace off (DESIGN 13.14); staying keeps it.
         var braced = unit.Braced && canto.To == unit.At;
         return (state.WithUnit(unit with { At = canto.To, Canto = null, Braced = braced }), null);
+    }
+
+    /// <summary>
+    /// Commander's Word (DESIGN.md 13.2, issue 85): the captain's action, after his Move or
+    /// without one, once a map. Press gives +1 Mov this phase to the allies in his radius who
+    /// have not moved; Rally heals those in it <see cref="Orders.RallyHeal"/>; Fall back owes
+    /// those in it who have acted one <see cref="FallBack"/> move. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyOrder(BattleState state, GameContent content, Order order, List<GameEvent> events)
+    {
+        if (Orders.Refusal(state) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotOrder, $"cannot call {Orders.Word(order.Kind)}: {refusal}"));
+        }
+
+        var captain = state.UnitsOf(Side.Player).First(u => u.IsCaptain);
+        var inRadius = Orders.InRadius(state, content, captain, captain.At);
+        var reached = Orders.Reached(state, content, captain, captain.At, order.Kind);
+        var exposure = Exposure.Of(state, content, captain, captain.At).NoCrit;
+        events.Add(new OrderCalled(captain.Id, order.Kind, Orders.Radius(captain, content), ValueList<string>.From(reached.Select(u => u.Id)), inRadius.Count, Orders.Allies(state).Count, exposure));
+        var next = state.WithUnit(captain with { Moved = true, Acted = true, Canto = null }) with { OrderCalled = order.Kind };
+        foreach (var ally in reached)
+        {
+            switch (order.Kind)
+            {
+                case OrderKind.Press:
+                    next = next.WithUnit(ally with { Pressed = true });
+                    break;
+                case OrderKind.Rally:
+                    var heal = Orders.RallyHeal(ally, content);
+                    if (heal > 0)
+                    {
+                        events.Add(new UnitHealed(ally.Id, heal, ally.Hp + heal));
+                        next = next.WithUnit(ally with { Hp = ally.Hp + heal });
+                    }
+
+                    break;
+                default:
+                    next = next.WithUnit(ally with { FallingBack = true });
+                    break;
+            }
+        }
+
+        return (next, null);
+    }
+
+    /// <summary>
+    /// The move a Fall back order owed (issue 85): within <see cref="Orders.FallBackMov"/> of where
+    /// the unit stands, its own tile included as a decline, and refused, naming the group, if the
+    /// unit standing there would wake a sleeping group by the section 8 proximity rule.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyFallBack(BattleState state, GameContent content, FallBack fallBack, List<GameEvent> events)
+    {
+        var unit = state.Find(fallBack.UnitId);
+        if (unit is null)
+        {
+            return (state, new Rejection(RejectionReason.NoSuchUnit, $"no living unit '{fallBack.UnitId}'"));
+        }
+
+        if (unit.Side != state.Phase)
+        {
+            return (state, new Rejection(RejectionReason.NotThisSide, $"{unit.Id} is a {unit.Side} unit and it is the {state.Phase} phase"));
+        }
+
+        if (state.FallBackReachOf(unit, content) is not { } reach)
+        {
+            return (state, new Rejection(RejectionReason.NoFallBack, $"{unit.Id} cannot fall back: no Fall back order reached it this phase, or it has taken it"));
+        }
+
+        var entry = reach.EntryAt(fallBack.To);
+        if (entry is not { CanEnd: true })
+        {
+            var why = !state.Map.Contains(fallBack.To) ? "outside the map"
+                : entry is null ? $"not within the {reach.Mov} movement a fall back gives from {unit.At}"
+                : "occupied by an ally";
+            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot fall back to {fallBack.To}: {why}"));
+        }
+
+        var moved = state.WithUnit(unit with { At = fallBack.To, FallingBack = false, Braced = unit.Braced && fallBack.To == unit.At });
+        var woken = WakeCheck.Run(state, moved, content, Array.Empty<Noise>(), Array.Empty<string>());
+        if (woken.Count > 0)
+        {
+            return (state, new Rejection(RejectionReason.NoFallBack, $"{unit.Id} cannot fall back to {fallBack.To}: it would wake {string.Join(", ", woken.Select(w => w.Group))}"));
+        }
+
+        events.Add(new FellBack(unit.Id, unit.At, fallBack.To, entry.Path));
+        return (moved, null);
     }
 
     private static (BattleState, Rejection?) ApplyAttack(BattleState state, GameContent content, Attack attack, List<GameEvent> events)
@@ -1322,7 +1424,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -1355,7 +1457,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1422,7 +1524,8 @@ public static class Resolver
     /// <summary>
     /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
     /// in a fixed order: for each unit of the acting side in id order, if it has acted, its
-    /// Cantos (row-major, own tile included, issue 71), else its Moves
+    /// Cantos (row-major, own tile included, issue 71) and its Fall back moves (issue 85, those
+    /// that wake no one), else, for the captain while an order is open, the three orders, then its Moves
     /// (row-major, own tile excluded), its Attacks (targets in id order, per usable weapon
     /// slot when it carries more than one), its item uses
     /// (slots in order; a spell once per ally in range, allies in id order; only where
@@ -1449,7 +1552,26 @@ public static class Resolver
                     }
                 }
 
+                if (state.FallBackReachOf(unit, content) is { } fallBack)
+                {
+                    foreach (var to in fallBack.Destinations)
+                    {
+                        if (Resolver.Apply(state, content, new FallBack(unit.Id, to)).Accepted)
+                        {
+                            yield return new FallBack(unit.Id, to);
+                        }
+                    }
+                }
+
                 continue;
+            }
+
+            if (unit.IsCaptain && Orders.Refusal(state) is null)
+            {
+                foreach (var kind in new[] { OrderKind.Press, OrderKind.Rally, OrderKind.FallBack })
+                {
+                    yield return new Order(kind);
+                }
             }
 
             if (!unit.Moved)

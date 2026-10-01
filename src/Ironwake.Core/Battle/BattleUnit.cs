@@ -42,6 +42,9 @@ namespace Ironwake.Core;
 /// and acted, so it neither moves, acts, waits nor braces, and 0 otherwise.
 /// <see cref="HasFed"/> is set when a hungering weapon the unit carries feeds on a kill (DESIGN.md
 /// 13.23, experiment) and cleared at each of the unit's side's phase starts, after the drain reads it.
+/// <see cref="Pressed"/> is set by a Press order (DESIGN.md 13.2, issue 85) on an ally that has not
+/// moved: +1 Mov until the phase ends. <see cref="FallingBack"/> is set by a Fall back order on an
+/// ally that has acted: one <see cref="FallBack"/> move is owed until it is taken or the phase ends.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -65,7 +68,9 @@ public sealed record BattleUnit(
     string? CoveredBy = null,
     ValueList<string>? ArtsDeclared = null,
     int Spent = 0,
-    bool HasFed = false)
+    bool HasFed = false,
+    bool Pressed = false,
+    bool FallingBack = false)
 {
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
