@@ -445,7 +445,7 @@ public class SignatureTests
     {
         var state = Start(true, Yard, OrdersLine);
 
-        Assert.Contains($"  signature: {Signatures.Describe(SignatureKind.Orders)}", PlaySession.ShowLines(state, Starter, state.Find("teodor")!));
+        Assert.Contains($"  Signature: {Signatures.Describe(SignatureKind.Orders)}", PlaySession.ShowLines(state, Starter, state.Find("teodor")!));
         Assert.DoesNotContain(PlaySession.ShowLines(state, Starter, state.Find("hale")!), l => l.Contains("signature"));
         Assert.DoesNotContain(PlaySession.ShowLines(Start(false, Yard, OrdersLine), Starter, state.Find("teodor")!), l => l.Contains("signature"));
 

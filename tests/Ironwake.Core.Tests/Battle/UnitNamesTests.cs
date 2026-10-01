@@ -191,4 +191,52 @@ public class UnitNamesTests
         Assert.Equal("wren cannot Canto: she has no Canto", Resolver.Apply(state, Starter, new Canto("wren", new Coord(1, 2))).Rejection!.Message);
         Assert.Equal("wren cannot Canto: they have no Canto", Resolver.Apply(state, With(Pronoun.They), new Canto("wren", new Coord(1, 2))).Rejection!.Message);
     }
+
+    [Fact]
+    public void ARewindNamesTheUnitsItGivesBackAndReturnsByTheirNames()
+    {
+        var state = Start(map: Field);
+        var names = UnitNames.Of(state, Starter);
+        var cost = new RecallCost(
+            3, 1, ValueList<string>.Of("archer-2"), 0, 0, 0, ValueList<string>.Of("archer-3"),
+            ValueList<string>.Of("wren"), ValueList<HpReturn>.Of(new HpReturn("wren", 9), new HpReturn("captain", 4)));
+
+        var text = PlaySession.UndoText(cost, names);
+
+        Assert.Equal($"gives back 1 kill (Archer 2); returns {names["wren"]} alive at 9 hp, 4 hp to {names["captain"]}, Archer 3 not yet arrived", text);
+        Assert.DoesNotContain("archer-", text, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void TheRecallBrowserIsInSentenceCase()
+    {
+        var rows = PlaySession.RecallRows(Start(map: Field), Starter, Array.Empty<string>());
+
+        Assert.StartsWith("Recall: 3 of 3 charges left", rows[0].Text, StringComparison.Ordinal);
+        Assert.Equal("  No state to return to yet", rows[1].Text);
+        Assert.All(rows, row => Assert.Equal(UnitNames.Sentence(row.Text), row.Text));
+    }
+
+    [Fact]
+    public void ShowNamesTheUnitAndItsTargetsAsAReaderSeesThem()
+    {
+        var state = Start(map: Field);
+        var archer = state.Find("archer-2")!;
+
+        var lines = PlaySession.ShowLines(state, Starter, archer);
+
+        Assert.StartsWith("Archer 2, ", lines[0], StringComparison.Ordinal);
+        Assert.StartsWith("  HP ", lines[1], StringComparison.Ordinal);
+        Assert.All(lines, line => Assert.DoesNotContain("archer-2", line, StringComparison.Ordinal));
+        Assert.All(lines, line => Assert.Equal(UnitNames.Sentence(line), line));
+    }
+
+    [Fact]
+    public void TheConsolesShowAddsTheIdACommandTypesWhereItDiffersFromTheName()
+    {
+        var state = Start(map: Field);
+
+        Assert.StartsWith("Archer 2 (archer-2), ", PlaySession.ShowLines(state, Starter, state.Find("archer-2")!, typed: true)[0], StringComparison.Ordinal);
+        Assert.StartsWith(state.Find("wren")!.Unit.Name + ", ", PlaySession.ShowLines(state, Starter, state.Find("wren")!, typed: true)[0], StringComparison.Ordinal);
+    }
 }

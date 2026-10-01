@@ -2412,8 +2412,8 @@ D  pell             Pell L2 adept              10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 > recall 98
 Recalled to state 98; 2 charges left
-undone: gives back 3 enemy hp; returns wren alive at 22 hp
-the rolls do not change: the same attack will roll the same
+Undone: gives back 3 enemy hp; returns Wren alive at 22 hp
+The rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...

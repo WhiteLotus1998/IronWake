@@ -498,7 +498,7 @@ public sealed class ClientSession
     /// The Recall browser (issue 353): the console's <c>recall list</c> rows, each state row
     /// carrying the history index a click on it recalls.
     /// </summary>
-    public IReadOnlyList<RecallRow> RecallRows => PlaySession.RecallRows(State, _made);
+    public IReadOnlyList<RecallRow> RecallRows => PlaySession.RecallRows(State, Content, _made);
 
     /// <summary>
     /// Rewinds to a history state, as a click on its row in the Recall browser does. The status
@@ -526,7 +526,7 @@ public sealed class ClientSession
         ScrubLengths = Rhythm.ScrubLengths(frames);
         ScrubSerial++;
 
-        Status = undone is null ? null : "undone: " + PlaySession.UndoText(undone) + "\n" + PlaySession.SameRolls;
+        Status = undone is null ? null : "Undone: " + PlaySession.UndoText(undone, UnitNames.Of(State, Content)) + "\n" + PlaySession.SameRolls;
         return true;
     }
 

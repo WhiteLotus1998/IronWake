@@ -2754,8 +2754,8 @@ B  teodor           Teodor L1 pikeman          7,4    hp 11/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 10/28  Hill  group weir, boss, awake
 > recall 121
 Recalled to state 121; 2 charges left
-undone: gives back 1 kill (brigand-2), 59 exp, 39 enemy hp; returns pell alive at 16 hp, 8 hp to dunstan
-the rolls do not change: the same attack will roll the same
+Undone: gives back 1 kill (Brigand 2), 59 exp, 39 enemy hp; returns Pell alive at 16 hp, 8 hp to Dunstan
+The rolls do not change: the same attack will roll the same
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 2
    0123456789012345
  0 ^^^....=..~~..MM

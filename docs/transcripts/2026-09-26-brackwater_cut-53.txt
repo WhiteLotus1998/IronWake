@@ -337,22 +337,22 @@ D  wren             Wren L1 cadet              10,3   hp 20/20  Plain
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall list
-recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same
-  state 0  turn 1  the start  undoes: gives back 7 enemy hp; returns pell alive at 16 hp
-  state 1  turn 1  after move rook 10,1  undoes: gives back 7 enemy hp; returns pell alive at 16 hp
-  state 2  turn 1  after attack rook archer-2  undoes: gives back 7 enemy hp; returns pell alive at 16 hp
-  state 3  turn 1  after move pell 10,2  undoes: gives back 7 enemy hp; returns pell alive at 16 hp
-  state 4  turn 1  after attack pell archer-2  undoes: returns pell alive at 8 hp
-  state 5  turn 1  after move captain 10,4  undoes: returns pell alive at 8 hp
-  state 6  turn 1  after wait captain  undoes: returns pell alive at 8 hp
-  state 7  turn 1  after move dunstan 11,3  undoes: returns pell alive at 8 hp
-  state 8  turn 1  after wait dunstan  undoes: returns pell alive at 8 hp
-  state 9  turn 1  after move wren 10,3  undoes: returns pell alive at 8 hp
-  state 10  turn 1  after wait wren  undoes: returns pell alive at 8 hp
+Recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same
+  State 0  turn 1  the start  undoes: gives back 7 enemy hp; returns Pell alive at 16 hp
+  State 1  turn 1  after move rook 10,1  undoes: gives back 7 enemy hp; returns Pell alive at 16 hp
+  State 2  turn 1  after attack rook archer-2  undoes: gives back 7 enemy hp; returns Pell alive at 16 hp
+  State 3  turn 1  after move pell 10,2  undoes: gives back 7 enemy hp; returns Pell alive at 16 hp
+  State 4  turn 1  after attack pell archer-2  undoes: returns Pell alive at 8 hp
+  State 5  turn 1  after move captain 10,4  undoes: returns Pell alive at 8 hp
+  State 6  turn 1  after wait captain  undoes: returns Pell alive at 8 hp
+  State 7  turn 1  after move dunstan 11,3  undoes: returns Pell alive at 8 hp
+  State 8  turn 1  after wait dunstan  undoes: returns Pell alive at 8 hp
+  State 9  turn 1  after move wren 10,3  undoes: returns Pell alive at 8 hp
+  State 10  turn 1  after wait wren  undoes: returns Pell alive at 8 hp
 > recall 3
 Recalled to state 3; 2 charges left
-undone: gives back 7 enemy hp; returns pell alive at 16 hp
-the rolls do not change: the same attack will roll the same
+Undone: gives back 7 enemy hp; returns Pell alive at 16 hp
+The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 1 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.......

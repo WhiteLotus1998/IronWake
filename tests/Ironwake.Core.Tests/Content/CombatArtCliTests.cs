@@ -78,8 +78,8 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "show captain\nshow wren\n");
 
-        Assert.Contains("  ranks: sword E (0), lance E (0), axe E (0)\n  arts: cleave (sword E, cost 2): +5 Mt and +5 Wt; two extra uses, hit or miss.\n", output);
-        Assert.DoesNotContain("  arts: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
+        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n  Arts: Cleave (sword E, cost 2): +5 Mt and +5 Wt; two extra uses, hit or miss.\n", output);
+        Assert.DoesNotContain("  Arts: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
     }
 
     [Fact]

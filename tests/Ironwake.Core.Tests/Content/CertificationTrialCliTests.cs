@@ -43,7 +43,7 @@ public class CertificationTrialCliTests
         var output = Play(out _, "bulwark_trial", "11", "show wren\n", "--candidate", "wren");
 
         Assert.Contains("certification trial: wren plays as Bulwark with iron_lance\n", output);
-        Assert.Contains("wren: Wren", output);
+        Assert.Contains("> show wren\nWren, ", output);
         Assert.Contains("Bulwark L1", output);
         Assert.DoesNotContain("Alder Fenn", output);
     }

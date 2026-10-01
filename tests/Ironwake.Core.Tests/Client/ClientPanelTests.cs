@@ -73,12 +73,12 @@ public class ClientPanelTests
         }
 
         var printed = console.Split('\n');
-        var start = Array.FindLastIndex(printed, l => l.StartsWith("recall: ", StringComparison.Ordinal));
+        var start = Array.FindLastIndex(printed, l => l.StartsWith("Recall: ", StringComparison.Ordinal));
         var rows = Sallow(script).RecallRows;
 
         Assert.Contains(rows, r => r.Text.Contains("after move", StringComparison.Ordinal));
         Assert.Equal(printed.Skip(start).Take(rows.Count), rows.Select(r => r.Text));
-        Assert.True(printed.Length == start + rows.Count || !printed[start + rows.Count].StartsWith("  state ", StringComparison.Ordinal));
+        Assert.True(printed.Length == start + rows.Count || !printed[start + rows.Count].StartsWith("  State ", StringComparison.Ordinal));
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class ClientPanelTests
         Assert.True(client.Recall(row.State!.Value));
         Assert.Equal(charges - 1, client.State.RecallCharges);
         Assert.Equal($"Recalled to state {row.State}; {charges - 1} charges left", client.Log[^1]);
-        Assert.StartsWith("undone: ", client.Status);
+        Assert.StartsWith("Undone: ", client.Status);
         Assert.EndsWith(PlaySession.SameRolls, client.Status);
     }
 

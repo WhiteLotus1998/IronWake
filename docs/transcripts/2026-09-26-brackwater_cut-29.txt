@@ -1545,8 +1545,8 @@ j  soldier-1        Soldier L3 pikeman         13,6   hp 2/21   Plain  group ban
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall 54
 Recalled to state 54; 2 charges left
-undone: gives back 28 exp, 44 enemy hp; returns dunstan alive at 23 hp, rook alive at 17 hp, wren alive at 20 hp, 8 hp to captain
-the rolls do not change: the same attack will roll the same
+Undone: gives back 28 exp, 44 enemy hp; returns Dunstan alive at 23 hp, Rook alive at 17 hp, Wren alive at 20 hp, 8 hp to Alder Fenn
+The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.......
@@ -2720,8 +2720,8 @@ D  wren             Wren L1 cadet              13,3   hp 5/20   Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall 96
 Recalled to state 96; 1 charges left
-undone: gives back 3 kills (hexer-1, rider-1, soldier-1), 136 exp, 52 enemy hp; returns pell alive at 8 hp, rook alive at 17 hp, 15 hp to wren
-the rolls do not change: the same attack will roll the same
+Undone: gives back 3 kills (Hexer, Rider 1, Soldier), 136 exp, 52 enemy hp; returns Pell alive at 8 hp, Rook alive at 17 hp, 15 hp to Wren
+The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 1
    01234567890123456789
  0 ..........~~~.......

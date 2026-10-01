@@ -1706,8 +1706,8 @@ B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > recall 94
 Recalled to state 94; 2 charges left
-undone: moves only
-the rolls do not change: the same attack will roll the same
+Undone: moves only
+The rolls do not change: the same attack will roll the same
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 2
    01234567890123
  0 ....^^....!...

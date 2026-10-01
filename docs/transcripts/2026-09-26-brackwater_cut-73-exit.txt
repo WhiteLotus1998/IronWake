@@ -1243,8 +1243,8 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > recall 55
 Recalled to state 55; 2 charges left
-undone: gives back 28 exp, 17 enemy hp; returns rook alive at 17 hp, 9 hp to dunstan
-the rolls do not change: the same attack will roll the same
+Undone: gives back 28 exp, 17 enemy hp; returns Rook alive at 17 hp, 9 hp to Dunstan
+The rolls do not change: the same attack will roll the same
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.......

@@ -66,7 +66,7 @@ public class CliPlayTests
 
         Assert.Contains("> item captain 2\nERROR: captain is at full HP\n", output);
         Assert.Contains("> item captain 2\nAlder Fenn uses Field Dressing (0 left)\nAlder Fenn heals 10 (hp 22)\n", output);
-        Assert.Contains("  items: 1: Iron Sword x38\n", output);
+        Assert.Contains("  Items: 1: Iron Sword x38\n", output);
         Assert.Contains("slots count from 1", output);
         Assert.Contains("--strict stops at the first", output);
         Assert.Contains("  item <unit> <slot> [ally] use the item in a slot", output);
@@ -199,10 +199,10 @@ public class CliPlayTests
         var output = Play(out _, "end\nrecall\nrecall 3\nend\nrecall\n");
 
         Assert.DoesNotContain("Unhandled", output);
-        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0; history holds 9 states; 3 charges left\n", output);
         Assert.Contains("> recall 3\nERROR: state 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
         Assert.Contains("-- Player phase, turn 3 --\n", output);
-        Assert.Contains("> recall\nplayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
+        Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
         Assert.Contains("  recall                   list the state each player turn started at", Play(out _, "help\n"));
     }
 
@@ -220,7 +220,7 @@ public class CliPlayTests
         Assert.Contains("> forecast wren brigand-1 1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: wren cannot move to 3,5\n", output);
         Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: wren cannot attack brigand-1 from 2,7\n", output);
-        Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n", output);
+        Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast", Play(out _, "help\n"));
@@ -298,8 +298,8 @@ public class CliPlayTests
         Assert.Contains("> forecast wren brigand-1\nForecast Wren -> Brigand: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
         Assert.Contains("> attack wren brigand-1 1\nForecast Wren -> Brigand:", output);
         Assert.Contains("Wren attacks Brigand\n  Wren misses Brigand\n  Brigand misses Wren\n  Wren hits Brigand for 10", output);
-        Assert.Contains("> show wren\nwren: Wren, Cadet L1, at 2,6 on Plain\n  hp ", output);
-        Assert.Contains("weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)\n", output);
+        Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n  HP ", output);
+        Assert.Contains("Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)\n", output);
         Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\n", output);
         Assert.Contains("battle ongoing at turn 1, player phase\n", output);
     }
@@ -314,12 +314,12 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nrecall list\nrecall 11\nattack wren brigand-1 1\n");
 
-        Assert.Contains("> recall list\nrecall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same\n"
-            + "  state 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
-            + "  state 1  turn 1  after move captain 1,4  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
-            + "  state 2  turn 1  after move wren 2,6  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to wren\n"
-            + "  state 11  turn 2  turn start  undoes: gives back 10 exp, 10 enemy hp\n", output);
-        Assert.Contains("> recall 11\nRecalled to state 11; 2 charges left\nundone: gives back 10 exp, 10 enemy hp\nthe rolls do not change: the same attack will roll the same\n", output);
+        Assert.Contains("> recall list\nRecall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same\n"
+            + "  State 0  turn 1  the start  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to Wren\n"
+            + "  State 1  turn 1  after move captain 1,4  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to Wren\n"
+            + "  State 2  turn 1  after move wren 2,6  undoes: gives back 20 exp, 20 enemy hp; returns 11 hp to Wren\n"
+            + "  State 11  turn 2  turn start  undoes: gives back 10 exp, 10 enemy hp\n", output);
+        Assert.Contains("> recall 11\nRecalled to state 11; 2 charges left\nUndone: gives back 10 exp, 10 enemy hp\nThe rolls do not change: the same attack will roll the same\n", output);
         const string Strikes = "Wren attacks Brigand\n  Wren misses Brigand\n  Brigand misses Wren\n  Wren hits Brigand for 10 (hp 2)\n";
         var first = output.IndexOf(Strikes, StringComparison.Ordinal);
         Assert.True(first >= 0);
@@ -339,7 +339,7 @@ public class CliPlayTests
             49, 4, ValueList<string>.Empty, 14, 0, 8, ValueList<string>.Empty,
             ValueList<string>.Of("teodor"), ValueList<HpReturn>.Of(new HpReturn("teodor", 17), new HpReturn("wren", 14)));
 
-        Assert.Equal("gives back 14 exp, 8 enemy hp; returns teodor alive at 17 hp, 14 hp to wren", PlaySession.UndoText(cost));
+        Assert.Equal("gives back 14 exp, 8 enemy hp; returns teodor alive at 17 hp, 14 hp to wren", PlaySession.UndoText(cost, UnitNames.None));
     }
 
     /// <summary>Issue 75: a rewind names the kill it gives back and the unit it returns, and one over moves alone says so.</summary>
@@ -348,10 +348,10 @@ public class CliPlayTests
     {
         const string Script = "move captain 1,4\nmove wren 2,6\nend\nattack wren brigand-1 1\nattack wren brigand-1 1\nrecall 0\n";
 
-        Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\nundone: gives back 1 kill (brigand-1), 40 exp, 22 enemy hp\n", Play(out _, Script, seed: "5"));
+        Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\nUndone: gives back 1 kill (Brigand), 40 exp, 22 enemy hp\n", Play(out _, Script, seed: "5"));
         Assert.Contains("Wren falls at 2,6\n", Play(out _, Script, seed: "3"));
-        Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\nundone: gives back 20 enemy hp; returns wren alive at 20 hp\n", Play(out _, Script, seed: "3"));
-        Assert.Contains("undone: moves only\n", Play(out _, "move captain 1,4\nrecall 0\n"));
+        Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\nUndone: gives back 20 enemy hp; returns Wren alive at 20 hp\n", Play(out _, Script, seed: "3"));
+        Assert.Contains("Undone: moves only\n", Play(out _, "move captain 1,4\nrecall 0\n"));
     }
 
     /// <summary>
@@ -363,7 +363,7 @@ public class CliPlayTests
     {
         var output = Play(out var exit, "move captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall 0\nmove captain 1,4\nrecall list\nrecall 0\n");
 
-        Assert.Contains("> recall list\nrecall: 0 of 3 charges left, 3 spent; a spent charge does not come back, and the same attack will roll the same\n  no charges left: nothing more can be recalled on this map\n", output);
+        Assert.Contains("> recall list\nRecall: 0 of 3 charges left, 3 spent; a spent charge does not come back, and the same attack will roll the same\n  No charges left: nothing more can be recalled on this map\n", output);
         Assert.Contains("> recall 0\nERROR: no Recall charges left on this map\n", output);
         Assert.Contains("line 9: recall 0: no Recall charges left on this map", output);
     }
@@ -404,8 +404,8 @@ public class CliPlayTests
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("Archer 2 falls at 4,7", output);
         Assert.Contains("The mill group wakes (proximity)", output);
-        Assert.Contains("  items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
-        Assert.Contains("  ranks: sword E (0), lance E (0), axe E (0)\n", Play(out _, "show captain\n", "139"));
+        Assert.Contains("  Items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
+        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n", Play(out _, "show captain\n", "139"));
         Assert.Contains("Mill Bandit falls at 6,1", output);
         Assert.DoesNotContain("uses Field Dressing", output);
     }
@@ -484,7 +484,7 @@ public class CliPlayTests
         Assert.Contains("Teodor falls at 8,7\nIron Lance (Teodor's) lies at 8,7\n", output);
         Assert.Contains("keepsakes: Iron Lance (Teodor's) at 8,7\n", output);
         Assert.Contains("Dunstan recovers Iron Lance (Teodor's)\n", output);
-        Assert.Contains("  items: 1: Iron Lance x39, 2: Iron Lance (Teodor's) x37\n", output);
+        Assert.Contains("  Items: 1: Iron Lance x39, 2: Iron Lance (Teodor's) x37\n", output);
     }
 
     /// <summary>
@@ -1928,7 +1928,7 @@ public class CliPlayTests
         {
             var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("> show captain\ncaptain: ", output);
+            Assert.Contains("> show captain\nAlder Fenn (captain), ", output);
             Assert.Contains("at 6,2 on Fort (heals 20 percent, 4 hp)\n", output);
             Assert.Contains("at 2,8 on Plain\n", output);
         }
@@ -2253,10 +2253,10 @@ public class CliPlayTests
 
     /// <summary>Issue 267: <c>show</c> prints the class's Mov and movement type, one unit of each type on Brackwater Cut in daylight.</summary>
     [Theory]
-    [InlineData("captain", "mov 4 (infantry)")]
-    [InlineData("rider-1", "mov 6 (cavalry)")]
-    [InlineData("rook", "mov 6 (flying)")]
-    [InlineData("shieldbearer-1", "mov 4 (armored)")]
+    [InlineData("captain", "Mov 4 (infantry)")]
+    [InlineData("rider-1", "Mov 6 (cavalry)")]
+    [InlineData("rook", "Mov 6 (flying)")]
+    [InlineData("shieldbearer-1", "Mov 4 (armored)")]
     public void ShowPrintsMovAndMovementType(string unit, string mov)
     {
         var script = Path.Combine(Path.GetTempPath(), "ironwake-show-" + Guid.NewGuid().ToString("N") + ".script");
@@ -2266,7 +2266,7 @@ public class CliPlayTests
             var output = Run(out _, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--content", Fixture.RealContentDirectory());
 
             var stats = output.Split('\n').SkipWhile(l => l != "> show " + unit).ElementAt(2);
-            Assert.StartsWith("  hp ", stats);
+            Assert.StartsWith("  HP ", stats);
             Assert.EndsWith("  " + mov, stats);
         }
         finally

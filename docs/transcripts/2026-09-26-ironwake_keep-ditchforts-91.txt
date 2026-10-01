@@ -2125,8 +2125,8 @@ k  soldier-4        Soldier L2 pikeman         6,8    hp 10/20  Plain  group wav
 B  wren             Wren L1 cadet              7,4    hp 20/20  Plain
 > recall 108
 Recalled to state 108; 2 charges left
-undone: gives back 2 kills (brigand-4, soldier-3), 47 exp, 1 level, 40 enemy hp; returns teodor alive at 21 hp, 8 hp to captain
-the rolls do not change: the same attack will roll the same
+Undone: gives back 2 kills (Brigand 4, Soldier 3), 47 exp, 1 level, 40 enemy hp; returns Teodor alive at 21 hp, 8 hp to Alder Fenn
+The rolls do not change: the same attack will roll the same
 Ironwake Keep  turn 6 of 8  player phase  survive  recall 2
    0123456789012345
  0 ....^^....#.....
