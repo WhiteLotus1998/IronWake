@@ -376,6 +376,9 @@ public partial class Main : Node2D
                     case Key.Tab:
                         _logOpen = !_logOpen;
                         break;
+                    case Key.B:
+                        _client.SceneSetting = Scenes.Next(_client.SceneSetting);
+                        break;
                     case Key.M:
                         ToggleMute();
                         break;
@@ -565,6 +568,7 @@ public partial class Main : Node2D
         DrawKeys();
         DrawCallout();
         DrawTerrainHover();
+        DrawBattleScene();
         DrawEndCard();
     }
 
@@ -595,6 +599,7 @@ public partial class Main : Node2D
         }
 
         RecallChip(x, state);
+        DrawSceneChip();
     }
 
     /// <summary>

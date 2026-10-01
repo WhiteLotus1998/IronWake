@@ -61,6 +61,19 @@ public sealed record Beat(
     /// </summary>
     public bool Pulse { get; init; }
 
+    /// <summary>
+    /// On a strike beat the setting plays as a scene (issue 535), the scene: the beat then lasts
+    /// the scene's length and its numbers land on the scene's contact frames, so the board under
+    /// it keeps time. Null when the strike plays on the map.
+    /// </summary>
+    public BattleScene? Scene { get; init; }
+
+    /// <summary>On a strike beat that levels a unit, the level-up card shown after it (issue 535), whatever the setting.</summary>
+    public LevelUpCard? LevelUp { get; init; }
+
+    /// <summary>When the level-up card rises, from the beat's start: after the scene or the strikes on the map.</summary>
+    public float LevelUpAt => Scene?.Length ?? Rhythm.StrikeLength(this);
+
     private static readonly IReadOnlyDictionary<string, int> NoHp = new Dictionary<string, int>();
 
     public bool IsMove => From is not null && To is not null;
@@ -184,6 +197,11 @@ public static class Rhythm
     /// <summary>When each of a strike beat's numbers lands, from the beat's start.</summary>
     public static IReadOnlyList<float> PopTimes(Beat beat)
     {
+        if (beat.Scene is { } scene)
+        {
+            return scene.Strikes.Select(s => s.Contact).ToList();
+        }
+
         var times = new float[beat.Pops.Count];
         var t = Lead;
         for (var i = 0; i < beat.Pops.Count; i++)
@@ -267,10 +285,16 @@ public static class Rhythm
     /// </summary>
     public static float Total(IEnumerable<Beat> beats, bool decided) => beats.Sum(Length) + (decided ? EndHold : 0);
 
-    /// <summary>A beat's whole length: a walk by its steps, a strike by its numbers, a death by its fade and hold.</summary>
+    /// <summary>
+    /// A beat's whole length: a walk by its steps, a strike by its scene or its numbers and then
+    /// its level-up card's hold when it carries one (issue 535), a death by its fade and hold.
+    /// </summary>
     public static float Length(Beat beat) =>
         beat.IsMove ? 0.1f + 0.07f * (beat.Path.Count + 1)
-        : beat.IsStrike ? Lead + beat.Pops.Sum(StrikeStep) + 0.1f
+        : beat.IsStrike ? beat.LevelUpAt + (beat.LevelUp is null ? 0 : LevelUpCard.Hold)
         : beat.Fell is not null ? Fade + DeathHold
         : 0;
+
+    /// <summary>A strike beat's length on the map, without a scene or a level-up card: the lean, each strike's step, and a breath.</summary>
+    public static float StrikeLength(Beat beat) => Lead + beat.Pops.Sum(StrikeStep) + 0.1f;
 }

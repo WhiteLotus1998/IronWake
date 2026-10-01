@@ -700,7 +700,7 @@ public sealed class ClientSession
         State = result.Next;
         var names = UnitNames.Of(State, Content);
         _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content, names)));
-        Beats = Hold(result.Events.Select(e => Beat.Of(e, before, State)).OfType<Beat>(), enemyPhase: false).ToList();
+        Beats = Hold(result.Events.Select(e => Staged(e, before, State, result.Events)).OfType<Beat>(), enemyPhase: false).ToList();
         BeatSerial++;
         _fallen.AddRange(Beats.Select(b => b.Fell).OfType<FallenMark>());
         _log.AddRange(Ironwake.Core.Objective.Notices(before, State, Content, command));
@@ -755,7 +755,7 @@ public sealed class ClientSession
                     _ghosts[dead.Id] = dead;
                 }
 
-                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content, UnitNames.Of(State, Content)), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content), first));
+                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content, UnitNames.Of(State, Content)), before, State), Staged(e, before, State, result.Events), ActCards.Of(e, before, State, Content), first));
                 first = false;
             }
 
@@ -792,6 +792,33 @@ public sealed class ClientSession
 
         Act = act is { Attacker: null } && Act is { Attacker: not null } ? Act : act ?? Act;
         return true;
+    }
+
+    /// <summary>
+    /// Which combats play as a battle scene (issue 535): the key moments unless the player has
+    /// stepped the setting on. Read when a command's beats are made, so a change applies from the
+    /// next command.
+    /// </summary>
+    public SceneSetting SceneSetting { get; set; } = SceneSetting.KeyMoments;
+
+    /// <summary>
+    /// The beat for <paramref name="e"/>, with its scene when <see cref="SceneSetting"/> plays the
+    /// combat as one and its level-up card when <paramref name="events"/>, its command's events,
+    /// level a unit.
+    /// </summary>
+    private Beat? Staged(GameEvent e, BattleState before, BattleState after, IReadOnlyList<GameEvent> events)
+    {
+        var beat = Beat.Of(e, before, after);
+        if (beat is null || e is not CombatFought combat)
+        {
+            return beat;
+        }
+
+        return beat with
+        {
+            Scene = Scenes.Plays(SceneSetting, combat, before, events) ? BattleScene.Of(combat, before, after, Content) : null,
+            LevelUp = LevelUpCard.Of(events, after, Content),
+        };
     }
 
     /// <summary>The last lethal number shown, kept so the death beat that follows it can hold it (issue 514).</summary>
