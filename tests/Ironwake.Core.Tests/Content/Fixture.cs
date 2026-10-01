@@ -203,7 +203,8 @@ internal static class Fixture
     /// <summary>
     /// A copy of the real content directory under the temp directory. Every copy stands for a build
     /// some transcript was journaled on, all of them before the keep sold rooms, so the keep's
-    /// <c>beds</c> and <c>rooms</c> are taken out (issue 687).
+    /// <c>beds</c> and <c>rooms</c> are taken out (issue 687), and before the forge, so the
+    /// <c>forge</c> and the quests' material payouts are taken out too (issue 647).
     /// </summary>
     private static string CopyRealContent(string prefix)
     {
@@ -222,8 +223,19 @@ internal static class Fixture
         {
             keep.Remove("beds");
             keep.Remove("rooms");
-            File.WriteAllText(campaignPath, campaign.ToJsonString());
         }
+
+        campaign.AsObject().Remove("forge");
+        if (campaign["quests"] is System.Text.Json.Nodes.JsonArray quests)
+        {
+            foreach (var quest in quests.OfType<System.Text.Json.Nodes.JsonObject>())
+            {
+                quest.Remove("common");
+                quest.Remove("rare");
+            }
+        }
+
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
 
         return target;
     }

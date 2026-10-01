@@ -45,6 +45,12 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     /// <summary>The signature item a win puts in the member's pack at full uses (part 2 only), or null for none.</summary>
     public string? Pays { get; init; }
 
+    /// <summary>The common material a win puts in the company's stores (issue 647); 0 for none.</summary>
+    public int Common { get; init; }
+
+    /// <summary>The rare material a win puts in the company's stores (issue 647), held by the validator to exactly what the issued signatures need (<see cref="Forge.RareRefusal"/>).</summary>
+    public int Rare { get; init; }
+
     public ValueList<string> Before { get; init; } = ValueList<string>.Empty;
 
     public ValueList<string> After { get; init; } = ValueList<string>.Empty;
@@ -70,6 +76,9 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 
     /// <summary>The keep's map and the edits sold for it (issue 82, an experiment); <see cref="KeepMenu.None"/> when the campaign has none.</summary>
     public KeepMenu Keep { get; init; } = KeepMenu.None;
+
+    /// <summary>The forge's numbers (issue 647); <see cref="ForgeRules.None"/> when the campaign has no <c>forge</c>.</summary>
+    public ForgeRules Forge { get; init; } = ForgeRules.None;
 
     /// <summary>
     /// The index of the map <paramref name="unitId"/> arrives on (issue 632), or -1 for a unit no

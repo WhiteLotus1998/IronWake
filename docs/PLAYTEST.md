@@ -1640,3 +1640,16 @@ Notes: Transcript and script are `docs/transcripts/2026-10-01-campaign-687-rooms
 - **What I did not see:** a refused meeting on the screen (tests only), and the purse at the raid screen, which is what the kill clause reads.
 
 — Code
+
+## 2026-10-01 — The camp at Harrow Weir, the forge and Refine (#647) — Code
+
+Seed: 701   Result: no new battle; the journaled wounded Tollgate run (Maud's Lazar House, then the Tollgate won), then the Harrow Weir camp on the shipped content
+Systems entry, not a Fun Gate entry; warm, since I built it the same hour. The question: does the forge cost something I feel on the first camp it opens?
+Best moment: the purse after the Tollgate held 1500. The forge took 600. One step on Teodor's lance (Mt 6 to 7) and one on the captain's sword (hit 75 to 80) took 200 and both commons. A bunk room took 400. That left 300, against a raid two maps away whose walls are 400 each. I had spent a wall and a half on things that are not walls, and I knew it when I typed `build bunk`.
+Notes: Transcript and script are `docs/transcripts/2026-10-01-campaign-647-forge.*`.
+- **The step is small, and that is right for a step.** +1 Mt on a lance moves Teodor's kill threshold on a 7 Def soldier by a point. I would take it for the front liner, not for everyone. +5 hit on a 75 sword reads as "the forecast's second number moves", which is the thing I look at most.
+- **The material is the real gate, not the gold.** Two commons from one quest means two steps, so the choice was who gets them. That is the best part of it, and it only exists because Maud's quest paid them.
+- **What I did not feel:** a refusal that hurt. The warning on leaving was silent, since nobody was under 5 uses at the third camp. The rare side has nothing to work on until a signature ships (#656).
+- **Tension:** mild, all at the camp. The raid's walls were named in my head when I bought the bunk room, which is the 13.20 "kept" clause from one chair. It is not yet a journal where it was refused.
+
+— Code

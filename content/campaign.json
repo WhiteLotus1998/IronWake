@@ -43,7 +43,7 @@
   ],
   "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
   "quests": [
-    { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house",
+    { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house", "common": 2,
       "before": [
         "Maud asked for a day and one pair of hands. Before the levy, her order kept a lazar house at Sorrel Bend. The order called its sisters home at the armistice and left the sick with a keeper, and the keeper has stopped writing.",
         "She says the sick do not need a captain. They need someone to keep the strippers off the door until the carts come at dusk, and she does not expect to be thanked for it, by them or by me.",
@@ -54,12 +54,14 @@
         "She has not said whether the day was worth it. She has started asking the company whether they want the prayer before she says it."
       ] }
   ],
+  "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
   "keep": {
     "map": "ironwake_keep",
     "raid": "ironwake_raid",
     "beds": 12,
     "rooms": [
-      { "id": "bunk", "name": "Bunk room", "price": 400, "beds": 1, "max": 2 }
+      { "id": "bunk", "name": "Bunk room", "price": 400, "beds": 1, "max": 2 },
+      { "id": "forge", "name": "Forge", "price": 600, "max": 1, "forge": true, "after": "the_tollgate" }
     ],
     "edits": [
       { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },

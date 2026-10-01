@@ -18,7 +18,7 @@ public class SignatureItemTests
 
     private static readonly Ability Oath = new("test_oath", "Test Oath", "Placeholder signature art.", new CombatArtEffect(WeaponType.Sword, WeaponRank.E, 1, 2, 0, 0, 0, 0) { Item = "test_vow" });
 
-    private static readonly CampaignQuest Second = new("wren_2", "wren", 2, "the_lazar_house") { Pays = "test_vow" };
+    private static readonly CampaignQuest Second = new("wren_2", "wren", 2, "the_lazar_house") { Pays = "test_vow", Rare = 3 };
 
     private static readonly GameContent Content = Shipped with
     {
@@ -64,7 +64,7 @@ public class SignatureItemTests
         var after = record.AfterQuest(Decided(record), "wren_2", Content);
 
         Assert.True(after.Accepted);
-        Assert.Equal("wren wins wren_2; wren receives Test Vow; nobody fell", after.Text);
+        Assert.Equal("wren wins wren_2; wren receives Test Vow; the stores take 3 rare material; nobody fell", after.Text);
         Assert.Equal(new ItemStack("test_vow", Vow.Durability), after.Record.Find("wren")!.Inventory.Items[^1]);
         Assert.DoesNotContain(after.Record.Find("maud")!.Inventory.Items, s => s.ItemId == "test_vow");
     }

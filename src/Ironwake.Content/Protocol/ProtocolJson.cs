@@ -977,6 +977,13 @@ public static class ProtocolJson
                 w.WriteNumber("stage", stack.Stage);
             }
 
+            if (stack.Refines != 0)
+            {
+                w.WriteNumber("refines", stack.Refines);
+                w.WriteNumber("refineMt", stack.RefineMt);
+                w.WriteNumber("refineHit", stack.RefineHit);
+            }
+
             w.WriteEndObject();
         }
 
@@ -1080,7 +1087,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0 }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))
@@ -1176,6 +1183,17 @@ public static class ProtocolJson
         {
             WriteStrings(w, "rooms", record.Rooms);
         }
+
+        if (record.CommonMaterial > 0)
+        {
+            w.WriteNumber("commonMaterial", record.CommonMaterial);
+        }
+
+        if (record.RareMaterial > 0)
+        {
+            w.WriteNumber("rareMaterial", record.RareMaterial);
+        }
+
         w.WriteEndObject();
     });
 
@@ -1222,6 +1240,8 @@ public static class ProtocolJson
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
             Keep = ReadKeep(e, content),
             Rooms = ReadRooms(e, content),
+            CommonMaterial = Math.Max(0, OptionalInt(e, "commonMaterial") ?? 0),
+            RareMaterial = Math.Max(0, OptionalInt(e, "rareMaterial") ?? 0),
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
         };
     }

@@ -29,6 +29,7 @@ public sealed class CampaignSession
           shop                     What the shop sells before this map, and each price
           buy <item> <unit>        Buy an item at full uses into the unit's next free slot
           repair <unit> <slot>     Restore a weapon's uses, at its price per use
+          refine <unit> <slot> mt|hit  Raise a weapon one step at the keep's forge, for one material and the smith's fee
           drop <unit> <slot>       Throw away an item, no refund; a signature item is never dropped
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
@@ -676,6 +677,7 @@ public sealed class CampaignSession
             var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (words is ["march"])
             {
+                Lines(LowLines(_record, _content));
                 return true;
             }
 
@@ -738,6 +740,9 @@ public sealed class CampaignSession
                 break;
             case ["drop", var unitId, var slotText] when int.TryParse(slotText, out var slot):
                 Take(_record.Drop(unitId, slot - 1, _content), text);
+                break;
+            case ["refine", var unitId, var slotText, var stat] when int.TryParse(slotText, out var slot):
+                Take(_record.Refine(unitId, slot - 1, stat, _content), text);
                 break;
             case ["classes"]:
                 PrintClasses(null);
@@ -842,6 +847,9 @@ public sealed class CampaignSession
                 break;
             case ["drop", ..]:
                 Error(text, "usage: drop <unit> <slot>");
+                break;
+            case ["refine", ..]:
+                Error(text, "usage: refine <unit> <slot> mt|hit");
                 break;
             case ["certify", ..]:
                 Error(text, "usage: certify <unit> <class>");
@@ -1090,11 +1098,27 @@ public sealed class CampaignSession
         var lines = new List<string> { $"Rooms: beds: {record.BedsTaken}/{beds}; a fallen member keeps their bed" };
         foreach (var room in keep.Rooms)
         {
-            lines.Add($"  {room.Id}: {room.Name}, {room.Price}, +{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}, built {record.Rooms.Count(id => id == room.Id)} of {room.Max}");
+            var does = room.Forge ? $"Refine +{content.Campaign.Forge.Mt} Mt or +{content.Campaign.Forge.Hit} hit a step" : $"+{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}";
+            var opens = room.After.Length > 0 && content.Campaign.Maps.ToList().FindIndex(m => m.MapId == room.After) >= record.MapIndex ? $"; opens once {room.After} is won" : "";
+            lines.Add($"  {room.Id}: {room.Name}, {room.Price}, {does}, built {record.Rooms.Count(id => id == room.Id)} of {room.Max}{opens}");
+        }
+
+        if (keep.Rooms.Any(r => r.Forge))
+        {
+            var forge = content.Campaign.Forge;
+            lines.Add($"  Stores: common {record.CommonMaterial}, rare {record.RareMaterial}; a step costs one and {forge.Price}, shop weapons to +{forge.CommonSteps} on common, the main line's signatures to +{forge.RareSteps} on rare");
         }
 
         return lines;
     }
+
+    /// <summary>
+    /// The warning on leaving the camp (issue 647): <c>low: &lt;name&gt;'s &lt;weapon&gt; has &lt;n&gt; uses</c>
+    /// for each unit going to the next map whose equipped weapon has fewer than
+    /// <see cref="CampaignRecord.LowUses"/>. It warns and never refuses.
+    /// </summary>
+    public static IReadOnlyList<string> LowLines(CampaignRecord record, GameContent content) =>
+        record.LowWeapons(content).Select(l => $"low: {l.Unit.Name}'s {l.Weapon.Name} has {l.Uses} {(l.Uses == 1 ? "use" : "uses")}").ToList();
 
     /// <summary>
     /// One line per arrival of the next map who will not join because no bed is free (issue 687):
@@ -1211,7 +1235,7 @@ public sealed class CampaignSession
             return $"{item.Name} {stack.Uses}/{item.Uses}";
         }
 
-        var text = $"{weapon.Name}{Keepsake.Suffix(stack, content)} {stack.Uses}/{weapon.Durability}";
+        var text = $"{Forge.Name(weapon.Name, stack)}{Keepsake.Suffix(stack, content)} {stack.Uses}/{weapon.Durability}";
         if (stack.Uses < weapon.Durability && CampaignRules.RepairPricePerUse(weapon) is { } perUse)
         {
             text += $" (repair {(weapon.Durability - stack.Uses) * perUse})";
