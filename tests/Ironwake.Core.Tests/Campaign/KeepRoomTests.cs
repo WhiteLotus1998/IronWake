@@ -33,7 +33,7 @@ public class KeepRoomTests
     public void TheKeepSeatsTheCastPlusOneSpareAndSellsTheBunkRoom()
     {
         Assert.Equal(Content.Cast.Count + 1, Menu.Beds);
-        Assert.Equal(new KeepRoom("bunk", "Bunk room", 400, 1, 2), Assert.Single(Menu.Rooms));
+        Assert.Equal(new KeepRoom("bunk", "Bunk room", 400, 1, 2), Menu.Rooms[0]);
         Assert.Equal(Content.Cast.Count - 1, CampaignRecord.Start(Content, 1).BedsTaken);
     }
 
@@ -70,7 +70,7 @@ public class KeepRoomTests
         var none = Content with { Campaign = Content.Campaign with { Keep = Menu with { Rooms = ValueList<KeepRoom>.Empty } } };
 
         Assert.Equal("Bunk room costs 400 and the purse holds 399", start.BuildRoom("bunk", Content).Text);
-        Assert.Equal("the keep has no room 'forge'; it builds bunk", start.BuildRoom("forge", Content).Text);
+        Assert.Equal("the keep has no room 'chapel'; it builds bunk, forge", start.BuildRoom("chapel", Content).Text);
         Assert.Equal("the keep has no rooms to build", start.BuildRoom("bunk", none).Text);
         Assert.Equal("the campaign is finished", (start with { Purse = 400, MapIndex = Content.Campaign.Maps.Count }).BuildRoom("bunk", Content).Text);
     }
@@ -143,7 +143,13 @@ public class KeepRoomTests
         var record = CampaignRecord.Start(Content, 1) with { Rooms = ValueList<string>.Of("bunk") };
 
         Assert.Equal(
-            new[] { $"Rooms: beds: 10/{Menu.Beds + 1}; a fallen member keeps their bed", "  bunk: Bunk room, 400, +1 bed, built 1 of 2" },
+            new[]
+            {
+                $"Rooms: beds: 10/{Menu.Beds + 1}; a fallen member keeps their bed",
+                "  bunk: Bunk room, 400, +1 bed, built 1 of 2",
+                "  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won",
+                "  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare",
+            },
             CampaignSession.RoomLines(record, Content));
         Assert.Empty(CampaignSession.RoomLines(record with { MapIndex = Content.Campaign.Maps.Count }, Content));
     }

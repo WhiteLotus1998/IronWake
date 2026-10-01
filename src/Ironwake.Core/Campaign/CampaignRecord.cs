@@ -60,6 +60,39 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<string> Rooms { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>The company's common material for the forge (issue 647), from quests; between maps, so a Recall never touches it.</summary>
+    public int CommonMaterial { get; init; }
+
+    /// <summary>The company's rare material for the forge (issue 647), from the main line's quests.</summary>
+    public int RareMaterial { get; init; }
+
+    /// <summary>The uses below which the camp warns on leaving that an equipped weapon is low (issue 647).</summary>
+    public const int LowUses = 5;
+
+    /// <summary>
+    /// The warning on leaving the camp (issue 647): each unit going to the next map, the bench left
+    /// out, whose equipped weapon is a physical weapon with fewer than <see cref="LowUses"/> uses, in
+    /// roster order, with that weapon. Spells refresh every map, so they never warn. It never refuses.
+    /// </summary>
+    public IReadOnlyList<(Unit Unit, Weapon Weapon, int Uses)> LowWeapons(GameContent content)
+    {
+        var low = new List<(Unit, Weapon, int)>();
+        foreach (var unit in Present(content).Where(u => !Benched.Contains(u.Id)))
+        {
+            var holder = new BattleUnit(unit, Side.Player, default, 1, false, false);
+            var slot = holder.EquippedSlot(content);
+            if (slot >= 0 && holder.EquippedWeapon(content) is { IsMagic: false } weapon && unit.Inventory.Items[slot].Uses < LowUses)
+            {
+                low.Add((unit, weapon, unit.Inventory.Items[slot].Uses));
+            }
+        }
+
+        return low;
+    }
+
+    /// <summary>Whether the keep's forge stands (issue 647): a room marked <see cref="KeepRoom.Forge"/> has been built.</summary>
+    public bool ForgeBuilt(GameContent content) => Rooms.Any(id => content.Campaign.Keep.Room(id) is { Forge: true });
+
     /// <summary>
     /// Whether a fall is for good (issue 664), chosen once at the start like the difficulty and
     /// printed on the record. Off, a unit that falls on a won map or a side map comes back
@@ -752,12 +785,21 @@ public sealed record CampaignRecord(
             paid = $"; {quest.MemberId} receives {content.ItemName(item)}";
         }
 
+        var common = won ? quest.Common : 0;
+        var rare = won ? quest.Rare : 0;
+        if (common + rare > 0)
+        {
+            paid += "; the stores take " + string.Join(" and ", new[] { (common, "common"), (rare, "rare") }.Where(m => m.Item1 > 0).Select(m => $"{m.Item1} {m.Item2} material"));
+        }
+
         var record = this with
         {
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
             QuestsTried = QuestsTried.Add(questId),
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
+            CommonMaterial = CommonMaterial + common,
+            RareMaterial = RareMaterial + rare,
         };
         var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"
             : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"
@@ -911,6 +953,11 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, "the campaign is finished");
         }
 
+        if (room.After.Length > 0 && content.Campaign.Maps.ToList().FindIndex(m => m.MapId == room.After) is var after && after >= MapIndex)
+        {
+            return ScreenResult.Refused(this, $"{room.Name} opens once {room.After} is won");
+        }
+
         var built = Rooms.Count(id => id == room.Id);
         if (built >= room.Max)
         {
@@ -922,10 +969,96 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"{room.Name} costs {room.Price} and the purse holds {Purse}");
         }
 
-        var after = this with { Purse = Purse - room.Price, Rooms = Rooms.Add(room.Id) };
+        var bought = this with { Purse = Purse - room.Price, Rooms = Rooms.Add(room.Id) };
+        var adds = room.Beds > 0 ? $"; beds: {bought.BedsTaken}/{bought.Beds(content)}" : room.Forge ? "; refine <unit> <slot> mt|hit works here" : "";
+        return new ScreenResult(bought, $"{room.Name} built for {room.Price}, the purse holds {bought.Purse}{adds}", true);
+    }
+
+    /// <summary>
+    /// Refines the weapon in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> one step
+    /// at the forge (issue 647, DESIGN section 13.20): <paramref name="stat"/> <c>mt</c> adds
+    /// <see cref="ForgeRules.Mt"/>, <c>hit</c> adds <see cref="ForgeRules.Hit"/>, for one material of
+    /// the weapon's kind (<see cref="Forge.MaterialFor"/>) and <see cref="ForgeRules.Price"/> from
+    /// the purse. Refused without a forge, for a unit or slot that is not there, an item, a weapon
+    /// the forge never works (named), an heirloom short of its last stage (the smith's own line at
+    /// rust), a weapon at its last step, a stat other than mt or hit, and a short store or purse.
+    /// </summary>
+    public ScreenResult Refine(string unitId, int slot, string stat, GameContent content)
+    {
+        var rules = content.Campaign.Forge;
+        if (!ForgeBuilt(content))
+        {
+            return ScreenResult.Refused(this, "the keep has no forge; build it first");
+        }
+
+        if (stat is not ("mt" or "hit"))
+        {
+            return ScreenResult.Refused(this, $"'{stat}' is not a step; Refine adds mt or hit, never weight");
+        }
+
+        if (Find(unitId) is not { } unit)
+        {
+            return ScreenResult.Refused(this, $"'{unitId}' is not on the roster");
+        }
+
+        if (slot < 0 || slot >= unit.Inventory.Count)
+        {
+            return ScreenResult.Refused(this, $"{unitId} has no item in slot {slot + 1}");
+        }
+
+        var stack = unit.Inventory.Items[slot];
+        if (!content.Weapons.TryGetValue(stack.ItemId, out var weapon))
+        {
+            return ScreenResult.Refused(this, $"{content.Item(stack.ItemId).Name} is not a weapon; nothing to Refine");
+        }
+
+        var (material, refusal) = Forge.MaterialFor(weapon, content);
+        if (material is not { } kind)
+        {
+            return ScreenResult.Refused(this, refusal!);
+        }
+
+        if (Heirloom.SmithRefuses(weapon, stack))
+        {
+            return ScreenResult.Refused(this, $"the smith: \"{Heirloom.SmithRefusal}\"");
+        }
+
+        if (weapon.Heirloom is { } ladder && stack.Stage < ladder.Turns.Count)
+        {
+            return ScreenResult.Refused(this, $"{weapon.Name} is not yet woken; the smith works it only then");
+        }
+
+        var max = Forge.MaxSteps(kind, rules);
+        if (stack.Refines >= max)
+        {
+            return ScreenResult.Refused(this, $"{Forge.Name(weapon.Name, stack)} is Refined {stack.Refines} of {max}");
+        }
+
+        var held = kind == Material.Rare ? RareMaterial : CommonMaterial;
+        var word = kind == Material.Rare ? "rare" : "common";
+        if (held < 1)
+        {
+            return ScreenResult.Refused(this, $"Refining {weapon.Name} takes 1 {word} material and the stores hold none");
+        }
+
+        if (Purse < rules.Price)
+        {
+            return ScreenResult.Refused(this, $"Refining {weapon.Name} costs {rules.Price} and the purse holds {Purse}");
+        }
+
+        var refined = stat == "mt"
+            ? stack with { RefineMt = stack.RefineMt + rules.Mt, Refines = stack.Refines + 1 }
+            : stack with { RefineHit = stack.RefineHit + rules.Hit, Refines = stack.Refines + 1 };
+        var after = Replace(unit with { Inventory = unit.Inventory.Replace(slot, refined) }) with
+        {
+            Purse = Purse - rules.Price,
+            CommonMaterial = kind == Material.Common ? CommonMaterial - 1 : CommonMaterial,
+            RareMaterial = kind == Material.Rare ? RareMaterial - 1 : RareMaterial,
+        };
+        var shaped = Forge.Shape(Heirloom.Shape(weapon, refined), refined);
         return new ScreenResult(
             after,
-            $"{room.Name} built for {room.Price}, the purse holds {after.Purse}; beds: {after.BedsTaken}/{after.Beds(content)}",
+            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Mt {shaped.Mt}, hit {shaped.Hit}, for 1 {word} material and {rules.Price}; the purse holds {after.Purse}",
             true);
     }
 

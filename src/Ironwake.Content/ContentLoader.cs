@@ -55,7 +55,13 @@ public static class ContentLoader
         ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList()) : CampaignRules.None;
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
+        var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
+        if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
+        {
+            throw new ContentException(campaignText.Name, "quests", "rare", rare);
+        }
+
+        return content;
     }
 
     /// <summary>
@@ -106,7 +112,11 @@ public static class ContentLoader
     /// member at most, part 2 only after that member's part 1 in the file), a <c>map</c> id under
     /// <c>content/quests</c>, optional <c>before</c> and <c>after</c> cards, and on a part 2 an optional
     /// <c>pays</c>, a weapon bound to the member (<see cref="Weapon.BoundTo"/>). Whoever loads the
-    /// map checks its slots (<see cref="CampaignRecord.QuestMapRefusal"/>).
+    /// map checks its slots (<see cref="CampaignRecord.QuestMapRefusal"/>). A quest's optional
+    /// <c>common</c> and <c>rare</c> (issue 647) are the material a win pays, each at least 0; the rare
+    /// in all quests is held to exactly what the issued signatures need (<see cref="Forge.RareRefusal"/>).
+    /// The optional <c>forge</c> object (issue 647) is <see cref="ForgeRules"/>: <c>mt</c>, <c>hit</c>,
+    /// <c>price</c>, <c>common</c> and <c>rare</c> steps, each at least 1; a forge room needs it.
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
@@ -297,7 +307,14 @@ public static class ContentLoader
                 }
             }
 
-            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after"), Pays = pays });
+            var common = node.IntOr("common", 0);
+            var rare = node.IntOr("rare", 0);
+            if (common < 0 || rare < 0)
+            {
+                throw node.Error(common < 0 ? "common" : "rare", "must be at least 0");
+            }
+
+            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after"), Pays = pays, Common = common, Rare = rare });
             questIndex++;
         }
 
@@ -313,11 +330,38 @@ public static class ContentLoader
             throw root.Error("keep.beds", $"must be at least {cast.Count}, the starting roster and every arrival, so a map's own arrival always has a bed");
         }
 
+        var forge = ForgeRules.None;
+        if (root.OptionalObject("forge") is { } forgeNode)
+        {
+            forge = new ForgeRules(forgeNode.Int("mt"), forgeNode.Int("hit"), forgeNode.Int("price"), forgeNode.Int("common"), forgeNode.Int("rare"));
+            foreach (var (field, value) in new[] { ("mt", forge.Mt), ("hit", forge.Hit), ("price", forge.Price), ("common", forge.CommonSteps), ("rare", forge.RareSteps) })
+            {
+                if (value < 1)
+                {
+                    throw forgeNode.Error(field, "must be at least 1");
+                }
+            }
+        }
+
+        foreach (var room in keep.Rooms)
+        {
+            if (room.Forge && forge == ForgeRules.None)
+            {
+                throw root.Error("keep.rooms." + room.Id + ".forge", "needs the campaign's forge object, which holds Refine's numbers");
+            }
+
+            if (room.After.Length > 0 && !ids.Contains(room.After))
+            {
+                throw root.Error("keep.rooms." + room.Id + ".after", $"'{room.After}' is not a campaign map");
+            }
+        }
+
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
             Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,
+            Forge = forge,
         };
     }
 
@@ -328,7 +372,8 @@ public static class ContentLoader
     /// under <c>content/keep</c> (issue 288). Whoever loads the map checks the tiles against it.
     /// Optional <c>beds</c>, at least 1 and at least the cast the campaign seats without a choice,
     /// and <c>rooms</c>, each an <c>id</c>, <c>name</c>, <c>price</c>, <c>beds</c> and <c>max</c> of
-    /// at least 1 (issue 687); rooms need beds.
+    /// at least 1 (issue 687); rooms need beds. A room's optional <c>forge</c> (issue 647) marks the forge, one at most, whose
+    /// <c>beds</c> may be 0 or absent; its optional <c>after</c> names the campaign map after whose win it may be built.
     /// </summary>
     /// <summary>
     /// A campaign map's optional text card (issue 631): an array of paragraphs, each a non-blank
@@ -447,13 +492,23 @@ public static class ContentLoader
                 throw entry.Error("id", "is listed twice");
             }
 
-            var room = new KeepRoom(id, entry.String("name"), entry.Int("price"), entry.Int("beds"), entry.Int("max"));
+            var isForge = entry.BoolOr("forge", false);
+            var room = new KeepRoom(id, entry.String("name"), entry.Int("price"), isForge ? entry.IntOr("beds", 0) : entry.Int("beds"), entry.Int("max"))
+            {
+                Forge = isForge,
+                After = entry.Has("after") ? entry.String("after") : "",
+            };
             foreach (var (field, value) in new[] { ("price", room.Price), ("beds", room.Beds), ("max", room.Max) })
             {
-                if (value < 1)
+                if (value < (field == "beds" && isForge ? 0 : 1))
                 {
-                    throw entry.Error(field, "must be at least 1");
+                    throw entry.Error(field, isForge && field == "beds" ? "must be at least 0" : "must be at least 1");
                 }
+            }
+
+            if (isForge && rooms.Any(r => r.Forge))
+            {
+                throw entry.Error("forge", "the keep has one forge");
             }
 
             rooms.Add(room);

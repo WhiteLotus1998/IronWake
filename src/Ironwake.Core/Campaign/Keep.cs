@@ -13,7 +13,17 @@ public sealed record KeepEdit(string Id, string Name, string TerrainId, int Pric
 /// more beds for <see cref="Price"/>, bought at most <see cref="Max"/> times, from the purse the
 /// keep's edits spend. A room changes no tile; it changes who may join.
 /// </summary>
-public sealed record KeepRoom(string Id, string Name, int Price, int Beds, int Max);
+public sealed record KeepRoom(string Id, string Name, int Price, int Beds, int Max)
+{
+    /// <summary>Whether this room is the forge (issue 647), where <c>refine</c> works; it may add no beds.</summary>
+    public bool Forge { get; init; }
+
+    /// <summary>
+    /// The campaign map after whose win the room may be built (issue 647: the forge opens once the
+    /// smith is met), or empty for a room open from map 1.
+    /// </summary>
+    public string After { get; init; } = "";
+}
 
 /// <summary>
 /// The keep's map id under <c>content/keep</c> and the edits sold for it, in content order (issue 82),

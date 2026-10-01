@@ -137,7 +137,8 @@ public class SideMapTests
         var after = record.AfterQuest(end, "maud_1", Content);
 
         Assert.True(after.Accepted);
-        Assert.Equal("maud wins maud_1; nobody fell", after.Text);
+        Assert.Equal("maud wins maud_1; the stores take 2 common material; nobody fell", after.Text);
+        Assert.Equal(2, after.Record.CommonMaterial);
         Assert.Equal(ValueList<QuestWon>.Of(new QuestWon("maud_1", 3)), after.Record.QuestsWon);
         Assert.Equal(77, after.Record.Find("maud")!.Exp);
         Assert.Equal(77, after.Record.Find("wren")!.Exp);

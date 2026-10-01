@@ -104,12 +104,33 @@ public static class ContentSerializer
                         writer.WriteString("pays", pays);
                     }
 
+                    if (quest.Common > 0)
+                    {
+                        writer.WriteNumber("common", quest.Common);
+                    }
+
+                    if (quest.Rare > 0)
+                    {
+                        writer.WriteNumber("rare", quest.Rare);
+                    }
+
                     WriteCard(writer, "before", quest.Before);
                     WriteCard(writer, "after", quest.After);
                     writer.WriteEndObject();
                 }
 
                 writer.WriteEndArray();
+            }
+
+            if (campaign.Forge != ForgeRules.None)
+            {
+                writer.WriteStartObject("forge");
+                writer.WriteNumber("mt", campaign.Forge.Mt);
+                writer.WriteNumber("hit", campaign.Forge.Hit);
+                writer.WriteNumber("price", campaign.Forge.Price);
+                writer.WriteNumber("common", campaign.Forge.CommonSteps);
+                writer.WriteNumber("rare", campaign.Forge.RareSteps);
+                writer.WriteEndObject();
             }
 
             if (campaign.Keep != KeepMenu.None)
@@ -137,6 +158,15 @@ public static class ContentSerializer
                         writer.WriteNumber("price", room.Price);
                         writer.WriteNumber("beds", room.Beds);
                         writer.WriteNumber("max", room.Max);
+                        if (room.Forge)
+                        {
+                            writer.WriteBoolean("forge", true);
+                        }
+
+                        if (room.After.Length > 0)
+                        {
+                            writer.WriteString("after", room.After);
+                        }
                         writer.WriteEndObject();
                     }
 
