@@ -31,7 +31,7 @@ public sealed class HitTally
             return;
         }
 
-        var forecast = Queries.Forecast(state, content, unit, target, attack.Slot);
+        var forecast = Queries.Forecast(state, content, unit, target, attack.Slot, attack.Art);
         if (forecast is null)
         {
             return;

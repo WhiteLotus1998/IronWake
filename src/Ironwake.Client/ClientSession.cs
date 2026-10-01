@@ -29,6 +29,27 @@ public sealed record MovePreview(Coord Tile, string Terrain, int Cost, int Mov, 
 public sealed record HoverForecast(string TargetId, Coord TargetAt, string Text, ForecastCard Card);
 
 /// <summary>
+/// One row of the attack menu (issue 611): the core's <see cref="AttackOption"/>, its label (the
+/// weapon's name, or the art's with the weapon after it), one line of numbers or the refusal in
+/// the rule's words, and the drawn card for a row the resolver would accept.
+/// </summary>
+public sealed record MenuRow(AttackOption Option, string Label, string Line, ForecastCard? Card)
+{
+    /// <summary>True when choosing the row strikes; a greyed row only teaches its refusal.</summary>
+    public bool Legal => Option.Legal;
+}
+
+/// <summary>
+/// The attack menu open on a target (issue 611): its rows in <see cref="Queries.AttackOptions"/>'s
+/// order and the row whose card the panel shows, the first legal one until another is hovered.
+/// </summary>
+public sealed record AttackMenu(string UnitId, string TargetId, IReadOnlyList<MenuRow> Rows, int Hovered)
+{
+    /// <summary>The card the panel draws: the hovered row's, or the first legal row's when the hovered one is greyed.</summary>
+    public ForecastCard? Card => Rows[Hovered].Card ?? Rows.FirstOrDefault(r => r.Legal)?.Card;
+}
+
+/// <summary>
 /// One side of the drawn forecast (issue 512): who, with what, standing where, and the source of
 /// its avoid there (the terrain's name, tile and avoid for its movement), its HP now and at most,
 /// what it would have left if every strike the other side can make lands, and its own strike as
@@ -273,8 +294,8 @@ public sealed class ClientSession
         return Selected is not null;
     }
 
-    /// <summary>Clears the selected unit and the inspected enemy.</summary>
-    public void ClearSelection() => (Selected, Inspected) = (null, null);
+    /// <summary>Clears the selected unit, the inspected enemy and the attack menu.</summary>
+    public void ClearSelection() => (Selected, Inspected, Menu) = (null, null, null);
 
     /// <summary>
     /// The seen enemy a click picked out when no unit of ours was selected (issue 533), whose reach
@@ -322,7 +343,7 @@ public sealed class ClientSession
     /// A side's HP after is its HP less the other side's damage times every strike it can make,
     /// never below 0, the no-crit reading of <c>threat</c>'s "if all land".
     /// </summary>
-    private ForecastCard CardOf(BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile)
+    private ForecastCard CardOf(BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, string? weaponLabel = null)
     {
         var raises = Windup.Raises(State, Resolver.ChooseWeapon(unit, Content, null).Weapon);
         ForecastSide Side(BattleUnit who, Coord at, SideForecast own, SideForecast against)
@@ -330,7 +351,7 @@ public sealed class ClientSession
             var terrain = State.Map.TerrainAt(at, Content);
             var max = who.MaxHp(Content);
             var lost = against.Strikes ? against.Damage * against.StrikeCount : 0;
-            var weapon = who.EquippedWeapon(Content)?.Name ?? "unarmed";
+            var weapon = who == unit && weaponLabel is not null ? weaponLabel : who.EquippedWeapon(Content)?.Name ?? "unarmed";
             return new ForecastSide(who.Id, who.Unit.Name, who.Unit.ClassId, who.IsBoss, weapon, terrain.Name, at,
                 terrain.AvoidFor(Content.Class(who.Unit.ClassId).Movement), who.Hp, max, Math.Max(0, who.Hp - lost), own);
         }
@@ -510,8 +531,91 @@ public sealed class ClientSession
     }
 
     /// <summary>
+    /// The attack menu (issue 611), open after a click on an enemy the selected unit has more
+    /// than one legal way to strike; null otherwise. Cleared by the next click, a choice, Esc,
+    /// and any command.
+    /// </summary>
+    public AttackMenu? Menu { get; private set; }
+
+    /// <summary>The menu's rows for <paramref name="unit"/> striking <paramref name="target"/> from where it stands, read from <see cref="Queries.AttackOptions"/>.</summary>
+    public AttackMenu MenuFor(BattleUnit unit, BattleUnit target)
+    {
+        var rows = Queries.AttackOptions(State, Content, unit, target).Select(option =>
+        {
+            var weapon = option.WeaponId is { } weaponId ? Content.ItemName(weaponId) : "no weapon";
+            var label = option.Art is { } art ? $"{art.Name} ({weapon})" : weapon;
+            if (option.Forecast is not { } forecast)
+            {
+                return new MenuRow(option, label, RefusalText(option.Refusal!), null);
+            }
+
+            var armed = Resolver.ChooseWeapon(unit, Content, option.Command.Slot).Unit;
+            return new MenuRow(option, label, RowLine(forecast), CardOf(armed, target, forecast, unit.At, label));
+        }).ToList();
+        var first = rows.FindIndex(r => r.Legal);
+        return new AttackMenu(unit.Id, target.Id, rows, Math.Max(0, first));
+    }
+
+    /// <summary>A legal row's numbers: damage times strikes, hit and crit, the counter's, and the most uses the attack spends, an art's cost included.</summary>
+    private static string RowLine(CombatForecast forecast)
+    {
+        var own = forecast.Attacker;
+        var counter = forecast.Defender.Strikes
+            ? $"counter {forecast.Defender.Damage} x{forecast.Defender.StrikeCount} hit {forecast.Defender.DisplayedHit}"
+            : "no counter";
+        return $"{own.Damage} x{own.StrikeCount}  hit {own.DisplayedHit}  crit {own.CritChance}  {counter}  uses {forecast.AttackerSpendsAtMost}";
+    }
+
+    /// <summary>A greyed row's reason: the resolver's words after the unit's name, or "out of reach from here" for a range refusal, whose text carries coordinates.</summary>
+    private static string RefusalText(Rejection refusal)
+    {
+        if (refusal.Reason == RejectionReason.OutOfRange)
+        {
+            return "out of reach from here";
+        }
+
+        var colon = refusal.Message.IndexOf(": ", StringComparison.Ordinal);
+        return colon >= 0 ? refusal.Message[(colon + 2)..] : refusal.Message;
+    }
+
+    /// <summary>Shows the card of the menu row at <paramref name="row"/>, as hovering it or pressing its number does. Ignored with no menu or a row out of range.</summary>
+    public void MenuHover(int row)
+    {
+        if (Menu is { } menu && row >= 0 && row < menu.Rows.Count)
+        {
+            Menu = menu with { Hovered = row };
+        }
+    }
+
+    /// <summary>
+    /// Strikes with the menu row at <paramref name="row"/>: its attack goes through
+    /// <see cref="Submit"/>. A greyed row leaves the menu open and puts its refusal in
+    /// <see cref="Status"/>. Returns the command applied, or null.
+    /// </summary>
+    public Command? Choose(int row)
+    {
+        if (Menu is not { } menu || row < 0 || row >= menu.Rows.Count)
+        {
+            return null;
+        }
+
+        var chosen = menu.Rows[row];
+        if (!chosen.Legal)
+        {
+            Status = chosen.Option.Refusal!.Message;
+            return null;
+        }
+
+        Menu = null;
+        return Submit(chosen.Option.Command) ? chosen.Option.Command : null;
+    }
+
+    /// <summary>Closes the attack menu without striking, as Esc does; the unit stays selected.</summary>
+    public void CloseMenu() => Menu = null;
+
+    /// <summary>
     /// What a click on a tile does with a unit selected: the unit itself waits, a hostile unit
-    /// is attacked with the equipped weapon, a tile it can end on is moved to (a Canto when one
+    /// is attacked, through the attack menu when it has more than one legal row (issue 611) and at once otherwise, a tile it can end on is moved to (a Canto when one
     /// is owed); anything else selects what is there. Returns the command applied, or null.
     /// </summary>
     public Command? Click(Coord at)
@@ -522,6 +626,7 @@ public sealed class ClientSession
             return null;
         }
 
+        Menu = null;
         if (Selected is not { } id || State.Find(id) is not { } unit)
         {
             Select(at);
@@ -535,7 +640,16 @@ public sealed class ClientSession
         }
         else if (UnitAt(at) is { Side: Side.Enemy } target)
         {
-            command = new Attack(unit.Id, target.Id);
+            var menu = MenuFor(unit, target);
+            var legal = menu.Rows.Where(r => r.Legal).ToList();
+            if (legal.Count > 1)
+            {
+                Menu = menu;
+                Status = null;
+                return null;
+            }
+
+            command = legal.Count == 1 ? legal[0].Option.Command : new Attack(unit.Id, target.Id);
         }
         else if (Reach is { } reach && reach.CanEnd(at))
         {
@@ -572,6 +686,7 @@ public sealed class ClientSession
         }
 
         Status = null;
+        Menu = null;
         if (command is EndPhase or Ironwake.Core.Recall || Playing is not null)
         {
             _fallen.Clear();

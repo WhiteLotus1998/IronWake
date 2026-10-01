@@ -751,7 +751,7 @@ public static class Program
             CombatForecast? forecast = null;
             if (tally is not null && command is Attack attack)
             {
-                forecast = Queries.Forecast(state, content, state.Find(attack.UnitId)!, state.Find(attack.TargetId)!, attack.Slot);
+                forecast = Queries.Forecast(state, content, state.Find(attack.UnitId)!, state.Find(attack.TargetId)!, attack.Slot, attack.Art);
             }
 
             var result = Resolver.Apply(state, content, command);
