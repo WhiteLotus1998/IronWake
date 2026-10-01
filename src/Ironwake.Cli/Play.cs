@@ -425,7 +425,7 @@ public sealed class PlaySession
         if (_state.Map.Certification is { } trialHeader)
         {
             var candidate = _state.UnitsOf(Side.Player).Single();
-            _out.WriteLine($"Certification trial: {candidate.Unit.Name} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
+            _out.WriteLine($"Promotion trial: {candidate.Unit.Name} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
         }
 
         _out.WriteLine("Objective: " + Objective.Line(_state, _content));
@@ -459,8 +459,8 @@ public sealed class PlaySession
         {
             var className = _content.Class(trial.ClassId).Name;
             _out.WriteLine(outcome.Result == BattleResult.Won
-                ? $"Certification: {UnitNames.Of(_state, _content)[_state.UnitsOf(Side.Player).Single().Id]} earned {className}"
-                : $"Certification: {className} not earned");
+                ? $"Promotion: {UnitNames.Of(_state, _content)[_state.UnitsOf(Side.Player).Single().Id]} earned {className}"
+                : $"Promotion: {className} not earned");
         }
         if (_state.Map.RivalryArm is { } arm)
         {

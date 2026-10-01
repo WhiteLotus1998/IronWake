@@ -345,7 +345,7 @@ public sealed record CampaignRecord(
         var refusals = Certifications.Check(unit, target);
         if (refusals.Count > 0)
         {
-            return ScreenResult.Refused(this, $"{unit.Id} cannot certify as {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
+            return ScreenResult.Refused(this, $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
         }
 
         var price = content.Campaign.CertificationPrice;
@@ -383,12 +383,12 @@ public sealed record CampaignRecord(
         var refusals = Certifications.Check(unit, target);
         if (refusals.Count > 0)
         {
-            return $"{unit.Id} cannot certify as {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
+            return $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
         }
 
         if (content.Campaign.TrialFor(classId) is null)
         {
-            return $"{target.Name} has no trial; certify with a seal";
+            return $"{target.Name} has no trial; promote with a seal";
         }
 
         return TrialsTried.Contains(new TrialAttempt(unitId, classId))
@@ -402,7 +402,7 @@ public sealed record CampaignRecord(
     /// must name the same class, since the loader reads the pairing without reading the map.
     /// </summary>
     public static string? TrialMapRefusal(MapDefinition trial, string classId) =>
-        trial.Certification?.ClassId == classId ? null : $"the trial map '{trial.Name}' does not certify '{classId}'";
+        trial.Certification?.ClassId == classId ? null : $"the trial map '{trial.Name}' does not promote to '{classId}'";
 
     /// <summary>
     /// The seed a trial before the next map runs on: the campaign seed plus the number of maps plus

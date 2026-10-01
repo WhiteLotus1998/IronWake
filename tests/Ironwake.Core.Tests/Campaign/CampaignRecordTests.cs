@@ -145,7 +145,7 @@ public class CampaignRecordTests
     public void CertificationIsRefusedNamingTheRequirementOrTheSealPrice()
     {
         Assert.Equal("a seal costs 500 and the purse holds 499", WithPurse(499).Certify("brannock", "reaver", Content).Text);
-        Assert.Equal("brannock cannot certify as Cadet: brannock is already a Cadet", WithPurse(600).Certify("brannock", "cadet", Content).Text);
+        Assert.Equal("brannock cannot be promoted to Cadet: brannock is already a Cadet", WithPurse(600).Certify("brannock", "cadet", Content).Text);
         Assert.Equal("no class 'knight'", WithPurse(600).Certify("brannock", "knight", Content).Text);
     }
 

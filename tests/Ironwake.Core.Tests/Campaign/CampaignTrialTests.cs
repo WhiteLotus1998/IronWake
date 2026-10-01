@@ -40,14 +40,14 @@ public class CampaignTrialTests
     [Fact]
     public void ATrialMapThatCertifiesAnotherClassIsRefused()
     {
-        Assert.Equal("the trial map 'Trial of the Bulwark' does not certify 'outrider'", CampaignRecord.TrialMapRefusal(Trial("bulwark_trial"), "outrider"));
+        Assert.Equal("the trial map 'Trial of the Bulwark' does not promote to 'outrider'", CampaignRecord.TrialMapRefusal(Trial("bulwark_trial"), "outrider"));
         Assert.Null(CampaignRecord.TrialMapRefusal(Trial("outrider_trial"), "outrider"));
     }
 
     [Fact]
     public void AClassWithNoTrialIsRefusedAndNeedsASeal()
     {
-        Assert.Equal("Pikeman has no trial; certify with a seal", Start().TrialRefusal("wren", "pikeman", Content));
+        Assert.Equal("Pikeman has no trial; promote with a seal", Start().TrialRefusal("wren", "pikeman", Content));
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class CampaignTrialTests
         };
         var content = Content with { Classes = Content.Classes.SetItem("bulwark", bulwark) };
 
-        Assert.Equal("wren cannot certify as Bulwark: needs level 5, has 1", CampaignRecord.Start(content, 5).TrialRefusal("wren", "bulwark", content));
+        Assert.Equal("wren cannot be promoted to Bulwark: needs level 5, has 1", CampaignRecord.Start(content, 5).TrialRefusal("wren", "bulwark", content));
         Assert.Null(Start().TrialRefusal("wren", "bulwark", Content));
     }
 
@@ -70,7 +70,7 @@ public class CampaignTrialTests
 
         Assert.Equal("no unit 'nobody' on the roster", record.TrialRefusal("nobody", "outrider", Content));
         Assert.Equal("no class 'wizard'", record.TrialRefusal("wren", "wizard", Content));
-        Assert.StartsWith("ansgar cannot certify as Outrider: ", record.TrialRefusal("ansgar", "outrider", Content));
+        Assert.StartsWith("ansgar cannot be promoted to Outrider: ", record.TrialRefusal("ansgar", "outrider", Content));
     }
 
     [Fact]

@@ -124,11 +124,11 @@ public class CampaignCliTests
 
         Assert.Equal(1, exit);
         Assert.Contains("Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider\n", output);
-        Assert.Contains("> trial captain outrider\nTrial: Trial of the Outrider, seed 12\nCertification trial: Alder Fenn plays as Outrider with iron_lance, iron_sword\n", output);
+        Assert.Contains("> trial captain outrider\nTrial: Trial of the Outrider, seed 12\nPromotion trial: Alder Fenn plays as Outrider with iron_lance, iron_sword\n", output);
         Assert.Contains("Battle won: seize; no recall is left, so leave\n", output);
         Assert.Contains("Alder Fenn passes the Outrider trial and certifies from Cadet to Outrider with no seal; L1 exp 30\n", output);
-        Assert.Contains("ERROR: Alder Fenn cannot certify as Outrider: ", output);
-        Assert.Contains("ERROR: Pikeman has no trial; certify with a seal\n", output);
+        Assert.Contains("ERROR: Alder Fenn cannot be promoted to Outrider: ", output);
+        Assert.Contains("ERROR: Pikeman has no trial; promote with a seal\n", output);
         Assert.Contains("-- Before map 1 of 8: Old Mill Road; the purse holds 500 --", output);
     }
 
@@ -154,8 +154,8 @@ public class CampaignCliTests
         {
             var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("ERROR: Alder Fenn cannot certify as Outrider: needs level 4, has 1; needs sword D, has E\n", output);
-            Assert.Contains("ERROR: Brannock cannot certify as Reaver: needs level 3, has 1; needs axe D, has E\n", output);
+            Assert.Contains("ERROR: Alder Fenn cannot be promoted to Outrider: needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("ERROR: Brannock cannot be promoted to Reaver: needs level 3, has 1; needs axe D, has E\n", output);
             Assert.Contains("Classes: what each asks, read against a unit's own stats without its class's; a seal costs 500\n", output);
             Assert.Contains("  Cadet: nothing -- Alder Fenn's class\n", output);
             Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 1; needs sword D, has E\n", output);

@@ -95,7 +95,7 @@ public static class Certifications
         var refusals = Check(unit, target);
         if (refusals.Count > 0)
         {
-            throw new InvalidOperationException($"{unit.Id} cannot certify as {target.Name}: {refusals[0].Text}");
+            throw new InvalidOperationException($"{unit.Id} cannot be promoted to {target.Name}: {refusals[0].Text}");
         }
 
         return unit with { ClassId = target.Id };

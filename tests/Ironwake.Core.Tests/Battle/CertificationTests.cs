@@ -78,7 +78,7 @@ public class CertificationTests
 
         var e = Assert.Throws<InvalidOperationException>(() => Certifications.Certify(Ready with { Level = 3 }, pikeman));
 
-        Assert.Equal("hale cannot certify as Pikeman: needs level 5, has 3", e.Message);
+        Assert.Equal("hale cannot be promoted to Pikeman: needs level 5, has 3", e.Message);
     }
 
     [Fact]
