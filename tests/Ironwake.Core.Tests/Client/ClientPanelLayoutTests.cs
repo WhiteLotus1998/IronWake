@@ -35,12 +35,18 @@ public class ClientPanelLayoutTests
 
     /// <summary>Issue 609: Lotus asked what P and S do; each label names what its key does.</summary>
     [Theory]
-    [InlineData("P", "threat on tile")]
-    [InlineData("S", "enemy speed")]
+    [InlineData("S", "game speed")]
     [InlineData("T", "enemy reach")]
     [InlineData("Esc", "menu")]
     public void EachKeyLabelSaysWhatTheKeyDoes(string key, string does)
     {
         Assert.Equal(does, KeyStrip.Keys.Single(k => k.Key == key).Does);
+    }
+
+    /// <summary>Issue 625: Lotus cut the priced threat, so no key in the strip is P.</summary>
+    [Fact]
+    public void TheKeyStripHasNoP()
+    {
+        Assert.DoesNotContain(KeyStrip.Keys, k => k.Key == "P");
     }
 }

@@ -400,25 +400,8 @@ public sealed class ClientSession
     }
 
     /// <summary>
-    /// The threat panel (issue 353): what the coming enemy phase could do to the selected unit
-    /// if it ended on <paramref name="tile"/>, the console's <c>threat</c> text from the core's
-    /// queries, sleeping groups, arrivals and the dark included. Null with no selection, while
-    /// the enemy phase plays, or from a tile the unit cannot end on.
-    /// </summary>
-    public string? Threat(Coord tile)
-    {
-        if (Selected is not { } id || State.Find(id) is not { } unit || EnemyPhasePlaying
-            || Queries.Threats(State, Content, unit, tile) is not { } lines)
-        {
-            return null;
-        }
-
-        return PlaySession.ThreatText(State, Content, unit, tile, lines, Queries.SleepingThreats(State, Content, unit, tile)!, Queries.Unseeing(State, Content, unit, tile), Queries.MoveWins(State, Content, unit, tile));
-    }
-
-    /// <summary>
     /// The move preview (issue 511): the one line the forecast slot shows for a hovered tile
-    /// with no strike to price, read from the same core queries as <see cref="Threat"/>. Null
+    /// with no strike to price, read from the core's <c>threat</c> queries (the priced rows themselves are cut, issue 625). Null
     /// with no selection, while the enemy phase plays, from a tile the unit cannot end on, and
     /// whenever <see cref="Hover"/> has a strike to price there.
     /// </summary>

@@ -6,9 +6,9 @@ using Ironwake.Core.Tests.Content;
 namespace Ironwake.Core.Tests.Client;
 
 /// <summary>
-/// The thin renderer, slice 2 (issue 353): the threat panel is the console's <c>threat</c>
-/// text for the selected unit on the hovered tile, and the Recall browser is the console's
-/// <c>recall list</c>, row for row, with a click on a row recalling that state.
+/// The thin renderer, slice 2 (issue 353): the Recall browser is the console's
+/// <c>recall list</c>, row for row, with a click on a row recalling that state. The threat
+/// panel this slice also built is cut from the client (issue 625); the console's <c>threat</c> stays.
 /// </summary>
 [Collection("console")]
 public class ClientPanelTests
@@ -29,32 +29,6 @@ public class ClientPanelTests
         var client = new ClientSession(content, BattleState.From(MapFiles.Load(Map, content), content, content.Cast, 61));
         Script.Apply(client, string.Join("\n", script));
         return client;
-    }
-
-    [Fact]
-    public void ThreatPanelIsTheConsolesThreatTextForTheHoveredTile()
-    {
-        var client = Sallow(Array.Empty<string>());
-        var captain = client.State.Find("captain")!;
-        var tile = new Coord(3, 4);
-        client.Select(captain.At);
-
-        var lines = Queries.Threats(client.State, client.Content, captain, tile)!;
-        var expected = PlaySession.ThreatText(client.State, client.Content, captain, tile, lines,
-            Queries.SleepingThreats(client.State, client.Content, captain, tile)!, Queries.Unseeing(client.State, client.Content, captain, tile), Queries.MoveWins(client.State, client.Content, captain, tile));
-
-        Assert.Equal(expected, client.Threat(tile));
-        Assert.StartsWith("Threat on Alder Fenn at 3,4", client.Threat(tile));
-    }
-
-    [Fact]
-    public void ThreatPanelIsEmptyFromATileOutOfReachOrWithNoSelection()
-    {
-        var client = Sallow(Array.Empty<string>());
-        Assert.Null(client.Threat(new Coord(3, 4)));
-
-        client.Select(client.State.Find("captain")!.At);
-        Assert.Null(client.Threat(new Coord(16, 6)));
     }
 
     [Fact]

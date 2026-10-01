@@ -44,13 +44,14 @@ public partial class Main
         return texture;
     }
 
-    /// <summary>The setting's chip at the top bar's right end: the B key and the setting in force.</summary>
-    private void DrawSceneChip()
+    /// <summary>The setting's chip at the top bar's right end: the B key and the setting in force; returns its left edge.</summary>
+    private float DrawSceneChip()
     {
         var value = Scenes.Label(_client!.SceneSetting)["scenes: ".Length..];
         var label = "SCENES  B";
         var width = UiWidth(label, 10, bold: true) + UiWidth(value, 14, bold: true) + 36;
         Chip(ViewWidth - Margin - width, label, value, Ink);
+        return ViewWidth - Margin - width;
     }
 
     /// <summary>The beat whose scene or level-up card is on show now, with the seconds into it at normal speed.</summary>

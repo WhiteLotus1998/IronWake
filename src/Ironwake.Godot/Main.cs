@@ -108,12 +108,6 @@ public partial class Main : Node2D
     /// <summary>Whether the board hatches every tile a seen enemy could strike next phase, a tile no unit can stand on left bare; T toggles it.</summary>
     private bool _threatShown;
 
-    /// <summary>
-    /// Whether the column prices the threat on the hovered stop, hit and damage per striker (issue
-    /// 533); P toggles it. Off, a stop shows only its one-line preview and the board its unpriced reach.
-    /// </summary>
-    private bool _pricedShown;
-
     /// <summary>Whether the column shows the event log (issue 512); Tab toggles it, and while it is closed the newest line stays on screen as one row.</summary>
     private bool _logOpen;
 
@@ -237,7 +231,7 @@ public partial class Main : Node2D
             _client.RecallOpen = Array.IndexOf(args, "--recall") >= 0;
             _paused = Array.IndexOf(args, "--paused") >= 0;
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
-            _pricedShown = Array.IndexOf(args, "--priced") >= 0;
+            _speed = Math.Max(0, GameSpeed.Speeds.Select(s => s.Name).ToList().IndexOf(Arg(args, "--speed") ?? ""));
             _logOpen = Array.IndexOf(args, "--log-open") >= 0;
             _screenshot = Arg(args, "--screenshot");
             var strip = Array.IndexOf(args, "--strip");
@@ -380,16 +374,13 @@ public partial class Main : Node2D
                         FinishBeats();
                         break;
                     case Key.S:
-                        _speed = (_speed + 1) % Speeds.Length;
+                        _speed = GameSpeed.Next(_speed);
                         break;
                     case Key.R:
                         _client.RecallOpen = !_client.RecallOpen;
                         break;
                     case Key.T:
                         _threatShown = !_threatShown;
-                        break;
-                    case Key.P:
-                        _pricedShown = !_pricedShown;
                         break;
                     case Key.Tab:
                         _logOpen = !_logOpen;
@@ -626,7 +617,46 @@ public partial class Main : Node2D
         }
 
         RecallChip(x, state);
-        DrawSceneChip();
+        DrawSpeedButtons(DrawSceneChip() - 8);
+    }
+
+    /// <summary>
+    /// The game speed (issue 625): a chip labelled GAME SPEED with three buttons, one, two and
+    /// three filled triangles for 1x, 2x and 5x, ending at <paramref name="right"/>. The speed in
+    /// force is filled amber with dark triangles; the others are bare with muted ones. A click picks
+    /// one for the session.
+    /// </summary>
+    private void DrawSpeedButtons(float right)
+    {
+        const float button = 30, gap = 4, side = 8;
+        var label = GameSpeed.Label.ToUpperInvariant();
+        var labelWidth = UiWidth(label, 10, bold: true);
+        var width = 14 + labelWidth + 10 + GameSpeed.Speeds.Length * (button + gap) - gap + 6;
+        var x = right - width;
+        Card(new Rect2(x, 12, width, 28), Box, 14);
+        UiText(new Vector2(x + 14, 30), label, Muted, 10, bold: true);
+        var amber = Look(LookPalette.Player);
+        for (var i = 0; i < GameSpeed.Speeds.Length; i++)
+        {
+            var rect = new Rect2(x + 14 + labelWidth + 10 + i * (button + gap), 15, button, 22);
+            var chosen = i == _speed;
+            if (chosen)
+            {
+                Card(rect, amber, 11);
+            }
+
+            var count = GameSpeed.Speeds[i].Triangles;
+            var left = rect.GetCenter().X - count * (side - 1) / 2f;
+            var mid = rect.GetCenter().Y;
+            for (var t = 0; t < count; t++)
+            {
+                var tx = left + t * (side - 1);
+                DrawColoredPolygon(new[] { new Vector2(tx, mid - side / 2), new Vector2(tx + side - 1, mid), new Vector2(tx, mid + side / 2) }, chosen ? Background : Muted);
+            }
+
+            var index = i;
+            _hits.Add((rect, () => _speed = index));
+        }
     }
 
     /// <summary>
@@ -1097,7 +1127,6 @@ public partial class Main : Node2D
                 if (client.Stop(_hover!.Value) is { } stop)
                 {
                     y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
-                    y = PricedRows(y, _hover.Value);
                 }
             }
             else if (act is not null)
@@ -1108,7 +1137,6 @@ public partial class Main : Node2D
             {
                 y = Title(y, "FORECAST");
                 y = PreviewRow(y, preview, "");
-                y = PricedRows(y, _hover!.Value);
             }
             else
             {
@@ -1161,25 +1189,6 @@ public partial class Main : Node2D
         }
 
         return y + 10;
-    }
-
-    /// <summary>
-    /// The priced threat on a stop (issue 533), shown only while P is on: the console's <c>threat</c>
-    /// lines after its heading, hit and damage per striker, in muted text under the preview.
-    /// </summary>
-    private float PricedRows(float y, Coord tile)
-    {
-        if (!_pricedShown || _client!.Threat(tile) is not { } threat)
-        {
-            return y;
-        }
-
-        foreach (var line in threat.Split('\n').Skip(1))
-        {
-            y = Row(y, line, Muted);
-        }
-
-        return y + 4;
     }
 
     /// <summary>The reaches the board draws: every seen enemy's on T, else the inspected enemy's alone, else none.</summary>
@@ -1238,7 +1247,7 @@ public partial class Main : Node2D
         }
     }
 
-    /// <summary>What the forecast box holds: a hint until a unit is selected and a tile hovered, then the console's forecast and threat text.</summary>
+    /// <summary>What the forecast box holds: a hint until a unit is selected and a tile hovered, then the console's forecast text; the priced threat is cut (issue 625).</summary>
     private IEnumerable<string> ForecastLines()
     {
         var client = _client!;
@@ -1257,7 +1266,7 @@ public partial class Main : Node2D
 
         if (_hover is not { } tile)
         {
-            yield return "Point at a tile to see the forecast and threat there.";
+            yield return "Point at a tile to see the forecast there.";
             yield break;
         }
 
@@ -1266,15 +1275,6 @@ public partial class Main : Node2D
         {
             any = true;
             foreach (var text in forecast.Text.Split('\n'))
-            {
-                yield return text;
-            }
-        }
-
-        if (client.Threat(tile) is { } threat)
-        {
-            any = true;
-            foreach (var text in threat.Split('\n'))
             {
                 yield return text;
             }
