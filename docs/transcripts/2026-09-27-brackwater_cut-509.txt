@@ -880,4 +880,4 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 > threat dunstan
 Threat on Dunstan at 16,6 (Plain): no enemy in sight can strike him next phase
   In the dark, unpriced: ? at 15,4 (3), ? at 15,2 (5), ? at 13,2 (7), ? at 12,3 (7), ? at 11,3 (8)
-battle ongoing at turn 5, player phase
+Battle ongoing at turn 5, player phase

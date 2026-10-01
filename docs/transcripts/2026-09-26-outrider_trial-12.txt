@@ -78,6 +78,6 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
  5 .......
 
 A  captain          Alder Fenn L1 outrider     3,0    hp 13/23  Gate (heals 20 percent, 4 hp)  captain  done
-battle won: seize; no recall is left
-battle won: seize
-certification: captain earned Outrider
+Battle won: seize; no recall is left
+Battle won: seize
+Certification: Alder Fenn earned Outrider

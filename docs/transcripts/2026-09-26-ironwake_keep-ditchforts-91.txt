@@ -2766,5 +2766,5 @@ D  ottilie          Ottilie L1 bowman          12,8   hp 7/17   Plain
 E  pell             Pell L1 adept              13,5   hp 5/16   Plain
 C  teodor           Teodor L1 pikeman          10,7   hp 13/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 9/20   Plain
-battle won: survive; only recall is left
-battle won: survive
+Battle won: survive; only recall is left
+Battle won: survive

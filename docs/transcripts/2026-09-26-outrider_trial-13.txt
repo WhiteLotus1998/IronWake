@@ -100,7 +100,7 @@ Trial of the Outrider  over after turn 1 of 1  seize  recall 0
  5 .......
 
 A  captain          Alder Fenn L1 outrider     3,3    hp 3/23   Forest  captain
-battle lost: turn 1 passed; no recall is left
+Battle lost: turn 1 passed; no recall is left
 Lost because turn 1 ended and the captain ended at 3,3, not on the gate at any tile from 0,0 to 6,0.
-battle lost: turn 1 passed
-certification: Outrider not earned
+Battle lost: turn 1 passed
+Certification: Outrider not earned

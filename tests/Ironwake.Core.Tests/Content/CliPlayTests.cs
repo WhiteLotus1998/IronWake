@@ -43,7 +43,7 @@ public class CliPlayTests
             "--script", Path.Combine(docs, "transcripts", "2026-09-26-old_mill_road_grudges-65.script"), "--content", Fixture.RealContentDirectory());
 
         Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: dmg 6 hit 70% crit 20%; counter: none\n  Sworn: Archer 2 on Wren: Wren crit avoid -20\n  Grudge: Archer 2 strikes sworn Wren (score 15.9); best alternative Alder Fenn (score 13.4)\n", output);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class CliPlayTests
         Assert.StartsWith("Old Mill Road, seed 7, scheme ", output);
         Assert.DoesNotContain("synthetic", output);
         Assert.DoesNotContain("issue 9", output);
-        Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
+        Assert.EndsWith("Battle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);
         Assert.All(output, c => Assert.True(c < 128, "non-ASCII character in CLI output"));
     }
@@ -67,9 +67,9 @@ public class CliPlayTests
         Assert.Contains("> item captain 2\nERROR: Alder Fenn is at full HP\n", output);
         Assert.Contains("> item captain 2\nAlder Fenn uses Field Dressing (0 left)\nAlder Fenn heals 10 (hp 22)\n", output);
         Assert.Contains("  Items: 1: Iron Sword x38\n", output);
-        Assert.Contains("slots count from 1", output);
+        Assert.Contains("Slots count from 1", output);
         Assert.Contains("--strict stops at the first", output);
-        Assert.Contains("  item <unit> <slot> [ally] use the item in a slot", output);
+        Assert.Contains("  item <unit> <slot> [ally] Use the item in a slot", output);
         Assert.DoesNotContain("unavailable", output);
     }
 
@@ -152,7 +152,7 @@ public class CliPlayTests
         Assert.Contains("> move captain 9,9\nERROR: Alder Fenn cannot move to 9,9", output);
         Assert.Contains("Rejected 3 of 5 commands:\n  line 3: move captain 9,9: Alder Fenn cannot move to 9,9", output);
         Assert.Contains("\n  line 6: wait wren: Wren has already acted", output);
-        Assert.Contains("\n  line 7: show nobody: No living unit 'nobody'\nbattle ongoing at turn 1, player phase\n", output);
+        Assert.Contains("\n  line 7: show nobody: No living unit 'nobody'\nBattle ongoing at turn 1, player phase\n", output);
         Assert.Equal(1, exit);
     }
 
@@ -168,7 +168,7 @@ public class CliPlayTests
             Assert.Contains("Wren moves ", output);
             Assert.Contains("-> 2,6", output);
             Assert.Contains("> move captain 9,9\nERROR: Alder Fenn cannot move to 9,9", output);
-            Assert.Contains("strict: stopped at line 2 (move captain 9,9); no later command applied\nRejected 1 of 2 commands:\n  line 2: move captain 9,9:", output);
+            Assert.Contains("Strict: stopped at line 2 (move captain 9,9); no later command applied\nRejected 1 of 2 commands:\n  line 2: move captain 9,9:", output);
             Assert.DoesNotContain("> wait wren", output);
             Assert.DoesNotContain("Wren waits", output);
         }
@@ -203,7 +203,7 @@ public class CliPlayTests
         Assert.Contains("> recall 3\nERROR: State 3 is inside the enemy phase of turn 1; Recall returns only to a player phase; the nearest player-phase state is 0\n", output);
         Assert.Contains("-- Player phase, turn 3 --\n", output);
         Assert.Contains("> recall\nPlayer turns start at: turn 1 state 0, turn 2 state 9; history holds 18 states; 3 charges left\n", output);
-        Assert.Contains("  recall                   list the state each player turn started at", Play(out _, "help\n"));
+        Assert.Contains("  recall                   List the state each player turn started at", Play(out _, "help\n"));
     }
 
     /// <summary>
@@ -223,7 +223,7 @@ public class CliPlayTests
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: Wren has already moved this phase; forecast from 3,7\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
-        Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast", Play(out _, "help\n"));
+        Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast", Play(out _, "help\n"));
     }
 
     /// <summary>
@@ -245,7 +245,7 @@ public class CliPlayTests
         Assert.Contains("> threat wren\n" + expected, output);
         Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none\n", output);
         Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\n", output);
-        Assert.Contains("  threat <unit> [from <x,y>]  what each enemy would strike it with", Play(out _, "help\n"));
+        Assert.Contains("  threat <unit> [from <x,y>]  What each enemy would strike it with", Play(out _, "help\n"));
     }
 
     /// <summary>
@@ -301,7 +301,7 @@ public class CliPlayTests
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n  HP ", output);
         Assert.Contains("Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)\n", output);
         Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\n", output);
-        Assert.Contains("battle ongoing at turn 1, player phase\n", output);
+        Assert.Contains("Battle ongoing at turn 1, player phase\n", output);
     }
 
     /// <summary>
@@ -324,7 +324,7 @@ public class CliPlayTests
         var first = output.IndexOf(Strikes, StringComparison.Ordinal);
         Assert.True(first >= 0);
         Assert.True(output.IndexOf(Strikes, first + 1, StringComparison.Ordinal) > output.IndexOf("> recall 11", StringComparison.Ordinal));
-        Assert.Contains("  recall list              every state recall can return to", Play(out _, "help\n"));
+        Assert.Contains("  recall list              Every state recall can return to", Play(out _, "help\n"));
     }
 
     /// <summary>
@@ -399,9 +399,9 @@ public class CliPlayTests
         var output = Run(out var exit, "play", OldMillRoad, "--seed", "139", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.DoesNotContain("Rejected ", output);
-        Assert.DoesNotContain("strict: stopped", output);
+        Assert.DoesNotContain("Strict: stopped", output);
         Assert.Contains("Archer 2 falls at 4,7", output);
         Assert.Contains("The mill group wakes (proximity)", output);
         Assert.Contains("  Items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
@@ -426,7 +426,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", ProtocolSessionTests.TollgateRowFive, "--seed", "163", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("-- Enemy phase, turn 4 --\nReinforcements arrive\n  Rider arrives at 13,5 with the flank group, aggressive\n", output);
         Assert.Contains("Rider attacks Pell", output);
@@ -480,7 +480,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", map, "--seed", "6", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.Contains("Teodor falls at 8,7\nIron Lance (Teodor's) lies at 8,7\n", output);
         Assert.Contains("keepsakes: Iron Lance (Teodor's) at 8,7\n", output);
         Assert.Contains("Dunstan recovers Iron Lance (Teodor's)\n", output);
@@ -502,7 +502,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", map, "--seed", "5", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: survive\n", output);
+        Assert.EndsWith("Battle won: survive\n", output);
         Assert.Contains("Pell falls at 9,5\nCinder (Pell's) lies at 9,5\n", output);
         Assert.Contains("Cinder (Pell's) was left at 9,5\nIron Lance (Dunstan's) was left at 11,8\n", output);
     }
@@ -519,7 +519,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-5.script", 5, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Ansgar falls at 13,6\n", output);
         Assert.Contains("Grange Reeve falls at 14,6\n", output);
         Assert.Contains("dusk: sight 1; it gets no darker;", output);
@@ -537,7 +537,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Forecast Pell -> Archer 1 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%\n", output);
         Assert.Contains("Forecast Pell -> Archer 1 with Cinder: dmg 10 hit 91% crit 2%; counter: none\n", output);
         Assert.Contains("Forecast Ottilie -> Hexer: dmg 9 x2 hit 89% crit 4%; counter: none\n", output);
@@ -555,7 +555,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_dusk5.map", "2026-09-26-sallow_grange_dusk5-17.script", 17, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  Brawler hits Pell for 9 (hp 7)\n  Brawler misses Pell\n  Pell hits Brawler for 13 (hp 0)\n", output);
     }
 
@@ -603,7 +603,7 @@ public class CliPlayTests
         Assert.All(spotted, line => Assert.Contains(" 16,6 ", line));
         Assert.Contains("Brawler moves 16,6 -> 15,6\nenemy: attack brawler-1 pell\n", output);
         Assert.Contains("Pell falls at 14,6\n", output);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
     }
 
     /// <summary>
@@ -619,7 +619,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Rider 1 falls at", output);
-        Assert.EndsWith("escaped: rook, dunstan, pell, wren, captain; left behind: none; fell: none\n", output);
+        Assert.EndsWith("Escaped: Rook, Dunstan, Pell, Wren, Alder Fenn; left behind: none; fell: none\n", output);
     }
 
     /// <summary>
@@ -635,7 +635,7 @@ public class CliPlayTests
         var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut_dusk5-23.script", 23, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("escaped: rook, captain; left behind: none; fell: dunstan, pell, wren\n", output);
+        Assert.EndsWith("Escaped: Rook, Alder Fenn; left behind: none; fell: Dunstan, Pell, Wren\n", output);
         Assert.Contains("Rider 1 moves 9,3 -> 13,3 via 10,3 11,3 12,3\n", output);
         Assert.Contains("The bank group wakes (noise)\n", output);
     }
@@ -659,7 +659,7 @@ public class CliPlayTests
         Assert.Contains("Brigand 1 moves 8,3 -> 10,3 via 9,3\n", enemyThree);
         Assert.Contains("  Brigand 1 hits Wren for 12 (hp 8)\n", enemyThree);
         Assert.Contains("Wren falls at 11,3\n", output);
-        Assert.Contains("strict: stopped at line 39 (move wren 15,3)", output);
+        Assert.Contains("Strict: stopped at line 39 (move wren 15,3)", output);
     }
 
     /// <summary>
@@ -680,7 +680,7 @@ public class CliPlayTests
         Assert.Contains("Dunstan falls at 11,3\n", output);
         Assert.Contains("Rider 2 moves 13,3 -> 19,3 via 14,3 15,3 16,3 17,3 18,3\n", output);
         Assert.Contains("  Pell hits Rider 2 for 12 (hp 0)\n", output);
-        Assert.EndsWith("escaped: wren, rook, captain; left behind: none; fell: dunstan, pell\n", output);
+        Assert.EndsWith("Escaped: Wren, Rook, Alder Fenn; left behind: none; fell: Dunstan, Pell\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-brackwater_cut-53.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -700,7 +700,7 @@ public class CliPlayTests
         Assert.Contains("Forecast Ford Chief -> Alder Fenn: dmg 10 hit 43% crit 0%; counter: none\n", output);
         Assert.Contains("Forecast Ford Chief -> Teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%\nFord Chief equips Steel Axe\n", output);
         Assert.Contains("Forecast Alder Fenn -> Ford Chief: dmg 8 x2 hit 74% crit 4%; counter with Steel Axe: dmg 15 hit 62% crit 0%\n", output);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-saltmarsh_ford_chief-47.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -777,8 +777,8 @@ public class CliPlayTests
     /// the console prints no heft on either map.
     /// </summary>
     [Theory]
-    [InlineData("sallow_grange_shove.map", "2026-09-27-sallow_grange_shove-83.script", 83, "battle won: seize\n")]
-    [InlineData("brackwater_cut_shove.map", "2026-09-27-brackwater_cut_shove-67.script", 67, "left behind: pell; fell: none\n")]
+    [InlineData("sallow_grange_shove.map", "2026-09-27-sallow_grange_shove-83.script", 83, "Battle won: seize\n")]
+    [InlineData("brackwater_cut_shove.map", "2026-09-27-brackwater_cut_shove-67.script", 67, "left behind: Pell; fell: none\n")]
     public void TheJournaledShovePlaysReplayWithNoHeft(string map, string script, int seed, string ending)
     {
         var output = RunSample(map, script, seed, out var exit);
@@ -786,7 +786,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith(ending, output);
         Assert.DoesNotContain("Rejected ", output);
-        Assert.DoesNotContain("strict: stopped", output);
+        Assert.DoesNotContain("Strict: stopped", output);
         Assert.Contains(" shoves ", output);
         Assert.DoesNotContain("heft", output);
     }
@@ -803,7 +803,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-97.script", 97, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar hit +15\n", output);
         Assert.Contains("  Pincer: Brawler pinned by Ansgar: Wren hit +15\n", output);
         Assert.Contains("  Pincer: Grange Reeve pinned by Wren: Alder Fenn hit +15\n", output);
@@ -822,7 +822,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-113.script", 113, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  Pincer: Brawler pinned by Wren: Alder Fenn hit +15\n", output);
         Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Ansgar hit +15\n", output);
         Assert.Contains("  Pincer: Grange Reeve pinned by Ansgar: Alder Fenn hit +15\n", output);
@@ -841,7 +841,7 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-307.script", 307, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.EndsWith("Battle won: defeat_boss\n", output);
         Assert.Contains("Forecast Brigand 2 -> Ottilie: dmg 12 hit 31% crit 0%; counter: none\n  Brace: Ottilie braced: Brigand 2 hit -15\n", output);
         Assert.Contains("  Brace: Weir Foreman braced: Teodor hit -15\n", output);
         Assert.Contains("Forecast Pell -> Weir Foreman with Cinder: dmg 12 hit 94% crit 1%", output);
@@ -861,7 +861,7 @@ public class CliPlayTests
         var output = RunSample("the_tollgate_wildfire.map", "2026-09-28-the_tollgate_wildfire-457.script", 457, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  5,5 becomes Fire\n", output);
         Assert.Contains("Archer 2 burns 3 (hp 2)\n", output);
         Assert.Contains("  6,5 becomes Fire\n  5,6 becomes Fire\n", output);
@@ -887,7 +887,7 @@ public class CliPlayTests
         var output = RunSample("brackwater_cut_wildfire.map", "2026-09-30-brackwater_cut_wildfire-613.script", 613, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("escaped: dunstan, captain; left behind: none; fell: pell, rook, wren\n", output);
+        Assert.EndsWith("Escaped: Dunstan, Alder Fenn; left behind: none; fell: Pell, Rook, Wren\n", output);
         Assert.Contains("Forecast Pell -> Archer 1 from 12,4 (Plain) with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%\n  Counter: lethal to Pell (8 against 8 hp)\n  Wildfire: Pell ignites 10,4 on a hit\n", output);
         Assert.Contains("  Wren hits Brigand 1 for 10 (hp 0)\n", output);
         Assert.Contains("  Rider 1 hits Wren for 9 (hp 0)\n", output);
@@ -909,7 +909,7 @@ public class CliPlayTests
         var output = RunSample("cinder_copse_wildfire.map", "2026-09-30-cinder_copse_wildfire-631.script", 631, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: survive\n", output);
+        Assert.EndsWith("Battle won: survive\n", output);
         Assert.Contains("  Wildfire: Pell ignites 7,4 on a hit\n", output);
         Assert.Contains("fire: burning 7,4; next front 6,4 7,5\n", output);
         Assert.Contains("  Wildfire: Hexer 1 ignites 6,4 on a hit\n", output);
@@ -932,7 +932,7 @@ public class CliPlayTests
         var output = RunSample("the_tollgate_windup.map", "2026-09-28-the_tollgate_windup-461.script", 461, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Forecast Toll Mauler -> Teodor: dmg 14 hit -- crit --; counter: none\n", output);
         Assert.Contains("Toll Mauler raises a blow over 6,3 (Teodor); it lands at Toll Mauler's next phase start\n", output);
         Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor 14, sure)\n", output);
@@ -954,7 +954,7 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_overwatch.map", "2026-09-29-harrow_weir_overwatch-491.script", 491, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.EndsWith("Battle won: defeat_boss\n", output);
         Assert.Contains("Ottilie watches from 9,2; no strike passed up\n", output);
         Assert.Contains("Pell's watch fires on Brigand 3 at 8,8: hit 12 (Brigand 3 hp 10)\n", output);
         Assert.Contains("Ottilie's watch fires on Weir Foreman at 11,2: hit 6 (Weir Foreman hp 22)\n", output);
@@ -974,7 +974,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_overwatch.map", "2026-09-30-sallow_grange_overwatch-577.script", 577, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Pell's watch fires on Brawler at 4,6: crit 39 (Brawler hp 0)\n", output);
         Assert.Contains("Hexer falls at 13,7\n", output);
         Assert.Contains("Ottilie's watch fires on Grange Reeve at 12,5: hit 4 (Grange Reeve hp 22)\n", output);
@@ -992,7 +992,7 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_brace.map", "2026-09-27-harrow_weir_brace-439.script", 439, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: defeat_boss\n", output);
+        Assert.EndsWith("Battle won: defeat_boss\n", output);
         Assert.Contains("Forecast Weir Foreman -> Dunstan: dmg 8 hit 43% crit 2%; counter: none\n  Brace: Dunstan braced: Weir Foreman hit -15\n", output);
         Assert.Contains("Forecast Dunstan -> Weir Foreman: dmg 8 hit 29% crit 0%; counter: dmg 8 hit 70% crit 2%\n  Brace: Weir Foreman braced: Dunstan hit -15\n", output);
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
@@ -1009,7 +1009,7 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_brace.map", "2026-09-27-saltmarsh_ford_brace-449.script", 449, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.Contains("Forecast Ottilie -> Bandit Leader: dmg 4 hit 39% crit 3%; counter: none\n  Brace: Bandit Leader braced: Ottilie hit -15\n", output);
         Assert.Contains("Teodor falls at 10,1\n", output);
         Assert.Contains("Bandit Leader falls at 10,0\n", output);
@@ -1028,7 +1028,7 @@ public class CliPlayTests
 
         Assert.Equal(PlaySession.StrictStop, exit);
         Assert.Contains("Ottilie will not shoot Soldier 1 at 60: she bills the crown for every arrow and looses none under 65 (signature)\n", output);
-        Assert.Contains("strict: stopped at line 22 (attack ottilie soldier-1); no later command applied\n", output);
+        Assert.Contains("Strict: stopped at line 22 (attack ottilie soldier-1); no later command applied\n", output);
     }
 
     /// <summary>
@@ -1042,7 +1042,7 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_brace_signatures.map", "2026-09-30-saltmarsh_ford_brace_signatures-587.script", 587, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.Contains("Forecast Ottilie -> Brigand: dmg 8 hit 91% crit 5%; counter: none\n  Signature: Teodor's orders: Ottilie hit +5\n", output);
         Assert.DoesNotContain("will not shoot", output);
     }
@@ -1059,7 +1059,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-433.script", 433, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Archer 2 moves 8,6 -> 6,7 via 7,6 7,7\n", output);
         Assert.Contains("  Pincer: Archer 2 pinned by Ottilie: Ansgar hit +15\n", output);
         Assert.Single(output.Split('\n'), line => line.StartsWith("  Pincer: ", StringComparison.Ordinal));
@@ -1078,7 +1078,7 @@ public class CliPlayTests
         var output = RunSample("sallow_grange_pincer.map", "2026-09-27-sallow_grange_pincer-131.script", 131, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar hit +15\n", output);
         Assert.Contains("  Pincer: Brawler pinned by Teodor: Alder Fenn hit +15\n", output);
         Assert.Contains("Grange Reeve falls at 13,6\n", output);
@@ -1102,7 +1102,7 @@ public class CliPlayTests
         Assert.Contains("enemy: move rider-1 13,0\nRider 1 moves 14,3 -> 13,0 via 15,3 15,2 15,1 15,0 14,0\n", output);
         Assert.Contains("  Pincer: Wren pinned by Brawler: Rider 2 hit +15\n", output);
         Assert.Contains("  Pincer: Alder Fenn pinned by Shieldbearer: Soldier hit +15\n", output);
-        Assert.Contains("escaped: none; left behind: none; fell: captain, dunstan, pell, rook, wren\n", output);
+        Assert.Contains("Escaped: none; left behind: none; fell: Alder Fenn, Dunstan, Pell, Rook, Wren\n", output);
     }
 
     /// <summary>
@@ -1119,7 +1119,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.DoesNotContain("rejected", output);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("  Pincer: Archer 2 pinned by Wren: Teodor hit +15\n", output);
         Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Wren hit +15\n", output);
         Assert.Contains("  Pincer: Toll Brigand pinned by Alder Fenn: Wren hit +15\n", output);
@@ -1142,7 +1142,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.DoesNotContain("rejected", output);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains(MapRenderer.BreakLegend, output);
         Assert.DoesNotContain("break if", output);
         Assert.DoesNotContain("breaks and flees", output);
@@ -1195,7 +1195,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Rook falls at 19,6\n", output);
-        Assert.EndsWith("escaped: wren, pell, captain; left behind: none; fell: dunstan, rook\n", output);
+        Assert.EndsWith("Escaped: Wren, Pell, Alder Fenn; left behind: none; fell: Dunstan, Rook\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241-stand.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -1215,7 +1215,7 @@ public class CliPlayTests
         Assert.Contains("  Brawler from 18,6 with Iron Gauntlets (slot 1): dmg 10 x2 hit 83% crit 0%;", output);
         Assert.Contains("Brawler moves 17,7 -> 19,8 via 18,7 19,7\n", output);
         Assert.Contains("Rook falls at 19,4\n", output);
-        Assert.EndsWith("escaped: wren, captain; left behind: pell; fell: dunstan, rook\n", output);
+        Assert.EndsWith("Escaped: Wren, Alder Fenn; left behind: Pell; fell: Dunstan, Rook\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241-lamps.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -1247,7 +1247,7 @@ public class CliPlayTests
         Assert.Contains("The bank group wakes (noise); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
         Assert.Contains("Shieldbearer moves 17,5 -> 15,3 via 17,4 17,3 16,3\n", output);
         Assert.Contains("Pell falls at 13,3\n", output);
-        Assert.EndsWith("escaped: wren, rook, captain; left behind: pell; fell: dunstan\n", output);
+        Assert.EndsWith("Escaped: Wren, Rook, Alder Fenn; left behind: Pell; fell: Dunstan\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-283.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -1471,7 +1471,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("  Brigand arrives at 0,9 with the ford group, aggressive\n", output);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-511.txt")).ReplaceLineEndings("\n"), output);
     }
@@ -1489,7 +1489,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Bandit Leader waits and braces\n", output);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-523.txt")).ReplaceLineEndings("\n"), output);
     }
@@ -1505,7 +1505,7 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_0091.map", "2026-09-29-saltmarsh_ford-541.script", 541, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-541.txt")).ReplaceLineEndings("\n"), output);
     }
@@ -1522,7 +1522,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Wren moves 10,4 -> 10,1 via 10,3 10,2\nReinforcements arrive\n", output);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-30-saltmarsh_ford-547.txt")).ReplaceLineEndings("\n"), output);
     }
@@ -1540,7 +1540,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.DoesNotContain("rejected", output);
         Assert.Contains("-- Player phase, turn 10 --", output);
-        Assert.Contains("battle won: rout", output);
+        Assert.Contains("Battle won: rout", output);
     }
 
     /// <summary>
@@ -1561,7 +1561,7 @@ public class CliPlayTests
         Assert.Contains("-- Player phase, turn 6 --", output);
         Assert.DoesNotContain("-- Player phase, turn 7 --", output);
         Assert.Contains("Weir Foreman falls at", output);
-        Assert.Contains("battle won: defeat_boss", output);
+        Assert.Contains("Battle won: defeat_boss", output);
     }
 
     /// <summary>
@@ -1807,7 +1807,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", map, "--seed", "7", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Teodor moves 1,2 -> 3,1 via 2,2 3,2\nThe ground changes\n  4,1 becomes Road\n", output);
         Assert.Contains("-- Enemy phase, turn 3 --\nReinforcements arrive\n  Brigand arrives at 9,0 with the east group, aggressive\n", output);
@@ -1845,7 +1845,7 @@ public class CliPlayTests
         var output = RunRiver("2026-09-25-river_refuge_retreat-3.script", out var exit);
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.DoesNotContain("falls back", output);
         Assert.Contains("Wingrider 1 falls at 3,7", output);
@@ -1887,7 +1887,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", map, "--seed", "5", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Forecast Alder Fenn -> Wingrider 2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%\n  Wingrider 2 would fall back to 2,2 at 5 hp\n", output);
         Assert.Contains("enemy: retreat wingrider-2 2,2\n", output);
@@ -2110,7 +2110,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "82", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: survive\n", output);
+        Assert.EndsWith("Battle won: survive\n", output);
         Assert.Contains("Hexer hits Ottilie for 10 (hp 0)", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
@@ -2130,7 +2130,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "91", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: survive\n", output);
+        Assert.EndsWith("Battle won: survive\n", output);
         Assert.Contains("Hexer falls at 8,8", output);
         Assert.Contains("Recalled to state 108", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
@@ -2151,7 +2151,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", Path.ChangeExtension(script, ".map"), "--seed", "287", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: survive\n", output);
+        Assert.EndsWith("Battle won: survive\n", output);
         Assert.Contains("Hexer 1 hits Dunstan for 11 (hp 0)", output);
         Assert.Contains("Wren falls at 11,3", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
@@ -2173,7 +2173,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", "sallow_grange", "--seed", "61", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: seize\n", output);
+        Assert.EndsWith("Battle won: seize\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("The field group wakes (noise)", output);
         Assert.Contains("Shieldbearer falls at 12,2", output);
@@ -2201,7 +2201,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "29", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: escape\nescaped: captain; left behind: none; fell: dunstan, pell, rook, wren\n", output);
+        Assert.EndsWith("Battle won: escape\nEscaped: Alder Fenn; left behind: none; fell: Dunstan, Pell, Rook, Wren\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Contains("Recalled to state 54; 2 charges left", output);
         Assert.Contains("Recalled to state 96; 1 charges left", output);
@@ -2224,7 +2224,7 @@ public class CliPlayTests
         var output = Run(out var exit, "play", BrackwaterDaylight, "--seed", "73", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.EndsWith("battle won: escape\nescaped: rook, wren, pell, captain; left behind: none; fell: dunstan\n", output);
+        Assert.EndsWith("Battle won: escape\nEscaped: Rook, Wren, Pell, Alder Fenn; left behind: none; fell: Dunstan\n", output);
         Assert.Contains("Rook leaves through the exit at 19,6", output);
         Assert.Contains("Dunstan falls at 12,3", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
@@ -2286,7 +2286,7 @@ public class CliPlayTests
             var output = Run(out _, "play", ProtocolSessionTests.TollgateRowFive, "--seed", "7", "--script", path, "--content", Fixture.RealContentDirectory());
 
             Assert.Contains("\nObjective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.\n", output);
-            Assert.Contains("help                     this list", output);
+            Assert.Contains("help                     This list", output);
             Assert.Contains("\nThe captain, Alder Fenn (A), must stand on the gate at 7,1. Only the captain seizes.\n", output);
         }
         finally
@@ -2443,11 +2443,11 @@ public class SimFullTests
 
             Assert.Equal(0, exit);
             Assert.DoesNotContain("Rejected ", output);
-            Assert.DoesNotContain("strict: stopped", output);
+            Assert.DoesNotContain("Strict: stopped", output);
             Assert.Contains("> item wren 2\nWren uses Field Dressing", output);
             Assert.Contains($"turn {turn} of ", output);
             Assert.DoesNotContain($"turn {turn + 1} of ", output);
-            Assert.EndsWith($"battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);
+            Assert.EndsWith($"Battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);
         }
         finally
         {
@@ -2476,7 +2476,7 @@ public class SimFullTests
 
             Assert.Equal(0, exit);
             Assert.DoesNotContain("Rejected ", output);
-            Assert.DoesNotContain("strict: stopped", output);
+            Assert.DoesNotContain("Strict: stopped", output);
             Assert.Contains("Ansgar cantos 5,8 -> 4,10", output);
         }
         finally

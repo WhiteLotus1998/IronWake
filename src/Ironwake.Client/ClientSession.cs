@@ -567,7 +567,7 @@ public sealed class ClientSession
     }
 
     /// <summary>A greyed row's reason: the resolver's words after the unit's name, or "out of reach from here" for a range refusal, whose text carries coordinates.</summary>
-    private static string RefusalText(Rejection refusal)
+    private string RefusalText(Rejection refusal)
     {
         if (refusal.Reason == RejectionReason.OutOfRange)
         {
@@ -575,7 +575,7 @@ public sealed class ClientSession
         }
 
         var colon = refusal.Message.IndexOf(": ", StringComparison.Ordinal);
-        return colon >= 0 ? refusal.Message[(colon + 2)..] : refusal.Message;
+        return UnitNames.Of(State, Content).Named(colon >= 0 ? refusal.Message[(colon + 2)..] : refusal.Message);
     }
 
     /// <summary>Shows the card of the menu row at <paramref name="row"/>, as hovering it or pressing its number does. Ignored with no menu or a row out of range.</summary>

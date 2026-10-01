@@ -33,7 +33,7 @@ public class CertificationTrialCliTests
         var output = Play(out _, "outrider_trial", "7", "reach captain\n");
 
         Assert.Contains("Certification trial: Alder Fenn plays as Outrider with iron_lance, iron_sword\nObjective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.\nTrial of the Outrider  turn 1 of 1", output);
-        Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
+        Assert.EndsWith("Battle ongoing at turn 1, player phase\n", output);
         Assert.DoesNotContain("certification: ", output);
     }
 
@@ -69,7 +69,7 @@ public class CertificationTrialCliTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Alder Fenn may Canto up to 3 movement", output);
-        Assert.EndsWith("battle won: seize; no recall is left\nbattle won: seize\ncertification: captain earned Outrider\n", output);
+        Assert.EndsWith("Battle won: seize; no recall is left\nBattle won: seize\nCertification: Alder Fenn earned Outrider\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -82,7 +82,7 @@ public class CertificationTrialCliTests
 
         Assert.Equal(1, exit);
         Assert.Contains("Hexer hp 3", output);
-        Assert.EndsWith("battle lost: turn 1 passed\ncertification: Outrider not earned\n", output);
+        Assert.EndsWith("Battle lost: turn 1 passed\nCertification: Outrider not earned\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -108,13 +108,13 @@ public class CertificationTrialCliTests
         var gambleOutput = Run(out var gambleExit, "play", Sample("bulwark_trial"), "--seed", "12", "--script", gamble, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, heldExit);
-        Assert.EndsWith("battle won: survive\ncertification: captain earned Bulwark\n", heldOutput);
+        Assert.EndsWith("Battle won: survive\nCertification: Alder Fenn earned Bulwark\n", heldOutput);
         Assert.Contains("Trial of the Bulwark  over after turn 1 of 1  survive  recall 0\n", heldOutput);
-        Assert.Contains("battle won: survive; no recall is left\n", heldOutput);
+        Assert.Contains("Battle won: survive; no recall is left\n", heldOutput);
         Assert.DoesNotContain("turn 2 of 1", heldOutput);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(held, ".txt")).ReplaceLineEndings("\n"), heldOutput);
         Assert.Equal(1, gambleExit);
-        Assert.EndsWith("battle lost: the captain is dead\ncertification: Bulwark not earned\n", gambleOutput);
+        Assert.EndsWith("Battle lost: the captain is dead\nCertification: Bulwark not earned\n", gambleOutput);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(gamble, ".txt")).ReplaceLineEndings("\n"), gambleOutput);
     }
 

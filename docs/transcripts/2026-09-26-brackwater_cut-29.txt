@@ -3590,6 +3590,6 @@ b  rider-2          Rider L3 outrider          11,3   hp 21/21  Plain  group cha
 h  shieldbearer-1   Shieldbearer L3 bulwark    16,2   hp 7/25   Plain  group bank, guard, awake
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: captain
-battle won: escape; only recall is left
-battle won: escape
-escaped: captain; left behind: none; fell: dunstan, pell, rook, wren
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Alder Fenn; left behind: none; fell: Dunstan, Pell, Rook, Wren

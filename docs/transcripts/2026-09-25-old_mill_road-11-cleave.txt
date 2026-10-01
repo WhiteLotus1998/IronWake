@@ -778,5 +778,5 @@ Old Mill Road  turn 9 of 12  player phase  rout  recall 3
  9 ............
 
 A  captain          Alder Fenn L2 cadet        7,2    hp 5/23   Plain  captain  done
-battle won: rout; only recall is left
-battle won: rout
+Battle won: rout; only recall is left
+Battle won: rout

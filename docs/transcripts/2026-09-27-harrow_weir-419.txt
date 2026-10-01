@@ -2583,5 +2583,5 @@ C  ottilie          Ottilie L1 bowman          5,4    hp 17/17  Plain
 D  pell             Pell L2 adept              11,6   hp 3/16   Road  done
 e  soldier-1        Soldier L2 pikeman         11,10  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          9,6    hp 8/21   Road
-battle won: defeat_boss; only recall is left
-battle won: defeat_boss
+Battle won: defeat_boss; only recall is left
+Battle won: defeat_boss

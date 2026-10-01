@@ -18,24 +18,24 @@ public sealed class CampaignSession
     public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two] [--from map] [--log file]";
 
     private const string Help = """
-        between maps:
-          roster                   every unit: class, level, EXP, items with uses, mastery
-          show <unit>              one unit's numbers, ranks and mastery
-          shop                     what the shop sells before this map, and each price
-          buy <item> <unit>        buy an item at full uses into the unit's next free slot
-          repair <unit> <slot>     restore a weapon's uses, at its price per use
-          classes [unit]           what each class asks to certify into it, and what the unit still lacks
-          certify <unit> <class>   change class, paying a seal from the purse
-          trial <unit> <class>     try the class's certification trial instead of a seal; one attempt per camp
-          keep                     the keep's menu once the raid is fought: each placement, its price and what it does
-          build <edit> <x,y>       buy one edit of the keep's menu at one of its placements
-          bench <unit>             keep a unit off the next map; the next in roster order fills its slot
-          unbench <unit>           return a benched unit to the deployment order
-          record                   the campaign record as one JSON line (the protocol's campaign shape)
-          march                    start the next map
-          help                     this list
-        in battle, every play command; leave ends a battle once it is won or lost
-        slots count from 1
+        Between maps:
+          roster                   Every unit: class, level, EXP, items with uses, mastery
+          show <unit>              One unit's numbers, ranks and mastery
+          shop                     What the shop sells before this map, and each price
+          buy <item> <unit>        Buy an item at full uses into the unit's next free slot
+          repair <unit> <slot>     Restore a weapon's uses, at its price per use
+          classes [unit]           What each class asks to certify into it, and what the unit still lacks
+          certify <unit> <class>   Change class, paying a seal from the purse
+          trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
+          keep                     The keep's menu once the raid is fought: each placement, its price and what it does
+          build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
+          bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
+          unbench <unit>           Return a benched unit to the deployment order
+          record                   The campaign record as one JSON line (the protocol's campaign shape)
+          march                    Start the next map
+          help                     This list
+        In battle, every play command; leave ends a battle once it is won or lost
+        Slots count from 1
         """;
 
     private readonly GameContent _content;
@@ -201,7 +201,7 @@ public sealed class CampaignSession
 
     private int Play(TextReader input, bool strict)
     {
-        _out.WriteLine($"campaign, seed {_record.Seed}, difficulty {_record.Difficulty}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
+        _out.WriteLine($"Campaign, seed {_record.Seed}, difficulty {_record.Difficulty}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
         var code = 1;
         var stopped = false;
         while (!_record.IsFinished(_content))
@@ -239,19 +239,19 @@ public sealed class CampaignSession
             _log.Write(battle.EventLog);
             if (stopped || !battle.Left)
             {
-                _out.WriteLine($"campaign stopped in {map.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
+                _out.WriteLine($"Campaign stopped in {map.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
                 break;
             }
 
             if (battle.State.Outcome.Result != BattleResult.Won)
             {
-                WriteEvent(LostLine(battle.State));
+                WriteEvent(LostLine(battle.State, _content));
                 break;
             }
 
             var before = _record;
             _record = _record.AfterBattle(battle.State, _content);
-            WriteEvent(WonLine(before, _record, battle.State));
+            WriteEvent(WonLine(before, _record, battle.State, _content));
         }
 
         if (_record.IsFinished(_content))
@@ -262,7 +262,7 @@ public sealed class CampaignSession
 
         if (_scripted && _rejections.Count > 0)
         {
-            _out.WriteLine($"rejected {_rejections.Count} of {_commands} commands:");
+            _out.WriteLine($"Rejected {_rejections.Count} of {_commands} commands:");
             foreach (var (at, command, reason) in _rejections)
             {
                 _out.WriteLine($"  line {at}: {command}: {reason}");
@@ -321,29 +321,39 @@ public sealed class CampaignSession
 
     /// <summary>The line that opens a campaign battle: which map of how many, and the seed it plays on.</summary>
     public static string MapLine(CampaignRecord record, GameContent content, MapDefinition map) =>
-        $"map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}, seed {record.BattleSeed}";
+        $"Map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}, seed {record.BattleSeed}";
 
     /// <summary>The lines that open a certification trial: the map and its seed, then who plays it as what.</summary>
     public static IReadOnlyList<string> TrialLines(CampaignRecord record, GameContent content, MapDefinition trial, string unitId, string classId) => new[]
     {
-        $"trial: {trial.Name}, seed {record.TrialSeed(content)}",
-        $"certification trial: {unitId} plays as {content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}",
+        $"Trial: {trial.Name}, seed {record.TrialSeed(content)}",
+        $"Certification trial: {UnitNames.Of(record, content)[unitId]} plays as {content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}",
     };
 
-    /// <summary>The line after a won battle: the reason, the reward, the purse, and who fell on it.</summary>
-    public static string WonLine(CampaignRecord before, CampaignRecord after, BattleState end)
+    /// <summary>The line after a won battle: the reason, the reward, the purse, and who fell on it, by name.</summary>
+    public static string WonLine(CampaignRecord before, CampaignRecord after, BattleState end, GameContent content)
     {
-        var fallen = after.Fallen.Skip(before.Fallen.Count).ToList();
+        var names = UnitNames.Of(after, content);
+        var fallen = after.Fallen.Skip(before.Fallen.Count).Select(id => names[id]).ToList();
         return $"{end.Map.Name} won: {end.Outcome.Reason}; reward {after.Purse - before.Purse}, the purse holds {after.Purse}"
             + (fallen.Count > 0 ? $"; fallen: {string.Join(", ", fallen)}" : "; nobody fell");
     }
 
-    /// <summary>The line a lost battle ends the campaign on.</summary>
-    public static string LostLine(BattleState end) => $"campaign lost on {end.Map.Name}: {end.Outcome.Reason}";
+    /// <summary>The line a lost battle ends the campaign on, its reason naming units as the battle does.</summary>
+    public static string LostLine(BattleState end, GameContent content) =>
+        $"Campaign lost on {end.Map.Name}: {UnitNames.Of(end, content).Named(end.Outcome.Reason)}";
 
     /// <summary>The line once every map is won.</summary>
     public static string CampaignWonLine(CampaignRecord record, GameContent content) =>
-        $"campaign won: all {content.Campaign.Maps.Count} maps, the purse holds {record.Purse}";
+        $"Campaign won: all {content.Campaign.Maps.Count} maps, the purse holds {record.Purse}";
+
+    /// <summary>
+    /// A between-map line as a reader sees it (issue 615): a refusal or an accepted action's
+    /// line from <see cref="CampaignRecord"/>, each unit id on the roster or among the fallen
+    /// read as its name, in sentence case: <c>Wren buys Vulnerary for 300; ...</c>.
+    /// </summary>
+    public static string Text(CampaignRecord record, GameContent content, string text) =>
+        UnitNames.Of(record, content).Message(text);
 
     /// <summary>
     /// <c>trial &lt;unit&gt; &lt;class&gt;</c> (issue 252): refused as <see cref="CampaignRecord.TrialRefusal"/>
@@ -375,7 +385,7 @@ public sealed class CampaignSession
         _log.Write(battle.EventLog);
         if (stopped || !battle.Left)
         {
-            _out.WriteLine($"campaign stopped in {trial.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
+            _out.WriteLine($"Campaign stopped in {trial.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
             return false;
         }
 
@@ -433,12 +443,12 @@ public sealed class CampaignSession
 
             if (strict && _rejections.Count > 0)
             {
-                _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
+                _out.WriteLine($"Strict: stopped at line {_line} ({text}); no later command applied");
                 return null;
             }
         }
 
-        _out.WriteLine($"campaign stopped before {map.Name}: the script ended on the screen");
+        _out.WriteLine($"Campaign stopped before {map.Name}: the script ended on the screen");
         return null;
     }
 
@@ -561,12 +571,13 @@ public sealed class CampaignSession
         }
 
         _record = result.Record;
-        WriteEvent(result.Text);
+        WriteEvent(Text(_record, _content, result.Text));
         return true;
     }
 
     private void Error(string command, string message)
     {
+        message = Text(_record, _content, message);
         _out.WriteLine("ERROR: " + message);
         if (_scripted)
         {
@@ -580,7 +591,8 @@ public sealed class CampaignSession
     /// </summary>
     private void PrintClasses(Unit? unit)
     {
-        _out.WriteLine($"classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}");
+        _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}");
+        var names = UnitNames.Of(_record, _content);
         foreach (var target in _content.Classes.Values)
         {
             var line = $"  {target.Name}: {target.Certification.Describe()}";
@@ -591,12 +603,12 @@ public sealed class CampaignSession
 
             if (unit is not null && unit.ClassId == target.Id)
             {
-                line += $" -- {unit.Id}'s class";
+                line += $" -- {names[unit.Id]}'s class";
             }
             else if (unit is not null)
             {
                 var refusals = Certifications.Check(unit, target);
-                line += refusals.Count == 0 ? $" -- {unit.Id} may certify" : $" -- {string.Join("; ", refusals.Select(r => r.Text))}";
+                line += refusals.Count == 0 ? $" -- {names[unit.Id]} may certify" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
             }
 
             _out.WriteLine(line);
@@ -624,7 +636,7 @@ public sealed class CampaignSession
     public static IReadOnlyList<string> KeepLines(string contentDir, GameContent content, CampaignRecord record)
     {
         var keep = record.KeepMap(BareKeep(contentDir, content), content);
-        var lines = new List<string> { $"keep: {keep.Name}; built: {(record.Keep.Count == 0 ? "nothing" : string.Join(", ", record.Keep))}; the purse holds {record.Purse}" };
+        var lines = new List<string> { $"Keep: {keep.Name}; built: {(record.Keep.Count == 0 ? "nothing" : string.Join(", ", record.Keep))}; the purse holds {record.Purse}" };
         foreach (var edit in content.Campaign.Keep.Edits)
         {
             lines.Add($"  {edit.Id}: {edit.Name}, {edit.Price}");
@@ -633,8 +645,8 @@ public sealed class CampaignSession
                 lines.Add(record.Keep.Contains(new KeepWork(edit.Id, at))
                     ? $"    {edit.Id} {at}: built"
                     : Keep.Refusal(keep, edit, at) is { } refusal
-                        ? $"    {edit.Id} {at}: {refusal}"
-                        : "    " + Keep.Describe(keep, edit, at, content));
+                        ? $"    {edit.Id} {at}: {UnitNames.Sentence(refusal)}"
+                        : "    " + UnitNames.Sentence(Keep.Describe(keep, edit, at, content)));
             }
         }
 
@@ -662,9 +674,9 @@ public sealed class CampaignSession
         return false;
     }
 
-    private void PrintRoster() => Lines(RosterLines(_record, _content));
+    private void PrintRoster() => Lines(RosterLines(_record, _content, typed: true));
 
-    private void PrintUnit(Unit unit, bool detail) => Lines(UnitLines(_record, _content, unit, detail));
+    private void PrintUnit(Unit unit, bool detail) => Lines(UnitLines(_record, _content, unit, detail, typed: true));
 
     private void PrintShop() => Lines(ShopLines(_record, _content));
 
@@ -680,45 +692,53 @@ public sealed class CampaignSession
         }
     }
 
-    /// <summary>The roster as the screen prints it: a heading, one row per unit, then the fallen if any.</summary>
-    public static IReadOnlyList<string> RosterLines(CampaignRecord record, GameContent content)
+    /// <summary>
+    /// The roster as the screen prints it: a heading, one row per unit, then the fallen if any,
+    /// each by name (issue 615); with <paramref name="typed"/>, as the console prints it, a name a
+    /// command types differently is followed by that id: <c>Alder Fenn (captain)</c>.
+    /// </summary>
+    public static IReadOnlyList<string> RosterLines(CampaignRecord record, GameContent content, bool typed = false)
     {
-        var lines = new List<string> { "roster:" };
+        var lines = new List<string> { "Roster:" };
         foreach (var unit in record.Roster)
         {
-            lines.AddRange(UnitLines(record, content, unit, detail: false));
+            lines.AddRange(UnitLines(record, content, unit, detail: false, typed));
         }
 
         if (record.Fallen.Count > 0)
         {
-            lines.Add($"  fallen: {string.Join(", ", record.Fallen)}");
+            var names = UnitNames.Of(record, content);
+            lines.Add($"  Fallen: {string.Join(", ", record.Fallen.Select(id => names[id]))}");
         }
 
         return lines;
     }
 
     /// <summary>
-    /// One unit's roster row: class, level, EXP, whether it is benched, and each item with its uses;
-    /// with <paramref name="detail"/>, its stats, ranks and mastery below, as <c>show</c> prints them.
+    /// One unit's roster row: its name, class, level, EXP, whether it is benched, and each item
+    /// with its uses; with <paramref name="detail"/>, its stats, ranks and mastery below, as
+    /// <c>show</c> prints them; with <paramref name="typed"/>, the id a command types after the
+    /// name where the two differ.
     /// </summary>
-    public static IReadOnlyList<string> UnitLines(CampaignRecord record, GameContent content, Unit unit, bool detail)
+    public static IReadOnlyList<string> UnitLines(CampaignRecord record, GameContent content, Unit unit, bool detail, bool typed = false)
     {
+        var name = typed && !string.Equals(unit.Name, unit.Id, StringComparison.OrdinalIgnoreCase) ? $"{unit.Name} ({unit.Id})" : unit.Name;
         var unitClass = content.Class(unit.ClassId);
         var slots = unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {ItemText(content, item)}");
         var bench = record.Benched.Contains(unit.Id) ? ", benched" : "";
-        var lines = new List<string> { $"  {unit.Id}: {unitClass.Name} L{unit.Level} exp {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}" };
+        var lines = new List<string> { $"  {name}: {unitClass.Name} L{unit.Level}, EXP {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}" };
         if (!detail)
         {
             return lines;
         }
 
         var stats = content.StatsOf(unit);
-        lines.Add($"    hp {stats.Hp} str {stats.Str} mag {stats.Mag} dex {stats.Dex} spd {stats.Spd} lck {stats.Lck} def {stats.Def} res {stats.Res} cha {stats.Cha}");
+        lines.Add($"    HP {stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}");
         var ranks = unitClass.Weapons.Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Skill.Rank(type)} ({unit.Skill.Points(type)})");
-        lines.Add($"    ranks: {string.Join(", ", ranks)}");
+        lines.Add($"    Ranks: {string.Join(", ", ranks)}");
         if (PlaySession.MasteryLine(new BattleUnit(unit, Side.Player, default, stats.Hp, false, false), content) is { } mastery)
         {
-            lines.Add("  " + mastery);
+            lines.Add("  " + UnitNames.Sentence(mastery));
         }
 
         return lines;
@@ -753,21 +773,24 @@ public sealed class CampaignSession
     public static IReadOnlyList<string> ShopLines(CampaignRecord record, GameContent content)
     {
         var wares = Stock(record, content).Select(id => WareText(content, id));
-        var lines = new List<string> { $"shop: {string.Join(", ", wares)}; a seal to certify costs {content.Campaign.CertificationPrice}" };
+        var lines = new List<string> { $"Shop: {string.Join(", ", wares)}; a seal to certify costs {content.Campaign.CertificationPrice}" };
         if (content.Campaign.Trials.Count > 0)
         {
             var trials = content.Campaign.Trials.Select(t => content.Class(t.ClassId).Name);
-            lines.Add($"trials in place of a seal (one attempt per unit and class before each map): {string.Join(", ", trials)}");
+            lines.Add($"Trials in place of a seal (one attempt per unit and class before each map): {string.Join(", ", trials)}");
         }
 
         return lines;
     }
 
-    /// <summary>Who deploys to <paramref name="map"/>, in slot order; throws <see cref="ArgumentException"/> as <see cref="CampaignRecord.Deployment"/> does.</summary>
-    public static string DeploymentLine(CampaignRecord record, GameContent content, MapDefinition map) =>
-        $"deploys to {map.Name}: {string.Join(", ", record.Deployment(map, content))}";
+    /// <summary>Who deploys to <paramref name="map"/>, in slot order, by name; throws <see cref="ArgumentException"/> as <see cref="CampaignRecord.Deployment"/> does.</summary>
+    public static string DeploymentLine(CampaignRecord record, GameContent content, MapDefinition map)
+    {
+        var names = UnitNames.Of(record, content);
+        return $"Deploys to {map.Name}: {string.Join(", ", record.Deployment(map, content).Select(id => names[id]))}";
+    }
 
     /// <summary>The heading the screen opens with before <paramref name="map"/>.</summary>
     public static string ScreenHeading(CampaignRecord record, GameContent content, MapDefinition map) =>
-        $"-- before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}; the purse holds {record.Purse} --";
+        $"-- Before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}; the purse holds {record.Purse} --";
 }

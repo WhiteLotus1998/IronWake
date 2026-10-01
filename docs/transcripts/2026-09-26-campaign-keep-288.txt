@@ -1,22 +1,22 @@
-campaign, seed 288, difficulty normal, scheme TwoRollAverage, 2 maps
--- before map 1 of 2: Raid on Ironwake; the purse holds 500 --
-roster:
-  captain: Cadet L1 exp 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  wren: Cadet L1 exp 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  teodor: Pikeman L1 exp 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
-  ottilie: Bowman L1 exp 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
-  pell: Adept L1 exp 0; 1: Cinder 8/8, 2: Gust 6/6
-  dunstan: Bulwark L1 exp 0; 1: Iron Lance 40/40
-  maud: Chaplain L1 exp 0; 1: Radiance 5/5, 2: Salve 8/8
-  ansgar: Outrider L1 exp 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  rook: Skyrider L1 exp 0; 1: Iron Lance 40/40
-  keziah: Reaver L1 exp 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  brannock: Cadet L1 exp 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal to certify costs 500
-trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
-deploys to Raid on Ironwake: captain, wren, teodor, ottilie, pell, dunstan
+Campaign, seed 288, difficulty normal, scheme TwoRollAverage, 2 maps
+-- Before map 1 of 2: Raid on Ironwake; the purse holds 500 --
+Roster:
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
+  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal to certify costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan
 > march
-map 1 of 2: Raid on Ironwake, seed 288
+Map 1 of 2: Raid on Ironwake, seed 288
 Objective: Defeat every enemy by the end of turn 7. Captain Fenn must survive.
 Raid on Ironwake  turn 1 of 7  player phase  rout  recall 3
    0123456789012345
@@ -1617,52 +1617,52 @@ D  ottilie          Ottilie L1 bowman          8,7    hp 7/17   Plain  done
 E  pell             Pell L1 adept              9,4    hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain
 B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
-battle won: rout; only recall is left, or leave
+Battle won: rout; only recall is left, or leave
 > leave
 Raid on Ironwake won: rout; reward 1000, the purse holds 1500; nobody fell
--- before map 2 of 2: Ironwake Keep; the purse holds 1500 --
-roster:
-  captain: Cadet L1 exp 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
-  wren: Cadet L1 exp 94; 1: Iron Sword 32/40 (repair 80), 2: Field Dressing 3/3
-  teodor: Pikeman L1 exp 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
-  ottilie: Bowman L1 exp 82; 1: Iron Bow 36/40 (repair 40), 2: Field Dressing 3/3
-  pell: Adept L1 exp 82; 1: Cinder 8/8, 2: Gust 6/6
-  dunstan: Bulwark L1 exp 12; 1: Iron Lance 38/40 (repair 20)
-  maud: Chaplain L1 exp 0; 1: Radiance 5/5, 2: Salve 8/8
-  ansgar: Outrider L1 exp 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  rook: Skyrider L1 exp 0; 1: Iron Lance 40/40
-  keziah: Reaver L1 exp 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
-  brannock: Cadet L1 exp 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal to certify costs 500
-trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
-deploys to Ironwake Keep: captain, wren, teodor, ottilie, pell, dunstan
-keep: Ironwake Keep; built: nothing; the purse holds 1500
+-- Before map 2 of 2: Ironwake Keep; the purse holds 1500 --
+Roster:
+  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Wren: Cadet L1, EXP 94; 1: Iron Sword 32/40 (repair 80), 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L1, EXP 82; 1: Iron Bow 36/40 (repair 40), 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 82; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 12; 1: Iron Lance 38/40 (repair 20)
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
+  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal to certify costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan
+Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
-    wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
   ditch: Dig a ditch, 300
-    ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 > keep
-keep: Ironwake Keep; built: nothing; the purse holds 1500
+Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
-    wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
-    wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
   ditch: Dig a ditch, 300
-    ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 > build wall 10,8
-built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+Built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
 > keep
-keep: Ironwake Keep; built: wall 10,8; the purse holds 1100
+Keep: Ironwake Keep; built: wall 10,8; the purse holds 1100
   wall: Rebuild a wall, 400
-    wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
     wall 10,8: built
   ditch: Dig a ditch, 300
-    ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
-    ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 > march
-map 2 of 2: Ironwake Keep, seed 289
+Map 2 of 2: Ironwake Keep, seed 289
 Objective: Hold out until the end of turn 8. Captain Fenn must survive.
 Ironwake Keep  turn 1 of 8  player phase  survive  recall 3
    0123456789012345
@@ -4325,7 +4325,7 @@ E  pell             Pell L3 adept              12,3   hp 16/16  Plain
 o  soldier-5        Soldier L2 pikeman         10,4   hp 2/20   Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          11,3   hp 6/21   Plain
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain
-battle won: survive; only recall is left, or leave
+Battle won: survive; only recall is left, or leave
 > leave
 Ironwake Keep won: survive; reward 2000, the purse holds 3100; nobody fell
-campaign won: all 2 maps, the purse holds 3100
+Campaign won: all 2 maps, the purse holds 3100

@@ -1764,6 +1764,6 @@ E  pell             Pell L2 adept              18,2   hp 6/16   Plain  done
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren captain
-battle won: escape; only recall is left
-battle won: escape
-escaped: wren, captain; left behind: pell; fell: dunstan, rook
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Wren, Alder Fenn; left behind: Pell; fell: Dunstan, Rook

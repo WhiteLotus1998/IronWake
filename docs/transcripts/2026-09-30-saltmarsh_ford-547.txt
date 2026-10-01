@@ -2243,5 +2243,5 @@ D  ottilie          Ottilie L1 bowman          10,4   hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          8,5    hp 5/21   Plain
 B  wren             Wren L2 cadet              10,1   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
-battle won: rout; only recall is left
-battle won: rout
+Battle won: rout; only recall is left
+Battle won: rout
