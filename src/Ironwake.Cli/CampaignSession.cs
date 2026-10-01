@@ -10,12 +10,17 @@ namespace Ironwake.Cli;
 /// shop and the next map's deployment, and takes the actions of <see cref="CampaignRecord"/>:
 /// buy, repair, certify, trial, quest (a side map, issue 635), build (the keep's menu, after the raid on it; issue 288), bench and unbench; <c>march</c> starts the battle, which plays as
 /// <c>play</c> does until <c>leave</c> after it is decided. A won battle returns to the screen
-/// with the reward paid and the fallen gone; a lost one ends the campaign. The same script
-/// grammar and <c>--strict</c> as <c>play</c>, one script for the whole campaign.
+/// with the reward paid and the fallen gone; a lost one ends this campaign and offers the fail
+/// menu: load a save, a new game, or quit (issue 663). Every camp autosaves, <c>save</c> names a
+/// save, and <c>quit</c> in a battle writes a suspend that <c>--resume</c> replays once (<see cref="SaveStore"/>).
+/// The same script grammar and <c>--strict</c> as <c>play</c>, one script for the whole campaign.
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two] [--from map] [--log file]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
+
+    /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
+    public const string DefaultSavesDirectory = "saves";
 
     private const string Help = """
         Between maps:
@@ -34,9 +39,11 @@ public sealed class CampaignSession
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
           record                   The campaign record as one JSON line (the protocol's campaign shape)
+          save <name>              Save the campaign as it stands at this camp; every camp also autosaves, keeping the last three
+          saves                    Every save: the autosaves, newest first, then the named ones
           march                    Start the next map
           help                     This list
-        In battle, every play command; leave ends a battle once it is won or lost
+        In battle, every play command; leave ends a battle once it is won or lost; quit suspends it, and --resume picks it up once
         Slots count from 1
         """;
 
@@ -46,7 +53,10 @@ public sealed class CampaignSession
     private readonly bool _scripted;
     private readonly RollScheme _scheme;
     private readonly List<(int Line, string Command, string Reason)> _rejections = new();
+    private readonly SaveStore? _saves;
     private CampaignRecord _record;
+    private IReadOnlyList<string>? _resume;
+    private bool _strictStopped;
     private int _line;
     private int _commands;
 
@@ -69,8 +79,10 @@ public sealed class CampaignSession
         _log.WriteLine(line);
     }
 
-    private CampaignSession(GameContent content, string contentDir, CampaignRecord record, TextWriter output, bool scripted, RollScheme scheme)
+    private CampaignSession(GameContent content, string contentDir, CampaignRecord record, TextWriter output, bool scripted, RollScheme scheme, SaveStore? saves, IReadOnlyList<string>? resume)
     {
+        _saves = saves;
+        _resume = resume;
         _content = content;
         _contentDir = contentDir;
         _record = record;
@@ -90,6 +102,9 @@ public sealed class CampaignSession
         var scheme = RollScheme.TwoRollAverage;
         string? from = null;
         string? log = null;
+        string? savesDir = null;
+        string? load = null;
+        var resume = false;
         for (var i = 0; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -125,6 +140,17 @@ public sealed class CampaignSession
                     log = value;
                     i++;
                     break;
+                case "--saves" when value is not null:
+                    savesDir = value;
+                    i++;
+                    break;
+                case "--load" when value is not null:
+                    load = value;
+                    i++;
+                    break;
+                case "--resume":
+                    resume = true;
+                    break;
                 default:
                     Console.WriteLine($"ERROR: unexpected argument '{args[i]}'");
                     Console.WriteLine(Usage);
@@ -135,6 +161,20 @@ public sealed class CampaignSession
         if (strict && script is null)
         {
             Console.WriteLine("ERROR: --strict applies to a scripted run; give --script");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if ((load is not null || resume) && (from is not null || (load is not null && resume)))
+        {
+            Console.WriteLine("ERROR: --load, --resume and --from each pick where the campaign starts; give one");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if ((load is not null || resume) && script is not null && savesDir is null)
+        {
+            Console.WriteLine("ERROR: a scripted run keeps no saves unless --saves names a directory");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -190,8 +230,34 @@ public sealed class CampaignSession
             input = Console.In;
         }
 
+        var saves = savesDir is not null ? new SaveStore(savesDir) : script is null ? new SaveStore(DefaultSavesDirectory) : null;
         var record = from is null ? CampaignRecord.Start(content, seed, difficulty) : CampaignRecord.StartAt(content, seed, from, difficulty);
-        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme);
+        IReadOnlyList<string>? battleLines = null;
+        if (load is not null)
+        {
+            var (loaded, refusal) = saves!.Load(load, content);
+            if (loaded is null)
+            {
+                Console.WriteLine("ERROR: " + refusal);
+                return 2;
+            }
+
+            record = loaded;
+        }
+        else if (resume)
+        {
+            var (suspended, lines, refusal) = saves!.TakeSuspend(content);
+            if (suspended is null)
+            {
+                Console.WriteLine("ERROR: " + refusal);
+                return 2;
+            }
+
+            record = suspended;
+            battleLines = lines;
+        }
+
+        var session = new CampaignSession(content, contentDir, record, Console.Out, script is not null, scheme, saves, battleLines);
         var code = session.Play(input, strict);
         if (log is not null)
         {
@@ -219,7 +285,9 @@ public sealed class CampaignSession
                 return 1;
             }
 
-            if (Screen(input, map, strict) != true)
+            var resume = _resume;
+            _resume = null;
+            if (resume is null && Screen(input, map, strict) != true)
             {
                 stopped = strict && _rejections.Count > 0;
                 break;
@@ -232,13 +300,33 @@ public sealed class CampaignSession
             }
 
             WriteEvent(MapLine(_record, _content, map));
-            var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), _out, _scripted, _line);
+            var screen = new QuietWriter(_out);
+            var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), screen, _scripted, _line);
+            var replayed = 0;
+            if (resume is not null)
+            {
+                screen.Quiet = true;
+                var replayCommands = 0;
+                battle.RunCommands(new StringReader(string.Concat(resume.Select(l => l + "\n"))), false, ref replayCommands);
+                screen.Quiet = false;
+                replayed = battle.Rejections.Count;
+                _out.WriteLine($"Resumed {map.Name} at turn {battle.State.Turn} from the suspend, {resume.Count} lines replayed; the suspend is deleted");
+            }
+
             _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
             _out.Write(MapRenderer.Render(battle.State, _content));
-            stopped = battle.RunCommands(input, strict, ref _commands);
+            var typed = new RecordingReader(input, resume);
+            stopped = battle.RunCommands(typed, strict, ref _commands);
             _line = battle.Line;
-            _rejections.AddRange(battle.Rejections);
+            _rejections.AddRange(battle.Rejections.Skip(replayed));
             _log.Write(battle.EventLog);
+            if (!stopped && !battle.Left && _saves is not null)
+            {
+                _saves.Suspend(_record, typed.Lines.Where(l => l.Trim() != "quit"));
+                _out.WriteLine($"Suspended in {map.Name} at turn {battle.State.Turn}: ironwake campaign --resume picks it up once, from {_saves.Directory}");
+                break;
+            }
+
             if (stopped || !battle.Left)
             {
                 _out.WriteLine($"Campaign stopped in {map.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
@@ -248,7 +336,14 @@ public sealed class CampaignSession
             if (battle.State.Outcome.Result != BattleResult.Won)
             {
                 WriteEvent(LostLine(battle.State, _content));
-                break;
+                if (FailMenu(input, strict) is not { } next)
+                {
+                    stopped = _strictStopped;
+                    break;
+                }
+
+                _record = next;
+                continue;
             }
 
             var before = _record;
@@ -520,6 +615,12 @@ public sealed class CampaignSession
     /// </summary>
     private bool? Screen(TextReader input, MapDefinition map, bool strict)
     {
+        if (_saves is not null)
+        {
+            _saves.Autosave(_record);
+            _out.WriteLine($"Autosaved as {SaveStore.AutoPrefix}1; the last {SaveStore.AutosavesKept} camps are kept");
+        }
+
         Lines(BeforeCard(_record, _content, map));
         _out.WriteLine(ScreenHeading(_record, _content, map));
         PrintRoster();
@@ -671,6 +772,27 @@ public sealed class CampaignSession
             case ["record"]:
                 _out.WriteLine(ProtocolJson.Campaign(_record));
                 break;
+            case ["save", var name]:
+                if (_saves is null)
+                {
+                    Error(text, SavesOff);
+                }
+                else if (_saves.Save(name, _record) is { } refused)
+                {
+                    Error(text, refused);
+                }
+                else
+                {
+                    _out.WriteLine($"Saved as {name}: {SaveLine(_record, _content)}");
+                }
+
+                break;
+            case ["save", ..]:
+                Error(text, "usage: save <name>");
+                break;
+            case ["saves"]:
+                PrintSaves();
+                break;
             case ["help"]:
                 _out.WriteLine(Help);
                 break;
@@ -699,6 +821,110 @@ public sealed class CampaignSession
                 Error(text, $"unknown command '{words[0]}' between maps; type help");
                 break;
         }
+    }
+
+    private const string SavesOff = "saves are off: a scripted run keeps none unless --saves names a directory";
+
+    /// <summary>
+    /// The card a lost map plays before the fail menu (issue 663): a placeholder, marked as one, until
+    /// the storyline's bad ending is written (issue 656).
+    /// </summary>
+    public static readonly IReadOnlyList<string> LostCard = Card("-- The company is lost (placeholder card) --", ValueList<string>.From(new[]
+    {
+        "The levy breaks on the field. The ones who can walk go home by the back roads, and nobody writes down which of them were yours.",
+    }));
+
+    /// <summary>The fail menu's prompt: the three ways on from a lost map.</summary>
+    public const string FailMenuLine = "Load from save (load <name>; saves lists them), New game (new), or Quit (quit)";
+
+    /// <summary>A save as the screen lists it: which map is next, of how many, and the purse.</summary>
+    public static string SaveLine(CampaignRecord record, GameContent content) =>
+        record.IsFinished(content)
+            ? $"every map won, the purse holds {record.Purse}"
+            : $"before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}, {record.NextMap(content).MapId}, the purse holds {record.Purse}";
+
+    private void PrintSaves()
+    {
+        if (_saves is null)
+        {
+            _out.WriteLine("Saves: off; " + SavesOff);
+            return;
+        }
+
+        var names = _saves.Names();
+        _out.WriteLine(names.Count == 0 ? $"Saves in {_saves.Directory}: none" : $"Saves in {_saves.Directory}:");
+        foreach (var name in names)
+        {
+            var (record, refusal) = _saves.Load(name, _content);
+            _out.WriteLine($"  {name}: {(record is null ? refusal : SaveLine(record, _content))}");
+        }
+    }
+
+    /// <summary>
+    /// After a lost map (issue 663): the placeholder card, then the fail menu until a save is loaded
+    /// or a new game is started (the record to go on with), or quit, the input ending or a strict
+    /// stop (null; <see cref="_strictStopped"/> says which).
+    /// </summary>
+    private CampaignRecord? FailMenu(TextReader input, bool strict)
+    {
+        Lines(LostCard);
+        _out.WriteLine(FailMenuLine);
+        while (input.ReadLine() is { } line)
+        {
+            _line++;
+            var text = line.Trim();
+            if (text.Length == 0 || text.StartsWith('#'))
+            {
+                continue;
+            }
+
+            if (_scripted)
+            {
+                _out.WriteLine("> " + text);
+            }
+
+            _commands++;
+            switch (text.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+            {
+                case ["quit"]:
+                    return null;
+                case ["new"]:
+                    var fresh = CampaignRecord.Start(_content, _record.Seed, _record.Difficulty);
+                    WriteEvent($"New game, seed {fresh.Seed}, difficulty {fresh.Difficulty}");
+                    return fresh;
+                case ["saves"]:
+                    PrintSaves();
+                    break;
+                case ["load", var name] when _saves is null:
+                    Error(text, SavesOff);
+                    break;
+                case ["load", var name]:
+                    var (loaded, refusal) = _saves.Load(name, _content);
+                    if (loaded is not null)
+                    {
+                        WriteEvent($"Loaded {name}: {SaveLine(loaded, _content)}");
+                        return loaded;
+                    }
+
+                    Error(text, refusal!);
+                    break;
+                case ["load", ..]:
+                    Error(text, "usage: load <name>");
+                    break;
+                default:
+                    Error(text, "the campaign is lost; " + FailMenuLine);
+                    break;
+            }
+
+            if (strict && _rejections.Count > 0)
+            {
+                _out.WriteLine($"Strict: stopped at line {_line} ({text}); no later command applied");
+                _strictStopped = true;
+                return null;
+            }
+        }
+
+        return null;
     }
 
     private bool Take(ScreenResult result, string text)
@@ -993,4 +1219,63 @@ public sealed class CampaignSession
     /// <summary>The heading the screen opens with before <paramref name="map"/>.</summary>
     public static string ScreenHeading(CampaignRecord record, GameContent content, MapDefinition map) =>
         $"-- Before map {record.MapIndex + 1} of {content.Campaign.Maps.Count}: {map.Name}; the purse holds {record.Purse} --";
+}
+
+/// <summary>A writer that drops what it is given while <see cref="Quiet"/>, so a resumed battle replays unseen (issue 663).</summary>
+internal sealed class QuietWriter : TextWriter
+{
+    private readonly TextWriter _inner;
+
+    public QuietWriter(TextWriter inner)
+    {
+        _inner = inner;
+        NewLine = inner.NewLine;
+    }
+
+    public bool Quiet { get; set; }
+
+    public override System.Text.Encoding Encoding => _inner.Encoding;
+
+    public override void Write(char value)
+    {
+        if (!Quiet)
+        {
+            _inner.Write(value);
+        }
+    }
+
+    public override void Write(string? value)
+    {
+        if (!Quiet)
+        {
+            _inner.Write(value);
+        }
+    }
+}
+
+/// <summary>A reader that keeps every line it hands on, after the lines a resumed battle replayed, so a quit can write them as the suspend (issue 663).</summary>
+internal sealed class RecordingReader : TextReader
+{
+    private readonly TextReader _inner;
+    private readonly List<string> _lines;
+
+    public RecordingReader(TextReader inner, IEnumerable<string>? replayed)
+    {
+        _inner = inner;
+        _lines = replayed?.ToList() ?? new List<string>();
+    }
+
+    /// <summary>Every line read, the replayed ones first.</summary>
+    public IReadOnlyList<string> Lines => _lines;
+
+    public override string? ReadLine()
+    {
+        var line = _inner.ReadLine();
+        if (line is not null)
+        {
+            _lines.Add(line);
+        }
+
+        return line;
+    }
 }

@@ -10,3 +10,4 @@ TestResults/
 
 # Godot exports (src/Ironwake.Godot/export_presets.cfg)
 /build/
+/saves/

@@ -135,6 +135,9 @@ public sealed class PlaySession
     /// <summary>Whether a campaign battle has been left with <c>leave</c>.</summary>
     internal bool Left { get; private set; }
 
+    /// <summary>Whether a campaign battle has been quit with <c>quit</c> before it was decided (issue 663).</summary>
+    internal bool Quit { get; private set; }
+
     /// <summary>Parses the arguments after <c>play</c>, runs the session, and returns the exit code: 0 on a win, 1 otherwise, 2 for a usage error.</summary>
     public static int Run(string[] args)
     {
@@ -480,7 +483,7 @@ public sealed class PlaySession
     /// </summary>
     internal bool RunCommands(TextReader input, bool strict, ref int commands)
     {
-        while (!Left && input.ReadLine() is { } line)
+        while (!Left && !Quit && input.ReadLine() is { } line)
         {
             _line++;
             var text = line.Trim();
@@ -715,6 +718,17 @@ public sealed class PlaySession
                 else
                 {
                     Error("the battle is not decided; leave comes after it is won or lost");
+                }
+
+                break;
+            case "quit" when _campaign && words.Length == 1:
+                if (_state.Outcome.IsOver)
+                {
+                    Error("the battle is decided; leave it instead");
+                }
+                else
+                {
+                    Quit = true;
                 }
 
                 break;
