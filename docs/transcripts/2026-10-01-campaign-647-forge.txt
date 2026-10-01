@@ -1,6 +1,6 @@
 Campaign, seed 698, difficulty Captain, permadeath off, scheme TwoRollAverage, 9 maps
 -- Before map 4 of 9: The Tollgate; the purse holds 500 --
-Roster:
+== Roster ==
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
@@ -12,15 +12,21 @@ Roster:
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, iron_bow 400, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
-Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
-Side maps (the member and one ally you pick, not the captain; who falls there is gone for good, and the campaign goes on):
-  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>)
 Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell
+== Keep ==
+Purse: 500
 Rooms: beds: 11/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +1 bed, built 0 of 2
   forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won
   Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath is off: who falls comes back wounded
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, iron_bow 400, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 4, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > quest maud_1 wren
 -- The Lazar House --
 Maud asked for a day and one pair of hands. Before the levy, her order
@@ -2716,7 +2722,7 @@ Battle won: seize; only recall is left, or leave
 > leave
 The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
 -- Before map 5 of 9: Harrow Weir; the purse holds 1500 --
-Roster:
+== Roster ==
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3
@@ -2728,13 +2734,21 @@ Roster:
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
-Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah
+== Keep ==
+Purse: 1500
 Rooms: beds: 11/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +1 bed, built 0 of 2
   forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1
   Stores: common 2, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > keep
 Rooms: beds: 11/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +1 bed, built 0 of 2

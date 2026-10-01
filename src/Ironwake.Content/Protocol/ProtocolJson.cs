@@ -1161,6 +1161,20 @@ public static class ProtocolJson
 
         w.WriteEndArray();
         WriteStrings(w, "fallen", record.Fallen);
+        if (record.FellOn.Count > 0)
+        {
+            w.WriteStartArray("fellOn");
+            foreach (var fell in record.FellOn)
+            {
+                w.WriteStartObject();
+                w.WriteString("unit", fell.UnitId);
+                w.WriteString("map", fell.MapName);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
         WriteStrings(w, "benched", record.Benched);
         w.WriteStartArray("trialsTried");
         foreach (var attempt in record.TrialsTried)
@@ -1259,6 +1273,7 @@ public static class ProtocolJson
             TrialsTried = ReadTrialsTried(e),
             QuestsWon = ReadQuestsWon(e, content),
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
+            FellOn = ReadFellOn(e),
             Keep = ReadKeep(e, content),
             Rooms = ReadRooms(e, content),
             CommonMaterial = Math.Max(0, OptionalInt(e, "commonMaterial") ?? 0),
@@ -1267,6 +1282,12 @@ public static class ProtocolJson
             LoweredFrom = ReadLoweredFrom(e, content),
         };
     }
+
+    /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>
+    private static ValueList<FellOn> ReadFellOn(JsonElement e) =>
+        e.TryGetProperty("fellOn", out _)
+            ? ValueList<FellOn>.From(Array(Required(e, "fellOn"), "fellOn").Select(f => new FellOn(RequiredString(f, "unit"), RequiredString(f, "map"))))
+            : ValueList<FellOn>.Empty;
 
     /// <summary>The optional <c>loweredFrom</c> array of a campaign record (issue 677), difficulty ids; a record written before it reads as never lowered.</summary>
     private static ValueList<string> ReadLoweredFrom(JsonElement e, GameContent content)

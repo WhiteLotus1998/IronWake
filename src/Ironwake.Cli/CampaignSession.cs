@@ -24,6 +24,7 @@ public sealed class CampaignSession
 
     private const string Help = """
         Between maps:
+          camp                     The camp as one view: roster, keep, quests, shop, then the march line
           roster                   Every unit: class, level, EXP, items with uses, mastery
           show <unit>              One unit's numbers, ranks and mastery
           shop                     What the shop sells before this map, and each price
@@ -559,24 +560,160 @@ public sealed class CampaignSession
         }
 
         var names = UnitNames.Of(record, content);
-        var lines = new List<string> { "Side maps (the member and one ally you pick, not the captain; who falls there is gone for good, and the campaign goes on):" };
+        var price = record.Permadeath ? "permadeath applies" : "permadeath is off: who falls comes back wounded";
+        var lines = new List<string> { "Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):" };
         foreach (var quest in offered)
         {
-            string board;
-            try
-            {
-                board = MapFiles.Load(QuestPath(contentDir, quest), content).Name;
-            }
-            catch (MapException)
-            {
-                board = quest.MapId;
-            }
-
             var closed = record.QuestsTried.Contains(quest.Id) ? "; fought since the last map, open again after the next" : "";
-            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {board} (quest {quest.Id} <ally>){closed}");
+            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {QuestBoard(contentDir, content, quest)} (quest {quest.Id} <ally>); {price}{closed}");
         }
 
         return lines;
+    }
+
+    /// <summary>A side map's board by its display name, or its id when the board will not load.</summary>
+    private static string QuestBoard(string contentDir, GameContent content, CampaignQuest quest)
+    {
+        try
+        {
+            return MapFiles.Load(QuestPath(contentDir, quest), content).Name;
+        }
+        catch (MapException)
+        {
+            return quest.MapId;
+        }
+    }
+
+    /// <summary>The camp's panel headings (issue 678), in the order the camp prints them.</summary>
+    public static readonly IReadOnlyList<string> CampPanels = new[] { "== Roster ==", "== Keep ==", "== Quests ==", "== Shop ==" };
+
+    /// <summary>
+    /// The camp as one view (issue 678), what the screen prints on arriving and <c>camp</c> prints
+    /// again: the heading, then four panels in order. Roster: each member's row, the fallen with the
+    /// board each fell on, who deploys, and the leave warning. Keep: the purse first, then the rooms
+    /// and, once the raid is fought, the walls and ditches, else why they are closed. Quests: the
+    /// side maps open, with their price, then those won and what each paid. Shop: the stock and the
+    /// seal. Last, the <c>march</c> line naming the next map and its objective; <c>march</c> is the
+    /// one command that leaves.
+    /// </summary>
+    public static IReadOnlyList<string> CampLines(string contentDir, GameContent content, CampaignRecord record, MapDefinition map, bool typed = false)
+    {
+        var lines = new List<string> { ScreenHeading(record, content, map), CampPanels[0] };
+        lines.AddRange(RosterPanelLines(record, content, map, typed));
+        lines.Add(CampPanels[1]);
+        lines.AddRange(KeepPanelLines(contentDir, content, record));
+        lines.Add(CampPanels[2]);
+        lines.AddRange(QuestPanelLines(contentDir, content, record));
+        lines.Add(CampPanels[3]);
+        lines.AddRange(ShopLines(record, content));
+        lines.Add(MarchLine(record, content, map));
+        return lines;
+    }
+
+    /// <summary>The camp's Roster panel (issue 678): each member's row, the fallen with their boards, who deploys to <paramref name="map"/>, and the leave warning.</summary>
+    public static IReadOnlyList<string> RosterPanelLines(CampaignRecord record, GameContent content, MapDefinition map, bool typed = false)
+    {
+        var lines = RosterLines(record, content, typed).Skip(1).ToList();
+        try
+        {
+            lines.Add(DeploymentLine(record, content, map));
+        }
+        catch (ArgumentException e)
+        {
+            lines.Add("ERROR: " + e.Message);
+        }
+
+        lines.AddRange(LowLines(record, content));
+        return lines;
+    }
+
+    /// <summary>The camp's Keep panel (issue 678): the purse, the rooms, then the walls and ditches once the raid is fought, else why they are closed.</summary>
+    public static IReadOnlyList<string> KeepPanelLines(string contentDir, GameContent content, CampaignRecord record)
+    {
+        var lines = new List<string> { $"Purse: {record.Purse}" };
+        lines.AddRange(RoomLines(record, content));
+        if (record.KeepMenuRefusal(content) is { } closed)
+        {
+            lines.Add("Walls and ditches: " + UnitNames.Sentence(closed));
+            return lines;
+        }
+
+        try
+        {
+            lines.AddRange(KeepLines(contentDir, content, record));
+        }
+        catch (MapException e)
+        {
+            lines.Add("ERROR: " + e.Message);
+        }
+
+        return lines;
+    }
+
+    /// <summary>The camp's Quests panel (issue 678): the side maps open with their price, then those won with their pay, or that none is open.</summary>
+    public static IReadOnlyList<string> QuestPanelLines(string contentDir, GameContent content, CampaignRecord record)
+    {
+        var lines = QuestLines(contentDir, content, record).Concat(WonQuestLines(contentDir, content, record)).ToList();
+        return lines.Count == 0 ? new[] { "No side map is open." } : lines;
+    }
+
+    /// <summary>
+    /// The side maps won (issue 678), one line each under a heading, with what each paid: the
+    /// signature item and the stores' material, or nothing. Empty when none is won.
+    /// </summary>
+    public static IReadOnlyList<string> WonQuestLines(string contentDir, GameContent content, CampaignRecord record)
+    {
+        if (record.QuestsWon.Count == 0)
+        {
+            return Array.Empty<string>();
+        }
+
+        var names = UnitNames.Of(record, content);
+        var lines = new List<string> { "Side maps won:" };
+        foreach (var won in record.QuestsWon)
+        {
+            if (content.Campaign.Quest(won.QuestId) is not { } quest)
+            {
+                continue;
+            }
+
+            var paid = new List<string>();
+            if (quest.Pays is { } item)
+            {
+                paid.Add(content.ItemName(item));
+            }
+
+            if (quest.Common > 0)
+            {
+                paid.Add($"{quest.Common} common material");
+            }
+
+            if (quest.Rare > 0)
+            {
+                paid.Add($"{quest.Rare} rare material");
+            }
+
+            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {QuestBoard(contentDir, content, quest)}; paid {(paid.Count == 0 ? "nothing" : string.Join(" and ", paid))}");
+        }
+
+        return lines;
+    }
+
+    /// <summary>
+    /// The camp's last line (issue 678): <c>march</c> and the map it starts, by its place in the
+    /// campaign and its name, then the objective line the battle opens with.
+    /// </summary>
+    public static string MarchLine(CampaignRecord record, GameContent content, MapDefinition map)
+    {
+        var line = $"March (march): map {record.MapIndex + 1}, {map.Name}.";
+        try
+        {
+            return line + " " + Objective.Line(record.Begin(map, content), content);
+        }
+        catch (ArgumentException)
+        {
+            return line;
+        }
     }
 
     /// <summary>The lines that open a side map: the board and its seed, then who goes.</summary>
@@ -649,16 +786,7 @@ public sealed class CampaignSession
 
         Lines(BeforeCard(_record, _content, map));
         Lines(TurnedAwayLines(_record, _content));
-        _out.WriteLine(ScreenHeading(_record, _content, map));
-        PrintRoster();
-        PrintShop();
-        Lines(QuestLines(_contentDir, _content, _record));
-        PrintDeployment(map);
-        Lines(RoomLines(_record, _content));
-        if (_record.KeepMenuRefusal(_content) is null)
-        {
-            PrintKeep();
-        }
+        Lines(CampLines(_contentDir, _content, _record, map, typed: true));
 
         while (input.ReadLine() is { } line)
         {
@@ -716,6 +844,9 @@ public sealed class CampaignSession
     {
         switch (words)
         {
+            case ["camp"]:
+                Lines(CampLines(_contentDir, _content, _record, map, typed: true));
+                break;
             case ["roster"]:
                 PrintRoster();
                 break;
@@ -1193,7 +1324,7 @@ public sealed class CampaignSession
         if (record.Fallen.Count > 0)
         {
             var names = UnitNames.Of(record, content);
-            lines.Add($"  Fallen: {string.Join(", ", record.Fallen.Select(id => names[id]))}");
+            lines.Add($"  Fallen: {string.Join(", ", record.Fallen.Select(id => record.FellOnMap(id) is { } board ? $"{names[id]} (fell on {board})" : names[id]))}");
         }
 
         return lines;
