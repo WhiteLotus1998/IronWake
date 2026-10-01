@@ -59,6 +59,9 @@ public sealed record Shoved(string UnitId, string TargetId, Coord From, Coord To
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 
 /// <summary>An enemy swore a grudge against the player unit that killed one of its group, on a <c>grudges: on</c> map (DESIGN.md 13.4, experiment).</summary>
+/// <summary>A unit whose boss fell while it stood at or below half HP left the board (DESIGN.md 13.22, experiment).</summary>
+public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
+
 public sealed record GrudgeSworn(string UnitId, string AgainstId) : GameEvent;
 
 /// <summary>

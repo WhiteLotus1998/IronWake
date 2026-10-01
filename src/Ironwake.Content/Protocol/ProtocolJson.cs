@@ -158,6 +158,11 @@ public static class ProtocolJson
                 WriteCoord(w, "from", r.From);
                 WriteCoord(w, "to", r.To);
                 break;
+            case UnitBroke b:
+                w.WriteString("unit", b.UnitId);
+                WriteCoord(w, "at", b.At);
+                w.WriteNumber("hp", b.Hp);
+                break;
             case GrudgeSworn g:
                 w.WriteString("unit", g.UnitId);
                 w.WriteString("against", g.AgainstId);

@@ -1496,3 +1496,14 @@ What the tide did: it decided turn 3 (cross now or wait three turns) and the lan
 The moment I stopped caring: turn 5, after the second recall, hiding from one hexer.
 Transcript: docs/transcripts/2026-09-30-ebb_ford_tide-653.txt (script beside it), replayed under `--strict`, exit 0: `recall 34` on turn 3, `recall 54` on turn 4, `recall 61` after the loss on turn 5, `battle won: rout` on turn 6.
 Sim at 40 seeds (the heuristic ignores the schedule): gate 1 17/40, 18 timeouts; gates 2 to 8 ok. A sample, not gated.
+
+## 2026-10-01 — The Tollgate (break), the break's spike (13.22), the warm play — Code
+
+Seed: 661 on `docs/samples/the_tollgate_break.map`: the Tollgate unchanged plus `break: on`. Warm: I drew the rule and know the map. Result: won, seize, on turn 9, nobody dead, one Recall.
+Tension: 6/10   Choice: 5/10   Surprise: 4/10
+Best turn: turn 8. The captain stood in the doorway at 10 HP, the warden was dead, and the archer and the boss were still in the room. The captain's strike took the archer to 6 of 17, so for one command the archer was a unit the break would have sent running. The boss was at 26 with nobody but Pell able to reach him, so Pell's Cinder killed the archer instead (99), and on turn 9 the captain walked 6,2 -> 6,1 -> 7,1 past the living boss. `end` printed both lethal lines (captain 11 against 10, Pell 14 against 8) and the boss missed at 43.
+Notes: Turns 1 and 2 were a march. On turn 3 Pell and Wren took archer-2 in the woods. Turn 4 was the bad one: the captain's 12 percent counter landed, Teodor fell to 3, and Wren died to a 41 percent counter on a 2-HP brigand. I recalled to the moment after Teodor's swing, and Pell finished the brigand from the forest at 87. Turn 6: the captain stepped on 6,4 to bring in the rider, who died on turn 7 to Wren and Teodor, while the captain and Pell killed the warden (9, then 12 at 99). The script's one oddity: Wren's Field Dressing sits on turn 8, not turn 4, where I first took it. That's the line that replays.
+What the break did: nothing. `break if` never printed and nobody broke. The door is the reason. The warden *is* the door, so he has to die before anyone can reach the boss, and the break would have needed him at half with the boss already dead. The archer at 6 was one Cinder from dead, and the boss was 26 from it. Killing was always cheaper than breaking, and the seize doesn't need the boss dead at all.
+The moment I stopped caring: turn 9, walking onto the gate past a boss with 17 HP left.
+Transcript: docs/transcripts/2026-10-01-the_tollgate_break-661.txt (script beside it), replayed under `--strict`, exit 0.
+Sim at 40 seeds (the heuristic ignores the rule): gate 1 32/40 on the sample, the same as plain.

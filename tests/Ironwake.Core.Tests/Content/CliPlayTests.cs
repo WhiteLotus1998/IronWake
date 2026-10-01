@@ -1129,6 +1129,25 @@ public class CliPlayTests
         Assert.DoesNotContain("pinned by bandit", output);
     }
 
+    /// <summary>
+    /// 13.22's warm play: Code's seed 661 on <c>docs/samples/the_tollgate_break.map</c>. The
+    /// warden and the archer are killed, never wounded for the break, so no boss forecast ever
+    /// names a member who would flee and nobody breaks; the captain seizes on turn 9 past the
+    /// living boss with one Recall spent.
+    /// </summary>
+    [Fact]
+    public void TheTollgateBreakPlayReplaysWithNobodyBroken()
+    {
+        var output = RunSample("the_tollgate_break.map", "2026-10-01-the_tollgate_break-661.script", 661, out var exit);
+
+        Assert.Equal(0, exit);
+        Assert.DoesNotContain("rejected", output);
+        Assert.EndsWith("battle won: seize\n", output);
+        Assert.Contains(MapRenderer.BreakLegend, output);
+        Assert.DoesNotContain("break if", output);
+        Assert.DoesNotContain("breaks and flees", output);
+    }
+
     private static string RunInline(string mapText, string scriptText)
     {
         var map = Path.Combine(Path.GetTempPath(), "ironwake-arms-" + Guid.NewGuid().ToString("N") + ".map");

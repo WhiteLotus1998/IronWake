@@ -30,6 +30,9 @@ public static class MapRenderer
     /// <summary>The legend a <c>brace: on</c> map prints (DESIGN.md 13.14, experiment).</summary>
     public const string BraceLegend = "brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase";
 
+    /// <summary>The legend a <c>break: on</c> map prints (DESIGN.md 13.22, experiment).</summary>
+    public const string BreakLegend = "break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)";
+
     /// <summary>The legend a <c>wildfire: on</c> map prints (DESIGN.md 13.15, experiment).</summary>
     public const string WildfireLegend = "wildfire: a Cinder hit on a unit in forest sets the tile alight (%); a unit on fire at its phase start loses 20 percent (never below 1); each player phase fire burns out to plain and lights the forest beside it";
 
@@ -219,6 +222,11 @@ public static class MapRenderer
         if (map.BraceEnabled)
         {
             sb.Append(BraceLegend).Append('\n');
+        }
+
+        if (map.BreakEnabled)
+        {
+            sb.Append(BreakLegend).Append('\n');
         }
 
         if (map.WildfireEnabled)
@@ -481,6 +489,11 @@ public static class MapRenderer
         if (map.BraceEnabled)
         {
             sb.Append(BraceLegend).Append('\n');
+        }
+
+        if (map.BreakEnabled)
+        {
+            sb.Append(BreakLegend).Append('\n');
         }
 
         if (map.WildfireEnabled)
