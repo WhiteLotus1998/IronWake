@@ -12,6 +12,9 @@ public sealed record TrialAttempt(string UnitId, string ClassId);
 /// <summary>A side map won (issue 635): its id and the index of the map it was won before, which times the member's next quest.</summary>
 public sealed record QuestWon(string QuestId, int MapIndex);
 
+/// <summary>Where a member of <see cref="CampaignRecord.Fallen"/> fell (issue 678): the unit's id and the display name of the board.</summary>
+public sealed record FellOn(string UnitId, string MapName);
+
 /// <summary>
 /// A campaign between maps (issue 74, DESIGN section 9): the roster in roster order, the captain
 /// first, each unit as its last map left it (EXP, level, ranks, mastery, weapon uses); the ids of
@@ -46,6 +49,15 @@ public sealed record CampaignRecord(
     /// side map lost on the clock opens again after the next map.
     /// </summary>
     public ValueList<string> QuestsTried { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// The board each of <see cref="Fallen"/> fell on (issue 678), in the order they fell, for the
+    /// camp's roster. A record written before it carries none, and its fallen print without a board.
+    /// </summary>
+    public ValueList<FellOn> FellOn { get; init; } = ValueList<FellOn>.Empty;
+
+    /// <summary>The display name of the board <paramref name="unitId"/> fell on, or null when the record does not say.</summary>
+    public string? FellOnMap(string unitId) => FellOn.FirstOrDefault(f => f.UnitId == unitId)?.MapName;
 
     /// <summary>
     /// The edits bought for the keep (issue 288), in the order they were made. The keep the finale
@@ -332,6 +344,7 @@ public sealed record CampaignRecord(
         {
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
+            FellOn = FellOnAdd(fallen.Skip(Fallen.Count), end.Map.Name),
             Purse = Purse + NextMap(content).Reward,
             MapIndex = MapIndex + 1,
             Benched = ValueList<string>.Empty,
@@ -339,6 +352,10 @@ public sealed record CampaignRecord(
             QuestsTried = ValueList<string>.Empty,
         };
     }
+
+    /// <summary><see cref="FellOn"/> with each of <paramref name="ids"/> marked as fallen on <paramref name="mapName"/>.</summary>
+    private ValueList<FellOn> FellOnAdd(IEnumerable<string> ids, string mapName) =>
+        ValueList<FellOn>.From(FellOn.Concat(ids.Select(id => new FellOn(id, mapName))));
 
     /// <summary>
     /// <paramref name="after"/> with the consumable uses a <c>supplies</c> cap took from
@@ -838,6 +855,7 @@ public sealed record CampaignRecord(
         {
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
+            FellOn = FellOnAdd(lost, end.Map.Name),
             QuestsTried = QuestsTried.Add(questId),
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
             CommonMaterial = CommonMaterial + common,

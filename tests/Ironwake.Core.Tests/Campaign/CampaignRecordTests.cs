@@ -222,6 +222,19 @@ public class CampaignRecordTests
     }
 
     [Fact]
+    public void AFallenUnitIsRecordedWithTheBoardItFellOn()
+    {
+        var record = AtMap(2);
+        var board = Map(record.NextMap(Content).MapId).Name;
+
+        var after = record.AfterBattle(Won(record, u => u.Id == "wren" ? null : u), Content);
+
+        Assert.Equal(ValueList<FellOn>.Of(new FellOn("wren", board)), after.FellOn);
+        Assert.Equal(board, after.FellOnMap("wren"));
+        Assert.Null(after.FellOnMap("teodor"));
+    }
+
+    [Fact]
     public void ANamedSlotWhoseRecruitHasFallenStaysEmpty()
     {
         var record = AtMap(3) with

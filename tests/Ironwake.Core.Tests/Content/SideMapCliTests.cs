@@ -21,7 +21,7 @@ public class SideMapCliTests
         {
             var output = Run(out _, "campaign", "--from", "the_tollgate", "--seed", "701", "--script", path, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("Side maps (the member and one ally you pick, not the captain; who falls there is gone for good, and the campaign goes on):\n  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>)\n", output);
+            Assert.Contains("Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):\n  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies\n", output);
             Assert.Contains("ERROR: Alder Fenn is the captain and stays with the company; pick another ally\n", output);
         }
         finally
@@ -63,7 +63,7 @@ public class SideMapCliTests
         Assert.Equal(1, exit);
         Assert.Contains("Wren falls at 3,1\n", output);
         Assert.Contains("> leave\nMaud wins maud_1; fallen for good: Wren\n-- After The Lazar House --\n", output);
-        Assert.Contains("  Fallen: Wren\n", output);
+        Assert.Contains("  Fallen: Wren (fell on The Lazar House)\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 

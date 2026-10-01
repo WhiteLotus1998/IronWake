@@ -560,18 +560,32 @@ public partial class Main : Node2D
         if (campaign.NextMap is { } map)
         {
             yield return (CampaignSession.ScreenHeading(record, content, map), null, false);
-            yield return ("roster: click a unit to select it; B benches or unbenches it", null, false);
+            yield return (CampaignSession.CampPanels[0], null, false);
+            yield return ("click a unit to select it; B benches or unbenches it", null, false);
             foreach (var unit in record.Roster)
             {
                 var id = unit.Id;
                 yield return (CampaignSession.UnitLines(record, content, unit, detail: false)[0], () => _screenUnit = id, id == _screenUnit);
             }
 
-            if (record.Fallen.Count > 0)
+            foreach (var text in CampaignSession.RosterPanelLines(record, content, map).Skip(record.Roster.Count))
             {
-                yield return (CampaignSession.RosterLines(record, content)[^1], null, false);
+                yield return (text, null, false);
             }
 
+            yield return (CampaignSession.CampPanels[1], null, false);
+            foreach (var text in campaign.KeepPanelLines())
+            {
+                yield return (text, null, false);
+            }
+
+            yield return (CampaignSession.CampPanels[2], null, false);
+            foreach (var text in campaign.QuestPanelLines())
+            {
+                yield return (text, null, false);
+            }
+
+            yield return (CampaignSession.CampPanels[3], null, false);
             foreach (var text in CampaignSession.ShopLines(record, content))
             {
                 yield return (text, null, false);
@@ -584,16 +598,7 @@ public partial class Main : Node2D
                 yield return ("  " + CampaignSession.WareText(content, id), _screenUnit is { } buyer ? () => campaign.Buy(id, buyer) : null, false);
             }
 
-            yield return (CampaignSession.DeploymentLine(record, content, map), null, false);
-            if (record.KeepMenuRefusal(content) is null)
-            {
-                foreach (var text in campaign.KeepLines())
-                {
-                    yield return (text, null, false);
-                }
-            }
-
-            yield return ($"[ march to {map.Name} ]  (M)", () => campaign.March(), false);
+            yield return ($"[ {CampaignSession.MarchLine(record, content, map)} ]  (M)", () => campaign.March(), false);
         }
 
         yield return ("", null, false);

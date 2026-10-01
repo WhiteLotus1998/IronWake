@@ -59,9 +59,9 @@ public sealed class CampaignClient
     public MapDefinition? NextMap => Over || Record.IsFinished(Content) ? null : CampaignSession.MapFor(_contentDir, Content, Record, Record.NextMap(Content).MapId);
 
     /// <summary>
-    /// The between-map screen's lines, as the console prints them on arriving at it: the heading,
-    /// the roster, the shop, the deployment, and the keep's menu once the raid is fought, after the
-    /// map's text card when it has one (issue 631).
+    /// The between-map screen's lines, as the console prints them on arriving at it: the map's text
+    /// card when it has one (issue 631), then the camp as one view (issue 678), heading, Roster,
+    /// Keep, Quests, Shop and the march line.
     /// </summary>
     public IReadOnlyList<string> ScreenLines()
     {
@@ -70,18 +70,17 @@ public sealed class CampaignClient
             return Array.Empty<string>();
         }
 
-        var lines = new List<string>(CampaignSession.BeforeCard(Record, Content, map)) { CampaignSession.ScreenHeading(Record, Content, map) };
-        lines.AddRange(CampaignSession.RosterLines(Record, Content, typed: true));
-        lines.AddRange(CampaignSession.ShopLines(Record, Content));
-        lines.AddRange(CampaignSession.QuestLines(_contentDir, Content, Record));
-        lines.Add(CampaignSession.DeploymentLine(Record, Content, map));
-        if (Record.KeepMenuRefusal(Content) is null)
-        {
-            lines.AddRange(KeepLines());
-        }
-
+        var lines = new List<string>(CampaignSession.BeforeCard(Record, Content, map));
+        lines.AddRange(CampaignSession.TurnedAwayLines(Record, Content));
+        lines.AddRange(CampaignSession.CampLines(_contentDir, Content, Record, map, typed: true));
         return lines;
     }
+
+    /// <summary>The camp's Keep panel as the console prints it (issue 678).</summary>
+    public IReadOnlyList<string> KeepPanelLines() => CampaignSession.KeepPanelLines(_contentDir, Content, Record);
+
+    /// <summary>The camp's Quests panel as the console prints it (issue 678).</summary>
+    public IReadOnlyList<string> QuestPanelLines() => CampaignSession.QuestPanelLines(_contentDir, Content, Record);
 
     /// <summary>The keep's menu as the console prints it, on the keep this record would fight.</summary>
     public IReadOnlyList<string> KeepLines() => CampaignSession.KeepLines(_contentDir, Content, Record);
