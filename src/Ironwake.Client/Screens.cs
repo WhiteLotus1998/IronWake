@@ -15,7 +15,7 @@ public static class Screens
     /// <summary>The title screen's choices, in order, each with the key that picks it.</summary>
     public static readonly IReadOnlyList<(string Label, string Key)> TitleChoices = new[]
     {
-        ("Play", "Enter"), ("How to play", "H"), ("Quit", "Esc"),
+        ("Play", "Enter"), ("How to play", "H"), ("Options", "O"), ("Quit", "Esc"),
     };
 
     /// <summary>
@@ -38,6 +38,33 @@ public static class Screens
         TitleChoice.Load => "Load",
         TitleChoice.Options => "Options",
         _ => "Quit",
+    };
+
+    /// <summary>The key each campaign title line answers to: Enter for the default line, else its initial.</summary>
+    public static string Key(TitleChoice choice) => choice switch
+    {
+        TitleChoice.Continue => "C",
+        TitleChoice.NewGame => "N",
+        TitleChoice.Load => "L",
+        TitleChoice.Options => "O",
+        _ => "Esc",
+    };
+
+    /// <summary>
+    /// The difficulties New game offers (issue 677), lowest tier first: every one the profile's
+    /// <paramref name="won"/> list has unlocked, so a locked one is never a line to pick.
+    /// </summary>
+    public static IReadOnlyList<Difficulty> NewGameDifficulties(GameContent content, IEnumerable<string> won)
+    {
+        var wins = won.ToList();
+        return content.Difficulties.Values.Where(d => d.IsUnlocked(wins)).OrderBy(d => d.Tier).ThenBy(d => d.Id, StringComparer.Ordinal).ToList();
+    }
+
+    /// <summary>New game's two lines: the difficulty picked and whether the fallen stay fallen.</summary>
+    public static IReadOnlyList<string> NewGameLines(Difficulty difficulty, bool permadeath) => new[]
+    {
+        "Difficulty: " + difficulty.DisplayName,
+        "Permadeath: " + (permadeath ? "on, the fallen stay fallen" : $"off, the fallen come back wounded for {Wound.MainMaps} maps"),
     };
 
     /// <summary>The one dry line under the title menu (issue 677): the game's name and the rules version.</summary>
@@ -118,6 +145,7 @@ public static class Screens
         (PauseChoice.Resume, "Resume", "Esc"),
         (PauseChoice.HowToPlay, "How to play", "H"),
         (PauseChoice.Sound, "Sound", Sound.MuteKey),
+        (PauseChoice.Options, "Options", "O"),
         (PauseChoice.Title, "Return to title", "Q"),
     };
 
@@ -168,6 +196,9 @@ public enum PauseChoice
 
     /// <summary>Sound on or off.</summary>
     Sound,
+
+    /// <summary>The Options screen (issue 677), whose Esc comes back to the menu.</summary>
+    Options,
 
     /// <summary>Leave the battle for the title.</summary>
     Title,

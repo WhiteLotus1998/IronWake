@@ -22,12 +22,17 @@ public sealed class CampaignClient
     /// <summary>The unit playing the open certification trial, or null outside a trial.</summary>
     private string? _trial;
 
-    public CampaignClient(GameContent content, string contentDir, CampaignRecord record, RollScheme scheme = RollScheme.TwoRollAverage)
+    /// <summary>Where the campaign autosaves at each camp and records a win (issue 677), or null for a run that keeps no saves (the parity scripts).</summary>
+    private readonly SaveStore? _saves;
+
+    public CampaignClient(GameContent content, string contentDir, CampaignRecord record, RollScheme scheme = RollScheme.TwoRollAverage, SaveStore? saves = null)
     {
         Content = content;
         _contentDir = contentDir;
         Record = record;
         _scheme = scheme;
+        _saves = saves;
+        Autosave();
     }
 
     public GameContent Content { get; }
@@ -171,6 +176,7 @@ public sealed class CampaignClient
             var result = Record.AfterTrial(battle.State, trialUnit, Content);
             Record = result.Record;
             _log.Add(CampaignSession.Text(Record, Content, result.Text));
+            Autosave();
             return true;
         }
 
@@ -188,9 +194,24 @@ public sealed class CampaignClient
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
             Over = true;
+            _saves?.RecordWin(Record.Difficulty);
         }
 
+        Autosave();
         return true;
+    }
+
+    /// <summary>
+    /// Autosaves the record as <c>ironwake campaign</c> does on arriving at a camp, so the title's
+    /// Continue finds it (issue 677): only with a save store, and only while a map is still to march to.
+    /// The event log is untouched, so a run with saves logs what one without them does.
+    /// </summary>
+    private void Autosave()
+    {
+        if (_saves is not null && !Over && !Record.IsFinished(Content))
+        {
+            _saves.Autosave(Record);
+        }
     }
 
     private bool Screen(Func<ScreenResult> action)

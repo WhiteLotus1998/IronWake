@@ -163,16 +163,47 @@ public partial class Main : Node2D
         {
             var content = ContentLoader.Load(contentDir);
             (_content, _contentDir, _mapArg, _seed) = (content, contentDir, mapArg, seed);
-            if (Array.IndexOf(args, "--campaign") >= 0 || Array.IndexOf(args, "--campaign-parity") >= 0)
+            var campaignParity = Array.IndexOf(args, "--campaign-parity");
+            if (campaignParity >= 0 && campaignParity + 2 < args.Length)
             {
+                var parityFrom = Arg(args, "--from");
+                _campaign = new CampaignClient(content, contentDir, parityFrom is null ? CampaignRecord.Start(content, seed) : CampaignRecord.StartAt(content, seed, parityFrom));
+                File.WriteAllText(args[campaignParity + 2], Ironwake.Client.Script.PlayCampaign(_campaign, File.ReadAllText(args[campaignParity + 1])));
+                GetTree().Quit(0);
+                return;
+            }
+
+            // The profile's options (issue 677) hold for a run a person plays; a render, a strip or
+            // a parity run keeps the defaults and never writes the profile.
+            var rendered = Array.IndexOf(args, "--screenshot") >= 0 || Array.IndexOf(args, "--strip") >= 0 || Array.IndexOf(args, "--parity") >= 0;
+            if (!rendered || Arg(args, "--saves") is not null)
+            {
+                _store = new SaveStore(SavesDir(args));
+            }
+
+            if (!rendered)
+            {
+                LoadOptions();
+            }
+
+            if (Array.IndexOf(args, "--campaign") >= 0)
+            {
+                // A named start map plays straight in; otherwise the campaign's title comes first.
                 var from = Arg(args, "--from");
-                _campaign = new CampaignClient(content, contentDir, from is null ? CampaignRecord.Start(content, seed) : CampaignRecord.StartAt(content, seed, from));
-                var campaignParity = Array.IndexOf(args, "--campaign-parity");
-                if (campaignParity >= 0 && campaignParity + 2 < args.Length)
+                if (from is not null || rendered && Arg(args, "--screen") is null)
                 {
-                    File.WriteAllText(args[campaignParity + 2], Ironwake.Client.Script.PlayCampaign(_campaign, File.ReadAllText(args[campaignParity + 1])));
-                    GetTree().Quit(0);
-                    return;
+                    _campaign = new CampaignClient(content, contentDir, from is null ? CampaignRecord.Start(content, seed) : CampaignRecord.StartAt(content, seed, from), saves: rendered ? null : _store);
+                }
+                else
+                {
+                    _screen = Arg(args, "--screen") switch
+                    {
+                        "options" => Screen.Options,
+                        "new-game" => Screen.NewGame,
+                        "load" => Screen.Load,
+                        _ => Screen.CampaignTitle,
+                    };
+                    (_optionsBack, _newDifficulty) = (Screen.CampaignTitle, NewGameDefault());
                 }
 
                 _screenshot = Arg(args, "--screenshot");
@@ -194,7 +225,12 @@ public partial class Main : Node2D
             // The exported build opens on the title (issue 515): no map named, nothing to replay.
             if (Arg(args, "--screen") is { } screen)
             {
-                _screen = screen == "howto" ? Screen.HowTo : Screen.Title;
+                _screen = screen switch
+                {
+                    "howto" => Screen.HowTo,
+                    "options" => Screen.Options,
+                    _ => Screen.Title,
+                };
             }
             else if (Arg(args, "--map") is null && Array.IndexOf(args, "--script") < 0 && Array.IndexOf(args, "--screenshot") < 0 && Array.IndexOf(args, "--strip") < 0)
             {
@@ -204,12 +240,11 @@ public partial class Main : Node2D
             _client = new ClientSession(content, state);
             _tile = TileFor(map);
             _callouts = Array.IndexOf(args, "--callouts") >= 0 ? new Callouts() : null;
-            _client.SceneSetting = Arg(args, "--scenes") switch
+            _client.SceneSetting = Scenes.FromOption(Arg(args, "--scenes") switch
             {
-                "all" => SceneSetting.All,
-                "map" => SceneSetting.MapOnly,
-                _ => SceneSetting.KeyMoments,
-            };
+                "all" or "map" => Arg(args, "--scenes")!,
+                _ => _options.Scenes,
+            });
             if (Arg(args, "--script") is { } script)
             {
                 Ironwake.Client.Script.Apply(_client, File.ReadAllText(script));
@@ -231,7 +266,12 @@ public partial class Main : Node2D
             _client.RecallOpen = Array.IndexOf(args, "--recall") >= 0;
             _paused = Array.IndexOf(args, "--paused") >= 0;
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
-            _speed = Math.Max(0, GameSpeed.Speeds.Select(s => s.Name).ToList().IndexOf(Arg(args, "--speed") ?? ""));
+            if (Arg(args, "--speed") is { } speed)
+            {
+                _speed = GameSpeed.IndexOf(speed);
+            }
+
+            _confirm = Array.IndexOf(args, "--confirm") >= 0 ? EndTurnConfirm.Lines(_client.State, content, true) : null;
             _logOpen = Array.IndexOf(args, "--log-open") >= 0;
             _screenshot = Arg(args, "--screenshot");
             var strip = Array.IndexOf(args, "--strip");
@@ -305,6 +345,13 @@ public partial class Main : Node2D
 
     public override void _UnhandledInput(InputEvent input)
     {
+        if (OnMenuScreen)
+        {
+            MenuScreenInput(input);
+            QueueRedraw();
+            return;
+        }
+
         if (_campaign is not null && _client is null)
         {
             ScreenInput(input);
@@ -332,6 +379,12 @@ public partial class Main : Node2D
         if (_paused)
         {
             PauseInput(input);
+            QueueRedraw();
+            return;
+        }
+
+        if (ConfirmInput(input))
+        {
             QueueRedraw();
             return;
         }
@@ -366,7 +419,7 @@ public partial class Main : Node2D
                 switch (key.Keycode)
                 {
                     case Key.E:
-                        _client.Submit(new EndPhase());
+                        EndPressed();
                         break;
                     case Key.Space:
                         FinishBeats();
@@ -378,7 +431,7 @@ public partial class Main : Node2D
                         FinishBeats();
                         break;
                     case Key.S:
-                        _speed = GameSpeed.Next(_speed);
+                        PickSpeed(GameSpeed.Next(_speed));
                         break;
                     case Key.R:
                         _client.RecallOpen = !_client.RecallOpen;
@@ -390,7 +443,7 @@ public partial class Main : Node2D
                         _logOpen = !_logOpen;
                         break;
                     case Key.B:
-                        _client.SceneSetting = Scenes.Next(_client.SceneSetting);
+                        CycleScenes();
                         break;
                     case Key.M:
                         ToggleMute();
@@ -444,10 +497,11 @@ public partial class Main : Node2D
     private void SyncBattle()
     {
         _client = _campaign!.Battle;
-        _hover = null;
+        (_hover, _confirm) = (null, null);
         if (_client is not null)
         {
             _tile = TileFor(_client.State.Map);
+            _client.SceneSetting = Scenes.FromOption(_options.Scenes);
         }
     }
 
@@ -570,6 +624,12 @@ public partial class Main : Node2D
     {
         _hits.Clear();
         DrawRect(new Rect2(Vector2.Zero, new Vector2(ViewWidth, ViewHeight)), Background);
+        if (OnMenuScreen)
+        {
+            DrawMenuScreen();
+            return;
+        }
+
         if (_campaign is not null && _client is null)
         {
             DrawScreen();
@@ -598,6 +658,7 @@ public partial class Main : Node2D
         DrawTerrainHover();
         DrawBattleScene();
         DrawEndCard();
+        DrawConfirm();
         DrawPauseMenu();
     }
 
@@ -632,10 +693,10 @@ public partial class Main : Node2D
     }
 
     /// <summary>
-    /// The game speed (issue 625): a chip labelled GAME SPEED with three buttons, one, two and
-    /// three filled triangles for 1x, 2x and 5x, ending at <paramref name="right"/>. The speed in
-    /// force is filled amber with dark triangles; the others are bare with muted ones. A click picks
-    /// one for the session.
+    /// The game speed (issue 625): a chip labelled GAME SPEED with four buttons, one, two and
+    /// three filled triangles for 1x, 2x and 5x, and three against a bar for instant (issue 677),
+    /// ending at <paramref name="right"/>. The speed in force is filled amber with dark triangles;
+    /// the others are bare with muted ones. A click picks one and the profile keeps it.
     /// </summary>
     private void DrawSpeedButtons(float right)
     {
@@ -656,8 +717,8 @@ public partial class Main : Node2D
                 Card(rect, amber, 11);
             }
 
-            var count = GameSpeed.Speeds[i].Triangles;
-            var left = rect.GetCenter().X - count * (side - 1) / 2f;
+            var (_, count, bar, _) = GameSpeed.Speeds[i];
+            var left = rect.GetCenter().X - (count * (side - 1) + (bar ? 3 : 0)) / 2f;
             var mid = rect.GetCenter().Y;
             for (var t = 0; t < count; t++)
             {
@@ -665,8 +726,14 @@ public partial class Main : Node2D
                 DrawColoredPolygon(new[] { new Vector2(tx, mid - side / 2), new Vector2(tx + side - 1, mid), new Vector2(tx, mid + side / 2) }, chosen ? Background : Muted);
             }
 
+            // Instant (issue 677): the triangles end on a bar, as a skip-to-end key does.
+            if (bar)
+            {
+                DrawRect(new Rect2(left + count * (side - 1) + 1, mid - side / 2, 2, side), chosen ? Background : Muted);
+            }
+
             var index = i;
-            _hits.Add((rect, () => _speed = index));
+            _hits.Add((rect, () => PickSpeed(index)));
         }
     }
 
@@ -1202,9 +1269,9 @@ public partial class Main : Node2D
         return y + 10;
     }
 
-    /// <summary>The reaches the board draws: every seen enemy's on T, else the inspected enemy's alone, else none.</summary>
+    /// <summary>The reaches the board draws: every seen enemy's on T, else the inspected enemy's or, with reach on hover, the hovered one's (issue 677), else none.</summary>
     private IReadOnlyList<EnemyReach> ShownReaches() =>
-        _threatShown ? _client!.EnemyReaches : _client!.InspectedReach is { } one ? new[] { one } : Array.Empty<EnemyReach>();
+        _threatShown ? _client!.EnemyReaches : _client!.ReachShown(_hover, _options.ReachOnHover) is { } one ? new[] { one } : Array.Empty<EnemyReach>();
 
     /// <summary>The move preview's one line on a card (issue 511): the verdict's dot frost when safe and bone when struck.</summary>
     private float PreviewRow(float y, MovePreview preview, string lead)

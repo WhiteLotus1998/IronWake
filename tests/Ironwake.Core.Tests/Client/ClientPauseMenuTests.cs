@@ -9,10 +9,10 @@ namespace Ironwake.Core.Tests.Client;
 public class ClientPauseMenuTests
 {
     [Fact]
-    public void ThePauseMenuOffersResumeHowToPlaySoundAndTheTitleInThatOrder()
+    public void ThePauseMenuOffersResumeHowToPlaySoundOptionsAndTheTitleInThatOrder()
     {
         Assert.Equal(
-            new[] { PauseChoice.Resume, PauseChoice.HowToPlay, PauseChoice.Sound, PauseChoice.Title },
+            new[] { PauseChoice.Resume, PauseChoice.HowToPlay, PauseChoice.Sound, PauseChoice.Options, PauseChoice.Title },
             Screens.PauseChoices.Select(c => c.Choice));
         Assert.Equal("Return to title", Screens.PauseChoices.Single(c => c.Choice == PauseChoice.Title).Label);
     }

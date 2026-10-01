@@ -83,13 +83,6 @@ public partial class Main
         }
     }
 
-    /// <summary>M: mutes or unmutes every sound, the bed included.</summary>
-    private void ToggleMute()
-    {
-        _muted = !_muted;
-        AudioServer.SetBusMute(AudioServer.GetBusIndex("Master"), _muted);
-    }
-
     /// <summary>
     /// Plays each cue of the beats in play whose moment the clock passed since the last frame:
     /// a strike's number when it rises, a death when its beat starts.

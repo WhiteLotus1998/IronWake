@@ -24,6 +24,22 @@ public static class Scenes
         _ => SceneSetting.KeyMoments,
     };
 
+    /// <summary>The setting the profile's <c>scenes</c> option names (issue 677): <c>all</c>, <c>map</c>, else the key moments.</summary>
+    public static SceneSetting FromOption(string value) => value switch
+    {
+        "all" => SceneSetting.All,
+        "map" => SceneSetting.MapOnly,
+        _ => SceneSetting.KeyMoments,
+    };
+
+    /// <summary>The profile's <c>scenes</c> value for <paramref name="setting"/>, the inverse of <see cref="FromOption"/>.</summary>
+    public static string ToOption(SceneSetting setting) => setting switch
+    {
+        SceneSetting.All => "all",
+        SceneSetting.MapOnly => "map",
+        _ => "key",
+    };
+
     /// <summary>The setting as the footer names it.</summary>
     public static string Label(SceneSetting setting) => setting switch
     {

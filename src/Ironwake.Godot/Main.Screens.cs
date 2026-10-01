@@ -19,6 +19,18 @@ public partial class Main
         Battle,
         Title,
         HowTo,
+
+        /// <summary>The Options screen (issue 677).</summary>
+        Options,
+
+        /// <summary>The campaign's title (issue 677): Continue, New game, Load, Options, Quit.</summary>
+        CampaignTitle,
+
+        /// <summary>New game's difficulty and permadeath.</summary>
+        NewGame,
+
+        /// <summary>The list of saves to load.</summary>
+        Load,
     }
 
     /// <summary>What the window shows: the battle, or the title or how-to-play screen before it.</summary>
@@ -47,8 +59,9 @@ public partial class Main
         var mapPath = File.Exists(_mapArg) ? _mapArg : Path.Combine(_contentDir, "maps", _mapArg + ".map");
         var map = MapFiles.Load(mapPath, content);
         _seed = seed;
-        _client = new ClientSession(content, BattleState.From(map, content, content.Cast, seed));
+        _client = new ClientSession(content, BattleState.From(map, content, content.Cast, seed)) { SceneSetting = Scenes.FromOption(_options.Scenes) };
         _tile = TileFor(map);
+        _confirm = null;
         _callouts = callouts ? new Callouts() : null;
         (_hover, _logOpen, _threatShown, _paused) = (null, false, false, false);
         (_beatSerialSeen, _scrubSerialSeen) = (-1, -1);
@@ -75,6 +88,9 @@ public partial class Main
                 break;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.H } when _screen == Screen.Title:
                 _screen = Screen.HowTo;
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.O } when _screen == Screen.Title:
+                OpenOptions(Screen.Title);
                 break;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape }:
                 if (_screen == Screen.HowTo)
@@ -156,7 +172,8 @@ public partial class Main
         DrawLine(new Vector2(centre - 48, 346), new Vector2(centre + 48, 346), amber, 3);
         UiText(new Vector2(centre, 384), Screens.Tagline, Muted, 17, centred: true);
 
-        var y = 450f;
+        // Four choices since Options joined (issue 677): set closer so the mute key clears the footer.
+        var y = 424f;
         foreach (var (label, key) in Screens.TitleChoices)
         {
             var first = label == Screens.TitleChoices[0].Label;
@@ -176,10 +193,11 @@ public partial class Main
             {
                 "Play" => () => StartBattle(_seed, callouts: true),
                 "How to play" => () => _screen = Screen.HowTo,
+                "Options" => () => OpenOptions(Screen.Title),
                 _ => () => GetTree().Quit(0),
             };
             _hits.Add((rect, act));
-            y += 56;
+            y += 50;
         }
 
         // The mute key (issue 516), a keycap and what it does now, clickable like the choices.
@@ -399,6 +417,10 @@ public partial class Main
                 break;
             case PauseChoice.Sound:
                 ToggleMute();
+                break;
+            case PauseChoice.Options:
+                // Esc on Options comes back to the battle with the menu still up.
+                OpenOptions(Screen.Battle);
                 break;
             default:
                 (_screen, _paused) = (Screen.Title, false);
