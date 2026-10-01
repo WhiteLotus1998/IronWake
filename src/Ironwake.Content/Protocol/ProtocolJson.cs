@@ -916,7 +916,7 @@ public static class ProtocolJson
     /// (a ulong does not survive every JSON reader), the difficulty, the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
-    /// since the last map (issue 252), and the edits bought for the keep in the order they were made
+    /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
     /// (issue 288). A campaign is a file.
     /// </summary>
     public static string Campaign(CampaignRecord record) => Write(w =>
@@ -950,6 +950,24 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (record.QuestsWon.Count > 0)
+        {
+            w.WriteStartArray("questsWon");
+            foreach (var won in record.QuestsWon)
+            {
+                w.WriteStartObject();
+                w.WriteString("quest", won.QuestId);
+                w.WriteNumber("mapIndex", won.MapIndex);
+                w.WriteEndObject();
+            }
+
+            w.WriteEndArray();
+        }
+
+        if (record.QuestsTried.Count > 0)
+        {
+            WriteStrings(w, "questsTried", record.QuestsTried);
+        }
         w.WriteStartArray("keep");
         foreach (var work in record.Keep)
         {
@@ -1002,6 +1020,8 @@ public static class ProtocolJson
             ReadStrings(e, "benched"))
         {
             TrialsTried = ReadTrialsTried(e),
+            QuestsWon = ReadQuestsWon(e, content),
+            QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
             Keep = ReadKeep(e, content),
         };
     }
@@ -1021,6 +1041,23 @@ public static class ProtocolJson
         }
 
         return ValueList<KeepWork>.From(built);
+    }
+
+    /// <summary>The optional <c>questsWon</c> array of a campaign record (issue 635); a record written before it reads as none won. A quest the campaign does not list is refused.</summary>
+    private static ValueList<QuestWon> ReadQuestsWon(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("questsWon", out _))
+        {
+            return ValueList<QuestWon>.Empty;
+        }
+
+        var won = Array(Required(e, "questsWon"), "questsWon").Select(q => new QuestWon(RequiredString(q, "quest"), RequiredInt(q, "mapIndex"))).ToList();
+        foreach (var quest in won.Where(q => content.Campaign.Quest(q.QuestId) is null))
+        {
+            throw new ProtocolException($"field 'questsWon': '{quest.QuestId}' is not a side map of the campaign");
+        }
+
+        return ValueList<QuestWon>.From(won);
     }
 
     /// <summary>The optional <c>trialsTried</c> array of a campaign record (issue 252); a record written before it reads as none tried.</summary>

@@ -33,6 +33,20 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
 public sealed record CampaignTrial(string ClassId, string MapId);
 
 /// <summary>
+/// A side map of a member's story (issue 635, DESIGN section 14): its id, the member it belongs
+/// to, which of their two quests it is (1 or 2), and the map's id, its file name under
+/// <c>content/quests</c> without the extension. The board is the trial shape: its <c>captain</c>
+/// slot is the member's, so the member's death loses it, and its one bare <c>recruit</c> slot is
+/// the ally the player picks. <see cref="Before"/> and <see cref="After"/> are its text cards.
+/// </summary>
+public sealed record CampaignQuest(string Id, string MemberId, int Part, string MapId)
+{
+    public ValueList<string> Before { get; init; } = ValueList<string>.Empty;
+
+    public ValueList<string> After { get; init; } = ValueList<string>.Empty;
+}
+
+/// <summary>
 /// The campaign's content (issue 74, DESIGN section 9): the purse a campaign starts with, the
 /// price of a certification (the seal, paid from the purse), and the maps in the order they are
 /// played. <see cref="None"/> is content without a <c>campaign.json</c>, which plays single maps only.
@@ -43,6 +57,12 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 
     /// <summary>The certification trials, one per class at most, in class id order (issue 252); a class without one certifies only with a seal.</summary>
     public ValueList<CampaignTrial> Trials { get; init; } = ValueList<CampaignTrial>.Empty;
+
+    /// <summary>The side maps of the members' stories (issue 635), in file order, which breaks ties in the order they are offered.</summary>
+    public ValueList<CampaignQuest> Quests { get; init; } = ValueList<CampaignQuest>.Empty;
+
+    /// <summary>The side map <paramref name="questId"/>, or null when the campaign has none by that id.</summary>
+    public CampaignQuest? Quest(string questId) => Quests.FirstOrDefault(q => q.Id == questId);
 
     /// <summary>The keep's map and the edits sold for it (issue 82, an experiment); <see cref="KeepMenu.None"/> when the campaign has none.</summary>
     public KeepMenu Keep { get; init; } = KeepMenu.None;

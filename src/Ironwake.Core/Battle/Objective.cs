@@ -28,7 +28,7 @@ public static class Objective
             WinCondition.Escape => $"Get the captain out through an exit {by}.",
             _ => throw new ArgumentOutOfRangeException(nameof(state), map.Win, "unknown win condition"),
         };
-        var captain = Rank(state);
+        var captain = Rank(state, content);
         var survivors = map.ProtectId is { } protect ? $"{captain} and {UnitNames.Of(state, content)[protect]} must survive." : $"{captain} must survive.";
         return $"{win} {survivors}";
     }
@@ -68,7 +68,8 @@ public static class Objective
         switch (outcome.Cause)
         {
             case LossCause.Captain:
-                return CaptainUnit(state) is { } fallen ? $"Lost because the captain, {fallen.Unit.Name}, fell." : "Lost because the captain fell.";
+                return CaptainUnit(state) is not { } fallen ? "Lost because the captain fell."
+                    : Leads(fallen, content) ? $"Lost because {fallen.Unit.Name} fell." : $"Lost because the captain, {fallen.Unit.Name}, fell.";
             case LossCause.Protected:
                 var protect = UnitNames.Of(state, content)[map.ProtectId!];
                 return outcome.Reason.EndsWith("left behind", StringComparison.Ordinal)
@@ -134,8 +135,18 @@ public static class Objective
             : MapDefinition.ThroneTerrainId;
 
     /// <summary>The captain by rank and surname, as the objective line names him: "Captain Fenn" for Alder Fenn; "The captain" when no captain was ever on the board.</summary>
-    private static string Rank(BattleState state) =>
-        CaptainUnit(state) is { } captain ? "Captain " + captain.Unit.Name.Split(' ')[^1] : "The captain";
+    private static string Rank(BattleState state, GameContent content) =>
+        CaptainUnit(state) is not { } captain ? "The captain"
+            : Leads(captain, content) ? captain.Unit.Name
+            : "Captain " + captain.Unit.Name.Split(' ')[^1];
+
+    /// <summary>
+    /// Whether the unit in the captain slot is another member of the cast standing in it (issue
+    /// 635): a side map's member or a trial's candidate, named plainly rather than given the
+    /// captain's rank. A unit the cast does not list is the captain of its own board.
+    /// </summary>
+    private static bool Leads(BattleUnit captain, GameContent content) =>
+        content.Cast.Count > 0 && captain.Id != content.Cast[0].Id && content.Cast.Any(u => u.Id == captain.Id);
 
     private static BattleUnit? CaptainUnit(BattleState state) =>
         state.Units.FirstOrDefault(u => u.IsCaptain)

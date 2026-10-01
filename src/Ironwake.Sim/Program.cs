@@ -36,11 +36,17 @@ public static class Program
             RollScheme? scheme = RollScheme.TwoRollAverage;
             double? taxFloor = FreePrefix.DefaultTaxFloor;
             string? difficulty = null;
+            var lead = new List<string>();
             for (var i = 2; i + 1 < args.Length; i++)
             {
                 if (args[i] == "--difficulty")
                 {
                     difficulty = args[i + 1];
+                }
+
+                else if (args[i] == "--lead")
+                {
+                    lead.Add(args[i + 1]);
                 }
 
                 else if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
@@ -59,7 +65,7 @@ public static class Program
 
             if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full, floor, difficulty);
+                return Full(args[1], seeds, full, floor, difficulty, lead);
             }
         }
 
@@ -103,7 +109,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
 
     private const int HitBandSeeds = 50;
 
@@ -379,7 +385,7 @@ public static class Program
     /// names no content map but is a map file on disk, such as a <c>docs/samples/</c> sample, is
     /// loaded from that file (issue 429), as <c>--trace</c> already does.
     /// </summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null)
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -389,8 +395,25 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
+        if (lead is { Count: > 0 })
+        {
+            if (lead.FirstOrDefault(id => content.Cast.All(u => u.Id != id)) is { } unknown)
+            {
+                Console.WriteLine($"full: --lead names '{unknown}', who is not in the cast");
+                return 2;
+            }
+
+            // A side map (issue 635) is measured with its member in the captain slot and its ally first in the bare slots.
+            content = content with { Cast = ValueList<Unit>.From(lead.Select(id => content.Cast.First(u => u.Id == id)).Concat(content.Cast.Where(u => !lead.Contains(u.Id)))) };
+        }
+
         var all = MapFiles.LoadAll(contentDir, content);
         var maps = mapId == "--all" ? all : all.Where(m => m.Id == mapId).ToList();
+        if (maps.Count == 0 && File.Exists(Path.Combine(contentDir, MapFiles.QuestsDirectory, mapId + MapFiles.Extension)))
+        {
+            maps = new[] { (mapId, MapFiles.Load(Path.Combine(contentDir, MapFiles.QuestsDirectory, mapId + MapFiles.Extension), content)) };
+        }
+
         if (maps.Count == 0 && content.Campaign.Keep.IsKeepMap(mapId))
         {
             maps = new[] { (mapId, MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content)) };

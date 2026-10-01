@@ -9,6 +9,7 @@ public static class MapFiles
     public const string Extension = ".map";
     public const string KeepDirectory = "keep";
     public const string TrialsDirectory = "trials";
+    public const string QuestsDirectory = "quests";
 
     /// <summary>
     /// Where the campaign map <paramref name="mapId"/> lives: under <c>content/keep</c> for the keep
@@ -40,7 +41,7 @@ public static class MapFiles
     /// <summary>
     /// Loads every <c>.map</c> under <c>content/&lt;subdirectory&gt;</c> the way
     /// <see cref="LoadAll"/> loads <c>content/maps</c>: <see cref="TrialsDirectory"/> for the
-    /// certification trials and <see cref="KeepDirectory"/> for the keep and its raid, so
+    /// certification trials, <see cref="QuestsDirectory"/> for the side maps (issue 635) and <see cref="KeepDirectory"/> for the keep and its raid, so
     /// <c>validate</c> parses every map the campaign can load (issue 397).
     /// </summary>
     public static IReadOnlyList<(string Id, MapDefinition Map)> LoadDirectory(string contentRoot, string subdirectory, GameContent content)

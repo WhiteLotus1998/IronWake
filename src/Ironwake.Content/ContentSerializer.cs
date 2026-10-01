@@ -89,6 +89,24 @@ public static class ContentSerializer
                 writer.WriteEndObject();
             }
 
+            if (campaign.Quests.Count > 0)
+            {
+                writer.WriteStartArray("quests");
+                foreach (var quest in campaign.Quests)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("id", quest.Id);
+                    writer.WriteString("member", quest.MemberId);
+                    writer.WriteNumber("part", quest.Part);
+                    writer.WriteString("map", quest.MapId);
+                    WriteCard(writer, "before", quest.Before);
+                    WriteCard(writer, "after", quest.After);
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
+
             if (campaign.Keep != KeepMenu.None)
             {
                 writer.WriteStartObject("keep");

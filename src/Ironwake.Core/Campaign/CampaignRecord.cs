@@ -9,6 +9,9 @@ public sealed record ScreenResult(CampaignRecord Record, string Text, bool Accep
 /// <summary>A certification trial tried this camp (issue 252): the unit and the class it tried for.</summary>
 public sealed record TrialAttempt(string UnitId, string ClassId);
 
+/// <summary>A side map won (issue 635): its id and the index of the map it was won before, which times the member's next quest.</summary>
+public sealed record QuestWon(string QuestId, int MapIndex);
+
 /// <summary>
 /// A campaign between maps (issue 74, DESIGN section 9): the roster in roster order, the captain
 /// first, each unit as its last map left it (EXP, level, ranks, mastery, weapon uses); the ids of
@@ -34,6 +37,15 @@ public sealed record CampaignRecord(
     /// attempt per unit and class per camp, so a failed trial opens again after the next map.
     /// </summary>
     public ValueList<TrialAttempt> TrialsTried { get; init; } = ValueList<TrialAttempt>.Empty;
+
+    /// <summary>The side maps won (issue 635), in the order they were won; a won quest is never offered again.</summary>
+    public ValueList<QuestWon> QuestsWon { get; init; } = ValueList<QuestWon>.Empty;
+
+    /// <summary>
+    /// The side maps fought since the last map (issue 635), won or lost: one attempt per camp, so a
+    /// side map lost on the clock opens again after the next map.
+    /// </summary>
+    public ValueList<string> QuestsTried { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
     /// The edits bought for the keep (issue 288), in the order they were made. The keep the finale
@@ -196,6 +208,7 @@ public sealed record CampaignRecord(
             MapIndex = MapIndex + 1,
             Benched = ValueList<string>.Empty,
             TrialsTried = ValueList<TrialAttempt>.Empty,
+            QuestsTried = ValueList<string>.Empty,
         };
     }
 
@@ -453,6 +466,201 @@ public sealed record CampaignRecord(
             tried.Replace(certified),
             $"{unit.Id} passes the {target.Name} trial and certifies from {content.Class(unit.ClassId).Name} to {target.Name} with no seal; L{certified.Level} exp {certified.Exp}",
             true);
+    }
+
+    /// <summary>Side maps an interlude offers at most (DESIGN section 14); the overflow waits for the next one.</summary>
+    public const int SideMapsPerInterlude = 2;
+
+    /// <summary>
+    /// The map index from which <paramref name="quest"/> opens (issue 635, DESIGN section 14), or
+    /// null while it cannot: part 1 after the member's second map, so two maps after the one they
+    /// arrive on (a member on the roster from the start arrives on map 0's eve, index -1); part 2
+    /// two maps after part 1 was won, and never before it is.
+    /// </summary>
+    public int? QuestOpensAt(CampaignQuest quest, GameContent content)
+    {
+        if (quest.Part == 1)
+        {
+            return content.Campaign.ArrivalIndex(quest.MemberId) + 2;
+        }
+
+        var first = content.Campaign.Quests.FirstOrDefault(q => q.MemberId == quest.MemberId && q.Part == 1);
+        return first is not null && QuestsWon.FirstOrDefault(w => w.QuestId == first.Id) is { } won ? won.MapIndex + 2 : null;
+    }
+
+    /// <summary>
+    /// The side maps this interlude offers (issue 635, DESIGN section 14): every quest not yet won
+    /// whose member stands on the roster and whose opening index has come, earliest opening first
+    /// and then in file order, at most <see cref="SideMapsPerInterlude"/> less the ones already won
+    /// here. A quest tried here and lost stays in its seat, closed until the next map. Empty once
+    /// the campaign is finished.
+    /// </summary>
+    public IReadOnlyList<CampaignQuest> QuestsOffered(GameContent content)
+    {
+        if (IsFinished(content))
+        {
+            return Array.Empty<CampaignQuest>();
+        }
+
+        var seats = SideMapsPerInterlude - QuestsWon.Count(w => w.MapIndex == MapIndex);
+        return content.Campaign.Quests
+            .Select((quest, order) => (quest, order, opens: QuestOpensAt(quest, content)))
+            .Where(q => q.opens is { } at && at <= MapIndex && Find(q.quest.MemberId) is not null && !QuestsWon.Any(w => w.QuestId == q.quest.Id))
+            .OrderBy(q => q.opens).ThenBy(q => q.order)
+            .Take(Math.Max(0, seats))
+            .Select(q => q.quest)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Why <paramref name="questId"/> may not be fought now with <paramref name="allyId"/> beside
+    /// its member (issue 635), or null when it may: the quest must exist and be offered this
+    /// interlude, not tried since the last map, and the ally must be on the roster, neither the
+    /// captain (who leads the main line and whose death would end the campaign on a side map)
+    /// nor the member.
+    /// </summary>
+    public string? QuestRefusal(string questId, string allyId, GameContent content)
+    {
+        if (content.Campaign.Quest(questId) is not { } quest)
+        {
+            return content.Campaign.Quests.Count == 0
+                ? "the campaign has no side maps"
+                : $"no side map '{questId}'; the campaign has {string.Join(", ", content.Campaign.Quests.Select(q => q.Id))}";
+        }
+
+        if (!QuestsOffered(content).Contains(quest))
+        {
+            return QuestsWon.Any(w => w.QuestId == questId)
+                ? $"side map {questId} is won already"
+                : Fallen.Contains(quest.MemberId)
+                    ? $"side map {questId} closed when {quest.MemberId} fell"
+                    : $"side map {questId} is not open before this map";
+        }
+
+        if (QuestsTried.Contains(questId))
+        {
+            return $"side map {questId} was fought since the last map; it opens again after the next one";
+        }
+
+        if (Find(allyId) is null)
+        {
+            return $"no unit '{allyId}' on the roster";
+        }
+
+        if (allyId == Roster[0].Id)
+        {
+            return $"{allyId} is the captain and stays with the company; pick another ally";
+        }
+
+        return allyId == quest.MemberId ? $"{allyId} is the side map's own; pick an ally beside {quest.MemberId}" : null;
+    }
+
+    /// <summary>
+    /// Why <paramref name="map"/> cannot be played as a side map (issue 635), or null when it can:
+    /// one <c>captain</c> slot (the member's), exactly one bare <c>recruit</c> slot (the ally's),
+    /// no recruit placed by name, and no certification header.
+    /// </summary>
+    public static string? QuestMapRefusal(MapDefinition map)
+    {
+        var players = map.Placements.OfType<PlayerPlacement>().ToList();
+        if (map.Certification is not null)
+        {
+            return $"the side map '{map.Name}' is a certification trial";
+        }
+
+        if (players.Any(p => p.Slot == PlayerSlot.NamedRecruit))
+        {
+            return $"the side map '{map.Name}' places a recruit by name; its slots are the member's (captain) and the ally's (recruit)";
+        }
+
+        return players.Count(p => p.Slot == PlayerSlot.AnyRecruit) == 1
+            ? null
+            : $"the side map '{map.Name}' needs exactly one bare recruit slot, for the ally";
+    }
+
+    /// <summary>
+    /// The seed a side map before the next map runs on: past every map's and every trial's seed,
+    /// one per quest per interlude, so no two battles of a campaign share one.
+    /// </summary>
+    public ulong QuestSeed(string questId, GameContent content)
+    {
+        var quests = content.Campaign.Quests.Select(q => q.Id).ToList();
+        return unchecked(Seed + (ulong)(2 * content.Campaign.Maps.Count) + (ulong)(MapIndex * quests.Count) + (ulong)quests.IndexOf(questId));
+    }
+
+    /// <summary>
+    /// The side map's battle (issue 635): <paramref name="map"/> as the caller loaded it, under the
+    /// campaign's difficulty, the member in its captain slot and <paramref name="allyId"/> in its
+    /// bare slot, on <see cref="QuestSeed"/>. The caller has checked <see cref="QuestRefusal"/>.
+    /// </summary>
+    public BattleState BeginQuest(MapDefinition map, string questId, string allyId, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
+    {
+        var quest = content.Campaign.Quest(questId) ?? throw new ArgumentException($"no side map '{questId}'");
+        var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
+        var pair = new[] { Find(quest.MemberId), Find(allyId) };
+        if (pair.Any(u => u is null))
+        {
+            throw new ArgumentException($"{quest.MemberId} and {allyId} must both be on the roster");
+        }
+
+        return BattleState.From(played, content, ValueList<Unit>.From(pair!), QuestSeed(questId, content), scheme);
+    }
+
+    /// <summary>
+    /// The record after a decided side map (issue 635). The price is permadeath and nothing else
+    /// (DESIGN section 14): whoever fell on it is fallen for good and leaves the roster, and
+    /// whoever stands comes back as the battle left it (EXP, levels, uses), with spells refreshed.
+    /// The attempt is recorded either way; a win is recorded with the map it was won before,
+    /// which times the member's next quest. A loss never ends the campaign; the side map opens
+    /// again after the next map unless its member fell. No purse reward: the quest's payout is
+    /// the member's own.
+    /// </summary>
+    public ScreenResult AfterQuest(BattleState end, string questId, GameContent content)
+    {
+        var quest = content.Campaign.Quest(questId) ?? throw new ArgumentException($"no side map '{questId}'");
+        if (!end.Outcome.IsOver)
+        {
+            throw new InvalidOperationException("the side map is not decided");
+        }
+
+        var opening = end.History.Count > 0 ? end.History[0] : end;
+        var deployed = opening.UnitsOf(Side.Player).ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
+        var standing = end.Survivors().ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
+        var roster = new List<Unit>();
+        var fallen = Fallen.ToList();
+        var lost = new List<string>();
+        foreach (var unit in Roster)
+        {
+            if (!deployed.TryGetValue(unit.Id, out var started))
+            {
+                roster.Add(unit);
+            }
+            else if (standing.TryGetValue(unit.Id, out var after))
+            {
+                roster.Add(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content));
+            }
+            else
+            {
+                fallen.Add(unit.Id);
+                lost.Add(unit.Id);
+            }
+        }
+
+        var won = end.Outcome.Result == BattleResult.Won;
+        var record = this with
+        {
+            Roster = ValueList<Unit>.From(roster),
+            Fallen = ValueList<string>.From(fallen),
+            QuestsTried = QuestsTried.Add(questId),
+            QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
+        };
+        var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}" : "; nobody fell";
+        var line = won
+            ? $"{quest.MemberId} wins {questId}{dead}"
+            : lost.Contains(quest.MemberId)
+                ? $"{quest.MemberId} falls on {questId}, which closes for good{dead}"
+                : $"side map {questId} is lost: {end.Outcome.Reason}; it opens again after the next map{dead}";
+        return new ScreenResult(record, line, true);
     }
 
     /// <summary>
