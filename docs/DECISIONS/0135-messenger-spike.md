@@ -19,3 +19,7 @@ Every enemy so far is either a fight or scenery. The tide, the break and wildfir
 ## Keep test
 
 Kept if either chair's journal shows a turn ordered by it: a strike spent on the messenger over the forecast's best line, a unit sent to hold its path, or a fight moved to keep its camp asleep. Killed if in both plays it is either never in danger of running or never catchable once it runs. Code's warm 701 (PLAYTEST) shows the third clause and the first (turns 6 and 7); the run itself was seen only in the woken demonstration. Chat's cold play decides.
+
+## Amendment (issue 680, round 206 and 207)
+
+Both plays of the first sample killed the rider asleep, so the chase never happened. The lever is content only: `docs/samples/signal_road_pass.map`, a rider awake from turn 1 at 1,1, 3 of its phases from the road at 15,2, its cheapest path through the one-tile pass at 12,2 (shut, the detour round the south gap costs it more than a phase). On open ground the outrider Ansgar reaches the pass in 2 turns (cost 12, Mov 6), and the Mov 4 three need at least 3; `MessengerTests.ThePassSampleHoldsItsArithmetic` holds all of it. The camp clause of the keep test is struck: a fight moved to keep a camp asleep is the wake rule's work. Kept if either chair's journal shows a strike spent on the messenger over the forecast's best line, or a unit sent to hold its path; killed if in both plays it never threatens to run, or can never be caught once it runs. Code's warm 680 is in PLAYTEST; Chat's cold play decides.

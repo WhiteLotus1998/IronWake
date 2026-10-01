@@ -1,0 +1,36 @@
+name: The Signal Pass
+size: 16x12
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 3
+announce: on
+messenger: 1,1 15,2
+
+............MM..
+............MM..
+..............==
+....^.......MM..
+....^...F...MM..
+............MM..
+..n.....^^..MM..
+........^^..MM..
+............MM..
+...^........n...
+................
+................
+
+units:
+P captain 5,11
+P recruit:wren 6,11
+P recruit:teodor 4,11
+P recruit:ansgar 7,9
+E rider 1,1 group:post behavior:aggressive
+E brigand 14,9 group:van behavior:aggressive
+E soldier 11,7 group:van behavior:aggressive
+E archer 10,4 group:van behavior:aggressive
+
+events:
+relief1 messenger spawn brigand 0,8 group:relief behavior:aggressive
+relief2 messenger spawn rider 15,11 group:relief behavior:aggressive
+relief3 messenger spawn archer 15,8 group:relief behavior:aggressive

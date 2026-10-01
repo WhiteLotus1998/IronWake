@@ -1,4 +1,5 @@
 using Ironwake.Content;
+using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
 using static Ironwake.Core.Tests.Battle.BattleFixture;
 
@@ -209,5 +210,41 @@ public class MessengerTests
         Assert.Null(MapRenderer.MessengerLine(state, Starter));
         Assert.Null(MapRenderer.MessengerLine(state.WithoutUnit("rider-1"), Starter));
         Assert.DoesNotContain("messenger", state.WithoutUnit("rider-1").Canonical());
+    }
+    /// <summary>
+    /// Issue 680, the pass sample's arithmetic (round 206's lever): the messenger is awake from
+    /// turn 1 and 3 of its phases from the road; its cheapest path runs through the one-tile pass
+    /// at 12,2, so with the pass shut it needs at least one phase more; and on open ground only
+    /// the outrider can stand in the pass by the end of turn 2, the Mov 4 three cannot.
+    /// </summary>
+    [Fact]
+    public void ThePassSampleHoldsItsArithmetic()
+    {
+        var shipped = ContentLoader.Load(Fixture.RealContentDirectory());
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var path = Path.Combine(repo, "docs", "samples", "signal_road_pass.map");
+        var map = MapFiles.Load(path, shipped);
+        Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(map, shipped));
+
+        var state = BattleState.From(map, shipped, shipped.Cast, 680);
+        var rider = Messenger.On(state)!;
+        Assert.True(Messenger.Runs(state, shipped, rider));
+        var open = Messenger.PhasesToRoad(state, shipped, rider);
+        Assert.True(open >= 3, $"{open} phases");
+
+        var pass = new Coord(12, 2);
+        var shut = state with { Map = map.WithTerrain(pass, "mountain") };
+        Assert.True(Messenger.PhasesToRoad(shut, shipped, rider) is not { } detour || detour >= open + 1);
+
+        int? TurnsToPass(string id)
+        {
+            var unit = state.Find(id)!;
+            var cls = shipped.Class(unit.Unit.ClassId);
+            var cost = Movement.DistancesTo(map, shipped, new[] { pass }, cls.Movement, _ => Occupant.None).From(unit.At);
+            return cost is { } c ? (c + cls.Mov - 1) / cls.Mov : null;
+        }
+
+        Assert.Equal(2, TurnsToPass("ansgar"));
+        Assert.All(new[] { "captain", "wren", "teodor" }, id => Assert.True(TurnsToPass(id) > 2, id));
     }
 }
