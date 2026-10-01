@@ -26,8 +26,9 @@ namespace Ironwake.Godot;
 /// ends the phase, after which the enemy phase plays itself (<c>Main.Motion.cs</c>, issue 513) at
 /// the speed S cycles; Space reveals its next event at once and marks it on the board, C skips
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
-/// Tab opens the event log under any live card (<c>--log-open</c> opens with it), Escape closes the
-/// attack menu or else clears the selection and closes the browser. A click on an enemy with more
+/// Tab opens the event log under the forecast block (<c>--log-open</c> opens with it), Escape closes the
+/// attack menu, else clears the selection and closes the browser, else opens the pause menu
+/// (<c>Main.Screens.cs</c>, issue 629; <c>--paused</c> opens with it), as a click on the footer's Esc does. A click on an enemy with more
 /// than one legal way to strike opens the attack menu (issue 611): 1 to 9 or a hover shows a row's
 /// card, a click on it or Enter strikes. An exported build finds <c>content/</c>
 /// beside its executable, and with no <c>--map</c> opens on the title (<c>Main.Screens.cs</c>,
@@ -152,7 +153,6 @@ public partial class Main : Node2D
     private string _error = "";
     private string? _screenshot;
     private int _framesDrawn;
-    private bool _recallOpen;
 
     public Main()
     {
@@ -234,7 +234,8 @@ public partial class Main : Node2D
             }
 
             _hover = CoordArg(args, "--hover");
-            _recallOpen = Array.IndexOf(args, "--recall") >= 0;
+            _client.RecallOpen = Array.IndexOf(args, "--recall") >= 0;
+            _paused = Array.IndexOf(args, "--paused") >= 0;
             _threatShown = Array.IndexOf(args, "--threat") >= 0;
             _pricedShown = Array.IndexOf(args, "--priced") >= 0;
             _logOpen = Array.IndexOf(args, "--log-open") >= 0;
@@ -291,7 +292,11 @@ public partial class Main : Node2D
     /// </summary>
     public override void _Process(double delta)
     {
-        Advance(delta);
+        if (!_paused)
+        {
+            Advance(delta);
+        }
+
         SoundBeats();
         SaveStripFrame();
         if (_screenshot is null || ++_framesDrawn < 3)
@@ -326,6 +331,13 @@ public partial class Main : Node2D
 
         if (EndCardShown && EndCardInput(input))
         {
+            QueueRedraw();
+            return;
+        }
+
+        if (_paused)
+        {
+            PauseInput(input);
             QueueRedraw();
             return;
         }
@@ -371,7 +383,7 @@ public partial class Main : Node2D
                         _speed = (_speed + 1) % Speeds.Length;
                         break;
                     case Key.R:
-                        _recallOpen = !_recallOpen;
+                        _client.RecallOpen = !_client.RecallOpen;
                         break;
                     case Key.T:
                         _threatShown = !_threatShown;
@@ -388,12 +400,21 @@ public partial class Main : Node2D
                     case Key.M:
                         ToggleMute();
                         break;
-                    case Key.Escape when _client.Menu is not null:
-                        _client.CloseMenu();
-                        break;
                     case Key.Escape:
-                        _client.ClearSelection();
-                        _recallOpen = false;
+                        switch (Screens.Escape(_client.Menu is not null, _client.Selected is not null, _client.RecallOpen, _campaign is not null))
+                        {
+                            case EscapeAction.CloseAttackMenu:
+                                _client.CloseMenu();
+                                break;
+                            case EscapeAction.Clear:
+                                _client.ClearSelection();
+                                _client.RecallOpen = false;
+                                break;
+                            default:
+                                _paused = true;
+                                break;
+                        }
+
                         break;
                     case >= Key.Key1 and <= Key.Key9 when _client.Menu is not null:
                         _client.MenuHover((int)(key.Keycode - Key.Key1));
@@ -421,7 +442,6 @@ public partial class Main : Node2D
     private void SyncBattle()
     {
         _client = _campaign!.Battle;
-        _recallOpen = false;
         _hover = null;
         if (_client is not null)
         {
@@ -576,6 +596,7 @@ public partial class Main : Node2D
         DrawTerrainHover();
         DrawBattleScene();
         DrawEndCard();
+        DrawPauseMenu();
     }
 
     /// <summary>
@@ -671,6 +692,12 @@ public partial class Main : Node2D
             Card(new Rect2(x, y - 7, width, 22), Box, 5);
             UiText(new Vector2(x + width / 2, y + 9), key, Ink, 12, bold: true, centred: true);
             UiText(new Vector2(x + width + 7, y + 9), does, Muted, 12);
+            if (key == "Esc" && _campaign is null)
+            {
+                // The menu button (issue 629): a click on Esc's keycap or its label opens the pause menu.
+                _hits.Add((new Rect2(x, y - 11, width + 7 + UiWidth(does, 12), 30), () => _paused = true));
+            }
+
             x += width + 7 + UiWidth(does, 12) + 14;
         }
     }
@@ -882,12 +909,12 @@ public partial class Main : Node2D
         x = Board.X;
         var entries = new List<(Action<Rect2> Swatch, string Label)>
         {
-            (r => DrawCircle(r.GetCenter(), 7, Look(LookPalette.Player)), "yours"),
+            (r => DrawCircle(r.GetCenter(), 7, Look(LookPalette.Player)), Legend.Player),
             (r =>
             {
                 DrawCircle(r.GetCenter(), 7, Look(LookPalette.Enemy));
                 DrawArc(r.GetCenter(), 6.5f, 0, Mathf.Tau, 24, EnemyMark, 1, antialiased: true);
-            }, "theirs"),
+            }, Legend.Enemy),
         };
         if (state.Units.Any(u => u.IsCaptain))
         {
@@ -1013,7 +1040,7 @@ public partial class Main : Node2D
             y = DrawEnemyHeader(y);
         }
 
-        if (_recallOpen)
+        if (client.RecallOpen)
         {
             y = Title(y, "RECALL  click a state to rewind to it; R closes");
             var rows = client.RecallRows;
@@ -1053,7 +1080,7 @@ public partial class Main : Node2D
         var cards = _hover is { } tile && !client.EnemyPhasePlaying ? client.Hover(tile) : Array.Empty<HoverForecast>();
         var act = cards.Count > 0 ? null : client.ActShown(Animating);
         var preview = cards.Count > 0 || act is not null || _hover is not { } spot ? null : client.Preview(spot);
-        var parts = PanelLayout.Parts(_recallOpen, _logOpen, cards.Count > 0 || act is not null || preview is not null);
+        var parts = PanelLayout.Parts(client.RecallOpen, _logOpen);
         if (parts.Contains(PanelPart.Forecast))
         {
             if (cards.Count > 0)

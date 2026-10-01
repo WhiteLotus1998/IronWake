@@ -95,6 +95,27 @@ public class ClientPanelTests
         Assert.EndsWith(PlaySession.SameRolls, client.Status);
     }
 
+    /// <summary>Issue 629: once a rewind is chosen, the browser closes itself.</summary>
+    [Fact]
+    public void ARecallClosesTheRecallBrowser()
+    {
+        var client = Sallow(Prefix());
+        client.RecallOpen = true;
+
+        Assert.True(client.Recall(client.RecallRows.Last(r => r.State is not null).State!.Value));
+        Assert.False(client.RecallOpen);
+    }
+
+    [Fact]
+    public void ARefusedRecallLeavesTheRecallBrowserOpen()
+    {
+        var client = Sallow(Prefix());
+        client.RecallOpen = true;
+
+        Assert.False(client.Recall(9999));
+        Assert.True(client.RecallOpen);
+    }
+
     [Fact]
     public void ARecallToAStateThatDoesNotExistIsRefused()
     {

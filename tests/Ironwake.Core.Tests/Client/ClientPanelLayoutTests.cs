@@ -5,36 +5,25 @@ namespace Ironwake.Core.Tests.Client;
 /// <summary>The side panel's order (issue 608): Tab opens the log without hiding the card being read.</summary>
 public class ClientPanelLayoutTests
 {
+    /// <summary>Issue 629: with nothing selected, Tab took the idle FORECAST block away; it stays in every state.</summary>
     [Fact]
-    public void TabLeavesTheForecastCardVisible()
+    public void TabLeavesTheForecastBlockVisible()
     {
-        var parts = PanelLayout.Parts(recallOpen: false, logOpen: true, cardLive: true);
-
-        Assert.Equal(new[] { PanelPart.Forecast, PanelPart.Log }, parts);
+        Assert.Equal(new[] { PanelPart.Forecast, PanelPart.Log }, PanelLayout.Parts(recallOpen: false, logOpen: true));
     }
 
     [Fact]
-    public void AnOpenLogTakesTheColumnWhenNoCardIsLive()
+    public void AClosedLogSitsUnderTheForecastAndTheUnitCard()
     {
-        Assert.Equal(new[] { PanelPart.Log }, PanelLayout.Parts(recallOpen: false, logOpen: true, cardLive: false));
+        Assert.Equal(new[] { PanelPart.Forecast, PanelPart.UnitCard, PanelPart.Log }, PanelLayout.Parts(recallOpen: false, logOpen: false));
     }
 
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void AClosedLogSitsUnderTheCardAndTheUnitCard(bool cardLive)
+    public void TheRecallBrowserTakesTheWholeColumn(bool logOpen)
     {
-        Assert.Equal(new[] { PanelPart.Forecast, PanelPart.UnitCard, PanelPart.Log }, PanelLayout.Parts(recallOpen: false, logOpen: false, cardLive: cardLive));
-    }
-
-    [Theory]
-    [InlineData(true, true)]
-    [InlineData(true, false)]
-    [InlineData(false, true)]
-    [InlineData(false, false)]
-    public void TheRecallBrowserTakesTheWholeColumn(bool logOpen, bool cardLive)
-    {
-        Assert.Equal(new[] { PanelPart.Recall }, PanelLayout.Parts(recallOpen: true, logOpen: logOpen, cardLive: cardLive));
+        Assert.Equal(new[] { PanelPart.Recall }, PanelLayout.Parts(recallOpen: true, logOpen: logOpen));
     }
 
     [Fact]
@@ -49,6 +38,7 @@ public class ClientPanelLayoutTests
     [InlineData("P", "threat on tile")]
     [InlineData("S", "enemy speed")]
     [InlineData("T", "enemy reach")]
+    [InlineData("Esc", "menu")]
     public void EachKeyLabelSaysWhatTheKeyDoes(string key, string does)
     {
         Assert.Equal(does, KeyStrip.Keys.Single(k => k.Key == key).Does);
