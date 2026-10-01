@@ -267,6 +267,8 @@ public class DifficultyTests
     [InlineData("\"name\": \"\"", "name")]
     [InlineData("\"unlockedBy\": \"nightmare\"", "unlockedBy")]
     [InlineData("\"unlockedBy\": \"hard\"", "unlockedBy")]
+    [InlineData("\"tier\": 10", "tier")]
+    [InlineData("\"tier\": -10", "tier")]
     public void ABadFieldIsRefusedNamingTheEntryAndField(string fields, string field)
     {
         var e = Fails("\"normal\": {}, \"hard\": { " + fields + " }");
@@ -278,7 +280,7 @@ public class DifficultyTests
     [Fact]
     public void TheBlockRoundTripsThroughTheSerializer()
     {
-        var content = ContentLoader.Parse(Fixture.Files(rules: Rules("\"normal\": {}, \"hard\": { \"statPercent\": { \"hp\": 150 }, \"enemyLevelOffset\": -1, \"recall\": 2, \"name\": \"Hard\", \"unlockedBy\": \"normal\" }, \"soft\": { \"statPercent\": { \"str\": 80 }, \"recallOffset\": -2 }")));
+        var content = ContentLoader.Parse(Fixture.Files(rules: Rules("\"normal\": {}, \"hard\": { \"statPercent\": { \"hp\": 150 }, \"enemyLevelOffset\": -1, \"recall\": 2, \"name\": \"Hard\", \"unlockedBy\": \"normal\", \"tier\": 2 }, \"soft\": { \"statPercent\": { \"str\": 80 }, \"recallOffset\": -2, \"tier\": -1 }")));
 
         var written = ContentSerializer.Write(content);
         var reloaded = ContentLoader.Parse(written);
@@ -286,6 +288,7 @@ public class DifficultyTests
         Assert.Equal(content.Difficulties, reloaded.Difficulties);
         Assert.Equal(written.Rules.Text, ContentSerializer.Write(reloaded).Rules.Text);
         Assert.Null(reloaded.Difficulty("soft").RecallCharges);
+        Assert.Equal(-1, reloaded.Difficulty("soft").Tier);
     }
 
     [Fact]

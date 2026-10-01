@@ -19,6 +19,55 @@ public static class Screens
     };
 
     /// <summary>
+    /// The campaign's title screen (issue 677): Continue, shown only when a save exists, then New
+    /// game, Load, Options and Quit. Continue loads <see cref="Ironwake.Content.SaveStore.Newest"/>.
+    /// </summary>
+    public static IReadOnlyList<TitleChoice> CampaignTitle(bool hasSave) =>
+        (hasSave ? new[] { TitleChoice.Continue } : Array.Empty<TitleChoice>())
+            .Concat(new[] { TitleChoice.NewGame, TitleChoice.Load, TitleChoice.Options, TitleChoice.Quit })
+            .ToList();
+
+    /// <summary>The line the title screen opens on: Continue when a save exists, else New game.</summary>
+    public static TitleChoice DefaultTitleChoice(bool hasSave) => hasSave ? TitleChoice.Continue : TitleChoice.NewGame;
+
+    /// <summary>A title line's words.</summary>
+    public static string Label(TitleChoice choice) => choice switch
+    {
+        TitleChoice.Continue => "Continue",
+        TitleChoice.NewGame => "New game",
+        TitleChoice.Load => "Load",
+        TitleChoice.Options => "Options",
+        _ => "Quit",
+    };
+
+    /// <summary>The one dry line under the title menu (issue 677): the game's name and the rules version.</summary>
+    public static string TitleFooter => $"Ironwake, rules version {RulesVersion.Current}";
+
+    /// <summary>
+    /// The Options screen's lines (issue 677): each option with its value, then, for a campaign in
+    /// play, its difficulty and permadeath, read-only here (a difficulty is lowered at a camp).
+    /// </summary>
+    public static IReadOnlyList<string> OptionsLines(Ironwake.Content.Options options, CampaignRecord? record, GameContent content)
+    {
+        string OnOff(bool on) => on ? "on" : "off";
+        var lines = new List<string>
+        {
+            "Enemy phase speed: " + options.Speed,
+            "Battle scenes: " + options.Scenes switch { "all" => "all", "map" => "map only", _ => "key moments" },
+            "Confirm end turn while units are unmoved: " + OnOff(options.ConfirmEndTurn),
+            "Show enemy reach on hover: " + OnOff(options.ReachOnHover),
+            $"UI scale: {options.UiScale}",
+            $"Sound: {OnOff(options.Sound)}, volume {options.Volume}",
+        };
+        if (record is not null)
+        {
+            lines.Add("This campaign: " + Ironwake.Cli.CampaignSession.RulesLine(record, content) + " (lowered only at a camp)");
+        }
+
+        return lines;
+    }
+
+    /// <summary>
     /// Recall as a stranger gets it on the first read (issue 515, Chat's question on slice 4): the
     /// screen was built around it. Chat's wording from round 163, taken word for word in round 164.
     /// </summary>
@@ -96,6 +145,16 @@ public static class Screens
 
         return selected || recallOpen || campaign ? EscapeAction.Clear : EscapeAction.Pause;
     }
+}
+
+/// <summary>A line of the campaign's title screen (issue 677).</summary>
+public enum TitleChoice
+{
+    Continue,
+    NewGame,
+    Load,
+    Options,
+    Quit,
 }
 
 /// <summary>A choice on the pause menu (issue 629).</summary>

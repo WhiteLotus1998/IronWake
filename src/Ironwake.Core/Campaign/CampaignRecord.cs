@@ -102,6 +102,48 @@ public sealed record CampaignRecord(
     public bool Permadeath { get; init; } = true;
 
     /// <summary>
+    /// The difficulties this campaign was lowered from at a camp (issue 677), the one it began on
+    /// first; empty when it never was. Printed on the record beside the difficulty.
+    /// </summary>
+    public ValueList<string> LoweredFrom { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// Lowers the campaign's difficulty at a camp (issue 677): to <paramref name="difficultyId"/>,
+    /// which must stand on a lower <see cref="Core.Difficulty.Tier"/> than the one in play. Raising
+    /// it is refused, as is the same difficulty, and a finished campaign changes nothing. The
+    /// difficulty left is kept in <see cref="LoweredFrom"/>. There is no battle-side version: a
+    /// battle is fought under the difficulty it began on.
+    /// </summary>
+    public ScreenResult LowerDifficulty(string difficultyId, GameContent content)
+    {
+        if (!content.Difficulties.TryGetValue(difficultyId, out var target))
+        {
+            return ScreenResult.Refused(this, $"no difficulty '{difficultyId}'; there are {string.Join(", ", content.Difficulties.Values.OrderBy(d => d.Tier).Select(d => d.DisplayName))}");
+        }
+
+        if (IsFinished(content))
+        {
+            return ScreenResult.Refused(this, "the campaign is finished");
+        }
+
+        var current = content.Difficulty(Difficulty);
+        if (target.Id == current.Id)
+        {
+            return ScreenResult.Refused(this, $"the campaign is already on {current.DisplayName}");
+        }
+
+        if (target.Tier >= current.Tier)
+        {
+            return ScreenResult.Refused(this, $"{target.DisplayName} is not easier than {current.DisplayName}; a difficulty may be lowered at a camp, never raised");
+        }
+
+        return new ScreenResult(
+            this with { Difficulty = target.Id, LoweredFrom = LoweredFrom.Add(current.Id) },
+            $"difficulty lowered from {current.DisplayName} to {target.DisplayName} for the rest of the campaign; the record says so",
+            true);
+    }
+
+    /// <summary>
     /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
     /// the starting purse, the first map, nobody benched.
     /// </summary>

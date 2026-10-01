@@ -854,9 +854,9 @@ public static class ContentLoader
             var entry = new EntryNode(node.File, "difficulties." + property.Name, property.Value);
             foreach (var field in entry.Element.EnumerateObject())
             {
-                if (field.Name is not ("statPercent" or "enemyLevelOffset" or "recall" or "recallOffset" or "name" or "unlockedBy"))
+                if (field.Name is not ("statPercent" or "enemyLevelOffset" or "recall" or "recallOffset" or "name" or "unlockedBy" or "tier"))
                 {
-                    throw entry.Error(field.Name, "is not a difficulty field; expected statPercent, enemyLevelOffset, recall, recallOffset, name or unlockedBy");
+                    throw entry.Error(field.Name, "is not a difficulty field; expected statPercent, enemyLevelOffset, recall, recallOffset, name, unlockedBy or tier");
                 }
             }
 
@@ -898,7 +898,13 @@ public static class ContentLoader
                 throw entry.Error("name", "must be 1 to 24 printable ASCII characters");
             }
 
-            builder.Add(property.Name, new Difficulty(property.Name, percent, offset, recall) { RecallOffset = recallOffset, Name = name, UnlockedBy = entry.OptionalString("unlockedBy") });
+            var tier = entry.IntOr("tier", 0);
+            if (tier is < -9 or > 9)
+            {
+                throw entry.Error("tier", "must be -9 to 9");
+            }
+
+            builder.Add(property.Name, new Difficulty(property.Name, percent, offset, recall) { RecallOffset = recallOffset, Name = name, UnlockedBy = entry.OptionalString("unlockedBy"), Tier = tier });
         }
 
         foreach (var difficulty in builder.Values)

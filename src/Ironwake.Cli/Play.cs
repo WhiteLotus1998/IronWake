@@ -752,6 +752,9 @@ public sealed class PlaySession
                 }
 
                 break;
+            case "difficulty" when _campaign:
+                Error("the difficulty is lowered only at a camp, never mid-battle");
+                break;
             case "quit" when _campaign && words.Length == 1:
                 if (_state.Outcome.IsOver)
                 {

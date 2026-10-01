@@ -1119,7 +1119,7 @@ public static class ProtocolJson
     /// <summary>
     /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
     /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
-    /// a record without it reads as on), the purse, the index of the next
+    /// a record without it reads as on), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
@@ -1134,6 +1134,17 @@ public static class ProtocolJson
         if (!record.Permadeath)
         {
             w.WriteBoolean("permadeath", false);
+        }
+
+        if (record.LoweredFrom.Count > 0)
+        {
+            w.WriteStartArray("loweredFrom");
+            foreach (var id in record.LoweredFrom)
+            {
+                w.WriteStringValue(id);
+            }
+
+            w.WriteEndArray();
         }
 
         w.WriteNumber("purse", record.Purse);
@@ -1253,7 +1264,25 @@ public static class ProtocolJson
             CommonMaterial = Math.Max(0, OptionalInt(e, "commonMaterial") ?? 0),
             RareMaterial = Math.Max(0, OptionalInt(e, "rareMaterial") ?? 0),
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
+            LoweredFrom = ReadLoweredFrom(e, content),
         };
+    }
+
+    /// <summary>The optional <c>loweredFrom</c> array of a campaign record (issue 677), difficulty ids; a record written before it reads as never lowered.</summary>
+    private static ValueList<string> ReadLoweredFrom(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("loweredFrom", out _))
+        {
+            return ValueList<string>.Empty;
+        }
+
+        var ids = ReadStrings(e, "loweredFrom");
+        foreach (var id in ids.Where(id => !content.Difficulties.ContainsKey(id)))
+        {
+            throw new ProtocolException($"field 'loweredFrom': '{id}' is not a difficulty");
+        }
+
+        return ids;
     }
 
     /// <summary>The optional <c>rooms</c> array of a campaign record (issue 687), room ids as bought; a record written before it reads as none.</summary>
