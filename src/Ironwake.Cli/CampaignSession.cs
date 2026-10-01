@@ -34,7 +34,8 @@ public sealed class CampaignSession
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
           quest <id> <ally>        Fight a member's side map with one ally beside them; who falls there is gone for good
-          keep                     The keep's menu once the raid is fought: each placement, its price and what it does
+          keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
+          build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
@@ -645,11 +646,13 @@ public sealed class CampaignSession
         }
 
         Lines(BeforeCard(_record, _content, map));
+        Lines(TurnedAwayLines(_record, _content));
         _out.WriteLine(ScreenHeading(_record, _content, map));
         PrintRoster();
         PrintShop();
         Lines(QuestLines(_contentDir, _content, _record));
         PrintDeployment(map);
+        Lines(RoomLines(_record, _content));
         if (_record.KeepMenuRefusal(_content) is null)
         {
             PrintKeep();
@@ -756,13 +759,25 @@ public sealed class CampaignSession
             case ["keep"]:
                 if (_record.KeepMenuRefusal(_content) is { } closed)
                 {
-                    Error(text, closed);
+                    if (_content.Campaign.Keep.Rooms.Count > 0 && !_record.IsFinished(_content))
+                    {
+                        Lines(RoomLines(_record, _content));
+                        _out.WriteLine("Walls and ditches: " + UnitNames.Sentence(closed));
+                    }
+                    else
+                    {
+                        Error(text, closed);
+                    }
                 }
                 else
                 {
+                    Lines(RoomLines(_record, _content));
                     PrintKeep();
                 }
 
+                break;
+            case ["build", var roomId] when _content.Campaign.Keep.Edit(roomId) is null:
+                Take(_record.BuildRoom(roomId, _content), text);
                 break;
             case ["build", var editId, var atText] when TryParseCoord(atText, out var at):
                 try
@@ -776,7 +791,7 @@ public sealed class CampaignSession
 
                 break;
             case ["build", ..]:
-                Error(text, "usage: build <edit> <x,y>");
+                Error(text, "usage: build <room>, or build <edit> <x,y>");
                 break;
             case ["bench", var unitId]:
                 if (Take(_record.Bench(unitId, map), text))
@@ -1057,6 +1072,38 @@ public sealed class CampaignSession
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// The keep's rooms as the camp screen prints them (issue 687, DESIGN section 13.20): the
+    /// beds held and the beds the keep has, then each room with its price, the beds it adds and
+    /// how many of it are built; empty when the keep sells no rooms or the campaign is finished.
+    /// </summary>
+    public static IReadOnlyList<string> RoomLines(CampaignRecord record, GameContent content)
+    {
+        var keep = content.Campaign.Keep;
+        if (keep.Rooms.Count == 0 || record.IsFinished(content) || record.Beds(content) is not { } beds)
+        {
+            return Array.Empty<string>();
+        }
+
+        var lines = new List<string> { $"Rooms: beds: {record.BedsTaken}/{beds}; a fallen member keeps their bed" };
+        foreach (var room in keep.Rooms)
+        {
+            lines.Add($"  {room.Id}: {room.Name}, {room.Price}, +{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}, built {record.Rooms.Count(id => id == room.Id)} of {room.Max}");
+        }
+
+        return lines;
+    }
+
+    /// <summary>
+    /// One line per arrival of the next map who will not join because no bed is free (issue 687):
+    /// <c>no bed free: &lt;name&gt; will not join</c>, printed where they are met.
+    /// </summary>
+    public static IReadOnlyList<string> TurnedAwayLines(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        return record.TurnedAway(content).Select(id => $"no bed free: {names[id]} will not join").ToList();
     }
 
     private void Lines(IEnumerable<string> lines)

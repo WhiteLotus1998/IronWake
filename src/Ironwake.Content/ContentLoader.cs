@@ -308,6 +308,11 @@ public static class ContentLoader
             throw root.Error("keep.raid", $"'{keep.RaidId}' must be listed in maps before the keep '{keep.MapId}', since the keep's menu opens after the raid");
         }
 
+        if (keep.Beds > 0 && keep.Beds < cast.Count)
+        {
+            throw root.Error("keep.beds", $"must be at least {cast.Count}, the starting roster and every arrival, so a map's own arrival always has a bed");
+        }
+
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
@@ -321,6 +326,9 @@ public static class ContentLoader
     /// and its <c>edits</c>, each an <c>id</c>, <c>name</c>, <c>terrain</c> id, <c>price</c> of at least 1
     /// and a non-empty <c>at</c> list of <c>x,y</c> tiles; and an optional <c>raid</c>, the raid's map id
     /// under <c>content/keep</c> (issue 288). Whoever loads the map checks the tiles against it.
+    /// Optional <c>beds</c>, at least 1 and at least the cast the campaign seats without a choice,
+    /// and <c>rooms</c>, each an <c>id</c>, <c>name</c>, <c>price</c>, <c>beds</c> and <c>max</c> of
+    /// at least 1 (issue 687); rooms need beds.
     /// </summary>
     /// <summary>
     /// A campaign map's optional text card (issue 631): an array of paragraphs, each a non-blank
@@ -421,7 +429,42 @@ public static class ContentLoader
             throw node.Error("raid", "must name a map other than the keep");
         }
 
-        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits)) { RaidId = raid };
+        var beds = node.IntOr("beds", 0);
+        if (node.Has("beds") && beds < 1)
+        {
+            throw node.Error("beds", "must be at least 1");
+        }
+
+        var rooms = new List<KeepRoom>();
+        index = 0;
+        foreach (var element in node.ArrayOrEmpty("rooms"))
+        {
+            var entry = new EntryNode(node.File, "keep.rooms[" + index++ + "]", element);
+            var id = entry.String("id");
+            entry = entry.WithEntry("keep.rooms." + id);
+            if (rooms.Any(r => r.Id == id) || edits.Any(e => e.Id == id))
+            {
+                throw entry.Error("id", "is listed twice");
+            }
+
+            var room = new KeepRoom(id, entry.String("name"), entry.Int("price"), entry.Int("beds"), entry.Int("max"));
+            foreach (var (field, value) in new[] { ("price", room.Price), ("beds", room.Beds), ("max", room.Max) })
+            {
+                if (value < 1)
+                {
+                    throw entry.Error(field, "must be at least 1");
+                }
+            }
+
+            rooms.Add(room);
+        }
+
+        if (rooms.Count > 0 && beds == 0)
+        {
+            throw node.Error("rooms", "needs the keep's beds, since a room adds beds");
+        }
+
+        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits)) { RaidId = raid, Beds = beds, Rooms = ValueList<KeepRoom>.From(rooms) };
     }
 
     /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>

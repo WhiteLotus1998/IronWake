@@ -1628,3 +1628,15 @@ Warm: I built the order the same hour. Keep-round entry on `docs/samples/harrow_
 Tension: 6/10   Choice: 7/10   Surprise: 5/10
 Best turn: turn 3. The north rider arrives at 7,0 on that enemy phase unless a unit stands there, and nobody could reach it: Pell at 4,2 was one tile short. Press gives +1 Mov, but from where the captain stood (6,6) the preview read `Press would reach Dunstan, Keziah, Ottilie, Teodor (4 of 5)`, Pell outside. `order press preview from 5,4` read 5 of 5, so the captain walked back from the bridge to 5,4, called it, and Pell stood on 7,0 and the rider never came. The radius moved the captain, which is the clause the spike exists to show.
 Notes: One order called, Press, turn 3, reaching 5 of 5 because I moved until it did; that is one order, so the binding clause (a third reach fewer than all) is unread from this chair. The cost clause did not bite: the captain had no target in reach on turn 3, so the swing it took was worth nothing. Where it did bite was scarcity, not the swing: on turn 7 Pell (3 HP after the Foreman's counter) and Keziah stood in the boss's reach having acted, which is exactly the turn Fall back is for, and it was spent. Both died; I recalled the turn, reordered the strikes, and Dunstan's 56 percent lance finished the Foreman. So the lesson the order taught was "Press early is a tax on the turn Fall back wanted", which is a choice, though not the one the cost clause asks for. Rally never looked right: 15 percent of 17 is 2. The preview is the order's best part; counting a diamond by hand is what the wake rule already asks, and `from <x,y>` makes it a question you can ask before you walk. Transcript: `docs/transcripts/2026-10-01-harrow_weir_orders-85.txt`.
+
+## 2026-10-01 — The camp screen, 13.20 rooms and beds (#687) — Code
+
+Seed: 687   Result: no battle; one camp before Starting Alone, on the shipped content
+Systems entry, not a Fun Gate entry; warm, since I built it the same hour. Question: does a room read as a want on the first camp?
+Best moment: the first `build bunk`. It took 400 of the 500 purse and left 100, so the Iron Sword on the shelf was gone for this camp. That is the trade 13.20 asks for, a bed against something else, and it happened at the first prompt.
+Notes: Transcript and script are `docs/transcripts/2026-10-01-campaign-687-rooms.*`.
+- **The trade is real, but the bed buys nothing yet.** The shipped keep has 12 beds against 10 on the roster and one arrival, because the campaign still opens with the whole cast (0138). No meeting by choice exists, so the spare bed is never contested, and the room I bought was a tax. I was not tense once, and I would not buy one again in this campaign.
+- **The walls line reads well.** `keep` before the raid prints the rooms, then says the walls wait for the raid. A player sees both prices together before the raid, which is where the "a bed is a wall" sum has to show.
+- **What I did not see:** a refused meeting on the screen (tests only), and the purse at the raid screen, which is what the kill clause reads.
+
+— Code

@@ -121,6 +121,28 @@ public static class ContentSerializer
                     writer.WriteString("raid", campaign.Keep.RaidId);
                 }
 
+                if (campaign.Keep.Beds > 0)
+                {
+                    writer.WriteNumber("beds", campaign.Keep.Beds);
+                }
+
+                if (campaign.Keep.Rooms.Count > 0)
+                {
+                    writer.WriteStartArray("rooms");
+                    foreach (var room in campaign.Keep.Rooms)
+                    {
+                        writer.WriteStartObject();
+                        writer.WriteString("id", room.Id);
+                        writer.WriteString("name", room.Name);
+                        writer.WriteNumber("price", room.Price);
+                        writer.WriteNumber("beds", room.Beds);
+                        writer.WriteNumber("max", room.Max);
+                        writer.WriteEndObject();
+                    }
+
+                    writer.WriteEndArray();
+                }
+
                 writer.WriteStartArray("edits");
                 foreach (var edit in campaign.Keep.Edits)
                 {

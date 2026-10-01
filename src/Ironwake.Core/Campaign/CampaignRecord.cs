@@ -55,6 +55,12 @@ public sealed record CampaignRecord(
     public ValueList<KeepWork> Keep { get; init; } = ValueList<KeepWork>.Empty;
 
     /// <summary>
+    /// The rooms bought for the keep (issue 687, DESIGN section 13.20), by room id in the order
+    /// they were bought. Between maps, so a Recall never touches it.
+    /// </summary>
+    public ValueList<string> Rooms { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
     /// Whether a fall is for good (issue 664), chosen once at the start like the difficulty and
     /// printed on the record. Off, a unit that falls on a won map or a side map comes back
     /// <see cref="Core.Wound"/>ed instead of joining <see cref="Fallen"/>; the captain's death and
@@ -126,10 +132,40 @@ public sealed record CampaignRecord(
             return Roster;
         }
 
-        var arrivals = NextMap(content).Arrives.Where(id => Find(id) is null && !Fallen.Contains(id)).Select(content.Unit).ToList();
+        var arrivals = Arriving(content).Take(FreeBeds(content) ?? int.MaxValue).Select(content.Unit).ToList();
         var order = content.Cast.Select(u => u.Id).ToList();
         return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
+
+    /// <summary>The next map's arrivals not yet on the roster or fallen, in content order (issue 632).</summary>
+    private IEnumerable<string> Arriving(GameContent content) =>
+        IsFinished(content) ? Enumerable.Empty<string>() : NextMap(content).Arrives.Where(id => Find(id) is null && !Fallen.Contains(id));
+
+    /// <summary>
+    /// The keep's beds (issue 687, DESIGN section 13.20): the beds it starts with and every bought
+    /// room's, or null when the campaign counts no beds.
+    /// </summary>
+    public int? Beds(GameContent content)
+    {
+        var keep = content.Campaign.Keep;
+        return keep.Beds == 0 ? null : keep.Beds + Rooms.Sum(id => keep.Room(id)?.Beds ?? 0);
+    }
+
+    /// <summary>
+    /// The beds held (issue 687): one per member who has joined, living or fallen. A death never
+    /// frees a bed (DECISIONS/0010, 0137).
+    /// </summary>
+    public int BedsTaken => Roster.Count + Fallen.Count;
+
+    /// <summary>The beds no member holds, or null when the campaign counts no beds.</summary>
+    public int? FreeBeds(GameContent content) => Beds(content) is { } beds ? Math.Max(0, beds - BedsTaken) : null;
+
+    /// <summary>
+    /// The next map's arrivals who will not join because no bed is free (issue 687), in content
+    /// order: met on the map, never on the roster, never fallen, and never benched in their place.
+    /// </summary>
+    public IReadOnlyList<string> TurnedAway(GameContent content) =>
+        Arriving(content).Skip(FreeBeds(content) ?? int.MaxValue).ToList();
 
     /// <summary>Whether every map of the campaign has been won.</summary>
     public bool IsFinished(GameContent content) => MapIndex >= content.Campaign.Maps.Count;
@@ -154,7 +190,7 @@ public sealed record CampaignRecord(
     /// The next battle: <paramref name="map"/> (the next map, as the caller loaded it) under the
     /// campaign's difficulty, with the roster less the bench filling its slots in roster order,
     /// so benching a unit lets the next recruit take its bare slot, which is a deployment and not
-    /// gate 4's ablation. A named slot whose recruit has fallen stays empty. The map's arrivals
+    /// gate 4's ablation. A named slot whose recruit has fallen, or was turned away for want of a bed (issue 687), stays empty. The map's arrivals
     /// join the roster for it (<see cref="Present"/>, issue 632). The battle knows which campaign map
     /// it is (<see cref="BattleState.CampaignMap"/>), for an heirloom's floor (issue 646).
     /// </summary>
@@ -162,8 +198,9 @@ public sealed record CampaignRecord(
     {
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
         var roster = Present(content).Where(u => !Benched.Contains(u.Id)).ToList();
+        var turnedAway = TurnedAway(content);
         var fallenNamed = map.Placements.OfType<PlayerPlacement>()
-            .Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && Fallen.Contains(id))
+            .Where(p => p.Slot == PlayerSlot.NamedRecruit && p.RecruitId is { } id && (Fallen.Contains(id) || turnedAway.Contains(id)))
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
@@ -847,6 +884,48 @@ public sealed record CampaignRecord(
         return new ScreenResult(
             this with { Purse = Purse - edit.Price, Keep = Keep.Add(new KeepWork(edit.Id, at)) },
             $"built for {edit.Price}, the purse holds {Purse - edit.Price}: {line}",
+            true);
+    }
+
+    /// <summary>
+    /// Buys the room <paramref name="roomId"/> for the keep (issue 687, DESIGN section 13.20): open
+    /// at every camp from map 1, unlike the edits, which wait for the raid. Refused for a campaign
+    /// whose keep sells no rooms, a room it does not sell (named), a room already built its
+    /// <see cref="KeepRoom.Max"/> times, a finished campaign, or a purse short of the price.
+    /// </summary>
+    public ScreenResult BuildRoom(string roomId, GameContent content)
+    {
+        var keep = content.Campaign.Keep;
+        if (keep.Rooms.Count == 0)
+        {
+            return ScreenResult.Refused(this, "the keep has no rooms to build");
+        }
+
+        if (keep.Room(roomId) is not { } room)
+        {
+            return ScreenResult.Refused(this, $"the keep has no room '{roomId}'; it builds {string.Join(", ", keep.Rooms.Select(r => r.Id))}");
+        }
+
+        if (IsFinished(content))
+        {
+            return ScreenResult.Refused(this, "the campaign is finished");
+        }
+
+        var built = Rooms.Count(id => id == room.Id);
+        if (built >= room.Max)
+        {
+            return ScreenResult.Refused(this, $"{room.Name} is built {built} of {room.Max}");
+        }
+
+        if (Purse < room.Price)
+        {
+            return ScreenResult.Refused(this, $"{room.Name} costs {room.Price} and the purse holds {Purse}");
+        }
+
+        var after = this with { Purse = Purse - room.Price, Rooms = Rooms.Add(room.Id) };
+        return new ScreenResult(
+            after,
+            $"{room.Name} built for {room.Price}, the purse holds {after.Purse}; beds: {after.BedsTaken}/{after.Beds(content)}",
             true);
     }
 
