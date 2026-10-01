@@ -9,7 +9,7 @@ namespace Ironwake.Godot;
 /// Showcase slice 3 (issue 513): motion over both phases. Each set of <see cref="ClientSession.Beats"/>
 /// plays in order: a move walks its path, a strike lunges and every strike's number rises off its
 /// target (a miss says so, a crit is louder), a death fades the token and leaves a mark on its tile
-/// for the rest of the phase. The enemy phase plays itself at the speed S sets; Space jumps to the
+/// for the rest of the phase. The enemy phase plays itself at the game speed the top bar's buttons or S set; Space jumps to the
 /// next event, C to the end. Nothing here hides state: the board is always the state the protocol
 /// has after the revealed events, or the one before the strike being shown, and the event log steps
 /// line by line beside it. <c>--strip &lt;prefix&gt; &lt;count&gt; &lt;seconds&gt;</c> saves
@@ -17,15 +17,14 @@ namespace Ironwake.Godot;
 /// </summary>
 public partial class Main
 {
-    private static readonly (string Name, float Factor)[] Speeds = { ("slow", 1.6f), ("normal", 1f), ("fast", 0.5f) };
-
     /// <summary>How long a strike's number takes to rise and fade.</summary>
     private const float PopLife = 1.0f;
 
     /// <summary>The fixed frame step on the strip's clock.</summary>
     private const float StripStep = 1f / 30;
 
-    private int _speed = 1;
+    /// <summary>The game speed's index in <see cref="GameSpeed.Speeds"/> (issue 625): set by the top bar's buttons or S, kept for the session.</summary>
+    private int _speed = GameSpeed.Default;
 
     /// <summary>Seconds since the battle opened: real time, or the strip's fixed clock.</summary>
     private float _clock;
@@ -47,7 +46,7 @@ public partial class Main
     private int _stripFrames;
     private float _stripStart;
 
-    private float Factor => Speeds[_speed].Factor;
+    private float Factor => GameSpeed.Factor(_speed);
 
     private int _scrubSerialSeen;
     private float _scrubStart = float.NegativeInfinity;
@@ -595,7 +594,7 @@ public partial class Main
         var width = _caps.GetStringSize(label, fontSize: 11).X + 28;
         Card(new Rect2(PanelOrigin.X - 4, top, width, 26), Box, 13);
         DrawString(_caps, new Vector2(PanelOrigin.X + 10, top + 17), label, fontSize: 11, modulate: EnemyMark);
-        UiText(new Vector2(PanelOrigin.X + width + 8, top + 18), $"speed {Speeds[_speed].Name} (S)  |  Space next  |  C to the end", Muted, 12);
+        UiText(new Vector2(PanelOrigin.X + width + 8, top + 18), $"game speed {GameSpeed.Speeds[_speed].Name} (S)  |  Space next  |  C to the end", Muted, 12);
         return top + 26 + LineHeight + 6;
     }
 
