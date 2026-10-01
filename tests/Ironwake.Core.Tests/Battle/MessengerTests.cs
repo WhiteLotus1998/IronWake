@@ -170,4 +170,44 @@ public class MessengerTests
 
         Assert.Equal("messenger at 2,2, running, 1 of its phases from the road at 6,2 on open ground", line);
     }
+
+    [Fact]
+    public void AKilledMessengerReadsAsFallenNotGone()
+    {
+        BattleState? after = null;
+        for (ulong seed = 1; seed <= 40 && after is null; seed++)
+        {
+            var state = Start(seed, map: Field());
+            state = state.WithUnit(state.Find("rider-1")! with { Hp = 1 });
+            var result = state.Try(new Attack("hale", "rider-1"));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            if (result.Next.Find("rider-1") is null)
+            {
+                after = result.Next;
+            }
+        }
+
+        Assert.NotNull(after);
+        Assert.Equal("messenger: fallen at 2,2; the word never left", MapRenderer.MessengerLine(after, Starter));
+        Assert.Contains("messenger fallen 2,2", after.Canonical());
+    }
+
+    [Fact]
+    public void AnEscapedMessengerReadsAsGoneByTheRoad()
+    {
+        var result = EnemyPhase(Start(map: Field()));
+
+        Assert.Equal("messenger: gone by the road at 6,2; the word is out", MapRenderer.MessengerLine(result.Next, Starter));
+        Assert.Contains("messenger escaped 6,2", result.Next.Canonical());
+    }
+
+    [Fact]
+    public void AMapWithoutTheHeaderPrintsNoMessengerLine()
+    {
+        var state = Start(map: Field(header: false));
+
+        Assert.Null(MapRenderer.MessengerLine(state, Starter));
+        Assert.Null(MapRenderer.MessengerLine(state.WithoutUnit("rider-1"), Starter));
+        Assert.DoesNotContain("messenger", state.WithoutUnit("rider-1").Canonical());
+    }
 }

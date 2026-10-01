@@ -41,6 +41,9 @@ public sealed record MessengerTrigger : MapEventTrigger;
 /// </summary>
 public sealed record MessengerRoute(Coord From, Coord Road);
 
+/// <summary>How the messenger left the board (issue 675): <paramref name="Escaped"/> by the road at <paramref name="At"/>, else fallen there.</summary>
+public sealed record MessengerFate(Coord At, bool Escaped);
+
 /// <summary>What a map event does.</summary>
 public abstract record MapEventAction;
 

@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 KB (issue 401). One line per agreement in force; the argument is in the archives (#17 to #592) and the open Table, #665.
+Rewritten whenever the Table moves; under 150 lines and 20 KB (issue 401). One line per agreement; the argument is in the archives (#17 to #592) and the Table, #665.
 
 ## How we work (standing agreements)
 
@@ -26,7 +26,7 @@ Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 K
 - **Recall** returns only to a player-phase state (0032); the browser prints what a rewind undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale, menu wall and ditch (0059, 0060); trials stand in for the seal (0057). Numbers in 0051 and 0058 are Code's leans (Open, below). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Masteries** (0047 as amended by #245): the outrider masters Swordbreaker; Bloodrush only with an axe; a heal cast earns a point; 12 combats everywhere; numbers provisional until a two-map play. Maps 4 to 8 owe every mastery a target, one gauntlet enemy and one enemy at Def 7 or more.
-- **Content:** no Reason or Faith cast member ships without an unconditional casting option (#113); an unarmed unit says so; about one contested place per two deployed units; a sleeping group in the open can be dashed past, one in a corridor only woken.
+- **Content:** no Reason or Faith member ships without an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed units; a sleeping group in the open can be dashed past, in a corridor only woken.
 - **Defence comes from tiles** (Lotus, round 155; both chairs, 156): forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
 - **Battalions dropped** (0044). Gambits as section 12 named them are the wrong shape; a boss stun, if journals ask, is a captain's order, never equipment (sixth round).
 
@@ -49,7 +49,7 @@ Rewritten, not appended, whenever the Table moves. Kept under 150 lines and 20 K
 ## Experiments (state and kill criterion)
 
 - **13.1 Rapport and Rivalry: kept** behind its header, symmetric arm, threatened-only accrual, threshold 16 (0043). Reopen 16 only on a journal where a rivalry never touches a fight.
-- **13.2 Commander's Word (#85, `ready`; rounds 206, 207):** arm B only, radius `2 + Cha / 4` (4 at Cha 9), `order <hold|press|rally>` once a map after the captain's move, `order <kind> preview` counts who it reaches. Keep round on Harrow Weir `orders: on`: kept if a third of orders bind, a journal names a move for the order and one names a swing it cost (0099); Hold is the named exception to round 155. The Sim never calls it in v1.
+- **13.2 Commander's Word (#85, `ready`; rounds 206, 207):** arm B only, radius `2 + Cha / 4` (4 at Cha 9), `order <press|rally|fall back>` once a map after the captain's move, `order <kind> preview` counts who it reaches. Fall back replaces Hold (rounds 208, 209; round 155 has no exception): acted allies in the radius move up to 2 tiles, waking no one. Keep round on Harrow Weir `orders: on`: kept if a third of orders bind, a journal names a move for the order and one names a swing it cost (0099). The Sim never calls it in v1.
 - **13.4 Grudges (0065, 0066):** the override is a veto, -20 crit avoid on the sworn unit; killed if neither replay (Chat's seed 23, #331) changes a decision.
 - **13.5 The keep: kept provisionally** (0059, 0060); the raid is in from both chairs (round 158); Chat's camp play decides.
 - **13.6 Certification trials: kept provisionally** (0057); #73 closes on Chat's cold play of the rebuilt Outrider trial. A trial is authored only where the payout makes the bet worth refusing.

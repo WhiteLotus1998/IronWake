@@ -54,6 +54,13 @@ public sealed record BattleState(
     /// </summary>
     public ValueList<Coord> Opened { get; init; }
 
+    /// <summary>
+    /// How the map's messenger left the board (DESIGN.md 13.24, issue 675): null while it stands
+    /// or on a map without one; fallen where it was removed, or gone by the road when it escaped.
+    /// A Recall restores it with the board.
+    /// </summary>
+    public MessengerFate? MessengerGone { get; init; }
+
     /// <summary>The map's chests not yet opened, in file order (issue 649).</summary>
     public IEnumerable<Chest> ClosedChests => Map.Chests.Where(c => !Opened.Contains(c.At));
 
@@ -471,14 +478,19 @@ public sealed record BattleState(
         throw new ArgumentException($"no living unit with id '{unit.Id}'", nameof(unit));
     }
 
-    /// <summary>This state with a unit removed by id. The unit must exist.</summary>
+    /// <summary>
+    /// This state with a unit removed by id. The unit must exist. Removing the messenger records
+    /// it as fallen on its tile (<see cref="MessengerGone"/>); <see cref="Messenger.AfterMove"/>
+    /// marks an escape over that.
+    /// </summary>
     public BattleState WithoutUnit(string id)
     {
         for (var i = 0; i < Units.Count; i++)
         {
             if (Units[i].Id == id)
             {
-                return this with { Units = Units.RemoveAt(i) };
+                var gone = Messenger.Is(this, Units[i]) ? new MessengerFate(Units[i].At, Escaped: false) : MessengerGone;
+                return this with { Units = Units.RemoveAt(i), MessengerGone = gone };
             }
         }
 
@@ -582,6 +594,11 @@ public sealed record BattleState(
             }
 
             sb.Append('\n');
+        }
+
+        if (MessengerGone is { } fate)
+        {
+            sb.Append("messenger ").Append(fate.Escaped ? "escaped" : "fallen").Append(' ').Append(fate.At).Append('\n');
         }
 
         foreach (var unit in Units)

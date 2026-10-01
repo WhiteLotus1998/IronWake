@@ -70,6 +70,6 @@ public static class Messenger
         }
 
         events.Add(new MessengerEscaped(mover.Id, mover.At));
-        return MapEvents.AfterMessenger(state.WithoutUnit(mover.Id), content, events);
+        return MapEvents.AfterMessenger(state.WithoutUnit(mover.Id) with { MessengerGone = new MessengerFate(mover.At, Escaped: true) }, content, events);
     }
 }

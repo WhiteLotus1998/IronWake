@@ -643,14 +643,11 @@ public static class MapRenderer
             : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({(map.ExitAfterMove ? EscapeRuleAfterMove : EscapeRule)})";
 
     /// <summary>
-    /// The chest line (issue 649): <c>chests ($): 3,1 Steel Sword, Field Dressing; 9,4 Iron Bow (</c>
-    /// <see cref="ChestRule"/><c>)</c>, each closed chest in file order with its tile and contents.
-    /// Null when no chest is left closed. The guard, if any, is a unit on the board; the way in is not printed.
-    /// </summary>
-    /// <summary>
     /// Where the messenger stands and how far the road is (DESIGN.md 13.24): its own phases at
     /// full Mov on open ground, the party left out, so a held path only makes it longer. Null
-    /// when the map has no messenger or it is off the board; a line saying so once it is gone.
+    /// when the map has no messenger. Once it is gone the line says how (issue 675):
+    /// <c>messenger: fallen at 8,2; the word never left</c> or
+    /// <c>messenger: gone by the road at 15,1; the word is out</c>.
     /// </summary>
     public static string? MessengerLine(BattleState state, GameContent content)
     {
@@ -661,7 +658,9 @@ public static class MapRenderer
 
         if (Messenger.On(state) is not { } unit)
         {
-            return $"messenger: off the board (road at {route.Road})";
+            return state.MessengerGone is { Escaped: true } escaped
+                ? $"messenger: gone by the road at {escaped.At}; the word is out"
+                : $"messenger: fallen at {state.MessengerGone?.At ?? route.From}; the word never left";
         }
 
         var phases = Messenger.PhasesToRoad(state, content, unit);
@@ -670,6 +669,11 @@ public static class MapRenderer
         return $"messenger at {unit.At}, {awake}, {away}";
     }
 
+    /// <summary>
+    /// The chest line (issue 649): <c>chests ($): 3,1 Steel Sword, Field Dressing; 9,4 Iron Bow (</c>
+    /// <see cref="ChestRule"/><c>)</c>, each closed chest in file order with its tile and contents.
+    /// Null when no chest is left closed. The guard, if any, is a unit on the board; the way in is not printed.
+    /// </summary>
     public static string? ChestLegend(IEnumerable<Chest> closed, GameContent content)
     {
         var listed = closed.Select(c => $"{c.At} {string.Join(", ", c.Items.Select(content.ItemName))}").ToList();
