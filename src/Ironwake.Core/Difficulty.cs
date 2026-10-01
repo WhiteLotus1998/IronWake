@@ -37,6 +37,13 @@ public sealed record Difficulty(string Id, Stats StatPercent, int EnemyLevelOffs
     /// </summary>
     public string? UnlockedBy { get; init; }
 
+    /// <summary>
+    /// Where this difficulty stands on the ladder (issue 677): lower is easier, Captain (the identity)
+    /// at 0 by default. A campaign's difficulty may be lowered at a camp to one with a lower tier,
+    /// never raised; the tier changes no rule.
+    /// </summary>
+    public int Tier { get; init; }
+
     /// <summary>What the screens call this difficulty: its <see cref="Name"/>, else its id.</summary>
     public string DisplayName => Name ?? Id;
 

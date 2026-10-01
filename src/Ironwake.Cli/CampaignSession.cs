@@ -41,6 +41,7 @@ public sealed class CampaignSession
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
           record                   The campaign record as one JSON line (the protocol's campaign shape)
+          difficulty <name>        Lower the campaign's difficulty for the rest of it; never raised, never mid-battle
           save <name>              Save the campaign as it stands at this camp; every camp also autosaves, keeping the last three
           saves                    Every save: the autosaves, newest first, then the named ones
           march                    Start the next map
@@ -744,6 +745,12 @@ public sealed class CampaignSession
             case ["refine", var unitId, var slotText, var stat] when int.TryParse(slotText, out var slot):
                 Take(_record.Refine(unitId, slot - 1, stat, _content), text);
                 break;
+            case ["difficulty", var difficultyName]:
+                Take(_record.LowerDifficulty(DifficultyNamed(_content, difficultyName)?.Id ?? difficultyName, _content), text);
+                break;
+            case ["difficulty", ..]:
+                Error(text, "usage: difficulty <name>; it may be lowered at a camp, never raised");
+                break;
             case ["classes"]:
                 PrintClasses(null);
                 break;
@@ -889,8 +896,9 @@ public sealed class CampaignSession
     /// </summary>
     public static string RulesLine(CampaignRecord record, GameContent content)
     {
-        var name = content.Difficulties.TryGetValue(record.Difficulty, out var difficulty) ? difficulty.DisplayName : record.Difficulty;
-        return $"difficulty {name}, permadeath {(record.Permadeath ? "on" : "off")}";
+        string Name(string id) => content.Difficulties.TryGetValue(id, out var difficulty) ? difficulty.DisplayName : id;
+        var lowered = record.LoweredFrom.Count > 0 ? $" (lowered from {Name(record.LoweredFrom[0])})" : "";
+        return $"difficulty {Name(record.Difficulty)}{lowered}, permadeath {(record.Permadeath ? "on" : "off")}";
     }
 
     /// <summary>The difficulty a <c>--difficulty</c> value names: its id, or its display name in any case; null when none.</summary>

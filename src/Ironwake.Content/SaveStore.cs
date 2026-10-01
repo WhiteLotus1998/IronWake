@@ -158,13 +158,14 @@ public sealed class SaveStore
 
     private string ProfilePath => Path.Combine(Directory, ProfileFile);
 
-    /// <summary>The difficulty ids a campaign has been won on, from the profile; none when there is no profile yet.</summary>
-    public IReadOnlyList<string> Won() =>
-        File.Exists(ProfilePath)
-            ? File.ReadAllLines(ProfilePath).Select(l => l.Trim()).Where(l => l.Length > 0).Distinct().ToList()
-            : Array.Empty<string>();
+    private IReadOnlyList<string> ProfileLines() =>
+        File.Exists(ProfilePath) ? File.ReadAllLines(ProfilePath) : Array.Empty<string>();
 
-    /// <summary>Records a campaign won on <paramref name="difficulty"/> in the profile; true when it was not there before.</summary>
+    /// <summary>The difficulty ids a campaign has been won on, from the profile (its lines without a colon); none when there is no profile yet.</summary>
+    public IReadOnlyList<string> Won() =>
+        ProfileLines().Select(l => l.Trim()).Where(l => l.Length > 0 && !Options.IsOptionLine(l)).Distinct().ToList();
+
+    /// <summary>Records a campaign won on <paramref name="difficulty"/> in the profile, its options kept; true when it was not there before.</summary>
     public bool RecordWin(string difficulty)
     {
         var won = Won();
@@ -173,8 +174,49 @@ public sealed class SaveStore
             return false;
         }
 
-        System.IO.Directory.CreateDirectory(Directory);
-        File.WriteAllLines(ProfilePath, won.Append(difficulty));
+        WriteProfile(won.Append(difficulty).ToList(), ReadOptions().Options);
         return true;
+    }
+
+    /// <summary>
+    /// The player's options from the profile (issue 677), the defaults where it sets none, and a
+    /// warning for each line that could not be read.
+    /// </summary>
+    public (Options Options, IReadOnlyList<string> Warnings) ReadOptions() => Options.Read(ProfileLines());
+
+    /// <summary>Writes <paramref name="options"/> to the profile (issue 677), the won difficulties kept: each option takes effect on change, so a renderer writes on every change.</summary>
+    public void WriteOptions(Options options) => WriteProfile(Won(), options);
+
+    private void WriteProfile(IReadOnlyList<string> won, Options options)
+    {
+        System.IO.Directory.CreateDirectory(Directory);
+        var lines = won.ToList();
+        if (options != new Options() || ProfileLines().Any(l => Options.IsOptionLine(l.Trim())))
+        {
+            lines.AddRange(options.Lines());
+        }
+
+        File.WriteAllLines(ProfilePath, lines);
+    }
+
+    /// <summary>
+    /// The save Continue loads (issue 677): the newest written of every save, autosave or named, or
+    /// null when there is none. A tie in the write time goes to the earlier name in <see cref="Names"/>,
+    /// so <c>auto-1</c> beats a named save written in the same instant.
+    /// </summary>
+    public string? Newest()
+    {
+        string? newest = null;
+        var newestTime = DateTime.MinValue;
+        foreach (var name in Names())
+        {
+            var time = File.GetLastWriteTimeUtc(PathOf(name));
+            if (newest is null || time > newestTime)
+            {
+                (newest, newestTime) = (name, time);
+            }
+        }
+
+        return newest;
     }
 }

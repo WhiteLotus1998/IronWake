@@ -386,6 +386,11 @@ public static class ContentSerializer
                         writer.WriteString("unlockedBy", needed);
                     }
 
+                    if (difficulty.Tier != 0)
+                    {
+                        writer.WriteNumber("tier", difficulty.Tier);
+                    }
+
                     writer.WriteEndObject();
                 }
 
