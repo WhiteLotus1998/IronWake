@@ -162,10 +162,18 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
-    /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
-    /// the starting purse, the first map, nobody benched.
+    /// The captain's origin (issue 681), chosen at the start, or null for the cast file's captain.
+    /// Printed on the captain's card; the stats it set are already on the roster.
     /// </summary>
-    public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty, bool permadeath = true)
+    public string? Origin { get; init; }
+
+    /// <summary>
+    /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
+    /// the starting purse, the first map, nobody benched. <paramref name="origin"/> (issue 681)
+    /// sets the captain's card from the campaign's origins, and <paramref name="captain"/> the
+    /// pronoun text uses for the captain; either left null keeps the cast file's.
+    /// </summary>
+    public static CampaignRecord Start(GameContent content, ulong seed, string difficulty = NormalDifficulty, bool permadeath = true, string? origin = null, Pronoun? captain = null)
     {
         if (content.Campaign.Maps.Count == 0)
         {
@@ -182,7 +190,25 @@ public sealed record CampaignRecord(
             content.Difficulty(difficulty);
         }
 
-        return new CampaignRecord(ArrivedBefore(content, 0), ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty) { Permadeath = permadeath };
+        var chosen = origin is null ? null
+            : content.Campaign.Origin(origin) ?? throw new ArgumentException(
+                content.Campaign.Origins.Count == 0
+                    ? $"the campaign offers no origins, so '{origin}' cannot be chosen"
+                    : $"the campaign has no origin '{origin}'; it offers {string.Join(", ", content.Campaign.Origins.Select(o => o.Id))}");
+        var captainId = content.Cast[0].Id;
+        var roster = ArrivedBefore(content, 0).Select(u => u.Id != captainId ? u : Captain(u, chosen, captain));
+        return new CampaignRecord(ValueList<Unit>.From(roster), ValueList<string>.Empty, content.Campaign.StartingPurse, 0, seed, difficulty, ValueList<string>.Empty)
+        {
+            Permadeath = permadeath,
+            Origin = chosen?.Id,
+        };
+    }
+
+    /// <summary>The cast's captain as the start's choices make them (issue 681).</summary>
+    private static Unit Captain(Unit cast, CaptainOrigin? origin, Pronoun? pronoun)
+    {
+        var captain = origin is null ? cast : origin.Apply(cast);
+        return pronoun is null ? captain : captain with { Pronoun = pronoun };
     }
 
     /// <summary>
@@ -194,16 +220,19 @@ public sealed record CampaignRecord(
     /// <paramref name="seed"/> itself, as <see cref="BattleSeed"/> promises for the opening map:
     /// <c>play &lt;map&gt; --seed N</c> reproduces its rolls. Refuses a map the campaign does not list.
     /// </summary>
-    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true)
+    public static CampaignRecord StartAt(GameContent content, ulong seed, string mapId, string difficulty = NormalDifficulty, bool permadeath = true, string? origin = null, Pronoun? captain = null)
     {
-        var start = Start(content, seed, difficulty, permadeath);
+        var start = Start(content, seed, difficulty, permadeath, origin, captain);
         var index = content.Campaign.Maps.ToList().FindIndex(m => m.MapId == mapId);
         if (index < 0)
         {
             throw new ArgumentException($"the campaign has no map '{mapId}'; it lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
         }
 
-        return start with { Roster = ArrivedBefore(content, index), MapIndex = index, Seed = unchecked(seed - (ulong)index) };
+        var captainId = content.Cast[0].Id;
+        var startCaptain = start.Roster.Single(u => u.Id == captainId);
+        var roster = ArrivedBefore(content, index).Select(u => u.Id == captainId ? startCaptain : u);
+        return start with { Roster = ValueList<Unit>.From(roster), MapIndex = index, Seed = unchecked(seed - (ulong)index) };
     }
 
     /// <summary>
@@ -278,6 +307,9 @@ public sealed record CampaignRecord(
     public ulong BattleSeed => unchecked(Seed + (ulong)MapIndex);
 
     public Unit? Find(string unitId) => Roster.FirstOrDefault(u => u.Id == unitId);
+
+    /// <summary>The captain on the roster (the cast's first, issue 681), or null when the content has no cast or the roster lacks them.</summary>
+    public Unit? Captain(GameContent content) => content.Cast.Count == 0 ? null : Find(content.Cast[0].Id);
 
     /// <summary>
     /// The next battle: <paramref name="map"/> (the next map, as the caller loaded it) under the
@@ -452,7 +484,7 @@ public sealed record CampaignRecord(
 
         if (slot < 0 || slot >= unit.Inventory.Count)
         {
-            return ScreenResult.Refused(this, $"{unit.Id} has no slot {slot + 1}; {Referent.For(content, unit.Id, unit.Id).Subject} {Referent.For(content, unit.Id, unit.Id).Verb("carries", "carry")} {unit.Inventory.Count}");
+            return ScreenResult.Refused(this, $"{unit.Id} has no slot {slot + 1}; {Referent.For(content, unit).Subject} {Referent.For(content, unit).Verb("carries", "carry")} {unit.Inventory.Count}");
         }
 
         var stack = unit.Inventory.Items[slot];

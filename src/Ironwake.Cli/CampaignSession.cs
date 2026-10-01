@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -111,6 +111,8 @@ public sealed class CampaignSession
         string? load = null;
         var resume = false;
         var permadeath = true;
+        string? origin = null;
+        Pronoun? captain = null;
         for (var i = 0; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -161,6 +163,14 @@ public sealed class CampaignSession
                     permadeath = value == "on";
                     i++;
                     break;
+                case "--origin" when value is not null:
+                    origin = value;
+                    i++;
+                    break;
+                case "--captain" when value is "he" or "she":
+                    captain = value == "he" ? Pronoun.He : Pronoun.She;
+                    i++;
+                    break;
                 default:
                     Console.WriteLine($"ERROR: unexpected argument '{args[i]}'");
                     Console.WriteLine(Usage);
@@ -178,6 +188,13 @@ public sealed class CampaignSession
         if ((load is not null || resume) && (from is not null || (load is not null && resume)))
         {
             Console.WriteLine("ERROR: --load, --resume and --from each pick where the campaign starts; give one");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if ((load is not null || resume) && (origin is not null || captain is not null))
+        {
+            Console.WriteLine("ERROR: --origin and --captain choose a new campaign's captain; a loaded campaign keeps its own");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -223,6 +240,14 @@ public sealed class CampaignSession
             difficulty = chosen.Id;
         }
 
+        if (origin is not null && content.Campaign.Origin(origin) is null)
+        {
+            Console.WriteLine(content.Campaign.Origins.Count == 0
+                ? $"ERROR: the campaign offers no origins, so '{origin}' cannot be chosen"
+                : $"ERROR: the campaign has no origin '{origin}'; it offers {string.Join(", ", content.Campaign.Origins.Select(o => o.Id))}");
+            return 2;
+        }
+
         if (from is not null && content.Campaign.Maps.All(m => m.MapId != from))
         {
             Console.WriteLine($"ERROR: the campaign has no map '{from}'; it lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
@@ -252,7 +277,7 @@ public sealed class CampaignSession
             return 2;
         }
 
-        var record = from is null ? CampaignRecord.Start(content, seed, difficulty, permadeath) : CampaignRecord.StartAt(content, seed, from, difficulty, permadeath);
+        var record = from is null ? CampaignRecord.Start(content, seed, difficulty, permadeath, origin, captain) : CampaignRecord.StartAt(content, seed, from, difficulty, permadeath, origin, captain);
         IReadOnlyList<string>? battleLines = null;
         if (load is not null)
         {
@@ -291,6 +316,10 @@ public sealed class CampaignSession
     private int Play(TextReader input, bool strict)
     {
         _out.WriteLine($"Campaign, seed {_record.Seed}, {RulesLine(_record, _content)}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
+        if (CaptainLine(_record, _content) is { } captainLine)
+        {
+            _out.WriteLine(captainLine);
+        }
         var code = 1;
         var stopped = false;
         while (!_record.IsFinished(_content))
@@ -1051,6 +1080,26 @@ public sealed class CampaignSession
         return $"difficulty {Name(record.Difficulty)}{lowered}, permadeath {(record.Permadeath ? "on" : "off")}";
     }
 
+    /// <summary>
+    /// The captain as the start chose them (issue 681): <c>Captain: Alder Fenn, from Sallow
+    /// (she/her)</c>, the origin by its name; null when neither an origin nor a pronoun was chosen,
+    /// so a campaign on the cast file's captain prints as it always has.
+    /// </summary>
+    public static string? CaptainLine(CampaignRecord record, GameContent content)
+    {
+        var captain = record.Captain(content);
+        var origin = record.Origin is { } id ? content.Campaign.Origin(id) : null;
+        if (captain is null || (origin is null && captain.Pronoun is null))
+        {
+            return null;
+        }
+
+        var from = origin is null ? "" : $", from {origin.Name}";
+        var words = Referent.For(content, captain);
+        var pronoun = words.Subject == captain.Id ? "" : $" ({words.Subject}/{words.Object})";
+        return $"Captain: {captain.Name}{from}{pronoun}";
+    }
+
     /// <summary>The difficulty a <c>--difficulty</c> value names: its id, or its display name in any case; null when none.</summary>
     public static Difficulty? DifficultyNamed(GameContent content, string value) =>
         content.Difficulties.TryGetValue(value, out var byId)
@@ -1111,7 +1160,7 @@ public sealed class CampaignSession
                 case ["quit"]:
                     return null;
                 case ["new"]:
-                    var fresh = CampaignRecord.Start(_content, _record.Seed, _record.Difficulty, _record.Permadeath);
+                    var fresh = CampaignRecord.Start(_content, _record.Seed, _record.Difficulty, _record.Permadeath, _record.Origin, _record.Captain(_content)?.Pronoun);
                     WriteEvent($"New game, seed {fresh.Seed}, {RulesLine(fresh, _content)}");
                     return fresh;
                 case ["saves"]:

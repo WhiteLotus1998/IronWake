@@ -33,7 +33,7 @@ public sealed class UnitNames
     /// <summary>
     /// The names for <paramref name="state"/>'s battle: every player unit that stood on its
     /// board (deployed at the start, still standing, or escaped) and every enemy its map
-    /// places or spawns, with each player unit's pronoun from the cast file (issue 615) and what
+    /// places or spawns, with each player unit's pronoun, the one chosen for it (issue 681) or the cast file's (issue 615), and what
     /// each of the map's events does, so a fired event reads by its effect, not its id.
     /// </summary>
     public static UnitNames Of(BattleState state, GameContent content)
@@ -47,7 +47,7 @@ public sealed class UnitNames
         foreach (var unit in players)
         {
             names[unit.Id] = unit.Unit.Name;
-            if (content.Pronouns.TryGetValue(unit.Id, out var pronoun))
+            if ((unit.Unit.Pronoun ?? (content.Pronouns.TryGetValue(unit.Id, out var cast) ? cast : null)) is { } pronoun)
             {
                 pronouns[unit.Id] = pronoun;
             }
@@ -95,7 +95,7 @@ public sealed class UnitNames
     /// <summary>
     /// The names for the campaign's between-map screen (issue 615): every unit on
     /// <paramref name="record"/>'s roster by its own name, and every fallen unit by its cast
-    /// name, each with its pronoun from the cast file. The screen has no board, so no enemy
+    /// name, each with its pronoun, the one chosen for it (issue 681) or the cast file's. The screen has no board, so no enemy
     /// and no map event is known.
     /// </summary>
     public static UnitNames Of(CampaignRecord record, GameContent content)
@@ -105,7 +105,7 @@ public sealed class UnitNames
         foreach (var unit in content.Cast.Concat(record.Roster))
         {
             names[unit.Id] = unit.Name;
-            if (content.Pronouns.TryGetValue(unit.Id, out var pronoun))
+            if ((unit.Pronoun ?? (content.Pronouns.TryGetValue(unit.Id, out var cast) ? cast : null)) is { } pronoun)
             {
                 pronouns[unit.Id] = pronoun;
             }

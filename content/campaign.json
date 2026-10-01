@@ -55,6 +55,12 @@
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
+  "origins": [
+    { "id": "aldmere", "name": "Aldmere", "stats": { "dex": 2, "lck": -1, "res": -1 }, "growths": { "dex": 10, "lck": -5, "res": -5 } },
+    { "id": "sallow", "name": "Sallow", "stats": { "str": 1, "lck": 1, "res": -2 }, "growths": { "str": 5, "lck": 5, "res": -10 } },
+    { "id": "kestrow", "name": "Kestrow", "stats": { "str": -1, "lck": 2, "res": -1 }, "growths": { "str": -5, "lck": 10, "res": -5 } },
+    { "id": "outlands", "name": "the outlands", "stats": { "str": 2, "dex": -1, "lck": -1 }, "growths": { "str": 10, "dex": -5, "lck": -5 } }
+  ],
   "keep": {
     "map": "ironwake_keep",
     "raid": "ironwake_raid",

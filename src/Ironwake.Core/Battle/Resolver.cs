@@ -340,7 +340,7 @@ public static class Resolver
 
         if (state.CantoReachOf(unit, content) is not { } reach)
         {
-            var who = Referent.For(content, unit.Id, unit.Id);
+            var who = Referent.For(content, unit.Unit);
             var why = !Signatures.HasCanto(state, content, unit) ? $"{who.Subject} {who.Verb("has", "have")} no Canto"
                 : !unit.Acted ? $"{who.Subject} {who.Verb("has", "have")} not acted yet this phase"
                 : $"{who.Possessive} Canto is spent this phase";
@@ -351,7 +351,7 @@ public static class Resolver
         if (entry is not { CanEnd: true })
         {
             var why = !state.Map.Contains(canto.To) ? "outside the map"
-                : entry is null ? $"not within the {reach.Mov} movement {Referent.For(content, unit.Id, unit.Id).Possessive} Canto has left from {unit.At}"
+                : entry is null ? $"not within the {reach.Mov} movement {Referent.For(content, unit.Unit).Possessive} Canto has left from {unit.At}"
                 : "occupied by an ally";
             return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot Canto to {canto.To}: {why}"));
         }
@@ -1220,7 +1220,7 @@ public static class Resolver
 
         if (unit.Unit.Inventory.IsFull)
         {
-            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: {Referent.For(content, unit.Id, unit.Id).Possessive} inventory is full"));
+            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: {Referent.For(content, unit.Unit).Possessive} inventory is full"));
         }
 
         events.Add(new KeepsakeRecovered(unit.Id, keepsake.FallenId, keepsake.Item.ItemId));
@@ -1363,12 +1363,12 @@ public static class Resolver
 
         if (unit.Moved && !state.Map.ExitAfterMove)
         {
-            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Id, unit.Id).Subject} moved this turn; a unit exits without moving, from an exit it began its turn on"));
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Unit).Subject} moved this turn; a unit exits without moving, from an exit it began its turn on"));
         }
 
         if (unit.Shoved && !state.Map.ExitAfterMove)
         {
-            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Id, unit.Id).Subject} {Referent.For(content, unit.Id, unit.Id).Verb("was", "were")} shoved this turn; a unit exits from an exit it began its turn on"));
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Unit).Subject} {Referent.For(content, unit.Unit).Verb("was", "were")} shoved this turn; a unit exits from an exit it began its turn on"));
         }
 
         events.Add(new UnitExited(unit.Id, unit.At));

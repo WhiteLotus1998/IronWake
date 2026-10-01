@@ -41,6 +41,7 @@ public static class Program
             RollScheme? scheme = RollScheme.TwoRollAverage;
             double? taxFloor = FreePrefix.DefaultTaxFloor;
             string? difficulty = null;
+            string? origin = null;
             var lead = new List<string>();
             for (var i = 2; i + 1 < args.Length; i++)
             {
@@ -52,6 +53,11 @@ public static class Program
                 else if (args[i] == "--lead")
                 {
                     lead.Add(args[i + 1]);
+                }
+
+                else if (args[i] == "--origin")
+                {
+                    origin = args[i + 1];
                 }
 
                 else if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
@@ -70,7 +76,7 @@ public static class Program
 
             if (scheme is { } full && taxFloor is { } floor)
             {
-                return Full(args[1], seeds, full, floor, difficulty, lead);
+                return Full(args[1], seeds, full, floor, difficulty, lead, origin);
             }
         }
 
@@ -128,7 +134,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --heirloom <item> [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --heirloom <item> [--seeds N]";
 
     private const int HitBandSeeds = 50;
 
@@ -433,9 +439,11 @@ public static class Program
     /// rules.json, every map is played under it (issue 76), so Hard is measured without the map
     /// files changing; without one, maps are played as authored. A <paramref name="mapId"/> that
     /// names no content map but is a map file on disk, such as a <c>docs/samples/</c> sample, is
-    /// loaded from that file (issue 429), as <c>--trace</c> already does.
+    /// loaded from that file (issue 429), as <c>--trace</c> already does. Given an
+    /// <paramref name="origin"/> (issue 681), the captain is played on that origin's card, so the
+    /// four origins can be held within 5 points of each other on gate 1.
     /// </summary>
-    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null)
+    public static int Full(string mapId, int seeds, RollScheme scheme = RollScheme.TwoRollAverage, double taxFloor = FreePrefix.DefaultTaxFloor, string? difficulty = null, IReadOnlyList<string>? lead = null, string? origin = null)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -445,6 +453,19 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
+        if (origin is not null)
+        {
+            if (content.Campaign.Origin(origin) is not { } chosen)
+            {
+                Console.WriteLine($"full: --origin names '{origin}', which the campaign does not offer; it offers {string.Join(", ", content.Campaign.Origins.Select(o => o.Id))}");
+                return 2;
+            }
+
+            var captain = chosen.Apply(content.Cast[0]);
+            content = content with { Cast = content.Cast.SetItem(0, captain), Units = content.Units.ContainsKey(captain.Id) ? content.Units.SetItem(captain.Id, captain) : content.Units };
+            Console.WriteLine($"origin: {chosen.Name}, the captain's card {captain.Stats}");
+        }
+
         if (lead is { Count: > 0 })
         {
             if (lead.FirstOrDefault(id => content.Cast.All(u => u.Id != id)) is { } unknown)

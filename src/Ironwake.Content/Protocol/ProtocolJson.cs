@@ -1045,6 +1045,11 @@ public static class ProtocolJson
         }
 
         w.WriteEndObject();
+        if (u.Pronoun is { } pronoun)
+        {
+            w.WriteString("pronoun", pronoun.ToString().ToLowerInvariant());
+        }
+
         if (u.Wound is { } wound)
         {
             w.WriteStartObject("wound");
@@ -1135,6 +1140,7 @@ public static class ProtocolJson
                 Skill = ReadWeaponPoints(e),
                 Mastery = ReadMasteryPoints(e),
                 Wound = ReadWound(e),
+                Pronoun = ReadPronoun(e, id),
             };
         }
         catch (ArgumentException ex)
@@ -1148,7 +1154,7 @@ public static class ProtocolJson
     /// <summary>
     /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
     /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
-    /// a record without it reads as on), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
+    /// a record without it reads as on), the captain's origin when one was chosen (issue 681), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
@@ -1163,6 +1169,11 @@ public static class ProtocolJson
         if (!record.Permadeath)
         {
             w.WriteBoolean("permadeath", false);
+        }
+
+        if (record.Origin is { } origin)
+        {
+            w.WriteString("origin", origin);
         }
 
         if (record.LoweredFrom.Count > 0)
@@ -1315,7 +1326,38 @@ public static class ProtocolJson
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             LoweredFrom = ReadLoweredFrom(e, content),
+            Origin = ReadOrigin(e, content),
         };
+    }
+
+    /// <summary>The optional <c>pronoun</c> of a roster unit (issue 681), chosen at the start; a unit without one reads the cast file's.</summary>
+    private static Pronoun? ReadPronoun(JsonElement e, string id)
+    {
+        if (OptionalString(e, "pronoun") is not { } text)
+        {
+            return null;
+        }
+
+        return text switch
+        {
+            "he" => Pronoun.He,
+            "she" => Pronoun.She,
+            "they" => Pronoun.They,
+            _ => throw new ProtocolException($"unit '{id}': pronoun '{text}' is not one of he, she, they"),
+        };
+    }
+
+    /// <summary>The optional <c>origin</c> of a campaign record (issue 681), an origin the content offers; a record without one has the cast file's captain.</summary>
+    private static string? ReadOrigin(JsonElement e, GameContent content)
+    {
+        if (OptionalString(e, "origin") is not { } origin)
+        {
+            return null;
+        }
+
+        return content.Campaign.Origin(origin) is null
+            ? throw new ProtocolException($"origin '{origin}' is not one the campaign offers")
+            : origin;
     }
 
     /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>
