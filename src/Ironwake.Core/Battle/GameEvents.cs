@@ -227,3 +227,14 @@ public sealed record HungerEased(string UnitId, string ItemId, int Healed, int H
 /// <paramref name="Stage"/> is the stage reached, counted from 0, and <paramref name="StageId"/> its id.
 /// </summary>
 public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, string StageId) : GameEvent;
+
+/// <summary>
+/// The captain called an order (DESIGN.md 13.2, issue 85): the allies it acts on in id order, how
+/// many allies stood in its radius and how many were alive, and the captain's exposure where he
+/// stands (<see cref="Exposure.Of"/>, no crit), the numbers the spike's binding fraction and
+/// exposure counter read.
+/// </summary>
+public sealed record OrderCalled(string CaptainId, OrderKind Kind, int Radius, ValueList<string> Reached, int InRadius, int Alive, int Exposure) : GameEvent;
+
+/// <summary>An ally used the move a Fall back order owed it (issue 85); from equal to to and an empty path: declined.</summary>
+public sealed record FellBack(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;

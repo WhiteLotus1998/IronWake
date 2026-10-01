@@ -415,6 +415,8 @@ public static class Program
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Open o => $"open {o.UnitId} {o.At}",
+        Order o => $"order {Orders.Word(o.Kind)}",
+        FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         Canto c => $"canto {c.UnitId} {c.To}",
