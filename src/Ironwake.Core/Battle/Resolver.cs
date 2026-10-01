@@ -32,6 +32,10 @@ public static class Resolver
                 {
                     next = MapEvents.AfterMove(next, content, next.Find(move.UnitId)!, events);
                     next = FireWatches(next, content, move.UnitId, events);
+                    if (next.Find(move.UnitId) is { } mover)
+                    {
+                        next = Messenger.AfterMove(next, content, mover, events);
+                    }
                 }
 
                 break;

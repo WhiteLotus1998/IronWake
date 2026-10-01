@@ -1,0 +1,57 @@
+end
+move pell 2,10
+wait pell
+end
+move captain 3,10
+attack captain brigand-1
+move teodor 5,11
+attack teodor soldier-2
+move pell 4,9
+attack pell soldier-2
+move wren 1,11
+wait wren
+end
+recall 20
+attack wren brigand-1
+move pell 4,9
+attack pell soldier-2
+move captain 6,10
+attack captain soldier-2
+move teodor 3,10
+wait teodor
+end
+move captain 8,8
+wait captain
+move pell 7,9
+wait pell
+move teodor 5,8
+wait teodor
+move wren 6,10
+wait wren
+end
+move captain 9,6
+wait captain
+wait pell
+move teodor 6,6
+wait teodor
+move wren 7,8
+wait wren
+end
+move pell 9,7
+wait pell
+wait captain
+move wren 6,9
+wait wren
+end
+move pell 9,3
+attack pell rider-1
+move captain 9,2
+attack captain rider-1
+end
+move captain 10,4
+attack captain soldier-1
+attack pell archer-1
+move teodor 7,3
+attack teodor archer-1
+wait wren
+end

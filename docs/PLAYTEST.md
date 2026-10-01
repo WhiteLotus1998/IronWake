@@ -1605,3 +1605,18 @@ Notes: Transcript and script are in `docs/transcripts/2026-10-01-the_tollgate-66
 - **What I did not see:** a fall that comes back across a won map in this play (the Recall undid both), the Tactician and Recruit numbers in hand (they are the Sim's, `docs/measurements/2026-10-01-difficulty-ladder-664.txt`), and the profile's unlock outside the tests.
 
 — Code
+
+## 2026-10-01 — The Signal Road, the messenger sample (13.24), the warm play — Code
+
+Seed: 701   Result: win, turn 8 of 10, nobody fell in the end, one Recall spent (rout)
+Systems entry on a sample, not a Fun Gate entry; warm, since I drew the board an hour before. Question: does a visible runner change the order of a map, and does its clock read?
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 6. The captain stood at 9,6, one step outside the camp's ring, and the forecast said 10 damage, no double, on a 21 HP rider. One strike could not kill it, and a strike that does not kill wakes it, and awake it is two phases from the road and gone. I spent the turn walking Pell into the second staging tile instead, and on turn 7 Pell's Cinder (12) and the captain's sword (10, at 87 percent) killed it before it moved. The clock I would have started was printed under the board the whole time.
+Notes: Transcripts and scripts are `docs/transcripts/2026-10-01-signal_road_messenger-701.*` (the win) and `-701-woken.*` (Wren walks into the ring on turn 2: the rider runs 8,2 to 14,2, then to the road on turn 3, and the relief brigand, rider and archer arrive; Wren dies on the way, which is why it is a demonstration and not a play).
+- **The camp's noise ring ordered the whole opening.** On turns 2 and 3 I fought the van at rows 10 and 11, not at 7,8, where a combat is 6 from the camp's soldier. Without the messenger I would have met the van forward.
+- **The messenger never ran in the play that counts.** A sleeping guard can be staged on from distance 5 and struck in one turn, so the honest reading is that the runner is a threat that shapes the approach, not a chase. The chase needs a camp the party cannot reach unseen (a lit camp, a dusk map, or an aggressive messenger that starts awake), and that is the first lever.
+- **Wren's death on turn 3 was mine**, a 63 percent strike I walked her into at 8 HP. The Recall restored the rolls, so Teodor's miss stood and Wren took the kill instead.
+- **What I did not see:** a held gap. The lane at 12,2 and 13,2 was never reached; the board is 18 steps from the start to the lane for a Mov 4 party, which is too far for the clock as drawn.
+
+— Code
+

@@ -30,12 +30,18 @@ public static class Threat
     public static bool IsThreatened(BattleState state, GameContent content, BattleUnit unit) =>
         StruckBy(state, content, unit.Side == Side.Player ? Side.Enemy : Side.Player).Contains(unit.At);
 
-    /// <summary>The tiles one unit could strike next phase; empty for a sleeping Guard or a unit with no usable weapon.</summary>
+    /// <summary>The tiles one unit could strike next phase; empty for a sleeping Guard, the messenger, or a unit with no usable weapon.</summary>
     public static IReadOnlySet<Coord> StruckByUnit(BattleState state, GameContent content, BattleUnit unit)
     {
         var struck = new HashSet<Coord>();
         if (unit is { Behavior: Behavior.Guard, Group: { } group } && !state.IsAwake(group))
         {
+            return struck;
+        }
+
+        if (Messenger.Is(state, unit))
+        {
+            // DESIGN.md 13.24: the messenger runs and never strikes.
             return struck;
         }
 

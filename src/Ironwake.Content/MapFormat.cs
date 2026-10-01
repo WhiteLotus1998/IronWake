@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "exit_after_move", "difficulty", "certification", "wake_links" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "exit_after_move", "difficulty", "certification", "wake_links" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -130,6 +130,11 @@ public static class MapFormat
             sb.Append("kinsbane: ").Append(bearer).Append('\n');
         }
 
+        if (map.Messenger is { } messenger)
+        {
+            sb.Append("messenger: ").Append(messenger.From).Append(' ').Append(messenger.Road).Append('\n');
+        }
+
         if (map.ExitAfterMove)
         {
             sb.Append("exit_after_move: on\n");
@@ -203,6 +208,7 @@ public static class MapFormat
         {
             TurnTrigger t => "turn " + t.Turn + " " + t.Phase.ToString().ToLowerInvariant(),
             EnterTrigger e => "enter " + string.Join(' ', e.Tiles),
+            MessengerTrigger => "messenger",
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
         };
         var action = mapEvent.Action switch
@@ -313,9 +319,84 @@ public static class MapFormat
             }
 
             var map = new MapDefinition(name, width, height, win, turnLimit, recall, enemyLevel, cheapShots, terrain, placements, exits, protect, events, retreat, rivalry, supplies, difficulty, certification, announce, keepsakes, dusk, grudges, shove, exitAfterMove);
-            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests };
+            map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests, Messenger = ParseMessenger(header, width, height) };
+            ValidateMessenger(map, header);
             Validate(map);
             return map;
+        }
+
+        /// <summary>The <c>messenger:</c> header (DESIGN.md 13.24): two tiles, the messenger's placement and its road on the grid's edge.</summary>
+        private MessengerRoute? ParseMessenger(Dictionary<string, (string Value, int Line)> header, int width, int height)
+        {
+            if (!header.TryGetValue("messenger", out var entry))
+            {
+                return null;
+            }
+
+            var tokens = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (tokens.Length != 2)
+            {
+                throw ErrorAt(entry.Line, $"messenger needs two tiles, the messenger's and its road's: 'messenger: 3,2 12,0', got '{entry.Value}'");
+            }
+
+            Coord Tile(string token)
+            {
+                var parts = token.Split(',');
+                if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y))
+                {
+                    throw ErrorAt(entry.Line, $"messenger position must be x,y, got '{token}'");
+                }
+
+                if (x < 0 || y < 0 || x >= width || y >= height)
+                {
+                    throw ErrorAt(entry.Line, $"messenger position {x},{y} is outside the {width}x{height} grid");
+                }
+
+                return new Coord(x, y);
+            }
+
+            var from = Tile(tokens[0]);
+            var road = Tile(tokens[1]);
+            if (road.X != 0 && road.Y != 0 && road.X != width - 1 && road.Y != height - 1)
+            {
+                throw ErrorAt(entry.Line, $"messenger's road {road} must be on the grid's edge");
+            }
+
+            return new MessengerRoute(from, road);
+        }
+
+        private void ValidateMessenger(MapDefinition map, Dictionary<string, (string Value, int Line)> header)
+        {
+            if (map.Messenger is not { } route)
+            {
+                if (map.Events.Any(e => e.Trigger is MessengerTrigger))
+                {
+                    throw new MapException(_file, 0, "an event uses the messenger trigger but the map has no messenger: header");
+                }
+
+                return;
+            }
+
+            var line = header["messenger"].Line;
+            if (map.Placements.FirstOrDefault(p => p.At == route.From) is not EnemyPlacement enemy)
+            {
+                throw ErrorAt(line, $"messenger names {route.From} but no E line places an enemy there");
+            }
+
+            if (enemy.IsBoss)
+            {
+                throw ErrorAt(line, $"messenger at {route.From} is a boss; a boss never runs");
+            }
+
+            if (route.From == route.Road)
+            {
+                throw ErrorAt(line, "messenger's road is the tile it starts on");
+            }
+
+            if (!map.Events.Any(e => e.Trigger is MessengerTrigger))
+            {
+                throw ErrorAt(line, "messenger: needs at least one event with the messenger trigger, or reaching the road does nothing");
+            }
         }
 
         private Dictionary<string, (string Value, int Line)> ParseHeader()
@@ -926,8 +1007,10 @@ public static class MapFormat
                     }
 
                     return (new EnterTrigger(ValueList<Coord>.From(tiles)), tokens[(2 + count)..]);
+                case "messenger":
+                    return (new MessengerTrigger(), tokens[2..]);
                 default:
-                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn or enter");
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter or messenger");
             }
         }
 

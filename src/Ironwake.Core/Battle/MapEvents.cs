@@ -19,6 +19,10 @@ public static class MapEvents
     public static BattleState AfterMove(BattleState state, GameContent content, BattleUnit mover, List<GameEvent> events) =>
         mover.Side != Side.Player ? state : Fire(state, content, events, t => t is EnterTrigger enter && enter.Tiles.Contains(mover.At));
 
+    /// <summary>The events whose trigger is the messenger reaching its road (DESIGN.md 13.24).</summary>
+    public static BattleState AfterMessenger(BattleState state, GameContent content, List<GameEvent> events) =>
+        Fire(state, content, events, t => t is MessengerTrigger);
+
     private static BattleState Fire(BattleState state, GameContent content, List<GameEvent> events, Func<MapEventTrigger, bool> triggered)
     {
         foreach (var mapEvent in state.Map.Events)

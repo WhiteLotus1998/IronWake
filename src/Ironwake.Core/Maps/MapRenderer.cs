@@ -37,6 +37,9 @@ public static class MapRenderer
     public const string BraceLegend = "brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase";
 
     /// <summary>The legend a <c>break: on</c> map prints (DESIGN.md 13.22, experiment).</summary>
+    /// <summary>The messenger's rule (DESIGN.md 13.24, experiment), printed under any board whose map has one.</summary>
+    public const string MessengerRule = "messenger: never strikes; once awake it runs for the road each phase and, if it reaches it, leaves and the word is out; kill it or stand on its path";
+
     public const string BreakLegend = "break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)";
 
     /// <summary>The legend a <c>wildfire: on</c> map prints (DESIGN.md 13.15, experiment).</summary>
@@ -239,6 +242,12 @@ public static class MapRenderer
         if (map.BreakEnabled)
         {
             sb.Append(BreakLegend).Append('\n');
+        }
+
+        if (map.Messenger is { } route)
+        {
+            sb.Append(MessengerRule).Append('\n');
+            sb.Append($"messenger at {route.From}, road at {route.Road}").Append('\n');
         }
 
         if (map.WildfireEnabled)
@@ -447,6 +456,11 @@ public static class MapRenderer
                 sb.Append("  unarmed");
             }
 
+            if (Messenger.Is(state, unit))
+            {
+                sb.Append("  messenger");
+            }
+
             var carried = unit.Side == Side.Enemy
                 ? unit.Unit.Inventory.Items.Where(stack => stack.Keepsake is not null).Select(stack => Keepsake.Name(stack.ItemId, stack.Keepsake!, content)).ToList()
                 : new List<string>();
@@ -512,6 +526,12 @@ public static class MapRenderer
         if (map.BreakEnabled)
         {
             sb.Append(BreakLegend).Append('\n');
+        }
+
+        if (MessengerLine(state, content) is { } messengerLine)
+        {
+            sb.Append(MessengerRule).Append('\n');
+            sb.Append(messengerLine).Append('\n');
         }
 
         if (map.WildfireEnabled)
@@ -627,6 +647,29 @@ public static class MapRenderer
     /// <see cref="ChestRule"/><c>)</c>, each closed chest in file order with its tile and contents.
     /// Null when no chest is left closed. The guard, if any, is a unit on the board; the way in is not printed.
     /// </summary>
+    /// <summary>
+    /// Where the messenger stands and how far the road is (DESIGN.md 13.24): its own phases at
+    /// full Mov on open ground, the party left out, so a held path only makes it longer. Null
+    /// when the map has no messenger or it is off the board; a line saying so once it is gone.
+    /// </summary>
+    public static string? MessengerLine(BattleState state, GameContent content)
+    {
+        if (state.Map.Messenger is not { } route)
+        {
+            return null;
+        }
+
+        if (Messenger.On(state) is not { } unit)
+        {
+            return $"messenger: off the board (road at {route.Road})";
+        }
+
+        var phases = Messenger.PhasesToRoad(state, content, unit);
+        var away = phases is { } n ? $"{n} of its phases from the road at {route.Road} on open ground" : $"no path to the road at {route.Road}";
+        var awake = Messenger.Runs(state, content, unit with { Moved = false }) ? "running" : "not yet running";
+        return $"messenger at {unit.At}, {awake}, {away}";
+    }
+
     public static string? ChestLegend(IEnumerable<Chest> closed, GameContent content)
     {
         var listed = closed.Select(c => $"{c.At} {string.Join(", ", c.Items.Select(content.ItemName))}").ToList();

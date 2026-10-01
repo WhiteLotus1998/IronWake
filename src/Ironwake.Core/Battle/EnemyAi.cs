@@ -142,7 +142,7 @@ public static class EnemyAi
         if (!state.Map.PincerEnabled || unit.Side != Side.Enemy || unit.Acted || unit.Moved || unit.IsBoss
             || unit.Group is null || claimed.Contains(unit.Id) || HoldsTheThrone(state, unit)
             || state.EffectiveBehavior(unit, content) != Behavior.Aggressive || unit.EquippedWeapon(content) is null
-            || RetreatRule.Choose(state, content, unit) is not null)
+            || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
         {
             return null;
         }
@@ -158,7 +158,7 @@ public static class EnemyAi
             .Where(f => f.Id != unit.Id && f.Group == unit.Group && !f.Acted && !f.Moved && !f.IsBoss && !claimed.Contains(f.Id)
                 && state.EffectiveBehavior(f, content) == Behavior.Aggressive
                 && f.EquippedWeapon(content) is { } weapon && weapon.InRange(1)
-                && RetreatRule.Choose(state, content, f) is null)
+                && RetreatRule.Choose(state, content, f) is null && !Messenger.Is(state, f))
             .ToList();
         if (followers.Count == 0)
         {
@@ -272,6 +272,14 @@ public static class EnemyAi
         if (RetreatRule.Choose(state, content, unit) is { } refuge)
         {
             return new Command[] { new Retreat(unit.Id, refuge) };
+        }
+
+        if (Messenger.Is(state, unit))
+        {
+            var run = Messenger.Runs(state, content, unit) ? Run(state, content, unit, reach, playerReach) : null;
+            return run is { } to && to != unit.At
+                ? new Command[] { new Move(unit.Id, to), new Wait(unit.Id) }
+                : new Command[] { new Wait(unit.Id) };
         }
 
         if (weapon is null)
@@ -431,7 +439,7 @@ public static class EnemyAi
     {
         var behavior = state.EffectiveBehavior(unit, content)
             ?? throw new ArgumentException($"{unit.Id} is a player unit and has no behavior", nameof(unit));
-        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null)
+        if (unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
         {
             return null;
         }
@@ -485,7 +493,7 @@ public static class EnemyAi
     public static VetoRefusal? Refusal(BattleState state, GameContent content, BattleUnit unit, BattleUnit target)
     {
         if (!BossVetoApplies(state, content, unit) || unit.EquippedWeapon(content) is null
-            || RetreatRule.Choose(state, content, unit) is not null || !Dusk.Knows(state, content, unit, target)
+            || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit) || !Dusk.Knows(state, content, unit, target)
             || StrikeOn(state, content, unit, target) is not null)
         {
             return null;
@@ -605,7 +613,7 @@ public static class EnemyAi
     /// </summary>
     public static GrudgeStrike? GrudgeChoice(BattleState state, GameContent content, BattleUnit unit)
     {
-        if (unit.Side != Side.Enemy || unit.Grudge is null || unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null)
+        if (unit.Side != Side.Enemy || unit.Grudge is null || unit.EquippedWeapon(content) is null || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit))
         {
             return null;
         }
@@ -842,6 +850,17 @@ public static class EnemyAi
         }
 
         return chosen is null ? null : Toward(state, content, unit, chosen, reach, playerReach, refused);
+    }
+
+    /// <summary>
+    /// Where the messenger runs this phase (DESIGN.md 13.24): the reachable tile with the lowest
+    /// remaining path cost to its road under <see cref="Messenger.Field"/>, ties as
+    /// <see cref="Approach"/> breaks them; null when no reachable tile has a path.
+    /// </summary>
+    public static Coord? Run(BattleState state, GameContent content, BattleUnit unit, Reach reach, IReadOnlyList<Reach> playerReach)
+    {
+        var field = Messenger.Field(state, content, unit);
+        return field.From(unit.At) is null ? null : Toward(state, content, unit, field, reach, playerReach);
     }
 
     /// <summary>
