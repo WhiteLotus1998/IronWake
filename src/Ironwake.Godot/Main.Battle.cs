@@ -108,7 +108,7 @@ public partial class Main
         }
 
         var frame = new Rect2(SceneFrame.Position + shake, SceneFrame.Size);
-        DrawBackdrop(frame, scene);
+        DrawBackdrop(frame, scene, t);
 
         var left = scene.Attacker.Left ? scene.Attacker : scene.Defender;
         var right = scene.Attacker.Left ? scene.Defender : scene.Attacker;
@@ -152,35 +152,109 @@ public partial class Main
     }
 
     /// <summary>
-    /// The backdrop: the sky in the panel's value, then each half's ground in its tile's colour,
-    /// a far band of the tile's own detail, and a darker near band, so where each side stands
+    /// The backdrop (slice 2, <see cref="SceneBackdrop"/>): the sky in the panel's value, then on
+    /// each half its ground's three parallax layers drifting at their own speeds (a far ridge in
+    /// the ground's colour darkened, the tile's own detail, a near band with tufts), fog banks
+    /// over forest and water, the dusk laid over both, an enemy half's lamps lit through it, and
+    /// embers rising where fire burns near. Each half is its own, so where each side stands
     /// reads at a glance.
     /// </summary>
-    private void DrawBackdrop(Rect2 frame, BattleScene scene)
+    private void DrawBackdrop(Rect2 frame, BattleScene scene, float t)
     {
         Card(frame.Grow(4), UiColour("ink"), 10);
         DrawRect(frame, Box);
+        var backdrop = scene.Backdrop;
         var horizon = frame.End.Y - SceneGround - 70;
-        var leftSide = scene.Attacker.Left ? scene.Attacker : scene.Defender;
-        var rightSide = scene.Attacker.Left ? scene.Defender : scene.Attacker;
         var half = frame.Size.X / 2;
-        foreach (var (side, x) in new[] { (leftSide, frame.Position.X), (rightSide, frame.Position.X + half) })
+        var speeds = SceneBackdrop.Layers.ToDictionary(l => l.Name, l => l.Speed);
+        foreach (var (side, x) in new[] { (backdrop.Left, frame.Position.X), (backdrop.Right, frame.Position.X + half) })
         {
+            var ground = TerrainColour(side.Terrain == "fire" ? "forest" : side.Terrain);
+
+            // The far ridge: a low silhouette in the ground's colour, darkened, drifting slowest.
+            var ridge = new List<Vector2> { new(x, horizon) };
+            for (var px = 0f; px <= half; px += 12)
+            {
+                var u = (px + t * speeds["ridge"] + x) / 90f;
+                ridge.Add(new Vector2(x + px, horizon - 26 - 14 * Mathf.Sin(u) - 8 * Mathf.Sin(u * 2.3f + 1)));
+            }
+
+            ridge.Add(new Vector2(x + half, horizon));
+            DrawColoredPolygon(ridge.ToArray(), ground.Darkened(0.35f));
+
+            // The ground's own detail, drifting at the middle speed.
             var band = new Rect2(x, horizon, half, frame.End.Y - horizon);
-            DrawRect(band, TerrainColour(side.Terrain));
+            DrawRect(band, ground);
             if (Art($"tile_{side.Terrain}", 70) is { } tile)
             {
-                for (var tx = x; tx < x + half; tx += 70)
+                var shift = (t * speeds["detail"]) % 70;
+                for (var tx = x - shift; tx < x + half; tx += 70)
                 {
-                    var w = Math.Min(70, x + half - tx);
-                    DrawTextureRectRegion(tile, new Rect2(tx, horizon, w, 70), new Rect2(0, 0, w, 70), new Color(1, 1, 1, 0.55f));
+                    var from = Math.Max(tx, x);
+                    var w = Math.Min(tx + 70, x + half) - from;
+                    if (w > 0)
+                    {
+                        DrawTextureRectRegion(tile, new Rect2(from, horizon, w, 70), new Rect2(from - tx, 0, w, 70), new Color(1, 1, 1, 0.55f));
+                    }
                 }
             }
 
-            DrawRect(new Rect2(x, frame.End.Y - SceneGround + 6, half, SceneGround - 6), UiColour("ink", 0.28f));
+            // The near band, with tufts drifting fastest.
+            var nearTop = frame.End.Y - SceneGround + 6;
+            DrawRect(new Rect2(x, nearTop, half, SceneGround - 6), UiColour("ink", 0.28f));
+            var tuftShift = (t * speeds["near"]) % 37;
+            for (var tx = x - tuftShift; tx < x + half; tx += 37)
+            {
+                if (tx >= x + 2 && tx <= x + half - 2)
+                {
+                    DrawLine(new Vector2(tx, nearTop + 14), new Vector2(tx + 3, nearTop + 6), UiColour("ink", 0.35f), 2);
+                }
+            }
+
+            // Fog: two banks over the ground, breathing slowly.
+            if (side.Fog > 0)
+            {
+                for (var k = 0; k < 2; k++)
+                {
+                    var y = horizon - 10 + 34 * k;
+                    var a = side.Fog * (0.7f + 0.3f * Mathf.Sin(t * 0.9f + k * 2));
+                    DrawRect(new Rect2(x, y, half, 26), new Color(Look(LookPalette.EnemyBone), a * 0.5f));
+                }
+            }
         }
 
         DrawLine(new Vector2(frame.Position.X, horizon), new Vector2(frame.End.X, horizon), UiColour("ink", 0.5f), 2);
+
+        // Dusk over both halves, then lamps lit through it: the enemy's light, in bone.
+        if (backdrop.Dark > 0)
+        {
+            DrawRect(frame, UiColour("ink", backdrop.Dark));
+        }
+
+        foreach (var (side, x) in new[] { (backdrop.Left, frame.Position.X), (backdrop.Right, frame.Position.X + half) })
+        {
+            if (side.Lamps)
+            {
+                foreach (var lx in new[] { 0.18f, 0.82f })
+                {
+                    var at = new Vector2(x + half * lx, horizon - 40);
+                    var glow = 0.18f + 0.06f * Mathf.Sin(t * 5 + lx * 9);
+                    DrawCircle(at, 26, new Color(Look(LookPalette.EnemyBone), glow));
+                    DrawLine(at + new Vector2(0, 8), new Vector2(at.X, horizon + 30), UiColour("ink", 0.8f), 2);
+                    DrawRect(new Rect2(at - new Vector2(5, 7), new Vector2(10, 14)), Look(LookPalette.EnemyBone));
+                }
+            }
+
+            // Embers: fire's colour lifted toward bone, small, rising and fading; sparks, never a fill.
+            var height = frame.End.Y - frame.Position.Y;
+            foreach (var ember in side.Embers)
+            {
+                var rise = (ember.Phase + t * ember.Speed) % 1f;
+                var ex = x + half * ember.X + 6 * Mathf.Sin(t * 3 + ember.X * 20);
+                var ey = frame.End.Y - SceneGround - rise * (height - SceneGround);
+                DrawRect(new Rect2(ex, ey, 3, 3), new Color(TerrainColour("fire").Lerp(Look(LookPalette.EnemyBone), 0.3f), 1 - rise));
+            }
+        }
     }
 
     /// <summary>

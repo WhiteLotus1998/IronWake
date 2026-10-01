@@ -91,6 +91,9 @@ public sealed record SceneStrike(
 /// </summary>
 public sealed record BattleScene(SceneSide Attacker, SceneSide Defender, IReadOnlyList<SceneStrike> Strikes, string? FallenId, float FallStart, float Length)
 {
+    /// <summary>The procedural backdrop behind both combatants (slice 2), read from the board the combat was fought on.</summary>
+    public SceneBackdrop Backdrop { get; init; } = SceneBackdrop.Day(Attacker.Terrain, Defender.Terrain);
+
     /// <summary>The art's frame rate (ART_SPEC: 12 frames a second).</summary>
     public const float Fps = 12f;
 
@@ -150,7 +153,8 @@ public sealed record BattleScene(SceneSide Attacker, SceneSide Defender, IReadOn
         var fallen = combat.TargetHpAfter == 0 ? t.Id : combat.AttackerHpAfter == 0 ? a.Id : null;
         var fallStart = strikes.Count > 0 ? strikes[^1].Contact : clock;
         var length = fallen is null ? clock - Between + Tail : Math.Max(clock - Between, fallStart + Frames("fall")) + Tail;
-        return new BattleScene(attacker, defender, strikes, fallen, fallStart, length);
+        var (leftUnit, rightUnit) = attacker.Left ? (a, t) : (t, a);
+        return new BattleScene(attacker, defender, strikes, fallen, fallStart, length) { Backdrop = SceneBackdrop.Of(before, leftUnit, rightUnit) };
     }
 
     /// <summary>
@@ -292,5 +296,105 @@ public sealed record LevelUpCard(string UnitId, string Name, int FromLevel, int 
         var lines = new List<string> { $"{Name} reaches level {ToLevel}" };
         lines.AddRange(Rose.Count > 0 ? Rose.Select(r => $"{StatName(r.Stat)} +{r.Amount}") : new[] { Flat ?? FlatDefault });
         return lines;
+    }
+}
+
+/// <summary>
+/// One ember over a burning half of a scene's backdrop: where it rises across the half (0 at the
+/// half's left edge, 1 at its right), how far through its rise it starts (0 to 1), and how fast
+/// it rises in fractions of the frame's height a second.
+/// </summary>
+public sealed record Ember(float X, float Phase, float Speed);
+
+/// <summary>
+/// One half of a scene's backdrop (issue 535, slice 2): the ground the combatant stands on, the
+/// fog over it (0 to 1), the embers rising when fire burns near, and whether its group's lamps
+/// are lit.
+/// </summary>
+public sealed record BackdropHalf(string Terrain, float Fog, IReadOnlyList<Ember> Embers, bool Lamps);
+
+/// <summary>
+/// A scene's procedural backdrop (issue 535, slice 2), read from the board the combat was fought
+/// on and adding nothing it does not say: each half's ground in three parallax layers, fog on
+/// forest and water, embers where a burning tile lies within <see cref="EmberReach"/> of the
+/// combatant, an enemy half's lamps when its group is lit (DESIGN 13.7), and the dusk over both,
+/// darker as the turns take the light. Daylight is <see cref="Dark"/> 0.
+/// </summary>
+public sealed record SceneBackdrop(BackdropHalf Left, BackdropHalf Right, float Dark)
+{
+    /// <summary>The parallax layers far to near, with each one's drift in pixels a second: the far ridge, the ground's own detail, the near band.</summary>
+    public static IReadOnlyList<(string Name, float Speed)> Layers { get; } = new[] { ("ridge", 6f), ("detail", 14f), ("near", 30f) };
+
+    /// <summary>The dusk on a dusk map's first turn.</summary>
+    public const float DuskFirst = 0.15f;
+
+    /// <summary>The dusk once sight is down to one tile.</summary>
+    public const float DuskLast = 0.55f;
+
+    /// <summary>How near, Manhattan, a burning tile raises embers over a combatant's half.</summary>
+    public const int EmberReach = 2;
+
+    /// <summary>Embers raised per burning tile within reach.</summary>
+    public const int EmbersPerFire = 4;
+
+    /// <summary>The most embers over one half.</summary>
+    public const int MaxEmbers = 12;
+
+    /// <summary>The fog each ground carries; a ground not listed has none.</summary>
+    public static IReadOnlyDictionary<string, float> GroundFog { get; } = new Dictionary<string, float>(StringComparer.Ordinal)
+    {
+        ["forest"] = 0.22f,
+        ["water"] = 0.3f,
+    };
+
+    /// <summary>The backdrop with no fog, fire, lamps or dusk, for scenes made without a board.</summary>
+    public static SceneBackdrop Day(string left, string right) =>
+        new(new BackdropHalf(left, 0, Array.Empty<Ember>(), false), new BackdropHalf(right, 0, Array.Empty<Ember>(), false), 0);
+
+    /// <summary>
+    /// The dusk over <paramref name="map"/> on <paramref name="turn"/>: 0 in daylight;
+    /// <see cref="DuskFirst"/> on a dusk map's first turn rising to <see cref="DuskLast"/> on
+    /// the turn sight reaches one tile (<see cref="Dusk.Sight(MapDefinition, int)"/>).
+    /// </summary>
+    public static float DarkOf(MapDefinition map, int turn)
+    {
+        if (map.Dusk is not { } start || Dusk.Sight(map, turn) is not { } sight)
+        {
+            return 0;
+        }
+
+        return start <= 1 ? DuskLast : DuskFirst + (DuskLast - DuskFirst) * (start - sight) / (start - 1);
+    }
+
+    /// <summary>The backdrop for a combat between <paramref name="left"/> and <paramref name="right"/> on <paramref name="state"/>, the board before it.</summary>
+    public static SceneBackdrop Of(BattleState state, BattleUnit left, BattleUnit right)
+    {
+        var dark = DarkOf(state.Map, state.Turn);
+        var burning = Wildfire.Burning(state.Map);
+        BackdropHalf Half(BattleUnit unit)
+        {
+            var terrain = state.Map.TerrainIdAt(unit.At);
+            var fires = burning.Count(c => c.DistanceTo(unit.At) <= EmberReach);
+            var embers = Enumerable.Range(0, Math.Min(MaxEmbers, fires * EmbersPerFire))
+                .Select(i => new Ember(Unit01(unit.Id, i, 1), Unit01(unit.Id, i, 2), 0.25f + 0.35f * Unit01(unit.Id, i, 3)))
+                .ToList();
+            var fog = Math.Min(1f, GroundFog.GetValueOrDefault(terrain) + dark * 0.3f);
+            var lamps = unit.Side == Side.Enemy && unit.Group is { } group && state.IsLit(group);
+            return new BackdropHalf(terrain, fog, embers, lamps);
+        }
+
+        return new SceneBackdrop(Half(left), Half(right), dark);
+    }
+
+    /// <summary>A fixed number in 0 to 1 from a unit's id and two indices (FNV-1a), so the same combat raises the same embers on every run and every Recall.</summary>
+    public static float Unit01(string id, int index, int salt)
+    {
+        var hash = 2166136261u;
+        foreach (var c in $"{id}/{index}/{salt}")
+        {
+            hash = (hash ^ c) * 16777619u;
+        }
+
+        return (hash % 10007) / 10007f;
     }
 }

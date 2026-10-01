@@ -276,4 +276,115 @@ public class BattleSceneTests
         var onMap = levelled with { Scene = null };
         Assert.Equal(Rhythm.StrikeLength(onMap) + LevelUpCard.Hold, Rhythm.Length(onMap), 5);
     }
+
+    private static BattleState Tollgate(Func<string, string>? edit = null)
+    {
+        var text = File.ReadAllText(Path.Combine(Fixture.RealContentDirectory(), "maps", "the_tollgate.map"));
+        var path = Path.Combine(Path.GetTempPath(), $"ironwake-scene-{Guid.NewGuid():N}.map");
+        File.WriteAllText(path, edit is null ? text : edit(text));
+        try
+        {
+            return BattleState.From(MapFiles.Load(path, Content), Content, Content.Cast, 113);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void DuskDarkensTheSceneTurnByTurnAndDaylightNever()
+    {
+        var map = MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "brackwater_cut.map"), Content);
+        var start = Assert.IsType<int>(map.Dusk);
+
+        Assert.Equal(SceneBackdrop.DuskFirst, SceneBackdrop.DarkOf(map, 1), 3);
+        Assert.True(SceneBackdrop.DarkOf(map, 2) > SceneBackdrop.DarkOf(map, 1));
+        Assert.Equal(SceneBackdrop.DuskLast, SceneBackdrop.DarkOf(map, start), 3);
+        Assert.Equal(SceneBackdrop.DuskLast, SceneBackdrop.DarkOf(map, start + 4), 3);
+        Assert.Equal(0f, SceneBackdrop.DarkOf(Tollgate().Map, 9));
+    }
+
+    [Fact]
+    public void FogLiesOnForestAndWaterOnly()
+    {
+        var state = Tollgate();
+        var archer = state.Units.First(u => u.Id == "archer-2");
+        var captain = state.Find("captain")!;
+        Assert.Equal("forest", state.Map.TerrainIdAt(archer.At));
+        Assert.Equal("plain", state.Map.TerrainIdAt(captain.At));
+
+        var backdrop = SceneBackdrop.Of(state, captain, archer);
+
+        Assert.Equal(SceneBackdrop.GroundFog["forest"], backdrop.Right.Fog);
+        Assert.Equal(0f, backdrop.Left.Fog);
+    }
+
+    [Fact]
+    public void EmbersRiseOnlyWhereFireBurnsWithinReachAndTheSameEveryRun()
+    {
+        var state = Tollgate();
+        var archer = state.Units.First(u => u.Id == "archer-2");
+        var captain = state.Find("captain")!;
+        Assert.Empty(SceneBackdrop.Of(state, captain, archer).Right.Embers);
+
+        var burning = state with { Map = state.Map.WithTerrain(new Coord(archer.At.X + 1, archer.At.Y), "fire") };
+        var near = SceneBackdrop.Of(burning, captain, archer);
+        var far = state with { Map = state.Map.WithTerrain(new Coord(archer.At.X, archer.At.Y - SceneBackdrop.EmberReach - 1), "fire") };
+
+        Assert.Equal(SceneBackdrop.EmbersPerFire, near.Right.Embers.Count);
+        Assert.Empty(near.Left.Embers);
+        Assert.Empty(SceneBackdrop.Of(far, captain, archer).Right.Embers);
+        Assert.Equal(near.Right.Embers, SceneBackdrop.Of(burning, captain, archer).Right.Embers);
+        Assert.All(near.Right.Embers, e => Assert.InRange(e.X, 0f, 1f));
+    }
+
+    [Fact]
+    public void LampsHangOnlyOverAnEnemyWhoseGroupIsLit()
+    {
+        var state = Tollgate();
+        var archer = state.Units.First(u => u.Id == "archer-2");
+        var captain = state.Find("captain")!;
+        Assert.False(SceneBackdrop.Of(state, captain, archer).Right.Lamps);
+
+        var lit = SceneBackdrop.Of(state.Light(archer.Group!), captain, archer);
+
+        Assert.True(lit.Right.Lamps);
+        Assert.False(lit.Left.Lamps);
+    }
+
+    [Fact]
+    public void ASceneCarriesTheBackdropOfTheBoardItWasFoughtOn()
+    {
+        var client = TurnFour();
+        client.Submit(new EndPhase());
+        StepUntil(client, "Bandit Leader attacks Teodor");
+
+        var scene = Assert.IsType<BattleScene>(Assert.Single(client.Beats).Scene);
+
+        Assert.Equal(scene.Defender.Terrain, scene.Backdrop.Left.Terrain);
+        Assert.Equal(scene.Attacker.Terrain, scene.Backdrop.Right.Terrain);
+        Assert.Equal(0f, scene.Backdrop.Dark);
+    }
+
+    [Fact]
+    public void AHealThatLevelsItsHealerShowsTheCardAlone()
+    {
+        var state = Tollgate(text => text.Replace("P recruit:pell 6,10", "P recruit:maud 6,10", StringComparison.Ordinal));
+        var maud = state.Find("maud")!;
+        var wren = state.Find("wren")!;
+        var slot = maud.Unit.Inventory.Items.ToList().FindIndex(s => s.ItemId == "salve");
+        state = state.WithUnit(maud with { Unit = maud.Unit with { Exp = 99 } }).WithUnit(wren with { Hp = 5 });
+        var client = new ClientSession(Content, state);
+        client.Submit(new Move("maud", new Coord(5, 10)));
+
+        Assert.True(client.Submit(new UseItem("maud", slot, "wren")));
+
+        var beat = Assert.Single(client.Beats, b => b.LevelUp is not null);
+        Assert.False(beat.IsStrike);
+        Assert.Null(beat.Scene);
+        Assert.Equal("maud", beat.LevelUp!.UnitId);
+        Assert.Equal(0f, beat.LevelUpAt);
+        Assert.Equal(LevelUpCard.Hold, Rhythm.Length(beat));
+    }
 }

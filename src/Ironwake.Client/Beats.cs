@@ -68,11 +68,18 @@ public sealed record Beat(
     /// </summary>
     public BattleScene? Scene { get; init; }
 
-    /// <summary>On a strike beat that levels a unit, the level-up card shown after it (issue 535), whatever the setting.</summary>
+    /// <summary>
+    /// On a strike beat that levels a unit, the level-up card shown after it (issue 535), whatever
+    /// the setting; on a heal that levels its healer, the beat is the card alone (slice 2).
+    /// </summary>
     public LevelUpCard? LevelUp { get; init; }
 
-    /// <summary>When the level-up card rises, from the beat's start: after the scene or the strikes on the map.</summary>
-    public float LevelUpAt => Scene?.Length ?? Rhythm.StrikeLength(this);
+    /// <summary>When the level-up card rises, from the beat's start: after the scene or the strikes on the map, or at once on a heal's card.</summary>
+    public float LevelUpAt => Scene?.Length ?? (IsStrike ? Rhythm.StrikeLength(this) : 0);
+
+    /// <summary>A beat that is a level-up card and nothing else: a heal that levelled its healer (issue 535, slice 2).</summary>
+    public static Beat CardOnly(LevelUpCard card) =>
+        new Beat(card.UnitId, null, Array.Empty<Coord>(), null, null, Array.Empty<Pop>(), NoHp, null) { LevelUp = card };
 
     private static readonly IReadOnlyDictionary<string, int> NoHp = new Dictionary<string, int>();
 
@@ -287,11 +294,13 @@ public static class Rhythm
 
     /// <summary>
     /// A beat's whole length: a walk by its steps, a strike by its scene or its numbers and then
-    /// its level-up card's hold when it carries one (issue 535), a death by its fade and hold.
+    /// its level-up card's hold when it carries one (issue 535), a heal's level-up card by its
+    /// hold, a death by its fade and hold.
     /// </summary>
     public static float Length(Beat beat) =>
         beat.IsMove ? 0.1f + 0.07f * (beat.Path.Count + 1)
         : beat.IsStrike ? beat.LevelUpAt + (beat.LevelUp is null ? 0 : LevelUpCard.Hold)
+        : beat.LevelUp is not null ? LevelUpCard.Hold
         : beat.Fell is not null ? Fade + DeathHold
         : 0;
 
