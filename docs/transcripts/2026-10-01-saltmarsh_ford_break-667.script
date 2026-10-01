@@ -1,0 +1,64 @@
+move teodor 10,7
+wait teodor
+move wren 8,7
+wait wren
+move captain 8,8
+wait captain
+move ottilie 7,9
+wait ottilie
+end
+move teodor 10,5
+wait teodor
+move wren 9,5
+wait wren
+move captain 9,6
+wait captain
+move ottilie 9,7
+wait ottilie
+end
+move wren 9,4
+attack wren wingrider-1
+attack teodor wingrider-1
+move captain 10,4
+attack captain archer-1
+move ottilie 9,5
+wait ottilie
+end
+move ottilie 11,4
+attack ottilie soldier-1
+attack captain soldier-1
+move teodor 9,6
+wait teodor
+wait wren
+end
+attack ottilie soldier-1
+move wren 10,2
+wait wren
+wait captain
+wait teodor
+end
+move captain 10,1
+attack captain bandit_leader-1
+item wren 2
+item teodor 2
+end
+move captain 10,4
+item captain 2
+move wren 11,0
+attack wren bandit_leader-1
+move teodor 7,6
+attack teodor soldier-2
+end
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move teodor 9,6
+item teodor 2
+move captain 8,5
+wait captain
+move wren 12,2
+item wren 2
+end
+move ottilie 10,6
+attack ottilie brigand-1
+attack captain brigand-1
+attack teodor soldier-2

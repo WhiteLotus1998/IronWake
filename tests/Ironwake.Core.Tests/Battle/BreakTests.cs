@@ -116,6 +116,36 @@ public class BreakTests
     }
 
     [Fact]
+    public void ABrokenUnitIsGoneForRoutSoABreakThatEmptiesTheBoardWinsOnThatCommand()
+    {
+        var map = Field(true).Replace("E brigand 4,4 group:road behavior:hold\n", "");
+        for (ulong seed = 1; seed < 200; seed++)
+        {
+            var state = BattleFixture.Start(seed, map: map);
+            foreach (var enemy in state.UnitsOf(Side.Enemy).ToList())
+            {
+                state = state.WithUnit(enemy with { Hp = 1 });
+            }
+
+            Assert.Equal(BattleResult.Ongoing, state.Outcome.Result);
+            var result = state.Try(new Attack("hale", "bandit_leader-1"));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            if (result.Next.Find("bandit_leader-1") is not null)
+            {
+                continue;
+            }
+
+            Assert.Contains(result.Events, e => e is UnitBroke { UnitId: "soldier-1" });
+            Assert.Contains(result.Events, e => e is UnitBroke { UnitId: "archer-1" });
+            Assert.Empty(result.Next.UnitsOf(Side.Enemy));
+            Assert.Equal(BattleResult.Won, result.Next.Outcome.Result);
+            return;
+        }
+
+        throw new InvalidOperationException("no seed under 200 kills the boss");
+    }
+
+    [Fact]
     public void AMemberOfAnotherGroupNeverBreaks()
     {
         var result = Behead(breaks: true, hp: 1);
@@ -201,10 +231,13 @@ public class BreakTests
         Assert.DoesNotContain(MapRenderer.BreakLegend, MapRenderer.Render(MapFixture.Parse(Field(false), "field.map"), Starter));
 
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
-        var path = Path.Combine(repo, "docs", "samples", "the_tollgate_break.map");
-        var sample = MapFiles.Load(path, MapFixture.Content);
-        Assert.True(sample.BreakEnabled);
-        Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(sample, Starter));
+        foreach (var name in new[] { "the_tollgate_break.map", "saltmarsh_ford_break.map" })
+        {
+            var path = Path.Combine(repo, "docs", "samples", name);
+            var sample = MapFiles.Load(path, MapFixture.Content);
+            Assert.True(sample.BreakEnabled);
+            Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(sample, Starter));
+        }
     }
 
     [Fact]
