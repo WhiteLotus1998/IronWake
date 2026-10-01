@@ -844,6 +844,11 @@ public sealed class PlaySession
                     _out.WriteLine(brace);
                 }
 
+                foreach (var line in BreakLines(_state, _content, attacker!, target!))
+                {
+                    _out.WriteLine(line);
+                }
+
                 foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes))
                 {
                     _out.WriteLine(ignite);
@@ -1228,6 +1233,7 @@ public sealed class PlaySession
 
         lines.AddRange(PincerLines(state, unit with { At = tile }, target));
         lines.AddRange(BraceLines(unit, target));
+        lines.AddRange(BreakLines(state, content, unit, target));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot));
@@ -1787,6 +1793,23 @@ public sealed class PlaySession
     }
 
     /// <summary>
+    /// Under a forecast on a <c>break: on</c> map (DESIGN.md 13.22): for the target, then the
+    /// striker, when it is a boss whose fall would break someone, one line naming each member at
+    /// or below half with its HP. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> BreakLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target)
+    {
+        foreach (var boss in new[] { target, attacker })
+        {
+            var members = Break.WouldBreak(state, content, boss);
+            if (members.Count > 0)
+            {
+                yield return $"  break if {boss.Id} falls: " + string.Join(", ", members.Select(m => $"{m.Id} ({m.Hp}/{m.MaxHp(content)})"));
+            }
+        }
+    }
+
+    /// <summary>
     /// Under a forecast on a <c>brace: on</c> map (DESIGN.md 13.14): one line when the target is
     /// braced, naming the hit the forecast already took off. Silent otherwise; the striker is never
     /// braced, since its brace ends before it can strike.
@@ -2001,6 +2024,8 @@ public sealed class PlaySession
                 return $"{s.UnitId} shoves {s.TargetId} {s.From} -> {s.To}";
             case UnitRetreated r:
                 return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
+            case UnitBroke b:
+                return $"{b.UnitId} breaks and flees ({b.Hp} hp)";
             case GrudgeSworn g:
                 return $"{g.UnitId} swears a grudge against {g.AgainstId}";
             case UnitHealed h:

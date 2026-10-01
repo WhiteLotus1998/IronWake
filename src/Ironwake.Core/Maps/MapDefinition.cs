@@ -73,6 +73,10 @@ namespace Ironwake.Core;
 /// began its phase on is struck at <see cref="Brace.Hit"/> less hit until its side's next phase (<see cref="Brace"/>).
 /// Off by default.
 /// </param>
+/// <param name="BreakEnabled">
+/// The <c>break: on</c> header (DESIGN.md 13.22, experiment): when a boss dies, every member of
+/// his group at or below half HP leaves the board (<see cref="Break"/>). Off by default.
+/// </param>
 /// <param name="WildfireEnabled">
 /// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
 /// sets a forest tile alight, and fire spreads through forest at each player phase start
@@ -146,7 +150,8 @@ public sealed record MapDefinition(
     bool OverwatchEnabled = false,
     bool CoverEnabled = false,
     bool SignaturesEnabled = false,
-    bool OverwatchHold = false)
+    bool OverwatchHold = false,
+    bool BreakEnabled = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

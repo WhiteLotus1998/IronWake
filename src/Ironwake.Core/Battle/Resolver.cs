@@ -107,6 +107,7 @@ public static class Resolver
             next = OpenCanto(next, content, acted);
         }
 
+        next = Break.After(state, next, content, events);
         next = WakeGroups(state, next, content, events);
         if (next.Map.KeepsakesEnabled && next.Outcome.IsOver)
         {
