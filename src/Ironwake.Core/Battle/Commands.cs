@@ -105,6 +105,14 @@ public sealed record EndPhase : Command;
 public sealed record Recall(int ToIndex) : Command;
 
 /// <summary>
+/// Take back a move (issue 676, DESIGN.md section 7): a player unit that has moved and not
+/// acted returns to the tile it began the phase on, unmoved, when its Move was the last command
+/// and changed nothing but its tile (<see cref="TakeBack"/>). No charge and no history entry:
+/// the state the move left comes back whole, with the history it had.
+/// </summary>
+public sealed record Undo(string UnitId) : Command;
+
+/// <summary>
 /// Commander's Word (DESIGN.md 13.2, issue 85): the captain calls one order a map as his action,
 /// after his Move or without one, reaching the allies within <see cref="Orders.Radius"/> of him.
 /// Open on a map with <c>orders: on</c> and on every campaign map from the second

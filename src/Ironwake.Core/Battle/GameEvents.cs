@@ -12,6 +12,9 @@ public sealed record UnitMoved(string UnitId, Coord From, Coord To, ValueList<Co
 public sealed record CombatFought(
     string AttackerId, string TargetId, int Turn, Side Phase, ValueList<StrikeEvent> Strikes, int AttackerHpAfter, int TargetHpAfter) : GameEvent;
 
+/// <summary>A unit's move was taken back (issue 676): it stood at <paramref name="From"/> and is back on <paramref name="To"/>, its start tile, unmoved.</summary>
+public sealed record MoveUndone(string UnitId, Coord From, Coord To) : GameEvent;
+
 public sealed record UnitDied(string UnitId, Side Side, Coord At) : GameEvent;
 
 /// <summary>EXP earned from one combat (DESIGN.md section 6), with the total toward the next level after it.</summary>

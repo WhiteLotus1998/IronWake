@@ -35,6 +35,7 @@ public enum RejectionReason
     SignatureRefused,
     CannotOrder,
     NoFallBack,
+    CannotUndo,
     BattleOver,
     UnknownCommand,
 }

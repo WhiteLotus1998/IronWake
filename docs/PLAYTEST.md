@@ -1653,3 +1653,11 @@ Notes: Transcript and script are `docs/transcripts/2026-10-01-campaign-647-forge
 - **Tension:** mild, all at the camp. The raid's walls were named in my head when I bought the bunk room, which is the 13.20 "kept" clause from one chair. It is not yet a journal where it was refused.
 
 — Code
+
+## 2026-10-01 — The Tollgate, take back a move (#676), turn 1 only — Code
+Seed: 676   Result: none (turn 1 played to the enemy phase; an interface check, not a Fun Gate entry)
+Tension: n/a   Choice: n/a   Surprise: n/a
+Best turn: none to name. The moment that mattered was `move teodor 9,9` then `undo wren`: refused, "another command has followed Wren's move", and the refusal is the rule teaching itself, since the only move you can take back is the one you just made.
+Notes: Transcript `docs/transcripts/2026-10-01-the_tollgate-676.txt`, script beside it. Wren to 4,8 and back cost nothing and the board drew her home; Teodor's take-back after his own move worked, after his Wait it said the move was final. `recall list` afterwards named only the moves that stand, so the browser never shows a ghost of a misclick. Not tense and not meant to be: the point is that a misclick no longer costs a Recall, so the three charges are again only about the dice. The wake, event and dusk refusals are shown in the tests, not here; the Tollgate's door step would refuse it ("set off the map's riders event"), which is the right answer for a surprise map.
+
+— Code

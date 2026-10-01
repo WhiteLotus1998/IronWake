@@ -48,6 +48,14 @@ public class ClientPauseMenuTests
     }
 
     [Fact]
+    public void EscapeTakesBackASelectedUnitsMoveBeforeItClears()
+    {
+        Assert.Equal(EscapeAction.TakeBack, Screens.Escape(attackMenuOpen: false, selected: true, recallOpen: false, campaign: false, canTakeBack: true));
+        Assert.Equal(EscapeAction.CloseAttackMenu, Screens.Escape(attackMenuOpen: true, selected: true, recallOpen: false, campaign: false, canTakeBack: true));
+        Assert.Equal(EscapeAction.Clear, Screens.Escape(attackMenuOpen: false, selected: true, recallOpen: true, campaign: false, canTakeBack: true));
+    }
+
+    [Fact]
     public void EscapeWithNothingToBackOutOfPauses()
     {
         Assert.Equal(EscapeAction.Pause, Screens.Escape(attackMenuOpen: false, selected: false, recallOpen: false, campaign: false));
