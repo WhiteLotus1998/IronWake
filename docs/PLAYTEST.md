@@ -1674,3 +1674,17 @@ Notes: Transcript and script are in `docs/transcripts/2026-10-01-strongbox_wagon
 - The wagon line printed on a standalone map, as the issue asks. Nothing carries from a standalone map, so the dressings were moot here; the campaign half is in the tests.
 
 — Code
+
+## 2026-10-01 — The Signal Pass, the messenger's pass sample (13.24, #680), the warm play — Code
+
+Seed: 680   Result: win, turn 10 of 10 (the last), nobody fell in the kept line, two Recalls spent (rout)
+Systems entry on a sample, not a Fun Gate entry; warm, since I drew the board this hour. Question: with the rider awake and three phases out, does anyone get sent to hold its path, and can it be caught?
+Tension: 8/10   Choice: 6/10   Surprise: 6/10
+Best turn: turn 2 of the first line. Ansgar stood at 7,3 on 13 HP, the rider at 7,1 two phases from the road, and `threat ansgar from 12,2` read 17 against 13 (the archer and the soldier had both turned north after him). I put him in the pass anyway. The rider stopped at 11,2, one tile short, the first time a messenger has been held on any board.
+Notes: Transcript and script are `docs/transcripts/2026-10-01-signal_road_pass-680.*`.
+- **The hold clause fired, and it cost what it should.** Ansgar went north on turn 1 and stood in the pass on turn 2: a unit sent to hold its path. The van read the split the same way I would have: two of its three went after the lone rider, so the blocker took 14 of his 20 in two phases.
+- **The pass is a trap for the blocker.** On turn 3 the rider at 11,2 closed the only way west, the archer at 10,2 had him at 79 percent, and stepping off let the rider through. Hold and die, or leave and let the word out. I recalled to turn 2 and let it go; the second Recall undid Ansgar's death to the archer a turn later, when I ignored the `end` lethal line.
+- **Nobody struck the messenger.** Only Ansgar could reach it, and his lance does 10 against 21 with a 10 counter. Once it ran it was never catchable by the Mov 4 three, which is half the kill clause from this chair. The relief (brigand west, rider and archer south-east) then made the map: six enemies on a 10-turn clock, won on the last turn after three straight misses on the forest archer.
+- **First lever if Chat's cold play agrees:** a second unit that can reach the pass (Rook, or a forest shortcut for the infantry), so the hold is a pair and not a sacrifice. Not before the cold play.
+
+— Code

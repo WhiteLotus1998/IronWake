@@ -1,0 +1,103 @@
+move ansgar 7,3
+wait ansgar
+move teodor 3,9
+wait teodor
+move captain 5,10
+wait captain
+move wren 6,10
+wait wren
+end
+move ansgar 12,2
+wait ansgar
+move captain 7,10
+wait captain
+move teodor 5,9
+wait teodor
+wait wren
+end
+threat ansgar from 15,5
+move ansgar 15,5
+wait ansgar
+move captain 7,6
+wait captain
+move wren 6,7
+wait wren
+move teodor 5,6
+wait teodor
+end
+recall 18
+move ansgar 6,8
+wait ansgar
+move captain 7,10
+wait captain
+move teodor 5,9
+wait teodor
+wait wren
+end
+move ansgar 6,7
+attack ansgar archer-1
+move captain 7,6
+attack captain archer-1
+canto ansgar 5,11
+move teodor 5,6
+attack teodor archer-1
+move wren 6,8
+wait wren
+end
+recall 35
+move teodor 5,6
+attack teodor archer-1
+move wren 6,7
+attack wren archer-1
+move ansgar 6,5
+attack ansgar archer-1
+canto ansgar 6,6
+move captain 7,6
+wait captain
+end
+move captain 7,5
+attack captain soldier-1
+attack ansgar soldier-1
+canto ansgar 7,2
+wait teodor
+wait wren
+end
+move wren 4,7
+attack wren brigand-2
+move teodor 3,6
+attack teodor brigand-2
+wait captain
+wait ansgar
+end
+move wren 0,7
+wait wren
+move ansgar 1,2
+wait ansgar
+move teodor 6,6
+wait teodor
+wait captain
+end
+attack captain rider-2
+move teodor 7,7
+attack teodor archer-2
+move wren 3,7
+wait wren
+wait ansgar
+end
+move captain 9,6
+attack captain archer-2
+move teodor 8,7
+attack teodor archer-2
+move wren 7,7
+wait wren
+wait ansgar
+end
+attack captain archer-2
+attack teodor archer-2
+move wren 9,8
+attack wren archer-2
+move ansgar 5,4
+wait ansgar
+end
+move captain 10,6
+attack captain archer-2
