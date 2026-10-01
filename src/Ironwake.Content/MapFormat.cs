@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "deploy" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "oathbound", "deploy" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -153,6 +153,11 @@ public static class MapFormat
         if (map.WakeLinks.Count > 0)
         {
             sb.Append("wake_links: ").Append(string.Join(", ", map.WakeLinks)).Append('\n');
+        }
+
+        if (map.Oathbound.Count > 0)
+        {
+            sb.Append("oathbound: ").Append(string.Join(", ", map.Oathbound)).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -333,7 +338,7 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders };
             ValidateMessenger(map, header);
             Validate(map);
-            return map with { Deploy = ParseDeploy(header, map) };
+            return map with { Deploy = ParseDeploy(header, map), Oathbound = ParseOathbound(header, map) };
         }
 
         /// <summary>
@@ -588,6 +593,37 @@ public static class MapFormat
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// The <c>oathbound:</c> header (issue 691): comma-separated enemy group names, each on the
+        /// map as a placement's or a spawn's group, each listed once. Every enemy in one is oath-bound.
+        /// </summary>
+        private ValueList<string> ParseOathbound(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("oathbound", out var entry))
+            {
+                return ValueList<string>.Empty;
+            }
+
+            var enemies = map.Placements.OfType<EnemyPlacement>().Concat(map.Spawns()).ToList();
+            var groups = new List<string>();
+            foreach (var group in entry.Value.Split(',', StringSplitOptions.TrimEntries))
+            {
+                if (group.Length == 0 || enemies.All(e => e.Group != group))
+                {
+                    throw ErrorAt(entry.Line, $"oathbound: no enemy is in group '{group}'");
+                }
+
+                if (groups.Contains(group))
+                {
+                    throw ErrorAt(entry.Line, $"oathbound: group '{group}' is listed twice");
+                }
+
+                groups.Add(group);
+            }
+
+            return ValueList<string>.From(groups);
         }
 
         /// <summary>

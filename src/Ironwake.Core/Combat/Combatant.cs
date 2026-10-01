@@ -82,6 +82,12 @@ public sealed record Combatant
     /// </summary>
     public bool Blind { get; init; }
 
+    /// <summary>
+    /// Whether this side is oath-bound (issue 691): an enemy in a group its map's <c>oathbound:</c>
+    /// header names. Read by an ability whose condition asks for it (Unsworn), nothing else.
+    /// </summary>
+    public bool Oathbound { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, and not <see cref="Blind"/>.</summary>
     public bool CanStrike(int distance) => !Blind && Weapon is not null && Weapon.InRange(distance);
 }

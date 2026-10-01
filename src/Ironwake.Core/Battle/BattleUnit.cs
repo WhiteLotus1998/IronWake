@@ -175,7 +175,7 @@ public sealed record BattleUnit(
 
     /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on, its weapon broken or whole.</summary>
     public Combatant ToCombatant(MapDefinition map, GameContent content) =>
-        content.CombatantOf(Unit, EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content));
+        content.CombatantOf(Unit, EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content)) with { Oathbound = map.IsOathbound(this) };
 
     /// <summary>
     /// This unit as the formulas see it on a board, rivalry's modifiers included (issue 16):
@@ -207,7 +207,7 @@ public sealed record BattleUnit(
             weapon = art.Apply(weapon);
         }
 
-        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit);
+        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit) with { Oathbound = state.Map.IsOathbound(this) };
     }
 
     /// <summary>

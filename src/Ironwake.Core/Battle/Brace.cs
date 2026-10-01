@@ -17,13 +17,14 @@ public static class Brace
     public const int Hit = 15;
 
     /// <summary>
-    /// Whether <paramref name="unit"/> braces when it waits now: on a <c>brace: on</c> map, only
+    /// Whether <paramref name="unit"/> braces when it waits now: on a <c>brace: on</c> map, or on
+    /// any map for a unit holding Hold the Gate (issue 691, <see cref="BraceEffect"/>), only
     /// on the tile it began its phase on (it has neither moved nor been shoved), and never a
     /// Guard whose group still sleeps, since a sleeper caught off guard is the ambush the wake
     /// rule promises.
     /// </summary>
-    public static bool BracesOnWait(BattleState state, BattleUnit unit) =>
-        state.Map.BraceEnabled && !unit.Moved && !unit.Shoved && !Asleep(state, unit);
+    public static bool BracesOnWait(BattleState state, GameContent content, BattleUnit unit) =>
+        (state.Map.BraceEnabled || AbilityRules.Braces(content.AbilitiesOf(unit.Unit))) && !unit.Moved && !unit.Shoved && !Asleep(state, unit);
 
     private static bool Asleep(BattleState state, BattleUnit unit) =>
         unit.Behavior == Behavior.Guard && unit.Group is { } group && !state.IsAwake(group);

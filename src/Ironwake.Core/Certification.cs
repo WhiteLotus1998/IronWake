@@ -43,17 +43,34 @@ public static class Certifications
 {
     /// <summary>
     /// Every requirement of <paramref name="target"/> that <paramref name="unit"/> fails, in
-    /// order: the class itself, level, ranks in content order, stats in draw order. Empty
+    /// order: the class itself, a hidden class (issue 691), level, ranks in content order, stats in draw order. Empty
     /// when the unit may certify. A stat minimum reads the unit's own stats, so the class it
     /// would leave counts for nothing toward the class it enters.
     /// </summary>
-    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target)
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target) => Check(unit, target, null);
+
+    /// <summary>
+    /// <see cref="Check(Unit, UnitClass)"/> read with the class the unit would leave,
+    /// <paramref name="from"/>: a unit in a hidden class keeps it (issue 691), so every other
+    /// class is refused first, naming the class it holds.
+    /// </summary>
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from)
     {
         var refusals = new List<CertificationRefusal>();
+        if (from is { Hidden: true } && from.Id == unit.ClassId && target.Id != from.Id)
+        {
+            refusals.Add(new("from", $"{unit.Id} is a {from.Name}, earned and kept"));
+        }
+
         if (unit.ClassId == target.Id)
         {
             var article = "AEIOU".Contains(target.Name[0]) ? "an" : "a";
             refusals.Add(new("class", $"{unit.Id} is already {article} {target.Name}"));
+        }
+
+        if (target.Hidden)
+        {
+            refusals.Add(new("hidden", $"{target.Name} is not certified; it is earned"));
         }
 
         var requirements = target.Certification;

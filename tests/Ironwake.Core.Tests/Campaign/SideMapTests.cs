@@ -38,7 +38,7 @@ public class SideMapTests
     [Fact]
     public void TheShippedCampaignOffersMaudsFirstQuestOnDiskInTheSideMapShape()
     {
-        var quest = Assert.Single(Content.Campaign.Quests);
+        var quest = Assert.Single(Content.Campaign.Quests, q => q.OpensAfter is null);
 
         Assert.Equal(("maud_1", "maud", 1, "the_lazar_house"), (quest.Id, quest.MemberId, quest.Part, quest.MapId));
         Assert.Null(CampaignRecord.QuestMapRefusal(Side(quest.MapId)));
@@ -104,7 +104,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));
@@ -204,15 +204,18 @@ public class SideMapTests
     }
 
     [Fact]
-    public void ABoardIsASideMapOnlyWithOneBareSlotAndNoNamedRecruitOrCertification()
+    public void ABoardIsASideMapOnlyWithABareSlotAndNoNamedRecruitOrCertification()
     {
         var board = Side("the_lazar_house");
         var named = board with { Placements = ValueList<Placement>.From(board.Placements.Select(p => p is PlayerPlacement { Slot: PlayerSlot.AnyRecruit } bare ? bare with { Slot = PlayerSlot.NamedRecruit, RecruitId = "wren" } : p)) };
+        var none = board with { Placements = ValueList<Placement>.From(board.Placements.Where(p => p is not PlayerPlacement { Slot: PlayerSlot.AnyRecruit })) };
         var two = board with { Placements = board.Placements.Add(new PlayerPlacement(new Coord(0, 4), PlayerSlot.AnyRecruit)) };
         var trial = board with { Certification = new CertificationTrial("outrider", ValueList<string>.Of("iron_lance")) };
 
         Assert.Equal("the side map 'The Lazar House' places a recruit by name; its slots are the member's (captain) and the ally's (recruit)", CampaignRecord.QuestMapRefusal(named));
-        Assert.Equal("the side map 'The Lazar House' needs exactly one bare recruit slot, for the ally", CampaignRecord.QuestMapRefusal(two));
+        Assert.Equal("the side map 'The Lazar House' needs a bare recruit slot, for the ally", CampaignRecord.QuestMapRefusal(none));
+        Assert.Null(CampaignRecord.QuestMapRefusal(two));
+        Assert.Equal(2, CampaignRecord.QuestAllies(two));
         Assert.Equal("the side map 'The Lazar House' is a certification trial", CampaignRecord.QuestMapRefusal(trial));
     }
 

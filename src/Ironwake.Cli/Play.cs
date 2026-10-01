@@ -1471,7 +1471,7 @@ public sealed class PlaySession
     /// </summary>
     public static string? BracedThreat(BattleState state, GameContent content, BattleUnit unit, Coord tile)
     {
-        if (tile != unit.At || unit.Acted || unit.Braced || !Brace.BracesOnWait(state, unit))
+        if (tile != unit.At || unit.Acted || unit.Braced || !Brace.BracesOnWait(state, content, unit))
         {
             return null;
         }

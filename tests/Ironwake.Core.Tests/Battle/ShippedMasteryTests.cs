@@ -27,6 +27,7 @@ public class ShippedMasteryTests
     [InlineData("outrider", "swordbreaker", 12)]
     [InlineData("skyrider", "bowbreaker", 12)]
     [InlineData("bulwark", "reasonbreaker", 12)]
+    [InlineData("sergeant", "unsworn", 12)]
     public void EveryStarterClassMastersOneAbilityAtItsRequirement(string classId, string ability, int points)
     {
         var unitClass = Starter.Class(classId);
@@ -41,7 +42,7 @@ public class ShippedMasteryTests
     {
         var masteries = Starter.Classes.Values.Select(c => c.Mastery).ToList();
 
-        Assert.Equal(9, masteries.Count);
+        Assert.Equal(10, masteries.Count);
         Assert.DoesNotContain(null, masteries);
         Assert.Equal(masteries.Count, masteries.Distinct().Count());
     }

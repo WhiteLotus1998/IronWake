@@ -28,5 +28,12 @@ public sealed record UnitClass(
     /// <summary>What a unit needs to certify into the class (issue 72, <see cref="Certifications"/>).</summary>
     public CertificationRequirements Certification { get; init; } = CertificationRequirements.None;
 
+    /// <summary>
+    /// Whether the class is earned rather than certified (issue 691): nobody certifies or trials
+    /// into it, the screen's class list leaves it out, and a side map's win is the only way in
+    /// (<see cref="CampaignQuest.Promotes"/>).
+    /// </summary>
+    public bool Hidden { get; init; }
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 }

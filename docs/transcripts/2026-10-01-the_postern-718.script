@@ -1,0 +1,62 @@
+build barracks
+hire bet
+quest bet_postern teodor ottilie maud
+show bet
+move teodor 2,3
+wait teodor
+move bet 1,3
+wait bet
+move ottilie 1,2
+wait ottilie
+move maud 0,3
+wait maud
+end
+forecast bet brigand-1 from 2,1
+threat bet from 2,1
+move ottilie 0,2
+attack ottilie brigand-1
+move bet 2,1
+attack bet brigand-1
+move maud 1,2
+attack maud brigand-1
+attack teodor soldier-2
+recall 21
+move teodor 2,1
+attack teodor brigand-1
+move bet 1,2
+attack bet brigand-1
+move maud 0,3
+item maud 2 ottilie
+threat bet
+threat ottilie
+threat maud
+threat teodor
+end
+move teodor 2,2
+attack teodor hexer-1
+move ottilie 2,3
+attack ottilie hexer-1
+move maud 1,3
+item maud 2 bet
+threat bet
+threat teodor
+threat ottilie
+threat maud
+end
+threat bet from 5,2
+forecast maud postern_keeper-1 from 2,3
+move maud 2,3
+item maud 2 teodor
+move teodor 5,3
+wait teodor
+move bet 5,2
+wait bet
+threat bet
+threat teodor
+threat maud
+end
+threat bet from 8,3
+move bet 8,3
+leave
+show bet
+classes bet

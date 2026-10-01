@@ -458,6 +458,14 @@ public partial class Main
                 }
 
                 break;
+            case "sergeant":
+                // The pike crossed with a short sword, the two weapons the class carries (issue 691);
+                // the same shape make_art.py draws.
+                Stroke(P(-9, 10), P(7, -8));
+                Fill(P(5, -6), P(11, -12), P(9, -4));
+                Stroke(P(8, 9), P(-5, -4));
+                Stroke(P(7.5f, 3.5f), P(2.5f, 8.5f));
+                break;
             case "outrider":
                 // Apart from the pike at 32 px (round 170): the lance couched flatter, the pennant
                 // under its head, a horseshoe at the foot; the same shape make_art.py draws.

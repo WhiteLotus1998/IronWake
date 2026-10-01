@@ -1,0 +1,1150 @@
+Campaign, seed 683, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 maps
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 9 of 9: Ironwake Keep; the purse holds 1000 --
+== Roster ==
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
+  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 11)
+== Keep ==
+Purse: 1000
+Rooms: beds: 11/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+Keep: Ironwake Keep; built: nothing; the purse holds 1000
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 9, Ironwake Keep. Hold out until the end of turn 8. Captain Fenn must survive.
+> build barracks
+Barracks built for 500, the purse holds 500; beds: 11/14; hire <id> takes Corin Ashby, Bet Lowry, Ines Tarrow, Mattias Grue for 300 each
+> hire bet
+Bet Lowry joins as a Pikeman at L1 for 300, the purse holds 200; beds: 12/14
+> quest bet_postern teodor ottilie maud
+-- The Postern --
+(Bet Lowry asks for one day and three of the company. Take the
+gatehouse: Bet on its seat at 8,3 wins. The map is lost if she falls.)
+
+Side map: The Postern, seed 718
+Bet Lowry goes with Teodor, Ottilie and Maud. This map is lost if Bet Lowry falls; who falls here is gone for good.
+Objective: Get the captain to the gate by the end of turn 10. Captain Lowry must survive.
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 B.....^#a#
+ 3 A====..!T#
+ 4 DC...^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       0,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, asleep
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, asleep
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, asleep
+B  teodor           Teodor L1 pikeman          0,2    hp 21/21  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> show bet
+Bet Lowry (bet), Pikeman L1, at 0,3 on Road
+  HP 21/21  Str 8 Mag 0 Dex 5 Spd 5 Lck 2 Def 5 Res 1 Cha 4  Mov 4 (infantry)
+  Weapon: Iron Lance (mt 6 hit 70 crit 0 wt 6 range 1-1)
+  Items: 1: Iron Lance x40
+  Ranks: lance E (0)
+  Mastery: Horsebane (0 of 12 combats)
+  Targets from here: none
+> move teodor 2,3
+Teodor moves 0,2 -> 2,3 via 1,2 2,2
+The lane group wakes (proximity)
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 ......^#a#
+ 3 A=B==..!T#
+ 4 DC...^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       0,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait teodor
+Teodor waits
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 ......^#a#
+ 3 A=B==..!T#
+ 4 DC...^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       0,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move bet 1,3
+Bet Lowry moves 0,3 -> 1,3
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 ......^#a#
+ 3 =AB==..!T#
+ 4 DC...^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait bet
+Bet Lowry waits
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 ......^#a#
+ 3 =AB==..!T#
+ 4 DC...^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain  done
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,4    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move ottilie 1,2
+Ottilie moves 1,4 -> 1,2 via 1,3
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 .C....^#a#
+ 3 =AB==..!T#
+ 4 D....^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain  done
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,2    hp 17/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait ottilie
+Ottilie waits
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 .C....^#a#
+ 3 =AB==..!T#
+ 4 D....^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain  done
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,4    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          1,2    hp 17/17  Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move maud 0,3
+Maud moves 0,4 -> 0,3
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 .C....^#a#
+ 3 DAB==..!T#
+ 4 .....^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain  done
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          1,2    hp 17/17  Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait maud
+Maud waits
+The Postern  turn 1 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^...c..#F#
+ 2 .C....^#a#
+ 3 DAB==..!T#
+ 4 .....^.#.#
+ 5 .^...d.#b#
+ 6 ^^..^.e#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain  done
+c  brigand-1        Brigand L2 reaver          4,1    hp 22/22  Hill  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             6,6    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road  done
+C  ottilie          Ottilie L1 bowman          1,2    hp 17/17  Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, asleep
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         5,5    hp 20/20  Plain  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 1,1
+Brigand moves 4,1 -> 1,1 via 3,1 2,1
+enemy: attack brigand-1 ottilie
+Forecast Brigand -> Ottilie: dmg 12 hit 58% crit 0%; counter: none
+Brigand attacks Ottilie
+  Brigand hits Ottilie for 12 (hp 5)
+  Brigand hp 22, Ottilie hp 5
+enemy: move hexer-1 5,3
+Hexer moves 6,6 -> 5,3 via 6,5 6,4 6,3
+enemy: wait hexer-1
+Hexer waits
+enemy: wait postern_keeper-1
+Postern Keeper waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 3,3
+Soldier 2 moves 5,5 -> 3,3 via 4,5 4,4 4,3
+enemy: attack soldier-2 teodor
+Forecast Soldier 2 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Soldier 2 attacks Teodor
+  Soldier 2 misses Teodor
+  Teodor hits Soldier 2 for 10 (hp 10)
+  Soldier 2 hp 10, Teodor hp 21
+Teodor gains 12 exp (12)
+The gate group wakes (noise)
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^c..n..#F#
+ 2 .C....^#a#
+ 3 DABd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 22/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          1,2    hp 5/17   Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> forecast bet brigand-1 from 2,1
+Forecast Bet Lowry -> Brigand from 2,1 (Plain): dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+> threat bet from 2,1
+Threat on Bet Lowry at 2,1 (Plain):
+  Brigand from 1,1 with Iron Axe (slot 1): dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
+  Hexer from 4,1 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
+  Soldier 2 from 3,1 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  If all land: 29 against 21 hp
+> move ottilie 0,2
+Ottilie moves 1,2 -> 0,2
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^c..n..#F#
+ 2 C.....^#a#
+ 3 DABd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 22/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> attack ottilie brigand-1
+Forecast Ottilie -> Brigand: dmg 8 hit 86% crit 5%; counter: none
+Ottilie attacks Brigand
+  Ottilie hits Brigand for 8 (hp 14)
+  Ottilie hp 5, Brigand hp 14
+Ottilie gains 12 exp (12)
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^c..n..#F#
+ 2 C.....^#a#
+ 3 DABd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 14/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> move bet 2,1
+Bet Lowry moves 1,3 -> 2,1 via 1,2 2,2
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^cA.n..#F#
+ 2 C.....^#a#
+ 3 D=Bd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       2,1    hp 21/21  Plain  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 14/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> attack bet brigand-1
+Forecast Bet Lowry -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Bet Lowry attacks Brigand
+  Bet Lowry hits Brigand for 12 (hp 2)
+  Brigand hits Bet Lowry for 10 (hp 11)
+  Bet Lowry hp 11, Brigand hp 2
+Bet Lowry gains 12 exp (12)
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^cA.n..#F#
+ 2 C.....^#a#
+ 3 D=Bd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       2,1    hp 11/21  Plain  captain  done
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> move maud 1,2
+Maud moves 0,3 -> 1,2 via 0,2
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^cA.n..#F#
+ 2 CD....^#a#
+ 3 ==Bd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       2,1    hp 11/21  Plain  captain  done
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           1,2    hp 17/17  Plain
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> attack maud brigand-1
+Forecast Maud -> Brigand: dmg 11 hit 98% crit 3%; counter: dmg 13 hit 72% crit 0%
+Maud attacks Brigand
+  Maud misses Brigand
+  Brigand hits Maud for 13 (hp 4)
+  Maud hp 4, Brigand hp 2
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^cA.n..#F#
+ 2 CD....^#a#
+ 3 ==Bd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       2,1    hp 11/21  Plain  captain  done
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           1,2    hp 4/17   Plain  done
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> attack teodor soldier-2
+Forecast Teodor -> Soldier 2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Teodor attacks Soldier 2
+  Teodor misses Soldier 2
+  Soldier 2 hits Teodor for 8 (hp 13)
+  Teodor hp 13, Soldier 2 hp 10
+The Postern  turn 2 of 10  player phase  seize  recall 2
+   0123456789
+ 0 ^^...^^###
+ 1 ^cA.n..#F#
+ 2 CD....^#a#
+ 3 ==Bd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       2,1    hp 11/21  Plain  captain  done
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           1,2    hp 4/17   Plain  done
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 13/21  Road  done
+> recall 21
+Recalled to state 21; 1 charges left
+Undone: gives back 12 exp, 12 enemy hp; returns 10 hp to Bet Lowry, 13 hp to Maud, 8 hp to Teodor
+The rolls do not change: the same attack will roll the same
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^c..n..#F#
+ 2 C.....^#a#
+ 3 DABd=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 14/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
+> move teodor 2,1
+Teodor moves 2,3 -> 2,1 via 2,2
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^cB.n..#F#
+ 2 C.....^#a#
+ 3 DA=d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 14/22  Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
+> attack teodor brigand-1
+Forecast Teodor -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Teodor attacks Brigand
+  Teodor hits Brigand for 12 (hp 2)
+  Brigand misses Teodor
+  Teodor hp 21, Brigand hp 2
+Teodor gains 12 exp (24)
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^cB.n..#F#
+ 2 C.....^#a#
+ 3 DA=d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,3    hp 21/21  Road  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
+> move bet 1,2
+Bet Lowry moves 1,3 -> 1,2
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^cB.n..#F#
+ 2 CA....^#a#
+ 3 D==d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 21/21  Plain  captain
+c  brigand-1        Brigand L2 reaver          1,1    hp 2/22   Plain  group lane, guard, awake
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
+> attack bet brigand-1
+Forecast Bet Lowry -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Bet Lowry attacks Brigand
+  Bet Lowry hits Brigand for 12 (hp 0)
+  Bet Lowry hp 21, Brigand hp 0
+Bet Lowry gains 35 exp (35)
+Brigand falls at 1,1
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^.B.n..#F#
+ 2 CA....^#a#
+ 3 D==d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 21/21  Plain  captain  done
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
+> move maud 0,3
+Maud moves 0,3 -> 0,3
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^.B.n..#F#
+ 2 CA....^#a#
+ 3 D==d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 21/21  Plain  captain  done
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 5/17   Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
+> item maud 2 ottilie
+Maud uses Salve on ottilie (7 left)
+Ottilie heals 7 (hp 12)
+Maud gains 16 exp (16)
+The Postern  turn 2 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^.B.n..#F#
+ 2 CA....^#a#
+ 3 D==d=e.!T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 21/21  Plain  captain  done
+e  hexer-1          Hexer L2 adept             5,3    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road  done
+C  ottilie          Ottilie L1 bowman          0,2    hp 12/17  Plain  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  7,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
+> threat bet
+Threat on Bet Lowry at 1,2 (Plain):
+  Hexer from 3,2 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
+  Soldier 2 from 2,2 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  If all land: 19 against 21 hp
+> threat ottilie
+Threat on Ottilie at 0,2 (Plain):
+  Hexer from 2,2 with Cinder (slot 1): dmg 10 hit 98% crit 0%; counter: dmg 9 x2 hit 89% crit 4%
+  If all land: 10 against 12 hp
+> threat maud
+Threat on Maud at 0,3 (Road):
+  Hexer from 2,3 with Cinder (slot 1): dmg 5 hit 99% crit 0%; counter: dmg 6 hit 97% crit 2%
+  Soldier 2 from 0,4 with Iron Lance (slot 1): dmg 11 hit 81% crit 0%; counter: dmg 10 hit 97% crit 2%
+  If all land: 16 against 17 hp
+> threat teodor
+Threat on Teodor at 2,1 (Plain):
+  Hexer from 4,1 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
+  Soldier 2 from 3,1 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  If all land: 19 against 21 hp
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: move hexer-1 3,2
+Hexer moves 5,3 -> 3,2 via 5,2 4,2
+enemy: attack hexer-1 bet
+Forecast Hexer -> Bet Lowry: dmg 11 hit 99% crit 1%; counter: none
+Hexer attacks Bet Lowry
+  Hexer hits Bet Lowry for 11 (hp 10)
+  Hexer hp 16, Bet Lowry hp 10
+enemy: move postern_keeper-1 4,2
+Postern Keeper moves 7,3 -> 4,2 via 6,3 5,3 5,2
+enemy: wait postern_keeper-1
+Postern Keeper waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 0,4
+Soldier 2 moves 3,3 -> 0,4 via 2,3 1,3 1,4
+enemy: attack soldier-2 maud
+Forecast Soldier 2 -> Maud: dmg 11 hit 81% crit 0%; counter: dmg 10 hit 97% crit 2%
+Soldier 2 attacks Maud
+  Soldier 2 misses Maud
+  Maud hits Soldier 2 for 10 (hp 0)
+  Soldier 2 hp 0, Maud hp 17
+Maud gains 35 exp (51)
+Soldier 2 falls at 0,4
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^.B.n..#F#
+ 2 CA.e!.^#a#
+ 3 D====..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+e  hexer-1          Hexer L2 adept             3,2    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 12/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
+> move teodor 2,2
+Teodor moves 2,1 -> 2,2
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 CABe!.^#a#
+ 3 D====..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+e  hexer-1          Hexer L2 adept             3,2    hp 16/16  Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 12/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 21/21  Plain
+> attack teodor hexer-1
+Forecast Teodor -> Hexer: dmg 13 hit 83% crit 1%; counter: dmg 11 hit 99% crit 1%
+Teodor attacks Hexer
+  Teodor hits Hexer for 13 (hp 3)
+  Hexer hits Teodor for 11 (hp 10)
+  Teodor hp 10, Hexer hp 3
+Teodor gains 12 exp (36)
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 CABe!.^#a#
+ 3 D====..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+e  hexer-1          Hexer L2 adept             3,2    hp 3/16   Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          0,2    hp 12/17  Plain
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
+> move ottilie 2,3
+Ottilie moves 0,2 -> 2,3 via 1,2 2,2
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .ABe!.^#a#
+ 3 D=C==..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+e  hexer-1          Hexer L2 adept             3,2    hp 3/16   Plain  group lane, guard, awake
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          2,3    hp 12/17  Road
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
+> attack ottilie hexer-1
+Forecast Ottilie -> Hexer: dmg 9 x2 hit 89% crit 4%; counter: dmg 10 hit 98% crit 0%
+Ottilie attacks Hexer
+  Ottilie hits Hexer for 9 (hp 0)
+  Ottilie hp 12, Hexer hp 0
+Ottilie gains 35 exp (47)
+Hexer falls at 3,2
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB.!.^#a#
+ 3 D=C==..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+D  maud             Maud L1 chaplain           0,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          2,3    hp 12/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
+> move maud 1,3
+Maud moves 0,3 -> 1,3
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB.!.^#a#
+ 3 =DC==..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 10/21  Plain  captain
+D  maud             Maud L1 chaplain           1,3    hp 17/17  Road
+C  ottilie          Ottilie L1 bowman          2,3    hp 12/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
+> item maud 2 bet
+Maud uses Salve on bet (6 left)
+Bet Lowry heals 7 (hp 17)
+Maud gains 16 exp (67)
+The Postern  turn 3 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB.!.^#a#
+ 3 =DC==..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           1,3    hp 17/17  Road  done
+C  ottilie          Ottilie L1 bowman          2,3    hp 12/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  4,2    hp 25/25  Plain  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
+> threat bet
+Threat on Bet Lowry at 1,2 (Plain):
+  Postern Keeper from 1,1 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  If all land: 12 against 17 hp
+> threat teodor
+Threat on Teodor at 2,2 (Plain):
+  Postern Keeper from 3,2 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  If all land: 12 against 10 hp
+> threat ottilie
+Threat on Ottilie at 2,3 (Road):
+  Postern Keeper from 3,3 with Steel Lance (slot 1): dmg 14 hit 80% crit 0%; counter: none
+  If all land: 14 against 12 hp
+> threat maud
+Threat on Maud at 1,3 (Road): no enemy can strike her next phase
+> end
+Lethal if all land: Ottilie (Postern Keeper for 14, against 12 hp)
+Lethal if all land: Teodor (Postern Keeper for 12, against 10 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer waits
+enemy: move postern_keeper-1 3,3
+Postern Keeper moves 4,2 -> 3,3 via 3,2
+enemy: attack postern_keeper-1 ottilie
+Forecast Postern Keeper -> Ottilie: dmg 14 hit 80% crit 0%; counter: none
+Postern Keeper attacks Ottilie
+  Postern Keeper hits Ottilie for 14 (hp 0)
+  Postern Keeper hp 25, Ottilie hp 0
+Ottilie falls at 2,3
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB...^#a#
+ 3 =D=!=..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           1,3    hp 17/17  Road
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain
+> threat bet from 5,2
+Threat on Bet Lowry at 5,2 (Plain):
+  Postern Keeper from 5,3 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  If all land: 12 against 17 hp
+> forecast maud postern_keeper-1 from 2,3
+Forecast Maud -> Postern Keeper from 2,3 (Road): dmg 9 hit 97% crit 1%; counter: dmg 15 hit 89% crit 0%
+> move maud 2,3
+Maud moves 1,3 -> 2,3
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB...^#a#
+ 3 ==D!=..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain
+> item maud 2 teodor
+Maud uses Salve on teodor (5 left)
+Teodor heals 7 (hp 17)
+Maud gains 16 exp (83)
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .AB...^#a#
+ 3 ==D!=..=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          2,2    hp 17/21  Plain
+> move teodor 5,3
+Teodor moves 2,2 -> 5,3 via 3,2 4,2 5,2
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .A....^#a#
+ 3 ==D!=B.=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain
+> wait teodor
+Teodor waits
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .A....^#a#
+ 3 ==D!=B.=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       1,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain  done
+> move bet 5,2
+Bet Lowry moves 1,2 -> 5,2 via 2,2 3,2 4,2
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .....A^#a#
+ 3 ==D!=B.=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       5,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain  done
+> wait bet
+Bet Lowry waits
+The Postern  turn 4 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .....A^#a#
+ 3 ==D!=B.=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       5,2    hp 17/21  Plain  captain  done
+D  maud             Maud L1 chaplain           2,3    hp 17/17  Road  done
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 25/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain  done
+> threat bet
+Threat on Bet Lowry at 5,2 (Plain):
+  Postern Keeper from 4,2 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  If all land: 12 against 17 hp
+> threat teodor
+Threat on Teodor at 5,3 (Plain):
+  Postern Keeper from 5,4 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 7 hit 49% crit 0%
+  If all land: 12 against 17 hp
+> threat maud
+Threat on Maud at 2,3 (Road):
+  Postern Keeper from 3,3 with Steel Lance (slot 1): dmg 15 hit 89% crit 0%; counter: dmg 9 hit 97% crit 1%
+  If all land: 15 against 17 hp
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer waits
+enemy: attack postern_keeper-1 maud
+Forecast Postern Keeper -> Maud: dmg 15 hit 89% crit 0%; counter: dmg 9 hit 97% crit 1%
+Postern Keeper attacks Maud
+  Postern Keeper hits Maud for 15 (hp 2)
+  Maud hits Postern Keeper for 9 (hp 16)
+  Postern Keeper hp 16, Maud hp 2
+Maud gains 14 exp (97)
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Postern  turn 5 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 .....A^#a#
+ 3 ==D!=B.=T#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       5,2    hp 17/21  Plain  captain
+D  maud             Maud L1 chaplain           2,3    hp 2/17   Road
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 16/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain
+> threat bet from 8,3
+Threat on Bet Lowry at 8,3 (Gate): this move wins the map
+> move bet 8,3
+Bet Lowry moves 5,2 -> 8,3 via 5,3 6,3 7,3
+The Postern  turn 5 of 10  player phase  seize  recall 1
+   0123456789
+ 0 ^^...^^###
+ 1 ^...n..#F#
+ 2 ......^#a#
+ 3 ==D!=B.=A#
+ 4 .....^.#.#
+ 5 .^.....#b#
+ 6 ^^..^..#.#
+ 7 ^^~......#
+
+a  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group yard, hold
+A  bet              Bet Lowry L1 pikeman       8,3    hp 17/21  Gate (heals 20 percent, 4 hp)  captain
+D  maud             Maud L1 chaplain           2,3    hp 2/17   Road
+!  postern_keeper-1 Postern Keeper L3 pikeman  3,3    hp 16/25  Road  group gate, boss, awake
+b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
+B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain
+Battle won: seize; only recall is left, or leave
+> leave
+Bet Lowry wins bet_postern; Bet Lowry becomes a Sergeant; fallen for good: Ottilie
+> show bet
+  Bet Lowry (bet): Sergeant L1, EXP 35; 1: Iron Lance 39/40 (repair 10)
+    HP 22  Str 8 Mag 0 Dex 5 Spd 5 Lck 2 Def 6 Res 1 Cha 4
+    Ranks: lance E (5), sword E (0)
+    Mastery: Unsworn, mastered
+> classes bet
+Classes: what each asks, read against a unit's own stats without its class's; a seal costs 500
+  Adept: level 3, mag 6 -- Bet Lowry is a Sergeant, earned and kept; needs level 3, has 1; needs mag 6, has 0
+  Bowman: level 3, dex 8 -- Bet Lowry is a Sergeant, earned and kept; needs level 3, has 1; needs dex 8, has 5
+  Bulwark: level 4, def 5; or its trial in place of the seal -- Bet Lowry is a Sergeant, earned and kept; needs level 4, has 1; needs def 5, has 4
+  Cadet: nothing -- Bet Lowry is a Sergeant, earned and kept
+  Chaplain: level 3, mag 4, res 4 -- Bet Lowry is a Sergeant, earned and kept; needs level 3, has 1; needs mag 4, has 0; needs res 4, has 1
+  Outrider: level 4, sword D; or its trial in place of the seal -- Bet Lowry is a Sergeant, earned and kept; needs level 4, has 1; needs sword D, has E
+  Pikeman: level 3, lance D -- Bet Lowry is a Sergeant, earned and kept; needs level 3, has 1; needs lance D, has E
+  Reaver: level 3, axe D -- Bet Lowry is a Sergeant, earned and kept; needs level 3, has 1; needs axe D, has E
+  Sergeant: nothing -- Bet Lowry's class
+  Skyrider: level 4, lance D, spd 8 -- Bet Lowry is a Sergeant, earned and kept; needs level 4, has 1; needs lance D, has E; needs spd 8, has 5
+Campaign stopped before Ironwake Keep: the script ended on the screen

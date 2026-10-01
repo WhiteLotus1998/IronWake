@@ -195,6 +195,16 @@ public sealed record MapDefinition(
     /// </summary>
     public int Deploy { get; init; } = DefaultDeploy;
 
+    /// <summary>
+    /// The <c>oathbound:</c> header (issue 691): the enemy groups sworn to the Kin, in file order.
+    /// An enemy in one of them is oath-bound (<see cref="IsOathbound"/>), which Unsworn reads.
+    /// Empty by default. The group flag stands in for the oath-bound flag of STORY draft 2.
+    /// </summary>
+    public ValueList<string> Oathbound { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
+    public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
+
     /// <summary>Whether this map fields the whole living company (<c>deploy: all</c>, issue 689).</summary>
     public bool DeploysAll => Deploy == DeployAll;
 

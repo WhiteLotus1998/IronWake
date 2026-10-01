@@ -110,7 +110,7 @@ public class BraceTests
         Assert.True(state.Find("soldier-1")!.Braced);
 
         var awake = state with { AwakeGroups = state.AwakeGroups.Add("far") };
-        Assert.True(Brace.BracesOnWait(awake, awake.Find("brigand-1")! with { Moved = false }));
+        Assert.True(Brace.BracesOnWait(awake, MapFixture.Content, awake.Find("brigand-1")! with { Moved = false }));
     }
 
     [Fact]

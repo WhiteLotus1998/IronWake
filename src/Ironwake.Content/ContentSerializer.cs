@@ -114,6 +114,21 @@ public static class ContentSerializer
                         writer.WriteNumber("rare", quest.Rare);
                     }
 
+                    if (quest.OpensAfter is { } opensAfter)
+                    {
+                        writer.WriteString("opensAfter", opensAfter);
+                    }
+
+                    if (quest.Promotes is { } promotes)
+                    {
+                        writer.WriteString("promotes", promotes);
+                    }
+
+                    if (quest.Ending is { } ending)
+                    {
+                        writer.WriteString("ending", ending);
+                    }
+
                     WriteCard(writer, "before", quest.Before);
                     WriteCard(writer, "after", quest.After);
                     writer.WriteEndObject();
@@ -288,6 +303,11 @@ public static class ContentSerializer
                         writer.WriteString("movement", movement.ToString().ToLowerInvariant());
                     }
 
+                    if (modifier.Against.Oathbound)
+                    {
+                        writer.WriteBoolean("oathbound", true);
+                    }
+
                     writer.WriteEndObject();
                 }
 
@@ -329,6 +349,9 @@ public static class ContentSerializer
                 break;
             case CantoEffect:
                 writer.WriteString("kind", "canto");
+                break;
+            case BraceEffect:
+                writer.WriteString("kind", "brace");
                 break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
@@ -522,6 +545,11 @@ public static class ContentSerializer
             }
 
             writer.WriteEndArray();
+        }
+
+        if (unitClass.Hidden)
+        {
+            writer.WriteBoolean("hidden", true);
         }
 
         if (unitClass.Certification != CertificationRequirements.None)

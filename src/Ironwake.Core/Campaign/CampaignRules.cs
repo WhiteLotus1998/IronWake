@@ -54,6 +54,25 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     public ValueList<string> Before { get; init; } = ValueList<string>.Empty;
 
     public ValueList<string> After { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// The main map after whose win the quest opens (issue 691), in place of the part's own timing,
+    /// or null for a member's quest timed by arrival. A quest with it is offered at every camp
+    /// from then on while its member stands, and at no camp before: nothing names it earlier.
+    /// </summary>
+    public string? OpensAfter { get; init; }
+
+    /// <summary>
+    /// The hidden class a win puts the member in (issue 691), its mastery held at once, or null for
+    /// none. Only a <see cref="UnitClass.Hidden"/> class is named here, by validator.
+    /// </summary>
+    public string? Promotes { get; init; }
+
+    /// <summary>
+    /// The ending line a won quest gives its member in place of <see cref="Barracks.EndingLine(string)"/>
+    /// (issue 691), or null for none; read only when the member is a hire alive at the end.
+    /// </summary>
+    public string? Ending { get; init; }
 }
 
 /// <summary>
@@ -95,6 +114,20 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
         for (var i = 0; i < Maps.Count; i++)
         {
             if (Maps[i].Arrives.Contains(unitId))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /// <summary>The index of the main map <paramref name="mapId"/> in play order, or -1 when the campaign does not list it.</summary>
+    public int MapIndexOf(string mapId)
+    {
+        for (var i = 0; i < Maps.Count; i++)
+        {
+            if (Maps[i].MapId == mapId)
             {
                 return i;
             }
