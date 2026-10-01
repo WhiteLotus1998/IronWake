@@ -244,6 +244,12 @@ public sealed class ClientSession
     /// <summary>Why a lost battle was lost, in the console's words, or null while ongoing or won (issue 374).</summary>
     public string? Verdict => EnemyPhasePlaying ? null : Ironwake.Core.Objective.Verdict(State, Content);
 
+    /// <summary>
+    /// The legend's hover card for a terrain (issue 610): what the ground does for a unit on it on
+    /// this map, the console's <c>terrain</c> card and the protocol's <c>terrain</c> text.
+    /// </summary>
+    public string TerrainText(string terrainId) => TerrainCard.Text(State, Content, terrainId);
+
     /// <summary>The selected player unit's id, or null.</summary>
     public string? Selected { get; private set; }
 

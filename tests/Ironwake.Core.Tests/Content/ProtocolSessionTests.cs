@@ -139,7 +139,7 @@ public class ProtocolSessionTests
     [InlineData("not json", "not JSON")]
     [InlineData("[1]", "a request is a JSON object")]
     [InlineData("""{"type":"jump"}""", "type 'jump' is not a command")]
-    [InlineData("""{"query":"weather"}""", "query 'weather' is not one of: state, reachable, targets, forecast, threat")]
+    [InlineData("""{"query":"weather"}""", "query 'weather' is not one of: state, reachable, targets, forecast, threat, terrain")]
     [InlineData("""{"query":"reachable"}""", "field 'unit' is missing")]
     public void AMalformedRequestAnswersBadRequestAndTheSessionGoesOn(string line, string message)
     {
