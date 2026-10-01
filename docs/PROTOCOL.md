@@ -20,7 +20,7 @@ The first line out is `{"ok":true,"protocolVersion":1,"rulesVersion":1,"state":<
 
 A **command** answers `{"ok":true,"events":[<event>...],"state":<board state>}`. `end` plays the enemy phase through `EnemyAi.Plan` and the resolver exactly as `--script` does, so its events are the player's end of phase, the whole enemy phase, and the start of the next player phase.
 
-A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}`. `reason` is a `RejectionReason` in camelCase (`outOfReach`, `noSuchUnit`, `alreadyActed`, ...) for anything the core refused, and `badRequest` for a line that is not a request (bad JSON, an unknown type or query, a missing or mistyped field, named in the message).
+A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}`. `reason` is a `RejectionReason` in camelCase (`outOfReach`, `noSuchUnit`, `alreadyActed`, ...) for anything the core refused, and `badRequest` for a line that is not a request (bad JSON, an unknown type or query, a missing or mistyped field, named in the message). `message` is for a reader (issue 615): unit ids read as names, an id quoted as typed stays as typed, sentence case; a client branches on `reason`, never on `message`.
 
 ## Commands
 

@@ -147,7 +147,7 @@ public class CantoTests
         var rejection = state.Refused(new Canto("rider", new Coord(0, 0)));
 
         Assert.Equal(RejectionReason.OutOfReach, rejection.Reason);
-        Assert.Contains("not within the 3 movement its Canto has left", rejection.Message);
+        Assert.Contains("not within the 3 movement rider's Canto has left", rejection.Message);
     }
 
     [Fact]

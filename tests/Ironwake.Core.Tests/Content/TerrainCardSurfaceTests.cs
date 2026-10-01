@@ -33,7 +33,7 @@ public class TerrainCardSurfaceTests
 
             Assert.Contains("> terrain\n" + string.Join("\n", expected) + "\n> terrain ~\n" + expected.Single(l => l.StartsWith('~')) + "\n", output, StringComparison.Ordinal);
             Assert.Contains("holds its tile", expected.Single(l => l.StartsWith('~')), StringComparison.Ordinal);
-            Assert.Contains("ERROR: no terrain 'swamp'; name it by its glyph, id or name", output, StringComparison.Ordinal);
+            Assert.Contains("ERROR: No terrain 'swamp'; name it by its glyph, id or name", output, StringComparison.Ordinal);
         }
         finally
         {
@@ -67,6 +67,6 @@ public class TerrainCardSurfaceTests
         using var answer = JsonDocument.Parse(session.Answer("""{"query":"terrain","terrain":"swamp"}"""));
 
         Assert.Equal("badRequest", answer.RootElement.GetProperty("error").GetProperty("reason").GetString());
-        Assert.Equal("no terrain 'swamp'; name it by its glyph, id or name", answer.RootElement.GetProperty("error").GetProperty("message").GetString());
+        Assert.Equal("No terrain 'swamp'; name it by its glyph, id or name", answer.RootElement.GetProperty("error").GetProperty("message").GetString());
     }
 }

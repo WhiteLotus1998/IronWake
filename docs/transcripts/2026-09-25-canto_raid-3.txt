@@ -76,7 +76,7 @@ C  wren             Wren L1 cadet              2,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 5 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 1 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -225,7 +225,7 @@ Ansgar attacks Archer
   Ansgar hits Archer for 11 (hp 6)
   Ansgar hp 20, Archer hp 6
 Ansgar gains 10 exp (10)
-ansgar may canto up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 1 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 2 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -353,7 +353,7 @@ Ansgar attacks Archer
   Ansgar hp 20, Archer hp 0
 Ansgar gains 30 exp (40)
 Archer falls at 4,3
-ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 5 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 3 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -520,7 +520,7 @@ Ansgar attacks Soldier 2
   Soldier 2 misses Ansgar
   Ansgar hp 20, Soldier 2 hp 11
 Ansgar gains 10 exp (50)
-ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -593,7 +593,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 3
    012345678901
  0 ............
@@ -728,7 +728,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 2
    012345678901
  0 ............
@@ -841,7 +841,7 @@ Ansgar attacks Soldier 2
   Ansgar hp 10, Soldier 2 hp 0
 Ansgar gains 30 exp (90)
 Soldier 2 falls at 9,5
-ansgar may canto up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may Canto up to 6 movement: canto ansgar <x,y|stay>
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
    012345678901
  0 ............

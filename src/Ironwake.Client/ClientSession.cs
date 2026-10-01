@@ -602,7 +602,7 @@ public sealed class ClientSession
         var chosen = menu.Rows[row];
         if (!chosen.Legal)
         {
-            Status = chosen.Option.Refusal!.Message;
+            Status = UnitNames.Of(State, Content).Message(chosen.Option.Refusal!.Message);
             return null;
         }
 
@@ -622,7 +622,7 @@ public sealed class ClientSession
     {
         if (EnemyPhasePlaying)
         {
-            Status = "the enemy phase is playing; step or continue";
+            Status = "The enemy phase is playing; step or continue";
             return null;
         }
 
@@ -674,14 +674,14 @@ public sealed class ClientSession
     {
         if (EnemyPhasePlaying)
         {
-            Status = "the enemy phase is playing; step or continue";
+            Status = "The enemy phase is playing; step or continue";
             return false;
         }
 
         var result = Resolver.Apply(State, Content, command);
         if (!result.Accepted)
         {
-            Status = result.Rejection!.Message;
+            Status = UnitNames.Of(State, Content).Message(result.Rejection!.Message);
             return false;
         }
 

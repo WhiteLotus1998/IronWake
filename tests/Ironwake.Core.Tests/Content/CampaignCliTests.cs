@@ -80,7 +80,7 @@ public class CampaignCliTests
         var output = Play(out var exit, "march\nleave\n");
 
         Assert.Equal(1, exit);
-        Assert.Contains("ERROR: the battle is not decided; leave comes after it is won or lost\n", output);
+        Assert.Contains("ERROR: The battle is not decided; leave comes after it is won or lost\n", output);
         Assert.Contains("campaign stopped in Old Mill Road at turn 1, undecided\n", output);
     }
 

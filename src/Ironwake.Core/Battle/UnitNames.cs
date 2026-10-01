@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Text.RegularExpressions;
 
 namespace Ironwake.Core;
 
@@ -116,6 +117,17 @@ public sealed class UnitNames
         ChangeTerrain change => blocked ? $"{change.At} does not change: a unit holds it" : "the ground changes",
         _ => $"event {name}" + (blocked ? " is blocked: its tile is held" : ""),
     };
+
+    /// <summary>
+    /// A refusal as a reader sees it (issue 615): every unit id this battle knows reads as its
+    /// name, an id quoted as it was typed (<c>'wren'</c>) stays as typed, and each line is in
+    /// sentence case: <c>wren cannot move to 3,4: ...</c> reads <c>Wren cannot move to 3,4: ...</c>,
+    /// <c>captain is at full HP</c> reads <c>Alder Fenn is at full HP</c>.
+    /// </summary>
+    public string Message(string text) =>
+        Sentence(IdToken.Replace(text, m => m.Value[0] == '\'' ? m.Value : this[m.Value]));
+
+    private static readonly Regex IdToken = new(@"'[^'\s]*'|(?<![\w-])[a-z][a-z0-9_]*(?:-[0-9]+)?(?![\w-])", RegexOptions.CultureInvariant);
 
     /// <summary>
     /// <paramref name="text"/> in sentence case (issue 609): on each line, the first character

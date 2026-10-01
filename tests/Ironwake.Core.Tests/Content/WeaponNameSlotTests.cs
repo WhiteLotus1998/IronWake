@@ -67,8 +67,8 @@ public class WeaponNameSlotTests
     {
         var output = Play("forecast pell brigand-1 iron sword from 2,4\nattack pell brigand-1 bolt\n");
 
-        Assert.Contains("> forecast pell brigand-1 iron sword from 2,4\nERROR: pell carries no 'iron sword'; slots: 1 Cinder, 2 Gust\n", output);
-        Assert.Contains("> attack pell brigand-1 bolt\nERROR: pell carries no 'bolt'; slots: 1 Cinder, 2 Gust\n", output);
+        Assert.Contains("> forecast pell brigand-1 iron sword from 2,4\nERROR: Pell carries no 'iron sword'; slots: 1 Cinder, 2 Gust\n", output);
+        Assert.Contains("> attack pell brigand-1 bolt\nERROR: Pell carries no 'bolt'; slots: 1 Cinder, 2 Gust\n", output);
     }
 
     [Theory]
@@ -79,7 +79,7 @@ public class WeaponNameSlotTests
     {
         var output = Play(command + "\n");
 
-        Assert.Contains("> " + command + "\nERROR: usage: ", output);
+        Assert.Contains("> " + command + "\nERROR: Usage: ", output);
     }
 
     [Fact]
@@ -97,8 +97,8 @@ public class WeaponNameSlotTests
         {
             var output = ConsoleCapture.Run(() => Program.Main(["play", "old_mill_road", "--seed", "7", "--script", script, "--content", content]));
 
-            Assert.Contains("> forecast captain brigand-1 iron sword\nERROR: captain carries 'iron sword' in slots 1 and 2; give the slot number; slots: 1 Iron Sword, 2 Iron Sword\n", output);
-            Assert.DoesNotContain("> forecast captain brigand-1 2\nERROR: captain carries", output);
+            Assert.Contains("> forecast captain brigand-1 iron sword\nERROR: Alder Fenn carries 'iron sword' in slots 1 and 2; give the slot number; slots: 1 Iron Sword, 2 Iron Sword\n", output);
+            Assert.DoesNotContain("> forecast captain brigand-1 2\nERROR: Alder Fenn carries", output);
         }
         finally
         {
