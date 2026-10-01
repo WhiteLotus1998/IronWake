@@ -95,13 +95,19 @@ public sealed class UnitNames
     /// <summary>
     /// The names for the campaign's between-map screen (issue 615): every unit on
     /// <paramref name="record"/>'s roster by its own name, and every fallen unit by its cast
-    /// name, each with its pronoun, the one chosen for it (issue 681) or the cast file's. The screen has no board, so no enemy
+    /// name or, for a hire (issue 690), the barracks' name for them, each with its pronoun, the one chosen for it (issue 681) or the cast file's. The screen has no board, so no enemy
     /// and no map event is known.
     /// </summary>
     public static UnitNames Of(CampaignRecord record, GameContent content)
     {
         var names = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
         var pronouns = ImmutableDictionary.CreateBuilder<string, Pronoun>(StringComparer.Ordinal);
+        foreach (var hire in content.Campaign.Keep.Hires)
+        {
+            names[hire.Id] = hire.Name;
+            pronouns[hire.Id] = hire.Pronoun;
+        }
+
         foreach (var unit in content.Cast.Concat(record.Roster))
         {
             names[unit.Id] = unit.Name;

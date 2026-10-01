@@ -1701,3 +1701,13 @@ Notes: Transcript and script are `docs/transcripts/2026-10-01-starting_alone-681
 - **What did not bite:** the -1 Dex and -1 Lck. A point of hit or crit avoid never decided a strike here. That's expected on a lesson. Gate 1 says the four cards land within 3 points on the Tollgate and The Mill (DECISIONS/0143). Whether an origin feels different over a campaign is a campaign play's question, from each chair.
 
 — Code
+
+## 2026-10-01 — The camp after the raid (the barracks, #690) — Code
+
+Seed: 690   Result: camp only; the raid won on turn 4 with Teodor and Dunstan fallen
+Systems entry, warm (I built it), not a Fun Gate entry. The raid is the Sim's own trace for seed 690 replayed through the campaign, disclosed: not hand play. The camp is by hand.
+Tension: 6/10   Choice: 7/10   Surprise: 4/10
+Best turn: the 700 left after the barracks and Bet. A wall at 10,3 or a second hire: I took the wall, then found the 300 left buys Ines, and bought her too, and the purse went to 0 two maps before the keep with no repairs on the Iron Sword at 34 of 40. That was the trade 13.20 wanted, priced in one place.
+Notes: Transcript `docs/transcripts/2026-10-01-campaign-690-barracks.txt`. Two members down after the raid, 1500 in the purse, the menu read cleanly: the barracks line says `+2 beds and 4 hires at 300`, the wing says it needs the barracks, and the hire list prints the card that joins, class modifiers included, so `show bet` matched the menu to the point. Bet is Teodor's class with Teodor's level-1 card and growths ten lower; she reads as a replacement, not a person, which is what the issue asked for. The finding that matters: **a hire cannot take a fallen member's named slot.** Sallow Grange names Teodor's tile, so with Bet and Ines in the company the deploy line still reads `deploy 5 of 11`; neither can fight until a map with bare slots or the keep's `deploy: all`. Whether a hire may stand in a fallen recruit's named slot is a question for the Table (on #690's PR); until then the barracks pays only on the keep, which is the room's stated purpose but makes the 300 feel like a deposit. Surprise is low because I wrote the list.
+
+— Code

@@ -70,7 +70,7 @@ public class KeepRoomTests
         var none = Content with { Campaign = Content.Campaign with { Keep = Menu with { Rooms = ValueList<KeepRoom>.Empty } } };
 
         Assert.Equal("Bunk room costs 400 and the purse holds 399", start.BuildRoom("bunk", Content).Text);
-        Assert.Equal("the keep has no room 'chapel'; it builds bunk, forge", start.BuildRoom("chapel", Content).Text);
+        Assert.Equal("the keep has no room 'chapel'; it builds bunk, forge, barracks, barracks_wing", start.BuildRoom("chapel", Content).Text);
         Assert.Equal("the keep has no rooms to build", start.BuildRoom("bunk", none).Text);
         Assert.Equal("the campaign is finished", (start with { Purse = 400, MapIndex = Content.Campaign.Maps.Count }).BuildRoom("bunk", Content).Text);
     }
@@ -148,6 +148,8 @@ public class KeepRoomTests
                 $"Rooms: beds: 10/{Menu.Beds + 2}; a fallen member keeps their bed",
                 "  bunk: Bunk room, 400, +2 beds, built 1 of 2",
                 "  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won",
+                "  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won",
+                "  barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first",
                 "  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare",
             },
             CampaignSession.RoomLines(record, Content));

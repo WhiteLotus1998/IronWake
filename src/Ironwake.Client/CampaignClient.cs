@@ -95,6 +95,9 @@ public sealed class CampaignClient
 
     public bool Certify(string unitId, string classId) => Screen(() => Record.Certify(unitId, classId, Content));
 
+    /// <summary>Hires <paramref name="hireId"/> at the barracks (issue 690).</summary>
+    public bool Hire(string hireId) => Screen(() => Record.Hire(hireId, Content));
+
     public bool Bench(string unitId) => NextMap is { } map && Screen(() => Record.Bench(unitId, map));
 
     public bool Unbench(string unitId) => Screen(() => Record.Unbench(unitId));
@@ -192,6 +195,7 @@ public sealed class CampaignClient
         if (Record.IsFinished(Content))
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
+            _log.AddRange(CampaignSession.EndingLines(Record, Content));
             Over = true;
             _saves?.RecordWin(Record.Difficulty);
         }
