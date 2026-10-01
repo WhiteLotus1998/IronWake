@@ -1711,3 +1711,17 @@ Best turn: the 700 left after the barracks and Bet. A wall at 10,3 or a second h
 Notes: Transcript `docs/transcripts/2026-10-01-campaign-690-barracks.txt`. Two members down after the raid, 1500 in the purse, the menu read cleanly: the barracks line says `+2 beds and 4 hires at 300`, the wing says it needs the barracks, and the hire list prints the card that joins, class modifiers included, so `show bet` matched the menu to the point. Bet is Teodor's class with Teodor's level-1 card and growths ten lower; she reads as a replacement, not a person, which is what the issue asked for. The finding that matters: **a hire cannot take a fallen member's named slot.** Sallow Grange names Teodor's tile, so with Bet and Ines in the company the deploy line still reads `deploy 5 of 11`; neither can fight until a map with bare slots or the keep's `deploy: all`. Whether a hire may stand in a fallen recruit's named slot is a question for the Table (on #690's PR); until then the barracks pays only on the keep, which is the room's stated purpose but makes the 300 feel like a deposit. Surprise is low because I wrote the list.
 
 — Code
+
+## 2026-10-01 — The Postern, Bet's request (#691), the warm play — Code
+
+Seed: 718 (campaign 683)   Result: win, turn 5 of 10, Ottilie fallen for good, one Recall spent (seize)
+Systems entry on a side map, warm (I drew the board this hour), not a Fun Gate entry. The camp is a hand-edited save: `campaign --from ironwake_keep --seed 691`, saved, the purse set to 1000 so the barracks and Bet both fit, disclosed. Question: does the gate cork make a decision, and does the hire's quest read right from the camp to the class?
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: turn 4. The Postern Keeper had come out of his gate on turn 2 to chase the lane fight, and killed Ottilie on turn 3 from 3,3. With him in the road, the door at 7,3 stood open. Maud salved Teodor and stood in the Keeper's reach as the bait (he took her to 2), Teodor screened 5,3, and Bet ran to 5,2. On turn 5 she walked through Teodor, through the postern, onto the seat.
+Notes: Transcript, script and the save are `docs/transcripts/2026-10-01-the_postern-718.*`.
+- **The cork is the map.** The Keeper's tile at 7,3 is struck in melee only from 6,3, and the back door's soldier only from 8,6. Both ways in need a kill or a lure. The guard boss woke on the lane fight's noise and came out, which is the lure the map wants. Whether a cold chair finds it is the side map's gate.
+- **The lane group hurts.** Three L2s on the L1 campaign-start roster put Ottilie at 5 on turn 1. Maud's 98 missed on turn 2, Teodor's 76 missed too, and every unit stood in lethal range. That was the Recall. The second line killed the brigand with Teodor and Bet instead.
+- **Unsworn did not appear here, by design.** Bet fights the Postern as a pikeman. After the win, `show` prints `Sergeant L1`, `Mastery: Unsworn, mastered` and a sword rank, and `classes` refuses every other class with `Bet Lowry is a Sergeant, earned and kept`. Unsworn's board is the finale, and no shipped main map carries `oathbound:` until Hask's sworn exist (#656).
+- **Surprise is high for a warm chair** because the Keeper's walk-out was the planner's choice, not mine: I drew him as a cork and he left the bottle.
+
+— Code

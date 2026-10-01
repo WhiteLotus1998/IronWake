@@ -36,7 +36,7 @@ public sealed class CampaignSession
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
-          quest <id> <ally>        Fight a member's side map with one ally beside them; who falls there is gone for good
+          quest <id> <ally>...     Fight a member's side map with the allies its board takes; who falls there is gone for good
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
@@ -506,10 +506,11 @@ public sealed class CampaignSession
 
     /// <summary>
     /// The lines after the campaign is won for those without an epilogue card (issue 690): one
-    /// <c>&lt;name&gt; served at the keep.</c> per hire still in the company, in roster order.
+    /// <c>&lt;name&gt; served at the keep.</c> per hire still in the company, in roster order, or the
+    /// line a won quest of theirs gives in its place (issue 691).
     /// </summary>
     public static IReadOnlyList<string> EndingLines(CampaignRecord record, GameContent content) =>
-        record.Roster.Where(u => Barracks.IsHire(u, content)).Select(u => Barracks.EndingLine(u.Name)).ToList();
+        record.Roster.Where(u => Barracks.IsHire(u, content)).Select(u => Barracks.EndingLine(record, u, content)).ToList();
 
     /// <summary>
     /// A between-map line as a reader sees it (issue 615): a refusal or an accepted action's
@@ -562,9 +563,17 @@ public sealed class CampaignSession
     /// prints (issue 635): the record's own refusal, a map that will not load, or one whose slots
     /// are not a side map's.
     /// </summary>
-    public static (MapDefinition? Map, string? Refusal) QuestFor(string contentDir, GameContent content, CampaignRecord record, string questId, string allyId)
+    public static (MapDefinition? Map, string? Refusal) QuestFor(string contentDir, GameContent content, CampaignRecord record, string questId, string allyId) =>
+        QuestFor(contentDir, content, record, questId, new[] { allyId });
+
+    /// <summary>
+    /// <see cref="QuestFor(string, GameContent, CampaignRecord, string, string)"/> for a side map
+    /// that takes several allies (issue 691), refused too when <paramref name="allyIds"/> do not
+    /// fill its bare slots one each (<see cref="CampaignRecord.QuestAlliesRefusal"/>).
+    /// </summary>
+    public static (MapDefinition? Map, string? Refusal) QuestFor(string contentDir, GameContent content, CampaignRecord record, string questId, IReadOnlyList<string> allyIds)
     {
-        if (record.QuestRefusal(questId, allyId, content) is { } refusal)
+        if (record.QuestRefusal(questId, allyIds, content) is { } refusal)
         {
             return (null, refusal);
         }
@@ -579,7 +588,9 @@ public sealed class CampaignSession
             return (null, e.Message);
         }
 
-        return CampaignRecord.QuestMapRefusal(map) is { } shape ? (null, shape) : (map, null);
+        return CampaignRecord.QuestMapRefusal(map) is { } shape ? (null, shape)
+            : CampaignRecord.QuestAlliesRefusal(map, allyIds) is { } count ? (null, count)
+            : (map, null);
     }
 
     private static string QuestPath(string contentDir, CampaignQuest quest) =>
@@ -600,26 +611,31 @@ public sealed class CampaignSession
 
         var names = UnitNames.Of(record, content);
         var price = record.Permadeath ? "permadeath applies" : "permadeath is off: who falls comes back wounded";
-        var lines = new List<string> { "Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):" };
-        foreach (var quest in offered)
+        var boards = offered.Select(quest => QuestBoard(contentDir, content, quest)).ToList();
+        var who = boards.All(b => b.Allies == 1) ? "one ally you pick" : "the allies you pick";
+        var lines = new List<string> { $"Side maps (the member and {who}, not the captain; a lost side map never ends the campaign):" };
+        foreach (var (quest, (board, allies)) in offered.Zip(boards))
         {
             var closed = record.QuestsTried.Contains(quest.Id) ? "; fought since the last map, open again after the next" : "";
-            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {QuestBoard(contentDir, content, quest)} (quest {quest.Id} <ally>); {price}{closed}");
+            var command = $"quest {quest.Id} {string.Join(" ", Enumerable.Repeat("<ally>", allies))}";
+            var what = quest.OpensAfter is null ? $"quest {quest.Part}" : "request";
+            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s {what}, {board} ({command}); {price}{closed}");
         }
 
         return lines;
     }
 
-    /// <summary>A side map's board by its display name, or its id when the board will not load.</summary>
-    private static string QuestBoard(string contentDir, GameContent content, CampaignQuest quest)
+    /// <summary>A side map's board by its display name and the allies it takes (issue 691), or its id and one when the board will not load.</summary>
+    private static (string Board, int Allies) QuestBoard(string contentDir, GameContent content, CampaignQuest quest)
     {
         try
         {
-            return MapFiles.Load(QuestPath(contentDir, quest), content).Name;
+            var map = MapFiles.Load(QuestPath(contentDir, quest), content);
+            return (map.Name, Math.Max(1, CampaignRecord.QuestAllies(map)));
         }
         catch (MapException)
         {
-            return quest.MapId;
+            return (quest.MapId, 1);
         }
     }
 
@@ -744,7 +760,13 @@ public sealed class CampaignSession
                 paid.Add($"{quest.Rare} rare material");
             }
 
-            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {QuestBoard(contentDir, content, quest)}; paid {(paid.Count == 0 ? "nothing" : string.Join(" and ", paid))}");
+            if (quest.Promotes is { } classId)
+            {
+                paid.Add($"the {content.Class(classId).Name} class");
+            }
+
+            var what = quest.OpensAfter is null ? $"quest {quest.Part}" : "request";
+            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s {what}, {QuestBoard(contentDir, content, quest).Board}; paid {(paid.Count == 0 ? "nothing" : string.Join(" and ", paid))}");
         }
 
         return lines;
@@ -768,24 +790,31 @@ public sealed class CampaignSession
     }
 
     /// <summary>The lines that open a side map: the board and its seed, then who goes.</summary>
-    public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, string allyId)
+    public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, string allyId) =>
+        QuestOpening(record, content, map, questId, new[] { allyId });
+
+    /// <summary>The lines that open a side map with several allies (issue 691), named in the order given.</summary>
+    public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, IReadOnlyList<string> allyIds)
     {
         var names = UnitNames.Of(record, content);
         var quest = content.Campaign.Quest(questId)!;
+        var allies = allyIds.Select(id => names[id]).ToList();
+        var with = allies.Count <= 2 ? string.Join(" and ", allies) : string.Join(", ", allies.Take(allies.Count - 1)) + " and " + allies[^1];
         return new[]
         {
             $"Side map: {map.Name}, seed {record.QuestSeed(questId, content)}",
-            $"{names[quest.MemberId]} goes with {names[allyId]}. This map is lost if {names[quest.MemberId]} falls; who falls here is gone for good.",
+            $"{names[quest.MemberId]} goes with {with}. This map is lost if {names[quest.MemberId]} falls; who falls here is gone for good.",
         };
     }
 
     /// <summary>
-    /// <c>quest &lt;id&gt; &lt;ally&gt;</c> (issue 635): refused as <see cref="QuestFor"/> says;
+    /// <c>quest &lt;id&gt; &lt;ally&gt;...</c> (issue 635; several allies, issue 691): refused as
+    /// <see cref="QuestFor(string, GameContent, CampaignRecord, string, IReadOnlyList{string})"/> says;
     /// otherwise the quest's card, then the side map plays on the screen with every <c>play</c>
     /// command until <c>leave</c>, its result applied through <see cref="CampaignRecord.AfterQuest"/>,
     /// and on a win its after card. False on a strict stop or when the input ends inside it.
     /// </summary>
-    private bool RunQuest(TextReader input, string text, string questId, string allyId, bool strict)
+    private bool RunQuest(TextReader input, string text, string questId, IReadOnlyList<string> allyId, bool strict)
     {
         var (map, refusal) = QuestFor(_contentDir, _content, _record, questId, allyId);
         if (map is null)
@@ -868,9 +897,9 @@ public sealed class CampaignSession
                     return null;
                 }
             }
-            else if (words is ["quest", var questId, var ally])
+            else if (words is ["quest", var questId, _, ..])
             {
-                if (!RunQuest(input, text, questId, ally, strict))
+                if (!RunQuest(input, text, questId, words[2..], strict))
                 {
                     return null;
                 }
@@ -1059,7 +1088,7 @@ public sealed class CampaignSession
                 Error(text, "usage: trial <unit> <class>");
                 break;
             case ["quest", ..]:
-                Error(text, "usage: quest <id> <ally>");
+                Error(text, "usage: quest <id> <ally> [<ally>...]");
                 break;
             case ["bench" or "unbench" or "show" or "classes", ..]:
                 Error(text, $"usage: {words[0]} <unit>");
@@ -1244,7 +1273,7 @@ public sealed class CampaignSession
     {
         _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}");
         var names = UnitNames.Of(_record, _content);
-        foreach (var target in _content.Classes.Values)
+        foreach (var target in _content.Classes.Values.Where(c => !c.Hidden || c.Id == unit?.ClassId))
         {
             var line = $"  {target.Name}: {target.Certification.Describe()}";
             if (_content.Campaign.TrialFor(target.Id) is not null)
@@ -1258,7 +1287,7 @@ public sealed class CampaignSession
             }
             else if (unit is not null)
             {
-                var refusals = Certifications.Check(unit, target);
+                var refusals = Certifications.Check(unit, target, _content.Class(unit.ClassId));
                 line += refusals.Count == 0 ? $" -- {names[unit.Id]} may be promoted" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
             }
 

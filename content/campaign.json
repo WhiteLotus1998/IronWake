@@ -52,7 +52,12 @@
       "after": [
         "The carts came at dusk. Maud said a prayer over every bed, and over the men in the yard, and then over the keeper, who we found in the well-house.",
         "She has not said whether the day was worth it. She has started asking the company whether they want the prayer before she says it."
-      ] }
+      ] },
+    { "id": "bet_postern", "member": "bet", "part": 1, "map": "the_postern", "opensAfter": "brackwater_cut", "promotes": "sergeant",
+      "before": [
+        "(Bet Lowry asks for one day and three of the company. Take the gatehouse: Bet on its seat at 8,3 wins. The map is lost if she falls.)"
+      ],
+      "ending": "Bet Lowry swore first, the one the oath could not hold, choosing it." }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
   "origins": [

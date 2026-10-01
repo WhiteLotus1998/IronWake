@@ -115,6 +115,9 @@ public static class ContentLoader
     /// map checks its slots (<see cref="CampaignRecord.QuestMapRefusal"/>). A quest's optional
     /// <c>common</c> and <c>rare</c> (issue 647) are the material a win pays, each at least 0; the rare
     /// in all quests is held to exactly what the issued signatures need (<see cref="Forge.RareRefusal"/>).
+    /// A quest's optional <c>opensAfter</c> (issue 691) names the main map after which it opens, and
+    /// lets its <c>member</c> be a <c>keep.hires</c> id; <c>promotes</c> names the hidden class a win
+    /// puts the member in; <c>ending</c>, a hire's only, replaces their served line.
     /// The optional <c>forge</c> object (issue 647) is <see cref="ForgeRules"/>: <c>mt</c>, <c>hit</c>,
     /// <c>price</c>, <c>common</c> and <c>rare</c> steps, each at least 1; a forge room needs it.
     /// </summary>
@@ -244,6 +247,9 @@ public static class ContentLoader
             }
         }
 
+        var hireIds = root.OptionalObject("keep") is { } hiresNode
+            ? hiresNode.ArrayOrEmpty("hires").Where(h => h.ValueKind == JsonValueKind.Object && h.TryGetProperty("id", out var hid) && hid.ValueKind == JsonValueKind.String).Select(h => h.GetProperty("id").GetString()!).ToList()
+            : new List<string>();
         var quests = new List<CampaignQuest>();
         var questIndex = 0;
         foreach (var element in root.ArrayOrEmpty("quests"))
@@ -262,9 +268,17 @@ public static class ContentLoader
             }
 
             var member = node.String("member");
-            if (!cast.Contains(member))
+            var opensAfter = node.OptionalString("opensAfter");
+            if (opensAfter is not null && !maps.Any(m => m.MapId == opensAfter))
             {
-                throw node.Error("member", $"'{member}' is not in the cast");
+                throw node.Error("opensAfter", $"'{opensAfter}' is not a map of the campaign");
+            }
+
+            if (!cast.Contains(member) && !(opensAfter is not null && hireIds.Contains(member)))
+            {
+                throw node.Error("member", hireIds.Contains(member)
+                    ? $"'{member}' is a hire, whose quest names the map it opensAfter"
+                    : $"'{member}' is not in the cast");
             }
 
             if (cast[0] == member)
@@ -316,7 +330,34 @@ public static class ContentLoader
                 throw node.Error(common < 0 ? "common" : "rare", "must be at least 0");
             }
 
-            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after"), Pays = pays, Common = common, Rare = rare });
+            var promotes = node.OptionalString("promotes");
+            if (promotes is not null && !(classes.TryGetValue(promotes, out var promoted) && promoted.Hidden))
+            {
+                throw node.Error("promotes", $"'{promotes}' must be a hidden class, the only kind a side map puts a member in");
+            }
+
+            var ending = node.OptionalString("ending");
+            if (ending is not null && !hireIds.Contains(member))
+            {
+                throw node.Error("ending", $"'{member}' is not a hire; only a hire's ending is one line");
+            }
+
+            if (ending is not null && string.IsNullOrWhiteSpace(ending))
+            {
+                throw node.Error("ending", "must be a line, or left out");
+            }
+
+            quests.Add(new CampaignQuest(id, member, part, map)
+            {
+                Before = Card(node, "before"),
+                After = Card(node, "after"),
+                Pays = pays,
+                Common = common,
+                Rare = rare,
+                OpensAfter = opensAfter,
+                Promotes = promotes,
+                Ending = ending,
+            });
             questIndex++;
         }
 
@@ -761,15 +802,16 @@ public static class ContentLoader
                 var against = OpponentCondition.Any;
                 if (effect.OptionalObject("against") is { } condition)
                 {
-                    RequireOnly(entry, condition, "effect.against", "weapon", "movement");
+                    RequireOnly(entry, condition, "effect.against", "weapon", "movement", "oathbound");
                     WeaponType? weapon = condition.Has("weapon") ? entry.ParseEnum<WeaponType>("effect.against.weapon", condition.String("weapon")) : null;
                     MovementType? movement = condition.Has("movement") ? entry.ParseEnum<MovementType>("effect.against.movement", condition.String("movement")) : null;
-                    if (weapon is null && movement is null)
+                    var oathbound = condition.BoolOr("oathbound", false);
+                    if (weapon is null && movement is null && !oathbound)
                     {
-                        throw entry.Error("effect.against", "must name a weapon, a movement, or both; leave it out to match every opponent");
+                        throw entry.Error("effect.against", "must name a weapon, a movement or oathbound: true; leave it out to match every opponent");
                     }
 
-                    against = new OpponentCondition(weapon, movement);
+                    against = new OpponentCondition(weapon, movement) { Oathbound = oathbound };
                 }
 
                 WeaponType? wielding = effect.Has("wielding") ? entry.ParseEnum<WeaponType>("effect.wielding", effect.String("wielding")) : null;
@@ -823,8 +865,11 @@ public static class ContentLoader
             case "canto":
                 RequireOnly(entry, effect, "effect", "kind");
                 return new CantoEffect();
+            case "brace":
+                RequireOnly(entry, effect, "effect", "kind");
+                return new BraceEffect();
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art or canto");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto or brace");
         }
     }
 
@@ -1396,6 +1441,7 @@ public static class ContentLoader
                 MasteryPoints = masteryPoints,
                 Abilities = AbilityIds(node, "abilities", abilities),
                 Certification = ParseCertification(node),
+                Hidden = node.BoolOr("hidden", false),
             });
         }
 

@@ -145,6 +145,15 @@
       "inventory": [ { "item": "steel_lance" }, { "item": "toll_spear" } ]
     },
     {
+      "id": "postern_keeper",
+      "name": "Postern Keeper",
+      "class": "pikeman",
+      "level": 3,
+      "stats": { "hp": 24, "str": 7, "mag": 0, "dex": 6, "spd": 5, "lck": 3, "def": 5, "res": 2, "cha": 4 },
+      "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 30, "spd": 25, "lck": 10, "def": 30, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "steel_lance" } ]
+    },
+    {
       "id": "bandit_leader",
       "name": "Bandit Leader",
       "class": "reaver",

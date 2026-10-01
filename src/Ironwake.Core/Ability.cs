@@ -29,6 +29,9 @@ public enum AbilityTrigger
 
     /// <summary>After the unit's Attack, Item or Wait: Canto's second move (issue 71).</summary>
     AfterAction,
+
+    /// <summary>When the unit takes Wait: a brace on any map (issue 691).</summary>
+    OnWait,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -116,17 +119,32 @@ public sealed record CantoEffect : AbilityEffect
 }
 
 /// <summary>
+/// Hold the Gate (issue 691): the holder braces on a Wait in place on every map, as a
+/// <c>brace: on</c> map lets every unit do (<see cref="Brace"/>). The effect has no numbers;
+/// the brace's own are the rule's.
+/// </summary>
+public sealed record BraceEffect : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnWait;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
-/// matches a weapon condition.
+/// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
+/// oath-bound (issue 691, <see cref="Combatant.Oathbound"/>).
 /// </summary>
 public sealed record OpponentCondition(WeaponType? Weapon, MovementType? Movement)
 {
     public static OpponentCondition Any { get; } = new(null, null);
 
+    /// <summary>Whether the opponent must be oath-bound (issue 691): an enemy in a group the map's <c>oathbound:</c> header names.</summary>
+    public bool Oathbound { get; init; }
+
     public bool Matches(Combatant opponent) =>
         (Weapon is null || opponent.Weapon?.Type == Weapon)
-        && (Movement is null || opponent.Movement == Movement);
+        && (Movement is null || opponent.Movement == Movement)
+        && (!Oathbound || opponent.Oathbound);
 }
 
 /// <summary>The summed on-combat modifiers one side carries against one opponent.</summary>
@@ -156,6 +174,9 @@ public static class AbilityRules
 
         return total;
     }
+
+    /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
+    public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);
 
     /// <summary>Whether any of <paramref name="abilities"/> is Canto.</summary>
     public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);

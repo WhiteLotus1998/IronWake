@@ -107,7 +107,7 @@ public class CliValidateTests
         var output = Run(out var exit, "validate", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.Contains("8 maps, 2 trials, 1 side maps, 2 keep maps from", output);
+        Assert.Contains("8 maps, 2 trials, 2 side maps, 2 keep maps from", output);
     }
 
     [Theory]

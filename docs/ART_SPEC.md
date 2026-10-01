@@ -41,7 +41,7 @@ One combatant per sheet, facing **right**. The client mirrors the sheet for the 
 | `hit_react` | 4 | 1 | taking the blow |
 | `fall` | 10 | none | down and still; the last frame holds |
 
-Classes and the weapon kinds each needs, from `content/classes.json`: adept (reason), bowman (bow), bulwark (lance, axe), cadet (sword, lance, axe), chaplain (faith), outrider (lance, sword), pikeman (lance), reaver (axe, gauntlet), skyrider (lance). Named bosses from the shipped maps, one set per weapon each carries: the Bandit Leader (the Tollgate; steel axe and the Toll Axe, a two-weapon boss whose chosen axe must read at a glance), the Grange Reeve (Sallow Grange; steel lance and the Toll Spear), and the Weir Foreman (Harrow Weir; the Toll Axe).
+Classes and the weapon kinds each needs, from `content/classes.json`: adept (reason), bowman (bow), bulwark (lance, axe), cadet (sword, lance, axe), chaplain (faith), outrider (lance, sword), pikeman (lance), reaver (axe, gauntlet), sergeant (lance, sword; issue 691, a hidden class earned on the Postern, the pike crossed with a short sword), skyrider (lance). Named bosses from the shipped maps, one set per weapon each carries: the Bandit Leader (the Tollgate; steel axe and the Toll Axe, a two-weapon boss whose chosen axe must read at a glance), the Grange Reeve (Sallow Grange; steel lance and the Toll Spear), and the Weir Foreman (Harrow Weir; the Toll Axe).
 
 ## Effects
 
@@ -91,6 +91,8 @@ token_pikeman_player
 token_pikeman_enemy
 token_reaver_player
 token_reaver_enemy
+token_sergeant_player
+token_sergeant_enemy
 token_skyrider_player
 token_skyrider_enemy
 token_captain_player
@@ -210,6 +212,22 @@ reaver_gauntlet_miss_recover
 reaver_gauntlet_dodge
 reaver_gauntlet_hit_react
 reaver_gauntlet_fall
+sergeant_lance_idle
+sergeant_lance_advance
+sergeant_lance_strike
+sergeant_lance_strike_crit
+sergeant_lance_miss_recover
+sergeant_lance_dodge
+sergeant_lance_hit_react
+sergeant_lance_fall
+sergeant_sword_idle
+sergeant_sword_advance
+sergeant_sword_strike
+sergeant_sword_strike_crit
+sergeant_sword_miss_recover
+sergeant_sword_dodge
+sergeant_sword_hit_react
+sergeant_sword_fall
 skyrider_lance_idle
 skyrider_lance_advance
 skyrider_lance_strike

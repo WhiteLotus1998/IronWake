@@ -1,0 +1,29 @@
+name: The Postern
+size: 10x8
+win: seize
+turn_limit: 10
+recall: 2
+enemy_level: 2
+oathbound: gate, yard, lane
+deploy: 4
+
+^^...^^###
+^...n..#F#
+......^#.#
+=====..=T#
+.....^.#.#
+.^.....#.#
+^^..^..#.#
+^^~......#
+
+units:
+P captain 0,3
+P recruit 0,2
+P recruit 1,4
+P recruit 0,4
+B postern_keeper 7,3 group:gate behavior:guard
+E archer 8,2 group:yard behavior:hold
+E soldier 8,5 group:yard behavior:hold
+E brigand 4,1 group:lane behavior:guard
+E soldier 5,5 group:lane behavior:guard
+E hexer 6,6 group:lane behavior:guard

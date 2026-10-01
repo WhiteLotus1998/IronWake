@@ -208,6 +208,12 @@ def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
         if tell == "hooked":
             stroke(P(1, -2), P(-3, -6))
             stroke(P(1, -2), P(5, 2))
+    elif class_id == "sergeant":
+        # The pike crossed with a short sword, the two weapons the class carries (issue 691).
+        stroke(P(-9, 10), P(7, -8))
+        fill(P(5, -6), P(11, -12), P(9, -4))
+        stroke(P(8, 9), P(-5, -4))
+        stroke(P(7.5, 3.5), P(2.5, 8.5))
     elif class_id == "bowman":
         stroke(*[quad(P(-4, -11), P(10, 0), P(-4, 11), i / 12) for i in range(13)])
         stroke(P(-4, -11), P(-4, 11))

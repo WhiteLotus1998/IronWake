@@ -204,7 +204,8 @@ internal static class Fixture
     /// A copy of the real content directory under the temp directory. Every copy stands for a build
     /// some transcript was journaled on, all of them before the keep sold rooms, so the keep's
     /// <c>beds</c> and <c>rooms</c> are taken out (issue 687), and before the forge, so the
-    /// <c>forge</c> and the quests' material payouts are taken out too (issue 647).
+    /// <c>forge</c> and the quests' material payouts are taken out too (issue 647), and before the
+    /// barracks, so a hire's quest goes with the hires (issue 691).
     /// </summary>
     private static string CopyRealContent(string prefix)
     {
@@ -234,6 +235,11 @@ internal static class Fixture
             {
                 quest.Remove("common");
                 quest.Remove("rare");
+            }
+
+            foreach (var hired in quests.OfType<System.Text.Json.Nodes.JsonObject>().Where(q => q.ContainsKey("opensAfter")).ToList())
+            {
+                quests.Remove(hired);
             }
         }
 

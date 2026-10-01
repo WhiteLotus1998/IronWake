@@ -56,7 +56,7 @@ public class ClassLadderTests
     {
         var brannock = Recruit("brannock");
 
-        foreach (var target in Content.Classes.Values.Where(c => c.Id != "cadet"))
+        foreach (var target in Content.Classes.Values.Where(c => c.Id != "cadet" && !c.Hidden))
         {
             Assert.Contains(Certifications.Check(brannock, target), r => r.Text == $"needs level {target.Certification.Level}, has 1");
         }

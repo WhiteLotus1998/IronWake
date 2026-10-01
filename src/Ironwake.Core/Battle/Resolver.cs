@@ -47,7 +47,7 @@ public static class Resolver
                 (next, rejection) = ApplyUseItem(state, content, item, events);
                 break;
             case Wait wait:
-                (next, rejection) = ApplyWait(state, wait, events);
+                (next, rejection) = ApplyWait(state, content, wait, events);
                 break;
             case Watch watch:
                 (next, rejection) = ApplyWatch(state, content, watch, events);
@@ -1076,7 +1076,7 @@ public static class Resolver
         return earner with { Unit = earner.Unit with { Skill = skill } };
     }
 
-    private static (BattleState, Rejection?) ApplyWait(BattleState state, Wait wait, List<GameEvent> events)
+    private static (BattleState, Rejection?) ApplyWait(BattleState state, GameContent content, Wait wait, List<GameEvent> events)
     {
         var unit = Acting(state, wait.UnitId, out var rejection);
         if (unit is null)
@@ -1084,7 +1084,7 @@ public static class Resolver
             return (state, rejection);
         }
 
-        var braced = Brace.BracesOnWait(state, unit);
+        var braced = Brace.BracesOnWait(state, content, unit);
         events.Add(new UnitWaited(unit.Id, braced));
         return (state.WithUnit(unit with { Moved = true, Acted = true, Braced = braced }), null);
     }

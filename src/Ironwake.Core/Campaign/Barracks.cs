@@ -27,6 +27,14 @@ public static class Barracks
     public static string EndingLine(string name) => $"{name} served at the keep.";
 
     /// <summary>
+    /// The ending line <paramref name="hire"/> gets in <paramref name="record"/> (issue 691): the
+    /// <see cref="CampaignQuest.Ending"/> of a quest of theirs the record has won, else <see cref="EndingLine(string)"/>.
+    /// </summary>
+    public static string EndingLine(CampaignRecord record, Unit hire, GameContent content) =>
+        content.Campaign.Quests.FirstOrDefault(q => q.MemberId == hire.Id && q.Ending is not null && record.QuestsWon.Any(w => w.QuestId == q.Id))?.Ending
+        ?? EndingLine(hire.Name);
+
+    /// <summary>
     /// The cast members whose card a hire of <paramref name="classId"/> is read from: every cast
     /// member of that class but the captain, whose card is the campaign's own (issue 681).
     /// </summary>

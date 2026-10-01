@@ -24,7 +24,7 @@ public class CombatArtCliTests : IDisposable
         Directory.Delete(_content, recursive: true);
     }
 
-    /// <summary>A copy of the real content with the sample arts, the captain knowing <c>cleave</c>, and no class mastery.</summary>
+    /// <summary>A copy of the real content with the sample arts, the captain knowing <c>cleave</c>, no class mastery, and no class ability the sample does not define.</summary>
     private static string SampleContent()
     {
         var real = Fixture.RealContentDirectory();
@@ -49,10 +49,15 @@ public class CombatArtCliTests : IDisposable
         File.WriteAllText(castPath, cast.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
         var classesPath = Path.Combine(copy, ContentFiles.ClassesName);
         var classes = JsonNode.Parse(File.ReadAllText(classesPath))!;
+        var sample = JsonNode.Parse(File.ReadAllText(Path.Combine(copy, ContentFiles.AbilitiesName)))!["abilities"]!.AsArray().Select(a => (string)a!["id"]!).ToHashSet();
         foreach (var unitClass in classes["classes"]!.AsArray())
         {
             unitClass!.AsObject().Remove("mastery");
             unitClass.AsObject().Remove("masteryPoints");
+            if (unitClass["abilities"] is JsonArray held && held.Any(a => !sample.Contains((string)a!)))
+            {
+                unitClass.AsObject().Remove("abilities");
+            }
         }
 
         File.WriteAllText(classesPath, classes.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));

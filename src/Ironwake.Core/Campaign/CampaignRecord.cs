@@ -602,7 +602,7 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Certifies <paramref name="unitId"/> into <paramref name="classId"/> through
-    /// <see cref="Certifications.Check"/> (issue 72), paying the seal, <see cref="CampaignRules.CertificationPrice"/>,
+    /// <see cref="Certifications.Check(Unit, UnitClass, UnitClass)"/> (issue 72), paying the seal, <see cref="CampaignRules.CertificationPrice"/>,
     /// from the purse. Refused naming every requirement failed, or the price and the balance.
     /// </summary>
     public ScreenResult Certify(string unitId, string classId, GameContent content)
@@ -617,7 +617,7 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"no class '{classId}'");
         }
 
-        var refusals = Certifications.Check(unit, target);
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId));
         if (refusals.Count > 0)
         {
             return ScreenResult.Refused(this, $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
@@ -639,7 +639,7 @@ public sealed record CampaignRecord(
     /// <summary>
     /// Why <paramref name="unitId"/> may not try the certification trial for <paramref name="classId"/>
     /// now (issue 252), or null when it may: the unit and the class must exist, the unit must not be
-    /// in the class already, it must meet every requirement of <see cref="Certifications.Check"/>
+    /// in the class already, it must meet every requirement of <see cref="Certifications.Check(Unit, UnitClass, UnitClass)"/>
     /// (a trial comes after them and stands in only for the seal), the class must have a trial, and
     /// the unit must not have tried that class's trial this camp.
     /// </summary>
@@ -655,7 +655,7 @@ public sealed record CampaignRecord(
             return $"no class '{classId}'";
         }
 
-        var refusals = Certifications.Check(unit, target);
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId));
         if (refusals.Count > 0)
         {
             return $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
@@ -737,10 +737,16 @@ public sealed record CampaignRecord(
     /// The map index from which <paramref name="quest"/> opens (issue 635, DESIGN section 14), or
     /// null while it cannot: part 1 after the member's second map, so two maps after the one they
     /// arrive on (a member on the roster from the start arrives on map 0's eve, index -1); part 2
-    /// two maps after part 1 was won, and never before it is.
+    /// two maps after part 1 was won, and never before it is. A quest that names the map it
+    /// <see cref="CampaignQuest.OpensAfter"/> (issue 691) opens at the camp after that map instead.
     /// </summary>
     public int? QuestOpensAt(CampaignQuest quest, GameContent content)
     {
+        if (quest.OpensAfter is { } after)
+        {
+            return content.Campaign.MapIndexOf(after) + 1;
+        }
+
         if (quest.Part == 1)
         {
             return content.Campaign.ArrivalIndex(quest.MemberId) + 2;
@@ -782,7 +788,15 @@ public sealed record CampaignRecord(
     /// captain (who leads the main line and whose death would end the campaign on a side map)
     /// nor the member.
     /// </summary>
-    public string? QuestRefusal(string questId, string allyId, GameContent content)
+    public string? QuestRefusal(string questId, string allyId, GameContent content) =>
+        QuestRefusal(questId, new[] { allyId }, content);
+
+    /// <summary>
+    /// <see cref="QuestRefusal(string, string, GameContent)"/> for a side map that takes more than
+    /// one ally (issue 691): each of <paramref name="allyIds"/> is checked as the one ally is, and
+    /// no ally is named twice. How many the board takes is the board's (<see cref="QuestAlliesRefusal"/>).
+    /// </summary>
+    public string? QuestRefusal(string questId, IReadOnlyList<string> allyIds, GameContent content)
     {
         if (content.Campaign.Quest(questId) is not { } quest)
         {
@@ -805,19 +819,27 @@ public sealed record CampaignRecord(
             return $"side map {questId} was fought since the last map; it opens again after the next one";
         }
 
-        if (Find(allyId) is null)
+        foreach (var allyId in allyIds)
         {
-            return $"no unit '{allyId}' on the roster";
+            if (Find(allyId) is null)
+            {
+                return $"no unit '{allyId}' on the roster";
+            }
+
+            if (allyId == Roster[0].Id)
+            {
+                return $"{allyId} is the captain and stays with the company; pick another ally";
+            }
+
+            if (allyId == quest.MemberId)
+            {
+                return $"{allyId} is the side map's own; pick an ally beside {quest.MemberId}";
+            }
         }
 
-        if (allyId == Roster[0].Id)
+        if (allyIds.GroupBy(id => id).FirstOrDefault(g => g.Count() > 1) is { } twice)
         {
-            return $"{allyId} is the captain and stays with the company; pick another ally";
-        }
-
-        if (allyId == quest.MemberId)
-        {
-            return $"{allyId} is the side map's own; pick an ally beside {quest.MemberId}";
+            return $"{twice.Key} is named twice; pick each ally once";
         }
 
         return quest.Pays is { } item && Find(quest.MemberId) is { Inventory.IsFull: true }
@@ -827,8 +849,9 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Why <paramref name="map"/> cannot be played as a side map (issue 635), or null when it can:
-    /// one <c>captain</c> slot (the member's), exactly one bare <c>recruit</c> slot (the ally's),
-    /// no recruit placed by name, and no certification header.
+    /// one <c>captain</c> slot (the member's), at least one bare <c>recruit</c> slot (one per
+    /// ally; one on a member's quest, more on a board like the Postern, issue 691), no recruit
+    /// placed by name, and no certification header.
     /// </summary>
     public static string? QuestMapRefusal(MapDefinition map)
     {
@@ -843,37 +866,65 @@ public sealed record CampaignRecord(
             return $"the side map '{map.Name}' places a recruit by name; its slots are the member's (captain) and the ally's (recruit)";
         }
 
-        return players.Count(p => p.Slot == PlayerSlot.AnyRecruit) == 1
+        return QuestAllies(map) >= 1
             ? null
-            : $"the side map '{map.Name}' needs exactly one bare recruit slot, for the ally";
+            : $"the side map '{map.Name}' needs a bare recruit slot, for the ally";
+    }
+
+    /// <summary>How many allies the side map <paramref name="map"/> takes beside its member (issue 691): its bare recruit slots.</summary>
+    public static int QuestAllies(MapDefinition map) =>
+        map.Placements.OfType<PlayerPlacement>().Count(p => p.Slot == PlayerSlot.AnyRecruit);
+
+    /// <summary>Why <paramref name="allyIds"/> do not fill <paramref name="map"/>'s ally slots (issue 691), or null when they do, one each.</summary>
+    public static string? QuestAlliesRefusal(MapDefinition map, IReadOnlyList<string> allyIds)
+    {
+        var slots = QuestAllies(map);
+        return allyIds.Count == slots
+            ? null
+            : slots == 1 ? $"{map.Name} takes one ally, not {allyIds.Count}" : $"{map.Name} takes {slots} allies, not {allyIds.Count}";
     }
 
     /// <summary>
     /// The seed a side map before the next map runs on: past every map's and every trial's seed,
-    /// one per quest per interlude, so no two battles of a campaign share one.
+    /// one per quest per interlude, so no two battles of a campaign share one. A hire's quest, one
+    /// that <see cref="CampaignQuest.OpensAfter"/> a map (issue 691), takes its seed from a block past
+    /// every member quest's, so adding one never moves a member quest's seed.
     /// </summary>
     public ulong QuestSeed(string questId, GameContent content)
     {
-        var quests = content.Campaign.Quests.Select(q => q.Id).ToList();
-        return unchecked(Seed + (ulong)(2 * content.Campaign.Maps.Count) + (ulong)(MapIndex * quests.Count) + (ulong)quests.IndexOf(questId));
+        var maps = content.Campaign.Maps.Count;
+        var members = content.Campaign.Quests.Where(q => q.OpensAfter is null).Select(q => q.Id).ToList();
+        var hires = content.Campaign.Quests.Where(q => q.OpensAfter is not null).Select(q => q.Id).ToList();
+        var offset = members.Contains(questId)
+            ? (MapIndex * members.Count) + members.IndexOf(questId)
+            : (maps * members.Count) + (MapIndex * hires.Count) + hires.IndexOf(questId);
+        return unchecked(Seed + (ulong)(2 * maps) + (ulong)offset);
     }
 
     /// <summary>
     /// The side map's battle (issue 635): <paramref name="map"/> as the caller loaded it, under the
     /// campaign's difficulty, the member in its captain slot and <paramref name="allyId"/> in its
-    /// bare slot, on <see cref="QuestSeed"/>. The caller has checked <see cref="QuestRefusal"/>.
+    /// bare slot, on <see cref="QuestSeed"/>. The caller has checked <see cref="QuestRefusal(string, string, GameContent)"/>.
     /// </summary>
-    public BattleState BeginQuest(MapDefinition map, string questId, string allyId, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
+    public BattleState BeginQuest(MapDefinition map, string questId, string allyId, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage) =>
+        BeginQuest(map, questId, new[] { allyId }, content, scheme);
+
+    /// <summary>
+    /// <see cref="BeginQuest(MapDefinition, string, string, GameContent, RollScheme)"/> with
+    /// <paramref name="allyIds"/> in the bare slots in file order (issue 691). The caller has
+    /// checked <see cref="QuestRefusal(string, IReadOnlyList{string}, GameContent)"/> and <see cref="QuestAlliesRefusal"/>.
+    /// </summary>
+    public BattleState BeginQuest(MapDefinition map, string questId, IReadOnlyList<string> allyIds, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
         var quest = content.Campaign.Quest(questId) ?? throw new ArgumentException($"no side map '{questId}'");
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
-        var pair = new[] { Find(quest.MemberId), Find(allyId) };
-        if (pair.Any(u => u is null))
+        var party = allyIds.Prepend(quest.MemberId).Select(Find).ToList();
+        if (party.Any(u => u is null))
         {
-            throw new ArgumentException($"{quest.MemberId} and {allyId} must both be on the roster");
+            throw new ArgumentException($"{quest.MemberId} and {string.Join(", ", allyIds)} must all be on the roster");
         }
 
-        return BattleState.From(played, content, ValueList<Unit>.From(pair!), QuestSeed(questId, content), scheme);
+        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme);
     }
 
     /// <summary>
@@ -884,7 +935,7 @@ public sealed record CampaignRecord(
     /// which times the member's next quest. A loss never ends the campaign; the side map opens
     /// again after the next map unless its member fell. No purse reward: the quest's payout is
     /// the member's own, and a won quest that <see cref="CampaignQuest.Pays"/> puts that signature
-    /// item in the member's pack at full uses (<see cref="QuestRefusal"/> kept a slot free). With
+    /// item in the member's pack at full uses (<see cref="QuestRefusal(string, IReadOnlyList{string}, GameContent)"/> kept a slot free). With
     /// <see cref="Permadeath"/> off whoever fell comes back wounded instead (issue 664), the member
     /// included, so the side map opens again; a side map never counts a wound down.
     /// </summary>
@@ -933,6 +984,12 @@ public sealed record CampaignRecord(
             paid = $"; {quest.MemberId} receives {content.ItemName(item)}";
         }
 
+        if (won && quest.Promotes is { } classId && roster.FindIndex(u => u.Id == quest.MemberId) is var promoted and >= 0)
+        {
+            roster[promoted] = Promote(roster[promoted], content.Class(classId));
+            paid += $"; {quest.MemberId} becomes a {content.Class(classId).Name}";
+        }
+
         var common = won ? quest.Common : 0;
         var rare = won ? quest.Rare : 0;
         if (common + rare > 0)
@@ -960,6 +1017,19 @@ public sealed record CampaignRecord(
                 ? $"{quest.MemberId} falls on {questId}, which closes for good{dead}"
                 : $"side map {questId} is lost: {end.Outcome.Reason}; it opens again after the next map{dead}";
         return new ScreenResult(record, line, true);
+    }
+
+    /// <summary>
+    /// <paramref name="unit"/> in the hidden class <paramref name="target"/> (issue 691): the class
+    /// changes with no seal and no check, and the class's mastery joins the unit's abilities at
+    /// once, its points held full, so it is mastered on arrival. Level, EXP, stats, ranks and pack are its own.
+    /// </summary>
+    public static Unit Promote(Unit unit, UnitClass target)
+    {
+        var promoted = unit with { ClassId = target.Id };
+        return target.Mastery is { } mastery && !promoted.Abilities.Contains(mastery)
+            ? promoted with { Abilities = promoted.Abilities.Add(mastery), Mastery = promoted.Mastery.With(target.Id, target.MasteryPoints) }
+            : promoted;
     }
 
     /// <summary>
