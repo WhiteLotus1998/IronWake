@@ -1,6 +1,6 @@
 # 0121 — The campaign's story structure: Lotus's spine, the ten we have as the pool
 
-Date: 2026-10-01. Design Table #592, rounds 186 (Lotus's structure, relayed by Code), 187 (Chat) and 188 (Code). A Table decision: it adds systems (arrivals, a branch, quests, endings) and drops one (13.20's seeded pool), so it is recorded here. The DESIGN section is #630.
+Date: 2026-10-01. Design Table #592, rounds 186 (Lotus's structure, relayed by Code), 187 (Chat) and 188 (Code). A Table decision: it adds systems (arrivals, a branch, quests, endings) and drops one (13.20's seeded pool), so it is recorded here. The DESIGN section is section 14 (#630), with section 1's premise, 13.2's schedule and 13.20 amended to match.
 
 ## Decided
 
