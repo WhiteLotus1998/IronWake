@@ -42,6 +42,18 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }
   ],
   "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
+  "quests": [
+    { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house",
+      "before": [
+        "Maud asked for a day and one pair of hands. Before the levy, her order kept a lazar house at Sorrel Bend. The order called its sisters home at the armistice and left the sick with a keeper, and the keeper has stopped writing.",
+        "She says the sick do not need a captain. They need someone to keep the strippers off the door until the carts come at dusk, and she does not expect to be thanked for it, by them or by me.",
+        "(Hold out six turns. The lanes in are announced. A unit that ends its move on the bar beside a lane, 8,1 north or 10,4 east, closes that lane for the rest of the map. The ford south cannot be barred.)"
+      ],
+      "after": [
+        "The carts came at dusk. Maud said a prayer over every bed, and over the men in the yard, and then over the keeper, who we found in the well-house.",
+        "She has not said whether the day was worth it. She has started asking the company whether they want the prayer before she says it."
+      ] }
+  ],
   "keep": {
     "map": "ironwake_keep",
     "raid": "ironwake_raid",

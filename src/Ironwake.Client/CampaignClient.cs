@@ -68,6 +68,7 @@ public sealed class CampaignClient
         var lines = new List<string>(CampaignSession.BeforeCard(Record, Content, map)) { CampaignSession.ScreenHeading(Record, Content, map) };
         lines.AddRange(CampaignSession.RosterLines(Record, Content, typed: true));
         lines.AddRange(CampaignSession.ShopLines(Record, Content));
+        lines.AddRange(CampaignSession.QuestLines(_contentDir, Content, Record));
         lines.Add(CampaignSession.DeploymentLine(Record, Content, map));
         if (Record.KeepMenuRefusal(Content) is null)
         {

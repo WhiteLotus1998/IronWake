@@ -98,7 +98,8 @@ internal static class Fixture
     /// <summary>
     /// A copy of the real content directory whose campaign is only the raid and the keep (issue
     /// 288), in that order, so a scripted campaign reaches the keep's menu and the finale in two
-    /// battles. Made once per test run under the temp directory.
+    /// battles, with no side map on offer (issue 635), as when its script was journaled. Made once
+    /// per test run under the temp directory.
     /// </summary>
     public static string KeepCampaignContentDirectory() => KeepCampaign.Value;
 
@@ -111,6 +112,7 @@ internal static class Fixture
         var ids = new[] { (string)keep["raid"]!, (string)keep["map"]! };
         var maps = campaign["maps"]!.AsArray().Where(m => ids.Contains((string)m!["map"]!)).Select(m => m!.DeepClone()).ToArray();
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        campaign.AsObject().Remove("quests");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
@@ -165,6 +167,7 @@ internal static class Fixture
     /// Takes Starting Alone (issue 631) out of the campaign's maps and puts Old Mill Road back in
     /// The Mill's place with nobody arriving (issue 632): a campaign journaled before the story
     /// order opens on Old Mill Road as map 1 with the whole cast, and its battle seeds count from there.
+    /// The side maps (issue 635) go too, since no such script was journaled with one on offer.
     /// </summary>
     public static string WithoutStartingAlone(string target)
     {
@@ -183,6 +186,7 @@ internal static class Fixture
         }
 
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        campaign.AsObject().Remove("quests");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }

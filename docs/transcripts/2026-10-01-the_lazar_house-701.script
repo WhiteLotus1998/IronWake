@@ -1,0 +1,29 @@
+quest maud_1 wren
+move wren 6,3
+wait wren
+wait maud
+end
+move wren 8,1
+wait wren
+wait maud
+end
+move wren 4,1
+wait wren
+move maud 3,1
+item maud 2 wren
+end
+move maud 3,2
+attack maud soldier-1
+move wren 5,1
+attack wren archer-1
+end
+attack maud soldier-1
+move wren 3,1
+item wren 2
+end
+item maud 2 wren
+wait wren
+end
+leave
+roster
+record

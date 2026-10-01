@@ -1,0 +1,32 @@
+name: The Lazar House
+size: 12x8
+win: survive
+turn_limit: 6
+recall: 2
+enemy_level: 1
+announce: on
+
+^^^^^^^^.^^M
+^........n.M
+..#F#.......
+..#.#....^..
+.....=======
+.^........^.
+.^^......^^.
+~~~~~~.~~~~~
+
+units:
+P captain 3,2
+P recruit 3,4
+E brigand 8,3 group:yard behavior:aggressive
+E archer 9,6 group:yard behavior:aggressive
+
+events:
+north_bar enter 8,1 terrain 8,0 #
+east_bar enter 10,4 terrain 11,4 #
+north1 turn 2 enemy spawn brigand 8,0 group:north behavior:aggressive
+east1 turn 2 enemy spawn soldier 11,4 group:east behavior:aggressive
+south1 turn 3 enemy spawn archer 6,7 group:ford behavior:aggressive
+north2 turn 3 enemy spawn hexer 8,0 group:north behavior:aggressive
+east2 turn 4 enemy spawn brigand 11,4 group:east behavior:aggressive
+south2 turn 5 enemy spawn brigand 6,7 group:ford behavior:aggressive

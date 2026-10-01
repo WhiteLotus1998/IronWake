@@ -8,7 +8,7 @@ namespace Ironwake.Cli;
 /// <c>ironwake campaign</c> (issue 74, DESIGN section 9): the maps of <c>campaign.json</c> in
 /// order, each preceded by the between-map screen, text only. The screen reads the roster, the
 /// shop and the next map's deployment, and takes the actions of <see cref="CampaignRecord"/>:
-/// buy, repair, certify, trial, build (the keep's menu, after the raid on it; issue 288), bench and unbench; <c>march</c> starts the battle, which plays as
+/// buy, repair, certify, trial, quest (a side map, issue 635), build (the keep's menu, after the raid on it; issue 288), bench and unbench; <c>march</c> starts the battle, which plays as
 /// <c>play</c> does until <c>leave</c> after it is decided. A won battle returns to the screen
 /// with the reward paid and the fallen gone; a lost one ends the campaign. The same script
 /// grammar and <c>--strict</c> as <c>play</c>, one script for the whole campaign.
@@ -27,6 +27,7 @@ public sealed class CampaignSession
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
+          quest <id> <ally>        Fight a member's side map with one ally beside them; who falls there is gone for good
           keep                     The keep's menu once the raid is fought: each placement, its price and what it does
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
@@ -395,6 +396,124 @@ public sealed class CampaignSession
     }
 
     /// <summary>
+    /// The side map <paramref name="questId"/> from <c>content/quests</c>, or the refusal the screen
+    /// prints (issue 635): the record's own refusal, a map that will not load, or one whose slots
+    /// are not a side map's.
+    /// </summary>
+    public static (MapDefinition? Map, string? Refusal) QuestFor(string contentDir, GameContent content, CampaignRecord record, string questId, string allyId)
+    {
+        if (record.QuestRefusal(questId, allyId, content) is { } refusal)
+        {
+            return (null, refusal);
+        }
+
+        MapDefinition map;
+        try
+        {
+            map = MapFiles.Load(QuestPath(contentDir, content.Campaign.Quest(questId)!), content);
+        }
+        catch (MapException e)
+        {
+            return (null, e.Message);
+        }
+
+        return CampaignRecord.QuestMapRefusal(map) is { } shape ? (null, shape) : (map, null);
+    }
+
+    private static string QuestPath(string contentDir, CampaignQuest quest) =>
+        Path.Combine(contentDir, MapFiles.QuestsDirectory, quest.MapId + MapFiles.Extension);
+
+    /// <summary>
+    /// The side maps this interlude offers, as the screen prints them (issue 635): a heading with
+    /// the price, then one line per quest naming its member, its part, its board and the command.
+    /// Empty when none is offered.
+    /// </summary>
+    public static IReadOnlyList<string> QuestLines(string contentDir, GameContent content, CampaignRecord record)
+    {
+        var offered = record.QuestsOffered(content);
+        if (offered.Count == 0)
+        {
+            return Array.Empty<string>();
+        }
+
+        var names = UnitNames.Of(record, content);
+        var lines = new List<string> { "Side maps (the member and one ally you pick, not the captain; who falls there is gone for good, and the campaign goes on):" };
+        foreach (var quest in offered)
+        {
+            string board;
+            try
+            {
+                board = MapFiles.Load(QuestPath(contentDir, quest), content).Name;
+            }
+            catch (MapException)
+            {
+                board = quest.MapId;
+            }
+
+            var closed = record.QuestsTried.Contains(quest.Id) ? "; fought since the last map, open again after the next" : "";
+            lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s quest {quest.Part}, {board} (quest {quest.Id} <ally>){closed}");
+        }
+
+        return lines;
+    }
+
+    /// <summary>The lines that open a side map: the board and its seed, then who goes.</summary>
+    public static IReadOnlyList<string> QuestOpening(CampaignRecord record, GameContent content, MapDefinition map, string questId, string allyId)
+    {
+        var names = UnitNames.Of(record, content);
+        var quest = content.Campaign.Quest(questId)!;
+        return new[]
+        {
+            $"Side map: {map.Name}, seed {record.QuestSeed(questId, content)}",
+            $"{names[quest.MemberId]} goes with {names[allyId]}. This map is lost if {names[quest.MemberId]} falls; who falls here is gone for good.",
+        };
+    }
+
+    /// <summary>
+    /// <c>quest &lt;id&gt; &lt;ally&gt;</c> (issue 635): refused as <see cref="QuestFor"/> says;
+    /// otherwise the quest's card, then the side map plays on the screen with every <c>play</c>
+    /// command until <c>leave</c>, its result applied through <see cref="CampaignRecord.AfterQuest"/>,
+    /// and on a win its after card. False on a strict stop or when the input ends inside it.
+    /// </summary>
+    private bool RunQuest(TextReader input, string text, string questId, string allyId, bool strict)
+    {
+        var (map, refusal) = QuestFor(_contentDir, _content, _record, questId, allyId);
+        if (map is null)
+        {
+            Error(text, refusal!);
+            return true;
+        }
+
+        var quest = _content.Campaign.Quest(questId)!;
+        Lines(Card($"-- {map.Name} --", quest.Before));
+        foreach (var opening in QuestOpening(_record, _content, map, questId, allyId))
+        {
+            WriteEvent(opening);
+        }
+
+        var battle = new PlaySession(_content, _record.BeginQuest(map, questId, allyId, _content, _scheme), _out, _scripted, _line);
+        battle.WritePendingEvents();
+        _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
+        _out.Write(MapRenderer.Render(battle.State, _content));
+        var stopped = battle.RunCommands(input, strict, ref _commands);
+        _line = battle.Line;
+        _rejections.AddRange(battle.Rejections);
+        _log.Write(battle.EventLog);
+        if (stopped || !battle.Left)
+        {
+            _out.WriteLine($"Campaign stopped in {map.Name} at turn {battle.State.Turn}, {(battle.State.Outcome.IsOver ? "decided and not left" : "undecided")}");
+            return false;
+        }
+
+        if (Take(_record.AfterQuest(battle.State, questId, _content), text) && battle.State.Outcome.Result == BattleResult.Won)
+        {
+            Lines(Card($"-- After {map.Name} --", quest.After));
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// The between-map screen before <paramref name="map"/>: prints it, then applies commands until
     /// <c>march</c> (true) or the input ends or a strict stop (null).
     /// </summary>
@@ -404,6 +523,7 @@ public sealed class CampaignSession
         _out.WriteLine(ScreenHeading(_record, _content, map));
         PrintRoster();
         PrintShop();
+        Lines(QuestLines(_contentDir, _content, _record));
         PrintDeployment(map);
         if (_record.KeepMenuRefusal(_content) is null)
         {
@@ -434,6 +554,13 @@ public sealed class CampaignSession
             if (words is ["trial", var trialUnit, var trialClass])
             {
                 if (!RunTrial(input, text, trialUnit, trialClass, strict))
+                {
+                    return null;
+                }
+            }
+            else if (words is ["quest", var questId, var ally])
+            {
+                if (!RunQuest(input, text, questId, ally, strict))
                 {
                     return null;
                 }
@@ -554,6 +681,9 @@ public sealed class CampaignSession
                 break;
             case ["trial", ..]:
                 Error(text, "usage: trial <unit> <class>");
+                break;
+            case ["quest", ..]:
+                Error(text, "usage: quest <id> <ally>");
                 break;
             case ["bench" or "unbench" or "show" or "classes", ..]:
                 Error(text, $"usage: {words[0]} <unit>");

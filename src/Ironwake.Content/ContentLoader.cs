@@ -69,6 +69,11 @@ public static class ContentLoader
     /// A map's optional <c>arrives</c> (issue 632) lists the cast ids who join on it; a unit not in
     /// the cast, the captain (the cast's first, there from the start) and a unit arriving twice are
     /// refused. Whoever loads the map checks that it places each arrival by name.
+    /// The optional <c>quests</c> array (issue 635) lists the side maps: each an <c>id</c> (unique),
+    /// a <c>member</c> in the cast and not the captain, a <c>part</c> of 1 or 2 (one of each per
+    /// member at most, part 2 only after that member's part 1 in the file), a <c>map</c> id under
+    /// <c>content/quests</c>, and optional <c>before</c> and <c>after</c> cards. Whoever loads the
+    /// map checks its slots (<see cref="CampaignRecord.QuestMapRefusal"/>).
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
@@ -194,6 +199,60 @@ public static class ContentLoader
             }
         }
 
+        var quests = new List<CampaignQuest>();
+        var questIndex = 0;
+        foreach (var element in root.ArrayOrEmpty("quests"))
+        {
+            var node = new EntryNode(file.Name, "quests[" + questIndex + "]", element);
+            if (element.ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error(null, "must be an object");
+            }
+
+            var id = node.String("id");
+            node = node.WithEntry(id);
+            if (quests.Any(q => q.Id == id))
+            {
+                throw node.Error("id", "is listed twice");
+            }
+
+            var member = node.String("member");
+            if (!cast.Contains(member))
+            {
+                throw node.Error("member", $"'{member}' is not in the cast");
+            }
+
+            if (cast[0] == member)
+            {
+                throw node.Error("member", $"'{member}' is the captain, whose quest is not a side map of this shape");
+            }
+
+            var part = node.Int("part");
+            if (part is not (1 or 2))
+            {
+                throw node.Error("part", "must be 1 or 2");
+            }
+
+            if (quests.Any(q => q.MemberId == member && q.Part == part))
+            {
+                throw node.Error("part", $"'{member}' has a quest {part} already");
+            }
+
+            if (part == 2 && !quests.Any(q => q.MemberId == member && q.Part == 1))
+            {
+                throw node.Error("part", $"'{member}' has no quest 1 listed before this quest 2");
+            }
+
+            var map = node.String("map");
+            if (string.IsNullOrWhiteSpace(map))
+            {
+                throw node.Error("map", "must be a side map id");
+            }
+
+            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after") });
+            questIndex++;
+        }
+
         var keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain) : KeepMenu.None;
         var ids = maps.Select(m => m.MapId).ToList();
         if (keep.RaidId.Length > 0 && ids.Contains(keep.MapId) && !(ids.IndexOf(keep.RaidId) is var raidAt && raidAt >= 0 && raidAt < ids.IndexOf(keep.MapId)))
@@ -204,6 +263,7 @@ public static class ContentLoader
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
+            Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,
         };
     }

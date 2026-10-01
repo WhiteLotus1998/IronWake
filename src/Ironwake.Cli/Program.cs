@@ -61,6 +61,7 @@ public static class Program
             var maps = MapFiles.LoadAll(contentDir, content);
             var trials = MapFiles.LoadDirectory(contentDir, MapFiles.TrialsDirectory, content);
             var keep = MapFiles.LoadDirectory(contentDir, MapFiles.KeepDirectory, content);
+            var quests = MapFiles.LoadDirectory(contentDir, MapFiles.QuestsDirectory, content);
             foreach (var entry in content.Campaign.Maps)
             {
                 var path = MapFiles.CampaignPath(contentDir, content, entry.MapId);
@@ -79,9 +80,19 @@ public static class Program
                 }
             }
 
+            foreach (var quest in content.Campaign.Quests)
+            {
+                var side = quests.FirstOrDefault(q => q.Id == quest.MapId).Map
+                    ?? throw new ContentException(ContentFiles.CampaignName, quest.Id, "map", $"no file {MapFiles.QuestsDirectory}/{quest.MapId}.map under {contentDir}");
+                if (CampaignRecord.QuestMapRefusal(side) is { } refusal)
+                {
+                    throw new ContentException(ContentFiles.CampaignName, quest.Id, "map", refusal);
+                }
+            }
+
             Console.WriteLine(
                 $"OK: {content.Terrain.Count} terrain, {content.Classes.Count} classes, " +
-                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps, {trials.Count} trials, {keep.Count} keep maps from {contentDir}");
+                $"{content.Weapons.Count} weapons, {content.Units.Count} units, {maps.Count} maps, {trials.Count} trials, {quests.Count} side maps, {keep.Count} keep maps from {contentDir}");
             return 0;
         }
         catch (ContentException e)
