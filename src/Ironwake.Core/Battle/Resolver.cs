@@ -670,7 +670,7 @@ public static class Resolver
     /// <summary>
     /// The combat art an attack declares (issue 68), or why it cannot: the unit must know
     /// it (<see cref="RejectionReason.NoSuchArt"/>), and the weapon it strikes with must be
-    /// of the art's type, at a rank the unit has reached, not broken, and holding at least
+    /// of the art's type (and the art's own item, for a signature art), at a rank the unit has reached, not broken, and holding at least
     /// the art's cost and the first strike's use (<see cref="RejectionReason.ArtRefused"/>).
     /// <paramref name="unit"/> is the unit with <paramref name="weapon"/> already equipped.
     /// </summary>
@@ -685,6 +685,7 @@ public static class Resolver
         var (ability, art) = known;
         var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
         var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} art and {weapon.Name} is a {Lower(weapon.Type)}"
+            : art.Item is { } item && item != weapon.Id ? $"{ability.Name} is declared only with {content.ItemName(item)}"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
             : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
             : uses == 0 ? $"{weapon.Name} is broken and cannot pay for an art"

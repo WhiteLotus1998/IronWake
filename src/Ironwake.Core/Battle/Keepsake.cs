@@ -11,23 +11,12 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
     /// What <paramref name="fallen"/> leaves on a <c>keepsakes: on</c> map: the weapon in its
     /// equipped slot, else the first slot holding any weapon, with the uses it had; null when it
     /// carried no weapon. A stack already named for someone else keeps that name, and the
-    /// keepsake is that one's.
+    /// keepsake is that one's. A signature item (<see cref="Weapon.BoundTo"/>, issue 635) is never
+    /// left: it is lost with its owner, so the next weapon is the keepsake.
     /// </summary>
     public static Keepsake? Of(BattleUnit fallen, GameContent content)
     {
-        var slot = fallen.EquippedSlot(content);
-        if (slot < 0)
-        {
-            var items = fallen.Unit.Inventory.Items;
-            for (var i = 0; i < items.Count && slot < 0; i++)
-            {
-                if (content.Weapons.ContainsKey(items[i].ItemId))
-                {
-                    slot = i;
-                }
-            }
-        }
-
+        var slot = OwnSlot(fallen, content);
         if (slot < 0)
         {
             return null;
@@ -46,15 +35,8 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
     /// </summary>
     public static IReadOnlyList<Keepsake> Dropped(BattleUnit fallen, GameContent content)
     {
-        var own = fallen.Side == Side.Player ? Of(fallen, content) : null;
-        var ownSlot = -1;
-        if (own is not null)
-        {
-            var equipped = fallen.EquippedSlot(content);
-            var items = fallen.Unit.Inventory.Items;
-            ownSlot = equipped >= 0 ? equipped : Enumerable.Range(0, items.Count).First(i => content.Weapons.ContainsKey(items[i].ItemId));
-        }
-
+        var ownSlot = fallen.Side == Side.Player ? OwnSlot(fallen, content) : -1;
+        var own = ownSlot >= 0 ? Of(fallen, content) : null;
         var dropped = new List<Keepsake>();
         for (var i = 0; i < fallen.Unit.Inventory.Count; i++)
         {
@@ -70,6 +52,29 @@ public sealed record Keepsake(Coord At, string FallenId, ItemStack Item)
         }
 
         return dropped;
+    }
+
+    /// <summary>The slot <see cref="Of"/> reads: the equipped weapon unless it is bound, else the first unbound weapon; -1 when none.</summary>
+    private static int OwnSlot(BattleUnit fallen, GameContent content)
+    {
+        var items = fallen.Unit.Inventory.Items;
+        var equipped = fallen.EquippedSlot(content);
+        if (equipped >= 0 && Leavable(items[equipped]))
+        {
+            return equipped;
+        }
+
+        for (var i = 0; i < items.Count; i++)
+        {
+            if (Leavable(items[i]))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+
+        bool Leavable(ItemStack stack) => content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.BoundTo is null;
     }
 
     /// <summary>

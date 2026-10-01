@@ -52,9 +52,41 @@ public static class ContentLoader
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
+        ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList()) : CampaignRules.None;
         return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
+    }
+
+    /// <summary>
+    /// Signature items and arts (issue 635): a weapon's <c>boundTo</c> names a cast member and the
+    /// weapon carries no <c>price</c>, since a bound item is never sold or repaired; an art's
+    /// <c>item</c> names a weapon of the art's own type.
+    /// </summary>
+    private static void ValidateSignatureItems(
+        ContentFiles files, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Ability> abilities, IReadOnlyList<Unit> cast)
+    {
+        foreach (var weapon in weapons.Values.Where(w => w.BoundTo is not null))
+        {
+            if (!cast.Any(u => u.Id == weapon.BoundTo))
+            {
+                throw new ContentException(files.Weapons.Name, weapon.Id, "boundTo", $"'{weapon.BoundTo}' is not in the cast");
+            }
+
+            if (weapon.Price is not null)
+            {
+                throw new ContentException(files.Weapons.Name, weapon.Id, "price", "a signature item is bound to its owner and is never sold");
+            }
+        }
+
+        foreach (var ability in abilities.Values)
+        {
+            if (ability.Effect is CombatArtEffect { Item: { } item } art
+                && !(weapons.TryGetValue(item, out var weapon) && weapon.Type == art.Weapon))
+            {
+                throw new ContentException(files.Abilities.Name, ability.Id, "effect.item", $"'{item}' must be a {art.Weapon.ToString().ToLowerInvariant()} in weapons.json");
+            }
+        }
     }
 
     /// <summary>
@@ -72,7 +104,8 @@ public static class ContentLoader
     /// The optional <c>quests</c> array (issue 635) lists the side maps: each an <c>id</c> (unique),
     /// a <c>member</c> in the cast and not the captain, a <c>part</c> of 1 or 2 (one of each per
     /// member at most, part 2 only after that member's part 1 in the file), a <c>map</c> id under
-    /// <c>content/quests</c>, and optional <c>before</c> and <c>after</c> cards. Whoever loads the
+    /// <c>content/quests</c>, optional <c>before</c> and <c>after</c> cards, and on a part 2 an optional
+    /// <c>pays</c>, a weapon bound to the member (<see cref="Weapon.BoundTo"/>). Whoever loads the
     /// map checks its slots (<see cref="CampaignRecord.QuestMapRefusal"/>).
     /// </summary>
     private static CampaignRules ParseCampaign(
@@ -249,7 +282,22 @@ public static class ContentLoader
                 throw node.Error("map", "must be a side map id");
             }
 
-            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after") });
+            string? pays = null;
+            if (node.Has("pays"))
+            {
+                pays = node.String("pays");
+                if (part != 2)
+                {
+                    throw node.Error("pays", "only a quest 2 pays the signature item");
+                }
+
+                if (!weapons.TryGetValue(pays, out var item) || item.BoundTo != member)
+                {
+                    throw node.Error("pays", $"'{pays}' must be a weapon bound to '{member}'");
+                }
+            }
+
+            quests.Add(new CampaignQuest(id, member, part, map) { Before = Card(node, "before"), After = Card(node, "after"), Pays = pays });
             questIndex++;
         }
 
@@ -462,7 +510,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "item");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -475,6 +523,7 @@ public static class ContentLoader
                 {
                     PerMap = effect.Has("perMap") ? effect.Int("perMap") : null,
                     CostsNextPhase = effect.BoolOr("costsNextPhase", false),
+                    Item = effect.Has("item") ? effect.String("item") : null,
                 };
                 if (art.PerMap is < 1)
                 {
@@ -1124,7 +1173,10 @@ public static class ContentLoader
                 node.Enum<WeaponRank>("rank"),
                 Price(node),
                 node.BoolOr("ignites", false),
-                node.BoolOr("windup", false)));
+                node.BoolOr("windup", false))
+            {
+                BoundTo = node.Has("boundTo") ? node.String("boundTo") : null,
+            });
         }
 
         if (builder.Count == 0)

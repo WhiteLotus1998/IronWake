@@ -75,7 +75,8 @@ public sealed record CombatModifierEffect(OpponentCondition Against, int Hit, in
 /// spends on top of one per strike, paid whether the art hits or misses.
 /// <see cref="PerMap"/> caps how many times a unit declares the art in one battle (null: no
 /// cap), and <see cref="CostsNextPhase"/> makes the attack cost the unit its side's next phase,
-/// in which it can neither move nor act (the captain's strike, issue 636).
+/// in which it can neither move nor act (the captain's strike, issue 636). <see cref="Item"/>
+/// makes it a signature art (issue 635): declared only with that one weapon.
 /// </summary>
 public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cost, int Mt, int Hit, int Crit, int Wt, int Range) : AbilityEffect
 {
@@ -99,6 +100,9 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 
     /// <summary>Whether the attack costs the unit its side's next phase: it begins that phase moved and acted (issue 636).</summary>
     public bool CostsNextPhase { get; init; }
+
+    /// <summary>The one weapon this signature art is declared with (issue 635), or null when any weapon of its type will do.</summary>
+    public string? Item { get; init; }
 }
 
 /// <summary>
