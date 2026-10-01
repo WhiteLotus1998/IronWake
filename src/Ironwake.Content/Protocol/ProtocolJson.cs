@@ -333,6 +333,11 @@ public static class ProtocolJson
             case MapEventFired m:
                 w.WriteString("name", m.Name);
                 w.WriteBoolean("blocked", m.Blocked);
+                if (m.Terrain is { } barring)
+                {
+                    w.WriteString("terrain", barring);
+                }
+
                 break;
             case TerrainChanged t:
                 WriteCoord(w, "at", t.At);

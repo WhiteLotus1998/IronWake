@@ -180,11 +180,13 @@ public sealed record GroupWoke(string Group, WakeCause Cause, ValueList<Lamp> La
 public sealed record Lamp(string UnitId, Coord At);
 
 /// <summary>
-/// A map event fired (issue 32). <paramref name="Blocked"/> is true when its tile was held:
-/// a spawn tile with a unit on it, or a terrain change its occupant could not stand on.
-/// A blocked event is spent all the same. Unless blocked, the action's own event follows.
+/// A map event fired (issue 32). <paramref name="Blocked"/> is true when its tile was barred:
+/// a spawn tile with a unit on it or terrain the template cannot stand on, or a terrain change
+/// its occupant could not stand on. <paramref name="Terrain"/> is the terrain id that barred a
+/// spawn when no unit held the tile (issue 655), and null otherwise. A blocked event is spent
+/// all the same. Unless blocked, the action's own event follows.
 /// </summary>
-public sealed record MapEventFired(string Name, bool Blocked) : GameEvent;
+public sealed record MapEventFired(string Name, bool Blocked, string? Terrain = null) : GameEvent;
 
 /// <summary>A map event changed a tile's terrain.</summary>
 public sealed record TerrainChanged(Coord At, string TerrainId) : GameEvent;

@@ -5,8 +5,9 @@ namespace Ironwake.Core;
 /// after every accepted command: at a phase start for turn triggers, after a player Move
 /// for enter triggers. Events fire in file order, each at most once per battle. A fired
 /// event emits <see cref="MapEventFired"/> and then its action's own event. An event whose
-/// tile is held is blocked and spent, with no action: a spawn tile with any unit on it,
-/// or a terrain change that would leave its occupant on ground it cannot enter.
+/// tile is barred is blocked and spent, with no action: a spawn tile with any unit on it or
+/// terrain the template cannot stand on (the event names that terrain, issue 655), or a
+/// terrain change that would leave its occupant on ground it cannot enter.
 /// </summary>
 public static class MapEvents
 {
@@ -44,9 +45,15 @@ public static class MapEvents
                     break;
                 case SpawnEnemy spawn:
                     var at = spawn.Placement.At;
-                    if (state.UnitAt(at) is not null || !state.Map.TerrainAt(at, content).IsPassable(content.Class(content.Unit(spawn.Placement.TemplateId).ClassId).Movement))
+                    if (state.UnitAt(at) is not null)
                     {
                         events.Add(new MapEventFired(mapEvent.Name, true));
+                        break;
+                    }
+
+                    if (!state.Map.TerrainAt(at, content).IsPassable(content.Class(content.Unit(spawn.Placement.TemplateId).ClassId).Movement))
+                    {
+                        events.Add(new MapEventFired(mapEvent.Name, true, state.Map.TerrainIdAt(at)));
                         break;
                     }
 
