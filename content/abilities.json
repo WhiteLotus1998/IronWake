@@ -39,6 +39,8 @@
     { "id": "aimed_shot", "name": "Aimed Shot", "text": "+20 hit, +10 crit, +2 wt. Steady, and slower for it.",
       "effect": { "kind": "art", "weapon": "bow", "rank": "E", "cost": 2, "hit": 20, "crit": 10, "wt": 2 } },
     { "id": "overcast", "name": "Overcast", "text": "+5 mt, +4 wt. More fire than the caster can carry.",
-      "effect": { "kind": "art", "weapon": "reason", "rank": "E", "cost": 2, "mt": 5, "wt": 4 } }
+      "effect": { "kind": "art", "weapon": "reason", "rank": "E", "cost": 2, "mt": 5, "wt": 4 } },
+    { "id": "full_measure", "name": "Full Measure", "text": "+8 mt, +30 hit, +20 crit. Once a map, and it costs the next phase: no move, no act.",
+      "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 2, "mt": 8, "hit": 30, "crit": 20, "perMap": 1, "costsNextPhase": true } }
   ]
 }

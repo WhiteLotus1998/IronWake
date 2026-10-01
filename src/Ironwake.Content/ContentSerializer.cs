@@ -178,6 +178,16 @@ public static class ContentSerializer
                 writer.WriteNumber("crit", art.Crit);
                 writer.WriteNumber("wt", art.Wt);
                 writer.WriteNumber("range", art.Range);
+                if (art.PerMap is { } perMap)
+                {
+                    writer.WriteNumber("perMap", perMap);
+                }
+
+                if (art.CostsNextPhase)
+                {
+                    writer.WriteBoolean("costsNextPhase", true);
+                }
+
                 break;
             case CantoEffect:
                 writer.WriteString("kind", "canto");

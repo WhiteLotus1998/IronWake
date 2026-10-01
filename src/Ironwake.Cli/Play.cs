@@ -1302,7 +1302,9 @@ public sealed class PlaySession
     /// <summary>
     /// Under a forecast of a combat art (issue 68): the art, the weapon as the art makes it,
     /// and the most uses the attack spends against the uses the weapon has, the art's cost
-    /// included, since that is paid whether the strike lands or not.
+    /// included, since that is paid whether the strike lands or not. An art with a per-map cap
+    /// says how many uses of it are left this map, and one that costs the next phase says so
+    /// (issue 636), since a rule the player pays for is printed where it is chosen.
     /// </summary>
     private static string ArtLine(GameContent content, BattleUnit unit, CombatForecast forecast, int? slot, string art)
     {
@@ -1310,7 +1312,9 @@ public sealed class PlaySession
         var ability = content.Ability(art);
         var struck = ((CombatArtEffect)ability.Effect).Apply(weapon!);
         var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
-        return $"  art {ability.Name}: {struck.Name} at mt {struck.Mt} hit {struck.Hit} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss";
+        return $"  art {ability.Name}: {struck.Name} at mt {struck.Mt} hit {struck.Hit} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
+            + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
+            + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "");
     }
 
     /// <summary>
@@ -2097,6 +2101,8 @@ public sealed class PlaySession
                 return $"{names[h.UnitId]} heals {h.Amount} (hp {h.HpAfter})";
             case UnitBurned b:
                 return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
+            case UnitRested r:
+                return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
             case WatchTaken w:
                 return $"{names[w.UnitId]} watches from {w.At}"
                     + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")

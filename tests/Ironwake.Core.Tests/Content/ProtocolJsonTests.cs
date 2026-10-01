@@ -47,6 +47,7 @@ public class ProtocolJsonTests
         { new PhaseBegan(Side.Enemy, 2), """{"type":"phaseBegan","side":"enemy","turn":2}""" },
         { new UnitHealed("wren", 3, 17), """{"type":"unitHealed","unit":"wren","amount":3,"hpAfter":17}""" },
         { new UnitBurned("wren", 4, 13), """{"type":"unitBurned","unit":"wren","amount":4,"hpAfter":13}""" },
+        { new UnitRested("captain"), """{"type":"unitRested","unit":"captain"}""" },
         { new BlowRaised("toll_mauler-1", "teodor", A), """{"type":"blowRaised","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2}}""" },
         { new BlowLanded("toll_mauler-1", "teodor", A, 11, 9), """{"type":"blowLanded","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2},"damage":11,"targetHpAfter":9}""" },
         { new BlowFell("toll_mauler-1", A), """{"type":"blowFell","unit":"toll_mauler-1","at":{"x":1,"y":2}}""" },

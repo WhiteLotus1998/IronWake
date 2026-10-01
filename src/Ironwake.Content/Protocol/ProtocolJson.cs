@@ -196,6 +196,9 @@ public static class ProtocolJson
                 w.WriteNumber("amount", b.Amount);
                 w.WriteNumber("hpAfter", b.HpAfter);
                 break;
+            case UnitRested r:
+                w.WriteString("unit", r.UnitId);
+                break;
             case WatchTaken t:
                 w.WriteString("unit", t.UnitId);
                 WriteCoord(w, "at", t.At);
@@ -758,6 +761,22 @@ public static class ProtocolJson
             w.WriteBoolean("braced", true);
         }
 
+        if (unit.Spent != 0)
+        {
+            w.WriteNumber("spent", unit.Spent);
+        }
+
+        if (unit.ArtsDeclared is { } declared)
+        {
+            w.WriteStartArray("artsDeclared");
+            foreach (var art in declared)
+            {
+                w.WriteStringValue(art);
+            }
+
+            w.WriteEndArray();
+        }
+
         if (burning)
         {
             w.WriteBoolean("burning", true);
@@ -846,7 +865,11 @@ public static class ProtocolJson
             OptionalString(e, "grudge"),
             e.TryGetProperty("shoved", out _) && RequiredBool(e, "shoved"),
             e.TryGetProperty("braced", out _) && RequiredBool(e, "braced"),
-            e.TryGetProperty("windupAt", out _) ? ReadCoord(e, "windupAt") : null);
+            e.TryGetProperty("windupAt", out _) ? ReadCoord(e, "windupAt") : null)
+        {
+            Spent = OptionalInt(e, "spent") ?? 0,
+            ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
+        };
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>

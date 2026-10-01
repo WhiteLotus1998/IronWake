@@ -186,6 +186,12 @@ public static class Resolver
             return null;
         }
 
+        if (unit.Resting)
+        {
+            rejection = new Rejection(RejectionReason.AlreadyActed, $"{unit.Id} spent this phase on last phase's strike and cannot move or act until its side's next phase");
+            return null;
+        }
+
         if (unit.Acted)
         {
             rejection = new Rejection(RejectionReason.AlreadyActed, $"{unit.Id} has already acted this phase");
@@ -428,6 +434,16 @@ public static class Resolver
         events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
 
         var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, art?.Cost ?? 0);
+        if (art is { PerMap: not null })
+        {
+            attackerAfter = attackerAfter with { ArtsDeclared = (attackerAfter.ArtsDeclared ?? ValueList<string>.Empty).Add(attack.Art!) };
+        }
+
+        if (art is { CostsNextPhase: true })
+        {
+            attackerAfter = attackerAfter with { Spent = 1 };
+        }
+
         var targetAfter = SpendDurability(target with { Hp = result.DefenderHp }, result.Strikes, content, events);
         attackerAfter = AwardExp(attackerAfter, targetAfter, result.Strikes, result.DefenderDied, content, state.Seed, events);
         targetAfter = AwardExp(targetAfter, attackerAfter, result.Strikes, result.AttackerDied, content, state.Seed, events);
@@ -670,12 +686,14 @@ public static class Resolver
         var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
         var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} art and {weapon.Name} is a {Lower(weapon.Type)}"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
+            : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
             : uses == 0 ? $"{weapon.Name} is broken and cannot pay for an art"
             : uses < art.UsesNeeded ? $"{ability.Name} costs {art.UsesNeeded} uses with the strike and {weapon.Name} has {uses} left"
             : null;
         return why is null ? (art, null) : (null, new Rejection(RejectionReason.ArtRefused, $"{unit.Id} cannot use {ability.Name}: {why}"));
 
         static string Lower(WeaponType type) => type.ToString().ToLowerInvariant();
+        static string Times(int cap) => cap == 1 ? "once" : $"{cap} times";
     }
 
     /// <summary>The refusal's reason when a unit's rank is below a weapon's (issue 67): the unit's rank in the type and the rank the weapon needs.</summary>
@@ -1241,7 +1259,14 @@ public static class Resolver
                 }
             }
 
-            units.Add(unit with { Hp = hp, Moved = false, Acted = false, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
+            var spent = unit.Side == nextPhase ? (unit.Spent == 1 ? 2 : 0) : unit.Spent;
+            var resting = unit.Side == nextPhase && spent == 2;
+            if (resting)
+            {
+                events.Add(new UnitRested(unit.Id));
+            }
+
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

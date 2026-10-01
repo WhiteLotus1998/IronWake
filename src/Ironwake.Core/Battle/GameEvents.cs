@@ -85,6 +85,9 @@ public sealed record UnitHealed(string UnitId, int Amount, int HpAfter) : GameEv
 /// <summary>Burning terrain at the start of the owner's phase (DESIGN.md 13.15, experiment). Amount is what was actually lost; fire never takes a unit below 1.</summary>
 public sealed record UnitBurned(string UnitId, int Amount, int HpAfter) : GameEvent;
 
+/// <summary>At the start of its side's phase a unit pays an art that cost it this phase (issue 636): it begins moved and acted and can neither move nor act until its side's next phase.</summary>
+public sealed record UnitRested(string UnitId) : GameEvent;
+
 /// <summary>A windup weapon's attack raised a blow over <paramref name="At"/>, where <paramref name="TargetId"/> stood (DESIGN.md 13.16, experiment). No combat was fought.</summary>
 public sealed record BlowRaised(string UnitId, string TargetId, Coord At) : GameEvent;
 
