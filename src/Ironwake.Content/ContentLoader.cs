@@ -53,7 +53,7 @@ public static class ContentLoader
         var items = ParseItems(files.Items, weapons);
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain) : CampaignRules.None;
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList()) : CampaignRules.None;
         return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
     }
 
@@ -66,10 +66,13 @@ public static class ContentLoader
     /// <c>content/trials</c>; an unknown class or an empty map id is refused, and whoever loads the
     /// trial checks that its <c>certification:</c> header names the same class. A map's optional
     /// <c>before</c> and <c>after</c> are its text cards (issue 631), read by <see cref="Card"/>.
+    /// A map's optional <c>arrives</c> (issue 632) lists the cast ids who join on it; a unit not in
+    /// the cast, the captain (the cast's first, there from the start) and a unit arriving twice are
+    /// refused. Whoever loads the map checks that it places each arrival by name.
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
-        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain)
+        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain, IReadOnlyList<string> cast)
     {
         JsonDocument document;
         try
@@ -139,7 +142,31 @@ public static class ContentLoader
                 throw node.Error("stock", "must not list an id twice");
             }
 
-            maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock)) { Before = Card(node, "before"), After = Card(node, "after") });
+            var arrives = node.StringArrayOrEmpty("arrives");
+            foreach (var id in arrives)
+            {
+                if (!cast.Contains(id))
+                {
+                    throw node.Error("arrives", $"'{id}' is not in the cast");
+                }
+
+                if (cast.Count > 0 && cast[0] == id)
+                {
+                    throw node.Error("arrives", $"'{id}' is the captain, who leads from the first map");
+                }
+
+                if (arrives.Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id)))
+                {
+                    throw node.Error("arrives", $"'{id}' arrives on more than one map");
+                }
+            }
+
+            maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock))
+            {
+                Before = Card(node, "before"),
+                After = Card(node, "after"),
+                Arrives = ValueList<string>.From(arrives),
+            });
             index++;
         }
 

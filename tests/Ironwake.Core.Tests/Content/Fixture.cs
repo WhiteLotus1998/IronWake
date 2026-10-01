@@ -162,14 +162,26 @@ internal static class Fixture
     }
 
     /// <summary>
-    /// Takes Starting Alone (issue 631) out of the campaign's maps: a campaign journaled before it
-    /// shipped opens on Old Mill Road as map 1, and its battle seeds count from there.
+    /// Takes Starting Alone (issue 631) out of the campaign's maps and puts Old Mill Road back in
+    /// The Mill's place with nobody arriving (issue 632): a campaign journaled before the story
+    /// order opens on Old Mill Road as map 1 with the whole cast, and its battle seeds count from there.
     /// </summary>
     public static string WithoutStartingAlone(string target)
     {
         var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
         var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
         var maps = campaign["maps"]!.AsArray().Where(m => (string)m!["map"]! != "starting_alone").Select(m => m!.DeepClone()).ToArray();
+        foreach (var map in maps.Select(m => m!.AsObject()))
+        {
+            map.Remove("arrives");
+            if ((string)map["map"]! == "the_mill")
+            {
+                map["map"] = "old_mill_road";
+                map.Remove("before");
+                map.Remove("after");
+            }
+        }
+
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;

@@ -10,12 +10,13 @@ public class SampleMapsTests
         MapFiles.LoadAll(Fixture.RealContentDirectory(), MapFixture.Content);
 
     [Fact]
-    public void TheSevenShippedMapsLoad()
+    public void TheEightShippedMapsLoad()
     {
         var maps = All();
 
-        Assert.Equal(new[] { "brackwater_cut", "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "starting_alone", "the_tollgate" }, maps.Select(m => m.Id));
-        Assert.Equal(WinCondition.Seize, maps[6].Map.Win);
+        Assert.Equal(new[] { "brackwater_cut", "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "starting_alone", "the_mill", "the_tollgate" }, maps.Select(m => m.Id));
+        Assert.Equal(WinCondition.Seize, maps[7].Map.Win);
+        Assert.Equal(WinCondition.Rout, maps[6].Map.Win);
         Assert.Equal(WinCondition.Rout, maps[5].Map.Win);
         Assert.Equal(WinCondition.Seize, maps[3].Map.Win);
         Assert.Equal(WinCondition.DefeatBoss, maps[1].Map.Win);

@@ -16,6 +16,13 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
 
     /// <summary>The text card printed after the map is won (issue 631), as <see cref="Before"/>; empty for a map without one.</summary>
     public ValueList<string> After { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// The recruits who arrive on this map (issue 632, DESIGN section 14), as cast ids: each is off
+    /// the roster until this map, joins its battle, and stays if it stands. Empty for a map nobody
+    /// arrives on; a recruit no map names is on the roster from the first map.
+    /// </summary>
+    public ValueList<string> Arrives { get; init; } = ValueList<string>.Empty;
 }
 
 /// <summary>
@@ -39,6 +46,23 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 
     /// <summary>The keep's map and the edits sold for it (issue 82, an experiment); <see cref="KeepMenu.None"/> when the campaign has none.</summary>
     public KeepMenu Keep { get; init; } = KeepMenu.None;
+
+    /// <summary>
+    /// The index of the map <paramref name="unitId"/> arrives on (issue 632), or -1 for a unit no
+    /// map names, who is on the roster from the first map.
+    /// </summary>
+    public int ArrivalIndex(string unitId)
+    {
+        for (var i = 0; i < Maps.Count; i++)
+        {
+            if (Maps[i].Arrives.Contains(unitId))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     /// <summary>The trial that certifies into <paramref name="classId"/>, or null when that class has none.</summary>
     public CampaignTrial? TrialFor(string classId) => Trials.FirstOrDefault(t => t.ClassId == classId);

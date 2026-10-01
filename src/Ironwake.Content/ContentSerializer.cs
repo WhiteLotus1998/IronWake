@@ -64,6 +64,16 @@ public static class ContentSerializer
                 writer.WriteEndArray();
                 WriteCard(writer, "before", map.Before);
                 WriteCard(writer, "after", map.After);
+                if (map.Arrives.Count > 0)
+                {
+                    writer.WriteStartArray("arrives");
+                    foreach (var id in map.Arrives)
+                    {
+                        writer.WriteStringValue(id);
+                    }
+
+                    writer.WriteEndArray();
+                }
                 writer.WriteEndObject();
             }
 
