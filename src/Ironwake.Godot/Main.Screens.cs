@@ -24,6 +24,13 @@ public partial class Main
     /// <summary>What the window shows: the battle, or the title or how-to-play screen before it.</summary>
     private Screen _screen = Screen.Battle;
 
+    /// <summary>
+    /// The pause menu is up (issue 629): the battle stays drawn, dimmed, under it, and its clock
+    /// stops. It stays set while the how-to-play screen is opened from it, so Esc there comes
+    /// back to the menu.
+    /// </summary>
+    private bool _paused;
+
     /// <summary>The turn-1 callouts, on for a battle opened from the title; null when off.</summary>
     private Callouts? _callouts;
 
@@ -43,7 +50,7 @@ public partial class Main
         _client = new ClientSession(content, BattleState.From(map, content, content.Cast, seed));
         _tile = TileFor(map);
         _callouts = callouts ? new Callouts() : null;
-        (_hover, _recallOpen, _logOpen, _threatShown) = (null, false, false, false);
+        (_hover, _logOpen, _threatShown, _paused) = (null, false, false, false);
         (_beatSerialSeen, _scrubSerialSeen) = (-1, -1);
         _screen = Screen.Battle;
         SyncBeats();
@@ -60,6 +67,9 @@ public partial class Main
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
                 ToggleMute();
                 break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Enter or Key.KpEnter or Key.Space } when _paused:
+                (_screen, _paused) = (Screen.Battle, false);
+                break;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Enter or Key.KpEnter or Key.Space }:
                 StartBattle(_seed, callouts: true);
                 break;
@@ -69,7 +79,8 @@ public partial class Main
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape }:
                 if (_screen == Screen.HowTo)
                 {
-                    _screen = Screen.Title;
+                    // From the pause menu, back to it; from the title, back to the title.
+                    _screen = _paused ? Screen.Battle : Screen.Title;
                 }
                 else
                 {
@@ -248,11 +259,18 @@ public partial class Main
         }
 
         var kx = side;
-        foreach (var (key, does, act) in new (string, string, Action)[]
-        {
-            ("Enter", "play the Tollgate", () => StartBattle(_seed, callouts: true)),
-            ("Esc", "back to the title", () => _screen = Screen.Title),
-        })
+        var leave = _paused
+            ? new (string, string, Action)[]
+            {
+                ("Enter", "back to the battle", () => (_screen, _paused) = (Screen.Battle, false)),
+                ("Esc", "back to the menu", () => _screen = Screen.Battle),
+            }
+            : new (string, string, Action)[]
+            {
+                ("Enter", "play the Tollgate", () => StartBattle(_seed, callouts: true)),
+                ("Esc", "back to the title", () => _screen = Screen.Title),
+            };
+        foreach (var (key, does, act) in leave)
         {
             var width = UiWidth(key, 12, bold: true) + 16;
             var cap = new Rect2(kx, ViewHeight - 50, width, 24);
@@ -351,6 +369,84 @@ public partial class Main
             var end2 = x + keyWidth + 8 + UiWidth(does, 14);
             _hits.Add((new Rect2(x, y - 20, end2 - x, 32), act));
             x = end2 + 28;
+        }
+    }
+
+    /// <summary>The pause menu's keys and clicks (issue 629); the board under it takes nothing but the pointer.</summary>
+    private void PauseInput(InputEvent input)
+    {
+        switch (input)
+        {
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left } click:
+                PressAt(click.Position);
+                break;
+            case InputEventKey { Pressed: true, Echo: false } key when Screens.PauseKey(key.Keycode == Key.Escape ? "Esc" : OS.GetKeycodeString(key.Keycode)) is { } choice:
+                Pick(choice);
+                break;
+        }
+    }
+
+    /// <summary>Does what a pause menu choice says.</summary>
+    private void Pick(PauseChoice choice)
+    {
+        switch (choice)
+        {
+            case PauseChoice.Resume:
+                _paused = false;
+                break;
+            case PauseChoice.HowToPlay:
+                _screen = Screen.HowTo;
+                break;
+            case PauseChoice.Sound:
+                ToggleMute();
+                break;
+            default:
+                (_screen, _paused) = (Screen.Title, false);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The pause menu (issue 629): the board dimmed under a card with the four choices, each a
+    /// row with its keycap, clickable like the title's; the sound row says whether sound is on.
+    /// </summary>
+    private void DrawPauseMenu()
+    {
+        if (!_paused || EndCardShown)
+        {
+            return;
+        }
+
+        // Only the menu's rows take a click while it is up, not the board or the column under it.
+        _hits.Clear();
+        DrawRect(new Rect2(Vector2.Zero, new Vector2(ViewWidth, ViewHeight)), UiColour("ink", 0.72f));
+        var amber = Look(LookPalette.Player);
+        var width = 380f;
+        var height = 96 + Screens.PauseChoices.Count * 56;
+        var rect = new Rect2((ViewWidth - width) / 2, (ViewHeight - height) / 2, width, height);
+        Card(rect, Box, 14);
+        Card(new Rect2(rect.Position, new Vector2(width, 6)), amber, 3);
+        DrawString(_caps, new Vector2(rect.Position.X + 40, rect.Position.Y + 48), "PAUSED", fontSize: 13, modulate: Muted);
+        var y = rect.Position.Y + 72;
+        foreach (var (choice, label, key) in Screens.PauseChoices)
+        {
+            var first = choice == PauseChoice.Resume;
+            var row = new Rect2(rect.Position.X + 40, y, width - 80, 44);
+            Card(row, first ? Look(LookPalette.Player, 0.16f) : UiColour("ink", 0.5f), 10);
+            if (first)
+            {
+                Ring(row, Look(LookPalette.Player, 0.7f), 10, 1.5f);
+            }
+
+            var text = choice == PauseChoice.Sound ? (_muted ? "Sound off" : "Sound on") : label;
+            UiText(new Vector2(row.Position.X + 20, y + 28), text, first ? amber : Ink, 17, bold: true);
+            var keyWidth = UiWidth(key, 12, bold: true) + 16;
+            var cap = new Rect2(row.End.X - 16 - keyWidth, y + 11, keyWidth, 22);
+            Card(cap, UiColour("ink"), 5);
+            UiText(new Vector2(cap.GetCenter().X, y + 27), key, Muted, 12, bold: true, centred: true);
+            var picked = choice;
+            _hits.Add((row, () => Pick(picked)));
+            y += 56;
         }
     }
 

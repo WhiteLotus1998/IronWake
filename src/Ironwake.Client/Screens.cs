@@ -56,6 +56,80 @@ public static class Screens
 
     /// <summary>The how-to-play screen's last line: how to leave it.</summary>
     public const string HowToLeave = "Enter plays, Esc goes back.";
+
+    /// <summary>The footer's label for Esc, whose keycap also opens the pause menu on a click (issue 629).</summary>
+    public const string MenuLabel = "menu";
+
+    /// <summary>
+    /// The pause menu's choices (issue 629, Lotus's third play), in order, each with the key
+    /// that picks it: the way back to the title that used to need a finished battle.
+    /// </summary>
+    public static readonly IReadOnlyList<(PauseChoice Choice, string Label, string Key)> PauseChoices = new[]
+    {
+        (PauseChoice.Resume, "Resume", "Esc"),
+        (PauseChoice.HowToPlay, "How to play", "H"),
+        (PauseChoice.Sound, "Sound", Sound.MuteKey),
+        (PauseChoice.Title, "Return to title", "Q"),
+    };
+
+    /// <summary>The choice a key picks on the pause menu, or null for a key that picks none.</summary>
+    public static PauseChoice? PauseKey(string key) =>
+        PauseChoices.Where(c => c.Key == key).Select(c => (PauseChoice?)c.Choice).FirstOrDefault();
+
+    /// <summary>
+    /// What Escape does in a battle (issue 629): it backs out of the innermost thing first, the
+    /// attack menu, then a selection or the Recall browser, and only with nothing left to back
+    /// out of opens the pause menu. In the campaign, which has no title to return to, it never
+    /// pauses.
+    /// </summary>
+    public static EscapeAction Escape(bool attackMenuOpen, bool selected, bool recallOpen, bool campaign)
+    {
+        if (attackMenuOpen)
+        {
+            return EscapeAction.CloseAttackMenu;
+        }
+
+        return selected || recallOpen || campaign ? EscapeAction.Clear : EscapeAction.Pause;
+    }
+}
+
+/// <summary>A choice on the pause menu (issue 629).</summary>
+public enum PauseChoice
+{
+    /// <summary>Back to the battle.</summary>
+    Resume,
+
+    /// <summary>The how-to-play screen, whose Esc comes back to the menu.</summary>
+    HowToPlay,
+
+    /// <summary>Sound on or off.</summary>
+    Sound,
+
+    /// <summary>Leave the battle for the title.</summary>
+    Title,
+}
+
+/// <summary>What Escape does in a battle (issue 629).</summary>
+public enum EscapeAction
+{
+    /// <summary>Closes the attack menu.</summary>
+    CloseAttackMenu,
+
+    /// <summary>Clears the selection and closes the Recall browser.</summary>
+    Clear,
+
+    /// <summary>Opens the pause menu.</summary>
+    Pause,
+}
+
+/// <summary>The board legend's words for the two sides' discs (issue 629: Lotus read "yours" and "theirs" as unclear).</summary>
+public static class Legend
+{
+    /// <summary>The player's disc.</summary>
+    public const string Player = "Player";
+
+    /// <summary>The enemy's disc.</summary>
+    public const string Enemy = "Enemy";
 }
 
 /// <summary>The three one-time turn-1 hints (issue 515), in the order they appear.</summary>

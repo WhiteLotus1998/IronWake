@@ -21,5 +21,5 @@ public static class KeyStrip
         ("P", "threat on tile"),
         ("Tab", PanelLayout.TabLabel),
         (Sound.MuteKey, "sound"),
-        ("Esc", "clear"));
+        ("Esc", Screens.MenuLabel));
 }

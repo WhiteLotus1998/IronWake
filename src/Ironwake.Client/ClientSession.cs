@@ -501,6 +501,13 @@ public sealed class ClientSession
     public IReadOnlyList<RecallRow> RecallRows => PlaySession.RecallRows(State, Content, _made);
 
     /// <summary>
+    /// Whether the Recall browser is open. A rewind closes it (issue 629): the board it returns
+    /// to is what the player wants to see next. A refused Recall leaves it open, its refusal in
+    /// <see cref="Status"/>.
+    /// </summary>
+    public bool RecallOpen { get; set; }
+
+    /// <summary>
     /// Rewinds to a history state, as a click on its row in the Recall browser does. The status
     /// bar then reads what the rewind gave back and that the rolls do not change, the lines the
     /// console prints under it; the event log gets only the Recall's own event, as the
@@ -514,6 +521,8 @@ public sealed class ClientSession
         {
             return false;
         }
+
+        RecallOpen = false;
 
         var frames = new List<BattleState> { left };
         for (var i = left.History.Count - 1; i > index; i--)

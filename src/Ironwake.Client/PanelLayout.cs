@@ -6,7 +6,7 @@ public enum PanelPart
     /// <summary>The Recall browser, which takes the whole column.</summary>
     Recall,
 
-    /// <summary>The live card: a hover forecast, the act on show, a move preview, or the idle hint.</summary>
+    /// <summary>The forecast block: a hover forecast, the act on show, a move preview, or the idle hint.</summary>
     Forecast,
 
     /// <summary>The drawn unit card.</summary>
@@ -17,31 +17,25 @@ public enum PanelPart
 }
 
 /// <summary>
-/// The side panel's order (issue 608). Tab opens the event log, and an open log takes what the
-/// column has left, never the card being read: a forecast, the act on show or a move preview
-/// keeps its place at the top. Only the unit card and the idle hint give way to the log.
+/// The side panel's order (issues 608, 629). Tab opens the event log, and an open log takes what
+/// the column has left, never the forecast block: a forecast, the act on show, a move preview or
+/// the idle hint keeps its place at the top. Only the unit card gives way to the log.
 /// </summary>
 public static class PanelLayout
 {
     /// <summary>The key strip's label for Tab.</summary>
     public const string TabLabel = "event log";
 
-    /// <summary>
-    /// The parts the column draws, in order. <paramref name="cardLive"/> is whether a card is
-    /// showing (a hover forecast, the act on show, or a move preview) rather than the idle hint.
-    /// </summary>
-    public static IReadOnlyList<PanelPart> Parts(bool recallOpen, bool logOpen, bool cardLive)
+    /// <summary>The parts the column draws, in order.</summary>
+    public static IReadOnlyList<PanelPart> Parts(bool recallOpen, bool logOpen)
     {
         if (recallOpen)
         {
             return new[] { PanelPart.Recall };
         }
 
-        if (!logOpen)
-        {
-            return new[] { PanelPart.Forecast, PanelPart.UnitCard, PanelPart.Log };
-        }
-
-        return cardLive ? new[] { PanelPart.Forecast, PanelPart.Log } : new[] { PanelPart.Log };
+        return logOpen
+            ? new[] { PanelPart.Forecast, PanelPart.Log }
+            : new[] { PanelPart.Forecast, PanelPart.UnitCard, PanelPart.Log };
     }
 }
