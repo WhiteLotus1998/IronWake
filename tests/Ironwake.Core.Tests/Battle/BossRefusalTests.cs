@@ -111,7 +111,7 @@ public class BossRefusalTests
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!,
             Queries.SleepingThreats(state, Starter, hale, hale.At)!, refusals: Queries.Refusals(state, Starter, hale, hale.At));
         var ends = line.Ends == line.Boss.At ? $"holds {line.Ends}" : $"ends on {line.Ends}";
-        Assert.Contains($"  grange_reeve-1 could reach {line.Refused} but refuses it: too exposed there; {ends}", text);
+        Assert.Contains($"  Grange Reeve could reach {line.Refused} but refuses it: too exposed there; {ends}", text);
         Assert.Contains("no enemy can strike hale next phase", text);
     }
 }

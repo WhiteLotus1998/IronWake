@@ -84,7 +84,7 @@ public sealed class LethalCounterTests
 
         var lines = PlaySession.ForecastText(state, Starter, captain, soldier, forecast, captain.At, fromTile: false).Split('\n');
 
-        Assert.Equal($"  counter: lethal to captain ({forecast.CounterIfAllLand} against 1 hp)", lines[1]);
+        Assert.Equal($"  Counter: lethal to Alder Fenn ({forecast.CounterIfAllLand} against 1 hp)", lines[1]);
     }
 
     [Fact]

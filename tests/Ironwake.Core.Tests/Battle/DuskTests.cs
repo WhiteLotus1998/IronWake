@@ -279,7 +279,7 @@ public class DuskTests
 
         Assert.DoesNotContain(lines, l => l.Enemy.Id == "soldier-1");
         Assert.Equal(new[] { "soldier-1" }, unseeing.Select(u => u.Id));
-        Assert.Contains("\n  soldier-1: cannot see you (dark)", text);
+        Assert.Contains("\n  Soldier: cannot see you (dark)", text);
     }
 
     /// <summary>
@@ -297,8 +297,8 @@ public class DuskTests
 
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
 
-        Assert.StartsWith($"threat on hale at 0,0 (Plain): {claim}", text);
-        Assert.Equal(dark, text.Contains("in the dark"));
+        Assert.StartsWith($"Threat on hale at 0,0 (Plain): {claim}", text);
+        Assert.Equal(dark, text.Contains("in the dark", StringComparison.OrdinalIgnoreCase));
     }
 
     /// <summary>
@@ -330,7 +330,7 @@ public class DuskTests
 
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
 
-        Assert.Contains("\n  in the dark, unpriced: ? at 4,1 (4), ? at 5,0 (6), ? at 5,2 (6)", text);
+        Assert.Contains("\n  In the dark, unpriced: ? at 4,1 (4), ? at 5,0 (6), ? at 5,2 (6)", text);
         Assert.DoesNotContain("9,1", text);
         Assert.DoesNotContain("rider", text);
         Assert.DoesNotContain("whatever is in the dark", text);
@@ -350,7 +350,7 @@ public class DuskTests
 
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
 
-        Assert.Equal(dark, text.Contains("\n  and whatever is in the dark (?), unpriced"));
+        Assert.Equal(dark, text.Contains("\n  And whatever is in the dark (?), unpriced"));
         Assert.DoesNotContain("in the dark, unpriced:", text);
         Assert.Equal(dark ? 1 : 0, Dusk.UnseenNear(state, hale.At, 99).Count);
     }

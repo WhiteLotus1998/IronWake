@@ -67,7 +67,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Rook -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
 Rook attacks Archer 2
   Rook hits Archer 2 for 7 (hp 10)
   Rook hp 17, Archer 2 hp 10
@@ -139,7 +139,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 10 (hp 0)
   Pell hp 16, Archer 2 hp 0
@@ -1037,7 +1037,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 enemy: move archer-1 9,3
 Archer 1 moves 6,3 -> 9,3 via 7,3 8,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+Forecast Archer 1 -> Dunstan: dmg 3 hit 88% crit 3%; counter: none
 Archer 1 attacks Dunstan
   Archer 1 hits Dunstan for 3 (hp 20)
   Archer 1 hp 17, Dunstan hp 20
@@ -1048,7 +1048,7 @@ Brawler waits
 enemy: move brigand-1 10,3
 Brigand 1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 11)
   Dunstan hits Brigand 1 for 11 (hp 12)
@@ -1067,7 +1067,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 16,4
 Shieldbearer moves 17,5 -> 16,4 via 17,4
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 7 hit 25% crit 0%; counter: dmg 2 x2 hit 70% crit 4%
+Forecast Shieldbearer -> Wren: dmg 7 hit 25% crit 0%; counter: dmg 2 x2 hit 70% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer hits Wren for 7 (hp 13)
   Wren misses Shieldbearer
@@ -1077,7 +1077,7 @@ Wren gains 14 exp (14)
 enemy: move soldier-1 15,5
 Soldier moves 17,6 -> 15,5 via 17,5 16,5
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 8 hit 28% crit 0%; counter: dmg 7 hit 54% crit 3%
+Forecast Soldier -> Wren: dmg 8 hit 28% crit 0%; counter: dmg 7 hit 54% crit 3%
 Soldier attacks Wren
   Soldier hits Wren for 8 (hp 5)
   Wren hits Soldier for 7 (hp 14)
@@ -1149,7 +1149,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 86% crit 2%; counter: none
+Forecast Pell -> Soldier with Cinder: dmg 12 hit 86% crit 2%; counter: none
 Pell attacks Soldier
   Pell misses Soldier
   Pell hp 16, Soldier hp 14
@@ -1216,7 +1216,7 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 5/20   Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 8 hit 58% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier: dmg 8 hit 58% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Soldier
   Alder Fenn misses Soldier
   Soldier hits Alder Fenn for 8 (hp 14)
@@ -1444,24 +1444,24 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 14/21  Forest  group ba
 D  wren             Wren L1 cadet              17,2   hp 5/20   Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: captain (brawler-1 12, shieldbearer-1 7, soldier-1 8 against 14 hp)
-lethal if all land: dunstan (archer-1 3, brawler-1 8, brigand-1 9 against 11 hp)
-lethal if all land: pell (archer-1 8, brawler-1 18, brigand-1 14, rider-1 11 against 16 hp)
-lethal if all land: rook (brawler-1 20, soldier-1 12 against 17 hp)
-lethal if all land: wren (brawler-1 14, shieldbearer-1 8 against 5 hp)
+Lethal if all land: Alder Fenn (Brawler for 12, Shieldbearer for 7, Soldier for 8, against 14 hp)
+Lethal if all land: Dunstan (Archer 1 for 3, Brawler for 8, Brigand 1 for 9, against 11 hp)
+Lethal if all land: Pell (Archer 1 for 8, Brawler for 18, Brigand 1 for 14, Rider 1 for 11, against 16 hp)
+Lethal if all land: Rook (Brawler for 20, Soldier for 12, against 17 hp)
+Lethal if all land: Wren (Brawler for 14, Shieldbearer for 8, against 5 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: move archer-1 13,3
 Archer 1 moves 9,3 -> 13,3 via 10,3 11,3 12,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+Forecast Archer 1 -> Dunstan: dmg 3 hit 88% crit 3%; counter: none
 Archer 1 attacks Dunstan
   Archer 1 hits Dunstan for 3 (hp 8)
   Archer 1 hp 17, Dunstan hp 8
 enemy: move brawler-1 17,3
 Brawler moves 16,5 -> 17,3 via 17,5 17,4
 enemy: attack brawler-1 rook
-forecast brawler-1 -> rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
+Forecast Brawler -> Rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
 Brawler attacks Rook
   Brawler hits Rook for 10 (hp 7)
   Brawler hits Rook for 10 (hp 0)
@@ -1470,7 +1470,7 @@ Rook falls at 16,3
 enemy: move brigand-1 14,3
 Brigand 1 moves 10,3 -> 14,3 via 11,3 12,3 13,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 0)
   Brigand 1 hp 12, Dunstan hp 0
@@ -1486,7 +1486,7 @@ Hexer waits
 enemy: move rider-1 13,4
 Rider 1 moves 9,2 -> 13,4 via 10,2 10,3 11,3 12,3 13,3
 enemy: attack rider-1 pell
-forecast rider-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Rider 1 -> Pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
 Rider 1 attacks Pell
   Rider 1 misses Pell
   Pell hits Rider 1 for 12 (hp 9)
@@ -1499,7 +1499,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 16,2
 Shieldbearer moves 16,4 -> 16,2 via 16,3
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer hits Wren for 8 (hp 0)
   Shieldbearer hp 23, Wren hp 0
@@ -1507,7 +1507,7 @@ Wren falls at 17,2
 enemy: move soldier-1 13,6
 Soldier moves 15,5 -> 13,6 via 15,6 14,6
 enemy: attack soldier-1 pell
-forecast soldier-1 -> pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Soldier -> Pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
 Soldier attacks Pell
   Soldier misses Pell
   Pell hits Soldier for 12 (hp 2)
@@ -1782,7 +1782,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 enemy: move archer-1 10,3
 Archer 1 moves 6,3 -> 10,3 via 7,3 8,3 9,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+Forecast Archer 1 -> Dunstan: dmg 3 hit 88% crit 3%; counter: none
 Archer 1 attacks Dunstan
   Archer 1 hits Dunstan for 3 (hp 20)
   Archer 1 hp 17, Dunstan hp 20
@@ -1791,7 +1791,7 @@ Brawler waits
 enemy: move brigand-1 11,3
 Brigand 1 moves 8,3 -> 11,3 via 9,3 10,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 11)
   Dunstan hits Brigand 1 for 11 (hp 12)
@@ -1846,7 +1846,7 @@ D  wren             Wren L1 cadet              13,3   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
-forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Brigand 1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 0)
   Pell hp 16, Brigand 1 hp 0
@@ -2039,11 +2039,11 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: pell (archer-1 8, hexer-1 8 against 16 hp)
+Lethal if all land: Pell (Archer 1 for 8, Hexer for 8, against 16 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+Forecast Archer 1 -> Dunstan: dmg 3 hit 88% crit 3%; counter: none
 Archer 1 attacks Dunstan
   Archer 1 hits Dunstan for 3 (hp 8)
   Archer 1 hp 17, Dunstan hp 8
@@ -2058,7 +2058,7 @@ Brigand 2 waits
 enemy: move hexer-1 10,2
 Hexer moves 7,2 -> 10,2 via 8,2 9,2
 enemy: attack hexer-1 pell
-forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 8 hit 99% crit 2%
+Forecast Hexer -> Pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 8 hit 99% crit 2%
 Hexer attacks Pell
   Hexer hits Pell for 8 (hp 8)
   Pell hits Hexer for 8 (hp 8)
@@ -2067,7 +2067,7 @@ Pell gains 14 exp (94)
 enemy: move rider-1 11,3
 Rider 1 moves 9,2 -> 11,3 via 10,2 10,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+Forecast Rider 1 -> Dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
 Rider 1 attacks Dunstan
   Rider 1 hits Dunstan for 6 (hp 2)
   Dunstan hits Rider 1 for 10 (hp 11)
@@ -2078,7 +2078,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 16,4
 Shieldbearer moves 17,5 -> 16,4 via 17,4
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 7 hit 25% crit 0%; counter: dmg 2 x2 hit 70% crit 4%
+Forecast Shieldbearer -> Wren: dmg 7 hit 25% crit 0%; counter: dmg 2 x2 hit 70% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren hits Shieldbearer for 2 (hp 23)
@@ -2088,7 +2088,7 @@ Wren gains 14 exp (14)
 enemy: move soldier-1 15,5
 Soldier moves 17,6 -> 15,5 via 17,5 16,5
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 8 hit 28% crit 0%; counter: dmg 7 hit 54% crit 3%
+Forecast Soldier -> Wren: dmg 8 hit 28% crit 0%; counter: dmg 7 hit 54% crit 3%
 Soldier attacks Wren
   Soldier misses Wren
   Wren misses Soldier
@@ -2126,8 +2126,8 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
-forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
-  counter: lethal to pell (8 against 8 hp)
+Forecast Pell -> Hexer with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+  Counter: lethal to Pell (8 against 8 hp)
 Pell attacks Hexer
   Pell hits Hexer for 8 (hp 0)
   Pell hp 8, Hexer hp 0
@@ -2403,13 +2403,13 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              13,3   hp 20/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: rook (archer-1 19, shieldbearer-1 11, soldier-1 12 against 17 hp)
+Lethal if all land: Rook (Archer 1 for 19, Shieldbearer for 11, Soldier for 12, against 17 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: move archer-1 10,4
 Archer 1 moves 10,3 -> 10,4
 enemy: attack archer-1 rook
-forecast archer-1 -> rook: dmg 19 hit 72% crit 1%; counter: none
+Forecast Archer 1 -> Rook: dmg 19 hit 72% crit 1%; counter: none
 Archer 1 attacks Rook
   Archer 1 hits Rook for 19 (hp 0)
   Archer 1 hp 17, Rook hp 0
@@ -2421,7 +2421,7 @@ Brawler waits
 enemy: wait brigand-2
 Brigand 2 waits
 enemy: attack rider-1 captain
-forecast rider-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
+Forecast Rider 1 -> Alder Fenn: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
 Rider 1 attacks Alder Fenn
   Rider 1 misses Alder Fenn
   Alder Fenn hits Rider 1 for 10 (hp 1)
@@ -2432,7 +2432,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 14,3
 Shieldbearer moves 16,4 -> 14,3 via 16,3 15,3
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren hits Shieldbearer for 3 (hp 18)
@@ -2442,7 +2442,7 @@ Wren gains 14 exp (28)
 enemy: move soldier-1 13,4
 Soldier moves 15,5 -> 13,4 via 14,5 14,4
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
 Soldier attacks Wren
   Soldier hits Wren for 9 (hp 11)
   Wren hits Soldier for 8 (hp 13)
@@ -2479,7 +2479,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain rider-1
-forecast captain -> rider-1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Rider 1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Rider 1
   Alder Fenn hits Rider 1 for 10 (hp 0)
   Alder Fenn hp 22, Rider 1 hp 0
@@ -2540,7 +2540,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+Forecast Pell -> Soldier with Cinder: dmg 12 hit 99% crit 2%; counter: none
 Pell attacks Soldier
   Pell hits Soldier for 12 (hp 1)
   Pell hp 9, Soldier hp 1
@@ -2572,7 +2572,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 1/21   Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 Wren attacks Soldier
   Wren hits Soldier for 8 (hp 0)
   Wren hp 11, Soldier hp 0
@@ -2658,23 +2658,23 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: captain (archer-1 5, brawler-1 12, brigand-2 11 against 22 hp)
-lethal if all land: dunstan (brawler-1 8 against 2 hp)
-lethal if all land: pell (brawler-1 18, shieldbearer-1 10 against 9 hp)
-lethal if all land: wren (archer-1 6, brawler-1 14, shieldbearer-1 8 against 11 hp)
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brawler for 12, Brigand 2 for 11, against 22 hp)
+Lethal if all land: Dunstan (Brawler for 8, against 2 hp)
+Lethal if all land: Pell (Brawler for 18, Shieldbearer for 10, against 9 hp)
+Lethal if all land: Wren (Archer 1 for 6, Brawler for 14, Shieldbearer for 8, against 11 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: move archer-1 11,3
 Archer 1 moves 10,4 -> 11,3 via 10,3
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+Forecast Archer 1 -> Wren: dmg 6 hit 72% crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 5)
   Archer 1 hp 17, Wren hp 5
 enemy: move brawler-1 14,2
 Brawler moves 15,3 -> 14,2 via 15,2
 enemy: attack brawler-1 pell
-forecast brawler-1 -> pell: dmg 9 x2 hit 94% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+Forecast Brawler -> Pell: dmg 9 x2 hit 94% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 Brawler attacks Pell
   Brawler hits Pell for 9 (hp 0)
   Brawler hp 23, Pell hp 0
@@ -2684,7 +2684,7 @@ Brigand 2 waits
 enemy: wait rider-2
 Rider 2 waits
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren hits Shieldbearer for 3 (hp 12)
@@ -2752,8 +2752,8 @@ j  soldier-1        Soldier L3 pikeman         15,5   hp 21/21  Forest  group ba
 D  wren             Wren L1 cadet              15,4   hp 20/20  Forest
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell hexer-1
-forecast pell -> hexer-1 with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
-  counter: lethal to pell (8 against 8 hp)
+Forecast Pell -> Hexer with Cinder: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+  Counter: lethal to Pell (8 against 8 hp)
 Pell attacks Hexer
   Pell hits Hexer for 8 (hp 0)
   Pell hp 8, Hexer hp 0
@@ -3002,7 +3002,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
 Archer 1 attacks Alder Fenn
   Archer 1 hits Alder Fenn for 5 (hp 17)
   Archer 1 hp 17, Alder Fenn hp 17
@@ -3013,7 +3013,7 @@ Brawler waits
 enemy: wait brigand-2
 Brigand 2 waits
 enemy: attack rider-1 captain
-forecast rider-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
+Forecast Rider 1 -> Alder Fenn: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
 Rider 1 attacks Alder Fenn
   Rider 1 misses Alder Fenn
   Alder Fenn hits Rider 1 for 10 (hp 1)
@@ -3024,7 +3024,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 14,3
 Shieldbearer moves 16,4 -> 14,3 via 16,3 15,3
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren hits Shieldbearer for 3 (hp 18)
@@ -3034,7 +3034,7 @@ Wren gains 14 exp (28)
 enemy: move soldier-1 13,4
 Soldier moves 15,5 -> 13,4 via 14,5 14,4
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
 Soldier attacks Wren
   Soldier hits Wren for 9 (hp 11)
   Wren hits Soldier for 8 (hp 13)
@@ -3072,7 +3072,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack captain rider-1
-forecast captain -> rider-1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Rider 1: dmg 10 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
 Alder Fenn attacks Rider 1
   Alder Fenn hits Rider 1 for 10 (hp 0)
   Alder Fenn hp 17, Rider 1 hp 0
@@ -3135,7 +3135,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 13/21  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+Forecast Pell -> Soldier with Cinder: dmg 12 hit 99% crit 2%; counter: none
 Pell attacks Soldier
   Pell hits Soldier for 12 (hp 1)
   Pell hp 9, Soldier hp 1
@@ -3168,7 +3168,7 @@ j  soldier-1        Soldier L3 pikeman         13,4   hp 1/21   Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
 Wren attacks Soldier
   Wren hits Soldier for 8 (hp 0)
   Wren hp 11, Soldier hp 0
@@ -3285,24 +3285,24 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    14,3   hp 15/25  Plain  group ban
 D  wren             Wren L1 cadet              13,3   hp 11/20  Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: captain (archer-1 5, brawler-1 12, brigand-2 11 against 17 hp)
-lethal if all land: dunstan (brawler-1 8 against 2 hp)
-lethal if all land: pell (brawler-1 18 against 9 hp)
-lethal if all land: rook (brawler-1 20, shieldbearer-1 11 against 17 hp)
-lethal if all land: wren (archer-1 6, brawler-1 14, shieldbearer-1 8 against 11 hp)
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brawler for 12, Brigand 2 for 11, against 17 hp)
+Lethal if all land: Dunstan (Brawler for 8, against 2 hp)
+Lethal if all land: Pell (Brawler for 18, against 9 hp)
+Lethal if all land: Rook (Brawler for 20, Shieldbearer for 11, against 17 hp)
+Lethal if all land: Wren (Archer 1 for 6, Brawler for 14, Shieldbearer for 8, against 11 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: move archer-1 11,3
 Archer 1 moves 10,3 -> 11,3
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+Forecast Archer 1 -> Wren: dmg 6 hit 72% crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 5)
   Archer 1 hp 17, Wren hp 5
 enemy: move brawler-1 15,2
 Brawler moves 15,3 -> 15,2
 enemy: attack brawler-1 rook
-forecast brawler-1 -> rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
+Forecast Brawler -> Rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
 Brawler attacks Rook
   Brawler hits Rook for 10 (hp 7)
   Brawler hits Rook for 10 (hp 0)
@@ -3315,7 +3315,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 14,2
 Shieldbearer moves 14,3 -> 14,2
 enemy: attack shieldbearer-1 pell
-forecast shieldbearer-1 -> pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+Forecast Shieldbearer -> Pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
 Shieldbearer attacks Pell
   Shieldbearer hits Pell for 10 (hp 0)
   Shieldbearer hp 15, Pell hp 0
@@ -3478,15 +3478,15 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    14,2   hp 15/25  Plain  group ban
 D  wren             Wren L1 cadet              17,3   hp 5/20   Plain  done
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > end
-lethal if all land: captain (archer-1 5, brawler-1 12, shieldbearer-1 7 against 17 hp)
-lethal if all land: dunstan (archer-1 3, brawler-1 8, shieldbearer-1 5 against 2 hp)
-lethal if all land: wren (archer-1 6, brawler-1 14, shieldbearer-1 8 against 5 hp)
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brawler for 12, Shieldbearer for 7, against 17 hp)
+Lethal if all land: Dunstan (Archer 1 for 3, Brawler for 8, Shieldbearer for 5, against 2 hp)
+Lethal if all land: Wren (Archer 1 for 6, Brawler for 14, Shieldbearer for 8, against 5 hp)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: move archer-1 15,3
 Archer 1 moves 11,3 -> 15,3 via 12,3 13,3 14,3
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+Forecast Archer 1 -> Wren: dmg 6 hit 72% crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 0)
   Archer 1 hp 17, Wren hp 0
@@ -3494,7 +3494,7 @@ Wren falls at 17,3
 enemy: move brawler-1 14,0
 Brawler moves 15,2 -> 14,0 via 15,1 15,0
 enemy: attack brawler-1 dunstan
-forecast brawler-1 -> dunstan: dmg 4 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
+Forecast Brawler -> Dunstan: dmg 4 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
 Brawler attacks Dunstan
   Brawler hits Dunstan for 4 (hp 0)
   Brawler hp 23, Dunstan hp 0
@@ -3510,7 +3510,7 @@ Rider 2 waits
 enemy: move shieldbearer-1 16,2
 Shieldbearer moves 14,2 -> 16,2 via 15,2
 enemy: attack shieldbearer-1 captain
-forecast shieldbearer-1 -> captain: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
+Forecast Shieldbearer -> Alder Fenn: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
 Shieldbearer attacks Alder Fenn
   Shieldbearer hits Alder Fenn for 7 (hp 10)
   Alder Fenn hits Shieldbearer for 4 (hp 11)

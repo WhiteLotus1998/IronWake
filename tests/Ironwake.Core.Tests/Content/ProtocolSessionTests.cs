@@ -189,7 +189,7 @@ public class ProtocolSessionTests
         using var doc = JsonDocument.Parse(session.Answer(ProtocolJson.Write(w => { w.WriteStartObject(); w.WriteString("query", "forecast"); w.WriteString("unit", pair.Unit.Id); w.WriteString("target", pair.Target.Id); w.WriteEndObject(); })));
 
         Assert.Equal(forecast, ProtocolJson.ReadForecast(doc.RootElement.GetProperty("forecast").GetRawText()));
-        Assert.StartsWith(PlaySession.ForecastLine(pair.Unit, pair.Target, forecast), doc.RootElement.GetProperty("text").GetString());
+        Assert.StartsWith(PlaySession.ForecastLine(pair.Unit, pair.Target, forecast, names: UnitNames.Of(state, content)), doc.RootElement.GetProperty("text").GetString());
     }
 
     [Fact]
@@ -207,7 +207,7 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"refusals":[],"wakes":[],"wins":false,"text":"threat on captain at 6,11 (Plain): no enemy can strike him next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
+        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"refusals":[],"wakes":[],"wins":false,"text":"Threat on Alder Fenn at 6,11 (Plain): no enemy can strike him next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
     }
 
     /// <summary>Issue 248: a threat line an announced event brings carries <c>arrives</c>, and <c>asleep</c> names each sleeping group that could strike the tile with its members.</summary>
@@ -244,7 +244,7 @@ public class ProtocolSessionTests
         var captain = session.Answer("""{"query":"threat","unit":"captain","from":{"x":3,"y":1}}""");
         var wren = session.Answer("""{"query":"threat","unit":"wren","from":{"x":3,"y":1}}""");
 
-        Assert.EndsWith("\"wins\":true,\"text\":\"threat on captain at 3,1 (Gate): this move wins the map\"}", captain);
+        Assert.EndsWith("\"wins\":true,\"text\":\"Threat on Alder Fenn at 3,1 (Gate): this move wins the map\"}", captain);
         Assert.Contains("\"enemy\":\"soldier-1\"", wren);
         Assert.Contains("\"wins\":false", wren);
     }
@@ -324,9 +324,9 @@ public class ProtocolSessionTests
         var open = new ProtocolSession(content, state, new StringWriter(), omniscient: true);
         const string From = """{"query":"threat","unit":"captain","from":{"x":3,"y":0}}""";
 
-        Assert.Contains("\\n  in the dark, unpriced: ? at 10,1 (8)\"", session.Answer(From));
+        Assert.Contains("\\n  In the dark, unpriced: ? at 10,1 (8)\"", session.Answer(From));
         Assert.Equal(session.Answer(From), open.Answer(From));
-        Assert.Contains("\\n  and whatever is in the dark (?), unpriced\"", session.Answer("""{"query":"threat","unit":"captain"}"""));
+        Assert.Contains("\\n  And whatever is in the dark (?), unpriced\"", session.Answer("""{"query":"threat","unit":"captain"}"""));
     }
 
     /// <summary>A daylight state carries neither <c>view</c> nor <c>unseen</c>, player view or not.</summary>

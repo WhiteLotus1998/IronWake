@@ -19,26 +19,26 @@ A  captain          Alder Fenn L1 bulwark      1,3    hp 25/25  Plain  captain
 e  hexer-1          Hexer L3 adept             4,1    hp 16/16  Plain  group north, hold
 f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group south, hold
 > threat captain
-threat on captain at 1,3 (Plain):
-  brigand-1 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  brigand-2 from 2,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  brigand-3 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  brigand-4 from 0,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  if all land: 32 against 25 hp
+Threat on Alder Fenn at 1,3 (Plain):
+  Brigand 1 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Brigand 2 from 2,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Brigand 3 from 1,2 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Brigand 4 from 0,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  If all land: 32 against 25 hp
 > threat captain from 4,3
-threat on captain at 4,3 (Plain):
-  brigand-1 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  brigand-2 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  hexer-1 from 4,1 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
-  hexer-2 from 4,5 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
-  if all land: 30 against 25 hp
+Threat on Alder Fenn at 4,3 (Plain):
+  Brigand 1 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Brigand 2 from 3,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Hexer 1 from 4,1 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
+  Hexer 2 from 4,5 with Cinder (slot 1): dmg 11 hit 98% crit 0%; counter: none
+  If all land: 30 against 25 hp
 > threat captain from 5,3
-threat on captain at 5,3 (Plain):
-  brigand-1 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  brigand-2 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
-  if all land: 8 against 25 hp
+Threat on Alder Fenn at 5,3 (Plain):
+  Brigand 1 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  Brigand 2 from 4,3 with Iron Axe (slot 1): dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+  If all land: 8 against 25 hp
 > forecast captain hexer-1 from 3,1
-forecast captain -> hexer-1 from 3,1 (Plain): dmg 13 x2 hit 88% crit 4%; counter: dmg 11 hit 98% crit 0%
+Forecast Alder Fenn -> Hexer 1 from 3,1 (Plain): dmg 13 x2 hit 88% crit 4%; counter: dmg 11 hit 98% crit 0%
 > move captain 5,3
 Alder Fenn moves 1,3 -> 5,3 via 2,3 3,3 4,3
 Trial of the Bulwark  turn 1 of 1  player phase  survive  recall 0
@@ -83,7 +83,7 @@ f  hexer-2          Hexer L3 adept             4,5    hp 16/16  Plain  group sou
 enemy: move brigand-1 4,3
 Brigand 1 moves 2,1 -> 4,3 via 3,1 3,2 3,3
 enemy: attack brigand-1 captain
-forecast brigand-1 -> captain: dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
+Forecast Brigand 1 -> Alder Fenn: dmg 8 hit 56% crit 0%; counter: dmg 12 hit 85% crit 5%
 Brigand 1 attacks Alder Fenn
   Brigand 1 misses Alder Fenn
   Alder Fenn misses Brigand 1

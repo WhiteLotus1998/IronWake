@@ -306,7 +306,7 @@ public class BraceTests
         var plain = Queries.Threats(state, Starter, hale, hale.At)!.Single();
 
         Assert.NotNull(text);
-        Assert.StartsWith("if hale waits here it braces (hit -15):\n", text);
+        Assert.StartsWith("If hale waits here and braces (hit -15):\n", text);
         var after = state.WithUnit(hale with { Braced = true });
         var braced = Queries.Threats(after, Starter, after.Find("hale")!, hale.At)!.Single();
         Assert.Equal(plain.Forecast.Attacker.HitChance - Brace.Hit, braced.Forecast.Attacker.HitChance);

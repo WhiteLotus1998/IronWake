@@ -320,7 +320,7 @@ public class CoverTests
         var text = PlaySession.ThreatText(state, Starter, mage, mage.At, new[] { line }, Array.Empty<SleepingThreat>());
 
         Assert.Equal("ta", line.CoveredBy!.Id);
-        Assert.Contains("brigand-1 from 4,2 with", text);
+        Assert.Contains("Brigand from 4,2 with", text);
         Assert.Contains("covered by ta, strikes ta on 3,2", text);
         Assert.Contains("the first strike swaps them; ta takes up to", text);
         Assert.Contains("ma lands on 3,1", text);

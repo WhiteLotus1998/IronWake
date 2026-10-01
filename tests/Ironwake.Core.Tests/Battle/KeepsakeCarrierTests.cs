@@ -220,7 +220,7 @@ public class KeepsakeCarrierTests
         var text = PlaySession.ThreatText(state, Starter, hale, hale.At, new[] { line }, Array.Empty<SleepingThreat>());
 
         Assert.Equal("hatchet", line.Weapon.Id);
-        Assert.Contains("brigand-1 from 3,1 with Hatchet (Wren's) (slot 2)", text);
+        Assert.Contains("Brigand from 3,1 with Hatchet (Wren's) (slot 2)", text);
         Assert.Equal(" with Hatchet (Wren's)", PlaySession.KeepsakeWith(state.Find("brigand-1")!, Starter, 1));
         Assert.Equal("", PlaySession.KeepsakeWith(state.Find("brigand-1")!, Starter, null));
     }
