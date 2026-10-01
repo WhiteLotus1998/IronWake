@@ -538,7 +538,7 @@ Pell attacks Archer 1
   Archer 1 misses Pell
   Pell hp 16, Archer 1 hp 7
 Pell gains 14 exp (14)
-Group field wakes: noise
+The field group wakes (noise)
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -3169,7 +3169,7 @@ C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 16,6
 Alder Fenn moves 17,3 -> 16,6 via 16,3 16,4 16,5
-Group hall wakes: proximity
+The hall group wakes (proximity)
 Sallow Grange  turn 10 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......

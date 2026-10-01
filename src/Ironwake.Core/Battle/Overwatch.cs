@@ -29,7 +29,7 @@ public static class Overwatch
     public static string? Refusal(BattleState state, GameContent content, BattleUnit unit) =>
         !state.Map.OverwatchEnabled ? "this map has no overwatch (overwatch: on)"
         : state.Map.OverwatchHold && unit.Side != Side.Player ? "the enemy does not watch on this map (overwatch: hold)"
-        : state.Map.OverwatchHold && (unit.Moved || unit.Shoved) ? $"{unit.Id} has moved this turn; a watch holds the tile it began on"
+        : state.Map.OverwatchHold && (unit.Moved || unit.Shoved) ? $"{unit.Id} has moved this turn; a watch holds the tile {Referent.For(content, unit.Id, unit.Id).Subject} began on"
         : unit.EquippedWeapon(content) is not { } weapon ? $"{unit.Id} has no weapon equipped"
         : !state.Map.OverwatchHold && !weapon.InRange(Distance) ? $"{unit.Id}'s {weapon.Name} does not reach range {Distance}"
         : null;

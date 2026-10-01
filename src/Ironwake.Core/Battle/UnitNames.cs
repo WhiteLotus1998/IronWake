@@ -13,19 +13,27 @@ namespace Ironwake.Core;
 public sealed class UnitNames
 {
     private readonly ImmutableDictionary<string, string> _names;
+    private readonly ImmutableDictionary<string, Pronoun> _pronouns;
+    private readonly ImmutableDictionary<string, MapEventAction> _events;
 
-    private UnitNames(ImmutableDictionary<string, string> names)
+    private UnitNames(ImmutableDictionary<string, string> names, ImmutableDictionary<string, Pronoun> pronouns, ImmutableDictionary<string, MapEventAction> events)
     {
         _names = names;
+        _pronouns = pronouns;
+        _events = events;
     }
 
     /// <summary>No names known: every id reads as itself.</summary>
-    public static UnitNames None { get; } = new(ImmutableDictionary<string, string>.Empty);
+    public static UnitNames None { get; } = new(
+        ImmutableDictionary<string, string>.Empty,
+        ImmutableDictionary<string, Pronoun>.Empty,
+        ImmutableDictionary<string, MapEventAction>.Empty);
 
     /// <summary>
     /// The names for <paramref name="state"/>'s battle: every player unit that stood on its
     /// board (deployed at the start, still standing, or escaped) and every enemy its map
-    /// places or spawns.
+    /// places or spawns, with each player unit's pronoun from the cast file (issue 615) and what
+    /// each of the map's events does, so a fired event reads by its effect, not its id.
     /// </summary>
     public static UnitNames Of(BattleState state, GameContent content)
     {
@@ -34,9 +42,14 @@ public sealed class UnitNames
             .Concat(state.Units)
             .Concat(state.Escaped)
             .Where(u => u.Side == Side.Player);
+        var pronouns = ImmutableDictionary.CreateBuilder<string, Pronoun>(StringComparer.Ordinal);
         foreach (var unit in players)
         {
             names[unit.Id] = unit.Unit.Name;
+            if (content.Pronouns.TryGetValue(unit.Id, out var pronoun))
+            {
+                pronouns[unit.Id] = pronoun;
+            }
         }
 
         var map = state.Map;
@@ -69,11 +82,40 @@ public sealed class UnitNames
             names[unit.Id] = unit.Unit.Name;
         }
 
-        return new UnitNames(names.ToImmutable());
+        var events = ImmutableDictionary.CreateBuilder<string, MapEventAction>(StringComparer.Ordinal);
+        foreach (var mapEvent in map.Events)
+        {
+            events[mapEvent.Name] = mapEvent.Action;
+        }
+
+        return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), events.ToImmutable());
     }
 
     /// <summary>The name <paramref name="id"/> reads as, or the id itself when no unit by that id is known.</summary>
     public string this[string id] => _names.TryGetValue(id, out var name) ? name : id;
+
+    /// <summary>
+    /// How a line refers back to <paramref name="id"/> once it has named the unit (issue 615): its
+    /// pronoun when the cast file gives one, else its name again, never "it".
+    /// </summary>
+    public Referent Refer(string id) =>
+        _pronouns.TryGetValue(id, out var pronoun) ? Referent.For(pronoun, this[id]) : new Referent(this[id], this[id], this[id] + "'s", false, this[id]);
+
+    /// <summary>A sleeping group as a reader sees it (issue 615): <c>the mill group</c>.</summary>
+    public static string Group(string group) => $"the {group} group";
+
+    /// <summary>
+    /// The line for a fired map event (issue 615), by what it does rather than by its map id:
+    /// <c>reinforcements arrive</c> or, when a unit holds the tile, <c>reinforcements are
+    /// blocked: a unit holds 7,0</c>; <c>the ground changes</c> or <c>7,3 does not change: a unit
+    /// holds it</c>. A flag event, or one the map does not list, keeps its name.
+    /// </summary>
+    public string Event(string name, bool blocked) => _events.GetValueOrDefault(name) switch
+    {
+        SpawnEnemy spawn => blocked ? $"reinforcements are blocked: a unit holds {spawn.Placement.At}" : "reinforcements arrive",
+        ChangeTerrain change => blocked ? $"{change.At} does not change: a unit holds it" : "the ground changes",
+        _ => $"event {name}" + (blocked ? " is blocked: its tile is held" : ""),
+    };
 
     /// <summary>
     /// <paramref name="text"/> in sentence case (issue 609): on each line, the first character

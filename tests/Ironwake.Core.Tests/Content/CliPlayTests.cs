@@ -280,7 +280,7 @@ public class CliPlayTests
             var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
 
             Assert.Contains("> threat captain from 4,1\nthreat on captain at 4,1 (Plain):\n  soldier-2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%\n  if all land: 8 against 22 hp\n> ", output);
-            Assert.Contains("> threat wren from 4,3\nthreat on wren at 4,3 (Plain): no enemy can strike it next phase\n  group y asleep, could strike here if woken: archer-1 at 10,3\n  asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies\n", output);
+            Assert.Contains("> threat wren from 4,3\nthreat on wren at 4,3 (Plain): no enemy can strike her next phase\n  group y asleep, could strike here if woken: archer-1 at 10,3\n  asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies\n", output);
         }
         finally
         {
@@ -403,7 +403,7 @@ public class CliPlayTests
         Assert.DoesNotContain("rejected ", output);
         Assert.DoesNotContain("strict: stopped", output);
         Assert.Contains("Archer 2 falls at 4,7", output);
-        Assert.Contains("Group mill wakes: proximity", output);
+        Assert.Contains("The mill group wakes (proximity)", output);
         Assert.Contains("  items: 1: Iron Sword x40, 2: Field Dressing x1\n", Play(out _, "show wren\n", "139"));
         Assert.Contains("  ranks: sword E (0), lance E (0), axe E (0)\n", Play(out _, "show captain\n", "139"));
         Assert.Contains("Mill Bandit falls at 6,1", output);
@@ -428,7 +428,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("-- Enemy phase, turn 4 --\nEvent riders\n  Rider arrives at 13,5, group flank, aggressive\n", output);
+        Assert.Contains("-- Enemy phase, turn 4 --\nReinforcements arrive\n  Rider arrives at 13,5 with the flank group, aggressive\n", output);
         Assert.Contains("Rider attacks Pell", output);
         Assert.Contains("Recalled to state 49; 2 charges left", output);
         Assert.Contains("Rider falls at 9,5", output);
@@ -637,7 +637,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("escaped: rook, captain; left behind: none; fell: dunstan, pell, wren\n", output);
         Assert.Contains("Rider 1 moves 9,3 -> 13,3 via 10,3 11,3 12,3\n", output);
-        Assert.Contains("Group bank wakes: noise\n", output);
+        Assert.Contains("The bank group wakes (noise)\n", output);
     }
 
     /// <summary>
@@ -1180,7 +1180,7 @@ public class CliPlayTests
         Assert.Equal(0, olderExit);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-241.txt")).ReplaceLineEndings("\n"), older);
         Assert.NotEqual(0, shippedExit);
-        Assert.Contains("rook cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on", shipped);
+        Assert.Contains("rook cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on", shipped);
     }
 
     /// <summary>
@@ -1211,7 +1211,7 @@ public class CliPlayTests
         var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-241-lamps.script", 241, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Group bank wakes: proximity; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
+        Assert.Contains("The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
         Assert.Contains("  brawler-1 from 18,6 with Iron Gauntlets (slot 1): dmg 10 x2 hit 83% crit 0%;", output);
         Assert.Contains("Brawler moves 17,7 -> 19,8 via 18,7 19,7\n", output);
         Assert.Contains("Rook falls at 19,4\n", output);
@@ -1234,7 +1234,7 @@ public class CliPlayTests
     {
         var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-509.script", 509, out _);
 
-        Assert.Contains("> threat dunstan\nthreat on dunstan at 16,6 (Plain): no enemy in sight can strike it next phase\n  in the dark, unpriced: ? at 15,4 (3), ", output);
+        Assert.Contains("> threat dunstan\nthreat on dunstan at 16,6 (Plain): no enemy in sight can strike him next phase\n  in the dark, unpriced: ? at 15,4 (3), ", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-27-brackwater_cut-509.txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -1244,7 +1244,7 @@ public class CliPlayTests
         var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-283.script", 283, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Group bank wakes: noise; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
+        Assert.Contains("The bank group wakes (noise); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
         Assert.Contains("Shieldbearer moves 17,5 -> 15,3 via 17,4 17,3 16,3\n", output);
         Assert.Contains("Pell falls at 13,3\n", output);
         Assert.EndsWith("escaped: wren, rook, captain; left behind: pell; fell: dunstan\n", output);
@@ -1265,7 +1265,7 @@ public class CliPlayTests
         var output = RunLoose(script, seed);
 
         var phase = output[output.IndexOf("-- Enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- Enemy phase ends, turn 3 --", StringComparison.Ordinal)];
-        Assert.Contains("Group weir wakes: proximity\n", output);
+        Assert.Contains("The weir group wakes (proximity)\n", output);
         Assert.DoesNotContain("Weir Foreman moves", phase);
         Assert.Contains("enemy: wait weir_foreman-1\n", phase);
     }
@@ -1328,8 +1328,8 @@ public class CliPlayTests
         }
 
         var seventh = output[output.IndexOf("-- Enemy phase, turn 7 --", StringComparison.Ordinal)..output.IndexOf("-- Enemy phase ends, turn 7 --", StringComparison.Ordinal)];
-        Assert.DoesNotContain("Group weir wakes: called by ford", output);
-        Assert.Contains("Group weir wakes: proximity\n", output);
+        Assert.DoesNotContain("The weir group wakes (called by the ford group)", output);
+        Assert.Contains("The weir group wakes (proximity)\n", output);
         Assert.DoesNotContain("Weir Foreman moves", seventh);
         Assert.Contains("enemy: wait weir_foreman-1\n", seventh);
     }
@@ -1345,7 +1345,7 @@ public class CliPlayTests
     {
         var output = RunLoose("2026-09-27-harrow_weir-401.script", 401);
 
-        Assert.Contains("Group ford wakes: proximity\nGroup weir wakes: called by ford\n", output);
+        Assert.Contains("The ford group wakes (proximity)\nThe weir group wakes (called by the ford group)\n", output);
         var third = output[output.IndexOf("-- Enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- Enemy phase ends, turn 3 --", StringComparison.Ordinal)];
         Assert.Contains("Weir Foreman moves 13,6 -> 9,6 via 12,6 11,6 10,6\n", third);
         Assert.Contains("Weir Foreman moves 9,6 -> 12,6 via 10,6 11,6\n", output);
@@ -1362,7 +1362,7 @@ public class CliPlayTests
     {
         var output = RunLoose("2026-09-27-harrow_weir-397.script", 397);
 
-        Assert.Contains("Group weir wakes: called by ford\n", output);
+        Assert.Contains("The weir group wakes (called by the ford group)\n", output);
         Assert.Contains("Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6\nenemy: wait weir_foreman-1\n", output);
         Assert.Contains("Weir Foreman moves 10,6 -> 13,6 via 11,6 12,6\nenemy: wait weir_foreman-1\n", output);
     }
@@ -1409,7 +1409,7 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-409.script", 409, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Group weir wakes: called by ford\n", output);
+        Assert.Contains("The weir group wakes (called by the ford group)\n", output);
         Assert.Contains("Weir Foreman moves 9,6 -> 9,3 via 9,5 9,4\nenemy: attack weir_foreman-1 teodor\n", output);
         Assert.Contains("Weir Foreman moves 9,3 -> 10,6 via 9,4 9,5 9,6\n", output);
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
@@ -1428,8 +1428,8 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-419.script", 419, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Group weir wakes: proximity\n", output);
-        Assert.Contains("Shieldbearer falls at 11,6\nGroup ford wakes: noise\n", output);
+        Assert.Contains("The weir group wakes (proximity)\n", output);
+        Assert.Contains("Shieldbearer falls at 11,6\nThe ford group wakes (noise)\n", output);
         Assert.Contains("Weir Foreman moves 13,6 -> 12,6\nenemy: attack weir_foreman-1 keziah\n", output);
         Assert.Contains("Weir Foreman moves 12,6 -> 13,6\nenemy: attack weir_foreman-1 keziah\n", output);
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
@@ -1448,7 +1448,7 @@ public class CliPlayTests
         var output = RunSample("harrow_weir_0081.map", "2026-09-27-harrow_weir-421.script", 421, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Group ford wakes: proximity\nGroup weir wakes: called by ford\n", output);
+        Assert.Contains("The ford group wakes (proximity)\nThe weir group wakes (called by the ford group)\n", output);
         Assert.Contains("Weir Foreman moves 13,6 -> 9,6 via 12,6 11,6 10,6\n", output);
         Assert.Contains("Weir Foreman moves 9,6 -> 12,6 via 10,6 11,6\n", output);
         Assert.Contains("Weir Foreman moves 13,6 -> 10,6 via 12,6 11,6\n", output);
@@ -1470,7 +1470,7 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_0090.map", "2026-09-29-saltmarsh_ford-511.script", 511, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("  Brigand arrives at 0,9, group ford, aggressive\n", output);
+        Assert.Contains("  Brigand arrives at 0,9 with the ford group, aggressive\n", output);
         Assert.Contains("battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-511.txt")).ReplaceLineEndings("\n"), output);
@@ -1521,7 +1521,7 @@ public class CliPlayTests
         var output = RunShipped("saltmarsh_ford.map", "2026-09-30-saltmarsh_ford-547.script", 547, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Wren moves 10,4 -> 10,1 via 10,3 10,2\nEvent ford\n", output);
+        Assert.Contains("Wren moves 10,4 -> 10,1 via 10,3 10,2\nReinforcements arrive\n", output);
         Assert.Contains("battle won: rout", output);
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         Assert.Equal(File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-30-saltmarsh_ford-547.txt")).ReplaceLineEndings("\n"), output);
@@ -1575,7 +1575,7 @@ public class CliPlayTests
     {
         var output = RunRetuned("2026-09-28-harrow_weir-601.script", 601, dropTail: 0);
 
-        Assert.Contains("Event north1 is blocked: its tile is held\n", output);
+        Assert.Contains("Reinforcements are blocked: a unit holds 7,0\n", output);
         Assert.Contains("forecast pell -> weir_shieldbearer-1 with Gust: dmg 9 x2 hit 100% crit 8%; counter: none\n", output);
         Assert.Contains("  Pell hits Weir Shieldbearer for 9 (hp 6)\n", output);
         var fourth = output[output.IndexOf("-- Enemy phase, turn 4 --", StringComparison.Ordinal)..output.IndexOf("-- Player phase, turn 5 --", StringComparison.Ordinal)];
@@ -1593,10 +1593,10 @@ public class CliPlayTests
     {
         var output = RunRetuned("2026-09-28-harrow_weir-601.script", 601, dropTail: 2);
 
-        Assert.Contains("Event north1 is blocked: its tile is held\n", output);
+        Assert.Contains("Reinforcements are blocked: a unit holds 7,0\n", output);
         var fifth = output[output.IndexOf("-- Enemy phase, turn 5 --", StringComparison.Ordinal)..];
-        Assert.Contains("arrives at 0,11, group west, aggressive\n", fifth);
-        Assert.Contains("arrives at 9,11, group south, aggressive\n", fifth);
+        Assert.Contains("arrives at 0,11 with the west group, aggressive\n", fifth);
+        Assert.Contains("arrives at 9,11 with the south group, aggressive\n", fifth);
         Assert.DoesNotContain("is blocked", fifth);
     }
 
@@ -1809,10 +1809,10 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("Teodor moves 1,2 -> 3,1 via 2,2 3,2\nEvent sluice\n  4,1 becomes Road\n", output);
-        Assert.Contains("-- Enemy phase, turn 3 --\nEvent reinforce\n  Brigand arrives at 9,0, group east, aggressive\n", output);
+        Assert.Contains("Teodor moves 1,2 -> 3,1 via 2,2 3,2\nThe ground changes\n  4,1 becomes Road\n", output);
+        Assert.Contains("-- Enemy phase, turn 3 --\nReinforcements arrive\n  Brigand arrives at 9,0 with the east group, aggressive\n", output);
         Assert.Contains("Brigand moves 9,0 -> 5,0", output);
-        Assert.Equal(1, CountOf(output, "Event reinforce"));
+        Assert.Equal(1, CountOf(output, "Reinforcements arrive"));
     }
 
     /// <summary>
@@ -2175,11 +2175,11 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("battle won: seize\n", output);
         Assert.DoesNotContain("rejected ", output);
-        Assert.Contains("Group field wakes: noise", output);
+        Assert.Contains("The field group wakes (noise)", output);
         Assert.Contains("Shieldbearer falls at 12,2", output);
         Assert.DoesNotContain("Hexer attacks", output);
-        Assert.Equal(1, output.Split("Group hall wakes").Length - 1);
-        Assert.Contains("Alder Fenn moves 17,3 -> 16,6 via 16,3 16,4 16,5\nGroup hall wakes: proximity\n", output);
+        Assert.Equal(1, output.Split("The hall group wakes").Length - 1);
+        Assert.Contains("Alder Fenn moves 17,3 -> 16,6 via 16,3 16,4 16,5\nThe hall group wakes (proximity)\n", output);
         Assert.Contains("Sallow Grange  turn 10 of 10", output);
         Assert.All(new[] { "captain", "wren", "teodor", "pell", "ottilie", "ansgar" }, id => Assert.DoesNotContain(id + " falls at", output));
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

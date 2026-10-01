@@ -3,6 +3,7 @@
     {
       "id": "captain",
       "name": "Alder Fenn",
+      "pronoun": "he",
       "class": "cadet",
       "level": 1,
       "region": "crown",
@@ -15,6 +16,7 @@
     {
       "id": "wren",
       "name": "Wren",
+      "pronoun": "she",
       "class": "cadet",
       "level": 1,
       "region": "aldmere",
@@ -29,6 +31,7 @@
     {
       "id": "teodor",
       "name": "Teodor",
+      "pronoun": "he",
       "class": "pikeman",
       "level": 1,
       "region": "aldmere",
@@ -43,6 +46,7 @@
     {
       "id": "ottilie",
       "name": "Ottilie",
+      "pronoun": "she",
       "class": "bowman",
       "level": 1,
       "region": "sallow",
@@ -57,6 +61,7 @@
     {
       "id": "pell",
       "name": "Pell",
+      "pronoun": "she",
       "class": "adept",
       "level": 1,
       "region": "aldmere",
@@ -70,6 +75,7 @@
     {
       "id": "dunstan",
       "name": "Dunstan",
+      "pronoun": "he",
       "class": "bulwark",
       "level": 1,
       "region": "kestrow",
@@ -82,6 +88,7 @@
     {
       "id": "maud",
       "name": "Maud",
+      "pronoun": "she",
       "class": "chaplain",
       "level": 1,
       "region": "kestrow",
@@ -94,6 +101,7 @@
     {
       "id": "ansgar",
       "name": "Ansgar",
+      "pronoun": "he",
       "class": "outrider",
       "level": 1,
       "region": "sallow",
@@ -106,6 +114,7 @@
     {
       "id": "rook",
       "name": "Rook",
+      "pronoun": "she",
       "class": "skyrider",
       "level": 1,
       "region": "kestrow",
@@ -118,6 +127,7 @@
     {
       "id": "keziah",
       "name": "Keziah",
+      "pronoun": "she",
       "class": "reaver",
       "level": 1,
       "region": "sallow",
@@ -131,6 +141,7 @@
     {
       "id": "brannock",
       "name": "Brannock",
+      "pronoun": "he",
       "class": "cadet",
       "level": 1,
       "region": "aldmere",

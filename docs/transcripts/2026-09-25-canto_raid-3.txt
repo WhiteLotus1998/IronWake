@@ -498,7 +498,7 @@ C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move ansgar 10,5
 Ansgar moves 6,5 -> 10,5 via 7,5 8,5 9,5
-Group watch wakes: proximity
+The watch group wakes (proximity)
 Canto Raid  turn 4 of 10  player phase  rout  recall 3
    012345678901
  0 ...........c
@@ -860,7 +860,7 @@ threat on ansgar at 7,5 (Plain):
   soldier-1 from 8,5 with Iron Lance (slot 1): dmg 10 hit 72% crit 0%; counter with Iron Lance: dmg 9 hit 76% crit 2%
   if all land: 10 against 10 hp
 > threat ansgar from 5,5
-threat on ansgar at 5,5 (Plain): no enemy can strike it next phase
+threat on ansgar at 5,5 (Plain): no enemy can strike him next phase
 > canto ansgar 5,5
 Ansgar cantos 8,5 -> 5,5 via 7,5 6,5
 Canto Raid  turn 5 of 10  player phase  rout  recall 1
@@ -877,7 +877,7 @@ A  captain          Alder Fenn L1 cadet        7,4    hp 16/22  Fort (heals 20 p
 c  soldier-1        Soldier L1 pikeman         11,4   hp 20/20  Plain  group watch, guard, awake
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
 > threat wren
-threat on wren at 6,3 (Plain): no enemy can strike it next phase
+threat on wren at 6,3 (Plain): no enemy can strike her next phase
 > wait wren
 Wren waits
 Canto Raid  turn 5 of 10  player phase  rout  recall 1

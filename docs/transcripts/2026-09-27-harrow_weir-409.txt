@@ -34,7 +34,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > move pell 3,5
 Pell moves 0,5 -> 3,5 via 1,5 2,5
-Group wood wakes: proximity
+The wood group wakes (proximity)
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -915,8 +915,8 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > move dunstan 7,10
 Dunstan moves 5,10 -> 7,10 via 6,10
-Group ford wakes: proximity
-Group weir wakes: called by ford
+The ford group wakes (proximity)
+The weir group wakes (called by the ford group)
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....B..~~..MM
@@ -1198,7 +1198,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road  done
 > end
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
-Event north1 is blocked: its tile is held
+Reinforcements are blocked: a unit holds 7,0
 enemy: wait archer-1
 Archer waits
 enemy: move brawler-1 8,10
@@ -1913,10 +1913,10 @@ B  teodor           Teodor L1 pikeman          6,5    hp 21/21  Plain  done
 > end
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
-Event west1
-  Brigand 2 arrives at 0,11, group west, aggressive
-Event north2
-  Brigand 3 arrives at 7,0, group north, aggressive
+Reinforcements arrive
+  Brigand 2 arrives at 0,11 with the west group, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 7,0 with the north group, aggressive
 enemy: wait archer-1
 Archer waits
 enemy: move brigand-2 2,9

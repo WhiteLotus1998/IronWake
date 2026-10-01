@@ -840,7 +840,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 15,4
 Wren moves 13,3 -> 15,4 via 14,3 15,3
-Group bank wakes: proximity
+The bank group wakes (proximity)
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -1884,7 +1884,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > move wren 15,4
 Wren moves 13,3 -> 15,4 via 14,3 15,3
-Group bank wakes: proximity
+The bank group wakes (proximity)
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.......

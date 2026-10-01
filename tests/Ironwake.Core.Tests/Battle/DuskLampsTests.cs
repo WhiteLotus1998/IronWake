@@ -137,8 +137,8 @@ public class DuskLampsTests
     {
         var woke = Start().Try(Wakes).Events.OfType<GroupWoke>().Single();
 
-        Assert.Equal("Group watch wakes: proximity; its lamps are lit (soldier-1 7,0, archer-1 11,3)", PlaySession.Describe(woke, Starter, UnitNames.None));
-        Assert.Equal("Group watch wakes: proximity", PlaySession.Describe(new GroupWoke("watch", WakeCause.Proximity), Starter, UnitNames.None));
+        Assert.Equal("The watch group wakes (proximity); their lamps are lit (soldier-1 7,0, archer-1 11,3)", PlaySession.Describe(woke, Starter, UnitNames.None));
+        Assert.Equal("The watch group wakes (proximity)", PlaySession.Describe(new GroupWoke("watch", WakeCause.Proximity), Starter, UnitNames.None));
     }
 
     [Fact]

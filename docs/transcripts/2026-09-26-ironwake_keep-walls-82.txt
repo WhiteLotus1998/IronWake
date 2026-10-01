@@ -389,10 +389,10 @@ B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 > end
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
-Event wave1
-  Brigand 3 arrives at 0,4, group wave, aggressive
-Event wave2
-  Archer 2 arrives at 0,7, group wave, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 0,4 with the wave group, aggressive
+Reinforcements arrive
+  Archer 2 arrives at 0,7 with the wave group, aggressive
 enemy: move archer-1 9,5
 Archer 1 moves 7,5 -> 9,5 via 8,5
 enemy: attack archer-1 ottilie
@@ -623,10 +623,10 @@ B  wren             Wren L1 cadet              11,4   hp 11/20  Plain
 lethal if all land: wren (brigand-2 11 against 11 hp)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
-Event wave3
-  Soldier 3 arrives at 0,3, group wave, aggressive
-Event wave4
-  Hexer arrives at 0,8, group wave, aggressive
+Reinforcements arrive
+  Soldier 3 arrives at 0,3 with the wave group, aggressive
+Reinforcements arrive
+  Hexer arrives at 0,8 with the wave group, aggressive
 enemy: move archer-2 6,7
 Archer 2 moves 3,7 -> 6,7 via 4,7 5,7
 enemy: wait archer-2
@@ -926,10 +926,10 @@ B  wren             Wren L1 cadet              12,3   hp 11/20  Plain  done
 > end
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
-Event wave5
-  Brigand 4 arrives at 0,4, group wave, aggressive
-Event wave6
-  Soldier 4 arrives at 0,7, group wave, aggressive
+Reinforcements arrive
+  Brigand 4 arrives at 0,4 with the wave group, aggressive
+Reinforcements arrive
+  Soldier 4 arrives at 0,7 with the wave group, aggressive
 enemy: move archer-2 9,7
 Archer 2 moves 6,7 -> 9,7 via 7,7 8,7
 enemy: attack archer-2 teodor

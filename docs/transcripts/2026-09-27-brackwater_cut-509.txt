@@ -432,7 +432,7 @@ dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 14,5
 Wren moves 12,4 -> 14,5 via 13,4 14,4
-Group bank wakes: proximity; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
+The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
 Brackwater Cut  turn 3 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......
@@ -878,6 +878,6 @@ D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 16,6 (Plain): no enemy in sight can strike it next phase
+threat on dunstan at 16,6 (Plain): no enemy in sight can strike him next phase
   in the dark, unpriced: ? at 15,4 (3), ? at 15,2 (5), ? at 13,2 (7), ? at 12,3 (7), ? at 11,3 (8)
 battle ongoing at turn 5, player phase
