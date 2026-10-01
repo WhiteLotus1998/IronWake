@@ -1602,6 +1602,6 @@ Brackwater Cut  turn 6 of 8  player phase  escape  recall 3
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren pell captain
-battle won: escape; only recall is left
-battle won: escape
-escaped: wren, pell, captain; left behind: none; fell: dunstan, rook
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Wren, Pell, Alder Fenn; left behind: none; fell: Dunstan, Rook

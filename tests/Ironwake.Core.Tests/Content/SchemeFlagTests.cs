@@ -62,8 +62,8 @@ public class SchemeFlagTests
             var exit = 0;
             var output = Capture(() => exit = Ironwake.Cli.Program.Main(new[] { "play", "saltmarsh_ford", "--seed", "5", "--script", path, "--strict", "--scheme", "one", "--content", Fixture.RealContentDirectory() }));
 
-            Assert.DoesNotContain("strict: stopped", output);
-            Assert.EndsWith($"battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);
+            Assert.DoesNotContain("Strict: stopped", output);
+            Assert.EndsWith($"Battle {outcome.Groups[1].Value.ToLowerInvariant()}: {outcome.Groups[3].Value}\n", output);
             Assert.Equal(outcome.Groups[1].Value == "Won" ? 0 : 1, exit);
         }
         finally

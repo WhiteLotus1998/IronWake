@@ -2120,5 +2120,5 @@ A  captain          Alder Fenn L2 cadet        11,0   hp 23/23  Plain  captain  
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 16/21  Road
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain
-battle won: rout; only recall is left
-battle won: rout
+Battle won: rout; only recall is left
+Battle won: rout

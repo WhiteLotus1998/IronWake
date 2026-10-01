@@ -3746,5 +3746,5 @@ C  ottilie          Ottilie L1 bowman          9,6    hp 7/17   Road
 D  pell             Pell L1 adept              8,6    hp 16/16  Road
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold  done
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain
-battle won: defeat_boss; only recall is left
-battle won: defeat_boss
+Battle won: defeat_boss; only recall is left
+Battle won: defeat_boss

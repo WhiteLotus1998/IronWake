@@ -102,7 +102,7 @@ public class ProtocolSessionTests
             Assert.True(events > 100, $"only {events} events");
             using var last = JsonDocument.Parse(answers[^1]);
             Assert.Equal("won", last.RootElement.GetProperty("state").GetProperty("outcome").GetProperty("result").GetString());
-            Assert.EndsWith("battle won: seize\n", text);
+            Assert.EndsWith("Battle won: seize\n", text);
         }
         finally
         {

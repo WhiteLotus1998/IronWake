@@ -2059,5 +2059,5 @@ E  pell             Pell L2 adept              12,4   hp 17/17  Plain
 h  soldier-3        Soldier L2 pikeman         10,4   hp 20/20  Plain  group wave, aggressive
 k  soldier-4        Soldier L2 pikeman         10,7   hp 11/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          13,7   hp 13/21  Plain
-battle won: survive; only recall is left
-battle won: survive
+Battle won: survive; only recall is left
+Battle won: survive

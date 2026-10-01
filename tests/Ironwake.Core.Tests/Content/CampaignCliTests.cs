@@ -23,10 +23,10 @@ public class CampaignCliTests
 
         Assert.Equal(1, exit);
         Assert.Contains("Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell\n", output);
-        Assert.Contains("brannock certifies from Cadet to Reaver for 500; the purse holds 320\n", output);
-        Assert.Contains("deploys to Saltmarsh Ford: captain, wren, teodor, pell\n", output);
+        Assert.Contains("Brannock certifies from Cadet to Reaver for 500; the purse holds 320\n", output);
+        Assert.Contains("Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Pell\n", output);
         Assert.Contains("Saltmarsh Ford won: rout; reward 800, the purse holds 1120; nobody fell\n", output);
-        Assert.Contains("campaign stopped before The Tollgate: the script ended on the screen\n", output);
+        Assert.Contains("Campaign stopped before The Tollgate: the script ended on the screen\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -55,11 +55,11 @@ public class CampaignCliTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Raid on Ironwake won: rout; reward 1000, the purse holds 1500; nobody fell\n", output);
-        Assert.Contains("keep: Ironwake Keep; built: nothing; the purse holds 1500\n", output);
-        Assert.Contains("built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)\n", output);
-        Assert.Contains("map 2 of 2: Ironwake Keep, seed 289\nObjective: Hold out until the end of turn 8. Captain Fenn must survive.\nIronwake Keep  turn 1 of 8  player phase  survive  recall 3\n", output);
+        Assert.Contains("Keep: Ironwake Keep; built: nothing; the purse holds 1500\n", output);
+        Assert.Contains("Built for 400, the purse holds 1100: wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)\n", output);
+        Assert.Contains("Map 2 of 2: Ironwake Keep, seed 289\nObjective: Hold out until the end of turn 8. Captain Fenn must survive.\nIronwake Keep  turn 1 of 8  player phase  survive  recall 3\n", output);
         Assert.Contains("\n 8 ...e......#.....\n", output);
-        Assert.Contains("campaign won: all 2 maps, the purse holds 3100\n", output);
+        Assert.Contains("Campaign won: all 2 maps, the purse holds 3100\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
@@ -68,10 +68,10 @@ public class CampaignCliTests
     {
         var output = Play(out _, "keep\nbuild wall 10,3\nbuild wall\n");
 
-        Assert.Contains("> keep\nERROR: the keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
-        Assert.Contains("> build wall 10,3\nERROR: the keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
-        Assert.Contains("ERROR: usage: build <edit> <x,y>\n", output);
-        Assert.DoesNotContain("keep: Ironwake Keep", output);
+        Assert.Contains("> keep\nERROR: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
+        Assert.Contains("> build wall 10,3\nERROR: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
+        Assert.Contains("ERROR: Usage: build <edit> <x,y>\n", output);
+        Assert.DoesNotContain("Keep: Ironwake Keep", output);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class CampaignCliTests
 
         Assert.Equal(1, exit);
         Assert.Contains("ERROR: The battle is not decided; leave comes after it is won or lost\n", output);
-        Assert.Contains("campaign stopped in Old Mill Road at turn 1, undecided\n", output);
+        Assert.Contains("Campaign stopped in Old Mill Road at turn 1, undecided\n", output);
     }
 
     [Fact]
@@ -89,9 +89,9 @@ public class CampaignCliTests
     {
         var output = Play(out _, "attack wren brigand-1\nbuy iron_sword\n");
 
-        Assert.Contains("ERROR: unknown command 'attack' between maps; type help\n", output);
-        Assert.Contains("ERROR: usage: buy <item> <unit>\n", output);
-        Assert.EndsWith("rejected 2 of 2 commands:\n  line 1: attack wren brigand-1: unknown command 'attack' between maps; type help\n  line 2: buy iron_sword: usage: buy <item> <unit>\n", output);
+        Assert.Contains("ERROR: Unknown command 'attack' between maps; type help\n", output);
+        Assert.Contains("ERROR: Usage: buy <item> <unit>\n", output);
+        Assert.EndsWith("Rejected 2 of 2 commands:\n  line 1: attack wren brigand-1: Unknown command 'attack' between maps; type help\n  line 2: buy iron_sword: Usage: buy <item> <unit>\n", output);
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class CampaignCliTests
         var output = Play(out var exit, "bench wren\nmarch\n", "--strict");
 
         Assert.Equal(3, exit);
-        Assert.Contains("strict: stopped at line 1 (bench wren); no later command applied\n", output);
+        Assert.Contains("Strict: stopped at line 1 (bench wren); no later command applied\n", output);
         Assert.DoesNotContain("> march", output);
     }
 
@@ -123,13 +123,13 @@ public class CampaignCliTests
         var output = Play(out var exit, script, "--seed", "4");
 
         Assert.Equal(1, exit);
-        Assert.Contains("trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider\n", output);
-        Assert.Contains("> trial captain outrider\ntrial: Trial of the Outrider, seed 12\ncertification trial: captain plays as Outrider with iron_lance, iron_sword\n", output);
-        Assert.Contains("battle won: seize; no recall is left, so leave\n", output);
-        Assert.Contains("captain passes the Outrider trial and certifies from Cadet to Outrider with no seal; L1 exp 30\n", output);
-        Assert.Contains("ERROR: captain cannot certify as Outrider: ", output);
+        Assert.Contains("Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider\n", output);
+        Assert.Contains("> trial captain outrider\nTrial: Trial of the Outrider, seed 12\nCertification trial: Alder Fenn plays as Outrider with iron_lance, iron_sword\n", output);
+        Assert.Contains("Battle won: seize; no recall is left, so leave\n", output);
+        Assert.Contains("Alder Fenn passes the Outrider trial and certifies from Cadet to Outrider with no seal; L1 exp 30\n", output);
+        Assert.Contains("ERROR: Alder Fenn cannot certify as Outrider: ", output);
         Assert.Contains("ERROR: Pikeman has no trial; certify with a seal\n", output);
-        Assert.Contains("-- before map 1 of 8: Old Mill Road; the purse holds 500 --", output);
+        Assert.Contains("-- Before map 1 of 8: Old Mill Road; the purse holds 500 --", output);
     }
 
     [Fact]
@@ -139,10 +139,10 @@ public class CampaignCliTests
 
         var output = Play(out _, script, "--seed", "5");
 
-        Assert.Contains("trial: Trial of the Outrider, seed 13\n", output);
-        Assert.Contains("battle lost: turn 1 passed; no recall is left, so leave\n", output);
-        Assert.Contains("captain fails the Outrider trial and stays a Cadet; it opens again after the next map\n", output);
-        Assert.Contains("ERROR: captain has tried the Outrider trial since the last map; it opens again after the next one\n", output);
+        Assert.Contains("Trial: Trial of the Outrider, seed 13\n", output);
+        Assert.Contains("Battle lost: turn 1 passed; no recall is left, so leave\n", output);
+        Assert.Contains("Alder Fenn fails the Outrider trial and stays a Cadet; it opens again after the next map\n", output);
+        Assert.Contains("ERROR: Alder Fenn has tried the Outrider trial since the last map; it opens again after the next one\n", output);
     }
 
     [Fact]
@@ -154,13 +154,13 @@ public class CampaignCliTests
         {
             var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("ERROR: captain cannot certify as Outrider: needs level 4, has 1; needs sword D, has E\n", output);
-            Assert.Contains("ERROR: brannock cannot certify as Reaver: needs level 3, has 1; needs axe D, has E\n", output);
-            Assert.Contains("classes: what each asks, read against a unit's own stats without its class's; a seal costs 500\n", output);
-            Assert.Contains("  Cadet: nothing -- captain's class\n", output);
+            Assert.Contains("ERROR: Alder Fenn cannot certify as Outrider: needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("ERROR: Brannock cannot certify as Reaver: needs level 3, has 1; needs axe D, has E\n", output);
+            Assert.Contains("Classes: what each asks, read against a unit's own stats without its class's; a seal costs 500\n", output);
+            Assert.Contains("  Cadet: nothing -- Alder Fenn's class\n", output);
             Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 1; needs sword D, has E\n", output);
             Assert.Contains("  Bowman: level 3, dex 8 -- needs level 3, has 1; needs dex 8, has 7\n", output);
-            Assert.Contains("ERROR: no unit 'nobody' on the roster\n", output);
+            Assert.Contains("ERROR: No unit 'nobody' on the roster\n", output);
         }
         finally
         {

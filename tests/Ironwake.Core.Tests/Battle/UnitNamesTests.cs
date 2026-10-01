@@ -127,6 +127,38 @@ public class UnitNamesTests
         Assert.Equal("Stranger-9 is gone", names.Message("stranger-9 is gone"));
     }
 
+    [Fact]
+    public void AWordAfterAnArticleIsARoleNotAUnit()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("The captain is dead", names.Message("the captain is dead"));
+        Assert.Equal(UnitNames.Sentence($"{names["captain"]} is the captain and leads every map"), names.Message("captain is the captain and leads every map"));
+    }
+
+    [Fact]
+    public void NamedReadsIdsAsNamesWithoutSentenceCase()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal($"seize; {names["wren"]} is left behind", names.Named("seize; wren is left behind"));
+    }
+
+    [Fact]
+    public void TheCampaignScreenNamesTheRosterAndTheFallen()
+    {
+        var content = Ironwake.Core.Tests.Maps.MapFixture.Content;
+        var record = CampaignRecord.Start(content, 5);
+        record = record with { Roster = ValueList<Unit>.From(record.Roster.Where(u => u.Id != "wren")), Fallen = ValueList<string>.From(new[] { "wren" }) };
+        var names = UnitNames.Of(record, content);
+
+        Assert.Equal("Alder Fenn", names["captain"]);
+        Assert.Equal("Wren", names["wren"]);
+        Assert.Equal("Teodor buys Iron Sword for 400; the purse holds 100", names.Message("teodor buys Iron Sword for 400; the purse holds 100"));
+        Assert.Equal("No unit 'wren' on the roster", names.Message("no unit 'wren' on the roster"));
+        Assert.Equal("him", names.Refer("teodor").Object);
+    }
+
     [Theory]
     [InlineData("wren waits", "Wren waits")]
     [InlineData("-- enemy phase, turn 1 --", "-- Enemy phase, turn 1 --")]

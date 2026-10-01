@@ -1457,6 +1457,6 @@ j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group ban
 dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 escaped: rook pell wren captain
-battle won: escape; only recall is left
-battle won: escape
-escaped: rook, pell, wren, captain; left behind: dunstan; fell: none
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Rook, Pell, Wren, Alder Fenn; left behind: Dunstan; fell: none

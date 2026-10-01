@@ -34,30 +34,30 @@ public sealed class PlaySession
     public const string NoCast = "content has no cast: " + ContentFiles.CastName + " is missing or empty";
 
     private const string Help = """
-        commands:
-          move <unit> <x,y>        move a unit to a tile in its reach
-          attack <unit> <target> [slot|weapon] [art <id>]  attack an enemy in range, with the weapon in a slot or named, declaring a combat art (the forecast prints first)
-          item <unit> <slot> [ally] use the item in a slot; a healing spell names the ally
-          wait <unit>              end the unit's action
-          canto <unit> <x,y|stay>  after acting, a unit with Canto moves on what its move left, or stays
-          exit <unit>              on an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
-          recover <unit>           on a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
-          shove <unit> <target>    on a shove map, push an adjacent ally one tile away, as the action
-          cover <unit> <ally>      on a cover map, take the first strike aimed at the ally beside it, as the action
-          watch <unit>             on an overwatch map, strike the first foe to end a move in the unit's ring, as the action
-          end                      end the player phase; the enemy phase plays out, each enemy attack printing its forecast first
-          recall <n>               rewind to history state n, a player-phase state (spends a charge), printing what it undoes
-          recall list              every state recall can return to, the command that made it, and what a rewind there gives back
-          recall                   list the state each player turn started at, and the charges left
-          forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  show the forecast without attacking, from any tile the unit can reach
-          threat <unit> [from <x,y>]  what each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
-          reach <unit>             show the board with the unit's reachable tiles marked
-          show <unit>              show a unit's numbers
-          terrain [glyph|name]     what the ground does for a unit on it; with no name, every terrain on the board
-          map                      show the board
-          help                     this list
-        slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
-        a scripted run ends with a summary of every rejected line; --strict stops at the first
+        Commands:
+          move <unit> <x,y>        Move a unit to a tile in its reach
+          attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a combat art (the forecast prints first)
+          item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
+          wait <unit>              End the unit's action
+          canto <unit> <x,y|stay>  After acting, a unit with Canto moves on what its move left, or stays
+          exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
+          recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
+          shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
+          cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
+          watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
+          end                      End the player phase; the enemy phase plays out, each enemy attack printing its forecast first
+          recall <n>               Rewind to history state n, a player-phase state (spends a charge), printing what it undoes
+          recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
+          recall                   List the state each player turn started at, and the charges left
+          forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast without attacking, from any tile the unit can reach
+          threat <unit> [from <x,y>]  What each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
+          reach <unit>             Show the board with the unit's reachable tiles marked
+          show <unit>              Show a unit's numbers
+          terrain [glyph|name]     What the ground does for a unit on it; with no name, every terrain on the board
+          map                      Show the board
+          help                     This list
+        Slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
+        A scripted run ends with a summary of every rejected line; --strict stops at the first
         """;
 
     private readonly GameContent _content;
@@ -448,24 +448,24 @@ public sealed class PlaySession
 
         var outcome = _state.Outcome;
         _out.WriteLine(outcome.IsOver
-            ? $"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}"
-            : $"battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
+            ? $"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(outcome.Reason)}"
+            : $"Battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
         if (EscapeSummary(_state) is { } escape && outcome.IsOver)
         {
-            _out.WriteLine(escape);
+            _out.WriteLine(UnitNames.Of(_state, _content).Message(escape));
         }
 
         if (_state.Map.Certification is { } trial && outcome.IsOver)
         {
             var className = _content.Class(trial.ClassId).Name;
             _out.WriteLine(outcome.Result == BattleResult.Won
-                ? $"certification: {_state.UnitsOf(Side.Player).Single().Id} earned {className}"
-                : $"certification: {className} not earned");
+                ? $"Certification: {UnitNames.Of(_state, _content)[_state.UnitsOf(Side.Player).Single().Id]} earned {className}"
+                : $"Certification: {className} not earned");
         }
         if (_state.Map.RivalryArm is { } arm)
         {
             var attacked = _exposure.Count(entry => entry.Attacked);
-            _out.WriteLine($"rivalry ({arm}): {_exposure.Count} threatened player phases ended beside a rival, {attacked} of them attacked in the enemy phase after");
+            _out.WriteLine($"Rivalry ({arm}): {_exposure.Count} threatened player phases ended beside a rival, {attacked} of them attacked in the enemy phase after");
         }
 
         return stopped ? StrictStop : outcome.Result == BattleResult.Won ? 0 : 1;
@@ -497,7 +497,7 @@ public sealed class PlaySession
             Execute(text.Split(' ', StringSplitOptions.RemoveEmptyEntries));
             if (strict && _rejections.Count > 0)
             {
-                _out.WriteLine($"strict: stopped at line {_line} ({text}); no later command applied");
+                _out.WriteLine($"Strict: stopped at line {_line} ({text}); no later command applied");
                 return true;
             }
         }
@@ -1118,7 +1118,7 @@ public sealed class PlaySession
             var after = _state.RecallCharges > 0
                 ? "only recall is left" + (_campaign ? ", or leave" : "")
                 : "no recall is left" + (_campaign ? ", so leave" : "");
-            _out.WriteLine($"battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {outcome.Reason}; {after}");
+            _out.WriteLine($"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(outcome.Reason)}; {after}");
             if (Objective.Verdict(_state, _content) is { } verdict)
             {
                 _out.WriteLine(verdict);

@@ -50,8 +50,8 @@ public class CampaignClientTests
         var console = ConsoleLog();
         var client = ClientLog();
 
-        Assert.StartsWith("captain buys Iron Sword for 400; the purse holds 100\nmap 3 of 8: The Tollgate, seed 113\n", console);
-        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: teodor\nmap 4 of 8: Harrow Weir, seed 114\n", console);
+        Assert.StartsWith("Alder Fenn buys Iron Sword for 400; the purse holds 100\nMap 3 of 8: The Tollgate, seed 113\n", console);
+        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: Teodor\nMap 4 of 8: Harrow Weir, seed 114\n", console);
         Assert.Contains("-- Enemy phase, turn 1 --", console[console.IndexOf("Harrow Weir", StringComparison.Ordinal)..]);
         Assert.Null(Parity.FirstDifference(console, client));
     }
@@ -63,7 +63,7 @@ public class CampaignClientTests
         var client = ClientLog();
         var withoutPurchase = client[(client.IndexOf('\n') + 1)..];
 
-        Assert.StartsWith("event log differs at line 1, column 1: console 'captain buys Iron Sword", Parity.FirstDifference(console, withoutPurchase));
+        Assert.StartsWith("event log differs at line 1, column 1: console 'Alder Fenn buys Iron Sword", Parity.FirstDifference(console, withoutPurchase));
     }
 
     [Fact]
@@ -71,7 +71,7 @@ public class CampaignClientTests
     {
         var console = ConsoleLog();
 
-        Assert.DoesNotContain("roster:", console);
+        Assert.DoesNotContain("Roster:", console);
         Assert.DoesNotContain("shop:", console);
         Assert.DoesNotContain("deploys to", console);
         Assert.DoesNotContain(console.Split('\n'), line => line.StartsWith("> ", StringComparison.Ordinal));
@@ -95,7 +95,7 @@ public class CampaignClientTests
 
         var lines = Client().ScreenLines();
 
-        Assert.Equal("-- before map 3 of 8: The Tollgate; the purse holds 500 --", lines[0]);
+        Assert.Equal("-- Before map 3 of 8: The Tollgate; the purse holds 500 --", lines[0]);
         Assert.Contains(string.Join("\n", lines) + "\n", output);
     }
 
@@ -108,7 +108,7 @@ public class CampaignClientTests
         var refusal = CampaignRecord.StartAt(Content, Seed, Map).Buy("steel_sword", "captain", Content);
 
         Assert.False(refusal.Accepted);
-        Assert.Equal(refusal.Text, client.Status);
+        Assert.Equal(CampaignSession.Text(refusal.Record, Content, refusal.Text), client.Status);
         Assert.Equal("", client.LogText);
         Assert.Equal(500, client.Record.Purse);
     }
@@ -120,7 +120,7 @@ public class CampaignClientTests
         Assert.True(client.March());
 
         Assert.False(client.Buy("field_dressing", "captain"));
-        Assert.Equal("a battle is open; leave it once it is decided", client.Status);
+        Assert.Equal("A battle is open; leave it once it is decided", client.Status);
         Assert.False(client.March());
     }
 
@@ -131,7 +131,7 @@ public class CampaignClientTests
         client.March();
 
         Assert.False(client.Leave());
-        Assert.Equal("the battle is not decided; leave comes after it is won or lost", client.Status);
+        Assert.Equal("The battle is not decided; leave comes after it is won or lost", client.Status);
         Assert.NotNull(client.Battle);
     }
 
@@ -142,8 +142,8 @@ public class CampaignClientTests
 
         Assert.False(client.Bench("teodor"));
 
-        Assert.Equal("The Tollgate places teodor by name at 7,11", client.Status);
-        Assert.Contains("teodor", client.ScreenLines().Single(l => l.StartsWith("deploys to", StringComparison.Ordinal)));
+        Assert.Equal("The Tollgate places Teodor by name at 7,11", client.Status);
+        Assert.Contains("Teodor", client.ScreenLines().Single(l => l.StartsWith("Deploys to", StringComparison.Ordinal)));
     }
 
     [Fact]

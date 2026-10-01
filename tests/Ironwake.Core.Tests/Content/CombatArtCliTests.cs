@@ -97,7 +97,7 @@ public class CombatArtCliTests : IDisposable
             + "  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
             + "Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

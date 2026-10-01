@@ -92,6 +92,28 @@ public sealed class UnitNames
         return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), events.ToImmutable());
     }
 
+    /// <summary>
+    /// The names for the campaign's between-map screen (issue 615): every unit on
+    /// <paramref name="record"/>'s roster by its own name, and every fallen unit by its cast
+    /// name, each with its pronoun from the cast file. The screen has no board, so no enemy
+    /// and no map event is known.
+    /// </summary>
+    public static UnitNames Of(CampaignRecord record, GameContent content)
+    {
+        var names = ImmutableDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
+        var pronouns = ImmutableDictionary.CreateBuilder<string, Pronoun>(StringComparer.Ordinal);
+        foreach (var unit in content.Cast.Concat(record.Roster))
+        {
+            names[unit.Id] = unit.Name;
+            if (content.Pronouns.TryGetValue(unit.Id, out var pronoun))
+            {
+                pronouns[unit.Id] = pronoun;
+            }
+        }
+
+        return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), ImmutableDictionary<string, MapEventAction>.Empty);
+    }
+
     /// <summary>The name <paramref name="id"/> reads as, or the id itself when no unit by that id is known.</summary>
     public string this[string id] => _names.TryGetValue(id, out var name) ? name : id;
 
@@ -122,12 +144,20 @@ public sealed class UnitNames
     /// A refusal as a reader sees it (issue 615): every unit id this battle knows reads as its
     /// name, an id quoted as it was typed (<c>'wren'</c>) stays as typed, and each line is in
     /// sentence case: <c>wren cannot move to 3,4: ...</c> reads <c>Wren cannot move to 3,4: ...</c>,
-    /// <c>captain is at full HP</c> reads <c>Alder Fenn is at full HP</c>.
+    /// <c>captain is at full HP</c> reads <c>Alder Fenn is at full HP</c>. A word after an
+    /// article is a role, not a unit: <c>the captain is dead</c> stays as it is.
     /// </summary>
-    public string Message(string text) =>
-        Sentence(IdToken.Replace(text, m => m.Value[0] == '\'' ? m.Value : this[m.Value]));
+    public string Message(string text) => Sentence(Named(text));
 
-    private static readonly Regex IdToken = new(@"'[^'\s]*'|(?<![\w-])[a-z][a-z0-9_]*(?:-[0-9]+)?(?![\w-])", RegexOptions.CultureInvariant);
+    /// <summary>
+    /// <paramref name="text"/> with every unit id this battle knows read as its name, as
+    /// <see cref="Message"/> reads it, but with no sentence case, for a clause set inside a line:
+    /// <c>Battle lost: the captain is dead</c>, <c>Campaign lost on ...: wren is dead</c>.
+    /// </summary>
+    public string Named(string text) =>
+        IdToken.Replace(text, m => m.Value[0] == '\'' ? m.Value : this[m.Value]);
+
+    private static readonly Regex IdToken = new(@"'[^'\s]*'|(?<![\w-])(?<!\b(?:the|a|an) )[a-z][a-z0-9_]*(?:-[0-9]+)?(?![\w-])", RegexOptions.CultureInvariant);
 
     /// <summary>
     /// <paramref name="text"/> in sentence case (issue 609): on each line, the first character

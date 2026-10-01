@@ -65,7 +65,7 @@ public sealed class CampaignClient
         }
 
         var lines = new List<string> { CampaignSession.ScreenHeading(Record, Content, map) };
-        lines.AddRange(CampaignSession.RosterLines(Record, Content));
+        lines.AddRange(CampaignSession.RosterLines(Record, Content, typed: true));
         lines.AddRange(CampaignSession.ShopLines(Record, Content));
         lines.Add(CampaignSession.DeploymentLine(Record, Content, map));
         if (Record.KeepMenuRefusal(Content) is null)
@@ -168,20 +168,20 @@ public sealed class CampaignClient
             _trial = null;
             var result = Record.AfterTrial(battle.State, trialUnit, Content);
             Record = result.Record;
-            _log.Add(result.Text);
+            _log.Add(CampaignSession.Text(Record, Content, result.Text));
             return true;
         }
 
         if (battle.State.Outcome.Result != BattleResult.Won)
         {
-            _log.Add(CampaignSession.LostLine(battle.State));
+            _log.Add(CampaignSession.LostLine(battle.State, Content));
             Over = true;
             return true;
         }
 
         var before = Record;
         Record = Record.AfterBattle(battle.State, Content);
-        _log.Add(CampaignSession.WonLine(before, Record, battle.State));
+        _log.Add(CampaignSession.WonLine(before, Record, battle.State, Content));
         if (Record.IsFinished(Content))
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
@@ -205,7 +205,7 @@ public sealed class CampaignClient
         }
 
         Record = result.Record;
-        _log.Add(result.Text);
+        _log.Add(CampaignSession.Text(Record, Content, result.Text));
         Status = null;
         return true;
     }
@@ -220,9 +220,10 @@ public sealed class CampaignClient
         return !Over || Refuse("the campaign is over");
     }
 
+    /// <summary>Shows a refusal in the status as the console's <c>ERROR:</c> line reads it, by name, in sentence case (issue 615).</summary>
     private bool Refuse(string reason)
     {
-        Status = reason;
+        Status = CampaignSession.Text(Record, Content, reason);
         return false;
     }
 }

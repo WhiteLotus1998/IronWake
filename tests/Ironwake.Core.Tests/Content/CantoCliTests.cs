@@ -65,7 +65,7 @@ public class CantoCliTests
         Assert.Contains("> canto ansgar 4,5\nAnsgar cantos 4,4 -> 4,5\n", output);
         Assert.Contains("> canto ansgar 5,5\nAnsgar cantos 8,5 -> 5,5 via 7,5 6,5\n", output);
         Assert.Contains("Threat on Ansgar at 5,5 (Plain): no enemy can strike him next phase", output);
-        Assert.EndsWith("battle won: rout\n", output);
+        Assert.EndsWith("Battle won: rout\n", output);
         Assert.DoesNotContain("Rejected ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

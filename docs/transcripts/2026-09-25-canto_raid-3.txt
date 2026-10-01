@@ -698,7 +698,7 @@ Canto Raid  turn 5 of 10  enemy phase  rout  recall 3
 B  ansgar           Ansgar L1 outrider         6,5    hp 10/20  Plain
 c  soldier-1        Soldier L1 pikeman         11,4   hp 11/20  Plain  group watch, guard, awake  done
 C  wren             Wren L1 cadet              8,4    hp 13/20  Plain
-battle lost: the captain is dead; only recall is left
+Battle lost: the captain is dead; only recall is left
 Lost because the captain, Alder Fenn, fell.
 > recall
 Player turns start at: turn 1 state 0, turn 2 state 13, turn 3 state 25, turn 4 state 34, turn 5 state 45; history holds 52 states; 3 charges left
@@ -933,5 +933,5 @@ Canto Raid  turn 5 of 10  enemy phase  rout  recall 1
 B  ansgar           Ansgar L1 outrider         5,5    hp 10/20  Plain
 A  captain          Alder Fenn L1 cadet        7,4    hp 10/22  Fort (heals 20 percent, 4 hp)  captain
 C  wren             Wren L1 cadet              6,3    hp 13/20  Plain
-battle won: rout; only recall is left
-battle won: rout
+Battle won: rout; only recall is left
+Battle won: rout

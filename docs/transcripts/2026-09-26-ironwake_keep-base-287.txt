@@ -3372,5 +3372,5 @@ D  ottilie          Ottilie L1 bowman          14,1   hp 8/17   Plain
 k  soldier-4        Soldier L2 pikeman         14,3   hp 1/20   Plain  group wave, aggressive
 o  soldier-5        Soldier L2 pikeman         9,3    hp 20/20  Plain  group wave, aggressive
 C  teodor           Teodor L1 pikeman          15,3   hp 10/21  Plain
-battle won: survive; only recall is left
-battle won: survive
+Battle won: survive; only recall is left
+Battle won: survive
