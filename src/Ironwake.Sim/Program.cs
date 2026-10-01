@@ -30,6 +30,11 @@ public static class Program
             return Smoke();
         }
 
+        if (args.Length > 0 && args[0] == "--ceiling")
+        {
+            return Ceiling();
+        }
+
         if (args.Length > 1 && args[0] == "--full")
         {
             var seeds = Gates.DefaultSeeds;
@@ -109,7 +114,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>]";
 
     private const int HitBandSeeds = 50;
 
@@ -590,8 +595,60 @@ public static class Program
         failed |= !Print(tally.Result(Gate5MinimumCombats));
         failed |= !Print(Gate7(content, maps));
         failed |= !Print(Gate8(content, maps));
+        failed |= !Print(CeilingGate(content));
         Console.WriteLine(failed ? "smoke: FAILED" : "smoke: ok");
         return failed ? 1 : 0;
+    }
+
+    /// <summary>
+    /// <c>--ceiling</c>: every signature item against the shop (issue 635, <see cref="SignatureCeiling"/>),
+    /// one line per item and its arts, then the verdict the smoke prints.
+    /// </summary>
+    private static int Ceiling()
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("ceiling: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        foreach (var line in CeilingLines(content))
+        {
+            Console.WriteLine(line);
+        }
+
+        return Print(CeilingGate(content)) ? 0 : 1;
+    }
+
+    /// <summary>One line per signature item, then one per signature art on it, on the default roll scheme.</summary>
+    public static IEnumerable<string> CeilingLines(GameContent content)
+    {
+        foreach (var reading in SignatureCeiling.ReadAll(content, RollScheme.TwoRollAverage))
+        {
+            var against = reading.Comparator is { } shop ? $"{reading.Ratio:F2} of {shop.Id}" : "no shop weapon";
+            yield return $"  {reading.Item.Id} ({reading.Item.BoundTo}, {reading.Item.Type.ToString().ToLowerInvariant()} {reading.Item.Rank}): {against}, ceiling {SignatureCeiling.MaxRatio:F2}";
+            foreach (var art in reading.Arts)
+            {
+                yield return $"    {art.ArtId}: loses to the plain attack on {art.LosesTo} of {art.Targets} targets";
+            }
+        }
+    }
+
+    /// <summary>The signature ceiling as a smoke row: passes with no item, fails naming the first item over its ceiling or with an art that never loses.</summary>
+    public static GateResult CeilingGate(GameContent content)
+    {
+        var readings = SignatureCeiling.ReadAll(content, RollScheme.TwoRollAverage);
+        if (readings.Count == 0)
+        {
+            return new GateResult("signature ceiling: no signature item ships: ok", true);
+        }
+
+        var failed = readings.FirstOrDefault(r => !r.Passed);
+        return failed is null
+            ? new GateResult($"signature ceiling: {readings.Count} items, highest {readings.Max(r => r.Ratio):F2} of {SignatureCeiling.MaxRatio:F2}: ok", true)
+            : new GateResult($"signature ceiling: {failed.Failure}: FAILED", false);
     }
 
     private static bool Print(GateResult result)
