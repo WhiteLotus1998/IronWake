@@ -937,6 +937,13 @@ public static class ProtocolJson
         }
 
         w.WriteEndObject();
+        if (u.Wound is { } wound)
+        {
+            w.WriteStartObject("wound");
+            WriteStats(w, "penalty", wound.Penalty);
+            w.WriteNumber("mapsLeft", wound.MapsLeft);
+            w.WriteEndObject();
+        }
     }
 
     private static BattleUnit ReadUnit(JsonElement e, GameContent content)
@@ -968,6 +975,26 @@ public static class ProtocolJson
         };
     }
 
+    /// <summary>
+    /// The optional <c>wound</c> of a unit (issue 664): the penalty its stats carry and the main
+    /// maps left, 1 or 2. A unit written before it, or without one, reads as unwounded.
+    /// </summary>
+    private static Wound? ReadWound(JsonElement e)
+    {
+        if (!e.TryGetProperty("wound", out var w) || w.ValueKind == JsonValueKind.Null)
+        {
+            return null;
+        }
+
+        var maps = RequiredInt(w, "mapsLeft");
+        if (maps is < 1 or > Wound.MainMaps)
+        {
+            throw new ProtocolException($"field 'wound.mapsLeft' must be 1 to {Wound.MainMaps}");
+        }
+
+        return new Wound(ReadStats(Required(w, "penalty")), maps);
+    }
+
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
     private static Unit ReadRosterUnit(JsonElement e, GameContent content)
     {
@@ -997,6 +1024,7 @@ public static class ProtocolJson
                 Hooks = ReadStrings(e, "hooks"),
                 Skill = ReadWeaponPoints(e),
                 Mastery = ReadMasteryPoints(e),
+                Wound = ReadWound(e),
             };
         }
         catch (ArgumentException ex)
@@ -1009,7 +1037,8 @@ public static class ProtocolJson
 
     /// <summary>
     /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
-    /// (a ulong does not survive every JSON reader), the difficulty, the purse, the index of the next
+    /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
+    /// a record without it reads as on), the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
@@ -1021,6 +1050,11 @@ public static class ProtocolJson
         w.WriteNumber("protocolVersion", ProtocolVersion.Current);
         w.WriteString("seed", record.Seed.ToString(System.Globalization.CultureInfo.InvariantCulture));
         w.WriteString("difficulty", record.Difficulty);
+        if (!record.Permadeath)
+        {
+            w.WriteBoolean("permadeath", false);
+        }
+
         w.WriteNumber("purse", record.Purse);
         w.WriteNumber("mapIndex", record.MapIndex);
         w.WriteStartArray("roster");
@@ -1119,6 +1153,7 @@ public static class ProtocolJson
             QuestsWon = ReadQuestsWon(e, content),
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
             Keep = ReadKeep(e, content),
+            Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
         };
     }
 

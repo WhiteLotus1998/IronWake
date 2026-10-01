@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--scheme one|two] [--from map] [--log file] [--saves dir] [--load save | --resume]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -105,6 +105,7 @@ public sealed class CampaignSession
         string? savesDir = null;
         string? load = null;
         var resume = false;
+        var permadeath = true;
         for (var i = 0; i < args.Length; i++)
         {
             var value = i + 1 < args.Length ? args[i + 1] : null;
@@ -150,6 +151,10 @@ public sealed class CampaignSession
                     break;
                 case "--resume":
                     resume = true;
+                    break;
+                case "--permadeath" when value is "on" or "off":
+                    permadeath = value == "on";
+                    i++;
                     break;
                 default:
                     Console.WriteLine($"ERROR: unexpected argument '{args[i]}'");
@@ -202,10 +207,15 @@ public sealed class CampaignSession
             return 2;
         }
 
-        if (content.Difficulties.Count > 0 && !content.Difficulties.ContainsKey(difficulty))
+        if (content.Difficulties.Count > 0)
         {
-            Console.WriteLine($"ERROR: no difficulty '{difficulty}'; the content declares {string.Join(", ", content.Difficulties.Keys)}");
-            return 2;
+            if (DifficultyNamed(content, difficulty) is not { } chosen)
+            {
+                Console.WriteLine($"ERROR: no difficulty '{difficulty}'; the content declares {string.Join(", ", content.Difficulties.Values.Select(DifficultyChoice))}");
+                return 2;
+            }
+
+            difficulty = chosen.Id;
         }
 
         if (from is not null && content.Campaign.Maps.All(m => m.MapId != from))
@@ -231,7 +241,13 @@ public sealed class CampaignSession
         }
 
         var saves = savesDir is not null ? new SaveStore(savesDir) : script is null ? new SaveStore(DefaultSavesDirectory) : null;
-        var record = from is null ? CampaignRecord.Start(content, seed, difficulty) : CampaignRecord.StartAt(content, seed, from, difficulty);
+        if (load is null && !resume && saves is not null && content.Difficulties.TryGetValue(difficulty, out var picked) && !picked.IsUnlocked(saves.Won()))
+        {
+            Console.WriteLine($"ERROR: {picked.DisplayName} unlocks when a campaign is won on {content.Difficulty(picked.UnlockedBy!).DisplayName}");
+            return 2;
+        }
+
+        var record = from is null ? CampaignRecord.Start(content, seed, difficulty, permadeath) : CampaignRecord.StartAt(content, seed, from, difficulty, permadeath);
         IReadOnlyList<string>? battleLines = null;
         if (load is not null)
         {
@@ -269,7 +285,7 @@ public sealed class CampaignSession
 
     private int Play(TextReader input, bool strict)
     {
-        _out.WriteLine($"Campaign, seed {_record.Seed}, difficulty {_record.Difficulty}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
+        _out.WriteLine($"Campaign, seed {_record.Seed}, {RulesLine(_record, _content)}, scheme {_scheme}, {_content.Campaign.Maps.Count} maps");
         var code = 1;
         var stopped = false;
         while (!_record.IsFinished(_content))
@@ -356,6 +372,13 @@ public sealed class CampaignSession
         {
             WriteEvent(CampaignWonLine(_record, _content));
             code = 0;
+            if (_saves is not null && _saves.RecordWin(_record.Difficulty))
+            {
+                foreach (var opened in _content.Difficulties.Values.Where(d => d.UnlockedBy == _record.Difficulty))
+                {
+                    _out.WriteLine($"Unlocked: {opened.DisplayName} (--difficulty {opened.Id})");
+                }
+            }
         }
 
         if (_scripted && _rejections.Count > 0)
@@ -837,6 +860,24 @@ public sealed class CampaignSession
     /// <summary>The fail menu's prompt: the three ways on from a lost map.</summary>
     public const string FailMenuLine = "Load from save (load <name>; saves lists them), New game (new), or Quit (quit)";
 
+    /// <summary>
+    /// The difficulty and the permadeath toggle as the record carries them (issue 664):
+    /// <c>difficulty Captain, permadeath on</c>, the difficulty by its display name.
+    /// </summary>
+    public static string RulesLine(CampaignRecord record, GameContent content)
+    {
+        var name = content.Difficulties.TryGetValue(record.Difficulty, out var difficulty) ? difficulty.DisplayName : record.Difficulty;
+        return $"difficulty {name}, permadeath {(record.Permadeath ? "on" : "off")}";
+    }
+
+    /// <summary>The difficulty a <c>--difficulty</c> value names: its id, or its display name in any case; null when none.</summary>
+    public static Difficulty? DifficultyNamed(GameContent content, string value) =>
+        content.Difficulties.TryGetValue(value, out var byId)
+            ? byId
+            : content.Difficulties.Values.FirstOrDefault(d => string.Equals(d.DisplayName, value, StringComparison.OrdinalIgnoreCase));
+
+    private static string DifficultyChoice(Difficulty d) => d.Name is null ? d.Id : $"{d.Id} ({d.Name})";
+
     /// <summary>A save as the screen lists it: which map is next, of how many, and the purse.</summary>
     public static string SaveLine(CampaignRecord record, GameContent content) =>
         record.IsFinished(content)
@@ -889,8 +930,8 @@ public sealed class CampaignSession
                 case ["quit"]:
                     return null;
                 case ["new"]:
-                    var fresh = CampaignRecord.Start(_content, _record.Seed, _record.Difficulty);
-                    WriteEvent($"New game, seed {fresh.Seed}, difficulty {fresh.Difficulty}");
+                    var fresh = CampaignRecord.Start(_content, _record.Seed, _record.Difficulty, _record.Permadeath);
+                    WriteEvent($"New game, seed {fresh.Seed}, {RulesLine(fresh, _content)}");
                     return fresh;
                 case ["saves"]:
                     PrintSaves();
@@ -1090,7 +1131,7 @@ public sealed class CampaignSession
         var name = typed && !string.Equals(unit.Name, unit.Id, StringComparison.OrdinalIgnoreCase) ? $"{unit.Name} ({unit.Id})" : unit.Name;
         var unitClass = content.Class(unit.ClassId);
         var slots = unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {ItemText(content, item)}");
-        var bench = record.Benched.Contains(unit.Id) ? ", benched" : "";
+        var bench = (unit.Wound is { } wound ? ", " + wound.Label : "") + (record.Benched.Contains(unit.Id) ? ", benched" : "");
         var lines = new List<string> { $"  {name}: {unitClass.Name} L{unit.Level}, EXP {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}" };
         if (!detail)
         {
@@ -1098,6 +1139,11 @@ public sealed class CampaignSession
         }
 
         var stats = content.StatsOf(unit);
+        if (unit.Wound is { } open)
+        {
+            lines.Add("    " + PlaySession.WoundLine(open));
+        }
+
         lines.Add($"    HP {stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}");
         var ranks = unitClass.Weapons.Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Skill.Rank(type)} ({unit.Skill.Points(type)})");
         lines.Add($"    Ranks: {string.Join(", ", ranks)}");

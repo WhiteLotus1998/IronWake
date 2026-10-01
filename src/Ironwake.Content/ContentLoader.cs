@@ -739,7 +739,8 @@ public static class ContentLoader
     /// The difficulties block of rules.json (issue 76): an object of difficulty id to an
     /// optional <c>statPercent</c> (stat keys, each at least 0, an omitted stat 100), an optional
     /// <c>enemyLevelOffset</c> (0 when omitted), and an optional <c>recall</c> charge count (0 to
-    /// 99; omitted keeps each map's). The block must declare <c>normal</c>, and <c>normal</c>
+    /// 99; omitted keeps each map's) or <c>recallOffset</c> (added to each map's, issue 664), an
+    /// optional display <c>name</c> and an optional <c>unlockedBy</c> naming another difficulty. The block must declare <c>normal</c>, and <c>normal</c>
     /// must be the identity, so Normal is data and never a code path of its own.
     /// </summary>
     private static ImmutableSortedDictionary<string, Difficulty> ParseDifficulties(EntryNode node)
@@ -755,9 +756,9 @@ public static class ContentLoader
             var entry = new EntryNode(node.File, "difficulties." + property.Name, property.Value);
             foreach (var field in entry.Element.EnumerateObject())
             {
-                if (field.Name is not ("statPercent" or "enemyLevelOffset" or "recall"))
+                if (field.Name is not ("statPercent" or "enemyLevelOffset" or "recall" or "recallOffset" or "name" or "unlockedBy"))
                 {
-                    throw entry.Error(field.Name, "is not a difficulty field; expected statPercent, enemyLevelOffset or recall");
+                    throw entry.Error(field.Name, "is not a difficulty field; expected statPercent, enemyLevelOffset, recall, recallOffset, name or unlockedBy");
                 }
             }
 
@@ -782,7 +783,32 @@ public static class ContentLoader
                 throw entry.Error("recall", "must be 0 to 99");
             }
 
-            builder.Add(property.Name, new Difficulty(property.Name, percent, offset, recall));
+            var recallOffset = entry.IntOr("recallOffset", 0);
+            if (recallOffset is < -99 or > 99)
+            {
+                throw entry.Error("recallOffset", "must be -99 to 99");
+            }
+
+            if (recall is not null && entry.Has("recallOffset"))
+            {
+                throw entry.Error("recallOffset", "cannot stand beside recall; a difficulty names a count or an offset");
+            }
+
+            var name = entry.OptionalString("name");
+            if (name is not null && (name.Length is 0 or > 24 || name.Any(c => c is < ' ' or > '~')))
+            {
+                throw entry.Error("name", "must be 1 to 24 printable ASCII characters");
+            }
+
+            builder.Add(property.Name, new Difficulty(property.Name, percent, offset, recall) { RecallOffset = recallOffset, Name = name, UnlockedBy = entry.OptionalString("unlockedBy") });
+        }
+
+        foreach (var difficulty in builder.Values)
+        {
+            if (difficulty.UnlockedBy is { } needed && (!builder.ContainsKey(needed) || needed == difficulty.Id))
+            {
+                throw new ContentException(node.File, "difficulties." + difficulty.Id, "unlockedBy", $"names '{needed}', which is not another difficulty");
+            }
         }
 
         if (!builder.TryGetValue(Difficulty.NormalId, out var normal))
@@ -792,7 +818,7 @@ public static class ContentLoader
 
         if (!normal.IsIdentity)
         {
-            throw new ContentException(node.File, "difficulties." + Difficulty.NormalId, null, "must be the identity: every percent 100, offset 0, no recall");
+            throw new ContentException(node.File, "difficulties." + Difficulty.NormalId, null, "must be the identity: every percent 100, offset 0, no recall or recallOffset");
         }
 
         return builder.ToImmutable();

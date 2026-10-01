@@ -1,0 +1,223 @@
+Issue 664: the difficulty ladder, gate 1 on the three tuned maps at 200 seeds, two-roll average, Release build.
+Captain is normal (the identity). Targets: gate 1 about 15 points either side of Captain; gates 2 to 8 passing.
+
+Rounds (gate 1 wins of 200: the_tollgate / brackwater_cut / harrow_weir):
+  Captain (normal)                         148 74% / 128 64% / 123 61%
+  Recruit   stats 90, recall +1            184 92% / 176 88% / 177 89%   (+18 / +24 / +28)
+  Recruit   stats 95, recall +1            165 82% / 140 70% / 142 71%   (+8 / +6 / +10)
+  Recruit   stats 92, recall +1  SHIPPED   170 85% / 165 82% / 155 78%   (+11 / +18 / +17, mean +15)
+  Tactician level +1, recall -1            140 70% / 107 54% / 105 53%   (-4 / -10 / -8)
+  Tactician level +2, recall -1             95 47% /  16  8% / 106 53%   (-27 / -56 / -8; the offset raises a floor, so it is uneven)
+  Tactician level +1, stats 105, recall -1 SHIPPED 132 66% / 108 54% / 86 43%   (-8 / -10 / -18, mean -12)
+  Tactician level +1, stats 108, recall -1  87 43% /  23 12% /  43 21%   (-31 / -52 / -40; a cliff)
+
+Gates 2 to 8 pass on every shipped row. Tactician is under gate 1's floor on two maps by design.
+
+=== the_tollgate, recruit (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty recruit
+gate 1 beatable: the_tollgate, heuristic wins 170/200 (85 %), winning turn median 8 p90 9 limit 10, losses 30 timeout 0 captain 0 protected, quiet tail 0.3, refused kill p50 0.8674 over 30, at the stall p50 0.8674 over 28, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.215: ok
+  pell: drop 0.540 se 0.055 own [atk 778 dmg 13343 heal 0 abs 468] rest baseline [atk 1305 dmg 12320 heal 0 abs 1539] rest benched [atk 2113 dmg 20455 heal 0 abs 2506] benched losses 136 timeout 2 captain 0 protected, refused kill p50 0.8674 over 136, at the stall p50 0.8674 over 123
+  teodor: drop 0.205 se 0.036 own [atk 466 dmg 4223 heal 0 abs 485] rest baseline [atk 1617 dmg 21440 heal 0 abs 1522] rest benched [atk 1777 dmg 23414 heal 0 abs 2006] benched losses 71 timeout 0 captain 0 protected, refused kill p50 0.8674 over 71, at the stall p50 0.0346 over 63
+  wren: drop 0.215 se 0.036 own [atk 365 dmg 3709 heal 0 abs 696] rest baseline [atk 1718 dmg 21954 heal 0 abs 1311] rest benched [atk 1798 dmg 23627 heal 0 abs 1997] benched losses 73 timeout 0 captain 0 protected, refused kill p50 0.8674 over 73, at the stall p50 0.8674 over 63
+  captain captain: baseline [atk 474 dmg 4388 heal 0 abs 358] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1313 ms: ok
+gate 5 forecast honesty: 10123 combats (4105 with gauntlets), 20832 strikes, hits 13026 expected 12969.0, crits 841 expected 890.5, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 9 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 18079 ms: ok
+free prefix: the_tollgate, 0 of 2, 4, 6 tried, slack median 2 p90 1 (printed, not gated)
+  prefix 2: wins 142/200, drop 0.140 se 0.043, not free
+  prefix 4: wins 48/200, drop 0.610 se 0.057, not free
+  prefix 6: wins 3/200, drop 0.835 se 0.065, not free
+  prefix 2 refunded: wins 162/200, drop 0.040 se 0.038, free, limit raised by 2 against the unraised baseline: at most tempo
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 1 quiet 0 live 199, wake tax 0.00
+  turn 7: dead 24 quiet 0 live 166, wake tax 0.00
+  turn 8: dead 35 quiet 0 live 109, wake tax 0.00
+  turn 9: dead 16 quiet 0 live 52, wake tax 0.00
+  turn 10: dead 4 quiet 0 live 37, wake tax 0.00
+full: ok
+
+=== brackwater_cut, recruit (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty recruit
+gate 1 beatable: brackwater_cut, heuristic wins 165/200 (82 %), winning turn median 5 p90 6 limit 8, losses 0 timeout 35 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 40, two-roll average: ok
+gate 2 decisions matter: brackwater_cut, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: brackwater_cut, 0 player units killed from deployment: ok
+gate 4 no dead weight: brackwater_cut, 4 recruits x 200 seeds, units out, 0 to 4, median drop 0.440: ok
+  dunstan: drop 0.510 se 0.068 win drop 0.150 se 0.042 own [atk 105 dmg 5042 heal 0 abs 826] rest baseline [atk 1205 dmg 18129 heal 0 abs 1674] rest benched [atk 988 dmg 16995 heal 0 abs 1848] benched losses 1 timeout 64 captain 0 protected, refused kill p50 0.8962 over 1, at the stall -, benched survivors p50 0 of 3, captain alone 123
+  pell: drop 0.885 se 0.096 win drop 0.350 se 0.048 own [atk 363 dmg 4857 heal 0 abs 277] rest baseline [atk 947 dmg 18314 heal 0 abs 2223] rest benched [atk 1059 dmg 22315 heal 0 abs 2900] benched losses 7 timeout 98 captain 0 protected, refused kill p50 0.8775 over 7, at the stall p50 0.8674 over 6, benched survivors p50 1 of 3, captain alone 17
+  rook: drop 0.080 se 0.071 win drop -0.015 se 0.031 own [atk 395 dmg 3520 heal 0 abs 367] rest baseline [atk 915 dmg 19651 heal 0 abs 2133] rest benched [atk 607 dmg 19315 heal 0 abs 2408] benched losses 0 timeout 32 captain 0 protected, refused kill -, benched survivors p50 1 of 3, captain alone 59
+  wren: drop 0.370 se 0.070 win drop 0.110 se 0.032 own [atk 444 dmg 6552 heal 0 abs 612] rest baseline [atk 866 dmg 16619 heal 0 abs 1888] rest benched [atk 925 dmg 18644 heal 0 abs 2167] benched losses 2 timeout 55 captain 0 protected, refused kill p50 0.8401 over 2, at the stall p50 0.8129 over 1, benched survivors p50 1 of 3, captain alone 49
+  captain captain: baseline [atk 3 dmg 3200 heal 0 abs 418] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1502 ms: ok
+gate 5 forecast honesty: 10154 combats (4106 with gauntlets), 20883 strikes, hits 13077 expected 13024.9, crits 846 expected 892.2, damage mismatches 0: ok
+gate 7 speed: brackwater_cut, 5 AI-vs-AI games, 28 turns, slowest 21 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 25999 ms: ok
+free prefix: brackwater_cut, 0 of 2, 4, 6 tried, slack median 3 p90 2 (printed, not gated)
+  prefix 2: wins 24/200, drop 0.705 se 0.063, not free
+  prefix 4: wins 4/200, drop 0.805 se 0.063, not free
+  prefix 6: wins 1/200, drop 0.820 se 0.064, not free
+  prefix 2 refunded: wins 41/200, drop 0.620 se 0.060, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 0.0, quiet 0.0, leading dead 0.0, first contact 1.0, first quiet at tax 0.25 -
+  turn 1: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.37
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 186, wake tax 0.00
+  turn 6: dead 0 quiet 0 live 53, wake tax 0.00
+  turn 7: dead 0 quiet 0 live 10, wake tax 0.00
+  turn 8: dead 0 quiet 0 live 1, wake tax 0.00
+full: ok
+
+=== harrow_weir, recruit (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty recruit
+gate 1 beatable: harrow_weir, heuristic wins 155/200 (78 %), winning turn median 8 p90 12 limit 15, losses 25 timeout 20 captain 0 protected, quiet tail 0.6, refused kill p50 0.9892 over 25, at the stall p50 0.0260 over 23, two-roll average: ok
+gate 2 decisions matter: harrow_weir, random wins 10/200 (5 %): ok
+gate 3 no cheap shots: harrow_weir, 0 player units killed from deployment: ok
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.295: ok
+  dunstan: drop 0.295 se 0.045 own [atk 571 dmg 5037 heal 0 abs 414] rest baseline [atk 2660 dmg 33235 heal 0 abs 1996] rest benched [atk 2574 dmg 35917 heal 0 abs 2881] benched losses 56 timeout 48 captain 0 protected, refused kill p50 0.9892 over 56, at the stall p50 0.0597 over 45
+  keziah: drop 0.290 se 0.046 own [atk 440 dmg 6157 heal 0 abs 349] rest baseline [atk 2791 dmg 32115 heal 0 abs 2061] rest benched [atk 2933 dmg 37257 heal 0 abs 2996] benched losses 50 timeout 53 captain 0 protected, refused kill p50 0.8868 over 50, at the stall p50 0.0260 over 47
+  ottilie: drop 0.200 se 0.042 own [atk 513 dmg 3174 heal 0 abs 445] rest baseline [atk 2718 dmg 35098 heal 0 abs 1965] rest benched [atk 2674 dmg 38268 heal 0 abs 2761] benched losses 52 timeout 33 captain 0 protected, refused kill p50 0.9892 over 52, at the stall p50 0.0260 over 44
+  pell: drop 0.420 se 0.051 own [atk 696 dmg 10983 heal 0 abs 247] rest baseline [atk 2535 dmg 27289 heal 0 abs 2163] rest benched [atk 2849 dmg 35274 heal 0 abs 3435] benched losses 75 timeout 54 captain 0 protected, refused kill p50 0.9892 over 75, at the stall p50 0.0681 over 67
+  teodor: drop 0.310 se 0.048 own [atk 499 dmg 5463 heal 0 abs 473] rest baseline [atk 2732 dmg 32809 heal 0 abs 1937] rest benched [atk 2848 dmg 36418 heal 0 abs 2871] benched losses 64 timeout 43 captain 0 protected, refused kill p50 0.9892 over 64, at the stall p50 0.0260 over 57
+  captain captain: baseline [atk 512 dmg 7458 heal 0 abs 482] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1431 ms: ok
+gate 5 forecast honesty: 10206 combats (4110 with gauntlets), 20949 strikes, hits 13107 expected 13055.4, crits 840 expected 895.2, damage mismatches 0: ok
+gate 7 speed: harrow_weir, 5 AI-vs-AI games, 66 turns, slowest 34 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 19314 ms: ok
+free prefix: harrow_weir, 0 of 2, 4, 6 tried, slack median 7 p90 3 (printed, not gated)
+  prefix 2: wins 125/200, drop 0.150 se 0.042, not free
+  prefix 4: wins 100/200, drop 0.275 se 0.050, not free
+  prefix 6: wins 74/200, drop 0.405 se 0.051, not free
+  prefix 2 refunded: wins 127/200, drop 0.140 se 0.042, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 0.0, first contact 3.0, first quiet at tax 0.25 1.0
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.83
+  turn 2: dead 187 quiet 0 live 13, wake tax 0.00
+  turn 3: dead 12 quiet 0 live 188, wake tax 0.17
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 0 quiet 0 live 181, wake tax 0.00
+  turn 7: dead 1 quiet 0 live 148, wake tax 0.00
+  turn 8: dead 4 quiet 0 live 126, wake tax 0.00
+  turn 9: dead 3 quiet 0 live 102, wake tax 0.00
+  turn 10: dead 0 quiet 0 live 74, wake tax 0.00
+  turn 11: dead 0 quiet 0 live 60, wake tax 0.00
+  turn 12: dead 0 quiet 0 live 49, wake tax 0.00
+  turn 13: dead 0 quiet 0 live 40, wake tax 0.00
+  turn 14: dead 0 quiet 0 live 32, wake tax 0.00
+  turn 15: dead 0 quiet 0 live 31, wake tax 0.00
+full: ok
+
+=== the_tollgate, tactician (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty tactician
+gate 1 beatable: the_tollgate, heuristic wins 132/200 (66 %), winning turn median 9 p90 10 limit 10, losses 68 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 68, at the stall p50 0.2451 over 62, two-roll average: ok
+gate 2 decisions matter: the_tollgate, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_tollgate, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_tollgate, 3 recruits x 200 seeds, median drop 0.260: ok
+  pell: drop 0.520 se 0.053 own [atk 881 dmg 15046 heal 0 abs 522] rest baseline [atk 1307 dmg 12194 heal 0 abs 1736] rest benched [atk 2070 dmg 20107 heal 0 abs 2487] benched losses 172 timeout 0 captain 0 protected, refused kill p50 0.8664 over 172, at the stall p50 0.0438 over 157
+  teodor: drop 0.260 se 0.049 own [atk 436 dmg 3700 heal 0 abs 537] rest baseline [atk 1752 dmg 23540 heal 0 abs 1721] rest benched [atk 1728 dmg 24215 heal 0 abs 2256] benched losses 120 timeout 0 captain 0 protected, refused kill p50 0.8674 over 120, at the stall p50 0.0346 over 103
+  wren: drop 0.190 se 0.044 own [atk 386 dmg 3851 heal 0 abs 704] rest baseline [atk 1802 dmg 23389 heal 0 abs 1554] rest benched [atk 1792 dmg 24366 heal 0 abs 2124] benched losses 106 timeout 0 captain 0 protected, refused kill p50 0.8674 over 106, at the stall p50 0.0346 over 86
+  captain captain: baseline [atk 485 dmg 4643 heal 0 abs 495] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1505 ms: ok
+gate 5 forecast honesty: 10162 combats (4105 with gauntlets), 20887 strikes, hits 13075 expected 13014.7, crits 839 expected 891.2, damage mismatches 0: ok
+gate 7 speed: the_tollgate, 5 AI-vs-AI games, 55 turns, slowest 16 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 16765 ms: ok
+free prefix: the_tollgate, 0 of 2, 4, 6 tried, slack median 1 p90 0 (printed, not gated)
+  prefix 2: wins 84/200, drop 0.240 se 0.049, not free
+  prefix 4: wins 12/200, drop 0.600 se 0.056, not free
+  prefix 6: wins 1/200, drop 0.655 se 0.057, not free
+  prefix 2 refunded: wins 109/200, drop 0.115 se 0.049, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 0.0, leading dead 1.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 200 quiet 0 live 0, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 6: dead 1 quiet 0 live 199, wake tax 0.00
+  turn 7: dead 11 quiet 0 live 188, wake tax 0.00
+  turn 8: dead 19 quiet 0 live 169, wake tax 0.00
+  turn 9: dead 19 quiet 0 live 124, wake tax 0.00
+  turn 10: dead 12 quiet 0 live 85, wake tax 0.00
+full: ok
+
+=== brackwater_cut, tactician (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty tactician
+gate 1 beatable: brackwater_cut, heuristic wins 108/200 (54 %), winning turn median 6 p90 6 limit 8, losses 3 timeout 89 captain 0 protected, quiet tail 1.7, refused kill p50 0.8962 over 3, at the stall p50 0.8962 over 3, survivors p50 1 of 4, captain alone 48, two-roll average: FAILED
+gate 2 decisions matter: brackwater_cut, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: brackwater_cut, 0 player units killed from deployment: ok
+gate 4 no dead weight: brackwater_cut, 4 recruits x 200 seeds, units out, 0 to 4, median drop 0.232: ok
+  dunstan: drop 0.225 se 0.053 win drop 0.240 se 0.048 own [atk 19 dmg 3239 heal 0 abs 669] rest baseline [atk 1303 dmg 19939 heal 0 abs 2031] rest benched [atk 1088 dmg 17402 heal 0 abs 1808] benched losses 4 timeout 136 captain 0 protected, refused kill p50 0.8760 over 4, at the stall p50 0.0692 over 3, benched survivors p50 0 of 3, captain alone 52
+  pell: drop 0.500 se 0.063 win drop 0.325 se 0.044 own [atk 317 dmg 4159 heal 0 abs 274] rest baseline [atk 1005 dmg 19019 heal 0 abs 2426] rest benched [atk 1027 dmg 19286 heal 0 abs 2713] benched losses 6 timeout 151 captain 0 protected, refused kill p50 0.8558 over 6, at the stall p50 0.0346 over 1, benched survivors p50 1 of 3, captain alone 17
+  rook: drop 0.240 se 0.067 win drop 0.125 se 0.041 own [atk 567 dmg 5210 heal 0 abs 459] rest baseline [atk 755 dmg 17968 heal 0 abs 2241] rest benched [atk 624 dmg 18580 heal 0 abs 2464] benched losses 2 timeout 115 captain 0 protected, refused kill p50 0.9892 over 2, at the stall p50 0.9283 over 2, benched survivors p50 0 of 3, captain alone 47
+  wren: drop 0.135 se 0.070 win drop 0.020 se 0.041 own [atk 417 dmg 6340 heal 0 abs 682] rest baseline [atk 905 dmg 16838 heal 0 abs 2018] rest benched [atk 967 dmg 18448 heal 0 abs 2175] benched losses 13 timeout 83 captain 0 protected, refused kill p50 0.8674 over 13, at the stall p50 0.0346 over 11, benched survivors p50 0 of 3, captain alone 69
+  captain captain: baseline [atk 2 dmg 4230 heal 0 abs 616] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1713 ms: ok
+gate 5 forecast honesty: 10188 combats (4106 with gauntlets), 20934 strikes, hits 13127 expected 13069.3, crits 843 expected 892.7, damage mismatches 0: ok
+gate 7 speed: brackwater_cut, 5 AI-vs-AI games, 29 turns, slowest 25 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 25431 ms: ok
+free prefix: brackwater_cut, 0 of 2, 4, 6 tried, slack median 2 p90 2 (printed, not gated)
+  prefix 2: wins 16/200, drop 0.460 se 0.052, not free
+  prefix 4: wins 3/200, drop 0.525 se 0.052, not free
+  prefix 6: wins 0/200, drop 0.540 se 0.052, not free
+  prefix 2 refunded: wins 23/200, drop 0.425 se 0.052, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 0.0, quiet 0.0, leading dead 0.0, first contact 1.0, first quiet at tax 0.25 -
+  turn 1: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.37
+  turn 3: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 194, wake tax 0.00
+  turn 6: dead 1 quiet 0 live 115, wake tax 0.00
+  turn 7: dead 1 quiet 0 live 12, wake tax 0.00
+  turn 8: dead 0 quiet 0 live 5, wake tax 0.00
+full: FAILED
+
+=== harrow_weir, tactician (shipped numbers)
+full: 1 maps from content, 200 seeds, two-roll average, difficulty tactician
+gate 1 beatable: harrow_weir, heuristic wins 86/200 (43 %), winning turn median 9 p90 13 limit 15, losses 68 timeout 46 captain 0 protected, quiet tail 0.3, refused kill p50 0.9892 over 68, at the stall p50 0.0303 over 62, two-roll average: FAILED
+gate 2 decisions matter: harrow_weir, random wins 2/200 (1 %): ok
+gate 3 no cheap shots: harrow_weir, 0 player units killed from deployment: ok
+gate 4 no dead weight: harrow_weir, 5 recruits x 200 seeds, median drop 0.230: ok
+  dunstan: drop 0.195 se 0.042 own [atk 610 dmg 5199 heal 0 abs 343] rest baseline [atk 3116 dmg 38829 heal 0 abs 3020] rest benched [atk 2916 dmg 37452 heal 0 abs 3139] benched losses 42 timeout 111 captain 0 protected, refused kill p50 0.9892 over 42, at the stall p50 0.0351 over 38
+  keziah: drop 0.230 se 0.046 own [atk 339 dmg 5449 heal 0 abs 455] rest baseline [atk 3387 dmg 38579 heal 0 abs 2908] rest benched [atk 3061 dmg 38300 heal 0 abs 3158] benched losses 63 timeout 97 captain 0 protected, refused kill p50 0.9892 over 63, at the stall p50 0.0513 over 58
+  ottilie: drop 0.225 se 0.045 own [atk 748 dmg 4596 heal 0 abs 686] rest baseline [atk 2978 dmg 39432 heal 0 abs 2677] rest benched [atk 2278 dmg 38151 heal 0 abs 3097] benched losses 47 timeout 112 captain 0 protected, refused kill p50 0.9892 over 47, at the stall p50 0.0603 over 45
+  pell: drop 0.375 se 0.046 own [atk 935 dmg 14425 heal 0 abs 326] rest baseline [atk 2791 dmg 29603 heal 0 abs 3037] rest benched [atk 2548 dmg 32786 heal 0 abs 3454] benched losses 51 timeout 138 captain 0 protected, refused kill p50 0.9892 over 51, at the stall p50 0.0689 over 46
+  teodor: drop 0.245 se 0.045 own [atk 837 dmg 6878 heal 0 abs 583] rest baseline [atk 2889 dmg 37150 heal 0 abs 2780] rest benched [atk 2978 dmg 38877 heal 0 abs 3493] benched losses 59 timeout 104 captain 0 protected, refused kill p50 0.9892 over 59, at the stall p50 0.0562 over 49
+  captain captain: baseline [atk 257 dmg 7481 heal 0 abs 970] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1270 ms: ok
+gate 5 forecast honesty: 10217 combats (4116 with gauntlets), 20983 strikes, hits 13147 expected 13088.2, crits 845 expected 895.4, damage mismatches 0: ok
+gate 7 speed: harrow_weir, 5 AI-vs-AI games, 55 turns, slowest 26 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 18323 ms: ok
+free prefix: harrow_weir, 0 of 2, 4, 6 tried, slack median 6 p90 2 (printed, not gated)
+  prefix 2: wins 53/200, drop 0.165 se 0.044, not free
+  prefix 4: wins 39/200, drop 0.235 se 0.046, not free
+  prefix 6: wins 23/200, drop 0.315 se 0.048, not free
+  prefix 2 refunded: wins 61/200, drop 0.125 se 0.043, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 1.0, quiet 1.0, leading dead 0.0, first contact 2.0, first quiet at tax 0.25 1.0
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.83
+  turn 2: dead 79 quiet 0 live 121, wake tax 0.00
+  turn 3: dead 119 quiet 0 live 81, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 200, wake tax 0.17
+  turn 5: dead 1 quiet 0 live 199, wake tax 0.00
+  turn 6: dead 0 quiet 0 live 199, wake tax 0.00
+  turn 7: dead 0 quiet 0 live 193, wake tax 0.00
+  turn 8: dead 4 quiet 0 live 181, wake tax 0.00
+  turn 9: dead 6 quiet 0 live 151, wake tax 0.00
+  turn 10: dead 1 quiet 0 live 124, wake tax 0.00
+  turn 11: dead 4 quiet 0 live 102, wake tax 0.00
+  turn 12: dead 2 quiet 0 live 89, wake tax 0.00
+  turn 13: dead 1 quiet 0 live 81, wake tax 0.00
+  turn 14: dead 0 quiet 0 live 77, wake tax 0.00
+  turn 15: dead 2 quiet 0 live 70, wake tax 0.00
+full: FAILED
+
+=== Captain baselines on this build
+gate 1 beatable: the_tollgate, heuristic wins 148/200 (74 %), winning turn median 8 p90 10 limit 10, losses 52 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 52, at the stall p50 0.8674 over 47, two-roll average: ok
+gate 1 beatable: brackwater_cut, heuristic wins 128/200 (64 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 72 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 81, two-roll average: ok
+gate 1 beatable: harrow_weir, heuristic wins 123/200 (61 %), winning turn median 9 p90 14 limit 15, losses 41 timeout 36 captain 0 protected, quiet tail 0.7, refused kill p50 0.9892 over 41, at the stall p50 0.0260 over 39, two-roll average: ok

@@ -1591,3 +1591,17 @@ Notes: Transcript and script are in `docs/transcripts/2026-10-01-strongbox_chest
 My misplays were mine and the forecasts said so. `end` printed Teodor's lethal line on turns 2 and 4, and on turn 11 it printed Ottilie's at 79 percent, which missed. The chests never felt like a side quest. Two of the four changed a turn, which is the most a sample can ask for.
 
 — Code
+
+## 2026-10-01 — The Tollgate with permadeath off and a wounded Wren (issue 664), the warm play — Code
+
+Seed: 701 (campaign `--from the_tollgate --permadeath off`, Captain)   Result: win, turn 7 of 10, nobody fell in the end, one Recall spent (seize)
+Systems entry, not a Fun Gate entry; warm, since I have played the Tollgate four times. The opening replays the journaled Lazar House play, where Wren fell; with permadeath off she came back Wounded (2), Str -2 and Spd -2, and marched into the Tollgate with it. Question: does the wound bite, and what does the toggle do to the way I play?
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: turn 5 after the Recall. The captain stepped into the door at 6,3 and held his attack, so Pell could come in behind him at 6,4 with Cinder, the only tile that reaches the warden from range. Pell hit, the captain missed his 87 percent, and I ended the turn on a 16 percent lethal line for the captain. Every enemy strike missed, and the warden died on Pell's counter.
+Notes: Transcript and script are in `docs/transcripts/2026-10-01-the_tollgate-664-wounded.*`.
+- **The wound bit, once and plainly.** On turn 3 the forecast gave Wren one 7-damage strike at 60 percent on the Toll Brigand, where the captain doubled him for 10. Spd 6 lost her the double. After that she was the one who could stand in the door, because she had the HP and nothing else to do.
+- **The toggle changed how I read a lethal line, and the map punished it.** On turn 4 `end` printed "Lethal if all land: Pell" and I ended anyway, because a fall now costs two maps of -2 and not a recruit. The rider's 47 percent landed. The roster never felt it, but the map did: Pell was the only unit that could strike the warden from 6,4, and without him the warden held the one door for three turns. On turn 6 I sent Teodor in as a door-opener for the same reason, and he died to the second of three strikes. By turn 8 the clock was gone, and the Recall to turn 4 bought the map back. With permadeath off, a fall costs the map you are on, not the roster. That is a different game, and I think a fair one for Recruit players, but Captain should stay on.
+- **Wounded (1) after a main map, never on the side map.** The Lazar House left Wren's count at 2; the Tollgate's win took it to 1. The card says "for the next main map".
+- **What I did not see:** a fall that comes back across a won map in this play (the Recall undid both), the Tactician and Recruit numbers in hand (they are the Sim's, `docs/measurements/2026-10-01-difficulty-ladder-664.txt`), and the profile's unlock outside the tests.
+
+— Code

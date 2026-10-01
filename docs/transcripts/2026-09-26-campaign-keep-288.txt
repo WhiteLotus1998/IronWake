@@ -1,4 +1,4 @@
-Campaign, seed 288, difficulty normal, scheme TwoRollAverage, 2 maps
+Campaign, seed 288, difficulty Captain, permadeath on, scheme TwoRollAverage, 2 maps
 -- Before map 1 of 2: Raid on Ironwake; the purse holds 500 --
 Roster:
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3

@@ -278,7 +278,8 @@ public sealed record MapDefinition(
 
     /// <summary>
     /// This map under a difficulty (issue 76): its enemy level floor moved by the offset and
-    /// held to the level range, its Recall charges replaced when the difficulty names a count,
+    /// held to the level range, its Recall charges replaced when the difficulty names a count and
+    /// otherwise moved by its offset (issue 664) and held to 0..99,
     /// and the difficulty recorded so <see cref="EnemyUnit"/> applies its stat percents to every
     /// placement and spawn. A difficulty is chosen once, so a map already under one refuses a second.
     /// </summary>
@@ -293,7 +294,7 @@ public sealed record MapDefinition(
         {
             DifficultyId = difficulty.Id,
             EnemyLevel = Math.Clamp(EnemyLevel + difficulty.EnemyLevelOffset, Unit.MinLevel, Unit.MaxLevel),
-            RecallCharges = difficulty.RecallCharges ?? RecallCharges,
+            RecallCharges = difficulty.RecallCharges ?? Math.Clamp(RecallCharges + difficulty.RecallOffset, 0, 99),
         };
     }
 

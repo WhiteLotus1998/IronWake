@@ -15,6 +15,18 @@
     "overwriteAt": 16
   },
   "difficulties": {
-    "normal": {}
+    "normal": { "name": "Captain" },
+    "recruit": {
+      "name": "Recruit",
+      "statPercent": { "hp": 92, "str": 92, "mag": 92, "dex": 92, "spd": 92, "lck": 92, "def": 92, "res": 92, "cha": 92 },
+      "recallOffset": 1
+    },
+    "tactician": {
+      "name": "Tactician",
+      "statPercent": { "hp": 105, "str": 105, "mag": 105, "dex": 105, "spd": 105, "lck": 105, "def": 105, "res": 105, "cha": 105 },
+      "enemyLevelOffset": 1,
+      "recallOffset": -1,
+      "unlockedBy": "normal"
+    }
   }
 }

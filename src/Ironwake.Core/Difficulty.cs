@@ -3,7 +3,7 @@ namespace Ironwake.Core;
 /// <summary>
 /// A difficulty as data (DESIGN.md section 9, issue 76): a percent per stat applied to every
 /// enemy after the map's level floor, an offset added to the map's <c>enemy_level</c>, and
-/// an optional Recall charge count that replaces the map header's. Normal is the identity
+/// an optional Recall charge count that replaces the map header's or an offset added to it. Normal is the identity
 /// entry of <c>rules.json</c> (every percent 100, offset 0, charges from the map), declared
 /// there rather than special-cased here, so every difficulty takes the same path through
 /// <see cref="MapDefinition.Under"/> and <see cref="MapDefinition.EnemyUnit"/>. Nothing
@@ -21,8 +21,33 @@ public sealed record Difficulty(string Id, Stats StatPercent, int EnemyLevelOffs
     /// <summary>Every stat at 100 percent.</summary>
     public static Stats FullPercent { get; } = new(100, 100, 100, 100, 100, 100, 100, 100, 100);
 
-    /// <summary>True when applying this difficulty changes nothing: every percent 100, no offset, the map's own charges.</summary>
-    public bool IsIdentity => StatPercent == FullPercent && EnemyLevelOffset == 0 && RecallCharges is null;
+    /// <summary>
+    /// Recall charges added to each map's own (issue 664), negative for fewer, the sum held to
+    /// 0..99; ignored when <see cref="RecallCharges"/> names a count.
+    /// </summary>
+    public int RecallOffset { get; init; }
+
+    /// <summary>The name the screens print (issue 664: Normal is printed Captain), or null to print the id.</summary>
+    public string? Name { get; init; }
+
+    /// <summary>
+    /// The difficulty a campaign must be won on before this one may be chosen (issue 664: Tactician
+    /// after a Captain campaign), or null when it is open from the start. The wins are the
+    /// player's profile, kept outside any record.
+    /// </summary>
+    public string? UnlockedBy { get; init; }
+
+    /// <summary>What the screens call this difficulty: its <see cref="Name"/>, else its id.</summary>
+    public string DisplayName => Name ?? Id;
+
+    /// <summary>
+    /// True when applying this difficulty changes nothing: every percent 100, no offset, the map's
+    /// own charges. The name and the unlock change no rule.
+    /// </summary>
+    public bool IsIdentity => StatPercent == FullPercent && EnemyLevelOffset == 0 && RecallCharges is null && RecallOffset == 0;
+
+    /// <summary>Whether this difficulty may be chosen by a player whose won campaigns are <paramref name="won"/> (difficulty ids).</summary>
+    public bool IsUnlocked(IEnumerable<string> won) => UnlockedBy is not { } needed || won.Contains(needed);
 
     /// <summary>
     /// An enemy's stats under this difficulty: each scaled to its percent and rounded to the

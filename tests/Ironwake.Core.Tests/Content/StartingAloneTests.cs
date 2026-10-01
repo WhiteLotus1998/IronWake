@@ -92,7 +92,7 @@ public class StartingAloneTests
         {
             var output = Run(out _, "campaign", "--seed", "631", "--script", path, "--content", Fixture.RealContentDirectory(), "--log", log);
 
-            Assert.StartsWith("Campaign, seed 631, difficulty normal, scheme TwoRollAverage, 9 maps\n-- Starting Alone --\nThe appointment came with a seal, a coat, and a list.", output);
+            Assert.StartsWith("Campaign, seed 631, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 maps\n-- Starting Alone --\nThe appointment came with a seal, a coat, and a list.", output);
             Assert.Contains("you have three.)\n\n-- Before map 1 of 9: Starting Alone; the purse holds 500 --\n", output);
             Assert.Contains("Starting Alone won: rout; reward 300, the purse holds 800; nobody fell\n-- After Starting Alone --\nThree dead on a road nobody will remember.", output);
             Assert.Contains("is, by way of the mill.\n\n-- The Mill --\nThe mill road follows a stream", output);

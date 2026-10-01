@@ -18,6 +18,13 @@ public sealed class SaveStore
     public const string SuspendFile = "suspend.txt";
     public const int MaxNameLength = 32;
 
+    /// <summary>
+    /// The player's profile (issue 664): one difficulty id a line, each a difficulty a campaign has
+    /// been won on, which is what unlocks a difficulty's <see cref="Difficulty.UnlockedBy"/>. It
+    /// lives beside the saves and outside every record, so loading an old save never locks it again.
+    /// </summary>
+    public const string ProfileFile = "profile.txt";
+
     public SaveStore(string directory)
     {
         Directory = directory;
@@ -147,5 +154,27 @@ public sealed class SaveStore
         {
             return (null, Array.Empty<string>(), $"the suspended battle cannot be read: {e.Message}");
         }
+    }
+
+    private string ProfilePath => Path.Combine(Directory, ProfileFile);
+
+    /// <summary>The difficulty ids a campaign has been won on, from the profile; none when there is no profile yet.</summary>
+    public IReadOnlyList<string> Won() =>
+        File.Exists(ProfilePath)
+            ? File.ReadAllLines(ProfilePath).Select(l => l.Trim()).Where(l => l.Length > 0).Distinct().ToList()
+            : Array.Empty<string>();
+
+    /// <summary>Records a campaign won on <paramref name="difficulty"/> in the profile; true when it was not there before.</summary>
+    public bool RecordWin(string difficulty)
+    {
+        var won = Won();
+        if (won.Contains(difficulty))
+        {
+            return false;
+        }
+
+        System.IO.Directory.CreateDirectory(Directory);
+        File.WriteAllLines(ProfilePath, won.Append(difficulty));
+        return true;
     }
 }
