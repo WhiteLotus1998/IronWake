@@ -69,6 +69,7 @@ public class ProtocolJsonTests
         { new CoverTaken("teodor", "pell", A), """{"type":"coverTaken","unit":"teodor","ally":"pell","allyLandsOn":{"x":1,"y":2}}""" },
         { new CoverFired("teodor", "pell", "rider-1", A, new Coord(1, 3), true, false), """{"type":"coverFired","unit":"teodor","ally":"pell","attacker":"rider-1","at":{"x":1,"y":2},"allyTo":{"x":1,"y":3},"wouldHaveKilled":true,"counters":false}""" },
         { new Recalled(12, 2), """{"type":"recalled","toIndex":12,"chargesLeft":2}""" },
+        { new MoveUndone("wren", B, A), """{"type":"moveUndone","unit":"wren","from":{"x":3,"y":4},"to":{"x":1,"y":2}}""" },
         { new ItemUsed("wren", "field_dressing", "wren", 0), """{"type":"itemUsed","unit":"wren","item":"field_dressing","target":"wren","usesLeft":0}""" },
         { new WeaponEquipped("wren", "steel_sword"), """{"type":"weaponEquipped","unit":"wren","item":"steel_sword"}""" },
         { new ArtDeclared("wren", "sunder", "iron_sword", 2), """{"type":"artDeclared","unit":"wren","art":"sunder","item":"iron_sword","cost":2}""" },
@@ -145,6 +146,7 @@ public class ProtocolJsonTests
         { new Canto("ansgar", B), """{"type":"canto","unit":"ansgar","to":{"x":3,"y":4}}""" },
         { new EndPhase(), """{"type":"end"}""" },
         { new Recall(4), """{"type":"recall","toIndex":4}""" },
+        { new Undo("wren"), """{"type":"undo","unit":"wren"}""" },
     };
 
     [Theory]

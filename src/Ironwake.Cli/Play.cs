@@ -39,6 +39,7 @@ public sealed class PlaySession
           attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a combat art (the forecast prints first)
           item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
           wait <unit>              End the unit's action
+          undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
           canto <unit> <x,y|stay>  After acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
@@ -524,6 +525,16 @@ public sealed class PlaySession
                 break;
             case "move":
                 Error("usage: move <unit> <x,y>");
+                break;
+            case "undo" when words.Length == 2:
+                if (Apply(new Undo(words[1])))
+                {
+                    _exposure.RemoveAll(entry => entry.HistoryAt >= _state.History.Count);
+                }
+
+                break;
+            case "undo":
+                Error("usage: undo <unit>");
                 break;
             case "attack" when words.Length >= 3 && IsSlotText(words[3..]):
                 if (TrySlot(words[1], SlotText(words[3..]), out var attackSlot) && PrintForecast(words[1], words[2], attackSlot, art))
@@ -1044,14 +1055,25 @@ public sealed class PlaySession
 
     /// <summary>
     /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
-    /// state moves: a Recall truncates it to the state it returns to, anything else names
-    /// the command applied from the state it leaves.
+    /// state moves: a Recall truncates it to the state it returns to, an Undo drops the move
+    /// it takes back (issue 676), anything else names the command applied from the state it leaves.
     /// </summary>
     private void Record(Command command)
     {
         if (command is Recall recall)
         {
             _made.RemoveRange(recall.ToIndex, _made.Count - recall.ToIndex);
+            return;
+        }
+
+        if (command is Undo)
+        {
+            var kept = _state.History.Count - 1;
+            if (_made.Count > kept)
+            {
+                _made.RemoveRange(kept, _made.Count - kept);
+            }
+
             return;
         }
 
@@ -2226,6 +2248,7 @@ public sealed class PlaySession
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
+        Undo u => $"undo {u.UnitId}",
         UseItem i => $"item {i.UnitId} {i.Slot + 1}" + (i.TargetId is null ? "" : " " + i.TargetId),
         _ => command.ToString() ?? "?",
     };
@@ -2243,6 +2266,8 @@ public sealed class PlaySession
     {
         switch (e)
         {
+            case MoveUndone u:
+                return $"{names[u.UnitId]} takes back the move to {u.From} and stands at {u.To} again, unmoved";
             case UnitMoved m:
                 return $"{names[m.UnitId]} moves {m.From} -> {m.To}" + (m.Path.Count > 1 ? " via " + string.Join(" ", m.Path.Take(m.Path.Count - 1)) : "");
             case CombatFought f:

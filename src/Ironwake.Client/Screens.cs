@@ -78,15 +78,20 @@ public static class Screens
 
     /// <summary>
     /// What Escape does in a battle (issue 629): it backs out of the innermost thing first, the
-    /// attack menu, then a selection or the Recall browser, and only with nothing left to back
-    /// out of opens the pause menu. In the campaign, which has no title to return to, it never
-    /// pauses.
+    /// attack menu, then a selected unit's move while it has not acted (issue 676), then a
+    /// selection or the Recall browser, and only with nothing left to back out of opens the
+    /// pause menu. In the campaign, which has no title to return to, it never pauses.
     /// </summary>
-    public static EscapeAction Escape(bool attackMenuOpen, bool selected, bool recallOpen, bool campaign)
+    public static EscapeAction Escape(bool attackMenuOpen, bool selected, bool recallOpen, bool campaign, bool canTakeBack = false)
     {
         if (attackMenuOpen)
         {
             return EscapeAction.CloseAttackMenu;
+        }
+
+        if (canTakeBack && !recallOpen)
+        {
+            return EscapeAction.TakeBack;
         }
 
         return selected || recallOpen || campaign ? EscapeAction.Clear : EscapeAction.Pause;
@@ -114,6 +119,9 @@ public enum EscapeAction
 {
     /// <summary>Closes the attack menu.</summary>
     CloseAttackMenu,
+
+    /// <summary>Takes back the selected unit's move (issue 676); a refusal leaves the move and says why.</summary>
+    TakeBack,
 
     /// <summary>Clears the selection and closes the Recall browser.</summary>
     Clear,

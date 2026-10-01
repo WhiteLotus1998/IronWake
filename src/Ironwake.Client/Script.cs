@@ -46,6 +46,7 @@ public static class Script
             ("shove", 3) => new Shove(words[1], words[2]),
             ("end", 1) => new EndPhase(),
             ("recall", 2) when int.TryParse(words[1], out var index) => new Recall(index),
+            ("undo", 2) => new Undo(words[1]),
             _ => null,
         };
     }

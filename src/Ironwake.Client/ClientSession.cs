@@ -606,6 +606,19 @@ public sealed class ClientSession
     public void CloseMenu() => Menu = null;
 
     /// <summary>
+    /// Whether the selected unit has moved and not acted, so Esc or a right-click on the board
+    /// asks to take its move back (issue 676) rather than clearing the selection.
+    /// </summary>
+    public bool CanTakeBack => !EnemyPhasePlaying && Selected is { } id && State.Find(id) is { Moved: true, Acted: false, Side: Side.Player };
+
+    /// <summary>
+    /// Takes back the selected unit's move (issue 676), as Esc or a right-click does: it stands
+    /// on its start tile again, unmoved and still selected. False, with the core's refusal in
+    /// <see cref="Status"/>, when the move is final.
+    /// </summary>
+    public bool TakeBack() => Selected is { } id && Submit(new Undo(id));
+
+    /// <summary>
     /// What a click on a tile does with a unit selected: the unit itself waits, a hostile unit
     /// is attacked, through the attack menu when it has more than one legal row (issue 611) and at once otherwise, a tile it can end on is moved to (a Canto when one
     /// is owed); anything else selects what is there. Returns the command applied, or null.
@@ -882,9 +895,9 @@ public sealed class ClientSession
 
     /// <summary>
     /// Keeps <see cref="_made"/> in step with the history for an accepted command, before the
-    /// state moves, by the console's rule: a Recall truncates it, anything else names the
-    /// command applied from the state it leaves. It also notes the log's length at the state
-    /// left, and for a Recall the lines it undoes.
+    /// state moves, by the console's rule: a Recall truncates it, an Undo drops the move it takes
+    /// back (issue 676), anything else names the command applied from the state it leaves. It
+    /// also notes the log's length at the state left, and for a Recall or an Undo the lines it undoes.
     /// </summary>
     private void Record(Command command)
     {
@@ -896,6 +909,19 @@ public sealed class ClientSession
             }
 
             _made.RemoveRange(recall.ToIndex, _made.Count - recall.ToIndex);
+        }
+        else if (command is Undo)
+        {
+            var kept = State.History.Count - 1;
+            if (_logAt.TryGetValue(kept, out var from) && from < _log.Count)
+            {
+                _undone.Add((from, _log.Count));
+            }
+
+            if (_made.Count > kept)
+            {
+                _made.RemoveRange(kept, _made.Count - kept);
+            }
         }
         else
         {

@@ -4,11 +4,12 @@ namespace Ironwake.Core;
 /// The only way a <see cref="BattleState"/> changes (DESIGN.md section 2): apply one
 /// command, get the next state and the events that explain it. An illegal command is
 /// answered with a <see cref="Rejection"/> naming the rule, never with an exception.
-/// Every accepted command except <see cref="Recall"/> pushes the state it left onto the
-/// history; a Recall restores a prior state, truncates the history to before it, and
-/// spends a charge (section 7). Rolls come from a <see cref="KeyedRng"/> over the state's
-/// seed under the section 5 keys, so the same attack on the same turn draws the same
-/// numbers whatever was resolved before it or rewound since.
+/// Every accepted command except <see cref="Recall"/> and <see cref="Undo"/> pushes the state
+/// it left onto the history; a Recall restores a prior state, truncates the history to before
+/// it, and spends a charge (section 7); an Undo restores the state a move left, history and
+/// all (issue 676). Rolls come from a <see cref="KeyedRng"/> over the state's seed under the
+/// section 5 keys, so the same attack on the same turn draws the same numbers whatever was
+/// resolved before it or rewound since.
 /// </summary>
 public static class Resolver
 {
@@ -106,6 +107,8 @@ public static class Resolver
                 break;
             case Recall recall:
                 return ApplyRecall(state, recall);
+            case Undo undo:
+                return TakeBack.Apply(state, undo);
             default:
                 next = state;
                 rejection = new Rejection(RejectionReason.UnknownCommand, $"unknown command {command.GetType().Name}");
@@ -1522,7 +1525,7 @@ public static class Resolver
     }
 
     /// <summary>
-    /// Every command other than Recall that <see cref="Apply"/> would accept in a state,
+    /// Every command other than Recall and Undo that <see cref="Apply"/> would accept in a state,
     /// in a fixed order: for each unit of the acting side in id order, if it has acted, its
     /// Cantos (row-major, own tile included, issue 71) and its Fall back moves (issue 85, those
     /// that wake no one), else, for the captain while an order is open, the three orders, then its Moves

@@ -356,7 +356,11 @@ public partial class Main : Node2D
                 hit();
                 break;
             case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right }:
-                _client.ClearSelection();
+                if (!_client.CanTakeBack || !_client.TakeBack())
+                {
+                    _client.ClearSelection();
+                }
+
                 break;
             case InputEventKey { Pressed: true, Echo: false } key:
                 switch (key.Keycode)
@@ -392,10 +396,17 @@ public partial class Main : Node2D
                         ToggleMute();
                         break;
                     case Key.Escape:
-                        switch (Screens.Escape(_client.Menu is not null, _client.Selected is not null, _client.RecallOpen, _campaign is not null))
+                        switch (Screens.Escape(_client.Menu is not null, _client.Selected is not null, _client.RecallOpen, _campaign is not null, _client.CanTakeBack))
                         {
                             case EscapeAction.CloseAttackMenu:
                                 _client.CloseMenu();
+                                break;
+                            case EscapeAction.TakeBack:
+                                if (!_client.TakeBack())
+                                {
+                                    _client.ClearSelection();
+                                }
+
                                 break;
                             case EscapeAction.Clear:
                                 _client.ClearSelection();

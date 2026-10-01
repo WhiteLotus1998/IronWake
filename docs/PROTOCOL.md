@@ -41,6 +41,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent ally pushed one tile away, as the unit's action; an enemy target is refused; DESIGN 13.12, experiment) | `Shove` |
 | `end` | none; the response also carries `lethal` (read before the phase ends: each player unit the coming enemy phase kills if every strike `threat` prices on it lands, in deployment order, as `unit`, `total`, `hp` and `strikers`, each `enemy` and `damage`, the strikers the total sums; the console's `Lethal if all land:` lines, issue 558; empty when none) | `EndPhase` |
 | `recall` | `toIndex` (a history index; the `state` query's `history` lists them) | `Recall` |
+| `undo` | `unit` (a unit that has moved and not acted goes back to its start tile, unmoved, when its move was the last command and changed nothing but its tile: no wake, no fired event, no enemy brought into sight at dusk; no charge, and the history is the one the move found; refused as `cannotUndo` naming why; issue 676) | `Undo` |
 | `retreat` | `unit`, `to` | `Retreat` (the AI's; a player's is refused by the core) |
 
 ## Queries
@@ -120,6 +121,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `coverTaken` | `unit`, `ally`, `allyLandsOn` (the tile the ally lands on if the swap fires), `passesUp` and `passesUpHit` (only when the unit had a legal strike) (DESIGN 13.19, experiment) |
 | `coverFired` | `unit` (the coverer), `ally`, `attacker`, `at` (the tile the coverer now stands on, the ally's), `allyTo` (the ally's new tile), `wouldHaveKilled` (the strike, every hit landing and no crit, would have killed the ally), `counters` (the coverer can answer from there) (DESIGN 13.19, experiment) |
 | `recalled` | `toIndex`, `chargesLeft` |
+| `moveUndone` | `unit`, `from` (where the move had ended), `to` (the start tile it is back on; issue 676) |
 | `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
 | `weaponEquipped` | `unit`, `item` |
 | `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with), `cost` (extra uses, spent hit or miss; issue 68); precedes the `combatFought` |

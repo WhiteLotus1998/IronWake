@@ -46,6 +46,11 @@ public static class ProtocolJson
         w.WriteString("type", CamelCase(e.GetType().Name));
         switch (e)
         {
+            case MoveUndone u:
+                w.WriteString("unit", u.UnitId);
+                WriteCoord(w, "from", u.From);
+                WriteCoord(w, "to", u.To);
+                break;
             case UnitMoved m:
                 w.WriteString("unit", m.UnitId);
                 WriteCoord(w, "from", m.From);
@@ -500,6 +505,10 @@ public static class ProtocolJson
                 w.WriteString("type", "recall");
                 w.WriteNumber("toIndex", r.ToIndex);
                 break;
+            case Undo u:
+                w.WriteString("type", "undo");
+                w.WriteString("unit", u.UnitId);
+                break;
             default:
                 throw new ArgumentException($"the protocol has no shape for command {command.GetType().Name}", nameof(command));
         }
@@ -535,7 +544,8 @@ public static class ProtocolJson
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, order, fallBack, end, or recall"),
+            "undo" => new Undo(RequiredString(e, "unit")),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, canto, exit, recover, open, shove, order, fallBack, end, recall, or undo"),
         };
     }
 

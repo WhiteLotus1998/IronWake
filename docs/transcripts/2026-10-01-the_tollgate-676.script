@@ -1,0 +1,15 @@
+undo wren
+move wren 4,8
+undo wren
+move wren 4,8
+move teodor 9,9
+undo wren
+undo teodor
+move teodor 9,9
+wait teodor
+undo teodor
+move captain 4,9
+undo captain
+move captain 4,10
+recall list
+end

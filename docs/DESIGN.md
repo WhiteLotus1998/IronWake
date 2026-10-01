@@ -129,6 +129,8 @@ Player phase → Enemy phase → (Ally phase if any) → turn counter increments
 
 **Recall restores the rolls.** The same attack after a Recall gets the same rolls; a Recall lets you choose differently, never reroll. Rolls are keyed (issue 31, section 5), so this holds at the roll level: the same strike on the same turn draws the same numbers whatever was resolved before it, and a resolver test shows it. It becomes a fact of the game once `BattleState` (issue 6) carries only the seed and no stream position; that issue's acceptance holds the three Recall tests.
 
+**Taking back a move (issue 676).** A misclicked move is answered without Recall: `undo <unit>` (the client's Esc or right-click on a selected unit) returns a unit that has moved and not acted to the tile it began the phase on, unmoved, with no charge and no history entry, since the state the move left comes back whole. It is refused, naming why, unless the move was the last command and changed nothing but the unit's tile: a move followed by any other command, an action (so Canto's second move too), a wake, a fired map event, or on a dusk map an enemy unseen before the move and seen after it (round 207) makes the move final, as does any other change. A free take-back must never probe a wake ring, a trigger or the dark; that knowledge is what Recall is priced for. A move rolls nothing, so an undo leaks nothing about the dice. The Sim and the planner never take one.
+
 ## 8. Enemy AI
 
 Every enemy belongs to a *group* with one behavior:

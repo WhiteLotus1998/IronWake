@@ -30,6 +30,28 @@ public class ClientSessionTests
     }
 
     [Fact]
+    public void TakeBackReturnsTheSelectedUnitAndDropsTheMoveFromTheRecallRows()
+    {
+        var client = Brackwater();
+        var start = client.State;
+        var rows = client.RecallRows.Select(r => r.Text).ToList();
+        var rook = start.Find("rook")!;
+        var to = Queries.Reachable(start, client.Content, rook).Destinations
+            .Where(at => at != rook.At)
+            .First(at => TakeBack.Refusal(Resolver.Apply(start, client.Content, new Move("rook", at)).Next, "rook") is null);
+        client.Select(rook.At);
+        client.Click(to);
+        Assert.True(client.CanTakeBack);
+
+        Assert.True(client.TakeBack());
+
+        Assert.Equal(start, client.State);
+        Assert.Equal(rows, client.RecallRows.Select(r => r.Text).ToList());
+        Assert.Equal("rook", client.Selected);
+        Assert.False(client.CanTakeBack);
+    }
+
+    [Fact]
     public void SelectingAnEnemyOrAnEmptyTileSelectsNothing()
     {
         var client = Brackwater();

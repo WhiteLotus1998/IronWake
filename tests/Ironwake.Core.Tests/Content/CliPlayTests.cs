@@ -60,6 +60,18 @@ public class CliPlayTests
     }
 
     [Fact]
+    public void UndoTakesBackAMoveAndTheMoveCanBeMadeAgain()
+    {
+        var output = Play(out _, "undo captain\nmove captain 2,6\nundo captain\nrecall list\nmove captain 2,6\nwait captain\nundo captain\nhelp\n");
+
+        Assert.Contains("> undo captain\nERROR: Undo refused: Alder Fenn has not moved this phase\n", output);
+        Assert.Contains("> undo captain\nAlder Fenn takes back the move to 2,6 and stands at ", output);
+        Assert.Contains("> undo captain\nERROR: Undo refused: Alder Fenn has acted this phase; its move is final\n", output);
+        Assert.DoesNotContain("move captain 2,6", output.Split("> recall list")[1].Split("> move captain")[0]);
+        Assert.Contains("  undo <unit>              Take back a unit's move before it acts", output);
+    }
+
+    [Fact]
     public void ItemUsesADressingAfterACombatAndHelpListsIt()
     {
         var output = Play(out _, "item captain 2\nmove captain 2,6\nend\nend\nitem captain 2\nshow captain\nhelp\n");
