@@ -180,6 +180,24 @@ public sealed record MapDefinition(
     public const int DefaultEnemyLevel = 1;
     public const int MaxSide = 64;
 
+    /// <summary>The units a map fields when its header names no <c>deploy:</c> (issue 689).</summary>
+    public const int DefaultDeploy = 6;
+
+    /// <summary>The <see cref="Deploy"/> of a <c>deploy: all</c> map (issue 689): the whole living company fights.</summary>
+    public const int DeployAll = 0;
+
+    /// <summary>
+    /// The <c>deploy:</c> header (issue 689): how many units the map fields at most, its player
+    /// placements held to it by the loader; <see cref="DefaultDeploy"/> when absent. On
+    /// <see cref="DeployAll"/> (<c>deploy: all</c>, the keep's finale) every living member is placed,
+    /// the map carries at least <see cref="CampaignRecord.CompanyCap"/> player placements, the
+    /// bare ones the company cannot fill stay empty, and nobody may be benched.
+    /// </summary>
+    public int Deploy { get; init; } = DefaultDeploy;
+
+    /// <summary>Whether this map fields the whole living company (<c>deploy: all</c>, issue 689).</summary>
+    public bool DeploysAll => Deploy == DeployAll;
+
     /// <summary>The terrain id of the seize target (glyph <c>T</c> in DESIGN.md section 4).</summary>
     public const string ThroneTerrainId = "throne";
 

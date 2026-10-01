@@ -33,22 +33,22 @@ public class KeepRoomTests
     public void TheKeepSeatsTheCastPlusOneSpareAndSellsTheBunkRoom()
     {
         Assert.Equal(Content.Cast.Count + 1, Menu.Beds);
-        Assert.Equal(new KeepRoom("bunk", "Bunk room", 400, 1, 2), Menu.Rooms[0]);
+        Assert.Equal(new KeepRoom("bunk", "Bunk room", 400, 2, 2), Menu.Rooms[0]);
         Assert.Equal(Content.Cast.Count - 1, CampaignRecord.Start(Content, 1).BedsTaken);
     }
 
     [Fact]
-    public void ABunkRoomAddsABed()
+    public void ABunkRoomAddsTwoBeds()
     {
         var start = CampaignRecord.Start(Content, 1) with { Purse = 500 };
 
         var built = start.BuildRoom("bunk", Content);
 
         Assert.True(built.Accepted);
-        Assert.Equal(Menu.Beds + 1, built.Record.Beds(Content));
+        Assert.Equal(Menu.Beds + 2, built.Record.Beds(Content));
         Assert.Equal(100, built.Record.Purse);
         Assert.Equal(new[] { "bunk" }, built.Record.Rooms);
-        Assert.Equal($"Bunk room built for 400, the purse holds 100; beds: 10/{Menu.Beds + 1}", built.Text);
+        Assert.Equal($"Bunk room built for 400, the purse holds 100; beds: 10/{Menu.Beds + 2}", built.Text);
     }
 
     [Fact]
@@ -145,8 +145,8 @@ public class KeepRoomTests
         Assert.Equal(
             new[]
             {
-                $"Rooms: beds: 10/{Menu.Beds + 1}; a fallen member keeps their bed",
-                "  bunk: Bunk room, 400, +1 bed, built 1 of 2",
+                $"Rooms: beds: 10/{Menu.Beds + 2}; a fallen member keeps their bed",
+                "  bunk: Bunk room, 400, +2 beds, built 1 of 2",
                 "  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won",
                 "  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare",
             },

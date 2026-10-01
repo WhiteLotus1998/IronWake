@@ -12,7 +12,7 @@ Campaign, seed 139, difficulty Captain, permadeath on, scheme TwoRollAverage, 8 
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Old Mill Road: Alder Fenn, Wren
+Deploys to Old Mill Road: Alder Fenn, Wren (deploy 2 of 11)
 == Keep ==
 Purse: 500
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought
@@ -682,7 +682,7 @@ Old Mill Road won: rout; reward 600, the purse holds 1100; nobody fell
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Ottilie
+Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Ottilie (deploy 4 of 11)
 == Keep ==
 Purse: 1100
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought
@@ -693,7 +693,7 @@ Shop: iron_sword 400, iron_lance 400, iron_axe 400, iron_bow 400, iron_gauntlets
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 2, Saltmarsh Ford. Defeat every enemy by the end of turn 18. Captain Fenn must survive.
 > roster
-Roster:
+Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 72; 1: Iron Sword 35/40 (repair 50), 2: Field Dressing 3/3
   Wren: Cadet L2, EXP 52; 1: Iron Sword 32/40 (repair 80), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
@@ -713,7 +713,7 @@ Wren's Iron Sword repaired from 32 to 40 uses for 80; the purse holds 970
 ERROR: Cinder is a spell; its uses refresh every map
 > bench ottilie
 Ottilie is benched from Saltmarsh Ford
-Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Pell
+Deploys to Saltmarsh Ford: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 11)
 > buy field_dressing pell
 Pell buys Field Dressing for 150; the purse holds 820
 > certify brannock reaver
@@ -2685,7 +2685,7 @@ Saltmarsh Ford won: rout; reward 800, the purse holds 1120; nobody fell
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Reaver L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 11)
 == Keep ==
 Purse: 1120
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought
@@ -2696,7 +2696,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 3, The Tollgate. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > roster
-Roster:
+Roster: company 11/12
   Alder Fenn (captain): Cadet L1, EXP 72; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Wren: Cadet L3, EXP 72; 1: Iron Sword 33/40 (repair 70), 2: Field Dressing 2/3
   Teodor: Pikeman L1, EXP 12; 1: Iron Lance 39/40 (repair 10), 2: Field Dressing 1/3

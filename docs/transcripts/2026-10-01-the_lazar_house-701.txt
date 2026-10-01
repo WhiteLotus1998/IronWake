@@ -12,7 +12,7 @@ Campaign, seed 698, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 
   Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 11)
 == Keep ==
 Purse: 500
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
@@ -701,7 +701,7 @@ She has not said whether the day was worth it. She has started asking
 the company whether they want the prayer before she says it.
 
 > roster
-Roster:
+Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
