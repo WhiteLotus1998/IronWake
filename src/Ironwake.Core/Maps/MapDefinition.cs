@@ -122,6 +122,11 @@ namespace Ironwake.Core;
 /// The <c>chests:</c> block (issue 649): each chest's tile and contents, in file order. Empty on a
 /// map without one. Which are open is battle state (<see cref="BattleState.Opened"/>).
 /// </param>
+/// <param name="Messenger">
+/// The <c>messenger:</c> header (DESIGN.md 13.24, experiment): the enemy placed on the route's
+/// first tile runs for its road instead of fighting, and on reaching it leaves the board and fires
+/// the map's <see cref="MessengerTrigger"/> events (<see cref="Core.Messenger"/>). Null for none.
+/// </param>
 /// <param name="WakeLinks">
 /// The <c>wake_links:</c> header (issue 393): pairs of groups where the first group's waking wakes
 /// the second in the same check (<see cref="WakeCheck"/>). Empty by default.
@@ -162,7 +167,8 @@ public sealed record MapDefinition(
     bool OverwatchHold = false,
     bool BreakEnabled = false,
     string? KinsbaneBearer = null,
-    ValueList<Chest> Chests = default)
+    ValueList<Chest> Chests = default,
+    MessengerRoute? Messenger = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

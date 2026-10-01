@@ -1,0 +1,8 @@
+move wren 4,7
+wait wren
+end
+move wren 6,5
+wait wren
+end
+end
+end

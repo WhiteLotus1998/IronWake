@@ -65,6 +65,9 @@ public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEv
 /// <summary>A unit whose boss fell while it stood at or below half HP left the board (DESIGN.md 13.22, experiment).</summary>
 public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
 
+/// <summary>The messenger reached its road and left the board, not a kill (DESIGN.md 13.24, experiment); its events fire next.</summary>
+public sealed record MessengerEscaped(string UnitId, Coord At) : GameEvent;
+
 public sealed record GrudgeSworn(string UnitId, string AgainstId) : GameEvent;
 
 /// <summary>

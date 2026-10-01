@@ -1,0 +1,37 @@
+name: The Signal Road
+size: 16x12
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 3
+announce: on
+messenger: 8,2 15,1
+
+....n.......MM..
+..........#.MM.=
+...^............
+...^....F...MM..
+............MM..
+..n.............
+.......^^.......
+..^....^^....n..
+................
+...^.......~~...
+................
+................
+
+units:
+P captain 3,11
+P recruit:wren 4,11
+P recruit:teodor 2,11
+P recruit:pell 3,10
+E rider 8,2 group:camp behavior:guard
+E soldier 7,2 group:camp behavior:guard
+E archer 9,1 group:camp behavior:guard
+E brigand 7,5 group:van behavior:aggressive
+E soldier 10,7 group:van behavior:aggressive
+
+events:
+relief1 messenger spawn brigand 0,8 group:relief behavior:aggressive
+relief2 messenger spawn rider 15,11 group:relief behavior:aggressive
+relief3 messenger spawn archer 15,8 group:relief behavior:aggressive

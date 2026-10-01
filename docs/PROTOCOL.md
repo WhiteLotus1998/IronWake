@@ -93,6 +93,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `shoved` | `unit`, `target`, `from`, `to` (the target's tiles; DESIGN 13.12, experiment) |
 | `unitRetreated` | `unit`, `from`, `to` |
 | `unitBroke` | `unit`, `at`, `hp` (a unit whose boss fell while it stood at or below half HP left the board on a `break: on` map; not a death; DESIGN 13.22, experiment) |
+| `messengerEscaped` | `unit`, `at` (the map's messenger reached its road at `at` and left the board, not a death; its `messenger` events fire next; DESIGN 13.24, experiment) |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
 | `rivalryEnded` | `a`, `b` |
 | `phaseEnded` | `side`, `turn` |

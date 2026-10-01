@@ -383,6 +383,7 @@ public sealed class PlaySession
         {
             TurnTrigger turn => WhenWords(turn),
             EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
+            MessengerTrigger => "if the messenger reaches the road",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch
@@ -2191,6 +2192,8 @@ public sealed class PlaySession
                 return $"{names[r.UnitId]} falls back to {r.To} and will not fight this phase";
             case UnitBroke b:
                 return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
+            case MessengerEscaped m:
+                return $"{names[m.UnitId]} reaches the road at {m.At} and is gone: the word is out";
             case GrudgeSworn g:
                 return $"{names[g.UnitId]} swears a grudge against {names[g.AgainstId]}";
             case UnitHealed h:
