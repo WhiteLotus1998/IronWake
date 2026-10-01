@@ -53,7 +53,7 @@ public class AttackMenuTests
     }
 
     [Theory]
-    [InlineData("captain", "feint")]
+    [InlineData("captain", "feint,full_measure")]
     [InlineData("wren", "heavy_cut")]
     [InlineData("teodor", "long_thrust")]
     [InlineData("ottilie", "aimed_shot")]
@@ -61,7 +61,7 @@ public class AttackMenuTests
     [InlineData("keziah", "cleave")]
     public void EachArtIsKnownAtTheStartByOneOfTheCast(string unit, string art)
     {
-        Assert.Equal(new[] { art }, Shipped.ArtsOf(Shipped.Cast.Single(u => u.Id == unit)).Select(a => a.Ability.Id));
+        Assert.Equal(art.Split(','), Shipped.ArtsOf(Shipped.Cast.Single(u => u.Id == unit)).Select(a => a.Ability.Id));
     }
 
     [Fact]
@@ -131,7 +131,7 @@ public class AttackMenuTests
         var content = Shipped with { Abilities = Shipped.Abilities.SetItem("feint", feint with { Effect = (CombatArtEffect)feint.Effect with { Rank = WeaponRank.D } }) };
         var state = Placed("captain", new Coord(6, 6), Tollgate(content));
 
-        var row = Queries.AttackOptions(state, content, state.Find("captain")!, EnemyAt(state, Brigand)).Single(r => r.Art is not null);
+        var row = Queries.AttackOptions(state, content, state.Find("captain")!, EnemyAt(state, Brigand)).Single(r => r.Art?.Id == "feint");
 
         Assert.Contains("rank E in sword, and Feint needs D", row.Refusal!.Message);
     }
@@ -141,7 +141,7 @@ public class AttackMenuTests
     {
         var state = WithUses(Placed("captain", new Coord(6, 6)), "captain", 1);
 
-        var row = Queries.AttackOptions(state, Shipped, state.Find("captain")!, EnemyAt(state, Brigand)).Single(r => r.Art is not null);
+        var row = Queries.AttackOptions(state, Shipped, state.Find("captain")!, EnemyAt(state, Brigand)).Single(r => r.Art?.Id == "feint");
 
         Assert.Contains("Feint costs 2 uses with the strike and Iron Sword has 1 left", row.Refusal!.Message);
     }
@@ -154,7 +154,7 @@ public class AttackMenuTests
         var rows = Queries.AttackOptions(state, Shipped, state.Find("captain")!, EnemyAt(state, Brigand));
 
         Assert.True(rows.Single(r => r.Art is null).Legal);
-        Assert.Contains("Iron Sword is broken and cannot pay for an art", rows.Single(r => r.Art is not null).Refusal!.Message);
+        Assert.Contains("Iron Sword is broken and cannot pay for an art", rows.Single(r => r.Art?.Id == "feint").Refusal!.Message);
     }
 
     private static ClientSession Selected(BattleState state, string id)
@@ -172,7 +172,7 @@ public class AttackMenuTests
         Assert.Null(client.Click(Brigand));
 
         var menu = client.Menu!;
-        Assert.Equal(new[] { "Iron Sword", "Feint (Iron Sword)" }, menu.Rows.Select(r => r.Label));
+        Assert.Equal(new[] { "Iron Sword", "Feint (Iron Sword)", "Full Measure (Iron Sword)" }, menu.Rows.Select(r => r.Label));
         Assert.Empty(client.Log);
         Assert.Equal("captain", client.Selected);
     }

@@ -402,7 +402,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -411,7 +411,16 @@ public static class ContentLoader
                     effect.IntOr("hit", 0),
                     effect.IntOr("crit", 0),
                     effect.IntOr("wt", 0),
-                    effect.IntOr("range", 0));
+                    effect.IntOr("range", 0))
+                {
+                    PerMap = effect.Has("perMap") ? effect.Int("perMap") : null,
+                    CostsNextPhase = effect.BoolOr("costsNextPhase", false),
+                };
+                if (art.PerMap is < 1)
+                {
+                    throw entry.Error("effect.perMap", "must be at least 1, or left out for no cap");
+                }
+
                 if (art.Cost < 1)
                 {
                     throw entry.Error("effect.cost", "must be at least 1: an art free on a miss is the plain attack with better numbers");

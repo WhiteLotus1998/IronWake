@@ -73,6 +73,9 @@ public sealed record CombatModifierEffect(OpponentCondition Against, int Hit, in
 /// burden and doubling all read it through the unchanged section 5 functions, and a Wt
 /// delta can cost the unit its double. <see cref="Cost"/> is the extra uses the attack
 /// spends on top of one per strike, paid whether the art hits or misses.
+/// <see cref="PerMap"/> caps how many times a unit declares the art in one battle (null: no
+/// cap), and <see cref="CostsNextPhase"/> makes the attack cost the unit its side's next phase,
+/// in which it can neither move nor act (the captain's strike, issue 636).
 /// </summary>
 public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cost, int Mt, int Hit, int Crit, int Wt, int Range) : AbilityEffect
 {
@@ -90,6 +93,12 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 
     /// <summary>The fewest uses a weapon must have left to pay for the art: its cost and the first strike.</summary>
     public int UsesNeeded => Cost + 1;
+
+    /// <summary>How many times a unit may declare the art in one battle; null when there is no cap.</summary>
+    public int? PerMap { get; init; }
+
+    /// <summary>Whether the attack costs the unit its side's next phase: it begins that phase moved and acted (issue 636).</summary>
+    public bool CostsNextPhase { get; init; }
 }
 
 /// <summary>

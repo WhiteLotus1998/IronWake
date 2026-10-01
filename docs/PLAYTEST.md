@@ -1549,3 +1549,13 @@ Notes: The noise choice never came up. Hitting the brigand from the fort at rang
 The moment I stopped caring: turn 5, the soldier dead and one archer left.
 Transcript: docs/transcripts/2026-10-01-the_mill-632.txt (script beside it), replayed under `--strict`, exit 0.
 Sim: gate 1 133/200 (67 percent; 66 losses are Maud, 1 timeout), gates 2 to 8 ok.
+
+## 2026-10-01 — The Tollgate with the captain's strike (issue 636), the warm play — Code
+
+Seed: 636 on `content/maps/the_tollgate.map`, the shipped map with Full Measure on the captain (sword, +8 Mt, +30 hit, +20 crit, cost 2, once a map, costs his next phase). Warm: I wrote the numbers and played the Tollgate on 671 this morning. Result: won, seize, on turn 8 of 10, nobody dead, no Recall.
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 3, the brigand on 6,5 in the woods. From 6,6 the captain's three lines read: plain `10 x2 at 63%`, Feint `8 x2 at 94%` (16, short of his 23), Full Measure `18 x2 at 97%` with the cost printed under it. The kill was certain in all but name, and the price was that he would stand on 6,6 through turn 4. I took it. Both strikes landed, 40 exp, and the woods were half clear.
+Did the cost bite: no, and that is the finding. Turn 4 he stood, and nothing could reach him. The woods archer was the only enemy in range, Wren killed it the same turn, and the keep group holds behind the gate. On a seize map with a limit of 10 the lost phase was a lost march, and I won with two turns to spare. The issue asks the keep round to show the cost biting once, so this play does not meet it. The strike also bought too much for that price: 18 x2 at 97 is overkill on the first map's toughest non-boss.
+Notes: Turns 5 to 8 were the 671 line with my own mistakes. On turn 5 I parked Pell on 7,4 with `lethal if all land` printed and ended anyway; the boss missed, and the rider left him on 5. On turn 6 Pell killed the rider from 8,5, out of the axe's reach, and Teodor's Long Thrust plus Wren's 85 took the warden. On turn 7 the boss's counter left Wren on 2, and Teodor's thrust finished him. On turn 8 the captain walked to the gate. Not tense: turns 1, 2 and 4. The moment I stopped caring was turn 4, the rest phase, because nothing could reach him. The strike needs a board where the rest phase is the dangerous one: an aggressive group still awake on the far side, or a protect map where the escort is who stands still.
+Transcript: `docs/transcripts/2026-10-01-the_tollgate-636-strike.txt`, the script beside it, replayed under `--strict` by `CaptainsStrikeCliTests`.
+Sim: the heuristic and the planner declare no art, so gate 1 does not move.

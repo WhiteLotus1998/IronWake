@@ -34,6 +34,12 @@ namespace Ironwake.Core;
 /// <see cref="CoveredBy"/> is the id of the ally covering this unit on a <c>cover: on</c> map
 /// (DESIGN.md 13.19, experiment): set by that ally's <see cref="Cover"/>, cleared when the cover
 /// fires and when this unit's side's next phase begins.
+/// <see cref="ArtsDeclared"/> lists, once per declaration, the arts with a per-map cap the unit
+/// has declared this battle (issue 636), so <see cref="Resolver.ChooseArt"/> refuses one spent;
+/// it is board state, so Recall restores the charge with the board.
+/// <see cref="Spent"/> is the price of an art that costs the next phase (issue 636): 1 from the
+/// attack to the end of that phase, 2 through the unit's side's next phase, which it begins moved
+/// and acted, so it neither moves, acts, waits nor braces, and 0 otherwise.
 /// </summary>
 public sealed record BattleUnit(
     Unit Unit,
@@ -54,8 +60,16 @@ public sealed record BattleUnit(
     bool Braced = false,
     Coord? WindupAt = null,
     bool Watching = false,
-    string? CoveredBy = null)
+    string? CoveredBy = null,
+    ValueList<string>? ArtsDeclared = null,
+    int Spent = 0)
 {
+    /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
+    public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
+
+    /// <summary>Whether the unit is paying an art's next-phase cost now: its side's phase, begun moved and acted (issue 636).</summary>
+    public bool Resting => Spent == 2;
+
     public string Id => Unit.Id;
 
     public int MaxHp(GameContent content) => content.StatsOf(Unit).Hp;

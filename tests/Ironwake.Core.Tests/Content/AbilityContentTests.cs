@@ -217,6 +217,12 @@ public class AbilityContentTests
     }
 
     [Fact]
+    public void AnArtsPerMapCapIsAtLeastOne()
+    {
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"sword\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"perMap\": 0 }"))), ContentFiles.AbilitiesName, "a", "effect.perMap");
+    }
+
+    [Fact]
     public void AnArtsRangeIsNeverNegative()
     {
         AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"art\", \"weapon\": \"bow\", \"rank\": \"E\", \"cost\": 1, \"mt\": 3, \"range\": -1 }"))), ContentFiles.AbilitiesName, "a", "effect.range");
