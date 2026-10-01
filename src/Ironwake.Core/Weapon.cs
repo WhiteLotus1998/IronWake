@@ -38,6 +38,12 @@ public sealed record Weapon(
     /// <summary>The cast id this signature item is bound to (issue 635), or null for an ordinary weapon.</summary>
     public string? BoundTo { get; init; }
 
+    /// <summary>
+    /// Marks a hungering weapon (DESIGN.md 13.23, experiment; <see cref="Kinsbane"/>): it drains
+    /// its carrier at each phase start it went unfed, feeds on its kills and grows with them.
+    /// </summary>
+    public bool Hungers { get; init; }
+
     /// <summary>The one line the item card prints for this weapon (issue 650); empty only in a weapon built outside the content files.</summary>
     public string Description { get; init; } = "";
 

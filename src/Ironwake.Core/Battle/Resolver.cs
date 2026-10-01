@@ -451,6 +451,8 @@ public static class Resolver
         targetAfter = AwardRank(targetAfter, defenderWeapon, result.Strikes, result.AttackerDied, events);
         attackerAfter = AwardMastery(attackerAfter, content, events);
         targetAfter = AwardMastery(targetAfter, content, events);
+        attackerAfter = Kinsbane.AfterCombat(attackerAfter, content, result.Strikes, result.DefenderDied, events);
+        targetAfter = Kinsbane.AfterCombat(targetAfter, content, result.Strikes, result.AttackerDied, events);
         var next = state.WithUnit(attackerAfter);
         next = next.WithUnit(targetAfter);
         if (result.DefenderDied)
@@ -707,7 +709,8 @@ public static class Resolver
     /// <paramref name="artCost"/> is spent with them, hit or miss (issue 68). The strike that
     /// empties a physical weapon emits <see cref="WeaponBroke"/> and the weapon stays,
     /// broken; the one that empties a spell emits <see cref="SpellSpent"/>. A gauntlet spends
-    /// one use for the combat however many strikes it made (issue 70).
+    /// one use for the combat however many strikes it made (issue 70). A hungering weapon never
+    /// spends below 1 (DESIGN.md 13.23, <see cref="Kinsbane"/>), so it never breaks.
     /// </summary>
     private static BattleUnit SpendDurability(BattleUnit unit, ValueList<StrikeEvent> strikes, GameContent content, List<GameEvent> events, int artCost = 0)
     {
@@ -726,7 +729,7 @@ public static class Resolver
 
         var made = (content.Weapon(stack.ItemId).Type.SpendsPerStrike() ? struck : Math.Min(1, struck)) + artCost;
 
-        var left = Math.Max(0, stack.Uses - made);
+        var left = Math.Max(content.Weapon(stack.ItemId).Hungers ? 1 : 0, stack.Uses - made);
         if (left == 0)
         {
             events.Add(content.Weapon(stack.ItemId).IsMagic ? new SpellSpent(unit.Id, stack.ItemId) : new WeaponBroke(unit.Id, stack.ItemId));
@@ -1216,6 +1219,7 @@ public static class Resolver
     /// heals the units of the side whose phase begins that stand on healing terrain
     /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
     /// max, reported as the amount actually gained; a unit at full HP is not reported.
+    /// A hungering weapon's drain follows heal and burn (DESIGN.md 13.23, <see cref="Kinsbane.AtPhaseStart"/>).
     /// Then the map events whose turn trigger names the phase that has begun fire, in
     /// file order (issue 32). The enemy phase of the last turn ends the battle (DESIGN.md
     /// section 7), so past the turn limit the turn still advances, which decides the outcome,
@@ -1276,6 +1280,7 @@ public static class Resolver
             next = next with { LitGroups = ValueList<string>.Empty };
         }
 
+        next = Kinsbane.AtPhaseStart(next, content, nextPhase, events);
         next = LandBlows(next, content, nextPhase, events);
         if (nextPhase == Side.Player)
         {

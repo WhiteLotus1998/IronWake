@@ -196,3 +196,22 @@ public sealed record UnitSpawned(string UnitId, Coord At, string Group, Behavior
 
 /// <summary>A map event set a flag.</summary>
 public sealed record FlagSet(string Flag) : GameEvent;
+
+/// <summary>
+/// At the start of its carrier's phase a hungering weapon that fed on nothing since the last one
+/// drains its carrier (DESIGN.md 13.23, experiment). Amount is what was actually lost; the drain
+/// never takes a unit below 1, and <paramref name="Starved"/> is set when it would have taken the
+/// carrier to 1 or below, which puts the weapon in its starved form.
+/// </summary>
+public sealed record HungerDrained(string UnitId, string ItemId, int Amount, int HpAfter, bool Starved) : GameEvent;
+
+/// <summary>
+/// A hungering weapon fed on a kill (DESIGN.md 13.23, experiment): <paramref name="Fed"/> is its
+/// count after the kill, <paramref name="Healed"/> what the carrier actually gained,
+/// <paramref name="MtBonus"/> its Mt growth after the kill, and <paramref name="Woke"/> is set on the
+/// kill that reaches the cap, after which it neither drains, starves nor heals.
+/// </summary>
+public sealed record HungerFed(string UnitId, string ItemId, int Fed, int Healed, int HpAfter, int MtBonus, bool Woke) : GameEvent;
+
+/// <summary>A starved hungering weapon landed a hit that killed nothing (DESIGN.md 13.23, experiment): it leaves the starved form and its carrier heals what <paramref name="Healed"/> says.</summary>
+public sealed record HungerEased(string UnitId, string ItemId, int Healed, int HpAfter) : GameEvent;

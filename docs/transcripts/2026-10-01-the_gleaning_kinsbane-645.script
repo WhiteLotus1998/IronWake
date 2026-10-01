@@ -1,0 +1,77 @@
+move keziah 4,6
+wait keziah
+move pell 3,8
+wait pell
+end
+attack keziah brigand-1
+move wren 6,7
+attack wren brigand-2
+move captain 5,7
+wait captain
+wait pell
+end
+recall 17
+move captain 5,6
+attack captain brigand-2
+move wren 4,8
+wait wren
+wait pell
+end
+attack keziah soldier-1
+move pell 5,9
+wait pell
+move wren 3,8
+attack wren brigand-3
+move captain 5,3
+wait captain
+end
+move keziah 4,2
+wait keziah
+move pell 5,6
+wait pell
+move wren 4,5
+wait wren
+wait captain
+end
+wait keziah
+move pell 5,2
+attack pell bandit_leader-1
+move wren 4,3
+wait wren
+move captain 6,3
+wait captain
+end
+move keziah 7,3
+wait keziah
+move pell 5,5
+wait pell
+move wren 4,4
+wait wren
+move captain 6,4
+wait captain
+end
+move keziah 9,3
+attack keziah archer-1
+wait pell
+wait wren
+wait captain
+end
+attack keziah archer-1
+move wren 4,0
+attack wren bandit_leader-1
+move captain 6,0
+attack captain bandit_leader-1
+move pell 5,2
+attack pell bandit_leader-1
+end
+recall 85
+move pell 5,7
+wait pell
+move wren 3,6
+wait wren
+move captain 6,5
+wait captain
+end
+attack keziah archer-1
+end
+end

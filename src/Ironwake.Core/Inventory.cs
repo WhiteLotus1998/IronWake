@@ -8,6 +8,15 @@ public readonly record struct ItemStack(string ItemId, int Uses)
     /// null for an ordinary stack. The name stays with the stack for the rest of the campaign.
     /// </summary>
     public string? Keepsake { get; init; }
+
+    /// <summary>
+    /// The kills a hungering weapon has fed on (DESIGN.md 13.23, experiment; <see cref="Kinsbane"/>),
+    /// 0 for any other stack. It stays with the stack, so a carried scythe keeps its growth.
+    /// </summary>
+    public int Fed { get; init; }
+
+    /// <summary>Whether a hungering weapon is in its starved form (DESIGN.md 13.23): half Mt, uses held at 1.</summary>
+    public bool Starved { get; init; }
 }
 
 /// <summary>

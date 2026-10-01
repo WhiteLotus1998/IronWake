@@ -896,6 +896,11 @@ public sealed class PlaySession
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
 
+                foreach (var line in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names))
+                {
+                    _out.WriteLine(UnitNames.Sentence(line));
+                }
+
                 foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(ignite));
@@ -1287,6 +1292,7 @@ public sealed class PlaySession
         lines.AddRange(PincerLines(state, unit with { At = tile }, target, names));
         lines.AddRange(BraceLines(unit, target, names));
         lines.AddRange(BreakLines(state, content, unit, target, names));
+        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
@@ -1768,6 +1774,11 @@ public sealed class PlaySession
             lines.Add($"  Signature: {Signatures.Describe(signature)}");
         }
 
+        if (Kinsbane.Card(unit, content) is { } hunger)
+        {
+            lines.Add($"  {hunger}");
+        }
+
         if (state.CantoReachOf(unit, content) is not null)
         {
             lines.Add($"  Canto: {unit.Canto} movement left this phase");
@@ -1876,6 +1887,31 @@ public sealed class PlaySession
             if (members.Count > 0)
             {
                 yield return $"  break if {names[boss.Id]} falls: " + string.Join(", ", members.Select(m => $"{names[m.Id]} ({m.Hp}/{m.MaxHp(content)})"));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Under a forecast (DESIGN.md 13.23, experiment): for the striker with the weapon it strikes
+    /// with, then the target when it counters, the heal a kill would feed a hungering weapon, and in
+    /// the starved form the hit that eases it (<see cref="Kinsbane.ForecastLines"/>). Silent for any
+    /// other weapon.
+    /// </summary>
+    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool targetCounters, UnitNames? names = null)
+    {
+        names ??= UnitNames.None;
+        var armed = slot is { } chosen && chosen >= 0 && chosen < attacker.Unit.Inventory.Count ? attacker.WithSlotInFront(chosen) : attacker;
+        foreach (var unit in targetCounters ? new[] { armed, target } : new[] { armed })
+        {
+            var equipped = unit.EquippedSlot(content);
+            if (equipped < 0)
+            {
+                continue;
+            }
+
+            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id]))
+            {
+                yield return line;
             }
         }
     }
@@ -2118,6 +2154,12 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
             case UnitRested r:
                 return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
+            case HungerDrained h:
+                return $"{content.ItemName(h.ItemId)} drains {names[h.UnitId]} {h.Amount} (hp {h.HpAfter})" + (h.Starved ? "; it starves: half Mt, uses 1" : "");
+            case HungerFed h:
+                return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, Mt +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
+            case HungerEased h:
+                return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
             case WatchTaken w:
                 return $"{names[w.UnitId]} watches from {w.At}"
                     + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")
