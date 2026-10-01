@@ -38,9 +38,13 @@ public sealed record CampaignTrial(string ClassId, string MapId);
 /// <c>content/quests</c> without the extension. The board is the trial shape: its <c>captain</c>
 /// slot is the member's, so the member's death loses it, and its one bare <c>recruit</c> slot is
 /// the ally the player picks. <see cref="Before"/> and <see cref="After"/> are its text cards.
+/// <see cref="Pays"/> is a part 2 quest's payout: the member's signature item, a weapon bound to them.
 /// </summary>
 public sealed record CampaignQuest(string Id, string MemberId, int Part, string MapId)
 {
+    /// <summary>The signature item a win puts in the member's pack at full uses (part 2 only), or null for none.</summary>
+    public string? Pays { get; init; }
+
     public ValueList<string> Before { get; init; } = ValueList<string>.Empty;
 
     public ValueList<string> After { get; init; } = ValueList<string>.Empty;

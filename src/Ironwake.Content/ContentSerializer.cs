@@ -99,6 +99,11 @@ public static class ContentSerializer
                     writer.WriteString("member", quest.MemberId);
                     writer.WriteNumber("part", quest.Part);
                     writer.WriteString("map", quest.MapId);
+                    if (quest.Pays is { } pays)
+                    {
+                        writer.WriteString("pays", pays);
+                    }
+
                     WriteCard(writer, "before", quest.Before);
                     WriteCard(writer, "after", quest.After);
                     writer.WriteEndObject();
@@ -204,6 +209,11 @@ public static class ContentSerializer
                 if (art.CostsNextPhase)
                 {
                     writer.WriteBoolean("costsNextPhase", true);
+                }
+
+                if (art.Item is { } item)
+                {
+                    writer.WriteString("item", item);
                 }
 
                 break;
@@ -442,6 +452,11 @@ public static class ContentSerializer
         if (weapon.Windup)
         {
             writer.WriteBoolean("windup", true);
+        }
+
+        if (weapon.BoundTo is { } owner)
+        {
+            writer.WriteString("boundTo", owner);
         }
 
         writer.WriteEndObject();

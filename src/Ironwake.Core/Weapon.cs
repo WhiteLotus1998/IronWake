@@ -12,6 +12,8 @@ namespace Ironwake.Core;
 /// <see cref="Windup"/> marks a slow weapon: on a <c>windup: on</c> map an attack with it raises a
 /// blow over the target's tile that lands at the wielder's side's next phase start
 /// (DESIGN.md 13.16, experiment; <see cref="Ironwake.Core.Windup"/>). It counters as any weapon does.
+/// <see cref="BoundTo"/> marks a signature item (issue 635, DESIGN section 14): bound to one cast
+/// member, never sold, paid by their quest 2, and lost with them.
 /// </summary>
 public sealed record Weapon(
     string Id,
@@ -32,6 +34,9 @@ public sealed record Weapon(
     bool Ignites = false,
     bool Windup = false)
 {
+    /// <summary>The cast id this signature item is bound to (issue 635), or null for an ordinary weapon.</summary>
+    public string? BoundTo { get; init; }
+
     public bool IsMagic => Type.IsMagic();
 
     public bool InRange(int distance) => distance >= MinRange && distance <= MaxRange;

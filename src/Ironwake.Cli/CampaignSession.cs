@@ -24,6 +24,7 @@ public sealed class CampaignSession
           shop                     What the shop sells before this map, and each price
           buy <item> <unit>        Buy an item at full uses into the unit's next free slot
           repair <unit> <slot>     Restore a weapon's uses, at its price per use
+          drop <unit> <slot>       Throw away an item, no refund; a signature item is never dropped
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
@@ -608,6 +609,9 @@ public sealed class CampaignSession
             case ["repair", var unitId, var slotText] when int.TryParse(slotText, out var slot):
                 Take(_record.Repair(unitId, slot - 1, _content), text);
                 break;
+            case ["drop", var unitId, var slotText] when int.TryParse(slotText, out var slot):
+                Take(_record.Drop(unitId, slot - 1, _content), text);
+                break;
             case ["classes"]:
                 PrintClasses(null);
                 break;
@@ -675,6 +679,9 @@ public sealed class CampaignSession
                 break;
             case ["repair", ..]:
                 Error(text, "usage: repair <unit> <slot>");
+                break;
+            case ["drop", ..]:
+                Error(text, "usage: drop <unit> <slot>");
                 break;
             case ["certify", ..]:
                 Error(text, "usage: certify <unit> <class>");

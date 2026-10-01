@@ -339,6 +339,34 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
+    /// Discards the stack in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> at the
+    /// camp (issue 635), so a pack of five can take a quest's payout. Nothing is refunded. Refused
+    /// for a unit not on the roster, an empty slot, or a signature item, which is bound to its
+    /// owner and leaves only with them.
+    /// </summary>
+    public ScreenResult Drop(string unitId, int slot, GameContent content)
+    {
+        if (Find(unitId) is not { } unit)
+        {
+            return ScreenResult.Refused(this, $"no unit '{unitId}' on the roster");
+        }
+
+        if (slot < 0 || slot >= unit.Inventory.Count)
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} has no item in slot {slot + 1}");
+        }
+
+        var stack = unit.Inventory.Items[slot];
+        if (content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.BoundTo is not null)
+        {
+            return ScreenResult.Refused(this, $"{weapon.Name} is bound to {weapon.BoundTo} and is never dropped");
+        }
+
+        var dropped = unit with { Inventory = unit.Inventory.RemoveAt(slot) };
+        return new ScreenResult(Replace(dropped), $"{unit.Id} drops {content.ItemName(stack.ItemId)}", true);
+    }
+
+    /// <summary>
     /// Certifies <paramref name="unitId"/> into <paramref name="classId"/> through
     /// <see cref="Certifications.Check"/> (issue 72), paying the seal, <see cref="CampaignRules.CertificationPrice"/>,
     /// from the purse. Refused naming every requirement failed, or the price and the balance.
@@ -514,7 +542,8 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Why <paramref name="questId"/> may not be fought now with <paramref name="allyId"/> beside
-    /// its member (issue 635), or null when it may: the quest must exist and be offered this
+    /// its member (issue 635), or null when it may. A quest that pays an item is refused while its
+    /// member's pack is full, so the payout always has a slot. Otherwise the quest must exist and be offered this
     /// interlude, not tried since the last map, and the ally must be on the roster, neither the
     /// captain (who leads the main line and whose death would end the campaign on a side map)
     /// nor the member.
@@ -552,7 +581,14 @@ public sealed record CampaignRecord(
             return $"{allyId} is the captain and stays with the company; pick another ally";
         }
 
-        return allyId == quest.MemberId ? $"{allyId} is the side map's own; pick an ally beside {quest.MemberId}" : null;
+        if (allyId == quest.MemberId)
+        {
+            return $"{allyId} is the side map's own; pick an ally beside {quest.MemberId}";
+        }
+
+        return quest.Pays is { } item && Find(quest.MemberId) is { Inventory.IsFull: true }
+            ? $"{quest.MemberId} carries {Inventory.Capacity} items and {questId} pays {content.ItemName(item)}; drop one first"
+            : null;
     }
 
     /// <summary>
@@ -613,7 +649,8 @@ public sealed record CampaignRecord(
     /// The attempt is recorded either way; a win is recorded with the map it was won before,
     /// which times the member's next quest. A loss never ends the campaign; the side map opens
     /// again after the next map unless its member fell. No purse reward: the quest's payout is
-    /// the member's own.
+    /// the member's own, and a won quest that <see cref="CampaignQuest.Pays"/> puts that signature
+    /// item in the member's pack at full uses (<see cref="QuestRefusal"/> kept a slot free).
     /// </summary>
     public ScreenResult AfterQuest(BattleState end, string questId, GameContent content)
     {
@@ -647,6 +684,13 @@ public sealed record CampaignRecord(
         }
 
         var won = end.Outcome.Result == BattleResult.Won;
+        var paid = "";
+        if (won && quest.Pays is { } item && roster.FindIndex(u => u.Id == quest.MemberId) is var at and >= 0)
+        {
+            roster[at] = roster[at] with { Inventory = roster[at].Inventory.Add(new ItemStack(item, content.Weapon(item).Durability)) };
+            paid = $"; {quest.MemberId} receives {content.ItemName(item)}";
+        }
+
         var record = this with
         {
             Roster = ValueList<Unit>.From(roster),
@@ -656,7 +700,7 @@ public sealed record CampaignRecord(
         };
         var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}" : "; nobody fell";
         var line = won
-            ? $"{quest.MemberId} wins {questId}{dead}"
+            ? $"{quest.MemberId} wins {questId}{paid}{dead}"
             : lost.Contains(quest.MemberId)
                 ? $"{quest.MemberId} falls on {questId}, which closes for good{dead}"
                 : $"side map {questId} is lost: {end.Outcome.Reason}; it opens again after the next map{dead}";
