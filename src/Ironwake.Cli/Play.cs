@@ -43,7 +43,7 @@ public sealed class PlaySession
           canto <unit> <x,y|stay>  After acting, a unit with Canto moves on what its move left, or stays
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
-          open <unit> <x,y>        Open the chest on or beside the unit, as its action; everything inside goes to its pack
+          open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
@@ -2306,7 +2306,7 @@ public sealed class PlaySession
             case KeepsakeRecovered k:
                 return $"{names[k.UnitId]} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case ChestOpened c:
-                return $"{names[c.UnitId]} opens the chest at {c.At}: {string.Join(", ", c.ItemIds.Select(content.ItemName))}";
+                return ChestLine(c, names, content);
             case KeepsakeTaken k:
                 return $"{names[k.UnitId]} takes {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case KeepsakeLost k:
@@ -2404,6 +2404,17 @@ public sealed class PlaySession
             default:
                 return e.ToString() ?? "?";
         }
+    }
+
+    /// <summary>
+    /// The console's lines for an opened chest (issue 679): what went to the pack, then, when
+    /// anything did not fit, what went to the wagon, collected only if the map is won.
+    /// </summary>
+    internal static string ChestLine(ChestOpened c, UnitNames names, GameContent content)
+    {
+        var pack = c.ItemIds.Count == 0 ? "nothing fits in the pack" : string.Join(", ", c.ItemIds.Select(content.ItemName));
+        var line = $"{names[c.UnitId]} opens the chest at {c.At}: {pack}";
+        return c.Wagon.Count == 0 ? line : line + $"\n  To the wagon, kept if the map is won: {string.Join(", ", c.Wagon.Select(content.ItemName))}";
     }
 
     private static string AbilityName(string id, GameContent content) =>

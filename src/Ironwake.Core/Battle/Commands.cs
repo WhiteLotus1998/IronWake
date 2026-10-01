@@ -63,9 +63,10 @@ public sealed record Recover(string UnitId) : Command;
 
 /// <summary>
 /// Open the chest at <paramref name="At"/> (issue 649): a player unit on the chest's tile or
-/// orthogonally beside it takes everything in it as its action, in place of Attack, Item or Wait,
-/// after its Move or without one. Every item must fit in its pack, or the chest stays shut.
-/// No Canto follows. The enemy never opens a chest.
+/// orthogonally beside it opens it as its action, in place of Attack, Item or Wait, after its
+/// Move or without one, unless an enemy stands on the chest's tile. What fits goes to its pack in
+/// the chest's order and the rest to the wagon (issue 679). No Canto follows. The enemy never
+/// opens a chest.
 /// </summary>
 public sealed record Open(string UnitId, Coord At) : Command;
 

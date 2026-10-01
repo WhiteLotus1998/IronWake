@@ -1,0 +1,26 @@
+name: Wagon Hollow
+size: 10x7
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 1
+
+....^.....
+.........n
+..^.......
+......^...
+..........
+.......^..
+..........
+
+units:
+P captain 1,5
+P recruit:wren 2,6
+P recruit:teodor 0,6
+E brigand 6,4 group:road behavior:aggressive
+E soldier 7,5 group:road behavior:aggressive
+B bandit_leader 8,1 group:vault behavior:guard
+
+chests:
+3,4 iron_lance steel_sword iron_bow field_dressing field_dressing
+8,1 steel_axe

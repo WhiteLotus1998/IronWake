@@ -1,0 +1,615 @@
+Wagon Hollow, seed 679, scheme TwoRollAverage
+Objective: Defeat every enemy by the end of turn 10. Captain Fenn must survive.
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ...$..a...
+ 5 .A.....b..
+ 6 C.B.......
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,5    hp 22/22  Plain  captain
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              2,6    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,4 Iron Lance, Steel Sword, Iron Bow, Field Dressing, Field Dressing; 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move wren 3,5
+Wren moves 2,6 -> 3,5 via 2,5
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ...$..a...
+ 5 .A.B...b..
+ 6 C.........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,5    hp 22/22  Plain  captain
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 3,4 Iron Lance, Steel Sword, Iron Bow, Field Dressing, Field Dressing; 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> open wren 3,4
+Wren opens the chest at 3,4: Iron Lance, Steel Sword, Iron Bow
+  To the wagon, kept if the map is won: Field Dressing, Field Dressing
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ......a...
+ 5 .A.B...b..
+ 6 C.........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        1,5    hp 22/22  Plain  captain
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> show wren
+Wren, Cadet L1, at 3,5 on Plain
+  HP 20/20  Str 7 Mag 0 Dex 6 Spd 8 Lck 5 Def 4 Res 2 Cha 3  Mov 4 (infantry)
+  Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)
+  Items: 1: Iron Sword x40, 2: Field Dressing x3, 3: Iron Lance x40, 4: Steel Sword x30, 5: Iron Bow x40
+  Ranks: sword E (0), lance E (0), axe E (0)
+  Arts: Heavy Cut (heavy_cut) (sword E, cost 2): +4 mt, +3 wt, -10 hit. Hits harder and may lose the double.
+  Mastery: Fundamentals (0 of 12 combats)
+  Targets from here: none
+> move captain 2,4
+Alder Fenn moves 1,5 -> 2,4 via 1,4
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...a...
+ 5 ...B...b..
+ 6 C.........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait captain
+Alder Fenn waits
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...a...
+ 5 ...B...b..
+ 6 C.........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move teodor 2,5
+Teodor moves 0,6 -> 2,5 via 0,5 1,5
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...a...
+ 5 ..CB...b..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait teodor
+Teodor waits
+Wagon Hollow  turn 1 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...a...
+ 5 ..CB...b..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          6,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         7,5    hp 20/20  Forest  group road, aggressive
+C  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+Lethal if all land: Wren (Brigand for 11, Soldier for 9, against 20 hp)
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-1 3,4
+Brigand moves 6,4 -> 3,4 via 5,4 4,4
+enemy: attack brigand-1 wren
+Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter with Iron Sword: dmg 10 x2 hit 88% crit 4%
+Brigand attacks Wren
+  Brigand hits Wren for 11 (hp 9)
+  Wren misses Brigand
+  Wren misses Brigand
+  Brigand hp 22, Wren hp 9
+enemy: move soldier-1 4,5
+Soldier moves 7,5 -> 4,5 via 6,5 5,5
+enemy: attack soldier-1 wren
+Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter with Iron Sword: dmg 8 hit 85% crit 3%
+Soldier attacks Wren
+  Soldier misses Wren
+  Wren hits Soldier for 8 (hp 12)
+  Soldier hp 12, Wren hp 9
+Wren gains 10 exp (10)
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Wagon Hollow  turn 2 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..Aa......
+ 5 ..CBb..^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+a  brigand-1        Brigand L1 reaver          3,4    hp 22/22  Plain  group road, aggressive
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain
+b  soldier-1        Soldier L1 pikeman         4,5    hp 12/20  Plain  group road, aggressive
+C  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack captain brigand-1
+Forecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+Alder Fenn attacks Brigand
+  Alder Fenn hits Brigand for 11 (hp 11)
+  Brigand misses Alder Fenn
+  Alder Fenn hits Brigand for 11 (hp 0)
+  Alder Fenn hp 22, Brigand hp 0
+Alder Fenn gains 30 exp (30)
+Brigand falls at 3,4
+Wagon Hollow  turn 2 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A.......
+ 5 ..CBb..^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         4,5    hp 12/20  Plain  group road, aggressive
+C  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move teodor 4,6
+Teodor moves 2,5 -> 4,6 via 3,5 3,6
+Wagon Hollow  turn 2 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A.......
+ 5 ...Bb..^..
+ 6 ....C.....
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         4,5    hp 12/20  Plain  group road, aggressive
+C  teodor           Teodor L1 pikeman          4,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack teodor soldier-1
+Forecast Teodor -> Soldier: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Teodor attacks Soldier
+  Teodor hits Soldier for 10 (hp 2)
+  Soldier misses Teodor
+  Teodor hp 21, Soldier hp 2
+Teodor gains 10 exp (10)
+Wagon Hollow  turn 2 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A.......
+ 5 ...Bb..^..
+ 6 ....C.....
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+b  soldier-1        Soldier L1 pikeman         4,5    hp 2/20   Plain  group road, aggressive
+C  teodor           Teodor L1 pikeman          4,6    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack wren soldier-1
+Forecast Wren -> Soldier with Iron Sword: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+  Counter: lethal to Wren (9 against 9 hp)
+Wren attacks Soldier
+  Wren hits Soldier for 8 (hp 0)
+  Wren hp 9, Soldier hp 0
+Wren gains 30 exp (40)
+Soldier falls at 4,5
+Wagon Hollow  turn 2 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A.......
+ 5 ...B...^..
+ 6 ....C.....
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain  done
+C  teodor           Teodor L1 pikeman          4,6    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A.......
+ 5 ...B...^..
+ 6 ....C.....
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          4,6    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move teodor 6,4
+Teodor moves 4,6 -> 6,4 via 4,5 4,4 5,4
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait teodor
+Teodor waits
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ..A...C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        2,4    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move captain 5,3
+Alder Fenn moves 2,4 -> 5,3 via 2,3 3,3 4,3
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 .....A^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait captain
+Alder Fenn waits
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 .....A^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain  done
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> item wren 2
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 19)
+Wagon Hollow  turn 3 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 .....A^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain  done
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain  done
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........!n
+ 2 ..^.......
+ 3 .....A^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, asleep
+A  captain          Alder Fenn L1 cadet        5,3    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move captain 7,1
+Alder Fenn moves 5,3 -> 7,1 via 5,2 5,1 6,1
+The vault group wakes (proximity)
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 26/26  Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 22/22  Plain  captain
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> open captain 8,1
+ERROR: Alder Fenn cannot open the chest at 8,1: Bandit Leader stands on it
+> attack captain bandit_leader-1
+Forecast Alder Fenn -> Bandit Leader: dmg 9 x2 hit 91% crit 3%; counter with Steel Axe: dmg 16 hit 62% crit 0%
+Alder Fenn attacks Bandit Leader
+  Alder Fenn hits Bandit Leader for 9 (hp 17)
+  Bandit Leader hits Alder Fenn for 16 (hp 6)
+  Alder Fenn hits Bandit Leader for 9 (hp 8)
+  Alder Fenn hp 6, Bandit Leader hp 8
+Alder Fenn gains 14 exp (44)
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.......
+ 3 ......^...
+ 4 ......C...
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 8/26   Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  done
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move teodor 8,2
+Teodor moves 6,4 -> 8,2 via 7,4 7,3 7,2
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.....C.
+ 3 ......^...
+ 4 ..........
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 8/26   Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  done
+C  teodor           Teodor L1 pikeman          8,2    hp 21/21  Plain
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack teodor bandit_leader-1
+Forecast Teodor -> Bandit Leader: dmg 10 hit 81% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
+Teodor attacks Bandit Leader
+  Teodor misses Bandit Leader
+  Bandit Leader hits Teodor for 16 (hp 5)
+  Teodor hp 5, Bandit Leader hp 8
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.....C.
+ 3 ......^...
+ 4 ..........
+ 5 ...B...^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 8/26   Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  done
+C  teodor           Teodor L1 pikeman          8,2    hp 5/21   Plain  done
+B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move wren 5,3
+Wren moves 3,5 -> 5,3 via 3,4 3,3 4,3
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.....C.
+ 3 .....B^...
+ 4 ..........
+ 5 .......^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 8/26   Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  done
+C  teodor           Teodor L1 pikeman          8,2    hp 5/21   Plain  done
+B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> wait wren
+Wren waits
+Wagon Hollow  turn 4 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A!n
+ 2 ..^.....C.
+ 3 .....B^...
+ 4 ..........
+ 5 .......^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    8,1    hp 8/26   Plain  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain  done
+C  teodor           Teodor L1 pikeman          8,2    hp 5/21   Plain  done
+B  wren             Wren L1 cadet              5,3    hp 19/20  Plain  done
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> end
+Lethal if all land: Alder Fenn (Bandit Leader for 11, against 6 hp)
+Lethal if all land: Teodor (Bandit Leader for 11, against 5 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move bandit_leader-1 9,1
+Bandit Leader moves 8,1 -> 9,1
+enemy: attack bandit_leader-1 teodor 2
+Forecast Bandit Leader -> Teodor: dmg 11 hit 58% crit 1%; counter: none
+Bandit Leader equips Toll Axe
+Bandit Leader attacks Teodor
+  Bandit Leader hits Teodor for 11 (hp 0)
+  Bandit Leader hp 8, Teodor hp 0
+Teodor falls at 8,2
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Wagon Hollow  turn 5 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 .......A$!
+ 2 ..^.......
+ 3 .....B^...
+ 4 ..........
+ 5 .......^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    9,1    hp 8/26   Hill  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        7,1    hp 6/22   Plain  captain
+B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> move captain 8,1
+Alder Fenn moves 7,1 -> 8,1
+Wagon Hollow  turn 5 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........A!
+ 2 ..^.......
+ 3 .....B^...
+ 4 ..........
+ 5 .......^..
+ 6 ..........
+
+!  bandit_leader-1  Bandit Leader L3 reaver    9,1    hp 8/26   Hill  group vault, boss, awake
+A  captain          Alder Fenn L1 cadet        8,1    hp 6/22   Plain  captain
+B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+> attack captain bandit_leader-1
+Forecast Alder Fenn -> Bandit Leader: dmg 8 hit 74% crit 3%; counter with Toll Axe: dmg 11 hit 43% crit 0%
+  Counter: lethal to Alder Fenn (11 against 6 hp)
+Alder Fenn attacks Bandit Leader
+  Alder Fenn hits Bandit Leader for 8 (hp 0)
+  Alder Fenn hp 6, Bandit Leader hp 0
+Alder Fenn gains 60 exp (4)
+Alder Fenn reaches level 2: spd +1 cha +1
+Bandit Leader falls at 9,1
+Wagon Hollow  turn 5 of 10  player phase  rout  recall 3
+   0123456789
+ 0 ....^.....
+ 1 ........An
+ 2 ..^.......
+ 3 .....B^...
+ 4 ..........
+ 5 .......^..
+ 6 ..........
+
+A  captain          Alder Fenn L2 cadet        8,1    hp 6/22   Plain  captain  done
+B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
+chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
+Battle won: rout; only recall is left
+Rejected 1 of 29 commands:
+  line 21: open captain 8,1: Alder Fenn cannot open the chest at 8,1: Bandit Leader stands on it
+Battle won: rout

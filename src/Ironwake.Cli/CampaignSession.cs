@@ -32,6 +32,7 @@ public sealed class CampaignSession
           repair <unit> <slot>     Restore a weapon's uses, at its price per use
           refine <unit> <slot> mt|hit  Raise a weapon one step at the keep's forge, for one material and the smith's fee
           drop <unit> <slot>       Throw away an item, no refund; a signature item is never dropped
+          take <unit> <n>          Move entry n of the wagon (what chests sent past a full pack) into the unit's pack
           classes [unit]           What each class asks for promotion into it, and what the unit still lacks
           certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
@@ -627,10 +628,22 @@ public sealed class CampaignSession
         return lines;
     }
 
+    /// <summary>
+    /// The wagon as the Keep panel prints it (issue 679): <c>Wagon: 1 Iron Bow, 2 Field Dressing (take &lt;unit&gt; &lt;n&gt;)</c>,
+    /// each entry numbered for <c>take</c>; null while the wagon is empty.
+    /// </summary>
+    public static string? WagonLine(CampaignRecord record, GameContent content) =>
+        record.Wagon.Count == 0 ? null : $"Wagon: {string.Join(", ", record.Wagon.Select((id, i) => $"{i + 1} {content.ItemName(id)}"))} (take <unit> <n>)";
+
     /// <summary>The camp's Keep panel (issue 678): the purse, the rooms, then the walls and ditches once the raid is fought, else why they are closed.</summary>
     public static IReadOnlyList<string> KeepPanelLines(string contentDir, GameContent content, CampaignRecord record)
     {
         var lines = new List<string> { $"Purse: {record.Purse}" };
+        if (WagonLine(record, content) is { } wagon)
+        {
+            lines.Add(wagon);
+        }
+
         lines.AddRange(RoomLines(record, content));
         if (record.KeepMenuRefusal(content) is { } closed)
         {
@@ -873,6 +886,9 @@ public sealed class CampaignSession
             case ["drop", var unitId, var slotText] when int.TryParse(slotText, out var slot):
                 Take(_record.Drop(unitId, slot - 1, _content), text);
                 break;
+            case ["take", var unitId, var indexText] when int.TryParse(indexText, out var index):
+                Take(_record.TakeFromWagon(unitId, index - 1, _content), text);
+                break;
             case ["refine", var unitId, var slotText, var stat] when int.TryParse(slotText, out var slot):
                 Take(_record.Refine(unitId, slot - 1, stat, _content), text);
                 break;
@@ -985,6 +1001,9 @@ public sealed class CampaignSession
                 break;
             case ["drop", ..]:
                 Error(text, "usage: drop <unit> <slot>");
+                break;
+            case ["take", ..]:
+                Error(text, "usage: take <unit> <n>");
                 break;
             case ["refine", ..]:
                 Error(text, "usage: refine <unit> <slot> mt|hit");
