@@ -49,11 +49,6 @@ public partial class Main : Node2D
     private const int LineHeight = 17;
     private const int LogLines = 30;
     private const int RecallRowsShown = 40;
-    private static readonly (string Key, string Does)[] Keys =
-    {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("P", "price"), ("Tab", PanelLayout.TabLabel), (Sound.MuteKey, "sound"), ("Esc", "clear"),
-    };
-
     /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
     private const int LegendRoom = 76;
 
@@ -627,7 +622,7 @@ public partial class Main : Node2D
     {
         var x = (float)Margin;
         var y = ViewHeight - 24;
-        foreach (var (key, does) in Keys)
+        foreach (var (key, does) in KeyStrip.Keys)
         {
             var width = UiWidth(key, 12, bold: true) + 14;
             if (key == "E")
@@ -638,7 +633,7 @@ public partial class Main : Node2D
             Card(new Rect2(x, y - 7, width, 22), Box, 5);
             UiText(new Vector2(x + width / 2, y + 9), key, Ink, 12, bold: true, centred: true);
             UiText(new Vector2(x + width + 7, y + 9), does, Muted, 12);
-            x += width + 7 + UiWidth(does, 12) + 20;
+            x += width + 7 + UiWidth(does, 12) + 14;
         }
     }
 

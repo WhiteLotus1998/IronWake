@@ -32,7 +32,7 @@ public class CertificationTrialCliTests
     {
         var output = Play(out _, "outrider_trial", "7", "reach captain\n");
 
-        Assert.Contains("certification trial: captain plays as Outrider with iron_lance, iron_sword\nobjective: the captain, Alder Fenn (A), must stand on the gate at any tile from 0,0 to 6,0 by the end of turn 1; only the captain seizes; lost if the captain falls\nTrial of the Outrider  turn 1 of 1", output);
+        Assert.Contains("certification trial: captain plays as Outrider with iron_lance, iron_sword\nObjective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.\nTrial of the Outrider  turn 1 of 1", output);
         Assert.EndsWith("battle ongoing at turn 1, player phase\n", output);
         Assert.DoesNotContain("certification: ", output);
     }
@@ -81,7 +81,7 @@ public class CertificationTrialCliTests
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "13", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(1, exit);
-        Assert.Contains("hexer-1 hp 3", output);
+        Assert.Contains("Hexer hp 3", output);
         Assert.EndsWith("battle lost: turn 1 passed\ncertification: Outrider not earned\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

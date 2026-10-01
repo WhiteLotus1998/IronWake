@@ -53,7 +53,7 @@ public class ClientParityTests
         var console = ConsoleLog(map, seed);
         var client = ClientLog(map, seed);
 
-        Assert.Contains("-- enemy phase, turn 1 --", console);
+        Assert.Contains("-- Enemy phase, turn 1 --", console);
         Assert.Null(Parity.FirstDifference(console, client));
     }
 
@@ -83,15 +83,15 @@ public class ClientParityTests
     public void ParityFiresOnALogOneCharacterAway()
     {
         var console = ConsoleLog("sallow_grange", 61);
-        var at = console.IndexOf("captain moves", StringComparison.Ordinal);
+        var at = console.IndexOf("Alder Fenn moves", StringComparison.Ordinal);
         var altered = console[..at] + "C" + console[(at + 1)..];
 
         var difference = Parity.FirstDifference(console, altered);
 
         Assert.NotNull(difference);
         var line = 1 + console[..at].Count(c => c == '\n');
-        Assert.StartsWith($"event log differs at line {line}, column 1: console 'captain moves", difference);
-        Assert.Contains("client 'Captain moves", difference);
+        Assert.StartsWith($"event log differs at line {line}, column 1: console 'Alder Fenn moves", difference);
+        Assert.Contains("client 'Clder Fenn moves", difference);
     }
 
     [Fact]

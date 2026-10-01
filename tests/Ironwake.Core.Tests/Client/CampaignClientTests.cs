@@ -52,7 +52,7 @@ public class CampaignClientTests
 
         Assert.StartsWith("captain buys Iron Sword for 400; the purse holds 100\nmap 3 of 8: The Tollgate, seed 113\n", console);
         Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: teodor\nmap 4 of 8: Harrow Weir, seed 114\n", console);
-        Assert.Contains("-- enemy phase, turn 1 --", console[console.IndexOf("Harrow Weir", StringComparison.Ordinal)..]);
+        Assert.Contains("-- Enemy phase, turn 1 --", console[console.IndexOf("Harrow Weir", StringComparison.Ordinal)..]);
         Assert.Null(Parity.FirstDifference(console, client));
     }
 

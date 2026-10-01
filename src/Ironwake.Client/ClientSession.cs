@@ -107,7 +107,7 @@ public sealed record Highlight(string Line, Coord? From, Coord? To, IReadOnlyLis
 /// <summary>
 /// The thin renderer's presenter (issue 347): everything the Godot client shows, with no
 /// rules in it. Reach, targets and forecasts are core queries; every line of the event log
-/// is the console's own text for an event (<see cref="PlaySession.Describe(GameEvent, GameContent)"/>),
+/// is the console's own text for an event (<see cref="PlaySession.Describe(GameEvent, GameContent, UnitNames)"/>),
 /// so the log equals what <c>ironwake play --log</c> writes for the same commands, which the
 /// parity gate checks byte for byte. The enemy phase does not resolve as one jump: after
 /// <c>end</c> the planner's commands wait in a queue, and <see cref="Step"/> reveals one event
@@ -236,10 +236,10 @@ public sealed class ClientSession
     public int RecallChargesAtStart => State.History.Count > 0 ? State.History[0].RecallCharges : State.RecallCharges;
 
     /// <summary>
-    /// The map's objective in the console's words, shown for the whole battle (issue 374), without
-    /// the console's placement letter after the captain's name: the client draws no letters (issue 578).
+    /// The map's objective in the player's words, shown for the whole battle (issue 374), the
+    /// console's line without its "Objective: " label (issue 609).
     /// </summary>
-    public string Objective => Ironwake.Core.Objective.Line(State, Content, letters: false);
+    public string Objective => Ironwake.Core.Objective.Line(State, Content);
 
     /// <summary>Why a lost battle was lost, in the console's words, or null while ongoing or won (issue 374).</summary>
     public string? Verdict => EnemyPhasePlaying ? null : Ironwake.Core.Objective.Verdict(State, Content);
@@ -577,7 +577,8 @@ public sealed class ClientSession
         Record(command);
         var before = State;
         State = result.Next;
-        _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content)));
+        var names = UnitNames.Of(State, Content);
+        _log.AddRange(result.Events.Select(e => PlaySession.Describe(e, Content, names)));
         Beats = Hold(result.Events.Select(e => Beat.Of(e, before, State)).OfType<Beat>(), enemyPhase: false).ToList();
         BeatSerial++;
         _fallen.AddRange(Beats.Select(b => b.Fell).OfType<FallenMark>());
@@ -633,7 +634,7 @@ public sealed class ClientSession
                     _ghosts[dead.Id] = dead;
                 }
 
-                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content), first));
+                _pending.Enqueue((HighlightOf(e, PlaySession.Describe(e, Content, UnitNames.Of(State, Content)), before, State), Beat.Of(e, before, State), ActCards.Of(e, before, State, Content), first));
                 first = false;
             }
 

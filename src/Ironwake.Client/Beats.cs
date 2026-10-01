@@ -125,17 +125,18 @@ public static class ActCards
     /// </summary>
     public static ActCard? Of(GameEvent e, BattleState before, BattleState after, GameContent content)
     {
+        var names = UnitNames.Of(after, content);
         BattleUnit? Find(string id) => before.Find(id) ?? after.Find(id);
         ActCard Solo(string id, string doing) =>
-            Find(id) is { } u ? new ActCard(u.Id, u.Unit.Name, u.Unit.ClassId, doing, null, null) : new ActCard(id, id, "", doing, null, null);
+            Find(id) is { } u ? new ActCard(u.Id, names[u.Id], u.Unit.ClassId, doing, null, null) : new ActCard(id, names[id], "", doing, null, null);
         switch (e)
         {
             case CombatFought c when before.Find(c.AttackerId) is { } a && before.Find(c.TargetId) is { } t:
-                ActSide Side(BattleUnit u, int hpAfter) => new(u.Id, u.Unit.Name, u.Unit.ClassId, u.IsBoss, u.Hp, hpAfter, u.MaxHp(content),
+                ActSide Side(BattleUnit u, int hpAfter) => new(u.Id, names[u.Id], u.Unit.ClassId, u.IsBoss, u.Hp, hpAfter, u.MaxHp(content),
                     c.Strikes.Where(s => s.AttackerId == u.Id).Select(s => !s.Hit ? "miss" : s.Crit ? $"crit {s.Damage}" : s.Damage.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToList());
-                var fallen = c.TargetHpAfter == 0 ? t.Unit.Name : c.AttackerHpAfter == 0 ? a.Unit.Name : null;
+                var fallen = c.TargetHpAfter == 0 ? names[t.Id] : c.AttackerHpAfter == 0 ? names[a.Id] : null;
                 var result = fallen is null ? "both stand" : $"{fallen} falls";
-                return new ActCard(a.Id, a.Unit.Name, a.Unit.ClassId, $"strikes {t.Unit.Name}: {result}", Side(a, c.AttackerHpAfter), Side(t, c.TargetHpAfter), fallen);
+                return new ActCard(a.Id, names[a.Id], a.Unit.ClassId, $"strikes {names[t.Id]}: {result}", Side(a, c.AttackerHpAfter), Side(t, c.TargetHpAfter), fallen);
             case UnitMoved m:
                 return Solo(m.UnitId, $"moves to {m.To.X},{m.To.Y}");
             case Cantoed m:
@@ -143,7 +144,7 @@ public static class ActCards
             case UnitWaited w:
                 return Solo(w.UnitId, w.Braced ? "waits, braced" : "waits");
             case UnitHealed h:
-                return Solo(h.UnitId, PlaySession.Describe(h, content));
+                return Solo(h.UnitId, PlaySession.Describe(h, content, names));
             case UnitSpawned s:
                 return Solo(s.UnitId, $"arrives at {s.At.X},{s.At.Y}");
             default:

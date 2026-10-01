@@ -120,7 +120,7 @@ public sealed class Callouts
 
 /// <summary>
 /// The end card (issue 515): won or lost, a line on what it cost or why, and the turn it ended
-/// on. The reason for a loss is the console's own verdict, without its "lost because", which
+/// on. The reason for a loss is the console's own verdict, without its "Lost because", which
 /// the headline already says; a Seize map run out of turns says it without the coordinates
 /// (issue 516, round 163), which stay in the log.
 /// </summary>
@@ -139,10 +139,10 @@ public sealed record EndCard(bool Won, string Headline, string Line, string Turn
 
         if (!won)
         {
-            const string lead = "lost because ";
-            var why = Objective.Verdict(state, content) ?? "lost";
+            const string lead = "Lost because ";
+            var why = Objective.Verdict(state, content) ?? "Lost.";
             why = why.StartsWith(lead, StringComparison.Ordinal) ? why[lead.Length..] : why;
-            return new EndCard(false, "Lost", char.ToUpperInvariant(why[0]) + why[1..] + ".", turn);
+            return new EndCard(false, "Lost", UnitNames.Sentence(why), turn);
         }
 
         var start = state.History.Count > 0 ? state.History[0] : state;

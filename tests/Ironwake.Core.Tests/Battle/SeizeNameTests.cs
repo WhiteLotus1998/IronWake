@@ -50,7 +50,8 @@ public class SeizeNameTests
         var content = Renamed(Starter, "Bridge");
         var state = Start(map: Hall("seize"));
 
-        Assert.Equal("objective: the captain, hale (A), must stand on the bridge at 12,1 by the end of turn 10; only the captain seizes; lost if the captain falls", Objective.Line(state, content));
+        Assert.Equal("Get the captain to the bridge by the end of turn 10. Captain hale must survive.", Objective.Line(state, content));
+        Assert.Contains("on the bridge at 12,1", Assert.Single(Objective.Rules(state, content)), StringComparison.Ordinal);
         Assert.DoesNotContain("gate", Objective.Line(state, content), StringComparison.Ordinal);
     }
 
@@ -89,7 +90,8 @@ public class SeizeNameTests
 
         using var json = JsonDocument.Parse(ProtocolJson.State(client.State, content));
         Assert.Equal(name, json.RootElement.GetProperty("seizeName").GetString());
-        Assert.Contains($"must stand on the {name} at 7,1", client.Objective, StringComparison.Ordinal);
+        Assert.Equal($"Get the captain to the {name} by the end of turn 10. Captain Fenn must survive.", client.Objective);
+        Assert.Contains($"must stand on the {name} at 7,1", Assert.Single(Objective.Rules(client.State, content)), StringComparison.Ordinal);
         Assert.Equal(name, content.TerrainById(MapDefinition.ThroneTerrainId).Name.ToLowerInvariant());
         Assert.Contains(Screens.HowTo, s => s.Heading == "The goal" && s.Lines[0].Contains($"onto the {name}.", StringComparison.Ordinal));
 

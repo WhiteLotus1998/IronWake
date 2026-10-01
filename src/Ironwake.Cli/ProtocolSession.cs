@@ -146,7 +146,7 @@ public sealed class ProtocolSession
                 }
                 else
                 {
-                    ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e, _content));
+                    ProtocolJson.WriteEvent(w, e, PlaySession.Describe(e, _content, UnitNames.Of(_state, _content)));
                 }
             }
 

@@ -157,6 +157,6 @@ public sealed class EndLethalTests
         var repo = Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName;
         var transcript = File.ReadAllText(Path.Combine(repo, "docs", "transcripts", "2026-09-29-saltmarsh_ford-541.txt")).ReplaceLineEndings("\n");
 
-        Assert.Contains("> end\nlethal if all land: wren (brigand-1 11 against 11 hp)\n-- player phase ends, turn 7 --\n-- enemy phase, turn 7 --\n", transcript);
+        Assert.Contains("> end\nlethal if all land: wren (brigand-1 11 against 11 hp)\n-- Player phase ends, turn 7 --\n-- Enemy phase, turn 7 --\n", transcript);
     }
 }

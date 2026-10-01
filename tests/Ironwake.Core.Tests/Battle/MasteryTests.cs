@@ -297,6 +297,6 @@ public class MasteryTests
     [Fact]
     public void TheConsoleNamesAMasteryEarned()
     {
-        Assert.Equal("hale masters the Cadet class and keeps Axebreaker", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axebreaker"), Starter));
+        Assert.Equal("Hale masters the Cadet class and keeps Axebreaker", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axebreaker"), Starter, UnitNames.None));
     }
 }

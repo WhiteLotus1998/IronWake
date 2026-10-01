@@ -231,7 +231,7 @@ public sealed class CampaignSession
 
             WriteEvent(MapLine(_record, _content, map));
             var battle = new PlaySession(_content, _record.Begin(map, _content, _scheme), _out, _scripted, _line);
-            _out.WriteLine(Objective.Line(battle.State, _content));
+            _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
             _out.Write(MapRenderer.Render(battle.State, _content));
             stopped = battle.RunCommands(input, strict, ref _commands);
             _line = battle.Line;
@@ -367,7 +367,7 @@ public sealed class CampaignSession
         }
         var battle = new PlaySession(_content, _record.BeginTrial(trial, unitId, _content, _scheme), _out, _scripted, _line);
         battle.WritePendingEvents();
-        _out.WriteLine(Objective.Line(battle.State, _content));
+        _out.WriteLine("Objective: " + Objective.Line(battle.State, _content));
         _out.Write(MapRenderer.Render(battle.State, _content));
         var stopped = battle.RunCommands(input, strict, ref _commands);
         _line = battle.Line;

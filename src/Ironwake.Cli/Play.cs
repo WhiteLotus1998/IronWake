@@ -427,7 +427,7 @@ public sealed class PlaySession
             _out.WriteLine($"certification trial: {candidate.Unit.Id} plays as {_content.Class(trialHeader.ClassId).Name} with {string.Join(", ", trialHeader.Loadout)}");
         }
 
-        _out.WriteLine(Objective.Line(_state, _content));
+        _out.WriteLine("Objective: " + Objective.Line(_state, _content));
         if (_state.Map.Certification is not null || _state.Map.Announced)
         {
             WritePendingEvents();
@@ -676,6 +676,11 @@ public sealed class PlaySession
                 break;
             case "help":
                 _out.WriteLine(Help);
+                foreach (var rule in Objective.Rules(_state, _content))
+                {
+                    _out.WriteLine(rule);
+                }
+
                 break;
             default:
                 Error($"unknown command '{words[0]}'; type help");
@@ -706,7 +711,7 @@ public sealed class PlaySession
         _state = result.Next;
         foreach (var e in result.Events)
         {
-            WriteEvent(Describe(e, _content));
+            WriteEvent(Describe(e, _content, UnitNames.Of(_state, _content)));
         }
 
         foreach (var notice in Objective.Notices(before, _state, _content, command))
@@ -795,7 +800,7 @@ public sealed class PlaySession
                 foreach (var e in hidden.Events.Where(e => e is not UnitMoved and not UnitWaited))
                 {
                     darkRun = FlushDarkRun(darkRun);
-                    WriteEvent(Describe(e, _content));
+                    WriteEvent(Describe(e, _content, UnitNames.Of(_state, _content)));
                 }
 
                 continue;
@@ -870,7 +875,7 @@ public sealed class PlaySession
             _state = result.Next;
             foreach (var e in result.Events)
             {
-                WriteEvent(Describe(e, _content));
+                WriteEvent(Describe(e, _content, UnitNames.Of(_state, _content)));
                 if (e is CombatFought fought)
                 {
                     foreach (var entry in _exposure.Where(x => x.UnitId == fought.TargetId && x.Turn == fought.Turn))
@@ -1969,123 +1974,127 @@ public sealed class PlaySession
 
     /// <summary>
     /// One line per event, the words a transcript reader sees. Items, weapons, abilities, classes
-    /// and terrain print their display names from <paramref name="content"/>; units keep their ids,
-    /// the handles a command types.
+    /// and terrain print their display names from <paramref name="content"/>; units print the names in
+    /// <paramref name="names"/>, never their ids (issue 609), and every line is in sentence case.
+    /// A command still types the id; only the narration reads as names.
     /// </summary>
-    public static string Describe(GameEvent e, GameContent content)
+    public static string Describe(GameEvent e, GameContent content, UnitNames names) =>
+        UnitNames.Sentence(DescribeLine(e, content, names));
+
+    private static string DescribeLine(GameEvent e, GameContent content, UnitNames names)
     {
         switch (e)
         {
             case UnitMoved m:
-                return $"{m.UnitId} moves {m.From} -> {m.To}" + (m.Path.Count > 1 ? " via " + string.Join(" ", m.Path.Take(m.Path.Count - 1)) : "");
+                return $"{names[m.UnitId]} moves {m.From} -> {m.To}" + (m.Path.Count > 1 ? " via " + string.Join(" ", m.Path.Take(m.Path.Count - 1)) : "");
             case CombatFought f:
                 var sb = new StringBuilder();
-                sb.Append($"{f.AttackerId} attacks {f.TargetId}");
+                sb.Append($"{names[f.AttackerId]} attacks {names[f.TargetId]}");
                 foreach (var strike in f.Strikes)
                 {
-                    sb.Append('\n').Append("  ").Append(strike.AttackerId).Append(' ')
-                        .Append(!strike.Hit ? "misses " + strike.TargetId : $"{(strike.Crit ? "crits" : "hits")} {strike.TargetId} for {strike.Damage} (hp {strike.TargetHpAfter})");
+                    sb.Append('\n').Append("  ").Append(names[strike.AttackerId]).Append(' ')
+                        .Append(!strike.Hit ? "misses " + names[strike.TargetId] : $"{(strike.Crit ? "crits" : "hits")} {names[strike.TargetId]} for {strike.Damage} (hp {strike.TargetHpAfter})");
                 }
 
-                sb.Append('\n').Append($"  {f.AttackerId} hp {f.AttackerHpAfter}, {f.TargetId} hp {f.TargetHpAfter}");
+                sb.Append('\n').Append($"  {names[f.AttackerId]} hp {f.AttackerHpAfter}, {names[f.TargetId]} hp {f.TargetHpAfter}");
                 return sb.ToString();
             case UnitDied d:
-                return $"{d.UnitId} falls at {d.At}";
+                return $"{names[d.UnitId]} falls at {d.At}";
             case ExpGained x:
-                return $"{x.UnitId} gains {x.Amount} exp ({x.ExpAfter})";
+                return $"{names[x.UnitId]} gains {x.Amount} exp ({x.ExpAfter})";
             case LeveledUp l:
                 var rose = string.Join(" ", Stats.All.Where(stat => l.Gains.Get(stat) > 0).Select(stat => stat.ToString().ToLowerInvariant() + " +1"));
-                return $"{l.UnitId} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
+                return $"{names[l.UnitId]} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
             case RankRaised k:
-                return $"{k.UnitId} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
+                return $"{names[k.UnitId]} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
             case MasteryEarned m:
-                return $"{m.UnitId} masters the {ClassName(m.ClassId, content)} class and keeps {AbilityName(m.AbilityId, content)}";
+                return $"{names[m.UnitId]} masters the {ClassName(m.ClassId, content)} class and keeps {AbilityName(m.AbilityId, content)}";
             case UnitWaited w:
-                return w.Braced ? $"{w.UnitId} waits and braces" : $"{w.UnitId} waits";
+                return w.Braced ? $"{names[w.UnitId]} waits and braces" : $"{names[w.UnitId]} waits";
             case UnitExited x:
-                return $"{x.UnitId} leaves through the exit at {x.At}";
+                return $"{names[x.UnitId]} leaves through the exit at {x.At}";
             case UnitLeftBehind b:
-                return $"{b.UnitId} is left behind at {b.At}";
+                return $"{names[b.UnitId]} is left behind at {b.At}";
             case KeepsakeLeft k:
                 return $"{Keepsake.Name(k.ItemId, k.FallenId, content)} lies at {k.At}";
             case KeepsakeRecovered k:
-                return $"{k.UnitId} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
+                return $"{names[k.UnitId]} recovers {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case KeepsakeTaken k:
-                return $"{k.UnitId} takes {Keepsake.Name(k.ItemId, k.FallenId, content)}";
+                return $"{names[k.UnitId]} takes {Keepsake.Name(k.ItemId, k.FallenId, content)}";
             case KeepsakeLost k:
                 return k.CarrierId is { } carrier
-                    ? $"{Keepsake.Name(k.ItemId, k.FallenId, content)} went with {carrier}"
+                    ? $"{Keepsake.Name(k.ItemId, k.FallenId, content)} went with {names[carrier]}"
                     : $"{Keepsake.Name(k.ItemId, k.FallenId, content)} was left at {k.At}";
             case Cantoed c:
                 return c.From == c.To
-                    ? $"{c.UnitId} stays at {c.To} (canto)"
-                    : $"{c.UnitId} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
+                    ? $"{names[c.UnitId]} stays at {c.To} (canto)"
+                    : $"{names[c.UnitId]} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
             case Shoved s:
-                return $"{s.UnitId} shoves {s.TargetId} {s.From} -> {s.To}";
+                return $"{names[s.UnitId]} shoves {names[s.TargetId]} {s.From} -> {s.To}";
             case UnitRetreated r:
-                return $"{r.UnitId} falls back to {r.To} and will not fight this phase";
+                return $"{names[r.UnitId]} falls back to {r.To} and will not fight this phase";
             case UnitBroke b:
-                return $"{b.UnitId} breaks and flees ({b.Hp} hp)";
+                return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
             case GrudgeSworn g:
-                return $"{g.UnitId} swears a grudge against {g.AgainstId}";
+                return $"{names[g.UnitId]} swears a grudge against {names[g.AgainstId]}";
             case UnitHealed h:
-                return $"{h.UnitId} heals {h.Amount} (hp {h.HpAfter})";
+                return $"{names[h.UnitId]} heals {h.Amount} (hp {h.HpAfter})";
             case UnitBurned b:
-                return $"{b.UnitId} burns {b.Amount} (hp {b.HpAfter})";
+                return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
             case WatchTaken w:
-                return $"{w.UnitId} watches from {w.At}"
+                return $"{names[w.UnitId]} watches from {w.At}"
                     + (!w.Holds ? "" : w.HoldsInsteadOf is { } instead ? $"; holds instead of {w.At} -> {instead}" : "; holds (no move closer)")
-                    + (w.PassedUpTargetId is { } passed ? $"; passes up {passed} at {w.PassedUpHit}" : "; no strike passed up");
+                    + (w.PassedUpTargetId is { } passed ? $"; passes up {names[passed]} at {w.PassedUpHit}" : "; no strike passed up");
             case WatchFired w:
-                return $"{w.UnitId}'s watch fires on {w.TargetId} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({w.TargetId} hp {w.Strike.TargetHpAfter})";
+                return $"{names[w.UnitId]}'s watch fires on {names[w.TargetId]} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({names[w.TargetId]} hp {w.Strike.TargetHpAfter})";
             case WatchHeld w:
-                return $"{w.UnitId}'s watch holds on {w.TargetId} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; she still watches";
+                return $"{names[w.UnitId]}'s watch holds on {names[w.TargetId]} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; she still watches";
             case WatchEnded w:
-                return $"{w.UnitId} is struck and stops watching";
+                return $"{names[w.UnitId]} is struck and stops watching";
             case CoverTaken c:
-                return $"{c.UnitId} covers {c.AllyId}; if struck, {c.AllyId} lands on {c.AllyLandsOn}" + (c.PassedUpTargetId is { } passedUp ? $"; passes up {passedUp} at {c.PassedUpHit}" : "; no strike passed up");
+                return $"{names[c.UnitId]} covers {names[c.AllyId]}; if struck, {names[c.AllyId]} lands on {c.AllyLandsOn}" + (c.PassedUpTargetId is { } passedUp ? $"; passes up {names[passedUp]} at {c.PassedUpHit}" : "; no strike passed up");
             case CoverFired c:
-                return $"{c.UnitId} covers {c.AllyId}: steps onto {c.At}, {c.AllyId} to {c.AllyTo}; {c.AttackerId}'s strike "
-                    + (c.WouldHaveKilled ? "would have killed" : "would not have killed") + $" {c.AllyId}" + (c.Counters ? "" : $"; {c.UnitId} cannot counter");
+                return $"{names[c.UnitId]} covers {names[c.AllyId]}: steps onto {c.At}, {names[c.AllyId]} to {c.AllyTo}; {names[c.AttackerId]}'s strike "
+                    + (c.WouldHaveKilled ? "would have killed" : "would not have killed") + $" {names[c.AllyId]}" + (c.Counters ? "" : $"; {names[c.UnitId]} cannot counter");
             case BlowRaised b:
-                return $"{b.UnitId} raises a blow over {b.At} ({b.TargetId}); it lands at {b.UnitId}'s next phase start";
+                return $"{names[b.UnitId]} raises a blow over {b.At} ({names[b.TargetId]}); it lands at {names[b.UnitId]}'s next phase start";
             case BlowLanded b:
-                return $"{b.UnitId}'s blow lands on {b.TargetId} at {b.At} for {b.Damage} (hp {b.TargetHpAfter})";
+                return $"{names[b.UnitId]}'s blow lands on {names[b.TargetId]} at {b.At} for {b.Damage} (hp {b.TargetHpAfter})";
             case BlowFell b:
-                return $"{b.UnitId}'s blow falls on empty ground at {b.At}";
+                return $"{names[b.UnitId]}'s blow falls on empty ground at {b.At}";
             case BlowBroken b:
-                return $"{b.UnitId}'s blow over {b.At} is broken";
+                return $"{names[b.UnitId]}'s blow over {b.At} is broken";
             case PhaseEnded p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase ends, turn {p.Turn} --";
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
                 return $"group {g.Group} wakes: {WakeCauseText(g)}"
-                    + (g.Lamps.Count > 0 ? $"; its lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{l.UnitId} {l.At}"))})" : "");
+                    + (g.Lamps.Count > 0 ? $"; its lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{names[l.UnitId]} {l.At}"))})" : "");
             case MapEventFired m:
                 return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
             case TerrainChanged t:
                 return $"  {t.At} becomes {(content.Terrain.TryGetValue(t.TerrainId, out var terrain) ? terrain.Name : t.TerrainId)}";
             case UnitSpawned u:
-                return $"  {u.UnitId} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
+                return $"  {names[u.UnitId]} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
             case FlagSet f:
                 return $"  flag {f.Flag} is set";
             case RapportGained g:
-                return $"rapport {g.A} and {g.B} +{g.Amount} ({g.Total}{(g.OutOf is { } outOf ? $" of {outOf}" : "")})";
+                return $"rapport {names[g.A]} and {names[g.B]} +{g.Amount} ({g.Total}{(g.OutOf is { } outOf ? $" of {outOf}" : "")})";
             case RivalryEnded r:
-                return $"{r.A} and {r.B} are rivals no longer";
+                return $"{names[r.A]} and {names[r.B]} are rivals no longer";
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:
-                return $"{i.UnitId} uses {content.ItemName(i.ItemId)}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
+                return $"{names[i.UnitId]} uses {content.ItemName(i.ItemId)}" + (i.TargetId == i.UnitId ? "" : " on " + i.TargetId) + $" ({i.UsesLeft} left)";
             case WeaponEquipped w:
-                return $"{w.UnitId} equips {content.ItemName(w.ItemId)}";
+                return $"{names[w.UnitId]} equips {content.ItemName(w.ItemId)}";
             case ArtDeclared a:
-                return $"{a.UnitId} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra uses";
+                return $"{names[a.UnitId]} declares {AbilityName(a.ArtId, content)} with {content.ItemName(a.ItemId)}, spending {a.Cost} extra uses";
             case WeaponBroke b:
-                return $"{b.UnitId}'s {content.ItemName(b.ItemId)} breaks";
+                return $"{names[b.UnitId]}'s {content.ItemName(b.ItemId)} breaks";
             case SpellSpent s:
-                return $"{s.UnitId}'s {content.ItemName(s.ItemId)} is spent for this battle";
+                return $"{names[s.UnitId]}'s {content.ItemName(s.ItemId)} is spent for this battle";
             default:
                 return e.ToString() ?? "?";
         }

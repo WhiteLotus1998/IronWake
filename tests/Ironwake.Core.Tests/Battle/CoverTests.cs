@@ -259,7 +259,7 @@ public class CoverTests
         var fought = Assert.Single(struck.Events.OfType<CombatFought>());
         Assert.Equal("ta", fought.TargetId);
         Assert.All(fought.Strikes, s => Assert.Equal("archer-1", s.AttackerId));
-        Assert.Contains("ta cannot counter", PlaySession.Describe(fired, Starter));
+        Assert.Contains("ta cannot counter", PlaySession.Describe(fired, Starter, UnitNames.None));
     }
 
     [Fact]

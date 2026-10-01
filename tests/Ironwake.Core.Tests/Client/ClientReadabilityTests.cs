@@ -60,14 +60,18 @@ public class ClientReadabilityTests
     [Fact]
     public void AStrikeMarksWhereTheAttackerStoodAndWhomItStruck()
     {
-        var strikes = Steps(Brackwater()).Where(s => s.Mark.Line.Contains(" attacks ", StringComparison.Ordinal)).ToList();
+        var client = Brackwater();
+        var strikes = Steps(client).Where(s => s.Mark.Line.Contains(" attacks ", StringComparison.Ordinal)).ToList();
 
         Assert.NotEmpty(strikes);
         Assert.All(strikes, s =>
         {
-            var words = s.Mark.Line.Split(' ', '\n');
-            Assert.Equal(s.Before.Find(words[0])!.At, s.Mark.To);
-            Assert.Equal(s.Before.Find(words[2])!.At, s.Mark.Struck);
+            var names = UnitNames.Of(s.Before, client.Content);
+            var head = s.Mark.Line.Split('\n')[0];
+            var attacker = Assert.Single(s.Before.Units, u => head.StartsWith(names[u.Id] + " attacks ", StringComparison.Ordinal));
+            var target = Assert.Single(s.Before.Units, u => head.EndsWith(" attacks " + names[u.Id], StringComparison.Ordinal));
+            Assert.Equal(attacker.At, s.Mark.To);
+            Assert.Equal(target.At, s.Mark.Struck);
         });
     }
 

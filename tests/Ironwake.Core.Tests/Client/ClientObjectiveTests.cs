@@ -35,18 +35,18 @@ public class ClientObjectiveTests
     {
         var client = Client();
 
-        Assert.Equal(Objective.Line(client.State, client.Content, letters: false), client.Objective);
-        Assert.Contains("gate at 12,1", client.Objective);
+        Assert.Equal(Objective.Line(client.State, client.Content), client.Objective);
+        Assert.Equal("Get the captain to the gate by the end of turn 1. Captain hale must survive.", client.Objective);
     }
 
     [Fact]
-    public void TheClientsObjectiveLineDropsTheConsolesPlacementLetter()
+    public void TheObjectiveLineLeavesTheLetterAndTheTileToTheRules()
     {
         var client = Client();
 
-        Assert.Contains("the captain, hale, must stand", client.Objective, StringComparison.Ordinal);
         Assert.DoesNotContain("(A)", client.Objective, StringComparison.Ordinal);
-        Assert.Contains("the captain, hale (A), must stand", Objective.Line(client.State, client.Content), StringComparison.Ordinal);
+        Assert.DoesNotContain("12,1", client.Objective, StringComparison.Ordinal);
+        Assert.Equal("The captain, hale (A), must stand on the gate at 12,1. Only the captain seizes.", Assert.Single(Objective.Rules(client.State, client.Content)));
     }
 
     [Fact]
@@ -56,7 +56,7 @@ public class ClientObjectiveTests
 
         Assert.True(client.Submit(new Move("wren", new Coord(12, 1))));
 
-        Assert.Equal("wren stands on the gate, but only the captain, hale (A), seizes", client.Log[^1]);
+        Assert.Equal("Wren stands on the gate, but only the captain, hale, seizes.", client.Log[^1]);
     }
 
     [Fact]
@@ -68,8 +68,8 @@ public class ClientObjectiveTests
         Assert.Null(client.Verdict);
         client.Continue();
 
-        Assert.Equal("-- enemy phase ends, turn 1 --", client.Log[^1]);
+        Assert.Equal("-- Enemy phase ends, turn 1 --", client.Log[^1]);
         Assert.DoesNotContain(client.Log, line => line.Contains("turn 2", StringComparison.Ordinal));
-        Assert.Equal("lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1", client.Verdict);
+        Assert.Equal("Lost because turn 1 ended and the captain ended at 1,1, not on the gate at 12,1.", client.Verdict);
     }
 }
