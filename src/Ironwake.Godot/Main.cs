@@ -26,7 +26,7 @@ namespace Ironwake.Godot;
 /// ends the phase, after which the enemy phase plays itself (<c>Main.Motion.cs</c>, issue 513) at
 /// the speed S cycles; Space reveals its next event at once and marks it on the board, C skips
 /// to its end, R opens or closes the Recall browser, where a click on a state's row recalls it,
-/// Tab gives the column to the event log (<c>--log-open</c> opens with it), Escape clears the
+/// Tab opens the event log under any live card (<c>--log-open</c> opens with it), Escape clears the
 /// selection and closes the browser. An exported build finds <c>content/</c>
 /// beside its executable, and with no <c>--map</c> opens on the title (<c>Main.Screens.cs</c>,
 /// issue 515), whose Play opens the Tollgate with the turn-1 callouts; a decided battle shows the
@@ -51,7 +51,7 @@ public partial class Main : Node2D
     private const int RecallRowsShown = 40;
     private static readonly (string Key, string Does)[] Keys =
     {
-        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("P", "price"), ("Tab", "log"), (Sound.MuteKey, "sound"), ("Esc", "clear"),
+        ("click", "select, move, strike"), ("E", "end phase"), ("Space", "next enemy act"), ("C", "skip"), ("S", "speed"), ("R", "recall"), ("T", "threat"), ("P", "price"), ("Tab", PanelLayout.TabLabel), (Sound.MuteKey, "sound"), ("Esc", "clear"),
     };
 
     /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
@@ -933,7 +933,8 @@ public partial class Main : Node2D
     /// <summary>
     /// The side panel, top to bottom: status, the enemy phase's keys, then either the Recall
     /// browser or the drawn forecast with the threat on a stop under it (issue 512; boxed, first,
-    /// where the eye lands), the drawn unit card, and the event log, open on Tab.
+    /// where the eye lands), the drawn unit card, and the event log, open on Tab under any live
+    /// card (issue 608; the order is <see cref="PanelLayout"/>).
     /// </summary>
     private void DrawPanel()
     {
@@ -978,55 +979,57 @@ public partial class Main : Node2D
             return;
         }
 
-        if (_logOpen)
-        {
-            DrawLog(y);
-            return;
-        }
-
+        // An open log takes what is left of the column, never the card being read (issue 608).
         var boxTop = y - LineHeight + 4;
         var cards = _hover is { } tile && !client.EnemyPhasePlaying ? client.Hover(tile) : Array.Empty<HoverForecast>();
-        if (cards.Count > 0)
+        var act = cards.Count > 0 ? null : client.ActShown(Animating);
+        var preview = cards.Count > 0 || act is not null || _hover is not { } spot ? null : client.Preview(spot);
+        var parts = PanelLayout.Parts(_recallOpen, _logOpen, cards.Count > 0 || act is not null || preview is not null);
+        if (parts.Contains(PanelPart.Forecast))
         {
-            // The drawn forecast (issue 512), then the threat on the unit if it stops there, in the move preview's words.
-            y = DrawForecastCard(boxTop, cards[0].Card) + 22;
-            foreach (var other in cards.Skip(1))
+            if (cards.Count > 0)
             {
-                var o = other.Card.Defender;
-                UiText(new Vector2(PanelOrigin.X, y), $"also in reach: {o.Name} {other.TargetAt.X},{other.TargetAt.Y}  hit {other.Card.Attacker.Strike.DisplayedHit}  dmg {other.Card.Attacker.Strike.Damage}", Muted, 12);
-                y += LineHeight;
+                // The drawn forecast (issue 512), then the threat on the unit if it stops there, in the move preview's words.
+                y = DrawForecastCard(boxTop, cards[0].Card) + 22;
+                foreach (var other in cards.Skip(1))
+                {
+                    var o = other.Card.Defender;
+                    UiText(new Vector2(PanelOrigin.X, y), $"also in reach: {o.Name} {other.TargetAt.X},{other.TargetAt.Y}  hit {other.Card.Attacker.Strike.DisplayedHit}  dmg {other.Card.Attacker.Strike.Damage}", Muted, 12);
+                    y += LineHeight;
+                }
+
+                if (client.Stop(_hover!.Value) is { } stop)
+                {
+                    y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
+                    y = PricedRows(y, _hover.Value);
+                }
+            }
+            else if (act is not null)
+            {
+                y = DrawActCard(boxTop, act) + 22;
+            }
+            else if (preview is not null)
+            {
+                y = Title(y, "FORECAST");
+                y = PreviewRow(y, preview, "");
+                y = PricedRows(y, _hover!.Value);
+            }
+            else
+            {
+                y = Title(y, "FORECAST");
+                var forecast = ForecastLines().ToList();
+                Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, Wrapped(forecast).Count() * LineHeight + 10), Box, 8);
+                foreach (var text in forecast)
+                {
+                    y = Row(y, text, Ink);
+                }
             }
 
-            if (client.Stop(_hover!.Value) is { } stop)
-            {
-                y = PreviewRow(y, stop, $"if {cards[0].Card.Attacker.Name} stops here: ");
-                y = PricedRows(y, _hover.Value);
-            }
-        }
-        else if (client.ActShown(Animating) is { } act)
-        {
-            y = DrawActCard(boxTop, act) + 22;
-        }
-        else if (_hover is { } spot && client.Preview(spot) is { } preview)
-        {
-            y = Title(y, "FORECAST");
-            y = PreviewRow(y, preview, "");
-            y = PricedRows(y, spot);
-        }
-        else
-        {
-            y = Title(y, "FORECAST");
-            var forecast = ForecastLines().ToList();
-            Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, Wrapped(forecast).Count() * LineHeight + 10), Box, 8);
-            foreach (var text in forecast)
-            {
-                y = Row(y, text, Ink);
-            }
+            y += 10;
         }
 
-        y += 10;
         var unitAt = _hover is { } over && client.UnitAt(over) is not null ? over : client.Selected is { } id ? client.State.Find(id)?.At : null;
-        if (unitAt is { } at && client.Card(at) is { } unitCard && y - LineHeight + 4 + UnitCardHeight <= PanelBottom - 2 * LineHeight)
+        if (parts.Contains(PanelPart.UnitCard) && unitAt is { } at && client.Card(at) is { } unitCard && y - LineHeight + 4 + UnitCardHeight <= PanelBottom - 2 * LineHeight)
         {
             y = DrawUnitCard(y - LineHeight + 4, unitCard) + LineHeight + 12;
         }
@@ -1069,8 +1072,8 @@ public partial class Main : Node2D
     /// <summary>
     /// The event log (issue 512) from <paramref name="y"/> to the column's foot, newest at the
     /// bottom, the line the board marks drawn in the mark colour: under the cards, the newest
-    /// lines that fit and at least one, so the enemy phase still reads; with Tab, the whole column
-    /// under the status lines, the cards set aside.
+    /// lines that fit and at least one, so the enemy phase still reads; with Tab, the whole log in
+    /// what the live card leaves (issue 608).
     /// </summary>
     private void DrawLog(float y)
     {
