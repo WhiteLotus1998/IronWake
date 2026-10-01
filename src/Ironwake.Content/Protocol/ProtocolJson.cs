@@ -1172,6 +1172,10 @@ public static class ProtocolJson
         }
 
         w.WriteEndArray();
+        if (record.Rooms.Count > 0)
+        {
+            WriteStrings(w, "rooms", record.Rooms);
+        }
         w.WriteEndObject();
     });
 
@@ -1217,8 +1221,26 @@ public static class ProtocolJson
             QuestsWon = ReadQuestsWon(e, content),
             QuestsTried = e.TryGetProperty("questsTried", out _) ? ReadStrings(e, "questsTried") : ValueList<string>.Empty,
             Keep = ReadKeep(e, content),
+            Rooms = ReadRooms(e, content),
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
         };
+    }
+
+    /// <summary>The optional <c>rooms</c> array of a campaign record (issue 687), room ids as bought; a record written before it reads as none.</summary>
+    private static ValueList<string> ReadRooms(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("rooms", out _))
+        {
+            return ValueList<string>.Empty;
+        }
+
+        var rooms = ReadStrings(e, "rooms");
+        foreach (var id in rooms.Where(id => content.Campaign.Keep.Room(id) is null))
+        {
+            throw new ProtocolException($"field 'rooms': '{id}' is not a room the keep sells");
+        }
+
+        return rooms;
     }
 
     /// <summary>The optional <c>keep</c> array of a campaign record (issue 288); a record written before it reads as nothing built.</summary>

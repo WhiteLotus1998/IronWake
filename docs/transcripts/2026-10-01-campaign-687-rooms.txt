@@ -1,0 +1,63 @@
+Campaign, seed 687, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 maps
+-- Starting Alone --
+The appointment came with a seal, a coat, and a list. The list is the
+company: ten names from three regions, owed to Ironwake under the
+armistice. None of them has arrived. I read it every morning anyway. So
+far it is the only part of the job I have done.
+
+The keep is two days east. Someone has followed me since the ford, and
+the waystation ahead has a fort with its gate still on. A fort keeps the
+weather off. It does not keep anyone from shooting at it.
+
+What the crown taught me before it sent me, which was not a lot: read
+the blow before you swing it. Know who answers back and who cannot. A
+sword answers a sword. It does not answer a bow.
+
+(forecast <unit> <target> prints a strike and its counter before you
+take it. threat <unit> prints who can reach you next phase. recall
+rewinds to a player turn you name; you have three.)
+
+-- Before map 1 of 9: Starting Alone; the purse holds 500 --
+Roster:
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
+  Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
+  Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
+  Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Shop: iron_sword 400, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+Deploys to Starting Alone: Alder Fenn
+Rooms: beds: 10/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +1 bed, built 0 of 2
+> keep
+Rooms: beds: 10/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +1 bed, built 0 of 2
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+> build bunk
+Bunk room built for 400, the purse holds 100; beds: 10/13
+> build bunk
+ERROR: Bunk room costs 400 and the purse holds 100
+> build wall 10,3
+ERROR: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+> build wall
+ERROR: Usage: build <room>, or build <edit> <x,y>
+> build chapel
+ERROR: The keep has no room 'chapel'; it builds bunk
+> shop
+Shop: iron_sword 400, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+> keep
+Rooms: beds: 10/13; a fallen member keeps their bed
+  bunk: Bunk room, 400, +1 bed, built 1 of 2
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+Campaign stopped before Starting Alone: the script ended on the screen
+Rejected 4 of 8 commands:
+  line 3: build bunk: Bunk room costs 400 and the purse holds 100
+  line 4: build wall 10,3: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+  line 5: build wall: Usage: build <room>, or build <edit> <x,y>
+  line 6: build chapel: The keep has no room 'chapel'; it builds bunk

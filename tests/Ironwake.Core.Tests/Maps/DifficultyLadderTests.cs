@@ -144,7 +144,7 @@ public class DifficultyLadderTests
     {
         var transcripts = Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts");
         var script = Path.Combine(transcripts, "2026-10-01-the_tollgate-664-wounded.script");
-        var args = new[] { "campaign", "--from", "the_tollgate", "--seed", "701", "--permadeath", "off", "--script", script, "--strict", "--content", Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--from", "the_tollgate", "--seed", "701", "--permadeath", "off", "--script", script, "--strict", "--content", Fixture.RoomlessContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Ironwake.Cli.Program.Main(args));
 

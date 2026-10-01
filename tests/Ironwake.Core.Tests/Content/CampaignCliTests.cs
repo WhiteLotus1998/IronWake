@@ -70,7 +70,7 @@ public class CampaignCliTests
 
         Assert.Contains("> keep\nERROR: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
         Assert.Contains("> build wall 10,3\nERROR: The keep's menu opens after the raid on it (ironwake_raid, map 5) is fought\n", output);
-        Assert.Contains("ERROR: Usage: build <edit> <x,y>\n", output);
+        Assert.Contains("ERROR: Usage: build <room>, or build <edit> <x,y>\n", output);
         Assert.DoesNotContain("Keep: Ironwake Keep", output);
     }
 

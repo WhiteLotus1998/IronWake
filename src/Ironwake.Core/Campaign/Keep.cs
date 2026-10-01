@@ -9,6 +9,13 @@ namespace Ironwake.Core;
 public sealed record KeepEdit(string Id, string Name, string TerrainId, int Price, ValueList<Coord> At);
 
 /// <summary>
+/// One room the keep sells (issue 687, DESIGN section 13.20, DECISIONS/0137): <see cref="Beds"/>
+/// more beds for <see cref="Price"/>, bought at most <see cref="Max"/> times, from the purse the
+/// keep's edits spend. A room changes no tile; it changes who may join.
+/// </summary>
+public sealed record KeepRoom(string Id, string Name, int Price, int Beds, int Max);
+
+/// <summary>
 /// The keep's map id under <c>content/keep</c> and the edits sold for it, in content order (issue 82),
 /// and the raid's map id beside it (issue 288), empty when the keep has none: the raid is fought on
 /// the bare keep with a smaller force from the finale's own spawn tiles, and the menu opens after it.
@@ -22,6 +29,18 @@ public sealed record KeepMenu(string MapId, ValueList<KeepEdit> Edits)
 
     /// <summary>Whether <paramref name="mapId"/> is the keep or its raid, the campaign maps read from <c>content/keep</c>.</summary>
     public bool IsKeepMap(string mapId) => this != None && (mapId == MapId || (RaidId.Length > 0 && mapId == RaidId));
+
+    /// <summary>
+    /// The beds the keep starts with (issue 687, DESIGN section 13.20), or 0 when the campaign
+    /// counts none and every meeting joins. Every member who has joined holds one, living or fallen.
+    /// </summary>
+    public int Beds { get; init; }
+
+    /// <summary>The rooms sold for the keep (issue 687), in content order; bought at any camp from map 1.</summary>
+    public ValueList<KeepRoom> Rooms { get; init; } = ValueList<KeepRoom>.Empty;
+
+    /// <summary>The room named <paramref name="id"/>, or null when the keep sells none.</summary>
+    public KeepRoom? Room(string id) => Rooms.FirstOrDefault(r => r.Id == id);
 
     /// <summary>The edit named <paramref name="id"/>, or null when the menu has none.</summary>
     public KeepEdit? Edit(string id) => Edits.FirstOrDefault(e => e.Id == id);

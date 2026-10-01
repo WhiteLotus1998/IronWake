@@ -191,6 +191,20 @@ internal static class Fixture
         return target;
     }
 
+    private static readonly Lazy<string> Roomless = new(() => CopyRealContent("ironwake-roomless-"));
+
+    /// <summary>
+    /// A copy of the real content directory with the keep's beds and rooms taken out (issue 687):
+    /// a campaign journaled before the keep sold rooms prints no rooms line, and a transcript is a
+    /// record of the build it was played on. Made once per test run under the temp directory.
+    /// </summary>
+    public static string RoomlessContentDirectory() => Roomless.Value;
+
+    /// <summary>
+    /// A copy of the real content directory under the temp directory. Every copy stands for a build
+    /// some transcript was journaled on, all of them before the keep sold rooms, so the keep's
+    /// <c>beds</c> and <c>rooms</c> are taken out (issue 687).
+    /// </summary>
     private static string CopyRealContent(string prefix)
     {
         var source = RealContentDirectory();
@@ -200,6 +214,15 @@ internal static class Fixture
             var copy = Path.Combine(target, Path.GetRelativePath(source, file));
             Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
             File.Copy(file, copy);
+        }
+
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        if (campaign["keep"] is System.Text.Json.Nodes.JsonObject keep)
+        {
+            keep.Remove("beds");
+            keep.Remove("rooms");
+            File.WriteAllText(campaignPath, campaign.ToJsonString());
         }
 
         return target;

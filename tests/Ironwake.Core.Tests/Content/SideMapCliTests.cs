@@ -58,7 +58,7 @@ public class SideMapCliTests
     {
         var script = Transcript("2026-10-01-the_lazar_house-701.script");
 
-        var output = Run(out var exit, "campaign", "--from", "the_tollgate", "--seed", "701", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+        var output = Run(out var exit, "campaign", "--from", "the_tollgate", "--seed", "701", "--script", script, "--strict", "--content", Fixture.RoomlessContentDirectory());
 
         Assert.Equal(1, exit);
         Assert.Contains("Wren falls at 3,1\n", output);

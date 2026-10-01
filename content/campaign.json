@@ -57,6 +57,10 @@
   "keep": {
     "map": "ironwake_keep",
     "raid": "ironwake_raid",
+    "beds": 12,
+    "rooms": [
+      { "id": "bunk", "name": "Bunk room", "price": 400, "beds": 1, "max": 2 }
+    ],
     "edits": [
       { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },
       { "id": "ditch", "name": "Dig a ditch", "terrain": "water", "price": 300, "at": ["9,5", "9,6"] }
