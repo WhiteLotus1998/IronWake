@@ -1,0 +1,36 @@
+reach captain
+move captain 5,4
+threat captain
+wait captain
+end
+threat captain
+forecast captain brigand-1 from 8,4
+wait captain
+end
+threat captain
+forecast captain hexer-1 from 5,3
+forecast captain hexer-1 1 art feint from 5,3
+threat captain from 5,3
+move captain 5,3
+attack captain hexer-1 1
+end
+threat captain
+forecast captain archer-1 from 5,2
+forecast captain archer-1 1 art feint from 5,2
+move captain 5,2
+attack captain archer-1 1
+end
+recall list
+recall 22
+threat captain from 5,4
+move captain 5,4
+item captain 2
+end
+forecast captain archer-1 from 5,3
+threat captain from 5,3
+move captain 5,3
+attack captain archer-1 1
+end
+forecast captain archer-1 from 5,2
+move captain 5,2
+attack captain archer-1 1

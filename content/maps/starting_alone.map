@@ -1,0 +1,21 @@
+name: Starting Alone
+size: 12x8
+win: rout
+turn_limit: 10
+recall: 3
+enemy_level: 1
+
+............
+.^^......n..
+.^^.....nn..
+............
+.....F......
+..^.....^...
+..^.........
+============
+
+units:
+P captain 4,7
+E brigand 11,6 group:road behavior:aggressive
+E archer 9,1 group:hill behavior:guard
+E hexer 8,2 group:hill behavior:guard

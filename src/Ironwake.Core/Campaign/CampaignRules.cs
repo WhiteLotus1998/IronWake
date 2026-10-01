@@ -6,7 +6,17 @@ namespace Ironwake.Core;
 /// winning it, and the <see cref="Stock"/> the shop sells on the screen before it. Stock is fixed
 /// and unlimited, a list the player can plan two maps ahead, never a roll.
 /// </summary>
-public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Stock);
+public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Stock)
+{
+    /// <summary>
+    /// The text card printed before the map's screen (issue 631, DESIGN section 14), one paragraph
+    /// per entry, in the captain's voice; empty for a map without one.
+    /// </summary>
+    public ValueList<string> Before { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>The text card printed after the map is won (issue 631), as <see cref="Before"/>; empty for a map without one.</summary>
+    public ValueList<string> After { get; init; } = ValueList<string>.Empty;
+}
 
 /// <summary>
 /// A certification trial the campaign offers (issue 252, DESIGN section 13.6): the class it

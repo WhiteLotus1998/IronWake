@@ -84,7 +84,7 @@ public class KeepRaidTests
     {
         var start = CampaignRecord.Start(Content, 288) with { Purse = 5000 };
         var atRaid = start with { MapIndex = IndexOf(Menu.RaidId) };
-        const string closed = "the keep's menu opens after the raid on it (ironwake_raid, map 5) is fought";
+        const string closed = "the keep's menu opens after the raid on it (ironwake_raid, map 6) is fought";
 
         Assert.Equal(closed, start.KeepMenuRefusal(Content));
         Assert.Equal(closed, atRaid.KeepMenuRefusal(Content));

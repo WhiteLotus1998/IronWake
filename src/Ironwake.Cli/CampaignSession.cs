@@ -252,6 +252,7 @@ public sealed class CampaignSession
             var before = _record;
             _record = _record.AfterBattle(battle.State, _content);
             WriteEvent(WonLine(before, _record, battle.State, _content));
+            Lines(AfterCard(before, _content, map));
         }
 
         if (_record.IsFinished(_content))
@@ -399,6 +400,7 @@ public sealed class CampaignSession
     /// </summary>
     private bool? Screen(TextReader input, MapDefinition map, bool strict)
     {
+        Lines(BeforeCard(_record, _content, map));
         _out.WriteLine(ScreenHeading(_record, _content, map));
         PrintRoster();
         PrintShop();
@@ -788,6 +790,67 @@ public sealed class CampaignSession
     {
         var names = UnitNames.Of(record, content);
         return $"Deploys to {map.Name}: {string.Join(", ", record.Deployment(map, content).Select(id => names[id]))}";
+    }
+
+    /// <summary>The width a text card's paragraphs are wrapped to (issue 631).</summary>
+    public const int CardWidth = 72;
+
+    /// <summary>
+    /// The text card printed before the screen of <paramref name="record"/>'s next map (issue 631,
+    /// DESIGN section 14): a heading naming the map, then each paragraph wrapped to
+    /// <see cref="CardWidth"/>, a blank line between paragraphs and after the last. Empty for a map
+    /// whose <c>campaign.json</c> entry has no <c>before</c>.
+    /// </summary>
+    public static IReadOnlyList<string> BeforeCard(CampaignRecord record, GameContent content, MapDefinition map) =>
+        Card($"-- {map.Name} --", record.NextMap(content).Before);
+
+    /// <summary>
+    /// The text card printed after <paramref name="map"/> is won, <paramref name="before"/> being the
+    /// record the battle began from (issue 631); shaped as <see cref="BeforeCard"/>, empty for a map
+    /// with no <c>after</c>. It is screen text, not an event, so the event log leaves it out.
+    /// </summary>
+    public static IReadOnlyList<string> AfterCard(CampaignRecord before, GameContent content, MapDefinition map) =>
+        Card($"-- After {map.Name} --", before.NextMap(content).After);
+
+    private static IReadOnlyList<string> Card(string heading, ValueList<string> paragraphs)
+    {
+        if (paragraphs.Count == 0)
+        {
+            return Array.Empty<string>();
+        }
+
+        var lines = new List<string> { heading };
+        foreach (var paragraph in paragraphs)
+        {
+            lines.AddRange(Wrap(paragraph, CardWidth));
+            lines.Add("");
+        }
+
+        return lines;
+    }
+
+    /// <summary><paramref name="text"/> broken at spaces into lines of at most <paramref name="width"/> characters; a longer word stands on its own line.</summary>
+    public static IReadOnlyList<string> Wrap(string text, int width)
+    {
+        var lines = new List<string>();
+        var line = "";
+        foreach (var word in text.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        {
+            if (line.Length > 0 && line.Length + 1 + word.Length > width)
+            {
+                lines.Add(line);
+                line = "";
+            }
+
+            line = line.Length == 0 ? word : line + " " + word;
+        }
+
+        if (line.Length > 0)
+        {
+            lines.Add(line);
+        }
+
+        return lines;
     }
 
     /// <summary>The heading the screen opens with before <paramref name="map"/>.</summary>
