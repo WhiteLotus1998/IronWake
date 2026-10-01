@@ -130,12 +130,16 @@ public sealed class UnitNames
     /// <summary>
     /// The line for a fired map event (issue 615), by what it does rather than by its map id:
     /// <c>reinforcements arrive</c> or, when a unit holds the tile, <c>reinforcements are
-    /// blocked: a unit holds 7,0</c>; <c>the ground changes</c> or <c>7,3 does not change: a unit
-    /// holds it</c>. A flag event, or one the map does not list, keeps its name.
+    /// blocked: a unit holds 7,0</c>, and when the tile's terrain bars the spawn, named by
+    /// <paramref name="barredBy"/>, <c>reinforcements are blocked: 8,0 is wall</c> (issue 655);
+    /// <c>the ground changes</c> or <c>7,3 does not change: a unit holds it</c>. A flag event,
+    /// or one the map does not list, keeps its name.
     /// </summary>
-    public string Event(string name, bool blocked) => _events.GetValueOrDefault(name) switch
+    public string Event(string name, bool blocked, string? barredBy = null) => _events.GetValueOrDefault(name) switch
     {
-        SpawnEnemy spawn => blocked ? $"reinforcements are blocked: a unit holds {spawn.Placement.At}" : "reinforcements arrive",
+        SpawnEnemy spawn => !blocked ? "reinforcements arrive"
+            : barredBy is null ? $"reinforcements are blocked: a unit holds {spawn.Placement.At}"
+            : $"reinforcements are blocked: {spawn.Placement.At} is {barredBy.ToLowerInvariant()}",
         ChangeTerrain change => blocked ? $"{change.At} does not change: a unit holds it" : "the ground changes",
         _ => $"event {name}" + (blocked ? " is blocked: its tile is held" : ""),
     };

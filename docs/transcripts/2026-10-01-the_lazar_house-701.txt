@@ -203,7 +203,7 @@ B  wren             Wren L1 cadet              8,1    hp 20/20  Plain  done
 > end
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
-Reinforcements are blocked: a unit holds 8,0
+Reinforcements are blocked: 8,0 is wall
 Reinforcements arrive
   Soldier arrives at 11,4 with the east group, aggressive
 enemy: move archer-1 7,2
@@ -320,7 +320,7 @@ B  wren             Wren L1 cadet              4,1    hp 10/20  Plain  done
 -- Enemy phase, turn 3 --
 Reinforcements arrive
   Archer 2 arrives at 6,7 with the ford group, aggressive
-Reinforcements are blocked: a unit holds 8,0
+Reinforcements are blocked: 8,0 is wall
 enemy: move archer-1 6,1
 Archer 1 moves 7,2 -> 6,1 via 7,1
 enemy: attack archer-1 wren

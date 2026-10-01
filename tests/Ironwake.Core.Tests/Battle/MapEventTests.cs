@@ -300,6 +300,31 @@ public class MapEventTests
     }
 
     [Fact]
+    public void ASpawnTileTheTemplateCannotStandOnBlocksTheReinforcementAndNamesTheTerrain()
+    {
+        var walled = BattleFixture.Start(map: Gate.Replace("reinforce turn 2 enemy", "walled turn 1 enemy terrain 7,0 #\nreinforce turn 2 enemy"));
+        var state = EndPhases(walled, 2);
+
+        var events = EndPhaseEvents(ref state);
+
+        Assert.Contains(new MapEventFired("reinforce", true, "wall"), events);
+        Assert.DoesNotContain(events, e => e is UnitSpawned);
+        Assert.Null(state.Find("brigand-2"));
+        Assert.True(state.HasFired("reinforce"));
+    }
+
+    [Fact]
+    public void AHeldSpawnTileNamesNoTerrain()
+    {
+        var start = Start();
+        var state = EndPhases(start.WithUnit(start.Find("wren")! with { At = new Coord(7, 0) }), 2);
+
+        var fired = Assert.Single(EndPhaseEvents(ref state).OfType<MapEventFired>(), e => e.Name == "reinforce");
+
+        Assert.Null(fired.Terrain);
+    }
+
+    [Fact]
     public void ATerrainChangeItsOccupantCannotStandOnIsBlocked()
     {
         var start = Start();

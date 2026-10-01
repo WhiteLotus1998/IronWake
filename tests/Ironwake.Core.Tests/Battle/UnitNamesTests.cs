@@ -239,6 +239,14 @@ public class UnitNamesTests
     }
 
     [Fact]
+    public void ASpawnBarredByTerrainNamesTheTerrainNotAUnit()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("Reinforcements are blocked: 6,0 is wall", PlaySession.Describe(new MapEventFired("late", true, "wall"), Starter, names));
+    }
+
+    [Fact]
     public void AFiredTerrainEventReadsAsTheGroundChanging()
     {
         var names = UnitNames.Of(Start(map: Flooded), Starter);

@@ -234,7 +234,7 @@ public static class Program
                             Console.WriteLine($"#   group {w.Group} woke ({w.Cause})");
                             break;
                         case MapEventFired m:
-                            Console.WriteLine($"#   event {m.Name}" + (m.Blocked ? " blocked" : " fired"));
+                            Console.WriteLine($"#   event {m.Name}" + (m.Blocked ? " blocked" + (m.Terrain is { } barring ? " by " + barring : "") : " fired"));
                             break;
                         case PhaseBegan p when p.Side == Side.Player:
                             Console.WriteLine($"# turn {p.Turn}");
