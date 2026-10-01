@@ -1243,9 +1243,10 @@ public static class Resolver
 
     /// <summary>
     /// Issue 649's chest: a player unit that has not acted, on a closed chest's tile or orthogonally
-    /// beside it, with room in its pack for everything in it, takes the contents as its action, in
-    /// place of Attack, Item or Wait, after its Move or without one. The stacks go to the end of its
-    /// inventory at full uses, the chest stays open, and no Canto follows.
+    /// beside it, with no enemy on that tile, opens it as its action, in place of Attack, Item or
+    /// Wait, after its Move or without one. The chest always opens (issue 679): its stacks go to the
+    /// end of the opener's inventory at full uses in file order while there is room, and the rest
+    /// to the state's <see cref="BattleState.Wagon"/>. The chest stays open, and no Canto follows.
     /// </summary>
     private static (BattleState, Rejection?) ApplyOpen(BattleState state, GameContent content, Open open, List<GameEvent> events)
     {
@@ -1261,13 +1262,23 @@ public static class Resolver
         }
 
         var chest = state.Map.ChestAt(open.At)!;
-        events.Add(new ChestOpened(unit.Id, chest.At, chest.Items));
         var inventory = unit.Unit.Inventory;
+        var packed = new List<string>();
+        var wagon = new List<string>();
         foreach (var stack in chest.Stacks(content))
         {
-            inventory = inventory.Add(stack);
+            if (inventory.Count < Inventory.Capacity)
+            {
+                inventory = inventory.Add(stack);
+                packed.Add(stack.ItemId);
+            }
+            else
+            {
+                wagon.Add(stack.ItemId);
+            }
         }
 
+        events.Add(new ChestOpened(unit.Id, chest.At, ValueList<string>.From(packed), ValueList<string>.From(wagon)));
         var opener = unit with
         {
             Unit = unit.Unit with { Inventory = inventory },
@@ -1275,7 +1286,11 @@ public static class Resolver
             Acted = true,
             Canto = null,
         };
-        var next = state.WithUnit(opener) with { Opened = ValueList<Coord>.From(state.Opened.Append(chest.At).Order()) };
+        var next = state.WithUnit(opener) with
+        {
+            Opened = ValueList<Coord>.From(state.Opened.Append(chest.At).Order()),
+            Wagon = ValueList<string>.From(state.Wagon.Concat(wagon)),
+        };
         return (next, null);
     }
 
@@ -1306,10 +1321,9 @@ public static class Resolver
             return $"{unit.Id} cannot open the chest at {at}: open it from its tile or one beside it";
         }
 
-        var room = Inventory.Capacity - unit.Unit.Inventory.Count;
-        if (room < chest.Items.Count)
+        if (state.UnitAt(at) is { Side: Side.Enemy } guard)
         {
-            return $"{unit.Id} cannot open the chest at {at}: it holds {chest.Items.Count} and there is room for {room}";
+            return $"{unit.Id} cannot open the chest at {at}: {guard.Id} stands on it";
         }
 
         return null;

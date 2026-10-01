@@ -135,6 +135,11 @@ public static class ProtocolJson
                 w.WriteString("unit", c.UnitId);
                 WriteCoord(w, "at", c.At);
                 WriteStrings(w, "items", c.ItemIds);
+                if (c.Wagon.Count > 0)
+                {
+                    WriteStrings(w, "wagon", c.Wagon);
+                }
+
                 break;
             case KeepsakeTaken k:
                 w.WriteString("unit", k.UnitId);
@@ -699,6 +704,11 @@ public static class ProtocolJson
             w.WriteEndArray();
         }
 
+        if (state.Wagon.Count > 0)
+        {
+            WriteStrings(w, "wagon", state.Wagon);
+        }
+
         if (state.Map.KeepsakesEnabled)
         {
             w.WriteStartArray("keepsakes");
@@ -842,7 +852,26 @@ public static class ProtocolJson
             Opened = e.TryGetProperty("chests", out var chests)
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
+            Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
         };
+    }
+
+    /// <summary>
+    /// The string array <paramref name="name"/> of item ids (issue 679's wagon), each a weapon in
+    /// weapons.json or an item in items.json; anything else is refused, naming the field.
+    /// </summary>
+    private static ValueList<string> ReadItemIds(JsonElement e, string name, GameContent content)
+    {
+        var ids = ReadStrings(e, name);
+        foreach (var id in ids)
+        {
+            if (!content.Weapons.ContainsKey(id) && !content.Items.ContainsKey(id))
+            {
+                throw new ProtocolException($"field '{name}' names '{id}', which is not a weapon or an item");
+            }
+        }
+
+        return ids;
     }
 
     private static void WriteUnit(Utf8JsonWriter w, BattleUnit unit, GameContent content, bool burning = false, SignatureKind? signature = null)
@@ -1229,6 +1258,11 @@ public static class ProtocolJson
             w.WriteNumber("rareMaterial", record.RareMaterial);
         }
 
+        if (record.Wagon.Count > 0)
+        {
+            WriteStrings(w, "wagon", record.Wagon);
+        }
+
         w.WriteEndObject();
     });
 
@@ -1278,6 +1312,7 @@ public static class ProtocolJson
             Rooms = ReadRooms(e, content),
             CommonMaterial = Math.Max(0, OptionalInt(e, "commonMaterial") ?? 0),
             RareMaterial = Math.Max(0, OptionalInt(e, "rareMaterial") ?? 0),
+            Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             LoweredFrom = ReadLoweredFrom(e, content),
         };

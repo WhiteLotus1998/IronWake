@@ -1661,3 +1661,16 @@ Best turn: none to name. The moment that mattered was `move teodor 9,9` then `un
 Notes: Transcript `docs/transcripts/2026-10-01-the_tollgate-676.txt`, script beside it. Wren to 4,8 and back cost nothing and the board drew her home; Teodor's take-back after his own move worked, after his Wait it said the move was final. `recall list` afterwards named only the moves that stand, so the browser never shows a ghost of a misclick. Not tense and not meant to be: the point is that a misclick no longer costs a Recall, so the three charges are again only about the dice. The wake, event and dusk refusals are shown in the tests, not here; the Tollgate's door step would refuse it ("set off the map's riders event"), which is the right answer for a surprise map.
 
 — Code
+
+## 2026-10-01 — Wagon Hollow, the chest wagon and the held vault (#679), the warm play — Code
+
+Seed: 679   Result: win, turn 5 of 10, Teodor lost, no Recall spent (rout)
+Systems entry on a sample, not a Fun Gate entry. It is warm, since I authored the board for this play. Two questions. Does the always-open chest turn "who opens" into a choice? Does a `B`-line guard boss sitting on a chest hold the vault shut?
+Tension: 6/10   Choice: 6/10   Surprise: 7/10
+Best turn: turn 4. The captain stepped beside the vault and typed `open`. The lid refused, `Bandit Leader stands on it`, so he struck the leader instead, two hits for 18. On the enemy phase the leader left his chest for the hill at 9,1, swapped to the Toll Axe and killed Teodor from range 2. The vault was open for the first time, and it had cost a pikeman.
+Notes: Transcript and script are in `docs/transcripts/2026-10-01-strongbox_wagon-679.*`, and the board is `docs/samples/strongbox_wagon.map`.
+- **The overflow chest** at 3,4 holds five items, and every starting pack has three free slots. Wren opened it on turn 1 from 3,5. Iron Lance, Steel Sword and Iron Bow went to her pack, and the two dressings went to the wagon, a line each. The choice was real but small: only who opens decides who carries the first three, and Wren was the wrong carrier for a lance and a bow. What bit was the tile. She spent her action standing in both enemies' reach and ate 11 for it.
+- **The held vault** held while the boss stood on it. On a rout map, though, the vault's guard is a problem, because if he is the last enemy his death ends the battle before anyone can open the chest. I won on the kill and the Steel Axe never left its box. **Lesson for authors:** a held vault on a rout map needs an enemy left after the guard, or a win that is not rout. The guard also stepped off his post to take a range-2 kill, so 0080's "goes home" did not hold him on it. Under the veto he was free to strike from the hill.
+- The wagon line printed on a standalone map, as the issue asks. Nothing carries from a standalone map, so the dressings were moot here; the campaign half is in the tests.
+
+— Code

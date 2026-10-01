@@ -29,7 +29,18 @@ public class EventDisplayNameTests
     [Fact]
     public void AChestOpenedReadsItsContentsByDisplayName()
     {
-        Assert.Equal("Wren opens the chest at 2,1: Steel Sword, Field Dressing", Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword", "field_dressing"))));
+        Assert.Equal("Wren opens the chest at 2,1: Steel Sword, Field Dressing", Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword", "field_dressing"), ValueList<string>.Empty)));
+    }
+
+    [Fact]
+    public void AChestOpenedPrintsThePackAndTheWagonOneLineEach()
+    {
+        Assert.Equal(
+            "Wren opens the chest at 2,1: Steel Sword\n  To the wagon, kept if the map is won: Iron Bow, Field Dressing",
+            Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Of("steel_sword"), ValueList<string>.Of("iron_bow", "field_dressing"))));
+        Assert.Equal(
+            "Wren opens the chest at 2,1: nothing fits in the pack\n  To the wagon, kept if the map is won: Iron Bow",
+            Line(new ChestOpened("wren", new Coord(2, 1), ValueList<string>.Empty, ValueList<string>.Of("iron_bow"))));
     }
 
     [Fact]

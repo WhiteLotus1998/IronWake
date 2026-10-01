@@ -9,9 +9,10 @@ namespace Ironwake.Core.Tests.Battle;
 /// <summary>
 /// Chests (issue 649): a <c>chests:</c> block puts a chest on a tile with its contents; a player
 /// unit on the tile or orthogonally beside it opens it as its action, after a Move or without one,
-/// and takes everything into its pack, or the chest stays shut; the chest stays open; no Canto
-/// follows; a Recall restores it shut; the enemy never opens one; the board prints each closed
-/// chest and what is in it.
+/// unless an enemy stands on the tile; what fits goes to its pack in file order and the rest to
+/// the wagon (issue 679); the chest stays open; no Canto follows; a Recall restores it shut and
+/// the wagon as it was; the enemy never opens one; the board prints each closed chest and what is
+/// in it.
 /// </summary>
 public class ChestTests
 {
@@ -64,6 +65,17 @@ public class ChestTests
         Assert.Equal(4, sample.Chests.Count);
     }
 
+    [Fact]
+    public void TheWagonSampleIsCanonicalWithAnOverflowChestAndAHeldVault()
+    {
+        var path = Path.Combine(Path.GetDirectoryName(SamplePath)!, "strongbox_wagon.map");
+        var sample = MapFiles.Load(path, Starter);
+
+        Assert.Equal(File.ReadAllText(path).Replace("\r\n", "\n"), MapFormat.Write(sample, Starter));
+        Assert.Contains(sample.Chests, c => c.Items.Count == Chest.MaxItems);
+        Assert.Contains(sample.Chests, c => sample.Placements.Any(p => p.At == c.At));
+    }
+
     [Theory]
     [InlineData("2,1 steel_sword", "2,1 steel_sword\n2,1 iron_bow", "already has the chest on line")]
     [InlineData("2,1 steel_sword", "2,1", "a chest holds 1 to 5 items, got 0")]
@@ -99,7 +111,7 @@ public class ChestTests
 
         Assert.True(result.Accepted, result.Rejection?.Message);
         var opened = Assert.Single(result.Events.OfType<ChestOpened>());
-        Assert.Equal(new ChestOpened("hale", Lid, ValueList<string>.Of("steel_sword", "field_dressing")), opened);
+        Assert.Equal(new ChestOpened("hale", Lid, ValueList<string>.Of("steel_sword", "field_dressing"), ValueList<string>.Empty), opened);
         var items = result.Next.Find("hale")!.Unit.Inventory.Items;
         Assert.Equal(before + 2, items.Count);
         Assert.Equal(new ItemStack("steel_sword", Starter.Weapon("steel_sword").Durability), items[before]);
@@ -162,15 +174,70 @@ public class ChestTests
         Assert.Contains("already open", refusal.Message);
     }
 
+    /// <summary>Hale with <paramref name="extra"/> dressings added to his starting pack.</summary>
+    private static Unit HaleWith(int extra) =>
+        Hale with { Inventory = Enumerable.Range(0, extra).Aggregate(Hale.Inventory, (inv, _) => inv.Add(new ItemStack("field_dressing", 3))) };
+
     [Fact]
-    public void AChestThatWillNotFitInThePackStaysShut()
+    public void AChestAlwaysOpensAndWhatDoesNotFitGoesToTheWagonInFileOrder()
     {
-        var full = Hale with { Inventory = Hale.Inventory.Add(new ItemStack("field_dressing", 3)).Add(new ItemStack("field_dressing", 3)).Add(new ItemStack("field_dressing", 3)) };
+        var full = HaleWith(Inventory.Capacity - Hale.Inventory.Count - 1);
+        var three = Vault.Replace("2,1 steel_sword field_dressing", "2,1 steel_sword iron_bow field_dressing");
+        var state = Start(map: three, roster: ValueList<Unit>.Of(full, Wren)).Do(new Move("hale", new Coord(1, 1)));
+
+        var result = state.Try(new Open("hale", Lid));
+
+        Assert.True(result.Accepted, result.Rejection?.Message);
+        Assert.Equal(new ChestOpened("hale", Lid, ValueList<string>.Of("steel_sword"), ValueList<string>.Of("iron_bow", "field_dressing")), Assert.Single(result.Events.OfType<ChestOpened>()));
+        Assert.Equal(Inventory.Capacity, result.Next.Find("hale")!.Unit.Inventory.Count);
+        Assert.Equal("steel_sword", result.Next.Find("hale")!.Unit.Inventory.Items[^1].ItemId);
+        Assert.Equal(ValueList<string>.Of("iron_bow", "field_dressing"), result.Next.Wagon);
+        Assert.Equal(ValueList<Coord>.Of(Lid), result.Next.Opened);
+    }
+
+    [Fact]
+    public void AFullPackOpenerSendsEverythingToTheWagon()
+    {
+        var full = HaleWith(Inventory.Capacity - Hale.Inventory.Count);
         var state = Start(map: Vault, roster: ValueList<Unit>.Of(full, Wren)).Do(new Move("hale", new Coord(1, 1)));
 
-        var refusal = state.Refused(new Open("hale", Lid));
+        var next = state.Do(new Open("hale", Lid));
+
+        Assert.Equal(full.Inventory, next.Find("hale")!.Unit.Inventory);
+        Assert.Equal(ValueList<string>.Of("steel_sword", "field_dressing"), next.Wagon);
+        Assert.Contains("wagon steel_sword field_dressing", next.Canonical());
+    }
+
+    [Fact]
+    public void AnEmptyWagonLeavesTheCanonicalStateAsItWas()
+    {
+        Assert.DoesNotContain("wagon", Opened(Start(map: Vault)).Canonical());
+    }
+
+    [Fact]
+    public void AChestWithAnEnemyOnItsTileIsShutUntilTheEnemyLeavesIt()
+    {
+        var twoEnemies = Vault.Replace("E soldier 5,3 group:yard behavior:aggressive", "E soldier 2,1 group:yard behavior:aggressive\nE soldier 5,3 group:yard behavior:aggressive");
+        var guarded = Start(map: twoEnemies).Do(new Move("hale", new Coord(1, 1)));
+        var guard = guarded.UnitAt(Lid)!;
+
+        var refusal = guarded.Refused(new Open("hale", Lid));
         Assert.Equal(RejectionReason.CannotOpen, refusal.Reason);
-        Assert.Contains("it holds 2 and there is room for 1", refusal.Message);
+        Assert.Contains($"cannot open the chest at 2,1: {guard.Id} stands on it", refusal.Message);
+        Assert.DoesNotContain(Resolver.Legal(guarded, Starter), c => c is Open);
+
+        var gone = guarded with { Units = ValueList<BattleUnit>.From(guarded.Units.Where(u => u.Id != guard.Id)) };
+        Assert.True(gone.Try(new Open("hale", Lid)).Accepted);
+        var movedOff = guarded.WithUnit(guard with { At = new Coord(3, 1) });
+        Assert.True(movedOff.Try(new Open("hale", Lid)).Accepted);
+    }
+
+    [Fact]
+    public void AnEnemyBesideTheChestDoesNotShutIt()
+    {
+        var state = Start(map: Vault.Replace("E soldier 5,3", "E soldier 3,1")).Do(new Move("hale", new Coord(1, 1)));
+
+        Assert.True(state.Try(new Open("hale", Lid)).Accepted);
     }
 
     [Fact]
@@ -195,12 +262,14 @@ public class ChestTests
     [Fact]
     public void ARecallRestoresTheChestShutAndThePackAsItWas()
     {
-        var start = Start(map: Vault);
+        var start = Start(map: Vault, roster: ValueList<Unit>.Of(HaleWith(Inventory.Capacity - Hale.Inventory.Count - 1), Wren));
         var opened = Opened(start);
+        Assert.NotEmpty(opened.Wagon);
 
         var back = opened.Do(new Recall(0));
 
         Assert.Empty(back.Opened);
+        Assert.Empty(back.Wagon);
         Assert.Equal(start.Find("hale")!.Unit.Inventory, back.Find("hale")!.Unit.Inventory);
         Assert.Contains(back.ClosedChests, c => c.At == Lid);
     }
@@ -246,5 +315,19 @@ public class ChestTests
 
         Assert.Contains("\"chests\":[{\"at\":{\"x\":2,\"y\":1},\"items\":[\"steel_sword\",\"field_dressing\"],\"open\":true}]", json);
         Assert.Equal(opened.Opened, ProtocolJson.ReadState(json, Starter).Opened);
+        Assert.DoesNotContain("\"wagon\"", json);
+    }
+
+    [Fact]
+    public void TheProtocolCarriesTheWagonAndReadsItBack()
+    {
+        var full = HaleWith(Inventory.Capacity - Hale.Inventory.Count);
+        var opened = Opened(Start(map: Vault, roster: ValueList<Unit>.Of(full, Wren)));
+
+        var json = ProtocolJson.State(opened, Starter);
+
+        Assert.Contains("\"wagon\":[\"steel_sword\",\"field_dressing\"]", json);
+        Assert.Equal(opened.Wagon, ProtocolJson.ReadState(json, Starter).Wagon);
+        Assert.Equal(opened.Canonical(), ProtocolJson.ReadState(json, Starter).Canonical());
     }
 }

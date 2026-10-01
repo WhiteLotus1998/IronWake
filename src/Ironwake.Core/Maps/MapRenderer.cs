@@ -28,7 +28,7 @@ public static class MapRenderer
     public const char ChestGlyph = '$';
 
     /// <summary>The rule a map with chests prints after its chest list (issue 649).</summary>
-    public const string ChestRule = "a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room";
+    public const string ChestRule = "a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won";
 
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
     public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";

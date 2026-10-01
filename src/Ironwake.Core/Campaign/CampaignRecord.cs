@@ -78,6 +78,12 @@ public sealed record CampaignRecord(
     /// <summary>The company's rare material for the forge (issue 647), from the main line's quests.</summary>
     public int RareMaterial { get; init; }
 
+    /// <summary>
+    /// The wagon (issue 679): item ids that chests sent past a full pack on a won map, oldest
+    /// first, each taken at full uses with <see cref="TakeFromWagon"/>. A lost map collects nothing.
+    /// </summary>
+    public ValueList<string> Wagon { get; init; } = ValueList<string>.Empty;
+
     /// <summary>The uses below which the camp warns on leaving that an equipped weapon is low (issue 647).</summary>
     public const int LowUses = 5;
 
@@ -350,6 +356,7 @@ public sealed record CampaignRecord(
             Benched = ValueList<string>.Empty,
             TrialsTried = ValueList<TrialAttempt>.Empty,
             QuestsTried = ValueList<string>.Empty,
+            Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
         };
     }
 
@@ -509,6 +516,34 @@ public sealed record CampaignRecord(
 
         var dropped = unit with { Inventory = unit.Inventory.RemoveAt(slot) };
         return new ScreenResult(Replace(dropped), $"{unit.Id} drops {content.ItemName(stack.ItemId)}", true);
+    }
+
+    /// <summary>
+    /// Moves wagon entry <paramref name="index"/> (from 0) into <paramref name="unitId"/>'s next
+    /// free slot at full uses (issue 679). Refused when the wagon has no such entry, the unit is not
+    /// on the roster, or its pack is full.
+    /// </summary>
+    public ScreenResult TakeFromWagon(string unitId, int index, GameContent content)
+    {
+        if (index < 0 || index >= Wagon.Count)
+        {
+            return ScreenResult.Refused(this, Wagon.Count == 0 ? "the wagon is empty" : $"the wagon has no entry {index + 1}; it holds {Wagon.Count}");
+        }
+
+        if (Find(unitId) is not { } unit)
+        {
+            return ScreenResult.Refused(this, $"no unit '{unitId}' on the roster");
+        }
+
+        if (unit.Inventory.Count >= Inventory.Capacity)
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} has no free slot");
+        }
+
+        var id = Wagon[index];
+        var uses = content.Weapons.TryGetValue(id, out var weapon) ? weapon.Durability : content.Item(id).Uses;
+        var taken = unit with { Inventory = unit.Inventory.Add(new ItemStack(id, uses)) };
+        return new ScreenResult(Replace(taken) with { Wagon = Wagon.RemoveAt(index) }, $"{unit.Id} takes {content.ItemName(id)} from the wagon", true);
     }
 
     /// <summary>
@@ -860,6 +895,7 @@ public sealed record CampaignRecord(
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
             CommonMaterial = CommonMaterial + common,
             RareMaterial = RareMaterial + rare,
+            Wagon = won ? ValueList<string>.From(Wagon.Concat(end.Wagon)) : Wagon,
         };
         var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"
             : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"
