@@ -183,6 +183,48 @@ public static class ContentSerializer
                         {
                             writer.WriteString("after", room.After);
                         }
+
+                        if (room.Requires.Length > 0)
+                        {
+                            writer.WriteString("requires", room.Requires);
+                        }
+
+                        if (room.Hires.Count > 0)
+                        {
+                            writer.WriteStartArray("hires");
+                            foreach (var hireId in room.Hires)
+                            {
+                                writer.WriteStringValue(hireId);
+                            }
+
+                            writer.WriteEndArray();
+                        }
+
+                        writer.WriteEndObject();
+                    }
+
+                    writer.WriteEndArray();
+                }
+
+                if (campaign.Keep.Hires.Count > 0)
+                {
+                    writer.WriteNumber("hirePrice", campaign.Keep.HirePrice);
+                    writer.WriteStartArray("hires");
+                    foreach (var hire in campaign.Keep.Hires)
+                    {
+                        writer.WriteStartObject();
+                        writer.WriteString("id", hire.Id);
+                        writer.WriteString("name", hire.Name);
+                        writer.WriteString("pronoun", hire.Pronoun.ToString().ToLowerInvariant());
+                        writer.WriteString("class", hire.ClassId);
+                        writer.WriteStartArray("items");
+                        foreach (var itemId in hire.Items)
+                        {
+                            writer.WriteStringValue(itemId);
+                        }
+
+                        writer.WriteEndArray();
+                        writer.WriteString("line", hire.Line);
                         writer.WriteEndObject();
                     }
 

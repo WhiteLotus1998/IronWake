@@ -23,6 +23,15 @@ public sealed record KeepRoom(string Id, string Name, int Price, int Beds, int M
     /// smith is met), or empty for a room open from map 1.
     /// </summary>
     public string After { get; init; } = "";
+
+    /// <summary>
+    /// The room that must be built before this one (issue 690: the barracks' upgrade needs the
+    /// barracks), or empty for a room that stands alone.
+    /// </summary>
+    public string Requires { get; init; } = "";
+
+    /// <summary>The hires this room puts on the barracks' list once built (issue 690), by id, in content order.</summary>
+    public ValueList<string> Hires { get; init; } = ValueList<string>.Empty;
 }
 
 /// <summary>
@@ -48,6 +57,21 @@ public sealed record KeepMenu(string MapId, ValueList<KeepEdit> Edits)
 
     /// <summary>The rooms sold for the keep (issue 687), in content order; bought at any camp from map 1.</summary>
     public ValueList<KeepRoom> Rooms { get; init; } = ValueList<KeepRoom>.Empty;
+
+    /// <summary>
+    /// The soldiers the barracks may hire (issue 690), in content order: each joins the roster
+    /// as a unit built by <see cref="Barracks.Recruit"/> once the room that lists it is built.
+    /// </summary>
+    public ValueList<KeepHire> Hires { get; init; } = ValueList<KeepHire>.Empty;
+
+    /// <summary>What one hire costs from the purse (issue 690), or 0 when the keep hires nobody.</summary>
+    public int HirePrice { get; init; }
+
+    /// <summary>The hire named <paramref name="id"/>, or null when the barracks lists none.</summary>
+    public KeepHire? Hire(string id) => Hires.FirstOrDefault(h => h.Id == id);
+
+    /// <summary>The room whose list carries the hire <paramref name="id"/>, or null when no room lists it.</summary>
+    public KeepRoom? RoomHiring(string id) => Rooms.FirstOrDefault(r => r.Hires.Contains(id));
 
     /// <summary>The room named <paramref name="id"/>, or null when the keep sells none.</summary>
     public KeepRoom? Room(string id) => Rooms.FirstOrDefault(r => r.Id == id);

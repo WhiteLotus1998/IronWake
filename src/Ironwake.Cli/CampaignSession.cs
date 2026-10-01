@@ -39,6 +39,7 @@ public sealed class CampaignSession
           quest <id> <ally>        Fight a member's side map with one ally beside them; who falls there is gone for good
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
+          hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
@@ -405,6 +406,7 @@ public sealed class CampaignSession
         if (_record.IsFinished(_content))
         {
             WriteEvent(CampaignWonLine(_record, _content));
+            Lines(EndingLines(_record, _content));
             code = 0;
             if (_saves is not null && _saves.RecordWin(_record.Difficulty))
             {
@@ -501,6 +503,13 @@ public sealed class CampaignSession
     /// <summary>The line once every map is won.</summary>
     public static string CampaignWonLine(CampaignRecord record, GameContent content) =>
         $"Campaign won: all {content.Campaign.Maps.Count} maps, the purse holds {record.Purse}";
+
+    /// <summary>
+    /// The lines after the campaign is won for those without an epilogue card (issue 690): one
+    /// <c>&lt;name&gt; served at the keep.</c> per hire still in the company, in roster order.
+    /// </summary>
+    public static IReadOnlyList<string> EndingLines(CampaignRecord record, GameContent content) =>
+        record.Roster.Where(u => Barracks.IsHire(u, content)).Select(u => Barracks.EndingLine(u.Name)).ToList();
 
     /// <summary>
     /// A between-map line as a reader sees it (issue 615): a refusal or an accepted action's
@@ -964,6 +973,12 @@ public sealed class CampaignSession
                 }
 
                 break;
+            case ["hire"]:
+                Lines(HireLines(_record, _content, always: true));
+                break;
+            case ["hire", var hireId]:
+                Take(_record.Hire(hireId, _content), text);
+                break;
             case ["build", var roomId] when _content.Campaign.Keep.Edit(roomId) is null:
                 Take(_record.BuildRoom(roomId, _content), text);
                 break;
@@ -1306,7 +1321,17 @@ public sealed class CampaignSession
         foreach (var room in keep.Rooms)
         {
             var does = room.Forge ? $"Refine +{content.Campaign.Forge.Mt} Mt or +{content.Campaign.Forge.Hit} hit a step" : $"+{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}";
+            if (room.Hires.Count > 0)
+            {
+                does += $" and {room.Hires.Count} {(room.Hires.Count == 1 ? "hire" : "hires")} at {keep.HirePrice}";
+            }
+
             var opens = room.After.Length > 0 && content.Campaign.Maps.ToList().FindIndex(m => m.MapId == room.After) >= record.MapIndex ? $"; opens once {room.After} is won" : "";
+            if (room.Requires.Length > 0 && !record.Rooms.Contains(room.Requires))
+            {
+                opens += $"; needs the {keep.Room(room.Requires)?.Name ?? room.Requires} first";
+            }
+
             lines.Add($"  {room.Id}: {room.Name}, {room.Price}, {does}, built {record.Rooms.Count(id => id == room.Id)} of {room.Max}{opens}");
         }
 
@@ -1316,8 +1341,49 @@ public sealed class CampaignSession
             lines.Add($"  Stores: common {record.CommonMaterial}, rare {record.RareMaterial}; a step costs one and {forge.Price}, shop weapons to +{forge.CommonSteps} on common, the main line's signatures to +{forge.RareSteps} on rare");
         }
 
+        lines.AddRange(HireLines(record, content));
+
         return lines;
     }
+
+    /// <summary>
+    /// The barracks' list as the Keep panel prints it (issue 690): a heading with the price and the
+    /// level a hire joins at now, then two lines per hire on offer, the card that would join
+    /// (name, pronoun, class, level, items, and the stats and growths with the class's modifiers, as <c>show</c> and a level-up read them, printed whole, pillar 2) and the
+    /// hire's one line. Empty while no room that hires is built, unless <paramref name="always"/>,
+    /// when the heading says why the list is empty.
+    /// </summary>
+    public static IReadOnlyList<string> HireLines(CampaignRecord record, GameContent content, bool always = false)
+    {
+        var keep = content.Campaign.Keep;
+        var hiring = keep.Rooms.Where(r => r.Hires.Count > 0).ToList();
+        var built = hiring.Any(r => record.Rooms.Contains(r.Id));
+        if (!built || record.IsFinished(content))
+        {
+            if (!always)
+            {
+                return Array.Empty<string>();
+            }
+
+            return new[] { hiring.Count == 0 || record.IsFinished(content) ? "Hires: " + (record.HireRefusal("", content) ?? "none") : $"Hires: none until the {hiring[0].Name} is built (build {hiring[0].Id})" };
+        }
+
+        var level = Barracks.JoinLevel(record);
+        var offered = record.HiresOffered(content);
+        var lines = new List<string> { $"Hires: {keep.HirePrice} each, joining at L{level}, the company's average less {Barracks.LevelsBelow}; hire <id>" + (offered.Count == 0 ? "; nobody is left to hire" : "") };
+        foreach (var hire in offered)
+        {
+            var unit = Barracks.Recruit(hire, level, content);
+            var items = string.Join(", ", unit.Inventory.Items.Select(i => content.ItemName(i.ItemId)));
+            lines.Add($"  {hire.Id}: {hire.Name} ({hire.Pronoun.ToString().ToLowerInvariant()}), {content.Class(hire.ClassId).Name} L{unit.Level}, {items}; {StatText(unit.EffectiveStats(content.Class(hire.ClassId)))}; growths {StatText(unit.EffectiveGrowths(content.Class(hire.ClassId)))}");
+            lines.Add($"    {hire.Line}");
+        }
+
+        return lines;
+    }
+
+    private static string StatText(Stats stats) =>
+        string.Join(" ", Stats.All.Select(s => $"{s.ToString().ToLowerInvariant()} {stats.Get(s)}"));
 
     /// <summary>
     /// The warning on leaving the camp (issue 647): <c>low: &lt;name&gt;'s &lt;weapon&gt; has &lt;n&gt; uses</c>

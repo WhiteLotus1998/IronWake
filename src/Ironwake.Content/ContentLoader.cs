@@ -54,7 +54,7 @@ public static class ContentLoader
         var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
-        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast.Select(u => u.Id).ToList(), cast.Count > 0 ? cast[0] : null) : CampaignRules.None;
+        var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
         var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
         if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
         {
@@ -120,8 +120,10 @@ public static class ContentLoader
     /// </summary>
     private static CampaignRules ParseCampaign(
         ContentFile file, ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items,
-        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain, IReadOnlyList<string> cast, Unit? captain)
+        ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Terrain> terrain, IReadOnlyList<Unit> castUnits)
     {
+        var cast = castUnits.Select(u => u.Id).ToList();
+        var captain = castUnits.Count > 0 ? castUnits[0] : null;
         JsonDocument document;
         try
         {
@@ -318,7 +320,7 @@ public static class ContentLoader
             questIndex++;
         }
 
-        var keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain) : KeepMenu.None;
+        var keep = root.OptionalObject("keep") is { } keepNode ? ParseKeep(keepNode, terrain, classes, weapons, items, castUnits) : KeepMenu.None;
         var ids = maps.Select(m => m.MapId).ToList();
         if (keep.RaidId.Length > 0 && ids.Contains(keep.MapId) && !(ids.IndexOf(keep.RaidId) is var raidAt && raidAt >= 0 && raidAt < ids.IndexOf(keep.MapId)))
         {
@@ -484,7 +486,9 @@ public static class ContentLoader
     /// <summary>The longest paragraph a text card holds, in characters (issue 631).</summary>
     public const int CardParagraphLength = 400;
 
-    private static KeepMenu ParseKeep(EntryNode node, ImmutableSortedDictionary<string, Terrain> terrain)
+    private static KeepMenu ParseKeep(
+        EntryNode node, ImmutableSortedDictionary<string, Terrain> terrain, ImmutableSortedDictionary<string, UnitClass> classes,
+        ImmutableSortedDictionary<string, Weapon> weapons, ImmutableSortedDictionary<string, Item> items, IReadOnlyList<Unit> cast)
     {
         var mapId = node.String("map");
         var edits = new List<KeepEdit>();
@@ -560,6 +564,8 @@ public static class ContentLoader
             {
                 Forge = isForge,
                 After = entry.Has("after") ? entry.String("after") : "",
+                Requires = entry.Has("requires") ? entry.String("requires") : "",
+                Hires = ValueList<string>.From(entry.StringArrayOrEmpty("hires")),
             };
             foreach (var (field, value) in new[] { ("price", room.Price), ("beds", room.Beds), ("max", room.Max) })
             {
@@ -582,7 +588,114 @@ public static class ContentLoader
             throw node.Error("rooms", "needs the keep's beds, since a room adds beds");
         }
 
-        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits)) { RaidId = raid, Beds = beds, Rooms = ValueList<KeepRoom>.From(rooms) };
+        foreach (var room in rooms.Where(r => r.Requires.Length > 0 && (r.Requires == r.Id || rooms.All(o => o.Id != r.Requires))))
+        {
+            throw node.Error("rooms." + room.Id + ".requires", $"'{room.Requires}' is not another room of the keep");
+        }
+
+        var hires = ParseHires(node, classes, weapons, items, cast);
+        foreach (var room in rooms)
+        {
+            foreach (var hireId in room.Hires)
+            {
+                if (hires.All(h => h.Id != hireId))
+                {
+                    throw node.Error("rooms." + room.Id + ".hires", $"'{hireId}' is not in the keep's hires");
+                }
+
+                if (rooms.Count(r => r.Hires.Contains(hireId)) > 1 || room.Hires.Count(id => id == hireId) > 1)
+                {
+                    throw node.Error("rooms." + room.Id + ".hires", $"'{hireId}' is listed by more than one room or twice");
+                }
+            }
+        }
+
+        foreach (var hire in hires.Where(h => rooms.All(r => !r.Hires.Contains(h.Id))))
+        {
+            throw node.Error("hires." + hire.Id, "no room lists this hire, so nobody could hire them");
+        }
+
+        var hirePrice = node.IntOr("hirePrice", 0);
+        if (hires.Count > 0 && hirePrice < 1)
+        {
+            throw node.Error("hirePrice", "must be at least 1 when the keep has hires");
+        }
+
+        return new KeepMenu(mapId, ValueList<KeepEdit>.From(edits))
+        {
+            RaidId = raid,
+            Beds = beds,
+            Rooms = ValueList<KeepRoom>.From(rooms),
+            Hires = ValueList<KeepHire>.From(hires),
+            HirePrice = hirePrice,
+        };
+    }
+
+    /// <summary>
+    /// The keep's optional <c>hires</c> (issue 690): each an <c>id</c> (unique, not a cast member's),
+    /// a <c>name</c>, a <c>pronoun</c>, a base <c>class</c> that some cast member other than the
+    /// captain holds (a hire's card is read from theirs), one to four <c>items</c>, each a rank E
+    /// weapon the class uses or an item, and one <c>line</c> for the hire menu.
+    /// </summary>
+    private static List<KeepHire> ParseHires(
+        EntryNode node, ImmutableSortedDictionary<string, UnitClass> classes, ImmutableSortedDictionary<string, Weapon> weapons,
+        ImmutableSortedDictionary<string, Item> items, IReadOnlyList<Unit> cast)
+    {
+        var hires = new List<KeepHire>();
+        var index = 0;
+        foreach (var element in node.ArrayOrEmpty("hires"))
+        {
+            var entry = new EntryNode(node.File, "keep.hires[" + index++ + "]", element);
+            var id = entry.String("id");
+            entry = entry.WithEntry("keep.hires." + id);
+            if (hires.Any(h => h.Id == id) || cast.Any(u => u.Id == id))
+            {
+                throw entry.Error("id", "is listed twice or is a cast member's id");
+            }
+
+            var pronoun = entry.Enum<Pronoun>("pronoun");
+            var classId = entry.String("class");
+            if (!classes.TryGetValue(classId, out var unitClass))
+            {
+                throw entry.Error("class", $"unknown class '{classId}'");
+            }
+
+            if (!cast.Skip(1).Any(u => u.ClassId == classId))
+            {
+                throw entry.Error("class", $"no cast member but the captain is a {classId}, and a hire's card is read from theirs");
+            }
+
+            var held = entry.StringArray("items");
+            if (held.Count is < 1 or > Inventory.Capacity)
+            {
+                throw entry.Error("items", $"must name 1 to {Inventory.Capacity} items");
+            }
+
+            foreach (var itemId in held)
+            {
+                if (weapons.TryGetValue(itemId, out var weapon))
+                {
+                    if (!unitClass.CanUse(weapon.Type) || weapon.Rank != WeaponRank.E)
+                    {
+                        throw entry.Error("items", $"'{itemId}' must be a rank E weapon a {classId} uses");
+                    }
+                }
+                else if (!items.ContainsKey(itemId))
+                {
+                    throw entry.Error("items", $"unknown item '{itemId}': not a weapon in weapons.json or an item in items.json");
+                }
+            }
+
+            var line = entry.String("line");
+            if (line.Trim().Length == 0)
+            {
+                throw entry.Error("line", "must not be empty");
+            }
+
+            hires.Add(new KeepHire(id, entry.String("name"), pronoun, classId, ValueList<string>.From(held), line));
+        }
+
+        return hires;
     }
 
     /// <summary>An optional <c>price</c> (issue 74): at least 1 when present, null when absent.</summary>

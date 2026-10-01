@@ -67,7 +67,18 @@
     "beds": 12,
     "rooms": [
       { "id": "bunk", "name": "Bunk room", "price": 400, "beds": 2, "max": 2 },
-      { "id": "forge", "name": "Forge", "price": 600, "max": 1, "forge": true, "after": "the_tollgate" }
+      { "id": "forge", "name": "Forge", "price": 600, "max": 1, "forge": true, "after": "the_tollgate" },
+      { "id": "barracks", "name": "Barracks", "price": 500, "beds": 2, "max": 1, "after": "ironwake_raid", "hires": ["corin", "bet", "ines", "mattias"] },
+      { "id": "barracks_wing", "name": "Barracks wing", "price": 300, "beds": 1, "max": 1, "after": "ironwake_raid", "requires": "barracks", "hires": ["tamsin", "wat"] }
+    ],
+    "hirePrice": 300,
+    "hires": [
+      { "id": "corin", "name": "Corin Ashby", "pronoun": "he", "class": "cadet", "items": ["iron_sword"], "line": "Took the bounty because the harvest failed. Says so." },
+      { "id": "bet", "name": "Bet Lowry", "pronoun": "she", "class": "pikeman", "items": ["iron_lance"], "line": "Twenty years on a town gate. Has opinions about gates." },
+      { "id": "ines", "name": "Ines Tarrow", "pronoun": "she", "class": "bowman", "items": ["iron_bow"], "line": "Hunts for a living. Charges extra for people." },
+      { "id": "mattias", "name": "Mattias Grue", "pronoun": "he", "class": "adept", "items": ["cinder"], "line": "Failed out of a shrine school. Kept the books." },
+      { "id": "tamsin", "name": "Tamsin Hale", "pronoun": "she", "class": "chaplain", "items": ["salve"], "line": "Left her parish over a roof. Won the argument, lost the roof." },
+      { "id": "wat", "name": "Wat Dunmore", "pronoun": "he", "class": "outrider", "items": ["iron_lance"], "line": "Sold his horse twice. Bought it back once." }
     ],
     "edits": [
       { "id": "wall", "name": "Rebuild a wall", "terrain": "wall", "price": 400, "at": ["10,3", "10,8"] },

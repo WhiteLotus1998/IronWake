@@ -223,6 +223,8 @@ internal static class Fixture
         {
             keep.Remove("beds");
             keep.Remove("rooms");
+            keep.Remove("hires");
+            keep.Remove("hirePrice");
         }
 
         campaign.AsObject().Remove("forge");

@@ -1113,6 +1113,11 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"{room.Name} opens once {room.After} is won");
         }
 
+        if (room.Requires.Length > 0 && !Rooms.Contains(room.Requires))
+        {
+            return ScreenResult.Refused(this, $"{room.Name} needs the {keep.Room(room.Requires)?.Name ?? room.Requires} built first");
+        }
+
         var built = Rooms.Count(id => id == room.Id);
         if (built >= room.Max)
         {
@@ -1126,7 +1131,91 @@ public sealed record CampaignRecord(
 
         var bought = this with { Purse = Purse - room.Price, Rooms = Rooms.Add(room.Id) };
         var adds = room.Beds > 0 ? $"; beds: {bought.BedsTaken}/{bought.Beds(content)}" : room.Forge ? "; refine <unit> <slot> mt|hit works here" : "";
+        if (room.Hires.Count > 0)
+        {
+            adds += $"; hire <id> takes {string.Join(", ", room.Hires)} for {keep.HirePrice} each";
+        }
+
         return new ScreenResult(bought, $"{room.Name} built for {room.Price}, the purse holds {bought.Purse}{adds}", true);
+    }
+
+    /// <summary>
+    /// The hires on the barracks' list now (issue 690), in content order: listed by a room that is
+    /// built, and neither in the company nor fallen. Empty when no room that hires is built.
+    /// </summary>
+    public IReadOnlyList<KeepHire> HiresOffered(GameContent content)
+    {
+        var keep = content.Campaign.Keep;
+        return keep.Hires
+            .Where(h => keep.RoomHiring(h.Id) is { } room && Rooms.Contains(room.Id) && Find(h.Id) is null && !Fallen.Contains(h.Id))
+            .ToList();
+    }
+
+    /// <summary>
+    /// Why <paramref name="hireId"/> may not be hired now, or null when they may (issue 690): the
+    /// keep must list the hire, the room that lists them must be built, they must be neither in
+    /// the company nor fallen, the company must have room (<see cref="Room"/>: the cap of 12 or
+    /// the beds, whichever binds, named as the camp names a turned-away arrival), and the purse
+    /// must hold <see cref="KeepMenu.HirePrice"/>.
+    /// </summary>
+    public string? HireRefusal(string hireId, GameContent content)
+    {
+        var keep = content.Campaign.Keep;
+        if (keep.Hires.Count == 0)
+        {
+            return "the keep has no barracks to hire from";
+        }
+
+        if (IsFinished(content))
+        {
+            return "the campaign is finished";
+        }
+
+        if (keep.Hire(hireId) is not { } hire)
+        {
+            return $"the barracks lists no '{hireId}'";
+        }
+
+        if (keep.RoomHiring(hire.Id) is { } room && !Rooms.Contains(room.Id))
+        {
+            return $"{hire.Id} is hired once the {room.Name} is built";
+        }
+
+        if (Find(hire.Id) is not null)
+        {
+            return $"{hire.Id} is already in the company";
+        }
+
+        if (Fallen.Contains(hire.Id))
+        {
+            return $"{hire.Id} has fallen";
+        }
+
+        if (Room(content) == 0)
+        {
+            return CompanyFull(content) ? $"company full ({CompanyCap}): {hire.Id} will not join" : $"no bed free: {hire.Id} will not join";
+        }
+
+        return Purse < keep.HirePrice ? $"a hire costs {keep.HirePrice} and the purse holds {Purse}" : null;
+    }
+
+    /// <summary>
+    /// Hires <paramref name="hireId"/> at the barracks (issue 690): refused as
+    /// <see cref="HireRefusal"/>, else the hire joins the end of the roster as
+    /// <see cref="Barracks.Recruit"/> builds them at <see cref="Barracks.JoinLevel"/>, and the purse pays.
+    /// </summary>
+    public ScreenResult Hire(string hireId, GameContent content)
+    {
+        if (HireRefusal(hireId, content) is { } refusal)
+        {
+            return ScreenResult.Refused(this, refusal);
+        }
+
+        var keep = content.Campaign.Keep;
+        var unit = Barracks.Recruit(keep.Hire(hireId)!, Barracks.JoinLevel(this), content);
+        var hired = this with { Roster = Roster.Add(unit), Purse = Purse - keep.HirePrice };
+        var beds = hired.Beds(content) is { } total ? $"; beds: {hired.BedsTaken}/{total}" : "";
+        return new ScreenResult(hired, $"{unit.Id} joins as a {content.Class(unit.ClassId).Name} at L{unit.Level} for {keep.HirePrice}, the purse holds {hired.Purse}{beds}", true);
     }
 
     /// <summary>
