@@ -65,7 +65,7 @@ jobs:
           sleep 90
           newer_json="$(gh api "repos/$REPO/issues/$ISSUE_NUMBER/comments?per_page=100&since=$since" 2>/dev/null || echo '[]')"
           newer_targets="$(printf '%s' "$newer_json" | jq -r --argjson id "$COMMENT_ID" --arg owner "$COMMENT_AUTHOR" '
-            [.[] | select(.id > $id and .user.login == $owner) | (.body | gsub(""; "") | .[-200:])
+            [.[] | select(.id > $id and .user.login == $owner) | (.body | gsub("\r"; "") | .[-200:])
              | if test("(—|--) Chat") then "partner"
                elif test("(—|--) (Code|Critic)") then "chat"
                else "both" end] | unique | join(" ")')"
