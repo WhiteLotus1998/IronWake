@@ -1170,7 +1170,7 @@ Archer 1 attacks Rook
   Archer 1 hits Rook for 19 (hp 0)
   Archer 1 hp 17, Rook hp 0
 Rook falls at 12,5
-Group bank wakes: noise
+The bank group wakes (noise)
 enemy: wait archer-2
 Archer 2 waits
 enemy: move brawler-1 13,7
@@ -1723,7 +1723,7 @@ Pell attacks Brigand 1
   Pell hp 16, Brigand 1 hp 0
 Pell gains 40 exp (40)
 Brigand 1 falls at 11,3
-Group bank wakes: noise
+The bank group wakes (noise)
 Brackwater Cut  turn 4 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~.......

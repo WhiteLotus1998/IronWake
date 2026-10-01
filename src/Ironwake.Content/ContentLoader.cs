@@ -51,10 +51,10 @@ public static class ContentLoader
         var classes = ParseClasses(files.Classes, abilities);
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
-        var (units, cast, signatures) = ParseUnits(files.Units, classes, weapons, items, abilities);
+        var (units, cast, signatures, pronouns) = ParseUnits(files.Units, classes, weapons, items, abilities);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain) : CampaignRules.None;
-        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures };
+        return new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
     }
 
     /// <summary>
@@ -1001,9 +1001,10 @@ public static class ContentLoader
     /// one of them an attacking spell, since a healing spell is legal only when an ally in
     /// range is hurt and two of them leave the unit with Move and Wait on a healthy turn
     /// (issue 113, ninth round). A cast entry may name a <c>signature</c> (DESIGN.md 13.18, issue
-    /// 486), one of <see cref="SignatureKind"/>; a template may not.
+    /// 486), one of <see cref="SignatureKind"/>, and a <c>pronoun</c> (issue 615), one of
+    /// <see cref="Pronoun"/>; a template may carry neither.
     /// </summary>
-    private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast, ImmutableSortedDictionary<string, SignatureKind> Signatures) ParseUnits(
+    private static (ImmutableSortedDictionary<string, Unit> Units, ValueList<Unit> Cast, ImmutableSortedDictionary<string, SignatureKind> Signatures, ImmutableSortedDictionary<string, Pronoun> Pronouns) ParseUnits(
         IReadOnlyList<ContentFile> files,
         ImmutableSortedDictionary<string, UnitClass> classes,
         ImmutableSortedDictionary<string, Weapon> weapons,
@@ -1015,6 +1016,7 @@ public static class ContentLoader
         var cast = new List<Unit>();
         var castNodes = new List<EntryNode>();
         var signatures = ImmutableSortedDictionary.CreateBuilder<string, SignatureKind>(StringComparer.Ordinal);
+        var pronouns = ImmutableSortedDictionary.CreateBuilder<string, Pronoun>(StringComparer.Ordinal);
         foreach (var file in files)
         {
             var entries = Entries(file, "units");
@@ -1036,10 +1038,23 @@ public static class ContentLoader
                     {
                         throw node.Error("signature", "only a cast member carries a signature");
                     }
+
+                    if (node.OptionalString("pronoun") is not null)
+                    {
+                        throw node.Error("pronoun", "only a cast member carries a pronoun");
+                    }
                 }
-                else if (node.OptionalString("signature") is { } signature)
+                else
                 {
-                    signatures.Add(node.Entry!, node.ParseEnum<SignatureKind>("signature", signature));
+                    if (node.OptionalString("signature") is { } signature)
+                    {
+                        signatures.Add(node.Entry!, node.ParseEnum<SignatureKind>("signature", signature));
+                    }
+
+                    if (node.OptionalString("pronoun") is { } pronoun)
+                    {
+                        pronouns.Add(node.Entry!, node.ParseEnum<Pronoun>("pronoun", pronoun));
+                    }
                 }
 
                 builder.Add(node.Entry!, unit);
@@ -1057,7 +1072,7 @@ public static class ContentLoader
             ValidateCastEntry(castNodes[i], cast[i], castIds, classes, weapons);
         }
 
-        return (builder.ToImmutable(), ValueList<Unit>.From(cast), signatures.ToImmutable());
+        return (builder.ToImmutable(), ValueList<Unit>.From(cast), signatures.ToImmutable(), pronouns.ToImmutable());
     }
 
     /// <summary>

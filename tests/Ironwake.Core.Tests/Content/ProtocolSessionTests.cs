@@ -207,7 +207,7 @@ public class ProtocolSessionTests
     {
         var (_, session, _) = Session();
 
-        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"refusals":[],"wakes":[],"wins":false,"text":"threat on captain at 6,11 (Plain): no enemy can strike it next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
+        Assert.Equal("""{"ok":true,"query":"threat","unit":"captain","from":{"x":6,"y":11},"threats":[],"ifAllLand":0,"asleep":[],"refusals":[],"wakes":[],"wins":false,"text":"threat on captain at 6,11 (Plain): no enemy can strike him next phase"}""", session.Answer("""{"query":"threat","unit":"captain"}"""));
     }
 
     /// <summary>Issue 248: a threat line an announced event brings carries <c>arrives</c>, and <c>asleep</c> names each sleeping group that could strike the tile with its members.</summary>

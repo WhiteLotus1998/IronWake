@@ -410,7 +410,7 @@ B  wren             Wren L1 cadet              5,3    hp 20/20  Road
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move captain 6,2
 Alder Fenn moves 4,2 -> 6,2 via 5,2
-Group mill wakes: proximity
+The mill group wakes (proximity)
 Old Mill Road  turn 5 of 12  player phase  rout  recall 3
    012345678901
  0 ............

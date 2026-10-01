@@ -257,7 +257,7 @@ public sealed record CampaignRecord(
 
         if (slot < 0 || slot >= unit.Inventory.Count)
         {
-            return ScreenResult.Refused(this, $"{unit.Id} has no slot {slot + 1}; it carries {unit.Inventory.Count}");
+            return ScreenResult.Refused(this, $"{unit.Id} has no slot {slot + 1}; {Referent.For(content, unit.Id, unit.Id).Subject} {Referent.For(content, unit.Id, unit.Id).Verb("carries", "carry")} {unit.Inventory.Count}");
         }
 
         var stack = unit.Inventory.Items[slot];

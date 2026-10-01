@@ -112,6 +112,6 @@ public class BossRefusalTests
             Queries.SleepingThreats(state, Starter, hale, hale.At)!, refusals: Queries.Refusals(state, Starter, hale, hale.At));
         var ends = line.Ends == line.Boss.At ? $"holds {line.Ends}" : $"ends on {line.Ends}";
         Assert.Contains($"  grange_reeve-1 could reach {line.Refused} but refuses it: too exposed there; {ends}", text);
-        Assert.Contains("no enemy can strike it next phase", text);
+        Assert.Contains("no enemy can strike hale next phase", text);
     }
 }

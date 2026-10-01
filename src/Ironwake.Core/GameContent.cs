@@ -50,6 +50,13 @@ public sealed record GameContent(
     public ImmutableSortedDictionary<string, SignatureKind> Signatures { get; init; } =
         ImmutableSortedDictionary<string, SignatureKind>.Empty.WithComparers(StringComparer.Ordinal);
 
+    /// <summary>
+    /// Each cast member's pronoun by unit id (issue 615), from the cast file's optional
+    /// <c>pronoun</c>; a line that refers back to a unit reads it through <see cref="Referent.For(GameContent, string, string)"/>.
+    /// </summary>
+    public ImmutableSortedDictionary<string, Pronoun> Pronouns { get; init; } =
+        ImmutableSortedDictionary<string, Pronoun>.Empty.WithComparers(StringComparer.Ordinal);
+
     /// <summary>Noise wakes a group from two tiles further out than proximity does (section 8).</summary>
     public int NoiseRadius => WakeRadius + 2;
 
@@ -131,6 +138,7 @@ public sealed record GameContent(
         && DictEquals(Abilities, other.Abilities)
         && DictEquals(Difficulties, other.Difficulties)
         && DictEquals(Signatures, other.Signatures)
+        && DictEquals(Pronouns, other.Pronouns)
         && Cast == other.Cast
         && Rivalry == other.Rivalry
         && Campaign == other.Campaign

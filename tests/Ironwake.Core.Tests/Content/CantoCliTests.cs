@@ -41,7 +41,7 @@ public class CantoCliTests
         var output = Play(out _, "wait ansgar\ncanto ansgar stay\ncanto ansgar 2,3\n");
 
         Assert.Contains("> canto ansgar stay\nAnsgar stays at 1,3 (canto)\n", output);
-        Assert.Contains("> canto ansgar 2,3\nERROR: ansgar cannot Canto: its Canto is spent this phase\n", output);
+        Assert.Contains("> canto ansgar 2,3\nERROR: ansgar cannot Canto: his Canto is spent this phase\n", output);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class CantoCliTests
         var output = Play(out _, "canto ansgar\ncanto captain 1,1\n");
 
         Assert.Contains("> canto ansgar\nERROR: usage: canto <unit> <x,y|stay>\n", output);
-        Assert.Contains("ERROR: captain cannot Canto: it has no Canto\n", output);
+        Assert.Contains("ERROR: captain cannot Canto: he has no Canto\n", output);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class CantoCliTests
         Assert.Contains("Ansgar hits Archer for 11 (hp 6)", output);
         Assert.Contains("> canto ansgar 4,5\nAnsgar cantos 4,4 -> 4,5\n", output);
         Assert.Contains("> canto ansgar 5,5\nAnsgar cantos 8,5 -> 5,5 via 7,5 6,5\n", output);
-        Assert.Contains("threat on ansgar at 5,5 (Plain): no enemy can strike it next phase", output);
+        Assert.Contains("threat on ansgar at 5,5 (Plain): no enemy can strike him next phase", output);
         Assert.EndsWith("battle won: rout\n", output);
         Assert.DoesNotContain("rejected ", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);

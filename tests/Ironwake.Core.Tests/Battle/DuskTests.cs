@@ -287,9 +287,9 @@ public class DuskTests
     /// enemies in sight; in daylight, or at dusk with every enemy seen, it keeps the plain line.
     /// </summary>
     [Theory]
-    [InlineData(1, "no enemy in sight can strike it next phase", true)]
-    [InlineData(9, "no enemy can strike it next phase", false)]
-    [InlineData(null, "no enemy can strike it next phase", false)]
+    [InlineData(1, "no enemy in sight can strike hale next phase", true)]
+    [InlineData(9, "no enemy can strike hale next phase", false)]
+    [InlineData(null, "no enemy can strike hale next phase", false)]
     public void AnEmptyThreatAtDuskClaimsOnlyTheEnemiesInSight(int? dusk, string claim, bool dark)
     {
         var state = Start(dusk);

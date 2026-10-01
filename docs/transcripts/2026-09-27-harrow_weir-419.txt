@@ -34,7 +34,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > move pell 3,5
 Pell moves 0,5 -> 3,5 via 1,5 2,5
-Group wood wakes: proximity
+The wood group wakes (proximity)
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -1131,8 +1131,8 @@ called: group weir wakes when group ford does
 > end
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
-Event north1
-  Rider arrives at 7,0, group north, aggressive
+Reinforcements arrive
+  Rider arrives at 7,0 with the north group, aggressive
 enemy: wait archer-1
 Archer waits
 enemy: wait brawler-1
@@ -1545,7 +1545,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 called: group weir wakes when group ford does
 > move pell 9,6
 Pell moves 7,6 -> 9,6 via 8,6
-Group weir wakes: proximity
+The weir group wakes (proximity)
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -1582,7 +1582,7 @@ Pell attacks Shieldbearer
   Pell hp 16, Shieldbearer hp 0
 Pell gains 35 exp (47)
 Shieldbearer falls at 11,6
-Group ford wakes: noise
+The ford group wakes (noise)
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
    0123456789012345
  0 ^^^....=..~~..MM
@@ -1881,10 +1881,10 @@ B  teodor           Teodor L1 pikeman          6,6    hp 13/21  Plain  done
 > end
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
-Event west1
-  Brigand 2 arrives at 0,11, group west, aggressive
-Event north2
-  Brigand 3 arrives at 7,0, group north, aggressive
+Reinforcements arrive
+  Brigand 2 arrives at 0,11 with the west group, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 7,0 with the north group, aggressive
 enemy: wait archer-1
 Archer waits
 enemy: move brawler-1 8,9

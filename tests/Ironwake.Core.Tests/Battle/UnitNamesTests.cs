@@ -100,4 +100,95 @@ public class UnitNamesTests
     {
         Assert.Equal(expected, UnitNames.Sentence(text));
     }
+
+    /// <summary>Field with a flood on turn 2 over 3,0.</summary>
+    private static string Flooded => Field.Replace("late turn 3 enemy spawn archer 6,0 group:b behavior:hold", "late turn 3 enemy spawn archer 6,0 group:b behavior:hold\nflood turn 2 enemy terrain 3,0 ~");
+
+    private static GameContent With(Pronoun pronoun) =>
+        Starter with { Pronouns = Starter.Pronouns.SetItem("wren", pronoun) };
+
+    [Fact]
+    public void AShippedCastMemberIsReferredToByThePronounTheCastFileGives()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal(("she", "her", "her"), (names.Refer("wren").Subject, names.Refer("wren").Object, names.Refer("wren").Possessive));
+    }
+
+    [Fact]
+    public void AUnitWithoutAPronounIsReferredToByItsNameAgainNeverIt()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("Brigand", names.Refer("brigand-1").Subject);
+        Assert.Equal("Brigand's", names.Refer("brigand-1").Possessive);
+    }
+
+    [Fact]
+    public void TheyTakesThePluralVerb()
+    {
+        var names = UnitNames.Of(Start(map: Field), With(Pronoun.They));
+
+        Assert.EndsWith("; they still watch", PlaySession.Describe(new WatchHeld("wren", "brigand-1", new Coord(1, 1), 40), Starter, names));
+    }
+
+    [Fact]
+    public void TheLedgersHeldWatchReadsTheWatchersOwnPronoun()
+    {
+        var she = UnitNames.Of(Start(map: Field), Starter);
+        var he = UnitNames.Of(Start(map: Field), With(Pronoun.He));
+
+        Assert.EndsWith("; she still watches", PlaySession.Describe(new WatchHeld("wren", "brigand-1", new Coord(1, 1), 40), Starter, she));
+        Assert.EndsWith("; he still watches", PlaySession.Describe(new WatchHeld("wren", "brigand-1", new Coord(1, 1), 40), Starter, he));
+    }
+
+    [Fact]
+    public void AWakingGroupReadsAsTheGroupWithItsCauseInParentheses()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("The a group wakes (proximity)", PlaySession.Describe(new GroupWoke("a", WakeCause.Proximity), Starter, names));
+        Assert.Equal("The b group wakes (called by the a group)", PlaySession.Describe(new GroupWoke("b", WakeCause.Proximity, CalledBy: "a"), Starter, names));
+    }
+
+    [Fact]
+    public void ASpawnedUnitArrivesWithItsGroup()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("  Archer 3 arrives at 6,0 with the b group, hold", PlaySession.Describe(new UnitSpawned("archer-3", new Coord(6, 0), "b", Behavior.Hold), Starter, names));
+    }
+
+    [Fact]
+    public void AFiredSpawnEventReadsAsReinforcementsNotItsMapId()
+    {
+        var names = UnitNames.Of(Start(map: Field), Starter);
+
+        Assert.Equal("Reinforcements arrive", PlaySession.Describe(new MapEventFired("late", false), Starter, names));
+        Assert.Equal("Reinforcements are blocked: a unit holds 6,0", PlaySession.Describe(new MapEventFired("late", true), Starter, names));
+    }
+
+    [Fact]
+    public void AFiredTerrainEventReadsAsTheGroundChanging()
+    {
+        var names = UnitNames.Of(Start(map: Flooded), Starter);
+
+        Assert.Equal("The ground changes", PlaySession.Describe(new MapEventFired("flood", false), Starter, names));
+        Assert.Equal("3,0 does not change: a unit holds it", PlaySession.Describe(new MapEventFired("flood", true), Starter, names));
+    }
+
+    [Fact]
+    public void AnEventTheMapDoesNotListKeepsItsName()
+    {
+        Assert.Equal("Event drill", PlaySession.Describe(new MapEventFired("drill", false), Starter, UnitNames.None));
+    }
+
+    [Fact]
+    public void ARejectionReferringBackToTheUnitUsesItsPronounAndVerb()
+    {
+        var state = Start(map: Field);
+
+        Assert.Equal("wren cannot Canto: she has no Canto", Resolver.Apply(state, Starter, new Canto("wren", new Coord(1, 2))).Rejection!.Message);
+        Assert.Equal("wren cannot Canto: they have no Canto", Resolver.Apply(state, With(Pronoun.They), new Canto("wren", new Coord(1, 2))).Rejection!.Message);
+    }
 }

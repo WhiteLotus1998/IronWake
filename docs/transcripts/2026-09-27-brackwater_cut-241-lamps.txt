@@ -1242,7 +1242,7 @@ dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 19,3
 Alder Fenn moves 19,0 -> 19,3 via 19,1 19,2
-Group bank wakes: proximity; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
+The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
 Brackwater Cut  turn 5 of 8  player phase  escape  recall 3
    01234567890123456789
  0 ..........~~~.......

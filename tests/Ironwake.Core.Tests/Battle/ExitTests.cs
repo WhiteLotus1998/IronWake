@@ -69,7 +69,7 @@ public class ExitTests
         var rejection = moved.Refused(new Exit("wren"));
 
         Assert.Equal(RejectionReason.MovedBeforeExit, rejection.Reason);
-        Assert.Equal("wren cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on", rejection.Message);
+        Assert.Equal("wren cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on", rejection.Message);
         Assert.DoesNotContain(new Exit("wren"), Resolver.Legal(moved, Starter));
     }
 

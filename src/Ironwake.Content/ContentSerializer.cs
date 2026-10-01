@@ -175,7 +175,7 @@ public static class ContentSerializer
         };
         if (content.Cast.Count > 0)
         {
-            files.Add(new ContentFile(ContentFiles.CastName, WriteArray("units", content.Cast, (writer, unit) => WriteUnit(writer, unit, content.Signatures.TryGetValue(unit.Id, out var kind) ? kind : null))));
+            files.Add(new ContentFile(ContentFiles.CastName, WriteArray("units", content.Cast, (writer, unit) => WriteUnit(writer, unit, content.Signatures.TryGetValue(unit.Id, out var kind) ? kind : null, content.Pronouns.TryGetValue(unit.Id, out var pronoun) ? pronoun : null))));
         }
 
         return files;
@@ -425,10 +425,10 @@ public static class ContentSerializer
         writer.WriteEndObject();
     }
 
-    private static void WriteUnit(Utf8JsonWriter writer, Unit unit) => WriteUnit(writer, unit, null);
+    private static void WriteUnit(Utf8JsonWriter writer, Unit unit) => WriteUnit(writer, unit, null, null);
 
-    /// <summary>A unit entry; a cast member's <paramref name="signature"/> (DESIGN.md 13.18) is written when it has one.</summary>
-    private static void WriteUnit(Utf8JsonWriter writer, Unit unit, SignatureKind? signature)
+    /// <summary>A unit entry; a cast member's <paramref name="signature"/> (DESIGN.md 13.18) and <paramref name="pronoun"/> (issue 615) are written when it has them.</summary>
+    private static void WriteUnit(Utf8JsonWriter writer, Unit unit, SignatureKind? signature, Pronoun? pronoun)
     {
         writer.WriteStartObject();
         writer.WriteString("id", unit.Id);
@@ -468,6 +468,11 @@ public static class ContentSerializer
         if (signature is { } kind)
         {
             writer.WriteString("signature", kind.ToString().ToLowerInvariant());
+        }
+
+        if (pronoun is { } said)
+        {
+            writer.WriteString("pronoun", said.ToString().ToLowerInvariant());
         }
 
         if (unit.Skill != WeaponSkill.Zero)

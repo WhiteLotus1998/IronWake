@@ -1439,7 +1439,7 @@ public sealed class PlaySession
         var blow = Queries.RaisedBlowOn(state, content, unit, tile);
         if (lines.Count == 0 && blow is null)
         {
-            rows.Add($"threat on {unit.Id} at {where}: no enemy {(dark ? "in sight " : "")}can strike it next phase");
+            rows.Add($"threat on {unit.Id} at {where}: no enemy {(dark ? "in sight " : "")}can strike {Referent.For(content, unit.Id, unit.Id).Object} next phase");
         }
         else
         {
@@ -2074,7 +2074,7 @@ public sealed class PlaySession
             case WatchFired w:
                 return $"{names[w.UnitId]}'s watch fires on {names[w.TargetId]} at {w.At}: " + (w.Strike.Hit ? (w.Strike.Crit ? "crit " : "hit ") + w.Strike.Damage : "miss") + $" ({names[w.TargetId]} hp {w.Strike.TargetHpAfter})";
             case WatchHeld w:
-                return $"{names[w.UnitId]}'s watch holds on {names[w.TargetId]} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; she still watches";
+                return $"{names[w.UnitId]}'s watch holds on {names[w.TargetId]} at {w.At}: {w.Hit} is under {Signatures.LedgerFloor}; {names.Refer(w.UnitId).Subject} still {names.Refer(w.UnitId).Verb("watches", "watch")}";
             case WatchEnded w:
                 return $"{names[w.UnitId]} is struck and stops watching";
             case CoverTaken c:
@@ -2095,14 +2095,14 @@ public sealed class PlaySession
             case PhaseBegan p:
                 return $"-- {p.Side.ToString().ToLowerInvariant()} phase, turn {p.Turn} --";
             case GroupWoke g:
-                return $"group {g.Group} wakes: {WakeCauseText(g)}"
-                    + (g.Lamps.Count > 0 ? $"; its lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{names[l.UnitId]} {l.At}"))})" : "");
+                return $"{UnitNames.Group(g.Group)} wakes ({(g.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(g))})"
+                    + (g.Lamps.Count > 0 ? $"; their lamps are lit ({string.Join(", ", g.Lamps.Select(l => $"{names[l.UnitId]} {l.At}"))})" : "");
             case MapEventFired m:
-                return $"event {m.Name}" + (m.Blocked ? " is blocked: its tile is held" : "");
+                return names.Event(m.Name, m.Blocked);
             case TerrainChanged t:
                 return $"  {t.At} becomes {(content.Terrain.TryGetValue(t.TerrainId, out var terrain) ? terrain.Name : t.TerrainId)}";
             case UnitSpawned u:
-                return $"  {names[u.UnitId]} arrives at {u.At}, group {u.Group}, {u.Behavior.ToString().ToLowerInvariant()}";
+                return $"  {names[u.UnitId]} arrives at {u.At} with {UnitNames.Group(u.Group)}, {u.Behavior.ToString().ToLowerInvariant()}";
             case FlagSet f:
                 return $"  flag {f.Flag} is set";
             case RapportGained g:

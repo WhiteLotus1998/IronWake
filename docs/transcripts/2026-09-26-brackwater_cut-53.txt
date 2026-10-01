@@ -409,7 +409,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 9,3 (Plain): no enemy in sight can strike it next phase
+threat on dunstan at 9,3 (Plain): no enemy in sight can strike him next phase
   and whatever is in the dark (?), unpriced
 > move captain 9,4
 Alder Fenn moves 8,4 -> 9,4
@@ -801,7 +801,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain  done
 dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat dunstan
-threat on dunstan at 11,3 (Plain): no enemy in sight can strike it next phase
+threat on dunstan at 11,3 (Plain): no enemy in sight can strike him next phase
   in the dark, unpriced: ? at 4,3 (7), ? at 5,4 (7), ? at 17,5 (8)
 > wait dunstan
 Dunstan waits
@@ -1402,7 +1402,7 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 2, 1 next turn; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat captain
-threat on captain at 18,1 (Plain): no enemy in sight can strike it next phase
+threat on captain at 18,1 (Plain): no enemy in sight can strike him next phase
   in the dark, unpriced: ? at 17,5 (5), ? at 17,6 (6), ? at 17,7 (7)
 > end
 -- Player phase ends, turn 4 --
@@ -1554,7 +1554,7 @@ D  wren             Wren L1 cadet              19,1   hp 20/20  Plain  done
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > threat pell
-threat on pell at 19,2 (Plain): no enemy in sight can strike it next phase
+threat on pell at 19,2 (Plain): no enemy in sight can strike her next phase
   in the dark, unpriced: ? at 17,5 (5), ? at 14,3 (6), ? at 17,6 (6), ? at 13,3 (7), ? at 17,7 (7), ? at 12,3 (8)
 > wait captain
 Alder Fenn waits
@@ -1771,7 +1771,7 @@ Alder Fenn attacks Rider 2
   Rider 2 misses Alder Fenn
   Alder Fenn hp 22, Rider 2 hp 11
 Alder Fenn gains 14 exp (14)
-Group bank wakes: noise; its lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
+The bank group wakes (noise); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)
 Brackwater Cut  turn 6 of 8  player phase  escape  recall 2
    01234567890123456789
  0 ..........~~~...C.D.

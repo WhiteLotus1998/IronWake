@@ -51,10 +51,10 @@ public static class Resolver
                 (next, rejection) = ApplyCover(state, content, cover, events);
                 break;
             case Exit exit:
-                (next, rejection) = ApplyExit(state, exit, events);
+                (next, rejection) = ApplyExit(state, content, exit, events);
                 break;
             case Recover recover:
-                (next, rejection) = ApplyRecover(state, recover, events);
+                (next, rejection) = ApplyRecover(state, content, recover, events);
                 break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
@@ -309,9 +309,10 @@ public static class Resolver
 
         if (state.CantoReachOf(unit, content) is not { } reach)
         {
-            var why = !Signatures.HasCanto(state, content, unit) ? "it has no Canto"
-                : !unit.Acted ? "it has not acted yet this phase"
-                : "its Canto is spent this phase";
+            var who = Referent.For(content, unit.Id, unit.Id);
+            var why = !Signatures.HasCanto(state, content, unit) ? $"{who.Subject} {who.Verb("has", "have")} no Canto"
+                : !unit.Acted ? $"{who.Subject} {who.Verb("has", "have")} not acted yet this phase"
+                : $"{who.Possessive} Canto is spent this phase";
             return (state, new Rejection(RejectionReason.NoCanto, $"{unit.Id} cannot Canto: {why}"));
         }
 
@@ -1062,7 +1063,7 @@ public static class Resolver
     /// Item or Wait, after its Move or without one. The stack goes to the end of the inventory
     /// under the fallen's name, and no Canto follows.
     /// </summary>
-    private static (BattleState, Rejection?) ApplyRecover(BattleState state, Recover recover, List<GameEvent> events)
+    private static (BattleState, Rejection?) ApplyRecover(BattleState state, GameContent content, Recover recover, List<GameEvent> events)
     {
         var unit = Acting(state, recover.UnitId, out var rejection);
         if (unit is null)
@@ -1082,7 +1083,7 @@ public static class Resolver
 
         if (unit.Unit.Inventory.IsFull)
         {
-            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: its inventory is full"));
+            return (state, new Rejection(RejectionReason.NoKeepsake, $"{unit.Id} cannot recover: {Referent.For(content, unit.Id, unit.Id).Possessive} inventory is full"));
         }
 
         events.Add(new KeepsakeRecovered(unit.Id, keepsake.FallenId, keepsake.Item.ItemId));
@@ -1112,7 +1113,7 @@ public static class Resolver
     /// player unit still on the board is left behind, one event each in id order. An enemy
     /// on an exit tile stays where it is.
     /// </summary>
-    private static (BattleState, Rejection?) ApplyExit(BattleState state, Exit exit, List<GameEvent> events)
+    private static (BattleState, Rejection?) ApplyExit(BattleState state, GameContent content, Exit exit, List<GameEvent> events)
     {
         var unit = Acting(state, exit.UnitId, out var rejection);
         if (unit is null)
@@ -1137,12 +1138,12 @@ public static class Resolver
 
         if (unit.Moved && !state.Map.ExitAfterMove)
         {
-            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: it moved this turn; a unit exits without moving, from an exit it began its turn on"));
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Id, unit.Id).Subject} moved this turn; a unit exits without moving, from an exit it began its turn on"));
         }
 
         if (unit.Shoved && !state.Map.ExitAfterMove)
         {
-            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: it was shoved this turn; a unit exits from an exit it began its turn on"));
+            return (state, new Rejection(RejectionReason.MovedBeforeExit, $"{unit.Id} cannot exit: {Referent.For(content, unit.Id, unit.Id).Subject} {Referent.For(content, unit.Id, unit.Id).Verb("was", "were")} shoved this turn; a unit exits from an exit it began its turn on"));
         }
 
         events.Add(new UnitExited(unit.Id, unit.At));

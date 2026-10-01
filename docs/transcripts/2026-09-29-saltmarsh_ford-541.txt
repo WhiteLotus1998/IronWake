@@ -262,7 +262,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move teodor 12,6
 Teodor moves 10,7 -> 12,6 via 10,6 11,6
-Group fort wakes: proximity
+The fort group wakes (proximity)
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...
@@ -767,10 +767,10 @@ B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
 > move wren 10,5
 Wren moves 10,6 -> 10,5
-Event ford
-  Brigand arrives at 0,9, group ford, aggressive
-Event ford_second
-  Soldier 2 arrives at 1,9, group ford, aggressive
+Reinforcements arrive
+  Brigand arrives at 0,9 with the ford group, aggressive
+Reinforcements arrive
+  Soldier 2 arrives at 1,9 with the ford group, aggressive
 Saltmarsh Ford  turn 4 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...

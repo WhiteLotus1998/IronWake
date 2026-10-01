@@ -123,7 +123,7 @@ public class CampaignRecordTests
         Assert.Equal("Toll Spear cannot be repaired: no shop has ever sold one", record.Repair("teodor", 0, Content).Text);
         Assert.Equal("repairing Iron Lance costs 20 (2 uses at 10) and the purse holds 5", record.Repair("teodor", 1, Content).Text);
         Assert.Equal("Field Dressing is not a weapon; nothing to repair", record.Repair("wren", 1, Content).Text);
-        Assert.Equal("wren has no slot 3; it carries 2", record.Repair("wren", 2, Content).Text);
+        Assert.Equal("wren has no slot 3; she carries 2", record.Repair("wren", 2, Content).Text);
         Assert.Null(CampaignRules.RepairPricePerUse(Content.Weapon("toll_axe")));
     }
 

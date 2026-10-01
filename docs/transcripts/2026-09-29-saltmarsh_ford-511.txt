@@ -252,11 +252,11 @@ B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > move teodor 10,4
 Teodor moves 9,6 -> 10,4 via 9,5 9,4
-Event ford
-  Brigand arrives at 0,9, group ford, aggressive
-Event ford_second
-  Soldier 2 arrives at 1,9, group ford, aggressive
-Group fort wakes: proximity
+Reinforcements arrive
+  Brigand arrives at 0,9 with the ford group, aggressive
+Reinforcements arrive
+  Soldier 2 arrives at 1,9 with the ford group, aggressive
+The fort group wakes (proximity)
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...b!...

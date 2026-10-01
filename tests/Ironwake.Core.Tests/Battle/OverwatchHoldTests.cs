@@ -65,7 +65,7 @@ public class OverwatchHoldTests
 
         Assert.False(result.Accepted);
         Assert.Equal(RejectionReason.CannotWatch, result.Rejection!.Reason);
-        Assert.Contains("pk has moved this turn; a watch holds the tile it began on", result.Rejection.Message);
+        Assert.Contains("pk has moved this turn; a watch holds the tile pk began on", result.Rejection.Message);
         Assert.DoesNotContain(Resolver.Legal(moved, Starter), c => c is Watch { UnitId: "pk" });
         Assert.Contains(Resolver.Legal(Start(), Starter), c => c is Watch { UnitId: "pk" });
     }

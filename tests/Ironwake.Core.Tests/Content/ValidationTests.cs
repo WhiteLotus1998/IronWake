@@ -470,6 +470,46 @@ public class ValidationTests
         AssertNames(e, "units/more.json", "brute", "signature");
     }
 
+    [Fact]
+    public void ACastMembersPronounIsReadByUnitId()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored) + ", " + CastMember("wren", Authored + " \"pronoun\": \"they\",") + " ] }"));
+
+        Assert.Equal(Pronoun.They, content.Pronouns["wren"]);
+        Assert.False(content.Pronouns.ContainsKey("captain"));
+    }
+
+    [Fact]
+    public void AnUnknownPronounIsRefused()
+    {
+        var e = Fails(Fixture.Files(cast: "{ \"units\": [ " + CastMember("captain", Authored + " \"pronoun\": \"it\",") + " ] }"));
+        AssertNames(e, ContentFiles.CastName, "captain", "pronoun");
+        Assert.Contains("he, she, they", e.Message);
+    }
+
+    [Fact]
+    public void ATemplateCarryingAPronounIsRefused()
+    {
+        var e = Fails(Fixture.Files(secondUnitsFile: "{ \"units\": [ " + CastMember("brute", "\"pronoun\": \"he\",") + " ] }"));
+        AssertNames(e, "units/more.json", "brute", "pronoun");
+    }
+
+    [Fact]
+    public void ThePronounsRoundTripThroughTheSerializer()
+    {
+        var content = Maps.MapFixture.Content;
+
+        Assert.Equal(content.Pronouns, ContentLoader.Parse(ContentSerializer.Write(content)).Pronouns);
+    }
+
+    [Fact]
+    public void EveryShippedCastMemberCarriesAPronoun()
+    {
+        var content = Maps.MapFixture.Content;
+
+        Assert.All(content.Cast, unit => Assert.True(content.Pronouns.ContainsKey(unit.Id), unit.Id));
+    }
+
     [Theory]
     [InlineData("nobody")]
     [InlineData("wren")]
