@@ -199,15 +199,28 @@ public class WindupTests
         var hale = state.Find("hale")!;
 
         Assert.Equal(
-            new[] { "  windup: a hit from 3,4 does not break toll_mauler-1's blow over 2,2 (outside its reach)" },
+            new[] { "  windup: a hit from 3,4 does not break toll_mauler-1's blow over 2,2 (outside toll_mauler-1's reach)" },
             Ironwake.Cli.PlaySession.WindupLines(state, Starter, pell, mauler, null).ToList());
         Assert.Equal(
             new[]
             {
-                "  windup: a hit on toll_mauler-1 breaks its blow over 2,2",
-                $"  windup: toll_mauler-1's blow lands on 2,2 at its next phase start: {Windup.Damage(state, Starter, mauler, hale)} to hale, sure",
+                "  windup: a hit on toll_mauler-1 breaks toll_mauler-1's blow over 2,2",
+                $"  windup: toll_mauler-1's blow lands on 2,2 at toll_mauler-1's next phase start: {Windup.Damage(state, Starter, mauler, hale)} to hale, sure",
             },
             Ironwake.Cli.PlaySession.WindupLines(state, Starter, hale, mauler, null).ToList());
+    }
+
+    [Fact]
+    public void TheWindupLinesNameTheWielderAsAReaderSeesThemWhenGivenNames()
+    {
+        var state = PerchPhase(7);
+        var names = UnitNames.Of(state, Starter);
+        var mauler = state.Find("toll_mauler-1")!;
+
+        var lines = Ironwake.Cli.PlaySession.WindupLines(state, Starter, state.Find("hale")!, mauler, null, names).ToList();
+
+        Assert.StartsWith($"  windup: a hit on {names["toll_mauler-1"]} breaks {names["toll_mauler-1"]}'s blow over 2,2", lines[0]);
+        Assert.All(lines, l => Assert.DoesNotContain("toll_mauler-1", l));
     }
 
     [Fact]
@@ -292,15 +305,15 @@ public class WindupTests
         Assert.Equal(
             new[]
             {
-                "  windup: a hit on toll_mauler-1 breaks its blow over 2,2",
-                $"  windup: toll_mauler-1's blow lands on 2,2 at its next phase start: {landing} to hale, sure",
+                "  windup: a hit on toll_mauler-1 breaks toll_mauler-1's blow over 2,2",
+                $"  windup: toll_mauler-1's blow lands on 2,2 at toll_mauler-1's next phase start: {landing} to hale, sure",
             },
             Ironwake.Cli.PlaySession.WindupLines(playerPhase, Starter, hale, mauler, null).ToList());
 
         var enemyPhase = Start(true).Do(new EndPhase());
         var damage = Windup.Damage(enemyPhase, Starter, enemyPhase.Find("toll_mauler-1")!, enemyPhase.Find("hale")!);
         Assert.Equal(
-            new[] { $"  windup: no combat now; toll_mauler-1 raises a blow over 2,2, landing at its next phase start on whoever stands there (hale: {damage}, sure) unless a hit from within its reach breaks it" },
+            new[] { $"  windup: no combat now; toll_mauler-1 raises a blow over 2,2, landing at toll_mauler-1's next phase start on whoever stands there (hale: {damage}, sure) unless a hit from within its reach breaks it" },
             Ironwake.Cli.PlaySession.WindupLines(enemyPhase, Starter, enemyPhase.Find("toll_mauler-1")!, enemyPhase.Find("hale")!, null).ToList());
         Assert.Empty(Ironwake.Cli.PlaySession.WindupLines(Start(false).Do(new EndPhase()), Starter, mauler, hale, null));
     }

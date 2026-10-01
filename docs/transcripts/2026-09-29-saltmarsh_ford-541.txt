@@ -1176,7 +1176,7 @@ enemy: move brigand-1 9,6
 Brigand moves 5,6 -> 9,6 via 6,6 7,6 8,6
 enemy: attack brigand-1 captain
 Forecast Brigand -> Alder Fenn: dmg 10 hit 23% crit 0%; counter: dmg 11 x2 hit 90% crit 5%
-  Brace: captain braced: brigand-1 hit -15
+  Brace: Alder Fenn braced: Brigand hit -15
 Brigand attacks Alder Fenn
   Brigand misses Alder Fenn
   Alder Fenn misses Brigand
@@ -1186,7 +1186,7 @@ enemy: move soldier-2 9,5
 Soldier 2 moves 6,6 -> 9,5 via 6,5 7,5 8,5
 enemy: attack soldier-2 wren
 Forecast Soldier 2 -> Wren: dmg 9 hit 36% crit 0%; counter: dmg 8 hit 85% crit 3%
-  Brace: wren braced: soldier-2 hit -15
+  Brace: Wren braced: Soldier 2 hit -15
 Soldier 2 attacks Wren
   Soldier 2 hits Wren for 9 (hp 11)
   Wren hits Soldier 2 for 8 (hp 12)
@@ -2057,7 +2057,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 hit u
 -- Enemy phase, turn 10 --
 enemy: attack bandit_leader-1 teodor
 Forecast Bandit Leader -> Teodor: dmg 11 hit 31% crit 1%; counter: none
-  Brace: teodor braced: bandit_leader-1 hit -15
+  Brace: Teodor braced: Bandit Leader hit -15
 Bandit Leader attacks Teodor
   Bandit Leader misses Teodor
   Bandit Leader hp 26, Teodor hp 21

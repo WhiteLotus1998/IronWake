@@ -815,7 +815,7 @@ public sealed class PlaySession
         var darkRun = 0;
         foreach (var command in EnemyAi.Plan(_state, _content))
         {
-            var grudge = EnemyAi.GrudgeLog(_state, _content, command, grudges);
+            var grudge = EnemyAi.GrudgeLog(_state, _content, command, grudges, UnitNames.Of(_state, _content));
             var passed = CoverRule.PassedLine(_state, _content, command);
             if (command is Move or Wait && InTheDark(command))
             {
@@ -846,9 +846,10 @@ public sealed class PlaySession
                 var covered = aimed is null ? null : CoverRule.Swapped(_state, aimed);
                 var target = covered?.Struck ?? aimed;
                 var board = covered?.Board ?? _state;
+                var names = UnitNames.Of(_state, _content);
                 if (covered is { } swap)
                 {
-                    _out.WriteLine($"  Cover: {swap.Struck.Id} takes the strike aimed at {aimed!.Id}");
+                    _out.WriteLine($"  Cover: {names[swap.Struck.Id]} takes the strike aimed at {names[aimed!.Id]}");
                 }
 
                 var forecast = attacker is null || target is null ? null : Queries.Forecast(board, _content, attacker, target, attacker.At, attack.Slot);
@@ -858,34 +859,34 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), UnitNames.Of(_state, _content)));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names));
                 PrintRivalry(target!, countering: true);
-                if (SwornLine(attacker!, target!) is { } sworn)
+                if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
                     _out.WriteLine(UnitNames.Sentence(sworn));
                 }
 
-                foreach (var pincer in PincerLines(_state, attacker!, target!))
+                foreach (var pincer in PincerLines(_state, attacker!, target!, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(pincer));
                 }
 
-                foreach (var brace in BraceLines(attacker!, target!))
+                foreach (var brace in BraceLines(attacker!, target!, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(brace));
                 }
 
-                foreach (var line in BreakLines(_state, _content, attacker!, target!))
+                foreach (var line in BreakLines(_state, _content, attacker!, target!, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
 
-                foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes))
+                foreach (var ignite in IgniteLines(_state, _content, attacker!, target!, attacker!.At, attack.Slot, forecast.Defender.Strikes, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(ignite));
                 }
 
-                foreach (var windup in WindupLines(_state, _content, attacker!, target!, attack.Slot))
+                foreach (var windup in WindupLines(_state, _content, attacker!, target!, attack.Slot, names))
                 {
                     _out.WriteLine(UnitNames.Sentence(windup));
                 }
@@ -1238,6 +1239,8 @@ public sealed class PlaySession
     /// protocol's forecast query (issue 25), whose <c>text</c> is exactly this.
     /// <paramref name="fromTile"/> is true for a forecast asked from a tile the unit has not
     /// moved to, whose line names the tile and its terrain.
+    /// Every line, the experiment sub-lines included, names units as a reader sees them (issue 615);
+    /// the sub-line builders keep ids when called without names.
     /// </summary>
     public static string ForecastText(BattleState state, GameContent content, BattleUnit unit, BattleUnit target, CombatForecast forecast, Coord tile, bool fromTile, int? slot = null, string? art = null)
     {
@@ -1256,22 +1259,22 @@ public sealed class PlaySession
             lines.Add(ArtLine(content, unit, forecast, slot, art));
         }
 
-        if (RivalryLine(state, content, unit with { At = tile }, countering: false) is { } rivalry)
+        if (RivalryLine(state, content, unit with { At = tile }, countering: false, names) is { } rivalry)
         {
             lines.Add(rivalry);
         }
 
-        if (SwornLine(unit, target) is { } sworn)
+        if (SwornLine(unit, target, names) is { } sworn)
         {
             lines.Add(sworn);
         }
 
-        lines.AddRange(PincerLines(state, unit with { At = tile }, target));
-        lines.AddRange(BraceLines(unit, target));
-        lines.AddRange(BreakLines(state, content, unit, target));
-        lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast));
-        lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes));
-        lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot));
+        lines.AddRange(PincerLines(state, unit with { At = tile }, target, names));
+        lines.AddRange(BraceLines(unit, target, names));
+        lines.AddRange(BreakLines(state, content, unit, target, names));
+        lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
+        lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
+        lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
         lines.AddRange(PendingRetreatLines(state, content, unit, tile, target, forecast, names));
         return UnitNames.Sentence(string.Join("\n", lines));
     }
@@ -1790,13 +1793,13 @@ public sealed class PlaySession
     /// </summary>
     private void PrintRivalry(BattleUnit unit, bool countering)
     {
-        if (RivalryLine(_state, _content, unit, countering) is { } line)
+        if (RivalryLine(_state, _content, unit, countering, UnitNames.Of(_state, _content)) is { } line)
         {
             _out.WriteLine(UnitNames.Sentence(line));
         }
     }
 
-    private static string? RivalryLine(BattleState state, GameContent content, BattleUnit unit, bool countering)
+    private static string? RivalryLine(BattleState state, GameContent content, BattleUnit unit, bool countering, UnitNames names)
     {
         if (Rivalry.ArmOf(state, content) is null || Rivalry.AdjacentRivals(state, content, unit) is not { Count: > 0 } rivals)
         {
@@ -1804,7 +1807,7 @@ public sealed class PlaySession
         }
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, unit, countering);
-        return $"  rivalry: {unit.Id} beside {string.Join(", ", rivals.Select(r => r.Id))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
+        return $"  rivalry: {names[unit.Id]} beside {string.Join(", ", rivals.Select(r => names[r.Id]))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
     }
 
     /// <summary>
@@ -1812,11 +1815,12 @@ public sealed class PlaySession
     /// crit avoid the forecast already took off, so the reader sees why the crit is what it is.
     /// Silent otherwise.
     /// </summary>
-    public static string? SwornLine(BattleUnit a, BattleUnit b)
+    public static string? SwornLine(BattleUnit a, BattleUnit b, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         var (enemy, player) = a.Side == Side.Enemy ? (a, b) : (b, a);
         return enemy.Grudge == player.Id && enemy.Side != player.Side
-            ? $"  sworn: {enemy.Id} on {player.Id}: {player.Id} crit avoid {Grudges.SwornCritAvoid:+0;-0;0}"
+            ? $"  sworn: {names[enemy.Id]} on {names[player.Id]}: {names[player.Id]} crit avoid {Grudges.SwornCritAvoid:+0;-0;0}"
             : null;
     }
 
@@ -1825,16 +1829,17 @@ public sealed class PlaySession
     /// that is pinned, naming the unit behind it and the hit the forecast already added, the
     /// strike first and the counter second. Silent when neither is pinned.
     /// </summary>
-    public static IEnumerable<string> PincerLines(BattleState state, BattleUnit attacker, BattleUnit target)
+    public static IEnumerable<string> PincerLines(BattleState state, BattleUnit attacker, BattleUnit target, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (Pincer.PinnedBy(state, attacker, target) is { } behindTarget)
         {
-            yield return $"  pincer: {target.Id} pinned by {behindTarget.Id}: {attacker.Id} hit +{Pincer.Hit}";
+            yield return $"  pincer: {names[target.Id]} pinned by {names[behindTarget.Id]}: {names[attacker.Id]} hit +{Pincer.Hit}";
         }
 
         if (Pincer.PinnedBy(state, target, attacker) is { } behindAttacker)
         {
-            yield return $"  pincer: {attacker.Id} pinned by {behindAttacker.Id}: {target.Id} hit +{Pincer.Hit}";
+            yield return $"  pincer: {names[attacker.Id]} pinned by {names[behindAttacker.Id]}: {names[target.Id]} hit +{Pincer.Hit}";
         }
     }
 
@@ -1843,14 +1848,15 @@ public sealed class PlaySession
     /// striker, when it is a boss whose fall would break someone, one line naming each member at
     /// or below half with its HP. Silent otherwise.
     /// </summary>
-    public static IEnumerable<string> BreakLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target)
+    public static IEnumerable<string> BreakLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         foreach (var boss in new[] { target, attacker })
         {
             var members = Break.WouldBreak(state, content, boss);
             if (members.Count > 0)
             {
-                yield return $"  break if {boss.Id} falls: " + string.Join(", ", members.Select(m => $"{m.Id} ({m.Hp}/{m.MaxHp(content)})"));
+                yield return $"  break if {names[boss.Id]} falls: " + string.Join(", ", members.Select(m => $"{names[m.Id]} ({m.Hp}/{m.MaxHp(content)})"));
             }
         }
     }
@@ -1860,11 +1866,12 @@ public sealed class PlaySession
     /// braced, naming the hit the forecast already took off. Silent otherwise; the striker is never
     /// braced, since its brace ends before it can strike.
     /// </summary>
-    public static IEnumerable<string> BraceLines(BattleUnit attacker, BattleUnit target)
+    public static IEnumerable<string> BraceLines(BattleUnit attacker, BattleUnit target, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (target.Braced)
         {
-            yield return $"  brace: {target.Id} braced: {attacker.Id} hit -{Brace.Hit}";
+            yield return $"  brace: {names[target.Id]} braced: {names[attacker.Id]} hit -{Brace.Hit}";
         }
     }
 
@@ -1873,21 +1880,22 @@ public sealed class PlaySession
     /// striker, Teodor's own watched penalty, each naming the hit the forecast already holds, and
     /// Ottilie's refusal with the displayed hit it refuses. The forecast still answers. Silent otherwise.
     /// </summary>
-    public static IEnumerable<string> SignatureLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, CombatForecast forecast)
+    public static IEnumerable<string> SignatureLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, CombatForecast forecast, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (Signatures.OrderedBy(state, content, attacker) is { } teodor)
         {
-            yield return $"  signature: {teodor.Id}'s orders: {attacker.Id} hit +{Signatures.OrdersHit}";
+            yield return $"  signature: {names[teodor.Id]}'s orders: {names[attacker.Id]} hit +{Signatures.OrdersHit}";
         }
 
         if (Signatures.Watched(state, content, attacker))
         {
-            yield return $"  signature: {attacker.Id} hit -{Signatures.WatchedHit} (ally within {Signatures.OrdersRadius})";
+            yield return $"  signature: {names[attacker.Id]} hit -{Signatures.WatchedHit} (ally within {Signatures.OrdersRadius})";
         }
 
         if (Signatures.Refuses(state, content, attacker, forecast.Attacker.DisplayedHit))
         {
-            yield return $"  signature: {attacker.Id} refuses this strike: {forecast.Attacker.DisplayedHit} is under {Signatures.LedgerFloor}";
+            yield return $"  signature: {names[attacker.Id]} refuses this strike: {forecast.Attacker.DisplayedHit} is under {Signatures.LedgerFloor}";
         }
     }
 
@@ -1896,8 +1904,9 @@ public sealed class PlaySession
     /// weapon ignites and the target stands on forest, and one when the target counters with a
     /// weapon that does and the striker's tile is forest, naming the tile a hit sets alight. Silent otherwise.
     /// </summary>
-    public static IEnumerable<string> IgniteLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, Coord tile, int? slot, bool counters)
+    public static IEnumerable<string> IgniteLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, Coord tile, int? slot, bool counters, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (!state.Map.WildfireEnabled)
         {
             yield break;
@@ -1905,12 +1914,12 @@ public sealed class PlaySession
 
         if (Resolver.ChooseWeapon(attacker, content, slot).Weapon is { Ignites: true } && state.Map.TerrainIdAt(target.At) == Wildfire.ForestTerrainId)
         {
-            yield return $"  wildfire: {attacker.Id} ignites {target.At} on a hit";
+            yield return $"  wildfire: {names[attacker.Id]} ignites {target.At} on a hit";
         }
 
         if (counters && target.EquippedWeapon(content) is { Ignites: true } && state.Map.TerrainIdAt(tile) == Wildfire.ForestTerrainId)
         {
-            yield return $"  wildfire: {target.Id} ignites {tile} on a hit";
+            yield return $"  wildfire: {names[target.Id]} ignites {tile} on a hit";
         }
     }
 
@@ -1921,8 +1930,9 @@ public sealed class PlaySession
     /// it; and one when the attacker's tile is under another unit's blow, with the certain damage
     /// it lands on the attacker. Silent otherwise.
     /// </summary>
-    public static IEnumerable<string> WindupLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, int? slot)
+    public static IEnumerable<string> WindupLines(BattleState state, GameContent content, BattleUnit attacker, BattleUnit target, int? slot, UnitNames? names = null)
     {
+        names ??= UnitNames.None;
         if (!state.Map.WindupEnabled)
         {
             yield break;
@@ -1932,19 +1942,19 @@ public sealed class PlaySession
         if (Windup.Raises(state, weapon))
         {
             var damage = Windup.Damage(state, content, armed, target);
-            yield return $"  windup: no combat now; {attacker.Id} raises a blow over {target.At}, landing at its next phase start on whoever stands there ({target.Id}: {damage}, sure) unless a hit from within its reach breaks it";
+            yield return $"  windup: no combat now; {names[attacker.Id]} raises a blow over {target.At}, landing at {names.Refer(attacker.Id).Possessive} next phase start on whoever stands there ({names[target.Id]}: {damage}, sure) unless a hit from within its reach breaks it";
         }
 
         if (target.WindupAt is { } at)
         {
             yield return Windup.Breaks(content, target, attacker.At)
-                ? $"  windup: a hit on {target.Id} breaks its blow over {at}"
-                : $"  windup: a hit from {attacker.At} does not break {target.Id}'s blow over {at} (outside its reach)";
+                ? $"  windup: a hit on {names[target.Id]} breaks {names.Refer(target.Id).Possessive} blow over {at}"
+                : $"  windup: a hit from {attacker.At} does not break {names[target.Id]}'s blow over {at} (outside {names.Refer(target.Id).Possessive} reach)";
         }
 
         if (Windup.Over(state, attacker.At) is { } wielder && wielder.Id != attacker.Id)
         {
-            yield return $"  windup: {wielder.Id}'s blow lands on {attacker.At} at its next phase start: {Windup.Damage(state, content, wielder, attacker)} to {attacker.Id}, sure";
+            yield return $"  windup: {names[wielder.Id]}'s blow lands on {attacker.At} at {names.Refer(wielder.Id).Possessive} next phase start: {Windup.Damage(state, content, wielder, attacker)} to {names[attacker.Id]}, sure";
         }
     }
 
