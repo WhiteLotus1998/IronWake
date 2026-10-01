@@ -24,8 +24,8 @@ public sealed class CampaignSession
           shop                     What the shop sells before this map, and each price
           buy <item> <unit>        Buy an item at full uses into the unit's next free slot
           repair <unit> <slot>     Restore a weapon's uses, at its price per use
-          classes [unit]           What each class asks to certify into it, and what the unit still lacks
-          certify <unit> <class>   Change class, paying a seal from the purse
+          classes [unit]           What each class asks for promotion into it, and what the unit still lacks
+          certify <unit> <class>   Promote into a class, paying a seal from the purse
           trial <unit> <class>     Try the class's certification trial instead of a seal; one attempt per camp
           keep                     The keep's menu once the raid is fought: each placement, its price and what it does
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
@@ -328,7 +328,7 @@ public sealed class CampaignSession
     public static IReadOnlyList<string> TrialLines(CampaignRecord record, GameContent content, MapDefinition trial, string unitId, string classId) => new[]
     {
         $"Trial: {trial.Name}, seed {record.TrialSeed(content)}",
-        $"Certification trial: {UnitNames.Of(record, content)[unitId]} plays as {content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}",
+        $"Promotion trial: {UnitNames.Of(record, content)[unitId]} plays as {content.Class(classId).Name} with {string.Join(", ", trial.Certification!.Loadout)}",
     };
 
     /// <summary>The line after a won battle: the reason, the reward, the purse, and who fell on it, by name.</summary>
@@ -610,7 +610,7 @@ public sealed class CampaignSession
             else if (unit is not null)
             {
                 var refusals = Certifications.Check(unit, target);
-                line += refusals.Count == 0 ? $" -- {names[unit.Id]} may certify" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
+                line += refusals.Count == 0 ? $" -- {names[unit.Id]} may be promoted" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
             }
 
             _out.WriteLine(line);
@@ -775,7 +775,7 @@ public sealed class CampaignSession
     public static IReadOnlyList<string> ShopLines(CampaignRecord record, GameContent content)
     {
         var wares = Stock(record, content).Select(id => WareText(content, id));
-        var lines = new List<string> { $"Shop: {string.Join(", ", wares)}; a seal to certify costs {content.Campaign.CertificationPrice}" };
+        var lines = new List<string> { $"Shop: {string.Join(", ", wares)}; a seal for promotion costs {content.Campaign.CertificationPrice}" };
         if (content.Campaign.Trials.Count > 0)
         {
             var trials = content.Campaign.Trials.Select(t => content.Class(t.ClassId).Name);

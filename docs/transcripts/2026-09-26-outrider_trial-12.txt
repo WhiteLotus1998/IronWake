@@ -1,5 +1,5 @@
 Trial of the Outrider, seed 12, scheme TwoRollAverage
-Certification trial: Alder Fenn plays as Outrider with iron_lance, iron_sword
+Promotion trial: Alder Fenn plays as Outrider with iron_lance, iron_sword
 Objective: Get the captain to the gate by the end of turn 1. Captain Fenn must survive.
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
@@ -80,4 +80,4 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 A  captain          Alder Fenn L1 outrider     3,0    hp 13/23  Gate (heals 20 percent, 4 hp)  captain  done
 Battle won: seize; no recall is left
 Battle won: seize
-Certification: Alder Fenn earned Outrider
+Promotion: Alder Fenn earned Outrider
