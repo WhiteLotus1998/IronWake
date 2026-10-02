@@ -94,6 +94,26 @@
       "def": 0,
       "res": 0,
       "burn": 20
+    },
+    {
+      "id": "planks",
+      "name": "Planks",
+      "glyph": "+",
+      "cost": { "infantry": 1, "cavalry": 1, "flying": 1, "armored": 1 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0,
+      "wearsTo": "split_planks"
+    },
+    {
+      "id": "split_planks",
+      "name": "Split planks",
+      "glyph": ":",
+      "cost": { "infantry": 1, "cavalry": 2, "flying": 1, "armored": 2 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0,
+      "wearsTo": "water"
     }
   ]
 }

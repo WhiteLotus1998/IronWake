@@ -1,0 +1,65 @@
+move teodor 7,3
+wait teodor
+move captain 6,3
+wait captain
+move pell 7,5
+wait pell
+move ottilie 6,5
+wait ottilie
+move dunstan 10,8
+wait dunstan
+move rook 4,5
+wait rook
+end
+move pell 8,3
+attack pell soldier-1 cinder
+move captain 9,2
+attack captain brigand-3
+move ottilie 6,2
+attack ottilie archer-2
+recall 32
+move teodor 7,2
+attack teodor archer-2
+move rook 6,1
+attack rook archer-2
+move ottilie 5,2
+wait ottilie
+move dunstan 13,7
+wait dunstan
+end
+move dunstan 13,3
+wait dunstan
+move pell 11,2
+wait pell
+move teodor 7,0
+wait teodor
+move rook 6,0
+wait rook
+move ottilie 5,0
+wait ottilie
+move captain 12,2
+wait captain
+end
+exit ottilie
+exit rook
+exit teodor
+move pell 9,0
+wait pell
+move dunstan 11,1
+wait dunstan
+move captain 13,3
+attack captain brigand-2
+end
+exit pell
+move dunstan 8,0
+wait dunstan
+attack captain rider-1
+end
+exit dunstan
+move captain 11,1
+wait captain
+end
+move captain 9,0
+wait captain
+end
+exit captain

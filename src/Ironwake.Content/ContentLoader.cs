@@ -1578,12 +1578,21 @@ public static class ContentLoader
                 node.IntOr("res", 0),
                 heal,
                 node.BoolOr("appliesToFlyers", false),
-                burn));
+                burn,
+                node.OptionalString("wearsTo")));
         }
 
         if (builder.Count == 0)
         {
             throw new ContentException(file.Name, null, "terrain", "must contain at least one terrain type");
+        }
+
+        foreach (var terrain in builder.Values)
+        {
+            if (terrain.WearsTo is { } wearsTo && (!builder.ContainsKey(wearsTo) || wearsTo == terrain.Id))
+            {
+                throw new ContentException(file.Name, terrain.Id, "wearsTo", wearsTo == terrain.Id ? "cannot name the terrain itself" : $"names no terrain '{wearsTo}'");
+            }
         }
 
         return builder.ToImmutable();

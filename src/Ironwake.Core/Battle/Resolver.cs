@@ -254,7 +254,8 @@ public static class Resolver
 
         events.Add(new UnitMoved(unit.Id, unit.At, move.To, entry.Path));
         int? canto = Signatures.HasCanto(state, content, unit) ? reach.Mov - entry.Cost : null;
-        return (EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events), null);
+        var moved = EndMove(state, unit, unit with { At = move.To, Moved = true, Canto = canto }, events);
+        return (Planks.AfterWalk(moved, content, unit, unit.At, entry.Path, events), null);
     }
 
     /// <summary>
@@ -363,7 +364,8 @@ public static class Resolver
         events.Add(new Cantoed(unit.Id, unit.At, canto.To, entry.Path));
         // A Canto that leaves the tile takes a brace off (DESIGN 13.14); staying keeps it.
         var braced = unit.Braced && canto.To == unit.At;
-        return (state.WithUnit(unit with { At = canto.To, Canto = null, Braced = braced }), null);
+        var cantoed = state.WithUnit(unit with { At = canto.To, Canto = null, Braced = braced });
+        return (Planks.AfterWalk(cantoed, content, unit, unit.At, entry.Path, events), null);
     }
 
     /// <summary>
@@ -1453,7 +1455,8 @@ public static class Resolver
             events.Add(new UnitMoved(unit.Id, unit.At, retreat.To, path));
         }
 
-        return (EndMove(state, unit, unit with { At = retreat.To, Moved = true, Acted = true, Retreated = true }, events), null);
+        var retreated = EndMove(state, unit, unit with { At = retreat.To, Moved = true, Acted = true, Retreated = true }, events);
+        return (Planks.AfterWalk(retreated, content, unit, unit.At, path, events), null);
     }
 
     /// <summary>

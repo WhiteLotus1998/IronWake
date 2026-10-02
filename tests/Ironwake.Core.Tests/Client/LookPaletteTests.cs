@@ -136,7 +136,7 @@ public partial class LookPaletteTests
         Assert.Single(stray);
     }
 
-    [GeneratedRegex(@"^\| `([a-z.]+)` \| `#([0-9A-F]{6})` \|", RegexOptions.Multiline)]
+    [GeneratedRegex(@"^\| `([a-z._]+)` \| `#([0-9A-F]{6})` \|", RegexOptions.Multiline)]
     private static partial Regex TokenRow();
 
     [GeneratedRegex(@"#([0-9A-Fa-f]{6})\b")]

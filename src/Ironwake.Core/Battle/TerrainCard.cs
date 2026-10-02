@@ -66,6 +66,11 @@ public static class TerrainCard
         }
 
         parts.Add(Costs(terrain));
+        if (terrain.WearsTo is not null)
+        {
+            var chain = string.Join(", ", Planks.Chain(content, terrain).Select(t => t.Name));
+            parts.Add($"Wears: each unit that walks off it wears it one step, a horse or armour two, a flyer none ({chain}).");
+        }
         if (map.WildfireEnabled && terrain.Id == Wildfire.ForestTerrainId)
         {
             parts.Add($"On this map a {Igniters(content)} hit on a unit here sets the tile alight.");

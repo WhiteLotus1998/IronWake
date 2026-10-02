@@ -2148,6 +2148,29 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Rotten planks (DESIGN.md 13.25, experiment): Code's warm seed 251 on the sample replays to
+    /// its transcript; the map is canonical, the board prints the wear line, each walk off the
+    /// bridge prints what the planks became, and the two cuts leave the river whole.
+    /// </summary>
+    [Fact]
+    public void TheJournaledPlanksPlayReplaysToItsTranscript()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "rotten_bridge_planks.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-rotten_bridge_planks-251.script");
+
+        var output = Run(out _, "play", map, "--seed", "251", "--script", script, "--content", Fixture.RealContentDirectory());
+        var text = File.ReadAllText(map).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("rotten_bridge_planks.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        Assert.Contains("wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)", output);
+        Assert.Contains("Pell moves 7,5 -> 8,3 via 7,4 7,3\n  7,5 becomes Water\n  7,4 becomes Water", output);
+        Assert.Contains("Ottilie moves 6,5 -> 5,2 via 6,4 6,3 6,2\n  6,5 becomes Water\n  6,4 becomes Water", output);
+        Assert.Contains("Escaped: Ottilie, Rook, Teodor, Pell, Dunstan, Alder Fenn; left behind: none; fell: none", output);
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.

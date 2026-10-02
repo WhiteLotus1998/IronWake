@@ -34,6 +34,8 @@ public static class Palette
         ["wall"] = new(40, 40, 46),
         ["throne"] = new(244, 234, 150),
         ["fire"] = new(112, 0, 0),
+        ["planks"] = new(192, 168, 96),
+        ["split_planks"] = new(112, 80, 16),
     };
 
     public static readonly Rgb UnknownTerrain = new(128, 128, 128);

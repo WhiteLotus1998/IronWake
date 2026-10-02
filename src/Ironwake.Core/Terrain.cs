@@ -5,7 +5,9 @@ namespace Ironwake.Core;
 /// type; null means impassable. Avoid and Def/Res bonuses do not apply to flyers unless
 /// <see cref="AppliesToFlyers"/> is set (Fort and Throne). <see cref="BurnPercent"/> is the
 /// heal inverted: a unit on the tile at the start of its side's phase loses that percent of
-/// its max HP, never below 1 (Fire, DESIGN.md 13.15, experiment).
+/// its max HP, never below 1 (Fire, DESIGN.md 13.15, experiment). <see cref="WearsTo"/> is the
+/// terrain a unit walking off the tile turns it into, null for ground that never wears
+/// (rotten planks, DESIGN.md 13.25, experiment; <see cref="Planks"/>).
 /// </summary>
 public sealed record Terrain(
     string Id,
@@ -17,7 +19,8 @@ public sealed record Terrain(
     int Res,
     int HealPercent,
     bool AppliesToFlyers,
-    int BurnPercent = 0)
+    int BurnPercent = 0,
+    string? WearsTo = null)
 {
     /// <summary>Cost to enter for the given movement type, or null if impassable.</summary>
     public int? MoveCost(MovementType movement) => MoveCosts[(int)movement];
