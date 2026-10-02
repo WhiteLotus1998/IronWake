@@ -61,7 +61,7 @@ public class CampaignRecordTests
     [Fact]
     public void ThePurseRefusesAPurchaseItCannotAffordNamingThePriceAndTheBalance()
     {
-        var result = WithPurse(399).Buy("iron_sword", "teodor", Content);
+        var result = WithPurse(399).Buy("iron_sword", "wren", Content);
 
         Assert.False(result.Accepted);
         Assert.Equal("Iron Sword costs 400 and the purse holds 399", result.Text);
@@ -87,6 +87,50 @@ public class CampaignRecordTests
         Assert.False(result.Accepted);
         Assert.StartsWith("the shop does not stock 'steel_sword'; it sells iron_sword", result.Text);
         Assert.True(AtMap(3).Buy("steel_sword", "wren", Content) is { Accepted: false, Text: "Steel Sword costs 900 and the purse holds 500" });
+    }
+
+    [Fact]
+    public void APurchaseIsRefusedForAWeaponTypeTheClassCannotWieldNamingTheTypeAndTheRanks()
+    {
+        var record = AtMap(2) with { Purse = 3760 };
+
+        var result = record.Buy("salve", "captain", Content);
+
+        Assert.False(result.Accepted);
+        Assert.Equal("captain cannot wield Salve (faith); ranks: sword E, lance E, axe E", result.Text);
+        Assert.Equal(3760, result.Record.Purse);
+        Assert.DoesNotContain(result.Record.Find("captain")!.Inventory.Items, s => s.ItemId == "salve");
+    }
+
+    [Fact]
+    public void APurchaseIsRefusedForAHealingStaffInATypeTheClassStrikesWithOnly()
+    {
+        var record = AtMap(2) with { Purse = 3760 };
+        record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == "pell" ? u with { ClassId = "scholar" } : u)) };
+
+        var result = record.Buy("salve", "pell", Content);
+
+        Assert.False(result.Accepted);
+        Assert.StartsWith("pell cannot wield Salve (faith); ranks: ", result.Text);
+        Assert.Equal(3760, result.Record.Purse);
+    }
+
+    [Fact]
+    public void APurchaseBelowTheUnitsRankGoesThroughWithANoteNamingBothRanks()
+    {
+        var bought = (AtMap(3) with { Purse = 5000 }).Buy("steel_sword", "wren", Content);
+
+        Assert.True(bought.Accepted);
+        Assert.Equal("wren buys Steel Sword for 900; the purse holds 4100; needs sword D, has E", bought.Text);
+    }
+
+    [Fact]
+    public void APurchaseAtTheUnitsRankCarriesNoNote()
+    {
+        var result = (AtMap(3) with { Purse = 1000 }).Buy("iron_sword", "wren", Content);
+
+        Assert.True(result.Accepted);
+        Assert.Equal("wren buys Iron Sword for 400; the purse holds 600", result.Text);
     }
 
     [Fact]
