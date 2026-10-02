@@ -45,5 +45,20 @@ public sealed record UnitClass(
     /// <summary>The first-tier class this one belongs to: <see cref="Advances"/>'s id for an advanced form, else its own.</summary>
     public string BaseId => Advances?.Id ?? Id;
 
+    /// <summary>
+    /// Weapon types the class strikes with but never heals with (issue 704: the Scholar's Faith is
+    /// strike spells only). Each is in <see cref="Weapons"/>.
+    /// </summary>
+    public ValueList<WeaponType> StrikeOnly { get; init; } = ValueList<WeaponType>.Empty;
+
+    /// <summary>
+    /// Ranks a unit holds at least on entering the class (issue 704): the Scholar starts Faith at D,
+    /// the rank of the first strike spell, since an Adept never trained it. Each type is in <see cref="Weapons"/>.
+    /// </summary>
+    public ValueList<(WeaponType Type, WeaponRank Rank)> Grants { get; init; } = ValueList<(WeaponType, WeaponRank)>.Empty;
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
+
+    /// <summary>Whether the class may cast a healing spell of <paramref name="type"/>: it uses the type and does not strike only with it.</summary>
+    public bool CanHealWith(WeaponType type) => CanUse(type) && !StrikeOnly.Contains(type);
 }

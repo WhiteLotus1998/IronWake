@@ -224,6 +224,14 @@ scholar_reason_miss_recover.png
 scholar_reason_dodge.png
 scholar_reason_hit_react.png
 scholar_reason_fall.png
+scholar_faith_idle.png
+scholar_faith_advance.png
+scholar_faith_strike.png
+scholar_faith_strike_crit.png
+scholar_faith_miss_recover.png
+scholar_faith_dodge.png
+scholar_faith_hit_react.png
+scholar_faith_fall.png
 sentinel_lance_idle.png
 sentinel_lance_advance.png
 sentinel_lance_strike.png

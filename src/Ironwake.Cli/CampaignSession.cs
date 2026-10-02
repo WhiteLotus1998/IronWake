@@ -1266,6 +1266,25 @@ public sealed class CampaignSession
     }
 
     /// <summary>
+    /// What an advanced form adds over <paramref name="basis"/> (issue 704), in a fixed order: the weapon
+    /// types its base lacks (a strike-only one says so), the Mov it gains, then the class abilities its base
+    /// does not hold, by name; <c>numbers only</c> when it adds none of them.
+    /// </summary>
+    private string Adds(UnitClass form, UnitClass basis)
+    {
+        var parts = form.Weapons.Where(w => !basis.CanUse(w))
+            .Select(w => form.StrikeOnly.Contains(w) ? $"{w.Label()} (strike spells only)" : w.Label())
+            .ToList();
+        if (form.Mov > basis.Mov)
+        {
+            parts.Add($"+{form.Mov - basis.Mov} Mov");
+        }
+
+        parts.AddRange(form.Abilities.Where(a => !basis.Abilities.Contains(a)).Select(a => _content.Ability(a).Name));
+        return parts.Count == 0 ? "numbers only" : string.Join(", ", parts);
+    }
+
+    /// <summary>
     /// Every class with what it asks (issue 72) and whether a trial stands in for its seal, and
     /// for <paramref name="unit"/>, what it still lacks for each, read against its own stats.
     /// </summary>
@@ -1276,7 +1295,7 @@ public sealed class CampaignSession
         var names = UnitNames.Of(_record, _content);
         foreach (var target in _content.Classes.Values.Where(c => !c.Hidden || c.Id == unit?.ClassId))
         {
-            var from = target.Advances is { } basis ? $" (from {basis.Name})" : "";
+            var from = target.Advances is { } basis ? $" (from {basis.Name}; adds {Adds(target, basis)})" : "";
             var line = $"  {target.Name}{from}: {target.Certification.Describe()}";
             if (_content.Campaign.TrialFor(target.Id) is not null)
             {

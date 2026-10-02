@@ -131,7 +131,7 @@ public sealed record BattleUnit(
         var unitClass = content.Class(Unit.ClassId);
         return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
             && (item.Uses > 0 || !weapon.IsMagic)
-            ? Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item), item, content)
+            ? content.WeaponOf(Unit, Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item), item, content))
             : null;
     }
 
@@ -172,7 +172,7 @@ public sealed record BattleUnit(
     /// <summary>
     /// The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.
     /// A hungering weapon comes back as its stack has grown or starved it (<see cref="Kinsbane.Shape"/>),
-    /// an heirloom at the stage its stack has reached (<see cref="Heirloom.Shape"/>), either with the forge's steps on it (<see cref="Forge.Shape"/>), and marked frozen iron when its stack has made it so (<see cref="Frost.Shape"/>).
+    /// an heirloom at the stage its stack has reached (<see cref="Heirloom.Shape"/>), either with the forge's steps on it (<see cref="Forge.Shape"/>), marked frozen iron when its stack has made it so (<see cref="Frost.Shape"/>), and at the reach the unit's abilities give it (<see cref="GameContent.WeaponOf"/>, issue 704).
     /// </summary>
     public Weapon? EquippedWeapon(GameContent content)
     {
@@ -183,7 +183,7 @@ public sealed record BattleUnit(
         }
 
         var stack = Unit.Inventory.Items[slot];
-        return Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(content.Weapon(stack.ItemId), stack), stack), stack), stack, content);
+        return content.WeaponOf(Unit, Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(content.Weapon(stack.ItemId), stack), stack), stack), stack, content));
     }
 
     /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>

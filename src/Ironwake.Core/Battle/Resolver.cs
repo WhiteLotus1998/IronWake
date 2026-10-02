@@ -566,6 +566,8 @@ public static class Resolver
         targetAfter = AwardMastery(targetAfter, content, events);
         attackerAfter = Kinsbane.AfterCombat(attackerAfter, content, result.Strikes, result.DefenderDied, events);
         targetAfter = Kinsbane.AfterCombat(targetAfter, content, result.Strikes, result.AttackerDied, events);
+        attackerAfter = KillHeal(attackerAfter, weapon, result.DefenderDied, content, events);
+        targetAfter = KillHeal(targetAfter, defenderWeapon, result.AttackerDied, content, events);
         attackerAfter = Heirloom.AfterCombat(attackerAfter, state, content, result.Strikes, events);
         targetAfter = Heirloom.AfterCombat(targetAfter, state, content, result.Strikes, events);
         var next = state.WithUnit(attackerAfter);
@@ -902,10 +904,15 @@ public static class Resolver
             return (state.WithUnit(unit with { Hp = hp, Moved = true, Acted = true, Unit = unit.Unit with { Inventory = after } }), null);
         }
 
-        var spell = content.Weapon(stack.ItemId);
+        var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
         if (!spell.Heals || !content.Class(unit.Unit.ClassId).CanUse(spell.Type))
         {
             return (state, new Rejection(RejectionReason.NotUsable, $"{spell.Name} is a weapon, not an item; attack with it"));
+        }
+
+        if (!content.Class(unit.Unit.ClassId).CanHealWith(spell.Type))
+        {
+            return (state, new Rejection(RejectionReason.NotUsable, $"{unit.Id} cannot use {stack.ItemId}: a {content.Class(unit.Unit.ClassId).Name} strikes with {spell.Type.Label()} and never heals"));
         }
 
         if (!unit.Unit.CanWield(spell, content.Class(unit.Unit.ClassId)))
@@ -963,6 +970,29 @@ public static class Resolver
         healer = AwardMastery(healer, content, events);
         var next = state.WithUnit(healer);
         return (next.WithUnit(target with { Hp = healed }), null);
+    }
+
+    /// <summary>
+    /// A kill's heal (issue 704, <see cref="KillHealEffect"/>): <paramref name="unit"/>, alive after a combat
+    /// in which it killed with <paramref name="weapon"/>, heals what its abilities give, never above its max HP,
+    /// with a <see cref="UnitHealed"/> when that is more than nothing.
+    /// </summary>
+    private static BattleUnit KillHeal(BattleUnit unit, Weapon? weapon, bool killed, GameContent content, List<GameEvent> events)
+    {
+        if (!killed || unit.Hp <= 0)
+        {
+            return unit;
+        }
+
+        var heal = AbilityRules.KillHeal(content.AbilitiesOf(unit.Unit), weapon);
+        var hp = Math.Min(unit.MaxHp(content), unit.Hp + heal);
+        if (hp <= unit.Hp)
+        {
+            return unit;
+        }
+
+        events.Add(new UnitHealed(unit.Id, hp - unit.Hp, hp));
+        return unit with { Hp = hp };
     }
 
     /// <summary>Section 5's healer EXP through the same level-up path as combat: player units only, nothing at the cap.</summary>
@@ -1750,7 +1780,7 @@ public static class Resolver
                 continue;
             }
 
-            var spell = content.Weapon(stack.ItemId);
+            var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
             if (!spell.Heals || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
                 continue;

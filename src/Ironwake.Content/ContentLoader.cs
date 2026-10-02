@@ -875,8 +875,32 @@ public static class ContentLoader
             case "brace":
                 RequireOnly(entry, effect, "effect", "kind");
                 return new BraceEffect();
+            case "range":
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "heals", "range");
+                var heals = effect.BoolOr("heals", false);
+                if (heals == effect.Has("weapon"))
+                {
+                    throw entry.Error("effect", "a range effect names a weapon type or heals: true, not both");
+                }
+
+                var reach = new RangeEffect(heals ? null : entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")), heals, effect.Int("range"));
+                if (reach.Range < 1)
+                {
+                    throw entry.Error("effect.range", "must be at least 1");
+                }
+
+                return reach;
+            case "killheal":
+                RequireOnly(entry, effect, "effect", "kind", "heal", "wielding");
+                var killHeal = new KillHealEffect(effect.Int("heal"), effect.Has("wielding") ? entry.ParseEnum<WeaponType>("effect.wielding", effect.String("wielding")) : null);
+                if (killHeal.Heal < 1)
+                {
+                    throw entry.Error("effect.heal", "must be at least 1");
+                }
+
+                return killHeal;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto or brace");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range or killheal");
         }
     }
 
@@ -1449,6 +1473,8 @@ public static class ContentLoader
                 Abilities = AbilityIds(node, "abilities", abilities),
                 Certification = ParseCertification(node),
                 Hidden = node.BoolOr("hidden", false),
+                StrikeOnly = ParseStrikeOnly(node, weapons),
+                Grants = ParseGrants(node, weapons),
             });
         }
 
@@ -1490,6 +1516,46 @@ public static class ContentLoader
         }
 
         return builder.ToImmutable();
+    }
+
+    /// <summary>A class's optional <c>strikeOnly</c> (issue 704): weapon types it uses, each once, that it never heals with.</summary>
+    private static ValueList<WeaponType> ParseStrikeOnly(EntryNode node, IReadOnlyList<WeaponType> weapons)
+    {
+        var types = node.StringArrayOrEmpty("strikeOnly").Select(w => node.ParseEnum<WeaponType>("strikeOnly", w)).ToList();
+        if (types.Distinct().Count() != types.Count)
+        {
+            throw node.Error("strikeOnly", "must not repeat a weapon type");
+        }
+
+        foreach (var type in types.Where(t => !weapons.Contains(t)))
+        {
+            throw node.Error("strikeOnly", $"{type.ToString().ToLowerInvariant()} is not in the class's weapons");
+        }
+
+        return ValueList<WeaponType>.From(types);
+    }
+
+    /// <summary>A class's optional <c>grants</c> (issue 704): weapon type to the rank letter a unit holds at least on entering it; each type is one the class uses.</summary>
+    private static ValueList<(WeaponType, WeaponRank)> ParseGrants(EntryNode node, IReadOnlyList<WeaponType> weapons)
+    {
+        if (node.OptionalObject("grants") is not { } grants)
+        {
+            return ValueList<(WeaponType, WeaponRank)>.Empty;
+        }
+
+        var list = new List<(WeaponType, WeaponRank)>();
+        foreach (var property in grants.Element.EnumerateObject())
+        {
+            var type = node.ParseEnum<WeaponType>("grants", property.Name);
+            if (!weapons.Contains(type))
+            {
+                throw node.Error("grants." + property.Name, "is not in the class's weapons");
+            }
+
+            list.Add((type, node.ParseEnum<WeaponRank>("grants." + property.Name, property.Value.GetString() ?? "")));
+        }
+
+        return ValueList<(WeaponType, WeaponRank)>.From(list);
     }
 
     /// <summary>
