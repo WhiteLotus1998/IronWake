@@ -763,6 +763,15 @@ public static class Gates
         /// <summary>Combats where either side fought with a multi-strike round, a gauntlet (issue 70).</summary>
         public int GauntletCombats { get; private set; }
 
+        /// <summary>Strikes from a bow at a flier, a side whose crit grounds instead of tripling (issue 723, <see cref="SideForecast.CritGrounds"/>).</summary>
+        public int BowStrikesOnFliers { get; private set; }
+
+        /// <summary>Of <see cref="BowStrikesOnFliers"/>, the crits whose flier was still standing when the combat ended: the fliers grounded (issue 723).</summary>
+        public int Groundings { get; private set; }
+
+        /// <summary>Of <see cref="BowStrikesOnFliers"/>, the strikes that killed their flier (issue 723).</summary>
+        public int FliersKilledByBow { get; private set; }
+
         /// <summary>Counts one combat: the forecast asked before the attack against the strikes it produced.</summary>
         public void Count(CombatForecast forecast, CombatFought fought)
         {
@@ -788,6 +797,14 @@ public static class Gates
             {
                 var side = strike.AttackerId == fought.AttackerId ? forecast.Attacker : forecast.Defender;
                 Strikes++;
+                if (side.CritGrounds)
+                {
+                    BowStrikesOnFliers++;
+                    var standing = strike.TargetId == fought.AttackerId ? fought.AttackerHpAfter > 0 : fought.TargetHpAfter > 0;
+                    Groundings += strike.Hit && strike.Crit && standing ? 1 : 0;
+                    FliersKilledByBow += strike.Hit && strike.TargetHpAfter == 0 ? 1 : 0;
+                }
+
                 ExpectedHits += Combat.HitProbability(side.HitChance, forecast.Scheme);
                 if (!strike.Hit)
                 {
@@ -800,7 +817,8 @@ public static class Gates
                 {
                     Crits++;
                 }
-                else if (strike.Damage != side.Damage)
+
+                if (strike.Damage != (strike.Crit ? side.CritDamage : side.Damage))
                 {
                     WrongDamage++;
                 }
@@ -820,6 +838,7 @@ public static class Gates
             var passed = Combats >= minimum && WrongDamage == 0 && WrongStrikeCounts == 0 && ProtocolMismatches == 0 && hitOk && critOk;
             return new GateResult(
                 $"gate 5 forecast honesty: {Combats} combats ({GauntletCombats} with gauntlets), {Strikes} strikes, hits {Hits} expected {ExpectedHits:F1}, crits {Crits} expected {ExpectedCrits:F1}, damage mismatches {WrongDamage}"
+                + (BowStrikesOnFliers > 0 ? $", bow strikes on fliers {BowStrikesOnFliers} (grounded {Groundings}, killed {FliersKilledByBow})" : "")
                 + (WrongStrikeCounts > 0 ? $", {WrongStrikeCounts} combats with a strike count the forecast did not show" : "")
                 + (ProtocolMismatches > 0 ? $", {ProtocolMismatches} forecasts changed over the protocol" : "")
                 + (Combats < minimum ? $", under the {minimum} required" : "") + $": {Verdict(passed)}",

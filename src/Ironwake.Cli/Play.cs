@@ -948,8 +948,7 @@ public sealed class PlaySession
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 var (chills, counterChills) = Chills(_content, attacker!, target!, attack.Slot);
-                var (grounds, counterGrounds) = Grounds(board.Map, _content, attacker!, target!, attack.Slot);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills, grounds, counterGrounds));
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1355,8 +1354,7 @@ public sealed class PlaySession
         var raises = RaisesWith(state, content, unit, slot);
         var names = UnitNames.Of(state, content);
         var (chills, counterChills) = Chills(content, unit, target, slot);
-        var (grounds, counterGrounds) = Grounds(state.Map, content, unit, target, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills, grounds, counterGrounds) };
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             lines.Add(lethal);
@@ -1680,7 +1678,7 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false, bool grounds = false, bool counterGrounds = false)
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false)
     {
         names ??= UnitNames.None;
         if (raises)
@@ -1688,20 +1686,8 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{GroundsText(forecast.Attacker, grounds)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + GroundsText(forecast.Defender, counterGrounds) + (counterChills ? " chills" : "") : ": none")}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none")}";
     }
-
-    /// <summary>The <c> (grounds)</c> after a side's crit column (issue 703): only when its crit would ground the other side and can happen.</summary>
-    private static string GroundsText(SideForecast side, bool grounds) => grounds && side.CritChance > 0 ? " (grounds)" : "";
-
-    /// <summary>
-    /// Whether each side of a forecast would ground the other on a crit (issue 703, <see cref="Grounding"/>):
-    /// the attacker with <paramref name="slot"/> (else its equipped weapon) against the target's movement,
-    /// the target with the weapon it holds in front against the attacker's.
-    /// </summary>
-    public static (bool Grounds, bool CounterGrounds) Grounds(MapDefinition map, GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
-        (Grounding.Grounds(map, Resolver.ChooseWeapon(unit, content, slot).Weapon, content.Class(target.Unit.ClassId).Movement),
-         Grounding.Grounds(map, target.EquippedWeapon(content), content.Class(unit.Unit.ClassId).Movement));
 
     /// <summary>
     /// Whether each side of a forecast strikes with frozen iron (issue 702, <see cref="Frost"/>): the
@@ -1763,9 +1749,12 @@ public sealed class PlaySession
         return " with " + Keepsake.Name(stack.ItemId, fallen, content);
     }
 
-    /// <summary>One side of a forecast as the console prints it: displayed Acc first, then damage, doubles and crit (issue 701).</summary>
+    /// <summary>
+    /// One side of a forecast as the console prints it: displayed Acc first, then damage, doubles and crit (issue 701);
+    /// <c>grounds N%</c> in place of the crit when the side's crit grounds a flier instead of tripling (issue 723).
+    /// </summary>
     private static string StrikeText(SideForecast side) =>
-        $"acc {side.DisplayedHit}% dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} crit {side.CritChance}%";
+        $"acc {side.DisplayedHit}% dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} {(side.CritGrounds ? "grounds" : "crit")} {side.CritChance}%";
 
     /// <summary>
     /// The strike columns of an attack that raises a blow (DESIGN.md 13.16, issue 447): the

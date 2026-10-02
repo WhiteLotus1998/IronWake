@@ -564,7 +564,7 @@ public sealed class ClientSession
         var counter = forecast.Defender.Strikes
             ? $"counter acc {forecast.Defender.DisplayedHit} {forecast.Defender.Damage} x{forecast.Defender.StrikeCount}"
             : "no counter";
-        return $"acc {own.DisplayedHit}  {own.Damage} x{own.StrikeCount}  crit {own.CritChance}  {counter}  uses {forecast.AttackerSpendsAtMost}";
+        return $"acc {own.DisplayedHit}  {own.Damage} x{own.StrikeCount}  {(own.CritGrounds ? "grounds" : "crit")} {own.CritChance}  {counter}  uses {forecast.AttackerSpendsAtMost}";
     }
 
     /// <summary>A greyed row's reason: the resolver's words after the unit's name, or "out of reach from here" for a range refusal, whose text carries coordinates.</summary>

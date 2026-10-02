@@ -77,6 +77,14 @@ public sealed record Weapon(
     /// <summary>The Crit this weapon adds against a target moving by <paramref name="movement"/>: <see cref="CritBonus"/> when listed, else 0.</summary>
     public int CritBonusAgainst(MovementType movement) => CritAgainst.Contains(movement) ? CritBonus : 0;
 
+    /// <summary>
+    /// Whether this weapon's crit against a target moving by <paramref name="movement"/> grounds it
+    /// instead of tripling (issue 723, round 220): a bow against a flier, unless the bow is
+    /// effective against fliers, as on an <c>effective_bows: on</c> sample (<see cref="Grounding.ForMap"/>).
+    /// </summary>
+    public bool GroundsAgainst(MovementType movement) =>
+        Type == WeaponType.Bow && movement == MovementType.Flying && !IsEffectiveAgainst(movement);
+
     /// <summary>The smith's line when asked to repair or Refine a glass weapon (issue 702).</summary>
     public const string GlassRefusal = "You don't mend glass. You buy another.";
 

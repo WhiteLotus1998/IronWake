@@ -51,7 +51,7 @@ public static class ItemCard
 
         if (weapon.Type == WeaponType.Bow)
         {
-            parts.Add("A crit grounds a flier.");
+            parts.Add("A crit on a flier grounds it for plain damage.");
         }
 
         parts.Add(weapon.Description);

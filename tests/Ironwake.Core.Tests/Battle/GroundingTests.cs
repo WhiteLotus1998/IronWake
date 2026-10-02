@@ -9,7 +9,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// Grounding (issue 703, Lotus's batch item 5, round 216): a bow's crit on a flier that survives lands
 /// it until the end of its side's next phase, so it moves on foot, and over a tile infantry cannot
 /// enter it cannot move at all but still acts. Bows trade the effective tag for +20 crit against
-/// fliers; Gust keeps its tag. The forecast prints <c>(grounds)</c>, the card and the event name the
+/// fliers; Gust keeps its tag. Since issue 723 (round 220) that crit deals plain damage, not triple,
+/// for either side. The forecast prints <c>grounds N%</c> in the crit's place, the card and the event name the
 /// clock, and every reach reads it. Played on the shipped Saltmarsh Ford, whose wingrider holds the
 /// north bank above the river row.
 /// </summary>
@@ -223,7 +224,9 @@ public class GroundingTests
 
         var forecast = Queries.Forecast(state, Shipped, bowman, wing)!;
         var line = PlaySession.ForecastText(state, Shipped, bowman, wing, forecast, bowman.At, fromTile: false).Split('\n')[0];
-        Assert.Contains($"crit {forecast.Attacker.CritChance}% (grounds); counter", line);
+        Assert.True(forecast.Attacker.CritGrounds);
+        Assert.Contains($"dmg {forecast.Attacker.Damage} grounds {forecast.Attacker.CritChance}%; counter", line);
+        Assert.DoesNotContain($"crit {forecast.Attacker.CritChance}%; counter", line);
 
         var old = state with { Map = state.Map with { EffectiveBows = true } };
         Assert.DoesNotContain("grounds", PlaySession.ForecastText(old, Shipped, bowman, wing, Queries.Forecast(old, Shipped, bowman, wing)!, bowman.At, fromTile: false));
@@ -232,6 +235,131 @@ public class GroundingTests
         var onFoot = state.Find(id)! with { At = new Coord(10, 3) };
         var walker = state.WithUnit(onFoot);
         Assert.DoesNotContain("grounds", PlaySession.ForecastText(walker, Shipped, onFoot, archer, Queries.Forecast(walker, Shipped, onFoot, archer, new Coord(10, 3))!, new Coord(10, 3), fromTile: true));
+    }
+
+    [Theory]
+    [InlineData("iron_bow", MovementType.Flying, false, true)]
+    [InlineData("steel_bow", MovementType.Flying, false, true)]
+    [InlineData("iron_bow", MovementType.Infantry, false, false)]
+    [InlineData("iron_bow", MovementType.Cavalry, false, false)]
+    [InlineData("iron_lance", MovementType.Flying, false, false)]
+    [InlineData("gust", MovementType.Flying, false, false)]
+    [InlineData("iron_bow", MovementType.Flying, true, false)]
+    public void ACritGroundsInsteadOfTriplingOnlyForABowOnAFlier(string weapon, MovementType movement, bool effectiveBows, bool grounds)
+    {
+        var map = Placed().Map with { EffectiveBows = effectiveBows };
+        var armed = Grounding.ForMap(map, Shipped.Weapon(weapon))!;
+
+        Assert.Equal(grounds, armed.GroundsAgainst(movement));
+        Assert.Equal(grounds, Grounding.Grounds(map, Shipped.Weapon(weapon), movement));
+    }
+
+    [Theory]
+    [InlineData("iron_bow", true)]
+    [InlineData("iron_lance", false)]
+    public void ABowCritOnAFlierDealsPlainDamageAndAnyOtherCritOnItTriples(string weapon, bool grounds)
+    {
+        var state = Placed();
+        var wing = Sturdy(Wingrider(state));
+        var defender = wing.ToCombatant(state, Shipped);
+        var striker = state.UnitsOf(Side.Player).First();
+        var unit = striker.Unit with { ClassId = grounds ? "bowman" : "pikeman", Inventory = Inventory.Empty };
+        var attacker = Shipped.CombatantOf(unit, Shipped.Weapon(weapon), defender.Terrain, Shipped.StatsOf(unit).Hp);
+        var distance = Shipped.Weapon(weapon).MinRange;
+
+        var forecast = Ironwake.Core.Combat.Forecast(attacker, defender, distance, RollScheme.TwoRollAverage);
+        var result = CombatResolver.Resolve(attacker, defender, distance, new CombatContext(1, Side.Player), new Ironwake.Core.Tests.Combat.ScriptedRng(0), RollScheme.TwoRollAverage);
+        var first = result.Strikes.First(s => s.AttackerId == attacker.Id);
+
+        Assert.True(forecast.Attacker.Damage > 0 && forecast.Attacker.CritChance > 0, "the striker must land a crit for damage");
+        Assert.Equal(grounds, forecast.Attacker.CritGrounds);
+        Assert.True(first.Hit && first.Crit);
+        Assert.Equal(grounds ? forecast.Attacker.Damage : forecast.Attacker.Damage * Ironwake.Core.Combat.CritMultiplier, first.Damage);
+        Assert.Equal(first.Damage, forecast.Attacker.CritDamage);
+    }
+
+    [Fact]
+    public void APlayerBowsCritOnTheShippedWingriderGroundsItInsteadOfKillingIt()
+    {
+        for (ulong seed = 1; seed < 600; seed++)
+        {
+            var state = WithPlayerBow(Placed(seed), new Coord(12, 4), out var id);
+            state = state.WithUnit(Wingrider(state) with { At = new Coord(12, 2) });
+            var wing = Wingrider(state);
+            var forecast = Queries.Forecast(state, Shipped, state.Find(id)!, wing)!;
+            var result = Resolver.Apply(state, Shipped, new Attack(id, wing.Id));
+            var strikes = result.Events.OfType<CombatFought>().Single().Strikes.Where(s => s.AttackerId == id).ToList();
+            if (!strikes.Any(s => s.Hit && s.Crit))
+            {
+                continue;
+            }
+
+            Assert.All(strikes.Where(s => s.Hit), s => Assert.Equal(forecast.Attacker.Damage, s.Damage));
+            Assert.True(forecast.Attacker.Damage * forecast.Attacker.StrikeCount < wing.Hp, "the shipped numbers leave the wingrider standing on plain damage");
+            Assert.Equal(1, result.Next.Find(wing.Id)!.Grounded);
+            return;
+        }
+
+        Assert.Fail("no seed under 600 gave a bow crit");
+    }
+
+    [Fact]
+    public void AnEnemyBowsCritOnAPlayerFlierDealsPlainDamageAndGroundsIt()
+    {
+        for (ulong seed = 1; seed < 600; seed++)
+        {
+            var state = Placed(seed) with { Phase = Side.Enemy };
+            var archer = Archer(state);
+            var flier = state.UnitsOf(Side.Player).First();
+            var winged = flier.Unit with { ClassId = "skyrider", Inventory = flier.Unit.Inventory.Replace(0, new ItemStack("iron_lance", 40)) };
+            var hp = Shipped.StatsOf(winged).Hp + 40;
+            flier = flier with { Unit = winged with { Stats = winged.Stats with { Hp = winged.Stats.Hp + 40 } }, Hp = hp, At = Free(state, archer.At) };
+            state = state.WithUnit(flier);
+            var forecast = Queries.Forecast(state, Shipped, archer, state.Find(flier.Id)!)!;
+            var result = Resolver.Apply(state, Shipped, new Attack(archer.Id, flier.Id));
+            Assert.True(result.Accepted, result.Rejection?.Message);
+            var strikes = result.Events.OfType<CombatFought>().Single().Strikes.Where(s => s.AttackerId == archer.Id).ToList();
+            if (!strikes.Any(s => s.Hit && s.Crit))
+            {
+                continue;
+            }
+
+            Assert.True(forecast.Attacker.CritGrounds);
+            Assert.All(strikes.Where(s => s.Hit), s => Assert.Equal(forecast.Attacker.Damage, s.Damage));
+            Assert.Equal(1, result.Next.Find(flier.Id)!.Grounded);
+            Assert.Contains(new UnitGrounded(flier.Id, archer.Id, Side.Player, false), result.Events);
+            return;
+        }
+
+        Assert.Fail("no seed under 600 gave the archer a crit");
+
+        static Coord Free(BattleState state, Coord from)
+        {
+            foreach (var at in new[] { new Coord(from.X, from.Y + 2), new Coord(from.X, from.Y - 2), new Coord(from.X + 2, from.Y), new Coord(from.X - 2, from.Y), new Coord(from.X + 1, from.Y + 1), new Coord(from.X - 1, from.Y + 1), new Coord(from.X + 1, from.Y - 1), new Coord(from.X - 1, from.Y - 1) })
+            {
+                if (at.X >= 0 && at.Y >= 0 && at.X < state.Map.Width && at.Y < state.Map.Height && state.Units.All(u => u.At != at))
+                {
+                    return at;
+                }
+            }
+
+            throw new InvalidOperationException("no free tile two from the archer");
+        }
+    }
+
+    [Fact]
+    public void AGroundingSideRoundTripsThroughTheProtocolAndAPlainSideWritesNoField()
+    {
+        var grounding = new SideForecast(true, 9, 70, 80, 23, false, CritGrounds: true);
+        var plain = grounding with { CritGrounds = false };
+        var forecast = new CombatForecast(grounding, plain, RollScheme.TwoRollAverage);
+
+        var json = ProtocolJson.Forecast(forecast);
+        Assert.Equal(forecast, ProtocolJson.ReadForecast(json));
+        Assert.Single(System.Text.RegularExpressions.Regex.Matches(json, "critGrounds"));
+        Assert.DoesNotContain("critGrounds", ProtocolJson.Forecast(forecast with { Attacker = plain }));
+        Assert.Equal(9, grounding.CritDamage);
+        Assert.Equal(27, plain.CritDamage);
     }
 
     [Fact]

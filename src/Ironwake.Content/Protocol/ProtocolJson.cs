@@ -1512,11 +1512,16 @@ public static class ProtocolJson
         w.WriteNumber("critChance", side.CritChance);
         w.WriteBoolean("doubles", side.Doubles);
         w.WriteNumber("strikesPerRound", side.StrikesPerRound);
+        if (side.CritGrounds)
+        {
+            w.WriteBoolean("critGrounds", true);
+        }
+
         w.WriteEndObject();
     }
 
     private static SideForecast ReadSide(JsonElement e) => new(
-        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1);
+        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"));
 
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 

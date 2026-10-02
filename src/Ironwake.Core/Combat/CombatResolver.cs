@@ -71,7 +71,7 @@ public static class CombatResolver
             var hit = Combat.Lands(side.HitChance, rollA, rollB, scheme);
             var crit = hit
                 && rng.Roll(RollKey.Combat(context.Turn, context.Phase, striker.Id, target.Id, strikeIndex, CombatRoll.Crit)) < side.CritChance;
-            var damage = !hit ? 0 : crit ? side.Damage * Combat.CritMultiplier : side.Damage;
+            var damage = !hit ? 0 : crit ? side.CritDamage : side.Damage;
             targetHp = Math.Max(0, targetHp - damage);
             strikes = strikes.Add(new StrikeEvent(strikes.Count, striker.Id, target.Id, hit, crit, damage, targetHp));
         }

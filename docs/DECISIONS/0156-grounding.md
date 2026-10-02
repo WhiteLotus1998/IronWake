@@ -18,4 +18,5 @@ Date: 2026-10-02. Issue #703 (Lotus's progression batch, item 5; Chat's round 21
 
 ## Open
 
+- **Answered by 0168 (#723, round 220): a bow's crit on a flier now deals plain damage and grounds.** The original note follows.
 - **A crit still kills the flier it would ground.** Crit is damage x3. Ottilie's Iron Bow deals 9 to the level 2 wingrider (17 HP), and the enemy archer deals 9 to Rook (17 HP), so a crit is 27 and kills either. Grounding fires only where a bow's plain hit is under a third of the flier's HP. Code's warm play 703 is the case: the forecast said `crit 23% (grounds)` twice and the wingrider died to a plain hit over the river. The lever is on the Table: a bow's crit on a flier grounds in place of tripling, or the bonus becomes the measured one.
