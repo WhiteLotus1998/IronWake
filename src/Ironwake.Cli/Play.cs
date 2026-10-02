@@ -427,6 +427,11 @@ public sealed class PlaySession
         var name = content.Unit(placement.TemplateId).Name.ToLowerInvariant();
         var article = "aeiou".Contains(name[0]) ? "an" : "a";
         var behavior = placement.Behavior.ToString().ToLowerInvariant();
+        if (placement.IsBoss)
+        {
+            return $"the boss, {article} {name}, arrives at {placement.At}. A unit standing on {placement.At} does not stop the boss, who takes the nearest free tile.";
+        }
+
         return $"{article} {name} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops it.";
     }
 

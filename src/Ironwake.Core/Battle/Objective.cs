@@ -23,7 +23,7 @@ public static class Objective
         {
             WinCondition.Seize => $"Get the captain to the {SeizeName(content)} {by}.",
             WinCondition.Rout => $"Defeat every enemy {by}.",
-            WinCondition.DefeatBoss => $"Defeat the boss {by}.",
+            WinCondition.DefeatBoss => Arrival(map) is { } arrival ? $"Hold until the boss arrives on turn {arrival.Turn}, then defeat the boss {by}." : $"Defeat the boss {by}.",
             WinCondition.Survive => $"Hold out until the end of turn {map.TurnLimit}.",
             WinCondition.Escape => $"Get the captain out through an exit {by}.",
             _ => throw new ArgumentOutOfRangeException(nameof(state), map.Win, "unknown win condition"),
@@ -47,6 +47,11 @@ public static class Objective
         {
             WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)}. Only the captain seizes." },
             WinCondition.Escape => new[] { $"The captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}).{(map.ExitAfterMove ? "" : " A unit that starts its turn on an exit may leave.")} Anyone still on the board is left behind." },
+            WinCondition.DefeatBoss when map.BossSpawns().Any() => new[]
+            {
+                $"The boss is drawn {MapRenderer.BossGlyph} on the board.",
+                $"The boss arrives on turn {Arrival(map)!.Turn} at {((SpawnEnemy)map.BossSpawns().First().Action).Placement.At}. A unit there does not stop the boss, who takes the nearest free tile. The map is won only once the boss has arrived and fallen.",
+            },
             WinCondition.DefeatBoss => new[] { $"The boss is drawn {MapRenderer.BossGlyph} on the board." },
             _ => Array.Empty<string>(),
         };
@@ -84,7 +89,7 @@ public static class Objective
                 ? $"the captain ended at {captain.At}, not on the {SeizeName(content)} at {Thrones(map)}"
                 : $"the captain never stood on the {SeizeName(content)} at {Thrones(map)}",
             WinCondition.Rout => state.UnitsOf(Side.Enemy).Count() is var left && left == 1 ? "1 enemy still stands" : $"{left} enemies still stand",
-            WinCondition.DefeatBoss => "the boss still stands",
+            WinCondition.DefeatBoss => map.BossSpawns().Any() ? "the boss got away" : "the boss still stands",
             WinCondition.Escape => "the captain never exited",
             _ => "the objective was not met",
         };
@@ -134,6 +139,9 @@ public static class Objective
         content.Terrain.TryGetValue(MapDefinition.ThroneTerrainId, out var throne)
             ? throne.Name.ToLowerInvariant()
             : MapDefinition.ThroneTerrainId;
+
+    /// <summary>The turn trigger of the map's first boss spawn (issue 692), or null on a map whose boss is placed.</summary>
+    private static TurnTrigger? Arrival(MapDefinition map) => map.BossSpawns().Select(e => e.Trigger).OfType<TurnTrigger>().FirstOrDefault();
 
     /// <summary>The captain by rank and surname, as the objective line names him: "Captain Fenn" for Alder Fenn; "The captain" when no captain was ever on the board.</summary>
     private static string Rank(BattleState state, GameContent content) =>

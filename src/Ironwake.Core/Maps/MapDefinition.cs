@@ -357,6 +357,13 @@ public sealed record MapDefinition(
             ? this with { TerrainIds = TerrainIds.SetItem(at.Y * Width + at.X, terrainId) }
             : throw new ArgumentOutOfRangeException(nameof(at), at, $"outside a {Width}x{Height} map");
 
+    /// <summary>
+    /// The events that bring a boss on (issue 692, the hold-then-boss finale): a Defeat Boss map
+    /// is not won while one of them has yet to fire, so the objective is to hold until the boss
+    /// arrives and then defeat him. Each has a turn trigger (the map loader holds that).
+    /// </summary>
+    public IEnumerable<MapEvent> BossSpawns() => Events.Where(e => e.Action is SpawnEnemy { Placement.IsBoss: true });
+
     /// <summary>The placement of every <see cref="SpawnEnemy"/> event, in file order.</summary>
     public IEnumerable<EnemyPlacement> Spawns() => Events.Select(e => e.Action).OfType<SpawnEnemy>().Select(s => s.Placement);
 

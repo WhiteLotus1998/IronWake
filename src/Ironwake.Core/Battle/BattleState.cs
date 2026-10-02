@@ -425,7 +425,7 @@ public sealed record BattleState(
             {
                 WinCondition.Rout => !UnitsOf(Side.Enemy).Any(),
                 WinCondition.Seize => Map.IsThrone(captain!.At),
-                WinCondition.DefeatBoss => !UnitsOf(Side.Enemy).Any(u => u.IsBoss),
+                WinCondition.DefeatBoss => !UnitsOf(Side.Enemy).Any(u => u.IsBoss) && Map.BossSpawns().All(e => HasFired(e.Name)),
                 WinCondition.Escape => captainEscaped,
                 WinCondition.Survive => Turn > Map.TurnLimit,
                 _ => throw new ArgumentOutOfRangeException(nameof(Map), Map.Win, "unknown win condition"),
