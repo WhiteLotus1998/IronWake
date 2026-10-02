@@ -42,7 +42,8 @@ namespace Ironwake.Godot;
 /// a ware buys it for that unit, B benches or unbenches it, a camp action's row (<see cref="CampActions"/>,
 /// issue 786) takes that command, Q picks the unit for a side map's party, the wheel scrolls, M or
 /// a click on the march row marches, and L leaves a decided battle. <c>--campaign-parity &lt;script&gt; &lt;out&gt;</c> writes the
-/// presenter's event log for a <c>campaign --script</c> file and quits.
+/// presenter's event log for a <c>campaign --script</c> file and quits, from <c>--from</c>,
+/// <c>--difficulty</c> and <c>--permadeath on|off</c> as the console's campaign reads them.
 /// </summary>
 public partial class Main : Node2D
 {
@@ -188,8 +189,13 @@ public partial class Main : Node2D
             var campaignParity = Array.IndexOf(args, "--campaign-parity");
             if (campaignParity >= 0 && campaignParity + 2 < args.Length)
             {
+                // The full-campaign script (issue 786) names the start it was written on, as the console's campaign does.
                 var parityFrom = Arg(args, "--from");
-                _campaign = new CampaignClient(content, contentDir, parityFrom is null ? CampaignRecord.Start(content, seed) : CampaignRecord.StartAt(content, seed, parityFrom));
+                var parityDifficulty = Arg(args, "--difficulty") ?? CampaignRecord.NormalDifficulty;
+                var parityPermadeath = Arg(args, "--permadeath") != "off";
+                _campaign = new CampaignClient(content, contentDir, parityFrom is null
+                    ? CampaignRecord.Start(content, seed, parityDifficulty, parityPermadeath)
+                    : CampaignRecord.StartAt(content, seed, parityFrom, parityDifficulty, parityPermadeath));
                 File.WriteAllText(args[campaignParity + 2], Ironwake.Client.Script.PlayCampaign(_campaign, File.ReadAllText(args[campaignParity + 1])));
                 GetTree().Quit(0);
                 return;

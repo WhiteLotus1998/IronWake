@@ -207,6 +207,16 @@ public static class Program
             return HitBandTable(args[1], seeds);
         }
 
+        if (args.Length > 1 && args[0] == "--campaign-script" && ulong.TryParse(args[1], out var scriptSeed))
+        {
+            var last = args.Length > 3 && args[2] == "--to" && ulong.TryParse(args[3], out var to) ? to : scriptSeed;
+            var write = Array.IndexOf(args, "--write") is var w and >= 0 && w + 1 < args.Length ? args[w + 1] : null;
+            var difficulty = Array.IndexOf(args, "--difficulty") is var d and >= 0 && d + 1 < args.Length ? args[d + 1] : CampaignRecord.NormalDifficulty;
+            var permadeath = !(Array.IndexOf(args, "--permadeath") is var pd and >= 0 && pd + 1 < args.Length && args[pd + 1] == "off");
+            var variant = Array.IndexOf(args, "--variant") is var v and >= 0 && v + 1 < args.Length && int.TryParse(args[v + 1], out var parsedVariant) ? parsedVariant : 0;
+            return CampaignScriptRun(scriptSeed, last, write, difficulty, permadeath, variant);
+        }
+
         if (args.Length > 2 && args[0] == "--trace" && ulong.TryParse(args[2], out var traceSeed))
         {
             RollScheme? scheme = RollScheme.TwoRollAverage;
@@ -228,7 +238,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -592,6 +602,56 @@ public static class Program
 
     /// <summary>The <c>--scheme</c> argument: <c>one</c> is one roll, <c>two</c> is the two-roll average; anything else is refused with the usage line.</summary>
     public static RollScheme? ParseScheme(string text) => RollSchemes.Parse(text);
+
+    /// <summary>
+    /// The hand plays the full-campaign script opens maps with (issue 786): Starting Alone and
+    /// The Mill as Code played them on seeds 631 and 632 (issues 631, 632), read from
+    /// <c>docs/transcripts</c> beside the content directory; none when that folder is absent.
+    /// </summary>
+    public static IReadOnlyDictionary<string, string> HandPlays(string contentDir)
+    {
+        var transcripts = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(contentDir).TrimEnd(Path.DirectorySeparatorChar))!, "docs", "transcripts");
+        var plays = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var (map, file) in new[] { ("starting_alone", "2026-10-01-starting_alone-631.script"), ("the_mill", "2026-10-01-the_mill-632.script") })
+        {
+            var path = Path.Combine(transcripts, file);
+            if (File.Exists(path))
+            {
+                plays[map] = File.ReadAllText(path);
+            }
+        }
+
+        return plays;
+    }
+
+    /// <summary>
+    /// The full-campaign parity script (issue 786): one line per seed from <paramref name="first"/>
+    /// to <paramref name="last"/> naming the map it was lost on or the win and the kinds it never
+    /// took, and with <paramref name="write"/> the first seed's script written there.
+    /// </summary>
+    public static int CampaignScriptRun(ulong first, ulong last, string? write, string difficulty, bool permadeath, int variant)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("campaign-script: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        for (var seed = first; seed <= last; seed++)
+        {
+            var result = CampaignScript.Write(content, contentDir, seed, HandPlays(contentDir), difficulty, permadeath, variant);
+            var missed = CampaignScript.Kinds.Where(k => !result.Touched.Contains(k)).ToList();
+            Console.WriteLine($"seed {seed}: {(result.LostOn is { } lost ? $"lost on map {lost}" : "won")}, {result.Maps} maps, missed {(missed.Count == 0 ? "none" : string.Join(", ", missed))}");
+            if (write is not null && seed == first)
+            {
+                File.WriteAllText(write, result.Text);
+            }
+        }
+
+        return 0;
+    }
 
     /// <summary>
     /// One game of the heuristic player on a map and a seed, printed as the script the CLI
