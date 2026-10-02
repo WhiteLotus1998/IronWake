@@ -235,10 +235,13 @@ public sealed record BattleState(
     /// removes a body and never shifts another recruit into the slot. A unit whose death
     /// loses the map cannot be benched: the captain, and the recruit the map's
     /// <c>protect:</c> header names (section 7's loss order; issue 141), since an empty
-    /// placement for either is a loss on the opening board and never an ablation.
+    /// placement for either is a loss on the opening board and never an ablation. With
+    /// <paramref name="shortHanded"/>, as a campaign battle is fought (issue 795), a bare slot
+    /// the roster has nobody left to fill stays empty, the map fought short-handed, where
+    /// otherwise it throws; a named slot is unchanged.
     /// </summary>
     public static BattleState From(
-        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default)
+        MapDefinition map, GameContent content, ValueList<Unit> roster, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage, ValueList<string> benched = default, bool shortHanded = false)
     {
         if (roster.Count == 0)
         {
@@ -273,7 +276,7 @@ public sealed record BattleState(
             var placement = map.Placements[index];
             switch (placement)
             {
-                case PlayerPlacement { Slot: PlayerSlot.AnyRecruit } when map.DeploysAll && !HasBare(roster, named, deployed, nextBare):
+                case PlayerPlacement { Slot: PlayerSlot.AnyRecruit } when (map.DeploysAll || shortHanded) && !HasBare(roster, named, deployed, nextBare):
                     break;
                 case PlayerPlacement p:
                     var unit = map.Armed(map.Supplied(map.Trial(Fill(p, roster, named, deployed, ref nextBare), content), content), content);
@@ -307,7 +310,7 @@ public sealed record BattleState(
         return new BattleState(map, ValueList<BattleUnit>.From(units), 1, Side.Player, seed, scheme, map.RecallCharges, ValueList<BattleState>.Empty);
     }
 
-    /// <summary>Whether a recruit is left for a bare slot (issue 689): on <c>deploy: all</c> the bare slots past the company stay empty.</summary>
+    /// <summary>Whether a recruit is left for a bare slot (issue 689): on <c>deploy: all</c>, or short-handed (issue 795), the bare slots past the company stay empty.</summary>
     private static bool HasBare(ValueList<Unit> roster, HashSet<string> named, HashSet<string> deployed, int nextBare)
     {
         for (var i = nextBare; i < roster.Count; i++)

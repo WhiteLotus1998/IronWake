@@ -390,7 +390,8 @@ public sealed record CampaignRecord(
     /// join the roster for it (<see cref="Present"/>, issue 632). The battle knows which campaign map
     /// it is (<see cref="BattleState.CampaignMap"/>), for an heirloom's floor (issue 646). The map is
     /// fought as the campaign lists it (<see cref="CampaignMap.Prepare"/>, issue 704): at its curve's enemy
-    /// level and with its template swaps, the difficulty's offset added after.
+    /// level and with its template swaps, the difficulty's offset added after. A company thinned below
+    /// the map's bare slots fights it short-handed, those slots empty (issue 795).
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
@@ -403,7 +404,7 @@ public sealed record CampaignRecord(
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
-        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed)) with { CampaignMap = MapIndex + 1 };
+        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1 };
     }
 
     /// <summary>
@@ -1166,6 +1167,23 @@ public sealed record CampaignRecord(
     /// </summary>
     public IReadOnlyList<string> Deployment(MapDefinition map, GameContent content) =>
         Begin(map, content).UnitsOf(Side.Player).OrderBy(u => u.PlacementIndex).Select(u => u.Id).ToList();
+
+    /// <summary>
+    /// Why <c>march</c> cannot open <paramref name="map"/>, or null when it can (issue 795): the
+    /// reason <see cref="Begin"/> refuses the battle, so a march is refused as a camp line and never throws.
+    /// </summary>
+    public string? MarchRefusal(MapDefinition map, GameContent content)
+    {
+        try
+        {
+            Begin(map, content);
+            return null;
+        }
+        catch (ArgumentException e)
+        {
+            return e.Message;
+        }
+    }
 
     /// <summary>
     /// Why the keep's menu is closed now, or null when it is open (issue 288): the campaign must

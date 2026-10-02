@@ -217,6 +217,11 @@ public sealed class CampaignClient
             return false;
         }
 
+        if (Record.MarchRefusal(map, Content) is { } refusal)
+        {
+            return Refuse(refusal);
+        }
+
         _log.Add(CampaignSession.MapLine(Record, Content, map));
         Battle = new ClientSession(Content, Record.Begin(map, Content, _scheme));
         Status = null;
