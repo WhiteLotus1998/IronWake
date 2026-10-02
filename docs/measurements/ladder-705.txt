@@ -41,3 +41,47 @@ ladder: brackwater_cut
     pathfinder: gate 1 100.0, gate 4 FAILED, captain [atk 1 dmg 1904 heal 0 abs 143]
     spread 0.0, bar 5; gate 4 lost under commander: FAILED
 ladder: FAILED
+
+# issue 705 slice 4 (DECISIONS/0164): the same command at 100 seeds after the first tuning pass (Vanguard +1 Def; Marshal +1 Str +1 Spd +1 Res +2 Cha; Champion +2 HP +2 Str +2 Def; Commander +1 Str +2 Spd +2 Res +3 Cha; Pathfinder +1 Str +3 Dex +2 Spd).
+ladder: the_tollgate
+  tier 1, party and enemies +2:
+    cadet: gate 1 70.0, gate 4 ok, captain [atk 248 dmg 2121 heal 0 abs 227]
+    marshal: gate 1 71.0, gate 4 ok, captain [atk 249 dmg 2424 heal 0 abs 217]
+    ranger: gate 1 57.0, gate 4 ok, captain [atk 340 dmg 3442 heal 0 abs 80]
+    vanguard: gate 1 78.0, gate 4 ok, captain [atk 274 dmg 2354 heal 0 abs 212]
+    spread 21.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 95.0, gate 4 ok, captain [atk 229 dmg 2139 heal 0 abs 112]
+    champion: gate 1 98.0, gate 4 ok, captain [atk 252 dmg 2946 heal 0 abs 118]
+    commander: gate 1 98.0, gate 4 FAILED, captain [atk 330 dmg 5009 heal 0 abs 69]
+    pathfinder: gate 1 92.0, gate 4 ok, captain [atk 341 dmg 6148 heal 0 abs 201]
+    spread 6.0, bar 5; gate 4 lost under commander: FAILED
+ladder: FAILED
+ladder: the_mill
+  tier 1, party and enemies +2:
+    cadet: gate 1 39.0, gate 4 ok, captain [atk 353 dmg 5161 heal 0 abs 276]
+    marshal: gate 1 66.0, gate 4 ok, captain [atk 263 dmg 5894 heal 0 abs 104]
+    ranger: gate 1 63.0, gate 4 ok, captain [atk 246 dmg 5193 heal 0 abs 199]
+    vanguard: gate 1 83.0, gate 4 ok, captain [atk 411 dmg 6356 heal 0 abs 433]
+    spread 20.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 98.0, gate 4 ok, captain [atk 269 dmg 6085 heal 0 abs 184]
+    champion: gate 1 100.0, gate 4 ok, captain [atk 277 dmg 7303 heal 0 abs 185]
+    commander: gate 1 99.0, gate 4 ok, captain [atk 278 dmg 8283 heal 0 abs 264]
+    pathfinder: gate 1 96.0, gate 4 ok, captain [atk 241 dmg 9436 heal 0 abs 248]
+    spread 4.0, bar 5: ok
+ladder: FAILED
+ladder: brackwater_cut
+  tier 1, party and enemies +2:
+    cadet: gate 1 39.0, gate 4 FAILED, captain [atk 2 dmg 1921 heal 0 abs 320]
+    marshal: gate 1 47.0, gate 4 FAILED, captain [atk 2 dmg 2677 heal 0 abs 312]
+    ranger: gate 1 66.0, gate 4 FAILED, captain [atk 1 dmg 1343 heal 0 abs 208]
+    vanguard: gate 1 64.0, gate 4 ok, captain [atk 53 dmg 2097 heal 0 abs 280]
+    spread 19.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 77.0, gate 4 FAILED, captain [atk 16 dmg 2261 heal 0 abs 258]
+    champion: gate 1 97.0, gate 4 ok, captain [atk 12 dmg 2964 heal 0 abs 227]
+    commander: gate 1 100.0, gate 4 ok, captain [atk 0 dmg 404 heal 0 abs 25]
+    pathfinder: gate 1 100.0, gate 4 FAILED, captain [atk 1 dmg 1870 heal 0 abs 144]
+    spread 3.0, bar 5: ok
+ladder: FAILED

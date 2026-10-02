@@ -220,7 +220,7 @@
       "mastery": "shoulder_to_shoulder",
       "masteryPoints": 12,
       "certification": { "level": 3 },
-      "modifiers": { "hp": 2, "str": 1, "def": 2 },
+      "modifiers": { "def": 1 },
       "growthModifiers": { "hp": 10, "def": 10 }
     },
     {
@@ -233,7 +233,7 @@
       "mastery": "command_presence",
       "masteryPoints": 12,
       "certification": { "level": 3 },
-      "modifiers": { "mag": 2, "res": 1, "cha": 2 },
+      "modifiers": { "str": 1, "spd": 1, "res": 1, "cha": 2 },
       "growthModifiers": { "mag": 10, "cha": 10 }
     },
     {
@@ -260,7 +260,7 @@
       "mastery": "breakthrough",
       "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
-      "modifiers": { "hp": 4, "str": 3, "def": 4 }
+      "modifiers": { "hp": 2, "str": 2, "def": 2 }
     },
     {
       "id": "commander",
@@ -273,7 +273,7 @@
       "mastery": "field_command",
       "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
-      "modifiers": { "str": 1, "mag": 3, "res": 2, "cha": 3 }
+      "modifiers": { "str": 1, "spd": 2, "res": 2, "cha": 3 }
     },
     {
       "id": "pathfinder",
@@ -287,7 +287,7 @@
       "mastery": "light_step",
       "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
-      "modifiers": { "str": 1, "dex": 4, "spd": 3 }
+      "modifiers": { "str": 1, "dex": 3, "spd": 2 }
     },
     {
       "id": "sergeant",
