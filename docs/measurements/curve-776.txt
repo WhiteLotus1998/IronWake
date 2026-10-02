@@ -1,0 +1,19 @@
+# issue 776: --curve --map brackwater_cut --seeds 200 (Release) on issue/776-brackwater-point. Round 234's step: the point at 7, then at 6 (DECISIONS/0178). At 8 the read is curve-764.txt.
+## enemyLevel 7
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+curve: carried is the file's party at the levels the heuristic's own campaign brings to each camp, slot by slot, over the runs of 200 that won the map (the count after `over`; issue 764); spread is the same total, even
+map 8 brackwater_cut: enemy level 3 in the file, 7 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 129/200 (65 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 71 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 59, two-roll average: ok
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 13/200 (7 %), winning turn median 6 p90 6 limit 8, losses 1 timeout 186 captain 0 protected, quiet tail 5.0, refused kill p50 0.8460 over 1, at the stall p50 0.8460 over 1, survivors p50 0 of 4, captain alone 9, two-roll average: FAILED
+  party +4: gate 1 beatable: brackwater_cut, heuristic wins 107/200 (54 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 93 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 70, two-roll average: FAILED
+  carried 6/3/1/1/1 over 82: gate 1 beatable: brackwater_cut, heuristic wins 115/200 (57 %), winning turn median 6 p90 6 limit 8, losses 1 timeout 84 captain 0 protected, quiet tail 0.0, refused kill p50 0.9849 over 1, at the stall -, survivors p50 0 of 4, captain alone 102, two-roll average: FAILED
+  carried, spread 3/3/2/2/2 over 82: gate 1 beatable: brackwater_cut, heuristic wins 22/200 (11 %), winning turn median 6 p90 6 limit 8, losses 1 timeout 177 captain 0 protected, quiet tail 4.0, refused kill p50 0.8460 over 1, at the stall -, survivors p50 0 of 4, captain alone 15, two-roll average: FAILED
+## enemyLevel 6 (shipped)
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+curve: carried is the file's party at the levels the heuristic's own campaign brings to each camp, slot by slot, over the runs of 200 that won the map (the count after `over`; issue 764); spread is the same total, even
+map 8 brackwater_cut: enemy level 3 in the file, 6 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 129/200 (65 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 71 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 59, two-roll average: ok
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 21/200 (10 %), winning turn median 6 p90 6 limit 8, losses 2 timeout 177 captain 0 protected, quiet tail 2.0, refused kill p50 0.8666 over 2, at the stall p50 0.8872 over 1, survivors p50 0 of 4, captain alone 12, two-roll average: FAILED
+  party +3: gate 1 beatable: brackwater_cut, heuristic wins 29/200 (14 %), winning turn median 6 p90 7 limit 8, losses 2 timeout 169 captain 0 protected, quiet tail 2.5, refused kill p50 0.9220 over 2, at the stall -, survivors p50 0 of 4, captain alone 18, two-roll average: FAILED
+  carried 6/3/1/1/1 over 82: gate 1 beatable: brackwater_cut, heuristic wins 167/200 (83 %), winning turn median 5 p90 6 limit 8, losses 3 timeout 30 captain 0 protected, quiet tail 2.3, refused kill p50 0.9849 over 3, at the stall p50 0.5418 over 2, survivors p50 0 of 4, captain alone 159, two-roll average: ok
+  carried, spread 3/3/2/2/2 over 82: gate 1 beatable: brackwater_cut, heuristic wins 25/200 (12 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 175 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 20, two-roll average: FAILED
