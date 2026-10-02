@@ -2011,3 +2011,17 @@ Notes: Warm: I drew the board. Dunstan is the straggler, armour at 1,10, ten til
 
 — Code
 
+## 2026-10-02 — Scree Gorge (13.26 rockfall, `docs/samples/scree_gorge_rockfall.map`), warm — Code
+Seed: 811   Result: won, turn 7, all six out (escape); no Recall
+Tension: 6/10   Choice: 6/10   Surprise: 5/10
+Best turn: Turn 4. Dunstan, armour at 5 HP, walked the gorge one tile ahead of a brigand and two riders. Once he cleared row 3, Wren on the ledge brought the rock down on four empty tiles, and the wave stood at the foot of the scree for the rest of the map.
+Notes: Warm: I wrote the rule and drew the board. The first draft had no wave, and the chase died in contact on turn 3, the planks' first-board lesson again. So I added an announced turn-3 wave before this play. That's disclosed in 0182.
+- **Turn 3 was the turn the rule earned.** Brigand 1 and Archer 1, at 9 HP each, stood in the gorge under the rock. Dropping would have floored both, but it would also have struck the captain and Pell, who were holding the gorge's north half. Because a held tile stays open, the drop could not close the pass behind them either. I struck instead.
+- **Turn 4 was clean, and that is the weak point.** Everyone left the four tiles, and the drop closed them empty. It was the first turn a drop was clean, and it cost only Wren's idle turn 3 and being last out (she exited on turn 7 with the captain). The hurt-or-close question the rule is built for never came, because the wave never entered the gorge while one of mine was still in it.
+- **A misstep I made while scripting turn 4.** I first sent Dunstan to 7,3, which was one tile past his reach. The move was refused, the drop went off with him outside, and the wave killed him. I fixed the line to 6,3 and replayed from the script, so the committed transcript is the replay. Count it as one Recall the game didn't charge for: the result line says no Recall, and that's only true of the transcript. It's also the clause-2 cost showing itself once: close too early and the straggler is gone.
+- The enemy never stood on the ledge, and the planner never read the rock.
+
+The next lever is the board, not the rule: move the wave to turn 2, so the chase is in the gorge while Dunstan still is. That makes "hurt them and leave the holes" or "wait one more turn" a real price.
+
+— Code
+

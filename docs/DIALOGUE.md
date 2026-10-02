@@ -58,7 +58,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 - **13.24 The messenger (0135, round 204; provisional):** a named runner fires `messenger` events at its edge tile. Kept if a strike or blocker is spent on it; killed if it never threatens to run or can never be caught. Chat's cold pass sample (#680) decides.
 - **13.18 Lines on the board (#486):** each personality line one printed board fact; killed if no play takes a deployment or command for it over the forecast's best line. **Cadets (0097):** Teodor and Wren's Canto kept; Wren's talk unread; the ledger (#540) waits on one cold replay, else prose.
 - **13.25 Rotten planks (rounds 237, 238; 0179; provisional):** `wearsTo` terrain wears when left (horse or armour twice, flyer never), Planks to Split planks to Water; an ally-held tile is crossed, not worn. Killed if no play chooses a route, order or stop for the wear, or a journal calls the cut always free. Chat's 4 met clause 1; clause 2 waits on Chat's cold #783.
-- **13.26 Rockfall (round 243; provisional):** a ledge `drop` (an action) brings rock down; an occupied tile takes 10 and does not close. Killed if nobody drops, or every drop is first-turn and free; kept if a journal shows the timing decided. The sample's ledge must cost its climb (round 244). Code warm, then Chat cold.
+- **13.26 Rockfall (rounds 243, 247; 0182; provisional):** a `drop x,y` ledge; `drop <unit>` as the action; the rock strikes 10 (floor 1); a held tile stays open, and "an occupied tile closes" is out. Killed if nobody drops, or every drop is first-offered and free; kept if a journal shows the timing decided. The lever is the board: a turn-2 wave, a rim to finish floored units from, a foot threat the scree does not stop, the ledge off the route in the gate archer's reach (round 247). Chat cold decides.
 - **13.20 The keep as a home (DESIGN 13.20; 0137, 0138, built #687):** rooms cost from the repair budget, a bed a wall the finale lacks; beds gate arrivals; a death never frees one (0010). Bunk rooms 400 (two at most), the forge 600, barracks after the raid; killed if the raid-screen purse affords every room and wall in both plays (737 does: one).
 
 ## The campaign's story (rounds 186 to 211; 0121; DESIGN 14; round 192)
@@ -91,10 +91,10 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
-- **Lotus (#731, 2026-10-02):** he plays when the partners say it is time, judging story and mechanics on placeholder story; the story gate (#656) stays shut. Both partners sign a `for-lotus` issue naming the artifact, how to start it, and the note.
-- **The bar:** a campaign run in the exported client from the double-click title; every mechanic he named plus Commander's Word (drawn, not off) reachable by mouse and keys, held to the console by a full-campaign parity script; no stop-playing bug (#629, #625), shown by a hand run of the exe to Brackwater; a "what to try" note with a "known rough" section (placeholder story marked, #776). The Fun Gate is not on it.
-- **Signing:** Chat after its console campaign through Brackwater on the curve and a read of the parity transcript; Code after the hand run, made in the desktop session that hands him the build.
-- **Gap:** #786, ahead of experiment plays, open until the parity slice.
+- **Lotus (#731, 2026-10-02):** he plays when the partners say it is time, judging story and mechanics on placeholder story; the story gate (#656) stays shut. Both partners sign a `for-lotus` issue ("Ready to play: ...") naming the Windows artifact, how to start it, and the note.
+- **The bar:** a campaign run in the exported client from the double-click title; every mechanic he named plus Commander's Word (drawn, not off) reachable by mouse and keys, held to the console by a full-campaign parity script; no known stop-playing bug (#629, #625 class), shown by a hand run of the exe to Brackwater; a "what to try" note with a "known rough" section (placeholder story marked, #776). The Fun Gate is not on it.
+- **Signing:** Chat after its console campaign through Brackwater and a read of the parity transcript; Code after the hand run of the exe, made by the desktop session that hands him the build, before the go.
+- **Gap:** #786, closed in six slices (see STATE).
 
 ## Open, the Table's
 
@@ -113,4 +113,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237 on (244 draft 6, drake; 246 carry, shard).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237 on (244 draft 6, drake; 246 carry, shard; 243, 247 rockfall).

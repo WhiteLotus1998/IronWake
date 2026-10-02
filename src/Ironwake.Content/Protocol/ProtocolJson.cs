@@ -238,6 +238,12 @@ public static class ProtocolJson
                 w.WriteNumber("amount", b.Amount);
                 w.WriteNumber("hpAfter", b.HpAfter);
                 break;
+            case RockfallStruck r:
+                w.WriteString("unit", r.UnitId);
+                WriteCoord(w, "at", r.At);
+                w.WriteNumber("amount", r.Amount);
+                w.WriteNumber("hpAfter", r.HpAfter);
+                break;
             case UnitRested r:
                 w.WriteString("unit", r.UnitId);
                 break;
@@ -523,6 +529,10 @@ public static class ProtocolJson
                 w.WriteString("unit", open.UnitId);
                 WriteCoord(w, "at", open.At);
                 break;
+            case Drop drop:
+                w.WriteString("type", "drop");
+                w.WriteString("unit", drop.UnitId);
+                break;
             case Shove shove:
                 w.WriteString("type", "shove");
                 w.WriteString("unit", shove.UnitId);
@@ -583,6 +593,7 @@ public static class ProtocolJson
             "exit" => new Exit(RequiredString(e, "unit")),
             "recover" => new Recover(RequiredString(e, "unit")),
             "open" => new Open(RequiredString(e, "unit"), ReadCoord(e, "at")),
+            "drop" => new Drop(RequiredString(e, "unit")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),

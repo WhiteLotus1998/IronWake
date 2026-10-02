@@ -1,0 +1,44 @@
+name: Scree Gorge
+size: 14x12
+win: escape
+turn_limit: 8
+recall: 3
+enemy_level: 2
+exit: 4,0 5,0 6,0 7,0 8,0 9,0
+announce: on
+
+..............
+..^.........^.
+..............
+MMMMMM..MMMMMM
+MMMMMM..nMMMMM
+MMMMMM..MMMMMM
+..............
+..^.......^...
+..............
+....^....^....
+..............
+..............
+
+units:
+P captain 6,7
+P recruit:teodor 7,7
+P recruit:pell 6,8
+P recruit:ottilie 8,8
+P recruit:dunstan 4,9
+P recruit:wren 7,9
+E rider 3,11 group:chase behavior:aggressive
+E rider 11,11 group:chase behavior:aggressive
+E brigand 6,11 group:chase behavior:aggressive
+E archer 9,11 group:chase behavior:aggressive
+E soldier 6,1 group:gate behavior:guard
+E archer 9,1 group:gate behavior:guard
+
+events:
+wave1 turn 3 enemy spawn rider 4,11 group:wave behavior:aggressive
+wave2 turn 3 enemy spawn rider 9,11 group:wave behavior:aggressive
+wave3 turn 3 enemy spawn brigand 6,11 group:wave behavior:aggressive
+rock1 drop 8,4 terrain 6,4 M
+rock2 drop 8,4 terrain 7,4 M
+rock3 drop 8,4 terrain 6,5 M
+rock4 drop 8,4 terrain 7,5 M

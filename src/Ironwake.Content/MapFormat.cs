@@ -255,6 +255,7 @@ public static class MapFormat
             EnterTrigger e => "enter " + string.Join(' ', e.Tiles),
             MessengerTrigger => "messenger",
             FallsTrigger f => "falls " + f.Front,
+            DropTrigger d => "drop " + d.Ledge,
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
         };
         var action = mapEvent.Action switch
@@ -1304,8 +1305,15 @@ public static class MapFormat
                     }
 
                     return (new FallsTrigger(tokens[2]), tokens[3..]);
+                case "drop":
+                    if (tokens.Length < 3 || !tokens[2].Contains(','))
+                    {
+                        throw Error("drop trigger needs the ledge's tile: 'drop 5,2'");
+                    }
+
+                    return (new DropTrigger(ParseCoord(tokens[2], width, height)), tokens[3..]);
                 default:
-                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, messenger or falls");
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, messenger, falls or drop");
             }
         }
 

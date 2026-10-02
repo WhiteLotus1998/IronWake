@@ -64,6 +64,9 @@ public static class Resolver
             case Open open:
                 (next, rejection) = ApplyOpen(state, content, open, events);
                 break;
+            case Drop drop:
+                (next, rejection) = ApplyDrop(state, content, drop, events);
+                break;
             case Shove shove:
                 (next, rejection) = ApplyShove(state, content, shove, events);
                 if (rejection is null)
@@ -1342,6 +1345,29 @@ public static class Resolver
     }
 
     /// <summary>
+    /// DESIGN.md 13.26's drop: a player unit that has not acted, on a ledge whose rock is still up,
+    /// brings it down as its action, in place of Attack, Item or Wait, after its Move or without
+    /// one. Every event on the ledge fires through <see cref="MapEvents.AfterDrop"/>. No Canto follows.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyDrop(BattleState state, GameContent content, Drop drop, List<GameEvent> events)
+    {
+        var unit = Acting(state, drop.UnitId, out var rejection);
+        if (unit is null)
+        {
+            return (state, rejection);
+        }
+
+        if (Rockfall.Refusal(state, unit) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotDrop, refusal));
+        }
+
+        var next = state.WithUnit(unit with { Moved = true, Acted = true, Canto = null });
+        next = MapEvents.AfterDrop(next, content, unit.At, events);
+        return (next, null);
+    }
+
+    /// <summary>
     /// Why <paramref name="unit"/> cannot open a chest at <paramref name="at"/> (issue 649), in the
     /// order the rules are checked, or null when it can. Whether the unit may act at all is the
     /// caller's check.
@@ -1687,6 +1713,11 @@ public static class Resolver
                 {
                     yield return new Open(unit.Id, chest.At);
                 }
+            }
+
+            if (Rockfall.Refusal(state, unit) is null)
+            {
+                yield return new Drop(unit.Id);
             }
 
             if (unit.Side == Side.Player && state.Map.ShoveEnabled)

@@ -36,6 +36,13 @@ public sealed record EnterTrigger(ValueList<Coord> Tiles) : MapEventTrigger
 public sealed record MessengerTrigger : MapEventTrigger;
 
 /// <summary>
+/// When a player unit standing on the ledge at <paramref name="Ledge"/> takes the drop as its
+/// action (DESIGN.md 13.26, experiment). Every event on that ledge fires then, in file order; a
+/// <see cref="ChangeTerrain"/> under it first strikes the tile's occupant (<see cref="Core.Rockfall"/>).
+/// </summary>
+public sealed record DropTrigger(Coord Ledge) : MapEventTrigger;
+
+/// <summary>
 /// The <c>messenger:</c> header (DESIGN.md 13.24): the enemy placed at <paramref name="From"/>
 /// is the messenger, and <paramref name="Road"/> is the edge tile it runs for.
 /// </summary>

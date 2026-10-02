@@ -1,0 +1,1649 @@
+Scree Gorge, seed 811, scheme TwoRollAverage
+Objective: Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+  turn 3, enemy phase: a rider arrives at 4,11 (aggressive). A unit standing on 4,11 stops it.
+  turn 3, enemy phase: a rider arrives at 9,11 (aggressive). A unit standing on 9,11 stops it.
+  turn 3, enemy phase: a brigand arrives at 6,11 (aggressive). A unit standing on 6,11 stops it.
+  when one of yours drops the rock from 8,4: 6,4 becomes mountain, unless anyone stands on it; the rock strikes them for 10, never below 1.
+  when one of yours drops the rock from 8,4: 7,4 becomes mountain, unless anyone stands on it; the rock strikes them for 10, never below 1.
+  when one of yours drops the rock from 8,4: 6,5 becomes mountain, unless anyone stands on it; the rock strikes them for 10, never below 1.
+  when one of yours drops the rock from 8,4: 7,5 becomes mountain, unless anyone stands on it; the rock strikes them for 10, never below 1.
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMM..nMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^...AB..^...
+ 8 ......C.D.....
+ 9 ....E..G.^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+C  pell             Pell L1 adept              6,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move teodor 7,4
+Teodor moves 7,7 -> 7,4 via 7,6 7,5
+The gate group wakes (proximity)
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMM.BnMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^...A...^...
+ 8 ......C.D.....
+ 9 ....E..G.^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+C  pell             Pell L1 adept              6,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move captain 6,4
+Alder Fenn moves 6,7 -> 6,4 via 6,6 6,5
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^.......^...
+ 8 ......C.D.....
+ 9 ....E..G.^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+C  pell             Pell L1 adept              6,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move wren 7,5
+Wren moves 7,9 -> 7,5 via 7,8 7,7 7,6
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 ..............
+ 7 ..^.......^...
+ 8 ......C.D.....
+ 9 ....E....^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+C  pell             Pell L1 adept              6,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move pell 6,5
+Pell moves 6,8 -> 6,5 via 6,7 6,6
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 ..............
+ 7 ..^.......^...
+ 8 ........D.....
+ 9 ....E....^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,8    hp 17/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move ottilie 8,6
+Ottilie moves 8,8 -> 8,6 via 8,7
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 ........D.....
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....E....^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Forest
+D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move dunstan 5,6
+Dunstan moves 4,9 -> 5,6 via 4,8 4,7 4,6
+Scree Gorge  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...e..f..^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 .....E..D.....
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ...a..c..d.b..
+
+d  archer-1         Archer L2 bowman           9,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          6,11   hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 23/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          3,11   hp 20/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          11,11  hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         6,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 8,8
+Archer 1 moves 9,11 -> 8,8 via 9,10 8,10 8,9
+enemy: attack archer-1 ottilie
+Forecast Archer 1 -> Ottilie: acc 76% dmg 7 crit 1%; counter: acc 82% dmg 8 crit 4%
+Archer 1 attacks Ottilie
+  Archer 1 hits Ottilie for 7 (hp 10)
+  Ottilie hits Archer 1 for 8 (hp 9)
+  Archer 1 hp 9, Ottilie hp 10
+Ottilie gains 12 exp (12)
+enemy: move archer-2 7,2
+Archer 2 moves 9,1 -> 7,2 via 8,1 7,1
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 hits Teodor for 5 (hp 16)
+  Archer 2 hp 17, Teodor hp 16
+enemy: move brigand-1 5,8
+Brigand 1 moves 6,11 -> 5,8 via 6,10 6,9 6,8
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move rider-1 4,6
+Rider 1 moves 3,11 -> 4,6 via 3,10 3,9 3,8 3,7 3,6
+enemy: attack rider-1 dunstan
+Forecast Rider 1 -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
+Rider 1 attacks Dunstan
+  Rider 1 hits Dunstan for 6 (hp 17)
+  Dunstan hits Rider 1 for 10 (hp 10)
+  Rider 1 hp 10, Dunstan hp 17
+Dunstan gains 12 exp (12)
+enemy: move rider-2 10,6
+Rider 2 moves 11,11 -> 10,6 via 11,10 11,9 11,8 11,7 11,6
+enemy: wait rider-2
+Rider 2 waits
+enemy: move soldier-1 7,3
+Soldier moves 6,1 -> 7,3 via 7,1 7,2
+enemy: attack soldier-1 teodor
+Forecast Soldier -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
+Soldier attacks Teodor
+  Soldier hits Teodor for 8 (hp 8)
+  Teodor misses Soldier
+  Soldier hp 20, Teodor hp 8
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMM.eMMMMMM
+ 4 MMMMMMABnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 ....aE..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          4,6    hp 10/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         7,3    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move captain 6,3
+Alder Fenn moves 6,4 -> 6,3
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMAeMMMMMM
+ 4 MMMMMM.BnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 ....aE..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          4,6    hp 10/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         7,3    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack captain soldier-1
+Forecast Alder Fenn -> Soldier: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
+Alder Fenn attacks Soldier
+  Alder Fenn hits Soldier for 9 (hp 11)
+  Soldier hits Alder Fenn for 8 (hp 14)
+  Alder Fenn hp 14, Soldier hp 11
+Alder Fenn gains 12 exp (12)
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMAeMMMMMM
+ 4 MMMMMM.BnMMMMM
+ 5 MMMMMMCGMMMMMM
+ 6 ....aE..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,5    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          4,6    hp 10/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         7,3    hp 11/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move pell 6,4
+Pell moves 6,5 -> 6,4
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMAeMMMMMM
+ 4 MMMMMMCBnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 ....aE..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          4,6    hp 10/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+e  soldier-1        Soldier L2 pikeman         7,3    hp 11/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack pell soldier-1
+Forecast Pell -> Soldier with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Soldier
+  Pell hits Soldier for 12 (hp 0)
+  Pell hp 16, Soldier hp 0
+Pell gains 35 exp (35)
+Soldier falls at 7,3
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMA.MMMMMM
+ 4 MMMMMMCBnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 ....aE..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          4,6    hp 10/20  Plain  group chase, aggressive
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack dunstan rider-1
+Forecast Dunstan -> Rider 1: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
+Dunstan attacks Rider 1
+  Dunstan hits Rider 1 for 10 (hp 0)
+  Dunstan hp 17, Rider 1 hp 0
+Dunstan gains 35 exp (47)
+Rider 1 falls at 4,6
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMA.MMMMMM
+ 4 MMMMMMCBnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 .....E..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,4    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move teodor 7,3
+Teodor moves 7,4 -> 7,3
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMC.nMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 .....E..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack teodor archer-2
+Forecast Teodor -> Archer 2: acc 76% dmg 12 crit 1%; counter: none
+Teodor attacks Archer 2
+  Teodor hits Archer 2 for 12 (hp 5)
+  Teodor hp 8, Archer 2 hp 5
+Teodor gains 12 exp (12)
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMC.nMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 .....E..D.b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 5/17   Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          8,6    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain  done
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move ottilie 7,4
+Ottilie moves 8,6 -> 7,4 via 7,6 7,5
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 .......f......
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMCDnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 .....E....b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           7,2    hp 5/17   Plain  group gate, guard, awake
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain  done
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack ottilie archer-2
+Forecast Ottilie -> Archer 2: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
+Ottilie attacks Archer 2
+  Ottilie hits Archer 2 for 8 (hp 0)
+  Ottilie hp 10, Archer 2 hp 0
+Ottilie gains 35 exp (47)
+Archer 2 falls at 7,2
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMCDnMMMMM
+ 5 MMMMMM.GMMMMMM
+ 6 .....E....b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain  done
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain  done
+G  wren             Wren L1 cadet              7,5    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move wren 8,4
+Wren moves 7,5 -> 8,4 via 7,4
+Scree Gorge  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 .....E....b...
+ 7 ..^.......^...
+ 8 .....c..d.....
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+c  brigand-1        Brigand L2 reaver          5,8    hp 22/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 17/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain  done
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          10,6   hp 20/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain  done
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> end
+Lethal if all land: Dunstan (Archer 1 for 3, Brigand 1 for 8, Rider 2 for 6, against 17 hp)
+Lethal if all land: Ottilie (Archer 1 for 7, Rider 2 for 10, against 10 hp)
+Lethal if all land: Pell (Archer 1 for 8, Brigand 1 for 13, against 16 hp)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: move archer-1 7,5
+Archer 1 moves 8,8 -> 7,5 via 8,7 8,6 7,6
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 misses Teodor
+  Archer 1 hp 9, Teodor hp 8
+enemy: move brigand-1 6,5
+Brigand 1 moves 5,8 -> 6,5 via 5,7 6,7 6,6
+enemy: attack brigand-1 pell
+Forecast Brigand 1 -> Pell: acc 70% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Brigand 1 attacks Pell
+  Brigand 1 misses Pell
+  Pell hits Brigand 1 for 13 (hp 9)
+  Brigand 1 hp 9, Pell hp 16
+Pell gains 12 exp (47)
+enemy: move rider-2 6,6
+Rider 2 moves 10,6 -> 6,6 via 9,6 8,6 7,6
+enemy: attack rider-2 dunstan
+Forecast Rider 2 -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
+Rider 2 attacks Dunstan
+  Rider 2 hits Dunstan for 6 (hp 11)
+  Dunstan hits Rider 2 for 10 (hp 10)
+  Rider 2 hp 10, Dunstan hp 11
+Dunstan gains 12 exp (59)
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMMcdMMMMMM
+ 6 .....Eb.......
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           7,5    hp 9/17   Plain  group chase, aggressive
+c  brigand-1        Brigand L2 reaver          6,5    hp 9/22   Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain
+b  rider-2          Rider L2 outrider          6,6    hp 10/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack pell brigand-1
+Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: acc 70% dmg 13 crit 0%
+Pell attacks Brigand 1
+  Pell hits Brigand 1 for 13 (hp 0)
+  Pell hp 16, Brigand 1 hp 0
+Pell gains 35 exp (82)
+Brigand 1 falls at 6,5
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMMABMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMM.dMMMMMM
+ 6 .....Eb.......
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           7,5    hp 9/17   Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,3    hp 14/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          6,6    hp 10/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move captain 6,5
+Alder Fenn moves 6,3 -> 6,5 via 6,4
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM.BMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMMAdMMMMMM
+ 6 .....Eb.......
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+d  archer-1         Archer L2 bowman           7,5    hp 9/17   Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          6,6    hp 10/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack captain archer-1
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 11 (hp 0)
+  Alder Fenn hp 14, Archer 1 hp 0
+Alder Fenn gains 35 exp (47)
+Archer 1 falls at 7,5
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM.BMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....Eb.......
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+b  rider-2          Rider L2 outrider          6,6    hp 10/20  Plain  group chase, aggressive
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> attack dunstan rider-2
+Forecast Dunstan -> Rider 2: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
+Dunstan attacks Rider 2
+  Dunstan hits Rider 2 for 10 (hp 0)
+  Dunstan hp 11, Rider 2 hp 0
+Dunstan gains 35 exp (94)
+Rider 2 falls at 6,6
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM.BMMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....E........
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          7,3    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move teodor 7,1
+Teodor moves 7,3 -> 7,1 via 7,2
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^....B....^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMCDGMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....E........
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,4    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move ottilie 7,2
+Ottilie moves 7,4 -> 7,2 via 7,3
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^....B....^.
+ 2 .......D......
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMC.GMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....E........
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> wait wren
+Wren waits
+Scree Gorge  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^....B....^.
+ 2 .......D......
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMC.GMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....E........
+ 7 ..^.......^...
+ 8 ..............
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L1 bulwark         5,6    hp 11/23  Plain  done
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Rider 3 arrives at 4,11 with the wave group, aggressive
+Reinforcements arrive
+  Rider 4 arrives at 9,11 with the wave group, aggressive
+Reinforcements arrive
+  Brigand 2 arrives at 6,11 with the wave group, aggressive
+enemy: move brigand-2 6,7
+Brigand 2 moves 6,11 -> 6,7 via 6,10 6,9 6,8
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move rider-3 5,7
+Rider 3 moves 4,11 -> 5,7 via 4,10 5,10 5,9 5,8
+enemy: attack rider-3 dunstan
+Forecast Rider 3 -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
+Rider 3 attacks Dunstan
+  Rider 3 hits Dunstan for 6 (hp 5)
+  Dunstan hits Rider 3 for 10 (hp 10)
+  Rider 3 hp 10, Dunstan hp 5
+Dunstan gains 12 exp (6)
+Dunstan reaches level 2: str +1 spd +1 cha +1
+enemy: move rider-4 6,8
+Rider 4 moves 9,11 -> 6,8 via 9,10 8,10 8,9 8,8 7,8
+enemy: wait rider-4
+Rider 4 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^....B....^.
+ 2 .......D......
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMC.GMMMMM
+ 5 MMMMMMA.MMMMMM
+ 6 .....E........
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,5    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         5,6    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move captain 6,1
+Alder Fenn moves 6,5 -> 6,1 via 6,4 6,3 6,2
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...AB....^.
+ 2 .......D......
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMC.GMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 .....E........
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         5,6    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,4    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move pell 6,2
+Pell moves 6,4 -> 6,2 via 6,3
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...AB....^.
+ 2 ......CD......
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMM..GMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 .....E........
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         5,6    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move dunstan 6,3
+Dunstan moves 5,6 -> 6,3 via 6,6 6,5 6,4
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...AB....^.
+ 2 ......CD......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMM..GMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          7,2    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move ottilie 8,0
+Ottilie moves 7,2 -> 8,0 via 7,1 7,0
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>D>....
+ 1 ..^...AB....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMM..GMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          8,0    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,1    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> move teodor 7,0
+Teodor moves 7,1 -> 7,0
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>BD>....
+ 1 ..^...A.....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMM..GMMMMM
+ 5 MMMMMM..MMMMMM
+ 6 ..............
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          8,0    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,0    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+ledges (drop, an action): 8,4 brings down 6,4 7,4 6,5 7,5 to Mountain; the rock strikes anyone under it for 10, never below 1, and a tile someone stands on stays open
+> drop wren
+The ground changes
+  6,4 becomes Mountain
+The ground changes
+  7,4 becomes Mountain
+The ground changes
+  6,5 becomes Mountain
+The ground changes
+  7,5 becomes Mountain
+Scree Gorge  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>BD>....
+ 1 ..^...A.....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ..............
+ 7 ..^..gi...^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          6,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          8,0    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,0    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move brigand-2 8,6
+Brigand 2 moves 6,7 -> 8,6 via 6,6 7,6
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-3
+Rider 3 waits
+enemy: wait rider-4
+Rider 4 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>BD>....
+ 1 ..^...A.....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          8,0    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+B  teodor           Teodor L1 pikeman          7,0    hp 8/21   Plain
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> exit teodor
+Teodor leaves through the exit at 7,0
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>D>....
+ 1 ..^...A.....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+D  ottilie          Ottilie L1 bowman          8,0    hp 10/17  Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor
+> exit ottilie
+Ottilie leaves through the exit at 8,0
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^...A.....^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,1    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> move captain 6,0
+Alder Fenn moves 6,1 -> 6,0
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>>>....
+ 1 ..^.........^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> wait captain
+Alder Fenn waits
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>>>....
+ 1 ..^.........^.
+ 2 ......C.......
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+C  pell             Pell L1 adept              6,2    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> move pell 5,0
+Pell moves 6,2 -> 5,0 via 6,1 6,0
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CA>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> wait pell
+Pell waits
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CA>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMME.MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         6,3    hp 5/23   Plain
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> move dunstan 7,0
+Dunstan moves 6,3 -> 7,0 via 6,2 6,1 6,0
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CAE>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> wait dunstan
+Dunstan waits
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CAE>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMGMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain  done
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,4    hp 20/20  Hill
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> move wren 8,2
+Wren moves 8,4 -> 8,2 via 8,3
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CAE>>....
+ 1 ..^.........^.
+ 2 ........G.....
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain  done
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,2    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> wait wren
+Wren waits
+Scree Gorge  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CAE>>....
+ 1 ..^.........^.
+ 2 ........G.....
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ........i.....
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,6    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain  done
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,2    hp 20/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: move brigand-2 8,5
+Brigand 2 moves 8,6 -> 8,5
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-3
+Rider 3 waits
+enemy: wait rider-4
+Rider 4 waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>CAE>>....
+ 1 ..^.........^.
+ 2 ........G.....
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain
+C  pell             Pell L1 adept              5,0    hp 16/16  Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,2    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie
+> exit pell
+Pell leaves through the exit at 5,0
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>AE>>....
+ 1 ..^.........^.
+ 2 ........G.....
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+E  dunstan          Dunstan L2 bulwark         7,0    hp 5/23   Plain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,2    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell
+> exit dunstan
+Dunstan leaves through the exit at 7,0
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>>>....
+ 1 ..^.........^.
+ 2 ........G.....
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,2    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan
+> move wren 8,0
+Wren moves 8,2 -> 8,0 via 8,1
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>G>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,0    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan
+> wait wren
+Wren waits
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>G>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,0    hp 20/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan
+> wait captain
+Alder Fenn waits
+Scree Gorge  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>G>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMnMMMMM
+ 5 MMMMMMMMiMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,5    hp 22/22  Mountain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain  done
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,0    hp 20/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: move brigand-2 8,4
+Brigand 2 moves 8,5 -> 8,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait rider-3
+Rider 3 waits
+enemy: wait rider-4
+Rider 4 waits
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Scree Gorge  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>G>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMiMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,4    hp 22/22  Hill  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+G  wren             Wren L1 cadet              8,0    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan
+> exit wren
+Wren leaves through the exit at 8,0
+Scree Gorge  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>A>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMiMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,4    hp 22/22  Hill  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        6,0    hp 14/22  Plain  captain
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan wren
+> exit captain
+Alder Fenn leaves through the exit at 6,0
+Scree Gorge  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>....
+ 1 ..^.........^.
+ 2 ..............
+ 3 MMMMMM..MMMMMM
+ 4 MMMMMMMMiMMMMM
+ 5 MMMMMMMMMMMMMM
+ 6 ..............
+ 7 ..^..g....^...
+ 8 ......h.......
+ 9 ....^....^....
+10 ..............
+11 ..............
+
+i  brigand-2        Brigand L2 reaver          8,4    hp 22/22  Hill  group wave, aggressive
+g  rider-3          Rider L2 outrider          5,7    hp 10/20  Plain  group wave, aggressive
+h  rider-4          Rider L2 outrider          6,8    hp 20/20  Plain  group wave, aggressive
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor ottilie pell dunstan wren captain
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Teodor, Ottilie, Pell, Dunstan, Wren, Alder Fenn; left behind: none; fell: none

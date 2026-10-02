@@ -46,6 +46,7 @@ public sealed class PlaySession
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
+          drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
@@ -404,11 +405,13 @@ public sealed class PlaySession
             EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
             MessengerTrigger => "if the messenger reaches the road",
             FallsTrigger falls => $"if {falls.Front.Replace('_', ' ')} falls",
+            DropTrigger drop => $"when one of yours drops the rock from {drop.Ledge}",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch
         {
             SpawnEnemy spawn => SpawnWords(spawn.Placement, content),
+            ChangeTerrain change when mapEvent.Trigger is DropTrigger => $"{change.At} becomes {content.TerrainById(change.TerrainId).Name.ToLowerInvariant()}, unless anyone stands on it; the rock strikes them for {Rockfall.Damage}, never below 1.",
             ChangeTerrain change => TerrainWords(new[] { change.At }, change.TerrainId, content),
             SetFlag flag => $"{flag.Flag} is set.",
             _ => throw new InvalidOperationException("unknown action " + mapEvent.Action.GetType().Name),
@@ -623,6 +626,12 @@ public sealed class PlaySession
                 break;
             case "open":
                 Error("usage: open <unit> <x,y>");
+                break;
+            case "drop" when words.Length == 2:
+                Apply(new Drop(words[1]));
+                break;
+            case "drop":
+                Error("usage: drop <unit>");
                 break;
             case "order":
                 OrderWords(words);
@@ -2416,6 +2425,7 @@ public sealed class PlaySession
         Exit x => $"exit {x.UnitId}",
         Recover r => $"recover {r.UnitId}",
         Open o => $"open {o.UnitId} {o.At}",
+        Drop d => $"drop {d.UnitId}",
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
@@ -2512,6 +2522,8 @@ public sealed class PlaySession
                 return $"{names[h.UnitId]} heals {h.Amount} (hp {h.HpAfter})";
             case UnitBurned b:
                 return $"{names[b.UnitId]} burns {b.Amount} (hp {b.HpAfter})";
+            case RockfallStruck r:
+                return $"  the rock strikes {names[r.UnitId]} at {r.At} for {r.Amount} (hp {r.HpAfter})";
             case UnitRested r:
                 return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
             case HungerDrained h:
