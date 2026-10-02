@@ -1271,11 +1271,13 @@ public sealed class CampaignSession
     /// </summary>
     private void PrintClasses(Unit? unit)
     {
-        _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}");
+        var advanced = _content.Classes.Values.Any(c => c.Advances is not null) ? $", {_content.Campaign.AdvancedCertificationPrice} for an advanced form" : "";
+        _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}{advanced}");
         var names = UnitNames.Of(_record, _content);
         foreach (var target in _content.Classes.Values.Where(c => !c.Hidden || c.Id == unit?.ClassId))
         {
-            var line = $"  {target.Name}: {target.Certification.Describe()}";
+            var from = target.Advances is { } basis ? $" (from {basis.Name})" : "";
+            var line = $"  {target.Name}{from}: {target.Certification.Describe()}";
             if (_content.Campaign.TrialFor(target.Id) is not null)
             {
                 line += "; or its trial in place of the seal";

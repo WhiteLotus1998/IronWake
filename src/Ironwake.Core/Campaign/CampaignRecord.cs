@@ -607,7 +607,7 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Certifies <paramref name="unitId"/> into <paramref name="classId"/> through
-    /// <see cref="Certifications.Check(Unit, UnitClass, UnitClass)"/> (issue 72), paying the seal, <see cref="CampaignRules.CertificationPrice"/>,
+    /// <see cref="Certifications.Check(Unit, UnitClass, UnitClass)"/> (issue 72), paying the seal, <see cref="CampaignRules.SealFor"/>,
     /// from the purse. Refused naming every requirement failed, or the price and the balance.
     /// </summary>
     public ScreenResult Certify(string unitId, string classId, GameContent content)
@@ -628,7 +628,7 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
         }
 
-        var price = content.Campaign.CertificationPrice;
+        var price = content.Campaign.SealFor(target);
         if (Purse < price)
         {
             return ScreenResult.Refused(this, $"a seal costs {price} and the purse holds {Purse}");

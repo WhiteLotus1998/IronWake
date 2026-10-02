@@ -49,6 +49,7 @@ public static class ContentSerializer
             writer.WriteStartObject();
             writer.WriteNumber("startingPurse", campaign.StartingPurse);
             writer.WriteNumber("certificationPrice", campaign.CertificationPrice);
+            writer.WriteNumber("advancedCertificationPrice", campaign.AdvancedCertificationPrice);
             writer.WriteStartArray("maps");
             foreach (var map in campaign.Maps)
             {
@@ -529,7 +530,14 @@ public static class ContentSerializer
 
         writer.WriteEndArray();
         WriteStats(writer, "modifiers", unitClass.Modifiers);
-        WriteStats(writer, "growthModifiers", unitClass.GrowthModifiers);
+        if (unitClass.Advances is { } basis)
+        {
+            writer.WriteString("advances", basis.Id);
+        }
+        else
+        {
+            WriteStats(writer, "growthModifiers", unitClass.GrowthModifiers);
+        }
         if (unitClass.Mastery is not null)
         {
             writer.WriteString("mastery", unitClass.Mastery);

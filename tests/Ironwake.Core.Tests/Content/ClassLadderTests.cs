@@ -44,11 +44,11 @@ public class ClassLadderTests
     }
 
     [Fact]
-    public void EveryRankTheLadderAsksIsInAWeaponTheCadetTrains()
+    public void EveryRankAFirstTierClassAsksIsInAWeaponTheCadetTrains()
     {
         var cadet = Content.Class("cadet");
 
-        Assert.All(Content.Classes.Values.SelectMany(c => c.Certification.Ranks), r => Assert.True(cadet.CanUse(r.Type), r.Type.ToString()));
+        Assert.All(Content.Classes.Values.Where(c => c.Advances is null).SelectMany(c => c.Certification.Ranks), r => Assert.True(cadet.CanUse(r.Type), r.Type.ToString()));
     }
 
     [Fact]
