@@ -72,6 +72,9 @@ public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEv
 /// <summary>A unit whose boss fell while it stood at or below half HP left the board (DESIGN.md 13.22, experiment).</summary>
 public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
 
+/// <summary>The enemy bound to a boss by the map's <c>freed:</c> header left the board when he fell (issue 750): not a kill.</summary>
+public sealed record UnitFreed(string UnitId, Coord At, int Hp) : GameEvent;
+
 /// <summary>The messenger reached its road and left the board, not a kill (DESIGN.md 13.24, experiment); its events fire next.</summary>
 public sealed record MessengerEscaped(string UnitId, Coord At) : GameEvent;
 

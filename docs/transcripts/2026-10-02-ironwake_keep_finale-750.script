@@ -1,0 +1,120 @@
+move wren 11,1
+wait wren
+move pell 12,1
+wait pell
+move rook 11,2
+wait rook
+move captain 11,5
+wait captain
+move ansgar 11,6
+wait ansgar
+move maud 12,5
+wait maud
+move ottilie 12,6
+wait ottilie
+move teodor 11,10
+wait teodor
+move dunstan 12,10
+wait dunstan
+move keziah 11,9
+wait keziah
+move brannock 14,8
+wait brannock
+end
+move pell 10,1
+attack pell finale_hunter-1 cinder
+move captain 10,5
+attack captain soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move ansgar 10,6
+attack ansgar brigand-1
+move maud 11,6
+wait maud
+wait wren
+wait rook
+wait teodor
+wait dunstan
+wait keziah
+move brannock 13,9
+wait brannock
+threat pell
+threat captain
+end
+recall
+recall 36
+move wren 10,1
+wait wren
+move pell 11,1
+wait pell
+move captain 10,5
+attack captain soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move ansgar 10,6
+wait ansgar
+move maud 11,6
+wait maud
+wait rook
+move dunstan 10,10
+wait dunstan
+wait teodor
+wait keziah
+move brannock 13,9
+wait brannock
+threat wren
+threat ansgar
+threat dunstan
+end
+attack wren brigand-2
+item maud 2 ansgar
+attack ansgar brigand-1
+attack dunstan soldier-2
+canto ansgar 13,6
+move captain 10,6
+attack captain brigand-1
+move ottilie 10,5
+wait ottilie
+wait pell
+wait rook
+wait keziah
+wait teodor
+wait brannock
+threat ottilie
+threat captain
+threat dunstan
+threat wren
+end
+attack pell finale_hunter-1 cinder
+move wren 12,2
+wait wren
+move rook 10,1
+wait rook
+move dunstan 13,10
+wait dunstan
+move keziah 10,10
+attack keziah soldier-2
+wait teodor
+move maud 12,9
+move ansgar 14,6
+wait ansgar
+wait ottilie
+wait captain
+wait brannock
+end
+move ottilie 11,5
+attack ottilie finale_hunter-1
+wait captain
+move teodor 11,6
+wait teodor
+move pell 12,4
+wait pell
+move maud 12,7
+wait maud
+wait rook
+wait wren
+move dunstan 14,10
+wait dunstan
+move brannock 12,10
+wait brannock
+end

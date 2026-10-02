@@ -129,6 +129,13 @@ public sealed record CampaignRecord(
     public bool Permadeath { get; init; } = true;
 
     /// <summary>
+    /// Whether the enemy bound by a won map's <c>freed:</c> header was killed before her boss fell
+    /// (issue 750, <see cref="BattleState.Bond"/>): once true, true for the rest of the campaign. The
+    /// founding's conditional paragraph reads it once #656 opens; nothing reads it before then.
+    /// </summary>
+    public bool FreedUnitFell { get; init; }
+
+    /// <summary>
     /// The difficulties this campaign was lowered from at a camp (issue 677), the one it began on
     /// first; empty when it never was. Printed on the record beside the difficulty.
     /// </summary>
@@ -380,7 +387,8 @@ public sealed record CampaignRecord(
     /// the one after. A lost battle ends the campaign, so it has no record after it. With
     /// <see cref="Permadeath"/> off a unit that fell comes back as it began the battle, wounded
     /// (<see cref="Wound.Inflict"/>); every other wound on the roster counts this main map down
-    /// (<see cref="Wound.Tick"/>), deployed or not.
+    /// (<see cref="Wound.Tick"/>), deployed or not. A bound enemy killed on the map is recorded
+    /// (<see cref="FreedUnitFell"/>, issue 750).
     /// </summary>
     public CampaignRecord AfterBattle(BattleState end, GameContent content)
     {
@@ -425,6 +433,7 @@ public sealed record CampaignRecord(
             TrialsTried = ValueList<TrialAttempt>.Empty,
             QuestsTried = ValueList<string>.Empty,
             Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
+            FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
         };
     }
 

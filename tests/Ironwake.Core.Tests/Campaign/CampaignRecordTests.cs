@@ -210,6 +210,33 @@ public class CampaignRecordTests
     }
 
     [Fact]
+    public void ABoundEnemyKilledOnAWonMapIsRecordedForTheRestOfTheCampaign()
+    {
+        var record = AtMap(2);
+
+        var fell = record.AfterBattle(Won(record) with { Bond = BondFate.Fell }, Content);
+        var freed = record.AfterBattle(Won(record) with { Bond = BondFate.Freed }, Content);
+
+        Assert.False(record.FreedUnitFell);
+        Assert.True(fell.FreedUnitFell);
+        Assert.False(freed.FreedUnitFell);
+        Assert.False(record.AfterBattle(Won(record), Content).FreedUnitFell);
+        Assert.True((record with { FreedUnitFell = true }).AfterBattle(Won(record), Content).FreedUnitFell);
+    }
+
+    [Fact]
+    public void TheRecordCarriesFreedUnitFellOnlyWhenTrue()
+    {
+        var record = AtMap(2);
+
+        Assert.DoesNotContain("freedUnitFell", Ironwake.Content.Protocol.ProtocolJson.Campaign(record));
+        var json = Ironwake.Content.Protocol.ProtocolJson.Campaign(record with { FreedUnitFell = true });
+        Assert.Contains("\"freedUnitFell\":true", json);
+        Assert.True(Ironwake.Content.Protocol.ProtocolJson.ReadCampaign(json, Content).FreedUnitFell);
+        Assert.False(Ironwake.Content.Protocol.ProtocolJson.ReadCampaign(Ironwake.Content.Protocol.ProtocolJson.Campaign(record), Content).FreedUnitFell);
+    }
+
+    [Fact]
     public void ADeployedUnitMissingFromTheWonBoardHasFallenAndLeavesTheRoster()
     {
         var record = AtMap(2);
