@@ -6,7 +6,7 @@ Updated: 2026-10-02. Rewritten, not appended; under 20 KB (issue 401); history i
 
 Phases 1 and 2 of DESIGN section 12 are built: rules, content, the cast of eleven, maps, combat on keyed rolls, Recall, the enemy AI, the console game (`ironwake play`, `campaign`, `threat`, `recall list`, `--protocol`) and the Sim with gates 1 to 8. Phase 3 is under way: abilities, ranks, arts, masteries, Canto, trials, the campaign with the keep and side maps, difficulty as data, map events, and the Godot client. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. The others wait on plays (Maps).
-2945 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+2944 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
