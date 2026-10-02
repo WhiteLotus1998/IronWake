@@ -102,4 +102,7 @@ public enum SidegradeMeasure
 {
     /// <summary>The farthest tile any healing spell the class casts reaches.</summary>
     Reach,
+
+    /// <summary>Str (Mag for a spell) plus the Mt of the strongest weapon the class strikes with (issue 706, the Scout).</summary>
+    Damage,
 }

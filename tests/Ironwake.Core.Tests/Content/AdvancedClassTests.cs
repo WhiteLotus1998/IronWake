@@ -49,7 +49,7 @@ public class AdvancedClassTests
     [Fact]
     public void AnAdvancedFormKeepsItsBasesWeaponsAndGrowths()
     {
-        foreach (var form in Content.Classes.Values.Where(c => c.Advances is not null))
+        foreach (var form in Content.Classes.Values.Where(c => c.Advances is not null && c.Unique is null))
         {
             Assert.All(form.Advances!.Weapons, w => Assert.True(form.CanUse(w), $"{form.Id} lacks {w}"));
             Assert.Equal(form.Advances.GrowthModifiers, form.GrowthModifiers);

@@ -380,6 +380,14 @@ public static class ContentSerializer
             case BraceEffect:
                 writer.WriteString("kind", "brace");
                 break;
+            case SightEffect sight:
+                writer.WriteString("kind", "sight");
+                writer.WriteNumber("tiles", sight.Tiles);
+                break;
+            case HeadcountEffect headcount:
+                writer.WriteString("kind", "headcount");
+                writer.WriteNumber("radius", headcount.Radius);
+                break;
             case RangeEffect reach:
                 writer.WriteString("kind", "range");
                 if (reach.Heals)
@@ -602,6 +610,10 @@ public static class ContentSerializer
         if (unitClass.Advances is { } basis)
         {
             writer.WriteString("advances", basis.Id);
+            if (unitClass.Unique is not null && unitClass.GrowthModifiers != basis.GrowthModifiers)
+            {
+                WriteStats(writer, "growthModifiers", unitClass.GrowthModifiers - basis.GrowthModifiers);
+            }
         }
         else
         {

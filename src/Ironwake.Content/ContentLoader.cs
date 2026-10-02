@@ -91,7 +91,9 @@ public static class ContentLoader
 
     /// <summary>
     /// Unique classes against the cast and the campaign (issue 706): a unique class's unit is in the cast
-    /// and not the captain, and its <c>unlockedBy</c> names a quest of the campaign whose member is that unit.
+    /// and not the captain, and its <c>unlockedBy</c> names a quest of the campaign whose member is that unit,
+    /// or an id of that unit's shape (<c>rook_1</c>) the campaign does not carry yet, a door no camp opens until
+    /// the quest is authored (issue 706 slice 2: Rook's quest waits on #633 and #656).
     /// Each is read only where the content has what it needs: a cast, a campaign with quests.
     /// </summary>
     private static void ValidateUniqueClasses(ContentFiles files, ImmutableSortedDictionary<string, UnitClass> classes, IReadOnlyList<Unit> cast, CampaignRules campaign)
@@ -103,9 +105,10 @@ public static class ContentLoader
                 throw new ContentException(files.Classes.Name, unitClass.Id, "unique", $"'{unitClass.Unique}' must be a cast member who is not the captain");
             }
 
-            if (unitClass.UnlockedBy is { } quest && campaign.Quests.Count > 0 && !campaign.Quests.Any(q => q.Id == quest && q.MemberId == unitClass.Unique))
+            if (unitClass.UnlockedBy is { } quest && campaign.Quests.Count > 0 && campaign.Quests.FirstOrDefault(q => q.Id == quest) is var named
+                && (named is null ? !quest.StartsWith(unitClass.Unique + "_", StringComparison.Ordinal) : named.MemberId != unitClass.Unique))
             {
-                throw new ContentException(files.Classes.Name, unitClass.Id, "unlockedBy", $"'{quest}' must be a quest in the campaign whose member is '{unitClass.Unique}'");
+                throw new ContentException(files.Classes.Name, unitClass.Id, "unlockedBy", $"'{quest}' must be a quest in the campaign whose member is '{unitClass.Unique}', or one of theirs not yet authored ('{unitClass.Unique}_<n>')");
             }
         }
     }
@@ -972,6 +975,24 @@ public static class ContentLoader
             case "brace":
                 RequireOnly(entry, effect, "effect", "kind");
                 return new BraceEffect();
+            case "sight":
+                RequireOnly(entry, effect, "effect", "kind", "tiles");
+                var sight = new SightEffect(effect.Int("tiles"));
+                if (sight.Tiles < 1)
+                {
+                    throw entry.Error("effect.tiles", "must be at least 1");
+                }
+
+                return sight;
+            case "headcount":
+                RequireOnly(entry, effect, "effect", "kind", "radius");
+                var headcount = new HeadcountEffect(effect.Int("radius"));
+                if (headcount.Radius < 1)
+                {
+                    throw entry.Error("effect.radius", "must be at least 1");
+                }
+
+                return headcount;
             case "range":
                 RequireOnly(entry, effect, "effect", "kind", "weapon", "heals", "range");
                 var heals = effect.BoolOr("heals", false);
@@ -1040,7 +1061,7 @@ public static class ContentLoader
 
                 return footing;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range, killheal, beside, aura or footing");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, mending, brace, sight, headcount, range, killheal, beside, aura or footing");
         }
     }
 
@@ -1646,12 +1667,12 @@ public static class ContentLoader
                 throw node.Error("advances", $"'{basisId}' is itself an advanced form; a class has one step above it");
             }
 
-            if (node.Has("growthModifiers"))
+            var form = builder[node.Entry!];
+            if (node.Has("growthModifiers") && form.Unique is null)
             {
-                throw node.Error("growthModifiers", $"an advanced form grows as its base, '{basisId}', does; name none");
+                throw node.Error("growthModifiers", $"an advanced form grows as its base, '{basisId}', does; name none (only a unique class names what it gives up)");
             }
 
-            var form = builder[node.Entry!];
             if (form.Captain != basis.Captain)
             {
                 throw node.Error("captain", $"must match its base, '{basisId}': an advanced form is on the captain's ladder exactly when its base is");
@@ -1662,7 +1683,8 @@ public static class ContentLoader
                 throw node.Error("weapons", $"must keep every weapon type of '{basisId}'; missing {weapon.ToString().ToLowerInvariant()}");
             }
 
-            builder[node.Entry!] = form with { GrowthModifiers = basis.GrowthModifiers, Advances = basis };
+            var growth = node.Has("growthModifiers") ? basis.GrowthModifiers + form.GrowthModifiers : basis.GrowthModifiers;
+            builder[node.Entry!] = form with { GrowthModifiers = growth, Advances = basis };
         }
 
         foreach (var node in entries)

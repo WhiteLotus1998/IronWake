@@ -1533,6 +1533,9 @@ public sealed class PlaySession
     /// and unpriced: <c>anvil: shieldbearer-1 could step to 17,0 so soldier-1 strikes you pinned
     /// from 19,0</c>, or <c>could hold 17,0</c> when the tile is the anvil's own; a plan with an
     /// enemy the player does not see is left out.
+    /// A sleeping group a player unit's headcount counts (issue 706, the Scout; <see cref="SleepingThreat.CountedBy"/>)
+    /// is priced member by member as an awake enemy is, with <c>if woken and all land</c>, never in the total:
+    /// <c>ford is asleep; Rook counts it, if woken:</c>.
     /// A stop that wakes a sleeping group (<see cref="Queries.StopWakes"/>, issue 458) is one row
     /// before the sleeping groups, naming each group and why, unpriced:
     /// <c>stopping here wakes: ford (proximity), weir (called by ford)</c>.
@@ -1644,7 +1647,20 @@ public sealed class PlaySession
 
         foreach (var group in asleep)
         {
-            rows.Add($"  {UnitNames.Group(group.Group)} is asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{names[m.Id]} at {m.At}"))}");
+            var priced = group.Priced.Where(l => group.Members.Any(m => m.Id == l.Enemy.Id)).ToList();
+            if (group.CountedBy is not { } counter || priced.Count == 0)
+            {
+                rows.Add($"  {UnitNames.Group(group.Group)} is asleep, could strike here if woken: {string.Join(", ", group.Members.Select(m => $"{names[m.Id]} at {m.At}"))}");
+                continue;
+            }
+
+            rows.Add($"  {UnitNames.Group(group.Group)} is asleep; {names[counter.Id]} counts it, if woken:");
+            foreach (var line in priced)
+            {
+                rows.Add($"    {names[line.Enemy.Id]} at {line.Enemy.At} from {line.From} with {line.Weapon.Name} (slot {line.Slot + 1}): {(line.Raises ? RaiseText(line.Forecast.Attacker) + "; counter: none" : StrikeText(line.Forecast.Attacker) + "; counter" + (line.Forecast.Defender.Strikes ? CounterWith(content, unit, line.From.DistanceTo(tile)) + ": " + StrikeText(line.Forecast.Defender) : ": none"))}");
+            }
+
+            rows.Add($"    if woken and all land: {Queries.IfAllLand(priced)} against {unit.Hp} hp (asleep, not in the total)");
         }
 
         if (asleep.Count > 0)
