@@ -61,6 +61,22 @@ public static class ContentLoader
             throw new ContentException(campaignText.Name, "quests", "rare", rare);
         }
 
+        foreach (var map in campaign.Maps)
+        {
+            foreach (var swap in map.Swaps)
+            {
+                if (!units.TryGetValue(swap.TemplateId, out var template))
+                {
+                    throw new ContentException(files.Campaign!.Name, map.MapId, "swap", $"'{swap.TemplateId}' is not a unit template");
+                }
+
+                if (cast.Any(u => u.Id == template.Id))
+                {
+                    throw new ContentException(files.Campaign!.Name, map.MapId, "swap", $"'{swap.TemplateId}' is in the cast, not an enemy template");
+                }
+            }
+        }
+
         return content;
     }
 
@@ -107,6 +123,10 @@ public static class ContentLoader
     /// A map's optional <c>arrives</c> (issue 632) lists the cast ids who join on it; a unit not in
     /// the cast, the captain (the cast's first, there from the start) and a unit arriving twice are
     /// refused. Whoever loads the map checks that it places each arrival by name.
+    /// A map's optional <c>enemyLevel</c> (issue 704) is the level the campaign fights it at, 1 to the
+    /// level cap, in place of the file's; its optional <c>swap</c> object maps an <c>x,y</c> tile to an
+    /// enemy template id the campaign fields there instead (a cast member is refused); whoever loads the
+    /// map checks that the tile holds an enemy placement (<see cref="CampaignMap.Prepare"/>).
     /// The optional <c>quests</c> array (issue 635) lists the side maps: each an <c>id</c> (unique),
     /// a <c>member</c> in the cast and not the captain, a <c>part</c> of 1 or 2 (one of each per
     /// member at most, part 2 only after that member's part 1 in the file), a <c>map</c> id under
@@ -220,11 +240,44 @@ public static class ContentLoader
                 }
             }
 
+            int? enemyLevel = null;
+            if (node.Has("enemyLevel"))
+            {
+                enemyLevel = node.Int("enemyLevel");
+                if (enemyLevel < Unit.MinLevel || enemyLevel > Unit.MaxLevel)
+                {
+                    throw node.Error("enemyLevel", $"must be between {Unit.MinLevel} and {Unit.MaxLevel}");
+                }
+            }
+
+            var swaps = new List<TemplateSwap>();
+            if (node.OptionalObject("swap") is { } swapNode)
+            {
+                foreach (var property in swapNode.Element.EnumerateObject())
+                {
+                    var parts = property.Name.Split(',');
+                    if (parts.Length != 2 || !int.TryParse(parts[0], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var x)
+                        || !int.TryParse(parts[1], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var y))
+                    {
+                        throw node.Error("swap", $"'{property.Name}' is not a tile; expected x,y");
+                    }
+
+                    if (property.Value.ValueKind != JsonValueKind.String || property.Value.GetString() is not { Length: > 0 } template)
+                    {
+                        throw node.Error("swap", $"'{property.Name}' must name a template id");
+                    }
+
+                    swaps.Add(new TemplateSwap(new Coord(x, y), template));
+                }
+            }
+
             maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock))
             {
                 Before = Card(node, "before"),
                 After = Card(node, "after"),
                 Arrives = ValueList<string>.From(arrives),
+                EnemyLevel = enemyLevel,
+                Swaps = ValueList<TemplateSwap>.From(swaps),
             });
             index++;
         }

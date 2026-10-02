@@ -75,6 +75,22 @@ public static class ContentSerializer
 
                     writer.WriteEndArray();
                 }
+
+                if (map.EnemyLevel is { } enemyLevel)
+                {
+                    writer.WriteNumber("enemyLevel", enemyLevel);
+                }
+
+                if (map.Swaps.Count > 0)
+                {
+                    writer.WriteStartObject("swap");
+                    foreach (var swap in map.Swaps)
+                    {
+                        writer.WriteString($"{swap.At.X},{swap.At.Y}", swap.TemplateId);
+                    }
+
+                    writer.WriteEndObject();
+                }
                 writer.WriteEndObject();
             }
 

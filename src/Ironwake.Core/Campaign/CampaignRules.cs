@@ -23,7 +23,46 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     /// arrives on; a recruit no map names is on the roster from the first map.
     /// </summary>
     public ValueList<string> Arrives { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
+    /// The enemy level this map is fought at in the campaign (issue 704, the curve of rounds 223 to 226),
+    /// in place of its file's <c>enemy_level</c>, or null to keep the file's. The standalone map is never
+    /// changed by it; a difficulty's offset is added on top, as on any map.
+    /// </summary>
+    public int? EnemyLevel { get; init; }
+
+    /// <summary>
+    /// The enemy placements this map fields a different template on in the campaign (issue 704): the
+    /// placement on each tile keeps its group, behaviour and boss flag and takes the named template.
+    /// The standalone map is never changed by it. Empty for a map fought as its file reads.
+    /// </summary>
+    public ValueList<TemplateSwap> Swaps { get; init; } = ValueList<TemplateSwap>.Empty;
+
+    /// <summary>
+    /// <paramref name="map"/> as the campaign fights it (issue 704): at <see cref="EnemyLevel"/> when one
+    /// is named and with every <see cref="Swaps"/> entry made. Throws when a swap's tile holds no enemy
+    /// placement, which the content tests hold for every shipped map.
+    /// </summary>
+    public MapDefinition Prepare(MapDefinition map)
+    {
+        var placements = map.Placements;
+        foreach (var swap in Swaps)
+        {
+            var index = placements.ToList().FindIndex(p => p is EnemyPlacement && p.At == swap.At);
+            if (index < 0)
+            {
+                throw new InvalidOperationException($"campaign map '{MapId}': swap at {swap.At} names a tile with no enemy placement");
+            }
+
+            placements = placements.SetItem(index, ((EnemyPlacement)placements[index]) with { TemplateId = swap.TemplateId });
+        }
+
+        return map with { EnemyLevel = EnemyLevel ?? map.EnemyLevel, Placements = placements };
+    }
 }
+
+/// <summary>A campaign-only template swap (issue 704): the enemy placement on <see cref="At"/> fields <see cref="TemplateId"/>.</summary>
+public sealed record TemplateSwap(Coord At, string TemplateId);
 
 /// <summary>
 /// A certification trial the campaign offers (issue 252, DESIGN section 13.6): the class it

@@ -16,7 +16,7 @@ public class AdvancedClassTests
     private static Unit Recruit(string id) => Content.Cast.Single(u => u.Id == id);
 
     private static Unit Ready(string id, string classId, WeaponType type) =>
-        Recruit(id) with { ClassId = classId, Level = 10, Skill = WeaponSkill.Zero.With(type, WeaponRanks.Threshold(WeaponRank.C)) };
+        Recruit(id) with { ClassId = classId, Level = 7, Skill = WeaponSkill.Zero.With(type, WeaponRanks.Threshold(WeaponRank.C)) };
 
     [Theory]
     [InlineData("halberdier", "pikeman", "lance")]
@@ -27,14 +27,14 @@ public class AdvancedClassTests
     [InlineData("lancer", "outrider", "lance")]
     [InlineData("skycaptain", "skyrider", "lance")]
     [InlineData("sentinel", "bulwark", "lance")]
-    public void EachFirstTierClassHasOneAdvancedFormAtLevelTenAndRankC(string formId, string baseId, string weapon)
+    public void EachFirstTierClassHasOneAdvancedFormAtLevelSevenAndRankC(string formId, string baseId, string weapon)
     {
         var form = Content.Class(formId);
 
         Assert.Equal(baseId, form.Advances?.Id);
         Assert.Equal(baseId, form.BaseId);
-        Assert.Equal(10, form.Certification.Level);
-        Assert.Equal($"level 10, {weapon} C", form.Certification.Describe());
+        Assert.Equal(7, form.Certification.Level);
+        Assert.Equal($"level 7, {weapon} C", form.Certification.Describe());
         Assert.Single(Content.Classes.Values, c => c.Advances?.Id == baseId);
     }
 
@@ -97,9 +97,9 @@ public class AdvancedClassTests
     [Fact]
     public void APikemanShortOfTheLevelAndTheRankIsRefusedNamingBoth()
     {
-        var pikeman = Recruit("teodor") with { ClassId = "pikeman", Level = 9, Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.D)) };
+        var pikeman = Recruit("teodor") with { ClassId = "pikeman", Level = 6, Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.D)) };
 
-        Assert.Equal(new[] { "needs level 10, has 9", "needs lance C, has D" }, Certifications.Check(pikeman, Content.Class("halberdier")).Select(r => r.Text));
+        Assert.Equal(new[] { "needs level 7, has 6", "needs lance C, has D" }, Certifications.Check(pikeman, Content.Class("halberdier")).Select(r => r.Text));
     }
 
     [Fact]

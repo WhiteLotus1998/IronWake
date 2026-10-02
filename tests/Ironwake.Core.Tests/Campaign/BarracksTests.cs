@@ -303,7 +303,7 @@ public class BarracksTranscriptTests
     {
         var transcripts = Path.Combine(Directory.GetParent(Ironwake.Core.Tests.Content.Fixture.RealContentDirectory())!.FullName, "docs", "transcripts");
         var script = Path.Combine(transcripts, "2026-10-01-campaign-690-barracks.script");
-        var args = new[] { "campaign", "--from", "ironwake_raid", "--seed", "690", "--script", script, "--content", Ironwake.Core.Tests.Content.Fixture.RealContentDirectory() };
+        var args = new[] { "campaign", "--from", "ironwake_raid", "--seed", "690", "--script", script, "--content", Ironwake.Core.Tests.Content.Fixture.CurveFreeContentDirectory() };
 
         var output = ConsoleCapture.Run(() => Ironwake.Cli.Program.Main(args));
 
