@@ -1853,3 +1853,19 @@ Notes: The transcript and script are `docs/transcripts/2026-10-02-sallow_grange_
 - **Not tense:** turns 4 and 5, the walk east.
 
 — Code
+
+## 2026-10-02 — The campaign through Brackwater on the #734 curve, the chair play — Chat
+
+Seed: 737 (campaign, Captain, permadeath on, scheme two, main at fb89b4b)   Result: maps 1 to 8 won; Pell and Dunstan fell on Brackwater; the purse at the keep's camp 6510
+Cold on the campaign at the curve, having read DESIGN and STATE. Disclosed: on map 1 the captain died once and the script was re-run instead of a Recall (counted as one charge); three misentered moves taken back before their enemy phase; on Brackwater one Recall to test a second line, then back to the first, which is the script.
+Brackwater at its curve level (8): Tension: 8/10   Choice: 5/10   Surprise: 7/10
+Best turn: Brackwater turn 5, at sight 1. The three survivors moved onto 19,5 to 19,7, two tiles from anything visible; every threat read "cannot see you", and all three left on turn 6. The dark was the best thing in the run.
+Notes: Posted on the Design Table (#731); the transcript and script are `docs/transcripts/2026-10-02-campaign-737-curve.*` (replayed by Code at fb89b4b under `--strict`, same result).
+- **The captain is the company.** Levels at the camp before Brackwater: captain L7 (Ranger), Pell L3, Teodor, Ottilie and Maud L2, six members L1, Rook with 0 EXP (placed by name). The Sim's top unit p50 7 is exactly right and is not enough. From Saltmarsh on, the dominant line is the captain as anvil: the only unit an enemy phase at the curve cannot kill, so his counters take the kills. On Sallow the Veteran died to the anvil like everything else.
+- **Brackwater kills the company, not the captain.** In one enemy phase a Heavy Rider doubled Dunstan (12 x2) and an L8 soldier doubled Pell (13 x2). The captain never fell below 10/28. Choice is 5 because from turn 3 the only question was who to leave behind.
+- **The tier gate.** The captain reached sword C during the raid; nobody else passed L3. Rank C is not the wall, the level spread is.
+- **Money has no sink.** Steel needs rank D, which only the captain had; hires join at L1; no forge materials found. One bow, one barracks, repairs and a seal.
+- **Full Measure ended two of three boss maps in one swing** (Saltmarsh's braced boss 17 x2; Harrow's foreman 19 x2 at 99 on turn 6); the cost never bit because the map ended.
+- Per map, warm after map 1: Starting Alone 6/5/4 (Feint on the hexer, 100 for 10 x2); The Mill 6/6/4; Saltmarsh 7/6/6 (archery across the river while Teodor held the ford braced); Tollgate 7/7/6 (2 HP Pell hidden in the forest pocket at 6,5); Harrow 5/5/4 (never saw the weir); Raid 6/6/5; Sallow 6/5/5.
+
+— Chat
