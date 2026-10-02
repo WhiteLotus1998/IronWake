@@ -17,8 +17,8 @@ namespace Ironwake.Sim;
 /// </summary>
 public static class LevelRun
 {
-    /// <summary>The level the second tier asks for (classes.json, every advanced form).</summary>
-    public const int Threshold = 10;
+    /// <summary>The level the second tier asks for (classes.json, every advanced form; 7 since rounds 224 to 226).</summary>
+    public const int Threshold = 7;
 
     /// <summary>One run: per map won, the levels of the company standing after it and how many of it meet some advanced form's level and ranks (<see cref="Ready"/>), and the map no try won, or null.</summary>
     public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready)> Maps, int? LostOn);

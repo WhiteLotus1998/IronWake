@@ -347,10 +347,13 @@ public sealed record CampaignRecord(
     /// so benching a unit lets the next recruit take its bare slot, which is a deployment and not
     /// gate 4's ablation. A named slot whose recruit has fallen, or was turned away for want of a bed (issue 687), stays empty. The map's arrivals
     /// join the roster for it (<see cref="Present"/>, issue 632). The battle knows which campaign map
-    /// it is (<see cref="BattleState.CampaignMap"/>), for an heirloom's floor (issue 646).
+    /// it is (<see cref="BattleState.CampaignMap"/>), for an heirloom's floor (issue 646). The map is
+    /// fought as the campaign lists it (<see cref="CampaignMap.Prepare"/>, issue 704): at its curve's enemy
+    /// level and with its template swaps, the difficulty's offset added after.
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
+        map = NextMap(content).Prepare(map);
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
         var roster = Present(content).Where(u => map.DeploysAll || !Benched.Contains(u.Id)).ToList();
         var turnedAway = TurnedAway(content);

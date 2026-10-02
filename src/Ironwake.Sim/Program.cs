@@ -135,6 +135,25 @@ public static class Program
             return LevelTable(seeds);
         }
 
+        if (args.Length > 0 && args[0] == "--curve")
+        {
+            var seeds = Gates.DefaultSeeds;
+            string? only = null;
+            for (var i = 1; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+                else if (args[i] == "--map")
+                {
+                    only = args[i + 1];
+                }
+            }
+
+            return CurveTable(seeds, only);
+        }
+
         if (args.Length > 0 && args[0] == "--keep")
         {
             return KeepGates(args.Skip(1).ToList());
@@ -175,7 +194,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -280,6 +299,60 @@ public static class Program
         foreach (var line in LevelRun.Lines(content, LevelRun.Measure(contentDir, content, seeds)))
         {
             Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The campaign's curve (issue 704, rounds 225 and 226): gate 1 on each campaign map as its file
+    /// reads and as the campaign fights it (<see cref="CampaignMap.Prepare"/>: the curve's enemy level
+    /// and the template swaps), side by side, so a tuned map whose campaign number falls under 60 is
+    /// seen before its standalone scores are cited for the campaign, and a third line with the file's party
+    /// raised by as many levels as the curve raised the enemy, a proxy for the company a campaign player
+    /// brings. A map the campaign fights as its file reads prints once. <paramref name="only"/> names one map. A measurement only.
+    /// </summary>
+    public static int CurveTable(int seeds, string? only)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("curve: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var entries = content.Campaign.Maps.Where(m => only is null || m.MapId == only).ToList();
+        if (entries.Count == 0)
+        {
+            Console.WriteLine($"curve: no campaign map '{only}'; the campaign lists {string.Join(", ", content.Campaign.Maps.Select(m => m.MapId))}");
+            return 2;
+        }
+
+        Console.WriteLine($"curve: {entries.Count} campaign maps, {seeds} seeds, gate 1 as the file reads and as the campaign fights it");
+        foreach (var entry in entries)
+        {
+            var number = content.Campaign.Maps.ToList().IndexOf(entry) + 1;
+            var map = MapFiles.Load(MapFiles.CampaignPath(contentDir, content, entry.MapId), content);
+            var fought = entry.Prepare(map);
+            var swaps = entry.Swaps.Count == 0 ? "no swaps" : string.Join(", ", entry.Swaps.Select(s => $"{s.TemplateId} at {s.At.X},{s.At.Y}"));
+            Console.WriteLine($"map {number} {entry.MapId}: enemy level {map.EnemyLevel} in the file, {fought.EnemyLevel} in the campaign, {swaps}");
+            var (file, _) = Gates.Gate1(content, map, entry.MapId, seeds);
+            Console.WriteLine("  file:     " + file.Line);
+            if (fought != map)
+            {
+                var (campaign, _) = Gates.Gate1(content, fought, entry.MapId, seeds);
+                Console.WriteLine("  campaign: " + campaign.Line);
+                var raise = fought.EnemyLevel - map.EnemyLevel;
+                if (raise > 0)
+                {
+                    // A proxy for the company a campaign player brings: the file's party raised by as many levels as the curve raised the enemy.
+                    var raised = ValueList<Unit>.From(content.Cast.Select(u => u.AtLevel(Math.Min(u.Level + raise, Unit.MaxLevel), content.Class(u.ClassId))));
+                    var party = content with { Cast = raised, Units = raised.Aggregate(content.Units, (units, u) => units.ContainsKey(u.Id) ? units.SetItem(u.Id, u) : units) };
+                    var (lifted, _) = Gates.Gate1(party, fought, entry.MapId, seeds);
+                    Console.WriteLine($"  party +{raise}: " + lifted.Line);
+                }
+            }
         }
 
         return 0;

@@ -93,6 +93,14 @@ internal static class Fixture
     /// </summary>
     public static string LadderFreeContentDirectory() => LadderFree.Value;
 
+    private static readonly Lazy<string> CurveFree = new(() => WithoutCurve(CopyContentAsIs("ironwake-curve-free-")));
+
+    /// <summary>
+    /// A copy of the real content directory without the campaign's enemy-level curve and template
+    /// swaps (issue 704) and nothing else changed, for a campaign transcript journaled before them. Made once per test run.
+    /// </summary>
+    public static string CurveFreeContentDirectory() => CurveFree.Value;
+
     private static readonly Lazy<string> KeepCampaign = new(CopyWithKeepCampaign);
 
     /// <summary>
@@ -105,7 +113,7 @@ internal static class Fixture
 
     private static string CopyWithKeepCampaign()
     {
-        var target = CopyRealContent("ironwake-keep-campaign-");
+        var target = WithoutCurve(CopyRealContent("ironwake-keep-campaign-"));
         var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
         var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
         var keep = campaign["keep"]!;
@@ -149,8 +157,8 @@ internal static class Fixture
     /// <summary>
     /// Takes every advanced form (issue 704) and the captain's ladder (issue 705) out of <c>classes.json</c>,
     /// and every enemy template in a form out of <c>units/enemies.json</c>: the class list a campaign journaled
-    /// before the second tier prints has none, its captain certified like anyone, and its dark reached as far
-    /// as the first tier's classes do.
+    /// before the second tier prints has none, its captain certified like anyone, its dark reached as far
+    /// as the first tier's classes do, and its maps were fought without the curve (<see cref="WithoutCurve"/>).
     /// </summary>
     public static string WithoutAdvancedForms(string target)
     {
@@ -175,6 +183,24 @@ internal static class Fixture
         }
 
         File.WriteAllText(enemiesPath, enemies.ToJsonString());
+        return WithoutCurve(target);
+    }
+
+    /// <summary>
+    /// Takes the campaign's enemy-level curve and template swaps (issue 704) out of <c>campaign.json</c>:
+    /// a campaign journaled before them fought every map at its file's level and placements.
+    /// </summary>
+    public static string WithoutCurve(string target)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        foreach (var map in campaign["maps"]!.AsArray())
+        {
+            map!.AsObject().Remove("enemyLevel");
+            map.AsObject().Remove("swap");
+        }
+
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
 
@@ -249,7 +275,7 @@ internal static class Fixture
     /// <c>forge</c> and the quests' material payouts are taken out too (issue 647), and before the
     /// barracks, so a hire's quest goes with the hires (issue 691).
     /// </summary>
-    private static string CopyRealContent(string prefix)
+    private static string CopyContentAsIs(string prefix)
     {
         var source = RealContentDirectory();
         var target = Path.Combine(Path.GetTempPath(), prefix + Guid.NewGuid().ToString("N"));
@@ -259,6 +285,13 @@ internal static class Fixture
             Directory.CreateDirectory(Path.GetDirectoryName(copy)!);
             File.Copy(file, copy);
         }
+
+        return target;
+    }
+
+    private static string CopyRealContent(string prefix)
+    {
+        var target = CopyContentAsIs(prefix);
 
         var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
         var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;

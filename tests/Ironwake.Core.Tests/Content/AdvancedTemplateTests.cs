@@ -66,10 +66,10 @@ public class AdvancedTemplateTests
     public void TheLevelTableCountsAUnitReadyOnlyAtTheFormsLevelAndRank()
     {
         var levy = Shipped.Cast[1];
-        var trained = levy with { Level = 10, Skill = WeaponSkill.Zero.With(WeaponType.Lance, 80) };
+        var trained = levy with { Level = 7, Skill = WeaponSkill.Zero.With(WeaponType.Lance, 80) };
 
         Assert.True(LevelRun.Ready(trained, Shipped));
-        Assert.False(LevelRun.Ready(trained with { Level = 9 }, Shipped));
+        Assert.False(LevelRun.Ready(trained with { Level = 6 }, Shipped));
         Assert.False(LevelRun.Ready(trained with { Skill = WeaponSkill.Zero.With(WeaponType.Lance, 79) }, Shipped));
     }
 }
