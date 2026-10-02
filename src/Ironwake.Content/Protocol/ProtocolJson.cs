@@ -791,17 +791,7 @@ public static class ProtocolJson
 
         WriteStrings(w, "fired", state.Fired);
         WriteStrings(w, "flags", state.Flags);
-        w.WriteStartArray("rapport");
-        foreach (var r in state.Rapport)
-        {
-            w.WriteStartObject();
-            w.WriteString("a", r.A);
-            w.WriteString("b", r.B);
-            w.WriteNumber("points", r.Points);
-            w.WriteEndObject();
-        }
-
-        w.WriteEndArray();
+        WriteRapport(w, state.Rapport);
         var outcome = state.Outcome;
         w.WriteStartObject("outcome");
         w.WriteString("result", Name(outcome.Result));
@@ -890,7 +880,7 @@ public static class ProtocolJson
             ReadStrings(e, "awakeGroups"),
             ReadStrings(e, "fired"),
             ReadStrings(e, "flags"),
-            ValueList<Rapport>.From(Array(Required(e, "rapport"), "rapport").Select(r => new Rapport(RequiredString(r, "a"), RequiredString(r, "b"), RequiredInt(r, "points")))),
+            ReadRapport(Required(e, "rapport")),
             e.TryGetProperty("escaped", out var escaped)
                 ? ValueList<BattleUnit>.From(Array(escaped, "escaped").Select(u => ReadUnit(u, content)))
                 : ValueList<BattleUnit>.Empty,
@@ -1280,6 +1270,11 @@ public static class ProtocolJson
             w.WriteBoolean("freedUnitFell", true);
         }
 
+        if (record.Rapport.Count > 0)
+        {
+            WriteRapport(w, record.Rapport);
+        }
+
         if (record.Origin is { } origin)
         {
             w.WriteString("origin", origin);
@@ -1435,10 +1430,30 @@ public static class ProtocolJson
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
+            Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),
         };
     }
+
+    /// <summary>The <c>rapport</c> array a board or a record carries (issues 16 and 77): each pair's ids and points.</summary>
+    private static void WriteRapport(Utf8JsonWriter w, ValueList<Rapport> rapport)
+    {
+        w.WriteStartArray("rapport");
+        foreach (var r in rapport)
+        {
+            w.WriteStartObject();
+            w.WriteString("a", r.A);
+            w.WriteString("b", r.B);
+            w.WriteNumber("points", r.Points);
+            w.WriteEndObject();
+        }
+
+        w.WriteEndArray();
+    }
+
+    private static ValueList<Rapport> ReadRapport(JsonElement array) =>
+        ValueList<Rapport>.From(Array(array, "rapport").Select(r => new Rapport(RequiredString(r, "a"), RequiredString(r, "b"), RequiredInt(r, "points"))));
 
     /// <summary>The optional <c>pronoun</c> of a roster unit (issue 681), chosen at the start; a unit without one reads the cast file's.</summary>
     private static Pronoun? ReadPronoun(JsonElement e, string id)

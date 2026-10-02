@@ -1534,6 +1534,11 @@ public sealed class CampaignSession
             lines.AddRange(UnitLines(record, content, unit, detail: false, typed));
         }
 
+        if (SupportsLine(record, content) is { } supports)
+        {
+            lines.Add(supports);
+        }
+
         if (record.Fallen.Count > 0)
         {
             var names = UnitNames.Of(record, content);
@@ -1541,6 +1546,23 @@ public sealed class CampaignSession
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// The roster's supports line (issue 77): each support pair of two living members whose rapport
+    /// on the record reaches a tier, in the campaign file's order, by name with the tier, as
+    /// <c>  Supports: Alder Fenn and Pell C, Maud and Pell B</c>; null when no pair stands at C.
+    /// </summary>
+    public static string? SupportsLine(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        var reached = content.Campaign.Supports
+            .Where(p => record.Find(p.A) is not null && record.Find(p.B) is not null)
+            .Select(p => (Pair: p, Tier: Supports.TierOf(content, p.A, p.B, record.RapportOf(p.A, p.B))))
+            .Where(t => t.Tier is not null)
+            .Select(t => $"{names[t.Pair.A]} and {names[t.Pair.B]} {t.Tier!.Name}")
+            .ToList();
+        return reached.Count == 0 ? null : "  Supports: " + string.Join(", ", reached);
     }
 
     /// <summary>

@@ -275,6 +275,9 @@ public sealed record OpponentCondition(WeaponType? Weapon, MovementType? Movemen
 public readonly record struct CombatBonus(int Hit, int Avoid, int Crit, int CritAvoid)
 {
     public static CombatBonus None => default;
+
+    public static CombatBonus operator +(CombatBonus a, CombatBonus b) =>
+        new(a.Hit + b.Hit, a.Avoid + b.Avoid, a.Crit + b.Crit, a.CritAvoid + b.CritAvoid);
 }
 
 /// <summary>

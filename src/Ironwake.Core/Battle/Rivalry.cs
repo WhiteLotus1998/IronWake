@@ -161,34 +161,54 @@ public static class Rivalry
     }
 
     /// <summary>
-    /// The end of a player phase: every adjacent pair of recruits one of whom some awake
-    /// enemy could strike next phase gains both rates, pairs in id order, with a
-    /// <see cref="RapportGained"/> each and a <see cref="RivalryEnded"/> for a rival pair
-    /// that crosses the threshold. A pair nobody can reach gains nothing (issue 209). No
-    /// header, no change.
+    /// Whether rapport accrues on this board: behind the <c>rivalry:</c> header, and on every main
+    /// campaign map (<see cref="BattleState.CampaignMap"/>), where support pairs grow (issue 77).
+    /// Rivalry's combat arm stays behind the header.
+    /// </summary>
+    public static bool Accrues(BattleState state) => state.Map.RivalryArm is not null || state.CampaignMap is not null;
+
+    /// <summary>
+    /// The end of a player phase: every adjacent pair one of whom some awake enemy could strike
+    /// next phase gains its rate, pairs in id order, with a <see cref="RapportGained"/> each and a
+    /// <see cref="RivalryEnded"/> for a rival pair that crosses the threshold. A pair nobody can
+    /// reach gains nothing (issue 209). Behind the header every pair of recruits accrues, at both
+    /// rates; off it only support pairs do (issue 77). A pair with the captain accrues only when it
+    /// is a support pair, at the recruit's rate alone, since the captain fights every map in every
+    /// one of their pairs. Nothing accrues where <see cref="Accrues"/> is false.
     /// </summary>
     public static BattleState Accrue(BattleState state, GameContent content, List<GameEvent> events)
     {
-        if (state.Map.RivalryArm is null)
+        if (!Accrues(state))
         {
             return state;
         }
 
+        var header = state.Map.RivalryArm is not null;
         var struck = Threat.StruckBy(state, content, Side.Enemy);
-        var recruits = state.Units.Where(IsRecruit).OrderBy(u => u.Id, StringComparer.Ordinal).ToList();
+        var members = state.Units.Where(u => IsRecruit(u) || (u.Side == Side.Player && u.IsCaptain)).OrderBy(u => u.Id, StringComparer.Ordinal).ToList();
         var table = state.Rapport.ToDictionary(r => (r.A, r.B), r => r.Points);
-        for (var i = 0; i < recruits.Count; i++)
+        for (var i = 0; i < members.Count; i++)
         {
-            for (var j = i + 1; j < recruits.Count; j++)
+            for (var j = i + 1; j < members.Count; j++)
             {
-                var a = recruits[i];
-                var b = recruits[j];
+                var a = members[i];
+                var b = members[j];
                 if (a.At.DistanceTo(b.At) != 1 || !(struck.Contains(a.At) || struck.Contains(b.At)))
                 {
                     continue;
                 }
 
-                var amount = RateOf(a, content) + RateOf(b, content);
+                var supported = Supports.Pair(content.Campaign, a.Id, b.Id) is not null;
+                int amount;
+                if (a.IsCaptain || b.IsCaptain)
+                {
+                    amount = supported ? RateOf(a.IsCaptain ? b : a, content) : 0;
+                }
+                else
+                {
+                    amount = header || supported ? RateOf(a, content) + RateOf(b, content) : 0;
+                }
+
                 if (amount == 0)
                 {
                     continue;
@@ -197,7 +217,7 @@ public static class Rivalry
                 var before = table.GetValueOrDefault((a.Id, b.Id));
                 var after = before + amount;
                 table[(a.Id, b.Id)] = after;
-                var wereRivals = a.Unit.Region != b.Unit.Region && before < content.Rivalry.OverwriteAt;
+                var wereRivals = header && IsRecruit(a) && IsRecruit(b) && a.Unit.Region != b.Unit.Region && before < content.Rivalry.OverwriteAt;
                 events.Add(new RapportGained(a.Id, b.Id, amount, after, wereRivals ? content.Rivalry.OverwriteAt : null));
                 if (wereRivals && after >= content.Rivalry.OverwriteAt)
                 {

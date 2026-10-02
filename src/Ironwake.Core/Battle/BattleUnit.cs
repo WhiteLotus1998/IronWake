@@ -228,7 +228,8 @@ public sealed record BattleUnit(
     /// <see cref="Brace.Hit"/> less when it is braced (DESIGN.md 13.14). On a <c>signatures: on</c>
     /// map a strike, never a counter, carries Teodor's orders or his watched penalty (DESIGN.md 13.18).
     /// A unit the pair rule binds cannot crit it when it has an ally beside it (<see cref="PairRule"/>, issue 692).
-    /// The captain's formation effects are read here too (<see cref="Formation"/>, issue 705).
+    /// The captain's formation effects are read here too (<see cref="Formation"/>, issue 705), and a support
+    /// partner's tier beside it joins the aura (<see cref="Supports.Bonus"/>, issue 77).
     /// An art that strikes once makes the side <see cref="Combatant.SingleStrike"/> (issue 739).
     /// An open unit answering a strike by an ally of its opener reads its Def and Res lower (<see cref="Opening.Lowered"/>, issue 772).
     /// </summary>
@@ -256,7 +257,7 @@ public sealed record BattleUnit(
             combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
         }
 
-        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) };
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) + Supports.Bonus(state, content, this) };
     }
 
     /// <summary>

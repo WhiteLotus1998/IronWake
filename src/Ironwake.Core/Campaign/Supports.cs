@@ -54,4 +54,35 @@ public static class Supports
     /// </summary>
     public static SupportTier? TierOf(GameContent content, string a, string b, int points) =>
         Pair(content.Campaign, a, b) is null ? null : content.Rivalry.TierFor(points);
+
+    /// <summary>
+    /// The support bonus <paramref name="unit"/> fights with where it stands (issue 77): of the
+    /// living allies adjacent to it with whom it is a support pair, the best tier their rapport on
+    /// this board reaches, as that tier's hit, avoid and crit. Two partners beside it give the best
+    /// of the two, never the sum. None when no partner beside it stands at C or better. The unit
+    /// itself is skipped by id, so a forecast may pass it at a tile it has not moved to yet.
+    /// </summary>
+    public static CombatBonus Bonus(BattleState state, GameContent content, BattleUnit unit)
+    {
+        if (content.Rivalry.SupportTiers.Count == 0 || content.Campaign.Supports.Count == 0)
+        {
+            return CombatBonus.None;
+        }
+
+        SupportTier? best = null;
+        foreach (var other in state.Units)
+        {
+            if (other.Id == unit.Id || other.Side != unit.Side || other.At.DistanceTo(unit.At) != 1)
+            {
+                continue;
+            }
+
+            if (TierOf(content, unit.Id, other.Id, Rivalry.PointsOf(state, unit.Id, other.Id)) is { } tier && (best is null || tier.At > best.At))
+            {
+                best = tier;
+            }
+        }
+
+        return best is null ? CombatBonus.None : new CombatBonus(best.Hit, best.Avoid, best.Crit, 0);
+    }
 }
