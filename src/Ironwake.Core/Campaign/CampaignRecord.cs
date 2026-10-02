@@ -93,6 +93,20 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<string> Wagon { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>
+    /// Each pair's rapport across the campaign (issue 77), sorted by pair as
+    /// <see cref="BattleState.Rapport"/> is: a battle begins with it on the board and a won map,
+    /// or any decided side map, writes the board's back. Support tiers read it.
+    /// </summary>
+    public ValueList<Rapport> Rapport { get; init; } = ValueList<Rapport>.Empty;
+
+    /// <summary>The rapport of <paramref name="a"/> and <paramref name="b"/> on the record, 0 when they have none.</summary>
+    public int RapportOf(string a, string b)
+    {
+        var (first, second) = string.CompareOrdinal(a, b) <= 0 ? (a, b) : (b, a);
+        return Rapport.FirstOrDefault(r => r.A == first && r.B == second)?.Points ?? 0;
+    }
+
     /// <summary>The uses below which the camp warns on leaving that an equipped weapon is low (issue 647).</summary>
     public const int LowUses = 5;
 
@@ -404,7 +418,7 @@ public sealed record CampaignRecord(
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
-        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1 };
+        return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
     }
 
     /// <summary>
@@ -466,6 +480,7 @@ public sealed record CampaignRecord(
             QuestsTried = ValueList<string>.Empty,
             Wagon = ValueList<string>.From(Wagon.Concat(end.Wagon)),
             FreedUnitFell = FreedUnitFell || end.Bond == BondFate.Fell,
+            Rapport = end.Rapport,
         };
     }
 
@@ -1005,7 +1020,7 @@ public sealed record CampaignRecord(
             throw new ArgumentException($"{quest.MemberId} and {string.Join(", ", allyIds)} must all be on the roster");
         }
 
-        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme);
+        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme) with { Rapport = Rapport };
     }
 
     /// <summary>
@@ -1088,6 +1103,7 @@ public sealed record CampaignRecord(
             CommonMaterial = CommonMaterial + common,
             RareMaterial = RareMaterial + rare,
             Wagon = won ? ValueList<string>.From(Wagon.Concat(end.Wagon)) : Wagon,
+            Rapport = end.Rapport,
         };
         var dead = lost.Count > 0 ? $"; fallen for good: {string.Join(", ", lost)}"
             : wounded.Count > 0 ? $"; fell and came back wounded: {string.Join(", ", wounded)}"

@@ -1655,6 +1655,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 14/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
 > end
+Rapport Alder Fenn and Wren +2 (2)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: wait archer-1
@@ -1789,6 +1790,8 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 11/21  Plain  group kee
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
 > end
 Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 7 hp)
+Rapport Alder Fenn and Teodor +2 (2)
+Rapport Alder Fenn and Wren +2 (4)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-1 teodor
@@ -1904,6 +1907,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 5/21   Plain  group kee
 B  wren             Wren L1 cadet              6,3    hp 20/20  Plain  done
 > end
 Lethal if all land: Wren (Archer 1 for 6, Bandit Leader for 12, Toll Warden for 8, against 20 hp)
+Rapport Alder Fenn and Wren +2 (6)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack archer-1 wren
@@ -2423,6 +2427,8 @@ B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 > end
 Lethal if all land: Alder Fenn (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 22 hp)
 Lethal if all land: Pell (Toll Warden for 9, against 8 hp)
+Rapport Alder Fenn and Pell +2 (2)
+Rapport Pell and Wren +4 (4)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-1 captain
@@ -2664,6 +2670,7 @@ C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain  done
 > end
 Lethal if all land: Pell (Bandit Leader for 14, against 9 hp)
+Rapport Pell and Wren +4 (8)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack bandit_leader-1 pell

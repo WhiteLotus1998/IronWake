@@ -269,6 +269,39 @@ public class CampaignRecordTests
     }
 
     [Fact]
+    public void ABattleBeginsWithTheRecordsRapportAndAWonMapWritesTheBoardsBack()
+    {
+        var record = AtMap(2) with { Rapport = ValueList<Rapport>.Of(new Rapport("pell", "wren", 20)) };
+
+        var opening = record.Begin(Map(record.NextMap(Content).MapId), Content);
+        var after = record.AfterBattle(Won(record) with { Rapport = ValueList<Rapport>.Of(new Rapport("pell", "wren", 44)) }, Content);
+
+        Assert.Equal(record.Rapport, opening.Rapport);
+        Assert.Equal(44, after.RapportOf("wren", "pell"));
+        Assert.Equal(0, after.RapportOf("wren", "teodor"));
+    }
+
+    [Fact]
+    public void TheRecordCarriesRapportThroughTheSave()
+    {
+        var record = AtMap(2);
+        var supported = record with { Rapport = ValueList<Rapport>.Of(new Rapport("maud", "pell", 41)) };
+
+        Assert.DoesNotContain("\"rapport\"", Ironwake.Content.Protocol.ProtocolJson.Campaign(record));
+        Assert.Equal(supported.Rapport, Ironwake.Content.Protocol.ProtocolJson.ReadCampaign(Ironwake.Content.Protocol.ProtocolJson.Campaign(supported), Content).Rapport);
+    }
+
+    [Fact]
+    public void TheRosterPrintsEachSupportPairAtATier()
+    {
+        var record = AtMap(2);
+
+        Assert.Null(Ironwake.Cli.CampaignSession.SupportsLine(record, Content));
+        var line = Ironwake.Cli.CampaignSession.SupportsLine(record with { Rapport = ValueList<Rapport>.Of(new Rapport("pell", "wren", 16), new Rapport("teodor", "wren", 15)) }, Content);
+        Assert.Equal("  Supports: Wren and Pell C", line);
+    }
+
+    [Fact]
     public void TheRecordCarriesFreedUnitFellOnlyWhenTrue()
     {
         var record = AtMap(2);

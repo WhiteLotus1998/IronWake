@@ -361,6 +361,7 @@ a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
 > end
+Rapport Pell and Wren +4 (4)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
 Reinforcements arrive
@@ -712,6 +713,8 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          10,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > end
+Rapport Alder Fenn and Pell +2 (2)
+Rapport Dunstan and Teodor +3 (3)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
 Reinforcements arrive
@@ -1056,6 +1059,8 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > end
 Lethal if all land: Wren (Brigand 2 for 11, Brigand 3 for 11, against 20 hp)
+Rapport Alder Fenn and Pell +2 (4)
+Rapport Pell and Wren +4 (8)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 enemy: move brigand-2 8,5
@@ -1372,6 +1377,9 @@ B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > end
 Lethal if all land: Ottilie (Soldier 2 for 10, against 7 hp)
 Lethal if all land: Wren (Soldier 2 for 9, against 9 hp)
+Rapport Alder Fenn and Ottilie +2 (2)
+Rapport Alder Fenn and Pell +2 (6)
+Rapport Ottilie and Wren +4 (4)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: move soldier-2 8,4
@@ -2039,6 +2047,7 @@ e  soldier-2        Soldier L2 pikeman         3,8    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > end
+Rapport Teodor and Wren +4 (4)
 -- Player phase ends, turn 1 --
 -- Enemy phase, turn 1 --
 enemy: move archer-1 7,4
@@ -2302,6 +2311,8 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > end
+Rapport Alder Fenn and Ottilie +2 (2)
+Rapport Teodor and Wren +4 (8)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
 Reinforcements arrive
@@ -2649,6 +2660,8 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
+Rapport Alder Fenn and Ottilie +2 (4)
+Rapport Ottilie and Wren +4 (4)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 Reinforcements arrive
@@ -2932,6 +2945,9 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
+Rapport Alder Fenn and Ottilie +2 (6)
+Rapport Alder Fenn and Pell +2 (6)
+Rapport Ottilie and Wren +4 (8)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 Reinforcements arrive
@@ -3246,6 +3262,8 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > end
+Rapport Alder Fenn and Pell +2 (8)
+Rapport Alder Fenn and Wren +2 (2)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 Reinforcements arrive
@@ -3606,6 +3624,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > end
+Rapport Alder Fenn and Pell +2 (10)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 Reinforcements arrive
@@ -3921,6 +3940,9 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > end
+Rapport Alder Fenn and Pell +2 (12)
+Rapport Alder Fenn and Wren +2 (4)
+Rapport Dunstan and Teodor +3 (6)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: move archer-3 9,7
@@ -4273,6 +4295,7 @@ o  soldier-5        Soldier L2 pikeman         6,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,3   hp 21/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > end
+Rapport Teodor and Wren +4 (12)
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
 enemy: move archer-3 9,3
