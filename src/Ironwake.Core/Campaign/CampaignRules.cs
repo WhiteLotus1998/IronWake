@@ -25,6 +25,16 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     public ValueList<string> Arrives { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// The recruits who join the company at this map's camp (issue 763, DESIGN section 14), as cast
+    /// ids: each is off the roster until this map and is then present like an arrival, but placed on
+    /// no tile of its own; the map's bare slots take them in roster order, so they may sit the battle
+    /// out and still join. A recruit who joins in the middle of the campaign could never have been fed,
+    /// so every joiner and arrival joins at no less than the living company's median level
+    /// (<see cref="CampaignRecord.JoinLevel"/>). Empty for a map nobody joins at.
+    /// </summary>
+    public ValueList<string> Joins { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
     /// The enemy level this map is fought at in the campaign (issue 704, the curve of rounds 223 to 226),
     /// in place of its file's <c>enemy_level</c>, or null to keep the file's. The standalone map is never
     /// changed by it; a difficulty's offset is added on top, as on any map.
@@ -154,14 +164,14 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     public CaptainOrigin? Origin(string originId) => Origins.FirstOrDefault(o => o.Id == originId);
 
     /// <summary>
-    /// The index of the map <paramref name="unitId"/> arrives on (issue 632), or -1 for a unit no
-    /// map names, who is on the roster from the first map.
+    /// The index of the map <paramref name="unitId"/> arrives on (issue 632) or joins at (issue 763),
+    /// or -1 for a unit no map names, who is on the roster from the first map.
     /// </summary>
     public int ArrivalIndex(string unitId)
     {
         for (var i = 0; i < Maps.Count; i++)
         {
-            if (Maps[i].Arrives.Contains(unitId))
+            if (Maps[i].Arrives.Contains(unitId) || Maps[i].Joins.Contains(unitId))
             {
                 return i;
             }

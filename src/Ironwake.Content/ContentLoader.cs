@@ -155,7 +155,9 @@ public static class ContentLoader
     /// <c>before</c> and <c>after</c> are its text cards (issue 631), read by <see cref="Card"/>.
     /// A map's optional <c>arrives</c> (issue 632) lists the cast ids who join on it; a unit not in
     /// the cast, the captain (the cast's first, there from the start) and a unit arriving twice are
-    /// refused. Whoever loads the map checks that it places each arrival by name.
+    /// refused. Whoever loads the map checks that it places each arrival by name. A map's optional
+    /// <c>joins</c> (issue 763) lists the cast ids who join the company at its camp, unplaced, under the
+    /// same refusals; an id named in both lists or on two maps is refused.
     /// A map's optional <c>enemyLevel</c> (issue 704) is the level the campaign fights it at, 1 to the
     /// level cap, in place of the file's; its optional <c>swap</c> object maps an <c>x,y</c> tile to an
     /// enemy template id the campaign fields there instead (a cast member is refused); whoever loads the
@@ -255,21 +257,25 @@ public static class ContentLoader
             }
 
             var arrives = node.StringArrayOrEmpty("arrives");
-            foreach (var id in arrives)
+            var joins = node.StringArrayOrEmpty("joins");
+            foreach (var (field, named) in new[] { ("arrives", arrives), ("joins", joins) })
             {
-                if (!cast.Contains(id))
+                foreach (var id in named)
                 {
-                    throw node.Error("arrives", $"'{id}' is not in the cast");
-                }
+                    if (!cast.Contains(id))
+                    {
+                        throw node.Error(field, $"'{id}' is not in the cast");
+                    }
 
-                if (cast.Count > 0 && cast[0] == id)
-                {
-                    throw node.Error("arrives", $"'{id}' is the captain, who leads from the first map");
-                }
+                    if (cast.Count > 0 && cast[0] == id)
+                    {
+                        throw node.Error(field, $"'{id}' is the captain, who leads from the first map");
+                    }
 
-                if (arrives.Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id)))
-                {
-                    throw node.Error("arrives", $"'{id}' arrives on more than one map");
+                    if (arrives.Concat(joins).Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id) || m.Joins.Contains(id)))
+                    {
+                        throw node.Error(field, $"'{id}' arrives or joins on more than one map");
+                    }
                 }
             }
 
@@ -309,6 +315,7 @@ public static class ContentLoader
                 Before = Card(node, "before"),
                 After = Card(node, "after"),
                 Arrives = ValueList<string>.From(arrives),
+                Joins = ValueList<string>.From(joins),
                 EnemyLevel = enemyLevel,
                 Swaps = ValueList<TemplateSwap>.From(swaps),
             });

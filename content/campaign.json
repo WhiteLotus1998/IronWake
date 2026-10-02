@@ -33,7 +33,7 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "iron_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "harrow_weir", "reward": 1200, "enemyLevel": 2,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
-    { "map": "ironwake_raid", "reward": 1000, "enemyLevel": 6,
+    { "map": "ironwake_raid", "reward": 1000, "joins": ["rook"], "enemyLevel": 6,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400, "enemyLevel": 7, "swap": { "7,5": "veteran" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },

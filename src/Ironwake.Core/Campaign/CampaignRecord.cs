@@ -259,25 +259,56 @@ public sealed record CampaignRecord(
         ValueList<Unit>.From(content.Cast.Where(u => content.Campaign.ArrivalIndex(u.Id) < index));
 
     /// <summary>
-    /// The roster with the next map's arrivals joined (issue 632, DESIGN section 14), every unit in
-    /// cast order: who the next battle may deploy and who comes back from it. Equal to
-    /// <see cref="Roster"/> on a map nobody arrives on, and once the campaign is finished.
+    /// The roster with the next map's arrivals and joiners joined (issues 632 and 763, DESIGN section 14),
+    /// each at no less than <see cref="JoinLevel"/>, every unit in cast order: who the next battle may
+    /// deploy and who comes back from it, deployed or not. Equal to <see cref="Roster"/> on a map nobody
+    /// arrives on or joins at, and once the campaign is finished.
     /// </summary>
     public ValueList<Unit> Present(GameContent content)
     {
-        if (IsFinished(content) || NextMap(content).Arrives.Count == 0)
+        if (IsFinished(content) || (NextMap(content).Arrives.Count == 0 && NextMap(content).Joins.Count == 0))
         {
             return Roster;
         }
 
-        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).ToList();
+        var level = JoinLevel(content);
+        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).Select(u => u.ScaledTo(level, content.Class(u.ClassId))).ToList();
         var order = content.Cast.Select(u => u.Id).ToList();
         return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
 
-    /// <summary>The next map's arrivals not yet on the roster or fallen, in content order (issue 632).</summary>
+    /// <summary>
+    /// The level a recruit joining now joins at, at least (issue 763, rounds 228 and 234): the living
+    /// company's median level, the lower middle's and upper middle's mean rounded down on an even count.
+    /// A joiner below it is raised to it on the average growth <c>play --level</c> uses
+    /// (<see cref="Unit.ScaledTo"/>), never lowered. The rule is join-time, never deploy-time: a recruit
+    /// left on the bench is never raised by it.
+    /// </summary>
+    public int JoinLevel(GameContent content)
+    {
+        var levels = Roster.Select(u => u.Level).Order().ToList();
+        if (levels.Count == 0)
+        {
+            return Unit.MinLevel;
+        }
+
+        var mid = levels.Count / 2;
+        return levels.Count % 2 == 1 ? levels[mid] : (levels[mid - 1] + levels[mid]) / 2;
+    }
+
+    /// <summary>
+    /// The next map's arrivals and joiners (issue 763) whom <see cref="JoinLevel"/> raises, each with the
+    /// level it joins at, in content order; the turned away are left out, since they never join.
+    /// </summary>
+    public IReadOnlyList<(string Id, int Level)> RaisedOnJoining(GameContent content)
+    {
+        var level = JoinLevel(content);
+        return Arriving(content).Take(Room(content)).Where(id => content.Unit(id).Level < level).Select(id => (id, level)).ToList();
+    }
+
+    /// <summary>The next map's arrivals and joiners not yet on the roster or fallen, in content order (issues 632, 763).</summary>
     private IEnumerable<string> Arriving(GameContent content) =>
-        IsFinished(content) ? Enumerable.Empty<string>() : NextMap(content).Arrives.Where(id => Find(id) is null && !Fallen.Contains(id));
+        IsFinished(content) ? Enumerable.Empty<string>() : NextMap(content).Arrives.Concat(NextMap(content).Joins).Where(id => Find(id) is null && !Fallen.Contains(id));
 
     /// <summary>
     /// The keep's beds (issue 687, DESIGN section 13.20): the beds it starts with and every bought

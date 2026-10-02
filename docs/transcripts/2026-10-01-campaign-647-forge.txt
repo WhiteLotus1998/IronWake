@@ -9,13 +9,12 @@ Campaign, seed 698, difficulty Captain, permadeath off, scheme TwoRollAverage, 9
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 11)
+Deploys to The Tollgate: Alder Fenn, Wren, Teodor, Pell (deploy 4 of 10)
 == Keep ==
 Purse: 500
-Rooms: beds: 11/12; a fallen member keeps their bed
+Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
@@ -707,7 +706,7 @@ She has not said whether the day was worth it. She has started asking
 the company whether they want the prayer before she says it.
 
 > roster
-Roster: company 11/12
+Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0, Wounded (2); 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
@@ -716,7 +715,6 @@ Roster: company 11/12
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 > show wren
@@ -2733,13 +2731,12 @@ The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
-Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah (deploy 6 of 11)
+Deploys to Harrow Weir: Alder Fenn, Teodor, Ottilie, Pell, Dunstan, Keziah (deploy 6 of 10)
 == Keep ==
 Purse: 1500
-Rooms: beds: 11/12; a fallen member keeps their bed
+Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
@@ -2754,7 +2751,7 @@ Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captain Fenn must survive.
 > keep
-Rooms: beds: 11/12; a fallen member keeps their bed
+Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
@@ -2768,9 +2765,9 @@ Refine Iron Lance: Iron Lance +1, Acc 70, Power 7, for 1 common material and 100
 > refine captain 1 hit
 Refine Iron Sword: Iron Sword +1, Acc 80, Power 5, for 1 common material and 100; the purse holds 700
 > build bunk
-Bunk room built for 400, the purse holds 300; beds: 11/14
+Bunk room built for 400, the purse holds 300; beds: 10/14
 > roster
-Roster: company 11/12
+Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword +1 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 54; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3
@@ -2779,11 +2776,10 @@ Roster: company 11/12
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 82; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 > keep
-Rooms: beds: 11/14; a fallen member keeps their bed
+Rooms: beds: 10/14; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 1 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 1 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
