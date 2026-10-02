@@ -72,6 +72,13 @@ public sealed record BattleUnit(
     bool Pressed = false,
     bool FallingBack = false)
 {
+    /// <summary>
+    /// The chill clock (issue 702 slice 2, <see cref="Frost"/>): 0 unchilled; 1 struck by frozen iron,
+    /// its side's next phase not yet begun; 2 that phase under way, cleared when it ends. While it is
+    /// not 0 the unit's Mov is one less, never below 1 (<see cref="Frost.Mov"/>).
+    /// </summary>
+    public int Chill { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 
@@ -117,7 +124,7 @@ public sealed record BattleUnit(
         var unitClass = content.Class(Unit.ClassId);
         return content.Weapons.TryGetValue(item.ItemId, out var weapon) && Unit.CanWield(weapon, unitClass) && !weapon.Heals
             && (item.Uses > 0 || !weapon.IsMagic)
-            ? Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item)
+            ? Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(weapon, item), item), item), item, content)
             : null;
     }
 
@@ -158,12 +165,18 @@ public sealed record BattleUnit(
     /// <summary>
     /// The weapon in <see cref="EquippedSlot"/>, or null when the unit has none, in which case it can neither attack nor counter.
     /// A hungering weapon comes back as its stack has grown or starved it (<see cref="Kinsbane.Shape"/>),
-    /// an heirloom at the stage its stack has reached (<see cref="Heirloom.Shape"/>), and either with the forge's steps on it (<see cref="Forge.Shape"/>).
+    /// an heirloom at the stage its stack has reached (<see cref="Heirloom.Shape"/>), either with the forge's steps on it (<see cref="Forge.Shape"/>), and marked frozen iron when its stack has made it so (<see cref="Frost.Shape"/>).
     /// </summary>
     public Weapon? EquippedWeapon(GameContent content)
     {
         var slot = EquippedSlot(content);
-        return slot < 0 ? null : Forge.Shape(Heirloom.Shape(Kinsbane.Shape(content.Weapon(Unit.Inventory.Items[slot].ItemId), Unit.Inventory.Items[slot]), Unit.Inventory.Items[slot]), Unit.Inventory.Items[slot]);
+        if (slot < 0)
+        {
+            return null;
+        }
+
+        var stack = Unit.Inventory.Items[slot];
+        return Frost.Shape(Forge.Shape(Heirloom.Shape(Kinsbane.Shape(content.Weapon(stack.ItemId), stack), stack), stack), stack, content);
     }
 
     /// <summary>Whether the equipped weapon is at zero uses and fights at the broken fallback.</summary>

@@ -492,11 +492,14 @@ public sealed record BattleState(
         }
     }
 
-    /// <summary>Where a unit may move, by the section 4 rule on the board as it stands.</summary>
+    /// <summary>
+    /// Where a unit may move, by the section 4 rule on the board as it stands: its class's Mov, one
+    /// more when Pressed (issue 85), one less when chilled, never below 1 (issue 702, <see cref="Frost.Mov"/>).
+    /// </summary>
     public Reach ReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var mov = unitClass.Mov + (unit.Pressed ? 1 : 0);
+        var mov = Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit);
         return Movement.Reach(Map, content, unit.At, unitClass.Movement, mov, at => OccupantAt(at, unit.Side));
     }
 

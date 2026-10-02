@@ -1595,6 +1595,16 @@ public static class ContentLoader
                 throw node.Error("glass", "a glass weapon is a physical shop weapon with a price, bound to no one");
             }
 
+            if (node.BoolOr("frozenIron", false) && node.BoolOr("hungers", false))
+            {
+                throw node.Error("frozenIron", "a hungering weapon is never frozen iron; it is what the iron holds");
+            }
+
+            if (node.BoolOr("frozenIron", false) && (heals || type.IsMagic()))
+            {
+                throw node.Error("frozenIron", "frozen iron is a physical weapon, never a spell");
+            }
+
             var effective = node.StringArrayOrEmpty("effective")
                 .Select(e => node.ParseEnum<MovementType>("effective", e)).ToList();
             if (effective.Distinct().Count() != effective.Count)
@@ -1628,6 +1638,7 @@ public static class ContentLoader
                 Hungers = node.BoolOr("hungers", false),
                 Heirloom = heirloom,
                 Glass = node.BoolOr("glass", false),
+                FrozenIron = node.BoolOr("frozenIron", false),
             });
         }
 

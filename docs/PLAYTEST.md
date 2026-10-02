@@ -1785,3 +1785,17 @@ Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_pair
 - **Not tense:** turns 7 and 9. Once the south pair was gone it was the captain and Ottilie in the courtyard waiting for the archers, with the lord still at 0,6. Whether he advances on arrival is the open slice-5 question again.
 
 — Code
+
+## 2026-10-02 — The Tollgate (frost), chill (#702 slice 2), the warm play — Code
+
+Seed: 702   Result: won, turn 10 of 10 (the captain on the gate with Pell at 2 HP), one Recall spent, two left
+Systems entry on `docs/samples/the_tollgate_frost.map` (the Tollgate with Teodor carrying the woken Family Lance, `woken: teodor`). I wrote the rule this hour, so this is a warm play, not a Fun Gate entry. The question: does chill read, and does it ever change a move?
+Tension: 6/10   Choice: 5/10   Surprise: 4/10
+Best turn: turn 7, after the Recall. On the first try Teodor stepped onto 6,3 to finish the warden and died to the archer and the boss, exactly as the `Lethal if all land` line had said. Recalled, he stayed on 6,4 and took the warden with Long Thrust at range 2 instead. That turn was the plan the board had been printing.
+Notes: The transcript and script are `docs/transcripts/2026-10-02-the_tollgate_frost-702.*`.
+- **It reads.** Every forecast with the lance said `chills`, the enemy's counter line included (`counter with Family Lance: acc 88% dmg 15 crit 1% chills`). The brigand's card said `chilled: Mov -1 until enemy phase ends`. I never had to wonder whether a strike would chill.
+- **Found in play, and fixed in this PR.** The rider attacked Teodor on the enemy phase and was chilled by the counter. The event said `until enemy phase ends`, with the enemy phase still under way, which reads as "for the rest of this phase", a chill that does nothing. Under the rule it lasts through the *next* enemy phase. The event and the card now say `until the next enemy phase ends` whenever the clock hasn't begun yet on the struck side's own phase.
+- **It never changed a move.** Five chills landed: the brigand and the warden twice each (both `hold`, so neither walks) and the rider once. Teodor killed the rider on the next player phase, before it could ride short. On the Tollgate the only thing that moves dies to the unit that chilled it. Chill needs a board where a mobile enemy survives a hit and still has somewhere to go: a cavalry wave, or a runner like 13.24's messenger. That's the board to read it on, not this one.
+- **Not tense:** turns 1 and 2, the march. The same as every Tollgate play.
+
+— Code

@@ -947,7 +947,8 @@ public sealed class PlaySession
                 }
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names));
+                var (chills, counterChills) = Chills(_content, attacker!, target!, attack.Slot);
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1352,7 +1353,8 @@ public sealed class PlaySession
         var (with, counterWith) = Arms(content, unit, target, slot, tile);
         var raises = RaisesWith(state, content, unit, slot);
         var names = UnitNames.Of(state, content);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names) };
+        var (chills, counterChills) = Chills(content, unit, target, slot);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             lines.Add(lethal);
@@ -1660,7 +1662,7 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null)
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false)
     {
         names ??= UnitNames.None;
         if (raises)
@@ -1668,8 +1670,16 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) : ": none")}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none")}";
     }
+
+    /// <summary>
+    /// Whether each side of a forecast strikes with frozen iron (issue 702, <see cref="Frost"/>): the
+    /// attacker with <paramref name="slot"/> (else its equipped weapon), the target with the weapon it
+    /// holds in front. The forecast line prints <c>chills</c> after that side's strike columns.
+    /// </summary>
+    public static (bool Chills, bool CounterChills) Chills(GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
+        (Resolver.ChooseWeapon(unit, content, slot).Weapon is { FrozenIron: true }, target.EquippedWeapon(content) is { FrozenIron: true });
 
     /// <summary>
     /// The weapon suffixes of a forecast line (DESIGN.md 13.11, issue 313): <c> with Toll Axe</c>
@@ -1861,6 +1871,11 @@ public sealed class PlaySession
         }
 
         lines.Add($"  Weapon: {WeaponLine(unit, content)}");
+        if (unit.EquippedWeapon(content) is { FrozenIron: true })
+        {
+            lines.Add($"  Frozen iron: a hit chills, Mov -{Frost.MovLost} until the end of the target's side's next phase");
+        }
+
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
         lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = content.Class(unit.Unit.ClassId).Weapons
@@ -1913,6 +1928,11 @@ public sealed class PlaySession
         if (unit.Pressed)
         {
             lines.Add("  Pressed: +1 Mov this phase");
+        }
+
+        if (Frost.CardLine(state, unit) is { } chilled)
+        {
+            lines.Add("  " + chilled);
         }
 
         if (unit.FallingBack)
@@ -2386,6 +2406,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
+            case UnitChilled c:
+                return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case HeirloomTurned t:
                 return $"{content.ItemName(t.ItemId)} turns in {names[t.UnitId]}'s hands: {t.StageId}. {Heirloom.Shape(content.Weapon(t.ItemId), new ItemStack(t.ItemId, 0) { Stage = t.Stage }).Description}";
             case WatchTaken w:
