@@ -22,6 +22,7 @@ public static class Program
     private const int Gate7Seeds = 5;
     private const int Gate7LimitMs = 1000;
     private const int Gate5MinimumCombats = 10000;
+    private const string LadderSmokeMap = "the_tollgate";
 
     public static int Main(string[] args)
     {
@@ -154,6 +155,25 @@ public static class Program
             return CurveTable(seeds, only);
         }
 
+        if (args.Length > 0 && args[0] == "--ladder")
+        {
+            var seeds = Gates.DefaultSeeds;
+            string? only = null;
+            for (var i = 1; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+                else if (args[i] == "--map")
+                {
+                    only = args[i + 1];
+                }
+            }
+
+            return LadderTable(seeds, only);
+        }
+
         if (args.Length > 0 && args[0] == "--keep")
         {
             return KeepGates(args.Skip(1).ToList());
@@ -194,7 +214,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -356,6 +376,45 @@ public static class Program
         }
 
         return 0;
+    }
+
+    /// <summary>
+    /// The captain's ladder's bar (issue 705, <see cref="LadderRun"/>): per content map, or the one
+    /// <paramref name="only"/> names, gate 1 and gate 4 with the captain unpromoted and in each ladder
+    /// class, then the tier spreads against the 5-point bar. Exits non-zero when any map misses the bar.
+    /// </summary>
+    public static int LadderTable(int seeds, string? only)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("ladder: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        var maps = MapFiles.LoadAll(contentDir, content).Where(m => only is null || m.Id == only).ToList();
+        if (maps.Count == 0)
+        {
+            Console.WriteLine($"ladder: no map '{only}' under {contentDir}");
+            return 2;
+        }
+
+        Console.WriteLine($"ladder: {maps.Count} maps, {seeds} seeds, the captain unpromoted and in {string.Join(", ", LadderRun.Ladder(content).Select(c => c.Id))}");
+        var failed = false;
+        foreach (var (id, map) in maps)
+        {
+            var reading = LadderRun.Measure(content, id, map, seeds);
+            foreach (var line in LadderRun.Lines(reading))
+            {
+                Console.WriteLine(line);
+            }
+
+            failed |= !reading.Passed;
+        }
+
+        Console.WriteLine(failed ? "ladder: FAILED" : "ladder: ok");
+        return failed ? 1 : 0;
     }
 
     /// <summary>
@@ -854,6 +913,10 @@ public static class Program
         failed |= !Print(Gate7(content, maps));
         failed |= !Print(Gate8(content, maps));
         failed |= !Print(CeilingGate(content));
+        var ladderMap = maps.FirstOrDefault(m => m.Id == LadderSmokeMap);
+        failed |= !Print(ladderMap.Map is null
+            ? new GateResult($"origin by class: no map '{LadderSmokeMap}': FAILED", false)
+            : LadderRun.OriginByClass(content, ladderMap.Id, ladderMap.Map));
         Console.WriteLine(failed ? "smoke: FAILED" : "smoke: ok");
         return failed ? 1 : 0;
     }
