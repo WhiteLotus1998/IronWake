@@ -8,8 +8,13 @@ namespace Ironwake.Core;
 /// </summary>
 public abstract record Command;
 
-/// <summary>Move a unit to a tile in its reach (section 4). Once per phase, before it acts.</summary>
-public sealed record Move(string UnitId, Coord To) : Command;
+/// <summary>
+/// Move a unit to a tile in its reach (section 4). Once per phase, before it acts. With
+/// <paramref name="Via"/> the unit walks its cheapest route to that tile, then its cheapest from
+/// there to <paramref name="To"/>, the two together within its Mov (13.25, issue 782): the
+/// player's way to pick which planks a walk spends.
+/// </summary>
+public sealed record Move(string UnitId, Coord To, Coord? Via = null) : Command;
 
 /// <summary>
 /// Attack an enemy within the unit's weapon range. Ends the unit's action.

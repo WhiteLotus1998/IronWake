@@ -35,6 +35,7 @@ public static class Script
         return (words[0], words.Length) switch
         {
             ("move", 3) when TryCoord(words[2], out var to) => new Move(words[1], to),
+            ("move", 5) when words[3] == "via" && TryCoord(words[2], out var to) && TryCoord(words[4], out var via) => new Move(words[1], to, via),
             ("attack", 3) => new Attack(words[1], words[2], null, art),
             ("attack", 4) when int.TryParse(words[3], out var slot) => new Attack(words[1], words[2], slot - 1, art),
             ("item", 3 or 4) when int.TryParse(words[2], out var slot) => new UseItem(words[1], slot - 1, words.Length == 4 ? words[3] : null),
