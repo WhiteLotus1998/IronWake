@@ -50,13 +50,7 @@ public static class ContentLoader
         var abilities = ParseAbilities(files.Abilities);
         foreach (var ability in abilities.Values)
         {
-            var named = ability.Effect switch
-            {
-                FootingEffect footing => footing.Terrain,
-                GroundStatsEffect ground => ground.Terrain,
-                _ => default,
-            };
-            if (named.FirstOrDefault(id => !terrain.ContainsKey(id)) is { } unknown)
+            if (ability.Effect is FootingEffect footing && footing.Terrain.FirstOrDefault(id => !terrain.ContainsKey(id)) is { } unknown)
             {
                 throw new ContentException(files.Abilities.Name, ability.Id, "effect.terrain", $"unknown terrain '{unknown}': not in {ContentFiles.TerrainName}");
             }
@@ -1009,28 +1003,8 @@ public static class ContentLoader
                 }
 
                 return footing;
-            case "ground":
-                RequireOnly(entry, effect, "effect", "kind", "terrain", "stats");
-                var ground = effect.StringArray("terrain");
-                if (ground.Count == 0)
-                {
-                    throw entry.Error("effect.terrain", "must name at least one terrain");
-                }
-
-                var grounded = ParseStats(effect.Object("stats"), allRequired: false);
-                if (grounded == Stats.Zero)
-                {
-                    throw entry.Error("effect.stats", "must change at least one stat");
-                }
-
-                if (grounded.Hp != 0)
-                {
-                    throw entry.Error("effect.stats.hp", "max HP cannot move with the ground; name another stat");
-                }
-
-                return new GroundStatsEffect(ValueList<string>.From(ground), grounded);
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range, killheal, beside, aura, footing or ground");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range, killheal, beside, aura or footing");
         }
     }
 

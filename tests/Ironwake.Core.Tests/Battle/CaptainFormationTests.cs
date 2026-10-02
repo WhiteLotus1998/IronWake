@@ -7,9 +7,8 @@ namespace Ironwake.Core.Tests.Battle;
 /// The captain's ladder's verbs (issue 705, slice 2; DESIGN section 3): the Vanguard's Shoulder to
 /// Shoulder (+1 Def and +1 Res with an ally orthogonally beside), the Marshal's Command Presence
 /// (allies within 2 tiles fight at +10 Acc) and the Commander's Field Command (+10 Evade, the same
-/// shape), the Pathfinder's Trail Sense (forest and hill cost 1) and the Ranger's Hunter's Ground
-/// (+2 Def and +2 Spd on forest or hill, DECISIONS/0165). Played on the shipped Saltmarsh Ford's open
-/// south rows and the forest at 2,6.
+/// shape), and the Pathfinder's Trail Sense (forest and hill cost 1). Played on the shipped Saltmarsh
+/// Ford's open south rows and the forest at 2,6.
 /// </summary>
 public class CaptainFormationTests
 {
@@ -192,53 +191,7 @@ public class CaptainFormationTests
     }
 
     [Fact]
-    public void HuntersGroundAddsDefAndSpdToTheRangerOnForest()
-    {
-        var state = Clear(As(Placed(), 0, "ranger", new Coord(2, 8)), 1);
-        var id = Player(state, 0).Id;
-        var plain = state.Find(id)!.ToCombatant(state, Shipped).Stats;
-        var wooded = At(state, 0, new Coord(2, 6));
-
-        Assert.Equal(plain with { Def = plain.Def + 2, Spd = plain.Spd + 2 }, wooded.Find(id)!.ToCombatant(wooded, Shipped).Stats);
-
-        var vanguard = Clear(As(Placed(), 0, "vanguard", new Coord(2, 8)), 1);
-        var inWood = At(vanguard, 0, new Coord(2, 6));
-        Assert.Equal(vanguard.Find(id)!.ToCombatant(vanguard, Shipped).Stats, inWood.Find(id)!.ToCombatant(inWood, Shipped).Stats);
-    }
-
-    [Fact]
-    public void HuntersGroundNamesOnlyItsTerrain()
-    {
-        var abilities = ValueList<Ability>.Of(Shipped.Ability("hunters_ground"));
-        var bonus = Stats.Zero with { Def = 2, Spd = 2 };
-
-        Assert.Equal(bonus, AbilityRules.Ground(abilities, "forest"));
-        Assert.Equal(bonus, AbilityRules.Ground(abilities, "hill"));
-        Assert.Equal(Stats.Zero, AbilityRules.Ground(abilities, "plain"));
-        Assert.Equal(Stats.Zero, AbilityRules.Ground(abilities, "fort"));
-        Assert.Equal(Stats.Zero, AbilityRules.Ground(ValueList<Ability>.Empty, "forest"));
-    }
-
-    [Fact]
-    public void HuntersGroundReachesTheForecastsNumbers()
-    {
-        int Taken(string classId, Coord at)
-        {
-            var state = Clear(As(Placed(), 0, classId, at), 1);
-            var soldier = Melee(state) with { At = new Coord(2, 7) };
-            state = state.WithUnit(soldier);
-            var id = Player(state, 0).Id;
-            return Core.Combat.Forecast(state.Find(soldier.Id)!.ToCombatant(state, Shipped), state.Find(id)!.Answering(state, Shipped, soldier.At), 1, state.Scheme).Attacker.Damage;
-        }
-
-        var ranger = Taken("ranger", new Coord(2, 8)) - Taken("ranger", new Coord(2, 6));
-        var vanguard = Taken("vanguard", new Coord(2, 8)) - Taken("vanguard", new Coord(2, 6));
-
-        Assert.Equal(vanguard + 2, ranger);
-    }
-
-    [Fact]
-    public void EachCaptainsClassNamesAMasteryAndTheRangerAndPathfinderAddTheirGround()
+    public void EachCaptainsClassNamesAMasteryAndThePathfinderAddsTrailSense()
     {
         Assert.Equal("shoulder_to_shoulder", Shipped.Class("vanguard").Mastery);
         Assert.Equal("command_presence", Shipped.Class("marshal").Mastery);
@@ -247,7 +200,6 @@ public class CaptainFormationTests
         Assert.Equal("field_command", Shipped.Class("commander").Mastery);
         Assert.Equal("light_step", Shipped.Class("pathfinder").Mastery);
         Assert.Equal(ValueList<string>.Of("trail_sense"), Shipped.Class("pathfinder").Abilities);
-        Assert.Equal(ValueList<string>.Of("hunters_ground"), Shipped.Class("ranger").Abilities);
         Assert.All(Shipped.Classes.Values.Where(c => c.Captain), c => Assert.Equal(12, c.MasteryPoints));
     }
 }

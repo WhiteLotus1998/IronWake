@@ -47,9 +47,6 @@ public enum AbilityTrigger
 
     /// <summary>Whenever the holder's reach is walked: a cheaper step on named terrain (issue 705).</summary>
     OnMove,
-
-    /// <summary>In a fight, while the holder stands on named terrain: the Ranger's stats (issue 705).</summary>
-    OnGround,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -202,17 +199,6 @@ public sealed record FootingEffect(ValueList<string> Terrain, int Cost) : Abilit
 }
 
 /// <summary>
-/// The Ranger's Hunter's Ground (issue 705, DECISIONS/0165): <see cref="Delta"/> added to the holder's
-/// stats in a fight while it stands on a tile of any of <see cref="Terrain"/>, read from the terrain
-/// <see cref="Combatant"/> already carries (<see cref="AbilityRules.Ground"/>), so the forecast, the
-/// resolver and both planners read one number wherever they place the holder.
-/// </summary>
-public sealed record GroundStatsEffect(ValueList<string> Terrain, Stats Delta) : AbilityEffect
-{
-    public override AbilityTrigger Trigger => AbilityTrigger.OnGround;
-}
-
-/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -301,21 +287,6 @@ public static class AbilityRules
             if (ability.Effect is BesideStatsEffect beside)
             {
                 total += beside.Delta;
-            }
-        }
-
-        return total;
-    }
-
-    /// <summary>The sum of every <see cref="GroundStatsEffect"/> in <paramref name="abilities"/> that names <paramref name="terrain"/>: what the holder gains standing there (issue 705).</summary>
-    public static Stats Ground(ValueList<Ability> abilities, string terrain)
-    {
-        var total = Stats.Zero;
-        foreach (var ability in abilities)
-        {
-            if (ability.Effect is GroundStatsEffect ground && ground.Terrain.Contains(terrain))
-            {
-                total += ground.Delta;
             }
         }
 
