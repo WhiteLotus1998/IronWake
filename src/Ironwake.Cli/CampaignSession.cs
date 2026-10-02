@@ -1275,6 +1275,11 @@ public sealed class CampaignSession
         var parts = form.Weapons.Where(w => !basis.CanUse(w))
             .Select(w => form.StrikeOnly.Contains(w) ? $"{w.Label()} (strike spells only)" : w.Label())
             .ToList();
+        if (form.Movement != basis.Movement)
+        {
+            parts.Insert(0, form.Movement.ToString().ToLowerInvariant());
+        }
+
         if (form.Mov > basis.Mov)
         {
             parts.Add($"+{form.Mov - basis.Mov} Mov");

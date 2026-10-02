@@ -167,6 +167,7 @@ public class CampaignCliTests
             Assert.Contains("  Berserker (from Reaver; adds Blood Price): level 10, axe C", output);
             Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov): level 10, lance C", output);
             Assert.Contains("  Vanguard: level 3 -- needs level 3, has 1\n", output);
+            Assert.Contains("  Commander (from Marshal; adds cavalry, lance, +2 Mov): level 10, sword C -- needs to be a Marshal first;", output);
             Assert.Contains("  Champion (from Vanguard; adds axe): level 10, sword C -- needs to be a Vanguard first; needs level 10, has 1; needs sword C, has E\n", output);
             Assert.Contains("ERROR: No unit 'nobody' on the roster\n", output);
         }
