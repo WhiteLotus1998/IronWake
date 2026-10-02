@@ -4,14 +4,20 @@ using Ironwake.Core;
 
 namespace Ironwake.Sim;
 
-/// <summary>What one unit did in one game, the action mix gate 4 prints beside the drop (DESIGN.md section 11).</summary>
-public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed)
+/// <summary>
+/// What one unit did in one game, the action mix gate 4 prints beside the drop (DESIGN.md section 11).
+/// <see cref="Opened"/> counts the enemies the unit's attacks opened (issue 772, <see cref="UnitOpened"/>),
+/// <see cref="Converted"/> the kills an ally then made on an enemy the unit had opened, and <see cref="Decided"/>
+/// those of them the mark made: the ally's hits, each without the lowered Def or Res, would have left the enemy
+/// standing (<see cref="Runner.MarkDecided"/>). The three print only when the unit opened any.
+/// </summary>
+public sealed record ActionMix(int Attacks, int Damage, int Heals, int Absorbed, int Opened = 0, int Converted = 0, int Decided = 0)
 {
     public static ActionMix Zero { get; } = new(0, 0, 0, 0);
 
-    public ActionMix Plus(ActionMix other) => new(Attacks + other.Attacks, Damage + other.Damage, Heals + other.Heals, Absorbed + other.Absorbed);
+    public ActionMix Plus(ActionMix other) => new(Attacks + other.Attacks, Damage + other.Damage, Heals + other.Heals, Absorbed + other.Absorbed, Opened + other.Opened, Converted + other.Converted, Decided + other.Decided);
 
-    public override string ToString() => $"atk {Attacks} dmg {Damage} heal {Heals} abs {Absorbed}";
+    public override string ToString() => $"atk {Attacks} dmg {Damage} heal {Heals} abs {Absorbed}" + (Opened > 0 ? $" opened {Opened} converted {Converted} decided {Decided}" : "");
 }
 
 /// <summary>
@@ -228,7 +234,7 @@ public static class Runner
                     throw new InvalidOperationException($"{command} was rejected: {result.Rejection!.Message}");
                 }
 
-                Tally(mix, result.Events);
+                Tally(mix, result.Events, state, result.Next, content);
                 foreach (var (unitId, _, type, counter, itemId) in WeaponMix.Strikes(state, content, command, result.Events))
                 {
                     weapons[unitId] = weapons.GetValueOrDefault(unitId, WeaponMix.Zero).With(type, counter);
@@ -316,7 +322,12 @@ public static class Runner
         _ => null,
     };
 
-    private static void Tally(Dictionary<string, ActionMix> mix, IReadOnlyList<GameEvent> events)
+    /// <summary>
+    /// Adds <paramref name="events"/> to <paramref name="mix"/>. <paramref name="before"/> is the board the command was
+    /// applied to and <paramref name="after"/> the board it left: a kill on a unit open before, by anyone but its opener,
+    /// is a conversion credited to the opener (issue 772), and a decided one when <see cref="MarkDecided"/> says so.
+    /// </summary>
+    private static void Tally(Dictionary<string, ActionMix> mix, IReadOnlyList<GameEvent> events, BattleState before, BattleState after, GameContent content)
     {
         foreach (var e in events)
         {
@@ -324,6 +335,12 @@ public static class Runner
             {
                 case CombatFought fought when mix.ContainsKey(fought.AttackerId):
                     mix[fought.AttackerId] = mix[fought.AttackerId].Plus(new ActionMix(1, fought.Strikes.Where(s => s.AttackerId == fought.AttackerId).Sum(s => s.Damage), 0, 0));
+                    if (fought.TargetHpAfter <= 0 && before.Find(fought.TargetId)?.Open is { } open && open.By != fought.AttackerId && mix.ContainsKey(open.By))
+                    {
+                        var decided = MarkDecided(before, after, content, fought, open) ? 1 : 0;
+                        mix[open.By] = mix[open.By].Plus(ActionMix.Zero with { Converted = 1, Decided = decided });
+                    }
+
                     break;
                 case CombatFought fought when mix.ContainsKey(fought.TargetId) && fought.Phase == Side.Enemy:
                     mix[fought.TargetId] = mix[fought.TargetId].Plus(new ActionMix(0, fought.Strikes.Where(s => s.AttackerId == fought.TargetId).Sum(s => s.Damage), 0, 1));
@@ -331,8 +348,29 @@ public static class Runner
                 case ItemUsed used when mix.ContainsKey(used.UnitId) && used.TargetId != used.UnitId:
                     mix[used.UnitId] = mix[used.UnitId].Plus(new ActionMix(0, 0, 1, 0));
                     break;
+                case UnitOpened opened when mix.ContainsKey(opened.ByUnitId):
+                    mix[opened.ByUnitId] = mix[opened.ByUnitId].Plus(ActionMix.Zero with { Opened = 1 });
+                    break;
             }
         }
+    }
+
+    /// <summary>
+    /// Whether the open mark made <paramref name="fought"/>'s kill (issue 772): each of the attacker's hits taken back by
+    /// what the mark lowered the target's Def (or Res, for a magic weapon) by, times the crit multiplier on a crit, never
+    /// below 0, and the sum short of the target's HP on <paramref name="before"/>. The weapon is the one the attacker
+    /// held in front on <paramref name="after"/>, where an attack's named slot stays, or on <paramref name="before"/> when it fell.
+    /// </summary>
+    public static bool MarkDecided(BattleState before, BattleState after, GameContent content, CombatFought fought, OpenMark open)
+    {
+        var target = before.Find(fought.TargetId)!;
+        var weapon = (after.Find(fought.AttackerId) ?? before.Find(fought.AttackerId)!).EquippedWeapon(content);
+        var lowered = Opening.Lowered(open, target.ToCombatant(before, content, countering: true).Stats);
+        var cut = weapon is { IsMagic: true } ? -lowered.Res : -lowered.Def;
+        var without = fought.Strikes
+            .Where(s => s.AttackerId == fought.AttackerId && s.Hit)
+            .Sum(s => Math.Max(0, s.Damage - cut * (s.Crit ? Combat.CritMultiplier : 1)));
+        return without < target.Hp;
     }
 }
 

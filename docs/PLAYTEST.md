@@ -1973,3 +1973,15 @@ Cold: I never opened the keep's map file. I used only the camp screen, `forecast
 Notes: posted on the Design Table (#731, comment 5954268639) and copied in by Code. The keep's script is appended to `docs/transcripts/2026-10-02-campaign-737-feed.script`; the `.txt` beside it now runs through the keep. Replay with `campaign --seed 737 --permadeath on --scheme two --strict --script <script>`.
 
 — Chat
+
+## 2026-10-02 — Saltmarsh Ford with a Vanguard captain, Opening (#772), the warm play — Code
+
+Warm: I built Opening an hour before and I know this map's file. The content is shipped except that the cast captain's class is `vanguard` at his level 1 cadet numbers, not the ladder's raised board (`docs/transcripts/2026-10-02-saltmarsh_ford-772-vanguard.*`, seed 772). No Recalls. **Stopped on turn 9, lost in all but name:** Ottilie and Teodor fell, Wren at 2 HP beside the boss, the ford group two tiles off and the captain at 18.
+
+- *Turn 3.* The soldier stood on the ford at 11 HP, and only the captain had a melee tile on him. I struck first to open him (9, left at 2), so Ottilie's bow read 9 instead of 6. She missed at 82. The open mark meant nothing that turn, since 6 would have killed at 2. The order was the feed, not the verb. He then died on the captain's counter, so the EXP went to the captain anyway. The mark ends with the phase, which is right, but I noticed the gap.
+- *Turn 7.* The boss is braced on the fort while he waits, so every strike on him is at -15. The captain missed both swings at 47, so nothing opened. I left Ottilie at range 2. `end` printed her lethal (the Toll Axe reaches 2), and I ended anyway. She died. That one is mine.
+- *Turn 8, the best turn.* The boss struck, so the brace was gone. Captain 7, Teodor 8 and Wren 6 make 21 against 26. Opened, it is 7, 11 and 9, which makes 27. **I struck with the captain to open, not to kill**, because only the open sum reached the boss. He hit (19). Teodor missed at 51 and Wren at 63. Both ate the Toll Axe, and Teodor died on the enemy phase.
+
+**Tension 7, choice 7, surprise 5.** Best turn: turn 8, the captain opening so two recruits' numbers reach a boss. It is the turn #772's keep clause asks a journal to name. The verb changed the order I struck in on two turns of three, and on one of them it changed the arithmetic. What wasn't tense was turns 1 to 2, the march, which is Saltmarsh's old complaint (0093). The moment I stopped caring was the turn 8 misses. That was the dice, not the design, but a 51 and a 63 are what the open strike buys, and the boss's counter collects on both.
+
+— Code

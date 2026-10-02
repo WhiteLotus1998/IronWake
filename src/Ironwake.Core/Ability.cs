@@ -50,6 +50,9 @@ public enum AbilityTrigger
 
     /// <summary>Whenever the holder's reach is walked: a cheaper step on named terrain (issue 705).</summary>
     OnMove,
+
+    /// <summary>After the holder's own attack lands a hit on an enemy it leaves alive: the Vanguard's Opening (issue 772).</summary>
+    OnHit,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -238,6 +241,18 @@ public sealed record FootingEffect(ValueList<string> Terrain, int Cost) : Abilit
 }
 
 /// <summary>
+/// The Vanguard's Opening (issue 772, DESIGN section 3): when the holder attacks and any of its strikes hits
+/// an enemy that lives through the combat, that enemy is open (<see cref="BattleUnit.Open"/>) until the
+/// phase ends, and every strike an ally of the holder makes against it reads its Def <see cref="Def"/> and
+/// its Res <see cref="Res"/> lower, never below 0 (<see cref="Opening"/>). The holder's own strikes never
+/// read it, a counter never opens, and a second opening refreshes the mark without stacking.
+/// </summary>
+public sealed record OpeningEffect(int Def, int Res) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnHit;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -382,6 +397,10 @@ public static class AbilityRules
 
         return cost;
     }
+
+    /// <summary>The first <see cref="OpeningEffect"/> among <paramref name="abilities"/> (issue 772), or null when none opens.</summary>
+    public static OpeningEffect? Opening(ValueList<Ability> abilities) =>
+        abilities.Select(a => a.Effect).OfType<OpeningEffect>().FirstOrDefault();
 
     /// <summary>How many tiles further than its side's dusk sight <paramref name="abilities"/> see (issue 706): the sum of every <see cref="SightEffect"/>, 0 when none.</summary>
     public static int ExtraSight(ValueList<Ability> abilities) => abilities.Sum(a => a.Effect is SightEffect sight ? sight.Tiles : 0);

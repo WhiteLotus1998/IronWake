@@ -1068,8 +1068,22 @@ public static class ContentLoader
                 }
 
                 return footing;
+            case "opening":
+                RequireOnly(entry, effect, "effect", "kind", "def", "res");
+                var opening = new OpeningEffect(effect.IntOr("def", 0), effect.IntOr("res", 0));
+                if (opening.Def < 0 || opening.Res < 0)
+                {
+                    throw entry.Error(opening.Def < 0 ? "effect.def" : "effect.res", "must be 0 or more: the number an open unit's stat reads lower");
+                }
+
+                if (opening.Def == 0 && opening.Res == 0)
+                {
+                    throw entry.Error("effect", "an opening must lower def or res");
+                }
+
+                return opening;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, mending, brace, sight, headcount, range, killheal, beside, aura or footing");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, mending, brace, sight, headcount, range, killheal, beside, aura, footing or opening");
         }
     }
 

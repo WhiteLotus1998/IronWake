@@ -263,6 +263,12 @@ public static class ProtocolJson
                 w.WriteNumber("healed", h.Healed);
                 w.WriteNumber("hpAfter", h.HpAfter);
                 break;
+            case UnitOpened o:
+                w.WriteString("unit", o.UnitId);
+                w.WriteString("by", o.ByUnitId);
+                w.WriteNumber("def", o.Def);
+                w.WriteNumber("res", o.Res);
+                break;
             case UnitChilled c:
                 w.WriteString("unit", c.UnitId);
                 w.WriteString("by", c.ByUnitId);
@@ -971,6 +977,15 @@ public static class ProtocolJson
             w.WriteNumber("grounded", unit.Grounded);
         }
 
+        if (unit.Open is { } open)
+        {
+            w.WriteStartObject("open");
+            w.WriteString("by", open.By);
+            w.WriteNumber("def", open.Def);
+            w.WriteNumber("res", open.Res);
+            w.WriteEndObject();
+        }
+
         if (unit.FallingBack)
         {
             w.WriteBoolean("fallingBack", true);
@@ -1142,6 +1157,7 @@ public static class ProtocolJson
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
             Grounded = OptionalInt(e, "grounded") ?? 0,
+            Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
         }.Sighted(content);

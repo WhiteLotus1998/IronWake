@@ -430,6 +430,11 @@ public static class MapRenderer
                     role += ", " + windup;
                 }
 
+                if (unit.Open is { } open)
+                {
+                    role += $", open: Def -{open.Def} Res -{open.Res} to allies of {open.By}";
+                }
+
                 sb.Append("  group ").Append(unit.Group).Append(", ").Append(role);
             }
             else if (unit.IsCaptain)

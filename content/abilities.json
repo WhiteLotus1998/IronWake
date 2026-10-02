@@ -68,6 +68,8 @@
       "effect": { "kind": "stats", "stats": { "def": 2, "res": 2 } } },
     { "id": "shoulder_to_shoulder", "name": "Shoulder to Shoulder", "text": "+1 Def and +1 Res while an ally stands beside.",
       "effect": { "kind": "beside", "stats": { "def": 1, "res": 1 } } },
+    { "id": "opening", "name": "Opening", "text": "A hit that leaves a foe standing opens it: allies strike it at -3 Def and -3 Res until the phase ends.",
+      "effect": { "kind": "opening", "def": 3, "res": 3 } },
     { "id": "command_presence", "name": "Command Presence", "text": "Allies within 2 tiles: +10 Acc.",
       "effect": { "kind": "aura", "radius": 2, "hit": 10 } },
     { "id": "breakthrough", "name": "Breakthrough", "text": "+5 Acc and +15 Crit while wielding an axe.",
