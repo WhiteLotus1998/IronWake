@@ -1,0 +1,25 @@
+# issue 704 slice 3: Sallow Grange with four advanced templates against the shipped board, the cast at level 1, no player second tier
+
+## content/maps/sallow_grange.map
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: sallow_grange, heuristic wins 157/200 (79 %), winning turn median 9 p90 10 limit 10, losses 39 timeout 4 captain 0 protected, quiet tail 0.4, refused kill p50 0.8775 over 39, at the stall p50 0.8237 over 30, two-roll average: ok
+gate 2 decisions matter: sallow_grange, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: sallow_grange, 0 player units killed from deployment: ok
+gate 4 no dead weight: sallow_grange, 5 recruits x 200 seeds, median drop 0.380: ok
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 811 ms: ok
+gate 5 forecast honesty: 10231 combats (4044 with gauntlets), 20937 strikes, hits 13345 expected 13446.7, crits 992 expected 964.7, damage mismatches 0: ok
+gate 7 speed: sallow_grange, 5 AI-vs-AI games, 34 turns, slowest 9 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 14265 ms: ok
+full: ok
+
+## docs/samples/sallow_grange_advanced.map (longbowman, veteran, sentry, lector in place of archer 4,2, soldier, shieldbearer, hexer)
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: docs/samples/sallow_grange_advanced.map, heuristic wins 106/200 (53 %), winning turn median 8 p90 10 limit 10, losses 63 timeout 31 captain 0 protected, quiet tail 0.9, refused kill p50 0.9311 over 63, at the stall p50 0.1532 over 49, two-roll average: FAILED
+gate 2 decisions matter: docs/samples/sallow_grange_advanced.map, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: docs/samples/sallow_grange_advanced.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: docs/samples/sallow_grange_advanced.map, 5 recruits x 200 seeds, median drop 0.285: ok
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 833 ms: ok
+gate 5 forecast honesty: 10245 combats (4034 with gauntlets), 20947 strikes, hits 13367 expected 13466.6, crits 1003 expected 969.3, damage mismatches 0: ok
+gate 7 speed: docs/samples/sallow_grange_advanced.map, 5 AI-vs-AI games, 27 turns, slowest 9 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 14628 ms: ok
+full: FAILED

@@ -685,7 +685,7 @@ public class CliPlayTests
     [Fact]
     public void TheJournaledScriptFightsTheChaseAtTheGapAndOnTheExit()
     {
-        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut-53.script", 53, out var exit);
+        var output = RunSample("brackwater_cut_exit_after_move.map", "2026-09-26-brackwater_cut-53.script", 53, out var exit, Fixture.BeforeSecondTierContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("Rider 1 attacks Dunstan\n", output);
@@ -1253,7 +1253,7 @@ public class CliPlayTests
     [Fact]
     public void TheJournaledReRateEmptiesTheExitsOnSeed283()
     {
-        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-283.script", 283, out var exit);
+        var output = RunShipped("brackwater_cut.map", "2026-09-27-brackwater_cut-283.script", 283, out var exit, Fixture.BeforeSecondTierContentDirectory());
 
         Assert.Equal(0, exit);
         Assert.Contains("The bank group wakes (noise); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
@@ -1646,7 +1646,7 @@ public class CliPlayTests
         return Run(out _, "play", Path.Combine(repo, "docs", "samples", "harrow_weir_0081.map"), "--seed", seed.ToString(System.Globalization.CultureInfo.InvariantCulture), "--script", Path.Combine(repo, "docs", "transcripts", script), "--content", Fixture.RealContentDirectory());
     }
 
-    private static string RunShipped(string map, string script, int seed, out int exit)
+    private static string RunShipped(string map, string script, int seed, out int exit, string? content = null)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         return Run(
@@ -1659,10 +1659,10 @@ public class CliPlayTests
             Path.Combine(repo, "docs", "transcripts", script),
             "--strict",
             "--content",
-            Fixture.RealContentDirectory());
+            content ?? Fixture.RealContentDirectory());
     }
 
-    private static string RunSample(string map, string script, int seed, out int exit)
+    private static string RunSample(string map, string script, int seed, out int exit, string? content = null)
     {
         var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
         return Run(
@@ -1675,7 +1675,7 @@ public class CliPlayTests
             Path.Combine(repo, "docs", "transcripts", script),
             "--strict",
             "--content",
-            Fixture.RealContentDirectory());
+            content ?? Fixture.RealContentDirectory());
     }
 
     private const string DarkWaitMap = """

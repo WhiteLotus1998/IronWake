@@ -1,0 +1,11 @@
+levels: 200 runs, the heuristic player through the campaign, never promoting; at 10+ is the second tier's level
+  map 1 starting_alone: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 2 p50 2 p75 2, third p25 1 p50 1 p75 1, levels gained by the company p25 1 p50 1 p75 1
+  map 2 the_mill: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 2 p50 2 p75 2, third p25 1 p50 1 p75 1, levels gained by the company p25 1 p50 1 p75 1
+  map 3 saltmarsh_ford: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 3 p50 3 p75 4, third p25 1 p50 1 p75 1, levels gained by the company p25 3 p50 3 p75 3
+  map 4 the_tollgate: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 4 p50 4 p75 4, third p25 1 p50 1 p75 1, levels gained by the company p25 3 p50 4 p75 4
+  map 5 harrow_weir: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 5 p50 5 p75 5, third p25 1 p50 1 p75 2, levels gained by the company p25 5 p50 5 p75 6
+  map 6 ironwake_raid: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 5 p50 5 p75 6, third p25 1 p50 2 p75 2, levels gained by the company p25 5 p50 6 p75 7
+  map 7 sallow_grange: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 5 p50 6 p75 6, third p25 1 p50 2 p75 2, levels gained by the company p25 6 p50 7 p75 9
+  map 8 brackwater_cut: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 6 p50 6 p75 6, third p25 1 p50 2 p75 2, levels gained by the company p25 7 p50 8 p75 9
+  map 9 ironwake_keep: won 82, at 10+ p25 0 p50 0 p75 0, meets a form's level and ranks p25 0 p50 0 p75 0, highest p25 6 p50 6 p75 7, third p25 1 p50 2 p75 2, levels gained by the company p25 7 p50 8 p75 10
+  no try won map 1: 118

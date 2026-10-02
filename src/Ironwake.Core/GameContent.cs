@@ -63,9 +63,10 @@ public sealed record GameContent(
     /// <summary>
     /// The longest reach any enemy in this content could have: the most <see cref="UnitClass.Mov"/>
     /// of any class an enemy template is in plus the most <see cref="Weapon.MaxRange"/> of any weapon,
-    /// in tiles, Manhattan (8 on the starter content: move 6 and range 2). The classes are those of
+    /// in tiles, Manhattan (9 on the starter content: the Wing Captain's move 7 and range 2; 8 before it). The classes are those of
     /// the units not in <see cref="Cast"/>, every class when there are none (issue 704: the dark hides
-    /// enemies, and only a template is one, so a player's Sky Captain does not widen it). One number for
+    /// enemies, and only a template is one, so a player's Sky Captain does not widen it; the Wing Captain
+    /// template, slice 3, does). One number for
     /// every unit, derived from the loaded files and never from a unit on the board, so a listing bounded
     /// by it tells the player nothing about what stands on a tile (issue 403). Zero when the content has
     /// no classes or no weapons.
