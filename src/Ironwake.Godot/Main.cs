@@ -554,8 +554,8 @@ public partial class Main : Node2D
 
     /// <summary>
     /// The between-map screen's input: a click on a row does what it offers; M marches; B benches or
-    /// unbenches the selected unit; Q adds it to or takes it from a side map's party (issue 786); the
-    /// wheel and Page Up and Page Down scroll the screen.
+    /// unbenches the selected unit; Q adds it to or takes it from a side map's party (issue 786); Esc
+    /// saves the camp and returns to the campaign's title; the wheel and Page Up and Page Down scroll the screen.
     /// </summary>
     private void ScreenInput(InputEvent input)
     {
@@ -579,6 +579,10 @@ public partial class Main : Node2D
                 }
 
                 break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Escape }:
+                LeaveForTitle();
+                QueueRedraw();
+                return;
             case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Q } when _screenUnit is { } picked:
                 if (!_screenParty.Remove(picked))
                 {
@@ -604,6 +608,18 @@ public partial class Main : Node2D
 
         SyncBattle();
         QueueRedraw();
+    }
+
+    /// <summary>Esc or the title row on the camp (issue 786): the camp saved as it stands, then the campaign's title.</summary>
+    private void LeaveForTitle()
+    {
+        if (!_campaign!.LeaveForTitle())
+        {
+            return;
+        }
+
+        (_campaign, _client, _screen, _screenUnit, _screenScroll) = (null, null, Screen.CampaignTitle, null, 0);
+        _screenParty.Clear();
     }
 
     /// <summary>
@@ -677,6 +693,8 @@ public partial class Main : Node2D
 
             yield return ($"[ {CampaignSession.MarchLine(record, content, map)} ]  (M)", () => campaign.March(), false);
         }
+
+        yield return ($"[ {campaign.TitleLine} ]  (Esc)", LeaveForTitle, false);
 
         yield return ("", null, false);
         yield return ("-- event log --", null, false);

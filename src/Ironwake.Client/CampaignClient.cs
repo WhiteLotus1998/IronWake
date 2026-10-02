@@ -330,6 +330,33 @@ public sealed class CampaignClient
         }
     }
 
+    /// <summary>The camp's way back to the title (issue 786), saying whether leaving saves the camp.</summary>
+    public string TitleLine =>
+        _saves is null ? "Return to the title (this run keeps no saves)"
+        : Over || Record.IsFinished(Content) ? "Return to the title"
+        : "Save the camp and return to the title";
+
+    /// <summary>
+    /// Leaves the camp for the campaign's title (issue 786): refused while a battle is open; with a
+    /// save store, the camp's autosave is rewritten with the record as it stands, so Continue
+    /// returns to this camp with every buy, repair and room since arriving kept. A finished or lost
+    /// campaign saves nothing. True when the title may open.
+    /// </summary>
+    public bool LeaveForTitle()
+    {
+        if (Battle is not null)
+        {
+            return Refuse("a battle is open; leave it once it is decided");
+        }
+
+        if (_saves is not null && !Over && !Record.IsFinished(Content))
+        {
+            _saves.RewriteAutosave(Record);
+        }
+
+        return true;
+    }
+
     private bool Screen(Func<ScreenResult> action)
     {
         if (!OnScreen())
