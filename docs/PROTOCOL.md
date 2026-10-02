@@ -26,7 +26,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 
 | `type` | fields | core record |
 |---|---|---|
-| `move` | `unit`, `to` | `Move` |
+| `move` | `unit`, `to`, `via` (optional: a tile the route passes through, the cheapest route to it then the cheapest on to `to`, both within Mov; DESIGN 13.25, issue 782) | `Move` |
 | `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon), `art` (optional: a combat art the unit knows, issue 68) | `Attack` |
 | `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
 | `wait` | `unit` | `Wait` |

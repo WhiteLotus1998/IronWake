@@ -469,6 +469,11 @@ public static class ProtocolJson
                 w.WriteString("type", "move");
                 w.WriteString("unit", m.UnitId);
                 WriteCoord(w, "to", m.To);
+                if (m.Via is { } via)
+                {
+                    WriteCoord(w, "via", via);
+                }
+
                 break;
             case Attack a:
                 w.WriteString("type", "attack");
@@ -567,7 +572,7 @@ public static class ProtocolJson
         var type = RequiredString(e, "type");
         return type switch
         {
-            "move" => new Move(RequiredString(e, "unit"), ReadCoord(e, "to")),
+            "move" => new Move(RequiredString(e, "unit"), ReadCoord(e, "to"), e.TryGetProperty("via", out _) ? ReadCoord(e, "via") : null),
             "attack" => new Attack(RequiredString(e, "unit"), RequiredString(e, "target"), OptionalInt(e, "slot"), OptionalString(e, "art")),
             "item" => new UseItem(RequiredString(e, "unit"), RequiredInt(e, "slot"), OptionalString(e, "target")),
             "retreat" => new Retreat(RequiredString(e, "unit"), ReadCoord(e, "to")),

@@ -140,6 +140,7 @@ public class ProtocolJsonTests
     public static TheoryData<Command, string> Commands() => new()
     {
         { new Move("wren", B), """{"type":"move","unit":"wren","to":{"x":3,"y":4}}""" },
+        { new Move("wren", B, A), """{"type":"move","unit":"wren","to":{"x":3,"y":4},"via":{"x":1,"y":2}}""" },
         { new Attack("wren", "brigand-1"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null}""" },
         { new Attack("wren", "brigand-1", 1), """{"type":"attack","unit":"wren","target":"brigand-1","slot":1}""" },
         { new Attack("wren", "brigand-1", null, "sunder"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"art":"sunder"}""" },

@@ -2171,6 +2171,34 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 782 (DESIGN.md 13.25 and section 4): on the planks sample Dunstan's turn-1 walk to 7,5,
+    /// which went down column 6 and dropped 6,5 before the tie-break, now takes the equally short
+    /// route that wears nothing; <c>preview</c> names the route and the wear and moves nothing, and
+    /// <c>via</c> spends the plank the player names.
+    /// </summary>
+    [Fact]
+    public void DunstansTurnOneWalkToTheBridgeWearsNothing()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "rotten_bridge_planks.map");
+        var path = Path.Combine(Path.GetTempPath(), "ironwake-play-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(path, "move dunstan 7,5 via 6,5 preview\nmove dunstan 7,5 preview\nmove dunstan 7,5\n");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "4", "--script", path, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("preview: Dunstan would move 6,8 -> 7,5 via 6,7 6,6 6,5; would wear 6,5 (Water)\n", output);
+            Assert.Contains("preview: Dunstan would move 6,8 -> 7,5 via 6,7 6,6 7,6; wears nothing\n", output);
+            Assert.Contains("Dunstan moves 6,8 -> 7,5 via 6,7 6,6 7,6\n", output);
+            Assert.DoesNotContain("becomes", output);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.

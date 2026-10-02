@@ -806,7 +806,7 @@ public static class Program
     /// </summary>
     public static string Script(Command command) => command switch
     {
-        Move m => $"move {m.UnitId} {m.To}",
+        Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
         Attack a => a.Slot is { } slot ? $"attack {a.UnitId} {a.TargetId} {slot + 1}" : $"attack {a.UnitId} {a.TargetId}",
         UseItem u => u.TargetId is { } t ? $"item {u.UnitId} {u.Slot + 1} {t}" : $"item {u.UnitId} {u.Slot + 1}",
         Wait w => $"wait {w.UnitId}",

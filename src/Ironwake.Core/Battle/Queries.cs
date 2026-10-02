@@ -15,6 +15,47 @@ public static class Queries
     public static Reach Reachable(BattleState state, GameContent content, BattleUnit unit) =>
         state.CantoReachOf(unit, content) ?? state.ReachOf(unit, content);
 
+    /// <summary>
+    /// What a move would walk and wear without making it (13.25, issue 782): the move applied to
+    /// the board as it stands and read back, so the preview and the walk cannot disagree. The
+    /// route as <see cref="UnitMoved"/> carries it, and each tile the walk wears with the terrain
+    /// it ends as, in walk order, one per tile (a map event's terrain change is not wear and is
+    /// left out). Null with the resolver's refusal when the move
+    /// would be refused.
+    /// </summary>
+    public static WalkPreview? PreviewMove(BattleState state, GameContent content, Move move, out Rejection? rejection)
+    {
+        var result = Resolver.Apply(state, content, move);
+        rejection = result.Rejection;
+        if (!result.Accepted)
+        {
+            return null;
+        }
+
+        var moved = result.Events.OfType<UnitMoved>().First();
+        var left = moved.Path.Take(moved.Path.Count - 1).Prepend(moved.From).ToHashSet();
+        var worn = new List<(Coord At, string TerrainId)>();
+        foreach (var changed in result.Events.OfType<TerrainChanged>())
+        {
+            if (!left.Contains(changed.At) || state.Map.TerrainAt(changed.At, content).WearsTo is null)
+            {
+                continue;
+            }
+
+            var index = worn.FindIndex(w => w.At == changed.At);
+            if (index >= 0)
+            {
+                worn[index] = (changed.At, changed.TerrainId);
+            }
+            else
+            {
+                worn.Add((changed.At, changed.TerrainId));
+            }
+        }
+
+        return new WalkPreview(moved, ValueList<(Coord At, string TerrainId)>.From(worn));
+    }
+
     /// <summary>The enemy units the unit's equipped weapon reaches from where it stands and its side sees (DESIGN.md 13.7), in id order. Empty when it has no weapon.</summary>
     public static IEnumerable<BattleUnit> Targets(BattleState state, GameContent content, BattleUnit unit)
     {
@@ -673,3 +714,9 @@ public sealed record AttackOption(Attack Command, string? WeaponId, Ability? Art
     /// <summary>True when the resolver would accept the row's attack.</summary>
     public bool Legal => Refusal is null;
 }
+
+/// <summary>
+/// A move's preview (issue 782): the walk as the resolver would record it, and the tiles it would
+/// wear, each with the terrain it would become.
+/// </summary>
+public sealed record WalkPreview(UnitMoved Walk, ValueList<(Coord At, string TerrainId)> Worn);

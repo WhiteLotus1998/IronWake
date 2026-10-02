@@ -243,7 +243,13 @@ public static class Resolver
         }
 
         var reach = state.ReachOf(unit, content);
-        var entry = reach.EntryAt(move.To);
+        var refused = "";
+        var entry = move.Via is { } via ? state.RouteVia(unit, content, via, move.To, out refused) : reach.EntryAt(move.To);
+        if (move.Via is not null && entry is null)
+        {
+            return (state, new Rejection(RejectionReason.OutOfReach, $"{unit.Id} cannot move to {move.To} via {move.Via}: {refused}"));
+        }
+
         if (entry is not { CanEnd: true })
         {
             var why = !state.Map.Contains(move.To) ? "outside the map"

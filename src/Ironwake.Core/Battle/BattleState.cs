@@ -512,6 +512,40 @@ public sealed record BattleState(
     }
 
     /// <summary>
+    /// The route of a <c>move ... via</c> (13.25, issue 782): the reach's path to <paramref name="via"/>,
+    /// then the cheapest path from there to <paramref name="to"/> on the Mov left, the unit's own
+    /// tile read as empty on the second leg. The entry carries the joined path and the total cost,
+    /// and <see cref="ReachEntry.CanEnd"/> as the second leg reads <paramref name="to"/>. Null, with
+    /// <paramref name="refused"/> naming the leg, when either leg is out of reach.
+    /// </summary>
+    public ReachEntry? RouteVia(BattleUnit unit, GameContent content, Coord via, Coord to, out string refused)
+    {
+        var reach = ReachOf(unit, content);
+        if (!Map.Contains(via) || !Map.Contains(to))
+        {
+            refused = "outside the map";
+            return null;
+        }
+
+        if (reach.EntryAt(via) is not { } first)
+        {
+            refused = $"{via} is not within {reach.Mov} movement from {unit.At}";
+            return null;
+        }
+
+        var left = reach.Mov - first.Cost;
+        var second = Movement.Reach(Map, content, via, reach.Movement, left, at => at == unit.At ? Occupant.None : OccupantAt(at, unit.Side), content.AbilitiesOf(unit.Unit)).EntryAt(to);
+        if (second is null)
+        {
+            refused = $"{to} is not within the {left} movement left at {via}";
+            return null;
+        }
+
+        refused = "";
+        return new ReachEntry(to, first.Cost + second.Cost, ValueList<Coord>.From(first.Path.Concat(second.Path)), second.CanEnd && to != via || to == via && first.CanEnd);
+    }
+
+    /// <summary>
     /// The section 4 reach of <paramref name="unit"/> on <paramref name="mov"/> points by how it moves now
     /// (<see cref="Grounding.MovementOf"/>), its footing read (issue 705); its own tile alone when grounded where it cannot walk.
     /// </summary>

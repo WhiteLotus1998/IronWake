@@ -36,6 +36,8 @@ public sealed class PlaySession
     private const string Help = """
         Commands:
           move <unit> <x,y>        Move a unit to a tile in its reach
+          move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
+          move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
           attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first)
           item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
           wait <unit>              End the unit's action
@@ -539,11 +541,19 @@ public sealed class PlaySession
         var art = words[0] is "attack" or "forecast" ? TakeArt(ref words) : null;
         switch (words[0])
         {
-            case "move" when words.Length == 3 && TryCoord(words[2], out var to):
-                Apply(new Move(words[1], to));
+            case "move" when ParseMove(words) is { } parsed:
+                if (parsed.Preview)
+                {
+                    PreviewMove(parsed.Move);
+                }
+                else
+                {
+                    Apply(parsed.Move);
+                }
+
                 break;
             case "move":
-                Error("usage: move <unit> <x,y>");
+                Error("usage: move <unit> <x,y> [via <x,y>] [preview]");
                 break;
             case "undo" when words.Length == 2:
                 if (Apply(new Undo(words[1])))
@@ -802,6 +812,48 @@ public sealed class PlaySession
     /// <summary>The terrain's card (issue 610) after its glyph: <c>^  Forest. -20 to hit a unit here, ...</c>.</summary>
     private void PrintTerrainCard(Terrain terrain) =>
         _out.WriteLine($"{terrain.Glyph}  {TerrainCard.Text(_state, _content, terrain.Id)}");
+
+    /// <summary>
+    /// <c>move &lt;unit&gt; &lt;x,y&gt; [via &lt;x,y&gt;] [preview]</c> (issue 782): the move, with a waypoint
+    /// when one is named, and whether only to preview it. Null for any other shape.
+    /// </summary>
+    private static (Move Move, bool Preview)? ParseMove(string[] words)
+    {
+        var preview = words.Length > 3 && words[^1] == "preview";
+        var rest = preview ? words[..^1] : words;
+        if (rest.Length == 3 && TryCoord(rest[2], out var to))
+        {
+            return (new Move(rest[1], to), preview);
+        }
+
+        if (rest.Length == 5 && rest[3] == "via" && TryCoord(rest[2], out var end) && TryCoord(rest[4], out var via))
+        {
+            return (new Move(rest[1], end, via), preview);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// The move preview (issue 782): <c>preview: Dunstan would move 6,8 -&gt; 7,5 via 6,7 7,7 7,6; wears nothing</c>,
+    /// or <c>; would wear 6,5 (Water)</c>, each worn tile with what it would become. Nothing moves.
+    /// </summary>
+    private void PreviewMove(Move move)
+    {
+        if (Queries.PreviewMove(_state, _content, move, out var rejection) is not { } preview)
+        {
+            Error(rejection!.Message);
+            return;
+        }
+
+        var walk = preview.Walk;
+        var names = UnitNames.Of(_state, _content);
+        var route = walk.Path.Count > 1 ? " via " + string.Join(" ", walk.Path.Take(walk.Path.Count - 1)) : "";
+        var wear = preview.Worn.Count == 0
+            ? "wears nothing"
+            : "would wear " + string.Join(", ", preview.Worn.Select(w => $"{w.At} ({(_content.Terrain.TryGetValue(w.TerrainId, out var terrain) ? terrain.Name : w.TerrainId)})"));
+        _out.WriteLine($"preview: {names[walk.UnitId]} would move {walk.From} -> {walk.To}{route}; {wear}");
+    }
 
     /// <summary>
     /// Applies a player command and, if it was accepted, prints <paramref name="first"/>, its
@@ -2355,7 +2407,7 @@ public sealed class PlaySession
     /// <summary>A command as a script line types it, the words <c>recall list</c> names a state by.</summary>
     public static string CommandText(Command command) => command switch
     {
-        Move m => $"move {m.UnitId} {m.To}",
+        Move m => m.Via is { } via ? $"move {m.UnitId} {m.To} via {via}" : $"move {m.UnitId} {m.To}",
         Attack a => $"attack {a.UnitId} {a.TargetId}" + (a.Slot is null ? "" : " " + (a.Slot + 1)) + (a.Art is null ? "" : " art " + a.Art),
         Canto c => $"canto {c.UnitId} {c.To}",
         Wait w => $"wait {w.UnitId}",

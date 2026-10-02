@@ -13,6 +13,11 @@ namespace Ironwake.Core;
 /// The order <see cref="Coord.Neighbors"/> enumerates in does no work here: every step
 /// costs at least 1, so every tile at a cost is queued before the first tile at that cost
 /// settles, and the queue key alone fixes the order. Same inputs, same paths, on every machine.
+/// On a board with wearing terrain (13.25, issue 782) the key is (cost, wear, row-major): among
+/// the cheapest routes to a tile the one that wears the fewest plank steps wins, a tile's wear
+/// charged when the route leaves it (<see cref="WearOnLeaving"/>), so a tile's path changes only
+/// when a strictly cheaper or, at equal cost, a strictly less wearing one is found. Where nothing
+/// wears every wear is 0 and the order is the plain (cost, row-major) one.
 /// </remarks>
 public static class Movement
 {
@@ -61,6 +66,7 @@ public static class Movement
         var tiles = map.Width * map.Height;
         var costs = new int[tiles];
         Array.Fill(costs, int.MaxValue);
+        var wears = new int[tiles];
         var parents = new int[tiles];
         Array.Fill(parents, -1);
         var occupants = new Occupant[tiles];
@@ -68,17 +74,18 @@ public static class Movement
 
         var origin = Index(map, from);
         costs[origin] = 0;
-        var frontier = new PriorityQueue<int, (int Cost, int Index)>();
-        frontier.Enqueue(origin, (0, origin));
+        var frontier = new PriorityQueue<int, (int Cost, int Wear, int Index)>();
+        frontier.Enqueue(origin, (0, 0, origin));
 
         while (frontier.TryDequeue(out var current, out var priority))
         {
-            if (priority.Cost > costs[current])
+            if (priority.Cost > costs[current] || (priority.Cost == costs[current] && priority.Wear > wears[current]))
             {
                 continue;
             }
 
             var here = TileAt(map, current);
+            var leaving = wears[current] + WearOnLeaving(content, map.TerrainAt(here, content), movement, current != origin && occupants[current] == Occupant.Ally);
             foreach (var next in here.Neighbors())
             {
                 if (!map.Contains(next))
@@ -105,14 +112,15 @@ public static class Movement
                 }
 
                 var cost = costs[current] + step.Value;
-                if (cost > mov || cost >= costs[index])
+                if (cost > mov || cost > costs[index] || (cost == costs[index] && leaving >= wears[index]))
                 {
                     continue;
                 }
 
                 costs[index] = cost;
+                wears[index] = leaving;
                 parents[index] = current;
-                frontier.Enqueue(index, (cost, index));
+                frontier.Enqueue(index, (cost, leaving, index));
             }
         }
 
@@ -210,6 +218,15 @@ public static class Movement
 
         return new Distances(map, costs);
     }
+
+    /// <summary>
+    /// The plank steps a walk wears on <paramref name="terrain"/> by leaving it (13.25, issue 782):
+    /// <see cref="Planks.Steps"/> for the movement type, held to how far down its chain the terrain
+    /// can still go, and none on a tile an ally stands on, which is crossed, not left. Terrain
+    /// without <see cref="Terrain.WearsTo"/> wears nothing.
+    /// </summary>
+    public static int WearOnLeaving(GameContent content, Terrain terrain, MovementType movement, bool allyHeld) =>
+        allyHeld || terrain.WearsTo is null ? 0 : Math.Min(Planks.Steps(movement), Planks.Chain(content, terrain).Count - 1);
 
     /// <summary>
     /// The refusal for a unit standing where its movement type cannot go, in the same
