@@ -150,7 +150,7 @@ public static class LevelRun
                     throw new InvalidOperationException($"seed {seed} map {number}: {command} was rejected: {result.Rejection!.Message}");
                 }
 
-                foreach (var (_, classId, type, counter) in WeaponMix.Strikes(state, content, command, result.Events))
+                foreach (var (_, classId, type, counter, _) in WeaponMix.Strikes(state, content, command, result.Events))
                 {
                     weapons[classId] = weapons.GetValueOrDefault(classId, WeaponMix.Zero).With(type, counter);
                 }

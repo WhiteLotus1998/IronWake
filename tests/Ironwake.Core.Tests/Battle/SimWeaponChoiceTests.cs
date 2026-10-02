@@ -75,7 +75,7 @@ public class SimWeaponChoiceTests
 
         var strike = Assert.Single(WeaponMix.Strikes(state, Starter, attack, result.Events));
 
-        Assert.Equal(("hale", "ranger", WeaponType.Bow, false), strike);
+        Assert.Equal(("hale", "ranger", WeaponType.Bow, false, "iron_bow"), strike);
         Assert.Equal("bow 1/0", WeaponMix.Zero.With(strike.Type, strike.Counter).ToString());
     }
 
@@ -91,7 +91,44 @@ public class SimWeaponChoiceTests
 
         var strikes = WeaponMix.Strikes(state, Starter, attack, result.Events).ToList();
 
-        Assert.Equal(new[] { ("hale", "ranger", WeaponType.Sword, true) }, strikes);
+        Assert.Equal(new[] { ("hale", "ranger", WeaponType.Sword, true, "iron_sword") }, strikes);
         Assert.Equal("sword 1/1", WeaponMix.Zero.With(WeaponType.Sword, false).Plus(WeaponMix.Zero.With(WeaponType.Sword, true)).ToString());
+    }
+
+    /// <summary>
+    /// Issue 757: two weapons of one type tell apart only by item. Pell's Cinder and Gust are both
+    /// reason, so the item tally keys by id where the weapon tally sums them.
+    /// </summary>
+    [Fact]
+    public void TheItemTallyKeepsTwoWeaponsOfOneTypeApart()
+    {
+        var items = ItemMix.Zero.With("gust", false).With("gust", true).With("cinder", false);
+        var types = WeaponMix.Zero.With(WeaponType.Reason, false).With(WeaponType.Reason, true).With(WeaponType.Reason, false);
+
+        Assert.Equal("cinder 1/0 gust 1/1", items.ToString());
+        Assert.Equal("reason 2/1", types.ToString());
+        Assert.Equal("cinder 2/0 gust 1/1", items.Plus(ItemMix.Zero.With("cinder", false)).ToString());
+        Assert.Equal("none", ItemMix.Zero.ToString());
+    }
+
+    [Fact]
+    public void CarryLeavesTheCastMemberHoldingTheOneWeaponAtFullUses()
+    {
+        var shipped = MapFixture.Content;
+        Assert.Equal(new[] { "cinder", "gust" }, shipped.Cast.Single(u => u.Id == "pell").Inventory.Items.Select(s => s.ItemId));
+
+        var carried = Ironwake.Sim.Program.Carry(shipped, "pell", "cinder")!;
+
+        var pell = carried.Cast.Single(u => u.Id == "pell");
+        var stack = Assert.Single(pell.Inventory.Items);
+        Assert.Equal(new ItemStack("cinder", shipped.Weapons["cinder"].Durability), stack);
+        Assert.Equal(shipped.Cast.Select(u => u.Id), carried.Cast.Select(u => u.Id));
+    }
+
+    [Fact]
+    public void CarryRefusesAnIdThatNamesNothing()
+    {
+        Assert.Null(Ironwake.Sim.Program.Carry(MapFixture.Content, "nobody", "cinder"));
+        Assert.Null(Ironwake.Sim.Program.Carry(MapFixture.Content, "pell", "no_such_weapon"));
     }
 }
