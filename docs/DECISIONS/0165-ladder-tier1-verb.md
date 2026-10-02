@@ -15,3 +15,22 @@ Date: 2026-10-02. Issue #705. Round 229 on the Design Table (#731): Code's openi
 - **The exemption.** A class that fails the second clause on a map where its captain absorbs under half of the cadet's damage gets a hand play of that map, and the play decides. The Ranger on the Tollgate (57 against 70, a third of the damage) is the first case: Chat's Ranger-captain Tollgate play. If the line cannot be made to work by hand, the bow's verb reopens.
 - **`--ladder` prints the captain's EXP share per class** once #738's column exists. A class that loses gate 1 by giving the anvil away is a finding about the bar, not a class to buff.
 - **Watch the Marshal.** If it falls outside 10 on Brackwater once the Vanguard drops, move its numbers before any verb; the aura is a mastery and arrives late on purpose.
+
+## The Hunter's Ground reading (slice 5, `--ladder --map <id> --seeds 100`; `docs/measurements/ladder-705.txt`)
+
+Folded in from slice 5's record of the same number, which main carried beside this one.
+
+| Map | Ranger, 0164 | Ranger, Hunter's Ground | captain absorbed, before and after | tier 1 spread |
+|---|---|---|---|---|
+| the_tollgate | 57 | 53 | 80, 61 | 21 to 25 |
+| the_mill | 63 | 65 | 199, 180 | 20 to 18 |
+| brackwater_cut | 66 | 66 | 208, 216 | 19 to 19 |
+
+The content and the `ground` effect kind were reverted whole, since no ability ships it (no dead kinds).
+
+## Built (slice 6) and what the re-read showed
+
+- The Vanguard's `weapons` is `["sword"]`; the Champion's list is unchanged, so it now adds lance and axe (`Champion (from Vanguard; adds lance, axe)` at the camp). The Vanguard's lance clips leave the art spec.
+- `LadderRun` carries the bar above: `Spread` 10, `Under` 10, the exemption when the class's captain absorbs under half the unpromoted captain's damage, printed `over 10 under cadet: <class> (absorbs under half; a hand play decides)`.
+- The re-read at 100 seeds is identical to slice 4 for every class on all three maps, action mix included. The Sim's player plans every attack with the first usable weapon (`HeuristicPlayer.PlanUnit`, `EquippedWeapon`), and `--ladder`'s kit appends its weapons after the iron sword, so no kit weapon was ever swung: not the Vanguard's lance, the Ranger's bow, the Champion's axe or the Marshal's cinder. 0164's "from the lance and the bow line" and this record's Hunter's Ground reading were measured on sword captains. The lance move stands on its design reasons (the anvil, a two-step Champion), not on the Sim. #746 makes `--ladder` read each class with its own weapon equipped before tier 1 is read again.
+- Under the new bar: tier 1 fails on spread on all three maps (Tollgate 21, the Mill 20, Brackwater 19); the Ranger on the Tollgate is 13 under and exempt (absorbs 80 against 227), so Chat's hand play decides it. Tier 2 passes on the Mill and Brackwater and fails on the Tollgate only on the Commander's gate 4.

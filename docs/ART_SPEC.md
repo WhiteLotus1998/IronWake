@@ -480,14 +480,6 @@ vanguard_sword_miss_recover
 vanguard_sword_dodge
 vanguard_sword_hit_react
 vanguard_sword_fall
-vanguard_lance_idle
-vanguard_lance_advance
-vanguard_lance_strike
-vanguard_lance_strike_crit
-vanguard_lance_miss_recover
-vanguard_lance_dodge
-vanguard_lance_hit_react
-vanguard_lance_fall
 warden_faith_idle
 warden_faith_advance
 warden_faith_strike

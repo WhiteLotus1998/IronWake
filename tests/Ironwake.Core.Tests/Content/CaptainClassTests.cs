@@ -38,7 +38,8 @@ public class CaptainClassTests
     [Fact]
     public void EachCaptainsClassDoesWhatItIsFor()
     {
-        Assert.Equal(new[] { WeaponType.Sword, WeaponType.Lance }, Content.Class("vanguard").Weapons);
+        Assert.Equal(new[] { WeaponType.Sword }, Content.Class("vanguard").Weapons);
+        Assert.Equal(new[] { WeaponType.Sword, WeaponType.Lance, WeaponType.Axe }, Content.Class("champion").Weapons);
         Assert.Equal(new[] { WeaponType.Sword, WeaponType.Reason }, Content.Class("marshal").Weapons);
         Assert.Equal(new[] { WeaponType.Sword, WeaponType.Bow }, Content.Class("ranger").Weapons);
         Assert.Equal(5, Content.Class("ranger").Mov);

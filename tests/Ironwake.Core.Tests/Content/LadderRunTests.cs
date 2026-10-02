@@ -15,8 +15,8 @@ public class LadderRunTests
 
     private static Unit Captain => Content.Cast[0];
 
-    private static LadderRun.Reading Row(string id, double rate, bool gate4 = true, int attacks = 10) =>
-        new(id, rate, gate4, new ActionMix(attacks, 0, 0, 0));
+    private static LadderRun.Reading Row(string id, double rate, bool gate4 = true, int attacks = 10, int absorbed = 0) =>
+        new(id, rate, gate4, new ActionMix(attacks, 0, 0, absorbed));
 
     [Fact]
     public void TheLadderIsTheThreeBaseClassesThenTheirForms()
@@ -28,10 +28,11 @@ public class LadderRunTests
     }
 
     [Theory]
-    [InlineData("vanguard", 3, "iron_lance")]
+    [InlineData("vanguard", 3, "iron_sword")]
     [InlineData("marshal", 3, "cinder")]
     [InlineData("ranger", 3, "iron_bow")]
     [InlineData("champion", 10, "iron_axe")]
+    [InlineData("champion", 10, "iron_lance")]
     [InlineData("commander", 10, "iron_lance")]
     [InlineData("pathfinder", 10, "iron_bow")]
     public void PromoteRaisesTheCaptainToTheClassLevelAndKitsItsWeapons(string classId, int level, string kit)
@@ -86,20 +87,39 @@ public class LadderRunTests
     }
 
     [Fact]
-    public void ATierWithinFivePointsPasses()
+    public void ATierWithinTenPointsPasses()
     {
-        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.70), Row("ranger", 0.74), Row("vanguard", 0.75) });
+        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.70), Row("ranger", 0.74), Row("vanguard", 0.80) });
 
         Assert.True(tier.Passed);
     }
 
     [Fact]
-    public void ATierSpreadOverFivePointsFails()
+    public void ATierSpreadOverTenPointsFails()
     {
-        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.70), Row("ranger", 0.74), Row("vanguard", 0.76) });
+        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.70), Row("ranger", 0.74), Row("vanguard", 0.81) });
 
         Assert.False(tier.Passed);
-        Assert.Equal(0.06, tier.SpreadOf, 6);
+        Assert.Equal(0.11, tier.SpreadOf, 6);
+    }
+
+    [Fact]
+    public void AClassMoreThanTenUnderTheUnpromotedCaptainFails()
+    {
+        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.59), Row("ranger", 0.62), Row("vanguard", 0.65) });
+
+        Assert.False(tier.Passed);
+        Assert.Equal(new[] { ("marshal", false) }, tier.UnderBaseline);
+    }
+
+    [Fact]
+    public void AClassUnderTheCaptainThatAbsorbsUnderHalfHisDamageOwesAHandPlayInsteadOfFailing()
+    {
+        var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70, absorbed: 227), new[] { Row("marshal", 0.66), Row("ranger", 0.57, absorbed: 80), Row("vanguard", 0.64) });
+
+        Assert.True(tier.Passed);
+        Assert.Equal(new[] { ("ranger", true) }, tier.UnderBaseline);
+        Assert.Contains("over 10 under cadet: ranger (absorbs under half; a hand play decides)", LadderRun.Lines(new LadderRun.MapReading("m", new[] { tier })).Last());
     }
 
     [Fact]

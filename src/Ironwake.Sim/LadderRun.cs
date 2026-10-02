@@ -8,14 +8,19 @@ namespace Ironwake.Sim;
 /// ladder (<see cref="UnitClass.Captain"/>) at the level the class certifies at, carrying a starting
 /// weapon of each type the class adds (<see cref="Kit"/>), so a Ranger has a bow to draw and a Marshal
 /// a spell to cast. Each tier is fought on its own <see cref="Board"/>. Per map and tier it reads gate 1
-/// and gate 4 for the unpromoted captain and each class. The bar: within a tier the classes' gate 1
-/// rates lie within <see cref="Spread"/> of each other, and gate 4 passes under every class wherever it
+/// and gate 4 for the unpromoted captain and each class. The bar (DECISIONS/0165, round 229): within a tier the
+/// classes' gate 1 rates lie within <see cref="Spread"/> of each other, no class reads more than <see cref="Under"/>
+/// below the unpromoted captain on the same board unless its captain absorbs under half the unpromoted captain's
+/// damage (then a hand play of that map is owed and decides), and gate 4 passes under every class wherever it
 /// passes under the unpromoted captain on the same board, with the captain attacking in its baseline. A measurement only; nothing here changes what ships.
 /// </summary>
 public static class LadderRun
 {
-    /// <summary>The widest gate 1 spread a tier may show on one map, as a rate (5 points; round 201's bar for origin).</summary>
-    public const double Spread = 0.05;
+    /// <summary>The widest gate 1 spread a tier may show on one map at 100 seeds, as a rate (10 points; DECISIONS/0165, round 229; 5 is the 400-seed target before anything ships as tuned).</summary>
+    public const double Spread = 0.10;
+
+    /// <summary>The furthest a class's gate 1 rate may read below the unpromoted captain's on the same board, as a rate (10 points; DECISIONS/0165).</summary>
+    public const double Under = 0.10;
 
     /// <summary>The starting weapon the kit adds for a weapon type the captain carries none of.</summary>
     public static IReadOnlyDictionary<WeaponType, string> Kit { get; } = new Dictionary<WeaponType, string>
@@ -44,7 +49,13 @@ public static class LadderRun
         public IReadOnlyList<string> Gate4Failures =>
             Classes.Where(c => (Baseline.Gate4 && !c.Gate4) || (!Escape && c.Captain.Attacks == 0)).Select(c => c.ClassId).ToList();
 
-        public bool Passed => SpreadOf <= Spread + 1e-9 && Gate4Failures.Count == 0;
+        /// <summary>The classes reading more than <see cref="Under"/> below the unpromoted captain, each with whether its captain absorbs under half the unpromoted captain's damage (the exemption: a hand play is owed and decides).</summary>
+        public IReadOnlyList<(string ClassId, bool HandPlayOwed)> UnderBaseline =>
+            Classes.Where(c => Baseline.Rate - c.Rate > Under + 1e-9)
+                .Select(c => (c.ClassId, c.Captain.Absorbed * 2 < Baseline.Captain.Absorbed))
+                .ToList();
+
+        public bool Passed => SpreadOf <= Spread + 1e-9 && Gate4Failures.Count == 0 && UnderBaseline.All(u => u.HandPlayOwed);
     }
 
     /// <summary>One map: a reading per tier.</summary>
@@ -166,7 +177,9 @@ public static class LadderRun
             }
 
             var failures = tier.Gate4Failures;
+            var under = tier.UnderBaseline;
             yield return $"    spread {tier.SpreadOf * 100:F1}, bar {Spread * 100:F0}"
+                + (under.Count == 0 ? "" : $"; over {Under * 100:F0} under {tier.Baseline.ClassId}: {string.Join(", ", under.Select(u => u.HandPlayOwed ? $"{u.ClassId} (absorbs under half; a hand play decides)" : u.ClassId))}")
                 + (failures.Count == 0 ? "" : $"; gate 4 lost under {string.Join(", ", failures)}")
                 + $": {Gates.Verdict(tier.Passed)}";
         }
