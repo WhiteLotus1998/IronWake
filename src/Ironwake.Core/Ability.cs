@@ -45,6 +45,9 @@ public enum AbilityTrigger
     /// <summary>In a fight, on every ally within the holder's radius, never the holder: the Marshal's aura (issue 705).</summary>
     Aura,
 
+    /// <summary>Whenever what the holder's side sees or knows is read: the Scout's eyes (issue 706).</summary>
+    OnSight,
+
     /// <summary>Whenever the holder's reach is walked: a cheaper step on named terrain (issue 705).</summary>
     OnMove,
 }
@@ -168,6 +171,25 @@ public sealed record RangeEffect(WeaponType? Weapon, bool Heals, int Range) : Ab
 public sealed record MendingEffect(int Factor, int Reach) : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.OnWeapon;
+}
+
+/// <summary>
+/// The Scout's long sight (issue 706): on a dusk map (DESIGN.md 13.7) the holder sees
+/// <see cref="Tiles"/> further than its side's sight, and its side sees what it sees. Nothing in daylight.
+/// </summary>
+public sealed record SightEffect(int Tiles) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnSight;
+}
+
+/// <summary>
+/// The Scout's headcount (issue 706): <c>threat</c> prices a sleeping Guard group, as it would were the
+/// group awake, when a member stands within <see cref="Radius"/> tiles of the holder, where it stands or,
+/// for the holder's own threat, the tile asked. Every other sleeping group stays named and unpriced (issue 248).
+/// </summary>
+public sealed record HeadcountEffect(int Radius) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnSight;
 }
 
 /// <summary>
@@ -356,6 +378,13 @@ public static class AbilityRules
 
         return cost;
     }
+
+    /// <summary>How many tiles further than its side's dusk sight <paramref name="abilities"/> see (issue 706): the sum of every <see cref="SightEffect"/>, 0 when none.</summary>
+    public static int ExtraSight(ValueList<Ability> abilities) => abilities.Sum(a => a.Effect is SightEffect sight ? sight.Tiles : 0);
+
+    /// <summary>How far from the holder <paramref name="abilities"/> count a sleeping group's numbers (issue 706): the widest <see cref="HeadcountEffect"/>'s radius, null when none.</summary>
+    public static int? HeadcountRadius(ValueList<Ability> abilities) =>
+        abilities.Select(a => a.Effect).OfType<HeadcountEffect>().Select(h => (int?)h.Radius).Max();
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);

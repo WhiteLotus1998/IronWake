@@ -9,7 +9,8 @@ namespace Ironwake.Core.Tests.Campaign;
 /// the second promotion, an advanced form of their base beside the standard one, opened by a quest's
 /// win. Taking either door closes the other for good. Each names a measure it loses on to the
 /// standard form, held here. Maud's Field Surgeon heals double and moves again after a heal, never
-/// strikes, and heals only beside her; the Warden keeps range and the sword.
+/// strikes, and heals only beside her; the Warden keeps range and the sword. Rook's Scout (slice 2)
+/// sees further at dusk and counts sleeping groups, and gives up Str and its growth to the Sky Captain.
 /// </summary>
 public class UniqueClassTests
 {
@@ -133,10 +134,82 @@ public class UniqueClassTests
         foreach (var unique in Shipped.Classes.Values.Where(c => c.Unique is not null))
         {
             var standard = Shipped.Classes.Values.Single(c => c.Advances?.Id == unique.Advances!.Id && c.Unique is null);
-            var unit = Shipped.Cast.Single(u => u.Id == unique.Unique) with { Skill = WeaponSkill.Zero.With(WeaponType.Faith, WeaponRanks.Threshold(WeaponRank.A)) };
+            var unit = Shipped.Cast.Single(u => u.Id == unique.Unique) with { Skill = Enum.GetValues<WeaponType>().Aggregate(WeaponSkill.Zero, (skill, type) => skill.With(type, WeaponRanks.Threshold(WeaponRank.A))) };
 
             Assert.True(Sidegrades.Measure(unit, unique, Shipped, unique.Loses!.Value) < Sidegrades.Measure(unit, standard, Shipped, unique.Loses.Value), unique.Id);
         }
+    }
+
+    /// <summary>Rook from the cast as a Skyrider at level 7 with Lance C, ready for either door.</summary>
+    private static Unit ReadyRook() =>
+        Shipped.Cast.Single(u => u.Id == "rook") with
+        {
+            Level = 7,
+            Stats = Shipped.Cast.Single(u => u.Id == "rook").Stats with { Spd = 9 },
+            Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.C)),
+        };
+
+    [Fact]
+    public void TheScoutIsRooksOtherDoorAboveTheSkyrider()
+    {
+        var scout = Shipped.Class("scout");
+
+        Assert.Equal("skyrider", scout.Advances?.Id);
+        Assert.Equal("rook", scout.Unique);
+        Assert.Equal("rook_1", scout.UnlockedBy);
+        Assert.Equal(SidegradeMeasure.Damage, scout.Loses);
+        Assert.Equal(Shipped.Class("skycaptain").Certification, scout.Certification);
+        Assert.Equal(Shipped.Class("skycaptain").Mov, scout.Mov);
+        Assert.Equal(1000, Shipped.Campaign.SealFor(scout));
+    }
+
+    [Fact]
+    public void TheScoutStaysShutUntilRooksQuestIsWon()
+    {
+        Assert.DoesNotContain(Shipped.Campaign.Quests, q => q.Id == "rook_1");
+        Assert.Equal(new[] { "unlockedBy" }, Refusals(ReadyRook(), "scout", Won));
+        Assert.Empty(Refusals(ReadyRook(), "scout", new[] { "rook_1" }));
+        Assert.Empty(Refusals(ReadyRook(), "skycaptain", Array.Empty<string>()));
+    }
+
+    [Fact]
+    public void TakingTheScoutClosesTheSkyCaptainForGood()
+    {
+        var scout = Certifications.Certify(ReadyRook(), Shipped.Class("scout"), false, new[] { "rook_1" });
+        var back = Certifications.Certify(scout, Shipped.Class("skyrider"));
+
+        Assert.Equal(new[] { "door" }, Refusals(back, "skycaptain", new[] { "rook_1" }));
+    }
+
+    [Fact]
+    public void TheScoutGrowsTenLessStrThanTheSkyCaptain()
+    {
+        Assert.Equal(Shipped.Class("skycaptain").GrowthModifiers.Str - 10, Shipped.Class("scout").GrowthModifiers.Str);
+        Assert.Equal(Shipped.Class("skycaptain").GrowthModifiers with { Str = 0 }, Shipped.Class("scout").GrowthModifiers with { Str = 0 });
+    }
+
+    /// <summary>The sidegrade test (issue 706): with every lance the Scout strikes for 1 less than the Sky Captain, the Str modifier it gives up.</summary>
+    [Theory]
+    [InlineData("iron_lance")]
+    [InlineData("steel_lance")]
+    public void TheScoutLosesDamageToTheSkyCaptainWithEveryLance(string lance)
+    {
+        var rook = ReadyRook() with { Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.A)) };
+        int Damage(string classId) => Shipped.StatsOf(rook with { ClassId = classId }).Str + Shipped.WeaponOf(rook with { ClassId = classId }, Shipped.Weapon(lance)).Mt;
+
+        Assert.Equal(Damage("skycaptain") - 1, Damage("scout"));
+        Assert.Equal(Sidegrades.Measure(rook, Shipped.Class("skycaptain"), Shipped, SidegradeMeasure.Damage) - 1, Sidegrades.Measure(rook, Shipped.Class("scout"), Shipped, SidegradeMeasure.Damage));
+    }
+
+    [Fact]
+    public void TheScoutsEyesAreData()
+    {
+        var abilities = Shipped.AbilitiesOf(ReadyRook() with { ClassId = "scout" });
+
+        Assert.Equal(2, AbilityRules.ExtraSight(abilities));
+        Assert.Equal(6, AbilityRules.HeadcountRadius(abilities));
+        Assert.Equal(0, AbilityRules.ExtraSight(Shipped.AbilitiesOf(ReadyRook() with { ClassId = "skycaptain" })));
+        Assert.Null(AbilityRules.HeadcountRadius(Shipped.AbilitiesOf(ReadyRook() with { ClassId = "skycaptain" })));
     }
 
     [Fact]
@@ -237,6 +310,8 @@ public class UniqueClassTests
         { "the captain", "fieldsurgeon", "unique", "must be a cast member who is not the captain" },
         { "another's quest", "fieldsurgeon", "unlockedBy", "'bet_postern' must be a quest in the campaign whose member is 'maud'" },
         { "heals and strikes only", "fieldsurgeon", "healOnly", "also strike-only" },
+        { "another's unauthored quest", "scout", "unlockedBy", "or one of theirs not yet authored ('rook_<n>')" },
+        { "another's authored quest", "scout", "unlockedBy", "'maud_1' must be a quest in the campaign whose member is 'rook'" },
     };
 
     [Theory]
@@ -252,6 +327,8 @@ public class UniqueClassTests
             "nobody" => surgeon with { Unique = "nobody" },
             "the captain" => surgeon with { Unique = Shipped.Cast[0].Id },
             "another's quest" => surgeon with { UnlockedBy = "bet_postern" },
+            "another's unauthored quest" => Shipped.Class("scout") with { UnlockedBy = "teodor_9" },
+            "another's authored quest" => Shipped.Class("scout") with { UnlockedBy = "maud_1" },
             _ => surgeon with { StrikeOnly = ValueList<WeaponType>.Of(WeaponType.Faith) },
         };
 
@@ -269,5 +346,8 @@ public class UniqueClassTests
         Assert.Equal(Shipped.Class("fieldsurgeon"), reloaded.Class("fieldsurgeon"));
         Assert.Equal(Shipped.Ability("ward_rounds"), reloaded.Ability("ward_rounds"));
         Assert.Equal(Shipped.Ability("steady_hands"), reloaded.Ability("steady_hands"));
+        Assert.Equal(Shipped.Class("scout"), reloaded.Class("scout"));
+        Assert.Equal(Shipped.Ability("high_watch"), reloaded.Ability("high_watch"));
+        Assert.Equal(Shipped.Ability("headcount"), reloaded.Ability("headcount"));
     }
 }

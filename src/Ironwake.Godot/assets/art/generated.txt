@@ -38,6 +38,8 @@ token_reaver_player.png
 token_reaver_enemy.png
 token_scholar_player.png
 token_scholar_enemy.png
+token_scout_player.png
+token_scout_enemy.png
 token_sentinel_player.png
 token_sentinel_enemy.png
 token_sergeant_player.png
@@ -350,6 +352,14 @@ scholar_faith_miss_recover.png
 scholar_faith_dodge.png
 scholar_faith_hit_react.png
 scholar_faith_fall.png
+scout_lance_idle.png
+scout_lance_advance.png
+scout_lance_strike.png
+scout_lance_strike_crit.png
+scout_lance_miss_recover.png
+scout_lance_dodge.png
+scout_lance_hit_react.png
+scout_lance_fall.png
 sentinel_lance_idle.png
 sentinel_lance_advance.png
 sentinel_lance_strike.png

@@ -409,6 +409,32 @@ public sealed class ProtocolSession
                 }
 
                 w.WriteEndArray();
+                var priced = group.Priced.Where(l => group.Members.Any(m => m.Id == l.Enemy.Id)).ToList();
+                if (group.CountedBy is { } counter && priced.Count > 0)
+                {
+                    w.WriteString("countedBy", counter.Id);
+                    w.WriteStartArray("priced");
+                    foreach (var line in priced)
+                    {
+                        w.WriteStartObject();
+                        w.WriteString("enemy", line.Enemy.Id);
+                        w.WriteStartObject("from");
+                        w.WriteNumber("x", line.From.X);
+                        w.WriteNumber("y", line.From.Y);
+                        w.WriteEndObject();
+                        w.WriteNumber("slot", line.Slot);
+                        w.WriteString("weapon", line.Weapon.Id);
+                        w.WriteNumber("ifAllLand", line.IfAllLand);
+                        w.WritePropertyName("forecast");
+                        ProtocolJson.WriteForecast(w, line.Forecast);
+                        WriteCounterWeapon(w, unit, line.Forecast);
+                        w.WriteEndObject();
+                    }
+
+                    w.WriteEndArray();
+                    w.WriteNumber("ifWokenAllLand", Queries.IfAllLand(priced));
+                }
+
                 w.WriteEndObject();
             }
 

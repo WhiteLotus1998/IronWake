@@ -1133,7 +1133,7 @@ public static class ProtocolJson
             Grounded = OptionalInt(e, "grounded") ?? 0,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
-        };
+        }.Sighted(content);
     }
 
     /// <summary>

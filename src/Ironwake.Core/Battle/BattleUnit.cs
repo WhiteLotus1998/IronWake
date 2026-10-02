@@ -80,6 +80,16 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// How many tiles further than its side's dusk sight the unit sees (issue 706, the Scout's
+    /// <see cref="SightEffect"/>), read from its abilities when it is placed (<see cref="BattleUnit.Sighted"/>).
+    /// 0 for nearly every unit; nothing in daylight (<see cref="Dusk.Sees"/>).
+    /// </summary>
+    public int ExtraSight { get; init; }
+
+    /// <summary>This unit with <see cref="ExtraSight"/> read from its abilities in <paramref name="content"/> (issue 706).</summary>
+    public BattleUnit Sighted(GameContent content) => this with { ExtraSight = AbilityRules.ExtraSight(content.AbilitiesOf(Unit)) };
+
+    /// <summary>
     /// The grounding clock (issue 703, <see cref="Grounding"/>): 0 not grounded; 1 a flier landed by a
     /// bow's crit, its side's next phase not yet begun; 2 that phase under way, cleared when it ends.
     /// While it is not 0 the unit moves on foot (<see cref="Grounding.MovementOf"/>).
