@@ -73,8 +73,8 @@ public class ScoutTests
     [Fact]
     public void TheDuskLineSaysHowFarTheScoutSees()
     {
-        Assert.Contains("dusk: sight 1; it gets no darker; rook sees 3; no side strikes", Dusk.Line(Night("scout")));
-        Assert.DoesNotContain("sees", Dusk.Line(Night("skyrider")));
+        Assert.Contains("dusk: sight 1; it gets no darker; rook sees 3; no side strikes", Dusk.Line(Night("scout"), Starter));
+        Assert.DoesNotContain("sees", Dusk.Line(Night("skyrider"), Starter));
     }
 
     [Fact]

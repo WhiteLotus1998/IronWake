@@ -298,6 +298,19 @@ public class ProtocolSessionTests
         Assert.Throws<ProtocolException>(() => ProtocolJson.ReadState(full, content));
     }
 
+    /// <summary>Issue 765: a dusk state carries the console's dusk line, hearing radius and all, and a daylight state none.</summary>
+    [Fact]
+    public void TheDuskStateCarriesTheDuskLineWithTheHearingRadius()
+    {
+        var (content, state) = DarkStart();
+        var day = BattleState.From(MapFormat.Parse("day.map", Dark.Replace("dusk: 1\n", ""), content), content, content.Cast, 7);
+
+        var view = ProtocolJson.Write(w => ProtocolJson.WriteState(w, state, content, full: false, playerView: true));
+
+        Assert.Contains($"\"duskLine\":\"dusk: sight 1; it gets no darker; 1 unseen (?); no side strikes what it cannot see; the enemy hears within {content.WakeRadius}\"", view);
+        Assert.DoesNotContain("duskLine", ProtocolJson.State(day, content));
+    }
+
     /// <summary>Issue 302: the omniscient state keeps everything, says so, and reads back equal.</summary>
     [Fact]
     public void TheOmniscientStateCarriesEveryUnitAndReadsBack()
