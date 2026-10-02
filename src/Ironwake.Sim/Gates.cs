@@ -40,6 +40,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The player units other than the captain deployed at the start of the game (issue 263).</summary>
     public int Recruits { get; init; }
 
+    /// <summary>The weapons each player unit attacked and countered with (issue 746), by id; a unit that never struck is absent.</summary>
+    public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+
     /// <summary>
     /// The player units other than the captain that came out of the game alive, by
     /// <see cref="BattleState.Survivors"/>: on an Escape map the ones that left through an
@@ -170,6 +173,7 @@ public static class Runner
             mix[unit.Id] = ActionMix.Zero;
         }
 
+        var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
         var lastCombatTurn = 0;
         var playerWatch = WatchCounts.Zero;
         var enemyWatch = WatchCounts.Zero;
@@ -214,6 +218,11 @@ public static class Runner
                 }
 
                 Tally(mix, result.Events);
+                foreach (var (unitId, _, type, counter) in WeaponMix.Strikes(state, content, command, result.Events))
+                {
+                    weapons[unitId] = weapons.GetValueOrDefault(unitId, WeaponMix.Zero).With(type, counter);
+                }
+
                 pins = pins.After(state, command, result.Events);
                 if (anvils.FindIndex(a => a.Commands[0] == command) is var anvil and >= 0)
                 {
@@ -257,6 +266,7 @@ public static class Runner
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
+            Weapons = weapons,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
             Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),
         };

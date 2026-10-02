@@ -1,0 +1,107 @@
+# issue 746: --ladder --seeds 100 (Release) on issue/746-sim-weapon-choice; weapons [type attacks/counters] is the captain's
+ladder: 8 maps, 100 seeds, the captain unpromoted and in marshal, ranger, vanguard, champion, commander, pathfinder
+ladder: brackwater_cut
+  tier 1, party and enemies +2:
+    cadet: gate 1 25.0, gate 4 FAILED, captain [atk 3 dmg 2059 heal 0 abs 359], weapons [sword 3/264]
+    marshal: gate 1 81.0, gate 4 ok, captain [atk 192 dmg 1578 heal 0 abs 156], weapons [sword 0/9 reason 192/128]
+    ranger: gate 1 71.0, gate 4 FAILED, captain [atk 208 dmg 1725 heal 0 abs 206], weapons [sword 3/6 bow 205/7]
+    vanguard: gate 1 62.0, gate 4 ok, captain [atk 21 dmg 2003 heal 0 abs 309], weapons [sword 21/253]
+    spread 19.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 76.0, gate 4 ok, captain [atk 15 dmg 2313 heal 0 abs 257], weapons [sword 15/222]
+    champion: gate 1 96.0, gate 4 ok, captain [atk 15 dmg 2977 heal 0 abs 218], weapons [sword 11/195 lance 1/4 axe 3/6]
+    commander: gate 1 97.0, gate 4 ok, captain [atk 52 dmg 1048 heal 0 abs 74], weapons [sword 1/41 lance 1/0 reason 50/28]
+    pathfinder: gate 1 96.0, gate 4 ok, captain [atk 57 dmg 1695 heal 0 abs 160], weapons [sword 0/73 bow 57/2]
+    spread 1.0, bar 10: ok
+ladder: harrow_weir
+  tier 1, party and enemies +2:
+    cadet: gate 1 70.0, gate 4 ok, captain [atk 220 dmg 3684 heal 0 abs 301], weapons [sword 220/86]
+    marshal: gate 1 95.0, gate 4 ok, captain [atk 371 dmg 5551 heal 0 abs 69], weapons [sword 137/24 reason 234/23]
+    ranger: gate 1 95.0, gate 4 ok, captain [atk 447 dmg 7371 heal 0 abs 271], weapons [sword 32/1 bow 415/5]
+    vanguard: gate 1 68.0, gate 4 ok, captain [atk 243 dmg 4100 heal 0 abs 312], weapons [sword 243/96]
+    spread 27.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 73.0, gate 4 ok, captain [atk 116 dmg 3268 heal 0 abs 256], weapons [sword 116/133]
+    champion: gate 1 87.0, gate 4 ok, captain [atk 305 dmg 7409 heal 0 abs 167], weapons [sword 68/18 lance 133/16 axe 104/60]
+    commander: gate 1 88.0, gate 4 FAILED, captain [atk 478 dmg 6761 heal 0 abs 146], weapons [sword 52/15 lance 113/36 reason 313/28]
+    pathfinder: gate 1 96.0, gate 4 ok, captain [atk 484 dmg 9080 heal 0 abs 107], weapons [sword 38/2 bow 446/7]
+    spread 9.0, bar 10; gate 4 lost under commander: FAILED
+ladder: old_mill_road
+  tier 1, party and enemies +2:
+    cadet: gate 1 27.0, gate 4 ok, captain [atk 262 dmg 5594 heal 0 abs 547], weapons [sword 262/337]
+    marshal: gate 1 92.0, gate 4 ok, captain [atk 307 dmg 7956 heal 0 abs 212], weapons [sword 208/139 reason 99/58]
+    ranger: gate 1 95.0, gate 4 ok, captain [atk 291 dmg 8686 heal 0 abs 241], weapons [sword 205/207 bow 86/1]
+    vanguard: gate 1 38.0, gate 4 ok, captain [atk 285 dmg 6066 heal 0 abs 579], weapons [sword 285/368]
+    spread 57.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 91.0, gate 4 ok, captain [atk 262 dmg 8533 heal 0 abs 210], weapons [sword 262/190]
+    champion: gate 1 100.0, gate 4 ok, captain [atk 298 dmg 10131 heal 0 abs 159], weapons [sword 291/148 axe 7/4]
+    commander: gate 1 94.0, gate 4 ok, captain [atk 330 dmg 10315 heal 0 abs 321], weapons [sword 159/175 reason 171/120]
+    pathfinder: gate 1 83.0, gate 4 FAILED, captain [atk 364 dmg 8980 heal 0 abs 333], weapons [sword 161/36 bow 203/14]
+    spread 17.0, bar 10; gate 4 lost under pathfinder: FAILED
+ladder: sallow_grange
+  tier 1, party and enemies +2:
+    cadet: gate 1 40.0, gate 4 FAILED, captain [atk 299 dmg 2846 heal 0 abs 267], weapons [sword 299/120]
+    marshal: gate 1 40.0, gate 4 ok, captain [atk 526 dmg 5030 heal 0 abs 158], weapons [sword 203/8 reason 323/56]
+    ranger: gate 1 41.0, gate 4 ok, captain [atk 666 dmg 5709 heal 0 abs 116], weapons [sword 124/1 bow 542/14]
+    vanguard: gate 1 38.0, gate 4 FAILED, captain [atk 363 dmg 3512 heal 0 abs 276], weapons [sword 363/138]
+    spread 3.0, bar 10: ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 56.0, gate 4 ok, captain [atk 310 dmg 3144 heal 0 abs 178], weapons [sword 310/104]
+    champion: gate 1 92.0, gate 4 ok, captain [atk 300 dmg 5223 heal 0 abs 59], weapons [sword 187/4 lance 6/0 axe 107/18]
+    commander: gate 1 92.0, gate 4 ok, captain [atk 546 dmg 6531 heal 0 abs 36], weapons [sword 200/0 lance 34/3 reason 312/8]
+    pathfinder: gate 1 85.0, gate 4 FAILED, captain [atk 514 dmg 7392 heal 0 abs 47], weapons [sword 49/0 bow 465/7]
+    spread 7.0, bar 10; gate 4 lost under pathfinder: FAILED
+ladder: saltmarsh_ford
+  tier 1, party and enemies +2:
+    cadet: gate 1 27.0, gate 4 FAILED, captain [atk 82 dmg 7525 heal 0 abs 895], weapons [sword 82/618]
+    marshal: gate 1 61.0, gate 4 ok, captain [atk 482 dmg 8223 heal 0 abs 500], weapons [sword 95/223 reason 387/57]
+    ranger: gate 1 69.0, gate 4 ok, captain [atk 826 dmg 9685 heal 0 abs 171], weapons [sword 59/0 bow 767/9]
+    vanguard: gate 1 24.0, gate 4 FAILED, captain [atk 138 dmg 7552 heal 0 abs 841], weapons [sword 138/582]
+    spread 45.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 39.0, gate 4 ok, captain [atk 200 dmg 9283 heal 0 abs 796], weapons [sword 200/566]
+    champion: gate 1 69.0, gate 4 FAILED, captain [atk 314 dmg 11578 heal 0 abs 606], weapons [sword 185/242 lance 11/25 axe 118/167]
+    commander: gate 1 61.0, gate 4 ok, captain [atk 520 dmg 7673 heal 0 abs 503], weapons [sword 140/186 lance 1/1 reason 379/55]
+    pathfinder: gate 1 83.0, gate 4 FAILED, captain [atk 674 dmg 12533 heal 0 abs 444], weapons [sword 51/3 bow 623/98]
+    spread 22.0, bar 10; gate 4 lost under champion, pathfinder: FAILED
+ladder: starting_alone
+  tier 1, party and enemies +2:
+    cadet: gate 1 1.0, gate 4 ok, captain [atk 3 dmg 3504 heal 0 abs 602], weapons [sword 3/197]
+    marshal: gate 1 1.0, gate 4 ok, captain [atk 9 dmg 2796 heal 0 abs 748], weapons [sword 7/119 reason 2/5]
+    ranger: gate 1 12.0, gate 4 ok, captain [atk 91 dmg 5425 heal 0 abs 686], weapons [sword 81/188 bow 10/0]
+    vanguard: gate 1 0.0, gate 4 ok, captain [atk 17 dmg 3689 heal 0 abs 776], weapons [sword 17/197]
+    spread 12.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 4.0, gate 4 ok, captain [atk 11 dmg 3289 heal 0 abs 575], weapons [sword 11/117]
+    champion: gate 1 1.0, gate 4 ok, captain [atk 27 dmg 4099 heal 0 abs 712], weapons [sword 27/117]
+    commander: gate 1 2.0, gate 4 ok, captain [atk 271 dmg 5740 heal 0 abs 718], weapons [sword 102/0 reason 169/234]
+    pathfinder: gate 1 7.0, gate 4 ok, captain [atk 68 dmg 5028 heal 0 abs 730], weapons [sword 58/115 bow 10/0]
+    spread 6.0, bar 10: ok
+ladder: the_mill
+  tier 1, party and enemies +2:
+    cadet: gate 1 39.0, gate 4 ok, captain [atk 353 dmg 5161 heal 0 abs 276], weapons [sword 353/122]
+    marshal: gate 1 66.0, gate 4 ok, captain [atk 278 dmg 5689 heal 0 abs 98], weapons [sword 204/43 reason 74/30]
+    ranger: gate 1 73.0, gate 4 ok, captain [atk 279 dmg 5674 heal 0 abs 172], weapons [sword 191/42 bow 88/1]
+    vanguard: gate 1 83.0, gate 4 ok, captain [atk 411 dmg 6356 heal 0 abs 433], weapons [sword 411/228]
+    spread 17.0, bar 10: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 98.0, gate 4 ok, captain [atk 269 dmg 6085 heal 0 abs 184], weapons [sword 269/58]
+    champion: gate 1 100.0, gate 4 ok, captain [atk 275 dmg 7249 heal 0 abs 175], weapons [sword 255/48 axe 20/5]
+    commander: gate 1 97.0, gate 4 ok, captain [atk 294 dmg 7716 heal 0 abs 239], weapons [sword 226/67 reason 68/27]
+    pathfinder: gate 1 100.0, gate 4 ok, captain [atk 247 dmg 9647 heal 0 abs 250], weapons [sword 209/105 bow 38/11]
+    spread 3.0, bar 10: ok
+ladder: the_tollgate
+  tier 1, party and enemies +2:
+    cadet: gate 1 65.0, gate 4 ok, captain [atk 236 dmg 2167 heal 0 abs 269], weapons [sword 236/45]
+    marshal: gate 1 76.0, gate 4 FAILED, captain [atk 467 dmg 4374 heal 0 abs 165], weapons [sword 162/19 reason 305/113]
+    ranger: gate 1 76.0, gate 4 ok, captain [atk 542 dmg 5979 heal 0 abs 114], weapons [sword 264/8 bow 278/27]
+    vanguard: gate 1 76.0, gate 4 ok, captain [atk 264 dmg 2148 heal 0 abs 231], weapons [sword 264/21]
+    spread 0.0, bar 10; gate 4 lost under marshal: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 96.0, gate 4 ok, captain [atk 233 dmg 2620 heal 0 abs 156], weapons [sword 233/44]
+    champion: gate 1 98.0, gate 4 ok, captain [atk 240 dmg 3000 heal 0 abs 127], weapons [sword 202/8 lance 3/0 axe 35/2]
+    commander: gate 1 100.0, gate 4 FAILED, captain [atk 350 dmg 5607 heal 0 abs 129], weapons [sword 196/11 lance 6/0 reason 148/116]
+    pathfinder: gate 1 98.0, gate 4 FAILED, captain [atk 428 dmg 9487 heal 0 abs 207], weapons [sword 182/12 bow 246/57]
+    spread 2.0, bar 10; gate 4 lost under commander, pathfinder: FAILED
+ladder: FAILED

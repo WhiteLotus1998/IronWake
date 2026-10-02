@@ -2478,13 +2478,14 @@ public class SimFullTests
     /// Issue 438: on a <c>wildfire: on</c> map the trace shows the fire. Seed 1 on the Tollgate
     /// sample: Pell's hit lights 5,5 under the archer, the archer burns at the enemy phase
     /// start, the front steps at the next player phase start, and Pell burns on the tile it lit.
-    /// The plain Tollgate on the same seed prints no fire line.
+    /// The plain Tollgate on the same seed prints no fire line. Pell carries Cinder alone here: since
+    /// issue 746 the heuristic picks among her spells and casts Gust, which never lights a tile.
     /// </summary>
     [Fact]
     public void AWildfireTracePrintsBurnsIgnitionsAndTheFrontsStep()
     {
         var sample = Path.Combine(Path.GetDirectoryName(Fixture.RealContentDirectory())!, "docs", "samples", "the_tollgate_wildfire.map");
-        var trace = Capture(() => Ironwake.Sim.Program.Trace(sample, 1));
+        var trace = Capture(() => Ironwake.Sim.Program.Trace(sample, 1, RollScheme.TwoRollAverage, CinderPell));
         Assert.Contains("#   pell vs archer-2: hit 12; pell 16 hp, archer-2 5 hp\n#   5,5 ignites\n", trace);
         Assert.Contains("\nend\n#   archer-2 burns 3, 2 hp\n# enemy: ", trace);
         Assert.Contains("\n# turn 3\n#   fire: out 5,5 6,5; lit 6,4 7,5 5,6\n", trace);
@@ -2571,4 +2572,12 @@ public class SimFullTests
 
     private static string Capture(Action run) =>
         ConsoleCapture.Run(run, Path.GetDirectoryName(Fixture.RealContentDirectory())!);
+
+    /// <summary>The content with Pell carrying Cinder alone, so the heuristic's only spell is the one that lights a tile.</summary>
+    private static GameContent CinderPell(GameContent content)
+    {
+        var slot = content.Cast.ToList().FindIndex(u => u.Id == "pell");
+        var pell = content.Cast[slot] with { Inventory = Inventory.Empty.Add(new ItemStack("cinder", content.Weapons["cinder"].Durability)) };
+        return content with { Cast = content.Cast.SetItem(slot, pell) };
+    }
 }
