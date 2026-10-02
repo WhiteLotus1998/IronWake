@@ -63,7 +63,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brigand-1
-forecast pell -> brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: acc 87% dmg 13 crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 9)
   pell hp 16, brigand-1 hp 9
@@ -127,7 +127,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
+forecast captain -> brigand-1: acc 63% dmg 10 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 captain attacks brigand-1
   captain hits brigand-1 for 10 (hp 0)
   captain hp 22, brigand-1 hp 0
@@ -1184,7 +1184,7 @@ archer-1 waits
 enemy: move brawler-1 8,10
 brawler-1 moves 11,10 -> 8,10 via 10,10 9,10
 enemy: attack brawler-1 dunstan
-forecast brawler-1 -> dunstan: dmg 3 x2 hit 95% crit 0%; counter: dmg 11 hit 74% crit 1%
+forecast brawler-1 -> dunstan: acc 95% dmg 3 x2 crit 0%; counter: acc 74% dmg 11 crit 1%
 brawler-1 attacks dunstan
   brawler-1 hits dunstan for 3 (hp 20)
   brawler-1 hits dunstan for 3 (hp 17)
@@ -1259,7 +1259,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brawler-1
-forecast pell -> brawler-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brawler-1
   pell crits brawler-1 for 39 (hp 0)
   pell hp 16, brawler-1 hp 0
@@ -1320,7 +1320,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 6 (hp 14)
   ottilie hp 17, soldier-1 hp 14
@@ -1380,7 +1380,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack dunstan soldier-1
-forecast dunstan -> soldier-1: dmg 9 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+forecast dunstan -> soldier-1: acc 73% dmg 9 crit 0%; counter: acc 82% dmg 6 crit 1%
 dunstan attacks soldier-1
   dunstan hits soldier-1 for 9 (hp 5)
   soldier-1 hits dunstan for 6 (hp 11)
@@ -1441,7 +1441,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack keziah soldier-1
-forecast keziah -> soldier-1 with Iron Axe: dmg 12 hit 67% crit 1%; counter: dmg 10 hit 74% crit 0%
+forecast keziah -> soldier-1 with Iron Axe: acc 67% dmg 12 crit 1%; counter: acc 74% dmg 10 crit 0%
 keziah attacks soldier-1
   keziah hits soldier-1 for 12 (hp 0)
   keziah hp 23, soldier-1 hp 0
@@ -1934,7 +1934,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-2
-forecast ottilie -> brigand-2: dmg 8 hit 86% crit 5%; counter: none
+forecast ottilie -> brigand-2: acc 86% dmg 8 crit 5%; counter: none
 ottilie attacks brigand-2
   ottilie hits brigand-2 for 8 (hp 14)
   ottilie hp 17, brigand-2 hp 14
@@ -1994,7 +1994,7 @@ B  teodor           Teodor L1 pikeman          7,0    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack dunstan brigand-2
-forecast dunstan -> brigand-2: dmg 11 hit 77% crit 1%; counter: dmg 8 hit 73% crit 0%
+forecast dunstan -> brigand-2: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
 dunstan attacks brigand-2
   dunstan hits brigand-2 for 11 (hp 3)
   brigand-2 hits dunstan for 8 (hp 3)
@@ -2249,7 +2249,7 @@ B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Road  done
 enemy: wait archer-1
 archer-1 waits
 enemy: attack brigand-2 dunstan
-forecast brigand-2 -> dunstan: dmg 8 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-2 -> dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-2 attacks dunstan
   brigand-2 misses dunstan
   dunstan hits brigand-2 for 11 (hp 0)
@@ -2261,7 +2261,7 @@ shieldbearer-1 waits
 enemy: move weir_foreman-1 12,7
 weir_foreman-1 moves 13,6 -> 12,7 via 12,6
 enemy: attack weir_foreman-1 keziah
-forecast weir_foreman-1 -> keziah: dmg 12 hit 60% crit 1%; counter: none
+forecast weir_foreman-1 -> keziah: acc 60% dmg 12 crit 1%; counter: none
 weir_foreman-1 attacks keziah
   weir_foreman-1 hits keziah for 12 (hp 11)
   weir_foreman-1 hp 28, keziah hp 11
@@ -2319,7 +2319,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          7,4    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     12,7   hp 28/28  Plain  group weir, boss, awake
 > attack pell weir_foreman-1
-forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 99% crit 1%; counter: dmg 13 hit 67% crit 1%
+forecast pell -> weir_foreman-1 with Cinder: acc 99% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
 pell attacks weir_foreman-1
   pell hits weir_foreman-1 for 12 (hp 16)
   weir_foreman-1 misses pell
@@ -2674,7 +2674,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,6    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 16/28  Hill  group weir, boss, awake
 > attack pell weir_foreman-1
-forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 94% crit 1%; counter: dmg 13 hit 67% crit 1%
+forecast pell -> weir_foreman-1 with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
 pell attacks weir_foreman-1
   pell hits weir_foreman-1 for 12 (hp 4)
   weir_foreman-1 misses pell
@@ -2920,7 +2920,7 @@ archer-1 waits
 enemy: wait shieldbearer-1
 shieldbearer-1 waits
 enemy: attack weir_foreman-1 pell
-forecast weir_foreman-1 -> pell: dmg 13 hit 67% crit 1%; counter with Cinder: dmg 12 hit 94% crit 1%
+forecast weir_foreman-1 -> pell: acc 67% dmg 13 crit 1%; counter with Cinder: acc 94% dmg 12 crit 1%
 weir_foreman-1 attacks pell
   weir_foreman-1 hits pell for 13 (hp 3)
   pell hits weir_foreman-1 for 12 (hp 0)

@@ -195,9 +195,9 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
 > forecast wren archer-2
-Forecast Wren -> Archer 2: dmg 9 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 9 crit 3%; counter: none
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 9 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 9 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 9 (hp 8)
   Wren hp 20, Archer 2 hp 8
@@ -314,7 +314,7 @@ Archer 2 waits
 enemy: wait bandit_leader-1
 Bandit Leader waits
 enemy: attack toll_brigand-1 wren
-Forecast Toll Brigand -> Wren: dmg 10 hit 13% crit 0%; counter: none
+Forecast Toll Brigand -> Wren: acc 13% dmg 10 crit 0%; counter: none
 Toll Brigand attacks Wren
   Toll Brigand misses Wren
   Toll Brigand hp 23, Wren hp 20
@@ -374,11 +374,11 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
 > forecast captain toll_brigand-1 art full_measure
-Forecast Alder Fenn -> Toll Brigand: dmg 18 x2 hit 97% crit 25%; counter: dmg 10 hit 39% crit 0%
-  Art Full Measure: Iron Sword at mt 13 hit 105 crit 20 wt 5 range 1-1; spends up to 4 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
+Forecast Alder Fenn -> Toll Brigand: acc 97% dmg 18 x2 crit 25%; counter: acc 39% dmg 10 crit 0%
+  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 4 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
 > attack captain toll_brigand-1 art full_measure
-Forecast Alder Fenn -> Toll Brigand: dmg 18 x2 hit 97% crit 25%; counter: dmg 10 hit 39% crit 0%
-  Art Full Measure: Iron Sword at mt 13 hit 105 crit 20 wt 5 range 1-1; spends up to 4 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
+Forecast Alder Fenn -> Toll Brigand: acc 97% dmg 18 x2 crit 25%; counter: acc 39% dmg 10 crit 0%
+  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 4 of 40 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Toll Brigand
   Alder Fenn hits Toll Brigand for 18 (hp 5)
@@ -411,7 +411,7 @@ C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 9 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 9 crit 3%; counter: none
 Wren attacks Archer 2
   Wren misses Archer 2
   Wren hp 20, Archer 2 hp 8
@@ -490,7 +490,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
 > threat captain
 Threat on Alder Fenn at 6,6 (Plain):
-  Archer 2 from 5,5 with Iron Bow (slot 1): dmg 5 hit 70% crit 0%; counter: none
+  Archer 2 from 5,5 with Iron Bow (slot 1): acc 70% dmg 5 crit 0%; counter: none
   If all land: 5 against 22 hp
 > end
 -- Player phase ends, turn 3 --
@@ -498,7 +498,7 @@ Threat on Alder Fenn at 6,6 (Plain):
 enemy: wait archer-1
 Archer 1 waits
 enemy: attack archer-2 captain
-Forecast Archer 2 -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer 2 attacks Alder Fenn
   Archer 2 hits Alder Fenn for 5 (hp 17)
   Archer 2 hp 8, Alder Fenn hp 17
@@ -534,9 +534,9 @@ C  teodor           Teodor L1 pikeman          7,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
 > forecast wren archer-2
-Forecast Wren -> Archer 2: dmg 9 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 9 crit 3%; counter: none
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 9 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 9 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 9 (hp 0)
   Wren hp 20, Archer 2 hp 0
@@ -676,11 +676,11 @@ C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
 > forecast teodor toll_warden-1 art long_thrust
-Forecast Teodor -> Toll Warden: dmg 7 hit 76% crit 1%; counter: dmg 6 hit 31% crit 1%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+Forecast Teodor -> Toll Warden: acc 76% dmg 7 crit 1%; counter: acc 31% dmg 6 crit 1%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
 > attack teodor toll_warden-1 art long_thrust
-Forecast Teodor -> Toll Warden: dmg 7 hit 76% crit 1%; counter: dmg 6 hit 31% crit 1%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+Forecast Teodor -> Toll Warden: acc 76% dmg 7 crit 1%; counter: acc 31% dmg 6 crit 1%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 7 (hp 14)
@@ -789,8 +789,8 @@ B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 Threat on Alder Fenn at 5,5 (Forest): no enemy can strike him next phase
 > threat pell
 Threat on Pell at 7,4 (Plain):
-  Bandit Leader from 7,2 with Toll Axe (slot 2): dmg 14 hit 65% crit 0%; counter with Cinder: dmg 12 hit 99% crit 1%
-  Rider from 8,4 with Iron Lance (slot 1): dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+  Bandit Leader from 7,2 with Toll Axe (slot 2): acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
+  Rider from 8,4 with Iron Lance (slot 1): acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
   If all land: 25 against 16 hp
 > end
 Lethal if all land: Pell (Bandit Leader for 14, Rider for 11, against 16 hp)
@@ -799,7 +799,7 @@ Lethal if all land: Pell (Bandit Leader for 14, Rider for 11, against 16 hp)
 enemy: wait archer-1
 Archer 1 waits
 enemy: attack bandit_leader-1 pell 2
-Forecast Bandit Leader -> Pell: dmg 14 hit 65% crit 0%; counter with Cinder: dmg 12 hit 99% crit 1%
+Forecast Bandit Leader -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Pell
   Bandit Leader misses Pell
@@ -809,14 +809,14 @@ Pell gains 14 exp (14)
 enemy: move rider-1 8,4
 Rider moves 13,4 -> 8,4 via 12,4 11,4 10,4 9,4
 enemy: attack rider-1 pell
-Forecast Rider -> Pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Rider -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
 Rider attacks Pell
   Rider hits Pell for 11 (hp 5)
   Pell hits Rider for 12 (hp 9)
   Rider hp 9, Pell hp 5
 Pell gains 14 exp (28)
 enemy: attack toll_warden-1 teodor
-Forecast Toll Warden -> Teodor: dmg 6 hit 31% crit 1%; counter: none
+Forecast Toll Warden -> Teodor: acc 31% dmg 6 crit 1%; counter: none
 Toll Warden attacks Teodor
   Toll Warden misses Teodor
   Toll Warden hp 14, Teodor hp 21
@@ -872,7 +872,7 @@ C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 14/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack pell rider-1
-Forecast Pell -> Rider with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 11 hit 80% crit 0%
+Forecast Pell -> Rider with Cinder: acc 99% dmg 12 crit 2%; counter: acc 80% dmg 11 crit 0%
   Counter: lethal to Pell (11 against 5 hp)
 Pell attacks Rider
   Pell hits Rider for 12 (hp 0)
@@ -902,8 +902,8 @@ C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 14/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack teodor toll_warden-1 art long_thrust
-Forecast Teodor -> Toll Warden: dmg 7 hit 76% crit 1%; counter: dmg 6 hit 31% crit 1%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 37 uses, 2 of them hit or miss
+Forecast Teodor -> Toll Warden: acc 76% dmg 7 crit 1%; counter: acc 31% dmg 6 crit 1%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 37 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 7 (hp 7)
@@ -957,7 +957,7 @@ C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 7/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              6,3    hp 20/20  Plain
 > attack wren toll_warden-1
-Forecast Wren -> Toll Warden: dmg 8 hit 85% crit 3%; counter: dmg 8 hit 54% crit 0%
+Forecast Wren -> Toll Warden: acc 85% dmg 8 crit 3%; counter: acc 54% dmg 8 crit 0%
 Wren attacks Toll Warden
   Wren hits Toll Warden for 8 (hp 0)
   Wren hp 20, Toll Warden hp 0
@@ -988,12 +988,12 @@ B  wren             Wren L1 cadet              6,3    hp 20/20  Plain  done
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 72% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 72% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 14)
   Archer 1 hp 17, Wren hp 14
 enemy: attack bandit_leader-1 wren
-Forecast Bandit Leader -> Wren: dmg 12 hit 45% crit 0%; counter: none
+Forecast Bandit Leader -> Wren: acc 45% dmg 12 crit 0%; counter: none
 Bandit Leader attacks Wren
   Bandit Leader misses Wren
   Bandit Leader hp 14, Wren hp 14
@@ -1045,7 +1045,7 @@ D  pell             Pell L1 adept              8,5    hp 5/16   Plain
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 B  wren             Wren L1 cadet              6,2    hp 14/20  Plain
 > attack wren bandit_leader-1
-Forecast Wren -> Bandit Leader: dmg 8 hit 85% crit 2%; counter with Toll Axe: dmg 12 hit 45% crit 0%
+Forecast Wren -> Bandit Leader: acc 85% dmg 8 crit 2%; counter with Toll Axe: acc 45% dmg 12 crit 0%
 Wren attacks Bandit Leader
   Wren hits Bandit Leader for 8 (hp 6)
   Bandit Leader hits Wren for 12 (hp 2)
@@ -1097,11 +1097,11 @@ D  pell             Pell L1 adept              8,5    hp 5/16   Plain
 C  teodor           Teodor L1 pikeman          6,3    hp 21/21  Plain
 B  wren             Wren L2 cadet              6,2    hp 2/20   Plain  done
 > forecast teodor bandit_leader-1 art long_thrust
-Forecast Teodor -> Bandit Leader: dmg 7 hit 76% crit 0%; counter: dmg 11 hit 58% crit 1%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 34 uses, 2 of them hit or miss
+Forecast Teodor -> Bandit Leader: acc 76% dmg 7 crit 0%; counter: acc 58% dmg 11 crit 1%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 34 uses, 2 of them hit or miss
 > attack teodor bandit_leader-1 art long_thrust
-Forecast Teodor -> Bandit Leader: dmg 7 hit 76% crit 0%; counter: dmg 11 hit 58% crit 1%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 34 uses, 2 of them hit or miss
+Forecast Teodor -> Bandit Leader: acc 76% dmg 7 crit 0%; counter: acc 58% dmg 11 crit 1%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 34 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Bandit Leader
   Teodor hits Bandit Leader for 7 (hp 0)
@@ -1158,7 +1158,7 @@ Threat on Alder Fenn at 6,4 (Forest): no enemy can strike him next phase
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 81% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 81% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 16)
   Archer 1 hp 17, Teodor hp 16
@@ -1208,8 +1208,8 @@ D  pell             Pell L1 adept              8,5    hp 5/16   Plain
 C  teodor           Teodor L1 pikeman          5,2    hp 16/21  Plain
 B  wren             Wren L2 cadet              6,2    hp 2/20   Plain
 > attack teodor archer-1 art long_thrust
-Forecast Teodor -> Archer 1: dmg 9 hit 76% crit 1%; counter: dmg 5 hit 81% crit 3%
-  Art Long Thrust: Iron Lance at mt 3 hit 70 crit 0 wt 6 range 1-2; spends up to 3 of 31 uses, 2 of them hit or miss
+Forecast Teodor -> Archer 1: acc 76% dmg 9 crit 1%; counter: acc 81% dmg 5 crit 3%
+  Technique Long Thrust: Iron Lance at acc 70 power 3 crit 0 wt 6 range 1-2; spends up to 3 of 31 uses, 2 of them hit or miss
 Teodor declares Long Thrust with Iron Lance, spending 2 extra uses
 Teodor attacks Archer 1
   Teodor hits Archer 1 for 9 (hp 8)

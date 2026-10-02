@@ -689,14 +689,14 @@ archer-1 waits
 enemy: move archer-2 5,5
 archer-2 moves 8,6 -> 5,5 via 8,5 7,5 6,5
 enemy: attack archer-2 teodor
-forecast archer-2 -> teodor: dmg 5 hit 81% crit 3%; counter: none
+forecast archer-2 -> teodor: acc 81% dmg 5 crit 3%; counter: none
 archer-2 attacks teodor
   archer-2 hits teodor for 5 (hp 16)
   archer-2 hp 17, teodor hp 16
 enemy: move brawler-1 4,5
 brawler-1 moves 7,6 -> 4,5 via 7,5 6,5 5,5
 enemy: attack brawler-1 teodor
-forecast brawler-1 -> teodor: dmg 6 x2 hit 91% crit 0%; counter: dmg 12 hit 77% crit 2%
+forecast brawler-1 -> teodor: acc 91% dmg 6 x2 crit 0%; counter: acc 77% dmg 12 crit 2%
 brawler-1 attacks teodor
   brawler-1 hits teodor for 6 (hp 10)
   brawler-1 hits teodor for 6 (hp 4)
@@ -797,7 +797,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > attack pell brawler-1
-forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brawler-1
   pell hits brawler-1 for 13 (hp 0)
   pell hp 16, brawler-1 hp 0
@@ -858,7 +858,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > attack wren archer-2
-forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-2: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-2
   wren misses archer-2
   wren hp 20, archer-2 hp 17
@@ -917,7 +917,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > attack ansgar archer-2
-forecast ansgar -> archer-2: dmg 11 hit 76% crit 2%; counter: none
+forecast ansgar -> archer-2: acc 76% dmg 11 crit 2%; counter: none
 ansgar attacks archer-2
   ansgar hits archer-2 for 11 (hp 6)
   ansgar hp 20, archer-2 hp 6
@@ -978,7 +978,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 12)
   soldier-1 misses captain
@@ -1039,7 +1039,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 6 (hp 6)
   ottilie hp 17, soldier-1 hp 6
@@ -1100,7 +1100,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 ?  unseen at 12,2 15,6 13,7
 dusk: sight 3, 2 next turn; 3 unseen (?); no side strikes what it cannot see
 > canto ansgar stay
-ansgar stays at 5,6 (canto)
+ansgar stays at 5,6 (move again)
 Sallow Grange (dusk 5)  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1135,7 +1135,7 @@ archer-1 waits
 enemy: move archer-2 7,6
 archer-2 moves 5,5 -> 7,6 via 6,5 7,5
 enemy: attack archer-2 ansgar
-forecast archer-2 -> ansgar: dmg 7 hit 79% crit 2%; counter: none
+forecast archer-2 -> ansgar: acc 79% dmg 7 crit 2%; counter: none
 archer-2 attacks ansgar
   archer-2 hits ansgar for 7 (hp 13)
   archer-2 hp 6, ansgar hp 13
@@ -1145,7 +1145,7 @@ enemy: something in the dark acts
 enemy: move soldier-1 2,7
 soldier-1 moves 4,6 -> 2,7 via 4,7 3,7
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+forecast soldier-1 -> ottilie: acc 70% dmg 10 crit 0%; counter: none
 soldier-1 attacks ottilie
   soldier-1 hits ottilie for 10 (hp 7)
   soldier-1 hp 6, ottilie hp 7
@@ -1205,7 +1205,7 @@ C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 ?  unseen at 4,2 12,2 15,6 13,7
 dusk: sight 2, 1 next turn; 4 unseen (?); no side strikes what it cannot see
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -1262,7 +1262,7 @@ C  wren             Wren L1 cadet              6,6    hp 20/20  Plain
 ?  unseen at 4,2 12,2 15,6 13,7
 dusk: sight 2, 1 next turn; 4 unseen (?); no side strikes what it cannot see
 > attack wren archer-2
-forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-2: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-2
   wren hits archer-2 for 10 (hp 0)
   wren hp 20, archer-2 hp 0
@@ -1917,7 +1917,7 @@ C  wren             Wren L1 cadet              12,7   hp 20/20  Plain
 ?  unseen at 4,2 12,2 15,6
 dusk: sight 1; it gets no darker; 3 unseen (?); no side strikes what it cannot see
 > attack pell hexer-1
-forecast pell -> hexer-1: dmg 8 hit 99% crit 2%; counter: dmg 8 hit 99% crit 0%
+forecast pell -> hexer-1: acc 99% dmg 8 crit 2%; counter: acc 99% dmg 8 crit 0%
 pell attacks hexer-1
   pell hits hexer-1 for 8 (hp 8)
   hexer-1 hits pell for 8 (hp 8)
@@ -1948,7 +1948,7 @@ C  wren             Wren L1 cadet              12,7   hp 20/20  Plain
 ?  unseen at 4,2 12,2 15,6
 dusk: sight 1; it gets no darker; 3 unseen (?); no side strikes what it cannot see
 > attack wren hexer-1
-forecast wren -> hexer-1: dmg 11 x2 hit 91% crit 3%; counter: dmg 11 hit 98% crit 0%
+forecast wren -> hexer-1: acc 91% dmg 11 x2 crit 3%; counter: acc 98% dmg 11 crit 0%
 wren attacks hexer-1
   wren misses hexer-1
   hexer-1 hits wren for 11 (hp 9)
@@ -2187,7 +2187,7 @@ enemy: something in the dark acts
 enemy: move grange_reeve-1 14,6
 grange_reeve-1 moves 15,6 -> 14,6
 enemy: attack grange_reeve-1 ansgar
-forecast grange_reeve-1 -> ansgar: dmg 14 hit 80% crit 1%; counter: dmg 7 x2 hit 83% crit 1%
+forecast grange_reeve-1 -> ansgar: acc 80% dmg 14 crit 1%; counter: acc 83% dmg 7 x2 crit 1%
 grange_reeve-1 attacks ansgar
   grange_reeve-1 hits ansgar for 14 (hp 0)
   grange_reeve-1 hp 26, ansgar hp 0
@@ -2244,7 +2244,7 @@ C  wren             Wren L1 cadet              12,7   hp 9/20   Plain
 ?  unseen at 4,2 12,2
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see
 > attack teodor grange_reeve-1
-forecast teodor -> grange_reeve-1: dmg 8 hit 83% crit 0%; counter: dmg 12 hit 82% crit 2%
+forecast teodor -> grange_reeve-1: acc 83% dmg 8 crit 0%; counter: acc 82% dmg 12 crit 2%
 teodor attacks grange_reeve-1
   teodor hits grange_reeve-1 for 8 (hp 18)
   grange_reeve-1 hits teodor for 12 (hp 2)
@@ -2299,7 +2299,7 @@ C  wren             Wren L1 cadet              12,7   hp 9/20   Plain
 ?  unseen at 4,2 12,2
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see
 > attack pell grange_reeve-1
-forecast pell -> grange_reeve-1: dmg 11 hit 99% crit 1%; counter: none
+forecast pell -> grange_reeve-1: acc 99% dmg 11 crit 1%; counter: none
 pell attacks grange_reeve-1
   pell hits grange_reeve-1 for 11 (hp 7)
   pell hp 8, grange_reeve-1 hp 7
@@ -2353,7 +2353,7 @@ C  wren             Wren L1 cadet              12,7   hp 9/20   Plain
 ?  unseen at 4,2 12,2
 dusk: sight 1; it gets no darker; 2 unseen (?); no side strikes what it cannot see
 > attack ottilie grange_reeve-1
-forecast ottilie -> grange_reeve-1: dmg 4 x2 hit 89% crit 3%; counter: none
+forecast ottilie -> grange_reeve-1: acc 89% dmg 4 x2 crit 3%; counter: none
 ottilie attacks grange_reeve-1
   ottilie hits grange_reeve-1 for 4 (hp 3)
   ottilie hits grange_reeve-1 for 4 (hp 0)

@@ -11,7 +11,7 @@ namespace Ironwake.Core.Tests.Campaign;
 /// The hire who is not what the menu says (issue 691, amended by issue 706): Bet Lowry's request
 /// opens at the first camp after map 8 at which she stands in the company, never before and never
 /// without her. The Postern takes her and three allies; a win makes her a Sergeant, a hidden class
-/// whose mastery, Unsworn (+10 hit and +10 crit against the oath-bound), she holds at once, and
+/// whose mastery, Unsworn (+10 Acc and +10 Crit against the oath-bound), she holds at once, and
 /// whose Hold the Gate braces her on a Wait in place on any map. Alive at the end, her ending line
 /// is her own.
 /// </summary>

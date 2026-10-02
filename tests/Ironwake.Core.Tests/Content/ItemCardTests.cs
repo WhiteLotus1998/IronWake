@@ -91,10 +91,10 @@ public class ItemCardTests
         var bow = content.Weapon("iron_bow");
 
         Assert.Equal(
-            $"Iron Bow, bow E. Mt {bow.Mt}, hit {bow.Hit}, crit {bow.Crit}, Wt {bow.Wt}, range 2, {bow.Durability} uses. Effective against flying. {bow.Description}",
+            $"Iron Bow, bow E. Acc {bow.Hit}, Power {bow.Mt}, Crit {bow.Crit}, Wt {bow.Wt}, range 2, {bow.Durability} uses. Effective against flying. {bow.Description}",
             ItemCard.Text(content, "iron_bow"));
-        Assert.StartsWith("Cinder, reason E. Mt 5, hit 90, crit 0, Wt 3, range 1-2, 8 uses a battle. ", ItemCard.Text(content, "cinder"), StringComparison.Ordinal);
-        Assert.StartsWith("Salve, faith E. heals, ", ItemCard.Text(content, "salve"), StringComparison.Ordinal);
+        Assert.StartsWith("Cinder, lore E. Acc 90, Power 5, Crit 0, Wt 3, range 1-2, 8 uses a battle. ", ItemCard.Text(content, "cinder"), StringComparison.Ordinal);
+        Assert.StartsWith("Salve, faith E. Acc ", ItemCard.Text(content, "salve"), StringComparison.Ordinal);
         var dressing = content.Item("field_dressing");
         Assert.Equal($"Field Dressing. Heals {dressing.Heals} HP, {dressing.Uses} uses. {dressing.Description}", ItemCard.Text(content, "field_dressing"));
     }

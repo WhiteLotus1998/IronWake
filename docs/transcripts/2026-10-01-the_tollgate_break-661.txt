@@ -567,7 +567,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack pell archer-2 cinder
-forecast pell -> archer-2 with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-2
   pell hits archer-2 for 12 (hp 5)
   archer-2 hits pell for 8 (hp 8)
@@ -626,7 +626,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack wren archer-2
-forecast wren -> archer-2: dmg 9 hit 54% crit 3%; counter: none
+forecast wren -> archer-2: acc 54% dmg 9 crit 3%; counter: none
 wren attacks archer-2
   wren hits archer-2 for 9 (hp 0)
   wren hp 20, archer-2 hp 0
@@ -683,7 +683,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack teodor toll_brigand-1
-forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 9 hit 21% crit 0%
+forecast teodor -> toll_brigand-1: acc 47% dmg 11 crit 2%; counter: acc 21% dmg 9 crit 0%
 teodor attacks toll_brigand-1
   teodor misses toll_brigand-1
   toll_brigand-1 hits teodor for 9 (hp 12)
@@ -772,7 +772,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_brigand-1 wren
-forecast toll_brigand-1 -> wren: dmg 10 hit 25% crit 0%; counter: none
+forecast toll_brigand-1 -> wren: acc 25% dmg 10 crit 0%; counter: none
 toll_brigand-1 attacks wren
   toll_brigand-1 hits wren for 10 (hp 10)
   toll_brigand-1 hp 23, wren hp 10
@@ -832,7 +832,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 10/20  Hill
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack captain toll_brigand-1
-forecast captain -> toll_brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 9 hit 12% crit 0%
+forecast captain -> toll_brigand-1: acc 63% dmg 10 x2 crit 5%; counter: acc 12% dmg 9 crit 0%
 captain attacks toll_brigand-1
   captain hits toll_brigand-1 for 10 (hp 13)
   toll_brigand-1 hits captain for 9 (hp 13)
@@ -864,7 +864,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 10/20  Hill
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack teodor toll_brigand-1
-forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 9 hit 21% crit 0%
+forecast teodor -> toll_brigand-1: acc 47% dmg 11 crit 2%; counter: acc 21% dmg 9 crit 0%
 teodor attacks toll_brigand-1
   teodor hits toll_brigand-1 for 11 (hp 2)
   toll_brigand-1 hits teodor for 9 (hp 3)
@@ -921,7 +921,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              6,6    hp 10/20  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack wren toll_brigand-1
-forecast wren -> toll_brigand-1: dmg 9 x2 hit 60% crit 4%; counter: dmg 11 hit 41% crit 0%
+forecast wren -> toll_brigand-1: acc 60% dmg 9 x2 crit 4%; counter: acc 41% dmg 11 crit 0%
   counter: lethal to wren (11 against 10 hp)
 wren attacks toll_brigand-1
   wren misses toll_brigand-1
@@ -1006,7 +1006,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              4,5    hp 10/20  Hill
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack pell toll_brigand-1 cinder
-forecast pell -> toll_brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: dmg 12 hit 26% crit 0%
+forecast pell -> toll_brigand-1 with Cinder: acc 87% dmg 13 crit 3%; counter: acc 26% dmg 12 crit 0%
   counter: lethal to pell (12 against 8 hp)
 pell attacks toll_brigand-1
   pell hits toll_brigand-1 for 13 (hp 0)
@@ -1402,14 +1402,14 @@ bandit_leader-1 waits
 enemy: move rider-1 8,5
 rider-1 moves 13,4 -> 8,5 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 teodor
-forecast rider-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 11 hit 76% crit 1%
+forecast rider-1 -> teodor: acc 39% dmg 7 crit 1%; counter: acc 76% dmg 11 crit 1%
 rider-1 attacks teodor
   rider-1 hits teodor for 7 (hp 6)
   teodor hits rider-1 for 11 (hp 10)
   rider-1 hp 10, teodor hp 6
 teodor gains 14 exp (28)
 enemy: attack toll_warden-1 captain
-forecast toll_warden-1 -> captain: dmg 6 hit 20% crit 0%; counter: none
+forecast toll_warden-1 -> captain: acc 20% dmg 6 crit 0%; counter: none
 toll_warden-1 attacks captain
   toll_warden-1 misses captain
   toll_warden-1 hp 21, captain hp 22
@@ -1467,7 +1467,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              8,4    hp 10/20  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack wren rider-1
-forecast wren -> rider-1: dmg 9 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> rider-1: acc 85% dmg 9 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks rider-1
   wren hits rider-1 for 9 (hp 1)
   rider-1 hits wren for 9 (hp 1)
@@ -1498,7 +1498,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack teodor rider-1
-forecast teodor -> rider-1: dmg 11 hit 76% crit 1%; counter: dmg 7 hit 39% crit 1%
+forecast teodor -> rider-1: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
   counter: lethal to teodor (7 against 6 hp)
 teodor attacks rider-1
   teodor hits rider-1 for 11 (hp 0)
@@ -1554,7 +1554,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack captain toll_warden-1
-forecast captain -> toll_warden-1: dmg 9 hit 87% crit 4%; counter: dmg 7 hit 52% crit 0%
+forecast captain -> toll_warden-1: acc 87% dmg 9 crit 4%; counter: acc 52% dmg 7 crit 0%
 captain attacks toll_warden-1
   captain hits toll_warden-1 for 9 (hp 12)
   toll_warden-1 hits captain for 7 (hp 15)
@@ -1609,7 +1609,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group kee
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack pell toll_warden-1 cinder
-forecast pell -> toll_warden-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%
+forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
   counter: lethal to pell (9 against 8 hp)
 pell attacks toll_warden-1
   pell hits toll_warden-1 for 12 (hp 0)
@@ -1643,12 +1643,12 @@ lethal if all land: captain (archer-1 5, bandit_leader-1 11 against 15 hp)
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+forecast archer-1 -> captain: acc 70% dmg 5 crit 0%; counter: none
 archer-1 attacks captain
   archer-1 hits captain for 5 (hp 10)
   archer-1 hp 17, captain hp 10
 enemy: attack bandit_leader-1 captain 2
-forecast bandit_leader-1 -> captain: dmg 11 hit 43% crit 0%; counter: none
+forecast bandit_leader-1 -> captain: acc 43% dmg 11 crit 0%; counter: none
 bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks captain
   bandit_leader-1 misses captain
@@ -1703,7 +1703,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 6/21   Forest
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+forecast captain -> archer-1: acc 87% dmg 11 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 11 (hp 6)
   captain hp 10, archer-1 hp 6
@@ -1755,7 +1755,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 6/21   Forest
 B  wren             Wren L1 cadet              8,4    hp 1/20   Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
 > attack pell archer-1 cinder
-forecast pell -> archer-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
   counter: lethal to pell (8 against 8 hp)
 pell attacks archer-1
   pell hits archer-1 for 12 (hp 0)
@@ -1838,7 +1838,7 @@ lethal if all land: pell (bandit_leader-1 14 against 8 hp)
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: attack bandit_leader-1 captain
-forecast bandit_leader-1 -> captain with Toll Axe: dmg 11 hit 43% crit 0%; counter: dmg 9 hit 87% crit 3%
+forecast bandit_leader-1 -> captain with Toll Axe: acc 43% dmg 11 crit 0%; counter: acc 87% dmg 9 crit 3%
 bandit_leader-1 attacks captain
   bandit_leader-1 misses captain
   captain hits bandit_leader-1 for 9 (hp 17)

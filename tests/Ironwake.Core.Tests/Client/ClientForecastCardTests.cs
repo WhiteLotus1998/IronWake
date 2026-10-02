@@ -23,7 +23,7 @@ public class ClientForecastCardTests
         return client;
     }
 
-    private static readonly Regex Strike = new(@"dmg (\d+)(?: x(\d+))? hit (\d+)% crit (\d+)%");
+    private static readonly Regex Strike = new(@"acc (?<hit>\d+)% dmg (?<dmg>\d+)(?: x(?<x>\d+))? crit (?<crit>\d+)%");
 
     [Fact]
     public void TheDrawnForecastsNumbersAreTheConsoleLinesNumbers()
@@ -37,10 +37,10 @@ public class ClientForecastCardTests
         Assert.Equal(2, sides.Count);
         foreach (var (match, side) in new[] { (sides[0], hover.Card.Attacker), (sides[1], hover.Card.Defender) })
         {
-            Assert.Equal(int.Parse(match.Groups[1].Value), side.Strike.Damage);
-            Assert.Equal(match.Groups[2].Success ? int.Parse(match.Groups[2].Value) : 1, side.Strike.StrikeCount);
-            Assert.Equal(int.Parse(match.Groups[3].Value), side.Strike.DisplayedHit);
-            Assert.Equal(int.Parse(match.Groups[4].Value), side.Strike.CritChance);
+            Assert.Equal(int.Parse(match.Groups["dmg"].Value), side.Strike.Damage);
+            Assert.Equal(match.Groups["x"].Success ? int.Parse(match.Groups["x"].Value) : 1, side.Strike.StrikeCount);
+            Assert.Equal(int.Parse(match.Groups["hit"].Value), side.Strike.DisplayedHit);
+            Assert.Equal(int.Parse(match.Groups["crit"].Value), side.Strike.CritChance);
         }
     }
 

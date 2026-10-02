@@ -163,7 +163,7 @@ public class KeepRaidTests
         };
 
         Assert.Equal(
-            "ditch 9,5: Shallows; cavalry and armored units cannot stand on it; infantry and flying can; a unit on it gets avoid 10",
+            "ditch 9,5: Shallows; cavalry and armored units cannot stand on it; infantry and flying can; a unit on it gets evade 10",
             Keep.Describe(Bare, Menu.Edit("ditch")!, new Coord(9, 5), shallow));
     }
 

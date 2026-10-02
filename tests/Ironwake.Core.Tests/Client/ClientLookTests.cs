@@ -27,7 +27,7 @@ public class ClientLookTests
         var preview = client.Preview(new Coord(4, 9))!;
 
         Assert.True(preview.Safe);
-        Assert.Equal("Plain 4,9  move 4 of 4  avoid 0  safe here", preview.Text);
+        Assert.Equal("Plain 4,9  move 4 of 4  evade 0  safe here", preview.Text);
     }
 
     /// <summary>The Tollgate at seed 113 on turn 3 with Teodor selected on 8,7: the woods group awake and in reach (the review frame's board).</summary>

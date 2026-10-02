@@ -170,7 +170,7 @@ a  wingrider-1      Wingrider L1 skyrider      3,7    hp 17/17  Plain  group sky
 b  wingrider-2      Wingrider L1 skyrider      3,5    hp 17/17  Water  group sky, aggressive
 B  wren             Wren L1 cadet              2,9    hp 20/20  Plain
 > attack ottilie wingrider-1
-forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
+forecast ottilie -> wingrider-1: acc 77% dmg 19 crit 3%; counter: none
 ottilie attacks wingrider-1
   ottilie hits wingrider-1 for 19 (hp 0)
   ottilie hp 17, wingrider-1 hp 0
@@ -238,7 +238,7 @@ soldier-1 waits
 enemy: move wingrider-2 2,9
 wingrider-2 moves 3,5 -> 2,9 via 2,5 2,6 2,7 2,8
 enemy: attack wingrider-2 ottilie
-forecast wingrider-2 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+forecast wingrider-2 -> ottilie: acc 72% dmg 8 crit 0%; counter: none
 wingrider-2 attacks ottilie
   wingrider-2 hits ottilie for 8 (hp 9)
   wingrider-2 hp 17, ottilie hp 9
@@ -292,7 +292,7 @@ e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group thr
 b  wingrider-2      Wingrider L1 skyrider      2,9    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              3,8    hp 20/20  Plain
 > attack ottilie wingrider-2
-forecast ottilie -> wingrider-2: dmg 19 hit 77% crit 3%; counter: none
+forecast ottilie -> wingrider-2: acc 77% dmg 19 crit 3%; counter: none
 ottilie attacks wingrider-2
   ottilie misses wingrider-2
   ottilie hp 9, wingrider-2 hp 17
@@ -343,7 +343,7 @@ e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group thr
 b  wingrider-2      Wingrider L1 skyrider      2,9    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              3,8    hp 20/20  Plain
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+forecast captain -> brigand-1: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 captain attacks brigand-1
   captain hits brigand-1 for 11 (hp 11)
   brigand-1 misses captain
@@ -396,7 +396,7 @@ e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group thr
 b  wingrider-2      Wingrider L1 skyrider      2,9    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
 > attack wren wingrider-2
-forecast wren -> wingrider-2: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+forecast wren -> wingrider-2: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 wren attacks wingrider-2
   wren hits wingrider-2 for 11 (hp 6)
   wingrider-2 misses wren
@@ -435,7 +435,7 @@ soldier-1 waits
 enemy: move wingrider-2 3,9
 wingrider-2 moves 2,9 -> 3,9
 enemy: attack wingrider-2 ottilie
-forecast wingrider-2 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+forecast wingrider-2 -> ottilie: acc 72% dmg 8 crit 0%; counter: none
 wingrider-2 attacks ottilie
   wingrider-2 misses ottilie
   wingrider-2 hp 6, ottilie hp 9
@@ -487,7 +487,7 @@ e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group thr
 b  wingrider-2      Wingrider L1 skyrider      3,9    hp 6/17   Plain  group sky, aggressive
 B  wren             Wren L1 cadet              2,9    hp 20/20  Plain
 > attack wren wingrider-2
-forecast wren -> wingrider-2: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+forecast wren -> wingrider-2: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 wren attacks wingrider-2
   wren hits wingrider-2 for 11 (hp 0)
   wren hp 20, wingrider-2 hp 0
@@ -809,7 +809,7 @@ C  ottilie          Ottilie L1 bowman          8,7    hp 17/17  Plain
 e  soldier-1        Soldier L1 pikeman         12,1   hp 20/20  Plain  group throne, hold
 B  wren             Wren L1 cadet              7,6    hp 20/20  Plain
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain misses soldier-1
   soldier-1 hits captain for 8 (hp 14)
@@ -886,7 +886,7 @@ archer-1 waits
 enemy: wait archer-2
 archer-2 waits
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+forecast soldier-1 -> captain: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
 soldier-1 attacks captain
   soldier-1 hits captain for 8 (hp 6)
   captain hits soldier-1 for 9 (hp 11)

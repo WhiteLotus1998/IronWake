@@ -461,7 +461,7 @@ B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  done
 enemy: move archer-1 10,2
 Archer moves 10,1 -> 10,2
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 16)
   Archer hp 17, Teodor hp 16
@@ -474,7 +474,7 @@ Brigand waits
 enemy: move soldier-1 10,3
 Soldier 1 moves 9,0 -> 10,3 via 10,0 10,1 10,2
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 misses Teodor
   Teodor hits Soldier 1 for 10 (hp 10)
@@ -487,7 +487,7 @@ Soldier 2 waits
 enemy: move wingrider-1 10,6
 Wingrider moves 12,2 -> 10,6 via 11,2 11,3 11,4 11,5 11,6
 enemy: attack wingrider-1 ottilie
-Forecast Wingrider -> Ottilie: dmg 8 hit 72% crit 0%; counter: none
+Forecast Wingrider -> Ottilie: acc 72% dmg 8 crit 0%; counter: none
 Wingrider attacks Ottilie
   Wingrider hits Ottilie for 8 (hp 9)
   Wingrider hp 17, Ottilie hp 9
@@ -543,7 +543,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 16/21  Plain
 c  wingrider-1      Wingrider L2 skyrider      10,6   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 > attack ottilie wingrider-1
-Forecast Ottilie -> Wingrider: dmg 19 hit 77% crit 3%; counter: none
+Forecast Ottilie -> Wingrider: acc 77% dmg 19 crit 3%; counter: none
 Ottilie attacks Wingrider
   Ottilie misses Wingrider
   Ottilie hp 9, Wingrider hp 17
@@ -571,7 +571,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 16/21  Plain
 c  wingrider-1      Wingrider L2 skyrider      10,6   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier 1: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 10 (hp 0)
   Teodor hp 16, Soldier 1 hp 0
@@ -600,7 +600,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 16/21  Plain  done
 c  wingrider-1      Wingrider L2 skyrider      10,6   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
 > attack wren wingrider-1
-Forecast Wren -> Wingrider: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+Forecast Wren -> Wingrider: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 Wren attacks Wingrider
   Wren hits Wingrider for 11 (hp 6)
   Wingrider hits Wren for 7 (hp 13)
@@ -653,7 +653,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 16/21  Plain  done
 c  wingrider-1      Wingrider L2 skyrider      10,6   hp 6/17   Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 13/20  Plain  done
 > attack captain wingrider-1
-Forecast Alder Fenn -> Wingrider: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%
+Forecast Alder Fenn -> Wingrider: acc 82% dmg 12 crit 3%; counter: acc 63% dmg 6 crit 0%
 Alder Fenn attacks Wingrider
   Alder Fenn hits Wingrider for 12 (hp 0)
   Alder Fenn hp 22, Wingrider hp 0
@@ -684,7 +684,7 @@ B  wren             Wren L1 cadet              10,5   hp 13/20  Plain  done
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 11)
   Archer hp 17, Teodor hp 11
@@ -792,7 +792,7 @@ e  soldier-2        Soldier L2 pikeman         6,6    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          10,4   hp 11/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 13/20  Plain
 > attack captain soldier-2
-Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 2: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 Alder Fenn attacks Soldier 2
   Alder Fenn hits Soldier 2 for 9 (hp 11)
   Soldier 2 misses Alder Fenn
@@ -843,7 +843,7 @@ e  soldier-2        Soldier L2 pikeman         6,6    hp 11/20  Plain  group for
 C  teodor           Teodor L1 pikeman          10,4   hp 11/21  Plain
 B  wren             Wren L1 cadet              6,5    hp 13/20  Plain
 > attack wren soldier-2
-Forecast Wren -> Soldier 2: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 2: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier 2
   Wren misses Soldier 2
   Soldier 2 misses Wren
@@ -898,7 +898,7 @@ Lethal if all land: Wren (Brigand for 11, Soldier 2 for 9, against 13 hp)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer crits Teodor for 15 (hp 6)
   Archer hp 17, Teodor hp 6
@@ -907,7 +907,7 @@ Bandit Leader waits
 enemy: move brigand-1 5,5
 Brigand moves 5,6 -> 5,5
 enemy: attack brigand-1 wren
-Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 9 x2 hit 60% crit 4%
+Forecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter: acc 60% dmg 9 x2 crit 4%
 Brigand attacks Wren
   Brigand misses Wren
   Wren misses Brigand
@@ -915,7 +915,7 @@ Brigand attacks Wren
   Brigand hp 13, Wren hp 13
 Wren gains 12 exp (24)
 enemy: attack soldier-2 wren
-Forecast Soldier 2 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier 2 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 Soldier 2 attacks Wren
   Soldier 2 hits Wren for 9 (hp 4)
   Wren hits Soldier 2 for 8 (hp 3)
@@ -946,7 +946,7 @@ e  soldier-2        Soldier L2 pikeman         6,6    hp 3/20   Plain  group for
 C  teodor           Teodor L1 pikeman          10,4   hp 6/21   Plain
 B  wren             Wren L1 cadet              6,5    hp 4/20   Plain
 > attack captain soldier-2
-Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 2: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 Alder Fenn attacks Soldier 2
   Alder Fenn hits Soldier 2 for 9 (hp 0)
   Alder Fenn hp 22, Soldier 2 hp 0
@@ -1043,14 +1043,14 @@ B  wren             Wren L1 cadet              6,5    hp 14/20  Plain  done
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 1)
   Archer hp 17, Teodor hp 1
 enemy: wait bandit_leader-1
 Bandit Leader waits
 enemy: attack brigand-1 wren
-Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 9 x2 hit 60% crit 4%
+Forecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter: acc 60% dmg 9 x2 crit 4%
 Brigand attacks Wren
   Brigand hits Wren for 11 (hp 3)
   Wren hits Brigand for 9 (hp 4)
@@ -1235,7 +1235,7 @@ B  wren             Wren L1 cadet              6,5    hp 13/20  Plain  done
 enemy: move archer-1 12,4
 Archer moves 10,2 -> 12,4 via 10,3 10,4 11,4
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 6)
   Archer hp 17, Teodor hp 6
@@ -1285,7 +1285,7 @@ D  ottilie          Ottilie L1 bowman          12,7   hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          12,6   hp 6/21   Plain
 B  wren             Wren L1 cadet              6,5    hp 13/20  Plain
 > attack captain archer-1
-Forecast Alder Fenn -> Archer: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn crits Archer for 33 (hp 0)
   Alder Fenn hp 22, Archer hp 0
@@ -1646,7 +1646,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 16/21  Plain
 B  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
 > attack ottilie bandit_leader-1
-Forecast Ottilie -> Bandit Leader: dmg 4 hit 67% crit 3%; counter: none
+Forecast Ottilie -> Bandit Leader: acc 67% dmg 4 crit 3%; counter: none
 Ottilie attacks Bandit Leader
   Ottilie hits Bandit Leader for 4 (hp 22)
   Ottilie hp 17, Bandit Leader hp 22
@@ -1734,7 +1734,7 @@ B  wren             Wren L1 cadet              9,2    hp 20/20  Plain  done
 -- Enemy phase, turn 9 --
 Bandit Leader heals 4 (hp 26)
 enemy: attack bandit_leader-1 ottilie 2
-Forecast Bandit Leader -> Ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
+Forecast Bandit Leader -> Ottilie: acc 52% dmg 13 crit 0%; counter: acc 60% dmg 4 crit 3%
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Ottilie
   Bandit Leader hits Ottilie for 13 (hp 4)
@@ -1823,7 +1823,7 @@ D  ottilie          Ottilie L1 bowman          11,4   hp 4/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 16/21  Road
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren bandit_leader-1
-Forecast Wren -> Bandit Leader: dmg 6 hit 63% crit 2%; counter with Toll Axe: dmg 12 hit 45% crit 0%
+Forecast Wren -> Bandit Leader: acc 63% dmg 6 crit 2%; counter with Toll Axe: acc 45% dmg 12 crit 0%
 Wren attacks Bandit Leader
   Wren hits Bandit Leader for 6 (hp 16)
   Bandit Leader misses Wren
@@ -1868,7 +1868,7 @@ D  ottilie          Ottilie L1 bowman          11,4   hp 4/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 16/21  Road
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack captain bandit_leader-1
-Forecast Alder Fenn -> Bandit Leader: dmg 7 hit 67% crit 3%; counter with Toll Axe: dmg 11 hit 43% crit 0%
+Forecast Alder Fenn -> Bandit Leader: acc 67% dmg 7 crit 3%; counter with Toll Axe: acc 43% dmg 11 crit 0%
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 7 (hp 9)
   Bandit Leader hits Alder Fenn for 11 (hp 12)
@@ -1913,7 +1913,7 @@ D  ottilie          Ottilie L1 bowman          11,4   hp 4/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 16/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack teodor bandit_leader-1
-Forecast Teodor -> Bandit Leader: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%
+Forecast Teodor -> Bandit Leader: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
 Teodor attacks Bandit Leader
   Teodor misses Bandit Leader
   Bandit Leader hits Teodor for 11 (hp 5)
@@ -2003,7 +2003,7 @@ B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 -- Enemy phase, turn 10 --
 Bandit Leader heals 5 (hp 21)
 enemy: attack bandit_leader-1 wren 2
-Forecast Bandit Leader -> Wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+Forecast Bandit Leader -> Wren with Steel Axe: acc 63% dmg 17 crit 0%; counter: acc 70% dmg 6 x2 crit 2%
 Bandit Leader equips Steel Axe
 Bandit Leader attacks Wren
   Bandit Leader hits Wren for 17 (hp 3)
@@ -2053,7 +2053,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          10,3   hp 16/21  Road
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain
 > attack ottilie bandit_leader-1
-Forecast Ottilie -> Bandit Leader: dmg 4 hit 67% crit 3%; counter: none
+Forecast Ottilie -> Bandit Leader: acc 67% dmg 4 crit 3%; counter: none
 Ottilie attacks Bandit Leader
   Ottilie hits Bandit Leader for 4 (hp 5)
   Ottilie hp 4, Bandit Leader hp 5
@@ -2097,7 +2097,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 16/21  Road
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain
 > attack captain bandit_leader-1
-Forecast Alder Fenn -> Bandit Leader: dmg 7 x2 hit 73% crit 3%; counter with Steel Axe: dmg 16 hit 62% crit 0%
+Forecast Alder Fenn -> Bandit Leader: acc 73% dmg 7 x2 crit 3%; counter with Steel Axe: acc 62% dmg 16 crit 0%
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 7 (hp 0)
   Alder Fenn hp 23, Bandit Leader hp 0

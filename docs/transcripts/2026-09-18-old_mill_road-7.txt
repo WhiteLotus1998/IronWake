@@ -76,7 +76,7 @@ A  captain          captain L1 cadet           3,7    hp 22/22  Plain  captain
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             wren L1 cadet              2,8    hp 20/20  Plain
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 100% crit 5%; counter: dmg 10 hit 89% crit 0%
+forecast captain -> brigand-1: acc 100% dmg 11 x2 crit 5%; counter: acc 89% dmg 10 crit 0%
 captain attacks brigand-1
   captain hits brigand-1 for 11 (hp 11)
   brigand-1 hits captain for 10 (hp 12)
@@ -495,7 +495,7 @@ A  captain          captain L1 cadet           4,3    hp 12/22  Road  captain
 a  soldier-1        Soldier L1 pikeman         6,1    hp 4/20   Plain  group mill, guard, awake
 B  wren             wren L1 cadet              6,2    hp 20/20  Fort
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 x2 hit 100% crit 3%; counter: dmg 7 hit 58% crit 0%
+forecast wren -> soldier-1: acc 100% dmg 8 x2 crit 3%; counter: acc 58% dmg 7 crit 0%
 wren attacks soldier-1
   wren hits soldier-1 for 8 (hp 0)
   wren hp 20, soldier-1 hp 0
@@ -538,7 +538,7 @@ b  archer-1         Archer L1 bowman           8,2    hp 17/17  Hill  group mill
 A  captain          captain L1 cadet           7,2    hp 12/22  Plain  captain
 B  wren             wren L1 cadet              6,2    hp 20/20  Fort  done
 > attack captain archer-1
-forecast captain -> archer-1: dmg 10 hit 97% crit 4%; counter: none
+forecast captain -> archer-1: acc 97% dmg 10 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 10 (hp 7)
   captain hp 12, archer-1 hp 7
@@ -611,7 +611,7 @@ b  archer-1         Archer L1 bowman           9,2    hp 7/17   Hill  group mill
 A  captain          captain L1 cadet           8,2    hp 7/22   Hill  captain
 B  wren             wren L1 cadet              6,2    hp 20/20  Fort
 > attack captain archer-1
-forecast captain -> archer-1: dmg 10 hit 97% crit 4%; counter: none
+forecast captain -> archer-1: acc 97% dmg 10 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 10 (hp 0)
   captain hp 7, archer-1 hp 0
@@ -991,7 +991,7 @@ Old Mill Road  turn 12 of 20  player phase  rout  recall 3
 A  captain          captain L1 cadet           10,0   hp 19/22  Plain  captain
 B  wren             wren L1 cadet              9,3    hp 20/20  Road
 > attack captain bandit_leader-1
-forecast captain -> bandit_leader-1: dmg 9 x2 hit 100% crit 3%; counter: dmg 16 hit 80% crit 0%
+forecast captain -> bandit_leader-1: acc 100% dmg 9 x2 crit 3%; counter: acc 80% dmg 16 crit 0%
 captain attacks bandit_leader-1
   captain hits bandit_leader-1 for 9 (hp 17)
   bandit_leader-1 hits captain for 16 (hp 3)
@@ -1033,7 +1033,7 @@ Old Mill Road  turn 12 of 20  player phase  rout  recall 3
 A  captain          captain L1 cadet           10,0   hp 3/22   Plain  captain  done
 B  wren             wren L1 cadet              10,2   hp 20/20  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 8 x2 hit 100% crit 2%; counter: dmg 17 hit 81% crit 0%
+forecast wren -> bandit_leader-1: acc 100% dmg 8 x2 crit 2%; counter: acc 81% dmg 17 crit 0%
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 8 (hp 0)
   wren hp 20, bandit_leader-1 hp 0

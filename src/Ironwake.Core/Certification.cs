@@ -23,7 +23,7 @@ public sealed record CertificationRequirements(int Level, ValueList<(WeaponType 
             parts.Add($"level {Level}");
         }
 
-        parts.AddRange(Ranks.Select(r => $"{r.Type.ToString().ToLowerInvariant()} {r.Rank}"));
+        parts.AddRange(Ranks.Select(r => $"{r.Type.Label()} {r.Rank}"));
         parts.AddRange(Stats.All.Where(s => Stats.Get(s) > 0).Select(s => $"{s.ToString().ToLowerInvariant()} {Stats.Get(s)}"));
         return parts.Count == 0 ? "nothing" : string.Join(", ", parts);
     }

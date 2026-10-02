@@ -24,7 +24,7 @@ C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              5,8    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -55,7 +55,7 @@ C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -87,7 +87,7 @@ C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -118,7 +118,7 @@ C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -149,7 +149,7 @@ C  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -180,7 +180,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -211,7 +211,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -242,7 +242,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -273,7 +273,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -324,7 +324,7 @@ C  teodor           Teodor L1 pikeman          6,6    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -355,7 +355,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -386,7 +386,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -417,14 +417,14 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack ottilie brigand-1
-forecast ottilie -> brigand-1: dmg 8 hit 91% crit 5%; counter: none
-  signature: teodor's orders: ottilie hit +5
+forecast ottilie -> brigand-1: acc 91% dmg 8 crit 5%; counter: none
+  signature: teodor's orders: ottilie acc +5
 ottilie attacks brigand-1
   ottilie hits brigand-1 for 8 (hp 14)
   ottilie hp 17, brigand-1 hp 14
@@ -453,7 +453,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -484,14 +484,14 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack wren brigand-1
-forecast wren -> brigand-1: dmg 10 x2 hit 92% crit 4%; counter: dmg 10 hit 18% crit 0%
-  signature: teodor's orders: wren hit +5
+forecast wren -> brigand-1: acc 92% dmg 10 x2 crit 4%; counter: acc 18% dmg 10 crit 0%
+  signature: teodor's orders: wren acc +5
 wren attacks brigand-1
   wren misses brigand-1
   brigand-1 misses wren
@@ -523,7 +523,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest  canto 2
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -554,14 +554,14 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest  canto 2
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 94% crit 5%; counter: dmg 9 hit 17% crit 0%
-  signature: teodor's orders: captain hit +5
+forecast captain -> brigand-1: acc 94% dmg 11 x2 crit 5%; counter: acc 17% dmg 9 crit 0%
+  signature: teodor's orders: captain acc +5
 captain attacks brigand-1
   captain hits brigand-1 for 11 (hp 0)
   captain hp 22, brigand-1 hp 0
@@ -590,13 +590,13 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest  canto 2
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren 3,6
-wren stays at 3,6 (canto)
+wren stays at 3,6 (move again)
 Saltmarsh Ford  turn 2 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -620,7 +620,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -635,7 +635,7 @@ bandit_leader-1 waits and braces
 enemy: move soldier-1 4,4
 soldier-1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 7 hit 26% crit 0%; counter: dmg 8 hit 58% crit 4%
+forecast soldier-1 -> captain: acc 26% dmg 7 crit 0%; counter: acc 58% dmg 8 crit 4%
 soldier-1 attacks captain
   soldier-1 misses captain
   captain hits soldier-1 for 8 (hp 12)
@@ -671,7 +671,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -701,7 +701,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -731,14 +731,14 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 5 hit 60% crit 4%; counter: none
-  signature: teodor's orders: ottilie hit +5
+forecast ottilie -> soldier-1: acc 60% dmg 5 crit 4%; counter: none
+  signature: teodor's orders: ottilie acc +5
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 5 (hp 7)
   ottilie hp 17, soldier-1 hp 7
@@ -766,14 +766,14 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 8 hit 67% crit 4%; counter: dmg 7 hit 26% crit 0%
-  signature: teodor's orders: captain hit +5
+forecast captain -> soldier-1: acc 67% dmg 8 crit 4%; counter: acc 26% dmg 7 crit 0%
+  signature: teodor's orders: captain acc +5
 captain attacks soldier-1
   captain hits soldier-1 for 8 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -801,7 +801,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              3,6    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -830,7 +830,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -860,7 +860,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain  braced  d
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              6,6    hp 20/20  Plain  canto 1
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -901,7 +901,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              6,6    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -930,7 +930,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -960,7 +960,7 @@ C  teodor           Teodor L1 pikeman          4,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -989,7 +989,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1018,7 +1018,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1047,7 +1047,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1076,7 +1076,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1105,7 +1105,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1134,7 +1134,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  canto 0
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1175,7 +1175,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1204,7 +1204,7 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1233,13 +1233,13 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              10,5   hp 20/20  Plain  canto 3
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren 9,7
-wren cantos 10,5 -> 9,7 via 9,5 9,6
+wren moves again 10,5 -> 9,7 via 9,5 9,6
 Saltmarsh Ford  turn 5 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^...d!...
@@ -1261,7 +1261,7 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1289,7 +1289,7 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1317,7 +1317,7 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1345,7 +1345,7 @@ d  soldier-2        Soldier L2 pikeman         9,0    hp 20/20  Plain  group for
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1391,7 +1391,7 @@ d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      8,4    hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1419,14 +1419,14 @@ d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 e  wingrider-1      Wingrider L2 skyrider      8,4    hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack ottilie wingrider-1
-forecast ottilie -> wingrider-1: dmg 19 hit 83% crit 3%; counter: none
-  signature: teodor's orders: ottilie hit +5
+forecast ottilie -> wingrider-1: acc 83% dmg 19 crit 3%; counter: none
+  signature: teodor's orders: ottilie acc +5
 ottilie attacks wingrider-1
   ottilie hits wingrider-1 for 19 (hp 0)
   ottilie hp 17, wingrider-1 hp 0
@@ -1452,7 +1452,7 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,7    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1479,13 +1479,13 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 7)
   wren hp 20, archer-1 hp 7
@@ -1511,7 +1511,7 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  canto 2
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1538,13 +1538,13 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  canto 2
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+forecast captain -> archer-1: acc 87% dmg 11 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 11 (hp 0)
   captain hp 22, archer-1 hp 0
@@ -1570,13 +1570,13 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  canto 2
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren stay
-wren stays at 9,5 (canto)
+wren stays at 9,5 (move again)
 Saltmarsh Ford  turn 6 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1596,7 +1596,7 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
 d  soldier-2        Soldier L2 pikeman         10,3   hp 20/20  Road  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1609,7 +1609,7 @@ bandit_leader-1 waits and braces
 enemy: move soldier-2 9,6
 soldier-2 moves 10,3 -> 9,6 via 10,4 10,5 10,6
 enemy: attack soldier-2 ottilie
-forecast soldier-2 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+forecast soldier-2 -> ottilie: acc 70% dmg 10 crit 0%; counter: none
 soldier-2 attacks ottilie
   soldier-2 hits ottilie for 10 (hp 7)
   soldier-2 hp 20, ottilie hp 7
@@ -1635,7 +1635,7 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 7/17   Plain
 d  soldier-2        Soldier L2 pikeman         9,6    hp 20/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1661,7 +1661,7 @@ D  ottilie          Ottilie L1 bowman          8,6    hp 7/17   Plain
 d  soldier-2        Soldier L2 pikeman         9,6    hp 20/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1687,14 +1687,14 @@ D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 d  soldier-2        Soldier L2 pikeman         9,6    hp 20/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack ottilie soldier-2
-forecast ottilie -> soldier-2: dmg 6 hit 88% crit 4%; counter: none
-  signature: teodor's orders: ottilie hit +5
+forecast ottilie -> soldier-2: acc 88% dmg 6 crit 4%; counter: none
+  signature: teodor's orders: ottilie acc +5
 ottilie attacks soldier-2
   ottilie hits soldier-2 for 6 (hp 14)
   ottilie hp 7, soldier-2 hp 14
@@ -1718,7 +1718,7 @@ D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain  done
 d  soldier-2        Soldier L2 pikeman         9,6    hp 14/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1744,14 +1744,14 @@ D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain  done
 d  soldier-2        Soldier L2 pikeman         9,6    hp 14/20  Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack captain soldier-2
-forecast captain -> soldier-2: dmg 9 hit 92% crit 5%; counter: dmg 8 hit 62% crit 0%
-  signature: teodor's orders: captain hit +5
+forecast captain -> soldier-2: acc 92% dmg 9 crit 5%; counter: acc 62% dmg 8 crit 0%
+  signature: teodor's orders: captain acc +5
 captain attacks soldier-2
   captain hits soldier-2 for 9 (hp 5)
   soldier-2 hits captain for 8 (hp 14)
@@ -1776,13 +1776,13 @@ D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain  done
 d  soldier-2        Soldier L2 pikeman         9,6    hp 5/20   Plain  group fort, guard, awake
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack wren soldier-2
-forecast wren -> soldier-2: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-2: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-2
   wren hits soldier-2 for 8 (hp 0)
   wren hp 20, soldier-2 hp 0
@@ -1807,13 +1807,13 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  canto 4
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren 10,4
-wren cantos 9,5 -> 10,4 via 9,4
+wren moves again 9,5 -> 10,4 via 9,4
 Saltmarsh Ford  turn 7 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1832,7 +1832,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain  done
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  braced  done
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1863,7 +1863,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,4   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1888,7 +1888,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1914,13 +1914,13 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  canto 1
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren stay
-wren stays at 10,1 (canto)
+wren stays at 10,1 (move again)
 Saltmarsh Ford  turn 8 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -1939,7 +1939,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1964,7 +1964,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -1989,7 +1989,7 @@ A  captain          Alder Fenn L2 cadet        9,7    hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2014,7 +2014,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 14/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2040,7 +2040,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          7,6    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2065,7 +2065,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          9,5    hp 7/17   Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2091,7 +2091,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          9,5    hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2100,7 +2100,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: attack bandit_leader-1 wren
-forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 6 x2 hit 70% crit 2%
+forecast bandit_leader-1 -> wren with Steel Axe: acc 63% dmg 17 crit 0%; counter: acc 70% dmg 6 x2 crit 2%
 bandit_leader-1 attacks wren
   bandit_leader-1 misses wren
   wren misses bandit_leader-1
@@ -2128,7 +2128,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          9,5    hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2153,7 +2153,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          9,5    hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2178,7 +2178,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          9,5    hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2203,14 +2203,14 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack ottilie bandit_leader-1
-forecast ottilie -> bandit_leader-1: dmg 4 hit 74% crit 3%; counter: none
-  signature: teodor's orders: ottilie hit +5
+forecast ottilie -> bandit_leader-1: acc 74% dmg 4 crit 3%; counter: none
+  signature: teodor's orders: ottilie acc +5
 ottilie attacks bandit_leader-1
   ottilie misses bandit_leader-1
   ottilie hp 17, bandit_leader-1 hp 20
@@ -2232,14 +2232,14 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              10,1   hp 20/20  Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 77% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
-  signature: teodor's orders: wren hit +5
+forecast wren -> bandit_leader-1: acc 77% dmg 6 x2 crit 2%; counter with Steel Axe: acc 63% dmg 17 crit 0%
+  signature: teodor's orders: wren acc +5
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 6 (hp 14)
   bandit_leader-1 hits wren for 17 (hp 3)
@@ -2265,13 +2265,13 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              10,1   hp 3/20   Plain  canto 4
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > canto wren 11,2
-wren cantos 10,1 -> 11,2 via 11,1
+wren moves again 10,1 -> 11,2 via 11,1
 Saltmarsh Ford  turn 9 of 18  player phase  rout  recall 3
    01234567890123
  0 ....^^....!...
@@ -2290,7 +2290,7 @@ A  captain          Alder Fenn L2 cadet        10,6   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2315,7 +2315,7 @@ A  captain          Alder Fenn L2 cadet        10,4   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2340,7 +2340,7 @@ A  captain          Alder Fenn L2 cadet        10,4   hp 22/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          10,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2350,7 +2350,7 @@ signatures: each recruit with a signature plays it, flaw included; show <unit> p
 -- enemy phase, turn 9 --
 bandit_leader-1 heals 5 (hp 13)
 enemy: attack bandit_leader-1 ottilie 2
-forecast bandit_leader-1 -> ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
+forecast bandit_leader-1 -> ottilie: acc 52% dmg 13 crit 0%; counter: acc 60% dmg 4 crit 3%
 bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks ottilie
   bandit_leader-1 hits ottilie for 13 (hp 4)
@@ -2378,7 +2378,7 @@ A  captain          Alder Fenn L2 cadet        10,4   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          10,3   hp 21/21  Road
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2403,13 +2403,13 @@ A  captain          Alder Fenn L2 cadet        10,4   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack teodor bandit_leader-1
-forecast teodor -> bandit_leader-1: dmg 8 hit 51% crit 0%; counter with Toll Axe: dmg 11 hit 58% crit 1%
+forecast teodor -> bandit_leader-1: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
 teodor attacks bandit_leader-1
   teodor hits bandit_leader-1 for 8 (hp 1)
   bandit_leader-1 misses teodor
@@ -2433,7 +2433,7 @@ A  captain          Alder Fenn L2 cadet        10,4   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
@@ -2458,14 +2458,14 @@ A  captain          Alder Fenn L2 cadet        10,1   hp 22/22  Plain  captain
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit
   wren: counts tiles: moves again after any action with the Mov she has left; talks: any combat she is in wakes a sleeping group within 8
 > attack captain bandit_leader-1
-forecast captain -> bandit_leader-1: dmg 7 hit 76% crit 4%; counter with Toll Axe: dmg 11 hit 43% crit 0%
-  signature: teodor's orders: captain hit +5
+forecast captain -> bandit_leader-1: acc 76% dmg 7 crit 4%; counter with Toll Axe: acc 43% dmg 11 crit 0%
+  signature: teodor's orders: captain acc +5
 captain attacks bandit_leader-1
   captain crits bandit_leader-1 for 21 (hp 0)
   captain hp 22, bandit_leader-1 hp 0
@@ -2488,7 +2488,7 @@ A  captain          Alder Fenn L2 cadet        10,1   hp 22/22  Plain  captain  
 D  ottilie          Ottilie L1 bowman          10,2   hp 4/17   Plain
 C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,2   hp 3/20   Plain
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 signatures: each recruit with a signature plays it, flaw included; show <unit> prints it
   ottilie: ledger: refuses a strike or a watch shot under 50 hit; her counters stand
   teodor: orders: an ally within 2 who acts after him strikes at +5 hit; watched: his own strike with an ally within 2 is at -10 hit

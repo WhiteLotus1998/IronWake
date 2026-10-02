@@ -84,7 +84,7 @@ public partial class Main
         var d = card.Defender.Strike;
         var hit = card.Raises ? "--" : a.DisplayedHit.ToString();
         var crit = card.Raises ? "--" : a.CritChance.ToString();
-        Numerals(P(PanelWidth * 0.15f, 0), top, "HIT", hit, d.Strikes ? d.DisplayedHit.ToString() : null);
+        Numerals(P(PanelWidth * 0.15f, 0), top, "ACC", hit, d.Strikes ? d.DisplayedHit.ToString() : null);
         Numerals(P(PanelWidth * 0.5f, 0), top, "DMG", a.Damage.ToString(), d.Strikes ? d.Damage.ToString() : null);
         Numerals(P(PanelWidth * 0.85f, 0), top, "CRIT", crit, d.Strikes ? d.CritChance.ToString() : null);
 

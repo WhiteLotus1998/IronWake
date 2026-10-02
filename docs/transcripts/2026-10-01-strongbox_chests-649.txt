@@ -390,7 +390,7 @@ B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack teodor archer-1
-Forecast Teodor -> Archer 1: dmg 12 hit 76% crit 1%; counter: none
+Forecast Teodor -> Archer 1: acc 76% dmg 12 crit 1%; counter: none
 Teodor attacks Archer 1
   Teodor misses Archer 1
   Teodor hp 21, Archer 1 hp 17
@@ -510,7 +510,7 @@ chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a 
 enemy: move archer-1 11,8
 Archer 1 moves 11,9 -> 11,8
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 16)
   Archer 1 hp 17, Teodor hp 16
@@ -519,7 +519,7 @@ Archer 2 waits
 enemy: move brigand-1 6,7
 Brigand moves 7,6 -> 6,7 via 6,6
 enemy: attack brigand-1 wren
-Forecast Brigand -> Wren: dmg 10 hit 18% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand -> Wren: acc 18% dmg 10 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 Brigand attacks Wren
   Brigand misses Wren
   Wren hits Brigand for 10 (hp 12)
@@ -566,7 +566,7 @@ B  wren             Wren L1 cadet              6,8    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 2,5 Steel Bow; 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren brigand-1
-Forecast Wren -> Brigand: dmg 10 x2 hit 88% crit 4%; counter: dmg 10 hit 18% crit 0%
+Forecast Wren -> Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 18% dmg 10 crit 0%
 Wren attacks Brigand
   Wren hits Brigand for 10 (hp 0)
   Wren hp 20, Brigand hp 0
@@ -679,7 +679,7 @@ B  wren             Wren L1 cadet              6,8    hp 20/20  Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack teodor archer-1
-Forecast Teodor -> Archer 1: dmg 12 hit 76% crit 1%; counter: none
+Forecast Teodor -> Archer 1: acc 76% dmg 12 crit 1%; counter: none
 Teodor attacks Archer 1
   Teodor misses Archer 1
   Teodor hp 16, Archer 1 hp 17
@@ -768,7 +768,7 @@ chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest
 enemy: move archer-1 11,7
 Archer 1 moves 11,8 -> 11,7
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 11)
   Archer 1 hp 17, Teodor hp 11
@@ -779,7 +779,7 @@ Shieldbearer waits
 enemy: move soldier-1 10,7
 Soldier 1 moves 7,7 -> 10,7 via 8,7 9,7
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 hits Teodor for 8 (hp 3)
   Teodor hits Soldier 1 for 10 (hp 10)
@@ -843,7 +843,7 @@ B  wren             Wren L1 cadet              9,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren soldier-1
-Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 8 (hp 2)
   Soldier 1 hits Wren for 9 (hp 11)
@@ -1046,7 +1046,7 @@ Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
 enemy: move archer-1 9,9
 Archer 1 moves 11,7 -> 9,9 via 10,7 10,8 9,8
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 8)
   Archer 1 hp 17, Teodor hp 8
@@ -1059,7 +1059,7 @@ Shieldbearer waits
 enemy: move soldier-1 9,10
 Soldier 1 moves 10,7 -> 9,10 via 10,8 9,8 9,9
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 hits Teodor for 8 (hp 0)
   Soldier 1 hp 2, Teodor hp 0
@@ -1207,7 +1207,7 @@ B  wren             Wren L1 cadet              10,8   hp 20/20  Road
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren soldier-1
-Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 8 (hp 2)
   Soldier 1 hits Wren for 9 (hp 11)
@@ -1327,7 +1327,7 @@ Lethal if all land: Wren (Archer 1 for 6, Soldier 1 for 9, against 11 hp)
 enemy: move archer-1 7,7
 Archer 1 moves 11,7 -> 7,7 via 10,7 9,7 8,7
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 8)
   Archer 1 hp 17, Teodor hp 8
@@ -1341,7 +1341,7 @@ Shieldbearer waits
 enemy: move soldier-1 8,9
 Soldier 1 moves 10,7 -> 8,9 via 9,7 8,7 8,8
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 hits Teodor for 8 (hp 0)
   Soldier 1 hp 2, Teodor hp 0
@@ -1404,7 +1404,7 @@ B  wren             Wren L1 cadet              9,9    hp 11/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren soldier-1
-Forecast Wren -> Soldier 1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 8 (hp 0)
   Wren hp 11, Soldier 1 hp 0
@@ -1434,7 +1434,7 @@ B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack captain archer-1
-Forecast Alder Fenn -> Archer 1: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer 1
   Alder Fenn hits Archer 1 for 11 (hp 6)
   Alder Fenn hp 22, Archer 1 hp 6
@@ -1488,7 +1488,7 @@ B  wren             Wren L1 cadet              9,9    hp 11/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack ottilie archer-1 steel_bow
-Forecast Ottilie -> Archer 1 with Steel Bow: dmg 11 hit 88% crit 9%; counter: dmg 7 hit 86% crit 1%
+Forecast Ottilie -> Archer 1 with Steel Bow: acc 88% dmg 11 crit 9%; counter: acc 86% dmg 7 crit 1%
 Ottilie equips Steel Bow
 Ottilie attacks Archer 1
   Ottilie hits Archer 1 for 11 (hp 0)
@@ -1527,7 +1527,7 @@ The ground changes
 enemy: move archer-2 9,7
 Archer 2 moves 7,5 -> 9,7 via 8,5 9,5 9,6
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 hits Wren for 6 (hp 5)
   Archer 2 hp 17, Wren hp 5
@@ -1536,7 +1536,7 @@ Shieldbearer waits
 enemy: move soldier-2 9,8
 Soldier 2 moves 8,6 -> 9,8 via 9,6 9,7
 enemy: attack soldier-2 wren
-Forecast Soldier 2 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier 2 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 Soldier 2 attacks Wren
   Soldier 2 misses Wren
   Wren hits Soldier 2 for 8 (hp 12)
@@ -1592,7 +1592,7 @@ B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack captain archer-2
-Forecast Alder Fenn -> Archer 2: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 2: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer 2
   Alder Fenn hits Archer 2 for 11 (hp 6)
   Alder Fenn hp 22, Archer 2 hp 6
@@ -1644,7 +1644,7 @@ B  wren             Wren L1 cadet              9,9    hp 5/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack ottilie archer-2 steel_bow
-Forecast Ottilie -> Archer 2 with Steel Bow: dmg 11 hit 88% crit 9%; counter: dmg 7 hit 86% crit 1%
+Forecast Ottilie -> Archer 2 with Steel Bow: acc 88% dmg 11 crit 9%; counter: acc 86% dmg 7 crit 1%
 Ottilie attacks Archer 2
   Ottilie hits Archer 2 for 11 (hp 0)
   Ottilie hp 17, Archer 2 hp 0
@@ -1726,7 +1726,7 @@ Shieldbearer waits
 enemy: move soldier-2 7,8
 Soldier 2 moves 9,8 -> 7,8 via 8,8
 enemy: attack soldier-2 ottilie
-Forecast Soldier 2 -> Ottilie: dmg 10 hit 81% crit 0%; counter: none
+Forecast Soldier 2 -> Ottilie: acc 81% dmg 10 crit 0%; counter: none
 Soldier 2 attacks Ottilie
   Soldier 2 hits Ottilie for 10 (hp 7)
   Soldier 2 hp 12, Ottilie hp 7
@@ -1778,7 +1778,7 @@ B  wren             Wren L1 cadet              6,8    hp 15/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren soldier-2
-Forecast Wren -> Soldier 2: dmg 8 hit 85% crit 3%; counter: dmg 8 hit 28% crit 0%
+Forecast Wren -> Soldier 2: acc 85% dmg 8 crit 3%; counter: acc 28% dmg 8 crit 0%
 Wren attacks Soldier 2
   Wren hits Soldier 2 for 8 (hp 4)
   Soldier 2 hits Wren for 8 (hp 7)
@@ -1830,7 +1830,7 @@ B  wren             Wren L2 cadet              6,8    hp 8/21   Forest  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 3,0 Steel Lance; 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack captain soldier-2
-Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 2: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 Alder Fenn attacks Soldier 2
   Alder Fenn hits Soldier 2 for 9 (hp 0)
   Alder Fenn hp 22, Soldier 2 hp 0
@@ -2224,7 +2224,7 @@ chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it ope
 enemy: move shieldbearer-1 13,4
 Shieldbearer moves 13,1 -> 13,4 via 13,2 13,3
 enemy: attack shieldbearer-1 captain
-Forecast Shieldbearer -> Alder Fenn: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 73% crit 5%
+Forecast Shieldbearer -> Alder Fenn: acc 58% dmg 7 crit 0%; counter: acc 73% dmg 4 x2 crit 5%
 Shieldbearer attacks Alder Fenn
   Shieldbearer hits Alder Fenn for 7 (hp 15)
   Alder Fenn hits Shieldbearer for 4 (hp 20)
@@ -2254,7 +2254,7 @@ f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 16/24  Forest  group va
 B  wren             Wren L2 cadet              10,4   hp 18/21  Road
 chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack captain shieldbearer-1
-Forecast Alder Fenn -> Shieldbearer: dmg 4 x2 hit 73% crit 5%; counter: dmg 7 hit 58% crit 0%
+Forecast Alder Fenn -> Shieldbearer: acc 73% dmg 4 x2 crit 5%; counter: acc 58% dmg 7 crit 0%
 Alder Fenn attacks Shieldbearer
   Alder Fenn hits Shieldbearer for 4 (hp 12)
   Shieldbearer hits Alder Fenn for 7 (hp 8)
@@ -2302,7 +2302,7 @@ f  shieldbearer-1   Shieldbearer L1 bulwark    13,4   hp 8/24   Forest  group va
 B  wren             Wren L2 cadet              13,3   hp 18/21  Plain
 chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it opens it as its action; everything inside goes to its pack, so it needs the room)
 > attack wren shieldbearer-1
-Forecast Wren -> Shieldbearer: dmg 3 x2 hit 70% crit 4%; counter: dmg 8 hit 60% crit 0%
+Forecast Wren -> Shieldbearer: acc 70% dmg 3 x2 crit 4%; counter: acc 60% dmg 8 crit 0%
 Wren attacks Shieldbearer
   Wren misses Shieldbearer
   Shieldbearer hits Wren for 8 (hp 10)
@@ -2374,7 +2374,7 @@ chests ($): 14,0 Steel Sword, Field Dressing (a unit on a chest or beside it ope
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --
 enemy: attack shieldbearer-1 wren
-Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 70% crit 4%
+Forecast Shieldbearer -> Wren: acc 60% dmg 8 crit 0%; counter: acc 70% dmg 3 x2 crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren misses Shieldbearer
@@ -2530,7 +2530,7 @@ Lethal if all land: Ottilie (Shieldbearer for 9, against 7 hp)
 enemy: move shieldbearer-1 10,3
 Shieldbearer moves 13,4 -> 10,3 via 13,3 12,3 11,3
 enemy: attack shieldbearer-1 ottilie
-Forecast Shieldbearer -> Ottilie: dmg 9 hit 79% crit 0%; counter: none
+Forecast Shieldbearer -> Ottilie: acc 79% dmg 9 crit 0%; counter: none
 Shieldbearer attacks Ottilie
   Shieldbearer misses Ottilie
   Shieldbearer hp 5, Ottilie hp 7
@@ -2576,7 +2576,7 @@ D  ottilie          Ottilie L1 bowman          11,4   hp 7/17   Plain
 f  shieldbearer-1   Shieldbearer L1 bulwark    10,3   hp 5/24   Road  group vault, guard, awake
 B  wren             Wren L2 cadet              14,1   hp 10/21  Plain
 > attack ottilie shieldbearer-1 steel_bow
-Forecast Ottilie -> Shieldbearer with Steel Bow: dmg 5 hit 95% crit 10%; counter: none
+Forecast Ottilie -> Shieldbearer with Steel Bow: acc 95% dmg 5 crit 10%; counter: none
 Ottilie attacks Shieldbearer
   Ottilie hits Shieldbearer for 5 (hp 0)
   Ottilie hp 7, Shieldbearer hp 0

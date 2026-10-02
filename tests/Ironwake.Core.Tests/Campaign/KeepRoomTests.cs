@@ -147,7 +147,7 @@ public class KeepRoomTests
             {
                 $"Rooms: beds: 10/{Menu.Beds + 2}; a fallen member keeps their bed",
                 "  bunk: Bunk room, 400, +2 beds, built 1 of 2",
-                "  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won",
+                "  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won",
                 "  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won",
                 "  barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first",
                 "  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare",

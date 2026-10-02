@@ -349,11 +349,11 @@ public class KinsbaneTests
     [Fact]
     public void TheUnitCardPrintsTheCountTheGrowthAndTheStateComing()
     {
-        Assert.Equal("Kinsbane: fed 4. Mt +1. Hungry: -5 HP at the next phase start.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 4)), Shipped));
-        Assert.Equal("Kinsbane: fed 4. Mt +1. Hungry: -5 HP at the next phase start, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4)), Shipped));
-        Assert.Equal("Kinsbane: fed 4. Mt +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4, hasFed: true)), Shipped));
-        Assert.StartsWith("Kinsbane: fed 0. Mt +0. Starved: half Mt, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
-        Assert.Equal("Kinsbane: fed 15. Mt +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 15)), Shipped));
+        Assert.Equal("Kinsbane: fed 4. Power +1. Hungry: -5 HP at the next phase start.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 4)), Shipped));
+        Assert.Equal("Kinsbane: fed 4. Power +1. Hungry: -5 HP at the next phase start, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4)), Shipped));
+        Assert.Equal("Kinsbane: fed 4. Power +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 4, hasFed: true)), Shipped));
+        Assert.StartsWith("Kinsbane: fed 0. Power +0. Starved: half Power, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
+        Assert.Equal("Kinsbane: fed 15. Power +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 15)), Shipped));
         Assert.Null(Kinsbane.Card(Placed().Find("captain")!, Shipped));
         Assert.Contains(PlaySession.ShowLines(Placed(), Shipped, Keziah(Placed())), line => line.StartsWith("  Kinsbane: fed 0.", StringComparison.Ordinal));
     }

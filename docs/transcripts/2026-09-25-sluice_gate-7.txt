@@ -62,7 +62,7 @@ a  soldier-1        Soldier L1 pikeman         5,7    hp 20/20  Plain  group yar
 C  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren hits soldier-1 for 8 (hp 12)
   soldier-1 misses wren
@@ -162,7 +162,7 @@ B  wren             Wren L1 cadet              4,7    hp 20/20  Plain  done
 enemy: wait archer-1
 archer-1 waits
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 misses wren
   wren hits soldier-1 for 8 (hp 4)
@@ -188,7 +188,7 @@ a  soldier-1        Soldier L1 pikeman         5,7    hp 4/20   Plain  group yar
 C  teodor           Teodor L1 pikeman          1,2    hp 21/21  Plain
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren misses soldier-1
   soldier-1 misses wren
@@ -295,7 +295,7 @@ brigand-1 moves 9,0 -> 5,0 via 8,0 7,0 6,0
 enemy: wait brigand-1
 brigand-1 waits
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 hits wren for 9 (hp 11)
   wren hits soldier-1 for 8 (hp 0)
@@ -419,7 +419,7 @@ archer-1 waits
 enemy: move brigand-1 5,4
 brigand-1 moves 5,0 -> 5,4 via 5,1 5,2 5,3
 enemy: attack brigand-1 wren
-forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+forecast brigand-1 -> wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 brigand-1 attacks wren
   brigand-1 misses wren
   wren hits brigand-1 for 10 (hp 12)
@@ -446,7 +446,7 @@ A  captain          Alder Fenn L1 cadet        3,2    hp 22/22  Plain  captain
 C  teodor           Teodor L1 pikeman          3,1    hp 21/21  Forest
 B  wren             Wren L1 cadet              5,5    hp 11/20  Plain
 > attack wren brigand-1
-forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
+forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-1
   wren hits brigand-1 for 10 (hp 0)
   wren hp 11, brigand-1 hp 0
@@ -485,7 +485,7 @@ A  captain          Alder Fenn L1 cadet        3,2    hp 22/22  Plain  captain
 C  teodor           Teodor L1 pikeman          7,1    hp 21/21  Plain
 B  wren             Wren L1 cadet              5,5    hp 11/20  Plain  done
 > attack teodor archer-1
-forecast teodor -> archer-1: dmg 11 hit 60% crit 1%; counter: none
+forecast teodor -> archer-1: acc 60% dmg 11 crit 1%; counter: none
 teodor attacks archer-1
   teodor misses archer-1
   teodor hp 21, archer-1 hp 17
@@ -562,7 +562,7 @@ A  captain          Alder Fenn L1 cadet        5,1    hp 22/22  Plain  captain
 C  teodor           Teodor L1 pikeman          7,1    hp 21/21  Plain
 B  wren             Wren L1 cadet              5,5    hp 11/20  Plain
 > attack teodor archer-1
-forecast teodor -> archer-1: dmg 11 hit 60% crit 1%; counter: none
+forecast teodor -> archer-1: acc 60% dmg 11 crit 1%; counter: none
 teodor attacks archer-1
   teodor hits archer-1 for 11 (hp 6)
   teodor hp 21, archer-1 hp 6
@@ -600,7 +600,7 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain
 C  teodor           Teodor L1 pikeman          7,1    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              5,5    hp 11/20  Plain
 > attack captain archer-1
-forecast captain -> archer-1: dmg 10 hit 74% crit 4%; counter: none
+forecast captain -> archer-1: acc 74% dmg 10 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 10 (hp 0)
   captain hp 22, archer-1 hp 0

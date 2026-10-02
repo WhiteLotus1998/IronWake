@@ -421,7 +421,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -532,7 +532,7 @@ D  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell archer-1
-Forecast Pell -> Archer 1 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 1 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
 Pell attacks Archer 1
   Pell hits Archer 1 for 10 (hp 7)
   Archer 1 misses Pell
@@ -600,7 +600,7 @@ D  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain archer-1
-Forecast Alder Fenn -> Archer 1: dmg 9 hit 67% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 1: acc 67% dmg 9 crit 4%; counter: none
 Alder Fenn attacks Archer 1
   Alder Fenn hits Archer 1 for 9 (hp 0)
   Alder Fenn hp 22, Archer 1 hp 0
@@ -846,7 +846,7 @@ C  wren             Wren L1 cadet              2,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -876,7 +876,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-Ansgar stays at 1,5 (canto)
+Ansgar stays at 1,5 (move again)
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -925,7 +925,7 @@ Shieldbearer waits
 enemy: move soldier-1 4,4
 Soldier moves 7,5 -> 4,4 via 7,4 6,4 5,4
 enemy: attack soldier-1 teodor
-Forecast Soldier -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier attacks Teodor
   Soldier misses Teodor
   Teodor hits Soldier for 10 (hp 11)
@@ -993,7 +993,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell soldier-1
-Forecast Pell -> Soldier with Cinder: dmg 12 hit 99% crit 2%; counter: none
+Forecast Pell -> Soldier with Cinder: acc 99% dmg 12 crit 2%; counter: none
 Pell attacks Soldier
   Pell hits Soldier for 12 (hp 0)
   Pell hp 16, Soldier hp 0
@@ -1056,13 +1056,13 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar brawler-1
-Forecast Ansgar -> Brawler with Iron Lance: dmg 11 hit 77% crit 3%; counter: dmg 8 x2 hit 89% crit 0%
+Forecast Ansgar -> Brawler with Iron Lance: acc 77% dmg 11 crit 3%; counter: acc 89% dmg 8 x2 crit 0%
 Ansgar attacks Brawler
   Ansgar misses Brawler
   Brawler hits Ansgar for 8 (hp 12)
   Brawler hits Ansgar for 8 (hp 4)
   Ansgar hp 4, Brawler hp 23
-Ansgar may Canto up to 0 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 0 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1120,7 +1120,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
-Forecast Alder Fenn -> Brawler: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 12)
   Brawler hits Alder Fenn for 6 (hp 16)
@@ -1215,7 +1215,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
-Forecast Alder Fenn -> Brawler: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 12)
   Brawler hits Alder Fenn for 6 (hp 16)
@@ -1279,7 +1279,7 @@ D  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor brawler-1
-Forecast Teodor -> Brawler: dmg 12 hit 77% crit 2%; counter: dmg 6 x2 hit 91% crit 0%
+Forecast Teodor -> Brawler: acc 77% dmg 12 crit 2%; counter: acc 91% dmg 6 x2 crit 0%
 Teodor attacks Brawler
   Teodor misses Brawler
   Brawler hits Teodor for 6 (hp 15)
@@ -1373,7 +1373,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
-Forecast Alder Fenn -> Brawler: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 12)
   Brawler hits Alder Fenn for 6 (hp 16)
@@ -1437,7 +1437,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren brawler-1
-Forecast Wren -> Brawler: dmg 10 hit 86% crit 4%; counter: dmg 7 x2 hit 83% crit 0%
+Forecast Wren -> Brawler: acc 86% dmg 10 crit 4%; counter: acc 83% dmg 7 x2 crit 0%
 Wren attacks Brawler
   Wren hits Brawler for 10 (hp 2)
   Brawler hits Wren for 7 (hp 13)
@@ -1501,7 +1501,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              6,4    hp 6/20   Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brawler-1
-Forecast Ottilie -> Brawler: dmg 8 hit 83% crit 5%; counter: none
+Forecast Ottilie -> Brawler: acc 83% dmg 8 crit 5%; counter: none
 Ottilie attacks Brawler
   Ottilie misses Brawler
   Ottilie hp 17, Brawler hp 2
@@ -1595,7 +1595,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brawler-1
-Forecast Pell -> Brawler with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Brawler with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Brawler
   Pell hits Brawler for 13 (hp 10)
   Pell hp 16, Brawler hp 10
@@ -1659,7 +1659,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
-Forecast Alder Fenn -> Brawler: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+Forecast Alder Fenn -> Brawler: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 Alder Fenn attacks Brawler
   Alder Fenn hits Brawler for 11 (hp 0)
   Alder Fenn hp 22, Brawler hp 0
@@ -1693,7 +1693,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 21/21  Plain
 C  wren             Wren L1 cadet              2,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier
   Teodor hits Soldier for 10 (hp 1)
   Soldier hits Teodor for 8 (hp 13)
@@ -1756,7 +1756,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain  done
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren soldier-1
-Forecast Wren -> Soldier: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier
   Wren hits Soldier for 8 (hp 0)
   Wren hp 20, Soldier hp 0
@@ -1818,7 +1818,7 @@ C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 4 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -1846,7 +1846,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain  done
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-Ansgar stays at 4,4 (canto)
+Ansgar stays at 4,4 (move again)
 Sallow Grange  turn 4 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -1935,7 +1935,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 enemy: move archer-2 6,4
 Archer 2 moves 7,3 -> 6,4 via 6,3
 enemy: attack archer-2 ansgar
-Forecast Archer 2 -> Ansgar: dmg 7 hit 79% crit 2%; counter: none
+Forecast Archer 2 -> Ansgar: acc 79% dmg 7 crit 2%; counter: none
 Archer 2 attacks Ansgar
   Archer 2 misses Ansgar
   Archer 2 hp 17, Ansgar hp 20
@@ -2003,7 +2003,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain archer-2
-Forecast Alder Fenn -> Archer 2: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 2: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer 2
   Alder Fenn hits Archer 2 for 11 (hp 6)
   Alder Fenn hp 22, Archer 2 hp 6
@@ -2063,13 +2063,13 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-2
-Forecast Ansgar -> Archer 2 with Iron Lance: dmg 11 hit 76% crit 2%; counter: none
+Forecast Ansgar -> Archer 2 with Iron Lance: acc 76% dmg 11 crit 2%; counter: none
 Ansgar attacks Archer 2
   Ansgar hits Archer 2 for 11 (hp 0)
   Ansgar hp 20, Archer 2 hp 0
 Ansgar gains 40 exp (40)
 Archer 2 falls at 6,4
-Ansgar may Canto up to 1 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 1 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 5 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2096,7 +2096,7 @@ D  teodor           Teodor L1 pikeman          3,4    hp 13/21  Plain
 C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar 8,4
-Ansgar cantos 7,4 -> 8,4
+Ansgar moves again 7,4 -> 8,4
 Sallow Grange  turn 5 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2403,7 +2403,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 13/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-Forecast Pell -> Shieldbearer with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Shieldbearer
   Pell hits Shieldbearer for 13 (hp 12)
   Pell hp 16, Shieldbearer hp 12
@@ -2461,7 +2461,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 13/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie shieldbearer-1
-Forecast Ottilie -> Shieldbearer: dmg 1 x2 hit 91% crit 5%; counter: none
+Forecast Ottilie -> Shieldbearer: acc 91% dmg 1 x2 crit 5%; counter: none
 Ottilie attacks Shieldbearer
   Ottilie misses Shieldbearer
   Ottilie hits Shieldbearer for 1 (hp 11)
@@ -2575,7 +2575,7 @@ C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may Canto up to 2 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 2 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 6 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2602,7 +2602,7 @@ D  teodor           Teodor L1 pikeman          6,5    hp 13/21  Plain
 C  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-Ansgar stays at 9,1 (canto)
+Ansgar stays at 9,1 (move again)
 Sallow Grange  turn 6 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......
@@ -2774,7 +2774,7 @@ D  teodor           Teodor L1 pikeman          8,3    hp 13/21  Plain
 C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell shieldbearer-1
-Forecast Pell -> Shieldbearer with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Shieldbearer
   Pell hits Shieldbearer for 13 (hp 0)
   Pell hp 16, Shieldbearer hp 0
@@ -2884,7 +2884,7 @@ C  wren             Wren L1 cadet              9,3    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > wait ansgar
 Ansgar waits
-Ansgar may Canto up to 6 movement: canto ansgar <x,y|stay>
+Ansgar may move again up to 6 movement: canto ansgar <x,y|stay>
 Sallow Grange  turn 7 of 10  player phase  seize  recall 0
    012345678901234567
  0 ....^^^^^^^.......

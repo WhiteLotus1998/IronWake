@@ -31,7 +31,7 @@ public class CantoCliTests
     {
         var output = Play(out _, "move ansgar 4,4\nwait ansgar\n");
 
-        Assert.Contains("Ansgar waits\nAnsgar may Canto up to 2 movement: canto ansgar <x,y|stay>\n", output);
+        Assert.Contains("Ansgar waits\nAnsgar may move again up to 2 movement: canto ansgar <x,y|stay>\n", output);
         Assert.Contains("Plain  canto 2\n", output);
     }
 
@@ -40,7 +40,7 @@ public class CantoCliTests
     {
         var output = Play(out _, "wait ansgar\ncanto ansgar stay\ncanto ansgar 2,3\n");
 
-        Assert.Contains("> canto ansgar stay\nAnsgar stays at 1,3 (canto)\n", output);
+        Assert.Contains("> canto ansgar stay\nAnsgar stays at 1,3 (move again)\n", output);
         Assert.Contains("> canto ansgar 2,3\nERROR: Ansgar cannot Canto: his Canto is spent this phase\n", output);
     }
 
@@ -62,8 +62,8 @@ public class CantoCliTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Ansgar hits Archer for 11 (hp 6)", output);
-        Assert.Contains("> canto ansgar 4,5\nAnsgar cantos 4,4 -> 4,5\n", output);
-        Assert.Contains("> canto ansgar 5,5\nAnsgar cantos 8,5 -> 5,5 via 7,5 6,5\n", output);
+        Assert.Contains("> canto ansgar 4,5\nAnsgar moves again 4,4 -> 4,5\n", output);
+        Assert.Contains("> canto ansgar 5,5\nAnsgar moves again 8,5 -> 5,5 via 7,5 6,5\n", output);
         Assert.Contains("Threat on Ansgar at 5,5 (Plain): no enemy can strike him next phase", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.DoesNotContain("Rejected ", output);

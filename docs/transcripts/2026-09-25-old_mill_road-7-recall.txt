@@ -75,7 +75,7 @@ archer-2 waits
 enemy: move brigand-1 3,6
 brigand-1 moves 6,5 -> 3,6 via 5,5 4,5 4,6
 enemy: attack brigand-1 wren
-forecast brigand-1 -> wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+forecast brigand-1 -> wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 brigand-1 attacks wren
   brigand-1 hits wren for 11 (hp 9)
   wren misses brigand-1
@@ -115,9 +115,9 @@ recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the
   state 1  turn 1  after move captain 1,4  undoes: gives back 10 exp, 10 enemy hp; returns 11 hp
   state 2  turn 1  after move wren 2,6  undoes: gives back 10 exp, 10 enemy hp; returns 11 hp
 > forecast wren brigand-1
-forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
+forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 > attack wren brigand-1 1
-forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
+forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-1
   wren misses brigand-1
   brigand-1 misses wren
@@ -175,7 +175,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, asleep
 B  wren             Wren L1 cadet              2,6    hp 9/20   Plain
 > attack wren brigand-1 1
-forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
+forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-1
   wren misses brigand-1
   brigand-1 misses wren

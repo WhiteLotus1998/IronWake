@@ -7,7 +7,7 @@ public class AbilityContentTests
 {
     private const string Breakers = """
         { "abilities": [
-          { "id": "axebreaker", "name": "Axebreaker", "text": "+20 hit and avoid against axes.",
+          { "id": "axebreaker", "name": "Axe Sense", "text": "+20 Acc and Evade against axes.",
             "effect": { "kind": "combat", "against": { "weapon": "axe" }, "hit": 20, "avoid": 20 } },
           { "id": "skyward", "name": "Skyward", "text": "+10 crit against fliers on foot.",
             "effect": { "kind": "combat", "against": { "weapon": "lance", "movement": "flying" }, "crit": 10 } },
@@ -47,7 +47,7 @@ public class AbilityContentTests
         Assert.Equal(new OpponentCondition(WeaponType.Lance, MovementType.Flying), ((CombatModifierEffect)content.Ability("skyward").Effect).Against);
         Assert.Equal(OpponentCondition.Any, ((CombatModifierEffect)content.Ability("steady").Effect).Against);
         Assert.Equal(new StatDeltaEffect(Stats.Zero with { Def = 2, Hp = 1 }), content.Ability("vigilance").Effect);
-        Assert.Equal("+20 hit and avoid against axes.", content.Ability("axebreaker").Text);
+        Assert.Equal("+20 Acc and Evade against axes.", content.Ability("axebreaker").Text);
     }
 
     [Fact]

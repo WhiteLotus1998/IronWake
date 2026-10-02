@@ -520,7 +520,7 @@ public class ValidationTests
         Assert.Contains(hook, e.Message);
     }
 
-    /// <summary>Design Table, seventh round: a spent spell does not equip, so a Reason or Faith unit carries two castable spells or is refused.</summary>
+    /// <summary>Design Table, seventh round: a spent spell does not equip, so a Lore or Faith unit carries two castable spells or is refused.</summary>
     [Fact]
     public void ACasterWithOneSpellIsRefused()
     {

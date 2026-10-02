@@ -65,7 +65,7 @@ public class EventDisplayNameTests
     [Fact]
     public void AnArtDeclaredReadsTheArtAndTheWeaponByTheirDisplayNames()
     {
-        Assert.Equal("Ansgar declares Canto with Iron Lance, spending 2 extra uses", Line(new ArtDeclared("ansgar", "canto", "iron_lance", 2)));
+        Assert.Equal("Ansgar declares Move Again with Iron Lance, spending 2 extra uses", Line(new ArtDeclared("ansgar", "canto", "iron_lance", 2)));
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public class EventDisplayNameTests
     [Fact]
     public void AMasteryEarnedReadsTheClassAndTheAbilityByTheirDisplayNames()
     {
-        Assert.Equal("Hale masters the Cadet class and keeps Axebreaker", Line(new MasteryEarned("hale", "cadet", "axebreaker")));
+        Assert.Equal("Hale masters the Cadet class and keeps Axe Sense", Line(new MasteryEarned("hale", "cadet", "axebreaker")));
     }
 
     [Fact]

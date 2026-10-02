@@ -24,11 +24,11 @@ C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > show wren
 wren: Wren, Cadet L1, at 5,11 on Plain
   hp 20/20  str 7 mag 0 dex 6 spd 8 lck 5 def 4 res 2 cha 3  mov 4 (infantry)
-  weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)
+  weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)
   items: 1: Iron Sword x40, 2: Field Dressing x3
   ranks: sword E (0), lance E (0), axe E (0)
   mastery: Fundamentals (0 of 12 combats)
@@ -36,7 +36,7 @@ wren: Wren, Cadet L1, at 5,11 on Plain
 > show teodor
 teodor: Teodor, Pikeman L1, at 7,11 on Plain
   hp 21/21  str 8 mag 0 dex 5 spd 5 lck 2 def 5 res 1 cha 4  mov 4 (infantry)
-  weapon: Iron Lance (mt 6 hit 70 crit 0 wt 6 range 1-1)
+  weapon: Iron Lance (acc 70 power 6 crit 0 wt 6 range 1-1)
   items: 1: Iron Lance x40, 2: Field Dressing x3
   ranks: lance E (0)
   mastery: Horsebane (0 of 12 combats)
@@ -44,15 +44,15 @@ teodor: Teodor, Pikeman L1, at 7,11 on Plain
 > show pell
 pell: Pell, Adept L1, at 6,10 on Plain
   hp 16/16  str 1 mag 8 dex 5 spd 5 lck 3 def 2 res 5 cha 3  mov 4 (infantry)
-  weapon: Cinder (mt 5 hit 90 crit 0 wt 3 range 1-2)
+  weapon: Cinder (acc 90 power 5 crit 0 wt 3 range 1-2)
   items: 1: Cinder x8, 2: Gust x6
-  ranks: reason E (0)
+  ranks: lore E (0)
   mastery: Deep Study (0 of 12 combats)
   targets from here: none
 > show captain
 captain: Alder Fenn, Cadet L1, at 6,11 on Plain
   hp 22/22  str 8 mag 0 dex 7 spd 8 lck 6 def 5 res 2 cha 9  mov 4 (infantry)
-  weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)
+  weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)
   items: 1: Iron Sword x40, 2: Field Dressing x3
   ranks: sword E (0), lance E (0), axe E (0)
   mastery: Fundamentals (0 of 12 combats)
@@ -82,7 +82,7 @@ C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 *  reach from 5,11: 15 tiles
 > move teodor 9,9
 teodor moves 7,11 -> 9,9 via 7,10 8,10 9,10
@@ -110,7 +110,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -137,7 +137,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 9,10
 pell moves 6,10 -> 9,10 via 7,10 8,10
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -164,7 +164,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -191,7 +191,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 8,10
 captain moves 6,11 -> 8,10 via 6,10 7,10
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -218,7 +218,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -245,7 +245,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 4,9
 wren moves 5,11 -> 4,9 via 5,10 4,10
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -272,7 +272,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 The Tollgate  turn 1 of 10  player phase  seize  recall 3
@@ -299,7 +299,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -340,7 +340,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > threat wren from 4,7
 threat on wren at 4,7 (Plain): no enemy can strike it next phase
 > move teodor 8,7
@@ -369,7 +369,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -396,7 +396,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 9,7
 pell moves 9,10 -> 9,7 via 9,9 9,8
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -423,7 +423,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -450,7 +450,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 9,8
 captain moves 8,10 -> 9,8 via 9,10 9,9
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -477,7 +477,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -504,7 +504,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,9    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 4,7
 wren moves 4,9 -> 4,7 via 4,8
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -531,7 +531,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 The Tollgate  turn 2 of 10  player phase  seize  recall 3
@@ -558,7 +558,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -599,7 +599,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 5,7
 pell moves 9,7 -> 5,7 via 8,7 7,7 6,7
 The Tollgate  turn 3 of 10  player phase  seize  recall 3
@@ -626,9 +626,9 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-2
   pell hits archer-2 for 12 (hp 5)
   archer-2 hits pell for 8 (hp 8)
@@ -658,7 +658,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 4,5
 wren moves 4,7 -> 4,5 via 4,6
 The Tollgate  turn 3 of 10  player phase  seize  recall 3
@@ -685,9 +685,9 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren archer-2
-forecast wren -> archer-2: dmg 9 hit 54% crit 3%; counter: none
+forecast wren -> archer-2: acc 54% dmg 9 crit 3%; counter: none
 wren attacks archer-2
   wren misses archer-2
   wren hp 20, archer-2 hp 5
@@ -715,7 +715,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 7,5
 teodor moves 8,7 -> 7,5 via 8,6 8,5
 The Tollgate  turn 3 of 10  player phase  seize  recall 3
@@ -742,9 +742,9 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack teodor toll_brigand-1
-forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 9 hit 21% crit 0%
+forecast teodor -> toll_brigand-1: acc 47% dmg 11 crit 2%; counter: acc 21% dmg 9 crit 0%
 teodor attacks toll_brigand-1
   teodor misses toll_brigand-1
   toll_brigand-1 misses teodor
@@ -773,7 +773,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 8,6
 captain moves 9,8 -> 8,6 via 9,7 9,6
 The Tollgate  turn 3 of 10  player phase  seize  recall 3
@@ -800,7 +800,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 3 of 10  player phase  seize  recall 3
@@ -827,14 +827,14 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: wait archer-1
 archer-1 waits
 enemy: attack archer-2 pell
-forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 12 hit 86% crit 2%
+forecast archer-2 -> pell: acc 86% dmg 8 crit 2%; counter with Cinder: acc 86% dmg 12 crit 2%
 archer-2 attacks pell
   archer-2 hits pell for 8 (hp 0)
   archer-2 hp 5, pell hp 0
@@ -842,7 +842,7 @@ pell falls at 5,7
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_brigand-1 wren
-forecast toll_brigand-1 -> wren: dmg 10 hit 25% crit 0%; counter: none
+forecast toll_brigand-1 -> wren: acc 25% dmg 10 crit 0%; counter: none
 toll_brigand-1 attacks wren
   toll_brigand-1 hits wren for 10 (hp 10)
   toll_brigand-1 hp 23, wren hp 10
@@ -874,7 +874,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 10/20  Hill
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > recall list
 recall: 3 of 3 charges left, 0 spent; a spent charge does not come back, and the same attack will roll the same
   state 0  turn 1  the start  undoes: gives back 12 enemy hp; returns pell alive, 26 hp
@@ -932,7 +932,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 5,6
 wren moves 4,7 -> 5,6 via 4,6
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -959,9 +959,9 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren archer-2
-forecast wren -> archer-2: dmg 9 hit 54% crit 3%; counter: none
+forecast wren -> archer-2: acc 54% dmg 9 crit 3%; counter: none
 wren attacks archer-2
   wren misses archer-2
   wren hp 20, archer-2 hp 17
@@ -989,7 +989,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 7,7
 pell moves 9,7 -> 7,7 via 8,7
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1016,7 +1016,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1043,7 +1043,7 @@ C  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 7,5
 teodor moves 8,7 -> 7,5 via 8,6 8,5
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1070,7 +1070,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1097,7 +1097,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 8,6
 captain moves 9,8 -> 8,6 via 9,7 9,6
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1124,7 +1124,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 3 of 10  player phase  seize  recall 2
@@ -1151,21 +1151,21 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: wait archer-1
 archer-1 waits
 enemy: attack archer-2 teodor
-forecast archer-2 -> teodor: dmg 4 hit 49% crit 3%; counter: none
+forecast archer-2 -> teodor: acc 49% dmg 4 crit 3%; counter: none
 archer-2 attacks teodor
   archer-2 hits teodor for 4 (hp 17)
   archer-2 hp 17, teodor hp 17
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_brigand-1 wren
-forecast toll_brigand-1 -> wren: dmg 10 hit 13% crit 0%; counter: none
+forecast toll_brigand-1 -> wren: acc 13% dmg 10 crit 0%; counter: none
 toll_brigand-1 attacks wren
   toll_brigand-1 hits wren for 10 (hp 10)
   toll_brigand-1 hp 23, wren hp 10
@@ -1198,7 +1198,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 17/21  Forest
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 5,4
 teodor moves 7,5 -> 5,4 via 7,4 6,4
 The Tollgate  turn 4 of 10  player phase  seize  recall 2
@@ -1225,10 +1225,10 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack teodor archer-2
-forecast teodor -> archer-2: dmg 11 hit 68% crit 1%; counter: none
-  pincer: archer-2 pinned by wren: teodor hit +15
+forecast teodor -> archer-2: acc 68% dmg 11 crit 1%; counter: none
+  pincer: archer-2 pinned by wren: teodor acc +15
 teodor attacks archer-2
   teodor misses archer-2
   teodor hp 17, archer-2 hp 17
@@ -1256,7 +1256,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 5,7
 pell moves 7,7 -> 5,7 via 6,7
 The Tollgate  turn 4 of 10  player phase  seize  recall 2
@@ -1283,9 +1283,9 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-2
   pell hits archer-2 for 12 (hp 5)
   archer-2 hits pell for 8 (hp 8)
@@ -1315,10 +1315,10 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren archer-2
-forecast wren -> archer-2: dmg 9 hit 79% crit 3%; counter: none
-  pincer: archer-2 pinned by teodor: wren hit +15
+forecast wren -> archer-2: acc 79% dmg 9 crit 3%; counter: none
+  pincer: archer-2 pinned by teodor: wren acc +15
 wren attacks archer-2
   wren hits archer-2 for 9 (hp 0)
   wren hp 10, archer-2 hp 0
@@ -1347,7 +1347,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 7,5
 captain moves 8,6 -> 7,5 via 8,5
 The Tollgate  turn 4 of 10  player phase  seize  recall 2
@@ -1373,9 +1373,9 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack captain toll_brigand-1
-forecast captain -> toll_brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 9 hit 12% crit 0%
+forecast captain -> toll_brigand-1: acc 63% dmg 10 x2 crit 5%; counter: acc 12% dmg 9 crit 0%
 captain attacks toll_brigand-1
   captain hits toll_brigand-1 for 10 (hp 13)
   toll_brigand-1 misses captain
@@ -1405,7 +1405,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain  done
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 3/23   Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1414,7 +1414,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_brigand-1 wren
-forecast toll_brigand-1 -> wren: dmg 10 hit 13% crit 0%; counter: none
+forecast toll_brigand-1 -> wren: acc 13% dmg 10 crit 0%; counter: none
 toll_brigand-1 attacks wren
   toll_brigand-1 misses wren
   toll_brigand-1 hp 3, wren hp 10
@@ -1446,7 +1446,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 3/23   Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,6    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 5,5
 wren moves 5,6 -> 5,5
 The Tollgate  turn 5 of 10  player phase  seize  recall 2
@@ -1472,11 +1472,11 @@ C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 3/23   Forest  group woods, hold
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren toll_brigand-1
-forecast wren -> toll_brigand-1: dmg 9 x2 hit 82% crit 4%; counter: dmg 10 hit 13% crit 0%
+forecast wren -> toll_brigand-1: acc 82% dmg 9 x2 crit 4%; counter: acc 13% dmg 10 crit 0%
   counter: lethal to wren (10 against 10 hp)
-  pincer: toll_brigand-1 pinned by captain: wren hit +15
+  pincer: toll_brigand-1 pinned by captain: wren acc +15
 wren attacks toll_brigand-1
   wren hits toll_brigand-1 for 9 (hp 0)
   wren hp 10, toll_brigand-1 hp 0
@@ -1504,7 +1504,7 @@ D  pell             Pell L1 adept              5,7    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 7,6
 pell moves 5,7 -> 7,6 via 6,7 6,6
 The Tollgate  turn 5 of 10  player phase  seize  recall 2
@@ -1529,7 +1529,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 The Tollgate  turn 5 of 10  player phase  seize  recall 2
@@ -1554,7 +1554,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 5 of 10  player phase  seize  recall 2
@@ -1579,7 +1579,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          5,4    hp 17/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 6,4
 teodor moves 5,4 -> 6,4
 event riders
@@ -1607,7 +1607,7 @@ e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group fla
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 5 of 10  player phase  seize  recall 2
@@ -1633,7 +1633,7 @@ e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group fla
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
@@ -1644,14 +1644,14 @@ bandit_leader-1 waits
 enemy: move rider-1 7,4
 rider-1 moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 teodor
-forecast rider-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 11 hit 76% crit 1%
+forecast rider-1 -> teodor: acc 39% dmg 7 crit 1%; counter: acc 76% dmg 11 crit 1%
 rider-1 attacks teodor
   rider-1 misses teodor
   teodor hits rider-1 for 11 (hp 10)
   rider-1 hp 10, teodor hp 17
 teodor gains 14 exp (14)
 enemy: attack toll_warden-1 teodor
-forecast toll_warden-1 -> teodor: dmg 6 hit 31% crit 1%; counter: none
+forecast toll_warden-1 -> teodor: acc 31% dmg 6 crit 1%; counter: none
 toll_warden-1 attacks teodor
   toll_warden-1 misses teodor
   toll_warden-1 hp 21, teodor hp 17
@@ -1681,7 +1681,7 @@ e  rider-1          Rider L3 outrider          7,4    hp 10/21  Plain  group fla
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 7,6
 pell moves 7,6 -> 7,6
 The Tollgate  turn 6 of 10  player phase  seize  recall 2
@@ -1707,9 +1707,9 @@ e  rider-1          Rider L3 outrider          7,4    hp 10/21  Plain  group fla
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 0)
   pell hp 8, rider-1 hp 0
@@ -1737,7 +1737,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,5    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 6,5
 wren moves 5,5 -> 6,5
 The Tollgate  turn 6 of 10  player phase  seize  recall 2
@@ -1762,7 +1762,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 10/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > item wren 2
 wren uses Field Dressing (2 left)
 wren heals 10 (hp 20)
@@ -1788,7 +1788,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 17/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > item teodor 2
 teodor uses Field Dressing (2 left)
 teodor heals 4 (hp 21)
@@ -1814,7 +1814,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 6 of 10  player phase  seize  recall 2
@@ -1839,7 +1839,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
@@ -1848,7 +1848,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_warden-1 teodor
-forecast toll_warden-1 -> teodor: dmg 6 hit 31% crit 1%; counter: none
+forecast toll_warden-1 -> teodor: acc 31% dmg 6 crit 1%; counter: none
 toll_warden-1 attacks teodor
   toll_warden-1 misses teodor
   toll_warden-1 hp 21, teodor hp 21
@@ -1877,7 +1877,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 6,3
 teodor moves 6,4 -> 6,3
 The Tollgate  turn 7 of 10  player phase  seize  recall 2
@@ -1902,9 +1902,9 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,3    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack teodor toll_warden-1
-forecast teodor -> toll_warden-1: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+forecast teodor -> toll_warden-1: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 teodor attacks toll_warden-1
   teodor misses toll_warden-1
   toll_warden-1 hits teodor for 7 (hp 14)
@@ -1931,7 +1931,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,3    hp 14/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > recall 83
 recalled to state 83; 1 charges left
 undone: returns 7 hp
@@ -1958,7 +1958,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 5,4
 wren moves 6,5 -> 5,4 via 6,4
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -1983,7 +1983,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -2008,7 +2008,7 @@ D  pell             Pell L1 adept              7,6    hp 8/16   Plain
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 6,5
 pell moves 7,6 -> 6,5 via 6,6
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -2033,7 +2033,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -2058,7 +2058,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -2083,7 +2083,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 The Tollgate  turn 7 of 10  player phase  seize  recall 1
@@ -2108,7 +2108,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
@@ -2117,7 +2117,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_warden-1 teodor
-forecast toll_warden-1 -> teodor: dmg 6 hit 31% crit 1%; counter: none
+forecast toll_warden-1 -> teodor: acc 31% dmg 6 crit 1%; counter: none
 toll_warden-1 attacks teodor
   toll_warden-1 misses teodor
   toll_warden-1 hp 21, teodor hp 21
@@ -2146,7 +2146,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 7,4
 teodor moves 6,4 -> 7,4
 The Tollgate  turn 8 of 10  player phase  seize  recall 1
@@ -2171,7 +2171,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 The Tollgate  turn 8 of 10  player phase  seize  recall 1
@@ -2196,7 +2196,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 6,3
 captain moves 7,5 -> 6,3 via 7,4 6,4
 The Tollgate  turn 8 of 10  player phase  seize  recall 1
@@ -2221,7 +2221,7 @@ D  pell             Pell L1 adept              6,5    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 6,4
 pell moves 6,5 -> 6,4
 The Tollgate  turn 8 of 10  player phase  seize  recall 1
@@ -2246,9 +2246,9 @@ D  pell             Pell L1 adept              6,4    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack captain toll_warden-1
-forecast captain -> toll_warden-1: dmg 9 hit 87% crit 4%; counter: dmg 7 hit 52% crit 0%
+forecast captain -> toll_warden-1: acc 87% dmg 9 crit 4%; counter: acc 52% dmg 7 crit 0%
 captain attacks toll_warden-1
   captain hits toll_warden-1 for 9 (hp 12)
   toll_warden-1 misses captain
@@ -2276,9 +2276,9 @@ D  pell             Pell L1 adept              6,4    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 12/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell toll_warden-1
-forecast pell -> toll_warden-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%
+forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
   counter: lethal to pell (9 against 8 hp)
 pell attacks toll_warden-1
   pell hits toll_warden-1 for 12 (hp 0)
@@ -2306,7 +2306,7 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 6,2
 wren moves 5,4 -> 6,2 via 6,4 6,3
 The Tollgate  turn 8 of 10  player phase  seize  recall 1
@@ -2330,9 +2330,9 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 7)
   wren hp 20, archer-1 hp 7
@@ -2358,17 +2358,17 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 22/22  Plain  captain  
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest  done
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain  done
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+forecast archer-1 -> captain: acc 70% dmg 5 crit 0%; counter: none
 archer-1 attacks captain
   archer-1 hits captain for 5 (hp 17)
   archer-1 hp 7, captain hp 17
 enemy: attack bandit_leader-1 teodor 2
-forecast bandit_leader-1 -> teodor: dmg 11 hit 58% crit 1%; counter: none
+forecast bandit_leader-1 -> teodor: acc 58% dmg 11 crit 1%; counter: none
 bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks teodor
   bandit_leader-1 misses teodor
@@ -2397,9 +2397,9 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 17/22  Plain  captain
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 0)
   wren hp 20, archer-1 hp 0
@@ -2426,7 +2426,7 @@ A  captain          Alder Fenn L1 cadet        6,3    hp 17/22  Plain  captain
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
 B  wren             Wren L2 cadet              6,2    hp 21/21  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 7,1
 captain moves 6,3 -> 7,1 via 6,2 6,1
 The Tollgate  turn 9 of 10  player phase  seize  recall 1
@@ -2449,6 +2449,6 @@ A  captain          Alder Fenn L1 cadet        7,1    hp 17/22  Gate (heals 20 p
 D  pell             Pell L1 adept              6,4    hp 8/16   Forest
 C  teodor           Teodor L1 pikeman          7,4    hp 21/21  Plain
 B  wren             Wren L2 cadet              6,2    hp 21/21  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 battle won: seize; only recall is left
 battle won: seize

@@ -184,9 +184,9 @@ public static class Kinsbane
         }
 
         var stack = unit.Unit.Inventory.Items[slot];
-        var head = $"{content.ItemName(stack.ItemId)}: fed {stack.Fed}. Mt +{MtBonus(stack.Fed)}.";
+        var head = $"{content.ItemName(stack.ItemId)}: fed {stack.Fed}. Power +{MtBonus(stack.Fed)}.";
         var state = Woken(stack.Fed) ? "Woken: no drain."
-            : stack.Starved ? "Starved: half Mt, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
+            : stack.Starved ? "Starved: half Power, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
             : unit.HasFed ? "Fed this phase."
             : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start" + (starves ? ", and it starves." : ".")
             : "";

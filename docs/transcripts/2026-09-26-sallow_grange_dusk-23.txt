@@ -467,7 +467,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ansgar archer-2
-forecast ansgar -> archer-2: dmg 11 hit 76% crit 2%; counter: none
+forecast ansgar -> archer-2: acc 76% dmg 11 crit 2%; counter: none
 ansgar attacks archer-2
   ansgar hits archer-2 for 11 (hp 6)
   ansgar hp 20, archer-2 hp 6
@@ -504,7 +504,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-ansgar stays at 8,7 (canto)
+ansgar stays at 8,7 (move again)
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -568,7 +568,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie archer-2
-forecast ottilie -> archer-2: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 77% crit 1%
+forecast ottilie -> archer-2: acc 82% dmg 8 crit 4%; counter: acc 77% dmg 7 crit 1%
 ottilie attacks archer-2
   ottilie crits archer-2 for 24 (hp 0)
   ottilie hp 17, archer-2 hp 0
@@ -635,7 +635,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell brawler-1
-forecast pell -> brawler-1: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brawler-1: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brawler-1
   pell hits brawler-1 for 13 (hp 10)
   pell hp 16, brawler-1 hp 10
@@ -701,7 +701,7 @@ C  wren             Wren L1 cadet              2,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brawler-1
-forecast captain -> brawler-1: dmg 11 hit 88% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
+forecast captain -> brawler-1: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
 captain attacks brawler-1
   captain hits brawler-1 for 11 (hp 0)
   captain hp 22, brawler-1 hp 0
@@ -766,7 +766,7 @@ C  wren             Wren L1 cadet              6,5    hp 20/20  Plain
 dusk: sight 8, 7 next turn; 1 unseen (?); no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren hits soldier-1 for 8 (hp 13)
   soldier-1 misses wren
@@ -873,7 +873,7 @@ enemy: something in the dark acts
 enemy: move soldier-1 7,6
 soldier-1 moves 7,5 -> 7,6
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+forecast soldier-1 -> ottilie: acc 70% dmg 10 crit 0%; counter: none
 soldier-1 attacks ottilie
   soldier-1 hits ottilie for 10 (hp 7)
   soldier-1 hp 13, ottilie hp 7
@@ -907,7 +907,7 @@ C  wren             Wren L1 cadet              6,5    hp 20/20  Plain
 ?  unseen at 12,2 15,6
 dusk: sight 7, 6 next turn; 2 unseen (?); no side strikes what it cannot see
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 4)
   soldier-1 hits captain for 8 (hp 14)
@@ -1133,7 +1133,7 @@ hexer-1 waits
 enemy: wait shieldbearer-1
 shieldbearer-1 waits
 enemy: attack soldier-1 ottilie
-forecast soldier-1 -> ottilie: dmg 10 hit 70% crit 0%; counter: none
+forecast soldier-1 -> ottilie: acc 70% dmg 10 crit 0%; counter: none
 soldier-1 attacks ottilie
   soldier-1 hits ottilie for 10 (hp 7)
   soldier-1 hp 4, ottilie hp 7
@@ -1169,7 +1169,7 @@ C  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 dusk: sight 6, 5 next turn; no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack pell soldier-1
-forecast pell -> soldier-1: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell crits soldier-1 for 36 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -1320,7 +1320,7 @@ C  wren             Wren L1 cadet              11,5   hp 20/20  Plain  done
 dusk: sight 6, 5 next turn; no side strikes what it cannot see
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > canto ansgar stay
-ansgar stays at 10,4 (canto)
+ansgar stays at 10,4 (move again)
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1565,7 +1565,7 @@ D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              12,7   hp 20/20  Plain
 dusk: sight 5, 4 next turn; no side strikes what it cannot see
 > attack wren hexer-1
-forecast wren -> hexer-1: dmg 11 x2 hit 91% crit 3%; counter: dmg 11 hit 98% crit 0%
+forecast wren -> hexer-1: acc 91% dmg 11 x2 crit 3%; counter: acc 98% dmg 11 crit 0%
 wren attacks hexer-1
   wren hits hexer-1 for 11 (hp 5)
   hexer-1 hits wren for 11 (hp 9)
@@ -1626,7 +1626,7 @@ D  teodor           Teodor L1 pikeman          9,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              12,7   hp 9/20   Plain  done
 dusk: sight 5, 4 next turn; no side strikes what it cannot see
 > attack ansgar grange_reeve-1
-forecast ansgar -> grange_reeve-1: dmg 7 x2 hit 83% crit 1%; counter: dmg 14 hit 80% crit 1%
+forecast ansgar -> grange_reeve-1: acc 83% dmg 7 x2 crit 1%; counter: acc 80% dmg 14 crit 1%
 ansgar attacks grange_reeve-1
   ansgar misses grange_reeve-1
   grange_reeve-1 hits ansgar for 14 (hp 6)
@@ -1798,7 +1798,7 @@ D  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              12,7   hp 9/20   Plain  done
 dusk: sight 5, 4 next turn; no side strikes what it cannot see
 > canto ansgar stay
-ansgar stays at 12,5 (canto)
+ansgar stays at 12,5 (move again)
 Sallow Grange  turn 5 of 10  player phase  seize  recall 2
    012345678901234567
  0 ....^^^^^^^.......
@@ -1966,7 +1966,7 @@ enemy: something in the dark acts
 enemy: move grange_reeve-1 14,7
 grange_reeve-1 moves 15,6 -> 14,7 via 14,6
 enemy: attack grange_reeve-1 wren 2
-forecast grange_reeve-1 -> wren: dmg 9 hit 56% crit 0%; counter: none
+forecast grange_reeve-1 -> wren: acc 56% dmg 9 crit 0%; counter: none
 grange_reeve-1 equips Toll Spear
 grange_reeve-1 attacks wren
   grange_reeve-1 hits wren for 9 (hp 0)
@@ -2028,7 +2028,7 @@ D  teodor           Teodor L1 pikeman          12,6   hp 21/21  Plain
 ?  unseen at 4,2
 dusk: sight 4, 3 next turn; 1 unseen (?); no side strikes what it cannot see
 > attack pell grange_reeve-1
-forecast pell -> grange_reeve-1: dmg 11 hit 99% crit 1%; counter: dmg 11 hit 74% crit 1%
+forecast pell -> grange_reeve-1: acc 99% dmg 11 crit 1%; counter: acc 74% dmg 11 crit 1%
 pell attacks grange_reeve-1
   pell hits grange_reeve-1 for 11 (hp 15)
   grange_reeve-1 hits pell for 11 (hp 5)
@@ -2085,7 +2085,7 @@ D  teodor           Teodor L1 pikeman          14,6   hp 21/21  Plain
 ?  unseen at 4,2
 dusk: sight 4, 3 next turn; 1 unseen (?); no side strikes what it cannot see
 > attack teodor grange_reeve-1
-forecast teodor -> grange_reeve-1: dmg 8 hit 79% crit 0%; counter: dmg 8 hit 68% crit 2%
+forecast teodor -> grange_reeve-1: acc 79% dmg 8 crit 0%; counter: acc 68% dmg 8 crit 2%
 teodor attacks grange_reeve-1
   teodor hits grange_reeve-1 for 8 (hp 7)
   grange_reeve-1 hits teodor for 8 (hp 13)
@@ -2141,7 +2141,7 @@ D  teodor           Teodor L1 pikeman          14,6   hp 13/21  Plain  done
 ?  unseen at 4,2 12,2
 dusk: sight 4, 3 next turn; 2 unseen (?); no side strikes what it cannot see
 > attack ansgar grange_reeve-1
-forecast ansgar -> grange_reeve-1: dmg 7 hit 79% crit 1%; counter: dmg 10 hit 65% crit 1%
+forecast ansgar -> grange_reeve-1: acc 79% dmg 7 crit 1%; counter: acc 65% dmg 10 crit 1%
 ansgar attacks grange_reeve-1
   ansgar misses grange_reeve-1
   grange_reeve-1 hits ansgar for 10 (hp 10)
@@ -2196,7 +2196,7 @@ D  teodor           Teodor L1 pikeman          14,6   hp 13/21  Plain  done
 ?  unseen at 4,2 12,2
 dusk: sight 4, 3 next turn; 2 unseen (?); no side strikes what it cannot see
 > attack captain grange_reeve-1
-forecast captain -> grange_reeve-1: dmg 7 x2 hit 89% crit 3%; counter: dmg 8 hit 54% crit 0%
+forecast captain -> grange_reeve-1: acc 89% dmg 7 x2 crit 3%; counter: acc 54% dmg 8 crit 0%
 captain attacks grange_reeve-1
   captain hits grange_reeve-1 for 7 (hp 0)
   captain hp 14, grange_reeve-1 hp 0
@@ -2226,7 +2226,7 @@ D  teodor           Teodor L1 pikeman          14,6   hp 13/21  Plain  done
 ?  unseen at 4,2 12,2
 dusk: sight 4, 3 next turn; 2 unseen (?); no side strikes what it cannot see
 > canto ansgar stay
-ansgar stays at 15,7 (canto)
+ansgar stays at 15,7 (move again)
 Sallow Grange  turn 6 of 10  player phase  seize  recall 2
    012345678901234567
  0 ....^^^^^^^.......

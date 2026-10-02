@@ -18,7 +18,7 @@ Deploys to Ironwake Keep: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (depl
 Purse: 1000
 Rooms: beds: 11/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
-  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; needs the Barracks first
   Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
@@ -73,7 +73,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 > show bet
 Bet Lowry (bet), Pikeman L1, at 0,3 on Road
   HP 21/21  Str 8 Mag 0 Dex 5 Spd 5 Lck 2 Def 5 Res 1 Cha 4  Mov 4 (infantry)
-  Weapon: Iron Lance (mt 6 hit 70 crit 0 wt 6 range 1-1)
+  Weapon: Iron Lance (acc 70 power 6 crit 0 wt 6 range 1-1)
   Items: 1: Iron Lance x40
   Ranks: lance E (0)
   Mastery: Horsebane (0 of 12 combats)
@@ -279,7 +279,7 @@ Archer waits
 enemy: move brigand-1 1,1
 Brigand moves 4,1 -> 1,1 via 3,1 2,1
 enemy: attack brigand-1 ottilie
-Forecast Brigand -> Ottilie: dmg 12 hit 58% crit 0%; counter: none
+Forecast Brigand -> Ottilie: acc 58% dmg 12 crit 0%; counter: none
 Brigand attacks Ottilie
   Brigand hits Ottilie for 12 (hp 5)
   Brigand hp 22, Ottilie hp 5
@@ -294,7 +294,7 @@ Soldier 1 waits
 enemy: move soldier-2 3,3
 Soldier 2 moves 5,5 -> 3,3 via 4,5 4,4 4,3
 enemy: attack soldier-2 teodor
-Forecast Soldier 2 -> Teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+Forecast Soldier 2 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 Soldier 2 attacks Teodor
   Soldier 2 misses Teodor
   Teodor hits Soldier 2 for 10 (hp 10)
@@ -326,12 +326,12 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
 > forecast bet brigand-1 from 2,1
-Forecast Bet Lowry -> Brigand from 2,1 (Plain): dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Bet Lowry -> Brigand from 2,1 (Plain): acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 > threat bet from 2,1
 Threat on Bet Lowry at 2,1 (Plain):
-  Brigand from 1,1 with Iron Axe (slot 1): dmg 10 hit 63% crit 0%; counter: dmg 12 hit 80% crit 2%
-  Hexer from 4,1 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
-  Soldier 2 from 3,1 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  Brigand from 1,1 with Iron Axe (slot 1): acc 63% dmg 10 crit 0%; counter: acc 80% dmg 12 crit 2%
+  Hexer from 4,1 with Cinder (slot 1): acc 99% dmg 11 crit 1%; counter: none
+  Soldier 2 from 3,1 with Iron Lance (slot 1): acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
   If all land: 29 against 21 hp
 > move ottilie 0,2
 Ottilie moves 1,2 -> 0,2
@@ -357,7 +357,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
 > attack ottilie brigand-1
-Forecast Ottilie -> Brigand: dmg 8 hit 86% crit 5%; counter: none
+Forecast Ottilie -> Brigand: acc 86% dmg 8 crit 5%; counter: none
 Ottilie attacks Brigand
   Ottilie hits Brigand for 8 (hp 14)
   Ottilie hp 5, Brigand hp 14
@@ -407,7 +407,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
 > attack bet brigand-1
-Forecast Bet Lowry -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Bet Lowry -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 Bet Lowry attacks Brigand
   Bet Lowry hits Brigand for 12 (hp 2)
   Brigand hits Bet Lowry for 10 (hp 11)
@@ -458,7 +458,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
 > attack maud brigand-1
-Forecast Maud -> Brigand: dmg 11 hit 98% crit 3%; counter: dmg 13 hit 72% crit 0%
+Forecast Maud -> Brigand: acc 98% dmg 11 crit 3%; counter: acc 72% dmg 13 crit 0%
 Maud attacks Brigand
   Maud misses Brigand
   Brigand hits Maud for 13 (hp 4)
@@ -485,7 +485,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,3    hp 21/21  Road
 > attack teodor soldier-2
-Forecast Teodor -> Soldier 2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier 2
   Teodor misses Soldier 2
   Soldier 2 hits Teodor for 8 (hp 13)
@@ -560,7 +560,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain
 > attack teodor brigand-1
-Forecast Teodor -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Teodor -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 Teodor attacks Brigand
   Teodor hits Brigand for 12 (hp 2)
   Brigand misses Teodor
@@ -611,7 +611,7 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane, guard, awake
 B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 > attack bet brigand-1
-Forecast Bet Lowry -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Bet Lowry -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 Bet Lowry attacks Brigand
   Bet Lowry hits Brigand for 12 (hp 0)
   Bet Lowry hp 21, Brigand hp 0
@@ -685,22 +685,22 @@ d  soldier-2        Soldier L2 pikeman         3,3    hp 10/20  Road  group lane
 B  teodor           Teodor L1 pikeman          2,1    hp 21/21  Plain  done
 > threat bet
 Threat on Bet Lowry at 1,2 (Plain):
-  Hexer from 3,2 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
-  Soldier 2 from 2,2 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  Hexer from 3,2 with Cinder (slot 1): acc 99% dmg 11 crit 1%; counter: none
+  Soldier 2 from 2,2 with Iron Lance (slot 1): acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
   If all land: 19 against 21 hp
 > threat ottilie
 Threat on Ottilie at 0,2 (Plain):
-  Hexer from 2,2 with Cinder (slot 1): dmg 10 hit 98% crit 0%; counter: dmg 9 x2 hit 89% crit 4%
+  Hexer from 2,2 with Cinder (slot 1): acc 98% dmg 10 crit 0%; counter: acc 89% dmg 9 x2 crit 4%
   If all land: 10 against 12 hp
 > threat maud
 Threat on Maud at 0,3 (Road):
-  Hexer from 2,3 with Cinder (slot 1): dmg 5 hit 99% crit 0%; counter: dmg 6 hit 97% crit 2%
-  Soldier 2 from 0,4 with Iron Lance (slot 1): dmg 11 hit 81% crit 0%; counter: dmg 10 hit 97% crit 2%
+  Hexer from 2,3 with Cinder (slot 1): acc 99% dmg 5 crit 0%; counter: acc 97% dmg 6 crit 2%
+  Soldier 2 from 0,4 with Iron Lance (slot 1): acc 81% dmg 11 crit 0%; counter: acc 97% dmg 10 crit 2%
   If all land: 16 against 17 hp
 > threat teodor
 Threat on Teodor at 2,1 (Plain):
-  Hexer from 4,1 with Cinder (slot 1): dmg 11 hit 99% crit 1%; counter: none
-  Soldier 2 from 3,1 with Iron Lance (slot 1): dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+  Hexer from 4,1 with Cinder (slot 1): acc 99% dmg 11 crit 1%; counter: none
+  Soldier 2 from 3,1 with Iron Lance (slot 1): acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
   If all land: 19 against 21 hp
 > end
 -- Player phase ends, turn 2 --
@@ -710,7 +710,7 @@ Archer waits
 enemy: move hexer-1 3,2
 Hexer moves 5,3 -> 3,2 via 5,2 4,2
 enemy: attack hexer-1 bet
-Forecast Hexer -> Bet Lowry: dmg 11 hit 99% crit 1%; counter: none
+Forecast Hexer -> Bet Lowry: acc 99% dmg 11 crit 1%; counter: none
 Hexer attacks Bet Lowry
   Hexer hits Bet Lowry for 11 (hp 10)
   Hexer hp 16, Bet Lowry hp 10
@@ -723,7 +723,7 @@ Soldier 1 waits
 enemy: move soldier-2 0,4
 Soldier 2 moves 3,3 -> 0,4 via 2,3 1,3 1,4
 enemy: attack soldier-2 maud
-Forecast Soldier 2 -> Maud: dmg 11 hit 81% crit 0%; counter: dmg 10 hit 97% crit 2%
+Forecast Soldier 2 -> Maud: acc 81% dmg 11 crit 0%; counter: acc 97% dmg 10 crit 2%
 Soldier 2 attacks Maud
   Soldier 2 misses Maud
   Maud hits Soldier 2 for 10 (hp 0)
@@ -774,7 +774,7 @@ C  ottilie          Ottilie L1 bowman          0,2    hp 12/17  Plain
 b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
 B  teodor           Teodor L1 pikeman          2,2    hp 21/21  Plain
 > attack teodor hexer-1
-Forecast Teodor -> Hexer: dmg 13 hit 83% crit 1%; counter: dmg 11 hit 99% crit 1%
+Forecast Teodor -> Hexer: acc 83% dmg 13 crit 1%; counter: acc 99% dmg 11 crit 1%
 Teodor attacks Hexer
   Teodor hits Hexer for 13 (hp 3)
   Hexer hits Teodor for 11 (hp 10)
@@ -821,7 +821,7 @@ C  ottilie          Ottilie L1 bowman          2,3    hp 12/17  Road
 b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yard, hold
 B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
 > attack ottilie hexer-1
-Forecast Ottilie -> Hexer: dmg 9 x2 hit 89% crit 4%; counter: dmg 10 hit 98% crit 0%
+Forecast Ottilie -> Hexer: acc 89% dmg 9 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
 Ottilie attacks Hexer
   Ottilie hits Hexer for 9 (hp 0)
   Ottilie hp 12, Hexer hp 0
@@ -889,15 +889,15 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain  done
 > threat bet
 Threat on Bet Lowry at 1,2 (Plain):
-  Postern Keeper from 1,1 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  Postern Keeper from 1,1 with Steel Lance (slot 1): acc 83% dmg 12 crit 2%; counter: acc 81% dmg 8 crit 0%
   If all land: 12 against 17 hp
 > threat teodor
 Threat on Teodor at 2,2 (Plain):
-  Postern Keeper from 3,2 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  Postern Keeper from 3,2 with Steel Lance (slot 1): acc 83% dmg 12 crit 2%; counter: acc 81% dmg 8 crit 0%
   If all land: 12 against 10 hp
 > threat ottilie
 Threat on Ottilie at 2,3 (Road):
-  Postern Keeper from 3,3 with Steel Lance (slot 1): dmg 14 hit 80% crit 0%; counter: none
+  Postern Keeper from 3,3 with Steel Lance (slot 1): acc 80% dmg 14 crit 0%; counter: none
   If all land: 14 against 12 hp
 > threat maud
 Threat on Maud at 1,3 (Road): no enemy can strike her next phase
@@ -911,7 +911,7 @@ Archer waits
 enemy: move postern_keeper-1 3,3
 Postern Keeper moves 4,2 -> 3,3 via 3,2
 enemy: attack postern_keeper-1 ottilie
-Forecast Postern Keeper -> Ottilie: dmg 14 hit 80% crit 0%; counter: none
+Forecast Postern Keeper -> Ottilie: acc 80% dmg 14 crit 0%; counter: none
 Postern Keeper attacks Ottilie
   Postern Keeper hits Ottilie for 14 (hp 0)
   Postern Keeper hp 25, Ottilie hp 0
@@ -940,10 +940,10 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 B  teodor           Teodor L1 pikeman          2,2    hp 10/21  Plain
 > threat bet from 5,2
 Threat on Bet Lowry at 5,2 (Plain):
-  Postern Keeper from 5,3 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  Postern Keeper from 5,3 with Steel Lance (slot 1): acc 83% dmg 12 crit 2%; counter: acc 81% dmg 8 crit 0%
   If all land: 12 against 17 hp
 > forecast maud postern_keeper-1 from 2,3
-Forecast Maud -> Postern Keeper from 2,3 (Road): dmg 9 hit 97% crit 1%; counter: dmg 15 hit 89% crit 0%
+Forecast Maud -> Postern Keeper from 2,3 (Road): acc 97% dmg 9 crit 1%; counter: acc 89% dmg 15 crit 0%
 > move maud 2,3
 Maud moves 1,3 -> 2,3
 The Postern  turn 4 of 10  player phase  seize  recall 1
@@ -1062,15 +1062,15 @@ b  soldier-1        Soldier L2 pikeman         8,5    hp 20/20  Plain  group yar
 B  teodor           Teodor L1 pikeman          5,3    hp 17/21  Plain  done
 > threat bet
 Threat on Bet Lowry at 5,2 (Plain):
-  Postern Keeper from 4,2 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 8 hit 81% crit 0%
+  Postern Keeper from 4,2 with Steel Lance (slot 1): acc 83% dmg 12 crit 2%; counter: acc 81% dmg 8 crit 0%
   If all land: 12 against 17 hp
 > threat teodor
 Threat on Teodor at 5,3 (Plain):
-  Postern Keeper from 5,4 with Steel Lance (slot 1): dmg 12 hit 83% crit 2%; counter: dmg 7 hit 49% crit 0%
+  Postern Keeper from 5,4 with Steel Lance (slot 1): acc 83% dmg 12 crit 2%; counter: acc 49% dmg 7 crit 0%
   If all land: 12 against 17 hp
 > threat maud
 Threat on Maud at 2,3 (Road):
-  Postern Keeper from 3,3 with Steel Lance (slot 1): dmg 15 hit 89% crit 0%; counter: dmg 9 hit 97% crit 1%
+  Postern Keeper from 3,3 with Steel Lance (slot 1): acc 89% dmg 15 crit 0%; counter: acc 97% dmg 9 crit 1%
   If all land: 15 against 17 hp
 > end
 -- Player phase ends, turn 4 --
@@ -1078,7 +1078,7 @@ Threat on Maud at 2,3 (Road):
 enemy: wait archer-1
 Archer waits
 enemy: attack postern_keeper-1 maud
-Forecast Postern Keeper -> Maud: dmg 15 hit 89% crit 0%; counter: dmg 9 hit 97% crit 1%
+Forecast Postern Keeper -> Maud: acc 89% dmg 15 crit 0%; counter: acc 97% dmg 9 crit 1%
 Postern Keeper attacks Maud
   Postern Keeper hits Maud for 15 (hp 2)
   Maud hits Postern Keeper for 9 (hp 16)

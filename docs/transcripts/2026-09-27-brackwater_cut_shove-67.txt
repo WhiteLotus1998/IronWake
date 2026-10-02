@@ -653,7 +653,7 @@ archer-1 moves 4,5 -> 7,4 via 4,4 5,4 6,4
 enemy: wait archer-1
 archer-1 waits
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-2 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-2 attacks dunstan
   archer-2 hits dunstan for 3 (hp 20)
   archer-2 hp 17, dunstan hp 20
@@ -661,7 +661,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 9,4
 brigand-1 moves 5,4 -> 9,4 via 6,4 7,4 8,4
 enemy: attack brigand-1 wren
-forecast brigand-1 -> wren: dmg 12 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+forecast brigand-1 -> wren: acc 51% dmg 12 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 brigand-1 attacks wren
   brigand-1 hits wren for 12 (hp 8)
   wren hits brigand-1 for 10 (hp 13)
@@ -1004,7 +1004,7 @@ shove: a player unit may push a unit beside it one tile straight away, as its ac
 enemy: move archer-1 10,4
 archer-1 moves 7,4 -> 10,4 via 8,4 9,4
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+forecast archer-1 -> wren: acc 72% dmg 6 crit 0%; counter: none
 archer-1 attacks wren
   archer-1 hits wren for 6 (hp 12)
   archer-1 hp 17, wren hp 12
@@ -1016,7 +1016,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 11,3
 brigand-1 moves 9,4 -> 11,3 via 9,3 10,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-1 -> dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-1 attacks dunstan
   brigand-1 misses dunstan
   dunstan hits brigand-1 for 11 (hp 0)
@@ -1032,7 +1032,7 @@ hexer-1 waits
 enemy: move rider-1 11,3
 rider-1 moves 8,3 -> 11,3 via 9,3 10,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 misses dunstan
   dunstan hits rider-1 for 10 (hp 11)
@@ -1106,7 +1106,7 @@ dusk: sight 2, 1 next turn; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 0)
   pell hp 16, rider-1 hp 0
@@ -1315,12 +1315,12 @@ escaped: rook
 enemy: move archer-1 10,3
 archer-1 moves 10,4 -> 10,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 17)
   archer-1 hp 17, dunstan hp 17
 enemy: attack archer-2 pell
-forecast archer-2 -> pell: dmg 8 hit 86% crit 2%; counter with Cinder: dmg 10 hit 91% crit 2%
+forecast archer-2 -> pell: acc 86% dmg 8 crit 2%; counter with Cinder: acc 91% dmg 10 crit 2%
 archer-2 attacks pell
   archer-2 hits pell for 8 (hp 8)
   pell hits archer-2 for 10 (hp 7)
@@ -1329,7 +1329,7 @@ pell gains 14 exp (54)
 enemy: move brawler-1 14,3
 brawler-1 moves 14,6 -> 14,3 via 14,5 14,4
 enemy: attack brawler-1 wren
-forecast brawler-1 -> wren: dmg 7 x2 hit 83% crit 0%; counter: dmg 10 hit 86% crit 4%
+forecast brawler-1 -> wren: acc 83% dmg 7 x2 crit 0%; counter: acc 86% dmg 10 crit 4%
 brawler-1 attacks wren
   brawler-1 hits wren for 7 (hp 5)
   brawler-1 hits wren for 7 (hp 0)
@@ -1338,7 +1338,7 @@ wren falls at 14,2
 enemy: move brigand-2 11,3
 brigand-2 moves 7,3 -> 11,3 via 8,3 9,3 10,3
 enemy: attack brigand-2 dunstan
-forecast brigand-2 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-2 -> dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-2 attacks dunstan
   brigand-2 hits dunstan for 9 (hp 8)
   dunstan hits brigand-2 for 11 (hp 12)
@@ -1347,7 +1347,7 @@ dunstan gains 14 exp (68)
 enemy: move hexer-1 10,2
 hexer-1 moves 9,4 -> 10,2 via 9,3 9,2
 enemy: attack hexer-1 pell
-forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 8 hit 99% crit 2%
+forecast hexer-1 -> pell: acc 99% dmg 8 crit 0%; counter with Cinder: acc 99% dmg 8 crit 2%
 hexer-1 attacks pell
   hexer-1 hits pell for 8 (hp 0)
   hexer-1 hp 16, pell hp 0
@@ -1356,7 +1356,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 13,3
 shieldbearer-1 moves 15,3 -> 13,3 via 14,3
 enemy: attack shieldbearer-1 dunstan
-forecast shieldbearer-1 -> dunstan: dmg 5 hit 80% crit 0%; counter: dmg 4 hit 85% crit 1%
+forecast shieldbearer-1 -> dunstan: acc 80% dmg 5 crit 0%; counter: acc 85% dmg 4 crit 1%
 shieldbearer-1 attacks dunstan
   shieldbearer-1 misses dunstan
   dunstan hits shieldbearer-1 for 4 (hp 21)
@@ -1365,7 +1365,7 @@ dunstan gains 14 exp (82)
 enemy: move soldier-1 12,4
 soldier-1 moves 14,5 -> 12,4 via 14,4 13,4
 enemy: attack soldier-1 dunstan
-forecast soldier-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 9 hit 73% crit 0%
+forecast soldier-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 9 crit 0%
 soldier-1 attacks dunstan
   soldier-1 misses dunstan
   dunstan hits soldier-1 for 9 (hp 12)
@@ -1699,12 +1699,12 @@ shove: a player unit may push a unit beside it one tile straight away, as its ac
 enemy: move archer-1 9,3
 archer-1 moves 7,4 -> 9,3 via 7,3 8,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 misses dunstan
   archer-1 hp 17, dunstan hp 20
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-2 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-2 attacks dunstan
   archer-2 hits dunstan for 3 (hp 17)
   archer-2 hp 17, dunstan hp 17
@@ -1712,7 +1712,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 10,3
 brigand-1 moves 9,4 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-1 -> dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-1 attacks dunstan
   brigand-1 misses dunstan
   dunstan hits brigand-1 for 11 (hp 0)
@@ -1728,7 +1728,7 @@ hexer-1 waits
 enemy: move rider-1 10,3
 rider-1 moves 8,3 -> 10,3 via 9,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 misses dunstan
   dunstan hits rider-1 for 10 (hp 11)
@@ -1942,7 +1942,7 @@ dusk: sight 2, 1 next turn; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
 > attack dunstan rider-1
-forecast dunstan -> rider-1: dmg 10 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+forecast dunstan -> rider-1: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
 dunstan attacks rider-1
   dunstan misses rider-1
   rider-1 hits dunstan for 6 (hp 11)
@@ -1978,12 +1978,12 @@ shove: a player unit may push a unit beside it one tile straight away, as its ac
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 8)
   archer-1 hp 17, dunstan hp 8
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-2 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-2 attacks dunstan
   archer-2 hits dunstan for 3 (hp 5)
   archer-2 hp 17, dunstan hp 5
@@ -1992,7 +1992,7 @@ enemy: something in the dark acts
 enemy: move hexer-1 10,4
 hexer-1 moves 9,4 -> 10,4
 enemy: attack hexer-1 dunstan
-forecast hexer-1 -> dunstan: dmg 12 hit 99% crit 1%; counter: none
+forecast hexer-1 -> dunstan: acc 99% dmg 12 crit 1%; counter: none
 hexer-1 attacks dunstan
   hexer-1 hits dunstan for 12 (hp 0)
   hexer-1 hp 16, dunstan hp 0
@@ -2304,7 +2304,7 @@ enemy: something in the dark acts
 enemy: move rider-1 13,2
 rider-1 moves 10,3 -> 13,2 via 11,3 12,3 12,2
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 misses dunstan
   dunstan hits rider-1 for 10 (hp 1)
@@ -2579,7 +2579,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 16,1
 shieldbearer-1 moves 15,3 -> 16,1 via 15,2 15,1
 enemy: attack shieldbearer-1 dunstan
-forecast shieldbearer-1 -> dunstan: dmg 5 hit 80% crit 0%; counter: dmg 4 hit 85% crit 1%
+forecast shieldbearer-1 -> dunstan: acc 80% dmg 5 crit 0%; counter: acc 85% dmg 4 crit 1%
 shieldbearer-1 attacks dunstan
   shieldbearer-1 hits dunstan for 5 (hp 12)
   dunstan hits shieldbearer-1 for 4 (hp 21)
@@ -2617,7 +2617,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 0)
   pell hp 16, rider-1 hp 0
@@ -2846,7 +2846,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 18,1
 shieldbearer-1 moves 16,1 -> 18,1 via 17,1
 enemy: attack shieldbearer-1 dunstan
-forecast shieldbearer-1 -> dunstan: dmg 5 hit 80% crit 0%; counter: dmg 4 hit 85% crit 1%
+forecast shieldbearer-1 -> dunstan: acc 80% dmg 5 crit 0%; counter: acc 85% dmg 4 crit 1%
 shieldbearer-1 attacks dunstan
   shieldbearer-1 hits dunstan for 5 (hp 7)
   dunstan misses shieldbearer-1
@@ -2854,7 +2854,7 @@ shieldbearer-1 attacks dunstan
 enemy: move soldier-1 19,2
 soldier-1 moves 15,2 -> 19,2 via 16,2 17,2 18,2
 enemy: attack soldier-1 dunstan
-forecast soldier-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 9 hit 73% crit 0%
+forecast soldier-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 9 crit 0%
 soldier-1 attacks dunstan
   soldier-1 hits dunstan for 6 (hp 1)
   dunstan hits soldier-1 for 9 (hp 12)
@@ -2889,7 +2889,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
 escaped: rook wren
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -3001,7 +3001,7 @@ escaped: rook wren dunstan
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+forecast archer-1 -> captain: acc 70% dmg 5 crit 0%; counter: none
 archer-1 attacks captain
   archer-1 hits captain for 5 (hp 17)
   archer-1 hp 17, captain hp 17
@@ -3011,7 +3011,7 @@ enemy: something in the dark acts
 enemy: move brigand-2 19,1
 brigand-2 moves 18,3 -> 19,1 via 18,2 18,1
 enemy: attack brigand-2 pell
-forecast brigand-2 -> pell: dmg 14 hit 70% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+forecast brigand-2 -> pell: acc 70% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
 brigand-2 attacks pell
   brigand-2 hits pell for 14 (hp 2)
   pell crits brigand-2 for 39 (hp 0)
@@ -3022,7 +3022,7 @@ brigand-2 falls at 19,1
 enemy: move hexer-1 19,1
 hexer-1 moves 19,4 -> 19,1 via 19,3 19,2
 enemy: attack hexer-1 pell
-forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 9 hit 99% crit 2%
+forecast hexer-1 -> pell: acc 99% dmg 8 crit 0%; counter with Cinder: acc 99% dmg 9 crit 2%
 hexer-1 attacks pell
   hexer-1 hits pell for 8 (hp 0)
   hexer-1 hp 16, pell hp 0
@@ -3030,14 +3030,14 @@ pell falls at 19,0
 enemy: move rider-2 17,0
 rider-2 moves 16,3 -> 17,0 via 16,2 16,1 16,0
 enemy: attack rider-2 captain
-forecast rider-2 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 10 hit 87% crit 4%
+forecast rider-2 -> captain: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 10 crit 4%
 rider-2 attacks captain
   rider-2 misses captain
   captain hits rider-2 for 10 (hp 11)
   rider-2 hp 11, captain hp 17
 captain gains 14 exp (14)
 enemy: attack shieldbearer-1 captain
-forecast shieldbearer-1 -> captain: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
+forecast shieldbearer-1 -> captain: acc 58% dmg 7 crit 0%; counter: acc 94% dmg 4 x2 crit 5%
 shieldbearer-1 attacks captain
   shieldbearer-1 hits captain for 7 (hp 10)
   captain crits shieldbearer-1 for 12 (hp 9)
@@ -3100,7 +3100,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 shove: a player unit may push a unit beside it one tile straight away, as its action, if the tile beyond is open and, against an enemy, its heft is at least the target's
 escaped: rook wren
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 0)
   pell hp 16, soldier-1 hp 0

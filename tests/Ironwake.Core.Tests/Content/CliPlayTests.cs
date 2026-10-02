@@ -30,7 +30,7 @@ public class CliPlayTests
     }
 
     /// <summary>
-    /// Issue 331: on the grudges sample, Code's seed 65 script prints the sworn crit avoid
+    /// Issue 331: on the grudges sample, Code's seed 65 script prints the sworn crit evade
     /// under a forecast between a sworn unit and its enemy, and a grudge strike's best
     /// alternative under the enemy's forecast.
     /// </summary>
@@ -42,7 +42,7 @@ public class CliPlayTests
             out _, "play", Path.Combine(docs, "samples", "old_mill_road_grudges.map"), "--seed", "65", "--strict",
             "--script", Path.Combine(docs, "transcripts", "2026-09-26-old_mill_road_grudges-65.script"), "--content", Fixture.RealContentDirectory());
 
-        Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: dmg 6 hit 70% crit 20%; counter: none\n  Sworn: Archer 2 on Wren: Wren crit avoid -20\n  Grudge: Archer 2 strikes sworn Wren (score 15.9); best alternative Alder Fenn (score 13.4)\n", output);
+        Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: acc 70% dmg 6 crit 20%; counter: none\n  Sworn: Archer 2 on Wren: Wren crit evade -20\n  Grudge: Archer 2 strikes sworn Wren (score 15.9); best alternative Alder Fenn (score 13.4)\n", output);
         Assert.Contains("Battle won: rout", output);
     }
 
@@ -228,13 +228,13 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 1 from 3,7\nforecast wren brigand-1 from 3,5\nforecast wren brigand-1 from 2,7\nshow wren\nmove wren 3,7\nforecast wren brigand-1 from 4,6\nforecast wren brigand-1 from 3,7\n");
 
-        Assert.Contains("> forecast wren brigand-1 from 4,6\nForecast Wren -> Brigand from 4,6 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
-        Assert.Contains("> forecast wren brigand-1 1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 4,6\nForecast Wren -> Brigand from 4,6 (Plain): acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
         Assert.Contains("> forecast wren brigand-1 from 3,5\nERROR: Wren cannot move to 3,5\n", output);
         Assert.Contains("> forecast wren brigand-1 from 2,7\nERROR: Wren cannot attack Brigand from 2,7\n", output);
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n", output);
         Assert.Contains("> forecast wren brigand-1 from 4,6\nERROR: Wren has already moved this phase; forecast from 3,7\n", output);
-        Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1 from 3,7\nForecast Wren -> Brigand from 3,7 (Plain): acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
         Assert.Contains("  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast", Play(out _, "help\n"));
     }
 
@@ -249,14 +249,14 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nthreat wren from 4,6\nmove wren 4,6\nthreat wren from 3,7\nthreat wren\nwait wren\nend\n");
 
-        const string Archer = "Archer 2 from 5,5 with Iron Bow (slot 1): dmg 6 hit 70% crit 0%; counter: none";
-        const string Brigand = "Brigand from 3,6 with Iron Axe (slot 1): dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%";
+        const string Archer = "Archer 2 from 5,5 with Iron Bow (slot 1): acc 70% dmg 6 crit 0%; counter: none";
+        const string Brigand = "Brigand from 3,6 with Iron Axe (slot 1): acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%";
         var expected = $"Threat on Wren at 4,6 (Plain):\n  {Archer}\n  {Brigand}\n  If all land: 17 against 9 hp\n";
         Assert.Contains("> threat wren from 4,6\n" + expected, output);
         Assert.Contains("> threat wren from 3,7\nERROR: Wren has already moved this phase; threat from 4,6\n", output);
         Assert.Contains("> threat wren\n" + expected, output);
-        Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none\n", output);
-        Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\n", output);
+        Assert.Contains("enemy: attack archer-2 wren\nForecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none\n", output);
+        Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%\n", output);
         Assert.Contains("  threat <unit> [from <x,y>]  What each enemy would strike it with", Play(out _, "help\n"));
     }
 
@@ -291,7 +291,7 @@ public class CliPlayTests
         {
             var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("> threat captain from 4,1\nThreat on Alder Fenn at 4,1 (Plain):\n  Soldier 2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%\n  If all land: 8 against 22 hp\n> ", output);
+            Assert.Contains("> threat captain from 4,1\nThreat on Alder Fenn at 4,1 (Plain):\n  Soldier 2 (arrives this enemy phase at 7,0) from 4,0 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%\n  If all land: 8 against 22 hp\n> ", output);
             Assert.Contains("> threat wren from 4,3\nThreat on Wren at 4,3 (Plain): no enemy can strike her next phase\n  The y group is asleep, could strike here if woken: Archer at 10,3\n  Asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies\n", output);
         }
         finally
@@ -307,11 +307,11 @@ public class CliPlayTests
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\nforecast wren brigand-1\nattack wren brigand-1 1\nshow wren\nrecall 0\n");
 
         Assert.Contains("Alder Fenn moves 1,8 -> 1,4 via 1,7 1,6 1,5\n", output);
-        Assert.Contains("> forecast wren brigand-1\nForecast Wren -> Brigand: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%\n", output);
+        Assert.Contains("> forecast wren brigand-1\nForecast Wren -> Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%\n", output);
         Assert.Contains("> attack wren brigand-1 1\nForecast Wren -> Brigand:", output);
         Assert.Contains("Wren attacks Brigand\n  Wren misses Brigand\n  Brigand misses Wren\n  Wren hits Brigand for 10", output);
         Assert.Contains("> show wren\nWren, Cadet L1, at 2,6 on Plain\n  HP ", output);
-        Assert.Contains("Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)\n", output);
+        Assert.Contains("Weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)\n", output);
         Assert.Contains("> recall 0\nRecalled to state 0; 2 charges left\n", output);
         Assert.Contains("Battle ongoing at turn 1, player phase\n", output);
     }
@@ -391,7 +391,7 @@ public class CliPlayTests
     {
         var output = Play(out _, "move captain 1,4\nmove wren 2,6\nend\n");
 
-        Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%\nBrigand attacks Wren\n  Brigand ", output);
+        Assert.Contains("enemy: attack brigand-1 wren\nForecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%\nBrigand attacks Wren\n  Brigand ", output);
     }
 
     /// <summary>
@@ -550,9 +550,9 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("Forecast Pell -> Archer 1 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%\n", output);
-        Assert.Contains("Forecast Pell -> Archer 1 with Cinder: dmg 10 hit 91% crit 2%; counter: none\n", output);
-        Assert.Contains("Forecast Ottilie -> Hexer: dmg 9 x2 hit 89% crit 4%; counter: none\n", output);
+        Assert.Contains("Forecast Pell -> Archer 1 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%\n", output);
+        Assert.Contains("Forecast Pell -> Archer 1 with Cinder: acc 91% dmg 10 crit 2%; counter: none\n", output);
+        Assert.Contains("Forecast Ottilie -> Hexer: acc 89% dmg 9 x2 crit 4%; counter: none\n", output);
     }
 
     /// <summary>
@@ -709,9 +709,9 @@ public class CliPlayTests
         var output = RunSample("saltmarsh_ford_chief.map", "2026-09-26-saltmarsh_ford_chief-47.script", 47, out var exit);
 
         Assert.Equal(0, exit);
-        Assert.Contains("Forecast Ford Chief -> Alder Fenn: dmg 10 hit 43% crit 0%; counter: none\n", output);
-        Assert.Contains("Forecast Ford Chief -> Teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%\nFord Chief equips Steel Axe\n", output);
-        Assert.Contains("Forecast Alder Fenn -> Ford Chief: dmg 8 x2 hit 74% crit 4%; counter with Steel Axe: dmg 15 hit 62% crit 0%\n", output);
+        Assert.Contains("Forecast Ford Chief -> Alder Fenn: acc 43% dmg 10 crit 0%; counter: none\n", output);
+        Assert.Contains("Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter: acc 58% dmg 8 crit 0%\nFord Chief equips Steel Axe\n", output);
+        Assert.Contains("Forecast Alder Fenn -> Ford Chief: acc 74% dmg 8 x2 crit 4%; counter with Steel Axe: acc 62% dmg 15 crit 0%\n", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-saltmarsh_ford_chief-47.txt")).ReplaceLineEndings("\n"), output);
     }
@@ -727,8 +727,8 @@ public class CliPlayTests
     {
         var output = RunInline(ArmsYard, "forecast captain ford_chief-1 from 2,1\n");
 
-        Assert.Contains("Forecast Alder Fenn -> Ford Chief from 2,1 (Plain): dmg ", output);
-        Assert.Contains("; counter with Toll Axe: dmg ", output);
+        Assert.Contains("Forecast Alder Fenn -> Ford Chief from 2,1 (Plain): acc ", output);
+        Assert.Contains("; counter with Toll Axe: acc ", output);
     }
 
     [Fact]
@@ -736,8 +736,8 @@ public class CliPlayTests
     {
         var output = RunInline(ArmsYard, "forecast captain brigand-1 from 2,2\n");
 
-        Assert.Contains("Forecast Alder Fenn -> Brigand from 2,2 (Plain): dmg ", output);
-        Assert.Contains("; counter: dmg ", output);
+        Assert.Contains("Forecast Alder Fenn -> Brigand from 2,2 (Plain): acc ", output);
+        Assert.Contains("; counter: acc ", output);
         Assert.DoesNotContain(" with ", output.Split('\n').Single(l => l.StartsWith("Forecast Alder Fenn", StringComparison.Ordinal)));
     }
 
@@ -747,8 +747,8 @@ public class CliPlayTests
     {
         var output = RunInline(ArmsYard, "forecast ottilie ford_chief-1 from 1,1\n");
 
-        Assert.Contains("Forecast Ottilie -> Ford Chief from 1,1 (Plain): dmg ", output);
-        Assert.Contains("; counter: dmg ", output);
+        Assert.Contains("Forecast Ottilie -> Ford Chief from 1,1 (Plain): acc ", output);
+        Assert.Contains("; counter: acc ", output);
     }
 
     /// <summary>Issue 313: a player unit with two spells names the one it strikes with, and <c>threat</c> names its counter's; against Pell the chief's planner takes the Steel Axe.</summary>
@@ -757,9 +757,9 @@ public class CliPlayTests
     {
         var output = RunInline(ArmsYard, "forecast pell ford_chief-1 from 1,1\nthreat pell from 2,1\n");
 
-        Assert.Contains("Forecast Pell -> Ford Chief from 1,1 (Plain) with Cinder: dmg ", output);
-        Assert.Contains("  Ford Chief from 3,1 with Steel Axe (slot 2): dmg ", output);
-        Assert.Contains("; counter with Cinder: dmg ", output);
+        Assert.Contains("Forecast Pell -> Ford Chief from 1,1 (Plain) with Cinder: acc ", output);
+        Assert.Contains("  Ford Chief from 3,1 with Steel Axe (slot 2): acc ", output);
+        Assert.Contains("; counter with Cinder: acc ", output);
     }
 
     private const string ArmsYard = """
@@ -816,9 +816,9 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar hit +15\n", output);
-        Assert.Contains("  Pincer: Brawler pinned by Ansgar: Wren hit +15\n", output);
-        Assert.Contains("  Pincer: Grange Reeve pinned by Wren: Alder Fenn hit +15\n", output);
+        Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar acc +15\n", output);
+        Assert.Contains("  Pincer: Brawler pinned by Ansgar: Wren acc +15\n", output);
+        Assert.Contains("  Pincer: Grange Reeve pinned by Wren: Alder Fenn acc +15\n", output);
         Assert.Contains("Ottilie falls at 12,6\n", output);
     }
 
@@ -835,9 +835,9 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("  Pincer: Brawler pinned by Wren: Alder Fenn hit +15\n", output);
-        Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Ansgar hit +15\n", output);
-        Assert.Contains("  Pincer: Grange Reeve pinned by Ansgar: Alder Fenn hit +15\n", output);
+        Assert.Contains("  Pincer: Brawler pinned by Wren: Alder Fenn acc +15\n", output);
+        Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Ansgar acc +15\n", output);
+        Assert.Contains("  Pincer: Grange Reeve pinned by Ansgar: Alder Fenn acc +15\n", output);
         Assert.Contains("Grange Reeve falls at 14,7\n", output);
     }
 
@@ -854,9 +854,9 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: defeat_boss\n", output);
-        Assert.Contains("Forecast Brigand 2 -> Ottilie: dmg 12 hit 31% crit 0%; counter: none\n  Brace: Ottilie braced: Brigand 2 hit -15\n", output);
-        Assert.Contains("  Brace: Weir Foreman braced: Teodor hit -15\n", output);
-        Assert.Contains("Forecast Pell -> Weir Foreman with Cinder: dmg 12 hit 94% crit 1%", output);
+        Assert.Contains("Forecast Brigand 2 -> Ottilie: acc 31% dmg 12 crit 0%; counter: none\n  Brace: Ottilie braced: Brigand 2 acc -15\n", output);
+        Assert.Contains("  Brace: Weir Foreman braced: Teodor acc -15\n", output);
+        Assert.Contains("Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%", output);
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
     }
 
@@ -877,9 +877,9 @@ public class CliPlayTests
         Assert.Contains("  5,5 becomes Fire\n", output);
         Assert.Contains("Archer 2 burns 3 (hp 2)\n", output);
         Assert.Contains("  6,5 becomes Fire\n  5,6 becomes Fire\n", output);
-        Assert.Contains("Forecast Wren -> Toll Brigand: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 41% crit 0%\n", output);
+        Assert.Contains("Forecast Wren -> Toll Brigand: acc 88% dmg 10 x2 crit 4%; counter: acc 41% dmg 11 crit 0%\n", output);
         Assert.Contains("  6,4 becomes Fire\n", output);
-        Assert.Contains("Forecast Toll Warden -> Teodor: dmg 7 hit 67% crit 1%; counter: none\n", output);
+        Assert.Contains("Forecast Toll Warden -> Teodor: acc 67% dmg 7 crit 1%; counter: none\n", output);
         Assert.Contains("  Wildfire: Pell ignites 5,5 on a hit\n", output);
         Assert.Contains("fire: burning 5,5; next front 6,5 5,6\n", output);
         Assert.Contains("Teodor burns 4 (hp 2)\n", output);
@@ -900,7 +900,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Escaped: Dunstan, Alder Fenn; left behind: none; fell: Pell, Rook, Wren\n", output);
-        Assert.Contains("Forecast Pell -> Archer 1 from 12,4 (Plain) with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%\n  Counter: lethal to Pell (8 against 8 hp)\n  Wildfire: Pell ignites 10,4 on a hit\n", output);
+        Assert.Contains("Forecast Pell -> Archer 1 from 12,4 (Plain) with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%\n  Counter: lethal to Pell (8 against 8 hp)\n  Wildfire: Pell ignites 10,4 on a hit\n", output);
         Assert.Contains("  Wren hits Brigand 1 for 10 (hp 0)\n", output);
         Assert.Contains("  Rider 1 hits Wren for 9 (hp 0)\n", output);
         Assert.DoesNotContain("becomes Fire", output);
@@ -927,7 +927,7 @@ public class CliPlayTests
         Assert.Contains("  Wildfire: Hexer 1 ignites 6,4 on a hit\n", output);
         Assert.Contains("Dunstan burns 4 (hp 7)\n", output);
         Assert.Contains("Alder Fenn moves 7,5 -> 5,4 via 7,4 6,4\n", output);
-        Assert.Contains("Forecast Alder Fenn -> Hexer 1: dmg 12 x2 hit 92% crit 4%; counter: dmg 11 hit 98% crit 0%\n", output);
+        Assert.Contains("Forecast Alder Fenn -> Hexer 1: acc 92% dmg 12 x2 crit 4%; counter: acc 98% dmg 11 crit 0%\n", output);
         Assert.DoesNotContain("Alder Fenn burns", output);
         Assert.DoesNotContain("Pell burns", output);
     }
@@ -945,7 +945,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("Forecast Toll Mauler -> Teodor: dmg 14 hit -- crit --; counter: none\n", output);
+        Assert.Contains("Forecast Toll Mauler -> Teodor: acc -- dmg 14 crit --; counter: none\n", output);
         Assert.Contains("Toll Mauler raises a blow over 6,3 (Teodor); it lands at Toll Mauler's next phase start\n", output);
         Assert.Contains("blows: toll_mauler-1 over 6,3 (teodor 14, sure)\n", output);
         Assert.Contains("under a blow from toll_mauler-1 (14, sure)", output);
@@ -1005,8 +1005,8 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: defeat_boss\n", output);
-        Assert.Contains("Forecast Weir Foreman -> Dunstan: dmg 8 hit 43% crit 2%; counter: none\n  Brace: Dunstan braced: Weir Foreman hit -15\n", output);
-        Assert.Contains("Forecast Dunstan -> Weir Foreman: dmg 8 hit 29% crit 0%; counter: dmg 8 hit 70% crit 2%\n  Brace: Weir Foreman braced: Dunstan hit -15\n", output);
+        Assert.Contains("Forecast Weir Foreman -> Dunstan: acc 43% dmg 8 crit 2%; counter: none\n  Brace: Dunstan braced: Weir Foreman acc -15\n", output);
+        Assert.Contains("Forecast Dunstan -> Weir Foreman: acc 29% dmg 8 crit 0%; counter: acc 70% dmg 8 crit 2%\n  Brace: Weir Foreman braced: Dunstan acc -15\n", output);
         Assert.Contains("Weir Foreman falls at 13,6\n", output);
     }
 
@@ -1022,7 +1022,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: rout\n", output);
-        Assert.Contains("Forecast Ottilie -> Bandit Leader: dmg 4 hit 39% crit 3%; counter: none\n  Brace: Bandit Leader braced: Ottilie hit -15\n", output);
+        Assert.Contains("Forecast Ottilie -> Bandit Leader: acc 39% dmg 4 crit 3%; counter: none\n  Brace: Bandit Leader braced: Ottilie acc -15\n", output);
         Assert.Contains("Teodor falls at 10,1\n", output);
         Assert.Contains("Bandit Leader falls at 10,0\n", output);
     }
@@ -1055,7 +1055,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: rout\n", output);
-        Assert.Contains("Forecast Ottilie -> Brigand: dmg 8 hit 91% crit 5%; counter: none\n  Signature: Teodor's orders: Ottilie hit +5\n", output);
+        Assert.Contains("Forecast Ottilie -> Brigand: acc 91% dmg 8 crit 5%; counter: none\n  Signature: Teodor's orders: Ottilie acc +5\n", output);
         Assert.DoesNotContain("will not shoot", output);
     }
 
@@ -1073,7 +1073,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
         Assert.Contains("Archer 2 moves 8,6 -> 6,7 via 7,6 7,7\n", output);
-        Assert.Contains("  Pincer: Archer 2 pinned by Ottilie: Ansgar hit +15\n", output);
+        Assert.Contains("  Pincer: Archer 2 pinned by Ottilie: Ansgar acc +15\n", output);
         Assert.Single(output.Split('\n'), line => line.StartsWith("  Pincer: ", StringComparison.Ordinal));
         Assert.Contains("Grange Reeve falls at 13,6\n", output);
     }
@@ -1091,8 +1091,8 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar hit +15\n", output);
-        Assert.Contains("  Pincer: Brawler pinned by Teodor: Alder Fenn hit +15\n", output);
+        Assert.Contains("  Pincer: Brawler pinned by Wren: Ansgar acc +15\n", output);
+        Assert.Contains("  Pincer: Brawler pinned by Teodor: Alder Fenn acc +15\n", output);
         Assert.Contains("Grange Reeve falls at 13,6\n", output);
         Assert.DoesNotContain(" falls at ", output.Replace("Soldier falls at", "").Replace("Brawler falls at", "").Replace("Archer 2 falls at", "").Replace("Grange Reeve falls at", ""));
     }
@@ -1112,8 +1112,8 @@ public class CliPlayTests
         Assert.Equal(1, exit);
         Assert.DoesNotContain("rejected", output);
         Assert.Contains("enemy: move rider-1 13,0\nRider 1 moves 14,3 -> 13,0 via 15,3 15,2 15,1 15,0 14,0\n", output);
-        Assert.Contains("  Pincer: Wren pinned by Brawler: Rider 2 hit +15\n", output);
-        Assert.Contains("  Pincer: Alder Fenn pinned by Shieldbearer: Soldier hit +15\n", output);
+        Assert.Contains("  Pincer: Wren pinned by Brawler: Rider 2 acc +15\n", output);
+        Assert.Contains("  Pincer: Alder Fenn pinned by Shieldbearer: Soldier acc +15\n", output);
         Assert.Contains("Escaped: none; left behind: none; fell: Alder Fenn, Dunstan, Pell, Rook, Wren\n", output);
     }
 
@@ -1132,9 +1132,9 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.DoesNotContain("rejected", output);
         Assert.EndsWith("Battle won: seize\n", output);
-        Assert.Contains("  Pincer: Archer 2 pinned by Wren: Teodor hit +15\n", output);
-        Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Wren hit +15\n", output);
-        Assert.Contains("  Pincer: Toll Brigand pinned by Alder Fenn: Wren hit +15\n", output);
+        Assert.Contains("  Pincer: Archer 2 pinned by Wren: Teodor acc +15\n", output);
+        Assert.Contains("  Pincer: Archer 2 pinned by Teodor: Wren acc +15\n", output);
+        Assert.Contains("  Pincer: Toll Brigand pinned by Alder Fenn: Wren acc +15\n", output);
         Assert.DoesNotContain("pinned by toll_", output);
         Assert.DoesNotContain("pinned by archer", output);
         Assert.DoesNotContain("pinned by rider", output);
@@ -1224,7 +1224,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("The bank group wakes (proximity); their lamps are lit (Shieldbearer 17,5, Soldier 17,6, Brawler 17,7)\n", output);
-        Assert.Contains("  Brawler from 18,6 with Iron Gauntlets (slot 1): dmg 10 x2 hit 83% crit 0%;", output);
+        Assert.Contains("  Brawler from 18,6 with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%;", output);
         Assert.Contains("Brawler moves 17,7 -> 19,8 via 18,7 19,7\n", output);
         Assert.Contains("Rook falls at 19,4\n", output);
         Assert.EndsWith("Escaped: Wren, Alder Fenn; left behind: Pell; fell: Dunstan, Rook\n", output);
@@ -1405,7 +1405,7 @@ public class CliPlayTests
 
         var phase = output[output.IndexOf("-- Enemy phase, turn 3 --", StringComparison.Ordinal)..output.IndexOf("-- Enemy phase ends, turn 3 --", StringComparison.Ordinal)];
         Assert.Contains("Weir Foreman moves 13,6 -> 12,6\n", phase);
-        Assert.Contains("Forecast Weir Foreman -> Keziah: dmg 12 hit 60% crit 1%; counter: none\n", phase);
+        Assert.Contains("Forecast Weir Foreman -> Keziah: acc 60% dmg 12 crit 1%; counter: none\n", phase);
         Assert.Contains("  Weir Foreman hits Keziah for 12 (hp 2)\n", phase);
     }
 
@@ -1588,7 +1588,7 @@ public class CliPlayTests
         var output = RunRetuned("2026-09-28-harrow_weir-601.script", 601, dropTail: 0);
 
         Assert.Contains("Reinforcements are blocked: a unit holds 7,0\n", output);
-        Assert.Contains("Forecast Pell -> Weir Shieldbearer with Gust: dmg 9 x2 hit 100% crit 8%; counter: none\n", output);
+        Assert.Contains("Forecast Pell -> Weir Shieldbearer with Gust: acc 100% dmg 9 x2 crit 8%; counter: none\n", output);
         Assert.Contains("  Pell hits Weir Shieldbearer for 9 (hp 6)\n", output);
         var fourth = output[output.IndexOf("-- Enemy phase, turn 4 --", StringComparison.Ordinal)..output.IndexOf("-- Player phase, turn 5 --", StringComparison.Ordinal)];
         Assert.Contains("enemy: attack weir_foreman-1 teodor\n", fourth);
@@ -1901,7 +1901,7 @@ public class CliPlayTests
         Assert.Equal(0, exit);
         Assert.EndsWith("Battle won: seize\n", output);
         Assert.DoesNotContain("Rejected ", output);
-        Assert.Contains("Forecast Alder Fenn -> Wingrider 2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%\n  Wingrider 2 would fall back to 2,2 at 5 hp\n", output);
+        Assert.Contains("Forecast Alder Fenn -> Wingrider 2: acc 82% dmg 12 crit 3%; counter: acc 63% dmg 6 crit 0%\n  Wingrider 2 would fall back to 2,2 at 5 hp\n", output);
         Assert.Contains("enemy: retreat wingrider-2 2,2\n", output);
         Assert.Contains("Wingrider 2 heals 3 (hp 8)\n", output);
         Assert.Contains("enemy: wait wingrider-2\n", output);
@@ -2142,8 +2142,8 @@ public class CliPlayTests
 
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("ironwake_keep_pair.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
-        Assert.Contains("Forecast Sworn Hunter -> Wren with Iron Sword: dmg 12 hit 80% crit 0%;", output);
-        Assert.Contains("Forecast Sworn Hunter -> Dunstan with Iron Lance: dmg 8 x2 hit 94% crit 8%;", output);
+        Assert.Contains("Forecast Sworn Hunter -> Wren with Iron Sword: acc 80% dmg 12 crit 0%;", output);
+        Assert.Contains("Forecast Sworn Hunter -> Dunstan with Iron Lance: acc 94% dmg 8 x2 crit 8%;", output);
     }
 
     /// <summary>
@@ -2560,7 +2560,7 @@ public class SimFullTests
             Assert.Equal(0, exit);
             Assert.DoesNotContain("Rejected ", output);
             Assert.DoesNotContain("Strict: stopped", output);
-            Assert.Contains("Ansgar cantos 5,8 -> 4,10", output);
+            Assert.Contains("Ansgar moves again 5,8 -> 4,10", output);
         }
         finally
         {

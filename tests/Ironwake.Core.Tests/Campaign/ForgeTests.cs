@@ -75,7 +75,7 @@ public class ForgeTests
         var hit = mt.Record.Refine("captain", 0, "hit", Content);
 
         Assert.True(mt.Accepted);
-        Assert.Equal($"Refine Iron Sword: Iron Sword +1, Mt {sword.Mt + 1}, hit {sword.Hit}, for 1 common material and 100; the purse holds 900", mt.Text);
+        Assert.Equal($"Refine Iron Sword: Iron Sword +1, Acc {sword.Hit}, Power {sword.Mt + 1}, for 1 common material and 100; the purse holds 900", mt.Text);
         Assert.True(hit.Accepted);
         var stack = hit.Record.Find("captain")!.Inventory.Items[0];
         Assert.Equal((2, 1, 5), (stack.Refines, stack.RefineMt, stack.RefineHit));
@@ -261,7 +261,7 @@ public class ForgeTranscriptTests
         var output = ConsoleCapture.Run(() => Ironwake.Cli.Program.Main(args));
 
         Assert.Contains("Maud wins maud_1; the stores take 2 common material; fell and came back wounded: Wren\n", output);
-        Assert.Contains("Refine Iron Lance: Iron Lance +1, Mt 7, hit 70, for 1 common material and 100; the purse holds 800\n", output);
+        Assert.Contains("Refine Iron Lance: Iron Lance +1, Acc 70, Power 7, for 1 common material and 100; the purse holds 800\n", output);
         Assert.Contains("  Teodor: Pikeman L1, EXP 54; 1: Iron Lance +1 38/40", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

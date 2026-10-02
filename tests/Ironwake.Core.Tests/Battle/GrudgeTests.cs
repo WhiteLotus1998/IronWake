@@ -12,7 +12,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// other strike only when none does, and approaches the sworn unit first. The second pass
 /// (issue 331): a keepsake strike outranks the grudge, a grudge strike names the planner's
 /// best alternative, at dusk only witnesses swear, and the sworn unit fights the enemy
-/// sworn on it at -20 crit avoid, counters included.
+/// sworn on it at -20 crit evade, counters included.
 /// </summary>
 public class GrudgeTests
 {

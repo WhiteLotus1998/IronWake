@@ -35,10 +35,10 @@ called: group weir wakes when group ford does
 > show captain
 Alder Fenn (captain), Cadet L1, at 1,6 on Plain
   HP 22/22  Str 8 Mag 0 Dex 7 Spd 8 Lck 6 Def 5 Res 2 Cha 9  Mov 4 (infantry)
-  Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)
+  Weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)
   Items: 1: Iron Sword x40, 2: Field Dressing x3
   Ranks: sword E (0), lance E (0), axe E (0)
-  Arts: Feint (sword E, cost 1): +25 hit, -2 mt. For the strike you cannot afford to miss., Full Measure (full_measure) (sword E, cost 2): +8 mt, +30 hit, +20 crit. Once a map, and it costs the next phase: no move, no act.
+  Techniques: Feint (sword E, cost 1): +25 Acc, -2 Power. For the strike you cannot afford to miss., Full Measure (full_measure) (sword E, cost 2): +30 Acc, +8 Power, +20 Crit. Once a map, and it costs the next phase: no move, no act.
   Mastery: Fundamentals (0 of 12 combats)
   Commander's Word: order press, rally or fall back, once a map, as the captain's action; reaches allies within 4 (2 + Cha / 4); unspent
   Targets from here: none
@@ -77,7 +77,7 @@ b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > attack pell brigand-1
-Forecast Pell -> Brigand 1 with Cinder: dmg 13 hit 87% crit 3%; counter: none
+Forecast Pell -> Brigand 1 with Cinder: acc 87% dmg 13 crit 3%; counter: none
 Pell attacks Brigand 1
   Pell hits Brigand 1 for 13 (hp 9)
   Pell hp 16, Brigand 1 hp 9
@@ -143,7 +143,7 @@ b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > attack ottilie brigand-1
-Forecast Ottilie -> Brigand 1: dmg 7 hit 56% crit 5%; counter: none
+Forecast Ottilie -> Brigand 1: acc 56% dmg 7 crit 5%; counter: none
 Ottilie attacks Brigand 1
   Ottilie misses Brigand 1
   Ottilie hp 17, Brigand 1 hp 9
@@ -208,7 +208,7 @@ b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > attack teodor brigand-1
-Forecast Teodor -> Brigand 1: dmg 11 hit 47% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Teodor -> Brigand 1: acc 47% dmg 11 crit 2%; counter: acc 63% dmg 10 crit 0%
 Teodor attacks Brigand 1
   Teodor misses Brigand 1
   Brigand 1 misses Teodor
@@ -438,7 +438,7 @@ Brawler waits
 enemy: move brigand-1 4,5
 Brigand 1 moves 3,3 -> 4,5 via 4,3 4,4
 enemy: attack brigand-1 ottilie
-Forecast Brigand 1 -> Ottilie: dmg 12 hit 58% crit 0%; counter: none
+Forecast Brigand 1 -> Ottilie: acc 58% dmg 12 crit 0%; counter: none
 Brigand 1 attacks Ottilie
   Brigand 1 hits Ottilie for 12 (hp 5)
   Brigand 1 hp 9, Ottilie hp 5
@@ -512,7 +512,7 @@ b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > attack teodor brigand-1
-Forecast Teodor -> Brigand 1: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+Forecast Teodor -> Brigand 1: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 Teodor attacks Brigand 1
   Teodor hits Brigand 1 for 12 (hp 0)
   Teodor hp 21, Brigand 1 hp 0
@@ -2083,7 +2083,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor archer-1
-Forecast Teodor -> Archer: dmg 12 hit 76% crit 1%; counter: none
+Forecast Teodor -> Archer: acc 76% dmg 12 crit 1%; counter: none
 Teodor attacks Archer
   Teodor hits Archer for 12 (hp 5)
   Teodor hp 21, Archer hp 5
@@ -2149,7 +2149,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain  done
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack keziah archer-1
-Forecast Keziah -> Archer with Iron Axe: dmg 14 hit 67% crit 1%; counter: none
+Forecast Keziah -> Archer with Iron Axe: acc 67% dmg 14 crit 1%; counter: none
 Keziah attacks Archer
   Keziah hits Archer for 14 (hp 0)
   Keziah hp 23, Archer hp 0
@@ -2439,7 +2439,7 @@ Brigand 3 waits
 enemy: wait soldier-1
 Soldier waits
 enemy: attack weir_foreman-1 keziah
-Forecast Weir Foreman -> Keziah: dmg 12 hit 60% crit 1%; counter: none
+Forecast Weir Foreman -> Keziah: acc 60% dmg 12 crit 1%; counter: none
 Weir Foreman attacks Keziah
   Weir Foreman misses Keziah
   Weir Foreman hp 28, Keziah hp 23
@@ -2506,7 +2506,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack pell weir_foreman-1
-Forecast Pell -> Weir Foreman with Cinder: dmg 12 hit 94% crit 1%; counter: dmg 13 hit 67% crit 1%
+Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
 Pell attacks Weir Foreman
   Pell hits Weir Foreman for 12 (hp 16)
   Weir Foreman hits Pell for 13 (hp 3)
@@ -2569,7 +2569,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 16/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack keziah weir_foreman-1
-Forecast Keziah -> Weir Foreman with Iron Axe: dmg 11 hit 49% crit 0%; counter: dmg 12 hit 60% crit 1%
+Forecast Keziah -> Weir Foreman with Iron Axe: acc 49% dmg 11 crit 0%; counter: acc 60% dmg 12 crit 1%
 Keziah attacks Weir Foreman
   Keziah misses Weir Foreman
   Weir Foreman hits Keziah for 12 (hp 11)
@@ -2631,7 +2631,7 @@ B  teodor           Teodor L1 pikeman          14,6   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 16/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack teodor weir_foreman-1
-Forecast Teodor -> Weir Foreman: dmg 9 hit 60% crit 0%; counter: dmg 10 hit 60% crit 2%
+Forecast Teodor -> Weir Foreman: acc 60% dmg 9 crit 0%; counter: acc 60% dmg 10 crit 2%
 Teodor attacks Weir Foreman
   Teodor hits Weir Foreman for 9 (hp 7)
   Weir Foreman hits Teodor for 10 (hp 11)
@@ -2694,7 +2694,7 @@ B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 7/28   Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack ottilie weir_foreman-1
-Forecast Ottilie -> Weir Foreman: dmg 5 hit 68% crit 3%; counter: dmg 12 hit 54% crit 0%
+Forecast Ottilie -> Weir Foreman: acc 68% dmg 5 crit 3%; counter: acc 54% dmg 12 crit 0%
 Ottilie attacks Weir Foreman
   Ottilie misses Weir Foreman
   Weir Foreman misses Ottilie
@@ -2830,7 +2830,7 @@ Brigand 2 moves 3,6 -> 7,6 via 4,6 5,6 6,6
 enemy: wait brigand-2
 Brigand 2 waits
 enemy: attack brigand-3 pell
-Forecast Brigand 3 -> Pell: dmg 13 hit 70% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+Forecast Brigand 3 -> Pell: acc 70% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
 Brigand 3 attacks Pell
   Brigand 3 hits Pell for 13 (hp 0)
   Brigand 3 hp 22, Pell hp 0
@@ -2840,7 +2840,7 @@ Soldier moves 12,11 -> 12,8 via 12,10 12,9
 enemy: wait soldier-1
 Soldier waits
 enemy: attack weir_foreman-1 keziah
-Forecast Weir Foreman -> Keziah: dmg 12 hit 60% crit 1%; counter with Iron Axe: dmg 11 hit 49% crit 0%
+Forecast Weir Foreman -> Keziah: acc 60% dmg 12 crit 1%; counter with Iron Axe: acc 49% dmg 11 crit 0%
 Weir Foreman attacks Keziah
   Weir Foreman hits Keziah for 12 (hp 0)
   Weir Foreman hp 7, Keziah hp 0
@@ -2936,7 +2936,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack ottilie weir_foreman-1
-Forecast Ottilie -> Weir Foreman: dmg 5 hit 68% crit 3%; counter: dmg 12 hit 54% crit 0%
+Forecast Ottilie -> Weir Foreman: acc 68% dmg 5 crit 3%; counter: acc 54% dmg 12 crit 0%
 Ottilie attacks Weir Foreman
   Ottilie misses Weir Foreman
   Weir Foreman misses Ottilie
@@ -2998,7 +2998,7 @@ B  teodor           Teodor L1 pikeman          14,3   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack pell weir_foreman-1
-Forecast Pell -> Weir Foreman with Cinder: dmg 12 hit 94% crit 1%; counter: dmg 13 hit 67% crit 1%
+Forecast Pell -> Weir Foreman with Cinder: acc 94% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
 Pell attacks Weir Foreman
   Pell hits Weir Foreman for 12 (hp 16)
   Weir Foreman hits Pell for 13 (hp 3)
@@ -3061,7 +3061,7 @@ B  teodor           Teodor L1 pikeman          14,6   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 16/28  Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack teodor weir_foreman-1
-Forecast Teodor -> Weir Foreman: dmg 9 hit 60% crit 0%; counter: dmg 10 hit 60% crit 2%
+Forecast Teodor -> Weir Foreman: acc 60% dmg 9 crit 0%; counter: acc 60% dmg 10 crit 2%
 Teodor attacks Weir Foreman
   Teodor hits Weir Foreman for 9 (hp 7)
   Weir Foreman hits Teodor for 10 (hp 11)
@@ -3124,7 +3124,7 @@ B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 7/28   Hill  group weir, boss, awake
 b  weir_shieldbearer-1 Weir Shieldbearer L2 bulwark 11,6   hp 24/24  Road  group bridge, hold
 > attack dunstan weir_foreman-1
-Forecast Dunstan -> Weir Foreman: dmg 8 hit 56% crit 0%; counter: dmg 8 hit 70% crit 2%
+Forecast Dunstan -> Weir Foreman: acc 56% dmg 8 crit 0%; counter: acc 70% dmg 8 crit 2%
 Dunstan attacks Weir Foreman
   Dunstan hits Weir Foreman for 8 (hp 0)
   Dunstan hp 23, Weir Foreman hp 0

@@ -75,14 +75,14 @@ Archer 1 waits
 enemy: move archer-2 5,7
 Archer 2 moves 8,7 -> 5,7 via 7,7 6,7
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 misses Wren
   Archer 2 hp 17, Wren hp 20
 enemy: move brigand-1 3,6
 Brigand moves 6,5 -> 3,6 via 5,5 4,5 4,6
 enemy: attack brigand-1 wren
-Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 Brigand attacks Wren
   Brigand misses Wren
   Wren hits Brigand for 10 (hp 12)
@@ -118,10 +118,10 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > forecast captain brigand-1
-Forecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+Forecast Alder Fenn -> Brigand: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 > attack captain brigand-1 art cleave
-Forecast Alder Fenn -> Brigand: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%
-  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss
+Forecast Alder Fenn -> Brigand: acc 90% dmg 16 crit 5%; counter: acc 56% dmg 10 crit 0%
+  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss
 Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 16 (hp 0)
@@ -171,7 +171,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 10 hit 85% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 85% dmg 10 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 10 (hp 7)
   Wren hp 20, Archer 2 hp 7
@@ -204,7 +204,7 @@ Archer 1 waits
 enemy: move archer-2 6,7
 Archer 2 moves 5,7 -> 6,7
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 misses Wren
   Archer 2 hp 7, Wren hp 20
@@ -258,7 +258,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 10 hit 85% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 85% dmg 10 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 10 (hp 0)
   Wren hp 20, Archer 2 hp 0
@@ -455,7 +455,7 @@ B  wren             Wren L1 cadet              5,2    hp 20/20  Plain
 enemy: move archer-1 8,2
 Archer 1 moves 10,2 -> 8,2 via 9,2
 enemy: attack archer-1 captain
-Forecast Archer 1 -> Alder Fenn: dmg 3 hit 41% crit 0%; counter: none
+Forecast Archer 1 -> Alder Fenn: acc 41% dmg 3 crit 0%; counter: none
 Archer 1 attacks Alder Fenn
   Archer 1 misses Alder Fenn
   Archer 1 hp 17, Alder Fenn hp 22
@@ -466,7 +466,7 @@ Mill Bandit waits
 enemy: move soldier-1 6,1
 Soldier moves 9,1 -> 6,1 via 8,1 7,1
 enemy: attack soldier-1 captain
-Forecast Soldier -> Alder Fenn: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+Forecast Soldier -> Alder Fenn: acc 34% dmg 6 crit 0%; counter: acc 87% dmg 9 crit 4%
 Soldier attacks Alder Fenn
   Soldier misses Alder Fenn
   Alder Fenn crits Soldier for 27 (hp 0)
@@ -513,7 +513,7 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Fort (heals 20 p
 d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              6,1    hp 20/20  Plain
 > attack wren mill_bandit-1
-Forecast Wren -> Mill Bandit: dmg 9 hit 85% crit 2%; counter: dmg 10 hit 85% crit 3%
+Forecast Wren -> Mill Bandit: acc 85% dmg 9 crit 2%; counter: acc 85% dmg 10 crit 3%
 Wren attacks Mill Bandit
   Wren misses Mill Bandit
   Mill Bandit hits Wren for 10 (hp 10)
@@ -555,8 +555,8 @@ A  captain          Alder Fenn L1 cadet        7,2    hp 22/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              6,1    hp 10/20  Plain  done
 > attack captain mill_bandit-1 art cleave
-Forecast Alder Fenn -> Mill Bandit: dmg 15 hit 87% crit 3%; counter: dmg 9 hit 88% crit 2%
-  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss
+Forecast Alder Fenn -> Mill Bandit: acc 87% dmg 15 crit 3%; counter: acc 88% dmg 9 crit 2%
+  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 36 uses, 2 of them hit or miss
 Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Mill Bandit
   Alder Fenn hits Mill Bandit for 15 (hp 9)
@@ -588,12 +588,12 @@ Lethal if all land: Wren (Archer 1 for 6, Mill Bandit for 10, against 10 hp)
 enemy: move archer-1 8,1
 Archer 1 moves 8,2 -> 8,1
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 4)
   Archer 1 hp 17, Wren hp 4
 enemy: attack mill_bandit-1 wren
-Forecast Mill Bandit -> Wren: dmg 10 hit 85% crit 3%; counter: dmg 9 hit 85% crit 2%
+Forecast Mill Bandit -> Wren: acc 85% dmg 10 crit 3%; counter: acc 85% dmg 9 crit 2%
 Mill Bandit attacks Wren
   Mill Bandit hits Wren for 10 (hp 0)
   Mill Bandit hp 9, Wren hp 0
@@ -618,7 +618,7 @@ b  archer-1         Archer L1 bowman           8,1    hp 17/17  Hill  group mill
 A  captain          Alder Fenn L1 cadet        7,2    hp 13/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 9/24   Plain  group mill, guard, awake
 > attack captain mill_bandit-1
-Forecast Alder Fenn -> Mill Bandit: dmg 10 hit 87% crit 3%; counter: dmg 9 hit 83% crit 2%
+Forecast Alder Fenn -> Mill Bandit: acc 87% dmg 10 crit 3%; counter: acc 83% dmg 9 crit 2%
 Alder Fenn attacks Mill Bandit
   Alder Fenn hits Mill Bandit for 10 (hp 0)
   Alder Fenn hp 13, Mill Bandit hp 0
@@ -644,7 +644,7 @@ A  captain          Alder Fenn L2 cadet        7,2    hp 14/23  Plain  captain  
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack archer-1 captain
-Forecast Archer 1 -> Alder Fenn: dmg 5 hit 65% crit 0%; counter: none
+Forecast Archer 1 -> Alder Fenn: acc 65% dmg 5 crit 0%; counter: none
 Archer 1 attacks Alder Fenn
   Archer 1 hits Alder Fenn for 5 (hp 9)
   Archer 1 hp 17, Alder Fenn hp 9
@@ -667,8 +667,8 @@ Old Mill Road  turn 8 of 12  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           8,1    hp 17/17  Hill  group mill, guard, awake
 A  captain          Alder Fenn L2 cadet        7,2    hp 9/23   Plain  captain
 > forecast captain archer-1 art cleave from 8,2
-Forecast Alder Fenn -> Archer 1 from 8,2 (Hill): dmg 16 hit 74% crit 4%; counter: none
-  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss
+Forecast Alder Fenn -> Archer 1 from 8,2 (Hill): acc 74% dmg 16 crit 4%; counter: none
+  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 32 uses, 2 of them hit or miss
 > move captain 8,2
 Alder Fenn moves 7,2 -> 8,2
 Old Mill Road  turn 8 of 12  player phase  rout  recall 3
@@ -687,7 +687,7 @@ Old Mill Road  turn 8 of 12  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           8,1    hp 17/17  Hill  group mill, guard, awake
 A  captain          Alder Fenn L2 cadet        8,2    hp 9/23   Hill  captain
 > attack captain archer-1
-Forecast Alder Fenn -> Archer 1: dmg 11 x2 hit 74% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 1: acc 74% dmg 11 x2 crit 4%; counter: none
 Alder Fenn attacks Archer 1
   Alder Fenn misses Archer 1
   Alder Fenn hits Archer 1 for 11 (hp 6)
@@ -714,7 +714,7 @@ A  captain          Alder Fenn L2 cadet        8,2    hp 9/23   Hill  captain  d
 enemy: move archer-1 6,2
 Archer 1 moves 8,1 -> 6,2 via 7,1 6,1
 enemy: attack archer-1 captain
-Forecast Archer 1 -> Alder Fenn: dmg 4 hit 47% crit 0%; counter: none
+Forecast Archer 1 -> Alder Fenn: acc 47% dmg 4 crit 0%; counter: none
 Archer 1 attacks Alder Fenn
   Archer 1 hits Alder Fenn for 4 (hp 5)
   Archer 1 hp 6, Alder Fenn hp 5
@@ -754,10 +754,10 @@ Old Mill Road  turn 9 of 12  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           6,2    hp 6/17   Fort (heals 20 percent, 3 hp)  group mill, guard, awake
 A  captain          Alder Fenn L2 cadet        7,2    hp 5/23   Plain  captain
 > forecast captain archer-1 art cleave
-Forecast Alder Fenn -> Archer 1: dmg 15 hit 67% crit 4%; counter: none
-  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 30 uses, 2 of them hit or miss
+Forecast Alder Fenn -> Archer 1: acc 67% dmg 15 crit 4%; counter: none
+  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 30 uses, 2 of them hit or miss
 > attack captain archer-1
-Forecast Alder Fenn -> Archer 1: dmg 10 x2 hit 67% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 1: acc 67% dmg 10 x2 crit 4%; counter: none
 Alder Fenn attacks Archer 1
   Alder Fenn misses Archer 1
   Alder Fenn hits Archer 1 for 10 (hp 0)

@@ -796,27 +796,27 @@ public static class Resolver
         var known = content.ArtsOf(unit.Unit).FirstOrDefault(a => a.Ability.Id == artId);
         if (known.Art is null)
         {
-            return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no art '{artId}'"));
+            return (null, new Rejection(RejectionReason.NoSuchArt, $"{unit.Id} knows no technique '{artId}'"));
         }
 
         var (ability, art) = known;
         var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
-        var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} art and {weapon.Name} is a {Lower(weapon.Type)}"
+        var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} technique and {weapon.Name} is a {Lower(weapon.Type)}"
             : art.Item is { } item && item != weapon.Id ? $"{ability.Name} is declared only with {content.ItemName(item)}"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
             : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
-            : uses == 0 ? $"{weapon.Name} is broken and cannot pay for an art"
+            : uses == 0 ? $"{weapon.Name} is broken and cannot pay for a technique"
             : uses < art.UsesNeeded ? $"{ability.Name} costs {art.UsesNeeded} uses with the strike and {weapon.Name} has {uses} left"
             : null;
         return why is null ? (art, null) : (null, new Rejection(RejectionReason.ArtRefused, $"{unit.Id} cannot use {ability.Name}: {why}"));
 
-        static string Lower(WeaponType type) => type.ToString().ToLowerInvariant();
+        static string Lower(WeaponType type) => type.Label();
         static string Times(int cap) => cap == 1 ? "once" : $"{cap} times";
     }
 
     /// <summary>The refusal's reason when a unit's rank is below a weapon's (issue 67): the unit's rank in the type and the rank the weapon needs.</summary>
     public static string RankShort(Unit unit, Weapon weapon) =>
-        $"rank {unit.Skill.Rank(weapon.Type)} in {weapon.Type.ToString().ToLowerInvariant()}, and {weapon.Name} needs {weapon.Rank}";
+        $"rank {unit.Skill.Rank(weapon.Type)} in {weapon.Type.Label()}, and {weapon.Name} needs {weapon.Rank}";
 
     /// <summary>
     /// Section 5's durability: every strike a unit made in the combat, landed or not,

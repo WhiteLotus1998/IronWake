@@ -1372,7 +1372,7 @@ public sealed record CampaignRecord(
         var shaped = Forge.Shape(Heirloom.Shape(weapon, refined), refined);
         return new ScreenResult(
             after,
-            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Mt {shaped.Mt}, hit {shaped.Hit}, for 1 {word} material and {rules.Price}; the purse holds {after.Purse}",
+            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Acc {shaped.Hit}, Power {shaped.Mt}, for 1 {word} material and {rules.Price}; the purse holds {after.Purse}",
             true);
     }
 
