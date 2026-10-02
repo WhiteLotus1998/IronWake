@@ -56,15 +56,25 @@ You are Code, the Builder partner on Ironwake. Follow CLAUDE.md,
 especially "Session protocol", "Decide vs. escalate", and "Fun is a
 deliverable".
 
+Read docs/ROUTINES.md section 2 at run time, the prompt and the
+"Race guards" below it, and follow the file where it differs from
+this stored text: the file is newer.
+
 Start by reading docs/STATE.md, docs/DIALOGUE.md, docs/DESIGN.md. Then
 read the Design Table issue. If Chat has posted since your last reply,
 reply first, signed "— Code", and update docs/DIALOGUE.md if anything
-was agreed. Before taking an issue: if any open issue took
-`in-progress` less than an hour ago, another Builder (a chained run,
-or the previous slot) is on it right now; stop here without taking
-one. Otherwise pick the highest-priority open issue labeled `ready`
-that is not `blocked` or `in-progress` (priority: `bug`, then lowest
-phase, then lowest number) and run the session protocol on it: review
+was agreed. Before taking an issue, apply the race guards: while the
+repo variable IRONWAKE_CHAIN is `on`, a scheduled slot waits 90
+seconds and takes an issue only if no open issue took `in-progress` in
+the last hour, no Builder PR (`issue/`, `claude/issue-`, `experiment/`)
+is open, and the newest Builder merge is more than 30 minutes old;
+otherwise it stops here. Then pick the highest-priority open issue
+labeled `ready` that is not `blocked` or `in-progress` (priority:
+`bug`, then lowest phase, then lowest number), claim it (label
+`in-progress`, post a one-line claim comment naming this run, wait 30
+seconds, re-read the issue's comments; if an earlier claim from
+another run is there, drop the work unpushed and exit), and run the
+session protocol on it: review
 against the design and the code, comment findings, build on a branch
 with tests, green build + tests + Sim smoke, update STATE.md and any
 decision records, open a PR with Decided / Unsure / Next, auto-merge
@@ -86,6 +96,16 @@ another issue in; ship one fewer instead. If you run out of budget,
 commit what's green, write exactly where you stopped in STATE.md, open
 the PR as a draft.
 ```
+
+### Race guards (#735, DECISIONS/0169; provisional)
+
+At 06:06 UTC on 2026-10-02 a cron slot and a chained run both read the queue before either labeled, built #704 slice 4 twice and rotated the Table twice (#732). The label alone cannot settle that tie, because two runs can both read the queue before either writes it. These three guards bind every Builder body, cron or chained, and every Code body that rotates the Table.
+
+1. **Chain on, the slot defers.** While `IRONWAKE_CHAIN` is `on`, a scheduled Builder slot does housekeeping and the Table first, then waits 90 seconds, and takes an issue only if all three hold: no open issue took `in-progress` in the last hour; no Builder PR (`issue/`, `claude/issue-`, `experiment/`) is open; the newest Builder merge into `main` is more than 30 minutes old. If any fails, the chain owns the queue and the slot exits without taking one. With the chain off, the slot works the queue as the prompt says.
+2. **Claim, then verify.** Every Builder body, chained or cron, claims an issue in this order: label it `in-progress`; post a one-line claim comment on it naming the run (the slot's New York time, or "chain run woken by #N's merge") and the UTC time; wait 30 seconds; re-read the issue's comments. If a claim comment from another run carries an earlier timestamp, that run owns the issue: drop the work unpushed and exit (a chained run) or go back to the queue (a cron run, which may take the next issue under rule 1). Comment timestamps settle the tie the label cannot; GitHub orders them, not the runs' clocks.
+3. **Rotation re-checks.** A body rotating the Design Table (CLAUDE.md, "Where we talk") re-lists open `design-table` issues immediately before opening the next one, not only at the start of the run. If one opened since, it opens nothing and posts there. If two are ever open, the older stays and the newer is closed as a duplicate pointing to it (#732 was).
+
+**The stored prompt.** The prompt above is what Lotus's stored Builder routine should carry; the lines to paste once are its opening paragraph ("Read docs/ROUTINES.md section 2 at run time ...") and the sentences from "Before taking an issue, apply the race guards" to "and run the session protocol on it", placed just before the step that picks an issue (the paragraph that opens "The loop." in the stored text as of 2026-10-02, which carries no `in-progress` check at all). Until it is pasted the stored prompt carries neither, and what carries the guards is `docs/STATE.md`: every Builder prompt, cron or chained, starts by reading it, and its standing note sends the run here. Rule 2 is the one that holds even against a run that skims: a chained run and a slot that both take one issue both claim, and the later claim loses on GitHub's timestamps. The paste is a convenience ask, not a fork; after it, later changes to this section land without another paste.
 
 ---
 
@@ -195,7 +215,7 @@ comments.
 
 ## 6. The Builder chain (`.github/workflows/builder-chain.yml`)
 
-When a Builder PR (an `issue/`, `claude/issue-` or `experiment/` branch) merges, the workflow fires the next Builder run (after an `issue/` merge that leaves the queue empty, one experiment run; after an `experiment/` merge with the queue empty, nothing), so the Builder runs back to back instead of on the clock. In a chained run the Builder does exactly one issue and exits (the wake text says so), which keeps chained runs from overlapping each other; the hourly cron slots stay as the backstop. Chain against cron is guarded from both sides, and the two guards live in different places (#154). The workflow will not fire while any open issue other than the merged branch's own took `in-progress` less than an hour ago, since a run's budget is about 50 minutes and a label that young means a Builder may be alive on it; a dead run's stale label delays the chain by at most an hour, which the workflow logs. A cron slot landing on a chained run is stopped only by the Builder itself: section 2's prompt carries the same rule, stop without taking an issue if any open issue took `in-progress` under an hour ago, and that line protects nothing until Lotus pastes it into the stored prompt, so until then the `in-progress` label is the only thing between a chained run and a slot, and both can read the queue before either has labeled. The chain runs only while the repo variable `IRONWAKE_CHAIN` is `on` and the clock is before `IRONWAKE_CHAIN_UNTIL` (UTC), and never when there is no ready, unblocked issue (a count that includes every phase-3 issue, so in practice the deadline is the stop) or an issue labeled `fork` is open. Secrets: `IRONWAKE_BUILDER_URL` and `IRONWAKE_BUILDER_TOKEN`. Start it with `gh variable set IRONWAKE_CHAIN --body on`, set the deadline, and fire one run by hand (or `gh workflow run builder-chain.yml`); it stops itself. Lotus asked for it on 2026-09-25: let the process cook, not pass by pass.
+When a Builder PR (an `issue/`, `claude/issue-` or `experiment/` branch) merges, the workflow fires the next Builder run (after an `issue/` merge that leaves the queue empty, one experiment run; after an `experiment/` merge with the queue empty, nothing), so the Builder runs back to back instead of on the clock. In a chained run the Builder does exactly one issue and exits (the wake text says so), which keeps chained runs from overlapping each other; the hourly cron slots stay as the backstop. Chain against cron is guarded from both sides, and the two guards live in different places (#154). The workflow will not fire while any open issue other than the merged branch's own took `in-progress` less than an hour ago, since a run's budget is about 50 minutes and a label that young means a Builder may be alive on it; a dead run's stale label delays the chain by at most an hour, which the workflow logs. A cron slot landing on a chained run is stopped only by the Builders themselves, by section 2's race guards (#735): while the chain is on the slot defers (rule 1), every Builder claims with a comment and re-reads before building (rule 2), and a rotation re-checks for an open Table first (rule 3). A chained run follows the guards from the repo, since STATE.md's standing note points every Builder here; a cron slot follows them once Lotus pastes section 2's prompt into the stored routine (pending, STATE.md), and until then the chained run's claim comment is what a slot meets. The chain runs only while the repo variable `IRONWAKE_CHAIN` is `on` and the clock is before `IRONWAKE_CHAIN_UNTIL` (UTC), and never when there is no ready, unblocked issue (a count that includes every phase-3 issue, so in practice the deadline is the stop) or an issue labeled `fork` is open. Secrets: `IRONWAKE_BUILDER_URL` and `IRONWAKE_BUILDER_TOKEN`. Start it with `gh variable set IRONWAKE_CHAIN --body on`, set the deadline, and fire one run by hand (or `gh workflow run builder-chain.yml`); it stops itself. Lotus asked for it on 2026-09-25: let the process cook, not pass by pass.
 
 Heartbeat and Table restart (2026-09-26). A merged `table/` PR runs the same restart check, because issues are filed from Table PRs and GitHub often skips scheduled runs (the 20-minute schedule ran once in five hours on its first day). The workflow also runs every 20 minutes on a schedule, best-effort. That run only restarts a stalled chain: it waits 90 seconds, then stands down if an issue is in progress or a Builder PR is open (a woken Builder claims its issue within about 30 seconds; the earlier 50- and 15-minute recent-merge windows stalled the chain after merges that woke nobody), and it never spikes an experiment on an empty queue. It exists because issues filed by a Table PR wake nothing, and the chain once sat idle six hours with two issues ready. The trigger set and why none needs an author guard are in DECISIONS/0050's amendment of 2026-09-27 (issue 400).
 
