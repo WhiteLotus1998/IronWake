@@ -101,6 +101,34 @@ internal static class Fixture
     /// </summary>
     public static string CurveFreeContentDirectory() => CurveFree.Value;
 
+    private static readonly Lazy<string> DoublingStrike = new(() => WithoutSingleStrike(CopyContentAsIs("ironwake-doubling-strike-")));
+
+    /// <summary>
+    /// A copy of the real content directory whose arts all may double (<see cref="WithoutSingleStrike"/>)
+    /// and nothing else changed, for a play journaled while Full Measure still doubled (issue 739). Made once per test run.
+    /// </summary>
+    public static string DoublingStrikeContentDirectory() => DoublingStrike.Value;
+
+    /// <summary>
+    /// Takes <c>single</c> off every art in <c>abilities.json</c> (issue 739): a play journaled before
+    /// an art struck once doubled with it, and a transcript is a record of the build it was played on.
+    /// </summary>
+    public static string WithoutSingleStrike(string target)
+    {
+        var abilitiesPath = Path.Combine(target, "abilities.json");
+        var abilities = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(abilitiesPath))!;
+        foreach (var entry in abilities["abilities"]!.AsArray())
+        {
+            if (entry!["effect"] is System.Text.Json.Nodes.JsonObject effect)
+            {
+                effect.Remove("single");
+            }
+        }
+
+        File.WriteAllText(abilitiesPath, abilities.ToJsonString());
+        return target;
+    }
+
     private static readonly Lazy<string> KeepCampaign = new(CopyWithKeepCampaign);
 
     /// <summary>

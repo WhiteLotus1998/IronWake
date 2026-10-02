@@ -28,9 +28,9 @@ public static class Combat
 
     public static int AttackSpeed(Combatant unit) => unit.Stats.Spd - Burden(unit);
 
-    /// <summary>Attack speed at least <see cref="DoubleThreshold"/> over the target's; never for a side the pair rule holds (<see cref="Combatant.PairHeld"/>).</summary>
+    /// <summary>Attack speed at least <see cref="DoubleThreshold"/> over the target's; never for a side the pair rule holds (<see cref="Combatant.PairHeld"/>) or one striking with a single-strike art (<see cref="Combatant.SingleStrike"/>).</summary>
     public static bool Doubles(Combatant attacker, Combatant target) =>
-        !attacker.PairHeld && AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
+        !attacker.PairHeld && !attacker.SingleStrike && AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
 
     /// <summary>The weapon's Mt as this side fights with it: the content number, less 5 (floored at zero) when the weapon is broken.</summary>
     public static int Mt(Combatant attacker)

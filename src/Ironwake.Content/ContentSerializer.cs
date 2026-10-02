@@ -358,6 +358,11 @@ public static class ContentSerializer
                     writer.WriteBoolean("costsNextPhase", true);
                 }
 
+                if (art.Single)
+                {
+                    writer.WriteBoolean("single", true);
+                }
+
                 if (art.Item is { } item)
                 {
                     writer.WriteString("item", item);

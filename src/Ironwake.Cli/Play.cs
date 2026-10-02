@@ -1411,7 +1411,8 @@ public sealed class PlaySession
     /// and the most uses the attack spends against the uses the weapon has, the art's cost
     /// included, since that is paid whether the strike lands or not. An art with a per-map cap
     /// says how many uses of it are left this map, and one that costs the next phase says so
-    /// (issue 636), since a rule the player pays for is printed where it is chosen.
+    /// (issue 636), since a rule the player pays for is printed where it is chosen. One that
+    /// strikes once says <c>x1, never doubles</c> (issue 739).
     /// </summary>
     private static string ArtLine(GameContent content, BattleUnit unit, CombatForecast forecast, int? slot, string art)
     {
@@ -1421,6 +1422,7 @@ public sealed class PlaySession
         var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
         return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
             + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
+            + (((CombatArtEffect)ability.Effect).Single ? "; x1, never doubles" : "")
             + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "");
     }
 

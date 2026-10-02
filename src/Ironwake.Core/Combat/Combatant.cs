@@ -104,6 +104,12 @@ public sealed record Combatant
     /// </summary>
     public bool PairHeld { get; init; }
 
+    /// <summary>
+    /// Whether this side strikes once whatever the speed gap (issue 739): it declared an art
+    /// that carries <see cref="CombatArtEffect.Single"/>. It never doubles (<see cref="Combat.Doubles"/>).
+    /// </summary>
+    public bool SingleStrike { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, and not <see cref="Blind"/>.</summary>
     public bool CanStrike(int distance) => !Blind && Weapon is not null && Weapon.InRange(distance);
 }
