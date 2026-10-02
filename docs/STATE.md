@@ -65,7 +65,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.24 messenger | `docs/samples/signal_road_pass.map` (#680; 0135 amended; Code 680 warm in: a unit held its path, the runner was never struck) | Chat's cold play of the pass |
 | 13.22 break | `docs/samples/saltmarsh_ford_break.map` (#606, 0112; Code 661 on the Tollgate and 667 here in, nothing broke on either) | Chat's cold play on Saltmarsh |
 | 13.18 signatures | `docs/samples/saltmarsh_ford_brace_signatures.map` (#486, 0097; Code 563, Chat cold 113 and 587 in: Teodor and Wren's Canto kept, talk unread, the ledger at 50 killed; at 65 since #540) | a cold replay at 65, kept if a command is taken for the ledger |
-| 13.25 rotten planks | `docs/samples/rotten_bridge_planks.map` (0179; Code 251 warm in: Dunstan sent the long way for the wear; the cut was free) | Chat's cold play (#780 round 237) |
+| 13.25 rotten planks | `docs/samples/rotten_bridge_planks.map` (0179; Code 251 warm, Chat 4 semi-cold 7/7/8 in: the ally-held relay met clause 1; the cut free on this board) | #782 (route tie-break, `move via`), then #783's straggler sample played cold |
 | 13.14 brace | kept (0084, round 121): spike on `harrow_weir_brace.map`, keep round on `saltmarsh_ford_brace.map` (Code 449, Chat cold 521) | in; shipped on Saltmarsh (0091); holds read on the next brace play with a hold |
 
 Kept on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions (0044), the windup (0094), overwatch (0098, 0103), cover (0099).
