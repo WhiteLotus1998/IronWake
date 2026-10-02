@@ -100,12 +100,13 @@ public static class Combat
     public static int CritAvoid(Combatant target) => target.Stats.Lck + target.CritAvoidModifier;
 
     /// <summary>
-    /// Crit less crit avoid, clamped to 0..100, with the on-combat ability modifiers added as for <see cref="HitChance"/>;
+    /// Crit less crit avoid, clamped to 0..100, with the on-combat ability modifiers added as for <see cref="HitChance"/>
+    /// and the weapon's bonus against the target's movement type (issue 703, <see cref="Weapon.CritBonusAgainst"/>);
     /// 0 when the pair rule holds the attacker (<see cref="Combatant.PairHeld"/>).
     /// </summary>
     public static int CritChance(Combatant attacker, Combatant target) =>
         attacker.PairHeld ? 0 : Math.Clamp(
-            Crit(attacker) + AbilityRules.Against(attacker, target).Crit
+            Crit(attacker) + Armed(attacker).CritBonusAgainst(target.Movement) + AbilityRules.Against(attacker, target).Crit
             - CritAvoid(target) - AbilityRules.Against(target, attacker).CritAvoid,
             0,
             100);

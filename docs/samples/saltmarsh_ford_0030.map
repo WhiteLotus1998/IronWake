@@ -4,6 +4,7 @@ win: rout
 turn_limit: 18
 recall: 3
 enemy_level: 2
+effective_bows: on
 
 ....^^....F...
 ..^....nn.....

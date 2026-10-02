@@ -58,6 +58,8 @@ public class ProtocolJsonTests
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
         { new UnitChilled("teodor", "rider-1", Side.Player, Next: true), """{"type":"unitChilled","unit":"teodor","by":"rider-1","side":"player","next":true}""" },
+        { new UnitGrounded("wingrider-1", "ottilie", Side.Enemy), """{"type":"unitGrounded","unit":"wingrider-1","by":"ottilie","side":"enemy"}""" },
+        { new UnitGrounded("rook", "archer-1", Side.Player, Next: true), """{"type":"unitGrounded","unit":"rook","by":"archer-1","side":"player","next":true}""" },
         { new HeirloomTurned("teodor", "family_lance", 2, "sound"), """{"type":"heirloomTurned","unit":"teodor","item":"family_lance","stage":2,"stageId":"sound"}""" },
         { new BlowRaised("toll_mauler-1", "teodor", A), """{"type":"blowRaised","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2}}""" },
         { new BlowLanded("toll_mauler-1", "teodor", A, 11, 9), """{"type":"blowLanded","unit":"toll_mauler-1","target":"teodor","at":{"x":1,"y":2},"damage":11,"targetHpAfter":9}""" },

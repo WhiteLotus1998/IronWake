@@ -220,7 +220,7 @@ public sealed class HeuristicPlayer : IPlayer
             return new Command[] { Idle(state, content, unit) };
         }
 
-        var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, movement);
+        var destination = Approach(state, content, unit, weapon, reach, enemies, enemyReach, Grounding.MovementOf(unit, content));
         return WithMove(unit, destination ?? unit.At, Idle(state, content, unit, destination));
     }
 

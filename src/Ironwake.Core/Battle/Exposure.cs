@@ -49,7 +49,7 @@ public static class Exposure
         var me = moved.ToCombatant(board, content, countering: true);
         foreach (var enemy in board.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player))
         {
-            var movement = content.Class(enemy.Unit.ClassId).Movement;
+            var movement = Grounding.MovementOf(enemy, content);
             var mayMove = board.EffectiveBehavior(enemy, content) == Behavior.Aggressive;
             var reach = board.ReachOf(enemy, content);
             var worst = (Plain: 0, Crit: 0);
@@ -69,7 +69,7 @@ public static class Exposure
                         continue;
                     }
 
-                    var striker = content.CombatantOf(enemy.Unit, weapon, board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content)) with { PairHeld = PairRule.Holds(board, enemy, moved) };
+                    var striker = content.CombatantOf(enemy.Unit, Grounding.ForMap(board.Map, weapon), board.Map.TerrainAt(from, content), enemy.Hp, 0, armed.WeaponBroken(content)) with { PairHeld = PairRule.Holds(board, enemy, moved) };
                     var forecast = Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme);
                     var here = Worst(forecast.Attacker);
                     if (!found || here.Plain > worst.Plain || (here.Plain == worst.Plain && here.Crit > worst.Crit))
@@ -124,7 +124,7 @@ public static class Exposure
                         continue;
                     }
 
-                    var striker = content.CombatantOf(player.Unit, weapon, board.Map.TerrainAt(from, content), player.Hp, 0, player.WithSlotInFront(arm).WeaponBroken(content));
+                    var striker = content.CombatantOf(player.Unit, Grounding.ForMap(board.Map, weapon), board.Map.TerrainAt(from, content), player.Hp, 0, player.WithSlotInFront(arm).WeaponBroken(content));
                     var here = Worst(Combat.Forecast(striker, me, from.DistanceTo(tile), state.Scheme).Attacker).Plain;
                     tiles.Add(from);
                     worst = Math.Max(worst, here);

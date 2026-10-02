@@ -948,7 +948,8 @@ public sealed class PlaySession
 
                 var (with, counterWith) = Arms(_content, attacker!, target!, attack.Slot, attacker!.At);
                 var (chills, counterChills) = Chills(_content, attacker!, target!, attack.Slot);
-                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills));
+                var (grounds, counterGrounds) = Grounds(board.Map, _content, attacker!, target!, attack.Slot);
+                _out.WriteLine(ForecastLine(attacker!, target!, forecast, "", with, counterWith, RaisesWith(_state, _content, attacker!, attack.Slot), names, chills, counterChills, grounds, counterGrounds));
                 PrintRivalry(target!, countering: true);
                 if (SwornLine(attacker!, target!, names) is { } sworn)
                 {
@@ -1354,7 +1355,8 @@ public sealed class PlaySession
         var raises = RaisesWith(state, content, unit, slot);
         var names = UnitNames.Of(state, content);
         var (chills, counterChills) = Chills(content, unit, target, slot);
-        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills) };
+        var (grounds, counterGrounds) = Grounds(state.Map, content, unit, target, slot);
+        var lines = new List<string> { ForecastLine(unit, target, forecast, where, with, counterWith, raises, names, chills, counterChills, grounds, counterGrounds) };
         if (LethalCounterLine(unit, target, forecast, raises, names) is { } lethal)
         {
             lines.Add(lethal);
@@ -1662,7 +1664,7 @@ public sealed class PlaySession
     /// <paramref name="where"/> is the tile suffix of a forecast asked from a tile the
     /// unit has not moved to (issue 151), empty for a forecast on the standing board.
     /// </summary>
-    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false)
+    public static string ForecastLine(BattleUnit unit, BattleUnit target, CombatForecast forecast, string where = "", string with = "", string counterWith = "", bool raises = false, UnitNames? names = null, bool chills = false, bool counterChills = false, bool grounds = false, bool counterGrounds = false)
     {
         names ??= UnitNames.None;
         if (raises)
@@ -1670,8 +1672,20 @@ public sealed class PlaySession
             return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {RaiseText(forecast.Attacker)}; counter: none";
         }
 
-        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + (counterChills ? " chills" : "") : ": none")}";
+        return $"Forecast {names[unit.Id]} -> {names[target.Id]}{where}{with}: {StrikeText(forecast.Attacker)}{GroundsText(forecast.Attacker, grounds)}{(chills ? " chills" : "")}; counter{(forecast.Defender.Strikes ? counterWith + ": " + StrikeText(forecast.Defender) + GroundsText(forecast.Defender, counterGrounds) + (counterChills ? " chills" : "") : ": none")}";
     }
+
+    /// <summary>The <c> (grounds)</c> after a side's crit column (issue 703): only when its crit would ground the other side and can happen.</summary>
+    private static string GroundsText(SideForecast side, bool grounds) => grounds && side.CritChance > 0 ? " (grounds)" : "";
+
+    /// <summary>
+    /// Whether each side of a forecast would ground the other on a crit (issue 703, <see cref="Grounding"/>):
+    /// the attacker with <paramref name="slot"/> (else its equipped weapon) against the target's movement,
+    /// the target with the weapon it holds in front against the attacker's.
+    /// </summary>
+    public static (bool Grounds, bool CounterGrounds) Grounds(MapDefinition map, GameContent content, BattleUnit unit, BattleUnit target, int? slot) =>
+        (Grounding.Grounds(map, Resolver.ChooseWeapon(unit, content, slot).Weapon, content.Class(target.Unit.ClassId).Movement),
+         Grounding.Grounds(map, target.EquippedWeapon(content), content.Class(unit.Unit.ClassId).Movement));
 
     /// <summary>
     /// Whether each side of a forecast strikes with frozen iron (issue 702, <see cref="Frost"/>): the
@@ -1933,6 +1947,11 @@ public sealed class PlaySession
         if (Frost.CardLine(state, unit) is { } chilled)
         {
             lines.Add("  " + chilled);
+        }
+
+        if (Grounding.CardLine(state, unit) is { } grounded)
+        {
+            lines.Add("  " + grounded + (Grounding.Stranded(state, unit, content) ? ", stranded: no move, may still act" : ", moves on foot"));
         }
 
         if (unit.FallingBack)
@@ -2408,6 +2427,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
+            case UnitGrounded g:
+                return $"{names[g.UnitId]} is grounded: moves on foot until {Frost.Until(g.Side, g.Next)}";
             case HeirloomTurned t:
                 return $"{content.ItemName(t.ItemId)} turns in {names[t.UnitId]}'s hands: {t.StageId}. {Heirloom.Shape(content.Weapon(t.ItemId), new ItemStack(t.ItemId, 0) { Stage = t.Stage }).Description}";
             case WatchTaken w:

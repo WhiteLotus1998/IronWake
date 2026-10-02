@@ -1612,6 +1612,24 @@ public static class ContentLoader
                 throw node.Error("effective", "must not repeat a movement type");
             }
 
+            var critAgainst = node.StringArrayOrEmpty("critAgainst")
+                .Select(e => node.ParseEnum<MovementType>("critAgainst", e)).ToList();
+            if (critAgainst.Distinct().Count() != critAgainst.Count)
+            {
+                throw node.Error("critAgainst", "must not repeat a movement type");
+            }
+
+            var critBonus = node.IntOr("critBonus", 0);
+            if (critAgainst.Count > 0 && (critBonus < 1 || critBonus > 100))
+            {
+                throw node.Error("critBonus", "must be 1..100 when critAgainst names a movement type");
+            }
+
+            if (critAgainst.Count == 0 && node.Has("critBonus"))
+            {
+                throw node.Error("critBonus", "is only valid when critAgainst names a movement type");
+            }
+
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
 
             builder.Add(node.Entry!, new Weapon(
@@ -1639,6 +1657,8 @@ public static class ContentLoader
                 Heirloom = heirloom,
                 Glass = node.BoolOr("glass", false),
                 FrozenIron = node.BoolOr("frozenIron", false),
+                CritAgainst = ValueList<MovementType>.From(critAgainst),
+                CritBonus = critBonus,
             });
         }
 

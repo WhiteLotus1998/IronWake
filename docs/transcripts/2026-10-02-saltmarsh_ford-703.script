@@ -1,0 +1,51 @@
+move teodor 10,7
+wait teodor
+move wren 8,7
+wait wren
+move captain 8,8
+wait captain
+move ottilie 7,9
+wait ottilie
+end
+move teodor 10,5
+wait teodor
+move wren 9,5
+wait wren
+move captain 9,6
+wait captain
+move ottilie 9,7
+wait ottilie
+end
+recall 14
+move teodor 10,6
+wait teodor
+move wren 9,5
+wait wren
+move captain 8,6
+wait captain
+move ottilie 8,7
+wait ottilie
+end
+move ottilie 11,6
+wait ottilie
+wait teodor
+wait wren
+wait captain
+end
+move ottilie 12,4
+attack ottilie wingrider-1
+move teodor 11,5
+wait teodor
+move wren 10,5
+wait wren
+move captain 9,6
+wait captain
+end
+move ottilie 12,5
+attack ottilie wingrider-1
+move teodor 11,4
+attack teodor archer-1
+attack wren archer-1
+move captain 9,5
+wait captain
+end

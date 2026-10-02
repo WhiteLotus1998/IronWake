@@ -781,7 +781,7 @@ public static class EnemyAi
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var there = attacker with { At = from };
-        var me = content.CombatantOf(attacker.Unit, weapon, state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false));
+        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false));
         var them = target.Answering(state, content, from, there);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
@@ -839,7 +839,7 @@ public static class EnemyAi
         BattleState state, GameContent content, BattleUnit unit, Weapon weapon, Reach reach,
         IReadOnlyList<BattleUnit> players, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
-        var movement = content.Class(unit.Unit.ClassId).Movement;
+        var movement = Grounding.MovementOf(unit, content);
         Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
 
         Distances? chosen = null;
@@ -866,7 +866,7 @@ public static class EnemyAi
     /// </summary>
     public static Coord? March(BattleState state, GameContent content, BattleUnit unit, Front front, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
     {
-        var movement = content.Class(unit.Unit.ClassId).Movement;
+        var movement = Grounding.MovementOf(unit, content);
         Occupant GroundOnly(Coord at) =>
             at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
         var distances = Movement.DistancesTo(state.Map, content, front.Tiles, movement, GroundOnly);
@@ -914,7 +914,7 @@ public static class EnemyAi
             return null;
         }
 
-        var movement = content.Class(unit.Unit.ClassId).Movement;
+        var movement = Grounding.MovementOf(unit, content);
         Occupant GroundOnly(Coord at) =>
             at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
         var distances = Movement.DistancesTo(map, content, objective, movement, GroundOnly);
@@ -962,8 +962,8 @@ public static class EnemyAi
 
     /// <summary>
     /// The tiles from which <paramref name="unit"/>'s weapon reaches <paramref name="target"/>
-    /// and on which it could end a move: inside the map, enterable by its movement type,
-    /// and occupied by nobody but itself.
+    /// and on which it could end a move: inside the map, enterable by its movement type (or its own
+    /// tile, where a grounded flier may be stranded, issue 703), and occupied by nobody but itself.
     /// </summary>
     public static IEnumerable<Coord> AttackTiles(BattleState state, GameContent content, BattleUnit unit, Weapon weapon, BattleUnit target, MovementType movement)
     {
@@ -977,7 +977,7 @@ public static class EnemyAi
                     continue;
                 }
 
-                if (!state.Map.TerrainAt(tile, content).IsPassable(movement))
+                if (tile != unit.At && !state.Map.TerrainAt(tile, content).IsPassable(movement))
                 {
                     continue;
                 }

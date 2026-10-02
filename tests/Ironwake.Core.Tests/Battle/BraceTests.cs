@@ -409,7 +409,8 @@ public class BraceTests
     /// <summary>
     /// Issue 131, the north cut (DECISIONS/0093): the shipped Saltmarsh Ford is the braced file
     /// (<c>docs/samples/saltmarsh_ford_0091.map</c>) with only the two enter lines moved from the
-    /// east crossing's mouth to the north bank east of the walls, and canonical.
+    /// east crossing's mouth to the north bank east of the walls, and canonical; the braced copy's
+    /// <c>effective_bows: on</c> (issue 703) keeps its transcripts and is no part of the cut.
     /// </summary>
     [Fact]
     public void TheShippedSaltmarshIsTheBracedFileWithOnlyTheEnterLineMovedNorth()
@@ -421,7 +422,7 @@ public class BraceTests
         const string North = "enter 7,0 8,0 9,0 11,0 12,0 13,0 9,1 10,1 11,1 12,1 13,1 7,2 8,2 9,2 10,2 11,2 12,2 13,2 ";
 
         Assert.Equal(2, shippedText.Split(North).Length - 1);
-        Assert.Equal(File.ReadAllText(bracedPath).Replace("\r\n", "\n"), shippedText.Replace(North, "enter 10,4 9,4 11,4 10,5 "));
+        Assert.Equal(File.ReadAllText(bracedPath).Replace("\r\n", "\n").Replace("effective_bows: on\n", ""), shippedText.Replace(North, "enter 10,4 9,4 11,4 10,5 "));
         Assert.Equal(shippedText, MapFormat.Write(MapFiles.Load(shippedPath, MapFixture.Content), Starter));
     }
 }

@@ -79,6 +79,13 @@ public sealed record BattleUnit(
     /// </summary>
     public int Chill { get; init; }
 
+    /// <summary>
+    /// The grounding clock (issue 703, <see cref="Grounding"/>): 0 not grounded; 1 a flier landed by a
+    /// bow's crit, its side's next phase not yet begun; 2 that phase under way, cleared when it ends.
+    /// While it is not 0 the unit moves on foot (<see cref="Grounding.MovementOf"/>).
+    /// </summary>
+    public int Grounded { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 
@@ -188,7 +195,7 @@ public sealed record BattleUnit(
 
     /// <summary>This unit as the section 5 formulas see it, on the terrain it stands on, its weapon broken or whole.</summary>
     public Combatant ToCombatant(MapDefinition map, GameContent content) =>
-        content.CombatantOf(Unit, EquippedWeapon(content), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content)) with { Oathbound = map.IsOathbound(this) };
+        content.CombatantOf(Unit, Grounding.ForMap(map, EquippedWeapon(content)), map.TerrainAt(At, content), Hp, 0, WeaponBroken(content)) with { Oathbound = map.IsOathbound(this) };
 
     /// <summary>
     /// This unit as the formulas see it on a board, rivalry's modifiers included (issue 16):
@@ -221,7 +228,7 @@ public sealed record BattleUnit(
             weapon = art.Apply(weapon);
         }
 
-        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit) with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against) };
+        return content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit) with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against) };
     }
 
     /// <summary>

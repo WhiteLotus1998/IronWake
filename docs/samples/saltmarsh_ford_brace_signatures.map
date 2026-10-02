@@ -6,6 +6,7 @@ recall: 3
 enemy_level: 2
 brace: on
 signatures: on
+effective_bows: on
 
 ....^^....F...
 ..^....nn.....

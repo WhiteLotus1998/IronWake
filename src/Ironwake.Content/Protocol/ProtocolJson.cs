@@ -268,6 +268,16 @@ public static class ProtocolJson
                 }
 
                 break;
+            case UnitGrounded g:
+                w.WriteString("unit", g.UnitId);
+                w.WriteString("by", g.ByUnitId);
+                w.WriteString("side", Name(g.Side));
+                if (g.Next)
+                {
+                    w.WriteBoolean("next", true);
+                }
+
+                break;
             case HeirloomTurned t:
                 w.WriteString("unit", t.UnitId);
                 w.WriteString("item", t.ItemId);
@@ -945,6 +955,11 @@ public static class ProtocolJson
             w.WriteNumber("chill", unit.Chill);
         }
 
+        if (unit.Grounded > 0)
+        {
+            w.WriteNumber("grounded", unit.Grounded);
+        }
+
         if (unit.FallingBack)
         {
             w.WriteBoolean("fallingBack", true);
@@ -1104,6 +1119,7 @@ public static class ProtocolJson
             HasFed = e.TryGetProperty("hasFed", out _) && RequiredBool(e, "hasFed"),
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
+            Grounded = OptionalInt(e, "grounded") ?? 0,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
         };
