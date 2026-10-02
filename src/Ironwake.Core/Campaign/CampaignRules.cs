@@ -160,6 +160,9 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The captain's origins (issue 681), in file order; empty when the campaign offers none and the captain is the cast file's.</summary>
     public ValueList<CaptainOrigin> Origins { get; init; } = ValueList<CaptainOrigin>.Empty;
 
+    /// <summary>The support pairs (issue 77), in file order; empty when the campaign has none.</summary>
+    public ValueList<SupportPair> Supports { get; init; } = ValueList<SupportPair>.Empty;
+
     /// <summary>The origin <paramref name="originId"/>, or null when the campaign has none by that id.</summary>
     public CaptainOrigin? Origin(string originId) => Origins.FirstOrDefault(o => o.Id == originId);
 

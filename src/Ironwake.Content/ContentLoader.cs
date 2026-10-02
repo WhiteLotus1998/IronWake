@@ -64,6 +64,7 @@ public static class ContentLoader
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
         ValidateUniqueClasses(files, classes, cast, campaign);
+        ValidateSameSexRomance(files, campaign, pronouns);
         var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
         if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
         {
@@ -87,6 +88,25 @@ public static class ContentLoader
         }
 
         return content;
+    }
+
+    /// <summary>
+    /// Round 192's floor on supports (issue 77): once any pair is listed, at least one romance is
+    /// between two recruits who share a pronoun, neither of them the captain.
+    /// </summary>
+    private static void ValidateSameSexRomance(ContentFiles files, CampaignRules campaign, ImmutableSortedDictionary<string, Pronoun> pronouns)
+    {
+        if (campaign.Supports.Count == 0)
+        {
+            return;
+        }
+
+        var found = campaign.Supports.Any(p => p.Kind == SupportKind.Romance
+            && pronouns.TryGetValue(p.A, out var a) && pronouns.TryGetValue(p.B, out var b) && a == b);
+        if (!found)
+        {
+            throw new ContentException(files.Campaign!.Name, null, "supports", "no romance between two recruits who share a pronoun; round 192 asks for at least one");
+        }
     }
 
     /// <summary>
@@ -506,7 +526,110 @@ public static class ContentLoader
             Keep = keep,
             Forge = forge,
             Origins = ParseOrigins(root, captain),
+            Supports = ParseSupports(root, castUnits),
         };
+    }
+
+    /// <summary>
+    /// The optional <c>supports</c> array (issue 77): each pair an <c>a</c> and a <c>b</c>, two
+    /// different cast members listed once in either order, and a <c>kind</c>, one of
+    /// <see cref="SupportKind"/>. A pair with the captain may carry <c>romance</c>, the captain
+    /// pronouns the recruit can romance, and its own kind is then never a romance; a pair between
+    /// two recruits carries none. Once any pair is listed, every recruit has exactly one pair with
+    /// the captain and three or four with other recruits (round 192), and no two of a recruit's
+    /// pairs share a kind, a captain pair that can be a romance counting as one. The captain, with
+    /// a pair per recruit, is exempt.
+    /// </summary>
+    private static ValueList<SupportPair> ParseSupports(EntryNode root, IReadOnlyList<Unit> castUnits)
+    {
+        var pairs = new List<SupportPair>();
+        var castIds = castUnits.Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
+        var captainId = castUnits.Count > 0 ? castUnits[0].Id : null;
+        var index = 0;
+        foreach (var element in root.ArrayOrEmpty("supports"))
+        {
+            var node = new EntryNode(root.File, "supports[" + index + "]", element);
+            if (element.ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error(null, "must be an object");
+            }
+
+            var a = node.String("a");
+            var b = node.String("b");
+            node = node.WithEntry(a + "/" + b);
+            foreach (var (field, id) in new[] { ("a", a), ("b", b) })
+            {
+                if (!castIds.Contains(id))
+                {
+                    throw node.Error(field, $"'{id}' is not a cast member");
+                }
+            }
+
+            if (a == b)
+            {
+                throw node.Error("b", "a pair is two different cast members");
+            }
+
+            if (pairs.Any(p => p.Involves(a) && p.Involves(b)))
+            {
+                throw node.Error(null, "is listed twice");
+            }
+
+            var kind = node.Enum<SupportKind>("kind");
+            var romance = new List<Pronoun>();
+            foreach (var value in node.StringArrayOrEmpty("romance"))
+            {
+                var pronoun = node.ParseEnum<Pronoun>("romance", value);
+                if (romance.Contains(pronoun))
+                {
+                    throw node.Error("romance", $"'{value}' is listed twice");
+                }
+
+                romance.Add(pronoun);
+            }
+
+            var withCaptain = a == captainId || b == captainId;
+            if (romance.Count > 0 && !withCaptain)
+            {
+                throw node.Error("romance", "only a pair with the captain names the captains it can romance; a pair between recruits sets its kind");
+            }
+
+            if (withCaptain && kind == SupportKind.Romance)
+            {
+                throw node.Error("kind", "a pair with the captain is a romance only through its romance field, since the captain is chosen");
+            }
+
+            pairs.Add(new SupportPair(a, b, kind) { Romance = ValueList<Pronoun>.From(romance) });
+            index++;
+        }
+
+        if (pairs.Count > 0)
+        {
+            foreach (var recruit in castUnits.Skip(1))
+            {
+                var mine = pairs.Where(p => p.Involves(recruit.Id)).ToList();
+                var withCaptain = mine.Count(p => p.Involves(captainId!));
+                if (withCaptain != 1)
+                {
+                    throw new ContentException(root.File, recruit.Id, "supports", $"has {withCaptain} pairs with the captain; every recruit has exactly one");
+                }
+
+                var others = mine.Count - 1;
+                if (others is < 3 or > 4)
+                {
+                    throw new ContentException(root.File, recruit.Id, "supports", $"has {others} partners besides the captain; every recruit has three or four");
+                }
+
+                var kinds = mine.Select(p => p.Kind).Concat(mine.Where(p => p.Romance.Count > 0).Select(_ => SupportKind.Romance)).ToList();
+                if (kinds.GroupBy(k => k).FirstOrDefault(g => g.Count() > 1) is { } shared)
+                {
+                    var names = string.Join(" and ", mine.Where(p => p.Kind == shared.Key || (shared.Key == SupportKind.Romance && p.Romance.Count > 0)).Select(p => p.Partner(recruit.Id)));
+                    throw new ContentException(root.File, recruit.Id, "supports", $"two pairs share the kind {shared.Key.ToString().ToLowerInvariant()} ({names}); no two of a recruit's pairs share one");
+                }
+            }
+        }
+
+        return ValueList<SupportPair>.From(pairs);
     }
 
     /// <summary>
