@@ -1,0 +1,369 @@
+march
+move captain 1,6
+wait captain
+end
+move captain 2,6
+wait captain
+end
+move captain 4,4
+wait captain
+end
+move captain 6,4
+wait captain
+end
+move captain 5,4
+item captain 2
+end
+move captain 6,4
+attack captain hexer-1 art feint
+end
+move captain 6,3
+attack captain archer-1
+end
+move captain 5,3
+attack captain archer-1 art feint
+leave
+march
+move captain 4,8
+wait captain
+wait maud
+end
+attack maud brigand-1
+move captain 7,7
+wait captain
+end
+attack maud soldier-1
+move captain 8,4
+attack captain soldier-1
+end
+move captain 9,4
+attack captain archer-1
+attack maud archer-2
+end
+move captain 9,3
+attack captain archer-1
+move maud 9,5
+attack maud archer-2
+leave
+repair captain 1
+bench wren
+bench pell
+bench dunstan
+march
+move teodor 6,6
+wait teodor
+move captain 7,5
+wait captain
+move ottilie 8,6
+wait ottilie
+move maud 7,6
+wait maud
+end
+move captain 10,4
+wait captain
+move teodor 9,5
+wait teodor
+move ottilie 10,6
+wait ottilie
+move maud 9,6
+wait maud
+end
+attack maud wingrider-1
+attack captain wingrider-1
+move ottilie 10,8
+wait ottilie
+wait teodor
+end
+move captain 10,3
+attack captain archer-1
+move maud 10,7
+item maud 2 ottilie
+move teodor 10,4
+wait teodor
+move ottilie 11,6
+wait ottilie
+end
+move captain 9,2
+wait captain
+move teodor 11,2
+wait teodor
+move maud 10,3
+wait maud
+move ottilie 10,4
+wait ottilie
+end
+move maud 9,1
+attack maud bandit_leader-1
+move ottilie 10,2
+attack ottilie bandit_leader-1
+move captain 9,0
+attack captain bandit_leader-1 art full_measure
+wait teodor
+end
+item maud 2 captain
+move teodor 10,3
+wait teodor
+wait ottilie
+end
+move captain 10,0
+wait captain
+move ottilie 8,2
+attack ottilie soldier-2
+move maud 7,2
+attack maud brigand-1
+wait teodor
+end
+move ottilie 10,2
+attack ottilie soldier-2
+leave
+certify captain ranger
+repair captain 1
+buy iron_bow captain
+bench dunstan
+march
+move captain 9,9
+wait captain
+move teodor 10,10
+wait teodor
+move pell 9,10
+wait pell
+move wren 9,11
+wait wren
+end
+move captain 9,6
+wait captain
+move teodor 9,7
+wait teodor
+move pell 10,7
+wait pell
+move wren 9,8
+wait wren
+end
+move captain 7,5
+attack captain toll_brigand-1 1
+move pell 7,6
+attack pell toll_brigand-1
+move teodor 8,5
+wait teodor
+move wren 8,6
+wait wren
+end
+move wren 5,6
+attack wren archer-2
+move captain 6,5
+attack captain archer-2 1
+move pell 7,4
+wait pell
+move teodor 8,4
+wait teodor
+end
+move captain 6,3
+attack captain toll_warden-1 1
+move pell 6,5
+wait pell
+wait teodor
+move wren 5,5
+wait wren
+end
+attack teodor rider-1
+move captain 6,2
+attack captain bandit_leader-1 1
+wait pell
+wait wren
+end
+move captain 7,1
+leave
+repair captain 1
+march
+move pell 1,3
+attack pell brigand-1
+move ottilie 3,5
+attack ottilie brigand-1
+move teodor 3,4
+attack teodor brigand-1
+move captain 2,4
+attack captain brigand-1 iron_bow
+move keziah 4,6
+wait keziah
+move dunstan 4,7
+wait dunstan
+end
+move captain 5,3
+wait captain
+move teodor 6,3
+wait teodor
+move ottilie 6,4
+wait ottilie
+move pell 3,2
+wait pell
+move keziah 7,5
+wait keziah
+move dunstan 6,5
+wait dunstan
+end
+move captain 7,3
+wait captain
+move teodor 7,2
+wait teodor
+wait ottilie
+move pell 5,2
+wait pell
+move keziah 7,4
+wait keziah
+wait dunstan
+end
+attack pell rider-1
+move keziah 6,2
+attack keziah rider-1
+move captain 11,2
+wait captain
+move teodor 10,2
+wait teodor
+move ottilie 9,3
+wait ottilie
+move dunstan 8,4
+wait dunstan
+end
+move captain 12,4
+attack captain archer-1 iron_bow
+move teodor 12,2
+wait teodor
+move ottilie 11,2
+wait ottilie
+move keziah 10,2
+wait keziah
+move pell 9,2
+wait pell
+move dunstan 9,3
+wait dunstan
+end
+move captain 13,5
+attack captain weir_foreman-1 iron_sword art full_measure
+leave
+march
+end
+move pell 11,3
+attack pell soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move wren 11,4
+attack wren soldier-1
+move teodor 11,7
+attack teodor brigand-1
+move captain 11,6
+attack captain brigand-1 iron_bow
+move dunstan 12,8
+wait dunstan
+end
+move captain 10,4
+attack captain archer-1 iron_sword
+canto captain 9,3
+move dunstan 9,8
+attack dunstan hexer-1
+move ottilie 10,8
+attack ottilie hexer-1
+move pell 10,3
+attack pell archer-1
+item teodor 2
+item wren 2
+end
+move dunstan 12,8
+wait dunstan
+move ottilie 12,7
+wait ottilie
+move teodor 9,7
+wait teodor
+move wren 11,6
+wait wren
+move pell 11,5
+wait pell
+move captain 9,5
+wait captain
+end
+move ottilie 9,8
+attack ottilie brigand-3
+leave
+build barracks
+repair captain 1
+repair captain 2
+march
+move captain 3,6
+wait captain
+end
+move pell 2,6
+attack pell veteran-1
+move wren 5,5
+attack wren archer-2
+move ottilie 4,7
+attack ottilie archer-2
+attack captain archer-2 iron_bow
+canto captain 8,6
+move teodor 4,5
+wait teodor
+wait ansgar
+end
+move captain 12,5
+wait captain
+move wren 9,5
+wait wren
+move teodor 8,5
+wait teodor
+move ansgar 5,9
+wait ansgar
+end
+move captain 16,6
+leave
+repair captain 1
+repair captain 2
+march
+move captain 12,3
+wait captain
+move rook 13,3
+wait rook
+move pell 10,3
+wait pell
+move dunstan 10,4
+wait dunstan
+move wren 9,4
+wait wren
+end
+move captain 16,3
+wait captain
+move rook 15,2
+wait rook
+move pell 14,3
+wait pell
+move dunstan 12,4
+wait dunstan
+move wren 12,3
+wait wren
+end
+move pell 15,3
+attack pell brawler-1
+attack captain brawler-1 iron_sword
+canto captain stay
+move wren 14,3
+wait wren
+move dunstan 14,4
+wait dunstan
+move rook 14,2
+wait rook
+end
+attack captain soldier-1 iron_bow
+canto captain 17,3
+move wren 18,3
+wait wren
+move rook 18,2
+wait rook
+end
+move captain 19,6
+move wren 19,5
+move rook 19,7
+item captain 3
+item wren 2
+wait rook
+end
+exit wren
+exit rook
+exit captain
+leave
