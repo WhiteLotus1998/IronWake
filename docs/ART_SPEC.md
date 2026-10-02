@@ -300,6 +300,14 @@ scholar_reason_miss_recover
 scholar_reason_dodge
 scholar_reason_hit_react
 scholar_reason_fall
+scholar_faith_idle
+scholar_faith_advance
+scholar_faith_strike
+scholar_faith_strike_crit
+scholar_faith_miss_recover
+scholar_faith_dodge
+scholar_faith_hit_react
+scholar_faith_fall
 sentinel_lance_idle
 sentinel_lance_advance
 sentinel_lance_strike

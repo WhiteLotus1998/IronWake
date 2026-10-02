@@ -1,0 +1,21 @@
+name: The Butts
+size: 11x7
+win: rout
+turn_limit: 6
+recall: 1
+enemy_level: 2
+certification: marksman iron_bow field_dressing
+
+...........
+....F......
+...........
+~~~~~~~~=~~
+...........
+...........
+...........
+
+units:
+P captain 4,5
+E archer 4,1 group:butts behavior:hold
+E brigand 1,1 group:butts behavior:aggressive
+E brigand 2,0 group:butts behavior:aggressive

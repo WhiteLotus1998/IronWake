@@ -1,0 +1,13 @@
+move captain 4,4
+attack captain archer-1
+end
+threat captain
+attack captain archer-1
+end
+forecast captain brigand-1 from 7,4
+threat captain from 7,4
+move captain 7,4
+attack captain brigand-1
+end
+move captain 5,4
+attack captain brigand-2

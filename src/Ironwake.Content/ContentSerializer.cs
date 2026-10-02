@@ -354,6 +354,28 @@ public static class ContentSerializer
             case BraceEffect:
                 writer.WriteString("kind", "brace");
                 break;
+            case RangeEffect reach:
+                writer.WriteString("kind", "range");
+                if (reach.Heals)
+                {
+                    writer.WriteBoolean("heals", true);
+                }
+                else
+                {
+                    writer.WriteString("weapon", reach.Weapon!.Value.ToString().ToLowerInvariant());
+                }
+
+                writer.WriteNumber("range", reach.Range);
+                break;
+            case KillHealEffect killHeal:
+                writer.WriteString("kind", "killheal");
+                writer.WriteNumber("heal", killHeal.Heal);
+                if (killHeal.Wielding is { } killWielding)
+                {
+                    writer.WriteString("wielding", killWielding.ToString().ToLowerInvariant());
+                }
+
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }
@@ -558,6 +580,28 @@ public static class ContentSerializer
         if (unitClass.Hidden)
         {
             writer.WriteBoolean("hidden", true);
+        }
+
+        if (unitClass.StrikeOnly.Count > 0)
+        {
+            writer.WriteStartArray("strikeOnly");
+            foreach (var type in unitClass.StrikeOnly)
+            {
+                writer.WriteStringValue(type.ToString().ToLowerInvariant());
+            }
+
+            writer.WriteEndArray();
+        }
+
+        if (unitClass.Grants.Count > 0)
+        {
+            writer.WriteStartObject("grants");
+            foreach (var (type, rank) in unitClass.Grants)
+            {
+                writer.WriteString(type.ToString().ToLowerInvariant(), rank.ToString());
+            }
+
+            writer.WriteEndObject();
         }
 
         if (unitClass.Certification != CertificationRequirements.None)

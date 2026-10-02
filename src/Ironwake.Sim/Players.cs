@@ -503,7 +503,7 @@ public sealed class HeuristicPlayer : IPlayer
                 continue;
             }
 
-            var spell = content.Weapon(stack.ItemId);
+            var spell = content.WeaponOf(unit.Unit, content.Weapon(stack.ItemId));
             if (!spell.Heals || !unit.Unit.CanWield(spell, unitClass) || stack.Uses == 0)
             {
                 continue;

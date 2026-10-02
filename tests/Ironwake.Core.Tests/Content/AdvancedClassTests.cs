@@ -197,4 +197,66 @@ public class AdvancedClassTests
         Assert.Equal("advances", e.Field);
         Assert.Contains("'duelist' is itself an advanced form; a class has one step above it", e.Message);
     }
+
+    private const string Verbs = """
+        { "abilities": [
+          { "id": "reach", "name": "Reach", "text": "Bows reach further.", "effect": { "kind": "range", "weapon": "bow", "range": 1 } },
+          { "id": "mend", "name": "Mend", "text": "Heals reach further.", "effect": { "kind": "range", "heals": true, "range": 1 } },
+          { "id": "feast", "name": "Feast", "text": "A kill heals.", "effect": { "kind": "killheal", "heal": 5, "wielding": "axe" } }
+        ] }
+        """;
+
+    private const string StrikeOnlyClasses = """
+        { "classes": [
+          { "id": "cadet", "name": "Cadet", "movement": "infantry", "mov": 4, "weapons": ["sword"] },
+          { "id": "seer", "name": "Seer", "movement": "infantry", "mov": 4, "weapons": ["reason", "faith"], "strikeOnly": ["faith"], "grants": { "faith": "D" }, "abilities": ["reach", "mend", "feast"] }
+        ] }
+        """;
+
+    [Fact]
+    public void TheVerbEffectsAndAStrikeOnlyClassLoadAndRoundTrip()
+    {
+        var content = ContentLoader.Parse(Fixture.Files(classes: StrikeOnlyClasses, abilities: Verbs));
+
+        Assert.Equal(new RangeEffect(WeaponType.Bow, false, 1), content.Ability("reach").Effect);
+        Assert.Equal(new RangeEffect(null, true, 1), content.Ability("mend").Effect);
+        Assert.Equal(new KillHealEffect(5, WeaponType.Axe), content.Ability("feast").Effect);
+        Assert.Equal(ValueList<WeaponType>.Of(WeaponType.Faith), content.Class("seer").StrikeOnly);
+        Assert.Equal(ValueList<(WeaponType, WeaponRank)>.Of((WeaponType.Faith, WeaponRank.D)), content.Class("seer").Grants);
+
+        var written = ContentSerializer.Write(content);
+        var reloaded = ContentLoader.Parse(written);
+        Assert.Equal(content, reloaded);
+        Assert.Equal(written.Abilities.Text, ContentSerializer.Write(reloaded).Abilities.Text);
+        Assert.Equal(written.Classes.Text, ContentSerializer.Write(reloaded).Classes.Text);
+    }
+
+    [Theory]
+    [InlineData("\"weapon\": \"bow\", \"range\": 1", "\"weapon\": \"bow\", \"heals\": true, \"range\": 1", "reach", "effect", "names a weapon type or heals: true, not both")]
+    [InlineData("\"weapon\": \"bow\", \"range\": 1", "\"range\": 1", "reach", "effect", "names a weapon type or heals: true, not both")]
+    [InlineData("\"weapon\": \"bow\", \"range\": 1", "\"weapon\": \"bow\", \"range\": 0", "reach", "effect.range", "must be at least 1")]
+    [InlineData("\"heal\": 5", "\"heal\": 0", "feast", "effect.heal", "must be at least 1")]
+    public void ABadVerbEffectIsRefusedNamingTheAbilityAndTheField(string find, string replace, string entry, string field, string message)
+    {
+        var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(Fixture.Files(classes: StrikeOnlyClasses, abilities: Verbs.Replace(find, replace))));
+
+        Assert.Equal(ContentFiles.AbilitiesName, e.File);
+        Assert.Equal(entry, e.Entry);
+        Assert.Equal(field, e.Field);
+        Assert.Contains(message, e.Message);
+    }
+
+    [Theory]
+    [InlineData("\"strikeOnly\": [\"faith\"]", "\"strikeOnly\": [\"bow\"]", "strikeOnly", "bow is not in the class's weapons")]
+    [InlineData("\"strikeOnly\": [\"faith\"]", "\"strikeOnly\": [\"faith\", \"faith\"]", "strikeOnly", "must not repeat a weapon type")]
+    [InlineData("\"grants\": { \"faith\": \"D\" }", "\"grants\": { \"bow\": \"D\" }", "grants.bow", "is not in the class's weapons")]
+    public void ABadStrikeOnlyOrGrantIsRefusedNamingTheClassAndTheField(string find, string replace, string field, string message)
+    {
+        var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(Fixture.Files(classes: StrikeOnlyClasses.Replace(find, replace), abilities: Verbs)));
+
+        Assert.Equal(ContentFiles.ClassesName, e.File);
+        Assert.Equal("seer", e.Entry);
+        Assert.Equal(field, e.Field);
+        Assert.Contains(message, e.Message);
+    }
 }

@@ -120,7 +120,22 @@ public static class Certifications
             throw new InvalidOperationException($"{unit.Id} cannot be promoted to {target.Name}: {refusals[0].Text}");
         }
 
-        return unit with { ClassId = target.Id };
+        return Grant(unit with { ClassId = target.Id }, target);
+    }
+
+    /// <summary>
+    /// <paramref name="unit"/> with each rank <paramref name="target"/> grants (issue 704,
+    /// <see cref="UnitClass.Grants"/>) raised to at least that rank's threshold; a rank it already holds stays.
+    /// </summary>
+    public static Unit Grant(Unit unit, UnitClass target)
+    {
+        var skill = unit.Skill;
+        foreach (var (type, rank) in target.Grants)
+        {
+            skill = skill.With(type, Math.Max(skill.Points(type), WeaponRanks.Threshold(rank)));
+        }
+
+        return skill == unit.Skill ? unit : unit with { Skill = skill };
     }
 }
 

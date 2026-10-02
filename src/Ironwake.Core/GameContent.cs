@@ -61,14 +61,24 @@ public sealed record GameContent(
     public int NoiseRadius => WakeRadius + 2;
 
     /// <summary>
-    /// The longest reach any unit in this content could have: the most <see cref="UnitClass.Mov"/>
-    /// of any class plus the most <see cref="Weapon.MaxRange"/> of any weapon, in tiles, Manhattan
-    /// (8 on the starter content: move 6 and range 2). One number for every unit, derived from the
-    /// loaded files and never from a unit on the board, so a listing bounded by it tells the player
-    /// nothing about what stands on a tile (issue 403). Zero when the content has no classes or no weapons.
+    /// The longest reach any enemy in this content could have: the most <see cref="UnitClass.Mov"/>
+    /// of any class an enemy template is in plus the most <see cref="Weapon.MaxRange"/> of any weapon,
+    /// in tiles, Manhattan (8 on the starter content: move 6 and range 2). The classes are those of
+    /// the units not in <see cref="Cast"/>, every class when there are none (issue 704: the dark hides
+    /// enemies, and only a template is one, so a player's Sky Captain does not widen it). One number for
+    /// every unit, derived from the loaded files and never from a unit on the board, so a listing bounded
+    /// by it tells the player nothing about what stands on a tile (issue 403). Zero when the content has
+    /// no classes or no weapons.
     /// </summary>
-    public int LongestReach =>
-        (Classes.IsEmpty ? 0 : Classes.Values.Max(c => c.Mov)) + (Weapons.IsEmpty ? 0 : Weapons.Values.Max(w => w.MaxRange));
+    public int LongestReach
+    {
+        get
+        {
+            var templates = Units.Values.Where(u => !Cast.Any(c => c.Id == u.Id) && Classes.ContainsKey(u.ClassId)).Select(u => Classes[u.ClassId]).ToList();
+            var classes = templates.Count > 0 ? templates : Classes.Values.ToList();
+            return (classes.Count == 0 ? 0 : classes.Max(c => c.Mov)) + (Weapons.IsEmpty ? 0 : Weapons.Values.Max(w => w.MaxRange));
+        }
+    }
 
     public UnitClass Class(string id) => Lookup(Classes, id, "class");
 
@@ -94,6 +104,13 @@ public sealed record GameContent(
     /// <summary>The unit's abilities, resolved in the order it lists them, then its class's (issue 71) that it does not already list.</summary>
     public ValueList<Ability> AbilitiesOf(Unit unit) =>
         ValueList<Ability>.From(unit.Abilities.Concat(Class(unit.ClassId).Abilities.Where(id => !unit.Abilities.Contains(id))).Select(Ability));
+
+    /// <summary>
+    /// <paramref name="weapon"/> as <paramref name="unit"/> reaches with it, to strike or to heal (issue 704,
+    /// <see cref="AbilityRules.Shape"/>); the same record for a unit with no abilities at all.
+    /// </summary>
+    public Weapon WeaponOf(Unit unit, Weapon weapon) =>
+        unit.Abilities.Count == 0 && Class(unit.ClassId).Abilities.Count == 0 ? weapon : AbilityRules.Shape(weapon, AbilitiesOf(unit));
 
     /// <summary>The combat arts a unit knows (issue 68): the abilities it lists whose effect is an art, in its order.</summary>
     public IEnumerable<(Ability Ability, CombatArtEffect Art)> ArtsOf(Unit unit) =>

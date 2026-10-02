@@ -32,6 +32,12 @@ public enum AbilityTrigger
 
     /// <summary>When the unit takes Wait: a brace on any map (issue 691).</summary>
     OnWait,
+
+    /// <summary>Whenever the unit's weapon is read, to strike or to heal: a longer reach (issue 704).</summary>
+    OnWeapon,
+
+    /// <summary>After a combat in which the unit killed and lived: a kill's heal (issue 704).</summary>
+    OnKill,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -129,6 +135,30 @@ public sealed record BraceEffect : AbilityEffect
 }
 
 /// <summary>
+/// A longer reach (issue 704, the advanced forms): every weapon the holder strikes or heals with
+/// that matches reaches <see cref="Range"/> tiles further at its far end. A weapon matches when it
+/// is of type <see cref="Weapon"/>, or, with <see cref="Heals"/>, when it is a healing spell.
+/// The Marksman's Long Draw is <c>+1 range with bows</c>; the Warden's Far Mending <c>+1 range on heals</c>.
+/// </summary>
+public sealed record RangeEffect(WeaponType? Weapon, bool Heals, int Range) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnWeapon;
+
+    /// <summary>Whether <paramref name="weapon"/> takes the longer reach.</summary>
+    public bool Matches(Weapon weapon) => Heals ? weapon.Heals : weapon.Type == Weapon && !weapon.Heals;
+}
+
+/// <summary>
+/// A kill's heal (issue 704, the Berserker's Blood Price): when the holder kills in a combat and
+/// lives, it heals <see cref="Heal"/>, never above its max HP, if it fought with a weapon of type
+/// <see cref="Wielding"/> (any weapon when null).
+/// </summary>
+public sealed record KillHealEffect(int Heal, WeaponType? Wielding) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnKill;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -173,6 +203,39 @@ public static class AbilityRules
         }
 
         return total;
+    }
+
+    /// <summary>
+    /// <paramref name="weapon"/> as <paramref name="abilities"/> reach with it (issue 704): the far end of
+    /// its range extended by every <see cref="RangeEffect"/> that matches it; the same record when none does.
+    /// </summary>
+    public static Weapon Shape(Weapon weapon, ValueList<Ability> abilities)
+    {
+        var range = 0;
+        foreach (var ability in abilities)
+        {
+            if (ability.Effect is RangeEffect reach && reach.Matches(weapon))
+            {
+                range += reach.Range;
+            }
+        }
+
+        return range == 0 ? weapon : weapon with { MaxRange = weapon.MaxRange + range };
+    }
+
+    /// <summary>What <paramref name="abilities"/> heal on a kill made with <paramref name="weapon"/> (issue 704); 0 when none answers.</summary>
+    public static int KillHeal(ValueList<Ability> abilities, Weapon? weapon)
+    {
+        var heal = 0;
+        foreach (var ability in abilities)
+        {
+            if (ability.Effect is KillHealEffect effect && weapon is not null && (effect.Wielding is null || effect.Wielding == weapon.Type))
+            {
+                heal += effect.Heal;
+            }
+        }
+
+        return heal;
     }
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>

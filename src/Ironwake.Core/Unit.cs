@@ -54,9 +54,12 @@ public sealed record Unit(
     /// </summary>
     public Pronoun? Pronoun { get; init; }
 
-    /// <summary>Whether this unit may equip <paramref name="weapon"/>: its class uses the type and its rank in the type reaches the weapon's.</summary>
+    /// <summary>
+    /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
+    /// reaches the weapon's, and a healing spell is not of a type the class strikes with only (issue 704).
+    /// </summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
-        unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank;
+        unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank && (!weapon.Heals || unitClass.CanHealWith(weapon.Type));
 
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));

@@ -1824,3 +1824,18 @@ Notes: The transcript and script are `docs/transcripts/2026-10-02-campaign-704-l
 - **What I'd want from the next slice:** the list is alphabetical, so the forms sit between the bases. Once the forms have their verbs, the screen should say the verb on the line (`+ axe`, `bow range 3`), since that is the whole reason to pay 1000.
 
 — Code
+
+## 2026-10-02 — The Butts, the Marksman's Long Draw (#704 slice 2), the warm play — Code
+
+Seed: 704   Result: won turn 4 of 6, rout, untouched, no Recall
+Systems entry on a new sample, `docs/samples/the_butts_marksman.map`: the captain alone as a Marksman (a trial header fields the form), an archer holding a fort across a river, two brigands who must come round by the one ford. I wrote the rule this hour, so this is warm. The question: does range 3 change a move?
+Tension: 5/10   Choice: 5/10   Surprise: 3/10
+Best turn: turn 3, the first time the board asked anything. Brigand 1 at the ford mouth, 89 percent for 24 against his 22, and `threat` from the firing tile said both axes would reach me for 20 of my 22 if he lived. I took it, he fell, his partner swung once and missed
+Notes: The transcript and script are `docs/transcripts/2026-10-02-the_butts_marksman-704.*`.
+- **It reads.** The card says `range 2-3`, the forecast at three tiles says `counter: none`, and the ability line names Long Draw. Nothing to learn.
+- **It changed every move, and that is the problem with this board.** The archer died in two turns without ever answering, because I stood at 3 and he reaches 2. Against a bow, the Marksman is a different class, which is the point; but a board where that is the only question is a shooting gallery.
+- **The cost showed once.** At range 1 a bow cannot answer, so a brigand beside me was a free swing. Stepping back to 3 each turn was the whole game after the archer, and Mov 4 made it easy.
+- **Not tense:** turns 1, 2 and 4. A real test needs a second enemy bow, or a flier, so standing at 3 is a choice rather than a rule.
+- **Not played:** Far Mending, the Scholar, Blood Price and the Sky Captain. Tests cover each; none has a board that fields it yet.
+
+— Code
