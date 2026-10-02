@@ -8,15 +8,17 @@ namespace Ironwake.Sim;
 /// ladder (<see cref="UnitClass.Captain"/>) at the level the class certifies at, carrying a starting
 /// weapon of each type the class adds (<see cref="Kit"/>), so a Ranger has a bow to draw and a Marshal
 /// a spell to cast. Each tier is fought on its own <see cref="Board"/>. Per map and tier it reads gate 1
-/// and gate 4 for the unpromoted captain and each class. The bar (DECISIONS/0165, round 229): within a tier the
-/// classes' gate 1 rates lie within <see cref="Spread"/> of each other, no class reads more than <see cref="Under"/>
-/// below the unpromoted captain on the same board unless its captain absorbs under half the unpromoted captain's
-/// damage (then a hand play of that map is owed and decides), and gate 4 passes under every class wherever it
-/// passes under the unpromoted captain on the same board, with the captain attacking in its baseline. A measurement only; nothing here changes what ships.
+/// and gate 4 for the unpromoted captain and each class, and the captain's share of the company's EXP. The bar
+/// (round 232, DECISIONS/0174, replacing 0165's per-map spread): per map a floor, no class reading more than
+/// <see cref="Under"/> below the unpromoted captain on the same board unless its captain absorbs under half the
+/// unpromoted captain's damage (then a hand play of that map is owed and decides), and gate 4 passing under every
+/// class wherever it passes under the unpromoted captain on the same board, with the captain attacking in its
+/// baseline; across the campaign (<see cref="Campaign"/>), each class's mean gate 1 over the campaign's maps within
+/// <see cref="Spread"/> of the others. A measurement only; nothing here changes what ships.
 /// </summary>
 public static class LadderRun
 {
-    /// <summary>The widest gate 1 spread a tier may show on one map at 100 seeds, as a rate (10 points; DECISIONS/0165, round 229; 5 is the 400-seed target before anything ships as tuned).</summary>
+    /// <summary>The widest spread a tier's classes' campaign means of gate 1 may show at 200 seeds, as a rate (10 points; round 232, DECISIONS/0174; 5 is the 400-seed target before anything ships as tuned). A single map's spread is printed and no longer fails it.</summary>
     public const double Spread = 0.10;
 
     /// <summary>The furthest a class's gate 1 rate may read below the unpromoted captain's on the same board, as a rate (10 points; DECISIONS/0165).</summary>
@@ -32,8 +34,21 @@ public static class LadderRun
         [WeaponType.Reason] = "cinder",
     };
 
-    /// <summary>One class on one board: gate 1's rate, gate 4's verdict, the captain's baseline mix, and the weapons the captain fought with in it (issue 746).</summary>
-    public sealed record Reading(string ClassId, double Rate, bool Gate4, ActionMix Captain, WeaponMix? Weapons = null);
+    /// <summary>
+    /// The campaign maps the campaign check leaves out (round 232): Starting Alone, a lesson with the captain alone
+    /// and every class near 0, and Sallow Grange, where every class reads within a few points and class does not matter.
+    /// </summary>
+    public static IReadOnlySet<string> OffTheBar { get; } = new HashSet<string>(StringComparer.Ordinal) { "starting_alone", "sallow_grange" };
+
+    /// <summary>
+    /// One class on one board: gate 1's rate, gate 4's verdict, the captain's baseline mix, the weapons the captain
+    /// fought with in it (issue 746), and the EXP the captain and the company kept over the won games (issue 758).
+    /// </summary>
+    public sealed record Reading(string ClassId, double Rate, bool Gate4, ActionMix Captain, WeaponMix? Weapons = null, int CaptainExp = 0, int CompanyExp = 0)
+    {
+        /// <summary>The captain's share of the company's EXP over the won games, a whole percent (#738's share, pooled), or null when the company earned none.</summary>
+        public int? Share => LevelRun.CaptainShare(new LevelRun.Camp(0, Array.Empty<int>(), CaptainExp, CompanyExp));
+    }
 
     /// <summary>
     /// One tier on one map: the board it is fought on (party and enemies raised by <paramref name="Raise"/>
@@ -55,8 +70,44 @@ public static class LadderRun
                 .Select(c => (c.ClassId, c.Captain.Absorbed * 2 < Baseline.Captain.Absorbed))
                 .ToList();
 
-        public bool Passed => SpreadOf <= Spread + 1e-9 && Gate4Failures.Count == 0 && UnderBaseline.All(u => u.HandPlayOwed);
+        /// <summary>The per-map floor (round 232): no class over <see cref="Under"/> below the unpromoted captain without the exemption, and gate 4 kept. The spread is the campaign's check.</summary>
+        public bool Passed => Gate4Failures.Count == 0 && UnderBaseline.All(u => u.HandPlayOwed);
     }
+
+    /// <summary>
+    /// One tier across the campaign (round 232): each class's mean gate 1 over <paramref name="Maps"/>, the maps read that are
+    /// on the campaign and not <see cref="OffTheBar"/>, in the tier's class order.
+    /// </summary>
+    public sealed record CampaignTier(int Tier, IReadOnlyList<string> Maps, IReadOnlyList<(string ClassId, double Mean)> Means)
+    {
+        public double SpreadOf => Means.Count == 0 ? 0.0 : Means.Max(m => m.Mean) - Means.Min(m => m.Mean);
+
+        /// <summary>Within <see cref="Spread"/>; a campaign with no map on the bar passes vacuously, and the line says so.</summary>
+        public bool Passed => SpreadOf <= Spread + 1e-9;
+    }
+
+    /// <summary>The campaign check per tier over <paramref name="readings"/>: the maps among them that <paramref name="content"/>'s campaign fields and <see cref="OffTheBar"/> does not name.</summary>
+    public static IReadOnlyList<CampaignTier> Campaign(GameContent content, IReadOnlyList<MapReading> readings)
+    {
+        var onCampaign = content.Campaign.Maps.Select(m => m.MapId).ToHashSet(StringComparer.Ordinal);
+        var counted = readings.Where(r => onCampaign.Contains(r.MapId) && !OffTheBar.Contains(r.MapId)).ToList();
+        var tiers = new List<CampaignTier>();
+        foreach (var tier in readings.SelectMany(r => r.Tiers).Select(t => t.Tier).Distinct().OrderBy(t => t))
+        {
+            var rows = counted.Select(r => r.Tiers.FirstOrDefault(t => t.Tier == tier)).OfType<TierReading>().ToList();
+            var ids = rows.SelectMany(t => t.Classes.Select(c => c.ClassId)).Distinct().ToList();
+            var means = ids.Select(id => (id, rows.Select(t => t.Classes.First(c => c.ClassId == id).Rate).DefaultIfEmpty(0.0).Average())).ToList();
+            tiers.Add(new CampaignTier(tier, counted.Select(r => r.MapId).ToList(), means));
+        }
+
+        return tiers;
+    }
+
+    /// <summary>The campaign check's printed line for one tier.</summary>
+    public static string Line(CampaignTier tier) =>
+        tier.Maps.Count == 0
+            ? $"  campaign tier {tier.Tier}: no map read is on the bar: {Gates.Verdict(tier.Passed)}"
+            : $"  campaign tier {tier.Tier} over {string.Join(", ", tier.Maps)}: {string.Join(", ", tier.Means.Select(m => $"{m.ClassId} {m.Mean * 100:F1}"))}; spread {tier.SpreadOf * 100:F1}, bar {Spread * 100:F0}: {Gates.Verdict(tier.Passed)}";
 
     /// <summary>One map: a reading per tier.</summary>
     public sealed record MapReading(string MapId, IReadOnlyList<TierReading> Tiers)
@@ -162,10 +213,11 @@ public static class LadderRun
         var captain = content.Cast[0].Id;
         var mix = games.Aggregate(ActionMix.Zero, (sum, g) => sum.Plus(g.Mix.GetValueOrDefault(captain, ActionMix.Zero)));
         var weapons = games.Aggregate(WeaponMix.Zero, (sum, g) => sum.Plus(g.Weapons.GetValueOrDefault(captain, WeaponMix.Zero)));
-        return new Reading(classId, games.Count == 0 ? 0.0 : games.Count(g => g.Won) / (double)games.Count, gate4.Passed, mix, weapons);
+        var camps = games.Select(g => g.Camp).OfType<LevelRun.Camp>().ToList();
+        return new Reading(classId, games.Count == 0 ? 0.0 : games.Count(g => g.Won) / (double)games.Count, gate4.Passed, mix, weapons, camps.Sum(c => c.CaptainExp), camps.Sum(c => c.CompanyExp));
     }
 
-    /// <summary>The printed table for one map: per tier its board, a row per class, then the spread and the verdict.</summary>
+    /// <summary>The printed table for one map: per tier its board, a row per class, then the spread and the floor's verdict.</summary>
     public static IEnumerable<string> Lines(MapReading reading)
     {
         yield return $"ladder: {reading.MapId}";
@@ -174,12 +226,12 @@ public static class LadderRun
             yield return $"  tier {tier.Tier}, party and enemies +{tier.Raise}:";
             foreach (var r in new[] { tier.Baseline }.Concat(tier.Classes))
             {
-                yield return $"    {r.ClassId}: gate 1 {r.Rate * 100:F1}, gate 4 {Gates.Verdict(r.Gate4)}, captain [{r.Captain}], weapons [{r.Weapons ?? WeaponMix.Zero}]";
+                yield return $"    {r.ClassId}: gate 1 {r.Rate * 100:F1}, gate 4 {Gates.Verdict(r.Gate4)}, captain [{r.Captain}], captain share {(r.Share is { } share ? $"{share}%" : "none earned")}, weapons [{r.Weapons ?? WeaponMix.Zero}]";
             }
 
             var failures = tier.Gate4Failures;
             var under = tier.UnderBaseline;
-            yield return $"    spread {tier.SpreadOf * 100:F1}, bar {Spread * 100:F0}"
+            yield return $"    spread {tier.SpreadOf * 100:F1} (the bar is the campaign's)"
                 + (under.Count == 0 ? "" : $"; over {Under * 100:F0} under {tier.Baseline.ClassId}: {string.Join(", ", under.Select(u => u.HandPlayOwed ? $"{u.ClassId} (absorbs under half; a hand play decides)" : u.ClassId))}")
                 + (failures.Count == 0 ? "" : $"; gate 4 lost under {string.Join(", ", failures)}")
                 + $": {Gates.Verdict(tier.Passed)}";

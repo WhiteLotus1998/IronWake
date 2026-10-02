@@ -46,6 +46,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The weapons each player unit attacked and countered with (issue 746), by id; a unit that never struck is absent.</summary>
     public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
 
+    /// <summary>The EXP the captain and the company kept from a won game (issue 738's <see cref="LevelRun.Camp"/>, read per game for issue 758); null on a game not won.</summary>
+    public LevelRun.Camp? Camp { get; init; }
+
     /// <summary>The same strikes as <see cref="Weapons"/> by the item struck with (issue 757), by unit id.</summary>
     public IReadOnlyDictionary<string, ItemMix> Items { get; init; } = new Dictionary<string, ItemMix>(StringComparer.Ordinal);
 
@@ -172,6 +175,7 @@ public static class Runner
     public static GameResult Play(GameContent content, MapDefinition map, ulong seed, IPlayer player, ValueList<string> benched = default, RollScheme scheme = RollScheme.TwoRollAverage, HitTally? hits = null, List<TurnReading>? turns = null)
     {
         var state = BattleState.From(map, content, content.Cast, seed, scheme, benched);
+        var start = state;
         var recruits = state.UnitsOf(Side.Player).Count(u => !u.IsCaptain);
         var mix = new Dictionary<string, ActionMix>(StringComparer.Ordinal);
         foreach (var unit in state.UnitsOf(Side.Player))
@@ -277,6 +281,7 @@ public static class Runner
             Bond = state.Bond,
             Weapons = weapons,
             Items = items,
+            Camp = state.Outcome.Result == BattleResult.Won ? LevelRun.Read(start, state, content) : null,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
             Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),
         };

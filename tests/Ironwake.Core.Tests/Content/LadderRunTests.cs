@@ -95,12 +95,56 @@ public class LadderRunTests
     }
 
     [Fact]
-    public void ATierSpreadOverTenPointsFails()
+    public void ASpreadOverTenPointsOnOneMapIsPrintedAndNoLongerFailsIt()
     {
         var tier = new LadderRun.TierReading(1, 2, Row("cadet", 0.70), new[] { Row("marshal", 0.70), Row("ranger", 0.74), Row("vanguard", 0.81) });
 
-        Assert.False(tier.Passed);
+        Assert.True(tier.Passed);
         Assert.Equal(0.11, tier.SpreadOf, 6);
+        Assert.Contains("spread 11.0 (the bar is the campaign's)", LadderRun.Lines(new LadderRun.MapReading("m", new[] { tier })).Last());
+    }
+
+    private static LadderRun.MapReading Map(string id, double marshal, double ranger, double vanguard) =>
+        new(id, new[] { new LadderRun.TierReading(1, 2, Row("cadet", 0.40), new[] { Row("marshal", marshal), Row("ranger", ranger), Row("vanguard", vanguard) }) });
+
+    [Fact]
+    public void TheCampaignCheckAveragesEachClassOverTheCampaignsMaps()
+    {
+        var tier = LadderRun.Campaign(Content, new[] { Map("the_tollgate", 0.80, 0.70, 0.60), Map("the_mill", 0.60, 0.70, 0.70) }).Single();
+
+        Assert.Equal(new[] { "the_tollgate", "the_mill" }, tier.Maps);
+        Assert.Equal(new[] { ("marshal", 0.70), ("ranger", 0.70), ("vanguard", 0.65) }, tier.Means.Select(m => (m.ClassId, Math.Round(m.Mean, 6))));
+        Assert.True(tier.Passed);
+    }
+
+    [Fact]
+    public void ACampaignMeanOverTenPointsFromAnotherFailsTheBar()
+    {
+        var tier = LadderRun.Campaign(Content, new[] { Map("the_tollgate", 0.80, 0.80, 0.60), Map("the_mill", 0.70, 0.70, 0.59) }).Single();
+
+        Assert.False(tier.Passed);
+        Assert.Equal(0.155, tier.SpreadOf, 6);
+        Assert.EndsWith("spread 15.5, bar 10: FAILED", LadderRun.Line(tier));
+    }
+
+    [Theory]
+    [InlineData("starting_alone")]
+    [InlineData("sallow_grange")]
+    [InlineData("old_mill_road")]
+    public void TheCampaignCheckLeavesOutTheLessonSallowAndMapsOffTheCampaign(string mapId)
+    {
+        var tier = LadderRun.Campaign(Content, new[] { Map("the_tollgate", 0.70, 0.70, 0.70), Map(mapId, 0.90, 0.10, 0.50) }).Single();
+
+        Assert.Equal(new[] { "the_tollgate" }, tier.Maps);
+        Assert.True(tier.Passed);
+    }
+
+    [Fact]
+    public void TheCaptainsShareIsTheCaptainsEXPOverTheCompanysAWholePercent()
+    {
+        Assert.Equal(33, (Row("vanguard", 0.7) with { CaptainExp = 50, CompanyExp = 150 }).Share);
+        Assert.Null(Row("vanguard", 0.7).Share);
+        Assert.Contains("captain share 33%", LadderRun.Lines(new LadderRun.MapReading("m", new[] { new LadderRun.TierReading(1, 2, Row("cadet", 0.7), new[] { Row("vanguard", 0.7) with { CaptainExp = 50, CompanyExp = 150 } }) })).ElementAt(3));
     }
 
     [Fact]

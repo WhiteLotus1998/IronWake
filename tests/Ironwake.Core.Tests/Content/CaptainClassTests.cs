@@ -36,6 +36,18 @@ public class CaptainClassTests
     }
 
     [Fact]
+    public void NoAdvancedFormReadsUnderItsBaseOnAnyStatModifier()
+    {
+        foreach (var form in Content.Classes.Values.Where(c => c.Advances is not null))
+        {
+            foreach (var stat in Stats.All)
+            {
+                Assert.True(form.Modifiers.Get(stat) >= form.Advances!.Modifiers.Get(stat), $"{form.Id} {stat}");
+            }
+        }
+    }
+
+    [Fact]
     public void EachCaptainsClassDoesWhatItIsFor()
     {
         Assert.Equal(new[] { WeaponType.Sword }, Content.Class("vanguard").Weapons);
