@@ -192,6 +192,32 @@ public static class ContentSerializer
                 writer.WriteEndArray();
             }
 
+            if (campaign.Supports.Count > 0)
+            {
+                writer.WriteStartArray("supports");
+                foreach (var pair in campaign.Supports)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("a", pair.A);
+                    writer.WriteString("b", pair.B);
+                    writer.WriteString("kind", pair.Kind.ToString().ToLowerInvariant());
+                    if (pair.Romance.Count > 0)
+                    {
+                        writer.WriteStartArray("romance");
+                        foreach (var pronoun in pair.Romance)
+                        {
+                            writer.WriteStringValue(pronoun.ToString().ToLowerInvariant());
+                        }
+
+                        writer.WriteEndArray();
+                    }
+
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
+
             if (campaign.Keep != KeepMenu.None)
             {
                 writer.WriteStartObject("keep");
