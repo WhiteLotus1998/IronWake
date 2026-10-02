@@ -12,7 +12,6 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 - **Rules go on screen; geometry does not** (rounds 42, 44). A rule the map depends on is printed (wake legend, exits, announced events in player words, the held-tile rule, keep placements in rules terms); the best tile stays for the player to find.
 - **The keep collects** (round 68): a map's price is at least a body, a Recall or a turn; a line through with none is a bug. A boss who acts only on units that step into his reach is scenery on Seize and Defeat Boss (rounds 39, 72).
 - **Reading the Sim.** The veto is frozen after #147. A stall under a veto is the baseline's; no map is tuned to remove it. A map short of gate 1's 60 may be `tuned` only under DESIGN 11's stall clause, naming the numbers on the `at the stall` median (0100).
-- **Recall** restores the rolls (DESIGN 7): a charge buys knowledge, never a change.
 
 ## Rules, settled (details in DESIGN.md and the records named)
 
@@ -23,7 +22,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 - **The Sim's veto** covers every unit whose death loses the map, on the no-crit worst case, a certain kill (raw 100, one strike) removed (0024 to 0026). Recruits take no veto. Gate 4 is ablation with a relative threshold and a cast verdict (0019, 0020); on Escape it pairs units out (0068).
 - **`threat`** prices the coming enemy phase with the planner's own choices (DESIGN 8): one enemy per strike tile, announced spawns priced and unannounced not (0045), sleeping groups named without numbers, weapons named when more than one could strike, at dusk only what the player sees (#403), `from <tile>` names what a stop would wake (#458).
 - **Escape:** `exit` is a unit's action, the captain's exit wins, anyone left behind is fallen (0056); taken without a Move (0074). Rear-first plan order (0067).
-- **Recall** returns only to a player-phase state (0032); the browser prints what a rewind undoes (#75).
+- **Recall** restores the rolls, buying knowledge, never a change (DESIGN 7); returns only to a player-phase state (0032); the browser prints what it undoes (#75).
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Masteries** (0047, #245): Swordbreaker the outrider's; Bloodrush axe only; a heal earns a point; 12 combats. Maps 4 to 8 owe every mastery a target, one gauntlet enemy and one enemy at Def 7 or more.
 - **Content:** no Lore or Faith member ships without an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed units; a sleeping group in the open can be dashed past, in a corridor only woken.
@@ -34,14 +33,11 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 - **The Tollgate: `tuned`** (0073). The rider spawns on the door step (0072), no tell, surprise not a trap. Opens the beta and the showcase with its named roster.
 - **Brackwater Cut at dusk: `tuned`** (0078; Critic's cold 509, 7/6/7). Dusk hides what, never where.
+- **The showcase (#509, 0092):** done at 8/7; the forecast the centrepiece, animation never hides state, each art loses to the plain attack somewhere (#611).
 - **Harrow Weir: `tuned` on the crest, on gate 1 itself** (0088, 0100; 7/8/7 from both chairs; limit 15). Critic's 617 (7/6/6): one answer at the 7,0 door, choice narrows past the bridge; first levers if reopened.
 - **Saltmarsh Ford:** not tuned. On the north cut (0093) Code 547 7/7/6, Chat cold 571 7/7/5: the pair from 0,9 and 1,9 need three enemy phases to reach the mouth, so it plays as the pair, then the boss. The spawn lever (0095) failed its floor; the next lever must buy gate 1 back first. Retuned for Pell's arrival under #632.
 - **Sallow Grange:** the Reeve stays at 15,6; sealing the yard mouth is the map's discovery, unnamed; a route is quiet only if quiet on the enemy phase too (#275).
 - **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (round 158); the one lever is the van one column west. The bare keep (Chat cold, round 235, 7/7/6): walls and Long Draw bow kept, no lever on the stand-in.
-
-## The showcase (#509, 0092; rounds 126 to 184)
-
-- **Done** at 8/7 (#510 to #516): flat vector, the forecast the centrepiece, animation never hides state; display names on screen, ids in scripts (#573, #629); each art loses to the plain attack somewhere (#611).
 
 ## Experiments (state and kill criterion)
 
@@ -68,14 +64,14 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 - **A levy company** the captain gathers, one arrival per map to the captain plus five (Maud on The Mill with Commander's Word, Pell, Teodor, Ottilie, the pick; round 213); `cadet` shows as Levy. The captain is male or female (#648). Map 1 is Starting Alone, exempt from the Fun Gate.
 - **The branch** (#633): the extra seat offered to the outlands, the outland Keziah against Kestrow's Rook; the passed one returns on the field before the keep (map 9) at the roster median, joining only if a bed is free (0010), the bed rule printed where side characters are met and the return set up. One return in v1.
-- **The pool is the ten we have;** the four side characters (Wren, Dunstan, Ansgar, Brannock; round 213) are met by choice, one a map at most.
+- **The pool is the ten we have;** the four side characters (round 213) are met by choice, one a map at most.
 - **Quests (round 192 reverses 188's deed):** both of a main member's quests are side maps in the trial shape, quest 2 one size larger and paying the signature item. Quest 1 after their second map, quest 2 two maps later, at most two an interlude; the price is permadeath. A side map's gate: one cold non-authoring chair at 7+ on tension and choice, plus the Sim.
 - **Signature items:** the best shop weapon of its rank plus an art only it declares (0099 on the art), or a little better with no art, at most 15 percent over it in damage per combat. Bound, lost with the owner.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden combat counter, no turn before map 5, the Sim's median wakes it on map 6; current numbers always honest (pillar 2); the smith refuses rusted steel.
-- **13.23 Kinsbane** (#645, rounds 195 to 197, 201): Keziah's from arrival; a splinter of the Kin in the scythe, heard by her alone. Numbers in DESIGN 13.23. Quest 2, her oath, plays either side of it. A passed Keziah returns at Fed 9. Kept if a journal shows the hunger deciding a turn.
+- **13.23 Kinsbane** (#645, rounds 195 to 197, 201): Keziah's from arrival; an old outland god in the scythe (STORY draft 5). Numbers in DESIGN 13.23. Quest 2, her oath, plays either side of it. A passed Keziah returns at Fed 9. Kept if a journal shows the hunger deciding a turn.
 - **Origin** (#681; the Word variant on #648 behind #85; round 201): sets only the captain's card (stats, growths, a Word variant); no support number depends on it. Recruits' first captain support has an origin variant, same points. Gate 1 within 5 points.
 - **Magic and faith** (round 201): Reason shows as Lore (id kept). Faith heals and may strike (#113). One goddess, three faiths; she speaks once, to Maud in quest 2, after map 8.
-- **The storyline** is `docs/STORY.md` draft 4 (round 231), behind #656. Frozen iron is the prison, the Kin it holds warm, the break a thaw (board text only). Title drop Hask's at the Grange, echoed at the founding. The founding oath is holderless, renewed yearly, leaving allowed. Marrit may be killed or held, freed when he falls (#750). Pell is she. Open for Lotus: the warm god, the yearly oath.
+- **The storyline** is `docs/STORY.md` draft 5 (rounds 241, 242; Lotus on #731). The Kin is a threat that takes the self, chained by the faiths' unity; nobody uses it. Hask is the door, not the holder (#750 stands). Kinsbane is an old outland god, the Kin's bane. Good: the reseal, held (a living member of each region, named on the card) or hand-locked; the yearly rite by choice. Bad: a lost map, cards in "we". Secret: Under the Hill, a map after the keep, needing Kinsbane and the lance woken, Marrit held, Pell's quest 2; Reseal or Fight, only Fight with no rite-keeper (#790, behind #656). Pell is she.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). The barracks (#690) opens after the raid: hires weaker, no story. One secret hire (#691). The finale (#692): fronts, waves, an announced assault; a fallen front does not end the map; Hask and Marrit strongest, bounded by `threat` and the pair rule; enemy numbers never scale. Open: hire numbers, the pair rule's wording, wave count, assault turn.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 points either side of `normal`; permadeath off returns the fallen Wounded (2); the captain's or a protect death still loses.
 - **Supports** (#77): 3 to 4 partners plus the captain; each pair gets a kind first; romance lifted, at least one same-sex recruit pair; marriage is an S bond with both alive (#634).
@@ -101,16 +97,16 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 ## Open, the Table's
 
 - The campaign's numbers (0051): prices, rewards, stock, the seal; steel's place in the stock is the first lever.
-- The class ladder's numbers (0058), the horse at level 4 especially; which weapons need which rank; which combat arts exist.
+- The class ladder's numbers (0058), the horse at level 4; weapon ranks; which combat arts exist.
 - Whether a rout should end a Seize map (#374).
 - Whether the Sim's Canto is too timid on a clock map (#262).
-- The wake tax floor, somewhere between 6 and 44 percent, from the journals (0040's `--taxfloor`, 0.25 provisional).
+- The wake tax floor, 6 to 44 percent, from the journals (0040's `--taxfloor`, 0.25 provisional).
 - Whether a fall in a trial should cost more than the attempt.
 
 ## Plumbing
 
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
-- **Builder race** (#735, 0169; provisional): chain `on`; one Builder at a time by claim, wait and re-read, the earlier claim wins; written into ROUTINES.md section 2; STATE carries it until Lotus pastes the prompt.
+- **Builder race** (#735, 0169; provisional): chain `on`; one Builder at a time by claim, wait and re-read, the earlier claim wins; in ROUTINES.md section 2 until Lotus pastes the prompt.
 - **Art direction is ours** (Lotus, 2026-09-27). Chat's bodies sign `— Chat` (0007, 0009).
 
 ## Round index
