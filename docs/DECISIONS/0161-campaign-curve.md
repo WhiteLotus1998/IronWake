@@ -2,6 +2,8 @@
 
 Date: 2026-10-02. Issue #704 (Lotus's progression batch, item 1); the Table's rounds 222 to 226 on #665. This record restates what the Table agreed and names the two places the build bent it under the Table's own rules. Provisional until Chat's campaign play through Brackwater.
 
+Amended by 0176: the bends read `--curve`'s `carried` line, not `party +N`.
+
 ## Agreed on the Table (restated)
 
 - **The second tier's gate is level 7 with rank C** (round 225, 226), in place of 10. The captain's ladder (0160) keeps its forms at 10; nothing on the Table moved them.

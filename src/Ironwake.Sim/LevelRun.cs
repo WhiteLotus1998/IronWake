@@ -204,6 +204,33 @@ public static class LevelRun
         }
     }
 
+    /// <summary>
+    /// The company the heuristic's own campaign brings to a map's camp, slot by slot (issue 764): over
+    /// <paramref name="camps"/>, the won battles of that map as they began, the deployed levels sorted
+    /// highest first, and for each of the first <paramref name="slots"/> places the p50 over the camps
+    /// that deployed that many units; a place no camp filled reads 0.
+    /// </summary>
+    public static IReadOnlyList<int> SlotLevels(IReadOnlyList<Camp> camps, int slots)
+    {
+        var sorted = camps.Select(c => c.Deployed.OrderDescending().ToList()).ToList();
+        return Enumerable.Range(0, slots).Select(k => Percentile(sorted.Where(l => l.Count > k).Select(l => l[k]), 0.5)).ToList();
+    }
+
+    /// <summary>
+    /// The same total levels as <paramref name="levels"/>, spread as evenly as the places allow, the
+    /// remainder one level each to the top places (issue 764's <c>carried, spread</c>).
+    /// </summary>
+    public static IReadOnlyList<int> Spread(IReadOnlyList<int> levels)
+    {
+        if (levels.Count == 0)
+        {
+            return [];
+        }
+
+        var total = levels.Sum();
+        return Enumerable.Range(0, levels.Count).Select(k => total / levels.Count + (k < total % levels.Count ? 1 : 0)).ToList();
+    }
+
     private static string Band(IReadOnlyList<int> values) =>
         $"p25 {Percentile(values, 0.25)} p50 {Percentile(values, 0.5)} p75 {Percentile(values, 0.75)}";
 
