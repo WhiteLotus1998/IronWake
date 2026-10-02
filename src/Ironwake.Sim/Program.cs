@@ -121,6 +121,20 @@ public static class Program
             return HeirloomTable(args[1], seeds);
         }
 
+        if (args.Length > 0 && args[0] == "--levels")
+        {
+            var seeds = Gates.DefaultSeeds;
+            for (var i = 1; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+            }
+
+            return LevelTable(seeds);
+        }
+
         if (args.Length > 0 && args[0] == "--keep")
         {
             return KeepGates(args.Skip(1).ToList());
@@ -242,6 +256,28 @@ public static class Program
         }
 
         foreach (var line in HeirloomRun.Lines(content, itemId, HeirloomRun.Measure(contentDir, content, itemId, seeds)))
+        {
+            Console.WriteLine(line);
+        }
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The second tier's timing (issue 704): the company's levels after each campaign map under the
+    /// heuristic player, <see cref="LevelRun"/>. A measurement only; nothing here changes what ships.
+    /// </summary>
+    public static int LevelTable(int seeds)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("levels: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        foreach (var line in LevelRun.Lines(content, LevelRun.Measure(contentDir, content, seeds)))
         {
             Console.WriteLine(line);
         }

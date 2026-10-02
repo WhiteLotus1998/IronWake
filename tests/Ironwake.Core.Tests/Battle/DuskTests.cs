@@ -312,26 +312,27 @@ public class DuskTests
         var longBow = Starter with { Weapons = Starter.Weapons.SetItem("long_bow", Starter.Weapon("iron_bow") with { Id = "long_bow", MaxRange = 3 }) };
         var noClasses = Starter with { Classes = Starter.Classes.Clear() };
 
-        Assert.Equal(8, Starter.LongestReach);
-        Assert.Equal(9, longBow.LongestReach);
+        Assert.Equal(9, Starter.LongestReach);
+        Assert.Equal(10, longBow.LongestReach);
         Assert.Equal(2, noClasses.LongestReach);
     }
 
     /// <summary>
     /// Issue 403: at dusk <c>threat</c> lists the unseen tiles within the longest reach of the tile
     /// asked about, nearest first with the distance, and never a name: a rider and a soldier at the
-    /// same distance print the same way, and a <c>?</c> at 9 is not listed.
+    /// same distance print the same way, and a <c>?</c> at 10 is not listed (the reach is 9 since the
+    /// Wing Captain, issue 704: Mov 7 and range 2).
     /// </summary>
     [Fact]
     public void ThreatAtDuskListsTheUnseenTilesWithinReachNearestFirstAndUnnamed()
     {
-        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(1, "E soldier 5,2 group:a behavior:hold\nE rider 5,0 group:b behavior:hold\nE soldier 9,1 group:c behavior:hold\nE soldier 4,1 group:d behavior:hold"));
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(1, "E soldier 5,2 group:a behavior:hold\nE rider 5,0 group:b behavior:hold\nE soldier 10,1 group:c behavior:hold\nE soldier 4,1 group:d behavior:hold"));
         var hale = state.Find("hale")!;
 
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));
 
         Assert.Contains("\n  In the dark, unpriced: ? at 4,1 (4), ? at 5,0 (6), ? at 5,2 (6)", text);
-        Assert.DoesNotContain("9,1", text);
+        Assert.DoesNotContain("10,1", text);
         Assert.DoesNotContain("rider", text);
         Assert.DoesNotContain("whatever is in the dark", text);
     }
@@ -345,7 +346,7 @@ public class DuskTests
     [InlineData(null, false)]
     public void WithNothingUnseenInReachTheBareDarkLineStays(int? dusk, bool dark)
     {
-        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(dusk, "E soldier 9,1 group:c behavior:hold"));
+        var state = BattleFixture.Start(7, ValueList<Unit>.Of(Hale, Ottilie), Night(dusk, "E soldier 10,1 group:c behavior:hold"));
         var hale = state.Find("hale")!;
 
         var text = Ironwake.Cli.PlaySession.ThreatText(state, Starter, hale, hale.At, Queries.Threats(state, Starter, hale, hale.At)!, Queries.SleepingThreats(state, Starter, hale, hale.At)!, Queries.Unseeing(state, Starter, hale, hale.At));

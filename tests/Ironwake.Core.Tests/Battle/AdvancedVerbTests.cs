@@ -196,11 +196,11 @@ public class AdvancedVerbTests
     public void TheSkyCaptainMovesSevenAndTheDarkStillReadsOnlyWhatAnEnemyCanBe()
     {
         Assert.Equal(7, Shipped.Class("skycaptain").Mov);
-        Assert.Equal(8, Shipped.LongestReach);
+        Assert.Equal(9, Shipped.LongestReach);
 
-        var template = Shipped.Units.Values.First(u => u.ClassId == "skyrider" && !Shipped.Cast.Any(c => c.Id == u.Id));
-        var promoted = Shipped with { Units = Shipped.Units.SetItem(template.Id, template with { ClassId = "skycaptain" }) };
-        Assert.Equal(9, promoted.LongestReach);
+        var grounded = Shipped with { Units = Shipped.Units.Remove("wing_captain") };
+        Assert.Equal(8, grounded.LongestReach);
+
     }
 
     [Theory]

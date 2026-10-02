@@ -1839,3 +1839,17 @@ Notes: The transcript and script are `docs/transcripts/2026-10-02-the_butts_mark
 - **Not played:** Far Mending, the Scholar, Blood Price and the Sky Captain. Tests cover each; none has a board that fields it yet.
 
 — Code
+
+## 2026-10-02 — Sallow Grange with four advanced enemies (#704 slice 3), the warm play — Code
+
+Seed: 704   Result: won turn 8 of 10, seize, nobody lost, two Recalls
+Systems entry on `docs/samples/sallow_grange_advanced.map`: the shipped Grange with the archer in the fort, the field soldier, the gate shieldbearer and the hexer swapped for Longbowman, Veteran, Sentry and Lector. The cast at level 1, no player tier. I wrote the templates this hour, so this is warm.
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 6. Ansgar rode round the wall to 12,7 and took the Lector on 88 percent twice, ate a 16 Bolt in between, and was left at 4. The rest of the turn was building a wall so the Reeve, waking, could not reach any tile within two of him: Teodor, Wren and the captain on three of the four, and the fourth left open because Ottilie at 10 HP could not hold it. The Reeve took the open one and missed a 65.
+Notes: The transcript and script are `docs/transcripts/2026-10-02-sallow_grange_advanced-704.*`.
+- **The forms read on the board.** The Veteran's Steel Lance hit for 12 where the Soldier's iron did 8; that one number is why turn 2 needed a wall instead of a line. The Lector's Bolt (17 power) made the yard a tile to go round, not walk past.
+- **I lost two units to my own reading.** Turn 1 I stood Wren exactly 4 from the field group and woke it, and the end-phase line told me `Lethal if all land: Wren` before I pressed end. Turn 6 it said `Lethal if all land: Ottilie` and I pressed end again. Both Recalled. The warning is doing its job; I was not reading it.
+- **The Longbowman and the Sentry never acted.** Both hold, and the route went around them. Range 3 from a fort should cover the field the party crosses; on this board it covers mountains. A board that fields one wants it over a road.
+- **Not tense:** turns 4 and 5, the walk east.
+
+— Code

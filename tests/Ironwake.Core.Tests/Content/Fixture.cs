@@ -147,20 +147,33 @@ internal static class Fixture
     }
 
     /// <summary>
-    /// Takes every advanced form (issue 704) out of <c>classes.json</c>: the class list a campaign
-    /// journaled before the second tier prints has none.
+    /// Takes every advanced form (issue 704) out of <c>classes.json</c>, and every enemy template
+    /// in one out of <c>units/enemies.json</c>: the class list a campaign journaled before the second
+    /// tier prints has none, and its dark reached as far as the first tier's classes do.
     /// </summary>
     public static string WithoutAdvancedForms(string target)
     {
         var classesPath = Path.Combine(target, ContentFiles.ClassesName);
         var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;
         var ladder = classes["classes"]!.AsArray();
+        var forms = new HashSet<string>(StringComparer.Ordinal);
         foreach (var advanced in ladder.Where(e => e!.AsObject().ContainsKey("advances")).ToList())
         {
+            forms.Add((string)advanced!["id"]!);
             ladder.Remove(advanced);
         }
 
         File.WriteAllText(classesPath, classes.ToJsonString());
+
+        var enemiesPath = Path.Combine(target, "units", "enemies.json");
+        var enemies = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(enemiesPath))!;
+        var templates = enemies["units"]!.AsArray();
+        foreach (var promoted in templates.Where(e => forms.Contains((string)e!["class"]!)).ToList())
+        {
+            templates.Remove(promoted);
+        }
+
+        File.WriteAllText(enemiesPath, enemies.ToJsonString());
         return target;
     }
 
@@ -209,6 +222,15 @@ internal static class Fixture
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
+
+    private static readonly Lazy<string> BeforeSecondTier = new(() => WithoutAdvancedForms(CopyRealContent("ironwake-before-second-tier-")));
+
+    /// <summary>
+    /// A copy of the real content directory without the second tier (issue 704): no advanced form
+    /// and no enemy template in one, so the dark reaches 8 as it did when Brackwater Cut's dusk plays
+    /// were journaled. Made once per test run under the temp directory.
+    /// </summary>
+    public static string BeforeSecondTierContentDirectory() => BeforeSecondTier.Value;
 
     private static readonly Lazy<string> Roomless = new(() => CopyRealContent("ironwake-roomless-"));
 
