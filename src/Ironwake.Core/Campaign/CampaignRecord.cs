@@ -480,8 +480,12 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Buys <paramref name="itemId"/> for <paramref name="unitId"/> at full uses: refused when the
-    /// next map's shop does not stock it, the unit is not on the roster, its five slots are full,
-    /// or the purse holds less than the price, naming the price and the balance.
+    /// next map's shop does not stock it, the unit is not on the roster, its class cannot wield the
+    /// weapon's type the way the weapon is used (naming the type and the class's ranks; issue 768),
+    /// its five slots are full, or the purse holds less than the price, naming the price and the
+    /// balance. A weapon whose rank the unit has not reached is sold with a note naming both ranks,
+    /// since a rank is earned. The refusal reads the class the unit holds now: certification and
+    /// promotion happen on the same camp screen, so a change of class can always come first.
     /// </summary>
     public ScreenResult Buy(string itemId, string unitId, GameContent content)
     {
@@ -499,6 +503,12 @@ public sealed record CampaignRecord(
         var (name, price, uses) = content.Weapons.TryGetValue(itemId, out var weapon)
             ? (weapon.Name, weapon.Price!.Value, weapon.Durability)
             : (content.Item(itemId).Name, content.Item(itemId).Price!.Value, content.Item(itemId).Uses);
+        var unitClass = content.Class(unit.ClassId);
+        if (weapon is not null && !ClassWields(unitClass, weapon))
+        {
+            return ScreenResult.Refused(this, $"{unit.Id} cannot wield {name} ({weapon.Type.Label()}); ranks: {RanksText(unit, unitClass)}");
+        }
+
         if (unit.Inventory.IsFull)
         {
             return ScreenResult.Refused(this, $"{unit.Id} carries {Inventory.Capacity} items already");
@@ -510,8 +520,19 @@ public sealed record CampaignRecord(
         }
 
         var bought = unit with { Inventory = unit.Inventory.Add(new ItemStack(itemId, uses)) };
-        return new ScreenResult(Replace(bought) with { Purse = Purse - price }, $"{unit.Id} buys {name} for {price}; the purse holds {Purse - price}", true);
+        var shortRank = weapon is not null && unit.Skill.Rank(weapon.Type) < weapon.Rank
+            ? $"; needs {weapon.Type.Label()} {weapon.Rank}, has {unit.Skill.Rank(weapon.Type)}"
+            : "";
+        return new ScreenResult(Replace(bought) with { Purse = Purse - price }, $"{unit.Id} buys {name} for {price}; the purse holds {Purse - price}{shortRank}", true);
     }
+
+    /// <summary>Whether <paramref name="unitClass"/> wields <paramref name="weapon"/>'s type the way the weapon is used, rank aside (<see cref="Unit.CanWield"/>'s other halves).</summary>
+    private static bool ClassWields(UnitClass unitClass, Weapon weapon) =>
+        weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type);
+
+    /// <summary>The unit's rank in each type its class uses, in class order: <c>sword C, lore E</c>.</summary>
+    private static string RanksText(Unit unit, UnitClass unitClass) =>
+        string.Join(", ", unitClass.Weapons.Select(t => $"{t.Label()} {unit.Skill.Rank(t)}"));
 
     /// <summary>
     /// Repairs the weapon in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> to its
