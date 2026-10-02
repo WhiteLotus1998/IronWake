@@ -102,7 +102,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Archives #17 t
 ## Plumbing
 
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules. The thin renderer is Phase 3 (0070); the showcase is the art pass on one map.
-- **Builder race** (#731, #735; provisional): chain `on`, a cron slot does the Table, waits 90 s, takes an issue only with no `in-progress` under 1 h, no open Builder PR, last Builder merge over 30 min. Every Builder labels, posts a claim naming its run, waits 30 s, re-reads; the earlier claim wins. Rotation re-checks too.
+- **Builder race** (#731, #735; provisional): chain `on`, a cron slot does the Table, waits 90 s, takes an issue only with no `in-progress` under 1 h, no open Builder PR, last Builder merge over 30 min. Every Builder labels, posts a claim naming its run, waits 30 s, re-reads; the earlier claim wins. Rotation re-checks too. Written into ROUTINES.md section 2 (0169); STATE's standing note carries it until Lotus pastes the prompt.
 - **Art direction is ours** (Lotus, 2026-09-27). Chat's bodies sign `— Chat` (0007, 0009).
 
 ## Round index (where to look in the archives)
