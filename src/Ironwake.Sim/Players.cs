@@ -543,13 +543,14 @@ public sealed class HeuristicPlayer : IPlayer
         List<BattleUnit> enemies, List<Reach> enemyReach, MovementType movement)
     {
         Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
+        var footing = content.AbilitiesOf(unit.Unit);
         Distances? TowardNearestEnemy(Weapon armed)
         {
             Distances? chosen = null;
             var nearest = int.MaxValue;
             foreach (var target in enemies)
             {
-                var distances = Movement.DistancesTo(state.Map, content, EnemyAi.AttackTiles(state, content, unit, armed, target, movement), movement, OccupantAt);
+                var distances = Movement.DistancesTo(state.Map, content, EnemyAi.AttackTiles(state, content, unit, armed, target, movement), movement, OccupantAt, footing);
                 if (distances.From(unit.At) is { } c && c < nearest)
                 {
                     chosen = distances;
@@ -564,10 +565,10 @@ public sealed class HeuristicPlayer : IPlayer
         switch (state.Map.Win)
         {
             case WinCondition.Seize:
-                toward = Movement.DistancesTo(state.Map, content, state.Map.TilesOf(MapDefinition.ThroneTerrainId), movement, OccupantAt);
+                toward = Movement.DistancesTo(state.Map, content, state.Map.TilesOf(MapDefinition.ThroneTerrainId), movement, OccupantAt, footing);
                 break;
             case WinCondition.Escape:
-                toward = Movement.DistancesTo(state.Map, content, state.Map.Exits, movement, OccupantAt);
+                toward = Movement.DistancesTo(state.Map, content, state.Map.Exits, movement, OccupantAt, footing);
                 break;
             default:
                 if (weapon is null)

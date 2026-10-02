@@ -32,13 +32,15 @@ public static class Movement
     /// Who stands on a tile, from the moving unit's side. Never asked about
     /// <paramref name="from"/> itself; the mover's own tile is always a destination.
     /// </param>
+    /// <param name="abilities">The mover's abilities, read for footing (<see cref="AbilityRules.StepCost"/>, issue 705); none by default.</param>
     public static Reach Reach(
         MapDefinition map,
         GameContent content,
         Coord from,
         MovementType movement,
         int mov,
-        Func<Coord, Occupant> occupantAt)
+        Func<Coord, Occupant> occupantAt,
+        ValueList<Ability> abilities = default)
     {
         if (!map.Contains(from))
         {
@@ -96,7 +98,7 @@ public static class Movement
                     continue;
                 }
 
-                var step = content.TerrainById(map.TerrainIds[index]).MoveCost(movement);
+                var step = AbilityRules.StepCost(content.TerrainById(map.TerrainIds[index]), movement, abilities);
                 if (step is null)
                 {
                     continue;
@@ -137,14 +139,16 @@ public static class Movement
     /// a tile from which no target can be reached is null. Enemy-occupied tiles are never
     /// walked through; the targets are taken as given, so the caller decides which tiles
     /// count as ones the mover may end on. One multi-source Dijkstra over the reversed
-    /// graph, so nothing re-counts per tile.
+    /// graph, so nothing re-counts per tile. <paramref name="abilities"/> are the mover's, read for
+    /// footing as <see cref="Reach"/> reads them (issue 705).
     /// </summary>
     public static Distances DistancesTo(
         MapDefinition map,
         GameContent content,
         IEnumerable<Coord> targets,
         MovementType movement,
-        Func<Coord, Occupant> occupantAt)
+        Func<Coord, Occupant> occupantAt,
+        ValueList<Ability> abilities = default)
     {
         var tiles = map.Width * map.Height;
         var costs = new int[tiles];
@@ -176,7 +180,7 @@ public static class Movement
             if (!stepAsked[current])
             {
                 stepAsked[current] = true;
-                stepInto[current] = content.TerrainById(map.TerrainIds[current]).MoveCost(movement);
+                stepInto[current] = AbilityRules.StepCost(content.TerrainById(map.TerrainIds[current]), movement, abilities);
                 occupants[current] ??= occupantAt(here);
             }
 

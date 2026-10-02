@@ -781,7 +781,7 @@ public static class EnemyAi
         var weapon = attacker.EquippedWeapon(content)
             ?? throw new ArgumentException($"{attacker.Id} has no weapon to score with", nameof(attacker));
         var there = attacker with { At = from };
-        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false));
+        var me = content.CombatantOf(attacker.Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(from, content), attacker.Hp, hitModifier: Brace.StrikeHit(state, there, target) + Signatures.StrikeHit(state, content, there, countering: false), beside: Formation.Beside(state, content, there)) with { Aura = Formation.Aura(state, content, there) };
         var them = target.Answering(state, content, from, there);
         var forecast = Combat.Forecast(me, them, from.DistanceTo(target.At), state.Scheme);
 
@@ -842,11 +842,12 @@ public static class EnemyAi
         var movement = Grounding.MovementOf(unit, content);
         Occupant OccupantAt(Coord at) => at == unit.At ? Occupant.None : state.OccupantAt(at, unit.Side);
 
+        var footing = content.AbilitiesOf(unit.Unit);
         Distances? chosen = null;
         var chosenCost = int.MaxValue;
         foreach (var target in players)
         {
-            var distances = Movement.DistancesTo(state.Map, content, AttackTiles(state, content, unit, weapon, target, movement), movement, OccupantAt);
+            var distances = Movement.DistancesTo(state.Map, content, AttackTiles(state, content, unit, weapon, target, movement), movement, OccupantAt, footing);
             var cost = distances.From(unit.At);
             if (cost is { } c && c < chosenCost)
             {

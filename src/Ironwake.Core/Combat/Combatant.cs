@@ -11,11 +11,13 @@ namespace Ironwake.Core;
 /// section 5 fallback of -5 Mt and -10 hit, so a unit is never helpless.
 /// <see cref="Abilities"/> are the unit's resolved abilities (issue 66): their passive
 /// deltas are part of <see cref="Stats"/> and their combat modifiers are read by the
-/// hit and crit chances through <see cref="AbilityRules"/>.
+/// hit and crit chances through <see cref="AbilityRules"/>. <c>beside</c> is what the unit's
+/// <see cref="BesideStatsEffect"/> adds where it fights with an ally beside it (issue 705), read on the
+/// board by <see cref="Formation.Beside"/>; it is part of <see cref="Stats"/>.
 /// </summary>
 public sealed record Combatant
 {
-    public Combatant(Unit unit, UnitClass unitClass, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false, int hitModifier = 0, int critModifier = 0, ValueList<Ability> abilities = default)
+    public Combatant(Unit unit, UnitClass unitClass, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false, int hitModifier = 0, int critModifier = 0, ValueList<Ability> abilities = default, Stats beside = default)
     {
         if (unitClass.Id != unit.ClassId)
         {
@@ -29,7 +31,7 @@ public sealed record Combatant
         }
 
         Abilities = abilities;
-        Stats = unit.EffectiveStats(unitClass) + AbilityRules.Passive(abilities);
+        Stats = unit.EffectiveStats(unitClass) + AbilityRules.Passive(abilities) + beside;
         var maxHp = Stats.Hp;
         if (hp < 1 || hp > maxHp)
         {
@@ -71,6 +73,12 @@ public sealed record Combatant
     public MovementType Movement => Class.Movement;
 
     public ValueList<Ability> Abilities { get; }
+
+    /// <summary>
+    /// The aura this side fights under (issue 705, <see cref="AuraEffect"/>): hit added to its strikes and
+    /// avoid against the opponent's, read on the board by <see cref="Formation.Aura"/>; none off the board.
+    /// </summary>
+    public CombatBonus Aura { get; init; }
 
     /// <summary>The unit's stats with the class modifiers and passive ability deltas applied, the numbers the formulas read.</summary>
     public Stats Stats { get; }
