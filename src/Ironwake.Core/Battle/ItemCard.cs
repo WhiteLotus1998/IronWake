@@ -44,6 +44,16 @@ public static class ItemCard
             parts.Add($"Effective against {string.Join(" and ", weapon.EffectiveAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
         }
 
+        if (weapon.CritAgainst.Count > 0)
+        {
+            parts.Add($"Crit +{weapon.CritBonus} against {string.Join(" and ", weapon.CritAgainst.Select(m => m.ToString().ToLowerInvariant()))}.");
+        }
+
+        if (weapon.Type == WeaponType.Bow)
+        {
+            parts.Add("A crit grounds a flier.");
+        }
+
         parts.Add(weapon.Description);
         return string.Join(" ", parts.Where(p => p.Length > 0));
     }

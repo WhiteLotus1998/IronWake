@@ -123,6 +123,12 @@ namespace Ironwake.Core;
 /// replay journaled plays made under that rule. Off by default, and then an exit is taken
 /// without a Move, from the exit tile the unit began its turn on.
 /// </param>
+/// <param name="EffectiveBows">
+/// The <c>effective_bows: on</c> header: the bow rule before issue 703, under which a bow is
+/// effective against fliers (Mt x3), carries no crit bonus against them, and never grounds
+/// (<see cref="Grounding.ForMap"/>). It is kept only on the sample maps that replay journaled
+/// plays made under that rule. Off by default.
+/// </param>
 /// <param name="Chests">
 /// The <c>chests:</c> block (issue 649): each chest's tile and contents, in file order. Empty on a
 /// map without one. Which are open is battle state (<see cref="BattleState.Opened"/>).
@@ -180,7 +186,8 @@ public sealed record MapDefinition(
     ValueList<Chest> Chests = default,
     MessengerRoute? Messenger = null,
     bool OrdersEnabled = false,
-    string? WokenBearer = null)
+    string? WokenBearer = null,
+    bool EffectiveBows = false)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;

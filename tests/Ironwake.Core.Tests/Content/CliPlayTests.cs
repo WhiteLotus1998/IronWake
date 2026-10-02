@@ -1526,11 +1526,12 @@ public class CliPlayTests
     /// Issue 131, the north cut (DECISIONS/0093): Code's play of the shipped Saltmarsh Ford
     /// (seed 547) replays to its transcript: the south bank cleared by turn 5 with nothing
     /// called, the pair arriving on Wren's step to 10,1 on turn 7, and the rout won on turn 11.
+    /// Since issue 703 it replays on the shipped map's pre-703 copy, which carries <c>effective_bows: on</c>.
     /// </summary>
     [Fact]
-    public void TheNorthCutPlayReplaysOnTheShippedSaltmarshToItsTranscript()
+    public void TheNorthCutPlayReplaysOnThePreGroundingSaltmarshToItsTranscript()
     {
-        var output = RunShipped("saltmarsh_ford.map", "2026-09-30-saltmarsh_ford-547.script", 547, out var exit);
+        var output = RunSample("saltmarsh_ford_0093.map", "2026-09-30-saltmarsh_ford-547.script", 547, out var exit);
 
         Assert.Equal(0, exit);
         Assert.Contains("Wren moves 10,4 -> 10,1 via 10,3 10,2\nReinforcements arrive\n", output);

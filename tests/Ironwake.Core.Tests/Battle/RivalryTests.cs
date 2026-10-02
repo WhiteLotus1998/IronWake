@@ -411,7 +411,7 @@ public class RivalryTests
         var map = MapFixture.Parse(text, "saltmarsh_ford_rivalry.map");
 
         Assert.Equal(text, MapFormat.Write(map, Starter));
-        Assert.Equal(MapFixture.Parse(shipped, "saltmarsh_ford.map") with { Name = map.Name, RivalryArm = "symmetric" }, map);
+        Assert.Equal(MapFixture.Parse(shipped, "saltmarsh_ford.map") with { Name = map.Name, RivalryArm = "symmetric", EffectiveBows = false }, map);
     }
 
     [Fact]

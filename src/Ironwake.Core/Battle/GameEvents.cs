@@ -246,6 +246,13 @@ public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, str
 public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
 /// <summary>
+/// A bow's crit landed a flier that survived (issue 703, <see cref="Grounding"/>): it moves on foot
+/// until <paramref name="Side"/>'s next phase ends, or the one after that when <paramref name="Next"/>
+/// says its own phase is under way.
+/// </summary>
+public sealed record UnitGrounded(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
+
+/// <summary>
 /// The captain called an order (DESIGN.md 13.2, issue 85): the allies it acts on in id order, how
 /// many allies stood in its radius and how many were alive, and the captain's exposure where he
 /// stands (<see cref="Exposure.Of"/>, no crit), the numbers the spike's binding fraction and

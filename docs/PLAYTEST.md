@@ -1799,3 +1799,17 @@ Notes: The transcript and script are `docs/transcripts/2026-10-02-the_tollgate_f
 - **Not tense:** turns 1 and 2, the march. The same as every Tollgate play.
 
 — Code
+
+## 2026-10-02 — Saltmarsh Ford, grounding (#703), the warm play — Code
+
+Seed: 703   Result: stopped at turn 6, player phase (the wingrider and the archer dead, Teodor at 8 HP, nobody fallen), one Recall spent, two left
+Systems entry on the shipped `content/maps/saltmarsh_ford.map`, where the wingrider holds the north bank above the river and Ottilie carries the Iron Bow. I wrote the rule this hour, so this is a warm play, not a Fun Gate entry. The question: does grounding ever fire, and does it change a move?
+Tension: 6/10   Choice: 5/10   Surprise: 5/10
+Best turn: turn 4, Ottilie stepping alone to 12,4 to shoot the wingrider on the north bank. It woke the fort group, which I'd half known, and the forecast read `acc 77% dmg 9 crit 23% (grounds)`, a line I'd never have taken for a crit before. She hit for 9. On the enemy phase the wingrider dropped onto the river at 12,3 to lance her and missed, and for one player phase there was a flier over water at 8 HP, the exact picture the rule exists for.
+Notes: The transcript and script are `docs/transcripts/2026-10-02-saltmarsh_ford-703.*`.
+- **It reads.** `(grounds)` sits after the crit column and says what it does. The bow card says it too.
+- **It never fired, and the arithmetic says it rarely can.** Crit is x3. Ottilie's 9 against a 17 HP wingrider makes a crit 27: a crit kills before it grounds. On turn 5 the wingrider died to a plain hit over the river. Grounding fires only where a bow's plain hit is under a third of the flier's HP, so on today's numbers it is close to the scenery round 216 set out to avoid. Taken to the Table with a lean: a bow's crit on a flier grounds in place of tripling.
+- **Before the Recall,** a wingrider's 2 percent crit killed Teodor on turn 2. Not this rule's doing, but it is the flier the bow is now weaker against (9 damage where it was 19).
+- **Not tense:** turn 1, the march, as on every Saltmarsh play.
+
+— Code

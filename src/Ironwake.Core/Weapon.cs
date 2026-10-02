@@ -64,6 +64,19 @@ public sealed record Weapon(
     /// </summary>
     public bool FrozenIron { get; init; }
 
+    /// <summary>
+    /// The movement types this weapon crits more easily against (issue 703): <see cref="CritBonus"/>
+    /// is added to its Crit when the target moves so. Bows carry it against fliers in place of the
+    /// effective tag, so a crit lands a flier (<see cref="Grounding"/>) instead of killing it.
+    /// </summary>
+    public ValueList<MovementType> CritAgainst { get; init; }
+
+    /// <summary>The Crit added against a target whose movement is in <see cref="CritAgainst"/> (issue 703).</summary>
+    public int CritBonus { get; init; }
+
+    /// <summary>The Crit this weapon adds against a target moving by <paramref name="movement"/>: <see cref="CritBonus"/> when listed, else 0.</summary>
+    public int CritBonusAgainst(MovementType movement) => CritAgainst.Contains(movement) ? CritBonus : 0;
+
     /// <summary>The smith's line when asked to repair or Refine a glass weapon (issue 702).</summary>
     public const string GlassRefusal = "You don't mend glass. You buy another.";
 

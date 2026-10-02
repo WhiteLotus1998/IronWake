@@ -494,14 +494,24 @@ public sealed record BattleState(
 
     /// <summary>
     /// Where a unit may move, by the section 4 rule on the board as it stands: its class's Mov, one
-    /// more when Pressed (issue 85), one less when chilled, never below 1 (issue 702, <see cref="Frost.Mov"/>).
+    /// more when Pressed (issue 85), one less when chilled, never below 1 (issue 702, <see cref="Frost.Mov"/>);
+    /// on foot while grounded, and no move at all when stranded (issue 703, <see cref="Grounding"/>).
     /// </summary>
     public Reach ReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
         var mov = Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit);
-        return Movement.Reach(Map, content, unit.At, unitClass.Movement, mov, at => OccupantAt(at, unit.Side));
+        return ReachOn(unit, content, mov);
     }
+
+    /// <summary>
+    /// The section 4 reach of <paramref name="unit"/> on <paramref name="mov"/> points by how it moves now
+    /// (<see cref="Grounding.MovementOf"/>); its own tile alone when grounded where it cannot walk.
+    /// </summary>
+    private Reach ReachOn(BattleUnit unit, GameContent content, int mov) =>
+        Grounding.Stranded(this, unit, content)
+            ? Movement.Reach(Map, content, unit.At, content.Class(unit.Unit.ClassId).Movement, 0, at => OccupantAt(at, unit.Side))
+            : Movement.Reach(Map, content, unit.At, Grounding.MovementOf(unit, content), mov, at => OccupantAt(at, unit.Side));
 
     /// <summary>
     /// Where a Fall back order's move may take a unit (issue 85): the section 4 reach from where it
@@ -514,8 +524,7 @@ public sealed record BattleState(
             return null;
         }
 
-        var unitClass = content.Class(unit.Unit.ClassId);
-        return Movement.Reach(Map, content, unit.At, unitClass.Movement, Orders.FallBackMov, at => OccupantAt(at, unit.Side));
+        return ReachOn(unit, content, Orders.FallBackMov);
     }
 
     /// <summary>
@@ -529,8 +538,7 @@ public sealed record BattleState(
             return null;
         }
 
-        var unitClass = content.Class(unit.Unit.ClassId);
-        return Movement.Reach(Map, content, unit.At, unitClass.Movement, budget, at => OccupantAt(at, unit.Side));
+        return ReachOn(unit, content, budget);
     }
 
     /// <summary>This state with one unit replaced by id. The unit must exist.</summary>

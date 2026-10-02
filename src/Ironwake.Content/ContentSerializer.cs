@@ -628,6 +628,18 @@ public static class ContentSerializer
             writer.WriteBoolean("frozenIron", true);
         }
 
+        if (weapon.CritAgainst.Count > 0)
+        {
+            writer.WriteStartArray("critAgainst");
+            foreach (var movement in weapon.CritAgainst)
+            {
+                writer.WriteStringValue(movement.ToString().ToLowerInvariant());
+            }
+
+            writer.WriteEndArray();
+            writer.WriteNumber("critBonus", weapon.CritBonus);
+        }
+
         if (weapon.BoundTo is { } owner)
         {
             writer.WriteString("boundTo", owner);
