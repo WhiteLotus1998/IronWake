@@ -36,6 +36,12 @@ public sealed record UnitClass(
     public bool Hidden { get; init; }
 
     /// <summary>
+    /// Whether the class is on the captain's ladder (issue 705, DESIGN section 3): only the captain
+    /// is promoted into it, and the captain into no other class. An advanced form shares its base's flag.
+    /// </summary>
+    public bool Captain { get; init; }
+
+    /// <summary>
     /// The class this one is the advanced form of (issue 704, DESIGN section 3), or null for a
     /// first-tier class. Only a unit in that class may be promoted into this one; the form keeps
     /// every weapon type of its base and its growths are the base's.

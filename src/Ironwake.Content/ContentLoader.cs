@@ -1473,6 +1473,7 @@ public static class ContentLoader
                 Abilities = AbilityIds(node, "abilities", abilities),
                 Certification = ParseCertification(node),
                 Hidden = node.BoolOr("hidden", false),
+                Captain = node.BoolOr("captain", false),
                 StrikeOnly = ParseStrikeOnly(node, weapons),
                 Grants = ParseGrants(node, weapons),
             });
@@ -1507,6 +1508,11 @@ public static class ContentLoader
             }
 
             var form = builder[node.Entry!];
+            if (form.Captain != basis.Captain)
+            {
+                throw node.Error("captain", $"must match its base, '{basisId}': an advanced form is on the captain's ladder exactly when its base is");
+            }
+
             foreach (var weapon in basis.Weapons.Where(w => !form.CanUse(w)))
             {
                 throw node.Error("weapons", $"must keep every weapon type of '{basisId}'; missing {weapon.ToString().ToLowerInvariant()}");
@@ -1853,6 +1859,14 @@ public static class ContentLoader
         for (var i = 0; i < cast.Count; i++)
         {
             ValidateCastEntry(castNodes[i], cast[i], castIds, classes, weapons);
+        }
+
+        foreach (var (id, unit) in builder)
+        {
+            if (classes[unit.ClassId].Captain && !(cast.Count > 0 && cast[0].Id == id))
+            {
+                throw new ContentException(origin[id], id, "class", $"'{unit.ClassId}' is on the captain's ladder, and only the captain, the cast's first, stands in it");
+            }
         }
 
         return (builder.ToImmutable(), ValueList<Unit>.From(cast), signatures.ToImmutable(), pronouns.ToImmutable());

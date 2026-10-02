@@ -154,18 +154,21 @@ public class CampaignCliTests
         {
             var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
 
-            Assert.Contains("ERROR: Alder Fenn cannot be promoted to Outrider: needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("ERROR: Alder Fenn cannot be promoted to Outrider: Outrider is not on the captain's ladder; needs level 4, has 1; needs sword D, has E\n", output);
             Assert.Contains("ERROR: Brannock cannot be promoted to Reaver: needs level 3, has 1; needs axe D, has E\n", output);
             Assert.Contains("Classes: what each asks, read against a unit's own stats without its class's; a seal costs 500, 1000 for an advanced form\n", output);
             Assert.Contains("  Cadet: nothing -- Alder Fenn's class\n", output);
-            Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- needs level 4, has 1; needs sword D, has E\n", output);
-            Assert.Contains("  Bowman: level 3, dex 8 -- needs level 3, has 1; needs dex 8, has 7\n", output);
-            Assert.Contains("  Halberdier (from Pikeman; adds axe): level 10, lance C -- needs to be a Pikeman first; needs level 10, has 1; needs lance C, has E\n", output);
+            Assert.Contains("  Outrider: level 4, sword D; or its trial in place of the seal -- Outrider is not on the captain's ladder; needs level 4, has 1; needs sword D, has E\n", output);
+            Assert.Contains("  Bowman: level 3, dex 8 -- Bowman is not on the captain's ladder; needs level 3, has 1; needs dex 8, has 7\n", output);
+            Assert.Contains("  Halberdier (from Pikeman; adds axe): level 10, lance C -- Halberdier is not on the captain's ladder; needs to be a Pikeman first; needs level 10, has 1; needs lance C, has E\n", output);
             Assert.Contains("  Marksman (from Bowman; adds Long Draw): level 10, bow C", output);
             Assert.Contains("  Scholar (from Adept; adds faith (strike spells only)): level 10, lore C", output);
             Assert.Contains("  Warden (from Chaplain; adds sword, Far Mending): level 10, faith C", output);
             Assert.Contains("  Berserker (from Reaver; adds Blood Price): level 10, axe C", output);
             Assert.Contains("  Sky Captain (from Skyrider; adds +1 Mov): level 10, lance C", output);
+            Assert.Contains("  Vanguard: level 3 -- needs level 3, has 1\n", output);
+            Assert.Contains("  Commander (from Marshal; adds cavalry, lance, +2 Mov): level 10, sword C -- needs to be a Marshal first;", output);
+            Assert.Contains("  Champion (from Vanguard; adds axe): level 10, sword C -- needs to be a Vanguard first; needs level 10, has 1; needs sword C, has E\n", output);
             Assert.Contains("ERROR: No unit 'nobody' on the roster\n", output);
         }
         finally

@@ -441,10 +441,14 @@ public partial class Main
         void Fill(params Vector2[] points) => DrawColoredPolygon(points, colour);
         var content = _client!.Content;
         var reach = Enumerable.Range(0, unit.Unit.Inventory.Count).Select(slot => unit.UsableWeaponAt(content, slot)).OfType<Weapon>().Select(w => w.MaxRange).DefaultIfEmpty(1).Max();
-        // An advanced form draws its base class's shape until it has its own (issue 704).
+        // An advanced form draws its base class's shape until it has its own (issue 704), and the
+        // captain's ladder draws the Levy's (issue 705).
         switch (content.Class(unit.Unit.ClassId).BaseId)
         {
             case "cadet":
+            case "vanguard":
+            case "marshal":
+            case "ranger":
                 Stroke(P(0, -11), P(0, 10));
                 Stroke(P(-6, 4), P(6, 4));
                 Fill(P(-2, -8), P(0, -13), P(2, -8));

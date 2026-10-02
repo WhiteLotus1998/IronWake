@@ -1,7 +1,7 @@
 Campaign, seed 685, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 maps
 -- Before map 6 of 9: Raid on Ironwake; the purse holds 500 --
 == Roster ==
-  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
@@ -1301,7 +1301,7 @@ Battle won: rout; only recall is left, or leave
 Raid on Ironwake won: rout; reward 1000, the purse holds 1500; fallen: Teodor, Dunstan
 -- Before map 7 of 9: Sallow Grange; the purse holds 1500 --
 == Roster ==
-  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
   Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
@@ -1372,7 +1372,7 @@ Ines Tarrow joins as a Bowman at L1 for 300, the purse holds 0; beds: 13/14
 ERROR: A hire costs 300 and the purse holds 0
 > roster
 Roster: company 11/12
-  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
   Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6
@@ -1392,7 +1392,7 @@ Roster: company 11/12
 > camp
 -- Before map 7 of 9: Sallow Grange; the purse holds 0 --
 == Roster ==
-  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L2, EXP 35; 1: Iron Sword 34/40 (repair 60), 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 59; 1: Iron Bow 37/40 (repair 30), 2: Field Dressing 3/3
   Pell: Adept L1, EXP 71; 1: Cinder 8/8, 2: Gust 6/6

@@ -147,9 +147,10 @@ internal static class Fixture
     }
 
     /// <summary>
-    /// Takes every advanced form (issue 704) out of <c>classes.json</c>, and every enemy template
-    /// in one out of <c>units/enemies.json</c>: the class list a campaign journaled before the second
-    /// tier prints has none, and its dark reached as far as the first tier's classes do.
+    /// Takes every advanced form (issue 704) and the captain's ladder (issue 705) out of <c>classes.json</c>,
+    /// and every enemy template in a form out of <c>units/enemies.json</c>: the class list a campaign journaled
+    /// before the second tier prints has none, its captain certified like anyone, and its dark reached as far
+    /// as the first tier's classes do.
     /// </summary>
     public static string WithoutAdvancedForms(string target)
     {
@@ -157,7 +158,7 @@ internal static class Fixture
         var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;
         var ladder = classes["classes"]!.AsArray();
         var forms = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var advanced in ladder.Where(e => e!.AsObject().ContainsKey("advances")).ToList())
+        foreach (var advanced in ladder.Where(e => e!.AsObject().ContainsKey("advances") || e!.AsObject().ContainsKey("captain")).ToList())
         {
             forms.Add((string)advanced!["id"]!);
             ladder.Remove(advanced);
