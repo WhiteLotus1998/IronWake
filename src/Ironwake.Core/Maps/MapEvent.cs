@@ -55,3 +55,19 @@ public sealed record SpawnEnemy(EnemyPlacement Placement) : MapEventAction;
 
 /// <summary>A named flag is set on the battle, for a win condition to read later.</summary>
 public sealed record SetFlag(string Flag) : MapEventAction;
+
+/// <summary>
+/// The <c>freed:</c> header (issue 750): the enemy placed at <paramref name="Bound"/> is bound to
+/// the boss of group <paramref name="BossGroup"/>, placed or spawned, and is freed when he falls.
+/// </summary>
+public sealed record FreedBond(Coord Bound, string BossGroup);
+
+/// <summary>How the bound enemy of a <c>freed:</c> header left the board (issue 750).</summary>
+public enum BondFate
+{
+    /// <summary>Its boss fell while it stood: it left the board, not a kill.</summary>
+    Freed,
+
+    /// <summary>It was killed (or otherwise removed) before its boss fell.</summary>
+    Fell,
+}

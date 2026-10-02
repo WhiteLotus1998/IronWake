@@ -40,6 +40,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The player units other than the captain deployed at the start of the game (issue 263).</summary>
     public int Recruits { get; init; }
 
+    /// <summary>How the enemy a <c>freed:</c> header binds left the board (issue 750): null while she stood at the end or on a map without one.</summary>
+    public BondFate? Bond { get; init; }
+
     /// <summary>The weapons each player unit attacked and countered with (issue 746), by id; a unit that never struck is absent.</summary>
     public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
 
@@ -266,6 +269,7 @@ public static class Runner
             Skills = LastOf(state, unit => unit.Skill),
             Masteries = LastOf(state, unit => unit.Mastery),
             Recruits = recruits,
+            Bond = state.Bond,
             Weapons = weapons,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
             Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),

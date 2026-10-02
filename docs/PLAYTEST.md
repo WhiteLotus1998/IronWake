@@ -1898,3 +1898,18 @@ Notes: the transcript and script are `docs/transcripts/2026-10-02-the_tollgate-7
 - **Not tense:** turns 3 and 4. Six misses into a forest brigand at 63 and 47 are a coin I had to keep flipping.
 
 — Code
+
+## 2026-10-02 — Ironwake Keep (finale), the bond (#750), the warm play — Code
+
+Seed: 750 at `--level 8`   Result: stopped at the start of turn 6 of 11 in a losing position (Keziah and Ottilie fallen, the gate and the south fallen, the captain at 14 on the gate, the lord not yet on the board), one Recall spent, two left
+Systems entry on `docs/samples/ironwake_keep_finale.map` with `freed: 7,6 by lord`. This is a warm play: I wrote the rule this hour, so it is not a Fun Gate entry. The question: does the bond read, and does it make the hunter a choice rather than just a big enemy?
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 4. The hunter had come to 9,1 against Wren, and Pell at 11,1 had her at range 2 with Cinder: 10 damage, no counter, 33 down to 23. The forecast under it read `Sworn Hunter is bound to Sworn Lord: freed when Sworn Lord falls`, and that is the first time a forecast on her has felt like a question. The lord arrives on turn 6 at the far edge and has to be walked to, so "freed" means five more phases of being hunted. I chose to keep burning her.
+Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_finale-750.*`. Replay with `play docs/samples/ironwake_keep_finale.map --seed 750 --level 8 --script <script>`.
+- **It reads everywhere it should.** It is on the board, on every `threat` row, under every forecast with her in it, and under the enemy's own forecast when she strikes. Nobody could learn it by surprise. If anything it is too loud: on a twelve-unit board the line is under every threat, including units she can't reach. One row on the board and on her forecasts would be enough, but I've left that as it is until a cold chair says so.
+- **The choice is real on this board, but lopsided.** She is freed only when the lord dies, and he arrives on turn 6 at 0,6 and has to be reached across the yard. So letting her live means being hunted through turn 10 or so. Killing her ends the hunt at the cost of a hard fight (39 HP, held strikes, a lance or a sword chosen per target). On this map the arithmetic says kill her, and the Sim agrees: 48 of 50. The bond makes it a choice only once the founding's paragraph puts a price on her death (#656).
+- **The hunt punished my own move.** On turn 4 I moved Maud south to heal Dunstan, and the gate dropped to the weakest front. The hunter walked from the north to 9,5 and put Ottilie to 5. Then the hexer killed her. The board had printed the hunted front, and I read it after I'd moved.
+- **My mistakes, for the record.** Turn 2's first try left Ansgar open on the gate after a counter. I spent a Recall on it. On turn 4 I sent Keziah at a 2 HP soldier past `Lethal if all land: Keziah`. She missed, and the soldier and an archer killed her. On turn 5 I typed a move one tile beyond the captain's reach, so he stayed on the gate. The board said every one of these.
+- **Not tense:** turn 1, the deployment. Pairing the fronts is solved by the pair rule's line.
+
+— Code

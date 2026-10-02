@@ -193,6 +193,11 @@ public static class ProtocolJson
                 WriteCoord(w, "at", b.At);
                 w.WriteNumber("hp", b.Hp);
                 break;
+            case UnitFreed f:
+                w.WriteString("unit", f.UnitId);
+                WriteCoord(w, "at", f.At);
+                w.WriteNumber("hp", f.Hp);
+                break;
             case MessengerEscaped m:
                 w.WriteString("unit", m.UnitId);
                 WriteCoord(w, "at", m.At);
@@ -1232,6 +1237,11 @@ public static class ProtocolJson
             w.WriteBoolean("permadeath", false);
         }
 
+        if (record.FreedUnitFell)
+        {
+            w.WriteBoolean("freedUnitFell", true);
+        }
+
         if (record.Origin is { } origin)
         {
             w.WriteString("origin", origin);
@@ -1386,6 +1396,7 @@ public static class ProtocolJson
             RareMaterial = Math.Max(0, OptionalInt(e, "rareMaterial") ?? 0),
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
+            FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),
         };

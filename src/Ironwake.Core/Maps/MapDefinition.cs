@@ -235,6 +235,12 @@ public sealed record MapDefinition(
     /// </summary>
     public Coord? Hunter { get; init; }
 
+    /// <summary>
+    /// The <c>freed:</c> header (issue 750): the enemy placement bound to a boss's group, freed
+    /// when a boss of that group falls (<see cref="Freed"/>). Null for none.
+    /// </summary>
+    public FreedBond? Bond { get; init; }
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

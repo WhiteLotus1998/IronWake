@@ -78,7 +78,7 @@ public static class FinaleRun
         map.DeploysAll ? null : $"finale: {id} is not 'deploy: all'; the finale fields the whole company";
 
     /// <summary>One company's reading: the heuristic's games and the slowest AI-vs-AI game.</summary>
-    public sealed record Reading(Company Company, int Size, IReadOnlyList<GameResult> Games, long SlowestMs, int TurnLimit)
+    public sealed record Reading(Company Company, int Size, IReadOnlyList<GameResult> Games, long SlowestMs, int TurnLimit, bool Bonded = false)
     {
         public int Wins => Games.Count(g => g.Won);
 
@@ -101,6 +101,10 @@ public static class FinaleRun
             yield return $"finale {Name(Company)}: {Size} units at level {level}, heuristic wins {Wins}/{Games.Count} ({rate:P0}), losses {Gates.LossCounts(Games)}: {verdict}";
             yield return $"  length: median {MedianTurns} turns over every game, limit {TurnLimit}: {(Short ? "ok" : $"over {LengthLimit}, the lever is one fewer wave")}";
             yield return $"  time: {SpeedSeeds} AI-vs-AI games, slowest {SlowestMs} ms: {Gates.Verdict(Fast)}";
+            if (Bonded)
+            {
+                yield return "  " + BondLine(Games);
+            }
         }
     }
 
@@ -125,8 +129,15 @@ public static class FinaleRun
         }
 
         var size = BattleState.From(map, fielded, roster, 1, scheme).UnitsOf(Side.Player).Count();
-        return new Reading(company, size, games, slowest, map.TurnLimit);
+        return new Reading(company, size, games, slowest, map.TurnLimit, map.Bond is not null);
     }
+
+    /// <summary>
+    /// How the bound enemy of a <c>freed:</c> header left each game (issue 750): killed, freed, or
+    /// standing at the end. Data only; the Sim's player does not price an ending.
+    /// </summary>
+    public static string BondLine(IReadOnlyList<GameResult> games) =>
+        $"bond: hunter killed {games.Count(g => g.Bond == BondFate.Fell)}, freed {games.Count(g => g.Bond == BondFate.Freed)}, standing {games.Count(g => g.Bond is null)} of {games.Count} (data; the Sim does not price an ending)";
 
     private static int Median(IEnumerable<int> values)
     {

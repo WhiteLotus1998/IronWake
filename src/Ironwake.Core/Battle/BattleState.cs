@@ -70,6 +70,13 @@ public sealed record BattleState(
     public MessengerFate? MessengerGone { get; init; }
 
     /// <summary>
+    /// How the enemy bound by the map's <c>freed:</c> header left the board (issue 750): null while
+    /// it stands or on a map without one; <see cref="BondFate.Fell"/> when removed, which
+    /// <see cref="Freed.After"/> marks <see cref="BondFate.Freed"/> over. A Recall restores it with the board.
+    /// </summary>
+    public BondFate? Bond { get; init; }
+
+    /// <summary>
     /// The names of the map's fronts that have fallen (issue 692), sorted. A front falls once and
     /// stays fallen; a Recall restores the list with the board.
     /// </summary>
@@ -558,7 +565,8 @@ public sealed record BattleState(
     /// <summary>
     /// This state with a unit removed by id. The unit must exist. Removing the messenger records
     /// it as fallen on its tile (<see cref="MessengerGone"/>); <see cref="Messenger.AfterMove"/>
-    /// marks an escape over that.
+    /// marks an escape over that. Removing the bound enemy of a <c>freed:</c> header records it
+    /// as fallen (<see cref="Bond"/>); <see cref="Freed.After"/> marks a freeing over that.
     /// </summary>
     public BattleState WithoutUnit(string id)
     {
@@ -567,7 +575,8 @@ public sealed record BattleState(
             if (Units[i].Id == id)
             {
                 var gone = Messenger.Is(this, Units[i]) ? new MessengerFate(Units[i].At, Escaped: false) : MessengerGone;
-                return this with { Units = Units.RemoveAt(i), MessengerGone = gone };
+                var bond = Freed.IsBound(this, Units[i]) ? BondFate.Fell : Bond;
+                return this with { Units = Units.RemoveAt(i), MessengerGone = gone, Bond = bond };
             }
         }
 
@@ -702,6 +711,11 @@ public sealed record BattleState(
         if (MessengerGone is { } fate)
         {
             sb.Append("messenger ").Append(fate.Escaped ? "escaped" : "fallen").Append(' ').Append(fate.At).Append('\n');
+        }
+
+        if (Bond is { } bondFate)
+        {
+            sb.Append("bond ").Append(bondFate == BondFate.Freed ? "freed" : "fell").Append('\n');
         }
 
         foreach (var unit in Units)

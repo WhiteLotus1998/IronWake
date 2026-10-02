@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -183,6 +183,11 @@ public static class MapFormat
         if (map.Hunter is { } hunter)
         {
             sb.Append("hunter: ").Append(hunter).Append('\n');
+        }
+
+        if (map.Bond is { } bond)
+        {
+            sb.Append("freed: ").Append(bond.Bound).Append(" by ").Append(bond.BossGroup).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -368,7 +373,51 @@ public static class MapFormat
             Validate(map);
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
             map = map with { Fronts = ParseFronts(header, map) };
-            return map with { Hunter = ParseHunter(header, map) };
+            map = map with { Hunter = ParseHunter(header, map) };
+            return map with { Bond = ParseFreed(header, map) };
+        }
+
+        /// <summary>
+        /// The <c>freed:</c> header (issue 750): <c>x,y by group</c>, the tile an enemy placement's
+        /// that is neither a boss nor the messenger, the group one with a boss, placed or spawned.
+        /// </summary>
+        private FreedBond? ParseFreed(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("freed", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var tile = parts.Length == 3 && parts[1] == "by" ? parts[0].Split(',') : Array.Empty<string>();
+            if (tile.Length != 2 || !int.TryParse(tile[0], out var x) || !int.TryParse(tile[1], out var y))
+            {
+                throw ErrorAt(entry.Line, $"freed: needs the bound enemy's tile and the boss's group: 'freed: 7,6 by lord', got '{entry.Value}'");
+            }
+
+            var at = new Coord(x, y);
+            var group = parts[2];
+            if (map.Placements.FirstOrDefault(p => p.At == at) is not EnemyPlacement enemy)
+            {
+                throw ErrorAt(entry.Line, $"freed names {at} but no E line places an enemy there");
+            }
+
+            if (enemy.IsBoss)
+            {
+                throw ErrorAt(entry.Line, $"freed: the enemy at {at} is a boss; a boss is never bound");
+            }
+
+            if (map.Messenger is { } route && route.From == at)
+            {
+                throw ErrorAt(entry.Line, $"freed: the enemy at {at} is the messenger");
+            }
+
+            if (!map.Placements.OfType<EnemyPlacement>().Concat(map.Spawns()).Any(e => e.IsBoss && e.Group == group))
+            {
+                throw ErrorAt(entry.Line, $"freed: group '{group}' has no boss, placed or spawned");
+            }
+
+            return new FreedBond(at, group);
         }
 
         /// <summary>

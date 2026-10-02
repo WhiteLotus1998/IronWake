@@ -557,6 +557,11 @@ public static class MapRenderer
             sb.Append(pairLine).Append('\n');
         }
 
+        if (Freed.Line(state, UnitNames.Of(state, content)) is { } bondLine)
+        {
+            sb.Append(bondLine).Append('\n');
+        }
+
         if (MessengerLine(state, content) is { } messengerLine)
         {
             sb.Append(MessengerRule).Append('\n');

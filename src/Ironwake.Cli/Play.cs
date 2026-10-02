@@ -1640,6 +1640,11 @@ public sealed class PlaySession
             }
         }
 
+        if (Freed.Line(state, names) is { } bondRow)
+        {
+            rows.Add($"  {bondRow}");
+        }
+
         if (wakes is { Count: > 0 })
         {
             rows.Add($"  stopping here wakes: {string.Join(", ", wakes.Select(w => $"{UnitNames.Group(w.Group)} ({(w.CalledBy is { } by ? "called by " + UnitNames.Group(by) : WakeCauseText(w))})"))}");
@@ -2077,6 +2082,11 @@ public sealed class PlaySession
                 yield return $"  sworn: will not break: " + string.Join(", ", sworn.Select(m => names[m.Id]));
             }
         }
+
+        if (Freed.ForecastLine(state, attacker, target, names) is { } bond)
+        {
+            yield return "  " + bond;
+        }
     }
 
     /// <summary>
@@ -2414,6 +2424,8 @@ public sealed class PlaySession
                 return $"{names[r.UnitId]} falls back to {r.To} and will not fight this phase";
             case UnitBroke b:
                 return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
+            case UnitFreed f:
+                return $"{names[f.UnitId]} lays down the weapon: freed ({f.Hp} hp)";
             case MessengerEscaped m:
                 return $"{names[m.UnitId]} reaches the road at {m.At} and is gone: the word is out";
             case FrontFell f:
