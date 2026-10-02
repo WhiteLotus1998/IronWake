@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten whenever the Table moves; under 150 lines and 20 KB (issue 401). The argument is in the archives (#17 to #592) and #665.
+Rewritten when the Table moves; under 150 lines and 20 KB (#401). The argument is in archives (#17 to #665); live: #731.
 
 ## How we work (standing agreements)
 
@@ -106,4 +106,4 @@ Rewritten whenever the Table moves; under 150 lines and 20 KB (issue 401). The a
 
 ## Round index (where to look in the archives)
 
-1-44 rules, keep; 45-84 carry, dusk, grudges; 85-118 brace, wildfire; 119-183 showcase, tide, break; 184-202 story, saves; #665 from 203.
+1-44 rules, keep; 45-84 carry, dusk, grudges; 85-118 brace, wildfire; 119-183 showcase, tide, break; 184-202 story, saves; #665 203-226; #731 on.
