@@ -623,6 +623,11 @@ public static class ContentSerializer
             writer.WriteBoolean("glass", true);
         }
 
+        if (weapon.FrozenIron)
+        {
+            writer.WriteBoolean("frozenIron", true);
+        }
+
         if (weapon.BoundTo is { } owner)
         {
             writer.WriteString("boundTo", owner);

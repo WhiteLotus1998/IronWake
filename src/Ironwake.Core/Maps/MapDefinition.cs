@@ -82,6 +82,11 @@ namespace Ironwake.Core;
 /// begins the map carrying <see cref="Kinsbane.ItemId"/> in front of their pack (<see cref="Armed"/>);
 /// null for none. The rule itself is the weapon's (<see cref="Kinsbane"/>).
 /// </param>
+/// <param name="WokenBearer">
+/// The <c>woken:</c> header (issue 702, samples): the recruit, placed by name, who begins the map
+/// carrying the heirloom bound to them at its last stage, frozen iron, in front of their pack
+/// (<see cref="Armed"/>); null for none.
+/// </param>
 /// <param name="WildfireEnabled">
 /// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
 /// sets a forest tile alight, and fire spreads through forest at each player phase start
@@ -174,7 +179,8 @@ public sealed record MapDefinition(
     string? KinsbaneBearer = null,
     ValueList<Chest> Chests = default,
     MessengerRoute? Messenger = null,
-    bool OrdersEnabled = false)
+    bool OrdersEnabled = false,
+    string? WokenBearer = null)
 {
     public const int DefaultRecallCharges = 3;
     public const int DefaultEnemyLevel = 1;
@@ -259,25 +265,39 @@ public sealed record MapDefinition(
     }
 
     /// <summary>
-    /// A player unit as the <c>kinsbane:</c> header issues it: the bearer gets the hungering weapon
-    /// at full uses in its first slot, and when the pack is full the last stack makes room. Any other
-    /// unit, and every unit on a map without the header, unchanged.
+    /// A player unit as the <c>kinsbane:</c> and <c>woken:</c> headers issue it: the Kinsbane bearer
+    /// gets the hungering weapon at full uses in its first slot, the woken bearer the heirloom bound to
+    /// them at full uses and its last stage (issue 702), and when the pack is full the last stack makes
+    /// room. Any other unit, and every unit on a map without either header, unchanged.
     /// </summary>
     public Unit Armed(Unit unit, GameContent content)
     {
-        if (KinsbaneBearer != unit.Id)
+        if (KinsbaneBearer == unit.Id)
         {
-            return unit;
+            var weapon = content.Weapon(Kinsbane.ItemId);
+            unit = InFront(unit, new ItemStack(weapon.Id, weapon.Durability));
         }
 
-        var weapon = content.Weapon(Kinsbane.ItemId);
+        if (WokenBearer == unit.Id)
+        {
+            var heirloom = content.Weapons.Values.FirstOrDefault(w => w.Heirloom is not null && w.BoundTo == unit.Id)
+                ?? throw new ArgumentException($"woken names '{unit.Id}', who has no heirloom bound to them", nameof(unit));
+            unit = InFront(unit, new ItemStack(heirloom.Id, heirloom.Durability) { Stage = heirloom.Heirloom!.Turns.Count });
+        }
+
+        return unit;
+    }
+
+    /// <summary><paramref name="unit"/> with <paramref name="stack"/> in its first slot; when the pack is full the last stack makes room.</summary>
+    private static Unit InFront(Unit unit, ItemStack stack)
+    {
         var items = unit.Inventory.Items;
         if (unit.Inventory.IsFull)
         {
             items = items.RemoveAt(items.Count - 1);
         }
 
-        return unit with { Inventory = new Inventory(items.Insert(0, new ItemStack(weapon.Id, weapon.Durability))) };
+        return unit with { Inventory = new Inventory(items.Insert(0, stack)) };
     }
 
     /// <summary>A player unit as a certification trial fields it (<see cref="CertificationTrial.Candidate"/>); unchanged on an ordinary map.</summary>

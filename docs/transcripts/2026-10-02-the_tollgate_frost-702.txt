@@ -1,0 +1,2354 @@
+The Tollgate (frost), seed 702, scheme TwoRollAverage
+Objective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ......D.......
+11 .....BAC......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,11   hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
+> move teodor 9,9
+Teodor moves 7,11 -> 9,9 via 7,10 8,10 9,10
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~C....
+10 ......D.......
+11 .....BA.......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
+> wait teodor
+Teodor waits
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~C....
+10 ......D.......
+11 .....BA.......
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,11   hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
+> move captain 4,9
+Alder Fenn moves 6,11 -> 4,9 via 6,10 5,10 4,10
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ....A~~~~C....
+10 ......D.......
+11 .....B........
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ....A~~~~C....
+10 ......D.......
+11 .....B........
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,11   hp 20/20  Plain
+> move wren 3,9
+Wren moves 5,11 -> 3,9 via 5,10 4,10 4,9
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~C....
+10 ......D.......
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~C....
+10 ......D.......
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain  done
+> move pell 4,10
+Pell moves 6,10 -> 4,10 via 5,10
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~C....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain  done
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~C....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait toll_brigand-1
+Toll Brigand waits
+enemy: wait toll_warden-1
+Toll Warden waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~C....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> move teodor 8,6
+Teodor moves 9,9 -> 8,6 via 9,8 9,7 9,6
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> wait teodor
+Teodor waits
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ..........F...
+ 8 ......~~......
+ 9 ...BA~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> move captain 3,7
+Alder Fenn moves 4,9 -> 3,7 via 4,8 4,7
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ......~~......
+ 9 ...B.~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ......~~......
+ 9 ...B.~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,9    hp 20/20  Plain
+> move wren 2,8
+Wren moves 3,9 -> 2,8 via 3,8
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ..B...~~......
+ 9 .....~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ..B...~~......
+ 9 .....~~~~.....
+10 ....D.........
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,10   hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain  done
+> move pell 4,8
+Pell moves 4,10 -> 4,8 via 4,9
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain  done
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait toll_brigand-1
+Toll Brigand waits
+enemy: wait toll_warden-1
+Toll Warden waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndc^......
+ 6 .....^..C.....
+ 7 ...A......F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> forecast teodor toll_brigand-1 from 6,6
+Forecast Teodor -> Toll Brigand from 6,6 (Plain) with Family Lance: acc 65% dmg 15 crit 2% chills; counter: acc 62% dmg 10 crit 0%
+> move teodor 7,5
+Teodor moves 8,6 -> 7,5 via 8,5
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...A......F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> attack teodor toll_brigand-1
+Forecast Teodor -> Toll Brigand with Family Lance: acc 65% dmg 15 crit 2% chills; counter: acc 26% dmg 9 crit 0%
+Teodor attacks Toll Brigand
+  Teodor hits Toll Brigand for 15 (hp 8)
+  Toll Brigand misses Teodor
+  Teodor hp 21, Toll Brigand hp 8
+Teodor gains 14 exp (14)
+Toll Brigand is chilled: Mov -1 until enemy phase ends
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...A......F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        3,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move captain 4,7
+Alder Fenn moves 3,7 -> 4,7
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ....A.....F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ....A.....F...
+ 8 ..B.D.~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              4,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move pell 5,8
+Pell moves 4,8 -> 5,8
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ....A.....F...
+ 8 ..B..D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ....A.....F...
+ 8 ..B..D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              2,8    hp 20/20  Plain
+> move wren 3,7
+Wren moves 2,8 -> 3,7 via 2,7
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...BA.....F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndcC......
+ 6 .....^........
+ 7 ...BA.....F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
+c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 8/23   Forest  group woods, hold
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 56% dmg 4 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 misses Teodor
+  Archer 2 hp 17, Teodor hp 21
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: attack toll_brigand-1 teodor
+Forecast Toll Brigand -> Teodor: acc 26% dmg 9 crit 0%; counter with Family Lance: acc 65% dmg 15 crit 2% chills
+Toll Brigand attacks Teodor
+  Toll Brigand hits Teodor for 9 (hp 12)
+  Teodor hits Toll Brigand for 15 (hp 0)
+  Toll Brigand hp 0, Teodor hp 12
+Teodor gains 40 exp (54)
+Toll Brigand falls at 6,5
+enemy: wait toll_warden-1
+Toll Warden waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....nd^C......
+ 6 .....^........
+ 7 ...BA.....F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        4,7    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> move captain 5,6
+Alder Fenn moves 4,7 -> 5,6 via 4,6
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....nd^C......
+ 6 .....A........
+ 7 ...B......F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 17/17  Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> attack captain archer-2
+Forecast Alder Fenn -> Archer 2: acc 58% dmg 10 crit 4%; counter: none
+Alder Fenn attacks Archer 2
+  Alder Fenn hits Archer 2 for 10 (hp 7)
+  Alder Fenn hp 22, Archer 2 hp 7
+Alder Fenn gains 14 exp (14)
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....nd^C......
+ 6 .....A........
+ 7 ...B......F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 7/17   Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          7,5    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> move teodor 6,5
+Teodor moves 7,5 -> 6,5
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....ndC^......
+ 6 .....A........
+ 7 ...B......F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+d  archer-2         Archer L3 bowman           5,5    hp 7/17   Forest  group woods, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> attack teodor archer-2
+Forecast Teodor -> Archer 2 with Family Lance: acc 60% dmg 15 crit 1% chills; counter: none
+Teodor attacks Archer 2
+  Teodor hits Archer 2 for 15 (hp 0)
+  Teodor hp 12, Archer 2 hp 0
+Teodor gains 40 exp (94)
+Archer 2 falls at 5,5
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 .....A........
+ 7 ...B......F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
+> move wren 4,6
+Wren moves 3,7 -> 4,6 via 3,6
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 ....BA........
+ 7 ..........F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 ....BA........
+ 7 ..........F...
+ 8 .....D~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,8    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  done
+> move pell 6,7
+Pell moves 5,8 -> 6,7 via 5,7
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 ....BA........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  done
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 4 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 ....BA........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain  done
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait toll_warden-1
+Toll Warden waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......^.......
+ 5 ....n^C^......
+ 6 ....BA........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+C  teodor           Teodor L1 pikeman          6,5    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> move teodor 6,4
+Teodor moves 6,5 -> 6,4
+Reinforcements arrive
+  Rider arrives at 13,4 with the flank group, aggressive
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....n^^^......
+ 6 ....BA........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 12/21  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> item teodor 3
+Teodor uses Field Dressing (2 left)
+Teodor heals 9 (hp 21)
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....n^^^......
+ 6 ....BA........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> move captain 5,5
+Alder Fenn moves 5,6 -> 5,5
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....nA^^......
+ 6 ....B^........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ......C......e
+ 5 ....nA^^......
+ 6 ....B^........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,6    hp 20/20  Plain
+> move wren 5,4
+Wren moves 4,6 -> 5,4 via 4,5 4,4
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC......e
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC......e
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ......D...F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,7    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
+> move pell 6,6
+Pell moves 6,7 -> 6,6
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC......e
+ 5 ....nA^^......
+ 6 .....^D.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 5 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC......e
+ 5 ....nA^^......
+ 6 .....^D.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+e  rider-1          Rider L3 outrider          13,4   hp 21/21  Plain  group flank, aggressive
+C  teodor           Teodor L1 pikeman          6,4    hp 21/21  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move rider-1 7,4
+Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
+enemy: attack rider-1 teodor
+Forecast Rider -> Teodor: acc 47% dmg 7 crit 1%; counter with Family Lance: acc 88% dmg 15 crit 1% chills
+Rider attacks Teodor
+  Rider misses Teodor
+  Teodor hits Rider for 15 (hp 6)
+  Rider hp 6, Teodor hp 21
+Teodor gains 14 exp (8)
+Teodor reaches level 2: hp +1 str +1
+Rider is chilled: Mov -1 until the next enemy phase ends
+enemy: attack toll_warden-1 teodor
+Forecast Toll Warden -> Teodor: acc 34% dmg 6 crit 1%; counter: none
+Toll Warden attacks Teodor
+  Toll Warden misses Teodor
+  Toll Warden hp 21, Teodor hp 22
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BCe......
+ 5 ....nA^^......
+ 6 .....^D.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain
+e  rider-1          Rider L3 outrider          7,4    hp 6/21   Plain  group flank, aggressive
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> show rider-1
+Rider (rider-1), Outrider L3, at 7,4 on Plain
+  HP 6/21  Str 7 Mag 0 Dex 4 Spd 5 Lck 2 Def 3 Res 1 Cha 2  Mov 6 (cavalry)
+  Weapon: Iron Lance (acc 70 power 6 crit 0 wt 6 range 1-1)
+  Items: 1: Iron Lance x39
+  Ranks: lance E (0), sword E (0)
+  Abilities: Move Again (After acting, move again on what the first move left)
+  Mastery: Sword Sense (0 of 12 combats)
+  chilled: Mov -1 until enemy phase ends
+  Targets from here: Teodor
+> attack teodor rider-1
+Forecast Teodor -> Rider with Family Lance: acc 88% dmg 16 crit 1% chills; counter: acc 43% dmg 7 crit 1%
+Teodor attacks Rider
+  Teodor hits Rider for 16 (hp 0)
+  Teodor hp 22, Rider hp 0
+Teodor gains 35 exp (43)
+Rider falls at 7,4
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC.......
+ 5 ....nA^^......
+ 6 .....^D.......
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> move pell 5,6
+Pell moves 6,6 -> 5,6
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> move captain 5,5
+Alder Fenn moves 5,5 -> 5,5
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....BC.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+> move wren 4,4
+Wren moves 5,4 -> 4,4
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.C.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 6 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.C.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          6,4    hp 22/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: attack toll_warden-1 teodor
+Forecast Toll Warden -> Teodor: acc 34% dmg 6 crit 1%; counter: none
+Toll Warden attacks Teodor
+  Toll Warden hits Teodor for 6 (hp 16)
+  Toll Warden hp 21, Teodor hp 16
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.C.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,4    hp 16/22  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move teodor 6,3
+Teodor moves 6,4 -> 6,3
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 ....B.^.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 16/22  Plain
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> attack teodor toll_warden-1
+Forecast Teodor -> Toll Warden with Family Lance: acc 88% dmg 15 crit 1% chills; counter: acc 70% dmg 7 crit 1%
+Teodor attacks Toll Warden
+  Teodor hits Toll Warden for 15 (hp 6)
+  Toll Warden hits Teodor for 7 (hp 9)
+  Teodor hp 9, Toll Warden hp 6
+Teodor gains 12 exp (55)
+Toll Warden is chilled: Mov -1 until enemy phase ends
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 ....B.^.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move captain 5,4
+Alder Fenn moves 5,5 -> 5,4
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 ....BA^.......
+ 5 ....n^^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 ....BA^.......
+ 5 ....n^^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move wren 4,5
+Wren moves 4,4 -> 4,5
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 .....A^.......
+ 5 ....B^^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####C#######
+ 4 .....A^.......
+ 5 ....B^^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,3    hp 9/22   Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
+> end
+Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, Toll Warden for 7, against 9 hp)
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 83% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 4)
+  Archer 1 hp 17, Teodor hp 4
+enemy: attack bandit_leader-1 teodor 2
+Forecast Bandit Leader -> Teodor: acc 62% dmg 11 crit 1%; counter: none
+Bandit Leader equips Toll Axe
+Bandit Leader attacks Teodor
+  Bandit Leader hits Teodor for 11 (hp 0)
+  Bandit Leader hp 26, Teodor hp 0
+Teodor falls at 6,3
+enemy: wait toll_warden-1
+Toll Warden waits
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 .....A^.......
+ 5 ....B^^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 6/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
+> recall 85
+Recalled to state 85; 2 charges left
+Undone: gives back 15 enemy hp; returns Teodor alive at 16 hp
+The rolls do not change: the same attack will roll the same
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.C.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,4    hp 16/22  Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> attack teodor toll_warden-1 art long_thrust
+Forecast Teodor -> Toll Warden: acc 88% dmg 12 crit 1% chills; counter: acc 34% dmg 6 crit 1%
+  Technique Long Thrust: Family Lance at acc 80 power 7 crit 0 wt 10 range 1-2; spends up to 3 of 35 uses, 2 of them hit or miss
+Teodor declares Long Thrust with Family Lance, spending 2 extra uses
+Teodor attacks Toll Warden
+  Teodor hits Toll Warden for 12 (hp 9)
+  Toll Warden hits Teodor for 6 (hp 10)
+  Teodor hp 10, Toll Warden hp 9
+Teodor gains 12 exp (55)
+Toll Warden is chilled: Mov -1 until enemy phase ends
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.C.......
+ 5 ....nA^^......
+ 6 .....D........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,6    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move pell 5,4
+Pell moves 5,6 -> 5,4 via 5,5
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait pell
+Pell waits
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move wren 4,4
+Wren moves 4,4 -> 4,4
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 7 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain  done
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          6,4    hp 10/22  Forest  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: attack toll_warden-1 teodor
+Forecast Toll Warden -> Teodor: acc 34% dmg 6 crit 1%; counter: none
+Toll Warden attacks Teodor
+  Toll Warden hits Teodor for 6 (hp 4)
+  Toll Warden hp 9, Teodor hp 4
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BDC.......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          6,4    hp 4/22   Forest
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move teodor 7,4
+Teodor moves 6,4 -> 7,4
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BD^C......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          7,4    hp 4/22   Plain
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> item teodor 3
+Teodor uses Field Dressing (1 left)
+Teodor heals 10 (hp 14)
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....BD^C......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              5,4    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move pell 6,4
+Pell moves 5,4 -> 6,4
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...b!.....#
+ 3 MM####.#######
+ 4 ....B.DC......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> attack pell toll_warden-1
+Forecast Pell -> Toll Warden with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
+Pell attacks Toll Warden
+  Pell hits Toll Warden for 12 (hp 0)
+  Pell hp 16, Toll Warden hp 0
+Pell gains 40 exp (40)
+Toll Warden falls at 6,2
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#....!.....#
+ 3 MM####.#######
+ 4 ....B.DC......
+ 5 ....nA^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,5    hp 22/22  Forest  captain
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move captain 5,4
+Alder Fenn moves 5,5 -> 5,4
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#....!.....#
+ 3 MM####.#######
+ 4 ....BADC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait captain
+Alder Fenn waits
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#....!.....#
+ 3 MM####.#######
+ 4 ....BADC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 8 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#....!.....#
+ 3 MM####.#######
+ 4 ....BADC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest  done
+C  teodor           Teodor L2 pikeman          7,4    hp 14/22  Plain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 8 --
+-- Enemy phase, turn 8 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: attack bandit_leader-1 teodor 2
+Forecast Bandit Leader -> Teodor: acc 62% dmg 11 crit 1%; counter: none
+Bandit Leader equips Toll Axe
+Bandit Leader attacks Teodor
+  Bandit Leader hits Teodor for 11 (hp 3)
+  Bandit Leader hp 26, Teodor hp 3
+enemy: end
+-- Enemy phase ends, turn 8 --
+-- Player phase, turn 9 --
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#....!.....#
+ 3 MM####.#######
+ 4 ....BADC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        5,4    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          7,4    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move captain 6,2
+Alder Fenn moves 5,4 -> 6,2 via 6,4 6,3
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...A!.....#
+ 3 MM####.#######
+ 4 ....B.DC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 17/17  Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          7,4    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> attack captain archer-1
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 11 (hp 6)
+  Alder Fenn hp 22, Archer 1 hp 6
+Alder Fenn gains 14 exp (28)
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...A!.....#
+ 3 MM####.#######
+ 4 ....B.DC......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 6/17   Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Forest
+C  teodor           Teodor L2 pikeman          7,4    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move pell 6,3
+Pell moves 6,4 -> 6,3
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#...aT.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ....B.^C......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+a  archer-1         Archer L3 bowman           6,1    hp 6/17   Plain  group keep, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain
+C  teodor           Teodor L2 pikeman          7,4    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> attack pell archer-1
+Forecast Pell -> Archer 1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
+Pell attacks Archer 1
+  Pell hits Archer 1 for 12 (hp 0)
+  Pell hp 16, Archer 1 hp 0
+Pell gains 40 exp (80)
+Archer 1 falls at 6,1
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ....B.^C......
+ 5 ....n^^^......
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          7,4    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move teodor 9,5
+Teodor moves 7,4 -> 9,5 via 8,4 9,4
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ....B.^.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          9,5    hp 3/22   Plain
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> item teodor 3
+Teodor uses Field Dressing (0 left)
+Teodor heals 10 (hp 13)
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ....B.^.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          9,5    hp 13/22  Plain  done
+B  wren             Wren L1 cadet              4,4    hp 20/20  Plain
+> move wren 6,4
+Wren moves 4,4 -> 6,4 via 5,4
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ......B.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          9,5    hp 13/22  Plain  done
+B  wren             Wren L1 cadet              6,4    hp 20/20  Forest
+> wait wren
+Wren waits
+The Tollgate (frost)  turn 9 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ......B.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 26/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain  done
+D  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+C  teodor           Teodor L2 pikeman          9,5    hp 13/22  Plain  done
+B  wren             Wren L1 cadet              6,4    hp 20/20  Forest  done
+> end
+-- Player phase ends, turn 9 --
+-- Enemy phase, turn 9 --
+enemy: attack bandit_leader-1 pell
+Forecast Bandit Leader -> Pell: acc 65% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 12 crit 1%
+Bandit Leader attacks Pell
+  Bandit Leader hits Pell for 14 (hp 2)
+  Pell hits Bandit Leader for 12 (hp 14)
+  Bandit Leader hp 14, Pell hp 2
+Pell gains 14 exp (94)
+enemy: end
+-- Enemy phase ends, turn 9 --
+-- Player phase, turn 10 --
+The Tollgate (frost)  turn 10 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....T.....#
+ 2 MM#...A!.....#
+ 3 MM####D#######
+ 4 ......B.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 14/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,3    hp 2/16   Plain
+C  teodor           Teodor L2 pikeman          9,5    hp 13/22  Plain
+B  wren             Wren L1 cadet              6,4    hp 20/20  Forest
+> move captain 7,1
+Alder Fenn moves 6,2 -> 7,1 via 6,1
+The Tollgate (frost)  turn 10 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 MM############
+ 1 MM#....A.....#
+ 2 MM#....!.....#
+ 3 MM####D#######
+ 4 ......B.......
+ 5 ....n^^^.C....
+ 6 .....^........
+ 7 ..........F...
+ 8 ......~~......
+ 9 .....~~~~.....
+10 ..............
+11 ..............
+
+!  bandit_leader-1  Bandit Leader L3 reaver    7,2    hp 14/26  Plain  group keep, boss
+A  captain          Alder Fenn L1 cadet        7,1    hp 22/22  Gate (heals 20 percent, 4 hp)  captain
+D  pell             Pell L1 adept              6,3    hp 2/16   Plain
+C  teodor           Teodor L2 pikeman          9,5    hp 13/22  Plain
+B  wren             Wren L1 cadet              6,4    hp 20/20  Forest
+Battle won: seize; only recall is left
+Battle won: seize

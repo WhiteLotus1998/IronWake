@@ -57,6 +57,13 @@ public sealed record Weapon(
     /// </summary>
     public bool Glass { get; init; }
 
+    /// <summary>
+    /// Marks a frozen-iron weapon (issue 702 slice 2; <see cref="Frost"/>): a hit from it chills.
+    /// Content may set it on any physical weapon that does not hunger; <see cref="Frost.Shape"/>
+    /// also sets it on a woken heirloom and on a signature at its last rare Refine step.
+    /// </summary>
+    public bool FrozenIron { get; init; }
+
     /// <summary>The smith's line when asked to repair or Refine a glass weapon (issue 702).</summary>
     public const string GlassRefusal = "You don't mend glass. You buy another.";
 

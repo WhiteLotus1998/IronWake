@@ -318,7 +318,7 @@ public static class Resolver
         }
 
         return unit.Canto is null
-            ? state.WithUnit(unit with { Canto = content.Class(unit.Unit.ClassId).Mov })
+            ? state.WithUnit(unit with { Canto = Frost.Mov(content.Class(unit.Unit.ClassId).Mov, unit) })
             : state;
     }
 
@@ -593,6 +593,7 @@ public static class Resolver
 
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
+        next = Frost.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
         next = EndStruckWatches(next, result.Strikes, events);
         return (next, null);
@@ -698,6 +699,7 @@ public static class Resolver
                 break;
             }
 
+            state = Frost.AfterCombat(state, shooter.Id, weapon, struck.Id, null, strikes, events);
             state = Windup.AfterCombat(state, content, shooter, struck, strikes, events);
             state = EndStruckWatches(state, strikes, events);
         }
@@ -1424,6 +1426,7 @@ public static class Resolver
     /// (DESIGN.md section 4): the terrain's percent of max HP, integer floor, capped at
     /// max, reported as the amount actually gained; a unit at full HP is not reported.
     /// A hungering weapon's drain follows heal and burn (DESIGN.md 13.23, <see cref="Kinsbane.AtPhaseStart"/>).
+    /// A chill's clock turns (issue 702, <see cref="Frost.AtPhaseChange"/>).
     /// Then the map events whose turn trigger names the phase that has begun fire, in
     /// file order (issue 32). The enemy phase of the last turn ends the battle (DESIGN.md
     /// section 7), so past the turn limit the turn still advances, which decides the outcome,
@@ -1475,7 +1478,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

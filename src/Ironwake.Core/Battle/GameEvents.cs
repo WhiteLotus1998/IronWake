@@ -239,6 +239,13 @@ public sealed record HungerEased(string UnitId, string ItemId, int Healed, int H
 public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, string StageId) : GameEvent;
 
 /// <summary>
+/// A hit from a frozen-iron weapon chilled a unit that survived it (issue 702 slice 2, <see cref="Frost"/>):
+/// Mov -1 until the end of <paramref name="Side"/>'s next phase, the struck unit's side. <paramref name="Next"/>
+/// is true when it was struck on its own side's phase, so the chill outlasts the phase under way.
+/// </summary>
+public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
+
+/// <summary>
 /// The captain called an order (DESIGN.md 13.2, issue 85): the allies it acts on in id order, how
 /// many allies stood in its radius and how many were alive, and the captain's exposure where he
 /// stands (<see cref="Exposure.Of"/>, no crit), the numbers the spike's binding fraction and
