@@ -344,7 +344,9 @@ public static class Program
     /// and the template swaps), side by side, so a tuned map whose campaign number falls under 60 is
     /// seen before its standalone scores are cited for the campaign, and a third line with the file's party
     /// raised by as many levels as the curve raised the enemy, a proxy for the company a campaign player
-    /// brings. A map the campaign fights as its file reads prints once. <paramref name="only"/> names one map. A measurement only.
+    /// brings. Then, on every map, <c>carried</c> and <c>carried, spread</c> (issue 764): the file's party at the
+    /// levels <see cref="LevelRun"/>'s campaign brings to that camp, slot by slot, and the same total spread
+    /// evenly (<see cref="AtSlotLevels"/>); 0161's bend reads <c>carried</c>. A map the campaign fights as its file reads prints its file line once. <paramref name="only"/> names one map. A measurement only.
     /// </summary>
     public static int CurveTable(int seeds, string? only) => CurveTable(seeds, only, null, false);
 
@@ -384,6 +386,8 @@ public static class Program
         }
 
         Console.WriteLine($"curve: {entries.Count} campaign maps, {seeds} seeds, gate 1 as the file reads and as the campaign fights it");
+        var runs = LevelRun.Measure(contentDir, content, seeds);
+        Console.WriteLine($"curve: carried is the file's party at the levels the heuristic's own campaign brings to each camp, slot by slot, over the runs of {runs.Count} that won the map (the count after `over`; issue 764); spread is the same total, even");
         foreach (var entry in entries)
         {
             var number = content.Campaign.Maps.ToList().IndexOf(entry) + 1;
@@ -410,9 +414,56 @@ public static class Program
                     PrintItems(items, liftedGames);
                 }
             }
+
+            var camps = runs.SelectMany(r => r.Maps.Where(m => m.Map == number).Select(m => m.Camp)).ToList();
+            if (camps.Count == 0)
+            {
+                Console.WriteLine("  carried: no run won this map");
+                continue;
+            }
+
+            var slots = BattleState.From(fought, content, content.Cast, 1).UnitsOf(Side.Player).Count();
+            var carriedLevels = LevelRun.SlotLevels(camps, slots);
+            foreach (var (label, levels) in new[] { ("carried", carriedLevels), ("carried, spread", LevelRun.Spread(carriedLevels)) })
+            {
+                var (company, applied) = AtSlotLevels(content, fought, levels);
+                var (read, readGames) = Gates.Gate1(company, fought, entry.MapId, seeds);
+                Console.WriteLine($"  {label} {string.Join("/", applied)} over {camps.Count}: " + read.Line);
+                PrintItems(items, readGames);
+            }
         }
 
         return 0;
+    }
+
+    /// <summary>
+    /// The file's party on <paramref name="map"/> at per-slot levels (issue 764): the units the map
+    /// deploys from the cast, the captain first and the rest in placement order, each raised to the
+    /// level of its place in <paramref name="levels"/>, highest first; a unit already above its place,
+    /// or a place reading 0, keeps its own level, since levels only rise. Returns the content with the
+    /// raised cast and the level each deployed unit stands at.
+    /// </summary>
+    public static (GameContent Content, IReadOnlyList<int> Applied) AtSlotLevels(GameContent content, MapDefinition map, IReadOnlyList<int> levels)
+    {
+        var deployed = BattleState.From(map, content, content.Cast, 1).UnitsOf(Side.Player)
+            .OrderByDescending(u => u.IsCaptain).ThenBy(u => u.PlacementIndex).Select(u => u.Id).ToList();
+        var cast = content.Cast;
+        var applied = new List<int>();
+        for (var k = 0; k < deployed.Count; k++)
+        {
+            var slot = cast.ToList().FindIndex(u => u.Id == deployed[k]);
+            if (slot < 0)
+            {
+                continue;
+            }
+
+            var unit = cast[slot];
+            var level = Math.Min(Math.Max(unit.Level, k < levels.Count ? levels[k] : 0), Unit.MaxLevel);
+            cast = cast.SetItem(slot, unit.AtLevel(level, content.Class(unit.ClassId)));
+            applied.Add(level);
+        }
+
+        return (content with { Cast = cast, Units = cast.Aggregate(content.Units, (units, u) => units.ContainsKey(u.Id) ? units.SetItem(u.Id, u) : units) }, applied);
     }
 
     /// <summary>
