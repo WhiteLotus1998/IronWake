@@ -11,7 +11,9 @@ namespace Ironwake.Sim;
 /// as it began the battle, wounded, and the run keeps its company.
 /// Per map won it reads the company standing after it: how many are at or above
 /// <see cref="Threshold"/>, the highest level, and the third highest (the issue asks for two or three
-/// over the threshold by map 7). The heuristic never promotes, so the
+/// over the threshold by map 7). Per map it also reads the battle won as it began, at that map's camp
+/// (issue 738): the map's enemy level, the levels of the units deployed, and the EXP the captain and
+/// the whole company kept from it, so the spread under the top unit is printed beside it. The heuristic never promotes, so the
 /// levels are those of the first step; a lost map ends that run. A measurement only; nothing here
 /// changes what ships.
 /// </summary>
@@ -20,8 +22,54 @@ public static class LevelRun
     /// <summary>The level the second tier asks for (classes.json, every advanced form; 7 since rounds 224 to 226).</summary>
     public const int Threshold = 7;
 
-    /// <summary>One run: per map won, the levels of the company standing after it and how many of it meet some advanced form's level and ranks (<see cref="Ready"/>), and the map no try won, or null.</summary>
-    public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready)> Maps, int? LostOn);
+    /// <summary>One run: per map won, the levels of the company standing after it, how many of it meet some advanced form's level and ranks (<see cref="Ready"/>) and the map's <see cref="Camp"/> reading, and the map no try won, or null.</summary>
+    public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready, Camp Camp)> Maps, int? LostOn);
+
+    /// <summary>
+    /// A won map as its battle began and ended (issue 738): the enemy level it was fought at, the
+    /// levels of the player units deployed into it, and the EXP the captain and the company kept from
+    /// it. A unit that fell keeps nothing, since the campaign brings it back as it began the battle.
+    /// </summary>
+    public sealed record Camp(int EnemyLevel, IReadOnlyList<int> Deployed, int CaptainExp, int CompanyExp);
+
+    /// <summary>The <see cref="Camp"/> reading of a battle from its first state to its won last one.</summary>
+    public static Camp Read(BattleState start, BattleState end, GameContent content)
+    {
+        var deployed = start.UnitsOf(Side.Player).ToList();
+        var after = end.Survivors().ToDictionary(u => u.Id, u => u.Unit);
+        var captainExp = 0;
+        var companyExp = 0;
+        foreach (var unit in deployed)
+        {
+            if (!after.TryGetValue(unit.Id, out var kept))
+            {
+                continue;
+            }
+
+            var earned = TotalExp(kept) - TotalExp(unit.Unit);
+            companyExp += earned;
+            if (CampaignRecord.IsCaptain(unit.Unit, content))
+            {
+                captainExp += earned;
+            }
+        }
+
+        return new Camp(start.Map.EnemyLevel, deployed.Select(u => u.Unit.Level).ToList(), captainExp, companyExp);
+    }
+
+    /// <summary>The EXP a unit holds counted from level 1: a level is <see cref="Experience.LevelUpAt"/>.</summary>
+    public static int TotalExp(Unit unit) => (unit.Level - Unit.MinLevel) * Experience.LevelUpAt + unit.Exp;
+
+    /// <summary>The captain's share of the company's EXP on one map, a whole percent, or null when the company earned none.</summary>
+    public static int? CaptainShare(Camp camp) =>
+        camp.CompanyExp <= 0 ? null : (int)Math.Round(100.0 * camp.CaptainExp / camp.CompanyExp, MidpointRounding.AwayFromZero);
+
+    /// <summary>The median of a list of levels, the lower middle on an even count, as <see cref="Percentile"/> reads p50 elsewhere in the table.</summary>
+    public static int Median(IReadOnlyList<int> levels)
+    {
+        var sorted = levels.Order().ToList();
+        return sorted.Count == 0 ? 0 : sorted[(sorted.Count - 1) / 2];
+    }
 
     /// <summary>Every run over seeds 1..<paramref name="seeds"/>.</summary>
     public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds)
@@ -30,20 +78,23 @@ public static class LevelRun
         for (var seed = 1; seed <= seeds; seed++)
         {
             var record = CampaignRecord.Start(content, (ulong)seed, permadeath: false);
-            var maps = new List<(int, IReadOnlyList<int>, int)>();
+            var maps = new List<(int, IReadOnlyList<int>, int, Camp)>();
             int? lost = null;
             while (!record.IsFinished(content))
             {
                 var number = record.MapIndex + 1;
                 var map = MapFiles.Load(MapFiles.CampaignPath(contentRoot, content, record.NextMap(content).MapId), content);
                 BattleState? won = null;
+                Camp? camp = null;
                 for (var attempt = 0; attempt < HeirloomRun.Attempts && won is null; attempt++)
                 {
                     var tried = record with { Seed = unchecked(record.Seed + (ulong)attempt * 7919UL) };
-                    var end = Fight(tried.Begin(map, content), content, seed, number);
+                    var start = tried.Begin(map, content);
+                    var end = Fight(start, content, seed, number);
                     if (end.Outcome.Result == BattleResult.Won)
                     {
                         won = end;
+                        camp = Read(start, end, content);
                     }
                 }
 
@@ -55,7 +106,7 @@ public static class LevelRun
 
                 record = record.AfterBattle(won, content);
                 var company = record.Present(content);
-                maps.Add((number, company.Select(u => u.Level).ToList(), company.Count(u => Ready(u, content))));
+                maps.Add((number, company.Select(u => u.Level).ToList(), company.Count(u => Ready(u, content)), camp!));
             }
 
             runs.Add(new Run(maps, lost));
@@ -97,10 +148,13 @@ public static class LevelRun
         return state;
     }
 
-    /// <summary>The printed table: per map, over the runs that won it, the company at or above the threshold, the highest level, the third highest and the levels the whole company has gained, each as p25 p50 p75.</summary>
+    /// <summary>
+    /// The printed table: per map, over the runs that won it, the company at or above the threshold, the highest level, the third highest and the levels the whole company has gained, each as p25 p50 p75;
+    /// then the map's camp line (issue 738): its enemy level, the deployed units' median and lowest level as the battle began, and the captain's share of the EXP the company kept from it, each as p50.
+    /// </summary>
     public static IEnumerable<string> Lines(GameContent content, IReadOnlyList<Run> runs)
     {
-        yield return $"levels: {runs.Count} runs, the heuristic player through the campaign, never promoting; at {Threshold}+ is the second tier's level";
+        yield return $"levels: {runs.Count} runs, the heuristic player through the campaign, never promoting; at {Threshold}+ is the second tier's level; each map's camp line is its won battle as it began";
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Order())
         {
             var won = runs.SelectMany(r => r.Maps.Where(m => m.Map == number)).ToList();
@@ -112,6 +166,14 @@ public static class LevelRun
             var gained = reached.Select(l => l.Sum(v => v - Unit.MinLevel)).ToList();
             var id = content.Campaign.Maps[number - 1].MapId;
             yield return $"  map {number} {id}: won {reached.Count}, at {Threshold}+ {Band(at)}, meets a form's level and ranks {Band(ready)}, highest {Band(top)}, third {Band(third)}, levels gained by the company {Band(gained)}";
+            var camps = won.Select(m => m.Camp).ToList();
+            var enemy = camps.Select(c => c.EnemyLevel).ToList();
+            var median = camps.Select(c => Median(c.Deployed)).ToList();
+            var lowest = camps.Select(c => c.Deployed.Count == 0 ? 0 : c.Deployed.Min()).ToList();
+            var topAtCamp = camps.Select(c => c.Deployed.Count == 0 ? 0 : c.Deployed.Max()).ToList();
+            var shares = camps.Select(CaptainShare).OfType<int>().ToList();
+            var share = shares.Count == 0 ? "none earned" : $"{Percentile(shares, 0.5)}%";
+            yield return $"    camp {id}: enemy {Percentile(enemy, 0.5)}, deployed top p50 {Percentile(topAtCamp, 0.5)}, median p50 {Percentile(median, 0.5)}, lowest p50 {Percentile(lowest, 0.5)}, captain share p50 {share}";
         }
 
         foreach (var lostOn in runs.Where(r => r.LostOn is not null).GroupBy(r => r.LostOn!.Value).OrderBy(g => g.Key))
