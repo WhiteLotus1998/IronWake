@@ -4,7 +4,8 @@ namespace Ironwake.Core;
 /// The break (DESIGN.md 13.22, experiment): on a <c>break: on</c> map, when a boss dies, every
 /// living member of his group at or below half its max HP breaks and leaves the board at once.
 /// A broken unit is not killed: no EXP, no <see cref="UnitDied"/>, one <see cref="UnitBroke"/>.
-/// A member above half fights on. The planner does not read it.
+/// A member above half fights on, and so does a sworn one: a member of an <c>oathbound</c> group
+/// never breaks (issue 692), and the forecast says so (<see cref="Sworn"/>). The planner does not read it.
 /// </summary>
 public static class Break
 {
@@ -24,7 +25,24 @@ public static class Break
         }
 
         return state.Units
-            .Where(u => u.Side == boss.Side && u.Id != boss.Id && !u.IsBoss && u.Group == group && Wavers(u, content))
+            .Where(u => u.Side == boss.Side && u.Id != boss.Id && !u.IsBoss && u.Group == group && !state.Map.IsOathbound(u) && Wavers(u, content))
+            .ToList();
+    }
+
+    /// <summary>
+    /// The members of <paramref name="boss"/>'s group who are sworn (issue 692): oath-bound, so they
+    /// would stand at any HP if he fell. Empty off a <c>break: on</c> map and for a unit that is not
+    /// a boss or has no group.
+    /// </summary>
+    public static IReadOnlyList<BattleUnit> Sworn(BattleState state, BattleUnit boss)
+    {
+        if (!state.Map.BreakEnabled || !boss.IsBoss || boss.Group is not { } group)
+        {
+            return Array.Empty<BattleUnit>();
+        }
+
+        return state.Units
+            .Where(u => u.Side == boss.Side && u.Id != boss.Id && !u.IsBoss && u.Group == group && state.Map.IsOathbound(u))
             .ToList();
     }
 

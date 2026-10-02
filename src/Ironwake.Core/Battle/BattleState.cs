@@ -70,6 +70,12 @@ public sealed record BattleState(
     public MessengerFate? MessengerGone { get; init; }
 
     /// <summary>
+    /// The names of the map's fronts that have fallen (issue 692), sorted. A front falls once and
+    /// stays fallen; a Recall restores the list with the board.
+    /// </summary>
+    public ValueList<string> Fallen { get; init; }
+
+    /// <summary>
     /// The order the captain has called this map (DESIGN.md 13.2, issue 85), or null while it is
     /// unspent. Once a map; a Recall restores it with the board.
     /// </summary>
@@ -656,6 +662,17 @@ public sealed record BattleState(
         if (OrderCalled is { } order)
         {
             sb.Append("order ").Append(Orders.Word(order)).Append('\n');
+        }
+
+        if (Map.Fronts.Count > 0)
+        {
+            sb.Append("fallen");
+            foreach (var front in Fallen)
+            {
+                sb.Append(' ').Append(front);
+            }
+
+            sb.Append('\n');
         }
 
         if (MessengerGone is { } fate)

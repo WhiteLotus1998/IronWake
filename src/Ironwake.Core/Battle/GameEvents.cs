@@ -75,6 +75,9 @@ public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
 /// <summary>The messenger reached its road and left the board, not a kill (DESIGN.md 13.24, experiment); its events fire next.</summary>
 public sealed record MessengerEscaped(string UnitId, Coord At) : GameEvent;
 
+/// <summary>A front fell (issue 692): an enemy stands on one of its tiles. The map goes on; the front's <c>falls</c> events fire next.</summary>
+public sealed record FrontFell(string Front) : GameEvent;
+
 public sealed record GrudgeSworn(string UnitId, string AgainstId) : GameEvent;
 
 /// <summary>

@@ -388,6 +388,7 @@ public sealed class PlaySession
             TurnTrigger turn => WhenWords(turn),
             EnterTrigger enter => $"when one of yours stops on {string.Join(" or ", enter.Tiles)}",
             MessengerTrigger => "if the messenger reaches the road",
+            FallsTrigger falls => $"if {falls.Front.Replace('_', ' ')} falls",
             _ => throw new InvalidOperationException("unknown trigger " + mapEvent.Trigger.GetType().Name),
         };
         var what = mapEvent.Action switch
@@ -1991,6 +1992,12 @@ public sealed class PlaySession
             {
                 yield return $"  break if {names[boss.Id]} falls: " + string.Join(", ", members.Select(m => $"{names[m.Id]} ({m.Hp}/{m.MaxHp(content)})"));
             }
+
+            var sworn = Break.Sworn(state, boss);
+            if (sworn.Count > 0)
+            {
+                yield return $"  sworn: will not break: " + string.Join(", ", sworn.Select(m => names[m.Id]));
+            }
         }
     }
 
@@ -2331,6 +2338,8 @@ public sealed class PlaySession
                 return $"{names[b.UnitId]} breaks and flees ({b.Hp} hp)";
             case MessengerEscaped m:
                 return $"{names[m.UnitId]} reaches the road at {m.At} and is gone: the word is out";
+            case FrontFell f:
+                return Fronts.FallLine(new Front(f.Front, ValueList<Coord>.Empty));
             case GrudgeSworn g:
                 return $"{names[g.UnitId]} swears a grudge against {names[g.AgainstId]}";
             case UnitHealed h:

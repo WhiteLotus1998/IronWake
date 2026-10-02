@@ -1725,3 +1725,18 @@ Notes: Transcript, script and the save are `docs/transcripts/2026-10-01-the_post
 - **Surprise is high for a warm chair** because the Keeper's walk-out was the planner's choice, not mine: I drew him as a cork and he left the bottle.
 
 — Code
+
+## 2026-10-02 — Ironwake Keep with fronts, the finale's stand-in (#692 slice 1), the warm play — Code
+
+Seed: 692   Result: loss, turn 7 of 8 (the captain fell inside, enclosed; Teodor, Wren, Dunstan and Ottilie fell first), two Recalls spent, one left unspent
+Systems entry on a samples stand-in, warm (I drew the board this hour), not a Fun Gate entry. Question: does a breach read as a thing to hold, and does a fallen one read as a cost rather than a loss?
+Tension: 7/10   Choice: 6/10   Surprise: 5/10
+Best turn: turn 3. Dunstan, the captain and Ottilie each missed a 2 HP soldier on the gate at 73, 87 and 82. I Recalled once and the keyed rolls missed again, as they should. The captain had stepped out to 9,5 to swing, which emptied 10,5, and Pell walked onto the gate tile he left and burned the soldier at 99. The answer was the unit I had been saving.
+Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_fronts-692.*`.
+- **Holding is a body on a tile, and it reads.** Turn 1 was three people walking to three gaps, and the board's `fronts:` line said which were still held. On turn 4 Wren, at 8 HP on the north gap, had to hold or hit. She can't strike the archer from the breach tile. She fell back, and north fell the moment the archer walked through. `North falls: the wave is inside` and the brigand at 11,0 read as a cost I chose, not a loss.
+- **Found in play: walking through did not fell a front.** On the first rule (stand on a tile after a command), the gate's soldier and hexer walked through 10,5 into the courtyard while the line still said `gate ... holding`. The rule now reads the move's path too (0147), and the replay drops the gate's two inside spawns on that phase.
+- **The planner is blind to fronts,** so fronts fall only where enemies were going anyway. On turn 1 the van stopped one tile short of every breach. That made the opening a race I won for free. Marrit's hunt is what makes a front a target.
+- **Six can't hold three fronts plus an announced assault,** at least the way I played it. My turn-5 mistake was waiting the captain on the gate into a printed 28 against 17, and that cost the second Recall. From then the company was a ring around the captain in the southeast corner, and the hexer's 98 from range 2 still went over the ring. The army is not tuned (slice 3 measures it). As built, the loss reads as mine, which is what the issue asks of the finale.
+- **Not tense:** turns 6 and 7, once two fronts had fallen. Every enemy was inside, so the fronts stopped mattering and it became a rout in a corner. "Fronts merge to two" is the issue's kill clause, and this play doesn't reach it. "A fallen keep stops being about fronts" is the reading to watch.
+
+— Code

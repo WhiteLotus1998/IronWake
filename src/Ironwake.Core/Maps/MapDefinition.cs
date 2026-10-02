@@ -202,6 +202,12 @@ public sealed record MapDefinition(
     /// </summary>
     public ValueList<string> Oathbound { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>
+    /// The <c>fronts:</c> header (issue 692): the map's named breaches in file order, each falling
+    /// once when an enemy stands on one of its tiles (<see cref="Fronts"/>). Empty by default.
+    /// </summary>
+    public ValueList<Front> Fronts { get; init; } = ValueList<Front>.Empty;
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

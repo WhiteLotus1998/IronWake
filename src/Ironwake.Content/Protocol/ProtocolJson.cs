@@ -197,6 +197,9 @@ public static class ProtocolJson
                 w.WriteString("unit", m.UnitId);
                 WriteCoord(w, "at", m.At);
                 break;
+            case FrontFell f:
+                w.WriteString("front", f.Front);
+                break;
             case GrudgeSworn g:
                 w.WriteString("unit", g.UnitId);
                 w.WriteString("against", g.AgainstId);

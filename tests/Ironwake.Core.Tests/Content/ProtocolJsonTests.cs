@@ -84,6 +84,7 @@ public class ProtocolJsonTests
         { new TerrainChanged(A, "plain"), """{"type":"terrainChanged","at":{"x":1,"y":2},"terrain":"plain"}""" },
         { new UnitSpawned("rider-1", B, "flank", Behavior.Aggressive), """{"type":"unitSpawned","unit":"rider-1","at":{"x":3,"y":4},"group":"flank","behavior":"aggressive"}""" },
         { new FlagSet("gate_open"), """{"type":"flagSet","flag":"gate_open"}""" },
+        { new FrontFell("north_breach"), """{"type":"frontFell","front":"north_breach"}""" },
     };
 
     [Theory]

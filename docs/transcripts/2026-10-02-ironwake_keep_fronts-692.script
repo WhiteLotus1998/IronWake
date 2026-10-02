@@ -1,0 +1,91 @@
+move wren 10,1
+wait wren
+move teodor 10,10
+wait teodor
+move dunstan 13,7
+wait dunstan
+move captain 11,5
+wait captain
+move ottilie 12,6
+wait ottilie
+move pell 12,3
+wait pell
+end
+move dunstan 10,6
+attack dunstan brigand-1
+move captain 10,5
+attack captain soldier-1
+move ottilie 11,5
+attack ottilie soldier-1
+move pell 12,4
+wait pell
+threat wren
+wait wren
+threat teodor
+wait teodor
+end
+forecast teodor soldier-2
+threat teodor
+threat teodor from 11,11
+attack wren brigand-2
+attack dunstan soldier-1
+recall 53
+move ottilie 11,6
+attack ottilie soldier-1
+attack teodor soldier-2
+attack dunstan soldier-1
+move captain 9,5
+attack captain soldier-1
+move pell 10,5
+attack pell soldier-1
+end
+move dunstan 13,7
+wait dunstan
+move captain 10,6
+wait captain
+wait pell
+move ottilie 11,10
+wait ottilie
+move wren 13,1
+wait wren
+end
+attack pell soldier-3
+move wren 14,5
+wait wren
+move dunstan 15,10
+wait dunstan
+move ottilie 12,6
+wait ottilie
+threat captain
+wait captain
+end
+recall 95
+move captain 12,8
+wait captain
+move ottilie 12,9
+wait ottilie
+move pell 12,7
+wait pell
+move dunstan 14,10
+wait dunstan
+move wren 15,3
+wait wren
+end
+move captain 13,11
+wait captain
+move dunstan 14,11
+wait dunstan
+move ottilie 13,10
+wait ottilie
+move pell 12,11
+wait pell
+move wren 15,6
+wait wren
+threat captain
+end
+attack pell brigand-6
+attack ottilie soldier-3
+move dunstan 14,7
+attack dunstan hexer-1
+wait captain
+end

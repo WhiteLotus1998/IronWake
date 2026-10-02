@@ -244,6 +244,12 @@ public static class MapRenderer
             sb.Append(BreakLegend).Append('\n');
         }
 
+        if (map.Fronts.Count > 0)
+        {
+            sb.Append(Fronts.Rule).Append('\n');
+            sb.Append("fronts: " + string.Join("; ", map.Fronts.Select(f => $"{f.Words} {string.Join(' ', f.Tiles)}"))).Append('\n');
+        }
+
         if (map.Messenger is { } route)
         {
             sb.Append(MessengerRule).Append('\n');
@@ -528,6 +534,12 @@ public static class MapRenderer
             sb.Append(BreakLegend).Append('\n');
         }
 
+        if (FrontsLine(state) is { } frontsLine)
+        {
+            sb.Append(Fronts.Rule).Append('\n');
+            sb.Append(frontsLine).Append('\n');
+        }
+
         if (MessengerLine(state, content) is { } messengerLine)
         {
             sb.Append(MessengerRule).Append('\n');
@@ -641,6 +653,16 @@ public static class MapRenderer
         map.Exits.Count == 0
             ? null
             : $"exits ({ExitGlyph}): {string.Join(' ', map.Exits)} ({(map.ExitAfterMove ? EscapeRuleAfterMove : EscapeRule)})";
+
+    /// <summary>
+    /// The fronts line (issue 692): each front in file order with its tiles and whether it stands or
+    /// has fallen, <c>fronts: west breach 2,4 2,5 holding; gate 7,0 fallen</c>. Null on a map
+    /// without fronts. The rule is <see cref="Fronts.Rule"/>, printed by <c>help</c>.
+    /// </summary>
+    public static string? FrontsLine(BattleState state) =>
+        state.Map.Fronts.Count == 0
+            ? null
+            : "fronts: " + string.Join("; ", state.Map.Fronts.Select(f => $"{f.Words} {string.Join(' ', f.Tiles)} {(Fronts.HasFallen(state, f) ? "fallen" : "holding")}"));
 
     /// <summary>
     /// Where the messenger stands and how far the road is (DESIGN.md 13.24): its own phases at
