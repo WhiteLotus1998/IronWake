@@ -68,7 +68,7 @@ public class ArrivalTests
         var after = mill.AfterBattle(Won(mill, Map("the_mill")), Content);
 
         Assert.NotNull(after.Find("maud"));
-        Assert.Equal(Content.Cast.Select(u => u.Id), after.Roster.Select(u => u.Id));
+        Assert.Equal(Content.Cast.Select(u => u.Id).Where(id => id != "rook"), after.Roster.Select(u => u.Id));
         Assert.Empty(after.Fallen);
     }
 
@@ -156,6 +156,6 @@ public class ArrivalTests
         var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(With(twice)));
 
         Assert.Equal(("two", "arrives"), (e.Entry, e.Field));
-        Assert.Contains("arrives on more than one map", e.Message);
+        Assert.Contains("arrives or joins on more than one map", e.Message);
     }
 }

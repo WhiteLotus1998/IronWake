@@ -34,7 +34,7 @@ public class KeepRoomTests
     {
         Assert.Equal(Content.Cast.Count + 1, Menu.Beds);
         Assert.Equal(new KeepRoom("bunk", "Bunk room", 400, 2, 2), Menu.Rooms[0]);
-        Assert.Equal(Content.Cast.Count - 1, CampaignRecord.Start(Content, 1).BedsTaken);
+        Assert.Equal(Content.Cast.Count - 2, CampaignRecord.Start(Content, 1).BedsTaken);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class KeepRoomTests
         Assert.Equal(Menu.Beds + 2, built.Record.Beds(Content));
         Assert.Equal(100, built.Record.Purse);
         Assert.Equal(new[] { "bunk" }, built.Record.Rooms);
-        Assert.Equal($"Bunk room built for 400, the purse holds 100; beds: 10/{Menu.Beds + 2}", built.Text);
+        Assert.Equal($"Bunk room built for 400, the purse holds 100; beds: 9/{Menu.Beds + 2}", built.Text);
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class KeepRoomTests
     [Fact]
     public void AMeetingWithNoFreeBedDoesNotJoinAndPrintsTheLine()
     {
-        var tight = WithBeds(Content.Cast.Count - 1);
+        var tight = WithBeds(AtTheMill().BedsTaken);
         var mill = AtTheMill();
 
         Assert.Equal(0, mill.FreeBeds(tight));
@@ -114,7 +114,7 @@ public class KeepRoomTests
     [Fact]
     public void AMeetingTurnedAwayNeverJoinsTheRosterOrTheFallen()
     {
-        var tight = WithBeds(Content.Cast.Count - 1);
+        var tight = WithBeds(AtTheMill().BedsTaken);
         var mill = AtTheMill();
         var unprotected = Map("the_mill") with { ProtectId = null };
         var opening = mill.Begin(unprotected, tight);
@@ -130,7 +130,7 @@ public class KeepRoomTests
     [Fact]
     public void ABoughtRoomFreesABedForTheMeeting()
     {
-        var tight = WithBeds(Content.Cast.Count - 1);
+        var tight = WithBeds(AtTheMill().BedsTaken);
         var built = AtTheMill().BuildRoom("bunk", tight).Record;
 
         Assert.Empty(built.TurnedAway(tight));
@@ -145,7 +145,7 @@ public class KeepRoomTests
         Assert.Equal(
             new[]
             {
-                $"Rooms: beds: 10/{Menu.Beds + 2}; a fallen member keeps their bed",
+                $"Rooms: beds: 9/{Menu.Beds + 2}; a fallen member keeps their bed",
                 "  bunk: Bunk room, 400, +2 beds, built 1 of 2",
                 "  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won",
                 "  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won",

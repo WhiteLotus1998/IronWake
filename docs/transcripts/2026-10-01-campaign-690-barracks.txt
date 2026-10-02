@@ -9,13 +9,12 @@ Campaign, seed 685, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
   Maud: Chaplain L1, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
-  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 11)
 == Keep ==
 Purse: 500
-Rooms: beds: 11/12; a fallen member keeps their bed
+Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +2 beds, built 0 of 2
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won

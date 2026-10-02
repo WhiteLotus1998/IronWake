@@ -866,6 +866,7 @@ public sealed class CampaignSession
 
         Lines(BeforeCard(_record, _content, map));
         Lines(TurnedAwayLines(_record, _content));
+        Lines(JoinLines(_record, _content));
         Lines(CampLines(_contentDir, _content, _record, map, typed: true));
 
         while (input.ReadLine() is { } line)
@@ -1463,6 +1464,16 @@ public sealed class CampaignSession
         var names = UnitNames.Of(record, content);
         var why = record.CompanyFull(content) ? $"company full ({CampaignRecord.CompanyCap})" : "no bed free";
         return record.TurnedAway(content).Select(id => $"{why}: {names[id]} will not join").ToList();
+    }
+
+    /// <summary>
+    /// One line per recruit joining at the next map below the living company's median (issue 763),
+    /// printed where they are met: <c>&lt;name&gt; joins at level N (the company's median)</c>.
+    /// </summary>
+    public static IReadOnlyList<string> JoinLines(CampaignRecord record, GameContent content)
+    {
+        var names = UnitNames.Of(record, content);
+        return record.RaisedOnJoining(content).Select(j => $"{names[j.Id]} joins at level {j.Level} (the company's median)").ToList();
     }
 
     private void Lines(IEnumerable<string> lines)

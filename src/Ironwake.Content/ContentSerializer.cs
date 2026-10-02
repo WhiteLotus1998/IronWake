@@ -76,6 +76,17 @@ public static class ContentSerializer
                     writer.WriteEndArray();
                 }
 
+                if (map.Joins.Count > 0)
+                {
+                    writer.WriteStartArray("joins");
+                    foreach (var id in map.Joins)
+                    {
+                        writer.WriteStringValue(id);
+                    }
+
+                    writer.WriteEndArray();
+                }
+
                 if (map.EnemyLevel is { } enemyLevel)
                 {
                     writer.WriteNumber("enemyLevel", enemyLevel);
