@@ -494,7 +494,7 @@ public static class MapRenderer
             sb.Append(Dusk.Unseen).Append("  unseen at ").Append(string.Join(' ', unseen)).Append('\n');
         }
 
-        if (Dusk.Line(state, UnitNames.Of(state, content)) is { } dusk)
+        if (Dusk.Line(state, content, UnitNames.Of(state, content)) is { } dusk)
         {
             sb.Append(dusk).Append('\n');
         }

@@ -22,7 +22,7 @@ E  pell             Pell L1 adept              7,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 13,3
 Dunstan moves 9,3 -> 13,3 via 10,3 11,3 12,3
@@ -48,7 +48,7 @@ E  pell             Pell L1 adept              7,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 10,3
 Alder Fenn moves 8,4 -> 10,3 via 8,3 9,3
@@ -74,7 +74,7 @@ E  pell             Pell L1 adept              7,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 9,3
 Pell moves 7,3 -> 9,3 via 8,3
@@ -100,7 +100,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 10,4
 Wren moves 8,5 -> 10,4 via 8,4 9,4
@@ -126,7 +126,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           8,2    hp 17/17  Plain
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 10,1
 Rook moves 8,2 -> 10,1 via 8,1 9,1
@@ -152,7 +152,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
 Forecast Rook -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
@@ -182,7 +182,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,1 1,4 0,5 17,5 17,6 0,7 17,7 1,8 0,10
-dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
 -- Player phase ends, turn 1 --
@@ -222,7 +222,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
 Forecast Rook -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
@@ -251,7 +251,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 14,3
 Alder Fenn moves 10,3 -> 14,3 via 11,3 12,3 13,3
@@ -277,7 +277,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 12,3
 Dunstan moves 13,3 -> 12,3
@@ -303,7 +303,7 @@ E  pell             Pell L1 adept              9,3    hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 13,3
 Pell moves 9,3 -> 13,3 via 10,3 11,3 12,3
@@ -329,7 +329,7 @@ E  pell             Pell L1 adept              13,3   hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              10,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 12,4
 Wren moves 10,4 -> 12,4 via 10,3 11,3 12,3
@@ -355,7 +355,7 @@ E  pell             Pell L1 adept              13,3   hp 16/16  Plain
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water  done
 D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 0,3 2,3 3,3 4,3 0,4 1,4 17,5 17,6 17,7
-dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see
+dusk: sight 4, 3 next turn; 9 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
 -- Player phase ends, turn 2 --
@@ -401,7 +401,7 @@ a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           10,1   hp 17/17  Water
 D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3 17,5 17,6 17,7
-dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see
+dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 13,2
 Rook moves 10,1 -> 13,2 via 10,0 11,0 12,0 13,0 13,1
@@ -428,7 +428,7 @@ a  rider-1          Rider L3 outrider          9,3    hp 21/21  Plain  group cha
 C  rook             Rook L1 skyrider           13,2   hp 17/17  Plain
 D  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3 17,5 17,6 17,7
-dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see
+dusk: sight 3, 2 next turn; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 14,5
 Wren moves 12,4 -> 14,5 via 13,4 14,4
@@ -459,7 +459,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    17,5   hp 25/25  Plain  group ban
 j  soldier-1        Soldier L3 pikeman         17,6   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,5   hp 20/20  Plain
 ?  unseen at 2,3 4,3 5,3 6,3 8,3
-dusk: sight 3, 2 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 3, 2 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
 Lethal if all land: Wren (Brawler for 14, Soldier for 9, against 20 hp)
@@ -540,7 +540,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move pell 13,5
 Pell moves 13,3 -> 13,5 via 13,4
@@ -570,7 +570,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell brawler-1
 Forecast Pell -> Brawler with Cinder: acc 99% dmg 13 crit 3%; counter: none
@@ -604,7 +604,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              14,5   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move wren 13,4
 Wren moves 14,5 -> 13,4 via 14,4
@@ -633,7 +633,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 6/20   Plain
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > item wren 2
 Wren uses Field Dressing (2 left)
@@ -663,7 +663,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move rook 14,2
 Rook moves 13,2 -> 14,2
@@ -692,7 +692,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3
-dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 5 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 14,4
 Dunstan moves 12,3 -> 14,4 via 13,3 14,3
@@ -719,7 +719,7 @@ h  shieldbearer-1   Shieldbearer L3 bulwark    15,5   hp 21/25  Forest  group ba
 j  soldier-1        Soldier L3 pikeman         16,3   hp 21/21  Plain  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 16/20  Plain  done
 ?  unseen at 11,1 2,3 4,3 5,3 9,3 10,3 11,3
-dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see
+dusk: sight 2, 1 next turn; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > end
 Lethal if all land: Dunstan (Shieldbearer for 5, Soldier for 6, against 11 hp)
@@ -796,7 +796,7 @@ E  pell             Pell L1 adept              13,5   hp 16/16  Plain
 j  soldier-1        Soldier L3 pikeman         15,4   hp 13/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
-dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
 Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
@@ -826,7 +826,7 @@ E  pell             Pell L1 adept              13,5   hp 16/16  Plain  done
 j  soldier-1        Soldier L3 pikeman         15,4   hp 13/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
-dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move captain 18,3
 Alder Fenn moves 14,3 -> 18,3 via 15,3 16,3 17,3
@@ -851,7 +851,7 @@ E  pell             Pell L1 adept              13,5   hp 16/16  Plain  done
 j  soldier-1        Soldier L3 pikeman         15,4   hp 13/21  Forest  group bank, guard, awake
 D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3
-dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see
+dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > move dunstan 16,6
 Dunstan moves 14,4 -> 16,6 via 14,5 14,6 15,6
@@ -875,7 +875,7 @@ B  dunstan          Dunstan L1 bulwark         16,6   hp 5/23   Plain
 E  pell             Pell L1 adept              13,5   hp 16/16  Plain  done
 D  wren             Wren L1 cadet              13,4   hp 10/20  Plain
 ?  unseen at 11,1 13,2 15,2 6,3 8,3 11,3 12,3 15,4
-dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
+dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see; the enemy hears within 4
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > threat dunstan
 Threat on Dunstan at 16,6 (Plain): no enemy in sight can strike him next phase

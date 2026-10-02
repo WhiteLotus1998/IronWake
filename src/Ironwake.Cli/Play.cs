@@ -62,6 +62,7 @@ public sealed class PlaySession
           about <item>             What a weapon, spell or item is: its numbers and one line on it
           map                      Show the board
           help                     This list
+        At dusk no side strikes what it cannot see, and an enemy knows a unit its side sees or that stands within its hearing, the radius the dusk line prints
         Slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
         A scripted run ends with a summary of every rejected line; --strict stops at the first
         """;

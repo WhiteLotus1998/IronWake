@@ -130,9 +130,11 @@ public static class Dusk
 
     /// <summary>
     /// The console line for a dusk map's sight on the state's turn, with the next turn's, each player unit
-    /// that sees further and how far by <paramref name="names"/> (issue 706: <c>; Rook sees 5</c>), or null in daylight.
+    /// that sees further and how far by <paramref name="names"/> (issue 706: <c>; Rook sees 5</c>), and the
+    /// hearing radius of <see cref="Knows"/>, the content's wake radius (issue 765: an enemy walks to a unit it
+    /// hears in the dark, so the line says how far it hears), or null in daylight.
     /// </summary>
-    public static string? Line(BattleState state, UnitNames? names = null)
+    public static string? Line(BattleState state, GameContent content, UnitNames? names = null)
     {
         if (Sight(state) is not { } sight)
         {
@@ -144,6 +146,6 @@ public static class Dusk
         var hidden = state.UnitsOf(Side.Enemy).Count(u => !Seen(state, u));
         var dark = hidden == 0 ? "" : $"; {hidden} unseen ({Unseen})";
         var far = string.Concat(state.UnitsOf(Side.Player).Where(u => u.ExtraSight > 0).Select(u => $"; {(names ?? UnitNames.None)[u.Id]} sees {sight + u.ExtraSight}"));
-        return $"dusk: sight {sight}{tail}{far}{dark}; no side strikes what it cannot see";
+        return $"dusk: sight {sight}{tail}{far}{dark}; no side strikes what it cannot see; the enemy hears within {content.WakeRadius}";
     }
 }

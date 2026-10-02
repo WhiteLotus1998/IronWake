@@ -761,6 +761,12 @@ public static class ProtocolJson
 
         w.WriteNumber("wakeRadius", content.WakeRadius);
         w.WriteNumber("noiseRadius", content.NoiseRadius);
+        if (Dusk.Line(state, content, UnitNames.Of(state, content)) is { } duskLine)
+        {
+            // Derived (issue 765): the console's dusk line, the hearing radius with it, never read back.
+            w.WriteString("duskLine", duskLine);
+        }
+
         WriteStrings(w, "fired", state.Fired);
         WriteStrings(w, "flags", state.Flags);
         w.WriteStartArray("rapport");

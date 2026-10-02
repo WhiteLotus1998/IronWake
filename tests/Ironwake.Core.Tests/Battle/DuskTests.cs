@@ -60,7 +60,7 @@ public class DuskTests
 
         Assert.Null(Dusk.Sight(state));
         Assert.True(Dusk.Sees(state, Side.Player, new Coord(6, 3)));
-        Assert.Null(Dusk.Line(state));
+        Assert.Null(Dusk.Line(state, Starter));
     }
 
     [Fact]
@@ -170,7 +170,15 @@ public class DuskTests
         Assert.Contains("\n 3 ......?.\n", text);
         Assert.DoesNotContain("archer-1", text);
         Assert.Contains("?  unseen at 6,3\n", text);
-        Assert.Contains("dusk: sight 2, 1 next turn; 1 unseen (?); no side strikes what it cannot see\n", text);
+        Assert.Contains("dusk: sight 2, 1 next turn; 1 unseen (?); no side strikes what it cannot see; the enemy hears within 4\n", text);
+    }
+
+    [Fact]
+    public void TheDuskLineNamesTheHearingRadiusFromContent()
+    {
+        Assert.EndsWith("; the enemy hears within 4", Dusk.Line(Start(1), Starter));
+        Assert.EndsWith("; the enemy hears within 2", Dusk.Line(Start(1), Starter with { WakeRadius = 2 }));
+        Assert.DoesNotContain("hears", MapRenderer.Render(Start(null), Starter));
     }
 
     [Fact]
