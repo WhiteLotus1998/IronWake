@@ -41,7 +41,7 @@ public class AdvancedTemplateTests
     public void EveryAdvancedFormHasExactlyOneTemplate()
     {
         var cast = Shipped.Cast.Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
-        foreach (var form in Shipped.Classes.Values.Where(c => c.Advances is not null))
+        foreach (var form in Shipped.Classes.Values.Where(c => c.Advances is not null && !c.Captain))
         {
             Assert.Single(Shipped.Units.Values, u => !cast.Contains(u.Id) && u.ClassId == form.Id);
         }

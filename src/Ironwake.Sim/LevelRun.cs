@@ -70,7 +70,7 @@ public static class LevelRun
     /// skipped is not what this measures.
     /// </summary>
     public static bool Ready(Unit unit, GameContent content) =>
-        content.Classes.Values.Any(f => f.Advances is { } basis && Certifications.Check(unit with { ClassId = basis.Id }, f).Count == 0);
+        content.Classes.Values.Any(f => f.Advances is { } basis && Certifications.Check(unit with { ClassId = basis.Id }, f, null, CampaignRecord.IsCaptain(unit, content)).Count == 0);
 
     private static BattleState Fight(BattleState state, GameContent content, int seed, int number)
     {

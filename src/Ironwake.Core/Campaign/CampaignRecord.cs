@@ -334,6 +334,14 @@ public sealed record CampaignRecord(
     public Unit? Captain(GameContent content) => content.Cast.Count == 0 ? null : Find(content.Cast[0].Id);
 
     /// <summary>
+    /// Whether <paramref name="unit"/> is the captain, the cast's first, and the content gives the captain a
+    /// ladder (issue 705, <see cref="UnitClass.Captain"/>): only then is the captain held to it. Content with
+    /// no captain's class leaves the captain the general classes, as before the ladder.
+    /// </summary>
+    public static bool IsCaptain(Unit unit, GameContent content) =>
+        content.Cast.Count > 0 && content.Cast[0].Id == unit.Id && content.Classes.Values.Any(c => c.Captain);
+
+    /// <summary>
     /// The next battle: <paramref name="map"/> (the next map, as the caller loaded it) under the
     /// campaign's difficulty, with the roster less the bench filling its slots in roster order,
     /// so benching a unit lets the next recruit take its bare slot, which is a deployment and not
@@ -622,7 +630,7 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"no class '{classId}'");
         }
 
-        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId));
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content));
         if (refusals.Count > 0)
         {
             return ScreenResult.Refused(this, $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
@@ -636,7 +644,7 @@ public sealed record CampaignRecord(
 
         var from = content.Class(unit.ClassId).Name;
         return new ScreenResult(
-            Replace(Certifications.Certify(unit, target)) with { Purse = Purse - price },
+            Replace(Certifications.Certify(unit, target, IsCaptain(unit, content))) with { Purse = Purse - price },
             $"{unit.Id} certifies from {from} to {target.Name} for {price}; the purse holds {Purse - price}",
             true);
     }
@@ -660,7 +668,7 @@ public sealed record CampaignRecord(
             return $"no class '{classId}'";
         }
 
-        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId));
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content));
         if (refusals.Count > 0)
         {
             return $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
@@ -722,7 +730,7 @@ public sealed record CampaignRecord(
         }
 
         var after = end.UnitsOf(Side.Player).Single(u => u.Id == unitId).Unit;
-        var certified = Certifications.Certify(unit, target) with
+        var certified = Certifications.Certify(unit, target, IsCaptain(unit, content)) with
         {
             Level = after.Level,
             Exp = after.Exp,

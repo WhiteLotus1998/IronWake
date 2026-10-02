@@ -211,6 +211,74 @@
       "modifiers": { "hp": 5, "def": 5, "spd": -2 }
     },
     {
+      "id": "vanguard",
+      "name": "Vanguard",
+      "captain": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["sword", "lance"],
+      "certification": { "level": 3 },
+      "modifiers": { "hp": 2, "str": 1, "def": 2 },
+      "growthModifiers": { "hp": 10, "def": 10 }
+    },
+    {
+      "id": "marshal",
+      "name": "Marshal",
+      "captain": true,
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["sword", "reason"],
+      "certification": { "level": 3 },
+      "modifiers": { "mag": 2, "res": 1, "cha": 2 },
+      "growthModifiers": { "mag": 10, "cha": 10 }
+    },
+    {
+      "id": "ranger",
+      "name": "Ranger",
+      "captain": true,
+      "movement": "infantry",
+      "mov": 5,
+      "weapons": ["sword", "bow"],
+      "mastery": "canto",
+      "masteryPoints": 12,
+      "certification": { "level": 3 },
+      "modifiers": { "dex": 2, "spd": 1 },
+      "growthModifiers": { "dex": 10, "spd": 5 }
+    },
+    {
+      "id": "champion",
+      "name": "Champion",
+      "captain": true,
+      "advances": "vanguard",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["sword", "lance", "axe"],
+      "certification": { "level": 10, "ranks": { "sword": "C" } },
+      "modifiers": { "hp": 4, "str": 3, "def": 4 }
+    },
+    {
+      "id": "commander",
+      "name": "Commander",
+      "captain": true,
+      "advances": "marshal",
+      "movement": "cavalry",
+      "mov": 6,
+      "weapons": ["sword", "reason", "lance"],
+      "certification": { "level": 10, "ranks": { "sword": "C" } },
+      "modifiers": { "str": 1, "mag": 3, "res": 2, "cha": 3 }
+    },
+    {
+      "id": "pathfinder",
+      "name": "Pathfinder",
+      "captain": true,
+      "advances": "ranger",
+      "movement": "infantry",
+      "mov": 5,
+      "weapons": ["sword", "bow"],
+      "certification": { "level": 10, "ranks": { "sword": "C" } },
+      "modifiers": { "str": 1, "dex": 4, "spd": 3 }
+    },
+    {
       "id": "sergeant",
       "name": "Sergeant",
       "movement": "infantry",

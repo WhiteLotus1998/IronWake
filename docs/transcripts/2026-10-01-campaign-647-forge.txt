@@ -1,7 +1,7 @@
 Campaign, seed 698, difficulty Captain, permadeath off, scheme TwoRollAverage, 9 maps
 -- Before map 4 of 9: The Tollgate; the purse holds 500 --
 == Roster ==
-  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
@@ -708,7 +708,7 @@ the company whether they want the prayer before she says it.
 
 > roster
 Roster: company 11/12
-  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0, Wounded (2); 1: Iron Sword 40/40, 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
@@ -2725,7 +2725,7 @@ Battle won: seize; only recall is left, or leave
 The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
 -- Before map 5 of 9: Harrow Weir; the purse holds 1500 --
 == Roster ==
-  Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
@@ -2771,7 +2771,7 @@ Refine Iron Sword: Iron Sword +1, Acc 80, Power 5, for 1 common material and 100
 Bunk room built for 400, the purse holds 300; beds: 11/14
 > roster
 Roster: company 11/12
-  Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword +1 36/40 (repair 40), 2: Field Dressing 3/3
+  Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword +1 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
   Teodor: Pikeman L1, EXP 54; 1: Iron Lance +1 38/40 (repair 20), 2: Field Dressing 3/3
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3

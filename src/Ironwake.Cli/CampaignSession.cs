@@ -1308,7 +1308,7 @@ public sealed class CampaignSession
             }
             else if (unit is not null)
             {
-                var refusals = Certifications.Check(unit, target, _content.Class(unit.ClassId));
+                var refusals = Certifications.Check(unit, target, _content.Class(unit.ClassId), CampaignRecord.IsCaptain(unit, _content));
                 line += refusals.Count == 0 ? $" -- {names[unit.Id]} may be promoted" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
             }
 
@@ -1529,7 +1529,8 @@ public sealed class CampaignSession
         var unitClass = content.Class(unit.ClassId);
         var slots = unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {ItemText(content, item)}");
         var bench = (unit.Wound is { } wound ? ", " + wound.Label : "") + (record.Benched.Contains(unit.Id) ? ", benched" : "");
-        var lines = new List<string> { $"  {name}: {unitClass.Name} L{unit.Level}, EXP {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}" };
+        var ladder = CampaignRecord.IsCaptain(unit, content) && LadderText(content, unitClass) is { } text ? "; " + text : "";
+        var lines = new List<string> { $"  {name}: {unitClass.Name} L{unit.Level}, EXP {unit.Exp}{bench}; {(unit.Inventory.Count == 0 ? "no items" : string.Join(", ", slots))}{ladder}" };
         if (!detail)
         {
             return lines;
@@ -1550,6 +1551,31 @@ public sealed class CampaignSession
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// The captain's ladder as the camp row ends it (issue 705): before the captain takes a class on it,
+    /// the level and the choices, <c>promotes at 3: Marshal, Ranger or Vanguard</c>; after, the class
+    /// held and the form above it, <c>ladder: Vanguard, then Champion at 10</c>. Null when the content has no ladder.
+    /// </summary>
+    public static string? LadderText(GameContent content, UnitClass held)
+    {
+        var bases = content.Classes.Values.Where(c => c.Captain && c.Advances is null).ToList();
+        if (bases.Count == 0)
+        {
+            return null;
+        }
+
+        if (!held.Captain)
+        {
+            var names = bases.Select(c => c.Name).ToList();
+            var choices = names.Count == 1 ? names[0] : $"{string.Join(", ", names.Take(names.Count - 1))} or {names[^1]}";
+            return $"promotes at {bases.Min(c => c.Certification.Level)}: {choices}";
+        }
+
+        var basis = held.Advances ?? held;
+        var form = content.Classes.Values.FirstOrDefault(c => c.Advances?.Id == basis.Id);
+        return form is null ? $"ladder: {basis.Name}" : $"ladder: {basis.Name}, then {form.Name} at {form.Certification.Level}";
     }
 
     /// <summary>An inventory entry with its uses out of its full uses, and what repairing it costs where it can be repaired and is short.</summary>

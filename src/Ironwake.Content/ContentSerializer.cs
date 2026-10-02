@@ -582,6 +582,11 @@ public static class ContentSerializer
             writer.WriteBoolean("hidden", true);
         }
 
+        if (unitClass.Captain)
+        {
+            writer.WriteBoolean("captain", true);
+        }
+
         if (unitClass.StrikeOnly.Count > 0)
         {
             writer.WriteStartArray("strikeOnly");

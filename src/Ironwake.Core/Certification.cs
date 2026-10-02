@@ -54,12 +54,33 @@ public static class Certifications
     /// <paramref name="from"/>: a unit in a hidden class keeps it (issue 691), so every other
     /// class is refused first, naming the class it holds.
     /// </summary>
-    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from)
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from) => Check(unit, target, from, captain: false);
+
+    /// <summary>
+    /// <see cref="Check(Unit, UnitClass, UnitClass)"/> read knowing whether <paramref name="unit"/> is the
+    /// captain (issue 705): the captain's ladder (<see cref="UnitClass.Captain"/>) is the captain's alone,
+    /// the captain takes no class off it, and once on it the captain goes only up, into the held class's
+    /// own advanced form, each refused naming the ladder.
+    /// </summary>
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from, bool captain)
     {
         var refusals = new List<CertificationRefusal>();
         if (from is { Hidden: true } && from.Id == unit.ClassId && target.Id != from.Id)
         {
             refusals.Add(new("from", $"{unit.Id} is a {from.Name}, earned and kept"));
+        }
+
+        if (target.Captain && !captain)
+        {
+            refusals.Add(new("captain", $"only the captain takes {target.Name}"));
+        }
+        else if (!target.Captain && captain && unit.ClassId != target.Id)
+        {
+            refusals.Add(new("captain", $"{target.Name} is not on the captain's ladder"));
+        }
+        else if (captain && from is { Captain: true } && from.Id == unit.ClassId && target.Id != from.Id && target.Advances?.Id != from.Id)
+        {
+            refusals.Add(new("captain", $"the captain's ladder is one-way; {from.Name} leads only to its own form"));
         }
 
         if (unit.ClassId == target.Id)
@@ -112,9 +133,14 @@ public static class Certifications
     /// <paramref name="unit"/> in <paramref name="target"/>, or an
     /// <see cref="InvalidOperationException"/> naming the first requirement it fails.
     /// </summary>
-    public static Unit Certify(Unit unit, UnitClass target)
+    public static Unit Certify(Unit unit, UnitClass target) => Certify(unit, target, captain: false);
+
+    /// <summary>
+    /// <see cref="Certify(Unit, UnitClass)"/> read knowing whether <paramref name="unit"/> is the captain (issue 705).
+    /// </summary>
+    public static Unit Certify(Unit unit, UnitClass target, bool captain)
     {
-        var refusals = Check(unit, target);
+        var refusals = Check(unit, target, null, captain);
         if (refusals.Count > 0)
         {
             throw new InvalidOperationException($"{unit.Id} cannot be promoted to {target.Name}: {refusals[0].Text}");

@@ -197,7 +197,8 @@ def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
     def fill(*points):
         canvas.polygon(list(points), rgba)
 
-    if class_id == "cadet":
+    # The captain's ladder draws the Levy's shape until it has its own (issue 705).
+    if class_id in ("cadet", "vanguard", "marshal", "ranger"):
         stroke(P(0, -11), P(0, 10))
         stroke(P(-6, 4), P(6, 4))
         fill(P(-2, -8), P(0, -13), P(2, -8))
