@@ -37,7 +37,7 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400, "enemyLevel": 7, "swap": { "7,5": "veteran" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
-    { "map": "brackwater_cut", "reward": 1600, "enemyLevel": 8, "swap": { "0,1": "heavy_rider", "0,10": "heavy_rider" },
+    { "map": "brackwater_cut", "reward": 1600, "enemyLevel": 6, "swap": { "0,1": "heavy_rider", "0,10": "heavy_rider" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
     { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }

@@ -25,7 +25,7 @@ public class CampaignCurveTests
     [Fact]
     public void TheShippedCurveBendsHarrowWeirBackToItsFileAndRaisesTheRaid()
     {
-        Assert.Equal(new int?[] { 1, 1, 2, 3, 2, 6, 7, 8, 8 }, Content.Campaign.Maps.Select(m => m.EnemyLevel));
+        Assert.Equal(new int?[] { 1, 1, 2, 3, 2, 6, 7, 6, 8 }, Content.Campaign.Maps.Select(m => m.EnemyLevel));
     }
 
     [Fact]
@@ -35,8 +35,8 @@ public class CampaignCurveTests
         var fought = Entry("brackwater_cut").Prepare(map);
 
         Assert.Equal(3, map.EnemyLevel);
-        Assert.Equal(8, fought.EnemyLevel);
-        Assert.All(fought.Placements.OfType<EnemyPlacement>(), p => Assert.Equal(8, fought.EnemyUnit(p, Content).Level));
+        Assert.Equal(6, fought.EnemyLevel);
+        Assert.All(fought.Placements.OfType<EnemyPlacement>(), p => Assert.Equal(6, fought.EnemyUnit(p, Content).Level));
     }
 
     [Fact]
