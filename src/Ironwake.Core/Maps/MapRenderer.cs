@@ -529,6 +529,11 @@ public static class MapRenderer
             sb.Append(wears).Append('\n');
         }
 
+        if (Rockfall.Line(state, content) is { } ledges)
+        {
+            sb.Append(ledges).Append('\n');
+        }
+
         if (ChestLegend(state.ClosedChests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');

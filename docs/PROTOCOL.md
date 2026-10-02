@@ -36,6 +36,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 | `exit` | `unit` (on an Escape map, from an exit tile, as the unit's action; issue 269) | `Exit` |
 | `recover` | `unit` (on a `keepsakes: on` map, from a keepsake's tile, as the unit's action; DESIGN 13.8, experiment) | `Recover` |
 | `open` | `unit`, `at` (the chest's tile; from that tile or orthogonally beside it, as the unit's action, refused while an enemy stands on the tile; what fits into its pack, the rest to the wagon; issues 649, 679) | `Open` |
+| `drop` | `unit` (standing on a ledge whose rock is still up, as the unit's action; every `drop` event on the ledge fires; DESIGN 13.26, experiment) | `Drop` |
 | `order` | `kind` (`press`, `rally` or `fallBack`; Commander's Word, once a map, as the captain's action, on an `orders: on` map or a campaign map from the second; DESIGN 13.2, issue 85) | `Order` |
 | `fallBack` | `unit`, `to` (after a `fallBack` order, an ally who had acted moves up to 2, refused if it would wake a group; its own tile declines it; issue 85) | `FallBack` |
 | `shove` | `unit`, `target` (on a `shove: on` map, an orthogonally adjacent ally pushed one tile away, as the unit's action; an enemy target is refused; DESIGN 13.12, experiment) | `Shove` |
@@ -108,6 +109,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `unitHealed` | `unit`, `amount`, `hpAfter` |
 | `unitRested` | `unit` (begins its side's phase moved and acted, paying an art that cost it this phase; issue 636) |
 | `unitBurned` | `unit`, `amount`, `hpAfter` (standing on burning terrain at its side's phase start; never below 1; DESIGN 13.15, experiment) |
+| `rockfallStruck` | `unit`, `at`, `amount`, `hpAfter` (a drop's rock struck the unit standing on a tile it brings down; never below 1; DESIGN 13.26, experiment) |
 | `hungerDrained` | `unit`, `item`, `amount`, `hpAfter`, `starved` (a hungering weapon unfed since its carrier's last phase start drains it, never below 1; `starved` when the drain put the weapon in its starved form; DESIGN 13.23, experiment) |
 | `hungerFed` | `unit`, `item`, `fed`, `healed`, `hpAfter`, `mtBonus`, `woke` (a kill fed the weapon: its count, the carrier's heal, its Mt growth, and `woke` on the kill that reaches the cap; DESIGN 13.23) |
 | `hungerEased` | `unit`, `item`, `healed`, `hpAfter` (a starved weapon's hit that killed nothing ends the starved form; DESIGN 13.23) |

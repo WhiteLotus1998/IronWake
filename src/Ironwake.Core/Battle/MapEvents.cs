@@ -7,7 +7,8 @@ namespace Ironwake.Core;
 /// event emits <see cref="MapEventFired"/> and then its action's own event. An event whose
 /// tile is barred is blocked and spent, with no action: a spawn tile with any unit on it or
 /// terrain the template cannot stand on (the event names that terrain, issue 655), or a
-/// terrain change that would leave its occupant on ground it cannot enter. A boss's spawn is
+/// terrain change that would leave its occupant on ground it cannot enter, or a drop's terrain change
+/// on any occupied tile (DESIGN.md 13.26), whose rock strikes the occupant instead. A boss's spawn is
 /// never stopped by a unit: it lands on the nearest free tile instead (<see cref="BossLanding"/>).
 /// </summary>
 public static class MapEvents
@@ -23,6 +24,10 @@ public static class MapEvents
     /// <summary>The events whose trigger is the messenger reaching its road (DESIGN.md 13.24).</summary>
     public static BattleState AfterMessenger(BattleState state, GameContent content, List<GameEvent> events) =>
         Fire(state, content, events, t => t is MessengerTrigger);
+
+    /// <summary>The events whose drop trigger names <paramref name="ledge"/> (DESIGN.md 13.26): a terrain change strikes its occupant first.</summary>
+    public static BattleState AfterDrop(BattleState state, GameContent content, Coord ledge, List<GameEvent> events) =>
+        Fire(state, content, events, t => t is DropTrigger drop && drop.Ledge == ledge);
 
     /// <summary>The events whose trigger is the fall of <paramref name="front"/> (issue 692).</summary>
     public static BattleState AfterFall(BattleState state, GameContent content, string front, List<GameEvent> events) =>
@@ -41,8 +46,13 @@ public static class MapEvents
             switch (mapEvent.Action)
             {
                 case ChangeTerrain change:
+                    if (mapEvent.Trigger is DropTrigger)
+                    {
+                        state = Rockfall.Strike(state, change.At, events);
+                    }
+
                     var occupant = state.UnitAt(change.At);
-                    if (occupant is not null && !content.TerrainById(change.TerrainId).IsPassable(content.Class(occupant.Unit.ClassId).Movement))
+                    if (occupant is not null && (mapEvent.Trigger is DropTrigger || !content.TerrainById(change.TerrainId).IsPassable(content.Class(occupant.Unit.ClassId).Movement)))
                     {
                         events.Add(new MapEventFired(mapEvent.Name, true));
                         break;

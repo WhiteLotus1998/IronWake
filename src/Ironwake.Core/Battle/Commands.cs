@@ -76,6 +76,14 @@ public sealed record Recover(string UnitId) : Command;
 public sealed record Open(string UnitId, Coord At) : Command;
 
 /// <summary>
+/// Drop the rock (DESIGN.md 13.26, experiment): a player unit standing on a ledge whose drop
+/// events have not fired brings the rock down as its action, in place of Attack, Item or Wait,
+/// after its Move or without one. Every event on the ledge fires (<see cref="Rockfall"/>). No
+/// Canto follows. The enemy never drops.
+/// </summary>
+public sealed record Drop(string UnitId) : Command;
+
+/// <summary>
 /// Shove an orthogonally adjacent ally (DESIGN.md 13.12, experiment): on a <c>shove: on</c> map,
 /// a player unit pushes an ally one tile directly away from itself, as its action in place of
 /// Attack, Item or Wait, after its Move or without one. The tile beyond must be on the map,

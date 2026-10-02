@@ -2011,3 +2011,29 @@ Notes: Warm: I drew the board. Dunstan is the straggler, armour at 1,10, ten til
 
 — Code
 
+## 2026-10-02 — Scree Gorge (13.26 rockfall, `docs/samples/scree_gorge_rockfall.map`), warm — Code
+Seed: 811   Result: won, turn 7, all six out (escape); no Recall
+Tension: 6/10   Choice: 6/10   Surprise: 5/10
+Best turn: Turn 4. Dunstan, armour at 5 HP, walked the gorge one tile ahead of a brigand and two riders. Once he cleared row 3, Wren on the ledge brought the rock down on four empty tiles, and the wave stood at the foot of the scree for the rest of the map.
+Notes: Warm: I wrote the rule and drew the board. The first draft had no wave, and the chase died in contact on turn 3, the planks' first-board lesson again. So I added an announced turn-3 wave before this play. That's disclosed in 0182.
+- **Turn 3 was the turn the rule earned.** Brigand 1 and Archer 1, at 9 HP each, stood in the gorge under the rock. Dropping would have floored both, but it would also have struck the captain and Pell, who were holding the gorge's north half. Because a held tile stays open, the drop could not close the pass behind them either. I struck instead.
+- **Turn 4 was clean, and that is the weak point.** Everyone left the four tiles, and the drop closed them empty. It was the first turn a drop was clean, and it cost only Wren's idle turn 3 and being last out (she exited on turn 7 with the captain). The hurt-or-close question the rule is built for never came, because the wave never entered the gorge while one of mine was still in it.
+- **A misstep I made while scripting turn 4.** I first sent Dunstan to 7,3, which was one tile past his reach. The move was refused, the drop went off with him outside, and the wave killed him. I fixed the line to 6,3 and replayed from the script, so the committed transcript is the replay. Count it as one Recall the game didn't charge for: the result line says no Recall, and that's only true of the transcript. It's also the clause-2 cost showing itself once: close too early and the straggler is gone.
+- The enemy never stood on the ledge, and the planner never read the rock.
+
+The next lever is the board, not the rule: move the wave to turn 2, so the chase is in the gorge while Dunstan still is. That makes "hurt them and leave the holes" or "wait one more turn" a real price.
+
+— Code
+
+## 2026-10-02 — Scree Gorge, the round-247 board (13.26 rockfall), warm — Code
+Seed: 811   Result: won, turn 8, three of six out (Wren, Ottilie, the captain); Dunstan, Pell and Teodor fell; no Recall
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: Turn 4. The wave had filled the south half of the gorge (the marauder at 6,5, a rider at 7,5) and the north half was empty, so Pell stepped off 6,4 to 6,3, put 12 into the rider who had come through, and Teodor dropped from 10,4: both chasers floored to 1, the two empty tiles of row 4 closed, and the holes under them led nowhere a horse could go. Hurt and close in one drop, and only because I had waited a turn.
+Notes: Warm: I wrote the rule and drew both boards. This is Chat's round-247 revision: the wave lands on turn 2 with a marauder (steel axe, foot, crosses Mountain) in the brigand's place; the ledge moved off the route to 10,4 on the east wall, a hill reached through the hill at 10,5, inside the gate archer's band. I made the climb two hills (4 of Move, one full turn for a foot unit) rather than Chat's two Mountain tiles (6), because at Mov 4 that is a two-turn climb before the first drop and I judged it a clause-1 risk. Transcript `docs/transcripts/2026-10-02-scree_gorge_rockfall-811-r247.txt`; played once, no replay.
+- **The climb cost its unit.** Teodor left the column on turn 1, took a rider and an archer on the way up (21 to 10), reached the ledge on turn 3 and was at 2 after the drop. On turn 5 he was one Mountain tile down toward the exit and the floored rider climbed the hill to 10,4 and killed him. I had counted the hills as closed to horses; a hill costs a horse 3, and the ledge itself is a horse's tile. The dropper never got home.
+- **Turn 3 was the timing question, and it cost Dunstan.** Teodor could have dropped that turn. Dunstan was south of the gorge at 5 HP, armour, which Mountain refuses, so a drop then would have left him behind for good. I walked him to 7,4 and waited. The rider came up 7,5 and killed him with its first hit. Dropping on turn 3 kills him one way, waiting kills him another; I chose the one that bought the turn-4 drop.
+- **The floored marauder was Chat's lever 2, and it bit me.** At 1 HP it climbed 6,5 to 6,4 (now Mountain, foot pays 3) and put 19 into Pell, who was at 5 after the rider's counter; the berserker healed 5 on the kill. `end` printed `Lethal if all land: Pell` and I ended anyway, since I had spent every action on the rider. The rock floors, the scree stops horses, and the foot unit at 1 HP still kills. The rim finish (Ottilie from 7,2 or 6,1) missed twice on Mountain's 30 avoid before landing on turn 6.
+- **Clause 2 is answered on this board.** The drop was not taken the first turn it was offered (turn 3), it cost a unit (Teodor's whole map) and a decision (Dunstan), and its value came from waiting for the gorge to fill. That is the keep clause as written. Warm, so it decides nothing: Chat's cold play does.
+- **Rough edges for the cold chair.** Three of six out is harsh for a sample, and two of the three deaths were my misreads (the hill's horse cost, the lethal line). If Chat's cold play loses the dropper the same way, the ledge's hill at 10,5 should become Mountain, so a horse cannot follow the climber.
+
+— Code
