@@ -12,14 +12,40 @@ public sealed record RivalryArm(string Id, int Hit, int Crit, int CritAvoid, boo
 public sealed record RapportStep(int Cha, int Rate);
 
 /// <summary>
+/// A support tier (issue 77): a support pair whose rapport reaches <see cref="At"/> stands at
+/// <see cref="Name"/> (C, B or A), and each of the pair fights at <see cref="Hit"/>,
+/// <see cref="Avoid"/> and <see cref="Crit"/> more while the other stands adjacent.
+/// </summary>
+public sealed record SupportTier(string Name, int At, int Hit, int Avoid, int Crit);
+
+/// <summary>
 /// The rivalry and rapport numbers of <c>rules.json</c> (issue 16). All content: the arms,
 /// the rate table by Cha (ascending, the first step at Cha 0), and the rapport at which a
 /// rival pair stops being rivals. <see cref="None"/> is content without a rivalry block,
-/// which no map can turn on.
+/// which no map can turn on. <see cref="SupportTiers"/> are the C/B/A tiers a support pair
+/// reaches on the same rapport (issue 77), C first, empty without the block's
+/// <c>supportTiers</c>.
 /// </summary>
 public sealed record RivalryRules(ValueList<RivalryArm> Arms, ValueList<RapportStep> RapportRates, int OverwriteAt)
 {
     public static RivalryRules None { get; } = new(ValueList<RivalryArm>.Empty, ValueList<RapportStep>.Empty, 0);
+
+    public ValueList<SupportTier> SupportTiers { get; init; } = ValueList<SupportTier>.Empty;
+
+    /// <summary>The highest support tier <paramref name="points"/> of rapport reaches, or null below the first.</summary>
+    public SupportTier? TierFor(int points)
+    {
+        SupportTier? reached = null;
+        foreach (var tier in SupportTiers)
+        {
+            if (points >= tier.At)
+            {
+                reached = tier;
+            }
+        }
+
+        return reached;
+    }
 
     public RivalryArm? Arm(string id) => Arms.FirstOrDefault(a => a.Id == id);
 

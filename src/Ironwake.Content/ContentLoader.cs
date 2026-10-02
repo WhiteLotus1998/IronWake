@@ -1553,7 +1553,76 @@ public static class ContentLoader
             throw node.Error("rivalry.overwriteAt", "must be at least 1");
         }
 
-        return new RivalryRules(ValueList<RivalryArm>.From(arms), ValueList<RapportStep>.From(steps), overwriteAt);
+        return new RivalryRules(ValueList<RivalryArm>.From(arms), ValueList<RapportStep>.From(steps), overwriteAt)
+        {
+            SupportTiers = ParseSupportTiers(node, overwriteAt),
+        };
+    }
+
+    /// <summary>
+    /// The rivalry block's optional <c>supportTiers</c> (issue 77): C, B and A in that order, each
+    /// a <c>tier</c>, the rapport <c>at</c> which a support pair reaches it, and the <c>hit</c>,
+    /// <c>avoid</c> and <c>crit</c> each of the pair gains beside the other. The first is at
+    /// least <c>overwriteAt</c>, so no pair is rivals and supported at once; <c>at</c> rises, and
+    /// no bonus is below 0 or below the tier before it, so growing a support is never a downgrade.
+    /// </summary>
+    private static ValueList<SupportTier> ParseSupportTiers(EntryNode node, int overwriteAt)
+    {
+        var names = new[] { "C", "B", "A" };
+        var elements = node.ArrayOrEmpty("supportTiers");
+        if (elements.Count == 0)
+        {
+            return ValueList<SupportTier>.Empty;
+        }
+
+        if (elements.Count != names.Length)
+        {
+            throw node.Error("rivalry.supportTiers", $"has {elements.Count} tiers; it lists C, B and A");
+        }
+
+        var tiers = new List<SupportTier>();
+        for (var i = 0; i < elements.Count; i++)
+        {
+            if (elements[i].ValueKind != JsonValueKind.Object)
+            {
+                throw node.Error($"rivalry.supportTiers[{i}]", "must be an object");
+            }
+
+            var entry = new EntryNode(node.File, $"rivalry.supportTiers[{i}]", elements[i]);
+            var name = entry.String("tier");
+            if (name != names[i])
+            {
+                throw entry.Error("tier", $"is '{name}'; tier {i + 1} is {names[i]}");
+            }
+
+            var tier = new SupportTier(name, entry.Int("at"), entry.Int("hit"), entry.Int("avoid"), entry.Int("crit"));
+            if (i == 0 && tier.At < overwriteAt)
+            {
+                throw entry.Error("at", $"is {tier.At}, under overwriteAt {overwriteAt}; a pair would be rivals and supported at once");
+            }
+
+            if (i > 0 && tier.At <= tiers[i - 1].At)
+            {
+                throw entry.Error("at", $"must rise; {tier.At} follows {tiers[i - 1].At}");
+            }
+
+            foreach (var (field, value, before) in new[]
+            {
+                ("hit", tier.Hit, i > 0 ? tiers[i - 1].Hit : 0),
+                ("avoid", tier.Avoid, i > 0 ? tiers[i - 1].Avoid : 0),
+                ("crit", tier.Crit, i > 0 ? tiers[i - 1].Crit : 0),
+            })
+            {
+                if (value < before)
+                {
+                    throw entry.Error(field, $"is {value}, under {before}; a higher tier never gives less");
+                }
+            }
+
+            tiers.Add(tier);
+        }
+
+        return ValueList<SupportTier>.From(tiers);
     }
 
     private static ContentFile ReadFile(string root, string name)

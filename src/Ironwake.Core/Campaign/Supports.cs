@@ -44,4 +44,14 @@ public static class Supports
     /// <summary>The pair of <paramref name="a"/> and <paramref name="b"/> in either order, or null when they have none.</summary>
     public static SupportPair? Pair(CampaignRules campaign, string a, string b) =>
         campaign.Supports.FirstOrDefault(p => p.Involves(a) && p.Involves(b) && a != b);
+
+    /// <summary>
+    /// The support tier <paramref name="a"/> and <paramref name="b"/> stand at on
+    /// <paramref name="points"/> of rapport (issue 77): the highest of the rivalry block's
+    /// <see cref="RivalryRules.SupportTiers"/> reached, or null when they are no support pair or
+    /// below C. Rapport between two people who are not a pair still ends a rivalry, and never
+    /// reaches a tier.
+    /// </summary>
+    public static SupportTier? TierOf(GameContent content, string a, string b, int points) =>
+        Pair(content.Campaign, a, b) is null ? null : content.Rivalry.TierFor(points);
 }

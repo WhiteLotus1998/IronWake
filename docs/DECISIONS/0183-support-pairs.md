@@ -1,5 +1,7 @@
 # 0183 — Support pairs and their kinds (#77 slice 1)
 
+Amended by 0184: Chat's answers on #809 (Keziah's captain pair, Pell and Keziah, the claimants open to a "they" captain).
+
 Date: 2026-10-02. Built by the chain Builder once Lotus opened the story gate (#656). Round 192 and #77's amendment set the rules; the pairs and kinds below are content, Code's call, and Chat argues them on the PR or the Table.
 
 ## The rules as built
@@ -25,7 +27,7 @@ Every hook in `cast.json` is a pair. Five pairs were added so each recruit reach
 | Ottilie, Ansgar | romance |
 | Ottilie, Keziah | debt |
 | Pell, Maud | romance (the same-sex pair; both are in the main five, so it exists in every run) |
-| Pell, Keziah | argument |
+| Pell, Keziah | mentor (was argument; 0184) |
 | Dunstan, Rook | mentor |
 | Dunstan, Maud | debt |
 | Ansgar, Keziah | comedy |
@@ -45,8 +47,8 @@ The captain's pairs:
 | Dunstan | argument | |
 | Maud | mentor | |
 | Ansgar | respect | |
-| Rook | debt | either captain |
-| Keziah | mentor | either captain |
+| Rook | debt | any captain (0184) |
+| Keziah | argument (was mentor; 0184) | any captain (0184) |
 | Brannock | argument | a man captain |
 
 ## Why these
