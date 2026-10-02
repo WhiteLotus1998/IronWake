@@ -886,6 +886,12 @@ public sealed class CampaignSession
             var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (words is ["march"])
             {
+                if (_record.MarchRefusal(map, _content) is { } refusal)
+                {
+                    Error(text, refusal);
+                    return false;
+                }
+
                 Lines(LowLines(_record, _content));
                 return true;
             }
@@ -1640,17 +1646,20 @@ public sealed class CampaignSession
     /// <summary>
     /// Who deploys to <paramref name="map"/>, in slot order, by name, then how many of the living
     /// members present field (issue 689): <c>(deploy 2 of 3)</c>, or on <c>deploy: all</c>
-    /// <c>the whole company fights: 11;</c> before the names. Throws <see cref="ArgumentException"/>
-    /// as <see cref="CampaignRecord.Deployment"/> does.
+    /// <c>the whole company fights: 11;</c> before the names. A map fought short-handed (issue 795)
+    /// adds how many of its slots stand empty: <c>(deploy 2 of 2; 4 slots stand empty)</c>. Throws
+    /// <see cref="ArgumentException"/> as <see cref="CampaignRecord.Deployment"/> does.
     /// </summary>
     public static string DeploymentLine(CampaignRecord record, GameContent content, MapDefinition map)
     {
         var names = UnitNames.Of(record, content);
         var deployed = record.Deployment(map, content);
         var who = string.Join(", ", deployed.Select(id => names[id]));
+        var empty = map.Placements.OfType<PlayerPlacement>().Count() - deployed.Count;
+        var standEmpty = empty > 0 ? $"; {empty} {(empty == 1 ? "slot stands" : "slots stand")} empty" : "";
         return map.DeploysAll
             ? $"Deploys to {map.Name}: the whole company fights: {deployed.Count}; {who}"
-            : $"Deploys to {map.Name}: {who} (deploy {deployed.Count} of {record.Present(content).Count})";
+            : $"Deploys to {map.Name}: {who} (deploy {deployed.Count} of {record.Present(content).Count}{standEmpty})";
     }
 
     /// <summary>The width a text card's paragraphs are wrapped to (issue 631).</summary>

@@ -308,7 +308,7 @@ public class BarracksTranscriptTests
         var output = ConsoleCapture.Run(() => Ironwake.Cli.Program.Main(args));
 
         Assert.Contains("Bet Lowry joins as a Pikeman at L1 for 300, the purse holds 700; beds: 12/14\n", output);
-        Assert.Contains("Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 11)", output);
+        Assert.Contains("Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 11; 1 slot stands empty)", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 }

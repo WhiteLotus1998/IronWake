@@ -1310,7 +1310,7 @@ Raid on Ironwake won: rout; reward 1000, the purse holds 1500; fallen: Teodor, D
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
   Fallen: Teodor (fell on Raid on Ironwake), Dunstan (fell on Raid on Ironwake)
-Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 9)
+Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 9; 1 slot stands empty)
 == Keep ==
 Purse: 1500
 Rooms: beds: 11/12; a fallen member keeps their bed
@@ -1403,7 +1403,7 @@ Roster: company 11/12
   Bet Lowry (bet): Pikeman L1, EXP 0; 1: Iron Lance 40/40
   Ines Tarrow (ines): Bowman L1, EXP 0; 1: Iron Bow 40/40
   Fallen: Teodor (fell on Raid on Ironwake), Dunstan (fell on Raid on Ironwake)
-Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 11)
+Deploys to Sallow Grange: Alder Fenn, Ansgar, Wren, Pell, Ottilie (deploy 5 of 11; 1 slot stands empty)
 == Keep ==
 Purse: 0
 Rooms: beds: 13/14; a fallen member keeps their bed
