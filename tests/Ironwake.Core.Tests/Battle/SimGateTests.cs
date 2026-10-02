@@ -930,6 +930,40 @@ public class SimGateTests
     }
 
     /// <summary>
+    /// Issue 723: gate 5 checks a crit's damage against the forecast's crit damage, plain for a bow
+    /// on a flier and triple otherwise, and counts bow strikes on fliers, the fliers they grounded
+    /// and the ones they killed.
+    /// </summary>
+    [Fact]
+    public void GateFiveChecksCritDamageAndCountsGroundingsAndBowKillsOnFliers()
+    {
+        var bow = new SideForecast(true, 9, 100, 100, 30, false, CritGrounds: true);
+        var forecast = new CombatForecast(bow, SideForecast.None, RollScheme.TwoRollAverage);
+        StrikeEvent Crit(int damage, int after) => new(0, "a", "b", true, true, damage, after);
+
+        var honest = new Gates.ForecastTally();
+        honest.Count(forecast, new CombatFought("a", "b", 1, Side.Player, ValueList<StrikeEvent>.Of(Crit(9, 8)), 20, 8));
+        honest.Count(forecast, new CombatFought("a", "b", 1, Side.Player, ValueList<StrikeEvent>.Of(new StrikeEvent(0, "a", "b", true, false, 9, 0)), 20, 0));
+        Assert.Equal(0, honest.WrongDamage);
+        Assert.Equal(2, honest.BowStrikesOnFliers);
+        Assert.Equal(1, honest.Groundings);
+        Assert.Equal(1, honest.FliersKilledByBow);
+        Assert.Contains("bow strikes on fliers 2 (grounded 1, killed 1)", honest.Result(0).Line);
+
+        var tripled = new Gates.ForecastTally();
+        tripled.Count(forecast, new CombatFought("a", "b", 1, Side.Player, ValueList<StrikeEvent>.Of(Crit(27, 0)), 20, 0));
+        Assert.Equal(1, tripled.WrongDamage);
+        Assert.Equal(0, tripled.Groundings);
+
+        var lance = new Gates.ForecastTally();
+        var plain = forecast with { Attacker = bow with { CritGrounds = false } };
+        lance.Count(plain, new CombatFought("a", "b", 1, Side.Player, ValueList<StrikeEvent>.Of(Crit(9, 8)), 20, 8));
+        Assert.Equal(1, lance.WrongDamage);
+        Assert.Equal(0, lance.BowStrikesOnFliers);
+        Assert.DoesNotContain("bow strikes on fliers", lance.Result(0).Line);
+    }
+
+    /// <summary>
     /// Issue 66: gate 5 runs with abilities on both sides. Its fighters draw both effect
     /// kinds, and a stream of them still reads exactly the damage the forecast printed.
     /// </summary>

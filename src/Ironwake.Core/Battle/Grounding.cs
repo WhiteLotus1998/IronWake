@@ -1,9 +1,10 @@
 namespace Ironwake.Core;
 
 /// <summary>
-/// Grounding (issue 703, Lotus's batch item 5, round 216; DESIGN section 5). A bow's strike that
-/// crits a flying unit which survives the combat lands it until the end of its side's next phase
-/// (<see cref="BattleUnit.Grounded"/>).
+/// Grounding (issue 703, Lotus's batch item 5, round 216; issue 723, round 220; DESIGN section 5).
+/// A bow's crit on a flying unit deals plain damage, not triple (<see cref="SideForecast.CritDamage"/>,
+/// <see cref="Weapon.GroundsAgainst"/>), and a flier that survives the combat is landed until the end
+/// of its side's next phase (<see cref="BattleUnit.Grounded"/>). Both sides' bows do it.
 /// <list type="bullet">
 /// <item>While grounded it moves with infantry costs and infantry passability (<see cref="MovementOf"/>);
 /// its terrain bonuses stay a flier's, since it is still a flier struck where it fell.</item>
@@ -14,6 +15,7 @@ namespace Ironwake.Core;
 /// The clock counts as the chill's does (<see cref="Frost.AtPhaseChange"/>). Everything is board
 /// state, so Recall restores it with the board. Bows trade the effective tag for
 /// <see cref="Weapon.CritBonus"/> against fliers, so the crit lands the flier instead of killing it.
+/// A crit that does not ground (any other weapon, or any weapon on a non-flier) still triples.
 /// </summary>
 public static class Grounding
 {

@@ -1869,3 +1869,17 @@ Notes: Posted on the Design Table (#731); the transcript and script are `docs/tr
 - Per map, warm after map 1: Starting Alone 6/5/4 (Feint on the hexer, 100 for 10 x2); The Mill 6/6/4; Saltmarsh 7/6/6 (archery across the river while Teodor held the ford braced); Tollgate 7/7/6 (2 HP Pell hidden in the forest pocket at 6,5); Harrow 5/5/4 (never saw the weir); Raid 6/6/5; Sallow 6/5/5.
 
 — Chat
+
+## 2026-10-02 — Saltmarsh Ford, a bow's crit grounds instead of tripling (#723), the warm play — Code
+
+Seed: 723 (shipped `saltmarsh_ford.map`, scheme two)   Result: won turn 12 on the rout, nobody fell, one Recall spent (2 left)
+Warm: I built the rule and opened the way 703 did.
+Tension: 6/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 7. The boss had braced on his fort every phase, so every strike on him went in at -15. I stood Wren on 10,1 full and let him come to her. He swung (and missed), so he was not braced on turn 8. Ottilie, Wren and the captain then went in at 67, 70 and 73 instead of the low 40s.
+Notes: the transcript and script are `docs/transcripts/2026-10-02-saltmarsh_ford-723.*`.
+- **The rule never fired.** Turn 3's forecast read `acc 77% dmg 9 grounds 23%`. Ottilie hit plainly (17 to 8), and Teodor's lance finished the wingrider. The line reads well: it says what a crit would do, not a crit number I have to mentally strike out. But with a lance beside the bow, the grounding is a side effect of a hit I was taking anyway. It needs a board where the bow is the only answer to the flier.
+- **Turn 6 was a blunder, and I recalled it.** I sent Wren into the braced boss at 43 and she ate 17, then 12 on his phase. Her stop on the north bank also called the ford group behind us. The Recall gave both back. Played straight, the brace is what makes the boss: you have to make him act before you can hit him.
+- **Not tense:** turns 10 to 12, the ford pair walking into a braced Teodor on the bridge one at a time. 0093's note that the pair turns into a tutorial once the boss is down still holds.
+- Teodor's Long Thrust took the boss's last 3 at 58%, at range 2 with no counter. That was the only swing of the map I watched land.
+
+— Code

@@ -201,7 +201,8 @@ public static class Combat
             DisplayedHit: DisplayedHit(hit, scheme),
             CritChance: CritChance(striker, target),
             Doubles: Doubles(striker, target),
-            StrikesPerRound: Armed(striker).Type.StrikesPerRound());
+            StrikesPerRound: Armed(striker).Type.StrikesPerRound(),
+            CritGrounds: Armed(striker).GroundsAgainst(target.Movement));
     }
 
     private static Weapon Armed(Combatant unit) =>

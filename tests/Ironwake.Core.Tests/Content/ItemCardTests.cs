@@ -91,7 +91,7 @@ public class ItemCardTests
         var bow = content.Weapon("iron_bow");
 
         Assert.Equal(
-            $"Iron Bow, bow E. Acc {bow.Hit}, Power {bow.Mt}, Crit {bow.Crit}, Wt {bow.Wt}, range 2, {bow.Durability} uses. Crit +20 against flying. A crit grounds a flier. {bow.Description}",
+            $"Iron Bow, bow E. Acc {bow.Hit}, Power {bow.Mt}, Crit {bow.Crit}, Wt {bow.Wt}, range 2, {bow.Durability} uses. Crit +20 against flying. A crit on a flier grounds it for plain damage. {bow.Description}",
             ItemCard.Text(content, "iron_bow"));
         Assert.StartsWith("Cinder, lore E. Acc 90, Power 5, Crit 0, Wt 3, range 1-2, 8 uses a battle. ", ItemCard.Text(content, "cinder"), StringComparison.Ordinal);
         Assert.StartsWith("Salve, faith E. Acc ", ItemCard.Text(content, "salve"), StringComparison.Ordinal);

@@ -151,7 +151,7 @@ public static class SignatureCeiling
         var attacker = content.CombatantOf(owner, weapon, terrain, content.StatsOf(owner).Hp);
         var defender = content.CombatantOf(target.Unit, target.Weapon, terrain, content.StatsOf(target.Unit).Hp);
         var side = Combat.Forecast(attacker, defender, Math.Max(1, weapon.MinRange), scheme).Attacker;
-        var perStrike = side.Damage * Combat.HitProbability(side.HitChance, scheme) * (1 + (Combat.CritMultiplier - 1) * side.CritChance / 100.0);
+        var perStrike = side.Damage * Combat.HitProbability(side.HitChance, scheme) * (side.CritGrounds ? 1 : 1 + (Combat.CritMultiplier - 1) * side.CritChance / 100.0);
         return perStrike * side.StrikeCount;
     }
 }

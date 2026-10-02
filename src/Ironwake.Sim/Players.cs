@@ -440,7 +440,7 @@ public sealed class HeuristicPlayer : IPlayer
     {
         var hit = Combat.HitProbability(side.HitChance, scheme);
         var crit = Math.Clamp(side.CritChance, 0, 100) / 100.0;
-        return new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.Damage * Combat.CritMultiplier) };
+        return new[] { (1 - hit, 0), (hit * (1 - crit), side.Damage), (hit * crit, side.CritDamage) };
     }
 
     /// <summary>

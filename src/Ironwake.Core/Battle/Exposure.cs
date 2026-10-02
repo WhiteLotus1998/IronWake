@@ -260,6 +260,6 @@ public static class Exposure
         }
 
         var strikes = side.StrikeCount;
-        return (side.Damage * strikes, side.Damage * Combat.CritMultiplier * strikes);
+        return (side.Damage * strikes, side.CritDamage * strikes);
     }
 }

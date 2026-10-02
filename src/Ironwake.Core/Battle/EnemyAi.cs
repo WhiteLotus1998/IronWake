@@ -760,7 +760,7 @@ public static class EnemyAi
     /// <summary>
     /// Section 8's target score for <paramref name="attacker"/> striking <paramref name="target"/>
     /// from <paramref name="from"/>. Expected damage on both lines carries the crit
-    /// expectation, <c>Damage * (1 + 2 * CritChance / 100)</c>, times the strikes that side
+    /// expectation, <c>Damage * (1 + 2 * CritChance / 100)</c> (plain <c>Damage</c> when the crit grounds instead, issue 723), times the strikes that side
     /// makes, capped at the HP it could remove; the kill flag reads deterministic damage
     /// only, so an attack lethal only on a crit is never priced as a kill, and only over the
     /// strikes the attacker lives to make, so a second strike a plain counter would kill it
@@ -824,7 +824,7 @@ public static class EnemyAi
         return false;
     }
 
-    private static double Expected(SideForecast side, int strikes) => side.Damage * (1 + 2 * side.CritChance / 100.0) * strikes;
+    private static double Expected(SideForecast side, int strikes) => side.CritGrounds ? side.Damage * strikes : side.Damage * (1 + 2 * side.CritChance / 100.0) * strikes;
 
     /// <summary>
     /// The approach rule of section 8 for a mover that can attack nobody this phase.

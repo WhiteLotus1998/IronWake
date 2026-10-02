@@ -26,10 +26,15 @@ public static class RollSchemes
 /// resolver rolls against; <see cref="DisplayedHit"/> is the resolved probability the
 /// player sees, and the only one a renderer may print. <see cref="StrikesPerRound"/> is
 /// the strikes each of this side's turns makes, two for gauntlets (issue 70).
+/// <see cref="CritGrounds"/> marks a bow striking a flier (issue 723, <see cref="Weapon.GroundsAgainst"/>):
+/// its crit deals plain damage and grounds the flier, so <see cref="CritDamage"/> is <see cref="Damage"/>.
 /// </summary>
-public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1)
+public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false)
 {
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
+
+    /// <summary>What one crit from this side deals: <see cref="Damage"/> times <see cref="Combat.CritMultiplier"/>, or plain <see cref="Damage"/> when the crit grounds instead (issue 723).</summary>
+    public int CritDamage => CritGrounds ? Damage : Damage * Combat.CritMultiplier;
 
     /// <summary>The turns this side takes in the combat: two when it doubles, one when it strikes at all.</summary>
     public int Rounds => !Strikes ? 0 : Doubles ? 2 : 1;
