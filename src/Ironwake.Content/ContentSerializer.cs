@@ -868,6 +868,11 @@ public static class ContentSerializer
             writer.WriteNumber("burn", terrain.BurnPercent);
         }
 
+        if (terrain.WearsTo is { } wearsTo)
+        {
+            writer.WriteString("wearsTo", wearsTo);
+        }
+
         writer.WriteEndObject();
     }
 

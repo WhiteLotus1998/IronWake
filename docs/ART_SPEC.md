@@ -136,7 +136,9 @@ tile_fort
 tile_hill
 tile_mountain
 tile_plain
+tile_planks
 tile_road
+tile_split_planks
 tile_throne
 tile_wall
 tile_water

@@ -60,7 +60,9 @@ tile_fort.png
 tile_hill.png
 tile_mountain.png
 tile_plain.png
+tile_planks.png
 tile_road.png
+tile_split_planks.png
 tile_throne.png
 tile_wall.png
 tile_water.png

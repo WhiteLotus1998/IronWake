@@ -219,6 +219,11 @@ public static class MapRenderer
             sb.Append(exits).Append('\n');
         }
 
+        if (Planks.Line(map, content) is { } wears)
+        {
+            sb.Append(wears).Append('\n');
+        }
+
         if (ChestLegend(map.Chests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');
@@ -517,6 +522,11 @@ public static class MapRenderer
         if (ExitLegend(map) is { } exits)
         {
             sb.Append(exits).Append('\n');
+        }
+
+        if (Planks.Line(map, content) is { } wears)
+        {
+            sb.Append(wears).Append('\n');
         }
 
         if (ChestLegend(state.ClosedChests, content) is { } chests)

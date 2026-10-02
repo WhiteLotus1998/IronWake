@@ -52,6 +52,7 @@ TERRAIN = {
     "plain": "7E9470", "road": "B3AE9C", "forest": "4F6E54", "hill": "C8C8A0",
     "mountain": "77767C", "water": "41667F", "fort": "9FB0C4", "wall": "23272E",
     "throne": "E4E7EA", "fire": "943C0C",
+    "planks": "585030", "split_planks": "383010",
 }
 PLAYER = hex_rgb("E8A33D")
 PLAYER_DEEP = hex_rgb("9A6420")
@@ -298,6 +299,12 @@ def tile(terrain):
         c.stroke([P(11, 22), P(11, 48)], s, coursing)
     elif terrain == "throne":
         c.polygon([P(8, 40), P(8, 10), P(40, 10), P(40, 40), P(33, 40), P(33, 18), P(15, 18), P(15, 40)], over(INK, 0.35))
+    elif terrain in ("planks", "split_planks"):
+        seam = over(INK, 0.3)
+        for y in (12, 24, 36):
+            c.stroke([P(0, y), P(48, y)], s, seam)
+        if terrain == "split_planks":
+            c.stroke([P(14, 24), P(22, 30), P(30, 24), P(38, 31)], 1.5 * s, over(INK, 0.45))
     elif terrain == "fort":
         battlement = [P(8, 36), P(8, 14), P(14, 14), P(14, 19), P(19, 19), P(19, 14), P(25, 14), P(25, 19),
                       P(30, 19), P(30, 14), P(36, 14), P(36, 19), P(40, 19), P(40, 36)]
