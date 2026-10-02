@@ -283,7 +283,7 @@ A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Road  captain
 a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              6,4    hp 20/20  Plain
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 100% crit 4%; counter: none
+forecast captain -> archer-1: acc 100% dmg 11 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 11 (hp 6)
   captain hp 22, archer-1 hp 6
@@ -368,7 +368,7 @@ A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Road  captain
 a  soldier-1        Soldier L1 pikeman         9,3    hp 4/20   Road  group mill, guard, awake
 B  wren             Wren L1 cadet              9,4    hp 5/20   Plain
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 x2 hit 100% crit 4%; counter: dmg 8 hit 94% crit 0%
+forecast captain -> soldier-1: acc 100% dmg 9 x2 crit 4%; counter: acc 94% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -411,7 +411,7 @@ A  captain          Alder Fenn L1 cadet        10,3   hp 22/22  Road  captain  d
 !  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
 B  wren             Wren L1 cadet              9,3    hp 5/20   Road
 > attack wren archer-1
-forecast wren -> archer-1: dmg 9 hit 96% crit 3%; counter: none
+forecast wren -> archer-1: acc 96% dmg 9 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 9 (hp 0)
   wren hp 5, archer-1 hp 0
@@ -495,7 +495,7 @@ A  captain          Alder Fenn L1 cadet        10,2   hp 22/22  Plain  captain
 !  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 24/24  Plain  group mill, boss
 B  wren             Wren L1 cadet              9,3    hp 15/20  Road  done
 > attack captain mill_bandit-1
-forecast captain -> mill_bandit-1: dmg 10 hit 100% crit 3%; counter: dmg 9 hit 94% crit 2%
+forecast captain -> mill_bandit-1: acc 100% dmg 10 crit 3%; counter: acc 94% dmg 9 crit 2%
 captain attacks mill_bandit-1
   captain hits mill_bandit-1 for 10 (hp 14)
   mill_bandit-1 hits captain for 9 (hp 13)
@@ -564,7 +564,7 @@ A  captain          Alder Fenn L1 cadet        10,2   hp 4/22   Plain  captain
 !  mill_bandit-1    Mill Bandit L2 reaver      10,1   hp 4/24   Plain  group mill, boss
 B  wren             Wren L1 cadet              9,1    hp 15/20  Plain
 > attack wren mill_bandit-1
-forecast wren -> mill_bandit-1: dmg 9 hit 100% crit 2%; counter: dmg 10 hit 95% crit 3%
+forecast wren -> mill_bandit-1: acc 100% dmg 9 crit 2%; counter: acc 95% dmg 10 crit 3%
 wren attacks mill_bandit-1
   wren hits mill_bandit-1 for 9 (hp 0)
   wren hp 15, mill_bandit-1 hp 0

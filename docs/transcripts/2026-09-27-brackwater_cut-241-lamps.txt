@@ -51,7 +51,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-Forecast Rook -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Rook -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Rook attacks Archer 2
   Rook hits Archer 2 for 7 (hp 10)
   Rook hp 17, Archer 2 hp 10
@@ -107,7 +107,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-Forecast Pell -> Archer 2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 10 (hp 0)
   Pell hp 16, Archer 2 hp 0
@@ -862,7 +862,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 10,3
 Brigand 1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 14)
   Dunstan hits Brigand 1 for 11 (hp 12)
@@ -1175,7 +1175,7 @@ enemy: something in the dark acts (x2)
 enemy: move brigand-1 11,3
 Brigand 1 moves 10,3 -> 11,3
 enemy: attack brigand-1 dunstan
-Forecast Brigand 1 -> Dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+Forecast Brigand 1 -> Dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 Brigand 1 attacks Dunstan
   Brigand 1 hits Dunstan for 9 (hp 5)
   Dunstan hits Brigand 1 for 11 (hp 1)
@@ -1210,7 +1210,7 @@ D  wren             Wren L1 cadet              18,1   hp 20/20  Plain
 dusk: sight 1; it gets no darker; 8 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack dunstan brigand-1
-Forecast Dunstan -> Brigand 1: dmg 11 hit 77% crit 1%; counter: dmg 9 hit 73% crit 0%
+Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 9 crit 0%
   Counter: lethal to Dunstan (9 against 5 hp)
 Dunstan attacks Brigand 1
   Dunstan hits Brigand 1 for 11 (hp 0)
@@ -1271,21 +1271,21 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > threat captain
 Threat on Alder Fenn at 19,3 (Plain):
-  Shieldbearer from 18,3 with Iron Lance (slot 1): dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
+  Shieldbearer from 18,3 with Iron Lance (slot 1): acc 58% dmg 7 crit 0%; counter: acc 94% dmg 4 x2 crit 5%
   If all land: 7 against 22 hp
   Soldier: cannot see you (dark)
   And whatever is in the dark (?), unpriced
 > threat rook from 19,6
 Threat on Rook at 19,6 (Plain):
-  Brawler from 18,6 with Iron Gauntlets (slot 1): dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
-  Shieldbearer from 18,6 with Iron Lance (slot 1): dmg 11 hit 60% crit 0%; counter: dmg 2 x2 hit 89% crit 4%
-  Soldier from 18,6 with Iron Lance (slot 1): dmg 12 hit 63% crit 0%; counter: dmg 7 hit 79% crit 3%
+  Brawler from 18,6 with Iron Gauntlets (slot 1): acc 83% dmg 10 x2 crit 0%; counter: acc 80% dmg 9 crit 4%
+  Shieldbearer from 18,6 with Iron Lance (slot 1): acc 60% dmg 11 crit 0%; counter: acc 89% dmg 2 x2 crit 4%
+  Soldier from 18,6 with Iron Lance (slot 1): acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
   If all land: 43 against 17 hp
   And whatever is in the dark (?), unpriced
 > threat wren from 19,4
 Threat on Wren at 19,4 (Plain):
-  Shieldbearer from 18,4 with Iron Lance (slot 1): dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
-  Soldier from 18,4 with Iron Lance (slot 1): dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+  Shieldbearer from 18,4 with Iron Lance (slot 1): acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
+  Soldier from 18,4 with Iron Lance (slot 1): acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
   If all land: 17 against 20 hp
   Brawler: cannot see you (dark)
   And whatever is in the dark (?), unpriced
@@ -1497,7 +1497,7 @@ enemy: something in the dark acts (x2)
 enemy: move hexer-1 11,3
 Hexer moves 8,3 -> 11,3 via 9,3 10,3
 enemy: attack hexer-1 dunstan
-Forecast Hexer -> Dunstan: dmg 12 hit 99% crit 1%; counter: dmg 12 hit 81% crit 0%
+Forecast Hexer -> Dunstan: acc 99% dmg 12 crit 1%; counter: acc 81% dmg 12 crit 0%
 Hexer attacks Dunstan
   Hexer hits Dunstan for 12 (hp 0)
   Hexer hp 16, Dunstan hp 0
@@ -1506,7 +1506,7 @@ enemy: something in the dark acts (x4)
 enemy: move shieldbearer-1 18,4
 Shieldbearer moves 17,5 -> 18,4 via 17,4
 enemy: attack shieldbearer-1 wren
-Forecast Shieldbearer -> Wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+Forecast Shieldbearer -> Wren: acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
 Shieldbearer attacks Wren
   Shieldbearer misses Wren
   Wren hits Shieldbearer for 3 (hp 22)
@@ -1516,7 +1516,7 @@ Wren gains 14 exp (14)
 enemy: move soldier-1 19,5
 Soldier moves 17,6 -> 19,5 via 17,5 18,5
 enemy: attack soldier-1 wren
-Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 Soldier attacks Wren
   Soldier hits Wren for 9 (hp 11)
   Wren crits Soldier for 24 (hp 0)
@@ -1550,7 +1550,7 @@ D  wren             Wren L1 cadet              19,4   hp 11/20  Plain
 dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell shieldbearer-1
-Forecast Pell -> Shieldbearer with Cinder: dmg 13 hit 99% crit 3%; counter: none
+Forecast Pell -> Shieldbearer with Cinder: acc 99% dmg 13 crit 3%; counter: none
 Pell attacks Shieldbearer
   Pell hits Shieldbearer for 13 (hp 6)
   Pell hp 16, Shieldbearer hp 6
@@ -1659,7 +1659,7 @@ enemy: something in the dark acts (x2)
 enemy: move brawler-1 19,5
 Brawler moves 19,8 -> 19,5 via 19,7 19,6
 enemy: attack brawler-1 rook
-Forecast Brawler -> Rook: dmg 10 x2 hit 83% crit 0%; counter: dmg 9 hit 80% crit 4%
+Forecast Brawler -> Rook: acc 83% dmg 10 x2 crit 0%; counter: acc 80% dmg 9 crit 4%
 Brawler attacks Rook
   Brawler hits Rook for 10 (hp 7)
   Brawler hits Rook for 10 (hp 0)
@@ -1669,7 +1669,7 @@ enemy: something in the dark acts (x4)
 enemy: move rider-1 17,2
 Rider 1 moves 15,3 -> 17,2 via 15,2 16,2
 enemy: attack rider-1 pell
-Forecast Rider 1 -> Pell: dmg 11 hit 80% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Rider 1 -> Pell: acc 80% dmg 11 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
 Rider 1 attacks Pell
   Rider 1 misses Pell
   Pell hits Rider 1 for 12 (hp 9)
@@ -1679,7 +1679,7 @@ enemy: something in the dark acts (x2)
 enemy: move shieldbearer-1 18,3
 Shieldbearer moves 18,4 -> 18,3
 enemy: attack shieldbearer-1 pell
-Forecast Shieldbearer -> Pell: dmg 10 hit 77% crit 0%; counter with Cinder: dmg 13 hit 99% crit 3%
+Forecast Shieldbearer -> Pell: acc 77% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
 Shieldbearer attacks Pell
   Shieldbearer hits Pell for 10 (hp 6)
   Pell hits Shieldbearer for 13 (hp 0)
@@ -1713,7 +1713,7 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack pell rider-1
-Forecast Pell -> Rider 1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 11 hit 80% crit 0%
+Forecast Pell -> Rider 1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 80% dmg 11 crit 0%
   Counter: lethal to Pell (11 against 6 hp)
 Pell attacks Rider 1
   Pell hits Rider 1 for 12 (hp 0)

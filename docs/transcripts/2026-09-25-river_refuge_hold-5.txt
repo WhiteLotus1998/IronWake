@@ -38,7 +38,7 @@ soldier-1 waits
 enemy: move wingrider-1 3,6
 wingrider-1 moves 3,1 -> 3,6 via 3,2 3,3 3,4 3,5
 enemy: attack wingrider-1 wren
-forecast wingrider-1 -> wren: dmg 7 hit 65% crit 0%; counter: dmg 11 hit 80% crit 2%
+forecast wingrider-1 -> wren: acc 65% dmg 7 crit 0%; counter: acc 80% dmg 11 crit 2%
 wingrider-1 attacks wren
   wingrider-1 hits wren for 7 (hp 13)
   wren hits wingrider-1 for 11 (hp 6)
@@ -75,7 +75,7 @@ a  wingrider-1      Wingrider L1 skyrider      3,6    hp 6/17   Plain  group sky
 b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              3,7    hp 13/20  Plain
 > attack wren wingrider-1
-forecast wren -> wingrider-1: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+forecast wren -> wingrider-1: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 wren attacks wingrider-1
   wren hits wingrider-1 for 11 (hp 0)
   wren hp 13, wingrider-1 hp 0
@@ -128,7 +128,7 @@ e  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group bri
 b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              3,7    hp 13/20  Plain  done
 > attack ottilie wingrider-2
-forecast ottilie -> wingrider-2: dmg 19 hit 77% crit 3%; counter: none
+forecast ottilie -> wingrider-2: acc 77% dmg 19 crit 3%; counter: none
 ottilie attacks wingrider-2
   ottilie misses wingrider-2
   ottilie hp 17, wingrider-2 hp 17
@@ -179,7 +179,7 @@ e  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group bri
 b  wingrider-2      Wingrider L1 skyrider      4,6    hp 17/17  Plain  group sky, aggressive
 B  wren             Wren L1 cadet              3,7    hp 13/20  Plain  done
 > attack captain wingrider-2
-forecast captain -> wingrider-2: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%
+forecast captain -> wingrider-2: acc 82% dmg 12 crit 3%; counter: acc 63% dmg 6 crit 0%
   wingrider-2 would fall back to 2,2 at 5 hp
 captain attacks wingrider-2
   captain hits wingrider-2 for 12 (hp 5)
@@ -218,7 +218,7 @@ archer-2 waits
 enemy: move brigand-1 5,8
 brigand-1 moves 8,7 -> 5,8 via 7,7 6,7 5,7
 enemy: attack brigand-1 ottilie
-forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
+forecast brigand-1 -> ottilie: acc 58% dmg 12 crit 0%; counter: none
 brigand-1 attacks ottilie
   brigand-1 misses ottilie
   brigand-1 hp 22, ottilie hp 17
@@ -277,7 +277,7 @@ e  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group bri
 b  wingrider-2      Wingrider L1 skyrider      2,2    hp 5/17   Fort (heals 20 percent, 3 hp)  group sky, aggressive, holds its refuge until half hp
 B  wren             Wren L1 cadet              3,7    hp 13/20  Plain
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+forecast captain -> brigand-1: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 captain attacks brigand-1
   captain hits brigand-1 for 11 (hp 11)
   brigand-1 misses captain
@@ -531,7 +531,7 @@ soldier-1 waits
 enemy: move wingrider-2 8,5
 wingrider-2 moves 8,2 -> 8,5 via 8,3 8,4
 enemy: attack wingrider-2 ottilie
-forecast wingrider-2 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+forecast wingrider-2 -> ottilie: acc 72% dmg 8 crit 0%; counter: none
 wingrider-2 attacks ottilie
   wingrider-2 hits ottilie for 8 (hp 9)
   wingrider-2 hp 11, ottilie hp 9
@@ -560,7 +560,7 @@ e  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group bri
 b  wingrider-2      Wingrider L1 skyrider      8,5    hp 11/17  Water  group sky, aggressive
 B  wren             Wren L1 cadet              9,5    hp 20/20  Road
 > attack wren wingrider-2
-forecast wren -> wingrider-2: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+forecast wren -> wingrider-2: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 wren attacks wingrider-2
   wren hits wingrider-2 for 11 (hp 0)
   wren hp 20, wingrider-2 hp 0
@@ -609,7 +609,7 @@ C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road
 e  soldier-1        Soldier L1 pikeman         9,2    hp 20/20  Plain  group bridge, hold
 B  wren             Wren L1 cadet              9,5    hp 20/20  Road  done
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 6 (hp 14)
   ottilie hp 9, soldier-1 hp 14
@@ -689,7 +689,7 @@ C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road
 e  soldier-1        Soldier L1 pikeman         9,2    hp 14/20  Plain  group bridge, hold
 B  wren             Wren L1 cadet              9,5    hp 20/20  Road
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie misses soldier-1
   ottilie hp 9, soldier-1 hp 14
@@ -736,7 +736,7 @@ C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road  done
 e  soldier-1        Soldier L1 pikeman         9,2    hp 14/20  Plain  group bridge, hold
 B  wren             Wren L1 cadet              9,3    hp 20/20  Road
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren misses soldier-1
   soldier-1 hits wren for 9 (hp 11)
@@ -791,7 +791,7 @@ archer-1 waits
 enemy: wait archer-2
 archer-2 waits
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 hits wren for 9 (hp 2)
   wren hits soldier-1 for 8 (hp 6)
@@ -821,7 +821,7 @@ C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road
 e  soldier-1        Soldier L1 pikeman         9,2    hp 6/20   Plain  group bridge, hold
 B  wren             Wren L1 cadet              9,3    hp 2/20   Road
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 6 (hp 0)
   ottilie hp 9, soldier-1 hp 0
@@ -890,7 +890,7 @@ A  captain          Alder Fenn L1 cadet        10,2   hp 16/22  Plain  captain
 C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road  done
 B  wren             Wren L1 cadet              9,3    hp 12/20  Road  done
 > attack captain archer-2
-forecast captain -> archer-2: dmg 11 hit 87% crit 4%; counter: none
+forecast captain -> archer-2: acc 87% dmg 11 crit 4%; counter: none
 captain attacks archer-2
   captain hits archer-2 for 11 (hp 6)
   captain hp 16, archer-2 hp 6
@@ -965,7 +965,7 @@ A  captain          Alder Fenn L1 cadet        10,2   hp 16/22  Plain  captain
 C  ottilie          Ottilie L1 bowman          9,4    hp 9/17   Road
 B  wren             Wren L1 cadet              9,1    hp 12/20  Plain
 > attack wren archer-2
-forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-2: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-2
   wren hits archer-2 for 10 (hp 0)
   wren hp 12, archer-2 hp 0

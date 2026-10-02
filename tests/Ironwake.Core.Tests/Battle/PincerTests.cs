@@ -186,7 +186,7 @@ public class PincerTests
 
         var lines = PlaySession.PincerLines(state, hale, brigand).ToList();
 
-        Assert.Equal(new[] { "  pincer: brigand-1 pinned by wren: hale hit +15" }, lines);
+        Assert.Equal(new[] { "  pincer: brigand-1 pinned by wren: hale acc +15" }, lines);
         Assert.Empty(PlaySession.PincerLines(Start(Alone), Start(Alone).Find("hale")!, Start(Alone).Find("brigand-1")!));
     }
 
@@ -198,7 +198,7 @@ public class PincerTests
 
         var lines = PlaySession.PincerLines(state, state.Find("hale")!, state.Find("brigand-1")!, names).ToList();
 
-        Assert.Equal(new[] { $"  pincer: {names["brigand-1"]} pinned by {names["wren"]}: {names["hale"]} hit +15" }, lines);
+        Assert.Equal(new[] { $"  pincer: {names["brigand-1"]} pinned by {names["wren"]}: {names["hale"]} acc +15" }, lines);
         Assert.DoesNotContain("brigand-1", lines[0]);
     }
 

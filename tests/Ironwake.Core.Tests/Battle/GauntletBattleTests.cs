@@ -83,7 +83,7 @@ public class GauntletBattleTests
         var brigand = state.Find("brigand-1")!;
         var forecast = Queries.Forecast(state, Fists, hale, brigand)!;
 
-        Assert.Contains($"dmg {forecast.Attacker.Damage} x{forecast.Attacker.StrikeCount} hit", PlaySession.ForecastLine(hale, brigand, forecast));
+        Assert.Contains($"dmg {forecast.Attacker.Damage} x{forecast.Attacker.StrikeCount} crit", PlaySession.ForecastLine(hale, brigand, forecast));
         Assert.Equal(forecast.Attacker.Damage * forecast.Attacker.StrikeCount, new ThreatLine(hale, hale.At, 0, TestGauntlet, forecast).IfAllLand);
     }
 

@@ -305,7 +305,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-1
-Forecast Ottilie -> Brigand: dmg 8 hit 86% crit 5%; counter: none
+Forecast Ottilie -> Brigand: acc 86% dmg 8 crit 5%; counter: none
 Ottilie attacks Brigand
   Ottilie hits Brigand for 8 (hp 14)
   Ottilie hp 17, Brigand hp 14
@@ -361,7 +361,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor brigand-1
-Forecast Teodor -> Brigand: dmg 12 hit 80% crit 2%; counter: dmg 9 hit 28% crit 0%
+Forecast Teodor -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 28% dmg 9 crit 0%
 Teodor attacks Brigand
   Teodor misses Brigand
   Brigand misses Teodor
@@ -502,7 +502,7 @@ Archer waits
 enemy: move brigand-1 3,6
 Brigand moves 3,5 -> 3,6
 enemy: attack brigand-1 ottilie
-Forecast Brigand -> Ottilie: dmg 12 hit 58% crit 0%; counter: none
+Forecast Brigand -> Ottilie: acc 58% dmg 12 crit 0%; counter: none
 Brigand attacks Ottilie
   Brigand misses Ottilie
   Brigand hp 14, Ottilie hp 17
@@ -511,7 +511,7 @@ Ford Chief waits
 enemy: move soldier-1 4,4
 Soldier 1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
+Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 misses Teodor
   Teodor misses Soldier 1
@@ -574,7 +574,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie brigand-1
-Forecast Ottilie -> Brigand: dmg 7 hit 56% crit 5%; counter: none
+Forecast Ottilie -> Brigand: acc 56% dmg 7 crit 5%; counter: none
 Ottilie attacks Brigand
   Ottilie hits Brigand for 7 (hp 7)
   Ottilie hp 17, Brigand hp 7
@@ -630,7 +630,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain brigand-1
-Forecast Alder Fenn -> Brigand: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 49% crit 0%
+Forecast Alder Fenn -> Brigand: acc 63% dmg 10 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 10 (hp 0)
   Alder Fenn hp 22, Brigand hp 0
@@ -660,7 +660,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
+Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 9 (hp 11)
   Soldier 1 misses Teodor
@@ -747,7 +747,7 @@ Archer waits
 enemy: wait ford_chief-1
 Ford Chief waits
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
+Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 misses Teodor
   Teodor misses Soldier 1
@@ -783,7 +783,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,5    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
+Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor misses Soldier 1
   Soldier 1 misses Teodor
@@ -837,7 +837,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren soldier-1
-Forecast Wren -> Soldier 1: dmg 7 hit 54% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier 1: acc 54% dmg 7 crit 3%; counter: acc 63% dmg 9 crit 0%
 Wren attacks Soldier 1
   Wren hits Soldier 1 for 7 (hp 4)
   Soldier 1 hits Wren for 9 (hp 11)
@@ -974,7 +974,7 @@ Archer waits
 enemy: wait ford_chief-1
 Ford Chief waits
 enemy: attack soldier-1 wren
-Forecast Soldier 1 -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 7 hit 54% crit 3%
+Forecast Soldier 1 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 54% dmg 7 crit 3%
 Soldier 1 attacks Wren
   Soldier 1 hits Wren for 9 (hp 2)
   Wren misses Soldier 1
@@ -1035,7 +1035,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack ottilie soldier-1
-Forecast Ottilie -> Soldier 1: dmg 5 hit 51% crit 4%; counter: none
+Forecast Ottilie -> Soldier 1: acc 51% dmg 5 crit 4%; counter: none
 Ottilie attacks Soldier 1
   Ottilie misses Soldier 1
   Ottilie hp 17, Soldier 1 hp 4
@@ -1063,7 +1063,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
+Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 9 (hp 0)
   Teodor hp 21, Soldier 1 hp 0
@@ -1620,7 +1620,7 @@ B  wren             Wren L1 cadet              9,5    hp 20/20  Plain  done
 enemy: move archer-1 9,2
 Archer moves 10,1 -> 9,2 via 9,1
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer misses Teodor
   Archer hp 17, Teodor hp 21
@@ -1633,7 +1633,7 @@ Soldier 2 waits
 enemy: move wingrider-1 9,3
 Wingrider moves 12,2 -> 9,3 via 11,2 10,2 9,2
 enemy: attack wingrider-1 teodor
-Forecast Wingrider -> Teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
+Forecast Wingrider -> Teodor: acc 76% dmg 6 crit 2%; counter: acc 70% dmg 13 crit 0%
 Wingrider attacks Teodor
   Wingrider misses Teodor
   Teodor misses Wingrider
@@ -1686,7 +1686,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack ottilie wingrider-1
-Forecast Ottilie -> Wingrider: dmg 19 hit 77% crit 3%; counter: none
+Forecast Ottilie -> Wingrider: acc 77% dmg 19 crit 3%; counter: none
 Ottilie attacks Wingrider
   Ottilie misses Wingrider
   Ottilie hp 17, Wingrider hp 17
@@ -1712,7 +1712,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack teodor wingrider-1
-Forecast Teodor -> Wingrider: dmg 13 hit 70% crit 0%; counter: dmg 6 hit 76% crit 2%
+Forecast Teodor -> Wingrider: acc 70% dmg 13 crit 0%; counter: acc 76% dmg 6 crit 2%
 Teodor attacks Wingrider
   Teodor misses Wingrider
   Wingrider hits Teodor for 6 (hp 15)
@@ -1762,7 +1762,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 15/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack captain soldier-2
-Forecast Alder Fenn -> Soldier 2: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+Forecast Alder Fenn -> Soldier 2: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 Alder Fenn attacks Soldier 2
   Alder Fenn crits Soldier 2 for 27 (hp 0)
   Alder Fenn hp 22, Soldier 2 hp 0
@@ -1836,7 +1836,7 @@ B  wren             Wren L1 cadet              8,5    hp 20/20  Plain  done
 -- Player phase ends, turn 8 --
 -- Enemy phase, turn 8 --
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer hits Teodor for 5 (hp 10)
   Archer hp 17, Teodor hp 10
@@ -1845,7 +1845,7 @@ Ford Chief waits
 enemy: move wingrider-1 8,3
 Wingrider moves 9,3 -> 8,3
 enemy: attack wingrider-1 ottilie
-Forecast Wingrider -> Ottilie: dmg 8 hit 72% crit 0%; counter: none
+Forecast Wingrider -> Ottilie: acc 72% dmg 8 crit 0%; counter: none
 Wingrider attacks Ottilie
   Wingrider hits Ottilie for 8 (hp 9)
   Wingrider hp 17, Ottilie hp 9
@@ -1895,7 +1895,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      8,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > attack ottilie wingrider-1
-Forecast Ottilie -> Wingrider: dmg 19 hit 77% crit 3%; counter: none
+Forecast Ottilie -> Wingrider: acc 77% dmg 19 crit 3%; counter: none
 Ottilie attacks Wingrider
   Ottilie hits Wingrider for 19 (hp 0)
   Ottilie hp 9, Wingrider hp 0
@@ -1942,7 +1942,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          9,4    hp 10/21  Plain
 B  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 > attack captain archer-1
-Forecast Alder Fenn -> Archer: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 6)
   Alder Fenn hp 22, Archer hp 6
@@ -2034,12 +2034,12 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road  done
 -- Player phase ends, turn 9 --
 -- Enemy phase, turn 9 --
 enemy: attack archer-1 teodor
-Forecast Archer -> Teodor: dmg 5 hit 80% crit 3%; counter: none
+Forecast Archer -> Teodor: acc 80% dmg 5 crit 3%; counter: none
 Archer attacks Teodor
   Archer misses Teodor
   Archer hp 6, Teodor hp 20
 enemy: attack ford_chief-1 captain
-Forecast Ford Chief -> Alder Fenn: dmg 11 hit 43% crit 0%; counter: none
+Forecast Ford Chief -> Alder Fenn: acc 43% dmg 11 crit 0%; counter: none
 Ford Chief attacks Alder Fenn
   Ford Chief misses Alder Fenn
   Ford Chief hp 26, Alder Fenn hp 22
@@ -2066,7 +2066,7 @@ D  ottilie          Ottilie L1 bowman          7,4    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          9,4    hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack captain archer-1
-Forecast Alder Fenn -> Archer: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 11 (hp 0)
   Alder Fenn hp 22, Archer hp 0
@@ -2175,7 +2175,7 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 -- Player phase ends, turn 10 --
 -- Enemy phase, turn 10 --
 enemy: attack ford_chief-1 captain
-Forecast Ford Chief -> Alder Fenn: dmg 10 hit 43% crit 0%; counter: none
+Forecast Ford Chief -> Alder Fenn: acc 43% dmg 10 crit 0%; counter: none
 Ford Chief attacks Alder Fenn
   Ford Chief hits Alder Fenn for 10 (hp 12)
   Ford Chief hp 26, Alder Fenn hp 12
@@ -2265,7 +2265,7 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 -- Player phase ends, turn 11 --
 -- Enemy phase, turn 11 --
 enemy: attack ford_chief-1 teodor 2
-Forecast Ford Chief -> Teodor with Steel Axe: dmg 16 hit 74% crit 1%; counter: dmg 8 hit 58% crit 0%
+Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter: acc 58% dmg 8 crit 0%
 Ford Chief equips Steel Axe
 Ford Chief attacks Teodor
   Ford Chief misses Teodor
@@ -2315,7 +2315,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack ottilie ford_chief-1
-Forecast Ottilie -> Ford Chief: dmg 4 hit 67% crit 3%; counter: none
+Forecast Ottilie -> Ford Chief: acc 67% dmg 4 crit 3%; counter: none
 Ottilie attacks Ford Chief
   Ottilie misses Ford Chief
   Ottilie hp 9, Ford Chief hp 18
@@ -2338,7 +2338,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack teodor ford_chief-1
-Forecast Teodor -> Ford Chief: dmg 8 hit 58% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
+Forecast Teodor -> Ford Chief: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
 Teodor attacks Ford Chief
   Teodor misses Ford Chief
   Ford Chief hits Teodor for 16 (hp 4)
@@ -2383,7 +2383,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              11,0   hp 20/20  Plain
 > attack wren ford_chief-1
-Forecast Wren -> Ford Chief: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+Forecast Wren -> Ford Chief: acc 70% dmg 6 x2 crit 2%; counter with Steel Axe: acc 63% dmg 17 crit 0%
 Wren attacks Ford Chief
   Wren hits Ford Chief for 6 (hp 12)
   Ford Chief hits Wren for 17 (hp 3)
@@ -2618,7 +2618,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack ottilie ford_chief-1
-Forecast Ottilie -> Ford Chief: dmg 4 hit 67% crit 3%; counter: none
+Forecast Ottilie -> Ford Chief: acc 67% dmg 4 crit 3%; counter: none
 Ottilie attacks Ford Chief
   Ottilie hits Ford Chief for 4 (hp 19)
   Ottilie hp 9, Ford Chief hp 19
@@ -2662,7 +2662,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren ford_chief-1
-Forecast Wren -> Ford Chief: dmg 6 x2 hit 70% crit 2%; counter with Steel Axe: dmg 17 hit 63% crit 0%
+Forecast Wren -> Ford Chief: acc 70% dmg 6 x2 crit 2%; counter with Steel Axe: acc 63% dmg 17 crit 0%
 Wren attacks Ford Chief
   Wren hits Ford Chief for 6 (hp 13)
   Ford Chief hits Wren for 17 (hp 3)
@@ -2708,7 +2708,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > attack teodor ford_chief-1
-Forecast Teodor -> Ford Chief: dmg 8 hit 58% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
+Forecast Teodor -> Ford Chief: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
 Teodor attacks Ford Chief
   Teodor misses Ford Chief
   Ford Chief hits Teodor for 16 (hp 4)
@@ -2753,7 +2753,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 4/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > attack captain ford_chief-1
-Forecast Alder Fenn -> Ford Chief: dmg 8 x2 hit 74% crit 4%; counter with Steel Axe: dmg 15 hit 62% crit 0%
+Forecast Alder Fenn -> Ford Chief: acc 74% dmg 8 x2 crit 4%; counter with Steel Axe: acc 62% dmg 15 crit 0%
 Alder Fenn attacks Ford Chief
   Alder Fenn hits Ford Chief for 8 (hp 0)
   Alder Fenn hp 22, Ford Chief hp 0

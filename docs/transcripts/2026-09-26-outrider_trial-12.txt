@@ -26,11 +26,11 @@ A  captain          Alder Fenn L1 outrider     3,4    hp 23/23  Plain  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 *  reach from 3,4: 26 tiles
 > forecast captain hexer-1 1 from 3,3
-Forecast Alder Fenn -> Hexer from 3,3 (Forest) with Iron Lance: dmg 14 x2 hit 88% crit 4%; counter: dmg 10 hit 81% crit 0%
+Forecast Alder Fenn -> Hexer from 3,3 (Forest) with Iron Lance: acc 88% dmg 14 x2 crit 4%; counter: acc 81% dmg 10 crit 0%
 > forecast captain hexer-1 2 from 3,3
-Forecast Alder Fenn -> Hexer from 3,3 (Forest) with Iron Sword: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 81% crit 0%
+Forecast Alder Fenn -> Hexer from 3,3 (Forest) with Iron Sword: acc 92% dmg 13 x2 crit 4%; counter: acc 81% dmg 10 crit 0%
 > forecast captain hexer-1 2 from 2,2
-Forecast Alder Fenn -> Hexer from 2,2 (Plain) with Iron Sword: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 98% crit 0%
+Forecast Alder Fenn -> Hexer from 2,2 (Plain) with Iron Sword: acc 92% dmg 13 x2 crit 4%; counter: acc 98% dmg 10 crit 0%
 > move captain 3,3
 Alder Fenn moves 3,4 -> 3,3
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
@@ -45,7 +45,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 A  captain          Alder Fenn L1 outrider     3,3    hp 23/23  Forest  captain
 a  hexer-1          Hexer L1 adept             3,2    hp 16/16  Plain  group gate, hold
 > attack captain hexer-1 2
-Forecast Alder Fenn -> Hexer with Iron Sword: dmg 13 x2 hit 92% crit 4%; counter: dmg 10 hit 81% crit 0%
+Forecast Alder Fenn -> Hexer with Iron Sword: acc 92% dmg 13 x2 crit 4%; counter: acc 81% dmg 10 crit 0%
 Alder Fenn equips Iron Sword
 Alder Fenn attacks Hexer
   Alder Fenn hits Hexer for 13 (hp 3)
@@ -55,7 +55,7 @@ Alder Fenn attacks Hexer
 Alder Fenn gains 30 exp (30)
 Hexer falls at 3,2
 No enemy is left, but the map is not won: the captain, Alder Fenn, must still stand on the gate at any tile from 0,0 to 6,0 by the end of turn 1 (now turn 1).
-Alder Fenn may Canto up to 3 movement: canto captain <x,y|stay>
+Alder Fenn may move again up to 3 movement: canto captain <x,y|stay>
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTTTTT
@@ -67,7 +67,7 @@ Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
 
 A  captain          Alder Fenn L1 outrider     3,3    hp 13/23  Forest  captain  canto 3
 > canto captain 3,0
-Alder Fenn cantos 3,3 -> 3,0 via 3,2 3,1
+Alder Fenn moves again 3,3 -> 3,0 via 3,2 3,1
 Trial of the Outrider  turn 1 of 1  player phase  seize  recall 0
    0123456
  0 TTTATTT

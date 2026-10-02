@@ -32,7 +32,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 3,8
 captain moves 1,6 -> 3,8 via 2,6 3,6 3,7
 group wood wakes: proximity
@@ -65,7 +65,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -97,7 +97,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 2,9
 dunstan moves 0,7 -> 2,9 via 1,7 1,8 1,9
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -129,7 +129,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -161,7 +161,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 1,9
 ottilie moves 1,7 -> 1,9 via 1,8
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -193,7 +193,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -225,7 +225,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 2,7
 keziah moves 0,6 -> 2,7 via 1,6 2,6
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -257,7 +257,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -289,7 +289,7 @@ B  teodor           Teodor L1 pikeman          1,5    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 0,6
 teodor moves 1,5 -> 0,6 via 0,5
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -321,7 +321,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -353,7 +353,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 1,7
 pell moves 0,5 -> 1,7 via 1,5 1,6
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -385,7 +385,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 1 of 14  player phase  defeat_boss  recall 3
@@ -417,7 +417,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -428,7 +428,7 @@ brawler-1 waits
 enemy: move brigand-1 2,6
 brigand-1 moves 3,3 -> 2,6 via 3,4 3,5 2,5
 enemy: attack brigand-1 keziah
-forecast brigand-1 -> keziah: dmg 12 hit 63% crit 0%; counter with Iron Axe: dmg 14 hit 72% crit 2%
+forecast brigand-1 -> keziah: acc 63% dmg 12 crit 0%; counter with Iron Axe: acc 72% dmg 14 crit 2%
 brigand-1 attacks keziah
   brigand-1 hits keziah for 12 (hp 11)
   keziah hits brigand-1 for 14 (hp 8)
@@ -472,9 +472,9 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack pell brigand-1
-forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 0)
   pell hp 16, brigand-1 hp 0
@@ -508,7 +508,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -539,7 +539,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 4,7
 captain moves 3,8 -> 4,7 via 3,7
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -570,7 +570,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -601,7 +601,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 3,8
 ottilie moves 1,9 -> 3,8 via 2,9 3,9
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -632,7 +632,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -663,7 +663,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 2,8
 keziah moves 2,7 -> 2,8
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -694,7 +694,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -725,7 +725,7 @@ B  teodor           Teodor L1 pikeman          0,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 3,6
 teodor moves 0,6 -> 3,6 via 1,6 2,6
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -756,7 +756,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 2 of 14  player phase  defeat_boss  recall 3
@@ -787,7 +787,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -832,7 +832,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -863,7 +863,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 3,7
 captain moves 4,7 -> 3,7
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -894,7 +894,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -925,7 +925,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 1,9
 keziah moves 2,8 -> 1,9 via 1,8
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -956,7 +956,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -987,7 +987,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits and braces
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -1018,7 +1018,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  braced  d
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits and braces
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -1049,7 +1049,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  braced  d
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 2,7
 pell moves 1,7 -> 2,7
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -1080,7 +1080,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  braced  d
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 3 of 14  player phase  defeat_boss  recall 3
@@ -1111,7 +1111,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain  braced  d
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
@@ -1163,7 +1163,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 3,4
 pell moves 2,7 -> 3,4 via 2,6 2,5 3,5
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1195,9 +1195,9 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 8)
   pell hp 16, rider-1 hp 8
@@ -1231,7 +1231,7 @@ B  teodor           Teodor L1 pikeman          3,6    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 4,4
 teodor moves 3,6 -> 4,4 via 3,5 3,4
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1263,9 +1263,9 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor rider-1
-forecast teodor -> rider-1: dmg 11 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+forecast teodor -> rider-1: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
 teodor attacks rider-1
   teodor hits rider-1 for 11 (hp 0)
   teodor hp 21, rider-1 hp 0
@@ -1299,7 +1299,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 0,11
 keziah moves 1,9 -> 0,11 via 0,9 0,10
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1330,7 +1330,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1361,7 +1361,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 6,7
 captain moves 3,7 -> 6,7 via 4,7 5,7
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1392,7 +1392,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1423,7 +1423,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 5,8
 ottilie moves 3,8 -> 5,8 via 4,8
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1454,7 +1454,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1485,7 +1485,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 4,8
 dunstan moves 2,9 -> 4,8 via 3,9 3,8
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1516,7 +1516,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 4 of 14  player phase  defeat_boss  recall 3
@@ -1547,7 +1547,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1592,7 +1592,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 7,9
 captain moves 6,7 -> 7,9 via 7,7 7,8
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1623,7 +1623,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1654,7 +1654,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 6,9
 ottilie moves 5,8 -> 6,9 via 6,8
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1685,7 +1685,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1716,7 +1716,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 5,9
 dunstan moves 4,8 -> 5,9 via 5,8
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1747,7 +1747,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1778,7 +1778,7 @@ B  teodor           Teodor L1 pikeman          4,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 5,7
 teodor moves 4,4 -> 5,7 via 5,4 5,5 5,6
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1809,7 +1809,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1840,7 +1840,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 4,7
 pell moves 3,4 -> 4,7 via 4,4 4,5 4,6
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1871,7 +1871,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1902,7 +1902,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits and braces
 Harrow Weir  turn 5 of 14  player phase  defeat_boss  recall 3
@@ -1933,7 +1933,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
@@ -1986,7 +1986,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 6,5
 pell moves 4,7 -> 6,5 via 4,6 4,5 5,5
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2018,9 +2018,9 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack pell brigand-3
-forecast pell -> brigand-3 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brigand-3 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brigand-3
   pell hits brigand-3 for 13 (hp 9)
   pell hp 16, brigand-3 hp 9
@@ -2054,7 +2054,7 @@ B  teodor           Teodor L1 pikeman          5,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 7,5
 teodor moves 5,7 -> 7,5 via 5,6 5,5 6,5
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2086,9 +2086,9 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor brigand-3
-forecast teodor -> brigand-3: dmg 12 hit 80% crit 2%; counter: dmg 10 hit 63% crit 0%
+forecast teodor -> brigand-3: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 teodor attacks brigand-3
   teodor hits brigand-3 for 12 (hp 0)
   teodor hp 21, brigand-3 hp 0
@@ -2122,7 +2122,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits and braces
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2153,7 +2153,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits and braces
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2184,7 +2184,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 6,10
 dunstan moves 5,9 -> 6,10 via 6,9
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2215,7 +2215,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2246,7 +2246,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 4,11
 keziah moves 0,11 -> 4,11 via 1,11 2,11 3,11
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2277,7 +2277,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 6 of 14  player phase  defeat_boss  recall 3
@@ -2308,7 +2308,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
@@ -2353,7 +2353,7 @@ B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, asleep
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 10,10
 dunstan moves 6,10 -> 10,10 via 7,10 8,10 9,10
 group ford wakes: proximity
@@ -2384,9 +2384,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack dunstan brawler-1
-forecast dunstan -> brawler-1: dmg 11 hit 74% crit 1%; counter: dmg 3 x2 hit 95% crit 0%
+forecast dunstan -> brawler-1: acc 74% dmg 11 crit 1%; counter: acc 95% dmg 3 x2 crit 0%
 dunstan attacks brawler-1
   dunstan hits brawler-1 for 11 (hp 11)
   brawler-1 hits dunstan for 3 (hp 20)
@@ -2419,7 +2419,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 7,7
 pell moves 6,5 -> 7,7 via 7,5 7,6
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2448,7 +2448,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2477,7 +2477,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          7,5    hp 21/21  Road
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 8,7
 teodor moves 7,5 -> 8,7 via 8,5 8,6
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2506,7 +2506,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2535,7 +2535,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 6,11
 keziah moves 4,11 -> 6,11 via 5,11
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2564,7 +2564,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2593,7 +2593,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 9,10
 ottilie moves 6,9 -> 9,10 via 7,9 8,9 9,9
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2622,9 +2622,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie brawler-1
-forecast ottilie -> brawler-1: dmg 8 hit 83% crit 5%; counter: none
+forecast ottilie -> brawler-1: acc 83% dmg 8 crit 5%; counter: none
 ottilie attacks brawler-1
   ottilie hits brawler-1 for 8 (hp 3)
   ottilie hp 17, brawler-1 hp 3
@@ -2655,7 +2655,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits and braces
 Harrow Weir  turn 7 of 14  player phase  defeat_boss  recall 3
@@ -2684,7 +2684,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         12,11  hp 20/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
@@ -2693,7 +2693,7 @@ archer-1 waits and braces
 enemy: move brawler-1 9,11
 brawler-1 moves 11,10 -> 9,11 via 11,11 10,11
 enemy: attack brawler-1 ottilie
-forecast brawler-1 -> ottilie: dmg 7 x2 hit 88% crit 0%; counter: none
+forecast brawler-1 -> ottilie: acc 88% dmg 7 x2 crit 0%; counter: none
 brawler-1 attacks ottilie
   brawler-1 hits ottilie for 7 (hp 10)
   brawler-1 hits ottilie for 7 (hp 3)
@@ -2703,7 +2703,7 @@ shieldbearer-1 waits and braces
 enemy: move soldier-1 11,10
 soldier-1 moves 12,11 -> 11,10 via 12,10
 enemy: attack soldier-1 dunstan
-forecast soldier-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 9 hit 73% crit 0%
+forecast soldier-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 9 crit 0%
 soldier-1 attacks dunstan
   soldier-1 hits dunstan for 6 (hp 11)
   dunstan hits soldier-1 for 9 (hp 11)
@@ -2740,9 +2740,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 6 (hp 5)
   ottilie hp 3, soldier-1 hp 5
@@ -2773,7 +2773,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 5/20   Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 8,11
 captain moves 7,9 -> 8,11 via 8,9 8,10
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 3
@@ -2802,9 +2802,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 5/20   Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain brawler-1
-forecast captain -> brawler-1: dmg 11 hit 88% crit 5%; counter: dmg 5 x2 hit 82% crit 0%
+forecast captain -> brawler-1: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 5 x2 crit 0%
 captain attacks brawler-1
   captain hits brawler-1 for 11 (hp 0)
   captain hp 22, brawler-1 hp 0
@@ -2835,9 +2835,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 5/20   Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack dunstan soldier-1
-forecast dunstan -> soldier-1: dmg 9 hit 73% crit 0%; counter: dmg 6 hit 82% crit 1%
+forecast dunstan -> soldier-1: acc 73% dmg 9 crit 0%; counter: acc 82% dmg 6 crit 1%
 dunstan attacks soldier-1
   dunstan misses soldier-1
   soldier-1 hits dunstan for 6 (hp 5)
@@ -2867,7 +2867,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 5/20   Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > recall 132
 recalled to state 132; 2 charges left
 undone: gives back 1 kill (brawler-1), 47 exp, 9 enemy hp; returns 6 hp
@@ -2898,7 +2898,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 8,11
 captain moves 7,9 -> 8,11 via 8,9 8,10
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -2927,9 +2927,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain brawler-1
-forecast captain -> brawler-1: dmg 11 hit 88% crit 5%; counter: dmg 5 x2 hit 82% crit 0%
+forecast captain -> brawler-1: acc 88% dmg 11 crit 5%; counter: acc 82% dmg 5 x2 crit 0%
 captain attacks brawler-1
   captain hits brawler-1 for 11 (hp 0)
   captain hp 22, brawler-1 hp 0
@@ -2960,7 +2960,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 6,9
 ottilie moves 9,10 -> 6,9 via 9,9 8,9 7,9
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -2988,7 +2988,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > item ottilie 2
 ottilie uses Field Dressing (2 left)
 ottilie heals 10 (hp 13)
@@ -3017,7 +3017,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3045,7 +3045,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 7,8
 pell moves 7,7 -> 7,8
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3073,7 +3073,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3101,7 +3101,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,7    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 8,9
 teodor moves 8,7 -> 8,9 via 8,8
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3129,7 +3129,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,9    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3157,7 +3157,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,9    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits and braces
 Harrow Weir  turn 8 of 14  player phase  defeat_boss  recall 2
@@ -3185,7 +3185,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         11,10  hp 11/20  Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,9    hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 28/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
@@ -3196,7 +3196,7 @@ shieldbearer-1 waits and braces
 enemy: move soldier-1 9,11
 soldier-1 moves 11,10 -> 9,11 via 11,11 10,11
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 8 hit 62% crit 0%; counter: dmg 9 hit 87% crit 4%
+forecast soldier-1 -> captain: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
 soldier-1 attacks captain
   soldier-1 hits captain for 8 (hp 14)
   captain hits soldier-1 for 9 (hp 2)
@@ -3234,9 +3234,9 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 e  soldier-1        Soldier L2 pikeman         9,11   hp 2/20   Plain  group ford, guard, awake
 B  teodor           Teodor L1 pikeman          8,9    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 14, soldier-1 hp 0
@@ -3266,7 +3266,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          8,9    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 9,10
 teodor moves 8,9 -> 9,10 via 9,9
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3293,7 +3293,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3320,7 +3320,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 8,10
 ottilie moves 6,9 -> 8,10 via 7,9 8,9
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3347,7 +3347,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3374,7 +3374,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 7,11
 keziah moves 6,11 -> 7,11
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3401,7 +3401,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3428,7 +3428,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits and braces
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3455,7 +3455,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain  braced  d
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 9 of 14  player phase  defeat_boss  recall 2
@@ -3482,7 +3482,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain  braced  d
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,9   hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 9 --
 -- enemy phase, turn 9 --
@@ -3493,8 +3493,8 @@ shieldbearer-1 waits and braces
 enemy: move weir_foreman-1 12,10
 weir_foreman-1 moves 12,9 -> 12,10
 enemy: attack weir_foreman-1 dunstan
-forecast weir_foreman-1 -> dunstan: dmg 8 hit 43% crit 2%; counter: none
-  brace: dunstan braced: weir_foreman-1 hit -15
+forecast weir_foreman-1 -> dunstan: acc 43% dmg 8 crit 2%; counter: none
+  brace: dunstan braced: weir_foreman-1 acc -15
 weir_foreman-1 attacks dunstan
   weir_foreman-1 misses dunstan
   weir_foreman-1 hp 28, dunstan hp 11
@@ -3525,7 +3525,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          9,10   hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 11,10
 teodor moves 9,10 -> 11,10 via 10,10
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3552,9 +3552,9 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 28/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor weir_foreman-1
-forecast teodor -> weir_foreman-1: dmg 10 hit 76% crit 0%; counter: dmg 10 hit 60% crit 2%
+forecast teodor -> weir_foreman-1: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
 teodor attacks weir_foreman-1
   teodor hits weir_foreman-1 for 10 (hp 18)
   weir_foreman-1 hits teodor for 10 (hp 11)
@@ -3584,7 +3584,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits and braces
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3611,7 +3611,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3638,7 +3638,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits and braces
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3665,7 +3665,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits and braces
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3692,7 +3692,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits and braces
 Harrow Weir  turn 10 of 14  player phase  defeat_boss  recall 2
@@ -3719,7 +3719,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain  braced  d
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,10  hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 10 --
 -- enemy phase, turn 10 --
@@ -3758,7 +3758,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 12,8
 dunstan moves 10,10 -> 12,8 via 11,10 12,10 12,9
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3785,7 +3785,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3812,7 +3812,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          11,10  hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 13,9
 teodor moves 11,10 -> 13,9 via 12,10 12,9
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3839,7 +3839,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3866,7 +3866,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 12,10
 ottilie moves 8,10 -> 12,10 via 9,10 10,10 11,10
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3893,7 +3893,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3920,7 +3920,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 11,11
 captain moves 8,11 -> 11,11 via 9,11 10,11
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3947,7 +3947,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -3974,7 +3974,7 @@ D  pell             Pell L1 adept              7,8    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 9,9
 pell moves 7,8 -> 9,9 via 8,8 9,8
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -4001,7 +4001,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -4028,7 +4028,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits and braces
 Harrow Weir  turn 11 of 14  player phase  defeat_boss  recall 2
@@ -4055,7 +4055,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     12,6   hp 18/28  Plain  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 11 --
 -- enemy phase, turn 11 --
@@ -4094,7 +4094,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move ottilie 13,10
 ottilie moves 12,10 -> 13,10
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4121,7 +4121,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait ottilie
 ottilie waits
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4148,7 +4148,7 @@ D  pell             Pell L1 adept              9,9    hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 12,10
 pell moves 9,9 -> 12,10 via 9,10 10,10 11,10
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4175,7 +4175,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait pell
 pell waits
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4202,7 +4202,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move captain 13,11
 captain moves 11,11 -> 13,11 via 12,11
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4229,7 +4229,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait captain
 captain waits
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4256,7 +4256,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move keziah 11,11
 keziah moves 7,11 -> 11,11 via 8,11 9,11 10,11
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4283,7 +4283,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait keziah
 keziah waits
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4310,7 +4310,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait teodor
 teodor waits and braces
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4337,7 +4337,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  braced  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > wait dunstan
 dunstan waits and braces
 Harrow Weir  turn 12 of 14  player phase  defeat_boss  recall 2
@@ -4364,7 +4364,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain  braced  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > end
 -- player phase ends, turn 12 --
 -- enemy phase, turn 12 --
@@ -4401,7 +4401,7 @@ D  pell             Pell L1 adept              12,10  hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move pell 12,7
 pell moves 12,10 -> 12,7 via 12,9 12,8
 Harrow Weir  turn 13 of 14  player phase  defeat_boss  recall 2
@@ -4428,10 +4428,10 @@ D  pell             Pell L1 adept              12,7   hp 16/16  Plain
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 18/28  Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack pell weir_foreman-1
-forecast pell -> weir_foreman-1 with Cinder: dmg 12 hit 79% crit 1%; counter: dmg 13 hit 67% crit 1%
-  brace: weir_foreman-1 braced: pell hit -15
+forecast pell -> weir_foreman-1 with Cinder: acc 79% dmg 12 crit 1%; counter: acc 67% dmg 13 crit 1%
+  brace: weir_foreman-1 braced: pell acc -15
 pell attacks weir_foreman-1
   pell hits weir_foreman-1 for 12 (hp 6)
   weir_foreman-1 hits pell for 13 (hp 3)
@@ -4461,7 +4461,7 @@ D  pell             Pell L1 adept              12,7   hp 3/16   Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          13,9   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move teodor 14,6
 teodor moves 13,9 -> 14,6 via 13,8 13,7 14,7
 Harrow Weir  turn 13 of 14  player phase  defeat_boss  recall 2
@@ -4488,10 +4488,10 @@ D  pell             Pell L1 adept              12,7   hp 3/16   Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor weir_foreman-1
-forecast teodor -> weir_foreman-1: dmg 9 hit 32% crit 0%; counter: dmg 10 hit 60% crit 2%
-  brace: weir_foreman-1 braced: teodor hit -15
+forecast teodor -> weir_foreman-1: acc 32% dmg 9 crit 0%; counter: acc 60% dmg 10 crit 2%
+  brace: weir_foreman-1 braced: teodor acc -15
 teodor attacks weir_foreman-1
   teodor misses weir_foreman-1
   weir_foreman-1 misses teodor
@@ -4520,7 +4520,7 @@ D  pell             Pell L1 adept              12,7   hp 3/16   Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > move dunstan 12,6
 dunstan moves 12,8 -> 12,6 via 12,7
 Harrow Weir  turn 13 of 14  player phase  defeat_boss  recall 2
@@ -4547,10 +4547,10 @@ D  pell             Pell L1 adept              12,7   hp 3/16   Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
 !  weir_foreman-1   Weir Foreman L3 reaver     13,6   hp 6/28   Hill  group weir, boss, awake, braced
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack dunstan weir_foreman-1
-forecast dunstan -> weir_foreman-1: dmg 8 hit 29% crit 0%; counter: dmg 8 hit 70% crit 2%
-  brace: weir_foreman-1 braced: dunstan hit -15
+forecast dunstan -> weir_foreman-1: acc 29% dmg 8 crit 0%; counter: acc 70% dmg 8 crit 2%
+  brace: weir_foreman-1 braced: dunstan acc -15
 dunstan attacks weir_foreman-1
   dunstan hits weir_foreman-1 for 8 (hp 0)
   dunstan hp 11, weir_foreman-1 hp 0
@@ -4579,6 +4579,6 @@ C  ottilie          Ottilie L1 bowman          13,10  hp 13/17  Plain
 D  pell             Pell L1 adept              12,7   hp 3/16   Plain  done
 b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group bridge, hold, braced
 B  teodor           Teodor L1 pikeman          14,6   hp 11/21  Plain  done
-brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase
+brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 battle won: defeat_boss; only recall is left
 battle won: defeat_boss

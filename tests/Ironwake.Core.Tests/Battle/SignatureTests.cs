@@ -428,13 +428,13 @@ public class SignatureTests
         var wren = ordered.Find("wren")!;
         var brigand = ordered.Find("brigand-1")!;
         var text = PlaySession.ForecastText(ordered, Starter, wren, brigand, Queries.Forecast(ordered, Starter, wren, brigand)!, wren.At, fromTile: false);
-        Assert.Contains("  Signature: Teodor's orders: Wren hit +5", text);
+        Assert.Contains("  Signature: Teodor's orders: Wren acc +5", text);
 
         var watched = Start(true, Yard, WatchedLine);
         var teodor = watched.Find("teodor")!;
         var target = watched.Find("brigand-1")!;
         var own = PlaySession.ForecastText(watched, Starter, teodor, target, Queries.Forecast(watched, Starter, teodor, target)!, teodor.At, fromTile: false);
-        Assert.Contains("  Signature: Teodor hit -10 (ally within 2)", own);
+        Assert.Contains("  Signature: Teodor acc -10 (ally within 2)", own);
 
         var plain = Start(false, Yard, WatchedLine);
         Assert.DoesNotContain("signature", PlaySession.ForecastText(plain, Starter, plain.Find("teodor")!, plain.Find("brigand-1")!, Queries.Forecast(plain, Starter, plain.Find("teodor")!, plain.Find("brigand-1")!)!, plain.Find("teodor")!.At, fromTile: false));

@@ -1349,7 +1349,7 @@ public sealed class CampaignSession
         var lines = new List<string> { $"Rooms: beds: {record.BedsTaken}/{beds}; a fallen member keeps their bed" };
         foreach (var room in keep.Rooms)
         {
-            var does = room.Forge ? $"Refine +{content.Campaign.Forge.Mt} Mt or +{content.Campaign.Forge.Hit} hit a step" : $"+{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}";
+            var does = room.Forge ? $"Refine +{content.Campaign.Forge.Hit} acc or +{content.Campaign.Forge.Mt} power a step" : $"+{room.Beds} {(room.Beds == 1 ? "bed" : "beds")}";
             if (room.Hires.Count > 0)
             {
                 does += $" and {room.Hires.Count} {(room.Hires.Count == 1 ? "hire" : "hires")} at {keep.HirePrice}";

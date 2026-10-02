@@ -193,7 +193,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              7,8    hp 20/20  Plain
 > attack teodor brigand-1
-forecast teodor -> brigand-1: dmg 12 hit 80% crit 2%; counter: dmg 9 hit 28% crit 0%
+forecast teodor -> brigand-1: acc 80% dmg 12 crit 2%; counter: acc 28% dmg 9 crit 0%
 teodor attacks brigand-1
   teodor misses brigand-1
   brigand-1 misses teodor
@@ -247,7 +247,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest  done
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              7,8    hp 20/20  Plain
 > attack ottilie brigand-1
-forecast ottilie -> brigand-1: dmg 8 hit 86% crit 5%; counter: none
+forecast ottilie -> brigand-1: acc 86% dmg 8 crit 5%; counter: none
 ottilie attacks brigand-1
   ottilie hits brigand-1 for 8 (hp 14)
   ottilie hp 17, brigand-1 hp 14
@@ -310,14 +310,14 @@ bandit_leader-1 waits
 enemy: move brigand-1 3,6
 brigand-1 moves 3,5 -> 3,6
 enemy: attack brigand-1 ottilie
-forecast brigand-1 -> ottilie: dmg 12 hit 58% crit 0%; counter: none
+forecast brigand-1 -> ottilie: acc 58% dmg 12 crit 0%; counter: none
 brigand-1 attacks ottilie
   brigand-1 misses ottilie
   brigand-1 hp 14, ottilie hp 17
 enemy: move soldier-1 4,4
 soldier-1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 teodor
-forecast soldier-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
+forecast soldier-1 -> teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
 soldier-1 attacks teodor
   soldier-1 misses teodor
   teodor misses soldier-1
@@ -378,7 +378,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              7,8    hp 20/20  Plain
 > attack ottilie brigand-1
-forecast ottilie -> brigand-1: dmg 7 hit 56% crit 5%; counter: none
+forecast ottilie -> brigand-1: acc 56% dmg 7 crit 5%; counter: none
 ottilie attacks brigand-1
   ottilie hits brigand-1 for 7 (hp 7)
   ottilie hp 17, brigand-1 hp 7
@@ -432,7 +432,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              7,8    hp 20/20  Plain
 > attack captain brigand-1
-forecast captain -> brigand-1: dmg 10 x2 hit 63% crit 5%; counter: dmg 9 hit 17% crit 0%
+forecast captain -> brigand-1: acc 63% dmg 10 x2 crit 5%; counter: acc 17% dmg 9 crit 0%
 captain attacks brigand-1
   captain hits brigand-1 for 10 (hp 0)
   captain hp 22, brigand-1 hp 0
@@ -461,7 +461,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              7,8    hp 20/20  Plain
 > attack teodor soldier-1
-forecast teodor -> soldier-1: dmg 9 hit 41% crit 1%; counter: dmg 7 hit 39% crit 1%
+forecast teodor -> soldier-1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 teodor attacks soldier-1
   teodor hits soldier-1 for 9 (hp 11)
   soldier-1 misses teodor
@@ -521,7 +521,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack soldier-1 teodor
-forecast soldier-1 -> teodor: dmg 7 hit 39% crit 1%; counter: dmg 9 hit 41% crit 1%
+forecast soldier-1 -> teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
 soldier-1 attacks teodor
   soldier-1 misses teodor
   teodor misses soldier-1
@@ -580,8 +580,8 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 5 hit 41% crit 14%; counter: none
-  rivalry: ottilie beside teodor: hit -5 crit +10 crit avoid -10
+forecast ottilie -> soldier-1: acc 41% dmg 5 crit 14%; counter: none
+  rivalry: ottilie beside teodor: acc -5 crit +10 crit evade -10
 ottilie attacks soldier-1
   ottilie hits soldier-1 for 5 (hp 6)
   ottilie hp 17, soldier-1 hp 6
@@ -633,7 +633,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 8 hit 58% crit 4%; counter: dmg 7 hit 26% crit 0%
+forecast captain -> soldier-1: acc 58% dmg 8 crit 4%; counter: acc 26% dmg 7 crit 0%
 captain attacks soldier-1
   captain misses soldier-1
   soldier-1 hits captain for 7 (hp 15)
@@ -661,8 +661,8 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,8    hp 20/20  Plain
 > attack teodor soldier-1
-forecast teodor -> soldier-1: dmg 9 hit 32% crit 11%; counter: dmg 7 hit 39% crit 11%
-  rivalry: teodor beside ottilie: hit -5 crit +10 crit avoid -10
+forecast teodor -> soldier-1: acc 32% dmg 9 crit 11%; counter: acc 39% dmg 7 crit 11%
+  rivalry: teodor beside ottilie: acc -5 crit +10 crit evade -10
 teodor attacks soldier-1
   teodor misses soldier-1
   soldier-1 misses teodor
@@ -725,7 +725,7 @@ bandit_leader-1 waits
 enemy: move soldier-1 5,6
 soldier-1 moves 4,4 -> 5,6 via 5,4 5,5
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 hits wren for 9 (hp 11)
   wren misses soldier-1
@@ -760,7 +760,7 @@ C  teodor           Teodor L1 pikeman          4,5    hp 21/21  Forest
 e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group fort, guard, asleep
 B  wren             Wren L1 cadet              4,6    hp 11/20  Plain
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren hits soldier-1 for 8 (hp 0)
   wren hp 11, soldier-1 hp 0
@@ -1120,8 +1120,8 @@ rapport ottilie and teodor +4 (8)
 enemy: move archer-1 10,2
 archer-1 moves 10,1 -> 10,2
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 80% crit 13%; counter: none
-  rivalry: teodor beside ottilie: hit -5 crit +10 crit avoid -10
+forecast archer-1 -> teodor: acc 80% dmg 5 crit 13%; counter: none
+  rivalry: teodor beside ottilie: acc -5 crit +10 crit evade -10
 archer-1 attacks teodor
   archer-1 misses teodor
   archer-1 hp 17, teodor hp 21
@@ -1130,8 +1130,8 @@ bandit_leader-1 waits
 enemy: move soldier-2 10,3
 soldier-2 moves 9,0 -> 10,3 via 10,0 10,1 10,2
 enemy: attack soldier-2 teodor
-forecast soldier-2 -> teodor: dmg 8 hit 74% crit 11%; counter: dmg 10 hit 68% crit 11%
-  rivalry: teodor beside ottilie: hit -5 crit +10 crit avoid -10
+forecast soldier-2 -> teodor: acc 74% dmg 8 crit 11%; counter: acc 68% dmg 10 crit 11%
+  rivalry: teodor beside ottilie: acc -5 crit +10 crit evade -10
 soldier-2 attacks teodor
   soldier-2 crits teodor for 24 (hp 0)
   soldier-2 hp 20, teodor hp 0
@@ -1139,7 +1139,7 @@ teodor falls at 10,4
 enemy: move wingrider-1 10,4
 wingrider-1 moves 12,2 -> 10,4 via 11,2 10,2 10,3
 enemy: attack wingrider-1 ottilie
-forecast wingrider-1 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+forecast wingrider-1 -> ottilie: acc 72% dmg 8 crit 0%; counter: none
 wingrider-1 attacks ottilie
   wingrider-1 misses ottilie
   wingrider-1 hp 17, ottilie hp 17
@@ -1288,7 +1288,7 @@ B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 enemy: move archer-1 10,2
 archer-1 moves 10,1 -> 10,2
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+forecast archer-1 -> teodor: acc 80% dmg 5 crit 3%; counter: none
 archer-1 attacks teodor
   archer-1 misses teodor
   archer-1 hp 17, teodor hp 21
@@ -1297,7 +1297,7 @@ bandit_leader-1 waits
 enemy: move soldier-2 10,3
 soldier-2 moves 9,0 -> 10,3 via 10,0 10,1 10,2
 enemy: attack soldier-2 teodor
-forecast soldier-2 -> teodor: dmg 8 hit 74% crit 1%; counter: dmg 10 hit 76% crit 1%
+forecast soldier-2 -> teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
 soldier-2 attacks teodor
   soldier-2 hits teodor for 8 (hp 13)
   teodor hits soldier-2 for 10 (hp 10)
@@ -1306,7 +1306,7 @@ teodor gains 12 exp (24)
 enemy: move wingrider-1 11,4
 wingrider-1 moves 12,2 -> 11,4 via 11,2 11,3
 enemy: attack wingrider-1 ottilie
-forecast wingrider-1 -> ottilie: dmg 8 hit 72% crit 0%; counter: none
+forecast wingrider-1 -> ottilie: acc 72% dmg 8 crit 0%; counter: none
 wingrider-1 attacks ottilie
   wingrider-1 misses ottilie
   wingrider-1 hp 17, ottilie hp 17
@@ -1358,7 +1358,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 13/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      11,4   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack ottilie wingrider-1
-forecast ottilie -> wingrider-1: dmg 19 hit 77% crit 3%; counter: none
+forecast ottilie -> wingrider-1: acc 77% dmg 19 crit 3%; counter: none
 ottilie attacks wingrider-1
   ottilie misses wingrider-1
   ottilie hp 17, wingrider-1 hp 17
@@ -1384,7 +1384,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 13/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      11,4   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack teodor soldier-2
-forecast teodor -> soldier-2: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+forecast teodor -> soldier-2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 teodor attacks soldier-2
   teodor hits soldier-2 for 10 (hp 0)
   teodor hp 13, soldier-2 hp 0
@@ -1433,7 +1433,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 13/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      11,4   hp 17/17  Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > attack wren wingrider-1
-forecast wren -> wingrider-1: dmg 11 hit 80% crit 2%; counter: dmg 7 hit 65% crit 0%
+forecast wren -> wingrider-1: acc 80% dmg 11 crit 2%; counter: acc 65% dmg 7 crit 0%
 wren attacks wingrider-1
   wren hits wingrider-1 for 11 (hp 6)
   wingrider-1 misses wren
@@ -1482,7 +1482,7 @@ C  teodor           Teodor L1 pikeman          10,4   hp 13/21  Plain  done
 e  wingrider-1      Wingrider L2 skyrider      11,4   hp 6/17   Plain  group fort, guard, awake
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain  done
 > attack captain wingrider-1
-forecast captain -> wingrider-1: dmg 12 hit 82% crit 3%; counter: dmg 6 hit 63% crit 0%
+forecast captain -> wingrider-1: acc 82% dmg 12 crit 3%; counter: acc 63% dmg 6 crit 0%
 captain attacks wingrider-1
   captain misses wingrider-1
   wingrider-1 hits captain for 6 (hp 16)
@@ -1511,14 +1511,14 @@ B  wren             Wren L1 cadet              12,4   hp 20/20  Plain  done
 -- player phase ends, turn 8 --
 -- enemy phase, turn 8 --
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 80% crit 3%; counter: none
+forecast archer-1 -> teodor: acc 80% dmg 5 crit 3%; counter: none
 archer-1 attacks teodor
   archer-1 hits teodor for 5 (hp 8)
   archer-1 hp 17, teodor hp 8
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack wingrider-1 teodor
-forecast wingrider-1 -> teodor: dmg 6 hit 76% crit 2%; counter: dmg 13 hit 70% crit 0%
+forecast wingrider-1 -> teodor: acc 76% dmg 6 crit 2%; counter: acc 70% dmg 13 crit 0%
 wingrider-1 attacks teodor
   wingrider-1 hits teodor for 6 (hp 2)
   teodor hits wingrider-1 for 13 (hp 0)
@@ -1612,7 +1612,7 @@ D  ottilie          Ottilie L1 bowman          10,4   hp 17/17  Plain
 C  teodor           Teodor L1 pikeman          10,6   hp 12/21  Plain  done
 B  wren             Wren L1 cadet              12,4   hp 20/20  Plain
 > attack ottilie archer-1
-forecast ottilie -> archer-1: dmg 8 hit 82% crit 4%; counter: dmg 7 hit 76% crit 1%
+forecast ottilie -> archer-1: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
 ottilie attacks archer-1
   ottilie hits archer-1 for 8 (hp 9)
   archer-1 hits ottilie for 7 (hp 10)
@@ -1659,8 +1659,8 @@ D  ottilie          Ottilie L1 bowman          10,4   hp 10/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,6   hp 12/21  Plain  done
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 79% crit 13%; counter: none
-  rivalry: wren beside ottilie: hit -5 crit +10 crit avoid -10
+forecast wren -> archer-1: acc 79% dmg 10 crit 13%; counter: none
+  rivalry: wren beside ottilie: acc -5 crit +10 crit evade -10
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 0)
   wren hp 20, archer-1 hp 0
@@ -1879,7 +1879,7 @@ D  ottilie          Ottilie L1 bowman          12,0   hp 10/17  Plain
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,2    hp 20/20  Plain
 > attack ottilie bandit_leader-1
-forecast ottilie -> bandit_leader-1: dmg 4 hit 67% crit 3%; counter: none
+forecast ottilie -> bandit_leader-1: acc 67% dmg 4 crit 3%; counter: none
 ottilie attacks bandit_leader-1
   ottilie hits bandit_leader-1 for 4 (hp 22)
   ottilie hp 10, bandit_leader-1 hp 22
@@ -1923,7 +1923,7 @@ D  ottilie          Ottilie L1 bowman          12,0   hp 10/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter: dmg 17 hit 63% crit 0%
+forecast wren -> bandit_leader-1: acc 70% dmg 6 x2 crit 2%; counter: acc 63% dmg 17 crit 0%
 wren attacks bandit_leader-1
   wren misses bandit_leader-1
   bandit_leader-1 misses wren
@@ -1968,7 +1968,7 @@ D  ottilie          Ottilie L1 bowman          12,0   hp 10/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack teodor bandit_leader-1
-forecast teodor -> bandit_leader-1: dmg 8 hit 58% crit 0%; counter: dmg 16 hit 74% crit 1%
+forecast teodor -> bandit_leader-1: acc 58% dmg 8 crit 0%; counter: acc 74% dmg 16 crit 1%
 teodor attacks bandit_leader-1
   teodor hits bandit_leader-1 for 8 (hp 14)
   bandit_leader-1 hits teodor for 16 (hp 5)
@@ -2014,7 +2014,7 @@ D  ottilie          Ottilie L1 bowman          12,0   hp 10/17  Plain  done
 C  teodor           Teodor L2 pikeman          10,1   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack captain bandit_leader-1
-forecast captain -> bandit_leader-1: dmg 7 x2 hit 73% crit 3%; counter: dmg 16 hit 62% crit 0%
+forecast captain -> bandit_leader-1: acc 73% dmg 7 x2 crit 3%; counter: acc 62% dmg 16 crit 0%
 captain attacks bandit_leader-1
   captain hits bandit_leader-1 for 7 (hp 7)
   bandit_leader-1 misses captain
@@ -2044,7 +2044,7 @@ B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 -- enemy phase, turn 11 --
 bandit_leader-1 heals 5 (hp 12)
 enemy: attack bandit_leader-1 ottilie 2
-forecast bandit_leader-1 -> ottilie: dmg 13 hit 52% crit 0%; counter: dmg 4 hit 60% crit 3%
+forecast bandit_leader-1 -> ottilie: acc 52% dmg 13 crit 0%; counter: acc 60% dmg 4 crit 3%
 bandit_leader-1 equips toll_axe
 bandit_leader-1 attacks ottilie
   bandit_leader-1 hits ottilie for 13 (hp 0)
@@ -2132,7 +2132,7 @@ D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,4   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter: dmg 17 hit 63% crit 0%
+forecast wren -> bandit_leader-1: acc 70% dmg 6 x2 crit 2%; counter: acc 63% dmg 17 crit 0%
 wren attacks bandit_leader-1
   wren misses bandit_leader-1
   bandit_leader-1 misses wren
@@ -2177,7 +2177,7 @@ D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 21/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack teodor bandit_leader-1
-forecast teodor -> bandit_leader-1: dmg 8 hit 58% crit 0%; counter: dmg 16 hit 74% crit 1%
+forecast teodor -> bandit_leader-1: acc 58% dmg 8 crit 0%; counter: acc 74% dmg 16 crit 1%
 teodor attacks bandit_leader-1
   teodor hits bandit_leader-1 for 8 (hp 18)
   bandit_leader-1 hits teodor for 16 (hp 5)
@@ -2223,7 +2223,7 @@ D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain  done
 C  teodor           Teodor L2 pikeman          10,1   hp 5/21   Plain  done
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 > attack captain bandit_leader-1
-forecast captain -> bandit_leader-1: dmg 7 x2 hit 73% crit 3%; counter: dmg 16 hit 62% crit 0%
+forecast captain -> bandit_leader-1: acc 73% dmg 7 x2 crit 3%; counter: acc 62% dmg 16 crit 0%
 captain attacks bandit_leader-1
   captain hits bandit_leader-1 for 7 (hp 11)
   bandit_leader-1 misses captain
@@ -2253,7 +2253,7 @@ B  wren             Wren L1 cadet              9,0    hp 20/20  Plain  done
 -- enemy phase, turn 11 --
 bandit_leader-1 heals 5 (hp 16)
 enemy: attack bandit_leader-1 teodor
-forecast bandit_leader-1 -> teodor: dmg 16 hit 74% crit 0%; counter: dmg 8 hit 58% crit 1%
+forecast bandit_leader-1 -> teodor: acc 74% dmg 16 crit 0%; counter: acc 58% dmg 8 crit 1%
 bandit_leader-1 attacks teodor
   bandit_leader-1 misses teodor
   teodor hits bandit_leader-1 for 8 (hp 8)
@@ -2281,7 +2281,7 @@ D  ottilie          Ottilie L1 bowman          11,2   hp 17/17  Plain
 C  teodor           Teodor L2 pikeman          10,1   hp 5/21   Plain
 B  wren             Wren L1 cadet              9,0    hp 20/20  Plain
 > attack wren bandit_leader-1
-forecast wren -> bandit_leader-1: dmg 6 x2 hit 70% crit 2%; counter: dmg 17 hit 63% crit 0%
+forecast wren -> bandit_leader-1: acc 70% dmg 6 x2 crit 2%; counter: acc 63% dmg 17 crit 0%
 wren attacks bandit_leader-1
   wren hits bandit_leader-1 for 6 (hp 2)
   bandit_leader-1 hits wren for 17 (hp 3)

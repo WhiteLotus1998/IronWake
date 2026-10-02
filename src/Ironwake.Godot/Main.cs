@@ -1268,7 +1268,7 @@ public partial class Main : Node2D
                 foreach (var other in cards.Skip(1))
                 {
                     var o = other.Card.Defender;
-                    UiText(new Vector2(PanelOrigin.X, y), $"also in reach: {o.Name} {other.TargetAt.X},{other.TargetAt.Y}  hit {other.Card.Attacker.Strike.DisplayedHit}  dmg {other.Card.Attacker.Strike.Damage}", Muted, 12);
+                    UiText(new Vector2(PanelOrigin.X, y), $"also in reach: {o.Name} {other.TargetAt.X},{other.TargetAt.Y}  acc {other.Card.Attacker.Strike.DisplayedHit}  dmg {other.Card.Attacker.Strike.Damage}", Muted, 12);
                     y += LineHeight;
                 }
 

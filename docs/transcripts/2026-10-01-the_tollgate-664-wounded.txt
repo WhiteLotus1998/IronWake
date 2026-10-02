@@ -121,14 +121,14 @@ B  wren             Wren L1 cadet              6,3    hp 20/20  Plain  done
 enemy: move archer-1 7,4
 Archer 1 moves 9,6 -> 7,4 via 9,5 9,4 8,4
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 misses Wren
   Archer 1 hp 17, Wren hp 20
 enemy: move brigand-1 7,3
 Brigand 1 moves 8,3 -> 7,3
 enemy: attack brigand-1 wren
-Forecast Brigand 1 -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand 1 -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 Brigand 1 attacks Wren
   Brigand 1 misses Wren
   Wren hits Brigand 1 for 10 (hp 12)
@@ -215,14 +215,14 @@ Reinforcements arrive
 enemy: move archer-1 7,2
 Archer 1 moves 7,4 -> 7,2 via 7,3
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 14)
   Archer 1 hp 17, Wren hp 14
 enemy: move brigand-1 7,1
 Brigand 1 moves 7,3 -> 7,1 via 7,2
 enemy: attack brigand-1 wren
-Forecast Brigand 1 -> Wren: dmg 11 hit 51% crit 0%; counter: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand 1 -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
 Brigand 1 attacks Wren
   Brigand 1 hits Wren for 11 (hp 3)
   Wren hits Brigand 1 for 10 (hp 0)
@@ -330,7 +330,7 @@ Reinforcements are blocked: 8,0 is wall
 enemy: move archer-1 6,1
 Archer 1 moves 7,2 -> 6,1 via 7,1
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 misses Wren
   Archer 1 hp 17, Wren hp 10
@@ -380,7 +380,7 @@ A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 p
 d  soldier-1        Soldier L1 pikeman         5,2    hp 20/20  Plain  group east, aggressive
 B  wren             Wren L1 cadet              4,1    hp 10/20  Plain
 > attack maud soldier-1
-Forecast Maud -> Soldier: dmg 10 hit 97% crit 2%; counter: none
+Forecast Maud -> Soldier: acc 97% dmg 10 crit 2%; counter: none
 Maud attacks Soldier
   Maud hits Soldier for 10 (hp 10)
   Maud hp 17, Soldier hp 10
@@ -420,7 +420,7 @@ A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 p
 d  soldier-1        Soldier L1 pikeman         5,2    hp 10/20  Plain  group east, aggressive
 B  wren             Wren L1 cadet              5,1    hp 10/20  Plain
 > attack wren archer-1
-Forecast Wren -> Archer 1: dmg 10 hit 85% crit 3%; counter: none
+Forecast Wren -> Archer 1: acc 85% dmg 10 crit 3%; counter: none
 Wren attacks Archer 1
   Wren misses Archer 1
   Wren hp 10, Archer 1 hp 17
@@ -449,14 +449,14 @@ Reinforcements arrive
 enemy: move archer-1 6,0
 Archer 1 moves 6,1 -> 6,0
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 4)
   Archer 1 hp 17, Wren hp 4
 enemy: move archer-2 5,3
 Archer 2 moves 6,3 -> 5,3
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 misses Wren
   Archer 2 hp 17, Wren hp 4
@@ -465,7 +465,7 @@ Brigand 3 moves 11,4 -> 9,2 via 11,3 11,2 10,2
 enemy: wait brigand-3
 Brigand 3 waits
 enemy: attack soldier-1 wren
-Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+Forecast Soldier -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 Soldier attacks Wren
   Soldier misses Wren
   Wren hits Soldier for 8 (hp 2)
@@ -492,7 +492,7 @@ A  maud             Maud L1 chaplain           3,2    hp 17/17  Fort (heals 20 p
 d  soldier-1        Soldier L1 pikeman         5,2    hp 2/20   Plain  group east, aggressive
 B  wren             Wren L1 cadet              5,1    hp 4/20   Plain
 > attack maud soldier-1
-Forecast Maud -> Soldier: dmg 10 hit 97% crit 2%; counter: none
+Forecast Maud -> Soldier: acc 97% dmg 10 crit 2%; counter: none
 Maud attacks Soldier
   Maud hits Soldier for 10 (hp 0)
   Maud hp 17, Soldier hp 0
@@ -559,14 +559,14 @@ Reinforcements arrive
 enemy: move archer-1 4,0
 Archer 1 moves 6,0 -> 4,0 via 5,0
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 8)
   Archer 1 hp 17, Wren hp 8
 enemy: move archer-2 5,1
 Archer 2 moves 5,3 -> 5,1 via 5,2
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 hits Wren for 6 (hp 2)
   Archer 2 hp 17, Wren hp 2
@@ -644,20 +644,20 @@ Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, Brigand 3 for 11, agai
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 70% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 3)
   Archer 1 hp 17, Wren hp 3
 Wren masters the Cadet class and keeps Fundamentals
 enemy: attack archer-2 wren
-Forecast Archer 2 -> Wren: dmg 5 hit 67% crit 0%; counter: none
+Forecast Archer 2 -> Wren: acc 67% dmg 5 crit 0%; counter: none
 Archer 2 attacks Wren
   Archer 2 misses Wren
   Archer 2 hp 17, Wren hp 3
 enemy: move brigand-3 4,1
 Brigand 3 moves 6,1 -> 4,1 via 5,1
 enemy: attack brigand-3 wren
-Forecast Brigand 3 -> Wren: dmg 10 hit 47% crit 0%; counter: dmg 11 x2 hit 88% crit 4%
+Forecast Brigand 3 -> Wren: acc 47% dmg 10 crit 0%; counter: acc 88% dmg 11 x2 crit 4%
 Brigand 3 attacks Wren
   Brigand 3 hits Wren for 10 (hp 0)
   Brigand 3 hp 22, Wren hp 0
@@ -665,7 +665,7 @@ Wren falls at 3,1
 enemy: move brigand-4 3,3
 Brigand 4 moves 5,4 -> 3,3 via 4,4 3,4
 enemy: attack brigand-4 maud
-Forecast Brigand 4 -> Maud: dmg 11 hit 45% crit 0%; counter: dmg 11 hit 98% crit 3%
+Forecast Brigand 4 -> Maud: acc 45% dmg 11 crit 0%; counter: acc 98% dmg 11 crit 3%
 Brigand 4 attacks Maud
   Brigand 4 misses Maud
   Maud hits Brigand 4 for 11 (hp 11)
@@ -1061,7 +1061,7 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 23/23  Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
 > attack captain toll_brigand-1
-Forecast Alder Fenn -> Toll Brigand: dmg 10 x2 hit 63% crit 5%; counter: dmg 10 hit 39% crit 0%
+Forecast Alder Fenn -> Toll Brigand: acc 63% dmg 10 x2 crit 5%; counter: acc 39% dmg 10 crit 0%
 Alder Fenn attacks Toll Brigand
   Alder Fenn misses Toll Brigand
   Toll Brigand misses Alder Fenn
@@ -1119,7 +1119,7 @@ c  toll_brigand-1   Toll Brigand L3 reaver     6,5    hp 13/23  Forest  group wo
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
 > attack pell toll_brigand-1
-Forecast Pell -> Toll Brigand with Cinder: dmg 13 hit 87% crit 3%; counter: dmg 13 hit 62% crit 0%
+Forecast Pell -> Toll Brigand with Cinder: acc 87% dmg 13 crit 3%; counter: acc 62% dmg 13 crit 0%
 Pell attacks Toll Brigand
   Pell hits Toll Brigand for 13 (hp 0)
   Pell hp 16, Toll Brigand hp 0
@@ -1174,7 +1174,7 @@ C  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Wren attacks Archer 2
   Wren misses Archer 2
   Wren hp 20, Archer 2 hp 17
@@ -1257,7 +1257,7 @@ B  wren             Wren L1 cadet              4,5    hp 20/20  Hill  done
 enemy: wait archer-1
 Archer 1 waits
 enemy: attack archer-2 captain
-Forecast Archer 2 -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer 2 -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer 2 attacks Alder Fenn
   Archer 2 misses Alder Fenn
   Archer 2 hp 17, Alder Fenn hp 22
@@ -1317,7 +1317,7 @@ C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack pell archer-2
-Forecast Pell -> Archer 2 with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 7 hit 56% crit 2%
+Forecast Pell -> Archer 2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 56% dmg 7 crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 12 (hp 5)
   Archer 2 hits Pell for 7 (hp 9)
@@ -1347,7 +1347,7 @@ C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 7 (hp 0)
   Wren hp 20, Archer 2 hp 0
@@ -1488,13 +1488,13 @@ Bandit Leader waits
 enemy: move rider-1 7,4
 Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 pell
-Forecast Rider -> Pell: dmg 10 hit 47% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Rider -> Pell: acc 47% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
 Rider attacks Pell
   Rider hits Pell for 10 (hp 0)
   Rider hp 21, Pell hp 0
 Pell falls at 7,5
 enemy: attack toll_warden-1 captain
-Forecast Toll Warden -> Alder Fenn: dmg 6 hit 20% crit 0%; counter: none
+Forecast Toll Warden -> Alder Fenn: acc 20% dmg 6 crit 0%; counter: none
 Toll Warden attacks Alder Fenn
   Toll Warden misses Alder Fenn
   Toll Warden hp 21, Alder Fenn hp 22
@@ -1548,7 +1548,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor rider-1
-Forecast Teodor -> Rider: dmg 11 hit 76% crit 1%; counter: dmg 7 hit 39% crit 1%
+Forecast Teodor -> Rider: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Rider
   Teodor hits Rider for 11 (hp 10)
   Rider hits Teodor for 7 (hp 14)
@@ -1577,7 +1577,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 14/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack captain rider-1
-Forecast Alder Fenn -> Rider: dmg 10 hit 87% crit 4%; counter: dmg 7 hit 26% crit 0%
+Forecast Alder Fenn -> Rider: acc 87% dmg 10 crit 4%; counter: acc 26% dmg 7 crit 0%
 Alder Fenn attacks Rider
   Alder Fenn hits Rider for 10 (hp 0)
   Alder Fenn hp 22, Rider hp 0
@@ -1658,7 +1658,7 @@ Archer 1 waits
 enemy: wait bandit_leader-1
 Bandit Leader waits
 enemy: attack toll_warden-1 captain
-Forecast Toll Warden -> Alder Fenn: dmg 6 hit 20% crit 0%; counter: none
+Forecast Toll Warden -> Alder Fenn: acc 20% dmg 6 crit 0%; counter: none
 Toll Warden attacks Alder Fenn
   Toll Warden misses Alder Fenn
   Toll Warden hp 21, Alder Fenn hp 22
@@ -1710,7 +1710,7 @@ C  teodor           Teodor L1 pikeman          6,3    hp 14/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
 > attack teodor toll_warden-1
-Forecast Teodor -> Toll Warden: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+Forecast Teodor -> Toll Warden: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 10 (hp 11)
   Toll Warden hits Teodor for 7 (hp 7)
@@ -1788,19 +1788,19 @@ Lethal if all land: Teodor (Archer 1 for 5, Bandit Leader for 11, Toll Warden fo
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack archer-1 teodor
-Forecast Archer 1 -> Teodor: dmg 5 hit 81% crit 3%; counter: none
+Forecast Archer 1 -> Teodor: acc 81% dmg 5 crit 3%; counter: none
 Archer 1 attacks Teodor
   Archer 1 hits Teodor for 5 (hp 2)
   Archer 1 hp 17, Teodor hp 2
 enemy: attack bandit_leader-1 teodor 2
-Forecast Bandit Leader -> Teodor: dmg 11 hit 58% crit 1%; counter: none
+Forecast Bandit Leader -> Teodor: acc 58% dmg 11 crit 1%; counter: none
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Teodor
   Bandit Leader hits Teodor for 11 (hp 0)
   Bandit Leader hp 26, Teodor hp 0
 Teodor falls at 6,3
 enemy: attack toll_warden-1 captain
-Forecast Toll Warden -> Alder Fenn: dmg 6 hit 20% crit 0%; counter: none
+Forecast Toll Warden -> Alder Fenn: acc 20% dmg 6 crit 0%; counter: none
 Toll Warden attacks Alder Fenn
   Toll Warden misses Alder Fenn
   Toll Warden hp 11, Alder Fenn hp 22
@@ -1850,7 +1850,7 @@ A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Forest  captain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 11/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,3    hp 20/20  Plain
 > attack wren toll_warden-1
-Forecast Wren -> Toll Warden: dmg 6 hit 85% crit 3%; counter: dmg 8 hit 62% crit 0%
+Forecast Wren -> Toll Warden: acc 85% dmg 6 crit 3%; counter: acc 62% dmg 8 crit 0%
 Wren attacks Toll Warden
   Wren hits Toll Warden for 6 (hp 5)
   Toll Warden misses Wren
@@ -1903,17 +1903,17 @@ Lethal if all land: Wren (Archer 1 for 6, Bandit Leader for 12, Toll Warden for 
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
 enemy: attack archer-1 wren
-Forecast Archer 1 -> Wren: dmg 6 hit 77% crit 0%; counter: none
+Forecast Archer 1 -> Wren: acc 77% dmg 6 crit 0%; counter: none
 Archer 1 attacks Wren
   Archer 1 hits Wren for 6 (hp 14)
   Archer 1 hp 17, Wren hp 14
 enemy: attack bandit_leader-1 wren
-Forecast Bandit Leader -> Wren: dmg 12 hit 52% crit 0%; counter: none
+Forecast Bandit Leader -> Wren: acc 52% dmg 12 crit 0%; counter: none
 Bandit Leader attacks Wren
   Bandit Leader misses Wren
   Bandit Leader hp 26, Wren hp 14
 enemy: attack toll_warden-1 captain
-Forecast Toll Warden -> Alder Fenn: dmg 6 hit 20% crit 0%; counter: none
+Forecast Toll Warden -> Alder Fenn: acc 20% dmg 6 crit 0%; counter: none
 Toll Warden attacks Alder Fenn
   Toll Warden misses Alder Fenn
   Toll Warden hp 5, Alder Fenn hp 22
@@ -1941,7 +1941,7 @@ A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Forest  captain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 5/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              6,3    hp 14/20  Plain
 > attack wren toll_warden-1
-Forecast Wren -> Toll Warden: dmg 6 hit 85% crit 3%; counter: dmg 8 hit 62% crit 0%
+Forecast Wren -> Toll Warden: acc 85% dmg 6 crit 3%; counter: acc 62% dmg 8 crit 0%
 Wren attacks Toll Warden
   Wren misses Toll Warden
   Toll Warden hits Wren for 8 (hp 6)
@@ -2074,7 +2074,7 @@ C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack pell archer-2
-Forecast Pell -> Archer 2 with Cinder: dmg 12 hit 86% crit 2%; counter: dmg 8 hit 86% crit 2%
+Forecast Pell -> Archer 2 with Cinder: acc 86% dmg 12 crit 2%; counter: acc 86% dmg 8 crit 2%
 Pell attacks Archer 2
   Pell hits Archer 2 for 12 (hp 5)
   Archer 2 hits Pell for 8 (hp 8)
@@ -2105,7 +2105,7 @@ C  teodor           Teodor L1 pikeman          8,6    hp 21/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack wren archer-2
-Forecast Wren -> Archer 2: dmg 7 hit 54% crit 3%; counter: none
+Forecast Wren -> Archer 2: acc 54% dmg 7 crit 3%; counter: none
 Wren attacks Archer 2
   Wren hits Archer 2 for 7 (hp 0)
   Wren hp 20, Archer 2 hp 0
@@ -2196,14 +2196,14 @@ Bandit Leader waits
 enemy: move rider-1 7,4
 Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 teodor
-Forecast Rider -> Teodor: dmg 7 hit 39% crit 1%; counter: dmg 11 hit 76% crit 1%
+Forecast Rider -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 76% dmg 11 crit 1%
 Rider attacks Teodor
   Rider misses Teodor
   Teodor hits Rider for 11 (hp 10)
   Rider hp 10, Teodor hp 21
 Teodor gains 14 exp (14)
 enemy: attack toll_warden-1 captain
-Forecast Toll Warden -> Alder Fenn: dmg 6 hit 20% crit 0%; counter: none
+Forecast Toll Warden -> Alder Fenn: acc 20% dmg 6 crit 0%; counter: none
 Toll Warden attacks Alder Fenn
   Toll Warden misses Alder Fenn
   Toll Warden hp 21, Alder Fenn hp 22
@@ -2234,7 +2234,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor rider-1
-Forecast Teodor -> Rider: dmg 11 hit 76% crit 1%; counter: dmg 7 hit 39% crit 1%
+Forecast Teodor -> Rider: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Rider
   Teodor hits Rider for 11 (hp 0)
   Teodor hp 21, Rider hp 0
@@ -2311,7 +2311,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack pell toll_warden-1
-Forecast Pell -> Toll Warden with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%
+Forecast Pell -> Toll Warden with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
   Counter: lethal to Pell (9 against 8 hp)
 Pell attacks Toll Warden
   Pell hits Toll Warden for 12 (hp 9)
@@ -2341,7 +2341,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest  done
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack captain toll_warden-1
-Forecast Alder Fenn -> Toll Warden: dmg 9 hit 87% crit 4%; counter: dmg 7 hit 52% crit 0%
+Forecast Alder Fenn -> Toll Warden: acc 87% dmg 9 crit 4%; counter: acc 52% dmg 7 crit 0%
 Alder Fenn attacks Toll Warden
   Alder Fenn misses Toll Warden
   Toll Warden misses Alder Fenn
@@ -2422,18 +2422,18 @@ Lethal if all land: Pell (Toll Warden for 9, against 8 hp)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-1 captain
-Forecast Archer 1 -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer 1 -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer 1 attacks Alder Fenn
   Archer 1 misses Alder Fenn
   Archer 1 hp 17, Alder Fenn hp 22
 enemy: attack bandit_leader-1 captain 2
-Forecast Bandit Leader -> Alder Fenn: dmg 11 hit 43% crit 0%; counter: none
+Forecast Bandit Leader -> Alder Fenn: acc 43% dmg 11 crit 0%; counter: none
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Alder Fenn
   Bandit Leader misses Alder Fenn
   Bandit Leader hp 26, Alder Fenn hp 22
 enemy: attack toll_warden-1 pell
-Forecast Toll Warden -> Pell: dmg 9 hit 37% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+Forecast Toll Warden -> Pell: acc 37% dmg 9 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
 Toll Warden attacks Pell
   Toll Warden misses Pell
   Pell hits Toll Warden for 12 (hp 0)
@@ -2489,7 +2489,7 @@ D  pell             Pell L2 adept              6,4    hp 9/17   Forest
 C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 > attack captain archer-1
-Forecast Alder Fenn -> Archer 1: dmg 11 hit 87% crit 4%; counter: none
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
 Alder Fenn attacks Archer 1
   Alder Fenn hits Archer 1 for 11 (hp 6)
   Alder Fenn hp 22, Archer 1 hp 6
@@ -2539,7 +2539,7 @@ D  pell             Pell L2 adept              6,4    hp 9/17   Forest
 C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain
 > attack wren archer-1
-Forecast Wren -> Archer 1: dmg 8 hit 85% crit 3%; counter: none
+Forecast Wren -> Archer 1: acc 85% dmg 8 crit 3%; counter: none
 Wren attacks Archer 1
   Wren misses Archer 1
   Wren hp 20, Archer 1 hp 6
@@ -2588,7 +2588,7 @@ D  pell             Pell L2 adept              6,3    hp 9/17   Plain
 C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 B  wren             Wren L1 cadet              6,2    hp 20/20  Plain  done
 > attack pell archer-1
-Forecast Pell -> Archer 1 with Cinder: dmg 13 hit 99% crit 2%; counter: dmg 8 hit 83% crit 2%
+Forecast Pell -> Archer 1 with Cinder: acc 99% dmg 13 crit 2%; counter: acc 83% dmg 8 crit 2%
 Pell attacks Archer 1
   Pell hits Archer 1 for 13 (hp 0)
   Pell hp 9, Archer 1 hp 0
@@ -2663,7 +2663,7 @@ Lethal if all land: Pell (Bandit Leader for 14, against 9 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 enemy: attack bandit_leader-1 pell
-Forecast Bandit Leader -> Pell: dmg 14 hit 62% crit 0%; counter with Cinder: dmg 13 hit 99% crit 1%
+Forecast Bandit Leader -> Pell: acc 62% dmg 14 crit 0%; counter with Cinder: acc 99% dmg 13 crit 1%
 Bandit Leader attacks Pell
   Bandit Leader misses Pell
   Pell hits Bandit Leader for 13 (hp 13)

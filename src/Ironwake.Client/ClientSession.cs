@@ -20,7 +20,7 @@ public sealed record MovePreview(Coord Tile, string Terrain, int Cost, int Mov, 
 
     /// <summary>The line: tile, move spent, avoid, then the verdict with its numbers.</summary>
     public string Text =>
-        $"{Terrain} {Tile.X},{Tile.Y}  move {Cost} of {Mov}  avoid {Avoid}  {Verdict}"
+        $"{Terrain} {Tile.X},{Tile.Y}  move {Cost} of {Mov}  evade {Avoid}  {Verdict}"
         + (Safe ? "" : $" for {IfAllLand}")
         + (Asleep.Count > 0 ? $"  asleep: {string.Join(", ", Asleep)}" : "");
 }
@@ -557,14 +557,14 @@ public sealed class ClientSession
         return new AttackMenu(unit.Id, target.Id, rows, Math.Max(0, first));
     }
 
-    /// <summary>A legal row's numbers: damage times strikes, hit and crit, the counter's, and the most uses the attack spends, an art's cost included.</summary>
+    /// <summary>A legal row's numbers: Acc first, then damage times strikes and crit, the counter's, and the most uses the attack spends, an art's cost included.</summary>
     private static string RowLine(CombatForecast forecast)
     {
         var own = forecast.Attacker;
         var counter = forecast.Defender.Strikes
-            ? $"counter {forecast.Defender.Damage} x{forecast.Defender.StrikeCount} hit {forecast.Defender.DisplayedHit}"
+            ? $"counter acc {forecast.Defender.DisplayedHit} {forecast.Defender.Damage} x{forecast.Defender.StrikeCount}"
             : "no counter";
-        return $"{own.Damage} x{own.StrikeCount}  hit {own.DisplayedHit}  crit {own.CritChance}  {counter}  uses {forecast.AttackerSpendsAtMost}";
+        return $"acc {own.DisplayedHit}  {own.Damage} x{own.StrikeCount}  crit {own.CritChance}  {counter}  uses {forecast.AttackerSpendsAtMost}";
     }
 
     /// <summary>A greyed row's reason: the resolver's words after the unit's name, or "out of reach from here" for a range refusal, whose text carries coordinates.</summary>

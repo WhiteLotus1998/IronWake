@@ -35,7 +35,7 @@ Deploys to Starting Alone: Alder Fenn
 Purse: 500
 Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +1 bed, built 0 of 2
-  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
   Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 == Quests ==
@@ -135,7 +135,7 @@ c  hexer-1          Hexer L1 adept             8,2    hp 16/16  Hill  group hill
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > threat captain
 Threat on Alder Fenn at 5,4 (Fort):
-  Brigand from 6,4 with Iron Axe (slot 1): dmg 8 hit 25% crit 0%; counter: dmg 13 x2 hit 88% crit 4%
+  Brigand from 6,4 with Iron Axe (slot 1): acc 25% dmg 8 crit 0%; counter: acc 88% dmg 13 x2 crit 4%
   If all land: 8 against 22 hp
   The hill group is asleep, could strike here if woken: Hexer at 8,2
   Asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
@@ -165,7 +165,7 @@ Archer waits
 enemy: move brigand-1 6,4
 Brigand moves 9,4 -> 6,4 via 8,4 7,4
 enemy: attack brigand-1 captain
-Forecast Brigand -> Alder Fenn: dmg 8 hit 25% crit 0%; counter: dmg 13 x2 hit 88% crit 4%
+Forecast Brigand -> Alder Fenn: acc 25% dmg 8 crit 0%; counter: acc 88% dmg 13 x2 crit 4%
 Brigand attacks Alder Fenn
   Brigand misses Alder Fenn
   Alder Fenn hits Brigand for 13 (hp 9)
@@ -176,7 +176,7 @@ The hill group wakes (noise)
 enemy: move hexer-1 5,2
 Hexer moves 8,2 -> 5,2 via 7,2 6,2
 enemy: attack hexer-1 captain
-Forecast Hexer -> Alder Fenn: dmg 8 hit 88% crit 0%; counter: none
+Forecast Hexer -> Alder Fenn: acc 88% dmg 8 crit 0%; counter: none
 Hexer attacks Alder Fenn
   Hexer hits Alder Fenn for 8 (hp 14)
   Hexer hp 16, Alder Fenn hp 14
@@ -201,21 +201,21 @@ A  captain          Alder Fenn L1 cadet        5,4    hp 18/22  Fort (heals 20 p
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > threat captain
 Threat on Alder Fenn at 5,4 (Fort):
-  Brigand from 6,4 with Iron Axe (slot 1): dmg 8 hit 25% crit 0%; counter: dmg 13 x2 hit 88% crit 4%
-  Hexer from 5,2 with Cinder (slot 1): dmg 8 hit 88% crit 0%; counter: none
+  Brigand from 6,4 with Iron Axe (slot 1): acc 25% dmg 8 crit 0%; counter: acc 88% dmg 13 x2 crit 4%
+  Hexer from 5,2 with Cinder (slot 1): acc 88% dmg 8 crit 0%; counter: none
   If all land: 16 against 18 hp
 > forecast captain brigand-1
-Forecast Alder Fenn -> Brigand: dmg 13 x2 hit 88% crit 4%; counter: dmg 8 hit 25% crit 0%
+Forecast Alder Fenn -> Brigand: acc 88% dmg 13 x2 crit 4%; counter: acc 25% dmg 8 crit 0%
 > forecast captain hexer-1 from 5,3
-Forecast Alder Fenn -> Hexer from 5,3 (Plain): dmg 14 x2 hit 91% crit 3%; counter: dmg 10 hit 98% crit 0%
+Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 91% dmg 14 x2 crit 3%; counter: acc 98% dmg 10 crit 0%
 > threat captain from 5,3
 Threat on Alder Fenn at 5,3 (Plain):
-  Archer from 5,1 with Iron Bow (slot 1): dmg 5 hit 70% crit 0%; counter: none
-  Brigand from 5,4 with Iron Axe (slot 1): dmg 10 hit 51% crit 0%; counter: dmg 11 x2 hit 68% crit 4%
-  Hexer from 5,1 with Cinder (slot 1): dmg 10 hit 98% crit 0%; counter: none
+  Archer from 5,1 with Iron Bow (slot 1): acc 70% dmg 5 crit 0%; counter: none
+  Brigand from 5,4 with Iron Axe (slot 1): acc 51% dmg 10 crit 0%; counter: acc 68% dmg 11 x2 crit 4%
+  Hexer from 5,1 with Cinder (slot 1): acc 98% dmg 10 crit 0%; counter: none
   If all land: 25 against 18 hp
 > attack captain brigand-1
-Forecast Alder Fenn -> Brigand: dmg 13 x2 hit 88% crit 4%; counter: dmg 8 hit 25% crit 0%
+Forecast Alder Fenn -> Brigand: acc 88% dmg 13 x2 crit 4%; counter: acc 25% dmg 8 crit 0%
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 13 (hp 0)
   Alder Fenn hp 18, Brigand hp 0
@@ -243,7 +243,7 @@ Archer moves 9,1 -> 6,2 via 8,1 7,1 6,1
 enemy: wait archer-1
 Archer waits
 enemy: attack hexer-1 captain
-Forecast Hexer -> Alder Fenn: dmg 8 hit 88% crit 0%; counter: none
+Forecast Hexer -> Alder Fenn: acc 88% dmg 8 crit 0%; counter: none
 Hexer attacks Alder Fenn
   Hexer hits Alder Fenn for 8 (hp 10)
   Hexer hp 16, Alder Fenn hp 10
@@ -267,19 +267,19 @@ A  captain          Alder Fenn L1 cadet        5,4    hp 14/22  Fort (heals 20 p
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > threat captain
 Threat on Alder Fenn at 5,4 (Fort):
-  Archer from 6,3 with Iron Bow (slot 1): dmg 3 hit 43% crit 0%; counter: none
-  Hexer from 5,2 with Cinder (slot 1): dmg 8 hit 88% crit 0%; counter: none
+  Archer from 6,3 with Iron Bow (slot 1): acc 43% dmg 3 crit 0%; counter: none
+  Hexer from 5,2 with Cinder (slot 1): acc 88% dmg 8 crit 0%; counter: none
   If all land: 11 against 14 hp
 > forecast captain archer-1 from 6,3
-Forecast Alder Fenn -> Archer from 6,3 (Plain): dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer from 6,3 (Plain): acc 85% dmg 13 crit 3%; counter: none
 > threat captain from 6,3
 Threat on Alder Fenn at 6,3 (Plain):
-  Archer from 5,4 with Iron Bow (slot 1): dmg 5 hit 70% crit 0%; counter: none
-  Hexer from 5,4 with Cinder (slot 1): dmg 10 hit 98% crit 0%; counter: none
+  Archer from 5,4 with Iron Bow (slot 1): acc 70% dmg 5 crit 0%; counter: none
+  Hexer from 5,4 with Cinder (slot 1): acc 98% dmg 10 crit 0%; counter: none
   If all land: 15 against 14 hp
 > forecast captain hexer-1 1 art full_measure from 5,3
-Forecast Alder Fenn -> Hexer from 5,3 (Plain): dmg 22 x2 hit 100% crit 23%; counter: dmg 10 hit 98% crit 0%
-  Art Full Measure: Iron Sword at mt 13 hit 105 crit 20 wt 5 range 1-1; spends up to 4 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
+Forecast Alder Fenn -> Hexer from 5,3 (Plain): acc 100% dmg 22 x2 crit 23%; counter: acc 98% dmg 10 crit 0%
+  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 4 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
 > move captain 5,3
 Alder Fenn moves 5,4 -> 5,3
 Starting Alone  turn 4 of 10  player phase  rout  recall 3
@@ -297,8 +297,8 @@ b  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,3    hp 14/22  Plain  captain
 c  hexer-1          Hexer L1 adept             5,2    hp 16/16  Plain  group hill, guard, awake
 > attack captain hexer-1 1 art full_measure
-Forecast Alder Fenn -> Hexer: dmg 22 x2 hit 100% crit 23%; counter: dmg 10 hit 98% crit 0%
-  Art Full Measure: Iron Sword at mt 13 hit 105 crit 20 wt 5 range 1-1; spends up to 4 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
+Forecast Alder Fenn -> Hexer: acc 100% dmg 22 x2 crit 23%; counter: acc 98% dmg 10 crit 0%
+  Technique Full Measure: Iron Sword at acc 105 power 13 crit 20 wt 5 range 1-1; spends up to 4 of 37 uses, 2 of them hit or miss; 1 of 1 left this map; costs the next phase: no move, no act
 Alder Fenn declares Full Measure with Iron Sword, spending 2 extra uses
 Alder Fenn attacks Hexer
   Alder Fenn hits Hexer for 22 (hp 0)
@@ -322,7 +322,7 @@ A  captain          Alder Fenn L1 cadet        5,3    hp 14/22  Plain  captain  
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
 enemy: attack archer-1 captain
-Forecast Archer -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer attacks Alder Fenn
   Archer hits Alder Fenn for 5 (hp 9)
   Archer hp 17, Alder Fenn hp 9
@@ -345,13 +345,13 @@ b  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,3    hp 9/22   Plain  captain  done
 > threat captain
 Threat on Alder Fenn at 5,3 (Plain):
-  Archer from 6,2 with Iron Bow (slot 1): dmg 5 hit 70% crit 0%; counter: none
+  Archer from 6,2 with Iron Bow (slot 1): acc 70% dmg 5 crit 0%; counter: none
   If all land: 5 against 9 hp
 > end
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 enemy: attack archer-1 captain
-Forecast Archer -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer attacks Alder Fenn
   Archer hits Alder Fenn for 5 (hp 4)
   Archer hp 17, Alder Fenn hp 4
@@ -373,13 +373,13 @@ b  archer-1         Archer L1 bowman           6,2    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,3    hp 4/22   Plain  captain
 > threat captain
 Threat on Alder Fenn at 5,3 (Plain):
-  Archer from 6,2 with Iron Bow (slot 1): dmg 5 hit 70% crit 0%; counter: none
+  Archer from 6,2 with Iron Bow (slot 1): acc 70% dmg 5 crit 0%; counter: none
   If all land: 5 against 4 hp
 > forecast captain archer-1 from 6,3
-Forecast Alder Fenn -> Archer from 6,3 (Plain): dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer from 6,3 (Plain): acc 85% dmg 13 crit 3%; counter: none
 > threat captain from 5,4
 Threat on Alder Fenn at 5,4 (Fort):
-  Archer from 5,2 with Iron Bow (slot 1): dmg 3 hit 43% crit 0%; counter: none
+  Archer from 5,2 with Iron Bow (slot 1): acc 43% dmg 3 crit 0%; counter: none
   If all land: 3 against 4 hp
 > move captain 5,4
 Alder Fenn moves 5,3 -> 5,4
@@ -418,7 +418,7 @@ A  captain          Alder Fenn L1 cadet        5,4    hp 14/22  Fort (heals 20 p
 enemy: move archer-1 5,2
 Archer moves 6,2 -> 5,2
 enemy: attack archer-1 captain
-Forecast Archer -> Alder Fenn: dmg 3 hit 43% crit 0%; counter: none
+Forecast Archer -> Alder Fenn: acc 43% dmg 3 crit 0%; counter: none
 Archer attacks Alder Fenn
   Archer misses Alder Fenn
   Archer hp 17, Alder Fenn hp 14
@@ -441,10 +441,10 @@ b  archer-1         Archer L1 bowman           5,2    hp 17/17  Plain  group hil
 A  captain          Alder Fenn L1 cadet        5,4    hp 18/22  Fort (heals 20 percent, 4 hp)  captain
 > threat captain
 Threat on Alder Fenn at 5,4 (Fort):
-  Archer from 5,2 with Iron Bow (slot 1): dmg 3 hit 43% crit 0%; counter: none
+  Archer from 5,2 with Iron Bow (slot 1): acc 43% dmg 3 crit 0%; counter: none
   If all land: 3 against 18 hp
 > forecast captain archer-1 from 5,3
-Forecast Alder Fenn -> Archer from 5,3 (Plain): dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer from 5,3 (Plain): acc 85% dmg 13 crit 3%; counter: none
 > move captain 5,3
 Alder Fenn moves 5,4 -> 5,3
 Starting Alone  turn 7 of 10  player phase  rout  recall 3
@@ -461,7 +461,7 @@ Starting Alone  turn 7 of 10  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           5,2    hp 17/17  Plain  group hill, guard, awake
 A  captain          Alder Fenn L1 cadet        5,3    hp 18/22  Plain  captain
 > attack captain archer-1 1
-Forecast Alder Fenn -> Archer: dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer: acc 85% dmg 13 crit 3%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 13 (hp 4)
   Alder Fenn hp 18, Archer hp 4
@@ -485,7 +485,7 @@ A  captain          Alder Fenn L1 cadet        5,3    hp 18/22  Plain  captain  
 enemy: move archer-1 5,1
 Archer moves 5,2 -> 5,1
 enemy: attack archer-1 captain
-Forecast Archer -> Alder Fenn: dmg 5 hit 70% crit 0%; counter: none
+Forecast Archer -> Alder Fenn: acc 70% dmg 5 crit 0%; counter: none
 Archer attacks Alder Fenn
   Archer hits Alder Fenn for 5 (hp 13)
   Archer hp 4, Alder Fenn hp 13
@@ -506,7 +506,7 @@ Starting Alone  turn 8 of 10  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           5,1    hp 4/17   Plain  group hill, guard, awake
 A  captain          Alder Fenn L1 cadet        5,3    hp 13/22  Plain  captain
 > forecast captain archer-1 from 5,2
-Forecast Alder Fenn -> Archer from 5,2 (Plain): dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer from 5,2 (Plain): acc 85% dmg 13 crit 3%; counter: none
 > move captain 5,2
 Alder Fenn moves 5,3 -> 5,2
 Starting Alone  turn 8 of 10  player phase  rout  recall 3
@@ -523,7 +523,7 @@ Starting Alone  turn 8 of 10  player phase  rout  recall 3
 b  archer-1         Archer L1 bowman           5,1    hp 4/17   Plain  group hill, guard, awake
 A  captain          Alder Fenn L1 cadet        5,2    hp 13/22  Plain  captain
 > attack captain archer-1 1
-Forecast Alder Fenn -> Archer: dmg 13 hit 85% crit 3%; counter: none
+Forecast Alder Fenn -> Archer: acc 85% dmg 13 crit 3%; counter: none
 Alder Fenn attacks Archer
   Alder Fenn hits Archer for 13 (hp 0)
   Alder Fenn hp 13, Archer hp 0
@@ -583,7 +583,7 @@ Deploys to The Mill: Alder Fenn, Maud
 Purse: 800
 Rooms: beds: 10/12; a fallen member keeps their bed
   bunk: Bunk room, 400, +1 bed, built 0 of 2
-  forge: Forge, 600, Refine +1 Mt or +5 hit a step, built 0 of 1; opens once the_tollgate is won
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
   Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 == Quests ==

@@ -1799,12 +1799,12 @@ public static class ContentLoader
                 .ToList();
             if (castable.Count < 2)
             {
-                throw node.Error("inventory", "a Reason or Faith unit carries at least two castable spells; a spent spell does not equip");
+                throw node.Error("inventory", "a Lore or Faith unit carries at least two castable spells; a spent spell does not equip");
             }
 
             if (castable.All(w => w!.Heals))
             {
-                throw node.Error("inventory", "a Reason or Faith unit carries at least one attacking spell, since a healing spell is legal only when an ally in range is hurt");
+                throw node.Error("inventory", "a Lore or Faith unit carries at least one attacking spell, since a healing spell is legal only when an ally in range is hurt");
             }
         }
     }

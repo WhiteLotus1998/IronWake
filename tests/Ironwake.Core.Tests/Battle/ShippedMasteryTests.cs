@@ -80,7 +80,7 @@ public class ShippedMasteryTests
     }
 
     [Fact]
-    public void DeadeyeAddsTenHitAndTenCrit()
+    public void SteadyAimAddsTenHitAndTenCrit()
     {
         var plain = Forecast(Beside(Hale));
         var aimed = Forecast(Beside(Knowing("deadeye")));

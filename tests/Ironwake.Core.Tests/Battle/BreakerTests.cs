@@ -30,7 +30,7 @@ public class BreakerTests
         Assert.Equal(new CombatModifierEffect(new OpponentCondition(type, null), 20, 20, 0, 0), Starter.Ability(id).Effect);
     }
 
-    /// <summary>Seven, one per weapon type, Fistbreaker for gauntlets since issue 70's content line.</summary>
+    /// <summary>Seven, one per weapon type, Fist Sense for gauntlets since issue 70's content line.</summary>
     [Fact]
     public void EveryWeaponTypeHasExactlyOneBreaker()
     {

@@ -290,13 +290,13 @@ public class MasteryTests
         var done = hale with { Unit = hale.Unit with { Abilities = ValueList<string>.Of("axebreaker") } };
 
         Assert.Null(Ironwake.Cli.PlaySession.MasteryLine(hale, WithoutCadetMastery()));
-        Assert.Equal("  mastery: Axebreaker (3 of 12 combats)", Ironwake.Cli.PlaySession.MasteryLine(three, content));
-        Assert.Equal("  mastery: Axebreaker, mastered", Ironwake.Cli.PlaySession.MasteryLine(done, content));
+        Assert.Equal("  mastery: Axe Sense (3 of 12 combats)", Ironwake.Cli.PlaySession.MasteryLine(three, content));
+        Assert.Equal("  mastery: Axe Sense, mastered", Ironwake.Cli.PlaySession.MasteryLine(done, content));
     }
 
     [Fact]
     public void TheConsoleNamesAMasteryEarned()
     {
-        Assert.Equal("Hale masters the Cadet class and keeps Axebreaker", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axebreaker"), Starter, UnitNames.None));
+        Assert.Equal("Hale masters the Cadet class and keeps Axe Sense", Ironwake.Cli.PlaySession.Describe(new MasteryEarned("hale", "cadet", "axebreaker"), Starter, UnitNames.None));
     }
 }

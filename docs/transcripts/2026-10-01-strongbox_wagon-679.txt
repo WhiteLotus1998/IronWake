@@ -62,10 +62,10 @@ chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action
 > show wren
 Wren, Cadet L1, at 3,5 on Plain
   HP 20/20  Str 7 Mag 0 Dex 6 Spd 8 Lck 5 Def 4 Res 2 Cha 3  Mov 4 (infantry)
-  Weapon: Iron Sword (mt 5 hit 75 crit 0 wt 5 range 1-1)
+  Weapon: Iron Sword (acc 75 power 5 crit 0 wt 5 range 1-1)
   Items: 1: Iron Sword x40, 2: Field Dressing x3, 3: Iron Lance x40, 4: Steel Sword x30, 5: Iron Bow x40
   Ranks: sword E (0), lance E (0), axe E (0)
-  Arts: Heavy Cut (heavy_cut) (sword E, cost 2): +4 mt, +3 wt, -10 hit. Hits harder and may lose the double.
+  Techniques: Heavy Cut (heavy_cut) (sword E, cost 2): -10 Acc, +4 Power, +3 Wt. Hits harder and may lose the double.
   Mastery: Fundamentals (0 of 12 combats)
   Targets from here: none
 > move captain 2,4
@@ -157,7 +157,7 @@ Bandit Leader waits
 enemy: move brigand-1 3,4
 Brigand moves 6,4 -> 3,4 via 5,4 4,4
 enemy: attack brigand-1 wren
-Forecast Brigand -> Wren: dmg 11 hit 51% crit 0%; counter with Iron Sword: dmg 10 x2 hit 88% crit 4%
+Forecast Brigand -> Wren: acc 51% dmg 11 crit 0%; counter with Iron Sword: acc 88% dmg 10 x2 crit 4%
 Brigand attacks Wren
   Brigand hits Wren for 11 (hp 9)
   Wren misses Brigand
@@ -166,7 +166,7 @@ Brigand attacks Wren
 enemy: move soldier-1 4,5
 Soldier moves 7,5 -> 4,5 via 6,5 5,5
 enemy: attack soldier-1 wren
-Forecast Soldier -> Wren: dmg 9 hit 63% crit 0%; counter with Iron Sword: dmg 8 hit 85% crit 3%
+Forecast Soldier -> Wren: acc 63% dmg 9 crit 0%; counter with Iron Sword: acc 85% dmg 8 crit 3%
 Soldier attacks Wren
   Soldier misses Wren
   Wren hits Soldier for 8 (hp 12)
@@ -194,7 +194,7 @@ B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > attack captain brigand-1
-Forecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%
+Forecast Alder Fenn -> Brigand: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%
 Alder Fenn attacks Brigand
   Alder Fenn hits Brigand for 11 (hp 11)
   Brigand misses Alder Fenn
@@ -239,7 +239,7 @@ B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > attack teodor soldier-1
-Forecast Teodor -> Soldier: dmg 10 hit 76% crit 1%; counter: dmg 8 hit 74% crit 1%
+Forecast Teodor -> Soldier: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier
   Teodor hits Soldier for 10 (hp 2)
   Soldier misses Teodor
@@ -263,7 +263,7 @@ B  wren             Wren L1 cadet              3,5    hp 9/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > attack wren soldier-1
-Forecast Wren -> Soldier with Iron Sword: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+Forecast Wren -> Soldier with Iron Sword: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
   Counter: lethal to Wren (9 against 9 hp)
 Wren attacks Soldier
   Wren hits Soldier for 8 (hp 0)
@@ -446,7 +446,7 @@ chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action
 > open captain 8,1
 ERROR: Alder Fenn cannot open the chest at 8,1: Bandit Leader stands on it
 > attack captain bandit_leader-1
-Forecast Alder Fenn -> Bandit Leader: dmg 9 x2 hit 91% crit 3%; counter with Steel Axe: dmg 16 hit 62% crit 0%
+Forecast Alder Fenn -> Bandit Leader: acc 91% dmg 9 x2 crit 3%; counter with Steel Axe: acc 62% dmg 16 crit 0%
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 9 (hp 17)
   Bandit Leader hits Alder Fenn for 16 (hp 6)
@@ -486,7 +486,7 @@ C  teodor           Teodor L1 pikeman          8,2    hp 21/21  Plain
 B  wren             Wren L1 cadet              3,5    hp 19/20  Plain
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > attack teodor bandit_leader-1
-Forecast Teodor -> Bandit Leader: dmg 10 hit 81% crit 0%; counter with Steel Axe: dmg 16 hit 74% crit 1%
+Forecast Teodor -> Bandit Leader: acc 81% dmg 10 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
 Teodor attacks Bandit Leader
   Teodor misses Bandit Leader
   Bandit Leader hits Teodor for 16 (hp 5)
@@ -548,7 +548,7 @@ Lethal if all land: Teodor (Bandit Leader for 11, against 5 hp)
 enemy: move bandit_leader-1 9,1
 Bandit Leader moves 8,1 -> 9,1
 enemy: attack bandit_leader-1 teodor 2
-Forecast Bandit Leader -> Teodor: dmg 11 hit 58% crit 1%; counter: none
+Forecast Bandit Leader -> Teodor: acc 58% dmg 11 crit 1%; counter: none
 Bandit Leader equips Toll Axe
 Bandit Leader attacks Teodor
   Bandit Leader hits Teodor for 11 (hp 0)
@@ -588,7 +588,7 @@ A  captain          Alder Fenn L1 cadet        8,1    hp 6/22   Plain  captain
 B  wren             Wren L1 cadet              5,3    hp 19/20  Plain
 chests ($): 8,1 Steel Axe (a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won)
 > attack captain bandit_leader-1
-Forecast Alder Fenn -> Bandit Leader: dmg 8 hit 74% crit 3%; counter with Toll Axe: dmg 11 hit 43% crit 0%
+Forecast Alder Fenn -> Bandit Leader: acc 74% dmg 8 crit 3%; counter with Toll Axe: acc 43% dmg 11 crit 0%
   Counter: lethal to Alder Fenn (11 against 6 hp)
 Alder Fenn attacks Bandit Leader
   Alder Fenn hits Bandit Leader for 8 (hp 0)

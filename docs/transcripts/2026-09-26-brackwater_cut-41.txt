@@ -50,7 +50,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+forecast rook -> archer-2: acc 54% dmg 7 crit 3%; counter: none
 rook attacks archer-2
   rook hits archer-2 for 7 (hp 10)
   rook hp 17, archer-2 hp 10
@@ -106,7 +106,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-2
   pell hits archer-2 for 10 (hp 0)
   pell hp 16, archer-2 hp 0
@@ -1164,7 +1164,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 16,3
 shieldbearer-1 moves 17,5 -> 16,3 via 17,4 17,3
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+forecast shieldbearer-1 -> wren: acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
 shieldbearer-1 attacks wren
   shieldbearer-1 hits wren for 8 (hp 12)
   wren hits shieldbearer-1 for 3 (hp 22)
@@ -1354,7 +1354,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 escaped: rook pell dunstan
 > threat wren from 18,2
 threat on wren at 18,2 (Plain):
-  shieldbearer-1 from 17,2 with Iron Lance (slot 1): dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+  shieldbearer-1 from 17,2 with Iron Lance (slot 1): acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
   if all land: 8 against 12 hp
   and whatever is in the dark (?), unpriced
 > move wren 18,2
@@ -1468,7 +1468,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 17,2
 shieldbearer-1 moves 16,3 -> 17,2 via 16,2
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+forecast shieldbearer-1 -> wren: acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
 shieldbearer-1 attacks wren
   shieldbearer-1 misses wren
   wren hits shieldbearer-1 for 3 (hp 16)
@@ -1478,7 +1478,7 @@ wren gains 14 exp (28)
 enemy: move soldier-1 18,3
 soldier-1 moves 16,4 -> 18,3 via 16,3 17,3
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 misses wren
   wren hits soldier-1 for 8 (hp 13)

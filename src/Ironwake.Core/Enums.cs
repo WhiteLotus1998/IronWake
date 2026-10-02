@@ -28,6 +28,13 @@ public static class WeaponTypeExtensions
     /// <summary>Reason and Faith attack with Mag and target Res; their uses refresh each map.</summary>
     public static bool IsMagic(this WeaponType type) => type is WeaponType.Reason or WeaponType.Faith;
 
+    /// <summary>
+    /// The word a reader sees for this type, lower case: the id's own word except
+    /// <see cref="WeaponType.Reason"/>, which reads <c>lore</c> (issue 701, round 201). Ids and
+    /// content keep <c>reason</c>.
+    /// </summary>
+    public static string Label(this WeaponType type) => type == WeaponType.Reason ? "lore" : type.ToString().ToLowerInvariant();
+
     /// <summary>The strikes one attack or counter with this type makes before the other side answers: two for gauntlets, one otherwise (issue 70).</summary>
     public static int StrikesPerRound(this WeaponType type) => type == WeaponType.Gauntlet ? 2 : 1;
 

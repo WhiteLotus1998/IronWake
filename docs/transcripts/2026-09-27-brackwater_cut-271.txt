@@ -51,7 +51,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack rook archer-2
-forecast rook -> archer-2: dmg 7 hit 54% crit 3%; counter: none
+forecast rook -> archer-2: acc 54% dmg 7 crit 3%; counter: none
 rook attacks archer-2
   rook misses archer-2
   rook hp 17, archer-2 hp 17
@@ -106,7 +106,7 @@ D  wren             Wren L1 cadet              8,5    hp 20/20  Plain
 dusk: sight 5, 4 next turn; 9 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 10 hit 91% crit 2%; counter: dmg 8 hit 86% crit 2%
+forecast pell -> archer-2 with Cinder: acc 91% dmg 10 crit 2%; counter: acc 86% dmg 8 crit 2%
 pell attacks archer-2
   pell hits archer-2 for 10 (hp 7)
   archer-2 hits pell for 8 (hp 8)
@@ -692,7 +692,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 enemy: something in the dark acts
 enemy: something in the dark acts
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-2 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-2 attacks dunstan
   archer-2 hits dunstan for 3 (hp 20)
   archer-2 hp 17, dunstan hp 20
@@ -708,7 +708,7 @@ enemy: something in the dark acts
 enemy: move rider-1 10,3
 rider-1 moves 4,3 -> 10,3 via 5,3 6,3 7,3 8,3 9,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 hits dunstan for 6 (hp 14)
   dunstan hits rider-1 for 10 (hp 11)
@@ -747,7 +747,7 @@ D  wren             Wren L1 cadet              14,3   hp 20/20  Plain
 dusk: sight 3, 2 next turn; 7 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 0)
   pell hp 16, rider-1 hp 0
@@ -973,12 +973,12 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 enemy: move archer-1 9,3
 archer-1 moves 7,4 -> 9,3 via 7,3 8,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 11)
   archer-1 hp 17, dunstan hp 11
 enemy: attack archer-2 dunstan
-forecast archer-2 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-2 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-2 attacks dunstan
   archer-2 misses dunstan
   archer-2 hp 17, dunstan hp 11
@@ -986,7 +986,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 10,3
 brigand-1 moves 8,3 -> 10,3 via 9,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-1 -> dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-1 attacks dunstan
   brigand-1 hits dunstan for 9 (hp 2)
   dunstan hits brigand-1 for 11 (hp 12)
@@ -1030,7 +1030,7 @@ D  wren             Wren L1 cadet              15,1   hp 20/20  Plain
 dusk: sight 2, 1 next turn; 6 unseen (?); no side strikes what it cannot see
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 > attack pell brigand-1
-forecast pell -> brigand-1 with Cinder: dmg 13 hit 99% crit 3%; counter: none
+forecast pell -> brigand-1 with Cinder: acc 99% dmg 13 crit 3%; counter: none
 pell attacks brigand-1
   pell hits brigand-1 for 13 (hp 0)
   pell hp 16, brigand-1 hp 0
@@ -1227,7 +1227,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 0)
   archer-1 hp 17, dunstan hp 0
@@ -1239,7 +1239,7 @@ enemy: something in the dark acts
 enemy: move hexer-1 10,3
 hexer-1 moves 9,4 -> 10,3 via 9,3
 enemy: attack hexer-1 pell
-forecast hexer-1 -> pell: dmg 8 hit 99% crit 0%; counter with Cinder: dmg 8 hit 99% crit 2%
+forecast hexer-1 -> pell: acc 99% dmg 8 crit 0%; counter with Cinder: acc 99% dmg 8 crit 2%
 hexer-1 attacks pell
   hexer-1 hits pell for 8 (hp 8)
   pell hits hexer-1 for 8 (hp 8)
@@ -1510,7 +1510,7 @@ enemy: something in the dark acts
 enemy: move shieldbearer-1 19,4
 shieldbearer-1 moves 17,5 -> 19,4 via 17,4 18,4
 enemy: attack shieldbearer-1 wren
-forecast shieldbearer-1 -> wren: dmg 8 hit 60% crit 0%; counter: dmg 3 x2 hit 93% crit 4%
+forecast shieldbearer-1 -> wren: acc 60% dmg 8 crit 0%; counter: acc 93% dmg 3 x2 crit 4%
 shieldbearer-1 attacks wren
   shieldbearer-1 hits wren for 8 (hp 12)
   wren hits shieldbearer-1 for 3 (hp 22)
@@ -1520,7 +1520,7 @@ wren gains 14 exp (14)
 enemy: move soldier-1 18,3
 soldier-1 moves 17,6 -> 18,3 via 17,5 17,4 17,3
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 hits wren for 9 (hp 3)
   wren hits soldier-1 for 8 (hp 13)
@@ -1628,7 +1628,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 1)
   pell hp 8, soldier-1 hp 1
@@ -1684,7 +1684,7 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -1741,7 +1741,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack rook soldier-1
-forecast rook -> soldier-1: dmg 7 hit 79% crit 3%; counter: dmg 12 hit 63% crit 0%
+forecast rook -> soldier-1: acc 79% dmg 7 crit 3%; counter: acc 63% dmg 12 crit 0%
 rook attacks soldier-1
   rook misses soldier-1
   soldier-1 misses rook
@@ -1795,7 +1795,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 1)
   pell hp 8, soldier-1 hp 1
@@ -1851,7 +1851,7 @@ dusk: sight 1; it gets no darker; 6 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -1885,7 +1885,7 @@ escaped: wren
 -- enemy phase, turn 6 --
 enemy: something in the dark acts
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+forecast archer-1 -> captain: acc 70% dmg 5 crit 0%; counter: none
 archer-1 attacks captain
   archer-1 hits captain for 5 (hp 17)
   archer-1 hp 17, captain hp 17
@@ -1897,7 +1897,7 @@ enemy: something in the dark acts
 enemy: move hexer-1 18,3
 hexer-1 moves 14,3 -> 18,3 via 15,3 16,3 17,3
 enemy: attack hexer-1 captain
-forecast hexer-1 -> captain: dmg 11 hit 98% crit 0%; counter: dmg 12 x2 hit 92% crit 4%
+forecast hexer-1 -> captain: acc 98% dmg 11 crit 0%; counter: acc 92% dmg 12 x2 crit 4%
 hexer-1 attacks captain
   hexer-1 hits captain for 11 (hp 6)
   captain hits hexer-1 for 12 (hp 0)
@@ -1907,7 +1907,7 @@ hexer-1 falls at 18,3
 enemy: something in the dark acts
 enemy: something in the dark acts
 enemy: attack shieldbearer-1 captain
-forecast shieldbearer-1 -> captain: dmg 7 hit 58% crit 0%; counter: dmg 4 x2 hit 94% crit 5%
+forecast shieldbearer-1 -> captain: acc 58% dmg 7 crit 0%; counter: acc 94% dmg 4 x2 crit 5%
 shieldbearer-1 attacks captain
   shieldbearer-1 hits captain for 7 (hp 0)
   shieldbearer-1 hp 19, captain hp 0
@@ -2013,7 +2013,7 @@ dusk: sight 1; it gets no darker; 7 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack rook hexer-1
-forecast rook -> hexer-1: dmg 10 x2 hit 86% crit 3%; counter: dmg 9 hit 98% crit 0%
+forecast rook -> hexer-1: acc 86% dmg 10 x2 crit 3%; counter: acc 98% dmg 9 crit 0%
 rook attacks hexer-1
   rook hits hexer-1 for 10 (hp 0)
   rook hp 17, hexer-1 hp 0
@@ -2092,7 +2092,7 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell hits soldier-1 for 12 (hp 1)
   pell hp 8, soldier-1 hp 1
@@ -2123,7 +2123,7 @@ dusk: sight 1; it gets no darker; 5 unseen (?); no side strikes what it cannot s
 exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 escaped: wren
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 8 hit 62% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 62% dmg 8 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 0)
   captain hp 22, soldier-1 hp 0
@@ -2162,7 +2162,7 @@ enemy: something in the dark acts
 enemy: move brigand-2 14,3
 brigand-2 moves 12,3 -> 14,3 via 13,3
 enemy: attack brigand-2 rook
-forecast brigand-2 -> rook: dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
+forecast brigand-2 -> rook: acc 51% dmg 15 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
 brigand-2 attacks rook
   brigand-2 misses rook
   rook misses brigand-2
@@ -2172,7 +2172,7 @@ rook gains 14 exp (54)
 enemy: move rider-2 15,2
 rider-2 moves 11,3 -> 15,2 via 12,3 12,2 13,2 14,2
 enemy: attack rider-2 rook
-forecast rider-2 -> rook: dmg 12 hit 63% crit 0%; counter: dmg 8 hit 79% crit 3%
+forecast rider-2 -> rook: acc 63% dmg 12 crit 0%; counter: acc 79% dmg 8 crit 3%
 rider-2 attacks rook
   rider-2 hits rook for 12 (hp 5)
   rook hits rider-2 for 8 (hp 13)
@@ -2181,7 +2181,7 @@ rook gains 14 exp (68)
 enemy: move shieldbearer-1 16,3
 shieldbearer-1 moves 19,4 -> 16,3 via 18,4 18,3 17,3
 enemy: attack shieldbearer-1 rook
-forecast shieldbearer-1 -> rook: dmg 11 hit 60% crit 0%; counter: dmg 2 x2 hit 89% crit 4%
+forecast shieldbearer-1 -> rook: acc 60% dmg 11 crit 0%; counter: acc 89% dmg 2 x2 crit 4%
 shieldbearer-1 attacks rook
   shieldbearer-1 hits rook for 11 (hp 0)
   shieldbearer-1 hp 19, rook hp 0

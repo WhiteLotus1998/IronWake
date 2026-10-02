@@ -36,11 +36,11 @@ public sealed class PlaySession
     private const string Help = """
         Commands:
           move <unit> <x,y>        Move a unit to a tile in its reach
-          attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a combat art (the forecast prints first)
+          attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first)
           item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
           wait <unit>              End the unit's action
           undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
-          canto <unit> <x,y|stay>  After acting, a unit with Canto moves on what its move left, or stays
+          canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
           exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
           recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
           open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
@@ -840,7 +840,7 @@ public sealed class PlaySession
 
         if (CantoOwed(command) is { } owed)
         {
-            _out.WriteLine($"{UnitNames.Of(_state, _content)[owed.Id]} may Canto up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
+            _out.WriteLine($"{UnitNames.Of(_state, _content)[owed.Id]} may move again up to {owed.Canto} movement: canto {owed.Id} <x,y|stay>");
         }
 
         if (command is not EndPhase)
@@ -1417,7 +1417,7 @@ public sealed class PlaySession
         var ability = content.Ability(art);
         var struck = ((CombatArtEffect)ability.Effect).Apply(weapon!);
         var uses = armed.Unit.Inventory.Items[armed.EquippedSlot(content)].Uses;
-        return $"  art {ability.Name}: {struck.Name} at mt {struck.Mt} hit {struck.Hit} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
+        return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
             + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
             + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "");
     }
@@ -1501,7 +1501,7 @@ public sealed class PlaySession
             return null;
         }
 
-        return $"If {UnitNames.Of(state, content)[unit.Id]} waits here and braces (hit -{Brace.Hit}):\n"
+        return $"If {UnitNames.Of(state, content)[unit.Id]} waits here and braces (acc -{Brace.Hit}):\n"
             + ThreatText(after, content, braced, tile, lines, Queries.SleepingThreats(after, content, braced, tile)!, Queries.Unseeing(after, content, braced, tile), anvils: Queries.Anvils(after, content, braced, tile), refusals: Queries.Refusals(after, content, braced, tile));
     }
 
@@ -1723,15 +1723,15 @@ public sealed class PlaySession
         return " with " + Keepsake.Name(stack.ItemId, fallen, content);
     }
 
-    /// <summary>One side of a forecast as the console prints it: damage, doubles, displayed hit, and crit.</summary>
+    /// <summary>One side of a forecast as the console prints it: displayed Acc first, then damage, doubles and crit (issue 701).</summary>
     private static string StrikeText(SideForecast side) =>
-        $"dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} hit {side.DisplayedHit}% crit {side.CritChance}%";
+        $"acc {side.DisplayedHit}% dmg {side.Damage}{(side.StrikeCount > 1 ? $" x{side.StrikeCount}" : "")} crit {side.CritChance}%";
 
     /// <summary>
     /// The strike columns of an attack that raises a blow (DESIGN.md 13.16, issue 447): the
     /// landing's damage and no percentage, since the raise has no roll and the landing is sure.
     /// </summary>
-    private static string RaiseText(SideForecast side) => $"dmg {side.Damage} hit -- crit --";
+    private static string RaiseText(SideForecast side) => $"acc -- dmg {side.Damage} crit --";
 
     /// <summary>True when <paramref name="unit"/>'s attack with <paramref name="slot"/> raises a blow instead of fighting.</summary>
     internal static bool RaisesWith(BattleState state, GameContent content, BattleUnit unit, int? slot) =>
@@ -1809,7 +1809,7 @@ public sealed class PlaySession
         var weapon = unit.EquippedWeapon(content);
         if (weapon is not null)
         {
-            return $"{weapon.Name} (mt {weapon.Mt} hit {weapon.Hit} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange}){(unit.WeaponBroken(content) ? " broken: -5 mt -10 hit" : "")}";
+            return $"{weapon.Name} (acc {weapon.Hit} power {weapon.Mt} crit {weapon.Crit} wt {weapon.Wt} range {weapon.MinRange}-{weapon.MaxRange}){(unit.WeaponBroken(content) ? " broken: -10 acc -5 power" : "")}";
         }
 
         var unitClass = content.Class(unit.Unit.ClassId);
@@ -1864,13 +1864,13 @@ public sealed class PlaySession
         var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
         lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = content.Class(unit.Unit.ClassId).Weapons
-            .Select(type => $"{type.ToString().ToLowerInvariant()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
+            .Select(type => $"{type.Label()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
         lines.Add($"  Ranks: {string.Join(", ", ranks)}");
         var arts = content.ArtsOf(unit.Unit).Select(a =>
-            $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.ToString().ToLowerInvariant()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
+            $"{Named(a.Ability.Name, a.Ability.Id)} ({a.Art.Weapon.Label()} {a.Art.Rank}, cost {a.Art.Cost}): {a.Ability.Text}").ToList();
         if (arts.Count > 0)
         {
-            lines.Add($"  Arts: {string.Join(", ", arts)}");
+            lines.Add($"  Techniques: {string.Join(", ", arts)}");
         }
 
         var held = content.AbilitiesOf(unit.Unit).Where(a => a.Effect is not CombatArtEffect).Select(a => $"{a.Name} ({a.Text.TrimEnd('.')})").ToList();
@@ -1901,7 +1901,7 @@ public sealed class PlaySession
 
         if (state.CantoReachOf(unit, content) is not null)
         {
-            lines.Add($"  Canto: {unit.Canto} movement left this phase");
+            lines.Add($"  Move again: {unit.Canto} movement left this phase");
         }
 
         if (unit.IsCaptain && state.OrdersOpen)
@@ -1973,7 +1973,7 @@ public sealed class PlaySession
         }
 
         var (hit, crit, critAvoid) = Rivalry.Modifiers(state, content, unit, countering);
-        return $"  rivalry: {names[unit.Id]} beside {string.Join(", ", rivals.Select(r => names[r.Id]))}: hit {hit:+0;-0;0} crit {crit:+0;-0;0} crit avoid {critAvoid:+0;-0;0}";
+        return $"  rivalry: {names[unit.Id]} beside {string.Join(", ", rivals.Select(r => names[r.Id]))}: acc {hit:+0;-0;0} crit {crit:+0;-0;0} crit evade {critAvoid:+0;-0;0}";
     }
 
     /// <summary>
@@ -1986,7 +1986,7 @@ public sealed class PlaySession
         names ??= UnitNames.None;
         var (enemy, player) = a.Side == Side.Enemy ? (a, b) : (b, a);
         return enemy.Grudge == player.Id && enemy.Side != player.Side
-            ? $"  sworn: {names[enemy.Id]} on {names[player.Id]}: {names[player.Id]} crit avoid {Grudges.SwornCritAvoid:+0;-0;0}"
+            ? $"  sworn: {names[enemy.Id]} on {names[player.Id]}: {names[player.Id]} crit evade {Grudges.SwornCritAvoid:+0;-0;0}"
             : null;
     }
 
@@ -2000,12 +2000,12 @@ public sealed class PlaySession
         names ??= UnitNames.None;
         if (Pincer.PinnedBy(state, attacker, target) is { } behindTarget)
         {
-            yield return $"  pincer: {names[target.Id]} pinned by {names[behindTarget.Id]}: {names[attacker.Id]} hit +{Pincer.Hit}";
+            yield return $"  pincer: {names[target.Id]} pinned by {names[behindTarget.Id]}: {names[attacker.Id]} acc +{Pincer.Hit}";
         }
 
         if (Pincer.PinnedBy(state, target, attacker) is { } behindAttacker)
         {
-            yield return $"  pincer: {names[attacker.Id]} pinned by {names[behindAttacker.Id]}: {names[target.Id]} hit +{Pincer.Hit}";
+            yield return $"  pincer: {names[attacker.Id]} pinned by {names[behindAttacker.Id]}: {names[target.Id]} acc +{Pincer.Hit}";
         }
     }
 
@@ -2068,7 +2068,7 @@ public sealed class PlaySession
         names ??= UnitNames.None;
         if (target.Braced)
         {
-            yield return $"  brace: {names[target.Id]} braced: {names[attacker.Id]} hit -{Brace.Hit}";
+            yield return $"  brace: {names[target.Id]} braced: {names[attacker.Id]} acc -{Brace.Hit}";
         }
     }
 
@@ -2082,12 +2082,12 @@ public sealed class PlaySession
         names ??= UnitNames.None;
         if (Signatures.OrderedBy(state, content, attacker) is { } teodor)
         {
-            yield return $"  signature: {names[teodor.Id]}'s orders: {names[attacker.Id]} hit +{Signatures.OrdersHit}";
+            yield return $"  signature: {names[teodor.Id]}'s orders: {names[attacker.Id]} acc +{Signatures.OrdersHit}";
         }
 
         if (Signatures.Watched(state, content, attacker))
         {
-            yield return $"  signature: {names[attacker.Id]} hit -{Signatures.WatchedHit} (ally within {Signatures.OrdersRadius})";
+            yield return $"  signature: {names[attacker.Id]} acc -{Signatures.WatchedHit} (ally within {Signatures.OrdersRadius})";
         }
 
         if (Signatures.Refuses(state, content, attacker, forecast.Attacker.DisplayedHit))
@@ -2331,7 +2331,7 @@ public sealed class PlaySession
                 var rose = string.Join(" ", Stats.All.Where(stat => l.Gains.Get(stat) > 0).Select(stat => stat.ToString().ToLowerInvariant() + " +1"));
                 return $"{names[l.UnitId]} reaches level {l.NewLevel}: {(rose.Length == 0 ? "nothing rose" : rose)}";
             case RankRaised k:
-                return $"{names[k.UnitId]} reaches rank {k.Rank} in {k.Type.ToString().ToLowerInvariant()}";
+                return $"{names[k.UnitId]} reaches rank {k.Rank} in {k.Type.Label()}";
             case MasteryEarned m:
                 return $"{names[m.UnitId]} masters the {ClassName(m.ClassId, content)} class and keeps {AbilityName(m.AbilityId, content)}";
             case UnitWaited w:
@@ -2354,8 +2354,8 @@ public sealed class PlaySession
                     : $"{Keepsake.Name(k.ItemId, k.FallenId, content)} was left at {k.At}";
             case Cantoed c:
                 return c.From == c.To
-                    ? $"{names[c.UnitId]} stays at {c.To} (canto)"
-                    : $"{names[c.UnitId]} cantos {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
+                    ? $"{names[c.UnitId]} stays at {c.To} (move again)"
+                    : $"{names[c.UnitId]} moves again {c.From} -> {c.To}" + (c.Path.Count > 1 ? " via " + string.Join(" ", c.Path.Take(c.Path.Count - 1)) : "");
             case OrderCalled o:
                 return $"{names[o.CaptainId]} calls {Orders.Word(o.Kind)} (radius {o.Radius}): " + (o.Reached.Count == 0 ? "it reaches no one" : string.Join(", ", o.Reached.Select(id => names[id]))) + $" ({o.Reached.Count} of {o.Alive})";
             case FellBack f:
@@ -2381,9 +2381,9 @@ public sealed class PlaySession
             case UnitRested r:
                 return $"{names[r.UnitId]} is spent from the strike and cannot move or act this phase";
             case HungerDrained h:
-                return $"{content.ItemName(h.ItemId)} drains {names[h.UnitId]} {h.Amount} (hp {h.HpAfter})" + (h.Starved ? "; it starves: half Mt, uses 1" : "");
+                return $"{content.ItemName(h.ItemId)} drains {names[h.UnitId]} {h.Amount} (hp {h.HpAfter})" + (h.Starved ? "; it starves: half power, uses 1" : "");
             case HungerFed h:
-                return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, Mt +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
+                return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
             case HeirloomTurned t:

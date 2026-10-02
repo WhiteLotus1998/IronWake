@@ -120,14 +120,14 @@ archer-1 waits
 enemy: move archer-2 5,7
 archer-2 moves 8,7 -> 5,7 via 7,7 6,7
 enemy: attack archer-2 captain
-forecast archer-2 -> captain: dmg 5 hit 68% crit 0%; counter: none
+forecast archer-2 -> captain: acc 68% dmg 5 crit 0%; counter: none
 archer-2 attacks captain
   archer-2 hits captain for 5 (hp 17)
   archer-2 hp 17, captain hp 17
 enemy: move brigand-1 4,7
 brigand-1 moves 6,5 -> 4,7 via 5,5 4,5 4,6
 enemy: attack brigand-1 captain
-forecast brigand-1 -> captain: dmg 10 hit 49% crit 0%; counter: dmg 11 x2 hit 90% crit 5%
+forecast brigand-1 -> captain: acc 49% dmg 10 crit 0%; counter: acc 90% dmg 11 x2 crit 5%
 brigand-1 attacks captain
   brigand-1 hits captain for 10 (hp 7)
   captain hits brigand-1 for 11 (hp 11)
@@ -186,7 +186,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren brigand-1
-forecast wren -> brigand-1: dmg 10 x2 hit 88% crit 4%; counter: dmg 11 hit 51% crit 0%
+forecast wren -> brigand-1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
 wren attacks brigand-1
   wren hits brigand-1 for 10 (hp 1)
   brigand-1 misses wren
@@ -238,7 +238,7 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              3,7    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack captain archer-2
-forecast captain -> archer-2: dmg 11 hit 87% crit 4%; counter: none
+forecast captain -> archer-2: acc 87% dmg 11 crit 4%; counter: none
 captain attacks archer-2
   captain hits archer-2 for 11 (hp 6)
   captain hp 7, archer-2 hp 6
@@ -267,7 +267,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 threat on captain at 5,8 (Plain): no enemy can strike it next phase
 > threat wren
 threat on wren at 3,7 (Plain):
-  archer-2 from 5,7 with Iron Bow (slot 1): dmg 6 hit 70% crit 20%; counter: none
+  archer-2 from 5,7 with Iron Bow (slot 1): acc 70% dmg 6 crit 20%; counter: none
   if all land: 6 against 20 hp
 > end
 -- player phase ends, turn 2 --
@@ -275,8 +275,8 @@ threat on wren at 3,7 (Plain):
 enemy: wait archer-1
 archer-1 waits
 enemy: attack archer-2 wren
-forecast archer-2 -> wren: dmg 6 hit 70% crit 20%; counter: none
-  sworn: archer-2 on wren: wren crit avoid -20
+forecast archer-2 -> wren: acc 70% dmg 6 crit 20%; counter: none
+  sworn: archer-2 on wren: wren crit evade -20
   grudge: archer-2 strikes sworn wren (score 15.9); best alternative captain (score 13.4)
 archer-2 attacks wren
   archer-2 hits wren for 6 (hp 14)
@@ -331,8 +331,8 @@ a  soldier-1        Soldier L1 pikeman         9,1    hp 20/20  Plain  group mil
 B  wren             Wren L1 cadet              4,7    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack wren archer-2
-forecast wren -> archer-2: dmg 10 hit 85% crit 3%; counter: none
-  sworn: archer-2 on wren: wren crit avoid -20
+forecast wren -> archer-2: acc 85% dmg 10 crit 3%; counter: none
+  sworn: archer-2 on wren: wren crit evade -20
 wren attacks archer-2
   wren hits archer-2 for 10 (hp 0)
   wren hp 14, archer-2 hp 0
@@ -613,7 +613,7 @@ B  wren             Wren L1 cadet              5,2    hp 20/20  Plain  done
 enemy: move archer-1 8,2
 archer-1 moves 10,2 -> 8,2 via 9,2
 enemy: attack archer-1 captain
-forecast archer-1 -> captain: dmg 3 hit 41% crit 0%; counter: none
+forecast archer-1 -> captain: acc 41% dmg 3 crit 0%; counter: none
 archer-1 attacks captain
   archer-1 misses captain
   archer-1 hp 17, captain hp 17
@@ -624,7 +624,7 @@ mill_bandit-1 waits
 enemy: move soldier-1 6,1
 soldier-1 moves 9,1 -> 6,1 via 8,1 7,1
 enemy: attack soldier-1 captain
-forecast soldier-1 -> captain: dmg 6 hit 34% crit 0%; counter: dmg 9 hit 87% crit 4%
+forecast soldier-1 -> captain: acc 34% dmg 6 crit 0%; counter: acc 87% dmg 9 crit 4%
 soldier-1 attacks captain
   soldier-1 hits captain for 6 (hp 11)
   captain hits soldier-1 for 9 (hp 11)
@@ -653,7 +653,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         6,1    hp 11/20  Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,2    hp 20/20  Plain
 > attack captain soldier-1
-forecast captain -> soldier-1: dmg 9 hit 87% crit 4%; counter: dmg 6 hit 34% crit 0%
+forecast captain -> soldier-1: acc 87% dmg 9 crit 4%; counter: acc 34% dmg 6 crit 0%
 captain attacks soldier-1
   captain hits soldier-1 for 9 (hp 2)
   soldier-1 hits captain for 6 (hp 9)
@@ -698,7 +698,7 @@ d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mil
 a  soldier-1        Soldier L1 pikeman         6,1    hp 2/20   Plain  group mill, guard, awake
 B  wren             Wren L1 cadet              5,1    hp 20/20  Plain
 > attack wren soldier-1
-forecast wren -> soldier-1: dmg 8 hit 85% crit 3%; counter: dmg 9 hit 63% crit 0%
+forecast wren -> soldier-1: acc 85% dmg 8 crit 3%; counter: acc 63% dmg 9 crit 0%
 wren attacks soldier-1
   wren hits soldier-1 for 8 (hp 0)
   wren hp 20, soldier-1 hp 0
@@ -725,8 +725,8 @@ d  mill_bandit-1    Mill Bandit L2 reaver      7,1    hp 24/24  Plain  group mil
 B  wren             Wren L1 cadet              5,1    hp 20/20  Plain  done
 > threat wren
 threat on wren at 5,1 (Plain):
-  archer-1 from 6,0 with Iron Bow (slot 1): dmg 6 hit 70% crit 20%; counter: none
-  mill_bandit-1 from 6,1 with Hatchet (slot 1): dmg 10 hit 85% crit 23%; counter: dmg 9 hit 85% crit 2%
+  archer-1 from 6,0 with Iron Bow (slot 1): acc 70% dmg 6 crit 20%; counter: none
+  mill_bandit-1 from 6,1 with Hatchet (slot 1): acc 85% dmg 10 crit 23%; counter: acc 85% dmg 9 crit 2%
   if all land: 16 against 20 hp
 > threat captain
 threat on captain at 6,2 (Fort): no enemy can strike it next phase
@@ -736,8 +736,8 @@ threat on captain at 6,2 (Fort): no enemy can strike it next phase
 enemy: move archer-1 6,0
 archer-1 moves 8,2 -> 6,0 via 7,2 7,1 7,0
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 70% crit 20%; counter: none
-  sworn: archer-1 on wren: wren crit avoid -20
+forecast archer-1 -> wren: acc 70% dmg 6 crit 20%; counter: none
+  sworn: archer-1 on wren: wren crit evade -20
   grudge: archer-1 strikes sworn wren (score 15.9); best alternative captain (score 11.2)
 archer-1 attacks wren
   archer-1 misses wren
@@ -745,8 +745,8 @@ archer-1 attacks wren
 enemy: move mill_bandit-1 6,1
 mill_bandit-1 moves 7,1 -> 6,1
 enemy: attack mill_bandit-1 wren
-forecast mill_bandit-1 -> wren: dmg 10 hit 85% crit 23%; counter: dmg 9 hit 85% crit 2%
-  sworn: mill_bandit-1 on wren: wren crit avoid -20
+forecast mill_bandit-1 -> wren: acc 85% dmg 10 crit 23%; counter: acc 85% dmg 9 crit 2%
+  sworn: mill_bandit-1 on wren: wren crit evade -20
   grudge: mill_bandit-1 strikes sworn wren (score 8.4); best alternative captain (score -0.1)
 mill_bandit-1 attacks wren
   mill_bandit-1 hits wren for 10 (hp 10)
@@ -776,7 +776,7 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 13/22  Fort (heals 20 p
 d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 15/24  Plain  group mill, guard, awake, sworn: wren
 B  wren             Wren L2 cadet              5,1    hp 11/21  Plain
 > attack captain mill_bandit-1
-forecast captain -> mill_bandit-1: dmg 10 hit 87% crit 3%; counter: dmg 7 hit 62% crit 2%
+forecast captain -> mill_bandit-1: acc 87% dmg 10 crit 3%; counter: acc 62% dmg 7 crit 2%
 captain attacks mill_bandit-1
   captain hits mill_bandit-1 for 10 (hp 5)
   mill_bandit-1 hits captain for 7 (hp 6)
@@ -800,8 +800,8 @@ A  captain          Alder Fenn L1 cadet        6,2    hp 6/22   Fort (heals 20 p
 d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mill, guard, awake, sworn: wren
 B  wren             Wren L2 cadet              5,1    hp 11/21  Plain
 > attack wren mill_bandit-1
-forecast wren -> mill_bandit-1: dmg 9 hit 85% crit 2%; counter: dmg 10 hit 85% crit 23%
-  sworn: mill_bandit-1 on wren: wren crit avoid -20
+forecast wren -> mill_bandit-1: acc 85% dmg 9 crit 2%; counter: acc 85% dmg 10 crit 23%
+  sworn: mill_bandit-1 on wren: wren crit evade -20
 wren attacks mill_bandit-1
   wren misses mill_bandit-1
   mill_bandit-1 hits wren for 10 (hp 1)
@@ -825,22 +825,22 @@ d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 5/24   Plain  group mil
 B  wren             Wren L2 cadet              5,1    hp 1/21   Plain  done
 > threat wren
 threat on wren at 5,1 (Plain):
-  archer-1 from 6,0 with Iron Bow (slot 1): dmg 6 hit 70% crit 20%; counter: none
-  mill_bandit-1 from 6,1 with Hatchet (slot 1): dmg 10 hit 85% crit 23%; counter: dmg 9 hit 85% crit 2%
+  archer-1 from 6,0 with Iron Bow (slot 1): acc 70% dmg 6 crit 20%; counter: none
+  mill_bandit-1 from 6,1 with Hatchet (slot 1): acc 85% dmg 10 crit 23%; counter: acc 85% dmg 9 crit 2%
   if all land: 16 against 1 hp
 > end
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 70% crit 20%; counter: none
-  sworn: archer-1 on wren: wren crit avoid -20
+forecast archer-1 -> wren: acc 70% dmg 6 crit 20%; counter: none
+  sworn: archer-1 on wren: wren crit evade -20
   grudge: archer-1 strikes sworn wren (score 110.7); best alternative captain (score 11.2)
 archer-1 attacks wren
   archer-1 misses wren
   archer-1 hp 17, wren hp 1
 enemy: attack mill_bandit-1 wren
-forecast mill_bandit-1 -> wren: dmg 10 hit 85% crit 23%; counter: dmg 9 hit 85% crit 2%
-  sworn: mill_bandit-1 on wren: wren crit avoid -20
+forecast mill_bandit-1 -> wren: acc 85% dmg 10 crit 23%; counter: acc 85% dmg 9 crit 2%
+  sworn: mill_bandit-1 on wren: wren crit evade -20
   grudge: mill_bandit-1 strikes sworn wren (score 98.7); best alternative captain (score 101.5)
 mill_bandit-1 attacks wren
   mill_bandit-1 hits wren for 10 (hp 0)
@@ -907,7 +907,7 @@ A  captain          Alder Fenn L1 cadet        7,1    hp 13/22  Plain  captain
 d  mill_bandit-1    Mill Bandit L2 reaver      6,1    hp 15/24  Plain  group mill, guard, awake, sworn: wren
 B  wren             Wren L2 cadet              5,1    hp 11/21  Plain
 > attack captain mill_bandit-1
-forecast captain -> mill_bandit-1: dmg 10 hit 87% crit 3%; counter: dmg 9 hit 83% crit 2%
+forecast captain -> mill_bandit-1: acc 87% dmg 10 crit 3%; counter: acc 83% dmg 9 crit 2%
 captain attacks mill_bandit-1
   captain hits mill_bandit-1 for 10 (hp 5)
   mill_bandit-1 hits captain for 9 (hp 4)
@@ -972,15 +972,15 @@ B  wren             Wren L2 cadet              6,2    hp 11/21  Fort (heals 20 p
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 4 hit 43% crit 20%; counter: none
-  sworn: archer-1 on wren: wren crit avoid -20
+forecast archer-1 -> wren: acc 43% dmg 4 crit 20%; counter: none
+  sworn: archer-1 on wren: wren crit evade -20
   grudge: archer-1 strikes sworn wren (score 12.4); best alternative captain (score 112.7)
 archer-1 attacks wren
   archer-1 misses wren
   archer-1 hp 17, wren hp 11
 enemy: attack mill_bandit-1 wren
-forecast mill_bandit-1 -> wren: dmg 8 hit 63% crit 23%; counter: dmg 9 hit 85% crit 2%
-  sworn: mill_bandit-1 on wren: wren crit avoid -20
+forecast mill_bandit-1 -> wren: acc 63% dmg 8 crit 23%; counter: acc 85% dmg 9 crit 2%
+  sworn: mill_bandit-1 on wren: wren crit evade -20
   grudge: mill_bandit-1 strikes sworn wren (score 4.9); best alternative captain (score 101.2)
 mill_bandit-1 attacks wren
   mill_bandit-1 hits wren for 8 (hp 3)
@@ -1027,7 +1027,7 @@ b  archer-1         Archer L1 bowman           6,0    hp 17/17  Plain  group mil
 A  captain          Alder Fenn L1 cadet        7,0    hp 4/22   Plain  captain
 B  wren             Wren L2 cadet              6,2    hp 7/21   Fort (heals 20 percent, 4 hp)
 > attack captain archer-1
-forecast captain -> archer-1: dmg 11 hit 87% crit 4%; counter: none
+forecast captain -> archer-1: acc 87% dmg 11 crit 4%; counter: none
 captain attacks archer-1
   captain hits archer-1 for 11 (hp 6)
   captain hp 4, archer-1 hp 6
@@ -1067,8 +1067,8 @@ b  archer-1         Archer L1 bowman           6,0    hp 6/17   Plain  group mil
 A  captain          Alder Fenn L1 cadet        7,0    hp 4/22   Plain  captain  done
 B  wren             Wren L2 cadet              6,1    hp 7/21   Plain
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
-  sworn: archer-1 on wren: wren crit avoid -20
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
+  sworn: archer-1 on wren: wren crit evade -20
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 0)
   wren hp 7, archer-1 hp 0

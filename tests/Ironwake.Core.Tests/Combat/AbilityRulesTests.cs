@@ -78,7 +78,7 @@ public class AbilityRulesTests
     public void ACombatModifierMovesCritAndCritAvoid()
     {
         // Wren's crit (6 + 5) / 2 = 5 less the brigand's Lck 1: 4. The brigand's crit
-        // (3 + 1) / 2 = 2 less Wren's Lck 5 clamps to 0; a crit avoid of -10 makes it 7.
+        // (3 + 1) / 2 = 2 less Wren's Lck 5 clamps to 0; a crit evade of -10 makes it 7.
         var wren = WrenWith(Modifier(AgainstAxes, crit: 10, critAvoid: -10));
 
         Assert.Equal(14, Core.Combat.CritChance(wren, BrigandInForest()));

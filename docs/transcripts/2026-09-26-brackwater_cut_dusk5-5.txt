@@ -588,7 +588,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 9,4
 brigand-1 moves 5,4 -> 9,4 via 6,4 7,4 8,4
 enemy: attack brigand-1 rook
-forecast brigand-1 -> rook: dmg 15 hit 51% crit 0%; counter: dmg 9 x2 hit 82% crit 4%
+forecast brigand-1 -> rook: acc 51% dmg 15 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
 brigand-1 attacks rook
   brigand-1 hits rook for 15 (hp 2)
   rook hits brigand-1 for 9 (hp 14)
@@ -919,7 +919,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 enemy: move archer-1 10,3
 archer-1 moves 7,4 -> 10,3 via 7,3 8,3 9,3
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 20)
   archer-1 hp 17, dunstan hp 20
@@ -929,7 +929,7 @@ enemy: something in the dark acts
 enemy: move brigand-1 11,3
 brigand-1 moves 9,4 -> 11,3 via 9,3 10,3
 enemy: attack brigand-1 dunstan
-forecast brigand-1 -> dunstan: dmg 9 hit 73% crit 0%; counter: dmg 11 hit 77% crit 1%
+forecast brigand-1 -> dunstan: acc 73% dmg 9 crit 0%; counter: acc 77% dmg 11 crit 1%
 brigand-1 attacks dunstan
   brigand-1 misses dunstan
   dunstan hits brigand-1 for 11 (hp 0)
@@ -943,7 +943,7 @@ enemy: something in the dark acts
 enemy: move rider-1 11,3
 rider-1 moves 9,2 -> 11,3 via 10,2 10,3
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 hits dunstan for 6 (hp 14)
   dunstan misses rider-1
@@ -1226,7 +1226,7 @@ exits (>): 19,3 19,4 19,5 19,6 19,7 19,8 (a unit on one may exit as its action; 
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
 enemy: attack archer-1 dunstan
-forecast archer-1 -> dunstan: dmg 3 hit 88% crit 3%; counter: none
+forecast archer-1 -> dunstan: acc 88% dmg 3 crit 3%; counter: none
 archer-1 attacks dunstan
   archer-1 hits dunstan for 3 (hp 11)
   archer-1 hp 17, dunstan hp 11
@@ -1235,7 +1235,7 @@ enemy: something in the dark acts
 enemy: something in the dark acts
 enemy: something in the dark acts
 enemy: attack rider-1 dunstan
-forecast rider-1 -> dunstan: dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+forecast rider-1 -> dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
 rider-1 attacks dunstan
   rider-1 hits dunstan for 6 (hp 5)
   dunstan hits rider-1 for 10 (hp 11)
@@ -1428,10 +1428,10 @@ escaped: rook wren
 > show dunstan
 dunstan: Dunstan, Bulwark L1, at 12,3 on Plain
   hp 5/23  str 7 mag 0 dex 3 spd 2 lck 2 def 7 res 1 cha 2  mov 4 (armored)
-  weapon: Iron Lance (mt 6 hit 70 crit 0 wt 6 range 1-1)
+  weapon: Iron Lance (acc 70 power 6 crit 0 wt 6 range 1-1)
   items: 1: Iron Lance x37
   ranks: lance E (11), axe E (0)
-  mastery: Reasonbreaker (5 of 12 combats)
+  mastery: Lore Sense (5 of 12 combats)
   targets from here: rider-1
 > threat dunstan from 14,1
 threat on dunstan at 14,1 (Plain): no enemy can strike it next phase
@@ -1439,7 +1439,7 @@ threat on dunstan at 14,1 (Plain): no enemy can strike it next phase
   and whatever is in the dark (?), unpriced
 > threat dunstan from 13,1
 threat on dunstan at 13,1 (Plain):
-  rider-1 from 13,2 with Iron Lance (slot 1): dmg 6 hit 82% crit 1%; counter: dmg 10 hit 73% crit 0%
+  rider-1 from 13,2 with Iron Lance (slot 1): acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
   if all land: 6 against 5 hp
   and whatever is in the dark (?), unpriced
 > move dunstan 14,1

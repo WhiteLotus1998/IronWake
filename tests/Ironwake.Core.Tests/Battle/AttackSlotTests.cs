@@ -102,7 +102,7 @@ public class AttackSlotTests
         var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve");
         var state = Start(roster: ValueList<Unit>.Of(Hale, mira), map: Yard.Replace("recruit:wren", "recruit"));
         Assert.DoesNotContain("unarmed", Ironwake.Core.MapRenderer.Render(state, Starter));
-        Assert.Equal("Radiance (mt 6 hit 85 crit 0 wt 4 range 1-2)", Ironwake.Cli.PlaySession.WeaponLine(state.Find("mira")!, Starter));
+        Assert.Equal("Radiance (acc 85 power 6 crit 0 wt 4 range 1-2)", Ironwake.Cli.PlaySession.WeaponLine(state.Find("mira")!, Starter));
 
         var spent = state.WithUnit(state.Find("mira")! with { Unit = state.Find("mira")!.Unit.WithUses(0) });
         var board = Ironwake.Core.MapRenderer.Render(spent, Starter);

@@ -83,8 +83,8 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "show captain\nshow wren\n");
 
-        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n  Arts: Cleave (sword E, cost 2): +5 Mt and +5 Wt; two extra uses, hit or miss.\n", output);
-        Assert.DoesNotContain("  Arts: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
+        Assert.Contains("  Ranks: sword E (0), lance E (0), axe E (0)\n  Techniques: Cleave (sword E, cost 2): +5 Power and +5 Wt; two extra uses, hit or miss.\n", output);
+        Assert.DoesNotContain("  Techniques: ", output[output.IndexOf("> show wren", StringComparison.Ordinal)..]);
     }
 
     [Fact]
@@ -97,9 +97,9 @@ public class CombatArtCliTests : IDisposable
 
         Assert.Equal(0, exit);
         Assert.Contains(
-            "> forecast captain brigand-1\nForecast Alder Fenn -> Brigand: dmg 11 x2 hit 90% crit 5%; counter: dmg 10 hit 49% crit 0%\n"
-            + "> attack captain brigand-1 art cleave\nForecast Alder Fenn -> Brigand: dmg 16 hit 90% crit 5%; counter: dmg 10 hit 56% crit 0%\n"
-            + "  Art Cleave: Iron Sword at mt 10 hit 75 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
+            "> forecast captain brigand-1\nForecast Alder Fenn -> Brigand: acc 90% dmg 11 x2 crit 5%; counter: acc 49% dmg 10 crit 0%\n"
+            + "> attack captain brigand-1 art cleave\nForecast Alder Fenn -> Brigand: acc 90% dmg 16 crit 5%; counter: acc 56% dmg 10 crit 0%\n"
+            + "  Technique Cleave: Iron Sword at acc 75 power 10 crit 0 wt 10 range 1-1; spends up to 3 of 40 uses, 2 of them hit or miss\n"
             + "Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\n",
             output);
         Assert.EndsWith("Battle won: rout\n", output);
@@ -112,8 +112,8 @@ public class CombatArtCliTests : IDisposable
     {
         var output = Play(out _, "move captain 2,6\nmove wren 3,7\nend\nforecast wren brigand-1 art cleave\nattack captain brigand-1 art sunder\nattack captain brigand-1 art\n");
 
-        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: Wren knows no art 'cleave'\n", output);
-        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: Alder Fenn knows no art 'sunder'\n", output);
+        Assert.Contains("> forecast wren brigand-1 art cleave\nERROR: Wren knows no technique 'cleave'\n", output);
+        Assert.Contains("> attack captain brigand-1 art sunder\nERROR: Alder Fenn knows no technique 'sunder'\n", output);
         Assert.Contains("> attack captain brigand-1 art\nERROR: Usage: attack <unit> <target> [slot|weapon] [art <id>]\n", output);
     }
 
@@ -133,7 +133,7 @@ public class CombatArtCliTests : IDisposable
             var output = Run(out _, "play", "old_mill_road", "--seed", "11", "--protocol", "--script", path, "--content", _content);
 
             Assert.Contains("\"scheme\":\"twoRollAverage\",\"artCost\":2}", output);
-            Assert.Contains("\\n  Art Cleave: Iron Sword at mt 10", output);
+            Assert.Contains("\\n  Technique Cleave: Iron Sword at acc ", output);
             Assert.Contains("{\"type\":\"artDeclared\",\"unit\":\"captain\",\"art\":\"cleave\",\"item\":\"iron_sword\",\"cost\":2,\"text\":\"Alder Fenn declares Cleave with Iron Sword, spending 2 extra uses\"}", output);
         }
         finally

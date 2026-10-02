@@ -136,7 +136,7 @@ B  wren             wren L1 cadet              1,8    hp 20/20  Plain
 > show captain
 captain: captain, Cadet L1, at 2,6 on Plain
   hp 12/22  str 8 mag 0 dex 7 spd 8 lck 6 def 5 res 2 cha 9
-  weapon: Iron Sword (mt 5 hit 90 crit 0 wt 5 range 1-1)
+  weapon: Iron Sword (acc 90 power 5 crit 0 wt 5 range 1-1)
   items: 0: Iron Sword x38, 1: Field Dressing x3
   targets from here: none
 > item captain 1

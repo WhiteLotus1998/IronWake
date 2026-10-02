@@ -824,7 +824,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell archer-2
-forecast pell -> archer-2 with Cinder: dmg 12 hit 86% crit 2%; counter: none
+forecast pell -> archer-2 with Cinder: acc 86% dmg 12 crit 2%; counter: none
 pell attacks archer-2
   pell hits archer-2 for 12 (hp 5)
   pell hp 16, archer-2 hp 5
@@ -882,7 +882,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack wren archer-2
-forecast wren -> archer-2: dmg 9 hit 54% crit 3%; counter: none
+forecast wren -> archer-2: acc 54% dmg 9 crit 3%; counter: none
 wren attacks archer-2
   wren misses archer-2
   wren hp 20, archer-2 hp 5
@@ -939,7 +939,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack captain archer-2
-forecast captain -> archer-2: dmg 10 hit 58% crit 4%; counter: none
+forecast captain -> archer-2: acc 58% dmg 10 crit 4%; counter: none
 captain attacks archer-2
   captain hits archer-2 for 10 (hp 0)
   captain hp 22, archer-2 hp 0
@@ -996,7 +996,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 20/20  Plain  done
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack teodor toll_brigand-1
-forecast teodor -> toll_brigand-1: dmg 11 hit 47% crit 2%; counter: dmg 10 hit 54% crit 0%
+forecast teodor -> toll_brigand-1: acc 47% dmg 11 crit 2%; counter: acc 54% dmg 10 crit 0%
 teodor attacks toll_brigand-1
   teodor hits toll_brigand-1 for 11 (hp 12)
   toll_brigand-1 hits teodor for 10 (hp 11)
@@ -1034,7 +1034,7 @@ archer-1 waits
 enemy: wait bandit_leader-1
 bandit_leader-1 waits
 enemy: attack toll_brigand-1 wren
-forecast toll_brigand-1 -> wren: dmg 11 hit 41% crit 0%; counter: none
+forecast toll_brigand-1 -> wren: acc 41% dmg 11 crit 0%; counter: none
 toll_brigand-1 attacks wren
   toll_brigand-1 hits wren for 11 (hp 9)
   toll_brigand-1 hp 12, wren hp 9
@@ -1068,7 +1068,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 9/20   Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell toll_brigand-1
-forecast pell -> toll_brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: dmg 12 hit 26% crit 0%
+forecast pell -> toll_brigand-1 with Cinder: acc 87% dmg 13 crit 3%; counter: acc 26% dmg 12 crit 0%
 pell attacks toll_brigand-1
   pell hits toll_brigand-1 for 13 (hp 0)
   pell hp 16, toll_brigand-1 hp 0
@@ -1288,7 +1288,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack teodor toll_warden-1
-forecast teodor -> toll_warden-1: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+forecast teodor -> toll_warden-1: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 teodor attacks toll_warden-1
   teodor hits toll_warden-1 for 10 (hp 11)
   toll_warden-1 hits teodor for 7 (hp 14)
@@ -1373,7 +1373,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 9/20   Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell toll_brigand-1
-forecast pell -> toll_brigand-1 with Cinder: dmg 13 hit 87% crit 3%; counter: dmg 12 hit 26% crit 0%
+forecast pell -> toll_brigand-1 with Cinder: acc 87% dmg 13 crit 3%; counter: acc 26% dmg 12 crit 0%
 pell attacks toll_brigand-1
   pell hits toll_brigand-1 for 13 (hp 0)
   pell hp 16, toll_brigand-1 hp 0
@@ -1593,7 +1593,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack teodor toll_warden-1
-forecast teodor -> toll_warden-1: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+forecast teodor -> toll_warden-1: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 teodor attacks toll_warden-1
   teodor hits toll_warden-1 for 10 (hp 11)
   toll_warden-1 hits teodor for 7 (hp 14)
@@ -1679,7 +1679,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell toll_warden-1
-forecast pell -> toll_warden-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 9 hit 37% crit 0%
+forecast pell -> toll_warden-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 37% dmg 9 crit 0%
 pell attacks toll_warden-1
   pell hits toll_warden-1 for 12 (hp 9)
   toll_warden-1 misses pell
@@ -1736,7 +1736,7 @@ b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 9/21   Plain  group kee
 B  wren             Wren L1 cadet              5,4    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack teodor toll_warden-1
-forecast teodor -> toll_warden-1: dmg 10 hit 76% crit 1%; counter: dmg 7 hit 67% crit 1%
+forecast teodor -> toll_warden-1: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 teodor attacks toll_warden-1
   teodor hits toll_warden-1 for 10 (hp 0)
   teodor hp 21, toll_warden-1 hp 0
@@ -1869,12 +1869,12 @@ cover: a unit beside an ally may cover it; the first strike aimed at the ally wh
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
 enemy: attack archer-1 teodor
-forecast archer-1 -> teodor: dmg 5 hit 81% crit 3%; counter: none
+forecast archer-1 -> teodor: acc 81% dmg 5 crit 3%; counter: none
 archer-1 attacks teodor
   archer-1 hits teodor for 5 (hp 16)
   archer-1 hp 17, teodor hp 16
 enemy: attack bandit_leader-1 teodor 2
-forecast bandit_leader-1 -> teodor: dmg 11 hit 58% crit 1%; counter: none
+forecast bandit_leader-1 -> teodor: acc 58% dmg 11 crit 1%; counter: none
 bandit_leader-1 equips Toll Axe
 bandit_leader-1 attacks teodor
   bandit_leader-1 hits teodor for 11 (hp 5)
@@ -1882,7 +1882,7 @@ bandit_leader-1 attacks teodor
 enemy: move rider-1 7,4
 rider-1 moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 pell
-forecast rider-1 -> pell: dmg 10 hit 47% crit 0%; counter with Cinder: dmg 12 hit 99% crit 2%
+forecast rider-1 -> pell: acc 47% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 12 crit 2%
 rider-1 attacks pell
   rider-1 hits pell for 10 (hp 6)
   pell hits rider-1 for 12 (hp 9)
@@ -1915,7 +1915,7 @@ C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
 B  wren             Wren L1 cadet              5,4    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell rider-1
-forecast pell -> rider-1 with Cinder: dmg 12 hit 99% crit 2%; counter: dmg 10 hit 47% crit 0%
+forecast pell -> rider-1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 47% dmg 10 crit 0%
   counter: lethal to pell (10 against 6 hp)
 pell attacks rider-1
   pell hits rider-1 for 12 (hp 0)
@@ -1970,7 +1970,7 @@ C  teodor           Teodor L1 pikeman          6,3    hp 5/21   Plain
 B  wren             Wren L1 cadet              6,2    hp 19/20  Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren misses archer-1
   wren hp 19, archer-1 hp 17
@@ -2099,7 +2099,7 @@ cover: a unit beside an ally may cover it; the first strike aimed at the ally wh
 enemy: wait archer-1
 archer-1 waits
 enemy: attack bandit_leader-1 wren 2
-forecast bandit_leader-1 -> wren with Steel Axe: dmg 17 hit 63% crit 0%; counter: dmg 8 x2 hit 89% crit 2%
+forecast bandit_leader-1 -> wren with Steel Axe: acc 63% dmg 17 crit 0%; counter: acc 89% dmg 8 x2 crit 2%
 bandit_leader-1 equips Steel Axe
 bandit_leader-1 attacks wren
   bandit_leader-1 hits wren for 17 (hp 2)
@@ -2157,7 +2157,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 15/21  Plain
 B  wren             Wren L1 cadet              6,2    hp 2/20   Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack pell bandit_leader-1
-forecast pell -> bandit_leader-1 with Cinder: dmg 13 hit 99% crit 1%; counter: none
+forecast pell -> bandit_leader-1 with Cinder: acc 99% dmg 13 crit 1%; counter: none
 pell attacks bandit_leader-1
   pell crits bandit_leader-1 for 39 (hp 0)
   pell hp 6, bandit_leader-1 hp 0
@@ -2185,7 +2185,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 15/21  Plain
 B  wren             Wren L1 cadet              6,2    hp 2/20   Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 7)
   wren hp 2, archer-1 hp 7
@@ -2259,7 +2259,7 @@ B  wren             Wren L1 cadet              6,2    hp 2/20   Plain  done
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > threat pell
 threat on pell at 6,3 (Plain):
-  archer-1 from 6,1 with Iron Bow (slot 1): covered by captain, strikes captain on 6,3, dmg 5 hit 70% crit 0%; counter: none
+  archer-1 from 6,1 with Iron Bow (slot 1): covered by captain, strikes captain on 6,3, acc 70% dmg 5 crit 0%; counter: none
   if all land: the first strike swaps them; captain takes up to 5 against 22 hp on 6,3, pell lands on 6,4, and any strike after it is unpriced
 > move teodor 5,4
 teodor moves 5,4 -> 5,4
@@ -2312,7 +2312,7 @@ cover: a unit beside an ally may cover it; the first strike aimed at the ally wh
 -- enemy phase, turn 8 --
 enemy: attack archer-1 pell
   cover: captain takes the strike aimed at pell
-forecast archer-1 -> captain: dmg 5 hit 70% crit 0%; counter: none
+forecast archer-1 -> captain: acc 70% dmg 5 crit 0%; counter: none
 captain covers pell: steps onto 6,3, pell to 6,4; archer-1's strike would have killed pell; captain cannot counter
 archer-1 attacks captain
   archer-1 misses captain
@@ -2342,7 +2342,7 @@ C  teodor           Teodor L1 pikeman          5,4    hp 15/21  Plain
 B  wren             Wren L1 cadet              6,2    hp 2/20   Plain
 cover: a unit beside an ally may cover it; the first strike aimed at the ally while they stand side by side swaps them and strikes the coverer on the ally's tile
 > attack wren archer-1
-forecast wren -> archer-1: dmg 10 hit 85% crit 3%; counter: none
+forecast wren -> archer-1: acc 85% dmg 10 crit 3%; counter: none
 wren attacks archer-1
   wren hits archer-1 for 10 (hp 0)
   wren hp 2, archer-1 hp 0

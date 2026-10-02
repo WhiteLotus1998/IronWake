@@ -68,7 +68,7 @@ public class CertificationTrialCliTests
         var output = Run(out var exit, "play", Sample("outrider_trial"), "--seed", "12", "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.Contains("Alder Fenn may Canto up to 3 movement", output);
+        Assert.Contains("Alder Fenn may move again up to 3 movement", output);
         Assert.EndsWith("Battle won: seize; no recall is left\nBattle won: seize\nPromotion: Alder Fenn earned Outrider\n", output);
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }

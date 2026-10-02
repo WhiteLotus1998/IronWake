@@ -292,7 +292,7 @@ public class BraceTests
         var state = result.Next;
 
         Assert.Equal(new UnitWaited("hale", Braced: true), Assert.Single(result.Events));
-        Assert.Equal(new[] { "  brace: hale braced: brigand-1 hit -15" }, PlaySession.BraceLines(state.Find("brigand-1")!, state.Find("hale")!).ToList());
+        Assert.Equal(new[] { "  brace: hale braced: brigand-1 acc -15" }, PlaySession.BraceLines(state.Find("brigand-1")!, state.Find("hale")!).ToList());
         Assert.Empty(PlaySession.BraceLines(Start().Find("brigand-1")!, Start().Find("hale")!));
     }
 
@@ -306,7 +306,7 @@ public class BraceTests
         var plain = Queries.Threats(state, Starter, hale, hale.At)!.Single();
 
         Assert.NotNull(text);
-        Assert.StartsWith("If hale waits here and braces (hit -15):\n", text);
+        Assert.StartsWith("If hale waits here and braces (acc -15):\n", text);
         var after = state.WithUnit(hale with { Braced = true });
         var braced = Queries.Threats(after, Starter, after.Find("hale")!, hale.At)!.Single();
         Assert.Equal(plain.Forecast.Attacker.HitChance - Brace.Hit, braced.Forecast.Attacker.HitChance);

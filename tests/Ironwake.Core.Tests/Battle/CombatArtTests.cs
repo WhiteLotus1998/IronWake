@@ -162,7 +162,7 @@ public class CombatArtTests
         var rejection = Refused(state, new Attack("hale", "brigand-1", null, "sunder"));
 
         Assert.Equal(RejectionReason.NoSuchArt, rejection.Reason);
-        Assert.Equal("hale knows no art 'sunder'", rejection.Message);
+        Assert.Equal("hale knows no technique 'sunder'", rejection.Message);
         Assert.Equal(RejectionReason.NoSuchArt, Refused(Beside(), new Attack("hale", "brigand-1", null, "vigilance")).Reason);
     }
 
@@ -172,7 +172,7 @@ public class CombatArtTests
         var rejection = Refused(Beside(), new Attack("hale", "brigand-1", null, "pike"));
 
         Assert.Equal(RejectionReason.ArtRefused, rejection.Reason);
-        Assert.Equal("hale cannot use pike: pike is a lance art and Iron Sword is a sword", rejection.Message);
+        Assert.Equal("hale cannot use pike: pike is a lance technique and Iron Sword is a sword", rejection.Message);
     }
 
     [Fact]
@@ -194,7 +194,7 @@ public class CombatArtTests
         var rejection = Refused(state, new Attack("hale", "brigand-1", null, "sunder"));
 
         Assert.Equal(RejectionReason.ArtRefused, rejection.Reason);
-        Assert.Equal("hale cannot use sunder: Iron Sword is broken and cannot pay for an art", rejection.Message);
+        Assert.Equal("hale cannot use sunder: Iron Sword is broken and cannot pay for a technique", rejection.Message);
         Assert.True(Try(state, new Attack("hale", "brigand-1")).Accepted);
     }
 

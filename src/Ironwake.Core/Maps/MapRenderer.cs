@@ -31,10 +31,10 @@ public static class MapRenderer
     public const string ChestRule = "a unit on a chest or beside it opens it as its action, unless an enemy stands on it; what fits goes to its pack, the rest to the wagon, kept only if the map is won";
 
     /// <summary>The legend a <c>shove: on</c> map prints under its exits (DESIGN.md 13.12, experiment).</summary>
-    public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too";
+    public const string PincerLegend = "pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too";
 
     /// <summary>The legend a <c>brace: on</c> map prints (DESIGN.md 13.14, experiment).</summary>
-    public const string BraceLegend = "brace: a unit that waits on the tile it began its turn on is struck at -15 hit until its side's next phase";
+    public const string BraceLegend = "brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase";
 
     /// <summary>The legend a <c>break: on</c> map prints (DESIGN.md 13.22, experiment).</summary>
     /// <summary>The messenger's rule (DESIGN.md 13.24, experiment), printed under any board whose map has one.</summary>

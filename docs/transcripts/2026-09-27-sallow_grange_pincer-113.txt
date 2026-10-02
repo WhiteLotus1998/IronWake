@@ -29,7 +29,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          0,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 2,5
 teodor moves 0,5 -> 2,5 via 1,5
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -61,7 +61,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -93,7 +93,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 2,6
 captain moves 1,6 -> 2,6
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -125,7 +125,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -157,7 +157,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,5    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 1,4
 wren moves 1,5 -> 1,4
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -189,7 +189,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -221,7 +221,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 1,6
 pell moves 0,6 -> 1,6
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -253,7 +253,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -285,7 +285,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 1,7
 ottilie moves 0,7 -> 1,7
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -317,7 +317,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -349,7 +349,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 2,8
 ansgar moves 0,10 -> 2,8 via 0,9 0,8 1,8
 Sallow Grange  turn 1 of 10  player phase  seize  recall 3
@@ -381,7 +381,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ansgar
 ansgar waits
 ansgar may canto up to 2 movement: canto ansgar <x,y|stay>
@@ -414,7 +414,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 1 --
 -- enemy phase, turn 1 --
@@ -464,7 +464,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          2,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 3,5
 teodor moves 2,5 -> 3,5
 group field wakes: proximity
@@ -497,7 +497,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -529,7 +529,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 3,6
 captain moves 2,6 -> 3,6
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -561,7 +561,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -593,7 +593,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              1,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 3,4
 wren moves 1,4 -> 3,4 via 2,4
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -625,7 +625,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -657,7 +657,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 2,7
 ansgar moves 2,8 -> 2,7
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -689,7 +689,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ansgar
 ansgar waits
 ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
@@ -722,7 +722,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 2,6
 pell moves 1,6 -> 2,6
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -754,7 +754,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -786,7 +786,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 2,4
 ottilie moves 1,7 -> 2,4 via 1,6 1,5 1,4
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -818,7 +818,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 2 of 10  player phase  seize  recall 3
@@ -850,7 +850,7 @@ b  soldier-1        Soldier L3 pikeman         7,5    hp 21/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 21/21  Plain  done
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 2 --
 -- enemy phase, turn 2 --
@@ -859,14 +859,14 @@ archer-1 waits
 enemy: move archer-2 5,5
 archer-2 moves 8,6 -> 5,5 via 8,5 7,5 6,5
 enemy: attack archer-2 teodor
-forecast archer-2 -> teodor: dmg 5 hit 81% crit 3%; counter: none
+forecast archer-2 -> teodor: acc 81% dmg 5 crit 3%; counter: none
 archer-2 attacks teodor
   archer-2 hits teodor for 5 (hp 16)
   archer-2 hp 17, teodor hp 16
 enemy: move brawler-1 4,5
 brawler-1 moves 7,6 -> 4,5 via 7,5 6,5 5,5
 enemy: attack brawler-1 teodor
-forecast brawler-1 -> teodor: dmg 6 x2 hit 91% crit 0%; counter: dmg 12 hit 77% crit 2%
+forecast brawler-1 -> teodor: acc 91% dmg 6 x2 crit 0%; counter: acc 77% dmg 12 crit 2%
 brawler-1 attacks teodor
   brawler-1 hits teodor for 6 (hp 10)
   brawler-1 hits teodor for 6 (hp 4)
@@ -882,7 +882,7 @@ shieldbearer-1 waits
 enemy: move soldier-1 4,4
 soldier-1 moves 7,5 -> 4,4 via 7,4 6,4 5,4
 enemy: attack soldier-1 wren
-forecast soldier-1 -> wren: dmg 9 hit 63% crit 0%; counter: dmg 8 hit 85% crit 3%
+forecast soldier-1 -> wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
 soldier-1 attacks wren
   soldier-1 misses wren
   wren hits soldier-1 for 8 (hp 13)
@@ -920,7 +920,7 @@ b  soldier-1        Soldier L3 pikeman         4,4    hp 13/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 3,3
 ottilie moves 2,4 -> 3,3 via 2,3
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -952,9 +952,9 @@ b  soldier-1        Soldier L3 pikeman         4,4    hp 13/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack ottilie soldier-1
-forecast ottilie -> soldier-1: dmg 6 hit 82% crit 4%; counter: none
+forecast ottilie -> soldier-1: acc 82% dmg 6 crit 4%; counter: none
 ottilie attacks soldier-1
   ottilie misses soldier-1
   ottilie hp 17, soldier-1 hp 13
@@ -987,7 +987,7 @@ b  soldier-1        Soldier L3 pikeman         4,4    hp 13/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 2,4
 pell moves 2,6 -> 2,4 via 2,5
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1019,9 +1019,9 @@ b  soldier-1        Soldier L3 pikeman         4,4    hp 13/21  Plain  group fie
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell soldier-1
-forecast pell -> soldier-1 with Cinder: dmg 12 hit 99% crit 2%; counter: none
+forecast pell -> soldier-1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
 pell attacks soldier-1
   pell crits soldier-1 for 36 (hp 0)
   pell hp 16, soldier-1 hp 0
@@ -1055,7 +1055,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              3,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 4,4
 wren moves 3,4 -> 4,4
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1086,7 +1086,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1117,7 +1117,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 4,6
 captain moves 3,6 -> 4,6
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1148,10 +1148,10 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack captain brawler-1
-forecast captain -> brawler-1: dmg 11 hit 98% crit 5%; counter: dmg 6 x2 hit 82% crit 0%
-  pincer: brawler-1 pinned by wren: captain hit +15
+forecast captain -> brawler-1: acc 98% dmg 11 crit 5%; counter: acc 82% dmg 6 x2 crit 0%
+  pincer: brawler-1 pinned by wren: captain acc +15
 captain attacks brawler-1
   captain hits brawler-1 for 11 (hp 0)
   captain hp 22, brawler-1 hp 0
@@ -1184,7 +1184,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          3,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 4,5
 teodor moves 3,5 -> 4,5
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1214,9 +1214,9 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack teodor archer-2
-forecast teodor -> archer-2: dmg 12 hit 76% crit 1%; counter: none
+forecast teodor -> archer-2: acc 76% dmg 12 crit 1%; counter: none
 teodor attacks archer-2
   teodor hits archer-2 for 12 (hp 5)
   teodor hp 4, archer-2 hp 5
@@ -1248,7 +1248,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain  done
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 6,5
 ansgar moves 2,7 -> 6,5 via 2,6 3,6 4,6 5,6 6,6
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
@@ -1278,10 +1278,10 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain  done
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack ansgar archer-2
-forecast ansgar -> archer-2 with Iron Lance: dmg 11 hit 92% crit 2%; counter: none
-  pincer: archer-2 pinned by teodor: ansgar hit +15
+forecast ansgar -> archer-2 with Iron Lance: acc 92% dmg 11 crit 2%; counter: none
+  pincer: archer-2 pinned by teodor: ansgar acc +15
 ansgar attacks archer-2
   ansgar hits archer-2 for 11 (hp 0)
   ansgar hp 20, archer-2 hp 0
@@ -1314,9 +1314,9 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain  done
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > canto ansgar stay
-ansgar stays at 6,5 (canto)
+ansgar stays at 6,5 (move again)
 Sallow Grange  turn 3 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -1343,12 +1343,12 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain  done
 C  wren             Wren L1 cadet              4,4    hp 20/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 3 --
 -- enemy phase, turn 3 --
 enemy: attack archer-1 wren
-forecast archer-1 -> wren: dmg 6 hit 72% crit 0%; counter: none
+forecast archer-1 -> wren: acc 72% dmg 6 crit 0%; counter: none
 archer-1 attacks wren
   archer-1 hits wren for 6 (hp 14)
   archer-1 hp 17, wren hp 14
@@ -1387,7 +1387,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          4,5    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 7,6
 teodor moves 4,5 -> 7,6 via 5,5 6,5 7,5
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1416,7 +1416,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 4/21   Plain
 C  wren             Wren L1 cadet              4,4    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > item teodor 2
 teodor uses Field Dressing (2 left)
 teodor heals 10 (hp 14)
@@ -1446,7 +1446,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              4,4    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 8,6
 captain moves 4,6 -> 8,6 via 5,6 6,6 7,6
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1475,7 +1475,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              4,4    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1504,7 +1504,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              4,4    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 7,5
 wren moves 4,4 -> 7,5 via 5,4 6,4 7,4
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1533,7 +1533,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1562,7 +1562,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 9,7
 ansgar moves 6,5 -> 9,7 via 7,5 8,5 9,5 9,6
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1591,7 +1591,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ansgar
 ansgar waits
 ansgar may canto up to 1 movement: canto ansgar <x,y|stay>
@@ -1621,7 +1621,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 5,5
 pell moves 2,4 -> 5,5 via 3,4 4,4 5,4
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1650,7 +1650,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1679,7 +1679,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 7,3
 ottilie moves 3,3 -> 7,3 via 4,3 5,3 6,3
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1708,7 +1708,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 4 of 10  player phase  seize  recall 3
@@ -1737,7 +1737,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 4 --
 -- enemy phase, turn 4 --
@@ -1778,7 +1778,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 10,6
 captain moves 8,6 -> 10,6 via 9,6
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1807,7 +1807,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1836,7 +1836,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 10,7
 ansgar moves 9,7 -> 10,7
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1865,7 +1865,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ansgar
 ansgar waits
 ansgar may canto up to 5 movement: canto ansgar <x,y|stay>
@@ -1895,7 +1895,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          7,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 9,6
 teodor moves 7,6 -> 9,6 via 8,6
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1924,7 +1924,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1953,7 +1953,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              7,5    hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 10,5
 wren moves 7,5 -> 10,5 via 8,5 9,5
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -1982,7 +1982,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait wren
 wren waits
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -2011,7 +2011,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 9,5
 pell moves 5,5 -> 9,5 via 6,5 7,5 8,5
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -2040,7 +2040,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -2069,7 +2069,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 9,4
 ottilie moves 7,3 -> 9,4 via 8,3 9,3
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -2098,7 +2098,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 5 of 10  player phase  seize  recall 3
@@ -2127,7 +2127,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain  done
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 5 --
 -- enemy phase, turn 5 --
@@ -2168,7 +2168,7 @@ e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gat
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 12,7
 ansgar moves 10,7 -> 12,7 via 10,6 11,6 12,6
 group hall wakes: proximity
@@ -2197,9 +2197,9 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack ansgar hexer-1
-forecast ansgar -> hexer-1 with Iron Lance: dmg 12 x2 hit 83% crit 2%; counter: dmg 12 hit 99% crit 0%
+forecast ansgar -> hexer-1 with Iron Lance: acc 83% dmg 12 x2 crit 2%; counter: acc 99% dmg 12 crit 0%
 ansgar attacks hexer-1
   ansgar hits hexer-1 for 12 (hp 4)
   hexer-1 hits ansgar for 12 (hp 8)
@@ -2232,9 +2232,9 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > canto ansgar stay
-ansgar stays at 12,7 (canto)
+ansgar stays at 12,7 (move again)
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
    012345678901234567
  0 ....^^^^^^^.......
@@ -2259,7 +2259,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 11,6
 captain moves 10,6 -> 11,6
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2286,7 +2286,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait captain
 captain waits
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2313,7 +2313,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          9,6    hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 12,5
 teodor moves 9,6 -> 12,5 via 9,5 10,5 11,5
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2340,7 +2340,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 14/21  Plain
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > item teodor 2
 teodor uses Field Dressing (1 left)
 teodor heals 7 (hp 21)
@@ -2368,7 +2368,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,5   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 10,6
 wren moves 10,5 -> 10,6
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2395,7 +2395,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 14/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > item wren 2
 wren uses Field Dressing (2 left)
 wren heals 6 (hp 20)
@@ -2423,7 +2423,7 @@ E  pell             Pell L1 adept              9,5    hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 10,5
 pell moves 9,5 -> 10,5
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2450,7 +2450,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait pell
 pell waits
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2477,7 +2477,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 10,4
 ottilie moves 9,4 -> 10,4
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2504,7 +2504,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 6 of 10  player phase  seize  recall 3
@@ -2531,7 +2531,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 6 --
 -- enemy phase, turn 6 --
@@ -2540,7 +2540,7 @@ archer-1 waits
 enemy: move grange_reeve-1 14,7
 grange_reeve-1 moves 15,6 -> 14,7 via 14,6
 enemy: attack grange_reeve-1 ansgar 2
-forecast grange_reeve-1 -> ansgar: dmg 10 hit 65% crit 1%; counter: none
+forecast grange_reeve-1 -> ansgar: acc 65% dmg 10 crit 1%; counter: none
 grange_reeve-1 equips Toll Spear
 grange_reeve-1 attacks ansgar
   grange_reeve-1 misses ansgar
@@ -2574,7 +2574,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ansgar 14,8
 ansgar moves 12,7 -> 14,8 via 13,7 13,8
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2601,7 +2601,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ansgar
 ansgar waits
 ansgar may canto up to 3 movement: canto ansgar <x,y|stay>
@@ -2629,7 +2629,7 @@ E  pell             Pell L1 adept              10,5   hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move pell 13,6
 pell moves 10,5 -> 13,6 via 11,5 12,5 13,5
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2656,9 +2656,9 @@ E  pell             Pell L1 adept              13,6   hp 16/16  Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack pell grange_reeve-1
-forecast pell -> grange_reeve-1 with Cinder: dmg 11 hit 99% crit 1%; counter: dmg 11 hit 74% crit 1%
+forecast pell -> grange_reeve-1 with Cinder: acc 99% dmg 11 crit 1%; counter: acc 74% dmg 11 crit 1%
 pell attacks grange_reeve-1
   pell hits grange_reeve-1 for 11 (hp 15)
   grange_reeve-1 hits pell for 11 (hp 5)
@@ -2688,7 +2688,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 14,6
 captain moves 11,6 -> 14,6 via 12,6 13,6
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2715,10 +2715,10 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack captain grange_reeve-1
-forecast captain -> grange_reeve-1: dmg 7 x2 hit 98% crit 3%; counter with Toll Spear: dmg 8 hit 54% crit 0%
-  pincer: grange_reeve-1 pinned by ansgar: captain hit +15
+forecast captain -> grange_reeve-1: acc 98% dmg 7 x2 crit 3%; counter with Toll Spear: acc 54% dmg 8 crit 0%
+  pincer: grange_reeve-1 pinned by ansgar: captain acc +15
 captain attacks grange_reeve-1
   captain hits grange_reeve-1 for 7 (hp 8)
   grange_reeve-1 hits captain for 8 (hp 14)
@@ -2749,7 +2749,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              10,6   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move wren 13,7
 wren moves 10,6 -> 13,7 via 11,6 12,6 13,6
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2776,9 +2776,9 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > attack wren grange_reeve-1
-forecast wren -> grange_reeve-1: dmg 6 x2 hit 87% crit 2%; counter with Toll Spear: dmg 9 hit 56% crit 0%
+forecast wren -> grange_reeve-1: acc 87% dmg 6 x2 crit 2%; counter with Toll Spear: acc 56% dmg 9 crit 0%
 wren attacks grange_reeve-1
   wren crits grange_reeve-1 for 18 (hp 0)
   wren hp 20, grange_reeve-1 hp 0
@@ -2807,7 +2807,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          12,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move teodor 14,5
 teodor moves 12,5 -> 14,5 via 13,5
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2833,7 +2833,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait teodor
 teodor waits
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2859,7 +2859,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move ottilie 10,6
 ottilie moves 10,4 -> 10,6 via 10,5
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2885,7 +2885,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > wait ottilie
 ottilie waits
 Sallow Grange  turn 7 of 10  player phase  seize  recall 3
@@ -2911,7 +2911,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain  done
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain  done
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain  done
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > end
 -- player phase ends, turn 7 --
 -- enemy phase, turn 7 --
@@ -2945,7 +2945,7 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 > move captain 16,6
 captain moves 14,6 -> 16,6 via 15,6
 Sallow Grange  turn 8 of 10  player phase  seize  recall 3
@@ -2971,6 +2971,6 @@ E  pell             Pell L1 adept              13,6   hp 5/16   Plain
 e  shieldbearer-1   Shieldbearer L3 bulwark    12,2   hp 25/25  Plain  group gate, hold
 D  teodor           Teodor L1 pikeman          14,5   hp 21/21  Plain
 C  wren             Wren L1 cadet              13,7   hp 20/20  Plain
-pincer: a unit struck from beside it while a foe of the striker stands directly behind it is hit at +15, counters too
+pincer: a unit struck from beside it while a foe of the striker stands directly behind it is struck at +15 Acc, counters too
 battle won: seize; only recall is left
 battle won: seize

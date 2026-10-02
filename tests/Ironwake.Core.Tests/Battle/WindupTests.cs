@@ -367,12 +367,12 @@ public class WindupTests
         var hale = enemyPhase.Find("hale")!;
         var damage = Windup.Damage(enemyPhase, Starter, mauler, hale);
 
-        Assert.Contains($"  Toll Mauler from 3,2 with Post Maul (slot 1): dmg {damage} hit -- crit --; counter: none\n", text);
+        Assert.Contains($"  Toll Mauler from 3,2 with Post Maul (slot 1): acc -- dmg {damage} crit --; counter: none\n", text);
         Assert.DoesNotContain("%", text);
 
         var forecast = Queries.Forecast(enemyPhase, Starter, mauler, hale, mauler.At, null)!;
         var lines = Ironwake.Cli.PlaySession.ForecastText(enemyPhase, Starter, mauler, hale, forecast, mauler.At, false).Split('\n');
-        Assert.Equal($"Forecast Toll Mauler -> hale: dmg {damage} hit -- crit --; counter: none", lines[0]);
+        Assert.Equal($"Forecast Toll Mauler -> hale: acc -- dmg {damage} crit --; counter: none", lines[0]);
         Assert.DoesNotContain(lines, l => l.Contains('%'));
 
         var plain = Start(false);

@@ -149,7 +149,7 @@ public static class Keep
         var bonuses = new List<string>();
         if (terrain.Avoid != 0)
         {
-            bonuses.Add($"avoid {terrain.Avoid}");
+            bonuses.Add($"evade {terrain.Avoid}");
         }
 
         if (terrain.Def != 0)
