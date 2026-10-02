@@ -823,8 +823,7 @@ public sealed class CampaignSession
             return true;
         }
 
-        var quest = _content.Campaign.Quest(questId)!;
-        Lines(Card($"-- {map.Name} --", quest.Before));
+        Lines(QuestBeforeCard(_content, map, questId));
         foreach (var opening in QuestOpening(_record, _content, map, questId, allyId))
         {
             WriteEvent(opening);
@@ -846,7 +845,7 @@ public sealed class CampaignSession
 
         if (Take(_record.AfterQuest(battle.State, questId, _content), text) && battle.State.Outcome.Result == BattleResult.Won)
         {
-            Lines(Card($"-- After {map.Name} --", quest.After));
+            Lines(QuestAfterCard(_content, map, questId));
         }
 
         return true;
@@ -1673,6 +1672,14 @@ public sealed class CampaignSession
     /// </summary>
     public static IReadOnlyList<string> AfterCard(CampaignRecord before, GameContent content, MapDefinition map) =>
         Card($"-- After {map.Name} --", before.NextMap(content).After);
+
+    /// <summary>The card printed before side map <paramref name="questId"/> plays on <paramref name="map"/> (issue 635), shaped as <see cref="BeforeCard"/>.</summary>
+    public static IReadOnlyList<string> QuestBeforeCard(GameContent content, MapDefinition map, string questId) =>
+        Card($"-- {map.Name} --", content.Campaign.Quest(questId)!.Before);
+
+    /// <summary>The card printed once side map <paramref name="questId"/> is won on <paramref name="map"/> (issue 635), shaped as <see cref="BeforeCard"/>.</summary>
+    public static IReadOnlyList<string> QuestAfterCard(GameContent content, MapDefinition map, string questId) =>
+        Card($"-- After {map.Name} --", content.Campaign.Quest(questId)!.After);
 
     private static IReadOnlyList<string> Card(string heading, ValueList<string> paragraphs)
     {
