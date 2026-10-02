@@ -70,6 +70,17 @@ public sealed class SaveStore
         File.WriteAllText(PathOf(AutoPrefix + 1), ProtocolJson.Campaign(record) + "\n");
     }
 
+    /// <summary>
+    /// Rewrites <c>auto-1</c> with <paramref name="record"/> without moving the older autosaves
+    /// (issue 786): a camp left for the title keeps what was spent there, and the last three camps
+    /// stay the last three, since <c>auto-1</c> was already this camp's autosave.
+    /// </summary>
+    public void RewriteAutosave(CampaignRecord record)
+    {
+        System.IO.Directory.CreateDirectory(Directory);
+        File.WriteAllText(PathOf(AutoPrefix + 1), ProtocolJson.Campaign(record) + "\n");
+    }
+
     /// <summary>Writes <paramref name="record"/> as the named save, replacing one of that name; the refusal, or null once written.</summary>
     public string? Save(string name, CampaignRecord record)
     {
