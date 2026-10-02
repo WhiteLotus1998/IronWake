@@ -80,6 +80,13 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// The open mark (issue 772, <see cref="Opening"/>): set when a holder of Opening hits the unit and leaves it
+    /// alive, cleared when the phase ends; null when the unit is not open. While it is set, a strike on the unit
+    /// by any unit of another side than its own, other than <see cref="OpenMark.By"/>, reads its Def and Res lower.
+    /// </summary>
+    public OpenMark? Open { get; init; }
+
+    /// <summary>
     /// How many tiles further than its side's dusk sight the unit sees (issue 706, the Scout's
     /// <see cref="SightEffect"/>), read from its abilities when it is placed (<see cref="BattleUnit.Sighted"/>).
     /// 0 for nearly every unit; nothing in daylight (<see cref="Dusk.Sees"/>).
@@ -223,6 +230,7 @@ public sealed record BattleUnit(
     /// A unit the pair rule binds cannot crit it when it has an ally beside it (<see cref="PairRule"/>, issue 692).
     /// The captain's formation effects are read here too (<see cref="Formation"/>, issue 705).
     /// An art that strikes once makes the side <see cref="Combatant.SingleStrike"/> (issue 739).
+    /// An open unit answering a strike by an ally of its opener reads its Def and Res lower (<see cref="Opening.Lowered"/>, issue 772).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -240,7 +248,15 @@ public sealed record BattleUnit(
             weapon = art.Apply(weapon);
         }
 
-        return content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit, Formation.Beside(state, content, this)) with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) };
+        var terrain = state.Map.TerrainAt(At, content);
+        var beside = Formation.Beside(state, content, this);
+        var combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside);
+        if (countering && Opening.Reads(this, against))
+        {
+            combatant = content.CombatantOf(Unit, Grounding.ForMap(state.Map, weapon), terrain, Hp, critAvoid, WeaponBroken(content), hit, crit, beside + Opening.Lowered(Open!, combatant.Stats));
+        }
+
+        return combatant with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against), SingleStrike = art is { Single: true }, Aura = Formation.Aura(state, content, this) };
     }
 
     /// <summary>

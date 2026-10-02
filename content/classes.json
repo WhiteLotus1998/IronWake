@@ -250,6 +250,7 @@
       "captain": true,
       "movement": "infantry",
       "mov": 4,
+      "abilities": ["opening"],
       "weapons": ["sword"],
       "mastery": "shoulder_to_shoulder",
       "masteryPoints": 12,

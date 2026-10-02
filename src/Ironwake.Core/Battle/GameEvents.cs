@@ -249,6 +249,13 @@ public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, str
 public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
 /// <summary>
+/// A hit from a holder of Opening left an enemy alive and open (issue 772, <see cref="Opening"/>): until the
+/// phase ends, every strike by an ally of <paramref name="ByUnitId"/> reads its Def <paramref name="Def"/> and
+/// its Res <paramref name="Res"/> lower, never below 0.
+/// </summary>
+public sealed record UnitOpened(string UnitId, string ByUnitId, int Def, int Res) : GameEvent;
+
+/// <summary>
 /// A bow's crit landed a flier that survived (issue 703, <see cref="Grounding"/>): it moves on foot
 /// until <paramref name="Side"/>'s next phase ends, or the one after that when <paramref name="Next"/>
 /// says its own phase is under way.

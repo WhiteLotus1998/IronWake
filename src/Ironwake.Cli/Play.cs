@@ -1378,6 +1378,7 @@ public sealed class PlaySession
 
         lines.AddRange(PincerLines(state, unit with { At = tile }, target, names));
         lines.AddRange(BraceLines(unit, target, names));
+        lines.AddRange(OpenLines(unit, target, names));
         lines.AddRange(BreakLines(state, content, unit, target, names));
         lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
@@ -1962,6 +1963,11 @@ public sealed class PlaySession
             lines.Add("  " + chilled);
         }
 
+        if (Opening.CardLine(state, unit, UnitNames.Of(state, content)) is { } open)
+        {
+            lines.Add("  " + open);
+        }
+
         if (Grounding.CardLine(state, unit) is { } grounded)
         {
             lines.Add("  " + grounded + (Grounding.Stranded(state, unit, content) ? ", stranded: no move, may still act" : ", moves on foot"));
@@ -2127,6 +2133,23 @@ public sealed class PlaySession
         {
             yield return $"  brace: {names[target.Id]} braced: {names[attacker.Id]} acc -{Brace.Hit}";
         }
+    }
+
+    /// <summary>
+    /// Under a forecast (issue 772): one line when the target is open to the striker, naming the Def and Res the
+    /// forecast already took off, or one when the striker is the target's own opener, who never reads it. Silent otherwise.
+    /// </summary>
+    public static IEnumerable<string> OpenLines(BattleUnit attacker, BattleUnit target, UnitNames? names = null)
+    {
+        names ??= UnitNames.None;
+        if (target.Open is not { } open)
+        {
+            yield break;
+        }
+
+        yield return Opening.Reads(target, attacker)
+            ? $"  open: {names[target.Id]} opened by {names[open.By]}: Def -{open.Def}, Res -{open.Res} in this forecast"
+            : $"  open: {names[target.Id]} is open to {names[open.By]}'s allies, not to {names[attacker.Id]}";
     }
 
     /// <summary>
@@ -2445,6 +2468,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
+            case UnitOpened o:
+                return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
             case UnitGrounded g:

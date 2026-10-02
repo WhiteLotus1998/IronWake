@@ -447,6 +447,11 @@ public static class ContentSerializer
                 writer.WriteEndArray();
                 writer.WriteNumber("cost", footing.Cost);
                 break;
+            case OpeningEffect opening:
+                writer.WriteString("kind", "opening");
+                writer.WriteNumber("def", opening.Def);
+                writer.WriteNumber("res", opening.Res);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }
