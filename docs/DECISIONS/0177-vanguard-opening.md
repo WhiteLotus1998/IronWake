@@ -21,12 +21,16 @@ At Def and Res -3, 200 seeds, tier 1 (party and enemies +2), the five campaign m
 | Ranger | 74 / 73 / 67.5 / 94 / 68 | 75.3 | 38 / 57 / 68 / 31 / 48 | 48.4 |
 | Vanguard | 75.5 / 80 / 30 / 71.5 / 65 | 64.4 | 33 / 54 / 72 / 19 / 53 | 46.2 |
 
-- **Opened 1103, converted 748 (68 percent),** far above #772's 10 percent floor. Per map: Tollgate 212/181, Mill 470/283, Saltmarsh 107/38, Harrow 284/246, Brackwater 30/0.
+- **Opened 1103, converted 748 (68 percent),** far above #772's 10 percent floor on conversions. Per map (opened/converted/decided): Tollgate 212/181/13, Mill 470/283/0, Saltmarsh 107/38/2, Harrow 284/246/48, Brackwater 30/0/0.
+- **But the mark itself decided only 63 kills (5.7 percent of openings).** `decided` counts a conversion whose ally hits, each without the lowered stat, would have left the enemy standing (`Runner.MarkDecided`). The Sim's allies mostly finish an opened enemy that they would have killed anyway. This is #772's build risk in another shape. The captain does strike first, but the chooser never strikes to open, so a conversion is usually a kill the mark did not make.
+- **Without the verb, same build:** Tollgate 76.0, Mill 80.0, Saltmarsh 30.0 (with it: 75.5, 80.0, 30.0). The verb moves gate 1 by under a point.
 - **The share is the lowest of the three** (46.2 against 48.4 and 49.0), and lowest on three of five maps. The hoarder kill does not fire.
 - **The mean is 11.3 under the Marshal**, just outside the bar. Without the verb, 0171 read 63 (100 seeds), so the verb bought about one point. Saltmarsh carries the gap: 30 against 62 and 67.5, with gate 4 failing under the Vanguard as it fails under the unpromoted captain.
 - That is #772's third case, "under the bar with a low share": step -3 to -4 once, read again, then stop.
 
-STEP_RESULT
+**The step, read.** At -4, every map and class reads identical to -3, opened and converted included. At these levels -3 already takes nearly every enemy's Def or Res to 0 (most templates have base Def 1 to 4), so the floor fires and -4 buys nothing. The procedure's one step is taken and stopped. **Opening ships at -3, the number #772 agreed.** The Sim cannot price the magnitude, so a further step would measure nothing.
+
+**Verdict, provisional.** By the letter of #772, Opening is not killed. Its share is the lowest of the three, and its conversions are 68 percent, not under 10. It is under the bar with a low share, the step is spent, and the hand plays decide. By the intent of the conversion clause, "the chooser or the board never uses it," `decided` at 5.7 percent says the Sim barely uses it. That reading is for the Table. Code's lean: the Sim is blind to an opening it does not plan for, as it was to ignition (round 232). So the verb is judged by the two hand plays, not by the Sim.
 
 ## Open
 
