@@ -1,0 +1,43 @@
+# issue 705 slice 3: dotnet run --project src/Ironwake.Sim -- --ladder --map <id> --seeds 100, at the slice's commit (before the Escape attack exemption; brackwater_cut tier 2 reads ok under it). harrow_weir was stopped unfinished.
+ladder: the_tollgate
+  tier 1, party and enemies +2:
+    cadet: gate 1 70.0, gate 4 ok, captain [atk 248 dmg 2121 heal 0 abs 227]
+    marshal: gate 1 73.0, gate 4 ok, captain [atk 249 dmg 2200 heal 0 abs 214]
+    ranger: gate 1 57.0, gate 4 ok, captain [atk 340 dmg 3442 heal 0 abs 80]
+    vanguard: gate 1 78.0, gate 4 ok, captain [atk 304 dmg 3019 heal 0 abs 257]
+    spread 21.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 95.0, gate 4 ok, captain [atk 229 dmg 2139 heal 0 abs 112]
+    champion: gate 1 100.0, gate 4 ok, captain [atk 283 dmg 3788 heal 0 abs 114]
+    commander: gate 1 93.0, gate 4 FAILED, captain [atk 343 dmg 3778 heal 0 abs 98]
+    pathfinder: gate 1 92.0, gate 4 ok, captain [atk 341 dmg 6264 heal 0 abs 197]
+    spread 8.0, bar 5; gate 4 lost under commander: FAILED
+ladder: FAILED
+ladder: the_mill
+  tier 1, party and enemies +2:
+    cadet: gate 1 39.0, gate 4 ok, captain [atk 353 dmg 5161 heal 0 abs 276]
+    marshal: gate 1 46.0, gate 4 ok, captain [atk 361 dmg 5349 heal 0 abs 274]
+    ranger: gate 1 63.0, gate 4 ok, captain [atk 246 dmg 5193 heal 0 abs 199]
+    vanguard: gate 1 85.0, gate 4 ok, captain [atk 522 dmg 6986 heal 0 abs 338]
+    spread 39.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 98.0, gate 4 ok, captain [atk 269 dmg 6085 heal 0 abs 184]
+    champion: gate 1 99.0, gate 4 ok, captain [atk 273 dmg 7678 heal 0 abs 171]
+    commander: gate 1 98.0, gate 4 ok, captain [atk 275 dmg 8174 heal 0 abs 260]
+    pathfinder: gate 1 95.0, gate 4 ok, captain [atk 236 dmg 9360 heal 0 abs 241]
+    spread 4.0, bar 5: ok
+ladder: FAILED
+ladder: brackwater_cut
+  tier 1, party and enemies +2:
+    cadet: gate 1 39.0, gate 4 FAILED, captain [atk 2 dmg 1921 heal 0 abs 320]
+    marshal: gate 1 39.0, gate 4 FAILED, captain [atk 2 dmg 1906 heal 0 abs 321]
+    ranger: gate 1 66.0, gate 4 FAILED, captain [atk 1 dmg 1343 heal 0 abs 208]
+    vanguard: gate 1 97.0, gate 4 FAILED, captain [atk 48 dmg 2108 heal 0 abs 198]
+    spread 58.0, bar 5: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 77.0, gate 4 FAILED, captain [atk 16 dmg 2261 heal 0 abs 258]
+    champion: gate 1 100.0, gate 4 FAILED, captain [atk 100 dmg 4394 heal 0 abs 157]
+    commander: gate 1 100.0, gate 4 ok, captain [atk 0 dmg 630 heal 0 abs 67]
+    pathfinder: gate 1 100.0, gate 4 FAILED, captain [atk 1 dmg 1904 heal 0 abs 143]
+    spread 0.0, bar 5; gate 4 lost under commander: FAILED
+ladder: FAILED
