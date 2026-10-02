@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -163,6 +163,11 @@ public static class MapFormat
         if (map.Fronts.Count > 0)
         {
             sb.Append("fronts: ").Append(string.Join("; ", map.Fronts.Select(f => f.Name + " " + string.Join(' ', f.Tiles)))).Append('\n');
+        }
+
+        if (map.Hunter is { } hunter)
+        {
+            sb.Append("hunter: ").Append(hunter).Append('\n');
         }
 
         if (map.DifficultyId is { } difficulty)
@@ -345,7 +350,49 @@ public static class MapFormat
             ValidateMessenger(map, header);
             Validate(map);
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseOathbound(header, map) };
-            return map with { Fronts = ParseFronts(header, map) };
+            map = map with { Fronts = ParseFronts(header, map) };
+            return map with { Hunter = ParseHunter(header, map) };
+        }
+
+        /// <summary>
+        /// The <c>hunter:</c> header (issue 692): one tile, an enemy placement's, whose unit hunts the
+        /// weakest front (<see cref="Hunt"/>). The map needs fronts; a boss never hunts, nor does the messenger.
+        /// </summary>
+        private Coord? ParseHunter(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("hunter", out var entry))
+            {
+                return null;
+            }
+
+            var parts = entry.Value.Split(',');
+            if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y))
+            {
+                throw ErrorAt(entry.Line, $"hunter: needs the hunter's tile as x,y: 'hunter: 3,6', got '{entry.Value}'");
+            }
+
+            var at = new Coord(x, y);
+            if (map.Fronts.Count == 0)
+            {
+                throw ErrorAt(entry.Line, "hunter: needs a fronts: header; the hunter hunts a front");
+            }
+
+            if (map.Placements.FirstOrDefault(p => p.At == at) is not EnemyPlacement enemy)
+            {
+                throw ErrorAt(entry.Line, $"hunter names {at} but no E line places an enemy there");
+            }
+
+            if (enemy.IsBoss)
+            {
+                throw ErrorAt(entry.Line, $"hunter at {at} is a boss; a boss never hunts");
+            }
+
+            if (map.Messenger is { } route && route.From == at)
+            {
+                throw ErrorAt(entry.Line, $"hunter at {at} is the messenger, which never strikes");
+            }
+
+            return at;
         }
 
         /// <summary>

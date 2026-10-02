@@ -540,6 +540,12 @@ public static class MapRenderer
             sb.Append(frontsLine).Append('\n');
         }
 
+        if (Hunt.Line(state, UnitNames.Of(state, content)) is { } huntLine)
+        {
+            sb.Append(Hunt.Rule).Append('\n');
+            sb.Append(huntLine).Append('\n');
+        }
+
         if (MessengerLine(state, content) is { } messengerLine)
         {
             sb.Append(MessengerRule).Append('\n');
@@ -662,7 +668,22 @@ public static class MapRenderer
     public static string? FrontsLine(BattleState state) =>
         state.Map.Fronts.Count == 0
             ? null
-            : "fronts: " + string.Join("; ", state.Map.Fronts.Select(f => $"{f.Words} {string.Join(' ', f.Tiles)} {(Fronts.HasFallen(state, f) ? "fallen" : "holding")}"));
+            : "fronts: " + string.Join("; ", state.Map.Fronts.Select(f => $"{f.Words} {string.Join(' ', f.Tiles)} {(Fronts.HasFallen(state, f) ? "fallen" : "holding")}{Defence(state, f)}"));
+
+    /// <summary>
+    /// On a map with a hunter (issue 692), what the fronts line adds for a standing front: its
+    /// defenders' summed HP and count (<see cref="Hunt.Holds"/>), and <c>hunted</c> on the front the
+    /// hunter hunts. Empty without a hunter on the board, and for a fallen front.
+    /// </summary>
+    private static string Defence(BattleState state, Front front)
+    {
+        if (Hunt.On(state) is null || Hunt.Holds(state).FirstOrDefault(h => h.Front == front) is not { } hold)
+        {
+            return "";
+        }
+
+        return $" ({hold.Defenders.Count} defending, {hold.Hp} hp{(Hunt.Hunted(state) == front ? ", hunted" : "")})";
+    }
 
     /// <summary>
     /// Where the messenger stands and how far the road is (DESIGN.md 13.24): its own phases at

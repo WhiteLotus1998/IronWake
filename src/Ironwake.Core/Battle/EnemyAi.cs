@@ -148,7 +148,7 @@ public static class EnemyAi
         }
 
         var players = state.UnitsOf(Side.Player).ToList();
-        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
+        var known = Hunt.Narrow(state, unit, players.Where(p => Dusk.Knows(state, content, unit, p)).ToList());
         if (known.Count == 0 || Sworn(state, unit, known) is not null)
         {
             return null;
@@ -267,7 +267,7 @@ public static class EnemyAi
         var tiles = mayMove ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
-        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
+        var known = Hunt.Narrow(state, unit, players.Where(p => Dusk.Knows(state, content, unit, p)).ToList());
 
         if (RetreatRule.Choose(state, content, unit) is { } refuge)
         {
@@ -385,6 +385,12 @@ public static class EnemyAi
         IReadOnlyList<BattleUnit> known, IReadOnlyList<Reach> playerReach, BattleUnit? sworn, bool veto)
     {
         Func<Coord, bool>? refused = veto ? tile => BossVetoRefuses(state, content, unit, tile) : null;
+        if (Hunt.Is(state, unit) && Hunt.Hunted(state) is { } front)
+        {
+            return (known.Count == 0 ? null : Approach(state, content, unit, weapon, reach, known, playerReach, refused))
+                ?? March(state, content, unit, front, reach, playerReach, refused);
+        }
+
         return known.Count == 0 && Dusk.Sight(state) is not null
             ? Drift(state, content, unit, reach, playerReach, refused)
             : (sworn is null ? null : Approach(state, content, unit, weapon, reach, new[] { sworn }, playerReach, refused))
@@ -444,7 +450,7 @@ public static class EnemyAi
             return null;
         }
 
-        if (!inDaylight && !Dusk.Knows(state, content, unit, target))
+        if ((!inDaylight && !Dusk.Knows(state, content, unit, target)) || Hunt.Spares(state, unit, target))
         {
             return null;
         }
@@ -453,7 +459,7 @@ public static class EnemyAi
         var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
-        var known = players.Where(p => inDaylight || Dusk.Knows(state, content, unit, p)).ToList();
+        var known = Hunt.Narrow(state, unit, players.Where(p => inDaylight || Dusk.Knows(state, content, unit, p)).ToList());
         if (Sworn(state, unit, known) is { } sworn)
         {
             var chosen = Choose(state, content, unit, tiles, reach, known, playerReach, sworn, inDaylight);
@@ -494,7 +500,7 @@ public static class EnemyAi
     {
         if (!BossVetoApplies(state, content, unit) || unit.EquippedWeapon(content) is null
             || RetreatRule.Choose(state, content, unit) is not null || Messenger.Is(state, unit) || !Dusk.Knows(state, content, unit, target)
-            || StrikeOn(state, content, unit, target) is not null)
+            || Hunt.Spares(state, unit, target) || StrikeOn(state, content, unit, target) is not null)
         {
             return null;
         }
@@ -623,7 +629,7 @@ public static class EnemyAi
         var tiles = behavior == Behavior.Aggressive && !unit.Moved ? reach.Destinations.ToList() : new List<Coord> { unit.At };
         var players = state.UnitsOf(Side.Player).ToList();
         var playerReach = players.Select(p => state.ReachOf(p, content)).ToList();
-        var known = players.Where(p => Dusk.Knows(state, content, unit, p)).ToList();
+        var known = Hunt.Narrow(state, unit, players.Where(p => Dusk.Knows(state, content, unit, p)).ToList());
         if (Sworn(state, unit, known) is not { } sworn)
         {
             return null;
@@ -850,6 +856,21 @@ public static class EnemyAi
         }
 
         return chosen is null ? null : Toward(state, content, unit, chosen, reach, playerReach, refused);
+    }
+
+    /// <summary>
+    /// Where the hunter marches when no defender of the hunted front is in its plan (issue 692,
+    /// <see cref="Hunt"/>): the reachable tile with the lowest remaining path cost to any of the
+    /// front's tiles, the party left out of the field as in <see cref="Drift"/>, ties as
+    /// <see cref="Approach"/> breaks them; null when no reachable tile has a path, which means Wait.
+    /// </summary>
+    public static Coord? March(BattleState state, GameContent content, BattleUnit unit, Front front, Reach reach, IReadOnlyList<Reach> playerReach, Func<Coord, bool>? refused = null)
+    {
+        var movement = content.Class(unit.Unit.ClassId).Movement;
+        Occupant GroundOnly(Coord at) =>
+            at == unit.At || state.UnitAt(at) is { Side: Side.Player } ? Occupant.None : state.OccupantAt(at, unit.Side);
+        var distances = Movement.DistancesTo(state.Map, content, front.Tiles, movement, GroundOnly);
+        return distances.From(unit.At) is null ? null : Toward(state, content, unit, distances, reach, playerReach, refused);
     }
 
     /// <summary>

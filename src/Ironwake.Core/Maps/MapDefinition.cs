@@ -208,6 +208,13 @@ public sealed record MapDefinition(
     /// </summary>
     public ValueList<Front> Fronts { get; init; } = ValueList<Front>.Empty;
 
+    /// <summary>
+    /// The <c>hunter:</c> header (issue 692): the tile of the enemy placement that hunts the
+    /// weakest front (<see cref="Hunt"/>), Marrit's rule on the keep. Null for none; a map with it
+    /// has fronts.
+    /// </summary>
+    public Coord? Hunter { get; init; }
+
     /// <summary>Whether <paramref name="unit"/> is oath-bound here (issue 691): an enemy whose group <see cref="Oathbound"/> names.</summary>
     public bool IsOathbound(BattleUnit unit) => unit.Side == Side.Enemy && unit.Group is { } group && Oathbound.Contains(group);
 

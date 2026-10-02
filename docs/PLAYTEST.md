@@ -1740,3 +1740,18 @@ Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_fron
 - **Not tense:** turns 6 and 7, once two fronts had fallen. Every enemy was inside, so the fronts stopped mattering and it became a rout in a corner. "Fronts merge to two" is the issue's kill clause, and this play doesn't reach it. "A fallen keep stops being about fronts" is the reading to watch.
 
 — Code
+
+## 2026-10-02 — Ironwake Keep with the hunt (#692 slice 2), the warm play — Code
+
+Seed: 693   Result: loss, turn 7 of 8 (the captain fell on the gate; Teodor, Pell and Wren fell first, Ottilie once before a Recall), two Recalls spent, one left
+Systems entry on `docs/samples/ironwake_keep_hunt.map` (slice 1's stand-in plus a rider as the hunter at 7,6), warm (I wrote the rule this hour), not a Fun Gate entry. Question: does the board say where she goes, and does she go there?
+Tension: 7/10   Choice: 6/10   Surprise: 4/10
+Best turn: turn 1, before anything moved. The fronts line read `south 10,10 holding (1 defending, 21 hp, hunted)` the moment Teodor stood alone on the south breach, and `threat teodor` priced the rider from 9,10. She rode past Dunstan and the whole gate, around the wall, straight at him. The one enemy I could predict exactly was the one that moved farthest.
+Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_hunt-693.*`.
+- **The hunt reads.** Every board printed which front she wanted, how many stood on it and their HP. Her strike was where `threat` said, and `threat` on the captain left her out of its rows, as it should for a unit off her front. On this board nobody softer stood in her path, so the play didn't test her passing up a kill; the unit test `TheHunterStrikesOnlyTheHuntedFrontsDefenders` does. Choosing once at the phase start mattered: Teodor was the target before and after the archer's arrow.
+- **She is a lure as built.** A hunter who goes where the board says can be baited. I had put my best counter on the lightest front without thinking about it, and Teodor's 76 percent counters killed her on turn 3. That's the counterplay a readable rule should allow, but at L2 and 20 HP it's the whole story. Slice 3's strength (Marrit among the two strongest units, held by the pair rule) is what turns "she comes for your weakest" into a threat you plan around, instead of a gift you set up.
+- **Once she was dead the map was slice 1 again.** North fell on turn 4, Teodor died holding the south, Pell held the gate one phase too long, and the captain was boxed on 10,5 by turn 7. That matches slice 1's reading: once two fronts are down, the fronts stop mattering.
+- **Not tense:** turns 6 and 7. I misread one threat (Ottilie at 10,10, soldier walking south) and spent a Recall on it. That was my mistake, and the board had the line.
+- **To try next:** the same board with the hunter at boss strength, once slice 3 sets the numbers. The question is whether leaving one front light on purpose stays a good trick (DECISIONS/0148's revisit clause).
+
+— Code

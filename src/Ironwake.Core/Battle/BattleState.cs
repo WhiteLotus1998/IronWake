@@ -76,6 +76,14 @@ public sealed record BattleState(
     public ValueList<string> Fallen { get; init; }
 
     /// <summary>
+    /// The front the hunter hunts this enemy phase (issue 692, <see cref="Hunt"/>): chosen once as
+    /// the enemy phase begins, so wounds dealt earlier in the phase do not move it and <c>threat</c>,
+    /// read on the player phase's board, names the front that comes. Null outside an enemy phase,
+    /// on a map without a hunter, and when no front stands.
+    /// </summary>
+    public string? Hunting { get; init; }
+
+    /// <summary>
     /// The order the captain has called this map (DESIGN.md 13.2, issue 85), or null while it is
     /// unspent. Once a map; a Recall restores it with the board.
     /// </summary>
@@ -673,6 +681,11 @@ public sealed record BattleState(
             }
 
             sb.Append('\n');
+        }
+
+        if (Hunting is { } hunting)
+        {
+            sb.Append("hunting ").Append(hunting).Append('\n');
         }
 
         if (MessengerGone is { } fate)
