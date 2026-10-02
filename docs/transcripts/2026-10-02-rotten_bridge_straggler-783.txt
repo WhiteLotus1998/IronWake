@@ -1,0 +1,2847 @@
+Rotten Bridge, the straggler, seed 783, scheme TwoRollAverage
+Objective: Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+  turn 3, enemy phase: a rider arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.
+  turn 3, enemy phase: a brigand arrives at 4,11 (aggressive). A unit standing on 4,11 stops it.
+  turn 3, enemy phase: a rider arrives at 9,11 (aggressive). A unit standing on 9,11 stops it.
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ..............
+ 7 ..^...AB......
+ 8 .....CEHD.....
+ 9 .....^....^...
+10 .G............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         1,10   hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          5,8    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move dunstan 4,9
+Dunstan moves 1,10 -> 4,9 via 1,9 2,9 3,9
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ..............
+ 7 ..^...AB......
+ 8 .....CEHD.....
+ 9 ....G^....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain
+C  ottilie          Ottilie L1 bowman          5,8    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait dunstan
+Dunstan waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ..............
+ 7 ..^...AB......
+ 8 .....CEHD.....
+ 9 ....G^....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          5,8    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              6,8    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move wren 5,9
+Wren moves 6,8 -> 5,9 via 5,8
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ..............
+ 7 ..^...AB......
+ 8 .....C.HD.....
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          5,8    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait wren
+Wren waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ..............
+ 7 ..^...AB......
+ 8 .....C.HD.....
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          5,8    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move ottilie 6,6
+Ottilie moves 5,8 -> 6,6 via 5,7 5,6
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......C.......
+ 7 ..^...AB......
+ 8 .......HD.....
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait ottilie
+Ottilie waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......C.......
+ 7 ..^...AB......
+ 8 .......HD.....
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              8,8    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move pell 7,6
+Pell moves 8,8 -> 7,6 via 8,7 8,6
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^...AB......
+ 8 .......H......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait pell
+Pell waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^...AB......
+ 8 .......H......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move captain 6,8
+Alder Fenn moves 6,7 -> 6,8
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^....B......
+ 8 ......AH......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait captain
+Alder Fenn waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^....B......
+ 8 ......AH......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait teodor
+Teodor waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^....B......
+ 8 ......AH......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           7,8    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move rook 5,7
+Rook moves 7,8 -> 5,7 via 7,7 6,7
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 ......A.......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait rook
+Rook waits
+Rotten Bridge, the straggler  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 ......A.......
+ 9 ....GE....^...
+10 ..............
+11 ...b..a.c.d...
+
+c  archer-1         Archer L2 bowman           8,11   hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,11   hp 22/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          10,11  hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 23/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain  done
+a  rider-1          Rider L2 outrider          6,11   hp 20/20  Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain  done
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 21/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> end
+Lethal if all land: Wren (Archer 1 for 5, Brigand 1 for 10, Rider 1 for 8, against 20 hp)
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 8,8
+Archer 1 moves 8,11 -> 8,8 via 8,10 8,9
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 16)
+  Archer 1 hp 17, Teodor hp 16
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-1 3,9
+Brigand 1 moves 3,11 -> 3,9 via 3,10
+enemy: attack brigand-1 dunstan
+Forecast Brigand 1 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 1 attacks Dunstan
+  Brigand 1 hits Dunstan for 8 (hp 15)
+  Dunstan hits Brigand 1 for 11 (hp 11)
+  Brigand 1 hp 11, Dunstan hp 15
+Dunstan gains 12 exp (12)
+enemy: move brigand-2 9,8
+Brigand 2 moves 10,11 -> 9,8 via 10,10 9,10 9,9
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move rider-1 8,7
+Rider 1 moves 6,11 -> 8,7 via 6,10 6,9 7,9 7,8 8,8
+enemy: attack rider-1 teodor
+Forecast Rider 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 11 crit 1%
+Rider 1 attacks Teodor
+  Rider 1 misses Teodor
+  Teodor hits Rider 1 for 11 (hp 9)
+  Rider 1 hp 9, Teodor hp 16
+Teodor gains 12 exp (12)
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.Ba.....
+ 8 ......A.cd....
+ 9 ...bGE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,9    hp 11/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+a  rider-1          Rider L2 outrider          8,7    hp 9/20   Plain  group chase, aggressive
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack teodor rider-1
+Forecast Teodor -> Rider 1: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
+Teodor attacks Rider 1
+  Teodor hits Rider 1 for 11 (hp 0)
+  Teodor hp 16, Rider 1 hp 0
+Teodor gains 35 exp (47)
+Rider 1 falls at 8,7
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 ......A.cd....
+ 9 ...bGE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+b  brigand-1        Brigand L2 reaver          3,9    hp 11/22  Plain  group chase, aggressive
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack dunstan brigand-1
+Forecast Dunstan -> Brigand 1: acc 77% dmg 11 crit 1%; counter: acc 73% dmg 8 crit 0%
+Dunstan attacks Brigand 1
+  Dunstan hits Brigand 1 for 11 (hp 0)
+  Dunstan hp 15, Brigand 1 hp 0
+Dunstan gains 35 exp (47)
+Brigand 1 falls at 3,9
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 ......A.cd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move captain 7,8
+Alder Fenn moves 6,8 -> 7,8
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 .......Acd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack captain archer-1
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 1
+  Alder Fenn misses Archer 1
+  Alder Fenn hp 22, Archer 1 hp 17
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ......CD......
+ 7 ..^..H.B......
+ 8 .......Acd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          6,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move ottilie 8,6
+Ottilie moves 6,6 -> 8,6 via 7,6
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 .......DC.....
+ 7 ..^..H.B......
+ 8 .......Acd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 17/17  Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, asleep
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, asleep
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, asleep
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack ottilie archer-1
+Forecast Ottilie -> Archer 1: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
+Ottilie attacks Archer 1
+  Ottilie hits Archer 1 for 8 (hp 9)
+  Archer 1 misses Ottilie
+  Ottilie hp 17, Archer 1 hp 9
+Ottilie gains 12 exp (12)
+The gate group wakes (noise)
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 .......DC.....
+ 7 ..^..H.B......
+ 8 .......Acd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              7,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move pell 6,8
+Pell moves 7,6 -> 6,8 via 6,6 6,7
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^..H.B......
+ 8 ......DAcd....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+c  archer-1         Archer L2 bowman           8,8    hp 9/17   Plain  group chase, aggressive
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack pell archer-1
+Forecast Pell -> Archer 1 with Cinder: acc 99% dmg 12 crit 2%; counter: acc 85% dmg 8 crit 2%
+Pell attacks Archer 1
+  Pell hits Archer 1 for 12 (hp 0)
+  Pell hp 16, Archer 1 hp 0
+Pell gains 35 exp (35)
+Archer 1 falls at 8,8
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^..H.B......
+ 8 ......DA.d....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           5,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move rook 9,7
+Rook moves 5,7 -> 9,7 via 6,7 7,7 8,7
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^....B.H....
+ 8 ......DA.d....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 22/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           9,7    hp 17/17  Plain
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack rook brigand-2
+Forecast Rook -> Brigand 2: acc 82% dmg 9 x2 crit 4%; counter: acc 51% dmg 14 crit 0%
+Rook attacks Brigand 2
+  Rook hits Brigand 2 for 9 (hp 13)
+  Brigand 2 hits Rook for 14 (hp 3)
+  Rook misses Brigand 2
+  Rook hp 3, Brigand 2 hp 13
+Rook gains 12 exp (12)
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^....B.H....
+ 8 ......DA.d....
+ 9 ....GE....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 13/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           9,7    hp 3/17   Plain  done
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              5,9    hp 20/20  Forest
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move wren 9,9
+Wren moves 5,9 -> 9,9 via 6,9 7,9 8,9
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^....B.H....
+ 8 ......DA.d....
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+d  brigand-2        Brigand L2 reaver          9,8    hp 13/22  Plain  group chase, aggressive
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           9,7    hp 3/17   Plain  done
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              9,9    hp 20/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack wren brigand-2
+Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+Wren attacks Brigand 2
+  Wren hits Brigand 2 for 10 (hp 3)
+  Brigand 2 hits Wren for 11 (hp 9)
+  Wren hits Brigand 2 for 10 (hp 0)
+  Wren hp 9, Brigand 2 hp 0
+Wren gains 35 exp (35)
+Brigand 2 falls at 9,8
+Rotten Bridge, the straggler  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^..e...f..^.
+ 2 ............g.
+ 3 ...^......n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^....B.H....
+ 8 ......DA......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           9,1    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          12,2   hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           9,7    hp 3/17   Plain  done
+e  soldier-1        Soldier L2 pikeman         5,1    hp 20/20  Plain  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain  done
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: move archer-2 7,3
+Archer 2 moves 9,1 -> 7,3 via 8,1 7,1 7,2
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-3 8,2
+Brigand 3 moves 12,2 -> 8,2 via 11,2 10,2 9,2
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move soldier-1 6,4
+Soldier moves 5,1 -> 6,4 via 6,1 6,2 6,3
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~++~~~~~=
+ 6 ........C.....
+ 7 ..^....B.H....
+ 8 ......DA......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+H  rook             Rook L1 skyrider           9,7    hp 3/17   Plain
+e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move rook 12,5
+Rook moves 9,7 -> 12,5 via 9,6 9,5 10,5 11,5
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~++~~~~H=
+ 6 ........C.....
+ 7 ..^....B......
+ 8 ......DA......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait rook
+Rook waits
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~++~~~~H=
+ 6 ........C.....
+ 7 ..^....B......
+ 8 ......DA......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move pell 6,6
+Pell moves 6,8 -> 6,6 via 6,7
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~++~~~~H=
+ 6 ......D.C.....
+ 7 ..^....B......
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack pell soldier-1
+Forecast Pell -> Soldier with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Soldier
+  Pell hits Soldier for 12 (hp 8)
+  Pell hp 16, Soldier hp 8
+Pell gains 12 exp (47)
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~++~~~~H=
+ 6 ......D.C.....
+ 7 ..^....B......
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          8,6    hp 17/17  Plain
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 8/20   Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move ottilie 7,5 preview
+preview: Ottilie would move 8,6 -> 7,5 via 7,6; wears nothing
+> move ottilie 7,5
+Ottilie moves 8,6 -> 7,5 via 7,6
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~+C~~~~H=
+ 6 ......D.......
+ 7 ..^....B......
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 8/20   Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack ottilie soldier-1
+Forecast Ottilie -> Soldier: acc 82% dmg 6 crit 4%; counter: none
+Ottilie attacks Soldier
+  Ottilie hits Soldier for 6 (hp 2)
+  Ottilie hp 17, Soldier hp 2
+Ottilie gains 12 exp (24)
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~+C~~~~H=
+ 6 ......D.......
+ 7 ..^....B......
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 2/20   Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          7,7    hp 16/21  Plain
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move teodor 6,5
+Teodor moves 7,7 -> 6,5 via 7,6 7,5
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~e+~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...........
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+e  soldier-1        Soldier L2 pikeman         6,4    hp 2/20   Planks  group gate, guard, awake
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack teodor soldier-1
+Forecast Teodor -> Soldier: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Teodor attacks Soldier
+  Teodor hits Soldier for 10 (hp 0)
+  Teodor hp 16, Soldier hp 0
+Teodor gains 35 exp (82)
+Soldier falls at 6,4
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...........
+ 8 .......A......
+ 9 ....G^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         4,9    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move dunstan 6,7
+Dunstan moves 4,9 -> 6,7 via 4,8 4,7 5,7
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...G.......
+ 8 .......A......
+ 9 .....^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait dunstan
+Dunstan waits
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...G.......
+ 8 .......A......
+ 9 .....^...E^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move wren 7,7
+Wren moves 9,9 -> 7,7 via 9,8 9,7 8,7
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...GE......
+ 8 .......A......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              7,7    hp 9/20   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> item wren 2
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 19)
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...GE......
+ 8 .......A......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        7,8    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move captain 8,7
+Alder Fenn moves 7,8 -> 8,7 via 7,7
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...GEA.....
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait captain
+Alder Fenn waits
+Rotten Bridge, the straggler  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ........g.....
+ 3 ...^...f..n...
+ 4 ~~~~~~++~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^...GEA.....
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           7,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          8,2    hp 22/22  Plain  group gate, guard, awake
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,5    hp 17/17  Planks  done
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain  done
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water  done
+B  teodor           Teodor L1 pikeman          6,5    hp 16/21  Planks  done
+E  wren             Wren L1 cadet              7,7    hp 19/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> end
+Lethal if all land: Ottilie (Archer 2 for 7, Brigand 3 for 12, against 17 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Rider 2 arrives at 0,11 with the wave group, aggressive
+Reinforcements arrive
+  Brigand 4 arrives at 4,11 with the wave group, aggressive
+Reinforcements arrive
+  Rider 3 arrives at 9,11 with the wave group, aggressive
+enemy: move archer-2 6,3
+Archer 2 moves 7,3 -> 6,3
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 hits Teodor for 5 (hp 11)
+  Archer 2 hp 17, Teodor hp 11
+enemy: move brigand-3 7,4
+Brigand 3 moves 8,2 -> 7,4 via 7,2 7,3
+enemy: attack brigand-3 ottilie
+Forecast Brigand 3 -> Ottilie: acc 58% dmg 12 crit 0%; counter: none
+Brigand 3 attacks Ottilie
+  Brigand 3 hits Ottilie for 12 (hp 5)
+  Brigand 3 hp 22, Ottilie hp 5
+enemy: move brigand-4 4,7
+Brigand 4 moves 4,11 -> 4,7 via 4,10 4,9 4,8
+enemy: wait brigand-4
+Brigand 4 waits
+enemy: move rider-2 3,8
+Rider 2 moves 0,11 -> 3,8 via 0,10 0,9 0,8 1,8 2,8
+enemy: wait rider-2
+Rider 2 waits
+enemy: move rider-3 7,8
+Rider 3 moves 9,11 -> 7,8 via 9,10 9,9 9,8 8,8
+enemy: attack rider-3 wren
+Forecast Rider 3 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 9 crit 3%
+Rider 3 attacks Wren
+  Rider 3 hits Wren for 9 (hp 10)
+  Wren hits Rider 3 for 9 (hp 11)
+  Rider 3 hp 11, Wren hp 10
+Wren gains 12 exp (47)
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..f...n...
+ 4 ~~~~~~+g~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ......D.......
+ 7 ..^.i.GEA.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          7,4    hp 22/22  Planks  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 5/17   Planks
+D  pell             Pell L1 adept              6,6    hp 16/16  Plain
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move pell 6,4
+Pell moves 6,6 -> 6,4 via 6,5
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..f...n...
+ 4 ~~~~~~Dg~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ..............
+ 7 ..^.i.GEA.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group gate, guard, awake
+g  brigand-3        Brigand L2 reaver          7,4    hp 22/22  Planks  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 5/17   Planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack pell brigand-3
+Forecast Pell -> Brigand 3 with Cinder: acc 99% dmg 13 crit 3%; counter: acc 70% dmg 13 crit 0%
+Pell attacks Brigand 3
+  Pell crits Brigand 3 for 39 (hp 0)
+  Pell hp 16, Brigand 3 hp 0
+Pell gains 35 exp (82)
+Brigand 3 falls at 7,4
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..f...n...
+ 4 ~~~~~~D+~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ..............
+ 7 ..^.i.GEA.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 5/17   Planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,7    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move wren 7,3 preview
+preview: Wren would move 7,7 -> 7,3 via 7,6 7,5 7,4; would wear 7,4 (Split planks)
+> move wren 7,3
+Wren moves 7,7 -> 7,3 via 7,6 7,5 7,4
+  7,4 becomes Split planks
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..fE..n...
+ 4 ~~~~~~D:~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ..............
+ 7 ..^.i.G.A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 5/17   Planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5 7,5; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack wren archer-2
+Forecast Wren -> Archer 2: acc 85% dmg 10 crit 3%; counter: none
+Wren attacks Archer 2
+  Wren hits Archer 2 for 10 (hp 7)
+  Wren hp 10, Archer 2 hp 7
+Wren gains 12 exp (59)
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..fE..n...
+ 4 ~~~~~~D:~~~~~=
+ 5 ~~~~~~BC~~~~H=
+ 6 ..............
+ 7 ..^.i.G.A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 7/17   Plain  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,5    hp 5/17   Planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5 7,5; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move ottilie 7,4
+Ottilie moves 7,5 -> 7,4
+  7,5 becomes Split planks
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^..fE..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ..............
+ 7 ..^.i.G.A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+f  archer-2         Archer L2 bowman           6,3    hp 7/17   Plain  group gate, guard, awake
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack ottilie archer-2
+Forecast Ottilie -> Archer 2: acc 82% dmg 8 crit 4%; counter: acc 76% dmg 7 crit 1%
+  Counter: lethal to Ottilie (7 against 5 hp)
+Ottilie attacks Archer 2
+  Ottilie hits Archer 2 for 8 (hp 0)
+  Ottilie hp 5, Archer 2 hp 0
+Ottilie gains 35 exp (59)
+Archer 2 falls at 6,3
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ..............
+ 7 ..^.i.G.A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,7    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move dunstan 6,6
+Dunstan moves 6,7 -> 6,6
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ......G.......
+ 7 ..^.i...A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait dunstan
+Dunstan waits
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ......G.......
+ 7 ..^.i...A.....
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        8,7    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move captain 7,6
+Alder Fenn moves 8,7 -> 7,6 via 8,6
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ......GA......
+ 7 ..^.i.........
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait captain
+Alder Fenn waits
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ......GA......
+ 7 ..^.i.........
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait teodor
+Teodor waits
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~H=
+ 6 ......GA......
+ 7 ..^.i.........
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           12,5   hp 3/17   Water
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move rook 10,1
+Rook moves 12,5 -> 10,1 via 12,4 12,3 12,2 12,1 11,1
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.......H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~~=
+ 6 ......GA......
+ 7 ..^.i.........
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait rook
+Rook waits
+Rotten Bridge, the straggler  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.......H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~~=
+ 6 ......GA......
+ 7 ..^.i.........
+ 8 ...h...j......
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          4,7    hp 22/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 22/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+h  rider-2          Rider L2 outrider          3,8    hp 20/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,8    hp 11/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain  done
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks  done
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move brigand-4 5,6
+Brigand 4 moves 4,7 -> 5,6 via 4,6
+enemy: attack brigand-4 dunstan
+Forecast Brigand 4 -> Dunstan: acc 73% dmg 8 crit 0%; counter: acc 77% dmg 11 crit 1%
+Brigand 4 attacks Dunstan
+  Brigand 4 misses Dunstan
+  Dunstan hits Brigand 4 for 11 (hp 11)
+  Brigand 4 hp 11, Dunstan hp 15
+Dunstan gains 12 exp (59)
+enemy: move rider-2 6,7
+Rider 2 moves 3,8 -> 6,7 via 3,7 4,7 5,7
+enemy: attack rider-2 dunstan
+Forecast Rider 2 -> Dunstan: acc 82% dmg 6 crit 1%; counter: acc 73% dmg 10 crit 0%
+Rider 2 attacks Dunstan
+  Rider 2 misses Dunstan
+  Dunstan hits Rider 2 for 10 (hp 10)
+  Rider 2 hp 10, Dunstan hp 15
+Dunstan gains 12 exp (71)
+enemy: move rider-3 7,7
+Rider 3 moves 7,8 -> 7,7
+enemy: attack rider-3 captain
+Forecast Rider 3 -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 10 crit 4%
+Rider 3 attacks Alder Fenn
+  Rider 3 hits Alder Fenn for 8 (hp 14)
+  Alder Fenn hits Rider 3 for 10 (hp 1)
+  Rider 3 hp 1, Alder Fenn hp 14
+Alder Fenn gains 12 exp (12)
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.......H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~~=
+ 6 .....iGA......
+ 7 ..^...hj......
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+h  rider-2          Rider L2 outrider          6,7    hp 10/20  Plain  group wave, aggressive
+j  rider-3          Rider L2 outrider          7,7    hp 1/20   Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack captain rider-3
+Forecast Alder Fenn -> Rider 3: acc 87% dmg 10 crit 4%; counter: acc 62% dmg 8 crit 0%
+Alder Fenn attacks Rider 3
+  Alder Fenn hits Rider 3 for 10 (hp 0)
+  Alder Fenn hp 14, Rider 3 hp 0
+Alder Fenn gains 35 exp (47)
+Rider 3 falls at 7,7
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.......H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~~=
+ 6 .....iGA......
+ 7 ..^...h.......
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L1 bulwark         6,6    hp 15/23  Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+h  rider-2          Rider L2 outrider          6,7    hp 10/20  Plain  group wave, aggressive
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> attack dunstan rider-2
+Forecast Dunstan -> Rider 2: acc 73% dmg 10 crit 0%; counter: acc 82% dmg 6 crit 1%
+Dunstan attacks Rider 2
+  Dunstan hits Rider 2 for 10 (hp 0)
+  Dunstan hp 15, Rider 2 hp 0
+Dunstan gains 35 exp (6)
+Dunstan reaches level 2: str +1 def +1
+Rider 2 falls at 6,7
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.......H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~B:~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,5    hp 11/21  Planks
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4 6,5; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move teodor 6,1 preview
+preview: Teodor would move 6,5 -> 6,1 via 6,4 6,3 6,2; would wear 6,5 (Split planks)
+> move teodor 6,1
+Teodor moves 6,5 -> 6,1 via 6,4 6,3 6,2
+  6,5 becomes Split planks
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B...H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait teodor
+Teodor waits
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B...H.^.
+ 2 ..............
+ 3 ...^...E..n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,3    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move wren 7,0
+Wren moves 7,3 -> 7,0 via 7,2 7,1
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>>...
+ 1 ..^...B...H.^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait wren
+Wren waits
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>>...
+ 1 ..^...B...H.^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,1   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> move rook 10,0
+Rook moves 10,1 -> 10,0
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait rook
+Rook waits
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait pell
+Pell waits
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> wait ottilie
+Ottilie waits
+Rotten Bridge, the straggler  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 .....iGA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+i  brigand-4        Brigand L2 reaver          5,6    hp 11/22  Plain  group wave, aggressive
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,6    hp 15/23  Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks  done
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks  done
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain  done
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain  done
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: attack brigand-4 dunstan
+Forecast Brigand 4 -> Dunstan: acc 73% dmg 7 crit 0%; counter: acc 77% dmg 12 crit 1%
+Brigand 4 attacks Dunstan
+  Brigand 4 hits Dunstan for 7 (hp 8)
+  Dunstan hits Brigand 4 for 12 (hp 0)
+  Brigand 4 hp 0, Dunstan hp 8
+Dunstan gains 30 exp (36)
+Brigand 4 falls at 5,6
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>E>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 ......GA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,6    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+E  wren             Wren L1 cadet              7,0    hp 10/20  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+> exit wren
+Wren leaves through the exit at 7,0
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>H...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 ......GA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,6    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+H  rook             Rook L1 skyrider           10,0   hp 3/17   Plain
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren
+> exit rook
+Rook leaves through the exit at 10,0
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~::~~~~~=
+ 6 ......GA......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,6    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> move dunstan 6,3 preview
+preview: Dunstan would move 6,6 -> 6,3 via 6,5 6,4; would wear 6,5 (Water)
+> move dunstan 6,3
+Dunstan moves 6,6 -> 6,3 via 6,5 6,4
+  6,5 becomes Water
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~:~~~~~=
+ 6 .......A......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> wait dunstan
+Dunstan waits
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B.....^.
+ 2 ..............
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~:~~~~~=
+ 6 .......A......
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,6    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> move captain 7,2 preview
+preview: Alder Fenn would move 7,6 -> 7,2 via 7,5 7,4 7,3; would wear 7,5 (Water)
+> move captain 7,2
+Alder Fenn moves 7,6 -> 7,2 via 7,5 7,4 7,3
+  7,5 becomes Water
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B.....^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> wait captain
+Alder Fenn waits
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^...B.....^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> move teodor 5,0
+Teodor moves 6,1 -> 5,0 via 6,0
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>B>>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> wait teodor
+Teodor waits
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>B>>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~DC~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,4    hp 16/16  Planks
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Planks 6,4; Split planks 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
+escaped: wren rook
+> move pell 6,0
+Pell moves 6,4 -> 6,0 via 6,3 6,2 6,1
+  6,4 becomes Split planks
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>BD>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:C~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook
+> wait pell
+Pell waits
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>BD>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:C~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,4    hp 5/17   Split planks
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 7,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook
+> move ottilie 7,0
+Ottilie moves 7,4 -> 7,0 via 7,3 7,2 7,1
+  7,4 becomes Water
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>BDC>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook
+> wait ottilie
+Ottilie waits
+Rotten Bridge, the straggler  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>BDC>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain  done
+C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain  done
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain  done
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>BDC>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain
+B  teodor           Teodor L1 pikeman          5,0    hp 11/21  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook
+> exit teodor
+Teodor leaves through the exit at 5,0
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>DC>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
+D  pell             Pell L1 adept              6,0    hp 16/16  Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor
+> exit pell
+Pell leaves through the exit at 6,0
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>C>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
+C  ottilie          Ottilie L1 bowman          7,0    hp 5/17   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell
+> exit ottilie
+Ottilie leaves through the exit at 7,0
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^..G...n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,3    hp 8/23   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> move dunstan 6,0 preview
+preview: Dunstan would move 6,3 -> 6,0 via 6,2 6,1; wears nothing
+> move dunstan 6,0
+Dunstan moves 6,3 -> 6,0 via 6,2 6,1
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>G>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> wait dunstan
+Dunstan waits
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>G>>>>...
+ 1 ..^.........^.
+ 2 .......A......
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        7,2    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> move captain 8,0
+Alder Fenn moves 7,2 -> 8,0 via 7,1 7,0
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>G>A>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> wait captain
+Alder Fenn waits
+Rotten Bridge, the straggler  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>G>A>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain  done
+G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain  done
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Rotten Bridge, the straggler  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>G>A>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
+G  dunstan          Dunstan L2 bulwark         6,0    hp 8/23   Plain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie
+> exit dunstan
+Dunstan leaves through the exit at 6,0
+Rotten Bridge, the straggler  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>A>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L1 cadet        8,0    hp 14/22  Plain  captain
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie dunstan
+> exit captain
+Alder Fenn leaves through the exit at 8,0
+Rotten Bridge, the straggler  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ....>>>>>>>...
+ 1 ..^.........^.
+ 2 ..............
+ 3 ...^......n...
+ 4 ~~~~~~:~~~~~~=
+ 5 ~~~~~~~~~~~~~=
+ 6 ..............
+ 7 ..^...........
+ 8 ..............
+ 9 .....^....^...
+10 ..............
+11 ..............
+
+exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+wears: Split planks 6,4 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Split planks, Water)
+escaped: wren rook teodor pell ottilie dunstan captain
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Wren, Rook, Teodor, Pell, Ottilie, Dunstan, Alder Fenn; left behind: none; fell: none

@@ -1,0 +1,43 @@
+name: Rotten Bridge, the straggler
+size: 14x12
+win: escape
+turn_limit: 8
+recall: 3
+enemy_level: 2
+exit: 4,0 5,0 6,0 7,0 8,0 9,0 10,0
+announce: on
+deploy: 7
+
+..............
+..^.........^.
+..............
+...^......n...
+~~~~~~++~~~~~=
+~~~~~~++~~~~~=
+..............
+..^...........
+..............
+.....^....^...
+..............
+..............
+
+units:
+P captain 6,7
+P recruit:teodor 7,7
+P recruit:ottilie 5,8
+P recruit:pell 8,8
+P recruit:wren 6,8
+P recruit:dunstan 1,10
+P recruit:rook 7,8
+E rider 6,11 group:chase behavior:aggressive
+E brigand 3,11 group:chase behavior:aggressive
+E archer 8,11 group:chase behavior:aggressive
+E brigand 10,11 group:chase behavior:aggressive
+E soldier 5,1 group:gate behavior:guard
+E archer 9,1 group:gate behavior:guard
+E brigand 12,2 group:gate behavior:guard
+
+events:
+wave1 turn 3 enemy spawn rider 0,11 group:wave behavior:aggressive
+wave2 turn 3 enemy spawn brigand 4,11 group:wave behavior:aggressive
+wave3 turn 3 enemy spawn rider 9,11 group:wave behavior:aggressive

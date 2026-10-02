@@ -2199,6 +2199,30 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 783 (DESIGN.md 13.25): the straggler sample is canonical and Code's warm seed 783
+    /// replays to its transcript; the turn-3 wave is announced before the first command, and on
+    /// turn 6 Dunstan's armour crosses over Pell's held plank, so only the split plank he leaves
+    /// goes to Water and all seven reach the exits.
+    /// </summary>
+    [Fact]
+    public void TheJournaledStragglerPlayReplaysToItsTranscript()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "rotten_bridge_straggler.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-rotten_bridge_straggler-783.script");
+
+        var output = Run(out _, "play", map, "--seed", "783", "--script", script, "--content", Fixture.RealContentDirectory());
+        var text = File.ReadAllText(map).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("rotten_bridge_straggler.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        Assert.Contains("  turn 3, enemy phase: a rider arrives at 0,11 (aggressive). A unit standing on 0,11 stops it.\n", output);
+        Assert.Contains("preview: Dunstan would move 6,6 -> 6,3 via 6,5 6,4; would wear 6,5 (Water)\n", output);
+        Assert.Contains("Dunstan moves 6,6 -> 6,3 via 6,5 6,4\n  6,5 becomes Water\n", output);
+        Assert.Contains("Escaped: Wren, Rook, Teodor, Pell, Ottilie, Dunstan, Alder Fenn; left behind: none; fell: none", output);
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.
