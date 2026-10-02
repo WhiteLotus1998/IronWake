@@ -561,6 +561,23 @@ public static class ContentSerializer
 
                 writer.WriteEndArray();
                 writer.WriteNumber("overwriteAt", content.Rivalry.OverwriteAt);
+                if (content.Rivalry.SupportTiers.Count > 0)
+                {
+                    writer.WriteStartArray("supportTiers");
+                    foreach (var tier in content.Rivalry.SupportTiers)
+                    {
+                        writer.WriteStartObject();
+                        writer.WriteString("tier", tier.Name);
+                        writer.WriteNumber("at", tier.At);
+                        writer.WriteNumber("hit", tier.Hit);
+                        writer.WriteNumber("avoid", tier.Avoid);
+                        writer.WriteNumber("crit", tier.Crit);
+                        writer.WriteEndObject();
+                    }
+
+                    writer.WriteEndArray();
+                }
+
                 writer.WriteEndObject();
             }
 
