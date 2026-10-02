@@ -476,7 +476,7 @@ public sealed class PlaySession
 
         var outcome = _state.Outcome;
         _out.WriteLine(outcome.IsOver
-            ? $"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(outcome.Reason)}"
+            ? $"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(Objective.Reason(_state, _content))}"
             : $"Battle ongoing at turn {_state.Turn}, {_state.Phase.ToString().ToLowerInvariant()} phase");
         if (EscapeSummary(_state) is { } escape && outcome.IsOver)
         {
@@ -1223,7 +1223,7 @@ public sealed class PlaySession
             var after = _state.RecallCharges > 0
                 ? "only recall is left" + (_campaign ? ", or leave" : "")
                 : "no recall is left" + (_campaign ? ", so leave" : "");
-            _out.WriteLine($"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(outcome.Reason)}; {after}");
+            _out.WriteLine($"Battle {(outcome.Result == BattleResult.Won ? "won" : "lost")}: {UnitNames.Of(_state, _content).Named(Objective.Reason(_state, _content))}; {after}");
             if (Objective.Verdict(_state, _content) is { } verdict)
             {
                 _out.WriteLine(verdict);

@@ -498,7 +498,7 @@ public sealed class CampaignSession
 
     /// <summary>The line a lost battle ends the campaign on, its reason naming units as the battle does.</summary>
     public static string LostLine(BattleState end, GameContent content) =>
-        $"Campaign lost on {end.Map.Name}: {UnitNames.Of(end, content).Named(end.Outcome.Reason)}";
+        $"Campaign lost on {end.Map.Name}: {UnitNames.Of(end, content).Named(Objective.Reason(end, content))}";
 
     /// <summary>The line once every map is won.</summary>
     public static string CampaignWonLine(CampaignRecord record, GameContent content) =>

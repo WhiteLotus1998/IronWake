@@ -4668,7 +4668,7 @@ The Lazar House  turn 5 of 6  enemy phase  survive  recall 0
 e  archer-2         Archer L1 bowman           9,3    hp 6/17   Forest  group ford, aggressive  done
 h  brigand-4        Brigand L1 reaver          6,7    hp 22/22  Plain  group ford, aggressive
 B  dunstan          Dunstan L1 bulwark         9,4    hp 5/23   Road
-Battle lost: the captain is dead; no recall is left, so leave
+Battle lost: Maud is dead; no recall is left, so leave
 Lost because Maud fell.
 > leave
 Maud falls on maud_1, which closes for good; fallen for good: Maud

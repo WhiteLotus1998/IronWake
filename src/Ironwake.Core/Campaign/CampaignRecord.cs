@@ -1043,7 +1043,7 @@ public sealed record CampaignRecord(
             ? $"{quest.MemberId} wins {questId}{paid}{dead}"
             : lost.Contains(quest.MemberId)
                 ? $"{quest.MemberId} falls on {questId}, which closes for good{dead}"
-                : $"side map {questId} is lost: {end.Outcome.Reason}; it opens again after the next map{dead}";
+                : $"side map {questId} is lost: {Objective.Reason(end, content)}; it opens again after the next map{dead}";
         return new ScreenResult(record, line, true);
     }
 
