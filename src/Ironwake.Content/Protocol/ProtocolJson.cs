@@ -777,7 +777,7 @@ public static class ProtocolJson
         var outcome = state.Outcome;
         w.WriteStartObject("outcome");
         w.WriteString("result", Name(outcome.Result));
-        w.WriteString("reason", outcome.Reason);
+        w.WriteString("reason", Objective.Reason(state, content));
         w.WriteString("cause", Name(outcome.Cause));
         w.WriteEndObject();
         w.WriteNumber("historyCount", state.History.Count);

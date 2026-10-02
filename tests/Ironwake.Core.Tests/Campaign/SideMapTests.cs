@@ -162,6 +162,39 @@ public class SideMapTests
     }
 
     [Fact]
+    public void ASideMapLostByTheMemberNamesTheMemberAndNeverTheCaptain()
+    {
+        var end = Decided(At("the_tollgate"), "maud_1", "wren", Content, keep: u => u.Id != "maud");
+
+        Assert.Equal(LossCause.Captain, end.Outcome.Cause);
+        Assert.Equal("maud is dead", Objective.Reason(end, Content));
+        Assert.Equal("Maud is dead", UnitNames.Of(end, Content).Named(Objective.Reason(end, Content)));
+        Assert.Contains("\"reason\":\"maud is dead\"", ProtocolJson.State(end, Content));
+        Assert.DoesNotContain("captain", Objective.Reason(end, Content));
+    }
+
+    [Fact]
+    public void ASideMapLostWithTheMemberWoundedNamesTheMemberInTheRecordLine()
+    {
+        var record = CampaignRecord.StartAt(Content, 701, "the_tollgate", permadeath: false);
+        var end = Decided(record, "maud_1", "wren", Content, keep: u => u.Id != "maud");
+
+        var after = record.AfterQuest(end, "maud_1", Content);
+
+        Assert.StartsWith("side map maud_1 is lost: maud is dead;", after.Text);
+    }
+
+    [Fact]
+    public void TheCompanyCaptainsDeathStillReadsTheCaptainIsDead()
+    {
+        var record = At("the_tollgate");
+        var opening = record.Begin(MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "maps", "the_tollgate" + MapFiles.Extension), Content), Content);
+        var end = opening with { Units = ValueList<BattleUnit>.From(opening.Units.Where(u => !u.IsCaptain)), History = ValueList<BattleState>.Of(opening) };
+
+        Assert.Equal("the captain is dead", Objective.Reason(end, Content));
+    }
+
+    [Fact]
     public void AMemberWhoFallsClosesTheSideMapAndTheCampaignGoesOn()
     {
         var record = At("the_tollgate");

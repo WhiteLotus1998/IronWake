@@ -64,6 +64,20 @@ public static class Objective
     }
 
     /// <summary>
+    /// The outcome's reason as a reader sees it (issue 762): on a map whose captain slot holds a
+    /// cast member who is not the company's captain (a side map's member), the captain's death
+    /// reads <c>maud is dead</c>, by id for <see cref="UnitNames.Named"/> to name, never
+    /// <c>the captain is dead</c>. Every other outcome reads as <see cref="BattleState.Outcome"/> gives it.
+    /// </summary>
+    public static string Reason(BattleState state, GameContent content)
+    {
+        var outcome = state.Outcome;
+        return outcome.Cause == LossCause.Captain && CaptainUnit(state) is { } fallen && Leads(fallen, content)
+            ? $"{fallen.Id} is dead"
+            : outcome.Reason;
+    }
+
+    /// <summary>
     /// Why a lost battle was lost, naming what was missed: the captain or the protected unit by
     /// name, or on a timeout what the objective still lacked. Null while ongoing or won.
     /// </summary>
