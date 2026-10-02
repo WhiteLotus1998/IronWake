@@ -39,8 +39,9 @@ namespace Ironwake.Godot;
 /// With <c>--campaign</c> (issue 360) or a bare launch it plays the campaign through <see cref="CampaignClient"/>
 /// instead, from the first map or from <c>--from &lt;map&gt;</c>: the between-map screen shows the
 /// console's roster, shop, deployment and keep lines; a click on a unit's row selects it, a click on
-/// a ware buys it for that unit, B benches or unbenches it, M or a click on the march row marches,
-/// and L leaves a decided battle. <c>--campaign-parity &lt;script&gt; &lt;out&gt;</c> writes the
+/// a ware buys it for that unit, B benches or unbenches it, a camp action's row (<see cref="CampActions"/>,
+/// issue 786) takes that command, Q picks the unit for a side map's party, the wheel scrolls, M or
+/// a click on the march row marches, and L leaves a decided battle. <c>--campaign-parity &lt;script&gt; &lt;out&gt;</c> writes the
 /// presenter's event log for a <c>campaign --script</c> file and quits.
 /// </summary>
 public partial class Main : Node2D
@@ -151,6 +152,12 @@ public partial class Main : Node2D
 
     /// <summary>The roster unit selected on the between-map screen, which a ware is bought for and B benches.</summary>
     private string? _screenUnit;
+
+    /// <summary>The allies picked with Q for a side map that takes more than one (issue 786), in the order picked.</summary>
+    private readonly List<string> _screenParty = new();
+
+    /// <summary>How many wrapped rows the between-map screen is scrolled past (issue 786), by the wheel or Page Up and Page Down.</summary>
+    private int _screenScroll;
 
     private Coord? _hover;
 
@@ -532,7 +539,11 @@ public partial class Main : Node2D
     /// <summary>The tile (issue 513): as large as fills the height the block allows under the top bar and above the legend and footer, and never so wide the column does not fit.</summary>
     private int TileFor(MapDefinition map) => _layout.TileFor(map.Width, map.Height);
 
-    /// <summary>The between-map screen's input: a click on a row does what it offers; M marches; B benches or unbenches the selected unit.</summary>
+    /// <summary>
+    /// The between-map screen's input: a click on a row does what it offers; M marches; B benches or
+    /// unbenches the selected unit; Q adds it to or takes it from a side map's party (issue 786); the
+    /// wheel and Page Up and Page Down scroll the screen.
+    /// </summary>
     private void ScreenInput(InputEvent input)
     {
         var campaign = _campaign!;
@@ -554,6 +565,25 @@ public partial class Main : Node2D
                     campaign.Bench(unit);
                 }
 
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Q } when _screenUnit is { } picked:
+                if (!_screenParty.Remove(picked))
+                {
+                    _screenParty.Add(picked);
+                }
+
+                break;
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.WheelDown }:
+                _screenScroll += 3;
+                break;
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.WheelUp }:
+                _screenScroll = Math.Max(0, _screenScroll - 3);
+                break;
+            case InputEventKey { Pressed: true, Keycode: Key.Pagedown }:
+                _screenScroll += 20;
+                break;
+            case InputEventKey { Pressed: true, Keycode: Key.Pageup }:
+                _screenScroll = Math.Max(0, _screenScroll - 20);
                 break;
             default:
                 return;
@@ -619,6 +649,17 @@ public partial class Main : Node2D
             {
                 var id = ware;
                 yield return ("  " + CampaignSession.WareText(content, id), _screenUnit is { } buyer ? () => campaign.Buy(id, buyer) : null, false);
+            }
+
+            // Every other camp command as a row (issue 786); each row names the console command it is.
+            _screenParty.RemoveAll(id => record.Find(id) is null);
+            yield return ("== Camp actions ==", null, false);
+            var party = _screenParty.Count == 0 ? "" : $"; side map party: {string.Join(", ", _screenParty)}";
+            yield return ((_screenUnit is null ? "select a unit for its own actions" : $"actions for {_screenUnit}") + "; Q adds the selected unit to a side map's party or takes it out" + party, null, false);
+            foreach (var action in CampActions.For(campaign, _screenUnit, _screenParty))
+            {
+                var run = action.Run;
+                yield return ($"  {action.Text}  ({action.Command})", () => run(), false);
             }
 
             yield return ($"[ {CampaignSession.MarchLine(record, content, map)} ]  (M)", () => campaign.March(), false);
@@ -1456,24 +1497,29 @@ public partial class Main : Node2D
         Text(new Vector2(Margin, 28), _campaign!.Over ? "campaign over" : "between maps", Ink, 18);
         var columns = (int)((ViewWidth - 2 * Margin) / (_mono.GetStringSize("MMMMMMMMMM", fontSize: FontSize).X / 10));
         var y = (float)Top;
-        foreach (var (text, click, selected) in ScreenLines())
+        var rows = ScreenLines().SelectMany(line => TextLayout.Wrap(line.Text, columns).Select(row => (row, line.Click, line.Selected))).ToList();
+        var fits = (int)((ViewHeight - Margin - Top) / LineHeight) + 1;
+        _screenScroll = Math.Clamp(_screenScroll, 0, Math.Max(0, rows.Count - fits));
+        if (_screenScroll > 0)
         {
-            var top = y;
-            foreach (var row in TextLayout.Wrap(text, columns))
-            {
-                if (y > ViewHeight - Margin)
-                {
-                    return;
-                }
+            Text(new Vector2(ViewWidth - Margin - 260, 28), $"scrolled {_screenScroll} rows (wheel, PgUp)", Muted, FontSize);
+        }
 
-                Text(new Vector2(Margin, y), row, selected ? Mark : click is null ? Ink : Link, FontSize);
-                y += LineHeight;
+        foreach (var (row, click, selected) in rows.Skip(_screenScroll))
+        {
+            if (y > ViewHeight - Margin)
+            {
+                Text(new Vector2(ViewWidth - Margin - 260, 28 + LineHeight), "more below (wheel, PgDn)", Muted, FontSize);
+                return;
             }
 
+            Text(new Vector2(Margin, y), row, selected ? Mark : click is null ? Ink : Link, FontSize);
             if (click is not null)
             {
-                _hits.Add((new Rect2(0, top - LineHeight + 4, ViewWidth, y - top), click));
+                _hits.Add((new Rect2(0, y - LineHeight + 4, ViewWidth, LineHeight), click));
             }
+
+            y += LineHeight;
         }
     }
 

@@ -4,9 +4,9 @@ Updated: 2026-10-02. Rewritten, not appended; under 20 KB (#401); history is in 
 
 ## Where we are
 
-Phases 1 and 2 of DESIGN section 12 are built: rules, content, the cast, maps, keyed combat, Recall, the enemy AI, the console game and the Sim with gates 1 to 8. Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
+Phases 1 and 2 (DESIGN 12) are built. Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3523 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+3533 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -17,7 +17,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client does not draw it. Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23 has the numbers): `kinsbane: <recruit>` issues it; sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. Chat's cold play decides.
 - 13.22 the break is spiked (0112, rounds 181 to 183; DESIGN 13.22): on `break: on` a boss's death sends his group at or below half HP off the board; forecasts print `break if <boss> falls`. Samples `the_tollgate_break.map` (Code 661) and `saltmarsh_ford_break.map` (#606; Code 667): nothing broke. Chat's cold play on Saltmarsh decides.
-- #786 (round 240): slice 1 built: a bare launch (double-clicking `Ironwake.exe`) opens the campaign's title; One battle (B) opens the Tollgate's title, Back returns. Next: slices 2 to 5 (camp actions, chests and the Word drawn, cards, full-campaign parity).
+- #786 (round 240): slice 1 built: a bare launch (double-clicking `Ironwake.exe`) opens the campaign's title; One battle (B) opens the Tollgate's title, Back returns. Slice 2: every other camp command is a row (`CampActions`), Q picks a side map's party, the camp scrolls; `camp-actions-41.script` holds them to the console. Next: slices 3 to 5; no way back to the title from a camp yet.
 - #762, #765: a lost side map names its member; the dusk line names the hearing radius (`duskLine`). The client draws neither.
 - #565: `threat` names a tile the boss veto refused and where the boss ends (`refusals`); the client lacks it.
 - 13.18 Lines on the board (#486, DESIGN 13.18): signatures behind `signatures: on`; verdicts in the experiments table; the other eight wait for boards that field them (`cast_audit.md`).
