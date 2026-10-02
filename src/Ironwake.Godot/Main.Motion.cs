@@ -404,13 +404,13 @@ public partial class Main
         var centre = TokenCentre(unit.At);
         var shift = Shift(unit.Id, unit.At);
         _tokenFrame = new Transform2D(0, new Vector2(scale, scale), 0, centre + shift - scale * centre);
-        DrawSetTransformMatrix(_tokenFrame);
+        DrawSetTransformMatrix(_frame * _tokenFrame);
         DrawToken(state, unit);
-        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        DrawSetTransformMatrix(_frame);
         _tokenFrame = Transform2D.Identity;
     }
 
-    /// <summary>The transform a token is being drawn under, so its own shadow ellipse can compose with it.</summary>
+    /// <summary>The transform a token is being drawn under, inside <see cref="_frame"/>, so its own shadow ellipse can compose with it.</summary>
     private Transform2D _tokenFrame = Transform2D.Identity;
 
     /// <summary>

@@ -325,9 +325,9 @@ public partial class Main
         var drawn = DrawTokenArt(unit, centre, radius, player && unit.Acted ? 0.45f : 0);
         if (!drawn)
         {
-            DrawSetTransformMatrix(_tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
+            DrawSetTransformMatrix(_frame * _tokenFrame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3 * s)));
             DrawCircle(Vector2.Zero, radius, deep);
-            DrawSetTransformMatrix(_tokenFrame);
+            DrawSetTransformMatrix(_frame * _tokenFrame);
             DrawCircle(centre, radius, fill);
         }
 

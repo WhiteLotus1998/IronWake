@@ -123,3 +123,12 @@ STILLS=(21)
 strip the_tollgate-113-scene 40 0.25 --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-enemy.script" --enemy-steps 0
 STILLS=(22)
 strip brackwater_cut-53-scene 40 0.25 --map brackwater_cut --seed 53 --script "$PWD/$out/brackwater_cut-53-turn3.script" --enemy-steps 0 --scenes all
+# Issue 698: UI scale. The Tollgate's turn 1 with the captain selected, the turn-3 forecast, the
+# pause menu and Options at 125 and 150: the canvas narrows to 1024 and 853, the column wraps,
+# the top bar and the key strip take a second row, and the board's tile shrinks.
+for scale in 125 150; do
+  shot the_tollgate-113-turn1-scale$scale --map the_tollgate --seed 113 --select 6,11 --hover 6,9 --ui-scale $scale
+  shot the_tollgate-113-turn3-scale$scale --map the_tollgate --seed 113 --script "$PWD/$out/the_tollgate-113-turn3.script" --select 8,7 --hover 7,5 --ui-scale $scale
+  shot the_tollgate-113-paused-scale$scale --map the_tollgate --seed 113 --paused --ui-scale $scale
+  shot options-scale$scale --campaign --screen options --ui-scale $scale
+done

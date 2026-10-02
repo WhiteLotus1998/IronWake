@@ -18,8 +18,14 @@ public partial class Main
     /// <summary>The drawn forecast's height, from the card's top edge to its bottom.</summary>
     private const float ForecastHeight = 236;
 
-    /// <summary>The drawn unit card's height.</summary>
+    /// <summary>The drawn unit card's height with its weapon on one line.</summary>
     private const float UnitCardHeight = 128;
+
+    /// <summary>The weapon line's rows: one across the column at 100, two where a narrower column at a larger UI scale wraps it (issue 698).</summary>
+    private IReadOnlyList<string> WeaponRows(UnitCard card) => TextLayout.Wrap(card.WeaponLine, Columns).Take(2).ToList();
+
+    /// <summary>The drawn unit card's height: a row taller for each wrapped weapon row after the first.</summary>
+    private float UnitCardHeightOf(UnitCard card) => UnitCardHeight + (WeaponRows(card).Count - 1) * (LineHeight - 2);
 
     /// <summary>
     /// Draws the card for <paramref name="card"/> with its top edge at <paramref name="top"/>, and
@@ -44,21 +50,34 @@ public partial class Main
         // Who, with what, from where: the source of avoid beside each tile.
         DrawDisc(P(34, 62), 20, card.Attacker.Id);
         UiText(P(66, 56), card.Attacker.Name, Ink, 18, bold: true);
-        UiText(P(66, 76), $"{card.Attacker.Weapon}  |  {card.Attacker.Ground}", Muted, 12);
         DrawDisc(P(PanelWidth - 34, 62), 20, card.Defender.Id);
         RightText(P(PanelWidth - 66, 56), card.Defender.Name, Ink, 18, bold: true);
-        RightText(P(PanelWidth - 66, 76), $"{card.Defender.Weapon}  |  {card.Defender.Ground}", Muted, 12);
+        var ours = $"{card.Attacker.Weapon}  |  {card.Attacker.Ground}";
+        var theirs = $"{card.Defender.Weapon}  |  {card.Defender.Ground}";
+        if (UiWidth(ours, 12) + UiWidth(theirs, 12) + 16 <= PanelWidth - 132)
+        {
+            UiText(P(66, 76), ours, Muted, 12);
+            RightText(P(PanelWidth - 66, 76), theirs, Muted, 12);
+        }
+        else
+        {
+            // A narrower column at a larger UI scale (issue 698): the weapon and the ground stack, smaller, rather than run into each other.
+            UiText(P(66, 72), card.Attacker.Weapon, Muted, 11);
+            UiText(P(66, 87), card.Attacker.Ground, Muted, 11);
+            RightText(P(PanelWidth - 66, 72), card.Defender.Weapon, Muted, 11);
+            RightText(P(PanelWidth - 66, 87), card.Defender.Ground, Muted, 11);
+        }
 
         // Both outcomes at one weight (round 131): the counter is what this game prices.
         var barWidth = (PanelWidth - 36) / 2f;
         HpBar(new Rect2(P(8, 94), new Vector2(barWidth, 14)), card.Attacker, Look(LookPalette.Player));
         HpBar(new Rect2(P(PanelWidth - 8 - barWidth, 94), new Vector2(barWidth, 14)), card.Defender, Look(LookPalette.EnemyBone));
-        var ours = $"{card.Attacker.Hp} → {card.Attacker.After}";
-        UiText(P(8, 128), ours, Ink, 15, bold: true);
-        UiText(P(8 + UiWidth(ours, 15, bold: true) + 8, 128), card.Defender.Strike.Strikes ? "if countered" : "no counter", Muted, 12);
-        var theirs = $"{card.Defender.Hp} → {card.Defender.After}";
-        RightText(P(PanelWidth - 8, 128), theirs, Ink, 15, bold: true);
-        RightText(P(PanelWidth - 16 - UiWidth(theirs, 15, bold: true), 128), "if all land", Muted, 12);
+        var ourHp = $"{card.Attacker.Hp} → {card.Attacker.After}";
+        UiText(P(8, 128), ourHp, Ink, 15, bold: true);
+        UiText(P(8 + UiWidth(ourHp, 15, bold: true) + 8, 128), card.Defender.Strike.Strikes ? "if countered" : "no counter", Muted, 12);
+        var theirHp = $"{card.Defender.Hp} → {card.Defender.After}";
+        RightText(P(PanelWidth - 8, 128), theirHp, Ink, 15, bold: true);
+        RightText(P(PanelWidth - 16 - UiWidth(theirHp, 15, bold: true), 128), "if all land", Muted, 12);
 
         // The numerals: ours in amber left of each rule, theirs in bone right of it.
         var a = card.Attacker.Strike;
@@ -72,8 +91,10 @@ public partial class Main
         DrawLine(P(8, 200), P(PanelWidth - 8, 200), Rule, 1);
         UiText(P(8, 222), "strikes", Muted, 12);
         Pips(P(72, 218), a.Strikes ? a.StrikeCount : 0, Look(LookPalette.Player));
-        UiText(P(PanelWidth * 0.52f, 222), "counter", Muted, 12);
-        Pips(P(PanelWidth * 0.52f + 64, 218), d.Strikes ? d.StrikeCount : 0, Look(LookPalette.EnemyBone));
+        // The counter's words sit at 52 percent across, or further left where a narrower column (issue 698) would run its pips into the doubling words.
+        var counterAt = Math.Min(PanelWidth * 0.52f, PanelWidth - 8 - UiWidth(card.Doubling, 12) - 64 - 16 * Math.Max(2, d.StrikeCount) - 8);
+        UiText(P(counterAt, 222), "counter", Muted, 12);
+        Pips(P(counterAt + 64, 218), d.Strikes ? d.StrikeCount : 0, Look(LookPalette.EnemyBone));
         RightText(P(PanelWidth - 8, 222), card.Doubling, Muted, 12);
         return top + ForecastHeight;
     }
@@ -88,7 +109,9 @@ public partial class Main
         var x = centre.X;
         var labelWidth = _caps.GetStringSize(label, fontSize: 11).X;
         DrawString(_caps, new Vector2(x - labelWidth / 2, top + 150), label, fontSize: 11, modulate: Muted);
-        RightText(new Vector2(x - 10, top + 188), ours, Look(LookPalette.Player), 38, bold: true);
+        // 38 across the 500 column; a narrower column at a larger UI scale (issue 698) sets them smaller so the three pairs keep apart.
+        var size = (int)(38 * Math.Min(1f, PanelWidth / 500f));
+        RightText(new Vector2(x - 10, top + 188), ours, Look(LookPalette.Player), size, bold: true);
         DrawLine(new Vector2(x, top + 160), new Vector2(x, top + 188), Rule, 1);
         if (theirs is null)
         {
@@ -96,7 +119,7 @@ public partial class Main
             return;
         }
 
-        UiText(new Vector2(x + 10, top + 188), theirs, Look(LookPalette.EnemyBone), 38, bold: true);
+        UiText(new Vector2(x + 10, top + 188), theirs, Look(LookPalette.EnemyBone), size, bold: true);
     }
 
     /// <summary>A side's strikes as pips: one filled per strike, up to two slots with the empty ones ringed.</summary>
@@ -170,9 +193,9 @@ public partial class Main
             return;
         }
 
-        DrawSetTransform(centre + new Vector2(0, 3), 0, new Vector2(1, (radius - 1) / radius));
+        DrawSetTransformMatrix(_frame * new Transform2D(0, new Vector2(1, (radius - 1) / radius), 0, centre + new Vector2(0, 3)));
         DrawCircle(Vector2.Zero, radius, player ? Look(LookPalette.PlayerDeep) : new Color(ink, 0.55f));
-        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        DrawSetTransformMatrix(_frame);
         DrawCircle(centre, radius, player ? Look(LookPalette.Player) : Look(LookPalette.Enemy));
         if (!player)
         {
@@ -191,19 +214,21 @@ public partial class Main
     {
         var x0 = PanelOrigin.X;
         Vector2 P(float x, float y) => new(x0 + x, top + y);
-        Card(new Rect2(x0 - 12, top, PanelWidth + 24, UnitCardHeight), Box, 10);
+        Card(new Rect2(x0 - 12, top, PanelWidth + 24, UnitCardHeightOf(card)), Box, 10);
         DrawDisc(P(30, 34), 18, card.Id);
         UiText(P(60, 30), card.Name, Ink, 17, bold: true);
         var sub = $"{card.ClassName} L{card.Level}  |  {card.Terrain} {card.At.X},{card.At.Y}";
         UiText(P(60 + UiWidth(card.Name, 17, bold: true) + 10, 30), sub, Muted, 12);
         var colour = card.Side == CoreSide.Player ? Look(LookPalette.Player) : Look(LookPalette.EnemyBone);
-        HpBar(new Rect2(P(60, 40), new Vector2(160, 10)), card.Hp, card.Hp, card.MaxHp, colour);
-        UiText(P(228, 50), $"{card.Hp} / {card.MaxHp}", Ink, 13, bold: true);
+        // The bars share the column: at 500 the HP bar is 160 and the EXP bar 110; a narrower column at a larger UI scale (issue 698) shortens both.
+        var hpWidth = 160f * PanelWidth / 500;
+        HpBar(new Rect2(P(60, 40), new Vector2(hpWidth, 10)), card.Hp, card.Hp, card.MaxHp, colour);
+        UiText(P(68 + hpWidth, 50), $"{card.Hp} / {card.MaxHp}", Ink, 13, bold: true);
         if (card.Exp is { } exp)
         {
             // The EXP bar beside HP (issue 533): a thin rule filling toward the next level, the number after it.
-            DrawString(_caps, P(318, 50), "EXP", fontSize: 9, modulate: Muted);
-            var bar = new Rect2(P(346, 42), new Vector2(110, 6));
+            DrawString(_caps, P(158 + hpWidth, 50), "EXP", fontSize: 9, modulate: Muted);
+            var bar = new Rect2(P(186 + hpWidth, 42), new Vector2(Math.Clamp(PanelWidth - 224 - hpWidth, 24, 110), 6));
             Card(bar, UiColour("ink"), 3);
             if (exp > 0)
             {
@@ -226,9 +251,13 @@ public partial class Main
             UiText(P(cx, 94), value.ToString(), Ink, 16, bold: true, centred: true);
         }
 
-        var line = TextLayout.Wrap(card.WeaponLine, Columns).First();
-        Text(P(8, 118), line, Muted, 13);
-        return top + UnitCardHeight;
+        var rows = WeaponRows(card);
+        for (var i = 0; i < rows.Count; i++)
+        {
+            Text(P(8, 118 + i * (LineHeight - 2)), rows[i], Muted, 13);
+        }
+
+        return top + UnitCardHeightOf(card);
     }
 
     /// <summary>Text in the UI face with its right end at <paramref name="at"/>.</summary>
