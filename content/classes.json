@@ -216,7 +216,7 @@
       "captain": true,
       "movement": "infantry",
       "mov": 4,
-      "weapons": ["sword", "lance"],
+      "weapons": ["sword"],
       "mastery": "shoulder_to_shoulder",
       "masteryPoints": 12,
       "certification": { "level": 3 },

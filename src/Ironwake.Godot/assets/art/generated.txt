@@ -404,14 +404,6 @@ vanguard_sword_miss_recover.png
 vanguard_sword_dodge.png
 vanguard_sword_hit_react.png
 vanguard_sword_fall.png
-vanguard_lance_idle.png
-vanguard_lance_advance.png
-vanguard_lance_strike.png
-vanguard_lance_strike_crit.png
-vanguard_lance_miss_recover.png
-vanguard_lance_dodge.png
-vanguard_lance_hit_react.png
-vanguard_lance_fall.png
 warden_faith_idle.png
 warden_faith_advance.png
 warden_faith_strike.png
