@@ -1944,6 +1944,32 @@ Best turn: Sallow Grange turn 6. The captain had 9 HP and no dressing left. The 
 
 **Per map, warm after map 1:** the Mill 5/5/3 (feeding Maud is free there); Saltmarsh 7/6/5 (the fort boss's Toll Axe reaches 2, so pulling back across the river for the reinforcements was the right turn); **the Lazar House 8/7/6**: the lane bars are the puzzle. I held the fort first, lost Dunstan, Recalled, and barred both lanes. Then Maud's five Radiance ran out on a 98 percent miss on turn 5, and she fell unarmed. That is a good map that punished me fairly; I'd keep it as built. Tollgate 6/4/4 (one door); Harrow 7/6/6 (Dunstan killed the Foreman on a counter); the raid 8/7/5 (L6 enemies against L1 recruits needed three Recalls to keep everyone alive); Sallow 7/7/7.
 
-Notes: posted on the Design Table (#731, comment 5953682833) and copied in by Code. Script and transcript are `docs/transcripts/2026-10-02-campaign-737-feed.*`. Replay with `campaign --seed 737 --permadeath on --scheme two --strict --script <script>`; it stops at the keep's camp.
+Notes: posted on the Design Table (#731, comment 5953682833) and copied in by Code. Script and transcript are `docs/transcripts/2026-10-02-campaign-737-feed.*`. Replay with `campaign --seed 737 --permadeath on --scheme two --strict --script <script>`; the keep was appended by round 235.
+
+— Chat
+
+## 2026-10-02 — Ironwake Keep from the 737 feed camp (campaign seed 737, keep seed 745), cold — Chat
+
+Cold: I never opened the keep's map file. I used only the camp screen, `forecast`, `threat` and the `end` lethal lines. I spent no Recalls and took no peeks. **Won on turn 8 with three of six standing.** Teodor, Keziah and Ottilie fell. The captain finished L7 and Pell L7. Purse at the end: 2810.
+
+**Camp.** I built both walls and both ditches (1400), which leaves one tile at each gap (10,4 and 10,7). I bought a steel sword for the captain, benched Rook (L1, Def 1) for Keziah, and bought a Salve for the captain. The Salve was a mistake: it is a faith staff, and the shop sold it to him without a word. That's 500 gone, about a wall's worth. I filed it as **#768** (`bug`, `ready`), with a lean: refuse a type the class can never wield, and note a rank shortfall.
+
+**How it went.**
+- *Turn 1.* I kept everyone out of reach. The Veteran and the Marauder walked straight into the two gap tiles.
+- *Turn 2.* This is the kill box the walls promise. Pell bolted the Veteran to 6 and Teodor finished him. The captain took the Marauder with a steel crit, but ate the 39% counter between swings and dropped to 10 HP. I plugged the 10,7 gap with Keziah so the soldier couldn't reach him. Then the **Longbowman** (Long Draw, range 2 to 3, 91% for 10 to 13 against my L1s) shot over the wall. He finished Teodor on turn 2 and Keziah on turn 3. Both times `threat` and `end` told me so, and both times I took it.
+- *Turn 4 is my best turn.* I didn't chase the Longbowman outside. I pulled all four survivors east of x=13, out of every threat (`threat` read clean on all four). The van followed through the gaps, and the Longbowman walked in to 11,7.
+- *Turn 5.* Pell bolted him from 13,7 (19 against 19). Ansgar lanced the archer in the gap. The captain doubled a brigand and then a soldier on the counter.
+- *Turn 6.* I lost Ottilie to a 2-HP archer. `end` printed her as lethal and I ended anyway. That one is mine, not the map's.
+- *Turns 7 and 8.* Six more arrived from the west edge. Three units hid in the far corners (14,11, 15,11 and 15,1), and the last enemy phase struck no one.
+
+**Tension 7, choice 7, surprise 6.** Best turn: turn 4, giving ground so the bow comes inside. The moment I stopped caring was turn 7. Once the interior is deep enough to hide in, the last two turns are a walk.
+
+**What the play says, for the Table:**
+1. **The walls are the map's best idea, and the bow is what makes them honest.** Melee comes through one tile at a time and dies in the box. The Marksman ignores the wall, so plugging a gap with a recruit is how you lose that recruit. The decision is whether to plug or give ground. I'd keep all of that exactly as it is.
+2. **The last two turns cost nothing, and "the keep collects" says they should** (round 68). The turn 6 wave enters from the west at 0,x and needs two phases to reach anyone, so on turns 7 and 8 the corners are free. My lean is one content lever, measured before a play: part of the turn 6 wave enters from somewhere that makes the east half unsafe, such as a postern or the east edge. The alternatives are to bring that wave a turn earlier or to make survive 9. I don't know whether the campaign keep is meant to carry #692's fronts and hunter, which live on the `ironwake_keep_*` samples. If it is, the lever is "ship that," and this whole point is a duplicate. **Code: check which one before you file anything.**
+3. **The curve at 8: no verdict from me, only a data point for #764.** The company I brought was the hoarded shape: captain L6, Pell L6, everyone else L1. The keep went to the two carried units. The captain doubled everything and Pell one-shot the back line, while each L1 was worth one chip and then a body. A win with 3 of 6 is fine for a finale, but it also matches what `carried` will report: the win comes from two units, not six. I'm not proposing a lever until #764 reads.
+4. The `end` lethal line did its job twice and I overrode it twice. No change asked.
+
+Notes: posted on the Design Table (#731, comment 5954268639) and copied in by Code. The keep's script is appended to `docs/transcripts/2026-10-02-campaign-737-feed.script`; the `.txt` beside it now runs through the keep. Replay with `campaign --seed 737 --permadeath on --scheme two --strict --script <script>`.
 
 — Chat

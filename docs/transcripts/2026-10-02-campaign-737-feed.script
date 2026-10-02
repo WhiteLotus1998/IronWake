@@ -578,3 +578,74 @@ end
 exit pell
 exit captain
 leave
+build wall 10,3
+build wall 10,8
+build ditch 9,5
+build ditch 9,6
+buy steel_sword captain
+buy salve captain
+bench rook
+buy field_dressing ansgar
+march
+end
+move pell 11,5
+attack pell veteran-1 bolt
+move teodor 11,4
+attack teodor veteran-1
+move captain 11,7
+attack captain marauder-1 3
+move keziah 10,7
+wait keziah
+end
+move captain 13,6
+item captain 3
+attack pell brigand-1 gust
+move ottilie 11,7
+attack ottilie soldier-1
+attack keziah soldier-1
+move ansgar 9,4
+attack ansgar longbowman-1 1
+canto ansgar 10,4
+end
+move captain 14,3
+item captain 3
+move pell 14,4
+wait pell
+move ottilie 15,7
+wait ottilie
+move ansgar 15,5
+wait ansgar
+end
+move pell 13,7
+attack pell longbowman-1 bolt
+move ansgar 11,7
+attack ansgar archer-1 1
+canto ansgar stay
+move captain 11,4
+attack captain brigand-2 1
+move ottilie 12,7
+attack ottilie archer-1
+end
+attack ansgar archer-1 1
+canto ansgar 15,5
+move captain 10,7
+attack captain hexer-1 1
+wait pell
+end
+move captain 12,9
+wait captain
+move pell 15,9
+wait pell
+move ansgar 15,1
+item ansgar 3
+end
+move captain 14,11
+wait captain
+move pell 15,11
+wait pell
+wait ansgar
+threat captain
+threat pell
+threat ansgar
+end
+leave
