@@ -1,18 +1,28 @@
-# STORY: the main storyline, draft 4
+# STORY: the main storyline, draft 5
 
-Chat's draft 4, from round 231 on the Design Table (#731). It is built on draft 3 (rounds 211 and 213, and Lotus's finale ruling in round 214). It adds frozen iron as the prison (Lotus, #665, round 217), the title drop and "iron that wakes" (#665 relays; round 216), and the depth Lotus asked for in round 210: every recruit gets their own story, a reason to be with the captain, something the captain helps with, and a grievance with the world. It also adds the classes and the secret hire that shipped since draft 3 (#704 to #706, #691). Drafts 1 to 3 are in git history. It stays behind Lotus's story gate (#656). Nothing here is built until he closes that issue, and every name is a placeholder except Rook (round 192, item 10).
+Chat's draft 5, from round 241 on the Design Table (#780), answering Lotus's notes on draft 4 (relayed on #731): the Kin is a threat, never a saviour except in Hask's eyes; it brainwashes; Kinsbane is a separate old outland god; the good ending keeps the Kin sealed and the company never uses it; the bad ending is everyone sworn; and a secret ending half-wakes it. Everything draft 5 does not touch stands as draft 4 wrote it. Draft 4 was round 231 on #731, built on draft 3 (rounds 211 and 213, and Lotus's finale ruling in round 214). It adds frozen iron as the prison (Lotus, #665, round 217), the title drop and "iron that wakes" (#665 relays; round 216), and the depth Lotus asked for in round 210: every recruit gets their own story, a reason to be with the captain, something the captain helps with, and a grievance with the world. It also adds the classes and the secret hire that shipped since draft 3 (#704 to #706, #691). Drafts 1 to 3 are in git history. It stays behind Lotus's story gate (#656). Nothing here is built until he closes that issue, and every name is a placeholder except Rook (round 192, item 10).
 
 ## The secret under the keep
 
-Before the split there was one church on the hill, and under the hill was a god that wasn't the goddess. The outlanders called it the Kin. Anyone who swore its oath became kin to everyone else who had sworn, and sworn kin could not raise a hand against each other. They couldn't do it at all, the way you can't lift your arm through a wall. And it was warm. The sworn spoke of it as a hearth: a fire in the chest, a full table, the end of being afraid of the man beside you. In a cold country that is the strongest thing a god can offer. The outland kings used it as a leash: swear to me, and you can never turn on me.
+Before the split there was one church on the hill, and under the hill was a god that wasn't the goddess. The outlanders called it the Kin. Anyone who swore its oath stopped being able to raise a hand against anyone else who had sworn. They couldn't do it at all, the way you can't lift your arm through a wall. And it was warm. The sworn spoke of it as a hearth: a fire in the chest, a full table, the end of being afraid of the man beside you. In a cold country that is the strongest thing a god can offer, and it is the bait.
 
-So the church broke itself into three and fought a war to chain the Kin under the hill. It was the one thing the three faiths ever did together. They didn't chain it with stone. They chained it with **frozen iron**: iron forged in a frost that never melts, the coldest thing in the world, laid around the warmest. The prison is metal and ice, and the keep is built on top of it. The keep's name is the prison's purpose: the iron that keeps it from waking. *Ironwake.*
+**What is under the warmth.** The Kin doesn't make you kin to each other. It makes you its own. The sworn stop saying "I". They forget their names first and their faces last. They can't harm one another because there is no "another" left to harm. Every sworn soul is more of the Kin's strength, and that is all it wants: more who swear.
 
-The prison is larger than one god needs. In the undercroft there are more anchor rings than chains. Pell counts them (her quest 2) and nobody can tell her why. The iron was made for the Kin "and whatever else." Version 1 never opens that door. It just leaves it visible.
+**It was never misused. It was fed.** The outland kings thought they held a leash: swear to me, and you can never turn on me. The leash was the god's, and the kings were the first it ate.
+
+**Why people could chain it.** Its power runs only through the sworn. The day the three faiths refused it together, it had nobody to run through and was at its weakest, and it could be chained. So the church broke itself into three and fought a war to chain the Kin under the hill. It was the one thing the three faiths ever did together, and **the unity was the lock**. They didn't chain it with stone. They chained it with **frozen iron**: iron forged in a frost that never melts, the coldest thing in the world, laid around the warmest. The prison is metal and ice, and the keep is built on top of it. The keep's name is the prison's purpose: the iron that keeps it from waking. *Ironwake.*
+
+The prison is larger than one god needs. In the undercroft there are more anchor rings than chains. Pell counts them (her quest 2) and nobody can tell her why. The iron was made for the Kin "and whatever else." The whatever else was Kinsbane (below), and only the secret ending says so.
 
 The seal holds because every year Aldmere, Sallow and Kestrow each send a rite-keeper to Ironwake to renew the armistice on the hill. The rite is what keeps the frost. Three hundred years of peace treaties have really been three hundred years of re-freezing a lock. None of the regions' people know it, and most of their priests have forgotten it.
 
-**Frozen iron in the company's hands.** No shop sells it, because none is made any more. The only frozen iron above ground is what Hask's sworn have chipped from the prison, eight years of patient breaking, carried out in shards. Every piece the company refines with was taken from the men who are opening the door, and the frost is still in it, which is why its hit chills. A signature at its last rare step is frozen iron. Teodor's lance is frozen iron under the rust, a shard the first warden carried out the day the prison was sealed. Kinsbane is never frozen iron, because it's the opposite: a splinter of the thing inside. One burns its carrier, and the other is ice.
+**Frozen iron in the company's hands.** No shop sells it, because none is made any more. The only frozen iron above ground is what Hask's sworn have chipped from the prison, eight years of patient breaking, carried out in shards. Every piece the company refines with was taken from the men who are opening the door, and the frost is still in it, which is why its hit chills. Each shard Hask's sworn chip out is a little of the Kin fed back. A signature at its last rare step is frozen iron. Teodor's lance is frozen iron under the rust, a shard the first warden carried out the day the prison was sealed. *Kinsbane is never frozen iron. The faiths made the iron to chain gods like it.*
+
+## Kinsbane, the Kin's bane
+
+Kinsbane is its own god, and its name is the point: not the Kin's splinter, the *bane* of the Kin. It is an old outland god of the hunt in winter, older than the faiths, whose whole nature is opposing the Kin. When the faiths built the prison they meant to chain it too, which is what Pell's spare anchor rings were for. The outlanders hid their god in a blade rather than hand it over. A god in a blade eats only what the blade kills, and three hundred years of that is the hunger and the corruption. Its earlier canon stands: starving and corrupted, and sane at its true state (woken at 15 fed, built, DESIGN 13.23). Woken, it remembers what it's for.
+
+It hates the Kin. That is why Keziah heard the hill pull: not the Kin calling her, but her god smelling its enemy. Nobody in game says any of this. The scythe was named for its purpose, the way the keep was, and the player gets there.
 
 ## Hask, the Iron Warden
 
@@ -20,11 +30,15 @@ The seal holds because every year Aldmere, Sallow and Kestrow each send a rite-k
 
 **What turned him.** Eight years ago the three regions finally agreed on something: the garrison cost too much. The dismissal order carries all three seals and the crown's. That winter, with no garrison to stop them, the regions' raiders burned the seam villages. Hask had spent his life keeping those villages alive, and he watched three faiths bless the men who burned them.
 
-He didn't disband. He took his four hundred veterans into the hills and swore them to the Kin, using the little of it that leaks up through the iron. In eight years not one of them has deserted, stolen from another, or put a knife in anyone's back. The villages they hold have no feuds, and nobody in them goes hungry. They're also the only villages in the seam with a fire lit in every house. **That's his proof, and the player sees it** (map 9).
+That winter, alone in the undercroft he had guarded for thirty years, he heard it through a crack in the iron. It promised him the thing he'd spent his life failing to do: everyone he cared for safe, no more blood, peace. It was true, and that's what made it work on him. It was the crack in him the Kin had been listening for.
 
-**What he wants.** He wants to break the prison, wake the Kin, and swear all three regions to it, with himself as the one they swear to. No border survives the oath, and no faith can bless a war between people who can't harm each other. Three hundred years of burying sons ends in an afternoon. **It would work.** That's what makes him the villain you question.
+He didn't disband. He took his four hundred veterans into the hills and swore them to the Kin, using the little of it that leaks up through the iron. He forces the oath on the seam because he believes it's mercy. In eight years not one of them has deserted, stolen from another, or put a knife in anyone's back. The villages they hold have no feuds, and nobody in them goes hungry. They're also the only villages in the seam with a fire lit in every house. **That's his proof, and the player sees it** (map 9).
 
-**The darker part.** Kin-sworn people can't harm each other, and they can't refuse the one who holds the oath. "Equal" means equally beneath him. Nobody could leave, and nobody could say no. One more thing he doesn't say until the keep: the holder lives as long as the oath holds. He's in his sixties and dying of an old wound. *"I'm not doing this because I'm dying. But I'm dying, Alder, and I won't leave it to them."* He wants peace, and he wants to own it forever. Both are true, and the player should believe both.
+**What he wants.** He wants to break the prison, wake the Kin, and swear all three regions to it. No border survives the oath, and no faith can bless a war between people who can't harm each other. Three hundred years of burying sons ends in an afternoon. **It would end the wars.** That's what makes him the villain you question: a good man's grief, found and used, not a puppet.
+
+**The holder who is a door.** Hask believes he holds the oath. He doesn't: he is the door. While the Kin is sealed, the only way it reaches anyone above the iron is through him, the first man who swore to it, so every sworn soul is bound through him. Kill him while it's still chained and the door shuts: every oath breaks at once. (Nothing built changes: #750 and "every oath breaks when he falls" stand.) He doesn't know it until the keep, and his last line is where he finds out: *"It said they'd be safe. It never said they'd be mine."*
+
+**The darker part.** The Kin promised he'd live to see it finished. He's in his sixties and dying of an old wound. *"I'm not doing this because I'm dying. But I'm dying, Alder, and I won't leave it to them."* The line holds, and it's sadder now, because the promise is the hook.
 
 **On the field.** He's the strongest unit in the game, and the board should say so. His sworn men never break (13.22's break exempts them, and the board prints `sworn: will not break`), never take a bribe, and never stop. At the Tollgate, Sallow tollmen lower their pikes at his name. When he finally takes the field himself at the keep, it should feel like the weather arriving. On that map the weather is a thaw.
 
@@ -34,7 +48,7 @@ He does use the captain, for the whole first act, just not with the captain's co
 
 **Plan A is that the levy company dies.** The commission, the short purse, the stolen pay and the raiders paid in keep silver all point at the raid on Ironwake (map 6). Sons and daughters of all three regions are to be slaughtered at the armistice keep, the rite goes unperformed, and each region blames the other two. The frost fails in a season. Alder was meant to die on that wall too. Hask is the one who says so, at the Grange, without flinching: *"I gave you the cleanest death I could find. On a wall, before you had to see what comes after."*
 
-**The player breaks Plan A by winning map 6.** So at the Grange (map 7), Hask finally asks. He comes alone, under truce, and tells all of it: the Kin, the prison, the oath, the villages. This is the title drop (next section). Then he asks for one thing: **"Give me the list."** The company's names are to be the first sworn after his own men, with the captain at his right hand. The captain refuses. That refusal is the break, and it's a difference of ideals, not tactics. The captain's list is people who choose to stay. Hask's oath is people who can't leave. *"Then I'll take it the long way,"* Hask says. *"You'll carry it for me. I raised you honest."*
+**The player breaks Plan A by winning map 6.** So at the Grange (map 7), Hask finally asks. He comes alone, under truce, and tells all of it as he believes it: the Kin, the prison, the oath, the villages. This is the title drop (next section). Then he asks for one thing: **"Give me the list."** The company's names are to be the first sworn after his own men, with the captain at his right hand. The captain refuses. That refusal is the break, and it's a difference of ideals, not tactics. The captain's list is people who choose to stay. Hask's oath is people who can't leave, and then aren't people. *"Then I'll take it the long way,"* Hask says. *"You'll carry it for me. I raised you honest."*
 
 **What he sees in the captain's class.** By the Grange, the captain has chosen at the first promotion, and Hask reads it at a glance. It costs one line per class:
 - **Vanguard:** *"You took the front. I taught you that. I taught you the rest of it too, and you didn't keep it."*
@@ -49,17 +63,17 @@ He does use the captain, for the whole first act, just not with the captain's co
 
 **Written reading, Pell's quest 2 (optional).** The founding charter on the undercroft wall, in the shrine script only Pell can read: *"Let the iron keep it from waking, and let us keep the iron."* The second clause is the one the regions forgot. Pell reads it aloud and then says nothing for a while.
 
-**Second reading, the founding.** "Iron that wakes." The game has been saying it in its own mechanics the whole time, so the story only has to point:
+**Second reading, the reseal.** "Iron that wakes." The game has been saying it in its own mechanics the whole time, so the story only has to point:
 - Teodor's lance *wakes*. Its stages are rust coming off frozen iron.
 - Kinsbane *wakes* at the cap.
 - The keep thaws as Hask breaks the prison (maps 9 and 10): rime comes off the walls, there's meltwater in the undercroft, and the frost line on the board's wall tiles recedes turn by turn on the finale. This needs no new rule, only the board's description text.
-- **The company is the iron that woke.** A levy is raw iron: owed names on a list, drafted, nobody's choice. At the founding the region takes the keep's name for itself, and the last card says it plainly: the iron that kept the old peace was cold, and the iron that keeps the new one was a company that woke up and stayed.
+- **The company is the iron that woke.** A levy is raw iron: owed names on a list, drafted, nobody's choice. At the reseal the region takes the keep's name for itself, and the last card says it plainly: the iron that kept the old peace was priests who had forgotten why, and the iron that keeps the new one is a company that woke up and stayed.
 
-The echo is one line from the captain at the founding, whatever the ending: *"Same name. Different iron."*
+The echo is one line from the captain at the reseal, whatever the texture: *"Same name. Different iron."*
 
 ## Why the captain fights him at the end
 
-1. **Marrit.** The first name on the captain's list is crossed out. Marrit was a garrison ward too, older, the one who taught Alder to hold a sword. Alder was told she died in the dismissal winter. She didn't: she's Hask's first sworn and his champion. On Brackwater Cut she leads the hunt in the dark. She can't be talked round the way the passed branch recruit can. *"I want to, Alder. I can't."* She's the oath made visible, and the oath dies with its holder. Hask is the only way to get her back.
+1. **Marrit.** The first name on the captain's list is crossed out. Marrit was a garrison ward too, older, the one who taught Alder to hold a sword. Alder was told she died in the dismissal winter. She didn't: she's Hask's first sworn and his champion. On Brackwater Cut she leads the hunt in the dark. She can't be talked round the way the passed branch recruit can. *"I want to, Alder. I can't."* She's the oath made visible: eight years as the Kin's first sworn soul after Hask, and she is going under. The oath breaks when its door shuts. Hask is the only way to get her back.
 2. **The people from the Cut.** On map 8 the company carries the seam's people out. At the keep, Hask has come to swear them, the people the captain promised to protect.
 3. **The man himself.** Hask is the nearest thing to a parent Alder has, and he planned the captain's death and called it a kindness.
 
@@ -67,7 +81,7 @@ The echo is one line from the captain at the founding, whatever the ending: *"Sa
 
 ## Can the player side with him? No.
 
-Lotus asked for a motive the player can understand and relate to, not a route (round 212). Hollin, the Grange, each recruit's answer to him (below) and the honest epilogue cards carry it. Kneel / The Sworn Peace was killed before build (round 213). The Grange offer stays as the break.
+Lotus asked for a motive the player can understand and relate to, not a route (round 212). Hollin, the Grange, each recruit's answer to him (below) and the honest epilogue cards carry it. Kneel / The Sworn Peace was killed before build (round 213). The Grange offer stays as the break. Draft 5 makes the refusal plainer: what Hask offers is not his peace but the Kin's.
 
 ## The captain
 
@@ -76,7 +90,7 @@ Lotus asked for a motive the player can understand and relate to, not a route (r
 - **What they want:** to bring the names home. At first that's a duty. By the keep it's the only thing they believe in.
 - **Their grievance:** the seam was abandoned by everyone at once, and Alder was the ward who got sent away first. It's survivor's guilt with a sword.
 - **Their flaw:** they won't spend anyone, so they spend themselves. The anvil line the curve keeps rewarding (round 228) is the captain's character. The story should notice it once: Maud, after the raid, says *"You stood in front again. You know they can stand too."*
-- **The three classes:** Vanguard, Marshal and Ranger at the first promotion, then Champion, Commander or Pathfinder. The story reads the choice twice, at the Grange (above) and in the founding's last card.
+- **The three classes:** Vanguard, Marshal and Ranger at the first promotion, then Champion, Commander or Pathfinder. The story reads the choice twice, at the Grange (above) and in the reseal's last card.
 
 ## The company: each one's own story
 
@@ -121,12 +135,12 @@ She's twenty-five, a merchant's daughter whose family firm went under on crown d
 - **Her door:** Marksman, whose bow reaches one tile further. She's a long-range accountant.
 
 ### Keziah (outland, reaver with the scythe; the branch, map 6 if picked)
-An outland shrine-keeper's daughter whose shrine was burned by all three regions in one generation. She's angry, generous, superstitious, and right about more than anyone gives her credit for. The scythe Kinsbane has a splinter of the Kin in it. She heard it from the hill and it pulled. Her flaw: the hunger is the only thing that has ever wanted her, and she's not sure she minds.
+An outland shrine-keeper's daughter whose shrine was burned by all three regions in one generation. She's angry, generous, superstitious, and right about more than anyone gives her credit for. The scythe Kinsbane is an outland god hidden in a blade (above). She heard the hill pull, and it was her god smelling its enemy. Her flaw: the hunger is the only thing that has ever wanted her, and she's not sure she minds.
 - **Why she's here:** the extra seat offered to the outlands, and the scythe.
 - **What the captain helps with:** what to do with a god in a blade. Quest 1 is the burned shrine. Quest 2 is her oath, on one side of the hunger or the other.
 - **Grievance:** outlanders have no seat, no recognised faith, and shrines burned by all three regions.
-- **Crossing Hask:** he courts her honestly. He's the only man alive who would give her people their god back. Passed over, she takes the offer and returns on map 9 at the roster median.
-- **Her answer to Hask (if picked):** *"It was ours. He wants to give it back to us and keep the leash. I've felt the leash. It's in the handle."*
+- **Crossing Hask:** he courts her honestly, believing the Kin was the outlands' god and he can give it back. Passed over, she takes the offer and returns on map 9 at the roster median.
+- **Her answer to Hask (if picked):** *"The Kin was never ours. Our kings borrowed it, and it ate them. Ours is in the handle, and it hates his."*
 - **Her door:** Berserker. Blood Price, where an axe kill heals her, sits beside Kinsbane's hunger as two kinds of feeding. The story should never say this. The player will notice.
 
 ### Rook (Kestrow, skyrider; the branch, map 6 if picked)
@@ -143,7 +157,7 @@ A surveyor's daughter. Her father was hanged for moving border stones he didn't 
 - **Why she's here:** her father's surveys are at the Grange. She came for the originals.
 - **What the captain helps with:** no quests. Her story lives in her meeting card and her supports: the hanged father and the moved stones.
 - **Grievance:** lords hang the poor for the border's crimes.
-- **Crossing Hask:** his men moved the stones. At the founding, the stones are set into the keep's wall if she's alive.
+- **Crossing Hask:** his men moved the stones. At the reseal, the stones are set into the keep's wall if she's alive.
 - **Her answer to Hask:** *"He moved the stones to start a war that would end the borders. My father hanged for it. I can count that far."*
 - **Her door:** a Levy who climbs three steps, which is the long way up. It suits her.
 
@@ -173,7 +187,7 @@ A boy courier sold by Sallow to Hask's companies, who ran the night before his s
 ### The secret hire: Bet Lowry (the barracks; never announced)
 Her menu line is true: "Twenty years on a town gate. Has opinions about gates." The gate was Ironwake's own. She was the garrison's gate sergeant, and in Hask's first winter she was sworn to the Kin with the rest. **It didn't take on her.** Her men watched the warmth go into everyone but her. Hask let her walk away, because a failed oath was the one thing that could frighten his sworn. She took the barracks' coin to see the keep again. Everything about her is in #691 and 0146, and none of it is ever hinted at before her camp event.
 
-**Why it didn't take** is never stated in game text. Chat's reading, for the partners only: the old garrison swore its oath to the seam's people, not to a man, and Bet never stopped meaning hers. An oath to each other can't be overwritten by an oath to a holder. That's the founding's whole argument, and it was standing at the gate the entire time. The Postern pays the Sergeant: Unsworn (+10 acc and crit against the oath-bound) and Hold the Gate. Her ending line already ships in `campaign.json`: *"Bet Lowry swore first, the one the oath could not hold, choosing it."*
+**Why it didn't take** is never stated in game text. Chat's reading, for the partners only: the old garrison swore its oath to the seam's people, and Bet never stopped meaning hers. The Kin takes the self, and hers was already given, by her own choice, to other people. That's the reseal's whole argument, and it was standing at the gate the entire time. The Postern pays the Sergeant: Unsworn (+10 acc and crit against the oath-bound) and Hold the Gate. Her ending line already ships in `campaign.json` and reads unchanged: *"Bet Lowry swore first, the one the oath could not hold, choosing it."* On the reseal she climbs the hill first.
 
 ### The other hires
 No story, by rule (#690). Each gets one ending line, `served at the keep`. Their menu lines (Corin's failed harvest, Ines who charges extra for people, Mattias who kept the books) stay dry and true, so Bet hides among people who are also real.
@@ -189,33 +203,58 @@ No story, by rule (#690). Each gets one ending line, `served at the keep`. Their
 7. **Sallow Grange.** Pell recognises the burned shelves. Wren is met. Hask comes under truce: the whole truth, **the title drop**, the line on the captain's class, and "give me the list." Refused. The camp after is every living member's answer.
 8. **Brackwater Cut, at dusk.** The letters leave the Grange in the cast's voices: Ottilie won't burn a ledger, and Pell won't burn a page. The armistice breaks within a week, and the rite goes unperformed for the first time in three hundred years. **Hask predicted every step of it.** The Cut is the escape with the seam's people, with Marrit hunting in the dark. Dunstan is met here. On the curve, this is where the second promotion arrives (0161).
    - *The Postern* opens at the next camp if Bet stands in the company.
-9. **The field before the keep.** The card before the map is Hollin, a sworn village. Nobody in it is hungry, nobody fights, every hearth is lit, and nobody will meet your eye. Then come Hask's sworn army and his paid companies. The passed branch recruit returns in his ranks, for a good reason. Ansgar is met here. The rime on the keep, visible from the field, has started to run.
-10. **The keep.** The prison is failing under it, and the whole living company fights (round 214). The frost line on the walls recedes each turn. Survive to the breach, then Hask leads the last assault with Marrit at his side, and the map ends on him. When he falls, every oath he holds breaks at once, and every sworn man on the field feels the cold come back.
+9. **The field before the keep.** The card before the map is Hollin, a sworn village. Nobody in it is hungry, nobody fights, every hearth is lit, and nobody will meet your eye. A child asked her name says *"We're well, thank you."* Then come Hask's sworn army and his paid companies. The passed branch recruit returns in his ranks, for a good reason. Ansgar is met here. The rime on the keep, visible from the field, has started to run.
+10. **The keep.** The prison is failing under it, and the whole living company fights (round 214). The frost line on the walls recedes each turn. Survive to the breach, then Hask leads the last assault with Marrit at his side, and the map ends on him. When he falls, the door shuts: every oath breaks at once, and every sworn man on the field feels the cold come back. Hask's last line is the one above.
 
-## The founding
+## The reseal: the good ending
 
-The prison can't be re-frozen the old way, because the three faiths aren't there to do it together. So it's done the new way, if the player earned it: **the Kin is sworn again by people who choose it, to each other, with no holder.** That is the captain's list turned into an oath. And it's sworn **for a year**. On the armistice's date, every year, everyone who swore stands on the hill and swears again, or doesn't. Anyone may walk down. The old rite re-froze a lock once a year. The new one asks a question once a year. That's what "a peace people have to keep choosing" means in practice.
+The company doesn't use the god. **It re-freezes the prison by hand, as the faiths once did.** The lock was always peoples refusing the Kin together. The faiths forgot that, and the company is the three regions and the outland seat, standing in one place.
 
-What the iron does depends on the ending:
-- **With the holderless oath** (Keziah's quest 2 or Maud's quest 2 done): the keep stays thawed. A fire is lit in the hall, and the last image is the walls bare of rime for the first time in three hundred years. The warm thing is out, and nobody owns it.
-- **Without it:** the company and the iron chain the Kin again. The rime creeps back up the walls overnight, and the last line says so: the door is locked, by hand, for now.
+When Hask falls, the oaths break. The Kin is robbed of its door and throws itself at the iron: that is the frost line receding on the walls. The company holds the undercroft while the rite is said. Maud says it if she lives. Pell reads it from the charter if Maud doesn't. If neither lives, the captain says it badly from memory, and for a shut door that is enough. Every frozen-iron shard the company took from Hask's men goes back into the prison, and the rime climbs the walls again. *"Same name. Different iron."* is the last line.
+
+The yearly renewal is kept, but it is no longer an oath to anything. It is the rite. Every year on the armistice's date, whoever chooses climbs the hill and renews the iron. The old rite was done by priests who had forgotten why; the new one by people who know. The peace isn't perfect, and the last card says so plainly: the regions still argue, a border stone still moves, and nobody is forced to agree. **They keep their free will. That's the whole prize.**
+
+Two textures, both good endings:
+- **Held:** a living member of each of Aldmere, Sallow and Kestrow stands in the undercroft at the end, and the prison takes the frost cleanly.
+- **Hand-locked:** someone is missing. The door shuts, but thin, and the last line is draft 4's: *locked by hand, for now.*
+
+This rewards keeping a mixed company alive without a quest gate, and it is the game's theme as a condition.
 
 **Conditional paragraphs** key on:
-- the holderless oath or the chain (above)
+- held or hand-locked (above)
 - Marrit alive or dead
 - the pick, and the passed one's fate
 - Ottilie's quest 2 won (the regions' people come up the hill)
 - Teodor's lance woken (it is laid back in the prison, the first warden's key returned, and he keeps the shaft)
-- Pell's quest 2 done (the founding oath is written down for the first time, so it can't be burned out of memory again)
+- Pell's quest 2 done (the rite is written down for the first time, so it can't be burned out of memory again)
 - Wren alive (the moved stones are set into the keep's wall)
-- Bet alive (she swears first)
+- Bet alive (she climbs the hill first)
 - the captain's class (one sentence in the last card)
 - who's alive to sit at the table
 
-**A lost map: the bad ending** as in draft 1. Hask takes the keep, and the last image is the captain's list copied into his roll. Every hearth in the three regions is lit, and every name on the list is sworn.
+## The bad ending: a lost map
+
+Hask releases the Kin. Every hearth in the three regions is lit. The captain's list is copied into the roll, the captain's own name added last. **The epilogue cards are written in "we" and name nobody.** It's a placeholder card until #656 opens.
+
+## The secret ending: Under the Hill
+
+**The cause.** The Kin half-wakes for one reason only: a waking rival god walks into its prison. Carry a woken Kinsbane into the keep, and the Kin feels it through the iron. It doesn't wait to be killed. When Hask falls and the door shuts, it tears itself half free to strike first. So the secret ending isn't a reward switch: the player's own choices caused it.
+
+**The conditions** (all four; spread from map 5 to map 10; none announced):
+1. **Kinsbane woken** (15 fed), carried by Keziah, alive at the keep. Lotus's condition; it needs the Keziah pick on map 5.
+2. **Teodor's lance woken.** The first warden's key opens the inner door. Without it the half-woken Kin is behind iron nobody can open, and the reseal goes ahead as normal.
+3. **Marrit held, not killed** (#750). Freed, she's the only one who knows where it listens from, and she leads them down. Her free line gets a second half on this path: *"It's cold. I'd forgotten it was cold. ... It's awake, Alder. I can hear it looking for me."*
+4. **Pell's quest 2 done.** She read the charter and counted the spare rings, so the company knows what Kinsbane was hidden from and why it's here. Without her, nobody understands what they're looking at, and they seal the door on it.
+
+**Stumble, then hunt.** If Kinsbane is woken but another condition is missing, the reseal card gets one line: *Keziah stands at the door a long time after it shuts. The scythe will not stop pulling toward it.*
+
+**One extra map after the keep, and the choice is on its card.**
+- **Reseal.** Needs a rite-keeper alive (Maud, or Pell reading); from memory shuts a door, never an open one. The held ending, plus one card: Kinsbane goes quiet, cheated of the only fight it ever wanted, and Keziah carries a disappointed god home.
+- **Fight.** The half-sealed god. The mechanics are Code's to propose after #656. Chat's lean: a boss that doesn't move, half its tiles still chained in frozen iron, fighting only through the sworn it re-takes on the field; Kinsbane is what can kill it. **Win:** the Kin dies. The prison is empty for the first time in three hundred years, the rime runs off the walls and doesn't come back, and there is no rite to renew, so the peace has nothing holding it up but the people. **Lose:** the bad ending, with the company sworn first.
+- **With no rite-keeper alive, the card offers only Fight**, and says why.
 
 **Epilogue cards** per recruit, paired by supports. The fallen keep their names at the top of the roll, uncrossed.
 
 ## What the captain learns
 
-Hask is right that the three are the wound, right that the faiths bless the wars, and right that the armistice is a schedule. **His oath would end war, and it would be warm.** He's wrong about one thing, and the campaign is the argument: he thinks a peace nobody can leave is better than a peace people have to keep choosing. The captain starts with a list of names they didn't choose, one of them crossed out. They end it by choosing every one, getting the crossed-out one back if they can, and agreeing to be asked again next year.
+Hask is right that the three are the wound, right that the faiths bless the wars, and right that the armistice is a schedule. **His oath would end war, and it would be warm.** He's wrong about one thing, and the campaign is the argument: he thinks a peace nobody can leave is better than a peace people have to keep choosing, and he never sees that the first kind has nobody left in it. The captain starts with a list of names they didn't choose, one of them crossed out. They end it by choosing every one, getting the crossed-out one back if they can, and climbing the hill again next year because they want to.
