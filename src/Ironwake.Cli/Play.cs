@@ -1524,6 +1524,9 @@ public sealed class PlaySession
     /// nearest refused tile and where its plan ends, unpriced:
     /// <c>weir_foreman-1 could reach 12,4 but refuses it: too exposed there; holds 14,6</c>, or
     /// <c>ends on 13,6</c> when the plan moves it; a boss the player does not see is left out.
+    /// On a map with fronts (issue 692) one row names the front the tile defends (<see cref="Hunt.DefendedFrom"/>),
+    /// and on a map with a hunter one more names the front it hunts (<see cref="Hunt.Line"/>), read
+    /// with the unit moved to the tile.
     /// </summary>
     public static string ThreatText(BattleState state, GameContent content, BattleUnit unit, Coord tile, IReadOnlyList<ThreatLine> lines, IReadOnlyList<SleepingThreat> asleep, IReadOnlyList<BattleUnit>? unseeing = null, bool wins = false, IReadOnlyList<AnvilLine>? anvils = null, IReadOnlyList<GroupWoke>? wakes = null, IReadOnlyList<RefusalLine>? refusals = null)
     {
@@ -1599,6 +1602,18 @@ public sealed class PlaySession
             rows.Add(near.Count == 0
                 ? $"  and whatever is in the dark ({Dusk.Unseen}), unpriced"
                 : $"  in the dark, unpriced: {string.Join(", ", near.Select(n => $"{Dusk.Unseen} at {n.At} ({n.Distance})"))}");
+        }
+
+        if (state.Map.Fronts.Count > 0)
+        {
+            var there = tile == unit.At ? state : state.WithUnit(unit with { At = tile });
+            rows.Add(Hunt.DefendedFrom(state.Map, tile) is { } front
+                ? $"  front: defends the {front.Words}{(Fronts.HasFallen(state, front) ? " (fallen)" : "")}"
+                : $"  front: defends none (more than {Hunt.DefendRadius} tiles from every front)");
+            if (Hunt.Line(there, names) is { } hunt)
+            {
+                rows.Add($"  {hunt}");
+            }
         }
 
         if (wakes is { Count: > 0 })
