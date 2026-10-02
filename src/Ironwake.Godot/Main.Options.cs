@@ -61,9 +61,10 @@ public partial class Main
         ApplyOptions();
     }
 
-    /// <summary>Puts the options in force: the speed, the scenes on any open battle, and the sound.</summary>
+    /// <summary>Puts the options in force: the UI scale, the speed, the scenes on any open battle, and the sound.</summary>
     private void ApplyOptions()
     {
+        ApplyScale();
         _speed = GameSpeed.IndexOf(_options.Speed);
         if (_client is not null)
         {
@@ -74,6 +75,27 @@ public partial class Main
         var master = AudioServer.GetBusIndex("Master");
         AudioServer.SetBusMute(master, _muted);
         AudioServer.SetBusVolumeDb(master, _options.Volume == 0 ? -80 : Mathf.LinearToDb(_options.Volume / 100f));
+    }
+
+    /// <summary>
+    /// Puts the UI scale in force (issue 698): the window draws the canvas larger by the scale's
+    /// factor, so type and cards grow at the same window size, and the layout reflows into the
+    /// smaller canvas, the open board taking the tile that fits it.
+    /// </summary>
+    private void ApplyScale()
+    {
+        _layout = UiLayout.For(_options.UiScale);
+        if (IsInsideTree())
+        {
+            GetWindow().ContentScaleFactor = _layout.Factor;
+        }
+
+        if (_client is not null)
+        {
+            _tile = TileFor(_client.State.Map);
+        }
+
+        QueueRedraw();
     }
 
     /// <summary>Takes <paramref name="options"/> as the options in force and writes them to the profile, so a change lasts.</summary>
@@ -322,13 +344,13 @@ public partial class Main
                 DrawOptions();
                 break;
             case Screen.CampaignTitle:
-                DrawCampaignTitle();
+                AtFullSize(DrawCampaignTitle);
                 break;
             case Screen.NewGame:
-                DrawNewGame();
+                AtFullSize(DrawNewGame);
                 break;
             default:
-                DrawLoad();
+                AtFullSize(DrawLoad);
                 break;
         }
     }
@@ -373,13 +395,16 @@ public partial class Main
     {
         Heading("OPTIONS");
         var y = 104f;
+
+        // The rows close up to fit the canvas at a larger UI scale (issue 698).
+        var pitch = Math.Min(54f, (ViewHeight - y - 64) / OptionsMenu.Rows.Count);
         for (var i = 0; i < OptionsMenu.Rows.Count; i++)
         {
             var (key, label, _) = OptionsMenu.Rows[i];
             var rowKey = key;
             MenuRow(y, label, OptionsMenu.Words(key, OptionsMenu.Value(_options, key)), (i + 1).ToString(System.Globalization.CultureInfo.InvariantCulture), false,
                 () => SetOptions(OptionsMenu.Cycle(_options, rowKey)));
-            y += 54;
+            y += pitch;
         }
 
         if (_campaign is not null)

@@ -25,12 +25,18 @@ public class ClientOptionsScreenTests
     private static string TempDir() => Path.Combine(Path.GetTempPath(), "ironwake-options-screen-" + Guid.NewGuid().ToString("N"));
 
     [Fact]
-    public void TheOptionsRowsAreTheProfilesKeysInScreenOrderAndUiScaleWaits()
+    public void TheOptionsRowsAreTheProfilesKeysInScreenOrder()
     {
         Assert.Equal(
-            new[] { "speed", "scenes", "confirm-end-turn", "reach-on-hover", "sound", "volume" },
+            new[] { "speed", "scenes", "confirm-end-turn", "reach-on-hover", "ui-scale", "sound", "volume" },
             OptionsMenu.Rows.Select(r => r.Key));
-        Assert.DoesNotContain(OptionsMenu.Rows, r => r.Key == "ui-scale");
+    }
+
+    /// <summary>Issue 698: the UI scale row reads as a percentage, the profile keeps the number.</summary>
+    [Fact]
+    public void TheUiScaleRowReadsAsAPercentage()
+    {
+        Assert.Equal("125%", OptionsMenu.Words("ui-scale", OptionsMenu.Value(Options.Set(new Options(), "ui-scale", "125").Options, "ui-scale")));
     }
 
     [Theory]
@@ -38,6 +44,7 @@ public class ClientOptionsScreenTests
     [InlineData("scenes", new[] { "all", "map", "key" })]
     [InlineData("confirm-end-turn", new[] { "off", "on" })]
     [InlineData("reach-on-hover", new[] { "off", "on" })]
+    [InlineData("ui-scale", new[] { "125", "150", "100" })]
     [InlineData("sound", new[] { "off", "on" })]
     [InlineData("volume", new[] { "100", "0", "20", "40", "60", "80" })]
     public void AClickOnARowStepsItsValueAndWraps(string key, string[] steps)

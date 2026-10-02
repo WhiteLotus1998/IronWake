@@ -17,7 +17,11 @@ namespace Ironwake.Godot;
 /// </summary>
 public partial class Main
 {
-    /// <summary>The scene's frame on the 1280x720 view.</summary>
+    /// <summary>
+    /// The scene's frame on the 1280x720 window. The scene is art drawn at its own pixel size, so
+    /// it keeps this frame at every UI scale (issue 698): at 150 the canvas is 853 wide, too narrow
+    /// for it, and the scene draws at full size (<see cref="AtFullSize"/>) instead.
+    /// </summary>
     private static readonly Rect2 SceneFrame = new(190, 120, 900, 430);
 
     /// <summary>How far the ground line sits above the frame's foot.</summary>
@@ -45,12 +49,12 @@ public partial class Main
     }
 
     /// <summary>The setting's chip at the top bar's right end: the B key and the setting in force; returns its left edge.</summary>
-    private float DrawSceneChip()
+    private float DrawSceneChip(float down)
     {
         var value = Scenes.Label(_client!.SceneSetting)["scenes: ".Length..];
         var label = "SCENES  B";
         var width = UiWidth(label, 10, bold: true) + UiWidth(value, 14, bold: true) + 36;
-        Chip(ViewWidth - Margin - width, label, value, Ink);
+        Chip(ViewWidth - Margin - width, label, value, Ink, down);
         return ViewWidth - Margin - width;
     }
 
@@ -90,7 +94,7 @@ public partial class Main
 
         if (beat.Scene is { } scene && at < scene.Length)
         {
-            DrawScene(scene, at);
+            AtFullSize(() => DrawScene(scene, at));
         }
         else if (beat.LevelUp is { } card && at >= beat.LevelUpAt)
         {
@@ -100,7 +104,7 @@ public partial class Main
 
     private void DrawScene(BattleScene scene, float t)
     {
-        DrawRect(new Rect2(Vector2.Zero, new Vector2(ViewWidth, ViewHeight)), UiColour("ink", 0.72f));
+        DrawRect(new Rect2(Vector2.Zero, new Vector2(UiLayout.WindowWidth, UiLayout.WindowHeight)), UiColour("ink", 0.72f));
         var shake = Vector2.Zero;
         foreach (var s in scene.Strikes.Where(s => s.Shake > 0 && t >= s.Contact && t < s.Contact + 0.25f))
         {
@@ -349,9 +353,9 @@ public partial class Main
         var size = ArtSpec.ClipFrame;
         var count = Math.Max(1, sheet.GetWidth() / size);
         var source = new Rect2(Math.Clamp(index, 0, count - 1) * size, 0, size, size);
-        DrawSetTransform(at, 0, new Vector2(mirrored ? -1 : 1, 1));
+        DrawSetTransformMatrix(_frame * new Transform2D(0, new Vector2(mirrored ? -1 : 1, 1), 0, at));
         DrawTextureRectRegion(sheet, new Rect2(-pivot, new Vector2(size, size)), source, modulate);
-        DrawSetTransform(Vector2.Zero, 0, Vector2.One);
+        DrawSetTransformMatrix(_frame);
         return true;
     }
 

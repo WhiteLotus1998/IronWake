@@ -43,20 +43,33 @@ namespace Ironwake.Godot;
 /// </summary>
 public partial class Main : Node2D
 {
-    private const int ViewWidth = 1280;
-    private const int ViewHeight = 720;
-    private const int Margin = 16;
-    private const int Top = 48;
-    private const int PanelWidth = 500;
+    /// <summary>The layout at the UI scale in force (issue 698): the canvas's size, the column's width, the top bar's and the key strip's rows.</summary>
+    private UiLayout _layout = UiLayout.For(100);
+
+    /// <summary>The canvas's width at the UI scale in force: 1280 at 100, narrower as the type grows.</summary>
+    private int ViewWidth => _layout.ViewWidth;
+
+    /// <summary>The canvas's height at the UI scale in force.</summary>
+    private int ViewHeight => _layout.ViewHeight;
+
+    private const int Margin = UiLayout.Margin;
+
+    /// <summary>Where the board's block starts, under the top bar's one or two rows.</summary>
+    private int Top => _layout.Top;
+
+    /// <summary>The column's width at the UI scale in force.</summary>
+    private int PanelWidth => _layout.PanelWidth;
+
     private const int FontSize = 14;
     private const int LineHeight = 17;
     private const int LogLines = 30;
     private const int RecallRowsShown = 40;
-    /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
-    private const int LegendRoom = 76;
 
-    /// <summary>The lowest baseline the footer leaves free.</summary>
-    private const int FooterTop = ViewHeight - 40;
+    /// <summary>The room under the board for its legend, counted in the block that is centred on the screen.</summary>
+    private const int LegendRoom = UiLayout.LegendRoom;
+
+    /// <summary>The lowest baseline the key strip leaves free.</summary>
+    private int FooterTop => _layout.FooterTop;
 
     /// <summary>
     /// How far the board and the column drop below the top bar (issue 512): the board, its legend
@@ -66,7 +79,7 @@ public partial class Main : Node2D
     private float Lift => _client is null ? 0 : Math.Max(0, (FooterTop - Top - (_client.State.Map.Height * _tile + LegendRoom)) / 2f);
 
     /// <summary>The gap between the board's right edge and the column (issue 513): fixed, so the column follows the board.</summary>
-    private const int ColumnGap = 40;
+    private const int ColumnGap = UiLayout.ColumnGap;
 
     /// <summary>The board's left edge: the board, the gap and the column are one block centred across the window (issue 513).</summary>
     private float Left => _client is null ? Margin : Math.Max(Margin, (ViewWidth - (_client.State.Map.Width * _tile + ColumnGap + PanelWidth + 12)) / 2f);
@@ -77,7 +90,7 @@ public partial class Main : Node2D
     private Vector2 PanelOrigin => new(_client is null ? ViewWidth - PanelWidth - Margin : Board.X + _client.State.Map.Width * _tile + ColumnGap, Board.Y + 12);
 
     /// <summary>The column's lowest baseline (issue 512): its height follows the board's and its legend's, not the window's.</summary>
-    private float PanelBottom => _client is null ? FooterTop : Board.Y + _client.State.Map.Height * _tile + LegendRoom;
+    private float PanelBottom => _client is null ? FooterTop : _layout.ColumnBottom(Board.Y + _client.State.Map.Height * _tile, PanelOrigin.Y, ForecastHeight + 4 * LineHeight);
 
     private static readonly Color Background = UiColour("ink");
     private static readonly Color Box = UiColour("panel");
@@ -185,6 +198,14 @@ public partial class Main : Node2D
             {
                 LoadOptions();
             }
+
+            // A render names its UI scale (issue 698), so the shots at 125 and 150 never read a profile.
+            if (Arg(args, "--ui-scale") is { } uiScale)
+            {
+                _options = Options.Set(_options, "ui-scale", uiScale).Options;
+            }
+
+            ApplyScale();
 
             if (Array.IndexOf(args, "--campaign") >= 0)
             {
@@ -506,8 +527,7 @@ public partial class Main : Node2D
     }
 
     /// <summary>The tile (issue 513): as large as fills the height the block allows under the top bar and above the legend and footer, and never so wide the column does not fit.</summary>
-    private static int TileFor(MapDefinition map) =>
-        Math.Min((ViewWidth - PanelWidth - ColumnGap - 2 * Margin - 12) / map.Width, (FooterTop - Top - LegendRoom - 8) / map.Height);
+    private int TileFor(MapDefinition map) => _layout.TileFor(map.Width, map.Height);
 
     /// <summary>The between-map screen's input: a click on a row does what it offers; M marches; B benches or unbenches the selected unit.</summary>
     private void ScreenInput(InputEvent input)
@@ -622,6 +642,40 @@ public partial class Main : Node2D
         return _client.State.Map.Contains(at) ? at : null;
     }
 
+    /// <summary>The transform every drawing starts from: none, or the UI scale's inverse inside <see cref="AtFullSize"/>.</summary>
+    private Transform2D _frame = Transform2D.Identity;
+
+    /// <summary>
+    /// Draws a composed screen at its 100 size whatever the UI scale (issue 698): the titles, New
+    /// game, Load, how to play and the battle scene are laid out for the whole 1280x720 window
+    /// with type from 12 up, and a smaller canvas would push them off it. They draw under the
+    /// scale's inverse with the layout at 100, and their click regions are brought back into the
+    /// canvas's coordinates, where a click arrives.
+    /// </summary>
+    private void AtFullSize(Action draw)
+    {
+        var layout = _layout;
+        var from = _hits.Count;
+        var shrink = 1 / layout.Factor;
+        (_layout, _frame) = (UiLayout.For(100), Transform2D.Identity.Scaled(new Vector2(shrink, shrink)));
+        DrawSetTransformMatrix(_frame);
+        try
+        {
+            draw();
+        }
+        finally
+        {
+            (_layout, _frame) = (layout, Transform2D.Identity);
+            DrawSetTransformMatrix(_frame);
+        }
+
+        for (var i = from; i < _hits.Count; i++)
+        {
+            var (area, click) = _hits[i];
+            _hits[i] = (new Rect2(area.Position * shrink, area.Size * shrink), click);
+        }
+    }
+
     /// <summary>What a click at <paramref name="position"/> does on the regions drawn last frame, or null.</summary>
     private Action? HitAt(Vector2 position) => _hits.LastOrDefault(hit => hit.Area.HasPoint(position)).Click;
 
@@ -649,7 +703,7 @@ public partial class Main : Node2D
 
         if (_screen != Screen.Battle)
         {
-            DrawTitleOrHowTo();
+            AtFullSize(DrawTitleOrHowTo);
             return;
         }
 
@@ -694,7 +748,10 @@ public partial class Main : Node2D
         }
 
         RecallChip(x, state);
-        DrawSpeedButtons(DrawSceneChip() - 8);
+
+        // At a larger UI scale the speed buttons and the scenes chip take the bar's second row (issue 698).
+        var down = (_layout.TopRows - 1) * UiLayout.TopRowHeight;
+        DrawSpeedButtons(DrawSceneChip(down) - 8, down);
     }
 
     /// <summary>
@@ -703,19 +760,19 @@ public partial class Main : Node2D
     /// ending at <paramref name="right"/>. The speed in force is filled amber with dark triangles;
     /// the others are bare with muted ones. A click picks one and the profile keeps it.
     /// </summary>
-    private void DrawSpeedButtons(float right)
+    private void DrawSpeedButtons(float right, float down)
     {
         const float button = 30, gap = 4, side = 8;
         var label = GameSpeed.Label.ToUpperInvariant();
         var labelWidth = UiWidth(label, 10, bold: true);
         var width = 14 + labelWidth + 10 + GameSpeed.Speeds.Length * (button + gap) - gap + 6;
         var x = right - width;
-        Card(new Rect2(x, 12, width, 28), Box, 14);
-        UiText(new Vector2(x + 14, 30), label, Muted, 10, bold: true);
+        Card(new Rect2(x, 12 + down, width, 28), Box, 14);
+        UiText(new Vector2(x + 14, 30 + down), label, Muted, 10, bold: true);
         var amber = Look(LookPalette.Player);
         for (var i = 0; i < GameSpeed.Speeds.Length; i++)
         {
-            var rect = new Rect2(x + 14 + labelWidth + 10 + i * (button + gap), 15, button, 22);
+            var rect = new Rect2(x + 14 + labelWidth + 10 + i * (button + gap), 15 + down, button, 22);
             var chosen = i == _speed;
             if (chosen)
             {
@@ -779,23 +836,31 @@ public partial class Main : Node2D
         }
     }
 
-    /// <summary>A chip: a spaced-capital label and a bold value on a rounded panel; returns its right edge.</summary>
-    private float Chip(float x, string label, string value, Color colour)
+    /// <summary>A chip: a spaced-capital label and a bold value on a rounded panel, <paramref name="down"/> below the bar's first row; returns its right edge.</summary>
+    private float Chip(float x, string label, string value, Color colour, float down = 0)
     {
         var width = UiWidth(label, 10, bold: true) + UiWidth(value, 14, bold: true) + 36;
-        Card(new Rect2(x, 12, width, 28), Box, 14);
-        UiText(new Vector2(x + 14, 30), label, Muted, 10, bold: true);
-        UiText(new Vector2(x + 22 + UiWidth(label, 10, bold: true), 31), value, colour, 14, bold: true);
+        Card(new Rect2(x, 12 + down, width, 28), Box, 14);
+        UiText(new Vector2(x + 14, 30 + down), label, Muted, 10, bold: true);
+        UiText(new Vector2(x + 22 + UiWidth(label, 10, bold: true), 31 + down), value, colour, 14, bold: true);
         return x + width;
     }
 
-    /// <summary>The footer: each key as a keycap and what it does.</summary>
+    /// <summary>The footer: each key as a keycap and what it does, wrapping onto a second row at a larger UI scale (issue 698).</summary>
     private void DrawKeys()
     {
+        var spans = KeyStrip.Keys.Select(k => UiWidth(k.Key, 12, bold: true) + 14 + 7 + UiWidth(k.Does, 12)).ToList();
+        var rows = UiLayout.Wrap(spans, ViewWidth - 2 * Margin, 14);
         var x = (float)Margin;
-        var y = ViewHeight - 24;
-        foreach (var (key, does) in KeyStrip.Keys)
+        var y = ViewHeight - 24 - (_layout.KeyRows - 1) * UiLayout.KeyRowHeight;
+        for (var i = 0; i < KeyStrip.Keys.Length; i++)
         {
+            var (key, does) = KeyStrip.Keys[i];
+            if (i > 0 && rows[i] != rows[i - 1])
+            {
+                (x, y) = (Margin, y + UiLayout.KeyRowHeight);
+            }
+
             var width = UiWidth(key, 12, bold: true) + 14;
             if (key == "E")
             {
@@ -1236,7 +1301,7 @@ public partial class Main : Node2D
         }
 
         var unitAt = _hover is { } over && client.UnitAt(over) is not null ? over : client.Selected is { } id ? client.State.Find(id)?.At : null;
-        if (parts.Contains(PanelPart.UnitCard) && unitAt is { } at && client.Card(at) is { } unitCard && y - LineHeight + 4 + UnitCardHeight <= PanelBottom - 2 * LineHeight)
+        if (parts.Contains(PanelPart.UnitCard) && unitAt is { } at && client.Card(at) is { } unitCard && y - LineHeight + 4 + UnitCardHeightOf(unitCard) <= PanelBottom - 2 * LineHeight)
         {
             y = DrawUnitCard(y - LineHeight + 4, unitCard) + LineHeight + 12;
         }
@@ -1281,10 +1346,17 @@ public partial class Main : Node2D
     /// <summary>The move preview's one line on a card (issue 511): the verdict's dot frost when safe and bone when struck.</summary>
     private float PreviewRow(float y, MovePreview preview, string lead)
     {
-        Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, LineHeight + 10), Box, 8);
+        // A narrower column at a larger UI scale (issue 698) wraps the line rather than running past the card.
+        var lines = UiLines(lead + preview.Text, 13, PanelWidth - 16);
+        Card(new Rect2(PanelOrigin.X - 8, y - LineHeight + 1, PanelWidth + 16, lines.Count * LineHeight + 10), Box, 8);
         DrawCircle(new Vector2(PanelOrigin.X + 5, y - 4), 5, preview.Safe ? MarkColour("reach") : EnemyMark);
-        UiText(new Vector2(PanelOrigin.X + 16, y), lead + preview.Text, Ink, 13);
-        return y + LineHeight + 4;
+        foreach (var line in lines)
+        {
+            UiText(new Vector2(PanelOrigin.X + 16, y), line, Ink, 13);
+            y += LineHeight;
+        }
+
+        return y + 4;
     }
 
     /// <summary>
@@ -1315,6 +1387,12 @@ public partial class Main : Node2D
         }
 
         // Closed, the newest lines fill what the cards leave, one at the least; open, the log has the column.
+        // On the player's phase a closed log the cards have filled the column with is left out (issue 698): its heading would be pulled up over them by more than a row.
+        if (!_logOpen && !client.EnemyPhasePlaying && y - (PanelBottom - LineHeight - 4) > LineHeight)
+        {
+            return;
+        }
+
         y = Title(Math.Min(y, PanelBottom - LineHeight - 4), _logOpen ? "EVENT LOG  Tab closes it" : client.EnemyPhasePlaying ? "THIS ACT  Tab for the whole log" : "EVENT LOG  Tab for the whole log");
         var room = Math.Max(0, (int)((PanelBottom + LineHeight - y) / LineHeight));
         foreach (var (text, marked, undone) in rows.Skip(Math.Max(0, rows.Count - room)))
@@ -1421,22 +1499,34 @@ public partial class Main : Node2D
     /// </summary>
     private float UiRows(float y, string text, Color colour, int size)
     {
+        foreach (var line in UiLines(text, size, PanelWidth))
+        {
+            UiText(new Vector2(PanelOrigin.X, y), line, colour, size);
+            y += size + 5;
+        }
+
+        return y;
+    }
+
+    /// <summary><paramref name="text"/> in the UI face broken at spaces into lines no wider than <paramref name="width"/>, one word at the least.</summary>
+    private List<string> UiLines(string text, int size, float width)
+    {
+        var lines = new List<string>();
         var line = "";
         foreach (var word in text.Split(' '))
         {
             var next = line.Length == 0 ? word : line + " " + word;
-            if (line.Length > 0 && UiWidth(next, size) > PanelWidth)
+            if (line.Length > 0 && UiWidth(next, size) > width)
             {
-                UiText(new Vector2(PanelOrigin.X, y), line, colour, size);
-                y += size + 5;
+                lines.Add(line);
                 next = word;
             }
 
             line = next;
         }
 
-        UiText(new Vector2(PanelOrigin.X, y), line, colour, size);
-        return y + size + 5;
+        lines.Add(line);
+        return lines;
     }
 
     private float Title(float y, string title)

@@ -9,8 +9,7 @@ namespace Ironwake.Client;
 /// The Options screen as rows a renderer draws and a click cycles (issue 677, slice 2): each row
 /// is one profile key, its words, and the values a click steps through in order, wrapping. A
 /// cycle goes through <see cref="Options.Set"/>, so a row can never hold a value the profile
-/// would refuse. UI scale is not a row yet: the window already stretches the whole screen, and a
-/// larger type needs a layout that reflows (DECISIONS/0141, issue 698).
+/// would refuse. UI scale is a row since the layout reflows (issue 698, <see cref="UiLayout"/>).
 /// </summary>
 public static class OptionsMenu
 {
@@ -24,6 +23,7 @@ public static class OptionsMenu
         ("scenes", "Battle scenes", Options.SceneValues),
         ("confirm-end-turn", "Confirm end turn while units are unmoved", new[] { "on", "off" }),
         ("reach-on-hover", "Show enemy reach on hover", new[] { "on", "off" }),
+        ("ui-scale", "UI scale", Options.UiScales.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToList()),
         ("sound", "Sound", new[] { "on", "off" }),
         ("volume", "Volume", VolumeSteps.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToList()),
     };
@@ -39,6 +39,7 @@ public static class OptionsMenu
     public static string Words(string key, string value) => key switch
     {
         "scenes" => value switch { "all" => "all", "map" => "map only", _ => "key moments" },
+        "ui-scale" => value + "%",
         _ => value,
     };
 
