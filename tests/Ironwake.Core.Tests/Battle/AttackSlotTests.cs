@@ -10,7 +10,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// </summary>
 public class AttackSlotTests
 {
-    private static readonly Unit TwoSwords = Recruit("hale", new Stats(22, 8, 0, 7, 8, 6, 5, 2, 9), "iron_sword", "steel_sword", "field_dressing");
+    private static readonly Unit TwoSwords = Recruit("hale", new Stats(22, 8, 0, 7, 8, 6, 5, 2, 9), "iron_sword", "steel_sword", "field_dressing") with { Skill = WeaponSkill.Zero.With(WeaponType.Sword, WeaponRanks.Threshold(WeaponRank.D)) };
 
     private static BattleState Beside() =>
         Start(roster: ValueList<Unit>.Of(TwoSwords, Wren)).Do(new Move("hale", new Coord(2, 1)));
@@ -69,7 +69,7 @@ public class AttackSlotTests
     [Fact]
     public void AHealingSpellOrASpentSpellInTheSlotIsRefused()
     {
-        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve");
+        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve") with { Skill = WeaponSkill.Zero.With(WeaponType.Faith, WeaponRanks.Threshold(WeaponRank.D)) };
         var state = Start(roster: ValueList<Unit>.Of(Hale, mira), map: Yard.Replace("recruit:wren", "recruit")).Do(new Move("mira", new Coord(2, 2)));
 
         var healing = state.Refused(new Attack("mira", "soldier-1", 1));
@@ -99,7 +99,7 @@ public class AttackSlotTests
     [Fact]
     public void AnUnarmedUnitSaysSoOnTheBoardAndInShow()
     {
-        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve");
+        var mira = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance", "salve") with { Skill = WeaponSkill.Zero.With(WeaponType.Faith, WeaponRanks.Threshold(WeaponRank.D)) };
         var state = Start(roster: ValueList<Unit>.Of(Hale, mira), map: Yard.Replace("recruit:wren", "recruit"));
         Assert.DoesNotContain("unarmed", Ironwake.Core.MapRenderer.Render(state, Starter));
         Assert.Equal("Radiance (acc 85 power 6 crit 0 wt 4 range 1-2)", Ironwake.Cli.PlaySession.WeaponLine(state.Find("mira")!, Starter));

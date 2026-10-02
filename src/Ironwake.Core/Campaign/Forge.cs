@@ -45,6 +45,11 @@ public static class Forge
     /// <summary>The material <paramref name="weapon"/> refines on, or null with the reason it never does.</summary>
     public static (Material? Material, string? Refusal) MaterialFor(Weapon weapon, GameContent content)
     {
+        if (weapon.Glass)
+        {
+            return (null, $"the smith: \"{Weapon.GlassRefusal}\"");
+        }
+
         if (weapon.Hungers)
         {
             return (null, $"{weapon.Name} is never Refined; it grows on what it is fed");
@@ -62,6 +67,12 @@ public static class Forge
 
         return weapon.Price is null ? (null, $"{weapon.Name} is no shop's weapon; the smith will not work it") : (Material.Common, null);
     }
+
+    /// <summary>
+    /// The material as the screen names it (issue 702): <c>common material</c>, and the rare one
+    /// <c>frozen iron</c>, Lotus's name; the id <c>rareMaterial</c> and <see cref="Material.Rare"/> stay.
+    /// </summary>
+    public static string Label(Material material) => material == Material.Rare ? "frozen iron" : "common material";
 
     /// <summary>How many steps a weapon on <paramref name="material"/> may take.</summary>
     public static int MaxSteps(Material material, ForgeRules rules) => material == Material.Rare ? rules.RareSteps : rules.CommonSteps;
@@ -91,7 +102,7 @@ public static class Forge
         var need = RareNeeded(content);
         var paid = RarePaid(content);
         return paid == need ? null
-            : paid < need ? $"pays {paid} rare material and the signatures the campaign issues need {need} to Refine fully; {need - paid} short"
-            : $"pays {paid} rare material and the signatures the campaign issues need {need}; {paid - need} over, which nothing can spend";
+            : paid < need ? $"pays {paid} frozen iron and the signatures the campaign issues need {need} to Refine fully; {need - paid} short"
+            : $"pays {paid} frozen iron and the signatures the campaign issues need {need}; {paid - need} over, which nothing can spend";
     }
 }

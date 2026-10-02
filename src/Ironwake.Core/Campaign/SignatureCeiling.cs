@@ -32,8 +32,8 @@ public sealed record ArtReading(string ArtId, int LosesTo, int Targets)
 /// <see cref="TerrainId"/>; the targets are every unit outside the cast that carries a weapon
 /// that strikes, with the first such weapon, on the same terrain at full HP, each struck at the
 /// attacking weapon's nearest range. The comparator is the shop weapon (one some campaign map
-/// stocks, else any priced weapon) of the item's type and rank with the most damage summed over
-/// the targets.
+/// stocks, else any priced weapon) of the item's type, at its rank up to <see cref="FloorRank"/>,
+/// with the most damage summed over the targets.
 /// </para>
 /// </summary>
 public static class SignatureCeiling
@@ -103,14 +103,23 @@ public static class SignatureCeiling
     }
 
     /// <summary>
-    /// The shop weapons an item is held to: unbound weapons of its type and rank that some
-    /// campaign map stocks, or, when the campaign stocks none of them, every priced one. Healing
-    /// spells are never comparators.
+    /// The lowest rank a signature is held to (issue 702). Signatures reach their owners after the
+    /// second campaign map (quest 2, the heirloom's floor at map 5), when the ladder puts D in a
+    /// fighting unit's hands, so a rank E item is read against D's steel as well as iron, as it
+    /// was before the ladder gave ranks a job.
+    /// </summary>
+    public const WeaponRank FloorRank = WeaponRank.D;
+
+    /// <summary>
+    /// The shop weapons an item is held to: unbound weapons of its type from its own rank up to
+    /// <see cref="FloorRank"/> (its rank alone when that is higher) that some campaign map stocks,
+    /// or, when the campaign stocks none of them, every priced one. Healing spells are never comparators.
     /// </summary>
     public static IReadOnlyList<Weapon> Shop(GameContent content, Weapon item)
     {
+        var top = item.Rank > FloorRank ? item.Rank : FloorRank;
         var kin = content.Weapons.Values
-            .Where(w => w.BoundTo is null && w.Price is not null && !w.Heals && w.Type == item.Type && w.Rank == item.Rank)
+            .Where(w => w.BoundTo is null && w.Price is not null && !w.Heals && w.Type == item.Type && w.Rank >= item.Rank && w.Rank <= top)
             .ToList();
         var stocked = kin.Where(w => content.Campaign.Maps.Any(m => m.Stock.Contains(w.Id))).ToList();
         return stocked.Count > 0 ? stocked : kin;

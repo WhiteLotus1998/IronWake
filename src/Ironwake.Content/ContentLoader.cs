@@ -1590,6 +1590,11 @@ public static class ContentLoader
                 throw node.Error("hungers", "a hungering weapon is a physical weapon with no price: never sold, never repaired");
             }
 
+            if (node.BoolOr("glass", false) && (!node.Has("price") || heals || type.IsMagic() || node.Has("boundTo")))
+            {
+                throw node.Error("glass", "a glass weapon is a physical shop weapon with a price, bound to no one");
+            }
+
             var effective = node.StringArrayOrEmpty("effective")
                 .Select(e => node.ParseEnum<MovementType>("effective", e)).ToList();
             if (effective.Distinct().Count() != effective.Count)
@@ -1622,6 +1627,7 @@ public static class ContentLoader
                 Description = Description(node),
                 Hungers = node.BoolOr("hungers", false),
                 Heirloom = heirloom,
+                Glass = node.BoolOr("glass", false),
             });
         }
 

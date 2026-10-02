@@ -20,7 +20,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
@@ -2744,7 +2744,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
-  Stores: common 2, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 2, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 == Quests ==
 Side maps won:
@@ -2759,7 +2759,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
-  Stores: common 2, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 2, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 > build forge
 Forge built for 600, the purse holds 900; refine <unit> <slot> mt|hit works here
@@ -2788,7 +2788,7 @@ Rooms: beds: 11/14; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 1 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 > march
 Map 5 of 9: Harrow Weir, seed 702

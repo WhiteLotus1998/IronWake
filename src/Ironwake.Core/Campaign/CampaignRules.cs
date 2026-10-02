@@ -142,8 +142,8 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>
     /// What repairing one use of <paramref name="weapon"/> costs: its price over its durability,
     /// at least 1. Null for a weapon that cannot be repaired: a spell, which refreshes every map
-    /// (section 5), or a weapon without a price, which no shop has ever sold.
+    /// (section 5), a weapon without a price, which no shop has ever sold, or a glass weapon (issue 702).
     /// </summary>
     public static int? RepairPricePerUse(Weapon weapon) =>
-        weapon.IsMagic || weapon.Price is not { } price ? null : Math.Max(1, price / weapon.Durability);
+        weapon.IsMagic || weapon.Glass || weapon.Price is not { } price ? null : Math.Max(1, price / weapon.Durability);
 }

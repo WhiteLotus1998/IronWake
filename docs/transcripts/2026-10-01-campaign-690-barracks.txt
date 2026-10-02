@@ -20,7 +20,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
@@ -1319,7 +1319,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; needs the Barracks first
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
     Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
@@ -1331,7 +1331,7 @@ Keep: Ironwake Keep; built: nothing; the purse holds 1500
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
 == Shop ==
-Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 > keep
@@ -1340,7 +1340,7 @@ Rooms: beds: 11/12; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; needs the Barracks first
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Keep: Ironwake Keep; built: nothing; the purse holds 1500
   wall: Rebuild a wall, 400
     Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
@@ -1412,7 +1412,7 @@ Rooms: beds: 13/14; a fallen member keeps their bed
   forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
   barracks: Barracks, 500, +2 beds and 4 hires at 300, built 1 of 1
   barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1
-  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
 Hires: 300 each, joining at L1, the company's average less 2; hire <id>
   corin: Corin Ashby (he), Cadet L1, Iron Sword; hp 19 str 6 mag 0 dex 5 spd 7 lck 4 def 4 res 1 cha 3; growths hp 40 str 30 mag 5 dex 30 spd 35 lck 17 def 17 res 5 cha 12
     Took the bounty because the harvest failed. Says so.
@@ -1429,7 +1429,7 @@ Keep: Ironwake Keep; built: wall 10,3; the purse holds 0
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   maud_1: Maud's quest 1, The Lazar House (quest maud_1 <ally>); permadeath applies
 == Shop ==
-Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, field_dressing 150; a seal for promotion costs 500
 Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
 March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
 Campaign stopped before Sallow Grange: the script ended on the screen

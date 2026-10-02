@@ -100,7 +100,7 @@ public class ItemTests
         Assert.Equal(RejectionReason.NotUsable, refused.Reason);
         Assert.Equal("Salve has no uses left this battle", refused.Message);
 
-        var caster = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance");
+        var caster = Recruit("mira", "chaplain", new Stats(16, 1, 4, 4, 4, 3, 1, 5, 3), "radiance") with { Skill = WeaponSkill.Zero.With(WeaponType.Faith, WeaponRanks.Threshold(WeaponRank.D)) };
         var field = Field3(Hale, caster, Wren).Do(new Move("mira", new Coord(2, 1)));
         field = field.WithUnit(field.Find("mira")! with { Unit = field.Find("mira")!.Unit.WithUses(1) });
         var result = field.Try(new Attack("mira", "brigand-1"));

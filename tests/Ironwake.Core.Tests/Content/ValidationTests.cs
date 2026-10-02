@@ -251,6 +251,8 @@ public class ValidationTests
     [InlineData("\"type\": \"sword\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"F\"", "rank")]
     [InlineData("\"type\": \"club\", \"mt\": 5, \"hit\": 90, \"crit\": 0, \"wt\": 5, \"minRange\": 1, \"maxRange\": 1, \"durability\": 40, \"description\": \"A test line.\", \"rank\": \"E\"", "type")]
     [InlineData("\"type\": \"gauntlet\", \"mt\": 2, \"hit\": 90, \"crit\": 0, \"wt\": 1, \"minRange\": 1, \"maxRange\": 2, \"durability\": 30, \"description\": \"A test line.\", \"rank\": \"E\"", "maxRange")]
+    [InlineData(Sword + ", \"glass\": true", "glass")]
+    [InlineData(Sword + ", \"price\": 900, \"boundTo\": \"hale\", \"glass\": true", "glass")]
     [InlineData(Sword + ", \"heals\": true", "heals")]
     [InlineData(Sword + ", \"healBase\": 3", "healBase")]
     [InlineData(Sword + ", \"effective\": [\"boats\"]", "effective")]

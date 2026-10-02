@@ -494,8 +494,8 @@ public sealed record CampaignRecord(
     /// Repairs the weapon in <paramref name="slot"/> (0-based) of <paramref name="unitId"/> to its
     /// full durability at <see cref="CampaignRules.RepairPricePerUse"/> for every missing use, a
     /// broken weapon included, since repair is what makes broken a state and not a slot (section 5).
-    /// Refused for an empty slot, a consumable, a spell, a weapon without a price, a weapon already
-    /// at full uses, or a purse short of the cost.
+    /// Refused for an empty slot, a consumable, a spell, a glass weapon (the smith's line, issue 702),
+    /// a weapon without a price, a weapon already at full uses, or a purse short of the cost.
     /// </summary>
     public ScreenResult Repair(string unitId, int slot, GameContent content)
     {
@@ -518,6 +518,11 @@ public sealed record CampaignRecord(
         if (weapon.IsMagic)
         {
             return ScreenResult.Refused(this, $"{weapon.Name} is a spell; its uses refresh every map");
+        }
+
+        if (weapon.Glass)
+        {
+            return ScreenResult.Refused(this, $"the smith: \"{Weapon.GlassRefusal}\"");
         }
 
         if (CampaignRules.RepairPricePerUse(weapon) is not { } perUse)
@@ -994,7 +999,7 @@ public sealed record CampaignRecord(
         var rare = won ? quest.Rare : 0;
         if (common + rare > 0)
         {
-            paid += "; the stores take " + string.Join(" and ", new[] { (common, "common"), (rare, "rare") }.Where(m => m.Item1 > 0).Select(m => $"{m.Item1} {m.Item2} material"));
+            paid += "; the stores take " + string.Join(" and ", new[] { (common, Material.Common), (rare, Material.Rare) }.Where(m => m.Item1 > 0).Select(m => $"{m.Item1} {Forge.Label(m.Item2)}"));
         }
 
         var record = this with
@@ -1294,7 +1299,7 @@ public sealed record CampaignRecord(
     /// <see cref="ForgeRules.Mt"/>, <c>hit</c> adds <see cref="ForgeRules.Hit"/>, for one material of
     /// the weapon's kind (<see cref="Forge.MaterialFor"/>) and <see cref="ForgeRules.Price"/> from
     /// the purse. Refused without a forge, for a unit or slot that is not there, an item, a weapon
-    /// the forge never works (named), an heirloom short of its last stage (the smith's own line at
+    /// the forge never works (named), a glass weapon (the smith's line, issue 702), an heirloom short of its last stage (the smith's own line at
     /// rust), a weapon at its last step, a stat other than mt or hit, and a short store or purse.
     /// </summary>
     public ScreenResult Refine(string unitId, int slot, string stat, GameContent content)
@@ -1349,10 +1354,10 @@ public sealed record CampaignRecord(
         }
 
         var held = kind == Material.Rare ? RareMaterial : CommonMaterial;
-        var word = kind == Material.Rare ? "rare" : "common";
+        var word = Forge.Label(kind);
         if (held < 1)
         {
-            return ScreenResult.Refused(this, $"Refining {weapon.Name} takes 1 {word} material and the stores hold none");
+            return ScreenResult.Refused(this, $"Refining {weapon.Name} takes 1 {word} and the stores hold none");
         }
 
         if (Purse < rules.Price)
@@ -1372,7 +1377,7 @@ public sealed record CampaignRecord(
         var shaped = Forge.Shape(Heirloom.Shape(weapon, refined), refined);
         return new ScreenResult(
             after,
-            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Acc {shaped.Hit}, Power {shaped.Mt}, for 1 {word} material and {rules.Price}; the purse holds {after.Purse}",
+            $"Refine {weapon.Name}: {Forge.Name(weapon.Name, refined)}, Acc {shaped.Hit}, Power {shaped.Mt}, for 1 {word} and {rules.Price}; the purse holds {after.Purse}",
             true);
     }
 

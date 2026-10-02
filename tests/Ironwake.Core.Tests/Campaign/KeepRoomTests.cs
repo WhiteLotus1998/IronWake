@@ -150,7 +150,7 @@ public class KeepRoomTests
                 "  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1; opens once the_tollgate is won",
                 "  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won",
                 "  barracks_wing: Barracks wing, 300, +1 bed and 2 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first",
-                "  Stores: common 0, rare 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on rare",
+                "  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron",
             },
             CampaignSession.RoomLines(record, Content));
         Assert.Empty(CampaignSession.RoomLines(record with { MapIndex = Content.Campaign.Maps.Count }, Content));

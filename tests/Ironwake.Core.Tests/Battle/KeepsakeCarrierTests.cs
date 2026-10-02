@@ -47,6 +47,13 @@ public class KeepsakeCarrierTests
         return state.WithUnit(unit with { Unit = unit.Unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) } });
     }
 
+    /// <summary>The state with <paramref name="unitId"/> at axe D, so steel is in its hands (issue 702's ladder).</summary>
+    private static BattleState AtAxeD(BattleState state, string unitId)
+    {
+        var unit = state.Find(unitId)!;
+        return state.WithUnit(unit with { Unit = unit.Unit with { Skill = unit.Unit.Skill.With(WeaponType.Axe, WeaponRanks.Threshold(WeaponRank.D)) } });
+    }
+
     [Fact]
     public void KeepsakeAtReadsTheNewestOfATilesStack()
     {
@@ -173,8 +180,8 @@ public class KeepsakeCarrierTests
     {
         var state = Start(map: Yard);
         state = state.WithUnit(state.Find("hale")! with { At = new Coord(2, 1) }).Do(new EndPhase());
-        var plain = WithInventory(state, "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20));
-        var grudge = WithInventory(state, "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20) { Keepsake = "wren" });
+        var plain = WithInventory(AtAxeD(state, "brigand-1"), "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20));
+        var grudge = WithInventory(AtAxeD(state, "brigand-1"), "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20) { Keepsake = "wren" });
 
         var free = EnemyAi.PlanUnit(plain, Starter, plain.Find("brigand-1")!).OfType<Attack>().Single();
         var held = EnemyAi.PlanUnit(grudge, Starter, grudge.Find("brigand-1")!).OfType<Attack>().Single();
@@ -198,7 +205,7 @@ public class KeepsakeCarrierTests
     [Fact]
     public void AnEnemyThatWillTakeAStackStrikesWithItOnTheSameTurn()
     {
-        var state = WithStack(Left("teodor", "steel_axe", Grave)).WithoutUnit("wren");
+        var state = AtAxeD(WithStack(Left("teodor", "steel_axe", Grave)).WithoutUnit("wren"), "brigand-1");
         state = state.WithUnit(state.Find("hale")! with { At = new Coord(1, 1) });
         state = WithInventory(state, "brigand-1", new ItemStack("hatchet", 30)).Do(new EndPhase());
 
@@ -213,7 +220,7 @@ public class KeepsakeCarrierTests
     {
         var state = Start(map: Yard);
         state = state.WithUnit(state.Find("hale")! with { At = new Coord(2, 1) });
-        state = WithInventory(state, "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20) { Keepsake = "wren" });
+        state = WithInventory(AtAxeD(state, "brigand-1"), "brigand-1", new ItemStack("steel_axe", 30), new ItemStack("hatchet", 20) { Keepsake = "wren" });
         var hale = state.Find("hale")!;
 
         var line = Queries.Threats(state, Starter, hale, hale.At)!.Single(l => l.Enemy.Id == "brigand-1");
