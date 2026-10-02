@@ -59,7 +59,11 @@ public static class Combat
     public static int Hit(Combatant attacker) =>
         Armed(attacker).Hit - (attacker.Broken ? BrokenHitPenalty : 0) + attacker.Stats.Dex + attacker.Stats.Lck / 2 + attacker.HitModifier;
 
-    /// <summary>Section 5's Faith heal: Mag / 2 + 5 + the spell's base. <paramref name="spell"/> must be a healing spell.</summary>
+    /// <summary>
+    /// Section 5's Faith heal: Mag / 2 + 5 + the spell's base, times the healer's mending factor
+    /// (issue 706, <see cref="AbilityRules.HealFactor"/>; 1 for everyone but the Field Surgeon).
+    /// <paramref name="spell"/> must be a healing spell.
+    /// </summary>
     public static int Heal(Combatant healer, Weapon spell)
     {
         if (!spell.Heals)
@@ -67,7 +71,7 @@ public static class Combat
             throw new ArgumentException($"{spell.Id} is not a healing spell", nameof(spell));
         }
 
-        return healer.Stats.Mag / 2 + HealBase + spell.HealBase;
+        return (healer.Stats.Mag / 2 + HealBase + spell.HealBase) * AbilityRules.HealFactor(healer.Abilities);
     }
 
     /// <summary>Avoid against a physical or a magic strike; magic ignores burden. Attack speed counts twice against a physical strike.</summary>

@@ -56,6 +56,9 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<string> QuestsTried { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>The ids of the side maps won (<see cref="QuestsWon"/>), what a unique class's unlock reads (issue 706).</summary>
+    public IReadOnlyCollection<string> WonQuestIds => QuestsWon.Select(w => w.QuestId).ToList();
+
     /// <summary>
     /// The board each of <see cref="Fallen"/> fell on (issue 678), in the order they fell, for the
     /// camp's roster. A record written before it carries none, and its fallen print without a board.
@@ -633,7 +636,7 @@ public sealed record CampaignRecord(
             return ScreenResult.Refused(this, $"no class '{classId}'");
         }
 
-        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content));
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content), WonQuestIds);
         if (refusals.Count > 0)
         {
             return ScreenResult.Refused(this, $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}");
@@ -647,7 +650,7 @@ public sealed record CampaignRecord(
 
         var from = content.Class(unit.ClassId).Name;
         return new ScreenResult(
-            Replace(Certifications.Certify(unit, target, IsCaptain(unit, content))) with { Purse = Purse - price },
+            Replace(Certifications.Certify(unit, target, IsCaptain(unit, content), WonQuestIds)) with { Purse = Purse - price },
             $"{unit.Id} certifies from {from} to {target.Name} for {price}; the purse holds {Purse - price}",
             true);
     }
@@ -671,7 +674,7 @@ public sealed record CampaignRecord(
             return $"no class '{classId}'";
         }
 
-        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content));
+        var refusals = Certifications.Check(unit, target, content.Class(unit.ClassId), IsCaptain(unit, content), WonQuestIds);
         if (refusals.Count > 0)
         {
             return $"{unit.Id} cannot be promoted to {target.Name}: {string.Join("; ", refusals.Select(r => r.Text))}";
@@ -733,7 +736,7 @@ public sealed record CampaignRecord(
         }
 
         var after = end.UnitsOf(Side.Player).Single(u => u.Id == unitId).Unit;
-        var certified = Certifications.Certify(unit, target, IsCaptain(unit, content)) with
+        var certified = Certifications.Certify(unit, target, IsCaptain(unit, content), WonQuestIds) with
         {
             Level = after.Level,
             Exp = after.Exp,

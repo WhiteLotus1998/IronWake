@@ -131,6 +131,9 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 public sealed record CantoEffect : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.AfterAction;
+
+    /// <summary>Whether the second move is owed only after the holder heals an ally with a spell (issue 706, the Field Surgeon), not after every action.</summary>
+    public bool AfterHeal { get; init; }
 }
 
 /// <summary>
@@ -155,6 +158,16 @@ public sealed record RangeEffect(WeaponType? Weapon, bool Heals, int Range) : Ab
 
     /// <summary>Whether <paramref name="weapon"/> takes the longer reach.</summary>
     public bool Matches(Weapon weapon) => Heals ? weapon.Heals : weapon.Type == Weapon && !weapon.Heals;
+}
+
+/// <summary>
+/// The Field Surgeon's hands (issue 706): every healing spell the holder casts restores
+/// <see cref="Factor"/> times its heal and reaches no further than <see cref="Reach"/> tiles,
+/// whatever its own range or any <see cref="RangeEffect"/> says.
+/// </summary>
+public sealed record MendingEffect(int Factor, int Reach) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnWeapon;
 }
 
 /// <summary>
@@ -247,7 +260,8 @@ public static class AbilityRules
 
     /// <summary>
     /// <paramref name="weapon"/> as <paramref name="abilities"/> reach with it (issue 704): the far end of
-    /// its range extended by every <see cref="RangeEffect"/> that matches it; the same record when none does.
+    /// its range extended by every <see cref="RangeEffect"/> that matches it, then a healing spell's held to a
+    /// <see cref="MendingEffect"/>'s reach (issue 706, never under its own near end); the same record when nothing changes it.
     /// </summary>
     public static Weapon Shape(Weapon weapon, ValueList<Ability> abilities)
     {
@@ -260,7 +274,34 @@ public static class AbilityRules
             }
         }
 
-        return range == 0 ? weapon : weapon with { MaxRange = weapon.MaxRange + range };
+        var max = weapon.MaxRange + range;
+        if (weapon.Heals)
+        {
+            foreach (var ability in abilities)
+            {
+                if (ability.Effect is MendingEffect mending)
+                {
+                    max = Math.Min(max, Math.Max(weapon.MinRange, mending.Reach));
+                }
+            }
+        }
+
+        return max == weapon.MaxRange ? weapon : weapon with { MaxRange = max };
+    }
+
+    /// <summary>What <paramref name="abilities"/> multiply a healing spell's heal by (issue 706): the product of every <see cref="MendingEffect"/>'s factor, 1 when none.</summary>
+    public static int HealFactor(ValueList<Ability> abilities)
+    {
+        var factor = 1;
+        foreach (var ability in abilities)
+        {
+            if (ability.Effect is MendingEffect mending)
+            {
+                factor *= mending.Factor;
+            }
+        }
+
+        return factor;
     }
 
     /// <summary>What <paramref name="abilities"/> heal on a kill made with <paramref name="weapon"/> (issue 704); 0 when none answers.</summary>
@@ -319,8 +360,11 @@ public static class AbilityRules
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);
 
-    /// <summary>Whether any of <paramref name="abilities"/> is Canto.</summary>
-    public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
+    /// <summary>Whether any of <paramref name="abilities"/> is Canto after every action.</summary>
+    public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect { AfterHeal: false });
+
+    /// <summary>Whether any of <paramref name="abilities"/> owes a Canto after a heal (issue 706): Canto of either kind.</summary>
+    public static bool HasCantoAfterHeal(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
 
     /// <summary>The aura <paramref name="self"/> fights under (<see cref="Combatant.Aura"/>, issue 705) plus the sum of its combat modifiers whose conditions hold: <paramref name="opponent"/> meets the opponent condition, and <paramref name="self"/>'s weapon the wielding one.</summary>
     public static CombatBonus Against(Combatant self, Combatant opponent)

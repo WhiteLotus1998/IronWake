@@ -129,7 +129,7 @@ public static class Resolver
         };
         if (acted is not null)
         {
-            next = OpenCanto(next, content, acted);
+            next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
         next = Break.After(state, next, content, events);
@@ -308,11 +308,13 @@ public static class Resolver
     /// <summary>
     /// Owes a Canto (issue 71) to a unit that has just attacked, used an item or waited and
     /// is still on the board: what its Move left, set by <see cref="ApplyMove"/>, or its
-    /// full Mov when it acted without moving. A unit without Canto is left as it is.
+    /// full Mov when it acted without moving. A unit without Canto is left as it is; one whose Canto
+    /// is owed only after a heal (issue 706) is owed it when <paramref name="healed"/>, its spell having healed an ally.
     /// </summary>
-    private static BattleState OpenCanto(BattleState state, GameContent content, string unitId)
+    private static BattleState OpenCanto(BattleState state, GameContent content, string unitId, bool healed)
     {
-        if (state.Find(unitId) is not { } unit || !Signatures.HasCanto(state, content, unit))
+        if (state.Find(unitId) is not { } unit
+            || !(Signatures.HasCanto(state, content, unit) || (healed && AbilityRules.HasCantoAfterHeal(content.AbilitiesOf(unit.Unit)))))
         {
             return state;
         }

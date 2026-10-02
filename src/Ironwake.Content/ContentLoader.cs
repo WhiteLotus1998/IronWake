@@ -63,6 +63,7 @@ public static class ContentLoader
         ValidateSignatureItems(files, weapons, abilities, cast);
         var (wakeRadius, rivalry, difficulties) = ParseRules(files.Rules);
         var campaign = files.Campaign is { } campaignFile ? ParseCampaign(campaignFile, weapons, items, classes, terrain, cast) : CampaignRules.None;
+        ValidateUniqueClasses(files, classes, cast, campaign);
         var content = new GameContent(classes, weapons, terrain, units, items, wakeRadius) { Cast = cast, Rivalry = rivalry, Abilities = abilities, Difficulties = difficulties, Campaign = campaign, Signatures = signatures, Pronouns = pronouns };
         if (files.Campaign is { } campaignText && Forge.RareRefusal(content) is { } rare)
         {
@@ -86,6 +87,27 @@ public static class ContentLoader
         }
 
         return content;
+    }
+
+    /// <summary>
+    /// Unique classes against the cast and the campaign (issue 706): a unique class's unit is in the cast
+    /// and not the captain, and its <c>unlockedBy</c> names a quest of the campaign whose member is that unit.
+    /// Each is read only where the content has what it needs: a cast, a campaign with quests.
+    /// </summary>
+    private static void ValidateUniqueClasses(ContentFiles files, ImmutableSortedDictionary<string, UnitClass> classes, IReadOnlyList<Unit> cast, CampaignRules campaign)
+    {
+        foreach (var unitClass in classes.Values.Where(c => c.Unique is not null))
+        {
+            if (cast.Count > 0 && (!cast.Any(u => u.Id == unitClass.Unique) || cast[0].Id == unitClass.Unique))
+            {
+                throw new ContentException(files.Classes.Name, unitClass.Id, "unique", $"'{unitClass.Unique}' must be a cast member who is not the captain");
+            }
+
+            if (unitClass.UnlockedBy is { } quest && campaign.Quests.Count > 0 && !campaign.Quests.Any(q => q.Id == quest && q.MemberId == unitClass.Unique))
+            {
+                throw new ContentException(files.Classes.Name, unitClass.Id, "unlockedBy", $"'{quest}' must be a quest in the campaign whose member is '{unitClass.Unique}'");
+            }
+        }
     }
 
     /// <summary>
@@ -931,8 +953,22 @@ public static class ContentLoader
 
                 return art;
             case "canto":
-                RequireOnly(entry, effect, "effect", "kind");
-                return new CantoEffect();
+                RequireOnly(entry, effect, "effect", "kind", "after");
+                if (effect.Has("after") && effect.String("after") != "heal")
+                {
+                    throw entry.Error("effect.after", "must be 'heal', or left out for a Canto after every action");
+                }
+
+                return new CantoEffect { AfterHeal = effect.Has("after") };
+            case "mending":
+                RequireOnly(entry, effect, "effect", "kind", "factor", "reach");
+                var mending = new MendingEffect(effect.Int("factor"), effect.Int("reach"));
+                if (mending.Factor < 1 || mending.Reach < 1)
+                {
+                    throw entry.Error(mending.Factor < 1 ? "effect.factor" : "effect.reach", "must be at least 1");
+                }
+
+                return mending;
             case "brace":
                 RequireOnly(entry, effect, "effect", "kind");
                 return new BraceEffect();
@@ -1579,7 +1615,11 @@ public static class ContentLoader
                 Hidden = node.BoolOr("hidden", false),
                 Captain = node.BoolOr("captain", false),
                 StrikeOnly = ParseStrikeOnly(node, weapons),
+                HealOnly = ParseHealOnly(node, weapons),
                 Grants = ParseGrants(node, weapons),
+                Unique = node.OptionalString("unique"),
+                UnlockedBy = node.OptionalString("unlockedBy"),
+                Loses = node.Has("loses") ? node.Enum<SidegradeMeasure>("loses") : null,
             });
         }
 
@@ -1625,6 +1665,40 @@ public static class ContentLoader
             builder[node.Entry!] = form with { GrowthModifiers = basis.GrowthModifiers, Advances = basis };
         }
 
+        foreach (var node in entries)
+        {
+            var unitClass = builder[node.Entry!];
+            if (unitClass.Unique is null)
+            {
+                foreach (var field in new[] { "unlockedBy", "loses" }.Where(node.Has))
+                {
+                    throw node.Error(field, "only a unique class names it; name 'unique' too");
+                }
+
+                continue;
+            }
+
+            if (unitClass.Advances is not { } basis || unitClass.Hidden || unitClass.Captain)
+            {
+                throw node.Error("unique", "a unique class is the other door at a second promotion: it names 'advances', and is neither hidden nor on the captain's ladder");
+            }
+
+            if (unitClass.Loses is null)
+            {
+                throw node.Error("loses", "missing: a unique class names the measure it loses on to the standard form");
+            }
+
+            if (!builder.Values.Any(c => c.Advances?.Id == basis.Id && c.Unique is null))
+            {
+                throw node.Error("advances", $"'{basis.Id}' has no standard advanced form for this one to stand beside");
+            }
+
+            if (builder.Values.Any(c => c.Id != unitClass.Id && c.Advances?.Id == basis.Id && c.Unique == unitClass.Unique))
+            {
+                throw node.Error("unique", $"'{unitClass.Unique}' already has a unique class above '{basis.Id}'; one other door per base");
+            }
+        }
+
         return builder.ToImmutable();
     }
 
@@ -1640,6 +1714,28 @@ public static class ContentLoader
         foreach (var type in types.Where(t => !weapons.Contains(t)))
         {
             throw node.Error("strikeOnly", $"{type.ToString().ToLowerInvariant()} is not in the class's weapons");
+        }
+
+        return ValueList<WeaponType>.From(types);
+    }
+
+    /// <summary>A class's optional <c>healOnly</c> (issue 706): weapon types it uses, each once, that it never strikes with; none is also strike-only.</summary>
+    private static ValueList<WeaponType> ParseHealOnly(EntryNode node, IReadOnlyList<WeaponType> weapons)
+    {
+        var types = node.StringArrayOrEmpty("healOnly").Select(w => node.ParseEnum<WeaponType>("healOnly", w)).ToList();
+        if (types.Distinct().Count() != types.Count)
+        {
+            throw node.Error("healOnly", "must not repeat a weapon type");
+        }
+
+        foreach (var type in types.Where(t => !weapons.Contains(t)))
+        {
+            throw node.Error("healOnly", $"{type.ToString().ToLowerInvariant()} is not in the class's weapons");
+        }
+
+        foreach (var type in types.Where(t => node.StringArrayOrEmpty("strikeOnly").Contains(t.ToString().ToLowerInvariant())))
+        {
+            throw node.Error("healOnly", $"{type.ToString().ToLowerInvariant()} is also strike-only; a class that neither strikes nor heals with a type does not use it");
         }
 
         return ValueList<WeaponType>.From(types);

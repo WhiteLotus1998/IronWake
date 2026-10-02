@@ -91,6 +91,8 @@ token_chaplain_player
 token_chaplain_enemy
 token_commander_player
 token_commander_enemy
+token_fieldsurgeon_player
+token_fieldsurgeon_enemy
 token_halberdier_player
 token_halberdier_enemy
 token_lancer_player
@@ -264,6 +266,14 @@ commander_lance_miss_recover
 commander_lance_dodge
 commander_lance_hit_react
 commander_lance_fall
+fieldsurgeon_faith_idle
+fieldsurgeon_faith_advance
+fieldsurgeon_faith_strike
+fieldsurgeon_faith_strike_crit
+fieldsurgeon_faith_miss_recover
+fieldsurgeon_faith_dodge
+fieldsurgeon_faith_hit_react
+fieldsurgeon_faith_fall
 halberdier_lance_idle
 halberdier_lance_advance
 halberdier_lance_strike

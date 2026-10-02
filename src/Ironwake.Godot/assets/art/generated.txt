@@ -16,6 +16,8 @@ token_chaplain_player.png
 token_chaplain_enemy.png
 token_commander_player.png
 token_commander_enemy.png
+token_fieldsurgeon_player.png
+token_fieldsurgeon_enemy.png
 token_halberdier_player.png
 token_halberdier_enemy.png
 token_lancer_player.png
@@ -188,6 +190,14 @@ commander_lance_miss_recover.png
 commander_lance_dodge.png
 commander_lance_hit_react.png
 commander_lance_fall.png
+fieldsurgeon_faith_idle.png
+fieldsurgeon_faith_advance.png
+fieldsurgeon_faith_strike.png
+fieldsurgeon_faith_strike_crit.png
+fieldsurgeon_faith_miss_recover.png
+fieldsurgeon_faith_dodge.png
+fieldsurgeon_faith_hit_react.png
+fieldsurgeon_faith_fall.png
 halberdier_lance_idle.png
 halberdier_lance_advance.png
 halberdier_lance_strike.png

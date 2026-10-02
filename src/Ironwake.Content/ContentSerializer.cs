@@ -364,8 +364,18 @@ public static class ContentSerializer
                 }
 
                 break;
-            case CantoEffect:
+            case CantoEffect canto:
                 writer.WriteString("kind", "canto");
+                if (canto.AfterHeal)
+                {
+                    writer.WriteString("after", "heal");
+                }
+
+                break;
+            case MendingEffect mending:
+                writer.WriteString("kind", "mending");
+                writer.WriteNumber("factor", mending.Factor);
+                writer.WriteNumber("reach", mending.Reach);
                 break;
             case BraceEffect:
                 writer.WriteString("kind", "brace");
@@ -633,6 +643,32 @@ public static class ContentSerializer
             }
 
             writer.WriteEndArray();
+        }
+
+        if (unitClass.HealOnly.Count > 0)
+        {
+            writer.WriteStartArray("healOnly");
+            foreach (var type in unitClass.HealOnly)
+            {
+                writer.WriteStringValue(type.ToString().ToLowerInvariant());
+            }
+
+            writer.WriteEndArray();
+        }
+
+        if (unitClass.Unique is { } unique)
+        {
+            writer.WriteString("unique", unique);
+        }
+
+        if (unitClass.UnlockedBy is { } unlockedBy)
+        {
+            writer.WriteString("unlockedBy", unlockedBy);
+        }
+
+        if (unitClass.Loses is { } loses)
+        {
+            writer.WriteString("loses", loses.ToString().ToLowerInvariant());
         }
 
         if (unitClass.Grants.Count > 0)
