@@ -33,6 +33,7 @@ public sealed class CampaignClient
         _scheme = scheme;
         _saves = saves;
         Autosave();
+        QueueBeforeCard();
     }
 
     public GameContent Content { get; }
@@ -54,6 +55,32 @@ public sealed class CampaignClient
 
     /// <summary>Whether the campaign is over: every map won, or a battle lost and left.</summary>
     public bool Over { get; private set; }
+
+    /// <summary>
+    /// The line every story card is drawn under (issue 786): the cards are placeholder text until
+    /// the storyline is written (issue 656), so notes on them land on the shape, not the words.
+    /// </summary>
+    public const string PlaceholderMark = "Placeholder story: these words stand in until the storyline is written.";
+
+    /// <summary>The story cards still to show, oldest first: screen text, never part of the event log.</summary>
+    private readonly Queue<IReadOnlyList<string>> _cards = new();
+
+    /// <summary>
+    /// The story card to show before anything else (issue 786), as the console prints it: a map's
+    /// before card on arriving at its camp, its after card once it is won, a side map's cards, and
+    /// the lost card; null when none is waiting. Showing one is the renderer's; the record's
+    /// actions do not wait on it, so a parity script plays the same with or without it.
+    /// </summary>
+    public IReadOnlyList<string>? Card => _cards.Count == 0 ? null : _cards.Peek();
+
+    /// <summary>Puts away the card <see cref="Card"/> shows, bringing up the next one waiting.</summary>
+    public void DismissCard()
+    {
+        if (_cards.Count > 0)
+        {
+            _cards.Dequeue();
+        }
+    }
 
     /// <summary>The last refusal for the status bar, never part of the event log.</summary>
     public string? Status { get; private set; }
@@ -174,6 +201,7 @@ public sealed class CampaignClient
             return Refuse(refusal!);
         }
 
+        QueueCard(CampaignSession.QuestBeforeCard(Content, map, questId));
         _log.AddRange(CampaignSession.QuestOpening(Record, Content, map, questId, allyIds));
         Battle = new ClientSession(Content, Record.BeginQuest(map, questId, allyIds, Content, _scheme));
         _quest = questId;
@@ -231,6 +259,11 @@ public sealed class CampaignClient
             var result = Record.AfterQuest(battle.State, questId, Content);
             Record = result.Record;
             _log.Add(CampaignSession.Text(Record, Content, result.Text));
+            if (battle.State.Outcome.Result == BattleResult.Won)
+            {
+                QueueCard(CampaignSession.QuestAfterCard(Content, battle.State.Map, questId));
+            }
+
             Autosave();
             return true;
         }
@@ -238,6 +271,7 @@ public sealed class CampaignClient
         if (battle.State.Outcome.Result != BattleResult.Won)
         {
             _log.Add(CampaignSession.LostLine(battle.State, Content));
+            QueueCard(CampaignSession.LostCard);
             Over = true;
             return true;
         }
@@ -245,6 +279,7 @@ public sealed class CampaignClient
         var before = Record;
         Record = Record.AfterBattle(battle.State, Content);
         _log.Add(CampaignSession.WonLine(before, Record, battle.State, Content));
+        QueueCard(CampaignSession.AfterCard(before, Content, battle.State.Map));
         if (Record.IsFinished(Content))
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
@@ -254,7 +289,25 @@ public sealed class CampaignClient
         }
 
         Autosave();
+        QueueBeforeCard();
         return true;
+    }
+
+    private void QueueCard(IReadOnlyList<string> lines)
+    {
+        if (lines.Count > 0)
+        {
+            _cards.Enqueue(lines);
+        }
+    }
+
+    /// <summary>The next map's before card, queued on arriving at its camp, as the console's screen opens with it.</summary>
+    private void QueueBeforeCard()
+    {
+        if (NextMap is { } map)
+        {
+            QueueCard(CampaignSession.BeforeCard(Record, Content, map));
+        }
     }
 
     /// <summary>

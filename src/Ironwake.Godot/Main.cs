@@ -383,6 +383,13 @@ public partial class Main : Node2D
             return;
         }
 
+        if (StoryCardShown)
+        {
+            StoryCardInput(input);
+            QueueRedraw();
+            return;
+        }
+
         if (_campaign is not null && _client is null)
         {
             ScreenInput(input);
@@ -730,6 +737,12 @@ public partial class Main : Node2D
         if (OnMenuScreen)
         {
             DrawMenuScreen();
+            return;
+        }
+
+        if (StoryCardShown)
+        {
+            DrawStoryCard();
             return;
         }
 

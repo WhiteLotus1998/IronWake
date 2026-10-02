@@ -1,4 +1,5 @@
 using Godot;
+using Ironwake.Cli;
 using Ironwake.Client;
 using Ironwake.Content;
 using Ironwake.Core;
@@ -132,6 +133,60 @@ public partial class Main
 
                 break;
         }
+    }
+
+    /// <summary>Whether a campaign story card waits to be read (issue 786): it covers the camp and the battle until put away.</summary>
+    private bool StoryCardShown => _campaign?.Card is not null && !OnMenuScreen;
+
+    /// <summary>The story card's keys and clicks: Enter, Space, Escape or a click puts it away; M mutes.</summary>
+    private void StoryCardInput(InputEvent input)
+    {
+        switch (input)
+        {
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.Enter or Key.KpEnter or Key.Space or Key.Escape }:
+            case InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left }:
+                _campaign!.DismissCard();
+                _screenScroll = 0;
+                break;
+            case InputEventKey { Pressed: true, Echo: false, Keycode: Key.M }:
+                ToggleMute();
+                break;
+        }
+    }
+
+    /// <summary>
+    /// The story card (issue 786): the console's card, heading and wrapped paragraphs, in a box on
+    /// the dimmed window, under the placeholder mark, with the key that puts it away.
+    /// </summary>
+    private void DrawStoryCard()
+    {
+        if (_campaign!.Card is not { } card)
+        {
+            return;
+        }
+
+        var glyph = _mono.GetStringSize("MMMMMMMMMM", fontSize: FontSize).X / 10;
+        var width = Math.Min(ViewWidth - 2 * Margin, (CampaignSession.CardWidth + 6) * glyph);
+        var body = card.Skip(1).ToList();
+        var fits = (int)((ViewHeight - 2 * Margin - 120) / LineHeight);
+        var height = 120 + Math.Min(body.Count, fits) * LineHeight;
+        var rect = new Rect2((ViewWidth - width) / 2, Math.Max(Margin, (ViewHeight - height) / 2), width, height);
+        Card(rect, Box, 14);
+        Card(new Rect2(rect.Position, new Vector2(width, 6)), Mark, 3);
+        var x = rect.Position.X + 3 * glyph;
+        var y = rect.Position.Y + 36;
+        Text(new Vector2(x, y), CampaignClient.PlaceholderMark, Muted, FontSize - 2);
+        y += LineHeight + 10;
+        Text(new Vector2(x, y), card[0].Trim('-', ' '), Mark, FontSize + 4);
+        y += LineHeight + 12;
+        foreach (var line in body.Take(fits))
+        {
+            Text(new Vector2(x, y), line, Ink, FontSize);
+            y += LineHeight;
+        }
+
+        Text(new Vector2(x, rect.End.Y - 16), "Enter, Space or click: continue", Muted, FontSize - 2);
+        _hits.Add((rect, () => _campaign.DismissCard()));
     }
 
     /// <summary>The end card's keys and clicks: Enter plays the map again on the next seed, Escape goes to the title; the board under it takes nothing but the pointer. True when the input was the card's.</summary>

@@ -1,0 +1,108 @@
+using Ironwake.Cli;
+using Ironwake.Client;
+using Ironwake.Content;
+using Ironwake.Core.Tests.Content;
+
+namespace Ironwake.Core.Tests.Client;
+
+/// <summary>
+/// The campaign's story cards in the client (issue 786): the presenter queues the console's own
+/// before, after, side map and lost cards in the order the console prints them, a map or a lost
+/// side map without a card queues none, and the cards stay out of the event log.
+/// </summary>
+[Collection("console")]
+public class StoryCardTests
+{
+    private const ulong Seed = 631;
+
+    private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
+
+    private static string AloneScript() =>
+        "march\n" + File.ReadAllText(Path.Combine(ClientParityTests.Root(), "docs", "transcripts", "2026-10-01-starting_alone-631.script")) + "leave\n";
+
+    private static CampaignClient Client() => new(Content, Fixture.RealContentDirectory(), CampaignRecord.Start(Content, Seed));
+
+    /// <summary>Every card <paramref name="client"/> holds, put away one by one.</summary>
+    private static List<IReadOnlyList<string>> Drain(CampaignClient client)
+    {
+        var cards = new List<IReadOnlyList<string>>();
+        while (client.Card is { } card)
+        {
+            cards.Add(card);
+            client.DismissCard();
+        }
+
+        return cards;
+    }
+
+    private static string ConsoleOutput(string script, ulong seed)
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"ironwake-cards-{Guid.NewGuid():N}.script");
+        File.WriteAllText(path, script);
+        try
+        {
+            return ConsoleCapture.Run(() => CampaignSession.Run(new[] { "--seed", seed.ToString(), "--script", path, "--content", Fixture.RealContentDirectory() }));
+        }
+        finally
+        {
+            File.Delete(path);
+        }
+    }
+
+    [Fact]
+    public void ANewCampaignOpensOnTheFirstMapsBeforeCard()
+    {
+        var client = Client();
+
+        Assert.Equal("-- Starting Alone --", client.Card![0]);
+        Assert.Equal(CampaignSession.BeforeCard(client.Record, Content, client.NextMap!), client.Card);
+        client.DismissCard();
+        Assert.Null(client.Card);
+    }
+
+    [Fact]
+    public void AWonMapQueuesItsAfterCardThenTheNextCampsBeforeCardInTheConsolesOrder()
+    {
+        var client = Client();
+        var log = Script.PlayCampaign(client, AloneScript());
+        var cards = Drain(client);
+        var output = ConsoleOutput(AloneScript(), Seed);
+
+        Assert.Equal(new[] { "-- Starting Alone --", "-- After Starting Alone --", "-- The Mill --" }, cards.Select(c => c[0]));
+        var at = 0;
+        foreach (var card in cards)
+        {
+            var text = string.Join("\n", card) + "\n";
+            var found = output.IndexOf(text, at, StringComparison.Ordinal);
+            Assert.True(found >= at, card[0]);
+            at = found + text.Length;
+        }
+
+        Assert.DoesNotContain("The appointment", log);
+        Assert.DoesNotContain("-- After Starting Alone --", log);
+    }
+
+    [Fact]
+    public void ALostMapQueuesTheLostCard()
+    {
+        var client = Client();
+        client.DismissCard();
+        Script.PlayCampaign(client, "march\n" + string.Concat(Enumerable.Repeat("end\n", 12)) + "leave\n");
+
+        Assert.True(client.Over);
+        Assert.Equal(CampaignSession.LostCard, client.Card);
+    }
+
+    [Fact]
+    public void ASideMapQueuesItsBeforeCardAndALostOneNoAfterCard()
+    {
+        var client = new CampaignClient(Content, Fixture.RealContentDirectory(), CampActionsTests.Stocked());
+        Assert.Null(client.Card);
+
+        Script.PlayCampaign(client, File.ReadAllText(Path.Combine(ClientParityTests.Root(), "tests", "parity", "campaign", "camp-actions-41.script")));
+        var cards = Drain(client);
+
+        Assert.Equal(new[] { "-- The Lazar House --" }, cards.Select(c => c[0]));
+        Assert.Equal(CampaignSession.QuestBeforeCard(Content, MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), "quests", "the_lazar_house.map"), Content), "maud_1"), cards[0]);
+    }
+}
