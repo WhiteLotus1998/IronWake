@@ -1,0 +1,57 @@
+# issue 746: dotnet Ironwake.Sim.dll --curve --seeds 100 (Release), before at c8f5ab3 (main), after on issue/746-sim-weapon-choice
+## before
+curve: 9 campaign maps, 100 seeds, gate 1 as the file reads and as the campaign fights it
+map 1 starting_alone: enemy level 1 in the file, 1 in the campaign, no swaps
+  file:     gate 1 beatable: starting_alone, heuristic wins 0/100 (0 %), no wins, losses 0 timeout 100 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+map 2 the_mill: enemy level 1 in the file, 1 in the campaign, no swaps
+  file:     gate 1 beatable: the_mill, heuristic wins 59/100 (59 %), winning turn median 7 p90 8 limit 12, losses 0 timeout 1 captain 40 protected, quiet tail -, refused kill -, two-roll average: FAILED
+map 3 saltmarsh_ford: enemy level 2 in the file, 2 in the campaign, no swaps
+  file:     gate 1 beatable: saltmarsh_ford, heuristic wins 25/100 (25 %), winning turn median 12 p90 16 limit 18, losses 69 timeout 6 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 69, at the stall p50 0.0077 over 67, two-roll average: FAILED
+map 4 the_tollgate: enemy level 3 in the file, 3 in the campaign, no swaps
+  file:     gate 1 beatable: the_tollgate, heuristic wins 80/100 (80 %), winning turn median 8 p90 9 limit 10, losses 20 timeout 0 captain 0 protected, quiet tail 0.1, refused kill p50 0.8674 over 20, at the stall p50 0.8674 over 18, two-roll average: ok
+map 5 harrow_weir: enemy level 2 in the file, 2 in the campaign, no swaps
+  file:     gate 1 beatable: harrow_weir, heuristic wins 63/100 (63 %), winning turn median 9 p90 14 limit 15, losses 20 timeout 17 captain 0 protected, quiet tail 0.5, refused kill p50 0.9858 over 20, at the stall p50 0.0305 over 20, two-roll average: ok
+map 6 ironwake_raid: enemy level 2 in the file, 6 in the campaign, no swaps
+  file:     gate 1 beatable: ironwake_raid, heuristic wins 95/100 (95 %), winning turn median 4 p90 6 limit 7, losses 5 timeout 0 captain 0 protected, quiet tail 0.0, refused kill p50 0.9892 over 5, at the stall p50 0.8558 over 5, two-roll average: ok
+  campaign: gate 1 beatable: ironwake_raid, heuristic wins 29/100 (29 %), winning turn median 6 p90 7 limit 7, losses 28 timeout 43 captain 0 protected, quiet tail 0.1, refused kill p50 0.8775 over 28, at the stall p50 0.5440 over 27, two-roll average: FAILED
+  party +4: gate 1 beatable: ironwake_raid, heuristic wins 89/100 (89 %), winning turn median 4 p90 5 limit 7, losses 6 timeout 5 captain 0 protected, quiet tail 0.0, refused kill p50 0.9872 over 6, at the stall p50 0.3332 over 6, two-roll average: ok
+map 7 sallow_grange: enemy level 3 in the file, 7 in the campaign, veteran at 7,5
+  file:     gate 1 beatable: sallow_grange, heuristic wins 77/100 (77 %), winning turn median 9 p90 10 limit 10, losses 22 timeout 1 captain 0 protected, quiet tail 0.2, refused kill p50 0.9005 over 22, at the stall p50 0.0713 over 20, two-roll average: ok
+  campaign: gate 1 beatable: sallow_grange, heuristic wins 7/100 (7 %), winning turn median 10 p90 10 limit 10, losses 43 timeout 50 captain 0 protected, quiet tail 0.5, refused kill p50 0.8460 over 43, at the stall p50 0.8283 over 31, two-roll average: FAILED
+  party +4: gate 1 beatable: sallow_grange, heuristic wins 35/100 (35 %), winning turn median 9 p90 10 limit 10, losses 51 timeout 14 captain 0 protected, quiet tail 0.6, refused kill p50 0.8674 over 51, at the stall p50 0.0799 over 37, two-roll average: FAILED
+map 8 brackwater_cut: enemy level 3 in the file, 8 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 68/100 (68 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 32 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 43, two-roll average: ok
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 3/100 (3 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 97 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 3, two-roll average: FAILED
+  party +5: gate 1 beatable: brackwater_cut, heuristic wins 72/100 (72 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 28 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 51, two-roll average: ok
+map 9 ironwake_keep: enemy level 2 in the file, 8 in the campaign, veteran at 6,4, marauder at 6,7, longbowman at 4,5
+  file:     gate 1 beatable: ironwake_keep, heuristic wins 77/100 (77 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 23 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+  campaign: gate 1 beatable: ironwake_keep, heuristic wins 0/100 (0 %), no wins, losses 0 timeout 100 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+  party +6: gate 1 beatable: ironwake_keep, heuristic wins 28/100 (28 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 72 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+## after
+curve: 9 campaign maps, 100 seeds, gate 1 as the file reads and as the campaign fights it
+map 1 starting_alone: enemy level 1 in the file, 1 in the campaign, no swaps
+  file:     gate 1 beatable: starting_alone, heuristic wins 0/100 (0 %), no wins, losses 0 timeout 100 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+map 2 the_mill: enemy level 1 in the file, 1 in the campaign, no swaps
+  file:     gate 1 beatable: the_mill, heuristic wins 59/100 (59 %), winning turn median 7 p90 8 limit 12, losses 0 timeout 1 captain 40 protected, quiet tail -, refused kill -, two-roll average: FAILED
+map 3 saltmarsh_ford: enemy level 2 in the file, 2 in the campaign, no swaps
+  file:     gate 1 beatable: saltmarsh_ford, heuristic wins 25/100 (25 %), winning turn median 12 p90 16 limit 18, losses 69 timeout 6 captain 0 protected, quiet tail 1.8, refused kill p50 0.8674 over 69, at the stall p50 0.0077 over 67, two-roll average: FAILED
+map 4 the_tollgate: enemy level 3 in the file, 3 in the campaign, no swaps
+  file:     gate 1 beatable: the_tollgate, heuristic wins 82/100 (82 %), winning turn median 8 p90 10 limit 10, losses 18 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 18, at the stall p50 0.8674 over 17, two-roll average: ok
+map 5 harrow_weir: enemy level 2 in the file, 2 in the campaign, no swaps
+  file:     gate 1 beatable: harrow_weir, heuristic wins 70/100 (70 %), winning turn median 8 p90 12 limit 15, losses 13 timeout 17 captain 0 protected, quiet tail 0.7, refused kill p50 0.9824 over 13, at the stall p50 0.0513 over 13, two-roll average: ok
+map 6 ironwake_raid: enemy level 2 in the file, 6 in the campaign, no swaps
+  file:     gate 1 beatable: ironwake_raid, heuristic wins 95/100 (95 %), winning turn median 4 p90 6 limit 7, losses 5 timeout 0 captain 0 protected, quiet tail 0.0, refused kill p50 0.9892 over 5, at the stall p50 0.2480 over 4, two-roll average: ok
+  campaign: gate 1 beatable: ironwake_raid, heuristic wins 37/100 (37 %), winning turn median 6 p90 7 limit 7, losses 28 timeout 35 captain 0 protected, quiet tail 0.1, refused kill p50 0.8775 over 28, at the stall p50 0.5440 over 26, two-roll average: FAILED
+  party +4: gate 1 beatable: ironwake_raid, heuristic wins 88/100 (88 %), winning turn median 4 p90 5 limit 7, losses 5 timeout 7 captain 0 protected, quiet tail 0.0, refused kill p50 0.9872 over 5, at the stall p50 0.1036 over 5, two-roll average: ok
+map 7 sallow_grange: enemy level 3 in the file, 7 in the campaign, veteran at 7,5
+  file:     gate 1 beatable: sallow_grange, heuristic wins 78/100 (78 %), winning turn median 9 p90 10 limit 10, losses 21 timeout 1 captain 0 protected, quiet tail 0.1, refused kill p50 0.8775 over 21, at the stall p50 0.0551 over 16, two-roll average: ok
+  campaign: gate 1 beatable: sallow_grange, heuristic wins 12/100 (12 %), winning turn median 9 p90 10 limit 10, losses 41 timeout 47 captain 0 protected, quiet tail 0.4, refused kill p50 0.8460 over 41, at the stall p50 0.0631 over 34, two-roll average: FAILED
+  party +4: gate 1 beatable: sallow_grange, heuristic wins 37/100 (37 %), winning turn median 9 p90 10 limit 10, losses 50 timeout 13 captain 0 protected, quiet tail 0.6, refused kill p50 0.8674 over 50, at the stall p50 0.0751 over 36, two-roll average: FAILED
+map 8 brackwater_cut: enemy level 3 in the file, 8 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 60/100 (60 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 40 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 27, two-roll average: ok
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 4/100 (4 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 96 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 3, two-roll average: FAILED
+  party +5: gate 1 beatable: brackwater_cut, heuristic wins 70/100 (70 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 30 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 46, two-roll average: ok
+map 9 ironwake_keep: enemy level 2 in the file, 8 in the campaign, veteran at 6,4, marauder at 6,7, longbowman at 4,5
+  file:     gate 1 beatable: ironwake_keep, heuristic wins 77/100 (77 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 23 captain 0 protected, quiet tail -, refused kill -, two-roll average: ok
+  campaign: gate 1 beatable: ironwake_keep, heuristic wins 4/100 (4 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 96 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
+  party +6: gate 1 beatable: ironwake_keep, heuristic wins 34/100 (34 %), winning turn median 9 p90 9 limit 8, losses 0 timeout 66 captain 0 protected, quiet tail -, refused kill -, two-roll average: FAILED
