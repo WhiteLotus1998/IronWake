@@ -1,0 +1,57 @@
+move teodor 7,5
+move captain 7,6
+move pell 6,6
+move dunstan 6,7
+move ottilie 5,6
+move rook 8,5
+end
+recall 0
+move teodor 7,5
+move captain 7,6
+move pell 6,6
+move dunstan 6,7
+move ottilie 5,6
+move rook 6,5
+end
+attack pell soldier-1 art overcast
+attack dunstan rider-1
+move ottilie 4,6
+attack ottilie rider-1
+move captain 5,6
+attack captain rider-1
+move rook 2,3
+wait teodor
+end
+attack teodor brigand-2
+attack pell brigand-1
+move captain 7,7
+attack captain brigand-2
+move dunstan 7,6
+attack dunstan archer-1
+move ottilie 6,4
+attack ottilie archer-2
+end
+move pell 6,5
+attack pell brigand-3
+move ottilie 6,3
+attack ottilie archer-2
+move captain 7,4
+move teodor 6,4
+move dunstan 7,5
+end
+move pell 6,2
+attack pell archer-2
+move dunstan 7,1
+move captain 7,0
+move teodor 6,0
+move ottilie 5,0
+end
+exit ottilie
+exit teodor
+move dunstan 8,0
+move pell 6,0
+wait captain
+end
+exit dunstan
+exit pell
+exit captain
