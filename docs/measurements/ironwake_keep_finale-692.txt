@@ -1,0 +1,11 @@
+finale: docs/samples/ironwake_keep_finale.map, 200 seeds, two-roll average, story members at level 8, hires at 6
+finale full: 12 units at level 8, heuristic wins 93/200 (47 %), losses 97 timeout 10 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 11: ok
+  time: 5 AI-vs-AI games, slowest 159 ms: ok
+finale depleted: 12 units at level 8, heuristic wins 79/200 (40 %), losses 116 timeout 5 captain 0 protected: FAILED
+  length: median 11 turns over every game, limit 11: ok
+  time: 5 AI-vs-AI games, slowest 113 ms: ok
+finale floor: 10 units at level 8, heuristic wins 0/200 (0 %), losses 131 timeout 69 captain 0 protected: data, a cold chair's play decides (never won)
+  length: median 11 turns over every game, limit 11: ok
+  time: 5 AI-vs-AI games, slowest 106 ms: ok
+finale: FAILED

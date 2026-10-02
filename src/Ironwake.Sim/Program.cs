@@ -80,6 +80,33 @@ public static class Program
             }
         }
 
+        if (args.Length > 1 && args[0] == "--finale")
+        {
+            var seeds = Gates.DefaultSeeds;
+            var level = FinaleRun.DefaultLevel;
+            RollScheme? scheme = RollScheme.TwoRollAverage;
+            for (var i = 2; i + 1 < args.Length; i++)
+            {
+                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                {
+                    seeds = n;
+                }
+                else if (args[i] == "--level" && int.TryParse(args[i + 1], out var l) && l >= Unit.MinLevel && l <= Unit.MaxLevel)
+                {
+                    level = l;
+                }
+                else if (args[i] == "--scheme")
+                {
+                    scheme = ParseScheme(args[i + 1]);
+                }
+            }
+
+            if (scheme is { } finale)
+            {
+                return Finale(args[1], seeds, level, finale);
+            }
+        }
+
         if (args.Length > 1 && args[0] == "--heirloom")
         {
             var seeds = Gates.DefaultSeeds;
@@ -134,9 +161,65 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --heirloom <item> [--seeds N]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N]";
 
     private const int HitBandSeeds = 50;
+
+    /// <summary>
+    /// The keep finale's measurement (issue 692, <see cref="FinaleRun"/>): a <c>deploy: all</c> map,
+    /// a campaign map, the keep, or a file, played with the full, depleted and floor companies at
+    /// <paramref name="level"/>, each with its gate 1, length and time lines. Exits non-zero when
+    /// full or depleted fails gate 1, or any company is slow or long.
+    /// </summary>
+    public static int Finale(string mapId, int seeds, int level, RollScheme scheme)
+    {
+        var contentDir = FindContent();
+        if (contentDir is null)
+        {
+            Console.WriteLine("finale: no content directory found from the working directory or the build output");
+            return 1;
+        }
+
+        var content = ContentLoader.Load(contentDir);
+        MapDefinition? map = MapFiles.LoadAll(contentDir, content).FirstOrDefault(m => m.Id == mapId).Map;
+        if (map is null && content.Campaign.Keep.IsKeepMap(mapId))
+        {
+            map = MapFiles.Load(MapFiles.CampaignPath(contentDir, content, mapId), content);
+        }
+
+        if (map is null && File.Exists(mapId))
+        {
+            map = MapFiles.Load(mapId, content);
+        }
+
+        if (map is null)
+        {
+            Console.WriteLine($"finale: no map '{mapId}' under {contentDir}, and no such file");
+            return 2;
+        }
+
+        if (FinaleRun.Refusal(map, mapId) is { } refusal)
+        {
+            Console.WriteLine(refusal);
+            return 2;
+        }
+
+        Console.WriteLine($"finale: {mapId}, {seeds} seeds, {Gates.Name(scheme)}, story members at level {level}, hires at {Math.Max(Unit.MinLevel, level - Barracks.LevelsBelow)}");
+        var failed = false;
+        foreach (var company in new[] { FinaleRun.Company.Full, FinaleRun.Company.Depleted, FinaleRun.Company.Floor })
+        {
+            var reading = FinaleRun.Measure(content, map, company, level, seeds, scheme);
+            foreach (var line in reading.Lines(level))
+            {
+                Console.WriteLine(line);
+            }
+
+            failed |= !reading.Passed;
+        }
+
+        Console.WriteLine(failed ? "finale: FAILED" : "finale: ok");
+        return failed ? 1 : 0;
+    }
 
     /// <summary>
     /// The heirloom's timing table (issue 646, <see cref="HeirloomRun"/>): the campaign map each
@@ -786,7 +869,7 @@ public static class Program
     }
 
     /// <summary>The random player against the enemy AI until the battle is decided. Returns the canonical end state and the turns played.</summary>
-    private static (string State, int Turns) FullGame(GameContent content, MapDefinition map, ulong seed)
+    internal static (string State, int Turns) FullGame(GameContent content, MapDefinition map, ulong seed)
     {
         var state = BattleState.From(map, content, content.Cast, seed);
         var random = new Random((int)seed);
