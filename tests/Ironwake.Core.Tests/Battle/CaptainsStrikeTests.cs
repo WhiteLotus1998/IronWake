@@ -51,8 +51,65 @@ public class CaptainsStrikeTests
     {
         var art = (CombatArtEffect)Shipped.Ability("full_measure").Effect;
 
-        Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.E, 2, 8, 30, 20, 0, 0) { PerMap = 1, CostsNextPhase = true }, art);
+        Assert.Equal(new CombatArtEffect(WeaponType.Sword, WeaponRank.E, 2, 8, 30, 20, 0, 0) { PerMap = 1, CostsNextPhase = true, Single = true }, art);
         Assert.Contains("full_measure", Shipped.ArtsOf(Shipped.Cast.Single(u => u.Id == "captain")).Select(a => a.Ability.Id));
+    }
+
+    [Fact]
+    public void AnArtThatStrikesOnceNeverDoublesWhereThePlainAttackDoubles()
+    {
+        var state = Placed();
+        var captain = state.Find("captain")!;
+        var brigand = state.Units.Single(u => u.At == Brigand);
+
+        var plain = Queries.Forecast(state, Shipped, captain, brigand)!;
+        var struck = Queries.Forecast(state, Shipped, captain, brigand, null, "full_measure")!;
+
+        Assert.True(plain.Attacker.Doubles);
+        Assert.Equal(2, plain.Attacker.StrikeCount);
+        Assert.False(struck.Attacker.Doubles);
+        Assert.Equal(1, struck.Attacker.StrikeCount);
+        Assert.Equal(3, struck.AttackerSpendsAtMost);
+    }
+
+    [Fact]
+    public void AnArtThatStrikesOnceLeavesTheCounterUnchanged()
+    {
+        var state = Placed();
+        var captain = state.Find("captain")!;
+        var brigand = state.Units.Single(u => u.At == Brigand);
+
+        var plain = Queries.Forecast(state, Shipped, captain, brigand)!;
+        var struck = Queries.Forecast(state, Shipped, captain, brigand, null, "full_measure")!;
+
+        Assert.Equal(plain.Defender, struck.Defender);
+    }
+
+    [Fact]
+    public void TheResolverStrikesOnceWithTheArtAndTwiceWithThePlainAttack()
+    {
+        var doubled = false;
+        foreach (var seed in Enumerable.Range(1, 20).Select(s => (ulong)s))
+        {
+            var state = Placed(seed);
+            var art = Apply(state, new Attack("captain", BrigandId(state), null, "full_measure"));
+            var plain = Apply(state, new Attack("captain", BrigandId(state), null, null));
+
+            Assert.Equal(1, art.Events.OfType<CombatFought>().First().Strikes.Count(s => s.AttackerId == "captain"));
+            doubled |= plain.Events.OfType<CombatFought>().First().Strikes.Count(s => s.AttackerId == "captain") == 2;
+        }
+
+        Assert.True(doubled);
+    }
+
+    [Fact]
+    public void TheMenuRowOfAnArtThatStrikesOnceForecastsOneStrike()
+    {
+        var state = Placed();
+        var rows = Queries.AttackOptions(state, Shipped, state.Find("captain")!, state.Units.Single(u => u.At == Brigand));
+
+        Assert.Equal(1, rows.Single(r => r.Art?.Id == "full_measure").Forecast!.Attacker.StrikeCount);
+        Assert.Equal(2, rows.First(r => r.Art is null).Forecast!.Attacker.StrikeCount);
     }
 
     [Fact]

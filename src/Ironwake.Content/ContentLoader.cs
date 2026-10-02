@@ -919,7 +919,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "item");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -932,6 +932,7 @@ public static class ContentLoader
                 {
                     PerMap = effect.Has("perMap") ? effect.Int("perMap") : null,
                     CostsNextPhase = effect.BoolOr("costsNextPhase", false),
+                    Single = effect.BoolOr("single", false),
                     Item = effect.Has("item") ? effect.String("item") : null,
                 };
                 if (art.PerMap is < 1)

@@ -1883,3 +1883,18 @@ Notes: the transcript and script are `docs/transcripts/2026-10-02-saltmarsh_ford
 - Teodor's Long Thrust took the boss's last 3 at 58%, at range 2 with no counter. That was the only swing of the map I watched land.
 
 — Code
+
+## 2026-10-02 — The Tollgate, Full Measure strikes once (#739), the warm play — Code
+
+Seed: 739 (shipped `the_tollgate.map`, scheme two)   Result: won turn 10 of 10 on the seize, nobody fell, no Recall
+Warm: I built the rule, and I opened the way 636 did.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: turn 8. The leader stood at 26, and the only tile beside him was the captain's. Pell's cinder from 6,3 took him to 14. Then Full Measure was the only sure kill: 17 once at 100 against plain 9 at 87. It cost turn 9, so the seize came on the last turn.
+Notes: the transcript and script are `docs/transcripts/2026-10-02-the_tollgate-739.*`.
+- **The rule bit twice, both times as a refusal.** On turn 3 the brigand was at 23, and the art read 18 once. Under 0125 it was 18 x2, which is how 636 ended the brigand in one declaration. Here neither the art nor the plain 10 x2 killed, so I kept the art and swung plain. On turn 7 the captain stood beside the leader at 26. The art would have been 17 once against a 62% counter for 16, and the leader's phase would follow. That is a 38% chance of losing the captain for one strike that ends nothing, so I did not go in.
+- **It became a finisher.** The kill took Pell and the captain together, and the art's +30 Hit is what made the second strike certain. That is the shape the issue asked for: a strong opening or a sure close, never the whole fight.
+- **The cost bit for the first time.** In 636 and 737 the map ended on the strike. Here it took turn 9, and with the seize clock at 10 I counted that turn before I declared.
+- **The surprise was the leader's.** After he hand-axed Teodor on turn 7, he was holding the Toll Axe. That cost the captain his plain double on turn 8 (9 at 87, not 9 x2), and that is what made the art the right call.
+- **Not tense:** turns 3 and 4. Six misses into a forest brigand at 63 and 47 are a coin I had to keep flipping.
+
+— Code
