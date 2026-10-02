@@ -506,12 +506,12 @@ public sealed record BattleState(
 
     /// <summary>
     /// The section 4 reach of <paramref name="unit"/> on <paramref name="mov"/> points by how it moves now
-    /// (<see cref="Grounding.MovementOf"/>); its own tile alone when grounded where it cannot walk.
+    /// (<see cref="Grounding.MovementOf"/>), its footing read (issue 705); its own tile alone when grounded where it cannot walk.
     /// </summary>
     private Reach ReachOn(BattleUnit unit, GameContent content, int mov) =>
         Grounding.Stranded(this, unit, content)
             ? Movement.Reach(Map, content, unit.At, content.Class(unit.Unit.ClassId).Movement, 0, at => OccupantAt(at, unit.Side))
-            : Movement.Reach(Map, content, unit.At, Grounding.MovementOf(unit, content), mov, at => OccupantAt(at, unit.Side));
+            : Movement.Reach(Map, content, unit.At, Grounding.MovementOf(unit, content), mov, at => OccupantAt(at, unit.Side), content.AbilitiesOf(unit.Unit));
 
     /// <summary>
     /// Where a Fall back order's move may take a unit (issue 85): the section 4 reach from where it

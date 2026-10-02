@@ -38,6 +38,15 @@ public enum AbilityTrigger
 
     /// <summary>After a combat in which the unit killed and lived: a kill's heal (issue 704).</summary>
     OnKill,
+
+    /// <summary>In a fight, while a living ally stands orthogonally beside the holder: the Vanguard's stats (issue 705).</summary>
+    Beside,
+
+    /// <summary>In a fight, on every ally within the holder's radius, never the holder: the Marshal's aura (issue 705).</summary>
+    Aura,
+
+    /// <summary>Whenever the holder's reach is walked: a cheaper step on named terrain (issue 705).</summary>
+    OnMove,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -159,6 +168,37 @@ public sealed record KillHealEffect(int Heal, WeaponType? Wielding) : AbilityEff
 }
 
 /// <summary>
+/// The Vanguard's Shoulder to Shoulder (issue 705): <see cref="Delta"/> added to the holder's stats in a
+/// fight while a living ally stands orthogonally beside the tile it fights from, read where both stand
+/// (<see cref="Formation.Beside"/>), so the forecast, the resolver and both planners read one number.
+/// </summary>
+public sealed record BesideStatsEffect(Stats Delta) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.Beside;
+}
+
+/// <summary>
+/// The Marshal's aura (issue 705): every ally of the holder within <see cref="Radius"/> tiles
+/// (Manhattan) of it, never the holder itself, fights at <see cref="Hit"/> more hit and
+/// <see cref="Avoid"/> more avoid (<see cref="Formation.Aura"/>). Two holders of one aura do not
+/// stack; two different auras do.
+/// </summary>
+public sealed record AuraEffect(int Radius, int Hit, int Avoid) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.Aura;
+}
+
+/// <summary>
+/// The Pathfinder's footing (issue 705): a step into a tile of any of <see cref="Terrain"/> costs the
+/// holder at most <see cref="Cost"/>, when its movement type can enter it at all; every other tile
+/// costs what the terrain says (<see cref="AbilityRules.StepCost"/>).
+/// </summary>
+public sealed record FootingEffect(ValueList<string> Terrain, int Cost) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnMove;
+}
+
+/// <summary>
 /// Which opponents a combat modifier answers to: a weapon type, a movement type, both
 /// (both must match), or neither (every opponent). An opponent with no weapon never
 /// matches a weapon condition. <see cref="Oathbound"/> also asks that the opponent be
@@ -238,16 +278,54 @@ public static class AbilityRules
         return heal;
     }
 
+    /// <summary>The sum of every <see cref="BesideStatsEffect"/> in <paramref name="abilities"/>: what the holder gains with an ally beside it (issue 705).</summary>
+    public static Stats Beside(ValueList<Ability> abilities)
+    {
+        var total = Stats.Zero;
+        foreach (var ability in abilities)
+        {
+            if (ability.Effect is BesideStatsEffect beside)
+            {
+                total += beside.Delta;
+            }
+        }
+
+        return total;
+    }
+
+    /// <summary>
+    /// What a step into <paramref name="terrain"/> costs a unit moving as <paramref name="movement"/> with
+    /// <paramref name="abilities"/> (issue 705): the terrain's cost, lowered to a matching
+    /// <see cref="FootingEffect"/>'s; null where the movement type cannot enter, footing or not.
+    /// </summary>
+    public static int? StepCost(Terrain terrain, MovementType movement, ValueList<Ability> abilities)
+    {
+        if (terrain.MoveCost(movement) is not { } cost)
+        {
+            return null;
+        }
+
+        foreach (var ability in abilities)
+        {
+            if (ability.Effect is FootingEffect footing && footing.Terrain.Contains(terrain.Id))
+            {
+                cost = Math.Min(cost, footing.Cost);
+            }
+        }
+
+        return cost;
+    }
+
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);
 
     /// <summary>Whether any of <paramref name="abilities"/> is Canto.</summary>
     public static bool HasCanto(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is CantoEffect);
 
-    /// <summary>The sum of <paramref name="self"/>'s combat modifiers whose conditions hold: <paramref name="opponent"/> meets the opponent condition, and <paramref name="self"/>'s weapon the wielding one.</summary>
+    /// <summary>The aura <paramref name="self"/> fights under (<see cref="Combatant.Aura"/>, issue 705) plus the sum of its combat modifiers whose conditions hold: <paramref name="opponent"/> meets the opponent condition, and <paramref name="self"/>'s weapon the wielding one.</summary>
     public static CombatBonus Against(Combatant self, Combatant opponent)
     {
-        var bonus = CombatBonus.None;
+        var bonus = self.Aura;
         foreach (var ability in self.Abilities)
         {
             if (ability.Effect is CombatModifierEffect modifier && modifier.AppliesTo(self, opponent))

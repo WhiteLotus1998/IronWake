@@ -140,7 +140,7 @@ public class AbilityContentTests
     [Fact]
     public void AnEffectKindMustBeKnown()
     {
-        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"aura\" }"))), ContentFiles.AbilitiesName, "a", "effect.kind");
+        AssertNames(Fails(Fixture.Files(abilities: One("{ \"kind\": \"halo\" }"))), ContentFiles.AbilitiesName, "a", "effect.kind");
     }
 
     [Fact]

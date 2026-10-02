@@ -217,6 +217,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["sword", "lance"],
+      "mastery": "shoulder_to_shoulder",
+      "masteryPoints": 12,
       "certification": { "level": 3 },
       "modifiers": { "hp": 2, "str": 1, "def": 2 },
       "growthModifiers": { "hp": 10, "def": 10 }
@@ -228,6 +230,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["sword", "reason"],
+      "mastery": "command_presence",
+      "masteryPoints": 12,
       "certification": { "level": 3 },
       "modifiers": { "mag": 2, "res": 1, "cha": 2 },
       "growthModifiers": { "mag": 10, "cha": 10 }
@@ -253,6 +257,8 @@
       "movement": "infantry",
       "mov": 4,
       "weapons": ["sword", "lance", "axe"],
+      "mastery": "breakthrough",
+      "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
       "modifiers": { "hp": 4, "str": 3, "def": 4 }
     },
@@ -264,6 +270,8 @@
       "movement": "cavalry",
       "mov": 6,
       "weapons": ["sword", "reason", "lance"],
+      "mastery": "field_command",
+      "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
       "modifiers": { "str": 1, "mag": 3, "res": 2, "cha": 3 }
     },
@@ -274,7 +282,10 @@
       "advances": "ranger",
       "movement": "infantry",
       "mov": 5,
+      "abilities": ["trail_sense"],
       "weapons": ["sword", "bow"],
+      "mastery": "light_step",
+      "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
       "modifiers": { "str": 1, "dex": 4, "spd": 3 }
     },

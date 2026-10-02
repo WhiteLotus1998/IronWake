@@ -392,6 +392,27 @@ public static class ContentSerializer
                 }
 
                 break;
+            case BesideStatsEffect beside:
+                writer.WriteString("kind", "beside");
+                WriteStats(writer, "stats", beside.Delta);
+                break;
+            case AuraEffect aura:
+                writer.WriteString("kind", "aura");
+                writer.WriteNumber("radius", aura.Radius);
+                writer.WriteNumber("hit", aura.Hit);
+                writer.WriteNumber("avoid", aura.Avoid);
+                break;
+            case FootingEffect footing:
+                writer.WriteString("kind", "footing");
+                writer.WriteStartArray("terrain");
+                foreach (var id in footing.Terrain)
+                {
+                    writer.WriteStringValue(id);
+                }
+
+                writer.WriteEndArray();
+                writer.WriteNumber("cost", footing.Cost);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }

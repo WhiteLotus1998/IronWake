@@ -48,6 +48,14 @@ public static class ContentLoader
     {
         var terrain = ParseTerrain(files.Terrain);
         var abilities = ParseAbilities(files.Abilities);
+        foreach (var ability in abilities.Values)
+        {
+            if (ability.Effect is FootingEffect footing && footing.Terrain.FirstOrDefault(id => !terrain.ContainsKey(id)) is { } unknown)
+            {
+                throw new ContentException(files.Abilities.Name, ability.Id, "effect.terrain", $"unknown terrain '{unknown}': not in {ContentFiles.TerrainName}");
+            }
+        }
+
         var classes = ParseClasses(files.Classes, abilities);
         var weapons = ParseWeapons(files.Weapons);
         var items = ParseItems(files.Items, weapons);
@@ -952,8 +960,51 @@ public static class ContentLoader
                 }
 
                 return killHeal;
+            case "beside":
+                RequireOnly(entry, effect, "effect", "kind", "stats");
+                var beside = ParseStats(effect.Object("stats"), allRequired: false);
+                if (beside == Stats.Zero)
+                {
+                    throw entry.Error("effect.stats", "must change at least one stat");
+                }
+
+                if (beside.Hp != 0)
+                {
+                    throw entry.Error("effect.stats.hp", "max HP cannot move with a neighbour; name another stat");
+                }
+
+                return new BesideStatsEffect(beside);
+            case "aura":
+                RequireOnly(entry, effect, "effect", "kind", "radius", "hit", "avoid");
+                var aura = new AuraEffect(effect.Int("radius"), effect.IntOr("hit", 0), effect.IntOr("avoid", 0));
+                if (aura.Radius < 1)
+                {
+                    throw entry.Error("effect.radius", "must be at least 1");
+                }
+
+                if (aura.Hit == 0 && aura.Avoid == 0)
+                {
+                    throw entry.Error("effect", "an aura must change hit or avoid");
+                }
+
+                return aura;
+            case "footing":
+                RequireOnly(entry, effect, "effect", "kind", "terrain", "cost");
+                var terrain = effect.StringArray("terrain");
+                if (terrain.Count == 0)
+                {
+                    throw entry.Error("effect.terrain", "must name at least one terrain");
+                }
+
+                var footing = new FootingEffect(ValueList<string>.From(terrain), effect.Int("cost"));
+                if (footing.Cost < 1)
+                {
+                    throw entry.Error("effect.cost", "must be at least 1");
+                }
+
+                return footing;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range or killheal");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, canto, brace, range, killheal, beside, aura or footing");
         }
     }
 

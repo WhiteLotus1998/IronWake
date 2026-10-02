@@ -124,8 +124,8 @@ public sealed record GameContent(
     public Stats StatsOf(Unit unit) => unit.EffectiveStats(Class(unit.ClassId)) + AbilityRules.Passive(AbilitiesOf(unit));
 
     /// <summary>This unit as the section 5 formulas see it, its abilities resolved from this content.</summary>
-    public Combatant CombatantOf(Unit unit, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false, int hitModifier = 0, int critModifier = 0) =>
-        new(unit, Class(unit.ClassId), weapon, terrain, hp, critAvoidModifier, broken, hitModifier, critModifier, AbilitiesOf(unit));
+    public Combatant CombatantOf(Unit unit, Weapon? weapon, Terrain terrain, int hp, int critAvoidModifier = 0, bool broken = false, int hitModifier = 0, int critModifier = 0, Stats beside = default) =>
+        new(unit, Class(unit.ClassId), weapon, terrain, hp, critAvoidModifier, broken, hitModifier, critModifier, AbilitiesOf(unit), beside);
 
     /// <summary>Finds the terrain drawn with a glyph, or null if no terrain uses it.</summary>
     public Terrain? TerrainByGlyph(char glyph)
