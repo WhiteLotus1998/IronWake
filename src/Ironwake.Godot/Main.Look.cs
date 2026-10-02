@@ -237,6 +237,22 @@ public partial class Main
         DrawRect(r, MarkColour("reach", 0.7f), filled: false, width: Mathf.Max(1, 1.5f * S));
     }
 
+    /// <summary>
+    /// A closed chest (issue 786): a small strongbox in the lower half of its tile, a lid line
+    /// and a clasp, drawn under the tokens so a unit standing on it covers it, as a unit covers
+    /// the ground; an opened chest is no longer drawn.
+    /// </summary>
+    private void DrawChest(Coord at)
+    {
+        var cell = Cell(at);
+        var size = new Vector2(cell.Size.X * 0.42f, cell.Size.Y * 0.3f);
+        var box = new Rect2(cell.Position + new Vector2((cell.Size.X - size.X) / 2, cell.Size.Y * 0.58f), size);
+        Card(box, Look(LookPalette.Player, 0.9f), 2 * S);
+        DrawRect(box, UiColour("ink"), filled: false, width: Mathf.Max(1, 1.5f * S));
+        DrawLine(box.Position + new Vector2(0, size.Y * 0.38f), box.Position + new Vector2(size.X, size.Y * 0.38f), UiColour("ink"), Mathf.Max(1, 1.5f * S));
+        DrawRect(new Rect2(box.Position + new Vector2(size.X / 2 - 2 * S, size.Y * 0.3f), new Vector2(4 * S, 4 * S)), UiColour("ink"));
+    }
+
     /// <summary>The enemy's threat on a tile: a bone hatch, never a fill; no ground under it is warm, so it never blends to a peach (issue 564).</summary>
     /// <remarks>On a tile the dark hides (issue 601) it is laid again over the veil, so its stroke reads lighter than the veil would leave it, so dark ground never swallows it.</remarks>
     private void DrawThreatMark(Coord at, bool faint = false, bool unseen = false) =>

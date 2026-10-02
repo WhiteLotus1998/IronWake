@@ -50,6 +50,18 @@ public sealed record AttackMenu(string UnitId, string TargetId, IReadOnlyList<Me
 }
 
 /// <summary>
+/// One row of the battle's action list (issue 786): a command the selected unit can take that
+/// no click on the board names, opening a chest beside it or the captain's Commander's Word,
+/// with its label, one line in the console's words (the chest's contents, the order's preview)
+/// and the resolver's refusal for a row it would refuse, which the row shows greyed.
+/// </summary>
+public sealed record ActionRow(string Label, string Line, Command Command, string? Refusal)
+{
+    /// <summary>True when choosing the row applies its command; a greyed row only teaches its refusal.</summary>
+    public bool Legal => Refusal is null;
+}
+
+/// <summary>
 /// One side of the drawn forecast (issue 512): who, with what, standing where, and the source of
 /// its avoid there (the terrain's name, tile and avoid for its movement), its HP now and at most,
 /// what it would have left if every strike the other side can make lands, and its own strike as
@@ -274,8 +286,74 @@ public sealed class ClientSession
     /// <summary>The selected player unit's id, or null.</summary>
     public string? Selected { get; private set; }
 
-    /// <summary>The selected unit's reach, as the core answers it, or null with no selection.</summary>
-    public Reach? Reach => Selected is { } id && State.Find(id) is { } unit ? Queries.Reachable(State, Content, unit) : null;
+    /// <summary>
+    /// The selected unit's reach, as the core answers it, or null with no selection: the move a
+    /// Fall back order owes it while one is owed (issue 786), else its move or Canto.
+    /// </summary>
+    public Reach? Reach => Selected is { } id && State.Find(id) is { } unit ? State.FallBackReachOf(unit, Content) ?? Queries.Reachable(State, Content, unit) : null;
+
+    /// <summary>The tiles of the chests not yet opened (issue 786), which the board draws; an opened chest is gone from the board.</summary>
+    public IReadOnlyList<Coord> Chests => State.ClosedChests.Select(chest => chest.At).ToList();
+
+    /// <summary>
+    /// The action list for the selected unit (issue 786), empty with none selected or while the
+    /// enemy phase plays: one row per closed chest on or beside its tile (<c>open</c>), then, for
+    /// the captain on a map where orders are open and unspent, one row per order (<c>order</c>),
+    /// its line the console's <c>order ... preview</c> from <paramref name="from"/> (a hovered
+    /// tile, to read a call from there before moving) or from where he stands.
+    /// </summary>
+    public IReadOnlyList<ActionRow> Actions(Coord? from = null)
+    {
+        if (EnemyPhasePlaying || Selected is not { } id || State.Find(id) is not { } unit)
+        {
+            return Array.Empty<ActionRow>();
+        }
+
+        var rows = new List<ActionRow>();
+        var names = UnitNames.Of(State, Content);
+        foreach (var chest in State.ClosedChests.Where(chest => chest.At.DistanceTo(unit.At) <= 1))
+        {
+            var open = new Open(unit.Id, chest.At);
+            var refusal = Resolver.Apply(State, Content, open).Rejection is { } rejected ? names.Message(rejected.Message) : null;
+            var holds = string.Join(", ", chest.Items.Select(Content.ItemName));
+            rows.Add(new ActionRow($"Open chest {chest.At.X},{chest.At.Y}", holds, open, refusal));
+        }
+
+        if (unit.IsCaptain && State.OrdersOpen && State.OrderCalled is null)
+        {
+            var at = from is { } tile && (tile == unit.At || Reach?.CanEnd(tile) == true) ? tile : (Coord?)null;
+            foreach (var kind in new[] { OrderKind.Press, OrderKind.Rally, OrderKind.FallBack })
+            {
+                var refusal = Orders.Refusal(State) is { } why ? names.Message($"cannot call {Orders.Word(kind)}: {why}") : null;
+                var word = Orders.Word(kind);
+                rows.Add(new ActionRow($"Order: {char.ToUpperInvariant(word[0])}{word[1..]}", PlaySession.OrderPreview(State, Content, kind, at), new Order(kind), refusal));
+            }
+        }
+
+        return rows;
+    }
+
+    /// <summary>
+    /// Takes the action row at <paramref name="row"/> of <see cref="Actions"/>: its command goes
+    /// through <see cref="Submit"/>. A greyed row puts its refusal in <see cref="Status"/>.
+    /// Returns the command applied, or null.
+    /// </summary>
+    public Command? TakeAction(int row)
+    {
+        var rows = Actions();
+        if (row < 0 || row >= rows.Count)
+        {
+            return null;
+        }
+
+        if (rows[row].Refusal is { } refusal)
+        {
+            Status = refusal;
+            return null;
+        }
+
+        return Submit(rows[row].Command) ? rows[row].Command : null;
+    }
 
     /// <summary>Whether enemy-phase events are still waiting to be shown; no player command is taken until they are.</summary>
     public bool EnemyPhasePlaying => _pending.Count > 0 || _enemy.Count > 0;
@@ -284,12 +362,13 @@ public sealed class ClientSession
     public BattleUnit? UnitAt(Coord at) => State.Units.FirstOrDefault(u => u.At == at);
 
     /// <summary>
-    /// Selects the player unit on a tile, if it has not acted or is owed a Canto; anything
+    /// Selects the player unit on a tile, if it has not acted or is owed a Canto or a Fall back
+    /// move (issue 786); anything
     /// else clears the selection. True when a unit is selected.
     /// </summary>
     public bool Select(Coord at)
     {
-        Selected = UnitAt(at) is { Side: Side.Player } unit && (!unit.Acted || State.CantoReachOf(unit, Content) is not null) ? unit.Id : null;
+        Selected = UnitAt(at) is { Side: Side.Player } unit && (!unit.Acted || State.CantoReachOf(unit, Content) is not null || unit.FallingBack) ? unit.Id : null;
         Inspected = Selected is null && UnitAt(at) is { Side: Side.Enemy } enemy && Dusk.Seen(State, enemy) ? enemy.Id : null;
         return Selected is not null;
     }
@@ -628,7 +707,8 @@ public sealed class ClientSession
     public bool TakeBack() => Selected is { } id && Submit(new Undo(id));
 
     /// <summary>
-    /// What a click on a tile does with a unit selected: the unit itself waits, a hostile unit
+    /// What a click on a tile does with a unit selected: a unit owed a Fall back move takes it to
+    /// the tile, or declines it on its own tile (issue 786); otherwise the unit itself waits, a hostile unit
     /// is attacked, through the attack menu when it has more than one legal row (issue 611) and at once otherwise, a tile it can end on is moved to (a Canto when one
     /// is owed); anything else selects what is there. Returns the command applied, or null.
     /// </summary>
@@ -648,7 +728,13 @@ public sealed class ClientSession
         }
 
         Command? command = null;
-        if (at == unit.At && !unit.Acted)
+        if (unit.FallingBack && State.FallBackReachOf(unit, Content) is { } fallBack)
+        {
+            // The move a Fall back order owes (issue 786): its own tile declines it, as
+            // `fallback <unit> stay` does; a tile in the two-step reach takes it.
+            command = at == unit.At || fallBack.CanEnd(at) ? new FallBack(unit.Id, at) : null;
+        }
+        else if (at == unit.At && !unit.Acted)
         {
             command = new Wait(unit.Id);
         }
@@ -726,7 +812,7 @@ public sealed class ClientSession
                 _enemy.Enqueue(enemy);
             }
         }
-        else if (Selected is { } id && State.Find(id) is { } unit && unit.Acted && State.CantoReachOf(unit, Content) is null)
+        else if (Selected is { } id && State.Find(id) is { } unit && unit.Acted && State.CantoReachOf(unit, Content) is null && !unit.FallingBack)
         {
             Selected = null;
         }
