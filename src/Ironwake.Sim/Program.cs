@@ -455,7 +455,7 @@ public static class Program
     /// <summary>
     /// The captain's ladder's bar (issue 705, <see cref="LadderRun"/>): per content map, or the one
     /// <paramref name="only"/> names, gate 1 and gate 4 with the captain unpromoted and in each ladder
-    /// class, then the tier spreads against the 5-point bar. Exits non-zero when any map misses the bar.
+    /// class, each map against the per-map floor, then each tier's campaign means against the spread (round 232). Exits non-zero when either check fails.
     /// </summary>
     public static int LadderTable(int seeds, string? only)
     {
@@ -476,6 +476,7 @@ public static class Program
 
         Console.WriteLine($"ladder: {maps.Count} maps, {seeds} seeds, the captain unpromoted and in {string.Join(", ", LadderRun.Ladder(content).Select(c => c.Id))}");
         var failed = false;
+        var readings = new List<LadderRun.MapReading>();
         foreach (var (id, map) in maps)
         {
             var reading = LadderRun.Measure(content, id, map, seeds);
@@ -484,10 +485,19 @@ public static class Program
                 Console.WriteLine(line);
             }
 
+            readings.Add(reading);
             failed |= !reading.Passed;
         }
 
-        Console.WriteLine(failed ? "ladder: FAILED" : "ladder: ok");
+        var floor = !failed;
+        var campaign = LadderRun.Campaign(content, readings);
+        foreach (var tier in campaign)
+        {
+            Console.WriteLine(LadderRun.Line(tier));
+            failed |= !tier.Passed;
+        }
+
+        Console.WriteLine($"ladder: per-map floor {Gates.Verdict(floor)}, campaign spread {Gates.Verdict(campaign.All(t => t.Passed))}: {(failed ? "FAILED" : "ok")}");
         return failed ? 1 : 0;
     }
 

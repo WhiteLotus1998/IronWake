@@ -254,7 +254,7 @@
       "mastery": "shoulder_to_shoulder",
       "masteryPoints": 12,
       "certification": { "level": 3 },
-      "modifiers": { "def": 1 },
+      "modifiers": { "hp": 4, "def": 2, "res": 1 },
       "growthModifiers": { "hp": 10, "def": 10 }
     },
     {
@@ -294,7 +294,7 @@
       "mastery": "breakthrough",
       "masteryPoints": 12,
       "certification": { "level": 10, "ranks": { "sword": "C" } },
-      "modifiers": { "hp": 2, "str": 2, "def": 2 }
+      "modifiers": { "hp": 6, "str": 2, "def": 3, "res": 1 }
     },
     {
       "id": "commander",
