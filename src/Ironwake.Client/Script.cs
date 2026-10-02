@@ -5,7 +5,8 @@ namespace Ironwake.Client;
 /// <summary>
 /// Reads a <c>play --script</c> file into the commands the client submits (issue 347), so the
 /// parity gate drives the client and the console from the same file. Only lines that change
-/// the board become commands; a query (<c>forecast</c>, <c>threat</c>, <c>show</c>, <c>reach</c>,
+/// the board become commands, <c>open</c>, <c>order</c> and <c>fallback</c> among them (issue 786);
+/// a query (<c>forecast</c>, <c>order ... preview</c>, <c>threat</c>, <c>show</c>, <c>reach</c>,
 /// <c>map</c>, <c>help</c>, a bare <c>recall</c> or <c>recall list</c>), a blank line or a
 /// <c>#</c> comment is skipped, as none of them prints an event. Slots count from 1, as the
 /// console reads them.
@@ -45,6 +46,10 @@ public static class Script
             ("exit", 2) => new Exit(words[1]),
             ("recover", 2) => new Recover(words[1]),
             ("shove", 3) => new Shove(words[1], words[2]),
+            ("open", 3) when TryCoord(words[2], out var chest) => new Open(words[1], chest),
+            ("order", 2 or 3) when OrderOf(words) is { } kind => new Order(kind),
+            ("fallback", 3) when words[2] == "stay" && state.Find(words[1]) is { } holder => new FallBack(holder.Id, holder.At),
+            ("fallback", 3) when TryCoord(words[2], out var to) => new FallBack(words[1], to),
             ("end", 1) => new EndPhase(),
             ("recall", 2) when int.TryParse(words[1], out var index) => new Recall(index),
             ("undo", 2) => new Undo(words[1]),
@@ -130,6 +135,13 @@ public static class Script
 
         return campaign.LogText;
     }
+
+    /// <summary>
+    /// The order an <c>order</c> line calls (<c>press</c>, <c>rally</c>, <c>fall back</c> as one
+    /// word or two), or null for anything else, a <c>preview</c> query included.
+    /// </summary>
+    private static OrderKind? OrderOf(string[] words) =>
+        Orders.Parse(string.Join(' ', words.Skip(1)));
 
     private static bool TryCoord(string text, out Coord at)
     {

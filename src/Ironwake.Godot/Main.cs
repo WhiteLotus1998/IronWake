@@ -1007,6 +1007,12 @@ public partial class Main : Node2D
             }
         }
 
+        // A chest is the map's, not a unit, so dusk never hides it (dusk hides what, never where).
+        foreach (var chest in _client.Chests)
+        {
+            DrawChest(chest);
+        }
+
         if (_client.Playing is { } walked)
         {
             DrawPath(walked);
@@ -1175,6 +1181,17 @@ public partial class Main : Node2D
             entries.Add((r => DrawRect(r, Ink, filled: false, width: 2), "exit"));
         }
 
+        if (_client!.Chests.Count > 0)
+        {
+            // The chest rule on screen (issue 786): opened from on or beside it, as the action.
+            entries.Add((r =>
+            {
+                var box = new Rect2(r.Position + new Vector2(1, r.Size.Y * 0.3f), new Vector2(r.Size.X - 2, r.Size.Y * 0.6f));
+                DrawRect(box, Look(LookPalette.Player, 0.9f));
+                DrawRect(box, UiColour("ink"), filled: false, width: 1);
+            }, "chest: open on or beside it"));
+        }
+
         if (Dusk.Sight(state) is not null)
         {
             entries.Add((r =>
@@ -1339,6 +1356,25 @@ public partial class Main : Node2D
                 {
                     y = Row(y, text, Ink);
                 }
+            }
+
+            y += 10;
+        }
+
+        // The action list (issue 786): what the selected unit can take that no board click names,
+        // a chest beside it and the captain's orders, each row clicked to take it.
+        var actions = client.Actions(_hover);
+        if (actions.Count > 0)
+        {
+            y = Title(y, "ACTIONS  click to take");
+            for (var i = 0; i < actions.Count; i++)
+            {
+                var row = actions[i];
+                var top = y - LineHeight + 4;
+                y = Row(y, row.Label, row.Legal ? Link : Muted);
+                y = Row(y, "     " + (row.Refusal ?? row.Line), Muted);
+                var index = i;
+                _hits.Add((new Rect2(PanelOrigin.X, top, PanelWidth, y - top), () => client.TakeAction(index)));
             }
 
             y += 10;
