@@ -62,7 +62,16 @@ public static class Certifications
     /// the captain takes no class off it, and once on it the captain goes only up, into the held class's
     /// own advanced form, each refused naming the ladder.
     /// </summary>
-    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from, bool captain)
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from, bool captain) =>
+        Check(unit, target, from, captain, ValueList<string>.Empty);
+
+    /// <summary>
+    /// <see cref="Check(Unit, UnitClass, UnitClass, bool)"/> read with the quests the campaign has won,
+    /// <paramref name="questsWon"/> (issue 706): a unique class is refused to every unit but its own, and to
+    /// its own until the quest that opens it is won; and a unit that has passed one door of a base's second
+    /// promotion (<see cref="Unit.Doors"/>) is refused every other door of that base.
+    /// </summary>
+    public static IReadOnlyList<CertificationRefusal> Check(Unit unit, UnitClass target, UnitClass? from, bool captain, IReadOnlyCollection<string> questsWon)
     {
         var refusals = new List<CertificationRefusal>();
         if (from is { Hidden: true } && from.Id == unit.ClassId && target.Id != from.Id)
@@ -93,9 +102,23 @@ public static class Certifications
             refusals.Add(new("hidden", $"{target.Name} is not certified; it is earned"));
         }
 
+        if (target.Unique is { } owner && owner != unit.Id)
+        {
+            refusals.Add(new("unique", $"{target.Name} is {owner}'s alone"));
+        }
+        else if (target.UnlockedBy is { } quest && !questsWon.Contains(quest))
+        {
+            refusals.Add(new("unlockedBy", $"{target.Name} opens when the quest {quest} is won"));
+        }
+
         if (target.Advances is { } basis && unit.ClassId != basis.Id)
         {
             refusals.Add(new("advances", $"needs to be {Article(basis.Name)} {basis.Name} first"));
+        }
+
+        if (target.Advances is { } door && unit.Doors.Any(d => d.Base == door.Id && d.Form != target.Id))
+        {
+            refusals.Add(new("door", $"{unit.Id} took the other door above {door.Name}; {target.Name} is closed"));
         }
 
         var requirements = target.Certification;
@@ -138,15 +161,24 @@ public static class Certifications
     /// <summary>
     /// <see cref="Certify(Unit, UnitClass)"/> read knowing whether <paramref name="unit"/> is the captain (issue 705).
     /// </summary>
-    public static Unit Certify(Unit unit, UnitClass target, bool captain)
+    public static Unit Certify(Unit unit, UnitClass target, bool captain) => Certify(unit, target, captain, ValueList<string>.Empty);
+
+    /// <summary>
+    /// <see cref="Certify(Unit, UnitClass, bool)"/> read with the quests the campaign has won (issue 706).
+    /// Passing into an advanced form records the door taken (<see cref="Unit.Doors"/>).
+    /// </summary>
+    public static Unit Certify(Unit unit, UnitClass target, bool captain, IReadOnlyCollection<string> questsWon)
     {
-        var refusals = Check(unit, target, null, captain);
+        var refusals = Check(unit, target, null, captain, questsWon);
         if (refusals.Count > 0)
         {
             throw new InvalidOperationException($"{unit.Id} cannot be promoted to {target.Name}: {refusals[0].Text}");
         }
 
-        return Grant(unit with { ClassId = target.Id }, target);
+        var promoted = Grant(unit with { ClassId = target.Id }, target);
+        return target.Advances is not { } basis || promoted.Doors.Any(d => d.Base == basis.Id)
+            ? promoted
+            : promoted with { Doors = promoted.Doors.Add((basis.Id, target.Id)) };
     }
 
     /// <summary>

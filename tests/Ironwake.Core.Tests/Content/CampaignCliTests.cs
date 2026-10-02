@@ -149,7 +149,7 @@ public class CampaignCliTests
     public void TheShippedLadderIsOnTheScreenAndRefusesALevelOneRecruitNamingEveryRequirement()
     {
         var path = Path.Combine(Path.GetTempPath(), "ironwake-campaign-" + Guid.NewGuid().ToString("N") + ".script");
-        File.WriteAllText(path, "trial captain outrider\ncertify brannock reaver\nclasses captain\nclasses nobody\n");
+        File.WriteAllText(path, "trial captain outrider\ncertify brannock reaver\nclasses captain\nclasses nobody\nclasses\n");
         try
         {
             var output = Run(out _, "campaign", "--seed", "3", "--script", path, "--content", Fixture.RealContentDirectory());
@@ -170,6 +170,8 @@ public class CampaignCliTests
             Assert.Contains("  Commander (from Marshal; adds cavalry, lance, +2 Mov): level 10, sword C -- needs to be a Marshal first;", output);
             Assert.Contains("  Champion (from Vanguard; adds lance, axe): level 10, sword C -- needs to be a Vanguard first; needs level 10, has 1; needs sword C, has E\n", output);
             Assert.Contains("ERROR: No unit 'nobody' on the roster\n", output);
+            Assert.Contains("  Field Surgeon (from Chaplain; adds Steady Hands, Ward Rounds) [Maud's other door; loses reach]: level 7, faith C\n", output);
+            Assert.Single(output.Split('\n'), l => l.Contains("Field Surgeon"));
         }
         finally
         {

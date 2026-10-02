@@ -1083,6 +1083,17 @@ public static class ProtocolJson
             w.WriteString("pronoun", pronoun.ToString().ToLowerInvariant());
         }
 
+        if (u.Doors.Count > 0)
+        {
+            w.WriteStartObject("doors");
+            foreach (var (basis, form) in u.Doors)
+            {
+                w.WriteString(basis, form);
+            }
+
+            w.WriteEndObject();
+        }
+
         if (u.Wound is { } wound)
         {
             w.WriteStartObject("wound");
@@ -1145,6 +1156,20 @@ public static class ProtocolJson
         return new Wound(ReadStats(Required(w, "penalty")), maps);
     }
 
+    /// <summary>
+    /// The optional <c>doors</c> of a unit (issue 706): each base class whose second promotion it has
+    /// passed, keyed to the form it took, in the order written. A unit written before it reads as having passed none.
+    /// </summary>
+    private static ValueList<(string Base, string Form)> ReadDoors(JsonElement e)
+    {
+        if (!e.TryGetProperty("doors", out var doors) || doors.ValueKind == JsonValueKind.Null)
+        {
+            return ValueList<(string, string)>.Empty;
+        }
+
+        return ValueList<(string, string)>.From(doors.EnumerateObject().Select(p => (p.Name, p.Value.GetString() ?? throw new ProtocolException($"field 'doors.{p.Name}' must be a class id"))));
+    }
+
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
     private static Unit ReadRosterUnit(JsonElement e, GameContent content)
     {
@@ -1176,6 +1201,7 @@ public static class ProtocolJson
                 Mastery = ReadMasteryPoints(e),
                 Wound = ReadWound(e),
                 Pronoun = ReadPronoun(e, id),
+                Doors = ReadDoors(e),
             };
         }
         catch (ArgumentException ex)

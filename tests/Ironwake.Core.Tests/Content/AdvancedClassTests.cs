@@ -35,7 +35,7 @@ public class AdvancedClassTests
         Assert.Equal(baseId, form.BaseId);
         Assert.Equal(7, form.Certification.Level);
         Assert.Equal($"level 7, {weapon} C", form.Certification.Describe());
-        Assert.Single(Content.Classes.Values, c => c.Advances?.Id == baseId);
+        Assert.Single(Content.Classes.Values, c => c.Advances?.Id == baseId && c.Unique is null);
     }
 
     [Fact]

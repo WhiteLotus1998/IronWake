@@ -48,6 +48,14 @@ public sealed record Unit(
     public Wound? Wound { get; init; }
 
     /// <summary>
+    /// Each base class whose second promotion this unit has passed, with the advanced form it took
+    /// there (issue 706), in the order taken. A base's second promotion has two doors when a unique
+    /// class is offered beside the standard form; a unit that has passed one is refused the other for
+    /// good, whatever class it later holds.
+    /// </summary>
+    public ValueList<(string Base, string Form)> Doors { get; init; } = ValueList<(string, string)>.Empty;
+
+    /// <summary>
     /// The pronoun chosen for this unit at a campaign's start (issue 681, the captain's gender), or
     /// null to read the cast file's (<see cref="GameContent.Pronouns"/>). Text that refers back to
     /// the unit reads it through <see cref="Referent.For(GameContent, Unit)"/>.
@@ -56,10 +64,12 @@ public sealed record Unit(
 
     /// <summary>
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
-    /// reaches the weapon's, and a healing spell is not of a type the class strikes with only (issue 704).
+    /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
+    /// anything else is not of a type the class heals with only (issue 706).
     /// </summary>
     public bool CanWield(Weapon weapon, UnitClass unitClass) =>
-        unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank && (!weapon.Heals || unitClass.CanHealWith(weapon.Type));
+        unitClass.CanUse(weapon.Type) && Skill.Rank(weapon.Type) >= weapon.Rank
+        && (weapon.Heals ? unitClass.CanHealWith(weapon.Type) : unitClass.CanStrikeWith(weapon.Type));
 
     private readonly int _level = Guard(Level, MinLevel, MaxLevel, nameof(Level));
     private readonly int _exp = Guard(Exp, 0, MaxExp, nameof(Exp));

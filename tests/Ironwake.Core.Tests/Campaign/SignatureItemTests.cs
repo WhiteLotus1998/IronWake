@@ -20,8 +20,10 @@ public class SignatureItemTests
 
     private static readonly CampaignQuest Second = new("wren_2", "wren", 2, "the_lazar_house") { Pays = "test_vow", Rare = 3 };
 
+    /// <summary>The shipped content with Wren's two quests in place of the campaign's, so Maud's Field Surgeon, opened by a quest it drops, is dropped too (issue 706).</summary>
     private static readonly GameContent Content = Shipped with
     {
+        Classes = Shipped.Classes.Remove("fieldsurgeon"),
         Weapons = Shipped.Weapons.Add(Vow.Id, Vow),
         Abilities = Shipped.Abilities.Add(Oath.Id, Oath),
         Campaign = Shipped.Campaign with

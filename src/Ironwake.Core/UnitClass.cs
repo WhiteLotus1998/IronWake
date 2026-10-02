@@ -63,8 +63,43 @@ public sealed record UnitClass(
     /// </summary>
     public ValueList<(WeaponType Type, WeaponRank Rank)> Grants { get; init; } = ValueList<(WeaponType, WeaponRank)>.Empty;
 
+    /// <summary>
+    /// Weapon types the class heals with but never strikes with (issue 706: the Field Surgeon never
+    /// strikes). Each is in <see cref="Weapons"/>, and none is also in <see cref="StrikeOnly"/>.
+    /// </summary>
+    public ValueList<WeaponType> HealOnly { get; init; } = ValueList<WeaponType>.Empty;
+
+    /// <summary>
+    /// The one unit this class is offered to (issue 706, DESIGN section 3), or null for a class open to
+    /// all: a unique class is the other door at the second promotion, an advanced form of the unit's
+    /// base beside the standard one, and taking either closes the other (<see cref="Unit.Doors"/>).
+    /// </summary>
+    public string? Unique { get; init; }
+
+    /// <summary>The quest whose win opens this unique class (issue 706), or null when nothing but the unit and the step gate it.</summary>
+    public string? UnlockedBy { get; init; }
+
+    /// <summary>
+    /// The measure on which this unique class loses to its unit's standard advanced form (issue 706's
+    /// sidegrade test), or null for a class that is not unique. A test holds the loss.
+    /// </summary>
+    public SidegradeMeasure? Loses { get; init; }
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 
     /// <summary>Whether the class may cast a healing spell of <paramref name="type"/>: it uses the type and does not strike only with it.</summary>
     public bool CanHealWith(WeaponType type) => CanUse(type) && !StrikeOnly.Contains(type);
+
+    /// <summary>Whether the class may strike with a weapon of <paramref name="type"/>: it uses the type and does not heal only with it (issue 706).</summary>
+    public bool CanStrikeWith(WeaponType type) => CanUse(type) && !HealOnly.Contains(type);
+}
+
+/// <summary>
+/// What a unique class may name as the measure it loses on to its unit's standard advanced form
+/// (issue 706). The set grows with the classes that need it.
+/// </summary>
+public enum SidegradeMeasure
+{
+    /// <summary>The farthest tile any healing spell the class casts reaches.</summary>
+    Reach,
 }

@@ -1298,9 +1298,14 @@ public sealed class CampaignSession
         var advanced = _content.Classes.Values.Any(c => c.Advances is not null) ? $", {_content.Campaign.AdvancedCertificationPrice} for an advanced form" : "";
         _out.WriteLine($"Classes: what each asks, read against a unit's own stats without its class's; a seal costs {_content.Campaign.CertificationPrice}{advanced}");
         var names = UnitNames.Of(_record, _content);
-        foreach (var target in _content.Classes.Values.Where(c => !c.Hidden || c.Id == unit?.ClassId))
+        foreach (var target in _content.Classes.Values.Where(c => (!c.Hidden || c.Id == unit?.ClassId) && (c.Unique is null || unit is null || c.Unique == unit.Id)))
         {
             var from = target.Advances is { } basis ? $" (from {basis.Name}; adds {Adds(target, basis)})" : "";
+            if (target.Unique is { } owner)
+            {
+                from += $" [{names[owner]}'s other door; loses {target.Loses?.ToString().ToLowerInvariant()}]";
+            }
+
             var line = $"  {target.Name}{from}: {target.Certification.Describe()}";
             if (_content.Campaign.TrialFor(target.Id) is not null)
             {
@@ -1313,7 +1318,7 @@ public sealed class CampaignSession
             }
             else if (unit is not null)
             {
-                var refusals = Certifications.Check(unit, target, _content.Class(unit.ClassId), CampaignRecord.IsCaptain(unit, _content));
+                var refusals = Certifications.Check(unit, target, _content.Class(unit.ClassId), CampaignRecord.IsCaptain(unit, _content), _record.WonQuestIds);
                 line += refusals.Count == 0 ? $" -- {names[unit.Id]} may be promoted" : $" -- {names.Named(string.Join("; ", refusals.Select(r => r.Text)))}";
             }
 
@@ -1579,7 +1584,7 @@ public sealed class CampaignSession
         }
 
         var basis = held.Advances ?? held;
-        var form = content.Classes.Values.FirstOrDefault(c => c.Advances?.Id == basis.Id);
+        var form = content.Classes.Values.FirstOrDefault(c => c.Advances?.Id == basis.Id && c.Unique is null);
         return form is null ? $"ladder: {basis.Name}" : $"ladder: {basis.Name}, then {form.Name} at {form.Certification.Level}";
     }
 
