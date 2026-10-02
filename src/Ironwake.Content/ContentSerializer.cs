@@ -413,6 +413,17 @@ public static class ContentSerializer
                 writer.WriteEndArray();
                 writer.WriteNumber("cost", footing.Cost);
                 break;
+            case GroundStatsEffect ground:
+                writer.WriteString("kind", "ground");
+                writer.WriteStartArray("terrain");
+                foreach (var id in ground.Terrain)
+                {
+                    writer.WriteStringValue(id);
+                }
+
+                writer.WriteEndArray();
+                WriteStats(writer, "stats", ground.Delta);
+                break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
         }

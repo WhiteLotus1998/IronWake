@@ -13,7 +13,8 @@ namespace Ironwake.Core;
 /// deltas are part of <see cref="Stats"/> and their combat modifiers are read by the
 /// hit and crit chances through <see cref="AbilityRules"/>. <c>beside</c> is what the unit's
 /// <see cref="BesideStatsEffect"/> adds where it fights with an ally beside it (issue 705), read on the
-/// board by <see cref="Formation.Beside"/>; it is part of <see cref="Stats"/>.
+/// board by <see cref="Formation.Beside"/>; it is part of <see cref="Stats"/>, as is what a
+/// <see cref="GroundStatsEffect"/> adds on <see cref="Terrain"/> (<see cref="AbilityRules.Ground"/>).
 /// </summary>
 public sealed record Combatant
 {
@@ -31,7 +32,7 @@ public sealed record Combatant
         }
 
         Abilities = abilities;
-        Stats = unit.EffectiveStats(unitClass) + AbilityRules.Passive(abilities) + beside;
+        Stats = unit.EffectiveStats(unitClass) + AbilityRules.Passive(abilities) + beside + AbilityRules.Ground(abilities, terrain.Id);
         var maxHp = Stats.Hp;
         if (hp < 1 || hp > maxHp)
         {

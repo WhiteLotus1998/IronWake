@@ -242,6 +242,7 @@
       "captain": true,
       "movement": "infantry",
       "mov": 5,
+      "abilities": ["hunters_ground"],
       "weapons": ["sword", "bow"],
       "mastery": "canto",
       "masteryPoints": 12,

@@ -64,6 +64,8 @@
       "effect": { "kind": "aura", "radius": 2, "avoid": 10 } },
     { "id": "trail_sense", "name": "Trail Sense", "text": "Forest and hill cost 1 to enter.",
       "effect": { "kind": "footing", "terrain": ["forest", "hill"], "cost": 1 } },
+    { "id": "hunters_ground", "name": "Hunter's Ground", "text": "+2 Def and +2 Spd on forest or hill.",
+      "effect": { "kind": "ground", "terrain": ["forest", "hill"], "stats": { "def": 2, "spd": 2 } } },
     { "id": "light_step", "name": "Light Step", "text": "+2 Spd and +2 Lck.",
       "effect": { "kind": "stats", "stats": { "spd": 2, "lck": 2 } } },
     { "id": "feint", "name": "Feint", "text": "+25 Acc, -2 Power. For the strike you cannot afford to miss.",
