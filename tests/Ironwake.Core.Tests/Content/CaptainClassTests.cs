@@ -36,16 +36,6 @@ public class CaptainClassTests
     }
 
     [Fact]
-    public void TheVanguardsFirstTierIsDurabilityOnlyAndTheChampionRisesOnIt()
-    {
-        var vanguard = Content.Class("vanguard").Modifiers;
-        var champion = Content.Class("champion").Modifiers;
-
-        Assert.Equal((4, 2, 1, 0, 0), (vanguard.Hp, vanguard.Def, vanguard.Res, vanguard.Str, vanguard.Spd));
-        Assert.Equal((6, 3, 1, 2), (champion.Hp, champion.Def, champion.Res, champion.Str));
-    }
-
-    [Fact]
     public void NoAdvancedFormReadsUnderItsBaseOnAnyStatModifier()
     {
         foreach (var form in Content.Classes.Values.Where(c => c.Advances is not null))

@@ -88,7 +88,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Archives #17 t
 - **The captain's ladder at tier 1 (round 229; 0165; provisional):** the lance moved from the Vanguard to the Champion (lance, then axe); the Ranger unchanged. A class failing where its captain absorbs under half the cadet's damage gets a hand play, which decides. Hunter's Ground killed (the Sim never swung a kit weapon). Numbers before verbs.
 - **The Sim's player picks a weapon per attack (round 230; #756, 0171):** read by both (round 232). At 200 seeds (#757, 0173) Brackwater's file holds at 65, Pell's Gust the whole move; the raid's +8 is real. 0164's exemption is invoked by no class.
 - **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the campaign's maps the ladder reads (Tollgate, Mill, Saltmarsh, Harrow, Brackwater) class means within 10 at 200 seeds; 5 at 400 before tuned. "Within 10 on every map" is retired: a board-dependent pick is choice. On 0171: 45/76/77/63, the Vanguard 14 under.
-- **The Vanguard's lever (#758; provisional):** durability only, hp +4 def +2 res +1, no Str or Spd; `--ladder` prints captain EXP share. Kept if within 10, absorbing most and sharing least; the verb door if it hoards or stays over 10 under.
+- **The Vanguard's lever (#758, 0174):** durability (hp +4 def +2 res +1) at 200 seeds: mean 80 against 76 and 75, absorbs most, share highest (52 against 49, 48): killed as a hoarder; the verb door next.
 - **Ignition is a Sim blind spot** (round 232): the score never picks Cinder; no map ships `wildfire: on` until it prices burn for both sides. Cinder unchanged.
 
 ## Open, the Table's

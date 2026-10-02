@@ -1,0 +1,112 @@
+ladder: 8 maps, 200 seeds, the captain unpromoted and in marshal, ranger, vanguard, champion, commander, pathfinder
+ladder: brackwater_cut
+  tier 1, party and enemies +2:
+    cadet: gate 1 29.0, gate 4 ok, captain [atk 5 dmg 4525 heal 0 abs 746], captain share 59%, weapons [sword 5/555]
+    marshal: gate 1 81.0, gate 4 ok, captain [atk 368 dmg 3124 heal 0 abs 328], captain share 51%, weapons [sword 0/25 reason 368/259]
+    ranger: gate 1 68.0, gate 4 FAILED, captain [atk 419 dmg 3623 heal 0 abs 402], captain share 48%, weapons [sword 4/9 bow 415/19]
+    vanguard: gate 1 95.0, gate 4 ok, captain [atk 24 dmg 3560 heal 0 abs 487], captain share 57%, weapons [sword 24/435]
+    spread 27.0 (the bar is the campaign's); gate 4 lost under ranger: FAILED
+  tier 2, party and enemies +9:
+    cadet: gate 1 76.0, gate 4 ok, captain [atk 32 dmg 4665 heal 0 abs 527], captain share 45%, weapons [sword 32/459]
+    champion: gate 1 98.5, gate 4 FAILED, captain [atk 201 dmg 8240 heal 0 abs 342], captain share 50%, weapons [sword 162/235 lance 17/43 axe 22/42]
+    commander: gate 1 96.5, gate 4 ok, captain [atk 108 dmg 1916 heal 0 abs 137], captain share 31%, weapons [sword 2/72 lance 3/3 reason 103/54]
+    pathfinder: gate 1 94.5, gate 4 ok, captain [atk 120 dmg 3440 heal 0 abs 330], captain share 27%, weapons [sword 0/142 bow 120/3]
+    spread 4.0 (the bar is the campaign's); gate 4 lost under champion: FAILED
+ladder: harrow_weir
+  tier 1, party and enemies +2:
+    cadet: gate 1 70.0, gate 4 ok, captain [atk 459 dmg 7460 heal 0 abs 599], captain share 21%, weapons [sword 459/169]
+    marshal: gate 1 96.0, gate 4 ok, captain [atk 734 dmg 10787 heal 0 abs 116], captain share 31%, weapons [sword 281/39 reason 453/45]
+    ranger: gate 1 94.0, gate 4 ok, captain [atk 903 dmg 14720 heal 0 abs 548], captain share 31%, weapons [sword 62/3 bow 841/15]
+    vanguard: gate 1 86.5, gate 4 ok, captain [atk 787 dmg 10811 heal 0 abs 438], captain share 33%, weapons [sword 787/160]
+    spread 9.5 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 71.5, gate 4 ok, captain [atk 251 dmg 7045 heal 0 abs 613], captain share 19%, weapons [sword 251/309]
+    champion: gate 1 94.5, gate 4 ok, captain [atk 749 dmg 18123 heal 0 abs 308], captain share 42%, weapons [sword 271/75 lance 274/20 axe 204/99]
+    commander: gate 1 89.5, gate 4 FAILED, captain [atk 941 dmg 12917 heal 0 abs 258], captain share 37%, weapons [sword 91/27 lance 223/62 reason 627/61]
+    pathfinder: gate 1 95.5, gate 4 FAILED, captain [atk 969 dmg 17783 heal 0 abs 247], captain share 37%, weapons [sword 75/7 bow 894/19]
+    spread 6.0 (the bar is the campaign's); gate 4 lost under commander, pathfinder: FAILED
+ladder: old_mill_road
+  tier 1, party and enemies +2:
+    cadet: gate 1 31.0, gate 4 ok, captain [atk 527 dmg 11445 heal 0 abs 1114], captain share 72%, weapons [sword 527/688]
+    marshal: gate 1 90.5, gate 4 ok, captain [atk 616 dmg 16229 heal 0 abs 449], captain share 74%, weapons [sword 421/285 reason 195/120]
+    ranger: gate 1 93.5, gate 4 ok, captain [atk 599 dmg 17692 heal 0 abs 508], captain share 69%, weapons [sword 414/422 bow 185/6]
+    vanguard: gate 1 91.0, gate 4 ok, captain [atk 615 dmg 11235 heal 0 abs 698], captain share 69%, weapons [sword 615/580]
+    spread 3.0 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 90.0, gate 4 ok, captain [atk 520 dmg 17229 heal 0 abs 439], captain share 70%, weapons [sword 520/384]
+    champion: gate 1 100.0, gate 4 FAILED, captain [atk 647 dmg 21144 heal 0 abs 322], captain share 68%, weapons [sword 611/253 lance 23/21 axe 13/11]
+    commander: gate 1 94.0, gate 4 ok, captain [atk 667 dmg 19959 heal 0 abs 614], captain share 66%, weapons [sword 314/332 reason 353/238]
+    pathfinder: gate 1 86.5, gate 4 FAILED, captain [atk 742 dmg 18557 heal 0 abs 637], captain share 69%, weapons [sword 322/72 bow 420/22]
+    spread 13.5 (the bar is the campaign's); gate 4 lost under champion, pathfinder: FAILED
+ladder: sallow_grange
+  tier 1, party and enemies +2:
+    cadet: gate 1 38.5, gate 4 FAILED, captain [atk 604 dmg 5825 heal 0 abs 536], captain share 32%, weapons [sword 604/253]
+    marshal: gate 1 38.0, gate 4 FAILED, captain [atk 1067 dmg 10447 heal 0 abs 309], captain share 43%, weapons [sword 415/16 reason 652/98]
+    ranger: gate 1 36.0, gate 4 ok, captain [atk 1366 dmg 11979 heal 0 abs 219], captain share 42%, weapons [sword 240/3 bow 1126/34]
+    vanguard: gate 1 52.0, gate 4 ok, captain [atk 828 dmg 8811 heal 0 abs 370], captain share 39%, weapons [sword 828/137]
+    spread 16.0 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 59.0, gate 4 FAILED, captain [atk 643 dmg 6485 heal 0 abs 353], captain share 20%, weapons [sword 643/207]
+    champion: gate 1 95.0, gate 4 ok, captain [atk 547 dmg 10712 heal 0 abs 15], captain share 27%, weapons [sword 334/0 lance 1/0 axe 212/4]
+    commander: gate 1 91.0, gate 4 ok, captain [atk 1091 dmg 12914 heal 0 abs 80], captain share 44%, weapons [sword 396/0 lance 69/6 reason 626/24]
+    pathfinder: gate 1 85.5, gate 4 FAILED, captain [atk 1005 dmg 14757 heal 0 abs 93], captain share 42%, weapons [sword 85/0 bow 920/12]
+    spread 9.5 (the bar is the campaign's): ok
+ladder: saltmarsh_ford
+  tier 1, party and enemies +2:
+    cadet: gate 1 24.5, gate 4 FAILED, captain [atk 151 dmg 14826 heal 0 abs 1793], captain share 71%, weapons [sword 151/1248]
+    marshal: gate 1 62.0, gate 4 ok, captain [atk 960 dmg 16278 heal 0 abs 1021], captain share 67%, weapons [sword 186/433 reason 774/127]
+    ranger: gate 1 67.5, gate 4 ok, captain [atk 1631 dmg 19303 heal 0 abs 382], captain share 68%, weapons [sword 113/1 bow 1518/17]
+    vanguard: gate 1 48.5, gate 4 FAILED, captain [atk 534 dmg 19072 heal 0 abs 1530], captain share 79%, weapons [sword 534/1282]
+    spread 19.0 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 34.0, gate 4 FAILED, captain [atk 385 dmg 18236 heal 0 abs 1597], captain share 65%, weapons [sword 385/1113]
+    champion: gate 1 86.0, gate 4 FAILED, captain [atk 757 dmg 25093 heal 0 abs 1020], captain share 77%, weapons [sword 418/364 lance 26/65 axe 313/393]
+    commander: gate 1 60.0, gate 4 ok, captain [atk 1047 dmg 15983 heal 0 abs 1048], captain share 62%, weapons [sword 281/406 lance 3/7 reason 763/126]
+    pathfinder: gate 1 88.0, gate 4 FAILED, captain [atk 1365 dmg 25107 heal 0 abs 794], captain share 73%, weapons [sword 102/6 bow 1263/201]
+    spread 28.0 (the bar is the campaign's): ok
+ladder: starting_alone
+  tier 1, party and enemies +2:
+    cadet: gate 1 0.5, gate 4 ok, captain [atk 4 dmg 6903 heal 0 abs 1184], captain share 100%, weapons [sword 4/387]
+    marshal: gate 1 1.5, gate 4 ok, captain [atk 21 dmg 5698 heal 0 abs 1502], captain share 100%, weapons [sword 17/232 reason 4/12]
+    ranger: gate 1 11.5, gate 4 ok, captain [atk 166 dmg 10495 heal 0 abs 1318], captain share 100%, weapons [sword 148/378 bow 18/0]
+    vanguard: gate 1 42.5, gate 4 ok, captain [atk 515 dmg 13167 heal 0 abs 2648], captain share 100%, weapons [sword 515/388]
+    spread 41.0 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 2.5, gate 4 ok, captain [atk 14 dmg 6246 heal 0 abs 1120], captain share 100%, weapons [sword 14/229]
+    champion: gate 1 20.0, gate 4 ok, captain [atk 278 dmg 14360 heal 0 abs 2198], captain share 100%, weapons [sword 278/229]
+    commander: gate 1 3.0, gate 4 ok, captain [atk 542 dmg 11315 heal 0 abs 1447], captain share 100%, weapons [sword 205/0 reason 337/469]
+    pathfinder: gate 1 6.0, gate 4 ok, captain [atk 125 dmg 9720 heal 0 abs 1447], captain share 100%, weapons [sword 110/223 bow 15/0]
+    spread 17.0 (the bar is the campaign's): ok
+ladder: the_mill
+  tier 1, party and enemies +2:
+    cadet: gate 1 46.5, gate 4 ok, captain [atk 712 dmg 10724 heal 0 abs 587], captain share 51%, weapons [sword 712/260]
+    marshal: gate 1 63.5, gate 4 ok, captain [atk 552 dmg 11301 heal 0 abs 182], captain share 58%, weapons [sword 412/76 reason 140/57]
+    ranger: gate 1 73.0, gate 4 ok, captain [atk 555 dmg 11230 heal 0 abs 339], captain share 57%, weapons [sword 380/76 bow 175/1]
+    vanguard: gate 1 86.0, gate 4 ok, captain [atk 1065 dmg 13307 heal 0 abs 707], captain share 54%, weapons [sword 1065/234]
+    spread 22.5 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 96.0, gate 4 ok, captain [atk 532 dmg 12330 heal 0 abs 362], captain share 50%, weapons [sword 532/121]
+    champion: gate 1 97.5, gate 4 ok, captain [atk 547 dmg 14562 heal 0 abs 345], captain share 52%, weapons [sword 504/96 axe 43/16]
+    commander: gate 1 97.5, gate 4 ok, captain [atk 595 dmg 16051 heal 0 abs 515], captain share 67%, weapons [sword 448/147 lance 1/1 reason 146/65]
+    pathfinder: gate 1 99.5, gate 4 ok, captain [atk 485 dmg 19041 heal 0 abs 487], captain share 69%, weapons [sword 424/208 bow 61/17]
+    spread 2.0 (the bar is the campaign's): ok
+ladder: the_tollgate
+  tier 1, party and enemies +2:
+    cadet: gate 1 62.0, gate 4 ok, captain [atk 459 dmg 4359 heal 0 abs 539], captain share 28%, weapons [sword 459/89]
+    marshal: gate 1 76.0, gate 4 ok, captain [atk 911 dmg 8445 heal 0 abs 325], captain share 38%, weapons [sword 313/27 reason 598/219]
+    ranger: gate 1 74.0, gate 4 ok, captain [atk 1111 dmg 11750 heal 0 abs 230], captain share 38%, weapons [sword 537/22 bow 574/42]
+    vanguard: gate 1 86.0, gate 4 ok, captain [atk 636 dmg 5630 heal 0 abs 490], captain share 39%, weapons [sword 636/58]
+    spread 12.0 (the bar is the campaign's): ok
+  tier 2, party and enemies +9:
+    cadet: gate 1 96.5, gate 4 ok, captain [atk 457 dmg 5276 heal 0 abs 293], captain share 25%, weapons [sword 457/82]
+    champion: gate 1 98.5, gate 4 ok, captain [atk 529 dmg 6902 heal 0 abs 283], captain share 32%, weapons [sword 423/11 lance 6/1 axe 100/13]
+    commander: gate 1 100.0, gate 4 ok, captain [atk 706 dmg 11173 heal 0 abs 276], captain share 32%, weapons [sword 391/17 lance 9/0 reason 306/250]
+    pathfinder: gate 1 98.0, gate 4 FAILED, captain [atk 857 dmg 18743 heal 0 abs 406], captain share 54%, weapons [sword 358/20 bow 499/120]
+    spread 2.0 (the bar is the campaign's); gate 4 lost under pathfinder: FAILED
+  campaign tier 1 over brackwater_cut, harrow_weir, saltmarsh_ford, the_mill, the_tollgate: marshal 75.7, ranger 75.3, vanguard 80.4; spread 5.1, bar 10: ok
+  campaign tier 2 over brackwater_cut, harrow_weir, saltmarsh_ford, the_mill, the_tollgate: champion 95.0, commander 88.7, pathfinder 95.1; spread 6.4, bar 10: ok
+ladder: per-map floor FAILED, campaign spread ok: FAILED
+
+real	31m54.676s
+user	31m14.465s
+sys	0m8.832s
