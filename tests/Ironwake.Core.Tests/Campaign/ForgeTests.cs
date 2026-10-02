@@ -115,7 +115,7 @@ public class ForgeTests
         var fourth = third.Record.Refine("captain", 0, "mt", Content);
 
         Assert.True(third.Accepted);
-        Assert.Contains("for 1 rare material", third.Text);
+        Assert.Contains("for 1 frozen iron", third.Text);
         Assert.Equal(2, third.Record.RareMaterial);
         Assert.Equal("Test Vow +3 is Refined 3 of 3", fourth.Text);
     }
@@ -136,6 +136,32 @@ public class ForgeTests
         Assert.Equal("Kinsbane is never Refined; it grows on what it is fed", record.Refine("captain", 0, "mt", Content).Text);
         Assert.Equal("Salve is a healing spell; the forge has nothing to raise", record.Refine("captain", 1, "hit", Content).Text);
         Assert.Equal("Rusty Thing is no shop's weapon; the smith will not work it", Forge.MaterialFor(Content.Weapon("iron_sword") with { Name = "Rusty Thing", Price = null }, Content).Refusal);
+    }
+
+    /// <summary>Issue 702: obsidian is glass, never Refined and never repaired, and the smith says why in one line.</summary>
+    [Fact]
+    public void AGlassWeaponIsNeverRefinedOrRepairedAndTheSmithSaysWhy()
+    {
+        var record = AtTheForge(pack: new ItemStack("obsidian_sword", 4));
+        var line = $"the smith: \"{Weapon.GlassRefusal}\"";
+
+        Assert.Equal("the smith: \"You don't mend glass. You buy another.\"", line);
+        var refine = record.Refine("captain", 0, "mt", Content);
+        Assert.False(refine.Accepted);
+        Assert.Equal(line, refine.Text);
+        var repair = record.Repair("captain", 0, Content);
+        Assert.False(repair.Accepted);
+        Assert.Equal(line, repair.Text);
+        Assert.Null(CampaignRules.RepairPricePerUse(Content.Weapon("obsidian_sword")));
+        Assert.True(record.Repair("captain", 0, Content with { Weapons = Content.Weapons.SetItem("obsidian_sword", Content.Weapon("obsidian_sword") with { Glass = false }) }).Accepted);
+    }
+
+    /// <summary>Issue 702: the rare material reads frozen iron on screen; the id stays.</summary>
+    [Fact]
+    public void TheRareMaterialIsNamedFrozenIron()
+    {
+        Assert.Equal("frozen iron", Forge.Label(Material.Rare));
+        Assert.Equal("common material", Forge.Label(Material.Common));
     }
 
     [Fact]
@@ -208,8 +234,8 @@ public class ForgeTests
     }
 
     [Theory]
-    [InlineData(2, "pays 2 rare material and the signatures the campaign issues need 3 to Refine fully; 1 short")]
-    [InlineData(4, "pays 4 rare material and the signatures the campaign issues need 3; 1 over, which nothing can spend")]
+    [InlineData(2, "pays 2 frozen iron and the signatures the campaign issues need 3 to Refine fully; 1 short")]
+    [InlineData(4, "pays 4 frozen iron and the signatures the campaign issues need 3; 1 over, which nothing can spend")]
     public void TheValidatorFiresOnOneShortAndOneOver(int rare, string problem)
     {
         var quests = Content.Campaign.Quests.Select(q => q.Id == "maud_2" ? q with { Rare = rare } : q);

@@ -44,7 +44,30 @@ public class SignatureCeilingTests
 
         var shop = SignatureCeiling.Shop(content, item).Select(w => w.Id).ToList();
 
-        Assert.Equal(new[] { "iron_sword", "ridgeblade", "steel_sword" }, shop);
+        Assert.Equal(new[] { "iron_sword", "steel_sword" }, shop);
+    }
+
+    [Fact]
+    public void ARankEItemIsHeldToTheShopUpToRankDAndNoHigher()
+    {
+        var item = Bound("test_vow", Shipped.Weapon("iron_sword"));
+
+        var shop = SignatureCeiling.Shop(With(item), item).Select(w => (w.Id, w.Rank)).ToList();
+
+        Assert.Equal(WeaponRank.D, SignatureCeiling.FloorRank);
+        Assert.Contains(("steel_sword", WeaponRank.D), shop);
+        Assert.DoesNotContain(shop, w => w.Rank > WeaponRank.D);
+    }
+
+    [Fact]
+    public void AnItemAboveTheFloorIsHeldToItsOwnRankAlone()
+    {
+        var item = Bound("test_vow", Shipped.Weapon("ridgeblade"));
+        var content = With(item) with { Campaign = Shipped.Campaign with { Maps = ValueList<CampaignMap>.Empty } };
+
+        var shop = SignatureCeiling.Shop(content, item).Select(w => w.Id).ToList();
+
+        Assert.Equal(new[] { "ridgeblade" }, shop);
     }
 
     [Fact]

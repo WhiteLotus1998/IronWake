@@ -618,6 +618,11 @@ public static class ContentSerializer
             writer.WriteBoolean("hungers", true);
         }
 
+        if (weapon.Glass)
+        {
+            writer.WriteBoolean("glass", true);
+        }
+
         if (weapon.BoundTo is { } owner)
         {
             writer.WriteString("boundTo", owner);

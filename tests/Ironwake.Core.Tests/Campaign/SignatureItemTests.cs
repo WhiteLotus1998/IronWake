@@ -64,7 +64,7 @@ public class SignatureItemTests
         var after = record.AfterQuest(Decided(record), "wren_2", Content);
 
         Assert.True(after.Accepted);
-        Assert.Equal("wren wins wren_2; wren receives Test Vow; the stores take 3 rare material; nobody fell", after.Text);
+        Assert.Equal("wren wins wren_2; wren receives Test Vow; the stores take 3 frozen iron; nobody fell", after.Text);
         Assert.Equal(new ItemStack("test_vow", Vow.Durability), after.Record.Find("wren")!.Inventory.Items[^1]);
         Assert.DoesNotContain(after.Record.Find("maud")!.Inventory.Items, s => s.ItemId == "test_vow");
     }

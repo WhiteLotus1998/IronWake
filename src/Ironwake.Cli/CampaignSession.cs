@@ -757,7 +757,7 @@ public sealed class CampaignSession
 
             if (quest.Rare > 0)
             {
-                paid.Add($"{quest.Rare} rare material");
+                paid.Add($"{quest.Rare} {Forge.Label(Material.Rare)}");
             }
 
             if (quest.Promotes is { } classId)
@@ -1367,7 +1367,7 @@ public sealed class CampaignSession
         if (keep.Rooms.Any(r => r.Forge))
         {
             var forge = content.Campaign.Forge;
-            lines.Add($"  Stores: common {record.CommonMaterial}, rare {record.RareMaterial}; a step costs one and {forge.Price}, shop weapons to +{forge.CommonSteps} on common, the main line's signatures to +{forge.RareSteps} on rare");
+            lines.Add($"  Stores: common {record.CommonMaterial}, frozen iron {record.RareMaterial}; a step costs one and {forge.Price}, shop weapons to +{forge.CommonSteps} on common, the main line's signatures to +{forge.RareSteps} on frozen iron");
         }
 
         lines.AddRange(HireLines(record, content));
