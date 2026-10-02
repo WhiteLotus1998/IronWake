@@ -64,6 +64,18 @@ jobs:
             if ! cmp "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log"; then echo "::error::$name: the client log differs from play --log"; diff "$RUNNER_TEMP/parity/$name.console.log" "$RUNNER_TEMP/parity/$name.client.log" | head -n 20; exit 1; fi
             echo "$name: identical"
           done
+      - name: Full campaign event log matches campaign --log byte for byte
+        run: |
+          script=tests/parity/campaign/full-campaign-631.script
+          start="--seed 631 --difficulty recruit --permadeath off"
+          echo "full-campaign-631: client (godot --campaign-parity)"
+          status=0; timeout 600 "$GODOT" --headless --path src/Ironwake.Godot -- $start --campaign-parity "$PWD/$script" "$RUNNER_TEMP/parity/full-campaign-631.client.log" || status=$?
+          if [ "$status" -ne 0 ]; then echo "::error::full-campaign-631: godot --campaign-parity exited $status (124 is the 600 s timeout)"; exit 1; fi
+          echo "full-campaign-631: console (campaign --log)"
+          status=0; dotnet run --no-build --configuration Release --project src/Ironwake.Cli -- campaign $start --script "$script" --strict --log "$RUNNER_TEMP/parity/full-campaign-631.console.log" > "$RUNNER_TEMP/parity/full-campaign-631.play.out" 2>&1 || status=$?
+          if [ "$status" -ne 0 ]; then echo "::error::full-campaign-631: campaign exited $status; the tail of its output:"; tail -n 40 "$RUNNER_TEMP/parity/full-campaign-631.play.out"; exit 1; fi
+          if ! cmp "$RUNNER_TEMP/parity/full-campaign-631.console.log" "$RUNNER_TEMP/parity/full-campaign-631.client.log"; then echo "::error::full-campaign-631: the client log differs from campaign --log"; diff "$RUNNER_TEMP/parity/full-campaign-631.console.log" "$RUNNER_TEMP/parity/full-campaign-631.client.log" | head -n 20; exit 1; fi
+          echo "full-campaign-631: identical"
       - name: The comparison fires on a log one character away
         run: |
           log="$RUNNER_TEMP/parity/brackwater_cut-53.console.log"

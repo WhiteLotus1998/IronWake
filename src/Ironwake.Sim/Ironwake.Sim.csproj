@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Ironwake.Core\Ironwake.Core.csproj" />
     <ProjectReference Include="..\Ironwake.Content\Ironwake.Content.csproj" />
+    <ProjectReference Include="..\Ironwake.Client\Ironwake.Client.csproj" />
   </ItemGroup>
 
 </Project>

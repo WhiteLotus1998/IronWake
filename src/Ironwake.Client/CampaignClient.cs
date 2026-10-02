@@ -225,7 +225,8 @@ public sealed class CampaignClient
 
     /// <summary>
     /// Leaves a decided battle, as <c>leave</c> does: a trial's result is applied and the screen
-    /// returns; a won map pays its reward and the screen returns, or the campaign is won; a lost
+    /// returns; a won map pays its reward and the screen returns, or the campaign is won, its
+    /// ending lines queued as a card (issue 786); a lost
     /// one ends the campaign. False, with the console's refusal, while the battle is undecided.
     /// </summary>
     public bool Leave()
@@ -283,7 +284,8 @@ public sealed class CampaignClient
         if (Record.IsFinished(Content))
         {
             _log.Add(CampaignSession.CampaignWonLine(Record, Content));
-            _log.AddRange(CampaignSession.EndingLines(Record, Content));
+            // The hires' ending lines are screen text, as the console prints them: a card, never the log.
+            QueueCard(CampaignSession.EndingLines(Record, Content));
             Over = true;
             _saves?.RecordWin(Record.Difficulty);
         }
