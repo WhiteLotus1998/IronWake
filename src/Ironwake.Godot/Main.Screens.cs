@@ -43,6 +43,33 @@ public partial class Main
     /// </summary>
     private bool _paused;
 
+    /// <summary>
+    /// The showcase's title was reached from the campaign's (issue 786): its last choice and Esc
+    /// go back there rather than quit.
+    /// </summary>
+    private bool _campaignHome;
+
+    /// <summary>One battle (issue 786): the Tollgate opened under the showcase's title, the campaign's title behind it.</summary>
+    private void OpenOneBattle()
+    {
+        _mapArg = Screens.OneBattleMap;
+        StartBattle(_seed, callouts: true);
+        _screen = Screen.Title;
+    }
+
+    /// <summary>The showcase title's last choice: back to the campaign's title when it came from there, else quit.</summary>
+    private void LeaveTitle()
+    {
+        if (_campaignHome)
+        {
+            _screen = Screen.CampaignTitle;
+        }
+        else
+        {
+            GetTree().Quit(0);
+        }
+    }
+
     /// <summary>The turn-1 callouts, on for a battle opened from the title; null when off.</summary>
     private Callouts? _callouts;
 
@@ -100,7 +127,7 @@ public partial class Main
                 }
                 else
                 {
-                    GetTree().Quit(0);
+                    LeaveTitle();
                 }
 
                 break;
@@ -174,7 +201,7 @@ public partial class Main
 
         // Four choices since Options joined (issue 677): set closer so the mute key clears the footer.
         var y = 424f;
-        foreach (var (label, key) in Screens.TitleChoices)
+        foreach (var (label, key) in Screens.SingleBattleTitle(_campaignHome))
         {
             var first = label == Screens.TitleChoices[0].Label;
             var rect = new Rect2(centre - 150, y, 300, 44);
@@ -194,7 +221,7 @@ public partial class Main
                 "Play" => () => StartBattle(_seed, callouts: true),
                 "How to play" => () => _screen = Screen.HowTo,
                 "Options" => () => OpenOptions(Screen.Title),
-                _ => () => GetTree().Quit(0),
+                _ => LeaveTitle,
             };
             _hits.Add((rect, act));
             y += 50;

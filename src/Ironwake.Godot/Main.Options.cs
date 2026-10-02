@@ -287,6 +287,9 @@ public partial class Main
             case TitleChoice.Load:
                 _screen = Screen.Load;
                 break;
+            case TitleChoice.OneBattle:
+                OpenOneBattle();
+                break;
             case TitleChoice.Options:
                 OpenOptions(Screen.CampaignTitle);
                 break;
