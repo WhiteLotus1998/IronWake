@@ -1,0 +1,20 @@
+# Issue 786: every camp action the client reaches, from CampActionsTests.Stocked (a camp before
+# Sallow Grange with 5000, a wagon of two, common material 4, the captain at L3, Teodor at L4).
+build forge
+build bunk
+build barracks
+hire corin
+refine captain 1 mt
+refine captain 1 hit
+repair wren 1
+take wren 2
+drop wren 3
+certify captain vanguard
+build wall 10,3
+quest maud_1 wren
+end
+end
+end
+end
+leave
+march

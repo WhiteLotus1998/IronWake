@@ -6,10 +6,10 @@ namespace Ironwake.Client;
 
 /// <summary>
 /// The thin renderer's campaign presenter (issue 360): what <c>ironwake campaign</c> does between
-/// maps, beside <see cref="ClientSession"/>, with no rules in it. Buy, repair, certify, trial,
-/// build, bench and unbench are the record's own actions, refused with the core's text; march
-/// opens the next map as a <see cref="ClientSession"/> and leave takes the record back once the
-/// battle is decided. Every line the screen shows is the console's, from the public statics on
+/// maps, beside <see cref="ClientSession"/>, with no rules in it. Buy, repair, drop, take, refine,
+/// certify, trial, quest, hire, build, bench and unbench are the record's own actions, refused
+/// with the core's text; march opens the next map as a <see cref="ClientSession"/> and leave
+/// takes the record back once the battle is decided. Every line the screen shows is the console's, from the public statics on
 /// <see cref="CampaignSession"/>, and the event log is what <c>campaign --log</c> writes for the
 /// same commands, which the campaign parity test checks byte for byte.
 /// </summary>
@@ -43,8 +43,14 @@ public sealed class CampaignClient
     /// <summary>The battle or trial being played, or null on the between-map screen.</summary>
     public ClientSession? Battle { get; private set; }
 
+    /// <summary>The side map being played as the battle (issue 786), or null outside one.</summary>
+    private string? _quest;
+
     /// <summary>Whether the battle being played is a certification trial.</summary>
     public bool InTrial => _trial is not null;
+
+    /// <summary>Whether the battle being played is a side map (issue 786).</summary>
+    public bool InQuest => _quest is not null;
 
     /// <summary>Whether the campaign is over: every map won, or a battle lost and left.</summary>
     public bool Over { get; private set; }
@@ -98,6 +104,18 @@ public sealed class CampaignClient
     /// <summary>Hires <paramref name="hireId"/> at the barracks (issue 690).</summary>
     public bool Hire(string hireId) => Screen(() => Record.Hire(hireId, Content));
 
+    /// <summary>Discards the stack in <paramref name="slot"/>, counted from 0 (issue 786).</summary>
+    public bool Drop(string unitId, int slot) => Screen(() => Record.Drop(unitId, slot, Content));
+
+    /// <summary>Moves wagon entry <paramref name="index"/>, counted from 0, into the unit's pack (issue 786).</summary>
+    public bool Take(string unitId, int index) => Screen(() => Record.TakeFromWagon(unitId, index, Content));
+
+    /// <summary>Refines the weapon in <paramref name="slot"/>, counted from 0, by <c>mt</c> or <c>hit</c> at the forge (issue 786).</summary>
+    public bool Refine(string unitId, int slot, string stat) => Screen(() => Record.Refine(unitId, slot, stat, Content));
+
+    /// <summary>Buys the keep's room <paramref name="roomId"/> (issue 786).</summary>
+    public bool BuildRoom(string roomId) => Screen(() => Record.BuildRoom(roomId, Content));
+
     public bool Bench(string unitId) => NextMap is { } map && Screen(() => Record.Bench(unitId, map));
 
     public bool Unbench(string unitId) => Screen(() => Record.Unbench(unitId));
@@ -134,6 +152,31 @@ public sealed class CampaignClient
         _log.AddRange(CampaignSession.TrialLines(Record, Content, trial, unitId, classId));
         Battle = new ClientSession(Content, Record.BeginTrial(trial, unitId, Content, _scheme));
         _trial = unitId;
+        Status = null;
+        return true;
+    }
+
+    /// <summary>
+    /// Opens the side map <paramref name="questId"/> as the battle with <paramref name="allyIds"/>
+    /// (issue 786), its opening lines in the log as the console writes them. False, with the
+    /// refusal in <see cref="Status"/>, as the console refuses it.
+    /// </summary>
+    public bool Quest(string questId, IReadOnlyList<string> allyIds)
+    {
+        if (!OnScreen())
+        {
+            return false;
+        }
+
+        var (map, refusal) = CampaignSession.QuestFor(_contentDir, Content, Record, questId, allyIds);
+        if (map is null)
+        {
+            return Refuse(refusal!);
+        }
+
+        _log.AddRange(CampaignSession.QuestOpening(Record, Content, map, questId, allyIds));
+        Battle = new ClientSession(Content, Record.BeginQuest(map, questId, allyIds, Content, _scheme));
+        _quest = questId;
         Status = null;
         return true;
     }
@@ -176,6 +219,16 @@ public sealed class CampaignClient
         {
             _trial = null;
             var result = Record.AfterTrial(battle.State, trialUnit, Content);
+            Record = result.Record;
+            _log.Add(CampaignSession.Text(Record, Content, result.Text));
+            Autosave();
+            return true;
+        }
+
+        if (_quest is { } questId)
+        {
+            _quest = null;
+            var result = Record.AfterQuest(battle.State, questId, Content);
             Record = result.Record;
             _log.Add(CampaignSession.Text(Record, Content, result.Text));
             Autosave();

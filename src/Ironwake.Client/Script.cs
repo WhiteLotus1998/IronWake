@@ -83,7 +83,8 @@ public static class Script
     /// <summary>
     /// Plays a whole <c>campaign --script</c> through a fresh campaign presenter (issue 360) and
     /// returns its event log. On the between-map screen a line that changes the record is taken as
-    /// the screen's action (buy, repair, certify, trial, build, bench, unbench, march); a listing
+    /// the screen's action (buy, repair, drop, take, refine, certify, trial, quest, hire, build,
+    /// bench, unbench, march); a listing
     /// prints no event and is skipped. In a battle, <c>leave</c> leaves it and every other line is
     /// read as <see cref="Parse"/> reads a <c>play</c> line, each enemy phase stepped to its end.
     /// </summary>
@@ -111,8 +112,14 @@ public static class Script
             {
                 ["buy", var item, var unit] => campaign.Buy(item, unit),
                 ["repair", var unit, var slot] when int.TryParse(slot, out var at) => campaign.Repair(unit, at - 1),
+                ["drop", var unit, var slot] when int.TryParse(slot, out var at) => campaign.Drop(unit, at - 1),
+                ["take", var unit, var index] when int.TryParse(index, out var at) => campaign.Take(unit, at - 1),
+                ["refine", var unit, var slot, var stat] when int.TryParse(slot, out var at) => campaign.Refine(unit, at - 1, stat),
                 ["certify", var unit, var classId] => campaign.Certify(unit, classId),
                 ["trial", var unit, var classId] => campaign.Trial(unit, classId),
+                ["quest", var quest, _, ..] => campaign.Quest(quest, words[2..]),
+                ["hire", var hire] => campaign.Hire(hire),
+                ["build", var room] when campaign.Content.Campaign.Keep.Edit(room) is null => campaign.BuildRoom(room),
                 ["build", var edit, var at] when TryCoord(at, out var tile) => campaign.Build(edit, tile),
                 ["bench", var unit] => campaign.Bench(unit),
                 ["unbench", var unit] => campaign.Unbench(unit),
