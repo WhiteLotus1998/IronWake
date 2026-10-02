@@ -43,13 +43,14 @@ public static class Objective
     {
         var map = state.Map;
         var captain = Captain(state, content);
-        return map.Win switch
+        var rules = map.Win switch
         {
             WinCondition.Seize => new[] { $"The captain, {captain}, must stand on the {SeizeName(content)} at {Thrones(map)}. Only the captain seizes." },
             WinCondition.Escape => new[] { $"The captain, {captain}, must exit from an exit tile ({MapRenderer.ExitGlyph}).{(map.ExitAfterMove ? "" : " A unit that starts its turn on an exit may leave.")} Anyone still on the board is left behind." },
             WinCondition.DefeatBoss => new[] { $"The boss is drawn {MapRenderer.BossGlyph} on the board." },
             _ => Array.Empty<string>(),
         };
+        return map.Fronts.Count == 0 ? rules : rules.Append(Fronts.Rule).ToArray();
     }
 
     /// <summary>

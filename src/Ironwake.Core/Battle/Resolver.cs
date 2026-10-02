@@ -133,6 +133,7 @@ public static class Resolver
         }
 
         next = Break.After(state, next, content, events);
+        next = Fronts.After(state, next, content, events);
         next = WakeGroups(state, next, content, events);
         if (next.Map.KeepsakesEnabled && next.Outcome.IsOver)
         {

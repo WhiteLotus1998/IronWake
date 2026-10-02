@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "oathbound", "deploy" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "messenger", "orders", "exit_after_move", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -160,6 +160,11 @@ public static class MapFormat
             sb.Append("oathbound: ").Append(string.Join(", ", map.Oathbound)).Append('\n');
         }
 
+        if (map.Fronts.Count > 0)
+        {
+            sb.Append("fronts: ").Append(string.Join("; ", map.Fronts.Select(f => f.Name + " " + string.Join(' ', f.Tiles)))).Append('\n');
+        }
+
         if (map.DifficultyId is { } difficulty)
         {
             sb.Append("difficulty: ").Append(difficulty).Append('\n');
@@ -224,6 +229,7 @@ public static class MapFormat
             TurnTrigger t => "turn " + t.Turn + " " + t.Phase.ToString().ToLowerInvariant(),
             EnterTrigger e => "enter " + string.Join(' ', e.Tiles),
             MessengerTrigger => "messenger",
+            FallsTrigger f => "falls " + f.Front,
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Trigger, "unknown map event trigger"),
         };
         var action = mapEvent.Action switch
@@ -338,7 +344,8 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders };
             ValidateMessenger(map, header);
             Validate(map);
-            return map with { Deploy = ParseDeploy(header, map), Oathbound = ParseOathbound(header, map) };
+            map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseOathbound(header, map) };
+            return map with { Fronts = ParseFronts(header, map) };
         }
 
         /// <summary>
@@ -593,6 +600,84 @@ public static class MapFormat
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// The <c>fronts:</c> header (issue 692): fronts separated by <c>;</c>, each a one-word name
+        /// (lower case, digits and underscores) and its tiles, in file order. A name is listed once, a
+        /// tile belongs to one front, and no enemy may start on a front's tile, or it would fall before
+        /// the first command. Every <c>falls</c> trigger must name a front here, and a map with the
+        /// trigger needs the header.
+        /// </summary>
+        private ValueList<Front> ParseFronts(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("fronts", out var entry))
+            {
+                if (map.Events.FirstOrDefault(e => e.Trigger is FallsTrigger) is { } orphan)
+                {
+                    throw new MapException(_file, 0, $"event '{orphan.Name}' uses the falls trigger but the map has no fronts: header");
+                }
+
+                return ValueList<Front>.Empty;
+            }
+
+            var fronts = new List<Front>();
+            foreach (var part in entry.Value.Split(';', StringSplitOptions.TrimEntries))
+            {
+                var tokens = part.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (tokens.Length < 2)
+                {
+                    throw ErrorAt(entry.Line, $"fronts: each front needs a name and at least one tile: 'fronts: west 2,4 2,5; gate 7,0', got '{part}'");
+                }
+
+                var name = tokens[0];
+                if (!name.All(c => c is (>= 'a' and <= 'z') or (>= '0' and <= '9') or '_') || name[0] is < 'a' or > 'z')
+                {
+                    throw ErrorAt(entry.Line, $"fronts: a front's name is one word in lower case (letters, digits, underscores), got '{name}'");
+                }
+
+                if (fronts.Any(f => f.Name == name))
+                {
+                    throw ErrorAt(entry.Line, $"fronts: front '{name}' is listed twice");
+                }
+
+                var tiles = new List<Coord>();
+                foreach (var token in tokens[1..])
+                {
+                    var parts = token.Split(',');
+                    if (parts.Length != 2 || !int.TryParse(parts[0], out var x) || !int.TryParse(parts[1], out var y))
+                    {
+                        throw ErrorAt(entry.Line, $"fronts: front '{name}' tile must be x,y, got '{token}'");
+                    }
+
+                    var tile = new Coord(x, y);
+                    if (x < 0 || y < 0 || x >= map.Width || y >= map.Height)
+                    {
+                        throw ErrorAt(entry.Line, $"fronts: front '{name}' tile {tile} is outside the {map.Width}x{map.Height} grid");
+                    }
+
+                    if (tiles.Contains(tile) || fronts.Any(f => f.Tiles.Contains(tile)))
+                    {
+                        throw ErrorAt(entry.Line, $"fronts: tile {tile} is listed twice; a tile belongs to one front");
+                    }
+
+                    if (map.Placements.OfType<EnemyPlacement>().Any(e => e.At == tile))
+                    {
+                        throw ErrorAt(entry.Line, $"fronts: an enemy starts on {tile}, front '{name}''s tile, so it would fall before the first command");
+                    }
+
+                    tiles.Add(tile);
+                }
+
+                fronts.Add(new Front(name, ValueList<Coord>.From(tiles)));
+            }
+
+            if (map.Events.FirstOrDefault(e => e.Trigger is FallsTrigger falls && fronts.All(f => f.Name != falls.Front)) is { } stray)
+            {
+                throw ErrorAt(entry.Line, $"event '{stray.Name}' uses 'falls {((FallsTrigger)stray.Trigger).Front}' but fronts: names no such front");
+            }
+
+            return ValueList<Front>.From(fronts);
         }
 
         /// <summary>
@@ -1032,7 +1117,7 @@ public static class MapFormat
 
                 names[name] = LineNumber;
                 var (trigger, rest) = ParseTrigger(tokens, width, height, turnLimit);
-                var action = ParseAction(rest, width, height, terrain);
+                var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not FallsTrigger);
                 events.Add(new MapEvent(name, trigger, action));
             }
 
@@ -1093,12 +1178,19 @@ public static class MapFormat
                     return (new EnterTrigger(ValueList<Coord>.From(tiles)), tokens[(2 + count)..]);
                 case "messenger":
                     return (new MessengerTrigger(), tokens[2..]);
+                case "falls":
+                    if (tokens.Length < 3)
+                    {
+                        throw Error("falls trigger needs a front's name: 'falls west'");
+                    }
+
+                    return (new FallsTrigger(tokens[2]), tokens[3..]);
                 default:
-                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter or messenger");
+                    throw Error($"unknown event trigger '{tokens[1]}'; expected turn, enter, messenger or falls");
             }
         }
 
-        private MapEventAction ParseAction(string[] tokens, int width, int height, ValueList<string> terrain)
+        private MapEventAction ParseAction(string[] tokens, int width, int height, ValueList<string> terrain, bool edgeOnly)
         {
             if (tokens.Length == 0)
             {
@@ -1129,9 +1221,9 @@ public static class MapFormat
                         throw Error("spawn action places an enemy");
                     }
 
-                    if (enemy.At.X != 0 && enemy.At.Y != 0 && enemy.At.X != width - 1 && enemy.At.Y != height - 1)
+                    if (edgeOnly && enemy.At.X != 0 && enemy.At.Y != 0 && enemy.At.X != width - 1 && enemy.At.Y != height - 1)
                     {
-                        throw Error($"spawn tile {enemy.At} is not on the edge of the {width}x{height} grid; reinforcements arrive from an edge");
+                        throw Error($"spawn tile {enemy.At} is not on the edge of the {width}x{height} grid; reinforcements arrive from an edge, unless a front's fall lets them in (falls <front>)");
                     }
 
                     return new SpawnEnemy(enemy);

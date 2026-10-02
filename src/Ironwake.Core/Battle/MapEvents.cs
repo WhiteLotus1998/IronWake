@@ -23,6 +23,10 @@ public static class MapEvents
     public static BattleState AfterMessenger(BattleState state, GameContent content, List<GameEvent> events) =>
         Fire(state, content, events, t => t is MessengerTrigger);
 
+    /// <summary>The events whose trigger is the fall of <paramref name="front"/> (issue 692).</summary>
+    public static BattleState AfterFall(BattleState state, GameContent content, string front, List<GameEvent> events) =>
+        Fire(state, content, events, t => t is FallsTrigger falls && falls.Front == front);
+
     private static BattleState Fire(BattleState state, GameContent content, List<GameEvent> events, Func<MapEventTrigger, bool> triggered)
     {
         foreach (var mapEvent in state.Map.Events)
