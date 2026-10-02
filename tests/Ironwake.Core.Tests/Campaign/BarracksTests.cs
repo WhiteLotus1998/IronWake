@@ -228,6 +228,40 @@ public class BarracksTests
         Assert.Equal(Pronoun.She, read.Roster[^1].Pronoun);
     }
 
+    private static bool Flies(Unit unit) => Content.Class(unit.ClassId).Movement == MovementType.Flying;
+
+    [Fact]
+    public void AKeziahPickCampaignHiresAFlierFromTheWingAtTheRaidsCamp()
+    {
+        var bothSides = WithBarracks();
+        var keziahPick = bothSides with { Roster = ValueList<Unit>.From(bothSides.Roster.Where(u => u.Id != "rook")) };
+        Assert.Contains(keziahPick.Roster, u => u.Id == "keziah");
+        Assert.DoesNotContain(keziahPick.Roster, Flies);
+        Assert.Equal("edda is hired once the Barracks wing is built", keziahPick.HireRefusal("edda", Content));
+
+        var winged = keziahPick.BuildRoom("barracks_wing", Content);
+        Assert.True(winged.Accepted, winged.Text);
+        var hired = winged.Record.Hire("edda", Content);
+
+        Assert.True(hired.Accepted, hired.Text);
+        Assert.Equal("edda", Assert.Single(hired.Record.Roster, Flies).Id);
+        Assert.Equal(new[] { "tamsin", "wat", "edda" }, Menu.Room("barracks_wing")!.Hires);
+        Assert.Equal("ironwake_raid", Menu.Room("barracks_wing")!.After);
+    }
+
+    [Fact]
+    public void TheSkyriderHireIsReadFromRookAndGrowsBelowHer()
+    {
+        var rook = Content.Unit("rook");
+        var edda = Barracks.Recruit(Menu.Hire("edda")!, 1, Content);
+
+        Assert.Equal(("skyrider", Pronoun.She, rook.Stats), (edda.ClassId, edda.Pronoun, edda.Stats));
+        Assert.Equal(new[] { new ItemStack("iron_lance", Content.Weapons["iron_lance"].Durability) }, edda.Inventory.Items);
+        Assert.All(Stats.All, s => Assert.Equal(Math.Max(Barracks.GrowthFloor, rook.Growths.Get(s) - Barracks.GrowthPenalty), edda.Growths.Get(s)));
+        Assert.True(Stats.All.Sum(s => edda.Growths.Get(s)) < Stats.All.Sum(s => rook.Growths.Get(s)));
+        Assert.Null(edda.Region);
+    }
+
     private static string Keep(Func<JsonNode, JsonNode> edit, out ContentFiles files)
     {
         files = ContentSerializer.Write(Content);
@@ -248,7 +282,7 @@ public class BarracksTests
     public void TheShippedHiresRoundTripThroughTheSerializer()
     {
         Assert.Equal(Menu, ContentLoader.Parse(ContentSerializer.Write(Content)).Campaign.Keep);
-        Assert.Equal(6, Menu.Hires.Count);
+        Assert.Equal(7, Menu.Hires.Count);
         Assert.Equal(2, Menu.Hires.Select(h => h.Pronoun).Distinct().Count());
     }
 

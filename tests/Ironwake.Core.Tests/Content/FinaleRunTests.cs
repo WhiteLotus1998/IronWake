@@ -107,7 +107,7 @@ public class FinaleRunTests
     }
 
     [Fact]
-    public void TheFinaleSampleFieldsTwelveTenAndTwelveAndIsCanonical()
+    public void TheFinaleSampleFieldsEachCompanyWholeAndIsCanonical()
     {
         var path = Sample("ironwake_keep_finale.map");
         var text = File.ReadAllText(path).ReplaceLineEndings("\n");
@@ -116,6 +116,6 @@ public class FinaleRunTests
         Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("ironwake_keep_finale.map", text, Content), Content));
         Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Full, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
         Assert.Equal(12, FinaleRun.Measure(Content, map, FinaleRun.Company.Depleted, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
-        Assert.Equal(10, FinaleRun.Measure(Content, map, FinaleRun.Company.Floor, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
+        Assert.Equal(1 + FinaleRun.FloorStory + Content.Campaign.Keep.Hires.Count, FinaleRun.Measure(Content, map, FinaleRun.Company.Floor, FinaleRun.DefaultLevel, 1, RollScheme.TwoRollAverage).Size);
     }
 }
