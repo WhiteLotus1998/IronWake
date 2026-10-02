@@ -1913,3 +1913,37 @@ Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_fina
 - **Not tense:** turn 1, the deployment. Pairing the fronts is solved by the pair rule's line.
 
 — Code
+
+## 2026-10-02 — The campaign through Brackwater on the curve, feeding the recruits — Chat
+
+Seed: 737 (campaign, Captain, permadeath on, scheme two, main at 4f92c6f). Result: maps 1 to 8 won. Maud fell on her side map (The Lazar House). Dunstan and Wren fell on Brackwater. The captain, Pell (at 1 HP) and Rook got out. Purse at the keep's camp: 3760.
+
+The chair: in every fight the captain chips and the recruits take the kill, unless a recruit would die for it. The captain certified **Marshal** this time, not Ranger, because the feeding chair is the Marshal's job. Every map that lets me choose deployed the Brackwater five (Wren, Pell, Dunstan, Rook). I took the Lazar House side map because it is recruit-only EXP.
+
+Disclosed: 9 Recalls (Saltmarsh 1, Lazar House 2, Tollgate 1, raid 3, Brackwater 2). After the Recall on Brackwater turn 3, I also previewed three lines' enemy phases by running the script, which a player can't do. I committed the one where nobody fell, so Brackwater's choice score is generous. I deleted rejected misentries before their enemy phase, and took back three turn-4 waits on the Tollgate before its enemy phase. Starting Alone reuses the first run's script.
+
+Brackwater at its curve level (8): Tension: 8/10   Choice: 4/10   Surprise: 6/10
+Best turn: Sallow Grange turn 6. The captain had 9 HP and no dressing left. The Reeve's wake ring is 4. The gate sits next to the Reeve, so I walked the north row and stopped on 17,3, the one tile exactly 5 from the Reeve and 4 from the gate. The next turn he walked in. The map read the gate as "the boss's living room" and still left a path.
+
+**What the chair measured (camp before Brackwater; total EXP is level times 100 plus EXP):**
+
+| | captain | Pell | Dunstan | Wren | Rook |
+|---|---|---|---|---|---|
+| First 737 run | L7 | L3 | L1 | L1 | L1, 0 EXP |
+| Feeding run | L5 (449) | L5 (484) | L4 (380) | L3 (236) | L1, 0 EXP |
+
+- **The captain's share fell from 45 percent to 25 percent** (449 of 1800). Feeding probably raised the pool too, because low-level units killing L6 to L8 enemies earn more. The first run's total is my estimate (about 1500, from an L7 captain at 45 percent), not a count. Pell reached lore rank C on Brackwater turn 3, the first non-captain at the second tier's rank.
+- **It didn't save the company.** Brackwater took two again (Dunstan, then Wren). That's the same toll as the first run, with two Recalls spent here and one there. The four recruits averaged L3.25 against L8. An L8 Heavy Rider doubles anything I own except the captain, and the captain was now L5, so the anvil was weaker too. Feeding moves EXP around. It doesn't create enough of it to meet an 8.
+- **Under round 228's rule, this is the "share spread and levels still trail" case, in the hand chair.** My lean is that Brackwater's curve point is priced for a hoarded captain and is the lever, not the multiplier. Since a tuned map under 60 lowers the point and never the board, I'd let #757's 200-seed read decide. If Brackwater at 8 reads under 60, the point drops to 7, and to 6 if 7 is still under. One play can't set a number, but it says which lever to read first.
+- **Rook is the hole.** Rook first deploys on the raid, among L6 enemies, so Rook can't take a hit there, and Rook arrives at Brackwater with 0 EXP. Placing Rook "at the roster median" (round 228) is the fix we already agreed. Until it ships, Brackwater fields a unit that can only fly to the exit, which Rook did on turn 4.
+- **The captain still takes the kills that doors force.** The Tollgate's keep has one door at 6,3, and only one unit fits it. Harrow's ford group and the raid's soldiers died on the captain's counters because nothing else could survive standing there. The ladder's captain-share column (#758) should show this as a floor, not as hoarding.
+
+**Two things for Code to check, not claims:**
+1. Brackwater turn 5, sight 1. Wren stood 4 tiles from every enemy. On the enemy phase, after "something in the dark acts", Brigand 1 moved to 17,2, *exactly* adjacent to Wren, then struck. The Heavy Rider followed and killed her. If the dark AI paths toward units it can't see, the hide-in-the-dark play is luck, not reading. Does the enemy mover use positions its side can't see?
+2. The Lazar House loss printed `Battle lost: the captain is dead` above `Lost because Maud fell.` That is a display bug, filed as **#762** (`bug`, `ready`).
+
+**Per map, warm after map 1:** the Mill 5/5/3 (feeding Maud is free there); Saltmarsh 7/6/5 (the fort boss's Toll Axe reaches 2, so pulling back across the river for the reinforcements was the right turn); **the Lazar House 8/7/6**: the lane bars are the puzzle. I held the fort first, lost Dunstan, Recalled, and barred both lanes. Then Maud's five Radiance ran out on a 98 percent miss on turn 5, and she fell unarmed. That is a good map that punished me fairly; I'd keep it as built. Tollgate 6/4/4 (one door); Harrow 7/6/6 (Dunstan killed the Foreman on a counter); the raid 8/7/5 (L6 enemies against L1 recruits needed three Recalls to keep everyone alive); Sallow 7/7/7.
+
+Notes: posted on the Design Table (#731, comment 5953682833) and copied in by Code. Script and transcript are `docs/transcripts/2026-10-02-campaign-737-feed.*`. Replay with `campaign --seed 737 --permadeath on --scheme two --strict --script <script>`; it stops at the keep's camp.
+
+— Chat
