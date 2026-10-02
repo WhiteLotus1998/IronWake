@@ -140,9 +140,19 @@ public static class Program
         {
             var seeds = Gates.DefaultSeeds;
             string? only = null;
-            for (var i = 1; i + 1 < args.Length; i++)
+            (string Unit, string Item)? carry = null;
+            var items = false;
+            for (var i = 1; i < args.Length; i++)
             {
-                if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
+                if (args[i] == "--items")
+                {
+                    items = true;
+                }
+                else if (i + 1 >= args.Length)
+                {
+                    break;
+                }
+                else if (args[i] == "--seeds" && int.TryParse(args[i + 1], out var n) && n > 0)
                 {
                     seeds = n;
                 }
@@ -150,9 +160,13 @@ public static class Program
                 {
                     only = args[i + 1];
                 }
+                else if (args[i] == "--carry" && i + 2 < args.Length)
+                {
+                    carry = (args[i + 1], args[i + 2]);
+                }
             }
 
-            return CurveTable(seeds, only);
+            return CurveTable(seeds, only, carry, items);
         }
 
         if (args.Length > 0 && args[0] == "--ladder")
@@ -214,7 +228,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --levels [--seeds N] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -332,7 +346,15 @@ public static class Program
     /// raised by as many levels as the curve raised the enemy, a proxy for the company a campaign player
     /// brings. A map the campaign fights as its file reads prints once. <paramref name="only"/> names one map. A measurement only.
     /// </summary>
-    public static int CurveTable(int seeds, string? only)
+    public static int CurveTable(int seeds, string? only) => CurveTable(seeds, only, null, false);
+
+    /// <summary>
+    /// <see cref="CurveTable(int, string?)"/> with the cast member <paramref name="carry"/> names
+    /// carrying that one item alone (issue 757: Pell with Cinder, the weapon she held in front
+    /// before the Sim chose per attack), and, given <paramref name="items"/>, each read followed by
+    /// the attacks and counters every player unit struck with, by item, summed over the seeds.
+    /// </summary>
+    public static int CurveTable(int seeds, string? only, (string Unit, string Item)? carry, bool items)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -342,6 +364,18 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
+        if (carry is { } held)
+        {
+            if (Carry(content, held.Unit, held.Item) is not { } carried)
+            {
+                Console.WriteLine($"curve: --carry needs a cast member and a weapon; '{held.Unit}' or '{held.Item}' is not one");
+                return 2;
+            }
+
+            content = carried;
+            Console.WriteLine($"curve: {held.Unit} carries {held.Item} alone");
+        }
+
         var entries = content.Campaign.Maps.Where(m => only is null || m.MapId == only).ToList();
         if (entries.Count == 0)
         {
@@ -357,25 +391,65 @@ public static class Program
             var fought = entry.Prepare(map);
             var swaps = entry.Swaps.Count == 0 ? "no swaps" : string.Join(", ", entry.Swaps.Select(s => $"{s.TemplateId} at {s.At.X},{s.At.Y}"));
             Console.WriteLine($"map {number} {entry.MapId}: enemy level {map.EnemyLevel} in the file, {fought.EnemyLevel} in the campaign, {swaps}");
-            var (file, _) = Gates.Gate1(content, map, entry.MapId, seeds);
+            var (file, fileGames) = Gates.Gate1(content, map, entry.MapId, seeds);
             Console.WriteLine("  file:     " + file.Line);
+            PrintItems(items, fileGames);
             if (fought != map)
             {
-                var (campaign, _) = Gates.Gate1(content, fought, entry.MapId, seeds);
+                var (campaign, campaignGames) = Gates.Gate1(content, fought, entry.MapId, seeds);
                 Console.WriteLine("  campaign: " + campaign.Line);
+                PrintItems(items, campaignGames);
                 var raise = fought.EnemyLevel - map.EnemyLevel;
                 if (raise > 0)
                 {
                     // A proxy for the company a campaign player brings: the file's party raised by as many levels as the curve raised the enemy.
                     var raised = ValueList<Unit>.From(content.Cast.Select(u => u.AtLevel(Math.Min(u.Level + raise, Unit.MaxLevel), content.Class(u.ClassId))));
                     var party = content with { Cast = raised, Units = raised.Aggregate(content.Units, (units, u) => units.ContainsKey(u.Id) ? units.SetItem(u.Id, u) : units) };
-                    var (lifted, _) = Gates.Gate1(party, fought, entry.MapId, seeds);
+                    var (lifted, liftedGames) = Gates.Gate1(party, fought, entry.MapId, seeds);
                     Console.WriteLine($"  party +{raise}: " + lifted.Line);
+                    PrintItems(items, liftedGames);
                 }
             }
         }
 
         return 0;
+    }
+
+    /// <summary>
+    /// The content with cast member <paramref name="unitId"/> carrying one full stack of weapon
+    /// <paramref name="itemId"/> and nothing else (issue 757; the wildfire trace's adjustment, issue 746);
+    /// null when either id names nothing.
+    /// </summary>
+    public static GameContent? Carry(GameContent content, string unitId, string itemId)
+    {
+        var slot = content.Cast.ToList().FindIndex(u => u.Id == unitId);
+        if (slot < 0 || !content.Weapons.TryGetValue(itemId, out var weapon))
+        {
+            return null;
+        }
+
+        var unit = content.Cast[slot] with { Inventory = Inventory.Empty.Add(new ItemStack(itemId, weapon.Durability)) };
+        return content with
+        {
+            Cast = content.Cast.SetItem(slot, unit),
+            Units = content.Units.ContainsKey(unitId) ? content.Units.SetItem(unitId, unit) : content.Units,
+        };
+    }
+
+    /// <summary>The <c>items:</c> line under a <c>--curve</c> read: per player unit, by id, the items it attacked and countered with over every game.</summary>
+    public static string ItemsLine(IReadOnlyList<GameResult> games)
+    {
+        var units = games.SelectMany(g => g.Items.Keys).Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal);
+        var parts = units.Select(id => $"{id} [{games.Aggregate(ItemMix.Zero, (sum, g) => sum.Plus(g.Items.GetValueOrDefault(id, ItemMix.Zero)))}]").ToList();
+        return "  items:    " + (parts.Count == 0 ? "none" : string.Join(", ", parts));
+    }
+
+    private static void PrintItems(bool items, IReadOnlyList<GameResult> games)
+    {
+        if (items)
+        {
+            Console.WriteLine(ItemsLine(games));
+        }
     }
 
     /// <summary>

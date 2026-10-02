@@ -46,6 +46,9 @@ public sealed record GameResult(BattleResult Result, int Turns, IReadOnlyDiction
     /// <summary>The weapons each player unit attacked and countered with (issue 746), by id; a unit that never struck is absent.</summary>
     public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
 
+    /// <summary>The same strikes as <see cref="Weapons"/> by the item struck with (issue 757), by unit id.</summary>
+    public IReadOnlyDictionary<string, ItemMix> Items { get; init; } = new Dictionary<string, ItemMix>(StringComparer.Ordinal);
+
     /// <summary>
     /// The player units other than the captain that came out of the game alive, by
     /// <see cref="BattleState.Survivors"/>: on an Escape map the ones that left through an
@@ -177,6 +180,7 @@ public static class Runner
         }
 
         var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+        var items = new Dictionary<string, ItemMix>(StringComparer.Ordinal);
         var lastCombatTurn = 0;
         var playerWatch = WatchCounts.Zero;
         var enemyWatch = WatchCounts.Zero;
@@ -221,9 +225,10 @@ public static class Runner
                 }
 
                 Tally(mix, result.Events);
-                foreach (var (unitId, _, type, counter) in WeaponMix.Strikes(state, content, command, result.Events))
+                foreach (var (unitId, _, type, counter, itemId) in WeaponMix.Strikes(state, content, command, result.Events))
                 {
                     weapons[unitId] = weapons.GetValueOrDefault(unitId, WeaponMix.Zero).With(type, counter);
+                    items[unitId] = items.GetValueOrDefault(unitId, ItemMix.Zero).With(itemId, counter);
                 }
 
                 pins = pins.After(state, command, result.Events);
@@ -271,6 +276,7 @@ public static class Runner
             Recruits = recruits,
             Bond = state.Bond,
             Weapons = weapons,
+            Items = items,
             RecruitsOut = state.Survivors().Count(u => !u.IsCaptain),
             Out = state.Survivors().Where(u => !u.IsCaptain).Select(u => u.Id).ToHashSet(StringComparer.Ordinal),
         };

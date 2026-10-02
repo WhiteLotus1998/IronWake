@@ -1,0 +1,44 @@
+# Issue 757: Brackwater Cut and the raid at 200 seeds, before and after the Sim's weapon choice (#756)
+# before: c8f5ab3 (pre-#756), --curve --seeds 200 --map <id>
+# after: main + #757, --curve --seeds 200 --map <id> --items; cinder: the same with --carry pell cinder
+
+## before (c8f5ab3)
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+map 8 brackwater_cut: enemy level 3 in the file, 8 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 133/200 (67 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 67 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 84, two-roll average: ok
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 7/200 (4 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 193 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 5, two-roll average: FAILED
+  party +5: gate 1 beatable: brackwater_cut, heuristic wins 141/200 (70 %), winning turn median 6 p90 6 limit 8, losses 3 timeout 56 captain 0 protected, quiet tail 0.3, refused kill p50 0.8460 over 3, at the stall p50 0.0423 over 1, survivors p50 0 of 4, captain alone 93, two-roll average: ok
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+map 6 ironwake_raid: enemy level 2 in the file, 6 in the campaign, no swaps
+  file:     gate 1 beatable: ironwake_raid, heuristic wins 186/200 (93 %), winning turn median 4 p90 6 limit 7, losses 12 timeout 2 captain 0 protected, quiet tail 0.2, refused kill p50 0.9892 over 12, at the stall p50 0.4403 over 10, two-roll average: ok
+  campaign: gate 1 beatable: ironwake_raid, heuristic wins 58/200 (29 %), winning turn median 6 p90 7 limit 7, losses 71 timeout 71 captain 0 protected, quiet tail 0.1, refused kill p50 0.8775 over 71, at the stall p50 0.8460 over 69, two-roll average: FAILED
+  party +4: gate 1 beatable: ironwake_raid, heuristic wins 180/200 (90 %), winning turn median 4 p90 5 limit 7, losses 14 timeout 6 captain 0 protected, quiet tail 0.0, refused kill p50 0.9872 over 14, at the stall p50 0.3332 over 14, two-roll average: ok
+
+## after
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+map 8 brackwater_cut: enemy level 3 in the file, 8 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 129/200 (65 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 71 captain 0 protected, quiet tail -, refused kill -, survivors p50 1 of 4, captain alone 59, two-roll average: ok
+  items:    captain [iron_sword 2/492], dunstan [iron_lance 38/622], pell [cinder 9/12 gust 360/125], rook [iron_lance 536/273], wren [iron_sword 413/403]
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 10/200 (5 %), winning turn median 6 p90 6 limit 8, losses 1 timeout 189 captain 0 protected, quiet tail 5.0, refused kill p50 0.8230 over 1, at the stall p50 0.8230 over 1, survivors p50 0 of 4, captain alone 7, two-roll average: FAILED
+  items:    captain [iron_sword 0/513], dunstan [iron_lance 2/203], pell [cinder 1/1 gust 294/63], rook [iron_lance 412/82], wren [iron_sword 210/130]
+  party +5: gate 1 beatable: brackwater_cut, heuristic wins 130/200 (65 %), winning turn median 6 p90 6 limit 8, losses 2 timeout 68 captain 0 protected, quiet tail 1.0, refused kill p50 0.9220 over 2, at the stall p50 0.0423 over 1, survivors p50 0 of 4, captain alone 81, two-roll average: ok
+  items:    captain [iron_sword 28/523], dunstan [iron_lance 65/439], pell [cinder 3/3 gust 314/77], rook [iron_lance 448/266], wren [iron_sword 384/409]
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+map 6 ironwake_raid: enemy level 2 in the file, 6 in the campaign, no swaps
+  file:     gate 1 beatable: ironwake_raid, heuristic wins 183/200 (92 %), winning turn median 4 p90 6 limit 7, losses 15 timeout 2 captain 0 protected, quiet tail 0.1, refused kill p50 0.9892 over 15, at the stall p50 0.4403 over 11, two-roll average: ok
+  items:    captain [iron_sword 207/64], dunstan [iron_lance 601/131], ottilie [iron_bow 566/3], pell [cinder 66/5 gust 499/89], teodor [iron_lance 193/349], wren [iron_sword 363/235]
+  campaign: gate 1 beatable: ironwake_raid, heuristic wins 74/200 (37 %), winning turn median 6 p90 7 limit 7, losses 68 timeout 58 captain 0 protected, quiet tail 0.1, refused kill p50 0.8775 over 68, at the stall p50 0.8266 over 64, two-roll average: FAILED
+  items:    captain [iron_sword 114/362], dunstan [iron_lance 277/52], ottilie [iron_bow 558/26], pell [cinder 37/12 gust 703/213], teodor [iron_lance 141/310], wren [iron_sword 372/259]
+  party +4: gate 1 beatable: ironwake_raid, heuristic wins 180/200 (90 %), winning turn median 4 p90 5 limit 7, losses 12 timeout 8 captain 0 protected, quiet tail 0.1, refused kill p50 0.9872 over 12, at the stall p50 0.3332 over 12, two-roll average: ok
+  items:    captain [iron_sword 160/83], dunstan [iron_lance 522/144], ottilie [iron_bow 545/0], pell [cinder 56/9 gust 488/70], teodor [iron_lance 173/336], wren [iron_sword 382/251]
+
+## after, Pell carrying Cinder alone
+curve: pell carries cinder alone
+curve: 1 campaign maps, 200 seeds, gate 1 as the file reads and as the campaign fights it
+map 8 brackwater_cut: enemy level 3 in the file, 8 in the campaign, heavy_rider at 0,1, heavy_rider at 0,10
+  file:     gate 1 beatable: brackwater_cut, heuristic wins 133/200 (67 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 67 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 84, two-roll average: ok
+  items:    captain [iron_sword 1/475], dunstan [iron_lance 107/573], pell [cinder 353/82], rook [iron_lance 395/193], wren [iron_sword 428/388]
+  campaign: gate 1 beatable: brackwater_cut, heuristic wins 7/200 (4 %), winning turn median 6 p90 6 limit 8, losses 0 timeout 193 captain 0 protected, quiet tail -, refused kill -, survivors p50 0 of 4, captain alone 5, two-roll average: FAILED
+  items:    captain [iron_sword 0/494], dunstan [iron_lance 0/204], pell [cinder 206/8], rook [iron_lance 445/73], wren [iron_sword 211/130]
+  party +5: gate 1 beatable: brackwater_cut, heuristic wins 141/200 (70 %), winning turn median 6 p90 6 limit 8, losses 3 timeout 56 captain 0 protected, quiet tail 0.3, refused kill p50 0.8460 over 3, at the stall p50 0.0423 over 1, survivors p50 0 of 4, captain alone 93, two-roll average: ok
+  items:    captain [iron_sword 16/507], dunstan [iron_lance 132/417], pell [cinder 360/68], rook [iron_lance 323/223], wren [iron_sword 397/401]

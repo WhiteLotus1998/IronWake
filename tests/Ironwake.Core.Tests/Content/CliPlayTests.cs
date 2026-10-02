@@ -2574,10 +2574,5 @@ public class SimFullTests
         ConsoleCapture.Run(run, Path.GetDirectoryName(Fixture.RealContentDirectory())!);
 
     /// <summary>The content with Pell carrying Cinder alone, so the heuristic's only spell is the one that lights a tile.</summary>
-    private static GameContent CinderPell(GameContent content)
-    {
-        var slot = content.Cast.ToList().FindIndex(u => u.Id == "pell");
-        var pell = content.Cast[slot] with { Inventory = Inventory.Empty.Add(new ItemStack("cinder", content.Weapons["cinder"].Durability)) };
-        return content with { Cast = content.Cast.SetItem(slot, pell) };
-    }
+    private static GameContent CinderPell(GameContent content) => Ironwake.Sim.Program.Carry(content, "pell", "cinder")!;
 }
