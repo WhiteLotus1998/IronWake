@@ -1813,3 +1813,14 @@ Notes: The transcript and script are `docs/transcripts/2026-10-02-saltmarsh_ford
 - **Not tense:** turn 1, the march, as on every Saltmarsh play.
 
 — Code
+
+## 2026-10-02 — The camp, the second tier (#704 slice 1), a screen reading — Code
+
+Seed: 704   Result: no battle; `classes captain` on the first camp
+Not a play and not rated: no shipped board fields a unit near level 10, so the step changes no turn yet. I read the screen the way a player meets it.
+Notes: The transcript and script are `docs/transcripts/2026-10-02-campaign-704-ladder.*`.
+- **It reads.** Each form prints beside the rest as `Halberdier (from Pikeman): level 10, lance C`, and a unit outside the base is told `needs to be a Pikeman first` before the level. The header names both seals, 500 and 1000.
+- **Found reading it, fixed in this PR.** Scholar's refusal said `needs reason C` under a line that said `lore C`; rank refusals now print the screen label.
+- **What I'd want from the next slice:** the list is alphabetical, so the forms sit between the bases. Once the forms have their verbs, the screen should say the verb on the line (`+ axe`, `bow range 3`), since that is the whole reason to pay 1000.
+
+— Code

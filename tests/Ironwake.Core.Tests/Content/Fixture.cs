@@ -142,6 +142,25 @@ internal static class Fixture
             Path.Combine(target, "maps", "saltmarsh_ford.map"),
             overwrite: true);
         WithoutCastArts(target);
+        WithoutAdvancedForms(target);
+        return target;
+    }
+
+    /// <summary>
+    /// Takes every advanced form (issue 704) out of <c>classes.json</c>: the class list a campaign
+    /// journaled before the second tier prints has none.
+    /// </summary>
+    public static string WithoutAdvancedForms(string target)
+    {
+        var classesPath = Path.Combine(target, ContentFiles.ClassesName);
+        var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;
+        var ladder = classes["classes"]!.AsArray();
+        foreach (var advanced in ladder.Where(e => e!.AsObject().ContainsKey("advances")).ToList())
+        {
+            ladder.Remove(advanced);
+        }
+
+        File.WriteAllText(classesPath, classes.ToJsonString());
         return target;
     }
 
@@ -250,7 +269,7 @@ internal static class Fixture
 
     private static string CopyWithoutLadder()
     {
-        var target = WithoutStartingAlone(CopyRealContent("ironwake-ladder-free-"));
+        var target = WithoutAdvancedForms(WithoutStartingAlone(CopyRealContent("ironwake-ladder-free-")));
 
         var classesPath = Path.Combine(target, ContentFiles.ClassesName);
         var classes = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(classesPath))!;

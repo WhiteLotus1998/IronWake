@@ -38,6 +38,10 @@ CLIP_SHEET = os.path.join("docs", "art", "contact-clips.png")
 FX_SHEET = os.path.join("docs", "art", "contact-effects.png")
 FRAME = 96  # ART_SPEC: 48 px tokens and tiles, delivered at 2x
 
+# An advanced form (issue 704) is drawn as its base class until it has a shape of its own.
+with open(os.path.join("content", "classes.json")) as _f:
+    BASE = {c["id"]: c.get("advances", c["id"]) for c in json.load(_f)["classes"]}
+
 
 def hex_rgb(value):
     return tuple(int(value[i:i + 2], 16) for i in (0, 2, 4))
@@ -181,6 +185,8 @@ def silhouette(canvas, class_id, cx, cy, k, rgba, tell=None):
     A tell (ArtSpec.TokenTell) adds the variant's mark: "hooked" the Toll Spear's crossbar on the
     pike, "double" the second bit on a boss reaver's axe.
     """
+    class_id = BASE.get(class_id, class_id)
+
     def P(x, y):
         return (cx + x * k, cy + y * k)
     width = 2.6 * k
@@ -563,6 +569,7 @@ def spec_names():
 
 
 def clip_sheet(class_id, kind, weapon_id, boss, clip):
+    class_id = BASE.get(class_id, class_id)
     frames, contact = CLIPS[clip]
     sheet = Canvas(CLIP * frames, CLIP)
     sheet.ground = PIVOT[1]  # nothing below the feet: a fallen weapon lies on the ground, not through it

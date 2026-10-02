@@ -155,6 +155,12 @@ public static class ContentLoader
             throw root.Error("certificationPrice", "must be at least 0");
         }
 
+        var advancedSeal = root.IntOr("advancedCertificationPrice", seal);
+        if (advancedSeal < 0)
+        {
+            throw root.Error("advancedCertificationPrice", "must be at least 0");
+        }
+
         var maps = new List<CampaignMap>();
         var index = 0;
         foreach (var element in root.Array("maps"))
@@ -401,6 +407,7 @@ public static class ContentLoader
 
         return new CampaignRules(purse, seal, ValueList<CampaignMap>.From(maps))
         {
+            AdvancedCertificationPrice = advancedSeal,
             Trials = ValueList<CampaignTrial>.From(trials.OrderBy(t => t.ClassId, StringComparer.Ordinal)),
             Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,
@@ -1448,6 +1455,38 @@ public static class ContentLoader
         if (builder.Count == 0)
         {
             throw new ContentException(file.Name, null, "classes", "must contain at least one class");
+        }
+
+        foreach (var node in entries.Where(n => n.Has("advances")))
+        {
+            var basisId = node.String("advances");
+            if (!builder.TryGetValue(basisId, out var basis))
+            {
+                throw node.Error("advances", $"unknown class '{basisId}'");
+            }
+
+            if (basis.Id == node.Entry || basis.Hidden)
+            {
+                throw node.Error("advances", $"'{basisId}' must be another class that is not hidden");
+            }
+
+            if (entries.Any(n => n.Entry == basisId && n.Has("advances")))
+            {
+                throw node.Error("advances", $"'{basisId}' is itself an advanced form; a class has one step above it");
+            }
+
+            if (node.Has("growthModifiers"))
+            {
+                throw node.Error("growthModifiers", $"an advanced form grows as its base, '{basisId}', does; name none");
+            }
+
+            var form = builder[node.Entry!];
+            foreach (var weapon in basis.Weapons.Where(w => !form.CanUse(w)))
+            {
+                throw node.Error("weapons", $"must keep every weapon type of '{basisId}'; missing {weapon.ToString().ToLowerInvariant()}");
+            }
+
+            builder[node.Entry!] = form with { GrowthModifiers = basis.GrowthModifiers, Advances = basis };
         }
 
         return builder.ToImmutable();

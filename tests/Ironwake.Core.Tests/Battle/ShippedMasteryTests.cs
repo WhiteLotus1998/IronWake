@@ -40,7 +40,7 @@ public class ShippedMasteryTests
     [Fact]
     public void NoTwoStarterClassesMasterTheSameAbility()
     {
-        var masteries = Starter.Classes.Values.Select(c => c.Mastery).ToList();
+        var masteries = Starter.Classes.Values.Where(c => c.Advances is null).Select(c => c.Mastery).ToList();
 
         Assert.Equal(10, masteries.Count);
         Assert.DoesNotContain(null, masteries);

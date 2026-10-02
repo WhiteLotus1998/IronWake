@@ -35,5 +35,15 @@ public sealed record UnitClass(
     /// </summary>
     public bool Hidden { get; init; }
 
+    /// <summary>
+    /// The class this one is the advanced form of (issue 704, DESIGN section 3), or null for a
+    /// first-tier class. Only a unit in that class may be promoted into this one; the form keeps
+    /// every weapon type of its base and its growths are the base's.
+    /// </summary>
+    public UnitClass? Advances { get; init; }
+
+    /// <summary>The first-tier class this one belongs to: <see cref="Advances"/>'s id for an advanced form, else its own.</summary>
+    public string BaseId => Advances?.Id ?? Id;
+
     public bool CanUse(WeaponType type) => Weapons.Contains(type);
 }

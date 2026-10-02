@@ -109,6 +109,87 @@
       "growthModifiers": { "hp": 10, "def": 15, "spd": -10 }
     },
     {
+      "id": "halberdier",
+      "name": "Halberdier",
+      "advances": "pikeman",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["lance", "axe"],
+      "certification": { "level": 10, "ranks": { "lance": "C" } },
+      "modifiers": { "hp": 3, "str": 2, "def": 2 }
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "advances": "reaver",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["axe", "gauntlet"],
+      "certification": { "level": 10, "ranks": { "axe": "C" } },
+      "modifiers": { "hp": 4, "str": 4 }
+    },
+    {
+      "id": "marksman",
+      "name": "Marksman",
+      "advances": "bowman",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["bow"],
+      "certification": { "level": 10, "ranks": { "bow": "C" } },
+      "modifiers": { "dex": 4, "str": 1 }
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar",
+      "advances": "adept",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["reason"],
+      "certification": { "level": 10, "ranks": { "reason": "C" } },
+      "modifiers": { "mag": 4, "res": 2 }
+    },
+    {
+      "id": "warden",
+      "name": "Warden",
+      "advances": "chaplain",
+      "movement": "infantry",
+      "mov": 4,
+      "weapons": ["faith", "sword"],
+      "certification": { "level": 10, "ranks": { "faith": "C" } },
+      "modifiers": { "mag": 2, "res": 3, "def": 1 }
+    },
+    {
+      "id": "lancer",
+      "name": "Lancer",
+      "advances": "outrider",
+      "movement": "cavalry",
+      "mov": 6,
+      "abilities": ["canto"],
+      "weapons": ["lance", "sword", "axe"],
+      "certification": { "level": 10, "ranks": { "lance": "C" } },
+      "modifiers": { "hp": 2, "str": 2, "def": 1 }
+    },
+    {
+      "id": "skycaptain",
+      "name": "Sky Captain",
+      "advances": "skyrider",
+      "movement": "flying",
+      "mov": 6,
+      "weapons": ["lance"],
+      "certification": { "level": 10, "ranks": { "lance": "C" } },
+      "modifiers": { "spd": 3, "res": 2, "str": 1 }
+    },
+    {
+      "id": "sentinel",
+      "name": "Sentinel",
+      "advances": "bulwark",
+      "movement": "armored",
+      "mov": 4,
+      "weapons": ["lance", "axe", "bow"],
+      "certification": { "level": 10, "ranks": { "lance": "C" } },
+      "modifiers": { "hp": 5, "def": 5, "spd": -2 }
+    },
+    {
       "id": "sergeant",
       "name": "Sergeant",
       "movement": "infantry",

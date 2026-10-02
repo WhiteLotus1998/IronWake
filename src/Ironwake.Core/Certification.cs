@@ -43,7 +43,7 @@ public static class Certifications
 {
     /// <summary>
     /// Every requirement of <paramref name="target"/> that <paramref name="unit"/> fails, in
-    /// order: the class itself, a hidden class (issue 691), level, ranks in content order, stats in draw order. Empty
+    /// order: the class itself, a hidden class (issue 691), an advanced form's base (issue 704), level, ranks in content order, stats in draw order. Empty
     /// when the unit may certify. A stat minimum reads the unit's own stats, so the class it
     /// would leave counts for nothing toward the class it enters.
     /// </summary>
@@ -64,13 +64,17 @@ public static class Certifications
 
         if (unit.ClassId == target.Id)
         {
-            var article = "AEIOU".Contains(target.Name[0]) ? "an" : "a";
-            refusals.Add(new("class", $"{unit.Id} is already {article} {target.Name}"));
+            refusals.Add(new("class", $"{unit.Id} is already {Article(target.Name)} {target.Name}"));
         }
 
         if (target.Hidden)
         {
             refusals.Add(new("hidden", $"{target.Name} is not certified; it is earned"));
+        }
+
+        if (target.Advances is { } basis && unit.ClassId != basis.Id)
+        {
+            refusals.Add(new("advances", $"needs to be {Article(basis.Name)} {basis.Name} first"));
         }
 
         var requirements = target.Certification;
@@ -84,8 +88,7 @@ public static class Certifications
             var has = unit.Skill.Rank(type);
             if (has < rank)
             {
-                var name = type.ToString().ToLowerInvariant();
-                refusals.Add(new("ranks." + name, $"needs {name} {rank}, has {has}"));
+                refusals.Add(new("ranks." + type.ToString().ToLowerInvariant(), $"needs {type.Label()} {rank}, has {has}"));
             }
         }
 
@@ -102,6 +105,8 @@ public static class Certifications
 
         return refusals;
     }
+
+    private static string Article(string name) => "AEIOU".Contains(name[0]) ? "an" : "a";
 
     /// <summary>
     /// <paramref name="unit"/> in <paramref name="target"/>, or an

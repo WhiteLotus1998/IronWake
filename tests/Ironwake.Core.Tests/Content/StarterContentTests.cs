@@ -14,7 +14,7 @@ public class StarterContentTests
     public void StarterContentLoads()
     {
         Assert.Equal(10, Content.Terrain.Count);
-        Assert.Equal(10, Content.Classes.Count);
+        Assert.Equal(18, Content.Classes.Count);
         Assert.Equal(28, Content.Weapons.Count);
         Assert.Equal(32, Content.Units.Count);
         Assert.Equal(11, Content.Cast.Count);

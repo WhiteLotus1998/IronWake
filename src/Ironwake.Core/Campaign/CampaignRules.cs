@@ -84,6 +84,15 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 {
     public static CampaignRules None { get; } = new(0, 0, ValueList<CampaignMap>.Empty);
 
+    /// <summary>
+    /// The seal for a step into an advanced form (issue 704), <c>advancedCertificationPrice</c>;
+    /// <see cref="CertificationPrice"/> when the file names none.
+    /// </summary>
+    public int AdvancedCertificationPrice { get; init; }
+
+    /// <summary>The seal a promotion into <paramref name="target"/> costs: the advanced price for an advanced form, else the plain one.</summary>
+    public int SealFor(UnitClass target) => target.Advances is null ? CertificationPrice : AdvancedCertificationPrice;
+
     /// <summary>The certification trials, one per class at most, in class id order (issue 252); a class without one certifies only with a seal.</summary>
     public ValueList<CampaignTrial> Trials { get; init; } = ValueList<CampaignTrial>.Empty;
 

@@ -1,6 +1,7 @@
 {
   "startingPurse": 500,
   "certificationPrice": 500,
+  "advancedCertificationPrice": 1000,
   "maps": [
     { "map": "starting_alone", "reward": 300,
       "stock": ["iron_sword", "field_dressing"],
