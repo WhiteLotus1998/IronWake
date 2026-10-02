@@ -7,7 +7,8 @@ namespace Ironwake.Core;
 /// event emits <see cref="MapEventFired"/> and then its action's own event. An event whose
 /// tile is barred is blocked and spent, with no action: a spawn tile with any unit on it or
 /// terrain the template cannot stand on (the event names that terrain, issue 655), or a
-/// terrain change that would leave its occupant on ground it cannot enter.
+/// terrain change that would leave its occupant on ground it cannot enter. A boss's spawn is
+/// never stopped by a unit: it lands on the nearest free tile instead (<see cref="BossLanding"/>).
 /// </summary>
 public static class MapEvents
 {
@@ -53,6 +54,11 @@ public static class MapEvents
                     break;
                 case SpawnEnemy spawn:
                     var at = spawn.Placement.At;
+                    if (spawn.Placement.IsBoss && state.UnitAt(at) is not null && BossLanding(state, content, spawn.Placement) is { } landing)
+                    {
+                        at = landing;
+                    }
+
                     if (state.UnitAt(at) is not null)
                     {
                         events.Add(new MapEventFired(mapEvent.Name, true));
@@ -71,6 +77,7 @@ public static class MapEvents
                     {
                         Group = spawn.Placement.Group,
                         Behavior = spawn.Placement.Behavior,
+                        IsBoss = spawn.Placement.IsBoss,
                         PlacementIndex = state.Map.SpawnIndex(mapEvent),
                     };
                     var units = state.Units.ToList();
@@ -91,6 +98,34 @@ public static class MapEvents
         }
 
         return state;
+    }
+
+    /// <summary>
+    /// Where a boss's spawn lands when a unit stands on its tile (issue 692): the nearest free
+    /// tile the boss can stand on by Manhattan distance, the lower row and then the lower column
+    /// on a tie. A held tile never stops a boss, so a hold-then-boss map cannot be won by
+    /// standing on his road. Null when no tile is free, and the spawn is blocked as any other.
+    /// </summary>
+    public static Coord? BossLanding(BattleState state, GameContent content, EnemyPlacement boss)
+    {
+        var movement = content.Class(content.Unit(boss.TemplateId).ClassId).Movement;
+        Coord? best = null;
+        var bestDistance = int.MaxValue;
+        for (var y = 0; y < state.Map.Height; y++)
+        {
+            for (var x = 0; x < state.Map.Width; x++)
+            {
+                var tile = new Coord(x, y);
+                var distance = Math.Abs(x - boss.At.X) + Math.Abs(y - boss.At.Y);
+                if (distance < bestDistance && state.UnitAt(tile) is null && state.Map.TerrainAt(tile, content).IsPassable(movement))
+                {
+                    best = tile;
+                    bestDistance = distance;
+                }
+            }
+        }
+
+        return best;
     }
 
     private static ValueList<string> Sorted(ValueList<string> names)

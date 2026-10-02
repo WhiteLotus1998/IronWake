@@ -1755,3 +1755,17 @@ Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_hunt
 - **To try next:** the same board with the hunter at boss strength, once slice 3 sets the numbers. The question is whether leaving one front light on purpose stays a good trick (DECISIONS/0148's revisit clause).
 
 — Code
+
+## 2026-10-02 — Ironwake Keep, the assault (#692 slice 3), the warm play — Code
+
+Seed: 694   Result: loss, turn 6 of 11 (the captain fell the phase the boss arrived; Teodor, Dunstan, Ottilie, Pell and Wren fell first), one Recall spent, two left
+Systems entry on `docs/samples/ironwake_keep_assault.map` (the hunt sample with the boss off the board, arriving on turn 6 by `spawn boss`), warm (I wrote the rule this hour), not a Fun Gate entry. Question: does "hold until he comes, then kill him" read as one objective?
+Tension: 6/10   Choice: 5/10   Surprise: 4/10
+Best turn: turn 2, the replay. On my first try every front fell in one enemy phase, because I had stood behind the breaches, not on them. Replayed with Wren on 10,1, Teodor on 10,10 and the captain on 10,5, all three held. The rider, hunting the south, rode into Teodor's 76 percent counter and died. The fronts line was the lesson: a front is a tile, not a neighbourhood.
+Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_assault-694.*`.
+- **The objective reads.** `Hold until the boss arrives on turn 6, then defeat the boss by the end of turn 11.` sits on the first line, and the announce list ends with his line and the rule that a held tile will not stop him. I counted to turn 6 from the first board.
+- **He arrived and waited.** `Bandit Leader arrives at 0,6 with the assault group, boss`, then `Bandit Leader waits`. A `behavior: boss` boss holds his ground, so the far edge is where the party would have had to go, five turns from the end. Hask leading the assault should probably come in. That is a question for the measured slice (0149), not something I changed here.
+- **The stand-in is not winnable as played.** Six L1 units against sixteen L2 enemies, plus the inside spawns from every fall, never got to him. Turn 4 was three misses at 87, 82 and 82 on one 20 HP soldier, the same misses after a Recall (keyed rolls, as they should be), and two fronts fell in that enemy phase. From then on it was a retreat to the east wall. Slice 1 and 2's journals said the same thing: once two fronts are down, the map stops being about fronts.
+- **Not tense:** turns 5 and 6, a ring in the corner waiting for the hexer. The tension the objective promises (do we hold long enough for him to come?) never reached the boss. The full/depleted/floor measurement is what tells us if the army is the lever.
+
+— Code

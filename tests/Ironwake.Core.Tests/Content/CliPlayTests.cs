@@ -2076,6 +2076,31 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 692: on the hold-then-boss stand-in the boss's arrival is announced from turn 1 in
+    /// player words, with the rule that a held tile does not stop him, and the objective line
+    /// says to hold until he comes.
+    /// </summary>
+    [Fact]
+    public void TheBossesArrivalIsAnnouncedFromTurnOne()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ironwake_keep_assault.map");
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-assault-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "");
+        try
+        {
+            var output = Run(out _, "play", map, "--seed", "7", "--script", script, "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("  turn 6, enemy phase: the boss, a bandit leader, arrives at 0,6. A unit standing on 0,6 does not stop the boss, who takes the nearest free tile.\n", output);
+            Assert.Contains("Hold until the boss arrives on turn 6, then defeat the boss by the end of turn 11.", output);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.

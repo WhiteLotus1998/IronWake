@@ -240,7 +240,7 @@ public static class MapFormat
         var action = mapEvent.Action switch
         {
             ChangeTerrain c => "terrain " + c.At + " " + content.TerrainById(c.TerrainId).Glyph,
-            SpawnEnemy s => "spawn " + s.Placement.TemplateId + " " + s.Placement.At + " group:" + s.Placement.Group + " behavior:" + s.Placement.Behavior.ToString().ToLowerInvariant(),
+            SpawnEnemy s => "spawn " + (s.Placement.IsBoss ? "boss " : "") + s.Placement.TemplateId + " " + s.Placement.At + " group:" + s.Placement.Group + " behavior:" + s.Placement.Behavior.ToString().ToLowerInvariant(),
             SetFlag f => "flag " + f.Flag,
             _ => throw new ArgumentOutOfRangeException(nameof(mapEvent), mapEvent.Action, "unknown map event action"),
         };
@@ -1165,6 +1165,11 @@ public static class MapFormat
                 names[name] = LineNumber;
                 var (trigger, rest) = ParseTrigger(tokens, width, height, turnLimit);
                 var action = ParseAction(rest, width, height, terrain, edgeOnly: trigger is not FallsTrigger);
+                if (action is SpawnEnemy { Placement.IsBoss: true } && trigger is not TurnTrigger)
+                {
+                    throw Error("a boss spawn needs a turn trigger, so the boss's arrival is a turn the board can name: 'assault turn 9 enemy spawn boss bandit_leader 0,5 group:assault'");
+                }
+
                 events.Add(new MapEvent(name, trigger, action));
             }
 
@@ -1262,7 +1267,13 @@ public static class MapFormat
                         throw Error("spawn action needs a template and an edge tile: 'spawn brigand 0,5 group:west behavior:aggressive'");
                     }
 
-                    var placement = ParseUnitLine("E " + string.Join(' ', tokens[1..]), width, height, terrain);
+                    var boss = tokens[1] == "boss";
+                    if (boss && tokens.Length < 4)
+                    {
+                        throw Error("a boss spawn needs a template and an edge tile: 'spawn boss bandit_leader 0,5 group:assault'");
+                    }
+
+                    var placement = ParseUnitLine((boss ? "B " : "E ") + string.Join(' ', tokens[(boss ? 2 : 1)..]), width, height, terrain);
                     if (placement is not EnemyPlacement enemy)
                     {
                         throw Error("spawn action places an enemy");
@@ -1361,9 +1372,9 @@ public static class MapFormat
                 throw new MapException(_file, 0, "win is seize but the grid has no throne tile");
             }
 
-            if (map.Win == WinCondition.DefeatBoss && !map.Placements.Any(p => p is EnemyPlacement { IsBoss: true }))
+            if (map.Win == WinCondition.DefeatBoss && !map.Placements.Any(p => p is EnemyPlacement { IsBoss: true }) && !map.BossSpawns().Any())
             {
-                throw new MapException(_file, 0, "win is defeat_boss but there is no B line");
+                throw new MapException(_file, 0, "win is defeat_boss but there is no B line and no boss spawn");
             }
 
             var slots = map.Placements.Count(p => p is PlayerPlacement);
