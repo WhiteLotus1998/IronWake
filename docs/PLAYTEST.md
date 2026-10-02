@@ -1769,3 +1769,19 @@ Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_assa
 - **Not tense:** turns 5 and 6, a ring in the corner waiting for the hexer. The tension the objective promises (do we hold long enough for him to come?) never reached the boss. The full/depleted/floor measurement is what tells us if the army is the lever.
 
 — Code
+
+## 2026-10-02 — Ironwake Keep, the pair rule (#692 slice 4), the warm play — Code
+
+Seed: 695 at `--level 8`   Result: loss, turn 9 of 11 (the captain fell to an archer at 1 HP; Wren, Pell, Teodor and Dunstan fell first; the lord never left the far edge), one Recall spent, two left
+Systems entry on `docs/samples/ironwake_keep_pair.map` (the assault sample at `enemy_level: 6`, the hunter now `finale_hunter`, the turn-6 boss `finale_lord`, both bound by `pair_rule:`), warm (I wrote the rule this hour), not a Fun Gate entry. Question: does a pair read as protection from the strongest units, and does losing your partner read as losing it?
+Tension: 8/10   Choice: 6/10   Surprise: 7/10
+Best turn: enemy phase 8. Teodor and Dunstan held the south as a pair, and the hunter had been held to one strike all game. A brigand killed Teodor first. The next line was `Forecast Sworn Hunter -> Dunstan with Iron Lance: dmg 8 x2 hit 94% crit 8%`. She doubled, critted for 24, and Dunstan fell. The rule told me exactly what I had lost the moment I lost it.
+Notes: Transcript and script are `docs/transcripts/2026-10-02-ironwake_keep_pair-695.*`; replay with `play docs/samples/ironwake_keep_pair.map --seed 695 --level 8 --script <script>`.
+- **The pair reads, and it changes where you stand.** With Pell on 11,1 behind Wren on the north breach, every forecast of the hunter on Wren read one strike at crit 0, and `threat` agreed. Alone on 9,1 the same strike read crit 4, and on a slow unit x2. I placed all six as three pairs on turn 1 because of the rule, which no earlier keep play made me do.
+- **The rule bounds the boss, and the wave still kills.** Wren fell on turn 4 to the archer's 6 plus the hunter's held 12, against her 15 HP, exactly the `If all land: 18` the board printed. That is the fairness the issue asks for: a loss I could read in advance.
+- **Read live, it bites hardest when a partner falls first** (the best turn). Whether that should stand or be fixed at the phase start like the hunt is in the PR's Unsure.
+- **Found in play: the first lord was a wall.** At Def 15 effective he took 0 from every iron weapon at level 8; only Pell's 10 hurt him, and Pell died on turn 6. That is a stat check, not a plan. `FinaleStrengthTests` now holds that every cast member has a stocked weapon dealing at least 3, and his Def is 12. He never fought here (he waits on arrival, as in 694), so the replay did not move.
+- **My mistakes, for the record.** Turn 2's first try left both breach tiles open, so two fronts fell; I spent a Recall. On turn 4 I typed `use` for `item`, and that run showed Wren dying before I re-ran it with the dressing (she died anyway, on the printed 18). On turn 6 I sent Pell in for a 16 on the archer past an end-of-turn line that printed his death, and on turn 8 I attacked with Teodor past `Counter: lethal to Teodor` before redoing it, so that one is in the scratch run only. The board said every one of them.
+- **Not tense:** turns 7 and 9. Once the south pair was gone it was the captain and Ottilie in the courtyard waiting for the archers, with the lord still at 0,6. Whether he advances on arrival is the open slice-5 question again.
+
+— Code

@@ -170,6 +170,24 @@
       "stats": { "hp": 24, "str": 8, "mag": 0, "dex": 4, "spd": 5, "lck": 3, "def": 4, "res": 1, "cha": 4 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 25, "lck": 10, "def": 25, "res": 10, "cha": 10 },
       "inventory": [ { "item": "toll_axe" }, { "item": "steel_axe" } ]
+    },
+    {
+      "id": "finale_lord",
+      "name": "Sworn Lord",
+      "class": "bulwark",
+      "level": 10,
+      "stats": { "hp": 44, "str": 9, "mag": 0, "dex": 14, "spd": 8, "lck": 10, "def": 9, "res": 7, "cha": 12 },
+      "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 20, "lck": 10, "def": 30, "res": 10, "cha": 10 },
+      "inventory": [ { "item": "steel_lance" } ]
+    },
+    {
+      "id": "finale_hunter",
+      "name": "Sworn Hunter",
+      "class": "outrider",
+      "level": 10,
+      "stats": { "hp": 38, "str": 11, "mag": 0, "dex": 14, "spd": 10, "lck": 9, "def": 8, "res": 7, "cha": 6 },
+      "growths": { "hp": 45, "str": 35, "mag": 5, "dex": 30, "spd": 30, "lck": 15, "def": 25, "res": 15, "cha": 10 },
+      "inventory": [ { "item": "iron_lance" }, { "item": "iron_sword" } ]
     }
   ]
 }

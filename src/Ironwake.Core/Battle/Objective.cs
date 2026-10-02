@@ -55,7 +55,12 @@ public static class Objective
             WinCondition.DefeatBoss => new[] { $"The boss is drawn {MapRenderer.BossGlyph} on the board." },
             _ => Array.Empty<string>(),
         };
-        return map.Fronts.Count == 0 ? rules : rules.Append(Fronts.Rule).ToArray();
+        if (map.Fronts.Count > 0)
+        {
+            rules = rules.Append(Fronts.Rule).ToArray();
+        }
+
+        return PairRule.Rule(map) is { } pairRule ? rules.Append(pairRule).ToArray() : rules;
     }
 
     /// <summary>

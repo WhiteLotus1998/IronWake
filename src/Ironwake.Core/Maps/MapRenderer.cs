@@ -250,6 +250,11 @@ public static class MapRenderer
             sb.Append("fronts: " + string.Join("; ", map.Fronts.Select(f => $"{f.Words} {string.Join(' ', f.Tiles)}"))).Append('\n');
         }
 
+        if (PairRule.Rule(map) is { } pairRule)
+        {
+            sb.Append(pairRule).Append('\n');
+        }
+
         if (map.Messenger is { } route)
         {
             sb.Append(MessengerRule).Append('\n');
@@ -544,6 +549,12 @@ public static class MapRenderer
         {
             sb.Append(Hunt.Rule).Append('\n');
             sb.Append(huntLine).Append('\n');
+        }
+
+        if (PairRule.Line(state, UnitNames.Of(state, content)) is { } pairLine)
+        {
+            sb.Append(PairRule.Rule(map)).Append('\n');
+            sb.Append(pairLine).Append('\n');
         }
 
         if (MessengerLine(state, content) is { } messengerLine)

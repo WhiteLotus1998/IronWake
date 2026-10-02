@@ -190,6 +190,7 @@ public sealed record BattleUnit(
     /// pinned (DESIGN.md 13.13), read at both units' <see cref="At"/>, and at
     /// <see cref="Brace.Hit"/> less when it is braced (DESIGN.md 13.14). On a <c>signatures: on</c>
     /// map a strike, never a counter, carries Teodor's orders or his watched penalty (DESIGN.md 13.18).
+    /// A unit the pair rule binds cannot crit it when it has an ally beside it (<see cref="PairRule"/>, issue 692).
     /// </summary>
     public Combatant ToCombatant(BattleState state, GameContent content, bool countering = false, CombatArtEffect? art = null, BattleUnit? against = null)
     {
@@ -207,7 +208,7 @@ public sealed record BattleUnit(
             weapon = art.Apply(weapon);
         }
 
-        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit) with { Oathbound = state.Map.IsOathbound(this) };
+        return content.CombatantOf(Unit, weapon, state.Map.TerrainAt(At, content), Hp, critAvoid, WeaponBroken(content), hit, crit) with { Oathbound = state.Map.IsOathbound(this), PairHeld = PairRule.Holds(state, this, against) };
     }
 
     /// <summary>
