@@ -19,12 +19,37 @@ public static class Screens
     };
 
     /// <summary>
+    /// The single battle's title as reached from the campaign's (issue 786): the same choices,
+    /// its last one Back to the campaign's title rather than Quit, on the same Esc.
+    /// </summary>
+    public static IReadOnlyList<(string Label, string Key)> SingleBattleTitle(bool fromCampaign) =>
+        fromCampaign ? TitleChoices.Take(TitleChoices.Count - 1).Append(("Back", "Esc")).ToList() : TitleChoices;
+
+    /// <summary>The map One battle opens: the showcase's own (issue 509).</summary>
+    public const string OneBattleMap = "the_tollgate";
+
+    /// <summary>
+    /// The arguments that name something other than the campaign: a map, a script, a screen, a
+    /// render or a parity run. A launch with none of them, a double-click on the exported build
+    /// among them, opens the campaign's title (issue 786).
+    /// </summary>
+    public static readonly IReadOnlyList<string> BattleArguments = new[]
+    {
+        "--map", "--script", "--screen", "--screenshot", "--strip", "--parity",
+    };
+
+    /// <summary>Whether a launch with <paramref name="args"/> opens the campaign's title: asked for by <c>--campaign</c>, or named nothing else (issue 786).</summary>
+    public static bool OpensCampaign(IReadOnlyList<string> args) =>
+        args.Contains("--campaign") || !args.Any(BattleArguments.Contains);
+
+    /// <summary>
     /// The campaign's title screen (issue 677): Continue, shown only when a save exists, then New
-    /// game, Load, Options and Quit. Continue loads <see cref="Ironwake.Content.SaveStore.Newest"/>.
+    /// game, Load, One battle (issue 786: the Tollgate on its own, the showcase's title), Options
+    /// and Quit. Continue loads <see cref="Ironwake.Content.SaveStore.Newest"/>.
     /// </summary>
     public static IReadOnlyList<TitleChoice> CampaignTitle(bool hasSave) =>
         (hasSave ? new[] { TitleChoice.Continue } : Array.Empty<TitleChoice>())
-            .Concat(new[] { TitleChoice.NewGame, TitleChoice.Load, TitleChoice.Options, TitleChoice.Quit })
+            .Concat(new[] { TitleChoice.NewGame, TitleChoice.Load, TitleChoice.OneBattle, TitleChoice.Options, TitleChoice.Quit })
             .ToList();
 
     /// <summary>The line the title screen opens on: Continue when a save exists, else New game.</summary>
@@ -36,6 +61,7 @@ public static class Screens
         TitleChoice.Continue => "Continue",
         TitleChoice.NewGame => "New game",
         TitleChoice.Load => "Load",
+        TitleChoice.OneBattle => "One battle",
         TitleChoice.Options => "Options",
         _ => "Quit",
     };
@@ -46,6 +72,7 @@ public static class Screens
         TitleChoice.Continue => "C",
         TitleChoice.NewGame => "N",
         TitleChoice.Load => "L",
+        TitleChoice.OneBattle => "B",
         TitleChoice.Options => "O",
         _ => "Esc",
     };
@@ -202,6 +229,9 @@ public enum TitleChoice
     Continue,
     NewGame,
     Load,
+
+    /// <summary>The Tollgate on its own, through the showcase's title (issue 786).</summary>
+    OneBattle,
     Options,
     Quit,
 }

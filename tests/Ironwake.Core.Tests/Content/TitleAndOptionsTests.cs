@@ -113,7 +113,7 @@ public class TitleAndOptionsTests
             Assert.Null(store.Newest());
             Assert.DoesNotContain(TitleChoice.Continue, Screens.CampaignTitle(store.Newest() is not null));
             Assert.Equal(TitleChoice.NewGame, Screens.DefaultTitleChoice(false));
-            Assert.Equal(new[] { "New game", "Load", "Options", "Quit" }, Screens.CampaignTitle(false).Select(Screens.Label));
+            Assert.Equal(new[] { "New game", "Load", "One battle", "Options", "Quit" }, Screens.CampaignTitle(false).Select(Screens.Label));
 
             store.Autosave(CampaignRecord.Start(Content, 3));
 
@@ -121,7 +121,7 @@ public class TitleAndOptionsTests
             var title = Screens.CampaignTitle(store.Newest() is not null);
             Assert.Equal(TitleChoice.Continue, title[0]);
             Assert.Equal(TitleChoice.Continue, Screens.DefaultTitleChoice(true));
-            Assert.Equal(5, title.Count);
+            Assert.Equal(6, title.Count);
         }
         finally
         {

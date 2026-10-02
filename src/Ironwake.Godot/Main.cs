@@ -31,10 +31,12 @@ namespace Ironwake.Godot;
 /// (<c>Main.Screens.cs</c>, issue 629; <c>--paused</c> opens with it), as a click on the footer's Esc does. A click on an enemy with more
 /// than one legal way to strike opens the attack menu (issue 611): 1 to 9 or a hover shows a row's
 /// card, a click on it or Enter strikes. An exported build finds <c>content/</c>
-/// beside its executable, and with no <c>--map</c> opens on the title (<c>Main.Screens.cs</c>,
-/// issue 515), whose Play opens the Tollgate with the turn-1 callouts; a decided battle shows the
-/// end card, Enter playing again on the next seed.
-/// With <c>--campaign</c> (issue 360) it plays the campaign through <see cref="CampaignClient"/>
+/// beside its executable. Launched with nothing that names a battle (<see cref="Screens.OpensCampaign"/>,
+/// issue 786), a double-click among them, it opens on the campaign's title, whose One battle opens
+/// the showcase's title (<c>Main.Screens.cs</c>, issue 515), whose Play opens the Tollgate with the
+/// turn-1 callouts; a decided battle shows the end card, Enter playing again on the next seed.
+/// <c>--screen title</c> opens the showcase's title alone, as the exported build did before.
+/// With <c>--campaign</c> (issue 360) or a bare launch it plays the campaign through <see cref="CampaignClient"/>
 /// instead, from the first map or from <c>--from &lt;map&gt;</c>: the between-map screen shows the
 /// console's roster, shop, deployment and keep lines; a click on a unit's row selects it, a click on
 /// a ware buys it for that unit, B benches or unbenches it, M or a click on the march row marches,
@@ -207,7 +209,8 @@ public partial class Main : Node2D
 
             ApplyScale();
 
-            if (Array.IndexOf(args, "--campaign") >= 0)
+            // A bare launch, a double-click on the exported build, opens the campaign (issue 786).
+            if (Screens.OpensCampaign(args))
             {
                 // A named start map plays straight in; otherwise the campaign's title comes first.
                 var from = Arg(args, "--from");
@@ -224,7 +227,7 @@ public partial class Main : Node2D
                         "load" => Screen.Load,
                         _ => Screen.CampaignTitle,
                     };
-                    (_optionsBack, _newDifficulty) = (Screen.CampaignTitle, NewGameDefault());
+                    (_optionsBack, _newDifficulty, _campaignHome) = (Screen.CampaignTitle, NewGameDefault(), true);
                 }
 
                 _screenshot = Arg(args, "--screenshot");
