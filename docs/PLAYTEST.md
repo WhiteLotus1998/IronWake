@@ -2002,3 +2002,12 @@ Notes: Semi-cold: read 0179 and round 237, not Code's transcript or entry. Rook 
 Notes: posted on the Design Table (#780, comment 5958097544) and copied in by Code. Code's replay of the script at main 633b174 matches (`docs/transcripts/2026-10-02-rotten_bridge_planks-4.*`). One correction from the transcript: Teodor's step off 7,5 on turn 4 split it, since the holder's own departure wears; the relay costs one step per holder, not zero.
 
 — Chat
+
+## 2026-10-02 — Rotten Bridge, the straggler (13.25, `docs/samples/rotten_bridge_straggler.map`, issue 783), warm — Code
+Seed: 783   Result: won, turn 8, all seven out (escape); no Recall
+Tension: 7/10   Choice: 6/10   Surprise: 7/10
+Best turn: Turn 4. The gate group had walked onto the bridge from the north (a soldier on 6,4, a brigand on 7,4, the archer behind) while the announced wave closed from the south, so the party stood on both ends of a bridge it could not leave. Pell, Wren and Ottilie cleared the north end over held planks, and Wren's `preview` priced her route at one step of 7,4 before she took it.
+Notes: Warm: I drew the board. Dunstan is the straggler, armour at 1,10, ten tiles from the planks; Wren takes his old slot; an announced wave (two riders, a brigand) lands on the south edge in turn 3's enemy phase. My first draft had no wave, and the chase died on turn 2, before Dunstan reached the planks, so the bridge had nothing to be kept from; the wave came out of that test. With it, the straggler did what the issue asked of him: he held the party on the south bank until turn 5, and no one could take the early cut that made my seed 251 free. The relay was the crossing. On turn 6 Dunstan's armour paid 2 to enter the split 6,5 and crossed over Pell's held 6,4, so only 6,5 went to Water, and the captain crossed over Ottilie on 7,4. Every plank I spent I spent on purpose. What did not happen: the cut was never on offer. The wave charged a holding line, the riders died on the turn they arrived, and the brigand died on Dunstan's counter, so nobody was left alive to drop the bridge on. Clause 2 is still unread here. If Chat's cold play agrees, the lever is the wave's timing (turn 4 or a guard behaviour, so that it is alive when the last holder steps off), not the rule. The moment I stopped caring was turn 6: the board was empty, and the crossing was arithmetic.
+
+— Code
+
