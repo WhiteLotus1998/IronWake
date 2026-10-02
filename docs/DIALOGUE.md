@@ -1,12 +1,12 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten when the Table moves; under 150 lines and 20 KB (#401). Archives #17 to #665; live #731.
+Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #731.
 
 ## How we work (standing agreements)
 
 - **Fun Gate entries.** Each partner plays and writes the PLAYTEST entry before reading the other's. Code's entry lands first; until Chat's is in, the Table says only that. A warm chair counts if disclosed (0073); the first cold chair on a tuned map finds its cheap line (round 105). Tricks stay unnamed until both entries are in.
 - **A map is retuned only after both entries on it are in**, one lever at a time, measured by the Sim before a partner plays it (round 16). Levers are content and reversible before they are rules.
-- **Queue order (rounds 61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, map retunes with both entries in, the rest of Phase 3. Chat's play queue: the camp, the tide cold, the break cold on Saltmarsh, the Tollgate with the menu, the Lazar House, the messenger's pass sample (#680), 13.23, a Vanguard-captain Saltmarsh after #758, then the keep from the 737 feed run's camp (round 233).
+- **Queue order (rounds 61, 184, 188):** bugs, Lotus's notes, the campaign's issues, then experiment plays, map retunes with both entries in, the rest of Phase 3. Chat's play queue: the camp, the tide cold, the break cold on Saltmarsh, the Tollgate with the menu, the Lazar House, the messenger's pass sample (#680), 13.23, a Vanguard-captain Saltmarsh after the verb door (0174).
 - **Experiments.** The gate is open (round 105). A header lives only on a `docs/samples/` map until a keep round names shipped maps. STATE.md names the play that decides each open experiment. Every spike carries a kill criterion agreed before its deciding play. A spike adding a player action names its cost in the spec; its keep round shows that cost biting once.
 - **`end` names the lethal** (rounds 158, 159; #558): before a player phase ends, one line per unit whose `threat` total reaches its HP if every strike lands, then the phase ends anyway; the counterpart of #539's `counter: lethal`.
 - **Rules go on screen; geometry does not** (rounds 42, 44). A rule the map depends on is printed (wake legend, exits, announced events in player words, the held-tile rule, keep placements in rules terms); the best tile stays for the player to find.
@@ -38,7 +38,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Archives #17 t
 - **Old Mill Road:** out of the campaign (The Mill replaces it).
 - **Saltmarsh Ford:** not tuned. On the north cut (0093) Code 547 7/7/6, Chat cold 571 7/7/5: the pair from 0,9 and 1,9 need three enemy phases to reach the mouth, so it plays as the pair, then the boss. The spawn lever (0095) failed its floor; the next lever must buy gate 1 back first. Retuned for Pell's arrival under #632.
 - **Sallow Grange:** the Reeve stays at 15,6 and the short way fights him; sealing the yard mouth is the map's discovery, unnamed; a route is quiet only if quiet on the enemy phase too (#275). Both partners replay it, short against long.
-- **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (Code 288, Chat cold 301; round 158); the one lever if any is the van one column west. 13.5 waits on the camp.
+- **The raid and the keep:** acceptance is play, not gate 1; the bare keep must be fair (0059, 0060). **The raid is kept as a map, never tuned for surprise** (Code 288, Chat cold 301; round 158); the one lever if any is the van one column west. The bare keep, Chat cold (round 235): 3 of 6, 7/7/6; walls and Long Draw bow kept. Its free last two turns are the stand-in's; the finale is `defeat_boss` (#692): no lever.
 
 ## The showcase (#509, 0092; rounds 126 to 184)
 
