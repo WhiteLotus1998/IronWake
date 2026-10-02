@@ -32,8 +32,8 @@ public static class LadderRun
         [WeaponType.Reason] = "cinder",
     };
 
-    /// <summary>One class on one board: gate 1's rate, gate 4's verdict, and the captain's baseline mix.</summary>
-    public sealed record Reading(string ClassId, double Rate, bool Gate4, ActionMix Captain);
+    /// <summary>One class on one board: gate 1's rate, gate 4's verdict, the captain's baseline mix, and the weapons the captain fought with in it (issue 746).</summary>
+    public sealed record Reading(string ClassId, double Rate, bool Gate4, ActionMix Captain, WeaponMix? Weapons = null);
 
     /// <summary>
     /// One tier on one map: the board it is fought on (party and enemies raised by <paramref name="Raise"/>
@@ -161,7 +161,8 @@ public static class LadderRun
         var gate4 = Gates.Gate4(content, map, mapId, games);
         var captain = content.Cast[0].Id;
         var mix = games.Aggregate(ActionMix.Zero, (sum, g) => sum.Plus(g.Mix.GetValueOrDefault(captain, ActionMix.Zero)));
-        return new Reading(classId, games.Count == 0 ? 0.0 : games.Count(g => g.Won) / (double)games.Count, gate4.Passed, mix);
+        var weapons = games.Aggregate(WeaponMix.Zero, (sum, g) => sum.Plus(g.Weapons.GetValueOrDefault(captain, WeaponMix.Zero)));
+        return new Reading(classId, games.Count == 0 ? 0.0 : games.Count(g => g.Won) / (double)games.Count, gate4.Passed, mix, weapons);
     }
 
     /// <summary>The printed table for one map: per tier its board, a row per class, then the spread and the verdict.</summary>
@@ -173,7 +174,7 @@ public static class LadderRun
             yield return $"  tier {tier.Tier}, party and enemies +{tier.Raise}:";
             foreach (var r in new[] { tier.Baseline }.Concat(tier.Classes))
             {
-                yield return $"    {r.ClassId}: gate 1 {r.Rate * 100:F1}, gate 4 {Gates.Verdict(r.Gate4)}, captain [{r.Captain}]";
+                yield return $"    {r.ClassId}: gate 1 {r.Rate * 100:F1}, gate 4 {Gates.Verdict(r.Gate4)}, captain [{r.Captain}], weapons [{r.Weapons ?? WeaponMix.Zero}]";
             }
 
             var failures = tier.Gate4Failures;

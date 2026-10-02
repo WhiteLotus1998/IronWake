@@ -31,7 +31,7 @@ public sealed class RandomLegalPlayer : IPlayer
 /// <summary>
 /// Gate 1's baseline (issue 12): a planner of its own over <see cref="EnemyAi.Score"/> and
 /// <see cref="EnemyAi.AttackTiles"/>, per unit in id order. The best-scoring attack from
-/// the best tile with section 8's tie-breaks mirrored (exposure counted over enemy reach
+/// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), with section 8's tie-breaks mirrored (exposure counted over enemy reach
 /// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
@@ -121,6 +121,21 @@ public sealed class HeuristicPlayer : IPlayer
                 .ThenByDescending(u => state.Map.Exits.Min(x => x.DistanceTo(u.At)));
 
     /// <summary>
+    /// The weapons <paramref name="unit"/> may strike with, by slot in inventory order, each with
+    /// the unit as it strikes (that slot moved to the front), as the enemy AI reads its own
+    /// (issue 746). <c>PlanUnit</c> scores every one per tile and target, so a unit that
+    /// carries a bow and a sword draws whichever the board pays for, and the attack names the slot,
+    /// which then stays in front for the enemy phase's counter. Healing spells, items and a spent
+    /// spell are left out, as <see cref="BattleUnit.UsableWeaponAt"/> leaves them out.
+    /// </summary>
+    public static IReadOnlyList<(int Slot, Weapon Weapon, BattleUnit Armed)> Arms(GameContent content, BattleUnit unit) =>
+        Enumerable.Range(0, unit.Unit.Inventory.Count)
+            .Select(slot => (Slot: slot, Weapon: unit.UsableWeaponAt(content, slot)))
+            .Where(arm => arm.Weapon is not null)
+            .Select(arm => (arm.Slot, arm.Weapon!, unit.WithSlotInFront(arm.Slot)))
+            .ToList();
+
+    /// <summary>
     /// Whether Ottilie's ledger (DESIGN.md 13.18) would refuse this attack from <paramref name="tile"/>.
     /// The heuristic plays no signature, but it obeys a refusal, so every plan it makes is legal.
     /// </summary>
@@ -162,50 +177,55 @@ public sealed class HeuristicPlayer : IPlayer
         var enemies = state.UnitsOf(Side.Enemy).ToList();
         var enemyReach = enemies.Select(e => state.ReachOf(e, content)).ToList();
 
-        if (weapon is not null)
+        var arms = Arms(content, unit);
+        if (arms.Count > 0)
         {
+            var equipped = unit.EquippedSlot(content);
             Option? best = null;
             foreach (var tile in tiles)
             {
                 var avoid = state.Map.TerrainAt(tile, content).AvoidFor(movement);
                 var exposed = enemyReach.Count(r => r.CanEnd(tile));
                 var cost = reach.CostTo(tile)!.Value;
-                foreach (var target in enemies)
+                foreach (var (slot, armWeapon, armed) in arms)
                 {
-                    if (!weapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile) || LedgerRefuses(state, content, unit, tile, target))
+                    foreach (var target in enemies)
                     {
-                        continue;
-                    }
-
-                    var critSafe = true;
-                    if (LosesTheMap(state, unit))
-                    {
-                        var sum = Exposure.Of(state, content, unit, tile, target);
-                        if (sum.NoCrit >= unit.Hp)
+                        if (!armWeapon.InRange(tile.DistanceTo(target.At)) || !Dusk.Sees(state, unit.Side, target.At, unit.Id, tile) || LedgerRefuses(state, content, armed, tile, target))
                         {
-                            var kill = KillProbability(state, content, unit, tile, target);
-                            if (refusedKill is null || kill > refusedKill)
-                            {
-                                refusedKill = kill;
-                            }
-
                             continue;
                         }
 
-                        critSafe = sum.WithCrit < unit.Hp;
-                    }
+                        var critSafe = true;
+                        if (LosesTheMap(state, unit))
+                        {
+                            var sum = Exposure.Of(state, content, unit, tile, target, slot);
+                            if (sum.NoCrit >= unit.Hp)
+                            {
+                                var kill = KillProbability(state, content, armed, tile, target);
+                                if (refusedKill is null || kill > refusedKill)
+                                {
+                                    refusedKill = kill;
+                                }
 
-                    var option = new Option(EnemyAi.Score(state, content, unit, tile, target), target.Id, tile, critSafe, avoid, exposed, cost);
-                    if (best is null || option.Beats(best))
-                    {
-                        best = option;
+                                continue;
+                            }
+
+                            critSafe = sum.WithCrit < unit.Hp;
+                        }
+
+                        var option = new Option(EnemyAi.Score(state, content, armed, tile, target), target.Id, tile, critSafe, avoid, exposed, cost, slot);
+                        if (best is null || option.Beats(best))
+                        {
+                            best = option;
+                        }
                     }
                 }
             }
 
             if (best is not null)
             {
-                return WithMove(unit, best.Tile, new Attack(unit.Id, best.TargetId));
+                return WithMove(unit, best.Tile, new Attack(unit.Id, best.TargetId, best.Slot == equipped ? null : best.Slot));
             }
         }
 
@@ -637,7 +657,7 @@ public sealed class HeuristicPlayer : IPlayer
     }
 
     /// <summary>Section 8's order for the player's side: score, lower target id, then the captain's crit-safe key, then avoid, fewer enemies reaching the tile, cost, row-major.</summary>
-    private sealed record Option(double Score, string TargetId, Coord Tile, bool CritSafe, int Avoid, int Exposed, int Cost)
+    private sealed record Option(double Score, string TargetId, Coord Tile, bool CritSafe, int Avoid, int Exposed, int Cost, int Slot)
     {
         public bool Beats(Option other)
         {

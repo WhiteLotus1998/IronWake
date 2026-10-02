@@ -23,7 +23,11 @@ public static class LevelRun
     public const int Threshold = 7;
 
     /// <summary>One run: per map won, the levels of the company standing after it, how many of it meet some advanced form's level and ranks (<see cref="Ready"/>) and the map's <see cref="Camp"/> reading, and the map no try won, or null.</summary>
-    public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready, Camp Camp)> Maps, int? LostOn);
+    public sealed record Run(IReadOnlyList<(int Map, IReadOnlyList<int> Levels, int Ready, Camp Camp)> Maps, int? LostOn)
+    {
+        /// <summary>The weapons the company attacked and countered with over the run's won battles, by class as each unit stood when it struck (issue 746).</summary>
+        public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+    }
 
     /// <summary>
     /// A won map as its battle began and ended (issue 738): the enemy level it was fought at, the
@@ -79,6 +83,7 @@ public static class LevelRun
         {
             var record = CampaignRecord.Start(content, (ulong)seed, permadeath: false);
             var maps = new List<(int, IReadOnlyList<int>, int, Camp)>();
+            var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
             int? lost = null;
             while (!record.IsFinished(content))
             {
@@ -86,14 +91,17 @@ public static class LevelRun
                 var map = MapFiles.Load(MapFiles.CampaignPath(contentRoot, content, record.NextMap(content).MapId), content);
                 BattleState? won = null;
                 Camp? camp = null;
+                Dictionary<string, WeaponMix>? struck = null;
                 for (var attempt = 0; attempt < HeirloomRun.Attempts && won is null; attempt++)
                 {
                     var tried = record with { Seed = unchecked(record.Seed + (ulong)attempt * 7919UL) };
                     var start = tried.Begin(map, content);
-                    var end = Fight(start, content, seed, number);
+                    var tally = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+                    var end = Fight(start, content, seed, number, tally);
                     if (end.Outcome.Result == BattleResult.Won)
                     {
                         won = end;
+                        struck = tally;
                         camp = Read(start, end, content);
                     }
                 }
@@ -104,12 +112,17 @@ public static class LevelRun
                     break;
                 }
 
+                foreach (var (classId, mix) in struck!)
+                {
+                    weapons[classId] = weapons.GetValueOrDefault(classId, WeaponMix.Zero).Plus(mix);
+                }
+
                 record = record.AfterBattle(won, content);
                 var company = record.Present(content);
                 maps.Add((number, company.Select(u => u.Level).ToList(), company.Count(u => Ready(u, content)), camp!));
             }
 
-            runs.Add(new Run(maps, lost));
+            runs.Add(new Run(maps, lost) { Weapons = weapons });
         }
 
         return runs;
@@ -123,7 +136,7 @@ public static class LevelRun
     public static bool Ready(Unit unit, GameContent content) =>
         content.Classes.Values.Any(f => f.Advances is { } basis && Certifications.Check(unit with { ClassId = basis.Id }, f, null, CampaignRecord.IsCaptain(unit, content)).Count == 0);
 
-    private static BattleState Fight(BattleState state, GameContent content, int seed, int number)
+    private static BattleState Fight(BattleState state, GameContent content, int seed, int number, Dictionary<string, WeaponMix> weapons)
     {
         var player = new HeuristicPlayer();
         while (!state.Outcome.IsOver)
@@ -135,6 +148,11 @@ public static class LevelRun
                 if (!result.Accepted)
                 {
                     throw new InvalidOperationException($"seed {seed} map {number}: {command} was rejected: {result.Rejection!.Message}");
+                }
+
+                foreach (var (_, classId, type, counter) in WeaponMix.Strikes(state, content, command, result.Events))
+                {
+                    weapons[classId] = weapons.GetValueOrDefault(classId, WeaponMix.Zero).With(type, counter);
                 }
 
                 state = result.Next;
@@ -150,7 +168,7 @@ public static class LevelRun
 
     /// <summary>
     /// The printed table: per map, over the runs that won it, the company at or above the threshold, the highest level, the third highest and the levels the whole company has gained, each as p25 p50 p75;
-    /// then the map's camp line (issue 738): its enemy level, the deployed units' median and lowest level as the battle began, and the captain's share of the EXP the company kept from it, each as p50.
+    /// then the map's camp line (issue 738): its enemy level, the deployed units' median and lowest level as the battle began, and the captain's share of the EXP the company kept from it, each as p50; last, the weapons each class attacked and countered with (issue 746).
     /// </summary>
     public static IEnumerable<string> Lines(GameContent content, IReadOnlyList<Run> runs)
     {
@@ -175,6 +193,10 @@ public static class LevelRun
             var share = shares.Count == 0 ? "none earned" : $"{Percentile(shares, 0.5)}%";
             yield return $"    camp {id}: enemy {Percentile(enemy, 0.5)}, deployed top p50 {Percentile(topAtCamp, 0.5)}, median p50 {Percentile(median, 0.5)}, lowest p50 {Percentile(lowest, 0.5)}, captain share p50 {share}";
         }
+
+        var byClass = runs.SelectMany(r => r.Weapons).GroupBy(kv => kv.Key, StringComparer.Ordinal).OrderBy(g => g.Key, StringComparer.Ordinal)
+            .Select(g => $"{g.Key} [{g.Aggregate(WeaponMix.Zero, (sum, kv) => sum.Plus(kv.Value))}]").ToList();
+        yield return $"  weapons by class over won battles, attacks/counters: {(byClass.Count == 0 ? "none" : string.Join(", ", byClass))}";
 
         foreach (var lostOn in runs.Where(r => r.LostOn is not null).GroupBy(r => r.LostOn!.Value).OrderBy(g => g.Key))
         {

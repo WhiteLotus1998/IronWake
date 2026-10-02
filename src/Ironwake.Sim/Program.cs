@@ -466,7 +466,14 @@ public static class Program
     /// beside it (issue 331). <paramref name="mapId"/> may be a map file's path, so a sample
     /// outside the content directory traces too.
     /// </summary>
-    public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage)
+    public static int Trace(string mapId, ulong seed, RollScheme scheme = RollScheme.TwoRollAverage) => Trace(mapId, seed, scheme, null);
+
+    /// <summary>
+    /// <see cref="Trace(string, ulong, RollScheme)"/> with the loaded content passed through
+    /// <paramref name="adjust"/> first, so a test can trace a sample with a roster changed (issue 746:
+    /// Pell with Cinder alone, since the heuristic otherwise casts Gust and never lights a fire).
+    /// </summary>
+    public static int Trace(string mapId, ulong seed, RollScheme scheme, Func<GameContent, GameContent>? adjust)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -475,7 +482,8 @@ public static class Program
             return 1;
         }
 
-        var content = ContentLoader.Load(contentDir);
+        var loaded = ContentLoader.Load(contentDir);
+        var content = adjust is null ? loaded : adjust(loaded);
         var maps = File.Exists(mapId)
             ? new List<(string Id, MapDefinition Map)> { (mapId, MapFiles.Load(mapId, content)) }
             : MapFiles.LoadAll(contentDir, content).Where(m => m.Id == mapId).ToList();
