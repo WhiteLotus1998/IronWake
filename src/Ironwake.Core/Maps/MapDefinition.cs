@@ -203,6 +203,13 @@ public sealed record MapDefinition(
     public ValueList<string> Oathbound { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// The <c>pair_rule:</c> header (issue 692, slice 4): the enemy groups bound by the pair rule, in
+    /// file order. An enemy in one of them never crits a unit with an ally beside it (<see cref="PairRule"/>).
+    /// Empty by default.
+    /// </summary>
+    public ValueList<string> PairRuleGroups { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
     /// The <c>fronts:</c> header (issue 692): the map's named breaches in file order, each falling
     /// once when an enemy stands on one of its tiles (<see cref="Fronts"/>). Empty by default.
     /// </summary>

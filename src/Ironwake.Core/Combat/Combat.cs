@@ -28,8 +28,9 @@ public static class Combat
 
     public static int AttackSpeed(Combatant unit) => unit.Stats.Spd - Burden(unit);
 
+    /// <summary>Attack speed at least <see cref="DoubleThreshold"/> over the target's; never for a side the pair rule holds (<see cref="Combatant.PairHeld"/>).</summary>
     public static bool Doubles(Combatant attacker, Combatant target) =>
-        AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
+        !attacker.PairHeld && AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
 
     /// <summary>The weapon's Mt as this side fights with it: the content number, less 5 (floored at zero) when the weapon is broken.</summary>
     public static int Mt(Combatant attacker)
@@ -98,9 +99,12 @@ public static class Combat
     /// <summary>Lck plus modifiers, deliberately unclamped: a negative crit avoid is a cost a modifier may impose.</summary>
     public static int CritAvoid(Combatant target) => target.Stats.Lck + target.CritAvoidModifier;
 
-    /// <summary>Crit less crit avoid, clamped to 0..100, with the on-combat ability modifiers added as for <see cref="HitChance"/>.</summary>
+    /// <summary>
+    /// Crit less crit avoid, clamped to 0..100, with the on-combat ability modifiers added as for <see cref="HitChance"/>;
+    /// 0 when the pair rule holds the attacker (<see cref="Combatant.PairHeld"/>).
+    /// </summary>
     public static int CritChance(Combatant attacker, Combatant target) =>
-        Math.Clamp(
+        attacker.PairHeld ? 0 : Math.Clamp(
             Crit(attacker) + AbilityRules.Against(attacker, target).Crit
             - CritAvoid(target) - AbilityRules.Against(target, attacker).CritAvoid,
             0,

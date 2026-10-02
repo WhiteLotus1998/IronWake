@@ -2101,6 +2101,52 @@ public class CliPlayTests
     }
 
     /// <summary>
+    /// Issue 692, slice 4: <c>play --level N</c> raises every deployed unit below N to N on the average
+    /// growth enemies scale by, and refuses a level outside 1 to 30.
+    /// </summary>
+    [Fact]
+    public void TheLevelFlagRaisesThePartyAndRefusesALevelOutOfRange()
+    {
+        var script = Path.Combine(Path.GetTempPath(), "ironwake-level-" + Guid.NewGuid().ToString("N") + ".script");
+        File.WriteAllText(script, "");
+        try
+        {
+            var raised = Run(out _, "play", "the_tollgate", "--seed", "7", "--level", "8", "--script", script, "--content", Fixture.RealContentDirectory());
+            var refused = Run(out var exit, "play", "the_tollgate", "--level", "31", "--content", Fixture.RealContentDirectory());
+
+            Assert.Contains("Alder Fenn L8 cadet", raised);
+            Assert.DoesNotContain(" L1 cadet", raised);
+            Assert.Equal(2, exit);
+            Assert.Contains(Ironwake.Cli.PlaySession.Usage, refused);
+        }
+        finally
+        {
+            File.Delete(script);
+        }
+    }
+
+    /// <summary>
+    /// Issue 692, slice 4: the pair rule's journaled play (<c>docs/samples/ironwake_keep_pair.map</c> at
+    /// level 8) replays to its transcript, and the hunter is held to one strike while Teodor stands
+    /// beside Dunstan and doubles him once Teodor has fallen.
+    /// </summary>
+    [Fact]
+    public void ThePairSamplePlayReplaysToItsTranscript()
+    {
+        var repo = Directory.GetParent(Fixture.RealContentDirectory())!.FullName;
+        var map = Path.Combine(repo, "docs", "samples", "ironwake_keep_pair.map");
+        var script = Path.Combine(repo, "docs", "transcripts", "2026-10-02-ironwake_keep_pair-695.script");
+
+        var output = Run(out _, "play", map, "--seed", "695", "--level", "8", "--script", script, "--content", Fixture.RealContentDirectory());
+        var text = File.ReadAllText(map).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, Ironwake.Content.MapFormat.Write(Ironwake.Content.MapFormat.Parse("ironwake_keep_pair.map", text, Maps.MapFixture.Content), Maps.MapFixture.Content));
+        Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        Assert.Contains("Forecast Sworn Hunter -> Wren with Iron Sword: dmg 12 hit 80% crit 0%;", output);
+        Assert.Contains("Forecast Sworn Hunter -> Dunstan with Iron Lance: dmg 8 x2 hit 94% crit 8%;", output);
+    }
+
+    /// <summary>
     /// Issues 78 and 256: on a map with <c>announce: on</c> the console lists every event before
     /// the first command, in player words with the held-tile rule on each spawn, and <c>map</c>
     /// lists only those still to fire; the Tollgate, which does not announce, prints none.

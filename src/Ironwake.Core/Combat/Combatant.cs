@@ -88,6 +88,14 @@ public sealed record Combatant
     /// </summary>
     public bool Oathbound { get; init; }
 
+    /// <summary>
+    /// Whether this side is held by the pair rule here (issue 692): an enemy in a group its map's
+    /// <c>pair_rule:</c> header names, striking or answering a unit with an ally beside it
+    /// (<see cref="PairRule"/>). It neither doubles (<see cref="Combat.Doubles"/>) nor crits
+    /// (<see cref="Combat.CritChance"/> reads 0).
+    /// </summary>
+    public bool PairHeld { get; init; }
+
     /// <summary>Whether this side can strike a target at <paramref name="distance"/> tiles: armed, in range, and not <see cref="Blind"/>.</summary>
     public bool CanStrike(int distance) => !Blind && Weapon is not null && Weapon.InRange(distance);
 }

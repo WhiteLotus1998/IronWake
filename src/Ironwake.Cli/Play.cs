@@ -25,7 +25,7 @@ public sealed record RecallRow(int? State, string Text);
 /// </summary>
 public sealed class PlaySession
 {
-    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id] [--log file]";
+    public const string Usage = "usage: ironwake play <map-file|map-name> [--seed N] [--script file] [--strict] [--content dir] [--scheme one|two] [--protocol [--omniscient]] [--candidate id] [--level N] [--log file]";
 
     /// <summary>The exit code of a <c>--strict</c> run stopped by a rejection: not a loss (1) and not a usage error (2).</summary>
     public const int StrictStop = 3;
@@ -159,6 +159,7 @@ public sealed class PlaySession
         var contentDir = "content";
         var scheme = RollScheme.TwoRollAverage;
         string? candidate = null;
+        int? level = null;
         string? log = null;
         for (var i = 1; i < args.Length; i++)
         {
@@ -187,6 +188,10 @@ public sealed class PlaySession
                     break;
                 case "--candidate" when value is not null:
                     candidate = value;
+                    i++;
+                    break;
+                case "--level" when value is not null && int.TryParse(value, out var parsedLevel) && parsedLevel >= Unit.MinLevel && parsedLevel <= Unit.MaxLevel:
+                    level = parsedLevel;
                     i++;
                     break;
                 case "--log" when value is not null:
@@ -283,6 +288,13 @@ public sealed class PlaySession
             }
 
             roster = ValueList<Unit>.From(new[] { unit });
+        }
+
+        // --level raises each member below N to N on the average growth enemies scale by (issue 692),
+        // so a board written for a late-campaign company can be played without the campaign before it.
+        if (level is { } floor)
+        {
+            roster = ValueList<Unit>.From(roster.Select(u => u.ScaledTo(floor, content.Class(u.ClassId))));
         }
 
         if (protocol)
