@@ -11,8 +11,8 @@ announce: on
 ..^.........^.
 ..............
 MMMMMM..MMMMMM
-MMMMMM..nMMMMM
-MMMMMM..MMMMMM
+MMMMMM..MMnMMM
+MMMMMM..MMnMMM
 ..............
 ..^.......^...
 ..............
@@ -35,10 +35,10 @@ E soldier 6,1 group:gate behavior:guard
 E archer 9,1 group:gate behavior:guard
 
 events:
-wave1 turn 3 enemy spawn rider 4,11 group:wave behavior:aggressive
-wave2 turn 3 enemy spawn rider 9,11 group:wave behavior:aggressive
-wave3 turn 3 enemy spawn brigand 6,11 group:wave behavior:aggressive
-rock1 drop 8,4 terrain 6,4 M
-rock2 drop 8,4 terrain 7,4 M
-rock3 drop 8,4 terrain 6,5 M
-rock4 drop 8,4 terrain 7,5 M
+wave1 turn 2 enemy spawn rider 4,11 group:wave behavior:aggressive
+wave2 turn 2 enemy spawn rider 9,11 group:wave behavior:aggressive
+wave3 turn 2 enemy spawn marauder 6,11 group:wave behavior:aggressive
+rock1 drop 10,4 terrain 6,4 M
+rock2 drop 10,4 terrain 7,4 M
+rock3 drop 10,4 terrain 6,5 M
+rock4 drop 10,4 terrain 7,5 M

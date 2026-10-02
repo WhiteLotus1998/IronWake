@@ -22,7 +22,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - #565: `threat` names a tile the boss veto refused and where the boss ends (`refusals`); the client lacks it.
 - 13.18 Lines on the board (#486, DESIGN 13.18): signatures behind `signatures: on`; verdicts in the experiments table; the other eight wait for boards that field them (`cast_audit.md`).
 - 13.25 rotten planks is spiked (0179, round 237; DESIGN 13.25): Planks `+` to Split planks `:` to Water, worn when walked off. #782 (0180): least-wear routes, `move ... via`, `move ... preview`. #783: `rotten_bridge_straggler.map` (Dunstan late, a turn-3 wave); Code 783 warm 7/6/7, the wave died in contact, no cut on offer.
-- 13.26 rockfall is spiked (0182, round 243; DESIGN 13.26): event trigger `drop x,y` (a ledge), `drop <unit>` as the action; a drop's terrain change strikes the occupant 10 (floor 1) and leaves a held tile open. Sample `scree_gorge_rockfall.map`; Code 811 warm 6/6/5, dropped on an empty gorge, clause 2 named against it (lever: the wave a turn earlier).
+- 13.26 rockfall is spiked (0182, round 243; DESIGN 13.26): `drop <unit>` on a `drop x,y` ledge; strikes 10 (floor 1), a held tile stays open. Sample `scree_gorge_rockfall.map`, revised by round 247 (turn-2 wave with a marauder, the ledge off the route at 10,4). Code 811 warm on it 8/7/7.
 - Standing rule (0099): a spike that adds a player action names its cost first, and its keep round shows it biting.
 - #131's north cut is built (0093; Saltmarsh in Maps): the map plays as the pair, then the boss. The lever #524 failed its floor (0095); the next lever has to buy gate 1 back first. Open: turn 1 is a march.
 - #611 is built: six arts, the attack menu; Chat's Tollgate play with it closes #611. #535 slices 1 and 2 are built (0114, 0115); clips await #621.
@@ -68,7 +68,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.22 break | `docs/samples/saltmarsh_ford_break.map` (#606, 0112; Code 661 on the Tollgate and 667 here in, nothing broke on either) | Chat's cold play on Saltmarsh |
 | 13.18 signatures | `docs/samples/saltmarsh_ford_brace_signatures.map` (#486, 0097; Code 563, Chat cold 113 and 587 in: Teodor and Wren's Canto kept, talk unread, the ledger at 50 killed; at 65 since #540) | a cold replay at 65, kept if a command is taken for the ledger |
 | 13.25 rotten planks | `rotten_bridge_planks.map` (0179; Code 251, Chat 4 7/7/8: the relay met clause 1) and `rotten_bridge_straggler.map` (#783; Code 783 warm, no cut on offer) | Chat's cold play of the straggler |
-| 13.26 rockfall | `docs/samples/scree_gorge_rockfall.map` (0182; Code 811 warm in: one clean drop, the timing never bit) | the board lever (wave on turn 2), then Chat's cold play |
+| 13.26 rockfall | `docs/samples/scree_gorge_rockfall.map` (0182; round 247's board; Code 811 warm 8/7/7: the timing decided, warm) | Chat's cold play |
 | 13.14 brace | kept (0084, round 121): spike on `harrow_weir_brace.map`, keep round on `saltmarsh_ford_brace.map` (Code 449, Chat cold 521) | in; shipped on Saltmarsh (0091); holds read on the next brace play with a hold |
 
 Kept on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions (0044), the windup (0094), overwatch (0098, 0103), cover (0099).

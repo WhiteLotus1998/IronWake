@@ -1,0 +1,56 @@
+move teodor 10,7
+move captain 6,4
+move pell 6,5
+move wren 7,5
+move ottilie 7,6
+move dunstan 5,6
+end
+move captain 6,3
+attack captain archer-2
+move pell 6,4
+attack pell archer-2
+attack dunstan rider-1
+move teodor 10,5
+move wren 7,1
+wait wren
+move ottilie 7,2
+wait ottilie
+wait teodor
+end
+attack pell brigand-1
+move dunstan 7,4
+wait dunstan
+move captain 6,1
+wait captain
+move wren 7,0
+wait wren
+wait ottilie
+move teodor 10,4
+wait teodor
+end
+exit wren
+move pell 6,3
+attack pell rider-4
+drop teodor
+move ottilie 8,2
+attack ottilie rider-4
+move captain 7,2
+attack captain rider-4
+end
+move ottilie 6,2
+attack ottilie marauder-1
+move captain 9,0
+wait captain
+move teodor 10,3
+wait teodor
+end
+move ottilie 6,1
+attack ottilie marauder-1
+wait captain
+end
+move ottilie 6,0
+wait ottilie
+wait captain
+end
+exit ottilie
+exit captain
