@@ -23,7 +23,7 @@ public static class Queries
     /// left out). Null with the resolver's refusal when the move
     /// would be refused.
     /// </summary>
-    public static MovePreview? PreviewMove(BattleState state, GameContent content, Move move, out Rejection? rejection)
+    public static WalkPreview? PreviewMove(BattleState state, GameContent content, Move move, out Rejection? rejection)
     {
         var result = Resolver.Apply(state, content, move);
         rejection = result.Rejection;
@@ -53,7 +53,7 @@ public static class Queries
             }
         }
 
-        return new MovePreview(moved, ValueList<(Coord At, string TerrainId)>.From(worn));
+        return new WalkPreview(moved, ValueList<(Coord At, string TerrainId)>.From(worn));
     }
 
     /// <summary>The enemy units the unit's equipped weapon reaches from where it stands and its side sees (DESIGN.md 13.7), in id order. Empty when it has no weapon.</summary>
@@ -719,4 +719,4 @@ public sealed record AttackOption(Attack Command, string? WeaponId, Ability? Art
 /// A move's preview (issue 782): the walk as the resolver would record it, and the tiles it would
 /// wear, each with the terrain it would become.
 /// </summary>
-public sealed record MovePreview(UnitMoved Walk, ValueList<(Coord At, string TerrainId)> Worn);
+public sealed record WalkPreview(UnitMoved Walk, ValueList<(Coord At, string TerrainId)> Worn);
