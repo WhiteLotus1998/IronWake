@@ -1959,7 +1959,8 @@ public static class ContentLoader
                 heal,
                 node.BoolOr("appliesToFlyers", false),
                 burn,
-                node.OptionalString("wearsTo")));
+                node.OptionalString("wearsTo"),
+                node.OptionalString("thawsTo")));
         }
 
         if (builder.Count == 0)
@@ -1972,6 +1973,11 @@ public static class ContentLoader
             if (terrain.WearsTo is { } wearsTo && (!builder.ContainsKey(wearsTo) || wearsTo == terrain.Id))
             {
                 throw new ContentException(file.Name, terrain.Id, "wearsTo", wearsTo == terrain.Id ? "cannot name the terrain itself" : $"names no terrain '{wearsTo}'");
+            }
+
+            if (terrain.ThawsTo is { } thawsTo && (!builder.ContainsKey(thawsTo) || thawsTo == terrain.Id))
+            {
+                throw new ContentException(file.Name, terrain.Id, "thawsTo", thawsTo == terrain.Id ? "cannot name the terrain itself" : $"names no terrain '{thawsTo}'");
             }
         }
 

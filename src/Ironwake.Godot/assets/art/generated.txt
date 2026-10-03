@@ -61,6 +61,7 @@ tile_hill.png
 tile_mountain.png
 tile_plain.png
 tile_planks.png
+tile_rime.png
 tile_road.png
 tile_split_planks.png
 tile_throne.png

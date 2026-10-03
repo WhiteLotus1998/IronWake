@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry", "breath" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -138,6 +138,11 @@ public static class MapFormat
         if (map.Carry is { } carry)
         {
             sb.Append("carry: ").Append(DrakeCarry.Word(carry.Setting)).Append(' ').Append(carry.Rider).Append('\n');
+        }
+
+        if (map.BreathRider is { } breath)
+        {
+            sb.Append("breath: ").Append(breath).Append('\n');
         }
 
         if (map.Messenger is { } messenger)
@@ -382,7 +387,7 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, WokenBearer = woken, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders, EffectiveBows = effectiveBows };
             ValidateMessenger(map, header);
             Validate(map);
-            map = map with { Carry = ParseCarry(header, map) };
+            map = map with { Carry = ParseCarry(header, map), BreathRider = ParseBreath(header, map) };
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
@@ -812,11 +817,6 @@ public static class MapFormat
         }
 
         /// <summary>
-        /// A header of comma-separated enemy group names, each on the map as a placement's or a spawn's
-        /// group, each listed once: <c>oathbound:</c> (issue 691), every enemy in one oath-bound, and
-        /// <c>pair_rule:</c> (issue 692), every enemy in one bound by the pair rule.
-        /// </summary>
-        /// <summary>
         /// The <c>carry:</c> header (issue 805, samples): <c>carry: &lt;waited|free|brace&gt; &lt;rider&gt;</c>,
         /// the rider placed by a <c>P recruit:</c> line.
         /// </summary>
@@ -841,6 +841,36 @@ public static class MapFormat
             return new CarryRule(setting, words[1]);
         }
 
+        /// <summary>
+        /// The <c>breath:</c> header (issue 805, samples): <c>breath: &lt;rider&gt;</c>, the rider placed by a
+        /// <c>P recruit:</c> line.
+        /// </summary>
+        private string? ParseBreath(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("breath", out var entry))
+            {
+                return null;
+            }
+
+            var words = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length != 1)
+            {
+                throw ErrorAt(entry.Line, $"breath needs '<rider>', got '{entry.Value}'");
+            }
+
+            if (!map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == words[0]))
+            {
+                throw ErrorAt(entry.Line, $"breath names '{words[0]}' but no 'P recruit:{words[0]}' line places them");
+            }
+
+            return words[0];
+        }
+
+        /// <summary>
+        /// A header of comma-separated enemy group names, each on the map as a placement's or a spawn's
+        /// group, each listed once: <c>oathbound:</c> (issue 691), every enemy in one oath-bound, and
+        /// <c>pair_rule:</c> (issue 692), every enemy in one bound by the pair rule.
+        /// </summary>
         private ValueList<string> ParseGroups(Dictionary<string, (string Value, int Line)> header, MapDefinition map, string key)
         {
             if (!header.TryGetValue(key, out var entry))

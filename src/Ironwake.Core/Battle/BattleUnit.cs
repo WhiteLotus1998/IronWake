@@ -122,6 +122,12 @@ public sealed record BattleUnit(
     /// </summary>
     public bool Landed { get; init; }
 
+    /// <summary>
+    /// Set once the unit's drake has breathed rime this battle (issue 805, <see cref="Rime"/>): once a
+    /// map. Never cleared.
+    /// </summary>
+    public bool Breathed { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

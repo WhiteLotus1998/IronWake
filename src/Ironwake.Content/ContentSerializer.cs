@@ -1009,6 +1009,11 @@ public static class ContentSerializer
             writer.WriteString("wearsTo", wearsTo);
         }
 
+        if (terrain.ThawsTo is { } thawsTo)
+        {
+            writer.WriteString("thawsTo", thawsTo);
+        }
+
         writer.WriteEndObject();
     }
 

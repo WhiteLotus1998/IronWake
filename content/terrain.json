@@ -114,6 +114,16 @@
       "def": 0,
       "res": 0,
       "wearsTo": "water"
+    },
+    {
+      "id": "rime",
+      "name": "Rime ice",
+      "glyph": "&",
+      "cost": { "infantry": 1, "cavalry": 2, "flying": 1, "armored": 2 },
+      "avoid": 0,
+      "def": 0,
+      "res": 0,
+      "thawsTo": "water"
     }
   ]
 }

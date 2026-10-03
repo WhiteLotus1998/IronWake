@@ -55,6 +55,12 @@ public sealed record BattleState(
     public ValueList<Coord> Opened { get; init; }
 
     /// <summary>
+    /// The Rime ice the drake's breath laid (issue 805, <see cref="Rime"/>), each tile on its thaw
+    /// clock, sorted row-major. A Recall restores the list with the board.
+    /// </summary>
+    public ValueList<RimeTile> Rime { get; init; }
+
+    /// <summary>
     /// What opened chests sent to the wagon (issue 679): the item ids that did not fit in the
     /// opener's pack, in the order they were taken, each at full uses. The campaign collects them
     /// only if the map is won (<see cref="CampaignRecord.AfterBattle"/>); a Recall restores the list
@@ -753,6 +759,17 @@ public sealed record BattleState(
             foreach (var at in Opened)
             {
                 sb.Append(' ').Append(at);
+            }
+
+            sb.Append('\n');
+        }
+
+        if (Rime.Count > 0)
+        {
+            sb.Append("rime");
+            foreach (var tile in Rime)
+            {
+                sb.Append(' ').Append(tile.At).Append('/').Append(tile.Side).Append('/').Append(tile.Clock);
             }
 
             sb.Append('\n');
