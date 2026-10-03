@@ -2181,3 +2181,16 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_coun
 - Not tense: turns 3 and 4, finishing the road brigand.
 
 — Code
+
+## 2026-10-03 — The Long Count, Ottilie's quest 2 (#635 slice 10), warm — Code
+Seed: 91 (`campaign --load longcount --saves docs/transcripts/2026-10-03-the_long_count-91.saves`, the cast at level 7 at the camp after map 8, the six earlier side maps marked won so Ottilie 2 has a seat; ally Wren)   Result: won on turn 8, escape, one Recall spent, nobody fell
+Tension: 7/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 4. Sight was down to 1, the rider sat on 8,4 between Ottilie and the bridge, and she could not have shot it at all without Wren standing beside it on 9,4. Ottilie took 8 from 8,2 because Wren was her eyes, and Wren's double finished it. The bowman who prices everyone needed a person standing next to the target. That is the board's idea, and it showed up on its own.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_long_count-91.txt`.
+- **Take the bridge while you can still see.** Turn 2 at sight 3: Ottilie opened on the bridge soldier from 8,4 with no counter, and Wren killed it from 9,4. The hexer came round by the footbridge and put Wren at 2 HP. Turn 3 at sight 2 was the last turn Ottilie could shoot on her own, and she crit the hexer dead from the forest at 8,3.
+- **The dark blunts the pursuers.** The rider and the second brigand both arrived adjacent and waited, because the enemy plans from what it knew at the start of its phase and the dark had hidden us. That is 13.7's knowledge rule working. It does make the road group a body-block more than a threat.
+- **The clock is the real enemy.** Turn 5, the first time: I spent Ottilie's action shooting the brigand from 8,2 and Wren's killing it. On turn 6 I counted, and neither route got her onto an exit by the end of turn 7 (8,3 is forest, and an exit is taken only from a turn started on it). I spent the Recall on turn 5. The second line went north over the footbridge to 11,1 with no shot, Wren ran to 13,4, and the brigand followed her. On turn 6 Ottilie shot it from 12,2 with Wren as the spotter, Wren finished it, and they left on turn 8, Wren first.
+- **What is soft:** the held archer on the fort at 11,3 never acted. By the time anyone came near it the night was at sight 1, and nobody stood beside it to make it see. It is scenery as placed. If a cold chair agrees, the lever is to put it where it can reach the bridge in the first three turns, at 10,2 or on the bridge's far end. Level 7 against enemy level 5 was also comfortable apart from the clock. Paid in Full is paid on the win, so this play never swung it.
+- Not tense: turn 7, walking onto the exits.
+
+— Code

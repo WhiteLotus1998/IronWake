@@ -189,12 +189,12 @@ public class SignatureCeilingTests
     }
 
     [Fact]
-    public void TheSmokeRowPassesOnTheShippedHeirloomAtItsLastStageMaudsPsalterAndPellsCommonplace()
+    public void TheSmokeRowPassesOnTheShippedHeirloomAtItsLastStageAndEveryPaidSignature()
     {
         var row = Ironwake.Sim.Program.CeilingGate(Shipped);
 
         Assert.True(row.Passed);
-        Assert.Equal("signature ceiling: 3 items, highest 1.14 of 1.15: ok", row.Line);
+        Assert.Equal("signature ceiling: 4 items, highest 1.14 of 1.15: ok", row.Line);
     }
 
     [Fact]

@@ -53,7 +53,7 @@
       "personality": "Keeps a ledger of every arrow and bills the crown for the ones she loses; has not been paid.",
       "signature": "ledger",
       "hooks": [ "ansgar", "wren" ],
-      "abilities": [ "aimed_shot" ],
+      "abilities": [ "aimed_shot", "paid_in_full" ],
       "stats": { "hp": 17, "str": 5, "mag": 0, "dex": 7, "spd": 6, "lck": 4, "def": 3, "res": 2, "cha": 4 },
       "growths": { "hp": 40, "str": 35, "mag": 5, "dex": 50, "spd": 40, "lck": 30, "def": 20, "res": 20, "cha": 30 },
       "inventory": [ { "item": "iron_bow" }, { "item": "field_dressing" } ]

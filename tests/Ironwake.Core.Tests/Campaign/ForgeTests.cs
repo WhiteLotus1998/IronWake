@@ -215,12 +215,13 @@ public class ForgeTests
     }
 
     [Fact]
-    public void TheShippedCampaignIssuesThePsalterAndTheCommonplaceAndPaysRareForTheCommonplaceOnly()
+    public void TheShippedCampaignIssuesThePsalterTheCommonplaceAndTheTallyAndPaysRareForTheTwoThatRefine()
     {
-        Assert.Equal(new[] { "maud_psalter", "pell_commonplace" }, Shipped.Campaign.Quests.Select(q => q.Pays).OfType<string>());
-        Assert.Equal(3, Forge.RareNeeded(Shipped));
-        Assert.Equal(3, Forge.RarePaid(Shipped));
+        Assert.Equal(new[] { "maud_psalter", "pell_commonplace", "ottilie_tally" }, Shipped.Campaign.Quests.Select(q => q.Pays).OfType<string>());
+        Assert.Equal(6, Forge.RareNeeded(Shipped));
+        Assert.Equal(6, Forge.RarePaid(Shipped));
         Assert.Equal(3, Shipped.Campaign.Quest("pell_2")!.Rare);
+        Assert.Equal(3, Shipped.Campaign.Quest("ottilie_2")!.Rare);
         Assert.Null(Forge.RareRefusal(Shipped));
         Assert.Equal(new ForgeRules(1, 5, 100, 2, 3), Shipped.Campaign.Forge);
     }
@@ -236,8 +237,8 @@ public class ForgeTests
     }
 
     [Theory]
-    [InlineData(2, "pays 5 frozen iron and the signatures the campaign issues need 6 to Refine fully; 1 short")]
-    [InlineData(4, "pays 7 frozen iron and the signatures the campaign issues need 6; 1 over, which nothing can spend")]
+    [InlineData(2, "pays 8 frozen iron and the signatures the campaign issues need 9 to Refine fully; 1 short")]
+    [InlineData(4, "pays 10 frozen iron and the signatures the campaign issues need 9; 1 over, which nothing can spend")]
     public void TheValidatorFiresOnOneShortAndOneOver(int rare, string problem)
     {
         var quests = Content.Campaign.Quests.Select(q => q.Id == "maud_2" ? q with { Rare = rare } : q);

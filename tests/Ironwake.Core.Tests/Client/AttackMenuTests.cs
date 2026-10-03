@@ -56,7 +56,7 @@ public class AttackMenuTests
     [InlineData("captain", "feint,full_measure")]
     [InlineData("wren", "heavy_cut")]
     [InlineData("teodor", "long_thrust")]
-    [InlineData("ottilie", "aimed_shot")]
+    [InlineData("ottilie", "aimed_shot,paid_in_full")]
     [InlineData("pell", "overcast,read_ahead")]
     [InlineData("keziah", "cleave")]
     public void EachArtIsKnownAtTheStartByOneOfTheCast(string unit, string art)

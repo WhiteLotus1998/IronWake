@@ -324,8 +324,8 @@ internal static class Fixture
     /// maps (<see cref="CampaignRecord.TrialSeed"/>,
     /// <see cref="CampaignRecord.QuestSeed"/>), so a script journaled on nine
     /// maps replays only on nine. Pell's quests 1 and 2 (issue 635 slices 6 and 7) go too, and
-    /// with them her art Read Ahead: every copy stands for a build journaled before them, when no
-    /// camp listed them and no card printed the art.
+    /// with them her art Read Ahead, and Ottilie's art Paid in Full (slice 10): every copy stands
+    /// for a build journaled before them, when no camp listed them and no card printed the art.
     /// </summary>
     public static string WithoutTheField(string target)
     {
@@ -349,9 +349,9 @@ internal static class Fixture
 
         var castPath = Path.Combine(target, "units", "cast.json");
         var cast = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(castPath))!;
-        foreach (var unit in cast["units"]!.AsArray().OfType<System.Text.Json.Nodes.JsonObject>().Where(u => (string)u["id"]! == "pell"))
+        foreach (var unit in cast["units"]!.AsArray().OfType<System.Text.Json.Nodes.JsonObject>().Where(u => (string)u["id"]! is "pell" or "ottilie"))
         {
-            unit["abilities"] = new System.Text.Json.Nodes.JsonArray(unit["abilities"]!.AsArray().Where(a => (string)a! != "read_ahead").Select(a => a!.DeepClone()).ToArray());
+            unit["abilities"] = new System.Text.Json.Nodes.JsonArray(unit["abilities"]!.AsArray().Where(a => (string)a! is not ("read_ahead" or "paid_in_full")).Select(a => a!.DeepClone()).ToArray());
         }
 
         File.WriteAllText(castPath, cast.ToJsonString());
@@ -384,6 +384,13 @@ internal static class Fixture
             foreach (var hired in quests.OfType<System.Text.Json.Nodes.JsonObject>().Where(q => q.ContainsKey("opensAfter")).ToList())
             {
                 quests.Remove(hired);
+            }
+
+            // A part 2 whose part 1 went with the held slots goes too (Ottilie's, issue 635 slice 10).
+            var firsts = quests.OfType<System.Text.Json.Nodes.JsonObject>().Where(q => (int)q["part"]! == 1).Select(q => (string)q["member"]!).ToHashSet();
+            foreach (var orphan in quests.OfType<System.Text.Json.Nodes.JsonObject>().Where(q => (int)q["part"]! == 2 && !firsts.Contains((string)q["member"]!)).ToList())
+            {
+                quests.Remove(orphan);
             }
         }
 
