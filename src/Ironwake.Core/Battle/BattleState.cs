@@ -168,12 +168,15 @@ public sealed record BattleState(
         Escaped.Any(u => u.IsCaptain) ? UnitsOf(Side.Player) : Enumerable.Empty<BattleUnit>();
 
     /// <summary>
-    /// The player units that come out of the battle alive: on an Escape map the ones that
-    /// left through an exit, since a unit left behind has fallen (issue 269); on every other
-    /// map the ones still on the board.
+    /// The player units that come out of the battle alive: on every map the ones still on the
+    /// board, and on an Escape map the ones that left through an exit before them. Once the
+    /// captain has escaped the board's are <see cref="LeftBehind"/> and fallen (issue 269); until
+    /// then nobody has been left behind, so a lost Escape map keeps its living (issue 861).
     /// </summary>
     public IEnumerable<BattleUnit> Survivors() =>
-        Map.Win == WinCondition.Escape ? Escaped : UnitsOf(Side.Player);
+        Map.Win != WinCondition.Escape ? UnitsOf(Side.Player)
+        : Escaped.Any(u => u.IsCaptain) ? Escaped
+        : Escaped.Concat(UnitsOf(Side.Player));
 
     /// <summary>Whether a Guard group has woken. Groups of any other behavior are never asked about.</summary>
     public bool IsAwake(string group) => AwakeGroups.Contains(group);

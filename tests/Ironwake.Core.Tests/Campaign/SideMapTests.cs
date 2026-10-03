@@ -514,6 +514,50 @@ public class SideMapTests
         Assert.Equal("side map maud_1 closed when maud fell", after.Record.QuestRefusal("maud_1", "wren", Content));
     }
 
+    /// <summary>The side map's opening played as an Escape, with <paramref name="escaped"/> gone through an exit and <paramref name="dead"/> fallen.</summary>
+    private static BattleState AsEscape(CampaignRecord record, string[] escaped, string[] dead)
+    {
+        var opening = record.BeginQuest(Side("the_lazar_house"), "maud_1", "wren", Content);
+        var escape = opening with { Map = opening.Map with { Win = WinCondition.Escape } };
+        var gone = escaped.Concat(dead).ToHashSet(StringComparer.Ordinal);
+        return escape with
+        {
+            Units = ValueList<BattleUnit>.From(escape.Units.Where(u => !gone.Contains(u.Id))),
+            Escaped = ValueList<BattleUnit>.From(escape.Units.Where(u => escaped.Contains(u.Id))),
+            History = ValueList<BattleState>.Of(escape),
+        };
+    }
+
+    [Fact]
+    public void ALostEscapeSideMapKeepsTheLivingAllyWhoNeverExited()
+    {
+        var record = At("the_tollgate");
+        var end = AsEscape(record, escaped: Array.Empty<string>(), dead: new[] { "maud" });
+        Assert.Equal(BattleResult.Lost, end.Outcome.Result);
+        Assert.Empty(end.LeftBehind());
+
+        var after = record.AfterQuest(end, "maud_1", Content);
+
+        Assert.Equal("maud falls on maud_1, which closes for good; fallen for good: maud", after.Text);
+        Assert.Equal(ValueList<string>.Of("maud"), after.Record.Fallen);
+        Assert.NotNull(after.Record.Find("wren"));
+    }
+
+    [Fact]
+    public void AnEscapeSideMapWonByTheMembersExitStillDropsTheAllyLeftOnTheBoard()
+    {
+        var record = At("the_tollgate");
+        var end = AsEscape(record, escaped: new[] { "maud" }, dead: Array.Empty<string>());
+        Assert.Equal(BattleResult.Won, end.Outcome.Result);
+        Assert.Equal(new[] { "wren" }, end.LeftBehind().Select(u => u.Id));
+
+        var after = record.AfterQuest(end, "maud_1", Content).Record;
+
+        Assert.Equal(ValueList<string>.Of("wren"), after.Fallen);
+        Assert.Null(after.Find("wren"));
+        Assert.NotNull(after.Find("maud"));
+    }
+
     [Fact]
     public void ASideMapLostWithItsMemberStandingOpensAgainAfterTheNextMap()
     {
