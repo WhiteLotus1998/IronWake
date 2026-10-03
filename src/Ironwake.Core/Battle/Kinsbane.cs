@@ -9,7 +9,8 @@ namespace Ironwake.Core;
 /// map, for whoever carries it, equipped or not:
 /// <list type="bullet">
 /// <item>The drain: at each of its carrier's side's phase starts after the first, if the carrier
-/// fed it nothing since the last one (<see cref="BattleUnit.HasFed"/>), the carrier loses
+/// fed it nothing since the last one (<see cref="BattleUnit.HasFed"/>) and an enemy stands in the
+/// carrier's reach (<see cref="Smells"/>, issue 854), the carrier loses
 /// <see cref="Drain"/> HP, never below 1. A drain that would take the carrier to 1 or below sets
 /// it at 1 and starves the weapon.</item>
 /// <item>The feed: a kill by its carrier with it, a counter-kill included, counts one, heals the
@@ -118,10 +119,24 @@ public static class Kinsbane
     }
 
     /// <summary>
+    /// Whether the weapon smells blood for <paramref name="unit"/> (issue 854, round 276): some unit
+    /// of the other side stands on a tile the carrier could strike next phase, the strike set
+    /// <c>threat</c> and both planners read (<see cref="Threat.StruckByUnit"/>: its move plus every
+    /// usable weapon's range). With none, the drain skips that phase start, so the walk to a fight
+    /// costs nothing and the clock runs only inside it.
+    /// </summary>
+    public static bool Smells(BattleState state, GameContent content, BattleUnit unit)
+    {
+        var struck = Threat.StruckByUnit(state, content, unit);
+        return state.UnitsOf(unit.Side == Side.Player ? Side.Enemy : Side.Player).Any(other => struck.Contains(other.At));
+    }
+
+    /// <summary>
     /// The drain at the start of <paramref name="side"/>'s phase, after heal and burn: each unit of
     /// the side carrying a hungering weapon pays <see cref="Coming"/> unless this is the side's
-    /// first phase (turn 1), then every such unit's <see cref="BattleUnit.HasFed"/> clears, so the
-    /// next drain reads only kills from here on.
+    /// first phase (turn 1) or no enemy is in its reach (<see cref="Smells"/>), then every such
+    /// unit's <see cref="BattleUnit.HasFed"/> clears, so the next drain reads only kills from here on.
+    /// A skipped drain emits nothing.
     /// </summary>
     public static BattleState AtPhaseStart(BattleState state, GameContent content, Side side, List<GameEvent> events)
     {
@@ -135,7 +150,7 @@ public static class Kinsbane
 
             var next = unit with { HasFed = false };
             var stack = unit.Unit.Inventory.Items[slot];
-            if (state.Turn > 1 && Coming(unit, content) is var (amount, starves) && (amount > 0 || !stack.Starved))
+            if (state.Turn > 1 && Coming(unit, content) is var (amount, starves) && (amount > 0 || !stack.Starved) && Smells(state, content, unit))
             {
                 var hp = unit.Hp - amount;
                 events.Add(new HungerDrained(unit.Id, stack.ItemId, amount, hp, starves));
@@ -194,7 +209,7 @@ public static class Kinsbane
     /// <summary>
     /// The unit card's line for a carrier (DESIGN.md 13.23): the weapon, its feed count, its teeth and growth,
     /// then its state: woken, starved, fed since the last phase start, or the drain coming at the
-    /// next one. Null for a unit carrying no hungering weapon.
+    /// next one if an enemy is then in reach (issue 854). Null for a unit carrying no hungering weapon.
     /// </summary>
     public static string? Card(BattleUnit unit, GameContent content)
     {
@@ -209,7 +224,7 @@ public static class Kinsbane
         var state = Woken(stack.Fed) ? "Woken: no drain."
             : stack.Starved ? "Starved: half Power, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
             : unit.HasFed ? "Fed this phase."
-            : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start" + (starves ? ", and it starves." : ".")
+            : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start, if an enemy is in reach" + (starves ? ", and it starves." : ".")
             : "";
         return $"{head} {state}".TrimEnd();
     }

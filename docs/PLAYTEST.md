@@ -2276,3 +2276,17 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_rook
 - Not tense: turns 7 to 9.
 
 — Code
+
+## 2026-10-03 — Sallow Grange with the reach gate (#854), warm — Code
+Seed: 854 (`campaign --from sallow_grange --pick keziah --level 6 --seed 854`; Dunstan and Maud benched, as on 804)   Result: won on turn 8, seize, nobody fell, no Recall
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 5, a choice that cost nothing to make and something to take. The field was clear and the hexer sat behind the wall's gap. From 9,6 she would have it in reach and pay 5 at the next phase start; from 8,7 she would not, and would lose a turn getting there. I took the turn back on 6 by stopping at 10,6 and paying, and on 7 the scythe's 19 into an 18 HP hexer at 82 was the kill, where the iron axe's 17 was not. Fed 2, the first tooth, back to 26.
+Notes: Warm: I built the gate this hour. Script and transcript `docs/transcripts/2026-10-03-sallow_grange-854-kinsbane.*`.
+- **The walk is free and it reads.** Turns 2 and 3 opened at 26/26 where 804 opened turn 2 at 21. The card says `if an enemy is in reach`, and `threat ... from` plus the reach view tell you which tiles that is. On 804 she arrived at every fight 5 to 10 short; here she arrived full twice.
+- **The clock still runs inside the fight.** The drain fired on turn 4, the phase after the field's archer walked into her reach, and on turn 7, after I chose to stand where the hexer was. Both were costs I could see coming.
+- **Feed or survive happened once, on turn 4:** Pell's Cinder left the archer at 4 so the scythe's forecast killed. I spent Pell's 9 HP of counter for it.
+- **My mistake:** on turn 4 I put Wren and Teodor into the veteran before Keziah could reach him, and he died on Wren's counter. A kill she needed went to someone who did not.
+- **A pre-existing oddity, not this change:** the forecast prints `Kill: Keziah +10 HP` under a 14-damage swing at a 28 HP Reeve. The line says what a kill would give, not that this swing kills; worth a look if a cold chair misreads it.
+- Not tense: turn 8. The Reeve sallied onto Keziah and left the gate open.
+
+— Code
