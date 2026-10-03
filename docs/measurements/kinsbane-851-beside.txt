@@ -1,0 +1,31 @@
+# issue 851: --kinsbane (Release, 200 runs each arm, same seeds as kinsbane-804-control.txt) on issue/851-kinsbane-beside-the-axe. The campaign issues Kinsbane in front of Keziah's pack beside her cast iron axe (campaign.json issues; Kinsbane boundTo keziah). The hunt swings the scythe only when its forecast kills on a hit, otherwise the best other weapon by the usual score (the scythe last). Tooth schedule 2,2,2,3,4, Drain 5, heal 10, unchanged. "her attacks" counts the attacks she started on each winning try, and how many were with the scythe (round 277). The control arm (--axe) takes the scythe out and leaves her cast iron axe in front; it reproduces 0207's control row for row.
+
+## scythe beside the axe: ironwake-sim --kinsbane --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 2, starved in 11, her attacks 250 (scythe 214)
+  map 7 (her map 2): won 34, deployed in 34, tries p50 22, fed by its end p25 4 p50 5 p75 6 (teeth p50 2/5), drains p50 5, starved in 18, her attacks 126 (scythe 69)
+  map 8 (her map 3): won 33, deployed in 33, tries p50 2, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 3, starved in 9, her attacks 33 (scythe 26)
+  map 9 (her map 4): won 30, deployed in 30, tries p50 7, fed by its end p25 9 p50 11 p75 13 (teeth p50 4/5), drains p50 5, starved in 8, her attacks 164 (scythe 135)
+  map 10 (her map 5): won 7, deployed in 7, tries p50 23, fed by its end p25 13 p50 13 p75 13 (teeth p50 5/5), drains p50 2, starved in 0, her attacks 44 (scythe 22)
+  no try won map 1: 118
+  no try won map 7: 48
+  no try won map 8: 1
+  no try won map 9: 3
+  no try won map 10: 23
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 74 of 82, median map 6
+  tooth 2 (fed 4): grew in 47 of 82, median map 7
+  tooth 3 (fed 6): grew in 32 of 82, median map never
+  tooth 4 (fed 9): grew in 27 of 82, median map never
+  tooth 5 (wakes, fed 13): grew in 15 of 82, median map never
+
+## control: ironwake-sim --kinsbane --seeds 200 --axe
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the control arm: her iron axe in front, no scythe
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 248 (scythe 0)
+  map 7 (her map 2): won 49, deployed in 49, tries p50 17, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 185 (scythe 0)
+  map 8 (her map 3): won 49, deployed in 49, tries p50 2, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 49 (scythe 0)
+  map 9 (her map 4): won 49, deployed in 49, tries p50 7, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 257 (scythe 0)
+  map 10 (her map 5): won 7, deployed in 7, tries p50 32, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 36 (scythe 0)
+  no try won map 1: 118
+  no try won map 7: 33
+  no try won map 10: 42

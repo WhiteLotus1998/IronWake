@@ -31,7 +31,7 @@ public sealed class RandomLegalPlayer : IPlayer
 /// <summary>
 /// Gate 1's baseline (issue 12): a planner of its own over <see cref="EnemyAi.Score"/> and
 /// <see cref="EnemyAi.AttackTiles"/>, per unit in id order. The best-scoring attack from
-/// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), a hungering weapon not yet woken ahead of any other (the hunt, issue 804), with section 8's tie-breaks mirrored (exposure counted over enemy reach
+/// the best tile with any weapon it carries (<see cref="Arms"/>, issue 746), a hungering weapon not yet woken ahead of any other when it kills on a hit and behind any other when it does not (the hunt, issues 804 and 851), with section 8's tie-breaks mirrored (exposure counted over enemy reach
 /// sets); else a heal below half HP (a healing spell on the most wounded ally in range,
 /// else a consumable on itself); else the approach: toward the nearest enemy by section
 /// 8's rule for Rout and Defeat Boss, toward the throne for Seize, toward the nearest exit
@@ -150,11 +150,24 @@ public sealed class HeuristicPlayer : IPlayer
 
     /// <summary>
     /// Whether an attack by <paramref name="unit"/> with <paramref name="weapon"/> from
-    /// <paramref name="slot"/> is the hunt (issue 804): a hungering weapon not yet woken
-    /// (DESIGN.md 13.23), which the planner prefers to any other weapon.
+    /// <paramref name="slot"/> is with a hungering weapon not yet woken (issue 804, DESIGN.md 13.23),
+    /// the weapon the hunt weighs apart from the rest (<see cref="KillsOnHit"/>).
     /// </summary>
     public static bool Hunts(BattleUnit unit, int slot, Weapon weapon) =>
         weapon.Hungers && !Kinsbane.Woken(unit.Unit.Inventory.Items[slot].Fed);
+
+    /// <summary>
+    /// Whether <paramref name="armed"/>'s forecast from <paramref name="tile"/> kills
+    /// <paramref name="target"/> on one plain hit (issue 851, round 276): the hunt swings a hungering
+    /// weapon only for a kill, the scythe where the forecast kills and iron where a miss would cost.
+    /// </summary>
+    public static bool KillsOnHit(BattleState state, GameContent content, BattleUnit armed, Coord tile, BattleUnit target)
+    {
+        var me = (armed with { At = tile }).ToCombatant(state, content, against: target);
+        var them = target.Answering(state, content, tile, armed);
+        var side = Combat.Forecast(me, them, tile.DistanceTo(target.At), state.Scheme).Attacker;
+        return side.Strikes && side.Damage >= target.Hp;
+    }
 
     /// <summary>
     /// One player unit's commands on the board as it stands. <paramref name="refusedKill"/>
@@ -222,9 +235,12 @@ public sealed class HeuristicPlayer : IPlayer
                             critSafe = sum.WithCrit < unit.Hp;
                         }
 
+                        var hungers = Hunts(unit, slot, armWeapon);
+                        var feeds = hungers && KillsOnHit(state, content, armed, tile, target);
                         var option = new Option(EnemyAi.Score(state, content, armed, tile, target), target.Id, tile, critSafe, avoid, exposed, cost, slot)
                         {
-                            Hunt = Hunts(unit, slot, armWeapon),
+                            Hunt = feeds,
+                            Spares = hungers && !feeds,
                         };
                         if (best is null || option.Beats(best))
                         {
@@ -671,18 +687,29 @@ public sealed class HeuristicPlayer : IPlayer
     private sealed record Option(double Score, string TargetId, Coord Tile, bool CritSafe, int Avoid, int Exposed, int Cost, int Slot)
     {
         /// <summary>
-        /// The hunt (issue 804, round 251: the Sim's player takes the hunt): an attack with a hungering
-        /// weapon not yet woken (DESIGN.md 13.23) beats any attack with another weapon, so its carrier
-        /// strikes with it whenever it can and every kill it makes feeds it; among such attacks the
-        /// score decides as usual.
+        /// The hunt (issue 804, round 251; issue 851, round 276: only to kill): an attack with a
+        /// hungering weapon not yet woken (DESIGN.md 13.23) whose forecast kills on a hit beats any
+        /// other attack, so every kill it can take feeds it; among such attacks the score decides.
         /// </summary>
         public bool Hunt { get; init; }
+
+        /// <summary>
+        /// An attack with a hungering weapon not yet woken that does not kill on a hit (issue 851):
+        /// it loses to any attack with another weapon, so the carrier swings the best other weapon by
+        /// the usual score, and the scythe only when nothing else reaches.
+        /// </summary>
+        public bool Spares { get; init; }
 
         public bool Beats(Option other)
         {
             if (Hunt != other.Hunt)
             {
                 return Hunt;
+            }
+
+            if (Spares != other.Spares)
+            {
+                return !Spares;
             }
 
             if (Score != other.Score)

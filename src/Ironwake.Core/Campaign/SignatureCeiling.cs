@@ -52,9 +52,13 @@ public static class SignatureCeiling
     /// <summary>The terrain both sides stand on.</summary>
     public const string TerrainId = "plain";
 
-    /// <summary>Every signature item in the content, in id order.</summary>
+    /// <summary>
+    /// Every signature item in the content, in id order. A bound hungering weapon (Kinsbane, bound on
+    /// issue by issue 851) is left out: it is no quest's payout, and its numbers are judged by its
+    /// own experiment (DESIGN.md 13.23), as the forge leaves it out of Refine.
+    /// </summary>
     public static IEnumerable<Weapon> Items(GameContent content) =>
-        content.Weapons.Values.Where(w => w.BoundTo is not null);
+        content.Weapons.Values.Where(w => w.BoundTo is not null && !w.Hungers);
 
     /// <summary>Reads every signature item; empty when none ships.</summary>
     public static IReadOnlyList<CeilingReading> ReadAll(GameContent content, RollScheme scheme) =>

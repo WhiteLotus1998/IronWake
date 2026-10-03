@@ -193,15 +193,34 @@ public class KinsbaneTests
     }
 
     [Fact]
-    public void TheSimsPlayerTakesTheHuntWithAHungeringWeaponOverABetterScoringOne()
+    public void TheSimsPlayerSwingsTheBestOtherWeaponWhenTheScytheDoesNotKillOnAHit()
     {
         var start = WithScythe(Placed(), 23, starved: true, uses: 1);
         var state = start.WithUnit(Keziah(start) with { At = new Coord(6, 7) });
         var keziah = Keziah(state);
         var brigand = state.Find("brigand-1")!;
+        var from = new Coord(6, 6);
+
+        Assert.False(Ironwake.Sim.HeuristicPlayer.KillsOnHit(state, Shipped, keziah, from, brigand));
+
+        var attack = Assert.IsType<Attack>(Ironwake.Sim.HeuristicPlayer.PlanUnit(state, Shipped, keziah)[^1]);
+
+        Assert.NotNull(attack.Slot);
+        Assert.NotEqual(Kinsbane.ItemId, keziah.Unit.Inventory.Items[attack.Slot!.Value].ItemId);
+    }
+
+    [Fact]
+    public void TheSimsPlayerTakesTheHuntWhenTheScytheKillsOnAHitOverABetterScoringWeapon()
+    {
+        var start = WithScythe(Placed(), 23, starved: true, uses: 1);
+        var placed = start.WithUnit(Keziah(start) with { At = new Coord(6, 7) });
+        var state = placed.WithUnit(placed.Find("brigand-1")! with { Hp = 1 });
+        var keziah = Keziah(state);
+        var brigand = state.Find("brigand-1")!;
         var axe = keziah.Unit.Inventory.Items.ToList().FindIndex(s => s.ItemId == "iron_axe");
         var from = new Coord(6, 6);
 
+        Assert.True(Ironwake.Sim.HeuristicPlayer.KillsOnHit(state, Shipped, keziah, from, brigand));
         Assert.True(EnemyAi.Score(state, Shipped, keziah.WithSlotInFront(axe), from, brigand) > EnemyAi.Score(state, Shipped, keziah, from, brigand));
 
         var attack = Assert.IsType<Attack>(Ironwake.Sim.HeuristicPlayer.PlanUnit(state, Shipped, keziah)[^1]);
