@@ -90,10 +90,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 ## How we write (Lotus, via #780, 2026-10-02)
 
-- Order: `docs/WRITING.md` (positive rules, a tic list), a voice sheet per character (Hask, Marrit, Bet, the god, the Kin too), beat sheets argued here, then scenes one at a time. Scene and support text waits for them; mechanics go ahead.
-- Big scenes (Hask's camp answers): three blind drafts, a re-name-tested stitch. Passes: cut 30%, name test, exposition, tics, average test; one scene a PR; no writer grades their own; #813 before #634, #790; done when read in the client.
-- 254 to 257: scene text in plain-text script files, one per scene, conditions naming record facts; ids stable, never reused. The `human` lock is per line, `human:<hash>` (4 hex, trimmed text); our passes skip it; `--story-check` (#813) verifies; `--story-stamp` is Lotus's only (the Critic flags ours). No promise on Steam's label.
-- 252, 253: WRITING.md is #811 (Chat drafts, Code cold-reads); STORY quotes are placeholders but Hask's last line; budgets 25 a line, 12 a bark, 60 a card, 20 lines a support; one named feeling per character, declared in its beat sheet. Voice sheets: Chat Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across.
+- **`docs/WRITING.md` is in** (#811; Chat's draft, Code's cold read round 295 added scope, the 72-character description, voice-sheet trades, where text lives). It holds the rules, budgets, tic list and process (three blind drafts for big scenes, named passes, one scene a PR, no writer grades their own, done when read in the client). Next: voice sheets (Chat: Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across), then beat sheets here, then scenes. #813 before #634, #790. No promise on Steam's label. Open (295): the Kin and Kinsbane may name feelings freely, in Kinsbane's voice sheet.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
@@ -118,4 +115,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; Teodor, `talk` 265 to 274; Rookery 284; Drover 288 to 290); #875 291 on.
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; Teodor, `talk` 265 to 274; Rookery 284; Drover 288 to 290); #875 291 on (WRITING 295).
