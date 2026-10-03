@@ -2263,3 +2263,16 @@ Notes: Warm: I built the issue this hour. Script and transcript `docs/transcript
 - Not tense: turns 4 and 5, the march east past the fort.
 
 — Code
+
+## 2026-10-03 — The Rookery, Rook's quest 2 (#635 slice 14), warm — Code
+Seed: 1132 (`campaign --load rookery --saves docs/transcripts/2026-10-03-the_rookery-1132.saves`: the Chapter Roll's camp save moved to the camp after map 9, Rook picked, the cast at level 7, every earlier side map marked won, Rook 1 at map 7, disclosed; ally Wren)   Result: won on turn 9, escape, no Recall, nobody fell
+Tension: 8/10   Choice: 6/10   Surprise: 6/10
+Best turn: Turn 4. Rook at 4 HP on the bridge with two wingriders on the water beside her; nothing she could swing at was safe and no tile was out of a Mov 7 flier's reach, except one: `threat rook from 13,4` came back empty. I flew her past the archer's fort to the exit's lip and left Wren on the bank alone against both riders. Wren's 74 on the first one came up a crit.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_rookery-1132.txt`.
+- **Turn 1 was my mistake and the board's best moment.** Wren stepped onto the road to wake the bridge soldier on my terms; his attack was a combat within 6 of the loft, and the Wing Captain came off the mountain and put 15 into Rook at Def 1. The threat line had printed `could strike here if woken: Wing Captain`. A skyrider who opens a fight beside her own rookery's master is a skyrider at 4 HP.
+- **The rule that makes the map works on the screen.** Rook can reach an exit tile on turn 2, and the end card says her exit leaves the rest behind. So she spends the map waiting for a cadet with Mov 4.
+- **I misused the dressing.** On turn 3 I tried `item wren 2 rook`; Field Dressing heals only its user. Rook then waited out a 54 percent lethal and it missed. The rejected line is dropped from the script; the coin is in the transcript.
+- **What is soft:** the archer on the fort and the sentry at the pass are holds, and neither struck once: everything happened on the west bank, and turns 7 to 9 were a walk to the exit. Choice is low for the same reason. The first lever is the sentry as a guard, so the pass is a fight Rook has to clear from the air under its bow; the second is the turn-4 rider a turn earlier.
+- Not tense: turns 7 to 9.
+
+— Code

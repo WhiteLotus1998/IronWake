@@ -145,6 +145,14 @@
       ],
       "after": [
         "(Placeholder until the writing pass: the hearth, the ash, and what Keziah leaves on it.)"
+      ] },
+    { "id": "rook_2", "member": "rook", "part": 2, "map": "the_rookery", "common": 2,
+      "before": [
+        "Rook asked for a day and one pair of hands again. Kestrow's rookery sits on the fells above the chapter house, and the ledger in its loft lists one cold drake as a holding and one rider on the line below it. She means to leave with both, and not be on the page.",
+        "(Placeholder card until the writing pass. Escape: get everyone off the east edge, 14,4 to 14,6, by the end of turn 9. Rook leaving wins the map, and anyone still on the board is left behind as fallen, so Rook leaves last. The map is lost if Rook falls. On foot only the bridge at 7,5 and 8,5 crosses the ravine; a bow crit grounds a flier. Riders from the rookery behind from turn 2, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the ledger, the line struck through, and the drake that is nobody's now.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

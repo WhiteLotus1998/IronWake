@@ -1,0 +1,32 @@
+name: The Rookery
+size: 15x10
+win: escape
+turn_limit: 9
+recall: 2
+enemy_level: 6
+exit: 14,4 14,5 14,6
+announce: on
+
+####MMM~~MMMMMM
+#..#.M.~~.^MnMM
+#..#...~~...^.M
+#.F#.n.~~..F..M
+#..#...~~......
+#..============
+#..#..^~~..^...
+#..#.^.~~.n...M
+####..^~~^..MMM
+....^^.~~.^MMMM
+
+units:
+P captain 1,4
+P recruit 2,5
+E wing_captain 5,1 group:loft behavior:guard
+E soldier 9,5 group:bridge behavior:guard
+E archer 11,3 group:bridge behavior:hold
+E sentry 12,6 group:pass behavior:hold
+
+events:
+pursuit1 turn 2 enemy spawn wingrider 0,9 group:pursuit behavior:aggressive
+pursuit2 turn 3 enemy spawn wingrider 4,9 group:pursuit behavior:aggressive
+pursuit3 turn 4 enemy spawn rider 0,9 group:pursuit behavior:aggressive
