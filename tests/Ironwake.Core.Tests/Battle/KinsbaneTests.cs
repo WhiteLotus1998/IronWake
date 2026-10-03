@@ -33,8 +33,19 @@ public class KinsbaneTests
 
     private static ItemStack Scythe(BattleState state) => Keziah(state).Unit.Inventory.Items[0];
 
-    private static (BattleState State, List<GameEvent> Events) PhaseStart(BattleState state, int turn = 2)
+    /// <summary>
+    /// The board with the field's hold archer moved to <paramref name="at"/>, by default the tile
+    /// north of Keziah, so an enemy stands in her reach and the drain smells it (issue 854).
+    /// </summary>
+    private static BattleState Scented(BattleState state, Coord? at = null)
     {
+        var archer = state.Units.Single(u => u.Side == Side.Enemy && u.Group == "field" && u.Behavior == Behavior.Hold);
+        return state.WithUnit(archer with { At = at ?? Keziah(state).At with { Y = Keziah(state).At.Y - 1 } });
+    }
+
+    private static (BattleState State, List<GameEvent> Events) PhaseStart(BattleState state, int turn = 2, bool scented = true)
+    {
+        state = scented ? Scented(state) : state;
         var events = new List<GameEvent>();
         var next = Kinsbane.AtPhaseStart(state with { Turn = turn }, Shipped, Side.Player, events);
         return (next, events);
@@ -138,6 +149,87 @@ public class KinsbaneTests
         var (next, _) = PhaseStart(state);
 
         Assert.Equal(18, Keziah(next).Hp);
+    }
+
+    [Fact]
+    public void TheDrainSkipsAPhaseStartWithNoEnemyInTheCarriersReach()
+    {
+        var state = WithScythe(Placed(), 23);
+        Assert.False(Kinsbane.Smells(state, Shipped, Keziah(state)));
+
+        var (next, events) = PhaseStart(state, scented: false);
+
+        Assert.Equal(23, Keziah(next).Hp);
+        Assert.Empty(events);
+        Assert.False(Scythe(next).Starved);
+    }
+
+    [Fact]
+    public void ASkippedDrainNeverStarvesACarrierAtOneAndTheFeedFlagStillClears()
+    {
+        var (next, events) = PhaseStart(WithScythe(Placed(), 3, hasFed: true), scented: false);
+        Assert.False(Keziah(next).HasFed);
+
+        (next, events) = PhaseStart(WithScythe(next, 3), scented: false);
+
+        Assert.Equal(3, Keziah(next).Hp);
+        Assert.Empty(events);
+        Assert.False(Scythe(next).Starved);
+    }
+
+    [Fact]
+    public void TheReachIsTheCarriersStrikeSetMoveAndRangeTheThreatSetThePlannersRead()
+    {
+        var state = WithScythe(Placed(), 23);
+        var struck = Threat.StruckByUnit(state, Shipped, Keziah(state));
+        var edge = struck.Where(t => !state.Units.Any(u => u.At == t)).MaxBy(t => (t.DistanceTo(Keziah(state).At), t.Y, t.X));
+        var past = Enumerable.Range(0, state.Map.Height)
+            .SelectMany(y => Enumerable.Range(0, state.Map.Width).Select(x => new Coord(x, y)))
+            .First(t => !struck.Contains(t) && !state.Units.Any(u => u.At == t) && t.DistanceTo(edge) == 1);
+
+        var inside = PhaseStart(Scented(state, edge), scented: false);
+        var outside = PhaseStart(Scented(state, past), scented: false);
+
+        Assert.Equal(18, Keziah(inside.State).Hp);
+        Assert.Single(inside.Events.OfType<HungerDrained>());
+        Assert.Equal(23, Keziah(outside.State).Hp);
+        Assert.Empty(outside.Events);
+    }
+
+    [Fact]
+    public void ASleepingEnemyInReachStillWakesTheHunger()
+    {
+        var state = WithScythe(Placed(), 23);
+        var guard = state.Units.First(u => u.Group == "hall" && u.Behavior == Behavior.Guard);
+        state = state.WithUnit(guard with { At = Keziah(state).At with { Y = Keziah(state).At.Y - 1 } });
+        Assert.False(state.IsAwake("hall"));
+
+        var (next, _) = PhaseStart(state, scented: false);
+
+        Assert.Equal(18, Keziah(next).Hp);
+    }
+
+    [Fact]
+    public void TheWalkToAFightCostsNothingWhenTheEnemyIsFarOverAWholeTurn()
+    {
+        var state = WithScythe(Placed(), 23);
+        state = state.WithUnit(Keziah(state) with { At = new Coord(1, 8) });
+        foreach (var enemy in state.UnitsOf(Side.Enemy).ToList())
+        {
+            state = state.WithUnit(enemy with { Behavior = enemy.Behavior == Behavior.Aggressive ? Behavior.Hold : enemy.Behavior });
+        }
+
+        Assert.False(Kinsbane.Smells(state, Shipped, Keziah(state)));
+        var result = Resolver.Apply(state, Shipped, new EndPhase());
+        var events = result.Events.ToList();
+        while (result.Next.Phase == Side.Enemy)
+        {
+            result = Resolver.Apply(result.Next, Shipped, new EndPhase());
+            events.AddRange(result.Events);
+        }
+
+        Assert.Empty(events.OfType<HungerDrained>());
+        Assert.Equal(23, Keziah(result.Next).Hp);
     }
 
     [Theory]
@@ -380,7 +472,7 @@ public class KinsbaneTests
     public void ThePlayerPhaseStartOfTurnTwoDrainsAnUnfedCarrier()
     {
         var state = WithScythe(Placed(), 23);
-        state = state.WithUnit(Keziah(state) with { At = new Coord(1, 8) });
+        state = Scented(state.WithUnit(Keziah(state) with { At = new Coord(1, 8) }), new Coord(5, 8));
 
         var result = Resolver.Apply(state, Shipped, new EndPhase());
         var events = result.Events.ToList();
@@ -399,7 +491,7 @@ public class KinsbaneTests
     public void RecallRestoresTheScytheWithTheBoard()
     {
         var state = WithScythe(Placed(), 23, fed: 2);
-        state = state.WithUnit(Keziah(state) with { At = new Coord(1, 8) });
+        state = Scented(state.WithUnit(Keziah(state) with { At = new Coord(1, 8) }), new Coord(5, 8));
         var result = Resolver.Apply(state, Shipped, new EndPhase());
         while (result.Next.Phase == Side.Enemy)
         {
@@ -446,8 +538,8 @@ public class KinsbaneTests
     [Fact]
     public void TheUnitCardPrintsTheCountTheGrowthAndTheStateComing()
     {
-        Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 3)), Shipped));
-        Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 3)), Shipped));
+        Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start, if an enemy is in reach.", Kinsbane.Card(Keziah(WithScythe(Placed(), 23, fed: 3)), Shipped));
+        Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start, if an enemy is in reach, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 3)), Shipped));
         Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 3, hasFed: true)), Shipped));
         Assert.StartsWith("Kinsbane: fed 0, teeth 0/5. Power +0. Starved: half Power, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
         Assert.Equal("Kinsbane: fed 13, teeth 5/5. Power +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 13)), Shipped));
