@@ -24,7 +24,7 @@ public class FinaleStrengthTests
     /// <summary>The class every cast cadet may certify out of into any other, so a cadet is read in each.</summary>
     private const string Cadet = "cadet";
 
-    public static readonly TheoryData<string> Finale = new() { "finale_lord", "finale_hunter" };
+    public static readonly TheoryData<string> Finale = new() { "hask", "finale_hunter" };
 
     private static IEnumerable<Unit> Company()
     {

@@ -196,7 +196,7 @@ public class FreedTests
 
         var opening = BattleState.From(sample, real, FinaleRun.Roster(real, FinaleRun.Company.Full, FinaleRun.DefaultLevel), 1);
         var names = UnitNames.Of(opening, real);
-        Assert.Equal("Sworn Hunter is bound to Sworn Lord: freed when Sworn Lord falls", Freed.Line(opening, names));
+        Assert.Equal("Sworn Hunter is bound to Hask: freed when Hask falls", Freed.Line(opening, names));
     }
 
     [Fact]

@@ -69,6 +69,20 @@ public sealed record Unit(
     public DrakeState? Drake { get; init; }
 
     /// <summary>
+    /// The one line a unit's card prints under its name (issue 806): who this is, in the content's
+    /// words, or null for none. The validator holds it to an item description's rule, one line of
+    /// at most 72 characters. It is a template's text and the save does not carry it.
+    /// </summary>
+    public string? Description { get; init; }
+
+    /// <summary>
+    /// Whether this template is one person rather than a kind (issue 806): text that names it
+    /// uses its name as written, <c>Hask</c>, never an article and a lower-cased kind,
+    /// <c>a sworn lord</c>. False for every kind of enemy; the cast are people by being the cast.
+    /// </summary>
+    public bool Named { get; init; }
+
+    /// <summary>
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
     /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
     /// anything else is not of a type the class heals with only (issue 706).

@@ -35,7 +35,7 @@ public static class PairRule
 
     /// <summary>
     /// The board's line naming the bound enemies standing now, by the names a reader sees:
-    /// <c>pair rule binds: Sworn Lord, Sworn Hunter</c>. Null when none stands or the map has no header.
+    /// <c>pair rule binds: Hask, Sworn Hunter</c>. Null when none stands or the map has no header.
     /// </summary>
     public static string? Line(BattleState state, UnitNames names)
     {

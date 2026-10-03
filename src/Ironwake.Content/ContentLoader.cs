@@ -2717,6 +2717,8 @@ public static class ContentLoader
         {
             Hooks = ValueList<string>.From(node.StringArrayOrEmpty("hooks")),
             Skill = ParseRanks(node),
+            Description = node.Has("description") ? Description(node) : null,
+            Named = node.BoolOr("named", false),
         };
     }
 }

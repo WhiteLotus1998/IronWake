@@ -400,7 +400,7 @@ public sealed class PlaySession
     /// 7,0 (aggressive). A unit standing on 7,0 stops it.</c> The held-tile rule is the one
     /// <see cref="MapEvents"/> applies: a spawn tile with any unit on it blocks the spawn.
     /// </summary>
-    internal static string DescribeEvent(MapEvent mapEvent, GameContent content)
+    public static string DescribeEvent(MapEvent mapEvent, GameContent content)
     {
         var when = mapEvent.Trigger switch
         {
@@ -445,15 +445,17 @@ public sealed class PlaySession
 
     private static string SpawnWords(EnemyPlacement placement, GameContent content)
     {
-        var name = content.Unit(placement.TemplateId).Name.ToLowerInvariant();
-        var article = "aeiou".Contains(name[0]) ? "an" : "a";
+        var template = content.Unit(placement.TemplateId);
+        var kind = template.Name.ToLowerInvariant();
+        var who = template.Named ? template.Name : ("aeiou".Contains(kind[0]) ? "an " : "a ") + kind;
         var behavior = placement.Behavior.ToString().ToLowerInvariant();
         if (placement.IsBoss)
         {
-            return $"the boss, {article} {name}, arrives at {placement.At}. A unit standing on {placement.At} does not stop the boss, who takes the nearest free tile.";
+            return $"the boss, {who}, arrives at {placement.At}. A unit standing on {placement.At} does not stop the boss, who takes the nearest free tile.";
         }
 
-        return $"{article} {name} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops it.";
+        var it = template.Named ? template.Name : "it";
+        return $"{who} arrives at {placement.At} ({behavior}). A unit standing on {placement.At} stops {it}.";
     }
 
     private int Play(TextReader input, bool strict, ulong seed)
@@ -1965,7 +1967,7 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// The lines <c>show &lt;unit&gt;</c> prints: who and where, stats, weapon, items, ranks,
+    /// The lines <c>show &lt;unit&gt;</c> prints: who and where, the unit's description if it has one (issue 806), stats, weapon, items, ranks,
     /// arts, abilities, mastery, Canto, targets and rivalry. The Godot client's unit panel
     /// shows the same lines (issue 349). Units and arts read by the names a reader sees, every
     /// line in sentence case (issue 615); with <paramref name="typed"/>, as the console prints
@@ -1980,6 +1982,11 @@ public sealed class PlaySession
         var lines = new List<string>();
         var stats = content.StatsOf(unit.Unit);
         lines.Add($"{Named(names[unit.Id], unit.Id)}, {content.Class(unit.Unit.ClassId).Name} L{unit.Unit.Level}, at {unit.At} on {state.Map.TerrainAt(unit.At, content).Label(stats.Hp)}");
+        if (unit.Unit.Description is { } description)
+        {
+            lines.Add("  " + description);
+        }
+
         var unitClass = content.Class(unit.Unit.ClassId);
         lines.Add($"  HP {unit.Hp}/{stats.Hp}  Str {stats.Str} Mag {stats.Mag} Dex {stats.Dex} Spd {stats.Spd} Lck {stats.Lck} Def {stats.Def} Res {stats.Res} Cha {stats.Cha}  Mov {unitClass.Mov} ({unitClass.Movement.ToString().ToLowerInvariant()})");
         if (unit.Unit.Wound is { } wound)

@@ -1066,6 +1066,16 @@ public static class ContentSerializer
             writer.WriteString("personality", unit.Personality);
         }
 
+        if (unit.Description is not null)
+        {
+            writer.WriteString("description", unit.Description);
+        }
+
+        if (unit.Named)
+        {
+            writer.WriteBoolean("named", true);
+        }
+
         if (signature is { } kind)
         {
             writer.WriteString("signature", kind.ToString().ToLowerInvariant());

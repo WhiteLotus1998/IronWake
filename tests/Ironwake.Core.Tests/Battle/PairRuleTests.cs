@@ -36,7 +36,7 @@ public class PairRuleTests
     private const string Paired = """
         P captain 1,2
         P recruit:wren 1,3
-        E finale_lord 2,2 group:lord behavior:aggressive
+        E hask 2,2 group:lord behavior:aggressive
         E brigand 6,0 group:field behavior:hold
 
         """;
@@ -44,7 +44,7 @@ public class PairRuleTests
     private const string Alone = """
         P captain 1,2
         P recruit:wren 5,4
-        E finale_lord 2,2 group:lord behavior:aggressive
+        E hask 2,2 group:lord behavior:aggressive
         E brigand 6,0 group:field behavior:hold
 
         """;
@@ -53,10 +53,10 @@ public class PairRuleTests
         BattleFixture.Start(map: Field(header, units));
 
     private static CombatForecast LordStrikes(BattleState state) =>
-        Queries.Forecast(state, Starter, state.Find("finale_lord-1")!, state.Find("hale")!, state.Find("finale_lord-1")!.At)!;
+        Queries.Forecast(state, Starter, state.Find("hask-1")!, state.Find("hale")!, state.Find("hask-1")!.At)!;
 
     private static CombatForecast HaleStrikes(BattleState state) =>
-        Queries.Forecast(state, Starter, state.Find("hale")!, state.Find("finale_lord-1")!, state.Find("hale")!.At)!;
+        Queries.Forecast(state, Starter, state.Find("hale")!, state.Find("hask-1")!, state.Find("hale")!.At)!;
 
     [Fact]
     public void ABoundEnemyNeverCritsAUnitWithAnAllyBesideIt()
@@ -114,7 +114,7 @@ public class PairRuleTests
     public void ThreatPricesTheBarredCrit()
     {
         var state = Start(Paired);
-        var line = Assert.Single(Queries.Threats(state, Starter, state.Find("hale")!, state.Find("hale")!.At)!, l => l.Enemy.Id == "finale_lord-1");
+        var line = Assert.Single(Queries.Threats(state, Starter, state.Find("hale")!, state.Find("hale")!.At)!, l => l.Enemy.Id == "hask-1");
 
         Assert.Equal(0, line.Forecast.Attacker.CritChance);
     }
@@ -146,7 +146,7 @@ public class PairRuleTests
         var board = MapRenderer.Render(state, Starter);
 
         Assert.Contains("Pair rule: an enemy of the lord group strikes a unit with an ally beside it once, never doubling, never critting.", board);
-        Assert.Contains("pair rule binds: Sworn Lord", board);
+        Assert.Contains("pair rule binds: Hask", board);
         Assert.Contains(PairRule.Rule(state.Map), Objective.Rules(state, Starter));
         Assert.DoesNotContain("Pair rule", MapRenderer.Render(Start(Paired, header: ""), Starter));
     }

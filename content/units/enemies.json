@@ -177,14 +177,16 @@
       "inventory": [ { "item": "toll_axe" }, { "item": "steel_axe" } ]
     },
     {
-      "id": "finale_lord",
-      "name": "Sworn Lord",
+      "id": "hask",
+      "name": "Hask",
+      "named": true,
       "class": "bulwark",
+      "description": "The Iron Warden. The shard in his lance's pommel is frozen iron.",
       "level": 10,
       "stats": { "hp": 44, "str": 9, "mag": 0, "dex": 14, "spd": 8, "lck": 10, "def": 9, "res": 7, "cha": 12 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 25, "spd": 20, "lck": 10, "def": 30, "res": 10, "cha": 10 },
       "ranks": { "lance": "D" },
-      "inventory": [ { "item": "steel_lance" } ]
+      "inventory": [ { "item": "wardens_lance" } ]
     },
     {
       "id": "finale_hunter",
