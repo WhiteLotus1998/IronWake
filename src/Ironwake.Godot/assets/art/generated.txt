@@ -16,6 +16,8 @@ token_chaplain_player.png
 token_chaplain_enemy.png
 token_commander_player.png
 token_commander_enemy.png
+token_drover_player.png
+token_drover_enemy.png
 token_fieldsurgeon_player.png
 token_fieldsurgeon_enemy.png
 token_halberdier_player.png
@@ -38,8 +40,6 @@ token_reaver_player.png
 token_reaver_enemy.png
 token_scholar_player.png
 token_scholar_enemy.png
-token_scout_player.png
-token_scout_enemy.png
 token_sentinel_player.png
 token_sentinel_enemy.png
 token_sergeant_player.png
@@ -195,6 +195,14 @@ commander_lance_miss_recover.png
 commander_lance_dodge.png
 commander_lance_hit_react.png
 commander_lance_fall.png
+drover_lance_idle.png
+drover_lance_advance.png
+drover_lance_strike.png
+drover_lance_strike_crit.png
+drover_lance_miss_recover.png
+drover_lance_dodge.png
+drover_lance_hit_react.png
+drover_lance_fall.png
 fieldsurgeon_faith_idle.png
 fieldsurgeon_faith_advance.png
 fieldsurgeon_faith_strike.png
@@ -355,14 +363,6 @@ scholar_faith_miss_recover.png
 scholar_faith_dodge.png
 scholar_faith_hit_react.png
 scholar_faith_fall.png
-scout_lance_idle.png
-scout_lance_advance.png
-scout_lance_strike.png
-scout_lance_strike_crit.png
-scout_lance_miss_recover.png
-scout_lance_dodge.png
-scout_lance_hit_react.png
-scout_lance_fall.png
 sentinel_lance_idle.png
 sentinel_lance_advance.png
 sentinel_lance_strike.png

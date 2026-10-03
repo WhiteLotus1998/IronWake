@@ -9,8 +9,8 @@ namespace Ironwake.Core.Tests.Campaign;
 /// the second promotion, an advanced form of their base beside the standard one, opened by a quest's
 /// win. Taking either door closes the other for good. Each names a measure it loses on to the
 /// standard form, held here. Maud's Field Surgeon heals double and moves again after a heal, never
-/// strikes, and heals only beside her; the Warden keeps range and the sword. Rook's Scout (slice 2)
-/// sees further at dusk and counts sleeping groups, and gives up Str and its growth to the Sky Captain.
+/// strikes, and heals only beside her; the Warden keeps range and the sword. Rook's Drover (issue 872,
+/// replacing 0167's Scout) never doubles and leans on her drake's stage verbs; the Sky Captain doubles.
 /// </summary>
 public class UniqueClassTests
 {
@@ -150,66 +150,102 @@ public class UniqueClassTests
         };
 
     [Fact]
-    public void TheScoutIsRooksOtherDoorAboveTheSkyrider()
+    public void TheDroverIsRooksOtherDoorAboveTheSkyrider()
     {
-        var scout = Shipped.Class("scout");
+        var drover = Shipped.Class("drover");
 
-        Assert.Equal("skyrider", scout.Advances?.Id);
-        Assert.Equal("rook", scout.Unique);
-        Assert.Equal("rook_1", scout.UnlockedBy);
-        Assert.Equal(SidegradeMeasure.Damage, scout.Loses);
-        Assert.Equal(Shipped.Class("skycaptain").Certification, scout.Certification);
-        Assert.Equal(Shipped.Class("skycaptain").Mov, scout.Mov);
-        Assert.Equal(1000, Shipped.Campaign.SealFor(scout));
+        Assert.Equal("Drover", drover.Name);
+        Assert.Equal("skyrider", drover.Advances?.Id);
+        Assert.Equal("rook", drover.Unique);
+        Assert.Equal("rook_1", drover.UnlockedBy);
+        Assert.Equal(SidegradeMeasure.Doubling, drover.Loses);
+        Assert.Equal(Shipped.Class("skycaptain").Certification, drover.Certification);
+        Assert.Equal(Shipped.Class("skycaptain").Mov, drover.Mov);
+        Assert.Equal(Shipped.Class("skycaptain").Movement, drover.Movement);
+        Assert.Equal("lookout", drover.Mastery);
+        Assert.Equal(1000, Shipped.Campaign.SealFor(drover));
     }
 
     [Fact]
-    public void TheScoutStaysShutUntilRooksQuestIsWon()
+    public void TheScoutIsGoneWithItsEyes()
+    {
+        Assert.False(Shipped.Classes.ContainsKey("scout"));
+        Assert.False(Shipped.Abilities.ContainsKey("high_watch"));
+        Assert.False(Shipped.Abilities.ContainsKey("headcount"));
+    }
+
+    [Fact]
+    public void TheDroverStaysShutUntilRooksQuestIsWon()
     {
         Assert.Equal(("rook", 1), (Shipped.Campaign.Quest("rook_1")!.MemberId, Shipped.Campaign.Quest("rook_1")!.Part));
-        Assert.Equal(new[] { "unlockedBy" }, Refusals(ReadyRook(), "scout", Won));
-        Assert.Empty(Refusals(ReadyRook(), "scout", new[] { "rook_1" }));
+        Assert.Equal(new[] { "unlockedBy" }, Refusals(ReadyRook(), "drover", Won));
+        Assert.Empty(Refusals(ReadyRook(), "drover", new[] { "rook_1" }));
         Assert.Empty(Refusals(ReadyRook(), "skycaptain", Array.Empty<string>()));
     }
 
     [Fact]
-    public void TakingTheScoutClosesTheSkyCaptainForGood()
+    public void TakingTheDroverClosesTheSkyCaptainForGood()
     {
-        var scout = Certifications.Certify(ReadyRook(), Shipped.Class("scout"), false, new[] { "rook_1" });
-        var back = Certifications.Certify(scout, Shipped.Class("skyrider"));
+        var drover = Certifications.Certify(ReadyRook(), Shipped.Class("drover"), false, new[] { "rook_1" });
+        var back = Certifications.Certify(drover, Shipped.Class("skyrider"));
 
         Assert.Equal(new[] { "door" }, Refusals(back, "skycaptain", new[] { "rook_1" }));
     }
 
+    /// <summary>Round 288: the double-for-bite trade is the whole difference, so the Drover takes the Sky Captain's modifiers and growths.</summary>
     [Fact]
-    public void TheScoutGrowsTenLessStrThanTheSkyCaptain()
+    public void TheDroverGrowsAndStandsAsTheSkyCaptain()
     {
-        Assert.Equal(Shipped.Class("skycaptain").GrowthModifiers.Str - 10, Shipped.Class("scout").GrowthModifiers.Str);
-        Assert.Equal(Shipped.Class("skycaptain").GrowthModifiers with { Str = 0 }, Shipped.Class("scout").GrowthModifiers with { Str = 0 });
+        Assert.Equal(Shipped.Class("skycaptain").GrowthModifiers, Shipped.Class("drover").GrowthModifiers);
+        Assert.Equal(Shipped.Class("skycaptain").Modifiers, Shipped.Class("drover").Modifiers);
     }
 
-    /// <summary>The sidegrade test (issue 706): with every lance the Scout strikes for 1 less than the Sky Captain, the Str modifier it gives up.</summary>
+    /// <summary>The sidegrade test (issue 872): the Drover strikes once a combat, the Sky Captain may double; both hit as hard per strike.</summary>
     [Theory]
     [InlineData("iron_lance")]
     [InlineData("steel_lance")]
-    public void TheScoutLosesDamageToTheSkyCaptainWithEveryLance(string lance)
+    public void TheDroverLosesTheDoubleToTheSkyCaptain(string lance)
     {
         var rook = ReadyRook() with { Skill = WeaponSkill.Zero.With(WeaponType.Lance, WeaponRanks.Threshold(WeaponRank.A)) };
         int Damage(string classId) => Shipped.StatsOf(rook with { ClassId = classId }).Str + Shipped.WeaponOf(rook with { ClassId = classId }, Shipped.Weapon(lance)).Mt;
 
-        Assert.Equal(Damage("skycaptain") - 1, Damage("scout"));
-        Assert.Equal(Sidegrades.Measure(rook, Shipped.Class("skycaptain"), Shipped, SidegradeMeasure.Damage) - 1, Sidegrades.Measure(rook, Shipped.Class("scout"), Shipped, SidegradeMeasure.Damage));
+        Assert.Equal(Damage("skycaptain"), Damage("drover"));
+        Assert.Equal(1, Sidegrades.Measure(rook, Shipped.Class("drover"), Shipped, SidegradeMeasure.Doubling));
+        Assert.Equal(2, Sidegrades.Measure(rook, Shipped.Class("skycaptain"), Shipped, SidegradeMeasure.Doubling));
     }
 
     [Fact]
-    public void TheScoutsEyesAreData()
+    public void TheDroversAbilitiesReadTheDrakesStage()
     {
-        var abilities = Shipped.AbilitiesOf(ReadyRook() with { ClassId = "scout" });
+        var rook = ReadyRook() with { ClassId = "drover" };
+        var abilities = Shipped.AbilitiesOf(rook);
+        Unit At(DrakeStage stage) => rook with { Drake = new DrakeState(stage, 0) };
 
-        Assert.Equal(2, AbilityRules.ExtraSight(abilities));
-        Assert.Equal(6, AbilityRules.HeadcountRadius(abilities));
-        Assert.Equal(0, AbilityRules.ExtraSight(Shipped.AbilitiesOf(ReadyRook() with { ClassId = "skycaptain" })));
-        Assert.Null(AbilityRules.HeadcountRadius(Shipped.AbilitiesOf(ReadyRook() with { ClassId = "skycaptain" })));
+        Assert.Equal(3, AbilityRules.Bite(abilities, At(DrakeStage.HalfGrown)));
+        Assert.Equal(5, AbilityRules.Bite(abilities, At(DrakeStage.Grown)));
+        Assert.Equal(5, AbilityRules.Bite(abilities, At(DrakeStage.Unbroken)));
+        Assert.Equal(0, AbilityRules.Bite(abilities, rook with { Drake = null }));
+        Assert.False(AbilityRules.LongCarry(abilities, At(DrakeStage.HalfGrown)));
+        Assert.True(AbilityRules.LongCarry(abilities, At(DrakeStage.Grown)));
+        Assert.Equal(0, AbilityRules.DeepRime(abilities, At(DrakeStage.Grown)));
+        Assert.Equal(1, AbilityRules.DeepRime(abilities, At(DrakeStage.Unbroken)));
+        var captain = Shipped.AbilitiesOf(rook with { ClassId = "skycaptain" });
+        Assert.Equal(0, AbilityRules.Bite(captain, At(DrakeStage.Unbroken)));
+        Assert.False(AbilityRules.LongCarry(captain, At(DrakeStage.Unbroken)));
+        Assert.Equal(0, AbilityRules.DeepRime(captain, At(DrakeStage.Unbroken)));
+    }
+
+    /// <summary>#872's note: if #805's keep round kills the carry, the long carry goes and the Drover still loads and measures on the bite and deep rime.</summary>
+    [Fact]
+    public void TheDroverLoadsAndMeasuresWithoutTheLongCarry()
+    {
+        var drover = Shipped.Class("drover") with { Abilities = ValueList<string>.From(new[] { "drake_bite", "deep_rime" }) };
+        var content = ContentLoader.Parse(ContentSerializer.Write(Shipped with { Classes = Shipped.Classes.SetItem("drover", drover), Abilities = Shipped.Abilities.Remove("long_carry") }));
+        var rook = ReadyRook() with { ClassId = "drover", Drake = new DrakeState(DrakeStage.Grown, 2) };
+
+        Assert.False(AbilityRules.LongCarry(content.AbilitiesOf(rook), rook));
+        Assert.Equal(5, AbilityRules.Bite(content.AbilitiesOf(rook), rook));
+        Assert.Equal(1, Sidegrades.Measure(rook, content.Class("drover"), content, SidegradeMeasure.Doubling));
     }
 
     [Fact]
@@ -310,8 +346,8 @@ public class UniqueClassTests
         { "the captain", "fieldsurgeon", "unique", "must be a cast member who is not the captain" },
         { "another's quest", "fieldsurgeon", "unlockedBy", "'bet_postern' must be a quest in the campaign whose member is 'maud'" },
         { "heals and strikes only", "fieldsurgeon", "healOnly", "also strike-only" },
-        { "another's unauthored quest", "scout", "unlockedBy", "or one of theirs not yet authored ('rook_<n>')" },
-        { "another's authored quest", "scout", "unlockedBy", "'maud_1' must be a quest in the campaign whose member is 'rook'" },
+        { "another's unauthored quest", "drover", "unlockedBy", "or one of theirs not yet authored ('rook_<n>')" },
+        { "another's authored quest", "drover", "unlockedBy", "'maud_1' must be a quest in the campaign whose member is 'rook'" },
     };
 
     [Theory]
@@ -327,8 +363,8 @@ public class UniqueClassTests
             "nobody" => surgeon with { Unique = "nobody" },
             "the captain" => surgeon with { Unique = Shipped.Cast[0].Id },
             "another's quest" => surgeon with { UnlockedBy = "bet_postern" },
-            "another's unauthored quest" => Shipped.Class("scout") with { UnlockedBy = "teodor_9" },
-            "another's authored quest" => Shipped.Class("scout") with { UnlockedBy = "maud_1" },
+            "another's unauthored quest" => Shipped.Class("drover") with { UnlockedBy = "teodor_9" },
+            "another's authored quest" => Shipped.Class("drover") with { UnlockedBy = "maud_1" },
             _ => surgeon with { StrikeOnly = ValueList<WeaponType>.Of(WeaponType.Faith) },
         };
 
@@ -346,8 +382,9 @@ public class UniqueClassTests
         Assert.Equal(Shipped.Class("fieldsurgeon"), reloaded.Class("fieldsurgeon"));
         Assert.Equal(Shipped.Ability("ward_rounds"), reloaded.Ability("ward_rounds"));
         Assert.Equal(Shipped.Ability("steady_hands"), reloaded.Ability("steady_hands"));
-        Assert.Equal(Shipped.Class("scout"), reloaded.Class("scout"));
-        Assert.Equal(Shipped.Ability("high_watch"), reloaded.Ability("high_watch"));
-        Assert.Equal(Shipped.Ability("headcount"), reloaded.Ability("headcount"));
+        Assert.Equal(Shipped.Class("drover"), reloaded.Class("drover"));
+        Assert.Equal(Shipped.Ability("drake_bite"), reloaded.Ability("drake_bite"));
+        Assert.Equal(Shipped.Ability("long_carry"), reloaded.Ability("long_carry"));
+        Assert.Equal(Shipped.Ability("deep_rime"), reloaded.Ability("deep_rime"));
     }
 }

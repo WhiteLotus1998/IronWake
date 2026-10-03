@@ -1254,7 +1254,7 @@ Rook wins rook_1; the stores take 2 common material; nobody fell
 (Placeholder until the writing pass: the roll, the extra seat, and whose
 coin bought it.)
 
-(The Scout is open to Rook at her second promotion: the other door above
-the Skyrider.)
+(The Drover is open to Rook at her second promotion: the other door
+above the Skyrider.)
 
 Campaign stopped before Brackwater Cut: the script ended on the screen

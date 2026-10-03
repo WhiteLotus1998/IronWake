@@ -1,0 +1,64 @@
+move rook 6,8
+breathe rook 6,7
+move captain 6,6
+move wren 6,7
+move teodor 7,8
+move pell 5,8
+move maud 6,9
+end
+move wren 5,4
+move captain 6,4
+move teodor 6,5
+move pell 6,6
+move maud 6,7
+move rook 5,5
+threat captain
+threat wren
+end
+help
+move rook 4,5
+attack rook soldier-1
+attack captain archer-1
+move teodor 7,3
+attack teodor archer-2
+attack pell brigand-3
+move maud 6,5
+item maud 2 maud
+threat maud
+threat rook
+end
+attack captain shieldbearer-1
+move rook 4,2
+attack rook archer-1
+threat captain
+move wren 7,4
+wait wren
+attack pell rider-1
+wait teodor
+end
+attack wren brigand-2
+move rook 5,2
+attack rook archer-2
+move pell 6,3
+attack pell archer-2
+move captain 6,0
+move wren 7,0
+move teodor 6,1
+threat captain
+threat teodor
+end
+forecast rook rider-2 from 8,3
+move rook 8,3
+attack rook rider-2
+move pell 8,2
+attack pell rider-2
+move teodor 7,4
+attack teodor rider-2
+end
+attack pell rider-2
+move teodor 7,0
+end
+move pell 8,0
+exit pell
+exit teodor
+exit captain

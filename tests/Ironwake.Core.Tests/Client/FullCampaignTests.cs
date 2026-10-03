@@ -18,7 +18,7 @@ public class FullCampaignTests
 {
     private const ulong Seed = 631;
     private const string Difficulty = "recruit";
-    private const int Variant = 13;
+    private const int Variant = 14;
 
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 

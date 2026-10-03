@@ -45,14 +45,14 @@ public enum AbilityTrigger
     /// <summary>In a fight, on every ally within the holder's radius, never the holder: the Marshal's aura (issue 705).</summary>
     Aura,
 
-    /// <summary>Whenever what the holder's side sees or knows is read: the Scout's eyes (issue 706).</summary>
-    OnSight,
-
     /// <summary>Whenever the holder's reach is walked: a cheaper step on named terrain (issue 705).</summary>
     OnMove,
 
     /// <summary>After the holder's own attack lands a hit on an enemy it leaves alive: the Vanguard's Opening (issue 772).</summary>
     OnHit,
+
+    /// <summary>When the holder's drake breathes: the Drover's Deep Rime (issue 872).</summary>
+    OnBreath,
 }
 
 /// <summary>The closed set of ability effects. Each record names its own trigger.</summary>
@@ -210,25 +210,6 @@ public sealed record MendingEffect(int Factor, int Reach) : AbilityEffect
 }
 
 /// <summary>
-/// The Scout's long sight (issue 706): on a dusk map (DESIGN.md 13.7) the holder sees
-/// <see cref="Tiles"/> further than its side's sight, and its side sees what it sees. Nothing in daylight.
-/// </summary>
-public sealed record SightEffect(int Tiles) : AbilityEffect
-{
-    public override AbilityTrigger Trigger => AbilityTrigger.OnSight;
-}
-
-/// <summary>
-/// The Scout's headcount (issue 706): <c>threat</c> prices a sleeping Guard group, as it would were the
-/// group awake, when a member stands within <see cref="Radius"/> tiles of the holder, where it stands or,
-/// for the holder's own threat, the tile asked. Every other sleeping group stays named and unpriced (issue 248).
-/// </summary>
-public sealed record HeadcountEffect(int Radius) : AbilityEffect
-{
-    public override AbilityTrigger Trigger => AbilityTrigger.OnSight;
-}
-
-/// <summary>
 /// A kill's heal (issue 704, the Berserker's Blood Price): when the holder kills in a combat and
 /// lives, it heals <see cref="Heal"/>, never above its max HP, if it fought with a weapon of type
 /// <see cref="Wielding"/> (any weapon when null).
@@ -279,6 +260,37 @@ public sealed record FootingEffect(ValueList<string> Terrain, int Cost) : Abilit
 public sealed record OpeningEffect(int Def, int Res) : AbilityEffect
 {
     public override AbilityTrigger Trigger => AbilityTrigger.OnHit;
+}
+
+/// <summary>
+/// The Drover's drake bite (issue 872, DESIGN section 3): in a combat at distance 1 in which one of the
+/// holder's lance strikes hits and both units still stand after the exchange, the drake bites the
+/// opponent once for a fixed <see cref="HalfGrown"/> while the drake is Half-grown and <see cref="Grown"/>
+/// from Grown on, through no Def. It is added damage, not a strike: it never rolls, never crits, and
+/// nothing that reads a strike reads it (<see cref="CombatResult.Bite"/>). It fires on counters too,
+/// and while the holder is grounded. Read on the rider's <see cref="Unit.Drake"/>: no drake, no bite.
+/// </summary>
+public sealed record BiteEffect(int HalfGrown, int Grown) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnCombat;
+}
+
+/// <summary>
+/// The Drover's long carry (issue 872): from Grown, after the holder sets a carried ally down
+/// (<see cref="DrakeCarry"/>) it may move again on the Move the carry left, a Canto with no strike.
+/// </summary>
+public sealed record LongCarryEffect : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.AfterAction;
+}
+
+/// <summary>
+/// The Drover's deep rime (issue 872): at Unbroken, the Rime ice the holder's breath makes (<see cref="Rime"/>)
+/// holds <see cref="Rounds"/> more full rounds, an enemy phase and a player phase each, before it thaws.
+/// </summary>
+public sealed record DeepRimeEffect(int Rounds) : AbilityEffect
+{
+    public override AbilityTrigger Trigger => AbilityTrigger.OnBreath;
 }
 
 /// <summary>
@@ -434,12 +446,22 @@ public static class AbilityRules
     public static OpeningEffect? Opening(ValueList<Ability> abilities) =>
         abilities.Select(a => a.Effect).OfType<OpeningEffect>().FirstOrDefault();
 
-    /// <summary>How many tiles further than its side's dusk sight <paramref name="abilities"/> see (issue 706): the sum of every <see cref="SightEffect"/>, 0 when none.</summary>
-    public static int ExtraSight(ValueList<Ability> abilities) => abilities.Sum(a => a.Effect is SightEffect sight ? sight.Tiles : 0);
+    /// <summary>
+    /// What the drake bites for in <paramref name="unit"/>'s combats (issue 872, <see cref="BiteEffect"/>):
+    /// the best bite among <paramref name="abilities"/> at the drake's stage, 0 with no bite or no drake.
+    /// </summary>
+    public static int Bite(ValueList<Ability> abilities, Unit unit) =>
+        unit.Drake is not { } drake ? 0
+        : abilities.Select(a => a.Effect).OfType<BiteEffect>().Select(b => drake.Stage == DrakeStage.HalfGrown ? b.HalfGrown : b.Grown).DefaultIfEmpty(0).Max();
 
-    /// <summary>How far from the holder <paramref name="abilities"/> count a sleeping group's numbers (issue 706): the widest <see cref="HeadcountEffect"/>'s radius, null when none.</summary>
-    public static int? HeadcountRadius(ValueList<Ability> abilities) =>
-        abilities.Select(a => a.Effect).OfType<HeadcountEffect>().Select(h => (int?)h.Radius).Max();
+    /// <summary>Whether <paramref name="unit"/> may move again after a carry (issue 872, <see cref="LongCarryEffect"/>): it holds the long carry and its drake is Grown or more.</summary>
+    public static bool LongCarry(ValueList<Ability> abilities, Unit unit) =>
+        unit.Drake is { Stage: >= DrakeStage.Grown } && abilities.Any(a => a.Effect is LongCarryEffect);
+
+    /// <summary>The extra rounds <paramref name="unit"/>'s breath's ice holds (issue 872, <see cref="DeepRimeEffect"/>): the most among <paramref name="abilities"/> at Unbroken, else 0.</summary>
+    public static int DeepRime(ValueList<Ability> abilities, Unit unit) =>
+        unit.Drake is not { Stage: DrakeStage.Unbroken } ? 0
+        : abilities.Select(a => a.Effect).OfType<DeepRimeEffect>().Select(d => d.Rounds).DefaultIfEmpty(0).Max();
 
     /// <summary>Whether any of <paramref name="abilities"/> braces on every map (issue 691).</summary>
     public static bool Braces(ValueList<Ability> abilities) => abilities.Any(a => a.Effect is BraceEffect);

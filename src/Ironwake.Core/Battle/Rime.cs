@@ -4,9 +4,15 @@ namespace Ironwake.Core;
 /// A tile of Rime ice the breath made (issue 805, experiment): where it is, the side whose breath
 /// made it, and its thaw clock, counted as the chill's is (<see cref="Frost.AtPhaseChange"/>):
 /// <c>1</c> from the breath until that side's next phase begins, <c>2</c> through that phase, and
-/// <c>3</c> once it is due but a unit stands on it.
+/// <c>3</c> once it is due but a unit stands on it. <see cref="Extra"/> is the full rounds it still holds
+/// past that (issue 872, the Drover's <see cref="DeepRimeEffect"/>): a due tile with one left goes back to
+/// <c>1</c> instead of thawing.
 /// </summary>
-public sealed record RimeTile(Coord At, Side Side, int Clock);
+public sealed record RimeTile(Coord At, Side Side, int Clock)
+{
+    /// <summary>The full rounds the tile holds past its first thaw (issue 872), 0 for a plain breath.</summary>
+    public int Extra { get; init; }
+}
 
 /// <summary>
 /// The drake's rime breath (issue 805, the Unbroken stage; STORY draft 6). On a <c>breath:</c> map a
@@ -116,12 +122,13 @@ public static class Rime
             state = state.WithUnit(state.Find(unit.Id)! with { Chill = 1 });
         }
 
+        var extra = AbilityRules.DeepRime(content.AbilitiesOf(rider.Unit), rider.Unit);
         var tiles = state.Rime.Where(r => !frozen.Contains(r.At)).ToList();
         foreach (var at in frozen)
         {
             events.Add(new TerrainChanged(at, TerrainId));
             state = state with { Map = state.Map.WithTerrain(at, TerrainId) };
-            tiles.Add(new RimeTile(at, rider.Side, 1));
+            tiles.Add(new RimeTile(at, rider.Side, 1) { Extra = extra });
         }
 
         return state with { Rime = ValueList<RimeTile>.From(tiles.OrderBy(r => r.At.Y).ThenBy(r => r.At.X)) };
@@ -131,7 +138,8 @@ public static class Rime
     /// The ice across a phase change from <paramref name="ended"/> to <paramref name="begins"/>: a tile no
     /// longer Rime ice leaves the clock; a tile of the side whose phase begins turns 1 to 2; a tile at 2
     /// whose side's phase ended, or one already due, thaws to its <see cref="Terrain.ThawsTo"/> when no unit
-    /// stands on it (<see cref="TerrainChanged"/>), and waits at 3 when one does.
+    /// stands on it (<see cref="TerrainChanged"/>), and waits at 3 when one does; a due tile with a deep rime
+    /// round left (<see cref="RimeTile.Extra"/>) spends it and goes back to 1 instead, so it holds one more round.
     /// </summary>
     public static BattleState AtPhaseChange(BattleState state, GameContent content, Side ended, Side begins, List<GameEvent> events)
     {
@@ -151,6 +159,12 @@ public static class Rime
             }
 
             var due = tile.Clock >= 3 || (tile.Clock == 2 && tile.Side == ended);
+            if (due && tile.Extra > 0)
+            {
+                kept.Add(tile with { Clock = 1, Extra = tile.Extra - 1 });
+                continue;
+            }
+
             if (due)
             {
                 if (state.UnitAt(tile.At) is null)
@@ -203,5 +217,5 @@ public static class Rime
     /// <summary>When <paramref name="tile"/> thaws, in player words.</summary>
     public static string Thaw(BattleState state, RimeTile tile) =>
         tile.Clock >= 3 ? "thaws once no one stands on it"
-        : $"thaws as {Frost.Until(tile.Side, tile.Clock == 1 && tile.Side == state.Phase)}";
+        : $"thaws as {Frost.Until(tile.Side, tile.Clock == 1 && tile.Side == state.Phase)}{(tile.Extra > 0 ? $", then holds {tile.Extra} more round{(tile.Extra == 1 ? "" : "s")} (deep rime)" : "")}";
 }

@@ -12,7 +12,8 @@ public static class Sidegrades
     /// content's weapons as the unit's abilities in that class shape them. <see cref="SidegradeMeasure.Reach"/>
     /// is the farthest tile any healing spell the unit may cast in the class reaches, 0 when it casts none;
     /// <see cref="SidegradeMeasure.Damage"/> the most any weapon it may strike with in the class adds to
-    /// its Str (Mag for a spell) at its level, before the target's defence, 0 when it strikes with none.
+    /// its Str (Mag for a spell) at its level, before the target's defence, 0 when it strikes with none;
+    /// <see cref="SidegradeMeasure.Doubling"/> the strikes one combat may make, 1 in a single-strike class, else 2.
     /// </summary>
     public static int Measure(Unit unit, UnitClass unitClass, GameContent content, SidegradeMeasure measure)
     {
@@ -29,6 +30,7 @@ public static class Sidegrades
                 .Select(w => (w.IsMagic ? content.StatsOf(inClass).Mag : content.StatsOf(inClass).Str) + content.WeaponOf(inClass, w).Mt)
                 .DefaultIfEmpty(0)
                 .Max(),
+            SidegradeMeasure.Doubling => unitClass.SingleStrike ? 1 : 2,
             _ => throw new ArgumentOutOfRangeException(nameof(measure), measure, "no such measure"),
         };
     }

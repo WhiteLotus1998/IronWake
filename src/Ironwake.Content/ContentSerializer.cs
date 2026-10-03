@@ -505,14 +505,6 @@ public static class ContentSerializer
             case BraceEffect:
                 writer.WriteString("kind", "brace");
                 break;
-            case SightEffect sight:
-                writer.WriteString("kind", "sight");
-                writer.WriteNumber("tiles", sight.Tiles);
-                break;
-            case HeadcountEffect headcount:
-                writer.WriteString("kind", "headcount");
-                writer.WriteNumber("radius", headcount.Radius);
-                break;
             case RangeEffect reach:
                 writer.WriteString("kind", "range");
                 if (reach.Heals)
@@ -560,6 +552,18 @@ public static class ContentSerializer
                 writer.WriteString("kind", "opening");
                 writer.WriteNumber("def", opening.Def);
                 writer.WriteNumber("res", opening.Res);
+                break;
+            case BiteEffect bite:
+                writer.WriteString("kind", "bite");
+                writer.WriteNumber("halfGrown", bite.HalfGrown);
+                writer.WriteNumber("grown", bite.Grown);
+                break;
+            case LongCarryEffect:
+                writer.WriteString("kind", "long_carry");
+                break;
+            case DeepRimeEffect deep:
+                writer.WriteString("kind", "deep_rime");
+                writer.WriteNumber("rounds", deep.Rounds);
                 break;
             default:
                 throw new ArgumentException($"no serializer for the effect of {ability.Id}", nameof(ability));
@@ -828,6 +832,11 @@ public static class ContentSerializer
         if (unitClass.Loses is { } loses)
         {
             writer.WriteString("loses", loses.ToString().ToLowerInvariant());
+        }
+
+        if (unitClass.SingleStrike)
+        {
+            writer.WriteBoolean("singleStrike", true);
         }
 
         if (unitClass.Grants.Count > 0)

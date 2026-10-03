@@ -46,8 +46,7 @@ public static class Dusk
 
     /// <summary>
     /// Whether <paramref name="side"/> sees <paramref name="at"/> on the state's turn: always in
-    /// daylight, otherwise when a living unit of that side stands within sight of it, a unit with
-    /// <see cref="BattleUnit.ExtraSight"/> that many tiles further (issue 706, the Scout). Given
+    /// daylight, otherwise when a living unit of that side stands within sight of it. Given
     /// <paramref name="moverId"/> and <paramref name="moverAt"/>, that unit is read as standing
     /// on the tile it would strike from, which is how the enemy planner asks before it moves.
     /// The player side also sees a tile a lit enemy stands on (<see cref="Lit"/>).
@@ -67,7 +66,7 @@ public static class Dusk
         foreach (var unit in state.UnitsOf(side))
         {
             var from = unit.Id == moverId && moverAt is { } tile ? tile : unit.At;
-            if (from.DistanceTo(at) <= sight + unit.ExtraSight)
+            if (from.DistanceTo(at) <= sight)
             {
                 return true;
             }
@@ -129,12 +128,11 @@ public static class Dusk
         Seen(state, unit) || Sees(state, Side.Player, unit.At, moverId, moverAt);
 
     /// <summary>
-    /// The console line for a dusk map's sight on the state's turn, with the next turn's, each player unit
-    /// that sees further and how far by <paramref name="names"/> (issue 706: <c>; Rook sees 5</c>), and the
+    /// The console line for a dusk map's sight on the state's turn, with the next turn's, and the
     /// hearing radius of <see cref="Knows"/>, the content's wake radius (issue 765: an enemy walks to a unit it
     /// hears in the dark, so the line says how far it hears), or null in daylight.
     /// </summary>
-    public static string? Line(BattleState state, GameContent content, UnitNames? names = null)
+    public static string? Line(BattleState state, GameContent content)
     {
         if (Sight(state) is not { } sight)
         {
@@ -145,7 +143,6 @@ public static class Dusk
         var tail = next == sight ? "; it gets no darker" : $", {next} next turn";
         var hidden = state.UnitsOf(Side.Enemy).Count(u => !Seen(state, u));
         var dark = hidden == 0 ? "" : $"; {hidden} unseen ({Unseen})";
-        var far = string.Concat(state.UnitsOf(Side.Player).Where(u => u.ExtraSight > 0).Select(u => $"; {(names ?? UnitNames.None)[u.Id]} sees {sight + u.ExtraSight}"));
-        return $"dusk: sight {sight}{tail}{far}{dark}; no side strikes what it cannot see; the enemy hears within {content.WakeRadius}";
+        return $"dusk: sight {sight}{tail}{dark}; no side strikes what it cannot see; the enemy hears within {content.WakeRadius}";
     }
 }

@@ -226,6 +226,22 @@ public static class Program
             return KeepGates(args.Skip(1).ToList());
         }
 
+        if (args.Length > 0 && args[0] == "--drover")
+        {
+            if (FindContent() is not { } droverContent)
+            {
+                Console.WriteLine("drover: no content directory found from the working directory or the build output");
+                return 1;
+            }
+
+            foreach (var line in DroverMeasure.Lines(ContentLoader.Load(droverContent), RollScheme.TwoRollAverage))
+            {
+                Console.WriteLine(line);
+            }
+
+            return 0;
+        }
+
         if (args.Length > 1 && args[0] == "--hitband")
         {
             var seeds = HitBandSeeds;

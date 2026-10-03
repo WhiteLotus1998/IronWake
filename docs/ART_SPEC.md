@@ -91,6 +91,8 @@ token_chaplain_player
 token_chaplain_enemy
 token_commander_player
 token_commander_enemy
+token_drover_player
+token_drover_enemy
 token_fieldsurgeon_player
 token_fieldsurgeon_enemy
 token_halberdier_player
@@ -113,8 +115,6 @@ token_reaver_player
 token_reaver_enemy
 token_scholar_player
 token_scholar_enemy
-token_scout_player
-token_scout_enemy
 token_sentinel_player
 token_sentinel_enemy
 token_sergeant_player
@@ -271,6 +271,14 @@ commander_lance_miss_recover
 commander_lance_dodge
 commander_lance_hit_react
 commander_lance_fall
+drover_lance_idle
+drover_lance_advance
+drover_lance_strike
+drover_lance_strike_crit
+drover_lance_miss_recover
+drover_lance_dodge
+drover_lance_hit_react
+drover_lance_fall
 fieldsurgeon_faith_idle
 fieldsurgeon_faith_advance
 fieldsurgeon_faith_strike
@@ -431,14 +439,6 @@ scholar_faith_miss_recover
 scholar_faith_dodge
 scholar_faith_hit_react
 scholar_faith_fall
-scout_lance_idle
-scout_lance_advance
-scout_lance_strike
-scout_lance_strike_crit
-scout_lance_miss_recover
-scout_lance_dodge
-scout_lance_hit_react
-scout_lance_fall
 sentinel_lance_idle
 sentinel_lance_advance
 sentinel_lance_strike
