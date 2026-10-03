@@ -155,6 +155,7 @@
         "(Placeholder until the writing pass: the ledger, the line struck through, and the drake that is nobody's now.)"
       ] }
   ],
+  "drake": { "member": "rook", "grownAfter": "rook_1", "grownFlown": 2, "unbrokenAfter": "rook_2" },
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
   "origins": [
     { "id": "aldmere", "name": "Aldmere", "stats": { "dex": 2, "lck": -1, "res": -1 }, "growths": { "dex": 10, "lck": -5, "res": -5 } },

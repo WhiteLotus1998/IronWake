@@ -119,6 +119,15 @@ public sealed class CampaignSession
         return record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == pick ? fedUnit : u)) };
     }
 
+    /// <summary>
+    /// A line for each drake a won map grew (issue 805), <c>Rook's drake is grown.</c>, in roster
+    /// order: a rider in both records whose stage moved.
+    /// </summary>
+    public static IEnumerable<string> DrakesGrown(CampaignRecord before, CampaignRecord after) =>
+        after.Roster
+            .Where(u => u.Drake is { } now && before.Find(u.Id)?.Drake is { } then && now.Stage != then.Stage)
+            .Select(u => $"{u.Name}'s drake is {Drake.Word(u.Drake!.Stage)}.");
+
     /// <summary>Parses the arguments after <c>campaign</c> and runs it: 0 when every map is won, 1 on a loss or an unfinished script, 2 for a usage error, 3 for a strict stop.</summary>
     public static int Run(string[] args)
     {
@@ -498,6 +507,10 @@ public sealed class CampaignSession
             var before = _record;
             _record = _record.AfterBattle(battle.State, _content);
             WriteEvent(WonLine(before, _record, battle.State, _content));
+            foreach (var grown in DrakesGrown(before, _record))
+            {
+                WriteEvent(grown);
+            }
             Lines(AfterCard(before, _content, map));
         }
 

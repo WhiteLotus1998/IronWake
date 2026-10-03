@@ -217,6 +217,16 @@ public static class ContentSerializer
                 writer.WriteEndArray();
             }
 
+            if (campaign.Drake is { } drake)
+            {
+                writer.WriteStartObject("drake");
+                writer.WriteString("member", drake.Member);
+                writer.WriteString("grownAfter", drake.GrownAfter);
+                writer.WriteNumber("grownFlown", drake.GrownFlown);
+                writer.WriteString("unbrokenAfter", drake.UnbrokenAfter);
+                writer.WriteEndObject();
+            }
+
             if (campaign.Forge != ForgeRules.None)
             {
                 writer.WriteStartObject("forge");

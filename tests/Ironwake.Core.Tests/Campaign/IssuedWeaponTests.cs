@@ -82,7 +82,8 @@ public class IssuedWeaponTests
     [Fact]
     public void AnyoneTheCampaignIssuesNothingIsKittedAsBefore()
     {
-        Assert.Equal(Content.Unit("rook"), CampaignRecord.Kitted(Content.Unit("rook"), Content));
+        Assert.Equal(Content.Unit("wren"), CampaignRecord.Kitted(Content.Unit("wren"), Content));
+        Assert.Equal(Content.Unit("rook").Inventory, CampaignRecord.Kitted(Content.Unit("rook"), Content).Inventory);
     }
 
     [Fact]

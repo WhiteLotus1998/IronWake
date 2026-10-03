@@ -1187,6 +1187,14 @@ public static class ProtocolJson
             w.WriteEndObject();
         }
 
+        if (u.Drake is { } drake)
+        {
+            w.WriteStartObject("drake");
+            w.WriteString("stage", Drake.Word(drake.Stage));
+            w.WriteNumber("flown", drake.Flown);
+            w.WriteEndObject();
+        }
+
         if (u.Wound is { } wound)
         {
             w.WriteStartObject("wound");
@@ -1266,6 +1274,29 @@ public static class ProtocolJson
         return ValueList<(string, string)>.From(doors.EnumerateObject().Select(p => (p.Name, p.Value.GetString() ?? throw new ProtocolException($"field 'doors.{p.Name}' must be a class id"))));
     }
 
+    /// <summary>
+    /// The optional <c>drake</c> of a unit (issue 805): its <c>stage</c> as the screen words it and the
+    /// main maps <c>flown</c>. A unit written before it, or without one, rides none.
+    /// </summary>
+    private static DrakeState? ReadDrake(JsonElement e)
+    {
+        if (!e.TryGetProperty("drake", out var d) || d.ValueKind == JsonValueKind.Null)
+        {
+            return null;
+        }
+
+        var word = RequiredString(d, "stage");
+        var stage = Enum.GetValues<DrakeStage>().Where(s => Drake.Word(s) == word).Select(s => (DrakeStage?)s).FirstOrDefault()
+            ?? throw new ProtocolException($"field 'drake.stage' must be one of {string.Join(", ", Enum.GetValues<DrakeStage>().Select(Drake.Word))}");
+        var flown = RequiredInt(d, "flown");
+        if (flown < 0)
+        {
+            throw new ProtocolException("field 'drake.flown' must be at least 0");
+        }
+
+        return new DrakeState(stage, flown);
+    }
+
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
     private static Unit ReadRosterUnit(JsonElement e, GameContent content)
     {
@@ -1298,6 +1329,7 @@ public static class ProtocolJson
                 Wound = ReadWound(e),
                 Pronoun = ReadPronoun(e, id),
                 Doors = ReadDoors(e),
+                Drake = ReadDrake(e),
             };
         }
         catch (ArgumentException ex)
