@@ -182,4 +182,111 @@ public class DrakeTests
 
         Assert.Equal((ContentFiles.CampaignName, field), (e.File, e.Field));
     }
+
+    [Fact]
+    public void ARiderWhoFallsForGoodOnAMainMapLeavesHerDrakesStageOnTheRecord()
+    {
+        var record = WithRook(OnTheField(), new DrakeState(DrakeStage.Grown, 3));
+        Assert.Null(record.DrakeFlew);
+
+        var after = record.AfterBattle(Won(record, Map("the_field"), u => u.Id != "rook"), Content);
+
+        Assert.Equal(DrakeStage.Grown, after.DrakeFlew);
+        Assert.Contains("rook", after.Fallen);
+        Assert.Null(after.Find("rook"));
+    }
+
+    [Fact]
+    public void AnotherMemberFallingFliesNoDrake()
+    {
+        var record = OnTheField();
+
+        var after = record.AfterBattle(Won(record, Map("the_field"), u => u.Id != "teodor"), Content);
+
+        Assert.Contains("teodor", after.Fallen);
+        Assert.Null(after.DrakeFlew);
+    }
+
+    [Fact]
+    public void WithPermadeathOffTheRiderComesBackWoundedAndKeepsTheDrake()
+    {
+        var record = WithRook(OnTheField(), new DrakeState(DrakeStage.Grown, 3)) with { Permadeath = false };
+
+        var after = record.AfterBattle(Won(record, Map("the_field"), u => u.Id != "rook"), Content);
+
+        Assert.Null(after.DrakeFlew);
+        Assert.Equal(DrakeStage.Grown, after.Find("rook")!.Drake!.Stage);
+    }
+
+    [Fact]
+    public void AFlownDrakeStaysOnTheRecordForTheRestOfTheCampaign()
+    {
+        var record = OnTheField() with { DrakeFlew = DrakeStage.HalfGrown };
+
+        Assert.Equal(DrakeStage.HalfGrown, record.AfterBattle(Won(record, Map("the_field")), Content).DrakeFlew);
+    }
+
+    [Fact]
+    public void ARiderWhoFallsOnHerSideMapLeavesHerDrakesStageOnTheRecord()
+    {
+        var start = CampaignRecord.StartAt(Content, 805, "ironwake_keep", pick: "rook");
+        var ally = start.Roster.First(u => u.Id != "rook" && u.Id != Content.Cast[0].Id).Id;
+        var record = WithRook(start, new DrakeState(DrakeStage.Grown, 3)) with { QuestsWon = ValueList<QuestWon>.Of(new QuestWon("rook_1", 7)) };
+        var opening = record.BeginQuest(SideMap("the_lazar_house"), "rook_2", ally, Content);
+        var end = opening with { Units = ValueList<BattleUnit>.From(opening.UnitsOf(Side.Player).Where(u => u.Id != "rook")), Turn = opening.Map.TurnLimit + 1, History = ValueList<BattleState>.Of(opening) };
+
+        var result = record.AfterQuest(end, "rook_2", Content);
+
+        Assert.Contains("rook", result.Record.Fallen);
+        Assert.Equal(DrakeStage.Grown, result.Record.DrakeFlew);
+    }
+
+    [Fact]
+    public void TheFlownDrakeRoundTripsThroughTheSaveAndIsWrittenOnlyOnceSet()
+    {
+        var record = CampaignRecord.StartAt(Content, 805, "the_field", pick: "rook") with { DrakeFlew = DrakeStage.Unbroken };
+
+        var json = ProtocolJson.Campaign(record);
+
+        Assert.Contains("\"drakeFlew\":\"unbroken\"", json);
+        Assert.Equal(DrakeStage.Unbroken, ProtocolJson.ReadCampaign(json, Content).DrakeFlew);
+        Assert.DoesNotContain("drakeFlew", ProtocolJson.Campaign(record with { DrakeFlew = null }));
+        Assert.Null(ProtocolJson.ReadCampaign(ProtocolJson.Campaign(record with { DrakeFlew = null }), Content).DrakeFlew);
+    }
+
+    [Fact]
+    public void ASavedFlownDrakeWithAnUnknownStageIsRefused()
+    {
+        var json = ProtocolJson.Campaign(CampaignRecord.StartAt(Content, 805, "the_field", pick: "rook") with { DrakeFlew = DrakeStage.Grown });
+
+        var e = Assert.Throws<ProtocolException>(() => ProtocolJson.ReadCampaign(json.Replace("\"drakeFlew\":\"grown\"", "\"drakeFlew\":\"gone\""), Content));
+
+        Assert.Contains("drakeFlew", e.Message);
+    }
+
+    [Fact]
+    public void ARidersFallLineSaysTheDrakeLeavesTheFieldAndNoOneElsesDoes()
+    {
+        var record = WithRook(OnTheField(), new DrakeState(DrakeStage.Grown, 3));
+        var opening = record.Begin(Map("the_field"), Content);
+        var names = UnitNames.Of(opening, Content);
+
+        Assert.True(names.Rides("rook"));
+        Assert.False(names.Rides("teodor"));
+        Assert.Equal("Rook falls at 4,5; her drake leaves the field", PlaySession.Describe(new UnitDied("rook", Side.Player, new Coord(4, 5)), Content, names));
+        Assert.Equal($"{names["teodor"]} falls at 4,5", PlaySession.Describe(new UnitDied("teodor", Side.Player, new Coord(4, 5)), Content, names));
+    }
+
+    [Fact]
+    public void TheCampsFallenListSaysTheDrakeFlewBesideItsRider()
+    {
+        var record = WithRook(OnTheField(), new DrakeState(DrakeStage.Grown, 3));
+        var after = record.AfterBattle(Won(record, Map("the_field"), u => u.Id != "rook" && u.Id != "teodor"), Content);
+        var names = UnitNames.Of(after, Content);
+
+        var fallen = CampaignSession.RosterLines(after, Content).Single(l => l.StartsWith("  Fallen: ", StringComparison.Ordinal));
+
+        Assert.Contains($"Rook (fell on {Map("the_field").Name}; the drake flew, grown)", fallen);
+        Assert.Contains($"{names["teodor"]} (fell on {Map("the_field").Name})", fallen);
+    }
 }

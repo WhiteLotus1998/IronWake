@@ -1815,10 +1815,31 @@ public sealed class CampaignSession
         if (record.Fallen.Count > 0)
         {
             var names = UnitNames.Of(record, content);
-            lines.Add($"  Fallen: {string.Join(", ", record.Fallen.Select(id => record.FellOnMap(id) is { } board ? $"{names[id]} (fell on {board})" : names[id]))}");
+            lines.Add($"  Fallen: {string.Join(", ", record.Fallen.Select(id => FallenEntry(record, content, names, id)))}");
         }
 
         return lines;
+    }
+
+    /// <summary>
+    /// One of the camp's fallen (issues 678 and 805): the name, then in brackets the board they fell on
+    /// and, for the campaign's drake rider once <see cref="CampaignRecord.DrakeFlew"/> is set, that the
+    /// drake flew: <c>Rook (fell on The Rookery; the drake flew, grown)</c>.
+    /// </summary>
+    private static string FallenEntry(CampaignRecord record, GameContent content, UnitNames names, string id)
+    {
+        var notes = new List<string>();
+        if (record.FellOnMap(id) is { } board)
+        {
+            notes.Add($"fell on {board}");
+        }
+
+        if (record.DrakeFlew is { } flew && content.Campaign.Drake?.Member == id)
+        {
+            notes.Add($"the drake flew, {Drake.Word(flew)}");
+        }
+
+        return notes.Count == 0 ? names[id] : $"{names[id]} ({string.Join("; ", notes)})";
     }
 
     /// <summary>
