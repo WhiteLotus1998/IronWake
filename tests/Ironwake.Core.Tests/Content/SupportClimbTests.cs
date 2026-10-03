@@ -76,6 +76,6 @@ public class SupportClimbTests
     [Fact]
     public void TheSimsUsageNamesSupports()
     {
-        Assert.Contains("| --supports [--seeds N] |", Program.Usage);
+        Assert.Contains("| --supports [--seeds N] [--pair <a> <b>] |", Program.Usage);
     }
 }

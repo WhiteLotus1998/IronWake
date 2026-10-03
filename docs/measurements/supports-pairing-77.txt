@@ -1,0 +1,165 @@
+# issue 77 slice 5: --supports --pair (Release, 200 runs each) on issue/77-pairing-player (DECISIONS/0187). The pairing player for one named pair; tiers C 16, B 40, A 72 (0184). Four pairs: the best captain pair of the floor, a captain romance, the best recruit pair of the floor, the recruit romance.
+
+## --supports --seeds 200 --pair captain wren
+supports: 200 runs, the pairing player for captain and wren through the campaign (both deployed where the bench allows, ending beside each other where the tile is no worse), 26 support pairs; tiers C 16, B 40, A 72; this is the ceiling of that pair's climb under the heuristic
+  map 1 starting_alone: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 2 the_mill: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 3 saltmarsh_ford: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 4 p50 8 p75 8, best recruit pair p25 4 p50 8 p75 8, best captain pair p25 0 p50 0 p75 3
+  map 4 the_tollgate: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 4 p50 8 p75 8, best recruit pair p25 4 p50 8 p75 8, best captain pair p25 2 p50 4 p75 6
+  map 5 harrow_weir: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 4 p50 8 p75 8, best recruit pair p25 4 p50 8 p75 8, best captain pair p25 4 p50 4 p75 6
+  map 6 ironwake_raid: won 81, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 10 p75 12, best recruit pair p25 6 p50 8 p75 12, best captain pair p25 6 p50 8 p75 8
+  map 7 sallow_grange: won 81, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 12 p75 12, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 6 p50 8 p75 10
+  map 8 brackwater_cut: won 81, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 12 p75 12, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 6 p50 8 p75 10
+  map 9 ironwake_keep: won 12, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 12 p50 14 p75 18, best recruit pair p25 8 p50 12 p75 18, best captain pair p25 8 p50 10 p75 14
+  per pair over the 12 runs that finished the campaign: final points p50 p75, and the runs reaching each tier
+    wren and pell (comedy): p50 8 p75 9, C 1, B 0, A 0
+    wren and teodor (debt): p50 0 p75 6, C 0, B 0, A 0
+    ottilie and wren (argument): p50 12 p75 18, C 4, B 0, A 0
+    teodor and brannock (mentor): p50 0 p75 0, C 0, B 0, A 0
+    teodor and dunstan (respect): p50 3 p75 3, C 0, B 0, A 0
+    ottilie and ansgar (romance): p50 4 p75 4, C 0, B 0, A 0
+    ottilie and keziah (debt): p50 3 p75 3, C 0, B 0, A 0
+    pell and maud (romance): p50 0 p75 0, C 0, B 0, A 0
+    pell and keziah (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and rook (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and maud (debt): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and keziah (comedy): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and maud (argument): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and brannock (debt): p50 0 p75 0, C 0, B 0, A 0
+    brannock and rook (comedy): p50 0 p75 0, C 0, B 0, A 0
+    rook and keziah (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and wren (mentor): p50 10 p75 12, C 1, B 0, A 0
+    captain and teodor (argument): p50 0 p75 2, C 0, B 0, A 0
+    captain and ottilie (respect): p50 2 p75 2, C 0, B 0, A 0
+    captain and pell (debt): p50 7 p75 8, C 0, B 0, A 0
+    captain and dunstan (argument): p50 1 p75 1, C 0, B 0, A 0
+    captain and maud (mentor): p50 0 p75 0, C 0, B 0, A 0
+    captain and ansgar (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and rook (debt): p50 0 p75 0, C 0, B 0, A 0
+    captain and keziah (argument): p50 0 p75 0, C 0, B 0, A 0
+    captain and brannock (argument): p50 0 p75 0, C 0, B 0, A 0
+  the pair: captain and wren (mentor): p50 10 p75 12, C 1, B 0, A 0
+  the pair's p50 after each won map: 1:0 2:0 3:0 4:4 5:4 6:6 7:8 8:8 9:10
+
+## --supports --seeds 200 --pair captain teodor
+supports: 200 runs, the pairing player for captain and teodor through the campaign (both deployed where the bench allows, ending beside each other where the tile is no worse), 26 support pairs; tiers C 16, B 40, A 72; this is the ceiling of that pair's climb under the heuristic
+  map 1 starting_alone: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 2 the_mill: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 3 saltmarsh_ford: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 6 p50 8 p75 8, best recruit pair p25 4 p50 4 p75 8, best captain pair p25 4 p50 4 p75 6
+  map 4 the_tollgate: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 8 p75 10, best recruit pair p25 8 p50 8 p75 8, best captain pair p25 6 p50 8 p75 10
+  map 5 harrow_weir: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 12 p75 14, best recruit pair p25 8 p50 8 p75 8, best captain pair p25 8 p50 10 p75 14
+  map 6 ironwake_raid: won 82, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 12 p50 12 p75 16, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 10 p50 12 p75 16
+  map 7 sallow_grange: won 78, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 12 p50 14 p75 18, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 12 p50 14 p75 18
+  map 8 brackwater_cut: won 78, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 12 p50 14 p75 18, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 12 p50 14 p75 18
+  map 9 ironwake_keep: won 5, at C p25 0 p50 1 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 14 p50 16 p75 17, best recruit pair p25 8 p50 12 p75 12, best captain pair p25 14 p50 16 p75 17
+  per pair over the 5 runs that finished the campaign: final points p50 p75, and the runs reaching each tier
+    wren and pell (comedy): p50 8 p75 12, C 0, B 0, A 0
+    wren and teodor (debt): p50 0 p75 0, C 0, B 0, A 0
+    ottilie and wren (argument): p50 4 p75 8, C 0, B 0, A 0
+    teodor and brannock (mentor): p50 0 p75 0, C 0, B 0, A 0
+    teodor and dunstan (respect): p50 0 p75 0, C 0, B 0, A 0
+    ottilie and ansgar (romance): p50 4 p75 4, C 0, B 0, A 0
+    ottilie and keziah (debt): p50 0 p75 3, C 0, B 0, A 0
+    pell and maud (romance): p50 0 p75 0, C 0, B 0, A 0
+    pell and keziah (mentor): p50 0 p75 3, C 0, B 0, A 0
+    dunstan and rook (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and maud (debt): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and keziah (comedy): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and maud (argument): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and brannock (debt): p50 0 p75 0, C 0, B 0, A 0
+    brannock and rook (comedy): p50 0 p75 0, C 0, B 0, A 0
+    rook and keziah (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and wren (mentor): p50 4 p75 6, C 0, B 0, A 0
+    captain and teodor (argument): p50 16 p75 17, C 3, B 0, A 0
+    captain and ottilie (respect): p50 6 p75 9, C 0, B 0, A 0
+    captain and pell (debt): p50 2 p75 4, C 0, B 0, A 0
+    captain and dunstan (argument): p50 0 p75 1, C 0, B 0, A 0
+    captain and maud (mentor): p50 0 p75 0, C 0, B 0, A 0
+    captain and ansgar (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and rook (debt): p50 0 p75 0, C 0, B 0, A 0
+    captain and keziah (argument): p50 0 p75 0, C 0, B 0, A 0
+    captain and brannock (argument): p50 0 p75 0, C 0, B 0, A 0
+  the pair: captain and teodor (argument): p50 16 p75 17, C 3, B 0, A 0
+  the pair's p50 after each won map: 1:0 2:0 3:4 4:6 5:10 6:12 7:14 8:14 9:16
+
+## --supports --seeds 200 --pair wren pell
+supports: 200 runs, the pairing player for wren and pell through the campaign (both deployed where the bench allows, ending beside each other where the tile is no worse), 26 support pairs; tiers C 16, B 40, A 72; this is the ceiling of that pair's climb under the heuristic
+  map 1 starting_alone: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 2 the_mill: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 3 saltmarsh_ford: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 4 p50 8 p75 8, best recruit pair p25 4 p50 8 p75 8, best captain pair p25 2 p50 3 p75 4
+  map 4 the_tollgate: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 8 p75 12, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 4 p50 4 p75 6
+  map 5 harrow_weir: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 8 p50 10 p75 12, best recruit pair p25 8 p50 8 p75 12, best captain pair p25 4 p50 6 p75 6
+  map 6 ironwake_raid: won 82, at C p25 0 p50 1 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 12 p50 16 p75 20, best recruit pair p25 12 p50 16 p75 20, best captain pair p25 6 p50 8 p75 10
+  map 7 sallow_grange: won 82, at C p25 1 p50 1 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 16 p50 16 p75 24, best recruit pair p25 16 p50 16 p75 24, best captain pair p25 6 p50 8 p75 10
+  map 8 brackwater_cut: won 82, at C p25 1 p50 1 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 20 p50 25 p75 32, best recruit pair p25 20 p50 25 p75 32, best captain pair p25 6 p50 9 p75 10
+  map 9 ironwake_keep: won 9, at C p25 1 p50 1 p75 1, at B p25 0 p50 0 p75 1, at A p25 0 p50 0 p75 0; best pair p25 32 p50 32 p75 40, best recruit pair p25 32 p50 32 p75 40, best captain pair p25 6 p50 8 p75 9
+  per pair over the 9 runs that finished the campaign: final points p50 p75, and the runs reaching each tier
+    wren and pell (comedy): p50 32 p75 40, C 9, B 3, A 0
+    wren and teodor (debt): p50 0 p75 0, C 0, B 0, A 0
+    ottilie and wren (argument): p50 4 p75 4, C 0, B 0, A 0
+    teodor and brannock (mentor): p50 0 p75 0, C 0, B 0, A 0
+    teodor and dunstan (respect): p50 0 p75 0, C 0, B 0, A 0
+    ottilie and ansgar (romance): p50 4 p75 4, C 0, B 0, A 0
+    ottilie and keziah (debt): p50 3 p75 3, C 0, B 0, A 0
+    pell and maud (romance): p50 0 p75 0, C 0, B 0, A 0
+    pell and keziah (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and rook (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and maud (debt): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and keziah (comedy): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and maud (argument): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and brannock (debt): p50 0 p75 0, C 0, B 0, A 0
+    brannock and rook (comedy): p50 0 p75 0, C 0, B 0, A 0
+    rook and keziah (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and wren (mentor): p50 2 p75 4, C 0, B 0, A 0
+    captain and teodor (argument): p50 4 p75 6, C 0, B 0, A 0
+    captain and ottilie (respect): p50 0 p75 4, C 0, B 0, A 0
+    captain and pell (debt): p50 8 p75 9, C 0, B 0, A 0
+    captain and dunstan (argument): p50 1 p75 1, C 0, B 0, A 0
+    captain and maud (mentor): p50 0 p75 0, C 0, B 0, A 0
+    captain and ansgar (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and rook (debt): p50 0 p75 0, C 0, B 0, A 0
+    captain and keziah (argument): p50 0 p75 0, C 0, B 0, A 0
+    captain and brannock (argument): p50 0 p75 0, C 0, B 0, A 0
+  the pair: wren and pell (comedy): p50 32 p75 40, C 9, B 3, A 0
+  the pair's p50 after each won map: 1:0 2:0 3:8 4:8 5:8 6:16 7:16 8:25 9:32
+
+## --supports --seeds 200 --pair pell maud
+supports: 200 runs, the pairing player for pell and maud through the campaign (both deployed where the bench allows, ending beside each other where the tile is no worse), 26 support pairs; tiers C 16, B 40, A 72; this is the ceiling of that pair's climb under the heuristic
+  map 1 starting_alone: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 2 the_mill: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 0 p50 0 p75 0, best recruit pair p25 0 p50 0 p75 0, best captain pair p25 0 p50 0 p75 0
+  map 3 saltmarsh_ford: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 5 p50 5 p75 10, best recruit pair p25 5 p50 5 p75 10, best captain pair p25 2 p50 4 p75 4
+  map 4 the_tollgate: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 5 p50 8 p75 10, best recruit pair p25 5 p50 5 p75 10, best captain pair p25 4 p50 6 p75 6
+  map 5 harrow_weir: won 82, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 6 p50 8 p75 10, best recruit pair p25 5 p50 5 p75 10, best captain pair p25 6 p50 6 p75 8
+  map 6 ironwake_raid: won 81, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 10 p50 10 p75 15, best recruit pair p25 10 p50 10 p75 15, best captain pair p25 6 p50 8 p75 8
+  map 7 sallow_grange: won 81, at C p25 0 p50 0 p75 0, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 10 p50 11 p75 15, best recruit pair p25 10 p50 10 p75 15, best captain pair p25 6 p50 8 p75 10
+  map 8 brackwater_cut: won 81, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 10 p50 14 p75 16, best recruit pair p25 10 p50 10 p75 15, best captain pair p25 10 p50 12 p75 14
+  map 9 ironwake_keep: won 25, at C p25 0 p50 0 p75 1, at B p25 0 p50 0 p75 0, at A p25 0 p50 0 p75 0; best pair p25 14 p50 15 p75 23, best recruit pair p25 10 p50 15 p75 23, best captain pair p25 12 p50 12 p75 14
+  per pair over the 25 runs that finished the campaign: final points p50 p75, and the runs reaching each tier
+    wren and pell (comedy): p50 8 p75 12, C 0, B 0, A 0
+    wren and teodor (debt): p50 4 p75 8, C 0, B 0, A 0
+    ottilie and wren (argument): p50 0 p75 4, C 0, B 0, A 0
+    teodor and brannock (mentor): p50 0 p75 0, C 0, B 0, A 0
+    teodor and dunstan (respect): p50 0 p75 0, C 0, B 0, A 0
+    ottilie and ansgar (romance): p50 4 p75 4, C 0, B 0, A 0
+    ottilie and keziah (debt): p50 3 p75 3, C 0, B 0, A 0
+    pell and maud (romance): p50 15 p75 23, C 11, B 1, A 0
+    pell and keziah (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and rook (mentor): p50 0 p75 0, C 0, B 0, A 0
+    dunstan and maud (debt): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and keziah (comedy): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and maud (argument): p50 0 p75 0, C 0, B 0, A 0
+    ansgar and brannock (debt): p50 0 p75 0, C 0, B 0, A 0
+    brannock and rook (comedy): p50 0 p75 0, C 0, B 0, A 0
+    rook and keziah (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and wren (mentor): p50 12 p75 14, C 1, B 0, A 0
+    captain and teodor (argument): p50 6 p75 8, C 0, B 0, A 0
+    captain and ottilie (respect): p50 0 p75 2, C 0, B 0, A 0
+    captain and pell (debt): p50 5 p75 6, C 1, B 0, A 0
+    captain and dunstan (argument): p50 1 p75 1, C 0, B 0, A 0
+    captain and maud (mentor): p50 0 p75 3, C 0, B 0, A 0
+    captain and ansgar (respect): p50 0 p75 0, C 0, B 0, A 0
+    captain and rook (debt): p50 0 p75 0, C 0, B 0, A 0
+    captain and keziah (argument): p50 0 p75 0, C 0, B 0, A 0
+    captain and brannock (argument): p50 0 p75 0, C 0, B 0, A 0
+  the pair: pell and maud (romance): p50 15 p75 23, C 11, B 1, A 0
+  the pair's p50 after each won map: 1:0 2:0 3:5 4:5 5:5 6:10 7:10 8:10 9:15

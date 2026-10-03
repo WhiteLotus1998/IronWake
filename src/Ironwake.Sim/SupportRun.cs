@@ -17,15 +17,18 @@ public static class SupportRun
     /// tier or better and the points of the best pair, the best pair between two recruits and the
     /// best pair with the captain, each as p25 p50 p75; then per support pair in file order, over the
     /// runs that finished the campaign, its final points as p50 and p75 and in how many of those runs it
-    /// reached each tier.
+    /// reached each tier. With <paramref name="pair"/> set the runs are <see cref="PairingPlayer"/>'s for
+    /// that pair (slice 5), the header says so, and that pair's line is printed again last.
     /// </summary>
-    public static IEnumerable<string> Lines(GameContent content, IReadOnlyList<LevelRun.Run> runs)
+    public static IEnumerable<string> Lines(GameContent content, IReadOnlyList<LevelRun.Run> runs, (string A, string B)? pair = null)
     {
         var tiers = content.Rivalry.SupportTiers;
         var pairs = content.Campaign.Supports;
         var captain = content.Cast.Count > 0 ? content.Cast[0].Id : string.Empty;
         var tierNames = string.Join(", ", tiers.Select(t => $"{t.Name} {t.At}"));
-        yield return $"supports: {runs.Count} runs, the heuristic player through the campaign, {pairs.Count} support pairs; tiers {tierNames}; the heuristic never stands a pair together on purpose, so this is the floor of the climb";
+        yield return pair is { } named
+            ? $"supports: {runs.Count} runs, the pairing player for {named.A} and {named.B} through the campaign (both deployed where the bench allows, ending beside each other where the tile is no worse), {pairs.Count} support pairs; tiers {tierNames}; this is the ceiling of that pair's climb under the heuristic"
+            : $"supports: {runs.Count} runs, the heuristic player through the campaign, {pairs.Count} support pairs; tiers {tierNames}; the heuristic never stands a pair together on purpose, so this is the floor of the climb";
 
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Order())
         {
@@ -43,13 +46,26 @@ public static class SupportRun
 
         var finished = runs.Where(r => r.LostOn is null && r.Rapport.Count > 0).Select(r => r.Rapport[^1]).ToList();
         yield return $"  per pair over the {finished.Count} runs that finished the campaign: final points p50 p75, and the runs reaching each tier";
-        foreach (var pair in pairs)
+        foreach (var each in pairs)
         {
-            var final = finished.Select(f => PointsOf(f, pair)).ToList();
-            var reached = tiers.Select(t => $"{t.Name} {final.Count(v => v >= t.At)}");
-            yield return $"    {pair.A} and {pair.B} ({pair.Kind.ToString().ToLowerInvariant()}): p50 {LevelRun.Percentile(final, 0.5)} p75 {LevelRun.Percentile(final, 0.75)}, {string.Join(", ", reached)}";
+            var final = finished.Select(f => PointsOf(f, each)).ToList();
+            yield return PairLine("    ", each, final, tiers);
+        }
+
+        if (pair is { } p && Supports.Pair(content.Campaign, p.A, p.B) is { } chosen)
+        {
+            var final = finished.Select(f => PointsOf(f, chosen)).ToList();
+            var byMap = runs.SelectMany(r => r.Maps.Select((m, i) => (m.Map, Points: i < r.Rapport.Count ? PointsOf(r.Rapport[i], chosen) : 0)))
+                .GroupBy(x => x.Map)
+                .OrderBy(g => g.Key)
+                .Select(g => $"{g.Key}:{LevelRun.Percentile(g.Select(x => x.Points).ToList(), 0.5)}");
+            yield return PairLine("  the pair: ", chosen, final, tiers);
+            yield return $"  the pair's p50 after each won map: {string.Join(" ", byMap)}";
         }
     }
+
+    private static string PairLine(string lead, SupportPair pair, IReadOnlyList<int> final, IReadOnlyList<SupportTier> tiers) =>
+        $"{lead}{pair.A} and {pair.B} ({pair.Kind.ToString().ToLowerInvariant()}): p50 {LevelRun.Percentile(final, 0.5)} p75 {LevelRun.Percentile(final, 0.75)}, {string.Join(", ", tiers.Select(t => $"{t.Name} {final.Count(v => v >= t.At)}"))}";
 
     /// <summary>The points <paramref name="pair"/> holds in <paramref name="rapport"/>, in either order, or 0.</summary>
     public static int PointsOf(IReadOnlyList<Rapport> rapport, SupportPair pair) =>
