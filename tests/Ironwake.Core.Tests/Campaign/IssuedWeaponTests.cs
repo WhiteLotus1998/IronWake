@@ -1,3 +1,4 @@
+using Ironwake.Cli;
 using Ironwake.Content;
 using Ironwake.Core.Tests.Content;
 using Ironwake.Core.Tests.Maps;
@@ -106,6 +107,31 @@ public class IssuedWeaponTests
         Assert.Equal(8, scythe.Fed);
         Assert.Equal(4, Kinsbane.Teeth(scythe.Fed));
         Assert.False(Kinsbane.Woken(scythe.Fed));
+    }
+
+    [Fact]
+    public void AStarvedKinsbaneCampsAsStarvedAndNotAsLow()
+    {
+        var record = CampaignRecord.StartAt(Content, 804, "the_field", pick: "keziah");
+        var starved = record with
+        {
+            Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == "keziah"
+                ? u with { Inventory = u.Inventory.Replace(0, u.Inventory.Items[0] with { Starved = true, Uses = 1 }) }
+                : u)),
+        };
+        Assert.Equal(Kinsbane.ItemId, starved.Find("keziah")!.Inventory.Items[0].ItemId);
+
+        var lines = CampaignSession.LowLines(starved, Content).Where(l => l.Contains("Kinsbane", StringComparison.Ordinal)).ToList();
+
+        Assert.Equal(new[] { "starved: Keziah's Kinsbane at half power until it lands a hit" }, lines);
+        Assert.DoesNotContain(CampaignSession.LowLines(record, Content), l => l.Contains("Kinsbane", StringComparison.Ordinal));
+        Assert.DoesNotContain(CampaignSession.LowLines(starved with { Benched = ValueList<string>.Of("keziah") }, Content), l => l.Contains("Kinsbane", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void KinsbanesDescriptionNamesTheReachClause()
+    {
+        Assert.Contains("if an enemy is in reach", Content.Weapon(Kinsbane.ItemId).Description, StringComparison.Ordinal);
     }
 
     [Fact]

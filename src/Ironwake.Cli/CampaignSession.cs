@@ -1609,10 +1609,14 @@ public sealed class CampaignSession
     /// <summary>
     /// The warning on leaving the camp (issue 647): <c>low: &lt;name&gt;'s &lt;weapon&gt; has &lt;n&gt; uses</c>
     /// for each unit going to the next map whose equipped weapon has fewer than
-    /// <see cref="CampaignRecord.LowUses"/>. It warns and never refuses.
+    /// <see cref="CampaignRecord.LowUses"/>; then, for a hungering weapon in its starved form
+    /// (issue 856), <c>starved: &lt;name&gt;'s &lt;weapon&gt; at half power until it lands a hit</c>
+    /// in its place. It warns and never refuses.
     /// </summary>
     public static IReadOnlyList<string> LowLines(CampaignRecord record, GameContent content) =>
-        record.LowWeapons(content).Select(l => $"low: {l.Unit.Name}'s {l.Weapon.Name} has {l.Uses} {(l.Uses == 1 ? "use" : "uses")}").ToList();
+        record.LowWeapons(content).Select(l => $"low: {l.Unit.Name}'s {l.Weapon.Name} has {l.Uses} {(l.Uses == 1 ? "use" : "uses")}")
+            .Concat(record.StarvedWeapons(content).Select(s => $"starved: {s.Unit.Name}'s {s.Weapon.Name} at half power until it lands a hit"))
+            .ToList();
 
     /// <summary>
     /// One line per arrival of the next map who will not join, printed where they are met: when the
