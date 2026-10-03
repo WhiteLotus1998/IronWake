@@ -50,6 +50,7 @@
     { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] }
   ],
+  "issues": { "keziah": "kinsbane" },
   "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
   "quests": [
     { "id": "maud_1", "member": "maud", "part": 1, "map": "the_lazar_house", "common": 2,

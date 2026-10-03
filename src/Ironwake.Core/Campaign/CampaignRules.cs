@@ -187,6 +187,17 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The certification trials, one per class at most, in class id order (issue 252); a class without one certifies only with a seal.</summary>
     public ValueList<CampaignTrial> Trials { get; init; } = ValueList<CampaignTrial>.Empty;
 
+    /// <summary>
+    /// The weapons the campaign issues to a cast member as they join (issue 804, round 263), cast id
+    /// to weapon id, from <c>issues</c>: the weapon goes in front of their pack at full uses in place
+    /// of the first weapon of its type they carry (Keziah's iron axe gives way to Kinsbane). A battle
+    /// outside the campaign reads the cast file and carries none of them.
+    /// </summary>
+    public ValueList<CampaignIssue> Issues { get; init; } = ValueList<CampaignIssue>.Empty;
+
+    /// <summary>The weapon the campaign issues <paramref name="unitId"/> as they join, or null.</summary>
+    public string? IssuedTo(string unitId) => Issues.FirstOrDefault(i => i.UnitId == unitId)?.WeaponId;
+
     /// <summary>The side maps of the members' stories (issue 635), in file order, which breaks ties in the order they are offered.</summary>
     public ValueList<CampaignQuest> Quests { get; init; } = ValueList<CampaignQuest>.Empty;
 
@@ -258,3 +269,6 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
 /// sleep and wake with it.
 /// </summary>
 public sealed record CampaignReturn(Coord At, string Group, Behavior Behavior);
+
+/// <summary>A weapon the campaign issues a cast member as they join (issue 804): <c>issues</c> in <c>campaign.json</c>.</summary>
+public sealed record CampaignIssue(string UnitId, string WeaponId);

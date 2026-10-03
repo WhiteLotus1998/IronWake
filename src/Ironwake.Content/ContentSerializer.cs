@@ -137,6 +137,17 @@ public static class ContentSerializer
             }
 
             writer.WriteEndArray();
+            if (campaign.Issues.Count > 0)
+            {
+                writer.WriteStartObject("issues");
+                foreach (var issue in campaign.Issues)
+                {
+                    writer.WriteString(issue.UnitId, issue.WeaponId);
+                }
+
+                writer.WriteEndObject();
+            }
+
             if (campaign.Trials.Count > 0)
             {
                 writer.WriteStartObject("trials");

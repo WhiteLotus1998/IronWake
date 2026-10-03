@@ -6,15 +6,17 @@ namespace Ironwake.Sim;
 /// <summary>
 /// Kinsbane's timing (issue 804, round 250: measure the wake first): the heuristic player fights the
 /// whole campaign from map 1 as <see cref="LevelRun"/> does, permadeath off, but picks
-/// <see cref="Owner"/> at the branch's camp, issues her the hungering weapon in front of her pack in
-/// place of her first weapon of its type (as <see cref="HeirloomRun"/> issues an heirloom), and
-/// benches from the back so she deploys on every map she can (<see cref="PairingPlayer.Deploy"/>).
+/// <see cref="Owner"/> at the branch's camp, where the campaign issues her the hungering weapon in
+/// front of her pack in place of her iron axe (<see cref="CampaignRecord.Kitted"/>, issue 804 slice 2),
+/// and benches from the back so she deploys on every map she can (<see cref="PairingPlayer.Deploy"/>).
+/// The control arm (round 263) takes the scythe back and gives her the iron axe in front, on the same
+/// seeds, so Sallow's clear rate with and without the hunger can be laid side by side.
 /// The heuristic is the one every other read uses, so it takes the hunt only as far as it already
 /// strikes with her. A map is tried on fresh seeds, up to <see cref="HeirloomRun.Attempts"/> times,
 /// until it is won with her standing where she fought, the Recall a player would spend. Per seed it
 /// reads the feed count by each map's end, the drains she paid and the starved forms, and the map each
 /// tooth grew on (<see cref="Kinsbane.Teeth"/>; the fifth wakes it); a lost map ends that run.
-/// A measurement only; nothing here changes what ships, and the campaign does not issue the weapon.
+/// A measurement only; nothing here changes what ships.
 /// </summary>
 public static class KinsbaneRun
 {
@@ -28,9 +30,8 @@ public static class KinsbaneRun
     public sealed record Run(IReadOnlyList<MapRead> Maps, IReadOnlyList<int> ToothOn, int? LostOn);
 
     /// <summary>Every run over seeds 1..<paramref name="seeds"/>.</summary>
-    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds)
+    public static IReadOnlyList<Run> Measure(string contentRoot, GameContent content, int seeds, bool axe = false)
     {
-        var scythe = content.Weapon(Kinsbane.ItemId);
         var runs = new List<Run>();
         for (var seed = 1; seed <= seeds; seed++)
         {
@@ -49,7 +50,11 @@ public static class KinsbaneRun
                 record = SimPick.Made(record, content);
                 if (!issued && record.Present(content).FirstOrDefault(u => u.Id == Owner) is not null)
                 {
-                    record = record with { Roster = ValueList<Unit>.From(record.Present(content).Select(u => u.Id == Owner ? Issued(u, scythe, content) : u)) };
+                    if (axe)
+                    {
+                        record = record with { Roster = ValueList<Unit>.From(record.Present(content).Select(u => u.Id == Owner ? Control(u, content) : u)) };
+                    }
+
                     issued = true;
                 }
 
@@ -132,9 +137,9 @@ public static class KinsbaneRun
     }
 
     /// <summary>The printed table: per map from her first, the feed count by its end (p25, p50, p75), the drains and starved forms; per tooth, the median map it grew on and how many runs grew it.</summary>
-    public static IEnumerable<string> Lines(IReadOnlyList<Run> runs)
+    public static IEnumerable<string> Lines(IReadOnlyList<Run> runs, bool axe = false)
     {
-        yield return $"kinsbane: {runs.Count} runs, the heuristic player through the campaign, {Owner} picked at the branch and fielded on every map she can, the scythe in front of her pack";
+        yield return $"kinsbane: {runs.Count} runs, the heuristic player through the campaign, {Owner} picked at the branch and fielded on every map she can, " + (axe ? "the control arm: her iron axe in front, no scythe" : "the scythe in front of her pack as the campaign issues it");
         var first = runs.SelectMany(r => r.Maps.Select(m => m.Map)).DefaultIfEmpty(0).Min();
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Order())
         {
@@ -147,28 +152,27 @@ public static class KinsbaneRun
             yield return $"  no try won map {lostOn.Key}: {lostOn.Count()}";
         }
 
+        if (axe)
+        {
+            yield break;
+        }
+
         var armed = runs.Where(r => r.Maps.Count > 0).ToList();
         yield return $"  teeth, over the {armed.Count} runs that won her first map (a run lost later counts as never):";
         for (var i = 0; i < Kinsbane.MtCap; i++)
         {
             var on = armed.Select(r => r.ToothOn[i]).Where(m => m > 0).ToList();
             var median = on.Count * 2 > armed.Count ? Percentile(armed.Select(r => r.ToothOn[i] == 0 ? int.MaxValue : r.ToothOn[i]), 0.5).ToString(System.Globalization.CultureInfo.InvariantCulture) : "never";
-            var label = i + 1 == Kinsbane.MtCap ? $"tooth {i + 1} (wakes, fed {Kinsbane.WakeKills})" : $"tooth {i + 1} (fed {(i + 1) * Kinsbane.KillsPerMt})";
+            var label = i + 1 == Kinsbane.MtCap ? $"tooth {i + 1} (wakes, fed {Kinsbane.WakeKills})" : $"tooth {i + 1} (fed {Kinsbane.FedFor(i + 1)})";
             yield return $"  {label}: grew in {on.Count} of {armed.Count}, median map {median}";
         }
     }
 
-    /// <summary>The owner with the weapon in front of her pack in place of the first weapon of its type she carries.</summary>
-    private static Unit Issued(Unit unit, Weapon item, GameContent content)
+    /// <summary>The control arm's owner: the hungering weapon taken out of her pack and her cast iron axe put in front at full uses.</summary>
+    private static Unit Control(Unit unit, GameContent content)
     {
-        var items = unit.Inventory.Items.ToList();
-        var replaced = items.FindIndex(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Type == item.Type);
-        if (replaced >= 0)
-        {
-            items.RemoveAt(replaced);
-        }
-
-        items.Insert(0, new ItemStack(item.Id, item.Durability));
+        var axe = content.Unit(Owner).Inventory.Items.First(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Type == content.Weapon(Kinsbane.ItemId).Type);
+        var items = unit.Inventory.Items.Where(s => s.ItemId != Kinsbane.ItemId).Prepend(new ItemStack(axe.ItemId, content.Weapon(axe.ItemId).Durability));
         return unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
     }
 

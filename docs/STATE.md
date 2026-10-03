@@ -6,7 +6,7 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3899 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+3919 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -15,7 +15,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - 13.21 the tide is spiked in content (0111; #600): `docs/samples/ebb_ford_tide.map`. Code 653 warm.
 - 13.24 the messenger is spiked (0135; DESIGN 13.24): samples `signal_road_messenger.map` (Code 701) and `signal_road_pass.map` (Code 680 warm 8/6/6).
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786). Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
-- 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23 has the numbers): `kinsbane: <recruit>` issues it; sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slice 1 (0195): `teeth n/5`, the Sim's hunt, `--kinsbane` (waking on 10 at the median). Bars restated (0195 amended): waking by the field, schedule lean 2,2,2,3,4. Next: the scythe on the pick, the schedule, an iron-axe control arm.
+- 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slice 1 (0195): `teeth n/5`, the Sim's hunt, `--kinsbane`. Slice 2 (0207): teeth at 2,4,6,9,13; `issues` (campaign.json) arms Keziah on the pick; a passed Keziah returns at Fed 9; `--axe` control: Sallow 49/82 axe, 26/82 scythe, so Drain is on the Table (275). Code 804 warm 8/7/6.
 - 13.22 the break is spiked (0112, rounds 181 to 183; DESIGN 13.22): on `break: on` a boss's death sends his group at or below half HP off the board; forecasts print `break if <boss> falls`. Samples `the_tollgate_break.map` (Code 661), `saltmarsh_ford_break.map` (#606; Code 667): nothing broke.
 - #786 (round 240) is closed in six slices. #795 (0181): a thinned company fights short-handed. Next: round 240's for-Lotus steps (Chat's console campaign through Brackwater, then the desktop hand run of the exe).
 - #762, #765, #565: a lost side map names its member, the dusk line the hearing radius, `threat` the boss veto's refusals; the client draws none.

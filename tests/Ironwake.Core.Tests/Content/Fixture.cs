@@ -149,6 +149,7 @@ internal static class Fixture
         var maps = campaign["maps"]!.AsArray().Where(m => ids.Contains((string)m!["map"]!)).Select(m => m!.DeepClone()).ToArray();
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         campaign.AsObject().Remove("quests");
+        campaign.AsObject().Remove("issues");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
@@ -254,7 +255,8 @@ internal static class Fixture
     /// Takes Starting Alone (issue 631) out of the campaign's maps and puts Old Mill Road back in
     /// The Mill's place with nobody arriving (issue 632): a campaign journaled before the story
     /// order opens on Old Mill Road as map 1 with the whole cast, and its battle seeds count from there.
-    /// The side maps (issue 635) go too, since no such script was journaled with one on offer.
+    /// The side maps (issue 635) go too, since no such script was journaled with one on offer, and so
+    /// does the scythe the campaign issues Keziah (issue 804), which no such build issued.
     /// </summary>
     public static string WithoutStartingAlone(string target)
     {
@@ -274,6 +276,7 @@ internal static class Fixture
 
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         campaign.AsObject().Remove("quests");
+        campaign.AsObject().Remove("issues");
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
@@ -343,6 +346,8 @@ internal static class Fixture
         }
 
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        // Issue 804: the same builds issued Keziah no scythe; she fought with her iron axe.
+        campaign.AsObject().Remove("issues");
         if (campaign["quests"] is System.Text.Json.Nodes.JsonArray quests)
         {
             campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(quests.Where(q => (string)q!["id"]! is not ("pell_1" or "pell_2")).Select(q => q!.DeepClone()).ToArray());
