@@ -73,4 +73,5 @@ Fire is the one warm thing in the world (wildfire, 13.15, not on the showcase's 
 ## Files
 
 - `docs/look/draw.py` draws the three SVGs; `docs/look/shot.js` rasterises them with the preinstalled Chromium (`NODE_PATH=$(npm root -g) node docs/look/shot.js $PWD/docs/look`). The SVGs are committed so the frame diffs; the PNGs are what the eyes read.
+- `docs/look/grounds-892.png`: the ground candidates for Lotus to pick (#892): the Tollgate on frost, Saltmarsh on cold moss, Harrow Weir on peat, and the Tollgate once per candidate. `grounds.py` draws it from the real map files and `shot-one.js` rasterises it; its SVG carries non-token colours, so it is written outside `docs/look/` and only the PNG is committed. The distances are in `docs/measurements/grounds-892.txt`. Nothing in the palette changes until he picks.
 - `the_tollgate-turn1.svg` and `.png`: the frame. `forecast.svg`: the forecast card. `silhouettes.svg` and `.png`: every token on the Tollgate. `crop-player-4x.png`, `crop-enemy-4x.png`, `crop-forecast-4x.png`: the 4x crops.
