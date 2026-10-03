@@ -1,0 +1,1259 @@
+Campaign, seed 993, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 8 of 10: Brackwater Cut; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L7, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L7, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L7, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L7, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L7, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L7, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Rook: Skyrider L7, EXP 0; 1: Iron Lance 40/40
+  Brannock: Cadet L7, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Brackwater Cut: Alder Fenn, Dunstan, Rook, Wren, Pell (deploy 5 of 9)
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  rook_1: Rook's quest 1, The Chapter Roll (quest rook_1 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+  teodor_1: Teodor's quest 1, The Old Watch; paid nothing
+  pell_2: Pell's quest 2, The Undercroft; paid Pell's Commonplace and 3 frozen iron
+  ottilie_1: Ottilie's quest 1, The Counting House; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 8, Brackwater Cut. Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+> quest rook_1 wren
+-- The Chapter Roll --
+Rook asked for a day and one pair of hands. Kestrow's chapter keeps its
+roll of seats in a house on the crag above the gorge, and her name was
+written into the extra seat the year someone paid for it. She wants to
+read who.
+
+(Placeholder card until the writing pass. Seize: Rook stands on the roll
+room, 12,1, by the end of turn 8; its one door is 12,2. The map is lost
+if Rook falls. A flier crosses the gorge; on foot, only the road bridge
+crosses the gorge. A bow crit grounds a flier; over water she then
+cannot move. Pursuers from turn 2, announced.)
+
+Side map: The Chapter Roll, seed 1100
+Rook goes with Wren. This map is lost if Rook falls; who falls here is gone for good.
+  turn 2, enemy phase: a wingrider arrives at 0,0 (aggressive). A unit standing on 0,0 stops it.
+  turn 3, enemy phase: a brigand arrives at 0,8 (aggressive). A unit standing on 0,8 stops it.
+Objective: Get the captain to the gate by the end of turn 8. Rook must survive.
+The Chapter Roll  turn 1 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 .A^.~~~..#...eM
+ 5 ..B.~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           1,4    hp 19/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move rook 4,2
+Rook moves 1,4 -> 4,2 via 1,3 1,2 2,2 3,2
+The Chapter Roll  turn 1 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..A~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ..B.~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           4,2    hp 19/19  Water  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait rook
+Rook waits
+The Chapter Roll  turn 1 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..A~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ..B.~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           4,2    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              2,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 4,7
+Wren moves 2,5 -> 4,7 via 3,5 3,6 3,7
+The Chapter Roll  turn 1 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..A~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...=B==========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           4,2    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              4,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Chapter Roll  turn 1 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..A~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...=B==========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           4,2    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              4,7    hp 23/23  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait deacon-1
+Deacon waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: wait wingrider-1
+Wingrider 1 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Chapter Roll  turn 2 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..A~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...=B==========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           4,2    hp 19/19  Water  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              4,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move rook 6,6
+Rook moves 4,2 -> 6,6 via 5,2 6,2 6,3 6,4 6,5
+The Chapter Roll  turn 2 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~A...^....
+ 7 ...=B==========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           6,6    hp 19/19  Water  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              4,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait rook
+Rook waits
+The Chapter Roll  turn 2 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~A...^....
+ 7 ...=B==========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           6,6    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              4,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 8,7
+Wren moves 4,7 -> 8,7 via 5,7 6,7 7,7
+The Chapter Roll  turn 2 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~A...^....
+ 7 ...=====B======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           6,6    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              8,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Chapter Roll  turn 2 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~A...^....
+ 7 ...=====B======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           6,6    hp 19/19  Water  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+B  wren             Wren L7 cadet              8,7    hp 23/23  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Wingrider 2 arrives at 0,0 with the pursuit group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: wait deacon-1
+Deacon waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: wait wingrider-1
+Wingrider 1 waits
+enemy: move wingrider-2 6,0
+Wingrider 2 moves 0,0 -> 6,0 via 1,0 2,0 3,0 4,0 5,0
+enemy: wait wingrider-2
+Wingrider 2 waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Chapter Roll  turn 3 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~f^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~A...^....
+ 7 ...=====B======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           6,6    hp 19/19  Water  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      6,0    hp 18/18  Water  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move rook 9,6
+Rook moves 6,6 -> 9,6 via 7,6 8,6
+The Chapter Roll  turn 3 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~f^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..A^....
+ 7 ...=====B======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      6,0    hp 18/18  Water  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait rook
+Rook waits
+The Chapter Roll  turn 3 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~f^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..A^....
+ 7 ...=====B======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      6,0    hp 18/18  Water  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,7    hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 10,7
+Wren moves 8,7 -> 10,7 via 9,7
+The Chapter Roll  turn 3 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~f^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..A^....
+ 7 ...=======B====
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      6,0    hp 18/18  Water  group pursuit, aggressive
+B  wren             Wren L7 cadet              10,7   hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Chapter Roll  turn 3 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~f^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..A^....
+ 7 ...=======B====
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      6,0    hp 18/18  Water  group pursuit, aggressive
+B  wren             Wren L7 cadet              10,7   hp 23/23  Road  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Brigand arrives at 0,8 with the pursuit group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 3,7
+Brigand moves 0,8 -> 3,7 via 0,7 1,7 2,7
+enemy: wait brigand-1
+Brigand waits
+enemy: wait deacon-1
+Deacon waits
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: wait wingrider-1
+Wingrider 1 waits
+enemy: move wingrider-2 8,4
+Wingrider 2 moves 6,0 -> 8,4 via 7,0 8,0 8,1 8,2 8,3
+enemy: wait wingrider-2
+Wingrider 2 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Chapter Roll  turn 4 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~.f#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..A^....
+ 7 ...g======B====
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          3,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, asleep
+f  wingrider-2      Wingrider L5 skyrider      8,4    hp 18/18  Plain  group pursuit, aggressive
+B  wren             Wren L7 cadet              10,7   hp 23/23  Road
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 8,5
+Wren moves 10,7 -> 8,5 via 9,7 9,6 8,6
+The loft group wakes (proximity)
+The Chapter Roll  turn 4 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~.f#...eM
+ 5 ....~~~.B##.##M
+ 6 .^..~~~..A^....
+ 7 ...g===========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          3,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, asleep
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, awake
+f  wingrider-2      Wingrider L5 skyrider      8,4    hp 18/18  Plain  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,5    hp 23/23  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack wren wingrider-2
+Forecast Wren -> Wingrider 2: acc 76% dmg 13 crit 4%; counter: acc 54% dmg 7 crit 0%
+Wren attacks Wingrider 2
+  Wren hits Wingrider 2 for 13 (hp 5)
+  Wingrider 2 hits Wren for 7 (hp 16)
+  Wren hp 16, Wingrider 2 hp 5
+Wren gains 6 exp (6)
+The yard group wakes (noise)
+The Chapter Roll  turn 4 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~.f#...eM
+ 5 ....~~~.B##.##M
+ 6 .^..~~~..A^....
+ 7 ...g===========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          3,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, awake
+f  wingrider-2      Wingrider L5 skyrider      8,4    hp 5/18   Plain  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain  done
+> wait rook
+Rook waits
+The Chapter Roll  turn 4 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.b###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.d..M
+ 4 ..^.~~~.f#...eM
+ 5 ....~~~.B##.##M
+ 6 .^..~~~..A^....
+ 7 ...g===========
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          3,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,3   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           9,6    hp 19/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      8,1    hp 18/18  Hill  group loft, guard, awake
+f  wingrider-2      Wingrider L5 skyrider      8,4    hp 5/18   Plain  group pursuit, aggressive
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain  done
+> end
+Lethal if all land: Rook (Deacon for 8, Wingrider 2 for 11, against 19 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 7,7
+Brigand moves 3,7 -> 7,7 via 4,7 5,7 6,7
+enemy: wait brigand-1
+Brigand waits
+enemy: move deacon-1 11,6
+Deacon moves 11,3 -> 11,6 via 11,4 11,5
+enemy: attack deacon-1 rook
+Forecast Deacon -> Rook: acc 95% dmg 8 crit 0%; counter: none
+Deacon attacks Rook
+  Deacon hits Rook for 8 (hp 11)
+  Deacon hp 17, Rook hp 11
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: move wingrider-1 7,5
+Wingrider 1 moves 8,1 -> 7,5 via 7,1 7,2 7,3 7,4
+enemy: attack wingrider-1 wren
+Forecast Wingrider 1 -> Wren: acc 54% dmg 7 crit 0%; counter: acc 76% dmg 13 crit 4%
+Wingrider 1 attacks Wren
+  Wingrider 1 misses Wren
+  Wren misses Wingrider 1
+  Wingrider 1 hp 18, Wren hp 16
+enemy: move wingrider-2 8,6
+Wingrider 2 moves 8,4 -> 8,6 via 7,4 7,5 7,6
+enemy: attack wingrider-2 rook
+Forecast Wingrider 2 -> Rook: acc 52% dmg 11 crit 0%; counter: acc 67% dmg 12 crit 3%
+Wingrider 2 attacks Rook
+  Wingrider 2 misses Rook
+  Rook hits Wingrider 2 for 12 (hp 0)
+  Wingrider 2 hp 0, Rook hp 11
+Rook gains 20 exp (20)
+Wingrider 2 falls at 8,6
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~bB##.##M
+ 6 .^..~~~..A^d...
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,6   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           9,6    hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
+> move rook 10,6
+Rook moves 9,6 -> 10,6
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~bB##.##M
+ 6 .^..~~~...Ad...
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,6   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           10,6   hp 11/19  Forest  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
+> attack rook deacon-1
+Forecast Rook -> Deacon: acc 87% dmg 11 x2 crit 2%; counter with Radiance: acc 95% dmg 8 crit 0%
+Rook attacks Deacon
+  Rook hits Deacon for 11 (hp 6)
+  Deacon hits Rook for 8 (hp 3)
+  Rook hits Deacon for 11 (hp 0)
+  Rook hp 3, Deacon hp 0
+Rook gains 20 exp (40)
+Deacon falls at 11,6
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~bB##.##M
+ 6 .^..~~~...A....
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+A  rook             Rook L7 skyrider           10,6   hp 3/19   Forest  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
+> attack wren wingrider-1
+Forecast Wren -> Wingrider 1: acc 76% dmg 13 crit 4%; counter: acc 54% dmg 7 crit 0%
+Wren attacks Wingrider 1
+  Wren hits Wingrider 1 for 13 (hp 5)
+  Wingrider 1 hits Wren for 7 (hp 9)
+  Wren hp 9, Wingrider 1 hp 5
+Wren gains 6 exp (12)
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~bB##.##M
+ 6 .^..~~~...A....
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+A  rook             Rook L7 skyrider           10,6   hp 3/19   Forest  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 5/18   Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              8,5    hp 9/23   Plain  done
+> end
+Lethal if all land: Rook (Brigand for 16, Wingrider 1 for 11, against 3 hp)
+Lethal if all land: Wren (Brigand for 12, Wingrider 1 for 7, against 9 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 8,6
+Brigand moves 7,7 -> 8,6 via 7,6
+enemy: attack brigand-1 wren
+Forecast Brigand -> Wren: acc 39% dmg 12 crit 0%; counter: acc 91% dmg 12 x2 crit 6%
+Brigand attacks Wren
+  Brigand misses Wren
+  Wren hits Brigand for 12 (hp 12)
+  Wren hits Brigand for 12 (hp 0)
+  Brigand hp 0, Wren hp 9
+Wren gains 20 exp (32)
+Brigand falls at 8,6
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: move wingrider-1 9,6
+Wingrider 1 moves 7,5 -> 9,6 via 7,6 8,6
+enemy: attack wingrider-1 rook
+Forecast Wingrider 1 -> Rook: acc 52% dmg 11 crit 0%; counter: acc 67% dmg 12 crit 3%
+Wingrider 1 attacks Rook
+  Wingrider 1 hits Rook for 11 (hp 0)
+  Wingrider 1 hp 5, Rook hp 0
+Rook falls at 10,6
+The Chapter Roll  turn 5 of 8  enemy phase  seize  recall 2
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~.B##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold  done
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold  done
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 5/18   Plain  group loft, guard, awake  done
+B  wren             Wren L7 cadet              8,5    hp 9/23   Plain
+Battle lost: Rook is dead; only recall is left, or leave
+Lost because Rook fell.
+> recall 55
+Recalled to state 55; 1 charges left
+Undone: gives back 2 kills (Brigand, Deacon), 26 exp, 54 enemy hp; returns Rook alive at 11 hp, 7 hp to Wren
+The rolls do not change: the same attack will roll the same
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~bB##.##M
+ 6 .^..~~~..A^d...
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,6   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           9,6    hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              8,5    hp 16/23  Plain
+> forecast wren deacon-1 from 10,6
+Forecast Wren -> Deacon from 10,6 (Forest): acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0%
+> move wren 10,6
+Wren moves 8,5 -> 10,6 via 8,6 9,6
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~b.##.##M
+ 6 .^..~~~..ABd...
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+d  deacon-1         Deacon L5 warden           11,6   hp 17/17  Plain  group yard, guard, awake
+A  rook             Rook L7 skyrider           9,6    hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 16/23  Forest
+> attack wren deacon-1
+Forecast Wren -> Deacon: acc 92% dmg 12 x2 crit 3%; counter with Radiance: acc 74% dmg 11 crit 0%
+Wren attacks Deacon
+  Wren hits Deacon for 12 (hp 5)
+  Deacon hits Wren for 11 (hp 5)
+  Wren hits Deacon for 12 (hp 0)
+  Wren hp 5, Deacon hp 0
+Wren gains 20 exp (26)
+Deacon falls at 11,6
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~b.##.##M
+ 6 .^..~~~..AB....
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+A  rook             Rook L7 skyrider           9,6    hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 5/23   Forest  done
+> move rook 11,3
+Rook moves 9,6 -> 11,3 via 10,6 11,6 11,5 11,4
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~b.##.##M
+ 6 .^..~~~...B....
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 5/23   Forest  done
+> wait rook
+Rook waits
+The Chapter Roll  turn 5 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~b.##.##M
+ 6 .^..~~~...B....
+ 7 ...====g=======
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+g  brigand-1        Brigand L5 reaver          7,7    hp 24/24  Road  group pursuit, aggressive
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      7,5    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 5/23   Forest  done
+> end
+Lethal if all land: Wren (Brigand for 11, Wingrider 1 for 6, against 5 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 9,6
+Brigand moves 7,7 -> 9,6 via 7,6 8,6
+enemy: attack brigand-1 wren
+Forecast Brigand -> Wren: acc 12% dmg 11 crit 0%; counter: acc 91% dmg 12 x2 crit 6%
+Brigand attacks Wren
+  Brigand misses Wren
+  Wren hits Brigand for 12 (hp 12)
+  Wren hits Brigand for 12 (hp 0)
+  Brigand hp 0, Wren hp 5
+Wren gains 20 exp (46)
+Brigand falls at 9,6
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: move wingrider-1 9,6
+Wingrider 1 moves 7,5 -> 9,6 via 8,5 8,6
+enemy: attack wingrider-1 wren
+Forecast Wingrider 1 -> Wren: acc 21% dmg 6 crit 0%; counter: acc 76% dmg 13 crit 4%
+Wingrider 1 attacks Wren
+  Wingrider 1 misses Wren
+  Wren misses Wingrider 1
+  Wingrider 1 hp 18, Wren hp 5
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..bB....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 5/23   Forest
+> move wren 11,4
+Wren moves 10,6 -> 11,4 via 11,6 11,5
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 5/23   Plain
+> move rook 11,2
+Rook moves 11,3 -> 11,2
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#.Ac.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,2   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 5/23   Plain
+> attack rook soldier-1
+Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
+  Counter: lethal to Rook (13 against 11 hp)
+Rook attacks Soldier
+  Rook misses Soldier
+  Soldier hits Rook for 13 (hp 0)
+  Rook hp 0, Soldier hp 22
+Rook falls at 11,2
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 1
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#....M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 5/23   Plain
+Battle lost: Rook is dead; only recall is left, or leave
+Lost because Rook fell.
+> recall 68
+Recalled to state 68; 0 charges left
+Undone: returns Rook alive at 11 hp
+The rolls do not change: the same attack will roll the same
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..bB....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              10,6   hp 5/23   Forest
+> move wren 11,4
+Wren moves 10,6 -> 11,4 via 11,6 11,5
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 5/23   Plain
+> item wren 2
+Wren uses Field Dressing (2 left)
+Wren heals 10 (hp 15)
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 15/23  Plain  done
+> wait rook
+Rook waits
+The Chapter Roll  turn 6 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~..b^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      9,6    hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 15/23  Plain  done
+> end
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: attack archer-1 wren
+Forecast Archer -> Wren: acc 62% dmg 6 crit 0%; counter: none
+Archer attacks Wren
+  Archer misses Wren
+  Archer hp 18, Wren hp 15
+enemy: wait sentry-1
+Sentry waits
+enemy: wait soldier-1
+Soldier waits
+enemy: move wingrider-1 11,5
+Wingrider 1 moves 9,6 -> 11,5 via 10,6 11,6
+enemy: attack wingrider-1 wren
+Forecast Wingrider 1 -> Wren: acc 54% dmg 7 crit 0%; counter: acc 76% dmg 13 crit 4%
+Wingrider 1 attacks Wren
+  Wingrider 1 misses Wren
+  Wren misses Wingrider 1
+  Wingrider 1 hp 18, Wren hp 15
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+The Chapter Roll  turn 7 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.A..M
+ 4 ..^.~~~..#.B.eM
+ 5 ....~~~..##b##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              11,4   hp 15/23  Plain
+> move wren 12,3
+Wren moves 11,4 -> 12,3 via 11,3
+The Chapter Roll  turn 7 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.AB.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##b##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 22/22  Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 15/23  Plain
+> attack wren soldier-1
+Forecast Wren -> Soldier: acc 86% dmg 9 x2 crit 5%; counter: acc 52% dmg 9 crit 0%
+Wren attacks Soldier
+  Wren hits Soldier for 9 (hp 13)
+  Soldier misses Wren
+  Wren hits Soldier for 9 (hp 4)
+  Wren hp 15, Soldier hp 4
+Wren gains 6 exp (52)
+The Chapter Roll  turn 7 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#..c.M
+ 3 ....~~~a.#.AB.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##b##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,3   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 4/22   Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
+> move rook 11,2
+Rook moves 11,3 -> 11,2
+The Chapter Roll  turn 7 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#.Ac.M
+ 3 ....~~~a.#..B.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##b##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,2   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+c  soldier-1        Soldier L5 pikeman         12,2   hp 4/22   Plain  group yard, hold
+b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
+> attack rook soldier-1
+Forecast Rook -> Soldier: acc 79% dmg 8 x2 crit 4%; counter: acc 51% dmg 13 crit 0%
+  Counter: lethal to Rook (13 against 11 hp)
+Rook attacks Soldier
+  Rook hits Soldier for 8 (hp 0)
+  Rook hp 11, Soldier hp 0
+Rook gains 20 exp (40)
+Soldier falls at 12,2
+The Chapter Roll  turn 7 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#.A..M
+ 3 ....~~~a.#..B.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##b##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,2   hp 11/19  Plain  captain  done
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+b  wingrider-1      Wingrider L5 skyrider      11,5   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 15/23  Plain  done
+> end
+Lethal if all land: Rook (Wingrider 1 for 11, against 11 hp)
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: attack archer-1 wren
+Forecast Archer -> Wren: acc 62% dmg 6 crit 0%; counter: none
+Archer attacks Wren
+  Archer hits Wren for 6 (hp 9)
+  Archer hp 18, Wren hp 9
+enemy: wait sentry-1
+Sentry waits
+enemy: move wingrider-1 11,3
+Wingrider 1 moves 11,5 -> 11,3 via 11,4
+enemy: attack wingrider-1 rook
+Forecast Wingrider 1 -> Rook: acc 52% dmg 11 crit 0%; counter: acc 67% dmg 12 crit 3%
+Wingrider 1 attacks Rook
+  Wingrider 1 misses Rook
+  Rook misses Wingrider 1
+  Wingrider 1 hp 18, Rook hp 11
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+The Chapter Roll  turn 8 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###T##
+ 2 .^..~~~^.#.A..M
+ 3 ....~~~a.#.bB.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           11,2   hp 11/19  Plain  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+b  wingrider-1      Wingrider L5 skyrider      11,3   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 9/23   Plain
+> move rook 12,1
+Rook moves 11,2 -> 12,1 via 12,2
+The Chapter Roll  turn 8 of 8  player phase  seize  recall 0
+   012345678901234
+ 0 ^...~~~^nMMM###
+ 1 ....~~~.n###A##
+ 2 .^..~~~^.#....M
+ 3 ....~~~a.#.bB.M
+ 4 ..^.~~~..#...eM
+ 5 ....~~~..##.##M
+ 6 .^..~~~...^....
+ 7 ...============
+ 8 ^...~~~....^..M
+
+e  archer-1         Archer L5 bowman           13,4   hp 18/18  Plain  group yard, hold
+A  rook             Rook L7 skyrider           12,1   hp 11/19  Gate (heals 20 percent, 3 hp)  captain
+a  sentry-1         Sentry L5 sentinel         7,3    hp 28/28  Hill  group gorge, hold
+b  wingrider-1      Wingrider L5 skyrider      11,3   hp 18/18  Plain  group loft, guard, awake
+B  wren             Wren L7 cadet              12,3   hp 9/23   Plain
+Battle won: seize; no recall is left, so leave
+> leave
+Rook wins rook_1; the stores take 2 common material; nobody fell
+-- After The Chapter Roll --
+(Placeholder until the writing pass: the roll, the extra seat, and whose
+coin bought it.)
+
+(The Scout is open to Rook at her second promotion: the other door above
+the Skyrider.)
+
+Campaign stopped before Brackwater Cut: the script ended on the screen

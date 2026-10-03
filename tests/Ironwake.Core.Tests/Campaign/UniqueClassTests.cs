@@ -166,7 +166,7 @@ public class UniqueClassTests
     [Fact]
     public void TheScoutStaysShutUntilRooksQuestIsWon()
     {
-        Assert.DoesNotContain(Shipped.Campaign.Quests, q => q.Id == "rook_1");
+        Assert.Equal(("rook", 1), (Shipped.Campaign.Quest("rook_1")!.MemberId, Shipped.Campaign.Quest("rook_1")!.Part));
         Assert.Equal(new[] { "unlockedBy" }, Refusals(ReadyRook(), "scout", Won));
         Assert.Empty(Refusals(ReadyRook(), "scout", new[] { "rook_1" }));
         Assert.Empty(Refusals(ReadyRook(), "skycaptain", Array.Empty<string>()));

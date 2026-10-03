@@ -205,6 +205,41 @@ public class SideMapTests
     }
 
     [Fact]
+    public void RooksFirstQuestIsTheChapterRollASeizeThatPaysMaterialAndOpensTheScout()
+    {
+        var quest = Content.Campaign.Quest("rook_1")!;
+        var map = Side(quest.MapId);
+
+        Assert.Equal(("rook", 1, "the_chapter_roll", "sallow_grange", 2), (quest.MemberId, quest.Part, quest.MapId, quest.OpensAfter, quest.Common));
+        Assert.Null(quest.Pays);
+        Assert.Null(CampaignRecord.QuestMapRefusal(map));
+        Assert.Equal(WinCondition.Seize, map.Win);
+        Assert.Equal("rook_1", Content.Class("scout").UnlockedBy);
+        Assert.NotEmpty(quest.Before);
+        Assert.NotEmpty(quest.After);
+    }
+
+    [Fact]
+    public void RooksFirstQuestOpensAfterSallowGrangeOnlyWhenRookIsOnTheRoster()
+    {
+        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5), new QuestWon("pell_2", 6), new QuestWon("ottilie_1", 6));
+        CampaignRecord Picked(string mapId, string pick) => CampaignRecord.StartAt(Content, 701, mapId, pick: pick) with { QuestsWon = won };
+
+        Assert.DoesNotContain("rook_1", Picked("sallow_grange", "rook").QuestsOffered(Content).Select(q => q.Id));
+        Assert.Contains("rook_1", Picked("brackwater_cut", "rook").QuestsOffered(Content).Select(q => q.Id));
+        Assert.DoesNotContain("rook_1", Picked("brackwater_cut", "keziah").QuestsOffered(Content).Select(q => q.Id));
+    }
+
+    [Fact]
+    public void TheChapterRollIsCanonical()
+    {
+        var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_chapter_roll.map");
+        var text = File.ReadAllText(path).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
+    }
+
+    [Fact]
     public void AQuestAppendedToTheFileMovesNoOtherSideMapsSeed()
     {
         var record = At("ironwake_raid");
@@ -301,7 +336,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2, rook_1")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));

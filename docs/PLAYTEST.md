@@ -2194,3 +2194,16 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_long
 - Not tense: turn 7, walking onto the exits.
 
 — Code
+
+## 2026-10-03 — The Chapter Roll, Rook's quest 1 (#635 slice 11), warm — Code
+Seed: 1100 (`campaign --load chapter --saves docs/transcripts/2026-10-03-the_chapter_roll-1100.saves`, Rook picked, the cast at level 7 at the camp after map 7, the six earlier side maps marked won; ally Wren)   Result: won on turn 8, seize, both Recalls spent, nobody fell
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 7. Rook at 11 HP beside the cork, whose counter is 13. Wren went first from 12,3 and landed both cuts, 22 to 4, so Rook's first strike killed it before it could answer. Then the printed lethal on the end line (the wingrider for 11 against 11) and a 52 percent lance that missed. Turn 8 was one step.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_chapter_roll-1100.txt`.
+- **The first cut was wrong.** The roll room sat open under the crag and Rook flew onto it on turn 3 with Wren still on the bridge. A flier side map needs a door only two units can open, so the room became a one-tile cell with a held soldier on its door.
+- **Rook fell twice, both times to a line the screen had already priced.** Turn 5: I traded her 11 HP into the deacon's Radiance and ended the phase with `Lethal if all land: Rook` printed; the wingrider hit. Recalled. Turn 6: I tried to put Wren's Field Dressing on Rook (it heals only its user) and then took the cork's lethal counter at 51 percent; it hit. Recalled to turn 6 with no charges left.
+- **The deacon walks out of the yard.** Woken by Wren's fight with the pursuing wingrider, he came to the door to Radiance Rook and left the cork without its healer. Wren killed him from the forest at 10,6 (92 percent twice), and the forest then turned the brigand and the wingrider to 12 and 21 percent on her.
+- **What is soft:** the gorge sentry never acted. I crossed out of its two tiles every time, and once the loft was awake the flight line did not matter. If a cold chair agrees, the lever is to put it where the yard approach runs past it (8,5 or the bridge's east end). Grounding never came up.
+- Not tense: turns 1 and 2, the crossing.
+
+— Code
