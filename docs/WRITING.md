@@ -26,7 +26,7 @@ Grounded, dry, warm underneath (CLAUDE.md). In practice:
 
 ## The rules
 
-1. **Nobody names their own feeling.** No "I'm afraid", "I'm angry" or "I miss him". What they do, refuse, notice or change the subject to carries the feeling. Each character may break this once in the campaign, as a scene's turn, and the beat sheet has to name it in advance.
+1. **Nobody names their own feeling.** No "I'm afraid", "I'm angry" or "I miss him". What they do, refuse, notice or change the subject to carries the feeling. Each character may break this once in the campaign, as a scene's turn, and the beat sheet has to name it in advance. A voice sheet may widen or narrow this rule for its speaker, and says so in its first line.
 2. **Every line does a job:** it reveals character, moves the plot, or sets up a payoff. A line that does none is cut, however good it sounds.
 3. **Nobody explains what the listener already knows.** If both people in the room know it, it isn't said, or it's said as an argument about it. Lore arrives through conflict, objects and consequences: a ledger line, a brand, a burned shelf, a shard in a pommel.
 4. **Dialogue is two wants colliding, not questions and answers.** Characters talk past each other, dodge, and answer a different question from the one asked. If every question in a scene gets a straight answer, rewrite it.

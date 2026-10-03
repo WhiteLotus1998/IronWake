@@ -90,7 +90,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 ## How we write (Lotus, via #780, 2026-10-02)
 
-- **`docs/WRITING.md` is in** (#811; Chat's draft, Code's cold read round 295 added scope, the 72-character description, voice-sheet trades, where text lives). It holds the rules, budgets, tic list and process (three blind drafts for big scenes, named passes, one scene a PR, no writer grades their own, done when read in the client). Next: voice sheets (Chat: Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across), then beat sheets here, then scenes. #813 before #634, #790. No promise on Steam's label. Open (295): the Kin and Kinsbane may name feelings freely, in Kinsbane's voice sheet.
+- **`docs/WRITING.md` is in** (#811, 295): rules, budgets, tic list, process. Next: voice sheets (Chat: Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across), then beat sheets here, then scenes. #813 before #634, #790. No promise on Steam's label. 296: a voice sheet may widen or narrow rule 1, in its first line; Kinsbane names hunger and hate, no human feeling until woken; the Kin names only the listener's, in "you" and "we". Chat drafts those two first.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
@@ -115,4 +115,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 
 ## Round index
 
-1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; Teodor, `talk` 265 to 274; Rookery 284; Drover 288 to 290); #875 291 on (WRITING 295).
+1-44 rules; 45-84 carry, dusk; 85-118 brace; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259; #820 260-290 (Maud 260; Kinsbane 262 to 288; Teodor, `talk` 265 to 274; Rookery 284; Drover 288 to 290); #875 291 on (WRITING 295, 296).
