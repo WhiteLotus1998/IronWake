@@ -1438,6 +1438,74 @@ public static class ContentLoader
     /// 1), Mt, hit, crit, weight and a description. Only a physical weapon with no price and an
     /// owner (<c>boundTo</c>) carries one; every id is distinct.
     /// </summary>
+    /// <summary>
+    /// A hungering weapon's <c>voice</c> (issue 804 item 3): an object of three optional registers,
+    /// <c>starved</c>, <c>tooth</c> and <c>woken</c>, each a list of <c>{ id, text }</c>. Ids are unique
+    /// across the voice; a text is one line of at most <see cref="HungerVoice.WordsMax"/> words, and
+    /// <c>{name}</c> is the only brace token it may carry.
+    /// </summary>
+    private static HungerVoice ReadVoice(EntryNode weapon)
+    {
+        if (!weapon.BoolOr("hungers", false))
+        {
+            throw weapon.Error("voice", "only a hungering weapon speaks");
+        }
+
+        var node = weapon.Object("voice");
+        foreach (var property in node.Element.EnumerateObject())
+        {
+            if (property.Name is not ("starved" or "tooth" or "woken"))
+            {
+                throw weapon.Error("voice." + property.Name, "is not a register; use starved, tooth or woken");
+            }
+        }
+
+        var ids = new HashSet<string>(StringComparer.Ordinal);
+        ValueList<VoiceLine> Register(string name)
+        {
+            var lines = new List<VoiceLine>();
+            var entries = node.ArrayOrEmpty(name);
+            for (var i = 0; i < entries.Count; i++)
+            {
+                var field = $"voice.{name}[{i}]";
+                if (entries[i].ValueKind != System.Text.Json.JsonValueKind.Object)
+                {
+                    throw weapon.Error(field, "must be an object with id and text");
+                }
+
+                var line = new EntryNode(weapon.File, weapon.Entry, entries[i]);
+                var id = line.String("id");
+                if (!ids.Add(id))
+                {
+                    throw weapon.Error(field + ".id", $"'{id}' names a line twice");
+                }
+
+                var text = line.String("text");
+                if (text.Contains('\n') || text.Contains('\r'))
+                {
+                    throw weapon.Error(field + ".text", "must be one line");
+                }
+
+                if (text.Replace("{name}", "", StringComparison.Ordinal).IndexOfAny(['{', '}']) >= 0)
+                {
+                    throw weapon.Error(field + ".text", "may carry only the {name} token");
+                }
+
+                var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+                if (words > HungerVoice.WordsMax)
+                {
+                    throw weapon.Error(field + ".text", $"must be at most {HungerVoice.WordsMax} words, not {words}");
+                }
+
+                lines.Add(new VoiceLine(id, text));
+            }
+
+            return ValueList<VoiceLine>.From(lines);
+        }
+
+        return new HungerVoice(Register("starved"), Register("tooth"), Register("woken"));
+    }
+
     private static HeirloomLadder ReadHeirloom(EntryNode weapon, bool magicOrHeals)
     {
         if (magicOrHeals || weapon.Has("price") || !weapon.Has("boundTo") || weapon.BoolOr("hungers", false))
@@ -2390,6 +2458,7 @@ public static class ContentLoader
             }
 
             var heirloom = node.Has("heirloom") ? ReadHeirloom(node, heals || type.IsMagic()) : null;
+            var voice = node.Has("voice") ? ReadVoice(node) : null;
 
             builder.Add(node.Entry!, new Weapon(
                 node.Entry!,
@@ -2414,6 +2483,7 @@ public static class ContentLoader
                 Description = Description(node),
                 Hungers = node.BoolOr("hungers", false),
                 Heirloom = heirloom,
+                Voice = voice,
                 Glass = node.BoolOr("glass", false),
                 FrozenIron = node.BoolOr("frozenIron", false),
                 CritAgainst = ValueList<MovementType>.From(critAgainst),

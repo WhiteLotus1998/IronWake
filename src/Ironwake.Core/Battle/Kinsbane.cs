@@ -24,6 +24,9 @@ namespace Ironwake.Core;
 /// <item>The hunt runs on (issue 804, round 251): once a battle, a kill with it on its carrier's own
 /// Attack that leaves it woken, the waking kill included, gives the carrier its full Move again as a
 /// Canto, with no second strike (<see cref="RunsOn"/>).</item>
+/// <item>The voice (issue 804 item 3): it speaks to its carrier when a drain starves it, when a kill
+/// grows a tooth, and on the kill that wakes it, at most <see cref="VoiceCap"/> lines a battle
+/// (<see cref="Speak"/>).</item>
 /// </list>
 /// Everything is board state, so Recall restores it with the board.
 /// </summary>
@@ -37,6 +40,9 @@ public static class Kinsbane
 
     /// <summary>HP a kill heals the carrier, to max HP.</summary>
     public const int FeedHeal = 10;
+
+    /// <summary>The most lines a hungering weapon says to its carrier in one battle (issue 804 item 3).</summary>
+    public const int VoiceCap = 3;
 
     /// <summary>HP a starved weapon's non-lethal hit heals the carrier as it leaves the starved form.</summary>
     public const int EasedHeal = 5;
@@ -200,6 +206,8 @@ public static class Kinsbane
                 if (starves && !stack.Starved)
                 {
                     next = WithStack(next, slot, stack with { Starved = true, Uses = 1 });
+                    var voice = content.Weapon(stack.ItemId).Voice;
+                    next = Speak(next, stack.ItemId, voice?.Starved, state.Turn, events);
                 }
             }
 
@@ -234,8 +242,12 @@ public static class Kinsbane
         {
             var fed = stack.Fed + 1;
             var hp = Woken(stack.Fed) ? unit.Hp : Math.Min(max, unit.Hp + FeedHeal);
-            events.Add(new HungerFed(unit.Id, stack.ItemId, fed, hp - unit.Hp, hp, MtBonus(fed), Woken(fed) && !Woken(stack.Fed)));
-            return WithStack(unit with { Hp = hp, HasFed = true }, slot, stack with { Fed = fed, Starved = false, Uses = weapon.Durability });
+            var woke = Woken(fed) && !Woken(stack.Fed);
+            events.Add(new HungerFed(unit.Id, stack.ItemId, fed, hp - unit.Hp, hp, MtBonus(fed), woke));
+            var fedUnit = WithStack(unit with { Hp = hp, HasFed = true }, slot, stack with { Fed = fed, Starved = false, Uses = weapon.Durability });
+            return woke ? Speak(fedUnit, stack.ItemId, weapon.Voice?.Woken, 0, events)
+                : ToothGrew(fed) ? Speak(fedUnit, stack.ItemId, weapon.Voice?.Tooth, Teeth(fed) - 1, events)
+                : fedUnit;
         }
 
         if (stack.Starved && strikes.Any(s => s.AttackerId == unit.Id && s.Hit))
@@ -333,6 +345,25 @@ public static class Kinsbane
         var mov = Math.Max(HuntMov(state, content, unit), unit.Canto ?? 0);
         events.Add(new HuntRanOn(unitId, mov));
         return state.WithUnit(unit with { Canto = mov, HuntRan = true });
+    }
+
+    /// <summary>
+    /// The voice (issue 804 item 3): the line of <paramref name="register"/> at <paramref name="pick"/>
+    /// (wrapped to the register's length) said to <paramref name="unit"/> as <see cref="KinsbaneSpoke"/>,
+    /// its <c>{name}</c> the carrier's name, and the unit's <see cref="BattleUnit.VoiceSpoken"/> counted.
+    /// Silent, the unit unchanged, when the register is missing or empty or the battle's
+    /// <see cref="VoiceCap"/> lines are spent. The pick is a number of the board (a tooth, a turn), never a roll.
+    /// </summary>
+    public static BattleUnit Speak(BattleUnit unit, string itemId, ValueList<VoiceLine>? register, int pick, List<GameEvent> events)
+    {
+        if (register is not { Count: > 0 } lines || unit.VoiceSpoken >= VoiceCap)
+        {
+            return unit;
+        }
+
+        var line = lines[((pick % lines.Count) + lines.Count) % lines.Count];
+        events.Add(new KinsbaneSpoke(unit.Id, itemId, line.Id, line.Text.Replace("{name}", unit.Unit.Name, StringComparison.Ordinal)));
+        return unit with { VoiceSpoken = unit.VoiceSpoken + 1 };
     }
 
     private static BattleUnit WithStack(BattleUnit unit, int slot, ItemStack stack) =>
