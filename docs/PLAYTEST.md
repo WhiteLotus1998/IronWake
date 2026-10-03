@@ -2167,3 +2167,17 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_old_
 - Not tense: turn 8, killing the archer. 86 percent twice with no counter is not a decision.
 
 — Code
+
+## 2026-10-03 — The Counting House, Ottilie's quest 1 (#635 slice 9), warm — Code
+Seed: 980 (`campaign --load counting --saves docs/transcripts/2026-10-03-the_counting_house-980.saves`, the cast at level 5 at the camp after map 6, Maud 1 and 2, Pell 1 and Teodor 1 marked won so Ottilie 1 has a seat; ally Wren)   Result: lost on turn 8, both Recalls spent; Wren and Ottilie fell
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: Turn 7, the second time. The lector had come over the south bridge and stood on 6,7. Ottilie shot it from 4,7 across the water and took a 15 Bolt back to 2 HP; Wren stepped onto 5,7 and waited. The near end of the bridge is the only tile anything crossing can strike from, so Ottilie at 2 HP was safe behind one body, and the Sworn Captain had to cross onto 6,7 and fight Wren. That is the board's idea working: the player holds the cork.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_counting_house-980.txt`.
+- **Turn 2 killed her, and it was fair.** A bow duel with the bank archer from 5,3 (85 against 74) looked like the opening the card promised. The combat was within 6 of the house, the house woke, and the lector walked to 7,3 and put a 14 Radiance over the canal. The water stops swords, not spells. Recall 1 went there.
+- **The road is the real pressure.** The hexer from 0,0 on turn 3 left no tile on the near bank where `threat` read under 18 against Ottilie's 18, and shooting it wakes the house (4,3 is 6 from the lector). I killed it on turn 5 and took the wake on purpose.
+- **Turn 7, the first time, I lost Wren for nothing.** She killed the lector at 95 percent and ate a 15 counter, leaving her at 6 with the captain coming. Recalled: Ottilie took the counter instead, and Wren corked the bridge at full HP.
+- **Lost on a 79.** Turn 8: Ottilie's two shots put the captain at 7; Wren's Heavy Cut (79, 10 damage, kills before the counter) against the plain sword (6 then a 68 percent lethal counter). I took the 79 and it missed. The counter killed Wren, the captain stepped off the bridge onto 5,7, and Ottilie at 2 HP was dead. Two holds were still standing; I would not have finished the rout by turn 10 anyway without the archer dying on turn 9.
+- **Too hard?** At level 5 I think the board is a turn short for a rout: the bank holds never come, so the last two turns are a walk across to kill them. The lever is the archer at 7,3 off the water (it stops being the bow duel) or enemy level 2 with the cork kept. A cold chair decides; this is the second side map in a row I lost warm.
+- Not tense: turns 3 and 4, finishing the road brigand.
+
+— Code

@@ -129,6 +129,36 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's journaled play of Ottilie's quest 1 (side-map seed 980), from a save at the camp
+    /// after map 6: a shot at the bank archer on turn 2 wakes the house and the lector's
+    /// Radiance kills Ottilie over the canal (recalled), the road pair is fought on the near
+    /// bank, and on turn 8 a missed Heavy Cut leaves the Sworn Captain on the bridge to cross
+    /// it to Ottilie at 2 HP.
+    /// </summary>
+    [Fact]
+    public void TheJournaledCountingHousePlayIsLostWhenTheBridgeIsLeftOpen()
+    {
+        var script = Transcript("2026-10-03-the_counting_house-980.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-counting-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_counting_house-980.saves", "counting.json")), Path.Combine(saves, "counting.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "counting", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Counting House, seed 980\n", output);
+            Assert.Contains("The house group wakes (noise)\n", output);
+            Assert.Contains("> leave\nOttilie falls on ottilie_1, which closes for good; fallen for good: Wren, Ottilie\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     [Fact]
     public void TheJournaledBurnedSchoolPlayEscapesWithTheGust()
     {
