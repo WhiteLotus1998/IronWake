@@ -83,7 +83,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1111", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1148", Parity.FirstDifference(console, without));
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class FullCampaignTests
 
         foreach (var start in new[]
         {
-            "buy ", "drop ", "bench ", "unbench ", "repair ", "certify captain ", "quest ", "build forge", "build barracks", "hire ", "build wall ",
+            "buy ", "drop ", "bench ", "unbench ", "repair ", "certify captain ", "quest ", "pick ", "build forge", "build barracks", "hire ", "build wall ",
             "order press", "order rally", "order fall back", "fallback ", "recall ", "exit ",
         })
         {

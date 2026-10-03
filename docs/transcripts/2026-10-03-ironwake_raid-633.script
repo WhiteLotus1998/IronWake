@@ -1,0 +1,106 @@
+# Issue 633 slice 1: Code's warm hand play of the branch's camp and the raid with Keziah picked, seed 633.
+# Played by `campaign --seed 633 --from ironwake_raid --script <this file>`. Two Recalls spent (turn 4 to turn 3, turn 5 to turn 4).
+pick keziah
+bench pell
+bench dunstan
+bench ansgar
+march
+move keziah 11,7
+wait keziah
+move teodor 12,8
+wait teodor
+move captain 12,5
+wait captain
+move wren 12,4
+wait wren
+move ottilie 13,6
+wait ottilie
+move maud 13,7
+wait maud
+end
+map
+move ottilie 12,7
+attack ottilie brigand-1
+move teodor 10,8
+attack teodor brigand-1
+attack keziah brigand-1
+wait captain
+wait wren
+wait maud
+end
+attack maud soldier-1
+move ottilie 14,6
+attack ottilie soldier-1
+attack captain soldier-1
+move keziah 9,8
+attack keziah hexer-1
+move teodor 8,9
+attack teodor hexer-1
+end
+recall 46
+move keziah 9,8
+attack keziah hexer-1 iron_gauntlets
+move ottilie 14,6
+attack ottilie soldier-1
+move wren 13,6
+attack wren soldier-1
+attack captain soldier-1
+move teodor 11,6
+attack teodor soldier-1
+move maud 15,6
+item maud 2 ottilie
+end
+move keziah 13,8
+wait keziah
+move teodor 14,7
+wait teodor
+move maud 15,7
+item maud 2 teodor
+move wren 14,5
+wait wren
+move captain 13,5
+wait captain
+wait ottilie
+end
+recall 67
+move keziah 13,8
+wait keziah
+move maud 14,8
+item maud 2 keziah
+move teodor 14,7
+wait teodor
+move wren 15,5
+wait wren
+move captain 14,4
+wait captain
+wait ottilie
+end
+move keziah 11,9
+attack keziah archer-1 iron_gauntlets
+move maud 12,8
+attack maud archer-1
+move ottilie 15,4
+attack ottilie brigand-2
+attack captain brigand-2
+move teodor 11,8
+item teodor 2
+move wren 15,6
+item wren 2
+end
+move maud 12,9
+attack maud brigand-3
+move teodor 11,7
+attack teodor brigand-3
+move wren 14,3
+attack wren soldier-2
+item ottilie 2
+item captain 2
+move keziah 12,6
+wait keziah
+end
+move ottilie 15,5
+attack ottilie soldier-2
+move captain 15,4
+attack captain soldier-2
+attack wren soldier-2
+leave

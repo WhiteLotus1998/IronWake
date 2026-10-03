@@ -7,7 +7,7 @@ namespace Ironwake.Core.Tests.Campaign;
 
 /// <summary>
 /// Issue 763 (rounds 228 and 234): a recruit who joins below the living company's median joins at
-/// it. Rook joins at the raid's camp (<c>joins</c> in <c>campaign.json</c>), placed on no tile of her
+/// it. Rook joins at the raid's camp when picked (the branch, issue 633), placed on no tile of her
 /// own, raised to the median whether or not she deploys, never lowered. The rule is join-time: the
 /// bench is never raised.
 /// </summary>
@@ -19,12 +19,12 @@ public class JoinTests
 
     private static int RaidIndex => Content.Campaign.MapIndexOf("ironwake_raid");
 
-    /// <summary>A campaign at the raid's camp whose living members stand at <paramref name="levels"/>, in roster order, the rest left as they are.</summary>
+    /// <summary>A campaign at the raid's camp, Rook picked (issue 633), whose living members stand at <paramref name="levels"/>, in roster order, the rest left as they are.</summary>
     private static CampaignRecord AtTheRaid(params int[] levels)
     {
         var start = CampaignRecord.StartAt(Content, 7, "ironwake_raid");
         var roster = start.Roster.Select((u, i) => i < levels.Length ? u.ScaledTo(levels[i], Content.Class(u.ClassId)) : u);
-        return start with { Roster = ValueList<Unit>.From(roster.Take(Math.Max(levels.Length, 1))) };
+        return start with { Roster = ValueList<Unit>.From(roster.Take(Math.Max(levels.Length, 1))), Pick = "rook" };
     }
 
     private static BattleState Won(CampaignRecord record, MapDefinition map, Func<BattleUnit, bool> keep)
@@ -35,9 +35,9 @@ public class JoinTests
     }
 
     [Fact]
-    public void RookJoinsAtTheRaidsCampAndIsOffTheRosterBeforeIt()
+    public void RookJoinsAtTheRaidsCampWhenPickedAndIsOffTheRosterBeforeIt()
     {
-        Assert.Equal(new[] { "rook" }, Content.Campaign.Maps[RaidIndex].Joins);
+        Assert.Equal(new[] { "keziah", "rook" }, Content.Campaign.Maps[RaidIndex].Branch);
         Assert.Equal(RaidIndex, Content.Campaign.ArrivalIndex("rook"));
         Assert.Null(CampaignRecord.Start(Content, 7).Find("rook"));
         Assert.Null(CampaignRecord.StartAt(Content, 7, "harrow_weir").Find("rook"));

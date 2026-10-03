@@ -318,7 +318,8 @@ internal static class Fixture
     }
 
     /// <summary>
-    /// Takes The Field Before the Keep (issue 81) out of the campaign's maps. Every copy stands for a
+    /// Takes The Field Before the Keep (issue 81) out of the campaign's maps, and puts the branch
+    /// (issue 633) back as Rook joining at the raid's camp. Every copy stands for a
     /// build journaled before it was map 9, and a trial's and a side map's seed count the campaign's
     /// maps (<see cref="CampaignRecord.TrialSeed"/>,
     /// <see cref="CampaignRecord.QuestSeed"/>), so a script journaled on nine
@@ -329,6 +330,13 @@ internal static class Fixture
         var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
         var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
         var maps = campaign["maps"]!.AsArray().Where(m => (string)m!["map"]! != "the_field").Select(m => m!.DeepClone()).ToArray();
+        foreach (var map in maps.OfType<System.Text.Json.Nodes.JsonObject>().Where(m => m.ContainsKey("branch")))
+        {
+            // Issue 633: the same builds had no branch; Rook joined at the raid's camp and Keziah was on the roster from map 1.
+            map.Remove("branch");
+            map["joins"] = new System.Text.Json.Nodes.JsonArray("rook");
+        }
+
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;

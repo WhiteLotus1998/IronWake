@@ -131,6 +131,9 @@ public sealed class CampaignClient
     /// <summary>Hires <paramref name="hireId"/> at the barracks (issue 690).</summary>
     public bool Hire(string hireId) => Screen(() => Record.Hire(hireId, Content));
 
+    /// <summary>Picks <paramref name="unitId"/> for the branch's seat (issue 633).</summary>
+    public bool Pick(string unitId) => Screen(() => Record.PickClaimant(unitId, Content));
+
     /// <summary>Discards the stack in <paramref name="slot"/>, counted from 0 (issue 786).</summary>
     public bool Drop(string unitId, int slot) => Screen(() => Record.Drop(unitId, slot, Content));
 

@@ -26,7 +26,7 @@ public class ShortHandedTests
         var named = Map(record).Placements.OfType<PlayerPlacement>().Where(p => p.RecruitId is not null).Select(p => p.RecruitId!).ToHashSet();
         var kept = record.Roster.Where((u, i) => i == 0 || named.Contains(u.Id)).ToList();
         var fallen = record.Roster.Where(u => !kept.Contains(u)).Select(u => u.Id);
-        return record with { Roster = ValueList<Unit>.From(kept), Fallen = ValueList<string>.From(record.Fallen.Concat(fallen)) };
+        return record with { Roster = ValueList<Unit>.From(kept), Fallen = ValueList<string>.From(record.Fallen.Concat(fallen)), Pick = "rook" };
     }
 
     private static int Slots(MapDefinition map) => map.Placements.OfType<PlayerPlacement>().Count();

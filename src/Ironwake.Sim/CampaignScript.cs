@@ -57,6 +57,16 @@ public static class CampaignScript
                 Camp(client, content, contentDir, lines, touched, variant);
             }
 
+            if (client.Record.Pick is null && client.Record.NextMap(content).Branch.Count > 0)
+            {
+                // Issue 633: the march is refused until the seat is filled, so every camp at the branch picks.
+                var claimant = SimPick.Claimant(client.Record.NextMap(content));
+                if (client.Pick(claimant))
+                {
+                    lines.Add($"pick {claimant}");
+                }
+            }
+
             bool marched;
             try
             {
