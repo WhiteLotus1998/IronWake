@@ -6,17 +6,14 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4001 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4026 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
 
-- 13.14 Brace is kept (#425, 0084; round 121; DESIGN 13.14) and ships on Saltmarsh (0091, #131); keep round on `saltmarsh_ford_brace.map` (#430, Code 449, Chat cold 521). Holds unread.
-- 13.21 the tide, in content (0111; #600): `docs/samples/ebb_ford_tide.map`. Code 653 warm.
-- 13.24 the messenger is spiked (0135; DESIGN 13.24): samples `signal_road_messenger.map` (Code 701) and `signal_road_pass.map` (Code 680 warm 8/6/6).
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786). Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #856 (0195, 0207, 0209, 0211): teeth 2,4,5,8,12, `--kinsbane [--axe|--heeding]`, issued beside the axe; 279's bar passes. Levers stop. Slice 3 (0212): the hunt runs on, a woken kill's full Move again once a map; `woken: keziah` on `the_gleaning_kinsbane_woken.map`. Code 804 warm 8/7/6, 854 7/7/5, woken 7/7/5; Chat cold Brackwater 858 8/7/5. #865: `campaign --from <map> --pick keziah --fed N` (Chat's field cold at 10 is open). The ease line drops its heal clause at 0 (round 286). #871 (0214, Lotus): 0210's reach gate reverted, the drain runs with no enemy near; `keziah_warning: on` on Sallow alone (walking drains p50 2), a bare `march` with her deployed asks Lotus's line, `march sure` answers; Next: the voice, the clip, the choice screen.
-- #805 slice 1 (0213): Rook's drake, Half-grown on joining, Grown after `rook_1` and 2 maps flown, Unbroken after `rook_2`; a passed Rook returns Grown. Next: the carry spike, then the breath.
+- #805 slice 1 (0213): Rook's drake, Half-grown on joining, Grown after `rook_1` and 2 maps flown, Unbroken after `rook_2`; a passed Rook returns Grown. Slice 2 (0215): the carry spike, `carry: <waited|free|brace> <rider>` on samples, `carry <rider> <ally> <to> <set down>` as an unmoved rider's whole turn. Code 805 warm 7/6/7 on `kestrow_water_carry.map` (free): it decided every turn offered, each time at the rider's cost. Next: the breath.
 - 13.22 the break is spiked (0112, rounds 181 to 183; DESIGN 13.22): on `break: on` a boss's death sends his group at or below half HP off the board; forecasts print `break if <boss> falls`. Samples `the_tollgate_break.map` (Code 661), `saltmarsh_ford_break.map` (#606; Code 667): nothing broke.
 - #786 (round 240) is closed in six slices. #795 (0181): a thinned company fights short-handed. Next: round 240's for-Lotus steps (Chat's console campaign through Brackwater, then the desktop hand run of the exe).
 - 13.18 Lines on the board (#486, DESIGN 13.18): signatures behind `signatures: on`; verdicts in the experiments table; the ledger killed at 65 (0197), next shape a lean (she won't shoot another's target); the other eight wait for boards (`cast_audit.md`).
@@ -80,6 +77,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.18 signatures | `docs/samples/saltmarsh_ford_brace_signatures.map` (#486, 0097; Code 563, Chat cold 113 and 587 in: Teodor and Wren's Canto kept, talk unread, the ledger at 50 killed; at 65 since #540) | the ledger killed at 65 (0197, Chat cold 831); its next shape (round 263) waits to be built, then a cold play |
 | 13.25 rotten planks | `rotten_bridge_planks.map` (0179; Code 251, Chat 4 7/7/8: the relay met clause 1) and `rotten_bridge_straggler.map` (#783; Code 783 warm, no cut on offer) | Chat's cold play of the straggler |
 | 13.26 rockfall | `docs/samples/scree_gorge_rockfall.map` (0182; round 247's board; Code 811 warm 8/7/7: the timing decided, warm) | Chat's cold play |
+| #805 the drake's carry | `docs/samples/kestrow_water_carry.map` (0215; Code 805 warm in on `free`: no setting named) | Chat's cold play on `waited` and `free` |
 | 13.14 brace | kept (0084, round 121): spike on `harrow_weir_brace.map`, keep round on `saltmarsh_ford_brace.map` (Code 449, Chat cold 521) | in; shipped on Saltmarsh (0091); holds read on the next brace play with a hold |
 
 Kept on samples only: rivalry (0043), shove (0069), Seize drift. Killed: Recall scars (0010), battalions (0044), the windup (0094), overwatch (0098, 0103), cover (0099).

@@ -2360,3 +2360,17 @@ Notes: Warm: I built the revert. Transcript `docs/transcripts/2026-10-03-sallow_
 - **The drain made me take a bad bet.** On turns 3 and 4 I sent her at the fort archer for the feed: 49% into fort avoid, missed both, and Pell's counter took the kill. That detour cost her 10 HP and left her two turns behind the company. With the reach gate this would have been a free walk. Now it is a choice I got wrong, and Lotus's "decide when you want to take her" is exactly that.
 - **The company keeps stealing her kills.** Wren and Ottilie double nearly everything here, so feeding her meant holding them back. On turn 6 I spent a Recall. Teodor, at 7 HP, had fallen to the Reeve's javelin, and Ottilie's counter had killed the hexer. In the replay nobody woke the Reeve and nobody stood in the hexer's range, which left its kill for her. The other Recall (turn 2) undid Pell walking into the veteran's reach, and was not about the scythe.
 - Not tense: turn 5, the march east.
+
+## 2026-10-03 — Kestrow Water, the drake's carry on `carry: free` (issue 805 slice 2), warm — Code
+Seed: 805 (`play docs/samples/kestrow_water_carry.map`; Rook placed Grown by the header; level 1 company against level 2 guards)   Result: won on turn 2, escape, two Recalls; Rook fell, and the captain's exit left Maud, Pell, Teodor and Wren behind
+Tension: 7/10   Choice: 6/10   Surprise: 7/10
+Best turn: Turn 1, the third time. I knew from the first try what the ferry costs: Rook on 6,3 with the whole bank group in reach of her, and `end` printing `Lethal if all land: Rook`. I took it anyway because the walk had just cost me Teodor. Rook carried the captain to 6,2, he walked to the exit at 5,0, and the guards went for the rider instead of him. An archer's crit grounded her, and the soldier finished her. He left on turn 2.
+Notes: Warm: I built the carry and the board. Transcript `docs/transcripts/2026-10-03-kestrow_water_carry-805.txt`.
+- **The carry decided every turn it was offered.** That meets the issue's keep clause at the warm chair. Both times, though, it decided the turn badly, and the board is the reason why.
+- **The rider pays, not the ally.** On turn 1 of every try, every guard awake went for Rook first. She was on open ground, the captain could counter, and the archers had a 21% grounding crit on her. The ferry costs the rider, and that cost was never something I chose.
+- **`free` is lift-and-strike, and the board punished it.** On the second try Rook set Teodor down at 12,4, beside the brigand and the bridge's cork, and he struck at once (80% for 12). Four guards answered him in the enemy phase and he fell. Chat's fear about (b) was that lift-and-strike would be the best play every turn. Here it was the worst play I made. The far bank is a kill box for any one body, whatever the setting.
+- **The captain's ferry is a trap on an Escape.** It is a turn-2 win that leaves four behind as fallen (0056). The map has to be won by getting the company over, and the drake moves one body per two turns at best: she must start a turn beside an unmoved ally. I didn't find the line that gets them over, and a cold chair should look for it before anyone retunes.
+- Not tense: turn 1 of the walk. The guards all slept, and every unit marched east.
+- **For the keep round:** this play cannot name a setting. `waited` would have saved Teodor from himself. `brace` would have let him wait at -15 with nothing to lose. Chat's cold play on `waited` against `free` is the deciding play.
+
+— Code

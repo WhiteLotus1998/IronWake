@@ -534,6 +534,11 @@ public static class MapRenderer
             sb.Append(ledges).Append('\n');
         }
 
+        if (DrakeCarry.Line(state) is { } carry)
+        {
+            sb.Append(carry).Append('\n');
+        }
+
         if (ChestLegend(state.ClosedChests, content) is { } chests)
         {
             sb.Append(chests).Append('\n');

@@ -15,7 +15,7 @@ public static class MapFormat
     /// <summary>The largest <c>supplies:</c> cap; above every consumable's uses, so a cap this high never binds.</summary>
     private const int MaxSupplies = 99;
 
-    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning" };
+    private static readonly string[] HeaderKeys = { "name", "size", "win", "turn_limit", "recall", "enemy_level", "exit", "protect", "cheap_shots", "retreat", "rivalry", "supplies", "announce", "keepsakes", "dusk", "grudges", "shove", "pincer", "brace", "wildfire", "windup", "overwatch", "cover", "signatures", "break", "kinsbane", "woken", "messenger", "orders", "exit_after_move", "effective_bows", "difficulty", "certification", "wake_links", "oathbound", "deploy", "fronts", "hunter", "pair_rule", "freed", "keziah_warning", "carry" };
 
     /// <summary>Parses map text. <paramref name="file"/> is only used in error messages.</summary>
     public static MapDefinition Parse(string file, string text, GameContent content)
@@ -133,6 +133,11 @@ public static class MapFormat
         if (map.WokenBearer is { } woken)
         {
             sb.Append("woken: ").Append(woken).Append('\n');
+        }
+
+        if (map.Carry is { } carry)
+        {
+            sb.Append("carry: ").Append(DrakeCarry.Word(carry.Setting)).Append(' ').Append(carry.Rider).Append('\n');
         }
 
         if (map.Messenger is { } messenger)
@@ -377,6 +382,7 @@ public static class MapFormat
             map = map with { WakeLinks = ParseWakeLinks(header, map), PincerEnabled = pincer, BraceEnabled = brace, WildfireEnabled = wildfire, WindupEnabled = windup, OverwatchEnabled = overwatch, OverwatchHold = overwatchHold, CoverEnabled = cover, SignaturesEnabled = signatures, BreakEnabled = breaks, KinsbaneBearer = kinsbane, WokenBearer = woken, Chests = chests, Messenger = ParseMessenger(header, width, height), OrdersEnabled = orders, EffectiveBows = effectiveBows };
             ValidateMessenger(map, header);
             Validate(map);
+            map = map with { Carry = ParseCarry(header, map) };
             map = map with { Deploy = ParseDeploy(header, map), Oathbound = ParseGroups(header, map, "oathbound"), PairRuleGroups = ParseGroups(header, map, "pair_rule") };
             map = map with { Fronts = ParseFronts(header, map) };
             map = map with { Hunter = ParseHunter(header, map) };
@@ -810,6 +816,31 @@ public static class MapFormat
         /// group, each listed once: <c>oathbound:</c> (issue 691), every enemy in one oath-bound, and
         /// <c>pair_rule:</c> (issue 692), every enemy in one bound by the pair rule.
         /// </summary>
+        /// <summary>
+        /// The <c>carry:</c> header (issue 805, samples): <c>carry: &lt;waited|free|brace&gt; &lt;rider&gt;</c>,
+        /// the rider placed by a <c>P recruit:</c> line.
+        /// </summary>
+        private CarryRule? ParseCarry(Dictionary<string, (string Value, int Line)> header, MapDefinition map)
+        {
+            if (!header.TryGetValue("carry", out var entry))
+            {
+                return null;
+            }
+
+            var words = entry.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length != 2 || DrakeCarry.Parse(words[0]) is not { } setting)
+            {
+                throw ErrorAt(entry.Line, $"carry needs '<waited|free|brace> <rider>', got '{entry.Value}'");
+            }
+
+            if (!map.Placements.Any(p => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit } n && n.RecruitId == words[1]))
+            {
+                throw ErrorAt(entry.Line, $"carry names '{words[1]}' but no 'P recruit:{words[1]}' line places them");
+            }
+
+            return new CarryRule(setting, words[1]);
+        }
+
         private ValueList<string> ParseGroups(Dictionary<string, (string Value, int Line)> header, MapDefinition map, string key)
         {
             if (!header.TryGetValue(key, out var entry))

@@ -210,6 +210,12 @@ public sealed record MapDefinition(
     public int Deploy { get; init; } = DefaultDeploy;
 
     /// <summary>
+    /// The <c>carry:</c> header (issue 805, samples): the setting a carried ally lands under and the
+    /// rider placed with a grown drake (<see cref="DrakeCarry"/>); null for a map without the carry.
+    /// </summary>
+    public CarryRule? Carry { get; init; }
+
+    /// <summary>
     /// The <c>oathbound:</c> header (issue 691): the enemy groups sworn to the Kin, in file order.
     /// An enemy in one of them is oath-bound (<see cref="IsOathbound"/>), which Unsworn reads.
     /// Empty by default. The group flag stands in for the oath-bound flag of STORY draft 2.
@@ -292,10 +298,16 @@ public sealed record MapDefinition(
     /// gets the hungering weapon at full uses in its first slot, fed to its waking when <c>woken:</c>
     /// names them too (issue 804), any other woken bearer the heirloom bound to
     /// them at full uses and its last stage (issue 702), and when the pack is full the last stack makes
-    /// room. Any other unit, and every unit on a map without either header, unchanged.
+    /// room. The <c>carry:</c> header's rider is placed with its drake at Grown at least (issue 805).
+    /// Any other unit, and every unit on a map without these headers, unchanged.
     /// </summary>
     public Unit Armed(Unit unit, GameContent content)
     {
+        if (Carry is { } carry && carry.Rider == unit.Id && unit.Drake is not { Stage: >= DrakeStage.Grown })
+        {
+            unit = unit with { Drake = new DrakeState(DrakeStage.Grown, unit.Drake?.Flown ?? 0) };
+        }
+
         if (KinsbaneBearer == unit.Id)
         {
             var weapon = content.Weapon(Kinsbane.ItemId);

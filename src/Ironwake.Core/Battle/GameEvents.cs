@@ -65,6 +65,14 @@ public sealed record Cantoed(string UnitId, Coord From, Coord To, ValueList<Coor
 /// <summary>A unit pushed another one tile, from <paramref name="From"/> to <paramref name="To"/> (DESIGN.md 13.12).</summary>
 public sealed record Shoved(string UnitId, string TargetId, Coord From, Coord To) : GameEvent;
 
+/// <summary>
+/// A rider's drake carried an ally (issue 805, experiment): the rider flew from <paramref name="From"/> to
+/// <paramref name="To"/> and set <paramref name="AllyId"/> down from <paramref name="AllyFrom"/> on
+/// <paramref name="SetDown"/>, which lands as <paramref name="Setting"/> says. The rider's own path is its
+/// <see cref="UnitMoved"/>, emitted just before.
+/// </summary>
+public sealed record Carried(string UnitId, string AllyId, Coord From, Coord To, Coord AllyFrom, Coord SetDown, CarrySetting Setting) : GameEvent;
+
 /// <summary>An enemy fell back to a healing tile instead of fighting (issue 33); it will not retreat again this battle.</summary>
 public sealed record UnitRetreated(string UnitId, Coord From, Coord To) : GameEvent;
 

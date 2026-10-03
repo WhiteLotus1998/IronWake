@@ -49,6 +49,7 @@ public sealed class PlaySession
           drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
           talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
           shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
+          carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
           order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
           order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
           fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
@@ -661,6 +662,12 @@ public sealed class PlaySession
                 break;
             case "shove":
                 Error("usage: shove <unit> <target>");
+                break;
+            case "carry" when words.Length == 5 && TryCoord(words[3], out var carryTo) && TryCoord(words[4], out var setDown):
+                Apply(new Carry(words[1], words[2], carryTo, setDown));
+                break;
+            case "carry":
+                Error("usage: carry <unit> <ally> <x,y> <set down x,y>");
                 break;
             case "end" when words.Length == 1:
                 var exposed = _state.Map.RivalryArm is not null && _state.Phase == Side.Player && !_state.Outcome.IsOver
@@ -2470,6 +2477,7 @@ public sealed class PlaySession
         Order o => $"order {Orders.Word(o.Kind)}",
         FallBack f => $"fallback {f.UnitId} {f.To}",
         Shove s => $"shove {s.UnitId} {s.TargetId}",
+        Carry c => $"carry {c.UnitId} {c.AllyId} {c.To} {c.SetDown}",
         Retreat r => $"retreat {r.UnitId} {r.To}",
         EndPhase => "end",
         Recall r => $"recall {r.ToIndex}",
@@ -2547,6 +2555,13 @@ public sealed class PlaySession
                     : $"{names[f.UnitId]} falls back {f.From} -> {f.To}" + (f.Path.Count > 1 ? " via " + string.Join(" ", f.Path.Take(f.Path.Count - 1)) : "");
             case Shoved s:
                 return $"{names[s.UnitId]} shoves {names[s.TargetId]} {s.From} -> {s.To}";
+            case Carried c:
+                return $"{names[c.UnitId]}'s drake carries {names[c.AllyId]} {c.AllyFrom} -> {c.SetDown}; " + c.Setting switch
+                {
+                    CarrySetting.Waited => "lands done for the phase",
+                    CarrySetting.Free => "lands free to move and act",
+                    _ => "lands moved, cannot strike, braces if it waits",
+                };
             case UnitRetreated r:
                 return $"{names[r.UnitId]} falls back to {r.To} and will not fight this phase";
             case UnitBroke b:

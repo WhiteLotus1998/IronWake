@@ -21,10 +21,11 @@ public static class Brace
     /// any map for a unit holding Hold the Gate (issue 691, <see cref="BraceEffect"/>), only
     /// on the tile it began its phase on (it has neither moved nor been shoved), and never a
     /// Guard whose group still sleeps, since a sleeper caught off guard is the ambush the wake
-    /// rule promises.
+    /// rule promises. A unit a drake set down on a <c>carry: brace</c> map braces on any map (issue 805).
     /// </summary>
     public static bool BracesOnWait(BattleState state, GameContent content, BattleUnit unit) =>
-        (state.Map.BraceEnabled || AbilityRules.Braces(content.AbilitiesOf(unit.Unit))) && !unit.Moved && !unit.Shoved && !Asleep(state, unit);
+        unit.Landed
+        || (state.Map.BraceEnabled || AbilityRules.Braces(content.AbilitiesOf(unit.Unit))) && !unit.Moved && !unit.Shoved && !Asleep(state, unit);
 
     private static bool Asleep(BattleState state, BattleUnit unit) =>
         unit.Behavior == Behavior.Guard && unit.Group is { } group && !state.IsAwake(group);

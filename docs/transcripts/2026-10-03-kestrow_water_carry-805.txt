@@ -1,0 +1,1840 @@
+Kestrow Water, the carry, seed 805, scheme TwoRollAverage
+Objective: Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+  turn 2, enemy phase: a rider arrives at 1,11 (aggressive). A unit standing on 1,11 stops it.
+  turn 2, enemy phase: a brigand arrives at 7,11 (aggressive). A unit standing on 7,11 stops it.
+  turn 3, enemy phase: a rider arrives at 12,11 (aggressive). A unit standing on 12,11 stops it.
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.AB...^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> carry rook captain 6,3 6,2
+Rook moves 6,9 -> 6,3 via 6,8 6,7 6,6 6,5 6,4
+Rook's drake carries Alder Fenn 5,9 -> 6,2; lands free to move and act
+The bank group wakes (proximity)
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a.A.b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move captain 5,0
+Alder Fenn moves 6,2 -> 5,0 via 5,2 5,1
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait captain
+Alder Fenn waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move teodor 9,9
+Teodor moves 7,10 -> 9,9 via 7,9 8,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....D^...
+10 ....ECG.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait teodor
+Teodor waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....D^...
+10 ....ECG.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move wren 8,9
+Wren moves 5,10 -> 8,9 via 5,9 6,9 7,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CD^...
+10 ....E.G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait wren
+Wren waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CD^...
+10 ....E.G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move maud 7,9
+Maud moves 6,10 -> 7,9 via 6,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^...GCD^...
+10 ....E.........
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait maud
+Maud waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^...GCD^...
+10 ....E.........
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move pell 6,9
+Pell moves 4,10 -> 6,9 via 4,9 5,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait pell
+Pell waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain  done
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> end
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brigand 1 for 10, Soldier for 8, against 22 hp)
+Lethal if all land: Rook (Archer 1 for 9, Brigand 1 for 14, Soldier for 12, against 17 hp)
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 8,3
+Archer 1 moves 8,2 -> 8,3
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 misses Rook
+  Archer 1 hp 17, Rook hp 17
+The bridge group wakes (noise)
+enemy: move archer-2 7,2
+Archer 2 moves 10,1 -> 7,2 via 9,1 8,1 7,1
+enemy: attack archer-2 rook
+Forecast Archer 2 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 2 attacks Rook
+  Archer 2 crits Rook for 9 (hp 8)
+  Archer 2 hp 17, Rook hp 8
+Rook is grounded: moves on foot until player phase ends
+enemy: move brigand-1 7,3
+Brigand 1 moves 6,1 -> 7,3 via 7,1 7,2
+enemy: attack brigand-1 rook
+Forecast Brigand 1 -> Rook: acc 51% dmg 14 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
+Brigand 1 attacks Rook
+  Brigand 1 misses Rook
+  Rook hits Brigand 1 for 9 (hp 13)
+  Rook hits Brigand 1 for 9 (hp 4)
+  Brigand 1 hp 4, Rook hp 8
+Rook gains 12 exp (12)
+enemy: move brigand-2 9,2
+Brigand 2 moves 12,3 -> 9,2 via 12,2 11,2 10,2
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move shieldbearer-1 7,4
+Shieldbearer moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 6,4
+Soldier moves 4,2 -> 6,4 via 4,3 4,4 5,4
+enemy: attack soldier-1 rook
+Forecast Soldier -> Rook: acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
+Soldier attacks Rook
+  Soldier hits Rook for 12 (hp 0)
+  Soldier hp 20, Rook hp 0
+Rook falls at 6,3
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^.......^...
+ 2 .......e.f....
+ 3 .....#.cb#....
+ 4 ......ad......
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          7,3    hp 4/22   Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          9,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> recall 0
+Recalled to state 0; 2 charges left
+Undone: gives back 18 enemy hp; returns Rook alive at 17 hp
+The rolls do not change: the same attack will roll the same
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.AB...^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move captain 9,9
+Alder Fenn moves 5,9 -> 9,9 via 6,9 7,9 8,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..B..A^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait captain
+Alder Fenn waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..B..A^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move rook 10,9
+Rook moves 6,9 -> 10,9 via 7,9 8,9 9,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....AB...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait rook
+Rook waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....AB...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move teodor 10,10
+Teodor moves 7,10 -> 10,10 via 8,10 9,10
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....AB...
+10 ....ECG...D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait teodor
+Teodor waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....AB...
+10 ....ECG...D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move wren 8,9
+Wren moves 5,10 -> 8,9 via 5,9 6,9 7,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 ....E.G...D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait wren
+Wren waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 ....E.G...D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move maud 8,10
+Maud moves 6,10 -> 8,10 via 7,10
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 ....E...G.D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait maud
+Maud waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 ....E...G.D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move pell 7,10
+Pell moves 4,10 -> 7,10 via 5,10 6,10
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 .......EG.D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain  done
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait pell
+Pell waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 .......EG.D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain  done
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain  done
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CAB...
+10 .......EG.D...
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           10,9   hp 17/17  Forest
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          10,10  hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> carry rook teodor 12,5 12,4
+Rook moves 10,9 -> 12,5 via 10,8 10,7 10,6 10,5 11,5
+Rook's drake carries Teodor 10,10 -> 12,4; lands free to move and act
+The bridge group wakes (proximity)
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CA^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          12,4   hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> attack teodor brigand-2
+Forecast Teodor -> Brigand 2: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
+Teodor attacks Brigand 2
+  Teodor hits Brigand 2 for 12 (hp 10)
+  Brigand 2 hits Teodor for 10 (hp 11)
+  Teodor hp 11, Brigand 2 hp 10
+Teodor gains 12 exp (12)
+The bank group wakes (noise)
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CA^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        9,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move captain 11,7
+Alder Fenn moves 9,9 -> 11,7 via 9,8 10,8 11,8
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ..............
+ 9 ...^....C.^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait captain
+Alder Fenn waits
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ..............
+ 9 ...^....C.^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move wren 11,8
+Wren moves 8,9 -> 11,8 via 8,8 9,8 10,8
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ...........C..
+ 9 ...^......^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait wren
+Wren waits
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ...........C..
+ 9 ...^......^...
+10 .......EG.....
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           8,10   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move maud 10,8
+Maud moves 8,10 -> 10,8 via 8,9 8,8 9,8
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ..........GC..
+ 9 ...^......^...
+10 .......E......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           10,8   hp 17/17  Plain
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait maud
+Maud waits
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ..........GC..
+ 9 ...^......^...
+10 .......E......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           10,8   hp 17/17  Plain  done
+E  pell             Pell L1 adept              7,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move pell 9,8
+Pell moves 7,10 -> 9,8 via 7,9 7,8 8,8
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 .........EGC..
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           10,8   hp 17/17  Plain  done
+E  pell             Pell L1 adept              9,8    hp 16/16  Plain
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait pell
+Pell waits
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........dD.
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 .........EGC..
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain  done
+G  maud             Maud L1 chaplain           10,8   hp 17/17  Plain  done
+E  pell             Pell L1 adept              9,8    hp 16/16  Plain  done
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          12,4   hp 11/21  Plain  done
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> end
+Lethal if all land: Teodor (Archer 1 for 5, Archer 2 for 5, Brigand 2 for 10, Shieldbearer for 7, against 11 hp)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Rider 1 arrives at 1,11 with the chase group, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 7,11 with the chase group, aggressive
+enemy: move archer-1 11,3
+Archer 1 moves 8,2 -> 11,3 via 9,2 10,2 11,2
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 6)
+  Archer 1 hp 17, Teodor hp 6
+enemy: move archer-2 10,4
+Archer 2 moves 10,1 -> 10,4 via 10,2 10,3
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 misses Teodor
+  Archer 2 hp 17, Teodor hp 6
+enemy: move brigand-1 9,2
+Brigand 1 moves 6,1 -> 9,2 via 7,1 8,1 9,1
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: attack brigand-2 teodor
+Forecast Brigand 2 -> Teodor: acc 63% dmg 10 crit 0%; counter: acc 80% dmg 12 crit 2%
+Brigand 2 attacks Teodor
+  Brigand 2 misses Teodor
+  Teodor misses Brigand 2
+  Brigand 2 hp 10, Teodor hp 6
+enemy: move brigand-3 8,8
+Brigand 3 moves 7,11 -> 8,8 via 7,10 7,9 7,8
+enemy: attack brigand-3 pell
+Forecast Brigand 3 -> Pell: acc 70% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Brigand 3 attacks Pell
+  Brigand 3 hits Pell for 13 (hp 3)
+  Pell hits Brigand 3 for 13 (hp 9)
+  Brigand 3 hp 9, Pell hp 3
+Pell gains 12 exp (12)
+enemy: move rider-1 5,9
+Rider 1 moves 1,11 -> 5,9 via 1,10 2,10 3,10 4,10 4,9
+enemy: wait rider-1
+Rider 1 waits
+enemy: attack shieldbearer-1 teodor
+Forecast Shieldbearer -> Teodor: acc 72% dmg 7 crit 0%; counter: acc 87% dmg 6 x2 crit 2%
+Shieldbearer attacks Teodor
+  Shieldbearer hits Teodor for 7 (hp 0)
+  Shieldbearer hp 24, Teodor hp 0
+Teodor falls at 12,4
+enemy: move soldier-1 8,2
+Soldier moves 4,2 -> 8,2 via 5,2 6,2 7,2
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Kestrow Water, the carry  turn 3 of 8  player phase  escape  recall 2
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ........ac....
+ 3 .....#...#.bf.
+ 4 ..........ed..
+ 5 ~~~~~~~~~~~=B~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~A~~
+ 8 ........hEGC..
+ 9 ...^.g....^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           11,3   hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,4   hp 17/17  Plain  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          9,2    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 10/22  Plain  group bridge, guard, awake
+h  brigand-3        Brigand L2 reaver          8,8    hp 9/22   Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        11,7   hp 22/22  Road  captain
+G  maud             Maud L1 chaplain           10,8   hp 17/17  Plain
+E  pell             Pell L1 adept              9,8    hp 3/16   Plain
+g  rider-1          Rider L2 outrider          5,9    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 skyrider           12,5   hp 17/17  Water
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         8,2    hp 20/20  Plain  group bank, guard, awake
+C  wren             Wren L1 cadet              11,8   hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> recall 0
+Recalled to state 0; 1 charges left
+Undone: gives back 12 exp, 12 enemy hp; returns Teodor alive at 21 hp, 13 hp to Pell, Brigand 3 not yet arrived, Rider 1 not yet arrived
+The rolls do not change: the same attack will roll the same
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.AB...^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> carry rook captain 6,3 6,2
+Rook moves 6,9 -> 6,3 via 6,8 6,7 6,6 6,5 6,4
+Rook's drake carries Alder Fenn 5,9 -> 6,2; lands free to move and act
+The bank group wakes (proximity)
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a.A.b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,2    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move captain 5,0
+Alder Fenn moves 6,2 -> 5,0 via 5,2 5,1
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait captain
+Alder Fenn waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move teodor 9,9
+Teodor moves 7,10 -> 9,9 via 7,9 8,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....D^...
+10 ....ECG.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait teodor
+Teodor waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.....D^...
+10 ....ECG.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move wren 8,9
+Wren moves 5,10 -> 8,9 via 5,9 6,9 7,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CD^...
+10 ....E.G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait wren
+Wren waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^....CD^...
+10 ....E.G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move maud 7,9
+Maud moves 6,10 -> 7,9 via 6,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^...GCD^...
+10 ....E.........
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait maud
+Maud waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^...GCD^...
+10 ....E.........
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> move pell 6,9
+Pell moves 4,10 -> 6,9 via 4,9 5,9
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> wait pell
+Pell waits
+Kestrow Water, the carry  turn 1 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#B..#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain  done
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain  done
+B  rook             Rook L1 skyrider           6,3    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain  done
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+carry (a grown drake's whole turn, from beside an ally that has not moved): carry rook <ally> <x,y> <set down x,y>; the ally lands free to move and act
+> end
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brigand 1 for 10, Soldier for 8, against 22 hp)
+Lethal if all land: Rook (Archer 1 for 9, Brigand 1 for 14, Soldier for 12, against 17 hp)
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: move archer-1 8,3
+Archer 1 moves 8,2 -> 8,3
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 misses Rook
+  Archer 1 hp 17, Rook hp 17
+The bridge group wakes (noise)
+enemy: move archer-2 7,2
+Archer 2 moves 10,1 -> 7,2 via 9,1 8,1 7,1
+enemy: attack archer-2 rook
+Forecast Archer 2 -> Rook: acc 70% dmg 9 grounds 21%; counter: none
+Archer 2 attacks Rook
+  Archer 2 crits Rook for 9 (hp 8)
+  Archer 2 hp 17, Rook hp 8
+Rook is grounded: moves on foot until player phase ends
+enemy: move brigand-1 7,3
+Brigand 1 moves 6,1 -> 7,3 via 7,1 7,2
+enemy: attack brigand-1 rook
+Forecast Brigand 1 -> Rook: acc 51% dmg 14 crit 0%; counter: acc 82% dmg 9 x2 crit 4%
+Brigand 1 attacks Rook
+  Brigand 1 misses Rook
+  Rook hits Brigand 1 for 9 (hp 13)
+  Rook hits Brigand 1 for 9 (hp 4)
+  Brigand 1 hp 4, Rook hp 8
+Rook gains 12 exp (12)
+enemy: move brigand-2 9,2
+Brigand 2 moves 12,3 -> 9,2 via 12,2 11,2 10,2
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move shieldbearer-1 7,4
+Shieldbearer moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: move soldier-1 6,4
+Soldier moves 4,2 -> 6,4 via 4,3 4,4 5,4
+enemy: attack soldier-1 rook
+Forecast Soldier -> Rook: acc 63% dmg 12 crit 0%; counter: acc 79% dmg 7 crit 3%
+Soldier attacks Rook
+  Soldier hits Rook for 12 (hp 0)
+  Soldier hp 20, Rook hp 0
+Rook falls at 6,3
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>A>>>.....
+ 1 ..^.......^...
+ 2 .......e.f....
+ 3 .....#.cb#....
+ 4 ......ad......
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          7,3    hp 4/22   Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          9,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        5,0    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> exit captain
+Alder Fenn leaves through the exit at 5,0
+Maud is left behind at 7,9
+Pell is left behind at 6,9
+Teodor is left behind at 9,9
+Wren is left behind at 8,9
+Kestrow Water, the carry  turn 2 of 8  player phase  escape  recall 1
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e.f....
+ 3 .....#.cb#....
+ 4 ......ad......
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^..EGCD^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+c  brigand-1        Brigand L2 reaver          7,3    hp 4/22   Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          9,2    hp 22/22  Plain  group bridge, guard, awake
+G  maud             Maud L1 chaplain           7,9    hp 17/17  Plain
+E  pell             Pell L1 adept              6,9    hp 16/16  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 24/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         6,4    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          9,9    hp 21/21  Plain
+C  wren             Wren L1 cadet              8,9    hp 20/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: captain
+Battle won: escape; only recall is left
+Battle won: escape
+Escaped: Alder Fenn; left behind: Maud, Pell, Teodor, Wren; fell: Rook
