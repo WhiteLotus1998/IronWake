@@ -115,6 +115,13 @@ public sealed record BattleUnit(
     /// </summary>
     public int Grounded { get; init; }
 
+    /// <summary>
+    /// Set when a drake set the unit down on a <c>carry: brace</c> map (issue 805, <see cref="DrakeCarry"/>):
+    /// it may not strike, and a Wait on the landing tile braces (<see cref="Brace.BracesOnWait"/>).
+    /// Cleared when a phase begins.
+    /// </summary>
+    public bool Landed { get; init; }
+
     /// <summary>How many times the unit has declared <paramref name="artId"/> this battle, counted only for an art with a per-map cap.</summary>
     public int TimesDeclared(string artId) => ArtsDeclared is { } declared ? declared.Count(id => id == artId) : 0;
 

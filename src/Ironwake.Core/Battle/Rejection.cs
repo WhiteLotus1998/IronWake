@@ -31,6 +31,7 @@ public enum RejectionReason
     CannotDrop,
     Unseen,
     CannotShove,
+    CannotCarry,
     CannotWatch,
     CannotCover,
     CannotTalk,

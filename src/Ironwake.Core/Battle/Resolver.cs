@@ -78,6 +78,20 @@ public static class Resolver
                 }
 
                 break;
+            case Carry carry:
+                (next, rejection) = ApplyCarry(state, content, carry, events);
+                if (rejection is null)
+                {
+                    next = MapEvents.AfterMove(next, content, next.Find(carry.UnitId)!, events);
+                    next = FireWatches(next, content, carry.UnitId, events);
+                    if (next.Find(carry.AllyId) is { } landed)
+                    {
+                        next = MapEvents.AfterMove(next, content, landed, events);
+                        next = FireWatches(next, content, carry.AllyId, events);
+                    }
+                }
+
+                break;
             case Canto canto:
                 (next, rejection) = ApplyCanto(state, content, canto, events);
                 if (rejection is null)
@@ -490,6 +504,11 @@ public static class Resolver
         if (target.Side == unit.Side)
         {
             return (state, new Rejection(RejectionReason.NotAnEnemy, $"{target.Id} is on {unit.Id}'s own side"));
+        }
+
+        if (unit.Landed)
+        {
+            return (state, new Rejection(RejectionReason.CannotCarry, $"{unit.Id} was set down by a drake this phase and cannot strike; it may wait to brace"));
         }
 
         var (armed, weapon, choice) = ChooseWeapon(unit, content, attack.Slot);
@@ -1252,6 +1271,44 @@ public static class Resolver
         return (next.WithUnit(target with { At = to, Shoved = true, Braced = false }), null);
     }
 
+    /// <summary>
+    /// Issue 805's carry: a rider with a grown drake, unmoved and not acted, lifts an adjacent ally, flies
+    /// to <see cref="Carry.To"/> on its own Move with the ally lifted, and sets the ally down beside it
+    /// (<see cref="DrakeCarry"/>). The rider's whole turn. The ally lands marked as shoved, and as the
+    /// map's setting says: done for the phase, free, or moved and unable to strike.
+    /// </summary>
+    private static (BattleState, Rejection?) ApplyCarry(BattleState state, GameContent content, Carry carry, List<GameEvent> events)
+    {
+        var rider = Acting(state, carry.UnitId, out var rejection);
+        if (rider is null)
+        {
+            return (state, rejection);
+        }
+
+        if (DrakeCarry.Refusal(state, content, rider, carry.AllyId, carry.To, carry.SetDown) is { } refusal)
+        {
+            return (state, new Rejection(RejectionReason.CannotCarry, $"{rider.Id} cannot carry {carry.AllyId}: {refusal}"));
+        }
+
+        var ally = state.Find(carry.AllyId)!;
+        var setting = state.Map.Carry!.Setting;
+        var lifted = state.WithoutUnit(ally.Id);
+        var entry = lifted.ReachOf(rider, content).EntryAt(carry.To)!;
+        events.Add(new UnitMoved(rider.Id, rider.At, carry.To, entry.Path));
+        events.Add(new Carried(rider.Id, ally.Id, rider.At, carry.To, ally.At, carry.SetDown, setting));
+        var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, Canto = null, Braced = false });
+        var landed = ally with
+        {
+            At = carry.SetDown,
+            Moved = setting != CarrySetting.Free,
+            Acted = setting == CarrySetting.Waited,
+            Shoved = true,
+            Braced = false,
+            Landed = setting == CarrySetting.Brace,
+        };
+        return (next.WithUnit(landed), null);
+    }
+
     /// <summary>The tile one step past <paramref name="target"/>, directly away from <paramref name="from"/>.</summary>
     public static Coord Beyond(Coord from, Coord target) =>
         new(target.X + (target.X - from.X), target.Y + (target.Y - from.Y));
@@ -1602,7 +1659,7 @@ public static class Resolver
         events.Add(new PhaseEnded(ended, state.Turn));
         if (nextTurn > state.Map.TurnLimit)
         {
-            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Open = null });
+            var cleared = state.Units.Select(u => u with { Moved = false, Acted = false, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Open = null, Landed = false });
             return (state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(cleared), LitGroups = ValueList<string>.Empty }, null);
         }
 
@@ -1635,7 +1692,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null, Landed = false });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };
@@ -1763,7 +1820,7 @@ public static class Resolver
                 }
             }
 
-            foreach (var attack in LegalAttacks(state, content, unit))
+            foreach (var attack in unit.Landed ? Enumerable.Empty<Attack>() : LegalAttacks(state, content, unit))
             {
                 yield return attack;
             }

@@ -94,6 +94,14 @@ public sealed record Drop(string UnitId) : Command;
 public sealed record Shove(string UnitId, string TargetId) : Command;
 
 /// <summary>
+/// Carry an ally on a grown drake (issue 805, experiment): on a <c>carry:</c> map, a rider whose drake
+/// is Grown or more, unmoved and not acted, lifts the orthogonally adjacent ally <paramref name="AllyId"/>,
+/// flies to <paramref name="To"/> as a Move of its own, and sets the ally down on <paramref name="SetDown"/>,
+/// beside it (<see cref="DrakeCarry"/>). The rider's whole turn; no Canto follows. The AI never carries.
+/// </summary>
+public sealed record Carry(string UnitId, string AllyId, Coord To, Coord SetDown) : Command;
+
+/// <summary>
 /// Watch (DESIGN.md 13.17, experiment): on an <c>overwatch: on</c> map, a unit whose equipped
 /// weapon reaches range 2 takes this as its action, in place of Attack, Item or Wait, after its
 /// Move or without one, and watches the tiles two steps from it until its side's next phase

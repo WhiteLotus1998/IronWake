@@ -183,6 +183,15 @@ public static class ProtocolJson
                 WriteCoord(w, "from", s.From);
                 WriteCoord(w, "to", s.To);
                 break;
+            case Carried c:
+                w.WriteString("unit", c.UnitId);
+                w.WriteString("ally", c.AllyId);
+                WriteCoord(w, "from", c.From);
+                WriteCoord(w, "to", c.To);
+                WriteCoord(w, "allyFrom", c.AllyFrom);
+                WriteCoord(w, "setDown", c.SetDown);
+                w.WriteString("setting", Name(c.Setting));
+                break;
             case UnitRetreated r:
                 w.WriteString("unit", r.UnitId);
                 WriteCoord(w, "from", r.From);
@@ -578,6 +587,13 @@ public static class ProtocolJson
                 w.WriteString("unit", shove.UnitId);
                 w.WriteString("target", shove.TargetId);
                 break;
+            case Carry carry:
+                w.WriteString("type", "carry");
+                w.WriteString("unit", carry.UnitId);
+                w.WriteString("ally", carry.AllyId);
+                WriteCoord(w, "to", carry.To);
+                WriteCoord(w, "setDown", carry.SetDown);
+                break;
             case Canto canto:
                 w.WriteString("type", "canto");
                 w.WriteString("unit", canto.UnitId);
@@ -636,12 +652,13 @@ public static class ProtocolJson
             "drop" => new Drop(RequiredString(e, "unit")),
             "talk" => new Talk(RequiredString(e, "unit"), RequiredString(e, "target")),
             "shove" => new Shove(RequiredString(e, "unit"), RequiredString(e, "target")),
+            "carry" => new Carry(RequiredString(e, "unit"), RequiredString(e, "ally"), ReadCoord(e, "to"), ReadCoord(e, "setDown")),
             "order" => new Order(ReadOrderKind(RequiredString(e, "kind"))),
             "fallBack" => new FallBack(RequiredString(e, "unit"), ReadCoord(e, "to")),
             "end" => new EndPhase(),
             "recall" => new Recall(RequiredInt(e, "toIndex")),
             "undo" => new Undo(RequiredString(e, "unit")),
-            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, order, fallBack, end, recall, or undo"),
+            _ => throw new ProtocolException($"type '{type}' is not a command; expected move, attack, item, retreat, wait, watch, cover, canto, exit, recover, open, drop, talk, shove, carry, order, fallBack, end, recall, or undo"),
         };
     }
 
@@ -1009,6 +1026,11 @@ public static class ProtocolJson
             w.WriteBoolean("braced", true);
         }
 
+        if (unit.Landed)
+        {
+            w.WriteBoolean("landed", true);
+        }
+
         if (unit.Pressed)
         {
             w.WriteBoolean("pressed", true);
@@ -1234,6 +1256,7 @@ public static class ProtocolJson
             Chill = OptionalInt(e, "chill") ?? 0,
             LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
+            Landed = e.TryGetProperty("landed", out _) && RequiredBool(e, "landed"),
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
