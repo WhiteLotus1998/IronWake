@@ -6,9 +6,21 @@ public readonly record struct CombatContext(int Turn, Side Phase);
 /// <summary>One strike, as the event stream reports it (DESIGN.md section 5).</summary>
 public sealed record StrikeEvent(int Index, string AttackerId, string TargetId, bool Hit, bool Crit, int Damage, int TargetHpAfter);
 
-/// <summary>A resolved combat: every strike in order and both sides' HP when it ended.</summary>
+/// <summary>
+/// A drake's bite after the exchange (issue 872, <see cref="BiteEffect"/>): the rider whose drake bit, the
+/// unit bitten, the damage, and that unit's HP after it. Not a strike: nothing that reads strikes sees it.
+/// </summary>
+public sealed record BiteEvent(string RiderId, string TargetId, int Damage, int TargetHpAfter);
+
+/// <summary>
+/// A resolved combat: every strike in order and both sides' HP when it ended, after a drake's
+/// <see cref="Bite"/> when one bit (issue 872), so a bite that kills is the combat's kill.
+/// </summary>
 public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp, int DefenderHp)
 {
+    /// <summary>The drake's bite after the exchange, or null when none bit.</summary>
+    public BiteEvent? Bite { get; init; }
+
     public bool AttackerDied => AttackerHp == 0;
 
     public bool DefenderDied => DefenderHp == 0;
@@ -21,6 +33,9 @@ public sealed record CombatResult(ValueList<StrikeEvent> Strikes, int AttackerHp
 /// <see cref="SideForecast.StrikesPerRound"/> strikes, two for gauntlets (issue 70), and
 /// a death ends the combat mid-round. Every roll comes from <see cref="IRng"/> under the key
 /// <see cref="RollKey.Combat"/> documents, and the crit roll is drawn only when the hit landed.
+/// When the exchange is over and both stand, a side with a <see cref="SideForecast.Bite"/> one of whose
+/// strikes hit bites once (issue 872): the attacker's drake, or else the defender's; one bite a combat.
+/// The bite draws no roll.
 /// </summary>
 public static class CombatResolver
 {
@@ -52,7 +67,19 @@ public static class CombatResolver
             }
         }
 
-        return new CombatResult(strikes, attackerHp, defenderHp);
+        BiteEvent? bite = null;
+        if (forecast.Attacker.Bite > 0 && attackerHp > 0 && defenderHp > 0 && strikes.Any(s => s.Hit && s.AttackerId == attacker.Id))
+        {
+            defenderHp = Math.Max(0, defenderHp - forecast.Attacker.Bite);
+            bite = new BiteEvent(attacker.Id, defender.Id, forecast.Attacker.Bite, defenderHp);
+        }
+        else if (forecast.Defender.Bite > 0 && attackerHp > 0 && defenderHp > 0 && strikes.Any(s => s.Hit && s.AttackerId == defender.Id))
+        {
+            attackerHp = Math.Max(0, attackerHp - forecast.Defender.Bite);
+            bite = new BiteEvent(defender.Id, attacker.Id, forecast.Defender.Bite, attackerHp);
+        }
+
+        return new CombatResult(strikes, attackerHp, defenderHp) { Bite = bite };
 
         void Round(Combatant striker, Combatant target, SideForecast side, ref int targetHp, ref int strikeIndex)
         {

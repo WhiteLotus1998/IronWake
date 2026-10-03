@@ -28,8 +28,11 @@ public static class RollSchemes
 /// the strikes each of this side's turns makes, two for gauntlets (issue 70).
 /// <see cref="CritGrounds"/> marks a bow striking a flier (issue 723, <see cref="Weapon.GroundsAgainst"/>):
 /// its crit deals plain damage and grounds the flier, so <see cref="CritDamage"/> is <see cref="Damage"/>.
+/// <see cref="Bite"/> is what the side's drake adds once after the exchange when one of its strikes hit and
+/// both units stand (issue 872, <see cref="BiteEffect"/>), 0 for every side without one; never a strike.
+/// <see cref="NeverDoubles"/> marks a side in a single-strike class (<see cref="UnitClass.SingleStrike"/>), so the line can say why.
 /// </summary>
-public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false)
+public sealed record SideForecast(bool Strikes, int Damage, int HitChance, int DisplayedHit, int CritChance, bool Doubles, int StrikesPerRound = 1, bool CritGrounds = false, int Bite = 0, bool NeverDoubles = false)
 {
     public static SideForecast None { get; } = new(false, 0, 0, 0, 0, false);
 
@@ -67,8 +70,14 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
             ? Attacker.StrikeCount
             : Attacker.StrikesPerRound;
 
-    /// <summary>The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit.</summary>
-    public int AttackerDamageLivedFor(int attackerHp) => Attacker.Damage * AttackerStrikesLivedFor(attackerHp);
+    /// <summary>
+    /// The attacker's plain damage over the strikes it lives to make (<see cref="AttackerStrikesLivedFor"/>), no crit,
+    /// and its drake's bite (issue 872) when the counter, every strike landing, leaves it standing: the bite needs both
+    /// units up after the exchange, and if the strikes alone kill, the bite adds nothing that matters.
+    /// </summary>
+    public int AttackerDamageLivedFor(int attackerHp) =>
+        Attacker.Damage * AttackerStrikesLivedFor(attackerHp)
+        + (Attacker.Bite > 0 && Defender.Damage * Defender.StrikeCount < attackerHp ? Attacker.Bite : 0);
 
     /// <summary>
     /// Whether the defender's counter kills the attacker if every counter strike lands (issue 539):
@@ -79,9 +88,12 @@ public sealed record CombatForecast(SideForecast Attacker, SideForecast Defender
     /// </summary>
     public bool CounterIsLethal(int attackerHp, int defenderHp) =>
         Defender.Strikes
-        && Defender.Damage * Defender.StrikeCount >= attackerHp
+        && CounterIfAllLand >= attackerHp
         && !(Attacker.Strikes && Attacker.DisplayedHit == 100 && Attacker.Damage * Attacker.StrikesPerRound >= defenderHp);
 
-    /// <summary>The counter's plain damage if every strike it can make lands, no crit (issue 539).</summary>
-    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount : 0;
+    /// <summary>
+    /// The counter's plain damage if every strike it can make lands, no crit (issue 539), with its drake's bite
+    /// (issue 872): when the strikes alone fall short of the attacker's HP the attacker stands, so the bite lands.
+    /// </summary>
+    public int CounterIfAllLand => Defender.Strikes ? Defender.Damage * Defender.StrikeCount + Defender.Bite : 0;
 }

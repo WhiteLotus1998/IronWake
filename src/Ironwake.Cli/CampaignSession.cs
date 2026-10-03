@@ -1590,6 +1590,10 @@ public sealed class CampaignSession
             }
 
             _out.WriteLine(line);
+            if (Drake.ClassLine(target, _content, unit) is { } drakeLine)
+            {
+                _out.WriteLine("    " + drakeLine);
+            }
         }
     }
 

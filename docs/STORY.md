@@ -155,7 +155,7 @@ Raised by Kestrow's church in the rookery that keeps its one secret animal, whic
 - **Grievance:** she's property to the church that raised her.
 - **Crossing Hask:** passed over, she rides with the one man who told her the truth about her lord, which is Hask, and so does the drake. **Hask fed it better than the church ever did.** Won back on map 9, she returns at the roster median with the drake at Grown: *"He was good to it. That was the worst part."* If she falls, the drake leaves the field, and one ending line says it was seen over the fells. Nobody owns it after that.
 - **Her answer to Hask (if picked):** *"He's the only one who never lied to me. He'd also never let me leave. I've had that."*
-- **Her door:** Sky Captain or Scout (0167). Quest 1 opens the Scout. She trades the lance's weight for counting what's asleep. The church's rider becomes her own lookout.
+- **Her door:** Sky Captain or Drover (0217, replacing 0167's Scout). Quest 1 opens the Drover. She trades the double for the drake's bite, and the drake is the point. The church's rider becomes the animal's own drover.
 
 ### Wren (Aldmere, cadet; side, met on map 7)
 A surveyor's daughter. Her father was hanged for moving border stones he didn't move. She's nineteen, counts everything out loud, and is very hard to lie to. Her flaw: she's sure, and she's often right, which makes the times she's wrong worse.

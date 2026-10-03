@@ -2388,3 +2388,17 @@ Notes: Warm: I built the breath and the board. Transcript `docs/transcripts/2026
 - Not tense: turns 6 to 8, a captain walking at a corked bridge.
 
 — Code
+
+## 2026-10-03 — Kestrow Water, the breath, with Rook as a Drover (issue 872), warm — Code
+Seed: 805 (`play docs/samples/kestrow_water_rime.map` on a content copy with Rook's cast class set to `drover`; she is placed Unbroken by the header, so the bite is 5 and Deep Rime is live)   Result: won turn 8. Teodor and the captain got out; Pell was left behind on 8,0; Maud, Wren and Rook fell. No Recall.
+Tension: 7/10   Choice: 6/10   Surprise: 6/10
+Best turn: Turn 3. Rook flew to 4,5 over the water and struck the soldier at 12 HP for 8, and the drake bit for 5 to finish it: `The drake bites: 5 (Soldier hp 0)`. Wren's own strike would have left it at 4 and given the counter a second turn.
+Notes: Warm: I built the class and the sample. Transcript `docs/transcripts/2026-10-03-kestrow_water_rime_drover-805.txt`.
+- **Deep Rime decided the map.** In the last play the river thawed behind me on turn 2 and stranded the captain. This time the breath on turn 1 held through turn 3's player phase, and I used the extra round to move the whole column over: Wren and the captain to the north bank on turn 2, with Teodor, Pell and Maud on the ice behind them. The ice on 6,5 and 6,6 held as long as Teodor and Pell stood on it, then went, and that cut the chasers off from the crossing.
+- **The bite was real, and also smaller than a double.** It finished the soldier on turn 3 and took an archer from 7 to 2 on turn 5. Both times a Sky Captain's double (8 and 8, then 10 and 10) would have done as much or more. The measure says the same about 24 of the 30 templates. I never wanted the Drover over the Sky Captain on this board, because nothing on it is armoured enough that she can't double it.
+- **`x1, never doubles` reads well,** and so does the bite on the forecast line. I added the bite in my head every time, and the forecast doesn't add it for me. A kill the bite makes doesn't print as lethal on the forecast line itself, only in the `end` summary.
+- **The cost bit once.** On turn 6 she missed the rider (79%), took 11 on the counter, and fell to it in the enemy phase. A Sky Captain would have had a second swing at a 79% double.
+- **My misplays:** I didn't move Maud off 6,7 before the rider came, and on turn 5 I tried to walk Wren to the exit after she had already struck.
+- Not tense: turns 7 and 8, with nothing left on the board.
+
+— Code

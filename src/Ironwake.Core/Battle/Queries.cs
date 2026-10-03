@@ -417,10 +417,7 @@ public static class Queries
     /// awake (issue 248, the thirty-sixth round's shape one): each group with the members that
     /// could strike the tile were it awake, never one that could not (issue 454), in group order, and no numbers, so the player learns a sleeping group is a
     /// question without being handed its answer. A group the tile itself certainly wakes is
-    /// already awake on that board and priced by <see cref="Threats"/> instead. A group with a member
-    /// within a player unit's headcount (issue 706, the Scout; that unit read on <paramref name="from"/>
-    /// when it is the one asked) carries that unit and each member's strike priced on the board with the
-    /// group woken (<see cref="SleepingThreat.Priced"/>). Null exactly when <see cref="Threats"/> is. Read-only.
+    /// already awake on that board and priced by <see cref="Threats"/> instead. Null exactly when <see cref="Threats"/> is. Read-only.
     /// </summary>
     public static IReadOnlyList<SleepingThreat>? SleepingThreats(BattleState state, GameContent content, BattleUnit unit, Coord from)
     {
@@ -440,10 +437,6 @@ public static class Queries
             .Select(u => u.Group!)
             .Distinct()
             .OrderBy(g => g, StringComparer.Ordinal);
-        var counters = board.UnitsOf(Side.Player)
-            .Select(u => (Unit: u, Radius: AbilityRules.HeadcountRadius(content.AbilitiesOf(u.Unit))))
-            .Where(c => c.Radius is not null)
-            .ToList();
         foreach (var group in sleeping)
         {
             var woken = board.Wake(group);
@@ -453,23 +446,7 @@ public static class Queries
                 continue;
             }
 
-            var counter = counters.FirstOrDefault(c => woken.UnitsOf(Side.Enemy).Any(u => u.Group == group && u.At.DistanceTo(c.Unit.At) <= c.Radius)).Unit;
-            if (counter is null)
-            {
-                groups.Add(new SleepingThreat(group, members));
-                continue;
-            }
-
-            var priced = new List<ThreatLine>();
-            foreach (var member in members)
-            {
-                var strike = EnemyAi.StrikeOn(woken, content, member, moved)!;
-                var carrier = woken.Carrying(member, strike.From);
-                var weapon = carrier.UsableWeaponAt(content, strike.Slot)!;
-                priced.Add(new ThreatLine(carrier, strike.From, strike.Slot, weapon, StrikeForecast(woken, content, carrier, moved, strike), null, StrikeTiles(woken, content, member, moved), Windup.Raises(woken, weapon)));
-            }
-
-            groups.Add(new SleepingThreat(group, members) { CountedBy = counter, Priced = ValueList<ThreatLine>.From(priced) });
+            groups.Add(new SleepingThreat(group, members));
         }
 
         return groups;
@@ -648,21 +625,7 @@ public sealed record AnvilLine(BattleUnit Anvil, Coord Tile, BattleUnit Follower
 public sealed record RefusalLine(BattleUnit Boss, Coord Refused, Coord Ends);
 
 /// <summary>A Guard group <see cref="Queries.SleepingThreats"/> names: asleep, and <see cref="Members"/> the ones able to strike the unit were it awake.</summary>
-public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members)
-{
-    /// <summary>
-    /// The player unit whose headcount prices the group (issue 706, <see cref="HeadcountEffect"/>): a member
-    /// stands within its radius. Null for a group named without numbers, as every group was before.
-    /// </summary>
-    public BattleUnit? CountedBy { get; init; }
-
-    /// <summary>
-    /// Each member's strike were the group woken, priced as <see cref="Queries.Threats"/> prices an awake
-    /// enemy on the same board with the group awake, in <see cref="Members"/>' order; empty when
-    /// <see cref="CountedBy"/> is null. Never in the threat's total: the group is asleep.
-    /// </summary>
-    public ValueList<ThreatLine> Priced { get; init; } = ValueList<ThreatLine>.Empty;
-}
+public sealed record SleepingThreat(string Group, ValueList<BattleUnit> Members);
 
 /// <summary>
 /// One enemy's strike on a unit as <see cref="Queries.Threats"/> prices it: who, from

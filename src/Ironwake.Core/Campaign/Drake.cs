@@ -66,12 +66,68 @@ public static class Drake
             return null;
         }
 
+        var live = Live(unit, content) is { Count: > 0 } verbs ? $" Live: {string.Join(", ", verbs)}." : "";
         if (drake.Stage != DrakeStage.HalfGrown || content.Campaign.Drake is not { } rules)
         {
-            return $"Drake: {Word(drake.Stage)}.";
+            return $"Drake: {Word(drake.Stage)}.{live}";
         }
 
         var said = Referent.For(content, unit);
-        return $"Drake: half-grown; grows once {unit.Name}'s first quest is won and {said.Subject} {(said.Plural ? "have" : "has")} flown {rules.GrownFlown} maps ({drake.Flown} so far).";
+        return $"Drake: half-grown; grows once {unit.Name}'s first quest is won and {said.Subject} {(said.Plural ? "have" : "has")} flown {rules.GrownFlown} maps ({drake.Flown} so far).{live}";
+    }
+
+    /// <summary>
+    /// The class's drake abilities live for <paramref name="unit"/> at its drake's stage (issue 872), as the
+    /// card names them: <c>Drake Bite 5</c>, <c>Long Carry</c>, <c>Deep Rime</c>. Empty for a class with none.
+    /// </summary>
+    public static IReadOnlyList<string> Live(Unit unit, GameContent content)
+    {
+        var abilities = content.AbilitiesOf(unit);
+        var live = new List<string>();
+        foreach (var ability in abilities)
+        {
+            switch (ability.Effect)
+            {
+                case BiteEffect when AbilityRules.Bite(abilities, unit) is var bite and > 0:
+                    live.Add($"{ability.Name} {bite}");
+                    break;
+                case LongCarryEffect when AbilityRules.LongCarry(abilities, unit):
+                case DeepRimeEffect when AbilityRules.DeepRime(abilities, unit) > 0:
+                    live.Add(ability.Name);
+                    break;
+            }
+        }
+
+        return live;
+    }
+
+    /// <summary>
+    /// The class list's line for a class with drake abilities (issue 872): each with the stage that opens it,
+    /// <c>Drake Bite (half-grown 3, grown 5; never doubles)</c>, <c>Long Carry (from grown)</c>, <c>Deep Rime (at unbroken)</c>,
+    /// and for a <paramref name="rider"/> whether each is live at its drake's stage. Null for a class with none.
+    /// </summary>
+    public static string? ClassLine(UnitClass unitClass, GameContent content, Unit? rider)
+    {
+        var parts = new List<string>();
+        foreach (var id in unitClass.Abilities)
+        {
+            var ability = content.Ability(id);
+            var (gate, stage) = ability.Effect switch
+            {
+                BiteEffect bite => ($"half-grown {bite.HalfGrown}, grown {bite.Grown}{(unitClass.SingleStrike ? "; never doubles" : "")}", DrakeStage.HalfGrown),
+                LongCarryEffect => ("from grown", DrakeStage.Grown),
+                DeepRimeEffect => ("at unbroken", DrakeStage.Unbroken),
+                _ => ((string?)null, DrakeStage.HalfGrown),
+            };
+            if (gate is null)
+            {
+                continue;
+            }
+
+            var now = rider?.Drake is { } drake ? (drake.Stage >= stage ? ", live" : ", not yet") : "";
+            parts.Add($"{ability.Name} ({gate}{now})");
+        }
+
+        return parts.Count == 0 ? null : "the drake: " + string.Join("; ", parts);
     }
 }

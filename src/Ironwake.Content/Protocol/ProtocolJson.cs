@@ -77,6 +77,16 @@ public static class ProtocolJson
                 }
 
                 w.WriteEndArray();
+                if (f.Bite is { } bite)
+                {
+                    w.WriteStartObject("bite");
+                    w.WriteString("rider", bite.RiderId);
+                    w.WriteString("target", bite.TargetId);
+                    w.WriteNumber("damage", bite.Damage);
+                    w.WriteNumber("targetHpAfter", bite.TargetHpAfter);
+                    w.WriteEndObject();
+                }
+
                 w.WriteNumber("attackerHpAfter", f.AttackerHpAfter);
                 w.WriteNumber("targetHpAfter", f.TargetHpAfter);
                 break;
@@ -839,6 +849,10 @@ public static class ProtocolJson
                 WriteCoord(w, "at", tile.At);
                 w.WriteString("side", Name(tile.Side));
                 w.WriteNumber("clock", tile.Clock);
+                if (tile.Extra > 0)
+                {
+                    w.WriteNumber("extra", tile.Extra);
+                }
                 w.WriteEndObject();
             }
 
@@ -869,7 +883,7 @@ public static class ProtocolJson
 
         w.WriteNumber("wakeRadius", content.WakeRadius);
         w.WriteNumber("noiseRadius", content.NoiseRadius);
-        if (Dusk.Line(state, content, UnitNames.Of(state, content)) is { } duskLine)
+        if (Dusk.Line(state, content) is { } duskLine)
         {
             // Derived (issue 765): the console's dusk line, the hearing radius with it, never read back.
             w.WriteString("duskLine", duskLine);
@@ -986,7 +1000,7 @@ public static class ProtocolJson
                 : ValueList<Coord>.Empty,
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Rime = e.TryGetProperty("rime", out var rime)
-                ? ValueList<RimeTile>.From(Array(rime, "rime").Select(r => new RimeTile(ReadCoord(r, "at"), ParseEnum<Side>(RequiredString(r, "side"), "side"), Math.Clamp(RequiredInt(r, "clock"), 1, 3))))
+                ? ValueList<RimeTile>.From(Array(rime, "rime").Select(r => new RimeTile(ReadCoord(r, "at"), ParseEnum<Side>(RequiredString(r, "side"), "side"), Math.Clamp(RequiredInt(r, "clock"), 1, 3)) { Extra = Math.Max(0, OptionalInt(r, "extra") ?? 0) }))
                 : ValueList<RimeTile>.Empty,
         };
     }
@@ -1297,7 +1311,7 @@ public static class ProtocolJson
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
             ArtsDeclared = e.TryGetProperty("artsDeclared", out var declared) ? ValueList<string>.From(declared.EnumerateArray().Select(a => a.GetString()!)) : null,
-        }.Sighted(content);
+        };
     }
 
     /// <summary>
@@ -1821,11 +1835,21 @@ public static class ProtocolJson
             w.WriteBoolean("critGrounds", true);
         }
 
+        if (side.Bite > 0)
+        {
+            w.WriteNumber("bite", side.Bite);
+        }
+
+        if (side.NeverDoubles)
+        {
+            w.WriteBoolean("neverDoubles", true);
+        }
+
         w.WriteEndObject();
     }
 
     private static SideForecast ReadSide(JsonElement e) => new(
-        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"));
+        RequiredBool(e, "strikes"), RequiredInt(e, "damage"), RequiredInt(e, "hitChance"), RequiredInt(e, "displayedHit"), RequiredInt(e, "critChance"), RequiredBool(e, "doubles"), OptionalInt(e, "strikesPerRound") ?? 1, e.TryGetProperty("critGrounds", out _) && RequiredBool(e, "critGrounds"), OptionalInt(e, "bite") ?? 0, e.TryGetProperty("neverDoubles", out _) && RequiredBool(e, "neverDoubles"));
 
     private static readonly string[] StatKeys = { "hp", "str", "mag", "dex", "spd", "lck", "def", "res", "cha" };
 

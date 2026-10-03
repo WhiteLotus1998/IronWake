@@ -1,0 +1,1763 @@
+# Issue 872 warm play: docs/samples/kestrow_water_rime.map, seed 805, with Rook in the Drover (Unbroken by the breath: header).
+# Run as: ironwake play docs/samples/kestrow_water_rime.map --seed 805 --content <copy> --script 2026-10-03-kestrow_water_rime_drover-805.script
+# The content copy is content/ with two edits only, since no sample places a promoted unit: units/cast.json gives rook "class": "drover",
+# and campaign.json's hire edda follows her to "drover" (a hire's class must be a cast member's). Rook is a level 1 Drover.
+
+Kestrow Water, the breath, seed 805, scheme TwoRollAverage
+Objective: Get the captain out through an exit by the end of turn 8. Captain Fenn must survive.
+  turn 2, enemy phase: a rider arrives at 1,11 (aggressive). A unit standing on 1,11 stops it.
+  turn 2, enemy phase: a brigand arrives at 7,11 (aggressive). A unit standing on 7,11 stops it.
+  turn 3, enemy phase: a rider arrives at 12,11 (aggressive). A unit standing on 12,11 stops it.
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^.AB...^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,9    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+breath (an unbroken drake's action, once a map): breathe rook <x,y beside it>; a line of 3 tiles chills everyone on it, either side, and freezes Water to Rime ice until the player's next phase ends
+> move rook 6,8
+Rook moves 6,9 -> 6,8
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......B.......
+ 9 ...^.A....^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+breath (an unbroken drake's action, once a map): breathe rook <x,y beside it>; a line of 3 tiles chills everyone on it, either side, and freezes Water to Rime ice until the player's next phase ends
+> breathe rook 6,7
+Rook's drake breathes rime from 6,8 over 6,7 6,6 6,5; the water freezes at 6,7 6,6 6,5; no one is caught
+  6,7 becomes Rime ice
+  6,6 becomes Rime ice
+  6,5 becomes Rime ice
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 ......B.......
+ 9 ...^.A....^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,9    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> move captain 6,6
+Alder Fenn moves 5,9 -> 6,6 via 5,8 6,8 6,7
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 ......B.......
+ 9 ...^......^...
+10 ....ECGD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              5,10   hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> move wren 6,7
+Wren moves 5,10 -> 6,7 via 5,9 5,8 6,8
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~C~~~~=~~
+ 8 ......B.......
+ 9 ...^......^...
+10 ....E.GD......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,10   hp 21/21  Plain
+C  wren             Wren L1 cadet              6,7    hp 20/20  Rime ice
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> move teodor 7,8
+Teodor moves 7,10 -> 7,8 via 7,9
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~C~~~~=~~
+ 8 ......BD......
+ 9 ...^......^...
+10 ....E.G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              4,10   hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              6,7    hp 20/20  Rime ice
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> move pell 5,8
+Pell moves 4,10 -> 5,8 via 4,9 4,8
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~C~~~~=~~
+ 8 .....EBD......
+ 9 ...^......^...
+10 ......G.......
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,10   hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              6,7    hp 20/20  Rime ice
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> move maud 6,9
+Maud moves 6,10 -> 6,9
+Kestrow Water, the breath  turn 1 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~C~~~~=~~
+ 8 .....EBD......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              6,7    hp 20/20  Rime ice
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as the next player phase ends, then holds 1 more round (deep rime))
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer 1 waits
+enemy: wait archer-2
+Archer 2 waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait shieldbearer-1
+Shieldbearer waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 ...........d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~C~~~~=~~
+ 8 .....EBD......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, asleep
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, asleep
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, asleep
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              6,7    hp 20/20  Rime ice
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move wren 5,4
+Wren moves 6,7 -> 5,4 via 6,6 6,5 6,4
+The bank group wakes (proximity)
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....C.....d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~A~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 .....EBD......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,6    hp 22/22  Rime ice  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move captain 6,4
+Alder Fenn moves 6,6 -> 6,4 via 6,5
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....CA....d..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 .....EBD......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          7,8    hp 21/21  Plain
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move teodor 6,5
+Teodor moves 7,8 -> 6,5 via 6,8 6,7 6,6
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....CA....d..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 .....EB.......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              5,8    hp 16/16  Plain
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 21/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move pell 6,6
+Pell moves 5,8 -> 6,6 via 6,8 6,7
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....CA....d..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~&~~~~=~~
+ 8 ......B.......
+ 9 ...^..G...^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,9    hp 17/17  Plain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 21/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move maud 6,7
+Maud moves 6,9 -> 6,7 via 6,8
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....CA....d..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ......B.......
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,7    hp 17/17  Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+B  rook             Rook L1 drover             6,8    hp 17/17  Plain
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 21/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> move rook 5,5
+Rook moves 6,8 -> 5,5 via 6,7 6,6 6,5
+Kestrow Water, the breath  turn 2 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^...c...e...
+ 2 ....a...b.....
+ 3 .....#...#..f.
+ 4 .....CA....d..
+ 5 ~~~~~BD~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           8,2    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           10,1   hp 17/17  Forest  group bridge, guard, asleep
+c  brigand-1        Brigand L2 reaver          6,1    hp 22/22  Plain  group bank, guard, awake
+f  brigand-2        Brigand L2 reaver          12,3   hp 22/22  Plain  group bridge, guard, asleep
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,7    hp 17/17  Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+B  rook             Rook L1 drover             5,5    hp 17/17  Water
+d  shieldbearer-1   Shieldbearer L2 bulwark    11,4   hp 24/24  Plain  group bridge, guard, asleep
+a  soldier-1        Soldier L2 pikeman         4,2    hp 20/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 21/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends, then holds 1 more round (deep rime))
+> threat captain
+Threat on Alder Fenn at 6,4 (Plain):
+  Archer 1 from 6,2 with Iron Bow (slot 1): acc 68% dmg 5 crit 0%; counter: none
+  Brigand 1 from 6,3 with Iron Axe (slot 1): acc 49% dmg 10 crit 0%; counter: acc 90% dmg 11 x2 crit 5%
+  Soldier from 6,3 with Iron Lance (slot 1): acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+  If all land: 23 against 22 hp
+  The bridge group is asleep, could strike here if woken: Shieldbearer at 11,4
+  Asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> threat wren
+Threat on Wren at 5,4 (Plain):
+  Archer 1 from 5,2 with Iron Bow (slot 1): acc 70% dmg 6 crit 0%; counter: none
+  Soldier from 4,4 with Iron Lance (slot 1): acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+  If all land: 15 against 20 hp
+> end
+Lethal if all land: Alder Fenn (Archer 1 for 5, Brigand 1 for 10, Soldier for 8, against 22 hp)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Rider 1 arrives at 1,11 with the chase group, aggressive
+Reinforcements arrive
+  Brigand 3 arrives at 7,11 with the chase group, aggressive
+enemy: move archer-1 6,3
+Archer 1 moves 8,2 -> 6,3 via 7,2 6,2
+enemy: attack archer-1 teodor
+Forecast Archer 1 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 1 attacks Teodor
+  Archer 1 hits Teodor for 5 (hp 16)
+  Archer 1 hp 17, Teodor hp 16
+The bridge group wakes (noise)
+enemy: move archer-2 7,2
+Archer 2 moves 10,1 -> 7,2 via 9,1 8,1 7,1
+enemy: wait archer-2
+Archer 2 waits
+enemy: move brigand-1 7,4
+Brigand 1 moves 6,1 -> 7,4 via 7,1 7,2 7,3
+enemy: attack brigand-1 captain
+Forecast Brigand 1 -> Alder Fenn: acc 49% dmg 10 crit 0%; counter: acc 90% dmg 11 x2 crit 5%
+Brigand 1 attacks Alder Fenn
+  Brigand 1 misses Alder Fenn
+  Alder Fenn hits Brigand 1 for 11 (hp 11)
+  Alder Fenn hits Brigand 1 for 11 (hp 0)
+  Brigand 1 hp 0, Alder Fenn hp 22
+Alder Fenn gains 35 exp (35)
+Brigand 1 falls at 7,4
+enemy: move brigand-2 9,4
+Brigand 2 moves 12,3 -> 9,4 via 11,3 10,3 10,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move brigand-3 6,8
+Brigand 3 moves 7,11 -> 6,8 via 7,10 7,9 7,8
+enemy: attack brigand-3 maud
+Forecast Brigand 3 -> Maud: acc 72% dmg 13 crit 0%; counter: acc 98% dmg 11 crit 3%
+Brigand 3 attacks Maud
+  Brigand 3 hits Maud for 13 (hp 4)
+  Maud hits Brigand 3 for 11 (hp 11)
+  Brigand 3 hp 11, Maud hp 4
+Maud gains 12 exp (12)
+enemy: move rider-1 7,11
+Rider 1 moves 1,11 -> 7,11 via 2,11 3,11 4,11 5,11 6,11
+enemy: wait rider-1
+Rider 1 waits
+enemy: move shieldbearer-1 7,4
+Shieldbearer moves 11,4 -> 7,4 via 10,4 9,4 8,4
+enemy: attack shieldbearer-1 captain
+Forecast Shieldbearer -> Alder Fenn: acc 58% dmg 7 crit 0%; counter: acc 94% dmg 5 x2 crit 5%
+Shieldbearer attacks Alder Fenn
+  Shieldbearer misses Alder Fenn
+  Alder Fenn misses Shieldbearer
+  Alder Fenn hits Shieldbearer for 5 (hp 19)
+  Shieldbearer hp 19, Alder Fenn hp 22
+Alder Fenn gains 12 exp (47)
+enemy: move soldier-1 4,4
+Soldier moves 4,2 -> 4,4 via 4,3
+enemy: attack soldier-1 wren
+Forecast Soldier -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 8 crit 3%
+Soldier attacks Wren
+  Soldier hits Wren for 9 (hp 11)
+  Wren hits Soldier for 8 (hp 12)
+  Soldier hp 12, Wren hp 11
+Wren gains 12 exp (12)
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+Kestrow Water, the breath  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e......
+ 3 .....#b..#....
+ 4 ....aCAd.f....
+ 5 ~~~~~BD~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ......h.......
+ 9 ...^......^...
+10 ..............
+11 .......g......
+
+b  archer-1         Archer L2 bowman           6,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          9,4    hp 22/22  Plain  group bridge, guard, awake
+h  brigand-3        Brigand L2 reaver          6,8    hp 11/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,7    hp 4/17   Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          7,11   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,5    hp 17/17  Water
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 19/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,4    hp 12/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 16/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends)
+> help
+Commands:
+  move <unit> <x,y>        Move a unit to a tile in its reach
+  move <unit> <x,y> via <x,y>  Move by way of a tile: the cheapest route to it, then on, within the unit's Mov
+  move <unit> <x,y> [via <x,y>] preview  The route the move would walk and the planks it would wear, without moving
+  attack <unit> <target> [slot|weapon] [art <id>]  Attack an enemy in range, with the weapon in a slot or named, declaring a technique by its id (the forecast prints first)
+  item <unit> <slot> [ally] Use the item in a slot; a healing spell names the ally
+  wait <unit>              End the unit's action
+  undo <unit>              Take back a unit's move before it acts, if the move was the last command and changed nothing but its tile (no charge)
+  canto <unit> <x,y|stay>  After acting, a unit with Move Again moves on what its move left, or stays
+  exit <unit>              On an Escape map, leave the board from an exit as the unit's action; the captain's exit ends the battle
+  recover <unit>           On a keepsakes map, take the weapon a fallen ally left on the unit's tile, as its action
+  open <unit> <x,y>        Open the chest on or beside the unit, as its action; what fits goes to its pack, the rest to the wagon
+  drop <unit>              On a ledge, bring the rock down as the action: each tile below takes 10 to anyone on it, and closes unless someone stands there
+  talk <unit> <target>     Beside the claimant who came back as a foe: the pick's talk turns them, the captain's spares them
+  shove <unit> <target>    On a shove map, push an adjacent ally one tile away, as the action
+  carry <unit> <ally> <x,y> <x,y>  On a carry map, a grown drake lifts an adjacent ally, flies to the first tile and sets it down on the second, as the rider's whole turn
+  breathe <unit> <x,y>     On a breath map, once a map, an unbroken drake breathes 3 tiles out through the adjacent tile, as the action: everyone on the line is chilled, Water freezes to Rime ice
+  order <press|rally|fall back>  Commander's Word, once a map, as the captain's action: allies within 2 + Cha / 4 of the captain; press +1 Mov to those not moved, rally heals 15 percent, fall back lets those who acted move 2
+  order <kind> preview [from <x,y>]  Who the order would reach from where the captain stands, or from a tile
+  fallback <unit> <x,y|stay>  After a fall back order, an ally who had acted moves up to 2, if it wakes no one
+  cover <unit> <ally>      On a cover map, take the first strike aimed at the ally beside it, as the action
+  watch <unit>             On an overwatch map, strike the first foe to end a move in the unit's ring, as the action
+  end                      End the player phase; the enemy phase plays out, each enemy attack printing its forecast first
+  recall <n>               Rewind to history state n, a player-phase state (spends a charge), printing what it undoes
+  recall list              Every state recall can return to, the command that made it, and what a rewind there gives back
+  recall                   List the state each player turn started at, and the charges left
+  forecast <unit> <target> [slot|weapon] [art <id>] [from <x,y>]  Show the forecast without attacking, from any tile the unit can reach
+  threat <unit> [from <x,y>]  What each enemy would strike it with next enemy phase, from where it stands or a tile it can reach, on the board as it stands now (a foe freed by a kill mid-phase is not counted)
+  reach <unit>             Show the board with the unit's reachable tiles marked
+  show <unit>              Show a unit's numbers
+  terrain [glyph|name]     What the ground does for a unit on it; with no name, every terrain on the board
+  about <item>             What a weapon, spell or item is: its numbers and one line on it
+  map                      Show the board
+  help                     This list
+At dusk no side strikes what it cannot see, and an enemy knows a unit its side sees or that stands within its hearing, the radius the dusk line prints
+Slots count from 1, as show lists them; a weapon may be named instead, by id or name (gust, iron bow)
+A scripted run ends with a summary of every rejected line; --strict stops at the first
+The captain, Alder Fenn (A), must exit from an exit tile (>). A unit that starts its turn on an exit may leave. Anyone still on the board is left behind.
+> move rook 4,5
+Rook moves 5,5 -> 4,5
+Kestrow Water, the breath  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e......
+ 3 .....#b..#....
+ 4 ....aCAd.f....
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ......h.......
+ 9 ...^......^...
+10 ..............
+11 .......g......
+
+b  archer-1         Archer L2 bowman           6,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          9,4    hp 22/22  Plain  group bridge, guard, awake
+h  brigand-3        Brigand L2 reaver          6,8    hp 11/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,7    hp 4/17   Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          7,11   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 19/24  Plain  group bridge, guard, awake
+a  soldier-1        Soldier L2 pikeman         4,4    hp 12/20  Plain  group bank, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 16/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends)
+> attack rook soldier-1
+Forecast Rook -> Soldier: acc 79% dmg 8 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll; counter: acc 56% dmg 11 crit 0%
+Rook attacks Soldier
+  Rook hits Soldier for 8 (hp 4)
+  Soldier misses Rook
+  The drake bites: 5 (Soldier hp 0)
+  Rook hp 17, Soldier hp 0
+Rook gains 35 exp (35)
+Soldier falls at 4,4
+Kestrow Water, the breath  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e......
+ 3 .....#b..#....
+ 4 .....CAd.f....
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ......h.......
+ 9 ...^......^...
+10 ..............
+11 .......g......
+
+b  archer-1         Archer L2 bowman           6,3    hp 17/17  Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          9,4    hp 22/22  Plain  group bridge, guard, awake
+h  brigand-3        Brigand L2 reaver          6,8    hp 11/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+G  maud             Maud L1 chaplain           6,7    hp 4/17   Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          7,11   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 19/24  Plain  group bridge, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 16/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends)
+> attack captain archer-1
+Forecast Alder Fenn -> Archer 1: acc 87% dmg 11 crit 4%; counter: none
+Alder Fenn attacks Archer 1
+  Alder Fenn hits Archer 1 for 11 (hp 6)
+  Alder Fenn hp 22, Archer 1 hp 6
+Alder Fenn gains 12 exp (59)
+Kestrow Water, the breath  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e......
+ 3 .....#b..#....
+ 4 .....CAd.f....
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ......h.......
+ 9 ...^......^...
+10 ..............
+11 .......g......
+
+b  archer-1         Archer L2 bowman           6,3    hp 6/17   Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          9,4    hp 22/22  Plain  group bridge, guard, awake
+h  brigand-3        Brigand L2 reaver          6,8    hp 11/22  Plain  group chase, aggressive
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,7    hp 4/17   Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          7,11   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 19/24  Plain  group bridge, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 16/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends)
+> move teodor 7,3
+ERROR: Teodor cannot move to 7,3: not within 4 movement from 6,5
+> attack teodor archer-2
+ERROR: Teodor cannot attack Archer 2 from 6,5
+> attack pell brigand-3
+Forecast Pell -> Brigand 3 with Cinder: acc 99% dmg 13 crit 3%; counter: none
+Pell attacks Brigand 3
+  Pell hits Brigand 3 for 13 (hp 0)
+  Pell hp 16, Brigand 3 hp 0
+Pell gains 35 exp (35)
+Brigand 3 falls at 6,8
+Kestrow Water, the breath  turn 3 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......e......
+ 3 .....#b..#....
+ 4 .....CAd.f....
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~G~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 .......g......
+
+b  archer-1         Archer L2 bowman           6,3    hp 6/17   Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           7,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          9,4    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain  done
+G  maud             Maud L1 chaplain           6,7    hp 4/17   Rime ice
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice  done
+g  rider-1          Rider L2 outrider          7,11   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water  done
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 19/24  Plain  group bridge, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 16/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 6,7 (thaws as player phase ends)
+> move maud 6,5
+ERROR: Maud cannot move to 6,5: occupied by an ally
+> item maud 2 maud
+ERROR: Maud at 6,7 is 0 tiles from Maud at 6,7; Salve reaches 1-1
+> threat maud
+Threat on Maud at 6,7 (Rime ice):
+  Rider 1 from 6,8 with Iron Lance (slot 1): acc 81% dmg 11 crit 0%; counter: acc 97% dmg 10 crit 2%
+  If all land: 11 against 4 hp
+> threat rook
+Threat on Rook at 4,5 (Water):
+  Archer 1 from 4,3 with Iron Bow (slot 1): acc 63% dmg 8 grounds 21%; counter: none
+  Archer 2 from 4,3 with Iron Bow (slot 1): acc 63% dmg 8 grounds 21%; counter: none
+  If all land: 8 against 17 hp
+> end
+Lethal if all land: Maud (Rider 1 for 11, against 4 hp)
+Lethal if all land: Wren (Archer 1 for 6, Archer 2 for 6, against 11 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Rider 2 arrives at 12,11 with the chase group, aggressive
+enemy: move archer-1 4,3
+Archer 1 moves 6,3 -> 4,3 via 6,2 5,2 4,2
+enemy: attack archer-1 rook
+Forecast Archer 1 -> Rook: acc 63% dmg 8 grounds 21%; counter: none
+Archer 1 attacks Rook
+  Archer 1 misses Rook
+  Archer 1 hp 6, Rook hp 17
+enemy: move archer-2 6,3
+Archer 2 moves 7,2 -> 6,3 via 6,2
+enemy: attack archer-2 teodor
+Forecast Archer 2 -> Teodor: acc 80% dmg 5 crit 3%; counter: none
+Archer 2 attacks Teodor
+  Archer 2 hits Teodor for 5 (hp 11)
+  Archer 2 hp 17, Teodor hp 11
+enemy: move brigand-2 7,2
+Brigand 2 moves 9,4 -> 7,2 via 8,4 8,3 8,2
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move rider-1 6,8
+Rider 1 moves 7,11 -> 6,8 via 7,10 7,9 7,8
+enemy: attack rider-1 maud
+Forecast Rider 1 -> Maud: acc 81% dmg 11 crit 0%; counter: acc 97% dmg 10 crit 2%
+Rider 1 attacks Maud
+  Rider 1 hits Maud for 11 (hp 0)
+  Rider 1 hp 20, Maud hp 0
+Maud falls at 6,7
+enemy: move rider-2 9,8
+Rider 2 moves 12,11 -> 9,8 via 12,10 12,9 12,8 11,8 10,8
+enemy: wait rider-2
+Rider 2 waits
+enemy: attack shieldbearer-1 captain
+Forecast Shieldbearer -> Alder Fenn: acc 58% dmg 7 crit 0%; counter: acc 94% dmg 5 x2 crit 5%
+Shieldbearer attacks Alder Fenn
+  Shieldbearer hits Alder Fenn for 7 (hp 15)
+  Alder Fenn hits Shieldbearer for 5 (hp 14)
+  Alder Fenn hits Shieldbearer for 5 (hp 9)
+  Shieldbearer hp 9, Alder Fenn hp 15
+Alder Fenn gains 12 exp (71)
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+  6,7 becomes Water
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......f......
+ 3 ....b#e..#....
+ 4 .....CAd......
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           4,3    hp 6/17   Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L1 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water
+d  shieldbearer-1   Shieldbearer L2 bulwark    7,4    hp 9/24   Plain  group bridge, guard, awake
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack captain shieldbearer-1
+Forecast Alder Fenn -> Shieldbearer: acc 94% dmg 5 x2 crit 5%; counter: acc 58% dmg 7 crit 0%
+Alder Fenn attacks Shieldbearer
+  Alder Fenn hits Shieldbearer for 5 (hp 4)
+  Shieldbearer misses Alder Fenn
+  Alder Fenn hits Shieldbearer for 5 (hp 0)
+  Alder Fenn hp 15, Shieldbearer hp 0
+Alder Fenn gains 35 exp (6)
+Alder Fenn reaches level 2: dex +1 lck +1 res +1
+Shieldbearer falls at 7,4
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .......f......
+ 3 ....b#e..#....
+ 4 .....CA.......
+ 5 ~~~~B~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           4,3    hp 6/17   Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,5    hp 17/17  Water
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> move rook 4,2
+Rook moves 4,5 -> 4,2 via 4,4 3,4 3,3 3,2
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 ....b#e..#....
+ 4 .....CA.......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+b  archer-1         Archer L2 bowman           4,3    hp 6/17   Plain  group bank, guard, awake
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack rook archer-1
+Forecast Rook -> Archer 1: acc 79% dmg 10 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll; counter: none
+Rook attacks Archer 1
+  Rook hits Archer 1 for 10 (hp 0)
+  Rook hp 17, Archer 1 hp 0
+Rook gains 35 exp (70)
+Archer 1 falls at 4,3
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 .....#e..#....
+ 4 .....CA.......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              5,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> threat captain
+Threat on Alder Fenn at 6,4 (Plain):
+  Archer 2 from 6,2 with Iron Bow (slot 1): acc 68% dmg 5 crit 0%; counter: none
+  Brigand 2 from 7,4 with Iron Axe (slot 1): acc 49% dmg 10 crit 0%; counter: acc 91% dmg 11 x2 crit 6%
+  If all land: 15 against 15 hp
+> move wren 7,4
+Wren moves 5,4 -> 7,4 via 6,4
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 .....#e..#....
+ 4 ......AC......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> wait wren
+Wren waits
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 .....#e..#....
+ 4 ......AC......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          6,8    hp 20/20  Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack pell rider-1
+Forecast Pell -> Rider 1 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Rider 1
+  Pell hits Rider 1 for 12 (hp 8)
+  Pell hp 16, Rider 1 hp 8
+Pell gains 12 exp (47)
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 .....#e..#....
+ 4 ......AC......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice  done
+g  rider-1          Rider L2 outrider          6,8    hp 8/20   Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> wait teodor
+Teodor waits
+Kestrow Water, the breath  turn 4 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B..f......
+ 3 .....#e..#....
+ 4 ......AC......
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ......g..i....
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,3    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,2    hp 22/22  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain  done
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice  done
+g  rider-1          Rider L2 outrider          6,8    hp 8/20   Plain  group chase, aggressive
+i  rider-2          Rider L2 outrider          9,8    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice  done
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> end
+Lethal if all land: Rook (Archer 2 for 8, Brigand 2 for 13, against 17 hp)
+Lethal if all land: Wren (Archer 2 for 6, Brigand 2 for 11, against 11 hp)
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: move archer-2 6,2
+Archer 2 moves 6,3 -> 6,2
+enemy: attack archer-2 rook
+Forecast Archer 2 -> Rook: acc 63% dmg 8 grounds 21%; counter: none
+Archer 2 attacks Rook
+  Archer 2 misses Rook
+  Archer 2 hp 17, Rook hp 17
+enemy: move brigand-2 7,3
+Brigand 2 moves 7,2 -> 7,3
+enemy: attack brigand-2 wren
+Forecast Brigand 2 -> Wren: acc 51% dmg 11 crit 0%; counter: acc 88% dmg 10 x2 crit 4%
+Brigand 2 attacks Wren
+  Brigand 2 misses Wren
+  Wren hits Brigand 2 for 10 (hp 12)
+  Wren hits Brigand 2 for 10 (hp 2)
+  Brigand 2 hp 2, Wren hp 11
+Wren gains 12 exp (24)
+enemy: move rider-1 11,7
+Rider 1 moves 6,8 -> 11,7 via 7,8 8,8 9,8 10,8 11,8
+enemy: wait rider-1
+Rider 1 waits
+enemy: move rider-2 11,4
+Rider 2 moves 9,8 -> 11,4 via 10,8 11,8 11,7 11,6 11,5
+enemy: wait rider-2
+Rider 2 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B.e.......
+ 3 .....#.f.#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,2    hp 17/17  Plain  group bridge, guard, awake
+f  brigand-2        Brigand L2 reaver          7,3    hp 2/22   Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack wren brigand-2
+Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+  Counter: lethal to Wren (11 against 11 hp)
+Wren attacks Brigand 2
+  Wren hits Brigand 2 for 10 (hp 0)
+  Wren hp 11, Brigand 2 hp 0
+Wren gains 35 exp (59)
+Brigand 2 falls at 7,3
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 ....B.e.......
+ 3 .....#...#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,2    hp 17/17  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             4,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> move rook 5,2
+Rook moves 4,2 -> 5,2
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .....Be.......
+ 3 .....#...#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,2    hp 17/17  Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack rook archer-2
+Forecast Rook -> Archer 2: acc 79% dmg 10 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll; counter: none
+Rook attacks Archer 2
+  Rook hits Archer 2 for 10 (hp 7)
+  The drake bites: 5 (Archer 2 hp 2)
+  Rook hp 17, Archer 2 hp 2
+Rook gains 12 exp (82)
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .....Be.......
+ 3 .....#...#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~E~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,2    hp 2/17   Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,6    hp 16/16  Rime ice
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> move pell 6,3
+Pell moves 6,6 -> 6,3 via 6,5 6,4
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .....Be.......
+ 3 .....#E..#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+e  archer-2         Archer L2 bowman           6,2    hp 2/17   Plain  group bridge, guard, awake
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> attack pell archer-2
+Forecast Pell -> Archer 2 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Archer 2
+  Pell hits Archer 2 for 12 (hp 0)
+  Pell hp 16, Archer 2 hp 0
+Pell gains 35 exp (82)
+Archer 2 falls at 6,2
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>>.....
+ 1 ..^.......^...
+ 2 .....B........
+ 3 .....#E..#....
+ 4 ......AC...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,4    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> move captain 6,0
+Alder Fenn moves 6,4 -> 6,0 via 6,3 6,2 6,1
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^.......^...
+ 2 .....B........
+ 3 .....#E..#....
+ 4 .......C...i..
+ 5 ~~~~~~D~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,5    hp 11/21  Rime ice
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> move wren 7,0
+ERROR: Wren has already acted this phase
+> move teodor 6,1
+Teodor moves 6,5 -> 6,1 via 6,4 6,3 6,2
+Kestrow Water, the breath  turn 5 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 .....B........
+ 3 .....#E..#....
+ 4 .......C...i..
+ 5 ~~~~~~&~~~~=~~
+ 6 ~~~~~~&~~~~=~~
+ 7 ~~~~~~~~~~~g~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain  done
+g  rider-1          Rider L2 outrider          11,7   hp 8/20   Road  group chase, aggressive
+i  rider-2          Rider L2 outrider          11,4   hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+C  wren             Wren L1 cadet              7,4    hp 11/20  Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+rime: 6,5 6,6 (thaws once no one stands on it)
+> threat captain
+Threat on Alder Fenn at 6,0 (Plain): no enemy can strike him next phase
+> threat teodor
+Threat on Teodor at 6,1 (Plain): no enemy can strike him next phase
+> end
+Lethal if all land: Wren (Rider 1 for 9, Rider 2 for 9, against 11 hp)
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+  6,5 becomes Water
+  6,6 becomes Water
+enemy: move rider-1 8,4
+Rider 1 moves 11,7 -> 8,4 via 11,6 11,5 11,4 10,4 9,4
+enemy: attack rider-1 wren
+Forecast Rider 1 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 9 crit 3%
+Rider 1 attacks Wren
+  Rider 1 hits Wren for 9 (hp 2)
+  Wren hits Rider 1 for 9 (hp 0)
+  Rider 1 hp 0, Wren hp 2
+Wren gains 35 exp (94)
+Rider 1 falls at 8,4
+enemy: move rider-2 8,4
+Rider 2 moves 11,4 -> 8,4 via 10,4 9,4
+enemy: attack rider-2 wren
+Forecast Rider 2 -> Wren: acc 63% dmg 9 crit 0%; counter: acc 85% dmg 9 crit 3%
+Rider 2 attacks Wren
+  Rider 2 hits Wren for 9 (hp 0)
+  Rider 2 hp 20, Wren hp 0
+Wren falls at 7,4
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 .....B........
+ 3 .....#E..#....
+ 4 ........i.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain
+i  rider-2          Rider L2 outrider          8,4    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             5,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> forecast rook rider-2 from 8,3
+Forecast Rook -> Rider 2 from 8,3 (Plain): acc 79% dmg 9 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll; counter: acc 56% dmg 11 crit 0%
+> move rook 8,3
+Rook moves 5,2 -> 8,3 via 6,2 7,2 8,2
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 ..............
+ 3 .....#E.B#....
+ 4 ........i.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain
+i  rider-2          Rider L2 outrider          8,4    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> attack rook rider-2
+Forecast Rook -> Rider 2: acc 79% dmg 9 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll; counter: acc 56% dmg 11 crit 0%
+Rook attacks Rider 2
+  Rook misses Rider 2
+  Rider 2 hits Rook for 11 (hp 6)
+  Rook hp 6, Rider 2 hp 20
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 ..............
+ 3 .....#E.B#....
+ 4 ........i.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              6,3    hp 16/16  Plain
+i  rider-2          Rider L2 outrider          8,4    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 6/17   Plain  done
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> move pell 8,2
+Pell moves 6,3 -> 8,2 via 6,2 7,2
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 ........E.....
+ 3 .....#..B#....
+ 4 ........i.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              8,2    hp 16/16  Plain
+i  rider-2          Rider L2 outrider          8,4    hp 20/20  Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 6/17   Plain  done
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> attack pell rider-2
+Forecast Pell -> Rider 2 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Rider 2
+  Pell hits Rider 2 for 12 (hp 8)
+  Pell hp 16, Rider 2 hp 8
+Pell gains 12 exp (94)
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^...D...^...
+ 2 ........E.....
+ 3 .....#..B#....
+ 4 ........i.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              8,2    hp 16/16  Plain  done
+i  rider-2          Rider L2 outrider          8,4    hp 8/20   Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 6/17   Plain  done
+D  teodor           Teodor L1 pikeman          6,1    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> move teodor 7,4
+Teodor moves 6,1 -> 7,4 via 7,1 7,2 7,3
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#..B#....
+ 4 .......Di.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              8,2    hp 16/16  Plain  done
+i  rider-2          Rider L2 outrider          8,4    hp 8/20   Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 6/17   Plain  done
+D  teodor           Teodor L1 pikeman          7,4    hp 11/21  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> attack teodor rider-2
+Forecast Teodor -> Rider 2: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
+Teodor attacks Rider 2
+  Teodor misses Rider 2
+  Rider 2 hits Teodor for 8 (hp 3)
+  Teodor hp 3, Rider 2 hp 8
+Kestrow Water, the breath  turn 6 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#..B#....
+ 4 .......Di.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              8,2    hp 16/16  Plain  done
+i  rider-2          Rider L2 outrider          8,4    hp 8/20   Plain  group chase, aggressive
+B  rook             Rook L1 drover             8,3    hp 6/17   Plain  done
+D  teodor           Teodor L1 pikeman          7,4    hp 3/21   Plain  done
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> end
+Lethal if all land: Rook (Rider 2 for 11, against 6 hp)
+Lethal if all land: Teodor (Rider 2 for 8, against 3 hp)
+-- Player phase ends, turn 6 --
+-- Enemy phase, turn 6 --
+enemy: attack rider-2 rook
+Forecast Rider 2 -> Rook: acc 56% dmg 11 crit 0%; counter: acc 79% dmg 9 x1, never doubles, crit 3%; drake bites 5 if a strike hits and both stand, no roll
+Rider 2 attacks Rook
+  Rider 2 hits Rook for 11 (hp 0)
+  Rider 2 hp 8, Rook hp 0
+Rook falls at 8,3
+enemy: end
+-- Enemy phase ends, turn 6 --
+-- Player phase, turn 7 --
+Kestrow Water, the breath  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#...#....
+ 4 .......Di.....
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L1 adept              8,2    hp 16/16  Plain
+i  rider-2          Rider L2 outrider          8,4    hp 8/20   Plain  group chase, aggressive
+D  teodor           Teodor L1 pikeman          7,4    hp 3/21   Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> attack pell rider-2
+Forecast Pell -> Rider 2 with Cinder: acc 99% dmg 12 crit 2%; counter: none
+Pell attacks Rider 2
+  Pell hits Rider 2 for 12 (hp 0)
+  Pell hp 16, Rider 2 hp 0
+Pell gains 35 exp (29)
+Pell reaches level 2: hp +1 res +1
+Rider 2 falls at 8,4
+Kestrow Water, the breath  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#...#....
+ 4 .......D......
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L2 adept              8,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          7,4    hp 3/21   Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> move teodor 7,0
+Teodor moves 7,4 -> 7,0 via 7,3 7,2 7,1
+Kestrow Water, the breath  turn 7 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>AD>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#...#....
+ 4 ..............
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L2 adept              8,2    hp 17/17  Plain  done
+D  teodor           Teodor L1 pikeman          7,0    hp 3/21   Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> end
+-- Player phase ends, turn 7 --
+-- Enemy phase, turn 7 --
+enemy: end
+-- Enemy phase ends, turn 7 --
+-- Player phase, turn 8 --
+Kestrow Water, the breath  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>AD>.....
+ 1 ..^.......^...
+ 2 ........E.....
+ 3 .....#...#....
+ 4 ..............
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L2 adept              8,2    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          7,0    hp 3/21   Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> move pell 8,0
+Pell moves 8,2 -> 8,0 via 8,1
+Kestrow Water, the breath  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>ADE.....
+ 1 ..^.......^...
+ 2 ..............
+ 3 .....#...#....
+ 4 ..............
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L2 adept              8,0    hp 17/17  Plain
+D  teodor           Teodor L1 pikeman          7,0    hp 3/21   Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+> exit pell
+ERROR: Pell cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on
+> exit teodor
+Teodor leaves through the exit at 7,0
+Kestrow Water, the breath  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>A>E.....
+ 1 ..^.......^...
+ 2 ..............
+ 3 .....#...#....
+ 4 ..............
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+A  captain          Alder Fenn L2 cadet        6,0    hp 15/22  Plain  captain
+E  pell             Pell L2 adept              8,0    hp 17/17  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor
+> exit captain
+Alder Fenn leaves through the exit at 6,0
+Pell is left behind at 8,0
+Kestrow Water, the breath  turn 8 of 8  player phase  escape  recall 3
+   01234567890123
+ 0 ...>>>>>E.....
+ 1 ..^.......^...
+ 2 ..............
+ 3 .....#...#....
+ 4 ..............
+ 5 ~~~~~~~~~~~=~~
+ 6 ~~~~~~~~~~~=~~
+ 7 ~~~~~~~~~~~=~~
+ 8 ..............
+ 9 ...^......^...
+10 ..............
+11 ..............
+
+E  pell             Pell L2 adept              8,0    hp 17/17  Plain
+exits (>): 3,0 4,0 5,0 6,0 7,0 8,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
+escaped: teodor captain
+Battle won: escape; only recall is left
+Rejected 6 of 64 commands:
+  line 22: move teodor 7,3: Teodor cannot move to 7,3: not within 4 movement from 6,5
+  line 23: attack teodor archer-2: Teodor cannot attack Archer 2 from 6,5
+  line 25: move maud 6,5: Maud cannot move to 6,5: occupied by an ally
+  line 26: item maud 2 maud: Maud at 6,7 is 0 tiles from Maud at 6,7; Salve reaches 1-1
+  line 45: move wren 7,0: Wren has already acted this phase
+  line 62: exit pell: Pell cannot exit: she moved this turn; a unit exits without moving, from an exit it began its turn on
+Battle won: escape
+Escaped: Teodor, Alder Fenn; left behind: Pell; fell: Maud, Rook, Wren

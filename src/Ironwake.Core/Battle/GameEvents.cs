@@ -8,9 +8,13 @@ public abstract record GameEvent;
 
 public sealed record UnitMoved(string UnitId, Coord From, Coord To, ValueList<Coord> Path) : GameEvent;
 
-/// <summary>A combat, strike by strike, with both sides' HP when it ended.</summary>
+/// <summary>A combat, strike by strike, with both sides' HP when it ended, after a drake's <see cref="Bite"/> when one bit (issue 872).</summary>
 public sealed record CombatFought(
-    string AttackerId, string TargetId, int Turn, Side Phase, ValueList<StrikeEvent> Strikes, int AttackerHpAfter, int TargetHpAfter) : GameEvent;
+    string AttackerId, string TargetId, int Turn, Side Phase, ValueList<StrikeEvent> Strikes, int AttackerHpAfter, int TargetHpAfter) : GameEvent
+{
+    /// <summary>The drake's bite after the exchange (issue 872, <see cref="CombatResult.Bite"/>), or null when none bit.</summary>
+    public BiteEvent? Bite { get; init; }
+}
 
 /// <summary>A unit's move was taken back (issue 676): it stood at <paramref name="From"/> and is back on <paramref name="To"/>, its start tile, unmoved.</summary>
 public sealed record MoveUndone(string UnitId, Coord From, Coord To) : GameEvent;

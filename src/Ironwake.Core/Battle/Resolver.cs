@@ -589,7 +589,7 @@ public static class Resolver
             new CombatContext(state.Turn, state.Phase),
             new KeyedRng(state.Seed),
             state.Scheme);
-        events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp));
+        events.Add(new CombatFought(unit.Id, target.Id, state.Turn, state.Phase, result.Strikes, result.AttackerHp, result.DefenderHp) { Bite = result.Bite });
 
         var attackerAfter = SpendDurability(unit with { Hp = result.AttackerHp, Moved = true, Acted = true }, result.Strikes, content, events, art?.Cost ?? 0);
         if (art is { PerMap: not null })
@@ -1278,7 +1278,8 @@ public static class Resolver
     /// Issue 805's carry: a rider with a grown drake, unmoved and not acted, lifts an adjacent ally, flies
     /// to <see cref="Carry.To"/> on its own Move with the ally lifted, and sets the ally down beside it
     /// (<see cref="DrakeCarry"/>). The rider's whole turn. The ally lands marked as shoved, and as the
-    /// map's setting says: done for the phase, free, or moved and unable to strike.
+    /// map's setting says: done for the phase, free, or moved and unable to strike. A rider holding the
+    /// long carry (issue 872, <see cref="AbilityRules.LongCarry"/>) keeps a Canto of the Move the flight left.
     /// </summary>
     private static (BattleState, Rejection?) ApplyCarry(BattleState state, GameContent content, Carry carry, List<GameEvent> events)
     {
@@ -1299,7 +1300,8 @@ public static class Resolver
         var entry = lifted.ReachOf(rider, content).EntryAt(carry.To)!;
         events.Add(new UnitMoved(rider.Id, rider.At, carry.To, entry.Path));
         events.Add(new Carried(rider.Id, ally.Id, rider.At, carry.To, ally.At, carry.SetDown, setting));
-        var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, Canto = null, Braced = false });
+        int? canto = AbilityRules.LongCarry(content.AbilitiesOf(rider.Unit), rider.Unit) ? lifted.ReachOf(rider, content).Mov - entry.Cost : null;
+        var next = state.WithUnit(rider with { At = carry.To, Moved = true, Acted = true, Canto = canto, Braced = false });
         var landed = ally with
         {
             At = carry.SetDown,

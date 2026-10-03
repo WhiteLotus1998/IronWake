@@ -205,7 +205,7 @@ public class SideMapTests
     }
 
     [Fact]
-    public void RooksFirstQuestIsTheChapterRollASeizeThatPaysMaterialAndOpensTheScout()
+    public void RooksFirstQuestIsTheChapterRollASeizeThatPaysMaterialAndOpensTheDrover()
     {
         var quest = Content.Campaign.Quest("rook_1")!;
         var map = Side(quest.MapId);
@@ -214,7 +214,7 @@ public class SideMapTests
         Assert.Null(quest.Pays);
         Assert.Null(CampaignRecord.QuestMapRefusal(map));
         Assert.Equal(WinCondition.Seize, map.Win);
-        Assert.Equal("rook_1", Content.Class("scout").UnlockedBy);
+        Assert.Equal("rook_1", Content.Class("drover").UnlockedBy);
         Assert.NotEmpty(quest.Before);
         Assert.NotEmpty(quest.After);
     }

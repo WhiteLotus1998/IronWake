@@ -1282,24 +1282,6 @@ public static class ContentLoader
             case "brace":
                 RequireOnly(entry, effect, "effect", "kind");
                 return new BraceEffect();
-            case "sight":
-                RequireOnly(entry, effect, "effect", "kind", "tiles");
-                var sight = new SightEffect(effect.Int("tiles"));
-                if (sight.Tiles < 1)
-                {
-                    throw entry.Error("effect.tiles", "must be at least 1");
-                }
-
-                return sight;
-            case "headcount":
-                RequireOnly(entry, effect, "effect", "kind", "radius");
-                var headcount = new HeadcountEffect(effect.Int("radius"));
-                if (headcount.Radius < 1)
-                {
-                    throw entry.Error("effect.radius", "must be at least 1");
-                }
-
-                return headcount;
             case "range":
                 RequireOnly(entry, effect, "effect", "kind", "weapon", "heals", "range");
                 var heals = effect.BoolOr("heals", false);
@@ -1381,8 +1363,34 @@ public static class ContentLoader
                 }
 
                 return opening;
+            case "bite":
+                RequireOnly(entry, effect, "effect", "kind", "halfGrown", "grown");
+                var bite = new BiteEffect(effect.Int("halfGrown"), effect.Int("grown"));
+                if (bite.HalfGrown < 1 || bite.Grown < 1)
+                {
+                    throw entry.Error(bite.HalfGrown < 1 ? "effect.halfGrown" : "effect.grown", "must be at least 1");
+                }
+
+                if (bite.Grown < bite.HalfGrown)
+                {
+                    throw entry.Error("effect.grown", $"must be at least halfGrown ({bite.HalfGrown}): a bite never shrinks as the drake grows");
+                }
+
+                return bite;
+            case "long_carry":
+                RequireOnly(entry, effect, "effect", "kind");
+                return new LongCarryEffect();
+            case "deep_rime":
+                RequireOnly(entry, effect, "effect", "kind", "rounds");
+                var deep = new DeepRimeEffect(effect.Int("rounds"));
+                if (deep.Rounds < 1)
+                {
+                    throw entry.Error("effect.rounds", "must be at least 1");
+                }
+
+                return deep;
             default:
-                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, sight, headcount, range, killheal, beside, aura, footing or opening");
+                throw entry.Error("effect.kind", $"unknown kind '{kind}'; expected stats, combat, art, heal_art, canto, mending, brace, range, killheal, beside, aura, footing, opening, bite, long_carry or deep_rime");
         }
     }
 
@@ -2058,6 +2066,7 @@ public static class ContentLoader
                 Unique = node.OptionalString("unique"),
                 UnlockedBy = node.OptionalString("unlockedBy"),
                 Loses = node.Has("loses") ? node.Enum<SidegradeMeasure>("loses") : null,
+                SingleStrike = node.BoolOr("singleStrike", false),
             });
         }
 

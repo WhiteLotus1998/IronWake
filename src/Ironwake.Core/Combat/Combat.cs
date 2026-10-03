@@ -28,9 +28,12 @@ public static class Combat
 
     public static int AttackSpeed(Combatant unit) => unit.Stats.Spd - Burden(unit);
 
-    /// <summary>Attack speed at least <see cref="DoubleThreshold"/> over the target's; never for a side the pair rule holds (<see cref="Combatant.PairHeld"/>) or one striking with a single-strike art (<see cref="Combatant.SingleStrike"/>).</summary>
+    /// <summary>
+    /// Attack speed at least <see cref="DoubleThreshold"/> over the target's; never for a side the pair rule holds (<see cref="Combatant.PairHeld"/>),
+    /// one striking with a single-strike art (<see cref="Combatant.SingleStrike"/>), or one in a single-strike class (<see cref="UnitClass.SingleStrike"/>, issue 872), striking or countering.
+    /// </summary>
     public static bool Doubles(Combatant attacker, Combatant target) =>
-        !attacker.PairHeld && !attacker.SingleStrike && AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
+        !attacker.PairHeld && !attacker.SingleStrike && !attacker.Class.SingleStrike && AttackSpeed(attacker) >= AttackSpeed(target) + DoubleThreshold;
 
     /// <summary>The weapon's Mt as this side fights with it: the content number, less 5 (floored at zero) when the weapon is broken.</summary>
     public static int Mt(Combatant attacker)
@@ -187,11 +190,18 @@ public static class Combat
             throw new ArgumentException($"{attacker.Id} cannot strike at distance {distance}", nameof(distance));
         }
 
-        var defenderSide = defender.CanStrike(distance) ? ForSide(defender, attacker, scheme) : SideForecast.None;
-        return new CombatForecast(ForSide(attacker, defender, scheme), defenderSide, scheme);
+        var defenderSide = defender.CanStrike(distance) ? ForSide(defender, attacker, distance, scheme) : SideForecast.None;
+        return new CombatForecast(ForSide(attacker, defender, distance, scheme), defenderSide, scheme);
     }
 
-    private static SideForecast ForSide(Combatant striker, Combatant target, RollScheme scheme)
+    /// <summary>
+    /// What <paramref name="striker"/>'s drake bites for at <paramref name="distance"/>
+    /// (issue 872, <see cref="BiteEffect"/>): its bite at its drake's stage when adjacent, else 0.
+    /// </summary>
+    public static int Bite(Combatant striker, int distance) =>
+        distance == 1 ? AbilityRules.Bite(striker.Abilities, striker.Unit) : 0;
+
+    private static SideForecast ForSide(Combatant striker, Combatant target, int distance, RollScheme scheme)
     {
         var hit = HitChance(striker, target);
         return new SideForecast(
@@ -202,7 +212,9 @@ public static class Combat
             CritChance: CritChance(striker, target),
             Doubles: Doubles(striker, target),
             StrikesPerRound: Armed(striker).Type.StrikesPerRound(),
-            CritGrounds: Armed(striker).GroundsAgainst(target.Movement));
+            CritGrounds: Armed(striker).GroundsAgainst(target.Movement),
+            Bite: Bite(striker, distance),
+            NeverDoubles: striker.Class.SingleStrike);
     }
 
     private static Weapon Armed(Combatant unit) =>
