@@ -101,6 +101,34 @@ public class SideMapCliTests
     /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp
     /// from 12,5, the one exit tile the chase cannot reach.
     /// </summary>
+    /// <summary>
+    /// Code's warm play of The Old Watch (issue 635 slice 7, seed 896): the Family Lance passes
+    /// count 10 on turn 3 and the card says the rust holds; both Recalls are spent; turn 9 ends
+    /// with the Sworn Captain at 2, Wren falls on the last enemy phase, and the side map is lost.
+    /// </summary>
+    [Fact]
+    public void TheJournaledOldWatchPlayIsLostByTwoHitPointsAndWrenIsFallenForGood()
+    {
+        var script = Transcript("2026-10-03-the_old_watch-896.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-watch-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_old_watch-896.saves", "watch.json")), Path.Combine(saves, "watch.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "watch", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("The rust holds; it waits on Teodor.", output);
+            Assert.Contains("Lost because turn 9 ended and the boss still stands.\n", output);
+            Assert.Contains("> leave\nSide map teodor_1 is lost: turn 9 passed; it opens again after the next map; fallen for good: Wren\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     [Fact]
     public void TheJournaledBurnedSchoolPlayEscapesWithTheGust()
     {

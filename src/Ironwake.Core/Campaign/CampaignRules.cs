@@ -119,6 +119,13 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     /// <summary>The signature item a win puts in the member's pack at full uses (part 2 only), or null for none.</summary>
     public string? Pays { get; init; }
 
+    /// <summary>
+    /// The gated heirloom a win opens (part 1 only; issue 635, round 266): the member's own, whose
+    /// last stage is held until this quest is won (<see cref="HeirloomLadder.Held"/>,
+    /// <see cref="Heirloom.OpenGate"/>), or null for none.
+    /// </summary>
+    public string? Wakes { get; init; }
+
     /// <summary>The common material a win puts in the company's stores (issue 647); 0 for none.</summary>
     public int Common { get; init; }
 

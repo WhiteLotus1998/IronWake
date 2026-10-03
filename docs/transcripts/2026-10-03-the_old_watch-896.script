@@ -1,0 +1,55 @@
+quest teodor_1 wren
+move teodor 7,4
+attack teodor soldier-1 family_lance art long_thrust
+move wren 7,5
+wait wren
+end
+move teodor 7,6
+item teodor 3
+move wren 7,4
+attack wren sworn_captain-1
+end
+move wren 7,5
+item wren 2
+move teodor 7,4
+attack teodor soldier-1 family_lance art long_thrust
+end
+attack wren brigand-1
+attack teodor brigand-2 family_lance art long_thrust
+end
+show teodor
+move teodor 8,7
+item teodor 3
+move wren 6,7
+item wren 2
+end
+attack teodor soldier-2
+move wren 7,4
+wait wren
+end
+move wren 7,6
+item wren 2
+move teodor 7,4
+item teodor 3
+end
+recall 76
+item wren 2
+move teodor 7,5
+attack teodor sworn_captain-1 family_lance art long_thrust
+end
+move wren 7,2
+attack wren archer-1
+move teodor 7,3
+wait teodor
+end
+move teodor 8,1
+attack teodor sworn_captain-1 family_lance art long_thrust
+move wren 7,1
+attack wren sworn_captain-1 art heavy_cut
+recall 91
+move wren 7,1
+attack wren sworn_captain-1 art heavy_cut
+move teodor 8,1
+attack teodor sworn_captain-1 family_lance art long_thrust
+end
+leave

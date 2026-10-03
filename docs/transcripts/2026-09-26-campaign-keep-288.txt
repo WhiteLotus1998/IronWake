@@ -3,7 +3,7 @@ Campaign, seed 288, difficulty Captain, permadeath on, scheme TwoRollAverage, 2 
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
@@ -1638,7 +1638,7 @@ Raid on Ironwake won: rout; reward 1000, the purse holds 1500; nobody fell
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 35; 1: Iron Sword 39/40 (repair 10), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 94; 1: Iron Sword 32/40 (repair 80), 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 82; 1: Iron Bow 36/40 (repair 40), 2: Field Dressing 3/3
   Pell: Adept L1, EXP 82; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 12; 1: Iron Lance 38/40 (repair 20)
@@ -2070,7 +2070,7 @@ Brigand 2 waits
 enemy: move soldier-1 10,4
 Soldier 1 moves 6,4 -> 10,4 via 7,4 8,4 9,4
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter with Iron Lance: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 hits Teodor for 8 (hp 13)
   Teodor hits Soldier 1 for 10 (hp 10)
@@ -2333,7 +2333,7 @@ Archer 2 waits
 enemy: move brigand-2 10,4
 Brigand 2 moves 7,3 -> 10,4 via 8,3 9,3 10,3
 enemy: attack brigand-2 teodor
-Forecast Brigand 2 -> Teodor: acc 63% dmg 10 crit 0%; counter: acc 80% dmg 12 crit 2%
+Forecast Brigand 2 -> Teodor: acc 63% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 12 crit 2%
 Brigand 2 attacks Teodor
   Brigand 2 hits Teodor for 10 (hp 6)
   Teodor hits Brigand 2 for 12 (hp 10)
@@ -4309,7 +4309,7 @@ Archer 3 attacks Teodor
 enemy: move brigand-5 10,3
 Brigand 5 moves 7,3 -> 10,3 via 8,3 9,3
 enemy: attack brigand-5 teodor
-Forecast Brigand 5 -> Teodor: acc 63% dmg 10 crit 0%; counter: acc 80% dmg 12 crit 2%
+Forecast Brigand 5 -> Teodor: acc 63% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 12 crit 2%
 Brigand 5 attacks Teodor
   Brigand 5 hits Teodor for 10 (hp 6)
   Teodor hits Brigand 5 for 12 (hp 10)

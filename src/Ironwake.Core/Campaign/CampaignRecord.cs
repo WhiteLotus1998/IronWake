@@ -424,7 +424,27 @@ public sealed record CampaignRecord(
     /// later (issue 632): the roster a campaign opening on that map starts with.
     /// </summary>
     private static ValueList<Unit> ArrivedBefore(GameContent content, int index) =>
-        ValueList<Unit>.From(content.Cast.Where(u => content.Campaign.ArrivalIndex(u.Id) < index));
+        ValueList<Unit>.From(content.Cast.Where(u => content.Campaign.ArrivalIndex(u.Id) < index).Select(u => Kitted(u, content)));
+
+    /// <summary>
+    /// <paramref name="unit"/> as the campaign first fields them (issue 635, round 266): every
+    /// heirloom bound to them (<see cref="Weapon.Heirloom"/>) at full uses after their cast pack, so
+    /// the cast's own weapon stays in front and the heirloom is swung only by choice. The cast file
+    /// is unchanged, so a battle outside the campaign carries no heirloom.
+    /// </summary>
+    public static Unit Kitted(Unit unit, GameContent content)
+    {
+        var inventory = unit.Inventory;
+        foreach (var heirloom in content.Weapons.Values.Where(w => w.Heirloom is not null && w.BoundTo == unit.Id).OrderBy(w => w.Id, StringComparer.Ordinal))
+        {
+            if (!inventory.IsFull && !inventory.Items.Any(s => s.ItemId == heirloom.Id))
+            {
+                inventory = inventory.Add(new ItemStack(heirloom.Id, heirloom.Durability));
+            }
+        }
+
+        return unit with { Inventory = inventory };
+    }
 
     /// <summary>
     /// The roster with the next map's arrivals and joiners joined (issues 632 and 763, DESIGN section 14),
@@ -440,7 +460,7 @@ public sealed record CampaignRecord(
         }
 
         var level = JoinLevel(content);
-        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).Select(u => u.ScaledTo(level, content.Class(u.ClassId))).ToList();
+        var arrivals = Arriving(content).Take(Room(content)).Select(content.Unit).Select(u => Kitted(u, content).ScaledTo(level, content.Class(u.ClassId))).ToList();
         var order = content.Cast.Select(u => u.Id).ToList();
         return ValueList<Unit>.From(Roster.Concat(arrivals).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at));
     }
@@ -1289,6 +1309,18 @@ public sealed record CampaignRecord(
         {
             roster[at] = roster[at] with { Inventory = roster[at].Inventory.Add(new ItemStack(item, content.Weapon(item).Durability)) };
             paid = $"; {quest.MemberId} receives {content.ItemName(item)}";
+        }
+
+        if (won && quest.Wakes is { } heirloom && roster.FindIndex(u => u.Id == quest.MemberId) is var bearer and >= 0
+            && roster[bearer].Inventory.Items.ToList().FindIndex(s => s.ItemId == heirloom) is var slot and >= 0)
+        {
+            var weapon = content.Weapon(heirloom);
+            var before = roster[bearer].Inventory.Items[slot];
+            var opened = Heirloom.OpenGate(weapon, before);
+            roster[bearer] = roster[bearer] with { Inventory = roster[bearer].Inventory.Replace(slot, opened) };
+            paid += opened.Stage > before.Stage
+                ? $"; {content.ItemName(heirloom)} wakes in {content.Unit(quest.MemberId).Name}'s hands"
+                : $"; {content.ItemName(heirloom)} will wake in {content.Unit(quest.MemberId).Name}'s hands";
         }
 
         if (won && quest.Promotes is { } classId && roster.FindIndex(u => u.Id == quest.MemberId) is var promoted and >= 0)

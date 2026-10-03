@@ -508,6 +508,21 @@ public static class ContentLoader
                 }
             }
 
+            string? wakes = null;
+            if (node.Has("wakes"))
+            {
+                wakes = node.String("wakes");
+                if (part != 1)
+                {
+                    throw node.Error("wakes", "only a quest 1 wakes an heirloom");
+                }
+
+                if (!weapons.TryGetValue(wakes, out var heirloom) || heirloom.BoundTo != member || heirloom.Heirloom is not { Held: not null })
+                {
+                    throw node.Error("wakes", $"'{wakes}' must be a gated heirloom (heirloom.held) bound to '{member}'");
+                }
+            }
+
             var common = node.IntOr("common", 0);
             var rare = node.IntOr("rare", 0);
             if (common < 0 || rare < 0)
@@ -537,6 +552,7 @@ public static class ContentLoader
                 Before = Card(node, "before"),
                 After = Card(node, "after"),
                 Pays = pays,
+                Wakes = wakes,
                 Common = common,
                 Rare = rare,
                 OpensAfter = opensAfter,
@@ -1386,7 +1402,13 @@ public static class ContentLoader
             turns.Add(new WeaponStage(id, mt, hit, crit, wt, at, Description(stage)));
         }
 
-        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns));
+        var held = node.OptionalString("held");
+        if (held is not null && string.IsNullOrWhiteSpace(held))
+        {
+            throw weapon.Error("heirloom.held", "must be a line, or left out");
+        }
+
+        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns)) { Held = held };
     }
 
     private static string Description(EntryNode node)

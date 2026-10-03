@@ -27,6 +27,12 @@ public readonly record struct ItemStack(string ItemId, int Uses)
     /// <summary>An heirloom's stage: 0 is its first, n is the ladder's nth turn. 0 for any other stack.</summary>
     public int Stage { get; init; }
 
+    /// <summary>
+    /// Whether a won quest has opened a gated heirloom's last stage (issue 635, round 266;
+    /// <see cref="HeirloomLadder.Held"/>). False for any other stack.
+    /// </summary>
+    public bool GateOpen { get; init; }
+
     /// <summary>The Mt the forge has added to this weapon (issue 647; <see cref="Forge"/>), 0 for an unrefined stack.</summary>
     public int RefineMt { get; init; }
 

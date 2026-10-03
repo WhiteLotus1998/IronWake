@@ -67,7 +67,7 @@ public class SideMapTests
         var won = harrow with { QuestsWon = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4)) };
 
         Assert.Equal(5, won.MapIndex);
-        Assert.Equal(new[] { "maud_2" }, won.QuestsOffered(Content).Select(q => q.Id));
+        Assert.Equal(new[] { "maud_2", "teodor_1" }, won.QuestsOffered(Content).Select(q => q.Id));
     }
 
     [Fact]
@@ -139,7 +139,7 @@ public class SideMapTests
     {
         var record = At("ironwake_raid");
         var first = Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, Content)).ToList();
-        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("teodor_1", "teodor", 1)) } };
+        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("ottilie_1", "ottilie", 1)) } };
 
         Assert.Equal(first, Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)));
         Assert.Equal(first.Count + 1, appended.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)).Distinct().Count());
@@ -159,6 +159,15 @@ public class SideMapTests
     public void TheFirstShrineIsCanonical()
     {
         var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_first_shrine.map");
+        var text = File.ReadAllText(path).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
+    }
+
+    [Fact]
+    public void TheOldWatchIsCanonical()
+    {
+        var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_old_watch.map");
         var text = File.ReadAllText(path).ReplaceLineEndings("\n");
 
         Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
@@ -222,7 +231,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));
