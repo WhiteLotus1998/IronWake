@@ -323,7 +323,8 @@ internal static class Fixture
     /// build journaled before it was map 9, and a trial's and a side map's seed count the campaign's
     /// maps (<see cref="CampaignRecord.TrialSeed"/>,
     /// <see cref="CampaignRecord.QuestSeed"/>), so a script journaled on nine
-    /// maps replays only on nine.
+    /// maps replays only on nine. Pell's quest 1 (issue 635 slice 6) goes too: every copy stands
+    /// for a build journaled before it, when no camp listed it.
     /// </summary>
     public static string WithoutTheField(string target)
     {
@@ -338,6 +339,11 @@ internal static class Fixture
         }
 
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        if (campaign["quests"] is System.Text.Json.Nodes.JsonArray quests)
+        {
+            campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(quests.Where(q => (string)q!["id"]! != "pell_1").Select(q => q!.DeepClone()).ToArray());
+        }
+
         File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }

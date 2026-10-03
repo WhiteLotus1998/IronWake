@@ -163,7 +163,7 @@ public class CampActionsTests
     [Fact]
     public void AQuestRowTakesThePartyWhenOneIsPicked()
     {
-        var row = CampActions.For(Client(), "captain", new[] { "wren", "teodor" }).Single(r => r.Command.StartsWith("quest", StringComparison.Ordinal));
+        var row = CampActions.For(Client(), "captain", new[] { "wren", "teodor" }).Single(r => r.Command.StartsWith("quest maud_1", StringComparison.Ordinal));
 
         Assert.Equal("quest maud_1 wren teodor", row.Command);
         Assert.Equal("fight Maud's side map maud_1 with Wren, Teodor", row.Text);

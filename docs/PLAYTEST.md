@@ -2127,3 +2127,17 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_firs
 - Not tense: turn 4, the walk to the altar.
 
 — Code
+
+## 2026-10-03 — The Burned School, Pell's quest 1 (#635 slice 6), warm — Code
+Seed: 884 (`campaign --load school --saves docs/transcripts/2026-10-03-the_burned_school-884.saves`, the cast at level 4 at the camp after map 4; ally Wren)   Result: won, turn 6 of 7, escape, nobody fell; no Recall; one chest of three (Gust)
+Tension: 7/10   Choice: 6/10   Surprise: 4/10
+Best turn: Turn 5. Pell stood at 9,4 on 5 HP, alone, with a brigand three tiles behind her in the courtyard and two more burners in the gate behind it. Two exit tiles were in her reach. `threat` priced 12,4 lethal and 12,5 clean, because the only tile beside 12,5 the brigand could reach was the forest at 11,5, a tile too far. She took 12,5, the brigand stopped at 10,4, and she walked out on turn 6.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_burned_school-884.txt`.
+- Disclosed: a first attempt on the same seed and save was lost, with both Recalls spent and both units dead. On turn 1 I sent Wren at the far chest (the Bolt at 1,1) past the sleeping chapel guard. `end` printed `Lethal if all land: Wren` (two 47 percent axes), and I ended anyway. Both axes hit. I recalled to turn 1, took the safe opening, then on turn 4 sent Wren back into the gate to kill the lead brigand. A 47 percent counter landed, and the hexer finished her. After the second Recall I parked Pell on 12,4 and ignored `Lethal if all land: Pell`. Both burners hit, so the side map closed with both of them fallen. The board printed every death before it happened.
+- **The chests are the board.** Without them the map is a cork and a walk: Wren and Pell break the shieldbearer on turn 1 and both leave on turn 3. Each chest turns you back toward the burners. On the won play, the Gust at 6,2 (a duplicate of a spell she already carried) cost Pell two turns boxed in the north door and 12 of her 17 HP.
+- **Wren leaves first, or she does not leave.** The captain's exit leaves the rest behind as fallen, so the member's own escape is the last thing she does. On this board that means the ally is the one who runs, and Pell is the one who stays to take the greedy turn. That is her flaw (a page over a person) in the order of exits.
+- **The cork is Pell's.** At Def 9 the shieldbearer takes 5 from Wren's sword and 14 from Cinder. The member has to stand in front.
+- The Bolt was never reached in either attempt. Whether it is worth anyone's life is the cold chair's question.
+- Not tense: turn 1 of the won play, the cork with nothing yet on the road.
+
+— Code

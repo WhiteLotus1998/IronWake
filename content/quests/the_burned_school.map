@@ -1,0 +1,36 @@
+name: The Burned School
+size: 13x9
+win: escape
+turn_limit: 7
+recall: 2
+enemy_level: 2
+exit: 12,3 12,4 12,5
+announce: on
+
+^^n.......^^M
+^...#####..^.
+....#...#..n.
+....##.##....
+==...........
+....##.##..^.
+.^..#...#....
+.^..#####.^^.
+^^.....^^..MM
+
+units:
+P captain 6,4
+P recruit 5,4
+E shieldbearer 9,4 group:road behavior:hold
+E archer 11,2 group:road behavior:hold
+E brigand 1,2 group:chapel behavior:guard
+
+chests:
+1,1 bolt
+6,2 gust
+6,6 field_dressing
+
+events:
+west1 turn 1 enemy spawn brigand 0,4 group:burners behavior:aggressive
+west2 turn 2 enemy spawn hexer 0,3 group:burners behavior:aggressive
+west3 turn 3 enemy spawn brigand 0,6 group:burners behavior:aggressive
+south1 turn 4 enemy spawn soldier 2,8 group:burners behavior:aggressive

@@ -75,6 +75,14 @@
       "after": [
         "(Placeholder until the writing pass: the goddess speaks to Maud once, at the altar, and tells her what the rite seals.)",
         "(Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her. Its art, Unasked, doubles a heal on an ally who has not moved or acted, and that ally's phase ends where it stands.)"
+      ] },
+    { "id": "pell_1", "member": "pell", "part": 1, "map": "the_burned_school", "opensAfter": "the_tollgate", "common": 2,
+      "before": [
+        "Pell asked for a day and one pair of hands. The shrine-school at Aldmere burned around her when she was fourteen. Somebody has been back since, and the rain has not finished the job they started.",
+        "(Placeholder card until the writing pass. Get Pell off the east edge, 12,3 to 12,5, by the end of turn 7; anyone still on the board when she exits is left behind and falls. The map is lost if she falls. Three chests hold what the fire missed. The burners come in from the west road from turn 1, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: what Pell carried out, and what she left.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

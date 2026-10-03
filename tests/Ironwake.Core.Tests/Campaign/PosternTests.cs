@@ -22,10 +22,14 @@ public class PosternTests
     private static MapDefinition Postern() =>
         MapFiles.Load(Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_postern" + MapFiles.Extension), Content);
 
-    /// <summary>A record before map <paramref name="mapId"/> with Bet hired from the barracks.</summary>
+    /// <summary>
+    /// A record before map <paramref name="mapId"/> with Bet hired from the barracks and the member
+    /// quests that open earlier already won, so their seats in the interlude are free for hers.
+    /// </summary>
     private static CampaignRecord WithBet(string mapId)
     {
-        var record = CampaignRecord.StartAt(Content, 691, mapId) with { Purse = 5000 };
+        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5));
+        var record = CampaignRecord.StartAt(Content, 691, mapId) with { Purse = 5000, QuestsWon = won };
         var built = record.BuildRoom("barracks", Content);
         Assert.True(built.Accepted, built.Text);
         var hired = built.Record.Hire("bet", Content);

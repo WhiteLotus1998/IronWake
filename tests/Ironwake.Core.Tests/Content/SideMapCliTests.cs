@@ -95,6 +95,35 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's journaled play of Pell's quest 1 (seed 884), from a save at the camp after map 4:
+    /// Wren's counter breaks the shieldbearer at the east gate, Pell turns back for the north
+    /// chest and is boxed in its door, Wren leaves first, and Pell gets out on turn 6 at 5 hp
+    /// from 12,5, the one exit tile the chase cannot reach.
+    /// </summary>
+    [Fact]
+    public void TheJournaledBurnedSchoolPlayEscapesWithTheGust()
+    {
+        var script = Transcript("2026-10-03-the_burned_school-884.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-school-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_school-884.saves", "school.json")), Path.Combine(saves, "school.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "school", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Pell opens the chest at 6,2: Gust\n", output);
+            Assert.Contains("Battle won: escape", output);
+            Assert.Contains("> leave\nPell wins pell_1; the stores take 2 common material; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;
