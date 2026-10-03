@@ -94,6 +94,61 @@ public class MeetingTests
         Assert.Equal("nobody is met at this camp", after.Meet("ansgar", Content).Text);
     }
 
+    [Fact]
+    public void AMetSideCharacterCanBeBenchedAndTheBareSlotGoesToThePick()
+    {
+        var record = CampaignRecord.StartAt(Content, 820, "the_field", pick: "rook");
+        var field = Map("the_field");
+        foreach (var id in new[] { "wren", "dunstan" })
+        {
+            record = record.Bench(id, field, Content).Record;
+        }
+
+        var met = record.Meet("ansgar", Content).Record;
+        Assert.Contains("ansgar", met.Deployment(field, Content));
+        Assert.DoesNotContain("rook", met.Deployment(field, Content));
+
+        var benched = met.Bench("ansgar", field, Content);
+
+        Assert.True(benched.Accepted, benched.Text);
+        Assert.Equal("ansgar is benched from The Field Before the Keep", benched.Text);
+        Assert.DoesNotContain("ansgar", benched.Record.Deployment(field, Content));
+        Assert.Contains("rook", benched.Record.Deployment(field, Content));
+    }
+
+    [Fact]
+    public void ABenchedMetSideCharacterStillJoinsTheRosterAfterTheMap()
+    {
+        var field = Map("the_field");
+        var benched = AtTheField().Meet("ansgar", Content).Record.Bench("ansgar", field, Content).Record;
+        var opening = benched.Begin(field, Content);
+        Assert.DoesNotContain(opening.UnitsOf(Side.Player), u => u.Id == "ansgar");
+
+        var after = benched.AfterBattle(Won(opening), Content);
+
+        Assert.NotNull(after.Find("ansgar"));
+        Assert.Empty(after.Benched);
+    }
+
+    [Fact]
+    public void ASideCharacterNotMetCannotBeBenched()
+    {
+        Assert.Equal("no unit 'ansgar' on the roster", AtTheField().Bench("ansgar", Map("the_field"), Content).Text);
+    }
+
+    [Fact]
+    public void TheRosterListsAndCountsAMetSideCharacterBeforeTheMarch()
+    {
+        var record = AtTheField();
+        var met = record.Meet("ansgar", Content).Record;
+
+        var lines = CampaignSession.RosterLines(met, Content, typed: true);
+
+        Assert.Equal($"Roster: company {record.Present(Content).Count + 1}/12", lines[0]);
+        Assert.Single(lines, l => l.StartsWith("  Ansgar: ", StringComparison.Ordinal));
+        Assert.DoesNotContain(CampaignSession.RosterLines(record, Content), l => l.StartsWith("  Ansgar: ", StringComparison.Ordinal));
+    }
+
     [Theory]
     [InlineData("ANSGAR")]
     [InlineData("Ansgar")]

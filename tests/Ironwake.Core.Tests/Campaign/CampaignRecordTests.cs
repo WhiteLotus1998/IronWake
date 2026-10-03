@@ -199,7 +199,7 @@ public class CampaignRecordTests
         var saltmarsh = Map("saltmarsh_ford");
         var record = AtMap(2);
 
-        var benched = record.Bench("ottilie", saltmarsh);
+        var benched = record.Bench("ottilie", saltmarsh, Content);
 
         Assert.Equal(new[] { "captain", "wren", "teodor", "ottilie" }, record.Deployment(saltmarsh, Content));
         Assert.True(benched.Accepted);
@@ -213,9 +213,9 @@ public class CampaignRecordTests
         var mill = Map("old_mill_road");
         var record = Start();
 
-        Assert.Equal("captain is the captain and leads every map", record.Bench("captain", mill).Text);
-        Assert.Equal("Old Mill Road places wren by name at 2,8", record.Bench("wren", mill).Text);
-        Assert.Equal("teodor is already benched", record.Bench("teodor", mill).Record.Bench("teodor", mill).Text);
+        Assert.Equal("captain is the captain and leads every map", record.Bench("captain", mill, Content).Text);
+        Assert.Equal("Old Mill Road places wren by name at 2,8", record.Bench("wren", mill, Content).Text);
+        Assert.Equal("teodor is already benched", record.Bench("teodor", mill, Content).Record.Bench("teodor", mill, Content).Text);
         Assert.Equal("nobody is not benched", record.Unbench("nobody").Text);
     }
 
@@ -224,7 +224,7 @@ public class CampaignRecordTests
     {
         var protecting = Map("the_tollgate") with { ProtectId = "wren" };
 
-        Assert.Equal("The Tollgate must protect wren, who cannot be benched", AtMap(3).Bench("wren", protecting).Text);
+        Assert.Equal("The Tollgate must protect wren, who cannot be benched", AtMap(3).Bench("wren", protecting, Content).Text);
     }
 
     [Fact]

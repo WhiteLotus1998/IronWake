@@ -174,7 +174,7 @@ public sealed class PairingPlayer : IPlayer
             var benched = false;
             foreach (var id in deployed.Reverse().Where(id => !wanted.Contains(id)))
             {
-                var result = record.Bench(id, map);
+                var result = record.Bench(id, map, content);
                 if (result.Accepted)
                 {
                     record = result.Record;

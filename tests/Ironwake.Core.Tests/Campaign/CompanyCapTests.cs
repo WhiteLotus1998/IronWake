@@ -144,7 +144,7 @@ public class CompanyCapTests
         var start = CampaignRecord.Start(Content, 1);
         var recruit = start.Roster[^1].Id;
 
-        var bench = start.Bench(recruit, map);
+        var bench = start.Bench(recruit, map, Content);
 
         Assert.False(bench.Accepted);
         Assert.Equal("the whole company fights on Old Mill Road; nobody is benched", bench.Text);

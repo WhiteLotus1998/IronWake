@@ -1187,7 +1187,7 @@ public sealed class CampaignSession
                 Error(text, "usage: build <room>, or build <edit> <x,y>");
                 break;
             case ["bench", var unitId]:
-                if (Take(_record.Bench(unitId, map), text))
+                if (Take(_record.Bench(unitId, map, _content), text))
                 {
                     PrintDeployment(map);
                 }
@@ -1678,13 +1678,17 @@ public sealed class CampaignSession
     /// <summary>
     /// The roster as the screen prints it: a heading with the living count against the company's
     /// cap (issue 689, <c>Roster: company 7/12</c>), one row per unit, then the fallen if any,
+    /// everyone <see cref="CampaignRecord.Present"/> for the next map counted and listed, the members
+    /// first and those joining at this camp after them, so a joiner, the pick or a side character
+    /// met here is on it before the march (issue 842),
     /// each by name (issue 615); with <paramref name="typed"/>, as the console prints it, a name a
     /// command types differently is followed by that id: <c>Alder Fenn (captain)</c>.
     /// </summary>
     public static IReadOnlyList<string> RosterLines(CampaignRecord record, GameContent content, bool typed = false)
     {
-        var lines = new List<string> { $"Roster: company {record.Living}/{CampaignRecord.CompanyCap}" };
-        foreach (var unit in record.Roster)
+        var joining = record.Present(content).Where(u => record.Find(u.Id) is null).ToList();
+        var lines = new List<string> { $"Roster: company {record.Living + joining.Count}/{CampaignRecord.CompanyCap}" };
+        foreach (var unit in record.Roster.Concat(joining))
         {
             lines.AddRange(UnitLines(record, content, unit, detail: false, typed));
         }
