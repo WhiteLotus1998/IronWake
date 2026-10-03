@@ -234,12 +234,13 @@ public static class Program
                 return 1;
             }
 
-            foreach (var line in DroverMeasure.Lines(ContentLoader.Load(droverContent), RollScheme.TwoRollAverage))
+            var droverLines = DroverMeasure.Lines(ContentLoader.Load(droverContent), RollScheme.TwoRollAverage);
+            foreach (var line in droverLines)
             {
                 Console.WriteLine(line);
             }
 
-            return 0;
+            return droverLines[^1].StartsWith(DroverMeasure.FailVerdict, StringComparison.Ordinal) ? 1 : 0;
         }
 
         if (args.Length > 1 && args[0] == "--hitband")

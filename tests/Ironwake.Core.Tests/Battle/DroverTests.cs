@@ -338,16 +338,60 @@ public class DroverTests
         Assert.Equal(SignatureCeiling.Targets(Starter).Count, reading.Rows.Count);
         Assert.All(reading.Rows, r => Assert.True(r.CaptainPlayer > 0 || r.DroverPlayer > 0));
         Assert.Equal(0, reading.Rows.Single(r => r.Template == "archer").DroverEnemy);
-        Assert.Equal(Ironwake.Sim.DroverMeasure.Levels.Length * Ironwake.Sim.DroverMeasure.Stages.Length * (5 + reading.Rows.Count) + 1, Ironwake.Sim.DroverMeasure.Lines(Starter, RollScheme.TwoRollAverage).Count);
+        Assert.Equal(Ironwake.Sim.DroverMeasure.Levels.Length * Ironwake.Sim.DroverMeasure.Stages.Length * (4 + reading.Rows.Count) + 2, Ironwake.Sim.DroverMeasure.Lines(Starter, RollScheme.TwoRollAverage).Count);
     }
 
     [Theory]
-    [InlineData(10, 10, 30, true)]
-    [InlineData(9, 21, 30, false)]
-    [InlineData(21, 9, 30, false)]
-    public void TheMeasuresBarWantsAThirdBehindAndAThirdAhead(int behind, int ahead, int templates, bool passes)
+    [InlineData(new[] { 7.0, 7.5, 8.0 }, 0.75, 0.70, true)]
+    [InlineData(new[] { 7.0, 7.0, 9.0 }, 0.70, 0.70, true)]
+    [InlineData(new[] { 6.0, 6.9, 9.0 }, 0.69, 0.60, false)]
+    [InlineData(new[] { 5.0, 6.0, 7.0, 8.0 }, 0.65, 0.50, false)]
+    public void ThePriceCeilingWantsHerMedianAtSeventyPercentWhereTheCaptainLeads(double[] hers, double median, double worst, bool passes)
     {
-        Assert.Equal(passes, Ironwake.Sim.DroverReading.Passes(behind, ahead, templates));
+        var rows = hers.Select((d, i) => new Ironwake.Sim.DroverRow($"t{i}", d, 10, 0, 0)).ToList();
+
+        var gate = Ironwake.Sim.DroverGate.Of(rows, r => r.DroverPlayer, r => r.CaptainPlayer);
+
+        Assert.Equal(hers.Length, gate.Led);
+        Assert.Equal(median, gate.Median, 6);
+        Assert.Equal(worst, gate.Worst, 6);
+        Assert.Equal(passes, gate.Passes);
+    }
+
+    [Fact]
+    public void ThePriceCeilingCountsNeitherANoDamageTemplateNorOneSheLeads()
+    {
+        var rows = new[]
+        {
+            new Ironwake.Sim.DroverRow("archer", 0, 0, 0, 0),
+            new Ironwake.Sim.DroverRow("sentry", 6, 2, 6, 2),
+            new Ironwake.Sim.DroverRow("soldier", 5, 10, 5, 10),
+        };
+
+        var player = Ironwake.Sim.DroverGate.Of(rows, r => r.DroverPlayer, r => r.CaptainPlayer);
+
+        Assert.Equal(1, player.Led);
+        Assert.Equal(3, player.Templates);
+        Assert.Equal(0.5, player.Median, 6);
+        Assert.False(player.Passes);
+    }
+
+    [Fact]
+    public void ThePriceCeilingGatesGrownAndOnlyPrintsHalfGrown()
+    {
+        Assert.True(Ironwake.Sim.DroverGate.Gated(DrakeStage.Grown));
+        Assert.False(Ironwake.Sim.DroverGate.Gated(DrakeStage.HalfGrown));
+    }
+
+    [Fact]
+    public void ThePriceCeilingPassesOnTheStarterContentAtEveryGrownCell()
+    {
+        var lines = Ironwake.Sim.DroverMeasure.Lines(Starter, RollScheme.TwoRollAverage);
+
+        Assert.DoesNotContain(lines, l => l.EndsWith("gate fails", StringComparison.Ordinal));
+        Assert.False(lines[^1].StartsWith(Ironwake.Sim.DroverMeasure.FailVerdict, StringComparison.Ordinal));
+        Assert.Equal(Ironwake.Sim.DroverMeasure.Levels.Length * 2, lines.Count(l => l.EndsWith("gate passes", StringComparison.Ordinal)));
+        Assert.Equal(Ironwake.Sim.DroverMeasure.Levels.Length * 2, lines.Count(l => l.EndsWith("not gated", StringComparison.Ordinal)));
     }
 
     [Fact]
