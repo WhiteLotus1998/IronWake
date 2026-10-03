@@ -2415,3 +2415,11 @@ Notes: Warm: I built the voice and wrote its placeholder lines. Stopped at turn 
 - Not tense: turn 3 and 4, a walk with the drain ticking.
 
 — Code
+
+## 2026-10-04 — The Oath Stone, Keziah's quest 2 (issue 635 slice 15), warm — Code
+
+Seed: 1133 (side map)   Result: loss, turn 6 (Keziah fell; the quest closes for good). One Recall spent, back to turn 1.
+Save at the camp after map 9, Keziah picked, the Burned Shrine won, Kinsbane fed 9, cast at level 7; ally Ottilie.
+Tension: 8/10   Choice: 5/10   Surprise: 6/10
+Best turn: turn 6. The drain took her to 1, the scythe starved and said "Eat.", and the only thing on the board she could eat was a soldier at 2 HP with a lance that kills her if she misses. 74%. She missed.
+Notes: I set out to keep the oath, go round by the south breach and leave the bound Marauder for the envoy's fall, and the hunger never let me get there. Turn 1 woke the camp at 4,5 (the rule is printed; I walked into it) and the drain did the rest: 26, 13, 8, dead on a 26% miss. After the Recall I fed her on the brigand at turn 3 (back to 26) and then missed two 74% swings in a row on the soldier, and every miss cost a drain. That is the hunger working, and it is the tensest Keziah map I have played. But the oath never came up. I never stood beside the bound man, so the choice the board is built around was not a choice I made. The surprise was the envoy: the turn-3 fight woke him, he walked out of his yard past his own bound man to 6,4, then went home to 10,4. A boss that leaves the door makes the door moot. Two levers for the next cut, one at a time: the camp further from the start (the oath road should be the long road, not a trap on turn 1), and the envoy as a `boss` who keeps his fort, so the yard stays shut and the door is the question. A cold chair decides whether the oath reads at all.
