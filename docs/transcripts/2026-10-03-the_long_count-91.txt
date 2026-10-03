@@ -47,6 +47,7 @@ Keep: Ironwake Keep; built: nothing; the purse holds 500
     Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  rook_1: Rook's quest 1, The Chapter Roll (quest rook_1 <ally>); permadeath applies
   ottilie_2: Ottilie's quest 2, The Long Count (quest ottilie_2 <ally>); permadeath applies
 Side maps won:
   maud_1: Maud's quest 1, The Lazar House; paid 2 common material

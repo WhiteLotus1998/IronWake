@@ -118,6 +118,15 @@
       "after": [
         "(Placeholder until the writing pass: the books on a table in a Sallow square, and the people reading their own villages' names in Hask's hand.)",
         "(Ottilie carries Ottilie's Tally now: the Iron Bow's numbers, bound to her. Its art, Paid in Full, looses one arrow at +6 Power and -25 Acc that never doubles.)"
+      ] },
+    { "id": "rook_1", "member": "rook", "part": 1, "map": "the_chapter_roll", "opensAfter": "sallow_grange", "common": 2,
+      "before": [
+        "Rook asked for a day and one pair of hands. Kestrow's chapter keeps its roll of seats in a house on the crag above the gorge, and her name was written into the extra seat the year someone paid for it. She wants to read who.",
+        "(Placeholder card until the writing pass. Seize: Rook stands on the roll room, 12,1, by the end of turn 8; its one door is 12,2. The map is lost if Rook falls. A flier crosses the gorge; on foot, only the road bridge crosses the gorge. A bow crit grounds a flier; over water she then cannot move. Pursuers from turn 2, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the roll, the extra seat, and whose coin bought it.)",
+        "(The Scout is open to Rook at her second promotion: the other door above the Skyrider.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

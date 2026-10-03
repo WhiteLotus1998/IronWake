@@ -1,0 +1,30 @@
+name: The Chapter Roll
+size: 15x9
+win: seize
+turn_limit: 8
+recall: 2
+enemy_level: 5
+announce: on
+
+^...~~~^nMMM###
+....~~~.n###T##
+.^..~~~^.#....M
+....~~~n.#....M
+..^.~~~..#....M
+....~~~..##.##M
+.^..~~~...^....
+...============
+^...~~~....^..M
+
+units:
+P captain 1,4
+P recruit 2,5
+E sentry 7,3 group:gorge behavior:hold
+E wingrider 8,1 group:loft behavior:guard
+E soldier 12,2 group:yard behavior:hold
+E deacon 11,3 group:yard behavior:guard
+E archer 13,4 group:yard behavior:hold
+
+events:
+pursuit1 turn 2 enemy spawn wingrider 0,0 group:pursuit behavior:aggressive
+pursuit2 turn 3 enemy spawn brigand 0,8 group:pursuit behavior:aggressive

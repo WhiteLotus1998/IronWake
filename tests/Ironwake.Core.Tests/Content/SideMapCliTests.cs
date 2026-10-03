@@ -241,6 +241,35 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's journaled play of Rook's quest 1 (side-map seed 1100), from a save at the camp
+    /// after map 7 with Rook picked: the deacon leaves the yard and is killed at the door, a
+    /// counter on the cork kills Rook twice over two Recalls, and on turn 7 Wren opens the cork
+    /// so Rook's first strike kills it, and she takes the roll room on turn 8.
+    /// </summary>
+    [Fact]
+    public void TheJournaledChapterRollPlaySeizesTheRollOnTheLastTurn()
+    {
+        var script = Transcript("2026-10-03-the_chapter_roll-1100.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-chapter-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_chapter_roll-1100.saves", "chapter.json")), Path.Combine(saves, "chapter.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "chapter", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Chapter Roll, seed 1100\n", output);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Contains("> leave\nRook wins rook_1; the stores take 2 common material; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;
