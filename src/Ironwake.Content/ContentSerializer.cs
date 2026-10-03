@@ -98,6 +98,17 @@ public static class ContentSerializer
                     writer.WriteEndArray();
                 }
 
+                if (map.Pitch.Count > 0)
+                {
+                    writer.WriteStartObject("pitch");
+                    for (var i = 0; i < map.Branch.Count; i++)
+                    {
+                        writer.WriteString(map.Branch[i], map.Pitch[i]);
+                    }
+
+                    writer.WriteEndObject();
+                }
+
                 if (map.Meets.Count > 0)
                 {
                     writer.WriteStartArray("meets");

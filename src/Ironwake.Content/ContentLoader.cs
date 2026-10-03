@@ -305,6 +305,52 @@ public static class ContentLoader
                 throw node.Error("branch", "only one map may offer a branch");
             }
 
+            var pitch = new List<string>();
+            if (node.OptionalObject("pitch") is { } pitchNode)
+            {
+                if (branch.Count == 0)
+                {
+                    throw node.Error("pitch", "needs a branch on this map; it is the claimants' lines at the pick");
+                }
+
+                var given = pitchNode.Element.EnumerateObject().ToList();
+                foreach (var property in given)
+                {
+                    if (!branch.Contains(property.Name))
+                    {
+                        throw node.Error("pitch", $"'{property.Name}' is not one of the branch's claimants");
+                    }
+                }
+
+                foreach (var id in branch)
+                {
+                    var field = "pitch." + id;
+                    if (!given.Any(p => p.Name == id))
+                    {
+                        throw node.Error("pitch", $"must give a line for each claimant; '{id}' has none");
+                    }
+
+                    var value = given.First(p => p.Name == id).Value;
+                    if (value.ValueKind != JsonValueKind.String || value.GetString() is not { } text || string.IsNullOrWhiteSpace(text) || text != text.Trim())
+                    {
+                        throw node.Error(field, "must be non-blank text with no leading or trailing space");
+                    }
+
+                    if (text.Any(c => c < ' ' || c > '~'))
+                    {
+                        throw node.Error(field, "must be printable ASCII on one line");
+                    }
+
+                    var words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+                    if (words > CampaignMap.PitchWordsMax)
+                    {
+                        throw node.Error(field, $"must be at most {CampaignMap.PitchWordsMax} words, not {words}");
+                    }
+
+                    pitch.Add(text);
+                }
+            }
+
             var meets = node.StringArrayOrEmpty("meets");
             if (meets.Count > 2)
             {
@@ -406,6 +452,7 @@ public static class ContentLoader
                 Arrives = ValueList<string>.From(arrives),
                 Joins = ValueList<string>.From(joins),
                 Branch = ValueList<string>.From(branch),
+                Pitch = ValueList<string>.From(pitch),
                 Meets = ValueList<string>.From(meets),
                 Return = back,
                 EnemyLevel = enemyLevel,

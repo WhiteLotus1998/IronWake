@@ -12,6 +12,8 @@ Autosaved as auto-1; the last 3 camps are kept
   Brannock: Cadet L4, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
 Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 8)
 The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.
+Keziah: "Everyone here is offering you a promise. I'm offering you something hungry."
+Rook: "She's the last one. Pick me and you're the second person alive who knows her name."
 They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.
 == Keep ==
 Purse: 500
