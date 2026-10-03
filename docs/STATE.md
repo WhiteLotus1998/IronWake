@@ -6,7 +6,7 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-4149 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+4152 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -15,7 +15,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #856 (0195, 0207, 0209, 0211): teeth 2,4,5,8,12, `--kinsbane [--axe|--heeding]`, issued beside the axe; 279's bar passes. Levers stop. Slice 3 (0212): the hunt runs on, a woken kill's full Move again once a map; `woken: keziah` on `the_gleaning_kinsbane_woken.map`. Code 804 8/7/6, woken 7/7/5; Chat cold 858 8/7/5. #865: `campaign ... --fed N` (Chat's field cold at 10 is open). #871 (0214, Lotus): the reach gate reverted; `keziah_warning: on` on Sallow alone (drains p50 2); `march` asks, `march sure` answers. The voice (0221): `kinsbaneSpoke` (a starving drain, a tooth, the waking), 3 a battle; placeholder. Code 804 voice warm 8/6/5 (stopped turn 7). The choice screen (0222): `pitch` in `campaign.json`, each claimant's line under the branch's offer until the pick; placeholder text. What is left on #804 is art (the hound, the screen's staging), waiting on #535.
 - #805 slices 1 to 3 (0213, 0215, 0216): the stages; the carry (`carry:`, Code 805 warm 7/6/7); the breath (`breath:`, `breathe`; Code 805 warm 6/7/8). #872 (0217): the Drover replaces the Scout (never doubles; Drake Bite 3/5; Long Carry; Deep Rime). #882 (0217 amended): `--drover`'s gate is a price ceiling, Grown median at least 70% of the Sky Captain where he leads, per phase and level; passes (0.72 to 0.74). Code 805 warm as a Drover 7/6/6, won turn 8. Slice 4 (0218): a rider fallen for good takes the drake off the field (`drakeFlew` on the record; ending text waits on #634). #805's items are built; it closes on the carry and breath keep rounds.
 - #786 closed (0181); next, round 240's for-Lotus steps.
-- #891 (0223): ART_SPEC's Figures section and Blender note; delivered figures keep their colour. #896: tint generated sheets only.
+- #891 (0223): ART_SPEC's Figures section and Blender note; delivered figures keep their colour. #896 (built): the battle scene tints only the sheets on `generated.txt` (`ArtSpec.Tinted`); a delivered sheet draws in its own colour. The export carries the list.
 - #892: grounds mocked (`docs/look/grounds-892.png`); frost, cold moss, heather pass every colour check. Waits on Lotus's pick; nothing changes until then.
 - #806 slice 1 (0219): Hask replaces the stand-in lord (same numbers); his card and the Warden's Lance name the pommel shard; units take `description` and `named`. Items 3, 5 wait on #634.
 - #807 slice 1 (0220): a won campaign writes `ending.json` with a versioned `ending` block for a sequel (PROTOCOL.md), `pending` until #634 (slice 2).

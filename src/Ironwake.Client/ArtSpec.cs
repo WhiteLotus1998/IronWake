@@ -149,6 +149,24 @@ public static class ArtSpec
         content.Cast.Select(u => $"levelup_{u.Id}").Concat(content.Cast.Select(u => $"portrait_{u.Id}"));
 
     /// <summary>
+    /// The names on the generator's <c>generated.txt</c> (issue 896): each line that is neither
+    /// blank nor a <c>#</c> comment, without its extension, so a sheet's sidecar line names the
+    /// same sheet.
+    /// </summary>
+    public static IReadOnlySet<string> GeneratedNames(IEnumerable<string> lines) =>
+        lines.Select(l => l.Trim()).Where(l => l.Length > 0 && !l.StartsWith('#'))
+            .Select(Path.GetFileNameWithoutExtension).OfType<string>().ToHashSet(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Whether a renderer tints sheet <paramref name="name"/> with its side's colour (DECISIONS/0223,
+    /// issue 896): only a sheet of the generated placeholder set is drawn in greys and tinted (0105);
+    /// a delivered figure carries its own colour and is drawn as it came. With no list to read
+    /// (<paramref name="generated"/> null) every sheet is taken for generated, the set the repo ships.
+    /// </summary>
+    public static bool Tinted(string name, IReadOnlySet<string>? generated) =>
+        generated is null || generated.Contains(name);
+
+    /// <summary>
     /// Every name the spec lists, in its order: tokens, the variant tokens, tiles, class clips, boss
     /// clips, effects, then the optional rows. <paramref name="enemies"/> is every enemy the shipped
     /// maps place, with whether it is placed as a boss.

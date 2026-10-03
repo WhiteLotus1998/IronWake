@@ -185,4 +185,39 @@ public class ArtSpecTests
 
         Assert.Contains($"| `spell_<weapon>` | {ArtSpec.SpellFrames} |", text);
     }
+
+    [Fact]
+    public void OnlyAGeneratedSheetIsTintedADeliveredOneKeepsItsColour()
+    {
+        var generated = ArtSpec.GeneratedNames(new[]
+        {
+            "# Written by docs/art/make_art.py",
+            "",
+            "soldier_lance_strike.png",
+            "soldier_lance_strike.json",
+            "  token_soldier_player.png  ",
+        });
+
+        Assert.Equal(new[] { "soldier_lance_strike", "token_soldier_player" }, generated.OrderBy(n => n, StringComparer.Ordinal));
+        Assert.True(ArtSpec.Tinted("soldier_lance_strike", generated));
+        Assert.False(ArtSpec.Tinted("boss_hask_wardens_lance_strike", generated));
+    }
+
+    [Fact]
+    public void WithNoGeneratedListEverySheetIsTintedAsTheShippedSetIs()
+    {
+        Assert.True(ArtSpec.Tinted("boss_hask_wardens_lance_strike", null));
+    }
+
+    [Fact]
+    public void EveryClipTheGeneratorShipsIsTintedFromItsOwnList()
+    {
+        var art = Path.GetFullPath(Path.Combine(Fixture.RealContentDirectory(), "..", "src", "Ironwake.Godot", "assets", "art"));
+        var generated = ArtSpec.GeneratedNames(File.ReadAllLines(Path.Combine(art, "generated.txt")));
+        var sheets = Directory.GetFiles(art, "*.png").Select(Path.GetFileNameWithoutExtension).OfType<string>().ToList();
+
+        Assert.NotEmpty(sheets);
+        Assert.All(sheets.Where(generated.Contains), n => Assert.True(ArtSpec.Tinted(n, generated)));
+        Assert.All(ArtSpec.ClassClips(Content()).Where(n => sheets.Contains(n)), n => Assert.True(ArtSpec.Tinted(n, generated), n));
+    }
 }

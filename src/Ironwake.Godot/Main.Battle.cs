@@ -7,13 +7,13 @@ namespace Ironwake.Godot;
 
 /// <summary>
 /// The battle scene (issue 535, slice 1): a combat the setting picks plays over the board as
-/// both combatants' clips, read from the generated sheets at ART_SPEC's names (mirrored for the
-/// right side, tinted with the side's colour, 0105), on a backdrop banded from each side's
-/// ground. Hit-stop holds the contact frame, the number rises there, the effects lay on the
-/// struck body, and the frame shakes by the scene's own measure. The scene is the strike beat
-/// itself, timed by <see cref="BattleScene"/>, so the board's HP under it keeps time, and Space
-/// or C ends it on the state the protocol already has. After a combat that levels, the level-up
-/// card shows whatever the setting. B steps the setting; its chip sits at the top bar's end.
+/// both combatants' clips, read from the sheets at ART_SPEC's names (mirrored for the right side;
+/// a generated sheet tinted with the side's colour, 0105, a delivered one in its own, 0223), on a
+/// backdrop banded from each side's ground. Hit-stop holds the contact frame, the number rises
+/// there, the effects lay on the struck body, and the frame shakes by the scene's own measure. The
+/// scene is the strike beat itself, timed by <see cref="BattleScene"/>, so the board's HP under it
+/// keeps time, and Space or C ends it on the state the protocol already has. After a combat that
+/// levels, the level-up card shows whatever the setting. B steps the setting; its chip sits at the top bar's end.
 /// </summary>
 public partial class Main
 {
@@ -34,6 +34,36 @@ public partial class Main
     private const float BodyCentre = 104;
 
     private readonly Dictionary<string, Texture2D?> _sheets = new();
+
+    private IReadOnlySet<string>? _generatedArt;
+    private bool _generatedArtRead;
+
+    /// <summary>
+    /// The names on <c>assets/art/generated.txt</c>, read once: the source tree's file, else the
+    /// exported build's; null when neither is there, and then every sheet tints as before (issue 896).
+    /// </summary>
+    private IReadOnlySet<string>? GeneratedArt()
+    {
+        if (!_generatedArtRead)
+        {
+            _generatedArtRead = true;
+            const string resource = "res://assets/art/generated.txt";
+            var path = ProjectSettings.GlobalizePath(resource);
+            if (File.Exists(path))
+            {
+                _generatedArt = ArtSpec.GeneratedNames(File.ReadAllLines(path));
+            }
+            else if (global::Godot.FileAccess.FileExists(resource) && global::Godot.FileAccess.Open(resource, global::Godot.FileAccess.ModeFlags.Read) is { } file)
+            {
+                using (file)
+                {
+                    _generatedArt = ArtSpec.GeneratedNames(file.GetAsText().Split('\n'));
+                }
+            }
+        }
+
+        return _generatedArt;
+    }
 
     /// <summary>A whole sheet at its own size, loaded once, or null when no file is on disk.</summary>
     private Texture2D? Sheet(string name)
@@ -320,7 +350,8 @@ public partial class Main
 
     /// <summary>
     /// One combatant's frame with its feet at <paramref name="feet"/>: the first of its sheets on
-    /// disk, tinted with its side's colour and mirrored on the right; a disc and body in the side's
+    /// disk, mirrored on the right, tinted with its side's colour when the sheet is a generated one
+    /// and drawn in its own colour when it was delivered (0223); a disc and body in the side's
     /// colour when no sheet is.
     /// </summary>
     private void DrawCombatant(SceneSide side, string clip, int index, Vector2 feet, float alpha)
@@ -329,7 +360,8 @@ public partial class Main
         tint.A = alpha;
         foreach (var name in side.ClipFiles(clip))
         {
-            if (DrawSheetFrame(name, index, feet, new Vector2(128, 232), tint, mirrored: !side.Left))
+            var modulate = ArtSpec.Tinted(name, GeneratedArt()) ? tint : new Color(1, 1, 1, alpha);
+            if (DrawSheetFrame(name, index, feet, new Vector2(128, 232), modulate, mirrored: !side.Left))
             {
                 return;
             }
