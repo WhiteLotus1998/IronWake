@@ -220,6 +220,11 @@ public static class ProtocolJson
                 w.WriteString("a", r.A);
                 w.WriteString("b", r.B);
                 break;
+            case SupportReached s:
+                w.WriteString("a", s.A);
+                w.WriteString("b", s.B);
+                w.WriteString("tier", s.Tier);
+                break;
             case PhaseEnded p:
                 w.WriteString("side", Name(p.Side));
                 w.WriteNumber("turn", p.Turn);

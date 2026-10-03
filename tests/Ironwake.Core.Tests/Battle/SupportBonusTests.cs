@@ -163,4 +163,49 @@ public class SupportBonusTests
 
         Assert.DoesNotContain(result.Events, e => e is RapportGained { A: "hale" } or RapportGained { B: "hale" });
     }
+
+    [Fact]
+    public void A_support_pair_crossing_a_tier_announces_the_tier_it_reaches()
+    {
+        var state = Board(new Rapport("ivo", "wren", C.At - 1)) with { CampaignMap = 1 };
+
+        var result = Resolver.Apply(state, Content, new EndPhase());
+
+        Assert.Contains(new SupportReached("ivo", "wren", "C"), result.Events);
+    }
+
+    [Fact]
+    public void A_support_pair_already_at_its_tier_announces_nothing()
+    {
+        var state = Board(new Rapport("ivo", "wren", C.At)) with { CampaignMap = 1 };
+
+        var result = Resolver.Apply(state, Content, new EndPhase());
+
+        Assert.Contains(result.Events, e => e is RapportGained { A: "ivo", B: "wren" });
+        Assert.DoesNotContain(result.Events, e => e is SupportReached { A: "ivo", B: "wren" });
+    }
+
+    [Fact]
+    public void A_support_pair_crossing_two_tiers_in_one_phase_announces_only_the_higher()
+    {
+        var content = Content with { Rivalry = Content.Rivalry with { SupportTiers = ValueList<SupportTier>.Of(C, B with { At = C.At + 1 }, A) } };
+        var state = BattleState.From(Maps.MapFixture.Parse(Yard, "yard.map"), content, Cohort, 7) with { CampaignMap = 1, Rapport = ValueList<Rapport>.Of(new Rapport("ivo", "wren", C.At - 1)) };
+        Assert.True(Rivalry.RateOf(state.Find("ivo")!, content) + Rivalry.RateOf(state.Find("wren")!, content) >= 2);
+
+        var result = Resolver.Apply(state, content, new EndPhase());
+
+        Assert.Equal(new[] { new SupportReached("ivo", "wren", "B") }, result.Events.OfType<SupportReached>().Where(e => e.A == "ivo").ToArray());
+    }
+
+    [Fact]
+    public void Rapport_between_two_who_are_no_support_pair_announces_no_tier()
+    {
+        var content = Content with { Campaign = Content.Campaign with { Supports = ValueList<SupportPair>.Of(new SupportPair("hale", "wren", SupportKind.Mentor)) } };
+        var state = BattleState.From(Maps.MapFixture.Parse(Yard.Replace("enemy_level: 1", "enemy_level: 1\nrivalry: symmetric"), "yard.map"), content, Cohort, 7) with { Rapport = ValueList<Rapport>.Of(new Rapport("ivo", "wren", C.At - 1)) };
+
+        var result = Resolver.Apply(state, content, new EndPhase());
+
+        Assert.Contains(result.Events, e => e is RapportGained { A: "ivo", B: "wren" });
+        Assert.DoesNotContain(result.Events, e => e is SupportReached { A: "ivo", B: "wren" });
+    }
 }
