@@ -121,7 +121,7 @@ public class SideMapTests
         var grange = At("sallow_grange") with { QuestsWon = raid.QuestsWon };
 
         Assert.DoesNotContain("pell_2", raid.QuestsOffered(Content).Select(q => q.Id));
-        Assert.Equal(new[] { "pell_2" }, grange.QuestsOffered(Content).Select(q => q.Id));
+        Assert.Equal(new[] { "pell_2", "ottilie_1" }, grange.QuestsOffered(Content).Select(q => q.Id));
         Assert.DoesNotContain("pell_2", At("sallow_grange").QuestsOffered(Content).Select(q => q.Id));
     }
 
@@ -135,11 +135,45 @@ public class SideMapTests
     }
 
     [Fact]
+    public void OttiliesFirstQuestIsTheCountingHouseARoutThatPaysMaterial()
+    {
+        var quest = Content.Campaign.Quest("ottilie_1")!;
+        var map = Side(quest.MapId);
+
+        Assert.Equal(("ottilie", 1, "the_counting_house", "ironwake_raid", 2), (quest.MemberId, quest.Part, quest.MapId, quest.OpensAfter, quest.Common));
+        Assert.Null(quest.Pays);
+        Assert.Null(CampaignRecord.QuestMapRefusal(map));
+        Assert.Equal(WinCondition.Rout, map.Win);
+        Assert.NotEmpty(quest.Before);
+        Assert.NotEmpty(quest.After);
+    }
+
+    [Fact]
+    public void OttiliesFirstQuestOpensAtTheCampAfterTheRaidAndNotBefore()
+    {
+        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5));
+        var raid = At("ironwake_raid") with { QuestsWon = won };
+        var grange = At("sallow_grange") with { QuestsWon = won };
+
+        Assert.DoesNotContain("ottilie_1", raid.QuestsOffered(Content).Select(q => q.Id));
+        Assert.Equal(new[] { "pell_2", "ottilie_1" }, grange.QuestsOffered(Content).Select(q => q.Id));
+    }
+
+    [Fact]
+    public void TheCountingHouseIsCanonical()
+    {
+        var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_counting_house.map");
+        var text = File.ReadAllText(path).ReplaceLineEndings("\n");
+
+        Assert.Equal(text, MapFormat.Write(MapFormat.Parse(path, text, Content), Content));
+    }
+
+    [Fact]
     public void AQuestAppendedToTheFileMovesNoOtherSideMapsSeed()
     {
         var record = At("ironwake_raid");
         var first = Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, Content)).ToList();
-        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("ottilie_1", "ottilie", 1)) } };
+        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("ottilie_2", "ottilie", 2)) } };
 
         Assert.Equal(first, Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)));
         Assert.Equal(first.Count + 1, appended.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)).Distinct().Count());
@@ -231,7 +265,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));

@@ -1,0 +1,31 @@
+name: The Counting House
+size: 13x9
+win: rout
+turn_limit: 10
+recall: 2
+enemy_level: 3
+announce: on
+
+^^...n~######
+^.....=.#..F#
+.....^~.#...#
+......~......
+..n..^~.#...#
+......~.#####
+.^....~......
+......=...^..
+==....~....^M
+
+units:
+P captain 2,6
+P recruit 3,7
+E archer 7,3 group:bank behavior:hold
+E soldier 7,7 group:bank behavior:hold
+E brigand 10,7 group:yard behavior:guard
+E hexer 9,6 group:yard behavior:guard
+E lector 10,3 group:house behavior:guard
+E sworn_captain 11,1 group:house behavior:guard
+
+events:
+road1 turn 2 enemy spawn brigand 0,8 group:road behavior:aggressive
+road2 turn 3 enemy spawn hexer 0,0 group:road behavior:aggressive

@@ -101,6 +101,14 @@
       "after": [
         "(Placeholder until the writing pass: what the sworn were digging for, and what the lance does in his hands at the cairn.)",
         "(The Family Lance's last stage waited on this. It wakes once Teodor has fought enough with it, now or later.)"
+      ] },
+    { "id": "ottilie_1", "member": "ottilie", "part": 1, "map": "the_counting_house", "opensAfter": "ironwake_raid", "common": 2,
+      "before": [
+        "Ottilie asked for a day and one pair of hands. Her house's bills were marked paid at a counting house on the Sallow canal, and nobody there will say who signed for the money.",
+        "(Placeholder card until the writing pass. Rout: every enemy falls by the end of turn 10. The map is lost if Ottilie falls. The canal is crossed only at the bridges, 6,1 and 6,7; a bow reaches over it and a sword does not. More come up the near bank from turn 2, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the ledger in the strongroom, and the seal at the foot of the page.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
