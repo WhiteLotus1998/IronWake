@@ -30,6 +30,7 @@ Keziah (Reaver, level 7) rides with the enemy on this map.
 Rook's talk turns her; the captain's spares her (talk <unit> keziah). Turned, she joins only if a bed is free (beds: 9/12), and a death never frees one.
 Met on the road: Ansgar (Outrider, level 7) (meet <unit>; one, final).
 Ansgar joins only if a bed is free (beds: 9/12), and a death never frees one. Not met, he goes on alone.
+The Field Before the Keep has one open place: Ansgar or Rook
 == Keep ==
 Purse: 500
 Rooms: beds: 9/12; a fallen member keeps their bed
