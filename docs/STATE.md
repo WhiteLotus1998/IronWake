@@ -6,7 +6,7 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3836 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
+3845 tests green; `ci` and `ci-windows` both run; `godot-parity`, `godot-windows-export` and `godot-windows-launch` run but are not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -41,7 +41,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_first_shrine | Side map, Maud's quest 2 (0198, #635), under `content/quests/`, after map 5; pays the Psalter. Seize, limit 10, `brace: on`; a braced cork at the sanctum door, pursuers over a causeway. Sim gate 1 5/200 (178 timeouts). Code 875 warm 5/6/5, won turn 4: the back half never fought. A cold chair owed. |
 | the_burned_school | Side map, Pell's quest 1 (0199, #635), under `content/quests/`, after map 4; pays 2 common. Escape, limit 7, Recall 2; a shieldbearer corks the east gate, burners through the west from turn 1, three chests that turn you back. Sim gate 1 36/200 (164 timeouts), gate 4 fails. Code 884 warm 7/6/4 at level 4, won turn 6 with one chest; a first attempt lost both units. A cold chair owed. |
 | the_undercroft | Side map, Pell's quest 2 (0200, #635), under `content/quests/`, two maps after Pell 1; pays Pell's Commonplace and 3 frozen iron. Seize, limit 7, Recall 2; three routes past two sleeping groups, a lector corking the north door, sworn down the stair from turn 2. Sim gate 1 2/200 (198 timeouts). Code 960 warm 7/7/6 at level 5, won turn 6; two earlier runs lost or stopped. A cold chair owed. |
-| the_old_watch | Side map, Teodor's quest 1 (0201, #635), under `content/quests/`, after map 5; wakes the Family Lance. Defeat Boss, limit 9, Recall 2; a sallying boss on a fort, a one-tile bridgehead. Sim gate 1 8/200 (164 timeouts). Code 896 warm 8/7/7, lost turn 9 with the boss at 2, Wren fell. A cold chair owed. |
+| the_old_watch | Side map, Teodor's quest 1 (0201, #635), under `content/quests/`, after map 5; wakes the Family Lance. Defeat Boss, limit 9, Recall 2; a sallying boss on a fort, a one-tile bridgehead. Sim gate 1 8/200 (164 timeouts). Code 961 warm 8/7/7, lost turn 9 with the boss at 2, Wren fell. A cold chair owed. |
 | the_lazar_house | Side map, Maud's quest 1 (0127, #635), under `content/quests/`. Survive, limit 6, Recall 2; lanes the ally can bar. Sim gate 1 4/200, gate 4 fails; the side-map gate is the cold chair. Code 701 warm 8/7/5, won, Wren fell. Chat's or the Critic's cold play owed. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200 (timeouts: a lone vetoed captain). Code 631 warm 7/6/4, won turn 6, one Recall. Chat's play owed. |
 | the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 74 percent, gate 4 ok at 0.245. Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |

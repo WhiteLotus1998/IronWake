@@ -102,17 +102,17 @@ public class SideMapCliTests
     /// from 12,5, the one exit tile the chase cannot reach.
     /// </summary>
     /// <summary>
-    /// Code's warm play of The Old Watch (issue 635 slice 7, seed 896): the Family Lance passes
+    /// Code's warm play of The Old Watch (issue 635 slice 8, side-map seed 961): the Family Lance passes
     /// count 10 on turn 3 and the card says the rust holds; both Recalls are spent; turn 9 ends
     /// with the Sworn Captain at 2, Wren falls on the last enemy phase, and the side map is lost.
     /// </summary>
     [Fact]
     public void TheJournaledOldWatchPlayIsLostByTwoHitPointsAndWrenIsFallenForGood()
     {
-        var script = Transcript("2026-10-03-the_old_watch-896.script");
+        var script = Transcript("2026-10-03-the_old_watch-961.script");
         var saves = Path.Combine(Path.GetTempPath(), "ironwake-watch-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(saves);
-        File.Copy(Transcript(Path.Combine("2026-10-03-the_old_watch-896.saves", "watch.json")), Path.Combine(saves, "watch.json"));
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_old_watch-961.saves", "watch.json")), Path.Combine(saves, "watch.json"));
         try
         {
             var output = Run(out var exit, "campaign", "--load", "watch", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());

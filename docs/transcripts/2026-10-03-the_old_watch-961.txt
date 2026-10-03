@@ -1,4 +1,4 @@
-Campaign, seed 896, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+Campaign, seed 886, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
 Autosaved as auto-1; the last 3 camps are kept
 -- Before map 6 of 10: Raid on Ironwake; the purse holds 500 --
 == Roster ==

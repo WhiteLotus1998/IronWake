@@ -117,7 +117,7 @@ public class SideMapTests
     [Fact]
     public void PellsSecondQuestOpensTwoMapsAfterHerFirstIsWon()
     {
-        var raid = At("ironwake_raid") with { QuestsWon = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5)) };
+        var raid = At("ironwake_raid") with { QuestsWon = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5)) };
         var grange = At("sallow_grange") with { QuestsWon = raid.QuestsWon };
 
         Assert.DoesNotContain("pell_2", raid.QuestsOffered(Content).Select(q => q.Id));

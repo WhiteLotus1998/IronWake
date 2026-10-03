@@ -162,6 +162,9 @@ public static class HeirloomRun
         {
             var tried = runs.Where(r => r.QuestTries > 0).ToList();
             yield return $"  quest arm: won the waking quest in {tried.Count(r => r.QuestWonAfter is not null)} of {tried.Count} runs offered it, tries p50 {Percentile(tried.Select(r => r.QuestTries), 0.5)}";
+            var winners = runs.Where(r => r.QuestWonAfter is not null).ToList();
+            var last = ladder.Turns.Count - 1;
+            yield return $"  quest winners: {ladder.Turns[last].Id} in {winners.Count(r => r.TurnedOn[last] > 0)} of {winners.Count}, median map {(winners.Count == 0 ? "none" : Percentile(winners.Select(r => r.TurnedOn[last] == 0 ? int.MaxValue : r.TurnedOn[last]), 0.5) is var m && m == int.MaxValue ? "never" : m.ToString(System.Globalization.CultureInfo.InvariantCulture))}, the quest won after map p50 {Percentile(winners.Select(r => r.QuestWonAfter!.Value), 0.5)}";
         }
 
         foreach (var lostOn in runs.Where(r => r.LostOn is not null).GroupBy(r => r.LostOn!.Value).OrderBy(g => g.Key))
