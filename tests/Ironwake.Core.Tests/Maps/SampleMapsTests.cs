@@ -10,13 +10,14 @@ public class SampleMapsTests
         MapFiles.LoadAll(Fixture.RealContentDirectory(), MapFixture.Content);
 
     [Fact]
-    public void TheEightShippedMapsLoad()
+    public void TheNineShippedMapsLoad()
     {
         var maps = All();
 
-        Assert.Equal(new[] { "brackwater_cut", "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "starting_alone", "the_mill", "the_tollgate" }, maps.Select(m => m.Id));
-        Assert.Equal(WinCondition.Seize, maps[7].Map.Win);
-        Assert.Equal(WinCondition.Rout, maps[6].Map.Win);
+        Assert.Equal(new[] { "brackwater_cut", "harrow_weir", "old_mill_road", "sallow_grange", "saltmarsh_ford", "starting_alone", "the_field", "the_mill", "the_tollgate" }, maps.Select(m => m.Id));
+        Assert.Equal(WinCondition.Seize, maps[8].Map.Win);
+        Assert.Equal(WinCondition.Rout, maps[7].Map.Win);
+        Assert.Equal(WinCondition.DefeatBoss, maps[6].Map.Win);
         Assert.Equal(WinCondition.Rout, maps[5].Map.Win);
         Assert.Equal(WinCondition.Seize, maps[3].Map.Win);
         Assert.Equal(WinCondition.DefeatBoss, maps[1].Map.Win);
@@ -571,5 +572,54 @@ public class SampleMapsTests
         {
             Directory.Delete(dir, recursive: true);
         }
+    }
+
+    private static IReadOnlyList<Coord> GroupOn(MapDefinition map, string group) =>
+        map.Placements.OfType<EnemyPlacement>().Where(e => e.Group == group).Select(e => e.At).ToList();
+
+    /// <summary>
+    /// Issue 81: the field's two western guard groups can be fought one at a time. No tile is
+    /// within the wake radius of both, and a fight on a tile beside either is outside the other's
+    /// noise radius, so the line wakes with the pickets only when a unit stops between them.
+    /// </summary>
+    [Fact]
+    public void TheFieldsWesternGroupsCanBeFoughtApart()
+    {
+        var map = All().Single(m => m.Id == "the_field").Map;
+        var content = MapFixture.Content;
+        var line = GroupOn(map, "line");
+        var pickets = GroupOn(map, "pickets");
+
+        var nearest = line.SelectMany(a => pickets.Select(b => a.DistanceTo(b))).Min();
+
+        Assert.Equal(3, line.Count);
+        Assert.Equal(3, pickets.Count);
+        Assert.True(nearest > 2 * content.WakeRadius, $"nearest {nearest}");
+        Assert.True(nearest > content.NoiseRadius + 1, $"nearest {nearest}");
+    }
+
+    /// <summary>
+    /// Issue 81: the river on columns 13 and 14 is crossed on foot only at the bridge (rows 7
+    /// and 8) or round its southern end (rows 13 to 15); every other row is water, the flyer's.
+    /// A fight on the bridge's east end is inside the camp's noise radius, so crossing there
+    /// wakes the boss's group.
+    /// </summary>
+    [Fact]
+    public void TheFieldsRiverIsCrossedAtTheBridgeRoundTheSouthOrByAir()
+    {
+        var map = All().Single(m => m.Id == "the_field").Map;
+        var content = MapFixture.Content;
+
+        foreach (var x in new[] { 13, 14 })
+        {
+            for (var y = 0; y < map.Height; y++)
+            {
+                var expected = y is 7 or 8 ? "road" : y >= 13 ? "plain" : "water";
+                Assert.Equal(expected, map.TerrainIdAt(new Coord(x, y)));
+            }
+        }
+
+        Assert.Contains(GroupOn(map, "camp"), at => at.DistanceTo(new Coord(14, 7)) <= content.NoiseRadius);
+        Assert.Equal("sworn_captain", map.Placements.OfType<EnemyPlacement>().Single(e => e.IsBoss).TemplateId);
     }
 }

@@ -106,7 +106,7 @@ public class WeaponLadderTests
             .Where(u => u.Inventory.Items.Any(s => Shipped.Weapons.TryGetValue(s.ItemId, out var w) && w.Rank > WeaponRank.E))
             .Select(u => u.Id).OrderBy(id => id, StringComparer.Ordinal).ToList();
 
-        Assert.Equal(new[] { "acolyte", "bandit_leader", "deacon", "finale_lord", "ford_chief", "grange_reeve", "heavy_rider", "lector", "longbowman", "marauder", "postern_keeper", "sentry", "veteran", "wing_captain" }, raised);
+        Assert.Equal(new[] { "acolyte", "bandit_leader", "deacon", "finale_lord", "ford_chief", "grange_reeve", "heavy_rider", "lector", "longbowman", "marauder", "postern_keeper", "sentry", "sworn_captain", "veteran", "wing_captain" }, raised);
         Assert.All(raised, id => Assert.All(Shipped.Units[id].Inventory.Items, s => Assert.True(Shipped.Units[id].CanWield(Shipped.Weapon(s.ItemId), Shipped.Class(Shipped.Units[id].ClassId)))));
     }
 

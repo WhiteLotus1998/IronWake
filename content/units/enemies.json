@@ -274,6 +274,16 @@
       "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 20, "spd": 15, "lck": 10, "def": 35, "res": 10, "cha": 10 },
       "ranks": { "lance": "D" },
       "inventory": [ { "item": "steel_lance" }, { "item": "iron_bow" } ]
+    },
+    {
+      "id": "sworn_captain",
+      "name": "Sworn Captain",
+      "class": "pikeman",
+      "level": 3,
+      "stats": { "hp": 26, "str": 7, "mag": 0, "dex": 6, "spd": 5, "lck": 4, "def": 6, "res": 2, "cha": 5 },
+      "growths": { "hp": 50, "str": 35, "mag": 5, "dex": 30, "spd": 25, "lck": 10, "def": 30, "res": 15, "cha": 10 },
+      "ranks": { "lance": "D" },
+      "inventory": [ { "item": "steel_lance" } ]
     }
   ]
 }
