@@ -25,7 +25,7 @@ public class CampaignCurveTests
     [Fact]
     public void TheShippedCurveBendsHarrowWeirBackToItsFileAndRaisesTheRaid()
     {
-        Assert.Equal(new int?[] { 1, 1, 2, 3, 2, 6, 7, 6, 8 }, Content.Campaign.Maps.Select(m => m.EnemyLevel));
+        Assert.Equal(new int?[] { 1, 1, 2, 3, 2, 6, 7, 6, 4, 8 }, Content.Campaign.Maps.Select(m => m.EnemyLevel));
     }
 
     [Fact]

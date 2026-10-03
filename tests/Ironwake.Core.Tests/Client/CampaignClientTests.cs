@@ -50,8 +50,8 @@ public class CampaignClientTests
         var console = ConsoleLog();
         var client = ClientLog();
 
-        Assert.StartsWith("Alder Fenn buys Iron Sword for 400; the purse holds 100\nMap 4 of 9: The Tollgate, seed 113\n", console);
-        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: Teodor\nMap 5 of 9: Harrow Weir, seed 114\n", console);
+        Assert.StartsWith("Alder Fenn buys Iron Sword for 400; the purse holds 100\nMap 4 of 10: The Tollgate, seed 113\n", console);
+        Assert.Contains("The Tollgate won: seize; reward 1000, the purse holds 1100; fallen: Teodor\nMap 5 of 10: Harrow Weir, seed 114\n", console);
         Assert.Contains("-- Enemy phase, turn 1 --", console[console.IndexOf("Harrow Weir", StringComparison.Ordinal)..]);
         Assert.Null(Parity.FirstDifference(console, client));
     }
@@ -95,7 +95,7 @@ public class CampaignClientTests
 
         var lines = Client().ScreenLines();
 
-        Assert.Equal("-- Before map 4 of 9: The Tollgate; the purse holds 500 --", lines[0]);
+        Assert.Equal("-- Before map 4 of 10: The Tollgate; the purse holds 500 --", lines[0]);
         Assert.Contains(string.Join("\n", lines) + "\n", output);
     }
 

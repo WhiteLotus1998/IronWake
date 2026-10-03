@@ -81,7 +81,7 @@ public class CampActionsTests
             "Forge built for 600", "Bunk room built for 400", "Barracks built for 500", "Corin Ashby joins as a Cadet",
             "Refine Iron Sword: Iron Sword +1", "Refine Iron Sword: Iron Sword +2", "Wren's Iron Sword repaired from 20 to 40", "Wren takes Salve from the wagon",
             "Wren drops Salve", "Alder Fenn certifies from Cadet to Vanguard", "Built for 400", "Side map: The Lazar House",
-            "Maud falls on maud_1", "Map 7 of 9: Sallow Grange",
+            "Maud falls on maud_1", "Map 7 of 10: Sallow Grange",
         })
         {
             Assert.Contains(line, console);

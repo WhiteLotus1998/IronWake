@@ -314,6 +314,23 @@ internal static class Fixture
             File.Copy(file, copy);
         }
 
+        return WithoutTheField(target);
+    }
+
+    /// <summary>
+    /// Takes The Field Before the Keep (issue 81) out of the campaign's maps. Every copy stands for a
+    /// build journaled before it was map 9, and a trial's and a side map's seed count the campaign's
+    /// maps (<see cref="CampaignRecord.TrialSeed"/>,
+    /// <see cref="CampaignRecord.QuestSeed"/>), so a script journaled on nine
+    /// maps replays only on nine.
+    /// </summary>
+    public static string WithoutTheField(string target)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        var maps = campaign["maps"]!.AsArray().Where(m => (string)m!["map"]! != "the_field").Select(m => m!.DeepClone()).ToArray();
+        campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
 

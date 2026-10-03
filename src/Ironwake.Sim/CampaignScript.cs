@@ -33,7 +33,9 @@ public static class CampaignScript
     /// taken while the client accepts them, the heuristic finishing anything left; the camp before
     /// such a map takes no action, so the hand play's slots stand as it was played. <paramref name="variant"/>
     /// varies the camps for a run the heuristic can win: the class list a certify tries is rotated by it,
-    /// and when <c>variant / 3</c> is odd no side map is taken.
+    /// when <c>variant / 3</c> is odd no side map is taken, and when <c>variant / 6</c> is odd the camp
+    /// before the last map benches the wounded, repairs every weapon and buys each member the dearest
+    /// stocked one it can wield (issue 81: with the field before it, no other camp wins the keep).
     /// </summary>
     public static Result Write(GameContent content, string contentDir, ulong seed, IReadOnlyDictionary<string, string>? handPlays = null, string difficulty = CampaignRecord.NormalDifficulty, bool permadeath = true, int variant = 0)
     {
@@ -182,6 +184,45 @@ public static class CampaignScript
                     touched.Add("trial");
                     Fight(client, content, lines, touched);
                     Leave(client, lines);
+                }
+            }
+        }
+
+        // Before the last map, a variant whose `variant / 6` is odd spends the purse as a player would:
+        // the wounded are benched so the whole deploy, each member repairs every worn weapon, and each
+        // buys the dearest stocked weapon it can wield.
+        if ((variant / 6) % 2 == 1 && client.Record.MapIndex == content.Campaign.Maps.Count - 1)
+        {
+            foreach (var unit in client.Record.Present(content).Where(u => u.Wound is not null && !CampaignRecord.IsCaptain(u, content)).ToList())
+            {
+                if (client.Bench(unit.Id))
+                {
+                    lines.Add($"bench {unit.Id}");
+                }
+            }
+
+            foreach (var unit in client.Record.Present(content))
+            {
+                for (var slot = 0; slot < unit.Inventory.Items.Count; slot++)
+                {
+                    if (client.Repair(unit.Id, slot))
+                    {
+                        lines.Add($"repair {unit.Id} {slot + 1}");
+                    }
+                }
+
+                var unitClass = content.Classes[unit.ClassId];
+                var wieldable = client.Stock
+                    .Where(id => content.Weapons.TryGetValue(id, out var w) && w.Price is not null && unit.CanWield(w, unitClass))
+                    .OrderByDescending(id => content.Weapons[id].Price).ThenBy(id => id, StringComparer.Ordinal);
+                foreach (var id in wieldable)
+                {
+                    if (client.Buy(id, unit.Id))
+                    {
+                        lines.Add($"buy {id} {unit.Id}");
+                        touched.Add("buy");
+                        break;
+                    }
                 }
             }
         }

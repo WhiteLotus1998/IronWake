@@ -1,0 +1,30 @@
+# issue 81 slice 2: --curve --map the_field --seeds 200 (Release) on issue/81-the-field-slot, the field as campaign map 9 at enemy level 6, 5, 4 and 3 (DECISIONS/0191).
+# At 7 (100 seeds, not kept in full): campaign 16 %, carried 7/3/1/1/1/1 23 %, spread 14 %. The point is 4: the first step where carried reaches 60 (68); 3 reads no better (65).
+
+map 9 the_field: enemy level 1 in the file, 6 in the campaign, no swaps
+  file:     gate 1 beatable: the_field, heuristic wins 120/200 (60 %), winning turn median 12 p90 15 limit 20, losses 48 timeout 32 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 48, at the stall p50 0.0355 over 46, two-roll average: ok
+  campaign: gate 1 beatable: the_field, heuristic wins 17/200 (9 %), winning turn median 13 p90 16 limit 20, losses 54 timeout 129 captain 0 protected, quiet tail 2.1, refused kill p50 0.8775 over 54, at the stall p50 0.0281 over 49, two-roll average: FAILED
+  party +5: gate 1 beatable: the_field, heuristic wins 125/200 (62 %), winning turn median 10 p90 13 limit 20, losses 63 timeout 12 captain 0 protected, quiet tail 5.2, refused kill p50 0.9824 over 63, at the stall p50 0.0002 over 61, two-roll average: ok
+  carried 7/3/1/1/1/1 over 80: gate 1 beatable: the_field, heuristic wins 46/200 (23 %), winning turn median 14 p90 20 limit 20, losses 102 timeout 52 captain 0 protected, quiet tail 1.3, refused kill p50 0.9849 over 102, at the stall p50 0.0642 over 93, two-roll average: FAILED
+  carried, spread 3/3/2/2/2/2 over 80: gate 1 beatable: the_field, heuristic wins 16/200 (8 %), winning turn median 13 p90 19 limit 20, losses 47 timeout 137 captain 0 protected, quiet tail 2.0, refused kill p50 0.8775 over 47, at the stall p50 0.0304 over 41, two-roll average: FAILED
+
+map 9 the_field: enemy level 1 in the file, 5 in the campaign, no swaps
+  file:     gate 1 beatable: the_field, heuristic wins 120/200 (60 %), winning turn median 12 p90 15 limit 20, losses 48 timeout 32 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 48, at the stall p50 0.0355 over 46, two-roll average: ok
+  campaign: gate 1 beatable: the_field, heuristic wins 41/200 (20 %), winning turn median 12 p90 17 limit 20, losses 77 timeout 82 captain 0 protected, quiet tail 2.0, refused kill p50 0.9892 over 77, at the stall p50 0.0339 over 71, two-roll average: FAILED
+  party +4: gate 1 beatable: the_field, heuristic wins 117/200 (58 %), winning turn median 10 p90 15 limit 20, losses 47 timeout 36 captain 0 protected, quiet tail 1.2, refused kill p50 0.9593 over 47, at the stall p50 0.0484 over 45, two-roll average: FAILED
+  carried 7/3/1/1/1/1 over 81: gate 1 beatable: the_field, heuristic wins 100/200 (50 %), winning turn median 11 p90 18 limit 20, losses 77 timeout 23 captain 0 protected, quiet tail 1.0, refused kill p50 0.9849 over 77, at the stall p50 0.0800 over 72, two-roll average: FAILED
+  carried, spread 3/3/2/2/2/2 over 81: gate 1 beatable: the_field, heuristic wins 49/200 (24 %), winning turn median 12 p90 19 limit 20, losses 63 timeout 88 captain 0 protected, quiet tail 2.0, refused kill p50 0.9645 over 63, at the stall p50 0.0224 over 57, two-roll average: FAILED
+
+map 9 the_field: enemy level 1 in the file, 4 in the campaign, no swaps
+  file:     gate 1 beatable: the_field, heuristic wins 120/200 (60 %), winning turn median 12 p90 15 limit 20, losses 48 timeout 32 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 48, at the stall p50 0.0355 over 46, two-roll average: ok
+  campaign: gate 1 beatable: the_field, heuristic wins 75/200 (38 %), winning turn median 12 p90 15 limit 20, losses 78 timeout 47 captain 0 protected, quiet tail 1.9, refused kill p50 0.9892 over 78, at the stall p50 0.0283 over 72, two-roll average: FAILED
+  party +3: gate 1 beatable: the_field, heuristic wins 113/200 (56 %), winning turn median 10 p90 13 limit 20, losses 54 timeout 33 captain 0 protected, quiet tail 3.0, refused kill p50 0.9849 over 54, at the stall p50 0.0089 over 54, two-roll average: FAILED
+  carried 7/3/1/1/1/1 over 81: gate 1 beatable: the_field, heuristic wins 136/200 (68 %), winning turn median 12 p90 18 limit 20, losses 39 timeout 25 captain 0 protected, quiet tail 0.9, refused kill p50 0.9939 over 39, at the stall p50 0.0597 over 37, two-roll average: ok
+  carried, spread 3/3/2/2/2/2 over 81: gate 1 beatable: the_field, heuristic wins 82/200 (41 %), winning turn median 13 p90 16 limit 20, losses 68 timeout 50 captain 0 protected, quiet tail 1.9, refused kill p50 0.9882 over 68, at the stall p50 0.0318 over 67, two-roll average: FAILED
+
+map 9 the_field: enemy level 1 in the file, 3 in the campaign, no swaps
+  file:     gate 1 beatable: the_field, heuristic wins 120/200 (60 %), winning turn median 12 p90 15 limit 20, losses 48 timeout 32 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 48, at the stall p50 0.0355 over 46, two-roll average: ok
+  campaign: gate 1 beatable: the_field, heuristic wins 88/200 (44 %), winning turn median 12 p90 15 limit 20, losses 64 timeout 48 captain 0 protected, quiet tail 1.6, refused kill p50 0.9892 over 64, at the stall p50 0.0318 over 61, two-roll average: FAILED
+  party +2: gate 1 beatable: the_field, heuristic wins 109/200 (55 %), winning turn median 12 p90 16 limit 20, losses 55 timeout 36 captain 0 protected, quiet tail 1.4, refused kill p50 0.8775 over 55, at the stall p50 0.0064 over 52, two-roll average: FAILED
+  carried 7/3/1/1/1/1 over 81: gate 1 beatable: the_field, heuristic wins 129/200 (65 %), winning turn median 11 p90 18 limit 20, losses 45 timeout 26 captain 0 protected, quiet tail 0.7, refused kill p50 0.9939 over 45, at the stall p50 0.0597 over 43, two-roll average: ok
+  carried, spread 3/3/2/2/2/2 over 81: gate 1 beatable: the_field, heuristic wins 88/200 (44 %), winning turn median 13 p90 16 limit 20, losses 71 timeout 41 captain 0 protected, quiet tail 1.7, refused kill p50 0.9187 over 71, at the stall p50 0.0318 over 70, two-roll average: FAILED

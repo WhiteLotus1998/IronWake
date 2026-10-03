@@ -84,7 +84,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Names:** Promotion, Refine; no Ascension.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique classes: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
-- **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,8 (0161, 0178); a tuned map under 60 lowers the point, never the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
+- **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, never the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (round 229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed (the Sim never swung a kit weapon). Numbers before verbs.
 - **The Sim's player picks a weapon per attack** (#756, 0171): Brackwater holds at 65 (0173).
 - **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the campaign's maps the ladder reads (Tollgate, Mill, Saltmarsh, Harrow, Brackwater) class means within 10 at 200 seeds; 5 at 400 before tuned. A board-dependent pick is choice.

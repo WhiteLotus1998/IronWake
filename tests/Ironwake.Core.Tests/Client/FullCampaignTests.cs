@@ -18,7 +18,7 @@ public class FullCampaignTests
 {
     private const ulong Seed = 631;
     private const string Difficulty = "recruit";
-    private const int Variant = 13;
+    private const int Variant = 42;
 
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
@@ -54,7 +54,7 @@ public class FullCampaignTests
 
         Assert.DoesNotContain("ERROR", output);
         Assert.DoesNotContain("Rejected", output);
-        Assert.Contains("Campaign won: all 9 maps", console);
+        Assert.Contains("Campaign won: all 10 maps", console);
         Assert.Null(Parity.FirstDifference(console, ClientLog()));
     }
 
@@ -83,7 +83,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1103", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1111", Parity.FirstDifference(console, without));
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class FullCampaignTests
             Assert.Contains(script, line => line.StartsWith(start, StringComparison.Ordinal));
         }
 
-        Assert.Equal(9, script.Count(line => line == "march"));
+        Assert.Equal(10, script.Count(line => line == "march"));
     }
 
     [Fact]
