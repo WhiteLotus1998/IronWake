@@ -17,7 +17,7 @@ namespace Ironwake.Cli;
 /// </summary>
 public sealed class CampaignSession
 {
-    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant] [--level N]] [--log file] [--saves dir] [--load save | --resume]";
+    public const string Usage = "usage: ironwake campaign [--seed N] [--script file] [--strict] [--content dir] [--difficulty id] [--permadeath on|off] [--origin id] [--captain he|she] [--scheme one|two] [--from map [--pick claimant [--fed N]] [--level N]] [--log file] [--saves dir] [--load save | --resume]";
 
     /// <summary>Where the keyboard's saves go when <c>--saves</c> is not given; a scripted run keeps none unless it is.</summary>
     public const string DefaultSavesDirectory = "saves";
@@ -99,6 +99,26 @@ public sealed class CampaignSession
         _scheme = scheme;
     }
 
+    /// <summary>
+    /// <paramref name="record"/> with the hungering weapon <paramref name="pick"/> carries fed
+    /// <paramref name="fed"/> times and not starved (issue 865, round 286): <c>--fed N</c>, so a chair
+    /// opening on a later map with <c>--from</c> plays the scythe at the feed the campaign would have
+    /// grown, its teeth and Mt as <see cref="Kinsbane"/> derives them from the count. Fed 0 is the
+    /// stack as issued. Null when the pick is not on the roster or carries no hungering weapon.
+    /// </summary>
+    public static CampaignRecord? Fed(CampaignRecord record, GameContent content, string pick, int fed)
+    {
+        if (record.Roster.FirstOrDefault(u => u.Id == pick) is not { } unit
+            || !unit.Inventory.Items.Any(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Hungers))
+        {
+            return null;
+        }
+
+        var items = unit.Inventory.Items.Select(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Hungers ? s with { Fed = fed, Starved = false } : s);
+        var fedUnit = unit with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+        return record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.Id == pick ? fedUnit : u)) };
+    }
+
     /// <summary>Parses the arguments after <c>campaign</c> and runs it: 0 when every map is won, 1 on a loss or an unfinished script, 2 for a usage error, 3 for a strict stop.</summary>
     public static int Run(string[] args)
     {
@@ -111,6 +131,7 @@ public sealed class CampaignSession
         string? from = null;
         string? pick = null;
         int? level = null;
+        int? fed = null;
         string? log = null;
         string? savesDir = null;
         string? load = null;
@@ -155,6 +176,10 @@ public sealed class CampaignSession
                     break;
                 case "--level" when value is not null && int.TryParse(value, out var parsedLevel) && parsedLevel >= Unit.MinLevel && parsedLevel <= Unit.MaxLevel:
                     level = parsedLevel;
+                    i++;
+                    break;
+                case "--fed" when value is not null && int.TryParse(value, out var parsedFed):
+                    fed = parsedFed;
                     i++;
                     break;
                 case "--log" when value is not null:
@@ -208,6 +233,27 @@ public sealed class CampaignSession
         if (level is not null && from is null)
         {
             Console.WriteLine("ERROR: --level raises the company a campaign opens with on a later map; give --from");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (fed is not null && from is null)
+        {
+            Console.WriteLine("ERROR: --fed feeds the pick's hungering weapon for a campaign opening on a later map; give --from");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (fed is not null && pick is null)
+        {
+            Console.WriteLine("ERROR: --fed feeds the pick's hungering weapon; give --pick");
+            Console.WriteLine(Usage);
+            return 2;
+        }
+
+        if (fed is { } count && (count < 0 || count > Kinsbane.WakeKills))
+        {
+            Console.WriteLine($"ERROR: --fed is 0 to {Kinsbane.WakeKills}, the count at which the weapon wakes; got {count}");
             Console.WriteLine(Usage);
             return 2;
         }
@@ -318,6 +364,17 @@ public sealed class CampaignSession
         if (level is { } floor)
         {
             record = record with { Roster = ValueList<Unit>.From(record.Roster.Select(u => u.ScaledTo(floor, content.Class(u.ClassId)))) };
+        }
+
+        if (fed is { } feed)
+        {
+            if (Fed(record, content, pick!, feed) is not { } fedRecord)
+            {
+                Console.WriteLine($"ERROR: {pick} carries no hungering weapon, so --fed has nothing to feed");
+                return 2;
+            }
+
+            record = fedRecord;
         }
 
         IReadOnlyList<string>? battleLines = null;
