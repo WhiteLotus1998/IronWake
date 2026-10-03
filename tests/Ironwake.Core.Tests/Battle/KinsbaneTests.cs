@@ -107,7 +107,7 @@ public class KinsbaneTests
         var (next, events) = PhaseStart(WithScythe(Placed(), hp));
 
         Assert.Equal(after, Keziah(next).Hp);
-        Assert.Equal(new HungerDrained("keziah", Kinsbane.ItemId, hp - after, after, starved), Assert.Single(events));
+        Assert.Equal(new HungerDrained("keziah", Kinsbane.ItemId, hp - after, after, starved), Assert.Single(events.OfType<HungerDrained>()));
         Assert.Equal(starved, Scythe(next).Starved);
         Assert.Equal(starved ? 1 : 20, Scythe(next).Uses);
     }
@@ -430,7 +430,7 @@ public class KinsbaneTests
     {
         var events = new List<GameEvent>();
         var woke = Kinsbane.AfterCombat(Keziah(WithScythe(Placed(), 10, fed: 11)), Shipped, ValueList<StrikeEvent>.Empty, killed: true, events);
-        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 12, 10, 20, 5, true), Assert.Single(events));
+        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 12, 10, 20, 5, true), Assert.Single(events.OfType<HungerFed>()));
 
         events.Clear();
         var after = Kinsbane.AfterCombat(woke with { Hp = 10 }, Shipped, ValueList<StrikeEvent>.Empty, killed: true, events);

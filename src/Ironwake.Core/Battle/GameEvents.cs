@@ -275,6 +275,13 @@ public sealed record HungerFed(string UnitId, string ItemId, int Fed, int Healed
 /// </summary>
 public sealed record HuntRanOn(string UnitId, int Mov) : GameEvent;
 
+/// <summary>
+/// A hungering weapon spoke to its carrier (issue 804 item 3, <see cref="Kinsbane.Speak"/>):
+/// <paramref name="LineId"/> is the content line's stable id and <paramref name="Text"/> its text with
+/// the carrier's name already in. It follows the drain or feed that moved it.
+/// </summary>
+public sealed record KinsbaneSpoke(string UnitId, string ItemId, string LineId, string Text) : GameEvent;
+
 /// <summary>A starved hungering weapon landed a hit that killed nothing (DESIGN.md 13.23, experiment): it leaves the starved form and its carrier heals what <paramref name="Healed"/> says.</summary>
 public sealed record HungerEased(string UnitId, string ItemId, int Healed, int HpAfter) : GameEvent;
 

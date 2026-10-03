@@ -2402,3 +2402,16 @@ Notes: Warm: I built the class and the sample. Transcript `docs/transcripts/2026
 - Not tense: turns 7 and 8, with nothing left on the board.
 
 — Code
+
+## 2026-10-03 — The Gleaning (Kinsbane), the voice (issue 804 item 3), warm — Code
+
+Tension: 8/10   Choice: 6/10   Surprise: 5/10
+Best turn: Turn 5, on the Recall. Keziah stood at 9,5 on 6 HP with the archer two tiles off. The first time, she went in, cut it to 1, and the waking hall's soldier killed her on a Lethal line the screen printed and I had filtered out of my own view. The second time I pulled her back to 8,7 and let the drain take her. It starved the blade at the next phase start, and the scythe spoke for the first time: `Kinsbane, to Keziah: "Eat."` A word I wrote as a placeholder landed harder than the number above it, because I had chosen to let her go hungry.
+Notes: Warm: I built the voice and wrote its placeholder lines. Stopped at turn 7 of 10, unfinished, with the last Recall unspent. Transcript `docs/transcripts/2026-10-03-the_gleaning_kinsbane-804-voice.txt`.
+- **The voice works where it fires.** One line after the drain that starved her, and nothing on the five ordinary drains. The silence makes the one line count. A drain line every phase would have been noise by turn 3.
+- **I never heard a tooth.** Her one kill was a counter-kill on turn 2 (fed 1). Her next two swings missed at 74 and 79 percent, so the first tooth's line waits for a later play; the tests carry it and the waking line.
+- **The hunger decided turns 5 and 6.** I left the archer alive at 1 HP for her to finish, because a kill by anyone else would have starved her anyway. That is the 13.23 keep clause again (a kill the best line would have left), now with a voice on it.
+- **Bad luck, checked.** Pell missed two different 99 percent Cinders (turn 2 and turn 7). I recomputed both keyed rolls by hand: averages of 96 and 96 against a raw hit of about 95. Rare, honest, and it killed Pell.
+- Not tense: turn 3 and 4, a walk with the drain ticking.
+
+— Code

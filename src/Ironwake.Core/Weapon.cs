@@ -52,6 +52,12 @@ public sealed record Weapon(
     public HeirloomLadder? Heirloom { get; init; }
 
     /// <summary>
+    /// What a hungering weapon says to its carrier (issue 804 item 3; <see cref="Kinsbane.Speak"/>),
+    /// or null for a weapon that never speaks. Content only on a weapon that <see cref="Hungers"/>.
+    /// </summary>
+    public HungerVoice? Voice { get; init; }
+
+    /// <summary>
     /// Marks a glass weapon (issue 702, obsidian): the sharpest edge sold, spent as it is used. It is
     /// never repaired and never Refined; the smith refuses it with <see cref="GlassRefusal"/>.
     /// </summary>
@@ -126,4 +132,23 @@ public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponS
     /// quest names. The id never changes, so the save and the stages key on what they did.
     /// </summary>
     public string? Named { get; init; }
+}
+
+/// <summary>
+/// One line a hungering weapon may say (issue 804 item 3): a stable id that is never reused, and its
+/// text, a bark under WRITING.md (one line, at most <see cref="HungerVoice.WordsMax"/> words). The
+/// token <c>{name}</c> stands for the carrier's name.
+/// </summary>
+public sealed record VoiceLine(string Id, string Text);
+
+/// <summary>
+/// A hungering weapon's voice (issue 804 item 3), in three registers: <paramref name="Starved"/>, said
+/// when a drain starves it; <paramref name="Tooth"/>, said when a kill grows a tooth, the tooth's
+/// number choosing the line; <paramref name="Woken"/>, said on the kill that wakes it, in place of
+/// that kill's tooth line. A register may be empty, and then that moment is silent.
+/// </summary>
+public sealed record HungerVoice(ValueList<VoiceLine> Starved, ValueList<VoiceLine> Tooth, ValueList<VoiceLine> Woken)
+{
+    /// <summary>The most words a line may run: WRITING.md's budget for a bark.</summary>
+    public const int WordsMax = 12;
 }

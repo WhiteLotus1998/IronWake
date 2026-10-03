@@ -86,6 +86,13 @@ public sealed record BattleUnit(
     public bool HuntRan { get; init; }
 
     /// <summary>
+    /// The lines the unit's hungering weapon has said to it this battle (issue 804 item 3,
+    /// <see cref="Kinsbane.Speak"/>), at most <see cref="Kinsbane.VoiceCap"/>. Never cleared; board
+    /// state, so Recall restores it.
+    /// </summary>
+    public int VoiceSpoken { get; init; }
+
+    /// <summary>
     /// The unit whose Turn the Key locked this one (issue 635, <see cref="Lock"/>), or null. While the
     /// chill clock runs and that unit stands orthogonally beside it, its Mov is 0 (<see cref="Lock.Holds"/>).
     /// </summary>

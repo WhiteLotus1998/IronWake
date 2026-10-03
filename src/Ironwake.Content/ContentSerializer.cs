@@ -976,6 +976,26 @@ public static class ContentSerializer
             writer.WriteEndObject();
         }
 
+        if (weapon.Voice is { } voice)
+        {
+            writer.WriteStartObject("voice");
+            foreach (var (name, lines) in new[] { ("starved", voice.Starved), ("tooth", voice.Tooth), ("woken", voice.Woken) })
+            {
+                writer.WriteStartArray(name);
+                foreach (var line in lines)
+                {
+                    writer.WriteStartObject();
+                    writer.WriteString("id", line.Id);
+                    writer.WriteString("text", line.Text);
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
+
+            writer.WriteEndObject();
+        }
+
         writer.WriteString("description", weapon.Description);
 
         writer.WriteEndObject();
