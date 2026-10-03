@@ -33,6 +33,13 @@ public readonly record struct ItemStack(string ItemId, int Uses)
     /// </summary>
     public bool GateOpen { get; init; }
 
+    /// <summary>
+    /// Whether a won quest 2 has named an heirloom (issue 635, rounds 268 to 270;
+    /// <see cref="HeirloomLadder.Named"/>, <see cref="CampaignQuest.Names"/>): it takes its true name
+    /// at whatever stage it has reached. False for any other stack.
+    /// </summary>
+    public bool Named { get; init; }
+
     /// <summary>The Mt the forge has added to this weapon (issue 647; <see cref="Forge"/>), 0 for an unrefined stack.</summary>
     public int RefineMt { get; init; }
 

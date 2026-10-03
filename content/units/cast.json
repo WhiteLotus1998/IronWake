@@ -38,7 +38,7 @@
       "personality": "Eldest of nine, gives orders to anyone younger, officers included; follows them himself when nobody is watching.",
       "signature": "orders",
       "hooks": [ "wren", "brannock" ],
-      "abilities": [ "long_thrust" ],
+      "abilities": [ "long_thrust", "turn_the_key" ],
       "stats": { "hp": 20, "str": 7, "mag": 0, "dex": 5, "spd": 5, "lck": 2, "def": 4, "res": 1, "cha": 4 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 35, "spd": 30, "lck": 20, "def": 35, "res": 15, "cha": 30 },
       "inventory": [ { "item": "iron_lance" }, { "item": "field_dressing" } ]

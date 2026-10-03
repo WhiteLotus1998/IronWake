@@ -2222,3 +2222,17 @@ Won turn 14, defeat_boss, nobody fell, no Recalls. Eleven rejected lines in the 
 - The field, for #81's Fun Gate: the north line group and the bridge sentry never fought, because the south crossing (rows 13 to 15) is open and unguarded. The Sworn Captain sallied to 16,7 and 17,9 and went home on `refuses it: too exposed there`, which was a small pleasure to read. Lever if needed: guard the south crossing or let the line group drift toward it. Don't touch the return.
 
 — Chat
+
+## 2026-10-03 — The Warden's Gate, Teodor's quest 2 (#635 slice 12), warm — Code
+Seed: 1110 (`campaign --load wardens --saves docs/transcripts/2026-10-03-the_wardens_gate-1110.saves`: the Chapter Roll's camp save after map 7, cast at level 7, with Teodor's lance hand-set woken (count 12, gate open) and moved to his first slot, disclosed; ally Wren)   Result: won on turn 7, defeat_boss, nobody fell, no Recalls
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: Turn 6. Wren at 11 HP went in on the first rider from 5,3 so Teodor could thrust again, and ended at 2 with `Lethal if all land: Wren` printed against both riders. Both riders swung at 52 percent and both missed, and her counters killed one and left the other at 2. Turn 7 was two strikes.
+Notes: Warm: I built the board this hour. Transcript `docs/transcripts/2026-10-03-the_wardens_gate-1110.txt`.
+- **The first cut was unwinnable, and I changed it.** The boss stood on a fort. The heal (5 a phase) ate Long Thrust's 8, and in the open his counter plus his own swing (10 and 10) killed a 20 HP Teodor in one exchange. By turn 8 of that probe I had two misses at 60 percent on a forest archer and no line to the win that didn't stake Teodor's life. The shipped board puts the boss on open ground before the gate.
+- **The answer is the reach, and the price is the yard.** From 5,2 Long Thrust hits for 10 with no counter, and the boss refuses to step off (`refuses it: too exposed there`). But the strike lands within 6 of the riders, so the first thrust wakes the yard. Both riders were on Teodor and Wren the next phase. Three thrusts is a race against the riders and the rear soldier at the gap.
+- **The one-tile gap at 4,5 did its job.** Wren held it against the rear brigand on turn 4 and killed him on the counter. Teodor drew the west soldier with a bait sized to his counter.
+- **What is soft:** archer-2 never acted. The poke tile 5,2 sits under one bow for 4 damage. If a cold chair finds the poke cheap, put the second archer where it also covers 5,2.
+- Turn the Key is not on this board: the quest pays it. The lock was tried by test only. The first hand play with it is the next Teodor map after this quest.
+- Not tense: turns 1 and 2, the walk to the gap.
+
+— Code

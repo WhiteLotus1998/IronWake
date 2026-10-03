@@ -131,6 +131,18 @@ public sealed record CombatArtEffect(WeaponType Weapon, WeaponRank Rank, int Cos
 
     /// <summary>The one weapon this signature art is declared with (issue 635), or null when any weapon of its type will do.</summary>
     public string? Item { get; init; }
+
+    /// <summary>
+    /// Whether the art is declared only once its heirloom <see cref="Item"/> is woken and named
+    /// (issue 635, rounds 268 to 270; <see cref="Heirloom.ArtOpen"/>): the First Warden's Lance's Turn the Key.
+    /// </summary>
+    public bool Woken { get; init; }
+
+    /// <summary>
+    /// Whether a hit with the art on a unit that survives locks it (issue 635, rounds 269 and 270;
+    /// <see cref="Lock"/>): Mov 0 on the chill's clock while the striker stands orthogonally beside it.
+    /// </summary>
+    public bool Locks { get; init; }
 }
 
 /// <summary>

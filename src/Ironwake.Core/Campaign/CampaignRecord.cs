@@ -1323,6 +1323,14 @@ public sealed record CampaignRecord(
                 : $"; {content.ItemName(heirloom)} will wake in {content.Unit(quest.MemberId).Name}'s hands";
         }
 
+        if (won && quest.Names is { } named && roster.FindIndex(u => u.Id == quest.MemberId) is var holder and >= 0
+            && roster[holder].Inventory.Items.ToList().FindIndex(s => s.ItemId == named) is var at2 and >= 0)
+        {
+            var stack = roster[holder].Inventory.Items[at2];
+            roster[holder] = roster[holder] with { Inventory = roster[holder].Inventory.Replace(at2, stack with { Named = true }) };
+            paid += $"; {content.ItemName(named)} is {Heirloom.Name(stack with { Named = true }, content)} now";
+        }
+
         if (won && quest.Promotes is { } classId && roster.FindIndex(u => u.Id == quest.MemberId) is var promoted and >= 0)
         {
             roster[promoted] = Promote(roster[promoted], content.Class(classId));

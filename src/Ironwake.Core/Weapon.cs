@@ -119,4 +119,11 @@ public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponS
     /// runs on regardless.
     /// </summary>
     public string? Held { get; init; }
+
+    /// <summary>
+    /// The weapon's true name once a won quest 2 names its stack (issue 635, rounds 268 to 270;
+    /// <see cref="ItemStack.Named"/>, <see cref="CampaignQuest.Names"/>), or null for a ladder no
+    /// quest names. The id never changes, so the save and the stages key on what they did.
+    /// </summary>
+    public string? Named { get; init; }
 }

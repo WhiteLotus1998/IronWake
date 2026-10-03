@@ -126,6 +126,14 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     /// </summary>
     public string? Wakes { get; init; }
 
+    /// <summary>
+    /// The heirloom a win names (part 2 only; issue 635, rounds 268 to 270): the member's own, whose
+    /// ladder carries a true name (<see cref="HeirloomLadder.Named"/>). The stack takes the name at
+    /// whatever stage it has reached, and its woken-only art opens (<see cref="Heirloom.ArtOpen"/>).
+    /// Counts as an issued signature for the rare material (<see cref="Forge.RareNeeded"/>).
+    /// </summary>
+    public string? Names { get; init; }
+
     /// <summary>The common material a win puts in the company's stores (issue 647); 0 for none.</summary>
     public int Common { get; init; }
 

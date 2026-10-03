@@ -162,6 +162,12 @@ public static class ContentLoader
                 throw new ContentException(files.Abilities.Name, ability.Id, "effect.item", $"'{item}' must be a {art.Weapon.ToString().ToLowerInvariant()} in weapons.json");
             }
 
+            if (ability.Effect is CombatArtEffect { Woken: true } woken
+                && !(woken.Item is { } heirloomId && weapons.TryGetValue(heirloomId, out var heirloom) && heirloom.Heirloom is not null))
+            {
+                throw new ContentException(files.Abilities.Name, ability.Id, "effect.woken", "a woken-only art needs an item that is an heirloom (weapons.json heirloom)");
+            }
+
             if (ability.Effect is HealArtEffect { Item: { } spell } heal
                 && !(weapons.TryGetValue(spell, out var healing) && healing.Type == heal.Weapon && healing.Heals))
             {
@@ -523,6 +529,26 @@ public static class ContentLoader
                 }
             }
 
+            string? names = null;
+            if (node.Has("names"))
+            {
+                names = node.String("names");
+                if (part != 2)
+                {
+                    throw node.Error("names", "only a quest 2 names an heirloom");
+                }
+
+                if (pays is not null)
+                {
+                    throw node.Error("names", "a quest 2 pays its signature item or names the one the member carries, not both");
+                }
+
+                if (!weapons.TryGetValue(names, out var namedHeirloom) || namedHeirloom.BoundTo != member || namedHeirloom.Heirloom is not { Named: not null })
+                {
+                    throw node.Error("names", $"'{names}' must be an heirloom with a true name (heirloom.named) bound to '{member}'");
+                }
+            }
+
             var common = node.IntOr("common", 0);
             var rare = node.IntOr("rare", 0);
             if (common < 0 || rare < 0)
@@ -553,6 +579,7 @@ public static class ContentLoader
                 After = Card(node, "after"),
                 Pays = pays,
                 Wakes = wakes,
+                Names = names,
                 Common = common,
                 Rare = rare,
                 OpensAfter = opensAfter,
@@ -1131,7 +1158,7 @@ public static class ContentLoader
 
                 return modifier;
             case "art":
-                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item");
+                RequireOnly(entry, effect, "effect", "kind", "weapon", "rank", "cost", "mt", "hit", "crit", "wt", "range", "perMap", "costsNextPhase", "single", "item", "woken", "locks");
                 var art = new CombatArtEffect(
                     entry.ParseEnum<WeaponType>("effect.weapon", effect.String("weapon")),
                     entry.ParseEnum<WeaponRank>("effect.rank", effect.String("rank")),
@@ -1146,6 +1173,8 @@ public static class ContentLoader
                     CostsNextPhase = effect.BoolOr("costsNextPhase", false),
                     Single = effect.BoolOr("single", false),
                     Item = effect.Has("item") ? effect.String("item") : null,
+                    Woken = effect.BoolOr("woken", false),
+                    Locks = effect.BoolOr("locks", false),
                 };
                 if (art.PerMap is < 1)
                 {
@@ -1408,7 +1437,13 @@ public static class ContentLoader
             throw weapon.Error("heirloom.held", "must be a line, or left out");
         }
 
-        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns)) { Held = held };
+        var named = node.OptionalString("named");
+        if (named is not null && string.IsNullOrWhiteSpace(named))
+        {
+            throw weapon.Error("heirloom.named", "must be a name, or left out");
+        }
+
+        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns)) { Held = held, Named = named };
     }
 
     private static string Description(EntryNode node)

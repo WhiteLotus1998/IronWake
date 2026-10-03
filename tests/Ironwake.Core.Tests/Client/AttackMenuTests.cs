@@ -55,7 +55,7 @@ public class AttackMenuTests
     [Theory]
     [InlineData("captain", "feint,full_measure")]
     [InlineData("wren", "heavy_cut")]
-    [InlineData("teodor", "long_thrust")]
+    [InlineData("teodor", "long_thrust,turn_the_key")]
     [InlineData("ottilie", "aimed_shot,paid_in_full")]
     [InlineData("pell", "overcast,read_ahead")]
     [InlineData("keziah", "cleave")]

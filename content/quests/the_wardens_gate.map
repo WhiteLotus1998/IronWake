@@ -1,0 +1,32 @@
+name: The Warden's Gate
+size: 15x10
+win: defeat_boss
+turn_limit: 10
+recall: 2
+enemy_level: 5
+announce: on
+
+MMMMMM###MMMMMM
+M^....^.^....^M
+^.............^
+..n.........n..
+...............
+####.#####..###
+...............
+.n.....^.....n.
+...............
+^^...........^^
+
+units:
+P captain 7,8
+P recruit 8,8
+B sworn_captain 7,2 group:gate behavior:guard
+E archer 6,1 group:gate behavior:hold
+E archer 8,1 group:gate behavior:hold
+E rider 12,3 group:yard behavior:guard
+E rider 13,4 group:yard behavior:guard
+E soldier 1,3 group:west behavior:guard
+
+events:
+rear1 turn 3 enemy spawn brigand 0,8 group:rear behavior:aggressive
+rear2 turn 4 enemy spawn soldier 14,8 group:rear behavior:aggressive

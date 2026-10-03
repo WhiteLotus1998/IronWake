@@ -1,0 +1,30 @@
+quest teodor_2 wren
+move teodor 4,7
+wait teodor
+move wren 5,7
+wait wren
+end
+threat teodor from 4,4
+move teodor 4,4
+wait teodor
+move wren 4,5
+wait wren
+end
+attack teodor soldier-1
+move wren 3,3
+attack wren soldier-1
+end
+move wren 4,5
+wait wren
+item teodor 3
+end
+move teodor 5,2
+attack teodor sworn_captain-1 art long_thrust
+end
+move wren 5,3
+attack wren rider-1
+attack teodor sworn_captain-1 art long_thrust
+end
+attack wren rider-2
+attack teodor sworn_captain-1 art long_thrust
+leave
