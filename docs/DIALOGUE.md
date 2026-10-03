@@ -26,7 +26,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Campaign:** permadeath carries; the keep is attacked twice, raid then finale (0059, 0060); trials stand in for the seal (0057). From #485: no campaign clock; no between-map screen the battles don't need; a spend wanted and feared at once is a signature with its cliff printed, never a gauge with a hidden one.
 - **Masteries** (0047, #245): 12 combats, a heal a point; maps 4 to 8 owe every mastery a target.
 - **Content:** no Lore or Faith member without an unconditional cast (#113); an unarmed unit says so; one contested place per two deployed units; a group asleep in the open can be dashed past.
-- **Defence comes from tiles** (Lotus, 155; both, 156): forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
+- **Defence comes from tiles**: forest, fort, hill and the raid's wall are how someone is kept safe; a protection idea is a terrain feature or a map event, never a unit action. Cover's redraft is retired with it.
 - **Battalions dropped** (0044). Gambits are the wrong shape; a boss stun, if asked for, is a captain's order (sixth round).
 
 ## Maps
