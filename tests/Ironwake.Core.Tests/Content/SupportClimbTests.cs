@@ -69,7 +69,7 @@ public class SupportClimbTests
     {
         var header = SupportRun.Lines(Shipped, Array.Empty<LevelRun.Run>()).First();
 
-        Assert.Contains("tiers C 16, B 40, A 72", header, StringComparison.Ordinal);
+        Assert.Contains("tiers C 16, B 28, A 48", header, StringComparison.Ordinal);
         Assert.Contains("the floor of the climb", header, StringComparison.Ordinal);
     }
 
