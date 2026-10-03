@@ -1,0 +1,136 @@
+bench dunstan
+bench maud
+march
+move keziah 3,9
+move ottilie 2,7
+move pell 1,7
+move teodor 2,4
+end
+move keziah 4,8
+move pell 3,7
+move ottilie 3,8
+move teodor 3,4
+move wren 2,5
+move captain 2,6
+end
+move pell 5,6
+attack pell brawler-1 cinder
+move keziah 7,7
+attack keziah brawler-1 kinsbane
+move captain 6,6
+move wren 4,6
+move teodor 5,5
+move ottilie 5,7
+end
+move captain 8,8
+attack captain veteran-1 iron_sword
+move pell 7,5
+attack pell archer-2 cinder
+move teodor 9,5
+move wren 8,6
+move ottilie 7,8
+wait keziah
+end
+item captain 2
+move teodor 11,6
+move wren 10,5
+move pell 9,5
+move ottilie 9,7
+move keziah 8,7
+end
+move pell 12,5
+attack pell grange_reeve-1 cinder
+move teodor 13,5
+attack teodor grange_reeve-1 iron_lance
+move wren 12,6
+attack wren grange_reeve-1 iron_sword
+move captain 10,6
+move ottilie 11,6
+move keziah 9,6
+end
+move ottilie 14,6
+attack ottilie hexer-1 iron_bow art aimed_shot
+move captain 13,6
+item teodor 2
+wait keziah
+end
+move captain 16,6
+leave
+bench teodor
+bench ottilie
+bench maud
+march
+move dunstan 12,3
+move keziah 10,3
+move captain 10,4
+move wren 10,5
+move pell 9,4
+end
+move keziah 9,3
+wait keziah
+move pell 10,3
+wait pell
+move dunstan 13,3
+wait dunstan
+move captain 12,4
+wait captain
+end
+attack pell brigand-1 cinder
+move keziah 10,2
+attack keziah heavy_rider-1 kinsbane
+move wren 10,4
+wait wren
+move dunstan 9,3
+wait dunstan
+move captain 12,3
+wait captain
+end
+recall 54
+move dunstan 11,3
+wait dunstan
+move captain 13,3
+wait captain
+end
+recall 49
+order press
+move dunstan 12,3
+wait dunstan
+move pell 14,3
+wait pell
+move wren 13,3
+wait wren
+move keziah 13,2
+wait keziah
+end
+move dunstan 14,4
+wait dunstan
+move keziah 12,3
+attack keziah heavy_rider-1 kinsbane
+move captain 15,3
+wait captain
+move wren 16,2
+wait wren
+move pell 14,2
+wait pell
+end
+move pell 13,3
+attack pell brigand-2 cinder
+attack keziah brigand-2 kinsbane
+move captain 12,4
+wait captain
+move wren 12,2
+wait wren
+move dunstan 17,3
+wait dunstan
+end
+recall 99
+move pell 12,2
+attack pell brigand-2 cinder
+attack keziah brigand-2 kinsbane
+move wren 13,2
+wait wren
+move captain 13,3
+wait captain
+move dunstan 14,2
+wait dunstan
+end
