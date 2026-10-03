@@ -23,8 +23,8 @@ public static class KinsbaneRun
     /// <summary>The claimant who carries the scythe (STORY draft 6, DESIGN 13.23).</summary>
     public const string Owner = "keziah";
 
-    /// <summary>One map won: its campaign number, the feed count by its end, whether she was deployed, the drains she paid and the times it starved on it, the tries it took, the attacks she made on the winning try with the scythe and with anything else (issue 851, round 277), and whether the scythe was still in its starved form at the map's end (issue 856, round 281).</summary>
-    public sealed record MapRead(int Map, int Fed, bool Deployed, int Drains, int Starved, int Attempts, int ScytheAttacks = 0, int OtherAttacks = 0, bool EndedStarved = false);
+    /// <summary>One map won: its campaign number, the feed count by its end, whether she was deployed, the drains she paid and the times it starved on it, the tries it took, the attacks she made on the winning try with the scythe and with anything else (issue 851, round 277), whether the scythe was still in its starved form at the map's end (issue 856, round 281), and whether the woken scythe ran the hunt on (issue 804 item 4).</summary>
+    public sealed record MapRead(int Map, int Fed, bool Deployed, int Drains, int Starved, int Attempts, int ScytheAttacks = 0, int OtherAttacks = 0, bool EndedStarved = false, bool HuntRan = false);
 
     /// <summary>One run: the maps won from her first, the campaign map each tooth grew on (0 when it never did), and the map no try won, or null.</summary>
     public sealed record Run(IReadOnlyList<MapRead> Maps, IReadOnlyList<int> ToothOn, int? LostOn);
@@ -101,7 +101,7 @@ public static class KinsbaneRun
 
                 var stack = record.Find(Owner)?.Inventory.Items.FirstOrDefault(s => s.ItemId == Kinsbane.ItemId);
                 var drains = events.OfType<HungerDrained>().Where(d => d.UnitId == Owner).ToList();
-                maps.Add(new MapRead(number, stack?.Fed ?? 0, won.History[0].UnitsOf(Side.Player).Any(u => u.Id == Owner), drains.Count, drains.Count(d => d.Starved), attempt, swings.Scythe, swings.Other, stack?.Starved ?? false));
+                maps.Add(new MapRead(number, stack?.Fed ?? 0, won.History[0].UnitsOf(Side.Player).Any(u => u.Id == Owner), drains.Count, drains.Count(d => d.Starved), attempt, swings.Scythe, swings.Other, stack?.Starved ?? false, events.OfType<HuntRanOn>().Any(h => h.UnitId == Owner)));
             }
 
             runs.Add(new Run(maps, toothOn, lost));
@@ -140,7 +140,7 @@ public static class KinsbaneRun
                     throw new InvalidOperationException($"seed {seed} map {number}: {command} was rejected: {result.Rejection!.Message}");
                 }
 
-                seen.AddRange(result.Events.Where(e => e is HungerFed or HungerDrained));
+                seen.AddRange(result.Events.Where(e => e is HungerFed or HungerDrained or HuntRanOn));
                 state = result.Next;
                 if (state.Outcome.IsOver)
                 {
@@ -152,7 +152,7 @@ public static class KinsbaneRun
         return (state, seen, swings);
     }
 
-    /// <summary>The printed table: per map from her first, the feed count by its end (p25, p50, p75), the drains and starved forms, and on the scythe arm the runs woken and starved by its end (rounds 279, 281) and those woken entering the last map, the keep; per tooth, the median map it grew on and how many runs grew it.</summary>
+    /// <summary>The printed table: per map from her first, the feed count by its end (p25, p50, p75), the drains and starved forms, and on the scythe arm the runs woken and starved by its end (rounds 279, 281) and those whose hunt ran on (issue 804) and those woken entering the last map, the keep; per tooth, the median map it grew on and how many runs grew it.</summary>
     public static IEnumerable<string> Lines(IReadOnlyList<Run> runs, bool axe = false)
     {
         yield return $"kinsbane: {runs.Count} runs, the heuristic player through the campaign, {Owner} picked at the branch and fielded on every map she can, " + (axe ? "the control arm: her iron axe in front, no scythe" : "the scythe in front of her pack, her iron axe behind it, as the campaign issues it");
@@ -160,7 +160,7 @@ public static class KinsbaneRun
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Order())
         {
             var reached = runs.SelectMany(r => r.Maps.Where(m => m.Map == number)).ToList();
-            yield return $"  map {number} (her map {number - first + 1}): won {reached.Count}, deployed in {reached.Count(m => m.Deployed)}, tries p50 {Percentile(reached.Select(m => m.Attempts), 0.5)}, fed by its end p25 {Percentile(reached.Select(m => m.Fed), 0.25)} p50 {Percentile(reached.Select(m => m.Fed), 0.5)} p75 {Percentile(reached.Select(m => m.Fed), 0.75)} (teeth p50 {Kinsbane.Teeth(Percentile(reached.Select(m => m.Fed), 0.5))}/{Kinsbane.MtCap}), drains p50 {Percentile(reached.Select(m => m.Drains), 0.5)}, starved in {reached.Count(m => m.Starved > 0)}, her attacks {reached.Sum(m => m.ScytheAttacks + m.OtherAttacks)} (scythe {reached.Sum(m => m.ScytheAttacks)})" + (axe ? "" : $", woken by its end in {reached.Count(m => Kinsbane.Woken(m.Fed))}, ended starved in {reached.Count(m => m.EndedStarved)}");
+            yield return $"  map {number} (her map {number - first + 1}): won {reached.Count}, deployed in {reached.Count(m => m.Deployed)}, tries p50 {Percentile(reached.Select(m => m.Attempts), 0.5)}, fed by its end p25 {Percentile(reached.Select(m => m.Fed), 0.25)} p50 {Percentile(reached.Select(m => m.Fed), 0.5)} p75 {Percentile(reached.Select(m => m.Fed), 0.75)} (teeth p50 {Kinsbane.Teeth(Percentile(reached.Select(m => m.Fed), 0.5))}/{Kinsbane.MtCap}), drains p50 {Percentile(reached.Select(m => m.Drains), 0.5)}, starved in {reached.Count(m => m.Starved > 0)}, her attacks {reached.Sum(m => m.ScytheAttacks + m.OtherAttacks)} (scythe {reached.Sum(m => m.ScytheAttacks)})" + (axe ? "" : $", woken by its end in {reached.Count(m => Kinsbane.Woken(m.Fed))}, ended starved in {reached.Count(m => m.EndedStarved)}, the hunt ran on in {reached.Count(m => m.HuntRan)}");
         }
 
         foreach (var lostOn in runs.Where(r => r.LostOn is not null).GroupBy(r => r.LostOn!.Value).OrderBy(g => g.Key))

@@ -21,6 +21,9 @@ namespace Ironwake.Core;
 /// <item>The uses: a hungering weapon never spends below 1, so it never breaks; at 1 a strike spends nothing.</item>
 /// <item>The cap: at <see cref="WakeKills"/> fed it wakes and neither drains, starves nor heals;
 /// a kill still counts and restores its uses.</item>
+/// <item>The hunt runs on (issue 804, round 251): once a battle, a kill with it on its carrier's own
+/// Attack that leaves it woken, the waking kill included, gives the carrier its full Move again as a
+/// Canto, with no second strike (<see cref="RunsOn"/>).</item>
 /// </list>
 /// Everything is board state, so Recall restores it with the board.
 /// </summary>
@@ -221,7 +224,7 @@ public static class Kinsbane
 
         var stack = unit.Unit.Inventory.Items[slot];
         var head = $"{content.ItemName(stack.ItemId)}: fed {stack.Fed}, teeth {Teeth(stack.Fed)}/{MtCap}. Power +{MtBonus(stack.Fed)}.";
-        var state = Woken(stack.Fed) ? "Woken: no drain."
+        var state = Woken(stack.Fed) ? "Woken: no drain. " + (unit.HuntRan ? "The hunt has run this map." : "A kill: move again (once a map).")
             : stack.Starved ? "Starved: half Power, uses 1; any hit eases it (+" + EasedHeal + " HP), a kill feeds it."
             : unit.HasFed ? "Fed this phase."
             : Coming(unit, content) is var (amount, starves) ? $"Hungry: -{amount} HP at the next phase start, if an enemy is in reach" + (starves ? ", and it starves." : ".")
@@ -232,22 +235,65 @@ public static class Kinsbane
     /// <summary>
     /// The forecast's lines for <paramref name="unit"/> fighting with <paramref name="weapon"/>
     /// equipped from <paramref name="stack"/> (DESIGN.md 13.23): <c>kill: +10 HP</c> when a kill
-    /// would heal it, and in the starved form the hit that eases it. Empty for any other weapon
-    /// and for one woken.
+    /// would heal it, and in the starved form the hit that eases it; for the striker on its own
+    /// phase (<paramref name="huntMov"/> set, the Move <see cref="HuntMov"/> gives), the hunt running
+    /// on when the kill would leave it woken with the charge unspent (issue 804). Empty for any other weapon.
     /// </summary>
-    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name)
+    public static IEnumerable<string> ForecastLines(BattleUnit unit, GameContent content, Weapon? weapon, ItemStack stack, string name, int? huntMov = null)
     {
-        if (weapon is not { Hungers: true } || Woken(stack.Fed))
+        if (weapon is not { Hungers: true })
         {
             yield break;
         }
 
-        var max = unit.MaxHp(content);
-        yield return $"  kill: {name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})";
-        if (stack.Starved)
+        if (!Woken(stack.Fed))
         {
-            yield return $"  hit: {name} +{EasedHeal} HP, the starved form ends";
+            var max = unit.MaxHp(content);
+            yield return $"  kill: {name} +{FeedHeal} HP, to max {max} ({content.ItemName(stack.ItemId)} feeds, fed {stack.Fed + 1})";
+            if (stack.Starved)
+            {
+                yield return $"  hit: {name} +{EasedHeal} HP, the starved form ends";
+            }
         }
+
+        if (huntMov is { } mov && WouldRunOn(unit, stack))
+        {
+            yield return $"  kill: {name} moves again, {mov} movement (the hunt runs on, once a map)";
+        }
+    }
+
+    /// <summary>
+    /// The Mov the hunt gives back (issue 804): the carrier's full Move this phase as
+    /// <see cref="BattleState.ReachOf"/> reads it (a Press counted, the chill taken off, 0 while locked).
+    /// </summary>
+    public static int HuntMov(BattleState state, GameContent content, BattleUnit unit) =>
+        Lock.Holds(state, unit) ? 0 : Frost.Mov(content.Class(unit.Unit.ClassId).Mov + (unit.Pressed ? 1 : 0), unit);
+
+    /// <summary>
+    /// Whether a kill now by <paramref name="unit"/> with the hungering weapon on <paramref name="stack"/>
+    /// would run the hunt on (issue 804): the kill leaves it woken and the unit has not run it this battle.
+    /// </summary>
+    public static bool WouldRunOn(BattleUnit unit, ItemStack stack) => !unit.HuntRan && Woken(stack.Fed + 1);
+
+    /// <summary>
+    /// The hunt runs on (issue 804, round 251; DESIGN.md 13.23): after <paramref name="unitId"/>'s own
+    /// Attack, if <paramref name="events"/> hold a feed of its weapon that left it woken and the unit
+    /// has not run the hunt this battle, the unit is owed a Canto of its full Move
+    /// (<see cref="HuntMov"/>; never less than a Canto it was already owed), the charge is spent
+    /// (<see cref="BattleUnit.HuntRan"/>) and <see cref="HuntRanOn"/> is emitted. The Canto moves
+    /// only, so there is no second strike. Any other command, a counter-kill, or a dead carrier: unchanged.
+    /// </summary>
+    public static BattleState RunsOn(BattleState state, GameContent content, string unitId, List<GameEvent> events)
+    {
+        if (state.Find(unitId) is not { } unit || unit.HuntRan || unit.Side != state.Phase
+            || !events.OfType<HungerFed>().Any(f => f.UnitId == unitId && Woken(f.Fed)))
+        {
+            return state;
+        }
+
+        var mov = Math.Max(HuntMov(state, content, unit), unit.Canto ?? 0);
+        events.Add(new HuntRanOn(unitId, mov));
+        return state.WithUnit(unit with { Canto = mov, HuntRan = true });
     }
 
     private static BattleUnit WithStack(BattleUnit unit, int slot, ItemStack stack) =>

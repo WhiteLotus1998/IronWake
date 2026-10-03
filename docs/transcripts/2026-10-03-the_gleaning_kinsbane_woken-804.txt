@@ -1,0 +1,1443 @@
+The Gleaning (Kinsbane woken), seed 804, scheme TwoRollAverage
+Objective: Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^....D......#
+ 9 #=.BAC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           3,9    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 4,8
+Keziah moves 3,9 -> 4,8 via 3,8
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^..B.D......#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^..B.D......#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^..B.D......#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^..B.D......#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 1 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#...a......#
+ 6 #^#.....nb...#
+ 7 #^#..........#
+ 8 #^..B.D......#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,5    hp 22/22  Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          9,6    hp 22/22  Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 16/16  Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+Lethal if all land: Pell (Brigand 1 for 13, Brigand 2 for 13, against 16 hp)
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-1 6,7
+Brigand 1 moves 6,5 -> 6,7 via 6,6
+enemy: attack brigand-1 pell
+Forecast Brigand 1 -> Pell: acc 70% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Brigand 1 attacks Pell
+  Brigand 1 hits Pell for 13 (hp 3)
+  Pell hits Brigand 1 for 13 (hp 9)
+  Brigand 1 hp 9, Pell hp 3
+Pell gains 12 exp (12)
+enemy: move brigand-2 7,8
+Brigand 2 moves 9,6 -> 7,8 via 9,7 8,7 7,7
+enemy: attack brigand-2 pell
+Forecast Brigand 2 -> Pell: acc 70% dmg 13 crit 0%; counter with Cinder: acc 99% dmg 13 crit 3%
+Brigand 2 attacks Pell
+  Brigand 2 misses Pell
+  Pell hits Brigand 2 for 13 (hp 9)
+  Brigand 2 hp 9, Pell hp 3
+Pell gains 12 exp (24)
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#...a......#
+ 8 #^..B.Db.....#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 7,9
+Wren moves 5,9 -> 7,9 via 6,9
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#...a......#
+ 8 #^..B.Db.....#
+ 9 #=..A..C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack wren brigand-2
+Forecast Wren -> Brigand 2: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+Wren attacks Brigand 2
+  Wren hits Brigand 2 for 10 (hp 0)
+  Wren hp 20, Brigand 2 hp 0
+Wren gains 35 exp (35)
+Brigand 2 falls at 7,8
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#...a......#
+ 8 #^..B.D......#
+ 9 #=..A..C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 5,7
+Keziah moves 4,8 -> 5,7 via 4,7
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ba......#
+ 8 #^....D......#
+ 9 #=..A..C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           5,7    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack keziah brigand-1
+Forecast Keziah -> Brigand 1 with Kinsbane: acc 79% dmg 21 crit 2%; counter: acc 67% dmg 12 crit 0%
+  Kill: Keziah moves again, 4 movement (the hunt runs on, once a map)
+Keziah attacks Brigand 1
+  Keziah misses Brigand 1
+  Brigand 1 hits Keziah for 12 (hp 11)
+  Keziah hp 11, Brigand 1 hp 9
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ba......#
+ 8 #^....D......#
+ 9 #=..A..C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           5,7    hp 11/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack pell brigand-1
+Forecast Pell -> Brigand 1 with Cinder: acc 99% dmg 13 crit 3%; counter: acc 70% dmg 13 crit 0%
+  Counter: lethal to Pell (13 against 3 hp)
+Pell attacks Brigand 1
+  Pell misses Brigand 1
+  Brigand 1 misses Pell
+  Pell hp 3, Brigand 1 hp 9
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ba......#
+ 8 #^....D......#
+ 9 #=..A..C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           5,7    hp 11/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 5,8
+Alder Fenn moves 4,9 -> 5,8 via 4,8
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ba......#
+ 8 #^...AD......#
+ 9 #=.....C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           5,7    hp 11/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ba......#
+ 8 #^...AD......#
+ 9 #=.....C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           5,7    hp 11/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+Lethal if all land: Keziah (Brigand 1 for 12, against 11 hp)
+Lethal if all land: Pell (Brigand 1 for 13, against 3 hp)
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: attack brigand-1 keziah
+Forecast Brigand 1 -> Keziah: acc 67% dmg 12 crit 0%; counter with Kinsbane: acc 79% dmg 21 crit 2%
+Brigand 1 attacks Keziah
+  Brigand 1 hits Keziah for 12 (hp 0)
+  Brigand 1 hp 9, Keziah hp 0
+Keziah falls at 5,7
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 3
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#...a......#
+ 8 #^...AD......#
+ 9 #=.....C.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              7,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> recall 15
+Recalled to state 15; 2 charges left
+Undone: gives back 1 kill (Brigand 2), 35 exp, 9 enemy hp; returns Keziah alive at 23 hp
+The rolls do not change: the same attack will roll the same
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#...a......#
+ 8 #^..B.Db.....#
+ 9 #=..AC.......#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,9    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 5,7
+Wren moves 5,9 -> 5,7 via 5,8
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..Ca......#
+ 8 #^..B.Db.....#
+ 9 #=..A........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+a  brigand-1        Brigand L2 reaver          6,7    hp 9/22   Plain  group field, aggressive
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack wren brigand-1
+Forecast Wren -> Brigand 1: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+Wren attacks Brigand 1
+  Wren misses Brigand 1
+  Brigand 1 misses Wren
+  Wren hits Brigand 1 for 10 (hp 0)
+  Wren hp 20, Brigand 1 hp 0
+Wren gains 35 exp (35)
+Brigand 1 falls at 6,7
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C.......#
+ 8 #^..B.Db.....#
+ 9 #=..A........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           4,8    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 7,9
+Keziah moves 4,8 -> 7,9 via 5,8 6,8 6,9
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C.......#
+ 8 #^....Db.....#
+ 9 #=..A..B.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+b  brigand-2        Brigand L2 reaver          7,8    hp 9/22   Plain  group field, aggressive
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           7,9    hp 23/23  Plain
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack keziah brigand-2
+Forecast Keziah -> Brigand 2 with Kinsbane: acc 79% dmg 21 crit 2%; counter: acc 67% dmg 12 crit 0%
+  Kill: Keziah moves again, 4 movement (the hunt runs on, once a map)
+Keziah attacks Brigand 2
+  Keziah hits Brigand 2 for 21 (hp 0)
+  Keziah hp 23, Brigand 2 hp 0
+Keziah gains 35 exp (35)
+Kinsbane feeds: fed 13, power +5
+Brigand 2 falls at 7,8
+The hunt runs on: Keziah may move again, 4 movement
+Keziah may move again up to 4 movement: canto keziah <x,y|stay>
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C.......#
+ 8 #^....D......#
+ 9 #=..A..B.....#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           7,9    hp 23/23  Plain  canto 4
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> canto keziah 9,7
+Keziah moves again 7,9 -> 9,7 via 7,8 7,7 8,7
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^....D......#
+ 9 #=..A........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain  done
+D  pell             Pell L1 adept              6,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> show keziah
+Keziah, Reaver L1, at 9,7 on Plain
+  HP 23/23  Str 9 Mag 0 Dex 4 Spd 5 Lck 3 Def 3 Res 0 Cha 2  Mov 4 (infantry)
+  Weapon: Kinsbane (acc 70 power 14 crit 0 wt 10 range 1-1)
+  Items: 1: Kinsbane x20, 2: Iron Axe x40, 3: Iron Gauntlets x40
+  Ranks: axe E (5), gauntlet E (0)
+  Techniques: Cleave (axe E, cost 3): -20 Acc, +6 Power, +10 Crit. All in.
+  Mastery: Bloodrush (1 of 12 combats)
+  Kinsbane: fed 13, teeth 5/5. Power +5. Woken: no drain. The hunt has run this map.
+  Targets from here: none
+> move pell 3,8
+Pell moves 6,8 -> 3,8 via 5,8 4,8
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^.D.........#
+ 9 #=..A........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^.D.........#
+ 9 #=..A........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        4,9    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 5,8
+Alder Fenn moves 4,9 -> 5,8 via 4,8
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 2 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..C...B...#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           9,7    hp 23/23  Plain
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 11,5
+Keziah moves 9,7 -> 11,5 via 9,6 9,5 10,5
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#........B.#
+ 6 #^#.....n....#
+ 7 #^#..C.......#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait keziah
+Keziah waits
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#........B.#
+ 6 #^#.....n....#
+ 7 #^#..C.......#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 5,5
+Wren moves 5,7 -> 5,5 via 5,6
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#.....n....#
+ 7 #^#..........#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#.....n....#
+ 7 #^#..........#
+ 8 #^.D.A.......#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,8    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move captain 5,6
+Alder Fenn moves 5,8 -> 5,6 via 5,7
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#..A..n....#
+ 7 #^#..........#
+ 8 #^.D.........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#..A..n....#
+ 7 #^#..........#
+ 8 #^.D.........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,8    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 4,7
+Pell moves 3,8 -> 4,7 via 3,7
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#..A..n....#
+ 7 #^#.D........#
+ 8 #^...........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              4,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Gleaning (Kinsbane woken)  turn 3 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#..A..n....#
+ 7 #^#.D........#
+ 8 #^...........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain  done
+D  pell             Pell L1 adept              4,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......c..#
+ 4 #^#......^^..#
+ 5 #^#..C.....B.#
+ 6 #^#..A..n....#
+ 7 #^#.D........#
+ 8 #^...........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,5   hp 23/23  Plain
+D  pell             Pell L1 adept              4,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move keziah 11,3
+Keziah moves 11,5 -> 11,3 via 11,4
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..C.......#
+ 6 #^#..A..n....#
+ 7 #^#.D........#
+ 8 #^...........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, asleep
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain
+D  pell             Pell L1 adept              4,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, asleep
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack keziah archer-1
+Forecast Keziah -> Archer with Kinsbane: acc 74% dmg 21 crit 1%; counter: none
+Keziah attacks Archer
+  Keziah misses Archer
+  Keziah hp 23, Archer hp 17
+The hall group wakes (noise)
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..C.......#
+ 6 #^#..A..n....#
+ 7 #^#.D........#
+ 8 #^...........#
+ 9 #=...........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              4,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+> move pell 3,9
+Pell moves 4,7 -> 3,9 via 3,7 3,8
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..C.......#
+ 6 #^#..A..n....#
+ 7 #^#..........#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+> wait pell
+Pell waits
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..C.......#
+ 6 #^#..A..n....#
+ 7 #^#..........#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,5    hp 20/20  Plain
+> move wren 5,7
+Wren moves 5,5 -> 5,7 via 5,6
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#..A..n....#
+ 7 #^#..C.......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+> wait wren
+Wren waits
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#..A..n....#
+ 7 #^#..C.......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        5,6    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+> move captain 6,7
+Alder Fenn moves 5,6 -> 6,7 via 6,6
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..CA......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 4 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#d...e.....#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#..........#
+ 6 #^#.....n....#
+ 7 #^#..CA......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,1    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         7,1    hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+enemy: wait archer-1
+Archer waits
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move brigand-3 3,5
+Brigand 3 moves 3,1 -> 3,5 via 3,2 3,3 3,4
+enemy: wait brigand-3
+Brigand 3 waits
+enemy: move soldier-1 11,1
+Soldier moves 7,1 -> 11,1 via 8,1 9,1 10,1
+enemy: wait soldier-1
+Soldier waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#.......cB.#
+ 4 #^#......^^..#
+ 5 #^#d.........#
+ 6 #^#.....n....#
+ 7 #^#..CA......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+c  archer-1         Archer L2 bowman           10,3   hp 17/17  Plain  group field, hold
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,5    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+> attack keziah archer-1
+Forecast Keziah -> Archer with Kinsbane: acc 74% dmg 21 crit 1%; counter: none
+Keziah attacks Archer
+  Keziah hits Archer for 21 (hp 0)
+  Keziah hp 23, Archer hp 0
+Keziah gains 35 exp (70)
+Kinsbane feeds: fed 14, power +5
+Archer falls at 10,3
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#......^^..#
+ 5 #^#d.........#
+ 6 #^#.....n....#
+ 7 #^#..CA......#
+ 8 #^...........#
+ 9 #=.D.........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,5    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,9    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+> move pell 3,7
+Pell moves 3,9 -> 3,7 via 3,8
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#......^^..#
+ 5 #^#d.........#
+ 6 #^#.....n....#
+ 7 #^#D.CA......#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,5    hp 22/22  Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+> attack pell brigand-3
+Forecast Pell -> Brigand 3 with Cinder: acc 99% dmg 13 crit 3%; counter: none
+Pell attacks Brigand 3
+  Pell hits Brigand 3 for 13 (hp 9)
+  Pell hp 3, Brigand 3 hp 9
+Pell gains 12 exp (36)
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#......^^..#
+ 5 #^#d.........#
+ 6 #^#.....n....#
+ 7 #^#D.CA......#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,5    hp 9/22   Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              5,7    hp 20/20  Plain
+> move wren 4,5
+Wren moves 5,7 -> 4,5 via 5,6 5,5
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#......^^..#
+ 5 #^#dC........#
+ 6 #^#.....n....#
+ 7 #^#D..A......#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+d  brigand-3        Brigand L2 reaver          3,5    hp 9/22   Plain  group hall, guard, awake
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+> attack wren brigand-3
+Forecast Wren -> Brigand 3: acc 88% dmg 10 x2 crit 4%; counter: acc 51% dmg 11 crit 0%
+Wren attacks Brigand 3
+  Wren hits Brigand 3 for 10 (hp 0)
+  Wren hp 20, Brigand 3 hp 0
+Wren gains 35 exp (70)
+Brigand 3 falls at 3,5
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#......^^..#
+ 5 #^#.C........#
+ 6 #^#.....n....#
+ 7 #^#D..A......#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+A  captain          Alder Fenn L1 cadet        6,7    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
+> move captain 6,4
+Alder Fenn moves 6,7 -> 6,4 via 6,6 6,5
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#...A..^^..#
+ 5 #^#.C........#
+ 6 #^#.....n....#
+ 7 #^#D.........#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
+> wait captain
+Alder Fenn waits
+The Gleaning (Kinsbane woken)  turn 5 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#........e.#
+ 2 #^#.....n....#
+ 3 #^#........B.#
+ 4 #^#...A..^^..#
+ 5 #^#.C........#
+ 6 #^#.....n....#
+ 7 #^#D.........#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain  done
+B  keziah           Keziah L1 reaver           11,3   hp 23/23  Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain  done
+e  soldier-1        Soldier L2 pikeman         11,1   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain  done
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait bandit_leader-1
+Bandit Leader waits
+enemy: move soldier-1 11,2
+Soldier moves 11,1 -> 11,2
+enemy: attack soldier-1 keziah
+Forecast Soldier -> Keziah: acc 77% dmg 10 crit 0%; counter with Kinsbane: acc 74% dmg 19 crit 1%
+Soldier attacks Keziah
+  Soldier hits Keziah for 10 (hp 13)
+  Keziah misses Soldier
+  Soldier hp 20, Keziah hp 13
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Gleaning (Kinsbane woken)  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#..........#
+ 2 #^#.....n..e.#
+ 3 #^#........B.#
+ 4 #^#...A..^^..#
+ 5 #^#.C........#
+ 6 #^#.....n....#
+ 7 #^#D.........#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 13/23  Plain
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         11,2   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+> attack keziah soldier-1 kinsbane art cleave
+Forecast Keziah -> Soldier with Kinsbane: acc 39% dmg 25 crit 11%; counter: acc 77% dmg 10 crit 0%
+  Technique Cleave: Kinsbane at acc 50 power 20 crit 10 wt 10 range 1-1; spends up to 4 of 19 uses, 3 of them hit or miss
+Keziah declares Cleave with Kinsbane, spending 3 extra uses
+Keziah attacks Soldier
+  Keziah misses Soldier
+  Soldier hits Keziah for 10 (hp 3)
+  Keziah hp 3, Soldier hp 20
+The Gleaning (Kinsbane woken)  turn 6 of 10  player phase  seize  recall 2
+   01234567890123
+ 0 #^...!.......#
+ 1 #^#..........#
+ 2 #^#.....n..e.#
+ 3 #^#........B.#
+ 4 #^#...A..^^..#
+ 5 #^#.C........#
+ 6 #^#.....n....#
+ 7 #^#D.........#
+ 8 #^...........#
+ 9 #=...........#
+
+!  bandit_leader-1  Bandit Leader L3 reaver    5,0    hp 26/26  Gate (heals 20 percent, 5 hp)  group hall, boss
+A  captain          Alder Fenn L1 cadet        6,4    hp 22/22  Plain  captain
+B  keziah           Keziah L1 reaver           11,3   hp 3/23   Plain  done
+D  pell             Pell L1 adept              3,7    hp 3/16   Plain
+e  soldier-1        Soldier L2 pikeman         11,2   hp 20/20  Plain  group hall, guard, awake
+C  wren             Wren L1 cadet              4,5    hp 20/20  Plain
+Battle ongoing at turn 6, player phase

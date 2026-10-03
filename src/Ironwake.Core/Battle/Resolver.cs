@@ -133,6 +133,11 @@ public static class Resolver
             Wait w => w.UnitId,
             _ => null,
         };
+        if (command is Attack attacked)
+        {
+            next = Kinsbane.RunsOn(next, content, attacked.UnitId, events);
+        }
+
         if (acted is not null)
         {
             next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));

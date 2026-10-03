@@ -85,7 +85,8 @@ namespace Ironwake.Core;
 /// <param name="WokenBearer">
 /// The <c>woken:</c> header (issue 702, samples): the recruit, placed by name, who begins the map
 /// carrying the heirloom bound to them at its last stage, frozen iron, in front of their pack
-/// (<see cref="Armed"/>); null for none.
+/// (<see cref="Armed"/>); null for none. Naming the <see cref="KinsbaneBearer"/> instead issues the
+/// hungering weapon already woken (issue 804, samples), so the hunt can be played from turn 1.
 /// </param>
 /// <param name="WildfireEnabled">
 /// The <c>wildfire: on</c> header (DESIGN.md 13.15, experiment): a hit from an igniting weapon
@@ -279,7 +280,8 @@ public sealed record MapDefinition(
 
     /// <summary>
     /// A player unit as the <c>kinsbane:</c> and <c>woken:</c> headers issue it: the Kinsbane bearer
-    /// gets the hungering weapon at full uses in its first slot, the woken bearer the heirloom bound to
+    /// gets the hungering weapon at full uses in its first slot, fed to its waking when <c>woken:</c>
+    /// names them too (issue 804), any other woken bearer the heirloom bound to
     /// them at full uses and its last stage (issue 702), and when the pack is full the last stack makes
     /// room. Any other unit, and every unit on a map without either header, unchanged.
     /// </summary>
@@ -288,7 +290,8 @@ public sealed record MapDefinition(
         if (KinsbaneBearer == unit.Id)
         {
             var weapon = content.Weapon(Kinsbane.ItemId);
-            unit = InFront(unit, new ItemStack(weapon.Id, weapon.Durability));
+            unit = InFront(unit, new ItemStack(weapon.Id, weapon.Durability) { Fed = WokenBearer == unit.Id ? Kinsbane.WakeKills : 0 });
+            return unit;
         }
 
         if (WokenBearer == unit.Id)

@@ -275,6 +275,10 @@ public static class ProtocolJson
                 w.WriteNumber("mtBonus", h.MtBonus);
                 w.WriteBoolean("woke", h.Woke);
                 break;
+            case HuntRanOn h:
+                w.WriteString("unit", h.UnitId);
+                w.WriteNumber("mov", h.Mov);
+                break;
             case HungerEased h:
                 w.WriteString("unit", h.UnitId);
                 w.WriteString("item", h.ItemId);
@@ -1049,6 +1053,11 @@ public static class ProtocolJson
             w.WriteBoolean("hasFed", true);
         }
 
+        if (unit.HuntRan)
+        {
+            w.WriteBoolean("huntRan", true);
+        }
+
         if (unit.ArtsDeclared is { } declared)
         {
             w.WriteStartArray("artsDeclared");
@@ -1212,6 +1221,7 @@ public static class ProtocolJson
         {
             Spent = OptionalInt(e, "spent") ?? 0,
             HasFed = e.TryGetProperty("hasFed", out _) && RequiredBool(e, "hasFed"),
+            HuntRan = e.TryGetProperty("huntRan", out _) && RequiredBool(e, "huntRan"),
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
             LockedBy = OptionalString(e, "lockedBy"),

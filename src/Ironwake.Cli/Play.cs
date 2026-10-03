@@ -1040,7 +1040,7 @@ public sealed class PlaySession
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
 
-                foreach (var line in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names))
+                foreach (var line in HungerLines(_content, attacker!, target!, attack.Slot, forecast.Defender.Strikes, names, _state))
                 {
                     _out.WriteLine(UnitNames.Sentence(line));
                 }
@@ -1464,7 +1464,7 @@ public sealed class PlaySession
         lines.AddRange(BraceLines(unit, target, names));
         lines.AddRange(OpenLines(unit, target, names));
         lines.AddRange(BreakLines(state, content, unit, target, names));
-        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names));
+        lines.AddRange(HungerLines(content, unit, target, slot, forecast.Defender.Strikes, names, state));
         lines.AddRange(SignatureLines(state, content, unit with { At = tile }, target, forecast, names));
         lines.AddRange(IgniteLines(state, content, unit, target, tile, slot, forecast.Defender.Strikes, names));
         lines.AddRange(WindupLines(state, content, unit with { At = tile }, target, slot, names));
@@ -2193,10 +2193,11 @@ public sealed class PlaySession
     /// <summary>
     /// Under a forecast (DESIGN.md 13.23, experiment): for the striker with the weapon it strikes
     /// with, then the target when it counters, the heal a kill would feed a hungering weapon, and in
-    /// the starved form the hit that eases it (<see cref="Kinsbane.ForecastLines"/>). Silent for any
+    /// the starved form the hit that eases it (<see cref="Kinsbane.ForecastLines"/>), and for the striker
+    /// on its own phase of <paramref name="state"/> the hunt running on (issue 804). Silent for any
     /// other weapon.
     /// </summary>
-    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool targetCounters, UnitNames? names = null)
+    public static IEnumerable<string> HungerLines(GameContent content, BattleUnit attacker, BattleUnit target, int? slot, bool targetCounters, UnitNames? names = null, BattleState? state = null)
     {
         names ??= UnitNames.None;
         var armed = slot is { } chosen && chosen >= 0 && chosen < attacker.Unit.Inventory.Count ? attacker.WithSlotInFront(chosen) : attacker;
@@ -2208,7 +2209,8 @@ public sealed class PlaySession
                 continue;
             }
 
-            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id]))
+            int? huntMov = state is not null && unit == armed && unit.Side == state.Phase ? Kinsbane.HuntMov(state, content, unit) : null;
+            foreach (var line in Kinsbane.ForecastLines(unit, content, unit.EquippedWeapon(content), unit.Unit.Inventory.Items[equipped], names[unit.Id], huntMov))
             {
                 yield return line;
             }
@@ -2568,6 +2570,8 @@ public sealed class PlaySession
                 return $"{content.ItemName(h.ItemId)} drains {names[h.UnitId]} {h.Amount} (hp {h.HpAfter})" + (h.Starved ? "; it starves: half power, uses 1" : "");
             case HungerFed h:
                 return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (Kinsbane.ToothGrew(h.Fed) ? $", a tooth grows (teeth {Kinsbane.Teeth(h.Fed)}/{Kinsbane.MtCap})" : "") + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
+            case HuntRanOn h:
+                return $"the hunt runs on: {names[h.UnitId]} may move again, {h.Mov} movement";
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
             case UnitOpened o:

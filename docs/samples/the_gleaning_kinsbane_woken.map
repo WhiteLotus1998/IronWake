@@ -1,0 +1,31 @@
+name: The Gleaning (Kinsbane woken)
+size: 14x10
+win: seize
+turn_limit: 10
+recall: 3
+enemy_level: 2
+kinsbane: keziah
+woken: keziah
+
+#^...T.......#
+#^#..........#
+#^#.....n....#
+#^#..........#
+#^#......^^..#
+#^#..........#
+#^#.....n....#
+#^#..........#
+#^...........#
+#=...........#
+
+units:
+P captain 4,9
+P recruit:keziah 3,9
+P recruit:wren 5,9
+P recruit:pell 6,8
+E brigand 6,5 group:field behavior:aggressive
+E brigand 9,6 group:field behavior:aggressive
+E archer 10,3 group:field behavior:hold
+E brigand 3,1 group:hall behavior:guard
+E soldier 7,1 group:hall behavior:guard
+B bandit_leader 5,0 group:hall behavior:boss

@@ -59,6 +59,7 @@ public class ProtocolJsonTests
         { new UnitRested("captain"), """{"type":"unitRested","unit":"captain"}""" },
         { new HungerDrained("keziah", "kinsbane", 5, 1, true), """{"type":"hungerDrained","unit":"keziah","item":"kinsbane","amount":5,"hpAfter":1,"starved":true}""" },
         { new HungerFed("keziah", "kinsbane", 3, 10, 16, 1, false), """{"type":"hungerFed","unit":"keziah","item":"kinsbane","fed":3,"healed":10,"hpAfter":16,"mtBonus":1,"woke":false}""" },
+        { new HuntRanOn("keziah", 5), """{"type":"huntRanOn","unit":"keziah","mov":5}""" },
         { new HungerEased("keziah", "kinsbane", 5, 6), """{"type":"hungerEased","unit":"keziah","item":"kinsbane","healed":5,"hpAfter":6}""" },
         { new UnitChilled("brigand-1", "teodor", Side.Enemy), """{"type":"unitChilled","unit":"brigand-1","by":"teodor","side":"enemy"}""" },
         { new UnitChilled("teodor", "rider-1", Side.Player, Next: true), """{"type":"unitChilled","unit":"teodor","by":"rider-1","side":"player","next":true}""" },
