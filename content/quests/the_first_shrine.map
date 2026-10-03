@@ -1,0 +1,32 @@
+name: The First Shrine
+size: 14x9
+win: seize
+turn_limit: 10
+recall: 2
+enemy_level: 2
+announce: on
+brace: on
+
+^^M###.T.###M^
+^.M#.......#M.
+..n####.####n.
+.^....^.^....^
+....n.....F..^
+.^...........^
+~~~~~~~=~~~~~.
+.^.....=....^.
+^^.....=.....^
+
+units:
+P captain 6,5
+P recruit 8,5
+E soldier 7,1 group:sanctum behavior:hold
+E archer 5,1 group:sanctum behavior:hold
+E brigand 2,3 group:yard behavior:guard
+E hexer 11,3 group:yard behavior:guard
+
+events:
+south1 turn 2 enemy spawn brigand 7,8 group:pursuit behavior:aggressive
+south2 turn 3 enemy spawn archer 6,8 group:pursuit behavior:aggressive
+south3 turn 4 enemy spawn soldier 7,8 group:pursuit behavior:aggressive
+east1 turn 5 enemy spawn brigand 13,8 group:pursuit behavior:aggressive

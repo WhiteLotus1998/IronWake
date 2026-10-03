@@ -1195,20 +1195,17 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
-    /// The seed a side map before the next map runs on: past every map's and every trial's seed,
-    /// one per quest per interlude, so no two battles of a campaign share one. A hire's quest, one
-    /// that <see cref="CampaignQuest.OpensAfter"/> a map (issue 691), takes its seed from a block past
-    /// every member quest's, so adding one never moves a member quest's seed.
+    /// The seed a side map before the next map runs on: past every map's and every trial's seed, in
+    /// a block of one seed per map for each quest, the block its place in <c>campaign.json</c>'s
+    /// <c>quests</c> (issue 635 slice 5). A quest added at the end of the file moves no other side
+    /// map's seed, so a journaled side-map play keeps its rolls. It equals the earlier rule (member
+    /// quests first, a hire's quest past them; issue 691) for the quests that rule seeded.
     /// </summary>
     public ulong QuestSeed(string questId, GameContent content)
     {
         var maps = content.Campaign.Maps.Count;
-        var members = content.Campaign.Quests.Where(q => q.OpensAfter is null).Select(q => q.Id).ToList();
-        var hires = content.Campaign.Quests.Where(q => q.OpensAfter is not null).Select(q => q.Id).ToList();
-        var offset = members.Contains(questId)
-            ? (MapIndex * members.Count) + members.IndexOf(questId)
-            : (maps * members.Count) + (MapIndex * hires.Count) + hires.IndexOf(questId);
-        return unchecked(Seed + (ulong)(2 * maps) + (ulong)offset);
+        var place = content.Campaign.Quests.Select(q => q.Id).ToList().IndexOf(questId);
+        return unchecked(Seed + (ulong)(2 * maps) + (ulong)MapIndex + ((ulong)maps * (ulong)place));
     }
 
     /// <summary>

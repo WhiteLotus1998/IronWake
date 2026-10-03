@@ -1,0 +1,21 @@
+quest maud_2 wren
+move wren 10,3
+attack wren hexer-1
+move maud 7,4
+wait maud
+end
+threat maud from 6,3
+move maud 6,3
+attack maud brigand-1
+move wren 8,4
+item wren 2
+end
+forecast maud brigand-2
+attack maud brigand-2
+threat wren from 7,2
+move wren 7,2
+attack wren soldier-1
+end
+move maud 7,0
+leave
+camp
