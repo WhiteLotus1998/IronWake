@@ -368,4 +368,35 @@ public class SideMapCliTests
             Directory.Delete(saves, true);
         }
     }
+
+    /// <summary>
+    /// Code's journaled play of Keziah's quest 2 (side-map seed 1133), from a save at the camp
+    /// after map 9 with Keziah picked, the Burned Shrine won, Kinsbane fed 9 and the cast at
+    /// level 7: one Recall back to turn 1, the camp fed to the scythe, the envoy out and home
+    /// again past his bound man, and Keziah starved to 1 and killed on turn 6 by the soldier
+    /// she needed to eat.
+    /// </summary>
+    [Fact]
+    public void TheJournaledOathStonePlayIsLostOnTurnSix()
+    {
+        var script = Transcript("2026-10-04-the_oath_stone-1133.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-oath-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-04-the_oath_stone-1133.saves", "oath.json")), Path.Combine(saves, "oath.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "oath", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Oath Stone, seed 1133\n", output);
+            Assert.Contains("Marauder is bound to Sworn Captain: freed when Sworn Captain falls\n", output);
+            Assert.Contains("Kinsbane, to Keziah: \"Eat.\"\n", output);
+            Assert.Contains("> leave\nKeziah falls on keziah_2, which closes for good; fallen for good: Keziah\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
 }

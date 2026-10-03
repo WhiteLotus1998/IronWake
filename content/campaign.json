@@ -154,6 +154,14 @@
       ],
       "after": [
         "(Placeholder until the writing pass: the ledger, the line struck through, and the drake that is nobody's now.)"
+      ] },
+    { "id": "keziah_2", "member": "keziah", "part": 2, "map": "the_oath_stone", "common": 2,
+      "before": [
+        "Keziah asked for a day and one pair of hands again. Hask has sent an envoy to the old outland stone on the moor, offering her people a seat and a god. One of the men at the door wears her mother's shrine-mark and the Kin's iron both.",
+        "(Placeholder card until the writing pass. Defeat Boss: defeat the envoy on the fort at 12,3 by the end of turn 9. The map is lost if Keziah falls. The yard's west door at 9,4 is held by a sworn outlander bound to the envoy: if the envoy falls first, the outlander lays down the weapon, freed. A breach in the south wall at 11,7 is the long way round. More come up behind you from turn 3, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the stone, the oath said over it, and which side of the hunger it was said on.)"
       ] }
   ],
   "drake": { "member": "rook", "grownAfter": "rook_1", "grownFlown": 2, "unbrokenAfter": "rook_2" },

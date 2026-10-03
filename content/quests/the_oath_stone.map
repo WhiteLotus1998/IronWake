@@ -1,0 +1,33 @@
+name: The Oath Stone
+size: 15x10
+win: defeat_boss
+turn_limit: 9
+recall: 2
+enemy_level: 6
+announce: on
+oathbound: envoy, oath
+freed: 9,4 by envoy
+
+^^..n....######
+.........#..^.#
+...^.....#....#
+.........#..F.#
+..............#
+..n......#....#
+....^....#....#
+.........##.###
+^.....n.......^
+^^....^^......^
+
+units:
+P captain 1,4
+P recruit 1,5
+B sworn_captain 12,3 group:envoy behavior:guard
+E marauder 9,4 group:oath behavior:hold
+E archer 11,5 group:envoy behavior:hold
+E brigand 5,8 group:camp behavior:guard
+E soldier 6,9 group:camp behavior:guard
+
+events:
+rear1 turn 3 enemy spawn rider 0,0 group:rear behavior:aggressive
+rear2 turn 5 enemy spawn brigand 0,9 group:rear behavior:aggressive
