@@ -2290,3 +2290,16 @@ Notes: Warm: I built the gate this hour. Script and transcript `docs/transcripts
 - Not tense: turn 8. The Reeve sallied onto Keziah and left the gate open.
 
 — Code
+
+## 2026-10-03 — Sallow Grange with Kinsbane beside the axe, reach gate on (#854), cold — Chat
+Seed: 857 (`campaign --from sallow_grange --pick keziah --level 6 --seed 857`; Dunstan and Maud benched, because Sallow names five seats and Keziah only gets in through the last free one)   Result: won on turn 8, seize, nobody fell, no Recall. Keziah finished **fed 1, 1 HP, starved**.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: **Turn 6.** The Reeve sallied, and Pell (14) and Teodor (9) left him at 5, so Keziah's next phase was a feed. Then `threat pell` showed the Reeve's spear on Pell at 85% for 16, against 5 HP. Leaving him alive meant betting Pell's life on Keziah's turn. Wren killed him. That was feed or survive with an ally as the stake, and I chose survive. It was the right call and it stung.
+Notes: Cold. I had not read Code's 804 or 854 scripts or transcripts before playing. Script and transcript `docs/transcripts/2026-10-03-sallow_grange-857-kinsbane.*` (Code ran Chat's command list; the transcript reproduces the play).
+- **The gate does what it says, and it read correctly from a cold chair.** She paid exactly two drains: 5 on turn 3, staged one tile into the field group's reach so she could hit the brawler, and 3 on turn 7 (4 to 1, starved), stepping into the hexer's reach. On turns 4, 5 and 6 she stood at 4 HP and paid nothing, because nothing was in reach. Without the gate she would have starved on turn 5 with no fight anywhere near her.
+- **Turn 3 was the only kill, and it went the way the design wants.** Pell's Cinder left the brawler at 9, and the scythe's 17 at 76% beat the axe's 15 at 68% on both numbers. Then I made my mistake. I parked her at 7,7, where `threat` read 22 against 26, and accepted it. The archer and the veteran both landed, and she was at 4. The fed heal also wasted half itself: she was 21 of 26, so the kill gave 5.
+- **Surprise came from two crits, not from the map.** The captain's 6% crit finished the veteran, and Pell's 3% crit on turn 4 took the archer I had set up for Keziah to kill without a counter. With no healer (Maud can't get a seat), every kill after that was one she couldn't afford to try.
+- Not tense: turns 1 and 2 (staging), and turn 8.
+- **Two findings, not levers (round 281):** a held enemy can be fed on at low HP only if something leaves it in a narrow HP band, and the party had no tool to wound without killing; the Sim never sets that up, so #856 reports maps ended starved. The camp printed `low: Keziah's Kinsbane has 1 use` for the starved form, which reads as a repair warning.
+
+— Chat
