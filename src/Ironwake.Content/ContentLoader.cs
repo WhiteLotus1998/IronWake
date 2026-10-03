@@ -508,6 +508,17 @@ public static class ContentLoader
                 }
             }
 
+            var wakes = node.OptionalString("wakes");
+            if (wakes is not null && !(weapons.TryGetValue(wakes, out var woken) && woken.BoundTo == member && woken.Heirloom?.HoldsAt is not null))
+            {
+                throw node.Error("wakes", $"'{wakes}' must be an heirloom bound to '{member}' whose ladder holds (holdsAt)");
+            }
+
+            if (wakes is not null && quests.Any(q => q.Wakes == wakes))
+            {
+                throw node.Error("wakes", $"'{wakes}' is woken by another quest already");
+            }
+
             var common = node.IntOr("common", 0);
             var rare = node.IntOr("rare", 0);
             if (common < 0 || rare < 0)
@@ -537,6 +548,7 @@ public static class ContentLoader
                 Before = Card(node, "before"),
                 After = Card(node, "after"),
                 Pays = pays,
+                Wakes = wakes,
                 Common = common,
                 Rare = rare,
                 OpensAfter = opensAfter,
@@ -1386,7 +1398,19 @@ public static class ContentLoader
             turns.Add(new WeaponStage(id, mt, hit, crit, wt, at, Description(stage)));
         }
 
-        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns));
+        int? holdsAt = null;
+        if (node.OptionalString("holdsAt") is { } held)
+        {
+            var at = held == first ? 0 : turns.FindIndex(t => t.Id == held) + 1;
+            if ((at <= 0 && held != first) || at >= turns.Count)
+            {
+                throw weapon.Error("heirloom.holdsAt", $"'{held}' must name a stage before the last");
+            }
+
+            holdsAt = at;
+        }
+
+        return new HeirloomLadder(fromMap, first, ValueList<WeaponStage>.From(turns)) { HoldsAt = holdsAt };
     }
 
     private static string Description(EntryNode node)

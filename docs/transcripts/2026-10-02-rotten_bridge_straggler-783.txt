@@ -508,7 +508,7 @@ Brigand 3 waits
 enemy: move rider-1 8,7
 Rider 1 moves 6,11 -> 8,7 via 6,10 6,9 7,9 7,8 8,8
 enemy: attack rider-1 teodor
-Forecast Rider 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 11 crit 1%
+Forecast Rider 1 -> Teodor: acc 74% dmg 8 crit 1%; counter with Iron Lance: acc 76% dmg 11 crit 1%
 Rider 1 attacks Teodor
   Rider 1 misses Teodor
   Teodor hits Rider 1 for 11 (hp 9)
@@ -552,7 +552,7 @@ asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack teodor rider-1
-Forecast Teodor -> Rider 1: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Rider 1 with Iron Lance: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Rider 1
   Teodor hits Rider 1 for 11 (hp 0)
   Teodor hp 16, Rider 1 hp 0
@@ -1219,7 +1219,7 @@ E  wren             Wren L1 cadet              9,9    hp 9/20   Plain
 exits (>): 4,0 5,0 6,0 7,0 8,0 9,0 10,0 (a unit that starts its turn on one may exit as its action, without moving; the captain's exit wins and leaves the rest behind)
 wears: Planks 6,4 7,4 6,5 7,5 (a unit that walks off one wears it a step, a horse or armour two, a flyer none: Planks, Split planks, Water)
 > attack teodor soldier-1
-Forecast Teodor -> Soldier: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Soldier with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier
   Teodor hits Soldier for 10 (hp 0)
   Teodor hp 16, Soldier hp 0

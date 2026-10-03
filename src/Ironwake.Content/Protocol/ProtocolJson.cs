@@ -738,6 +738,17 @@ public static class ProtocolJson
             w.WriteString("order", OrderName(order));
         }
 
+        if (state.Held.Count > 0)
+        {
+            w.WriteStartArray("held");
+            foreach (var held in state.Held)
+            {
+                w.WriteStringValue(held);
+            }
+
+            w.WriteEndArray();
+        }
+
         w.WriteStartArray("units");
         foreach (var unit in state.Units.Where(u => !hidden.Contains(u)))
         {
@@ -922,6 +933,7 @@ public static class ProtocolJson
                 ? ValueList<Coord>.From(Array(chests, "chests").Where(c => RequiredBool(c, "open")).Select(c => ReadCoord(c, "at")).Order())
                 : ValueList<Coord>.Empty,
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
+            Held = e.TryGetProperty("held", out _) ? ReadItemIds(e, "held", content) : ValueList<string>.Empty,
         };
     }
 

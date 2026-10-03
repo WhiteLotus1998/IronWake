@@ -110,4 +110,12 @@ public sealed record WeaponStage(string Id, int Mt, int Hit, int Crit, int Wt, i
 /// (<paramref name="FromMap"/>), the id of the first stage, whose numbers are the weapon's own
 /// (<paramref name="First"/>), and the stages it turns to, in order, their thresholds rising.
 /// </summary>
-public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponStage> Turns);
+public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponStage> Turns)
+{
+    /// <summary>
+    /// The stage, as a stack's <see cref="ItemStack.Stage"/> counts it (0 the first), at which the
+    /// ladder stops in a campaign until a quest that <see cref="CampaignQuest.Wakes"/> it is won
+    /// (round 266), or null for a ladder nothing holds. Never the last stage.
+    /// </summary>
+    public int? HoldsAt { get; init; }
+}

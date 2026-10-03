@@ -2026,7 +2026,7 @@ public sealed class PlaySession
             lines.Add($"  {hunger}");
         }
 
-        if (Heirloom.Card(unit, content) is { } heirloom)
+        if (Heirloom.Card(unit, content, state.Held) is { } heirloom)
         {
             lines.Add($"  {heirloom}");
         }

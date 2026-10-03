@@ -1250,7 +1250,7 @@ B  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 called: group weir wakes when group ford does
 > attack teodor rider-1
-Forecast Teodor -> Rider: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Rider with Iron Lance: acc 76% dmg 11 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Rider
   Teodor misses Rider
   Rider hits Teodor for 8 (hp 13)
@@ -2322,7 +2322,7 @@ Archer waits
 enemy: move brawler-1 9,7
 Brawler moves 8,9 -> 9,7 via 9,9 9,8
 enemy: attack brawler-1 teodor
-Forecast Brawler -> Teodor: acc 91% dmg 5 x2 crit 0%; counter: acc 77% dmg 12 crit 2%
+Forecast Brawler -> Teodor: acc 91% dmg 5 x2 crit 0%; counter with Iron Lance: acc 77% dmg 12 crit 2%
 Brawler attacks Teodor
   Brawler misses Teodor
   Brawler hits Teodor for 5 (hp 8)

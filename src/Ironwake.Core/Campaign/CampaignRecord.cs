@@ -574,7 +574,7 @@ public sealed record CampaignRecord(
             .Select(p => p.RecruitId!)
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
-        var battle = BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
+        var battle = BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport, Held = Held(content) };
         if (ReturnLevel(content) is { } level && NextMap(content).Return is { } back && Passed(content) is { } passed)
         {
             var card = content.Unit(passed);
@@ -1231,8 +1231,18 @@ public sealed record CampaignRecord(
             throw new ArgumentException($"{quest.MemberId} and {string.Join(", ", allyIds)} must all be on the roster");
         }
 
-        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme) with { Rapport = Rapport };
+        return BattleState.From(played, content, ValueList<Unit>.From(party!), QuestSeed(questId, content), scheme) with { Rapport = Rapport, Held = Held(content) };
     }
+
+    /// <summary>
+    /// The heirlooms held at their <see cref="HeirloomLadder.HoldsAt"/> stage in this campaign's
+    /// battles (round 266): every one a quest <see cref="CampaignQuest.Wakes"/> that the record has
+    /// not won, main maps and side maps alike, the waking quest's own board included.
+    /// </summary>
+    public ValueList<string> Held(GameContent content) =>
+        ValueList<string>.From(content.Campaign.Quests
+            .Where(q => q.Wakes is not null && !QuestsWon.Any(w => w.QuestId == q.Id))
+            .Select(q => q.Wakes!));
 
     /// <summary>
     /// The record after a decided side map (issue 635). The price is permadeath and nothing else
@@ -1289,6 +1299,19 @@ public sealed record CampaignRecord(
         {
             roster[at] = roster[at] with { Inventory = roster[at].Inventory.Add(new ItemStack(item, content.Weapon(item).Durability)) };
             paid = $"; {quest.MemberId} receives {content.ItemName(item)}";
+        }
+
+        if (won && quest.Wakes is { } wakes && roster.FindIndex(u => u.Id == quest.MemberId) is var bearer and >= 0
+            && roster[bearer].Inventory.Items.ToList().FindIndex(i => i.ItemId == wakes) is var slot and >= 0)
+        {
+            var ladder = content.Weapon(wakes).Heirloom!;
+            var stack = roster[bearer].Inventory.Items[slot];
+            var released = Heirloom.Release(ladder, stack);
+            roster[bearer] = roster[bearer] with { Inventory = roster[bearer].Inventory.Replace(slot, released) };
+            if (released.Stage != stack.Stage)
+            {
+                paid += $"; {content.ItemName(wakes)} wakes in {roster[bearer].Name}'s hands";
+            }
         }
 
         if (won && quest.Promotes is { } classId && roster.FindIndex(u => u.Id == quest.MemberId) is var promoted and >= 0)

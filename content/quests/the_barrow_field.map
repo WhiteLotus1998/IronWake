@@ -1,0 +1,30 @@
+name: The Barrow Field
+size: 14x9
+win: defeat_boss
+turn_limit: 8
+recall: 2
+enemy_level: 4
+announce: on
+freed: 9,4 by dig
+
+^^....^...nn^^
+^.....^..nnnn^
+......^..nnn..
+=====....nn#n.
+.....====.n##.
+......^.n.nn#.
+.^....^.nnn...
+^^......nn..^^
+^^^...^^....^^
+
+units:
+P captain 1,4
+P recruit 1,5
+E soldier 9,4 group:dig behavior:guard
+E archer 10,2 group:dig behavior:guard
+E brigand 12,7 group:dig behavior:guard
+B sworn_captain 10,4 group:dig behavior:guard
+
+events:
+road1 turn 2 enemy spawn brigand 0,3 group:sworn behavior:aggressive
+road2 turn 3 enemy spawn soldier 0,4 group:sworn behavior:aggressive

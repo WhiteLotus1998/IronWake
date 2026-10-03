@@ -41,7 +41,7 @@
       "abilities": [ "long_thrust" ],
       "stats": { "hp": 20, "str": 7, "mag": 0, "dex": 5, "spd": 5, "lck": 2, "def": 4, "res": 1, "cha": 4 },
       "growths": { "hp": 50, "str": 40, "mag": 5, "dex": 35, "spd": 30, "lck": 20, "def": 35, "res": 15, "cha": 30 },
-      "inventory": [ { "item": "iron_lance" }, { "item": "field_dressing" } ]
+      "inventory": [ { "item": "iron_lance" }, { "item": "field_dressing" }, { "item": "family_lance" } ]
     },
     {
       "id": "ottilie",

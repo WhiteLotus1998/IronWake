@@ -676,7 +676,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 21/21  Plain
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor archer-1
-Forecast Teodor -> Archer: acc 76% dmg 12 crit 1%; counter: none
+Forecast Teodor -> Archer with Iron Lance: acc 76% dmg 12 crit 1%; counter: none
 Teodor attacks Archer
   Teodor hits Archer for 12 (hp 0)
   Teodor hp 21, Archer hp 0
@@ -710,7 +710,7 @@ Bandit Leader waits and braces
 enemy: move soldier-1 11,4
 Soldier 1 moves 10,3 -> 11,4 via 10,4
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter: acc 76% dmg 10 crit 1%
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter with Iron Lance: acc 76% dmg 10 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 hits Teodor for 8 (hp 13)
   Teodor hits Soldier 1 for 10 (hp 10)
@@ -740,7 +740,7 @@ C  teodor           Teodor L1 pikeman          11,5   hp 13/21  Plain
 B  wren             Wren L1 cadet              10,6   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Soldier 1 with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 10 (hp 0)
   Teodor hp 13, Soldier 1 hp 0
@@ -1240,7 +1240,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,5   hp 11/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor soldier-2
-Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Soldier 2 with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 10 (hp 2)
   Soldier 2 hits Teodor for 8 (hp 13)
@@ -1764,7 +1764,7 @@ C  teodor           Teodor L1 pikeman          11,0   hp 21/21  Plain
 B  wren             Wren L1 cadet              11,4   hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor bandit_leader-1
-Forecast Teodor -> Bandit Leader: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
+Forecast Teodor -> Bandit Leader with Iron Lance: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
 Teodor attacks Bandit Leader
   Teodor misses Bandit Leader
   Bandit Leader hits Teodor for 11 (hp 10)
@@ -2152,7 +2152,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor bandit_leader-1
-Forecast Teodor -> Bandit Leader: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
+Forecast Teodor -> Bandit Leader with Iron Lance: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
 Teodor attacks Bandit Leader
   Teodor misses Bandit Leader
   Bandit Leader misses Teodor
@@ -2267,7 +2267,7 @@ C  teodor           Teodor L1 pikeman          9,0    hp 21/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor bandit_leader-1
-Forecast Teodor -> Bandit Leader: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
+Forecast Teodor -> Bandit Leader with Iron Lance: acc 51% dmg 8 crit 0%; counter with Toll Axe: acc 58% dmg 11 crit 1%
 Teodor attacks Bandit Leader
   Teodor misses Bandit Leader
   Bandit Leader misses Teodor
@@ -2383,7 +2383,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 Acc u
 -- Player phase ends, turn 11 --
 -- Enemy phase, turn 11 --
 enemy: attack bandit_leader-1 teodor 2
-Forecast Bandit Leader -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter: acc 58% dmg 8 crit 0%
+Forecast Bandit Leader -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter with Iron Lance: acc 58% dmg 8 crit 0%
 Bandit Leader equips Steel Axe
 Bandit Leader attacks Teodor
   Bandit Leader hits Teodor for 16 (hp 5)

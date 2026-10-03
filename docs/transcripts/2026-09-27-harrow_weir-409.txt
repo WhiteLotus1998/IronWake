@@ -2173,7 +2173,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          6,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     10,6   hp 10/28  Road  group weir, boss, awake
 > attack teodor brigand-3
-Forecast Teodor -> Brigand 3: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
+Forecast Teodor -> Brigand 3 with Iron Lance: acc 80% dmg 12 crit 2%; counter: acc 63% dmg 10 crit 0%
 Teodor attacks Brigand 3
   Teodor hits Brigand 3 for 12 (hp 10)
   Brigand 3 hits Teodor for 10 (hp 11)

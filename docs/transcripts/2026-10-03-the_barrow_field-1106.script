@@ -1,0 +1,18 @@
+quest teodor_1 wren
+move teodor 4,4
+wait teodor
+move wren 4,5
+wait wren
+end
+move teodor 6,4
+wait teodor
+move wren 5,5
+wait wren
+end
+move wren 6,3
+attack wren sworn_captain-1
+attack teodor sworn_captain-1 family_lance art long_thrust
+end
+move wren 9,3
+attack wren sworn_captain-1
+leave

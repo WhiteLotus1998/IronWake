@@ -183,7 +183,7 @@ public class ProtocolSessionTests
         var state = session.State;
         var pair = state.UnitsOf(Side.Player)
             .SelectMany(u => state.UnitsOf(Side.Enemy).Select(e => (Unit: u, Target: e)))
-            .First(p => Queries.Forecast(state, content, p.Unit, p.Target) is not null);
+            .First(p => Queries.Forecast(state, content, p.Unit, p.Target) is not null && p.Unit.Unit.Inventory.Items.Count(s => content.Weapons.ContainsKey(s.ItemId)) == 1);
         var forecast = Queries.Forecast(state, content, pair.Unit, pair.Target)!;
 
         using var doc = JsonDocument.Parse(session.Answer(ProtocolJson.Write(w => { w.WriteStartObject(); w.WriteString("query", "forecast"); w.WriteString("unit", pair.Unit.Id); w.WriteString("target", pair.Target.Id); w.WriteEndObject(); })));

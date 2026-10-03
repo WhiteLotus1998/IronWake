@@ -110,8 +110,8 @@ public class AttackMenuTests
 
         var rows = Queries.AttackOptions(state, Shipped, state.Find("teodor")!, EnemyAt(state, Brigand));
 
-        Assert.Equal(RejectionReason.OutOfRange, rows.Single(r => r.Art is null).Refusal!.Reason);
-        Assert.True(rows.Single(r => r.Art?.Id == "long_thrust").Legal);
+        Assert.Equal(RejectionReason.OutOfRange, rows.Single(r => r.Art is null && r.WeaponId == "iron_lance").Refusal!.Reason);
+        Assert.True(rows.Single(r => r.Art?.Id == "long_thrust" && r.WeaponId == "iron_lance").Legal);
     }
 
     [Fact]

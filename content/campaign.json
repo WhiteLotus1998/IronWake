@@ -92,6 +92,15 @@
       "after": [
         "(Placeholder until the writing pass: what Pell read at the desk about what the armistice seals, and that she means to tell the company before anyone else can.)",
         "(Pell carries Pell's Commonplace now: Cinder's numbers, bound to her, and it never catches. Its art, Read Ahead, reaches one tile further for 2 less Power.)"
+      ] },
+    { "id": "teodor_1", "member": "teodor", "part": 1, "map": "the_barrow_field", "opensAfter": "harrow_weir", "wakes": "family_lance", "common": 2,
+      "before": [
+        "Teodor asked for a day and one pair of hands. His grandfather is buried on the barrow field above Aldmere, and a letter from home says men in grey coats have been digging there since the thaw. They have pressed his brother Jory to carry the spoil.",
+        "(Placeholder card until the writing pass. Defeat the sworn captain in the barrow mouth at 10,4 by the end of turn 8. The map is lost if Teodor falls. Jory digs beside the captain and lays down his spade when the captain falls; he fights you until then. The sworn come up the west road from turn 2, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: what the sworn were digging for, what Jory says to his brother, and the rust on the lance.)",
+        "(The Family Lance no longer holds at sound. Fought with past the rust, it wakes.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

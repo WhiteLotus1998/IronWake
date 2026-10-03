@@ -977,7 +977,7 @@ South falls: the wave is inside
 Reinforcements arrive
   Brigand 7 arrives at 11,11 with the inside group, aggressive
 enemy: attack soldier-2 teodor
-Forecast Soldier 2 -> Teodor: acc 70% dmg 7 crit 0%; counter: acc 76% dmg 11 crit 3%
+Forecast Soldier 2 -> Teodor: acc 70% dmg 7 crit 0%; counter with Iron Lance: acc 76% dmg 11 crit 3%
 Soldier 2 attacks Teodor
   Soldier 2 hits Teodor for 7 (hp 17)
   Teodor hits Soldier 2 for 11 (hp 11)
@@ -1572,7 +1572,7 @@ Soldier 1 falls at 9,5
 enemy: move soldier-2 9,10
 Soldier 2 moves 7,10 -> 9,10 via 8,10
 enemy: attack soldier-2 teodor
-Forecast Soldier 2 -> Teodor: acc 70% dmg 7 crit 0%; counter: acc 76% dmg 11 crit 3%
+Forecast Soldier 2 -> Teodor: acc 70% dmg 7 crit 0%; counter with Iron Lance: acc 76% dmg 11 crit 3%
 Soldier 2 attacks Teodor
   Soldier 2 hits Teodor for 7 (hp 17)
   Teodor hits Soldier 2 for 11 (hp 11)
@@ -1617,7 +1617,7 @@ Sworn Hunter hunts the north next: 2 defenders, 41 hp (weakest); strikes only it
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
 pair rule binds: Sworn Hunter
 > attack teodor soldier-2
-Forecast Teodor -> Soldier 2: acc 76% dmg 11 crit 3%; counter: acc 70% dmg 7 crit 0%
+Forecast Teodor -> Soldier 2 with Iron Lance: acc 76% dmg 11 crit 3%; counter: acc 70% dmg 7 crit 0%
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 11 (hp 0)
   Teodor hp 17, Soldier 2 hp 0
@@ -2183,7 +2183,7 @@ Archer 2 attacks Teodor
 enemy: move brigand-1 9,10
 Brigand 1 moves 9,6 -> 9,10 via 9,7 9,8 9,9
 enemy: attack brigand-1 teodor
-Forecast Brigand 1 -> Teodor: acc 58% dmg 10 crit 0%; counter: acc 80% dmg 13 crit 4%
+Forecast Brigand 1 -> Teodor: acc 58% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 13 crit 4%
 Brigand 1 attacks Teodor
   Brigand 1 misses Teodor
   Teodor misses Brigand 1
@@ -3261,7 +3261,7 @@ Brigand 5 attacks Ottilie
 enemy: move finale_hunter-1 11,9
 Sworn Hunter moves 11,6 -> 11,9 via 11,7 11,8
 enemy: attack finale_hunter-1 teodor 2
-Forecast Sworn Hunter -> Teodor with Iron Lance: acc 86% dmg 11 crit 0%; counter: acc 58% dmg 8 crit 0%
+Forecast Sworn Hunter -> Teodor with Iron Lance: acc 86% dmg 11 crit 0%; counter with Iron Lance: acc 58% dmg 8 crit 0%
 Sworn Hunter equips Iron Lance
 Sworn Hunter attacks Teodor
   Sworn Hunter hits Teodor for 11 (hp 4)
@@ -3466,8 +3466,8 @@ pair rule binds: Sworn Hunter, Sworn Lord
 > threat teodor
 Threat on Teodor at 11,10 (Plain):
   Archer 2 from 9,10 with Iron Bow (slot 1): acc 77% dmg 4 crit 3%; counter: none
-  Brigand 6 from 12,10 with Iron Axe (slot 1): acc 58% dmg 10 crit 0%; counter: acc 80% dmg 13 crit 4%
-  Sworn Hunter from 11,9 with Iron Lance (slot 1): acc 86% dmg 11 crit 0%; counter: acc 58% dmg 8 crit 0%
+  Brigand 6 from 12,10 with Iron Axe (slot 1): acc 58% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 13 crit 4%
+  Sworn Hunter from 11,9 with Iron Lance (slot 1): acc 86% dmg 11 crit 0%; counter with Iron Lance: acc 58% dmg 8 crit 0%
   If all land: 25 against 14 hp
   Front: defends the south
   Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
@@ -3500,7 +3500,7 @@ Brigand 4 attacks Ottilie
 enemy: move brigand-6 12,10
 Brigand 6 moves 11,7 -> 12,10 via 12,7 12,8 12,9
 enemy: attack brigand-6 teodor
-Forecast Brigand 6 -> Teodor: acc 58% dmg 10 crit 0%; counter: acc 80% dmg 13 crit 4%
+Forecast Brigand 6 -> Teodor: acc 58% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 13 crit 4%
 Brigand 6 attacks Teodor
   Brigand 6 hits Teodor for 10 (hp 0)
   Brigand 6 hp 24, Teodor hp 0

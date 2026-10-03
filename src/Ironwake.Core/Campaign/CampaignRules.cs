@@ -119,6 +119,14 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     /// <summary>The signature item a win puts in the member's pack at full uses (part 2 only), or null for none.</summary>
     public string? Pays { get; init; }
 
+    /// <summary>
+    /// The heirloom a win releases (round 266): one bound to the member whose ladder
+    /// <see cref="HeirloomLadder.HoldsAt"/> a stage. Until the quest is won the ladder stops there
+    /// in every campaign battle; a win turns it on the after card when its count has already
+    /// reached the next stage. Null for none.
+    /// </summary>
+    public string? Wakes { get; init; }
+
     /// <summary>The common material a win puts in the company's stores (issue 647); 0 for none.</summary>
     public int Common { get; init; }
 

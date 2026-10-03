@@ -3,7 +3,7 @@ Campaign, seed 698, difficulty Captain, permadeath off, scheme TwoRollAverage, 9
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
@@ -703,7 +703,7 @@ the company whether they want the prayer before she says it.
 Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 0, Wounded (2); 1: Iron Sword 40/40, 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L1, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
@@ -1546,7 +1546,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor rider-1
-Forecast Teodor -> Rider: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
+Forecast Teodor -> Rider with Iron Lance: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Rider
   Teodor hits Rider for 11 (hp 10)
   Rider hits Teodor for 7 (hp 14)
@@ -1709,7 +1709,7 @@ C  teodor           Teodor L1 pikeman          6,3    hp 14/21  Plain
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              6,5    hp 20/20  Forest
 > attack teodor toll_warden-1
-Forecast Teodor -> Toll Warden: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
+Forecast Teodor -> Toll Warden with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 67% dmg 7 crit 1%
 Teodor attacks Toll Warden
   Teodor hits Toll Warden for 10 (hp 11)
   Toll Warden hits Teodor for 7 (hp 7)
@@ -2198,7 +2198,7 @@ Bandit Leader waits
 enemy: move rider-1 7,4
 Rider moves 13,4 -> 7,4 via 12,4 11,4 10,4 9,4 8,4
 enemy: attack rider-1 teodor
-Forecast Rider -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 76% dmg 11 crit 1%
+Forecast Rider -> Teodor: acc 39% dmg 7 crit 1%; counter with Iron Lance: acc 76% dmg 11 crit 1%
 Rider attacks Teodor
   Rider misses Teodor
   Teodor hits Rider for 11 (hp 10)
@@ -2236,7 +2236,7 @@ C  teodor           Teodor L1 pikeman          7,5    hp 21/21  Forest
 b  toll_warden-1    Toll Warden L3 pikeman     6,2    hp 21/21  Plain  group keep, hold
 B  wren             Wren L1 cadet              4,5    hp 20/20  Hill
 > attack teodor rider-1
-Forecast Teodor -> Rider: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
+Forecast Teodor -> Rider with Iron Lance: acc 76% dmg 11 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Rider
   Teodor hits Rider for 11 (hp 0)
   Teodor hp 21, Rider hp 0
@@ -2726,7 +2726,7 @@ The Tollgate won: seize; reward 1000, the purse holds 1500; nobody fell
 == Roster ==
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40
@@ -2749,7 +2749,7 @@ March (march): map 5, Harrow Weir. Defeat the boss by the end of turn 15. Captai
 Roster: company 10/12
   Alder Fenn (captain): Cadet L1, EXP 28; 1: Iron Sword 36/40 (repair 40), 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
   Wren: Cadet L1, EXP 40, Wounded (1); 1: Iron Sword 37/40 (repair 30), 2: Field Dressing 3/3
-  Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3
+  Teodor: Pikeman L1, EXP 54; 1: Iron Lance 38/40 (repair 20), 2: Field Dressing 3/3, 3: Family Lance 40/40
   Ottilie: Bowman L1, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
   Pell: Adept L2, EXP 55; 1: Cinder 8/8, 2: Gust 6/6
   Dunstan: Bulwark L1, EXP 0; 1: Iron Lance 40/40

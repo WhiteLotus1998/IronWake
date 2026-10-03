@@ -361,7 +361,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              7,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor brigand-1
-Forecast Teodor -> Brigand: acc 80% dmg 12 crit 2%; counter: acc 28% dmg 9 crit 0%
+Forecast Teodor -> Brigand with Iron Lance: acc 80% dmg 12 crit 2%; counter: acc 28% dmg 9 crit 0%
 Teodor attacks Brigand
   Teodor misses Brigand
   Brigand misses Teodor
@@ -511,7 +511,7 @@ Ford Chief waits
 enemy: move soldier-1 4,4
 Soldier 1 moves 3,3 -> 4,4 via 3,4
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
+Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter with Iron Lance: acc 41% dmg 9 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 misses Teodor
   Teodor misses Soldier 1
@@ -660,7 +660,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,7    hp 20/20  Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
+Forecast Teodor -> Soldier 1 with Iron Lance: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 9 (hp 11)
   Soldier 1 misses Teodor
@@ -747,7 +747,7 @@ Archer waits
 enemy: wait ford_chief-1
 Ford Chief waits
 enemy: attack soldier-1 teodor
-Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter: acc 41% dmg 9 crit 1%
+Forecast Soldier 1 -> Teodor: acc 39% dmg 7 crit 1%; counter with Iron Lance: acc 41% dmg 9 crit 1%
 Soldier 1 attacks Teodor
   Soldier 1 misses Teodor
   Teodor misses Soldier 1
@@ -783,7 +783,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,5    hp 20/20  Forest
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
+Forecast Teodor -> Soldier 1 with Iron Lance: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor misses Soldier 1
   Soldier 1 misses Teodor
@@ -1063,7 +1063,7 @@ e  wingrider-1      Wingrider L2 skyrider      12,2   hp 17/17  Plain  group for
 B  wren             Wren L1 cadet              5,4    hp 2/20   Plain
 asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
 > attack teodor soldier-1
-Forecast Teodor -> Soldier 1: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
+Forecast Teodor -> Soldier 1 with Iron Lance: acc 41% dmg 9 crit 1%; counter: acc 39% dmg 7 crit 1%
 Teodor attacks Soldier 1
   Teodor hits Soldier 1 for 9 (hp 0)
   Teodor hp 21, Soldier 1 hp 0
@@ -1633,7 +1633,7 @@ Soldier 2 waits
 enemy: move wingrider-1 9,3
 Wingrider moves 12,2 -> 9,3 via 11,2 10,2 9,2
 enemy: attack wingrider-1 teodor
-Forecast Wingrider -> Teodor: acc 76% dmg 6 crit 2%; counter: acc 70% dmg 13 crit 0%
+Forecast Wingrider -> Teodor: acc 76% dmg 6 crit 2%; counter with Iron Lance: acc 70% dmg 13 crit 0%
 Wingrider attacks Teodor
   Wingrider misses Teodor
   Teodor misses Wingrider
@@ -1712,7 +1712,7 @@ C  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 e  wingrider-1      Wingrider L2 skyrider      9,3    hp 17/17  Water  group fort, guard, awake
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 > attack teodor wingrider-1
-Forecast Teodor -> Wingrider: acc 70% dmg 13 crit 0%; counter: acc 76% dmg 6 crit 2%
+Forecast Teodor -> Wingrider with Iron Lance: acc 70% dmg 13 crit 0%; counter: acc 76% dmg 6 crit 2%
 Teodor attacks Wingrider
   Teodor misses Wingrider
   Wingrider hits Teodor for 6 (hp 15)
@@ -2265,7 +2265,7 @@ B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 -- Player phase ends, turn 11 --
 -- Enemy phase, turn 11 --
 enemy: attack ford_chief-1 teodor 2
-Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter: acc 58% dmg 8 crit 0%
+Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter with Iron Lance: acc 58% dmg 8 crit 0%
 Ford Chief equips Steel Axe
 Ford Chief attacks Teodor
   Ford Chief misses Teodor
@@ -2338,7 +2338,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              10,3   hp 20/20  Road
 > attack teodor ford_chief-1
-Forecast Teodor -> Ford Chief: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
+Forecast Teodor -> Ford Chief with Iron Lance: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
 Teodor attacks Ford Chief
   Teodor misses Ford Chief
   Ford Chief hits Teodor for 16 (hp 4)
@@ -2708,7 +2708,7 @@ D  ottilie          Ottilie L1 bowman          10,2   hp 9/17   Plain  done
 C  teodor           Teodor L1 pikeman          10,1   hp 20/21  Plain
 B  wren             Wren L1 cadet              9,0    hp 3/20   Plain  done
 > attack teodor ford_chief-1
-Forecast Teodor -> Ford Chief: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
+Forecast Teodor -> Ford Chief with Iron Lance: acc 58% dmg 8 crit 0%; counter with Steel Axe: acc 74% dmg 16 crit 1%
 Teodor attacks Ford Chief
   Teodor misses Ford Chief
   Ford Chief hits Teodor for 16 (hp 4)

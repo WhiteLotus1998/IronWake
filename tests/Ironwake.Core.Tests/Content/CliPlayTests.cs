@@ -710,7 +710,7 @@ public class CliPlayTests
 
         Assert.Equal(0, exit);
         Assert.Contains("Forecast Ford Chief -> Alder Fenn: acc 43% dmg 10 crit 0%; counter: none\n", output);
-        Assert.Contains("Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter: acc 58% dmg 8 crit 0%\nFord Chief equips Steel Axe\n", output);
+        Assert.Contains("Forecast Ford Chief -> Teodor with Steel Axe: acc 74% dmg 16 crit 1%; counter with Iron Lance: acc 58% dmg 8 crit 0%\nFord Chief equips Steel Axe\n", output);
         Assert.Contains("Forecast Alder Fenn -> Ford Chief: acc 74% dmg 8 x2 crit 4%; counter with Steel Axe: acc 62% dmg 15 crit 0%\n", output);
         Assert.EndsWith("Battle won: rout\n", output);
         Assert.Equal(File.ReadAllText(Path.Combine(Directory.GetParent(Fixture.RealContentDirectory())!.FullName, "docs", "transcripts", "2026-09-26-saltmarsh_ford_chief-47.txt")).ReplaceLineEndings("\n"), output);

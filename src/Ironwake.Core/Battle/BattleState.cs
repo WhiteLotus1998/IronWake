@@ -63,6 +63,13 @@ public sealed record BattleState(
     public ValueList<string> Wagon { get; init; }
 
     /// <summary>
+    /// The heirlooms whose ladders stop at their <see cref="HeirloomLadder.HoldsAt"/> stage in this
+    /// battle (round 266): the ones whose waking quest the campaign has not won yet
+    /// (<see cref="CampaignRecord.Held"/>). Empty outside the campaign, where nothing holds.
+    /// </summary>
+    public ValueList<string> Held { get; init; }
+
+    /// <summary>
     /// How the map's messenger left the board (DESIGN.md 13.24, issue 675): null while it stands
     /// or on a map without one; fallen where it was removed, or gone by the road when it escaped.
     /// A Recall restores it with the board.

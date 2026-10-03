@@ -472,7 +472,7 @@ Soldier 1 waits
 enemy: move wingrider-1 10,4
 Wingrider moves 12,2 -> 10,4 via 11,2 10,2 10,3
 enemy: attack wingrider-1 teodor
-Forecast Wingrider -> Teodor: acc 76% dmg 6 crit 2%; counter: acc 70% dmg 13 crit 0%
+Forecast Wingrider -> Teodor: acc 76% dmg 6 crit 2%; counter with Iron Lance: acc 70% dmg 13 crit 0%
 Wingrider attacks Teodor
   Wingrider hits Teodor for 6 (hp 10)
   Teodor misses Wingrider
@@ -714,7 +714,7 @@ C  teodor           Teodor L1 pikeman          12,5   hp 5/21   Plain
 B  wren             Wren L1 cadet              9,5    hp 20/20  Plain
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor archer-1
-Forecast Teodor -> Archer: acc 76% dmg 12 crit 1%; counter: none
+Forecast Teodor -> Archer with Iron Lance: acc 76% dmg 12 crit 1%; counter: none
 Teodor attacks Archer
   Teodor hits Archer for 12 (hp 5)
   Teodor hp 5, Archer hp 5
@@ -2138,7 +2138,7 @@ C  teodor           Teodor L1 pikeman          8,5    hp 15/21  Plain
 B  wren             Wren L2 cadet              10,1   hp 20/20  Plain  done
 brace: a unit that waits on the tile it began its turn on is struck at -15 Acc until its side's next phase
 > attack teodor soldier-2
-Forecast Teodor -> Soldier 2: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
+Forecast Teodor -> Soldier 2 with Iron Lance: acc 76% dmg 10 crit 1%; counter: acc 74% dmg 8 crit 1%
 Teodor attacks Soldier 2
   Teodor hits Soldier 2 for 10 (hp 0)
   Teodor hp 15, Soldier 2 hp 0
@@ -2190,7 +2190,7 @@ brace: a unit that waits on the tile it began its turn on is struck at -15 Acc u
 enemy: move brigand-1 8,4
 Brigand moves 7,4 -> 8,4
 enemy: attack brigand-1 teodor
-Forecast Brigand -> Teodor: acc 63% dmg 10 crit 0%; counter: acc 80% dmg 12 crit 2%
+Forecast Brigand -> Teodor: acc 63% dmg 10 crit 0%; counter with Iron Lance: acc 80% dmg 12 crit 2%
 Brigand attacks Teodor
   Brigand hits Teodor for 10 (hp 5)
   Teodor hits Brigand for 12 (hp 10)

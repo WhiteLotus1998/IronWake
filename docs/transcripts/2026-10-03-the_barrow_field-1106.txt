@@ -1,0 +1,545 @@
+Campaign, seed 1031, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 6 of 10: Raid on Ironwake; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3, 3: Family Lance 40/40
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 8)
+The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.
+They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.
+== Keep ==
+Purse: 500
+Rooms: beds: 8/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1; opens once ironwake_raid is won
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; opens once ironwake_raid is won; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Walls and ditches: The keep's menu opens after the raid on it (ironwake_raid, map 6) is fought
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  maud_2: Maud's quest 2, The First Shrine (quest maud_2 <ally>); permadeath applies
+  teodor_1: Teodor's quest 1, The Barrow Field (quest teodor_1 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, iron_gauntlets 400, hatchet 300, cinder 500, gust 600, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 6, Raid on Ironwake. Defeat every enemy by the end of turn 7. Captain Fenn must survive.
+> quest teodor_1 wren
+-- The Barrow Field --
+Teodor asked for a day and one pair of hands. His grandfather is buried
+on the barrow field above Aldmere, and a letter from home says men in
+grey coats have been digging there since the thaw. They have pressed his
+brother Jory to carry the spoil.
+
+(Placeholder card until the writing pass. Defeat the sworn captain in
+the barrow mouth at 10,4 by the end of turn 8. The map is lost if Teodor
+falls. Jory digs beside the captain and lays down his spade when the
+captain falls; he fights you until then. The sworn come up the west road
+from turn 2, announced.)
+
+Side map: The Barrow Field, seed 1106
+Teodor goes with Wren. This map is lost if Teodor falls; who falls here is gone for good.
+  turn 2, enemy phase: a brigand arrives at 0,3 (aggressive). A unit standing on 0,3 stops it.
+  turn 3, enemy phase: a soldier arrives at 0,4 (aggressive). A unit standing on 0,4 stops it.
+Objective: Defeat the boss by the end of turn 8. Teodor must survive.
+The Barrow Field  turn 1 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 .A...====a!##.
+ 5 .B....^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          1,4    hp 23/23  Plain  captain
+B  wren             Wren L5 cadet              1,5    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 4,4
+Teodor moves 1,4 -> 4,4 via 2,4 3,4
+The Barrow Field  turn 1 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 ....A====a!##.
+ 5 .B....^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          4,4    hp 23/23  Plain  captain
+B  wren             Wren L5 cadet              1,5    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> wait teodor
+Teodor waits
+The Barrow Field  turn 1 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 ....A====a!##.
+ 5 .B....^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          4,4    hp 23/23  Plain  captain  done
+B  wren             Wren L5 cadet              1,5    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move wren 4,5
+Wren moves 1,5 -> 4,5 via 2,5 3,5
+The Barrow Field  turn 1 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 ....A====a!##.
+ 5 ....B.^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          4,4    hp 23/23  Plain  captain  done
+B  wren             Wren L5 cadet              4,5    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> wait wren
+Wren waits
+The Barrow Field  turn 1 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 ....A====a!##.
+ 5 ....B.^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          4,4    hp 23/23  Plain  captain  done
+B  wren             Wren L5 cadet              4,5    hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Barrow Field  turn 2 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 ....A====a!##.
+ 5 ....B.^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, asleep
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, asleep
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, asleep
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, asleep
+A  teodor           Teodor L5 pikeman          4,4    hp 23/23  Plain  captain
+B  wren             Wren L5 cadet              4,5    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move teodor 6,4
+Teodor moves 4,4 -> 6,4 via 5,4
+The dig group wakes (proximity)
+The Barrow Field  turn 2 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 .....=A==a!##.
+ 5 ....B.^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, awake
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain
+B  wren             Wren L5 cadet              4,5    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> wait teodor
+Teodor waits
+The Barrow Field  turn 2 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 .....=A==a!##.
+ 5 ....B.^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, awake
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain  done
+B  wren             Wren L5 cadet              4,5    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move wren 5,5
+Wren moves 4,5 -> 5,5
+The Barrow Field  turn 2 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 .....=A==a!##.
+ 5 .....B^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, awake
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain  done
+B  wren             Wren L5 cadet              5,5    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> wait wren
+Wren waits
+The Barrow Field  turn 2 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^..nbn..
+ 3 =====....nn#n.
+ 4 .....=A==a!##.
+ 5 .....B^.n.nn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..c^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           10,2   hp 18/18  Hill  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          12,7   hp 23/23  Forest  group dig, guard, awake
+a  soldier-1        Soldier L4 pikeman         9,4    hp 21/21  Plain  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   10,4   hp 27/27  Hill  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain  done
+B  wren             Wren L5 cadet              5,5    hp 22/22  Plain  done
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 0,3 with the sworn group, aggressive
+enemy: move archer-1 7,2
+Archer moves 10,2 -> 7,2 via 9,2 8,2
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 11,5
+Brigand 1 moves 12,7 -> 11,5 via 12,6 11,6
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 4,3
+Brigand 2 moves 0,3 -> 4,3 via 1,3 2,3 3,3
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move soldier-1 7,4
+Soldier 1 moves 9,4 -> 7,4 via 8,4
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: acc 72% dmg 8 crit 1%; counter with Iron Lance: acc 77% dmg 10 crit 2%
+  Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+Soldier 1 attacks Teodor
+  Soldier 1 misses Teodor
+  Teodor hits Soldier 1 for 10 (hp 11)
+  Soldier 1 hp 11, Teodor hp 23
+Teodor gains 8 exp (8)
+enemy: move sworn_captain-1 7,3
+Sworn Captain moves 10,4 -> 7,3 via 9,4 8,4 8,3
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Barrow Field  turn 3 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^b.nnn..
+ 3 ====d..!.nn#n.
+ 4 .....=Aa=.n##.
+ 5 .....B^.n.nc#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           7,2    hp 18/18  Plain  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          11,5   hp 23/23  Hill  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          4,3    hp 23/23  Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         7,4    hp 11/21  Road  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   7,3    hp 27/27  Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain
+B  wren             Wren L5 cadet              5,5    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move wren 6,3
+Wren moves 5,5 -> 6,3 via 5,4 5,3
+The Barrow Field  turn 3 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^b.nnn..
+ 3 ====d.B!.nn#n.
+ 4 .....=Aa=.n##.
+ 5 ......^.n.nc#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           7,2    hp 18/18  Plain  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          11,5   hp 23/23  Hill  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          4,3    hp 23/23  Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         7,4    hp 11/21  Road  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   7,3    hp 27/27  Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain
+B  wren             Wren L5 cadet              6,3    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> attack wren sworn_captain-1
+Forecast Wren -> Sworn Captain: acc 90% dmg 6 x2 crit 2%; counter: acc 68% dmg 12 crit 0%
+  Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+Wren attacks Sworn Captain
+  Wren hits Sworn Captain for 6 (hp 21)
+  Sworn Captain misses Wren
+  Wren hits Sworn Captain for 6 (hp 15)
+  Wren hp 22, Sworn Captain hp 15
+Wren gains 8 exp (8)
+The Barrow Field  turn 3 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^b.nnn..
+ 3 ====d.B!.nn#n.
+ 4 .....=Aa=.n##.
+ 5 ......^.n.nc#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           7,2    hp 18/18  Plain  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          11,5   hp 23/23  Hill  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          4,3    hp 23/23  Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         7,4    hp 11/21  Road  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   7,3    hp 15/27  Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain
+B  wren             Wren L5 cadet              6,3    hp 22/22  Plain  done
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> attack teodor sworn_captain-1 family_lance art long_thrust
+Forecast Teodor -> Sworn Captain: acc 87% dmg 8 crit 0%; counter: none
+  Technique Long Thrust: Family Lance at acc 75 power 6 crit 0 wt 10 range 1-2; spends up to 3 of 40 uses, 2 of them hit or miss
+  Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+Teodor equips Family Lance
+Teodor declares Long Thrust with Family Lance, spending 2 extra uses
+Teodor attacks Sworn Captain
+  Teodor hits Sworn Captain for 8 (hp 7)
+  Teodor hp 23, Sworn Captain hp 7
+Teodor gains 8 exp (16)
+The Barrow Field  turn 3 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......^b.nnn..
+ 3 ====d.B!.nn#n.
+ 4 .....=Aa=.n##.
+ 5 ......^.n.nc#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           7,2    hp 18/18  Plain  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          11,5   hp 23/23  Hill  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          4,3    hp 23/23  Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         7,4    hp 11/21  Road  group dig, guard, awake
+!  sworn_captain-1  Sworn Captain L4 pikeman   7,3    hp 7/27   Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 23/23  Road  captain  done
+B  wren             Wren L5 cadet              6,3    hp 22/22  Plain  done
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> end
+Lethal if all land: Wren (Archer for 5, Brigand 2 for 11, Soldier 1 for 9, against 22 hp)
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Soldier 2 arrives at 0,4 with the sworn group, aggressive
+enemy: move archer-1 6,2
+Archer moves 7,2 -> 6,2
+enemy: attack archer-1 teodor
+Forecast Archer -> Teodor: acc 81% dmg 4 crit 3%; counter: none
+Archer attacks Teodor
+  Archer hits Teodor for 4 (hp 19)
+  Archer hp 18, Teodor hp 19
+enemy: move brigand-1 9,5
+Brigand 1 moves 11,5 -> 9,5 via 10,5
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 5,4
+Brigand 2 moves 4,3 -> 5,4 via 5,3
+enemy: attack brigand-2 teodor
+Forecast Brigand 2 -> Teodor: acc 63% dmg 10 crit 0%; counter with Family Lance: acc 87% dmg 16 crit 3%
+Brigand 2 attacks Teodor
+  Brigand 2 hits Teodor for 10 (hp 9)
+  Teodor hits Brigand 2 for 16 (hp 7)
+  Brigand 2 hp 7, Teodor hp 9
+Teodor gains 8 exp (24)
+enemy: move soldier-1 6,5
+Soldier 1 moves 7,4 -> 6,5 via 7,5
+enemy: attack soldier-1 teodor
+Forecast Soldier 1 -> Teodor: acc 74% dmg 8 crit 1%; counter with Family Lance: acc 52% dmg 12 crit 2%
+  Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+Soldier 1 attacks Teodor
+  Soldier 1 hits Teodor for 8 (hp 1)
+  Teodor misses Soldier 1
+  Soldier 1 hp 11, Teodor hp 1
+enemy: move soldier-2 3,3
+Soldier 2 moves 0,4 -> 3,3 via 0,3 1,3 2,3
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: move sworn_captain-1 9,4
+Sworn Captain moves 7,3 -> 9,4 via 8,3 8,4
+enemy: wait sworn_captain-1
+Sworn Captain waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Barrow Field  turn 4 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......b..nnn..
+ 3 ===e=.B..nn#n.
+ 4 .....dA==!n##.
+ 5 ......a.ncnn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           6,2    hp 18/18  Forest  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          9,5    hp 23/23  Plain  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          5,4    hp 7/23   Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         6,5    hp 11/21  Forest  group dig, guard, awake
+e  soldier-2        Soldier L4 pikeman         3,3    hp 21/21  Road  group sworn, aggressive
+!  sworn_captain-1  Sworn Captain L4 pikeman   9,4    hp 7/27   Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 1/23   Road  captain
+B  wren             Wren L5 cadet              6,3    hp 22/22  Plain
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> move wren 9,3
+Wren moves 6,3 -> 9,3 via 7,3 8,3
+The Barrow Field  turn 4 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......b..nnn..
+ 3 ===e=....Bn#n.
+ 4 .....dA==!n##.
+ 5 ......a.ncnn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           6,2    hp 18/18  Forest  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          9,5    hp 23/23  Plain  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          5,4    hp 7/23   Road  group sworn, aggressive
+a  soldier-1        Soldier L4 pikeman         6,5    hp 11/21  Forest  group dig, guard, awake
+e  soldier-2        Soldier L4 pikeman         3,3    hp 21/21  Road  group sworn, aggressive
+!  sworn_captain-1  Sworn Captain L4 pikeman   9,4    hp 7/27   Plain  group dig, boss, awake
+A  teodor           Teodor L5 pikeman          6,4    hp 1/23   Road  captain
+B  wren             Wren L5 cadet              9,3    hp 22/22  Hill
+Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+> attack wren sworn_captain-1
+Forecast Wren -> Sworn Captain: acc 90% dmg 6 x2 crit 2%; counter: acc 51% dmg 11 crit 0%
+  Soldier 1 is bound to Sworn Captain: freed when Sworn Captain falls
+Wren attacks Sworn Captain
+  Wren hits Sworn Captain for 6 (hp 1)
+  Sworn Captain misses Wren
+  Wren hits Sworn Captain for 6 (hp 0)
+  Wren hp 22, Sworn Captain hp 0
+Wren gains 45 exp (53)
+Sworn Captain falls at 9,4
+Soldier 1 lays down the weapon: freed (11 hp)
+The Barrow Field  turn 4 of 8  player phase  defeat_boss  recall 2
+   01234567890123
+ 0 ^^....^...nn^^
+ 1 ^.....^..nnnn^
+ 2 ......b..nnn..
+ 3 ===e=....Bn#n.
+ 4 .....dA==.n##.
+ 5 ......^.ncnn#.
+ 6 .^....^.nnn...
+ 7 ^^......nn..^^
+ 8 ^^^...^^....^^
+
+b  archer-1         Archer L4 bowman           6,2    hp 18/18  Forest  group dig, guard, awake
+c  brigand-1        Brigand L4 reaver          9,5    hp 23/23  Plain  group dig, guard, awake
+d  brigand-2        Brigand L4 reaver          5,4    hp 7/23   Road  group sworn, aggressive
+e  soldier-2        Soldier L4 pikeman         3,3    hp 21/21  Road  group sworn, aggressive
+A  teodor           Teodor L5 pikeman          6,4    hp 1/23   Road  captain
+B  wren             Wren L5 cadet              9,3    hp 22/22  Hill  done
+Battle won: defeat_boss; only recall is left, or leave
+> leave
+Teodor wins teodor_1; Family Lance wakes in Teodor's hands; the stores take 2 common material; nobody fell
+-- After The Barrow Field --
+(Placeholder until the writing pass: what the sworn were digging for,
+what Jory says to his brother, and the rust on the lance.)
+
+(The Family Lance no longer holds at sound. Fought with past the rust,
+it wakes.)
+
+Campaign stopped before Raid on Ironwake: the script ended on the screen

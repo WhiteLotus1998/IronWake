@@ -29,6 +29,7 @@ Keep: Ironwake Keep; built: nothing; the purse holds 500
     Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  teodor_1: Teodor's quest 1, The Barrow Field (quest teodor_1 <ally>); permadeath applies
   pell_2: Pell's quest 2, The Undercroft (quest pell_2 <ally>); permadeath applies
 Side maps won:
   maud_1: Maud's quest 1, The Lazar House; paid 2 common material
@@ -914,6 +915,8 @@ Keep: Ironwake Keep; built: nothing; the purse holds 500
     Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
     Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
 == Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  teodor_1: Teodor's quest 1, The Barrow Field (quest teodor_1 <ally>); permadeath applies
 Side maps won:
   maud_1: Maud's quest 1, The Lazar House; paid 2 common material
   pell_1: Pell's quest 1, The Burned School; paid 2 common material

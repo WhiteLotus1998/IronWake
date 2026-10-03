@@ -2668,7 +2668,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
-Forecast Teodor -> Weir Foreman: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
+Forecast Teodor -> Weir Foreman with Iron Lance: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
 Teodor attacks Weir Foreman
   Teodor hits Weir Foreman for 10 (hp 18)
   Weir Foreman misses Teodor
@@ -3060,7 +3060,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,4    hp 21/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     8,4    hp 28/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
-Forecast Teodor -> Weir Foreman: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
+Forecast Teodor -> Weir Foreman with Iron Lance: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
 Teodor attacks Weir Foreman
   Teodor hits Weir Foreman for 10 (hp 18)
   Weir Foreman misses Teodor
@@ -3418,7 +3418,7 @@ b  shieldbearer-1   Shieldbearer L2 bulwark    11,6   hp 24/24  Road  group brid
 B  teodor           Teodor L1 pikeman          9,3    hp 11/21  Plain
 !  weir_foreman-1   Weir Foreman L3 reaver     9,2    hp 18/28  Plain  group weir, boss, awake
 > attack teodor weir_foreman-1
-Forecast Teodor -> Weir Foreman: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
+Forecast Teodor -> Weir Foreman with Iron Lance: acc 76% dmg 10 crit 0%; counter: acc 60% dmg 10 crit 2%
 Teodor attacks Weir Foreman
   Teodor hits Weir Foreman for 10 (hp 8)
   Weir Foreman misses Teodor
@@ -3716,7 +3716,7 @@ Archer waits
 enemy: wait shieldbearer-1
 Shieldbearer waits
 enemy: attack weir_foreman-1 teodor
-Forecast Weir Foreman -> Teodor: acc 60% dmg 10 crit 2%; counter: acc 76% dmg 10 crit 0%
+Forecast Weir Foreman -> Teodor: acc 60% dmg 10 crit 2%; counter with Iron Lance: acc 76% dmg 10 crit 0%
 Weir Foreman attacks Teodor
   Weir Foreman misses Teodor
   Teodor hits Weir Foreman for 10 (hp 0)

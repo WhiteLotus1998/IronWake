@@ -153,6 +153,35 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Issue 635 slice 8: Code's warm play of The Barrow Field, Teodor's quest 1 (seed 1106, from a
+    /// camp after map 5 with the cast at level 5 and the Family Lance at sound on 9 combats; ally
+    /// Wren). The lance swung once passes its count and the card prints the hold; Jory's counter
+    /// misses twice; Wren kills the captain on turn 4, Jory is freed, and the after card wakes the lance.
+    /// </summary>
+    [Fact]
+    public void TheJournaledBarrowFieldPlayFreesJoryAndWakesTheLance()
+    {
+        var script = Transcript("2026-10-03-the_barrow_field-1106.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-barrow-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_barrow_field-1106.saves", "barrow.json")), Path.Combine(saves, "barrow.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "barrow", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Soldier 1 lays down the weapon: freed (11 hp)\n", output);
+            Assert.Contains("Battle won: defeat_boss", output);
+            Assert.Contains("> leave\nTeodor wins teodor_1; Family Lance wakes in Teodor's hands; the stores take 2 common material; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

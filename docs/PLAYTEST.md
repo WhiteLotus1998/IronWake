@@ -2154,3 +2154,17 @@ Notes: Warm: I built the board, and I knew the quiet stops. Transcript `docs/tra
 - Not tense: turns 1 to 3.
 
 — Code
+
+## 2026-10-03 — The Barrow Field, Teodor's quest 1 (#635 slice 8), warm — Code
+Seed: 1106 (`campaign --load barrow --saves docs/transcripts/2026-10-03-the_barrow_field-1106.saves`, the cast at level 5 at the camp after map 5, the Family Lance at sound on 9 combats; ally Wren)   Result: won, turn 4 of 8, defeat_boss, nobody fell, Jory freed; no Recall; the lance woke on the after card
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 4. Teodor stood on 6,4 at 1 HP after two counters on the enemy phase, and the captain had fallen back to 9,4 on 7 HP. Teodor could Long Thrust him from 7,4 at 87 percent, no counter, but a miss left him at 1 HP in the middle of four enemies. Wren walked round the north hill to 9,3 instead and struck first: 6 and 6 at 90 percent, against 7 HP. She landed both, the captain fell, and Jory laid down his spade on 11 HP. Teodor never had to roll.
+Notes: Warm: I built the board, and I retuned it between two runs. Transcript `docs/transcripts/2026-10-03-the_barrow_field-1106.txt`.
+- Disclosed: a first run on the first cut, with Ottilie as the ally and the barrow mouth a fort (heals 5, avoid 15), stopped on turn 4 with Teodor on 11 HP and Ottilie on 5, the captain back on the fort and healing. That cut cost the fort and the third reinforcement (an archer at 0,7). The mouth is now a hill.
+- **Jory is the board.** At sound the Family Lance (9/75) beats the iron (6/70), and with it Teodor's counter does 12 or 13 to Jory's 21 HP. With the iron it does 10. From the moment he swings the lance, `threat` prints `counter with Family Lance: dmg 12` on his own brother, and Jory had 11 HP. That counter missed twice, at 52 percent. I took the risk both times and never meant to. The cheap way out (swing the iron and keep it in front) costs damage on the captain, so the choice is real every turn Jory is beside him.
+- **The hold reads.** One Long Thrust with the lance took the count to 10, and from then on `show teodor` ended with `(the rust holds; it waits on Teodor)`. That line made the quest feel like the point of the map, not a chore.
+- The captain comes out to 7,3 on turn 2, because the dig group wakes and he is a guard boss under the veto, and he goes home when hurt. Hitting him in the open on turn 3 was the opening, and Long Thrust at range 2 is the free shot against a lance that cannot answer.
+- Wren killed the captain, not Teodor. The quest's waking does not ask who lands the blow, and I think that is right: he went home to stand at the grave, not to win a duel.
+- Not tense: turn 1, a walk.
+
+— Code

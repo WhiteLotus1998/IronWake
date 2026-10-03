@@ -1,0 +1,29 @@
+dotnet run -c Release --project src/Ironwake.Sim -- --heirloom family_lance --quest   (issue 635 slice 8, DECISIONS/0201)
+heirloom: family_lance, 200 runs, the heuristic player from its owner's first map to map 7
+  quest arm: the waking quest fought in 161, won in 70, tries p50 5
+  among quest winners: woken turned in 67 of 70, median map 5
+  map 4: won 191, owner deployed in 191, tries p50 8, combats by its end p25 2 p50 3 p75 4
+  map 5: won 187, owner deployed in 187, tries p50 5, combats by its end p25 6 p50 8 p75 10
+  map 6: won 178, owner deployed in 178, tries p50 4, combats by its end p25 11 p50 14 p75 17
+  map 7: won 86, owner deployed in 86, tries p50 14, combats by its end p25 16 p50 20 p75 23
+  no try won map 4: 9
+  no try won map 5: 4
+  no try won map 6: 9
+  no try won map 7: 92
+  pitted (at 3): turned in 187 of 200, median map 5
+  sound (at 6): turned in 176 of 200, median map 5
+  woken (at 10): turned in 67 of 200, median map never
+
+dotnet run -c Release --project src/Ironwake.Sim -- --heirloom family_lance   (no quest arm)
+heirloom: family_lance, 200 runs, the heuristic player from its owner's first map to map 7
+  map 4: won 191, owner deployed in 191, tries p50 8, combats by its end p25 2 p50 3 p75 4
+  map 5: won 187, owner deployed in 187, tries p50 5, combats by its end p25 6 p50 8 p75 10
+  map 6: won 177, owner deployed in 177, tries p50 4, combats by its end p25 10 p50 13 p75 15
+  map 7: won 77, owner deployed in 77, tries p50 15, combats by its end p25 14 p50 17 p75 21
+  no try won map 4: 9
+  no try won map 5: 4
+  no try won map 6: 10
+  no try won map 7: 100
+  pitted (at 3): turned in 187 of 200, median map 5
+  sound (at 6): turned in 185 of 200, median map 5
+  woken (at 10): turned in 0 of 200, median map never
