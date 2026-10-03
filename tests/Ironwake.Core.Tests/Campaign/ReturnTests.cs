@@ -145,6 +145,45 @@ public class ReturnTests
         Assert.Contains(result.Events, e => e is UnitTalked { Fate: ReturnFate.Spared });
     }
 
+    /// <summary>
+    /// Issue 826: a Recall over a talk gives the talk back, not a kill. The browser names it apart,
+    /// with the fate, and the claimant's HP stays out of the enemy hp, since she left with it.
+    /// </summary>
+    [Theory]
+    [InlineData("keziah", ReturnFate.Turned, "turned")]
+    [InlineData(null, ReturnFate.Spared, "spared")]
+    public void ARecallOverATalkGivesBackTheTalkNotAKill(string? talker, ReturnFate fate, string word)
+    {
+        var id = talker ?? Content.Cast[0].Id;
+        var state = Beside(AtTheField("keziah"), id);
+        var now = Resolver.Apply(state, Content, new Talk(id, "rook")).Next;
+        var index = now.History.Count - 1;
+
+        var cost = RecallCost.Of(now, index);
+
+        Assert.Equal(new TalkReturn("rook", fate), cost.TalkGivenBack);
+        Assert.Empty(cost.KillsGivenBack);
+        Assert.Equal(0, cost.EnemyHpBack);
+        Assert.Equal(0, cost.ExpGivenBack);
+        Assert.False(cost.IsEmpty);
+        var names = UnitNames.Of(now, Content);
+        Assert.Equal($"gives back {names["rook"]}'s talk ({word})", PlaySession.UndoText(cost, names));
+    }
+
+    /// <summary>Issue 826's guard: a returned claimant killed, not talked round, is a kill the Recall gives back.</summary>
+    [Fact]
+    public void ARecallOverTheReturnedClaimantsDeathGivesBackAKill()
+    {
+        var state = Beside(AtTheField("keziah"), "keziah");
+        var dead = state.WithoutUnit("rook") with { History = state.History.Add(state) };
+
+        var cost = RecallCost.Of(dead, dead.History.Count - 1);
+
+        Assert.Null(cost.TalkGivenBack);
+        Assert.Equal(new[] { "rook" }, cost.KillsGivenBack);
+        Assert.Equal(state.Find("rook")!.Hp, cost.EnemyHpBack);
+    }
+
     [Fact]
     public void ATalkFromAnyoneButThePickOrTheCaptainIsRefused()
     {
