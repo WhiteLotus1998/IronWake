@@ -39,6 +39,7 @@ public class WeaponLadderTests
     [InlineData("post_maul", WeaponRank.E)]
     [InlineData("kinsbane", WeaponRank.E)]
     [InlineData("family_lance", WeaponRank.E)]
+    [InlineData("maud_psalter", WeaponRank.D)]
     public void EveryWeaponSitsOnItsRungOfTheLadder(string id, WeaponRank rank)
     {
         Assert.Equal(rank, Shipped.Weapon(id).Rank);

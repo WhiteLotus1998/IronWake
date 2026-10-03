@@ -34,13 +34,13 @@
     { "map": "harrow_weir", "reward": 1200, "enemyLevel": 2,
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
     { "map": "ironwake_raid", "reward": 1000, "branch": ["keziah", "rook"], "enemyLevel": 6,
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "field_dressing"] },
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "iron_gauntlets", "hatchet", "cinder", "gust", "salve", "beacon", "field_dressing"] },
     { "map": "sallow_grange", "reward": 1400, "enemyLevel": 7, "swap": { "7,5": "veteran" },
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] },
     { "map": "brackwater_cut", "reward": 1600, "enemyLevel": 6, "swap": { "0,1": "heavy_rider", "0,10": "heavy_rider" },
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] },
     { "map": "the_field", "reward": 1800, "enemyLevel": 4, "meets": ["ansgar"], "return": { "at": "8,12", "group": "pickets", "behavior": "guard" },
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"],
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"],
       "before": [
         "Hollin is a sworn village, a day short of the keep. Nobody in it is hungry. Nobody is fighting. Every hearth is lit, which is more than Ironwake can say. Nobody will meet my eye.",
         "I asked a girl at the well her name. She said, \"We're well, thank you,\" and went back to the bucket.",
@@ -48,7 +48,7 @@
         "(Placeholder card until the writing pass. Defeat the Sworn Captain. Each group sleeps until a fight comes within its hearing.)"
       ] },
     { "map": "ironwake_keep", "reward": 2000, "enemyLevel": 8, "swap": { "6,4": "veteran", "6,7": "marauder", "4,5": "longbowman" },
-      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] }
+      "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "beacon", "field_dressing"] }
   ],
   "trials": { "bulwark": "bulwark_trial", "outrider": "outrider_trial" },
   "quests": [

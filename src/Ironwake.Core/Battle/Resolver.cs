@@ -903,6 +903,11 @@ public static class Resolver
         var stack = inventory.Items[use.Slot];
         if (content.Items.TryGetValue(stack.ItemId, out var item))
         {
+            if (use.Art is not null)
+            {
+                return (state, new Rejection(RejectionReason.ArtRefused, $"{item.Name} is not a healing spell; no art is declared with it"));
+            }
+
             if (use.TargetId is not null && use.TargetId != unit.Id)
             {
                 return (state, new Rejection(RejectionReason.NotUsable, $"{item.Name} heals its user; it cannot be used on {use.TargetId}"));
@@ -973,7 +978,19 @@ public static class Resolver
             return (state, new Rejection(RejectionReason.NothingToHeal, $"{target.Id} is at full HP"));
         }
 
-        var healed = Math.Min(targetMax, target.Hp + Combat.Heal(unit.ToCombatant(state.Map, content), spell));
+        HealArtEffect? art = null;
+        if (use.Art is not null)
+        {
+            (art, var refused) = ChooseHealArt(unit, content, spell, target, use.Art);
+            if (art is null)
+            {
+                return (state, refused);
+            }
+
+            events.Add(new ArtDeclared(unit.Id, use.Art, spell.Id, 0));
+        }
+
+        var healed = Math.Min(targetMax, target.Hp + Combat.Heal(unit.ToCombatant(state.Map, content), spell) * (art?.Factor ?? 1));
         var usesLeft = stack.Uses - 1;
         events.Add(new ItemUsed(unit.Id, spell.Id, target.Id, usesLeft));
         events.Add(new UnitHealed(target.Id, healed - target.Hp, healed));
@@ -987,7 +1004,39 @@ public static class Resolver
         healer = GainRank(healer, spell.Type, WeaponRanks.PerCombat, events);
         healer = AwardMastery(healer, content, events);
         var next = state.WithUnit(healer);
-        return (next.WithUnit(target with { Hp = healed }), null);
+        if (art is null)
+        {
+            return (next.WithUnit(target with { Hp = healed }), null);
+        }
+
+        var braced = Brace.BracesOnWait(next, content, target);
+        events.Add(new UnitWaited(target.Id, braced));
+        return (next.WithUnit(target with { Hp = healed, Moved = true, Acted = true, Braced = braced }), null);
+    }
+
+    /// <summary>
+    /// The heal art a heal declares (issue 635, <see cref="HealArtEffect"/>), or why it cannot: the
+    /// healer must know it (<see cref="RejectionReason.NoSuchArt"/>); the spell must be of its type
+    /// (and its own item, for a signature art) at a rank the healer has reached, and the ally must
+    /// not be the healer and must have neither moved, acted nor been shoved this phase
+    /// (<see cref="RejectionReason.ArtRefused"/>).
+    /// </summary>
+    public static (HealArtEffect? Art, Rejection? Rejection) ChooseHealArt(BattleUnit healer, GameContent content, Weapon spell, BattleUnit target, string artId)
+    {
+        var known = content.AbilitiesOf(healer.Unit).FirstOrDefault(a => a.Id == artId && a.Effect is HealArtEffect);
+        if (known is null)
+        {
+            return (null, new Rejection(RejectionReason.NoSuchArt, $"{healer.Id} knows no heal art '{artId}'"));
+        }
+
+        var art = (HealArtEffect)known.Effect;
+        var why = spell.Type != art.Weapon ? $"{known.Name} is a {art.Weapon.Label()} art and {spell.Name} is a {spell.Type.Label()}"
+            : art.Item is { } item && item != spell.Id ? $"{known.Name} is declared only with {content.ItemName(item)}"
+            : healer.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {healer.Unit.Skill.Rank(art.Weapon)} in {art.Weapon.Label()}, and {known.Name} needs {art.Rank}"
+            : target.Id == healer.Id ? $"{known.Name} is cast on an ally, never the healer"
+            : target.Moved || target.Acted || target.Shoved ? $"{target.Id} has already moved or acted this phase; {known.Name} needs an ally who has done neither"
+            : null;
+        return why is null ? (art, null) : (null, new Rejection(RejectionReason.ArtRefused, $"{healer.Id} cannot use {known.Name}: {why}"));
     }
 
     /// <summary>

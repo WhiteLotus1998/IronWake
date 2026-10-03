@@ -31,3 +31,7 @@ Two artefacts of the read: forcing her onto every map costs the heuristic Sallow
 ## Not in this slice
 
 The waking gain (round 251's full Move again once a map), the voice lines, the clip's hound, Harrow Weir's choice screen, and the campaign issuing the scythe on the pick. No hand play: nothing a player sees changes but two printed lines.
+
+## Amended (round 263)
+
+The bars are restated against her maps: the first tooth on her first map (met), the waking by the field (map 9) on the median run. The lever is the tooth schedule, lean 2,2,2,3,4 (woken at 13; 2,2,1,3,4 if the next read's median at the field is under 13); the waking gain and the +5 cap stay. A passed Keziah returns at the fourth tooth's count (Fed 9 under that schedule), replacing round 244's Fed 12. The scythe-on-pick slice adds an iron-axe control arm on the same seeds; until it reads, the schedule is provisional, and if the axe clears Sallow far more often than the scythe, Drain comes back to the Table first.

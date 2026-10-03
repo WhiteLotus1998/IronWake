@@ -28,7 +28,7 @@ A **refusal** answers `{"ok":false,"error":{"reason":<reason>,"message":<text>}}
 |---|---|---|
 | `move` | `unit`, `to`, `via` (optional: a tile the route passes through, the cheapest route to it then the cheapest on to `to`, both within Mov; DESIGN 13.25, issue 782) | `Move` |
 | `attack` | `unit`, `target`, `slot` (0-based or null for the equipped weapon), `art` (optional: a combat art the unit knows, issue 68) | `Attack` |
-| `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null) | `UseItem` |
+| `item` | `unit`, `slot` (0-based), `target` (the ally for a healing spell, else null), `art` (optional, a heal art the unit knows, issue 635: written only when declared) | `UseItem` |
 | `wait` | `unit` | `Wait` |
 | `watch` | `unit` (on an `overwatch: on` map, a unit whose equipped weapon reaches range 2 watches the tiles two steps away until its side's next phase, as its action; DESIGN 13.17, experiment) | `Watch` |
 | `cover` | `unit`, `ally` (on a `cover: on` map, a player unit beside an ally covers it as its action: the first Attack aimed at the ally while the two stand side by side swaps them and strikes the coverer; DESIGN 13.19, experiment) | `Cover` |
@@ -134,7 +134,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `moveUndone` | `unit`, `from` (where the move had ended), `to` (the start tile it is back on; issue 676) |
 | `itemUsed` | `unit`, `item`, `target`, `usesLeft` |
 | `weaponEquipped` | `unit`, `item` |
-| `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with), `cost` (extra uses, spent hit or miss; issue 68); precedes the `combatFought` |
+| `artDeclared` | `unit`, `art`, `item` (the weapon it strikes with, or the spell it heals with), `cost` (extra uses, spent hit or miss; issue 68; 0 for a heal art); precedes the `combatFought`, or for a heal art (issue 635) the `itemUsed`, after which the held ally's `unitWaited` follows |
 | `weaponBroke` | `unit`, `item` |
 | `spellSpent` | `unit`, `item` |
 | `groupWoke` | `group`, `cause` (`death`, `noise`, `proximity`, `call`), with `by`, the calling group, when the cause is `call` (the map's `wake_links:` header, issue 393), and at dusk, on a wake a player-phase command caused, `lamps`: the lit members row-major by tile, each `{unit, at}` (issue 382; omitted otherwise) |

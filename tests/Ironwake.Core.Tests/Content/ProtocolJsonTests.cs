@@ -149,6 +149,7 @@ public class ProtocolJsonTests
         { new Attack("wren", "brigand-1", null, "sunder"), """{"type":"attack","unit":"wren","target":"brigand-1","slot":null,"art":"sunder"}""" },
         { new UseItem("wren", 1), """{"type":"item","unit":"wren","slot":1,"target":null}""" },
         { new UseItem("mira", 0, "wren"), """{"type":"item","unit":"mira","slot":0,"target":"wren"}""" },
+        { new UseItem("maud", 0, "wren", "unasked"), """{"type":"item","unit":"maud","slot":0,"target":"wren","art":"unasked"}""" },
         { new Retreat("brigand-1", A), """{"type":"retreat","unit":"brigand-1","to":{"x":1,"y":2}}""" },
         { new Wait("wren"), """{"type":"wait","unit":"wren"}""" },
         { new Cover("teodor", "pell"), """{"type":"cover","unit":"teodor","ally":"pell"}""" },

@@ -542,7 +542,7 @@ public sealed class PlaySession
 
     private void Execute(string[] words)
     {
-        var art = words[0] is "attack" or "forecast" ? TakeArt(ref words) : null;
+        var art = words[0] is "attack" or "forecast" or "item" ? TakeArt(ref words) : null;
         switch (words[0])
         {
             case "move" when ParseMove(words) is { } parsed:
@@ -697,12 +697,13 @@ public sealed class PlaySession
             case "item" when words.Length is 3 or 4 && int.TryParse(words[2], out _):
                 if (TrySlot(words[1], words[2], out var itemSlot))
                 {
-                    Apply(new UseItem(words[1], itemSlot!.Value, words.Length == 4 ? words[3] : null));
+                    var ally = words.Length == 4 ? words[3] : null;
+                    Apply(new UseItem(words[1], itemSlot!.Value, ally, art), first: art is null ? null : HealArtLine(art, ally));
                 }
 
                 break;
             case "item":
-                Error("usage: item <unit> <slot> [ally]");
+                Error("usage: item <unit> <slot> [ally] [art <id>]");
                 break;
             case "forecast" when TryForecastWords(words, out var slotText, out var from):
                 if (TrySlot(words[1], slotText, out var forecastSlot))
@@ -1307,7 +1308,16 @@ public sealed class PlaySession
     }
 
     /// <summary>
-    /// Takes <c>art &lt;id&gt;</c> out of an <c>attack</c> or <c>forecast</c> line (issue 68),
+    /// The line a heal art prints before its events (issue 635, round 261): the art, then the ally
+    /// held on its tile, whose phase the art ends.
+    /// </summary>
+    private string HealArtLine(string art, string? ally) =>
+        _state.Find(ally ?? "") is { } held
+            ? $"{AbilityName(art, _content)}: {UnitNames.Of(_state, _content)[held.Id]} holds {held.At}; phase ends"
+            : AbilityName(art, _content);
+
+    /// <summary>
+    /// Takes <c>art &lt;id&gt;</c> out of an <c>attack</c>, <c>forecast</c> or <c>item</c> line (issues 68, 635),
     /// after the unit and the target, and returns the id; the remaining words parse as
     /// before. A trailing <c>art</c> with no id is left for the usage error.
     /// </summary>

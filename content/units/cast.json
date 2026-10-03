@@ -97,6 +97,7 @@
       "stats": { "hp": 17, "str": 2, "mag": 4, "dex": 4, "spd": 4, "lck": 5, "def": 2, "res": 5, "cha": 5 },
       "growths": { "hp": 40, "str": 10, "mag": 40, "dex": 30, "spd": 30, "lck": 35, "def": 15, "res": 40, "cha": 35 },
       "ranks": { "faith": "D" },
+      "abilities": [ "unasked" ],
       "inventory": [ { "item": "radiance" }, { "item": "salve" } ]
     },
     {

@@ -41,6 +41,7 @@ public class ClientScriptTests
         Assert.Equal(new Attack("wren", "brigand-1", 1, null), Script.Parse("attack wren brigand-1 2", state));
         Assert.Equal(new Attack("wren", "brigand-1", null, "smash"), Script.Parse("attack wren brigand-1 art smash", state));
         Assert.Equal(new UseItem("wren", 0, "pell"), Script.Parse("item wren 1 pell", state));
+        Assert.Equal(new UseItem("wren", 0, "pell", "unasked"), Script.Parse("item wren 1 pell art unasked", state));
     }
 
     [Fact]
