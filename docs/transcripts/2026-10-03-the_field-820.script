@@ -1,0 +1,170 @@
+bench wren
+bench dunstan
+march
+move teodor 4,12
+wait teodor
+move captain 2,12
+wait captain
+move rook 2,14
+wait rook
+move ottilie 2,11
+wait ottilie
+move pell 1,11
+wait pell
+move maud 1,13
+wait maud
+end
+move rook 5,11
+talk rook keziah
+move teodor 3,13
+wait teodor
+move maud 2,13
+item maud 2 teodor
+move ottilie 4,12
+attack ottilie archer-2
+move captain 5,12
+attack captain archer-2
+end
+move pell 4,11
+attack pell soldier-3
+move rook 2,12
+wait rook
+item maud 2 rook
+move ottilie 6,13
+attack ottilie brigand-1
+attack teodor brigand-1
+move captain 5,13
+attack captain brigand-1
+end
+move captain 9,13
+wait captain
+move ottilie 9,14
+wait ottilie
+move teodor 6,13
+wait teodor
+move pell 8,12
+wait pell
+move rook 7,12
+wait rook
+move maud 6,12
+wait maud
+end
+move captain 12,13
+wait captain
+move ottilie 10,13
+wait ottilie
+move teodor 9,14
+wait teodor
+move rook 7,13
+wait rook
+move maud 6,13
+item maud 2 rook
+move pell 7,12
+wait pell
+end
+move captain 15,14
+attack captain rider-1
+move maud 6,12
+move rook 6,13
+wait rook
+item maud 2 rook
+move ottilie 13,14
+wait ottilie
+move teodor 12,14
+wait teodor
+move pell 10,12
+wait pell
+end
+move captain 12,13
+wait captain
+move teodor 13,13
+wait teodor
+move ottilie 14,13
+wait ottilie
+move pell 11,13
+wait pell
+move maud 5,12
+move rook 6,12
+wait rook
+item maud 2 rook
+end
+move teodor 10,12
+wait teodor
+move maud 9,12
+item maud 2 teodor
+move rook 12,12
+wait rook
+wait captain
+wait pell
+wait ottilie
+end
+move ottilie 16,11
+wait ottilie
+move captain 15,12
+wait captain
+move rook 14,12
+wait rook
+move teodor 13,12
+wait teodor
+move pell 13,13
+wait pell
+move maud 12,12
+wait maud
+end
+move captain 15,13
+attack ottilie archer-3
+move pell 15,12
+attack pell archer-3
+order fall back preview
+order fall back
+fallback ottilie 16,13
+fallback pell 14,13
+move rook 13,14
+wait rook
+move teodor 13,13
+wait teodor
+wait maud
+end
+attack pell brigand-2
+move ottilie 14,13
+wait ottilie
+move maud 14,14
+item maud 2 ottilie
+move captain 16,13
+attack captain brigand-2
+move teodor 15,13
+wait teodor
+move rook 16,14
+wait rook
+end
+move pell 16,12
+wait pell
+move maud 16,13
+item maud 2 pell
+move captain 17,11
+wait captain
+move teodor 16,10
+wait teodor
+move ottilie 15,11
+wait ottilie
+move rook 18,11
+wait rook
+end
+move maud 16,13
+item maud 2 pell
+move captain 18,10
+wait captain
+move teodor 16,9
+wait teodor
+move rook 19,10
+wait rook
+move ottilie 17,10
+wait ottilie
+move pell 17,11
+wait pell
+end
+move pell 18,8
+attack pell sworn_captain-1 art overcast
+move captain 18,7
+attack captain sworn_captain-1 art full_measure
+leave

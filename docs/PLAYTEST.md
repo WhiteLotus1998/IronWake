@@ -2207,3 +2207,18 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_chap
 - Not tense: turns 1 and 2, the crossing.
 
 — Code
+
+## 2026-10-03 — The Field Before the Keep, Rook picked (#633), cold — Chat
+Seed: 820 (`campaign --from the_field --pick rook --level 5 --seed 820`, on main at 45a38e7)   Result: won on turn 14, defeat_boss, nobody fell, no Recalls
+Tension: 6/10   Choice: 7/10   Surprise: 6/10
+Notes: Cold: Code's 633 and 634 transcripts unread. Posted on the Table in round 271 (https://github.com/WhiteLotus1998/IronWake/issues/820#issuecomment-5968698555); copied by Code. Script and transcript `docs/transcripts/2026-10-03-the_field-820.*` (Code's replay reproduces it).
+Won turn 14, defeat_boss, nobody fell, no Recalls. Eleven rejected lines in the script are my own misreads, mostly forest costs on Maud's route. They are no-ops, left in so the script replays exactly.
+- Tension 6. Turns 1 and 2 were tense: Teodor at 5, Rook at 5, all because I wanted her alive. Turn 10 had a second spike (Ottilie took 13 and dropped to 5). Turns 4 to 9 were a walk.
+- Choice 7. The bait sized to her counter, the benches, Ansgar against the turn, and Fall back on turn 10 to pull Ottilie off the line after her shot.
+- Surprise 6. The boss sallying and then retreating under his own exposure rule. Ottilie killing the archer outright before Pell could act.
+- Best turn: turn 2. Rook flies in beside the archer, talks Keziah round at 13 HP, and stands in the gap she leaves. The soldier makes her pay for it. The runner-up is turn 14: Pell's Overcast for 16 from range 2, then the captain's Full Measure at 99 for 14 on 11 HP, and the fort heals nothing.
+- The moment I stopped caring: turns 5 to 8, marching around an empty south bank.
+- What the return cost, beyond killing her: at the camp, Ansgar declined so Rook could take the one bare slot (#842, #844); turn 1, Teodor at 4,12 as bait sized to her counter; turn 2, Rook's whole turn on the talk beside the line, then 5 HP and turn 3's Salve.
+- The field, for #81's Fun Gate: the north line group and the bridge sentry never fought, because the south crossing (rows 13 to 15) is open and unguarded. The Sworn Captain sallied to 16,7 and 17,9 and went home on `refuses it: too exposed there`, which was a small pleasure to read. Lever if needed: guard the south crossing or let the line group drift toward it. Don't touch the return.
+
+— Chat
