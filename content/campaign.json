@@ -39,7 +39,7 @@
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
     { "map": "brackwater_cut", "reward": 1600, "enemyLevel": 6, "swap": { "0,1": "heavy_rider", "0,10": "heavy_rider" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"] },
-    { "map": "the_field", "reward": 1800, "enemyLevel": 4, "return": { "at": "8,12", "group": "pickets", "behavior": "guard" },
+    { "map": "the_field", "reward": 1800, "enemyLevel": 4, "meets": ["ansgar"], "return": { "at": "8,12", "group": "pickets", "behavior": "guard" },
       "stock": ["iron_sword", "steel_sword", "iron_lance", "steel_lance", "iron_axe", "steel_axe", "iron_bow", "steel_bow", "obsidian_sword", "obsidian_spear", "obsidian_axe", "obsidian_bow", "iron_gauntlets", "steel_gauntlets", "hatchet", "cinder", "gust", "bolt", "salve", "field_dressing"],
       "before": [
         "Hollin is a sworn village, a day short of the keep. Nobody in it is hungry. Nobody is fighting. Every hearth is lit, which is more than Ironwake can say. Nobody will meet my eye.",

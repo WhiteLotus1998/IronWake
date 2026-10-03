@@ -70,7 +70,7 @@ public class CampaignTrialTests
 
         Assert.Equal("no unit 'nobody' on the roster", record.TrialRefusal("nobody", "outrider", Content));
         Assert.Equal("no class 'wizard'", record.TrialRefusal("wren", "wizard", Content));
-        Assert.StartsWith("ansgar cannot be promoted to Outrider: ", record.TrialRefusal("ansgar", "outrider", Content));
+        Assert.StartsWith("dunstan cannot be promoted to Bulwark: ", record.TrialRefusal("dunstan", "bulwark", Content));
     }
 
     [Fact]

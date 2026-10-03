@@ -101,7 +101,7 @@ public class BarracksTests
     public void AHireIsRefusedByTheCompanyCapWithTheLine()
     {
         var full = WithBarracks();
-        var padded = full with { Roster = ValueList<Unit>.From(full.Roster.Append(full.Roster[1] with { Id = "spare" })) };
+        var padded = full with { Roster = ValueList<Unit>.From(full.Roster.Concat(new[] { "spare", "spare2" }.Select(id => full.Roster[1] with { Id = id })).Take(CampaignRecord.CompanyCap)) };
 
         Assert.Equal(CampaignRecord.CompanyCap, padded.Living);
         Assert.Equal("company full (12): corin will not join", padded.HireRefusal("corin", Content));

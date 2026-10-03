@@ -1303,6 +1303,17 @@ public static class ProtocolJson
             w.WriteString("pick", pick);
         }
 
+        if (record.Met.Count > 0)
+        {
+            w.WriteStartArray("met");
+            foreach (var id in record.Met)
+            {
+                w.WriteStringValue(id);
+            }
+
+            w.WriteEndArray();
+        }
+
         if (record.Returned is { } returned)
         {
             w.WriteString("returned", ClaimantFateName(returned));
@@ -1463,6 +1474,7 @@ public static class ProtocolJson
             Origin = ReadOrigin(e, content),
             Pick = ReadPick(e, content),
             Returned = ReadReturned(e),
+            Met = ReadMet(e, content),
         };
     }
 
@@ -1548,6 +1560,26 @@ public static class ProtocolJson
         return content.Campaign.Maps.Any(m => m.Branch.Contains(pick))
             ? pick
             : throw new ProtocolException($"pick '{pick}' is not a claimant the campaign offers");
+    }
+
+    /// <summary>The optional <c>met</c> array of a campaign record (issue 633 slice 3), side characters some campaign map's <c>meets</c> offers; a record without one has met nobody.</summary>
+    private static ValueList<string> ReadMet(JsonElement e, GameContent content)
+    {
+        if (!e.TryGetProperty("met", out _))
+        {
+            return ValueList<string>.Empty;
+        }
+
+        var met = Array(Required(e, "met"), "met").Select(m => m.ValueKind == JsonValueKind.String ? m.GetString()! : throw new ProtocolException("met entries must be strings")).ToList();
+        foreach (var id in met)
+        {
+            if (!content.Campaign.Maps.Any(m => m.Meets.Contains(id)))
+            {
+                throw new ProtocolException($"met '{id}' is not a side character the campaign offers");
+            }
+        }
+
+        return ValueList<string>.From(met);
     }
 
     /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>

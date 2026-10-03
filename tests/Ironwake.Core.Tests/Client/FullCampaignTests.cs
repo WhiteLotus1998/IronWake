@@ -18,7 +18,7 @@ public class FullCampaignTests
 {
     private const ulong Seed = 631;
     private const string Difficulty = "recruit";
-    private const int Variant = 42;
+    private const int Variant = 13;
 
     private static readonly GameContent Content = ContentLoader.Load(Fixture.RealContentDirectory());
 
@@ -83,7 +83,7 @@ public class FullCampaignTests
         var order = client.IndexOf("Alder Fenn calls fall back", StringComparison.Ordinal);
         var without = client[..order] + client[(client.IndexOf('\n', order) + 1)..];
 
-        Assert.StartsWith("event log differs at line 1148", Parity.FirstDifference(console, without));
+        Assert.StartsWith("event log differs at line 1301", Parity.FirstDifference(console, without));
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class FullCampaignTests
         foreach (var start in new[]
         {
             "buy ", "drop ", "bench ", "unbench ", "repair ", "certify captain ", "quest ", "pick ", "build forge", "build barracks", "hire ", "build wall ",
-            "order press", "order rally", "order fall back", "fallback ", "recall ", "exit ",
+            "order press", "order rally", "order fall back", "fallback ", "recall ", "exit ", "meet ",
         })
         {
             Assert.Contains(script, line => line.StartsWith(start, StringComparison.Ordinal));

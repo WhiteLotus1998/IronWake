@@ -51,7 +51,7 @@ public class CampaignRecordTests
     {
         var record = Start(9);
 
-        Assert.Equal(Content.Cast.Where(u => u.Id is not ("maud" or "rook" or "keziah")), record.Roster);
+        Assert.Equal(Content.Cast.Where(u => u.Id is not ("maud" or "rook" or "keziah" or "ansgar")), record.Roster);
         Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
         Assert.Equal("starting_alone", record.NextMap(Content).MapId);
         Assert.Equal("normal", record.Difficulty);
@@ -415,7 +415,7 @@ public class CampaignRecordTests
 
         Assert.Equal("the_tollgate", record.NextMap(Content).MapId);
         Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
-        Assert.Equal(Content.Cast.Select(u => u.Id).Where(id => id is not ("rook" or "keziah")), record.Roster.Select(u => u.Id));
+        Assert.Equal(Content.Cast.Select(u => u.Id).Where(id => id is not ("rook" or "keziah" or "ansgar")), record.Roster.Select(u => u.Id));
         Assert.Empty(record.Fallen);
         Assert.Empty(record.Benched);
     }

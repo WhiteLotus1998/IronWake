@@ -98,6 +98,17 @@ public static class ContentSerializer
                     writer.WriteEndArray();
                 }
 
+                if (map.Meets.Count > 0)
+                {
+                    writer.WriteStartArray("meets");
+                    foreach (var id in map.Meets)
+                    {
+                        writer.WriteStringValue(id);
+                    }
+
+                    writer.WriteEndArray();
+                }
+
                 if (map.Return is { } back)
                 {
                     writer.WriteStartObject("return");

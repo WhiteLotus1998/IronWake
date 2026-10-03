@@ -293,7 +293,13 @@ public static class ContentLoader
                 throw node.Error("branch", "only one map may offer a branch");
             }
 
-            foreach (var (field, named) in new[] { ("arrives", arrives), ("joins", joins), ("branch", branch) })
+            var meets = node.StringArrayOrEmpty("meets");
+            if (meets.Count > 2)
+            {
+                throw node.Error("meets", "may name one or two side characters; at most one is met a map");
+            }
+
+            foreach (var (field, named) in new[] { ("arrives", arrives), ("joins", joins), ("branch", branch), ("meets", meets) })
             {
                 foreach (var id in named)
                 {
@@ -307,7 +313,7 @@ public static class ContentLoader
                         throw node.Error(field, $"'{id}' is the captain, who leads from the first map");
                     }
 
-                    if (arrives.Concat(joins).Concat(branch).Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id) || m.Joins.Contains(id) || m.Branch.Contains(id)))
+                    if (arrives.Concat(joins).Concat(branch).Concat(meets).Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id) || m.Joins.Contains(id) || m.Branch.Contains(id) || m.Meets.Contains(id)))
                     {
                         throw node.Error(field, $"'{id}' arrives or joins on more than one map");
                     }
@@ -388,6 +394,7 @@ public static class ContentLoader
                 Arrives = ValueList<string>.From(arrives),
                 Joins = ValueList<string>.From(joins),
                 Branch = ValueList<string>.From(branch),
+                Meets = ValueList<string>.From(meets),
                 Return = back,
                 EnemyLevel = enemyLevel,
                 Swaps = ValueList<TemplateSwap>.From(swaps),

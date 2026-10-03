@@ -44,6 +44,14 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     public ValueList<string> Branch { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// The side characters who may be met at this map's camp (issue 633 slice 3, DESIGN section 14),
+    /// as cast ids, one or two: each is off the roster until this map, the camp's <c>meet</c> takes at
+    /// most one, who then joins like a <see cref="Joins"/> entry if a bed is free, and anyone not met
+    /// never joins. A march is never refused for want of a meeting. Empty for a map with no meeting.
+    /// </summary>
+    public ValueList<string> Meets { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
     /// Where the claimant passed on at the branch comes back as a foe on this map (issue 633, DESIGN
     /// section 14), or null on every other map. Read only once the pick is made; the claimant fights
     /// with their own card at the pick's level (<see cref="CampaignRecord.Begin"/>). At most one map
@@ -184,15 +192,15 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     public CaptainOrigin? Origin(string originId) => Origins.FirstOrDefault(o => o.Id == originId);
 
     /// <summary>
-    /// The index of the map <paramref name="unitId"/> arrives on (issue 632), joins at (issue 763) or is
-    /// offered at as a claimant (issue 633),
+    /// The index of the map <paramref name="unitId"/> arrives on (issue 632), joins at (issue 763), is
+    /// offered at as a claimant (issue 633) or may be met at (issue 633 slice 3),
     /// or -1 for a unit no map names, who is on the roster from the first map.
     /// </summary>
     public int ArrivalIndex(string unitId)
     {
         for (var i = 0; i < Maps.Count; i++)
         {
-            if (Maps[i].Arrives.Contains(unitId) || Maps[i].Joins.Contains(unitId) || Maps[i].Branch.Contains(unitId))
+            if (Maps[i].Arrives.Contains(unitId) || Maps[i].Joins.Contains(unitId) || Maps[i].Branch.Contains(unitId) || Maps[i].Meets.Contains(unitId))
             {
                 return i;
             }

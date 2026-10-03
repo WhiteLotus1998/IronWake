@@ -68,6 +68,15 @@ public static class CampActions
             }
         }
 
+        if (!record.IsFinished(content) && record.NextMap(content).Meets is { Count: > 0 } meets && !meets.Any(record.Met.Contains))
+        {
+            foreach (var id in meets)
+            {
+                var side = id;
+                actions.Add(new($"meet {content.Unit(side).Name}", $"meet {side}", () => campaign.Meet(side)));
+            }
+        }
+
         foreach (var hire in record.HiresOffered(content))
         {
             var id = hire.Id;

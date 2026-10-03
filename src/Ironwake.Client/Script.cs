@@ -127,6 +127,7 @@ public static class Script
                 ["quest", var quest, _, ..] => campaign.Quest(quest, words[2..]),
                 ["hire", var hire] => campaign.Hire(hire),
                 ["pick", var claimant] => campaign.Pick(claimant),
+                ["meet", var side] => campaign.Meet(side),
                 ["build", var room] when campaign.Content.Campaign.Keep.Edit(room) is null => campaign.BuildRoom(room),
                 ["build", var edit, var at] when TryCoord(at, out var tile) => campaign.Build(edit, tile),
                 ["bench", var unit] => campaign.Bench(unit),
