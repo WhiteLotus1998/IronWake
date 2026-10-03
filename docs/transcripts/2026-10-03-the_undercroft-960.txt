@@ -1,0 +1,926 @@
+Campaign, seed 894, difficulty Captain, permadeath on, scheme TwoRollAverage, 10 maps
+Autosaved as auto-1; the last 3 camps are kept
+-- Before map 7 of 10: Sallow Grange; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 0; 1: Cinder 8/8, 2: Gust 6/6
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 0; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
+  pell_2: Pell's quest 2, The Undercroft (quest pell_2 <ally>); permadeath applies
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+> quest pell_2 wren
+-- The Undercroft --
+Pell asked for a day and one pair of hands again. The undercroft under
+Ironwake opens only to the garrison, and she has been one since the
+levy. Somebody else came down after the raid with a lamp and a can of
+oil.
+
+(Placeholder card until the writing pass. Get Pell onto the reading desk
+at 16,4 by the end of turn 7. The map is lost if she falls. The sworn
+come down the stair at 1,10 from turn 2, announced. Two groups sleep in
+the stacks and the cells; walls do not stop them hearing.)
+
+Side map: The Undercroft, seed 960
+Pell goes with Wren. This map is lost if Pell falls; who falls here is gone for good.
+  turn 2, enemy phase: a brigand arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
+  turn 3, enemy phase: a soldier arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
+  turn 4, enemy phase: a hexer arrives at 1,10 (aggressive). A unit standing on 1,10 stops it.
+Objective: Get the captain to the gate by the end of turn 7. Pell must survive.
+The Undercroft  turn 1 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...............#
+ 2 #.A.##########.##
+ 3 #.B.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              2,2    hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              2,3    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 5,1
+Pell moves 2,2 -> 5,1 via 2,1 3,1 4,1
+The Undercroft  turn 1 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....A..........#
+ 2 #...##########.##
+ 3 #.B.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              5,1    hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              2,3    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Undercroft  turn 1 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....A..........#
+ 2 #...##########.##
+ 3 #.B.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              5,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              2,3    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 4,1
+Wren moves 2,3 -> 4,1 via 2,2 2,1 3,1
+The Undercroft  turn 1 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...BA..........#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              5,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              4,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Undercroft  turn 1 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...BA..........#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              5,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              4,1    hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 1 --
+-- Enemy phase, turn 1 --
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: end
+-- Enemy phase ends, turn 1 --
+-- Player phase, turn 2 --
+The Undercroft  turn 2 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...BA..........#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              5,1    hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              4,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 9,1
+Pell moves 5,1 -> 9,1 via 6,1 7,1 8,1
+The Undercroft  turn 2 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...B....A......#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              9,1    hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              4,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Undercroft  turn 2 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...B....A......#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              9,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              4,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 5,1
+Wren moves 4,1 -> 5,1
+The Undercroft  turn 2 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....B...A......#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              9,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              5,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Undercroft  turn 2 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....B...A......#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              9,1    hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              5,1    hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 2 --
+-- Enemy phase, turn 2 --
+Reinforcements arrive
+  Brigand 2 arrives at 1,10 with the sworn group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 2,7
+Brigand 2 moves 1,10 -> 2,7 via 1,9 2,9 2,8
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: end
+-- Enemy phase ends, turn 2 --
+-- Player phase, turn 3 --
+The Undercroft  turn 3 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....B...A......#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.f.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,7    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              9,1    hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              5,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 13,1
+Pell moves 9,1 -> 13,1 via 10,1 11,1 12,1
+The Undercroft  turn 3 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....B.......A..#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.f.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,7    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              13,1   hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              5,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Undercroft  turn 3 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #....B.......A..#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.f.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,7    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              13,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              5,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 9,1
+Wren moves 5,1 -> 9,1 via 6,1 7,1 8,1
+The Undercroft  turn 3 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #........B...A..#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.f.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,7    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              13,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              9,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Undercroft  turn 3 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #........B...A..#
+ 2 #...##########.##
+ 3 #...#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.f.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,7    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              13,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+B  wren             Wren L5 cadet              9,1    hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 3 --
+-- Enemy phase, turn 3 --
+Reinforcements arrive
+  Soldier 2 arrives at 1,10 with the sworn group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 2,3
+Brigand 2 moves 2,7 -> 2,3 via 2,6 2,5 2,4
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: wait lector-1
+Lector waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 2,7
+Soldier 2 moves 1,10 -> 2,7 via 1,9 2,9 2,8
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 3 --
+-- Player phase, turn 4 --
+The Undercroft  turn 4 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #........B...A..#
+ 2 #...##########.##
+ 3 #.f.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.g.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,3    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              13,1   hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,7    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              9,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> threat pell from 14,1
+Threat on Pell at 14,1 (Plain):
+  Lector from 14,3 with Radiance (slot 2): acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3%
+  If all land: 10 against 17 hp
+> move pell 14,1
+Pell moves 13,1 -> 14,1
+The Undercroft  turn 4 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #........B....A.#
+ 2 #...##########.##
+ 3 #.f.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.g.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,3    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              14,1   hp 17/17  Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,7    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              9,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait pell
+Pell waits
+The Undercroft  turn 4 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #........B....A.#
+ 2 #...##########.##
+ 3 #.f.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.g.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,3    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              14,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,7    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              9,1    hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move wren 13,1
+Wren moves 9,1 -> 13,1 via 10,1 11,1 12,1
+The Undercroft  turn 4 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #............BA.#
+ 2 #...##########.##
+ 3 #.f.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.g.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,3    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              14,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,7    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              13,1   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Undercroft  turn 4 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #............BA.#
+ 2 #...##########.##
+ 3 #.f.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #.g.............#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, asleep
+f  brigand-2        Brigand L4 reaver          2,3    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, asleep
+e  lector-1         Lector L4 scholar          14,3   hp 17/17  Plain  group reading, hold
+A  pell             Pell L5 adept              14,1   hp 17/17  Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,7    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              13,1   hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> end
+-- Player phase ends, turn 4 --
+-- Enemy phase, turn 4 --
+Reinforcements arrive
+  Hexer 2 arrives at 1,10 with the sworn group, aggressive
+enemy: wait archer-1
+Archer waits
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 4,1
+Brigand 2 moves 2,3 -> 4,1 via 2,2 2,1 3,1
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: wait hexer-1
+Hexer 1 waits
+enemy: move hexer-2 2,8
+Hexer 2 moves 1,10 -> 2,8 via 1,9 2,9
+enemy: wait hexer-2
+Hexer 2 waits
+enemy: attack lector-1 pell 2
+Forecast Lector -> Pell with Radiance: acc 96% dmg 10 crit 0%; counter with Cinder: acc 99% dmg 9 crit 3%
+Lector equips Radiance
+Lector attacks Pell
+  Lector hits Pell for 10 (hp 7)
+  Pell hits Lector for 9 (hp 8)
+  Lector hp 8, Pell hp 7
+Pell gains 8 exp (8)
+The stacks group wakes (noise)
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 2,3
+Soldier 2 moves 2,7 -> 2,3 via 2,6 2,5 2,4
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 4 --
+-- Player phase, turn 5 --
+The Undercroft  turn 5 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...f........BA.#
+ 2 #...##########.##
+ 3 #.g.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##h####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          4,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             2,8    hp 17/17  Plain  group sworn, aggressive
+e  lector-1         Lector L4 scholar          14,3   hp 8/17   Plain  group reading, hold
+A  pell             Pell L5 adept              14,1   hp 7/17   Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              13,1   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 14,2
+Pell moves 14,1 -> 14,2
+The Undercroft  turn 5 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...f........B..#
+ 2 #...##########A##
+ 3 #.g.#........#e.#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##h####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          4,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             2,8    hp 17/17  Plain  group sworn, aggressive
+e  lector-1         Lector L4 scholar          14,3   hp 8/17   Plain  group reading, hold
+A  pell             Pell L5 adept              14,2   hp 7/17   Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              13,1   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> attack pell lector-1
+Forecast Pell -> Lector with Cinder: acc 99% dmg 9 crit 3%; counter with Radiance: acc 96% dmg 10 crit 0%
+  Counter: lethal to Pell (10 against 7 hp)
+Pell attacks Lector
+  Pell hits Lector for 9 (hp 0)
+  Pell hp 7, Lector hp 0
+Pell gains 25 exp (33)
+Lector falls at 14,3
+The Undercroft  turn 5 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...f........B..#
+ 2 #...##########A##
+ 3 #.g.#........#..#
+ 4 #......a...b....T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##h####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          4,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             2,8    hp 17/17  Plain  group sworn, aggressive
+A  pell             Pell L5 adept              14,2   hp 7/17   Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              13,1   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> threat wren from 14,4
+Threat on Wren at 14,4 (Plain):
+  Hexer 1 from 12,4 with Cinder (slot 1): acc 97% dmg 11 crit 0%; counter: none
+  If all land: 11 against 22 hp
+> move wren 14,4
+Wren moves 13,1 -> 14,4 via 14,1 14,2 14,3
+The Undercroft  turn 5 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...f...........#
+ 2 #...##########A##
+ 3 #.g.#........#..#
+ 4 #......a...b..B.T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##h####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          4,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             2,8    hp 17/17  Plain  group sworn, aggressive
+A  pell             Pell L5 adept              14,2   hp 7/17   Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              14,4   hp 22/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> wait wren
+Wren waits
+The Undercroft  turn 5 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #...f...........#
+ 2 #...##########A##
+ 3 #.g.#........#..#
+ 4 #......a...b..B.T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #...............#
+ 8 ##h####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          7,4    hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          4,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             11,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             2,8    hp 17/17  Plain  group sworn, aggressive
+A  pell             Pell L5 adept              14,2   hp 7/17   Plain  captain  done
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         2,3    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              14,4   hp 22/22  Plain  done
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> threat pell
+Threat on Pell at 14,2 (Plain): no enemy can strike her next phase
+> end
+-- Player phase ends, turn 5 --
+-- Enemy phase, turn 5 --
+enemy: wait archer-1
+Archer waits
+enemy: move brigand-1 10,4
+Brigand 1 moves 7,4 -> 10,4 via 8,4 9,4
+enemy: wait brigand-1
+Brigand 1 waits
+enemy: move brigand-2 8,1
+Brigand 2 moves 4,1 -> 8,1 via 5,1 6,1 7,1
+enemy: wait brigand-2
+Brigand 2 waits
+enemy: move hexer-1 12,4
+Hexer 1 moves 11,4 -> 12,4
+enemy: attack hexer-1 wren
+Forecast Hexer 1 -> Wren: acc 97% dmg 11 crit 0%; counter: none
+Hexer 1 attacks Wren
+  Hexer 1 hits Wren for 11 (hp 11)
+  Hexer 1 hp 17, Wren hp 11
+enemy: move hexer-2 5,7
+Hexer 2 moves 2,8 -> 5,7 via 2,7 3,7 4,7
+enemy: wait hexer-2
+Hexer 2 waits
+enemy: wait soldier-1
+Soldier 1 waits
+enemy: move soldier-2 5,4
+Soldier 2 moves 2,3 -> 5,4 via 3,3 3,4 4,4
+enemy: wait soldier-2
+Soldier 2 waits
+enemy: end
+-- Enemy phase ends, turn 5 --
+-- Player phase, turn 6 --
+The Undercroft  turn 6 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #.......f.......#
+ 2 #...##########A##
+ 3 #...#........#..#
+ 4 #....g....a.b.B.T
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #....h..........#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          10,4   hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          8,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             12,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             5,7    hp 17/17  Plain  group sworn, aggressive
+A  pell             Pell L5 adept              14,2   hp 7/17   Plain  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         5,4    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              14,4   hp 11/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+> move pell 16,4
+Pell moves 14,2 -> 16,4 via 14,3 15,3 15,4
+The Undercroft  turn 6 of 7  player phase  seize  recall 2
+   01234567890123456
+ 0 #################
+ 1 #.......f.......#
+ 2 #...##########.##
+ 3 #...#........#..#
+ 4 #....g....a.b.B.A
+ 5 #...#........#..#
+ 6 #...##########.##
+ 7 #....h..........#
+ 8 ##.####.###.###.#
+ 9 #...#.c.#.d.#...#
+10 #.###############
+
+d  archer-1         Archer L4 bowman           10,9   hp 18/18  Plain  group cells, guard, asleep
+a  brigand-1        Brigand L4 reaver          10,4   hp 23/23  Plain  group stacks, guard, awake
+f  brigand-2        Brigand L4 reaver          8,1    hp 23/23  Plain  group sworn, aggressive
+b  hexer-1          Hexer L4 adept             12,4   hp 17/17  Plain  group stacks, guard, awake
+h  hexer-2          Hexer L4 adept             5,7    hp 17/17  Plain  group sworn, aggressive
+A  pell             Pell L5 adept              16,4   hp 7/17   Gate (heals 20 percent, 3 hp)  captain
+c  soldier-1        Soldier L4 pikeman         6,9    hp 21/21  Plain  group cells, guard, asleep
+g  soldier-2        Soldier L4 pikeman         5,4    hp 21/21  Plain  group sworn, aggressive
+B  wren             Wren L5 cadet              14,4   hp 11/22  Plain
+asleep: wakes if a unit ends within 4 tiles of a member, a combat happens within 6, or a member dies
+Battle won: seize; only recall is left, or leave
+> leave
+Pell wins pell_2; Pell receives Pell's Commonplace; the stores take 3 frozen iron; nobody fell
+-- After The Undercroft --
+(Placeholder until the writing pass: what Pell read at the desk about
+what the armistice seals, and that she means to tell the company before
+anyone else can.)
+
+(Pell carries Pell's Commonplace now: Cinder's numbers, bound to her,
+and it never catches. Its art, Read Ahead, reaches one tile further for
+2 less Power.)
+
+> camp
+-- Before map 7 of 10: Sallow Grange; the purse holds 500 --
+== Roster ==
+  Alder Fenn (captain): Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3; promotes at 3: Marshal, Ranger or Vanguard
+  Wren: Cadet L5, EXP 0; 1: Iron Sword 40/40, 2: Field Dressing 3/3
+  Teodor: Pikeman L5, EXP 0; 1: Iron Lance 40/40, 2: Field Dressing 3/3
+  Ottilie: Bowman L5, EXP 0; 1: Iron Bow 40/40, 2: Field Dressing 3/3
+  Pell: Adept L5, EXP 33; 1: Cinder 8/8, 2: Gust 6/6, 3: Pell's Commonplace 8/8
+  Dunstan: Bulwark L5, EXP 0; 1: Iron Lance 40/40
+  Maud: Chaplain L5, EXP 0; 1: Radiance 5/5, 2: Salve 8/8
+  Rook: Skyrider L5, EXP 0; 1: Iron Lance 40/40
+  Brannock: Cadet L5, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+Deploys to Sallow Grange: Alder Fenn, Dunstan, Wren, Teodor, Pell, Ottilie (deploy 6 of 9)
+== Keep ==
+Purse: 500
+Rooms: beds: 9/12; a fallen member keeps their bed
+  bunk: Bunk room, 400, +2 beds, built 0 of 2
+  forge: Forge, 600, Refine +5 acc or +1 power a step, built 0 of 1
+  barracks: Barracks, 500, +2 beds and 4 hires at 300, built 0 of 1
+  barracks_wing: Barracks wing, 300, +1 bed and 3 hires at 300, built 0 of 1; needs the Barracks first
+  Stores: common 0, frozen iron 3; a step costs one and 100, shop weapons to +2 on common, the main line's signatures to +3 on frozen iron
+Keep: Ironwake Keep; built: nothing; the purse holds 500
+  wall: Rebuild a wall, 400
+    Wall 10,3: Wall; no unit can stand on it; the gap 10,3 to 10,4 narrows from 2 tiles to 1 (10,4)
+    Wall 10,8: Wall; no unit can stand on it; the gap 10,7 to 10,8 narrows from 2 tiles to 1 (10,7)
+  ditch: Dig a ditch, 300
+    Ditch 9,5: Water; infantry, cavalry and armored units cannot stand on it; flying can
+    Ditch 9,6: Water; infantry, cavalry and armored units cannot stand on it; flying can
+== Quests ==
+Side maps won:
+  maud_1: Maud's quest 1, The Lazar House; paid 2 common material
+  pell_1: Pell's quest 1, The Burned School; paid 2 common material
+  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter
+  pell_2: Pell's quest 2, The Undercroft; paid Pell's Commonplace and 3 frozen iron
+== Shop ==
+Shop: iron_sword 400, steel_sword 900, iron_lance 400, steel_lance 900, iron_axe 400, steel_axe 900, iron_bow 400, steel_bow 900, obsidian_sword 1800, obsidian_spear 1800, obsidian_axe 1800, obsidian_bow 1800, iron_gauntlets 400, steel_gauntlets 900, hatchet 300, cinder 500, gust 600, bolt 900, salve 500, beacon 800, field_dressing 150; a seal for promotion costs 500
+Trials in place of a seal (one attempt per unit and class before each map): Bulwark, Outrider
+March (march): map 7, Sallow Grange. Get the captain to the gate by the end of turn 10. Captain Fenn must survive.
+Campaign stopped before Sallow Grange: the script ended on the screen

@@ -499,4 +499,5 @@ fx_embers.png
 fx_spell_bolt.png
 fx_spell_cinder.png
 fx_spell_gust.png
+fx_spell_pell_commonplace.png
 fx_spell_radiance.png

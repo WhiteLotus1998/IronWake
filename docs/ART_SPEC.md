@@ -575,6 +575,7 @@ fx_embers
 fx_spell_bolt
 fx_spell_cinder
 fx_spell_gust
+fx_spell_pell_commonplace
 fx_spell_radiance
 levelup_captain
 levelup_wren

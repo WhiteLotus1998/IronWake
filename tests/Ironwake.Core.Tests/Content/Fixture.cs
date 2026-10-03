@@ -323,8 +323,9 @@ internal static class Fixture
     /// build journaled before it was map 9, and a trial's and a side map's seed count the campaign's
     /// maps (<see cref="CampaignRecord.TrialSeed"/>,
     /// <see cref="CampaignRecord.QuestSeed"/>), so a script journaled on nine
-    /// maps replays only on nine. Pell's quest 1 (issue 635 slice 6) goes too: every copy stands
-    /// for a build journaled before it, when no camp listed it.
+    /// maps replays only on nine. Pell's quests 1 and 2 (issue 635 slices 6 and 7) go too, and
+    /// with them her art Read Ahead: every copy stands for a build journaled before them, when no
+    /// camp listed them and no card printed the art.
     /// </summary>
     public static string WithoutTheField(string target)
     {
@@ -341,10 +342,19 @@ internal static class Fixture
         campaign.AsObject()["maps"] = new System.Text.Json.Nodes.JsonArray(maps);
         if (campaign["quests"] is System.Text.Json.Nodes.JsonArray quests)
         {
-            campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(quests.Where(q => (string)q!["id"]! != "pell_1").Select(q => q!.DeepClone()).ToArray());
+            campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(quests.Where(q => (string)q!["id"]! is not ("pell_1" or "pell_2")).Select(q => q!.DeepClone()).ToArray());
         }
 
         File.WriteAllText(campaignPath, campaign.ToJsonString());
+
+        var castPath = Path.Combine(target, "units", "cast.json");
+        var cast = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(castPath))!;
+        foreach (var unit in cast["units"]!.AsArray().OfType<System.Text.Json.Nodes.JsonObject>().Where(u => (string)u["id"]! == "pell"))
+        {
+            unit["abilities"] = new System.Text.Json.Nodes.JsonArray(unit["abilities"]!.AsArray().Where(a => (string)a! != "read_ahead").Select(a => a!.DeepClone()).ToArray());
+        }
+
+        File.WriteAllText(castPath, cast.ToJsonString());
         return target;
     }
 

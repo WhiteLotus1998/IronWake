@@ -124,6 +124,35 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's journaled play of Pell's quest 2 (seed 960), from a save at the camp after map 6:
+    /// the north passage crossed on the quiet stops, Pell takes the lector's shot at 14,1 (its
+    /// noise wakes the stacks), kills him from 14,2, Wren corks the middle door at 14,4 through
+    /// her, and Pell reaches the desk on turn 6.
+    /// </summary>
+    [Fact]
+    public void TheJournaledUndercroftPlaySeizesTheDeskAndPaysTheCommonplace()
+    {
+        var script = Transcript("2026-10-03-the_undercroft-960.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-undercroft-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_undercroft-960.saves", "undercroft.json")), Path.Combine(saves, "undercroft.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "undercroft", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("The stacks group wakes (noise)\n", output);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Contains("> leave\nPell wins pell_2; Pell receives Pell's Commonplace; the stores take 3 frozen iron; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

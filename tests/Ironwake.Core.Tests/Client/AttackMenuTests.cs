@@ -57,7 +57,7 @@ public class AttackMenuTests
     [InlineData("wren", "heavy_cut")]
     [InlineData("teodor", "long_thrust")]
     [InlineData("ottilie", "aimed_shot")]
-    [InlineData("pell", "overcast")]
+    [InlineData("pell", "overcast,read_ahead")]
     [InlineData("keziah", "cleave")]
     public void EachArtIsKnownAtTheStartByOneOfTheCast(string unit, string art)
     {
@@ -74,6 +74,20 @@ public class AttackMenuTests
         Assert.Equal(new (string?, string?, int?)[] { ("cinder", null, null), ("gust", null, 1), ("cinder", "overcast", null), ("gust", "overcast", 1) },
             rows.Select(r => (r.WeaponId, r.Art?.Id, r.Command.Slot)));
         Assert.All(rows, r => Assert.True(r.Legal));
+    }
+
+    [Fact]
+    public void ASignatureArtIsListedOnlyUnderItsOwnItemAndNotAtAllWithoutIt()
+    {
+        var state = Placed("pell", new Coord(6, 6));
+        var pell = state.Find("pell")!;
+        var pack = pell.Unit.Inventory.Items.Add(new ItemStack("pell_commonplace", Shipped.Weapon("pell_commonplace").Durability));
+        var armed = state.WithUnit(pell with { Unit = pell.Unit with { Inventory = new Inventory(pack) } });
+
+        var rows = Queries.AttackOptions(armed, Shipped, armed.Find("pell")!, EnemyAt(armed, Brigand));
+
+        Assert.Equal(new[] { "pell_commonplace" }, rows.Where(r => r.Art?.Id == "read_ahead").Select(r => r.WeaponId));
+        Assert.DoesNotContain(Queries.AttackOptions(state, Shipped, pell, EnemyAt(state, Brigand)), r => r.Art?.Id == "read_ahead");
     }
 
     [Fact]

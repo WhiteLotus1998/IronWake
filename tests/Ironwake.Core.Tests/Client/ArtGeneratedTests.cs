@@ -60,6 +60,7 @@ public class ArtGeneratedTests
         ["fx_spell_bolt"] = new[] { Value(LookPalette.Marks["reach"]), Value(LookPalette.Marks["struck"]) },
         ["fx_spell_cinder"] = new[] { Value(LookPalette.Terrain["fire"]), Value(LookPalette.Terrain["road"]) },
         ["fx_spell_gust"] = new[] { Value(LookPalette.Marks["reach"]), Value(LookPalette.Ui["text"]) },
+        ["fx_spell_pell_commonplace"] = new[] { Value(LookPalette.Ui["text"]), Value(LookPalette.Marks["struck"]), Value(LookPalette.Terrain["road"]) },
         ["fx_spell_radiance"] = new[] { Value(LookPalette.Ui["text"]), Value(LookPalette.Marks["struck"]) },
     };
 

@@ -134,7 +134,8 @@ public static class Queries
     /// Every way the unit could strike the target from where it stands (issue 611), the attack
     /// menu's rows in order: the plain attack with each weapon it carries (healing spells and
     /// items left out), then each art it knows under each carried weapon of the art's type, or
-    /// once under no weapon when it carries none of that type. Each row is the
+    /// once under no weapon when it carries none of that type; a signature art (issue 635) is
+    /// listed only under its own item, and not at all while the unit does not carry it. Each row is the
     /// <see cref="Attack"/> it would submit, with the forecast <see cref="Forecast(BattleState, GameContent, BattleUnit, BattleUnit, int?, string?)"/>
     /// gives it when the resolver would accept it, or the resolver's own refusal, so a renderer
     /// greys a row with the rule's words and never judges legality itself. The equipped
@@ -164,7 +165,13 @@ public static class Queries
 
         foreach (var (ability, art) in content.ArtsOf(unit.Unit))
         {
-            var matching = slots.Where(slot => content.Weapon(unit.Unit.Inventory.Items[slot].ItemId).Type == art.Weapon).ToList();
+            var matching = slots.Where(slot => content.Weapon(unit.Unit.Inventory.Items[slot].ItemId).Type == art.Weapon
+                && (art.Item is null || unit.Unit.Inventory.Items[slot].ItemId == art.Item)).ToList();
+            if (matching.Count == 0 && art.Item is not null)
+            {
+                continue;
+            }
+
             if (matching.Count == 0)
             {
                 Add(slots.Contains(equipped) ? equipped : slots.Count > 0 ? slots[0] : null, ability);
