@@ -2325,3 +2325,17 @@ Best turn: **Turn 2, second try.** Two brigands at 9 HP stood on Pell at 3. Wren
 Notes: Warm: I built the rule. The hunt decided one turn. It chose the target (the brigand whose tile left her the better hunt, not the one nearer) and it chose her end tile. That meets 804's keep clause once; a cold chair should read it too. The first try at turn 2 is in the transcript: her 79% missed, Pell's displayed 99 missed, and Keziah died to the counter-phase. I recalled. After the hunt was spent, the card said `The hunt has run this map.`, and the second kill (the archer, turn 5) printed no hunt line, which is the once-a-map reading correctly. What was not tense: turn 3, a walk. My own mistake: turn 6's Cleave at 39% without a forecast first, leaving her at 3 HP beside the soldier. The 4 Move matters more on a reaver than it sounds. On a Mov 4 unit, a second Move doubles her turn's reach, so the feel is "she gets to leave," not "she gets to chase." That is Code's version of 251, and it read right. Transcript `docs/transcripts/2026-10-03-the_gleaning_kinsbane_woken-804.txt` (script beside it).
 
 — Code
+
+## 2026-10-03 — Brackwater Cut at dusk with Kinsbane beside the axe, from the Sallow 857 run, cold — Chat
+Seed: campaign 857, map seed 858 (the Sallow 857 script continued into Brackwater in one `campaign --from sallow_grange --pick keziah --level 6 --seed 857` run; Brackwater names Dunstan, Wren and Pell, so Keziah took the one free seat and Maud, Teodor and Ottilie were benched; Keziah arrived starved at Kinsbane 1/20)   Result: stopped at turn 6, undecided; across the Recall lines Keziah, Dunstan and Pell fell; all three Recalls spent; the captain, Wren and Pell alive at the stop; the escape not played out
+Tension: 8/10   Choice: 7/10   Surprise: 5/10
+Best turn: **Turn 4, on the Recall line.** Dunstan held the gap at 12,3 and the heavy rider sat at 8 on 11,3; Keziah had 6 HP. Pell's 99% Cinder would have killed it for free. Instead Dunstan stepped aside and Keziah took the cork tile and swung the scythe: 74%, lethal counter. It landed, she fed to 16, and the first tooth grew. The turn before, she sat at 6 behind Dunstan and the drain did not fire, because the cork kept the chase out of her strike set.
+Notes: Cold. Script and transcript `docs/transcripts/2026-10-03-brackwater_cut-858-kinsbane.*` (Code ran Chat's command list; the transcript reproduces the play).
+- Feed or survive came up three turns running, each at single-digit HP against a lethal counter. Turn 5: 9 HP, the brigand at 8 after Cinder, the scythe at 79%; it missed and the archer and brawler finished her. On an Escape map the hunger keeps her in the rear guard, where the whole chase arrives. A 10 heal from 6 lands her at 16, still two hits from death. One play; no lever asked.
+- The seat squeeze is the pick's hidden price: Sallow and Brackwater each leave one seat, and Keziah costs Maud on both. Honest, kept. The Sim fields her everywhere, so 0211's field median is an upper bound for a player who benches her at Brackwater.
+- Recall's "the same attack rolls the same" held: the turn-5 miss came back after `recall 99`.
+- Misreads, all legible: Dunstan doubled by the heavy rider on 9,3, the hexer over the wall at range 2, Pell left on 13,3 for an unseen brawler at dusk.
+- Text: `Kinsbane is eased by the hit; Keziah heals 0 (hp 26)` should drop the heal clause when it heals 0 (next Kinsbane slice, #804).
+- The field cold moves to `--fed 10` (#865).
+
+— Chat
