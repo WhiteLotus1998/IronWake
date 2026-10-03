@@ -11,6 +11,7 @@ Campaign, seed 685, difficulty Captain, permadeath on, scheme TwoRollAverage, 9 
   Ansgar: Outrider L1, EXP 0; 1: Iron Lance 40/40, 2: Iron Sword 40/40
   Keziah: Reaver L1, EXP 0; 1: Iron Axe 40/40, 2: Iron Gauntlets 40/40
   Brannock: Cadet L1, EXP 0; 1: Hatchet 45/45, 2: Field Dressing 3/3
+  Rook: Skyrider L1, EXP 0; 1: Iron Lance 40/40
 Deploys to Raid on Ironwake: Alder Fenn, Wren, Teodor, Ottilie, Pell, Dunstan (deploy 6 of 11)
 == Keep ==
 Purse: 500

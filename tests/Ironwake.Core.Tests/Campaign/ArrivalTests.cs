@@ -48,7 +48,7 @@ public class ArrivalTests
 
         Assert.Null(start.Find("maud"));
         Assert.Null(mill.Find("maud"));
-        Assert.Equal("no unit 'maud' on the roster", mill.Bench("maud", Map("the_mill")).Text);
+        Assert.Equal("no unit 'maud' on the roster", start.Bench("maud", Map("the_mill"), Content).Text);
     }
 
     [Fact]

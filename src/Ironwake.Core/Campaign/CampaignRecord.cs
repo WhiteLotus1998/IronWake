@@ -1374,12 +1374,14 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Benches <paramref name="unitId"/> from <paramref name="map"/>, the next map: its bare slot
-    /// goes to the next recruit in roster order. Refused for the captain, the map's protected
-    /// recruit, a recruit the map places by name, a unit not on the roster, or one already benched.
+    /// goes to the next recruit in roster order. Anyone <see cref="Present"/> for it may be benched,
+    /// so a joiner, the branch's pick or a side character met at this camp is benched like a member
+    /// (issue 842) and still joins the roster after the map. Refused for the captain, the map's
+    /// protected recruit, a recruit the map places by name, a unit not present, or one already benched.
     /// </summary>
-    public ScreenResult Bench(string unitId, MapDefinition map)
+    public ScreenResult Bench(string unitId, MapDefinition map, GameContent content)
     {
-        if (Find(unitId) is not { } unit)
+        if (Present(content).FirstOrDefault(u => u.Id == unitId) is not { } unit)
         {
             return ScreenResult.Refused(this, $"no unit '{unitId}' on the roster");
         }

@@ -149,7 +149,7 @@ public sealed class CampaignClient
     /// <summary>Buys the keep's room <paramref name="roomId"/> (issue 786).</summary>
     public bool BuildRoom(string roomId) => Screen(() => Record.BuildRoom(roomId, Content));
 
-    public bool Bench(string unitId) => NextMap is { } map && Screen(() => Record.Bench(unitId, map));
+    public bool Bench(string unitId) => NextMap is { } map && Screen(() => Record.Bench(unitId, map, Content));
 
     public bool Unbench(string unitId) => Screen(() => Record.Unbench(unitId));
 
