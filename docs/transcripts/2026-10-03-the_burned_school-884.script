@@ -1,0 +1,26 @@
+quest pell_1 wren
+move pell 7,4
+attack pell shieldbearer-1
+move wren 8,4
+attack wren shieldbearer-1
+end
+threat pell from 6,3
+move pell 6,3
+open pell 6,2
+move wren 12,4
+wait wren
+end
+exit wren
+forecast pell brigand-2
+attack pell brigand-2
+end
+move pell 9,4
+wait pell
+end
+threat pell from 12,5
+move pell 12,5
+wait pell
+end
+exit pell
+leave
+camp

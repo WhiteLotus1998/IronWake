@@ -659,7 +659,7 @@ public sealed class CampaignSession
         {
             var closed = record.QuestsTried.Contains(quest.Id) ? "; fought since the last map, open again after the next" : "";
             var command = $"quest {quest.Id} {string.Join(" ", Enumerable.Repeat("<ally>", allies))}";
-            var what = quest.OpensAfter is null ? $"quest {quest.Part}" : "request";
+            var what = content.Cast.Any(u => u.Id == quest.MemberId) ? $"quest {quest.Part}" : "request";
             lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s {what}, {board} ({command}); {price}{closed}");
         }
 
@@ -914,7 +914,7 @@ public sealed class CampaignSession
                 paid.Add($"the {content.Class(classId).Name} class");
             }
 
-            var what = quest.OpensAfter is null ? $"quest {quest.Part}" : "request";
+            var what = content.Cast.Any(u => u.Id == quest.MemberId) ? $"quest {quest.Part}" : "request";
             lines.Add($"  {quest.Id}: {names[quest.MemberId]}'s {what}, {QuestBoard(contentDir, content, quest).Board}; paid {(paid.Count == 0 ? "nothing" : string.Join(" and ", paid))}");
         }
 

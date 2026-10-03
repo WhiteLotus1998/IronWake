@@ -17,7 +17,7 @@ public class ForgeTests
 
     private static readonly Weapon Vow = Shipped.Weapon("iron_sword") with { Id = "test_vow", Name = "Test Vow", Price = null, BoundTo = "maud" };
 
-    private static readonly Weapon Charm = Shipped.Weapon("iron_sword") with { Id = "test_charm", Name = "Test Charm", Price = null, BoundTo = "pell" };
+    private static readonly Weapon Charm = Shipped.Weapon("iron_sword") with { Id = "test_charm", Name = "Test Charm", Price = null, BoundTo = "brannock" };
 
     /// <summary>The shipped content with Maud's Test Vow paid by her quest 2 in place of the Psalter (with its three rare) and a side character's Test Charm.</summary>
     private static readonly GameContent Content = Shipped with

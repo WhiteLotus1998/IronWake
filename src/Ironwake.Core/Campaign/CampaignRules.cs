@@ -132,7 +132,9 @@ public sealed record CampaignQuest(string Id, string MemberId, int Part, string 
     /// <summary>
     /// The main map after whose win the quest opens (issue 691), in place of the part's own timing,
     /// or null for a member's quest timed by arrival. A quest with it is offered at every camp
-    /// from then on while its member stands, and at no camp before: nothing names it earlier.
+    /// from then on while its member stands, and at no camp before: nothing names it earlier. A
+    /// member whose arrival map the campaign does not name yet (Pell's quest 1, issue 635 slice 6)
+    /// takes it to hold DESIGN 14's slot.
     /// </summary>
     public string? OpensAfter { get; init; }
 
