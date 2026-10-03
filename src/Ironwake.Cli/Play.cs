@@ -2552,7 +2552,7 @@ public sealed class PlaySession
             case HungerDrained h:
                 return $"{content.ItemName(h.ItemId)} drains {names[h.UnitId]} {h.Amount} (hp {h.HpAfter})" + (h.Starved ? "; it starves: half power, uses 1" : "");
             case HungerFed h:
-                return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
+                return $"{content.ItemName(h.ItemId)} feeds: fed {h.Fed}, power +{h.MtBonus}" + (Kinsbane.ToothGrew(h.Fed) ? $", a tooth grows (teeth {Kinsbane.Teeth(h.Fed)}/{Kinsbane.MtCap})" : "") + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "") + (h.Woke ? "; it wakes and hungers no more" : "");
             case HungerEased h:
                 return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
             case UnitOpened o:

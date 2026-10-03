@@ -1,0 +1,17 @@
+# issue 804: --kinsbane (Release, 200 runs) on issue/804-kinsbane-teeth. Keziah picked at the raid's camp, the scythe issued in front of her pack (in place of her iron axe), benched in from the back on every map, the heuristic taking the hunt (a hungering weapon not woken beats any other weapon). Permadeath off; a map counts won only with her standing where she fought (up to 50 tries).
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 1, starved in 2
+  map 7 (her map 2): won 29, deployed in 29, tries p50 25, fed by its end p25 5 p50 6 p75 7 (teeth p50 2/5), drains p50 4, starved in 14
+  map 8 (her map 3): won 29, deployed in 29, tries p50 2, fed by its end p25 6 p50 7 p75 8 (teeth p50 2/5), drains p50 3, starved in 5
+  map 9 (her map 4): won 27, deployed in 27, tries p50 6, fed by its end p25 12 p50 13 p75 15 (teeth p50 4/5), drains p50 4, starved in 3
+  map 10 (her map 5): won 5, deployed in 5, tries p50 18, fed by its end p25 13 p50 15 p75 15 (teeth p50 5/5), drains p50 2, starved in 3
+  no try won map 1: 118
+  no try won map 7: 53
+  no try won map 9: 2
+  no try won map 10: 22
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 3): grew in 65 of 82, median map 6
+  tooth 2 (fed 6): grew in 29 of 82, median map never
+  tooth 3 (fed 9): grew in 27 of 82, median map never
+  tooth 4 (fed 12): grew in 23 of 82, median map never
+  tooth 5 (wakes, fed 15): grew in 10 of 82, median map never
