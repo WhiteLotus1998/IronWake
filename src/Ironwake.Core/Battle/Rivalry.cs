@@ -174,8 +174,9 @@ public static class Rivalry
     /// <see cref="SupportReached"/> for a support pair whose total reaches a higher tier. A pair nobody can
     /// reach gains nothing (issue 209). Behind the header every pair of recruits accrues, at both
     /// rates; off it only support pairs do (issue 77). A pair with the captain accrues only when it
-    /// is a support pair, at the recruit's rate alone, since the captain fights every map in every
-    /// one of their pairs. Nothing accrues where <see cref="Accrues"/> is false.
+    /// is a support pair, at the higher of the two rates, never their sum, since the captain fights
+    /// every map in every one of their pairs (rounds 258, 259). Nothing accrues where
+    /// <see cref="Accrues"/> is false.
     /// </summary>
     public static BattleState Accrue(BattleState state, GameContent content, List<GameEvent> events)
     {
@@ -203,7 +204,7 @@ public static class Rivalry
                 int amount;
                 if (a.IsCaptain || b.IsCaptain)
                 {
-                    amount = supported ? RateOf(a.IsCaptain ? b : a, content) : 0;
+                    amount = supported ? Math.Max(RateOf(a, content), RateOf(b, content)) : 0;
                 }
                 else
                 {

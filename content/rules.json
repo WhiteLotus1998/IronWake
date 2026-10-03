@@ -15,8 +15,8 @@
     "overwriteAt": 16,
     "supportTiers": [
       { "tier": "C", "at": 16, "hit": 5, "avoid": 0, "crit": 0 },
-      { "tier": "B", "at": 40, "hit": 5, "avoid": 5, "crit": 0 },
-      { "tier": "A", "at": 72, "hit": 10, "avoid": 5, "crit": 5 }
+      { "tier": "B", "at": 28, "hit": 5, "avoid": 5, "crit": 0 },
+      { "tier": "A", "at": 48, "hit": 10, "avoid": 5, "crit": 5 }
     ]
   },
   "difficulties": {

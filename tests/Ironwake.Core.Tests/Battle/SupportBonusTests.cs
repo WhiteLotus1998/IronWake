@@ -6,7 +6,7 @@ namespace Ironwake.Core.Tests.Battle;
 /// Supports in battle (issue 77, slice 3): a unit beside a support partner whose rapport reaches a
 /// tier fights with that tier's hit, avoid and crit through its aura, the best partner's tier and
 /// never the sum; rapport accrues on every main campaign map as well as behind the header, a pair
-/// with the captain at the recruit's rate alone.
+/// with the captain at the higher of the two rates, never their sum.
 /// </summary>
 public class SupportBonusTests
 {
@@ -131,15 +131,31 @@ public class SupportBonusTests
     }
 
     [Fact]
-    public void A_pair_with_the_captain_accrues_at_the_recruits_rate_alone()
+    public void A_pair_with_the_captain_accrues_at_the_captains_rate_when_it_is_the_higher()
     {
         var state = Board() with { CampaignMap = 1 };
-        var rate = Rivalry.RateOf(state.Find("wren")!, Content);
-        Assert.True(Rivalry.RateOf(state.Find("hale")!, Content) > 0);
+        var captain = Rivalry.RateOf(state.Find("hale")!, Content);
+        Assert.True(captain > Rivalry.RateOf(state.Find("wren")!, Content));
 
         var result = Resolver.Apply(state, Content, new EndPhase());
 
-        Assert.Contains(new RapportGained("hale", "wren", rate, rate), result.Events);
+        Assert.Contains(new RapportGained("hale", "wren", captain, captain), result.Events);
+    }
+
+    [Fact]
+    public void A_pair_with_the_captain_accrues_at_the_recruits_rate_when_it_is_the_higher()
+    {
+        var cohort = ValueList<Unit>.Of(
+            Hale with { Region = "crown", Stats = Hale.Stats with { Cha = 0 } },
+            Wren with { Region = "aldmere", Stats = Wren.Stats with { Cha = 9 } },
+            Ivo with { Region = "sallow" });
+        var state = BattleState.From(Maps.MapFixture.Parse(Yard, "yard.map"), Content, cohort, 7) with { CampaignMap = 1 };
+        var recruit = Rivalry.RateOf(state.Find("wren")!, Content);
+        Assert.True(recruit > Rivalry.RateOf(state.Find("hale")!, Content));
+
+        var result = Resolver.Apply(state, Content, new EndPhase());
+
+        Assert.Contains(new RapportGained("hale", "wren", recruit, recruit), result.Events);
     }
 
     [Fact]

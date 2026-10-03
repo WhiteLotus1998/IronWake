@@ -713,7 +713,7 @@ E  pell             Pell L1 adept              11,4   hp 16/16  Plain  done
 C  teodor           Teodor L1 pikeman          10,8   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              9,6    hp 20/20  Plain  done
 > end
-Rapport Alder Fenn and Pell +2 (2)
+Rapport Alder Fenn and Pell +4 (4)
 Rapport Dunstan and Teodor +3 (3)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -1059,7 +1059,7 @@ C  teodor           Teodor L1 pikeman          10,8   hp 10/21  Plain  done
 B  wren             Wren L1 cadet              8,6    hp 20/20  Plain  done
 > end
 Lethal if all land: Wren (Brigand 2 for 11, Brigand 3 for 11, against 20 hp)
-Rapport Alder Fenn and Pell +2 (4)
+Rapport Alder Fenn and Pell +4 (8)
 Rapport Pell and Wren +4 (8)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -1377,8 +1377,8 @@ B  wren             Wren L1 cadet              8,6    hp 9/20   Plain  done
 > end
 Lethal if all land: Ottilie (Soldier 2 for 10, against 7 hp)
 Lethal if all land: Wren (Soldier 2 for 9, against 9 hp)
-Rapport Alder Fenn and Ottilie +2 (2)
-Rapport Alder Fenn and Pell +2 (6)
+Rapport Alder Fenn and Ottilie +4 (4)
+Rapport Alder Fenn and Pell +4 (12)
 Rapport Ottilie and Wren +4 (4)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -2311,7 +2311,7 @@ e  soldier-2        Soldier L2 pikeman         3,4    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          11,4   hp 21/21  Plain  done
 B  wren             Wren L1 cadet              11,3   hp 20/20  Plain  done
 > end
-Rapport Alder Fenn and Ottilie +2 (2)
+Rapport Alder Fenn and Ottilie +4 (4)
 Rapport Teodor and Wren +4 (8)
 -- Player phase ends, turn 2 --
 -- Enemy phase, turn 2 --
@@ -2660,7 +2660,7 @@ e  soldier-2        Soldier L2 pikeman         6,3    hp 20/20  Plain  group van
 C  teodor           Teodor L1 pikeman          12,5   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
-Rapport Alder Fenn and Ottilie +2 (4)
+Rapport Alder Fenn and Ottilie +4 (8)
 Rapport Ottilie and Wren +4 (4)
 -- Player phase ends, turn 3 --
 -- Enemy phase, turn 3 --
@@ -2945,8 +2945,8 @@ h  soldier-3        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 20/20  Plain  done
 > end
-Rapport Alder Fenn and Ottilie +2 (6)
-Rapport Alder Fenn and Pell +2 (6)
+Rapport Alder Fenn and Ottilie +4 (12)
+Rapport Alder Fenn and Pell +4 (12)
 Rapport Ottilie and Wren +4 (8)
 -- Player phase ends, turn 4 --
 -- Enemy phase, turn 4 --
@@ -3262,8 +3262,9 @@ h  soldier-3        Soldier L2 pikeman         8,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          12,6   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 20/20  Plain  done
 > end
-Rapport Alder Fenn and Pell +2 (8)
-Rapport Alder Fenn and Wren +2 (2)
+Rapport Alder Fenn and Pell +4 (16)
+Alder Fenn and Pell reach support C
+Rapport Alder Fenn and Wren +4 (4)
 -- Player phase ends, turn 5 --
 -- Enemy phase, turn 5 --
 Reinforcements arrive
@@ -3295,7 +3296,7 @@ Hexer 1 attacks Dunstan
 enemy: move soldier-3 10,3
 Soldier 3 moves 8,3 -> 10,3 via 9,3
 enemy: attack soldier-3 captain
-Forecast Soldier 3 -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+Forecast Soldier 3 -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 91% dmg 9 crit 4%
 Soldier 3 attacks Alder Fenn
   Soldier 3 hits Alder Fenn for 8 (hp 14)
   Alder Fenn hits Soldier 3 for 9 (hp 11)
@@ -3624,7 +3625,7 @@ k  soldier-4        Soldier L2 pikeman         4,3    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              10,4   hp 14/20  Plain  done
 > end
-Rapport Alder Fenn and Pell +2 (10)
+Rapport Alder Fenn and Pell +4 (20)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 Reinforcements arrive
@@ -3702,7 +3703,7 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain
 B  wren             Wren L2 cadet              10,4   hp 3/20   Plain
 > attack pell brigand-4
-Forecast Pell -> Brigand 4 with Cinder: acc 99% dmg 14 crit 4%; counter: none
+Forecast Pell -> Brigand 4 with Cinder: acc 100% dmg 14 crit 4%; counter: none
 Pell attacks Brigand 4
   Pell hits Brigand 4 for 14 (hp 0)
   Pell hp 16, Brigand 4 hp 0
@@ -3940,8 +3941,8 @@ o  soldier-5        Soldier L2 pikeman         3,4    hp 20/20  Plain  group wav
 C  teodor           Teodor L1 pikeman          11,7   hp 16/21  Plain  done
 B  wren             Wren L2 cadet              11,4   hp 13/20  Plain  done
 > end
-Rapport Alder Fenn and Pell +2 (12)
-Rapport Alder Fenn and Wren +2 (4)
+Rapport Alder Fenn and Pell +4 (24)
+Rapport Alder Fenn and Wren +4 (8)
 Rapport Dunstan and Teodor +3 (6)
 -- Player phase ends, turn 7 --
 -- Enemy phase, turn 7 --
@@ -3967,7 +3968,7 @@ Hexer 2 waits
 enemy: move soldier-4 10,3
 Soldier 4 moves 8,3 -> 10,3 via 9,3
 enemy: attack soldier-4 captain
-Forecast Soldier 4 -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 87% dmg 9 crit 4%
+Forecast Soldier 4 -> Alder Fenn: acc 62% dmg 8 crit 0%; counter: acc 91% dmg 9 crit 4%
 Soldier 4 attacks Alder Fenn
   Soldier 4 hits Alder Fenn for 8 (hp 14)
   Alder Fenn hits Soldier 4 for 9 (hp 11)

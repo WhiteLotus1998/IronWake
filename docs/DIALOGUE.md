@@ -1,6 +1,6 @@
 # DIALOGUE — what the Design Table has agreed so far
 
-Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
+Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 ## How we work (standing agreements)
 
@@ -78,7 +78,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 - **The waking (rounds 250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike, on the forecast. Kept on a journal deciding a turn. `--kinsbane`: first tooth by map 3, waking by map 8; a miss moves kills per tooth, never the gain. A passed Keziah shows four teeth.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). The barracks (#690) opens after the raid: hires weaker, no story. One secret hire (#691). The finale (#692): fronts, waves, an announced assault, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 points either side of `normal`; permadeath off returns the fallen Wounded (2); the captain's or a protect death still loses.
-- **Supports** (#77; 0183 to 0187; rounds 258, 259): 3 to 4 partners plus the captain, each pair a kind (#809); marriage an S bond, both alive (#634). Read beside a partner (best, not sum), accrued on every campaign map, on the record (0185). Agreed, to build: tiers C 16, B 28, A 48; a captain pair accrues at the higher of the two rates (4 today), no captain tier table. Re-read on after-Brackwater p50: committed captain pair within a phase of B, floor captain pairs C not B, none at A; a miss moves the lean. A must be reachable by a committed human (chair's campaign; else 44).
+- **Supports** (#77; 0183 to 0187; rounds 258, 259): 3 to 4 partners plus the captain, each pair a kind (#809); marriage an S bond, both alive (#634). Read beside a partner (best, not sum), accrued on every campaign map, on the record (0185). Built (0189): C 16, B 28, A 48; a captain pair at the higher of the two rates (4 today), one tier table. Re-read on after-Brackwater p50: committed captain pair within a phase of B, floor captain pairs C not B, none at A; a miss moves the lean. A must be reachable by a committed human (chair's campaign; else 44).
 - **The forge** (#647): a 13.20 room; Refine +2 common, +3 rare; rare material exactly enough for the signatures.
 - **Chests** (#649, #679; built): guarded or a puzzle; opening costs the action; overflow to the wagon; an enemy on the tile shuts it. One early switch only.
 - **Names:** Promotion, Refine; no Ascension.
@@ -121,4 +121,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237 on (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on.

@@ -26,10 +26,10 @@ public class SupportTierTests
     [InlineData(0, null)]
     [InlineData(15, null)]
     [InlineData(16, "C")]
-    [InlineData(39, "C")]
-    [InlineData(40, "B")]
-    [InlineData(71, "B")]
-    [InlineData(72, "A")]
+    [InlineData(27, "C")]
+    [InlineData(28, "B")]
+    [InlineData(47, "B")]
+    [InlineData(48, "A")]
     [InlineData(500, "A")]
     public void A_support_pair_stands_at_the_highest_tier_its_rapport_reaches(int points, string? tier)
     {
