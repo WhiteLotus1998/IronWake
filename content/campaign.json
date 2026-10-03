@@ -136,6 +136,14 @@
       "after": [
         "(Placeholder until the writing pass: the name over the gate, and the lance that matches it.)",
         "(The Family Lance is the First Warden's Lance now. Once woken, its art Turn the Key strikes at -4 Power, once, never doubling; a hit the enemy survives locks it, Mov 0 until its side's next phase ends, while Teodor stands beside it. If he leaves or falls, the lock drops to a chill.)"
+      ] },
+    { "id": "keziah_1", "member": "keziah", "part": 1, "map": "the_burned_shrine", "opensAfter": "sallow_grange", "common": 2,
+      "before": [
+        "Keziah asked for a day and one pair of hands. Her mother's shrine stands on a knoll off the west road, burned three times, once by each region. Someone is stripping the lead off what is left of its roof.",
+        "(Placeholder card until the writing pass. Rout: defeat every enemy by the end of turn 10. The map is lost if Keziah falls. The ring wall has a west door at 4,3 and a breach at 7,5. More come up the road from turn 3, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the hearth, the ash, and what Keziah leaves on it.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

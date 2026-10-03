@@ -2236,3 +2236,17 @@ Notes: Warm: I built the board this hour. Transcript `docs/transcripts/2026-10-0
 - Not tense: turns 1 and 2, the walk to the gap.
 
 — Code
+
+## 2026-10-03 — The Burned Shrine, Keziah's quest 1 (#635 slice 13), warm — Code
+Seed: 1113 (`campaign --load shrine --saves docs/transcripts/2026-10-03-the_burned_shrine-1113.saves`, Keziah picked, the cast at level 7 at the camp after map 7, the six earlier side maps marked won; ally Wren)   Result: won on turn 8, rout, no Recall, nobody fell
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 6. Keziah at 6 HP, the hexer at the breach's mouth. Gauntlets 13 x2 at 96 kill it before its lethal counter, the axe one swing at 76; I took the gauntlets. That left her at 7,5 under the archer's printed 7 against 6 at 79, and the only answer was Wren running through the breach past her to put two cuts into the archer, 86 each, no counter. Both landed.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_burned_shrine-1113.txt`.
+- **The first cut was wrong twice.** The shieldbearer sat on the fort and healed 5 a turn against a 60 percent axe: a grind. Moved beside the hearth, the hearth became Keziah's, and the axe-or-gauntlets read flipped (4 x4 at 98 beat 9 x2 at 82 on the plain). Then the grove's archer was held: once the rest fell it was a three-turn walk round the wall. As a guard it comes, and the breach corks it.
+- **Wren died on the first cut** to a hexer line the end screen printed (`Lethal if all land: Wren`) and I ended anyway. Recalled; the replay on the final board does not carry that turn, so the transcript has no Recall.
+- **The hearth wake is real.** Striking the shieldbearer from 7,3 woke the grove (noise), and the grove plus the turn-3 rider reached the breach on the same phase. I took the fort for its heal; from 6,2 the grove would have slept.
+- **Turn 1 hurt.** I stepped Keziah to 3,4 to wake the nave on my terms and the brawler doubled her to 10 before she swung. Gauntlets against gauntlets: the enemy gets the first four.
+- **What is soft:** the turn-5 brigand from 0,0 is a walk; it reached the door on turn 6 and died on the hearth on turn 8 with nothing else alive. Surprise is low because every arrival is announced and the grove's wake is the only unannounced event. If a cold chair agrees, the lever is the brigand's tile (the west door's north side, 3,2) or its turn (4).
+- Not tense: turns 7 and 8, the brigand alone.
+
+— Code

@@ -184,7 +184,7 @@ public class WardensGateTests
         Assert.Null(quest.Pays);
         Assert.Null(CampaignRecord.QuestMapRefusal(map));
         Assert.Equal(WinCondition.DefeatBoss, map.Win);
-        Assert.Equal(Shipped.Campaign.Quests[^1], quest);
+        Assert.Equal(Shipped.Campaign.Quests[^2], quest);
     }
 
     [Fact]

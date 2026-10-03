@@ -307,4 +307,33 @@ public class SideMapCliTests
             Directory.Delete(saves, true);
         }
     }
+
+    /// <summary>
+    /// Code's journaled play of Keziah's quest 1 (side-map seed 1113), from a save at the camp
+    /// after map 7 with Keziah picked and the cast at level 7: the nave is woken and drawn to the
+    /// west door, Keziah takes the hearth and the shieldbearer beside it, which wakes the grove,
+    /// Wren corks the breach, and the last burner falls on the hearth on turn 8.
+    /// </summary>
+    [Fact]
+    public void TheJournaledBurnedShrinePlayRoutsOnTurnEight()
+    {
+        var script = Transcript("2026-10-03-the_burned_shrine-1113.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_burned_shrine-1113.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Burned Shrine, seed 1113\n", output);
+            Assert.Contains("The grove group wakes (noise)", output);
+            Assert.Contains("> leave\nKeziah wins keziah_1; the stores take 2 common material; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
 }

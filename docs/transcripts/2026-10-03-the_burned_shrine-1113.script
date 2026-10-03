@@ -1,0 +1,40 @@
+quest keziah_1 wren
+move keziah 3,4
+wait keziah
+move wren 3,5
+end
+move wren 2,3
+attack wren brawler-1
+move keziah 4,3
+attack keziah acolyte-1 iron_gauntlets
+end
+move keziah 7,3
+attack keziah shieldbearer-1 iron_gauntlets
+move wren 4,3
+item wren 2
+end
+wait keziah
+move wren 7,4
+wait wren
+end
+move wren 6,3
+wait wren
+move keziah 7,4
+attack keziah rider-1 iron_gauntlets
+end
+move keziah 7,5
+attack keziah hexer-1 iron_gauntlets
+move wren 7,6
+attack wren archer-1
+threat keziah
+threat wren
+end
+move keziah 8,6
+wait keziah
+move wren 7,4
+item wren 2
+threat wren
+end
+forecast wren brigand-1
+attack wren brigand-1
+leave

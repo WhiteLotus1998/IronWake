@@ -1,0 +1,30 @@
+name: The Burned Shrine
+size: 15x9
+win: rout
+turn_limit: 10
+recall: 2
+enemy_level: 5
+announce: on
+
+^^...nn...^^^^^
+^...#######.^^^
+....#.....#....
+.......F..#..n.
+....#.....#....
+^...###.###..^.
+..........^^...
+===============
+^^......^^....^
+
+units:
+P captain 1,6
+P recruit 2,6
+E brawler 6,4 group:nave behavior:guard
+E shieldbearer 7,2 group:nave behavior:hold
+E acolyte 8,2 group:nave behavior:guard
+E archer 12,1 group:grove behavior:guard
+E hexer 13,3 group:grove behavior:guard
+
+events:
+burners1 turn 3 enemy spawn rider 14,7 group:burners behavior:aggressive
+burners2 turn 5 enemy spawn brigand 0,0 group:burners behavior:aggressive
