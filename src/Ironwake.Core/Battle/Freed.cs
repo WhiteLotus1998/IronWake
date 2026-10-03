@@ -61,7 +61,7 @@ public static class Freed
 
     /// <summary>
     /// The bond as the board, <c>threat</c> and the forecast print it while the bound enemy stands:
-    /// <c>Sworn Hunter is bound to Sworn Lord: freed when Sworn Lord falls</c>. Null otherwise.
+    /// <c>Sworn Hunter is bound to Hask: freed when Hask falls</c>. Null otherwise.
     /// </summary>
     public static string? Line(BattleState state, UnitNames names)
     {

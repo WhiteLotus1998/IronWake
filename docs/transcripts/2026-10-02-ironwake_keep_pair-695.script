@@ -80,7 +80,7 @@ attack captain soldier-4
 attack ottilie brigand-4
 attack dunstan archer-2
 wait teodor
-forecast captain finale_lord-1 from 1,6
+forecast captain hask-1 from 1,6
 threat captain
 end
 item teodor 2

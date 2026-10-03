@@ -10,7 +10,7 @@ Objective: Hold until the boss arrives on turn 6, then defeat the boss by the en
   if north falls: a brigand arrives at 11,0 (aggressive). A unit standing on 11,0 stops it.
   if gate falls: a soldier arrives at 11,4 (aggressive). A unit standing on 11,4 stops it.
   if gate falls: a brigand arrives at 11,7 (aggressive). A unit standing on 11,7 stops it.
-  turn 6, enemy phase: the boss, a sworn lord, arrives at 0,6. A unit standing on 0,6 does not stop the boss, who takes the nearest free tile.
+  turn 6, enemy phase: the boss, Hask, arrives at 0,6. A unit standing on 0,6 does not stop the boss, who takes the nearest free tile.
   if south falls: a brigand arrives at 11,11 (aggressive). A unit standing on 11,11 stops it.
 Ironwake Keep (pair)  turn 1 of 11  player phase  defeat_boss  recall 3
    0123456789012345
@@ -2966,7 +2966,7 @@ Lethal if all land: Pell (Archer 1 for 9, against 9 hp)
 -- Player phase ends, turn 6 --
 -- Enemy phase, turn 6 --
 Reinforcements arrive
-  Sworn Lord arrives at 0,6 with the lord group, boss
+  Hask arrives at 0,6 with the lord group, boss
 enemy: attack archer-1 pell
 Forecast Archer 1 -> Pell: acc 81% dmg 9 crit 2%; counter with Cinder: acc 99% dmg 16 crit 3%
 Archer 1 attacks Pell
@@ -2999,8 +2999,8 @@ enemy: move finale_hunter-1 11,6
 Sworn Hunter moves 10,1 -> 11,6 via 11,1 11,2 11,3 11,4 11,5
 enemy: wait finale_hunter-1
 Sworn Hunter waits
-enemy: wait finale_lord-1
-Sworn Lord waits
+enemy: wait hask-1
+Hask waits
 enemy: move soldier-4 8,5
 Soldier 4 moves 4,5 -> 8,5 via 5,5 6,5 7,5
 enemy: attack soldier-4 captain
@@ -3037,7 +3037,7 @@ o  brigand-5        Brigand L6 reaver          11,4   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L8 cadet        9,5    hp 25/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,6   hp 23/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 18/19  Plain
 k  soldier-4        Soldier L6 pikeman         8,5    hp 2/22   Plain  group assault, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 19/24  Plain
@@ -3047,7 +3047,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 holding (2 defending, 43 hp); south 10
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack captain soldier-4
 Forecast Alder Fenn -> Soldier 4: acc 88% dmg 10 x2 crit 6%; counter: acc 54% dmg 7 crit 0%
 Alder Fenn attacks Soldier 4
@@ -3082,7 +3082,7 @@ o  brigand-5        Brigand L6 reaver          11,4   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,6   hp 23/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 18/19  Plain
 C  teodor           Teodor L8 pikeman          11,10  hp 19/24  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3091,7 +3091,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 holding (2 defending, 43 hp); south 10
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack ottilie brigand-4
 Forecast Ottilie -> Brigand 4: acc 89% dmg 9 crit 8%; counter: none
 Ottilie attacks Brigand 4
@@ -3121,7 +3121,7 @@ o  brigand-5        Brigand L6 reaver          11,4   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,6   hp 23/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 18/19  Plain  done
 C  teodor           Teodor L8 pikeman          11,10  hp 19/24  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3130,7 +3130,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 holding (2 defending, 43 hp); south 10
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack dunstan archer-2
 Forecast Dunstan -> Archer 2: acc 72% dmg 12 crit 1%; counter: none
 Dunstan attacks Archer 2
@@ -3160,7 +3160,7 @@ o  brigand-5        Brigand L6 reaver          11,4   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain  done
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,6   hp 23/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 18/19  Plain  done
 C  teodor           Teodor L8 pikeman          11,10  hp 19/24  Plain
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3169,7 +3169,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 holding (2 defending, 43 hp); south 10
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > wait teodor
 Teodor waits
 Ironwake Keep (pair)  turn 7 of 11  player phase  defeat_boss  recall 2
@@ -3195,7 +3195,7 @@ o  brigand-5        Brigand L6 reaver          11,4   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 25/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain  done
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,6   hp 23/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 18/19  Plain  done
 C  teodor           Teodor L8 pikeman          11,10  hp 19/24  Plain  done
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3204,8 +3204,8 @@ fronts: north 10,1 fallen; gate 10,5 10,6 holding (2 defending, 43 hp); south 10
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 37 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
-> forecast captain finale_lord-1 from 1,6
+pair rule binds: Sworn Hunter, Hask
+> forecast captain hask-1 from 1,6
 ERROR: Alder Fenn has already moved this phase; forecast from 9,5
 > threat captain
 Threat on Alder Fenn at 9,5 (Plain):
@@ -3268,8 +3268,8 @@ Sworn Hunter attacks Teodor
   Teodor hits Sworn Hunter for 8 (hp 15)
   Sworn Hunter hp 15, Teodor hp 4
 Teodor gains 14 exp (40)
-enemy: wait finale_lord-1
-Sworn Lord waits
+enemy: wait hask-1
+Hask waits
 enemy: end
 -- Enemy phase ends, turn 7 --
 -- Player phase, turn 8 --
@@ -3297,7 +3297,7 @@ q  brigand-6        Brigand L6 reaver          11,7   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 22/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,9   hp 15/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         11,4   hp 22/22  Plain  group inside, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 4/24   Plain
@@ -3307,7 +3307,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (2 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 22 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > item teodor 2
 Teodor uses Field Dressing (1 left)
 Teodor heals 10 (hp 14)
@@ -3335,7 +3335,7 @@ q  brigand-6        Brigand L6 reaver          11,7   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 22/25  Plain  captain
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,9   hp 15/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         11,4   hp 22/22  Plain  group inside, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 14/24  Plain  done
@@ -3345,7 +3345,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (2 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack captain brigand-5
 Forecast Alder Fenn -> Brigand 5: acc 91% dmg 12 x2 crit 8%; counter: acc 41% dmg 9 crit 0%
 Alder Fenn attacks Brigand 5
@@ -3379,7 +3379,7 @@ q  brigand-6        Brigand L6 reaver          11,7   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 13/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,9   hp 15/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         11,4   hp 22/22  Plain  group inside, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 14/24  Plain  done
@@ -3389,7 +3389,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (2 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > item ottilie 2
 Ottilie uses Field Dressing (1 left)
 Ottilie heals 10 (hp 15)
@@ -3416,7 +3416,7 @@ q  brigand-6        Brigand L6 reaver          11,7   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 13/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,9   hp 15/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 15/19  Plain  done
 p  soldier-5        Soldier L6 pikeman         11,4   hp 22/22  Plain  group inside, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 14/24  Plain  done
@@ -3426,7 +3426,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (2 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > wait dunstan
 Dunstan waits
 Ironwake Keep (pair)  turn 8 of 11  player phase  defeat_boss  recall 2
@@ -3452,7 +3452,7 @@ q  brigand-6        Brigand L6 reaver          11,7   hp 24/24  Plain  group ins
 A  captain          Alder Fenn L9 cadet        9,5    hp 13/25  Plain  captain  done
 G  dunstan          Dunstan L8 bulwark         10,10  hp 18/27  Plain  done
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,9   hp 15/39  Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 15/19  Plain  done
 p  soldier-5        Soldier L6 pikeman         11,4   hp 22/22  Plain  group inside, aggressive
 C  teodor           Teodor L8 pikeman          11,10  hp 14/24  Plain  done
@@ -3462,7 +3462,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (2 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: 2 defenders, 32 hp (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > threat teodor
 Threat on Teodor at 11,10 (Plain):
   Archer 2 from 9,10 with Iron Bow (slot 1): acc 77% dmg 4 crit 3%; counter: none
@@ -3515,8 +3515,8 @@ Sworn Hunter attacks Dunstan
   Sworn Hunter crits Dunstan for 24 (hp 0)
   Sworn Hunter hp 8, Dunstan hp 0
 Dunstan falls at 10,10
-enemy: wait finale_lord-1
-Sworn Lord waits
+enemy: wait hask-1
+Hask waits
 enemy: move soldier-5 10,5
 Soldier 5 moves 11,4 -> 10,5 via 11,5
 enemy: attack soldier-5 ottilie
@@ -3549,7 +3549,7 @@ l  brigand-4        Brigand L6 reaver          9,6    hp 15/24  Plain  group ass
 q  brigand-6        Brigand L6 reaver          12,10  hp 24/24  Plain  group inside, aggressive
 A  captain          Alder Fenn L9 cadet        9,5    hp 9/25   Plain  captain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,10  hp 8/39   Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          10,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         10,5   hp 22/22  Plain  group inside, aggressive
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3558,7 +3558,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (0 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > move ottilie 11,6
 Ottilie moves 10,6 -> 11,6
 Ironwake Keep (pair)  turn 9 of 11  player phase  defeat_boss  recall 2
@@ -3583,7 +3583,7 @@ l  brigand-4        Brigand L6 reaver          9,6    hp 15/24  Plain  group ass
 q  brigand-6        Brigand L6 reaver          12,10  hp 24/24  Plain  group inside, aggressive
 A  captain          Alder Fenn L9 cadet        9,5    hp 9/25   Plain  captain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,10  hp 8/39   Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          11,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         10,5   hp 22/22  Plain  group inside, aggressive
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3592,7 +3592,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (0 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack ottilie soldier-5
 Forecast Ottilie -> Soldier 5: acc 86% dmg 7 crit 7%; counter: none
 Ottilie attacks Soldier 5
@@ -3621,7 +3621,7 @@ l  brigand-4        Brigand L6 reaver          9,6    hp 15/24  Plain  group ass
 q  brigand-6        Brigand L6 reaver          12,10  hp 24/24  Plain  group inside, aggressive
 A  captain          Alder Fenn L9 cadet        9,5    hp 9/25   Plain  captain
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,10  hp 8/39   Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          11,6   hp 5/19   Plain  done
 p  soldier-5        Soldier L6 pikeman         10,5   hp 15/22  Plain  group inside, aggressive
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3630,7 +3630,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (0 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > attack captain brigand-4
 Forecast Alder Fenn -> Brigand 4: acc 91% dmg 13 x2 crit 8%; counter: acc 37% dmg 8 crit 0%
 Alder Fenn attacks Brigand 4
@@ -3661,7 +3661,7 @@ m  archer-3         Archer L6 bowman           7,5    hp 19/19  Plain  group ass
 q  brigand-6        Brigand L6 reaver          12,10  hp 24/24  Plain  group inside, aggressive
 A  captain          Alder Fenn L9 cadet        9,5    hp 1/25   Plain  captain  done
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,10  hp 8/39   Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          11,6   hp 5/19   Plain  done
 p  soldier-5        Soldier L6 pikeman         10,5   hp 15/22  Plain  group inside, aggressive
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3670,7 +3670,7 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (0 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south next: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 > end
 Lethal if all land: Alder Fenn (Archer 1 for 2, Archer 2 for 2, Archer 3 for 2, Soldier 5 for 5, against 1 hp)
 Lethal if all land: Ottilie (Archer 2 for 7, Archer 3 for 7, Brigand 6 for 13, Soldier 5 for 10, against 5 hp)
@@ -3709,7 +3709,7 @@ h  archer-2         Archer L6 bowman           9,7    hp 7/19   Plain  group wav
 m  archer-3         Archer L6 bowman           7,5    hp 19/19  Plain  group assault, aggressive
 q  brigand-6        Brigand L6 reaver          12,10  hp 24/24  Plain  group inside, aggressive
 f  finale_hunter-1  Sworn Hunter L10 outrider  11,10  hp 8/39   Plain  group hunt, aggressive
-!  finale_lord-1    Sworn Lord L10 bulwark     0,6    hp 47/47  Plain  group lord, boss
+!  hask-1           Hask L10 bulwark           0,6    hp 47/47  Plain  group lord, boss
 D  ottilie          Ottilie L8 bowman          11,6   hp 5/19   Plain
 p  soldier-5        Soldier L6 pikeman         10,5   hp 15/22  Plain  group inside, aggressive
 break: when a boss falls, each of his group at or below half hp flees the board (not a kill, no EXP)
@@ -3718,9 +3718,9 @@ fronts: north 10,1 fallen; gate 10,5 10,6 fallen; south 10,10 holding (0 defendi
 A unit defends the front nearest it, within 3 tiles. The hunter strikes only the defenders of the standing front with the least HP among its defenders, chosen as each enemy phase begins.
 Sworn Hunter hunts the south: no defenders (weakest); strikes only its defenders
 Pair rule: an enemy of the hunt or lord group strikes a unit with an ally beside it once, never doubling, never critting.
-pair rule binds: Sworn Hunter, Sworn Lord
+pair rule binds: Sworn Hunter, Hask
 Battle lost: the captain is dead; only recall is left
 Lost because the captain, Alder Fenn, fell.
 Rejected 1 of 95 commands:
-  line 83: forecast captain finale_lord-1 from 1,6: Alder Fenn has already moved this phase; forecast from 9,5
+  line 83: forecast captain hask-1 from 1,6: Alder Fenn has already moved this phase; forecast from 9,5
 Battle lost: the captain is dead
