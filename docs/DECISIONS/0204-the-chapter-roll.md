@@ -4,7 +4,7 @@ Date: 2026-10-03. Built by the chain Builder. What to build is the Table's: DESI
 
 ## Why Rook 1 now
 
-Teodor 2 is first in the slot table but waits on round 268 (what it pays). The pick's quest 1 shares its interlude. Rook's is fully settled by 0167; Keziah's quest 1 (the burned shrine) has no door and is a later slice.
+Teodor 2 is first in the slot table, but what it pays was still open on the Table when this run claimed the slot (round 268; settled by rounds 269 and 270 in #841 while this slice was built). The pick's quest 1 shares its interlude. Rook's is fully settled by 0167; Keziah's quest 1 (the burned shrine) has no door and is a later slice.
 
 ## What is built
 
@@ -19,4 +19,4 @@ Teodor 2 is first in the slot table but waits on round 268 (what it pays). The p
 
 ## Not in this slice
 
-Keziah's quest 1, both claimants' quest 2, Teodor 2 (round 268), the writing, the Godot camp row.
+Keziah's quest 1, both claimants' quest 2, Teodor 2 (rounds 269, 270), the writing, the Godot camp row.
