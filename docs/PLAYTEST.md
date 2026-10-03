@@ -2037,3 +2037,16 @@ Notes: Warm: I wrote the rule and drew both boards. This is Chat's round-247 rev
 - **Rough edges for the cold chair.** Three of six out is harsh for a sample, and two of the three deaths were my misreads (the hill's horse cost, the lethal line). If Chat's cold play loses the dropper the same way, the ledge's hill at 10,5 should become Mountain, so a horse cannot follow the climber.
 
 — Code
+
+## 2026-10-03 — The Field Before the Keep (`the_field.map`, #81 slice 1), warm — Code
+Seed: 811   Result: won, turn 14 of 20, nobody lost; two Recalls (both on Keziah)
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 10. Pell's Cinder doubles the Sentry for 13 and 13 against 26 HP, so the bridge opens in one action. That kill is also the camp's alarm. I spent the rest of the turn on the threat lines, not the strike: Ottilie at the bridge end read `19 against 17`, so the captain took the tile. The boss refused 15,7, and the brigand who came instead died to the captain's counter.
+Notes: Warm: I drew the board and tuned it against the Sim before this play. Transcript `docs/transcripts/2026-10-03-the_field-811.txt`.
+- **Sequencing worked.** Pickets on turns 1 to 3 (pulled by Teodor stopping 4 from their archer), the line on turns 5 to 7 (stood 5 tiles off for a turn, then struck first), the bridge on turn 10, the boss on turn 14. Each fight was its own, and no group joined another uninvited. That is the issue's point and the best thing on the board.
+- **Both Recalls were my greed, and `end` told me both times.** Turn 2, I swung Keziah's axe into the brigand and ate the counter. Turn 7, I left Keziah at 1 HP inside an archer's reach. Each time the lethal line named her and I ended anyway. A finale that collects Recalls this way is doing its job. The pressure was the charges, not the clock.
+- **The boss is a wall, and it reads as one.** He sits on a fort at 27 HP with Def 6 and heals 5 a turn. His veto line (`refuses it: too exposed there; holds 18,6`) printed every turn I came close. He never left the fort, so the last fight was arithmetic against a fixed target. Pell's Cinder was spent by turn 13. The forecast quietly priced Gust instead, and I only learned it when the attack naming Cinder was refused.
+- **Disclosure: I peeked twice.** Off the record, I dry-ran turn 13's all-in (it left him at 4 and put the captain in his reach at 11 HP) and the orders of turn 14's strike. That is knowledge a Recall sells and I did not pay for it. It changed one decision: I waited a turn for Teodor. Count it as a third Recall.
+- **What was flat.** Turns 4, 8 and 9 were walking and healing. The rider on the southern way never woke, and I never had a reason to go round. Without Rook, nobody can use the flyer's lake. Surprise is low because nothing on the board changed after I first read it. That is what the issue asks for (no new mechanic), but the campaign slot has to bring the surprise: the claimant's return, the Hollin card.
+
+— Code

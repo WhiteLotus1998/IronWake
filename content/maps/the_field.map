@@ -1,0 +1,42 @@
+name: The Field Before the Keep
+size: 20x16
+win: defeat_boss
+turn_limit: 20
+recall: 3
+enemy_level: 1
+
+.....^^....~~~~~~MMM
+.....^^....~~~~~~.MM
+..........F..~~.....
+...^.........~~.....
+...^^........~~..n..
+...........^.~~.....
+...........^.~~...F.
+.....n.......==.....
+.....F.......==.....
+...........^.~~..n..
+........^^...~~.....
+........^^...~~.....
+.............~~.....
+...^........F.......
+...^^...............
+....................
+
+units:
+P captain 1,12
+P recruit:teodor 1,11
+P recruit:ottilie 0,12
+P recruit:pell 0,11
+P recruit:maud 0,13
+P recruit:keziah 1,13
+E archer 10,2 group:line behavior:guard
+E soldier 9,2 group:line behavior:guard
+E soldier 11,3 group:line behavior:guard
+E archer 9,11 group:pickets behavior:guard
+E soldier 10,13 group:pickets behavior:guard
+E brigand 10,14 group:pickets behavior:guard
+E sentry 15,7 group:bridge behavior:hold
+E brigand 17,5 group:camp behavior:guard
+E archer 17,8 group:camp behavior:guard
+B sworn_captain 18,6 group:camp behavior:guard
+E rider 16,14 group:south behavior:guard

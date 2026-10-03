@@ -1,0 +1,44 @@
+# issue 81 slice 1: --full the_field --seeds 200 (Release) on issue/81-the-field (DECISIONS/0190). Standalone file, enemy_level 1, the cast's level 1 named six (captain, Teodor, Ottilie, Pell, Maud, Keziah).
+
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: the_field, heuristic wins 120/200 (60 %), winning turn median 12 p90 15 limit 20, losses 48 timeout 32 captain 0 protected, quiet tail 1.5, refused kill p50 0.9892 over 48, at the stall p50 0.0355 over 46, two-roll average: ok
+gate 2 decisions matter: the_field, random wins 0/200 (0 %): ok
+gate 3 no cheap shots: the_field, 0 player units killed from deployment: ok
+gate 4 no dead weight: the_field, 5 recruits x 200 seeds, median drop 0.355: ok
+  keziah: drop 0.355 se 0.053 own [atk 788 dmg 10192 heal 0 abs 591] rest baseline [atk 2916 dmg 42843 heal 109 abs 2971] rest benched [atk 3470 dmg 47493 heal 141 abs 3771] benched losses 95 timeout 56 captain 0 protected, refused kill p50 0.8674 over 95, at the stall p50 0.0355 over 82
+  maud: drop 0.290 se 0.049 own [atk 491 dmg 7283 heal 109 abs 496] rest baseline [atk 3213 dmg 45752 heal 0 abs 3066] rest benched [atk 3161 dmg 47135 heal 0 abs 3683] benched losses 74 timeout 64 captain 0 protected, refused kill p50 0.9849 over 74, at the stall p50 0.0355 over 66
+  ottilie: drop 0.340 se 0.053 own [atk 484 dmg 3760 heal 0 abs 768] rest baseline [atk 3220 dmg 49275 heal 109 abs 2794] rest benched [atk 2557 dmg 47785 heal 14 abs 3710] benched losses 89 timeout 59 captain 0 protected, refused kill p50 0.9824 over 89, at the stall p50 0.0299 over 80
+  pell: drop 0.525 se 0.054 own [atk 1056 dmg 15955 heal 0 abs 269] rest baseline [atk 2648 dmg 37080 heal 109 abs 3293] rest benched [atk 2859 dmg 43339 heal 85 abs 4317] benched losses 95 timeout 90 captain 0 protected, refused kill p50 0.9711 over 95, at the stall p50 0.0355 over 89
+  teodor: drop 0.410 se 0.052 own [atk 549 dmg 6926 heal 0 abs 566] rest baseline [atk 3155 dmg 46109 heal 109 abs 2996] rest benched [atk 2712 dmg 47553 heal 59 abs 4057] benched losses 97 timeout 65 captain 0 protected, refused kill p50 0.9892 over 97, at the stall p50 0.0355 over 90
+  captain captain: baseline [atk 336 dmg 8919 heal 0 abs 872] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 1465 ms: ok
+gate 5 forecast honesty: 10024 combats (4064 with gauntlets), 20305 strikes, hits 13510 expected 13524.8, crits 1018 expected 975.3, damage mismatches 0, bow strikes on fliers 55 (grounded 1, killed 17): ok
+gate 7 speed: the_field, 5 AI-vs-AI games, 79 turns, slowest 47 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 25437 ms: ok
+free prefix: the_field, 0 of 2, 4, 6 tried, slack median 8 p90 5 (printed, not gated)
+  prefix 2: wins 80/200, drop 0.200 se 0.052, not free
+  prefix 4: wins 75/200, drop 0.225 se 0.051, not free
+  prefix 6: wins 40/200, drop 0.400 se 0.050, not free
+  prefix 2 refunded: wins 84/200, drop 0.180 se 0.052, not free, limit raised by 2 against the unraised baseline: positional
+  turns, medians over 200 games: dead 0.0, quiet 2.0, leading dead 0.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.04
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 13 quiet 0 live 187, wake tax 0.00
+  turn 4: dead 3 quiet 191 live 6, wake tax 0.21
+  turn 5: dead 0 quiet 9 live 191, wake tax 0.00
+  turn 6: dead 0 quiet 45 live 155, wake tax 0.03
+  turn 7: dead 2 quiet 0 live 198, wake tax 0.00
+  turn 8: dead 0 quiet 0 live 199, wake tax 0.00
+  turn 9: dead 1 quiet 0 live 194, wake tax 0.00
+  turn 10: dead 2 quiet 0 live 176, wake tax 0.00
+  turn 11: dead 2 quiet 0 live 163, wake tax 0.00
+  turn 12: dead 2 quiet 0 live 143, wake tax 0.00
+  turn 13: dead 1 quiet 0 live 117, wake tax 0.00
+  turn 14: dead 0 quiet 0 live 92, wake tax 0.00
+  turn 15: dead 4 quiet 0 live 74, wake tax 0.00
+  turn 16: dead 7 quiet 0 live 64, wake tax 0.00
+  turn 17: dead 4 quiet 0 live 65, wake tax 0.00
+  turn 18: dead 5 quiet 0 live 59, wake tax 0.00
+  turn 19: dead 4 quiet 0 live 54, wake tax 0.00
+  turn 20: dead 2 quiet 0 live 51, wake tax 0.00
+full: ok

@@ -73,7 +73,7 @@ public class CliValidateTests
     {
         var ok = Run(out var okExit, "validate", Fixture.RealContentDirectory());
         Assert.Equal(0, okExit);
-        Assert.Contains("8 maps", ok);
+        Assert.Contains("9 maps", ok);
 
         var dir = Path.Combine(Path.GetTempPath(), "ironwake-cli-maps-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(Path.Combine(dir, "maps"));
@@ -107,7 +107,7 @@ public class CliValidateTests
         var output = Run(out var exit, "validate", Fixture.RealContentDirectory());
 
         Assert.Equal(0, exit);
-        Assert.Contains("8 maps, 2 trials, 2 side maps, 2 keep maps from", output);
+        Assert.Contains("9 maps, 2 trials, 2 side maps, 2 keep maps from", output);
     }
 
     [Theory]
