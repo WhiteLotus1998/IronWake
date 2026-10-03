@@ -691,6 +691,36 @@ public sealed record CampaignRecord(
     }
 
     /// <summary>
+    /// The trade the camp prints when the pick and a side character compete for <paramref name="map"/>'s
+    /// open places (issue 844): on a map whose campaign entry both brings the passed claimant back and
+    /// offers a meeting, with the pick present and not placed by name, and a side character met here
+    /// or still meetable (a bed free), the bare slots left after the map's named placements, and the
+    /// contenders (the side characters, then the pick), when the pick and one side character outnumber
+    /// those slots. Null otherwise, and on a <c>deploy: all</c> map. Which unit a slot goes to stays
+    /// <see cref="Begin"/>'s fill.
+    /// </summary>
+    public (int Open, IReadOnlyList<string> Contenders)? ContestedPlaces(MapDefinition map, GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content) is not { Return: not null, Meets.Count: > 0 } entry || map.DeploysAll
+            || Pick is not { } pick || Present(content).All(u => u.Id != pick))
+        {
+            return null;
+        }
+
+        var sides = entry.Meets.FirstOrDefault(Met.Contains) is { } made
+            ? new List<string> { made }
+            : entry.Meets.Where(id => Meet(id, content).Accepted).ToList();
+        var players = ClaimantSlotsBare(entry.Prepare(map), content).Placements.OfType<PlayerPlacement>().ToList();
+        if (sides.Count == 0 || players.Any(p => p.RecruitId == pick))
+        {
+            return null;
+        }
+
+        var open = players.Count(p => p.Slot == PlayerSlot.AnyRecruit);
+        return open < 2 ? (open, sides.Append(pick).ToList()) : null;
+    }
+
+    /// <summary>
     /// The record after a won battle: every deployed unit still standing comes back as the battle
     /// left it, with its spells refreshed and any consumable uses a <c>supplies</c> cap held back
     /// returned (the cap is what a unit brings into the battle; the rest stays in the wagon); a

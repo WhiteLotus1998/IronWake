@@ -794,7 +794,25 @@ public sealed class CampaignSession
         lines.AddRange(LowLines(record, content));
         lines.AddRange(BranchLines(record, content));
         lines.AddRange(MeetingLines(record, content));
+        lines.AddRange(ContestLines(record, content, map));
         return lines;
+    }
+
+    /// <summary>
+    /// The Roster panel's word on a contested place (issue 844): when the pick and a side character
+    /// compete for the next map's open places (<see cref="CampaignRecord.ContestedPlaces"/>),
+    /// <c>The Field Before the Keep has one open place: Ansgar or Rook</c>. Empty otherwise.
+    /// </summary>
+    public static IReadOnlyList<string> ContestLines(CampaignRecord record, GameContent content, MapDefinition map)
+    {
+        if (record.ContestedPlaces(map, content) is not { } contest)
+        {
+            return Array.Empty<string>();
+        }
+
+        var places = contest.Open == 0 ? "no open place" : "one open place";
+        var names = contest.Contenders.Select(id => content.Unit(id).Name).ToList();
+        return new[] { $"{map.Name} has {places}: {string.Join(", ", names.SkipLast(1))} or {names[^1]}" };
     }
 
     /// <summary>
