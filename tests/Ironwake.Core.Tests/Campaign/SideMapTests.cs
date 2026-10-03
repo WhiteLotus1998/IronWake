@@ -302,6 +302,21 @@ public class SideMapTests
     }
 
     [Fact]
+    public void TheRookerysHoldsCoverTwoExitsAndLeaveOneFree()
+    {
+        // Issue 862 (round 284): the bow holds' rings sit on the exit approach, one exit outside both,
+        // and the sentry's lance guards the corner beside the north exit.
+        var map = Side("the_rookery");
+        var holds = map.Placements.OfType<EnemyPlacement>().Where(p => p.Behavior == Behavior.Hold).ToList();
+        bool Covered(Coord exit) => holds.Any(h => Content.Units[h.TemplateId].Inventory.Items
+            .Any(stack => Content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.InRange(h.At.DistanceTo(exit))));
+
+        Assert.Equal(2, holds.Count);
+        Assert.Equal(new[] { true, false, true }, map.Exits.Select(Covered));
+        Assert.Equal(new Coord(13, 3), holds.Single(h => h.TemplateId == "sentry").At);
+    }
+
+    [Fact]
     public void TheRookeryIsCanonical()
     {
         var path = Path.Combine(Fixture.RealContentDirectory(), MapFiles.QuestsDirectory, "the_rookery.map");

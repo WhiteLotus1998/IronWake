@@ -17,3 +17,13 @@ Date: 2026-10-03. Built by the chain Builder. What to build is the Table's: DESI
 ## Not in this slice
 
 Keziah's quest 2 (her oath; a Table round first), the drake's stages (#805), the writing, the Godot camp row.
+
+## Addendum, 2026-10-03: the holds on the exit approach (issue 862, round 284)
+
+Two chairs played the board as built: Code warm 8/6/6 and Chat cold 8/6/8. Neither play saw a hold shoot, and #635's side-map gate needs choice at 7, so the Table agreed one lever (rounds 284 and 285): the holds' rings go on the exit approach, with at least one exit left outside both. The sentry stays a hold, the turn-4 rider keeps its turn, and the courtyard cage is untouched.
+
+- **Built:** the two holds trade places and move east. The sentry (steel lance, iron bow) goes from 12,6 to 13,3, so its bow covers exit 14,4 and its lance covers 13,4, the perch beside it. The archer goes from the fort at 11,3 to 12,6, where its bow covers exit 14,6. 14,5 is in neither ring. Since an exit is the action and not a move (0074), a unit waits out one enemy phase on its exit tile. The price is therefore the tile: one free exit for two units, so either one of them stands under a bow, or Rook gives up the free tile and the pair spends a turn. Rook leaves last.
+- **Why the sentry is in the corner.** A first arm moved only the archer, to 13,3, and Rook struck it from 13,4 at 79% x2 with no counter, since a bow does not answer at range 1. The lance makes that corner cost something. The fort at 11,3 is now empty.
+- **Measured** (`docs/measurements/the_rookery-862.txt`, 200 seeds): gate 1 went from 72 to 36, all with the captain alone, and no run escaped with the ally. Hold shots went from 0 games to 182, 107 of them on Rook standing on 14,4. As on the other side maps, the gate is a cold chair.
+- **Played:** Code warm on 1132 with the new holds scored 7/7/5 and won on turn 9 with nobody lost. Rook held 14,5 from turn 4 (the old 13,4 perch now reads the lance at 56% for 15 against 4 HP), and Wren killed the archer on 12,6 to open 14,6. Neither hold fired. That kill was cheap (86% x2, no counter, on her road), and a cold chair decides whether it counts as a choice. If not, the next lever is the archer at 13,7, off the road.
+- The journaled replay test reads the new play (`2026-10-03-the_rookery-1132-862.*`). The first play's transcripts stay as the record of the old board; they no longer replay on it.

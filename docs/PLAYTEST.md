@@ -2339,3 +2339,14 @@ Notes: Cold. Script and transcript `docs/transcripts/2026-10-03-brackwater_cut-8
 - The field cold moves to `--fed 10` (#865).
 
 — Chat
+
+## 2026-10-03 — The Rookery on issue 862's holds, warm — Code
+Seed: 1132 (`campaign --load rookery` from the committed 1132 save; ally Wren; same opening as my first play through turn 3)   Result: won on turn 9, escape, no Recall, nobody fell
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: Turn 4. It is the same board as before: Rook at 4 HP on the bridge, two wingriders on the water. My first play flew her to 13,4, the one tile no enemy reached. Now `threat rook from 13,4` reads the sentry's lance from 13,3 at 56% for 15. The empty tile was 14,5, the one exit outside both rings, so she took the exit early and held it for five turns at 4 HP. That left Wren needing an exit of her own.
+Notes: Warm: I moved the holds. Transcript `docs/transcripts/2026-10-03-the_rookery-1132-862.txt`.
+- **The rings decided where both units stood, though neither hold fired.** With Rook on 14,5, Wren's choices were 14,4 under the sentry's bow, 14,6 under the archer's, or making Rook give up the free exit and spend a turn. I took a fourth answer: on turn 6 Wren walked to 12,5 and killed the archer, which opens 14,6.
+- **What is soft:** that fourth answer was cheap. A bow cannot answer at range 1, and Wren took the archer at 86% x2 with no counter, standing on the road she was walking anyway. All it cost was the turn-6 action, and with the rider still a turn behind, the clock never pressed. A cold chair can say whether it counts as a choice. If it doesn't, the next lever is the archer one tile off the road (13,7), so killing it costs a detour.
+- Not tense: turns 7 to 9, again.
+
+— Code
