@@ -438,6 +438,30 @@ public static class ContentLoader
             }
         }
 
+        var issues = new List<CampaignIssue>();
+        if (root.OptionalObject("issues") is { } issuesNode)
+        {
+            foreach (var property in issuesNode.Element.EnumerateObject())
+            {
+                if (!castUnits.Any(u => u.Id == property.Name))
+                {
+                    throw root.Error("issues." + property.Name, "is not a cast member");
+                }
+
+                if (property.Value.ValueKind != JsonValueKind.String || !weapons.TryGetValue(property.Value.GetString()!, out var issued))
+                {
+                    throw root.Error("issues." + property.Name, "must be a weapon id in weapons.json");
+                }
+
+                if (issued.BoundTo is { } owner && owner != property.Name)
+                {
+                    throw root.Error("issues." + property.Name, $"'{issued.Id}' is bound to {owner}");
+                }
+
+                issues.Add(new CampaignIssue(property.Name, issued.Id));
+            }
+        }
+
         var hireIds = root.OptionalObject("keep") is { } hiresNode
             ? hiresNode.ArrayOrEmpty("hires").Where(h => h.ValueKind == JsonValueKind.Object && h.TryGetProperty("id", out var hid) && hid.ValueKind == JsonValueKind.String).Select(h => h.GetProperty("id").GetString()!).ToList()
             : new List<string>();
@@ -636,6 +660,7 @@ public static class ContentLoader
             Forge = forge,
             Origins = ParseOrigins(root, captain),
             Supports = ParseSupports(root, castUnits),
+            Issues = ValueList<CampaignIssue>.From(issues.OrderBy(i => i.UnitId, StringComparer.Ordinal)),
         };
     }
 

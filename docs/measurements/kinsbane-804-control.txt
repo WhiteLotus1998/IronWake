@@ -1,0 +1,30 @@
+# issue 804 slice 2: --kinsbane (Release, 200 runs each arm, same seeds) on issue/804-kinsbane-schedule. The campaign issues Kinsbane in front of Keziah's pack in place of her iron axe (campaign.json issues); tooth schedule 2,2,2,3,4 (teeth at 2, 4, 6, 9, 13; woken at 13). Benched in from the back on every map, the heuristic taking the hunt. Permadeath off; a map counts won only with her standing where she fought (up to 50 tries). The control arm (--axe) takes the scythe out and puts her cast iron axe in front.
+
+## scythe: ironwake-sim --kinsbane --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 1, starved in 3
+  map 7 (her map 2): won 26, deployed in 26, tries p50 25, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 4, starved in 12
+  map 8 (her map 3): won 26, deployed in 26, tries p50 2, fed by its end p25 6 p50 7 p75 8 (teeth p50 3/5), drains p50 3, starved in 3
+  map 9 (her map 4): won 25, deployed in 25, tries p50 3, fed by its end p25 12 p50 13 p75 14 (teeth p50 5/5), drains p50 4, starved in 1
+  map 10 (her map 5): won 5, deployed in 5, tries p50 17, fed by its end p25 13 p50 13 p75 14 (teeth p50 5/5), drains p50 1, starved in 1
+  no try won map 1: 118
+  no try won map 7: 56
+  no try won map 9: 1
+  no try won map 10: 20
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 79 of 82, median map 6
+  tooth 2 (fed 4): grew in 44 of 82, median map 7
+  tooth 3 (fed 6): grew in 26 of 82, median map never
+  tooth 4 (fed 9): grew in 25 of 82, median map never
+  tooth 5 (wakes, fed 13): grew in 15 of 82, median map never
+
+## control: ironwake-sim --kinsbane --seeds 200 --axe
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the control arm: her iron axe in front, no scythe
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0
+  map 7 (her map 2): won 49, deployed in 49, tries p50 17, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0
+  map 8 (her map 3): won 49, deployed in 49, tries p50 2, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0
+  map 9 (her map 4): won 49, deployed in 49, tries p50 7, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0
+  map 10 (her map 5): won 7, deployed in 7, tries p50 32, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0
+  no try won map 1: 118
+  no try won map 7: 33
+  no try won map 10: 42

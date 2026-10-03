@@ -430,11 +430,31 @@ public sealed record CampaignRecord(
     /// <paramref name="unit"/> as the campaign first fields them (issue 635, round 266): every
     /// heirloom bound to them (<see cref="Weapon.Heirloom"/>) at full uses after their cast pack, so
     /// the cast's own weapon stays in front and the heirloom is swung only by choice. The cast file
-    /// is unchanged, so a battle outside the campaign carries no heirloom.
+    /// is unchanged, so a battle outside the campaign carries no heirloom. A weapon the campaign
+    /// issues them (<see cref="CampaignRules.Issues"/>, issue 804) goes in front at full uses in place
+    /// of the first weapon of its type they carry: Keziah joins with Kinsbane, not her iron axe.
     /// </summary>
     public static Unit Kitted(Unit unit, GameContent content)
     {
         var inventory = unit.Inventory;
+        if (content.Campaign.IssuedTo(unit.Id) is { } issuedId && !inventory.Items.Any(s => s.ItemId == issuedId))
+        {
+            var issued = content.Weapon(issuedId);
+            var items = inventory.Items.ToList();
+            var replaced = items.FindIndex(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Type == issued.Type);
+            if (replaced >= 0)
+            {
+                items.RemoveAt(replaced);
+            }
+
+            if (items.Count < Inventory.Capacity)
+            {
+                items.Insert(0, new ItemStack(issued.Id, issued.Durability));
+            }
+
+            inventory = new Inventory(ValueList<ItemStack>.From(items));
+        }
+
         foreach (var heirloom in content.Weapons.Values.Where(w => w.Heirloom is not null && w.BoundTo == unit.Id).OrderBy(w => w.Id, StringComparer.Ordinal))
         {
             if (!inventory.IsFull && !inventory.Items.Any(s => s.ItemId == heirloom.Id))
@@ -444,6 +464,18 @@ public sealed record CampaignRecord(
         }
 
         return unit with { Inventory = inventory };
+    }
+
+    /// <summary>
+    /// The passed claimant as they come back (issue 633, round 263): <see cref="Kitted"/>, with a
+    /// hungering weapon fed to the fourth tooth's count (<see cref="Kinsbane.FedFor"/>), so a passed
+    /// Keziah returns one tooth short of waking and the player who turns her grows the last.
+    /// </summary>
+    public static Unit Returning(Unit unit, GameContent content)
+    {
+        var kitted = Kitted(unit, content);
+        var items = kitted.Inventory.Items.Select(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Hungers ? s with { Fed = Kinsbane.FedFor(Kinsbane.MtCap - 1) } : s);
+        return kitted with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
     }
 
     /// <summary>
@@ -597,7 +629,7 @@ public sealed record CampaignRecord(
         var battle = BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
         if (ReturnLevel(content) is { } level && NextMap(content).Return is { } back && Passed(content) is { } passed)
         {
-            var card = content.Unit(passed);
+            var card = Returning(content.Unit(passed), content);
             battle = battle.WithReturned(card.ScaledTo(level, content.Class(card.ClassId)), back.At, back.Group, back.Behavior, Pick!, content);
         }
 

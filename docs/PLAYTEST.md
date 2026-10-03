@@ -2250,3 +2250,16 @@ Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_burn
 - Not tense: turns 7 and 8, the brigand alone.
 
 — Code
+
+## 2026-10-03 — Sallow Grange with the scythe issued (#804 slice 2), warm — Code
+Seed: 804 (`campaign --from sallow_grange --pick keziah --level 6 --seed 804`; Dunstan and Maud benched so Keziah fills the bare slot)   Result: won on turn 8, seize, nobody fell, two Recalls spent
+Tension: 8/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 7. The Reeve sallied onto Ottilie and left her at 5. Pell's Cinder took him to 14, Teodor's lance to 5, and Keziah went in at 11 HP after the turn's drain. The forecast said `Counter: lethal to Keziah (14 against 11 hp)` above `Kill: Keziah +10 HP`, at 82. It landed, the first tooth grew, and she healed to 21. The captain walked onto the gate the next turn.
+Notes: Warm: I built the issue this hour. Script and transcript `docs/transcripts/2026-10-03-sallow_grange-804-kinsbane.*`. The two recalls are in the script.
+- **The hunger decided turns 3 and 7.** On turn 3 the brawler stood at 3 HP. Wren or Teodor could have taken him safely. I cleared Teodor off 4,7 so Keziah could reach him, at 16 HP and against a lethal counter, because a kill heals 10 and a turn without one costs 5. On turn 7 the same thing happened with the boss. That is 13.23's keep clause, shown twice.
+- **The drain killed her twice before it paid.** On turn 2 I walked her to the front at 21 HP (the drain had already taken 5), and the brawler and the archer took her down in one phase. That cost a Recall. On turn 6 she took an 82 percent swing at the hexer, missed, and the counter and the hexer finished her. That cost the second. Both deaths came straight from the drain: she starts every fight 5 or 10 HP short, so a single miss is lethal.
+- **What the scythe could not do:** the fort archer. Her one strike at 49 for 15 was not worth the detour, and she marched past at 26 to pay the drain on the way to the hexer. A weight-10 scythe never doubles, so she cannot hunt anything that doubles back or sits on a fort.
+- **The Sim agrees, and harder.** On the same seeds the iron axe clears Sallow in 49 of 82 runs and the scythe in 26 (`docs/measurements/kinsbane-804-control.txt`). Round 263 sends Drain back to the Table.
+- Not tense: turns 4 and 5, the march east past the fort.
+
+— Code

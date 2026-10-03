@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Ironwake.Core;
 
 /// <summary>
@@ -12,7 +14,7 @@ namespace Ironwake.Core;
 /// it at 1 and starves the weapon.</item>
 /// <item>The feed: a kill by its carrier with it, a counter-kill included, counts one, heals the
 /// carrier <see cref="FeedHeal"/> (to max HP), ends the starved form and restores its uses.</item>
-/// <item>The growth: <see cref="KillsPerMt"/> kills buy +1 Mt, to <see cref="MtCap"/>.</item>
+/// <item>The growth: each tooth of <see cref="ToothAt"/> buys +1 Mt, to <see cref="MtCap"/>.</item>
 /// <item>The starved form: half Mt rounded down, uses held at 1. Any hit it lands that kills nothing
 /// ends the form, restores its uses and heals <see cref="EasedHeal"/>.</item>
 /// <item>The uses: a hungering weapon never spends below 1, so it never breaks; at 1 a strike spends nothing.</item>
@@ -35,17 +37,26 @@ public static class Kinsbane
     /// <summary>HP a starved weapon's non-lethal hit heals the carrier as it leaves the starved form.</summary>
     public const int EasedHeal = 5;
 
-    /// <summary>Kills per +1 Mt.</summary>
-    public const int KillsPerMt = 3;
+    /// <summary>
+    /// The feed count at which each tooth grows, one Mt step each (round 263, provisional until the
+    /// iron-axe control reads): steps of 2, 2, 2, 3 and 4 kills, front-loaded so a claimant who joins
+    /// at the raid can wake it by the field. The last entry is the waking.
+    /// </summary>
+    public static readonly ImmutableArray<int> ToothAt = ImmutableArray.Create(2, 4, 6, 9, 13);
 
-    /// <summary>The most Mt it grows.</summary>
-    public const int MtCap = 5;
+    /// <summary>The most Mt it grows: one per tooth.</summary>
+    public static int MtCap => ToothAt.Length;
 
-    /// <summary>The feed count at which it wakes: the kill that buys the last Mt.</summary>
-    public const int WakeKills = KillsPerMt * MtCap;
+    /// <summary>The feed count at which it wakes: the kill that grows the last tooth.</summary>
+    public static int WakeKills => ToothAt[^1];
 
-    /// <summary>The Mt a weapon fed <paramref name="fed"/> times has grown.</summary>
-    public static int MtBonus(int fed) => Math.Min(MtCap, Math.Max(0, fed) / KillsPerMt);
+    /// <summary>The feed count at which tooth <paramref name="tooth"/> (1 to <see cref="MtCap"/>) grows.</summary>
+    public static int FedFor(int tooth) => tooth < 1 || tooth > MtCap
+        ? throw new ArgumentOutOfRangeException(nameof(tooth), tooth, $"a tooth is 1 to {MtCap}")
+        : ToothAt[tooth - 1];
+
+    /// <summary>The Mt a weapon fed <paramref name="fed"/> times has grown: the teeth on its blade.</summary>
+    public static int MtBonus(int fed) => ToothAt.Count(at => fed >= at);
 
     /// <summary>
     /// The teeth on the blade (issue 804): one hooked tooth grows with each Mt step, so the count is

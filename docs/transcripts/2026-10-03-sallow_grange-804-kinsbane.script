@@ -1,0 +1,131 @@
+bench dunstan
+bench maud
+march
+move keziah 3,9
+wait keziah
+move wren 2,7
+wait wren
+move teodor 1,7
+wait teodor
+move pell 1,8
+wait pell
+move ottilie 2,8
+wait ottilie
+wait captain
+end
+move keziah 4,8
+wait keziah
+move teodor 4,7
+wait teodor
+move wren 3,6
+wait wren
+move ottilie 3,7
+wait ottilie
+move pell 3,8
+wait pell
+move captain 2,6
+wait captain
+end
+recall
+recall 20
+move keziah 2,9
+wait keziah
+move teodor 4,7
+wait teodor
+move wren 3,6
+wait wren
+move ottilie 3,7
+wait ottilie
+move pell 2,8
+wait pell
+move captain 2,6
+wait captain
+end
+forecast teodor archer-2 from 5,7
+move teodor 5,7
+attack teodor archer-2
+forecast keziah brawler-1 from 4,7
+move keziah 4,7
+attack keziah brawler-1
+attack ottilie veteran-1
+forecast captain veteran-1 from 2,5
+move captain 2,5
+attack captain veteran-1
+forecast wren archer-2 from 4,6
+move wren 4,6
+attack wren archer-2
+move pell 2,7
+wait pell
+end
+forecast keziah archer-1 from 4,3
+move captain 6,5
+item captain 2
+move wren 7,6
+wait wren
+move ottilie 6,7
+wait ottilie
+move pell 5,6
+wait pell
+move teodor 9,7
+wait teodor
+move keziah 8,7
+wait keziah
+end
+move keziah 10,6
+wait keziah
+move teodor 10,5
+wait teodor
+move captain 9,5
+wait captain
+move ottilie 9,6
+wait ottilie
+move pell 8,5
+wait pell
+move wren 8,6
+wait wren
+end
+forecast keziah hexer-1 from 12,7
+move keziah 12,7
+attack keziah hexer-1
+move teodor 12,5
+wait teodor
+move ottilie 11,6
+wait ottilie
+move captain 10,6
+wait captain
+move pell 10,5
+wait pell
+move wren 9,6
+wait wren
+end
+recall
+recall 97
+forecast ottilie hexer-1 from 12,6
+move ottilie 12,6
+attack ottilie hexer-1
+move teodor 12,5
+wait teodor
+move keziah 11,6
+wait keziah
+move captain 10,6
+wait captain
+move pell 10,5
+wait pell
+move wren 9,6
+wait wren
+end
+move ottilie 11,5
+wait ottilie
+move pell 13,4
+attack pell grange_reeve-1
+move teodor 13,5
+attack teodor grange_reeve-1
+forecast keziah grange_reeve-1 from 13,7
+move keziah 13,7
+attack keziah grange_reeve-1
+move captain 14,6
+wait captain
+move wren 12,6
+wait wren
+end
+move captain 16,6
