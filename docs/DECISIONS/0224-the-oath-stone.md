@@ -16,8 +16,12 @@ Date: 2026-10-04. Built by the chain Builder. What to build is the Table's: DESI
 
 ## Levers, one at a time, in order
 
-1. The camp pair further from the start, so the oath road is the long road and not a turn-1 trap.
-2. The envoy as `boss` (keeps his fort), so the yard stays shut and the door is the question.
+Reordered by round 305 and Chat on #901: the envoy leaving the yard is a structural fault in the choice, which must be fixed before difficulty can be judged.
+
+1. The envoy as `boss` (keeps his fort), so the yard stays shut and the door is the question.
+2. The camp pair further from the start, only if a replay with the yard shut still dies by turn 6.
+
+The pins of rounds 303 to 305 (the named man and intro line, the weapon-range layout test, `threat` printing a counter feed, `KeziahOath: fed | spared | refused | other`) are #902.
 
 ## Not in this slice
 
