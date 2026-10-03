@@ -157,8 +157,8 @@ public class CampaignSaveTests
             var loaded = Run(out _, "roster\n", "--saves", dir, "--load", "first-camp");
 
             Assert.Contains("Autosaved as auto-1; the last 3 camps are kept\n", saved);
-            Assert.Contains("> save first-camp\nSaved as first-camp: before map 1 of 9, starting_alone, the purse holds 500\n", saved);
-            Assert.Contains("  auto-1: before map 1 of 9, starting_alone, the purse holds 500\n  first-camp: before map 1 of 9, starting_alone, the purse holds 500\n", saved);
+            Assert.Contains("> save first-camp\nSaved as first-camp: before map 1 of 10, starting_alone, the purse holds 500\n", saved);
+            Assert.Contains("  auto-1: before map 1 of 10, starting_alone, the purse holds 500\n  first-camp: before map 1 of 10, starting_alone, the purse holds 500\n", saved);
             Assert.Contains("Campaign, seed 3, difficulty Captain, permadeath on", loaded);
             Assert.Equal(new[] { "auto-1", "auto-2", "first-camp" }, new SaveStore(dir).Names());
         }
@@ -190,7 +190,7 @@ public class CampaignSaveTests
             Assert.Equal(1, exit);
             Assert.Contains("Campaign lost on Starting Alone: turn 10 passed\n-- The company is lost (placeholder card) --\n", output);
             Assert.Contains("Load from save (load <name>; saves lists them), New game (new), or Quit (quit)\n", output);
-            Assert.Contains("  auto-1: before map 1 of 9, starting_alone, the purse holds 500\n", output);
+            Assert.Contains("  auto-1: before map 1 of 10, starting_alone, the purse holds 500\n", output);
             Assert.Contains("ERROR: No save 'nothing' in " + dir + "\n", output);
             Assert.Contains("> new\nNew game, seed 3, difficulty Captain, permadeath on\nAutosaved as auto-1", output);
             Assert.Contains("Suspended in Starting Alone at turn 1", output);
@@ -210,7 +210,7 @@ public class CampaignSaveTests
             var lose = "save start\nmarch\n" + string.Concat(Enumerable.Repeat("end\n", 10)) + "leave\n";
             var output = Run(out _, lose + "load start\nquit\n", "--saves", dir);
 
-            Assert.Contains("> load start\nLoaded start: before map 1 of 9, starting_alone, the purse holds 500\nAutosaved as auto-1", output);
+            Assert.Contains("> load start\nLoaded start: before map 1 of 10, starting_alone, the purse holds 500\nAutosaved as auto-1", output);
         }
         finally
         {
