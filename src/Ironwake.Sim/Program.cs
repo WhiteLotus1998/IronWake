@@ -133,7 +133,7 @@ public static class Program
                 }
             }
 
-            return KinsbaneTable(seeds, args.Contains("--axe"));
+            return KinsbaneTable(seeds, args.Contains("--axe") ? KinsbaneRun.Arm.Axe : args.Contains("--heeding") ? KinsbaneRun.Arm.Heeding : KinsbaneRun.Arm.Committed);
         }
 
         if (args.Length > 0 && args[0] == "--levels")
@@ -271,7 +271,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] [--axe|--heeding] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -362,9 +362,10 @@ public static class Program
     /// <summary>
     /// Kinsbane's timing table (issue 804, <see cref="KinsbaneRun"/>): the campaign map each tooth grows
     /// on, the fifth waking it, with Keziah picked, armed and fielded under the heuristic player;
-    /// <paramref name="axe"/> runs the iron-axe control arm on the same seeds (round 263).
+    /// <paramref name="arm"/> picks the arm: committed, heeding (benched on a <c>keziah_warning</c>
+    /// map, issue 871) or the iron-axe control on the same seeds (round 263).
     /// </summary>
-    public static int KinsbaneTable(int seeds, bool axe = false)
+    public static int KinsbaneTable(int seeds, KinsbaneRun.Arm arm = KinsbaneRun.Arm.Committed)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -374,7 +375,7 @@ public static class Program
         }
 
         var content = ContentLoader.Load(contentDir);
-        foreach (var line in KinsbaneRun.Lines(KinsbaneRun.Measure(contentDir, content, seeds, axe), axe))
+        foreach (var line in KinsbaneRun.Lines(KinsbaneRun.Measure(contentDir, content, seeds, arm), arm))
         {
             Console.WriteLine(line);
         }

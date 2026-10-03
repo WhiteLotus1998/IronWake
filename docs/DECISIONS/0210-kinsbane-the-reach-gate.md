@@ -1,5 +1,7 @@
 # 0210 — Kinsbane's drain skips a phase start with no enemy in her reach (#854; amends 0209)
 
+**Reverted by 0214 (#871, Lotus's ruling): the drain fires with no enemy near again; `Smells` is kept as a measurement only.**
+
 Date: 2026-10-03. Built by the chain Builder. The shape is the Table's (round 276, "it hungers when it smells blood"): lever 2 of the agreed order, cumulative on 0209, no number moved. The bar and the order were agreed before the read.
 
 ## What is built

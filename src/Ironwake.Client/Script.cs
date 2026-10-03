@@ -133,6 +133,7 @@ public static class Script
                 ["bench", var unit] => campaign.Bench(unit),
                 ["unbench", var unit] => campaign.Unbench(unit),
                 ["march"] => campaign.March(),
+                ["march", "sure"] => campaign.March(sure: true),
                 _ => false,
             };
         }
