@@ -113,7 +113,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #875.
 - **Engine** (0008): Godot 4 .NET in this repo; the core stays engine-free; any renderer consumes the versioned protocol (0046) and carries no rules.
 - **Builder race** (#735, 0169; provisional): chain `on`; one Builder at a time by claim, wait and re-read, the earlier claim wins; in ROUTINES.md section 2 until Lotus pastes the prompt.
 - **Art:** human-made only (Lotus, 2026-10-03). The board's look is ours at $0; packs for battle clips, recoloured to LOOK.md; commissions at commercial rates; licences checked before purchase; the drake and Kinsbane first (#816).
-- **Character style** (Lotus, relayed; 298, 299; #891): Lotus's Blender renders and packs. Cold north key, a warm low fill on player figures only; 3 or 4 posterized steps, ink heavier on the silhouette; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art keeps its colour under chroma 32 with one amber accent, never the only side cue; tint for placeholders only (amends 0105). Ground: see the land.
+- **Character style** (Lotus, relayed; 298, 299; #891): Lotus's Blender renders and packs. Cold north key, a warm low fill on player figures only; 3 or 4 posterized steps, ink heavier on the silhouette; heads a sixth, weapons and hands 1.2x; Kinsbane and the drake may break the tile. Delivered art keeps its colour under chroma 32 with one amber accent, never the only side cue; tint for placeholders only (0223, built). Ground: see the land.
 
 ## Round index
 
