@@ -6,13 +6,13 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3937 tests green; `ci` and `ci-windows` both run; the three `godot-*` checks run but are not required.
+3937 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
 
 - 13.14 Brace is kept (#425, 0084; round 121; DESIGN 13.14) and ships on Saltmarsh (0091, #131); keep round on `saltmarsh_ford_brace.map` (#430, Code 449, Chat cold 521). Holds unread.
-- 13.21 the tide is spiked in content (0111; #600): `docs/samples/ebb_ford_tide.map`. Code 653 warm.
+- 13.21 the tide, in content (0111; #600): `docs/samples/ebb_ford_tide.map`. Code 653 warm.
 - 13.24 the messenger is spiked (0135; DESIGN 13.24): samples `signal_road_messenger.map` (Code 701) and `signal_road_pass.map` (Code 680 warm 8/6/6).
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786). Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
 - 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slice 1 (0195): `teeth n/5`, the Sim's hunt, `--kinsbane`. Slice 2 (0207): issued on the pick, the `--axe` control (Sallow 49/82). #851 (0209): beside the axe, bound, hunt to kill. #854 (0210): no drain with no enemy in reach. #856 (0211): teeth 2,4,5,8,12; round 279's bar passes whole (Sallow 44/82, field four teeth, woken by the keep in 17 of 43, the keep no worse). Levers stop. Code 804 warm 8/7/6, 854 warm 7/7/5.
@@ -47,7 +47,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | the_chapter_roll | Side map, Rook 1 (0204, #635); opens the Scout. Seize, limit 8; a gorge, a corked cell. Sim 0/200. Code 1100 warm 8/7/6, won turn 8; the sentry never acted. A cold chair owed. |
 | the_wardens_gate | Side map, Teodor 2 (0205, #635); names the lance, 3 frozen iron. Defeat Boss, limit 10; the boss before the gate, a gap and a breach, a rider yard in his noise. Sim 0/200. Code 1110 warm 8/7/7, won turn 7; archer-2 never acted. A cold chair owed. |
 | the_burned_shrine | Side map, Keziah 1 (0206, #635); 2 common. Rout, limit 10; a ring wall, the hearth fort beside a held shieldbearer, a fight from it wakes the grove. Sim 0/200. Code 1113 warm 7/7/5, won turn 8; the turn-5 brigand is a walk. A cold chair owed. |
-| the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. Sim 72/200 (all captain alone). Code 1132 warm 8/6/6, won turn 9; the bow holds never struck. A cold chair owed. |
+| the_rookery | Side map, Rook 2 (0208, #635); 2 common, #805's key for Unbroken. Escape, limit 9; a ravine bridge, a woken loft, Rook leaves last. Sim 72/200 (all captain alone). Code 1132 warm 8/6/6; Chat cold 1132 8/6/8, lost turn 6, not passed. Lever: the holds on the exit approach (#862); bug #861. |
 | the_lazar_house | Side map, Maud's quest 1 (0127, #635), under `content/quests/`. Survive, limit 6, Recall 2; lanes the ally can bar. Sim gate 1 4/200. Code 701 warm 8/7/5, won, Wren fell. Chat's or the Critic's cold play owed. |
 | starting_alone | Lesson, exempt from the Fun Gate (0123, #631). Captain alone, rout, limit 10. Gate 1 1/200. Code 631 warm 7/6/4, won turn 6, one Recall. Chat's play owed. |
 | the_tollgate | **tuned** (0073). Rider spawns at 13,4 when a unit stops on 6,4 or 6,3 (0072). Four deployed, limit 10. Gate 1 74 percent, gate 4 ok at 0.245. Fun Gate: Code seed 211 8/7/7, Chat seed 227 8/7/7, both warm. |
