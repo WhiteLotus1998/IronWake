@@ -163,6 +163,11 @@ public static class ContentSerializer
                         writer.WriteString("pays", pays);
                     }
 
+                    if (quest.Wakes is { } wakes)
+                    {
+                        writer.WriteString("wakes", wakes);
+                    }
+
                     if (quest.Common > 0)
                     {
                         writer.WriteNumber("common", quest.Common);
@@ -898,6 +903,11 @@ public static class ContentSerializer
             writer.WriteStartObject("heirloom");
             writer.WriteNumber("fromMap", ladder.FromMap);
             writer.WriteString("first", ladder.First);
+            if (ladder.Held is { } held)
+            {
+                writer.WriteString("held", held);
+            }
+
             writer.WriteStartArray("stages");
             foreach (var stage in ladder.Turns)
             {

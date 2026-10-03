@@ -1,0 +1,76 @@
+# issue 635 slice 8 (DECISIONS/0201): the Family Lance held at sound until Teodor's quest 1 is won. Release, 100 seeds each.
+# Without the quest: dotnet run -c Release --project src/Ironwake.Sim -- --heirloom family_lance --seeds 100
+heirloom: family_lance, 100 runs, the heuristic player from its owner's first map to map 7
+  map 4: won 97, owner deployed in 97, tries p50 7, combats by its end p25 2 p50 3 p75 4
+  map 5: won 95, owner deployed in 95, tries p50 5, combats by its end p25 5 p50 8 p75 10
+  map 6: won 88, owner deployed in 88, tries p50 4, combats by its end p25 10 p50 13 p75 16
+  map 7: won 42, owner deployed in 42, tries p50 15, combats by its end p25 14 p50 17 p75 21
+  no try won map 4: 3
+  no try won map 5: 2
+  no try won map 6: 7
+  no try won map 7: 46
+  pitted (at 3): turned in 95 of 100, median map 5
+  sound (at 6): turned in 94 of 100, median map 5
+  woken (at 10): turned in 0 of 100, median map never
+
+# With the quest arm: dotnet run -c Release --project src/Ironwake.Sim -- --heirloom family_lance --seeds 100 --quest
+# 'median map 5' for the quest winners is the camp after map 5: the quest's own after card.
+heirloom: family_lance, 100 runs, the heuristic player from its owner's first map to map 7
+  map 4: won 97, owner deployed in 97, tries p50 7, combats by its end p25 2 p50 3 p75 4
+  map 5: won 95, owner deployed in 95, tries p50 5, combats by its end p25 5 p50 8 p75 10
+  map 6: won 89, owner deployed in 89, tries p50 3, combats by its end p25 11 p50 14 p75 17
+  map 7: won 46, owner deployed in 46, tries p50 11, combats by its end p25 16 p50 19 p75 24
+  quest arm: won the waking quest in 47 of 90 runs offered it, tries p50 37
+  quest winners: woken in 47 of 47, median map 5, the quest won after map p50 5
+  no try won map 4: 3
+  no try won map 5: 2
+  no try won map 6: 6
+  no try won map 7: 43
+  pitted (at 3): turned in 95 of 100, median map 5
+  sound (at 6): turned in 88 of 100, median map 5
+  woken (at 10): turned in 47 of 100, median map never
+
+# The Tollgate's campaign row, main (69f3964's parent b29c69b) against this branch: dotnet run -c Release --project src/Ironwake.Sim -- --curve --map the_tollgate --seeds 100
+# main:
+curve: 1 campaign maps, 100 seeds, gate 1 as the file reads and as the campaign fights it
+curve: carried is the file's party at the levels the heuristic's own campaign brings to each camp, slot by slot, over the runs of 100 that won the map (the count after `over`; issue 764); spread is the same total, even
+map 4 the_tollgate: enemy level 3 in the file, 3 in the campaign, no swaps
+  file:     gate 1 beatable: the_tollgate, heuristic wins 82/100 (82 %), winning turn median 8 p90 10 limit 10, losses 18 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 18, at the stall p50 0.8674 over 17, two-roll average: ok
+  carried 3/1/1/1 over 41: gate 1 beatable: the_tollgate, heuristic wins 84/100 (84 %), winning turn median 8 p90 10 limit 10, losses 16 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 16, at the stall p50 0.8674 over 15, two-roll average: ok
+  carried, spread 2/2/1/1 over 41: gate 1 beatable: the_tollgate, heuristic wins 82/100 (82 %), winning turn median 8 p90 10 limit 10, losses 18 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 18, at the stall p50 0.8674 over 17, two-roll average: ok
+# branch:
+curve: 1 campaign maps, 100 seeds, gate 1 as the file reads and as the campaign fights it
+curve: carried is the file's party at the levels the heuristic's own campaign brings to each camp, slot by slot, over the runs of 100 that won the map (the count after `over`; issue 764); spread is the same total, even
+map 4 the_tollgate: enemy level 3 in the file, 3 in the campaign, no swaps
+  file:     gate 1 beatable: the_tollgate, heuristic wins 82/100 (82 %), winning turn median 8 p90 10 limit 10, losses 18 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 18, at the stall p50 0.8674 over 17, two-roll average: ok
+  carried 3/1/1/1 over 41: gate 1 beatable: the_tollgate, heuristic wins 84/100 (84 %), winning turn median 8 p90 10 limit 10, losses 16 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 16, at the stall p50 0.8674 over 15, two-roll average: ok
+  carried, spread 2/2/1/1 over 41: gate 1 beatable: the_tollgate, heuristic wins 82/100 (82 %), winning turn median 8 p90 10 limit 10, losses 18 timeout 0 captain 0 protected, quiet tail 0.2, refused kill p50 0.8674 over 18, at the stall p50 0.8674 over 17, two-roll average: ok
+
+# The board at the level-1 cast: dotnet run --project src/Ironwake.Sim -- --full content/quests/the_old_watch.map --seeds 200
+full: 1 maps from /home/user/IronWake/content, 200 seeds, two-roll average
+gate 1 beatable: content/quests/the_old_watch.map, heuristic wins 8/200 (4 %), winning turn median 2 p90 9 limit 9, losses 164 timeout 28 captain 0 protected, quiet tail 0.6, refused kill p50 0.9824 over 164, at the stall p50 0.0530 over 115, two-roll average: FAILED
+gate 2 decisions matter: content/quests/the_old_watch.map, random wins 9/200 (4 %): ok
+gate 3 no cheap shots: content/quests/the_old_watch.map, 0 player units killed from deployment: ok
+gate 4 no dead weight: content/quests/the_old_watch.map, 1 recruits x 200 seeds, median drop 0.030: FAILED
+  cast not earning its deployment: the median recruit changes no outcomes (drop 0.030, se 0.016); rows are data, no recruit is judged
+  wren: drop 0.030 se 0.016 own [atk 450 dmg 7673 heal 0 abs 442] rest baseline [atk 107 dmg 17904 heal 0 abs 1254] rest benched [atk 24 dmg 19577 heal 0 abs 1471] benched losses 99 timeout 99 captain 0 protected, refused kill p50 0.9373 over 99, at the stall p50 0.4700 over 87
+  captain captain: baseline [atk 107 dmg 17904 heal 0 abs 1254] never benched, not judged
+gate 6 determinism: 1 maps x 100 seeds x 100 commands, 2598 ms: ok
+gate 5 forecast honesty: 10169 combats (4064 with gauntlets), 20634 strikes, hits 13770 expected 13775.9, crits 1017 expected 983.9, damage mismatches 0, bow strikes on fliers 55 (grounded 1, killed 17): ok
+gate 7 speed: content/quests/the_old_watch.map, 5 AI-vs-AI games, 42 turns, slowest 25 ms: ok
+gate 8 crash-free: 1 maps x 10000 sequences x 20 commands, 33816 ms: ok
+free prefix: content/quests/the_old_watch.map, 6 of 2, 4, 6 tried, slack median 7 p90 0 (printed, not gated)
+  prefix 2: wins 10/200, drop -0.010 se 0.020, free
+  prefix 4: wins 11/200, drop -0.015 se 0.019, free
+  prefix 6: wins 7/200, drop 0.005 se 0.017, free
+  turns, medians over 200 games: dead 0.0, quiet 1.0, leading dead 0.0, first contact 2.0, first quiet at tax 0.25 -
+  turn 1: dead 0 quiet 200 live 0, wake tax 0.13
+  turn 2: dead 0 quiet 0 live 200, wake tax 0.00
+  turn 3: dead 0 quiet 0 live 194, wake tax 0.00
+  turn 4: dead 0 quiet 0 live 194, wake tax 0.00
+  turn 5: dead 0 quiet 0 live 194, wake tax 0.00
+  turn 6: dead 10 quiet 0 live 172, wake tax 0.00
+  turn 7: dead 3 quiet 0 live 174, wake tax 0.00
+  turn 8: dead 11 quiet 0 live 163, wake tax 0.00
+  turn 9: dead 41 quiet 0 live 127, wake tax 0.00
+full: FAILED

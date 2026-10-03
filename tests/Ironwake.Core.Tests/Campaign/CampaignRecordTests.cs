@@ -51,7 +51,7 @@ public class CampaignRecordTests
     {
         var record = Start(9);
 
-        Assert.Equal(Content.Cast.Where(u => u.Id is not ("maud" or "rook" or "keziah" or "ansgar")), record.Roster);
+        Assert.Equal(Content.Cast.Where(u => u.Id is not ("maud" or "rook" or "keziah" or "ansgar")).Select(u => CampaignRecord.Kitted(u, Content)), record.Roster);
         Assert.Equal(Content.Campaign.StartingPurse, record.Purse);
         Assert.Equal("starting_alone", record.NextMap(Content).MapId);
         Assert.Equal("normal", record.Difficulty);
@@ -427,7 +427,7 @@ public class CampaignRecordTests
         var map = Map("the_tollgate");
 
         Assert.Equal(113UL, record.BattleSeed);
-        Assert.Equal(BattleState.From(map, Content, Content.Cast, 113).Units, record.Begin(map, Content).Units);
+        Assert.Equal(BattleState.From(map, Content, ValueList<Unit>.From(Content.Cast.Select(u => CampaignRecord.Kitted(u, Content))), 113).Units, record.Begin(map, Content).Units);
     }
 
     [Fact]

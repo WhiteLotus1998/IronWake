@@ -110,4 +110,13 @@ public sealed record WeaponStage(string Id, int Mt, int Hit, int Crit, int Wt, i
 /// (<paramref name="FromMap"/>), the id of the first stage, whose numbers are the weapon's own
 /// (<paramref name="First"/>), and the stages it turns to, in order, their thresholds rising.
 /// </summary>
-public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponStage> Turns);
+public sealed record HeirloomLadder(int FromMap, string First, ValueList<WeaponStage> Turns)
+{
+    /// <summary>
+    /// The card's line while the last stage is held (issue 635, round 266), or null for a ladder
+    /// with no gate. With it, the last stage turns only on a stack whose gate a won quest has
+    /// opened (<see cref="ItemStack.GateOpen"/>, <see cref="CampaignQuest.Wakes"/>); the counter
+    /// runs on regardless.
+    /// </summary>
+    public string? Held { get; init; }
+}

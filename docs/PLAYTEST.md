@@ -2154,3 +2154,16 @@ Notes: Warm: I built the board, and I knew the quiet stops. Transcript `docs/tra
 - Not tense: turns 1 to 3.
 
 — Code
+
+## 2026-10-03 — The Old Watch, Teodor's quest 1 (#635 slice 8), warm — Code
+Seed: 961 (`campaign --load watch --saves docs/transcripts/2026-10-03-the_old_watch-961.saves`, the cast at level 4 at the camp after map 5, Pell 1 marked won so Teodor 1 has a seat, the Family Lance at sound on count 8; ally Wren)   Result: lost, turn 9 passed with the Sworn Captain at 2 of 27; both Recalls spent; Wren fell for good on the last enemy phase
+Tension: 8/10   Choice: 7/10   Surprise: 7/10
+Best turn: Turn 4's enemy phase. Teodor held the bridgehead at 7,4 on 21 HP, and `threat` priced it at 11: only one enemy can stand on 7,3, and the Sworn Captain wanted it. Brigand 2 took the tile first, hit for 9, and died on Teodor's counter. That freed 7,3, and the captain walked out of his cairn into it and hit for 11. 21 to 1 on a board that had promised 11. `threat` says it does not count a foe freed by a kill mid-phase, and the kill was mine.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_old_watch-961.txt`.
+- **The lance did what round 266 wanted.** On turn 1 the Family Lance at sound (9/75) beat the iron (6/70) on the forecast, so I swung it. Long Thrust took it to count 10 on turn 3. From then on the card read `Family Lance, sound: ... The rust holds; it waits on Teodor.` I read that line as the reason to win this map, not as a bug.
+- **The boss is a sally, not a siege.** The guard Sworn Captain leaves his fort for 7,3 against a unit he judges weak (Wren at 17, Teodor at 11) and goes home to heal when nobody is, 5 a phase. He refused Teodor at 21. So the whole map is choosing the bait: who stands on 7,4, and at what HP. Recall 2 went on turn 7, where I had pulled both units back and he walked home.
+- **I lost it by 2 HP.** On turn 9 Wren's Heavy Cut from 7,1 landed twice (52 percent) and the captain was at 2. Teodor's Long Thrust from 8,1 missed at 67, in either order, because a recalled attack rolls the same. I attacked with Wren and could not move her, so the end-of-turn line printed `Lethal if all land: Wren`, and the boss's 73 percent took her.
+- **Too tight or right?** Turns 1 to 5 are the best opening of the side maps so far. The bridge, two flankers round the water, and the rear pair arriving on the south bank give a three-way squeeze without a wall of text. Turns 6 to 9 are a siege against a 5-a-phase heal, behind an archer, on a fort, with one melee tile. At level 4 I think it is a turn short or a heal too strong. The lever would be limit 10, or the archer moved off 7,1 so two tiles reach the fort. A cold chair decides.
+- Not tense: turn 8, killing the archer. 86 percent twice with no counter is not a decision.
+
+— Code

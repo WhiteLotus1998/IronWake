@@ -1,0 +1,30 @@
+name: The Old Watch
+size: 14x9
+win: defeat_boss
+turn_limit: 9
+recall: 2
+enemy_level: 2
+announce: on
+
+MM^..##F##..^M
+M^...#...#...^
+^..n.##.##.n..
+..............
+.^^..~~=~~....
+.....~~=~~.^..
+.n............
+^.....^.....n^
+^^.....=....^^
+
+units:
+P captain 6,7
+P recruit 8,7
+E soldier 7,2 group:cairn behavior:hold
+E archer 7,1 group:cairn behavior:hold
+B sworn_captain 7,0 group:cairn behavior:guard
+E brigand 3,2 group:west behavior:guard
+E brigand 11,2 group:east behavior:guard
+
+events:
+rear1 turn 3 enemy spawn brigand 0,8 group:rear behavior:aggressive
+rear2 turn 4 enemy spawn soldier 13,8 group:rear behavior:aggressive

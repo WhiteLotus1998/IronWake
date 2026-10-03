@@ -1104,6 +1104,11 @@ public static class ProtocolJson
                 w.WriteNumber("stage", stack.Stage);
             }
 
+            if (stack.GateOpen)
+            {
+                w.WriteBoolean("gateOpen", true);
+            }
+
             if (stack.Refines != 0)
             {
                 w.WriteNumber("refines", stack.Refines);
@@ -1247,7 +1252,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, GateOpen = s.TryGetProperty("gateOpen", out _) && RequiredBool(s, "gateOpen"), Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))

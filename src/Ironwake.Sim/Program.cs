@@ -119,7 +119,7 @@ public static class Program
                 }
             }
 
-            return HeirloomTable(args[1], seeds);
+            return HeirloomTable(args[1], seeds, args.Contains("--quest"));
         }
 
         if (args.Length > 0 && args[0] == "--kinsbane")
@@ -271,7 +271,7 @@ public static class Program
         return 2;
     }
 
-    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] | --kinsbane [--seeds N] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
+    public const string Usage = "usage: ironwake-sim --smoke | --ceiling | --full <map|file> [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] [--lead <id>]... [--origin <id>] | --full --all [--seeds N] [--scheme one|two] [--taxfloor F] [--difficulty D] | --trace <map> <seed> [--scheme one|two] | --campaign-script <seed> [--to <seed>] [--write <path>] [--difficulty D] [--permadeath on|off] [--variant N] | --hitband <map>|--all [--seeds N] | --keep [<edit> <x,y>]... [--seeds N] [--write <path>] | --finale <map|file> [--seeds N] [--level N] [--scheme one|two] | --heirloom <item> [--seeds N] [--quest] | --kinsbane [--seeds N] | --levels [--seeds N] | --supports [--seeds N] [--pair <a> <b>] | --curve [--seeds N] [--map <id>] [--carry <unit> <weapon>] [--items] | --ladder [--seeds N] [--map <id>]";
 
     private const int HitBandSeeds = 50;
 
@@ -335,7 +335,7 @@ public static class Program
     /// The heirloom's timing table (issue 646, <see cref="HeirloomRun"/>): the campaign map each
     /// stage turns on under the heuristic player, and the combats fought with it by each map's end.
     /// </summary>
-    public static int HeirloomTable(string itemId, int seeds)
+    public static int HeirloomTable(string itemId, int seeds, bool quest = false)
     {
         var contentDir = FindContent();
         if (contentDir is null)
@@ -351,7 +351,7 @@ public static class Program
             return 2;
         }
 
-        foreach (var line in HeirloomRun.Lines(content, itemId, HeirloomRun.Measure(contentDir, content, itemId, seeds)))
+        foreach (var line in HeirloomRun.Lines(content, itemId, HeirloomRun.Measure(contentDir, content, itemId, seeds, quest)))
         {
             Console.WriteLine(line);
         }

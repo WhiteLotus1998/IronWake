@@ -13,6 +13,9 @@ namespace Ironwake.Core;
 /// one stage a combat. Counts reached on an earlier map turn it on the first combat that may.</item>
 /// <item>The numbers: its current stage's Mt, hit, crit and weight, always printed truthfully
 /// (pillar 2); only its future is hidden.</item>
+/// <item>The gate (issue 635, round 266): a ladder with <see cref="HeirloomLadder.Held"/> holds its
+/// last stage until a won quest opens the stack's gate (<see cref="ItemStack.GateOpen"/>); the
+/// counter runs on, and the card says the stage is held once the count has passed it.</item>
 /// <item>The uses: an heirloom never spends below 1, so it never breaks.</item>
 /// </list>
 /// Everything is board state, so Recall restores the counter and the stage with the board.
@@ -53,6 +56,27 @@ public static class Heirloom
     /// <summary>Whether a stage may turn in <paramref name="state"/>: outside the campaign, or on or after the ladder's first map.</summary>
     public static bool Open(HeirloomLadder ladder, BattleState state) => state.CampaignMap is not { } map || map >= ladder.FromMap;
 
+    /// <summary>Whether <paramref name="stage"/> of <paramref name="ladder"/> is held on <paramref name="stack"/>: the last stage of a gated ladder whose gate no quest has opened.</summary>
+    public static bool Held(HeirloomLadder ladder, ItemStack stack, int stage) =>
+        ladder.Held is not null && !stack.GateOpen && stage >= ladder.Turns.Count;
+
+    /// <summary>
+    /// The stack once a won quest opens its gate (issue 635, round 266): the gate is open, and the
+    /// last stage turns at once when the counter has already reached it and the stage before it
+    /// has turned. Any other weapon is unchanged.
+    /// </summary>
+    public static ItemStack OpenGate(Weapon weapon, ItemStack stack)
+    {
+        if (weapon.Heirloom is not { } ladder)
+        {
+            return stack;
+        }
+
+        var opened = stack with { GateOpen = true };
+        var last = ladder.Turns.Count;
+        return opened.Stage == last - 1 && opened.Combats >= ladder.Turns[last - 1].At ? opened with { Stage = last } : opened;
+    }
+
     /// <summary>
     /// After a combat in <paramref name="state"/> in which <paramref name="unit"/> (as the combat
     /// left it) struck with an heirloom equipped: the counter counts it, and the next stage turns
@@ -74,7 +98,7 @@ public static class Heirloom
         }
 
         stack = stack with { Combats = stack.Combats + 1 };
-        if (stack.Stage < ladder.Turns.Count && stack.Combats >= ladder.Turns[stack.Stage].At && Open(ladder, state))
+        if (stack.Stage < ladder.Turns.Count && stack.Combats >= ladder.Turns[stack.Stage].At && Open(ladder, state) && !Held(ladder, stack, stack.Stage + 1))
         {
             stack = stack with { Stage = stack.Stage + 1 };
             events.Add(new HeirloomTurned(unit.Id, stack.ItemId, stack.Stage, ladder.Turns[stack.Stage - 1].Id));
@@ -93,7 +117,10 @@ public static class Heirloom
         {
             if (content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.Heirloom is not null)
             {
-                return $"{weapon.Name}, {StageId(weapon, stack)}: {Shape(weapon, stack).Description}";
+                var line = $"{weapon.Name}, {StageId(weapon, stack)}: {Shape(weapon, stack).Description}";
+                return weapon.Heirloom is { Held: { } held } ladder && Held(ladder, stack, stack.Stage + 1) && stack.Stage == ladder.Turns.Count - 1 && stack.Combats >= ladder.Turns[^1].At
+                    ? $"{line} {held}"
+                    : line;
             }
         }
 

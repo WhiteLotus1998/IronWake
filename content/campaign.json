@@ -92,6 +92,15 @@
       "after": [
         "(Placeholder until the writing pass: what Pell read at the desk about what the armistice seals, and that she means to tell the company before anyone else can.)",
         "(Pell carries Pell's Commonplace now: Cinder's numbers, bound to her, and it never catches. Its art, Read Ahead, reaches one tile further for 2 less Power.)"
+        ] },
+    { "id": "teodor_1", "member": "teodor", "part": 1, "map": "the_old_watch", "opensAfter": "harrow_weir", "wakes": "family_lance",
+      "before": [
+        "Teodor asked for a day and one pair of hands. His grandfather stood watch on a hill above Aldmere for thirty years, and is buried under it. Sworn men have been digging there since the spring.",
+        "(Placeholder card until the writing pass. Defeat their captain on the cairn's fort at 7,0 by the end of turn 9. The map is lost if Teodor falls. The cairn's door at 7,2 is one tile wide. More come up the hill behind you from turn 3, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: what the sworn were digging for, and what the lance does in his hands at the cairn.)",
+        "(The Family Lance's last stage waited on this. It wakes once Teodor has fought enough with it, now or later.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
