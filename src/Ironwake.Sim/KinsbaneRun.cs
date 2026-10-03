@@ -152,7 +152,7 @@ public static class KinsbaneRun
         return (state, seen, swings);
     }
 
-    /// <summary>The printed table: per map from her first, the feed count by its end (p25, p50, p75), the drains and starved forms; per tooth, the median map it grew on and how many runs grew it.</summary>
+    /// <summary>The printed table: per map from her first, the feed count by its end (p25, p50, p75), the drains and starved forms, and on the scythe arm the runs woken by its end (round 279: woken by the keep's first phase is woken by the field's end); per tooth, the median map it grew on and how many runs grew it.</summary>
     public static IEnumerable<string> Lines(IReadOnlyList<Run> runs, bool axe = false)
     {
         yield return $"kinsbane: {runs.Count} runs, the heuristic player through the campaign, {Owner} picked at the branch and fielded on every map she can, " + (axe ? "the control arm: her iron axe in front, no scythe" : "the scythe in front of her pack, her iron axe behind it, as the campaign issues it");
@@ -160,7 +160,7 @@ public static class KinsbaneRun
         foreach (var number in runs.SelectMany(r => r.Maps.Select(m => m.Map)).Distinct().Order())
         {
             var reached = runs.SelectMany(r => r.Maps.Where(m => m.Map == number)).ToList();
-            yield return $"  map {number} (her map {number - first + 1}): won {reached.Count}, deployed in {reached.Count(m => m.Deployed)}, tries p50 {Percentile(reached.Select(m => m.Attempts), 0.5)}, fed by its end p25 {Percentile(reached.Select(m => m.Fed), 0.25)} p50 {Percentile(reached.Select(m => m.Fed), 0.5)} p75 {Percentile(reached.Select(m => m.Fed), 0.75)} (teeth p50 {Kinsbane.Teeth(Percentile(reached.Select(m => m.Fed), 0.5))}/{Kinsbane.MtCap}), drains p50 {Percentile(reached.Select(m => m.Drains), 0.5)}, starved in {reached.Count(m => m.Starved > 0)}, her attacks {reached.Sum(m => m.ScytheAttacks + m.OtherAttacks)} (scythe {reached.Sum(m => m.ScytheAttacks)})";
+            yield return $"  map {number} (her map {number - first + 1}): won {reached.Count}, deployed in {reached.Count(m => m.Deployed)}, tries p50 {Percentile(reached.Select(m => m.Attempts), 0.5)}, fed by its end p25 {Percentile(reached.Select(m => m.Fed), 0.25)} p50 {Percentile(reached.Select(m => m.Fed), 0.5)} p75 {Percentile(reached.Select(m => m.Fed), 0.75)} (teeth p50 {Kinsbane.Teeth(Percentile(reached.Select(m => m.Fed), 0.5))}/{Kinsbane.MtCap}), drains p50 {Percentile(reached.Select(m => m.Drains), 0.5)}, starved in {reached.Count(m => m.Starved > 0)}, her attacks {reached.Sum(m => m.ScytheAttacks + m.OtherAttacks)} (scythe {reached.Sum(m => m.ScytheAttacks)})" + (axe ? "" : $", woken by its end in {reached.Count(m => Kinsbane.Woken(m.Fed))}");
         }
 
         foreach (var lostOn in runs.Where(r => r.LostOn is not null).GroupBy(r => r.LostOn!.Value).OrderBy(g => g.Key))

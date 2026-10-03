@@ -103,7 +103,7 @@ public class IssuedWeaponTests
         var scythe = opening.Find("keziah")!.Unit.Inventory.Items[0];
         Assert.Equal(Kinsbane.ItemId, scythe.ItemId);
         Assert.Equal(Kinsbane.FedFor(4), scythe.Fed);
-        Assert.Equal(9, scythe.Fed);
+        Assert.Equal(8, scythe.Fed);
         Assert.Equal(4, Kinsbane.Teeth(scythe.Fed));
         Assert.False(Kinsbane.Woken(scythe.Fed));
     }

@@ -39,11 +39,11 @@ public static class Kinsbane
     public const int EasedHeal = 5;
 
     /// <summary>
-    /// The feed count at which each tooth grows, one Mt step each (round 263, provisional until the
-    /// iron-axe control reads): steps of 2, 2, 2, 3 and 4 kills, front-loaded so a claimant who joins
-    /// at the raid can wake it by the field. The last entry is the waking.
+    /// The feed count at which each tooth grows, one Mt step each (round 263's clause for a field
+    /// median under 13, taken in round 279; issue 856): steps of 2, 2, 1, 3 and 4 kills, front-loaded so
+    /// a claimant who joins at the raid can wake it by the field or the keep. The last entry is the waking.
     /// </summary>
-    public static readonly ImmutableArray<int> ToothAt = ImmutableArray.Create(2, 4, 6, 9, 13);
+    public static readonly ImmutableArray<int> ToothAt = ImmutableArray.Create(2, 4, 5, 8, 12);
 
     /// <summary>The most Mt it grows: one per tooth.</summary>
     public static int MtCap => ToothAt.Length;
