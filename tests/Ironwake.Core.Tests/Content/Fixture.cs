@@ -342,6 +342,7 @@ internal static class Fixture
         {
             // Issue 633: the same builds had no branch; Rook joined at the raid's camp and Keziah was on the roster from map 1.
             map.Remove("branch");
+            map.Remove("pitch");
             map["joins"] = new System.Text.Json.Nodes.JsonArray("rook");
         }
 

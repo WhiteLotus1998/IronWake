@@ -815,8 +815,8 @@ public sealed class CampaignSession
 
     /// <summary>
     /// The branch as the Roster panel prints it at its camp (issue 633, DESIGN section 14): before the
-    /// pick, the two claimants with their classes, the command, and the bed rule the return is set up
-    /// under; after it, who took the seat and who rode home. Empty at every other camp.
+    /// pick, the two claimants with their classes, the command, each claimant's own line (issue 804,
+    /// the choice screen) in the same shape, and the bed rule the return is set up under; after it, who took the seat and who rode home. Empty at every other camp.
     /// </summary>
     public static IReadOnlyList<string> BranchLines(CampaignRecord record, GameContent content)
     {
@@ -836,11 +836,11 @@ public sealed class CampaignSession
             return new[] { $"The seat: {content.Unit(pick).Name}. {content.Unit(record.Passed(content)!).Name} rode home." };
         }
 
-        return new[]
-        {
-            $"The last seat: {Claimant(branch[0])} or {Claimant(branch[1])} (pick <unit>). The one passed on rides home.",
-            "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
-        };
+        var pitch = record.NextMap(content).Pitch;
+        return new[] { $"The last seat: {Claimant(branch[0])} or {Claimant(branch[1])} (pick <unit>). The one passed on rides home." }
+            .Concat(pitch.Select((text, i) => $"{content.Unit(branch[i]).Name}: \"{text}\""))
+            .Append("They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.")
+            .ToList();
     }
 
     /// <summary>

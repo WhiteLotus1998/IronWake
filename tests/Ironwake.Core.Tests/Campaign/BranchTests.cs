@@ -176,6 +176,8 @@ public class BranchTests
             new[]
             {
                 "The last seat: Keziah (Reaver) or Rook (Skyrider) (pick <unit>). The one passed on rides home.",
+                "Keziah: \"Everyone here is offering you a promise. I'm offering you something hungry.\"",
+                "Rook: \"She's the last one. Pick me and you're the second person alive who knows her name.\"",
                 "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
             },
             CampaignSession.BranchLines(AtTheRaid(), Content));
@@ -219,6 +221,42 @@ public class BranchTests
         var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(With(maps)));
 
         Assert.Equal((ContentFiles.CampaignName, entry, "branch"), (e.File, e.Entry, e.Field));
+        Assert.Contains(message, e.Message);
+    }
+
+    [Fact]
+    public void EachClaimantsPitchPrintsInBranchOrderAndNotAfterThePick()
+    {
+        var content = ContentLoader.Parse(With("""{ "map": "one", "reward": 0, "stock": [], "branch": ["rook", "keziah"], "pitch": { "keziah": "Something hungry.", "rook": "The last one." } }"""));
+        var record = CampaignRecord.StartAt(content, 0, "one");
+
+        var lines = CampaignSession.BranchLines(record, content);
+
+        Assert.Equal(new[] { "Rook: \"The last one.\"", "Keziah: \"Something hungry.\"" }, lines.Skip(1).Take(2));
+        Assert.DoesNotContain(CampaignSession.BranchLines(record.PickClaimant("rook", content).Record, content), l => l.Contains("The last one.", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void APitchRoundTripsThroughTheSerializer()
+    {
+        var content = ContentLoader.Parse(With("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "The last one.", "keziah": "Something hungry." } }"""));
+
+        Assert.Equal(ValueList<string>.Of("Something hungry.", "The last one."), ContentLoader.Parse(ContentSerializer.Write(content)).Campaign.Maps[0].Pitch);
+    }
+
+    [Theory]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "pitch": { "rook": "Hi." } }""", "pitch", "needs a branch")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "Hi.", "pell": "Hi." } }""", "pitch", "'pell' is not one of the branch's claimants")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "Hi." } }""", "pitch", "'keziah' has none")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "Hi.", "keziah": " Hi." } }""", "pitch.keziah", "no leading or trailing space")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "Hi.", "keziah": 3 } }""", "pitch.keziah", "non-blank text")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "Hi.\u00e9", "keziah": "Hi." } }""", "pitch.rook", "printable ASCII")]
+    [InlineData("""{ "map": "one", "reward": 0, "stock": [], "branch": ["keziah", "rook"], "pitch": { "rook": "a a a a a a a a a a a a a a a a a a a a a a a a a a", "keziah": "Hi." } }""", "pitch.rook", "at most 25 words, not 26")]
+    public void ABadPitchIsRefusedNamingTheMapAndTheField(string maps, string field, string message)
+    {
+        var e = Assert.Throws<ContentException>(() => ContentLoader.Parse(With(maps)));
+
+        Assert.Equal((ContentFiles.CampaignName, "one", field), (e.File, e.Entry, e.Field));
         Assert.Contains(message, e.Message);
     }
 }

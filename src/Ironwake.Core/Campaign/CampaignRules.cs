@@ -43,6 +43,16 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     /// </summary>
     public ValueList<string> Branch { get; init; } = ValueList<string>.Empty;
 
+    /// <summary>The most words a claimant's <see cref="Pitch"/> line holds: WRITING.md's spoken line.</summary>
+    public const int PitchWordsMax = 25;
+
+    /// <summary>
+    /// Each claimant's own line at the branch's camp (issue 804, item 5: the choice screen), in
+    /// <see cref="Branch"/> order, one per claimant: what they offer, printed beside their name until
+    /// the pick is made. Empty when the map has no branch or the branch carries no lines.
+    /// </summary>
+    public ValueList<string> Pitch { get; init; } = ValueList<string>.Empty;
+
     /// <summary>
     /// The side characters who may be met at this map's camp (issue 633 slice 3, DESIGN section 14),
     /// as cast ids, one or two: each is off the roster until this map, the camp's <c>meet</c> takes at
