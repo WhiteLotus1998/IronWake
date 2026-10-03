@@ -78,10 +78,10 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 - **The waking (rounds 250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike, on the forecast. Kept on a journal deciding a turn. `--kinsbane`: first tooth by map 3, waking by map 8; a miss moves kills per tooth, never the gain. A passed Keziah shows four teeth.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). The barracks (#690) opens after the raid: hires weaker, no story. One secret hire (#691). The finale (#692): fronts, waves, an announced assault, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 points either side of `normal`; permadeath off returns the fallen Wounded (2); the captain's or a protect death still loses.
-- **Supports** (#77; 0183, 0184): 3 to 4 partners plus the captain, each pair a kind; Pell and Maud the same-sex romance; the claimants open to any captain, Keziah's captain pair an argument (#809); marriage an S bond, both alive (#634). Tiers C 16, B 40, A 72 (0184); read beside a partner (best, not sum), accrued on every campaign map, on the record (0185). The Sim's ceiling (0187): no pair at A; leans B 28, A 48, a captain pair at both rates.
-- **The forge** (#647) is a 13.20 room; Refine +2 common, +3 rare; rare material exactly enough for the captain's and the five's signatures, by validator; the leave warning under 5 uses.
-- **Chests** (#649, #679; built): guarded or a puzzle; opening costs the action; the overflow to the wagon; an enemy on the tile shuts it; a vault meant to be held wants a `B`-line boss, not a Guard. One early switch only. **Item descriptions** by validator (#650).
-- **Names:** Promotion and Refine. No Ascension (round 193).
+- **Supports** (#77; 0183 to 0187; rounds 258, 259): 3 to 4 partners plus the captain, each pair a kind (#809); marriage an S bond, both alive (#634). Read beside a partner (best, not sum), accrued on every campaign map, on the record (0185). Agreed, to build: tiers C 16, B 28, A 48; a captain pair accrues at the higher of the two rates (4 today), no captain tier table. Re-read on after-Brackwater p50: committed captain pair within a phase of B, floor captain pairs C not B, none at A; a miss moves the lean. A must be reachable by a committed human (chair's campaign; else 44).
+- **The forge** (#647): a 13.20 room; Refine +2 common, +3 rare; rare material exactly enough for the signatures.
+- **Chests** (#649, #679; built): guarded or a puzzle; opening costs the action; overflow to the wagon; an enemy on the tile shuts it. One early switch only.
+- **Names:** Promotion, Refine; no Ascension.
 
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique classes: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,8 (0161, 0178); a tuned map under 60 lowers the point, never the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
@@ -95,13 +95,13 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 - Order: `docs/WRITING.md` (positive rules, a tic list), a voice sheet per character (Hask, Marrit, Bet, the god, the Kin too), beat sheets argued here, then scenes one at a time. Scene and support text waits for them; mechanics go ahead.
 - Big scenes (the camp's answers to Hask too): three blind drafts, a re-name-tested stitch. Passes: cut 30% (cards, barks by budget), name test, exposition, tics, average test; one scene or pair a PR; the writer never grades their own; the branch checker (#813) before #634 and #790; done when read in the client.
-- 254, 255: scene text in plain-text script files, one per scene, conditions naming record facts; ids in content only, stable, retired never reused; a `human` lock per line that our passes skip (report, never rewrite); per-line provenance, no promise on Steam's label; `--story-check` in #813 checks locks too. Named in WRITING.md at the #811 cold read.
+- 254 to 257: scene text in plain-text script files, one per scene, conditions naming record facts; ids in content only, stable, retired never reused. The `human` lock is per line, `human:<hash>` (4 hex over the trimmed text); our passes skip it (report, never rewrite); `--story-check` (#813) verifies stamps, `--story-stamp` is Lotus's and never ours, the Critic flags a stamp in a partner's PR. Per-line provenance; no promise on Steam's label. Named in WRITING.md at the #811 cold read.
 - 252, 253: WRITING.md is #811 (Chat drafts, Code cold-reads); STORY quotes are placeholders but Hask's last line; budgets 25 a line, 12 a bark, 60 a card, 20 lines a support; one named feeling per character, declared in its beat sheet. Voice sheets: Chat Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
 - **Lotus (#731)** plays when both sign a `for-lotus` issue naming the Windows artifact, how to start it, and the note.
-- **The bar:** a campaign run in the exported client from the title; every mechanic he named plus Commander's Word by mouse and keys, held to the console by a parity script; no known stop-playing bug (a hand run of the exe to Brackwater); a "what to try" note with "known rough". No Fun Gate.
+- **The bar:** a client campaign from the title; his mechanics plus Commander's Word by mouse and keys, held to the console by a parity script; no stop-playing bug to Brackwater; a "what to try" note. No Fun Gate.
 - **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after the desktop session's hand run of the exe.
 
 ## Open, the Table's
@@ -121,4 +121,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #780.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237 on (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-255 writing, art).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237 on (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports).
