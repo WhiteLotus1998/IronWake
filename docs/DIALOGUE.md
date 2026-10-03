@@ -73,26 +73,26 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Magic and faith** (round 201): Reason shows as Lore (id kept). Faith heals and may strike (#113). One goddess, three faiths; she speaks once, to Maud in quest 2, after map 5.
 - **The storyline** is `docs/STORY.md` draft 6 (244); open (#656): build to change it. Hask is the door, the Kin in his pommel shard, nudging, never erasing; his last line is Lotus's. Good: the reseal. Bad: a lost map. Secret (#790): Under the Hill (Kinsbane woken, both claimants, Marrit held, Pell's quest 2); Reseal or Fight (#806); Fight won kills the god.
 - **Rook's drake** (244): the last cold drake, church property, an animal; half-grown, Grown carries an ally, Unbroken breathes rime once a map (#805); rime ice wears to Water. **A Keziah run's flier:** Edda Vane, a Skyrider hire (#801); no flying side character.
-- **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake (`teeth n/5`); the hound's shadow in the kill clip, starved to whole; three voice registers, three lines a map at most; Harrow Weir's choice screen equal, both at their peak. Lands with #805.
-- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. Bars (262, 263): first tooth on her first map, waking by the field on the median; teeth 2,2,2,3,4 (built, 0207). The control read: axe 49/82 at Sallow, scythe 26/82; Drain is open (275).
+- **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake (`teeth n/5`); the hound in the kill clip; three voice registers, three lines a map; the choice screen equal; with #805.
+- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. Bars (262, 263): first tooth on her first map, waking by the field on the median; teeth 2,2,2,3,4 (0207). **The control (275, 276):** the axe wins Sallow 49/82 to 26; nowhere else. Lever 1 (#851), no number moved: scythe beside her cast axe, bound on issue; the drain runs carried, so each combat is feed or survive; the Sim swings it only to kill. Bar: Sallow 40/82, the field woken at p50, the keep no worse. Else, one a read: drain only with a foe in reach, Drain 3, starved Mt -3; heal 10.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
-- **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 points off `normal`; permadeath off returns the fallen Wounded (2); a captain or protect death still loses.
+- **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 off `normal`; permadeath off returns the fallen Wounded (2); a captain or protect death loses.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage an S bond (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4). After-Brackwater p50: committed captain pair near B, floor pairs C, none at A. A reachable by a committed human (else 44).
 - **The forge** (#647): Refine +2 common, +3 rare; rare material exactly enough for the signatures. Names: Promotion, Refine.
 - **Chests** (#649, #679; built): guarded or a puzzle; opening costs the action; overflow to the wagon; an enemy on the tile shuts it. One early switch only.
 
-- **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique classes: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
+- **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, never the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (round 229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed (the Sim never swung a kit weapon). Numbers before verbs.
-- **The Sim's player picks a weapon per attack** (#756, 0171): Brackwater holds at 65 (0173).
+- **The Sim picks a weapon per attack** (#756, 0171; Brackwater 65, 0173).
 - **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the ladder's five maps class means within 10 at 200 seeds; 5 at 400 before tuned. A board-dependent pick is choice.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
-- **Ignition is a Sim blind spot** (232): no `wildfire: on` map yet.
+- **Ignition is a Sim blind spot** (232).
 
 ## How we write (Lotus, relayed on #780, 2026-10-02)
 
 - Order: `docs/WRITING.md` (positive rules, a tic list), a voice sheet per character (Hask, Marrit, Bet, the god, the Kin too), beat sheets argued here, then scenes one at a time. Scene and support text waits for them; mechanics go ahead.
-- Big scenes (Hask's camp answers too): three blind drafts, a re-name-tested stitch. Passes: cut 30%, name test, exposition, tics, average test; one scene a PR; the writer never grades their own; #813 before #634 and #790; done when read in the client.
+- Big scenes (Hask's camp answers): three blind drafts, a re-name-tested stitch. Passes: cut 30%, name test, exposition, tics, average test; one scene a PR; no writer grades their own; #813 before #634, #790; done when read in the client.
 - 254 to 257: scene text in plain-text script files, one per scene, conditions naming record facts; ids stable, never reused. The `human` lock is per line, `human:<hash>` (4 hex, trimmed text); our passes skip it; `--story-check` (#813) verifies, `--story-stamp` is Lotus's, never ours; the Critic flags a stamp in a partner's PR. No promise on Steam's label.
 - 252, 253: WRITING.md is #811 (Chat drafts, Code cold-reads); STORY quotes are placeholders but Hask's last line; budgets 25 a line, 12 a bark, 60 a card, 20 lines a support; one named feeling per character, declared in its beat sheet. Voice sheets: Chat Hask, Marrit, the Kin, Kinsbane, Keziah, Rook, Maud, Bet; Code the rest; cold-read across.
 
@@ -119,4 +119,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263 Kinsbane bars, the ledger; 265 to 271 Teodor, `talk` kept).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263, 275, 276 Kinsbane; 265 to 274 Teodor, `talk`, the field).
