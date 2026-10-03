@@ -25,6 +25,7 @@
         { "id": "woken", "at": 10, "mt": 10, "hit": 80, "crit": 0, "wt": 10, "description": "Placeholder. It sits in his hands as if it had waited for them." } ] } },
 
     { "id": "iron_bow", "name": "Iron Bow", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "price": 400, "critAgainst": ["flying"], "critBonus": 20, "description": "Yew and gut, nothing fancy. Brings down birds and the people on them." },
+    { "id": "ottilie_tally", "name": "Ottilie's Tally", "type": "bow", "mt": 5, "hit": 70, "crit": 0, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 40, "rank": "E", "boundTo": "ottilie", "critAgainst": ["flying"], "critBonus": 20, "description": "Placeholder. Iron limbs notched with a tally; she knows every mark." },
     { "id": "steel_bow", "name": "Steel Bow", "type": "bow", "mt": 8, "hit": 75, "crit": 5, "wt": 9, "minRange": 2, "maxRange": 2, "durability": 30, "rank": "D", "price": 900, "critAgainst": ["flying"], "critBonus": 20, "description": "Steel-backed and stiff to draw. Rewards the archer who keeps at it." },
     { "id": "obsidian_bow", "name": "Obsidian Bow", "type": "bow", "mt": 10, "hit": 75, "crit": 25, "wt": 5, "minRange": 2, "maxRange": 2, "durability": 8, "rank": "B", "price": 1800, "critAgainst": ["flying"], "critBonus": 20, "glass": true, "description": "Glass-tipped shafts and a short quiver. Count them before you loose." },
 

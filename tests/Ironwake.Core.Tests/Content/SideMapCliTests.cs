@@ -211,6 +211,36 @@ public class SideMapCliTests
         }
     }
 
+    /// <summary>
+    /// Code's journaled play of Ottilie's quest 2 (side-map seed 91), from a save at the camp
+    /// after map 8 with the cast at level 7: the bridge is taken on turn 2 while the dusk still
+    /// lets Ottilie shoot at range, the pursuers are killed with Wren beside them as the spotter,
+    /// a turn-5 line that cannot reach the exits by turn 8 is recalled, and the pair leaves on
+    /// turn 8, Wren first.
+    /// </summary>
+    [Fact]
+    public void TheJournaledLongCountPlayEscapesAndPaysTheTally()
+    {
+        var script = Transcript("2026-10-03-the_long_count-91.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-longcount-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Long Count, seed 91\n", output);
+            Assert.Contains("Battle won: escape", output);
+            Assert.Contains("> leave\nOttilie wins ottilie_2; Ottilie receives Ottilie's Tally; the stores take 3 frozen iron; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;

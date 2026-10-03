@@ -109,6 +109,15 @@
       ],
       "after": [
         "(Placeholder until the writing pass: the ledger in the strongroom, and the seal at the foot of the page.)"
+      ] },
+    { "id": "ottilie_2", "member": "ottilie", "part": 2, "map": "the_long_count", "pays": "ottilie_tally", "rare": 3,
+      "before": [
+        "Ottilie asked for a night and one pair of hands. The seal on the counting house's page was Hask's, and his own books sit in a Sallow bookroom two days east. Nobody in the regions will believe a copy.",
+        "(Placeholder card until the writing pass. Escape: Ottilie leaves by the east road, 14,3 to 14,5, by the end of turn 8; whoever is still on the board then is lost, so the ally leaves first. The map is lost if Ottilie falls. Dusk: sight is 4 on turn 1 and one less each turn, never under 1; nobody strikes what their side cannot see. Riders come down the road behind you from turn 2, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the books on a table in a Sallow square, and the people reading their own villages' names in Hask's hand.)",
+        "(Ottilie carries Ottilie's Tally now: the Iron Bow's numbers, bound to her. Its art, Paid in Full, looses one arrow at +6 Power and -25 Acc that never doubles.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

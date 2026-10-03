@@ -93,6 +93,7 @@
     { "id": "overcast", "name": "Overcast", "text": "+5 Power, +4 Wt. More fire than the caster can carry.",
       "effect": { "kind": "art", "weapon": "reason", "rank": "E", "cost": 2, "mt": 5, "wt": 4 } },
     { "id": "read_ahead", "name": "Read Ahead", "text": "+1 range, -2 Power. She has read how far it goes.", "effect": { "kind": "art", "weapon": "reason", "rank": "E", "cost": 2, "mt": -2, "range": 1, "item": "pell_commonplace" } },
+    { "id": "paid_in_full", "name": "Paid in Full", "text": "+6 Power, -25 Acc. Strikes once, never doubles. One arrow, billed at five.", "effect": { "kind": "art", "weapon": "bow", "rank": "E", "cost": 4, "mt": 6, "hit": -25, "single": true, "item": "ottilie_tally" } },
     { "id": "full_measure", "name": "Full Measure", "text": "+30 Acc, +8 Power, +20 Crit. Strikes once, never doubles. Once a map, and it costs the next phase: no move, no act.",
       "effect": { "kind": "art", "weapon": "sword", "rank": "E", "cost": 2, "mt": 8, "hit": 30, "crit": 20, "perMap": 1, "costsNextPhase": true, "single": true } },
     { "id": "unasked", "name": "Unasked", "text": "Double heal on an ally who has not moved or acted. Their phase ends where they stand.",

@@ -1,0 +1,32 @@
+name: The Long Count
+size: 15x9
+win: escape
+turn_limit: 8
+recall: 2
+enemy_level: 5
+exit: 14,3 14,4 14,5
+announce: on
+dusk: 4
+
+####.^^..~^^...
+#..#.^...=..n..
+#..#.....~.....
+#.F#....^~.F...
+#..============
+#..#.....~.....
+#..#..^..~..^..
+####.....~.....
+.....^...~..^^.
+
+units:
+P captain 1,4
+P recruit 2,4
+E soldier 10,4 group:bridge behavior:guard
+E archer 11,3 group:bridge behavior:hold
+E hexer 12,1 group:gate behavior:guard
+E brigand 13,6 group:gate behavior:guard
+
+events:
+road1 turn 2 enemy spawn rider 0,8 group:road behavior:aggressive
+road2 turn 3 enemy spawn brigand 4,0 group:road behavior:aggressive
+road3 turn 4 enemy spawn hexer 0,8 group:road behavior:aggressive
