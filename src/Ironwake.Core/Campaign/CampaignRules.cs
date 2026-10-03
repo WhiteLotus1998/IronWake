@@ -44,6 +44,14 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     public ValueList<string> Branch { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// Where the claimant passed on at the branch comes back as a foe on this map (issue 633, DESIGN
+    /// section 14), or null on every other map. Read only once the pick is made; the claimant fights
+    /// with their own card at the pick's level (<see cref="CampaignRecord.Begin"/>). At most one map
+    /// carries it, and only after the map with the branch.
+    /// </summary>
+    public CampaignReturn? Return { get; init; }
+
+    /// <summary>
     /// The enemy level this map is fought at in the campaign (issue 704, the curve of rounds 223 to 226),
     /// in place of its file's <c>enemy_level</c>, or null to keep the file's. The standalone map is never
     /// changed by it; a difficulty's offset is added on top, as on any map.
@@ -218,3 +226,10 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     public static int? RepairPricePerUse(Weapon weapon) =>
         weapon.IsMagic || weapon.Glass || weapon.Price is not { } price ? null : Math.Max(1, price / weapon.Durability);
 }
+
+/// <summary>
+/// The tile, group and behaviour the passed claimant is placed under on the map that brings them back
+/// (issue 633, <see cref="CampaignMap.Return"/>); the group is one the map's own enemies use, so they
+/// sleep and wake with it.
+/// </summary>
+public sealed record CampaignReturn(Coord At, string Group, Behavior Behavior);

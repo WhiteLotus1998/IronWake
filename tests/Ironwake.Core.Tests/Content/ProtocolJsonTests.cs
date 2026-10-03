@@ -45,6 +45,7 @@ public class ProtocolJsonTests
         { new MessengerEscaped("rider-1", A), """{"type":"messengerEscaped","unit":"rider-1","at":{"x":1,"y":2}}""" },
         { new UnitBroke("soldier-1", A, 4), """{"type":"unitBroke","unit":"soldier-1","at":{"x":1,"y":2},"hp":4}""" },
         { new UnitFreed("brigand-1", A, 4), """{"type":"unitFreed","unit":"brigand-1","at":{"x":1,"y":2},"hp":4}""" },
+        { new UnitTalked("rook", "keziah", A, 9, ReturnFate.Turned), """{"type":"unitTalked","unit":"rook","target":"keziah","at":{"x":1,"y":2},"hp":9,"fate":"turned"}""" },
         { new Shoved("dunstan", "rider-1", A, B), """{"type":"shoved","unit":"dunstan","target":"rider-1","from":{"x":1,"y":2},"to":{"x":3,"y":4}}""" },
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
         { new RapportGained("teodor", "wren", 4, 8), """{"type":"rapportGained","a":"teodor","b":"wren","amount":4,"total":8,"outOf":null}""" },

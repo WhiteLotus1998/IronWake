@@ -8,7 +8,7 @@ namespace Ironwake.Sim;
 /// The full-campaign parity script (issue 786, slice 5): the heuristic player through the whole
 /// campaign from map 1, driven through the client's own campaign presenter so every line written
 /// is one the client took, with every camp action and every order taken once where the campaign
-/// offers it. Each camp tries, in a fixed order, the kinds not yet touched and keeps the first
+/// offers it, and the returned claimant talked round once a unit that may talk acts beside them. Each camp tries, in a fixed order, the kinds not yet touched and keeps the first
 /// concrete line the record accepts; a refused try writes nothing. A trial or a side map is
 /// fought by the same player and left. On a map where orders are open, the captain calls the
 /// first order not yet called in place of a plain Wait when it reaches someone; a Fall back is
@@ -21,7 +21,7 @@ public static class CampaignScript
     public static readonly IReadOnlyList<string> Kinds = new[]
     {
         "buy", "drop", "bench", "unbench", "repair", "room", "hire", "edit", "certify", "advance", "refine", "trial", "quest",
-        "press", "rally", "fall back", "fallback",
+        "press", "rally", "fall back", "fallback", "talk",
     };
 
     /// <summary>The script, the kinds it took, and the map number the campaign was lost on, or null when it was won.</summary>
@@ -316,6 +316,11 @@ public static class CampaignScript
                     break;
                 }
 
+                if (command is Attack or Wait && TryTalk(battle, lines, touched, command))
+                {
+                    break;
+                }
+
                 Submit(battle, lines, command);
                 if (battle.State.Outcome.IsOver)
                 {
@@ -357,6 +362,24 @@ public static class CampaignScript
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// The first Attack or Wait by a unit that may talk the returned claimant round (issue 633) replaced
+    /// by the talk, once a campaign: the pick's turns them, the captain's spares them.
+    /// </summary>
+    private static bool TryTalk(ClientSession battle, List<string> lines, HashSet<string> touched, Command command)
+    {
+        var state = battle.State;
+        var unitId = command is Attack a ? a.UnitId : ((Wait)command).UnitId;
+        if (touched.Contains("talk") || Returned.On(state) is not { } returned || state.Find(unitId) is not { } unit || Returned.Refusal(state, unit, returned.Id) is not null)
+        {
+            return false;
+        }
+
+        Submit(battle, lines, new Talk(unitId, returned.Id));
+        touched.Add("talk");
+        return true;
     }
 
     private static void Submit(ClientSession battle, List<string> lines, Command command)

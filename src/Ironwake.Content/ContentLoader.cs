@@ -179,6 +179,9 @@ public static class ContentLoader
     /// <c>joins</c> (issue 763) lists the cast ids who join the company at its camp, unplaced, under the
     /// same refusals; an id named in both lists or on two maps is refused. A map's optional
     /// <c>branch</c> (issue 633) names exactly two claimants under the same refusals, on one map at most.
+    /// A map's optional <c>return</c> (issue 633 slice 2) places the passed claimant as a foe: an object
+    /// of <c>at</c> (x,y), <c>group</c> and <c>behavior</c> (aggressive, hold or guard), on one map at most,
+    /// after the branch's; whoever loads the map checks that the tile is free and the group the map's.
     /// A map's optional <c>enemyLevel</c> (issue 704) is the level the campaign fights it at, 1 to the
     /// level cap, in place of the file's; its optional <c>swap</c> object maps an <c>x,y</c> tile to an
     /// enemy template id the campaign fields there instead (a cast member is refused); whoever loads the
@@ -342,6 +345,42 @@ public static class ContentLoader
                 }
             }
 
+            CampaignReturn? back = null;
+            if (node.OptionalObject("return") is { } returnNode)
+            {
+                if (!maps.Any(m => m.Branch.Count > 0))
+                {
+                    throw node.Error("return", "must come after the map with the branch, whose passed claimant it brings back");
+                }
+
+                if (maps.Any(m => m.Return is not null))
+                {
+                    throw node.Error("return", "only one map may bring the passed claimant back");
+                }
+
+                string Text(string name) =>
+                    returnNode.Element.TryGetProperty(name, out var value) && value.ValueKind == JsonValueKind.String && value.GetString() is { Length: > 0 } text
+                        ? text
+                        : throw node.Error("return." + name, name == "group" ? "must name the map's group the claimant fights in" : "must be a non-empty string");
+
+                var tile = Text("at").Split(',');
+                if (tile.Length != 2 || !int.TryParse(tile[0], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var rx)
+                    || !int.TryParse(tile[1], System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var ry))
+                {
+                    throw node.Error("return.at", $"'{Text("at")}' is not a tile; expected x,y");
+                }
+
+                var group = Text("group");
+                var behavior = Text("behavior") switch
+                {
+                    "aggressive" => Behavior.Aggressive,
+                    "hold" => Behavior.Hold,
+                    "guard" => Behavior.Guard,
+                    var given => throw node.Error("return.behavior", $"unknown behavior '{given}'; expected aggressive, hold, or guard"),
+                };
+                back = new CampaignReturn(new Coord(rx, ry), group, behavior);
+            }
+
             maps.Add(new CampaignMap(mapId, reward, ValueList<string>.From(stock))
             {
                 Before = Card(node, "before"),
@@ -349,6 +388,7 @@ public static class ContentLoader
                 Arrives = ValueList<string>.From(arrives),
                 Joins = ValueList<string>.From(joins),
                 Branch = ValueList<string>.From(branch),
+                Return = back,
                 EnemyLevel = enemyLevel,
                 Swaps = ValueList<TemplateSwap>.From(swaps),
             });

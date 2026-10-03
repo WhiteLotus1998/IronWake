@@ -75,6 +75,13 @@ public sealed record UnitBroke(string UnitId, Coord At, int Hp) : GameEvent;
 /// <summary>The enemy bound to a boss by the map's <c>freed:</c> header left the board when he fell (issue 750): not a kill.</summary>
 public sealed record UnitFreed(string UnitId, Coord At, int Hp) : GameEvent;
 
+/// <summary>
+/// <paramref name="UnitId"/> talked the returned claimant <paramref name="TargetId"/> round (issue 633), who
+/// left the board from <paramref name="At"/> with <paramref name="Hp"/>: not a kill. <paramref name="Fate"/>
+/// says whether the pick turned them or the captain spared them.
+/// </summary>
+public sealed record UnitTalked(string UnitId, string TargetId, Coord At, int Hp, ReturnFate Fate) : GameEvent;
+
 /// <summary>The messenger reached its road and left the board, not a kill (DESIGN.md 13.24, experiment); its events fire next.</summary>
 public sealed record MessengerEscaped(string UnitId, Coord At) : GameEvent;
 
