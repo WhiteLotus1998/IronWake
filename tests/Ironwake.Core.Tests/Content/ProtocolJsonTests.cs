@@ -49,6 +49,7 @@ public class ProtocolJsonTests
         { new RapportGained("ottilie", "wren", 4, 8, 16), """{"type":"rapportGained","a":"ottilie","b":"wren","amount":4,"total":8,"outOf":16}""" },
         { new RapportGained("teodor", "wren", 4, 8), """{"type":"rapportGained","a":"teodor","b":"wren","amount":4,"total":8,"outOf":null}""" },
         { new RivalryEnded("ottilie", "wren"), """{"type":"rivalryEnded","a":"ottilie","b":"wren"}""" },
+        { new SupportReached("ivo", "wren", "C"), """{"type":"supportReached","a":"ivo","b":"wren","tier":"C"}""" },
         { new PhaseEnded(Side.Player, 2), """{"type":"phaseEnded","side":"player","turn":2}""" },
         { new PhaseBegan(Side.Enemy, 2), """{"type":"phaseBegan","side":"enemy","turn":2}""" },
         { new UnitHealed("wren", 3, 17), """{"type":"unitHealed","unit":"wren","amount":3,"hpAfter":17}""" },

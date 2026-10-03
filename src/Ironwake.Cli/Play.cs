@@ -2582,6 +2582,8 @@ public sealed class PlaySession
                 return $"rapport {names[g.A]} and {names[g.B]} +{g.Amount} ({g.Total}{(g.OutOf is { } outOf ? $" of {outOf}" : "")})";
             case RivalryEnded r:
                 return $"{names[r.A]} and {names[r.B]} are rivals no longer";
+            case SupportReached s:
+                return $"{names[s.A]} and {names[s.B]} reach support {s.Tier}";
             case Recalled r:
                 return $"recalled to state {r.ToIndex}; {r.ChargesLeft} charges left";
             case ItemUsed i:

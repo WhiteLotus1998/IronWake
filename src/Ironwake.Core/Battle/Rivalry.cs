@@ -170,7 +170,8 @@ public static class Rivalry
     /// <summary>
     /// The end of a player phase: every adjacent pair one of whom some awake enemy could strike
     /// next phase gains its rate, pairs in id order, with a <see cref="RapportGained"/> each and a
-    /// <see cref="RivalryEnded"/> for a rival pair that crosses the threshold. A pair nobody can
+    /// <see cref="RivalryEnded"/> for a rival pair that crosses the threshold, and a
+    /// <see cref="SupportReached"/> for a support pair whose total reaches a higher tier. A pair nobody can
     /// reach gains nothing (issue 209). Behind the header every pair of recruits accrues, at both
     /// rates; off it only support pairs do (issue 77). A pair with the captain accrues only when it
     /// is a support pair, at the recruit's rate alone, since the captain fights every map in every
@@ -222,6 +223,11 @@ public static class Rivalry
                 if (wereRivals && after >= content.Rivalry.OverwriteAt)
                 {
                     events.Add(new RivalryEnded(a.Id, b.Id));
+                }
+
+                if (Supports.TierOf(content, a.Id, b.Id, after) is { } reached && Supports.TierOf(content, a.Id, b.Id, before) != reached)
+                {
+                    events.Add(new SupportReached(a.Id, b.Id, reached.Name));
                 }
             }
         }

@@ -104,6 +104,7 @@ Every event is `{"type":<type>, <fields>, "text":<the console's line>}`, in the 
 | `messengerEscaped` | `unit`, `at` (the map's messenger reached its road at `at` and left the board, not a death; its `messenger` events fire next; DESIGN 13.24, experiment) |
 | `rapportGained` | `a`, `b`, `amount`, `total`, `outOf` (the overwrite threshold when the pair were rivals before the gain, else null) |
 | `rivalryEnded` | `a`, `b` |
+| `supportReached` | `a`, `b`, `tier` (a support pair's rapport reached a higher tier, `C`, `B` or `A`, at a player phase's end; issue 77) |
 | `phaseEnded` | `side`, `turn` |
 | `phaseBegan` | `side`, `turn` |
 | `unitHealed` | `unit`, `amount`, `hpAfter` |

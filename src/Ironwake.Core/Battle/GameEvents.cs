@@ -94,6 +94,13 @@ public sealed record RapportGained(string A, string B, int Amount, int Total, in
 /// <summary>A rival pair's rapport reached the overwrite threshold; they are rivals no longer.</summary>
 public sealed record RivalryEnded(string A, string B) : GameEvent;
 
+/// <summary>
+/// A support pair's rapport reached a new support tier at the end of a player phase (issue 77):
+/// <paramref name="Tier"/> is the tier's name (C, B or A), the highest the pair's total now
+/// reaches. One event per pair per phase, whatever the number of tiers crossed.
+/// </summary>
+public sealed record SupportReached(string A, string B, string Tier) : GameEvent;
+
 public sealed record PhaseEnded(Side Side, int Turn) : GameEvent;
 
 public sealed record PhaseBegan(Side Side, int Turn) : GameEvent;
