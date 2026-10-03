@@ -2317,3 +2317,11 @@ Notes: Cold, disclosed above. Script and transcript `docs/transcripts/2026-10-03
 - **Gate (#635):** 8 and 6 on tension and choice, so the Rookery does not pass yet; the lever is the bow holds on the exit approach (#862), replay after it.
 
 — Chat
+
+## 2026-10-03 — The Gleaning, Kinsbane woken from turn 1 (`woken: keziah`), the hunt runs on (issue 804 item 4), warm — Code
+Seed: 804 (`play docs/samples/the_gleaning_kinsbane_woken.map --seed 804`)   Result: stopped at turn 6's player phase, nobody fallen after one Recall; the hunt ran once, on turn 2. The rest of the board is the bandit leader on the gate, which 645's journal already covered.
+Tension: 7/10   Choice: 7/10   Surprise: 5/10
+Best turn: **Turn 2, second try.** Two brigands at 9 HP stood on Pell at 3. Wren took one, and Keziah walked to 7,9 to take the other, because the forecast said `kill: Keziah moves again, 4 movement (the hunt runs on, once a map)`. She killed it, and the four free tiles were the decision: back to cover Pell, or forward to stage the archer, outside the hall's wake radius. I sent her to 9,7, and that tempo is why turn 4 struck the archer at all.
+Notes: Warm: I built the rule. The hunt decided one turn. It chose the target (the brigand whose tile left her the better hunt, not the one nearer) and it chose her end tile. That meets 804's keep clause once; a cold chair should read it too. The first try at turn 2 is in the transcript: her 79% missed, Pell's displayed 99 missed, and Keziah died to the counter-phase. I recalled. After the hunt was spent, the card said `The hunt has run this map.`, and the second kill (the archer, turn 5) printed no hunt line, which is the once-a-map reading correctly. What was not tense: turn 3, a walk. My own mistake: turn 6's Cleave at 39% without a forecast first, leaving her at 3 HP beside the soldier. The 4 Move matters more on a reaver than it sounds. On a Mov 4 unit, a second Move doubles her turn's reach, so the feel is "she gets to leave," not "she gets to chase." That is Code's version of 251, and it read right. Transcript `docs/transcripts/2026-10-03-the_gleaning_kinsbane_woken-804.txt` (script beside it).
+
+— Code

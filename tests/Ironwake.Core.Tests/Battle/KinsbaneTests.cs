@@ -543,7 +543,7 @@ public class KinsbaneTests
         Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Hungry: -5 HP at the next phase start, if an enemy is in reach, and it starves.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 3)), Shipped));
         Assert.Equal("Kinsbane: fed 3, teeth 1/5. Power +1. Fed this phase.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 3, hasFed: true)), Shipped));
         Assert.StartsWith("Kinsbane: fed 0, teeth 0/5. Power +0. Starved: half Power, uses 1", Kinsbane.Card(Keziah(WithScythe(Placed(), 1, starved: true, uses: 1)), Shipped));
-        Assert.Equal("Kinsbane: fed 13, teeth 5/5. Power +5. Woken: no drain.", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 13)), Shipped));
+        Assert.Equal("Kinsbane: fed 13, teeth 5/5. Power +5. Woken: no drain. A kill: move again (once a map).", Kinsbane.Card(Keziah(WithScythe(Placed(), 6, fed: 13)), Shipped));
         Assert.Null(Kinsbane.Card(Placed().Find("captain")!, Shipped));
         Assert.Contains(PlaySession.ShowLines(Placed(), Shipped, Keziah(Placed())), line => line.StartsWith("  Kinsbane: fed 0, teeth 0/5.", StringComparison.Ordinal));
     }

@@ -249,6 +249,12 @@ public sealed record HungerDrained(string UnitId, string ItemId, int Amount, int
 /// </summary>
 public sealed record HungerFed(string UnitId, string ItemId, int Fed, int Healed, int HpAfter, int MtBonus, bool Woke) : GameEvent;
 
+/// <summary>
+/// A woken hungering weapon's kill ran the hunt on (issue 804, DESIGN.md 13.23): once a battle, the
+/// carrier is owed a Canto of <paramref name="Mov"/>, its full Move, and strikes no second time.
+/// </summary>
+public sealed record HuntRanOn(string UnitId, int Mov) : GameEvent;
+
 /// <summary>A starved hungering weapon landed a hit that killed nothing (DESIGN.md 13.23, experiment): it leaves the starved form and its carrier heals what <paramref name="Healed"/> says.</summary>
 public sealed record HungerEased(string UnitId, string ItemId, int Healed, int HpAfter) : GameEvent;
 

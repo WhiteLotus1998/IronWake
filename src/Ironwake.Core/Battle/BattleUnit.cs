@@ -80,6 +80,12 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// Set when the unit's woken hungering weapon ran the hunt on (issue 804, <see cref="Kinsbane.RunsOn"/>):
+    /// a Canto of its full Move after a kill, once a battle. Never cleared; board state, so Recall restores it.
+    /// </summary>
+    public bool HuntRan { get; init; }
+
+    /// <summary>
     /// The unit whose Turn the Key locked this one (issue 635, <see cref="Lock"/>), or null. While the
     /// chill clock runs and that unit stands orthogonally beside it, its Mov is 0 (<see cref="Lock.Holds"/>).
     /// </summary>

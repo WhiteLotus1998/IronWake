@@ -6,7 +6,7 @@ Updated: 2026-10-03. Rewritten, not appended; under 20 KB (#401); history is in 
 
 Phases 1 and 2 (DESIGN 12) are built; Phase 3 is under way. The showcase (#509, 0092; slices #510 to #516) is built and closed at 8/7 from both chairs (round 169); per-slice scores are in the PRs and DIALOGUE.
 Three maps are `tuned`: the Tollgate (0073), Brackwater Cut at dusk (0078) and Harrow Weir (0088, 0100). Starting Alone (#631, 0123) is campaign map 1, a lesson exempt from the Fun Gate; The Mill (#632, 0124) is map 2, where Maud arrives. Others wait on plays (Maps).
-3937 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
+3952 tests green; `ci` and `ci-windows` run; the `godot-*` checks run, not required.
 No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 2026-09-27).
 
 ## Next
@@ -15,13 +15,11 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 - 13.21 the tide, in content (0111; #600): `docs/samples/ebb_ford_tide.map`. Code 653 warm.
 - 13.24 the messenger is spiked (0135; DESIGN 13.24): samples `signal_road_messenger.map` (Code 701) and `signal_road_pass.map` (Code 680 warm 8/6/6).
 - 13.2 Commander's Word is spiked (#85, 0136; DESIGN 13.2): `order <press|rally|fall back>` once a map as the captain's action, radius `2 + Cha / 4`; `fallback <unit> <x,y|stay>`; `order <kind> preview [from <x,y>]`. Open behind `orders: on` and on campaign maps from the second; the client calls it from its action list (#786). Code 85 warm 6/7/5 on `harrow_weir_orders.map`: the cost did not bite.
-- 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slice 1 (0195): `teeth n/5`, the Sim's hunt, `--kinsbane`. Slice 2 (0207): issued on the pick, the `--axe` control (Sallow 49/82). #851 (0209): beside the axe, bound, hunt to kill. #854 (0210): no drain with no enemy in reach. #856 (0211): teeth 2,4,5,8,12; round 279's bar passes whole (Sallow 44/82, field four teeth, woken by the keep in 17 of 43, the keep no worse). Levers stop. Code 804 warm 8/7/6, 854 warm 7/7/5.
+- 13.23 Kinsbane is spiked (#645, 0130; DESIGN 13.23): sample `docs/samples/the_gleaning_kinsbane.map` (Keziah). Code 645 warm 7/6/5. #804 slices 1, 2, #851, #854, #856 (0195, 0207, 0209 to 0211): teeth, `--kinsbane [--axe]`, issued on the pick beside the axe, no drain with no enemy in reach, teeth 2,4,5,8,12; round 279's bar passes (Sallow 44/82). Levers stop. Slice 3 (0212): the hunt runs on, a woken kill's full Move again once a map; `woken: keziah` on `the_gleaning_kinsbane_woken.map`. Code 804 warm 8/7/6, 854 7/7/5, 804 woken 7/7/5 (the hunt decided turn 2). Next: the voice, the clip, the choice screen.
 - 13.22 the break is spiked (0112, rounds 181 to 183; DESIGN 13.22): on `break: on` a boss's death sends his group at or below half HP off the board; forecasts print `break if <boss> falls`. Samples `the_tollgate_break.map` (Code 661), `saltmarsh_ford_break.map` (#606; Code 667): nothing broke.
 - #786 (round 240) is closed in six slices. #795 (0181): a thinned company fights short-handed. Next: round 240's for-Lotus steps (Chat's console campaign through Brackwater, then the desktop hand run of the exe).
 - #762, #765, #565: a lost side map names its member, the dusk line the hearing radius, `threat` the boss veto's refusals; the client draws none.
 - 13.18 Lines on the board (#486, DESIGN 13.18): signatures behind `signatures: on`; verdicts in the experiments table; the ledger killed at 65 (0197), next shape a lean (she won't shoot another's target); the other eight wait for boards (`cast_audit.md`).
-- 13.25 rotten planks is spiked (0179, 0180; DESIGN 13.25): `rotten_bridge_straggler.map`, Code 783 warm 7/6/7.
-- 13.26 rockfall is spiked (0182; DESIGN 13.26): sample `scree_gorge_rockfall.map` (round 247's board). Code 811 warm 8/7/7.
 - Standing rule (0099): a spike adding a player action names its cost; its keep round shows it biting.
 - #131's north cut is built (0093; Saltmarsh in Maps): the map plays as the pair, then the boss. The lever #524 failed its floor (0095); the next lever has to buy gate 1 back first. Open: turn 1 is a march.
 - #611 is built: six arts, the attack menu; Chat's Tollgate play with it closes #611. #535 slices 1 and 2 are built (0114, 0115); clips await #621.
@@ -75,7 +73,7 @@ No forks are open. The builder-chain heartbeat stays (Lotus's ruling on #406, 20
 | 13.13 pincer | kept on its samples (0082, 0083; Code 443, 503; Chat cold 499, 523); ships only where the enemy can anvil too, no board named | none waits; a keep round names a ship board when a map authored for it exists |
 | 13.15 wildfire | kept whole on its samples (0085, 0110; Code 457, 631; Chat cold 559, 641) | none; keep rounds closed |
 | 13.21 tide | `docs/samples/ebb_ford_tide.map` (0111; Code 653 in) | Chat's cold play |
-| 13.23 Kinsbane | `docs/samples/the_gleaning_kinsbane.map` (#645, 0130; Code 645 warm in: both keep clauses shown) | the read passes (0211); Chat's cold Sallow (seed 857) and cold field |
+| 13.23 Kinsbane | `docs/samples/the_gleaning_kinsbane.map` (#645, 0130; Code 645 warm in: both keep clauses shown) | the read passes (0211); Chat's cold field; the hunt (0212): a cold play of `the_gleaning_kinsbane_woken.map` |
 | 13.2 Commander's Word | `docs/samples/harrow_weir_orders.map` (#85, 0136; Code 85 warm in: moved for the order, the cost did not bite) | Chat's cold play |
 | 13.24 messenger | `docs/samples/signal_road_pass.map` (#680; 0135 amended; Code 680 warm in: a unit held its path, the runner was never struck) | Chat's cold play of the pass |
 | 13.22 break | `docs/samples/saltmarsh_ford_break.map` (#606, 0112; Code 661 on the Tollgate and 667 here in, nothing broke on either) | Chat's cold play on Saltmarsh |

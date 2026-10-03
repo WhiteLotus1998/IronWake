@@ -1,0 +1,20 @@
+# issue 804 slice 3: --kinsbane (Release, 200 runs, the same seeds as kinsbane-856-schedule.txt) on issue/804-the-hunt-runs-on. The hunt runs on (round 251, DECISIONS/0212): once a battle a woken scythe kill on her own Attack owes her a Canto of her full Move, which the heuristic takes to its safest tile (Players.PlanCanto). The schedule, Drain 5, the reach gate and the heal of 10 are unchanged. The scythe arm's rows add the runs in which the hunt ran on. The control arm (--axe) has no scythe and is unchanged by construction; see kinsbane-856-schedule.txt.
+
+## ironwake-sim --kinsbane --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 2, starved in 11, her attacks 250 (scythe 214), woken by its end in 0, ended starved in 7, the hunt ran on in 0
+  map 7 (her map 2): won 44, deployed in 44, tries p50 25, fed by its end p25 4 p50 5 p75 6 (teeth p50 3/5), drains p50 3, starved in 14, her attacks 169 (scythe 102), woken by its end in 0, ended starved in 1, the hunt ran on in 0
+  map 8 (her map 3): won 44, deployed in 44, tries p50 2, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 2, starved in 8, her attacks 44 (scythe 35), woken by its end in 0, ended starved in 6, the hunt ran on in 0
+  map 9 (her map 4): won 43, deployed in 43, tries p50 6, fed by its end p25 9 p50 10 p75 13 (teeth p50 4/5), drains p50 3, starved in 5, her attacks 232 (scythe 192), woken by its end in 17, ended starved in 3, the hunt ran on in 15
+  map 10 (her map 5): won 13, deployed in 13, tries p50 18, fed by its end p25 12 p50 12 p75 12 (teeth p50 5/5), drains p50 2, starved in 0, her attacks 59 (scythe 31), woken by its end in 13, ended starved in 0, the hunt ran on in 10
+  no try won map 1: 118
+  no try won map 7: 38
+  no try won map 9: 1
+  no try won map 10: 30
+  woken entering the keep (map 10, fed 12 by map 9's end): 17 of 43 reachers
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 76 of 82, median map 6
+  tooth 2 (fed 4): grew in 54 of 82, median map 7
+  tooth 3 (fed 5): grew in 45 of 82, median map 9
+  tooth 4 (fed 8): grew in 41 of 82, median map never
+  tooth 5 (wakes, fed 12): grew in 28 of 82, median map never
