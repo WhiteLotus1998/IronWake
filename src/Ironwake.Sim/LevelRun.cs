@@ -27,6 +27,9 @@ public static class LevelRun
     {
         /// <summary>The weapons the company attacked and countered with over the run's won battles, by class as each unit stood when it struck (issue 746).</summary>
         public IReadOnlyDictionary<string, WeaponMix> Weapons { get; init; } = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+
+        /// <summary>The record's rapport after each won map, one entry per <see cref="Maps"/> entry in the same order (issue 77).</summary>
+        public IReadOnlyList<IReadOnlyList<Rapport>> Rapport { get; init; } = [];
     }
 
     /// <summary>
@@ -84,6 +87,7 @@ public static class LevelRun
             var record = CampaignRecord.Start(content, (ulong)seed, permadeath: false);
             var maps = new List<(int, IReadOnlyList<int>, int, Camp)>();
             var weapons = new Dictionary<string, WeaponMix>(StringComparer.Ordinal);
+            var rapport = new List<IReadOnlyList<Rapport>>();
             int? lost = null;
             while (!record.IsFinished(content))
             {
@@ -120,9 +124,10 @@ public static class LevelRun
                 record = record.AfterBattle(won, content);
                 var company = record.Present(content);
                 maps.Add((number, company.Select(u => u.Level).ToList(), company.Count(u => Ready(u, content)), camp!));
+                rapport.Add(record.Rapport.ToList());
             }
 
-            runs.Add(new Run(maps, lost) { Weapons = weapons });
+            runs.Add(new Run(maps, lost) { Weapons = weapons, Rapport = rapport });
         }
 
         return runs;
@@ -231,10 +236,10 @@ public static class LevelRun
         return Enumerable.Range(0, levels.Count).Select(k => total / levels.Count + (k < total % levels.Count ? 1 : 0)).ToList();
     }
 
-    private static string Band(IReadOnlyList<int> values) =>
+    internal static string Band(IReadOnlyList<int> values) =>
         $"p25 {Percentile(values, 0.25)} p50 {Percentile(values, 0.5)} p75 {Percentile(values, 0.75)}";
 
-    private static int Percentile(IEnumerable<int> values, double p)
+    internal static int Percentile(IEnumerable<int> values, double p)
     {
         var sorted = values.Order().ToList();
         return sorted.Count == 0 ? 0 : sorted[Math.Min(sorted.Count - 1, (int)Math.Floor(p * sorted.Count))];
