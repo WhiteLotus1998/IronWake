@@ -24,7 +24,7 @@ The first tooth grows on her first map in 65 of 82. Among the runs that survive,
 
 ## What it says about round 251's bars
 
-The bars (first tooth by map 3, waking by map 8) were set while Keziah was on the roster from map 1. Since #633 (0192) she joins at the raid's camp, map 6, and fights five maps at most. The first tooth lands on her first map. The waking misses map 8 by two maps, and 15 kills in three maps is not a feed-schedule fix (2,2,3,4,4 still needs 15). The bars need restating against the branch before the schedule is touched; that is the Table's (round 261). The schedule is unchanged.
+The bars (first tooth by map 3, waking by map 8) were set while Keziah was on the roster from map 1. Since #633 (0192) she joins at the raid's camp, map 6, and fights five maps at most. The first tooth lands on her first map. The waking misses map 8 by two maps, and 15 kills in three maps is not a feed-schedule fix (2,2,3,4,4 still needs 15). The bars need restating against the branch before the schedule is touched; that is the Table's (round 262). The schedule is unchanged.
 
 Two artefacts of the read: forcing her onto every map costs the heuristic Sallow Grange (53 of 82 runs lose it with her standing), so the late rows rest on 27 runs; and the campaign itself does not issue the scythe yet (she joins with her iron axe), which the next slice does once the bars are restated.
 
