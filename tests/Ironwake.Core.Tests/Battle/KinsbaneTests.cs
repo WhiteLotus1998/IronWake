@@ -394,6 +394,16 @@ public class KinsbaneTests
     }
 
     [Fact]
+    public void TheEaseLineDropsItsHealClauseWhenItHealsNothing()
+    {
+        var healed = new HungerEased("keziah", Kinsbane.ItemId, 5, 6);
+        var full = new HungerEased("keziah", Kinsbane.ItemId, 0, 26);
+
+        Assert.EndsWith("is eased by the hit; keziah heals 5 (hp 6)", PlaySession.Describe(healed, Shipped, UnitNames.None), StringComparison.Ordinal);
+        Assert.EndsWith("is eased by the hit", PlaySession.Describe(full, Shipped, UnitNames.None), StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void AStarvedMissChangesNothing()
     {
         var events = new List<GameEvent>();

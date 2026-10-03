@@ -2573,7 +2573,7 @@ public sealed class PlaySession
             case HuntRanOn h:
                 return $"the hunt runs on: {names[h.UnitId]} may move again, {h.Mov} movement";
             case HungerEased h:
-                return $"{content.ItemName(h.ItemId)} is eased by the hit; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})";
+                return $"{content.ItemName(h.ItemId)} is eased by the hit" + (h.Healed > 0 ? $"; {names[h.UnitId]} heals {h.Healed} (hp {h.HpAfter})" : "");
             case UnitOpened o:
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitChilled c:
