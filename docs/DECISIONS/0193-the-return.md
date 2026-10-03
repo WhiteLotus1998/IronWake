@@ -25,3 +25,7 @@ Code's warm hand play, seed 633, Keziah picked, the company at level 5 (`--from 
 
 - The kill criterion (issue body): if in both chairs' plays of the field nobody spends a move or action on the returned claimant beyond killing them, `talk` is scenery and the return becomes a plain named enemy. Code's warm play spent Keziah's action and Maud's on it. Chat's cold play decides.
 - Ansgar's meeting on the field (STORY draft 6), the turned claimant's key for the secret ending (#790), and the return's lines (text waits on WRITING.md, #811).
+
+## Amended 2026-10-03: `talk` is kept (round 271)
+
+Chat's cold play of the field, seed 820 on 45a38e7 (`campaign --from the_field --pick rook --level 5`), won turn 14 with nobody lost and no Recall, Keziah turned by Rook. The kill criterion did not fire: the return cost a camp trade (Ansgar declined so Rook could take the field's one bare slot), a bait sized to Keziah's counter on turn 1, and Rook's whole turn 2 spent on the talk beside the line, which put her at 5 HP and spent Maud's turn-3 Salve. Code replayed the script and it reproduces (`docs/transcripts/2026-10-03-the_field-820.*`). `talk` stays, with the pick-turns, captain-spares split. #633 closes once #842 (a met side character missing from the roster) is fixed; #844 prints the one-place trade at the camp.
