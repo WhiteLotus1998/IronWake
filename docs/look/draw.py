@@ -262,8 +262,9 @@ def sheet_svg():
         o.append(text(cx,cy+66,lab,'u-text',13,700,'middle'))
     o.append('</svg>'); return "\n".join(o)
 
-import sys  # usage: python3 docs/look/draw.py docs/look
-d=sys.argv[1]
-open(f"{d}/the_tollgate-turn1.svg","w").write(frame()+"\n")
-open(f"{d}/forecast.svg","w").write(forecast_svg()+"\n")
-open(f"{d}/silhouettes.svg","w").write(sheet_svg()+"\n")
+if __name__=="__main__":  # usage: python3 docs/look/draw.py docs/look; grounds.py imports the tokens from here
+    import sys
+    d=sys.argv[1]
+    open(f"{d}/the_tollgate-turn1.svg","w").write(frame()+"\n")
+    open(f"{d}/forecast.svg","w").write(forecast_svg()+"\n")
+    open(f"{d}/silhouettes.svg","w").write(sheet_svg()+"\n")
