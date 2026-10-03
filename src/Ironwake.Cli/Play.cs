@@ -2513,7 +2513,7 @@ public sealed class PlaySession
                 sb.Append('\n').Append($"  {names[f.AttackerId]} hp {f.AttackerHpAfter}, {names[f.TargetId]} hp {f.TargetHpAfter}");
                 return sb.ToString();
             case UnitDied d:
-                return $"{names[d.UnitId]} falls at {d.At}";
+                return $"{names[d.UnitId]} falls at {d.At}" + (names.Rides(d.UnitId) ? $"; {names.Refer(d.UnitId).Possessive} drake leaves the field" : "");
             case ExpGained x:
                 return $"{names[x.UnitId]} gains {x.Amount} exp ({x.ExpAfter})";
             case LeveledUp l:

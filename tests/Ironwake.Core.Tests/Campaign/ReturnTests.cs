@@ -390,4 +390,18 @@ public class ReturnTests
             Assert.True(field.TerrainAt(back.At, Content).IsPassable(Content.Class(Content.Unit(claimant).ClassId).Movement));
         }
     }
+
+    [Fact]
+    public void APassedRiderKilledOnTheFieldFliesHerDrakeAndASparedOneKeepsIt()
+    {
+        var record = AtTheField("keziah");
+        var captain = Content.Cast[0].Id;
+        var opening = record.Begin(Field, Content);
+        var spareOpening = Beside(record, captain);
+        var spared = Resolver.Apply(spareOpening, Content, new Talk(captain, "rook")).Next;
+
+        Assert.Equal(DrakeStage.Grown, record.AfterBattle(Won(opening.WithoutUnit("rook"), opening), Content).DrakeFlew);
+        Assert.Null(record.AfterBattle(Won(spared, spareOpening), Content).DrakeFlew);
+        Assert.Null(AtTheField("rook").AfterBattle(Won(AtTheField("rook").Begin(Field, Content).WithoutUnit("keziah"), AtTheField("rook").Begin(Field, Content)), Content).DrakeFlew);
+    }
 }

@@ -16,12 +16,14 @@ public sealed class UnitNames
     private readonly ImmutableDictionary<string, string> _names;
     private readonly ImmutableDictionary<string, Pronoun> _pronouns;
     private readonly ImmutableDictionary<string, MapEventAction> _events;
+    private readonly ImmutableHashSet<string> _riders;
 
-    private UnitNames(ImmutableDictionary<string, string> names, ImmutableDictionary<string, Pronoun> pronouns, ImmutableDictionary<string, MapEventAction> events)
+    private UnitNames(ImmutableDictionary<string, string> names, ImmutableDictionary<string, Pronoun> pronouns, ImmutableDictionary<string, MapEventAction> events, ImmutableHashSet<string>? riders = null)
     {
         _names = names;
         _pronouns = pronouns;
         _events = events;
+        _riders = riders ?? ImmutableHashSet<string>.Empty;
     }
 
     /// <summary>No names known: every id reads as itself.</summary>
@@ -44,9 +46,15 @@ public sealed class UnitNames
             .Concat(state.Escaped)
             .Where(u => u.Side == Side.Player);
         var pronouns = ImmutableDictionary.CreateBuilder<string, Pronoun>(StringComparer.Ordinal);
+        var riders = ImmutableHashSet.CreateBuilder<string>(StringComparer.Ordinal);
         foreach (var unit in players)
         {
             names[unit.Id] = unit.Unit.Name;
+            if (unit.Unit.Drake is not null)
+            {
+                riders.Add(unit.Id);
+            }
+
             if ((unit.Unit.Pronoun ?? (content.Pronouns.TryGetValue(unit.Id, out var cast) ? cast : null)) is { } pronoun)
             {
                 pronouns[unit.Id] = pronoun;
@@ -88,6 +96,11 @@ public sealed class UnitNames
             && (state.History.Count > 0 ? state.History[0].Units : state.Units).Concat(state.Units).FirstOrDefault(u => u.Id == bond.UnitId) is { } returned)
         {
             names[returned.Id] = returned.Unit.Name;
+            if (returned.Unit.Drake is not null)
+            {
+                riders.Add(returned.Id);
+            }
+
             if ((returned.Unit.Pronoun ?? (content.Pronouns.TryGetValue(returned.Id, out var cast) ? cast : null)) is { } pronoun)
             {
                 pronouns[returned.Id] = pronoun;
@@ -100,7 +113,7 @@ public sealed class UnitNames
             events[mapEvent.Name] = mapEvent.Action;
         }
 
-        return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), events.ToImmutable());
+        return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), events.ToImmutable(), riders.ToImmutable());
     }
 
     /// <summary>
@@ -130,6 +143,9 @@ public sealed class UnitNames
 
         return new UnitNames(names.ToImmutable(), pronouns.ToImmutable(), ImmutableDictionary<string, MapEventAction>.Empty);
     }
+
+    /// <summary>Whether <paramref name="id"/> took the field on a drake (issue 805): a player unit, or the returned claimant, that rides one.</summary>
+    public bool Rides(string id) => _riders.Contains(id);
 
     /// <summary>The name <paramref name="id"/> reads as, or the id itself when no unit by that id is known.</summary>
     public string this[string id] => _names.TryGetValue(id, out var name) ? name : id;

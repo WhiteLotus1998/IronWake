@@ -1359,9 +1359,7 @@ public static class ProtocolJson
             return null;
         }
 
-        var word = RequiredString(d, "stage");
-        var stage = Enum.GetValues<DrakeStage>().Where(s => Drake.Word(s) == word).Select(s => (DrakeStage?)s).FirstOrDefault()
-            ?? throw new ProtocolException($"field 'drake.stage' must be one of {string.Join(", ", Enum.GetValues<DrakeStage>().Select(Drake.Word))}");
+        var stage = ReadStage(d, "stage", "drake.stage");
         var flown = RequiredInt(d, "flown");
         if (flown < 0)
         {
@@ -1369,6 +1367,14 @@ public static class ProtocolJson
         }
 
         return new DrakeState(stage, flown);
+    }
+
+    /// <summary>A drake's stage (issue 805) as the screen words it, under <paramref name="field"/>; any other word refused, named as <paramref name="label"/>.</summary>
+    private static DrakeStage ReadStage(JsonElement e, string field, string? label = null)
+    {
+        var word = RequiredString(e, field);
+        return Enum.GetValues<DrakeStage>().Where(s => Drake.Word(s) == word).Select(s => (DrakeStage?)s).FirstOrDefault()
+            ?? throw new ProtocolException($"field '{label ?? field}' must be one of {string.Join(", ", Enum.GetValues<DrakeStage>().Select(Drake.Word))}");
     }
 
     /// <summary>A <see cref="Unit"/> from its id, name and own fields; the battle fields around it are not read.</summary>
@@ -1437,6 +1443,11 @@ public static class ProtocolJson
         if (record.FreedUnitFell)
         {
             w.WriteBoolean("freedUnitFell", true);
+        }
+
+        if (record.DrakeFlew is { } flew)
+        {
+            w.WriteString("drakeFlew", Drake.Word(flew));
         }
 
         if (record.Rapport.Count > 0)
@@ -1625,6 +1636,7 @@ public static class ProtocolJson
             Wagon = e.TryGetProperty("wagon", out _) ? ReadItemIds(e, "wagon", content) : ValueList<string>.Empty,
             Permadeath = !e.TryGetProperty("permadeath", out _) || RequiredBool(e, "permadeath"),
             FreedUnitFell = e.TryGetProperty("freedUnitFell", out _) && RequiredBool(e, "freedUnitFell"),
+            DrakeFlew = e.TryGetProperty("drakeFlew", out _) ? ReadStage(e, "drakeFlew") : null,
             Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),

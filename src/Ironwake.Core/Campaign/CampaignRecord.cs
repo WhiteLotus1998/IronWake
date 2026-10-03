@@ -180,6 +180,18 @@ public sealed record CampaignRecord(
     public bool FreedUnitFell { get; init; }
 
     /// <summary>
+    /// The stage a rider's drake had reached when the rider fell for good (issue 805, STORY draft 6:
+    /// the drake leaves the field and is seen over the fells), on a main map or a side map; null while
+    /// no rider has. A fall with <see cref="Permadeath"/> off keeps the rider and the drake, so it never
+    /// sets it. Once set, set for the rest of the campaign. The ending's line reads it once #634 is built.
+    /// </summary>
+    public DrakeStage? DrakeFlew { get; init; }
+
+    /// <summary><see cref="DrakeFlew"/> after <paramref name="fell"/> fell for good: the first rider's stage among them, else unchanged.</summary>
+    private DrakeStage? DrakeFlewAfter(IEnumerable<Unit> fell) =>
+        DrakeFlew ?? fell.Select(u => u.Drake?.Stage).FirstOrDefault(s => s is not null);
+
+    /// <summary>
     /// The difficulties this campaign was lowered from at a camp (issue 677), the one it began on
     /// first; empty when it never was. Printed on the record beside the difficulty.
     /// </summary>
@@ -705,6 +717,7 @@ public sealed record CampaignRecord(
         var standing = end.Survivors().ToDictionary(u => u.Id, u => u.Unit, StringComparer.Ordinal);
         var roster = new List<Unit>();
         var fallen = Fallen.ToList();
+        var gone = new List<Unit>();
         foreach (var unit in Present(content))
         {
             if (!deployed.TryGetValue(unit.Id, out var started))
@@ -722,6 +735,7 @@ public sealed record CampaignRecord(
             else
             {
                 fallen.Add(unit.Id);
+                gone.Add(unit);
             }
         }
 
@@ -730,6 +744,7 @@ public sealed record CampaignRecord(
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
             FellOn = FellOnAdd(fallen.Skip(Fallen.Count), end.Map.Name),
+            DrakeFlew = DrakeFlewAfter(gone),
             Purse = Purse + NextMap(content).Reward,
             MapIndex = MapIndex + 1,
             Benched = ValueList<string>.Empty,
@@ -746,8 +761,8 @@ public sealed record CampaignRecord(
     /// The won record with the returned claimant's fate written (issue 633): turned by the pick, they
     /// join the company as they took the field, at full uses, if a bed is free and the company has room
     /// (<see cref="Room"/>, counted after the map's fallen, since a death never frees a bed), else they
-    /// are turned away; spared by the captain, they ride on; killed, they fell; left standing, they stood
-    /// against the company to the end.
+    /// are turned away; spared by the captain, they ride on; killed, they fell, and a drake under them
+    /// flies (<see cref="DrakeFlew"/>, issue 805); left standing, they stood against the company to the end.
     /// </summary>
     private CampaignRecord AfterReturn(ReturnBond bond, BattleState opening, BattleState end, GameContent content)
     {
@@ -758,6 +773,11 @@ public sealed record CampaignRecord(
             ReturnFate.Fell => ClaimantFate.Fell,
             _ => ClaimantFate.Stood,
         };
+        if (fate == ClaimantFate.Fell)
+        {
+            return this with { Returned = fate, DrakeFlew = DrakeFlewAfter(opening.Find(bond.UnitId) is { } fell ? new[] { fell.Unit } : Array.Empty<Unit>()) };
+        }
+
         if (fate != ClaimantFate.Turned)
         {
             return this with { Returned = fate };
@@ -1341,6 +1361,7 @@ public sealed record CampaignRecord(
         var fallen = Fallen.ToList();
         var lost = new List<string>();
         var wounded = new List<string>();
+        var gone = new List<Unit>();
         foreach (var unit in Roster)
         {
             if (!deployed.TryGetValue(unit.Id, out var started))
@@ -1360,6 +1381,7 @@ public sealed record CampaignRecord(
             {
                 fallen.Add(unit.Id);
                 lost.Add(unit.Id);
+                gone.Add(unit);
             }
         }
 
@@ -1419,6 +1441,7 @@ public sealed record CampaignRecord(
             Roster = ValueList<Unit>.From(roster),
             Fallen = ValueList<string>.From(fallen),
             FellOn = FellOnAdd(lost, end.Map.Name),
+            DrakeFlew = DrakeFlewAfter(gone),
             QuestsTried = QuestsTried.Add(questId),
             QuestsWon = won ? QuestsWon.Add(new QuestWon(questId, MapIndex)) : QuestsWon,
             CommonMaterial = CommonMaterial + common,
