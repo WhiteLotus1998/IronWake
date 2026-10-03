@@ -10,18 +10,38 @@ public sealed record DroverRow(string Template, double DroverPlayer, double Capt
     public double CaptainTotal => CaptainPlayer + CaptainEnemy;
 }
 
-/// <summary>The measure at one level and one drake stage: the rows and the bar's verdict on each phase and on both.</summary>
-public sealed record DroverReading(int Level, DrakeStage Stage, ValueList<DroverRow> Rows)
+/// <summary>The measure at one level and one drake stage: the rows, read by the price ceiling per phase.</summary>
+public sealed record DroverReading(int Level, DrakeStage Stage, ValueList<DroverRow> Rows);
+
+/// <summary>
+/// The price ceiling on one phase of one reading (issue 882, round 293): over the templates where the Sky Captain's
+/// expected damage is above hers, how many there are, the median and the worst of hers over his. A template where
+/// neither deals damage, or where she leads, is not counted.
+/// </summary>
+public sealed record DroverGate(int Led, int Templates, double Median, double Worst)
 {
-    /// <summary>How many templates the Drover trails and leads on, read on <paramref name="drover"/> against <paramref name="captain"/>; a tie within 0.05 is neither.</summary>
-    public static (int Behind, int Ahead) Count(IEnumerable<DroverRow> rows, Func<DroverRow, double> drover, Func<DroverRow, double> captain)
+    /// <summary>The ceiling: at Grown her median is at least this share of the Sky Captain's damage where he leads.</summary>
+    public const double Ceiling = 0.70;
+
+    /// <summary>Whether the median meets <see cref="Ceiling"/>; with no template led there is no price, and it passes.</summary>
+    public bool Passes => Led == 0 || Median >= Ceiling;
+
+    /// <summary>The gate over <paramref name="rows"/>, read on <paramref name="drover"/> against <paramref name="captain"/>.</summary>
+    public static DroverGate Of(IReadOnlyCollection<DroverRow> rows, Func<DroverRow, double> drover, Func<DroverRow, double> captain)
     {
-        var list = rows.ToList();
-        return (list.Count(r => drover(r) < captain(r) - 0.05), list.Count(r => drover(r) > captain(r) + 0.05));
+        var ratios = rows.Where(r => captain(r) > drover(r)).Select(r => drover(r) / captain(r)).OrderBy(x => x).ToList();
+        if (ratios.Count == 0)
+        {
+            return new DroverGate(0, rows.Count, 1, 1);
+        }
+
+        var mid = ratios.Count / 2;
+        var median = ratios.Count % 2 == 1 ? ratios[mid] : (ratios[mid - 1] + ratios[mid]) / 2;
+        return new DroverGate(ratios.Count, rows.Count, median, ratios[0]);
     }
 
-    /// <summary>Issue 872's bar: behind on at least a third of the templates and ahead on at least a third.</summary>
-    public static bool Passes(int behind, int ahead, int templates) => behind * 3 >= templates && ahead * 3 >= templates;
+    /// <summary>Only Grown is gated; half-grown prints the same numbers (round 293).</summary>
+    public static bool Gated(DrakeStage stage) => stage == DrakeStage.Grown;
 }
 
 /// <summary>
@@ -86,10 +106,14 @@ public static class DroverMeasure
         return perStrike * side.StrikeCount + side.Bite * (1 - Math.Pow(1 - p, side.StrikeCount));
     }
 
-    /// <summary>The report <c>--drover</c> prints: per level and stage, the sidegrade measures, the table, and the bar per phase and in all.</summary>
+    /// <summary>The start of the verdict line when a Grown cell fails the price ceiling.</summary>
+    public const string FailVerdict = "drover: the price ceiling fails";
+
+    /// <summary>The report <c>--drover</c> prints: per level and stage, the sidegrade measures, the table, and the price ceiling per phase; the last line is the verdict.</summary>
     public static IReadOnlyList<string> Lines(GameContent content, RollScheme scheme)
     {
-        var lines = new List<string> { "drover: Rook in the Drover against the Sky Captain, expected damage per combat on plain (issue 872)" };
+        var lines = new List<string> { "drover: Rook in the Drover against the Sky Captain, expected damage per combat on plain (issues 872, 882)" };
+        var failed = false;
         foreach (var level in Levels)
         {
             foreach (var stage in Stages)
@@ -104,20 +128,23 @@ public static class DroverMeasure
                     lines.Add($"  {row.Template,-16} {row.DroverPlayer,15:F2} {row.CaptainPlayer,8:F2} {row.DroverEnemy,15:F2} {row.CaptainEnemy,8:F2}");
                 }
 
-                var n = reading.Rows.Count;
                 foreach (var (name, d, c) in new (string, Func<DroverRow, double>, Func<DroverRow, double>)[]
                 {
                     ("player phase", r => r.DroverPlayer, r => r.CaptainPlayer),
                     ("enemy phase", r => r.DroverEnemy, r => r.CaptainEnemy),
-                    ("both", r => r.DroverTotal, r => r.CaptainTotal),
                 })
                 {
-                    var (behind, ahead) = DroverReading.Count(reading.Rows, d, c);
-                    lines.Add($"  {name}: behind on {behind} of {n}, ahead on {ahead}; bar {(DroverReading.Passes(behind, ahead, n) ? "passes" : "fails")}");
+                    var gate = DroverGate.Of(reading.Rows, d, c);
+                    var verdict = !DroverGate.Gated(stage) ? "not gated" : gate.Passes ? "gate passes" : "gate fails";
+                    failed |= DroverGate.Gated(stage) && !gate.Passes;
+                    lines.Add($"  {name}: the captain leads on {gate.Led} of {gate.Templates}, her median {gate.Median:F3} of his, worst {gate.Worst:F3}; {verdict}");
                 }
             }
         }
 
+        lines.Add(failed
+            ? $"{FailVerdict} (Grown median under {DroverGate.Ceiling:F2} of the Sky Captain's damage where he leads)"
+            : $"drover: the price ceiling passes at every level and phase (Grown median at least {DroverGate.Ceiling:F2} where he leads)");
         return lines;
     }
 }
