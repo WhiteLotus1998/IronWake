@@ -217,6 +217,7 @@ public class SideMapCliTests
     /// lets Ottilie shoot at range, the pursuers are killed with Wren beside them as the spotter,
     /// a turn-5 line that cannot reach the exits by turn 8 is recalled, and the pair leaves on
     /// turn 8, Wren first.
+    /// Replayed without Teodor's quest 2, which the save's camp would offer ahead of Ottilie's.
     /// </summary>
     [Fact]
     public void TheJournaledLongCountPlayEscapesAndPaysTheTally()
@@ -227,7 +228,7 @@ public class SideMapCliTests
         File.Copy(Transcript(Path.Combine("2026-10-03-the_long_count-91.saves", "longcount.json")), Path.Combine(saves, "longcount.json"));
         try
         {
-            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+            var output = Run(out var exit, "campaign", "--load", "longcount", "--saves", saves, "--script", script, "--strict", "--content", Fixture.BeforeWardensGateContentDirectory());
 
             Assert.Equal(1, exit);
             Assert.Contains("Side map: The Long Count, seed 91\n", output);
@@ -276,5 +277,34 @@ public class SideMapCliTests
         var output = ConsoleCapture.Run(() => code = Ironwake.Cli.Program.Main(args));
         exit = code;
         return output;
+    }
+
+    /// <summary>
+    /// Code's journaled play of Teodor's quest 2 (side-map seed 1110), from the Chapter Roll's camp
+    /// save with Teodor's lance set woken and in front: the west soldier is lured and killed, Wren
+    /// holds the one-tile gap against the rear, Long Thrust from 5,2 wears the boss down while the
+    /// woken yard comes for Wren at 2 HP, and the third thrust wins on turn 7.
+    /// </summary>
+    [Fact]
+    public void TheJournaledWardensGatePlayNamesTheLance()
+    {
+        var script = Transcript("2026-10-03-the_wardens_gate-1110.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-wardens-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_wardens_gate-1110.saves", "wardens.json")), Path.Combine(saves, "wardens.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "wardens", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Side map: The Warden's Gate, seed 1110\n", output);
+            Assert.Contains("Battle won: defeat_boss", output);
+            Assert.Contains("> leave\nTeodor wins teodor_2; Family Lance is the First Warden's Lance now; the stores take 3 frozen iron; nobody fell\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
     }
 }

@@ -127,6 +127,15 @@
       "after": [
         "(Placeholder until the writing pass: the roll, the extra seat, and whose coin bought it.)",
         "(The Scout is open to Rook at her second promotion: the other door above the Skyrider.)"
+      ] },
+    { "id": "teodor_2", "member": "teodor", "part": 2, "map": "the_wardens_gate", "names": "family_lance", "rare": 3,
+      "before": [
+        "Teodor asked for two days and one pair of hands. The prison's outer gate is a day north of Aldmere, under the hill, and the first warden's name is cut over it. Hask's sworn have been chipping at the stone around it for shards.",
+        "(Placeholder card until the writing pass. Defeat their captain on the fort before the gate, 7,2, by the end of turn 10. The map is lost if Teodor falls. The old wall at row 5 has two ways through: a one-tile gap at 4,5 and a breach at 10,5 and 11,5. Riders keep the east yard. More come up the road behind you from turn 3, announced.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the name over the gate, and the lance that matches it.)",
+        "(The Family Lance is the First Warden's Lance now. Once woken, its art Turn the Key strikes at -4 Power, once, never doubling; a hit the enemy survives locks it, Mov 0 until its side's next phase ends, while Teodor stands beside it. If he leaves or falls, the lock drops to a chill.)"
       ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },

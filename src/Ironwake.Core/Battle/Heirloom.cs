@@ -25,17 +25,37 @@ public static class Heirloom
     /// <summary>The line the smith gives an heirloom still at its first stage (issue 646), which the forge refuses to work.</summary>
     public const string SmithRefusal = "Nothing here to work with. It's all rust.";
 
-    /// <summary>The weapon as its stack's stage makes it: the stage's numbers and line; any other weapon, or stage 0, unchanged.</summary>
+    /// <summary>
+    /// The weapon as its stack's stage makes it: the stage's numbers and line, and its true name once
+    /// named (<see cref="ItemStack.Named"/>); any other weapon, or stage 0 unnamed, unchanged.
+    /// </summary>
     public static Weapon Shape(Weapon weapon, ItemStack stack)
     {
-        if (weapon.Heirloom is not { } ladder || stack.Stage <= 0)
+        if (weapon.Heirloom is not { } ladder)
         {
             return weapon;
         }
 
+        var named = stack.Named && ladder.Named is { } name ? weapon with { Name = name } : weapon;
+        if (stack.Stage <= 0)
+        {
+            return named;
+        }
+
         var stage = ladder.Turns[Math.Min(stack.Stage, ladder.Turns.Count) - 1];
-        return weapon with { Mt = stage.Mt, Hit = stage.Hit, Crit = stage.Crit, Wt = stage.Wt, Description = stage.Description };
+        return named with { Mt = stage.Mt, Hit = stage.Hit, Crit = stage.Crit, Wt = stage.Wt, Description = stage.Description };
     }
+
+    /// <summary>The name a pack prints for <paramref name="stack"/>: an heirloom's true name once named, else the item's own.</summary>
+    public static string Name(ItemStack stack, GameContent content) =>
+        stack.Named && content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.Heirloom is { Named: { } name } ? name : content.ItemName(stack.ItemId);
+
+    /// <summary>
+    /// Whether a woken-only art (<see cref="CombatArtEffect.Woken"/>) may be declared with <paramref name="stack"/>:
+    /// an heirloom at its last stage and, where its ladder carries a true name, named by its quest 2.
+    /// </summary>
+    public static bool ArtOpen(Weapon weapon, ItemStack stack) =>
+        weapon.Heirloom is { } ladder && ladder.Turns.Count > 0 && stack.Stage >= ladder.Turns.Count && (ladder.Named is null || stack.Named);
 
     /// <summary>The id of the stage <paramref name="stack"/> has reached; null for a weapon with no ladder.</summary>
     public static string? StageId(Weapon weapon, ItemStack stack) =>
@@ -117,7 +137,7 @@ public static class Heirloom
         {
             if (content.Weapons.TryGetValue(stack.ItemId, out var weapon) && weapon.Heirloom is not null)
             {
-                var line = $"{weapon.Name}, {StageId(weapon, stack)}: {Shape(weapon, stack).Description}";
+                var line = $"{Name(stack, content)}, {StageId(weapon, stack)}: {Shape(weapon, stack).Description}";
                 return weapon.Heirloom is { Held: { } held } ladder && Held(ladder, stack, stack.Stage + 1) && stack.Stage == ladder.Turns.Count - 1 && stack.Combats >= ladder.Turns[^1].At
                     ? $"{line} {held}"
                     : line;

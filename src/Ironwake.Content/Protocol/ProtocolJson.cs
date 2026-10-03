@@ -297,6 +297,20 @@ public static class ProtocolJson
                 }
 
                 break;
+            case UnitLocked l:
+                w.WriteString("unit", l.UnitId);
+                w.WriteString("by", l.ByUnitId);
+                w.WriteString("side", Name(l.Side));
+                if (l.Next)
+                {
+                    w.WriteBoolean("next", true);
+                }
+
+                break;
+            case LockDropped d:
+                w.WriteString("unit", d.UnitId);
+                w.WriteString("by", d.ByUnitId);
+                break;
             case UnitGrounded g:
                 w.WriteString("unit", g.UnitId);
                 w.WriteString("by", g.ByUnitId);
@@ -1001,6 +1015,11 @@ public static class ProtocolJson
             w.WriteNumber("chill", unit.Chill);
         }
 
+        if (unit.LockedBy is { } lockedBy)
+        {
+            w.WriteString("lockedBy", lockedBy);
+        }
+
         if (unit.Grounded > 0)
         {
             w.WriteNumber("grounded", unit.Grounded);
@@ -1109,6 +1128,11 @@ public static class ProtocolJson
                 w.WriteBoolean("gateOpen", true);
             }
 
+            if (stack.Named)
+            {
+                w.WriteBoolean("named", true);
+            }
+
             if (stack.Refines != 0)
             {
                 w.WriteNumber("refines", stack.Refines);
@@ -1190,6 +1214,7 @@ public static class ProtocolJson
             HasFed = e.TryGetProperty("hasFed", out _) && RequiredBool(e, "hasFed"),
             Pressed = e.TryGetProperty("pressed", out _) && RequiredBool(e, "pressed"),
             Chill = OptionalInt(e, "chill") ?? 0,
+            LockedBy = OptionalString(e, "lockedBy"),
             Grounded = OptionalInt(e, "grounded") ?? 0,
             Open = e.TryGetProperty("open", out var open) ? new OpenMark(RequiredString(open, "by"), RequiredInt(open, "def"), RequiredInt(open, "res")) : null,
             FallingBack = e.TryGetProperty("fallingBack", out _) && RequiredBool(e, "fallingBack"),
@@ -1252,7 +1277,7 @@ public static class ProtocolJson
                 RequiredInt(e, "exp"),
                 ReadStats(Required(e, "stats")),
                 ReadStats(Required(e, "growths")),
-                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, GateOpen = s.TryGetProperty("gateOpen", out _) && RequiredBool(s, "gateOpen"), Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
+                new Inventory(ValueList<ItemStack>.From(Array(Required(e, "inventory"), "inventory").Select(s => new ItemStack(RequiredString(s, "item"), RequiredInt(s, "uses")) { Keepsake = OptionalString(s, "keepsake"), Fed = OptionalInt(s, "fed") ?? 0, Starved = s.TryGetProperty("starved", out _) && RequiredBool(s, "starved"), Combats = OptionalInt(s, "combats") ?? 0, Stage = OptionalInt(s, "stage") ?? 0, GateOpen = s.TryGetProperty("gateOpen", out _) && RequiredBool(s, "gateOpen"), Named = s.TryGetProperty("named", out _) && RequiredBool(s, "named"), Refines = OptionalInt(s, "refines") ?? 0, RefineMt = OptionalInt(s, "refineMt") ?? 0, RefineHit = OptionalInt(s, "refineHit") ?? 0 }))),
                 ReadStrings(e, "abilities"),
                 OptionalString(e, "region"),
                 OptionalString(e, "personality"))

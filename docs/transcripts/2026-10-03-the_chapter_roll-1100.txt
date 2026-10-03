@@ -30,6 +30,7 @@ Keep: Ironwake Keep; built: nothing; the purse holds 500
 == Quests ==
 Side maps (the member and one ally you pick, not the captain; a lost side map never ends the campaign):
   rook_1: Rook's quest 1, The Chapter Roll (quest rook_1 <ally>); permadeath applies
+  teodor_2: Teodor's quest 2, The Warden's Gate (quest teodor_2 <ally>); permadeath applies
 Side maps won:
   maud_1: Maud's quest 1, The Lazar House; paid 2 common material
   pell_1: Pell's quest 1, The Burned School; paid 2 common material

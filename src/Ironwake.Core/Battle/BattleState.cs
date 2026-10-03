@@ -537,13 +537,14 @@ public sealed record BattleState(
 
     /// <summary>
     /// Where a unit may move, by the section 4 rule on the board as it stands: its class's Mov, one
-    /// more when Pressed (issue 85), one less when chilled, never below 1 (issue 702, <see cref="Frost.Mov"/>);
+    /// more when Pressed (issue 85), one less when chilled, never below 1 (issue 702, <see cref="Frost.Mov"/>),
+    /// and 0 while locked (issue 635, <see cref="Lock.Holds"/>);
     /// on foot while grounded, and no move at all when stranded (issue 703, <see cref="Grounding"/>).
     /// </summary>
     public Reach ReachOf(BattleUnit unit, GameContent content)
     {
         var unitClass = content.Class(unit.Unit.ClassId);
-        var mov = Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit);
+        var mov = Lock.Holds(this, unit) ? 0 : Frost.Mov(unitClass.Mov + (unit.Pressed ? 1 : 0), unit);
         return ReachOn(unit, content, mov);
     }
 

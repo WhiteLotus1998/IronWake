@@ -138,6 +138,7 @@ public static class Resolver
             next = OpenCanto(next, content, acted, healed: command is UseItem && events.OfType<UnitHealed>().Any(h => h.UnitId != acted));
         }
 
+        next = Lock.After(next, events);
         next = Freed.After(state, next, events);
         next = Break.After(state, next, content, events);
         next = Fronts.After(state, next, content, events);
@@ -613,6 +614,7 @@ public static class Resolver
         next = Wildfire.AfterCombat(next, unit.Id, weapon, target.At, result.Strikes, events);
         next = Wildfire.AfterCombat(next, target.Id, defenderWeapon, unit.At, result.Strikes, events);
         next = Frost.AfterCombat(next, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
+        next = Lock.AfterAttack(next, art, unit.Id, target.Id, result.Strikes, events);
         next = Grounding.AfterCombat(next, content, unit.Id, weapon, target.Id, defenderWeapon, result.Strikes, events);
         next = Opening.AfterAttack(next, content, unit, target.Id, result.Strikes, events);
         next = Windup.AfterCombat(next, content, unit, target, result.Strikes, events);
@@ -827,6 +829,7 @@ public static class Resolver
         var uses = unit.Unit.Inventory.Items[unit.EquippedSlot(content)].Uses;
         var why = weapon.Type != art.Weapon ? $"{ability.Name} is a {Lower(art.Weapon)} technique and {weapon.Name} is a {Lower(weapon.Type)}"
             : art.Item is { } item && item != weapon.Id ? $"{ability.Name} is declared only with {content.ItemName(item)}"
+            : art.Woken && !Heirloom.ArtOpen(content.Weapon(unit.Unit.Inventory.Items[unit.EquippedSlot(content)].ItemId), unit.Unit.Inventory.Items[unit.EquippedSlot(content)]) ? $"{ability.Name} waits until {weapon.Name} is woken and named"
             : unit.Unit.Skill.Rank(art.Weapon) < art.Rank ? $"rank {unit.Unit.Skill.Rank(art.Weapon)} in {Lower(art.Weapon)}, and {ability.Name} needs {art.Rank}"
             : art.PerMap is { } cap && unit.TimesDeclared(artId) >= cap ? $"{ability.Name} is {Times(cap)} a map and is spent"
             : uses == 0 ? $"{weapon.Name} is broken and cannot pay for a technique"
@@ -1627,7 +1630,7 @@ public static class Resolver
                 events.Add(new UnitRested(unit.Id));
             }
 
-            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null });
+            units.Add(unit with { Hp = hp, Moved = resting, Acted = resting, Spent = spent, Canto = null, Shoved = false, Pressed = false, FallingBack = false, Braced = unit.Braced && unit.Side != nextPhase, Watching = unit.Watching && unit.Side != nextPhase, CoveredBy = unit.Side != nextPhase ? unit.CoveredBy : null, Chill = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase), LockedBy = Frost.AtPhaseChange(unit.Chill, unit.Side, ended, nextPhase) > 0 ? unit.LockedBy : null, Grounded = Frost.AtPhaseChange(unit.Grounded, unit.Side, ended, nextPhase), Open = null });
         }
 
         var next = state with { Phase = nextPhase, Turn = nextTurn, Units = ValueList<BattleUnit>.From(units) };

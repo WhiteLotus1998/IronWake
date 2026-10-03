@@ -266,6 +266,16 @@ public sealed record HeirloomTurned(string UnitId, string ItemId, int Stage, str
 public sealed record UnitChilled(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
 
 /// <summary>
+/// A hit with a locking art locked a unit that survived it (issue 635, <see cref="Lock"/>): Mov 0 until
+/// its side's next phase ends while <paramref name="ByUnitId"/> stands beside it. <paramref name="Next"/>
+/// is true when it was struck on its own side's phase.
+/// </summary>
+public sealed record UnitLocked(string UnitId, string ByUnitId, Side Side, bool Next = false) : GameEvent;
+
+/// <summary>A lock's striker left the locked unit's side or fell (issue 635, <see cref="Lock"/>): the lock drops to the chill.</summary>
+public sealed record LockDropped(string UnitId, string ByUnitId) : GameEvent;
+
+/// <summary>
 /// A hit from a holder of Opening left an enemy alive and open (issue 772, <see cref="Opening"/>): until the
 /// phase ends, every strike by an ally of <paramref name="ByUnitId"/> reads its Def <paramref name="Def"/> and
 /// its Res <paramref name="Res"/> lower, never below 0.

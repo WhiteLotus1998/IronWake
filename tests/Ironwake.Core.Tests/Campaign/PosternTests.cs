@@ -28,7 +28,7 @@ public class PosternTests
     /// </summary>
     private static CampaignRecord WithBet(string mapId)
     {
-        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5), new QuestWon("ottilie_1", 6), new QuestWon("pell_2", 7));
+        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5), new QuestWon("ottilie_1", 6), new QuestWon("pell_2", 7), new QuestWon("teodor_2", 7));
         var record = CampaignRecord.StartAt(Content, 691, mapId) with { Purse = 5000, QuestsWon = won };
         var built = record.BuildRoom("barracks", Content);
         Assert.True(built.Accepted, built.Text);

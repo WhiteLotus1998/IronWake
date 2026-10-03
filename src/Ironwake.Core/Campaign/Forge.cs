@@ -82,11 +82,11 @@ public static class Forge
 
     /// <summary>
     /// The rare material the campaign must pay, by the "exactly enough" rule (issue 647): every
-    /// signature it issues (a quest's <see cref="CampaignQuest.Pays"/>) that refines on rare, at
+    /// signature it issues (a quest's <see cref="CampaignQuest.Pays"/> or <see cref="CampaignQuest.Names"/>) that refines on rare, at
     /// <see cref="ForgeRules.RareSteps"/> each. Kinsbane never Refines, so it never counts.
     /// </summary>
     public static int RareNeeded(GameContent content) =>
-        content.Campaign.Quests.Select(q => q.Pays).OfType<string>().Distinct()
+        content.Campaign.Quests.Select(q => q.Pays ?? q.Names).OfType<string>().Distinct()
             .Count(id => MaterialFor(content.Weapon(id), content).Material == Material.Rare) * content.Campaign.Forge.RareSteps;
 
     /// <summary>The rare material the campaign pays: every quest's payout.</summary>

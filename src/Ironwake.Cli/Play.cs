@@ -1509,7 +1509,8 @@ public sealed class PlaySession
         return $"  technique {ability.Name}: {struck.Name} at acc {struck.Hit} power {struck.Mt} crit {struck.Crit} wt {struck.Wt} range {struck.MinRange}-{struck.MaxRange}; spends up to {forecast.AttackerSpendsAtMost} of {uses} uses, {forecast.ArtCost} of them hit or miss"
             + (((CombatArtEffect)ability.Effect).PerMap is { } cap ? $"; {cap - unit.TimesDeclared(art)} of {cap} left this map" : "")
             + (((CombatArtEffect)ability.Effect).Single ? "; x1, never doubles" : "")
-            + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "");
+            + (((CombatArtEffect)ability.Effect).CostsNextPhase ? "; costs the next phase: no move, no act" : "")
+            + (((CombatArtEffect)ability.Effect).Locks ? $"; locks: a hit it survives holds it at Mov 0 while {armed.Unit.Name} stands beside" : "");
     }
 
     /// <summary>
@@ -1828,7 +1829,7 @@ public sealed class PlaySession
         }
 
         var stack = unit.Unit.Inventory.Items[slot];
-        return " with " + content.ItemName(stack.ItemId) + Keepsake.Suffix(stack, content);
+        return " with " + Heirloom.Name(stack, content) + Keepsake.Suffix(stack, content);
     }
 
     /// <summary>
@@ -1897,7 +1898,7 @@ public sealed class PlaySession
 
             var slots = count == 0
                 ? "carries nothing"
-                : "slots: " + string.Join(", ", unit.Unit.Inventory.Items.Select((item, at) => $"{at + 1} {_content.ItemName(item.ItemId)}"));
+                : "slots: " + string.Join(", ", unit.Unit.Inventory.Items.Select((item, at) => $"{at + 1} {Heirloom.Name(item, _content)}"));
             Error(named.Count == 0
                 ? $"{unit.Id} carries no '{text}'; {slots}"
                 : $"{unit.Id} carries '{text}' in slots {string.Join(" and ", named.Select(at => at + 1))}; give the slot number; {slots}");
@@ -1993,7 +1994,7 @@ public sealed class PlaySession
             lines.Add($"  Frozen iron: a hit chills, Mov -{Frost.MovLost} until the end of the target's side's next phase");
         }
 
-        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {content.ItemName(item.ItemId)}{Keepsake.Suffix(item, content)} x{item.Uses}");
+        var slots = unit.Unit.Inventory.Items.Select((item, slot) => $"{slot + 1}: {Heirloom.Name(item, content)}{Keepsake.Suffix(item, content)} x{item.Uses}");
         lines.Add($"  Items: {(unit.Unit.Inventory.Count == 0 ? "none" : string.Join(", ", slots))}");
         var ranks = content.Class(unit.Unit.ClassId).Weapons
             .Select(type => $"{type.Label()} {unit.Unit.Skill.Rank(type)} ({unit.Unit.Skill.Points(type)})");
@@ -2047,7 +2048,11 @@ public sealed class PlaySession
             lines.Add("  Pressed: +1 Mov this phase");
         }
 
-        if (Frost.CardLine(state, unit) is { } chilled)
+        if (unit.LockedBy is { } locker && Lock.CardLine(state, unit, UnitNames.Of(state, content)[locker]) is { } locked)
+        {
+            lines.Add("  " + locked);
+        }
+        else if (Frost.CardLine(state, unit) is { } chilled)
         {
             lines.Add("  " + chilled);
         }
@@ -2569,6 +2574,10 @@ public sealed class PlaySession
                 return $"{names[o.UnitId]} is open: allies of {names[o.ByUnitId]} strike it at Def -{o.Def}, Res -{o.Res} until the phase ends";
             case UnitChilled c:
                 return $"{names[c.UnitId]} is chilled: Mov -{Frost.MovLost} until {Frost.Until(c.Side, c.Next)}";
+            case UnitLocked l:
+                return $"{names[l.UnitId]} is locked by {names[l.ByUnitId]}: Mov 0 until {Frost.Until(l.Side, l.Next)} while {names[l.ByUnitId]} stands beside";
+            case LockDropped d:
+                return $"{names[d.UnitId]}'s lock drops: {names[d.ByUnitId]} no longer stands beside it; chilled still";
             case UnitGrounded g:
                 return $"{names[g.UnitId]} is grounded: moves on foot until {Frost.Until(g.Side, g.Next)}";
             case HeirloomTurned t:

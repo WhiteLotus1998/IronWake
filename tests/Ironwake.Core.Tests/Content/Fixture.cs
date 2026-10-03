@@ -303,7 +303,10 @@ internal static class Fixture
     /// <c>forge</c> and the quests' material payouts are taken out too (issue 647), and before the
     /// barracks, so a hire's quest goes with the hires (issue 691).
     /// </summary>
-    private static string CopyContentAsIs(string prefix)
+    private static string CopyContentAsIs(string prefix) => WithoutTheField(CopyFiles(prefix));
+
+    /// <summary>A file-for-file copy of the real content directory under the temp directory, nothing taken out.</summary>
+    private static string CopyFiles(string prefix)
     {
         var source = RealContentDirectory();
         var target = Path.Combine(Path.GetTempPath(), prefix + Guid.NewGuid().ToString("N"));
@@ -314,7 +317,7 @@ internal static class Fixture
             File.Copy(file, copy);
         }
 
-        return WithoutTheField(target);
+        return target;
     }
 
     /// <summary>
@@ -349,9 +352,9 @@ internal static class Fixture
 
         var castPath = Path.Combine(target, "units", "cast.json");
         var cast = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(castPath))!;
-        foreach (var unit in cast["units"]!.AsArray().OfType<System.Text.Json.Nodes.JsonObject>().Where(u => (string)u["id"]! is "pell" or "ottilie"))
+        foreach (var unit in cast["units"]!.AsArray().OfType<System.Text.Json.Nodes.JsonObject>().Where(u => (string)u["id"]! is "pell" or "ottilie" or "teodor"))
         {
-            unit["abilities"] = new System.Text.Json.Nodes.JsonArray(unit["abilities"]!.AsArray().Where(a => (string)a! is not ("read_ahead" or "paid_in_full")).Select(a => a!.DeepClone()).ToArray());
+            unit["abilities"] = new System.Text.Json.Nodes.JsonArray(unit["abilities"]!.AsArray().Where(a => (string)a! is not ("read_ahead" or "paid_in_full" or "turn_the_key")).Select(a => a!.DeepClone()).ToArray());
         }
 
         File.WriteAllText(castPath, cast.ToJsonString());
@@ -411,6 +414,27 @@ internal static class Fixture
         }
 
         File.WriteAllText(classesPath, classes.ToJsonString());
+        return target;
+    }
+
+    private static readonly Lazy<string> BeforeWardensGate = new(() => WithoutQuest(CopyFiles("ironwake-before-wardens-gate-"), "teodor_2"));
+
+    /// <summary>
+    /// A copy of the real content directory without Teodor's quest 2 (issue 635 slice 12). A camp
+    /// that has won Teodor's quest 1 offers it ahead of a quest opened later, so a side map journaled
+    /// at such a camp before it existed replays only without it. Made once per test run under the
+    /// temp directory.
+    /// </summary>
+    public static string BeforeWardensGateContentDirectory() => BeforeWardensGate.Value;
+
+    /// <summary>Takes the side map <paramref name="questId"/> out of the campaign's quests in the copy at <paramref name="target"/>.</summary>
+    public static string WithoutQuest(string target, string questId)
+    {
+        var campaignPath = Path.Combine(target, ContentFiles.CampaignName);
+        var campaign = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(campaignPath))!;
+        var quests = campaign["quests"]!.AsArray().Where(q => (string)q!["id"]! != questId).Select(q => q!.DeepClone()).ToArray();
+        campaign.AsObject()["quests"] = new System.Text.Json.Nodes.JsonArray(quests);
+        File.WriteAllText(campaignPath, campaign.ToJsonString());
         return target;
     }
 

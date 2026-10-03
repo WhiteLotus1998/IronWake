@@ -186,7 +186,7 @@ public class SideMapTests
     [Fact]
     public void OttiliesSecondQuestOpensTwoMapsAfterHerFirstIsWon()
     {
-        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5), new QuestWon("ottilie_1", 6), new QuestWon("pell_2", 6));
+        var won = ValueList<QuestWon>.Of(new QuestWon("maud_1", 3), new QuestWon("pell_1", 4), new QuestWon("maud_2", 5), new QuestWon("teodor_1", 5), new QuestWon("ottilie_1", 6), new QuestWon("pell_2", 6), new QuestWon("teodor_2", 7));
         var brackwater = At("brackwater_cut") with { QuestsWon = won };
         var field = At("the_field") with { QuestsWon = won };
 
@@ -244,7 +244,7 @@ public class SideMapTests
     {
         var record = At("ironwake_raid");
         var first = Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, Content)).ToList();
-        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("teodor_2", "teodor", 2)) } };
+        var appended = Content with { Campaign = Content.Campaign with { Quests = Content.Campaign.Quests.Add(Quest("keziah_1", "keziah", 1)) } };
 
         Assert.Equal(first, Content.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)));
         Assert.Equal(first.Count + 1, appended.Campaign.Quests.Select(q => record.QuestSeed(q.Id, appended)).Distinct().Count());
@@ -336,7 +336,7 @@ public class SideMapTests
     [InlineData("maud_1", "captain", "captain is the captain and stays with the company; pick another ally")]
     [InlineData("maud_1", "maud", "maud is the side map's own; pick an ally beside maud")]
     [InlineData("maud_1", "nobody", "no unit 'nobody' on the roster")]
-    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2, rook_1")]
+    [InlineData("wren_9", "wren", "no side map 'wren_9'; the campaign has maud_1, bet_postern, maud_2, pell_1, pell_2, teodor_1, ottilie_1, ottilie_2, rook_1, teodor_2")]
     public void ASideMapIsRefusedTheCaptainTheMemberAStrangerAndAnUnknownQuest(string quest, string ally, string refusal)
     {
         Assert.Equal(refusal, At("the_tollgate").QuestRefusal(quest, ally, Content));

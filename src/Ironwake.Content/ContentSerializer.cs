@@ -168,6 +168,11 @@ public static class ContentSerializer
                         writer.WriteString("wakes", wakes);
                     }
 
+                    if (quest.Names is { } names)
+                    {
+                        writer.WriteString("names", names);
+                    }
+
                     if (quest.Common > 0)
                     {
                         writer.WriteNumber("common", quest.Common);
@@ -434,6 +439,16 @@ public static class ContentSerializer
                 if (art.Single)
                 {
                     writer.WriteBoolean("single", true);
+                }
+
+                if (art.Woken)
+                {
+                    writer.WriteBoolean("woken", true);
+                }
+
+                if (art.Locks)
+                {
+                    writer.WriteBoolean("locks", true);
                 }
 
                 if (art.Item is { } item)
@@ -906,6 +921,11 @@ public static class ContentSerializer
             if (ladder.Held is { } held)
             {
                 writer.WriteString("held", held);
+            }
+
+            if (ladder.Named is { } named)
+            {
+                writer.WriteString("named", named);
             }
 
             writer.WriteStartArray("stages");

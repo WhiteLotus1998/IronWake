@@ -80,6 +80,12 @@ public sealed record BattleUnit(
     public int Chill { get; init; }
 
     /// <summary>
+    /// The unit whose Turn the Key locked this one (issue 635, <see cref="Lock"/>), or null. While the
+    /// chill clock runs and that unit stands orthogonally beside it, its Mov is 0 (<see cref="Lock.Holds"/>).
+    /// </summary>
+    public string? LockedBy { get; init; }
+
+    /// <summary>
     /// The open mark (issue 772, <see cref="Opening"/>): set when a holder of Opening hits the unit and leaves it
     /// alive, cleared when the phase ends; null when the unit is not open. While it is set, a strike on the unit
     /// by any unit of another side than its own, other than <see cref="OpenMark.By"/>, reads its Def and Res lower.
