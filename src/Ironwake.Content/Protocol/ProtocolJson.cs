@@ -1253,7 +1253,7 @@ public static class ProtocolJson
     /// <summary>
     /// A campaign record (issue 74) as one JSON object: the protocol version, the seed as a string
     /// (a ulong does not survive every JSON reader), the difficulty, permadeath when it is off (issue 664;
-    /// a record without it reads as on), the captain's origin when one was chosen (issue 681), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
+    /// a record without it reads as on), the captain's origin when one was chosen (issue 681), the branch's pick once made (issue 633), the difficulties it was lowered from when there are any (issue 677), the purse, the index of the next
     /// map, the roster in roster order (each unit's id, name and own fields as a state writes them,
     /// without the battle fields), the fallen and benched ids, and the certification trials tried
     /// since the last map (issue 252), the side maps won and those fought since the last map when there are any (issue 635), and the edits bought for the keep in the order they were made
@@ -1283,6 +1283,11 @@ public static class ProtocolJson
         if (record.Origin is { } origin)
         {
             w.WriteString("origin", origin);
+        }
+
+        if (record.Pick is { } pick)
+        {
+            w.WriteString("pick", pick);
         }
 
         if (record.LoweredFrom.Count > 0)
@@ -1438,6 +1443,7 @@ public static class ProtocolJson
             Rapport = e.TryGetProperty("rapport", out var rapport) ? ReadRapport(rapport) : ValueList<Rapport>.Empty,
             LoweredFrom = ReadLoweredFrom(e, content),
             Origin = ReadOrigin(e, content),
+            Pick = ReadPick(e, content),
         };
     }
 
@@ -1488,6 +1494,19 @@ public static class ProtocolJson
         return content.Campaign.Origin(origin) is null
             ? throw new ProtocolException($"origin '{origin}' is not one the campaign offers")
             : origin;
+    }
+
+    /// <summary>The optional <c>pick</c> of a campaign record (issue 633), a claimant some campaign map's branch offers; a record without one has made no pick.</summary>
+    private static string? ReadPick(JsonElement e, GameContent content)
+    {
+        if (OptionalString(e, "pick") is not { } pick)
+        {
+            return null;
+        }
+
+        return content.Campaign.Maps.Any(m => m.Branch.Contains(pick))
+            ? pick
+            : throw new ProtocolException($"pick '{pick}' is not a claimant the campaign offers");
     }
 
     /// <summary>The optional <c>fellOn</c> array of a campaign record (issue 678), the board each of the fallen fell on; a record written before it reads as none.</summary>

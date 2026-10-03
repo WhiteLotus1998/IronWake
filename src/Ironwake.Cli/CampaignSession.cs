@@ -40,6 +40,7 @@ public sealed class CampaignSession
           keep                     The keep's rooms and beds; once the raid is fought, each wall placement, its price and what it does
           build <room>             Buy a room for the keep from the purse; each adds beds, and no bed free means a recruit will not join
           hire [<id>]              List the barracks' hires, or hire one into the company from the purse (once the barracks is built)
+          pick <unit>              Fill the last seat with one of the two claimants; the other rides home (final)
           build <edit> <x,y>       Buy one edit of the keep's menu at one of its placements
           bench <unit>             Keep a unit off the next map; the next in roster order fills its slot
           unbench <unit>           Return a benched unit to the deployment order
@@ -679,7 +680,33 @@ public sealed class CampaignSession
         }
 
         lines.AddRange(LowLines(record, content));
+        lines.AddRange(BranchLines(record, content));
         return lines;
+    }
+
+    /// <summary>
+    /// The branch as the Roster panel prints it at its camp (issue 633, DESIGN section 14): before the
+    /// pick, the two claimants with their classes, the command, and the bed rule the return is set up
+    /// under; after it, who took the seat and who rode home. Empty at every other camp.
+    /// </summary>
+    public static IReadOnlyList<string> BranchLines(CampaignRecord record, GameContent content)
+    {
+        if (record.IsFinished(content) || record.NextMap(content).Branch is not { Count: 2 } branch)
+        {
+            return Array.Empty<string>();
+        }
+
+        string Claimant(string id) => $"{content.Unit(id).Name} ({content.Class(content.Unit(id).ClassId).Name})";
+        if (record.Pick is { } pick)
+        {
+            return new[] { $"The seat: {content.Unit(pick).Name}. {content.Unit(record.Passed(content)!).Name} rode home." };
+        }
+
+        return new[]
+        {
+            $"The last seat: {Claimant(branch[0])} or {Claimant(branch[1])} (pick <unit>). The one passed on rides home.",
+            "They come back before the keep. Turned, they join only if a bed is free, and a death never frees one.",
+        };
     }
 
     /// <summary>
@@ -1013,6 +1040,9 @@ public sealed class CampaignSession
                 break;
             case ["hire", var hireId]:
                 Take(_record.Hire(hireId, _content), text);
+                break;
+            case ["pick", var claimant]:
+                Take(_record.PickClaimant(claimant, _content), text);
                 break;
             case ["build", var roomId] when _content.Campaign.Keep.Edit(roomId) is null:
                 Take(_record.BuildRoom(roomId, _content), text);

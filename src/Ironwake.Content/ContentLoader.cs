@@ -177,7 +177,8 @@ public static class ContentLoader
     /// the cast, the captain (the cast's first, there from the start) and a unit arriving twice are
     /// refused. Whoever loads the map checks that it places each arrival by name. A map's optional
     /// <c>joins</c> (issue 763) lists the cast ids who join the company at its camp, unplaced, under the
-    /// same refusals; an id named in both lists or on two maps is refused.
+    /// same refusals; an id named in both lists or on two maps is refused. A map's optional
+    /// <c>branch</c> (issue 633) names exactly two claimants under the same refusals, on one map at most.
     /// A map's optional <c>enemyLevel</c> (issue 704) is the level the campaign fights it at, 1 to the
     /// level cap, in place of the file's; its optional <c>swap</c> object maps an <c>x,y</c> tile to an
     /// enemy template id the campaign fields there instead (a cast member is refused); whoever loads the
@@ -278,7 +279,18 @@ public static class ContentLoader
 
             var arrives = node.StringArrayOrEmpty("arrives");
             var joins = node.StringArrayOrEmpty("joins");
-            foreach (var (field, named) in new[] { ("arrives", arrives), ("joins", joins) })
+            var branch = node.StringArrayOrEmpty("branch");
+            if (branch.Count is not (0 or 2))
+            {
+                throw node.Error("branch", "must name exactly two claimants");
+            }
+
+            if (branch.Count > 0 && maps.Any(m => m.Branch.Count > 0))
+            {
+                throw node.Error("branch", "only one map may offer a branch");
+            }
+
+            foreach (var (field, named) in new[] { ("arrives", arrives), ("joins", joins), ("branch", branch) })
             {
                 foreach (var id in named)
                 {
@@ -292,7 +304,7 @@ public static class ContentLoader
                         throw node.Error(field, $"'{id}' is the captain, who leads from the first map");
                     }
 
-                    if (arrives.Concat(joins).Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id) || m.Joins.Contains(id)))
+                    if (arrives.Concat(joins).Concat(branch).Count(a => a == id) > 1 || maps.Any(m => m.Arrives.Contains(id) || m.Joins.Contains(id) || m.Branch.Contains(id)))
                     {
                         throw node.Error(field, $"'{id}' arrives or joins on more than one map");
                     }
@@ -336,6 +348,7 @@ public static class ContentLoader
                 After = Card(node, "after"),
                 Arrives = ValueList<string>.From(arrives),
                 Joins = ValueList<string>.From(joins),
+                Branch = ValueList<string>.From(branch),
                 EnemyLevel = enemyLevel,
                 Swaps = ValueList<TemplateSwap>.From(swaps),
             });

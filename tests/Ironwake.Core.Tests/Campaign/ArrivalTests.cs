@@ -68,7 +68,7 @@ public class ArrivalTests
         var after = mill.AfterBattle(Won(mill, Map("the_mill")), Content);
 
         Assert.NotNull(after.Find("maud"));
-        Assert.Equal(Content.Cast.Select(u => u.Id).Where(id => id != "rook"), after.Roster.Select(u => u.Id));
+        Assert.Equal(Content.Cast.Select(u => u.Id).Where(id => id is not ("rook" or "keziah")), after.Roster.Select(u => u.Id));
         Assert.Empty(after.Fallen);
     }
 

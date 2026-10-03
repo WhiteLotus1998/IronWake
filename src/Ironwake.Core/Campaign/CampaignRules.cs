@@ -35,6 +35,15 @@ public sealed record CampaignMap(string MapId, int Reward, ValueList<string> Sto
     public ValueList<string> Joins { get; init; } = ValueList<string>.Empty;
 
     /// <summary>
+    /// The two claimants offered at this map's camp (issue 633, DESIGN section 14's branch), as cast
+    /// ids: both are off the roster until this map, the camp's <c>pick</c> chooses one, who then joins
+    /// like a <see cref="Joins"/> entry, and the one passed on never joins the company. A march to this
+    /// map is refused until the pick is made (<see cref="CampaignRecord.MarchRefusal"/>). Empty for a
+    /// map with no branch; at most one map carries one.
+    /// </summary>
+    public ValueList<string> Branch { get; init; } = ValueList<string>.Empty;
+
+    /// <summary>
     /// The enemy level this map is fought at in the campaign (issue 704, the curve of rounds 223 to 226),
     /// in place of its file's <c>enemy_level</c>, or null to keep the file's. The standalone map is never
     /// changed by it; a difficulty's offset is added on top, as on any map.
@@ -167,14 +176,15 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     public CaptainOrigin? Origin(string originId) => Origins.FirstOrDefault(o => o.Id == originId);
 
     /// <summary>
-    /// The index of the map <paramref name="unitId"/> arrives on (issue 632) or joins at (issue 763),
+    /// The index of the map <paramref name="unitId"/> arrives on (issue 632), joins at (issue 763) or is
+    /// offered at as a claimant (issue 633),
     /// or -1 for a unit no map names, who is on the roster from the first map.
     /// </summary>
     public int ArrivalIndex(string unitId)
     {
         for (var i = 0; i < Maps.Count; i++)
         {
-            if (Maps[i].Arrives.Contains(unitId) || Maps[i].Joins.Contains(unitId))
+            if (Maps[i].Arrives.Contains(unitId) || Maps[i].Joins.Contains(unitId) || Maps[i].Branch.Contains(unitId))
             {
                 return i;
             }

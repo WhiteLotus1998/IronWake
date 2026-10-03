@@ -95,6 +95,7 @@ public static class LevelRun
             int? lost = null;
             while (!record.IsFinished(content))
             {
+                record = SimPick.Made(record, content);
                 var number = record.MapIndex + 1;
                 var map = MapFiles.Load(MapFiles.CampaignPath(contentRoot, content, record.NextMap(content).MapId), content);
                 BattleState? won = null;

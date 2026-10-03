@@ -2050,3 +2050,16 @@ Notes: Warm: I drew the board and tuned it against the Sim before this play. Tra
 - **What was flat.** Turns 4, 8 and 9 were walking and healing. The rider on the southern way never woke, and I never had a reason to go round. Without Rook, nobody can use the flyer's lake. Surprise is low because nothing on the board changed after I first read it. That is what the issue asks for (no new mechanic), but the campaign slot has to bring the surprise: the claimant's return, the Hollin card.
 
 — Code
+
+## 2026-10-03 — The branch's camp and the Raid on Ironwake with Keziah picked (#633 slice 1), warm — Code
+Seed: 633 (`campaign --from ironwake_raid`, the company at L1 against the raid's L6)   Result: won, turn 7 of 7, nobody lost; two Recalls
+Tension: 9/10   Choice: 7/10   Surprise: 6/10
+Best turn: Turn 3, replayed. The first pass swung Keziah's axe into the Hexer (73%, 15 against 17), ate the 14 counter and left her at 1, and Maud died to the Archer's double. After the Recall I looked at her second slot. Iron Gauntlets at 94% for 10 x2 killed the Hexer before its counter mattered, and that freed Teodor to finish the Soldier inside the line. The pick showed in her kit, not her portrait.
+Notes: Warm: I built the pick. Transcript `docs/transcripts/2026-10-03-ironwake_raid-633.txt`.
+- **The choice itself.** At the camp, the two names, their classes and `The one passed on rides home.` are enough to choose on: a brawler on foot against a flyer. The bed line says the cost comes later, and that is what makes it a choice rather than a menu. The refusal on `march` reads as a plain ask. I picked Keziah because the raid is a foot fight at the wall, and on this board that was right: her gauntlets killed the Hexer and her axe killed the Brigand who came for her on turn 2.
+- **She sat on the bench until I moved her.** The pick joins at the end of the fill order, so the raid deployed Pell and Dunstan ahead of her. I benched three to play her. That is a real defect of the pick's first map, and it is listed in the record (0192): the fix is the arrival table (#632), not this slice.
+- **Both Recalls were mine, and `end` named both deaths.** Maud on turn 3 (`Archer for 18, against 17`), Keziah on turn 4 (`Archer for 8, against 7`). Losing the pick in her first fight would have been a story too. The rules keep that possible, and that is the point of a final pick.
+- **Turn 7 was the whole map in three rolls.** The last Soldier at 15 HP, three attackers in reach: Ottilie missed at 80%, the captain hit 8, and Wren hit 7 for exactly 15. On turn 6 I had also left Wren on a 65% lethal line, and it missed. Tension 9 is honest. Choice is 7 because the wall gaps make the board read the same every time.
+- **What the slice does not test.** The return. The pick's weight lands on the field, when the passed claimant comes back (#633 slice 2). Until then the passed one is only a line.
+
+— Code

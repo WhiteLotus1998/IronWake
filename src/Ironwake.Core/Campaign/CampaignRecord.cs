@@ -198,6 +198,56 @@ public sealed record CampaignRecord(
     public string? Origin { get; init; }
 
     /// <summary>
+    /// The claimant picked at the branch's camp (issue 633, DESIGN section 14), a cast id from that
+    /// map's <see cref="CampaignMap.Branch"/>, or null before the pick (and in a campaign without a
+    /// branch). Kept for the rest of the campaign: the passed claimant's return and the endings read it.
+    /// </summary>
+    public string? Pick { get; init; }
+
+    /// <summary>
+    /// The claimant passed on at the branch (issue 633): the one of the two the record did not
+    /// <see cref="Pick"/>, or null before the pick and in a campaign without a branch.
+    /// </summary>
+    public string? Passed(GameContent content) =>
+        Pick is { } pick && content.Campaign.Maps.FirstOrDefault(m => m.Branch.Contains(pick)) is { } map
+            ? map.Branch.First(id => id != pick)
+            : null;
+
+    /// <summary>
+    /// Picks <paramref name="unitId"/> at the branch's camp (issue 633): one of the next map's two
+    /// claimants, by id or by name in any case, who joins the company for it like a joiner (<see cref="Present"/>, at no less than
+    /// <see cref="JoinLevel"/>); the other rides home and never joins. Refused when the next map
+    /// offers no branch, when the id is not one of its claimants, and once the pick is made: the
+    /// choice is final.
+    /// </summary>
+    public ScreenResult PickClaimant(string unitId, GameContent content)
+    {
+        if (IsFinished(content) || NextMap(content).Branch.Count == 0)
+        {
+            return ScreenResult.Refused(this, "no claimant is offered at this camp");
+        }
+
+        var branch = NextMap(content).Branch;
+        if (Pick is { } made)
+        {
+            return ScreenResult.Refused(this, $"the pick is made: {content.Unit(made).Name}, and it is final");
+        }
+
+        var named = branch.FirstOrDefault(id => string.Equals(id, unitId, StringComparison.OrdinalIgnoreCase) || string.Equals(content.Unit(id).Name, unitId, StringComparison.OrdinalIgnoreCase));
+        if (named is null)
+        {
+            return ScreenResult.Refused(this, $"'{unitId}' is not a claimant; pick {string.Join(" or ", branch)}");
+        }
+
+        unitId = named;
+
+        var passed = branch.First(id => id != unitId);
+        var level = Math.Max(content.Unit(unitId).Level, JoinLevel(content));
+        var picked = this with { Pick = unitId };
+        return new ScreenResult(picked, $"{content.Unit(unitId).Name} takes the seat at level {level}; {content.Unit(passed).Name} rides home", true);
+    }
+
+    /// <summary>
     /// A new campaign: the cast in roster order less every recruit who arrives on a map (issue 632),
     /// the starting purse, the first map, nobody benched. <paramref name="origin"/> (issue 681)
     /// sets the captain's card from the campaign's origins, and <paramref name="captain"/> the
@@ -280,7 +330,7 @@ public sealed record CampaignRecord(
     /// </summary>
     public ValueList<Unit> Present(GameContent content)
     {
-        if (IsFinished(content) || (NextMap(content).Arrives.Count == 0 && NextMap(content).Joins.Count == 0))
+        if (IsFinished(content) || (NextMap(content).Arrives.Count == 0 && NextMap(content).Joins.Count == 0 && NextMap(content).Branch.Count == 0))
         {
             return Roster;
         }
@@ -322,7 +372,9 @@ public sealed record CampaignRecord(
 
     /// <summary>The next map's arrivals and joiners not yet on the roster or fallen, in content order (issues 632, 763).</summary>
     private IEnumerable<string> Arriving(GameContent content) =>
-        IsFinished(content) ? Enumerable.Empty<string>() : NextMap(content).Arrives.Concat(NextMap(content).Joins).Where(id => Find(id) is null && !Fallen.Contains(id));
+        IsFinished(content)
+            ? Enumerable.Empty<string>()
+            : NextMap(content).Arrives.Concat(NextMap(content).Joins).Concat(NextMap(content).Branch.Where(id => id == Pick)).Where(id => Find(id) is null && !Fallen.Contains(id));
 
     /// <summary>
     /// The keep's beds (issue 687, DESIGN section 13.20): the beds it starts with and every bought
@@ -409,7 +461,7 @@ public sealed record CampaignRecord(
     /// </summary>
     public BattleState Begin(MapDefinition map, GameContent content, RollScheme scheme = RollScheme.TwoRollAverage)
     {
-        map = NextMap(content).Prepare(map);
+        map = ClaimantSlotsBare(NextMap(content).Prepare(map), content);
         var played = content.Difficulties.Count > 0 ? map.Under(content.Difficulty(Difficulty)) : map;
         var roster = Present(content).Where(u => map.DeploysAll || !Benched.Contains(u.Id)).ToList();
         var turnedAway = TurnedAway(content);
@@ -419,6 +471,28 @@ public sealed record CampaignRecord(
             .ToList();
         roster.AddRange(fallenNamed.Select(content.Unit));
         return BattleState.From(played, content, ValueList<Unit>.From(roster), BattleSeed, scheme, ValueList<string>.From(fallenNamed), shortHanded: true) with { CampaignMap = MapIndex + 1, Rapport = Rapport };
+    }
+
+    /// <summary>
+    /// <paramref name="map"/> with every slot naming a branch claimant who is not with the company
+    /// (issue 633: before the branch, or passed on at it) turned into a bare slot: a unit who may be
+    /// absent holds a roster slot, not a named one (DESIGN section 14), so the slot is filled in roster
+    /// order like any bare slot and never throws for want of her. A claimant who has fallen keeps the
+    /// fallen's empty named slot.
+    /// </summary>
+    private MapDefinition ClaimantSlotsBare(MapDefinition map, GameContent content)
+    {
+        var claimants = content.Campaign.Maps.SelectMany(m => m.Branch).ToHashSet(StringComparer.Ordinal);
+        if (claimants.Count == 0)
+        {
+            return map;
+        }
+
+        var present = Present(content).Select(u => u.Id).ToHashSet(StringComparer.Ordinal);
+        bool Absent(Placement p) => p is PlayerPlacement { Slot: PlayerSlot.NamedRecruit, RecruitId: { } id } && claimants.Contains(id) && !present.Contains(id) && !Fallen.Contains(id);
+        return map.Placements.Any(Absent)
+            ? map with { Placements = ValueList<Placement>.From(map.Placements.Select(p => Absent(p) ? new PlayerPlacement(p.At, PlayerSlot.AnyRecruit) : p)) }
+            : map;
     }
 
     /// <summary>
@@ -1186,10 +1260,16 @@ public sealed record CampaignRecord(
 
     /// <summary>
     /// Why <c>march</c> cannot open <paramref name="map"/>, or null when it can (issue 795): the
-    /// reason <see cref="Begin"/> refuses the battle, so a march is refused as a camp line and never throws.
+    /// branch's pick not yet made (issue 633), else the reason <see cref="Begin"/> refuses the battle,
+    /// so a march is refused as a camp line and never throws.
     /// </summary>
     public string? MarchRefusal(MapDefinition map, GameContent content)
     {
+        if (!IsFinished(content) && NextMap(content).Branch is { Count: > 0 } branch && Pick is null)
+        {
+            return $"the seat is not filled; pick {string.Join(" or ", branch)} first";
+        }
+
         try
         {
             Begin(map, content);

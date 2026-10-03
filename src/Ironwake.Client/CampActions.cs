@@ -22,7 +22,7 @@ public static class CampActions
 {
     /// <summary>
     /// The rows for the selected unit <paramref name="unitId"/> (none of the unit's own rows when
-    /// null), then the keep's rooms, edits and hires, then the side maps, each taking
+    /// null), then the keep's rooms, edits and hires, then the branch's two claimants until one is picked (issue 633), then the side maps, each taking
     /// <paramref name="party"/> as its allies, or the selected unit when the party is empty.
     /// </summary>
     public static IReadOnlyList<CampAction> For(CampaignClient campaign, string? unitId, IReadOnlyList<string> party)
@@ -56,6 +56,15 @@ public static class CampActions
                     var (editId, tile) = (edit.Id, at);
                     actions.Add(new($"build {edit.Name.ToLowerInvariant()} at {at} ({edit.Price})", $"build {editId} {tile}", () => campaign.Build(editId, tile)));
                 }
+            }
+        }
+
+        if (record.Pick is null && record.NextMap(content).Branch is { Count: 2 } branch)
+        {
+            foreach (var id in branch)
+            {
+                var claimant = id;
+                actions.Add(new($"pick {content.Unit(claimant).Name} for the last seat", $"pick {claimant}", () => campaign.Pick(claimant)));
             }
         }
 
