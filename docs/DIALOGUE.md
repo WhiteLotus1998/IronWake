@@ -69,12 +69,12 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Signature items:** the best shop weapon of its rank plus its own art (0099), or a little better with none; at most 15 percent over it per combat. Bound. **Maud's Psalter (260, 261; built, 0196):** Beacon's numbers at rank D, art **Unasked**: double heal on an ally unmoved and unacted, capped at max HP; its phase ends in place as a Wait (braces). Heal arm at most 1.15 against the best stocked heal at or below its rank.
 - **The heirloom is Teodor's lance** (#646): four stages on a hidden counter, none before map 5, numbers honest. Packed from arrival, iron first. Quest 1 (no door) holds it at sound until won, then wakes at 10 (median by map 6); a bump if it moves no choice. Quest 2 (built, 0205: The Warden's Gate) names it `the First Warden's Lance`, pays 3 frozen iron and **Turn the Key** (269 to 271): woken only, -4 Mt, single, cost 3; a hit on a survivor locks it (Mov 0 on the chill's clock) while Teodor stays beside it; leaving, Fall back, shove or death drop it to the chill. If a locked boss trivialises a Seize: bosses only chilled. A lost quest reopens; only death ends a story.
 - **13.23 Kinsbane** (#645; 195 to 201): Keziah's; an old outland god in the scythe. Numbers in DESIGN 13.23. Quest 2, her oath, plays either side. A passed Keziah returns at the fourth tooth (263; Fed 9). Kept if a journal shows the hunger deciding a turn.
-- **Origin** (#681, #648; 201): only the captain's card (stats, growths, a Word variant), no support number; a recruit's first captain support has an origin variant. Gate 1 within 5.
+- **Origin** (#681, #648; 201): the captain's card only (stats, growths, a Word variant); a recruit's first captain support has an origin variant. Gate 1 within 5.
 - **Magic and faith** (round 201): Reason shows as Lore (id kept). Faith heals and may strike (#113). One goddess, three faiths; she speaks once, to Maud in quest 2, after map 5.
 - **The storyline** is `docs/STORY.md` draft 6 (244); open (#656): build to change it. Hask is the door, the Kin in his pommel shard, nudging, never erasing; his last line is Lotus's. Good: the reseal. Bad: a lost map. Secret (#790): Under the Hill (Kinsbane woken, both claimants, Marrit held, Pell's quest 2); Reseal or Fight (#806); Fight won kills the god.
-- **Rook's drake** (244): the last cold drake, church property, an animal; half-grown, Grown carries an ally, Unbroken breathes rime once a map (#805); rime ice wears to Water. **A Keziah run's flier:** Edda Vane, a Skyrider hire (#801); no flying side character.
+- **Rook's drake** (244): the last cold drake, church property, an animal; half-grown, Grown carries an ally, Unbroken breathes rime once a map (#805), rime wears to Water. **A Keziah run's flier:** Edda Vane, a Skyrider hire (#801); no flying side character.
 - **Kinsbane's arc (249; #804):** a tooth per Mt step, five to wake (`teeth n/5`); the hound in the kill clip; three voice registers, three lines a map; the choice screen equal; with #805.
-- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. Bars (262, 263): first tooth on her first map, waking by the field on the median; teeth 2,2,2,3,4 (0207). **The control (275, 276):** the axe wins Sallow 49/82 to 26; nowhere else. Lever 1 (#851), no number moved: scythe beside her cast axe, bound on issue; the drain runs carried, so each combat is feed or survive; the Sim swings it only to kill. Bar: Sallow 40/82, the field woken at p50, the keep no worse. Else, one a read: drain only with a foe in reach, Drain 3, starved Mt -3; heal 10.
+- **The waking (250, 251; provisional):** once a map a woken scythe kill gives full Move again, no second strike; kept on a journal deciding a turn. Teeth 2,2,2,3,4 (0207). **Levers (275 to 279):** the axe won Sallow 49/82 to 26, nowhere else. Kept: the scythe beside her axe, bound, drain carried, swung by the Sim only to kill (0209); no drain with no foe in reach (0210; Sallow 44/82). Next (#856): teeth 2,2,1,3,4 (drain buys survival; the gap is kills). **Bar (279, set before the read):** Sallow 40/82, the keep no worse, four teeth by the field at p50, woken entering the keep in a third of its reachers; the old bar also passes. Miss both: Drain 3, then starved Mt -3; heal 10.
 - **The company** (rounds 213, 214): cap 12 living (beds count the fallen, 0010), cast 10; a map deploys 6 and the keep `deploy: all` (#689, bunk room +2 beds). Barracks after the raid (#690); one secret hire (#691); the finale (#692): fronts, waves, no scaling.
 - **Saves and difficulty** (#663, #664): camp saves only; Recruit and Tactician about 15 off `normal`; permadeath off returns the fallen Wounded (2); a captain or protect death loses.
 - **Supports** (#77; 0183 to 0189; 258, 259): 3 to 4 partners plus the captain, a kind per pair (#809); marriage an S bond (#634). Read beside a partner (best, not sum). C 16, B 28, A 48; a captain pair at the higher rate (4). After-Brackwater p50: committed captain pair near B, floor pairs C, none at A. A reachable by a committed human (else 44).
@@ -84,12 +84,11 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 - **Progression (rounds 216, 217; #701 to #706; built, DESIGN 3):** one advanced form per class, changing a verb; enemies promote too. The captain's three at the first promotion, origin independent. Unique: Rook, Maud, Bet. A bow crit grounds a flier (#723). Frozen iron is the rare Refine material and chills (#702).
 - **The second tier's level (#704; provisional):** gate L7, rank C. Campaign-only curve 1,1,2,3,2,6,7,6,4,8 (0161, 0178, 0191); a tuned map under 60 lowers the point, never the board; the bend reads `--curve`'s `carried` (#764). The branch pick joins at the living median at the raid's camp (#763). Money waits (0051).
 - **The captain's ladder at tier 1 (round 229; 0165; provisional):** the lance moved to the Champion; Hunter's Ground killed (the Sim never swung a kit weapon). Numbers before verbs.
-- **The Sim picks a weapon per attack** (#756, 0171; Brackwater 65, 0173).
+- **The Sim picks a weapon per attack** (#756, 0171; Brackwater 65, 0173). Ignition is its blind spot (232).
 - **The ladder bar (round 232; provisional):** per map a floor (no class more than 10 under the unpromoted captain); across the ladder's five maps class means within 10 at 200 seeds; 5 at 400 before tuned. A board-dependent pick is choice.
 - **The Vanguard's verb (rounds 235, 236; 0174; provisional):** durability killed as a hoarder. Share is the chooser's fingerprint: it can kill a verb, never keep one alone; a hand play must. The verb is **Opening** (#772): a struck, living enemy is open to allies (Def and Res -3) until the player phase ends; kill criterion in #772.
-- **Ignition is a Sim blind spot** (232).
 
-## How we write (Lotus, relayed on #780, 2026-10-02)
+## How we write (Lotus, via #780, 2026-10-02)
 
 - Order: `docs/WRITING.md` (positive rules, a tic list), a voice sheet per character (Hask, Marrit, Bet, the god, the Kin too), beat sheets argued here, then scenes one at a time. Scene and support text waits for them; mechanics go ahead.
 - Big scenes (Hask's camp answers): three blind drafts, a re-name-tested stitch. Passes: cut 30%, name test, exposition, tics, average test; one scene a PR; no writer grades their own; #813 before #634, #790; done when read in the client.
@@ -98,7 +97,7 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 ## Lotus's mechanics build (rounds 239, 240; #786)
 
-- **Lotus (#731)** plays when both sign a `for-lotus` issue naming the Windows artifact, how to start it, and the note.
+- **Lotus (#731)** plays when both sign a `for-lotus` issue naming the Windows artifact, its start, the note.
 - **The bar:** a client campaign from the title; his mechanics plus Commander's Word by mouse and keys, held to the console by a parity script; no stop-playing bug to Brackwater; a "what to try" note. No Fun Gate.
 - **Signing:** Chat after its console campaign through Brackwater and the parity transcript; Code after the desktop session's hand run of the exe.
 
@@ -119,4 +118,4 @@ Rewritten when the Table moves; under 150 lines and 20 KB (#401). Live #820.
 
 ## Round index
 
-1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263, 275, 276 Kinsbane; 265 to 274 Teodor, `talk`, the field).
+1-44 rules, keep; 45-84 carry, dusk; 85-118 brace, wildfire; 119-183 showcase, tide; 184-202 story; #665 203-226; #731 227-236; #780 237-259 (244 draft 6; 243-248 rockfall; 249-251 Kinsbane; 252-257 writing, art; 258, 259 supports); #820 260 on (260, 261 Maud; 262, 263, 275 to 279 Kinsbane; 265 to 274 Teodor, `talk`, the field).
