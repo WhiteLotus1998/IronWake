@@ -2114,3 +2114,16 @@ Notes: Warm: I built the art. Transcript `docs/transcripts/2026-10-03-the_mill-6
 - Not tense: turns 6 to 9, two archers and a captain at full HP.
 
 — Code
+
+## 2026-10-03 — The First Shrine, Maud's quest 2 (#635 slice 5), warm — Code
+Seed: 875 (`campaign --load shrine --saves docs/transcripts/2026-10-03-the_first_shrine-875.saves`, a save before the raid at level 4 with quest 1 marked won; ally Wren)   Result: won, turn 4 of 10, seize, nobody fell; no Recall
+Tension: 5/10   Choice: 6/10   Surprise: 5/10
+Best turn: Turn 3. The pursuit brigand stood at 7,4 on 11 HP, beside Wren and a tile off the door path. Maud killed it from the forest at range 2 (12 damage, no counter), which freed Wren to step through to 7,2 and swing at the braced soldier at 65 percent. She landed one of two; he missed his strike on the enemy phase, and her riposte opened the door.
+Notes: Warm: I built the board. Transcript `docs/transcripts/2026-10-03-the_first_shrine-875.txt`.
+- Disclosed: I played it twice before on seed 861, which the side map ran on before this PR's seed fix (0198). In the first attempt Wren went straight at the door on turn 1. The hexer's Cinder (10 against Res 2) and the soldier killed her on the first enemy phase. In the second attempt (my line on turns 1 and 2 here), a 34 percent axe took Maud to 6 in the forest. On turn 3 I left her there rather than finish the soldier from 7,3, where `threat` put the arriving archer at 85 percent for 8 against her 6. On 875 the same opening rolled kinder, and Maud never dropped below full.
+- **The brace on the cork is the board.** A held enemy that waits braces, so the door soldier always stood at -15. Opening one tile took two strikes and a counter.
+- **The yard pair mattered more than the pursuers.** Killing the hexer woke the brigand (a death wakes the group). On 861 it came close to costing Maud.
+- **The back half never fought.** The causeway decision I built the map for did not come up in either attempt that held. The door fell on turn 3 and Maud walked in on turn 4, before the turn 4 and 5 pursuers arrived. At level 4 the board is short. If the cold chair finds it a walk too, the lever is the waves a turn earlier or a second sanctum guard, measured first.
+- Not tense: turn 4, the walk to the altar.
+
+— Code

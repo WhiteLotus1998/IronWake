@@ -19,13 +19,13 @@ public class ForgeTests
 
     private static readonly Weapon Charm = Shipped.Weapon("iron_sword") with { Id = "test_charm", Name = "Test Charm", Price = null, BoundTo = "pell" };
 
-    /// <summary>The shipped content with Maud's Test Vow paid by her quest 2 (with its three rare) and a side character's Test Charm.</summary>
+    /// <summary>The shipped content with Maud's Test Vow paid by her quest 2 in place of the Psalter (with its three rare) and a side character's Test Charm.</summary>
     private static readonly GameContent Content = Shipped with
     {
         Weapons = Shipped.Weapons.Add(Vow.Id, Vow).Add(Charm.Id, Charm),
         Campaign = Shipped.Campaign with
         {
-            Quests = Shipped.Campaign.Quests.Add(new CampaignQuest("maud_2", "maud", 2, "the_lazar_house") { Pays = "test_vow", Rare = 3 }),
+            Quests = ValueList<CampaignQuest>.From(Shipped.Campaign.Quests.Select(q => q.Id == "maud_2" ? q with { Pays = "test_vow", Rare = 3 } : q)),
         },
     };
 
@@ -215,8 +215,9 @@ public class ForgeTests
     }
 
     [Fact]
-    public void TheShippedCampaignIssuesNoSignatureAndPaysNoRare()
+    public void TheShippedCampaignIssuesOnlyTheHealingPsalterAndPaysNoRare()
     {
+        Assert.Equal(new[] { "maud_psalter" }, Shipped.Campaign.Quests.Select(q => q.Pays).OfType<string>());
         Assert.Equal(0, Forge.RareNeeded(Shipped));
         Assert.Equal(0, Forge.RarePaid(Shipped));
         Assert.Null(Forge.RareRefusal(Shipped));

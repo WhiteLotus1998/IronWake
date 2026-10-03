@@ -66,7 +66,16 @@
       "before": [
         "(Bet Lowry asks for one day and three of the company. Take the gatehouse: Bet on its seat at 8,3 wins. The map is lost if she falls.)"
       ],
-      "ending": "Bet Lowry swore first, the one the oath could not hold, choosing it." }
+      "ending": "Bet Lowry swore first, the one the oath could not hold, choosing it." },
+    { "id": "maud_2", "member": "maud", "part": 2, "map": "the_first_shrine", "pays": "maud_psalter",
+      "before": [
+        "Maud asked for a day and one pair of hands again. Kestrow's first shrine is a half-day off the weir road, older than the split, and she has never been inside it. Somebody else has.",
+        "(Placeholder card until the writing pass. Get Maud onto the altar at 7,0 by the end of turn 10. The map is lost if she falls. Pursuers cross the causeway at 7,6 from turn 2, announced; a unit that waits where it began its phase braces.)"
+      ],
+      "after": [
+        "(Placeholder until the writing pass: the goddess speaks to Maud once, at the altar, and tells her what the rite seals.)",
+        "(Maud carries Maud's Psalter now: a heal at range 1 to 2, bound to her. Its art, Unasked, doubles a heal on an ally who has not moved or acted, and that ally's phase ends where it stands.)"
+      ] }
   ],
   "forge": { "mt": 1, "hit": 5, "price": 100, "common": 2, "rare": 3 },
   "origins": [

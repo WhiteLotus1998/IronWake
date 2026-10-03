@@ -67,6 +67,34 @@ public class SideMapCliTests
         Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
     }
 
+    /// <summary>
+    /// Code's journaled play of Maud's quest 2 (seed 875), from a save before the raid with her
+    /// quest 1 won: Wren kills the hexer, Maud both brigands, the braced door soldier falls on
+    /// Wren's counter, and Maud takes the altar on turn 4 with the Psalter paid into her pack.
+    /// </summary>
+    [Fact]
+    public void TheJournaledShrinePlayWinsAndPaysThePsalter()
+    {
+        var script = Transcript("2026-10-03-the_first_shrine-875.script");
+        var saves = Path.Combine(Path.GetTempPath(), "ironwake-shrine-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(saves);
+        File.Copy(Transcript(Path.Combine("2026-10-03-the_first_shrine-875.saves", "shrine.json")), Path.Combine(saves, "shrine.json"));
+        try
+        {
+            var output = Run(out var exit, "campaign", "--load", "shrine", "--saves", saves, "--script", script, "--strict", "--content", Fixture.RealContentDirectory());
+
+            Assert.Equal(1, exit);
+            Assert.Contains("Battle won: seize", output);
+            Assert.Contains("> leave\nMaud wins maud_2; Maud receives Maud's Psalter; nobody fell\n-- After The First Shrine --\n", output);
+            Assert.Contains("  maud_2: Maud's quest 2, The First Shrine; paid Maud's Psalter\n", output);
+            Assert.Equal(File.ReadAllText(Path.ChangeExtension(script, ".txt")).ReplaceLineEndings("\n"), output);
+        }
+        finally
+        {
+            Directory.Delete(saves, true);
+        }
+    }
+
     private static string Run(out int exit, params string[] args)
     {
         var code = 0;
