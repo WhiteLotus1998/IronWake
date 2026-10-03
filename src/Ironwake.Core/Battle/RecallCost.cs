@@ -4,16 +4,17 @@ namespace Ironwake.Core;
 /// What a Recall to a history state gives back (DESIGN.md section 7, issue 75): the
 /// difference between that state and the present, in the terms a player weighs before
 /// spending a charge. A rewind undoes both sides' work, so the kills, EXP and levels the
-/// player earned since are given back, the HP the enemies lost since comes back to them,
+/// player earned since are given back, the HP the enemies lost since comes back to them, a
+/// returned claimant talked off the board since (issue 633) comes back as a talk, not a kill,
 /// reinforcements that arrived since have not arrived yet, and the player units lost and
 /// the HP the player lost since are returned. Pure: it reads two states and changes neither.
 /// </summary>
 /// <param name="ToIndex">The history index the Recall would return to.</param>
 /// <param name="Turn">The turn of that state.</param>
-/// <param name="KillsGivenBack">Enemies alive then and dead now, in id order.</param>
+/// <param name="KillsGivenBack">Enemies alive then and dead now, in id order; a claimant talked off the board is not one (issue 826).</param>
 /// <param name="ExpGivenBack">EXP player units earned since, levels counted at 100 each, over the units alive both then and now.</param>
 /// <param name="LevelsGivenBack">Level-ups player units gained since, over the same units.</param>
-/// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0.</param>
+/// <param name="EnemyHpBack">HP the enemies alive then have lost since, a dead one counted from its HP then to 0; a talked claimant left with their HP and is not counted.</param>
 /// <param name="ArrivalsUndone">Enemies on the board now that were not on it then (map-event spawns), in id order.</param>
 /// <param name="UnitsReturned">Player units alive then and dead now, in id order; a unit that left through an exit since is not dead (issue 269).</param>
 /// <param name="HpByUnit">HP each player unit alive then has lost since, a dead one counted from its HP then to 0, in id order; a unit that lost nothing, or was healed since, is not listed (issue 552).</param>
@@ -28,6 +29,12 @@ public sealed record RecallCost(
     ValueList<string> UnitsReturned,
     ValueList<HpReturn> HpByUnit)
 {
+    /// <summary>
+    /// The talk a Recall gives back (issue 826): the returned claimant on the board then and talked
+    /// off it since, with the fate the talk gave, or null. A talk is not a kill (DECISIONS/0193).
+    /// </summary>
+    public TalkReturn? TalkGivenBack { get; init; }
+
     /// <summary>HP the player units alive then have lost since, summed over <see cref="HpByUnit"/>.</summary>
     public int HpReturned => HpByUnit.Sum(entry => entry.Hp);
 
@@ -49,9 +56,16 @@ public sealed record RecallCost(
         var then = state.History[index];
         var kills = new List<string>();
         var enemyHp = 0;
+        TalkReturn? talk = null;
         foreach (var enemy in then.UnitsOf(Side.Enemy))
         {
             var now = state.Find(enemy.Id);
+            if (now is null && TalkedSince(then, state, enemy) is { } fate)
+            {
+                talk = new TalkReturn(enemy.Id, fate);
+                continue;
+            }
+
             if (now is null)
             {
                 kills.Add(enemy.Id);
@@ -99,12 +113,26 @@ public sealed record RecallCost(
             enemyHp,
             ValueList<string>.From(arrivals),
             ValueList<string>.From(returned),
-            ValueList<HpReturn>.From(hp));
+            ValueList<HpReturn>.From(hp))
+        {
+            TalkGivenBack = talk,
+        };
     }
+
+    /// <summary>
+    /// The fate a talk gave <paramref name="enemy"/> between <paramref name="then"/> and
+    /// <paramref name="now"/>, or null when they are not the returned claimant or were not talked
+    /// off the board since: the bond names them, and the present state's fate is Turned or Spared
+    /// where the earlier state had none.
+    /// </summary>
+    private static ReturnFate? TalkedSince(BattleState then, BattleState now, BattleUnit enemy) =>
+        Returned.Is(then, enemy) && then.ReturnGone is null && now.ReturnGone is ReturnFate.Turned or ReturnFate.Spared
+            ? now.ReturnGone
+            : null;
 
     /// <summary>Whether the Recall undoes none of the things this record counts: only moves and waits since.</summary>
     public bool IsEmpty =>
-        KillsGivenBack.Count == 0 && ExpGivenBack == 0 && LevelsGivenBack == 0 && EnemyHpBack == 0
+        KillsGivenBack.Count == 0 && TalkGivenBack is null && ExpGivenBack == 0 && LevelsGivenBack == 0 && EnemyHpBack == 0
         && ArrivalsUndone.Count == 0 && UnitsReturned.Count == 0 && HpReturned == 0;
 
     private static int TotalExp(Unit unit) => unit.Level * 100 + unit.Exp;
@@ -114,3 +142,8 @@ public sealed record RecallCost(
 /// <param name="Id">The unit's id.</param>
 /// <param name="Hp">HP it lost since the target state; for a unit dead now, its HP then.</param>
 public sealed record HpReturn(string Id, int Hp);
+
+/// <summary>The talk a Recall gives back (issue 826): the claimant talked off the board and the fate the talk gave.</summary>
+/// <param name="Id">The returned claimant's id.</param>
+/// <param name="Fate">Turned by the pick's talk or spared by the captain's.</param>
+public sealed record TalkReturn(string Id, ReturnFate Fate);

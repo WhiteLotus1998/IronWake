@@ -1236,6 +1236,7 @@ public sealed class PlaySession
     /// number (issue 552): a returned unit is named with the HP it comes back at, and each other
     /// unit with the HP it gets back, read from <see cref="RecallCost.HpByUnit"/>. Units read by
     /// <paramref name="names"/> (issue 615): <c>returns Teodor alive at 17 hp, 14 hp to Wren</c>.
+    /// A talk is named apart from the kills (issue 826): <c>gives back Keziah's talk (spared)</c>.
     /// </summary>
     public static string UndoText(RecallCost cost, UnitNames names)
     {
@@ -1248,6 +1249,11 @@ public sealed class PlaySession
         if (cost.KillsGivenBack.Count > 0)
         {
             back.Add($"{cost.KillsGivenBack.Count} {(cost.KillsGivenBack.Count == 1 ? "kill" : "kills")} ({string.Join(", ", cost.KillsGivenBack.Select(id => names[id]))})");
+        }
+
+        if (cost.TalkGivenBack is { } talk)
+        {
+            back.Add($"{names[talk.Id]}'s talk ({talk.Fate.ToString().ToLowerInvariant()})");
         }
 
         if (cost.ExpGivenBack > 0)
