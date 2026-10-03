@@ -63,6 +63,12 @@ public sealed record Unit(
     public Pronoun? Pronoun { get; init; }
 
     /// <summary>
+    /// The drake this unit rides (issue 805): its stage and the main maps flown, or null for a unit
+    /// without one. The campaign gives it to <see cref="DrakeRules.Member"/> as they join.
+    /// </summary>
+    public DrakeState? Drake { get; init; }
+
+    /// <summary>
     /// Whether this unit may equip <paramref name="weapon"/>: its class uses the type, its rank in the type
     /// reaches the weapon's, a healing spell is not of a type the class strikes with only (issue 704), and
     /// anything else is not of a type the class heals with only (issue 706).

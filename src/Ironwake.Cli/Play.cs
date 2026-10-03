@@ -2032,6 +2032,11 @@ public sealed class PlaySession
             lines.Add($"  {heirloom}");
         }
 
+        if (Drake.Card(unit.Unit, content) is { } drake)
+        {
+            lines.Add($"  {drake}");
+        }
+
         if (state.CantoReachOf(unit, content) is not null)
         {
             lines.Add($"  Move again: {unit.Canto} movement left this phase");

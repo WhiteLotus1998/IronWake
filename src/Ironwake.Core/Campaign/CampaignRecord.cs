@@ -472,19 +472,22 @@ public sealed record CampaignRecord(
             }
         }
 
-        return unit with { Inventory = inventory };
+        var drake = unit.Drake ?? (content.Campaign.Drake is { } rules && rules.Member == unit.Id ? new DrakeState(DrakeStage.HalfGrown, 0) : null);
+        return unit with { Inventory = inventory, Drake = drake };
     }
 
     /// <summary>
     /// The passed claimant as they come back (issue 633, round 263): <see cref="Kitted"/>, with a
     /// hungering weapon fed to the fourth tooth's count (<see cref="Kinsbane.FedFor"/>), so a passed
-    /// Keziah returns one tooth short of waking and the player who turns her grows the last.
+    /// Keziah returns one tooth short of waking and the player who turns her grows the last; a drake
+    /// comes back Grown at least (issue 805, STORY draft 6: Hask fed it better than the church did).
     /// </summary>
     public static Unit Returning(Unit unit, GameContent content)
     {
         var kitted = Kitted(unit, content);
         var items = kitted.Inventory.Items.Select(s => content.Weapons.TryGetValue(s.ItemId, out var w) && w.Hungers ? s with { Fed = Kinsbane.FedFor(Kinsbane.MtCap - 1) } : s);
-        return kitted with { Inventory = new Inventory(ValueList<ItemStack>.From(items)) };
+        var drake = kitted.Drake is { } d && d.Stage < DrakeStage.Grown ? d with { Stage = DrakeStage.Grown } : kitted.Drake;
+        return kitted with { Inventory = new Inventory(ValueList<ItemStack>.From(items)), Drake = drake };
     }
 
     /// <summary>
@@ -703,7 +706,7 @@ public sealed record CampaignRecord(
             }
             else if (standing.TryGetValue(unit.Id, out var after))
             {
-                roster.Add(Wound.Tick(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content)));
+                roster.Add(Flew(Wound.Tick(BattleState.RefreshSpells(ReturnWithheld(unit, started, after, content), content)), content));
             }
             else if (!Permadeath)
             {
@@ -758,6 +761,15 @@ public sealed record CampaignRecord(
         var roster = Roster.Append(joined).OrderBy(u => order.IndexOf(u.Id) is var at && at < 0 ? int.MaxValue : at);
         return this with { Returned = fate, Roster = ValueList<Unit>.From(roster) };
     }
+
+    /// <summary>
+    /// <paramref name="unit"/>, who stood at the end of a won main map, with one more map flown on its
+    /// drake and the stage read again (issue 805); a unit without a drake unchanged.
+    /// </summary>
+    private Unit Flew(Unit unit, GameContent content) =>
+        unit.Drake is { } drake && content.Campaign.Drake is { } rules
+            ? rules.Grow(unit with { Drake = drake with { Flown = drake.Flown + 1 } }, WonQuestIds)
+            : unit;
 
     /// <summary><see cref="FellOn"/> with each of <paramref name="ids"/> marked as fallen on <paramref name="mapName"/>.</summary>
     private ValueList<FellOn> FellOnAdd(IEnumerable<string> ids, string mapName) =>
@@ -1376,6 +1388,16 @@ public sealed record CampaignRecord(
         {
             roster[promoted] = Promote(roster[promoted], content.Class(classId));
             paid += $"; {quest.MemberId} becomes a {content.Class(classId).Name}";
+        }
+
+        if (won && content.Campaign.Drake is { } drakeRules && roster.FindIndex(u => u.Id == drakeRules.Member) is var rider and >= 0
+            && roster[rider].Drake is { } drake)
+        {
+            roster[rider] = drakeRules.Grow(roster[rider], WonQuestIds.Append(questId).ToList());
+            if (roster[rider].Drake!.Stage != drake.Stage)
+            {
+                paid += $"; {roster[rider].Name}'s drake is {Drake.Word(roster[rider].Drake!.Stage)} now";
+            }
         }
 
         var common = won ? quest.Common : 0;

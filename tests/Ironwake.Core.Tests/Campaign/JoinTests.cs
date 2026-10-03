@@ -59,7 +59,7 @@ public class JoinTests
     public void AJoinerBelowTheMedianIsRaisedToItOnTheAverageGrowthAndTheCampSaysSo()
     {
         var record = AtTheRaid(7, 5, 5, 4, 1);
-        var cast = Content.Unit("rook");
+        var cast = CampaignRecord.Kitted(Content.Unit("rook"), Content);
 
         var rook = record.Present(Content).Single(u => u.Id == "rook");
 
@@ -73,7 +73,7 @@ public class JoinTests
     {
         var record = AtTheRaid(1, 1, 1);
 
-        Assert.Equal(Content.Unit("rook"), record.Present(Content).Single(u => u.Id == "rook"));
+        Assert.Equal(CampaignRecord.Kitted(Content.Unit("rook"), Content), record.Present(Content).Single(u => u.Id == "rook"));
         Assert.Empty(record.RaisedOnJoining(Content));
         Assert.Empty(CampaignSession.JoinLines(record, Content));
     }

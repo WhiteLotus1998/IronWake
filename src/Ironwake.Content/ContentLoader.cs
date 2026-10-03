@@ -638,6 +638,30 @@ public static class ContentLoader
             }
         }
 
+        // A named quest the campaign does not list leaves the drake short of that stage; one it lists must be the rider's.
+        DrakeRules? drake = null;
+        if (root.OptionalObject("drake") is { } drakeNode)
+        {
+            drake = new DrakeRules(drakeNode.String("member"), drakeNode.String("grownAfter"), drakeNode.Int("grownFlown"), drakeNode.String("unbrokenAfter"));
+            if (!castUnits.Any(u => u.Id == drake.Member))
+            {
+                throw drakeNode.Error("member", $"'{drake.Member}' is not in the cast");
+            }
+
+            foreach (var (field, questId, part) in new[] { ("grownAfter", drake.GrownAfter, 1), ("unbrokenAfter", drake.UnbrokenAfter, 2) })
+            {
+                if (quests.FirstOrDefault(q => q.Id == questId) is { } quest && (quest.MemberId != drake.Member || quest.Part != part))
+                {
+                    throw drakeNode.Error(field, $"'{questId}' must be {drake.Member}'s quest {part}");
+                }
+            }
+
+            if (drake.GrownFlown < 0)
+            {
+                throw drakeNode.Error("grownFlown", "must be at least 0");
+            }
+        }
+
         foreach (var room in keep.Rooms)
         {
             if (room.Forge && forge == ForgeRules.None)
@@ -658,6 +682,7 @@ public static class ContentLoader
             Quests = ValueList<CampaignQuest>.From(quests),
             Keep = keep,
             Forge = forge,
+            Drake = drake,
             Origins = ParseOrigins(root, captain),
             Supports = ParseSupports(root, castUnits),
             Issues = ValueList<CampaignIssue>.From(issues.OrderBy(i => i.UnitId, StringComparer.Ordinal)),

@@ -207,6 +207,9 @@ public sealed record CampaignRules(int StartingPurse, int CertificationPrice, Va
     /// <summary>The keep's map and the edits sold for it (issue 82, an experiment); <see cref="KeepMenu.None"/> when the campaign has none.</summary>
     public KeepMenu Keep { get; init; } = KeepMenu.None;
 
+    /// <summary>The drake a cast member rides (issue 805), from <c>drake</c>; null when the campaign has none.</summary>
+    public DrakeRules? Drake { get; init; }
+
     /// <summary>The forge's numbers (issue 647); <see cref="ForgeRules.None"/> when the campaign has no <c>forge</c>.</summary>
     public ForgeRules Forge { get; init; } = ForgeRules.None;
 
