@@ -1,0 +1,36 @@
+# issue 856: --kinsbane (Release, 200 runs each arm, same seeds as kinsbane-804-control.txt, kinsbane-851-beside.txt and kinsbane-854-reach.txt) on issue/856-kinsbane-tooth-schedule. Round 263's schedule clause, taken in round 279: Kinsbane.ToothAt 2,4,6,9,13 becomes 2,4,5,8,12 (steps 2,2,1,3,4; woken at 12). The reach gate (0210), beside, the bind and the hunt as 0209; Drain 5, heal 10, unchanged. The scythe arm's rows add the runs woken and ended starved by each map's end, and a line for the runs woken entering the keep (rounds 279 and 281). The control arm (--axe) reproduces 0207's, 0209's and 0210's control rows row for row.
+
+## scythe beside the axe, the reach gate, teeth 2,2,1,3,4: ironwake-sim --kinsbane --seeds 200
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the scythe in front of her pack, her iron axe behind it, as the campaign issues it
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 2 p50 3 p75 4 (teeth p50 1/5), drains p50 2, starved in 11, her attacks 250 (scythe 214), woken by its end in 0, ended starved in 7
+  map 7 (her map 2): won 44, deployed in 44, tries p50 25, fed by its end p25 4 p50 5 p75 6 (teeth p50 3/5), drains p50 3, starved in 14, her attacks 169 (scythe 102), woken by its end in 0, ended starved in 1
+  map 8 (her map 3): won 44, deployed in 44, tries p50 2, fed by its end p25 5 p50 6 p75 7 (teeth p50 3/5), drains p50 2, starved in 8, her attacks 44 (scythe 35), woken by its end in 0, ended starved in 6
+  map 9 (her map 4): won 43, deployed in 43, tries p50 6, fed by its end p25 9 p50 10 p75 13 (teeth p50 4/5), drains p50 3, starved in 5, her attacks 232 (scythe 189), woken by its end in 17, ended starved in 3
+  map 10 (her map 5): won 9, deployed in 9, tries p50 18, fed by its end p25 12 p50 12 p75 12 (teeth p50 5/5), drains p50 2, starved in 0, her attacks 49 (scythe 26), woken by its end in 9, ended starved in 0
+  no try won map 1: 118
+  no try won map 7: 38
+  no try won map 9: 1
+  no try won map 10: 34
+  woken entering the keep (map 10, fed 12 by map 9's end): 17 of 43 reachers
+  teeth, over the 82 runs that won her first map (a run lost later counts as never):
+  tooth 1 (fed 2): grew in 76 of 82, median map 6
+  tooth 2 (fed 4): grew in 54 of 82, median map 7
+  tooth 3 (fed 5): grew in 45 of 82, median map 9
+  tooth 4 (fed 8): grew in 41 of 82, median map never
+  tooth 5 (wakes, fed 12): grew in 24 of 82, median map never
+
+## control: ironwake-sim --kinsbane --seeds 200 --axe
+kinsbane: 200 runs, the heuristic player through the campaign, keziah picked at the branch and fielded on every map she can, the control arm: her iron axe in front, no scythe
+  map 6 (her map 1): won 82, deployed in 82, tries p50 3, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 248 (scythe 0)
+  map 7 (her map 2): won 49, deployed in 49, tries p50 17, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 185 (scythe 0)
+  map 8 (her map 3): won 49, deployed in 49, tries p50 2, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 49 (scythe 0)
+  map 9 (her map 4): won 49, deployed in 49, tries p50 7, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 257 (scythe 0)
+  map 10 (her map 5): won 7, deployed in 7, tries p50 32, fed by its end p25 0 p50 0 p75 0 (teeth p50 0/5), drains p50 0, starved in 0, her attacks 36 (scythe 0)
+  no try won map 1: 118
+  no try won map 7: 33
+  no try won map 10: 42
+
+## round 279's check on 0210's field dip (per-seed field feed, read off uncommitted per-seed prints on 0209 at f1195b6, 0210 at 4570b14 and this branch; same 200 seeds)
+- seeds that won the field under both 0209 and 0210: 29; field fed p50 10 under 0209, 10 under 0210. The gate cost no feed on the same runs; 0209's printed 11 is its 30th run and the floor-index percentile.
+- the 15 runs that win the field only under 0210 (the Sallow wins the gate bought): fed p50 10 (7 to 14). They are not less fed.
+- 0210 woken by the field's end under its own schedule (fed 13): 10 of 44 (23 percent). This branch (fed 12): 17 of 43 (40 percent). On the 43 seeds won under both, fed p50 is 10 in each: the schedule moves the wake, not the kills.

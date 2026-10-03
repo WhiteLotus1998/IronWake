@@ -132,7 +132,8 @@ public sealed record CampaignRecord(
     /// <summary>
     /// The warning on leaving the camp (issue 647): each unit going to the next map, the bench left
     /// out, whose equipped weapon is a physical weapon with fewer than <see cref="LowUses"/> uses, in
-    /// roster order, with that weapon. Spells refresh every map, so they never warn. It never refuses.
+    /// roster order, with that weapon. Spells refresh every map, so they never warn, and a hungering
+    /// weapon in its starved form is <see cref="StarvedWeapons"/>'s, not low (issue 856). It never refuses.
     /// </summary>
     public IReadOnlyList<(Unit Unit, Weapon Weapon, int Uses)> LowWeapons(GameContent content)
     {
@@ -141,7 +142,7 @@ public sealed record CampaignRecord(
         {
             var holder = new BattleUnit(unit, Side.Player, default, 1, false, false);
             var slot = holder.EquippedSlot(content);
-            if (slot >= 0 && holder.EquippedWeapon(content) is { IsMagic: false } weapon && unit.Inventory.Items[slot].Uses < LowUses)
+            if (slot >= 0 && holder.EquippedWeapon(content) is { IsMagic: false } weapon && unit.Inventory.Items[slot].Uses < LowUses && !(weapon.Hungers && unit.Inventory.Items[slot].Starved))
             {
                 low.Add((unit, weapon, unit.Inventory.Items[slot].Uses));
             }
@@ -149,6 +150,16 @@ public sealed record CampaignRecord(
 
         return low;
     }
+
+    /// <summary>
+    /// The camp's starved line (issue 856, round 281): each unit going to the next map, the bench left
+    /// out, carrying a hungering weapon in its starved form, in roster order, with that weapon. The form
+    /// carries over the camp on purpose and ends on the next hit it lands (DESIGN 13.23).
+    /// </summary>
+    public IReadOnlyList<(Unit Unit, Weapon Weapon)> StarvedWeapons(GameContent content) =>
+        Present(content).Where(u => !Benched.Contains(u.Id))
+            .SelectMany(u => u.Inventory.Items.Where(s => s.Starved && content.Weapons.TryGetValue(s.ItemId, out var w) && w.Hungers).Select(s => (u, content.Weapon(s.ItemId))))
+            .ToList();
 
     /// <summary>Whether the keep's forge stands (issue 647): a room marked <see cref="KeepRoom.Forge"/> has been built.</summary>
     public bool ForgeBuilt(GameContent content) => Rooms.Any(id => content.Campaign.Keep.Room(id) is { Forge: true });

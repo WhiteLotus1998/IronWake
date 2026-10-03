@@ -236,14 +236,14 @@ public class KinsbaneTests
     [InlineData(0, 0)]
     [InlineData(1, 0)]
     [InlineData(2, 1)]
-    [InlineData(5, 2)]
-    [InlineData(6, 3)]
-    [InlineData(8, 3)]
-    [InlineData(9, 4)]
-    [InlineData(12, 4)]
-    [InlineData(13, 5)]
+    [InlineData(4, 2)]
+    [InlineData(5, 3)]
+    [InlineData(7, 3)]
+    [InlineData(8, 4)]
+    [InlineData(11, 4)]
+    [InlineData(12, 5)]
     [InlineData(40, 5)]
-    public void TheScytheGrowsOneMtPerToothOnTheTwoTwoTwoThreeFourScheduleToFive(int fed, int bonus)
+    public void TheScytheGrowsOneMtPerToothOnTheTwoTwoOneThreeFourScheduleToFive(int fed, int bonus)
     {
         Assert.Equal(bonus, Kinsbane.MtBonus(fed));
         Assert.Equal(Shipped.Weapon(Kinsbane.ItemId).Mt + bonus, Keziah(WithScythe(Placed(), 23, fed: fed)).EquippedWeapon(Shipped)!.Mt);
@@ -255,11 +255,12 @@ public class KinsbaneTests
     [InlineData(2, 1, true)]
     [InlineData(3, 1, false)]
     [InlineData(4, 2, true)]
-    [InlineData(6, 3, true)]
-    [InlineData(9, 4, true)]
-    [InlineData(12, 4, false)]
-    [InlineData(13, 5, true)]
-    [InlineData(14, 5, false)]
+    [InlineData(5, 3, true)]
+    [InlineData(6, 3, false)]
+    [InlineData(8, 4, true)]
+    [InlineData(11, 4, false)]
+    [InlineData(12, 5, true)]
+    [InlineData(13, 5, false)]
     public void TheBladeGrowsAToothWithEachMtStepToFive(int fed, int teeth, bool grew)
     {
         Assert.Equal(teeth, Kinsbane.Teeth(fed));
@@ -267,13 +268,13 @@ public class KinsbaneTests
     }
 
     [Fact]
-    public void TheScytheWakesOnTheFifthToothAtThirteenFed()
+    public void TheScytheWakesOnTheFifthToothAtTwelveFed()
     {
-        Assert.Equal(13, Kinsbane.WakeKills);
+        Assert.Equal(12, Kinsbane.WakeKills);
         Assert.Equal(5, Kinsbane.MtCap);
-        Assert.False(Kinsbane.Woken(12));
-        Assert.True(Kinsbane.Woken(13));
-        Assert.Equal(new[] { 2, 4, 6, 9, 13 }, Enumerable.Range(1, 5).Select(Kinsbane.FedFor));
+        Assert.False(Kinsbane.Woken(11));
+        Assert.True(Kinsbane.Woken(12));
+        Assert.Equal(new[] { 2, 4, 5, 8, 12 }, Enumerable.Range(1, 5).Select(Kinsbane.FedFor));
     }
 
     [Theory]
@@ -322,8 +323,8 @@ public class KinsbaneTests
 
     [Theory]
     [InlineData(0, true)]
-    [InlineData(12, true)]
-    [InlineData(13, false)]
+    [InlineData(11, true)]
+    [InlineData(12, false)]
     public void AWokenWeaponIsNoLongerHunted(int fed, bool hunts)
     {
         var keziah = Keziah(WithScythe(Placed(), 23, fed: fed));
@@ -337,7 +338,7 @@ public class KinsbaneTests
     public void TheFeedLineNamesTheToothOnlyWhenOneGrows()
     {
         var grew = new HungerFed("keziah", Kinsbane.ItemId, 4, 10, 20, 2, false);
-        var same = new HungerFed("keziah", Kinsbane.ItemId, 5, 10, 20, 2, false);
+        var same = new HungerFed("keziah", Kinsbane.ItemId, 3, 10, 20, 1, false);
 
         Assert.Contains("a tooth grows (teeth 2/5)", PlaySession.Describe(grew, Shipped, UnitNames.None), StringComparison.Ordinal);
         Assert.DoesNotContain("tooth", PlaySession.Describe(same, Shipped, UnitNames.None), StringComparison.Ordinal);
@@ -418,15 +419,15 @@ public class KinsbaneTests
     public void TheKillThatReachesTheCapWakesItAndItNeitherHealsNorDrainsAfter()
     {
         var events = new List<GameEvent>();
-        var woke = Kinsbane.AfterCombat(Keziah(WithScythe(Placed(), 10, fed: 12)), Shipped, ValueList<StrikeEvent>.Empty, killed: true, events);
-        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 13, 10, 20, 5, true), Assert.Single(events));
+        var woke = Kinsbane.AfterCombat(Keziah(WithScythe(Placed(), 10, fed: 11)), Shipped, ValueList<StrikeEvent>.Empty, killed: true, events);
+        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 12, 10, 20, 5, true), Assert.Single(events));
 
         events.Clear();
         var after = Kinsbane.AfterCombat(woke with { Hp = 10 }, Shipped, ValueList<StrikeEvent>.Empty, killed: true, events);
-        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 14, 0, 10, 5, false), Assert.Single(events));
+        Assert.Equal(new HungerFed("keziah", Kinsbane.ItemId, 13, 0, 10, 5, false), Assert.Single(events));
         Assert.Equal(10, after.Hp);
 
-        var (next, drained) = PhaseStart(WithScythe(Placed(), 3, fed: 13));
+        var (next, drained) = PhaseStart(WithScythe(Placed(), 3, fed: 12));
         Assert.Equal(3, Keziah(next).Hp);
         Assert.Empty(drained);
         Assert.Null(Kinsbane.Coming(Keziah(next), Shipped));
