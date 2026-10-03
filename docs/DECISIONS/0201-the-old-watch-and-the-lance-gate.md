@@ -13,7 +13,9 @@ Date: 2026-10-03. Built by the chain Builder. What to build is the Table's: roun
 
 ## Measured and played
 
-- Sim at the level-1 cast, 200 seeds: gate 1 8/200 (164 timeouts, 28 Teodor deaths). Gate 4 reads the ally's drop at 0.030. As with the other side maps, the side-map gate is a cold chair (round 194). See `docs/measurements/2026-10-03-heirloom-quest-arm-200seeds.txt` for the heirloom read with and without the quest arm, and the Tollgate's campaign row against main.
+- Sim at the level-1 cast, 200 seeds: gate 1 8/200 (164 timeouts, 28 Teodor deaths). Gate 4 reads the ally's drop at 0.030. As with the other side maps, the side-map gate is a cold chair (round 194). See `docs/measurements/2026-10-03-heirloom-quest-arm-100seeds.txt` for the heirloom read with and without the quest arm, and the Tollgate's campaign row against main.
+- `--heirloom family_lance`, Release, 100 seeds: pitted and sound turn on map 5 at the median as before, and **woken in 0 of 100** without the quest. With `--quest`: the heuristic wins the quest in 47 of the 90 runs that reach its camp (tries p50 37), and **every winner wakes the lance on the quest's after card** (47 of 47, after map 5). Round 267's bar ("the median quest winner wakes it by map 6") is met, and "never without" holds. Map 7 (Sallow) is lost in about half the runs on both arms, more than on 0131's read; both arms show it, so it is not the gate.
+- The Tollgate's campaign row (`--curve --map the_tollgate`, 100 seeds) is identical on main and on this branch: the heuristic never takes the rusted lance over the iron there.
 - Code's warm play (side-map seed 961, a save at the camp after map 5 with the cast at level 4 and the lance at sound on count 8; ally Wren; the save's campaign seed is 886, chosen so the side map plays on 961, as it did before Pell 2 was appended ahead of it): lost on turn 9 with the boss at 2 HP, both Recalls spent, and Wren fell on the last enemy phase. The lance crossed 10 on turn 3 and the card printed the held line from then on. The journal is in PLAYTEST.
 
 ## Not in this slice
