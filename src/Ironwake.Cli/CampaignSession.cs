@@ -519,6 +519,7 @@ public sealed class CampaignSession
             WriteEvent(CampaignWonLine(_record, _content));
             Lines(EndingLines(_record, _content));
             code = 0;
+            _saves?.WriteEnding(_record, _content);
             if (_saves is not null && _saves.RecordWin(_record.Difficulty))
             {
                 foreach (var opened in _content.Difficulties.Values.Where(d => d.UnlockedBy == _record.Difficulty))

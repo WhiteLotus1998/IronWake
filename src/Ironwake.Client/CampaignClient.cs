@@ -312,6 +312,7 @@ public sealed class CampaignClient
             // The hires' ending lines are screen text, as the console prints them: a card, never the log.
             QueueCard(CampaignSession.EndingLines(Record, Content));
             Over = true;
+            _saves?.WriteEnding(Record, Content);
             _saves?.RecordWin(Record.Difficulty);
         }
 

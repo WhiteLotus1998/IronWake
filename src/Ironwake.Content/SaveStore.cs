@@ -5,7 +5,7 @@ namespace Ironwake.Content;
 
 /// <summary>
 /// The campaign's saves on disk (issue 663, DESIGN section 9): each save is the campaign record as
-/// the protocol writes it (<see cref="ProtocolJson.Campaign"/>), one file per save under one
+/// the protocol writes it (<see cref="ProtocolJson.Campaign(CampaignRecord)"/>), one file per save under one
 /// directory. Autosaves are taken at the start of every camp and keep the last three, <c>auto-1</c>
 /// the newest; named saves are the player's; the suspend is the one battle a quit left open, read
 /// once and then deleted. There is no save inside a battle: Recall is the in-battle tool.
@@ -24,6 +24,13 @@ public sealed class SaveStore
     /// lives beside the saves and outside every record, so loading an old save never locks it again.
     /// </summary>
     public const string ProfileFile = "profile.txt";
+
+    /// <summary>
+    /// The save a won campaign leaves for a sequel (issue 807, docs/FUTURE.md): the finished record
+    /// with its <c>ending</c> block, under this reserved name, the latest win replacing the one before.
+    /// Never an autosave or a player's save, so it is not listed and no player save takes its name.
+    /// </summary>
+    public const string EndingName = "ending";
 
     public SaveStore(string directory)
     {
@@ -48,7 +55,30 @@ public sealed class SaveStore
             return $"a save's name is 1 to {MaxNameLength} lower-case letters, digits, hyphens or underscores, not '{name}'";
         }
 
+        if (name == EndingName)
+        {
+            return $"'{EndingName}' is the finished campaign's save; pick another";
+        }
+
         return name.StartsWith(AutoPrefix, StringComparison.Ordinal) ? $"names starting '{AutoPrefix}' are the autosaves'; pick another" : null;
+    }
+
+    /// <summary>
+    /// Writes the ending save (issue 807): <paramref name="record"/>, a campaign whose every map is won,
+    /// with its <see cref="CampaignEnding"/> as the <c>ending</c> block, as <see cref="EndingName"/>.
+    /// Nothing in this game reads it back.
+    /// </summary>
+    public void WriteEnding(CampaignRecord record, GameContent content)
+    {
+        System.IO.Directory.CreateDirectory(Directory);
+        File.WriteAllText(PathOf(EndingName), ProtocolJson.Campaign(record, CampaignEnding.Of(record, content)) + "\n");
+    }
+
+    /// <summary>The ending save's block (issue 807), or null when no campaign has been won here.</summary>
+    public CampaignEnding? ReadEnding()
+    {
+        var path = PathOf(EndingName);
+        return File.Exists(path) ? ProtocolJson.ReadEnding(File.ReadAllText(path)) : null;
     }
 
     /// <summary>
